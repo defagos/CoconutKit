@@ -40,6 +40,8 @@ DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
  *
  * Designated initializer: initWithURLRequest:
  */
+// TODO: Must provide a way to access the encoding of the answer (e.g. gzip, plain, etc.). Extracted from NSURLResponse,
+//       but see how this information can best be made available
 @interface HLSRequester : NSObject {
 @private
     NSURLRequest *m_request;

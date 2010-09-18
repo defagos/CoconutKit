@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F21D3F81245548100252AF1 /* HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D3F61245548100252AF1 /* HLSCompression.h */; };
+		6F21D3F91245548100252AF1 /* HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D3F71245548100252AF1 /* HLSCompression.m */; };
+		6F21D4211245565400252AF1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F21D4201245565400252AF1 /* libz.dylib */; };
 		6F8D090D123F51DF00FCF2AF /* HLSAnimationFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */; };
 		6F8D090E123F51DF00FCF2AF /* HLSAnimationFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D090A123F51DF00FCF2AF /* HLSAnimationFrame.m */; };
 		6F8D090F123F51DF00FCF2AF /* HLSViewAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D090B123F51DF00FCF2AF /* HLSViewAnimation.h */; };
@@ -69,6 +72,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F21D3F61245548100252AF1 /* HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCompression.h; sourceTree = "<group>"; };
+		6F21D3F71245548100252AF1 /* HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCompression.m; sourceTree = "<group>"; };
+		6F21D4201245565400252AF1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationFrame.h; sourceTree = "<group>"; };
 		6F8D090A123F51DF00FCF2AF /* HLSAnimationFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationFrame.m; sourceTree = "<group>"; };
 		6F8D090B123F51DF00FCF2AF /* HLSViewAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimation.h; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */,
 				6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */,
+				6F21D4211245565400252AF1 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +179,7 @@
 				6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				6F8D09A0123F545D00FCF2AF /* UIKit.framework */,
+				6F21D4201245565400252AF1 /* libz.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,6 +284,8 @@
 		6F8D0908123F4FF500FCF2AF /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6F21D3F61245548100252AF1 /* HLSCompression.h */,
+				6F21D3F71245548100252AF1 /* HLSCompression.m */,
 				6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */,
 				6F8D095A123F53B200FCF2AF /* HLSFeed.h */,
 				6F8D095B123F53B200FCF2AF /* HLSFeed.m */,
@@ -348,6 +358,7 @@
 				6F8D0972123F53B200FCF2AF /* HLSRuntimeChecks.h in Headers */,
 				6F8D09B0123F605800FCF2AF /* HLSStandardTableViewCell.h in Headers */,
 				6F8D09B2123F605800FCF2AF /* HLSStandardView.h in Headers */,
+				6F21D3F81245548100252AF1 /* HLSCompression.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +438,7 @@
 				6F8D096C123F53B200FCF2AF /* HLSNotifications.m in Sources */,
 				6F8D09B1123F605800FCF2AF /* HLSStandardTableViewCell.m in Sources */,
 				6F8D09B3123F605800FCF2AF /* HLSStandardView.m in Sources */,
+				6F21D3F91245548100252AF1 /* HLSCompression.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
