@@ -1,9 +1,11 @@
 HLSAnimationFrame.h
+HLSAssert.h
 HLSContainerControllerLoader.h
 HLSDownloader.h
 HLSDownloaderTools.h
 HLSFeed.h
 HLSFeedFilter.h
+HLSFloat.h
 HLSLogger.h
 HLSNotifications.h
 HLSOrientationCloner.h
