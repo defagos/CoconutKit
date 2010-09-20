@@ -8,6 +8,7 @@
 
 #import "HLSServiceBroker.h"
 
+#import "HLSLogger.h"
 #import "HLSServiceAggregator.h"
 #import "HLSServiceCache.h"
 #import "HLSServiceDecoder.h"
@@ -81,6 +82,10 @@ DEFINE_NOTIFICATION(HLSServiceBrokerFailureNotification);
     
     // Aggregate the sub-requests into a single request
     HLSServiceRequest *fullRequest = [self.aggregator aggregateRequests:requests];
+    if (! fullRequest) {
+        logger_error("Could not send requests");
+        return;
+    }
     
     // Create the requester object for submitting the single request to the web service
     HLSServiceRequester *requester = [[[NSClassFromString(self.settings.requesterClassName) alloc] initWithRequest:fullRequest
