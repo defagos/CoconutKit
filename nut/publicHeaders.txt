@@ -6,6 +6,7 @@ HLSDownloaderTools.h
 HLSFeed.h
 HLSFeedFilter.h
 HLSFloat.h
+HLSHash.h
 HLSLogger.h
 HLSNotifications.h
 HLSOrientationCloner.h

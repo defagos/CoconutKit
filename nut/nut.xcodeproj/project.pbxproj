@@ -70,6 +70,8 @@
 		6F8D09B1123F605800FCF2AF /* HLSStandardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */; };
 		6F8D09B2123F605800FCF2AF /* HLSStandardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D09AE123F605800FCF2AF /* HLSStandardView.h */; };
 		6F8D09B3123F605800FCF2AF /* HLSStandardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D09AF123F605800FCF2AF /* HLSStandardView.m */; };
+		6FAF527F124753B100A8B23E /* HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF527D124753B100A8B23E /* HLSHash.h */; };
+		6FAF5280124753B100A8B23E /* HLSHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF527E124753B100A8B23E /* HLSHash.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -139,6 +141,8 @@
 		6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardTableViewCell.m; sourceTree = "<group>"; };
 		6F8D09AE123F605800FCF2AF /* HLSStandardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardView.h; sourceTree = "<group>"; };
 		6F8D09AF123F605800FCF2AF /* HLSStandardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardView.m; sourceTree = "<group>"; };
+		6FAF527D124753B100A8B23E /* HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSHash.h; sourceTree = "<group>"; };
+		6FAF527E124753B100A8B23E /* HLSHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSHash.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +304,8 @@
 				6F8D095D123F53B200FCF2AF /* HLSFeedFilter.m */,
 				6F21D4341246163A00252AF1 /* HLSFloat.h */,
 				6F21D4351246163A00252AF1 /* HLSFloat.m */,
+				6FAF527D124753B100A8B23E /* HLSHash.h */,
+				6FAF527E124753B100A8B23E /* HLSHash.m */,
 				6F8D095E123F53B200FCF2AF /* HLSNotifications.h */,
 				6F8D095F123F53B200FCF2AF /* HLSNotifications.m */,
 				6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */,
@@ -370,6 +376,7 @@
 				6F21D3F81245548100252AF1 /* HLSCompression.h in Headers */,
 				6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */,
 				6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */,
+				6FAF527F124753B100A8B23E /* HLSHash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +458,7 @@
 				6F8D09B3123F605800FCF2AF /* HLSStandardView.m in Sources */,
 				6F21D3F91245548100252AF1 /* HLSCompression.m in Sources */,
 				6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */,
+				6FAF5280124753B100A8B23E /* HLSHash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
