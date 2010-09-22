@@ -14,6 +14,10 @@
  * Notifications
  */
 DECLARE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
+// Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
+// User info: "error" for the NSError object containing information about the error
+
+DECLARE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 /**
  * A service object is a simple object wrapper kept in sync with the cache of objects managed by a web service broker.

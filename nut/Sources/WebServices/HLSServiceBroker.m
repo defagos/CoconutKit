@@ -15,7 +15,8 @@
 #import "HLSServiceObjectDescription.h"
 
 DEFINE_NOTIFICATION(HLSServiceBrokerAnswerReceivedNotification);
-DEFINE_NOTIFICATION(HLSServiceBrokerFailureNotification);
+DEFINE_NOTIFICATION(HLSServiceBrokerNetworkFailureNotification);
+DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 
 @interface HLSServiceBroker ()
 
@@ -110,7 +111,8 @@ DEFINE_NOTIFICATION(HLSServiceBrokerFailureNotification);
     NSError *disaggregationError = nil;
     NSArray *answers = [self.aggregator disaggregateAnswer:aggregatedAnswer didFailWithError:&disaggregationError];
     if (disaggregationError) {
-        [self postCoalescingNotificationWithName:HLSServiceBrokerFailureNotification];
+        // Technical failure for programmer's eyes only; no need to propagate through notification
+        logger_debug(@"Disaggregation error: %@", [disaggregationError localizedDescription]);
         return;
     }
     
@@ -123,7 +125,11 @@ DEFINE_NOTIFICATION(HLSServiceBrokerFailureNotification);
         NSError *decodingError = nil;
         NSArray *objectDescriptions = [self.decoder decodeAnswer:answer didFailWithError:&decodingError];
         if (decodingError) {
-            [self postCoalescingNotificationWithName:HLSServiceBrokerFailureNotification];
+            // Forward the error information
+            NSDictionary *errorUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:answer.requestId, @"requestId",
+                                           decodingError, @"error", nil];
+            [self postCoalescingNotificationWithName:HLSServiceBrokerDataErrorNotification
+                                            userInfo:errorUserInfo];
             
             // Process the next answer, decoding failure for one answer does not mean that all are incorrect
             continue;
@@ -155,10 +161,9 @@ DEFINE_NOTIFICATION(HLSServiceBrokerFailureNotification);
 
 - (void)serviceRequester:(HLSServiceRequester *)requester failedForRequestId:(NSString *)requestId
 {
-    // TODO: Maybe retry?
     [self.requesters removeObjectForKey:requestId];
     
-    [self postCoalescingNotificationWithName:HLSServiceBrokerFailureNotification];
+    [self postCoalescingNotificationWithName:HLSServiceBrokerNetworkFailureNotification];
 }
 
 @end

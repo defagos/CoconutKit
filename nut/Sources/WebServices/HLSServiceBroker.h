@@ -24,9 +24,11 @@
  */
 // User info: "requestId" for the request id, "updatedObjects" for the NSArray of all updated objects
 DECLARE_NOTIFICATION(HLSServiceBrokerAnswerReceivedNotification);
-
-// TODO: Should carry along information about the error
-DECLARE_NOTIFICATION(HLSServiceBrokerFailureNotification);
+// Does not carry any information
+DECLARE_NOTIFICATION(HLSServiceBrokerNetworkFailureNotification);
+// Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
+// User info: "requestId" for the request id, "error" for the NSError object containing information about the error
+DECLARE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 
 /**
  * Provides complete management of queries for retrieving information from a web service. An application
@@ -60,7 +62,7 @@ DECLARE_NOTIFICATION(HLSServiceBrokerFailureNotification);
 //       the object can be retrieved. Should also have a similar method for retrieving several
 //       objects in a single batch)
 
-// TODO: Unclean. Required for convenience by the nut project, but breaks encapsulation. Should be removed
+// TODO: Unclean. Required for convenience by the FIVB project, but breaks encapsulation. Should be removed
 //       of this interface when promoted to a library. For this reason, this file does not include HLSServiceCache.h
 //       (this way, we force callers which want to use this method to include it)
 @property (nonatomic, readonly, retain) HLSServiceCache *cache;

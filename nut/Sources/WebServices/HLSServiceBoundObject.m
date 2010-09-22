@@ -12,6 +12,7 @@
 #import "HLSRuntimeChecks.h"
 
 DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
+DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 @interface HLSServiceBoundObject ()
 
@@ -20,6 +21,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
 @property (nonatomic, retain) id object;
 
 - (void)serviceBrokerAnswerReceived:(NSNotification *)notification;
+- (void)serviceBrokerDataError:(NSNotification *)notification;
 
 @end
 
@@ -67,6 +69,9 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:HLSServiceBrokerAnswerReceivedNotification
                                                       object:m_broker];
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:HLSServiceBrokerDataErrorNotification
+                                                      object:m_broker];
     }
     
     // Update the value
@@ -77,7 +82,11 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(serviceBrokerAnswerReceived:) 
                                                      name:HLSServiceBrokerAnswerReceivedNotification 
-                                                   object:m_broker];        
+                                                   object:m_broker];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(serviceBrokerDataError:) 
+                                                     name:HLSServiceBrokerDataErrorNotification 
+                                                   object:m_broker];  
     }
 }
 
@@ -147,6 +156,23 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
             [self postCoalescingNotificationWithName:HLSServiceBoundObjectUpdatedNotification];
         }
     }
+}
+
+- (void)serviceBrokerDataError:(NSNotification *)notification
+{
+    // Extract the user information
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *requestId = [userInfo objectForKey:@"requestId"];
+    NSError *error = [userInfo objectForKey:@"error"];
+    
+    // Only interested in errors related to the attached request
+    if (! [self.requestId isEqual:requestId]) {
+        return;
+    }
+    
+    // Forward the error
+    NSDictionary *errorUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:error, @"error", nil];
+    [self postCoalescingNotificationWithName:HLSServiceBoundObjectErrorNotification userInfo:errorUserInfo];    
 }
 
 @end
