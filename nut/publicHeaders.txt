@@ -1,5 +1,6 @@
 HLSAnimationFrame.h
 HLSAssert.h
+HLSBusy.h
 HLSContainerControllerLoader.h
 HLSConverters.h
 HLSDownloader.h
