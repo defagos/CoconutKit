@@ -84,7 +84,7 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
     // Aggregate the sub-requests into a single request
     HLSServiceRequest *fullRequest = [self.aggregator aggregateRequests:requests];
     if (! fullRequest) {
-        logger_error("Could not send requests");
+        logger_error(@"Could not send requests");
         return;
     }
     

@@ -52,7 +52,7 @@ HLSLoggerMode MODE_FATAL = {@"FATAL", 4};
 			level = HLSLoggerLevelDebug;
 		}
 		else if ([levelName isEqual:MODE_INFO.name]) {
-			level =HLSLoggerLevelInfo;		
+			level = HLSLoggerLevelInfo;		
 		}
 		else if ([levelName isEqual:MODE_WARN.name]) {
 			level = HLSLoggerLevelWarn;
