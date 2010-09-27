@@ -75,6 +75,8 @@
 		6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF57841248B8F300A8B23E /* HLSConverters.h */; };
 		6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF57851248B8F300A8B23E /* HLSConverters.m */; };
 		6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */; };
+		6FEDB415125078EA0011CF63 /* HLSBusyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDB413125078EA0011CF63 /* HLSBusyManager.h */; };
+		6FEDB416125078EA0011CF63 /* HLSBusyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDB414125078EA0011CF63 /* HLSBusyManager.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +151,8 @@
 		6FAF57841248B8F300A8B23E /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FAF57851248B8F300A8B23E /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
 		6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusy.h; sourceTree = "<group>"; };
+		6FEDB413125078EA0011CF63 /* HLSBusyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusyManager.h; sourceTree = "<group>"; };
+		6FEDB414125078EA0011CF63 /* HLSBusyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBusyManager.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +306,8 @@
 			children = (
 				6F21D438124617BB00252AF1 /* HLSAssert.h */,
 				6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */,
+				6FEDB413125078EA0011CF63 /* HLSBusyManager.h */,
+				6FEDB414125078EA0011CF63 /* HLSBusyManager.m */,
 				6F21D3F61245548100252AF1 /* HLSCompression.h */,
 				6F21D3F71245548100252AF1 /* HLSCompression.m */,
 				6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */,
@@ -388,6 +394,7 @@
 				6FAF527F124753B100A8B23E /* HLSHash.h in Headers */,
 				6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */,
 				6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */,
+				6FEDB415125078EA0011CF63 /* HLSBusyManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +478,7 @@
 				6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */,
 				6FAF5280124753B100A8B23E /* HLSHash.m in Sources */,
 				6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */,
+				6FEDB416125078EA0011CF63 /* HLSBusyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
