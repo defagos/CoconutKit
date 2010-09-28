@@ -12,7 +12,6 @@
 #import "HLSOrientationCloner.h"
 #import "HLSStandardWidgetConstants.h"
 
-#define NO_CURRENT_PAGE                                         -1
 #define MAX_NBR_DOTS_PAGE_CONTROLLER_PORTRAIT                   19
 #define MAX_NBR_DOTS_PAGE_CONTROLLER_LANDSCAPE                  28
 
@@ -61,9 +60,9 @@
 {
     if (self = [super init]) {
         // Start with no current page
-        m_currentPage = NO_CURRENT_PAGE;
-        m_initialPage = NO_CURRENT_PAGE;
-        m_pageControlPreviousPage = NO_CURRENT_PAGE;
+        m_currentPage = PAGE_CONTROLLER_NO_PAGE;
+        m_initialPage = PAGE_CONTROLLER_NO_PAGE;
+        m_pageControlPreviousPage = PAGE_CONTROLLER_NO_PAGE;
         m_maximizedPortrait = NO;
         m_maximizedLandscape = NO;
         m_firstAppearance = YES;
@@ -115,7 +114,7 @@
     // implementation (or require a refactoring), and this might not be worth the price / needed.
     // TODO: Maybe improve if this does not work in some cases
     UIViewController *prevCurrentViewController; 
-    if (m_currentPage != NO_CURRENT_PAGE) {
+    if (m_currentPage != PAGE_CONTROLLER_NO_PAGE) {
         prevCurrentViewController = [self viewControllerObjectAtIndex:m_currentPage];
     }
     else {
@@ -123,7 +122,7 @@
     }
 
     UIViewController *currentViewController; 
-    if (currentPage != NO_CURRENT_PAGE) {
+    if (currentPage != PAGE_CONTROLLER_NO_PAGE) {
         currentViewController = [self viewControllerObjectAtIndex:currentPage];
     }
     else {
@@ -291,7 +290,7 @@
     // Only if first time the page controller appears
     if (m_firstAppearance) {
         // Start with the initial page if set
-        if (m_initialPage != NO_CURRENT_PAGE) {
+        if (m_initialPage != PAGE_CONTROLLER_NO_PAGE) {
             self.currentPage = m_initialPage;
         }
         // Else start with the first
