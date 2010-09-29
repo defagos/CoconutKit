@@ -351,16 +351,16 @@
  * this function is also called when the view is loaded for the first time (to check that its initial orientation
  * is correct), another reason why we must not alter any views here.
  */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     // Check if this orientation is supported
-    if (! [self allViewControllersShouldAutorotateToInterfaceOrientation:orientation]) {
+    if (! [self allViewControllersShouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
         return NO;
     }
     
     // When this function has been called and is returning YES, the orientation is known for sure. Depending on the
     // orientation, we display a maximum number of dots in the page controller
-    if (UIDeviceOrientationIsPortrait(orientation)) {
+    if (UIDeviceOrientationIsPortrait(toInterfaceOrientation)) {
         self.pageControl.numberOfPages = MIN(MAX_NBR_DOTS_PAGE_CONTROLLER_PORTRAIT, [self viewControllerCount]);
     }
     else {
@@ -590,14 +590,11 @@
         [wrapperView addSubview:viewController.view];
     }
     
-    // Check if it support the HLSReloadable protocol
-    if (! [viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        return;
+    // Reload it if it supports the HLSReloadable protocol
+    if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
+        UIViewController<HLSReloadable> *reloadableViewController = viewController;
+        [reloadableViewController reloadData];
     }
-    
-    // Reload it
-    UIViewController<HLSReloadable> *reloadableViewController = viewController;
-    [reloadableViewController reloadData];
 }
 
 #pragma mark Scrolling programatically
