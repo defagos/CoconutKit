@@ -10,6 +10,7 @@ HLSFeed.h
 HLSFeedFilter.h
 HLSFloat.h
 HLSHash.h
+HLSInsetController.h
 HLSLogger.h
 HLSNotifications.h
 HLSOrientationCloner.h
@@ -34,3 +35,4 @@ HLSStandardView.h
 HLSStandardWidgetConstants.h
 HLSTableSearchDisplayController.h
 HLSViewAnimation.h
+HLSViewPlaceholder.h

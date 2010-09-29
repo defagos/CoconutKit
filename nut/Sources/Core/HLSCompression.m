@@ -1,6 +1,6 @@
 //
 //  HLSCompression.m
-//  iPad_CRM
+//  nut
 //
 //  Created by Samuel Défago on 9/16/10.
 //  Copyright 2010 Hortis. All rights reserved.

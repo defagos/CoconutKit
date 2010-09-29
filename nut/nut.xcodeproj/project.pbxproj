@@ -77,6 +77,9 @@
 		6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */; };
 		6FEDB415125078EA0011CF63 /* HLSBusyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDB413125078EA0011CF63 /* HLSBusyManager.h */; };
 		6FEDB416125078EA0011CF63 /* HLSBusyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDB414125078EA0011CF63 /* HLSBusyManager.m */; };
+		6FEDC2C012537B850011CF63 /* HLSViewPlaceholder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */; };
+		6FEDC2C512537BCD0011CF63 /* HLSInsetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDC2C312537BCD0011CF63 /* HLSInsetController.h */; };
+		6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDC2C412537BCD0011CF63 /* HLSInsetController.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -153,6 +156,9 @@
 		6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusy.h; sourceTree = "<group>"; };
 		6FEDB413125078EA0011CF63 /* HLSBusyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusyManager.h; sourceTree = "<group>"; };
 		6FEDB414125078EA0011CF63 /* HLSBusyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBusyManager.m; sourceTree = "<group>"; };
+		6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewPlaceholder.h; sourceTree = "<group>"; };
+		6FEDC2C312537BCD0011CF63 /* HLSInsetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInsetController.h; sourceTree = "<group>"; };
+		6FEDC2C412537BCD0011CF63 /* HLSInsetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInsetController.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +299,8 @@
 		6F8D0907123F4FB500FCF2AF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6FEDC2C312537BCD0011CF63 /* HLSInsetController.h */,
+				6FEDC2C412537BCD0011CF63 /* HLSInsetController.m */,
 				6F8D0921123F530400FCF2AF /* HLSPageController.h */,
 				6F8D0922123F530400FCF2AF /* HLSPageController.m */,
 				6F8D0923123F530400FCF2AF /* HLSTableSearchDisplayController.h */,
@@ -327,6 +335,7 @@
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
 				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
+				6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -395,6 +404,8 @@
 				6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */,
 				6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */,
 				6FEDB415125078EA0011CF63 /* HLSBusyManager.h in Headers */,
+				6FEDC2C012537B850011CF63 /* HLSViewPlaceholder.h in Headers */,
+				6FEDC2C512537BCD0011CF63 /* HLSInsetController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +490,7 @@
 				6FAF5280124753B100A8B23E /* HLSHash.m in Sources */,
 				6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */,
 				6FEDB416125078EA0011CF63 /* HLSBusyManager.m in Sources */,
+				6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

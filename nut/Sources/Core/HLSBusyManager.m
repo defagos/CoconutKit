@@ -8,6 +8,8 @@
 
 #import "HLSBusyManager.h"
 
+#import "HLSLogger.h"
+
 @implementation HLSBusyManager
 
 #pragma mark Object creation and destruction
@@ -41,6 +43,10 @@
 - (void)decreaseBusyCount
 {
     --m_busyCount;
+    if (m_busyCount < 0) {
+        logger_debug(@"Was not busy");
+        m_busyCount = 0;
+    }
     [self updateManagedObjectMode];
 }
 
