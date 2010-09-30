@@ -30,6 +30,7 @@ HLSServiceObjectDescription.h
 HLSServiceRequest.h
 HLSServiceRequester.h
 HLSServiceSettings.h
+HLSSingleBusyObjectManager.h
 HLSStandardTableViewCell.h
 HLSStandardView.h
 HLSStandardWidgetConstants.h
