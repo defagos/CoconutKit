@@ -27,6 +27,6 @@
  * keeps some internal state variables which allow it to take appropriate action when this method is called (this 
  * means calling the right HLSBusy protocol methods)
  */
-- (void)updateObject:(id<HLSBusy>)managedObject;
+- (void)updateObject:(id<HLSBusy>)object;
 
 @end
