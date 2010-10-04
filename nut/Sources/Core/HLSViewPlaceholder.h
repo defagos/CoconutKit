@@ -7,10 +7,13 @@
 //
 
 /**
- * Protocol implemented by views exhibiting a placeholder view for view composition
+ * Protocol implemented by objects (most probably view controllers) exhibiting a placeholder view for view composition
+ *
+ * Remark: If your placeholder view is set using Interface Builder, just redeclare this method in your class, adding the 
+ *         IBOutlet keyword to it.
  */
 @protocol HLSViewPlaceholder <NSObject>
 @required
-@property (nonatomic, retain) IBOutlet UIView *placeholderView;
+@property (nonatomic, retain) UIView *placeholderView;
 
 @end
