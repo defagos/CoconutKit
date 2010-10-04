@@ -15,7 +15,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSStandardTableViewCellAbstract
+@protocol HLSStandardTableViewCellAbstract <NSObject>
 
 @optional
 /**

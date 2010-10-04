@@ -13,7 +13,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSFeedFilterAbstract
+@protocol HLSFeedFilterAbstract <NSObject>
 
 @optional
 /**

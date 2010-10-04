@@ -12,7 +12,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSServiceAggregatorAbstract
+@protocol HLSServiceAggregatorAbstract <NSObject>
 
 @optional
 - (HLSServiceRequest *)aggregateRequests:(NSArray *)requests;                                                  // array of HLSServiceRequest objects

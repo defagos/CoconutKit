@@ -16,7 +16,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSServiceRequesterAbstract
+@protocol HLSServiceRequesterAbstract <NSObject>
 
 @optional
 - (void)start;

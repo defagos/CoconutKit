@@ -15,7 +15,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSStandardViewAbstract
+@protocol HLSStandardViewAbstract <NSObject>
 
 @optional
 /**

@@ -9,7 +9,7 @@
 /**
  * Protocol for objects whose data can be reloaded
  */
-@protocol HLSReloadable
+@protocol HLSReloadable <NSObject>
 
 - (void)reloadData;
 

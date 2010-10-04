@@ -104,7 +104,7 @@
 
 @end
 
-@protocol HLSPageControllerDelegate
+@protocol HLSPageControllerDelegate <NSObject>
 
 - (void)pageController:(HLSPageController *)pageController movedToPage:(NSUInteger)page;
 

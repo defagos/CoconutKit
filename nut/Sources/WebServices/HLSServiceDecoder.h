@@ -12,7 +12,7 @@
 /**
  * "Pure virtual" methods
  */
-@protocol HLSServiceDecoderAbstract
+@protocol HLSServiceDecoderAbstract <NSObject>
 
 @optional
 /**
