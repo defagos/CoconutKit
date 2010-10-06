@@ -16,6 +16,8 @@
 
 @property (nonatomic, retain) UIViewController *placeholderViewController;
 
+- (void)copyPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController;
+
 @end
 
 @implementation HLSInsetController
@@ -46,6 +48,47 @@
 #pragma mark Accessors and mutators
 
 @synthesize placeholderViewController = m_placeholderViewController;
+
+- (void)setPlaceholderViewController:(UIViewController *)placeholderViewController
+{
+    // Check for self-assignment
+    if (m_placeholderViewController == placeholderViewController) {
+        return;
+    }
+    
+    // Stop KVO for the old placeholder view controller
+    if (m_placeholderViewController) {
+        [m_placeholderViewController removeObserver:self forKeyPath:@"title"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.title"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.backBarButtonItem"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.titleView"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.prompt"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.hidesBackButton"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.leftBarButtonItem"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"navigationItem.rightBarButtonItem"];
+        [m_placeholderViewController removeObserver:self forKeyPath:@"toolbarItems"];
+    }
+    
+    // Update the value
+    [m_placeholderViewController release];
+    m_placeholderViewController = [placeholderViewController retain];
+    
+    // Sync properties
+    [self copyPlaceholderViewControllerPropertiesFromViewController:m_placeholderViewController];
+    
+    // Start KVO for the new placeholder view controller
+    if (m_placeholderViewController) {
+        [m_placeholderViewController addObserver:self forKeyPath:@"title" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.title" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.backBarButtonItem" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.titleView" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.prompt" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.hidesBackButton" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.leftBarButtonItem" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"navigationItem.rightBarButtonItem" options:0 context:NULL];
+        [m_placeholderViewController addObserver:self forKeyPath:@"toolbarItems" options:0 context:NULL];
+    }
+}
 
 @synthesize insetViewController = m_insetViewController;
 
@@ -225,6 +268,37 @@
         UIViewController<HLSReloadable> *reloadableInsetViewController = self.insetViewController;
         [reloadableInsetViewController reloadData];
     }
+}
+
+#pragma mark Mirroring properties of the wrapped view controller
+
+- (void)copyPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController
+{
+    // Forward title and navigation interface elements
+    self.title = viewController.title;
+    
+    self.navigationItem.title = viewController.navigationItem.title;
+    self.navigationItem.backBarButtonItem = viewController.navigationItem.backBarButtonItem;
+    self.navigationItem.titleView = viewController.navigationItem.titleView;
+    self.navigationItem.prompt = viewController.navigationItem.prompt;
+    self.navigationItem.hidesBackButton = viewController.navigationItem.hidesBackButton;
+    self.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
+    self.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
+    
+    self.toolbarItems = viewController.toolbarItems;
+}
+
+#pragma mark KVO notification
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    // KVO is here used to track changes made to the wrapped placeholder view controller; if a change has been
+    // detected, just sync everything
+    UIViewController *viewController = object;
+    [self copyPlaceholderViewControllerPropertiesFromViewController:viewController];
 }
 
 @end

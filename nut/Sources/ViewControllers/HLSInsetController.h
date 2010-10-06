@@ -24,8 +24,12 @@
  * The view controller's view to which the other one will be added must have a placeholder view. This is guaranteed
  * by the mandatory HLSViewPlaceholder protocol implementation.
  *
- * The view controller can be swapped at any time. Simply update the viewController property. This makes embedded
- * pages / tabs easy to code.
+ * The view controller can be swapped with another one at any time. Simply update the viewController property. This makes 
+ * embedded pages / tabs easy to code. Moreover, the inset view controller mirrors the properties of the placeholder
+ * view controller when wrapped into a navigation controller (navigation bar, title, toolbar). In other words,
+ * customize those elements in the placeholder view controller itself, not by subclassing HLSInsetController: As for
+ * the container controllers UITabBarController and UINavigationController, HLSInsetController is namely not meant
+ * to be subclassed.
  *
  * Designated initializer: initWithPlaceholderViewController:
  */
