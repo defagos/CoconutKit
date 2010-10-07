@@ -13,10 +13,11 @@
 /**
  * Notifications
  */
+// Do not carry any information
 DECLARE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
+DECLARE_NOTIFICATION(HLSServiceBoundObjectNetworkFailureNotification);
 // Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
 // User info: "error" for the NSError object containing information about the error
-
 DECLARE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 /**

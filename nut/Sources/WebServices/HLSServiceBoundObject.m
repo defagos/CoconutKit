@@ -12,6 +12,7 @@
 #import "HLSRuntimeChecks.h"
 
 DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
+DEFINE_NOTIFICATION(HLSServiceBoundObjectNetworkFailureNotification);
 DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 @interface HLSServiceBoundObject ()
@@ -21,6 +22,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 @property (nonatomic, retain) id object;
 
 - (void)serviceBrokerAnswerReceived:(NSNotification *)notification;
+- (void)serviceBrokerNetworkFailure:(NSNotification *)notification;
 - (void)serviceBrokerDataError:(NSNotification *)notification;
 
 @end
@@ -70,6 +72,9 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
                                                         name:HLSServiceBrokerAnswerReceivedNotification
                                                       object:m_broker];
         [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:HLSServiceBrokerNetworkFailureNotification
+                                                      object:m_broker];
+        [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:HLSServiceBrokerDataErrorNotification
                                                       object:m_broker];
     }
@@ -82,6 +87,10 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(serviceBrokerAnswerReceived:) 
                                                      name:HLSServiceBrokerAnswerReceivedNotification 
+                                                   object:m_broker];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(serviceBrokerNetworkFailure:) 
+                                                     name:HLSServiceBrokerNetworkFailureNotification
                                                    object:m_broker];
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(serviceBrokerDataError:) 
@@ -156,6 +165,21 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
             [self postCoalescingNotificationWithName:HLSServiceBoundObjectUpdatedNotification];
         }
     }
+}
+
+- (void)serviceBrokerNetworkFailure:(NSNotification *)notification
+{
+    // Extract the user information
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *requestId = [userInfo objectForKey:@"requestId"];
+    
+    // Only interested in errors related to the attached request
+    if (! [self.requestId isEqual:requestId]) {
+        return;
+    }
+    
+    // Forward the error
+    [self postCoalescingNotificationWithName:HLSServiceBoundObjectNetworkFailureNotification]; 
 }
 
 - (void)serviceBrokerDataError:(NSNotification *)notification

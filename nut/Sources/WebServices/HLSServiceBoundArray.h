@@ -20,6 +20,8 @@
 // at those indexes occurred (the caller can just update those entries). Otherwise a global updated occurred
 // (the caller must perform a global refresh)
 DECLARE_NOTIFICATION(HLSServiceBoundArrayUpdatedNotification);
+// Does not carry any information
+DECLARE_NOTIFICATION(HLSServiceBoundArrayNetworkFailureNotification);
 // Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
 // User info: "error" for the NSError object containing information about the error
 DECLARE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);

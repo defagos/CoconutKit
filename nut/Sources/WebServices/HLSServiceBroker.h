@@ -24,7 +24,7 @@
  */
 // User info: "requestId" for the request id, "updatedObjects" for the NSArray of all updated objects
 DECLARE_NOTIFICATION(HLSServiceBrokerAnswerReceivedNotification);
-// Does not carry any information
+// User info: "requestId" for the request id
 DECLARE_NOTIFICATION(HLSServiceBrokerNetworkFailureNotification);
 // Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
 // User info: "requestId" for the request id, "error" for the NSError object containing information about the error

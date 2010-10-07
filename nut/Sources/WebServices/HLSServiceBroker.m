@@ -160,10 +160,12 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 }
 
 - (void)serviceRequester:(HLSServiceRequester *)requester failedForRequestId:(NSString *)requestId
-{
-    [self.requesters removeObjectForKey:requestId];
+{    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:requestId, @"requestId", nil];
+    [self postCoalescingNotificationWithName:HLSServiceBrokerNetworkFailureNotification
+                                    userInfo:userInfo];
     
-    [self postCoalescingNotificationWithName:HLSServiceBrokerNetworkFailureNotification];
+    [self.requesters removeObjectForKey:requestId];
 }
 
 @end
