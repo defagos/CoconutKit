@@ -141,14 +141,7 @@
         UIViewController<HLSOrientationCloner> *clonableInsetViewController = self.insetViewController;
         UIViewController *clonedInsetViewController = [clonableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
         
-        // TODO: Can be moved to better locations
-        [clonableInsetViewController viewWillDisappear:YES];
-        [clonedInsetViewController viewWillAppear:YES];
-        
         self.insetViewController = clonedInsetViewController;
-        
-        [clonableInsetViewController viewDidDisappear:YES];
-        [clonedInsetViewController viewDidAppear:YES];
     }
     // Should never happen, shouldAutorotateToInterfaceOrientation: returned YES if we arrived in this method
     else {
