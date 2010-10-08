@@ -10,6 +10,12 @@
 #import "HLSViewPlaceholder.h"
 
 /**
+ * ------------------------
+ * This class is deprecated
+ * ------------------------
+ * Use HLSPlaceholderViewController insteads
+ *
+ *
  * Container view controller for displaying a view controller inset within another view controller exhibiting some
  * placeholder view as insertion point.
  * 

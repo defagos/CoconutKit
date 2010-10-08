@@ -16,6 +16,7 @@ HLSLogger.h
 HLSNotifications.h
 HLSOrientationCloner.h
 HLSPageController.h
+HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRequester.h
 HLSRuntimeChecks.h

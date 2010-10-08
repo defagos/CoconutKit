@@ -7,6 +7,10 @@
 //
 
 /**
+ * ---------------------------
+ * This protocol is deprecated
+ * ---------------------------
+ *
  * Protocol implemented by objects (most probably view controllers) exhibiting a placeholder view for view composition
  *
  * Remark: If your placeholder view is set using Interface Builder, just redeclare this method in your class, adding the 

@@ -109,13 +109,13 @@
     m_insetViewController = [insetViewController retain];
     
     // Get the new inset; this lazily creates the associated view
-    UIView *insetView = insetViewController.view;
+    UIView *insetView = m_insetViewController.view;
     
     // Display the new inset (the cast is guaranteed to work because of the initWithPlaceholderViewController: signature)
-    [insetViewController viewWillAppear:NO];
+    [m_insetViewController viewWillAppear:NO];
     UIViewController<HLSViewPlaceholder> *placeholderViewController = self.placeholderViewController;
     [placeholderViewController.placeholderView addSubview:insetView];
-    [insetViewController viewDidAppear:NO];
+    [m_insetViewController viewDidAppear:NO];
 }
 
 #pragma mark View lifecycle
