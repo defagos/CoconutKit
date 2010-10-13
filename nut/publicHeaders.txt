@@ -36,6 +36,9 @@ HLSStandardTableViewCell.h
 HLSStandardView.h
 HLSStandardWidgetConstants.h
 HLSTableSearchDisplayController.h
+HLSTextField.h
+HLSValidable.h
 HLSValidators.h
 HLSViewAnimation.h
 HLSViewPlaceholder.h
+HLSWizardViewController.h

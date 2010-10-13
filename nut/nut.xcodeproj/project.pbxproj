@@ -15,6 +15,11 @@
 		6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D438124617BB00252AF1 /* HLSAssert.h */; };
 		6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28629A12658CA800D04F08 /* HLSValidators.h */; };
 		6F28629D12658CA800D04F08 /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28629B12658CA800D04F08 /* HLSValidators.m */; };
+		6F2862FF1265A60F00D04F08 /* HLSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2862FD1265A60F00D04F08 /* HLSTextField.h */; };
+		6F2863001265A60F00D04F08 /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2862FE1265A60F00D04F08 /* HLSTextField.m */; };
+		6F2863061265A65300D04F08 /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863051265A65300D04F08 /* HLSValidable.h */; };
+		6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863091265B3E500D04F08 /* HLSWizardViewController.h */; };
+		6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */; };
 		6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */; };
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F8D090D123F51DF00FCF2AF /* HLSAnimationFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */; };
@@ -98,6 +103,11 @@
 		6F21D438124617BB00252AF1 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6F28629A12658CA800D04F08 /* HLSValidators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidators.h; sourceTree = "<group>"; };
 		6F28629B12658CA800D04F08 /* HLSValidators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidators.m; sourceTree = "<group>"; };
+		6F2862FD1265A60F00D04F08 /* HLSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextField.h; sourceTree = "<group>"; };
+		6F2862FE1265A60F00D04F08 /* HLSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextField.m; sourceTree = "<group>"; };
+		6F2863051265A65300D04F08 /* HLSValidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidable.h; sourceTree = "<group>"; };
+		6F2863091265B3E500D04F08 /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
+		6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationFrame.h; sourceTree = "<group>"; };
@@ -317,6 +327,8 @@
 				6F8D0922123F530400FCF2AF /* HLSPageController.m */,
 				6F8D0923123F530400FCF2AF /* HLSTableSearchDisplayController.h */,
 				6F8D0924123F530400FCF2AF /* HLSTableSearchDisplayController.m */,
+				6F2863091265B3E500D04F08 /* HLSWizardViewController.h */,
+				6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -348,6 +360,7 @@
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
 				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
+				6F2863051265A65300D04F08 /* HLSValidable.h */,
 				6F28629A12658CA800D04F08 /* HLSValidators.h */,
 				6F28629B12658CA800D04F08 /* HLSValidators.m */,
 				6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */,
@@ -370,6 +383,8 @@
 				6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */,
 				6F8D09AE123F605800FCF2AF /* HLSStandardView.h */,
 				6F8D09AF123F605800FCF2AF /* HLSStandardView.m */,
+				6F2862FD1265A60F00D04F08 /* HLSTextField.h */,
+				6F2862FE1265A60F00D04F08 /* HLSTextField.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -424,6 +439,9 @@
 				6FEDC73E1254B6940011CF63 /* HLSBusyManager.h in Headers */,
 				6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */,
 				6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */,
+				6F2862FF1265A60F00D04F08 /* HLSTextField.h in Headers */,
+				6F2863061265A65300D04F08 /* HLSValidable.h in Headers */,
+				6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +529,8 @@
 				6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */,
 				6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */,
 				6F28629D12658CA800D04F08 /* HLSValidators.m in Sources */,
+				6F2863001265A60F00D04F08 /* HLSTextField.m in Sources */,
+				6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
