@@ -13,6 +13,8 @@
 		6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D4341246163A00252AF1 /* HLSFloat.h */; };
 		6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D4351246163A00252AF1 /* HLSFloat.m */; };
 		6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D438124617BB00252AF1 /* HLSAssert.h */; };
+		6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28629A12658CA800D04F08 /* HLSValidators.h */; };
+		6F28629D12658CA800D04F08 /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28629B12658CA800D04F08 /* HLSValidators.m */; };
 		6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */; };
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F8D090D123F51DF00FCF2AF /* HLSAnimationFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */; };
@@ -94,6 +96,8 @@
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6F21D438124617BB00252AF1 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
+		6F28629A12658CA800D04F08 /* HLSValidators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidators.h; sourceTree = "<group>"; };
+		6F28629B12658CA800D04F08 /* HLSValidators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidators.m; sourceTree = "<group>"; };
 		6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F8D0909123F51DF00FCF2AF /* HLSAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationFrame.h; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
 				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
+				6F28629A12658CA800D04F08 /* HLSValidators.h */,
+				6F28629B12658CA800D04F08 /* HLSValidators.m */,
 				6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */,
 			);
 			path = Core;
@@ -417,6 +423,7 @@
 				6FEDC2C512537BCD0011CF63 /* HLSInsetController.h in Headers */,
 				6FEDC73E1254B6940011CF63 /* HLSBusyManager.h in Headers */,
 				6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */,
+				6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +510,7 @@
 				6FEDB416125078EA0011CF63 /* HLSBusyObjectSetManager.m in Sources */,
 				6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */,
 				6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */,
+				6F28629D12658CA800D04F08 /* HLSValidators.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
