@@ -50,6 +50,11 @@
 
 @property (nonatomic, assign) id<HLSWizardViewControllerDelegate> delegate;
 
+/**
+ * Go to some page; hopping in forward direction will block if some page in between is not valid
+ */
+- (void)moveToPage:(NSUInteger)page;
+
 @end
 
 @protocol HLSWizardViewControllerDelegate <NSObject>

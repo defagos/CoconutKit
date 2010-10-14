@@ -18,7 +18,7 @@
 
 @property (nonatomic, assign) NSInteger currentPage;
 
-- (BOOL)validateCurrentPage;
+- (BOOL)validatePage:(NSInteger)page;
 
 - (void)previousButtonClicked:(id)sender;
 - (void)nextButtonClicked:(id)sender;
@@ -190,15 +190,15 @@
 
 #pragma mark Handling pages
 
-- (BOOL)validateCurrentPage
+- (BOOL)validatePage:(NSInteger)page
 {
     // Sanitize input (deals with the "no page" case)
-    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
+    if (page < 0 || page >= [self.viewControllers count]) {
         return YES;
     }
     
     // Validate the current page if it implements a validation mechanism
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
+    UIViewController *viewController = [self.viewControllers objectAtIndex:page];
     if ([viewController conformsToProtocol:@protocol(HLSValidable)]) {
         UIViewController<HLSValidable> *validableViewController = viewController;
         return [validableViewController validate];
@@ -207,6 +207,31 @@
     else {
         return YES;
     }
+}
+
+- (void)moveToPage:(NSUInteger)page
+{
+    // Sanitize input (unsigned value, no < 0 test here)
+    if (page > [self.viewControllers count]) {
+        return;
+    }
+    
+    // If not moving, nothing to do
+    if (page == self.currentPage) {
+        return;
+    }
+    
+    // Going forward, check pages in between and stops on a page if it is not valid
+    if (page > self.currentPage) {
+        for (NSInteger i = self.currentPage; i < page; ++i) {
+            if (! [self validatePage:i]) {
+                self.currentPage = i;
+                return;
+            }
+        }
+    }
+    
+    self.currentPage = page;
 }
 
 #pragma mark Event callbacks
@@ -218,7 +243,7 @@
 
 - (void)nextButtonClicked:(id)sender
 {
-    if (! [self validateCurrentPage]) {
+    if (! [self validatePage:self.currentPage]) {
         return;
     }
     ++self.currentPage;
@@ -226,7 +251,7 @@
 
 - (void)doneButtonClicked:(id)sender
 {
-    if (! [self validateCurrentPage]) {
+    if (! [self validatePage:self.currentPage]) {
         return;
     }
     [self.delegate wizardViewControllerHasClickedDoneButton:self];
