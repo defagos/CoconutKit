@@ -76,6 +76,12 @@
     [self reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.delegate wizardViewController:self didDisplayPage:self.currentPage];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
