@@ -6,6 +6,7 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+#import "HLSBusy.h"
 #import "HLSPlaceholderViewController.h"
 
 // Forward declarations
@@ -32,7 +33,7 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSWizardViewController : HLSPlaceholderViewController <HLSReloadable> {
+@interface HLSWizardViewController : HLSPlaceholderViewController <HLSBusy, HLSReloadable> {
 @private
     UIButton *m_previousButton;
     UIButton *m_nextButton;
