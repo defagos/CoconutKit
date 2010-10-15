@@ -151,7 +151,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
     // again. We need to refresh the data completely since the result has probably completely changed
     if ([self.requestId isEqual:requestId]) {
         if ([updatedObjects count] != 1) {
-            logger_warn(@"Query returning several results bound to a single object");
+            logger_warn(@"Query returning %d object(s), 1 object expected", [updatedObjects count]);
             return;
         }
         self.object = [updatedObjects objectAtIndex:0];
