@@ -56,4 +56,10 @@
  * for refresh. A typical example is in the implementation of the viewWillAppear: method
  * of a view controller implementing HLSBusy
  */
-#define BUSY_MANAGER_ASK_FOR_UPDATE()       [self.busyManager updateObject:self]
+#define BUSY_MANAGER_ASK_FOR_UPDATE()                   \
+    if (self.busyManager) {                             \
+        [self.busyManager updateObject:self];           \
+    }                                                   \
+    else {                                              \
+        [self exitBusyMode];                            \
+    }

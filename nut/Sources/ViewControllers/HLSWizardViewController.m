@@ -152,14 +152,16 @@ SYNTHESIZE_BUSY_MANAGER();
     self.nextButton.enabled = NO;
     self.doneButton.enabled = NO;
     
-    // Check that a page is currently selected
+    // If no page currently selected, we are done
     if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        // Forward the message to the currently displayed view controller (if it understands it)
-        UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-        if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
-            UIViewController<HLSBusy> *busyViewController = viewController;
-            [busyViewController enterBusyMode];
-        }
+        return;
+    }
+        
+    // Forward the message to the currently displayed view controller (if it understands it)
+    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
+    if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
+        UIViewController<HLSBusy> *busyViewController = viewController;
+        [busyViewController enterBusyMode];
     }
 }
 
@@ -169,14 +171,16 @@ SYNTHESIZE_BUSY_MANAGER();
     self.nextButton.enabled = YES;
     self.doneButton.enabled = YES;    
     
-    // Check that a page is currently selected
+    // If no page currently selected, we are done
     if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        // Forward the message to the currently displayed view controller (if it understands it)
-        UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-        if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
-            UIViewController<HLSBusy> *busyViewController = viewController;
-            [busyViewController exitBusyMode];
-        }
+        return;
+    }
+    
+    // Forward the message to the currently displayed view controller (if it understands it)
+    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
+    if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
+        UIViewController<HLSBusy> *busyViewController = viewController;
+        [busyViewController exitBusyMode];
     }
 }
 
