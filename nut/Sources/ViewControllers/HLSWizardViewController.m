@@ -268,8 +268,8 @@ SYNTHESIZE_BUSY_MANAGER();
     // Going forward, check pages in between and stops on a page if it is not valid
     if (page > self.currentPage) {
         for (NSInteger i = self.currentPage; i < page; ++i) {
+            self.currentPage = i;
             if (! [self validatePage:i]) {
-                self.currentPage = i;
                 return;
             }
         }
