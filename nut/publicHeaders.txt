@@ -32,6 +32,8 @@ HLSServiceObjectDescription.h
 HLSServiceRequest.h
 HLSServiceRequester.h
 HLSServiceSettings.h
+HLSSingleValuePicker.h
+HLSSingleValuePickerViewController.h
 HLSStandardTableViewCell.h
 HLSStandardView.h
 HLSStandardWidgetConstants.h
