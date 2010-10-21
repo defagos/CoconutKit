@@ -360,7 +360,7 @@
     
     // When this function has been called and is returning YES, the orientation is known for sure. Depending on the
     // orientation, we display a maximum number of dots in the page controller
-    if (UIDeviceOrientationIsPortrait(toInterfaceOrientation)) {
+    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
         self.pageControl.numberOfPages = MIN(MAX_NBR_DOTS_PAGE_CONTROLLER_PORTRAIT, [self viewControllerCount]);
     }
     else {
@@ -516,8 +516,8 @@
 
 - (void)maximizeForOrientation:(UIInterfaceOrientation)orientation
 {
-    if ((UIDeviceOrientationIsPortrait(orientation) && self.maximizedPortrait)
-        || (UIDeviceOrientationIsLandscape(orientation) && self.maximizedLandscape)) {
+    if ((UIInterfaceOrientationIsPortrait(orientation) && self.maximizedPortrait)
+        || (UIInterfaceOrientationIsLandscape(orientation) && self.maximizedLandscape)) {
         [self setMaximized:YES];
     }
     else {
