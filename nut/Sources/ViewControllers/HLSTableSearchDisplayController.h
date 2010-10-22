@@ -9,7 +9,7 @@
 // Forward declarations
 @class HLSTableSearchDisplayController;
 
-@protocol TableSearchDisplayDelegate <NSObject>
+@protocol HLSTableSearchDisplayDelegate <NSObject>
 
 @optional
 // when we start/end showing the search UI (use willBeginSearch to initialize the search string with some meaningful value if
@@ -30,13 +30,15 @@
  * This class mimics the UISearchDisplayController class, but with the difference that the scope bar buttons can
  * be used even if no search string is entered.
  *
- * Moreover, the use of this class is limited to filtering entries managed by a UITableViewController. This is
+ * Moreover, the use of this class is limited to filtering entries managed by a UITableView. This is
  * namely by far the most common use of UISearchDisplayController, which does not even support all cases
  * for table views (try e.g. adding the search bar as table view footer, you will see what I mean). This also
  * allows us to reuse the original table view to display the results (the added flexibility that UISearchDisplayController
- * provides is not really worth its price). In contrast to UISearchDisplayController, this class therefore can directly
- * inherit from UITableViewController, and to benefit from it you just need to derive from it instead of from
- * UITableViewController.
+ * provides is not really worth its price).
+ *
+ * To provide the user with the ability to customize the view controller layout, this class does not inherit directly from
+ * UITableViewController, but from UIViewController. Classes derived from this class are therefore expected to initialize
+ * the table view outlet provided, either using Interface Builder or via code.
  *
  * Table reload is handled in the following way:
  *   - if the class inheriting from HLSTableSearchDisplayController implements the HLSReloadable protocol, the protocol
@@ -45,15 +47,25 @@
  *   - if the class inheriting from HLSTableSearchDisplayController does not implement the HLSReloadable protocol, the
  *     UITableView reloadData method is used
  *
+ * As for UITableViewController, this class conforms to the table view protocols for convenience, but does not provide
+ * any meaningful implementations for them. Subclasses are required to override at least the required UITableViewDataSource
+ * protocol methods to display records.
+ *
  * Remark: If you override viewDidLoad, viewWillAppear, etc., do not forget to call its super counterpart (as usual),
  *         otherwise the HLSTableSearchDisplayController will not work correctly.
  *
- * Designated initializer: initWithStyle:
+ * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSTableSearchDisplayController : UITableViewController <UISearchBarDelegate, TableSearchDisplayDelegate> {
+@interface HLSTableSearchDisplayController : UIViewController <
+    HLSTableSearchDisplayDelegate,
+    UISearchBarDelegate, 
+    UITableViewDataSource,
+    UITableViewDelegate
+> {
 @private
     UISearchBar *m_searchBar;
-    id<TableSearchDisplayDelegate> m_searchDelegate;
+    UITableView *m_tableView;
+    id<HLSTableSearchDisplayDelegate> m_searchDelegate;
     BOOL m_firstTime;
     struct {
         unsigned int delegateWillBeginSearch:1;
@@ -76,6 +88,11 @@
  */
 @property (nonatomic, readonly, retain) UISearchBar *searchBar;
 
-@property (nonatomic, assign) id<TableSearchDisplayDelegate> searchDelegate;
+/**
+ * Derived classes must initialize this outlet, either using Interface Builder or via code (i.e. when implementing the loadView method)
+ */
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+
+@property (nonatomic, assign) id<HLSTableSearchDisplayDelegate> searchDelegate;
 
 @end

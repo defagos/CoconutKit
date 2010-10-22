@@ -26,9 +26,9 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithStyle:style]) {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Create the search bar for displaying at the top of the table view (created in init so that the user
         // has a chance to customize it before it is displayed)
         CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
@@ -49,6 +49,7 @@
 - (void)dealloc
 {
     self.searchBar = nil;
+    self.tableView = nil;
     self.searchDelegate = nil;
     [super dealloc];
 }
@@ -58,6 +59,9 @@
 - (void)viewDidLoad
 {    
     [super viewDidLoad];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
     // No search criterium by default. Can be customized by the delegate
     self.searchBar.text = nil;
@@ -108,9 +112,11 @@
 
 @synthesize searchBar = m_searchBar;
 
+@synthesize tableView = m_tableView;
+
 @synthesize searchDelegate = m_searchDelegate;
 
-- (void)setSearchDelegate:(id <TableSearchDisplayDelegate>)searchDelegate
+- (void)setSearchDelegate:(id <HLSTableSearchDisplayDelegate>)searchDelegate
 {
     // Check for self-assignment
     if (m_searchDelegate == searchDelegate) {
@@ -272,6 +278,20 @@
             [self reloadTable];
         }
     }
+}
+
+#pragma mark UITableViewDataSource protocol implementation
+
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
+{
+    // To be overriden by subclasses
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // To be overriden by subclasses
+    return nil;
 }
 
 @end
