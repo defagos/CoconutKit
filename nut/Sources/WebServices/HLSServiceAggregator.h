@@ -23,6 +23,12 @@
  */
 - (NSArray *)disaggregateAnswer:(HLSServiceAnswer *)aggregatedAnswer didFailWithError:(NSError **)pError;      // must return an array of HLSServiceAnswer objects
 
+/**
+ * This method must return an array containing all NSString ids which have been aggregated into the request id
+ * specified as parameter
+ */
+- (NSArray *)requestIdsForAggregatedRequestId:(NSString *)aggregatedRequestId;
+
 @end
 
 /**
