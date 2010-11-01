@@ -48,6 +48,7 @@
 - (void)increaseBusyCount
 {
     ++m_busyCount;
+    logger_debug(@"Busy counter: %d", m_busyCount);
     for (id<HLSBusy> object in self.managedObjects) {
         [self updateObject:object];   
     }
@@ -60,6 +61,7 @@
         logger_debug(@"Was not busy");
         m_busyCount = 0;
     }
+    logger_debug(@"Busy counter: %d", m_busyCount);
     for (id<HLSBusy> object in self.managedObjects) {
         [self updateObject:object];   
     }
