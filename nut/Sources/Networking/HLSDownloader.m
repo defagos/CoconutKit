@@ -99,7 +99,7 @@ DEFINE_NOTIFICATION(HLSDownloaderFailureNotification);
     return [self.requester fetchPartialData];
 }
 
-- (NSNumber *)progress
+- (float)progress
 {
     return [self.requester progress];
 }

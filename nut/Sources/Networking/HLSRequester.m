@@ -144,27 +144,26 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
 
 #pragma mark Getting status
 
-- (NSNumber *)progress
+- (float)progress
 {
     // Retrieved
     if (self.status == HLSRequesterStatusDone) {
-        return [NSNumber numberWithFloat:1.f];
+        return 1.f;
     }
     // Not retrieving
     else if (self.status == HLSRequesterStatusIdle) {
-        return [NSNumber numberWithFloat:0.f];
+        return 0.f;
     }
     // Retrieving
     else {
         // The content length could be retrieved
         if (m_expectedContentLength != NSURLResponseUnknownLength) {
-            float result = (float)[self.data length] / m_expectedContentLength;
-            return [NSNumber numberWithFloat:result];
+            return (float)[self.data length] / m_expectedContentLength;
         }
-        // If the content length was not retrieved, we have no other choice than
-        // returning 0. The function will only return 1 when the process completes
+        // If the content length was not retrieved, we return 0.1f to mean that the process
+        // has started, but we cannot say more
         else {
-            return [NSNumber numberWithFloat:0.f];
+            return 0.1f;
         }
     }
 }

@@ -72,12 +72,10 @@ DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
 - (NSData *)fetchPartialData;
 
 /**
- * Return the estimated completion rate (float between 0 and 1). Might not be reliable, in which case only 0
- * (not completely retrieved) or 1 (retrieved) are returned
+ * Return the estimated completion rate (float between 0 and 1). If the total download size is not available, then the
+ * completion will stay at 0.1 until the download is done.
  */
-// TODO: Simply return a float! Why so complicated??
-// TODO: Maybe more clever (e.g. small value for "download started", then true download progress)
-- (NSNumber *)progress;        // float
+- (float)progress;
 
 /**
  * Optional tag for identifying requests

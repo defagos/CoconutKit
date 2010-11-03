@@ -46,10 +46,10 @@ DECLARE_NOTIFICATION(HLSDownloaderFailureNotification);
 - (NSData *)fetchPartialData;
 
 /**
- * Return the estimated completion rate (float between 0 and 1). Might not be reliable, in which case only 0
- * (not completely downloaded) or 1 (downloaded) are returned
+ * Return the estimated completion rate (float between 0 and 1). If the total download size is not available, then the
+ * completion will stay at 0.1 until the download is done.
  */
-- (NSNumber *)progress;        // float
+- (float)progress;
 
 /**
  * Optional tag for identifying downloads
