@@ -42,6 +42,7 @@ DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
  */
 // TODO: Must provide a way to access the encoding of the answer (e.g. gzip, plain, etc.). Extracted from NSURLResponse,
 //       but see how this information can best be made available
+// TODO: Add a method to cancel a request (add it to HLSDownloader as well)
 @interface HLSRequester : NSObject {
 @private
     NSURLRequest *m_request;
@@ -74,6 +75,8 @@ DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
  * Return the estimated completion rate (float between 0 and 1). Might not be reliable, in which case only 0
  * (not completely retrieved) or 1 (retrieved) are returned
  */
+// TODO: Simply return a float! Why so complicated??
+// TODO: Maybe more clever (e.g. small value for "download started", then true download progress)
 - (NSNumber *)progress;        // float
 
 /**
