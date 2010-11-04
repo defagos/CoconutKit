@@ -34,7 +34,7 @@
 @property (nonatomic, readonly, retain) UIView *view;
 
 // An id can optionally be assigned to an animation for identifying it if needed
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, retain) NSString *id;
 
 /**
  * Animation settings. If not set, default values are used

@@ -27,8 +27,8 @@ aggregatorClassName:(NSString *)aggregatorClassName
  decoderClassName:(NSString *)decoderClassName;
 
 @property (nonatomic, readonly, copy) NSURL *url;
-@property (nonatomic, readonly, copy) NSString *requesterClassName;
-@property (nonatomic, readonly, copy) NSString *aggregatorClassName;
-@property (nonatomic, readonly, copy) NSString *decoderClassName;
+@property (nonatomic, readonly, retain) NSString *requesterClassName;
+@property (nonatomic, readonly, retain) NSString *aggregatorClassName;
+@property (nonatomic, readonly, retain) NSString *decoderClassName;
 
 @end

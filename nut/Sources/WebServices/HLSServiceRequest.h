@@ -19,7 +19,7 @@
 
 - (id)initWithBody:(NSString *)body;
 
-@property (nonatomic, readonly, copy) NSString *id;
-@property (nonatomic, readonly, copy) NSString *body;
+@property (nonatomic, readonly, retain) NSString *id;
+@property (nonatomic, readonly, retain) NSString *body;
 
 @end

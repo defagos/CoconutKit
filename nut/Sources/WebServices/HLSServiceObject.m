@@ -12,7 +12,7 @@
 
 @interface HLSServiceObject ()
 
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, retain) NSString *id;
 
 @end
 

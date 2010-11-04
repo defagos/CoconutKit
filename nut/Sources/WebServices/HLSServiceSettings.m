@@ -11,9 +11,9 @@
 @interface HLSServiceSettings ()
 
 @property (nonatomic, copy) NSURL *url;
-@property (nonatomic, copy) NSString *requesterClassName;
-@property (nonatomic, copy) NSString *aggregatorClassName;
-@property (nonatomic, copy) NSString *decoderClassName;
+@property (nonatomic, retain) NSString *requesterClassName;
+@property (nonatomic, retain) NSString *aggregatorClassName;
+@property (nonatomic, retain) NSString *decoderClassName;
 
 @end
 

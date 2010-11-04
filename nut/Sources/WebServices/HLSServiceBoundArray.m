@@ -16,7 +16,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
 
 @interface HLSServiceBoundArray ()
 
-@property (nonatomic, copy) NSString *requestId;
+@property (nonatomic, retain) NSString *requestId;
 // Since the broker notifies service arrays (which only interact with it in such occasions), it is safe to assign.
 // Retain would not have been desirable (requests must not keep the corresponding broker alive!)
 @property (nonatomic, assign) HLSServiceBroker *broker;
@@ -41,7 +41,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
     serviceBoundArrayCopy.requestId = serviceBoundArray.requestId;
     serviceBoundArrayCopy.broker = serviceBoundArray.broker;
     
-    // The following is safe. We do not create dependencies between original and copy since we are
+    // The following is safe. We do not create dependencies between original and retain since we are
     // working with immutable arrays
     NSArray *objects = serviceBoundArray.objects;
     

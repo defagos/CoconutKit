@@ -25,7 +25,7 @@
 
 - (id)initWithId:(NSString *)id;
 
-@property (nonatomic, readonly, copy) NSString *id;
+@property (nonatomic, readonly, retain) NSString *id;
 
 @end
 
@@ -38,7 +38,7 @@
 
 - (id)initWithId:(NSString *)id;
 
-@property (nonatomic, readonly, copy) NSString *id;
+@property (nonatomic, readonly, retain) NSString *id;
 
 @end
 

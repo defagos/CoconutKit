@@ -27,8 +27,8 @@
 
 - (id)initWithClassName:(NSString *)className id:(NSString *)id fields:(NSDictionary *)fields;
 
-@property (nonatomic, readonly, copy) NSString *className;
-@property (nonatomic, readonly, copy) NSString *id;
+@property (nonatomic, readonly, retain) NSString *className;
+@property (nonatomic, readonly, retain) NSString *id;
 @property (nonatomic, readonly, retain) NSDictionary *fields;
 
 @end

@@ -80,6 +80,6 @@ DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
 /**
  * Optional tag for identifying requests
  */
-@property (nonatomic, copy) NSString *tag;
+@property (nonatomic, retain) NSString *tag;
 
 @end

@@ -42,7 +42,7 @@
 - (id)initWithRequest:(HLSServiceRequest *)request settings:(HLSServiceSettings *)settings;
 
 @property (nonatomic, assign) id<HLSServiceRequesterDelegate> delegate;
-@property (nonatomic, readonly, copy) NSString *requestId;
+@property (nonatomic, readonly, retain) NSString *requestId;
 
 @end
 

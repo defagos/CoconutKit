@@ -17,7 +17,7 @@
 
 - (id)initWithBody:(NSString *)body forRequestId:(NSString *)requestId;
 
-@property (nonatomic, copy, readonly) NSString *body;
-@property (nonatomic, copy, readonly) NSString *requestId;
+@property (nonatomic, retain, readonly) NSString *body;
+@property (nonatomic, retain, readonly) NSString *requestId;
 
 @end

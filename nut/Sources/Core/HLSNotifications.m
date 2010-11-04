@@ -30,7 +30,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 
 - (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object;
 
-@property (nonatomic, copy) NSString *notificationName;
+@property (nonatomic, retain) NSString *notificationName;
 @property (nonatomic, assign) id object;
 
 @end

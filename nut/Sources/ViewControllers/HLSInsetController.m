@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) UIViewController *placeholderViewController;
 
-- (void)copyPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController;
+- (void)retainPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController;
 
 @end
 
@@ -74,7 +74,7 @@
     m_placeholderViewController = [placeholderViewController retain];
     
     // Sync properties
-    [self copyPlaceholderViewControllerPropertiesFromViewController:m_placeholderViewController];
+    [self retainPlaceholderViewControllerPropertiesFromViewController:m_placeholderViewController];
     
     // Start KVO for the new placeholder view controller
     if (m_placeholderViewController) {
@@ -272,7 +272,7 @@
 
 #pragma mark Mirroring properties of the wrapped view controller
 
-- (void)copyPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController
+- (void)retainPlaceholderViewControllerPropertiesFromViewController:(UIViewController *)viewController
 {
     // Forward title and navigation interface elements
     self.title = viewController.title;
@@ -298,7 +298,7 @@
     // KVO is here used to track changes made to the wrapped placeholder view controller; if a change has been
     // detected, just sync everything
     UIViewController *viewController = object;
-    [self copyPlaceholderViewControllerPropertiesFromViewController:viewController];
+    [self retainPlaceholderViewControllerPropertiesFromViewController:viewController];
 }
 
 @end

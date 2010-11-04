@@ -10,8 +10,8 @@
 
 @interface HLSServiceObjectDescription ()
 
-@property (nonatomic, copy) NSString *className;
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, retain) NSString *className;
+@property (nonatomic, retain) NSString *id;
 @property (nonatomic, retain) NSDictionary *fields;
 
 @end

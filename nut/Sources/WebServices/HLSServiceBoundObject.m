@@ -17,7 +17,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 @interface HLSServiceBoundObject ()
 
-@property (nonatomic, copy) NSString *requestId;
+@property (nonatomic, retain) NSString *requestId;
 @property (nonatomic, assign) HLSServiceBroker *broker;
 @property (nonatomic, retain) id object;
 

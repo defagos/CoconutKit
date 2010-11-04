@@ -70,7 +70,7 @@ DECLARE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
  * time the service broker notifies about the availability of the answer matching the associated request id. There
  * is one reason for this behavior: Applying descriptors and predicates to existing data does not mean it is 
  * up-to-date (the request must be resent to be sure it is).
- * If you know that your data is up-to-date, or if you don't care, you can create a filtered copy of an existing array
+ * If you know that your data is up-to-date, or if you don't care, you can create a filtered retain of an existing array
  * and data by using the convenience method
  *    filteredServiceBoundArrayWithServiceBoundArray:sortDescriptors:predicate:
  */

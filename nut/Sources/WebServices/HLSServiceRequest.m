@@ -10,8 +10,8 @@
 
 @interface HLSServiceRequest ()
 
-@property (nonatomic, copy) NSString *id;
-@property (nonatomic, copy) NSString *body;
+@property (nonatomic, retain) NSString *id;
+@property (nonatomic, retain) NSString *body;
 
 @end
 

@@ -54,6 +54,6 @@ DECLARE_NOTIFICATION(HLSDownloaderFailureNotification);
 /**
  * Optional tag for identifying downloads
  */
-@property (nonatomic, copy) NSString *tag;
+@property (nonatomic, retain) NSString *tag;
 
 @end
