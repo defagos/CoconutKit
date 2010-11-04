@@ -1,21 +1,21 @@
 //
-//  HLSHash.m
+//  NSString+HLSHash.m
 //  nut
 //
-//  Created by Samuel Défago on 9/20/10.
+//  Created by Samuel Défago on 11/3/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSHash.h"
+#import "NSString+HLSHash.h"
 
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation HLSHash
+@implementation NSString (HLSHash)
 
-+ (NSString *)md5hashForString:(NSString *)string
+- (NSString *)md5hash
 {
     // Calculate the MD5 hash
-    const char *utf8str = [string UTF8String];
+    const char *utf8str = [self UTF8String];
     unsigned char resultBuffer[CC_MD5_DIGEST_LENGTH];
     CC_MD5(utf8str, strlen(utf8str), resultBuffer);
     

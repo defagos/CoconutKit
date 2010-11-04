@@ -1,31 +1,31 @@
 //
-//  HLSCompression.m
+//  NSData+HLSCompression.m
 //  nut
 //
-//  Created by Samuel Défago on 9/16/10.
+//  Created by Samuel Défago on 11/3/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSCompression.h"
+#import "NSData+HLSCompression.h"
 
 // TODO: mmmhhh... EXC_BAD_ACCESS in inflate for small values (8, 12, ...). Crashes when ~8192 bytes have been read.
 #define BUFFER_SIZE             1 << 12
 
 #include <zlib.h>
 
-@implementation HLSCompression
+@implementation NSData (HLSCompression)
 
-+ (NSData *)zlibGzipInflateData:(NSData *)data;
+- (NSData *)zlibGzipInflate
 {
-    if (! data) {
-        return data;
+    if (! self) {
+        return nil;
     }
     
     // Stream initialization before calling inflateInit(2)
     z_stream stream;
     memset(&stream, 0, sizeof(z_stream));
-    stream.next_in = (Bytef *)[data bytes];
-    stream.avail_in = [data length];
+    stream.next_in = (Bytef *)[self bytes];
+    stream.avail_in = [self length];
     stream.zalloc = Z_NULL;
     stream.zfree = Z_NULL;
     stream.opaque = Z_NULL;
@@ -47,7 +47,7 @@
         // Reset the buffer space
         memset(chunkBuffer, 0, sizeof(chunkBuffer));
         stream.avail_out = BUFFER_SIZE;
-
+        
         // Inflate more data. Data has been decoded if Z_OK (more data available but output buffer has been filled; 
         // must call inflate again) or Z_STREAM_END (all data decoded; done). In all cases, inflate stops either
         // when the buffer has been filled or if the stream end has been reached

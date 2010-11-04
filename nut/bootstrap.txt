@@ -1,1 +1,3 @@
 HLSTextField.m
+NSData+HLSCompression.m
+NSString+HLSHash.m

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F21D3F81245548100252AF1 /* HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D3F61245548100252AF1 /* HLSCompression.h */; };
-		6F21D3F91245548100252AF1 /* HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D3F71245548100252AF1 /* HLSCompression.m */; };
 		6F21D4211245565400252AF1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F21D4201245565400252AF1 /* libz.dylib */; };
 		6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D4341246163A00252AF1 /* HLSFloat.h */; };
 		6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D4351246163A00252AF1 /* HLSFloat.m */; };
@@ -83,8 +81,6 @@
 		6F8D09B1123F605800FCF2AF /* HLSStandardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */; };
 		6F8D09B2123F605800FCF2AF /* HLSStandardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D09AE123F605800FCF2AF /* HLSStandardView.h */; };
 		6F8D09B3123F605800FCF2AF /* HLSStandardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D09AF123F605800FCF2AF /* HLSStandardView.m */; };
-		6FAF527F124753B100A8B23E /* HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF527D124753B100A8B23E /* HLSHash.h */; };
-		6FAF5280124753B100A8B23E /* HLSHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF527E124753B100A8B23E /* HLSHash.m */; };
 		6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF57841248B8F300A8B23E /* HLSConverters.h */; };
 		6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF57851248B8F300A8B23E /* HLSConverters.m */; };
 		6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */; };
@@ -94,13 +90,15 @@
 		6FEDC2C512537BCD0011CF63 /* HLSInsetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDC2C312537BCD0011CF63 /* HLSInsetController.h */; };
 		6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDC2C412537BCD0011CF63 /* HLSInsetController.m */; };
 		6FEDC73E1254B6940011CF63 /* HLSBusyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEDC73D1254B6940011CF63 /* HLSBusyManager.h */; };
+		6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */; };
+		6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */; };
+		6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */; };
+		6FEFF5301281BBB400B01B7A /* NSString+HLSHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6F21D3F61245548100252AF1 /* HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCompression.h; sourceTree = "<group>"; };
-		6F21D3F71245548100252AF1 /* HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCompression.m; sourceTree = "<group>"; };
 		6F21D4201245565400252AF1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
@@ -177,8 +175,6 @@
 		6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardTableViewCell.m; sourceTree = "<group>"; };
 		6F8D09AE123F605800FCF2AF /* HLSStandardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardView.h; sourceTree = "<group>"; };
 		6F8D09AF123F605800FCF2AF /* HLSStandardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardView.m; sourceTree = "<group>"; };
-		6FAF527D124753B100A8B23E /* HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSHash.h; sourceTree = "<group>"; };
-		6FAF527E124753B100A8B23E /* HLSHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSHash.m; sourceTree = "<group>"; };
 		6FAF57841248B8F300A8B23E /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FAF57851248B8F300A8B23E /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
 		6FAF5B3E124A34AA00A8B23E /* HLSBusy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusy.h; sourceTree = "<group>"; };
@@ -188,6 +184,10 @@
 		6FEDC2C312537BCD0011CF63 /* HLSInsetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInsetController.h; sourceTree = "<group>"; };
 		6FEDC2C412537BCD0011CF63 /* HLSInsetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInsetController.m; sourceTree = "<group>"; };
 		6FEDC73D1254B6940011CF63 /* HLSBusyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBusyManager.h; sourceTree = "<group>"; };
+		6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSCompression.h"; sourceTree = "<group>"; };
+		6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSCompression.m"; sourceTree = "<group>"; };
+		6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSHash.h"; sourceTree = "<group>"; };
+		6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSHash.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -363,8 +363,6 @@
 				6FEDC73D1254B6940011CF63 /* HLSBusyManager.h */,
 				6FEDB413125078EA0011CF63 /* HLSBusyObjectSetManager.h */,
 				6FEDB414125078EA0011CF63 /* HLSBusyObjectSetManager.m */,
-				6F21D3F61245548100252AF1 /* HLSCompression.h */,
-				6F21D3F71245548100252AF1 /* HLSCompression.m */,
 				6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */,
 				6FAF57841248B8F300A8B23E /* HLSConverters.h */,
 				6FAF57851248B8F300A8B23E /* HLSConverters.m */,
@@ -374,8 +372,6 @@
 				6F8D095D123F53B200FCF2AF /* HLSFeedFilter.m */,
 				6F21D4341246163A00252AF1 /* HLSFloat.h */,
 				6F21D4351246163A00252AF1 /* HLSFloat.m */,
-				6FAF527D124753B100A8B23E /* HLSHash.h */,
-				6FAF527E124753B100A8B23E /* HLSHash.m */,
 				6F8D095E123F53B200FCF2AF /* HLSNotifications.h */,
 				6F8D095F123F53B200FCF2AF /* HLSNotifications.m */,
 				6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */,
@@ -386,6 +382,10 @@
 				6F28629A12658CA800D04F08 /* HLSValidators.h */,
 				6F28629B12658CA800D04F08 /* HLSValidators.m */,
 				6FEDC2BF12537B850011CF63 /* HLSViewPlaceholder.h */,
+				6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */,
+				6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */,
+				6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */,
+				6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -449,10 +449,8 @@
 				6F8D0972123F53B200FCF2AF /* HLSRuntimeChecks.h in Headers */,
 				6F8D09B0123F605800FCF2AF /* HLSStandardTableViewCell.h in Headers */,
 				6F8D09B2123F605800FCF2AF /* HLSStandardView.h in Headers */,
-				6F21D3F81245548100252AF1 /* HLSCompression.h in Headers */,
 				6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */,
 				6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */,
-				6FAF527F124753B100A8B23E /* HLSHash.h in Headers */,
 				6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */,
 				6FAF5B3F124A34AA00A8B23E /* HLSBusy.h in Headers */,
 				6FEDB415125078EA0011CF63 /* HLSBusyObjectSetManager.h in Headers */,
@@ -466,6 +464,8 @@
 				6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */,
 				6F5B04A1126DC8A800C92F2A /* HLSSingleValuePicker.h in Headers */,
 				6F5B04A6126DC8B800C92F2A /* HLSSingleValuePickerViewController.h in Headers */,
+				6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */,
+				6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,9 +545,7 @@
 				6F8D096C123F53B200FCF2AF /* HLSNotifications.m in Sources */,
 				6F8D09B1123F605800FCF2AF /* HLSStandardTableViewCell.m in Sources */,
 				6F8D09B3123F605800FCF2AF /* HLSStandardView.m in Sources */,
-				6F21D3F91245548100252AF1 /* HLSCompression.m in Sources */,
 				6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */,
-				6FAF5280124753B100A8B23E /* HLSHash.m in Sources */,
 				6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */,
 				6FEDB416125078EA0011CF63 /* HLSBusyObjectSetManager.m in Sources */,
 				6FEDC2C612537BCD0011CF63 /* HLSInsetController.m in Sources */,
@@ -557,6 +555,8 @@
 				6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */,
 				6F5B04A2126DC8A800C92F2A /* HLSSingleValuePicker.m in Sources */,
 				6F5B04A7126DC8B800C92F2A /* HLSSingleValuePickerViewController.m in Sources */,
+				6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */,
+				6FEFF5301281BBB400B01B7A /* NSString+HLSHash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

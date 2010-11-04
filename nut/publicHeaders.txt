@@ -10,7 +10,6 @@ HLSDownloaderTools.h
 HLSFeed.h
 HLSFeedFilter.h
 HLSFloat.h
-HLSHash.h
 HLSInsetController.h
 HLSLogger.h
 HLSNotifications.h
@@ -44,3 +43,5 @@ HLSValidators.h
 HLSViewAnimation.h
 HLSViewPlaceholder.h
 HLSWizardViewController.h
+NSData+HLSCompression.h
+NSString+HLSHash.h

@@ -11,7 +11,7 @@
 // Download status
 typedef enum {
     HLSRequesterStatusEnumBegin = 0,                                   // (BEGIN)
-    HLSRequesterStatusIdle = HLSRequesterStatusEnumBegin,                 // Not downloading
+    HLSRequesterStatusIdle = HLSRequesterStatusEnumBegin,              // Not downloading
     HLSRequesterStatusRetrieving,                                      // Currently downloading file
     HLSRequesterStatusDone,                                            // The whole file has been downloaded
     HLSRequesterStatusEnumEnd,                                         // (END)
