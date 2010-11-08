@@ -116,6 +116,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    // If no inset has been defined, let the placeholder rotate
+    if (! self.insetViewController) {
+        return YES;
+    }
+    
     return [self.insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
         || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];
 }
@@ -127,6 +132,11 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    // If no inset defined, nothing to do
+    if (! self.insetViewController) {
+        return;
+    }
+    
     // Forward to the view controllers first
     [self.insetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
