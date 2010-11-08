@@ -45,7 +45,7 @@ typedef enum {
  * Basic logger facility writing to the console. Currently not thread-safe
  *
  * To use a logger, create an environment.plist file and set the "Logger level" property to either
- * DEBUG, INFO, WARN, ERROR or FATAL.
+ * DEBUG, INFO, WARN, ERROR or FATAL. Also add the -DDEBUG option to the target "Other C flag" option. 
  *
  * Designated initializer: initWithLevel:
  */
