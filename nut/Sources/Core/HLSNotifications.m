@@ -10,8 +10,8 @@
 
 #import "HLSLogger.h"
 
-DEFINE_NOTIFICATION(NetworkActivityStartNotification);
-DEFINE_NOTIFICATION(NetworkActivityStopNotification);
+DEFINE_NOTIFICATION(HLSNetworkActivityStartNotification);
+DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 #pragma mark -
 #pragma mark NotificationSender class interface
@@ -36,9 +36,9 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 @end
 
 #pragma mark -
-#pragma mark NotificationConverter class interface extension
+#pragma mark HLSNotificationConverter class interface extension
 
-@interface NotificationConverter ()
+@interface HLSNotificationConverter ()
 
 @property (nonatomic, retain) NSMutableDictionary *objectToNotificationMap;
 
@@ -49,18 +49,18 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 @end
 
 #pragma mark -
-#pragma mark NotificationManager class implementation
+#pragma mark HLSNotificationManager class implementation
 
-@implementation NotificationManager
+@implementation HLSNotificationManager
 
 #pragma mark Class methods
 
-+ (NotificationManager *)sharedNotificationManager
++ (HLSNotificationManager *)sharedNotificationManager
 {
-    static NotificationManager *s_instance;
+    static HLSNotificationManager *s_instance;
     
     if (! s_instance) {
-        s_instance = [[NotificationManager alloc] init];
+        s_instance = [[HLSNotificationManager alloc] init];
     }
     return s_instance;
 }
@@ -89,7 +89,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
     logger_debug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 1) {
-        [self postCoalescingNotificationWithName:NetworkActivityStartNotification];
+        [self postCoalescingNotificationWithName:HLSNetworkActivityStartNotification];
     }
 }
 
@@ -105,7 +105,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
     logger_debug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 0) {
-        [self postCoalescingNotificationWithName:NetworkActivityStopNotification];
+        [self postCoalescingNotificationWithName:HLSNetworkActivityStopNotification];
     }
 }
 
@@ -143,18 +143,18 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 @end
 
 #pragma mark -
-#pragma mark NotificationConverter class implementation
+#pragma mark HLSNotificationConverter class implementation
 
-@implementation NotificationConverter
+@implementation HLSNotificationConverter
 
 #pragma mark Class methods
 
-+ (NotificationConverter *)sharedNotificationConverter
++ (HLSNotificationConverter *)sharedNotificationConverter
 {
-    static NotificationConverter *s_instance;
+    static HLSNotificationConverter *s_instance;
     
     if (! s_instance) {
-        s_instance = [[NotificationConverter alloc] init];
+        s_instance = [[HLSNotificationConverter alloc] init];
     }
     return s_instance;
 }
@@ -233,7 +233,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
                        sentByObject:(id)objectTo
 {
     for (id objectFrom in collectionFrom) {
-        [[NotificationConverter sharedNotificationConverter] convertNotificationWithName:notificationNameFrom 
+        [[HLSNotificationConverter sharedNotificationConverter] convertNotificationWithName:notificationNameFrom 
                                                                             sentByObject:objectFrom
                                                                 intoNotificationWithName:notificationNameTo 
                                                                             sentByObject:objectTo];
@@ -273,7 +273,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 - (void)removeConversionsFromObjectsInCollection:(id<NSFastEnumeration>)collectionFrom
 {
     for (id objectFrom in collectionFrom) {
-        [[NotificationConverter sharedNotificationConverter] removeConversionsFromObject:objectFrom];
+        [[HLSNotificationConverter sharedNotificationConverter] removeConversionsFromObject:objectFrom];
     } 
 }
 
@@ -318,7 +318,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 #pragma mark -
 #pragma mark NSObject extensions
 
-@implementation NSObject (NotificationExtensions)
+@implementation NSObject (HLSNotificationExtensions)
 
 - (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(NSDictionary *)userInfo
 {
@@ -341,7 +341,7 @@ DEFINE_NOTIFICATION(NetworkActivityStopNotification);
 #pragma mark -
 #pragma mark NSNotificationCenter extensions
 
-@implementation NSNotificationCenter (NotificationExtensions)
+@implementation NSNotificationCenter (HLSNotificationExtensions)
 
 - (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection
 {

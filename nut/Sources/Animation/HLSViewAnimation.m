@@ -9,6 +9,7 @@
 #import "HLSViewAnimation.h"
 
 #import "HLSRuntimeChecks.h"
+#import "HLSUserInterfaceLock.h"
 
 // Default values as given by Apple UIView documentation
 #define ANIMATION_SETTINGS_DEFAULT_DURATION          0.2f
@@ -18,14 +19,10 @@
 @interface HLSViewAnimation ()
 
 @property (nonatomic, retain) UIView *view;
-@property (nonatomic, retain) UIView *modalView;
 @property (nonatomic, retain) NSArray *animationFrames;
 @property (nonatomic, retain) NSArray *parentZOrderedViews;
 
 - (void)endAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
-
-- (void)lockUserInterface;
-- (void)unlockUserInterface;
 
 @end
 
@@ -55,7 +52,6 @@
 - (void)dealloc
 {
     self.view = nil;
-    self.modalView = nil;
     self.animationFrames = nil;
     self.id = nil;
     self.parentZOrderedViews = nil;
@@ -66,8 +62,6 @@
 #pragma mark Accessors and mutators
 
 @synthesize view = m_view;
-
-@synthesize modalView = m_modalView;
 
 @synthesize animationFrames = m_animationFrames;
 
@@ -96,7 +90,7 @@
 - (void)animate
 {
     // Locke the UI during the animation
-    [self lockUserInterface];
+    [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     
     // We will put the view in front to ensure the animation looks always good (otherwise the view might be hidden by
     // other views). This requires us to save the Z-ordering for restoring it when the reverse animation is played.
@@ -130,7 +124,7 @@
 - (void)animateReverse
 {
     // Lock the UI during the animation
-    [self lockUserInterface];
+    [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     
     // Create the animation
     [UIView beginAnimations:@"reverse" context:nil];
@@ -156,7 +150,7 @@
 - (void)endAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     // Unlocks the UI
-    [self unlockUserInterface];
+    [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
     
     if ([animationID isEqual:@"normal"]) {
         [self.delegate viewAnimationFinished:self];
@@ -170,28 +164,6 @@
         }
         self.parentZOrderedViews = nil;
     }
-}
-
-#pragma mark Locking user interaction during animation
-
-- (void)lockUserInterface
-{
-    // Prevents user interaction using a modal transparent view covering the whole screen. To get modal-like behavior 
-    // for views, it suffices to add them as subviews of window, blocking interaction with the root application view
-    // (usually the only child view of window)
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    self.modalView = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Use color with alpha = 0 to get transparency while keeping the view alive (i.e. interactive). If the alpha
-    // view property is set to 0, the view is like removed and unable to trap clicks
-    self.modalView.backgroundColor = [UIColor clearColor];
-    [window addSubview:self.modalView];
-}
-
-- (void)unlockUserInterface
-{
-    // Removes the modal-like view
-    [self.modalView removeFromSuperview];
-    self.modalView = nil;
 }
 
 @end

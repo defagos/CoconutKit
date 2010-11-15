@@ -210,10 +210,10 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
     
     // Notify the network status manager depending on status transitions
     if (s_transitions[m_status][status] == HLSRequesterNetworkStatusStart) {
-        [[NotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
+        [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     }
     else if (s_transitions[m_status][status] == HLSRequesterNetworkStatusStop) {
-        [[NotificationManager sharedNotificationManager] notifyEndNetworkActivity];
+        [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     }
     
     m_status = status;

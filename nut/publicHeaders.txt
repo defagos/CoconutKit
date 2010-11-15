@@ -38,6 +38,7 @@ HLSStandardView.h
 HLSStandardWidgetConstants.h
 HLSTableSearchDisplayController.h
 HLSTextField.h
+HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h
 HLSViewAnimation.h

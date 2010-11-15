@@ -61,22 +61,22 @@ DEFINE_NOTIFICATION(HLSDownloaderFailureNotification);
     }
     
     // Stop trapping notifications for previous download
-    [[NotificationConverter sharedNotificationConverter] removeConversionsFromObject:m_requester];
+    [[HLSNotificationConverter sharedNotificationConverter] removeConversionsFromObject:m_requester];
     
     // Save new value
     [m_requester release];
     m_requester = [requester retain];
     
     // Trap & convert notifications    
-    [[NotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterAllRetrievedNotification 
+    [[HLSNotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterAllRetrievedNotification 
                                                                         sentByObject:m_requester 
                                                             intoNotificationWithName:HLSDownloaderAllRetrievedNotification 
                                                                         sentByObject:self];
-    [[NotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterChunkRetrievedNotification 
+    [[HLSNotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterChunkRetrievedNotification 
                                                                         sentByObject:m_requester 
                                                             intoNotificationWithName:HLSDownloaderChunkRetrievedNotification 
                                                                         sentByObject:self];
-    [[NotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterFailureNotification 
+    [[HLSNotificationConverter sharedNotificationConverter] convertNotificationWithName:HLSRequesterFailureNotification 
                                                                         sentByObject:m_requester 
                                                             intoNotificationWithName:HLSDownloaderFailureNotification 
                                                                         sentByObject:self];

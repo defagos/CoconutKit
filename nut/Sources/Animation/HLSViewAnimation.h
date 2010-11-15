@@ -19,7 +19,6 @@
 @interface HLSViewAnimation : NSObject {
 @private
     UIView *m_view;
-    UIView *m_modalView;
     NSArray *m_animationFrames;             // contains HLSAnimationFrame objects
     NSString *m_id;
     NSTimeInterval m_duration;

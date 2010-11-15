@@ -29,8 +29,8 @@
 /**
  * Notifications
  */
-DECLARE_NOTIFICATION(NetworkActivityStartNotification);
-DECLARE_NOTIFICATION(NetworkActivityStopNotification);
+DECLARE_NOTIFICATION(HLSNetworkActivityStartNotification);
+DECLARE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 /**
  * Manages application-wide notification mechanisms
@@ -39,12 +39,12 @@ DECLARE_NOTIFICATION(NetworkActivityStopNotification);
  *
  * Designated initializer: init
  */
-@interface NotificationManager : NSObject {
+@interface HLSNotificationManager : NSObject {
 @private
     NSUInteger m_networkActivityCount;
 }
 
-+ (NotificationManager *)sharedNotificationManager;
++ (HLSNotificationManager *)sharedNotificationManager;
 
 - (void)notifyBeginNetworkActivity;
 - (void)notifyEndNetworkActivity;
@@ -54,12 +54,12 @@ DECLARE_NOTIFICATION(NetworkActivityStopNotification);
 /**
  * To avoid breaking encapsulation, an object composed from (retained) objects emitting notifications should translate
  * those notifications into its own notifications, otherwise the object internals might be revealed. Writing
- * such conversion code can be tedious and error prone. The NotificationConverter singleton provides a convenient
+ * such conversion code can be tedious and error prone. The HLSNotificationConverter singleton provides a convenient
  * way to define conversions with very litte code.
  *
  * Designated initializer: init
  */
-@interface NotificationConverter : NSObject {
+@interface HLSNotificationConverter : NSObject {
 @private
     // To be able to add conversion rules for an (object, notification name), and to be able to remove all rules defined
     // for an object, we introduce two dictionary levels:
@@ -69,14 +69,14 @@ DECLARE_NOTIFICATION(NetworkActivityStopNotification);
     NSMutableDictionary *m_objectToNotificationMap;
 }
 
-+ (NotificationConverter *)sharedNotificationConverter;
++ (HLSNotificationConverter *)sharedNotificationConverter;
 
 /**
  * Add a conversion rule. The objectFrom and objectTo objects are NOT retained, as for NSNotificationManager. This is 
  * not needed (and not desirable) since:
- *  - objectFrom: When deallocated, an object must have unregistered itself from the NotificationConverter
+ *  - objectFrom: When deallocated, an object must have unregistered itself from the HLSNotificationConverter
  *                by calling removeConversionsFromObject:
- *  - objectTo: NotificationConverter is meant to be used for converting notifications in object compositions,
+ *  - objectTo: HLSNotificationConverter is meant to be used for converting notifications in object compositions,
  *              where objectFrom is a member of objectTo and is retained by it. As long as the conversion rule
  *              exists (and provided objectFrom removes all associated rules when it gets deallocated) objectTo
  *              is guaranteed to be valid, since its lifetime is longer than the one of objectFrom
@@ -110,14 +110,14 @@ DECLARE_NOTIFICATION(NetworkActivityStopNotification);
 /**
  * Extension for writing less notification code in the most common cases
  */
-@interface NSObject (NotificationExtensions)
+@interface NSObject (HLSNotificationExtensions)
 
 - (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(NSDictionary *)userInfo;
 - (void)postCoalescingNotificationWithName:(NSString *)name;
 
 @end
 
-@interface NSNotificationCenter (NotificationExtensions)
+@interface NSNotificationCenter (HLSNotificationExtensions)
 
 - (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection;
 - (void)removeObserver:(id)observer name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection;

@@ -11,6 +11,8 @@
 		6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D4341246163A00252AF1 /* HLSFloat.h */; };
 		6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D4351246163A00252AF1 /* HLSFloat.m */; };
 		6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D438124617BB00252AF1 /* HLSAssert.h */; };
+		6F248A4D129180FB000A6996 /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */; };
+		6F248A4E129180FB000A6996 /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */; };
 		6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28629A12658CA800D04F08 /* HLSValidators.h */; };
 		6F28629D12658CA800D04F08 /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28629B12658CA800D04F08 /* HLSValidators.m */; };
 		6F2862FF1265A60F00D04F08 /* HLSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2862FD1265A60F00D04F08 /* HLSTextField.h */; };
@@ -103,6 +105,8 @@
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6F21D438124617BB00252AF1 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
+		6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSUserInterfaceLock.h; sourceTree = "<group>"; };
+		6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSUserInterfaceLock.m; sourceTree = "<group>"; };
 		6F28629A12658CA800D04F08 /* HLSValidators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidators.h; sourceTree = "<group>"; };
 		6F28629B12658CA800D04F08 /* HLSValidators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidators.m; sourceTree = "<group>"; };
 		6F2862FD1265A60F00D04F08 /* HLSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextField.h; sourceTree = "<group>"; };
@@ -378,6 +382,8 @@
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
 				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
+				6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */,
+				6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */,
 				6F2863051265A65300D04F08 /* HLSValidable.h */,
 				6F28629A12658CA800D04F08 /* HLSValidators.h */,
 				6F28629B12658CA800D04F08 /* HLSValidators.m */,
@@ -466,6 +472,7 @@
 				6F5B04A6126DC8B800C92F2A /* HLSSingleValuePickerViewController.h in Headers */,
 				6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */,
 				6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */,
+				6F248A4D129180FB000A6996 /* HLSUserInterfaceLock.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +564,7 @@
 				6F5B04A7126DC8B800C92F2A /* HLSSingleValuePickerViewController.m in Sources */,
 				6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */,
 				6FEFF5301281BBB400B01B7A /* NSString+HLSHash.m in Sources */,
+				6F248A4E129180FB000A6996 /* HLSUserInterfaceLock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
