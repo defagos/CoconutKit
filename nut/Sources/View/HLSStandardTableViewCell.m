@@ -51,11 +51,11 @@
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName
 {
     if (backgroundImageName) {
-        self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:backgroundImageName]];
+        self.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:backgroundImageName]] autorelease];
     }
     
     if (selectedBackgroundImageName) {
-        self.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedBackgroundImageName]];
+        self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedBackgroundImageName]] autorelease];
     }
 }
 
