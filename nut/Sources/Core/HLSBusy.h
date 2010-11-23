@@ -8,6 +8,10 @@
 
 #import "HLSBusyManager.h"
 
+// TODO: This class design is not optimal (except for the enter / exitBusyMode methods which are a good idea). Completely
+//       rewrite it to avoid cyclic references with HLSBusyManager (and to avoid subtle issues when writing dealloc methods
+//       with busy managers)
+
 /**
  * Protocol for objects to implement their "I'm busy" - "I'm not busy" behaviors.
  */
