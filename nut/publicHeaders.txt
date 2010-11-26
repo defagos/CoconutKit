@@ -45,4 +45,5 @@ HLSViewAnimation.h
 HLSViewPlaceholder.h
 HLSWizardViewController.h
 NSData+HLSCompression.h
+NSDate+HLSExtensions.h
 NSString+HLSHash.h
