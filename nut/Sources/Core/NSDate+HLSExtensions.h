@@ -8,6 +8,7 @@
 
 @interface NSDate (HLSExtensions)
 
+- (NSComparisonResult)compareDaysWithDate:(NSDate *)date;
 - (BOOL)isSameDayAsDate:(NSDate *)date;
 
 @end
