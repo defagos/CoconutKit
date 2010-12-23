@@ -18,6 +18,7 @@
 
 // TODO: Add debugging tools (number of requests, number of bytes transferred,
 //       answer time, number of failures, etc.)
+// TODO: Should be multithreaded
 
 /**
  * Notifications
