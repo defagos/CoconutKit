@@ -37,6 +37,11 @@ HLSStandardTableViewCell.h
 HLSStandardView.h
 HLSStandardWidgetConstants.h
 HLSTableSearchDisplayController.h
+HLSTask.h
+HLSTaskGroup.h
+HLSTaskManager.h
+HLSTaskOperation.h
+HLSTaskOperation+Protected.h
 HLSTextField.h
 HLSUserInterfaceLock.h
 HLSValidable.h
