@@ -16,10 +16,10 @@
  * when dealing with table view and search display controllers.
  
  * A filtered feed is in fact just a mask on top of the raw feed. Filtered views therefore do not duplicate 
- * feed entries. This not only saves memory resources, but also guarantees that the unfiltered entries and 
- * filtered entries are the same. If feed entries are updated asynchronously (e.g. thumbnail downloading),
- * then the update will be available whether you are currently dealing with the raw feed or a filtered
- * subset.
+ * feed entries, and preserve their original ordering. This not only saves memory resources, but also guarantees
+ * that the unfiltered entries and filtered entries are the same. If feed entries are updated asynchronously (e.g. 
+ * thumbnail downloading), then the update will be available whether you are currently dealing with the raw feed 
+ * or a filtered subset.
  *
  * Once you have defined a filter and used it by accessing the filtered feed once, the resulting filtered feed
  * is cached within the HLSFeed object. The object remains alive until the filter object itself is deallocated. It
