@@ -77,6 +77,8 @@
 @optional
 
 - (void)viewAnimationFinished:(HLSViewAnimation *)viewAnimation;
+- (void)viewAnimationStepFinished:(HLSAnimationStep *)animationStep;
 - (void)viewAnimationFinishedReverse:(HLSViewAnimation *)viewAnimation;
+- (void)viewAnimationStepFinishedReverse:(HLSAnimationStep *)animationStep;
 
 @end

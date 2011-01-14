@@ -127,7 +127,7 @@
  */
 - (void)animateStep:(HLSAnimationStep *)animationStep
 {
-    [UIView beginAnimations:nil context:nil];
+    [UIView beginAnimations:nil context:animationStep];
     
     [UIView setAnimationDuration:animationStep.duration];
     [UIView setAnimationDelay:animationStep.delay];
@@ -165,7 +165,7 @@
 
 - (void)reverseAnimateStep:(HLSAnimationStep *)animationStep
 {
-    [UIView beginAnimations:nil context:nil];
+    [UIView beginAnimations:nil context:animationStep];
     
     [UIView setAnimationDuration:animationStep.duration];
     [UIView setAnimationDelay:animationStep.delay];
@@ -277,11 +277,21 @@
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
+    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+    if ([self.delegate respondsToSelector:@selector(viewAnimationStepFinished:)]) {
+        [self.delegate viewAnimationStepFinished:animationStep];
+    }
+    
     [self animateNextStep];
 }
 
 - (void)reverseAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
+    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+    if ([self.delegate respondsToSelector:@selector(viewAnimationStepFinishedReverse:)]) {
+        [self.delegate viewAnimationStepFinishedReverse:animationStep];
+    }    
+    
     [self reverseAnimateNextStep];
 }
 
