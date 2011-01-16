@@ -140,15 +140,12 @@
     if (m_firstDisplay) {
         if (self.insetViewController) {
             if (m_transitionStyle != HLSTransitionStyleNone) {
-                NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:m_transitionStyle];
                 NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:m_transitionStyle];
                 
                 // Reset value
                 m_transitionStyle = HLSTransitionStyleNone;
                 
-                [self setInsetViewController:self.insetViewController 
-                   withFadeOutAnimationSteps:fadeOutAnimationSteps 
-                        fadeInAnimationSteps:fadeInAnimationSteps];
+                [self displayInsetViewController:self.insetViewController withFadeInAnimationSteps:fadeInAnimationSteps];
             }
             else {
                 [self displayInsetViewController:self.insetViewController withFadeInAnimationSteps:self.fadeInAnimationSteps];
