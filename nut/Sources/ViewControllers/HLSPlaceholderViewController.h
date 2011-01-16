@@ -11,6 +11,22 @@
 #import "HLSAnimationStep.h"
 #import "HLSViewAnimation.h"
 
+typedef enum {
+    HLSTransitionStyleEnumBegin = 0,
+    HLSTransitionStyleNone = HLSTransitionStyleEnumBegin,                                       // No transtion
+    HLSTransitionStyleCoverFromBottom,                                                          // The new view covers the old one starting from the bottom
+    HLSTransitionStyleCoverFromTop,                                                             // The new view covers the old one starting from the top
+    HLSTransitionStyleCoverFromLeft,                                                            // The new view covers the old one starting from the left
+    HLSTransitionStyleCoverFromRight,                                                           // The new view covers the old one starting from the right
+    HLSTransitionStyleCrossDissolve,                                                            // The old view fades out as the new one fades in
+    HLSTransitionStylePushFromBottom,                                                           // The new view pushes up the old one
+    HLSTransitionStylePushFromTop,                                                              // The new view pushes down the old one
+    HLSTransitionStylePushFromLeft,                                                             // The new view pushes the old one to the right
+    HLSTransitionStylePushFromRight,                                                            // The new view pushes the old one to the left
+    HLSTransitionStyleEnumEnd,
+    HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
+} HLSTransitionStyle;
+
 /**
  * View controllers which must be able to embed another view controller as subview can inherit from this class
  * to benefit from correct event propagation (e.g. viewDidLoad, rotation events, etc.). Moreover, this class
@@ -49,6 +65,7 @@
     UIViewController *m_insetViewController;
     UIViewController *m_oldInsetViewController;
     NSArray *m_fadeInAnimationSteps;
+    HLSTransitionStyle m_transitionStyle;
     UIView *m_placeholderView;
     BOOL m_autoresizesInset;
     BOOL m_firstDisplay;
@@ -71,6 +88,12 @@
 - (void)setInsetViewController:(UIViewController *)insetViewController
      withFadeOutAnimationSteps:(NSArray *)fadeOutAnimationSteps
           fadeInAnimationSteps:(NSArray *)fadeInAnimationSteps;
+
+/**
+ * Display an inset view controller using one of the available built-in transition styles
+ */
+- (void)setInsetViewController:(UIViewController *)insetViewController
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
 
