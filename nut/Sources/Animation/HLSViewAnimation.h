@@ -19,9 +19,9 @@
 @interface HLSViewAnimation : NSObject {
 @private
     UIView *m_view;
-    CGFloat m_alpha;                        // calculate the alpha value obtained by accumulating deltas during steps
     NSArray *m_animationSteps;              // contains HLSAnimationStep objects
     NSEnumerator *m_stepsEnumerator;        // enumerator over m_animationSteps
+    NSMutableArray *m_previousStepAlphas;   // contains NSNumber objects (floats)
     NSString *m_tag;
     BOOL m_lockingUI;
     BOOL m_alwaysOnTop;

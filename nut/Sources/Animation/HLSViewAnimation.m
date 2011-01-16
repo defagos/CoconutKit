@@ -18,6 +18,7 @@
 @property (nonatomic, retain) UIView *view;
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *stepsEnumerator;
+@property (nonatomic, retain) NSMutableArray *previousStepAlphas;
 @property (nonatomic, retain) NSArray *parentZOrderedViews;
 
 - (void)animateStep:(HLSAnimationStep *)animationStep;
@@ -40,6 +41,7 @@
     if (self = [super init]) {
         self.view = view;
         self.animationSteps = animationSteps;
+        self.previousStepAlphas = [NSMutableArray array];
         self.lockingUI = NO;
         self.alwaysOnTop = NO;
     }
@@ -56,6 +58,7 @@
 {
     self.view = nil;
     self.animationSteps = nil;
+    self.previousStepAlphas = nil;
     self.stepsEnumerator = nil;
     self.tag = nil;
     self.parentZOrderedViews = nil;
@@ -70,6 +73,8 @@
 @synthesize animationSteps = m_animationSteps;
 
 @synthesize stepsEnumerator = m_stepsEnumerator;
+
+@synthesize previousStepAlphas = m_previousStepAlphas;
 
 @synthesize tag = m_tag;
 
@@ -127,6 +132,10 @@
  */
 - (void)animateStep:(HLSAnimationStep *)animationStep
 {
+    // Save the alpha at the beginning (so that we can later play the reverse animation)
+    NSNumber *previousAlpha = [NSNumber numberWithFloat:self.view.alpha];
+    [self.previousStepAlphas addObject:previousAlpha];
+    
     [UIView beginAnimations:nil context:animationStep];
     
     [UIView setAnimationDuration:animationStep.duration];
@@ -136,22 +145,10 @@
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationDelegate:self];
     
-    // Animate the view; fix alpha if it goes out of the allowed bounds, but keep the total internally so that we
-    // can play the reverse animation correctly
-    m_alpha += animationStep.deltaAlpha;
-    CGFloat alpha = 0.f;
-    if (floatlt(m_alpha, 0.f)) {
-        logger_warn(@"Alpha smaller than 0 (%f)", m_alpha);
-        alpha = 0.f;
+    // Animate the view; alpha is altered only if set
+    if (! floateq(animationStep.alpha, ANIMATION_STEP_ALPHA_NOT_SET)) {
+        self.view.alpha = animationStep.alpha;
     }
-    else if (floatgt(m_alpha, 1.f)) {
-        logger_warn(@"Alpha larger than 1 (%f)", m_alpha);
-        alpha = 1.f;
-    }
-    else {
-        alpha = m_alpha;
-    }
-    self.view.alpha = alpha;
     
     // The fact that transform is a property is essential. If you "po" a UIView in gdb, you will see something like:
     //   <UIView: 0x4d57c40; frame = (141 508; 136 102); transform = [1, 0, 0, 1, 30, -60]; autoresize = RM+BM; layer = <CALayer: 0x4d57cc0>>
@@ -190,22 +187,10 @@
     [UIView setAnimationDidStopSelector:@selector(reverseAnimationDidStop:finished:context:)];
     [UIView setAnimationDelegate:self];
     
-    // Animate the view; fix alpha if it goes out of the allowed bounds, but keep the total internally so that we
-    // can play the reverse animation correctly
-    m_alpha -= animationStep.deltaAlpha;
-    CGFloat alpha = 0.f;
-    if (floatlt(m_alpha, 0.f)) {
-        logger_warn(@"Alpha smaller than 0 (%f)", m_alpha);
-        alpha = 0.f;
-    }
-    else if (floatgt(m_alpha, 1.f)) {
-        logger_warn(@"Alpha larger than 1 (%f)", m_alpha);
-        alpha = 1.f;
-    }
-    else {
-        alpha = m_alpha;
-    }
-    self.view.alpha = alpha;
+    // Animate the view; retrieve the alpha to reach, and remove it from the history
+    float previousAlpha = [[self.previousStepAlphas lastObject] floatValue];
+    self.view.alpha = previousAlpha;
+    [self.previousStepAlphas removeLastObject];
     
     // See remark in animateStep:; we remove the transform
     self.view.transform = CGAffineTransformConcat(CGAffineTransformInvert(animationStep.transform), self.view.transform);
@@ -215,9 +200,10 @@
 
 - (void)animateNextStep
 {
+    // First call?
     if (! self.stepsEnumerator) {
         self.stepsEnumerator = [self.animationSteps objectEnumerator];
-        m_alpha = self.view.alpha;
+        [self.previousStepAlphas removeAllObjects];
     }
     
     // Proceeed with the next step (if any)
@@ -241,6 +227,7 @@
 
 - (void)reverseAnimateNextStep
 {
+    // First call?
     if (! self.stepsEnumerator) {
         self.stepsEnumerator = [self.animationSteps reverseObjectEnumerator];
     }    
@@ -252,7 +239,7 @@
     }
     else {
         self.stepsEnumerator = nil;
-        m_alpha = 0.f;
+        NSAssert([self.previousStepAlphas count] == 0, @"Different number of steps in reverse animation");
         
         // Unlock the UI
         if (self.lockingUI) {
