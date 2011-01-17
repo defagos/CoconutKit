@@ -78,8 +78,9 @@ typedef enum {
 
 /**
  * Set the view controller to display as inset. A fade out animation can be applied (if not nil) to the view controller
- * which is removed before it gets actually removed, and a fade in animation can be applied (if not nil) to the view
- * controller which is installed. In both cases, simply supply the sequence of HLSAnimationSteps to apply
+ * which is removed (when the animation ends, the associated view is removed), and a fade in animation can be applied 
+ * (if not nil) to the view controller which is installed. In both cases, simply supply the sequence of HLSAnimationSteps
+ * to apply
  * Remark: If this method is called when no view controller was displayed (e.g. right after creation and before the
  *         placeholder view controller is displayed), then the fade out animation is ignored. Similarly, if no
  *         view controller is being installed (insetViewController is nil), then the fade in animation will be

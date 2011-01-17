@@ -122,6 +122,16 @@
 
 #pragma mark View lifecycle
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // All animations must take place within the placeholder area, even those which move views outside it. We
+    // do not want views in the placeholder view to overlap with views outside it, so we clip views to match
+    // the placeholder area
+    self.placeholderView.layer.masksToBounds = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -386,7 +396,10 @@
         case HLSTransitionStyleCoverFromTop:
         case HLSTransitionStyleCoverFromLeft:
         case HLSTransitionStyleCoverFromRight: {
-            return nil;
+            // Keep the old view alive for the duration of the associated fade in animation
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
+            animationStep.duration = 0.4f;
+            return [NSArray arrayWithObject:animationStep];
             break;
         }
             
