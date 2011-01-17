@@ -18,26 +18,34 @@
  * to set other animatable properties or animation settings.
  *
  * Remark: This class was initially named HLSAnimationFrame, but was renamed to avoid confusion with the UIView frame property
- *         which an animation step usually alters
+ *         (which is the view property an animation step usually alters!)
  *
- * Designated initializer: init (identity frame)
+ * Designated initializer: init (create an animation step with default settings)
+ * Copy behavior: deep copy
  */
-@interface HLSAnimationStep : NSObject {
+@interface HLSAnimationStep : NSObject <NSCopying> {
 @private
     CGAffineTransform m_transform;
     CGFloat m_alpha;
     NSTimeInterval m_duration;
     NSTimeInterval m_delay;
-    UIViewAnimationCurve m_curve;    
+    UIViewAnimationCurve m_curve;
+    NSString *m_tag;
 }
 
 /**
- * Identity animation step (leaves a view intact)
+ * Convenience constructor for an animation step with default settings
  */
 + (HLSAnimationStep *)animationStep;
 
 /**
- * Animation step moving a view between two frames. Both frames must describe positions of the view to animated
+ * Convenience constructor for creating an identity animation step for a view (no change, duration is 0). Such animations are
+ * usually used as first animation step
+ */
++ (HLSAnimationStep *)animationStepIdentityForView:(UIView *)view;
+
+/**
+ * Animation step moving a view between two frames. Both frames must describe positions of the view to animate
  * relative to its superview (otherwise the result is undefined)
  */
 + (HLSAnimationStep *)animationStepAnimatingViewFromFrame:(CGRect)fromFrame toFrame:(CGRect)toFrame;
@@ -49,7 +57,8 @@
                                                       deltaY:(CGFloat)deltaY;
 
 /**
- * The affine transformation which must be applied during the step (the default value is the identity)
+ * The affine transformation which must be applied during the step
+ * Default value is the identity
  */
 @property (nonatomic, assign) CGAffineTransform transform;
 
@@ -65,5 +74,10 @@
 @property (nonatomic, assign) NSTimeInterval duration;                      // default: 0.2f
 @property (nonatomic, assign) NSTimeInterval delay;                         // default: 0.f
 @property (nonatomic, assign) UIViewAnimationCurve curve;                   // default: UIViewAnimationCurveEaseInOut
+
+/**
+ * Optional tag to help identifying animation steps
+ */
+@property (nonatomic, retain) NSString *tag;
 
 @end

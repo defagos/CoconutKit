@@ -18,21 +18,23 @@
 @property (nonatomic, retain) UIView *view;
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *stepsEnumerator;
-@property (nonatomic, retain) NSMutableArray *previousStepAlphas;
-@property (nonatomic, retain) NSArray *parentZOrderedViews;
 
 - (void)animateStep:(HLSAnimationStep *)animationStep;
-- (void)reverseAnimateStep:(HLSAnimationStep *)animationStep;
 
 - (void)animateNextStep;
-- (void)reverseAnimateNextStep;
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
-- (void)reverseAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
 
 @implementation HLSViewAnimation
+
+#pragma mark Class methods
+
++ (HLSViewAnimation *)viewAnimationWithView:(UIView *)view animationSteps:(NSArray *)animationSteps
+{
+    return [[[[self class] alloc] initWithView:view animationSteps:animationSteps] autorelease];
+}
 
 #pragma mark Object creation and destruction
 
@@ -40,10 +42,24 @@
 {
     if (self = [super init]) {
         self.view = view;
-        self.animationSteps = animationSteps;
-        self.previousStepAlphas = [NSMutableArray array];
+        
+        // Add an identity step first; this is mandatory in order to be able to generate the inverse animation
+        HLSAnimationStep *identityAnimationStep = [HLSAnimationStep animationStepIdentityForView:self.view];
+        self.animationSteps = [NSArray arrayWithObject:identityAnimationStep];
+        
+        // Add the steps supplied as parameter, replacing non-set values of alpha with their real value. This
+        // is needed to be able to generate the correct reverse animation
+        CGFloat previousAlpha = identityAnimationStep.alpha;
+        for (HLSAnimationStep *animationStep in animationSteps) {
+            HLSAnimationStep *animationStepCopy = [animationStep copy];
+            if (floateq(animationStepCopy.alpha, ANIMATION_STEP_ALPHA_NOT_SET)) {
+                animationStep.alpha = previousAlpha;
+            }
+            previousAlpha = animationStep.alpha;
+            self.animationSteps = [self.animationSteps arrayByAddingObject:animationStepCopy];
+        }
         self.lockingUI = NO;
-        self.alwaysOnTop = NO;
+        self.bringToFront = NO;
     }
     return self;
 }
@@ -58,10 +74,8 @@
 {
     self.view = nil;
     self.animationSteps = nil;
-    self.previousStepAlphas = nil;
     self.stepsEnumerator = nil;
     self.tag = nil;
-    self.parentZOrderedViews = nil;
     self.delegate = nil;
     [super dealloc];
 }
@@ -74,52 +88,29 @@
 
 @synthesize stepsEnumerator = m_stepsEnumerator;
 
-@synthesize previousStepAlphas = m_previousStepAlphas;
-
 @synthesize tag = m_tag;
 
 @synthesize lockingUI = m_lockingUI;
 
-@synthesize alwaysOnTop = m_alwaysOnTop;
-
-@synthesize parentZOrderedViews = m_parentZOrderedViews;
+@synthesize bringToFront = m_bringToFront;
 
 @synthesize delegate = m_delegate;
 
 #pragma mark Animation
 
-- (void)animate
+- (void)play
 {
     // Lock the UI during the animation
     if (self.lockingUI) {
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
     
-    // If desired, we put the view in front to ensure the animation looks always good (otherwise the view might be hidden by
-    // other views). This requires us to save the Z-ordering for restoring it when the reverse animation is played.
-    // This can be achieved simply by saving the view array since it is sorted according to the Z-order. This feature
-    // is undocumented, so this trick might break in the future, but it is currently the cheapest solution. The lowest
-    // index corresponds to the view with the lowest Z-order
-    if (self.alwaysOnTop) {
-        self.parentZOrderedViews = self.view.superview.subviews;
-        
-        // Bring the view to animate to the front
+    if (self.bringToFront) {
         [self.view.superview bringSubviewToFront:self.view];
     }
     
     // Begin with the first step
     [self animateNextStep];
-}
-
-- (void)animateReverse
-{
-    // Lock the UI during the animation
-    if (self.lockingUI) {
-        [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
-    }
-    
-    // Begin with the last step
-    [self reverseAnimateNextStep];
 }
 
 /**
@@ -132,10 +123,6 @@
  */
 - (void)animateStep:(HLSAnimationStep *)animationStep
 {
-    // Save the alpha at the beginning (so that we can later play the reverse animation)
-    NSNumber *previousAlpha = [NSNumber numberWithFloat:self.view.alpha];
-    [self.previousStepAlphas addObject:previousAlpha];
-    
     [UIView beginAnimations:nil context:animationStep];
     
     [UIView setAnimationDuration:animationStep.duration];
@@ -145,10 +132,9 @@
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationDelegate:self];
     
-    // Animate the view; alpha is altered only if set
-    if (! floateq(animationStep.alpha, ANIMATION_STEP_ALPHA_NOT_SET)) {
-        self.view.alpha = animationStep.alpha;
-    }
+    // No unset alpha must remain after initialization
+    NSAssert(! floateq(animationStep.alpha, ANIMATION_STEP_ALPHA_NOT_SET), @"An alpha has not been set correctly for an animation step");
+    self.view.alpha = animationStep.alpha;
     
     // The fact that transform is a property is essential. If you "po" a UIView in gdb, you will see something like:
     //   <UIView: 0x4d57c40; frame = (141 508; 136 102); transform = [1, 0, 0, 1, 30, -60]; autoresize = RM+BM; layer = <CALayer: 0x4d57cc0>>
@@ -160,50 +146,11 @@
     [UIView commitAnimations];
 }
 
-- (void)reverseAnimateStep:(HLSAnimationStep *)animationStep
-{
-    [UIView beginAnimations:nil context:animationStep];
-    
-    [UIView setAnimationDuration:animationStep.duration];
-    [UIView setAnimationDelay:animationStep.delay];
-    
-    // Reverse the curve
-    UIViewAnimationCurve curve;
-    switch (animationStep.curve) {
-        case UIViewAnimationCurveEaseIn:
-            curve = UIViewAnimationCurveEaseOut;
-            break;
-            
-        case UIViewAnimationCurveEaseOut:
-            curve = UIViewAnimationCurveEaseIn;
-            break;
-            
-        default:
-            curve = animationStep.curve;
-            break;
-    }
-    [UIView setAnimationCurve:curve];
-    
-    [UIView setAnimationDidStopSelector:@selector(reverseAnimationDidStop:finished:context:)];
-    [UIView setAnimationDelegate:self];
-    
-    // Animate the view; retrieve the alpha to reach, and remove it from the history
-    float previousAlpha = [[self.previousStepAlphas lastObject] floatValue];
-    self.view.alpha = previousAlpha;
-    [self.previousStepAlphas removeLastObject];
-    
-    // See remark in animateStep:; we remove the transform
-    self.view.transform = CGAffineTransformConcat(CGAffineTransformInvert(animationStep.transform), self.view.transform);
-    
-    [UIView commitAnimations];    
-}
-
 - (void)animateNextStep
 {
     // First call?
     if (! self.stepsEnumerator) {
         self.stepsEnumerator = [self.animationSteps objectEnumerator];
-        [self.previousStepAlphas removeAllObjects];
     }
     
     // Proceeed with the next step (if any)
@@ -225,39 +172,56 @@
     }    
 }
 
-- (void)reverseAnimateNextStep
+#pragma mark Creating the reverse animation
+
+- (HLSViewAnimation *)reverseViewAnimation
 {
-    // First call?
-    if (! self.stepsEnumerator) {
-        self.stepsEnumerator = [self.animationSteps reverseObjectEnumerator];
-    }    
+    NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
     
-    // Proceeed with the next step (if any)
-    HLSAnimationStep *nextAnimationStep = [self.stepsEnumerator nextObject];
-    if (nextAnimationStep) {
-        [self reverseAnimateStep:nextAnimationStep];
+    // Create an initial identity step
+    HLSAnimationStep *identityAnimationStep = [HLSAnimationStep animationStepIdentityForView:self.view];
+    [reverseAnimationSteps addObject:identityAnimationStep];
+    
+    // Two pointers to be kept in parallel: Current step and previous one (reverse steps are composed of data stemming from
+    // both)
+    NSEnumerator *animationStepReverseEnumerator = [self.animationSteps reverseObjectEnumerator];
+    HLSAnimationStep *previousAnimationStep = [animationStepReverseEnumerator nextObject];
+    HLSAnimationStep *animationStep = [animationStepReverseEnumerator nextObject];
+    while (animationStep) {
+        // Most attributes are the same as the previous animation step (but reversed), therefore deep copy first
+        HLSAnimationStep *reverseAnimationStep = [previousAnimationStep copy];
+        reverseAnimationStep.transform = CGAffineTransformInvert(reverseAnimationStep.transform);
+        
+        // Reverse the curve
+        switch (reverseAnimationStep.curve) {
+            case UIViewAnimationCurveEaseIn:
+                reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;
+                break;
+                
+            case UIViewAnimationCurveEaseOut:
+                reverseAnimationStep.curve = UIViewAnimationCurveEaseIn;
+                break;
+                
+            case UIViewAnimationCurveLinear:
+            case UIViewAnimationCurveEaseInOut:
+            default:
+                // Nothing to do
+                break;
+        }
+        
+        // Must reach alpha of the CURRENT step, though
+        reverseAnimationStep.alpha = animationStep.alpha;
+        
+        // Add step
+        [reverseAnimationSteps addObject:reverseAnimationStep];
+        
+        // Update cursors
+        previousAnimationStep = animationStep;
+        animationStep = [animationStepReverseEnumerator nextObject];
     }
-    else {
-        self.stepsEnumerator = nil;
-        NSAssert([self.previousStepAlphas count] == 0, @"Different number of steps in reverse animation");
-        
-        // Unlock the UI
-        if (self.lockingUI) {
-            [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
-        }
-        
-        // Restore initial Z-ordering
-        if (self.alwaysOnTop) {
-            for (UIView *view in self.parentZOrderedViews) {
-                [self.view.superview bringSubviewToFront:view];
-            }
-            self.parentZOrderedViews = nil;
-        }
-        
-        if ([self.delegate respondsToSelector:@selector(viewAnimationFinishedReverse:)]) {
-            [self.delegate viewAnimationFinishedReverse:self];
-        }
-    }
+    
+    // No properties set, just view and steps
+    return [HLSViewAnimation viewAnimationWithView:self.view animationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
 }
 
 #pragma mark Animation callbacks
@@ -265,21 +229,12 @@
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+
     if ([self.delegate respondsToSelector:@selector(viewAnimationStepFinished:)]) {
         [self.delegate viewAnimationStepFinished:animationStep];
     }
     
     [self animateNextStep];
-}
-
-- (void)reverseAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-    if ([self.delegate respondsToSelector:@selector(viewAnimationStepFinishedReverse:)]) {
-        [self.delegate viewAnimationStepFinishedReverse:animationStep];
-    }    
-    
-    [self reverseAnimateNextStep];
 }
 
 @end

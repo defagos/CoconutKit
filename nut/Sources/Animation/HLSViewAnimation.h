@@ -13,6 +13,7 @@
 
 /**
  * Class for animating an existing view between HLSAnimationSteps. The animation can then easily be played backwards
+ * by generating the corresponding reverse animation and playing it.
  *
  * Designated initializer: initWithView:animationSteps:
  */
@@ -21,13 +22,16 @@
     UIView *m_view;
     NSArray *m_animationSteps;              // contains HLSAnimationStep objects
     NSEnumerator *m_stepsEnumerator;        // enumerator over m_animationSteps
-    NSMutableArray *m_previousStepAlphas;   // contains NSNumber objects (floats)
     NSString *m_tag;
     BOOL m_lockingUI;
     BOOL m_alwaysOnTop;
-    NSArray *m_parentZOrderedViews;
     id<HLSViewAnimationDelegate> m_delegate;
 }
+
+/**
+ * Convenience constructor for creating an animation, specifying each of the steps
+ */
++ (HLSViewAnimation *)viewAnimationWithView:(UIView *)view animationSteps:(NSArray *)animationSteps;
 
 /**
  * Expect the view to animate, as well as the HLSAnimationStep sequence which must be applied to it
@@ -51,25 +55,24 @@
 @property (nonatomic, assign) BOOL lockingUI;
 
 /**
- * If this property is set to YES, then the view will be brought on top at the beginning of the forward animation to
- * avoid being hidden or overlapping with other views. The new view depth is kept at the end of the forward animation, 
- * the original one is only restored at the end of the backward animation. If this property is set to NO, the original
- * depth is kept during both animations
- * Default value is NO.
+ * If set to YES, the view to animate is brought to the front at the beginning of the animation, otherwise its
+ * z-order is not altered
+ * Default is NO
  */
-@property (nonatomic, assign) BOOL alwaysOnTop;
+@property (nonatomic, assign) BOOL bringToFront;
+
+/**
+ * Return the reverse animation for the same view. All properties are set to their default values, they are not copied over from
+ * the original animation
+ */
+- (HLSViewAnimation *)reverseViewAnimation;
 
 @property (nonatomic, assign) id<HLSViewAnimationDelegate> delegate;
 
 /**
  * Play the animation
  */
-- (void)animate;
-
-/**
- * Play the animation reverse; playing the reverse animation before the normal one leads to undefined behavior
- */
-- (void)animateReverse;
+- (void)play;
 
 @end
 
@@ -78,7 +81,5 @@
 
 - (void)viewAnimationFinished:(HLSViewAnimation *)viewAnimation;
 - (void)viewAnimationStepFinished:(HLSAnimationStep *)animationStep;
-- (void)viewAnimationFinishedReverse:(HLSViewAnimation *)viewAnimation;
-- (void)viewAnimationStepFinishedReverse:(HLSAnimationStep *)animationStep;
 
 @end

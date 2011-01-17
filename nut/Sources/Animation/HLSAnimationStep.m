@@ -25,6 +25,15 @@
     return [[[[self class] alloc] init] autorelease];
 }
 
++ (HLSAnimationStep *)animationStepIdentityForView:(UIView *)view
+{
+    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
+    animationStep.duration = 0.f;
+    animationStep.alpha = view.alpha;
+    
+    return animationStep;
+}
+
 + (HLSAnimationStep *)animationStepAnimatingViewFromFrame:(CGRect)fromFrame toFrame:(CGRect)toFrame
 {
     // Scaling matrix
@@ -73,6 +82,7 @@
 
 - (void)dealloc
 {
+    self.tag = nil;
     [super dealloc];
 }
 
@@ -106,5 +116,23 @@
 @synthesize delay = m_delay;
 
 @synthesize curve = m_curve;
+
+@synthesize tag = m_tag;
+
+#pragma mark NSCopying protocol implementation
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    // Deep copy
+    HLSAnimationStep *animationStep = [[[[self class] allocWithZone:zone] init] autorelease];
+    animationStep.transform = self.transform;
+    animationStep.alpha = self.alpha;
+    animationStep.duration = self.duration;
+    animationStep.delay = self.delay;
+    animationStep.curve = self.curve;
+    animationStep.tag = [self.tag copy];
+    
+    return animationStep;
+}
 
 @end

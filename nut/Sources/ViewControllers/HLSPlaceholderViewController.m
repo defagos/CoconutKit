@@ -273,14 +273,13 @@
         [self.placeholderView addSubview:insetView];
         
         // Create the animation
-        HLSViewAnimation *fadeInViewAnimation = [[[HLSViewAnimation alloc] initWithView:insetView 
-                                                                         animationSteps:fadeInAnimationSteps]
-                                                 autorelease];
+        HLSViewAnimation *fadeInViewAnimation = [HLSViewAnimation viewAnimationWithView:insetView
+                                                                         animationSteps:fadeInAnimationSteps];
         fadeInViewAnimation.tag = @"fadeIn";
         fadeInViewAnimation.lockingUI = YES;
-        fadeInViewAnimation.alwaysOnTop = YES;
+        fadeInViewAnimation.bringToFront = YES;
         fadeInViewAnimation.delegate = self;
-        [fadeInViewAnimation animate];
+        [fadeInViewAnimation play];
     }
     // Display without animation
     else {
@@ -300,15 +299,13 @@
         self.oldInsetViewController = insetViewController;
         
         // Create the animation
-        HLSViewAnimation *fadeOutViewAnimation = [[[HLSViewAnimation alloc] initWithView:self.oldInsetViewController.view 
-                                                                          animationSteps:fadeOutAnimationSteps]
-                                                  autorelease];
-        
+        HLSViewAnimation *fadeOutViewAnimation = [HLSViewAnimation viewAnimationWithView:self.oldInsetViewController.view
+                                                                          animationSteps:fadeOutAnimationSteps];
         fadeOutViewAnimation.tag = @"fadeOut";
         fadeOutViewAnimation.lockingUI = YES;
-        fadeOutViewAnimation.alwaysOnTop = NO;
+        fadeOutViewAnimation.bringToFront = NO;
         fadeOutViewAnimation.delegate = self;
-        [fadeOutViewAnimation animate];
+        [fadeOutViewAnimation play];
     }
     // Remove without animation
     else {
