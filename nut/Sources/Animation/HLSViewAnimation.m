@@ -191,12 +191,20 @@
 
 #pragma mark Creating the reverse animation
 
-- (HLSViewAnimation *)reverseViewAnimation
+- (HLSViewAnimation *)reverseViewAnimationWithView:(UIView *)viewOrNil
 {
+    UIView *view = nil;
+    if (viewOrNil) {
+        view = viewOrNil;
+    }
+    else {
+        view = self.view;
+    }
+    
     NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
     
     // Create an initial identity step
-    HLSAnimationStep *identityAnimationStep = [HLSAnimationStep animationStepIdentityForView:self.view];
+    HLSAnimationStep *identityAnimationStep = [HLSAnimationStep animationStepIdentityForView:view];
     [reverseAnimationSteps addObject:identityAnimationStep];
     
     // Two pointers to be kept in parallel: Current step and previous one (reverse steps are composed of data stemming from
@@ -238,7 +246,7 @@
     }
     
     // No properties set, just view and steps
-    return [HLSViewAnimation viewAnimationWithView:self.view animationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
+    return [HLSViewAnimation viewAnimationWithView:view animationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
 }
 
 #pragma mark Animation callbacks
