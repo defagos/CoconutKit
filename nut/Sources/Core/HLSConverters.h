@@ -14,6 +14,8 @@
     
 }
 
++ (NSString *)stringFromBool:(BOOL)yesOrNo;
+
 + (NSNumber *)unsignedIntNumberFromString:(NSString *)string;
 
 + (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString;

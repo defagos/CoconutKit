@@ -159,4 +159,18 @@
     return animationStep;
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; transform: %@; alpha: %f; duration: %f; delay: %f, tag: %@>", 
+            [self class],
+            self,
+            NSStringFromCGAffineTransform(self.transform),
+            self.alpha,
+            self.duration,
+            self.delay,
+            self.tag];
+}
+
 @end

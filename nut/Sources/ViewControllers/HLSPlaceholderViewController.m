@@ -361,7 +361,7 @@
     // Remove without animation
     else {
         [insetViewController viewWillDisappear:NO];
-        [insetViewController.view removeFromSuperview];
+        //[insetViewController.view removeFromSuperview];
         [insetViewController viewDidDisappear:NO];
     }
 }
@@ -515,7 +515,7 @@
     
     // Fade in done
     if ([viewAnimation.tag isEqual:@"fadeIn"]) {
-        [self.oldInsetViewController.view removeFromSuperview];
+        //[self.oldInsetViewController.view removeFromSuperview];
         [self.oldInsetViewController viewDidDisappear:YES];
     }
     // Fade out done

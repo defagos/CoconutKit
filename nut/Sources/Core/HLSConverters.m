@@ -14,6 +14,11 @@
 
 #pragma mark Class methods
 
++ (NSString *)stringFromBool:(BOOL)yesOrNo
+{
+    return yesOrNo ? @"YES" : @"NO";
+}
+
 + (NSNumber *)unsignedIntNumberFromString:(NSString *)string
 {
     if (! string) {

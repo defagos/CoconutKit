@@ -8,6 +8,7 @@
 
 #import "HLSViewAnimation.h"
 
+#import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntimeChecks.h"
@@ -95,6 +96,22 @@
 @synthesize bringToFront = m_bringToFront;
 
 @synthesize delegate = m_delegate;
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; view: <%@: %p>; animationSteps: %@; tag: %@; lockingUI: %@, bringToFront: %@, delegate: %p>", 
+            [self class],
+            self,
+            [self.view class],
+            self.view,
+            self.animationSteps,
+            self.tag,
+            [HLSConverters stringFromBool:self.lockingUI],
+            [HLSConverters stringFromBool:self.bringToFront],
+            self.delegate];
+}
 
 #pragma mark Animation
 
