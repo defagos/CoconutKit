@@ -71,7 +71,7 @@
 /**
  * Animation step settings
  */
-@property (nonatomic, assign) NSTimeInterval duration;                      // default: 0.2f
+@property (nonatomic, assign) NSTimeInterval duration;                      // default: 0.2
 @property (nonatomic, assign) NSTimeInterval delay;                         // default: 0.f
 @property (nonatomic, assign) UIViewAnimationCurve curve;                   // default: UIViewAnimationCurveEaseInOut
 

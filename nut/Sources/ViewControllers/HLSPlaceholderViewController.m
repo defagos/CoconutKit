@@ -8,6 +8,7 @@
 
 #import "HLSPlaceholderViewController.h"
 
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "HLSRuntimeChecks.h"
@@ -104,12 +105,62 @@
         m_transitionStyle = transitionStyle;
     }
     
+    // The returned animation steps contain the default durations for each step
     NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:transitionStyle];
     NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:transitionStyle];
     
     [self setInsetViewController:insetViewController 
        withFadeOutAnimationSteps:fadeOutAnimationSteps 
-            fadeInAnimationSteps:fadeInAnimationSteps];
+            fadeInAnimationSteps:fadeInAnimationSteps]; 
+}
+
+- (void)setInsetViewController:(UIViewController *)insetViewController
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration
+{
+    // Sanitize input
+    if (doublelt(duration, 0.)) {
+        logger_warn(@"Duration must be non-negative. Fixed to 0");
+        duration = 0.;
+    }
+    
+    // If the placeholder view is not displayed (e.g. if this method is called between creation of the placeholder view
+    // controller and the time it is displayed), then we cannot know the placeholder view dimensions and we must defer
+    // the animation creation
+    if (! self.insetViewController) {
+        // Save animation values to play them later
+        m_transitionStyle = transitionStyle;
+    }
+    
+    // The returned animation steps contain the default durations for each step
+    NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:transitionStyle];
+    NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:transitionStyle];
+    
+    // Distribute durations evenly among fade out animation steps
+    NSTimeInterval fadeOutDuration = 0.;
+    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
+        fadeOutDuration += fadeOutAnimationStep.delay + fadeOutAnimationStep.duration;
+    }
+    double fadeOutFactor = duration / fadeOutDuration;
+    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
+        fadeOutAnimationStep.duration *= fadeOutFactor;
+        fadeOutAnimationStep.delay *= fadeOutFactor;
+    }
+    
+    // Distribute durations evenly among fade in animation steps
+    NSTimeInterval fadeInDuration = 0.;
+    for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
+        fadeInDuration += fadeInAnimationStep.delay + fadeInAnimationStep.duration;
+    }
+    double fadeInFactor = duration / fadeInDuration;
+    for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
+        fadeInAnimationStep.duration *= fadeInFactor;
+        fadeInAnimationStep.delay *= fadeInFactor;
+    }    
+    
+    [self setInsetViewController:insetViewController 
+       withFadeOutAnimationSteps:fadeOutAnimationSteps 
+            fadeInAnimationSteps:fadeInAnimationSteps];    
 }
 
 @synthesize oldInsetViewController = m_oldInsetViewController;
@@ -129,7 +180,7 @@
     // All animations must take place within the placeholder area, even those which move views outside it. We
     // do not want views in the placeholder view to overlap with views outside it, so we clip views to match
     // the placeholder area
-    self.placeholderView.layer.masksToBounds = YES;
+    self.placeholderView.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -325,10 +376,10 @@
         case HLSTransitionStylePushFromBottom: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:self.placeholderView.frame.size.height];
-            animationStep1.duration = 0.f;
+            animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:-self.placeholderView.frame.size.height];
-            animationStep2.duration = 0.4f;
+            animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
@@ -337,10 +388,10 @@
         case HLSTransitionStylePushFromTop: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:-self.placeholderView.frame.size.height];
-            animationStep1.duration = 0.f;
+            animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:self.placeholderView.frame.size.height];
-            animationStep2.duration = 0.4f;
+            animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
@@ -349,10 +400,10 @@
         case HLSTransitionStylePushFromLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
                                                                                                  deltaY:0.f];
-            animationStep1.duration = 0.f;
+            animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
                                                                                                  deltaY:0.f];
-            animationStep2.duration = 0.4f;
+            animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
@@ -361,10 +412,10 @@
         case HLSTransitionStylePushFromRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
                                                                                                  deltaY:0.f];
-            animationStep1.duration = 0.f;
+            animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
                                                                                                  deltaY:0.f];
-            animationStep2.duration = 0.4f;
+            animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
@@ -372,10 +423,10 @@
         case HLSTransitionStyleCrossDissolve: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             animationStep1.alpha = 0.f;
-            animationStep1.duration = 0.f;
+            animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             animationStep2.alpha = 1.f;
-            animationStep2.duration = 0.4f;
+            animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
@@ -395,7 +446,7 @@
         case HLSTransitionStyleCoverFromRight: {
             // Keep the old view alive for the duration of the associated fade in animation
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -403,7 +454,7 @@
         case HLSTransitionStyleCrossDissolve: {
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
             animationStep.alpha = 0.f;
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -411,7 +462,7 @@
         case HLSTransitionStylePushFromBottom: {
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                 deltaY:-self.placeholderView.frame.size.height];
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -419,7 +470,7 @@
         case HLSTransitionStylePushFromTop: {
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                 deltaY:self.placeholderView.frame.size.height];
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];            
             break;
         }
@@ -427,7 +478,7 @@
         case HLSTransitionStylePushFromLeft: {
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
                                                                                                 deltaY:0.f];
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -435,7 +486,7 @@
         case HLSTransitionStylePushFromRight: {
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
                                                                                                 deltaY:0.f];
-            animationStep.duration = 0.4f;
+            animationStep.duration = 0.4;
             return [NSArray arrayWithObject:animationStep];            
             break;
         }

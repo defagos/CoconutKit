@@ -91,10 +91,19 @@ typedef enum {
           fadeInAnimationSteps:(NSArray *)fadeInAnimationSteps;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles
+ * Display an inset view controller using one of the available built-in transition styles (default transition duration,
+ * which can vary depending on the animation)
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle;
+
+/**
+ * Display an inset view controller using one of the available built-in transition styles (the duration can be
+ * freely set; it will be distributed evenly on the animation steps composing the animation)
+ */
+- (void)setInsetViewController:(UIViewController *)insetViewController
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration;
 
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
 

@@ -53,9 +53,9 @@
         for (HLSAnimationStep *animationStep in animationSteps) {
             HLSAnimationStep *animationStepCopy = [animationStep copy];
             if (floateq(animationStepCopy.alpha, ANIMATION_STEP_ALPHA_NOT_SET)) {
-                animationStep.alpha = previousAlpha;
+                animationStepCopy.alpha = previousAlpha;
             }
-            previousAlpha = animationStep.alpha;
+            previousAlpha = animationStepCopy.alpha;
             self.animationSteps = [self.animationSteps arrayByAddingObject:animationStepCopy];
         }
         self.lockingUI = NO;

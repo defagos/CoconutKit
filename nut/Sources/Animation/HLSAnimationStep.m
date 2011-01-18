@@ -12,8 +12,8 @@
 #import "HLSLogger.h"
 
 // Default values as given by Apple UIView documentation
-#define ANIMATION_STEP_DEFAULT_DURATION          0.2f
-#define ANIMATION_STEP_DEFAULT_DELAY             0.f
+#define ANIMATION_STEP_DEFAULT_DURATION          0.2
+#define ANIMATION_STEP_DEFAULT_DELAY             0.
 #define ANIMATION_STEP_DEFAULT_CURVE             UIViewAnimationCurveEaseInOut
 
 @implementation HLSAnimationStep
@@ -28,7 +28,7 @@
 + (HLSAnimationStep *)animationStepIdentityForView:(UIView *)view
 {
     HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    animationStep.duration = 0.f;
+    animationStep.duration = 0.;
     animationStep.alpha = view.alpha;
     
     return animationStep;
@@ -113,7 +113,31 @@
 
 @synthesize duration = m_duration;
 
+- (void)setDuration:(NSTimeInterval)duration
+{
+    // Sanitize input
+    if (doublelt(duration, 0.)) {
+        logger_warn(@"Duration must be non-negative. Fixed to 0");
+        m_duration = 0.;
+    }
+    else {
+        m_duration = duration;
+    }
+}
+
 @synthesize delay = m_delay;
+
+- (void)setDelay:(NSTimeInterval)delay
+{
+    // Sanitize input
+    if (doublelt(delay, 0.)) {
+        logger_warn(@"Delay must be non-negative. Fixed to 0");
+        m_delay = 0.;
+    }
+    else {
+        m_delay = delay;
+    }
+}
 
 @synthesize curve = m_curve;
 
