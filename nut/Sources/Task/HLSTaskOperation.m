@@ -137,7 +137,7 @@
     // If part of a non-running task group, first flag the task group as running and notify
     HLSTaskGroup *taskGroup = self.task.taskGroup;
     if (taskGroup && ! taskGroup.running) {
-        logger_debug(@"Batch task %@ starts", taskGroup);
+        logger_debug(@"Task group %@ starts", taskGroup);
         
         taskGroup.running = YES;
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
@@ -230,13 +230,13 @@
             taskGroup.running = NO;
             
             if (! taskGroup.cancelled) {
-                logger_debug(@"Batch task %@ ends successfully", taskGroup);
+                logger_debug(@"Task group %@ ends successfully", taskGroup);
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
                     [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
                 }
             }
             else {
-                logger_debug(@"Batch task %@ has been cancelled", taskGroup);
+                logger_debug(@"Task group %@ has been cancelled", taskGroup);
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
                     [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
                 }

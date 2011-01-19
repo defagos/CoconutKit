@@ -216,6 +216,37 @@
     // here
     if (! [operation isExecuting]) {
         task.finished = YES;
+        
+        // Notify the task delegate
+        id<HLSTaskDelegate> taskDelegate = [self delegateForTask:taskDelegate];
+        if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
+            [taskDelegate taskHasBeenCancelled:task];
+        }
+        
+        HLSTaskGroup *taskGroup = task.taskGroup;
+        if (taskGroup) {
+            [taskGroup updateStatus];
+            
+            // If the task group is now complete, update and notify as well
+            if (taskGroup.finished) {
+                taskGroup.running = NO;
+                
+                id<HLSTaskGroupDelegate> taskGroupDelegate = [self delegateForTaskGroup:taskGroup];
+                if (! taskGroup.cancelled) {
+                    logger_debug(@"Task group %@ ends successfully", taskGroup);
+                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
+                        [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
+                    }
+                }
+                else {
+                    logger_debug(@"Task group %@ has been cancelled", taskGroup);
+                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
+                        [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
+                    }
+                }
+            }
+        }
+        
         [self unregisterOperation:operation];
     }
     
@@ -366,7 +397,7 @@
 
 - (void)unregisterDelegateForTaskGroup:(HLSTaskGroup *)taskGroup
 {
-    // Find if a delegate has been defined for this task group; use the task pinter as key
+    // Find if a delegate has been defined for this task group; use the task pointer as key
     NSValue *taskGroupKey = [NSValue valueWithPointer:taskGroup];
     id<HLSTaskGroupDelegate> delegate = [self.taskGroupToDelegateMap objectForKey:taskGroupKey];
     if (! delegate) {
@@ -374,6 +405,9 @@
     }
     
     // Remove the task group - delegate relationship
+    [self.taskGroupToDelegateMap removeObjectForKey:taskGroupKey];
+    
+    // Remove the inverse delegate - task group relationship
     NSValue *delegateKey = [NSValue valueWithPointer:delegate];
     NSMutableSet *taskGroupsForDelegate = [self.delegateToTaskGroupsMap objectForKey:delegateKey];
     [taskGroupsForDelegate removeObject:taskGroup];
