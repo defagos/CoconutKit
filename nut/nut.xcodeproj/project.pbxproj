@@ -115,6 +115,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6F21D4201245565400252AF1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
@@ -570,6 +571,7 @@
 				French,
 				German,
 				en,
+				fr,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* nut */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -639,6 +641,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6F8D09A8123F5ECF00FCF2AF /* en */,
+				6F05065C12F1A4550077E119 /* fr */,
 			);
 			name = nut_Localizable.strings;
 			sourceTree = "<group>";

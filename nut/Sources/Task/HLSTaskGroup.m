@@ -8,8 +8,13 @@
 
 #import "HLSTaskGroup.h"
 
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
+#import "HLSTaskGroup+Friend.h"
+
+const NSUInteger kFullProgressStepsCounterThreshold = 50;
+const NSTimeInterval kFullProgressStepsTimeIntervalThreshold = 5.;           // 5 seconds
 
 @interface HLSTaskGroup ()
 
@@ -19,6 +24,9 @@
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
+@property (nonatomic, assign) float fullProgress;
+@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, retain) NSDate *lastEstimateDate;
 
 @end
 
@@ -32,6 +40,7 @@
     if (self = [super init]) {
         self.taskSet = [NSMutableSet set];
         self.dependencyMap = [NSMutableDictionary dictionary];
+        [self reset];
     }
     return self;
 }
@@ -42,6 +51,7 @@
     self.userInfo = nil;
     self.taskSet = nil;
     self.dependencyMap = nil;
+    self.lastEstimateDate = nil;
     [super dealloc];
 }
 
@@ -69,9 +79,102 @@
 
 @synthesize progress = _progress;
 
+@synthesize fullProgress = _fullProgress;
+
+- (void)setFullProgress:(float)fullProgress
+{
+    // If the value has not changed, nothing to do
+    if (floateq(fullProgress, _fullProgress)) {
+        return;
+    }
+    
+    // Sanitize input
+    if (floatlt(fullProgress, 0.f) || floatgt(fullProgress, 1.f)) {
+        if (floatlt(fullProgress, 0.f)) {
+            _fullProgress = 0.f;
+        }
+        else {
+            _fullProgress = 1.f;
+        }
+        logger_warn(@"Incorrect value %f for full progress value, must be between 0 and 1. Fixed", fullProgress);
+    }
+    else {
+        _fullProgress = fullProgress;
+    }    
+    
+    // Estimation is not made with each progress value change. If progress values are incremented fast, it is calculated
+    // after several changes. If progress value change is slow, we use a time difference criterium. This should provide
+    // accurate enough results
+    if (! _lastEstimateDate) {
+        _fullProgressStepsCounter = 0;
+        self.lastEstimateDate = [NSDate date];
+        _lastEstimateFullProgress = fullProgress;
+    }
+    else {
+        ++_fullProgressStepsCounter;
+    }
+    
+    // Should update estimate?
+    NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
+    if (_fullProgressStepsCounter > kFullProgressStepsCounterThreshold || elapsedTimeIntervalSinceLastEstimate > kFullProgressStepsTimeIntervalThreshold) {
+        // Calculate estimate based on velocity during previous step
+        double fullProgressSinceLastEstimate = fullProgress - _lastEstimateFullProgress;
+        if (! doubleeq(fullProgressSinceLastEstimate, 0.)) {
+            self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / fullProgressSinceLastEstimate) * (1 - fullProgress);
+            
+            // Get ready for next estimate
+            _fullProgressStepsCounter = 0;
+            self.lastEstimateDate = [NSDate date];
+            _lastEstimateFullProgress = fullProgress;
+        }
+    }
+}
+
+@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
+
+- (NSTimeInterval)remainingTimeIntervalEstimate
+{
+    if (! self.finished && ! self.cancelled) {
+        return _remainingTimeIntervalEstimate;
+    }
+    else {
+        return kTaskGroupNoTimeIntervalEstimateAvailable;
+    }
+}
+
+@synthesize lastEstimateDate = _lastEstimateDate;
+
+
 - (NSUInteger)nbrFailures
 {
     return _nbrFailures;
+}
+
+- (NSString *)remainingTimeIntervalEstimateLocalizedString
+{
+    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+        return NSLocalizedString(@"No remaining time estimate available", @"No remaining time estimate available");
+    }
+    
+    NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
+    NSUInteger days = timeInterval / (24 * 60 * 60);
+    timeInterval -= days * (24 * 60 * 60);
+    NSUInteger hours = timeInterval / (60 * 60);
+    timeInterval -= hours * (60 * 60);
+    NSUInteger minutes = timeInterval / 60;
+    
+    if (days != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%dd %dh remaining (estimate)", @"%dd %dh remaining (estimate)"), days, hours];
+    }
+    else if (hours != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%dh %dm remaining (estimate)", @"%dh %dm remaining (estimate)"), hours, minutes];
+    }
+    else if (minutes != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%d min remaining (estimate)", @"%d min remaining (estimate)"), minutes];
+    }
+    else {
+        return NSLocalizedString(@"< 1 min remaining (estimate)", @"< 1 min remaining (estimate)");
+    }
 }
 
 #pragma mark -
@@ -95,6 +198,7 @@
 {
     // Calculate the overall progress and status
     float progress = 0.f;
+    float fullProgress = 0.f;
     BOOL finished = YES;
     for (HLSTask *task in self.taskSet) {
         progress += task.progress;
@@ -104,15 +208,21 @@
             finished = NO;
         }
         
-        // Failed tasks increase the failure counter
+        // Failed tasks increase the failure counter and count for 1 in fullProgress
         if (task.error) {
+            fullProgress += 1.f;
             ++_nbrFailures;
+        }
+        else {
+            fullProgress += task.progress;
         }
     }
     progress /= [self.taskSet count];
+    fullProgress /= [self.taskSet count];
     
     // Update the values stored internally
     self.progress = progress;
+    self.fullProgress = fullProgress;
     self.finished = finished;
 }
 
@@ -161,6 +271,9 @@
     self.finished = NO;
     self.cancelled = NO;
     self.progress = 0.f;
+    self.fullProgress = 0.f;
+    self.remainingTimeIntervalEstimate = kTaskGroupNoTimeIntervalEstimateAvailable;
+    self.lastEstimateDate = nil;
     _nbrFailures = 0;
 }
 

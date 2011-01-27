@@ -10,7 +10,11 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSTask+Friend.h"
 #import "HLSTaskGroup.h"
+
+const NSUInteger kProgressStepsCounterThreshold = 50;
+const NSTimeInterval kProgressStepsTimeIntervalThreshold = 5.;           // 5 seconds
 
 @interface HLSTask ()
 
@@ -18,6 +22,8 @@
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
+@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, retain) NSDate *lastEstimateDate;
 @property (nonatomic, retain) NSDictionary *returnInfo;
 @property (nonatomic, retain) NSError *error;
 @property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
@@ -32,7 +38,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        
+        [self reset];
     }
     return self;
 }
@@ -41,6 +47,7 @@
 {
     self.tag = nil;
     self.userInfo = nil;
+    self.lastEstimateDate = nil;
     self.returnInfo = nil;
     self.error = nil;
     self.taskGroup = nil;
@@ -88,13 +95,81 @@
     else {
         _progress = progress;
     }
+    
+    // Estimation is not made with each progress value change. If progress values are incremented fast, it is calculated
+    // after several changes. If progress value change is slow, we use a time difference criterium. This should provide
+    // accurate enough results
+    if (! _lastEstimateDate) {
+        _progressStepsCounter = 0;
+        self.lastEstimateDate = [NSDate date];
+        _lastEstimateProgress = progress;
+    }
+    else {
+        ++_progressStepsCounter;
+    }
+    
+    // Should update estimate?
+    NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
+    if (_progressStepsCounter > kProgressStepsCounterThreshold || elapsedTimeIntervalSinceLastEstimate > kProgressStepsTimeIntervalThreshold) {
+        // Calculate estimate based on velocity during previous step (never 0 since this method returns if progress does not change)
+        double progressSinceLastEstimate = progress - _lastEstimateProgress;
+        if (! doubleeq(progressSinceLastEstimate, 0.)) {
+            self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / progressSinceLastEstimate) * (1 - progress);
+            
+            // Get ready for next estimate
+            _progressStepsCounter = 0;
+            self.lastEstimateDate = [NSDate date];
+            _lastEstimateProgress = progress;
+        }
+    }
 }
+
+@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
+
+- (NSTimeInterval)remainingTimeIntervalEstimate
+{
+    if (! self.finished &&  ! self.cancelled) {
+        return _remainingTimeIntervalEstimate;
+    }
+    else {
+        return kTaskNoTimeIntervalEstimateAvailable;
+    }
+}
+
+@synthesize lastEstimateDate = _lastEstimateDate;
 
 @synthesize returnInfo = _returnInfo;
 
 @synthesize error = _error;
 
 @synthesize taskGroup = _taskGroup;
+
+- (NSString *)remainingTimeIntervalEstimateLocalizedString
+{
+    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+        return NSLocalizedString(@"No remaining time estimate available", @"No remaining time estimate available");
+    }    
+    
+    NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
+    NSUInteger days = timeInterval / (24 * 60 * 60);
+    timeInterval -= days * (24 * 60 * 60);
+    NSUInteger hours = timeInterval / (60 * 60);
+    timeInterval -= hours * (60 * 60);
+    NSUInteger minutes = timeInterval / 60;
+    
+    if (days != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%dd %dh remaining (estimate)", @"%dd %dh remaining (estimate)"), days, hours];
+    }
+    else if (hours != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%dh %dm remaining (estimate)", @"%dh %dm remaining (estimate)"), hours, minutes];
+    }
+    else if (minutes != 0) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%d min remaining (estimate)", @"%d min remaining (estimate)"), minutes];
+    }
+    else {
+        return NSLocalizedString(@"< 1 min remaining (estimate)", @"< 1 min remaining (estimate)");
+    }
+}
 
 #pragma mark -
 #pragma mark Resetting
@@ -105,6 +180,8 @@
     self.finished = NO;
     self.cancelled = NO;
     self.progress = 0.f;
+    self.remainingTimeIntervalEstimate = kTaskNoTimeIntervalEstimateAvailable;
+    self.lastEstimateDate = nil;
     self.returnInfo = nil;
     self.error = nil;
 }

@@ -8,6 +8,8 @@
 
 #import "HLSTask.h"
 
+#define kTaskGroupNoTimeIntervalEstimateAvailable                     -1.
+
 // Forward declarations
 @protocol HLSTaskGroupDelegate;
 
@@ -33,7 +35,12 @@
     BOOL _running;
     BOOL _finished;
     BOOL _cancelled;
-    float _progress;
+    float _progress;                            // all individual progress values added
+    float _fullProgress;                        // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
+    NSTimeInterval _remainingTimeIntervalEstimate;
+    NSDate *_lastEstimateDate;                  // date & time when the remaining time was previously estimated ...
+    float _lastEstimateFullProgress;            // ... and corresponding progress value 
+    NSUInteger _fullProgressStepsCounter;     
     NSUInteger _nbrFailures;
 }
 
@@ -76,6 +83,19 @@
  * Overall progress value (between 0.f and 1.f). If some tasks fail this value may not reach 1.f
  */
 @property (nonatomic, readonly, assign) float progress;
+
+/**
+ * Return an estimate about the remaining time before the task processing completes (or kTaskGroupNoTimeIntervalEstimateAvailable if no
+ * estimate is available yet)
+ * Not meant to be overridden
+ */
+@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+
+/**
+ * Return a localized string describing the estimated time before completion
+ * Not meant to be overridden
+ */
+- (NSString *)remainingTimeIntervalEstimateLocalizedString;
 
 /**
  * Return the current number of failed tasks

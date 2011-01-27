@@ -10,6 +10,8 @@
 @class HLSTaskGroup;
 @protocol HLSTaskDelegate;
 
+#define kTaskNoTimeIntervalEstimateAvailable        -1.
+
 /**
  * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status
  *
@@ -27,6 +29,10 @@
     BOOL _finished;
     BOOL _cancelled;
     float _progress;
+    NSTimeInterval _remainingTimeIntervalEstimate;
+    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
+    float _lastEstimateProgress;            // ... and corresponding progress value 
+    NSUInteger _progressStepsCounter; 
     NSDictionary *_returnInfo;
     NSError *_error;
     HLSTaskGroup *_taskGroup;            // parent task group if any, nil if none
@@ -72,6 +78,19 @@
  * Not meant to be overridden
  */
 @property (nonatomic, readonly, assign) float progress;
+
+/**
+ * Return an estimate about the remaining time before the task processing completes (or kTaskNoTimeIntervalEstimateAvailable if no
+ * estimate is available yet)
+ * Not meant to be overridden
+ */
+@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+
+/**
+ * Return a localized string describing the estimated time before completion
+ * Not meant to be overridden
+ */
+- (NSString *)remainingTimeIntervalEstimateLocalizedString;
 
 /**
  * NSDictionary which can freely be used to convey return information
