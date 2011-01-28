@@ -69,11 +69,6 @@
      withFadeOutAnimationSteps:(NSArray *)fadeOutAnimationSteps
           fadeInAnimationSteps:(NSArray *)fadeInAnimationSteps
 {
-    // If the inset view controller is not being changed, nothing to do
-    if (m_insetViewController == insetViewController) {
-        return;
-    }
-    
     // Remove the old inset if it was displayed
     // TODO: Better condition!
     if (m_insetViewController.view) {
