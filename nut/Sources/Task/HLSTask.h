@@ -82,12 +82,16 @@
 /**
  * Return an estimate about the remaining time before the task processing completes (or kTaskNoTimeIntervalEstimateAvailable if no
  * estimate is available yet)
+ * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not varying fast (in another
+ *                   words: constant over long enough periods of time). This is for example usually the case for download or
+ *                   inflating / deflating tasks.
  * Not meant to be overridden
  */
 @property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
 
 /**
  * Return a localized string describing the estimated time before completion
+ * (see remark of remainingTimeIntervalEstimate method)
  * Not meant to be overridden
  */
 - (NSString *)remainingTimeIntervalEstimateLocalizedString;

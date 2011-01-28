@@ -85,8 +85,11 @@
 @property (nonatomic, readonly, assign) float progress;
 
 /**
- * Return an estimate about the remaining time before the task processing completes (or kTaskGroupNoTimeIntervalEstimateAvailable if no
+ * Return an estimate about the remaining time before the task group processing completes (or kTaskGroupNoTimeIntervalEstimateAvailable if no
  * estimate is available yet)
+ * Important remark: Accurate measurements can only be obtained if the progress update rate of a task group is not varying fast (in another
+ *                   words: constant over long enough periods of time). This is most likely to happen when all tasks are similar (i.e. the
+ *                   underlying processing is similar) and roughly of the same size.
  * Not meant to be overridden
  */
 @property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
@@ -94,6 +97,7 @@
 /**
  * Return a localized string describing the estimated time before completion
  * Not meant to be overridden
+ * (see remark of remainingTimeIntervalEstimate method)
  */
 - (NSString *)remainingTimeIntervalEstimateLocalizedString;
 
