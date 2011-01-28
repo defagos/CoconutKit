@@ -14,7 +14,6 @@
 #import "HLSTaskGroup+Friend.h"
 
 const NSUInteger kFullProgressStepsCounterThreshold = 50;
-const NSTimeInterval kFullProgressStepsTimeIntervalThreshold = 5.;           // 5 seconds
 
 @interface HLSTaskGroup ()
 
@@ -116,7 +115,7 @@ const NSTimeInterval kFullProgressStepsTimeIntervalThreshold = 5.;           // 
     
     // Should update estimate?
     NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
-    if (_fullProgressStepsCounter > kFullProgressStepsCounterThreshold || elapsedTimeIntervalSinceLastEstimate > kFullProgressStepsTimeIntervalThreshold) {
+    if (_fullProgressStepsCounter > kFullProgressStepsCounterThreshold) {
         // Calculate estimate based on velocity during previous step
         double fullProgressSinceLastEstimate = fullProgress - _lastEstimateFullProgress;
         if (! doubleeq(fullProgressSinceLastEstimate, 0.)) {
