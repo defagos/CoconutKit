@@ -27,7 +27,7 @@
  * This object is not thread-safe. All operations on it must stem from the same thread, otherwise the behavior is 
  * undefined.
  *
- * Designated initializer: initWith
+ * Designated initializer: init
  */
 @interface HLSTaskManager : NSObject {
 @private
@@ -47,6 +47,12 @@
  * create those manually.
  */
 + (HLSTaskManager *)defaultManager;
+
+/**
+ * Change the number of tasks processed simultaneously. Default is 4. This setting does not affect already running
+ * operations
+ */
+- (void)setMaxConcurrentTaskCount:(NSInteger)count;
 
 /**
  * Submit a single task; if you have several tasks to process, consider bundling them as a task group, and use

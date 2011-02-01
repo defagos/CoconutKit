@@ -56,10 +56,7 @@
 {
     if (self = [super init]) {
         self.operationQueue = [[[NSOperationQueue alloc] init] autorelease];
-        // Remark: It seems that with the recommended setting NSOperationQueueDefaultMaxConcurrentOperationCount (which
-        //         lets the OS decide dynamically how many threads are needed), dependencies betweeen NSOperation objects
-        //         are not applied anymore (bug?). Anyway, this does not work correctly, so we fix the number of threads
-        //         to a seemingly good value
+        [self setMaxConcurrentTaskCount:4];
         [self.operationQueue setMaxConcurrentOperationCount:4];
         self.tasks = [NSMutableSet set];
         self.taskGroups = [NSMutableSet set];
@@ -103,6 +100,23 @@
 @synthesize taskGroupToDelegateMap = _taskGroupToDelegateMap;
 
 @synthesize delegateToTaskGroupsMap = _delegateToTaskGroupsMap;
+
+- (void)setMaxConcurrentTaskCount:(NSInteger)count
+{
+    // Remark: It seems that with the recommended setting NSOperationQueueDefaultMaxConcurrentOperationCount (which
+    //         lets the OS decide dynamically how many threads are needed), dependencies betweeen NSOperation objects
+    //         are not applied anymore (bug?). Anyway, this does not work correctly, so we fix the number of threads
+    //         to a seemingly good value
+    if (count == NSOperationQueueDefaultMaxConcurrentOperationCount) {
+        logger_warn(@"Dynamic number of concurrent tasks is currently not working correctly; task count not changed");
+    }
+    else if (count > 1) {
+        [self.operationQueue setMaxConcurrentOperationCount:count];
+    }
+    else {
+        logger_error(@"Invalid number of concurrent tasks; task count not changed");
+    }
+}
 
 #pragma mark -
 #pragma mark Submitting tasks
