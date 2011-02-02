@@ -27,6 +27,19 @@ typedef enum {
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;
 
+typedef enum {
+    LifeCyclePhaseEnumBegin = 0,
+    LifeCyclePhaseInitialized = LifeCyclePhaseEnumBegin,
+    LifeCyclePhaseViewDidLoad,
+    LifeCyclePhaseViewWillAppear,
+    LifeCyclePhaseViewDidAppear,
+    LifeCyclePhaseViewWillDisappear,
+    LifeCyclePhaseViewDidDisappear,
+    LifeCyclePhaseViewDidUnload,
+    LifeCyclePhaseEnumEnd,
+    LifeCyclePhaseEnumSize = LifeCyclePhaseEnumEnd - LifeCyclePhaseEnumBegin
+} LifeCyclePhase;
+
 /**
  * View controllers which must be able to embed another view controller as subview can inherit from this class
  * to benefit from correct event propagation (e.g. viewDidLoad, rotation events, etc.). Moreover, this class
@@ -58,17 +71,23 @@ typedef enum {
  * and to animation:
  *   - viewAnimation...
  *
+ * As with standard built-in view controllers (e.g. UINavigationController), the view controller's view rect is known
+ * when viewWillAppear: gets called for it. This is important since it lets you insert you code (e.g. hiding a navigation
+ * bar) before the view gets actually displayed.
+ *
  * Designated initializer: initWithNibName:bundle:
  */
 @interface HLSPlaceholderViewController : UIViewController <HLSReloadable, HLSViewAnimationDelegate> {
 @private
     UIViewController *m_insetViewController;
-    UIViewController *m_oldInsetViewController;
-    NSArray *m_fadeInAnimationSteps;
-    HLSTransitionStyle m_transitionStyle;
+    BOOL m_insetViewAddedAsSubview;                 // Avoid testing the view controller view property (this triggers view loading,
+                                                    // which we want to precisely control so that it happens when it has to). Test
+                                                    // this boolean value instead, which means that the inset view controller's view
+                                                    // has been added to the placeholder view as subview (which is actually when
+                                                    // we precisely need view loading to occur)
     UIView *m_placeholderView;
-    BOOL m_autoresizesInset;
-    BOOL m_firstDisplay;
+    LifeCyclePhase m_lifeCyclePhase;                // Which lifecycle phase is the placeholder view controller currently in?
+    BOOL m_adjustingInset;
 }
 
 /**
@@ -76,6 +95,7 @@ typedef enum {
  */
 @property (nonatomic, retain) UIViewController *insetViewController;
 
+#if 0
 /**
  * Set the view controller to display as inset. A fade out animation can be applied (if not nil) to the view controller
  * which is removed (when the animation ends, the associated view is removed), and a fade in animation can be applied 
@@ -105,12 +125,20 @@ typedef enum {
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
 
+#endif
+
+/**
+ * The view where inset view controller's view must be drawn. Either created programmatically in a subclass' loadView method 
+ * or bound to a UIView in Interface Builder
+ */
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
 
 /**
- * If set to YES, then the inset view is automatically resized to fill the placeholder view, otherwise
- * it keeps its original size. Default is NO
+ * If set to YES, the inset view controller's view frame is automatically adjusted to match the placeholder bounds. The behavior
+ * depends on the autoresizing behavior of the inset view (e.g. it will fulfill the placeholder view when able to stretch in
+ * both directions). If set to NO, the inset view is used as is.
+ * Default value is NO
  */
-@property (nonatomic, assign) BOOL autoresizesInset;
+@property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;
 
 @end
