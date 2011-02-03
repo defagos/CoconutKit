@@ -12,9 +12,9 @@
 #import "HLSLogger.h"
 
 // Default values as given by Apple UIView documentation
-#define ANIMATION_STEP_DEFAULT_DURATION          0.2
-#define ANIMATION_STEP_DEFAULT_DELAY             0.
-#define ANIMATION_STEP_DEFAULT_CURVE             UIViewAnimationCurveEaseInOut
+#define ANIMATION_STEP_DEFAULT_DURATION                 0.2
+#define ANIMATION_STEP_DEFAULT_ALPHA_VARIATION          0.f
+#define ANIMATION_STEP_DEFAULT_CURVE                    UIViewAnimationCurveEaseInOut
 
 @implementation HLSAnimationStep
 
@@ -23,15 +23,6 @@
 + (HLSAnimationStep *)animationStep
 {
     return [[[[self class] alloc] init] autorelease];
-}
-
-+ (HLSAnimationStep *)animationStepIdentityForView:(UIView *)view
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    animationStep.duration = 0.;
-    animationStep.alpha = view.alpha;
-    
-    return animationStep;
 }
 
 + (HLSAnimationStep *)animationStepAnimatingViewFromFrame:(CGRect)fromFrame toFrame:(CGRect)toFrame
@@ -70,11 +61,10 @@
     if (self = [super init]) {
         // Default: No change
         self.transform = CGAffineTransformIdentity;
-        m_alpha = ANIMATION_STEP_ALPHA_NOT_SET;
+        self.alphaVariation = ANIMATION_STEP_DEFAULT_ALPHA_VARIATION;
         
         // Default animation settings
         self.duration = ANIMATION_STEP_DEFAULT_DURATION;
-        self.delay = ANIMATION_STEP_DEFAULT_DELAY;
         self.curve = ANIMATION_STEP_DEFAULT_CURVE;   
     }
     return self;
@@ -90,24 +80,21 @@
 
 @synthesize transform = m_transform;
 
-@synthesize alpha = m_alpha;
+@synthesize alphaVariation = m_alphaVariation;
 
-- (void)setAlpha:(CGFloat)alpha
+- (void)setAlphaVariation:(CGFloat)alphaVariation
 {
     // Sanitize input
-    if (floateq(alpha, ANIMATION_STEP_ALPHA_NOT_SET)) {
-        m_alpha = alpha;
+    if (floatlt(alphaVariation, -1.f)) {
+        logger_warn(@"Alpha variation cannot be smaller than -1. Fixed to -1");
+        m_alphaVariation = -1.f;
     }
-    else if (floatlt(alpha, 0.f)) {
-        logger_warn(@"alpha must be >= 0. Fixed to 0");
-        m_alpha = 0.f;
-    }
-    else if (floatgt(alpha, 1.f)) {
-        logger_warn(@"alpha must be <= 1. Fixed to 1");
-        m_alpha = 1.f;
+    else if (floatgt(alphaVariation, 1.f)) {
+        logger_warn(@"Alpha variation cannot be larger than 1. Fixed to 1");
+        m_alphaVariation = 1.f;
     }
     else {
-        m_alpha = alpha;
+        m_alphaVariation = alphaVariation;
     }
 }
 
@@ -125,51 +112,20 @@
     }
 }
 
-@synthesize delay = m_delay;
-
-- (void)setDelay:(NSTimeInterval)delay
-{
-    // Sanitize input
-    if (doublelt(delay, 0.)) {
-        logger_warn(@"Delay must be non-negative. Fixed to 0");
-        m_delay = 0.;
-    }
-    else {
-        m_delay = delay;
-    }
-}
-
 @synthesize curve = m_curve;
 
 @synthesize tag = m_tag;
-
-#pragma mark NSCopying protocol implementation
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    // Deep copy
-    HLSAnimationStep *animationStep = [[[[self class] allocWithZone:zone] init] autorelease];
-    animationStep.transform = self.transform;
-    animationStep.alpha = self.alpha;
-    animationStep.duration = self.duration;
-    animationStep.delay = self.delay;
-    animationStep.curve = self.curve;
-    animationStep.tag = [self.tag copy];
-    
-    return animationStep;
-}
 
 #pragma mark Description
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; transform: %@; alpha: %f; duration: %f; delay: %f, tag: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; transform: %@; alphaVariation: %f; duration: %f; tag: %@>", 
             [self class],
             self,
             NSStringFromCGAffineTransform(self.transform),
-            self.alpha,
+            self.alphaVariation,
             self.duration,
-            self.delay,
             self.tag];
 }
 

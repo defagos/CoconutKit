@@ -12,10 +12,16 @@
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "HLSRuntimeChecks.h"
+#import "HLSViewAnimation.h"
 
 @interface HLSPlaceholderViewController ()
 
 - (void)releaseViews;
+
+@property (nonatomic, retain) UIViewController *oldInsetViewController;
+
+- (NSArray *)fadeOutAnimationStepsForTransitionStyle:(HLSTransitionStyle)transitionStyle viewController:(UIViewController *)viewController;
+- (NSArray *)fadeInAnimationStepsForTransitionStyle:(HLSTransitionStyle)transitionStyle viewController:(UIViewController *)viewController;
 
 @end
 
@@ -43,6 +49,7 @@
 {
     [self releaseViews];
     self.insetViewController = nil;
+    self.oldInsetViewController = nil;
     self.placeholderView = nil;
     [super dealloc];
 }
@@ -58,6 +65,13 @@
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
 {
+    return [self setInsetViewController:insetViewController withFadeOutAnimationSteps:nil fadeInAnimationSteps:nil];
+}
+
+- (void)setInsetViewController:(UIViewController *)insetViewController
+     withFadeOutAnimationSteps:(NSArray *)fadeOutAnimationSteps
+          fadeInAnimationSteps:(NSArray *)fadeInAnimationSteps
+{
     // If not changed, nothing to do
     if (m_insetViewController == insetViewController) {
         return;
@@ -67,16 +81,37 @@
     if (m_insetViewAddedAsSubview) {
         // If visible, forward disappearance events
         if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
-            [m_insetViewController viewWillDisappear:NO];
-        }
-        
-        // Remove the view
-        [m_insetViewController.view removeFromSuperview];
-        m_insetViewAddedAsSubview = NO;
-        
-        // If visible, forward disappearance events
-        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
-            [m_insetViewController viewDidDisappear:NO];
+            // Animated
+            if ([fadeOutAnimationSteps count] != 0) {
+                // Forward disappearance events
+                [m_insetViewController viewWillDisappear:YES];
+                m_insetViewAddedAsSubview = NO;
+                
+                // Animate
+                HLSViewAnimation *fadeOutViewAnimation = [HLSViewAnimation viewAnimationWithAnimationSteps:fadeOutAnimationSteps];
+                fadeOutViewAnimation.tag = @"fadeOut";
+                fadeOutViewAnimation.lockingUI = YES;
+                fadeOutViewAnimation.bringToFront = NO;
+                fadeOutViewAnimation.delegate = self;
+                [fadeOutViewAnimation animateView:m_insetViewController.view];
+                
+                // Keep a ref to the removed view controller so that it can stay alive until the animation ends
+                self.oldInsetViewController = m_insetViewController;
+            }
+            // Not animated
+            else {
+                // Forward disappearance events
+                [m_insetViewController viewWillDisappear:NO];
+                m_insetViewAddedAsSubview = NO;
+                
+                // Remove the view
+                [m_insetViewController.view removeFromSuperview];
+                
+                // Forward disappearance events
+                if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+                    [m_insetViewController viewDidDisappear:NO];
+                }
+            }
         }
     }
     
@@ -90,8 +125,8 @@
         // situations). This will trigger the associated viewDidLoad
         UIView *insetView = m_insetViewController.view;
         
-        // If soon or already visible, forward appearance events (this event here correctly occurs after viewDidLoad)
-        if (m_lifeCyclePhase == LifeCyclePhaseViewWillAppear || m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+        // If already visible, forward appearance events (this event here correctly occurs after viewDidLoad)
+        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
             // Adjust the frame to get proper autoresizing behavior (if autoresizesSubviews has been enabled for the placeholder
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
@@ -99,19 +134,97 @@
                 insetView.frame = self.placeholderView.bounds;
             }
             
-            [m_insetViewController viewWillAppear:NO];
+            // Animated
+            if ([fadeInAnimationSteps count] != 0) {
+                // Forward appearance events
+                [m_insetViewController viewWillAppear:YES];
+                m_insetViewAddedAsSubview = YES;
+                
+                // Add the inset
+                [self.placeholderView addSubview:insetView];
+                
+                // Animate
+                HLSViewAnimation *fadeInViewAnimation = [HLSViewAnimation viewAnimationWithAnimationSteps:fadeInAnimationSteps];
+                fadeInViewAnimation.tag = @"fadeIn";
+                fadeInViewAnimation.lockingUI = YES;
+                fadeInViewAnimation.bringToFront = YES;
+                fadeInViewAnimation.delegate = self;
+                [fadeInViewAnimation animateView:m_insetViewController.view];
+            }
+            // Not animated
+            else {
+                // Forward appearance events
+                [m_insetViewController viewWillAppear:NO];
+                m_insetViewAddedAsSubview = YES;
+                
+                // Add the inset
+                [self.placeholderView addSubview:insetView];
+                
+                // Forward appearance events
+                [m_insetViewController viewDidAppear:NO];                
+            }
         }
-        
-        // Add the inset
-        [self.placeholderView addSubview:insetView];
-        m_insetViewAddedAsSubview = YES;
-        
-        // If visible, forward appearance events
-        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
-            [m_insetViewController viewDidAppear:NO];
+        // Not visible or disappearing
+        else {
+            // Add the inset
+            [self.placeholderView addSubview:insetView];
+            m_insetViewAddedAsSubview = YES;            
         }
     }
 }
+
+- (void)setInsetViewController:(UIViewController *)insetViewController
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+{    
+    // The returned animation steps contain the default durations for each step
+    NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:transitionStyle viewController:self.insetViewController];
+    NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:transitionStyle viewController:insetViewController];
+    
+    [self setInsetViewController:insetViewController 
+       withFadeOutAnimationSteps:fadeOutAnimationSteps 
+            fadeInAnimationSteps:fadeInAnimationSteps];     
+}
+
+- (void)setInsetViewController:(UIViewController *)insetViewController
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration
+{
+    // Sanitize input
+    if (doublelt(duration, 0.)) {
+        logger_warn(@"Duration must be non-negative. Fixed to 0");
+        duration = 0.;
+    }
+    
+    // The returned animation steps contain the default durations for each step
+    NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:transitionStyle viewController:self.insetViewController];
+    NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:transitionStyle viewController:insetViewController];
+    
+    // Distribute durations evenly among fade out animation steps
+    NSTimeInterval fadeOutDuration = 0.;
+    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
+        fadeOutDuration += fadeOutAnimationStep.duration;
+    }
+    double fadeOutFactor = duration / fadeOutDuration;
+    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
+        fadeOutAnimationStep.duration *= fadeOutFactor;
+    }
+    
+    // Distribute durations evenly among fade in animation steps
+    NSTimeInterval fadeInDuration = 0.;
+    for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
+        fadeInDuration += fadeInAnimationStep.duration;
+    }
+    double fadeInFactor = duration / fadeInDuration;
+    for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
+        fadeInAnimationStep.duration *= fadeInFactor;
+    }    
+    
+    [self setInsetViewController:insetViewController 
+       withFadeOutAnimationSteps:fadeOutAnimationSteps 
+            fadeInAnimationSteps:fadeInAnimationSteps];    
+}
+
+@synthesize oldInsetViewController = m_oldInsetViewController;
 
 @synthesize placeholderView = m_placeholderView;
 
@@ -254,6 +367,144 @@
 
 #endif
 
+#pragma mark Built-in transitions (return an array of HLSAnimationStep objects)
+
+- (NSArray *)fadeOutAnimationStepsForTransitionStyle:(HLSTransitionStyle)transitionStyle viewController:(UIViewController *)viewController
+{
+    // Remark: Animations take place only when the placeholder view controller is visible, these methods are therefore called in such cases only.
+    //         This guarantees that the placeholder view frame we use below is well defined 
+    switch (transitionStyle) {
+        case HLSTransitionStyleCoverFromBottom:
+        case HLSTransitionStyleCoverFromTop:
+        case HLSTransitionStyleCoverFromLeft:
+        case HLSTransitionStyleCoverFromRight: {
+            // Keep the old view alive for the duration of the associated fade in animation
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];
+            break;
+        }
+            
+        case HLSTransitionStyleCrossDissolve: {
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
+            // This triggers view creation a little bit earlier than in cases where alpha is not involved, but we have no other choice to find 
+            // the needed alpha variation
+            CGFloat viewAlpha = viewController.view.alpha;            
+            animationStep.alphaVariation = -viewAlpha;
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];
+            break;
+        }
+            
+        case HLSTransitionStylePushFromBottom: {
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                deltaY:-self.placeholderView.frame.size.height];
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];
+            break;
+        }
+            
+        case HLSTransitionStylePushFromTop: {
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                deltaY:self.placeholderView.frame.size.height];
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];            
+            break;
+        }
+            
+        case HLSTransitionStylePushFromLeft: {
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
+                                                                                                deltaY:0.f];
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];
+            break;
+        }
+            
+        case HLSTransitionStylePushFromRight: {
+            HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
+                                                                                                deltaY:0.f];
+            animationStep.duration = 0.4;
+            return [NSArray arrayWithObject:animationStep];            
+            break;
+        }
+            
+        default:
+            return nil;
+    }
+}
+
+- (NSArray *)fadeInAnimationStepsForTransitionStyle:(HLSTransitionStyle)transitionStyle viewController:(UIViewController *)viewController
+{
+    // Remark: Animations take place only when the placeholder view controller is visible, these methods are therefore called in such cases only.
+    //         This guarantees that the placeholder view frame we use below is well defined     
+    switch (transitionStyle) {
+        case HLSTransitionStyleCoverFromBottom: 
+        case HLSTransitionStylePushFromBottom: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop: 
+        case HLSTransitionStylePushFromTop: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft:
+        case HLSTransitionStylePushFromLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
+                                                                                                 deltaY:0.f];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
+                                                                                                 deltaY:0.f];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromRight: 
+        case HLSTransitionStylePushFromRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
+                                                                                                 deltaY:0.f];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
+                                                                                                 deltaY:0.f];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCrossDissolve: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            // This triggers view creation a little bit earlier than in cases where alpha is not involved, but we have no other choice to find 
+            // the needed alpha variation
+            CGFloat viewAlpha = viewController.view.alpha;
+            animationStep1.alphaVariation = -viewAlpha;
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            animationStep2.alphaVariation = viewAlpha;
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        default:
+            return nil;
+    }
+}
+
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
@@ -261,6 +512,25 @@
     if ([self.insetViewController conformsToProtocol:@protocol(HLSReloadable)]) {
         UIViewController<HLSReloadable> *reloadableInsetViewController = self.insetViewController;
         [reloadableInsetViewController reloadData];
+    }
+}
+
+#pragma mark HLSViewAnimationDelegate protocol implementation
+
+- (void)viewAnimationFinished:(HLSViewAnimation *)viewAnimation
+{
+    if ([viewAnimation.tag isEqual:@"fadeOut"]) {
+        // Remove the view
+        [self.oldInsetViewController.view removeFromSuperview];
+        
+        [self.oldInsetViewController viewDidDisappear:YES];
+        
+        // Done with the old inset view controller
+        self.oldInsetViewController = nil;
+    }
+    else if ([viewAnimation.tag isEqual:@"fadeIn"]) {
+        // Forward appearance events
+        [m_insetViewController viewDidAppear:YES];
     }
 }
 

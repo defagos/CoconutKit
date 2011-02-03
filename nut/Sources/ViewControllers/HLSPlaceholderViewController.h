@@ -85,6 +85,7 @@ typedef enum {
                                                     // this boolean value instead, which means that the inset view controller's view
                                                     // has been added to the placeholder view as subview (which is actually when
                                                     // we precisely need view loading to occur)
+    UIViewController *m_oldInsetViewController;
     UIView *m_placeholderView;
     LifeCyclePhase m_lifeCyclePhase;                // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;
@@ -95,16 +96,13 @@ typedef enum {
  */
 @property (nonatomic, retain) UIViewController *insetViewController;
 
-#if 0
 /**
  * Set the view controller to display as inset. A fade out animation can be applied (if not nil) to the view controller
  * which is removed (when the animation ends, the associated view is removed), and a fade in animation can be applied 
  * (if not nil) to the view controller which is installed. In both cases, simply supply the sequence of HLSAnimationSteps
  * to apply
- * Remark: If this method is called when no view controller was displayed (e.g. right after creation and before the
- *         placeholder view controller is displayed), then the fade out animation is ignored. Similarly, if no
- *         view controller is being installed (insetViewController is nil), then the fade in animation will be
- *         ignored
+ * This method does not apply any animation if the view controller is not visible or about to be displayed, or if no 
+ * inset view controller is installed (insetViewController set to nil) or changed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
      withFadeOutAnimationSteps:(NSArray *)fadeOutAnimationSteps
@@ -124,8 +122,6 @@ typedef enum {
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
-
-#endif
 
 /**
  * The view where inset view controller's view must be drawn. Either created programmatically in a subclass' loadView method 
