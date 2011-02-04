@@ -56,9 +56,9 @@ typedef enum {
  * The wrapped view controller can be swapped with another one at any time. Simply update the viewController property. 
  * This makes pages or tabs easy to code.
  *
- * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super
- * view lifecycle methods first, otherwise the behaviour will be undefined. Similarly for methods related to interface
- * orientation and initialization methods. This means:
+ * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
+ * view lifecycle methods first if you override any of them, otherwise the behaviour will be undefined. Similarly 
+ * for methods related to interface orientation and initialization methods. This means:
  *   - initWithNibName:bundle:
  *   - initWithCoder: (for view controllers instantiated from a xib)
  *   - viewWill...
@@ -71,9 +71,11 @@ typedef enum {
  * and to animation:
  *   - viewAnimation...
  *
- * As with standard built-in view controllers (e.g. UINavigationController), the view controller's view rect is known
- * when viewWillAppear: gets called for it. This is important since it lets you insert you code (e.g. hiding a navigation
- * bar) before the view gets actually displayed.
+ * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rect is known
+ * when viewWillAppear: gets called for it. If you need to insert code requiring to know the final view dimensions or changing
+ * the screen layout (e.g. hiding a navigation bar), be sure to insert it in viewWillAppear: or events thereafter (in other
+ * words, NOT in viewDidLoad).
+ * You should not alter the inset view controller's view frame yourself, otherwise the behavior is undefined.
  *
  * Designated initializer: initWithNibName:bundle:
  */
@@ -136,5 +138,7 @@ typedef enum {
  * Default value is NO
  */
 @property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;
+
+// TODO: Add a delegate mechanism similar to the one of UINavigationController
 
 @end

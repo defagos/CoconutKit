@@ -214,7 +214,7 @@
     }
     
     NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
-    for (HLSAnimationStep *animationStep in animationSteps) {
+    for (HLSAnimationStep *animationStep in [animationSteps reverseObjectEnumerator]) {
         HLSAnimationStep *reverseAnimationStep = [HLSAnimationStep animationStep];
         reverseAnimationStep.transform = CGAffineTransformInvert(animationStep.transform);
         reverseAnimationStep.alphaVariation = -animationStep.alphaVariation;

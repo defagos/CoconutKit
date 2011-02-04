@@ -136,12 +136,27 @@
             
             // Animated
             if ([fadeInAnimationSteps count] != 0) {
+                // To avoid seing the view before the animation begins (creating an ugly flick), we make it invisible and move it 
+                // out of the placeholder view bounds first. We must then ensure we restore the alpha by modifying the first animation 
+                // step provided by the caller
+                CGFloat hideInsetViewAlphaVariation = -insetView.alpha;
+                insetView.alpha += hideInsetViewAlphaVariation;
+                CGAffineTransform hideInsetViewTransform = CGAffineTransformMakeTranslation(self.placeholderView.frame.size.width, 
+                                                                                            self.placeholderView.frame.size.height);
+                insetView.transform = hideInsetViewTransform;
+                
                 // Forward appearance events
                 [m_insetViewController viewWillAppear:YES];
                 m_insetViewAddedAsSubview = YES;
                 
                 // Add the inset
                 [self.placeholderView addSubview:insetView];
+      
+                // Alter the first animation to negate the initial changes applied above
+                HLSAnimationStep *firstFadeInAnimationStep = [fadeInAnimationSteps objectAtIndex:0];
+                firstFadeInAnimationStep.alphaVariation -= hideInsetViewAlphaVariation;
+                firstFadeInAnimationStep.transform = CGAffineTransformConcat(firstFadeInAnimationStep.transform, 
+                                                                             CGAffineTransformInvert(hideInsetViewTransform));
                 
                 // Animate
                 HLSViewAnimation *fadeInViewAnimation = [HLSViewAnimation viewAnimationWithAnimationSteps:fadeInAnimationSteps];
@@ -149,7 +164,7 @@
                 fadeInViewAnimation.lockingUI = YES;
                 fadeInViewAnimation.bringToFront = YES;
                 fadeInViewAnimation.delegate = self;
-                [fadeInViewAnimation animateView:m_insetViewController.view];
+                [fadeInViewAnimation animateView:insetView];
             }
             // Not animated
             else {
@@ -342,12 +357,12 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-
+    
 }
 
 - (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 { 
-
+    
 }
 
 - (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -357,12 +372,12 @@
 
 - (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration
 {
-
+    
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-
+    
 }
 
 #endif
