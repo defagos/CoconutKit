@@ -97,10 +97,19 @@
 
 - (void)onCallingThreadPerformSelector:(SEL)selector object:(NSObject *)objectOrNil
 {
+    // HUGE WARNING here! If we do not wait until done, we might sometimes (most notably under heavy load) perform selectors
+    // on the calling thread, but not in the order they were scheduled. This can be a complete disaster if we perform the
+    // notifyEnd method before a progress update via notifyRunningWithProgress:. If waitUntilDone is left to NO, then this
+    // might happen and, since the task is released by notifyEnd, any notifyRunningWithProgress: coming after it would crash.
+    // To avoid this issue, waitUntilDone must clearly be set to YES.
+    // Remark: This equivalently means that when waitUntilDone is NO, selectors are not necessarily processed in the order they 
+    //         are "sent" to the calling thread. Most of the time they seem to, but not always. Setting waitUntilDone to YES 
+    //         guarantees they will be processed sequentially (of course, since performSelector blocks the thread). IMHO, I would 
+    //         have not called this method performSelector:onThread:withObject:waitUntilDone:, 
     [self performSelector:selector 
                  onThread:self.callingThread 
                withObject:objectOrNil
-            waitUntilDone:NO];
+            waitUntilDone:YES];
 }
 
 // Remark: Originally, I intended to call this method "setProgress:", but this was a bad idea. It could have conflicted
