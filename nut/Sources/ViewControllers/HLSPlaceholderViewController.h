@@ -113,6 +113,8 @@ typedef enum {
     UIView *m_placeholderView;
     LifeCyclePhase m_lifeCyclePhase;                // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;
+    BOOL m_fadeInAnimationComplete;
+    BOOL m_fadeOutAnimationComplete;
 }
 
 /**
