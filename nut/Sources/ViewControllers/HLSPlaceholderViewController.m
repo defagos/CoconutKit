@@ -12,6 +12,7 @@
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "HLSRuntimeChecks.h"
+#import "HLSTransform.h"
 #import "HLSViewAnimation.h"
 
 @interface HLSPlaceholderViewController ()
@@ -146,7 +147,10 @@
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
             if (self.adjustingInset) {
-                insetView.frame = self.placeholderView.bounds;
+                // We do not adjust the frame directly here but use a transform. According to UIView's documentation, we must avoid
+                // mixing frame and transforms
+                insetView.transform = [HLSTransform transformFromRect:insetView.frame 
+                                                               toRect:self.placeholderView.bounds];
             }
             
             // Animated
@@ -158,7 +162,7 @@
                 insetView.alpha += hideInsetViewAlphaVariation;
                 CGAffineTransform hideInsetViewTransform = CGAffineTransformMakeTranslation(self.placeholderView.frame.size.width, 
                                                                                             self.placeholderView.frame.size.height);
-                insetView.transform = hideInsetViewTransform;
+                insetView.transform = CGAffineTransformConcat(hideInsetViewTransform, insetView.transform);
                 
                 // Forward appearance events
                 [m_insetViewController viewWillAppear:YES];
@@ -300,7 +304,10 @@
         // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
         // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
         if (self.adjustingInset) {
-            self.insetViewController.view.frame = self.placeholderView.bounds;
+            // We do not adjust the frame directly here but use a transform. According to UIView's documentation, we must avoid
+            // mixing frame and transforms
+            self.insetViewController.view.transform = [HLSTransform transformFromRect:self.insetViewController.view.frame 
+                                                                               toRect:self.placeholderView.bounds];
         }
         
         [self.insetViewController viewWillAppear:animated];
@@ -416,7 +423,12 @@
         case HLSTransitionStyleCoverFromBottom:
         case HLSTransitionStyleCoverFromTop:
         case HLSTransitionStyleCoverFromLeft:
-        case HLSTransitionStyleCoverFromRight: {
+        case HLSTransitionStyleCoverFromRight: 
+        case HLSTransitionStyleCoverFromUpperLeft: 
+        case HLSTransitionStyleCoverFromUpperRight:
+        case HLSTransitionStyleCoverFromBottomLeft:
+        case HLSTransitionStyleCoverFromBottomRight: 
+        case HLSTransitionStyleEmergeFromCenter: {
             // Keep the old view alive for the duration of the associated fade in animation
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
             animationStep.duration = 0.4;
@@ -525,6 +537,50 @@
             break;
         }
             
+        case HLSTransitionStyleCoverFromUpperLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromUpperRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }            
+            
         case HLSTransitionStyleCrossDissolve: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             // This triggers view creation a little bit earlier than in cases where alpha is not involved, but we have no other choice to find 
@@ -534,6 +590,24 @@
             animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             animationStep2.alphaVariation = viewAlpha;
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
+        case HLSTransitionStyleEmergeFromCenter: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            // This triggers view creation a little bit earlier than in cases where alpha is not involved, but we have no other choice to find 
+            // the needed alpha variation
+            CGRect viewFrame = viewController.view.frame;
+            CGRect centerPointFrame = CGRectMake((viewFrame.size.width - 0.1f) / 2,
+                                                 (viewFrame.size.height - 0.1f) / 2,
+                                                 0.1f,      // Cannot use 0 here (otherwise nan in the transform)
+                                                 0.1f);
+            animationStep1.transform = [HLSTransform transformFromRect:viewFrame toRect:centerPointFrame];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            animationStep2.transform = [HLSTransform transformFromRect:centerPointFrame toRect:viewFrame];
             animationStep2.duration = 0.4;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;

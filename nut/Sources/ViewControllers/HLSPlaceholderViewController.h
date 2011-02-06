@@ -18,11 +18,16 @@ typedef enum {
     HLSTransitionStyleCoverFromTop,                                                             // The new view covers the old one starting from the top
     HLSTransitionStyleCoverFromLeft,                                                            // The new view covers the old one starting from the left
     HLSTransitionStyleCoverFromRight,                                                           // The new view covers the old one starting from the right
+    HLSTransitionStyleCoverFromUpperLeft,                                                       // The new view covers the old one starting from the upper left corner
+    HLSTransitionStyleCoverFromUpperRight,                                                      // The new view covers the old one starting from the upper right corner
+    HLSTransitionStyleCoverFromBottomLeft,                                                      // The new view covers the old one starting from the bottom left corner
+    HLSTransitionStyleCoverFromBottomRight,                                                     // The new view covers the old one starting from the bottom right corner
     HLSTransitionStyleCrossDissolve,                                                            // The old view fades out as the new one fades in
     HLSTransitionStylePushFromBottom,                                                           // The new view pushes up the old one
     HLSTransitionStylePushFromTop,                                                              // The new view pushes down the old one
     HLSTransitionStylePushFromLeft,                                                             // The new view pushes the old one to the right
     HLSTransitionStylePushFromRight,                                                            // The new view pushes the old one to the left
+    HLSTransitionStyleEmergeFromCenter,                                                         // The new view emerges from the center of the placeholder view
     HLSTransitionStyleEnumEnd,
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;

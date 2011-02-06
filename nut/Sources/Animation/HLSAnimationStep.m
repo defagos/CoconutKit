@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSTransform.h"
 
 // Default values as given by Apple UIView documentation
 #define ANIMATION_STEP_DEFAULT_DURATION                 0.2
@@ -27,21 +28,9 @@
 
 + (HLSAnimationStep *)animationStepAnimatingViewFromFrame:(CGRect)fromFrame toFrame:(CGRect)toFrame
 {
-    // Scaling matrix
-    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(toFrame.size.width / fromFrame.size.width, 
-                                                                  toFrame.size.height / fromFrame.size.height);
-    
-    // Rect centers in the parent view coordinate system
-    CGPoint beginCenterInParent = CGPointMake(CGRectGetMidX(fromFrame), CGRectGetMidY(fromFrame));
-    CGPoint endCenterInParent = CGPointMake(CGRectGetMidX(toFrame), CGRectGetMidY(toFrame));
-    
-    // Translation matrix
-    CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(endCenterInParent.x - beginCenterInParent.x, 
-                                                                              endCenterInParent.y - beginCenterInParent.y);
-    
     // Return the resulting animation step
     HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    animationStep.transform = CGAffineTransformConcat(scaleTransform, translationTransform);
+    animationStep.transform = [HLSTransform transformFromRect:fromFrame toRect:toFrame];
     
     return animationStep;    
 }
