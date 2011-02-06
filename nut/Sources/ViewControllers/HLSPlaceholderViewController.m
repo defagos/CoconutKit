@@ -95,8 +95,11 @@
                 fadeOutViewAnimation.delegate = self;
                 [fadeOutViewAnimation animateView:m_insetViewController.view];
                 
-                // Keep a ref to the removed view controller so that it can stay alive until the animation ends
+                // Keep a ref to the removed view controller so that it can stay alive until the animation ends; also save the
+                // view controller's view original properties we might have altered to restore them at the end of the animation
                 self.oldInsetViewController = m_insetViewController;
+                m_oldOriginalInsetViewTransform = m_originalInsetViewTransform;
+                m_oldOriginalInsetViewAlpha = m_originalInsetViewAlpha;
             }
             // Not animated
             else {
@@ -111,6 +114,11 @@
                 if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
                     [m_insetViewController viewDidDisappear:NO];
                 }
+                
+                // Restore the original view properties we might have altered during the time the view controller was
+                // set as inset
+                m_insetViewController.view.transform = m_originalInsetViewTransform;
+                m_insetViewController.view.alpha = m_originalInsetViewAlpha;
             }
         }
     }
@@ -124,6 +132,13 @@
         // Instantiate the view lazily (if it has not been already been instantiated, which should be the case in most
         // situations). This will trigger the associated viewDidLoad
         UIView *insetView = m_insetViewController.view;
+        
+        // Save original parameters which can get altered by view controller animations; this way we can restore the original
+        // state of the view controller's view when it gets removed. This allows callers to cache the view controller (and its
+        // view) for reusing them at a later time. We must restore these parameters since the caller must expect to be able
+        // to reuse a view in the same state existing before the view controller was assigned as inset
+        m_originalInsetViewTransform = insetView.transform;
+        m_originalInsetViewAlpha = insetView.alpha;
         
         // If already visible, forward appearance events (this event here correctly occurs after viewDidLoad)
         if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
@@ -267,7 +282,16 @@
     // If an inset has been defined but not displayed yet, add it (remark: This is not done in viewDidLoad since only
     // now are the placeholder view dimensions known)
     if (self.insetViewController && ! m_insetViewAddedAsSubview) {
-        [self.placeholderView addSubview:self.insetViewController.view];
+        UIView *insetView = self.insetViewController.view;
+        
+        // Save original parameters which can get altered by view controller animations; this way we can restore the original
+        // state of the view controller's view when it gets removed. This allows callers to cache the view controller (and its
+        // view) for reusing them at a later time. We must restore these parameters since the caller must expect to be able
+        // to reuse a view in the same state existing before the view controller was assigned as inset
+        m_originalInsetViewTransform = insetView.transform;
+        m_originalInsetViewAlpha = insetView.alpha;
+        
+        [self.placeholderView addSubview:insetView];
         m_insetViewAddedAsSubview = YES;
     }
     
@@ -540,8 +564,15 @@
         
         [self.oldInsetViewController viewDidDisappear:YES];
         
-        // Done with the old inset view controller
+        // Restore the original view properties we might have altered during the time the view controller was
+        // set as inset
+        self.oldInsetViewController.view.transform = m_oldOriginalInsetViewTransform;
+        self.oldInsetViewController.view.alpha = m_oldOriginalInsetViewAlpha;
+        
+        // Done with the old inset view controller.
         self.oldInsetViewController = nil;
+        m_oldOriginalInsetViewTransform = CGAffineTransformIdentity;
+        m_oldOriginalInsetViewAlpha = 0.f;
     }
     else if ([viewAnimation.tag isEqual:@"fadeIn"]) {
         // Forward appearance events

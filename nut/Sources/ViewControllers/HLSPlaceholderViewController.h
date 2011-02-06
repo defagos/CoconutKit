@@ -77,6 +77,19 @@ typedef enum {
  * words, NOT in viewDidLoad).
  * You should not alter the inset view controller's view frame yourself, otherwise the behavior is undefined.
  *
+ * About view reuse: A view controller is retained when set as inset, and released when done. If no other object keeps
+ * a strong reference to it, it will get deallocated, and so will its view. This is perfectly fine in general since
+ * it contributes to saving resources. But if you need to reuse a view which has already been built (most likely if you
+ * you plan to display it later by the same placeholder view controller), you need to have another object retain the view 
+ * controller to keep it alive.
+ * For example, you might use HLSPlaceholderViewController to switch through N view controllers using toggle buttons. If 
+ * those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers. You want
+ * to pay the price once, either by creating all views at the beginning, or more probably by using some lazy creation mechanism.
+ * In such cases, be sure to retain all those view controllers elsewhere (most naturally by the same object which
+ * instantiated the placeholder view controller). In such cases, though, you must ensure that this object is capable of
+ * releasing the views if memory is critically low. If this object is a view controller, this means you must implement
+ * didReceiveMemoryWarning so that cached view controller's views can be set to nil when needed.
+ *
  * Designated initializer: initWithNibName:bundle:
  */
 @interface HLSPlaceholderViewController : UIViewController <HLSReloadable, HLSViewAnimationDelegate> {
@@ -87,7 +100,11 @@ typedef enum {
                                                     // this boolean value instead, which means that the inset view controller's view
                                                     // has been added to the placeholder view as subview (which is actually when
                                                     // we precisely need view loading to occur)
+    CGAffineTransform m_originalInsetViewTransform;
+    CGFloat m_originalInsetViewAlpha;
     UIViewController *m_oldInsetViewController;
+    CGAffineTransform m_oldOriginalInsetViewTransform;
+    CGFloat m_oldOriginalInsetViewAlpha;
     UIView *m_placeholderView;
     LifeCyclePhase m_lifeCyclePhase;                // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;
