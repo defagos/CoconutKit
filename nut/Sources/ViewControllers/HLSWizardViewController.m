@@ -42,7 +42,6 @@
 {
     [self releaseViews];
     self.viewControllers = nil;
-    self.busyManager = nil;
     self.delegate = nil;
     [super dealloc];
 }
@@ -75,7 +74,6 @@
 {
     [super viewWillAppear:animated];
     [self reloadData];
-    BUSY_MANAGER_ASK_FOR_UPDATE();
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -140,49 +138,8 @@
     [self.delegate wizardViewController:self didDisplayPage:m_currentPage];
 }
 
-SYNTHESIZE_BUSY_MANAGER();
 
 @synthesize delegate = m_delegate;
-
-#pragma mark HLSBusy protocol implementation
-
-- (void)enterBusyMode
-{
-    self.previousButton.enabled = NO;
-    self.nextButton.enabled = NO;
-    self.doneButton.enabled = NO;
-    
-    // If no page currently selected, we are done
-    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        return;
-    }
-        
-    // Forward the message to the currently displayed view controller (if it understands it)
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-    if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
-        UIViewController<HLSBusy> *busyViewController = viewController;
-        [busyViewController enterBusyMode];
-    }
-}
-
-- (void)exitBusyMode
-{
-    self.previousButton.enabled = YES;
-    self.nextButton.enabled = YES;
-    self.doneButton.enabled = YES;    
-    
-    // If no page currently selected, we are done
-    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        return;
-    }
-    
-    // Forward the message to the currently displayed view controller (if it understands it)
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-    if ([viewController conformsToProtocol:@protocol(HLSBusy)]) {
-        UIViewController<HLSBusy> *busyViewController = viewController;
-        [busyViewController exitBusyMode];
-    }
-}
 
 #pragma mark HLSReloadable protocol implementation
 

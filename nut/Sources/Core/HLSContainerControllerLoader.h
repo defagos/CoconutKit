@@ -8,7 +8,7 @@
 
 /**
  * In many cases where containers of view controllers are used, a large number of view controllers might be loaded. 
- * In such cases it is inefficient to load them at once before showing up the container controller.
+ * In such cases it is inefficient to load them all at once before showing up the container controller.
  * Instead, some containers might support the HLSContainerControllerLoader for lazily loading view controllers when
  * they are really required. In such cases a loader delegate member should be provided, through which information
  * required by the container controller can be obtained:

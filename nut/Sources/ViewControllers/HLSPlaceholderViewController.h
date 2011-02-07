@@ -47,53 +47,55 @@ typedef enum {
 
 /**
  * View controllers which must be able to embed another view controller as subview can inherit from this class
- * to benefit from correct event propagation (e.g. viewDidLoad, rotation events, etc.). Moreover, this class
- * also supports view controller different depending on the orientation (see HLSOrientationCloner protocol).
- * The inherited class must create a placeholder view instance, either using a xib or by implementing the viewDidLoad
- * method.
+ * to benefit from correct event propagation (e.g. view lifecycle events, rotation events, etc.). Moreover, this class
+ * also supports view controller different depending on the orientation (see HLSOrientationCloner protocol). To
+ * define the area where embedded view controllers ("insets") will all be drawn, the subclass must supply a properly
+ * initialized placeholder view, either using a xib or by implementing the loadView method.
  * 
- * The reason this class exists is that embedding view controllers by directly adding a view controller's
- * view as subview of another view controller's view does not work correctly out of the box. Most view controller
- * events will be fired up correctly (e.g viewDidLoad or rotation events), but other simply won't (e.g. viewWillAppear:).
- * This means that when adding a view controller's view directly as subview, the viewWillAppear: message has to be sent
- * manually, which is disturbing and awkward (the same has to be done when removing the view).
+ * The reason this class exists is that embedding view controllers by directly adding a view controller's view as 
+ * subview of another view controller's view does not work correctly out of the box. Most view controller events will 
+ * be fired up correctly (e.g viewDidLoad or rotation events), but other simply won't (e.g. viewWillAppear:). This 
+ * means that when adding a view controller's view directly as subview, the viewWillAppear: message has to be sent
+ * manually, which can be easily forgotten or done incorrectly (the same has of course to be done when removing the 
+ * view).
  *
- * The wrapped view controller can be swapped with another one at any time. Simply update the viewController property. 
- * This makes pages or tabs easy to code.
+ * The inset view controller can be swapped with another one at any time. Animations can be supplied for the transition
+ * an inset and the previous one, either using the supplied built-in transitions, or by supplying the sequences of
+ * animation steps to use.
  *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
- * view lifecycle methods first if you override any of them, otherwise the behaviour will be undefined. Similarly 
- * for methods related to interface orientation and initialization methods. This means:
+ * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
+ * behaviour will be undefined:
  *   - initWithNibName:bundle:
  *   - initWithCoder: (for view controllers instantiated from a xib)
  *   - viewWill...
  *   - viewDid...
  *   - shouldAutorotateToInterfaceOrientation: : If the call to the super method returns NO, return NO immediately (this
- *                                               means that the inset cannot rotate).
+ *                                               means that the inset cannot rotate)
  *   - willRotateToInterfaceOrientation:duration:
  *   - willAnimate...
  *   - didRotateFromInterfaceOrientation:
- * and to animation:
  *   - viewAnimation...
  *
  * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rect is known
- * when viewWillAppear: gets called for it. If you need to insert code requiring to know the final view dimensions or changing
- * the screen layout (e.g. hiding a navigation bar), be sure to insert it in viewWillAppear: or events thereafter (in other
- * words, NOT in viewDidLoad).
- * You should not alter the inset view controller's view frame yourself, otherwise the behavior is undefined.
+ * when viewWillAppear: gets called for it, not earlier. If you need to insert code requiring to know the final view dimensions
+ * or changing the screen layout (e.g. hiding a navigation bar), be sure to insert it in viewWillAppear: or events thereafter 
+ * (in other words, NOT in viewDidLoad). You should not alter the inset view controller's view frame or transform yourself, 
+ * otherwise the behavior is undefined.
  *
- * About view reuse: A view controller is retained when set as inset, and released when done. If no other object keeps
+ * About view reuse: A view controller is retained when set as inset, and released when removed. If no other object keeps
  * a strong reference to it, it will get deallocated, and so will its view. This is perfectly fine in general since
- * it contributes to saving resources. But if you need to reuse a view which has already been built (most likely if you
- * you plan to display it later by the same placeholder view controller), you need to have another object retain the view 
- * controller to keep it alive.
- * For example, you might use HLSPlaceholderViewController to switch through N view controllers using toggle buttons. If 
- * those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers. You want
- * to pay the price once, either by creating all views at the beginning, or more probably by using some lazy creation mechanism.
+ * it contributes to saving resources. But if you need to reuse a view controller's view instead of creating it from
+ * scratch again (most likely if you plan to display it later within the same placeholder view controller), you need 
+ * to have another object retain the view controller to keep it alive.
+ * For example, you might use HLSPlaceholderViewController to switch through a set of view controllers using a button bar. 
+ * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, since
+ * this would make navigating between tabs slow. You want to pay the price once, either by creating all views at the 
+ * beginning, or more probably by using some lazy creation mechanism.
  * In such cases, be sure to retain all those view controllers elsewhere (most naturally by the same object which
- * instantiated the placeholder view controller). In such cases, though, you must ensure that this object is capable of
- * releasing the views if memory is critically low. If this object is a view controller, this means you must implement
- * didReceiveMemoryWarning so that cached view controller's views can be set to nil when needed.
+ * instantiates the placeholder view controller). You must then ensure that this owner object is capable of releasing 
+ * the views when memory is critically low. If the owner object is a view controller, it suffices to implement its 
+ * viewDidUnload method and, within it, to set the view property of all cached view controllers to nil.
  *
  * Designated initializer: initWithNibName:bundle:
  */
@@ -124,41 +126,44 @@ typedef enum {
 
 /**
  * Set the view controller to display as inset. A fade out animation can be applied (if not nil) to the view controller
- * which is removed (when the animation ends, the associated view is removed), and a fade in animation can be applied 
- * (if not nil) to the view controller which is installed. In both cases, simply supply the sequence of HLSAnimationSteps
- * to apply
- * This method does not apply any animation if the view controller is not visible or about to be displayed, or if no 
- * inset view controller is installed (insetViewController set to nil) or changed
+ * which is removed, and a fade in animation can be applied (if not nil) to the view controller which is installed. When 
+ * the animation ends, the view associated to the old inset view controller is removed, and the old inset view controller
+ * is released.
+ * To define a transition, simply provide sequences of HLSAnimationSteps which must be applied during the fade out / fade in
+ * animations.
+ * This method does not apply any animation if the placeholder view controller is not visible, or if no inset view controller 
+ * is installed (insetViewController set to nil) or changed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
      withFadeOutAnimationSteps:(NSArray *)fadeOutAnimationSteps
           fadeInAnimationSteps:(NSArray *)fadeInAnimationSteps;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles (default transition duration,
- * which can vary depending on the animation)
+ * Display an inset view controller using one of the available built-in transition styles. The transition duration is set
+ * by the animation itself
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 
 /**
  * Display an inset view controller using one of the available built-in transition styles (the duration can be
- * freely set; it will be distributed evenly on the animation steps composing the animation)
+ * freely set; it will be distributed evenly on the animation steps composing the animation, preserving its original
+ * aspect)
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
 
 /**
- * The view where inset view controller's view must be drawn. Either created programmatically in a subclass' loadView method 
+ * The view where inset view controller's view must be drawn. Must either created programmatically in a subclass' loadView method 
  * or bound to a UIView in Interface Builder
  */
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
 
 /**
  * If set to YES, the inset view controller's view frame is automatically adjusted to match the placeholder bounds. The behavior
- * depends on the autoresizing behavior of the inset view (e.g. it will fulfill the placeholder view when able to stretch in
- * both directions). If set to NO, the inset view is used as is.
+ * depends on the autoresizing behavior of the inset view (for example, if an inset view is able to stretch in both directions,
+ * it will fill the entire placeholder view). If set to NO, the inset view is used as is.
  * Default value is NO
  */
 @property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;

@@ -1,8 +1,5 @@
 HLSAnimationStep.h
 HLSAssert.h
-HLSBusy.h
-HLSBusyManager.h
-HLSBusyObjectSetManager.h
 HLSContainerControllerLoader.h
 HLSConverters.h
 HLSDownloader.h
@@ -10,7 +7,6 @@ HLSDownloaderTools.h
 HLSFeed.h
 HLSFeedFilter.h
 HLSFloat.h
-HLSInsetController.h
 HLSLogger.h
 HLSNotifications.h
 HLSOrientationCloner.h
@@ -47,7 +43,6 @@ HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h
 HLSViewAnimation.h
-HLSViewPlaceholder.h
 HLSWizardViewController.h
 NSData+HLSCompression.h
 NSDate+HLSExtensions.h

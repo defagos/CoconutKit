@@ -14,6 +14,8 @@
 // Forward declarations
 @protocol HLSPageControllerDelegate;
 
+// TODO: Implementation is really sloppy (especially regarding lifecycle events). Implement like HLSPlaceholderViewController
+
 /**
  * Remark: The interface is similar to the one of UITabBarController. But since the number of pages can often be quite large 
  * (which is rarely the case with a tab bar controller), this class makes optionally use of the HLSContainerControllerLoader 
