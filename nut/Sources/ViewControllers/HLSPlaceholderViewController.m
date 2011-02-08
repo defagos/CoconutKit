@@ -163,10 +163,8 @@
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
             if (self.adjustingInset) {
-                // We do not adjust the frame directly here but use a transform. According to UIView's documentation, we must avoid
-                // mixing frame and transforms
-                insetView.transform = [HLSTransform transformFromRect:insetView.frame 
-                                                               toRect:self.placeholderView.bounds];
+                // Cannot apply a transform here; we must adjust the frame for autoresizing behavior to occur
+                self.insetViewController.view.frame = self.placeholderView.bounds;
             }
             
             // Animated
@@ -320,10 +318,8 @@
         // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
         // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
         if (self.adjustingInset) {
-            // We do not adjust the frame directly here but use a transform. According to UIView's documentation, we must avoid
-            // mixing frame and transforms
-            self.insetViewController.view.transform = [HLSTransform transformFromRect:self.insetViewController.view.frame 
-                                                                               toRect:self.placeholderView.bounds];
+            // Cannot apply a transform here; we must adjust the frame for autoresizing behavior to occur
+            self.insetViewController.view.frame = self.placeholderView.bounds;
         }
         
         [self.insetViewController viewWillAppear:animated];
@@ -467,6 +463,7 @@
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                 deltaY:-self.placeholderView.frame.size.height];
             animationStep.duration = 0.4;
+            animationStep.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -475,6 +472,7 @@
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                 deltaY:self.placeholderView.frame.size.height];
             animationStep.duration = 0.4;
+            animationStep.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObject:animationStep];            
             break;
         }
@@ -483,6 +481,7 @@
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
                                                                                                 deltaY:0.f];
             animationStep.duration = 0.4;
+            animationStep.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObject:animationStep];
             break;
         }
@@ -491,6 +490,7 @@
             HLSAnimationStep *animationStep = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
                                                                                                 deltaY:0.f];
             animationStep.duration = 0.4;
+            animationStep.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObject:animationStep];            
             break;
         }
@@ -505,20 +505,30 @@
     // Remark: Animations take place only when the placeholder view controller is visible, these methods are therefore called in such cases only.
     //         This guarantees that the placeholder view frame we use below is well defined     
     switch (transitionStyle) {
-        case HLSTransitionStyleCoverFromBottom: 
+        case HLSTransitionStyleCoverFromBottom: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.4;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
         case HLSTransitionStylePushFromBottom: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:self.placeholderView.frame.size.height];
             animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:-self.placeholderView.frame.size.height];
-            animationStep2.duration = 0.4;
+            animationStep2.duration = 0.31;     // slightly faster than fade out animation for better effect
+            animationStep2.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
             
-        case HLSTransitionStyleCoverFromTop: 
-        case HLSTransitionStylePushFromTop: {
+        case HLSTransitionStyleCoverFromTop: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
                                                                                                  deltaY:-self.placeholderView.frame.size.height];
             animationStep1.duration = 0.;
@@ -528,9 +538,20 @@
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
+        
+        case HLSTransitionStylePushFromTop: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:-self.placeholderView.frame.size.height];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:0.f 
+                                                                                                 deltaY:self.placeholderView.frame.size.height];
+            animationStep2.duration = 0.31;     // slightly faster than fade out animation for better effect
+            animationStep2.curve = UIViewAnimationCurveLinear;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }            
             
-        case HLSTransitionStyleCoverFromLeft:
-        case HLSTransitionStylePushFromLeft: {
+        case HLSTransitionStyleCoverFromLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
                                                                                                  deltaY:0.f];
             animationStep1.duration = 0.;
@@ -540,18 +561,41 @@
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
         }
+        
+        case HLSTransitionStylePushFromLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
+                                                                                                 deltaY:0.f];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
+                                                                                                 deltaY:0.f];
+            animationStep2.duration = 0.31;     // slightly faster than fade out animation for better effect
+            animationStep2.curve = UIViewAnimationCurveLinear;
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }            
             
-        case HLSTransitionStyleCoverFromRight: 
+        case HLSTransitionStyleCoverFromRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
+                                                                                                 deltaY:0.f];
+            animationStep1.duration = 0.;
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
+                                                                                                 deltaY:0.f];
+            animationStep2.duration = 0.4; 
+            return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
+            break;
+        }
+            
         case HLSTransitionStylePushFromRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width 
                                                                                                  deltaY:0.f];
             animationStep1.duration = 0.;
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
                                                                                                  deltaY:0.f];
-            animationStep2.duration = 0.4;
+            animationStep2.duration = 0.31;     // slightly faster than fade out animation for better effect
+            animationStep2.curve = UIViewAnimationCurveLinear;
             return [NSArray arrayWithObjects:animationStep1, animationStep2, nil];
             break;
-        }
+        }            
             
         case HLSTransitionStyleCoverFromUpperLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width 
