@@ -101,22 +101,24 @@ typedef enum {
  */
 @interface HLSPlaceholderViewController : UIViewController <HLSReloadable, HLSViewAnimationDelegate> {
 @private
-    UIViewController *m_insetViewController;
-    BOOL m_insetViewAddedAsSubview;                 // Avoid testing the view controller view property (this triggers view loading,
-                                                    // which we want to precisely control so that it happens when it has to). Test
-                                                    // this boolean value instead, which means that the inset view controller's view
-                                                    // has been added to the placeholder view as subview (which is actually when
-                                                    // we precisely need view loading to occur)
-    CGAffineTransform m_originalInsetViewTransform;
-    CGFloat m_originalInsetViewAlpha;
-    UIViewController *m_oldInsetViewController;
-    CGAffineTransform m_oldOriginalInsetViewTransform;
-    CGFloat m_oldOriginalInsetViewAlpha;
-    UIView *m_placeholderView;
-    LifeCyclePhase m_lifeCyclePhase;                // Which lifecycle phase is the placeholder view controller currently in?
-    BOOL m_adjustingInset;
-    BOOL m_fadeInAnimationComplete;
-    BOOL m_fadeOutAnimationComplete;
+    UIViewController *m_insetViewController;                // The view controller displayed as inset
+    BOOL m_insetViewAddedAsSubview;                         // Avoid testing the view controller view property (this triggers view loading,
+                                                            // which we want to precisely control so that it happens when it has to). Test
+                                                            // this boolean value instead, which means that the inset view controller's view
+                                                            // has been added to the placeholder view as subview (which is actually when
+                                                            // we precisely need view loading to occur)
+    CGAffineTransform m_originalInsetViewTransform;         // Save initial inset view properties that the placeholder might alter to restore
+    CGFloat m_originalInsetViewAlpha;                       // it when it is released
+    UIViewController *m_oldInsetViewController;             // View controller which is being removed. Kept alive during the whole transition 
+                                                            // animation (even if no fade out animation occurs)
+    BOOL m_fadeOutAnimated;                                 // Is the fade out animated?
+    CGAffineTransform m_oldOriginalInsetViewTransform;      // Save the original properties during animation
+    CGFloat m_oldOriginalInsetViewAlpha;                    // (same as above)
+    UIView *m_placeholderView;                              // View onto which the inset view is drawn
+    LifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
+    BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
+    BOOL m_fadeInAnimationComplete;                         // Set to NO when a fade in animation is running
+    BOOL m_fadeOutAnimationComplete;                        // Set to NO when a fade out animation is running
 }
 
 /**
