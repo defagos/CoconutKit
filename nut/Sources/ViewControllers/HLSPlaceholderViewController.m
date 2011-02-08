@@ -247,24 +247,25 @@
     NSArray *fadeOutAnimationSteps = [self fadeOutAnimationStepsForTransitionStyle:transitionStyle viewController:self.insetViewController];
     NSArray *fadeInAnimationSteps = [self fadeInAnimationStepsForTransitionStyle:transitionStyle viewController:insetViewController];
     
-    // Distribute durations evenly among fade out animation steps
+    // Calculate total duration of fade out / fade in animations separately (might be different)
     NSTimeInterval fadeOutDuration = 0.;
     for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
         fadeOutDuration += fadeOutAnimationStep.duration;
     }
-    double fadeOutFactor = duration / fadeOutDuration;
-    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
-        fadeOutAnimationStep.duration *= fadeOutFactor;
-    }
-    
-    // Distribute durations evenly among fade in animation steps
     NSTimeInterval fadeInDuration = 0.;
     for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
         fadeInDuration += fadeInAnimationStep.duration;
     }
-    double fadeInFactor = duration / fadeInDuration;
+    
+    // Find out which factor must be applied to each animation step to preserve the animation appearance for the specified duration
+    double factor = duration / doublemax(fadeOutDuration, fadeInDuration);
+    
+    // Distribute the total duration evenly among fade in animation steps
+    for (HLSAnimationStep *fadeOutAnimationStep in fadeOutAnimationSteps) {
+        fadeOutAnimationStep.duration *= factor;
+    }
     for (HLSAnimationStep *fadeInAnimationStep in fadeInAnimationSteps) {
-        fadeInAnimationStep.duration *= fadeInFactor;
+        fadeInAnimationStep.duration *= factor;
     }    
     
     [self setInsetViewController:insetViewController 
