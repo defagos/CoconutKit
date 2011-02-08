@@ -78,13 +78,15 @@
         return;
     }
     
-    // If animated, reset status tracker
+    // If animated, reset status tracking variables
     if ([fadeOutAnimationSteps count] != 0) {
         m_fadeOutAnimationComplete = NO;
+        m_fadeOutAnimated = YES;
     }
     // Not animated; consider as done
     else {
         m_fadeOutAnimationComplete = YES;
+        m_fadeOutAnimated = NO;
     }
     
     if ([fadeInAnimationSteps count] != 0) {
@@ -96,19 +98,18 @@
     
     // Remove any existing inset first
     if (m_insetViewAddedAsSubview) {
-        // If visible, forward disappearance events
-        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+        // If the container is visible, deal with animation and lifecycle events for the old inset view
+        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {                        
             // Animated
             if ([fadeOutAnimationSteps count] != 0) {
                 // Forward disappearance events
                 [m_insetViewController viewWillDisappear:YES];
                 m_insetViewAddedAsSubview = NO;
                 
-                // Keep a ref to the removed view controller so that it can stay alive until the animation ends; also save the
-                // view controller's view original properties we might have altered to restore them at the end of the animation
+                // Keep a ref to the removed view controller (and save settings) so that it can stay alive until it is removed
                 self.oldInsetViewController = m_insetViewController;
                 m_oldOriginalInsetViewTransform = m_originalInsetViewTransform;
-                m_oldOriginalInsetViewAlpha = m_originalInsetViewAlpha;
+                m_oldOriginalInsetViewAlpha = m_originalInsetViewAlpha;                
                 
                 // Animate
                 HLSViewAnimation *fadeOutViewAnimation = [HLSViewAnimation viewAnimationWithAnimationSteps:fadeOutAnimationSteps];
@@ -120,22 +121,30 @@
             }
             // Not animated
             else {
-                // Forward disappearance events
-                [m_insetViewController viewWillDisappear:NO];
-                m_insetViewAddedAsSubview = NO;
-                
-                // Remove the view
-                [m_insetViewController.view removeFromSuperview];
-                
-                // Forward disappearance events
-                if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
-                    [m_insetViewController viewDidDisappear:NO];
+                // If the fade in is animated, the view will be removed at the end of the fade in animation
+                if ([fadeInAnimationSteps count] != 0) {
+                    // Keep a ref to the removed view controller (and save settings) so that it can stay alive until it is removed
+                    self.oldInsetViewController = m_insetViewController;
+                    m_oldOriginalInsetViewTransform = m_originalInsetViewTransform;
+                    m_oldOriginalInsetViewAlpha = m_originalInsetViewAlpha;
                 }
-                
-                // Restore the original view properties we might have altered during the time the view controller was
-                // set as inset
-                m_insetViewController.view.transform = m_originalInsetViewTransform;
-                m_insetViewController.view.alpha = m_originalInsetViewAlpha;
+                // Otherwise we can get rid of the inset now
+                else {
+                    // Forward disappearance events
+                    [m_insetViewController viewWillDisappear:NO];
+                    m_insetViewAddedAsSubview = NO;
+                    
+                    // Remove the view
+                    [m_insetViewController.view removeFromSuperview];
+                    
+                    // Forward disappearance events
+                    [m_insetViewController viewDidDisappear:NO];
+                    
+                    // Restore the original view properties we might have altered during the time the view controller was
+                    // set as inset
+                    m_insetViewController.view.transform = m_originalInsetViewTransform;
+                    m_insetViewController.view.alpha = m_originalInsetViewAlpha;                 
+                }
             }
         }
     }
@@ -442,10 +451,7 @@
         case HLSTransitionStyleCoverFromBottomLeft:
         case HLSTransitionStyleCoverFromBottomRight: 
         case HLSTransitionStyleEmergeFromCenter: {
-            // Keep the old view alive for the duration of the associated fade in animation
-            HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-            animationStep.duration = 0.4;
-            return [NSArray arrayWithObject:animationStep];
+            return nil;
             break;
         }
             
@@ -706,11 +712,11 @@
     
     // Both animation complete; we can now remove the old view controller's view. This makes animations where the new
     // view controller covers the previous one possible
-    if (m_fadeInAnimationComplete && m_fadeOutAnimationComplete) {
-        // Remove the view
+    if (m_fadeInAnimationComplete && m_fadeOutAnimationComplete) {        
+        // Remove the view and notify
+        [self.oldInsetViewController viewWillDisappear:m_fadeOutAnimated];
         [self.oldInsetViewController.view removeFromSuperview];
-        
-        [self.oldInsetViewController viewDidDisappear:YES];
+        [self.oldInsetViewController viewDidDisappear:m_fadeOutAnimated];
         
         // Restore the original view properties we might have altered during the time the view controller was
         // set as inset
