@@ -123,6 +123,7 @@ typedef enum {
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     LifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
+    UIViewController *m_clonedInsetViewController;          // Holds the new view controller when rotating an inset supporting HLSOrientationCloner
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 

@@ -19,6 +19,7 @@
 - (void)releaseViews;
 
 @property (nonatomic, retain) UIViewController *oldInsetViewController;
+@property (nonatomic, retain) UIViewController *clonedInsetViewController;
 
 - (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
                                         oldInsetViewController:(UIViewController *)oldInsetViewController
@@ -51,6 +52,7 @@
     self.insetViewController = nil;
     self.oldInsetViewController = nil;
     self.placeholderView = nil;
+    self.clonedInsetViewController = nil;
     self.delegate = nil;
     [super dealloc];
 }
@@ -117,6 +119,14 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     // If not changed, nothing to do
     if (m_insetViewController == insetViewController) {
         return;
+    }
+    
+    // Check that the new inset can be displayed for the current orientation
+    if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+        if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
+            logger_error(@"The inset view controller cannot be set because it does not support the current interface orientation");
+            return;
+        }
     }
     
     // Remove any existing inset first
@@ -258,6 +268,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 @synthesize adjustingInset = m_adjustingInset;
 
+@synthesize clonedInsetViewController = m_clonedInsetViewController;
+
 @synthesize delegate = m_delegate;
 
 #pragma mark View lifecycle
@@ -380,48 +392,134 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)
 
-// TODO: HLSOrientationCloner: More difficult that what we have here; we have to keep two references during the rotation:
-//       the references to the view controller and its rotated clones. Both must be sent the rotation events
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return YES;
+{    
+    // Remark: We can not call shouldAutorotateToInterfaceOrientation: for super here (since it returns YES only
+    //         for portrait orientation).
+    
+    // If no inset has been defined, let the placeholder rotate
+    if (! self.insetViewController) {
+        return YES;
+    }
+    
+    return [self.insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
+        || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
-
-#if 0
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {   
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
+    // If no inset has been defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    // If the view controller can rotate by cloning, create the clone now since we must forward all rotation events to it as well
+    if ([self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
+        UIViewController<HLSOrientationCloner> *clonableInsetViewController = self.insetViewController;
+        self.clonedInsetViewController = [clonableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
+    }
+    
+    [self.insetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.clonedInsetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
+//TODO: Avoid 2-step rotation. To make the change smooth (since we do not have the intermediate step to swap views), insert a cross
+//fade animation during the rotation if cloning occurs
+
+#if 0
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
+    // If no inset defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    // Forward to the view controllers first
+    [self.insetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // Now can swap with the clone if any; remember the old inset view controller to keep it alive until the rotation is over
+    if (self.clonedInsetViewController) {
+        [self.clonedInsetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+        
+        self.oldInsetViewController = self.insetViewController;
+        self.insetViewController = self.clonedInsetViewController;
+        
+        // Done with the initial clone strong ref (is now installed!)
+        self.clonedInsetViewController = nil;
+    }
 }
+#endif
 
 - (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 { 
+    [super willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
+    // If no inset defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    // Now can swap with the clone if any; remember the old inset view controller to keep it alive until the rotation is over
+    if (self.clonedInsetViewController) {
+        [self.clonedInsetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+        
+        self.oldInsetViewController = self.insetViewController;
+        self.insetViewController = self.clonedInsetViewController;
+        
+        // Done with the initial clone strong ref (is now installed!)
+        self.clonedInsetViewController = nil;
+    }
+    
+    [self.oldInsetViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.insetViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 - (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    [super didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];
+    
+    // If no inset defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    [self.oldInsetViewController didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];
+    [self.insetViewController didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];
     
 }
 
 - (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [super willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
     
+    // If no inset defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    [self.oldInsetViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
+    [self.insetViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
+    // If no inset defined, we are done
+    if (! self.insetViewController) {
+        return;
+    }
+    
+    [self.oldInsetViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.insetViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    // Done with the old inset
+    self.oldInsetViewController = nil;
 }
-
-#endif
-
-
 
 #pragma mark Built-in transitions (return an array of HLSTwoViewAnimationStepDefinition objects)
 
