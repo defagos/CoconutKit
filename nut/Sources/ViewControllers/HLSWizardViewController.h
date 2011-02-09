@@ -14,15 +14,15 @@
 /**
  * Controller made of pages building a wizard interface. Each page is a separate view controller you must
  * provide. The appearance of the view controller (as well as its behavior under rotation) is customized by 
- * inheriting from it. As for UIViewController, this class is therefore not meant to be instantiated.
+ * inheriting from it. As for UIViewController, this class is therefore not meant to be instantiated directly.
  *
  * As for UIViewController, if init is called instead of the designated initalizer, a xib with the same name
  * as the derived class will be searched in the main bundle (the interface can also be created via code, of
  * course).
  *
  * The appearance of the wizard is freely customized using the IBOutlets defined by its public interface,
- * either hooking them using Interface Builder or via code. No cancel is provided, the subclass can decide
- * whether it wants to display such a button or whether this button will appear in a navigation bar (if
+ * either hooking them using Interface Builder or via code. No cancel mechanism is provided, the subclass can
+ * decide whether it wants to display such a button or whether this button will appear in a navigation bar (if
  * any is available) or on its own view.
  *
  * When trying to move to a next page, and if the view controller currently displayed implements the
@@ -39,7 +39,6 @@
     UIButton *m_doneButton;
     NSArray *m_viewControllers;
     NSInteger m_currentPage;
-    id<HLSWizardViewControllerDelegate> m_delegate;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *previousButton;
@@ -47,8 +46,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *doneButton;
 
 @property (nonatomic, retain) NSArray *viewControllers;
-
-@property (nonatomic, assign) id<HLSWizardViewControllerDelegate> delegate;
 
 /**
  * Go to some page; hopping in forward direction will block if some page in between is not valid
@@ -58,6 +55,7 @@
 @end
 
 @protocol HLSWizardViewControllerDelegate <NSObject>
+@optional
 
 - (void)wizardViewController:(HLSWizardViewController *)wizardViewController
               didDisplayPage:(NSUInteger)page;

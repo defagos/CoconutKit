@@ -47,6 +47,9 @@ typedef enum {
     LifeCyclePhaseEnumSize = LifeCyclePhaseEnumEnd - LifeCyclePhaseEnumBegin
 } LifeCyclePhase;
 
+// Forward declarations
+@protocol HLSPlaceholderViewControllerDelegate;
+
 /**
  * View controllers which must be able to embed another view controller as subview can inherit from this class
  * to benefit from correct event propagation (e.g. view lifecycle events, rotation events, etc.). Moreover, this class
@@ -120,6 +123,7 @@ typedef enum {
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     LifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
+    id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 
 /**
@@ -164,6 +168,18 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  */
 @property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;
 
-// TODO: Add a delegate mechanism similar to the one of UINavigationController
+@property (nonatomic, assign) id<HLSPlaceholderViewControllerDelegate> delegate;
+
+@end
+
+@protocol HLSPlaceholderViewControllerDelegate <NSObject>
+@optional
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willShowInsetViewController:(UIViewController *)viewControlller
+                         animated:(BOOL)animated;
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didShowInsetViewController:(UIViewController *)viewControlller
+                         animated:(BOOL)animated;
 
 @end

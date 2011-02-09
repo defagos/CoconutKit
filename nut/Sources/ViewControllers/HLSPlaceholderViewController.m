@@ -51,6 +51,7 @@
     self.insetViewController = nil;
     self.oldInsetViewController = nil;
     self.placeholderView = nil;
+    self.delegate = nil;
     [super dealloc];
 }
 
@@ -182,6 +183,13 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
             
             // Animated
             if ([twoViewAnimationStepDefinitions count] != 0) {
+                // Notify the delegate
+                if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
+                    [self.delegate placeholderViewController:self
+                                 willShowInsetViewController:m_insetViewController 
+                                                    animated:YES];
+                }
+                
                 // Forward appearance events
                 [m_insetViewController viewWillAppear:YES];
                 m_insetViewAddedAsSubview = YES;
@@ -190,16 +198,30 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
                 [self.placeholderView addSubview:insetView];
             }
             // Not animated
-            else {
+            else {                
+                // Notify the delegate
+                if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
+                    [self.delegate placeholderViewController:self
+                                 willShowInsetViewController:m_insetViewController 
+                                                    animated:NO];
+                } 
+                
                 // Forward appearance events
                 [m_insetViewController viewWillAppear:NO];
-                m_insetViewAddedAsSubview = YES;
+                m_insetViewAddedAsSubview = YES;                
                 
                 // Add the inset
                 [self.placeholderView addSubview:insetView];
                 
+                // Notify the delegate
+                if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
+                    [self.delegate placeholderViewController:self
+                                  didShowInsetViewController:m_insetViewController 
+                                                    animated:NO];
+                }
+                
                 // Forward appearance events
-                [m_insetViewController viewDidAppear:NO];                
+                [m_insetViewController viewDidAppear:NO];          
             }
         }
         // Not visible or disappearing
@@ -235,6 +257,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 @synthesize placeholderView = m_placeholderView;
 
 @synthesize adjustingInset = m_adjustingInset;
+
+@synthesize delegate = m_delegate;
 
 #pragma mark View lifecycle
 
@@ -280,6 +304,13 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
             self.insetViewController.view.frame = self.placeholderView.bounds;
         }
         
+        // Notify the delegate
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
+            [self.delegate placeholderViewController:self
+                         willShowInsetViewController:self.insetViewController 
+                                            animated:animated];
+        } 
+        
         [self.insetViewController viewWillAppear:animated];
     }    
     
@@ -292,6 +323,13 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     [super viewDidAppear:animated];
     
     if (m_insetViewAddedAsSubview) {
+        // Notify the delegate
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
+            [self.delegate placeholderViewController:self
+                          didShowInsetViewController:self.insetViewController 
+                                            animated:animated];
+        }        
+        
         [self.insetViewController viewDidAppear:animated];
     }
     
@@ -382,6 +420,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 }
 
 #endif
+
+
 
 #pragma mark Built-in transitions (return an array of HLSTwoViewAnimationStepDefinition objects)
 
@@ -659,8 +699,15 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     m_oldOriginalInsetViewTransform = CGAffineTransformIdentity;
     m_oldOriginalInsetViewAlpha = 0.f;
     
+    // Notify the delegate
+    if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
+        [self.delegate placeholderViewController:self
+                      didShowInsetViewController:self.insetViewController 
+                                        animated:YES];
+    } 
+    
     // Forward appearance event of the new inset
-    [m_insetViewController viewDidAppear:YES];
+    [self.insetViewController viewDidAppear:YES];
 }
 
 @end

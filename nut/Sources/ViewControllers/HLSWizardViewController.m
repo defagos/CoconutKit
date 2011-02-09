@@ -79,7 +79,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.delegate wizardViewController:self didDisplayPage:self.currentPage];
+    if ([self.delegate respondsToSelector:@selector(wizardViewController:didDisplayPage:)]) {
+        id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
+        [delegate wizardViewController:self didDisplayPage:self.currentPage];
+    }
 }
 
 - (void)viewDidUnload
@@ -135,11 +138,11 @@
     [self reloadData];
     
     // Notify the delegate
-    [self.delegate wizardViewController:self didDisplayPage:m_currentPage];
+    if ([self.delegate respondsToSelector:@selector(wizardViewController:didDisplayPage:)]) {
+        id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
+        [delegate wizardViewController:self didDisplayPage:m_currentPage];
+    }
 }
-
-
-@synthesize delegate = m_delegate;
 
 #pragma mark HLSReloadable protocol implementation
 
@@ -255,7 +258,10 @@
     if (! [self validatePage:self.currentPage]) {
         return;
     }
-    [self.delegate wizardViewControllerHasClickedDoneButton:self];
+    if ([self.delegate respondsToSelector:@selector(wizardViewControllerHasClickedDoneButton:)]) {
+        id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
+        [delegate wizardViewControllerHasClickedDoneButton:self];
+    }
 }
 
 @end
