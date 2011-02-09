@@ -83,6 +83,8 @@ typedef enum {
  *   - willAnimate...
  *   - didRotateFromInterfaceOrientation:
  *   - viewAnimation...
+ * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
+ * in subclasses (it will be ignored, see UIViewController documentation).
  *
  * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rect is known
  * when viewWillAppear: gets called for it, not earlier. If you need to insert code requiring to know the final view dimensions
@@ -123,7 +125,6 @@ typedef enum {
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     LifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
-    UIViewController *m_clonedInsetViewController;          // Holds the new view controller when rotating an inset supporting HLSOrientationCloner
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 
