@@ -6,14 +6,16 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+#import "HLSViewAnimationStep.h"
+
 /**
- * An animation is made of animation steps, moving a view within its superview from a position into another one (and maybe animating 
- * other animatable properties as well during this process). An animation object simply applies animation steps onto the view
- * it animates. Each step is applied to the state of the animation as yielded by the previous animation step.
+ * An animation step (HLSAnimationStep) is the combination of several view animation steps (HLSViewAnimationStep) applied
+ * to a set of views, and represent the collective set of changes applied to these views during some time interval. An 
+ * animation (HLSAnimation) is then simply a collection of animation steps.
  *
- * Several convenience constructors are available to help you create animation steps without requiring you to calculate coordinates
- * explicitly (you can if you require this flexibility, of course). After you have created a step object, you can use the other accessors
- * to set other animatable properties or animation settings.
+ * Several convenience constructors are available to help you create animation steps for common cases, most notably
+ * when a single view is involved (in such cases, you do no really want to instantiate view animation step objects
+ * individually, do you?)
  *
  * Remark: This class was initially named HLSAnimationFrame, but was renamed to avoid confusion with the UIView frame property
  *         (which is the view property an animation step usually alters!)
@@ -22,42 +24,65 @@
  */
 @interface HLSAnimationStep : NSObject {
 @private
-    CGAffineTransform m_transform;
-    CGFloat m_alphaVariation;
+    NSMutableArray *m_viewKeys;                             // track in which order views were added to the animation step
+    NSMutableDictionary *m_viewToViewAnimationStepMap;      // map a UIView objects to the view animation step to be applied on it
     NSTimeInterval m_duration;
     UIViewAnimationCurve m_curve;
     NSString *m_tag;
 }
 
 /**
- * Convenience constructor for an animation step with default settings
+ * Convenience constructor for an animation step with default settings and no view to animate
  */
 + (HLSAnimationStep *)animationStep;
 
 /**
- * Animation step moving a view between two frames. Both frames must describe positions of the view to animate
- * relative to its superview (otherwise the result of the animation step is undefined)
+ * Animation step moving a single view between two frames. Both frames must describe positions of the view to animate
+ * in the coordinate system of its superview (otherwise the result of the animation step is undefined)
  */
-+ (HLSAnimationStep *)animationStepAnimatingViewFromFrame:(CGRect)fromFrame toFrame:(CGRect)toFrame;
++ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
+                                       fromFrame:(CGRect)fromFrame 
+                                         toFrame:(CGRect)toFrame;
+
++ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
+                                       fromFrame:(CGRect)fromFrame 
+                                         toFrame:(CGRect)toFrame
+                              withAlphaVariation:(CGFloat)alphaVariation;
 
 /**
  * Animation step applying a translation to a view frame
  */
-+ (HLSAnimationStep *)animationStepTranslatingViewWithDeltaX:(CGFloat)deltaX
-                                                      deltaY:(CGFloat)deltaY;
++ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
+                                        withDeltaX:(CGFloat)deltaX
+                                            deltaY:(CGFloat)deltaY;
+
++ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
+                                        withDeltaX:(CGFloat)deltaX
+                                            deltaY:(CGFloat)deltaY
+                                    alphaVariation:(CGFloat)alphaVariation;
 
 /**
- * The affine transformation which must be applied during the step
- * Default value is the identity
+ * Animation step varying the alpha of a view
  */
-@property (nonatomic, assign) CGAffineTransform transform;
++ (HLSAnimationStep *)viewAnimationChangingView:(UIView *)view
+                             withAlphaVariation:(CGFloat)alphaVariation;
 
 /**
- * Alpha increment or decrement to be applied during the animation step. Any value between 1.f and -1.f can be provided, 
- * though you should ensure that animation steps never add to a value outside [0, 1] during the animation.
- * Default value is 0.f
+ * Setting a view animation step for a view. Only one animation step can be defined at most for a view during
+ * an animation step. The view is not retained. The order in which view animation steps are added is important
+ * if your animation changes their z-ordering (refer to the HLSAnimation bringToFront property documentation)
  */
-@property (nonatomic, assign) CGFloat alphaVariation;
+- (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view;
+
+/**
+ * All views changed by the animation, returned in the order they were added to the animation step object
+ */
+- (NSArray *)views;
+
+/**
+ * Return the view animation step defined for a view, or nil if none is found
+ */
+- (HLSViewAnimationStep *)viewAnimationStepForView:(UIView *)view;
 
 /**
  * Animation step settings
