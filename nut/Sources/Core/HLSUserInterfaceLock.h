@@ -7,6 +7,12 @@
 //
 
 /**
+ * Singleton class for preventing / allowing user interface interaction. To maximize locking abilities, the
+ * UIWindow makeKeyAndVisible method used to install the main window should be called first in the
+ * application:didFinishLaunchingWithOptions: method of your application delegate. This is required since
+ * locking is achieved by installing a transparent view on top of the main window. The sooner it is available,
+ * the better.
+ *
  * Designated initializer: init
  */
 @interface HLSUserInterfaceLock : NSObject {
