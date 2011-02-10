@@ -7,7 +7,12 @@
 //
 
 // Page control constants
-#define PAGE_CONTROL_STD_HEIGHT                     20.f
+extern const CGFloat kPageControlStandardHeight;
 
 // Search bar constants
-#define SEARCH_BAR_STD_HEIGHT                       44.f
+extern const CGFloat kSearchBarStandardHeight;
+
+// Table view cell constants
+extern const CGFloat kTableViewCellStandardHeight;
+
+

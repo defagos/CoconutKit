@@ -35,7 +35,7 @@
         self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.f,
                                                                         0.f,
                                                                         applicationFrame.size.width, 
-                                                                        SEARCH_BAR_STD_HEIGHT)]
+                                                                        kSearchBarStandardHeight)]
                           autorelease];
         self.searchBar.placeholder = NSLocalizedStringFromTable(@"Search", @"nut_Localizable", @"Search");
         self.searchBar.delegate = self;

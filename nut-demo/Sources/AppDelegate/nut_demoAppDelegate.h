@@ -6,8 +6,12 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+// Forward declarations
+@class nut_demoApplication;
+
 @interface nut_demoAppDelegate : NSObject <UIApplicationDelegate> {
 @private
+    nut_demoApplication *m_application;
     UIWindow *m_window;
 }
 

@@ -1,6 +1,6 @@
 //
 //  HLSStandardTableViewCell.m
-//  FIVB
+//  nut
 //
 //  Created by Samuel Défago on 8/21/10.
 //  Copyright 2010 Hortis. All rights reserved.
@@ -8,6 +8,7 @@
 
 #import "HLSStandardTableViewCell.h"
 
+#import "HLSStandardWidgetConstants.h"
 #import <objc/runtime.h>
 
 #pragma mark Static methods
@@ -16,33 +17,31 @@
 
 #pragma mark Factory methods
 
-+ (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView
++ (UITableViewCell *)tableViewCellFromXibFileWithName:(NSString *)xibFileName forTableView:(UITableView *)tableView
 {
-    // Get the class name (inheritance is taken into account)
-    NSString *className = [NSString stringWithUTF8String:class_getName([self class])];
+    // Try to find if a cell is available for the cell class identifier
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:className];
+    // If not, create one lazily from xib
     if (! cell) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil];
+        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
         cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
     }
     
     return cell;
 }
 
-#pragma mark Object creation and destruction
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
++ (UITableViewCell *)tableViewCellWithStyle:(UITableViewCellStyle)style forTableView:(UITableView *)tableView
 {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+    // Try to find if a cell is available for the cell class identifier
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
+    
+    // If not, create one lazily
+    if (! cell) {
+        cell = [[[self class] alloc] initWithStyle:style reuseIdentifier:[self identifier]];
     }
-    return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
+    
+    return cell;    
 }
 
 #pragma mark Cell customization
@@ -57,6 +56,19 @@
     if (selectedBackgroundImageName) {
         self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedBackgroundImageName]] autorelease];
     }
+}
+
+#pragma mark Class methods
+
++ (NSString *)identifier
+{
+    // Use the class name by default
+    return [NSString stringWithUTF8String:class_getName([self class])];
+}
+
++ (CGFloat)height
+{
+    return kTableViewCellStandardHeight;
 }
 
 @end

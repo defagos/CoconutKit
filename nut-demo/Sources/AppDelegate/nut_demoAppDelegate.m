@@ -8,17 +8,28 @@
 
 #import "nut_demoAppDelegate.h"
 
+#import "nut_demoApplication.h"
+
+@interface nut_demoAppDelegate ()
+
+@property (nonatomic, retain) nut_demoApplication *application;
+
+@end
+
 @implementation nut_demoAppDelegate
 
 #pragma mark Object construction and destruction
 
 - (void)dealloc
 {
+    self.application = nil;
     self.window = nil;
     [super dealloc];
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize application = m_application;
 
 @synthesize window = m_window;
 
@@ -28,7 +39,9 @@
 {    
     [self.window makeKeyAndVisible];
     
-    
+    self.application = [[[nut_demoApplication alloc] init] autorelease];
+    UIViewController *rootViewController = [self.application viewController];
+    [self.window addSubview:rootViewController.view];
     
     return YES;
 }

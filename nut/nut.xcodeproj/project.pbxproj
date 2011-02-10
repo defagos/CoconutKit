@@ -107,6 +107,7 @@
 		6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */; };
 		6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */; };
 		6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */; };
+		6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */; };
 		6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */; };
 		6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */; };
 		6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */; };
@@ -219,6 +220,7 @@
 		6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTwoViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
 		6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSOneViewAnimationStepDefinition.m; sourceTree = "<group>"; };
+		6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardWidgetConstants.m; sourceTree = "<group>"; };
 		6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSCompression.h"; sourceTree = "<group>"; };
 		6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSCompression.m"; sourceTree = "<group>"; };
 		6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSHash.h"; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
 				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
+				6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */,
 				6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */,
 				6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */,
 				6F2863051265A65300D04F08 /* HLSValidable.h */,
@@ -643,6 +646,7 @@
 				6F3D04071301D901009ACE4D /* HLSAnimation.m in Sources */,
 				6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */,
 				6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */,
+				6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

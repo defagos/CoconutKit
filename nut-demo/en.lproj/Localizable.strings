@@ -1,0 +1,19 @@
+/* 
+   Localizable.strings
+   nut-demo
+
+   Created by Samuel Défago on 2/10/11.
+   Copyright 2011 Hortis. All rights reserved.
+ */
+
+"Animation"="Animation";
+"Demos"="Demos";
+"Downloads"="Downloads";
+"Multiple view animation"="Multiple view animation";
+"Parallel processing"="Parallel processing";
+"Single view animation"="Single view animation";
+"Table view cells"="Table view cells";
+"Tasks"="Tasks";
+"Text fields"="Text fields";
+"Views"="Views";
+"View controllers"="View controllers";

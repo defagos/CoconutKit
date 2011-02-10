@@ -66,7 +66,7 @@
         m_maximizedPortrait = NO;
         m_maximizedLandscape = NO;
         m_firstAppearance = YES;
-        m_pageControlHeight = PAGE_CONTROL_STD_HEIGHT;
+        m_pageControlHeight = kPageControlStandardHeight;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(statusBarFrameChanged:) 
