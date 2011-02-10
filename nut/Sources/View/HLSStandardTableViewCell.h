@@ -6,37 +6,45 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Convenience macro for creating a cell of a given class using a xib having the same name as the class
-#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB(className, tableView)                               (className *)[className tableViewCellFromXibFileWithName:className forTableView:tableView]
+// Convenience factory macro for creating a custom cell of a given class using a xib having the same name as the class
+// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_FROM_XIB(SomeCellClass, tableView)
+#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB(className, tableView) \
+    (className *)[className tableViewCellFromXibFileWithName:@#className forTableView:tableView]
 
-// Convenience macro for creating a cell of a given class using a xib with arbitrary name
-#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB_WITH_NAME(className, tableView, xibFileName)        (className *)[className tableViewCellFromXibFileWithName:xibFileName forTableView:tableView]
+// Convenience factory macro for creating a custom cell of a given class using a xib with arbitrary name
+// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_FROM_XIB_WITH_NAME(SomeCellClass, tableView, @"CellLayout")
+#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB_WITH_NAME(className, tableView, xibFileName) \
+    (className *)[className tableViewCellFromXibFileWithName:xibFileName forTableView:tableView]
 
-// Convenience macro for creating a cell programmatically without a xib
-#define CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(className, style, tableView)                (className *)[className tableViewCellWithStyle:style forTableView:tableView]
+// Convenience factory macro for creating a custom cell programmatically without a xib (cell created with default style)
+// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(SomeCellClass, tableView)
+#define CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(className, tableView) \
+    (className *)[className tableViewCellWithStyle:UITableViewCellStyleDefault forTableView:tableView]
 
-// Convenience macro for creating a simple built-in cell. No need for subclassing HLSStandardTableViewCell, but with limited customization abilities
-#define STANDARD_TABLE_VIEW_CELL(style, tableView)                                          [HLSStandardTableViewCell tableViewCellWithStyle:style forTableView:tableView]
-
-// Convenience macro for retrieving the height of a custom cell
+// Convenience factory macro for retrieving the height of a custom cell
 #define CUSTOM_TABLE_VIEW_CELL_HEIGHT(className)                                            [className height]
 
-// Convenience macro for retrieving the height of a standard cell
-#define STANDARD_TABLE_VIEW_CELL_HEIGHT()                                                   [HLSStandardTableViewCell height]
+// Convenience factory macro for creating a simple cell (= not from a subclass). No need for subclassing HLSStandardTableViewCell, but with limited customization abilities
+// Example: SomeCellClass *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleSubtitle, tableView)
+#define SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(style, tableView) \
+    (HLSStandardTableViewCell *)[HLSStandardTableViewCell tableViewCellWithStyle:style forTableView:tableView]
+
+// Convenience factory macro for retrieving the height of a simple cell
+#define SIMPLE_TABLE_VIEW_CELL_HEIGHT()                                                     [HLSStandardTableViewCell height]
 
 /**
  * Class for easier table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
- * every time you instantiate cells. 
+ * every time you instantiate cells. This class also forces centralization of common class cell properties.
  *
- * To make working with custom cells easier, just inherit from this class. This forces you to define cell properties in a
- * standard and centralized way (namely in the cell implementation file), instead of putting redundant code in all
- * table view controllers which use those cells.
+ * To create custom cells, just inherit from this class. The subclass can override the height and identifier methods
+ * if it needs to. Subclasses may layout their content either through code or using a xib file. Two kinds of factory
+ * macros are provided to support these cases.
  *
- * Use the factory methods for creating a cell in a standard way as well (i.e. with an identifier for caching). The
- * cell can be instantiated via code or from a xib file.
+ * Note that subclassing HLSStandardTableViewCell is not necessary if you do not need cell customization ("simple cell"). 
+ * In such cases, you can simply instantiate HLSStandardTableViewCell objects using the simple cell factory macros.
  *
  * Designated initializer: initWithStyle:reuseIdentifier:
- * (You usually do not need to create a cell manually. Use the factory methods instead)
+ * (You usually do not need to create a cell manually. Use the factory macros instead)
  */
 @interface HLSStandardTableViewCell : UITableViewCell {
 @private

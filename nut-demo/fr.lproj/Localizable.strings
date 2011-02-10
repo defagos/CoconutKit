@@ -7,10 +7,15 @@
  */
  
 "Animation"="Animation";
+"Custom cell created programmatically"="Cellule personnalisée créée par le code";
+"Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
 "Demos"="Démos";
+"Details"="Détails";
 "Downloads"="Téléchargements";
 "Multiple view animation"="Animation de plusieurs vues";
 "Parallel processing"="Calculs en parallèle";
+"Simple cell, default style"="Cellule basique, style par défaut";
+"Simple cell, subtitle"="Cellule basique, avec sous-titre";
 "Single view animation"="Animation d'une seule vue";
 "Table view cells"="Cellules";
 "Tasks"="Tâches";

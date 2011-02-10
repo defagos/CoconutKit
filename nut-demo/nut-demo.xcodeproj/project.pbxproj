@@ -21,6 +21,13 @@
 		6FBDA78E1303EA81004B9617 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA78D1303EA81004B9617 /* DemosListViewController.m */; };
 		6FBDA7971303EAD3004B9617 /* nut_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7961303EAD3004B9617 /* nut_demoApplication.m */; };
 		6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
+		6FBDA8C713041CB1004B9617 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA8C613041CB1004B9617 /* TableViewCellsDemoViewController.m */; };
+		6FBDA8FF130426DC004B9617 /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA8FE130426DC004B9617 /* ProgrammaticTableViewCell.m */; };
+		6FBDA90B13042A84004B9617 /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA90A13042A84004B9617 /* XibTableViewCell.m */; };
+		6FBDA91113042B0B004B9617 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA91013042B0B004B9617 /* XibTableViewCell.xib */; };
+		6FBDA9261304315B004B9617 /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */; };
+		6FBDA9271304315B004B9617 /* cell_bkgr_brown_large_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */; };
+		6FBDA9281304315B004B9617 /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9251304315B004B9617 /* icn_bookmark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +52,16 @@
 		6FBDA7961303EAD3004B9617 /* nut_demoApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoApplication.m; sourceTree = "<group>"; };
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FBDA8C513041CB1004B9617 /* TableViewCellsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellsDemoViewController.h; sourceTree = "<group>"; };
+		6FBDA8C613041CB1004B9617 /* TableViewCellsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellsDemoViewController.m; sourceTree = "<group>"; };
+		6FBDA8FD130426DC004B9617 /* ProgrammaticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgrammaticTableViewCell.h; sourceTree = "<group>"; };
+		6FBDA8FE130426DC004B9617 /* ProgrammaticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgrammaticTableViewCell.m; sourceTree = "<group>"; };
+		6FBDA90913042A84004B9617 /* XibTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibTableViewCell.h; sourceTree = "<group>"; };
+		6FBDA90A13042A84004B9617 /* XibTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibTableViewCell.m; sourceTree = "<group>"; };
+		6FBDA91013042B0B004B9617 /* XibTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XibTableViewCell.xib; sourceTree = "<group>"; };
+		6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large.png; sourceTree = "<group>"; };
+		6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large_selected.png; sourceTree = "<group>"; };
+		6FBDA9251304315B004B9617 /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +92,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDA9201304315B004B9617 /* Resources */,
 				6FBDA71D1303E481004B9617 /* Sources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -130,7 +148,10 @@
 		6FBDA7231303E481004B9617 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDA8BD13041C43004B9617 /* Animation */,
 				6FBDA79E1303EDAB004B9617 /* Common */,
+				6FBDA8BE13041C43004B9617 /* Task */,
+				6FBDA8BF13041C43004B9617 /* View */,
 				6FBDA7241303E481004B9617 /* ViewControllers */,
 			);
 			path = Demos;
@@ -244,6 +265,92 @@
 			path = PortraitOnlyViewController;
 			sourceTree = "<group>";
 		};
+		6FBDA8BD13041C43004B9617 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		6FBDA8BE13041C43004B9617 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		6FBDA8BF13041C43004B9617 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA8C313041CA0004B9617 /* TableViewCells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6FBDA8C313041CA0004B9617 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA8F51304268E004B9617 /* ProgrammaticTableViewCell */,
+				6FBDA8C413041CA0004B9617 /* TableViewCellsDemoViewController */,
+				6FBDA8F61304268E004B9617 /* XibTableViewCell */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6FBDA8C413041CA0004B9617 /* TableViewCellsDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA8C513041CB1004B9617 /* TableViewCellsDemoViewController.h */,
+				6FBDA8C613041CB1004B9617 /* TableViewCellsDemoViewController.m */,
+			);
+			path = TableViewCellsDemoViewController;
+			sourceTree = "<group>";
+		};
+		6FBDA8F51304268E004B9617 /* ProgrammaticTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA8FD130426DC004B9617 /* ProgrammaticTableViewCell.h */,
+				6FBDA8FE130426DC004B9617 /* ProgrammaticTableViewCell.m */,
+			);
+			path = ProgrammaticTableViewCell;
+			sourceTree = "<group>";
+		};
+		6FBDA8F61304268E004B9617 /* XibTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA90913042A84004B9617 /* XibTableViewCell.h */,
+				6FBDA90A13042A84004B9617 /* XibTableViewCell.m */,
+				6FBDA91013042B0B004B9617 /* XibTableViewCell.xib */,
+			);
+			path = XibTableViewCell;
+			sourceTree = "<group>";
+		};
+		6FBDA9201304315B004B9617 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA9211304315B004B9617 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6FBDA9211304315B004B9617 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA9221304315B004B9617 /* Miscellaneous */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6FBDA9221304315B004B9617 /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */,
+				6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */,
+				6FBDA9251304315B004B9617 /* icn_bookmark.png */,
+			);
+			path = Miscellaneous;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +406,10 @@
 				6FBDA75A1303E6A1004B9617 /* nut_Localizable.strings in Resources */,
 				6FBDA75B1303E6A1004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */,
+				6FBDA91113042B0B004B9617 /* XibTableViewCell.xib in Resources */,
+				6FBDA9261304315B004B9617 /* cell_bkgr_brown_large.png in Resources */,
+				6FBDA9271304315B004B9617 /* cell_bkgr_brown_large_selected.png in Resources */,
+				6FBDA9281304315B004B9617 /* icn_bookmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +425,9 @@
 				6FBDA7581303E6A1004B9617 /* nut_bootstrap.m in Sources */,
 				6FBDA78E1303EA81004B9617 /* DemosListViewController.m in Sources */,
 				6FBDA7971303EAD3004B9617 /* nut_demoApplication.m in Sources */,
+				6FBDA8C713041CB1004B9617 /* TableViewCellsDemoViewController.m in Sources */,
+				6FBDA8FF130426DC004B9617 /* ProgrammaticTableViewCell.m in Sources */,
+				6FBDA90B13042A84004B9617 /* XibTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

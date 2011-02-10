@@ -8,6 +8,8 @@
 
 #import "DemosListViewController.h"
 
+#import "TableViewCellsDemoViewController.h"
+
 // Categories
 typedef enum {
     DemoCategoryIndexEnumBegin = 0,
@@ -150,7 +152,8 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = STANDARD_TABLE_VIEW_CELL(UITableViewCellStyleDefault, tableView);
+    UITableViewCell *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleDefault, tableView);
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
@@ -254,12 +257,108 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return STANDARD_TABLE_VIEW_CELL_HEIGHT();
+    return SIMPLE_TABLE_VIEW_CELL_HEIGHT();
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    switch (indexPath.section) {
+        case DemoCategoryIndexAnimation: {
+            switch (indexPath.row) {
+                case AnimationDemoIndexSingleView: {
+
+                    break;
+                }
+                    
+                case AnimationDemoIndexMultipleViews: {
+
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexTask: {
+            switch (indexPath.row) {
+                case TaskDemoIndexParallelProcessing: {
+
+                    break;
+                }
+                    
+                case TaskDemoIndexDownloads: {
+
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexView: {
+            switch (indexPath.row) {
+                case ViewDemoIndexTableViewCells: {
+                    TableViewCellsDemoViewController *demoViewController = [[[TableViewCellsDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewDemoIndexTextFields: {
+
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexViewControllers: {
+            switch (indexPath.row) {
+                case ViewControllersDemoIndexPlaceholderViewController: {
+
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexWizardViewController: {
+
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexTableSearchDisplayViewController: {
+
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexPageController: {
+
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        default: {
+            return;
+            break;
+        }
+    }
 }
 
 @end
