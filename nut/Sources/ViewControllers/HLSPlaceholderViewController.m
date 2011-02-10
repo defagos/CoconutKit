@@ -696,6 +696,25 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
             break;
         } 
             
+        case HLSTransitionStyleEmergeFromCenter:  {
+            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
+            HLSViewAnimationStep *secondViewAnimationStep1 = [HLSViewAnimationStep viewAnimationStep];
+            secondViewAnimationStep1.transform = CGAffineTransformMakeScale(0.01f, 0.01f);      // cannot use 0.f, otherwise infinite matrix elements
+            animationStepDefinition1.secondViewAnimationStep = secondViewAnimationStep1;
+            animationStepDefinition1.duration = 0.;
+            
+            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
+            HLSViewAnimationStep *secondViewAnimationStep2 = [HLSViewAnimationStep viewAnimationStep];
+            secondViewAnimationStep2.transform = CGAffineTransformInvert(secondViewAnimationStep1.transform);
+            animationStepDefinition2.secondViewAnimationStep = secondViewAnimationStep2;
+            animationStepDefinition2.duration = 0.4;
+            
+            return [NSArray arrayWithObjects:animationStepDefinition1,
+                    animationStepDefinition2,
+                    nil];
+            break;
+        }
+            
         default: {
             logger_error(@"Unknown transition style");
             return nil;
