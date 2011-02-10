@@ -31,6 +31,7 @@
     BOOL m_lockingUI;
     BOOL m_bringToFront;
     BOOL m_alwaysOnTop;
+    BOOL m_firstStep;
     id<HLSAnimationDelegate> m_delegate;
 }
 
@@ -83,7 +84,8 @@
 @protocol HLSAnimationDelegate <NSObject>
 @optional
 
-- (void)animationFinished:(HLSAnimation *)animation;
+- (void)animationWillStart:(HLSAnimation *)animation;
+- (void)animationDidStop:(HLSAnimation *)animation;
 - (void)animationStepFinished:(HLSAnimationStep *)animationStep;
 
 @end

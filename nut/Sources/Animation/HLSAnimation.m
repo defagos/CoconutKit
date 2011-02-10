@@ -25,6 +25,7 @@
 
 - (NSArray *)reverseAnimationSteps;
 
+- (void)animationWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
@@ -115,6 +116,7 @@
     [UIView setAnimationDuration:animationStep.duration];
     [UIView setAnimationCurve:animationStep.curve];
     
+    [UIView setAnimationWillStartSelector:@selector(animationWillStart:context:)];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationDelegate:self];
     
@@ -158,6 +160,7 @@
     // First call?
     if (! self.animationStepsEnumerator) {
         self.animationStepsEnumerator = [self.animationSteps objectEnumerator];
+        m_firstStep = YES;
     }
     
     // Proceeed with the next step (if any)
@@ -174,8 +177,8 @@
             [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
         }
         
-        if ([self.delegate respondsToSelector:@selector(animationFinished:)]) {
-            [self.delegate animationFinished:self];
+        if ([self.delegate respondsToSelector:@selector(animationDidStop:)]) {
+            [self.delegate animationDidStop:self];
         }
     }    
 }
@@ -242,6 +245,17 @@
 }
 
 #pragma mark Animation callbacks
+
+- (void)animationWillStart:(NSString *)animationID context:(void *)context
+{
+    if (m_firstStep) {
+        if ([self.delegate respondsToSelector:@selector(animationWillStart:)]) {
+            [self.delegate animationWillStart:self];
+        }
+        
+        m_firstStep = NO;
+    }
+}
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
