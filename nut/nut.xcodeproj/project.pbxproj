@@ -108,6 +108,15 @@
 		6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */; };
 		6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */; };
 		6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */; };
+		6FBDA9EC130522DE004B9617 /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */; };
+		6FBDA9ED130522DE004B9617 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */; };
+		6FBDAA1313052D09004B9617 /* HLSValue1TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDAA1113052D09004B9617 /* HLSValue1TableViewCell.h */; };
+		6FBDAA1413052D09004B9617 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAA1213052D09004B9617 /* HLSValue1TableViewCell.m */; };
+		6FBDAA1713052D18004B9617 /* HLSValue2TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDAA1513052D18004B9617 /* HLSValue2TableViewCell.h */; };
+		6FBDAA1813052D18004B9617 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAA1613052D18004B9617 /* HLSValue2TableViewCell.m */; };
+		6FBDAA1B13052D23004B9617 /* HLSSubtitleTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */; };
+		6FBDAA1C13052D23004B9617 /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAA1A13052D23004B9617 /* HLSSubtitleTableViewCell.m */; };
+		6FBDABA513056D64004B9617 /* HLSStandardTableViewCell+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDABA413056D64004B9617 /* HLSStandardTableViewCell+Protected.h */; };
 		6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */; };
 		6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */; };
 		6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */; };
@@ -221,6 +230,15 @@
 		6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
 		6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSOneViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardWidgetConstants.m; sourceTree = "<group>"; };
+		6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FBDAA1113052D09004B9617 /* HLSValue1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue1TableViewCell.h; sourceTree = "<group>"; };
+		6FBDAA1213052D09004B9617 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
+		6FBDAA1513052D18004B9617 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
+		6FBDAA1613052D18004B9617 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
+		6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSubtitleTableViewCell.h; sourceTree = "<group>"; };
+		6FBDAA1A13052D23004B9617 /* HLSSubtitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSSubtitleTableViewCell.m; sourceTree = "<group>"; };
+		6FBDABA413056D64004B9617 /* HLSStandardTableViewCell+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSStandardTableViewCell+Protected.h"; sourceTree = "<group>"; };
 		6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSCompression.h"; sourceTree = "<group>"; };
 		6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSCompression.m"; sourceTree = "<group>"; };
 		6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSHash.h"; sourceTree = "<group>"; };
@@ -436,6 +454,8 @@
 				6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */,
 				6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */,
 				6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */,
+				6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */,
+				6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */,
 				6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */,
 				6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */,
 			);
@@ -454,11 +474,18 @@
 			isa = PBXGroup;
 			children = (
 				6F8D09AC123F605800FCF2AF /* HLSStandardTableViewCell.h */,
+				6FBDABA413056D64004B9617 /* HLSStandardTableViewCell+Protected.h */,
 				6F8D09AD123F605800FCF2AF /* HLSStandardTableViewCell.m */,
 				6F8D09AE123F605800FCF2AF /* HLSStandardView.h */,
 				6F8D09AF123F605800FCF2AF /* HLSStandardView.m */,
+				6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */,
+				6FBDAA1A13052D23004B9617 /* HLSSubtitleTableViewCell.m */,
 				6F2862FD1265A60F00D04F08 /* HLSTextField.h */,
 				6F2862FE1265A60F00D04F08 /* HLSTextField.m */,
+				6FBDAA1113052D09004B9617 /* HLSValue1TableViewCell.h */,
+				6FBDAA1213052D09004B9617 /* HLSValue1TableViewCell.m */,
+				6FBDAA1513052D18004B9617 /* HLSValue2TableViewCell.h */,
+				6FBDAA1613052D18004B9617 /* HLSValue2TableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -546,6 +573,11 @@
 				6F3D04061301D901009ACE4D /* HLSAnimation.h in Headers */,
 				6FBDA2CE1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h in Headers */,
 				6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */,
+				6FBDA9EC130522DE004B9617 /* NSObject+HLSExtensions.h in Headers */,
+				6FBDAA1313052D09004B9617 /* HLSValue1TableViewCell.h in Headers */,
+				6FBDAA1713052D18004B9617 /* HLSValue2TableViewCell.h in Headers */,
+				6FBDAA1B13052D23004B9617 /* HLSSubtitleTableViewCell.h in Headers */,
+				6FBDABA513056D64004B9617 /* HLSStandardTableViewCell+Protected.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +679,10 @@
 				6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */,
 				6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */,
 				6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */,
+				6FBDA9ED130522DE004B9617 /* NSObject+HLSExtensions.m in Sources */,
+				6FBDAA1413052D09004B9617 /* HLSValue1TableViewCell.m in Sources */,
+				6FBDAA1813052D18004B9617 /* HLSValue2TableViewCell.m in Sources */,
+				6FBDAA1C13052D23004B9617 /* HLSSubtitleTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -152,7 +152,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleDefault, tableView);
+    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSStandardTableViewCell, tableView);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
@@ -257,7 +257,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SIMPLE_TABLE_VIEW_CELL_HEIGHT();
+    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSStandardTableViewCell);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

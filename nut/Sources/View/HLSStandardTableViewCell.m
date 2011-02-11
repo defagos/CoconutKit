@@ -8,8 +8,10 @@
 
 #import "HLSStandardTableViewCell.h"
 
+#import "HLSLogger.h"
+#import "HLSStandardTableViewCell+Protected.h"
 #import "HLSStandardWidgetConstants.h"
-#import <objc/runtime.h>
+#import "NSObject+HLSExtensions.h"
 
 #pragma mark Static methods
 
@@ -17,31 +19,32 @@
 
 #pragma mark Factory methods
 
-+ (UITableViewCell *)tableViewCellFromXibFileWithName:(NSString *)xibFileName forTableView:(UITableView *)tableView
-{
-    // Try to find if a cell is available for the cell class identifier
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
-    
-    // If not, create one lazily from xib
-    if (! cell) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
-        cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
-    }
-    
-    return cell;
-}
-
-+ (UITableViewCell *)tableViewCellWithStyle:(UITableViewCellStyle)style forTableView:(UITableView *)tableView
++ (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView
 {
     // Try to find if a cell is available for the cell class identifier
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
     
     // If not, create one lazily
     if (! cell) {
-        cell = [[[self class] alloc] initWithStyle:style reuseIdentifier:[self identifier]];
+        // If a xib file name has been specified, use it, otherwise try to locate the default one (xib bearing
+        // the class name)
+        NSString *xibFileName = [self xibFileName];
+        if (! xibFileName && [[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+            xibFileName = [self className];
+        }
+        
+        // A xib has been found, use it
+        if (xibFileName) {
+            NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
+            cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
+        }
+        // Created programmatically
+        else {
+            cell = [[[self class] alloc] initWithStyle:[self style] reuseIdentifier:[self identifier]];
+        }
     }
     
-    return cell;    
+    return cell;
 }
 
 #pragma mark Cell customization
@@ -60,15 +63,24 @@
 
 #pragma mark Class methods
 
-+ (NSString *)identifier
-{
-    // Use the class name by default
-    return [NSString stringWithUTF8String:class_getName([self class])];
-}
-
 + (CGFloat)height
 {
     return kTableViewCellStandardHeight;
+}
+
++ (NSString *)xibFileName
+{
+    return nil;
+}
+
++ (UITableViewCellStyle)style
+{
+    return UITableViewCellStyleDefault;
+}
+
++ (NSString *)identifier
+{
+    return [self className];
 }
 
 @end

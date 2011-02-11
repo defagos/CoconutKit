@@ -24,6 +24,8 @@ typedef enum {
 typedef enum {
     SimpleCellIndexEnumBegin = 0,
     SimpleCellIndexDefault = SimpleCellIndexEnumBegin,
+    SimpleCellIndexValue1,
+    SimpleCellIndexValue2,
     SimpleCellIndexSubtitle,
     SimpleCellIndexEnumEnd,
     SimpleCellIndexEnumSize = SimpleCellIndexEnumEnd - SimpleCellIndexEnumBegin
@@ -88,16 +90,34 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    HLSStandardTableViewCell *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleDefault, tableView);
-                    cell.textLabel.text = NSLocalizedString(@"Simple cell, default style", @"Simple cell, default style");
+                    HLSStandardTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSStandardTableViewCell, tableView);
+                    cell.textLabel.text = @"HLSStandardTableViewCell";
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    break;
+                }
+                    
+                case SimpleCellIndexValue1: {
+                    HLSValue1TableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSValue1TableViewCell, tableView);
+                    cell.textLabel.text = @"HLSValue1TableViewCell";
+                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    break;
+                }
+                    
+                case SimpleCellIndexValue2: {
+                    HLSValue2TableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSValue2TableViewCell, tableView);
+                    cell.textLabel.text = @"HLSValue2TableViewCell";
+                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
                 }
                     
                 case SimpleCellIndexSubtitle: {
-                    HLSStandardTableViewCell *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleSubtitle, tableView);
-                    cell.textLabel.text = NSLocalizedString(@"Simple cell, subtitle", @"Simple cell, subtitle");
+                    HLSSubtitleTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSSubtitleTableViewCell, tableView);
+                    cell.textLabel.text = @"HLSSubtitleTableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;                    
@@ -115,7 +135,7 @@ typedef enum {
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    XibTableViewCell *cell = CUSTOM_TABLE_VIEW_CELL_FROM_XIB(XibTableViewCell, tableView);
+                    XibTableViewCell *cell = HLS_TABLE_VIEW_CELL(XibTableViewCell, tableView);
                     cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
                     cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
                     // Selection enabled to show that customization works
@@ -124,7 +144,7 @@ typedef enum {
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    ProgrammaticTableViewCell *cell = CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(ProgrammaticTableViewCell, tableView);
+                    ProgrammaticTableViewCell *cell = HLS_TABLE_VIEW_CELL(ProgrammaticTableViewCell, tableView);
                     cell.textLabel.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -194,18 +214,43 @@ typedef enum {
 {
     switch (indexPath.section) {
         case CellCategoryIndexSimple: {
-            return SIMPLE_TABLE_VIEW_CELL_HEIGHT();
+            switch (indexPath.row) {
+                case SimpleCellIndexDefault: {
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSStandardTableViewCell);
+                    break;
+                }
+                    
+                case SimpleCellIndexValue1: {
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSValue1TableViewCell);
+                    break;
+                }
+                    
+                case SimpleCellIndexValue2: {
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSValue2TableViewCell);
+                    break;
+                }
+                    
+                case SimpleCellIndexSubtitle: {
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSSubtitleTableViewCell);
+                    break;
+                }
+                    
+                default: {
+                    return 0;
+                    break;
+                }            
+            }            
         }
             
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    return CUSTOM_TABLE_VIEW_CELL_HEIGHT(XibTableViewCell);
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(XibTableViewCell);
                     break;
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    return CUSTOM_TABLE_VIEW_CELL_HEIGHT(ProgrammaticTableViewCell);
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(ProgrammaticTableViewCell);
                     break;
                 }
                     

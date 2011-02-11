@@ -34,6 +34,7 @@ HLSSingleValuePickerViewController.h
 HLSStandardTableViewCell.h
 HLSStandardView.h
 HLSStandardWidgetConstants.h
+HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayController.h
 HLSTask.h
 HLSTaskGroup.h
@@ -45,8 +46,11 @@ HLSTwoViewAnimationStepDefinition.h
 HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h
+HLSValue1TableViewCell.h
+HLSValue2TableViewCell.h
 HLSViewAnimationStep.h
 HLSWizardViewController.h
 NSData+HLSCompression.h
 NSDate+HLSExtensions.h
+NSObject+HLSExtensions.h
 NSString+HLSHash.h

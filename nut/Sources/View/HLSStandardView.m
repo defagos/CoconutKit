@@ -8,7 +8,7 @@
 
 #import "HLSStandardView.h"
 
-#import <objc/runtime.h>
+#import "NSObject+HLSExtensions.h"
 
 @implementation HLSStandardView
 
@@ -16,11 +16,8 @@
 
 + (UIView *)view
 {
-    // Get the class name (inheritance is taken into account)
-    NSString *className = [NSString stringWithUTF8String:class_getName([self class])];
-    
     // Load from nib file
-    NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil];
+    NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:[self className] owner:self options:nil];
     return [bundleContents objectAtIndex:0];
 }
 

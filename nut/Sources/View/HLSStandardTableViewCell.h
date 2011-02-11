@@ -6,42 +6,41 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Convenience factory macro for creating a custom cell of a given class using a xib having the same name as the class
-// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_FROM_XIB(SomeCellClass, tableView)
-#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB(className, tableView) \
-    (className *)[className tableViewCellFromXibFileWithName:@#className forTableView:tableView]
+// Convenience factory macro for creating table view cells of a given class (either HLSStandardTableViewCell or a
+// subclass)
+#define HLS_TABLE_VIEW_CELL(className, tableView)       (className *)[className tableViewCellForTableView:tableView]
 
-// Convenience factory macro for creating a custom cell of a given class using a xib with arbitrary name
-// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_FROM_XIB_WITH_NAME(SomeCellClass, tableView, @"CellLayout")
-#define CUSTOM_TABLE_VIEW_CELL_FROM_XIB_WITH_NAME(className, tableView, xibFileName) \
-    (className *)[className tableViewCellFromXibFileWithName:xibFileName forTableView:tableView]
-
-// Convenience factory macro for creating a custom cell programmatically without a xib (cell created with default style)
-// Example: SomeCellClass *cell = CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(SomeCellClass, tableView)
-#define CUSTOM_TABLE_VIEW_CELL_PROGRAMMATICALLY(className, tableView) \
-    (className *)[className tableViewCellWithStyle:UITableViewCellStyleDefault forTableView:tableView]
-
-// Convenience factory macro for retrieving the height of a custom cell
-#define CUSTOM_TABLE_VIEW_CELL_HEIGHT(className)                                            [className height]
-
-// Convenience factory macro for creating a simple cell (= not from a subclass). No need for subclassing HLSStandardTableViewCell, but with limited customization abilities
-// Example: SomeCellClass *cell = SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(UITableViewCellStyleSubtitle, tableView)
-#define SIMPLE_TABLE_VIEW_CELL_PROGRAMMATICALLY(style, tableView) \
-    (HLSStandardTableViewCell *)[HLSStandardTableViewCell tableViewCellWithStyle:style forTableView:tableView]
-
-// Convenience factory macro for retrieving the height of a simple cell
-#define SIMPLE_TABLE_VIEW_CELL_HEIGHT()                                                     [HLSStandardTableViewCell height]
+// Convenience factory macro for retrieving the height of cells for a given class (either HLSStandardTableViewCell or a
+// subclass)
+#define HLS_TABLE_VIEW_CELL_HEIGHT(className)           [className height]
 
 /**
  * Class for easier table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
- * every time you instantiate cells. This class also forces centralization of common class cell properties.
+ * every time you instantiate cells. This class also forces centralization of common cell class properties, like
+ * cell identifier, dimensions, style and xib file (if any).
  *
- * To create custom cells, just inherit from this class. The subclass can override the height and identifier methods
- * if it needs to. Subclasses may layout their content either through code or using a xib file. Two kinds of factory
- * macros are provided to support these cases.
+ * If you do not need other customization properties than the ones offered by a UITableViewCell with default style
+ * (UITableViewCellStyleDefault), you can simply instantiate HLSStandardTableViewCell using the factory macro.
+ * Other simple table view cells also exist for the other built-in cell styles (HLSValue1TableViewCell,
+ * HLSValue1TableViewCell and HLSSubtitleTableViewCell). Those are similarly instantiated using the factory macro.
  *
- * Note that subclassing HLSStandardTableViewCell is not necessary if you do not need cell customization ("simple cell"). 
- * In such cases, you can simply instantiate HLSStandardTableViewCell objects using the simple cell factory macros.
+ * If you need further customization abilities, like cells whose layout is defined using a xib or programmatically, 
+ * you must sublcass HLSStandardTableViewCell and:
+ *   - override the height method to return the height of the cell if not the default one (44.f, which is the original
+ *     size of cells created using Interface Builder)
+ *   - if your cell layout is created using a xib file not bearing the same name as the cell class, override the
+ *     xibFileName accessor to return the name of the xib file. If the xib file bears the same name as its
+ *     corresponding class or if your cell layout is created programmatically, do not override this accessor
+ *   - override the identifier method to return the cell identifier used by the reuse mechanism if the default value
+ *     (the class name) does not suit your needs, which should be rarely the case
+ * Your custom classes can then be instantiated using the provided factory macro.
+ *
+ * When your class uses a xib to define its layout:
+ *   - the first object must be the cell object. Do not forget to set its type to match your cell class name (if
+ *     you need to bind outlets). Use this class as origin when drawing bindings (do not use the file's owner)
+ *   - do not forget to set the cell identifier to the one returned by the identifier class method. By default this
+ *     identifier is the class name, except if your class overrides it. If you fail to do so, the reuse mechanism
+ *     will not work
  *
  * Designated initializer: initWithStyle:reuseIdentifier:
  * (You usually do not need to create a cell manually. Use the factory macros instead)
@@ -52,35 +51,34 @@
 }
 
 /**
- * Factory method for creating a standard table view cell using a xib. For this factory method to work, the xib file
- * must have a UITableViewCell as first resource, and this object must be assigned the identifer of the class (using 
- * Interface Builder). This identifier is by default the class name, but you can override it in subclasses to define
- * your own if you want (identifier method)
+ * Factory method for creating a table view cell. A downcast might be needed to be able to edit cell attributes,
+ * that is why you should use the HLS_TABLE_VIEW_CELL factory method which does this cast for you
  */
-+ (UITableViewCell *)tableViewCellFromXibFileWithName:(NSString *)xibFileName forTableView:(UITableView *)tableView;
++ (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView;
 
 /**
- * Factory method for creating a standard table view programmatically without a xib
- */
-+ (UITableViewCell *)tableViewCellWithStyle:(UITableViewCellStyle)style forTableView:(UITableView *)tableView;
-
-/**
- * Convenience method for cell skinning
+ * Method for cell skinning
  */
 - (void)setBackgroundWithImageNamed:(NSString *)backgroundImageName
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
 
 /**
- * The cell identifier to use for cell reuse. You can override this method if you do really want to define your
+ * Override this method to return the height of your custom cell class if not the default one (44.f). This has to
+ * be done whether the cell is created programmatically or using a xib file
+ */
++ (CGFloat)height;
+
+/**
+ * If the cell layout is created using Interface Builder, override this accessor to return the name of the associated xib
+ * file. This is not needed if the xib file name is identical to the class name
+ */
++ (NSString *)xibFileName;
+
+/**
+ * The cell identifier to apply for cell reuse. You can override this method if you do really want to define your
  * own identifier in a subclass, otherwise just stick with the default implementation (which uses the class name
  * as cell identifier)
  */
 + (NSString *)identifier;
-
-/**
- * Override this method to set the height of your custom cell class if not the default one (44.f). This has to
- * be done whether the cell is created programmatically or using a xib file
- */
-+ (CGFloat)height;
 
 @end

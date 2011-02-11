@@ -12,14 +12,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
-    }
-    return self;
-}
-
 + (CGFloat)height
 {
     return 60.f;
