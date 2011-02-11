@@ -8,6 +8,7 @@
 
 #import "TableViewCellsDemoViewController.h"
 
+#import "HeaderView.h"
 #import "ProgrammaticTableViewCell.h"
 #import "XibTableViewCell.h"
 
@@ -168,22 +169,25 @@ typedef enum {
 
 #pragma mark UITableViewDelegate protocol implementation
 
-#if 0
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     switch (section) {
         case CellCategoryIndexSimple: {
-            
+            HeaderView *headerView = STANDARD_VIEW(HeaderView);
+            headerView.label.text = NSLocalizedString(@"Header: simple cells", @"Header: simple cells");
+            return headerView;
             break;
         }
             
         case CellCategoryIndexCustom: {
-            
+            HeaderView *headerView = STANDARD_VIEW(HeaderView);
+            headerView.label.text = NSLocalizedString(@"Header: custom cells", @"Header: custom cells");
+            return headerView;            
             break;
         }
             
         default: {
-            
+            return nil;
             break;
         }
     }
@@ -193,22 +197,21 @@ typedef enum {
 {
     switch (section) {
         case CellCategoryIndexSimple: {
-            
+            return STANDARD_VIEW_HEIGHT(HeaderView);
             break;
         }
             
         case CellCategoryIndexCustom: {
-            
+            return STANDARD_VIEW_HEIGHT(HeaderView);            
             break;
         }
             
         default: {
-        
+            return 0;
             break;
         }
     }
 }
-#endif
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

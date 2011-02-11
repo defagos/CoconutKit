@@ -12,6 +12,8 @@
 "Demos"="Démos";
 "Details"="Détails";
 "Downloads"="Téléchargements";
+"Header: custom cells"="En-tête: cellules personnalisées";
+"Header: simple cells"="En-tête: cellules basiques";
 "Multiple view animation"="Animation de plusieurs vues";
 "Parallel processing"="Calculs en parallèle";
 "Single view animation"="Animation d'une seule vue";

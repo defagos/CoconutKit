@@ -7,15 +7,15 @@
 //
 
 // Convenience factory macro for creating table view cells of a given class (either HLSStandardTableViewCell or a
-// subclass)
+// subclass); useful since no covariant return types in Objective-C
 #define HLS_TABLE_VIEW_CELL(className, tableView)       (className *)[className tableViewCellForTableView:tableView]
 
 // Convenience factory macro for retrieving the height of cells for a given class (either HLSStandardTableViewCell or a
-// subclass)
+// subclass); this macro was not needed, but introduced for consistency
 #define HLS_TABLE_VIEW_CELL_HEIGHT(className)           [className height]
 
 /**
- * Class for easier table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
+ * Class for easy table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
  * every time you instantiate cells. This class also forces centralization of common cell class properties, like
  * cell identifier, dimensions, style and xib file (if any).
  *
@@ -36,8 +36,8 @@
  * Your custom classes can then be instantiated using the provided factory macro.
  *
  * When your class uses a xib to define its layout:
- *   - the first object must be the cell object. Do not forget to set its type to match your cell class name (if
- *     you need to bind outlets). Use this class as origin when drawing bindings (do not use the file's owner)
+ *   - the first object in the xib must be the cell object. Do not forget to set its type to match your cell class name
+ *     (if you need to bind outlets). Use this class as origin when drawing bindings (do not use the file's owner)
  *   - do not forget to set the cell identifier to the one returned by the identifier class method. By default this
  *     identifier is the class name, except if your class overrides it. If you fail to do so, the reuse mechanism
  *     will not work

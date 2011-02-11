@@ -70,6 +70,7 @@
 
 + (NSString *)xibFileName
 {
+    // Return nil by default (since can be created programmatically)
     return nil;
 }
 

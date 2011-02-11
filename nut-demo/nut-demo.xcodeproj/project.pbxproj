@@ -28,6 +28,8 @@
 		6FBDAB5F1305616C004B9617 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDAB581305616C004B9617 /* nut.framework */; };
 		6FBDAB601305616C004B9617 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAB5A1305616C004B9617 /* nut_Localizable.strings */; };
 		6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */; };
+		6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAC3D1305903A004B9617 /* HeaderView.xib */; };
+		6FBDAC4113059041004B9617 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAC4013059041004B9617 /* HeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,9 @@
 		6FBDAB5B1305616C004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FBDAB5C1305616C004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
+		6FBDAC3D1305903A004B9617 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		6FBDAC3F13059041004B9617 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		6FBDAC4013059041004B9617 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -262,6 +267,7 @@
 		6FBDA8C313041CA0004B9617 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDAC3C13059031004B9617 /* HeaderView */,
 				6FBDA8F51304268E004B9617 /* ProgrammaticTableViewCell */,
 				6FBDA8C413041CA0004B9617 /* TableViewCellsDemoViewController */,
 				6FBDA8F61304268E004B9617 /* XibTableViewCell */,
@@ -351,6 +357,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6FBDAC3C13059031004B9617 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDAC3F13059041004B9617 /* HeaderView.h */,
+				6FBDAC4013059041004B9617 /* HeaderView.m */,
+				6FBDAC3D1305903A004B9617 /* HeaderView.xib */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -410,6 +426,7 @@
 				6FBDA9281304315B004B9617 /* icn_bookmark.png in Resources */,
 				6FBDAB601305616C004B9617 /* nut_Localizable.strings in Resources */,
 				6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
+				6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +445,7 @@
 				6FBDA8FF130426DC004B9617 /* ProgrammaticTableViewCell.m in Sources */,
 				6FBDA90B13042A84004B9617 /* XibTableViewCell.m in Sources */,
 				6FBDAB5E1305616C004B9617 /* nut_bootstrap.m in Sources */,
+				6FBDAC4113059041004B9617 /* HeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,8 @@
 
 #import "HLSStandardView.h"
 
+#import "HLSLogger.h"
+#import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
 @implementation HLSStandardView
@@ -15,25 +17,33 @@
 #pragma mark Factory methods
 
 + (UIView *)view
-{
-    // Load from nib file
-    NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:[self className] owner:self options:nil];
-    return [bundleContents objectAtIndex:0];
-}
-
-#pragma mark Object creation and destruction
-
-- (id)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        
+{   
+    if ([self isMemberOfClass:[HLSStandardView class]]) {
+        logger_error(@"HLSStandardView cannot be instantiated directly");
+        return nil;
     }
-    return self;
+    
+    // A xib has been found, use it
+    if ([[NSBundle mainBundle] pathForResource:[self xibFileName] ofType:@"nib"]) {
+        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:[self xibFileName] owner:self options:nil];
+        return [bundleContents objectAtIndex:0];
+    }
+    else {
+        logger_error(@"xib file not found");
+        return nil;
+    }
 }
 
-- (void)dealloc
+#pragma mark Class methods
+
++ (CGFloat)height
 {
-    [super dealloc];
+    return kViewStandardHeight;
+}
+
++ (NSString *)xibFileName
+{
+    return [self className];
 }
 
 @end
