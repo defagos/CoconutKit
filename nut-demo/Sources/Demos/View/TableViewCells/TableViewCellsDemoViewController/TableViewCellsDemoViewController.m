@@ -145,7 +145,7 @@ typedef enum {
                     
                 case CustomCellIndexProgrammatically: {
                     ProgrammaticTableViewCell *cell = HLS_TABLE_VIEW_CELL(ProgrammaticTableViewCell, tableView);
-                    cell.textLabel.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
+                    cell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;

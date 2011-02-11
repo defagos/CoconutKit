@@ -8,7 +8,9 @@
 
 @interface ProgrammaticTableViewCell : HLSStandardTableViewCell {
 @private
-    
+    UILabel *m_label;
 }
+
+@property (nonatomic, retain) UILabel *label;
 
 @end
