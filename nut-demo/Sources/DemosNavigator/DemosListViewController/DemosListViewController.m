@@ -71,11 +71,6 @@ typedef enum {
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -152,7 +147,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSStandardTableViewCell, tableView);
+    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
@@ -257,7 +252,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSStandardTableViewCell);
+    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

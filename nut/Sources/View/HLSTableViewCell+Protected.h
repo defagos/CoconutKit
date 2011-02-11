@@ -1,5 +1,5 @@
 //
-//  HLSStandardTableViewCell+Protected.h
+//  HLSTableViewCell+Protected.h
 //  nut
 //
 //  Created by Samuel Défago on 2/11/11.
@@ -7,10 +7,10 @@
 //
 
 /**
- * Just to be used by subclasses of HLSStandardTableViewCell within the nut framework (the ones needing
+ * Just to be used by subclasses of HLSTableViewCell within the nut framework (the ones needing
  * access to styles). Not to be published in the library public headers
  */
-@interface HLSStandardTableViewCell (Protected)
+@interface HLSTableViewCell (Protected)
 
 + (UITableViewCellStyle)style;
 

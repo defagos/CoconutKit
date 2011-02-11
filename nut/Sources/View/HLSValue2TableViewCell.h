@@ -6,9 +6,12 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSStandardTableViewCell.h"
+#import "HLSTableViewCell.h"
 
-@interface HLSValue2TableViewCell : HLSStandardTableViewCell {
+/**
+ * Same as HLSTableViewCell, but with UITableViewCellStyleValue2 as style
+ */
+@interface HLSValue2TableViewCell : HLSTableViewCell {
 @private
     
 }

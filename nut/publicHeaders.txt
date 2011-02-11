@@ -31,11 +31,10 @@ HLSServiceRequester.h
 HLSServiceSettings.h
 HLSSingleValuePicker.h
 HLSSingleValuePickerViewController.h
-HLSStandardTableViewCell.h
-HLSStandardView.h
 HLSStandardWidgetConstants.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayController.h
+HLSTableViewCell.h
 HLSTask.h
 HLSTaskGroup.h
 HLSTaskManager.h
@@ -50,6 +49,7 @@ HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
 HLSViewAnimationStep.h
 HLSWizardViewController.h
+HLSXibView.h
 NSData+HLSCompression.h
 NSDate+HLSExtensions.h
 NSObject+HLSExtensions.h

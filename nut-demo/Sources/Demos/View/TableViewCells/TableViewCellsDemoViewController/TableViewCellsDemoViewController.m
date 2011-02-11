@@ -48,14 +48,9 @@ typedef enum {
 - (id)init
 {
     if (self = [super init]) {
-        
+        self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -91,8 +86,8 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    HLSStandardTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSStandardTableViewCell, tableView);
-                    cell.textLabel.text = @"HLSStandardTableViewCell";
+                    HLSTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
+                    cell.textLabel.text = @"HLSTableViewCell";
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
@@ -173,14 +168,14 @@ typedef enum {
 {
     switch (section) {
         case CellCategoryIndexSimple: {
-            HeaderView *headerView = STANDARD_VIEW(HeaderView);
+            HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
             headerView.label.text = NSLocalizedString(@"Header: simple cells", @"Header: simple cells");
             return headerView;
             break;
         }
             
         case CellCategoryIndexCustom: {
-            HeaderView *headerView = STANDARD_VIEW(HeaderView);
+            HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
             headerView.label.text = NSLocalizedString(@"Header: custom cells", @"Header: custom cells");
             return headerView;            
             break;
@@ -197,12 +192,12 @@ typedef enum {
 {
     switch (section) {
         case CellCategoryIndexSimple: {
-            return STANDARD_VIEW_HEIGHT(HeaderView);
+            return HLS_XIB_VIEW_HEIGHT(HeaderView);
             break;
         }
             
         case CellCategoryIndexCustom: {
-            return STANDARD_VIEW_HEIGHT(HeaderView);            
+            return HLS_XIB_VIEW_HEIGHT(HeaderView);            
             break;
         }
             
@@ -219,7 +214,7 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSStandardTableViewCell);
+                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
                     break;
                 }
                     

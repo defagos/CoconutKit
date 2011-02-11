@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface ProgrammaticTableViewCell : HLSStandardTableViewCell {
+@interface ProgrammaticTableViewCell : HLSTableViewCell {
 @private
     UILabel *m_label;
 }

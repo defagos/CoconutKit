@@ -1,5 +1,5 @@
 //
-//  HLSStandardView.h
+//  HLSXibView.h
 //  nut
 //
 //  Created by Samuel Défago on 9/1/10.
@@ -7,21 +7,22 @@
 //
 
 // Convenience factory macro for creating views of a given class; useful since no covariant return types in Objective-C
-#define STANDARD_VIEW(className)                 (className *)[className view]
+#define HLS_XIB_VIEW(className)                 (className *)[className xibView]
 
-// Convenience macro for retrieving the height of a view; this macro was not needed, but introduced for consistency
-#define STANDARD_VIEW_HEIGHT(className)          [className height]
+// Convenience macro for retrieving the height of a view
+#define HLS_XIB_VIEW_HEIGHT(className)          [className height]
 
 /**
- * Abstract class for easy view creation.
+ * Abstract class for easy view creation using xibs.
  *
- * To make working with views generated using a xib (one example is table view headers), just inherit from this class. 
- * This forces you to define view properties in a standard and centralized way (namely in the implementation file
- * of the corresponding class), instead of putting redundant code in all code using the view.
+ * Simply inherit from this class to define your custom view classes (this class is abstract and therefore not meant
+ * to be instantiated directly). This forces you to define view properties in a standard and centralized way (namely 
+ * in the implementation file of the corresponding class), instead of putting redundant code in all source files using
+ * the view.
  *
- * To create your own view class, simply subclass HLSStandardView and:
+ * To create your own view class, simply subclass HLSXibView and:
  *   - override the height method to return the height of the view if not the default one (44.f). This is not
- *     mandatory if you never plan to use the STANDARD_VIEW_HEIGHT macro
+ *     mandatory if you never plan to use the HLS_XIB_VIEW_HEIGHT macro
  *   - if your view layout is created using a xib file not bearing the same name as the view class, override the
  *     xibFileName accessor to return the name of the xib file. If the xib file bears the same name as its
  *     corresponding class, you do not need to override this accessor
@@ -34,7 +35,7 @@
  * Designated initializer: initWithFrame: (you usually do not need to create a view manually. Use the factory method 
  * instead)
  */
-@interface HLSStandardView : UIView {
+@interface HLSXibView : UIView {
 @private
     
 }
@@ -42,10 +43,10 @@
 /**
  * Factory method for creating the view
  */
-+ (UIView *)view;
++ (UIView *)xibView;
 
 /**
- * Implement this method to reflect the height of the view in your nib file
+ * Implement this method to reflect the height of the view in your xib file
  */
 + (CGFloat)height;
 

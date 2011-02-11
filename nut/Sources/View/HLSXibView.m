@@ -1,25 +1,25 @@
 //
-//  HLSStandardView.m
+//  HLSXibView.m
 //  nut
 //
 //  Created by Samuel Défago on 9/1/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSStandardView.h"
+#import "HLSXibView.h"
 
 #import "HLSLogger.h"
 #import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
-@implementation HLSStandardView
+@implementation HLSXibView
 
 #pragma mark Factory methods
 
-+ (UIView *)view
++ (UIView *)xibView
 {   
-    if ([self isMemberOfClass:[HLSStandardView class]]) {
-        logger_error(@"HLSStandardView cannot be instantiated directly");
+    if ([self isMemberOfClass:[HLSXibView class]]) {
+        logger_error(@"HLSXibView cannot be instantiated directly");
         return nil;
     }
     

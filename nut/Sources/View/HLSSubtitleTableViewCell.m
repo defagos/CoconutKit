@@ -8,7 +8,7 @@
 
 #import "HLSSubtitleTableViewCell.h"
 
-#import "HLSStandardTableViewCell+Protected.h"
+#import "HLSTableViewCell+Protected.h"
 
 @implementation HLSSubtitleTableViewCell
 

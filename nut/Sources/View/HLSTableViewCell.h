@@ -1,17 +1,17 @@
 //
-//  HLSStandardTableViewCell.h
+//  HLSTableViewCell.h
 //  nut
 //
 //  Created by Samuel Défago on 8/21/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Convenience factory macro for creating table view cells of a given class (either HLSStandardTableViewCell or a
+// Convenience factory macro for creating table view cells of a given class (either HLSTableViewCell or a
 // subclass); useful since no covariant return types in Objective-C
 #define HLS_TABLE_VIEW_CELL(className, tableView)       (className *)[className tableViewCellForTableView:tableView]
 
-// Convenience factory macro for retrieving the height of cells for a given class (either HLSStandardTableViewCell or a
-// subclass); this macro was not needed, but introduced for consistency
+// Convenience factory macro for retrieving the height of cells for a given class (either HLSTableViewCell or a
+// subclass)
 #define HLS_TABLE_VIEW_CELL_HEIGHT(className)           [className height]
 
 /**
@@ -20,12 +20,12 @@
  * cell identifier, dimensions, style and xib file (if any).
  *
  * If you do not need other customization properties than the ones offered by a UITableViewCell with default style
- * (UITableViewCellStyleDefault), you can simply instantiate HLSStandardTableViewCell using the factory macro.
+ * (UITableViewCellStyleDefault), you can simply instantiate HLSTableViewCell using the factory macro.
  * Other simple table view cells also exist for the other built-in cell styles (HLSValue1TableViewCell,
  * HLSValue1TableViewCell and HLSSubtitleTableViewCell). Those are similarly instantiated using the factory macro.
  *
  * If you need further customization abilities, like cells whose layout is defined using a xib or programmatically, 
- * you must sublcass HLSStandardTableViewCell and:
+ * you must sublcass HLSTableViewCell and:
  *   - override the height method to return the height of the cell if not the default one (44.f, which is the original
  *     size of cells created using Interface Builder)
  *   - if your cell layout is created using a xib file not bearing the same name as the cell class, override the
@@ -45,7 +45,7 @@
  * Designated initializer: initWithStyle:reuseIdentifier:
  * (You usually do not need to create a cell manually. Use the factory macros instead)
  */
-@interface HLSStandardTableViewCell : UITableViewCell {
+@interface HLSTableViewCell : UITableViewCell {
 @private
 
 }

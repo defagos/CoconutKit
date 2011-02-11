@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface XibTableViewCell : HLSStandardTableViewCell {
+@interface XibTableViewCell : HLSTableViewCell {
 @private
     UIImageView *m_imageView;
     UILabel *m_label;

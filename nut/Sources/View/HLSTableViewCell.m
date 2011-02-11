@@ -1,21 +1,21 @@
 //
-//  HLSStandardTableViewCell.m
+//  HLSTableViewCell.m
 //  nut
 //
 //  Created by Samuel Défago on 8/21/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSStandardTableViewCell.h"
+#import "HLSTableViewCell.h"
 
 #import "HLSLogger.h"
-#import "HLSStandardTableViewCell+Protected.h"
+#import "HLSTableViewCell+Protected.h"
 #import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
 #pragma mark Static methods
 
-@implementation HLSStandardTableViewCell
+@implementation HLSTableViewCell
 
 #pragma mark Factory methods
 

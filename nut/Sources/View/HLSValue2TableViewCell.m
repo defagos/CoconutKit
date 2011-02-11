@@ -8,7 +8,7 @@
 
 #import "HLSValue2TableViewCell.h"
 
-#import "HLSStandardTableViewCell+Protected.h"
+#import "HLSTableViewCell+Protected.h"
 
 @implementation HLSValue2TableViewCell
 

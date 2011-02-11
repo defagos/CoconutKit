@@ -6,9 +6,12 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSStandardTableViewCell.h"
+#import "HLSTableViewCell.h"
 
-@interface HLSSubtitleTableViewCell : HLSStandardTableViewCell {
+/**
+ * Same as HLSTableViewCell, but with UITableViewCellStyleSubtitle as style
+ */
+@interface HLSSubtitleTableViewCell : HLSTableViewCell {
 @private
     
 }
