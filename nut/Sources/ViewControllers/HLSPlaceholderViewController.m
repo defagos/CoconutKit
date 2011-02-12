@@ -32,7 +32,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        m_lifeCyclePhase = LifeCyclePhaseInitialized;
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
     }
     return self;
 }
@@ -40,7 +40,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        m_lifeCyclePhase = LifeCyclePhaseInitialized;
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
     }
     return self;
 }
@@ -120,7 +120,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }
     
     // Check that the new inset can be displayed for the current orientation
-    if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+    if (m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear) {
         if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
             logger_error(@"The inset view controller cannot be set because it does not support the current interface orientation");
             return;
@@ -130,7 +130,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     // Remove any existing inset first
     if (m_insetViewAddedAsSubview) {
         // If the container is visible, deal with animation and lifecycle events for the old inset view
-        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {                        
+        if (m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear) {                        
             // Animated
             if ([twoViewAnimationStepDefinitions count] != 0) {
                 // Forward disappearance events
@@ -167,7 +167,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     m_insetViewController = [insetViewController retain];
     
     // Add the new inset if the placeholder is available
-    if (m_insetViewController && m_lifeCyclePhase >= LifeCyclePhaseViewDidLoad && m_lifeCyclePhase < LifeCyclePhaseViewDidUnload) {
+    if (m_insetViewController && m_lifeCyclePhase >= HLSViewControllerLifeCyclePhaseViewDidLoad && m_lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidUnload) {
         // Instantiate the view lazily (if it has not been already been instantiated, which should be the case in most
         // situations). This will trigger the associated viewDidLoad
         UIView *insetView = m_insetViewController.view;
@@ -180,7 +180,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
         m_originalInsetViewAlpha = insetView.alpha;
         
         // If already visible, forward appearance events (this event here correctly occurs after viewDidLoad)
-        if (m_lifeCyclePhase == LifeCyclePhaseViewDidAppear) {
+        if (m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear) {
             // Adjust the frame to get proper autoresizing behavior (if autoresizesSubviews has been enabled for the placeholder
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
@@ -284,7 +284,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     self.placeholderView.clipsToBounds = YES;
     
     // At the end: update life cycle status
-    m_lifeCyclePhase = LifeCyclePhaseViewDidLoad;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -327,7 +327,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }    
     
     // At the end: update life cycle status    
-    m_lifeCyclePhase = LifeCyclePhaseViewWillAppear;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -346,7 +346,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }
     
     // At the end: update life cycle status
-    m_lifeCyclePhase = LifeCyclePhaseViewDidAppear;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -358,7 +358,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }
     
     // At the end: update life cycle status
-    m_lifeCyclePhase = LifeCyclePhaseViewWillDisappear;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -370,7 +370,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }
     
     // At the end: update life cycle status
-    m_lifeCyclePhase = LifeCyclePhaseViewDidDisappear;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
 }
 
 - (void)viewDidUnload
@@ -387,7 +387,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     }
     
     // At the end: update life cycle status
-    m_lifeCyclePhase = LifeCyclePhaseViewDidUnload;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)

@@ -30,6 +30,12 @@
 		6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAC3D1305903A004B9617 /* HeaderView.xib */; };
 		6FBDAC4113059041004B9617 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAC4013059041004B9617 /* HeaderView.m */; };
+		6FBDACEE130680F0004B9617 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDACED130680F0004B9617 /* TextFieldsDemoViewController.m */; };
+		6FBDACF013068107004B9617 /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDACEF13068107004B9617 /* TextFieldsDemoViewController.xib */; };
+		6FBDAD09130686DE004B9617 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD08130686DE004B9617 /* ParallelProcessingDemoViewController.m */; };
+		6FBDAD84130696C6004B9617 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD83130696C6004B9617 /* SleepTask.m */; };
+		6FBDAD87130696D3004B9617 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD86130696D3004B9617 /* SleepTaskOperation.m */; };
+		6FBDAE461306A0D5004B9617 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAE451306A0D5004B9617 /* ParallelProcessingDemoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +73,16 @@
 		6FBDAC3D1305903A004B9617 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		6FBDAC3F13059041004B9617 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		6FBDAC4013059041004B9617 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		6FBDACEC130680F0004B9617 /* TextFieldsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsDemoViewController.h; sourceTree = "<group>"; };
+		6FBDACED130680F0004B9617 /* TextFieldsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsDemoViewController.m; sourceTree = "<group>"; };
+		6FBDACEF13068107004B9617 /* TextFieldsDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsDemoViewController.xib; sourceTree = "<group>"; };
+		6FBDAD07130686DE004B9617 /* ParallelProcessingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelProcessingDemoViewController.h; sourceTree = "<group>"; };
+		6FBDAD08130686DE004B9617 /* ParallelProcessingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallelProcessingDemoViewController.m; sourceTree = "<group>"; };
+		6FBDAD82130696C6004B9617 /* SleepTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTask.h; sourceTree = "<group>"; };
+		6FBDAD83130696C6004B9617 /* SleepTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTask.m; sourceTree = "<group>"; };
+		6FBDAD85130696D3004B9617 /* SleepTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTaskOperation.h; sourceTree = "<group>"; };
+		6FBDAD86130696D3004B9617 /* SleepTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTaskOperation.m; sourceTree = "<group>"; };
+		6FBDAE451306A0D5004B9617 /* ParallelProcessingDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParallelProcessingDemoViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,6 +268,7 @@
 		6FBDA8BE13041C43004B9617 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDAD04130686CC004B9617 /* ParallelProcessing */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -260,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				6FBDA8C313041CA0004B9617 /* TableViewCells */,
+				6FBDACE71306806A004B9617 /* TextFields */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,6 +385,54 @@
 			path = HeaderView;
 			sourceTree = "<group>";
 		};
+		6FBDACE71306806A004B9617 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDACEB130680F0004B9617 /* TextFieldsDemoViewController */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		6FBDACEB130680F0004B9617 /* TextFieldsDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDACEC130680F0004B9617 /* TextFieldsDemoViewController.h */,
+				6FBDACED130680F0004B9617 /* TextFieldsDemoViewController.m */,
+				6FBDACEF13068107004B9617 /* TextFieldsDemoViewController.xib */,
+			);
+			path = TextFieldsDemoViewController;
+			sourceTree = "<group>";
+		};
+		6FBDAD04130686CC004B9617 /* ParallelProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDAD05130686CC004B9617 /* ParallelProcessingDemoViewController */,
+				6FBDAD81130696BC004B9617 /* SleepTask */,
+			);
+			path = ParallelProcessing;
+			sourceTree = "<group>";
+		};
+		6FBDAD05130686CC004B9617 /* ParallelProcessingDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDAD07130686DE004B9617 /* ParallelProcessingDemoViewController.h */,
+				6FBDAD08130686DE004B9617 /* ParallelProcessingDemoViewController.m */,
+				6FBDAE451306A0D5004B9617 /* ParallelProcessingDemoViewController.xib */,
+			);
+			path = ParallelProcessingDemoViewController;
+			sourceTree = "<group>";
+		};
+		6FBDAD81130696BC004B9617 /* SleepTask */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDAD82130696C6004B9617 /* SleepTask.h */,
+				6FBDAD83130696C6004B9617 /* SleepTask.m */,
+				6FBDAD85130696D3004B9617 /* SleepTaskOperation.h */,
+				6FBDAD86130696D3004B9617 /* SleepTaskOperation.m */,
+			);
+			path = SleepTask;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -427,6 +493,8 @@
 				6FBDAB601305616C004B9617 /* nut_Localizable.strings in Resources */,
 				6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */,
+				6FBDACF013068107004B9617 /* TextFieldsDemoViewController.xib in Resources */,
+				6FBDAE461306A0D5004B9617 /* ParallelProcessingDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +514,10 @@
 				6FBDA90B13042A84004B9617 /* XibTableViewCell.m in Sources */,
 				6FBDAB5E1305616C004B9617 /* nut_bootstrap.m in Sources */,
 				6FBDAC4113059041004B9617 /* HeaderView.m in Sources */,
+				6FBDACEE130680F0004B9617 /* TextFieldsDemoViewController.m in Sources */,
+				6FBDAD09130686DE004B9617 /* ParallelProcessingDemoViewController.m in Sources */,
+				6FBDAD84130696C6004B9617 /* SleepTask.m in Sources */,
+				6FBDAD87130696D3004B9617 /* SleepTaskOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

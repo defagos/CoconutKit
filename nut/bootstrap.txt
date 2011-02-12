@@ -1,4 +1,5 @@
 HLSTextField.m
+HLSViewController.m
 NSData+HLSCompression.m
 NSDate+HLSExtensions.m
 NSObject+HLSExtensions.m

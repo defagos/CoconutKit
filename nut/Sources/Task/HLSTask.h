@@ -13,11 +13,13 @@
 #define kTaskNoTimeIntervalEstimateAvailable        -1.
 
 /**
- * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status
+ * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status. To create your own
+ * tasks, simply subclass HLSTask and override the operationClass method to return the class of the operation
+ * responsible for processing the task.
  *
  * A task must not be submitted several times simultaneously (this leads to undefined behavior). A task
- * which was fully processed can be submitted again (and with another delegate if needed), but must not be
- * already running.
+ * which was fully processed can be submitted again (and with another delegate if needed), but only when it
+ * is not running anymore.
  *
  * Designated initializer: init
  */
@@ -35,7 +37,7 @@
     NSUInteger _progressStepsCounter; 
     NSDictionary *_returnInfo;
     NSError *_error;
-    HLSTaskGroup *_taskGroup;            // parent task group if any, nil if none
+    HLSTaskGroup *_taskGroup;               // parent task group if any, nil if none
 }
 
 /**

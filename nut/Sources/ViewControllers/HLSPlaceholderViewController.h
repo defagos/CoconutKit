@@ -33,19 +33,19 @@ typedef enum {
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;
 
-// TODO: Probably move in a common superclass since this can be quite useful. Also rename as HLSViewControllerLifeCyclePhase
+// TODO: Probably move in a common superclass since this can be quite useful. Also rename as HLSViewControllerHLSViewControllerLifeCyclePhase
 typedef enum {
-    LifeCyclePhaseEnumBegin = 0,
-    LifeCyclePhaseInitialized = LifeCyclePhaseEnumBegin,
-    LifeCyclePhaseViewDidLoad,
-    LifeCyclePhaseViewWillAppear,
-    LifeCyclePhaseViewDidAppear,
-    LifeCyclePhaseViewWillDisappear,
-    LifeCyclePhaseViewDidDisappear,
-    LifeCyclePhaseViewDidUnload,
-    LifeCyclePhaseEnumEnd,
-    LifeCyclePhaseEnumSize = LifeCyclePhaseEnumEnd - LifeCyclePhaseEnumBegin
-} LifeCyclePhase;
+    HLSViewControllerLifeCyclePhaseEnumBegin = 0,
+    HLSViewControllerLifeCyclePhaseInitialized = HLSViewControllerLifeCyclePhaseEnumBegin,
+    HLSViewControllerLifeCyclePhaseViewDidLoad,
+    HLSViewControllerLifeCyclePhaseViewWillAppear,
+    HLSViewControllerLifeCyclePhaseViewDidAppear,
+    HLSViewControllerLifeCyclePhaseViewWillDisappear,
+    HLSViewControllerLifeCyclePhaseViewDidDisappear,
+    HLSViewControllerLifeCyclePhaseViewDidUnload,
+    HLSViewControllerLifeCyclePhaseEnumEnd,
+    HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
+} HLSViewControllerLifeCyclePhase;
 
 // Forward declarations
 @protocol HLSPlaceholderViewControllerDelegate;
@@ -123,7 +123,7 @@ typedef enum {
     CGAffineTransform m_oldOriginalInsetViewTransform;      // Save the original properties during animation
     CGFloat m_oldOriginalInsetViewAlpha;                    // (same as above)
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
-    LifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
+    HLSViewControllerLifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }

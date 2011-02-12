@@ -8,7 +8,9 @@
 
 #import "DemosListViewController.h"
 
+#import "ParallelProcessingDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
+#import "TextFieldsDemoViewController.h"
 
 // Categories
 typedef enum {
@@ -281,7 +283,8 @@ typedef enum {
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
-
+                    ParallelProcessingDemoViewController *demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     
@@ -307,7 +310,8 @@ typedef enum {
                 }
                     
                 case ViewDemoIndexTextFields: {
-
+                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     

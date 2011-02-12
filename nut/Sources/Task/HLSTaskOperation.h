@@ -19,7 +19,7 @@
  *    In particular, no other threads which the operation might have spawned must still be running
  *  - when cancelling a task, each operation is sent a cancel message. You must especially be careful that
  *    if your operations are already running (e.g. downloading data), they will only be put in the cancelled state,
- *    but the corresponding thread will not be killed. Your operation implementation is responsible to check
+ *    but the corresponding thread will not be killed. Your operation implementation is therefore responsible to check
  *    its state regularly so that if a running operation is switched to the cancelled state it gracefully stops its
  *    current work as soon as possible
  *  - operations are instantiated by the HLSTaskManager using their designated initializer. Your subclass must therefore
