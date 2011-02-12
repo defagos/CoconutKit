@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// TODO: Probably move in a common superclass since this can be quite useful. Also rename as HLSViewControllerHLSViewControllerLifeCyclePhase
+// Lifecycle phases
 typedef enum {
     HLSViewControllerLifeCyclePhaseEnumBegin = 0,
     HLSViewControllerLifeCyclePhaseInitialized = HLSViewControllerLifeCyclePhaseEnumBegin,
@@ -41,11 +41,13 @@ typedef enum {
  *   - in releaseViews: Release all views retained by the view controller. If your view controller subclass retains view controllers
  *     to avoid creating their views too often ("view caching"), also set the views of thesee view controllers to nil in this method
  *   - in dealloc: Release all other resources owned by the view controller (model objects, other view controllers, etc.)
+ * If you are subclassing a class already subclassing HLSViewController, do not forget to send the releaseView message to super first.
  */
 - (void)releaseViews;
 
 /**
  * Return the life cycle phase the view controller is currently in
+ * Not meant to be overridden
  */
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 

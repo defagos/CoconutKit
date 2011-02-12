@@ -12,8 +12,6 @@
 
 @interface ParallelProcessingDemoViewController ()
 
-- (void)releaseViews;
-
 - (void)taskStartButtonClicked:(id)sender;
 - (void)taskStopButtonClicked:(id)sender;
 
@@ -36,8 +34,6 @@
     // Just to be sure we do not let a dying object listen to task events; this would not be needed here since
     // this is also done when the view disappears, but it is still a good practice
     [[HLSTaskManager defaultManager] cancelTasksWithDelegate:self];
-    
-    [self releaseViews];
     [super dealloc];
 }
 
@@ -82,12 +78,6 @@
 {
     // We do not want to let tasks run when we leave the screen
     [[HLSTaskManager defaultManager] cancelTasksWithDelegate:self];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [self releaseViews];
 }
 
 #pragma mark Orientation management

@@ -12,6 +12,22 @@
 
 #pragma mark Object creation and destruction
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [self releaseViews];
@@ -58,6 +74,7 @@
 {
     [self viewDidUnload];
     [self releaseViews];
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
 #pragma mark Accessors and mutators

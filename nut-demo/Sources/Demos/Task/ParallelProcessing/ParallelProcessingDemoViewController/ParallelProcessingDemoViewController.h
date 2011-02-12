@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface ParallelProcessingDemoViewController : UIViewController <HLSTaskDelegate, HLSTaskGroupDelegate> {
+@interface ParallelProcessingDemoViewController : HLSViewController <HLSTaskDelegate, HLSTaskGroupDelegate> {
 @private
     UILabel *m_taskLabel;
     UIButton *m_taskStartButton;

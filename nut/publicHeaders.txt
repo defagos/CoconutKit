@@ -48,6 +48,7 @@ HLSValidators.h
 HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
 HLSViewAnimationStep.h
+HLSViewController.h
 HLSWizardViewController.h
 HLSXibView.h
 NSData+HLSCompression.h

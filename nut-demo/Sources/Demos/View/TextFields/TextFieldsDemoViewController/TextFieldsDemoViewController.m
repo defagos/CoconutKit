@@ -8,12 +8,6 @@
 
 #import "TextFieldsDemoViewController.h"
 
-@interface TextFieldsDemoViewController ()
-
-- (void)releaseViews;
-
-@end
-
 @implementation TextFieldsDemoViewController
 
 #pragma mark Object creation and destruction
@@ -26,26 +20,12 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self releaseViews];
-    [super dealloc];
-}
-
 - (void)releaseViews
 {
     self.textField1 = nil;
     self.textField2 = nil;
     self.textField3 = nil;
     self.textField4 = nil;
-}
-
-#pragma mark View lifecycle
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [self releaseViews];
 }
 
 #pragma mark Orientation management

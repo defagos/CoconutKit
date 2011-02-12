@@ -11,6 +11,7 @@
 #import "HLSAnimation.h"
 #import "HLSAnimationStep.h"
 #import "HLSTwoViewAnimationStepDefinition.h"
+#import "HLSViewController.h"
 
 typedef enum {
     HLSTransitionStyleEnumBegin = 0,
@@ -32,20 +33,6 @@ typedef enum {
     HLSTransitionStyleEnumEnd,
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;
-
-// TODO: Probably move in a common superclass since this can be quite useful. Also rename as HLSViewControllerHLSViewControllerLifeCyclePhase
-typedef enum {
-    HLSViewControllerLifeCyclePhaseEnumBegin = 0,
-    HLSViewControllerLifeCyclePhaseInitialized = HLSViewControllerLifeCyclePhaseEnumBegin,
-    HLSViewControllerLifeCyclePhaseViewDidLoad,
-    HLSViewControllerLifeCyclePhaseViewWillAppear,
-    HLSViewControllerLifeCyclePhaseViewDidAppear,
-    HLSViewControllerLifeCyclePhaseViewWillDisappear,
-    HLSViewControllerLifeCyclePhaseViewDidDisappear,
-    HLSViewControllerLifeCyclePhaseViewDidUnload,
-    HLSViewControllerLifeCyclePhaseEnumEnd,
-    HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
-} HLSViewControllerLifeCyclePhase;
 
 // Forward declarations
 @protocol HLSPlaceholderViewControllerDelegate;
@@ -108,7 +95,7 @@ typedef enum {
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : UIViewController <HLSReloadable, HLSAnimationDelegate> {
+@interface HLSPlaceholderViewController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
 @private
     UIViewController *m_insetViewController;                // The view controller displayed as inset
     BOOL m_insetViewAddedAsSubview;                         // Avoid testing the view controller view property (this triggers view loading,
@@ -123,7 +110,6 @@ typedef enum {
     CGAffineTransform m_oldOriginalInsetViewTransform;      // Save the original properties during animation
     CGFloat m_oldOriginalInsetViewAlpha;                    // (same as above)
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
-    HLSViewControllerLifeCyclePhase m_lifeCyclePhase;                        // Which lifecycle phase is the placeholder view controller currently in?
     BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }

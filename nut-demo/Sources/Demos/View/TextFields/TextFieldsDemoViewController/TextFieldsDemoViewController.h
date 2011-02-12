@@ -6,7 +6,7 @@
 //  Copyright 2011 HLSXibView. All rights reserved.
 //
 
-@interface TextFieldsDemoViewController : UIViewController {
+@interface TextFieldsDemoViewController : HLSViewController {
 @private
     HLSTextField *m_textField1;
     HLSTextField *m_textField2;
