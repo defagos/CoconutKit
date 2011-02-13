@@ -202,7 +202,7 @@
     id<HLSTaskDelegate> taskDelegate = [self.taskManager delegateForTask:self.task];
     
     // Update the progress to 1.f on success, else do not alter current value (so that the progress value cannot go backwards)
-    if (! self.task.error) {
+    if (! self.task.error && ! [self isCancelled]) {
         self.task.progress = 1.f;
         if ([taskDelegate respondsToSelector:@selector(taskProgressUpdated:)]) {
             [taskDelegate taskProgressUpdated:self.task];
