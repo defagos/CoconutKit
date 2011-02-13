@@ -1,0 +1,154 @@
+//
+//  MultipleViewsAnimationDemoViewController.m
+//  nut-demo
+//
+//  Created by Samuel Défago on 2/13/11.
+//  Copyright 2011 Hortis. All rights reserved.
+//
+
+#import "MultipleViewsAnimationDemoViewController.h"
+
+@interface MultipleViewsAnimationDemoViewController ()
+
+@property (nonatomic, retain) HLSAnimation *animation;
+
+- (void)playForwardButtonClicked:(id)sender;
+- (void)playBackwardButtonClicked:(id)sender;
+
+@end
+
+@implementation MultipleViewsAnimationDemoViewController
+
+#pragma mark Object creation and destruction
+
+- (void)dealloc
+{
+    // Currently no way to stop the animation; be sure not to be the delegate anymore if an animation is running
+    // while the view controller gets deallocated
+    self.animation.delegate = nil;
+    
+    self.animation = nil;
+    [super dealloc];
+}
+
+- (void)releaseViews
+{
+    self.rectangleView1 = nil;
+    self.rectangleView2 = nil;
+    self.rectangleView3 = nil;
+    self.rectangleView4 = nil;
+    self.playForwardButton = nil;
+    self.playBackwardButton = nil;
+}
+
+#pragma mark View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") 
+                            forState:UIControlStateNormal];
+    [self.playForwardButton addTarget:self 
+                               action:@selector(playForwardButtonClicked:)
+                     forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") 
+                             forState:UIControlStateNormal];
+    [self.playBackwardButton addTarget:self 
+                                action:@selector(playBackwardButtonClicked:)
+                      forControlEvents:UIControlEventTouchUpInside];
+    self.playBackwardButton.hidden = YES;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize rectangleView1 = m_rectangleView1;
+
+@synthesize rectangleView2 = m_rectangleView2;
+
+@synthesize rectangleView3 = m_rectangleView3;
+
+@synthesize rectangleView4 = m_rectangleView4;
+
+@synthesize playForwardButton = m_playForwardButton;
+
+@synthesize playBackwardButton = m_playBackwardButton;
+
+@synthesize animation = m_animation;
+
+#pragma mark Event callbacks
+
+- (void)playForwardButtonClicked:(id)sender
+{
+    self.playForwardButton.hidden = YES;
+    
+    // Several views animated; build the animation step from a set of view animation steps
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.duration = 2.f;
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:50.f 
+                                                                                                          deltaY:60.f];
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView1];
+    HLSViewAnimationStep *viewAnimationStep12 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:CGAffineTransformMakeRotation(-M_PI)
+                                                                                                  alphaVariation:-0.4f];
+    [animationStep1 addViewAnimationStep:viewAnimationStep12 forView:self.rectangleView2];
+    HLSViewAnimationStep *viewAnimationStep13 = [HLSViewAnimationStep viewAnimationStepAnimatingViewFromFrame:self.rectangleView3.frame
+                                                                                                      toFrame:self.rectangleView4.frame];
+    [animationStep1 addViewAnimationStep:viewAnimationStep13 forView:self.rectangleView3];
+    HLSViewAnimationStep *viewAnimationStep14 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-0.8f];
+    [animationStep1 addViewAnimationStep:viewAnimationStep14 forView:self.rectangleView4];
+    
+    // Can also apply the same view animation step to all views
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.duration = 1.f;
+    HLSViewAnimationStep *viewAnimationStep2 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:CGAffineTransformMakeScale(1.5f, 1.5f)
+                                                                                                 alphaVariation:0.f];
+    [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView1];
+    [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView2];
+    [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView3];
+    [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView4];
+    
+    // In fact, there is an even easier way to achieve this
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepTranslatingViews:[NSArray arrayWithObjects:self.rectangleView1,
+                                                                                        self.rectangleView2,
+                                                                                        self.rectangleView3,
+                                                                                        self.rectangleView4,
+                                                                                        nil]
+                                                                            withDeltaX:0.f
+                                                                                deltaY:50.f
+                                                                        alphaVariation:0.f];
+    animationStep3.duration = 0.8f;
+    
+    // Create the animation and play it
+    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
+                                                                animationStep2,
+                                                                animationStep3,
+                                                                nil]];
+    self.animation.tag = @"multipleViewsAnimation";
+    self.animation.delegate = self;
+    [self.animation play];
+}
+
+- (void)playBackwardButtonClicked:(id)sender
+{
+    self.playBackwardButton.hidden = YES;
+    
+    // Create the reverse animation
+    HLSAnimation *reverseAnimation = [self.animation reverseAnimation];
+    [reverseAnimation play];
+}
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationDidStop:(HLSAnimation *)animation
+{
+    // Can find which animation ended using its tag
+    if ([animation.tag isEqual:@"multipleViewsAnimation"]) {
+        self.playBackwardButton.hidden = NO;
+    }
+    else if ([animation.tag isEqual:@"reverse_multipleViewsAnimation"]) {
+        self.playForwardButton.hidden = NO;
+    }
+}
+
+@end

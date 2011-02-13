@@ -51,6 +51,12 @@
                                                       alphaVariation:(CGFloat)alphaVariation;
 
 /**
+ * View animation step applying a transform and an alpha variation
+ */
++ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithTransform:(CGAffineTransform)transform
+                                                      alphaVariation:(CGFloat)alphaVariation;
+
+/**
  * View animation step varying the alpha of a view
  */
 + (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithAlphaVariation:(CGFloat)alphaVariation;

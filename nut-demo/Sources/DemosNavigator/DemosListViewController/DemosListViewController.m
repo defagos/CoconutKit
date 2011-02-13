@@ -8,7 +8,9 @@
 
 #import "DemosListViewController.h"
 
+#import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
+#import "SingleViewAnimationDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
 
@@ -36,7 +38,6 @@ typedef enum {
 typedef enum {
     TaskDemoIndexEnumBegin = 0,
     TaskDemoIndexParallelProcessing = TaskDemoIndexEnumBegin,
-    TaskDemoIndexDownloads,
     TaskDemoIndexEnumEnd,
     TaskDemoIndexEnumSize = TaskDemoIndexEnumEnd - TaskDemoIndexEnumBegin
 } TaskDemoIndex;
@@ -179,11 +180,6 @@ typedef enum {
                     break;
                 }
                     
-                case TaskDemoIndexDownloads: {
-                    cell.textLabel.text = NSLocalizedString(@"Downloads", @"Downloads");
-                    break;
-                }
-                    
                 default: {
                     return nil;
                     break;
@@ -263,12 +259,14 @@ typedef enum {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
                 case AnimationDemoIndexSingleView: {
-
+                    SingleViewAnimationDemoViewController *demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     
                 case AnimationDemoIndexMultipleViews: {
-
+                    MultipleViewsAnimationDemoViewController *demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     
@@ -285,11 +283,6 @@ typedef enum {
                 case TaskDemoIndexParallelProcessing: {
                     ParallelProcessingDemoViewController *demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
-                    break;
-                }
-                    
-                case TaskDemoIndexDownloads: {
-
                     break;
                 }
                     

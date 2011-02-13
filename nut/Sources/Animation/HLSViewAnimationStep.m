@@ -60,6 +60,15 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return viewAnimationStep;
 }
 
++ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithTransform:(CGAffineTransform)transform
+                                                      alphaVariation:(CGFloat)alphaVariation
+{
+    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep.transform = transform;
+    viewAnimationStep.alphaVariation = alphaVariation;
+    return viewAnimationStep;
+}
+
 + (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithAlphaVariation:(CGFloat)alphaVariation
 {
     HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];

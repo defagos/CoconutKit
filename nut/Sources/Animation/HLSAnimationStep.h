@@ -50,7 +50,7 @@
                               withAlphaVariation:(CGFloat)alphaVariation;
 
 /**
- * Animation step applying a translation to a view frame
+ * Animation step applying a translation to a view or an NSArray of UIView objects
  */
 + (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
                                         withDeltaX:(CGFloat)deltaX
@@ -61,11 +61,34 @@
                                             deltaY:(CGFloat)deltaY
                                     alphaVariation:(CGFloat)alphaVariation;
 
++ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
+                                         withDeltaX:(CGFloat)deltaX
+                                             deltaY:(CGFloat)deltaY;
+
++ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
+                                         withDeltaX:(CGFloat)deltaX
+                                             deltaY:(CGFloat)deltaY
+                                     alphaVariation:(CGFloat)alphaVariation;
+
 /**
- * Animation step varying the alpha of a view
+ * Animation step applying a transform and an alpha variation to a view or an NSArray of UIView objects
  */
-+ (HLSAnimationStep *)viewAnimationChangingView:(UIView *)view
++ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
+                                  withTransform:(CGAffineTransform)transform
+                                 alphaVariation:(CGFloat)alphaVariation;
+
++ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
+                                   withTransform:(CGAffineTransform)transform
+                                  alphaVariation:(CGFloat)alphaVariation;
+
+/**
+ * Animation step varying the alpha of a view or of an NSArray of UIView objects
+ */
++ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
                              withAlphaVariation:(CGFloat)alphaVariation;
+
++ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
+                              withAlphaVariation:(CGFloat)alphaVariation;
 
 /**
  * Setting a view animation step for a view. Only one animation step can be defined at most for a view during

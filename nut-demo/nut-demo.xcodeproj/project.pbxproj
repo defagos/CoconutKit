@@ -36,6 +36,10 @@
 		6FBDAD84130696C6004B9617 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD83130696C6004B9617 /* SleepTask.m */; };
 		6FBDAD87130696D3004B9617 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD86130696D3004B9617 /* SleepTaskOperation.m */; };
 		6FBDAE461306A0D5004B9617 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAE451306A0D5004B9617 /* ParallelProcessingDemoViewController.xib */; };
+		6FBDB06013082FBA004B9617 /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB05F13082FBA004B9617 /* SingleViewAnimationDemoViewController.m */; };
+		6FBDB06213083227004B9617 /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB06113083227004B9617 /* SingleViewAnimationDemoViewController.xib */; };
+		6FBDB0F513085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */; };
+		6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +87,12 @@
 		6FBDAD85130696D3004B9617 /* SleepTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTaskOperation.h; sourceTree = "<group>"; };
 		6FBDAD86130696D3004B9617 /* SleepTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTaskOperation.m; sourceTree = "<group>"; };
 		6FBDAE451306A0D5004B9617 /* ParallelProcessingDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParallelProcessingDemoViewController.xib; sourceTree = "<group>"; };
+		6FBDB05E13082FBA004B9617 /* SingleViewAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleViewAnimationDemoViewController.h; sourceTree = "<group>"; };
+		6FBDB05F13082FBA004B9617 /* SingleViewAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleViewAnimationDemoViewController.m; sourceTree = "<group>"; };
+		6FBDB06113083227004B9617 /* SingleViewAnimationDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleViewAnimationDemoViewController.xib; sourceTree = "<group>"; };
+		6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleViewsAnimationDemoViewController.m; sourceTree = "<group>"; };
+		6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleViewsAnimationDemoViewController.xib; sourceTree = "<group>"; };
+		6FBDB0F413085AA1004B9617 /* MultipleViewsAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleViewsAnimationDemoViewController.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,6 +271,8 @@
 		6FBDA8BD13041C43004B9617 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDB05713082F6F004B9617 /* MultipleViewsAnimation */,
+				6FBDB05913082F6F004B9617 /* SingleViewAnimation */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -433,6 +445,42 @@
 			path = SleepTask;
 			sourceTree = "<group>";
 		};
+		6FBDB05713082F6F004B9617 /* MultipleViewsAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB05813082F6F004B9617 /* MutipleViewsAnimationDemoViewController */,
+			);
+			path = MultipleViewsAnimation;
+			sourceTree = "<group>";
+		};
+		6FBDB05813082F6F004B9617 /* MutipleViewsAnimationDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */,
+				6FBDB0F413085AA1004B9617 /* MultipleViewsAnimationDemoViewController.h */,
+				6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */,
+			);
+			path = MutipleViewsAnimationDemoViewController;
+			sourceTree = "<group>";
+		};
+		6FBDB05913082F6F004B9617 /* SingleViewAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB05A13082F6F004B9617 /* SingleViewAnimationDemoViewController */,
+			);
+			path = SingleViewAnimation;
+			sourceTree = "<group>";
+		};
+		6FBDB05A13082F6F004B9617 /* SingleViewAnimationDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB05E13082FBA004B9617 /* SingleViewAnimationDemoViewController.h */,
+				6FBDB05F13082FBA004B9617 /* SingleViewAnimationDemoViewController.m */,
+				6FBDB06113083227004B9617 /* SingleViewAnimationDemoViewController.xib */,
+			);
+			path = SingleViewAnimationDemoViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -495,6 +543,8 @@
 				6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */,
 				6FBDACF013068107004B9617 /* TextFieldsDemoViewController.xib in Resources */,
 				6FBDAE461306A0D5004B9617 /* ParallelProcessingDemoViewController.xib in Resources */,
+				6FBDB06213083227004B9617 /* SingleViewAnimationDemoViewController.xib in Resources */,
+				6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +568,8 @@
 				6FBDAD09130686DE004B9617 /* ParallelProcessingDemoViewController.m in Sources */,
 				6FBDAD84130696C6004B9617 /* SleepTask.m in Sources */,
 				6FBDAD87130696D3004B9617 /* SleepTaskOperation.m in Sources */,
+				6FBDB06013082FBA004B9617 /* SingleViewAnimationDemoViewController.m in Sources */,
+				6FBDB0F513085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

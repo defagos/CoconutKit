@@ -12,13 +12,14 @@
 "Demos"="Demos";
 "Details"="Details";
 "Dismiss"="Dismiss";
-"Downloads"="Downloads";
 "Error"="Error";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
 "Houston, we've got a problem"="Houston, we've got a problem";
 "Multiple view animation"="Multiple view animation";
 "Parallel processing"="Parallel processing";
+"Play forward"="Play forward";
+"Play backward"="Play backward";
 "Remaining time estimate"="Remaining time estimate";
 "Single view animation"="Single view animation";
 "Start"="Start";
