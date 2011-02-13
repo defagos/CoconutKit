@@ -107,8 +107,8 @@
 - (NSUInteger)nbrFailures;
 
 /**
- * Create dependencies between tasks of a task group. If task1 depends on task2, then task1 will
- * only begin processing once task2 has been fully processed.
+ * Create dependencies between tasks of a task group (both tasks must have already been added to the task group. If task1 depends on task2, then 
+ * task1 will only begin processing once task2 has been fully processed.
  */
 - (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2;
 

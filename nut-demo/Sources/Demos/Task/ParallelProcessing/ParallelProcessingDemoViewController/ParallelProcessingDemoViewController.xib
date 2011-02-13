@@ -101,7 +101,26 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="806072207"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;startStop&gt;</string>
+						<string key="IBUINormalTitle">&lt;start&gt;</string>
+						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
+					</object>
+					<object class="IBUIButton" id="465279575">
+						<reference key="NSNextResponder" ref="982762895"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{62, 620}, {132, 37}}</string>
+						<reference key="NSSuperview" ref="982762895"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIFont" ref="806072207"/>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">&lt;stop&gt;</string>
 						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -509,6 +528,158 @@
 					</object>
 					<int key="connectionID">41</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1046193325"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupStartButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="607778981"/>
+					</object>
+					<int key="connectionID">44</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupStopButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="465279575"/>
+					</object>
+					<int key="connectionID">45</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupProgressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="831830403"/>
+					</object>
+					<int key="connectionID">46</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupRemainingTimeEstimateLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="401342058"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">taskGroupRemainingTimeLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="524601731"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTasksLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="497172839"/>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask1ProgressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="199883418"/>
+					</object>
+					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask1RemainingTimeEstimateLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="870835724"/>
+					</object>
+					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask1RemainingTimeLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="969211916"/>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask1StopButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="516676967"/>
+					</object>
+					<int key="connectionID">53</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask2ProgressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="13645666"/>
+					</object>
+					<int key="connectionID">54</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask2RemainingTimeEstimateLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="659104228"/>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask2RemainingTimeLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="938650982"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask2StopButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="691869695"/>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask3ProgressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="983030766"/>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask3RemainingTimeEstimateLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="603858199"/>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask3RemainingTimeLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="248951204"/>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subTask3StopButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="697638063"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -559,6 +730,7 @@
 							<reference ref="697638063"/>
 							<reference ref="401342058"/>
 							<reference ref="408797683"/>
+							<reference ref="465279575"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -682,6 +854,11 @@
 						<reference key="object" ref="408797683"/>
 						<reference key="parent" ref="982762895"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">43</int>
+						<reference key="object" ref="465279575"/>
+						<reference key="parent" ref="982762895"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -732,6 +909,8 @@
 					<string>39.IBViewBoundsToFrameTransform</string>
 					<string>4.IBPluginDependency</string>
 					<string>4.IBViewBoundsToFrameTransform</string>
+					<string>43.IBPluginDependency</string>
+					<string>43.IBViewBoundsToFrameTransform</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.IBViewBoundsToFrameTransform</string>
 					<string>6.IBPluginDependency</string>
@@ -829,11 +1008,15 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABChgAAxCUAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDfgAAwtgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCaAAAw6CAAA</bytes>
+						<bytes key="NSTransformStruct">AUJ4AABEGwAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -861,18 +1044,37 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">61</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">ParallelProcessingDemoViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">HLSViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>subTask1ProgressView</string>
+							<string>subTask1RemainingTimeEstimateLabel</string>
+							<string>subTask1RemainingTimeLabel</string>
+							<string>subTask1StopButton</string>
+							<string>subTask2ProgressView</string>
+							<string>subTask2RemainingTimeEstimateLabel</string>
+							<string>subTask2RemainingTimeLabel</string>
+							<string>subTask2StopButton</string>
+							<string>subTask3ProgressView</string>
+							<string>subTask3RemainingTimeEstimateLabel</string>
+							<string>subTask3RemainingTimeLabel</string>
+							<string>subTask3StopButton</string>
+							<string>subTasksLabel</string>
+							<string>taskGroupLabel</string>
+							<string>taskGroupProgressView</string>
+							<string>taskGroupRemainingTimeEstimateLabel</string>
+							<string>taskGroupRemainingTimeLabel</string>
+							<string>taskGroupStartButton</string>
+							<string>taskGroupStopButton</string>
 							<string>taskLabel</string>
 							<string>taskProgressView</string>
 							<string>taskRemainingTimeEstimateLabel</string>
@@ -882,6 +1084,25 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIProgressView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+							<string>UIProgressView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+							<string>UIProgressView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIProgressView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UIProgressView</string>
 							<string>UILabel</string>
@@ -894,6 +1115,25 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>subTask1ProgressView</string>
+							<string>subTask1RemainingTimeEstimateLabel</string>
+							<string>subTask1RemainingTimeLabel</string>
+							<string>subTask1StopButton</string>
+							<string>subTask2ProgressView</string>
+							<string>subTask2RemainingTimeEstimateLabel</string>
+							<string>subTask2RemainingTimeLabel</string>
+							<string>subTask2StopButton</string>
+							<string>subTask3ProgressView</string>
+							<string>subTask3RemainingTimeEstimateLabel</string>
+							<string>subTask3RemainingTimeLabel</string>
+							<string>subTask3StopButton</string>
+							<string>subTasksLabel</string>
+							<string>taskGroupLabel</string>
+							<string>taskGroupProgressView</string>
+							<string>taskGroupRemainingTimeEstimateLabel</string>
+							<string>taskGroupRemainingTimeLabel</string>
+							<string>taskGroupStartButton</string>
+							<string>taskGroupStopButton</string>
 							<string>taskLabel</string>
 							<string>taskProgressView</string>
 							<string>taskRemainingTimeEstimateLabel</string>
@@ -903,6 +1143,82 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask1ProgressView</string>
+								<string key="candidateClassName">UIProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask1RemainingTimeEstimateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask1RemainingTimeLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask1StopButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask2ProgressView</string>
+								<string key="candidateClassName">UIProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask2RemainingTimeEstimateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask2RemainingTimeLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask2StopButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask3ProgressView</string>
+								<string key="candidateClassName">UIProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask3RemainingTimeEstimateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask3RemainingTimeLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTask3StopButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">subTasksLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupProgressView</string>
+								<string key="candidateClassName">UIProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupRemainingTimeEstimateLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupRemainingTimeLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupStartButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">taskGroupStopButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">taskLabel</string>
 								<string key="candidateClassName">UILabel</string>
@@ -937,6 +1253,14 @@
 			</object>
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">HLSViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">nut.framework/Headers/HLSViewController.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

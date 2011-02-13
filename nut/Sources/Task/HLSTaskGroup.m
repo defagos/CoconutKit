@@ -13,6 +13,12 @@
 #import "HLSTask+Friend.h"
 #import "HLSTaskGroup+Friend.h"
 
+// Remark:
+// HLSTaskGroup is not a subclass of HLSTask. This would have been nice, but this would also have introduced subtle
+// issues regarding cycling task dependencies in the task composites which could have been made in this case. To
+// keep everything simple (because it is already complicated enough), I chose to create two separate kinds of
+// objects instead.
+
 const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @interface HLSTaskGroup ()
