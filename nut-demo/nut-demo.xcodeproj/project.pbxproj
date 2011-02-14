@@ -440,8 +440,8 @@
 		6FBDB05813082F6F004B9617 /* MutipleViewsAnimationDemoViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */,
 				6FBDB0F413085AA1004B9617 /* MultipleViewsAnimationDemoViewController.h */,
+				6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */,
 				6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */,
 			);
 			path = MutipleViewsAnimationDemoViewController;
@@ -694,6 +694,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -708,6 +709,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;

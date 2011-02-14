@@ -132,6 +132,7 @@
                                                                 animationStep3,
                                                                 nil]];
     self.animation.tag = @"multipleViewsAnimation";
+    self.animation.lockingUI = YES;
     self.animation.delegate = self;
     [self.animation play];
 }

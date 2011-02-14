@@ -22,11 +22,7 @@
 #pragma mark Object creation and destruction
 
 - (void)dealloc
-{
-    // Currently no way to stop the animation; be sure not to be the delegate anymore if an animation is running
-    // while the view controller gets deallocated
-    self.animation.delegate = nil;
-    
+{    
     self.animation = nil;
     [super dealloc];
 }
@@ -112,6 +108,7 @@
                                                                 animationStep4,
                                                                 nil]];
     self.animation.tag = @"singleViewAnimation";
+    self.animation.lockingUI = YES;
     self.animation.delegate = self;
     [self.animation play];
 }

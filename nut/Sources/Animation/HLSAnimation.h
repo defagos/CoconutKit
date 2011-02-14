@@ -19,7 +19,8 @@
  * Currently, there is sadly no way to stop an animation once it has begun. You must therefore be especially careful
  * if a delegate registered for an animation dies before the animation ends (do not forget to unregister it before).
  * Moreover, an animation does not retain the view it animates (see HLSViewAnimationStep documentation). You should
- * therefore ensure that an animation has ended before its views are destroyed.
+ * therefore ensure that an animation has ended before its views are destroyed. The easiest solution to both problems
+ * is to lock the UI during the animation (lockingUI animation property).
  *
  * Designated initializer: initWithAnimationSteps:
  */
