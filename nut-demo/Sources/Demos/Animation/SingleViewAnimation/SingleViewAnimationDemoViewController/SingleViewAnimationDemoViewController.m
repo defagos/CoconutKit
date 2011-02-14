@@ -68,6 +68,13 @@
 
 @synthesize animation = m_animation;
 
+#pragma mark Orientation management
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
 #pragma mark Event callbacks
 
 - (void)playForwardButtonClicked:(id)sender

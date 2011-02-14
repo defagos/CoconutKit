@@ -1,17 +1,17 @@
 //
-//  HLSTableSearchDisplayController.m
+//  HLSTableSearchDisplayViewController.m
 //  nut
 //
 //  Created by Samuel Défago on 8/23/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSTableSearchDisplayController.h"
+#import "HLSTableSearchDisplayViewController.h"
 
 #import "HLSReloadable.h"
 #import "HLSStandardWidgetConstants.h"
 
-@interface HLSTableSearchDisplayController ()
+@interface HLSTableSearchDisplayViewController ()
 
 @property (nonatomic, retain) UISearchBar *searchBar;
 
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation HLSTableSearchDisplayController
+@implementation HLSTableSearchDisplayViewController
 
 #pragma mark Object creation and destruction
 
@@ -48,10 +48,14 @@
 
 - (void)dealloc
 {
-    self.searchBar = nil;
-    self.tableView = nil;
     self.searchDelegate = nil;
     [super dealloc];
+}
+
+- (void)releaseViews
+{
+    self.searchBar = nil;
+    self.tableView = nil;
 }
 
 #pragma mark View lifecycle
@@ -116,7 +120,7 @@
 
 @synthesize searchDelegate = m_searchDelegate;
 
-- (void)setSearchDelegate:(id <HLSTableSearchDisplayDelegate>)searchDelegate
+- (void)setSearchDelegate:(id <HLSTableSearchDisplayViewControllerDelegate>)searchDelegate
 {
     // Check for self-assignment
     if (m_searchDelegate == searchDelegate) {
@@ -127,13 +131,13 @@
     m_searchDelegate = searchDelegate;
     
     // Cache protocol support flags
-    m_flags.delegateWillBeginSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayControllerWillBeginSearch:)];
-    m_flags.delegateDidBeginSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayControllerDidBeginSearch:)];
-    m_flags.delegateWillEndSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayControllerWillEndSearch:)];
-    m_flags.delegateDidEndSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayControllerDidEndSearch:)];
-    m_flags.delegateShouldReloadTableForSearchString = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayController:shouldReloadTableForSearchString:)];
-    m_flags.delegateShouldReloadTableForSearchScope = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayController:shouldReloadTableForSearchScope:)];
-    m_flags.delegateShouldReloadOriginalTable = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayControllerShouldReloadOriginalTable:)];
+    m_flags.delegateWillBeginSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerWillBeginSearch:)];
+    m_flags.delegateDidBeginSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerDidBeginSearch:)];
+    m_flags.delegateWillEndSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerWillEndSearch:)];
+    m_flags.delegateDidEndSearch = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerDidEndSearch:)];
+    m_flags.delegateShouldReloadTableForSearchString = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewController:shouldReloadTableForSearchString:)];
+    m_flags.delegateShouldReloadTableForSearchScope = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewController:shouldReloadTableForSearchScope:)];
+    m_flags.delegateShouldReloadOriginalTable = [m_searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerShouldReloadOriginalTable:)];
 }
 
 #pragma mark Search bar functions
@@ -192,8 +196,8 @@
 - (void)reloadTable
 {
     if ([self conformsToProtocol:@protocol(HLSReloadable)]) {
-        HLSTableSearchDisplayController<HLSReloadable> *reloadableTableSearchDisplayController = self;
-        [reloadableTableSearchDisplayController reloadData];
+        HLSTableSearchDisplayViewController<HLSReloadable> *reloadableTableSearchDisplayViewController = self;
+        [reloadableTableSearchDisplayViewController reloadData];
     }
     else {
         [self.tableView reloadData];
@@ -206,7 +210,7 @@
 {    
     [self maximizeSearchInterfaceAnimated:YES];
     if (m_flags.delegateWillBeginSearch) {
-        [self.searchDelegate tableSearchDisplayControllerWillBeginSearch:self];
+        [self.searchDelegate tableSearchDisplayViewControllerWillBeginSearch:self];
     }
     return YES;
 }
@@ -214,7 +218,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     if (m_flags.delegateDidBeginSearch) {
-        [self.searchDelegate tableSearchDisplayControllerDidBeginSearch:self];
+        [self.searchDelegate tableSearchDisplayViewControllerDidBeginSearch:self];
     }
 }
 
@@ -222,7 +226,7 @@
 {
     [self minimizeSearchInterfaceAnimated:YES];
     if (m_flags.delegateWillEndSearch) {
-        [self.searchDelegate tableSearchDisplayControllerWillEndSearch:self];
+        [self.searchDelegate tableSearchDisplayViewControllerWillEndSearch:self];
     }
     return YES;
 }
@@ -230,14 +234,14 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     if (m_flags.delegateDidEndSearch) {
-        [self.searchDelegate tableSearchDisplayControllerDidEndSearch:self];
+        [self.searchDelegate tableSearchDisplayViewControllerDidEndSearch:self];
     }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if (m_flags.delegateShouldReloadTableForSearchString) {
-        if ([self.searchDelegate tableSearchDisplayController:self shouldReloadTableForSearchString:searchBar.text]) {
+        if ([self.searchDelegate tableSearchDisplayViewController:self shouldReloadTableForSearchString:searchBar.text]) {
             [self reloadTable];
         }
     }
@@ -249,7 +253,7 @@
     [searchBar resignFirstResponder];
     
     if (m_flags.delegateShouldReloadTableForSearchString) {
-        if ([self.searchDelegate tableSearchDisplayController:self shouldReloadTableForSearchString:searchBar.text]) {
+        if ([self.searchDelegate tableSearchDisplayViewController:self shouldReloadTableForSearchString:searchBar.text]) {
             [self reloadTable];
         }
     }
@@ -265,7 +269,7 @@
     searchBar.selectedScopeButtonIndex = UISegmentedControlNoSegment;
     
     if (m_flags.delegateShouldReloadOriginalTable) {
-        if ([self.searchDelegate tableSearchDisplayControllerShouldReloadOriginalTable:self]) {
+        if ([self.searchDelegate tableSearchDisplayViewControllerShouldReloadOriginalTable:self]) {
             [self reloadTable];
         }
     }
@@ -274,7 +278,7 @@
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     if (m_flags.delegateShouldReloadTableForSearchScope) {
-        if ([self.searchDelegate tableSearchDisplayController:self shouldReloadTableForSearchScope:selectedScope]) {
+        if ([self.searchDelegate tableSearchDisplayViewController:self shouldReloadTableForSearchScope:selectedScope]) {
             [self reloadTable];
         }
     }

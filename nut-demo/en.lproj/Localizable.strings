@@ -6,6 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
 
+"All"="All";
 "Animation"="Animation";
 "Custom cell created programmatically"="Custom cell created programmatically";
 "Custom cell from xib"="Custom cell from xib";
@@ -17,7 +18,9 @@
 "Header: simple cells"="Header: simple cells";
 "Houston, we've got a problem"="Houston, we've got a problem";
 "Multiple view animation"="Multiple view animation";
+"Music players"="Music players";
 "Parallel processing"="Parallel processing";
+"Phones"="Phones";
 "Play forward"="Play forward";
 "Play backward"="Play backward";
 "Remaining time estimate"="Remaining time estimate";
@@ -26,6 +29,7 @@
 "Stop"="Stop";
 "Sub-tasks"="Sub-tasks";
 "Table view cells"="Table view cells";
+"Tablets"="Tablets";
 "Task"="Task";
 "Task group"="Task group";
 "Tasks"="Tasks";

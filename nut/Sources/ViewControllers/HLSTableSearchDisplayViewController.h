@@ -1,28 +1,32 @@
 //
-//  HLSTableSearchDisplayController.h
+//  HLSTableSearchDisplayViewController.h
 //  nut
 //
 //  Created by Samuel Défago on 8/23/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class HLSTableSearchDisplayController;
+#import "HLSViewController.h"
 
-@protocol HLSTableSearchDisplayDelegate <NSObject>
+// Forward declarations
+@class HLSTableSearchDisplayViewController;
+
+@protocol HLSTableSearchDisplayViewControllerDelegate <NSObject>
 
 @optional
 // when we start/end showing the search UI (use willBeginSearch to initialize the search string with some meaningful value if
 // you want)
-- (void)tableSearchDisplayControllerWillBeginSearch:(HLSTableSearchDisplayController *)controller;
-- (void)tableSearchDisplayControllerDidBeginSearch:(HLSTableSearchDisplayController *)controller;
-- (void)tableSearchDisplayControllerWillEndSearch:(HLSTableSearchDisplayController *)controller;
-- (void)tableSearchDisplayControllerDidEndSearch:(HLSTableSearchDisplayController *)controller;
+- (void)tableSearchDisplayViewControllerWillBeginSearch:(HLSTableSearchDisplayViewController *)controller;
+- (void)tableSearchDisplayViewControllerDidBeginSearch:(HLSTableSearchDisplayViewController *)controller;
+- (void)tableSearchDisplayViewControllerWillEndSearch:(HLSTableSearchDisplayViewController *)controller;
+- (void)tableSearchDisplayViewControllerDidEndSearch:(HLSTableSearchDisplayViewController *)controller;
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
-- (BOOL)tableSearchDisplayController:(HLSTableSearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString;
-- (BOOL)tableSearchDisplayController:(HLSTableSearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption;
-- (BOOL)tableSearchDisplayControllerShouldReloadOriginalTable:(HLSTableSearchDisplayController *)controller;
+- (BOOL)tableSearchDisplayViewController:(HLSTableSearchDisplayViewController *)controller 
+        shouldReloadTableForSearchString:(NSString *)searchString;
+- (BOOL)tableSearchDisplayViewController:(HLSTableSearchDisplayViewController *)controller 
+         shouldReloadTableForSearchScope:(NSInteger)searchOption;
+- (BOOL)tableSearchDisplayViewControllerShouldReloadOriginalTable:(HLSTableSearchDisplayViewController *)controller;
 
 @end
 
@@ -31,20 +35,18 @@
  * be used even if no search string is entered.
  *
  * Moreover, the use of this class is limited to filtering entries managed by a UITableView. This is
- * namely by far the most common use of UISearchDisplayController, which does not even support all cases
- * for table views (try e.g. adding the search bar as table view footer, you will see what I mean). This also
- * allows us to reuse the original table view to display the results (the added flexibility that UISearchDisplayController
- * provides is not really worth its price).
+ * namely by far the most common use of UISearchDisplayController. This also allows us to reuse the original table 
+ * view to display the results (the added flexibility that UISearchDisplayController provides is not really worth its price).
  *
  * To provide the user with the ability to customize the view controller layout, this class does not inherit directly from
  * UITableViewController, but from UIViewController. Classes derived from this class are therefore expected to initialize
  * the table view outlet provided, either using Interface Builder or via code.
  *
  * Table reload is handled in the following way:
- *   - if the class inheriting from HLSTableSearchDisplayController implements the HLSReloadable protocol, the protocol
+ *   - if the class inheriting from HLSTableSearchDisplayViewController implements the HLSReloadable protocol, the protocol
  *     reloadData method is called when the search criteria are updated. Since the class is ultimately a table view,
  *     the reloadData method must call the UITableView reloadData method, otherwise the behavior is undefined
- *   - if the class inheriting from HLSTableSearchDisplayController does not implement the HLSReloadable protocol, the
+ *   - if the class inheriting from HLSTableSearchDisplayViewController does not implement the HLSReloadable protocol, the
  *     UITableView reloadData method is used
  *
  * As for UITableViewController, this class conforms to the table view protocols for convenience, but does not provide
@@ -52,12 +54,12 @@
  * protocol methods to display records.
  *
  * Remark: If you override viewDidLoad, viewWillAppear, etc., do not forget to call its super counterpart (as usual),
- *         otherwise the HLSTableSearchDisplayController will not work correctly.
+ *         otherwise the HLSTableSearchDisplayViewController will not work correctly.
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSTableSearchDisplayController : UIViewController <
-    HLSTableSearchDisplayDelegate,
+@interface HLSTableSearchDisplayViewController : HLSViewController <
+    HLSTableSearchDisplayViewControllerDelegate,
     UISearchBarDelegate, 
     UITableViewDataSource,
     UITableViewDelegate
@@ -65,7 +67,7 @@
 @private
     UISearchBar *m_searchBar;
     UITableView *m_tableView;
-    id<HLSTableSearchDisplayDelegate> m_searchDelegate;
+    id<HLSTableSearchDisplayViewControllerDelegate> m_searchDelegate;
     BOOL m_firstTime;
     struct {
         unsigned int delegateWillBeginSearch:1;
@@ -93,6 +95,6 @@
  */
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
-@property (nonatomic, assign) id<HLSTableSearchDisplayDelegate> searchDelegate;
+@property (nonatomic, assign) id<HLSTableSearchDisplayViewControllerDelegate> searchDelegate;
 
 @end

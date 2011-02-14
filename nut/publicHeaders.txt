@@ -33,7 +33,7 @@ HLSSingleValuePicker.h
 HLSSingleValuePickerViewController.h
 HLSStandardWidgetConstants.h
 HLSSubtitleTableViewCell.h
-HLSTableSearchDisplayController.h
+HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h
 HLSTask.h
 HLSTaskGroup.h

@@ -9,6 +9,7 @@
 #import "HLSFeed.h"
 
 #import "HLSFeedFilter.h"
+#import "HLSRuntimeChecks.h"
 
 #pragma mark -
 #pragma mark FilteredFeed class interface
@@ -79,6 +80,12 @@
         [self update];
     }
     return self;
+}
+
+- (id)init
+{
+    FORBIDDEN_INHERITED_METHOD();
+    return nil;
 }
 
 - (void)dealloc

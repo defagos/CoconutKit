@@ -11,6 +11,7 @@
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
 
@@ -78,7 +79,7 @@ typedef enum {
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -329,7 +330,8 @@ typedef enum {
                 }
                     
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
-
+                    TableSearchDisplayDemoViewController *demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     

@@ -24,10 +24,6 @@
 		6FBDA9261304315B004B9617 /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */; };
 		6FBDA9271304315B004B9617 /* cell_bkgr_brown_large_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */; };
 		6FBDA9281304315B004B9617 /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA9251304315B004B9617 /* icn_bookmark.png */; };
-		6FBDAB5E1305616C004B9617 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAB571305616C004B9617 /* nut_bootstrap.m */; };
-		6FBDAB5F1305616C004B9617 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDAB581305616C004B9617 /* nut.framework */; };
-		6FBDAB601305616C004B9617 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAB5A1305616C004B9617 /* nut_Localizable.strings */; };
-		6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDAC3D1305903A004B9617 /* HeaderView.xib */; };
 		6FBDAC4113059041004B9617 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAC4013059041004B9617 /* HeaderView.m */; };
 		6FBDACEE130680F0004B9617 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDACED130680F0004B9617 /* TextFieldsDemoViewController.m */; };
@@ -40,6 +36,14 @@
 		6FBDB06213083227004B9617 /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB06113083227004B9617 /* SingleViewAnimationDemoViewController.xib */; };
 		6FBDB0F513085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */; };
 		6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */; };
+		6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */; };
+		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
+		6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */; };
+		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
+		6FBDB4A5130926E5004B9617 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB49E130926E5004B9617 /* nut_bootstrap.m */; };
+		6FBDB4A6130926E5004B9617 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDB49F130926E5004B9617 /* nut.framework */; };
+		6FBDB4A7130926E5004B9617 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */; };
+		6FBDB4A8130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,11 +73,6 @@
 		6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large.png; sourceTree = "<group>"; };
 		6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large_selected.png; sourceTree = "<group>"; };
 		6FBDA9251304315B004B9617 /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
-		6FBDAB571305616C004B9617 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
-		6FBDAB581305616C004B9617 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
-		6FBDAB5B1305616C004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6FBDAB5C1305616C004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6FBDAC3D1305903A004B9617 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		6FBDAC3F13059041004B9617 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		6FBDAC4013059041004B9617 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
@@ -93,6 +92,18 @@
 		6FBDB0F213085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleViewsAnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultipleViewsAnimationDemoViewController.xib; sourceTree = "<group>"; };
 		6FBDB0F413085AA1004B9617 /* MultipleViewsAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleViewsAnimationDemoViewController.h; sourceTree = "<group>"; };
+		6FBDB1B41308F95F004B9617 /* TableSearchDisplayDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSearchDisplayDemoViewController.h; sourceTree = "<group>"; };
+		6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSearchDisplayDemoViewController.m; sourceTree = "<group>"; };
+		6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
+		6FBDB28C13091439004B9617 /* DeviceFeedFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFeedFilter.h; sourceTree = "<group>"; };
+		6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFeedFilter.m; sourceTree = "<group>"; };
+		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		6FBDB49E130926E5004B9617 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
+		6FBDB49F130926E5004B9617 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
+		6FBDB4A2130926E5004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6FBDB4A3130926E5004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +116,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */,
-				6FBDAB5F1305616C004B9617 /* nut.framework in Frameworks */,
+				6FBDB4A6130926E5004B9617 /* nut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +157,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FBDAB551305616C004B9617 /* nut-Release.staticframework */,
+				6FBDB49C130926E5004B9617 /* nut-Release.staticframework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -191,6 +202,7 @@
 		6FBDA7241303E481004B9617 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6FBDB1B21308F925004B9617 /* TableSearchDisplay */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -359,34 +371,6 @@
 			path = Miscellaneous;
 			sourceTree = "<group>";
 		};
-		6FBDAB551305616C004B9617 /* nut-Release.staticframework */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDAB561305616C004B9617 /* Bootstrap */,
-				6FBDAB581305616C004B9617 /* nut.framework */,
-				6FBDAB591305616C004B9617 /* Resources */,
-			);
-			name = "nut-Release.staticframework";
-			path = "StaticFrameworks/nut-Release.staticframework";
-			sourceTree = "<group>";
-		};
-		6FBDAB561305616C004B9617 /* Bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDAB571305616C004B9617 /* nut_bootstrap.m */,
-			);
-			path = Bootstrap;
-			sourceTree = "<group>";
-		};
-		6FBDAB591305616C004B9617 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDAB5A1305616C004B9617 /* nut_Localizable.strings */,
-				6FBDAB5D1305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		6FBDAC3C13059031004B9617 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +465,72 @@
 			path = SingleViewAnimationDemoViewController;
 			sourceTree = "<group>";
 		};
+		6FBDB1B21308F925004B9617 /* TableSearchDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB28B1309141F004B9617 /* DeviceFeedFilter */,
+				6FBDB2AE13091593004B9617 /* DeviceInfo */,
+				6FBDB1B31308F94B004B9617 /* TableSearchDisplayDemoViewController */,
+			);
+			path = TableSearchDisplay;
+			sourceTree = "<group>";
+		};
+		6FBDB1B31308F94B004B9617 /* TableSearchDisplayDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB1B41308F95F004B9617 /* TableSearchDisplayDemoViewController.h */,
+				6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */,
+				6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */,
+			);
+			path = TableSearchDisplayDemoViewController;
+			sourceTree = "<group>";
+		};
+		6FBDB28B1309141F004B9617 /* DeviceFeedFilter */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB28C13091439004B9617 /* DeviceFeedFilter.h */,
+				6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */,
+			);
+			path = DeviceFeedFilter;
+			sourceTree = "<group>";
+		};
+		6FBDB2AE13091593004B9617 /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB2AF13091593004B9617 /* DeviceInfo.h */,
+				6FBDB2B0130915F9004B9617 /* DeviceInfo.m */,
+			);
+			path = DeviceInfo;
+			sourceTree = "<group>";
+		};
+		6FBDB49C130926E5004B9617 /* nut-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB49D130926E5004B9617 /* Bootstrap */,
+				6FBDB49F130926E5004B9617 /* nut.framework */,
+				6FBDB4A0130926E5004B9617 /* Resources */,
+			);
+			name = "nut-Release.staticframework";
+			path = "StaticFrameworks/nut-Release.staticframework";
+			sourceTree = "<group>";
+		};
+		6FBDB49D130926E5004B9617 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB49E130926E5004B9617 /* nut_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6FBDB4A0130926E5004B9617 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */,
+				6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -538,13 +588,14 @@
 				6FBDA9261304315B004B9617 /* cell_bkgr_brown_large.png in Resources */,
 				6FBDA9271304315B004B9617 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FBDA9281304315B004B9617 /* icn_bookmark.png in Resources */,
-				6FBDAB601305616C004B9617 /* nut_Localizable.strings in Resources */,
-				6FBDAB611305616C004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FBDAC3E1305903A004B9617 /* HeaderView.xib in Resources */,
 				6FBDACF013068107004B9617 /* TextFieldsDemoViewController.xib in Resources */,
 				6FBDAE461306A0D5004B9617 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6FBDB06213083227004B9617 /* SingleViewAnimationDemoViewController.xib in Resources */,
 				6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
+				6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */,
+				6FBDB4A7130926E5004B9617 /* nut_Localizable.strings in Resources */,
+				6FBDB4A8130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +613,6 @@
 				6FBDA8C713041CB1004B9617 /* TableViewCellsDemoViewController.m in Sources */,
 				6FBDA8FF130426DC004B9617 /* ProgrammaticTableViewCell.m in Sources */,
 				6FBDA90B13042A84004B9617 /* XibTableViewCell.m in Sources */,
-				6FBDAB5E1305616C004B9617 /* nut_bootstrap.m in Sources */,
 				6FBDAC4113059041004B9617 /* HeaderView.m in Sources */,
 				6FBDACEE130680F0004B9617 /* TextFieldsDemoViewController.m in Sources */,
 				6FBDAD09130686DE004B9617 /* ParallelProcessingDemoViewController.m in Sources */,
@@ -570,6 +620,10 @@
 				6FBDAD87130696D3004B9617 /* SleepTaskOperation.m in Sources */,
 				6FBDB06013082FBA004B9617 /* SingleViewAnimationDemoViewController.m in Sources */,
 				6FBDB0F513085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m in Sources */,
+				6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */,
+				6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */,
+				6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */,
+				6FBDB4A5130926E5004B9617 /* nut_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,11 +639,11 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		6FBDAB5A1305616C004B9617 /* nut_Localizable.strings */ = {
+		6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6FBDAB5B1305616C004B9617 /* en */,
-				6FBDAB5C1305616C004B9617 /* fr */,
+				6FBDB4A2130926E5004B9617 /* en */,
+				6FBDB4A3130926E5004B9617 /* fr */,
 			);
 			name = nut_Localizable.strings;
 			sourceTree = "<group>";

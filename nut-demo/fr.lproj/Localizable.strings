@@ -6,6 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
  
+"All"="Tous";
 "Animation"="Animation";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
@@ -17,7 +18,9 @@
 "Header: simple cells"="En-tête: cellules basiques";
 "Houston, we've got a problem"="Houston, nous avons un problème";
 "Multiple view animation"="Animation de plusieurs vues";
+"Music players"="Baladeurs";
 "Parallel processing"="Calculs en parallèle";
+"Phones"="Téléphones";
 "Play forward"="Jouer l'animation";
 "Play backward"="Jouer l'animation inverse";
 "Remaining time estimate"="Temps restant estimé";
@@ -26,6 +29,7 @@
 "Stop"="Arrêter";
 "Sub-tasks"="Sous-tâches";
 "Table view cells"="Cellules";
+"Tablets"="Tablettes";
 "Task"="Tâche";
 "Task group"="Tâche groupée";
 "Tasks"="Tâches";

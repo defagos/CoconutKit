@@ -46,8 +46,6 @@
 		6F8D0920123F52E000FCF2AF /* HLSRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D091A123F52E000FCF2AF /* HLSRequester.m */; };
 		6F8D0925123F530400FCF2AF /* HLSPageController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0921123F530400FCF2AF /* HLSPageController.h */; };
 		6F8D0926123F530400FCF2AF /* HLSPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D0922123F530400FCF2AF /* HLSPageController.m */; };
-		6F8D0927123F530400FCF2AF /* HLSTableSearchDisplayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0923123F530400FCF2AF /* HLSTableSearchDisplayController.h */; };
-		6F8D0928123F530400FCF2AF /* HLSTableSearchDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D0924123F530400FCF2AF /* HLSTableSearchDisplayController.m */; };
 		6F8D0941123F536900FCF2AF /* HLSServiceAggregator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0929123F536900FCF2AF /* HLSServiceAggregator.h */; };
 		6F8D0942123F536900FCF2AF /* HLSServiceAggregator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D092A123F536900FCF2AF /* HLSServiceAggregator.m */; };
 		6F8D0943123F536900FCF2AF /* HLSServiceAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D092B123F536900FCF2AF /* HLSServiceAnswer.h */; };
@@ -119,6 +117,8 @@
 		6FBDAC821305939B004B9617 /* HLSXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAC7D1305939B004B9617 /* HLSXibView.m */; };
 		6FBDAD2413068956004B9617 /* HLSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDAD2213068956004B9617 /* HLSViewController.h */; };
 		6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD2313068956004B9617 /* HLSViewController.m */; };
+		6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */; };
+		6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */; };
 		6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */; };
 		6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */; };
 		6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */; };
@@ -169,8 +169,6 @@
 		6F8D091A123F52E000FCF2AF /* HLSRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRequester.m; sourceTree = "<group>"; };
 		6F8D0921123F530400FCF2AF /* HLSPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPageController.h; sourceTree = "<group>"; };
 		6F8D0922123F530400FCF2AF /* HLSPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPageController.m; sourceTree = "<group>"; };
-		6F8D0923123F530400FCF2AF /* HLSTableSearchDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayController.h; sourceTree = "<group>"; };
-		6F8D0924123F530400FCF2AF /* HLSTableSearchDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayController.m; sourceTree = "<group>"; };
 		6F8D0929123F536900FCF2AF /* HLSServiceAggregator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSServiceAggregator.h; sourceTree = "<group>"; };
 		6F8D092A123F536900FCF2AF /* HLSServiceAggregator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSServiceAggregator.m; sourceTree = "<group>"; };
 		6F8D092B123F536900FCF2AF /* HLSServiceAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSServiceAnswer.h; sourceTree = "<group>"; };
@@ -243,6 +241,8 @@
 		6FBDAC7D1305939B004B9617 /* HLSXibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSXibView.m; sourceTree = "<group>"; };
 		6FBDAD2213068956004B9617 /* HLSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewController.h; sourceTree = "<group>"; };
 		6FBDAD2313068956004B9617 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
+		6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
+		6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
 		6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSCompression.h"; sourceTree = "<group>"; };
 		6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSCompression.m"; sourceTree = "<group>"; };
 		6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSHash.h"; sourceTree = "<group>"; };
@@ -420,9 +420,9 @@
 				6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */,
 				6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */,
 				6F5B04A4126DC8B800C92F2A /* HLSSingleValuePickerViewController.m */,
+				6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */,
+				6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */,
 				6F5B04A5126DC8B800C92F2A /* nut_HLSSingleValuePickerViewController.xib */,
-				6F8D0923123F530400FCF2AF /* HLSTableSearchDisplayController.h */,
-				6F8D0924123F530400FCF2AF /* HLSTableSearchDisplayController.m */,
 				6F2863091265B3E500D04F08 /* HLSWizardViewController.h */,
 				6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */,
 				6FBDAD2213068956004B9617 /* HLSViewController.h */,
@@ -529,7 +529,6 @@
 				6F8D091D123F52E000FCF2AF /* HLSDownloaderTools.h in Headers */,
 				6F8D091F123F52E000FCF2AF /* HLSRequester.h in Headers */,
 				6F8D0925123F530400FCF2AF /* HLSPageController.h in Headers */,
-				6F8D0927123F530400FCF2AF /* HLSTableSearchDisplayController.h in Headers */,
 				6F8D0941123F536900FCF2AF /* HLSServiceAggregator.h in Headers */,
 				6F8D0943123F536900FCF2AF /* HLSServiceAnswer.h in Headers */,
 				6F8D0945123F536900FCF2AF /* HLSServiceBoundArray.h in Headers */,
@@ -585,6 +584,7 @@
 				6FBDAC801305939B004B9617 /* HLSTableViewCell+Protected.h in Headers */,
 				6FBDAC811305939B004B9617 /* HLSXibView.h in Headers */,
 				6FBDAD2413068956004B9617 /* HLSViewController.h in Headers */,
+				6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,7 +646,6 @@
 				6F8D091E123F52E000FCF2AF /* HLSDownloaderTools.m in Sources */,
 				6F8D0920123F52E000FCF2AF /* HLSRequester.m in Sources */,
 				6F8D0926123F530400FCF2AF /* HLSPageController.m in Sources */,
-				6F8D0928123F530400FCF2AF /* HLSTableSearchDisplayController.m in Sources */,
 				6F8D0942123F536900FCF2AF /* HLSServiceAggregator.m in Sources */,
 				6F8D0944123F536900FCF2AF /* HLSServiceAnswer.m in Sources */,
 				6F8D0946123F536900FCF2AF /* HLSServiceBoundArray.m in Sources */,
@@ -691,6 +690,7 @@
 				6FBDAC7F1305939B004B9617 /* HLSTableViewCell.m in Sources */,
 				6FBDAC821305939B004B9617 /* HLSXibView.m in Sources */,
 				6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */,
+				6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
