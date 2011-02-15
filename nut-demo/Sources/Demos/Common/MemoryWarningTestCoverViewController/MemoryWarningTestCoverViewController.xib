@@ -39,13 +39,13 @@
 			</object>
 			<object class="IBUIView" id="538294322">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">319</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUILabel" id="908324968">
 						<reference key="NSNextResponder" ref="538294322"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 475}, {768, 53}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{0, 495}, {768, 53}}</string>
 						<reference key="NSSuperview" ref="538294322"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -74,7 +74,7 @@
 					</object>
 					<object class="IBUIToolbar" id="358488784">
 						<reference key="NSNextResponder" ref="538294322"/>
-						<int key="NSvFlags">266</int>
+						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{768, 44}</string>
 						<reference key="NSSuperview" ref="538294322"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -91,14 +91,11 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{768, 1004}</string>
+				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
 					<bytes key="NSRGB">MSAwLjc4ODIzNTM2NjMgMC4yNDcwNTg4Mzg2AA</bytes>
-				</object>
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
-					<int key="IBUIStatusBarStyle">2</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -156,8 +153,8 @@
 						<reference key="object" ref="538294322"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="908324968"/>
 							<reference ref="358488784"/>
+							<reference ref="908324968"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -204,7 +201,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAADCHAAAw/yAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAxAiAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

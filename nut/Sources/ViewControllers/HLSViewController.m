@@ -38,6 +38,13 @@
 {
 }
 
+#pragma mark Accessors and mutators
+
+- (HLSViewControllerLifeCyclePhase)lifeCyclePhase
+{
+    return m_lifeCyclePhase;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -77,11 +84,12 @@
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
-#pragma mark Accessors and mutators
+#pragma mark Orientation management
 
-- (HLSViewControllerLifeCyclePhase)lifeCyclePhase
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return m_lifeCyclePhase;
+    // This fixes an inconsistency of UIViewController, see HLSViewController.h documentation
+    return YES;
 }
 
 @end

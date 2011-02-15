@@ -52,6 +52,9 @@
 {
     [super releaseViews];
     
+    // Free heavy view in cache
+    self.heavyViewController.view = nil;
+    
     self.stretchableSampleButton = nil;
     self.fixedSizeSampleButton = nil;
     self.heavySampleButton = nil;

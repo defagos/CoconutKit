@@ -188,6 +188,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+        return NO;
+    }
+    
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 

@@ -25,7 +25,21 @@ typedef enum {
  * you should subclass it to define your own view controllers.
  *
  * If your subclass overrides any of the view lifecycle events methods (viewWill..., viewDid...), be sure to call the super
- * method first, otherwise the behaviour is undefined.
+ * method first, otherwise the behaviour is undefined. The same holds for view orientation events.
+ *
+ * There is only one major difference with UIViewController. For UIViewController, shouldAutorotateToInterfaceOrientation:
+ * returns YES only for portrait orientations when not overridden. This creates an exception to the rule that subclasses
+ * should call the super view event and orientation methods first. This is confusing and ugly, especially for view controllers
+ * picked from a library (in such cases, super has to be called or not depending on the view controller's implementation).
+ * If you are lucky, the documentation of a view controller will explicitly state what sublcasses must do, but I think it is
+ * best to stick to a single rule, namely to always begin by calling the super implementation. To fix this inconsistency,
+ * HLSViewController returns YES for all orientations. Then, If a view controller inherits from HLSViewController (either
+ * directly or indirectly), its implementation of shouldAutorotateToInterfaceOrientation: (if overridden) must always
+ * always begin with:
+ *   if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+ *      return NO;
+ *   }
+ *   // Rest of the implementation here
  *
  * Designated initializer: initWithNibName:bundle:
  */

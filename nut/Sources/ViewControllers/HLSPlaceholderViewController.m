@@ -376,8 +376,9 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {    
-    // Remark: We can not call shouldAutorotateToInterfaceOrientation: for super here (since it returns YES only
-    //         for portrait orientation).
+    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+        return NO;
+    }
     
     // If no inset has been defined, let the placeholder rotate
     if (! self.insetViewController) {
