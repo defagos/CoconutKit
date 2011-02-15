@@ -8,8 +8,8 @@
 
 @interface PlaceholderDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
-    UIButton *m_autoresizingSampleButton;
-    UIButton *m_fixedSampleButton;
+    UIButton *m_stretchableSampleButton;
+    UIButton *m_fixedSizeSampleButton;
     UIButton *m_heavySampleButton;
     UIButton *m_portraitOnlyButton;
     UIButton *m_landscapeOnlyButton;
@@ -20,8 +20,8 @@
     UISwitch *m_adjustingInsetSwitch;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *autoresizingSampleButton;
-@property (nonatomic, retain) IBOutlet UIButton *fixedSampleButton;
+@property (nonatomic, retain) IBOutlet UIButton *stretchableSampleButton;
+@property (nonatomic, retain) IBOutlet UIButton *fixedSizeSampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *heavySampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *portraitOnlyButton;
 @property (nonatomic, retain) IBOutlet UIButton *landscapeOnlyButton;

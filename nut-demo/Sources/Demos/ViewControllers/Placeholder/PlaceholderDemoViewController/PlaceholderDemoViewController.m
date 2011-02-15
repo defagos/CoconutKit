@@ -8,10 +8,14 @@
 
 #import "PlaceholderDemoViewController.h"
 
+#import "StretchableViewController.h"
+
 @interface PlaceholderDemoViewController ()
 
-- (void)autoresizingSampleButtonClicked:(id)sender;
-- (void)fixedSampleButtonClicked:(id)sender;
+- (void)displayInsetViewController:(UIViewController *)viewController;
+
+- (void)stretchableSampleButtonClicked:(id)sender;
+- (void)fixedSizeSampleButtonClicked:(id)sender;
 - (void)heavySampleButtonClicked:(id)sender;
 - (void)portraitOnlyButtonClicked:(id)sender;
 - (void)landscapeOnlyButtonClicked:(id)sender;
@@ -36,8 +40,8 @@
 {
     [super releaseViews];
     
-    self.autoresizingSampleButton = nil;
-    self.fixedSampleButton = nil;
+    self.stretchableSampleButton = nil;
+    self.fixedSizeSampleButton = nil;
     self.heavySampleButton = nil;
     self.portraitOnlyButton = nil;
     self.landscapeOnlyButton = nil;
@@ -46,14 +50,13 @@
     self.transitionPickerView = nil;
     self.adjustingInsetLabel = nil;
     self.adjustingInsetSwitch = nil;
-
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize autoresizingSampleButton = m_autoresizingSampleButton;
+@synthesize stretchableSampleButton = m_stretchableSampleButton;
 
-@synthesize fixedSampleButton = m_fixedSampleButton;
+@synthesize fixedSizeSampleButton = m_fixedSizeSampleButton;
 
 @synthesize heavySampleButton = m_heavySampleButton;
 
@@ -77,16 +80,16 @@
 {
     [super viewDidLoad];
     
-    [self.autoresizingSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
+    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
                                    forState:UIControlStateNormal];
-    [self.autoresizingSampleButton addTarget:self
-                                      action:@selector(autoresizingSampleButtonClicked:)
+    [self.stretchableSampleButton addTarget:self
+                                      action:@selector(stretchableSampleButtonClicked:)
                             forControlEvents:UIControlEventTouchUpInside];
     
-    [self.fixedSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") 
+    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") 
                             forState:UIControlStateNormal];
-    [self.fixedSampleButton addTarget:self
-                               action:@selector(fixedSampleButtonClicked:)
+    [self.fixedSizeSampleButton addTarget:self
+                               action:@selector(fixedSizeSampleButtonClicked:)
                      forControlEvents:UIControlEventTouchUpInside];
     
     [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view", @"Heavy view") 
@@ -114,23 +117,42 @@
                            forControlEvents:UIControlEventTouchUpInside];
     
     self.adjustingInsetLabel.text = NSLocalizedString(@"Adjust inset", @"Adjust inset");
+    
+    self.adjustingInsetSwitch.on = self.adjustingInset;
     [self.adjustingInsetSwitch addTarget:self
                                   action:@selector(adjustingInsetSwitchValueChanged:)
                         forControlEvents:UIControlEventValueChanged];    
     
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
+    
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
 }
 
-#pragma mark Event callbacks
+#pragma mark Displaying an inset view controller according to the user settings
 
-- (void)autoresizingSampleButtonClicked:(id)sender
+- (void)displayInsetViewController:(UIViewController *)viewController
 {
-
+    // Built-in transition effects in picker
+    NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
+    if (pickedIndex < HLSTransitionStyleEnumSize) {
+        [self setInsetViewController:viewController withTransitionStyle:pickedIndex];
+    }
+    // Custom transition effects in picker
+    else {
+        
+    }
 }
 
-- (void)fixedSampleButtonClicked:(id)sender
+#pragma mark Event callbacks
+
+- (void)stretchableSampleButtonClicked:(id)sender
+{
+    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+    [self displayInsetViewController:stretchableViewController];
+}
+
+- (void)fixedSizeSampleButtonClicked:(id)sender
 {
 
 }
@@ -157,7 +179,7 @@
 
 - (void)adjustingInsetSwitchValueChanged:(id)sender
 {
-    
+    self.adjustingInset = self.adjustingInsetSwitch.on;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

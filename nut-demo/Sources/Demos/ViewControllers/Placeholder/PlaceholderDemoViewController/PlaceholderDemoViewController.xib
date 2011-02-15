@@ -68,7 +68,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;autoresizingSample&gt;</string>
+						<string key="IBUINormalTitle">&lt;stretchableSample&gt;</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="114470078">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -93,7 +93,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="186321935"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;fixedSample&gt;</string>
+						<string key="IBUINormalTitle">&lt;fixedSizeSample&gt;</string>
 						<reference key="IBUIHighlightedTitleColor" ref="114470078"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -258,27 +258,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">autoresizingSampleButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="61978082"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">placeholderView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="576299195"/>
 					</object>
 					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">fixedSampleButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="1063045559"/>
-					</object>
-					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -343,6 +327,22 @@
 						<reference key="destination" ref="16578721"/>
 					</object>
 					<int key="connectionID">33</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">stretchableSampleButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="61978082"/>
+					</object>
+					<int key="connectionID">34</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">fixedSizeSampleButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1063045559"/>
+					</object>
+					<int key="connectionID">35</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -543,7 +543,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">35</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -557,12 +557,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>adjustingInsetLabel</string>
 							<string>adjustingInsetSwitch</string>
-							<string>autoresizingSampleButton</string>
-							<string>fixedSampleButton</string>
+							<string>fixedSizeSampleButton</string>
 							<string>heavySampleButton</string>
 							<string>landscapeOnlyButton</string>
 							<string>orientationClonerButton</string>
 							<string>portraitOnlyButton</string>
+							<string>stretchableSampleButton</string>
 							<string>transitionLabel</string>
 							<string>transitionPickerView</string>
 						</object>
@@ -586,12 +586,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>adjustingInsetLabel</string>
 							<string>adjustingInsetSwitch</string>
-							<string>autoresizingSampleButton</string>
-							<string>fixedSampleButton</string>
+							<string>fixedSizeSampleButton</string>
 							<string>heavySampleButton</string>
 							<string>landscapeOnlyButton</string>
 							<string>orientationClonerButton</string>
 							<string>portraitOnlyButton</string>
+							<string>stretchableSampleButton</string>
 							<string>transitionLabel</string>
 							<string>transitionPickerView</string>
 						</object>
@@ -606,11 +606,7 @@
 								<string key="candidateClassName">UISwitch</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">autoresizingSampleButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">fixedSampleButton</string>
+								<string key="name">fixedSizeSampleButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -627,6 +623,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">portraitOnlyButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">stretchableSampleButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
