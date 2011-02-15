@@ -232,6 +232,25 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
 					</object>
+					<object class="IBUIButton" id="154317067">
+						<reference key="NSNextResponder" ref="490296611"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{20, 922}, {217, 37}}</string>
+						<reference key="NSSuperview" ref="490296611"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIFont" ref="186321935"/>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">&lt;hideWithModal&gt;</string>
+						<reference key="IBUIHighlightedTitleColor" ref="114470078"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC45OTIxNTY5MjI4IDAuMDAzOTIxNTY4ODU5IDAAA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
+					</object>
 				</object>
 				<string key="NSFrameSize">{768, 980}</string>
 				<reference key="NSSuperview"/>
@@ -338,6 +357,14 @@
 					</object>
 					<int key="connectionID">35</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">hideWithModalButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="154317067"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -375,6 +402,7 @@
 							<reference ref="16578721"/>
 							<reference ref="178406867"/>
 							<reference ref="347996817"/>
+							<reference ref="154317067"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -436,6 +464,11 @@
 						<reference key="object" ref="16578721"/>
 						<reference key="parent" ref="490296611"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="154317067"/>
+						<reference key="parent" ref="490296611"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -466,6 +499,8 @@
 					<string>30.IBViewBoundsToFrameTransform</string>
 					<string>31.IBPluginDependency</string>
 					<string>31.IBViewBoundsToFrameTransform</string>
+					<string>36.IBPluginDependency</string>
+					<string>36.IBViewBoundsToFrameTransform</string>
 					<string>9.IBPluginDependency</string>
 					<string>9.IBViewBoundsToFrameTransform</string>
 				</object>
@@ -517,6 +552,10 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABCWAAAxHFAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUGgAABEKQAAA</bytes>
 					</object>
 				</object>
@@ -537,7 +576,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">35</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -553,6 +592,7 @@
 							<string>adjustingInsetSwitch</string>
 							<string>fixedSizeSampleButton</string>
 							<string>heavySampleButton</string>
+							<string>hideWithModalButton</string>
 							<string>landscapeOnlyButton</string>
 							<string>orientationClonerButton</string>
 							<string>portraitOnlyButton</string>
@@ -564,6 +604,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UISwitch</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -582,6 +623,7 @@
 							<string>adjustingInsetSwitch</string>
 							<string>fixedSizeSampleButton</string>
 							<string>heavySampleButton</string>
+							<string>hideWithModalButton</string>
 							<string>landscapeOnlyButton</string>
 							<string>orientationClonerButton</string>
 							<string>portraitOnlyButton</string>
@@ -605,6 +647,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">heavySampleButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">hideWithModalButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">

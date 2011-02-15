@@ -9,6 +9,7 @@
 "Adjust inset"="Adjust inset";
 "All"="All";
 "Animation"="Animation";
+"Close"="Close";
 "Custom cell created programmatically"="Custom cell created programmatically";
 "Custom cell from xib"="Custom cell from xib";
 "Custom transition"="Custom transition";
@@ -19,8 +20,10 @@
 "Fixed size"="Fixed size";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
-"Heavy view"="Heavy view";
+"Heavy view (cached)"="Heavy view (cached)";
+"Hide with modal"="Hide with modal";
 "Houston, we've got a problem"="Houston, we've got a problem";
+"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Landscape only"="Landscape only";
 "Multiple view animation"="Multiple view animation";
 "Music players"="Music players";

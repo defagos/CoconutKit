@@ -9,9 +9,13 @@
 #import "PlaceholderDemoViewController.h"
 
 #import "FixedSizeViewController.h"
+#import "HeavyViewController.h"
+#import "MemoryWarningTestCoverViewController.h"
 #import "StretchableViewController.h"
 
 @interface PlaceholderDemoViewController ()
+
+@property (nonatomic, retain) HeavyViewController *heavyViewController;
 
 - (void)displayInsetViewController:(UIViewController *)viewController;
 
@@ -20,6 +24,7 @@
 - (void)heavySampleButtonClicked:(id)sender;
 - (void)portraitOnlyButtonClicked:(id)sender;
 - (void)landscapeOnlyButtonClicked:(id)sender;
+- (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)adjustingInsetSwitchValueChanged:(id)sender;
 
@@ -37,6 +42,12 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.heavyViewController = nil;
+    [super dealloc];
+}
+
 - (void)releaseViews
 {
     [super releaseViews];
@@ -47,6 +58,7 @@
     self.portraitOnlyButton = nil;
     self.landscapeOnlyButton = nil;
     self.orientationClonerButton = nil;
+    self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
     self.adjustingInsetLabel = nil;
@@ -67,6 +79,8 @@
 
 @synthesize orientationClonerButton = m_orientationClonerButton;
 
+@synthesize hideWithModalButton = m_hideWithModalButton;
+
 @synthesize transitionLabel = m_transitionLabel;
 
 @synthesize transitionPickerView = m_transitionPickerView;
@@ -74,6 +88,8 @@
 @synthesize adjustingInsetLabel = m_adjustingInsetLabel;
 
 @synthesize adjustingInsetSwitch = m_adjustingInsetSwitch;
+
+@synthesize heavyViewController = m_heavyViewController;
 
 #pragma mark View lifecycle
 
@@ -93,7 +109,7 @@
                                action:@selector(fixedSizeSampleButtonClicked:)
                      forControlEvents:UIControlEventTouchUpInside];
     
-    [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view", @"Heavy view") 
+    [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view (cached)", @"Heavy view (cached)") 
                             forState:UIControlStateNormal];
     [self.heavySampleButton addTarget:self
                                action:@selector(heavySampleButtonClicked:)
@@ -116,6 +132,12 @@
     [self.orientationClonerButton addTarget:self
                                      action:@selector(orientationClonerButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal")
+                              forState:UIControlStateNormal];
+    [self.hideWithModalButton addTarget:self
+                                 action:@selector(hideWithModalButtonClicked:)
+                       forControlEvents:UIControlEventTouchUpInside];
     
     self.adjustingInsetLabel.text = NSLocalizedString(@"Adjust inset", @"Adjust inset");
     
@@ -161,7 +183,13 @@
 
 - (void)heavySampleButtonClicked:(id)sender
 {
-
+    // Store a strong ref to an already built HeavyViewController; this way, this view controller is kept alive and does
+    // not need to be recreated from scratch each time it is displayed as inset (lazy creation suffices). This proves 
+    // that caching view controller's views is made possible by HLSPlaceholderViewController if needed
+    if (! self.heavyViewController) {
+        self.heavyViewController = [[[HeavyViewController alloc] init] autorelease];
+    }
+    [self displayInsetViewController:self.heavyViewController];
 }
 
 - (void)portraitOnlyButtonClicked:(id)sender
@@ -177,6 +205,12 @@
 - (void)orientationClonerButtonClicked:(id)sender
 {
 
+}
+
+- (void)hideWithModalButtonClicked:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
 - (void)adjustingInsetSwitchValueChanged:(id)sender

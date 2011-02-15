@@ -72,7 +72,7 @@
 
 - (void)viewDidUnload
 {
-    [self viewDidUnload];
+    [super viewDidUnload];
     [self releaseViews];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
