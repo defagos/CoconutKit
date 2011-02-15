@@ -8,6 +8,7 @@
 
 #import "PlaceholderDemoViewController.h"
 
+#import "FixedSizeViewController.h"
 #import "StretchableViewController.h"
 
 @interface PlaceholderDemoViewController ()
@@ -154,7 +155,8 @@
 
 - (void)fixedSizeSampleButtonClicked:(id)sender
 {
-
+    FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+    [self displayInsetViewController:fixedSizeViewController];
 }
 
 - (void)heavySampleButtonClicked:(id)sender

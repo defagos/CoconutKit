@@ -1,21 +1,21 @@
 //
-//  StretchableViewController.m
+//  FixedSizeViewController
 //  nut-demo
 //
-//  Created by Samuel Défago on 2/14/11.
+//  Created by Samuel Défago on 2/15/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "StretchableViewController.h"
+#import "FixedSizeViewController.h"
 
-@implementation StretchableViewController
+@implementation FixedSizeViewController
 
 #pragma mark Object creation and destruction
 
 - (id)init
 {
     if (self = [super init]) {
-        self.title = @"StretchableViewController";
+        self.title = @"FixedSizeViewController";
     }
     return self;
 }

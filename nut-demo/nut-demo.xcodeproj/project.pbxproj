@@ -15,6 +15,8 @@
 		6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */; };
 		6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143AFD130A6DF00075E94C /* StretchableViewController.m */; };
 		6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143AFE130A6DF00075E94C /* StretchableViewController.xib */; };
+		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
+		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -63,6 +65,9 @@
 		6F143AFC130A6DF00075E94C /* StretchableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableViewController.h; sourceTree = "<group>"; };
 		6F143AFD130A6DF00075E94C /* StretchableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableViewController.m; sourceTree = "<group>"; };
 		6F143AFE130A6DF00075E94C /* StretchableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
+		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
+		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
+		6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSizeViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -204,6 +209,16 @@
 			path = StretchableViewController;
 			sourceTree = "<group>";
 		};
+		6F7A26BE130AA1C200AB1926 /* FixedSizeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */,
+				6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */,
+				6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */,
+			);
+			path = FixedSizeViewController;
+			sourceTree = "<group>";
+		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,20 +290,13 @@
 		6FBDA79E1303EDAB004B9617 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6FBDA7A01303EDAB004B9617 /* FixedViewController */,
+				6F7A26BE130AA1C200AB1926 /* FixedSizeViewController */,
 				6FBDA7A11303EDAB004B9617 /* HeavyViewController */,
 				6FBDA7A21303EDAB004B9617 /* LandscapeOnlyViewController */,
 				6FBDA7A31303EDAB004B9617 /* PortraitOnlyViewController */,
 				6F143AFB130A6DF00075E94C /* StretchableViewController */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		6FBDA7A01303EDAB004B9617 /* FixedViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FixedViewController;
 			sourceTree = "<group>";
 		};
 		6FBDA7A11303EDAB004B9617 /* HeavyViewController */ = {
@@ -630,6 +638,7 @@
 				6FBDB4A8130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */,
 				6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */,
+				6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +669,7 @@
 				6FBDB4A5130926E5004B9617 /* nut_bootstrap.m in Sources */,
 				6F143A9B130999DD0075E94C /* PlaceholderDemoViewController.m in Sources */,
 				6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */,
+				6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
