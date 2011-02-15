@@ -10,6 +10,7 @@
 
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
+#import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
 #import "StretchableViewController.h"
 
@@ -19,6 +20,7 @@
 
 - (void)displayInsetViewController:(UIViewController *)viewController;
 
+- (void)lifeCycleTestSampleButtonClicked:(id)sender;
 - (void)stretchableSampleButtonClicked:(id)sender;
 - (void)fixedSizeSampleButtonClicked:(id)sender;
 - (void)heavySampleButtonClicked:(id)sender;
@@ -55,6 +57,7 @@
     // Free heavy view in cache
     self.heavyViewController.view = nil;
     
+    self.lifecycleTestSampleButton = nil;
     self.stretchableSampleButton = nil;
     self.fixedSizeSampleButton = nil;
     self.heavySampleButton = nil;
@@ -69,6 +72,8 @@
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize lifecycleTestSampleButton = m_lifecycleTestSampleButton;
 
 @synthesize stretchableSampleButton = m_stretchableSampleButton;
 
@@ -99,6 +104,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test")
+                                    forState:UIControlStateNormal];
+    [self.lifecycleTestSampleButton addTarget:self
+                                       action:@selector(lifeCycleTestSampleButtonClicked:)
+                             forControlEvents:UIControlEventTouchUpInside];
     
     [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
                                    forState:UIControlStateNormal];
@@ -171,6 +182,12 @@
 }
 
 #pragma mark Event callbacks
+
+- (void)lifeCycleTestSampleButtonClicked:(id)sender
+{
+    LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+    [self displayInsetViewController:lifecycleTestViewController];
+}
 
 - (void)stretchableSampleButtonClicked:(id)sender
 {

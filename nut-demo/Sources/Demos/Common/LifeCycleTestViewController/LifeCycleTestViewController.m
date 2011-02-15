@@ -20,48 +20,67 @@
     return self;
 }
 
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    self.instructionLabel = nil;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize instructionLabel = m_instructionLabel;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    logger_info(@"Called!");
+    self.instructionLabel.text = NSLocalizedString(@"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)",
+                                                   @"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)");
+    
+    self.view.backgroundColor = [UIColor colorWithRed:(rand() % 256)/256.f
+                                                green:(rand() % 256)/256.f 
+                                                 blue:(rand() % 256)/256.f 
+                                                alpha:1.f];    
+    
+    logger_info(@"Called for object %@", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    logger_info(@"Called!");
+    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    logger_info(@"Called!");
+    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    logger_info(@"Called!");
+    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    logger_info(@"Called!");
+    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     
-    logger_info(@"Called!");
+    logger_info(@"Called for object %@", self);
 }
 
 #pragma mark Orientation management

@@ -11,6 +11,7 @@
 
 @interface PlaceholderDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
+    UIButton *m_lifecycleTestSampleButton;
     UIButton *m_stretchableSampleButton;
     UIButton *m_fixedSizeSampleButton;
     UIButton *m_heavySampleButton;
@@ -25,6 +26,7 @@
     HeavyViewController *m_heavyViewController;
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *lifecycleTestSampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *stretchableSampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *fixedSizeSampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *heavySampleButton;

@@ -8,7 +8,9 @@
 
 @interface LifeCycleTestViewController : HLSViewController {
 @private
-    
+    UILabel *m_instructionLabel;
 }
+
+@property (nonatomic, retain) IBOutlet UILabel *instructionLabel;
 
 @end
