@@ -41,7 +41,7 @@ typedef enum {
  *   - in releaseViews: Release all views retained by the view controller. If your view controller subclass retains view controllers
  *     to avoid creating their views too often ("view caching"), also set the views of thesee view controllers to nil in this method
  *   - in dealloc: Release all other resources owned by the view controller (model objects, other view controllers, etc.)
- * If you are subclassing a class already subclassing HLSViewController, do not forget to send the releaseView message to super first.
+ * If you are subclassing a class already subclassing HLSViewController, always send the releaseView message to super first.
  */
 - (void)releaseViews;
 

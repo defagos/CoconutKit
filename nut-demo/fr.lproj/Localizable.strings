@@ -6,27 +6,34 @@
    Copyright 2011 Hortis. All rights reserved.
  */
  
+"Adjust inset"="Ajustement du contenu";
 "All"="Tous";
 "Animation"="Animation";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
+"Custom transition"="Transition personnalisée";
 "Demos"="Démos";
 "Details"="Détails";
 "Dismiss"="Fermer";
 "Error"="Erreur";
+"Fixed size"="Taille fixe";
 "Header: custom cells"="En-tête: cellules personnalisées";
 "Header: simple cells"="En-tête: cellules basiques";
+"Heavy view"="Vue lourde";
 "Houston, we've got a problem"="Houston, nous avons un problème";
+"Landscape only"="Uniquement paysage";
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Parallel processing"="Calculs en parallèle";
 "Phones"="Téléphones";
 "Play forward"="Jouer l'animation";
 "Play backward"="Jouer l'animation inverse";
+"Portrait only"="Uniquement portrait";
 "Remaining time estimate"="Temps restant estimé";
 "Single view animation"="Animation d'une seule vue";
 "Start"="Démarrer";
 "Stop"="Arrêter";
+"Stretchable"="Etirable";
 "Sub-tasks"="Sous-tâches";
 "Table view cells"="Cellules";
 "Tablets"="Tablettes";
@@ -34,5 +41,6 @@
 "Task group"="Tâche groupée";
 "Tasks"="Tâches";
 "Text fields"="Champs textuels";
+"Transition"="Transition";
 "Views"="Vues";
 "View controllers"="View controllers";

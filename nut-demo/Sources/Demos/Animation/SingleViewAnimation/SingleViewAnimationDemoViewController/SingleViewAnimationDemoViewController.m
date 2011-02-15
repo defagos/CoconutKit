@@ -21,6 +21,14 @@
 
 #pragma mark Object creation and destruction
 
+- (id)init
+{
+    if (self = [super init]) {
+        self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+    }
+    return self;
+}
+
 - (void)dealloc
 {    
     self.animation = nil;
@@ -29,6 +37,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.rectangleView = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;

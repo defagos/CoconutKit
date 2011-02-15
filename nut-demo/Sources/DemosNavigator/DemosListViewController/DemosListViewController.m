@@ -10,6 +10,7 @@
 
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
+#import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
@@ -320,7 +321,8 @@ typedef enum {
         case DemoCategoryIndexViewControllers: {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
-
+                    PlaceholderDemoViewController *demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     

@@ -22,6 +22,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.textField1 = nil;
     self.textField2 = nil;
     self.textField3 = nil;

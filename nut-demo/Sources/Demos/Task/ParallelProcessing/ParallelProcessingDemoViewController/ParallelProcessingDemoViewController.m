@@ -50,6 +50,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.taskLabel = nil;
     self.taskStartButton = nil;
     self.taskStopButton = nil;
