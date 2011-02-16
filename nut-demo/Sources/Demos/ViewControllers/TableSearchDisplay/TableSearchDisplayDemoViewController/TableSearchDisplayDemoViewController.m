@@ -127,7 +127,7 @@ typedef enum {
         return NO;
     }
     
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return YES;
 }
 
 #pragma mark HLSTableSearchDisplayViewControllerDelegate protocol implementatio
@@ -233,6 +233,7 @@ typedef enum {
     // Wrapped for providing navigation bar even in modal version
     ModalWrapperViewController *modalWrapperViewController = [[[ModalWrapperViewController alloc] init] autorelease];
     modalWrapperViewController.insetViewController = demoViewController;
+    modalWrapperViewController.adjustingInset = YES;
     
     [self presentModalViewController:modalWrapperViewController animated:YES];
 }

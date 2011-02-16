@@ -39,12 +39,12 @@
 			</object>
 			<object class="IBUIView" id="15639075">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">319</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUITableView" id="206039223">
 						<reference key="NSNextResponder" ref="15639075"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrameSize">{768, 1004}</string>
 						<reference key="NSSuperview" ref="15639075"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="360394792">
@@ -143,7 +143,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC5gAAxD1AAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAxH+AAA</bytes>
 					</object>
 				</object>
 			</object>
@@ -170,7 +170,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">TableSearchDisplayDemoViewController</string>
-					<string key="superclassName">HLSTableSearchDisplayController</string>
+					<string key="superclassName">HLSTableSearchDisplayViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Sources/Demos/ViewControllers/TableSearchDisplay/TableSearchDisplayDemoViewController/TableSearchDisplayDemoViewController.h</string>
@@ -180,8 +180,8 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">HLSTableSearchDisplayController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="className">HLSTableSearchDisplayViewController</string>
+					<string key="superclassName">HLSViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">tableView</string>
 						<string key="NS.object.0">UITableView</string>
@@ -195,7 +195,15 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">nut.framework/Headers/HLSTableSearchDisplayController.h</string>
+						<string key="minorKey">nut.framework/Headers/HLSTableSearchDisplayViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HLSViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">nut.framework/Headers/HLSViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

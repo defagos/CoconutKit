@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
+			<integer value="7"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -44,7 +44,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUINavigationBar" id="798983149">
 						<reference key="NSNextResponder" ref="1034977015"/>
-						<int key="NSvFlags">290</int>
+						<int key="NSvFlags">295</int>
 						<string key="NSFrameSize">{768, 44}</string>
 						<reference key="NSSuperview" ref="1034977015"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -59,7 +59,7 @@
 					</object>
 					<object class="IBUIToolbar" id="347614912">
 						<reference key="NSNextResponder" ref="1034977015"/>
-						<int key="NSvFlags">266</int>
+						<int key="NSvFlags">271</int>
 						<string key="NSFrame">{{0, 960}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="1034977015"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -71,8 +71,8 @@
 					</object>
 					<object class="IBUIView" id="724131561">
 						<reference key="NSNextResponder" ref="1034977015"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 44}, {768, 916}}</string>
+						<int key="NSvFlags">279</int>
+						<string key="NSFrame">{{1, 44}, {768, 916}}</string>
 						<reference key="NSSuperview" ref="1034977015"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
