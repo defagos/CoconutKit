@@ -8,6 +8,7 @@
 
 #import "TableViewCellsDemoViewController.h"
 
+#import "FooterView.h"
 #import "HeaderView.h"
 #import "ProgrammaticTableViewCell.h"
 #import "XibTableViewCell.h"
@@ -51,6 +52,16 @@ typedef enum {
         self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
     }
     return self;
+}
+
+#pragma mark View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tableView.sectionHeaderHeight = HLS_XIB_VIEW_HEIGHT(HeaderView);
+    self.tableView.sectionFooterHeight = HLS_XIB_VIEW_HEIGHT(FooterView);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -166,18 +177,15 @@ typedef enum {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
     switch (section) {
         case CellCategoryIndexSimple: {
-            HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
             headerView.label.text = NSLocalizedString(@"Header: simple cells", @"Header: simple cells");
-            return headerView;
             break;
         }
             
         case CellCategoryIndexCustom: {
-            HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
-            headerView.label.text = NSLocalizedString(@"Header: custom cells", @"Header: custom cells");
-            return headerView;            
+            headerView.label.text = NSLocalizedString(@"Header: custom cells", @"Header: custom cells");            
             break;
         }
             
@@ -186,26 +194,14 @@ typedef enum {
             break;
         }
     }
+    return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    switch (section) {
-        case CellCategoryIndexSimple: {
-            return HLS_XIB_VIEW_HEIGHT(HeaderView);
-            break;
-        }
-            
-        case CellCategoryIndexCustom: {
-            return HLS_XIB_VIEW_HEIGHT(HeaderView);            
-            break;
-        }
-            
-        default: {
-            return 0;
-            break;
-        }
-    }
+    FooterView *footerView = HLS_XIB_VIEW(FooterView);
+    footerView.label.text = NSLocalizedString(@"Section end", @"Section end");
+    return footerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

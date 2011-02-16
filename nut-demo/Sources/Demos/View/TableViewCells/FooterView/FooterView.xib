@@ -45,7 +45,7 @@
 					<object class="IBUILabel" id="301287845">
 						<reference key="NSNextResponder" ref="546680771"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 19}, {728, 21}}</string>
+						<string key="NSFrame">{{20, 4}, {728, 21}}</string>
 						<reference key="NSSuperview" ref="546680771"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -54,8 +54,11 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">&lt;label&gt;</string>
 						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<object class="NSColorSpace" key="NSCustomColorSpace">
+								<int key="NSID">2</int>
+							</object>
 						</object>
 						<object class="NSColor" key="IBUIHighlightedColor">
 							<int key="NSColorSpace">3</int>
@@ -66,11 +69,11 @@
 						<int key="IBUITextAlignment">1</int>
 					</object>
 				</object>
-				<string key="NSFrameSize">{768, 60}</string>
+				<string key="NSFrameSize">{768, 30}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC44Nzg0MzEzNzI1IDAuNzUyOTQxMTc2NSAwLjY2Mjc0NTA5OAA</bytes>
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MC4zMjQ4MTc1MTgyAA</bytes>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -137,12 +140,12 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
-					<string>HeaderView</string>
-					<string>{{492, 1061}, {768, 60}}</string>
+					<string>FooterView</string>
+					<string>{{492, 1091}, {768, 30}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDkgAAwhgAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwhgAAA</bytes>
 					</object>
 				</object>
 			</object>
@@ -168,7 +171,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">HeaderView</string>
+					<string key="className">FooterView</string>
 					<string key="superclassName">HLSXibView</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">label</string>
@@ -183,7 +186,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Sources/Demos/View/TableViewCells/HeaderView/HeaderView.h</string>
+						<string key="minorKey">Sources/Demos/View/TableViewCells/FooterView/FooterView.h</string>
 					</object>
 				</object>
 			</object>
