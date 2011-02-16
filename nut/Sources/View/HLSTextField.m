@@ -10,7 +10,7 @@
 
 #import "HLSFloat.h"
 
-// Estimation of the keyboard size at the bottom of the screen. Could be catched by listening to the keyboard
+// Estimation of the keyboard size at the bottom of the screen. Could be caught by listening to the keyboard
 // events, but overkill
 #define KEYBOARD_RESERVED_HEIGHT                350.f
 

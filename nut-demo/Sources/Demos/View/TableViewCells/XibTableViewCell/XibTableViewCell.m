@@ -32,12 +32,4 @@
 
 @synthesize label = m_label;
 
-#pragma mark Class methods
-
-+ (CGFloat)height
-{
-    // Must match the size of the resource in the xib file
-    return 50.f;
-}
-
 @end

@@ -11,11 +11,22 @@
 #import "HLSTableViewCell+Protected.h"
 #import "NSObject+HLSExtensions.h"
 
-#pragma mark Static methods
-
 @implementation HLSTableViewCell
 
-#pragma mark Factory methods
+static NSMutableDictionary *s_classNameToHeightMap = nil;
+
+#pragma mark Class methods
+
++ (void)initialize
+{
+    if (! s_classNameToHeightMap) {
+        s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
+    }
+    
+    // Add cell height to height cache
+    CGFloat cellHeight = CGRectGetHeight([self tableViewCellForTableView:nil].frame);
+    [s_classNameToHeightMap setObject:[NSNumber numberWithFloat:cellHeight] forKey:[self className]];
+}
 
 + (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView
 {
@@ -63,11 +74,8 @@
 
 + (CGFloat)height
 {
-    static CGFloat s_height = 0.0f;
-    if (s_height == 0.0f) {
-        s_height = CGRectGetHeight([self tableViewCellForTableView:nil].frame);
-    }
-    return s_height;
+    NSNumber *cellHeight = [s_classNameToHeightMap objectForKey:[self className]];
+    return [cellHeight floatValue];
 }
 
 + (NSString *)xibFileName
