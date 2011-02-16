@@ -111,15 +111,19 @@
 
 - (void)animateStep:(HLSAnimationStep *)animationStep
 {
-    [UIView beginAnimations:nil context:animationStep];
-    
-    [UIView setAnimationDuration:animationStep.duration];
-    [UIView setAnimationCurve:animationStep.curve];
-    
-    [UIView setAnimationWillStartSelector:@selector(animationWillStart:context:)];
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-    [UIView setAnimationDelegate:self];
-    
+    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
+    // in animations
+    if (! doubleeq(animationStep.duration, 0.f)) {
+        [UIView beginAnimations:nil context:animationStep];
+        
+        [UIView setAnimationDuration:animationStep.duration];
+        [UIView setAnimationCurve:animationStep.curve];
+        
+        [UIView setAnimationWillStartSelector:@selector(animationWillStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationDelegate:self];        
+    }
+        
     // Animate all views in the animation step
     for (UIView *view in [animationStep views]) {
         // The views are brought to the front in the order they were registered with the animation step
@@ -152,7 +156,21 @@
         view.transform = CGAffineTransformConcat(viewAnimationStep.transform, view.transform);
     }
     
-    [UIView commitAnimations];
+    // Animated
+    if (! doubleeq(animationStep.duration, 0.f)) {
+        [UIView commitAnimations];
+        
+        // The code will resume in the animationDidStop:finished:context: method
+    }
+    // Instantaneous
+    else {
+        // Notify the end of the animation
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:)]) {
+            [self.delegate animationStepFinished:animationStep];
+        }
+        
+        [self animateNextStep];
+    }
 }
 
 - (void)animateNextStep

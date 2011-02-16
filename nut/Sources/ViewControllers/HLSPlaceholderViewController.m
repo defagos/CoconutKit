@@ -245,10 +245,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
         UIView *oldInsetView = self.oldInsetViewController.view;
         UIView *newInsetView = m_insetViewController.view;
         
-        // Initially hidden to avoid an ugly flickering (otherwise the view can be sometimes just seen before it gets animated); the view will 
-        // be made visible just before the first animation starts
-        newInsetView.hidden = YES;
-        
         NSMutableArray *animationSteps = [NSMutableArray array];
         for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in twoViewAnimationStepDefinitions) {
             HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:oldInsetView
@@ -721,12 +717,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
-
-- (void)animationWillStart:(HLSAnimation *)animation
-{
-    // Show the new inset which has been hidden to avoid flickering
-    self.insetViewController.view.hidden = NO;
-}
 
 - (void)animationDidStop:(HLSAnimation *)animation
 {
