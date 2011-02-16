@@ -9,7 +9,6 @@
 #import "HLSTableViewCell.h"
 
 #import "HLSTableViewCell+Protected.h"
-#import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
 #pragma mark Static methods
