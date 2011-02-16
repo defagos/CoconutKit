@@ -232,7 +232,7 @@
         task.finished = YES;
         
         // Notify the task delegate
-        id<HLSTaskDelegate> taskDelegate = [self delegateForTask:taskDelegate];
+        id<HLSTaskDelegate> taskDelegate = [self delegateForTask:task];
         if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
             [taskDelegate taskHasBeenCancelled:task];
         }

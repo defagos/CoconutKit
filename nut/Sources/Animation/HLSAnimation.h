@@ -31,7 +31,6 @@
     NSString *m_tag;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
-    BOOL m_alwaysOnTop;
     BOOL m_firstStep;
     id<HLSAnimationDelegate> m_delegate;
 }
