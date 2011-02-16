@@ -39,7 +39,7 @@
         }
         // Created programmatically
         else {
-            cell = [[[self class] alloc] initWithStyle:[self style] reuseIdentifier:[self identifier]];
+            cell = [[[[self class] alloc] initWithStyle:[self style] reuseIdentifier:[self identifier]] autorelease];
         }
     }
     
