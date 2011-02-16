@@ -51,17 +51,20 @@
 /**
  * Factory method for creating a table view cell. A downcast might be needed to be able to edit cell attributes,
  * that is why you should use the HLS_TABLE_VIEW_CELL factory method which does this cast for you
+ * Not meant to be overridden
  */
 + (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView;
 
 /**
  * Method for cell skinning
+ * Not meant to be overridden
  */
 - (void)setBackgroundWithImageNamed:(NSString *)backgroundImageName
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
 
 /**
- * Returns the cell height, must not be overridden
+ * Returns the cell height
+ * Not meant to be overridden
  */
 + (CGFloat)height;
 

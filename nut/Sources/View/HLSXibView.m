@@ -12,9 +12,21 @@
 #import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
+static NSMutableDictionary *s_classNameToHeightMap = nil;
+
 @implementation HLSXibView
 
-#pragma mark Factory methods
+#pragma mark Class methods for creation
+
++ (void)initialize
+{
+    // Perform initialization once for the whole inheritance hierarchy
+    if (self != [HLSXibView class]) {
+        return;
+    }
+    
+    s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
+}
 
 + (UIView *)xibView
 {   
@@ -34,11 +46,17 @@
     }
 }
 
-#pragma mark Class methods
+#pragma mark Class methods for customization
 
 + (CGFloat)height
 {
-    return kViewStandardHeight;
+    // Cache the view height
+    NSNumber *viewHeight = [s_classNameToHeightMap objectForKey:[self className]];
+    if (! viewHeight) {
+        viewHeight = [NSNumber numberWithFloat:CGRectGetHeight([self xibView].frame)];
+        [s_classNameToHeightMap setObject:viewHeight forKey:[self className]];
+    }
+    return [viewHeight floatValue];
 }
 
 + (NSString *)xibFileName

@@ -20,12 +20,9 @@
  * in the implementation file of the corresponding class), instead of putting redundant code in all source files using
  * the view.
  *
- * To create your own view class, simply subclass HLSXibView and:
- *   - override the height method to return the height of the view if not the default one (44.f). This is not
- *     mandatory if you never plan to use the HLS_XIB_VIEW_HEIGHT macro
- *   - if your view layout is created using a xib file not bearing the same name as the view class, override the
- *     xibFileName accessor to return the name of the xib file. If the xib file bears the same name as its
- *     corresponding class, you do not need to override this accessor
+ * To create your own view class, simply subclass HLSXibView. If your view layout is created using a xib file not 
+ * bearing the same name as the view class, override the xibFileName accessor to return the name of the xib file. 
+ * If the xib file bears the same name as its corresponding class, you do not need to override this accessor.
  * Your custom classes can then be instantiated using the provided factory macro.
  *
  * To define the view layout in Interface Builder, the first object in the xib must be the view object. Do not forget 
@@ -42,11 +39,13 @@
 
 /**
  * Factory method for creating the view
+ * Not meant to be overridden
  */
 + (UIView *)xibView;
 
 /**
- * Implement this method to reflect the height of the view in your xib file
+ * Return the height of the view.
+ * Not meant to be overridden
  */
 + (CGFloat)height;
 

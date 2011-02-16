@@ -76,6 +76,15 @@ typedef enum {
     return self;
 }
 
+#pragma mark View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tableView.rowHeight = HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
+}
+
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -152,7 +161,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
+    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSSubtitleTableViewCell, tableView);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
@@ -249,11 +258,6 @@ typedef enum {
 }
 
 #pragma mark UITableViewDelegate protocol implementation
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

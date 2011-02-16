@@ -47,15 +47,17 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
 
 + (void)initialize
 {
-    // Ensure this is not called  from a subclass
-    if (self == [HLSRequester class]) {
-        // Initialise the network transition static decision table. Only transitions different from HLSRequesterNetworkStatusNone 
-        // need to be set since the table is initially filled with this value
-        s_transitions[HLSRequesterStatusIdle][HLSRequesterStatusRetrieving] = HLSRequesterNetworkStatusStart;
-        s_transitions[HLSRequesterStatusRetrieving][HLSRequesterStatusIdle] = HLSRequesterNetworkStatusStop;
-        s_transitions[HLSRequesterStatusRetrieving][HLSRequesterStatusDone] = HLSRequesterNetworkStatusStop;
-        s_transitions[HLSRequesterStatusDone][HLSRequesterStatusRetrieving] = HLSRequesterNetworkStatusStart;
+    // Perform initialization once for the whole inheritance hierarchy
+    if (self != [HLSRequester class]) {
+        return;
     }
+    
+    // Initialise the network transition static decision table. Only transitions different from HLSRequesterNetworkStatusNone 
+    // need to be set since the table is initially filled with this value
+    s_transitions[HLSRequesterStatusIdle][HLSRequesterStatusRetrieving] = HLSRequesterNetworkStatusStart;
+    s_transitions[HLSRequesterStatusRetrieving][HLSRequesterStatusIdle] = HLSRequesterNetworkStatusStop;
+    s_transitions[HLSRequesterStatusRetrieving][HLSRequesterStatusDone] = HLSRequesterNetworkStatusStop;
+    s_transitions[HLSRequesterStatusDone][HLSRequesterStatusRetrieving] = HLSRequesterNetworkStatusStart;
 }
 
 #pragma mark Object creation and destruction

@@ -11,7 +11,3 @@ extern const CGFloat kPageControlStandardHeight;
 
 // Search bar constants
 extern const CGFloat kSearchBarStandardHeight;
-
-// View constants
-extern const CGFloat kViewStandardHeight;
-

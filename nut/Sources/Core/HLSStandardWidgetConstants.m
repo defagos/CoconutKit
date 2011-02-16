@@ -9,5 +9,3 @@
 const CGFloat kPageControlStandardHeight = 20.f;
 
 const CGFloat kSearchBarStandardHeight = 44.f;
-
-const CGFloat kViewStandardHeight = 44.f;
