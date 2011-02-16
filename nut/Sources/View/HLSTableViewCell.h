@@ -26,8 +26,6 @@
  *
  * If you need further customization abilities, like cells whose layout is defined using a xib or programmatically, 
  * you must sublcass HLSTableViewCell and:
- *   - override the height method to return the height of the cell if not the default one (44.f, which is the original
- *     size of cells created using Interface Builder)
  *   - if your cell layout is created using a xib file not bearing the same name as the cell class, override the
  *     xibFileName accessor to return the name of the xib file. If the xib file bears the same name as its
  *     corresponding class or if your cell layout is created programmatically, do not override this accessor
@@ -63,8 +61,7 @@
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
 
 /**
- * Override this method to return the height of your custom cell class if not the default one (44.f). This has to
- * be done whether the cell is created programmatically or using a xib file
+ * Returns the cell height, must not be overridden
  */
 + (CGFloat)height;
 

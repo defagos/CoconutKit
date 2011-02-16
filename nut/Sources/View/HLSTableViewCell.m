@@ -64,7 +64,11 @@
 
 + (CGFloat)height
 {
-    return kTableViewCellStandardHeight;
+    static CGFloat s_height = 0.0f;
+    if (s_height == 0.0f) {
+        s_height = CGRectGetHeight([self tableViewCellForTableView:nil].frame);
+    }
+    return s_height;
 }
 
 + (NSString *)xibFileName
