@@ -8,7 +8,6 @@
 
 #import "HLSTableViewCell.h"
 
-#import "HLSLogger.h"
 #import "HLSTableViewCell+Protected.h"
 #import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
