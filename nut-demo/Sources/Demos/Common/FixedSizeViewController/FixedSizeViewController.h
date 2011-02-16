@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface FixedSizeViewController : UIViewController {
+@interface FixedSizeViewController : HLSViewController {
 @private
     
 }

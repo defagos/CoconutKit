@@ -10,8 +10,11 @@
 
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
+#import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
+#import "OrientationClonerViewController.h"
+#import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
 @interface PlaceholderDemoViewController ()
@@ -214,17 +217,22 @@
 
 - (void)portraitOnlyButtonClicked:(id)sender
 {
-
+    PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+    [self displayInsetViewController:portraitOnlyViewController];
 }
 
 - (void)landscapeOnlyButtonClicked:(id)sender
 {
-
+    LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+    [self displayInsetViewController:landscapeOnlyViewController];
 }
 
 - (void)orientationClonerButtonClicked:(id)sender
 {
-
+    OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
+                                                                         initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)]
+                                                                        autorelease];
+    [self displayInsetViewController:orientationClonerViewController];
 }
 
 - (void)hideWithModalButtonClicked:(id)sender

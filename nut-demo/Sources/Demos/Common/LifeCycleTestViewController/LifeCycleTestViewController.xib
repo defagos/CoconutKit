@@ -45,7 +45,7 @@
 					<object class="IBUILabel" id="604852118">
 						<reference key="NSNextResponder" ref="629671924"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{0, 453}, {768, 98}}</string>
+						<string key="NSFrame">{{20, 199}, {360, 101}}</string>
 						<reference key="NSSuperview" ref="629671924"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -63,12 +63,12 @@
 						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUINumberOfLines">2</int>
+						<int key="IBUINumberOfLines">4</int>
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">0</int>
 					</object>
 				</object>
-				<string key="NSFrameSize">{768, 1004}</string>
+				<string key="NSFrameSize">{400, 500}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -151,7 +151,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>LifeCycleTestViewController</string>
 					<string>UIResponder</string>
-					<string>{{418, 141}, {768, 1004}}</string>
+					<string>{{640, 645}, {400, 500}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

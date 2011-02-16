@@ -1,21 +1,21 @@
 //
-//  StretchableViewController.m
+//  PortraitOnlyViewController
 //  nut-demo
 //
-//  Created by Samuel Défago on 2/14/11.
+//  Created by Samuel Défago on 2/15/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "StretchableViewController.h"
+#import "PortraitOnlyViewController.h"
 
-@implementation StretchableViewController
+@implementation PortraitOnlyViewController
 
 #pragma mark Object creation and destruction
 
 - (id)init
 {
     if (self = [super init]) {
-        self.title = @"StretchableViewController";
+        self.title = @"PortraitOnlyViewController";
     }
     return self;
 }
@@ -40,7 +40,7 @@
         return NO;
     }
     
-    return YES;
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
 @end

@@ -45,7 +45,7 @@
 					<object class="IBUILabel" id="908324968">
 						<reference key="NSNextResponder" ref="538294322"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{0, 495}, {768, 53}}</string>
+						<string key="NSFrame">{{20, 495}, {728, 53}}</string>
 						<reference key="NSSuperview" ref="538294322"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -197,7 +197,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MemoryWarningTestCoverViewController</string>
 					<string>UIResponder</string>
-					<string>{{418, 121}, {768, 1024}}</string>
+					<string>{{640, 121}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

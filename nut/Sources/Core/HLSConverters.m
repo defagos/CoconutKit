@@ -8,6 +8,7 @@
 
 #import "HLSConverters.h"
 
+#import "HLSLogger.h"
 #import "HLSRuntimeChecks.h"
 
 @implementation HLSConverters
@@ -17,6 +18,68 @@
 + (NSString *)stringFromBool:(BOOL)yesOrNo
 {
     return yesOrNo ? @"YES" : @"NO";
+}
+
++ (NSString *)stringFromInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait: {
+            return @"UIInterfaceOrientationPortrait";
+            break;
+        }
+            
+        case UIInterfaceOrientationPortraitUpsideDown: {
+            return @"UIInterfaceOrientationPortraitUpsideDown";
+            break;
+        }
+            
+        case UIInterfaceOrientationLandscapeLeft: {
+            return @"UIInterfaceOrientationLandscapeLeft";
+            break;
+        }
+            
+        case UIInterfaceOrientationLandscapeRight: {
+            return @"UIInterfaceOrientationLandscapeRight";
+            break;
+        }
+            
+        default: {
+            logger_error(@"Unknown interface orientation");
+            return nil;
+            break;
+        }            
+    }
+}
+
++ (NSString *)stringFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation
+{
+    switch (deviceOrientation) {
+        case UIDeviceOrientationPortrait: {
+            return @"UIDeviceOrientationPortrait";
+            break;
+        }
+            
+        case UIDeviceOrientationPortraitUpsideDown: {
+            return @"UIDeviceOrientationPortraitUpsideDown";
+            break;
+        }
+            
+        case UIDeviceOrientationLandscapeLeft: {
+            return @"UIDeviceOrientationLandscapeLeft";
+            break;
+        }
+            
+        case UIDeviceOrientationLandscapeRight: {
+            return @"UIDeviceOrientationLandscapeRight";
+            break;
+        }
+            
+        default: {
+            logger_error(@"Unknown device orientation");
+            return nil;
+            break;
+        }            
+    }
 }
 
 + (NSNumber *)unsignedIntNumberFromString:(NSString *)string

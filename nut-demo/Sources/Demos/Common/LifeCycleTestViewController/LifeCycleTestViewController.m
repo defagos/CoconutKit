@@ -91,7 +91,7 @@
         return NO;
     }
     
-    logger_info(@"Called!");
+    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
     return YES;
 }
 
@@ -99,21 +99,21 @@
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    logger_info(@"Called!");
+    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    logger_info(@"Called!");
+    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    logger_info(@"Called!");
+    logger_info(@"Called, fromInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
 }
 
 @end

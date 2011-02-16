@@ -16,6 +16,10 @@
 
 + (NSString *)stringFromBool:(BOOL)yesOrNo;
 
++ (NSString *)stringFromInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+
++ (NSString *)stringFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation;
+
 + (NSNumber *)unsignedIntNumberFromString:(NSString *)string;
 
 + (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString;

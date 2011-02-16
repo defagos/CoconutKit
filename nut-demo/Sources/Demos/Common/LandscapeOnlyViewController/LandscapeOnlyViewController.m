@@ -1,21 +1,21 @@
 //
-//  StretchableViewController.m
+//  LandscapeOnlyViewController.m
 //  nut-demo
 //
 //  Created by Samuel Défago on 2/14/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "StretchableViewController.h"
+#import "LandscapeOnlyViewController.h"
 
-@implementation StretchableViewController
+@implementation LandscapeOnlyViewController
 
 #pragma mark Object creation and destruction
 
 - (id)init
 {
     if (self = [super init]) {
-        self.title = @"StretchableViewController";
+        self.title = @"LandscapeOnlyViewController";
     }
     return self;
 }
@@ -40,7 +40,7 @@
         return NO;
     }
     
-    return YES;
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
 @end
