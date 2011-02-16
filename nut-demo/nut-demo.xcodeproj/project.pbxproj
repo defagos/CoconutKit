@@ -33,6 +33,8 @@
 		6F7A2AA3130BA3F000AB1926 /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A2AA2130BA3F000AB1926 /* OrientationClonerViewControllerLandscape.xib */; };
 		6F7A3393130C558B00AB1926 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A3391130C558B00AB1926 /* FooterView.m */; };
 		6F7A3394130C558B00AB1926 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3392130C558B00AB1926 /* FooterView.xib */; };
+		6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A33E1130C6D2A00AB1926 /* ModalWrapperViewController.m */; };
+		6F7A33E4130C6D3500AB1926 /* ModalWrapperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -107,6 +109,9 @@
 		6F7A3390130C558B00AB1926 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		6F7A3391130C558B00AB1926 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		6F7A3392130C558B00AB1926 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
+		6F7A33E0130C6D2A00AB1926 /* ModalWrapperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWrapperViewController.h; sourceTree = "<group>"; };
+		6F7A33E1130C6D2A00AB1926 /* ModalWrapperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWrapperViewController.m; sourceTree = "<group>"; };
+		6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalWrapperViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -300,6 +305,16 @@
 			path = FooterView;
 			sourceTree = "<group>";
 		};
+		6F7A33DF130C6D1D00AB1926 /* ModalWrapperViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F7A33E0130C6D2A00AB1926 /* ModalWrapperViewController.h */,
+				6F7A33E1130C6D2A00AB1926 /* ModalWrapperViewController.m */,
+				6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */,
+			);
+			path = ModalWrapperViewController;
+			sourceTree = "<group>";
+		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +391,7 @@
 				6FBDA7A21303EDAB004B9617 /* LandscapeOnlyViewController */,
 				6F7A27E7130AF8E400AB1926 /* LifeCycleTestViewController */,
 				6F7A2790130AEC6900AB1926 /* MemoryWarningTestCoverViewController */,
+				6F7A33DF130C6D1D00AB1926 /* ModalWrapperViewController */,
 				6F7A2A92130BA35500AB1926 /* OrientationClonerViewController */,
 				6FBDA7A31303EDAB004B9617 /* PortraitOnlyViewController */,
 				6F143AFB130A6DF00075E94C /* StretchableViewController */,
@@ -742,6 +758,7 @@
 				6F7A2A97130BA37400AB1926 /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6F7A2AA3130BA3F000AB1926 /* OrientationClonerViewControllerLandscape.xib in Resources */,
 				6F7A3394130C558B00AB1926 /* FooterView.xib in Resources */,
+				6F7A33E4130C6D3500AB1926 /* ModalWrapperViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +797,7 @@
 				6F7A2A70130B9DBD00AB1926 /* PortraitOnlyViewController.m in Sources */,
 				6F7A2A95130BA36600AB1926 /* OrientationClonerViewController.m in Sources */,
 				6F7A3393130C558B00AB1926 /* FooterView.m in Sources */,
+				6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

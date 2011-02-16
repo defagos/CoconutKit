@@ -10,6 +10,7 @@
 
 #import "DeviceFeedFilter.h"
 #import "DeviceInfo.h"
+#import "ModalWrapperViewController.h"
 
 static NSArray *s_data;
 
@@ -27,8 +28,12 @@ typedef enum {
 
 @property (nonatomic, retain) HLSFeed *deviceFeed;
 @property (nonatomic, retain) HLSFeedFilter *deviceFeedFilter;
+@property (nonatomic, assign) TableSearchDisplayDemoViewController *parentNonModalViewController;       // weak ref
 
 - (DeviceFeedFilter *)buildDeviceFeedFilter;
+
+- (void)modalBarButtonItemClicked:(id)sender;
+- (void)closeBarButtonItemClicked:(id)sender;
 
 @end
 
@@ -70,6 +75,7 @@ typedef enum {
 {
     self.deviceFeed = nil;
     self.deviceFeedFilter = nil;
+    self.parentNonModalViewController = nil;
     [super dealloc];
 }
 
@@ -78,6 +84,8 @@ typedef enum {
 @synthesize deviceFeed = m_deviceFeed;
 
 @synthesize deviceFeedFilter = m_deviceFeedFilter;
+
+@synthesize parentNonModalViewController = m_parentNonModalViewController;
 
 #pragma mark View lifecycle
 
@@ -90,6 +98,25 @@ typedef enum {
                                         NSLocalizedString(@"Phones", @"Phones"),
                                         NSLocalizedString(@"Tablets", @"Tablets"),
                                         nil];
+    
+    // Trick to show the behavior when added to a navigation controller or shown normally. In a navigation controller,
+    // show a modal button to open the view controller modally
+    if (self.navigationController) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Modal", @"Modal")
+                                                                                   style:UIBarButtonItemStyleBordered 
+                                                                                  target:self 
+                                                                                  action:@selector(modalBarButtonItemClicked:)]
+                                                  autorelease];        
+    }
+    // Else display a close button
+    else {
+        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                                                 action:@selector(closeBarButtonItemClicked:)]
+                                                 autorelease];
+    }
+
 }
 
 #pragma mark Orientation management
@@ -193,6 +220,28 @@ typedef enum {
     }
         
     return filter;
+}
+
+#pragma mark Event callbacks
+
+- (void)modalBarButtonItemClicked:(id)sender
+{
+    // Create the modal version; keep a weak ref to the view controller (self) which presents the modal
+    TableSearchDisplayDemoViewController *demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
+    demoViewController.parentNonModalViewController = self;
+    
+    // Wrapped for providing navigation bar even in modal version
+    ModalWrapperViewController *modalWrapperViewController = [[[ModalWrapperViewController alloc] init] autorelease];
+    modalWrapperViewController.insetViewController = demoViewController;
+    
+    [self presentModalViewController:modalWrapperViewController animated:YES];
+}
+
+- (void)closeBarButtonItemClicked:(id)sender
+{
+    // Modal version requests close; ask view controller responsible for modal display to dismiss the view controller
+    [self.parentNonModalViewController dismissModalViewControllerAnimated:YES];
+    self.parentNonModalViewController = nil;
 }
 
 @end

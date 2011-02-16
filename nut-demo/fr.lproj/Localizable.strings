@@ -26,6 +26,7 @@
 "Houston, we've got a problem"="Houston, nous avons un problème";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Landscape only"="Uniquement paysage";
+"Modal"="Modale";
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Parallel processing"="Calculs en parallèle";
