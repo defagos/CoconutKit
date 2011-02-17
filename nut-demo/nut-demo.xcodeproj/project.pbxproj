@@ -35,6 +35,10 @@
 		6F7A3394130C558B00AB1926 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3392130C558B00AB1926 /* FooterView.xib */; };
 		6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A33E1130C6D2A00AB1926 /* ModalWrapperViewController.m */; };
 		6F7A33E4130C6D3500AB1926 /* ModalWrapperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */; };
+		6F7A3927130D6DE300AB1926 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A3920130D6DE300AB1926 /* nut_bootstrap.m */; };
+		6F7A3928130D6DE300AB1926 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7A3921130D6DE300AB1926 /* nut.framework */; };
+		6F7A3929130D6DE300AB1926 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3923130D6DE300AB1926 /* nut_Localizable.strings */; };
+		6F7A392A130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3926130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -64,10 +68,6 @@
 		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
 		6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */; };
 		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
-		6FBDB4A5130926E5004B9617 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB49E130926E5004B9617 /* nut_bootstrap.m */; };
-		6FBDB4A6130926E5004B9617 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDB49F130926E5004B9617 /* nut.framework */; };
-		6FBDB4A7130926E5004B9617 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */; };
-		6FBDB4A8130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +112,11 @@
 		6F7A33E0130C6D2A00AB1926 /* ModalWrapperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWrapperViewController.h; sourceTree = "<group>"; };
 		6F7A33E1130C6D2A00AB1926 /* ModalWrapperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWrapperViewController.m; sourceTree = "<group>"; };
 		6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalWrapperViewController.xib; sourceTree = "<group>"; };
+		6F7A3920130D6DE300AB1926 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
+		6F7A3921130D6DE300AB1926 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
+		6F7A3924130D6DE300AB1926 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F7A3925130D6DE300AB1926 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F7A3926130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -158,11 +163,6 @@
 		6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFeedFilter.m; sourceTree = "<group>"; };
 		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
-		6FBDB49E130926E5004B9617 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
-		6FBDB49F130926E5004B9617 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
-		6FBDB4A2130926E5004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6FBDB4A3130926E5004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,7 +175,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */,
-				6FBDB4A6130926E5004B9617 /* nut.framework in Frameworks */,
+				6F7A3928130D6DE300AB1926 /* nut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +217,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FBDB49C130926E5004B9617 /* nut-Release.staticframework */,
+				6F7A391E130D6DE300AB1926 /* nut-Release.staticframework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -313,6 +313,34 @@
 				6F7A33E3130C6D3500AB1926 /* ModalWrapperViewController.xib */,
 			);
 			path = ModalWrapperViewController;
+			sourceTree = "<group>";
+		};
+		6F7A391E130D6DE300AB1926 /* nut-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F7A391F130D6DE300AB1926 /* Bootstrap */,
+				6F7A3921130D6DE300AB1926 /* nut.framework */,
+				6F7A3922130D6DE300AB1926 /* Resources */,
+			);
+			name = "nut-Release.staticframework";
+			path = "StaticFrameworks/nut-Release.staticframework";
+			sourceTree = "<group>";
+		};
+		6F7A391F130D6DE300AB1926 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F7A3920130D6DE300AB1926 /* nut_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F7A3922130D6DE300AB1926 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F7A3923130D6DE300AB1926 /* nut_Localizable.strings */,
+				6F7A3926130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
@@ -653,34 +681,6 @@
 			path = DeviceInfo;
 			sourceTree = "<group>";
 		};
-		6FBDB49C130926E5004B9617 /* nut-Release.staticframework */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDB49D130926E5004B9617 /* Bootstrap */,
-				6FBDB49F130926E5004B9617 /* nut.framework */,
-				6FBDB4A0130926E5004B9617 /* Resources */,
-			);
-			name = "nut-Release.staticframework";
-			path = "StaticFrameworks/nut-Release.staticframework";
-			sourceTree = "<group>";
-		};
-		6FBDB49D130926E5004B9617 /* Bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDB49E130926E5004B9617 /* nut_bootstrap.m */,
-			);
-			path = Bootstrap;
-			sourceTree = "<group>";
-		};
-		6FBDB4A0130926E5004B9617 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */,
-				6FBDB4A4130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -744,8 +744,6 @@
 				6FBDB06213083227004B9617 /* SingleViewAnimationDemoViewController.xib in Resources */,
 				6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */,
-				6FBDB4A7130926E5004B9617 /* nut_Localizable.strings in Resources */,
-				6FBDB4A8130926E5004B9617 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */,
 				6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */,
 				6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */,
@@ -759,6 +757,8 @@
 				6F7A2AA3130BA3F000AB1926 /* OrientationClonerViewControllerLandscape.xib in Resources */,
 				6F7A3394130C558B00AB1926 /* FooterView.xib in Resources */,
 				6F7A33E4130C6D3500AB1926 /* ModalWrapperViewController.xib in Resources */,
+				6F7A3929130D6DE300AB1926 /* nut_Localizable.strings in Resources */,
+				6F7A392A130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,7 +786,6 @@
 				6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */,
 				6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */,
 				6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */,
-				6FBDB4A5130926E5004B9617 /* nut_bootstrap.m in Sources */,
 				6F143A9B130999DD0075E94C /* PlaceholderDemoViewController.m in Sources */,
 				6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */,
 				6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */,
@@ -798,12 +797,22 @@
 				6F7A2A95130BA36600AB1926 /* OrientationClonerViewController.m in Sources */,
 				6F7A3393130C558B00AB1926 /* FooterView.m in Sources */,
 				6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */,
+				6F7A3927130D6DE300AB1926 /* nut_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6F7A3923130D6DE300AB1926 /* nut_Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F7A3924130D6DE300AB1926 /* en */,
+				6F7A3925130D6DE300AB1926 /* fr */,
+			);
+			name = nut_Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6FBDA7A61303EE9B004B9617 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -811,15 +820,6 @@
 				6FBDA7A91303EEAD004B9617 /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		6FBDB4A1130926E5004B9617 /* nut_Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6FBDB4A2130926E5004B9617 /* en */,
-				6FBDB4A3130926E5004B9617 /* fr */,
-			);
-			name = nut_Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
