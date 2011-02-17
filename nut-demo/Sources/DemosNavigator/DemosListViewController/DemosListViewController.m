@@ -15,6 +15,7 @@
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "TextFieldsScrollableDemoViewController.h"
 
 // Categories
 typedef enum {
@@ -48,7 +49,8 @@ typedef enum {
 typedef enum {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
-    ViewDemoIndexTextFields,
+    ViewDemoIndexTextFieldsFixed,
+    ViewDemoIndexTextFieldsScrollable,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -206,8 +208,13 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFields: {
+                case ViewDemoIndexTextFieldsFixed: {
                     cell.textLabel.text = NSLocalizedString(@"Text fields", @"Text fields");
+                    break;
+                }
+                    
+                case ViewDemoIndexTextFieldsScrollable: {
+                    cell.textLabel.text = NSLocalizedString(@"Text fields (scrollable content)", @"Text fields (scrollable content)");
                     break;
                 }
                     
@@ -308,9 +315,17 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFields: {
+                case ViewDemoIndexTextFieldsFixed: {
                     TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewDemoIndexTextFieldsScrollable: {
+                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                    TextFieldsScrollableDemoViewController *demoViewController = [[[TextFieldsScrollableDemoViewController alloc] init] autorelease];
+                    scrollViewController.insetViewController = demoViewController;
+                    [self.navigationController pushViewController:scrollViewController animated:YES];
                     break;
                 }
                     

@@ -18,6 +18,7 @@ HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRequester.h
 HLSRuntimeChecks.h
+HLSScrollViewController.h
 HLSServiceAggregator.h
 HLSServiceAnswer.h
 HLSServiceBoundArray.h

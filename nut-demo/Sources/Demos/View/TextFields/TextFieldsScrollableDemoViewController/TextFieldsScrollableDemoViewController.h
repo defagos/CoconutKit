@@ -1,12 +1,12 @@
 //
-//  TextFieldsDemoViewController.h
+//  TextFieldsScrollableDemoViewController.h
 //  nut-demo
 //
 //  Created by Samuel Défago on 2/12/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface TextFieldsDemoViewController : HLSViewController <UITextFieldDelegate> {
+@interface TextFieldsScrollableDemoViewController : HLSViewController <UITextFieldDelegate> {
 @private
     UILabel *m_instructionLabel;
     HLSTextField *m_textField1;

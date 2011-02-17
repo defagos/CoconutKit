@@ -1,43 +1,30 @@
 //
-//  ModalWrapperViewController.m
-//  nut-demo
+//  HLSScrollViewController.m
+//  nut
 //
-//  Created by Samuel Défago on 2/16/11.
+//  Created by Samuel Défago on 2/17/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "ModalWrapperViewController.h"
+#import "HLSScrollViewController.h"
 
-@interface ModalWrapperViewController ()
+@interface HLSScrollViewController ()
+
+- (void)adjustContentSize;
 
 - (void)syncPropertiesWithViewController:(UIViewController *)viewController;
 
 @end
 
-@implementation ModalWrapperViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.navigationBar = nil;
-    self.toolbar = nil;
-}
+@implementation HLSScrollViewController
 
 #pragma mark Accessors and mutators
 
-@synthesize navigationBar = m_navigationBar;
-
-@synthesize toolbar = m_toolbar;
-
-// Recommended way to override the parent implementation. Check the HLSPlaceholderViewController documentation
-- (void)setInsetViewController:(UIViewController *)insetViewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
+- (void)setInsetViewController:(UIViewController *)insetViewController 
+withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
     // Check for self-assignment
-    if (insetViewController == self.insetViewController) {
+    if (self.insetViewController == insetViewController) {
         return;
     }
     
@@ -54,10 +41,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
         [self.insetViewController removeObserver:self forKeyPath:@"navigationItem.rightBarButtonItem"];
         [self.insetViewController removeObserver:self forKeyPath:@"toolbarItems"];
     }
-        
-    // Install new inset and sync UI with it
+    
+    // Install new inset and fit content area size
     [super setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];
-    [self syncPropertiesWithViewController:insetViewController];
+    [self adjustContentSize];
     
     // Start listening to changes of the wrapped view controllers which require a UI refresh
     if (self.insetViewController) {
@@ -76,11 +63,47 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
+    // Covers everything
+    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    self.placeholderView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0.f, 
+                                                                           0.f, 
+                                                                           applicationFrame.size.width, 
+                                                                           applicationFrame.size.height)]
+                            autorelease];
+    self.placeholderView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    // Adjust content size if an inset was already attached
+    [self adjustContentSize];
+    
+    // The scroll view is the main view
+    self.view = self.placeholderView;
     
     [self syncPropertiesWithViewController:self.insetViewController];
+}
+
+#pragma mark Orientation management
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    // In particular, adjust the size if a cloned view controller has been installed
+    [self adjustContentSize];
+}
+
+#pragma mark Content size fitting
+
+- (void)adjustContentSize
+{
+    UIScrollView *scrollView = (UIScrollView *)self.placeholderView;
+    if (self.insetViewController) {
+        scrollView.contentSize = self.insetViewController.view.bounds.size;
+    }
+    else {
+        scrollView.contentSize = scrollView.bounds.size;
+    }
 }
 
 #pragma mark KVO notification
@@ -101,12 +124,17 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     // Sync the title
     self.title = viewController.title;
     
-    // Sync the navigation bar
-    [self.navigationBar popNavigationItemAnimated:NO];
-    [self.navigationBar pushNavigationItem:viewController.navigationItem animated:NO];
+    // Sync the navigation bar    
+    self.navigationItem.title = viewController.navigationItem.title;
+    self.navigationItem.backBarButtonItem = viewController.navigationItem.backBarButtonItem;
+    self.navigationItem.titleView = viewController.navigationItem.titleView;
+    self.navigationItem.prompt = viewController.navigationItem.prompt;
+    self.navigationItem.hidesBackButton = viewController.navigationItem.hidesBackButton;
+    self.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
+    self.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
     
     // Sync the toolbar
-    self.toolbar.items = viewController.toolbarItems;
+    self.toolbarItems = viewController.toolbarItems;
 }
 
 @end

@@ -1,14 +1,14 @@
 //
-//  TextFieldsDemoViewController.m
+//  TextFieldsScrollableDemoViewController.m
 //  nut-demo
 //
 //  Created by Samuel Défago on 2/12/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "TextFieldsDemoViewController.h"
+#import "TextFieldsScrollableDemoViewController.h"
 
-@implementation TextFieldsDemoViewController
+@implementation TextFieldsScrollableDemoViewController
 
 #pragma mark Object creation and destruction
 
