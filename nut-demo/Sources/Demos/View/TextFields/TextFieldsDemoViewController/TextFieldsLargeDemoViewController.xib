@@ -373,7 +373,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>TextFieldsScrollableDemoViewController</string>
+					<string>TextFieldsDemoViewController</string>
 					<string>UIResponder</string>
 					<string>{{277, 74}, {1215, 1082}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -441,7 +441,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">TextFieldsScrollableDemoViewController</string>
+					<string key="className">TextFieldsDemoViewController</string>
 					<string key="superclassName">HLSViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -498,7 +498,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Sources/Demos/View/TextFields/TextFieldsScrollableDemoViewController/TextFieldsScrollableDemoViewController.h</string>
+						<string key="minorKey">Sources/Demos/View/TextFields/TextFieldsDemoViewController/TextFieldsDemoViewController.h</string>
 					</object>
 				</object>
 			</object>

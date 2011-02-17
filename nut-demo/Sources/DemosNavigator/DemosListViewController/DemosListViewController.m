@@ -8,14 +8,15 @@
 
 #import "DemosListViewController.h"
 
+#import "FixedSizeViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "StretchableViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
-#import "TextFieldsScrollableDemoViewController.h"
 
 // Categories
 typedef enum {
@@ -59,6 +60,8 @@ typedef enum {
 typedef enum {
     ViewControllersDemoIndexEnumBegin = 0,
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
+    ViewControllersDemoIndexFixedSizeLargeInScrollView,
+    ViewControllersDemoIndexStretchableLargeInScrollView,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexPageController,
@@ -214,7 +217,7 @@ typedef enum {
                 }
                     
                 case ViewDemoIndexTextFieldsScrollable: {
-                    cell.textLabel.text = NSLocalizedString(@"Text fields (scrollable content)", @"Text fields (scrollable content)");
+                    cell.textLabel.text = NSLocalizedString(@"Text fields (large)", @"Text fields (large)");
                     break;
                 }
                     
@@ -230,6 +233,16 @@ typedef enum {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
                     cell.textLabel.text = @"HLSPlaceholderViewController";
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
+                    cell.textLabel.text = @"HLSScrollViewController + FixedSizeViewController (large)";
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexStretchableLargeInScrollView: {
+                    cell.textLabel.text = @"HLSScrollViewController + StretchableViewController (large)";
                     break;
                 }
                     
@@ -323,7 +336,7 @@ typedef enum {
                     
                 case ViewDemoIndexTextFieldsScrollable: {
                     HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
-                    TextFieldsScrollableDemoViewController *demoViewController = [[[TextFieldsScrollableDemoViewController alloc] init] autorelease];
+                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:YES] autorelease];
                     scrollViewController.insetViewController = demoViewController;
                     [self.navigationController pushViewController:scrollViewController animated:YES];
                     break;
@@ -342,6 +355,22 @@ typedef enum {
                 case ViewControllersDemoIndexPlaceholderViewController: {
                     PlaceholderDemoViewController *demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
+                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                    FixedSizeViewController *demoViewController = [[[FixedSizeViewController alloc] initLarge:YES] autorelease];
+                    scrollViewController.insetViewController = demoViewController;
+                    [self.navigationController pushViewController:scrollViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexStretchableLargeInScrollView: {
+                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                    StretchableViewController *demoViewController = [[[StretchableViewController alloc] initLarge:YES] autorelease];
+                    scrollViewController.insetViewController = demoViewController;
+                    [self.navigationController pushViewController:scrollViewController animated:YES];
                     break;
                 }
                     

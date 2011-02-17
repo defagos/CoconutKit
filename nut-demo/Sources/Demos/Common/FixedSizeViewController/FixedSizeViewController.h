@@ -11,4 +11,6 @@
     
 }
 
+- (id)initLarge:(BOOL)large;
+
 @end

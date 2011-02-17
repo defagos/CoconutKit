@@ -41,8 +41,9 @@
 		6F7A392A130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3926130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6F7A39D1130D865300AB1926 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A39CF130D865300AB1926 /* TextFieldsDemoViewController.m */; };
 		6F7A39D2130D865300AB1926 /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A39D0130D865300AB1926 /* TextFieldsDemoViewController.xib */; };
-		6F7A39E4130D87D900AB1926 /* TextFieldsScrollableDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A39E3130D87D900AB1926 /* TextFieldsScrollableDemoViewController.m */; };
-		6F7A3A44130D941B00AB1926 /* TextFieldsScrollableDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3A43130D941B00AB1926 /* TextFieldsScrollableDemoViewController.xib */; };
+		6F7A3AF5130DC8F800AB1926 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3AF4130DC8F800AB1926 /* FixedSizeLargeViewController.xib */; };
+		6F7A3B19130DCC2100AB1926 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */; };
+		6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -122,9 +123,9 @@
 		6F7A39CE130D865300AB1926 /* TextFieldsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsDemoViewController.h; sourceTree = "<group>"; };
 		6F7A39CF130D865300AB1926 /* TextFieldsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsDemoViewController.m; sourceTree = "<group>"; };
 		6F7A39D0130D865300AB1926 /* TextFieldsDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsDemoViewController.xib; sourceTree = "<group>"; };
-		6F7A39E2130D87D900AB1926 /* TextFieldsScrollableDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsScrollableDemoViewController.h; sourceTree = "<group>"; };
-		6F7A39E3130D87D900AB1926 /* TextFieldsScrollableDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsScrollableDemoViewController.m; sourceTree = "<group>"; };
-		6F7A3A43130D941B00AB1926 /* TextFieldsScrollableDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsScrollableDemoViewController.xib; sourceTree = "<group>"; };
+		6F7A3AF4130DC8F800AB1926 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
+		6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableLargeViewController.xib; sourceTree = "<group>"; };
+		6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 				6F143AFC130A6DF00075E94C /* StretchableViewController.h */,
 				6F143AFD130A6DF00075E94C /* StretchableViewController.m */,
 				6F143AFE130A6DF00075E94C /* StretchableViewController.xib */,
+				6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */,
 			);
 			path = StretchableViewController;
 			sourceTree = "<group>";
@@ -265,6 +267,7 @@
 				6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */,
 				6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */,
 				6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */,
+				6F7A3AF4130DC8F800AB1926 /* FixedSizeLargeViewController.xib */,
 			);
 			path = FixedSizeViewController;
 			sourceTree = "<group>";
@@ -354,18 +357,9 @@
 				6F7A39CE130D865300AB1926 /* TextFieldsDemoViewController.h */,
 				6F7A39CF130D865300AB1926 /* TextFieldsDemoViewController.m */,
 				6F7A39D0130D865300AB1926 /* TextFieldsDemoViewController.xib */,
+				6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */,
 			);
 			path = TextFieldsDemoViewController;
-			sourceTree = "<group>";
-		};
-		6F7A39E1130D87D900AB1926 /* TextFieldsScrollableDemoViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F7A39E2130D87D900AB1926 /* TextFieldsScrollableDemoViewController.h */,
-				6F7A39E3130D87D900AB1926 /* TextFieldsScrollableDemoViewController.m */,
-				6F7A3A43130D941B00AB1926 /* TextFieldsScrollableDemoViewController.xib */,
-			);
-			path = TextFieldsScrollableDemoViewController;
 			sourceTree = "<group>";
 		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
@@ -588,7 +582,6 @@
 			isa = PBXGroup;
 			children = (
 				6F7A39CD130D865300AB1926 /* TextFieldsDemoViewController */,
-				6F7A39E1130D87D900AB1926 /* TextFieldsScrollableDemoViewController */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -775,7 +768,9 @@
 				6F7A3929130D6DE300AB1926 /* nut_Localizable.strings in Resources */,
 				6F7A392A130D6DE300AB1926 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F7A39D2130D865300AB1926 /* TextFieldsDemoViewController.xib in Resources */,
-				6F7A3A44130D941B00AB1926 /* TextFieldsScrollableDemoViewController.xib in Resources */,
+				6F7A3AF5130DC8F800AB1926 /* FixedSizeLargeViewController.xib in Resources */,
+				6F7A3B19130DCC2100AB1926 /* StretchableLargeViewController.xib in Resources */,
+				6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,7 +810,6 @@
 				6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */,
 				6F7A3927130D6DE300AB1926 /* nut_bootstrap.m in Sources */,
 				6F7A39D1130D865300AB1926 /* TextFieldsDemoViewController.m in Sources */,
-				6F7A39E4130D87D900AB1926 /* TextFieldsScrollableDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

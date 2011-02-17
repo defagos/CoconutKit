@@ -12,12 +12,24 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (id)initLarge:(BOOL)large
 {
-    if (self = [super init]) {
-        self.title = @"FixedSizeViewController";
+    if (large) {
+        if (self = [super initWithNibName:@"FixedSizeLargeViewController" bundle:nil]) {
+            self.title = @"FixedSizeViewController (large)";
+        }
+    }
+    else {
+        if (self = [super initWithNibName:@"FixedSizeViewController" bundle:nil]) {
+            self.title = @"FixedSizeViewController";
+        }
     }
     return self;
+}
+
+- (id)init
+{
+    return [self initLarge:NO];
 }
 
 #pragma mark View lifecycle

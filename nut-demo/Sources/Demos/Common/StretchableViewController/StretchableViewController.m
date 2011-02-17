@@ -12,12 +12,24 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (id)initLarge:(BOOL)large
 {
-    if (self = [super init]) {
-        self.title = @"StretchableViewController";
+    if (large) {
+        if (self = [super initWithNibName:@"StretchableLargeViewController" bundle:nil]) {
+            self.title = @"StretchableViewController (large)";
+        }                
+    }
+    else {
+        if (self = [super initWithNibName:@"StretchableViewController" bundle:nil]) {
+            self.title = @"StretchableViewController";
+        }        
     }
     return self;
+}
+
+- (id)init
+{
+    return [self initLarge:NO];
 }
 
 #pragma mark View lifecycle

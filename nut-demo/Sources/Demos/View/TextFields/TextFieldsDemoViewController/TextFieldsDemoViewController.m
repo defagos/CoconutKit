@@ -12,12 +12,24 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (id)initLarge:(BOOL)large
 {
-    if (self = [super init]) {
-        self.title = NSLocalizedString(@"Text fields", @"Text fields");
+    if (large) {
+        if (self = [super initWithNibName:@"TextFieldsLargeDemoViewController" bundle:nil]) {
+            self.title = @"TextFieldsDemoViewController (large)";
+        }
+    }
+    else {
+        if (self = [super initWithNibName:@"TextFieldsDemoViewController" bundle:nil]) {
+            self.title = @"TextFieldsDemoViewController";
+        }
     }
     return self;
+}
+
+- (id)init
+{
+    return [self initLarge:NO];
 }
 
 - (void)releaseViews
