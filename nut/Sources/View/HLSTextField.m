@@ -128,23 +128,23 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
                 
                 // Find if the text field is covered by the keyboard, and scroll again if this is the case
                 //
-                //                   Scroll view
-                //          +--------------------------+    +                                            +
-                //          |                          |    |                                            |
-                //          |                          |    | b (keyboard origin in scroll)              |  a (text field origin in scroll
-                //          |                          |    |    view coordinate system)                 |     view coordinate system)
-                //          |                          |    |                                            |
-                //          |                          |    |                                            |
-                //          |   +---------+            |    |        +                                   +
-                //          |   |  Field  |            |    |        |   f (text field height)
-                //          |   +---------+            |    |        +
-                //          |                          |    |
-                //          |                          |    |
-                //          +--------------------------+    +
-                //          |                          |
-                //          |         Keyboard         |
-                //          |                          |
-                //          +--------------------------+
+                //                                                  Scroll view
+                //                                     +    +--------------------------+    +
+                //                                     |    |                          |    |
+                //      a (text field origin in scroll |    |                          |    | b (keyboard origin in scroll)
+                //         view coordinate system)     |    |                          |    |    view coordinate system)
+                //                                     |    |                          |    |
+                //                                     |    |                          |    |
+                //                                     +    |   +---------+            |    |        +
+                //                                          |   |  Field  |            |    |        |   f (text field height)
+                //                                          |   +---------+            |    |        +
+                //                                          |                          |    |
+                //                                          |                          |    |
+                //                                          +--------------------------+    +
+                //                                          |                          |
+                //                                          |         Keyboard         |
+                //                                          |                          |
+                //                                          +--------------------------+
                 //
                 //
                 // Let d be the minimal distance to be kept between text field and keyboard. Then, in order for the field to
