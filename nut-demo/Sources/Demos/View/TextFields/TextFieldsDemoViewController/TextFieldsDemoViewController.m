@@ -38,7 +38,7 @@
         return NO;
     }
     
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return YES;
 }
 
 #pragma mark Accessors and mutators

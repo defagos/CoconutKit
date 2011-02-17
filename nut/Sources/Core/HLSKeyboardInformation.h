@@ -27,15 +27,15 @@
 + (HLSKeyboardInformation *)keyboardInformation;
 
 /**
- * Start frame of the keyboard before it got displayed. Refer to the UIKeyboardFrameBeginUserInfoKey 
- * documentation for how to translate this frame into a meaningful coordinate system
+ * Start frame of the keyboard before it is displayed (in the window coordinate system). Refer to the 
+ * UIKeyboardFrameBeginUserInfoKey documentation for how to translate this frame into a meaningful coordinate system
  */
 @property (nonatomic, readonly, assign) CGRect beginFrame;
 
 /**
- * Start frame of the keyboard after it got displayed. This is the most interesting keyboard property since
- * it lets you find which screen area the keyboard covers when displayed. Refer to the UIKeyboardFrameEndUserInfoKey 
- * documentation for how to translate this frame into a meaningful coordinate system
+ * Start frame of the keyboard after it is displayed (in the window coordinate system). This is the most interesting 
+ * keyboard property since it lets you find which screen area the keyboard covers when displayed. Refer to the 
+ * UIKeyboardFrameEndUserInfoKey documentation for how to translate this frame into a meaningful coordinate system
  */
 @property (nonatomic, readonly, assign) CGRect endFrame;
 

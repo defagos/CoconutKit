@@ -9,10 +9,11 @@
 #import "HLSTextField.h"
 
 #import "HLSFloat.h"
+#import "HLSKeyboardInformation.h"
+#import "HLSLogger.h"
 
-// Estimation of the keyboard size at the bottom of the screen. Could be caught by listening to the keyboard
-// events, but overkill
-#define KEYBOARD_RESERVED_HEIGHT                350.f
+// The minimal distance to be kept between the active text field and the keyboard
+const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
 
 @interface HLSTextField ()
 
@@ -80,23 +81,64 @@
             // Get the new view frame
             CGRect newFrameInScrollView = [self convertRect:self.bounds toView:self.scrollView];
             
-            // Convert them in the window coordinate system
-            CGRect newFrameInWindow = [self.scrollView convertRect:newFrameInScrollView toView:nil];
-            
-            // Screen size
-            CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
-            
-            // If covered up by the keyboard, scroll again
-            CGFloat deltaY = newFrameInWindow.origin.y + newFrameInWindow.size.height - applicationFrame.size.height + KEYBOARD_RESERVED_HEIGHT;
-            if (floatge(deltaY, 0)) {
-                // No animation, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
-                m_deltaY = deltaY;
-                CGPoint scrollViewOffset = self.scrollView.contentOffset;
-                [self.scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
-                                                              scrollViewOffset.y + m_deltaY) 
-                                         animated:NO];
+            // Get the keyboard frame (should be available)
+            HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
+            if (keyboardInformation) {
+                // Work in the scroll view coordinate system
+                // Remark: Initially, I intended to work in the window coordinate system, but this is a bad idea
+                //         (the window coordinate system is in portrait mode, and this does not make conversion
+                //         of coordinates easy for views displayed in landscape mode). But we can pick any 
+                //         coordinate system (as long as all coordinates are converted back to it, of course),
+                //         and the most natural is the scroll view coordinate system
+                
+                // Get the area covered by the keyboard in the scroll view coordinate system
+                CGRect keyboardFrameInScrollView = [self.scrollView convertRect:keyboardInformation.endFrame fromView:nil];
+                
+                // Find if the text field is covered by the keyboard, and scroll again if this is the case
+                //
+                //                   Scroll view
+                //          +--------------------------+    +                                            +
+                //          |                          |    |                                            |
+                //          |                          |    | b (keyboard origin in scroll)              |  a (text field origin in scroll
+                //          |                          |    |    view coordinate system)                 |     view coordinate system)
+                //          |                          |    |                                            |
+                //          |                          |    |                                            |
+                //          |   +---------+            |    |        +                                   +
+                //          |   |  Field  |            |    |        |   f (text field height)
+                //          |   +---------+            |    |        +
+                //          |                          |    |
+                //          |                          |    |
+                //          +--------------------------+    +
+                //          |                          |
+                //          |         Keyboard         |
+                //          |                          |
+                //          +--------------------------+
+                //
+                //
+                // Let d be the minimal distance to be kept between text field and keyboard. Then, in order for the field to
+                // be visible, we must have:
+                //   a + f + d < b
+                // or
+                //   a + f + d - b < 0
+                // Let delta := a + f + d - b, then we must shift the scroll view content offset if this condition is not satisfied,
+                // i.e. when
+                //   delta >= 0
+                // The shift to apply is just delta
+                CGFloat deltaY = newFrameInScrollView.origin.y + newFrameInScrollView.size.height + kTextFieldMinDistanceFromKeyboard - keyboardFrameInScrollView.origin.y;
+                if (floatge(deltaY, 0)) {
+                    // No animation here, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
+                    m_deltaY = deltaY;
+                    CGPoint scrollViewOffset = self.scrollView.contentOffset;
+                    [self.scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
+                                                                  scrollViewOffset.y + m_deltaY) 
+                                             animated:NO];
+                }
+                else {
+                    m_deltaY = 0.f;
+                }
             }
             else {
+                logger_warn(@"Keyboard information not available. Text field behavior might be incorrect");
                 m_deltaY = 0.f;
             }
             
