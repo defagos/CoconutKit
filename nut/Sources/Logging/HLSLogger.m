@@ -37,7 +37,7 @@ HLSLoggerMode MODE_FATAL = {@"FATAL", 4};
 
 + (HLSLogger *)sharedLogger
 {
-	static HLSLogger *s_instance;
+	static HLSLogger *s_instance = nil;
 	
 	if (! s_instance) {
 		// Read the environment.plist file

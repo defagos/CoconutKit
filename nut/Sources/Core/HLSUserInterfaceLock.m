@@ -22,7 +22,7 @@
 
 + (HLSUserInterfaceLock *)sharedUserInterfaceLock
 {
-    static HLSUserInterfaceLock *s_instance;
+    static HLSUserInterfaceLock *s_instance = nil;
     
     if (! s_instance) {
         s_instance = [[HLSUserInterfaceLock alloc] init];

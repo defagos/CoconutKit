@@ -8,6 +8,7 @@ HLSDownloaderTools.h
 HLSFeed.h
 HLSFeedFilter.h
 HLSFloat.h
+HLSKeyboardInformation.h
 HLSLogger.h
 HLSNotifications.h
 HLSOneViewAnimationStepDefinition.h

@@ -57,7 +57,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 + (HLSNotificationManager *)sharedNotificationManager
 {
-    static HLSNotificationManager *s_instance;
+    static HLSNotificationManager *s_instance = nil;
     
     if (! s_instance) {
         s_instance = [[HLSNotificationManager alloc] init];
@@ -151,7 +151,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 + (HLSNotificationConverter *)sharedNotificationConverter
 {
-    static HLSNotificationConverter *s_instance;
+    static HLSNotificationConverter *s_instance = nil;
     
     if (! s_instance) {
         s_instance = [[HLSNotificationConverter alloc] init];
