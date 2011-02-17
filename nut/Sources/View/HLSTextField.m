@@ -30,6 +30,12 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
  */
 @property (nonatomic, assign) UIScrollView *scrollView;
 
+- (void)makeVisible;
+- (void)restore;
+
+- (void)keyboardWillShow:(NSNotification *)notification;
+- (void)keyboardWillHide:(NSNotification *)notification;
+
 @end
 
 @implementation HLSTextField
@@ -62,11 +68,37 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
         return NO;
     }
     
-    // If scroll view already moved to display the keyboard, nothing to do
-    if (self.scrollView) {
-        return YES;
+    // Listen to keyboard appearance notifications. If any occurs while the text field is first responder, this means that
+    // the device has been rotated and that the keyboard for the new orientation is about to be displayed
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(keyboardWillShow:) 
+                                                 name:UIKeyboardWillShowNotification 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(keyboardWillHide:) 
+                                                 name:UIKeyboardWillHideNotification 
+                                               object:nil];
+    
+    [self makeVisible];
+    return YES;
+}
+
+- (BOOL)resignFirstResponder
+{
+    if (! [super resignFirstResponder]) {
+        return NO;
     }
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self restore];
+    return YES;
+}
+
+#pragma mark Locating a scroll view and using it to keep the text field visible
+
+- (void)makeVisible
+{
     // Look for the first encountered scroll view up the view hierarchy
     UIView *parentView = [self superview];
     while (parentView) {
@@ -146,16 +178,14 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
         }
         parentView = [parentView superview];
     }
-    
-    return YES;
 }
 
-- (BOOL)resignFirstResponder
+/**
+ * Restore the scroll view offset. Must be called for the same orientation as when the makeVisible method was called,
+ * otherwise the behavior is undefined
+ */
+- (void)restore
 {
-    if (! [super resignFirstResponder]) {
-        return NO;
-    }
-    
     // No animation, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
     CGPoint scrollViewOffset = self.scrollView.contentOffset;
     [self.scrollView setContentOffset:CGPointMake(scrollViewOffset.x, 
@@ -164,8 +194,26 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
     
     // No more scroll view moved
     self.scrollView = nil;
-    
-    return YES;
+}
+
+#pragma mark Notification callbacks
+
+/**
+ * Extremely important: When rotating the interface with the keyboard enabled, the willShow event is fired after the new
+ * orientation has been installed, i.e. coordinates are relative to the new orientation
+ */
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self makeVisible];
+}
+
+/**
+ * Extremely important: When rotating the interface with the keyboard enabled, the willHide event is fired before the new
+ * orientation has been installed, i.e. coordinates are relative to the old orientation
+ */
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self restore];
 }
 
 @end
