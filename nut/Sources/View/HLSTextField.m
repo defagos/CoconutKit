@@ -173,7 +173,6 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
                 logger_warn(@"Keyboard information not available. Text field behavior might be incorrect");
                 m_deltaY = 0.f;
             }
-            
             break;
         }
         parentView = [parentView superview];

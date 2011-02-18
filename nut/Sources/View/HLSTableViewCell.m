@@ -8,14 +8,21 @@
 
 #import "HLSTableViewCell.h"
 
+#import "HLSLogger.h"
 #import "HLSTableViewCell+Protected.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToHeightMap = nil;
 
+@interface HLSTableViewCell ()
+
++ (NSString *)findXibFileName;
+
+@end
+
 @implementation HLSTableViewCell
 
-#pragma mark Class methods for creation
+#pragma mark Class methods for initialization and creation
 
 + (void)initialize
 {
@@ -24,6 +31,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
         return;
     }
     
+    // The height map is common for the whole HLSTableViewCell inheritance hierarchy
     s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
 }
 
@@ -34,17 +42,19 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     
     // If not, create one lazily
     if (! cell) {
-        // If a xib file name has been specified, use it, otherwise try to locate the default one (xib bearing
-        // the class name)
-        NSString *xibFileName = [self xibFileName];
-        if (! xibFileName && [[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
-            xibFileName = [self className];
-        }
+        NSString *xibFileName = [self findXibFileName];
         
-        // A xib has been found, use it
+        // A xib file is used
         if (xibFileName) {
             NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
             cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
+            
+            // Check that the reuse identifier defined in the xib is correct
+            if (! [[cell reuseIdentifier] isEqual:[self identifier]]) {
+                logger_warn(@"The reuse identifier in the xib %@ (%@) does not match the one defined for the class "
+                            "(%@). The reuse mechanism will not work properly and the table view will suffer from "
+                            "performance issues", xibFileName, [cell reuseIdentifier], [self identifier]);
+            }
         }
         // Created programmatically
         else {
@@ -69,7 +79,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     }
 }
 
-#pragma mark Class methods for customization
+#pragma mark Class methods related to customization
 
 + (CGFloat)height
 {
@@ -77,7 +87,9 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     // sets the UITableView rowHeight property or uses the row height callback
     NSNumber *cellHeight = [s_classNameToHeightMap objectForKey:[self className]];
     if (! cellHeight) {
-        cellHeight = [NSNumber numberWithFloat:CGRectGetHeight([self tableViewCellForTableView:nil].frame)];
+        // Instantiate a dummy cell
+        UITableViewCell *cell = [self tableViewCellForTableView:nil];
+        cellHeight = [NSNumber numberWithFloat:CGRectGetHeight(cell.frame)];
         [s_classNameToHeightMap setObject:cellHeight forKey:[self className]];
     }
     return [cellHeight floatValue];
@@ -97,6 +109,18 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
 + (NSString *)identifier
 {
     return [self className];
+}
+
+// Return the xib file to be used if any, nil otherwise
++ (NSString *)findXibFileName
+{
+    // If a xib file name has been specified, use it, otherwise try to locate the default one (xib bearing
+    // the class name)
+    NSString *xibFileName = [self xibFileName];
+    if (! xibFileName && [[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+        xibFileName = [self className];
+    }
+    return xibFileName;
 }
 
 @end
