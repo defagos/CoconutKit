@@ -9,7 +9,9 @@
 #import "DemosListViewController.h"
 
 #import "FixedSizeViewController.h"
+#import "LifeCycleTestViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
+#import "OrientationClonerViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
@@ -60,8 +62,10 @@ typedef enum {
 typedef enum {
     ViewControllersDemoIndexEnumBegin = 0,
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
+    ViewControllersDemoIndexLifeCycleTestInScrollView,
     ViewControllersDemoIndexFixedSizeLargeInScrollView,
     ViewControllersDemoIndexStretchableLargeInScrollView,
+    ViewControllersDemoIndexOrientationLargeClonerInScrollView,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexPageController,
@@ -236,6 +240,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewControllersDemoIndexLifeCycleTestInScrollView: {
+                    cell.textLabel.text = @"HLSScrollViewController + LifeCycleTest";
+                    break;
+                }
+                    
                 case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
                     cell.textLabel.text = @"HLSScrollViewController + FixedSizeViewController (large)";
                     break;
@@ -244,6 +253,11 @@ typedef enum {
                 case ViewControllersDemoIndexStretchableLargeInScrollView: {
                     cell.textLabel.text = @"HLSScrollViewController + StretchableViewController (large)";
                     break;
+                }
+                    
+                case ViewControllersDemoIndexOrientationLargeClonerInScrollView: {
+                    cell.textLabel.text = @"HLSScrollViewController + OrientationCloner (large)";
+                    break;                
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
@@ -358,6 +372,15 @@ typedef enum {
                     break;
                 }
                     
+                case ViewControllersDemoIndexLifeCycleTestInScrollView: {
+                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                    LifeCycleTestViewController *demoViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+                    scrollViewController.insetViewController = demoViewController;
+                    scrollViewController.adjustingInset = YES;
+                    [self.navigationController pushViewController:scrollViewController animated:YES];
+                    break;                    
+                }
+                    
                 case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
                     HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
                     FixedSizeViewController *demoViewController = [[[FixedSizeViewController alloc] initLarge:YES] autorelease];
@@ -372,6 +395,15 @@ typedef enum {
                     scrollViewController.insetViewController = demoViewController;
                     [self.navigationController pushViewController:scrollViewController animated:YES];
                     break;
+                }
+                    
+                case ViewControllersDemoIndexOrientationLargeClonerInScrollView: {
+                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                    OrientationClonerViewController *demoViewController = [[[OrientationClonerViewController alloc] initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation) 
+                                                                                                                                          large:YES] autorelease];
+                    scrollViewController.insetViewController = demoViewController;
+                    [self.navigationController pushViewController:scrollViewController animated:YES];
+                    break;                    
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {

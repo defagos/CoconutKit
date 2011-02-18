@@ -10,9 +10,10 @@
 @private
     HLSTextField *m_textField;
     NSString *m_text;
+    BOOL m_large;
 }
 
-- (id)initWithPortraitOrientation:(BOOL)portraitOrientation;
+- (id)initWithPortraitOrientation:(BOOL)portraitOrientation large:(BOOL)large;
 
 @property (nonatomic, retain) IBOutlet HLSTextField *textField;
 

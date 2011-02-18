@@ -44,6 +44,8 @@
 		6F7A3AF5130DC8F800AB1926 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3AF4130DC8F800AB1926 /* FixedSizeLargeViewController.xib */; };
 		6F7A3B19130DCC2100AB1926 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */; };
 		6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */; };
+		6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */; };
+		6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -126,6 +128,8 @@
 		6F7A3AF4130DC8F800AB1926 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableLargeViewController.xib; sourceTree = "<group>"; };
 		6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
+		6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
+		6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 				6F7A2A94130BA36600AB1926 /* OrientationClonerViewController.m */,
 				6F7A2A96130BA37400AB1926 /* OrientationClonerViewControllerPortrait.xib */,
 				6F7A2AA2130BA3F000AB1926 /* OrientationClonerViewControllerLandscape.xib */,
+				6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */,
+				6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */,
 			);
 			path = OrientationClonerViewController;
 			sourceTree = "<group>";
@@ -771,6 +777,8 @@
 				6F7A3AF5130DC8F800AB1926 /* FixedSizeLargeViewController.xib in Resources */,
 				6F7A3B19130DCC2100AB1926 /* StretchableLargeViewController.xib in Resources */,
 				6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */,
+				6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
+				6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

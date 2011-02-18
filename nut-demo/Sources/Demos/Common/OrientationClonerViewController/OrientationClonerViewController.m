@@ -24,22 +24,46 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithPortraitOrientation:(BOOL)portraitOrientation
+- (id)initWithPortraitOrientation:(BOOL)portraitOrientation large:(BOOL)large
 {
     if (portraitOrientation) {
-        self = [super initWithNibName:@"OrientationClonerViewControllerPortrait" bundle:nil];
-        self.title = @"OrientationClonerViewController (Portrait)";
+        if (large) {
+            self = [super initWithNibName:@"OrientationClonerLargeViewControllerPortrait" bundle:nil];
+            if (self) {
+                self.title = @"OrientationClonerViewController (portrait, large)";
+                m_large = large;
+            }            
+        }
+        else {
+            self = [super initWithNibName:@"OrientationClonerViewControllerPortrait" bundle:nil];
+            if (self) {
+                self.title = @"OrientationClonerViewController (portrait)";
+                m_large = large;
+            }            
+        }
     }
     else {
-        self = [super initWithNibName:@"OrientationClonerViewControllerLandscape" bundle:nil];
-        self.title = @"OrientationClonerViewController (Landscape)";
+        if (large) {
+            self = [super initWithNibName:@"OrientationClonerLargeViewControllerLandscape" bundle:nil];
+            if (self) {
+                self.title = @"OrientationClonerViewController (landscape, large)";
+                m_large = large;
+            }            
+        }
+        else {
+            self = [super initWithNibName:@"OrientationClonerViewControllerLandscape" bundle:nil];
+            if (self) {
+                self.title = @"OrientationClonerViewController (landscape)";
+                m_large = large;
+            }            
+        }
     }
     return self;
 }
 
 - (id)init
 {
-    return [self initWithPortraitOrientation:YES];
+    return [self initWithPortraitOrientation:YES large:NO];
 }
 
 - (void)dealloc
@@ -76,7 +100,8 @@
 
 - (UIViewController *)viewControllerCloneWithOrientation:(UIInterfaceOrientation)orientation
 {
-    OrientationClonerViewController *viewControllerClone = [[[OrientationClonerViewController alloc] initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(orientation)] 
+    OrientationClonerViewController *viewControllerClone = [[[OrientationClonerViewController alloc] initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(orientation)
+                                                                                                                           large:m_large] 
                                                             autorelease];
     
     // Clone any meaningful internal variables here
