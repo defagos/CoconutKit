@@ -105,13 +105,8 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
         if ([parentView isKindOfClass:[UIScrollView class]]) {            
             self.scrollView = (UIScrollView *)parentView;
             
-            // Scroll so that the view becomes visible (if hidden from view, e.g. when tabbing); could lead
-            // to a motion in both x and y directions
+            // Text field frame in scroll view coordinate system;
             CGRect frameInScrollView = [self convertRect:self.bounds toView:self.scrollView];
-            [self.scrollView scrollRectToVisible:frameInScrollView animated:YES];
-            
-            // Get the new view frame
-            CGRect newFrameInScrollView = [self convertRect:self.bounds toView:self.scrollView];
             
             // Get the keyboard frame (should be available)
             HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
@@ -156,7 +151,7 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
                 // i.e. when
                 //   delta >= 0
                 // The shift to apply is just delta
-                CGFloat deltaY = newFrameInScrollView.origin.y + newFrameInScrollView.size.height + kTextFieldMinDistanceFromKeyboard - keyboardFrameInScrollView.origin.y;
+                CGFloat deltaY = frameInScrollView.origin.y + frameInScrollView.size.height + kTextFieldMinDistanceFromKeyboard - keyboardFrameInScrollView.origin.y;
                 if (floatge(deltaY, 0)) {
                     // No animation here, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
                     m_deltaY = deltaY;
