@@ -12,6 +12,19 @@
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 
+/**
+ * Test workflow:
+ * --------------
+ * To understand this code, create a form with at least two HLSTextFields, supporting all orientations. Then debug the 
+ * code using the following test workflow (covering all possible cases). Setting a breakpoint on each method will
+ * help you understand when each method gets called:
+ *   1) With the keyboard dismissed, click on a field A (A receives becomeFirstResponder)
+ *   2) Rotate the device (keyboardWillHide, then keyboardWillShow are called) on A
+ *   3) Click on another field B (B receives becomeFirstResponder, which calls resignFirstResponder on A)
+ *   4) Rotate the device (keyboardWillHide, then keyboardWillShow are called) on B
+ *   5) Dismiss the keyboardd (B receives resignFirstResponder)
+ */
+
 // The minimal distance to be kept between the active text field and the top of the scroll view top or the keyboard. If the area 
 // is too small fulfill both, visibility at the top wins
 const CGFloat kTextFieldMinVisibilityDistance = 30.f;
@@ -160,7 +173,8 @@ static UIScrollView *s_scrollView = nil;
             // Text field frame in scroll view coordinate system;
             CGRect frameInScrollView = [textField convertRect:textField.bounds toView:scrollView];
             
-            // If the text field is hidden at the top, adjust the scroll view offset to make it visible
+            // If the text field is hidden at the top, adjust the scroll view offset to make it visible; must take
+            // the current offset into account
             CGFloat yOffsetTop = frameInScrollView.origin.y - scrollViewOffset.y - kTextFieldMinVisibilityDistance;
             if (floatle(yOffsetTop, 0.f)) {
                 // Move
