@@ -12,10 +12,16 @@
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 
-// The minimal distance to be kept between the active text field and the keyboard
-const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
+// The minimal distance to be kept between the active text field and the top of the scroll view top or the keyboard. If the area 
+// is too small fulfill both, visibility at the top wins
+const CGFloat kTextFieldMinVisibilityDistance = 30.f;
 
-@interface HLSTextField ()
+// Keep a reference to the currently active HLSTextField (if any). This is safe since UIKit is not meant to be
+// used in multi-threaded code. Moreover, at most one text field can be active at any time, and there is
+// no risk of dangling pointers (a viewDidUnload, which would invalidate the ref we keep, can only appear
+// when the view is not visible, i.e. when no text field is active)
+static HLSTextField *s_currentTextField = nil;
+static CGFloat s_yTotalOffset = 0.f;
 
 /**
  * The first scroll view up the view hierarchy is the one whose content offset is adjusted to keep the field visible
@@ -28,10 +34,12 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
  * way to identify which view up the caller hierarchy can be adjusted when some of its content needs to stay visible. 
  * The most natural such object is a scroll view, namely the first one encountered when climbing up the view hierarchy.
  */
-@property (nonatomic, assign) UIScrollView *scrollView;
+static UIScrollView *s_scrollView = nil;
 
-- (void)makeVisible;
-- (void)restore;
+@interface HLSTextField ()
+
++ (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated;
++ (void)restoreScrollAnimated:(BOOL)animated;
 
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
@@ -52,24 +60,41 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
 
 - (void)dealloc
 {
-    self.scrollView = nil;
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize scrollView = m_scrollView;
 
 #pragma mark Focus events
 
 - (BOOL)becomeFirstResponder
 {
-    if (! [super becomeFirstResponder]) {
-        return NO;
+    // The same HLSTextField is clicked several times; nothing more to do
+    if (s_currentTextField == self) {
+        return [super becomeFirstResponder];        // UITextField implementation always return YES, see documentation
     }
     
-    // Listen to keyboard appearance notifications. If any occurs while the text field is first responder, this means that
-    // the device has been rotated and that the keyboard for the new orientation is about to be displayed
+    // We must update the current text field before calling becomeFirstResponder on super. The reason is that
+    // when switching between text fields, the becomeFirstResponder of the new field is called, and when
+    // its super becomeFirstResponder method is called, it calls the resignFirstResponder method of the old text
+    // field! But in the old text field resignFirstResponder method, we want to know the identity of the new
+    // field
+    s_currentTextField = self;
+    
+    // Calling the super method first; two cases can lead to becomeFirstResponder being called:
+    //   - we are entering input mode. The keyboard appears, which fires a UIKeyboardWillShowNotification during
+    //     the becomeFirstResponder call. We do not want to catch such events yet (we use them to detect interface
+    //     orientation changes only), we must therefore register with the notification center after the call to
+    //     the super becomeFirstResponder method has returned
+    //   - when clicking a text field while another one was already active, the keyboard stays visible and no
+    //     keyboard events are fired. Even if a text field is registered with the notification center, the
+    //     keyboardWillShow: method will not be called (which is what we want; we only want this method to be
+    //     called when orientation changes)
+    [super becomeFirstResponder];       // UITextField implementation always return YES, see documentation
+    
+    // Move the scroll view so that the field is visible (if not already)
+    [HLSTextField offsetScrollForTextField:self animated:YES];    
+    
+    // Register for keyboard notifications so that the new responder can answer to keyboard events (the registration
+    // is here carefully made so that those events always correspond to device rotation)
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardWillShow:) 
                                                  name:UIKeyboardWillShowNotification 
@@ -77,97 +102,138 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardWillHide:) 
                                                  name:UIKeyboardWillHideNotification 
-                                               object:nil];
+                                               object:nil]; 
     
-    [self makeVisible];
     return YES;
 }
 
 - (BOOL)resignFirstResponder
-{
-    if (! [super resignFirstResponder]) {
-        return NO;
-    }
+{    
+    // Note that s_currentTextField can never nil here
+    NSAssert(s_currentTextField != nil, @"Can only resign if a text field was active!");
     
+    // Unregister from the notification center first; important since we only want to track rotation events
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [self restore];
+    // Calling the super method first; two cases can lead to resignFirstResponder being called:
+    //   - we are exiting input mode. The keyboard disappears, which fires a UIKeyboardWillHideNotification during
+    //     the resignFirstResponder call. We do not want to catch such events (we will use them to detect interface
+    //     orientation changes only), we had therefore to unregister from the notification center before the call to
+    //     the super resignFirstResponder method is made
+    //   - when clicking a text field while another one was already active, the keyboard stays visible and no
+    //     keyboard events are fired. Even if a text field is registered with the notification center, the
+    //     keyboardWillHide: method will not be called (which is what we want; we only want this method to be
+    //     called when orientation changes)
+    [super resignFirstResponder];       // UITextField implementation always return YES, see documentation
+    
+    // The current HLSTextField is losing the focus, reset scroll view offset
+    if (s_currentTextField == self) {
+        [HLSTextField restoreScrollAnimated:YES];
+        s_currentTextField = nil;
+    }
+    
     return YES;
 }
 
 #pragma mark Locating a scroll view and using it to keep the text field visible
 
-- (void)makeVisible
+/**
+ * Make the text visible by offsetting a scroll view (if needed and if a scroll view is available)
+ */
++ (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated
 {
-    // Look for the first encountered scroll view up the view hierarchy
-    UIView *parentView = [self superview];
+    UIView *parentView = [textField superview];
     while (parentView) {
         if ([parentView isKindOfClass:[UIScrollView class]]) {            
-            self.scrollView = (UIScrollView *)parentView;
+            UIScrollView *scrollView = (UIScrollView *)parentView;
+            
+            // If a different scroll view was already assigned an offset, reset it. We must offset at most one scroll 
+            // view at a time, and we are done with the old one since the field we are now tracking is wrapped in 
+            // another scroll view
+            if (s_scrollView && s_scrollView != scrollView) {
+                [HLSTextField restoreScrollAnimated:YES];
+            }
+            
+            s_scrollView = scrollView;
+            CGPoint scrollViewOffset = s_scrollView.contentOffset;
             
             // Text field frame in scroll view coordinate system;
-            CGRect frameInScrollView = [self convertRect:self.bounds toView:self.scrollView];
+            CGRect frameInScrollView = [textField convertRect:textField.bounds toView:scrollView];
             
-            // Get the keyboard frame (should be available)
+            // If the text field is hidden at the top, adjust the scroll view offset to make it visible
+            CGFloat yOffsetTop = frameInScrollView.origin.y - scrollViewOffset.y - kTextFieldMinVisibilityDistance;
+            if (floatle(yOffsetTop, 0.f)) {
+                // Move
+                [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
+                                                           scrollViewOffset.y + yOffsetTop) 
+                                      animated:animated];
+                
+                // Remember the total offset we have applied until now
+                s_yTotalOffset += yOffsetTop;
+                
+                // We are done
+                break;
+            }
+            
+            // Get the keyboard frame (should be available); the text field might be covered by it
             HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-            if (keyboardInformation) {
-                // Work in the scroll view coordinate system
-                // Remark: Initially, I intended to work in the window coordinate system, but this is a bad idea
-                //         (the window coordinate system is in portrait mode, and this does not make conversion
-                //         of coordinates easy for views displayed in landscape mode). But we can pick any 
-                //         coordinate system (as long as all coordinates are converted back to it, of course),
-                //         and the most natural is the scroll view coordinate system
+            NSAssert(keyboardInformation != nil, @"Keyboard information not available");
+            
+            // Work in the scroll view coordinate system
+            // Remark: Initially, I intended to work in the window coordinate system, but this is a bad idea
+            //         (the window coordinate system is in portrait mode, and this does not make conversion
+            //         of coordinates easy for views displayed in landscape mode). But we can pick any 
+            //         coordinate system (as long as all coordinates are converted back to it, of course),
+            //         and the most natural is the scroll view coordinate system
+            
+            // Get the area covered by the keyboard in the scroll view coordinate system
+            CGRect keyboardFrameInScrollView = [scrollView convertRect:keyboardInformation.endFrame fromView:nil];
+            
+            // Find if the text field is covered by the keyboard, and scroll if this is the case
+            //
+            //                                                  Scroll view
+            //                                     +    +--------------------------+    +
+            //                                     |    |                          |    |
+            //      a (text field origin in scroll |    |                          |    | b (keyboard origin in scroll)
+            //         view coordinate system)     |    |                          |    |    view coordinate system)
+            //                                     |    |                          |    |
+            //                                     |    |                          |    |
+            //                                     +    |   +---------+            |    |        +
+            //                                          |   |  Field  |            |    |        |   f (text field height)
+            //                                          |   +---------+            |    |        +
+            //                                          |                          |    |
+            //                                          |                          |    |
+            //                                          +--------------------------+    +
+            //                                          |                          |
+            //                                          |         Keyboard         |
+            //                                          |                          |
+            //                                          +--------------------------+
+            //
+            //
+            // Let d be the minimal distance to be kept between text field and keyboard. Then, in order for the field to
+            // be visible, we must have:
+            //   a + f + d < b
+            // or
+            //   a + f + d - b < 0
+            // Let delta := a + f + d - b, then we must shift the scroll view content offset if this condition is not satisfied,
+            // i.e. when
+            //   delta >= 0
+            // The shift to apply is just delta
+            CGFloat yOffset = frameInScrollView.origin.y + frameInScrollView.size.height + kTextFieldMinVisibilityDistance - keyboardFrameInScrollView.origin.y;
+            if (floatge(yOffset, 0.f)) {
+                // Move
+                [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
+                                                           scrollViewOffset.y + yOffset) 
+                                      animated:animated];
                 
-                // Get the area covered by the keyboard in the scroll view coordinate system
-                CGRect keyboardFrameInScrollView = [self.scrollView convertRect:keyboardInformation.endFrame fromView:nil];
+                // Remember the total offset we have applied until now
+                s_yTotalOffset += yOffset;
                 
-                // Find if the text field is covered by the keyboard, and scroll again if this is the case
-                //
-                //                                                  Scroll view
-                //                                     +    +--------------------------+    +
-                //                                     |    |                          |    |
-                //      a (text field origin in scroll |    |                          |    | b (keyboard origin in scroll)
-                //         view coordinate system)     |    |                          |    |    view coordinate system)
-                //                                     |    |                          |    |
-                //                                     |    |                          |    |
-                //                                     +    |   +---------+            |    |        +
-                //                                          |   |  Field  |            |    |        |   f (text field height)
-                //                                          |   +---------+            |    |        +
-                //                                          |                          |    |
-                //                                          |                          |    |
-                //                                          +--------------------------+    +
-                //                                          |                          |
-                //                                          |         Keyboard         |
-                //                                          |                          |
-                //                                          +--------------------------+
-                //
-                //
-                // Let d be the minimal distance to be kept between text field and keyboard. Then, in order for the field to
-                // be visible, we must have:
-                //   a + f + d < b
-                // or
-                //   a + f + d - b < 0
-                // Let delta := a + f + d - b, then we must shift the scroll view content offset if this condition is not satisfied,
-                // i.e. when
-                //   delta >= 0
-                // The shift to apply is just delta
-                CGFloat deltaY = frameInScrollView.origin.y + frameInScrollView.size.height + kTextFieldMinDistanceFromKeyboard - keyboardFrameInScrollView.origin.y;
-                if (floatge(deltaY, 0)) {
-                    // No animation here, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
-                    m_deltaY = deltaY;
-                    CGPoint scrollViewOffset = self.scrollView.contentOffset;
-                    [self.scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
-                                                                  scrollViewOffset.y + m_deltaY) 
-                                             animated:NO];
-                }
-                else {
-                    m_deltaY = 0.f;
-                }
+                // Done
+                break;
             }
-            else {
-                logger_warn(@"Keyboard information not available. Text field behavior might be incorrect");
-                m_deltaY = 0.f;
-            }
+            
+            // Done; no offset needed, the field is visible
             break;
         }
         parentView = [parentView superview];
@@ -178,16 +244,22 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
  * Restore the scroll view offset. Must be called for the same orientation as when the makeVisible method was called,
  * otherwise the behavior is undefined
  */
-- (void)restore
++ (void)restoreScrollAnimated:(BOOL)animated
 {
-    // No animation, otherwise incorrect behavior (may offsetting too much when tabbing between fields)
-    CGPoint scrollViewOffset = self.scrollView.contentOffset;
-    [self.scrollView setContentOffset:CGPointMake(scrollViewOffset.x, 
-                                                  scrollViewOffset.y - m_deltaY) 
-                             animated:NO];
+    // If nothing to restore, nothing to do
+    if (! s_scrollView) {
+        return;
+    }
     
-    // No more scroll view moved
-    self.scrollView = nil;
+    // Restore original offset
+    CGPoint scrollViewOffset = s_scrollView.contentOffset;
+    [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x, 
+                                               scrollViewOffset.y - s_yTotalOffset) 
+                          animated:animated];
+    
+    // Done with the scroll view
+    s_scrollView = nil;
+    s_yTotalOffset = 0.f;
 }
 
 #pragma mark Notification callbacks
@@ -198,7 +270,7 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
  */
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self makeVisible];
+    [HLSTextField offsetScrollForTextField:self animated:NO];
 }
 
 /**
@@ -207,7 +279,7 @@ const CGFloat kTextFieldMinDistanceFromKeyboard = 30.f;
  */
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self restore];
+    [HLSTextField restoreScrollAnimated:NO];
 }
 
 @end

@@ -18,8 +18,7 @@
  */
 @interface HLSTextField : UITextField {
 @private
-    UIScrollView *m_scrollView;
-    CGFloat m_deltaY;
+
 }
 
 @end
