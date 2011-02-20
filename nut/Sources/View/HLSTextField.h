@@ -10,28 +10,36 @@
  * Thin wrapper to UITextField adding standard useful functionality.
  *
  * Most notably, when wrapped within a scroll view (either as direct parent view or higher in the view hierarchy),
- * the scroll view is automatically moved so that the field is completely visible when the keyboard is displayed.
- * To create forms easily, it therefore suffices to start with a scroll view (even for small views where scrolling 
- * is not required) and to add HLSTextFields somewhere down its view hierarchy (usually as direct children).
+ * the scroll view is automatically applied an offset so that the field stays completely visible (vertically) when 
+ * the keyboard is displayed. When exiting input mode, the original scroll view offset is restored.
  *
- * There is a known minor issue with the iOS simulator: If the user uses the tab key to switch between fields
- * too fast, then the scroll view might not return back to its original position when the keyboard is dismissed.
- * This is due to the fact that the scroll offset update is animated, and animations can overlap since it is
- * difficult to hook a delegate in the animation process (and the current implementation is complicated
- * enough for the moment). The simplest way to solve this issue would have been to remove the animations, but 
- * they help the user to understand where the focus is moving.
+ * Using HLSTextField, creating forms is very easy: You usually start with a scroll view (even if the form fits 
+ * on a single screen), then you add HLSTextFields to it, usually as direct children.
  *
- * There is also another issue with scroll views expanding in the horizontal direction: For such scroll views,
- * a built-in UIKit behavior automatically animates text fields horizontally if they are not completely visible.
- * This effect interferes with the vertical offsets we apply (even if not animated). But since such views should
- * be quite rare, this issue should not be a severe one.
+ * Complex scroll view hierarchies are also supported. You can e.g. embbed a scroll view containing HLSTextField 
+ * objects within other scroll views at will. When a text field needs to be displayed, it is always the bottommost
+ * scroll view which is applied an offset if needed. Always remember this fact when designing your forms.
  *
- * TODO: We could add a button above the keyboard to allow fast switching between HLSTextFields without having
- *       to hide the keyboard. This would make filling forms from top to bottom very convenient, but would 
- *       require us to fix the issue described above for the iOS simulator.
+ * At most one scroll view is applied an offset at any time. If a form contains two separate scroll views having
+ * no common scroll view in their parent view hierarchy (each with their own set of HLSTextFields), their motion
+ * will be decoupled when offsets are applied, which is not really attractive. In such cases, always remember that 
+ * you can add a common scroll view parent to a set of disjoint scroll views in order to keep their vertical
+ * motion synchronized.
+ *
+ * There is only a small issue with scroll views expanding in the horizontal direction (quite rare for forms,
+ * which usually expand vertically): For such scroll views, a built-in UIKit behavior automatically adjusts the 
+ * horizontal offset of a scroll view so that a text field contained within it stays completely visible when active. 
+ * This animated effect interferes with the vertical offsets apply by HLSTextField (even if not animated). The 
+ * behavior of HLSTextField objects remains correct, but the offset animations suffer from "hiccups" because of 
+ * the two effects overlapping. Since such views should be quite rare, though, this issue should not be a severe one.
+ *
+ * TODO: We could add a button above the keyboard (or somewhere else) to allow fast switching between HLSTextFields 
+ *       without having to hide the keyboard. A better approach would allow fast switching between UIResponders (e.g. 
+ *       a picker view, a text field, etc.)
  *
  * Designated initializer: initWithFrame:
- */@interface HLSTextField : UITextField {
+ */
+@interface HLSTextField : UITextField {
 @private
 
 }
