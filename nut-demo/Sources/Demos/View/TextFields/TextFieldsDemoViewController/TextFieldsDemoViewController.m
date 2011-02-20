@@ -14,14 +14,18 @@
 
 - (id)initLarge:(BOOL)large
 {
+    // The large version is taller than the screen and therefore can be browsed vertically; no demo for horizontal
+    // scrolling since issues remain (see HLSTextField documentation)
     if (large) {
         if (self = [super initWithNibName:@"TextFieldsLargeDemoViewController" bundle:nil]) {
             self.title = @"TextFieldsDemoViewController (large)";
+            m_large = YES;
         }
     }
     else {
         if (self = [super initWithNibName:@"TextFieldsDemoViewController" bundle:nil]) {
             self.title = @"TextFieldsDemoViewController";
+            m_large = NO;
         }
     }
     return self;
@@ -48,6 +52,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Large version: Must adjust content size to make the IB-designed view scrollable
+    if (m_large) {
+        UIScrollView *scrollView = (UIScrollView *)self.view;
+        scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 
+                                            self.view.frame.size.height);
+    }
     
     self.instructionLabel.text = NSLocalizedString(@"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct", 
                                                    @"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct");

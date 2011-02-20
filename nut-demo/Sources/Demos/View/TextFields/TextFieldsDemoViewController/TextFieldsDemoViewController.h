@@ -13,6 +13,7 @@
     HLSTextField *m_textField2;
     HLSTextField *m_textField3;
     HLSTextField *m_textField4;
+    BOOL m_large;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *instructionLabel;

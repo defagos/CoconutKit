@@ -36,8 +36,6 @@
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */; };
 		6F7A34C1130D02AB00AB1926 /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A34BF130D02AB00AB1926 /* HLSKeyboardInformation.m */; };
-		6F7A3A35130D910700AB1926 /* HLSScrollViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A3A33130D910700AB1926 /* HLSScrollViewController.h */; };
-		6F7A3A36130D910700AB1926 /* HLSScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A3A34130D910700AB1926 /* HLSScrollViewController.m */; };
 		6F8D090D123F51DF00FCF2AF /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0909123F51DF00FCF2AF /* HLSAnimationStep.h */; };
 		6F8D090E123F51DF00FCF2AF /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D090A123F51DF00FCF2AF /* HLSAnimationStep.m */; };
 		6F8D0913123F51FD00FCF2AF /* HLSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0911123F51FD00FCF2AF /* HLSLogger.h */; };
@@ -163,8 +161,6 @@
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
 		6F7A34BF130D02AB00AB1926 /* HLSKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKeyboardInformation.m; sourceTree = "<group>"; };
-		6F7A3A33130D910700AB1926 /* HLSScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSScrollViewController.h; sourceTree = "<group>"; };
-		6F7A3A34130D910700AB1926 /* HLSScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSScrollViewController.m; sourceTree = "<group>"; };
 		6F8D0909123F51DF00FCF2AF /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
 		6F8D090A123F51DF00FCF2AF /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
 		6F8D0911123F51FD00FCF2AF /* HLSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLogger.h; sourceTree = "<group>"; };
@@ -426,8 +422,6 @@
 				6F8D0922123F530400FCF2AF /* HLSPageController.m */,
 				6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */,
 				6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */,
-				6F7A3A33130D910700AB1926 /* HLSScrollViewController.h */,
-				6F7A3A34130D910700AB1926 /* HLSScrollViewController.m */,
 				6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */,
 				6F5B04A4126DC8B800C92F2A /* HLSSingleValuePickerViewController.m */,
 				6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */,
@@ -598,7 +592,6 @@
 				6FBDAD2413068956004B9617 /* HLSViewController.h in Headers */,
 				6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */,
 				6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */,
-				6F7A3A35130D910700AB1926 /* HLSScrollViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +699,6 @@
 				6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */,
 				6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */,
 				6F7A34C1130D02AB00AB1926 /* HLSKeyboardInformation.m in Sources */,
-				6F7A3A36130D910700AB1926 /* HLSScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

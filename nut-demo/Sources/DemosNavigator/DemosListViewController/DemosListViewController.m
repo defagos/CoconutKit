@@ -9,13 +9,10 @@
 #import "DemosListViewController.h"
 
 #import "FixedSizeViewController.h"
-#import "LifeCycleTestViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
-#import "OrientationClonerViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
-#import "StretchableViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
@@ -53,7 +50,7 @@ typedef enum {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexTextFieldsFixed,
-    ViewDemoIndexTextFieldsScrollable,
+    ViewDemoIndexTextFieldsLarge,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -62,10 +59,6 @@ typedef enum {
 typedef enum {
     ViewControllersDemoIndexEnumBegin = 0,
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
-    ViewControllersDemoIndexLifeCycleTestInScrollView,
-    ViewControllersDemoIndexFixedSizeLargeInScrollView,
-    ViewControllersDemoIndexStretchableLargeInScrollView,
-    ViewControllersDemoIndexOrientationLargeClonerInScrollView,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexPageController,
@@ -220,7 +213,7 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFieldsScrollable: {
+                case ViewDemoIndexTextFieldsLarge: {
                     cell.textLabel.text = NSLocalizedString(@"Text fields (large)", @"Text fields (large)");
                     break;
                 }
@@ -238,26 +231,6 @@ typedef enum {
                 case ViewControllersDemoIndexPlaceholderViewController: {
                     cell.textLabel.text = @"HLSPlaceholderViewController";
                     break;
-                }
-                    
-                case ViewControllersDemoIndexLifeCycleTestInScrollView: {
-                    cell.textLabel.text = @"HLSScrollViewController + LifeCycleTest";
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
-                    cell.textLabel.text = @"HLSScrollViewController + FixedSizeViewController (large)";
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexStretchableLargeInScrollView: {
-                    cell.textLabel.text = @"HLSScrollViewController + StretchableViewController (large)";
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexOrientationLargeClonerInScrollView: {
-                    cell.textLabel.text = @"HLSScrollViewController + OrientationCloner (large)";
-                    break;                
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
@@ -343,18 +316,16 @@ typedef enum {
                 }
                     
                 case ViewDemoIndexTextFieldsFixed: {
-                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
+                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:NO] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     
-                case ViewDemoIndexTextFieldsScrollable: {
-                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
+                case ViewDemoIndexTextFieldsLarge: {
                     TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:YES] autorelease];
-                    scrollViewController.insetViewController = demoViewController;
-                    [self.navigationController pushViewController:scrollViewController animated:YES];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
-                }
+                }                    
                     
                 default: {
                     return;
@@ -370,40 +341,6 @@ typedef enum {
                     PlaceholderDemoViewController *demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
-                }
-                    
-                case ViewControllersDemoIndexLifeCycleTestInScrollView: {
-                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
-                    LifeCycleTestViewController *demoViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-                    scrollViewController.insetViewController = demoViewController;
-                    scrollViewController.adjustingInset = YES;
-                    [self.navigationController pushViewController:scrollViewController animated:YES];
-                    break;                    
-                }
-                    
-                case ViewControllersDemoIndexFixedSizeLargeInScrollView: {
-                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
-                    FixedSizeViewController *demoViewController = [[[FixedSizeViewController alloc] initLarge:YES] autorelease];
-                    scrollViewController.insetViewController = demoViewController;
-                    [self.navigationController pushViewController:scrollViewController animated:YES];
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexStretchableLargeInScrollView: {
-                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
-                    StretchableViewController *demoViewController = [[[StretchableViewController alloc] initLarge:YES] autorelease];
-                    scrollViewController.insetViewController = demoViewController;
-                    [self.navigationController pushViewController:scrollViewController animated:YES];
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexOrientationLargeClonerInScrollView: {
-                    HLSScrollViewController *scrollViewController = [[[HLSScrollViewController alloc] init] autorelease];
-                    OrientationClonerViewController *demoViewController = [[[OrientationClonerViewController alloc] initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation) 
-                                                                                                                                          large:YES] autorelease];
-                    scrollViewController.insetViewController = demoViewController;
-                    [self.navigationController pushViewController:scrollViewController animated:YES];
-                    break;                    
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
