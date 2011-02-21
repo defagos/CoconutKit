@@ -10,6 +10,7 @@
 
 #import "DeviceFeedFilter.h"
 #import "DeviceInfo.h"
+#import "FixedSizeViewController.h"
 #import "ModalWrapperViewController.h"
 
 static NSArray *s_data;
@@ -185,8 +186,32 @@ typedef enum {
     DeviceInfo *deviceInfo = [self.deviceFeed entryAtIndex:indexPath.row matchingFilter:self.deviceFeedFilter];
     HLSTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
     cell.textLabel.text = deviceInfo.name;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    // In navigation controller: Can test behavior when another level is pushed
+    if (self.navigationController) {
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    // Modal: In this example, we have no navigation controller available. Cannot navigate further
+    else {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+
     return cell;
+}
+
+#pragma mark UITableViewDelegate protocol implementation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Push another dummy level
+    if (self.navigationController) {
+        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [self.navigationController pushViewController:fixedSizeViewController animated:YES];        
+    }
 }
 
 #pragma mark Creating the search filter
