@@ -38,12 +38,14 @@ typedef enum {
 @protocol HLSPlaceholderViewControllerDelegate;
 
 /**
- * View controllers which must be able to embed another view controller as subview can inherit from this class
- * to benefit from correct event propagation (e.g. view lifecycle events, rotation events, etc.). Moreover, this class
- * also supports view controller different depending on the orientation (see HLSOrientationCloner protocol). To
- * define the area where embedded view controllers ("insets") will all be drawn, the subclass must supply a properly
- * initialized placeholder view, either using a xib or by implementing the loadView method.
- * 
+ * View controllers must sometimes embbed another view controller as "subview". In such cases, it is difficult and
+ * cumbersome to achieve correct event propagation (e.g. view lifecycle events, rotation events) to the embedded
+ * view controller. The placeholder view controller class allows you to achieve such embeddings, without having
+ * to worry about event propagation anymore. Simply subclass HLSPlaceholderViewController and define an area
+ * where embedded view controllers ("insets") must be drawn, either by binding the placeholder view outlet
+ * in your subclass xib, or by instantiating it in the loadView method. Note that this class also supports view 
+ * controllers different depending on the orientation (see HLSOrientationCloner protocol). 
+ *
  * The reason this class exists is that embedding view controllers by directly adding a view controller's view as 
  * subview of another view controller's view does not work correctly out of the box. Most view controller events will 
  * be fired up correctly (e.g viewDidLoad or rotation events), but other simply won't (e.g. viewWillAppear:). This 
