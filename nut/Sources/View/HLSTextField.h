@@ -41,7 +41,13 @@
  */
 @interface HLSTextField : UITextField {
 @private
-
+    CGFloat m_minVisibilityDistance;
 }
+
+/**
+ * Minimal (positive) distance to keep between keyboard and text field, respectively scroll view top and text field
+ * Default value is 30.f
+ */
+@property (nonatomic, assign) CGFloat minVisibilityDistance;
 
 @end

@@ -63,6 +63,8 @@ static UIScrollView *s_scrollView = nil;
 + (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated;
 + (void)restoreScrollAnimated:(BOOL)animated;
 
+- (void)initialize;
+
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 
@@ -75,14 +77,41 @@ static UIScrollView *s_scrollView = nil;
 - (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
+        [self initialize];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self initialize];
+}
+
+// Common initialization code
+- (void)initialize
+{
+    self.minVisibilityDistance = kTextFieldMinVisibilityDistance;
 }
 
 - (void)dealloc
 {
     [super dealloc];
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize minVisibilityDistance = m_minVisibilityDistance;
+
+- (void)setTextFieldMinVisibilityDistance:(CGFloat)minVisibilityDistance
+{
+    // Sanitize input
+    if (floatlt(minVisibilityDistance, 0.f)) {
+        logger_warn(@"Invalid value; must be positive");
+        m_minVisibilityDistance = 0.f;
+    }
+    else {
+        m_minVisibilityDistance = minVisibilityDistance;
+    }
 }
 
 #pragma mark Focus events
@@ -198,7 +227,7 @@ static UIScrollView *s_scrollView = nil;
     
     // If the text field is hidden at the top, adjust the scroll view offset to make it visible; must take
     // the current offset (if any) into account
-    CGFloat yOffsetTop = frameInScrollView.origin.y - scrollViewOffset.y - kTextFieldMinVisibilityDistance;
+    CGFloat yOffsetTop = frameInScrollView.origin.y - scrollViewOffset.y - textField.minVisibilityDistance;
     if (floatle(yOffsetTop, 0.f)) {
         // Move
         [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
@@ -253,7 +282,7 @@ static UIScrollView *s_scrollView = nil;
     // i.e. when
     //   delta >= 0
     // The shift to apply is just delta
-    CGFloat yOffset = frameInScrollView.origin.y + frameInScrollView.size.height + kTextFieldMinVisibilityDistance - keyboardFrameInScrollView.origin.y;
+    CGFloat yOffset = frameInScrollView.origin.y + frameInScrollView.size.height + textField.minVisibilityDistance - keyboardFrameInScrollView.origin.y;
     if (floatge(yOffset, 0.f)) {
         // Move
         [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x,
