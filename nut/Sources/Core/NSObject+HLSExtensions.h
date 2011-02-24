@@ -8,6 +8,8 @@
 
 @interface NSObject (HLSExtensions)
 
++ (NSString *)className;
+
 - (NSString *)className;
 
 @end

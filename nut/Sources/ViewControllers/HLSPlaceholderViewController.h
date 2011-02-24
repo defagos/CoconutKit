@@ -93,7 +93,10 @@ typedef enum {
  * In such cases, be sure to retain all those view controllers elsewhere (most naturally by the same object which
  * instantiates the placeholder view controller). You must then ensure that this owner object is capable of releasing 
  * the views when memory is critically low. If the owner object is a view controller, it suffices to implement its 
- * viewDidUnload method and, within it, to set the view property of all cached view controllers to nil.
+ * viewDidUnload method and, within it, to set the view property of all cached view controllers to nil. Of course,
+ * after having set a view to nil, you should forward its view controller the viewDidUnload message as well. If several
+ * views are cached but only a subset (probably one) displayed at once, you also need to implement the didReceiveMemoryWarning
+ * method to set invisible cached views to nil and send their view controller the viewDidUnload message.
  *
  * Designated initializer: initWithNibName:bundle:
  */

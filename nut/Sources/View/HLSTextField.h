@@ -33,6 +33,10 @@
  * behavior of HLSTextField objects remains correct, but the offset animations suffer from "hiccups" because of 
  * the two effects overlapping. Since such views should be quite rare, though, this issue should not be a severe one.
  *
+ * If you need to subclass HLSTextField (which should be quite rare), do not forget to implement awakeFromNib,
+ * calling the super method first (otherwise the behavior of HLSTextFields instantiated from a xib will be
+ * undefined)
+ *
  * TODO: We could add a button above the keyboard (or somewhere else) to allow fast switching between HLSTextFields 
  *       without having to hide the keyboard. A better approach would allow fast switching between UIResponders (e.g. 
  *       a picker view, a text field, etc.)

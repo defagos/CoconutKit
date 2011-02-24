@@ -12,6 +12,11 @@
 
 @implementation NSObject (HLSExtensions)
 
++ (NSString *)className
+{
+    return [NSString stringWithUTF8String:class_getName([self class])];
+}
+
 - (NSString *)className
 {
     return [NSString stringWithUTF8String:class_getName([self class])];
