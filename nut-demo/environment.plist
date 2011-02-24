@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>Logger level</key>
-	<string>INFO</string>
+	<string>DEBUG</string>
 </dict>
 </plist>

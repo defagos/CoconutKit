@@ -10,7 +10,7 @@
 
 #import "HLSValidable.h"
 
-#define WIZARD_VIEW_CONTROLLER_NO_PAGE                 -1
+const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
@@ -33,7 +33,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        m_currentPage = WIZARD_VIEW_CONTROLLER_NO_PAGE;
+        m_currentPage = kWizardViewControllerNoPage;
     }
     return self;
 }
@@ -114,7 +114,7 @@
     
     // Start with the first page again (need to reset to no page first so that displayPage always can detect
     // that the page has changed)
-    self.currentPage = WIZARD_VIEW_CONTROLLER_NO_PAGE;
+    self.currentPage = kWizardViewControllerNoPage;
     self.currentPage = 0;
 }
 

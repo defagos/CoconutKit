@@ -16,11 +16,11 @@ typedef struct {
 	HLSLoggerLevel level;
 } HLSLoggerMode;
 
-HLSLoggerMode MODE_DEBUG = {@"DEBUG", 0};
-HLSLoggerMode MODE_INFO = {@"INFO", 1};
-HLSLoggerMode MODE_WARN = {@"WARN", 2};
-HLSLoggerMode MODE_ERROR = {@"ERROR", 3};
-HLSLoggerMode MODE_FATAL = {@"FATAL", 4};
+static const HLSLoggerMode kLoggerModeDebug = {@"DEBUG", 0};
+static const HLSLoggerMode kLoggerModeInfo = {@"INFO", 1};
+static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2};
+static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3};
+static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 
 #pragma mark -
 #pragma mark HLSLogger class
@@ -48,19 +48,19 @@ HLSLoggerMode MODE_FATAL = {@"FATAL", 4};
 		// Create a logger with the corresponding level
 		NSString *levelName = [envProperties valueForKey:@"Logger level"];
 		HLSLoggerLevel level;
-		if ([levelName isEqual:MODE_DEBUG.name]) {
+		if ([levelName isEqual:kLoggerModeDebug.name]) {
 			level = HLSLoggerLevelDebug;
 		}
-		else if ([levelName isEqual:MODE_INFO.name]) {
+		else if ([levelName isEqual:kLoggerModeInfo.name]) {
 			level = HLSLoggerLevelInfo;		
 		}
-		else if ([levelName isEqual:MODE_WARN.name]) {
+		else if ([levelName isEqual:kLoggerModeWarn.name]) {
 			level = HLSLoggerLevelWarn;
 		}
-		else if ([levelName isEqual:MODE_ERROR.name]) {
+		else if ([levelName isEqual:kLoggerModeError.name]) {
 			level = HLSLoggerLevelError;
 		}
-		else if ([levelName isEqual:MODE_FATAL.name]) {
+		else if ([levelName isEqual:kLoggerModeFatal.name]) {
 			level = HLSLoggerLevelFatal;
 		}
 		else {
@@ -105,27 +105,27 @@ HLSLoggerMode MODE_FATAL = {@"FATAL", 4};
 
 - (void)debug:(NSString *)message
 {
-	[self logMessage:message forMode:MODE_DEBUG];
+	[self logMessage:message forMode:kLoggerModeDebug];
 }
 
 - (void)info:(NSString *)message
 {
-	[self logMessage:message forMode:MODE_INFO];
+	[self logMessage:message forMode:kLoggerModeInfo];
 }
 
 - (void)warn:(NSString *)message
 {
-	[self logMessage:message forMode:MODE_WARN];
+	[self logMessage:message forMode:kLoggerModeWarn];
 }
 
 - (void)error:(NSString *)message
 {
-	[self logMessage:message forMode:MODE_ERROR];
+	[self logMessage:message forMode:kLoggerModeError];
 }
 
 - (void)fatal:(NSString *)message
 {
-	[self logMessage:message forMode:MODE_FATAL];
+	[self logMessage:message forMode:kLoggerModeFatal];
 }
 
 #pragma mark Level testers
