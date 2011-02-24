@@ -84,6 +84,21 @@
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
+#pragma mark View management
+
+/**
+ * Remark: We have NOT overridden the view property to perform the viewDidUnload, and on purpose. This would have been
+ *         very convenient, but this would have been unusual and in most cases the viewDidUnload would have
+ *         been sent twice (when a container controller nils a view it manages, it is likely it will set the view
+ *         to nil and send it the viewDidUnload afterwards. If all view controller containers of the world knew
+ *         about HLSViewController, this would work, but since they don't this would lead to viewDidUnload be
+ *         called twice in most cases)! */
+- (void)unloadView
+{
+    self.view = nil;
+    [self viewDidUnload];
+}
+
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
