@@ -54,6 +54,7 @@ HLSWizardViewController.h
 HLSXibView.h
 NSArray+HLSExtensions.h
 NSBundle+HLSExtensions.h
+NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h

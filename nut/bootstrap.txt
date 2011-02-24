@@ -2,6 +2,7 @@ HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
 NSBundle+HLSExtensions.m
+NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m

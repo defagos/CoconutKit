@@ -34,6 +34,8 @@
 		6F5B04A7126DC8B800C92F2A /* HLSSingleValuePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B04A4126DC8B800C92F2A /* HLSSingleValuePickerViewController.m */; };
 		6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */; };
 		6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */; };
+		6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */; };
+		6F6E9A0A1316997E0075DD7A /* NSData+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */; };
 		6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */; };
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */; };
@@ -161,6 +163,8 @@
 		6F5B04A5126DC8B800C92F2A /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 				6F8FA7B9131650BB003886FB /* NSArray+HLSExtensions.m */,
 				6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */,
 				6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */,
+				6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */,
+				6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */,
 				6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */,
 				6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */,
 				6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */,
@@ -599,6 +605,7 @@
 				6F8FA7BA131650BB003886FB /* NSArray+HLSExtensions.h in Headers */,
 				6F8FA7DB13165AB2003886FB /* NSString+HLSExtensions.h in Headers */,
 				6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */,
+				6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +714,7 @@
 				6F8FA7BB131650BB003886FB /* NSArray+HLSExtensions.m in Sources */,
 				6F8FA7DC13165AB2003886FB /* NSString+HLSExtensions.m in Sources */,
 				6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */,
+				6F6E9A0A1316997E0075DD7A /* NSData+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

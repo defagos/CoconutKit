@@ -9,9 +9,44 @@
 @interface NSString (HLSExtensions)
 
 /**
- * Calculates the MD5 hash of a string
+ * Calculates the MD2 hash of a string (hexadecimal)
+ */
+- (NSString *)md2hash;
+
+/**
+ * Calculates the MD4 hash of a string (hexadecimal)
+ */
+- (NSString *)md4hash;
+
+/**
+ * Calculates the MD5 hash of a string (hexadecimal)
  */
 - (NSString *)md5hash;
+
+/**
+ * Calculates the SHA-1 hash of a string (hexadecimal)
+ */
+- (NSString *)sha1hash;
+
+/**
+ * Calculates the SHA-224 hash of a string (hexadecimal)
+ */
+- (NSString *)sha224hash;
+
+/**
+ * Calculates the SHA-256 hash of a string (hexadecimal)
+ */
+- (NSString *)sha256hash;
+
+/**
+ * Calculates the SHA-384 hash of a string (hexadecimal)
+ */
+- (NSString *)sha384hash;
+
+/**
+ * Calculates the SHA-512 hash of a string (hexadecimal)
+ */
+- (NSString *)sha512hash;
 
 /**
  * At Hortis, we use a convenient way to identify versions during development, for tags and for official releases:
@@ -23,7 +58,7 @@
  *       x.x[.x[.x]]            represents "standard" versions
  *       x.x[.x[.x]]+bN         represents the N-th beta for version x.x[.x[.x]]
  *       x.x[.x[.x]]+rcN        represents the N-th release candidate for version x.x[.x[.x]]
-*      This ordering matches because it matches the alphabetical ordering.
+ *     This ordering matches because it matches the alphabetical ordering.
  *   - qualifier is either:
  *       dev                    for development versions (trunk). This qualifier is never to be used for tags
  *       test                   for tagged versions used with test environments (e.g. test servers)
