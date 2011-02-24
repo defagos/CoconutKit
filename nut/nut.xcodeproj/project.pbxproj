@@ -32,6 +32,8 @@
 		6F5B04A2126DC8A800C92F2A /* HLSSingleValuePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B04A0126DC8A800C92F2A /* HLSSingleValuePicker.m */; };
 		6F5B04A6126DC8B800C92F2A /* HLSSingleValuePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */; };
 		6F5B04A7126DC8B800C92F2A /* HLSSingleValuePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B04A4126DC8B800C92F2A /* HLSSingleValuePickerViewController.m */; };
+		6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */; };
+		6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */; };
 		6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */; };
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */; };
@@ -85,6 +87,10 @@
 		6F8D0972123F53B200FCF2AF /* HLSRuntimeChecks.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
+		6F8FA7BA131650BB003886FB /* NSArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8FA7B8131650BB003886FB /* NSArray+HLSExtensions.h */; };
+		6F8FA7BB131650BB003886FB /* NSArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FA7B9131650BB003886FB /* NSArray+HLSExtensions.m */; };
+		6F8FA7DB13165AB2003886FB /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8FA7D913165AB2003886FB /* NSString+HLSExtensions.h */; };
+		6F8FA7DC13165AB2003886FB /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FA7DA13165AB2003886FB /* NSString+HLSExtensions.m */; };
 		6F93EE6C12DE55080039A2B2 /* HLSTask+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F93EE6012DE55080039A2B2 /* HLSTask+Friend.h */; };
 		6F93EE6D12DE55080039A2B2 /* HLSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F93EE6112DE55080039A2B2 /* HLSTask.h */; };
 		6F93EE6E12DE55080039A2B2 /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93EE6212DE55080039A2B2 /* HLSTask.m */; };
@@ -121,10 +127,6 @@
 		6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD2313068956004B9617 /* HLSViewController.m */; };
 		6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */; };
 		6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */; };
-		6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */; };
-		6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */; };
-		6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */; };
-		6FEFF5301281BBB400B01B7A /* NSString+HLSHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -157,6 +159,8 @@
 		6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSingleValuePickerViewController.h; sourceTree = "<group>"; };
 		6F5B04A4126DC8B800C92F2A /* HLSSingleValuePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSSingleValuePickerViewController.m; sourceTree = "<group>"; };
 		6F5B04A5126DC8B800C92F2A /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
+		6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -211,6 +215,10 @@
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F8D09A8123F5ECF00FCF2AF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F8FA7B8131650BB003886FB /* NSArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F8FA7B9131650BB003886FB /* NSArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F8FA7D913165AB2003886FB /* NSString+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F8FA7DA13165AB2003886FB /* NSString+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F93EE6012DE55080039A2B2 /* HLSTask+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTask+Friend.h"; sourceTree = "<group>"; };
 		6F93EE6112DE55080039A2B2 /* HLSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTask.h; sourceTree = "<group>"; };
 		6F93EE6212DE55080039A2B2 /* HLSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTask.m; sourceTree = "<group>"; };
@@ -247,10 +255,6 @@
 		6FBDAD2313068956004B9617 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
-		6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSCompression.h"; sourceTree = "<group>"; };
-		6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSCompression.m"; sourceTree = "<group>"; };
-		6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSHash.h"; sourceTree = "<group>"; };
-		6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSHash.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -462,14 +466,16 @@
 				6F2863051265A65300D04F08 /* HLSValidable.h */,
 				6F28629A12658CA800D04F08 /* HLSValidators.h */,
 				6F28629B12658CA800D04F08 /* HLSValidators.m */,
-				6FEFF5051281B77000B01B7A /* NSData+HLSCompression.h */,
-				6FEFF5061281B77000B01B7A /* NSData+HLSCompression.m */,
+				6F8FA7B8131650BB003886FB /* NSArray+HLSExtensions.h */,
+				6F8FA7B9131650BB003886FB /* NSArray+HLSExtensions.m */,
+				6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */,
+				6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */,
 				6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */,
 				6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */,
 				6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */,
 				6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */,
-				6FEFF52D1281BBB400B01B7A /* NSString+HLSHash.h */,
-				6FEFF52E1281BBB400B01B7A /* NSString+HLSHash.m */,
+				6F8FA7D913165AB2003886FB /* NSString+HLSExtensions.h */,
+				6F8FA7DA13165AB2003886FB /* NSString+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -565,8 +571,6 @@
 				6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */,
 				6F5B04A1126DC8A800C92F2A /* HLSSingleValuePicker.h in Headers */,
 				6F5B04A6126DC8B800C92F2A /* HLSSingleValuePickerViewController.h in Headers */,
-				6FEFF5071281B77000B01B7A /* NSData+HLSCompression.h in Headers */,
-				6FEFF52F1281BBB400B01B7A /* NSString+HLSHash.h in Headers */,
 				6F248A4D129180FB000A6996 /* HLSUserInterfaceLock.h in Headers */,
 				6F32E220129F8A7700FCA2FF /* NSDate+HLSExtensions.h in Headers */,
 				6F93EE6C12DE55080039A2B2 /* HLSTask+Friend.h in Headers */,
@@ -592,6 +596,9 @@
 				6FBDAD2413068956004B9617 /* HLSViewController.h in Headers */,
 				6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */,
 				6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */,
+				6F8FA7BA131650BB003886FB /* NSArray+HLSExtensions.h in Headers */,
+				6F8FA7DB13165AB2003886FB /* NSString+HLSExtensions.h in Headers */,
+				6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,8 +683,6 @@
 				6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */,
 				6F5B04A2126DC8A800C92F2A /* HLSSingleValuePicker.m in Sources */,
 				6F5B04A7126DC8B800C92F2A /* HLSSingleValuePickerViewController.m in Sources */,
-				6FEFF5081281B77000B01B7A /* NSData+HLSCompression.m in Sources */,
-				6FEFF5301281BBB400B01B7A /* NSString+HLSHash.m in Sources */,
 				6F248A4E129180FB000A6996 /* HLSUserInterfaceLock.m in Sources */,
 				6F32E221129F8A7700FCA2FF /* NSDate+HLSExtensions.m in Sources */,
 				6F93EE6E12DE55080039A2B2 /* HLSTask.m in Sources */,
@@ -699,6 +704,9 @@
 				6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */,
 				6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */,
 				6F7A34C1130D02AB00AB1926 /* HLSKeyboardInformation.m in Sources */,
+				6F8FA7BB131650BB003886FB /* NSArray+HLSExtensions.m in Sources */,
+				6F8FA7DC13165AB2003886FB /* NSString+HLSExtensions.m in Sources */,
+				6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,14 @@
 
 @interface NSObject (HLSExtensions)
 
+/**
+ * Returns the name of a class as a string
+ */
 + (NSString *)className;
 
+/**
+ * Returns the name of an object's class as a string
+ */
 - (NSString *)className;
 
 @end

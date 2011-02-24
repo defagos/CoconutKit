@@ -1,16 +1,18 @@
 //
-//  NSString+HLSHash.m
+//  NSString+HLSExtensions.m
 //  nut
 //
 //  Created by Samuel Défago on 11/3/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "NSString+HLSHash.h"
+#import "NSString+HLSExtensions.h"
 
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (HLSHash)
+@implementation NSString (HLSExtensions)
+
+#pragma mark Hash digests
 
 - (NSString *)md5hash
 {
@@ -25,6 +27,20 @@
         [hexHash appendFormat:@"%02X", resultBuffer[i]];
     }
     return [hexHash lowercaseString];
+}
+
+#pragma mark Version strings
+
+- (NSString *)friendlyVersionNumber
+{
+    NSArray *versionComponents = [self componentsSeparatedByString:@"+"];
+    if ([versionComponents count] > 1) {
+        NSString *lastComponent = [versionComponents lastObject];
+        if (! [lastComponent isEqualToString:@"dev"] && ! [lastComponent isEqualToString:@"test"]) {
+            return lastComponent;
+        }
+    }
+    return self;
 }
 
 @end
