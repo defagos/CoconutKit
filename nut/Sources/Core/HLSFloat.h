@@ -49,5 +49,5 @@ BOOL doubleeq_dist(double x, double y, int64_t maxDist);
  */
 float floatmin_dist(float x, float y, int32_t maxDist);
 float floatmax_dist(float x, float y, int32_t maxDist);
-float doublemin_dist(double x, double y, int64_t maxDist);
-float doublemax_dist(double x, double y, int64_t maxDist);
+double doublemin_dist(double x, double y, int64_t maxDist);
+double doublemax_dist(double x, double y, int64_t maxDist);

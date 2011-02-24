@@ -59,12 +59,12 @@ float floatmax_dist(float x, float y, int32_t maxDist)
     return floatlt_dist(x, y, maxDist) ? y : x;
 }
 
-float doublemin_dist(double x, double y, int64_t maxDist)
+double doublemin_dist(double x, double y, int64_t maxDist)
 {
     return doublelt_dist(x, y, maxDist) ? x : y;
 }
 
-float doublemax_dist(double x, double y, int64_t maxDist)
+double doublemax_dist(double x, double y, int64_t maxDist)
 {
     return doublelt_dist(x, y, maxDist) ? y : x;
 }

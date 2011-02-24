@@ -239,8 +239,8 @@ DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
             }
             
             // Notify the partial change
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:updatedIndexes, @"updatedIndexes", nil];
-            [self postCoalescingNotificationWithName:HLSServiceBoundArrayUpdatedNotification userInfo:userInfo];
+            NSDictionary *returnedUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:updatedIndexes, @"updatedIndexes", nil];
+            [self postCoalescingNotificationWithName:HLSServiceBoundArrayUpdatedNotification userInfo:returnedUserInfo];
         }
     }
 }

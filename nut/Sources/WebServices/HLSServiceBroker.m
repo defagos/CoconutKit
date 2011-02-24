@@ -162,9 +162,9 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 - (void)serviceRequester:(HLSServiceRequester *)requester failedForRequestId:(NSString *)requestId
 {    
     // Forward failure to all aggregated requests
-    NSArray *requestIds = [self.aggregator requestIdsForAggregatedRequestId:requestId];
-    for (NSString *requestId in requestIds) {
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:requestId, @"requestId", nil];
+    NSArray *subRequestIds = [self.aggregator requestIdsForAggregatedRequestId:requestId];
+    for (NSString *subRequestId in subRequestIds) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:subRequestId, @"requestId", nil];
         [self postCoalescingNotificationWithName:HLSServiceBrokerNetworkFailureNotification
                                         userInfo:userInfo];
     }
