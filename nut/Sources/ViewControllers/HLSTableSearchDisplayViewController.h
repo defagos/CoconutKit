@@ -69,8 +69,11 @@
 @private
     UISearchBar *m_searchBar;
     UITableView *m_tableView;
+    NSString *m_searchText;
+    NSInteger m_selectedScopeButtonIndex;
+    BOOL m_searchInterfaceActive;
     UISearchDisplayController *m_searchController;
-    BOOL m_scopeButtonHookInstalled;
+    BOOL m_firstLoad;
     id<HLSTableSearchDisplayViewControllerDelegate> m_searchDelegate;
 }
 
