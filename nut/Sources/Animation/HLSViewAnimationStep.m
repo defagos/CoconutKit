@@ -80,17 +80,12 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         // Default: No change
         self.transform = CGAffineTransformIdentity;
         self.alphaVariation = kAnimationStepDefaultAlphaVariation;  
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

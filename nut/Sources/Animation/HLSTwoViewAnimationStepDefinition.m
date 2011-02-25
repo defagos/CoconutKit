@@ -24,7 +24,7 @@ static const UIViewAnimationCurve kTwoViewAnimationStepDefinition = UIViewAnimat
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.duration = kTwoViewAnimationStepDefinitionDefaultDuration;
         self.curve = kTwoViewAnimationStepDefinition;
     }

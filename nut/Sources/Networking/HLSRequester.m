@@ -64,7 +64,7 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
 
 - (id)initWithRequest:(NSURLRequest *)request
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.request = request;
         self.data = [[[NSMutableData alloc] init] autorelease];
         self.status = HLSRequesterStatusIdle;

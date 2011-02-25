@@ -43,7 +43,7 @@
 
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.animationSteps = animationSteps;
     }
     return self;

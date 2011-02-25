@@ -14,8 +14,6 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
-- (void)releaseViews;
-
 @property (nonatomic, assign) NSInteger currentPage;
 
 - (BOOL)validatePage:(NSInteger)page;
@@ -32,7 +30,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         m_currentPage = kWizardViewControllerNoPage;
     }
     return self;
@@ -40,7 +38,6 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 - (void)dealloc
 {
-    [self releaseViews];
     self.viewControllers = nil;
     self.delegate = nil;
     [super dealloc];
@@ -48,6 +45,8 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.previousButton = nil;
     self.nextButton = nil;
     self.doneButton = nil;
@@ -83,12 +82,6 @@ const NSInteger kWizardViewControllerNoPage = -1;
         id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
         [delegate wizardViewController:self didDisplayPage:self.currentPage];
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [self releaseViews];
 }
 
 #pragma mark Accessors and mutators

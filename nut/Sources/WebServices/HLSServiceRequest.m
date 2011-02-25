@@ -23,7 +23,7 @@
 {
     // Ids are automatically assigned by this very basic id factory
     static NSUInteger s_idAsInteger = 1;
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.body = body;
         self.id = [NSString stringWithFormat:@"%d", s_idAsInteger];
         ++s_idAsInteger;

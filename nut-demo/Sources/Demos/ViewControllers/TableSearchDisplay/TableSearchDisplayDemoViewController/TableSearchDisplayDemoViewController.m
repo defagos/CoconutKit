@@ -62,7 +62,7 @@ typedef enum {
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.title = @"HLSTableSearchDisplayViewController";
         self.searchDelegate = self;
         

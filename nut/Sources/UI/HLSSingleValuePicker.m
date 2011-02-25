@@ -24,7 +24,7 @@
 
 - (id)initWithValues:(NSArray *)values
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.singleValuePickerViewController = [[[HLSSingleValuePickerViewController alloc] init] autorelease];
         self.singleValuePickerViewController.values = values;
         self.singleValuePickerViewController.delegate = self;

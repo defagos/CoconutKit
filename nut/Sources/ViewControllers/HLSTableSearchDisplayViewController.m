@@ -28,7 +28,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Create the search bar for displaying at the top of the table view (created in init so that the user
         // has a chance to customize it before it is displayed)
         CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
@@ -54,6 +54,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.searchBar = nil;
     self.tableView = nil;
 }

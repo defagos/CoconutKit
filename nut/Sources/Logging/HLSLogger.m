@@ -80,7 +80,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 
 - (id)initWithLevel:(HLSLoggerLevel)level
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		m_level = level;
 	}
 	return self;
@@ -89,11 +89,6 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 - (id)init
 {
 	return [self initWithLevel:HLSLoggerLevelNone];
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 #pragma mark Logging methods

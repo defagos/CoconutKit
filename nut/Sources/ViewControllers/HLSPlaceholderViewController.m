@@ -16,8 +16,6 @@
 
 @interface HLSPlaceholderViewController ()
 
-- (void)releaseViews;
-
 @property (nonatomic, retain) UIViewController *oldInsetViewController;
 
 - (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
@@ -29,25 +27,8 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        
-    }
-    return self;
-}
-
 - (void)dealloc
 {
-    [self releaseViews];
     self.insetViewController = nil;
     self.oldInsetViewController = nil;
     self.placeholderView = nil;
@@ -57,6 +38,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.placeholderView = nil;
 }
 
@@ -357,8 +340,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
-    [self releaseViews];
     
     if (m_insetViewAddedAsSubview) {
         self.insetViewController.view = nil;

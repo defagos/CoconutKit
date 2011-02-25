@@ -20,7 +20,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.classNameToIdMap = [NSMutableDictionary dictionary];
     }
     return self;

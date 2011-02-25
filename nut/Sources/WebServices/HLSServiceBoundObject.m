@@ -33,7 +33,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
 
 - (id)initWithBroker:(HLSServiceBroker *)broker
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.broker = broker;
     }
     return self;

@@ -14,7 +14,7 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Just add some customized label
         self.label = [[[UILabel alloc] initWithFrame:CGRectMake(20.f, 20.f, 400.f, 20.f)] autorelease];
         self.label.font = [UIFont systemFontOfSize:13.f];

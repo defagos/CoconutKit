@@ -15,12 +15,12 @@
 - (id)initLarge:(BOOL)large
 {
     if (large) {
-        if (self = [super initWithNibName:@"StretchableLargeViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"StretchableLargeViewController" bundle:nil])) {
             self.title = @"StretchableViewController (large)";
         }                
     }
     else {
-        if (self = [super initWithNibName:@"StretchableViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"StretchableViewController" bundle:nil])) {
             self.title = @"StretchableViewController";
         }        
     }

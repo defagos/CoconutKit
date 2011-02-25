@@ -153,7 +153,7 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.viewKeys = [NSMutableArray array];
         self.viewToViewAnimationStepMap = [NSMutableDictionary dictionary];
         

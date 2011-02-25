@@ -36,7 +36,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         [self reset];
     }
     return self;

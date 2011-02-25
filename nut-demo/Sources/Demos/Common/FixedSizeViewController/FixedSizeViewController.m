@@ -15,12 +15,12 @@
 - (id)initLarge:(BOOL)large
 {
     if (large) {
-        if (self = [super initWithNibName:@"FixedSizeLargeViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"FixedSizeLargeViewController" bundle:nil])) {
             self.title = @"FixedSizeViewController (large)";
         }
     }
     else {
-        if (self = [super initWithNibName:@"FixedSizeViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"FixedSizeViewController" bundle:nil])) {
             self.title = @"FixedSizeViewController";
         }
     }

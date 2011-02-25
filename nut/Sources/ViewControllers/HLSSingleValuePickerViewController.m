@@ -10,19 +10,13 @@
 
 #import "HLSLogger.h"
 
-@interface HLSSingleValuePickerViewController ()
-
-- (void)releaseViews;
-
-@end
-
 @implementation HLSSingleValuePickerViewController
 
 #pragma mark Object creation and destruction
 
 - (id)init
 {
-    if (self = [super initWithNibName:@"nut_HLSSingleValuePickerViewController" bundle:nil]) {
+    if ((self = [super initWithNibName:@"nut_HLSSingleValuePickerViewController" bundle:nil])) {
         
     }
     return self;
@@ -30,7 +24,6 @@
 
 - (void)dealloc
 {
-    [self releaseViews];
     self.values = nil;
     self.delegate = nil;
     [super dealloc];
@@ -38,6 +31,8 @@
 
 - (void)releaseViews
 {
+    [super releaseViews];
+    
     self.pickerView = nil;
 }
 
@@ -45,12 +40,9 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     self.pickerView.delegate = self;
-}
-
-- (void)viewDidUnload
-{
-    [self releaseViews];
 }
 
 #pragma mark Accessors and mutators

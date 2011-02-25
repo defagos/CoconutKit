@@ -69,15 +69,10 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         m_networkActivityCount = 0;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 #pragma mark Activity notification
@@ -120,7 +115,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 - (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.notificationName = notificationName;
         self.object = object;
     }
@@ -163,7 +158,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.objectToNotificationMap = [NSMutableDictionary dictionary];
     }
     return self;

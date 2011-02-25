@@ -54,7 +54,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.operationQueue = [[[NSOperationQueue alloc] init] autorelease];
         [self setMaxConcurrentTaskCount:4];
         [self.operationQueue setMaxConcurrentOperationCount:4];

@@ -17,13 +17,13 @@
     // The large version is taller than the screen and therefore can be browsed vertically; no demo for horizontal
     // scrolling since issues remain (see HLSTextField documentation)
     if (large) {
-        if (self = [super initWithNibName:@"TextFieldsLargeDemoViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"TextFieldsLargeDemoViewController" bundle:nil])) {
             self.title = @"TextFieldsDemoViewController (large)";
             m_large = YES;
         }
     }
     else {
-        if (self = [super initWithNibName:@"TextFieldsDemoViewController" bundle:nil]) {
+        if ((self = [super initWithNibName:@"TextFieldsDemoViewController" bundle:nil])) {
             self.title = @"TextFieldsDemoViewController";
             m_large = NO;
         }

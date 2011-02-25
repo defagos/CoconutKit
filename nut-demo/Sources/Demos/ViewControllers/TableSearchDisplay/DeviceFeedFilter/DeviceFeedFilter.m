@@ -14,7 +14,7 @@
 
 - (id)initWithFeed:(HLSFeed *)feed
 {
-    if (self = [super initWithFeed:feed]) {
+    if ((self = [super initWithFeed:feed])) {
         self.type = DeviceTypeAll;
     }
     return self;

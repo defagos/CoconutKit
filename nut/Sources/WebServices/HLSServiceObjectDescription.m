@@ -22,7 +22,7 @@
 
 - (id)initWithClassName:(NSString *)className id:(NSString *)id fields:(NSDictionary *)fields
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.className = className;
         self.id = id;
         self.fields = fields;

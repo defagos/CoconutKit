@@ -16,7 +16,7 @@
 
 - (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         m_secondsToSleep = secondsToSleep;
     }
     return self;

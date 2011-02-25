@@ -72,7 +72,7 @@ typedef enum {
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.title = NSLocalizedString(@"Demos", @"Demos");
     }
     return self;

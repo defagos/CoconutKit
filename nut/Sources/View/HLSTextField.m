@@ -76,7 +76,7 @@ static UIScrollView *s_scrollView = nil;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if (self = [super initWithFrame:frame]) {
+    if ((self = [super initWithFrame:frame])) {
         [self initialize];
     }
     return self;
@@ -91,11 +91,6 @@ static UIScrollView *s_scrollView = nil;
 - (void)initialize
 {
     self.minVisibilityDistance = kTextFieldMinVisibilityDistance;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

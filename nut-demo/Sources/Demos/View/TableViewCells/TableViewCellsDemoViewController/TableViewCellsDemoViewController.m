@@ -48,7 +48,7 @@ typedef enum {
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
     }
     return self;

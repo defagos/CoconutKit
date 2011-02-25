@@ -34,7 +34,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         m_useCount = 0;
     }
     return self;

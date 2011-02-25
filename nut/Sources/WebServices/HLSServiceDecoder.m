@@ -10,19 +10,4 @@
 
 @implementation HLSServiceDecoder
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 @end

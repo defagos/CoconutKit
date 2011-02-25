@@ -22,7 +22,7 @@
 
 - (id)initWithId:(NSString *)id
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.id = id;
     }
     return self;

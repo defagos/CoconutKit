@@ -6,13 +6,15 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+#import "HLSViewController.h"
+
 // Forward declarations
 @protocol HLSSingleValuePickerViewControllerDelegate;
 
 /**
  * Designated initializer: init
  */
-@interface HLSSingleValuePickerViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface HLSSingleValuePickerViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     NSArray *m_values;                  // contains NSString objects
     UIPickerView *m_pickerView;

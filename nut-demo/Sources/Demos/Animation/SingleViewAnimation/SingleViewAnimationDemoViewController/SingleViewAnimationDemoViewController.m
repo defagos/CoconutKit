@@ -23,7 +23,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
     }
     return self;

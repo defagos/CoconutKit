@@ -21,7 +21,7 @@
 
 - (id)initWithBody:(NSString *)body forRequestId:(NSString *)requestId
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.body = body;
         self.requestId = requestId;
     }

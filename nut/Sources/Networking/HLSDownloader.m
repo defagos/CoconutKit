@@ -27,7 +27,7 @@ DEFINE_NOTIFICATION(HLSDownloaderFailureNotification);
 
 - (id)initWithURL:(NSURL *)url
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         // Create a request object appropriate for downloading
         NSURLRequest *request = [NSURLRequest requestWithURL:url
                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy

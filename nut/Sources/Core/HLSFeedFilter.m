@@ -26,7 +26,7 @@
 
 - (id)initWithFeed:(HLSFeed *)feed
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.feed = feed;
     }
     return self;

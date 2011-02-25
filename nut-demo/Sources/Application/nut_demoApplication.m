@@ -22,7 +22,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
         self.navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
     }

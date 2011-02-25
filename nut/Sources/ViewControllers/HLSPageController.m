@@ -58,7 +58,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         // Start with no current page
         m_currentPage = PAGE_CONTROLLER_NO_PAGE;
         m_initialPage = PAGE_CONTROLLER_NO_PAGE;

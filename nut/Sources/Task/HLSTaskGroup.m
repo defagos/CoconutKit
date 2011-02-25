@@ -42,7 +42,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.taskSet = [NSMutableSet set];
         self.dependencyMap = [NSMutableDictionary dictionary];
         [self reset];

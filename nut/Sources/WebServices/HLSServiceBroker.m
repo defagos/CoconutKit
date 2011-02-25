@@ -34,7 +34,7 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 
 - (id)initWithSettings:(HLSServiceSettings *)settings
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.settings = settings;
         // TODO: Test against nil when instantiating using class name (nil if the class name is invalid)
         self.aggregator = [[[NSClassFromString(self.settings.aggregatorClassName) alloc] init] autorelease];

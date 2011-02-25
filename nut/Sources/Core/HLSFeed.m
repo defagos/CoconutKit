@@ -75,7 +75,7 @@
 
 - (id)initWithFilter:(HLSFeedFilter *)filter
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.filter = filter;
         [self update];
     }
@@ -117,7 +117,7 @@
 
 - (id)init
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.filteredFeeds = [NSMutableDictionary dictionary];
     }
     return self;

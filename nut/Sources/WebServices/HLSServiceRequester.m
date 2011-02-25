@@ -22,7 +22,7 @@
 
 - (id)initWithRequest:(HLSServiceRequest *)request settings:(HLSServiceSettings *)settings;
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.requestId = request.id;
     }
     return self;

@@ -26,7 +26,7 @@ requesterClassName:(NSString *)requesterClassName
 aggregatorClassName:(NSString *)aggregatorClassName
  decoderClassName:(NSString *)decoderClassName;
 {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.url = url;
         self.requesterClassName = requesterClassName;
         self.aggregatorClassName = aggregatorClassName;
