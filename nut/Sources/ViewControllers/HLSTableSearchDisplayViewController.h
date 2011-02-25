@@ -52,8 +52,14 @@
  * delegate methods to return YES when the table view needs reloading. These methods are called each time the search
  * string or the search scope are changed.
  *
+ * HLSTableSearchDisplayViewController already saves search criteria and restore them after the view has been
+ * unloaded. You do not have to code this mechanism yourself.
+ *
  * This class only implements the standard UISearchDisplayController behavior (scope buttons are only active when a
- * search string has been entered).
+ * search string has been entered). Having scope buttons active even if no search criterium is entered requires
+ * further investigation (it would be nice to implement such behavior using UISearchDisplayController, since otherwise
+ * we must code everything from scratch, with tricky animations requiring access to private implementation details,
+ * layout different on iPhone / iPad, for portrait and landscape orientations, etc.)
  *
  * Remark: If you override viewDidLoad, viewWillAppear, etc., do not forget to call their super counterpart (as usual),
  *         otherwise the behavior is undefined.
