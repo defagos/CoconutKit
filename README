@@ -16,7 +16,7 @@ This creates three .staticframework files in your ~/StaticFrameworks directory.
 To use the library in a project, add a frameworks.txt file in its main directory, containing either
     nut-Release
     nut-Debug
-    nut-SrcDebug
+    nut-Debug-src
 depending on the .staticframework you intend to use (for production code, you must of course use the Release package).
 Then run the link-fmwk.sh command without parameter from the project main directory:
     link-fmwk.sh

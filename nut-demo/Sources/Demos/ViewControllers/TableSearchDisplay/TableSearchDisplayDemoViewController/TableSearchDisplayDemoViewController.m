@@ -53,8 +53,29 @@ typedef enum {
     [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 3GS" type:DeviceTypePhone]];
     [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 4" type:DeviceTypePhone]];
     [data addObject:[DeviceInfo deviceInfoWithName:@"HTC Desire" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5800 XpressMusic" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"BlackBerry Pearl" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"LG Cookie (KP500)" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5310 XpressMusic" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D500" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung E250" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-E700" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung J700" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung S5230" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung T-100" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"LG Shine" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia N95" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy S" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung F480 TouchWiz" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Motorola MING A1200i" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"N-Gage" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D900" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Sony Ericsson W300" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung S8500" type:DeviceTypePhone]];
+    [data addObject:[DeviceInfo deviceInfoWithName:@"HTC Touch" type:DeviceTypePhone]];    
     [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPad" type:DeviceTypeTablet]];
     [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy Tab" type:DeviceTypeTablet]];
+    
     s_data = [[NSArray arrayWithArray:data] retain];
 }
 
@@ -65,6 +86,7 @@ typedef enum {
     if ((self = [super init])) {
         self.title = @"HLSTableSearchDisplayViewController";
         self.searchDelegate = self;
+        self.style = HLSTableSearchStyleTrueScopeButtons;
         
         self.deviceFeed = [[[HLSFeed alloc] init] autorelease];
         self.deviceFeed.entries = s_data;
@@ -94,13 +116,14 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    // Can further customize the search bar (color, scope buttons, etc. from viewDidLoad on)
     self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
                                         NSLocalizedString(@"Music players", @"Music players"),
                                         NSLocalizedString(@"Phones", @"Phones"),
                                         NSLocalizedString(@"Tablets", @"Tablets"),
                                         nil];
     
-    // Trick to show the behavior when added to a navigation controller or shown normally. In a navigation controller,
+    // Trick to show the behavior when added to a navigation controller or when shown normally. In a navigation controller,
     // show a modal button to open the view controller modally
     if (self.navigationController) {
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Modal", @"Modal")
@@ -117,7 +140,8 @@ typedef enum {
                                                                                  action:@selector(closeBarButtonItemClicked:)]
                                                  autorelease];
     }
-
+    
+    // No [tableView reloadData] needed here, the search display controller does it for us
 }
 
 #pragma mark Orientation management
@@ -140,9 +164,12 @@ typedef enum {
     
     // Create the corresponding filter
     self.deviceFeedFilter = [self buildDeviceFeedFilter];
-    
-    // Sync data
-    [self.tableView reloadData];
+}
+
+- (void)tableSearchDisplayViewControllerWillEndSearch:(HLSTableSearchDisplayViewController *)controller;
+{
+    // No search criteria anymore
+    self.deviceFeedFilter = nil;
 }
 
 - (BOOL)tableSearchDisplayViewController:(HLSTableSearchDisplayViewController *)controller 
@@ -151,7 +178,7 @@ typedef enum {
     // Create the corresponding filter
     self.deviceFeedFilter = [self buildDeviceFeedFilter];
     
-    // Trigger a table view reload
+    // Trigger a search result table view reload
     return YES;
 }
 
@@ -161,16 +188,7 @@ typedef enum {
     // Clear the filter
     self.deviceFeedFilter = [self buildDeviceFeedFilter];
     
-    // Trigger a table view reload
-    return YES;
-}
-
-- (BOOL)tableSearchDisplayViewControllerShouldReloadOriginalTable:(HLSTableSearchDisplayViewController *)controller
-{
-    // Create the corresponding filter
-    self.deviceFeedFilter = nil;
-    
-    // Trigger a table view reload
+    // Trigger a search result table view reload
     return YES;
 }
 

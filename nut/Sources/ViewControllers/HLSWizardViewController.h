@@ -17,12 +17,12 @@
  * inheriting from it. As for UIViewController, this class is therefore not meant to be instantiated directly.
  *
  * As for UIViewController, if init is called instead of the designated initalizer, a xib with the same name
- * as the derived class will be searched in the main bundle (the interface can also be created via code, of
- * course).
+ * as the derived class will be searched in the main bundle (the interface can also be created programmatically,
+ * of course).
  *
  * The appearance of the wizard is freely customized using the IBOutlets defined by its public interface,
- * either hooking them using Interface Builder or via code. No cancel mechanism is provided, the subclass can
- * decide whether it wants to display such a button or whether this button will appear in a navigation bar (if
+ * either hooking them using Interface Builder or programmatically. No cancel mechanism is provided, the subclass 
+ * can decide whether it wants to display such a button or whether this button will appear in a navigation bar (if
  * any is available) or on its own view.
  *
  * When trying to move to a next page, and if the view controller currently displayed implements the
