@@ -42,10 +42,16 @@ typedef enum {
 } HLSLoggerLevel;
 
 /**
- * Basic logger facility writing to the console. Currently not thread-safe
+ * Basic logging facility writing to the console. Thread-safe
  *
- * To use a logger, create an environment.plist file and set the "Logger level" property to either
- * DEBUG, INFO, WARN, ERROR or FATAL. Also add the -DDEBUG option to the target "Other C flag" option. 
+ * To enable logging, you can use either the release or debug version of this library, the logging code is in both
+ * (the linker ensures that you do not pay for it if your do not actually use it). To add logging to your project,
+ * use the logging macros above. Those will strip off the logging code for your release builds. Debug builds with
+ * logging enabled must be configured as follows:
+ *   - in your project target settings, add -DDEBUG to the "Other C flags" parameter. This disables logging code
+ *     stripping
+ *   - add an environment.plist file to your project, containing the "Logger level" property (set to either
+ *     DEBUG, INFO, WARN, ERROR or FATAL). This sets the logging level to use
  *
  * Designated initializer: initWithLevel:
  */
@@ -62,7 +68,7 @@ typedef enum {
 - (id)initWithLevel:(HLSLoggerLevel)level;
 
 /**
- * Logging functions
+ * Logging functions; should never be called directly, use the macros instead
  */
 - (void)debug:(NSString *)message;
 - (void)info:(NSString *)message;

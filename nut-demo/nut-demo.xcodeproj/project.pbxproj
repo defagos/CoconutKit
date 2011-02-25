@@ -15,10 +15,6 @@
 		6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */; };
 		6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143AFD130A6DF00075E94C /* StretchableViewController.m */; };
 		6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143AFE130A6DF00075E94C /* StretchableViewController.xib */; };
-		6F6E9C7C1316B6860075DD7A /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9C751316B6860075DD7A /* nut_bootstrap.m */; };
-		6F6E9C7D1316B6860075DD7A /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6E9C761316B6860075DD7A /* nut.framework */; };
-		6F6E9C7E1316B6860075DD7A /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F6E9C781316B6860075DD7A /* nut_Localizable.strings */; };
-		6F6E9C7F1316B6860075DD7A /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6E9C7B1316B6860075DD7A /* nut_HLSSingleValuePickerViewController.xib */; };
 		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
 		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
 		6F7A275D130AE83A00AB1926 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A275C130AE83A00AB1926 /* HeavyViewController.m */; };
@@ -46,6 +42,10 @@
 		6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */; };
 		6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */; };
 		6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */; };
+		6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9219151317D75D00D69AC8 /* nut_bootstrap.m */; };
+		6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9219161317D75D00D69AC8 /* nut.framework */; };
+		6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F9219181317D75D00D69AC8 /* nut_Localizable.strings */; };
+		6F92191F1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -88,11 +88,6 @@
 		6F143AFC130A6DF00075E94C /* StretchableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableViewController.h; sourceTree = "<group>"; };
 		6F143AFD130A6DF00075E94C /* StretchableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableViewController.m; sourceTree = "<group>"; };
 		6F143AFE130A6DF00075E94C /* StretchableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
-		6F6E9C751316B6860075DD7A /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
-		6F6E9C761316B6860075DD7A /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
-		6F6E9C791316B6860075DD7A /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6F6E9C7A1316B6860075DD7A /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
-		6F6E9C7B1316B6860075DD7A /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
 		6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSizeViewController.xib; sourceTree = "<group>"; };
@@ -130,6 +125,11 @@
 		6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
 		6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
+		6F9219151317D75D00D69AC8 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
+		6F9219161317D75D00D69AC8 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
+		6F9219191317D75D00D69AC8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F92191A1317D75D00D69AC8 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */,
-				6F6E9C7D1316B6860075DD7A /* nut.framework in Frameworks */,
+				6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +227,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F6E9C731316B6860075DD7A /* nut-Release.staticframework */,
+				6F9219131317D75D00D69AC8 /* nut-Release.staticframework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -263,34 +263,6 @@
 				6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */,
 			);
 			path = StretchableViewController;
-			sourceTree = "<group>";
-		};
-		6F6E9C731316B6860075DD7A /* nut-Release.staticframework */ = {
-			isa = PBXGroup;
-			children = (
-				6F6E9C741316B6860075DD7A /* Bootstrap */,
-				6F6E9C761316B6860075DD7A /* nut.framework */,
-				6F6E9C771316B6860075DD7A /* Resources */,
-			);
-			name = "nut-Release.staticframework";
-			path = "StaticFrameworks/nut-Release.staticframework";
-			sourceTree = "<group>";
-		};
-		6F6E9C741316B6860075DD7A /* Bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				6F6E9C751316B6860075DD7A /* nut_bootstrap.m */,
-			);
-			path = Bootstrap;
-			sourceTree = "<group>";
-		};
-		6F6E9C771316B6860075DD7A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6F6E9C781316B6860075DD7A /* nut_Localizable.strings */,
-				6F6E9C7B1316B6860075DD7A /* nut_HLSSingleValuePickerViewController.xib */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		6F7A26BE130AA1C200AB1926 /* FixedSizeViewController */ = {
@@ -366,6 +338,34 @@
 				6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */,
 			);
 			path = TextFieldsDemoViewController;
+			sourceTree = "<group>";
+		};
+		6F9219131317D75D00D69AC8 /* nut-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219141317D75D00D69AC8 /* Bootstrap */,
+				6F9219161317D75D00D69AC8 /* nut.framework */,
+				6F9219171317D75D00D69AC8 /* Resources */,
+			);
+			name = "nut-Release.staticframework";
+			path = "StaticFrameworks/nut-Release.staticframework";
+			sourceTree = "<group>";
+		};
+		6F9219141317D75D00D69AC8 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219151317D75D00D69AC8 /* nut_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F9219171317D75D00D69AC8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219181317D75D00D69AC8 /* nut_Localizable.strings */,
+				6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
@@ -777,8 +777,8 @@
 				6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */,
 				6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
 				6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6F6E9C7E1316B6860075DD7A /* nut_Localizable.strings in Resources */,
-				6F6E9C7F1316B6860075DD7A /* nut_HLSSingleValuePickerViewController.xib in Resources */,
+				6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */,
+				6F92191F1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,18 +817,18 @@
 				6F7A3393130C558B00AB1926 /* FooterView.m in Sources */,
 				6F7A33E2130C6D2A00AB1926 /* ModalWrapperViewController.m in Sources */,
 				6F7A39D1130D865300AB1926 /* TextFieldsDemoViewController.m in Sources */,
-				6F6E9C7C1316B6860075DD7A /* nut_bootstrap.m in Sources */,
+				6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6F6E9C781316B6860075DD7A /* nut_Localizable.strings */ = {
+		6F9219181317D75D00D69AC8 /* nut_Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6F6E9C791316B6860075DD7A /* en */,
-				6F6E9C7A1316B6860075DD7A /* fr */,
+				6F9219191317D75D00D69AC8 /* en */,
+				6F92191A1317D75D00D69AC8 /* fr */,
 			);
 			name = nut_Localizable.strings;
 			sourceTree = "<group>";
@@ -859,6 +859,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = nut_demo_Prefix.pch;
 				INFOPLIST_FILE = "nut_demo-Info.plist";
+				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = "nut-demo";
 			};
 			name = Debug;
@@ -898,7 +899,6 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				OTHER_CFLAGS = "-DDEBUG";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

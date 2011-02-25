@@ -39,34 +39,39 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 {
 	static HLSLogger *s_instance = nil;
 	
+    // Double-checked locking pattern
 	if (! s_instance) {
-		// Read the environment.plist file
-		NSString *envPlistPath = [[NSBundle mainBundle] pathForResource:@"environment" ofType:@"plist"];
-		NSDictionary *envProperties = [[[NSDictionary alloc] initWithContentsOfFile:envPlistPath] 
-									   autorelease];
-		
-		// Create a logger with the corresponding level
-		NSString *levelName = [envProperties valueForKey:@"Logger level"];
-		HLSLoggerLevel level;
-		if ([levelName isEqual:kLoggerModeDebug.name]) {
-			level = HLSLoggerLevelDebug;
-		}
-		else if ([levelName isEqual:kLoggerModeInfo.name]) {
-			level = HLSLoggerLevelInfo;		
-		}
-		else if ([levelName isEqual:kLoggerModeWarn.name]) {
-			level = HLSLoggerLevelWarn;
-		}
-		else if ([levelName isEqual:kLoggerModeError.name]) {
-			level = HLSLoggerLevelError;
-		}
-		else if ([levelName isEqual:kLoggerModeFatal.name]) {
-			level = HLSLoggerLevelFatal;
-		}
-		else {
-			level = HLSLoggerLevelNone;
-		}
-		s_instance = [[HLSLogger alloc] initWithLevel:level];
+        @synchronized(self) {
+            if (! s_instance) {
+                // Read the environment.plist file
+                NSString *envPlistPath = [[NSBundle mainBundle] pathForResource:@"environment" ofType:@"plist"];
+                NSDictionary *envProperties = [[[NSDictionary alloc] initWithContentsOfFile:envPlistPath] 
+                                               autorelease];
+                
+                // Create a logger with the corresponding level
+                NSString *levelName = [envProperties valueForKey:@"Logger level"];
+                HLSLoggerLevel level;
+                if ([levelName isEqual:kLoggerModeDebug.name]) {
+                    level = HLSLoggerLevelDebug;
+                }
+                else if ([levelName isEqual:kLoggerModeInfo.name]) {
+                    level = HLSLoggerLevelInfo;		
+                }
+                else if ([levelName isEqual:kLoggerModeWarn.name]) {
+                    level = HLSLoggerLevelWarn;
+                }
+                else if ([levelName isEqual:kLoggerModeError.name]) {
+                    level = HLSLoggerLevelError;
+                }
+                else if ([levelName isEqual:kLoggerModeFatal.name]) {
+                    level = HLSLoggerLevelFatal;
+                }
+                else {
+                    level = HLSLoggerLevelNone;
+                }
+                s_instance = [[HLSLogger alloc] initWithLevel:level];                
+            }
+        }
 	}
 	return s_instance;
 }
@@ -100,6 +105,8 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 	}
 	
 	NSString *fullLogEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
+    
+    // NSLog is thread-safe
 	NSLog(@"%@", fullLogEntry);
 }
 

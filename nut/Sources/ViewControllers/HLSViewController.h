@@ -41,6 +41,11 @@ typedef enum {
  *   }
  *   // Rest of the implementation here
  *
+ * This class also provides a way to debug view controller events (lifecycle, rotation, memory warnings). You must
+ * use the debug version of the library (obtained by compiling it with -DDEBUG added to your target "Other C flags"),
+ * and set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use 
+ * the console when running your application to have a look at view controller events.
+ *
  * Designated initializer: initWithNibName:bundle:
  */
 @interface HLSViewController : UIViewController {
@@ -54,10 +59,10 @@ typedef enum {
  * code of a view controller into two blocks:
  *   - in releaseViews: Release all views created when loading the view, and retained by the view controller. If your view controller 
  *     subclass retains view controllers to avoid creating their views too often ("view caching"), also set the views of thesee view 
- *     controllers to nil in this method
+ *     controllers to nil in this method. If you are subclassing a class already subclassing HLSViewController, always send the releaseView 
+ *     message to super first.
  *   - in dealloc: Release all other resources owned by the view controller (model objects, other view controllers, views
  *     existing before the view is loaded, etc.)
- * If you are subclassing a class already subclassing HLSViewController, always send the releaseView message to super first.
  */
 - (void)releaseViews;
 
