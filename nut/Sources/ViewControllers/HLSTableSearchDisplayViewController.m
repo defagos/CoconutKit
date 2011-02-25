@@ -16,9 +16,6 @@
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UISearchDisplayController *searchController;      // Not called searchDisplayController to avoid conflicts with 
                                                                                 // UIViewController's searchViewController property
-
-- (void)scopeButtonsSegmentedControlValueChanged:(id)sender;
-
 @end
 
 @implementation HLSTableSearchDisplayViewController
@@ -156,21 +153,6 @@
 {
     MISSING_METHOD_IMPLEMENTATION();
     return nil;
-}
-
-#pragma mark Event callbacks
-
-- (void)scopeButtonsSegmentedControlValueChanged:(id)sender
-{
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewController:shouldReloadTableForSearchScope:)]) {
-        UISegmentedControl *segmentedControl = sender;
-        // See tableSearchDisplayViewController:shouldReloadTableForSearchScope: documentation: If the method returns YES, we
-        // must reload the table view
-        if ([self.searchDelegate tableSearchDisplayViewController:self 
-                                  shouldReloadTableForSearchScope:[segmentedControl selectedSegmentIndex]]) {
-            [self.searchController.searchResultsTableView reloadData];
-        }
-    }  
 }
 
 @end
