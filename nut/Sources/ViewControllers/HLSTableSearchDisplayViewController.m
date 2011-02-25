@@ -52,8 +52,6 @@
     return self.searchController.searchResultsTableView;
 }
 
-@synthesize style = m_style;
-
 @synthesize searchController = m_searchController;
 
 @synthesize searchDelegate = m_searchDelegate;
@@ -100,22 +98,6 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
 {
-    // First time since the view has been loaded (or reloaded after unload)
-    if (self.style == HLSTableSearchStyleTrueScopeButtons && ! m_scopeButtonHookInstalled) {
-        // The segmented control for scope buttons (if any) has now been added as subview. Find it to hook another custom
-        // evebt handler :-)
-        for (UIView *view in self.searchBar.subviews) {
-            if ([view isKindOfClass:[UISegmentedControl class]]) {
-                UISegmentedControl *scopeButtonsSegmentedControl = (UISegmentedControl *)view;
-                [scopeButtonsSegmentedControl addTarget:self
-                                                 action:@selector(scopeButtonsSegmentedControlValueChanged:) 
-                                       forControlEvents:UIControlEventValueChanged];
-                break;
-            }
-        } 
-        m_scopeButtonHookInstalled = YES;
-    }
-    
     if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerWillBeginSearch:)]) {
         [self.searchDelegate tableSearchDisplayViewControllerWillBeginSearch:self];
     }    

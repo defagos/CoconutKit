@@ -86,7 +86,6 @@ typedef enum {
     if ((self = [super init])) {
         self.title = @"HLSTableSearchDisplayViewController";
         self.searchDelegate = self;
-        self.style = HLSTableSearchStyleTrueScopeButtons;
         
         self.deviceFeed = [[[HLSFeed alloc] init] autorelease];
         self.deviceFeed.entries = s_data;
