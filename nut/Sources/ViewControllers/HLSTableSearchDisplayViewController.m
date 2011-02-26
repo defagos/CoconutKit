@@ -27,7 +27,6 @@
 {
     self.searchText = nil;
     self.searchController = nil;
-    self.searchDelegate = nil;
     
     [super dealloc];
 }
@@ -54,8 +53,6 @@
 @synthesize searchText = m_searchText;
 
 @synthesize searchController = m_searchController;
-
-@synthesize searchDelegate = m_searchDelegate;
 
 #pragma mark View lifecycle
 
@@ -118,58 +115,64 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
 {
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerWillBeginSearch:)]) {
-        [self.searchDelegate tableSearchDisplayViewControllerWillBeginSearch:self];
-    }    
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
 }
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
     m_searchInterfaceActive = YES;
-    
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerDidBeginSearch:)]) {
-        [self.searchDelegate tableSearchDisplayViewControllerDidBeginSearch:self];
-    }
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerWillEndSearch:)]) {
-        [self.searchDelegate tableSearchDisplayViewControllerWillEndSearch:self];
-    }
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
 }
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     m_searchInterfaceActive = NO;
-    
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewControllerDidEndSearch:)]) {
-        [self.searchDelegate tableSearchDisplayViewControllerDidEndSearch:self];
-    }    
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView
+{
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     self.searchText = searchString;
-    
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewController:shouldReloadTableForSearchString:)]) {
-        return [self.searchDelegate tableSearchDisplayViewController:self shouldReloadTableForSearchString:searchString];
-    }
-    else {
-        return YES;
-    }
+    return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     m_selectedScopeButtonIndex = searchOption;
-    
-    if ([self.searchDelegate respondsToSelector:@selector(tableSearchDisplayViewController:shouldReloadTableForSearchScope:)]) {
-        return [self.searchDelegate tableSearchDisplayViewController:self shouldReloadTableForSearchScope:searchOption];
-    }
-    else {
-        return YES;
-    }
+    return YES;
 }
 
 #pragma mark UITableViewDataSource protocol implementation

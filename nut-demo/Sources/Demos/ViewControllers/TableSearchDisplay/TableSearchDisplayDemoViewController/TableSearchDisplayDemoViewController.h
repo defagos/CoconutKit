@@ -9,11 +9,10 @@
 // Forward declarations
 @class DeviceFeedFilter;
 
-@interface TableSearchDisplayDemoViewController : HLSTableSearchDisplayViewController <HLSTableSearchDisplayViewControllerDelegate> {
+@interface TableSearchDisplayDemoViewController : HLSTableSearchDisplayViewController {
 @private
     HLSFeed *m_deviceFeed;
     DeviceFeedFilter *m_deviceFeedFilter;
-    TableSearchDisplayDemoViewController *m_parentNonModalViewController;         // Reference to the view controller (of the same kind) when presenting modally
 }
 
 @end
