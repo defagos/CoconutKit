@@ -142,7 +142,7 @@ typedef enum {
 
 /**
  * Set the view controller to display as inset. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = old inset view, second view = new inset view)
+ * objects (first view = old inset view, second view = new inset view). The new inset view is animated on top of the old one
  * Remark: If you want to customize the inset mutator in subclasses, you only have to override this method (be sure to call the super
  *         method in your implementation, though). Other inset mutators are implemented in terms of this method and do not need to
  *         be overridden as well.
