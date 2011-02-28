@@ -40,6 +40,10 @@
 		6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */; };
 		6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */; };
 		6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */; };
+		6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */; };
+		6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */; };
+		6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */; };
+		6F84AF5C131BB0A6002C3D05 /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */; };
 		6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9219151317D75D00D69AC8 /* nut_bootstrap.m */; };
 		6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9219161317D75D00D69AC8 /* nut.framework */; };
 		6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F9219181317D75D00D69AC8 /* nut_Localizable.strings */; };
@@ -120,6 +124,12 @@
 		6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
 		6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
+		6F84AF2B131BAC71002C3D05 /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
+		6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
+		6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
+		6F84AF58131BB09A002C3D05 /* WizardPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardPageViewController.h; sourceTree = "<group>"; };
+		6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardPageViewController.m; sourceTree = "<group>"; };
+		6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
 		6F9219151317D75D00D69AC8 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
 		6F9219161317D75D00D69AC8 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
 		6F9219191317D75D00D69AC8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -325,6 +335,35 @@
 			path = TextFieldsDemoViewController;
 			sourceTree = "<group>";
 		};
+		6F84AF27131BAC39002C3D05 /* Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				6F84AF57131BB08E002C3D05 /* WizardPageViewController */,
+				6F84AF2A131BAC5F002C3D05 /* WizardDemoViewController */,
+			);
+			path = Wizard;
+			sourceTree = "<group>";
+		};
+		6F84AF2A131BAC5F002C3D05 /* WizardDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F84AF2B131BAC71002C3D05 /* WizardDemoViewController.h */,
+				6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */,
+				6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */,
+			);
+			path = WizardDemoViewController;
+			sourceTree = "<group>";
+		};
+		6F84AF57131BB08E002C3D05 /* WizardPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F84AF58131BB09A002C3D05 /* WizardPageViewController.h */,
+				6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */,
+				6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */,
+			);
+			path = WizardPageViewController;
+			sourceTree = "<group>";
+		};
 		6F9219131317D75D00D69AC8 /* nut-Release.staticframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +430,7 @@
 			children = (
 				6F143A97130999CA0075E94C /* Placeholder */,
 				6FBDB1B21308F925004B9617 /* TableSearchDisplay */,
+				6F84AF27131BAC39002C3D05 /* Wizard */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -762,6 +802,8 @@
 				6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
 				6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */,
 				6F92191F1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
+				6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */,
+				6F84AF5C131BB0A6002C3D05 /* WizardPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +842,8 @@
 				6F7A3393130C558B00AB1926 /* FooterView.m in Sources */,
 				6F7A39D1130D865300AB1926 /* TextFieldsDemoViewController.m in Sources */,
 				6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */,
+				6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */,
+				6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,8 @@
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "WizardDemoViewController.h"
+#import "WizardPageViewController.h"
 
 // Categories
 typedef enum {
@@ -344,7 +346,17 @@ typedef enum {
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
-
+                    WizardDemoViewController *demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
+                    demoViewController.adjustingInset = YES;
+                    
+                    WizardPageViewController *wizardPageViewController1 = [[[WizardPageViewController alloc] init] autorelease];
+                    WizardPageViewController *wizardPageViewController2 = [[[WizardPageViewController alloc] init] autorelease];
+                    WizardPageViewController *wizardPageViewController3 = [[[WizardPageViewController alloc] init] autorelease];
+                    demoViewController.viewControllers = [NSArray arrayWithObjects:wizardPageViewController1,
+                                                          wizardPageViewController2,
+                                                          wizardPageViewController3,
+                                                          nil];                    
+                    [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
                     
