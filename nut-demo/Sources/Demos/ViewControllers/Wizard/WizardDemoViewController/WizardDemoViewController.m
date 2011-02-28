@@ -8,6 +8,8 @@
 
 #import "WizardDemoViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
+
 @implementation WizardDemoViewController
 
 #pragma mark View lifecycle
@@ -16,6 +18,7 @@
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.title = @"WizardDemoViewController";
+        self.delegate = self;
     }
     return self;
 }
@@ -43,6 +46,14 @@
     }
     
     return YES;
+}
+
+#pragma mark HLSWizardViewControllerDelegate protocol implementation
+
+- (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
 @end

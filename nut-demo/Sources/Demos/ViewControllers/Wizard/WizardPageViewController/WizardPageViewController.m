@@ -8,9 +8,26 @@
 
 #import "WizardPageViewController.h"
 
+#import "Customer.h"
+
+@interface WizardPageViewController ()
+
+@property (nonatomic, retain) Customer *customer;
+
+- (void)updateViewFromModel;
+- (void)updateModelFromView;
+
+@end
+
 @implementation WizardPageViewController
 
 #pragma mark Object creation and destruction
+
+- (void)dealloc
+{
+    self.customer = nil;
+    [super dealloc];
+}
 
 - (void)releaseViews
 {
@@ -34,6 +51,8 @@
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize customer = m_customer;
 
 @synthesize customerInformationLabel = m_customerInformationLabel;
 
@@ -92,6 +111,35 @@
     self.cityTextField.delegate = self;
     self.stateTextField.delegate = self;
     self.countryTextField.delegate = self;
+    
+    [self updateViewFromModel];
+}
+
+#pragma mark Model synchronization methods
+
+- (void)updateViewFromModel
+{
+    self.firstNameTextField.text = self.customer.firstName;
+    self.lastNameTextField.text = self.customer.lastName;
+    self.emailTextField.text = self.customer.email;
+    self.streetTextField.text = self.customer.street;
+    self.cityTextField.text = self.customer.city;
+    self.stateTextField.text = self.customer.state;
+    self.countryTextField.text = self.customer.country;
+}
+
+- (void)updateModelFromView
+{
+    Customer *customer = [[[Customer alloc] init] autorelease];
+    customer.firstName = self.firstNameTextField.text;
+    customer.lastName = self.lastNameTextField.text;
+    customer.email = self.emailTextField.text;
+    customer.street = self.streetTextField.text;
+    customer.city = self.cityTextField.text;
+    customer.state = self.stateTextField.text;
+    customer.country = self.countryTextField.text;
+    
+    self.customer = customer;
 }
 
 #pragma mark HLSValidable protocol implementation
@@ -126,13 +174,16 @@
         return NO;        
     }
     
+    // All fields valid; save into model object
+    [self updateModelFromView];
+    
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Congratulations", @"Congratulations")
                                                          message:NSLocalizedString(@"All fields have been validated", @"All fields have been validated") 
                                                         delegate:nil
                                                cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
                                                otherButtonTitles:nil]
                               autorelease];
-    [alertView show];    
+    [alertView show];
     return YES;
 }
 

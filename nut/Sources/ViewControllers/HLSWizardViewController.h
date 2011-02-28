@@ -75,7 +75,7 @@ typedef enum {
 
 @end
 
-@protocol HLSWizardViewControllerDelegate <NSObject>
+@protocol HLSWizardViewControllerDelegate <HLSPlaceholderViewControllerDelegate>
 @optional
 
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController;

@@ -6,8 +6,12 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+// Forward declarations
+@class Customer;
+
 @interface WizardPageViewController : HLSViewController <HLSValidable, UITextFieldDelegate> {
 @private
+    Customer *m_customer;
     UILabel *m_customerInformationLabel;
     UILabel *m_firstNameLabel;
     HLSTextField *m_firstNameTextField;

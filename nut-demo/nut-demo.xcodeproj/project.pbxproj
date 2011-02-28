@@ -44,6 +44,7 @@
 		6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */; };
 		6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */; };
 		6F84AF5C131BB0A6002C3D05 /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */; };
+		6F84B23F131BF53B002C3D05 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84B23E131BF53B002C3D05 /* Customer.m */; };
 		6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9219151317D75D00D69AC8 /* nut_bootstrap.m */; };
 		6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9219161317D75D00D69AC8 /* nut.framework */; };
 		6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F9219181317D75D00D69AC8 /* nut_Localizable.strings */; };
@@ -130,6 +131,8 @@
 		6F84AF58131BB09A002C3D05 /* WizardPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardPageViewController.h; sourceTree = "<group>"; };
 		6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardPageViewController.m; sourceTree = "<group>"; };
 		6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
+		6F84B23D131BF53B002C3D05 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		6F84B23E131BF53B002C3D05 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		6F9219151317D75D00D69AC8 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
 		6F9219161317D75D00D69AC8 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
 		6F9219191317D75D00D69AC8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -338,6 +341,7 @@
 		6F84AF27131BAC39002C3D05 /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				6F84B23C131BF534002C3D05 /* Customer */,
 				6F84AF57131BB08E002C3D05 /* WizardPageViewController */,
 				6F84AF2A131BAC5F002C3D05 /* WizardDemoViewController */,
 			);
@@ -362,6 +366,15 @@
 				6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */,
 			);
 			path = WizardPageViewController;
+			sourceTree = "<group>";
+		};
+		6F84B23C131BF534002C3D05 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				6F84B23D131BF53B002C3D05 /* Customer.h */,
+				6F84B23E131BF53B002C3D05 /* Customer.m */,
+			);
+			path = Customer;
 			sourceTree = "<group>";
 		};
 		6F9219131317D75D00D69AC8 /* nut-Release.staticframework */ = {
@@ -844,6 +857,7 @@
 				6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */,
 				6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */,
 				6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */,
+				6F84B23F131BF53B002C3D05 /* Customer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
