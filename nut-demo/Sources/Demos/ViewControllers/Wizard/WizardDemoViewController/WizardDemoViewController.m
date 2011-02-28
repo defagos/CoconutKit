@@ -12,9 +12,19 @@
 
 #pragma mark View lifecycle
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        self.title = @"WizardDemoViewController";
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;
     
     [self.previousButton setTitle:NSLocalizedString(@"Previous", @"Previous") 
                          forState:UIControlStateNormal];

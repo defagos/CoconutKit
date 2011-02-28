@@ -8,13 +8,18 @@
 
 #import "HLSWizardViewController.h"
 
+#import "HLSLogger.h"
 #import "HLSValidable.h"
 
 const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
+- (void)initialize;
+
 @property (nonatomic, assign) NSInteger currentPage;
+
+- (void)refreshWizardInterface;
 
 - (BOOL)validatePage:(NSInteger)page;
 
@@ -31,9 +36,24 @@ const NSInteger kWizardViewControllerNoPage = -1;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        m_currentPage = kWizardViewControllerNoPage;
+        [self initialize];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self initialize];
+    }
+    return self;
+}
+
+// Common initialization code
+- (void)initialize
+{
+    m_currentPage = kWizardViewControllerNoPage;
+    m_wizardTransitionStyle = HLSWizardTransitionStyleNone;
 }
 
 - (void)dealloc
@@ -57,6 +77,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.previousButton addTarget:self 
                             action:@selector(previousButtonClicked:) 
                   forControlEvents:UIControlEventTouchUpInside];
@@ -67,21 +88,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
                         action:@selector(doneButtonClicked:) 
               forControlEvents:UIControlEventTouchUpInside];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if ([self.delegate respondsToSelector:@selector(wizardViewController:didDisplayPage:)]) {
-        id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
-        [delegate wizardViewController:self didDisplayPage:self.currentPage];
-    }
+    [self refreshWizardInterface];
 }
 
 #pragma mark Accessors and mutators
@@ -105,11 +112,13 @@ const NSInteger kWizardViewControllerNoPage = -1;
     [m_viewControllers release];
     m_viewControllers = [viewControllers retain];
     
-    // Start with the first page again (need to reset to no page first so that displayPage always can detect
-    // that the page has changed)
-    self.currentPage = kWizardViewControllerNoPage;
-    self.currentPage = 0;
+    // Start with the first page
+    if ([m_viewControllers count] > 0) {
+        self.currentPage = 0;   
+    }    
 }
+
+@synthesize wizardTransitionStyle = m_wizardTransitionStyle;
 
 @synthesize currentPage = m_currentPage;
 
@@ -119,39 +128,89 @@ const NSInteger kWizardViewControllerNoPage = -1;
     if (currentPage == m_currentPage) {
         return;
     }
-    
+        
+    // Update the value and refresh the UI accordingly
+    NSInteger oldCurrentPage = m_currentPage;
     m_currentPage = currentPage;
+    [self refreshWizardInterface];
     
-    // Sanitize input (deals with the "no page" case)
-    if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
+    // If no page selected, done
+    if (m_currentPage == kWizardViewControllerNoPage) {
         return;
     }
     
-    // Refresh the display
-    [self reloadData];
-    
-    // Notify the delegate
-    if ([self.delegate respondsToSelector:@selector(wizardViewController:didDisplayPage:)]) {
-        id<HLSWizardViewControllerDelegate> delegate = (id<HLSWizardViewControllerDelegate>)self.delegate;
-        [delegate wizardViewController:self didDisplayPage:m_currentPage];
+    // Sanitize input
+    if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
+        logger_error(@"Incorrect page number %d, must lie between 0 and %d", currentPage, [self.viewControllers count]);
+        return;
     }
+    
+    // Find the transition effect to apply
+    HLSTransitionStyle transitionStyle;
+    switch (self.wizardTransitionStyle) {
+        case HLSWizardTransitionStyleNone: {
+            transitionStyle = HLSTransitionStyleNone;
+            break;
+        }
+            
+        case HLSWizardTransitionStyleCrossDissolve: {
+            transitionStyle = HLSTransitionStyleCrossDissolve;
+            break;
+        }
+            
+        case HLSWizardTransitionStylePushHorizontally: {
+            if (m_currentPage > oldCurrentPage) {
+                transitionStyle = HLSTransitionStylePushFromRight;
+            }
+            else {
+                transitionStyle = HLSTransitionStylePushFromLeft;
+            }
+            break;
+        }
+            
+        default: {
+            logger_error(@"Unknown transition style");
+            transitionStyle = HLSTransitionStyleNone;
+            break;
+        }            
+    }
+    
+    // Display the current page
+    UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
+    [self setInsetViewController:viewController withTransitionStyle:transitionStyle];
 }
 
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
 {
-    // Check that a page is currently selected
-    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        self.insetViewController = nil;
-        self.doneButton.hidden = YES;
-        self.previousButton.hidden = YES;
-        self.nextButton.hidden = YES;
+    // Reload the current page content (if supported)
+    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
+    if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
+        UIViewController<HLSReloadable> *reloadableViewController = viewController;
+        [reloadableViewController reloadData];
+    }
+}
+
+#pragma mark Refreshing the UI
+
+- (void)refreshWizardInterface
+{
+    // Reset UI elements
+    self.doneButton.hidden = YES;
+    self.previousButton.hidden = YES;
+    self.nextButton.hidden = YES;            
+    
+    // If no page selected, done
+    if (self.currentPage == kWizardViewControllerNoPage) {
         return;
     }
     
-    // Display the current page
-    self.insetViewController = [self.viewControllers objectAtIndex:self.currentPage];
+    // Sanitize input
+    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
+        logger_error(@"Incorrect page number %d, must lie between 0 and %d", self.currentPage, [self.viewControllers count]);
+        return;
+    }
     
     // Done button on last page only
     if (self.currentPage == [self.viewControllers count] - 1) {
@@ -175,14 +234,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     }
     else {
         self.nextButton.hidden = YES;
-    }
-    
-    // Reload the current page content (if supported)
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-    if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        UIViewController<HLSReloadable> *reloadableViewController = viewController;
-        [reloadableViewController reloadData];
-    }
+    }    
 }
 
 #pragma mark Handling pages
@@ -191,6 +243,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input (deals with the "no page" case)
     if (page < 0 || page >= [self.viewControllers count]) {
+        logger_error(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
         return YES;
     }
     
@@ -206,10 +259,11 @@ const NSInteger kWizardViewControllerNoPage = -1;
     }
 }
 
-- (void)moveToPage:(NSUInteger)page
+- (void)moveToPage:(NSInteger)page
 {
-    // Sanitize input (unsigned value, no < 0 test here)
-    if (page > [self.viewControllers count]) {
+    // Sanitize input
+    if (page < 0 || page >= [self.viewControllers count]) {
+        logger_error(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
         return;
     }
     
