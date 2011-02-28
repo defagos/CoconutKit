@@ -63,7 +63,7 @@ typedef enum {
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
-    ViewControllersDemoIndexPageController,
+//    ViewControllersDemoIndexPageController,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
@@ -244,12 +244,12 @@ typedef enum {
                     cell.textLabel.text = @"HLSTableSearchDisplayController";
                     break;
                 }
-                    
+#if 0
                 case ViewControllersDemoIndexPageController: {
                     cell.textLabel.text = @"HLSPageController";
                     break;
                 }
-                    
+#endif                    
                 default: {
                     return nil;
                     break;
@@ -365,12 +365,12 @@ typedef enum {
                     [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }
-                    
+#if 0
                 case ViewControllersDemoIndexPageController: {
 
                     break;
                 }
-                    
+#endif                    
                 default: {
                     return;
                     break;
