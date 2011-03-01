@@ -8,8 +8,8 @@
 
 #import "HLSTaskOperation.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 #import "HLSTask+Friend.h"
 #import "HLSTaskGroup+Friend.h"
 #import "HLSTaskManager+Friend.h"

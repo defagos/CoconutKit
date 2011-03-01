@@ -8,7 +8,7 @@
 
 #import "HLSServiceBoundArray.h"
 
-#import "HLSRuntimeChecks.h"
+#import "HLSAssert.h"
 
 DEFINE_NOTIFICATION(HLSServiceBoundArrayUpdatedNotification);
 DEFINE_NOTIFICATION(HLSServiceBoundArrayNetworkFailureNotification);

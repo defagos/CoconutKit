@@ -8,8 +8,8 @@
 
 #import "HLSConverters.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 
 @implementation HLSConverters
 

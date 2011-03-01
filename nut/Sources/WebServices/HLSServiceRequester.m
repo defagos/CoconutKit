@@ -8,7 +8,7 @@
 
 #import "HLSServiceRequester.h"
 
-#import "HLSRuntimeChecks.h"
+#import "HLSAssert.h"
 
 @interface HLSServiceRequester ()
 

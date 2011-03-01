@@ -10,7 +10,6 @@
 		6F21D4211245565400252AF1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F21D4201245565400252AF1 /* libz.dylib */; };
 		6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D4341246163A00252AF1 /* HLSFloat.h */; };
 		6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D4351246163A00252AF1 /* HLSFloat.m */; };
-		6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D438124617BB00252AF1 /* HLSAssert.h */; };
 		6F248A4D129180FB000A6996 /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */; };
 		6F248A4E129180FB000A6996 /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */; };
 		6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28629A12658CA800D04F08 /* HLSValidators.h */; };
@@ -40,7 +39,8 @@
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */; };
 		6F7A34C1130D02AB00AB1926 /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A34BF130D02AB00AB1926 /* HLSKeyboardInformation.m */; };
-		6F84B33F131CFF56002C3D05 /* HLSRuntimeChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84B33E131CFF56002C3D05 /* HLSRuntimeChecks.m */; };
+		6F84B527131D2EFE002C3D05 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F84B525131D2EFE002C3D05 /* HLSAssert.h */; };
+		6F84B528131D2EFE002C3D05 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84B526131D2EFE002C3D05 /* HLSAssert.m */; };
 		6F8D090D123F51DF00FCF2AF /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0909123F51DF00FCF2AF /* HLSAnimationStep.h */; };
 		6F8D090E123F51DF00FCF2AF /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D090A123F51DF00FCF2AF /* HLSAnimationStep.m */; };
 		6F8D0913123F51FD00FCF2AF /* HLSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0911123F51FD00FCF2AF /* HLSLogger.h */; };
@@ -83,7 +83,6 @@
 		6F8D096D123F53B200FCF2AF /* HLSOrientationCloner.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */; };
 		6F8D096E123F53B200FCF2AF /* HLSReloadable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0961123F53B200FCF2AF /* HLSReloadable.h */; };
 		6F8D096F123F53B200FCF2AF /* HLSStandardWidgetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */; };
-		6F8D0972123F53B200FCF2AF /* HLSRuntimeChecks.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6F8FA7BA131650BB003886FB /* NSArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8FA7B8131650BB003886FB /* NSArray+HLSExtensions.h */; };
@@ -135,7 +134,6 @@
 		6F21D4201245565400252AF1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
-		6F21D438124617BB00252AF1 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSUserInterfaceLock.h; sourceTree = "<group>"; };
 		6F248A4C129180FB000A6996 /* HLSUserInterfaceLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSUserInterfaceLock.m; sourceTree = "<group>"; };
 		6F28629A12658CA800D04F08 /* HLSValidators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidators.h; sourceTree = "<group>"; };
@@ -166,7 +164,8 @@
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
 		6F7A34BF130D02AB00AB1926 /* HLSKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKeyboardInformation.m; sourceTree = "<group>"; };
-		6F84B33E131CFF56002C3D05 /* HLSRuntimeChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeChecks.m; sourceTree = "<group>"; };
+		6F84B525131D2EFE002C3D05 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
+		6F84B526131D2EFE002C3D05 /* HLSAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAssert.m; sourceTree = "<group>"; };
 		6F8D0909123F51DF00FCF2AF /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
 		6F8D090A123F51DF00FCF2AF /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
 		6F8D0911123F51FD00FCF2AF /* HLSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLogger.h; sourceTree = "<group>"; };
@@ -209,7 +208,6 @@
 		6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOrientationCloner.h; sourceTree = "<group>"; };
 		6F8D0961123F53B200FCF2AF /* HLSReloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSReloadable.h; sourceTree = "<group>"; };
 		6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardWidgetConstants.h; sourceTree = "<group>"; };
-		6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntimeChecks.h; sourceTree = "<group>"; };
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F8D09A8123F5ECF00FCF2AF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -440,7 +438,8 @@
 		6F8D0908123F4FF500FCF2AF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F21D438124617BB00252AF1 /* HLSAssert.h */,
+				6F84B525131D2EFE002C3D05 /* HLSAssert.h */,
+				6F84B526131D2EFE002C3D05 /* HLSAssert.m */,
 				6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */,
 				6FAF57841248B8F300A8B23E /* HLSConverters.h */,
 				6FAF57851248B8F300A8B23E /* HLSConverters.m */,
@@ -452,8 +451,6 @@
 				6F8D095F123F53B200FCF2AF /* HLSNotifications.m */,
 				6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */,
 				6F8D0961123F53B200FCF2AF /* HLSReloadable.h */,
-				6F8D0965123F53B200FCF2AF /* HLSRuntimeChecks.h */,
-				6F84B33E131CFF56002C3D05 /* HLSRuntimeChecks.m */,
 				6F8D0962123F53B200FCF2AF /* HLSStandardWidgetConstants.h */,
 				6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */,
 				6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */,
@@ -555,9 +552,7 @@
 				6F8D096D123F53B200FCF2AF /* HLSOrientationCloner.h in Headers */,
 				6F8D096E123F53B200FCF2AF /* HLSReloadable.h in Headers */,
 				6F8D096F123F53B200FCF2AF /* HLSStandardWidgetConstants.h in Headers */,
-				6F8D0972123F53B200FCF2AF /* HLSRuntimeChecks.h in Headers */,
 				6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */,
-				6F21D43A124617BB00252AF1 /* HLSAssert.h in Headers */,
 				6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */,
 				6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */,
 				6F28629C12658CA800D04F08 /* HLSValidators.h in Headers */,
@@ -595,6 +590,7 @@
 				6F8FA7DB13165AB2003886FB /* NSString+HLSExtensions.h in Headers */,
 				6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */,
 				6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */,
+				6F84B527131D2EFE002C3D05 /* HLSAssert.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +698,7 @@
 				6F8FA7DC13165AB2003886FB /* NSString+HLSExtensions.m in Sources */,
 				6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */,
 				6F6E9A0A1316997E0075DD7A /* NSData+HLSExtensions.m in Sources */,
-				6F84B33F131CFF56002C3D05 /* HLSRuntimeChecks.m in Sources */,
+				6F84B528131D2EFE002C3D05 /* HLSAssert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,8 @@
 
 #import "HLSSingleValuePicker.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 
 @interface HLSSingleValuePicker ()
 

@@ -15,7 +15,6 @@ HLSPageController.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRequester.h
-HLSRuntimeChecks.h
 HLSServiceAggregator.h
 HLSServiceAnswer.h
 HLSServiceBoundArray.h

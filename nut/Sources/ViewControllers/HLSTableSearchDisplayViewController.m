@@ -8,7 +8,7 @@
 
 #import "HLSTableSearchDisplayViewController.h"
 
-#import "HLSRuntimeChecks.h"
+#import "HLSAssert.h"
 #import "HLSStandardWidgetConstants.h"
 
 @interface HLSTableSearchDisplayViewController ()

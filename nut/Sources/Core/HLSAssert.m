@@ -1,23 +1,23 @@
 //
-//  HLSRuntimeChecks.m
+//  HLSAssert.m
 //  nut
 //
 //  Created by Samuel Défago on 3/1/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSRuntimeChecks.h"
+#import "HLSAssert.h"
 
 #import "NSObject+HLSExtensions.h"
 
-@interface NSAssertionHandler (HLSRuntimeChecksPrivate)
+@interface NSAssertionHandler (HLSAssertPrivate)
 
 + (BOOL)enumeration:(id<NSFastEnumeration>)enumeration containsOnlyObjectsOfClass:(Class)objectClass strict:(BOOL)strict;
 
 @end
 
 
-@implementation NSAssertionHandler (HLSRuntimeChecks)
+@implementation NSAssertionHandler (HLSAssert)
 
 - (void)handleIncorrectObjectClass:(Class)objectClass 
                      inEnumeration:(id<NSFastEnumeration>)enumeration
@@ -61,7 +61,7 @@
 
 @end
 
-@implementation NSAssertionHandler (HLSRuntimeChecksPrivate)
+@implementation NSAssertionHandler (HLSAssertPrivate)
 
 + (BOOL)enumeration:(id<NSFastEnumeration>)enumeration containsOnlyObjectsOfClass:(Class)objectClass strict:(BOOL)strict
 {

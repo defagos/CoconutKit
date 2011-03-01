@@ -8,10 +8,10 @@
 
 #import "HLSPlaceholderViewController.h"
 
+#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
-#import "HLSRuntimeChecks.h"
 #import "HLSTransform.h"
 
 @interface HLSPlaceholderViewController ()

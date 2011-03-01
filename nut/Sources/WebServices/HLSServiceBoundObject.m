@@ -8,8 +8,8 @@
 
 #import "HLSServiceBoundObject.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 
 DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
 DEFINE_NOTIFICATION(HLSServiceBoundObjectNetworkFailureNotification);

@@ -8,8 +8,8 @@
 
 #import "HLSDownloader.h"
 
+#import "HLSAssert.h"
 #import "HLSRequester.h"
-#import "HLSRuntimeChecks.h"
 
 DEFINE_NOTIFICATION(HLSDownloaderAllRetrievedNotification);
 DEFINE_NOTIFICATION(HLSDownloaderChunkRetrievedNotification);

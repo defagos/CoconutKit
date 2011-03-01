@@ -17,7 +17,7 @@
 
 BOOL floateq_dist(float x, float y, int32_t maxDist)
 {
-    HLS_STATIC_ASSERT(sizeof(float) == sizeof(int32_t));
+    HLSStaticAssert(sizeof(float) == sizeof(int32_t));
     
     int32_t i_x = *(int32_t *)&x;
     if (i_x < 0) {
@@ -34,7 +34,7 @@ BOOL floateq_dist(float x, float y, int32_t maxDist)
 
 BOOL doubleeq_dist(double x, double y, int64_t maxDist)
 {
-    HLS_STATIC_ASSERT(sizeof(double) == sizeof(int64_t));
+    HLSStaticAssert(sizeof(double) == sizeof(int64_t));
     
     int64_t i_x = *(int64_t *)&x;
     if (i_x < 0) {

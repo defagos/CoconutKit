@@ -8,8 +8,8 @@
 
 #import "HLSRequester.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 
 // Transitions between HLSRequesterStatus-es might correspond to changes of network activity (e.g. when a request
 // goes from idle to retrieving, network activity starts). The following enum is mean to represent those

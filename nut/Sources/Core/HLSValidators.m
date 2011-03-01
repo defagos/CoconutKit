@@ -8,7 +8,7 @@
 
 #import "HLSValidators.h"
 
-#import "HLSRuntimeChecks.h"
+#import "HLSAssert.h"
 
 @implementation HLSValidators
 

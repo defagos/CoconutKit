@@ -8,10 +8,10 @@
 
 #import "HLSAnimation.h"
 
+#import "HLSAssert.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
-#import "HLSRuntimeChecks.h"
 #import "HLSUserInterfaceLock.h"
 
 @interface HLSAnimation ()
@@ -43,6 +43,7 @@
 
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
     if ((self = [super init])) {
         self.animationSteps = animationSteps;
     }
