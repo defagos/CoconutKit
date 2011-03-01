@@ -8,6 +8,7 @@
 
 #import "HLSWizardViewController.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSValidable.h"
 
@@ -129,6 +130,8 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 - (void)setViewControllers:(NSArray *)viewControllers
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
+    
     // Check for self-assignment
     if (m_viewControllers == viewControllers) {
         return;

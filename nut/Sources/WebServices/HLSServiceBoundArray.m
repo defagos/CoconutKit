@@ -188,6 +188,18 @@ DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
 
 @synthesize sortDescriptors = m_sortDescriptors;
 
+- (void)setSortDescriptors:(NSArray *)sortDescriptors
+{
+    HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
+    
+    if (m_sortDescriptors == sortDescriptors) {
+        return;
+    }
+    
+    [m_sortDescriptors release];
+    m_sortDescriptors = [sortDescriptors retain];
+}
+
 @synthesize predicate = m_predicate;
 
 #pragma mark Requesting data

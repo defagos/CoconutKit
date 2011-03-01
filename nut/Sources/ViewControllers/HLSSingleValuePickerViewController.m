@@ -8,6 +8,7 @@
 
 #import "HLSSingleValuePickerViewController.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @implementation HLSSingleValuePickerViewController
@@ -51,6 +52,8 @@
 
 - (void)setValues:(NSArray *)values
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(values, NSString);
+    
     // Check for self-assignment
     if (m_values == values) {
         return;

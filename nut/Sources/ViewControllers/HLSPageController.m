@@ -8,6 +8,7 @@
 
 #import "HLSPageController.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "HLSStandardWidgetConstants.h"
@@ -175,6 +176,7 @@
 
 - (void)setViewControllers:(NSArray *)viewControllers
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
     self.pageViewControllers = [NSMutableArray arrayWithArray:viewControllers];
 }
 

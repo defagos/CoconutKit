@@ -8,6 +8,7 @@
 
 #import "HLSServiceBroker.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSServiceAggregator.h"
 #import "HLSServiceCache.h"
@@ -76,6 +77,8 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
 
 - (void)submitRequests:(NSArray *)requests
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(requests, HLSServiceRequest);
+    
     // If the array is empty, nothing to send
     if ([requests count] == 0) {
         return;

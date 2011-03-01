@@ -25,6 +25,7 @@
 - (id)initWithValues:(NSArray *)values
 {
     if ((self = [super init])) {
+        HLSAssertObjectsInEnumerationAreKindOfClass(values, NSString);
         self.singleValuePickerViewController = [[[HLSSingleValuePickerViewController alloc] init] autorelease];
         self.singleValuePickerViewController.values = values;
         self.singleValuePickerViewController.delegate = self;

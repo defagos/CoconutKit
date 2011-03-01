@@ -101,6 +101,8 @@
 - (void)setInsetViewController:(UIViewController *)insetViewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(twoViewAnimationStepDefinitions, HLSTwoViewAnimationStepDefinition);
+    
     // If not changed, nothing to do
     if (m_insetViewController == insetViewController) {
         return;
