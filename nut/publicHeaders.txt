@@ -5,8 +5,6 @@ HLSContainerControllerLoader.h
 HLSConverters.h
 HLSDownloader.h
 HLSDownloaderTools.h
-HLSFeed.h
-HLSFeedFilter.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLogger.h

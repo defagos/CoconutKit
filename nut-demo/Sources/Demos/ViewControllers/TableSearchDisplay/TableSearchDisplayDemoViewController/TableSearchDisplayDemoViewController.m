@@ -8,11 +8,8 @@
 
 #import "TableSearchDisplayDemoViewController.h"
 
-#import "DeviceFeedFilter.h"
 #import "DeviceInfo.h"
 #import "FixedSizeViewController.h"
-
-static NSArray *s_data;
 
 typedef enum {
     ScopeButtonIndexEnumBegin = 0,
@@ -26,53 +23,14 @@ typedef enum {
 
 @interface TableSearchDisplayDemoViewController ()
 
-@property (nonatomic, retain) HLSFeed *deviceFeed;
-@property (nonatomic, retain) HLSFeedFilter *deviceFeedFilter;
+@property (nonatomic, retain) NSArray *devices;
+@property (nonatomic, retain) NSArray *filteredDevices;
 
-- (DeviceFeedFilter *)buildDeviceFeedFilter;
+- (void)filterDevices;
 
 @end
 
 @implementation TableSearchDisplayDemoViewController
-
-#pragma mark Class methods
-
-+ (void)initialize
-{
-    NSMutableArray *data = [NSMutableArray array];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod" type:DeviceTypeMusicPlayer]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Touch" type:DeviceTypeMusicPlayer]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Nano" type:DeviceTypeMusicPlayer]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Sony Walkman" type:DeviceTypeMusicPlayer]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 3G" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 3GS" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 4" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"HTC Desire" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5800 XpressMusic" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"BlackBerry Pearl" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"LG Cookie (KP500)" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5310 XpressMusic" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D500" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung E250" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-E700" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung J700" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung S5230" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung T-100" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"LG Shine" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Nokia N95" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy S" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung F480 TouchWiz" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Motorola MING A1200i" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"N-Gage" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D900" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Sony Ericsson W300" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung S8500" type:DeviceTypePhone]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"HTC Touch" type:DeviceTypePhone]];    
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Apple iPad" type:DeviceTypeTablet]];
-    [data addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy Tab" type:DeviceTypeTablet]];
-    
-    s_data = [[NSArray arrayWithArray:data] retain];
-}
 
 #pragma mark Object creation and destruction
 
@@ -81,24 +39,55 @@ typedef enum {
     if ((self = [super init])) {
         self.title = @"HLSTableSearchDisplayViewController";
         
-        self.deviceFeed = [[[HLSFeed alloc] init] autorelease];
-        self.deviceFeed.entries = s_data;
+        NSMutableArray *devices = [NSMutableArray array];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod" type:DeviceTypeMusicPlayer]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Touch" type:DeviceTypeMusicPlayer]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Nano" type:DeviceTypeMusicPlayer]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Sony Walkman" type:DeviceTypeMusicPlayer]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 3G" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 3GS" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPhone 4" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"HTC Desire" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5800 XpressMusic" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"BlackBerry Pearl" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"LG Cookie (KP500)" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Nokia 5310 XpressMusic" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D500" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung E250" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-E700" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung J700" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung S5230" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung T-100" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"LG Shine" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Nokia N95" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy S" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung F480 TouchWiz" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Motorola MING A1200i" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"N-Gage" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung SGH-D900" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Sony Ericsson W300" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung S8500" type:DeviceTypePhone]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"HTC Touch" type:DeviceTypePhone]];    
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPad" type:DeviceTypeTablet]];
+        [devices addObject:[DeviceInfo deviceInfoWithName:@"Samsung Galaxy Tab" type:DeviceTypeTablet]];
+        
+        self.devices = [NSArray arrayWithArray:devices];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.deviceFeed = nil;
-    self.deviceFeedFilter = nil;
+    self.devices = nil;
+    self.filteredDevices = nil;
     [super dealloc];
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize deviceFeed = m_deviceFeed;
+@synthesize devices = m_devices;
 
-@synthesize deviceFeedFilter = m_deviceFeedFilter;
+@synthesize filteredDevices = m_filteredDevices;
 
 #pragma mark View lifecycle
 
@@ -135,25 +124,14 @@ typedef enum {
     
     // We want a search to always open with the "All" scope button selected
     self.searchBar.selectedScopeButtonIndex = ScopeButtonIndexAll;
-    
-    // Create the corresponding filter
-    self.deviceFeedFilter = [self buildDeviceFeedFilter];
-}
-
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
-{
-    [super searchDisplayControllerWillEndSearch:controller];
-    
-    // No search criteria anymore
-    self.deviceFeedFilter = nil;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     [super searchDisplayController:controller shouldReloadTableForSearchString:searchString];
     
-    // Create the corresponding filter
-    self.deviceFeedFilter = [self buildDeviceFeedFilter];
+    // Refresh the results
+    [self filterDevices];
     
     // Trigger a search result table view reload
     return YES;
@@ -163,8 +141,8 @@ typedef enum {
 {
     [super searchDisplayController:controller shouldReloadTableForSearchScope:searchOption];
     
-    // Clear the filter
-    self.deviceFeedFilter = [self buildDeviceFeedFilter];
+    // Refresh the results
+    [self filterDevices];
     
     // Trigger a search result table view reload
     return YES;
@@ -175,25 +153,25 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchResultsTableView) {
-        return [self.deviceFeed countMatchingFilter:self.deviceFeedFilter];
+        return [self.filteredDevices count];
     }
     else {
-        return [self.deviceFeed count];
+        return [self.devices count];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {   
-    DeviceInfo *deviceInfo = nil;
+    DeviceInfo *device = nil;
     if (tableView == self.searchResultsTableView) {
-        deviceInfo = [self.deviceFeed entryAtIndex:indexPath.row matchingFilter:self.deviceFeedFilter];
+        device = [self.filteredDevices objectAtIndex:indexPath.row];
     }
     else {
-        deviceInfo = [self.deviceFeed entryAtIndex:indexPath.row];
+        device = [self.devices objectAtIndex:indexPath.row];
     }
-
+    
     HLSTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
-    cell.textLabel.text = deviceInfo.name;
+    cell.textLabel.text = device.name;
     
     // In navigation controller: Can test behavior when another level is pushed
     if (self.navigationController) {
@@ -205,7 +183,7 @@ typedef enum {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-
+    
     return cell;
 }
 
@@ -224,35 +202,54 @@ typedef enum {
 
 #pragma mark Creating the search filter
 
-- (DeviceFeedFilter *)buildDeviceFeedFilter
+- (void)filterDevices
 {
-    DeviceFeedFilter *filter = [[[DeviceFeedFilter alloc] initWithFeed:self.deviceFeed] autorelease];
-    filter.pattern = self.searchBar.text;
-    
+    DeviceType deviceType;
     switch (self.searchBar.selectedScopeButtonIndex) {            
         case ScopeButtonIndexMusicPlayers: {
-            filter.type = DeviceTypeMusicPlayer;
+            deviceType = DeviceTypeMusicPlayer;
             break;
         }
             
         case ScopeButtonIndexPhones: {
-            filter.type = DeviceTypePhone;            
+            deviceType = DeviceTypePhone;            
             break;
         }
             
         case ScopeButtonIndexTablets: {
-            filter.type = DeviceTypeTablet;
+            deviceType = DeviceTypeTablet;
             break;
         }
             
         case ScopeButtonIndexAll:
         default: {
-            filter.type = DeviceTypeAll;
+            deviceType = DeviceTypeAll;
             break;
         }
     }
+    
+    NSString *pattern = self.searchBar.text;
+    NSMutableArray *filteredDevices = [NSMutableArray array];
+    for (DeviceInfo *device in self.devices) {
+        // Try to locate the pattern in the name (if any)
+        if ([pattern length] != 0) {
+            NSRange prefixRange = [device.name rangeOfString:pattern
+                                                     options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+            if (prefixRange.length == 0) {
+                continue;
+            }        
+        }
         
-    return filter;
+        // Check against device type (if any)
+        if (deviceType != DeviceTypeAll && device.type != deviceType) {
+            continue;
+        }
+        
+        // All checks successful; matches the filter criteria
+        [filteredDevices addObject:device];
+    }
+    
+    self.filteredDevices = [NSArray arrayWithArray:filteredDevices];
 }
 
 @end

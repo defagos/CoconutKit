@@ -77,10 +77,6 @@
 		6F8D0957123F536900FCF2AF /* HLSServiceSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D093F123F536900FCF2AF /* HLSServiceSettings.h */; };
 		6F8D0958123F536900FCF2AF /* HLSServiceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D0940123F536900FCF2AF /* HLSServiceSettings.m */; };
 		6F8D0966123F53B200FCF2AF /* HLSContainerControllerLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */; };
-		6F8D0967123F53B200FCF2AF /* HLSFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D095A123F53B200FCF2AF /* HLSFeed.h */; };
-		6F8D0968123F53B200FCF2AF /* HLSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D095B123F53B200FCF2AF /* HLSFeed.m */; };
-		6F8D0969123F53B200FCF2AF /* HLSFeedFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D095C123F53B200FCF2AF /* HLSFeedFilter.h */; };
-		6F8D096A123F53B200FCF2AF /* HLSFeedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D095D123F53B200FCF2AF /* HLSFeedFilter.m */; };
 		6F8D096B123F53B200FCF2AF /* HLSNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D095E123F53B200FCF2AF /* HLSNotifications.h */; };
 		6F8D096C123F53B200FCF2AF /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D095F123F53B200FCF2AF /* HLSNotifications.m */; };
 		6F8D096D123F53B200FCF2AF /* HLSOrientationCloner.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */; };
@@ -206,10 +202,6 @@
 		6F8D093F123F536900FCF2AF /* HLSServiceSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSServiceSettings.h; sourceTree = "<group>"; };
 		6F8D0940123F536900FCF2AF /* HLSServiceSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSServiceSettings.m; sourceTree = "<group>"; };
 		6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerControllerLoader.h; sourceTree = "<group>"; };
-		6F8D095A123F53B200FCF2AF /* HLSFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFeed.h; sourceTree = "<group>"; };
-		6F8D095B123F53B200FCF2AF /* HLSFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFeed.m; sourceTree = "<group>"; };
-		6F8D095C123F53B200FCF2AF /* HLSFeedFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFeedFilter.h; sourceTree = "<group>"; };
-		6F8D095D123F53B200FCF2AF /* HLSFeedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFeedFilter.m; sourceTree = "<group>"; };
 		6F8D095E123F53B200FCF2AF /* HLSNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNotifications.h; sourceTree = "<group>"; };
 		6F8D095F123F53B200FCF2AF /* HLSNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNotifications.m; sourceTree = "<group>"; };
 		6F8D0960123F53B200FCF2AF /* HLSOrientationCloner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOrientationCloner.h; sourceTree = "<group>"; };
@@ -450,10 +442,6 @@
 				6F8D0959123F53B200FCF2AF /* HLSContainerControllerLoader.h */,
 				6FAF57841248B8F300A8B23E /* HLSConverters.h */,
 				6FAF57851248B8F300A8B23E /* HLSConverters.m */,
-				6F8D095A123F53B200FCF2AF /* HLSFeed.h */,
-				6F8D095B123F53B200FCF2AF /* HLSFeed.m */,
-				6F8D095C123F53B200FCF2AF /* HLSFeedFilter.h */,
-				6F8D095D123F53B200FCF2AF /* HLSFeedFilter.m */,
 				6F21D4341246163A00252AF1 /* HLSFloat.h */,
 				6F21D4351246163A00252AF1 /* HLSFloat.m */,
 				6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */,
@@ -560,8 +548,6 @@
 				6F8D0955123F536900FCF2AF /* HLSServiceRequester.h in Headers */,
 				6F8D0957123F536900FCF2AF /* HLSServiceSettings.h in Headers */,
 				6F8D0966123F53B200FCF2AF /* HLSContainerControllerLoader.h in Headers */,
-				6F8D0967123F53B200FCF2AF /* HLSFeed.h in Headers */,
-				6F8D0969123F53B200FCF2AF /* HLSFeedFilter.h in Headers */,
 				6F8D096B123F53B200FCF2AF /* HLSNotifications.h in Headers */,
 				6F8D096D123F53B200FCF2AF /* HLSOrientationCloner.h in Headers */,
 				6F8D096E123F53B200FCF2AF /* HLSReloadable.h in Headers */,
@@ -679,8 +665,6 @@
 				6F8D0954123F536900FCF2AF /* HLSServiceRequest.m in Sources */,
 				6F8D0956123F536900FCF2AF /* HLSServiceRequester.m in Sources */,
 				6F8D0958123F536900FCF2AF /* HLSServiceSettings.m in Sources */,
-				6F8D0968123F53B200FCF2AF /* HLSFeed.m in Sources */,
-				6F8D096A123F53B200FCF2AF /* HLSFeedFilter.m in Sources */,
 				6F8D096C123F53B200FCF2AF /* HLSNotifications.m in Sources */,
 				6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */,
 				6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */,

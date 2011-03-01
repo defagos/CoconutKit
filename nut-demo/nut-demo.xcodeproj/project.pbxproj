@@ -74,7 +74,6 @@
 		6FBDB0F613085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB0F313085AA1004B9617 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */; };
 		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
-		6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */; };
 		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
 /* End PBXBuildFile section */
 
@@ -177,8 +176,6 @@
 		6FBDB1B41308F95F004B9617 /* TableSearchDisplayDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSearchDisplayDemoViewController.h; sourceTree = "<group>"; };
 		6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSearchDisplayDemoViewController.m; sourceTree = "<group>"; };
 		6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
-		6FBDB28C13091439004B9617 /* DeviceFeedFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFeedFilter.h; sourceTree = "<group>"; };
-		6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFeedFilter.m; sourceTree = "<group>"; };
 		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -698,7 +695,6 @@
 		6FBDB1B21308F925004B9617 /* TableSearchDisplay */ = {
 			isa = PBXGroup;
 			children = (
-				6FBDB28B1309141F004B9617 /* DeviceFeedFilter */,
 				6FBDB2AE13091593004B9617 /* DeviceInfo */,
 				6FBDB1B31308F94B004B9617 /* TableSearchDisplayDemoViewController */,
 			);
@@ -713,15 +709,6 @@
 				6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */,
 			);
 			path = TableSearchDisplayDemoViewController;
-			sourceTree = "<group>";
-		};
-		6FBDB28B1309141F004B9617 /* DeviceFeedFilter */ = {
-			isa = PBXGroup;
-			children = (
-				6FBDB28C13091439004B9617 /* DeviceFeedFilter.h */,
-				6FBDB28D13091439004B9617 /* DeviceFeedFilter.m */,
-			);
-			path = DeviceFeedFilter;
 			sourceTree = "<group>";
 		};
 		6FBDB2AE13091593004B9617 /* DeviceInfo */ = {
@@ -841,7 +828,6 @@
 				6FBDB06013082FBA004B9617 /* SingleViewAnimationDemoViewController.m in Sources */,
 				6FBDB0F513085AA1004B9617 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */,
-				6FBDB28E13091439004B9617 /* DeviceFeedFilter.m in Sources */,
 				6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */,
 				6F143A9B130999DD0075E94C /* PlaceholderDemoViewController.m in Sources */,
 				6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */,
