@@ -51,7 +51,7 @@
 
 - (id)init
 {
-    FORBIDDEN_INHERITED_METHOD();
+    HLSForbiddenInheritedMethod();
     return nil;
 }
 
@@ -89,7 +89,7 @@
 
 - (void)operationMain
 {
-    MISSING_METHOD_IMPLEMENTATION();
+    HLSMissingMethodImplementation();
 }
 
 #pragma mark -

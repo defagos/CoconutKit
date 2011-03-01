@@ -75,7 +75,7 @@ static HLSKeyboardInformation *s_instance = nil;
 
 - (id)init
 {
-    FORBIDDEN_INHERITED_METHOD();
+    HLSForbiddenInheritedMethod();
     return nil;
 }
 

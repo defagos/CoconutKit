@@ -1,3 +1,4 @@
+HLSRuntimeChecks.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m

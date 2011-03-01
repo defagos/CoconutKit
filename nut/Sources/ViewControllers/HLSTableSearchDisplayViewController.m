@@ -179,13 +179,13 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    MISSING_METHOD_IMPLEMENTATION();
+    HLSMissingMethodImplementation();
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MISSING_METHOD_IMPLEMENTATION();
+    HLSMissingMethodImplementation();
     return nil;
 }
 

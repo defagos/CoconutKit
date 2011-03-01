@@ -81,7 +81,7 @@ DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
 
 - (id)init
 {
-    FORBIDDEN_INHERITED_METHOD();
+    HLSForbiddenInheritedMethod();
     return nil;
 }
 

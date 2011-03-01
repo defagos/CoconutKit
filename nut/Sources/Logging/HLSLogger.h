@@ -10,17 +10,21 @@
  * Helper macros (note the ## in front of __VA_ARGS__ to support 0 variable arguments)
  */
 #ifdef DEBUG
+
 #define logger_debug(format, ...)	[[HLSLogger sharedLogger] debug:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_info(format, ...)	[[HLSLogger sharedLogger] info:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_warn(format, ...)	[[HLSLogger sharedLogger] warn:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_error(format, ...)	[[HLSLogger sharedLogger] error:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_fatal(format, ...)	[[HLSLogger sharedLogger] fatal:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
+
 #else
+
 #define logger_debug(format, ...)
 #define logger_info(format, ...)
 #define logger_warn(format, ...)
 #define logger_error(format, ...)
 #define logger_fatal(format, ...)
+
 #endif
 
 /**
