@@ -7,10 +7,11 @@
 //
 
 /**
- * Helper macros (note the ## in front of __VA_ARGS__ to support 0 variable arguments)
+ * Logging macros. Only active if HLS_LOGGER is added to your configuration preprocessor flags (-DHLS_LOGGER)
  */
-#ifdef DEBUG
+#ifdef HLS_LOGGER
 
+// Note the ## in front of __VA_ARGS__ to support 0 variable arguments
 #define logger_debug(format, ...)	[[HLSLogger sharedLogger] debug:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_info(format, ...)	[[HLSLogger sharedLogger] info:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]
 #define logger_warn(format, ...)	[[HLSLogger sharedLogger] warn:[NSString stringWithFormat:@"(%s) - %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:format, ## __VA_ARGS__]]]

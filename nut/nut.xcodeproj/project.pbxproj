@@ -731,7 +731,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = nut_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				OTHER_CFLAGS = "-DDEBUG";
+				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = nut;
 			};
 			name = Debug;

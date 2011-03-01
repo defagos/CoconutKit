@@ -885,7 +885,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = nut_demo_Prefix.pch;
 				INFOPLIST_FILE = "nut_demo-Info.plist";
-				OTHER_CFLAGS = "-DDEBUG";
+				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "nut-demo";
 			};
 			name = Debug;
