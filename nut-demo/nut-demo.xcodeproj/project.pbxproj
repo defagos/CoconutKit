@@ -44,6 +44,10 @@
 		6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */; };
 		6F84AF5C131BB0A6002C3D05 /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */; };
 		6F84B23F131BF53B002C3D05 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84B23E131BF53B002C3D05 /* Customer.m */; };
+		6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9219151317D75D00D69AC8 /* nut_bootstrap.m */; };
+		6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9219161317D75D00D69AC8 /* nut.framework */; };
+		6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F9219181317D75D00D69AC8 /* nut_Localizable.strings */; };
+		6F92191F1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBDA7611303E6BD004B9617 /* libz.dylib */; };
@@ -70,40 +74,7 @@
 		6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */; };
 		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
 		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
-		DA83844D131E8CC800ECAED3 /* libnut.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA83844A131E8CB400ECAED3 /* libnut.a */; };
-		DA838467131E8D1F00ECAED3 /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA838457131E8D1F00ECAED3 /* nut_Localizable.strings */; };
-		DA838468131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83845B131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft.png */; };
-		DA838469131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83845C131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft@2x.png */; };
-		DA83846A131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83845D131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png */; };
-		DA83846B131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83845E131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png */; };
-		DA83846C131E8D1F00ECAED3 /* nut_ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83845F131E8D1F00ECAED3 /* nut_ButtonBarArrowRight.png */; };
-		DA83846D131E8D1F00ECAED3 /* nut_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838460131E8D1F00ECAED3 /* nut_ButtonBarArrowRight@2x.png */; };
-		DA83846E131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838461131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape.png */; };
-		DA83846F131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838462131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png */; };
-		DA838470131E8D1F00ECAED3 /* nut_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838463131E8D1F00ECAED3 /* nut_ButtonBarRefresh.png */; };
-		DA838471131E8D1F00ECAED3 /* nut_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838464131E8D1F00ECAED3 /* nut_ButtonBarRefresh@2x.png */; };
-		DA838472131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838465131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape.png */; };
-		DA838473131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA838466131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png */; };
-		DA838476131E8D4900ECAED3 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA838474131E8D4900ECAED3 /* nut_HLSSingleValuePickerViewController.xib */; };
-		DA838477131E8D4900ECAED3 /* nut_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA838475131E8D4900ECAED3 /* nut_HLSWebViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DA838449131E8CB400ECAED3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA838445131E8CB400ECAED3 /* nut.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libnut.a */;
-			remoteInfo = nut;
-		};
-		DA83844B131E8CBE00ECAED3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA838445131E8CB400ECAED3 /* nut.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D /* nut */;
-			remoteInfo = nut;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -159,6 +130,11 @@
 		6F84AF5B131BB0A6002C3D05 /* WizardPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
 		6F84B23D131BF53B002C3D05 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		6F84B23E131BF53B002C3D05 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		6F9219151317D75D00D69AC8 /* nut_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_bootstrap.m; sourceTree = "<group>"; };
+		6F9219161317D75D00D69AC8 /* nut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nut.framework; sourceTree = "<group>"; };
+		6F9219191317D75D00D69AC8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F92191A1317D75D00D69AC8 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -201,23 +177,6 @@
 		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		DA838445131E8CB400ECAED3 /* nut.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = nut.xcodeproj; path = ../nut/nut.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DA838458131E8D1F00ECAED3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../nut/Resources/en.lproj/nut_Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA838459131E8D1F00ECAED3 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = ../nut/Resources/fr.lproj/nut_Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA83845B131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarArrowLeft.png; path = ../nut/Resources/Images/nut_ButtonBarArrowLeft.png; sourceTree = SOURCE_ROOT; };
-		DA83845C131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarArrowLeft@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarArrowLeft@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA83845D131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarArrowLeftLandscape.png; path = ../nut/Resources/Images/nut_ButtonBarArrowLeftLandscape.png; sourceTree = SOURCE_ROOT; };
-		DA83845E131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarArrowLeftLandscape@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarArrowLeftLandscape@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA83845F131E8D1F00ECAED3 /* nut_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarArrowRight.png; path = ../nut/Resources/Images/nut_ButtonBarArrowRight.png; sourceTree = SOURCE_ROOT; };
-		DA838460131E8D1F00ECAED3 /* nut_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarArrowRight@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarArrowRight@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA838461131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarArrowRightLandscape.png; path = ../nut/Resources/Images/nut_ButtonBarArrowRightLandscape.png; sourceTree = SOURCE_ROOT; };
-		DA838462131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarArrowRightLandscape@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarArrowRightLandscape@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA838463131E8D1F00ECAED3 /* nut_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarRefresh.png; path = ../nut/Resources/Images/nut_ButtonBarRefresh.png; sourceTree = SOURCE_ROOT; };
-		DA838464131E8D1F00ECAED3 /* nut_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarRefresh@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarRefresh@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA838465131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nut_ButtonBarRefreshLandscape.png; path = ../nut/Resources/Images/nut_ButtonBarRefreshLandscape.png; sourceTree = SOURCE_ROOT; };
-		DA838466131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nut_ButtonBarRefreshLandscape@2x.png"; path = "../nut/Resources/Images/nut_ButtonBarRefreshLandscape@2x.png"; sourceTree = SOURCE_ROOT; };
-		DA838474131E8D4900ECAED3 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nut_HLSSingleValuePickerViewController.xib; path = ../nut/Sources/ViewControllers/nut_HLSSingleValuePickerViewController.xib; sourceTree = SOURCE_ROOT; };
-		DA838475131E8D4900ECAED3 /* nut_HLSWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nut_HLSWebViewController.xib; path = ../nut/Sources/ViewControllers/nut_HLSWebViewController.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +188,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6FBDA7621303E6BD004B9617 /* libz.dylib in Frameworks */,
-				DA83844D131E8CC800ECAED3 /* libnut.a in Frameworks */,
+				6F92191D1317D75D00D69AC8 /* nut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +206,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				DA838451131E8D0F00ECAED3 /* nut */,
 				6FBDA9201304315B004B9617 /* Resources */,
 				6FBDA71D1303E481004B9617 /* Sources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -271,6 +229,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F9219131317D75D00D69AC8 /* nut-Release.staticframework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -410,6 +369,34 @@
 				6F84B23E131BF53B002C3D05 /* Customer.m */,
 			);
 			path = Customer;
+			sourceTree = "<group>";
+		};
+		6F9219131317D75D00D69AC8 /* nut-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219141317D75D00D69AC8 /* Bootstrap */,
+				6F9219161317D75D00D69AC8 /* nut.framework */,
+				6F9219171317D75D00D69AC8 /* Resources */,
+			);
+			name = "nut-Release.staticframework";
+			path = "StaticFrameworks/nut-Release.staticframework";
+			sourceTree = "<group>";
+		};
+		6F9219141317D75D00D69AC8 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219151317D75D00D69AC8 /* nut_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F9219171317D75D00D69AC8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F9219181317D75D00D69AC8 /* nut_Localizable.strings */,
+				6F92191B1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
@@ -730,64 +717,6 @@
 			path = DeviceInfo;
 			sourceTree = "<group>";
 		};
-		DA838446131E8CB400ECAED3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DA83844A131E8CB400ECAED3 /* libnut.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DA838451131E8D0F00ECAED3 /* nut */ = {
-			isa = PBXGroup;
-			children = (
-				DA838456131E8D1F00ECAED3 /* Resources */,
-				DA838445131E8CB400ECAED3 /* nut.xcodeproj */,
-			);
-			name = nut;
-			sourceTree = "<group>";
-		};
-		DA838456131E8D1F00ECAED3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DA838457131E8D1F00ECAED3 /* nut_Localizable.strings */,
-				DA83845A131E8D1F00ECAED3 /* Images */,
-				DA838478131E8D4D00ECAED3 /* xibs */,
-			);
-			name = Resources;
-			path = ../nut/Resources;
-			sourceTree = SOURCE_ROOT;
-		};
-		DA83845A131E8D1F00ECAED3 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				DA83845B131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft.png */,
-				DA83845C131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft@2x.png */,
-				DA83845D131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png */,
-				DA83845E131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png */,
-				DA83845F131E8D1F00ECAED3 /* nut_ButtonBarArrowRight.png */,
-				DA838460131E8D1F00ECAED3 /* nut_ButtonBarArrowRight@2x.png */,
-				DA838461131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape.png */,
-				DA838462131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png */,
-				DA838463131E8D1F00ECAED3 /* nut_ButtonBarRefresh.png */,
-				DA838464131E8D1F00ECAED3 /* nut_ButtonBarRefresh@2x.png */,
-				DA838465131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape.png */,
-				DA838466131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png */,
-			);
-			name = Images;
-			path = ../nut/Resources/Images;
-			sourceTree = SOURCE_ROOT;
-		};
-		DA838478131E8D4D00ECAED3 /* xibs */ = {
-			isa = PBXGroup;
-			children = (
-				DA838474131E8D4900ECAED3 /* nut_HLSSingleValuePickerViewController.xib */,
-				DA838475131E8D4900ECAED3 /* nut_HLSWebViewController.xib */,
-			);
-			name = xibs;
-			path = ../nut/Resources;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -802,7 +731,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DA83844C131E8CBE00ECAED3 /* PBXTargetDependency */,
 			);
 			name = "nut-demo";
 			productName = "nut-demo";
@@ -828,28 +756,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = DA838446131E8CB400ECAED3 /* Products */;
-					ProjectRef = DA838445131E8CB400ECAED3 /* nut.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* nut-demo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		DA83844A131E8CB400ECAED3 /* libnut.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libnut.a;
-			remoteRef = DA838449131E8CB400ECAED3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -884,23 +796,10 @@
 				6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */,
 				6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
 				6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
+				6F92191E1317D75D00D69AC8 /* nut_Localizable.strings in Resources */,
+				6F92191F1317D75D00D69AC8 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */,
 				6F84AF5C131BB0A6002C3D05 /* WizardPageViewController.xib in Resources */,
-				DA838467131E8D1F00ECAED3 /* nut_Localizable.strings in Resources */,
-				DA838468131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft.png in Resources */,
-				DA838469131E8D1F00ECAED3 /* nut_ButtonBarArrowLeft@2x.png in Resources */,
-				DA83846A131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png in Resources */,
-				DA83846B131E8D1F00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png in Resources */,
-				DA83846C131E8D1F00ECAED3 /* nut_ButtonBarArrowRight.png in Resources */,
-				DA83846D131E8D1F00ECAED3 /* nut_ButtonBarArrowRight@2x.png in Resources */,
-				DA83846E131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape.png in Resources */,
-				DA83846F131E8D1F00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png in Resources */,
-				DA838470131E8D1F00ECAED3 /* nut_ButtonBarRefresh.png in Resources */,
-				DA838471131E8D1F00ECAED3 /* nut_ButtonBarRefresh@2x.png in Resources */,
-				DA838472131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape.png in Resources */,
-				DA838473131E8D1F00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png in Resources */,
-				DA838476131E8D4900ECAED3 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
-				DA838477131E8D4900ECAED3 /* nut_HLSWebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,6 +836,7 @@
 				6F7A2A95130BA36600AB1926 /* OrientationClonerViewController.m in Sources */,
 				6F7A3393130C558B00AB1926 /* FooterView.m in Sources */,
 				6F7A39D1130D865300AB1926 /* TextFieldsDemoViewController.m in Sources */,
+				6F92191C1317D75D00D69AC8 /* nut_bootstrap.m in Sources */,
 				6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */,
 				6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */,
 				6F84B23F131BF53B002C3D05 /* Customer.m in Sources */,
@@ -945,15 +845,16 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		DA83844C131E8CBE00ECAED3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = nut;
-			targetProxy = DA83844B131E8CBE00ECAED3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
+		6F9219181317D75D00D69AC8 /* nut_Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F9219191317D75D00D69AC8 /* en */,
+				6F92191A1317D75D00D69AC8 /* fr */,
+			);
+			name = nut_Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6FBDA7A61303EE9B004B9617 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -962,16 +863,6 @@
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
-		};
-		DA838457131E8D1F00ECAED3 /* nut_Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA838458131E8D1F00ECAED3 /* en */,
-				DA838459131E8D1F00ECAED3 /* fr */,
-			);
-			name = nut_Localizable.strings;
-			path = ../nut/Resources;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
@@ -991,10 +882,6 @@
 				GCC_PREFIX_HEADER = nut_demo_Prefix.pch;
 				INFOPLIST_FILE = "nut_demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
 				PRODUCT_NAME = "nut-demo";
 			};
 			name = Debug;
@@ -1011,10 +898,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = nut_demo_Prefix.pch;
 				INFOPLIST_FILE = "nut_demo-Info.plist";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
 				PRODUCT_NAME = "nut-demo";
 				VALIDATE_PRODUCT = YES;
 			};
