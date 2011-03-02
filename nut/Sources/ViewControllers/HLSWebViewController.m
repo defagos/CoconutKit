@@ -60,19 +60,24 @@
 // MARK: -
 // MARK: UIWebView delegate
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
+- (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.activityIndicator startAnimating];
 	[self updateView];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webViewDidFinishLoad:(UIWebView *)aWebView
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self.activityIndicator stopAnimating];
 	self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 	[self updateView];
+}
+
+- (void)webView:(UIWebView *)aWebView didFailLoadWithError:(NSError *)error;
+{
+	[self webViewDidFinishLoad:aWebView];
 }
 
 // MARK: -
