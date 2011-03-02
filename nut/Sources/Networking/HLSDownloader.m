@@ -11,9 +11,9 @@
 #import "HLSAssert.h"
 #import "HLSRequester.h"
 
-DEFINE_NOTIFICATION(HLSDownloaderAllRetrievedNotification);
-DEFINE_NOTIFICATION(HLSDownloaderChunkRetrievedNotification);
-DEFINE_NOTIFICATION(HLSDownloaderFailureNotification);
+HLSDefineNotification(HLSDownloaderAllRetrievedNotification);
+HLSDefineNotification(HLSDownloaderChunkRetrievedNotification);
+HLSDefineNotification(HLSDownloaderFailureNotification);
 
 @interface HLSDownloader ()
 

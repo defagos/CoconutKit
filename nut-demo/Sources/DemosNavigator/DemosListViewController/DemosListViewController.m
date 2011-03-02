@@ -86,7 +86,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.tableView.rowHeight = HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
+    self.tableView.rowHeight = HLSTableViewCellHeight(HLSTableViewCell);
 }
 
 #pragma mark Orientation management
@@ -165,7 +165,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSSubtitleTableViewCell, tableView);
+    UITableViewCell *cell = HLSTableViewCellCreate(HLSSubtitleTableViewCell, tableView);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {

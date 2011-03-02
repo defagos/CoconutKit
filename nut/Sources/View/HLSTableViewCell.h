@@ -8,11 +8,11 @@
 
 // Convenience factory macro for creating table view cells of a given class (either HLSTableViewCell or a
 // subclass); useful since no covariant return types in Objective-C
-#define HLS_TABLE_VIEW_CELL(className, tableView)       (className *)[className tableViewCellForTableView:tableView]
+#define HLSTableViewCellCreate(className, tableView)        (className *)[className tableViewCellForTableView:tableView]
 
 // Convenience factory macro for retrieving the height of cells for a given class (either HLSTableViewCell or a
 // subclass)
-#define HLS_TABLE_VIEW_CELL_HEIGHT(className)           [className height]
+#define HLSTableViewCellHeight(className)                   [className height]
 
 /**
  * Class for easy table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
@@ -50,7 +50,7 @@
 
 /**
  * Factory method for creating a table view cell. A downcast might be needed to be able to edit cell attributes,
- * that is why you should use the HLS_TABLE_VIEW_CELL factory method which does this cast for you
+ * that is why you should use the HLSTableViewCellCreate factory method which does this cast for you
  * Not meant to be overridden
  */
 + (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView;

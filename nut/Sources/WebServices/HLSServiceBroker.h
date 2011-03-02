@@ -24,12 +24,12 @@
  * Notifications
  */
 // User info: "requestId" for the request id, "updatedObjects" for the NSArray of all updated objects
-DECLARE_NOTIFICATION(HLSServiceBrokerAnswerReceivedNotification);
+HLSDeclareNotification(HLSServiceBrokerAnswerReceivedNotification);
 // User info: "requestId" for the request id
-DECLARE_NOTIFICATION(HLSServiceBrokerNetworkFailureNotification);
+HLSDeclareNotification(HLSServiceBrokerNetworkFailureNotification);
 // Errors returned by the web service (e.g. bad login data, unknown object reference, etc.)
 // User info: "requestId" for the request id, "error" for the NSError object containing information about the error
-DECLARE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
+HLSDeclareNotification(HLSServiceBrokerDataErrorNotification);
 
 /**
  * Provides complete management of queries for retrieving information from a web service. An application

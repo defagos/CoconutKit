@@ -15,9 +15,9 @@
 #import "HLSServiceDecoder.h"
 #import "HLSServiceObjectDescription.h"
 
-DEFINE_NOTIFICATION(HLSServiceBrokerAnswerReceivedNotification);
-DEFINE_NOTIFICATION(HLSServiceBrokerNetworkFailureNotification);
-DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
+HLSDefineNotification(HLSServiceBrokerAnswerReceivedNotification);
+HLSDefineNotification(HLSServiceBrokerNetworkFailureNotification);
+HLSDefineNotification(HLSServiceBrokerDataErrorNotification);
 
 @interface HLSServiceBroker ()
 

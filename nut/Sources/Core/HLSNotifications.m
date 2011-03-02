@@ -10,8 +10,8 @@
 
 #import "HLSLogger.h"
 
-DEFINE_NOTIFICATION(HLSNetworkActivityStartNotification);
-DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
+HLSDefineNotification(HLSNetworkActivityStartNotification);
+HLSDefineNotification(HLSNetworkActivityStopNotification);
 
 #pragma mark -
 #pragma mark NotificationSender class interface

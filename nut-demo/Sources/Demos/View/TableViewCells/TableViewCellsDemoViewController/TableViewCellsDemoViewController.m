@@ -60,8 +60,8 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.tableView.sectionHeaderHeight = HLS_XIB_VIEW_HEIGHT(HeaderView);
-    self.tableView.sectionFooterHeight = HLS_XIB_VIEW_HEIGHT(FooterView);
+    self.tableView.sectionHeaderHeight = HLSXibViewHeight(HeaderView);
+    self.tableView.sectionFooterHeight = HLSXibViewHeight(FooterView);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -97,7 +97,7 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    HLSTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSTableViewCell, tableView);
+                    HLSTableViewCell *cell = HLSTableViewCellCreate(HLSTableViewCell, tableView);
                     cell.textLabel.text = @"HLSTableViewCell";
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -105,7 +105,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexValue1: {
-                    HLSValue1TableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSValue1TableViewCell, tableView);
+                    HLSValue1TableViewCell *cell = HLSTableViewCellCreate(HLSValue1TableViewCell, tableView);
                     cell.textLabel.text = @"HLSValue1TableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -114,7 +114,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexValue2: {
-                    HLSValue2TableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSValue2TableViewCell, tableView);
+                    HLSValue2TableViewCell *cell = HLSTableViewCellCreate(HLSValue2TableViewCell, tableView);
                     cell.textLabel.text = @"HLSValue2TableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -123,7 +123,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexSubtitle: {
-                    HLSSubtitleTableViewCell *cell = HLS_TABLE_VIEW_CELL(HLSSubtitleTableViewCell, tableView);
+                    HLSSubtitleTableViewCell *cell = HLSTableViewCellCreate(HLSSubtitleTableViewCell, tableView);
                     cell.textLabel.text = @"HLSSubtitleTableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -142,7 +142,7 @@ typedef enum {
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    XibTableViewCell *cell = HLS_TABLE_VIEW_CELL(XibTableViewCell, tableView);
+                    XibTableViewCell *cell = HLSTableViewCellCreate(XibTableViewCell, tableView);
                     cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
                     cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
                     // Selection enabled to show that customization works
@@ -151,7 +151,7 @@ typedef enum {
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    ProgrammaticTableViewCell *cell = HLS_TABLE_VIEW_CELL(ProgrammaticTableViewCell, tableView);
+                    ProgrammaticTableViewCell *cell = HLSTableViewCellCreate(ProgrammaticTableViewCell, tableView);
                     cell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -177,7 +177,7 @@ typedef enum {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    HeaderView *headerView = HLS_XIB_VIEW(HeaderView);
+    HeaderView *headerView = HLSXibViewCreate(HeaderView);
     switch (section) {
         case CellCategoryIndexSimple: {
             headerView.label.text = NSLocalizedString(@"Header: simple cells", @"Header: simple cells");
@@ -199,7 +199,7 @@ typedef enum {
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    FooterView *footerView = HLS_XIB_VIEW(FooterView);
+    FooterView *footerView = HLSXibViewCreate(FooterView);
     footerView.label.text = NSLocalizedString(@"Section end", @"Section end");
     return footerView;
 }
@@ -210,22 +210,22 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSTableViewCell);
+                    return HLSTableViewCellHeight(HLSTableViewCell);
                     break;
                 }
                     
                 case SimpleCellIndexValue1: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSValue1TableViewCell);
+                    return HLSTableViewCellHeight(HLSValue1TableViewCell);
                     break;
                 }
                     
                 case SimpleCellIndexValue2: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSValue2TableViewCell);
+                    return HLSTableViewCellHeight(HLSValue2TableViewCell);
                     break;
                 }
                     
                 case SimpleCellIndexSubtitle: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(HLSSubtitleTableViewCell);
+                    return HLSTableViewCellHeight(HLSSubtitleTableViewCell);
                     break;
                 }
                     
@@ -239,12 +239,12 @@ typedef enum {
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(XibTableViewCell);
+                    return HLSTableViewCellHeight(XibTableViewCell);
                     break;
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    return HLS_TABLE_VIEW_CELL_HEIGHT(ProgrammaticTableViewCell);
+                    return HLSTableViewCellHeight(ProgrammaticTableViewCell);
                     break;
                 }
                     

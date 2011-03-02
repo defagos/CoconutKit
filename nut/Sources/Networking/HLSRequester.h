@@ -19,9 +19,9 @@ typedef enum {
 } HLSRequesterStatus;
 
 // HLSNotifications
-DECLARE_NOTIFICATION(HLSRequesterAllRetrievedNotification);
-DECLARE_NOTIFICATION(HLSRequesterChunkRetrievedNotification);
-DECLARE_NOTIFICATION(HLSRequesterFailureNotification);
+HLSDeclareNotification(HLSRequesterAllRetrievedNotification);
+HLSDeclareNotification(HLSRequesterChunkRetrievedNotification);
+HLSDeclareNotification(HLSRequesterFailureNotification);
 
 /**
  * Class for managing a request process. A request is initialized by specifying a URL request. The request

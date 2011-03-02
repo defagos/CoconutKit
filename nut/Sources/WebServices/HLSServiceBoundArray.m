@@ -10,9 +10,9 @@
 
 #import "HLSAssert.h"
 
-DEFINE_NOTIFICATION(HLSServiceBoundArrayUpdatedNotification);
-DEFINE_NOTIFICATION(HLSServiceBoundArrayNetworkFailureNotification);
-DEFINE_NOTIFICATION(HLSServiceBoundArrayErrorNotification);
+HLSDefineNotification(HLSServiceBoundArrayUpdatedNotification);
+HLSDefineNotification(HLSServiceBoundArrayNetworkFailureNotification);
+HLSDefineNotification(HLSServiceBoundArrayErrorNotification);
 
 @interface HLSServiceBoundArray ()
 

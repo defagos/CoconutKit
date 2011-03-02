@@ -11,9 +11,9 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
-DEFINE_NOTIFICATION(HLSServiceBoundObjectUpdatedNotification);
-DEFINE_NOTIFICATION(HLSServiceBoundObjectNetworkFailureNotification);
-DEFINE_NOTIFICATION(HLSServiceBoundObjectErrorNotification);
+HLSDefineNotification(HLSServiceBoundObjectUpdatedNotification);
+HLSDefineNotification(HLSServiceBoundObjectNetworkFailureNotification);
+HLSDefineNotification(HLSServiceBoundObjectErrorNotification);
 
 @interface HLSServiceBoundObject ()
 

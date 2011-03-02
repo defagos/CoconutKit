@@ -12,9 +12,9 @@
 @class HLSRequester;
 
 // Notifications
-DECLARE_NOTIFICATION(HLSDownloaderAllRetrievedNotification);
-DECLARE_NOTIFICATION(HLSDownloaderChunkRetrievedNotification);
-DECLARE_NOTIFICATION(HLSDownloaderFailureNotification);
+HLSDeclareNotification(HLSDownloaderAllRetrievedNotification);
+HLSDeclareNotification(HLSDownloaderChunkRetrievedNotification);
+HLSDeclareNotification(HLSDownloaderFailureNotification);
 
 /**
  * Class for managing a download process. Thin wrapper around an HLSRequester object (please refer to the

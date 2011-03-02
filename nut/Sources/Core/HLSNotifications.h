@@ -11,9 +11,9 @@
  *
  * A module introducing new notifications should:
  *   1) import this header file in its own header file
- *   2) in its header file, declare the new notification name using the DECLARE_NOTIFICATION
+ *   2) in its header file, declare the new notification name using the HLSDeclareNotification
  *      macro
- *   3) in its implementation file, define the new notification using the DEFINE_NOTIFICATION
+ *   3) in its implementation file, define the new notification using the HLSDefineNotification
  *      macro
  * If two modules try to introduce the same notification name, a linker error will occur
  * (since the symbol is in this case multiply defined in two separate translation units).
@@ -23,14 +23,14 @@
  * Note that notification names should end with "Notification"
  */
 
-#define DECLARE_NOTIFICATION(name)      extern NSString * const name
-#define DEFINE_NOTIFICATION(name)       NSString * const name = @#name
+#define HLSDeclareNotification(name)      extern NSString * const name
+#define HLSDefineNotification(name)       NSString * const name = @#name
 
 /**
  * Notifications
  */
-DECLARE_NOTIFICATION(HLSNetworkActivityStartNotification);
-DECLARE_NOTIFICATION(HLSNetworkActivityStopNotification);
+HLSDeclareNotification(HLSNetworkActivityStartNotification);
+HLSDeclareNotification(HLSNetworkActivityStopNotification);
 
 /**
  * Manages application-wide notification mechanisms

@@ -7,10 +7,10 @@
 //
 
 // Convenience factory macro for creating views of a given class; useful since no covariant return types in Objective-C
-#define HLS_XIB_VIEW(className)                 (className *)[className xibView]
+#define HLSXibViewCreate(className)           (className *)[className xibView]
 
 // Convenience macro for retrieving the height of a view
-#define HLS_XIB_VIEW_HEIGHT(className)          [className height]
+#define HLSXibViewHeight(className)           [className height]
 
 /**
  * Abstract class for easy view creation using xibs.

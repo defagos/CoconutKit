@@ -26,9 +26,9 @@ typedef enum {
 static HLSRequesterNetworkStatus s_transitions[HLSRequesterStatusEnumSize][HLSRequesterStatusEnumSize] 
 = {HLSRequesterNetworkStatusNone};
 
-DEFINE_NOTIFICATION(HLSRequesterAllRetrievedNotification);
-DEFINE_NOTIFICATION(HLSRequesterChunkRetrievedNotification);
-DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
+HLSDefineNotification(HLSRequesterAllRetrievedNotification);
+HLSDefineNotification(HLSRequesterChunkRetrievedNotification);
+HLSDefineNotification(HLSRequesterFailureNotification);
 
 @interface HLSRequester ()
 
