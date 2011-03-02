@@ -87,14 +87,14 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
     // Aggregate the sub-requests into a single request
     HLSServiceRequest *fullRequest = [self.aggregator aggregateRequests:requests];
     if (! fullRequest) {
-        logger_error(@"Could not send requests");
+        HLSLoggerError(@"Could not send requests");
         return;
     }
     
     // Create the requester object for submitting the single request to the web service
     HLSServiceRequester *requester = [[[NSClassFromString(self.settings.requesterClassName) alloc] initWithRequest:fullRequest
-                                                                                                       settings:self.settings]
-                                   autorelease];
+                                                                                                          settings:self.settings]
+                                      autorelease];
     requester.delegate = self;
     
     // Retain the requester during the time the request is processed
@@ -115,7 +115,7 @@ DEFINE_NOTIFICATION(HLSServiceBrokerDataErrorNotification);
     NSArray *answers = [self.aggregator disaggregateAnswer:aggregatedAnswer didFailWithError:&disaggregationError];
     if (disaggregationError) {
         // Technical failure for programmer's eyes only; no need to propagate through notification
-        logger_debug(@"Disaggregation error: %@", [disaggregationError localizedDescription]);
+        HLSLoggerDebug(@"Disaggregation error: %@", [disaggregationError localizedDescription]);
         return;
     }
     

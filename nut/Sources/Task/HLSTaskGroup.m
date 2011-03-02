@@ -101,7 +101,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         else {
             _fullProgress = 1.f;
         }
-        logger_warn(@"Incorrect value %f for full progress value, must be between 0 and 1. Fixed", fullProgress);
+        HLSLoggerWarn(@"Incorrect value %f for full progress value, must be between 0 and 1. Fixed", fullProgress);
     }
     else {
         _fullProgress = fullProgress;
@@ -188,7 +188,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 - (void)addTask:(HLSTask *)task
 {
     if (self.running) {
-        logger_info(@"Cannot add a task to a running task group");
+        HLSLoggerInfo(@"Cannot add a task to a running task group");
         return;
     }
     
@@ -238,11 +238,11 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 {
     // Check that both tasks are part of the task group
     if (! [self.taskSet containsObject:task1]) {
-        logger_error(@"First task does not belong to the task group set");
+        HLSLoggerError(@"First task does not belong to the task group set");
         return;
     }
     if (! [self.taskSet containsObject:task2]) {
-        logger_error(@"Second task does not belong to the task group set");
+        HLSLoggerError(@"Second task does not belong to the task group set");
         return;
     }
     

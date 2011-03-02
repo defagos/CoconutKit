@@ -78,7 +78,7 @@
         // Locate the position in the value array
         position = [self.values indexOfObject:initialValue];
         if (position == NSNotFound) {
-            logger_debug(@"An initial value was set for the picker, but this value cannot be found in the picker value list");
+            HLSLoggerDebug(@"An initial value was set for the picker, but this value cannot be found in the picker value list");
             return;
         }
     }
@@ -87,7 +87,7 @@
         // Locate the position in the value array
         position = [self.values indexOfObject:@""];
         if (position == NSNotFound) {
-            logger_debug(@"No initial value set for the picker, and not empty value found in the picker value list");
+            HLSLoggerDebug(@"No initial value set for the picker, and not empty value found in the picker value list");
             return;
         }
     }

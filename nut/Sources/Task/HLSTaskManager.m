@@ -108,13 +108,13 @@
     //         are not applied anymore (bug?). Anyway, this does not work correctly, so we fix the number of threads
     //         to a seemingly good value
     if (count == NSOperationQueueDefaultMaxConcurrentOperationCount) {
-        logger_warn(@"Dynamic number of concurrent tasks is currently not working correctly; task count not changed");
+        HLSLoggerWarn(@"Dynamic number of concurrent tasks is currently not working correctly; task count not changed");
     }
     else if (count > 1) {
         [self.operationQueue setMaxConcurrentOperationCount:count];
     }
     else {
-        logger_error(@"Invalid number of concurrent tasks; task count not changed");
+        HLSLoggerError(@"Invalid number of concurrent tasks; task count not changed");
     }
 }
 
@@ -125,7 +125,7 @@
 {
     // Cannot submit a task if already running
     if ([self.tasks containsObject:task]) {
-        logger_warn(@"Cannot submit a task which is already running");
+        HLSLoggerWarn(@"Cannot submit a task which is already running");
         return;
     }
     
@@ -143,7 +143,7 @@
 {
     // Cannot submit a task if already running
     if ([self.taskGroups containsObject:taskGroup]) {
-        logger_warn(@"Cannot submit a task group which is already running");
+        HLSLoggerWarn(@"Cannot submit a task group which is already running");
         return;
     }
     
@@ -162,7 +162,7 @@
                 [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
             }            
         }
-                
+        
         taskGroup.finished = YES;
         return;
     }    
@@ -247,13 +247,13 @@
                 
                 id<HLSTaskGroupDelegate> taskGroupDelegate = [self delegateForTaskGroup:taskGroup];
                 if (! taskGroup.cancelled) {
-                    logger_debug(@"Task group %@ ends successfully", taskGroup);
+                    HLSLoggerDebug(@"Task group %@ ends successfully", taskGroup);
                     if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
                         [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
                     }
                 }
                 else {
-                    logger_debug(@"Task group %@ has been cancelled", taskGroup);
+                    HLSLoggerDebug(@"Task group %@ has been cancelled", taskGroup);
                     if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
                         [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
                     }
@@ -331,7 +331,7 @@
 {
     // Unregister any previously registered delegate first
     [self unregisterDelegateForTask:task];
-
+    
     // Register the task - delegate relationship; use the task pointer as key
     // TODO: I first expected the obvious following code to work:
     //          NSValue *taskKey = [NSValue valueWithPointer:task];
@@ -369,7 +369,7 @@
     // Register the task group - delegate relationship; use the task pointer as key
     NSValue *taskGroupKey = [NSValue valueWithPointer:taskGroup];
     [self.taskGroupToDelegateMap setObject:delegate forKey:taskGroupKey];
-
+    
     // Register the inverse delegate - task group relationship; use the delgate pointer as key
     NSValue *delegateKey = [NSValue valueWithPointer:delegate];
     NSMutableSet *taskGroupsForDelegate = [self.delegateToTaskGroupsMap objectForKey:delegateKey];
@@ -448,7 +448,7 @@
     for (HLSTask *task in tasksForDelegate) {
         [self unregisterDelegateForTask:task];
     }
-        
+    
     // Same for task groups
     NSSet *taskGroupsForDelegate = [NSSet setWithSet:[self.delegateToTaskGroupsMap objectForKey:delegateKey]];
     for (HLSTaskGroup *taskGroup in taskGroupsForDelegate) {
@@ -491,7 +491,7 @@
     // Unregister the associated task - operation relationship; use the task pointer as key
     NSValue *taskKey = [NSValue valueWithPointer:operation.task];
     [self.taskToOperationMap removeObjectForKey:taskKey];   
-
+    
     // Automatically cleanup delegate registrations
     [self unregisterDelegateForTask:operation.task];
     

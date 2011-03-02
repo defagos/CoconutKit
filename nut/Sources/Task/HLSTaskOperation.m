@@ -138,7 +138,7 @@
 
 - (void)notifyStart
 {
-    logger_debug(@"Task %@ starts", self.task);
+    HLSLoggerDebug(@"Task %@ starts", self.task);
     
     // Reset status
     [self.task reset];
@@ -146,7 +146,7 @@
     // If part of a non-running task group, first flag the task group as running and notify
     HLSTaskGroup *taskGroup = self.task.taskGroup;
     if (taskGroup && ! taskGroup.running) {
-        logger_debug(@"Task group %@ starts", taskGroup);
+        HLSLoggerDebug(@"Task group %@ starts", taskGroup);
         
         taskGroup.running = YES;
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
@@ -212,13 +212,13 @@
     self.task.running = NO;
     
     if (! [self isCancelled]) {
-        logger_debug(@"Task %@ ends successfully", self.task);
+        HLSLoggerDebug(@"Task %@ ends successfully", self.task);
         if ([taskDelegate respondsToSelector:@selector(taskHasBeenProcessed:)]) {
             [taskDelegate taskHasBeenProcessed:self.task];
         }
     }
     else {
-        logger_debug(@"Task %@ has been cancelled", self.task);
+        HLSLoggerDebug(@"Task %@ has been cancelled", self.task);
         if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
             [taskDelegate taskHasBeenCancelled:self.task];
         }
@@ -239,13 +239,13 @@
             taskGroup.running = NO;
             
             if (! taskGroup.cancelled) {
-                logger_debug(@"Task group %@ ends successfully", taskGroup);
+                HLSLoggerDebug(@"Task group %@ ends successfully", taskGroup);
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
                     [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
                 }
             }
             else {
-                logger_debug(@"Task group %@ has been cancelled", taskGroup);
+                HLSLoggerDebug(@"Task group %@ has been cancelled", taskGroup);
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
                     [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
                 }

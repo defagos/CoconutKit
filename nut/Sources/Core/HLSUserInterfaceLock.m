@@ -56,14 +56,14 @@
 {
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     if (! window) {
-        logger_warn(@"No key window define when trying to acquire interface lock; please ensure that the UIWindow "
-                    "makeKeyAndVisible method has been called (e.g. by moving its call to the top of your "
-                    "application:didFinishLaunchingWithOptions: application delegate method). No lock acquired.");
+        HLSLoggerWarn(@"No key window define when trying to acquire interface lock; please ensure that the UIWindow "
+                      "makeKeyAndVisible method has been called (e.g. by moving its call to the top of your "
+                      "application:didFinishLaunchingWithOptions: application delegate method). No lock acquired.");
         return;
     }
     
     ++m_useCount;
-    logger_debug(@"Acquiring UI lock");
+    HLSLoggerDebug(@"Acquiring UI lock");
     
     if (m_useCount == 1) {
         // Prevents user interaction using a modal transparent view covering the whole screen. To get modal-like behavior 
@@ -81,12 +81,12 @@
 {
     // Check that the UI was locked
     if (m_useCount == 0) {
-        logger_debug(@"The UI was not locked, nothing to unlock");
+        HLSLoggerDebug(@"The UI was not locked, nothing to unlock");
         return;
     }
     
     --m_useCount;
-    logger_debug(@"Release UI lock");
+    HLSLoggerDebug(@"Release UI lock");
     
     if (m_useCount == 0) {
         // Removes the modal-like view

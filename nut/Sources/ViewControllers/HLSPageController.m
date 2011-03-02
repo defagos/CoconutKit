@@ -121,7 +121,7 @@
     else {
         prevCurrentViewController = nil;
     }
-
+    
     UIViewController *currentViewController; 
     if (currentPage != PAGE_CONTROLLER_NO_PAGE) {
         currentViewController = [self viewControllerObjectAtIndex:currentPage];
@@ -445,7 +445,7 @@
             // In the case of lazy loading, it is the responsibility of the caller to ensure that all view controllers
             // support the new orientation. Check and log if programming error
             if (! clonableViewController) {
-                logger_error(@"A view controller does not support the new orientation");
+                HLSLoggerError(@"A view controller does not support the new orientation");
             }
             
             [orientedViewControllers addObject:clonedViewController];
@@ -453,7 +453,7 @@
         }
         
         // No oriented version available, caller has lied to us in lazy loading mode
-        logger_error(@"A view controller does not support the new orientation");
+        HLSLoggerError(@"A view controller does not support the new orientation");
     }
     
     // We replace the view controllers

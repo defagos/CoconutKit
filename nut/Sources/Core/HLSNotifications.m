@@ -81,7 +81,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 {
     ++m_networkActivityCount;
     
-    logger_debug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 1) {
         [self postCoalescingNotificationWithName:HLSNetworkActivityStartNotification];
@@ -91,13 +91,13 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 - (void)notifyEndNetworkActivity
 {
     if (m_networkActivityCount == 0) {
-        logger_warn(@"Warning: Notifying the end of a network activity which has not been started");
+        HLSLoggerWarn(@"Warning: Notifying the end of a network activity which has not been started");
         return;
     }
     
     --m_networkActivityCount;
     
-    logger_debug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 0) {
         [self postCoalescingNotificationWithName:HLSNetworkActivityStopNotification];
@@ -216,8 +216,8 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
                                                  name:notificationNameFrom 
                                                object:objectFrom];
     
-    logger_debug(@"Added conversion rule for (%@, %p) into (%@, %p)", notificationNameFrom,
-                 objectFrom, notificationNameTo, objectTo);
+    HLSLoggerDebug(@"Added conversion rule for (%@, %p) into (%@, %p)", notificationNameFrom,
+                   objectFrom, notificationNameTo, objectTo);
 }
 
 // TODO: Warning! Does not work correctly for dictionaries (should iterate over the values, not the keys, which is the default
@@ -229,9 +229,9 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
 {
     for (id objectFrom in collectionFrom) {
         [[HLSNotificationConverter sharedNotificationConverter] convertNotificationWithName:notificationNameFrom 
-                                                                            sentByObject:objectFrom
-                                                                intoNotificationWithName:notificationNameTo 
-                                                                            sentByObject:objectTo];
+                                                                               sentByObject:objectFrom
+                                                                   intoNotificationWithName:notificationNameTo 
+                                                                               sentByObject:objectTo];
     }
 }
 
@@ -262,7 +262,7 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
     // Remove all rules
     [self.objectToNotificationMap removeObjectForKey:fromIdentifier];
     
-    logger_debug(@"Removed all conversions for object %p", objectFrom);
+    HLSLoggerDebug(@"Removed all conversions for object %p", objectFrom);
 }
 
 - (void)removeConversionsFromObjectsInCollection:(id<NSFastEnumeration>)collectionFrom
@@ -293,8 +293,8 @@ DEFINE_NOTIFICATION(HLSNetworkActivityStopNotification);
     
     // We should never be trapped here if no conversion rule exists; but stay defensive anyway
     if (! sender) {
-        logger_warn(@"Notification conversion remains registered with NSNotificationCenter for object %@ "
-                    "and notification %@, but should not be", fromIdentifier, notification.name);
+        HLSLoggerWarn(@"Notification conversion remains registered with NSNotificationCenter for object %@ "
+                      "and notification %@, but should not be", fromIdentifier, notification.name);
         return;
     }
     

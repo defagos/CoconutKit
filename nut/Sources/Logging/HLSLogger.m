@@ -43,13 +43,11 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 	if (! s_instance) {
         @synchronized(self) {
             if (! s_instance) {
-                // Read the environment.plist file
-                NSString *envPlistPath = [[NSBundle mainBundle] pathForResource:@"environment" ofType:@"plist"];
-                NSDictionary *envProperties = [[[NSDictionary alloc] initWithContentsOfFile:envPlistPath] 
-                                               autorelease];
+                // Read the main .plist file content
+                NSDictionary *infoProperties = [[NSBundle mainBundle] infoDictionary];
                 
                 // Create a logger with the corresponding level
-                NSString *levelName = [envProperties valueForKey:@"Logger level"];
+                NSString *levelName = [infoProperties valueForKey:@"HLSLoggerLevel"];
                 HLSLoggerLevel level;
                 if ([levelName isEqual:kLoggerModeDebug.name]) {
                     level = HLSLoggerLevelDebug;

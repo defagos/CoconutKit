@@ -93,13 +93,13 @@ static HLSKeyboardInformation *s_instance = nil;
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    logger_debug(@"Keyboard shown");
+    HLSLoggerDebug(@"Keyboard shown");
     s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-    logger_debug(@"Keyboard hidden");
+    HLSLoggerDebug(@"Keyboard hidden");
     [s_instance release];
     s_instance = nil;
 }

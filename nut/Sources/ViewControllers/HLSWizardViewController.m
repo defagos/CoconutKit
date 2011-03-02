@@ -157,7 +157,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     if (currentPage == m_currentPage) {
         return;
     }
-        
+    
     // Update the value and refresh the UI accordingly
     NSInteger oldCurrentPage = m_currentPage;
     m_currentPage = currentPage;
@@ -170,7 +170,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     
     // Sanitize input
     if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
-        logger_error(@"Incorrect page number %d, must lie between 0 and %d", currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", currentPage, [self.viewControllers count]);
         return;
     }
     
@@ -198,7 +198,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
         }
             
         default: {
-            logger_error(@"Unknown transition style");
+            HLSLoggerError(@"Unknown transition style");
             transitionStyle = HLSTransitionStyleNone;
             break;
         }            
@@ -237,7 +237,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     
     // Sanitize input
     if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        logger_error(@"Incorrect page number %d, must lie between 0 and %d", self.currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", self.currentPage, [self.viewControllers count]);
         return;
     }
     
@@ -272,7 +272,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input (deals with the "no page" case)
     if (page < 0 || page >= [self.viewControllers count]) {
-        logger_error(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
         return YES;
     }
     
@@ -292,7 +292,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input
     if (page < 0 || page >= [self.viewControllers count]) {
-        logger_error(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
         return;
     }
     

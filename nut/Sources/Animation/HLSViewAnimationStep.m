@@ -98,11 +98,11 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 {
     // Sanitize input
     if (floatlt(alphaVariation, -1.f)) {
-        logger_warn(@"Alpha variation cannot be smaller than -1. Fixed to -1");
+        HLSLoggerWarn(@"Alpha variation cannot be smaller than -1. Fixed to -1");
         m_alphaVariation = -1.f;
     }
     else if (floatgt(alphaVariation, 1.f)) {
-        logger_warn(@"Alpha variation cannot be larger than 1. Fixed to 1");
+        HLSLoggerWarn(@"Alpha variation cannot be larger than 1. Fixed to 1");
         m_alphaVariation = 1.f;
     }
     else {

@@ -101,7 +101,7 @@ static UIScrollView *s_scrollView = nil;
 {
     // Sanitize input
     if (floatlt(minVisibilityDistance, 0.f)) {
-        logger_warn(@"Invalid value; must be positive");
+        HLSLoggerWarn(@"Invalid value; must be positive");
         m_minVisibilityDistance = 0.f;
     }
     else {

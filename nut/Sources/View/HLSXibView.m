@@ -31,7 +31,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
 + (UIView *)xibView
 {   
     if ([self isMemberOfClass:[HLSXibView class]]) {
-        logger_error(@"HLSXibView cannot be instantiated directly");
+        HLSLoggerError(@"HLSXibView cannot be instantiated directly");
         return nil;
     }
     
@@ -41,7 +41,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
         return [bundleContents objectAtIndex:0];
     }
     else {
-        logger_error(@"xib file not found");
+        HLSLoggerError(@"xib file not found");
         return nil;
     }
 }

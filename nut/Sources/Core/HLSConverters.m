@@ -44,7 +44,7 @@
         }
             
         default: {
-            logger_error(@"Unknown interface orientation");
+            HLSLoggerError(@"Unknown interface orientation");
             return nil;
             break;
         }            
@@ -75,7 +75,7 @@
         }
             
         default: {
-            logger_error(@"Unknown device orientation");
+            HLSLoggerError(@"Unknown device orientation");
             return nil;
             break;
         }            

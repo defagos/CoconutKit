@@ -68,7 +68,7 @@
 {
     // Sanitize input
     if (doublelt(duration, 0.)) {
-        logger_warn(@"Duration must be non-negative. Fixed to 0");
+        HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
         duration = 0.;
     }
     
@@ -111,7 +111,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Check that the new inset can be displayed for the current orientation
     if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
         if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
-            logger_error(@"The inset view controller cannot be set because it does not support the current interface orientation");
+            HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
             return;
         }
     }
@@ -369,7 +369,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     return [self.insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-        || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
+    || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -686,7 +686,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         }
             
         default: {
-            logger_error(@"Unknown transition style");
+            HLSLoggerError(@"Unknown transition style");
             return nil;
             break;
         }

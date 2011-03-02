@@ -23,7 +23,6 @@
 		6F7A2797130AECE900AB1926 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A2796130AECE900AB1926 /* MemoryWarningTestCoverViewController.xib */; };
 		6F7A27EA130AF8F500AB1926 /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A27E9130AF8F500AB1926 /* LifeCycleTestViewController.m */; };
 		6F7A27EC130AF90200AB1926 /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A27EB130AF90200AB1926 /* LifeCycleTestViewController.xib */; };
-		6F7A27FF130AFFFF00AB1926 /* environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A27FE130AFFFF00AB1926 /* environment.plist */; };
 		6F7A2A46130B9BCA00AB1926 /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A2A44130B9BCA00AB1926 /* LandscapeOnlyViewController.m */; };
 		6F7A2A47130B9BCA00AB1926 /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A2A45130B9BCA00AB1926 /* LandscapeOnlyViewController.xib */; };
 		6F7A2A70130B9DBD00AB1926 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A2A6E130B9DBD00AB1926 /* PortraitOnlyViewController.m */; };
@@ -102,7 +101,6 @@
 		6F7A27E8130AF8F500AB1926 /* LifeCycleTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeCycleTestViewController.h; sourceTree = "<group>"; };
 		6F7A27E9130AF8F500AB1926 /* LifeCycleTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeCycleTestViewController.m; sourceTree = "<group>"; };
 		6F7A27EB130AF90200AB1926 /* LifeCycleTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LifeCycleTestViewController.xib; sourceTree = "<group>"; };
-		6F7A27FE130AFFFF00AB1926 /* environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = environment.plist; sourceTree = "<group>"; };
 		6F7A2A43130B9BCA00AB1926 /* LandscapeOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandscapeOnlyViewController.h; sourceTree = "<group>"; };
 		6F7A2A44130B9BCA00AB1926 /* LandscapeOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandscapeOnlyViewController.m; sourceTree = "<group>"; };
 		6F7A2A45130B9BCA00AB1926 /* LandscapeOnlyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandscapeOnlyViewController.xib; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				32CA4F630368D1EE00C91783 /* nut_demo_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				6FBDA7A61303EE9B004B9617 /* Localizable.strings */,
-				6F7A27FE130AFFFF00AB1926 /* environment.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -788,7 +785,6 @@
 				6F7A275F130AE84500AB1926 /* HeavyViewController.xib in Resources */,
 				6F7A2797130AECE900AB1926 /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6F7A27EC130AF90200AB1926 /* LifeCycleTestViewController.xib in Resources */,
-				6F7A27FF130AFFFF00AB1926 /* environment.plist in Resources */,
 				6F7A2A47130B9BCA00AB1926 /* LandscapeOnlyViewController.xib in Resources */,
 				6F7A2A71130B9DBD00AB1926 /* PortraitOnlyViewController.xib in Resources */,
 				6F7A2A97130BA37400AB1926 /* OrientationClonerViewControllerPortrait.xib in Resources */,

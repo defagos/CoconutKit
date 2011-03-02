@@ -58,7 +58,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 - (Class)operationClass
 {
-    logger_error(@"No operation class attached to task class %@", [self class]);
+    HLSLoggerError(@"No operation class attached to task class %@", [self class]);
     return NULL;
 }
 
@@ -89,7 +89,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
         else {
             _progress = 1.f;
         }
-        logger_warn(@"Incorrect value %f for progress value, must be between 0 and 1. Fixed", progress);
+        HLSLoggerWarn(@"Incorrect value %f for progress value, must be between 0 and 1. Fixed", progress);
     }
     else {
         _progress = progress;

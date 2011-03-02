@@ -97,7 +97,7 @@
 {
     // Cannot be played if already running (equivalently, we can test we are iterating over steps)
     if (self.animationStepsEnumerator) {
-        logger_debug(@"The animation is already running");
+        HLSLoggerDebug(@"The animation is already running");
         return;
     }
     
@@ -124,7 +124,7 @@
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];        
     }
-        
+    
     // Animate all views in the animation step
     for (UIView *view in [animationStep views]) {
         // The views are brought to the front in the order they were registered with the animation step
@@ -138,17 +138,17 @@
         // Alpha always between 0.f and 1.f
         CGFloat alpha = view.alpha + viewAnimationStep.alphaVariation;
         if (floatlt(alpha, -1.f)) {
-            logger_warn(@"Animation steps adding to value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", view);
+            HLSLoggerWarn(@"Animation steps adding to value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", view);
             view.alpha = -1.f;
         }
         else if (floatgt(alpha, 1.f)) {
-            logger_warn(@"Animation steps adding to value larger than 1 for view %@. Fixed to 1, but your animation is incorrect", view);
+            HLSLoggerWarn(@"Animation steps adding to value larger than 1 for view %@. Fixed to 1, but your animation is incorrect", view);
             view.alpha = 1.f;
         }
         else {
             view.alpha = alpha;
         }
-
+        
         // The fact that transform is a property is essential. If you "po" a UIView in gdb, you will see something like:
         //   <UIView: 0x4d57c40; frame = (141 508; 136 102); transform = [1, 0, 0, 1, 30, -60]; autoresize = RM+BM; layer = <CALayer: 0x4d57cc0>>
         // i.e. the view is attached a transform, not applied a transform which would get lost after it has been applied. If

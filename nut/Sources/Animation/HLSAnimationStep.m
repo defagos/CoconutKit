@@ -177,12 +177,12 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 - (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view
 {   
     if (! viewAnimationStep) {
-        logger_warn(@"View animation step is nil");
+        HLSLoggerWarn(@"View animation step is nil");
         return;
     }
     
     if (! view) {
-        logger_warn(@"View is nil");
+        HLSLoggerWarn(@"View is nil");
         return;
     }
     
@@ -221,7 +221,7 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 {
     // Sanitize input
     if (doublelt(duration, 0.)) {
-        logger_warn(@"Duration must be non-negative. Fixed to 0");
+        HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
         m_duration = 0.;
     }
     else {

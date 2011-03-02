@@ -41,19 +41,19 @@
 - (void)initialize
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
-    logger_debug(@"View controller %@ initialized", self);
+    HLSLoggerDebug(@"View controller %@ initialized", self);
 }
 
 - (void)dealloc
 {
-    logger_debug(@"View controller %@ deallocated", self);
+    HLSLoggerDebug(@"View controller %@ deallocated", self);
     [self releaseViews];
     [super dealloc];
 }
 
 - (void)releaseViews
 {
-    logger_debug(@"Views released for view controller %@", self);
+    HLSLoggerDebug(@"Views released for view controller %@", self);
 }
 
 #pragma mark Accessors and mutators
@@ -64,7 +64,7 @@
 {
     [super setView:view];
     if (! view) {
-        logger_debug(@"View controller %@: view set to nil", self);
+        HLSLoggerDebug(@"View controller %@: view set to nil", self);
     }
 }
 
@@ -81,35 +81,35 @@
 {
     [super viewDidLoad];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
-    logger_debug(@"View controller %@: view did load", self);
+    HLSLoggerDebug(@"View controller %@: view did load", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
-    logger_debug(@"View controller %@: view will appear", self);
+    HLSLoggerDebug(@"View controller %@: view will appear", self);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
-    logger_debug(@"View controller %@: view did appear", self);
+    HLSLoggerDebug(@"View controller %@: view did appear", self);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
-    logger_debug(@"View controller %@: view will disappear", self);
+    HLSLoggerDebug(@"View controller %@: view will disappear", self);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
-    logger_debug(@"View controller %@: view did disappear", self);
+    HLSLoggerDebug(@"View controller %@: view did disappear", self);
 }
 
 - (void)viewDidUnload
@@ -117,7 +117,7 @@
     [super viewDidUnload];
     [self releaseViews];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
-    logger_debug(@"View controller %@: view did unload", self);
+    HLSLoggerDebug(@"View controller %@: view did unload", self);
 }
 
 #pragma mark View management
@@ -148,13 +148,13 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    logger_debug(@"View controller %@ will rotate to interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
+    HLSLoggerDebug(@"View controller %@ will rotate to interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    logger_debug(@"View controller %@ did rotate from interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
+    HLSLoggerDebug(@"View controller %@ did rotate from interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
 }
 
 #endif
@@ -166,7 +166,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    logger_debug(@"View controller %@ did receive a memory warning", self);
+    HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
 }
 
 #endif

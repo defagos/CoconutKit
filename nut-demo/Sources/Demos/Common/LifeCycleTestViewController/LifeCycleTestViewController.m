@@ -45,42 +45,42 @@
                                                  blue:(rand() % 256)/256.f 
                                                 alpha:1.f];    
     
-    logger_info(@"Called for object %@", self);
+    HLSLoggerInfo(@"Called for object %@", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    logger_info(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     
-    logger_info(@"Called for object %@", self);
+    HLSLoggerInfo(@"Called for object %@", self);
 }
 
 #pragma mark Orientation management
@@ -91,7 +91,7 @@
         return NO;
     }
     
-    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
+    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
     return YES;
 }
 
@@ -99,21 +99,21 @@
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
+    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    logger_info(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
+    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    logger_info(@"Called, fromInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
+    HLSLoggerInfo(@"Called, fromInterfaceOrientation = %@", [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
 }
 
 @end

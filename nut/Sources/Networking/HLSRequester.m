@@ -117,7 +117,7 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
     
     // The process could not start
     if (! self.connection) {
-        logger_error(@"Unable to open connection for fetching data %@", self.tag);
+        HLSLoggerError(@"Unable to open connection for fetching data %@", self.tag);
     }
 }
 
@@ -252,7 +252,7 @@ DEFINE_NOTIFICATION(HLSRequesterFailureNotification);
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    logger_debug(@"Data request failed with error: %@", error);
+    HLSLoggerDebug(@"Data request failed with error: %@", error);
     
     // Reset object
     [self reset];
