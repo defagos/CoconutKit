@@ -132,7 +132,7 @@
  *         to nil and send it the viewDidUnload afterwards. If all view controller containers of the world knew
  *         about HLSViewController, this would work, but since they don't this would lead to viewDidUnload be
  *         called twice in most cases)! */
-- (void)unloadView
+- (void)unloadViews
 {
     self.view = nil;
     [self viewDidUnload];

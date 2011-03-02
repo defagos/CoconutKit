@@ -69,8 +69,9 @@ typedef enum {
 /**
  * Convenience method to set the view controller to nil and forward viewDidUnload to its view controller
  * Not meant to be overridden
+ * Note: Originally I intented to call this method unloadView, but UIViewController already implements this method... privately
  */
-- (void)unloadView;
+- (void)unloadViews;
 
 /**
  * Return the life cycle phase the view controller is currently in

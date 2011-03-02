@@ -165,7 +165,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLSTableViewCellCreate(HLSSubtitleTableViewCell, tableView);
+    UITableViewCell *cell = HLSTableViewCellGet(HLSSubtitleTableViewCell, tableView);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
