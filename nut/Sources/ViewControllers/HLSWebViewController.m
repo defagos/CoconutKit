@@ -11,7 +11,7 @@
 @implementation HLSWebViewController
 
 @synthesize request;
-@synthesize webView, goBackButtonItem, goForwardButtonItem, refreshButtonItem;
+@synthesize webView, toolbar, goBackButtonItem, goForwardButtonItem, refreshButtonItem, activityIndicator;
 
 - (id)initWithRequest:(NSURLRequest *)aRequest
 {
@@ -31,6 +31,7 @@
 {
 	self.goBackButtonItem.enabled = self.webView.canGoBack;
 	self.goForwardButtonItem.enabled = self.webView.canGoForward;
+	self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : [UIImage imageNamed:@"nut_ButtonBarRefresh.png"];
 }
 
 - (void)viewDidLoad
@@ -49,9 +50,11 @@
 {
 	[super releaseViews];
 	self.webView = nil;
+	self.toolbar = nil;
 	self.goBackButtonItem = nil;
 	self.goForwardButtonItem = nil;
 	self.refreshButtonItem = nil;
+	self.activityIndicator = nil;
 }
 
 // MARK: -
@@ -60,11 +63,14 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self.activityIndicator startAnimating];
+	[self updateView];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self.activityIndicator stopAnimating];
 	self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 	[self updateView];
 }
@@ -82,6 +88,60 @@
 {
 	[self.webView goForward];
 	[self updateView];
+}
+
+- (IBAction)refresh:(id)sender
+{
+	[self.webView loadRequest:self.webView.request];
+}
+
+- (IBAction)displayActionShet:(id)sender;
+{
+	NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
+	NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", nil, uiKitBundle ?: [NSBundle mainBundle], @"");
+	NSString *openInSafari = NSLocalizedStringFromTable(@"Open in Safari", @"nut_Localizable", @"HLSWebViewController 'Open in Safari' action");
+	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTable(@"Mail Link", @"nut_Localizable", @"HLSWebViewController 'Mail Link' action") : nil;
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString] delegate:self cancelButtonTitle:cancel destructiveButtonTitle:nil otherButtonTitles:openInSafari, mailLink, nil] autorelease];
+	[actionSheet showFromToolbar:self.toolbar];
+}
+
+// MARK: -
+// MARK: Action Sheet
+
+- (void)openInBrowser
+{
+	[[UIApplication sharedApplication] openURL:self.webView.request.URL];
+}
+
+- (void)mailLink
+{
+	MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+	mailComposeViewController.mailComposeDelegate = self;
+	[mailComposeViewController setSubject:self.title];
+	[mailComposeViewController setMessageBody:[self.webView.request.URL absoluteString] isHTML:NO];
+	[self presentModalViewController:mailComposeViewController animated:YES];
+	[mailComposeViewController release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == actionSheet.cancelButtonIndex)
+		return;
+	
+	switch (buttonIndex)
+	{
+		case 0:
+			[self openInBrowser];
+			break;
+		case 1:
+			[self mailLink];
+			break;
+	}
 }
 
 @end
