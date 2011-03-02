@@ -13,7 +13,7 @@
 @synthesize request;
 @synthesize webView, goBackButtonItem, goForwardButtonItem, refreshButtonItem;
 
-- (id) initWithRequest:(NSURLRequest *)aRequest
+- (id)initWithRequest:(NSURLRequest *)aRequest
 {
 	if ((self = [super initWithNibName:@"nut_HLSWebViewController" bundle:nil])) {
 		request = [aRequest retain];
@@ -21,13 +21,13 @@
 	return self;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	[request release];
 	[super dealloc];
 }
 
-- (void) updateView
+- (void)updateView
 {
 	self.goBackButtonItem.enabled = self.webView.canGoBack;
 	self.goForwardButtonItem.enabled = self.webView.canGoForward;

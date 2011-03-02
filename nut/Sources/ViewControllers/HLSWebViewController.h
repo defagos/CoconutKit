@@ -10,7 +10,7 @@
 
 @interface HLSWebViewController : HLSViewController <UIWebViewDelegate>
 
-- (id) initWithRequest:(NSURLRequest *)request;
+- (id)initWithRequest:(NSURLRequest *)request;
 
 @property (nonatomic, readonly) NSURLRequest *request;
 

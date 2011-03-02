@@ -9,7 +9,10 @@
 #import "HLSViewController.h"
 
 #import "HLSLogger.h"
+
+#ifdef DEBUG
 #import "HLSConverters.h"
+#endif
 
 @interface HLSViewController ()
 

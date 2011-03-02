@@ -14,7 +14,7 @@
 
 + (NSString *)className
 {
-    return [NSString stringWithUTF8String:class_getName([self class])];
+    return NSStringFromClass(self);
 }
 
 - (NSString *)className
