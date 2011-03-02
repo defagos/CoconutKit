@@ -47,6 +47,7 @@ HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
 HLSViewAnimationStep.h
 HLSViewController.h
+HLSWebViewController.h
 HLSWizardViewController.h
 HLSXibView.h
 NSArray+HLSExtensions.h

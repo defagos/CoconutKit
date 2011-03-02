@@ -127,6 +127,8 @@
 		6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		DA83830D131E78B800ECAED3 /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA83830A131E78B800ECAED3 /* HLSWebViewController.h */; };
+		DA83830E131E78B800ECAED3 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83830B131E78B800ECAED3 /* HLSWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -254,6 +256,21 @@
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA83830A131E78B800ECAED3 /* HLSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWebViewController.h; sourceTree = "<group>"; };
+		DA83830B131E78B800ECAED3 /* HLSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWebViewController.m; sourceTree = "<group>"; };
+		DA83830C131E78B800ECAED3 /* nut_HLSWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSWebViewController.xib; sourceTree = "<group>"; };
+		DA8383C5131E86FC00ECAED3 /* nut_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		DA8383C6131E86FC00ECAED3 /* nut_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
+		DA8383C7131E86FC00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowLeftLandscape.png; sourceTree = "<group>"; };
+		DA8383C8131E86FC00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarArrowLeftLandscape@2x.png"; sourceTree = "<group>"; };
+		DA8383C9131E86FC00ECAED3 /* nut_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowRight.png; sourceTree = "<group>"; };
+		DA8383CA131E86FC00ECAED3 /* nut_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
+		DA8383CB131E86FC00ECAED3 /* nut_ButtonBarArrowRightLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowRightLandscape.png; sourceTree = "<group>"; };
+		DA8383CC131E86FC00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarArrowRightLandscape@2x.png"; sourceTree = "<group>"; };
+		DA8383CD131E86FC00ECAED3 /* nut_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarRefresh.png; sourceTree = "<group>"; };
+		DA8383CE131E86FC00ECAED3 /* nut_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		DA8383CF131E86FC00ECAED3 /* nut_ButtonBarRefreshLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarRefreshLandscape.png; sourceTree = "<group>"; };
+		DA8383D0131E86FC00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarRefreshLandscape@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +448,9 @@
 				6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */,
 				6FBDAD2213068956004B9617 /* HLSViewController.h */,
 				6FBDAD2313068956004B9617 /* HLSViewController.m */,
+				DA83830A131E78B800ECAED3 /* HLSWebViewController.h */,
+				DA83830B131E78B800ECAED3 /* HLSWebViewController.m */,
+				DA83830C131E78B800ECAED3 /* nut_HLSWebViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -478,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				6F8D09A7123F5ECF00FCF2AF /* nut_Localizable.strings */,
+				DA8383C4131E86FC00ECAED3 /* Images */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -519,6 +540,25 @@
 				6F93EE6B12DE55080039A2B2 /* HLSTaskOperation.m */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		DA8383C4131E86FC00ECAED3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DA8383C5131E86FC00ECAED3 /* nut_ButtonBarArrowLeft.png */,
+				DA8383C6131E86FC00ECAED3 /* nut_ButtonBarArrowLeft@2x.png */,
+				DA8383C7131E86FC00ECAED3 /* nut_ButtonBarArrowLeftLandscape.png */,
+				DA8383C8131E86FC00ECAED3 /* nut_ButtonBarArrowLeftLandscape@2x.png */,
+				DA8383C9131E86FC00ECAED3 /* nut_ButtonBarArrowRight.png */,
+				DA8383CA131E86FC00ECAED3 /* nut_ButtonBarArrowRight@2x.png */,
+				DA8383CB131E86FC00ECAED3 /* nut_ButtonBarArrowRightLandscape.png */,
+				DA8383CC131E86FC00ECAED3 /* nut_ButtonBarArrowRightLandscape@2x.png */,
+				DA8383CD131E86FC00ECAED3 /* nut_ButtonBarRefresh.png */,
+				DA8383CE131E86FC00ECAED3 /* nut_ButtonBarRefresh@2x.png */,
+				DA8383CF131E86FC00ECAED3 /* nut_ButtonBarRefreshLandscape.png */,
+				DA8383D0131E86FC00ECAED3 /* nut_ButtonBarRefreshLandscape@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -591,6 +631,7 @@
 				6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */,
 				6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */,
 				6F84B527131D2EFE002C3D05 /* HLSAssert.h in Headers */,
+				DA83830D131E78B800ECAED3 /* HLSWebViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +740,7 @@
 				6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */,
 				6F6E9A0A1316997E0075DD7A /* NSData+HLSExtensions.m in Sources */,
 				6F84B528131D2EFE002C3D05 /* HLSAssert.m in Sources */,
+				DA83830E131E78B800ECAED3 /* HLSWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
