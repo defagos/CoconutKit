@@ -46,3 +46,27 @@ if you are linking against the nut-Debug or nut-Debug-src packages, you will get
 An iPad demo project is provided. To compile it, first build the nut-Release .staticframework (as described above), then 
 run the link-fmwk command from the nut-demo project main directory (the one containing nut-demo.xcodeproj). The
 project can then be built and run using Xcode.
+
+
+4) The nut-dev project
+   -------------------
+When working on a library component, it is not very convenient to use the nut-demo library, because every time a change
+is made the library has to be recompiled before being linked to the demo project. For convenience, a nut-dev project has
+therefore been introduced. This project simply combines the nut and nut-demo projects into one (all corresponding files
+have been collected into the project "Shared" directory). With the exception of a few files, which have been collected
+in the project "nut-dev Other Sources" directory, the nut-dev project is therefore an empty shell.
+
+The recommended way to use the nut-dev project is the following:
+  - during development, you can add files to the nut or nut-demo directly from within nut-dev
+  - when you add a new public header, add it to the nut-dev pch file
+  - when you are done with the development, mirror your changes into the nut and nut-demo projects. The headers you
+    have added to the nut-dev pch file must be added to the publicHeaders.txt found in the nut project. If you
+    made changes to your project or target settings, mirror them if needed
+  - build the library and the demo project, and check that everything compiles, links and works as expected. You might 
+    have to tune the nut bootstrap.txt file if new objects you have introduced do not behave correctly with the nut-demo
+    project
+  - commit all changes you made to the three projects to the repository
+
+It would have been nice to use the nut-demo project also for development, but it was difficult not to introduce special
+settings and tricks to get this working. Having a clean separate demo project is easier to understand (which is the
+goal of a demo after all).
