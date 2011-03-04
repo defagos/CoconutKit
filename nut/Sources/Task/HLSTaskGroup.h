@@ -30,8 +30,12 @@
 @private
     NSString *_tag;
     NSDictionary *_userInfo;
-    NSMutableSet *_taskSet;                     // contains HLSTask objects
-    NSMutableDictionary *_dependencyMap;        // maps a HLSTask object to the NSMutableSet of all other HLSTask objects it depends on
+    NSMutableSet *_taskSet;                                     // contains HLSTask objects
+    // Dependencies between tasks are saved in both directions for faster lookup
+    NSMutableDictionary *_weakTaskDependencyMap;                // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
+    NSMutableDictionary *_strongTaskDependencyMap;              // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
+    NSMutableDictionary *_taskToWeakDependentsMap;              // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
+    NSMutableDictionary *_taskToStrongDependentsMap;            // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
     BOOL _running;
     BOOL _finished;
     BOOL _cancelled;
@@ -108,14 +112,11 @@
 
 /**
  * Create dependencies between tasks of a task group (both tasks must have already been added to the task group. If task1 depends on task2, then 
- * task1 will only begin processing once task2 has been fully processed.
+ * task1 will only begin processing once task2 has been fully processed. Moreover, if the strong boolean is set to YES, task1 will be
+ * cancelled before it starts if task2 failed or was cancelled ("strong dependency"). Otherwise task1 will be started after task2 ends, no
+ * matter what happened with task2 ("weak dependency")
  */
-- (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2;
-
-/**
- * Return the array of all tasks which a task depends on
- */
-- (NSSet *)dependenciesForTask:(HLSTask *)task;
+- (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2 strong:(BOOL)strong;
 
 @end
 

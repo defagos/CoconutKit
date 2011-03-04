@@ -33,7 +33,8 @@
 - (void)attachReturnInfo:(NSDictionary *)returnInfo;
 
 /**
- * Call this method to attach an error to the task processed by the operation
+ * Call this method to attach an error to the task processed by the operation. The task is then considered to have
+ * failed
  * Not meant to be overridden
  */
 - (void)attachError:(NSError *)error;

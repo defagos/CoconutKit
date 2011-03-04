@@ -24,6 +24,20 @@
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 
 /**
+ * Return the set of tasks which a task depends on
+ */
+- (NSSet *)dependenciesForTask:(HLSTask *)task;
+- (NSSet *)weakDependenciesForTask:(HLSTask *)task;
+- (NSSet *)strongDependenciesForTask:(HLSTask *)task;
+
+/**
+ * Returns the set of tasks depending on a task
+ */
+- (NSSet *)dependentsForTask:(HLSTask *)task;
+- (NSSet *)weakDependentsForTask:(HLSTask *)task;
+- (NSSet *)strongDependentsForTask:(HLSTask *)task;
+
+/**
  * Reset internal status variables
  */
 - (void)reset;

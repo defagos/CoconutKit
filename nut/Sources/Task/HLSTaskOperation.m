@@ -211,17 +211,27 @@
     self.task.finished = YES;
     self.task.running = NO;
     
-    if (! [self isCancelled]) {
-        HLSLoggerDebug(@"Task %@ ends successfully", self.task);
-        if ([taskDelegate respondsToSelector:@selector(taskHasBeenProcessed:)]) {
-            [taskDelegate taskHasBeenProcessed:self.task];
-        }
-    }
-    else {
+    // The task has been cancelled
+    if ([self isCancelled]) {
         HLSLoggerDebug(@"Task %@ has been cancelled", self.task);
         if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
             [taskDelegate taskHasBeenCancelled:self.task];
+        }        
+    }
+    // The task has been processed
+    else {
+        // Successful
+        if (! self.task.error) {
+            HLSLoggerDebug(@"Task %@ ends successfully", self.task);
         }
+        // An error has been attached during processing
+        else {
+            HLSLoggerDebug(@"Task %@ has encountered an error", self.task);
+        }
+        
+        if ([taskDelegate respondsToSelector:@selector(taskHasBeenProcessed:)]) {
+            [taskDelegate taskHasBeenProcessed:self.task];
+        }        
     }
     
     // If part of a task group
@@ -249,6 +259,14 @@
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
                     [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
                 }
+            }
+        }
+        
+        // Cancel all tasks strongly depending on the task it not successful
+        if ([self isCancelled] || self.task.error) {
+            NSSet *strongDependents = [taskGroup strongDependentsForTask:self.task];
+            for (HLSTask *dependent in strongDependents) {
+                [self.taskManager cancelTask:dependent];
             }
         }
     }

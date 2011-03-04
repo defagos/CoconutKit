@@ -502,8 +502,8 @@
     [taskGroup addTask:sleepSubTask3];
     [[HLSTaskManager defaultManager] registerDelegate:self forTaskGroup:taskGroup];
     
-    // Task 2 will only start after task 1 is complete
-    [taskGroup addDependencyForTask:sleepSubTask2 onTask:sleepSubTask1];
+    // Task 2 will only start after task 1 is complete and successful
+    [taskGroup addDependencyForTask:sleepSubTask2 onTask:sleepSubTask1 strong:YES];
     
     [[HLSTaskManager defaultManager] submitTaskGroup:taskGroup];
 }
