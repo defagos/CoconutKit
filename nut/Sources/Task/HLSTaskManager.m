@@ -215,6 +215,12 @@
 
 - (void)cancelTask:(HLSTask *)task
 {
+    // If already finished (cancelled or complete), nothing to cancel
+    if (task.finished) {
+        HLSLoggerDebug(@"Task %@ is already complete or cancelled; cannot cancel", task);
+        return;
+    }
+    
     // Locate the associated operation
     NSValue *taskKey = [NSValue valueWithPointer:task];
     HLSTaskOperation *operation = [self.taskToOperationMap objectForKey:taskKey];
@@ -229,6 +235,18 @@
     // stop (and unregister them at this point). For tasks which have not been started, this has to be done
     // here
     if (! [operation isExecuting]) {
+        // If part of a task group, first cancel all dependent tasks; a task group is removed once all tasks it contains are
+        // marked as finished. Here we are careful enough to cancel all dependent task before the current task is set as 
+        // finished. This way the task group is guaranteed to survive the loop below
+        HLSTaskGroup *taskGroup = task.taskGroup;
+        if (taskGroup) {
+            // Cancel all tasks strongly depending on the task
+            NSSet *strongDependents = [taskGroup strongDependentsForTask:task];
+            for (HLSTask *dependent in strongDependents) {
+                [self cancelTask:dependent];
+            }
+        }
+        
         task.finished = YES;
         
         // Notify the task delegate
@@ -237,8 +255,13 @@
             [taskDelegate taskHasBeenCancelled:task];
         }
         
-        HLSTaskGroup *taskGroup = task.taskGroup;
         if (taskGroup) {
+            // Cancel all tasks strongly depending on the task
+            NSSet *strongDependents = [taskGroup strongDependentsForTask:task];
+            for (HLSTask *dependent in strongDependents) {
+                [self cancelTask:dependent];
+            } 
+            
             [taskGroup updateStatus];
             
             // If the task group is now complete, update and notify as well

@@ -261,6 +261,11 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         return;
     }
     
+    // Cannot set a dependency on itself!
+    if (task1 == task2) {
+        HLSLoggerError(@"A task cannot add itself as dependency");
+    }
+    
     // A dependency is either weak or strong, and cannot be registered several times
     NSValue *task1Key = [NSValue valueWithPointer:task1];
     NSMutableSet *task1WeakDependencies = [self.weakTaskDependencyMap objectForKey:task1Key];

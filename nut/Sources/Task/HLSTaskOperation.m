@@ -198,8 +198,21 @@
 
 - (void)notifyEnd
 {
-    // Update and notify about the end of the task
     id<HLSTaskDelegate> taskDelegate = [self.taskManager delegateForTask:self.task];
+    
+    // If part of a task group, first cancel all dependent tasks; a task group is removed once all tasks it contains are
+    // marked as finished. Here we are careful enough to cancel all dependent task before the current task is set as 
+    // finished. This way the task group is guaranteed to survive the loop below
+    HLSTaskGroup *taskGroup = self.task.taskGroup;
+    if (taskGroup) {
+        // Cancel all tasks strongly depending on the task it not successful
+        if ([self isCancelled] || self.task.error) {
+            NSSet *strongDependents = [taskGroup strongDependentsForTask:self.task];
+            for (HLSTask *dependent in strongDependents) {
+                [self.taskManager cancelTask:dependent];
+            }
+        }
+    }
     
     // Update the progress to 1.f on success, else do not alter current value (so that the progress value cannot go backwards)
     if (! self.task.error && ! [self isCancelled]) {
@@ -235,7 +248,6 @@
     }
     
     // If part of a task group
-    HLSTaskGroup *taskGroup = self.task.taskGroup;
     if (taskGroup) {
         // Update an notify about the task group progress as well
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
@@ -259,14 +271,6 @@
                 if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
                     [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
                 }
-            }
-        }
-        
-        // Cancel all tasks strongly depending on the task it not successful
-        if ([self isCancelled] || self.task.error) {
-            NSSet *strongDependents = [taskGroup strongDependentsForTask:self.task];
-            for (HLSTask *dependent in strongDependents) {
-                [self.taskManager cancelTask:dependent];
             }
         }
     }
