@@ -217,7 +217,7 @@
 {
     // If already finished (cancelled or complete), nothing to cancel
     if (task.finished) {
-        HLSLoggerDebug(@"Task %@ is already complete or cancelled; cannot cancel", task);
+        HLSLoggerDebug(@"Task %@ is already complete or cancelled", task);
         return;
     }
     
@@ -255,13 +255,7 @@
             [taskDelegate taskHasBeenCancelled:task];
         }
         
-        if (taskGroup) {
-            // Cancel all tasks strongly depending on the task
-            NSSet *strongDependents = [taskGroup strongDependentsForTask:task];
-            for (HLSTask *dependent in strongDependents) {
-                [self cancelTask:dependent];
-            } 
-            
+        if (taskGroup) {            
             [taskGroup updateStatus];
             
             // If the task group is now complete, update and notify as well
