@@ -38,12 +38,35 @@
 {
 	[super viewDidLoad];
 	[self.webView loadRequest:self.request];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
 	[self updateView];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	return /*UIInterfaceOrientationIsLandscape(interfaceOrientation) ||*/ interfaceOrientation == UIInterfaceOrientationPortrait;
+	return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	UIBarButtonItem *fixedSpaceLeft = [self.toolbar.items objectAtIndex:2];
+	UIBarButtonItem *fixedSpaceRight = [self.toolbar.items objectAtIndex:6];
+	if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
+	{
+		fixedSpaceLeft.width = fixedSpaceRight.width = 40.0f;
+	}
+	else
+	{
+		fixedSpaceLeft.width = fixedSpaceRight.width = 83.0f;
+	}
+	
+	CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
+	self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
+	self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
 }
 
 - (void)releaseViews
