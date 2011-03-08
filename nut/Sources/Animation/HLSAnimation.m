@@ -25,8 +25,8 @@
 
 - (NSArray *)reverseAnimationSteps;
 
-- (void)animationWillStart:(NSString *)animationID context:(void *)context;
-- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
+- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
+- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
 
@@ -120,8 +120,10 @@
         [UIView setAnimationDuration:animationStep.duration];
         [UIView setAnimationCurve:animationStep.curve];
         
-        [UIView setAnimationWillStartSelector:@selector(animationWillStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context: (though appearing
+        //         in the UIKit UIView header documentation) are reserved by Apple. Using them might lead to app rejection!
+        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];        
     }
     
@@ -265,7 +267,7 @@
 
 #pragma mark Animation callbacks
 
-- (void)animationWillStart:(NSString *)animationID context:(void *)context
+- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
     if (m_firstStep) {
         if ([self.delegate respondsToSelector:@selector(animationWillStart:)]) {
@@ -276,7 +278,7 @@
     }
 }
 
-- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
     
