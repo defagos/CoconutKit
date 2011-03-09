@@ -53,20 +53,23 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+	CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
+	self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
+	self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
+	
 	UIBarButtonItem *fixedSpaceLeft = [self.toolbar.items objectAtIndex:2];
 	UIBarButtonItem *fixedSpaceRight = [self.toolbar.items objectAtIndex:6];
+	CGFloat activityIndicatorYPosition = CGRectGetMinY(self.toolbar.frame) + roundf(toolbarSize.height / 2.0f);
 	if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
 	{
 		fixedSpaceLeft.width = fixedSpaceRight.width = 40.0f;
+		activityIndicator.center = CGPointMake(214, activityIndicatorYPosition);
 	}
 	else
 	{
 		fixedSpaceLeft.width = fixedSpaceRight.width = 83.0f;
+		activityIndicator.center = CGPointMake(334, activityIndicatorYPosition);
 	}
-	
-	CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
-	self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-	self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
 }
 
 - (void)releaseViews
