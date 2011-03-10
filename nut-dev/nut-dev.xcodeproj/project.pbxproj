@@ -150,6 +150,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F391B17132774890032F977 /* UIControl+HLSInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+HLSInjection.m"; sourceTree = "<group>"; };
+		6F51133C132929AD00A7EFAE /* UIControl+HLSInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSInjection.h"; sourceTree = "<group>"; };
 		6FEF8398131F76510015B57C /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FEF8399131F76510015B57C /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FEF839B131F76510015B57C /* nut_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -546,6 +547,7 @@
 				6FEF83D1131F76510015B57C /* NSObject+HLSExtensions.m */,
 				6FEF83D2131F76510015B57C /* NSString+HLSExtensions.h */,
 				6FEF83D3131F76510015B57C /* NSString+HLSExtensions.m */,
+				6F51133C132929AD00A7EFAE /* UIControl+HLSInjection.h */,
 				6F391B17132774890032F977 /* UIControl+HLSInjection.m */,
 			);
 			path = Core;

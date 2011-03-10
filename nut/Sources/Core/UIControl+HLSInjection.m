@@ -35,23 +35,10 @@ static void sentinelTouchUpActionImp(id self, SEL sel, id sender);
 static void wrapperTouchDownActionImp(id self, SEL sel, id sender);
 static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
 
+#pragma mark -
+#pragma mark UIControl (HLSInjectionPrivate) interface
+
 /** 
- * In UIKit, nothing prevents quasi-simulatenous taps on several buttons. Such taps can lead to very annoying issues.
- * For example, if two buttons opening two different view controllers modally are clicked quasi simultaenously, and 
- * if both of them respond to a touch up event to show their respective view controller, then you might end up stacking 
- * two view controllers modally. In such cases, your intention was of course to always present one modal view controller 
- * at a time.
- *
- * In general, you can fix such issues by littering your code with boolean variables and testing them in each button
- * action method. This is ugly, error-prone and painful.
- *
- * To avoid such issues, the category below globally injects some code to disable quasi-simulatenous taps. If such events 
- * occur, only the first tap will be executed, not the other ones. Double taps on the same button are of course not affected,
- * since they are simultaneous, not quasi. This code has been injected directly into UIControl. IMHO, you never want quasi
- * simultaneous taps to occur. Either you handle gestures involving several fingers for real simultaneous taps, or you
- * respond to single actions. The time interval between taps for quasi-simultaneity is undetermined, therefore
- * quasi-simultaneous taps are of no use.
- *
  * The code works as follows: We replace the usual UIControl event / target methods by wrappers using swizzling (the
  * implementations we replace are still called internally, the original behavior is therefore preserved). To track touch
  * events (up and down events), we then register two "sentinel" actions for touch up and down events:
@@ -81,9 +68,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
  *   - the list of inhibited controls is not a set (which retains its elements), but a list of NSValue objects
  *     containing the inhibited control pointers. This avoids keeping controls alive unnecessarily
  */
-@interface UIControl (HLSInjection)
-
-+ (void)load;
+@interface UIControl (HLSInjectionPrivate)
 
 - (id)swizzledInitWithFrame:(CGRect)frame;
 - (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
@@ -95,12 +80,21 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
 
 @end
 
+#pragma mark -
+#pragma mark UIControl (HLSInjection) implementation
+
 @implementation UIControl (HLSInjection)
 
 #pragma mark Class methods
 
-+ (void)load
++ (void)injectQuasiSimultaneousTapsDisabler
 {
+    // Test if already injected
+    if (s_inhibitedControls) {
+        HLSLoggerWarn(@"Already injected");
+        return;
+    }
+    
     // Get the original implementations we want to swizzle
     s_initWithFrame$Imp = method_getImplementation(class_getInstanceMethod([self class], 
                                                                            @selector(initWithFrame:)));
@@ -134,6 +128,13 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     // Set for tracking inhibited controls
     s_inhibitedControls = [[NSMutableSet alloc] init];
 }
+
+@end
+
+#pragma mark -
+#pragma mark UIControl (HLSInjectionPrivate) implementation
+
+@implementation UIControl (HLSInjectionPrivate)
 
 #pragma mark Methods injected by swizzling
 

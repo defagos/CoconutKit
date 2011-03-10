@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+HLSEnableUIControlInjection();
+
 int main(int argc, char *argv[])
 {    
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];

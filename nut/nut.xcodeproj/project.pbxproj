@@ -27,6 +27,7 @@
 		6F3DFB4712FF1F67009ACE4D /* HLSTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */; };
 		6F3DFB4812FF1F67009ACE4D /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */; };
 		6F5112F71329234A00A7EFAE /* UIControl+HLSInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5112F61329234A00A7EFAE /* UIControl+HLSInjection.m */; };
+		6F51131A132925EF00A7EFAE /* UIControl+HLSInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F511319132925EF00A7EFAE /* UIControl+HLSInjection.h */; };
 		6F5B04A1126DC8A800C92F2A /* HLSSingleValuePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5B049F126DC8A800C92F2A /* HLSSingleValuePicker.h */; };
 		6F5B04A2126DC8A800C92F2A /* HLSSingleValuePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B04A0126DC8A800C92F2A /* HLSSingleValuePicker.m */; };
 		6F5B04A6126DC8B800C92F2A /* HLSSingleValuePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */; };
@@ -154,6 +155,7 @@
 		6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransform.h; sourceTree = "<group>"; };
 		6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransform.m; sourceTree = "<group>"; };
 		6F5112F61329234A00A7EFAE /* UIControl+HLSInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+HLSInjection.m"; sourceTree = "<group>"; };
+		6F511319132925EF00A7EFAE /* UIControl+HLSInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSInjection.h"; sourceTree = "<group>"; };
 		6F5B049F126DC8A800C92F2A /* HLSSingleValuePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSingleValuePicker.h; sourceTree = "<group>"; };
 		6F5B04A0126DC8A800C92F2A /* HLSSingleValuePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSSingleValuePicker.m; sourceTree = "<group>"; };
 		6F5B04A3126DC8B800C92F2A /* HLSSingleValuePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSingleValuePickerViewController.h; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				6F8FA7D913165AB2003886FB /* NSString+HLSExtensions.h */,
 				6F8FA7DA13165AB2003886FB /* NSString+HLSExtensions.m */,
 				6F5112F61329234A00A7EFAE /* UIControl+HLSInjection.m */,
+				6F511319132925EF00A7EFAE /* UIControl+HLSInjection.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */,
 				6F84B527131D2EFE002C3D05 /* HLSAssert.h in Headers */,
 				DA83830D131E78B800ECAED3 /* HLSWebViewController.h in Headers */,
+				6F51131A132925EF00A7EFAE /* UIControl+HLSInjection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
