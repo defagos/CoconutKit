@@ -7,8 +7,8 @@
 //
 
 /**
- * Simply call this macro somewhere in global scope, e.g. outside your main function in main.m to enable 
- * or in your application delegate implementation file
+ * Simply call this macro somewhere in global scope to enable the UIControl injection early. Good places are
+ * for example main.m or your application .m file
  */
 #define HLSEnableUIControlInjection()                                                               \
     __attribute__ ((constructor)) void UIControlInjectionConstructor(void)                          \
@@ -17,29 +17,31 @@
     }
 
 /** 
- * In UIKit, nothing prevents quasi-simulatenous taps on several buttons. Such taps can lead to very annoying issues.
- * For example, if two buttons opening two different view controllers modally are clicked quasi simultaenously, and 
- * if both of them respond to a touch up event to show their respective view controller, then you might end up stacking 
- * two view controllers modally. In such cases, your intention was of course to always present one modal view controller 
- * at a time.
+ * With UIKit, nothing prevents quasi-simulatenous taps on several buttons. Such taps can lead to very annoying issues.
+ * For example, if two buttons opening two different modal view controllers are clicked quasi simultaenously, and 
+ * if both of them show their respective view controllers on touch up, then you might end up stacking two view controllers 
+ * modally. In such cases, your intention was of course to always present one modal view controller at a time, and
+ * not doing so could have all sort of nasty consequences (e.g. not being able to dismiss all stacked up view controllers, 
+ * crashes, rickrolling, etc.)
  *
  * In general, you can fix such issues by littering your code with boolean variables and testing them in each button
- * action method. This is ugly, error-prone and painful.
+ * action method. This is ugly, error-prone and rather painful.
  *
- * To avoid such issues, the category below allows to globally inject some code to disable quasi-simulatenous taps. If such 
- * taps occur, only the first one will be executed, not the other ones. Double taps on the same control are of course not 
- * affected, since they are simultaneous, not quasi.
+ * To avoid such issues, the category below allows to globally inject code disabling quasi-simulatenous taps. If such 
+ * taps occur, only the first one will be executed, not the other ones which are inhibited temporarily. Double taps 
+ * on the same control are of course not disabled, since they are simultaneous, not quasi. Note that the inhibited
+ * controls can still be highlighted when tapped, but that the associated event are in fact disabled.
  *
- * This code injects methods directly into UIControl. IMHO, you never want quasi simultaneous taps to occur, no matter
- * which control you use. Either you handle gestures involving several fingers for real simultaneous taps, or you
- * respond to single actions. Simultaneous taps are of no real use since the time between taps (which would define
- * what we mean by "quasi-simultaneous" is undefined).
+ * This category injects methods directly into UIControl. IMHO, you never want quasi simultaneous taps to occur, no matter
+ * which control you use. Your either want to handle gestures involving several fingers for real simultaneous taps, or you
+ * respond to single actions involving one control only. Simultaneous taps are in fact undefined (which time interval
+ * corresponds to quasi-simulatenous events?) and are therefore of no use.
  */ 
 @interface UIControl (HLSInjection)
 
 /**
  * Call this method as soon as possible if you want to benefit from injection. To achieve this easily, use the
- * UIControlInjectionConstructor convenience macro
+ * UIControlInjectionConstructor convenience macro, which injects the code before the main function is entered
  */
 + (void)injectQuasiSimultaneousTapsDisabler;
 
