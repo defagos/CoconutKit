@@ -1,0 +1,13 @@
+/* 
+   nut_Localizable.strings
+   nut
+
+   Created by Cédric Luthi on 3/10/11.
+   Copyright 2010 Hortis. All rights reserved.
+ */
+
+/* HLSWebViewController 'Open in Safari' action */
+"Open in Safari"="Safari에서 열기";
+
+/* HLSWebViewController 'Mail Link' action */
+"Mail Link"="링크를 이메일로 전송하기";

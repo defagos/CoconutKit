@@ -23,3 +23,9 @@
 
 /* Search */
 "Search"="Rechercher";
+
+/* HLSWebViewController 'Open in Safari' action */
+"Open in Safari"="Ouvrir dans Safari";
+
+/* HLSWebViewController 'Mail Link' action */
+"Mail Link"="Envoyer par E-mail";
