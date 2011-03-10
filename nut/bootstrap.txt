@@ -7,3 +7,4 @@ NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
+UIControl+HLSInjection.m
