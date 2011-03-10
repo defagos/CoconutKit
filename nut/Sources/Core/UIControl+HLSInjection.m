@@ -7,11 +7,10 @@
 //
 
 #import <objc/runtime.h> 
-#import <objc/message.h>
 
 #import "HLSLogger.h"
 
-// No threading issues here, UIKit is not to be used by multiple threads
+// No threading issues here, UIKit is not to be used concurrently
 static UIControl *s_currentControl;
 static NSMutableSet *s_inhibitedControls;
 
@@ -41,32 +40,20 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
 /** 
  * The code works as follows: We replace the usual UIControl event / target methods by wrappers using swizzling (the
  * implementations we replace are still called internally, the original behavior is therefore preserved). To track touch
- * events (up and down events), we then register two "sentinel" actions for touch up and down events:
- *   - touch down event (must stay the first action in the list of touch down actions): to begin tracking a control if 
- *     none was currently active. If a control is already active, any control receiving a touch down event is marked as 
- *     inhibited, and will remain so until this flag is removed (see below)
- *   - touch up event (must stay the last action in the list of touch up actions): to end tracking of the current active 
- *     control
- * To be able to track touch up / down events registered by the user, the addTarget:action:forControlEvents: method is
- * then swizzled to register a wrapper for the action instead of the action itself. This wrapper simply executes the 
- * original action if the control is active, but immediately returns if the control is inhibited. The other target / action
- * methods must be swizzled as well to make the injection trick invisible to the caller.
+ * events (touch up and down events), we then register two "sentinel" actions:
+ *   - touch down event sentinel (must stay the first action in the list of touch down actions): To start tracking a 
+ *     control if none was currently active. If a control is already active, any control receiving a touch down event 
+ *     is marked as inhibited, and will remain so until this flag is removed (see below)
+ *   - touch up event sentinel (must stay the last action in the list of touch up actions): To strop tracking the currently 
+ *     active control
+ * To be able to track touch up / down events added by the user, the addTarget:action:forControlEvents: method is
+ * also swizzled to register a wrapper for the action, instead of the action itself. This wrapper simply executes the 
+ * original action if the control is active, but immediately returns if the control has been inhibited. The other 
+ * target / action methods are swizzled as well to make the injection invisible externally.
  *
- * The order of touch up / down events for quasi simultaneous taps is often as follows:
- *   - touch down on first control; becomes currently active control
- *   - touch down on second control; first control already active, the second control is therefore flagged as inhibited
- *   - touch up on first control: not active anymore
- *   - touch up on second control
- * Since the touch up event on the first control occurs before the touch up even on the second control, the first
- * control touch up wrapper cannot decide to flag the second control as not inhibited anymore (otherwise the corresponding
- * touch up event would be triggered, which is what we want to prevent). The responsibility of removing the inhibited
- * flag is therefore given to the inhibited control itself: When it is done processing the events we track (i.e. when
- * touch up is called for it), it simply unflags itself. There is a small issue, though: If the the inhibited control 
- * somehow vanishes (e.g. if a view a button sits on disappears), this last event might not be triggered, and the control 
- * might stay flagged as inhibited. For this reason:
- *   - the touch down sentinel clears the inhibited control list when a new control becomes active
- *   - the list of inhibited controls is not a set (which retains its elements), but a list of NSValue objects
- *     containing the inhibited control pointers. This avoids keeping controls alive unnecessarily
+ * When a control is tapped but no other one is the currently active one, all controls which were marked as inhibited 
+ * are reset. We identify such inhibited controls by storing them into a set. To avoid retaining controls unnecessarily, 
+ * this set stores weak references by wrapping object pointers into NSValue objects.
  */
 @interface UIControl (HLSInjectionPrivate)
 
@@ -365,10 +352,6 @@ static void sentinelTouchUpActionImp(id self, SEL sel, id sender)
     // Last event; if current control, done protecting it
     if (s_currentControl == self) {
         s_currentControl = nil;
-    }
-    // Other control: stop inhibiting it, the control reached the end of the event cycle we protect
-    else {
-        [s_inhibitedControls removeObject:[NSValue valueWithPointer:self]];
     }
 }
 
