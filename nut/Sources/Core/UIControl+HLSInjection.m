@@ -10,6 +10,13 @@
 
 #import "HLSLogger.h"
 
+// Constants
+static const char * const kSentinelTouchDownSelectorNameCStr = "sentinelTouchDownAction";
+static const char * const kSentinelTouchUpSelectorNameCStr = "sentinelTouchUpAction";
+
+static NSString * const kWrapperDownPrefix = @"wrapper_down_";
+static NSString * const kWrapperUpPrefix = @"wrapper_up_";
+
 // No threading issues here, UIKit is not to be used concurrently
 static UIControl *s_currentControl;
 static NSMutableSet *s_inhibitedControls;
@@ -101,12 +108,12 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     swizzleSelector([self class], @selector(actionsForTarget:forControlEvent:), @selector(swizzledActionsForTarget:forControlEvent:));
     
     // Create and inject sentinel methods
-    s_sentinelTouchDownActionSel = sel_registerName("sentinelTouchDownAction");
+    s_sentinelTouchDownActionSel = sel_registerName(kSentinelTouchDownSelectorNameCStr);
     class_addMethod([self class],
                     s_sentinelTouchDownActionSel,
                     (IMP)sentinelTouchDownActionImp,
                     "v@:@");
-    s_sentinelTouchUpActionSel = sel_registerName("sentinelTouchUpAction");
+    s_sentinelTouchUpActionSel = sel_registerName(kSentinelTouchUpSelectorNameCStr);
     class_addMethod([self class],
                     s_sentinelTouchUpActionSel,
                     (IMP)sentinelTouchUpActionImp,
@@ -155,7 +162,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     UIControlEvents touchDownFlags = UIControlEventTouchDown | UIControlEventTouchDownRepeat;
     if (controlEvents & touchDownFlags) {
         // Wrapper name is simply original name with prefix
-        NSString *wrapperTouchDownActionName = [@"wrapper_down_" stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
+        NSString *wrapperTouchDownActionName = [kWrapperDownPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         
         // Create the method dynamically and add it to the target class
         SEL wrapperTouchDownActionSel = sel_registerName([wrapperTouchDownActionName UTF8String]);
@@ -179,7 +186,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     UIControlEvents touchUpFlags = UIControlEventTouchUpInside | UIControlEventTouchUpOutside;
     if (controlEvents & touchUpFlags) {
         // Wrapper name is simply original name with prefix
-        NSString *wrapperTouchUpActionName = [@"wrapper_up_" stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
+        NSString *wrapperTouchUpActionName = [kWrapperUpPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         
         // Create the method dynamically and add it to the UIControl class
         SEL wrapperTouchUpActionSel = sel_registerName([wrapperTouchUpActionName UTF8String]);
@@ -231,7 +238,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     UIControlEvents touchDownFlags = UIControlEventTouchDown | UIControlEventTouchDownRepeat;
     if (controlEvents & touchDownFlags) {
         // Wrapper name is simply original name with prefix
-        NSString *wrapperTouchDownActionName = [@"wrapper_down_" stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
+        NSString *wrapperTouchDownActionName = [kWrapperDownPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         SEL wrapperTouchDownActionSel = sel_registerName([wrapperTouchDownActionName UTF8String]);
         
         (*s_removeTarget$action$forControlEvents$Imp)(self, 
@@ -248,7 +255,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     UIControlEvents touchUpFlags = UIControlEventTouchUpInside | UIControlEventTouchUpOutside;
     if (controlEvents & touchUpFlags) {
         // Wrapper name is simply original name with prefix
-        NSString *wrapperTouchUpActionName = [@"wrapper_up_" stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
+        NSString *wrapperTouchUpActionName = [kWrapperUpPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         SEL wrapperTouchUpActionSel = sel_registerName([wrapperTouchUpActionName UTF8String]);
         
         (*s_removeTarget$action$forControlEvents$Imp)(self, 
@@ -285,8 +292,8 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     NSMutableArray *actionNames = [NSMutableArray array];
     for (NSString *actionName in internalActionNames) {
         // Cleanup wrapper prefixes (if any)
-        NSString *originalActionName = [actionName stringByReplacingOccurrencesOfString:@"wrapper_down_" withString:@""];
-        originalActionName = [originalActionName stringByReplacingOccurrencesOfString:@"wrapper_up_" withString:@""];
+        NSString *originalActionName = [actionName stringByReplacingOccurrencesOfString:kWrapperDownPrefix withString:@""];
+        originalActionName = [originalActionName stringByReplacingOccurrencesOfString:kWrapperUpPrefix withString:@""];
         [actionNames addObject:originalActionName];
     }
     
@@ -366,7 +373,7 @@ static void wrapperTouchDownActionImp(id self, SEL sel, id sender)
     }
     
     // Remove the prefix
-    NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:@"wrapper_down_"
+    NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:kWrapperDownPrefix
                                                                                                          withString:@""];
     
     // Call the original selector
@@ -384,7 +391,7 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender)
     }
     
     // Remove the prefix
-    NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:@"wrapper_up_"
+    NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:kWrapperUpPrefix
                                                                                                          withString:@""];
     
     // Call the original selector
