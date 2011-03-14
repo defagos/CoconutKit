@@ -31,6 +31,7 @@
 {
 	self.goBackButtonItem.enabled = self.webView.canGoBack;
 	self.goForwardButtonItem.enabled = self.webView.canGoForward;
+	self.refreshButtonItem.enabled = !self.activityIndicator.isAnimating;
 	self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : [UIImage imageNamed:@"nut_ButtonBarRefresh.png"];
 }
 
