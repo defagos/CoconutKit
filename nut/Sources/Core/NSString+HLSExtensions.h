@@ -9,6 +9,12 @@
 @interface NSString (HLSExtensions)
 
 /**
+ * URL encoded (aka percent encoded) string with RFC 3986 compliance
+ * See http://www.openradar.me/6546984
+ */
+- (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding;
+
+/**
  * Calculates the MD2 hash of a string (hexadecimal)
  */
 - (NSString *)md2hash;
