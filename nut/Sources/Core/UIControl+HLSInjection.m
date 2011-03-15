@@ -11,11 +11,11 @@
 #import "HLSLogger.h"
 
 // Constants
-static const char * const kSentinelTouchDownSelectorNameCStr = "sentinelTouchDownAction";
-static const char * const kSentinelTouchUpSelectorNameCStr = "sentinelTouchUpAction";
+static const char * const kSentinelTouchDownSelectorNameCStr = "hls_sentinelTouchDownAction";
+static const char * const kSentinelTouchUpSelectorNameCStr = "hls_sentinelTouchUpAction";
 
-static NSString * const kWrapperDownPrefix = @"wrapper_down_";
-static NSString * const kWrapperUpPrefix = @"wrapper_up_";
+static NSString * const kWrapperDownPrefix = @"hls_wrapper_down_";
+static NSString * const kWrapperUpPrefix = @"hls_wrapper_up_";
 
 // No threading issues here, UIKit is not to be used concurrently
 static UIControl *s_currentControl;
@@ -40,6 +40,8 @@ static void sentinelTouchUpActionImp(id self, SEL sel, id sender);
 
 static void wrapperTouchDownActionImp(id self, SEL sel, id sender);
 static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
+
+static void callWrappedAction(id self, SEL sel, id sender);
 
 #pragma mark -
 #pragma mark UIControl (HLSInjectionPrivate) interface
@@ -160,16 +162,29 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     
     // Register action wrappers for touch down actions (if any)
     UIControlEvents touchDownFlags = UIControlEventTouchDown | UIControlEventTouchDownRepeat;
-    if (controlEvents & touchDownFlags) {
+    if (controlEvents & touchDownFlags) {        
+        // A target has been given; the most natural location where to insert the wrapper action is the target class itself (where the non-wrapped 
+        // action must have already been defined)
+        Class class;
+        if (target) {
+            class = [target class];
+        }
+        // If the target is nil, then the message is sent along the responder chain until a responder handles it (see UIControl documentation). To be
+        // able to reach our wrapper first, we add it as early as possible in the responder chain (i.e. in UIControl). We will then use it to send
+        // the original action along the responder chain
+        else {
+            class = [UIControl class];
+        }
+        
         // Wrapper name is simply original name with prefix
         NSString *wrapperTouchDownActionName = [kWrapperDownPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         
         // Create the method dynamically and add it to the target class
         SEL wrapperTouchDownActionSel = sel_registerName([wrapperTouchDownActionName UTF8String]);
-        class_addMethod([target class],
+        class_addMethod(class,
                         wrapperTouchDownActionSel,
                         (IMP)wrapperTouchDownActionImp,
-                        "v@:@");            // Same prototype as action, i.e. - (void)methodName:(id)sender
+                        "v@:@");            // Same prototype as action, i.e. - (void)methodName:(id)sender 
         
         // Register the new target / action
         (*s_addTarget$action$forControlEvents$Imp)(self, 
@@ -185,12 +200,25 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender);
     // Register action wrappers for touch up actions (if any)
     UIControlEvents touchUpFlags = UIControlEventTouchUpInside | UIControlEventTouchUpOutside;
     if (controlEvents & touchUpFlags) {
+        // A target has been given; the most natural location where to insert the wrapper action is the target class itself (where the non-wrapped 
+        // action must have already been defined)
+        Class class;
+        if (target) {
+            class = [target class];
+        }
+        // If the target is nil, then the message is sent along the responder chain until a responder handles it (see UIControl documentation). To be
+        // able to reach our wrapper first, we add it as early as possible in the responder chain (i.e. in UIControl). We will then use it to send
+        // the original action along the responder chain        
+        else {
+            class = [UIControl class];
+        }
+        
         // Wrapper name is simply original name with prefix
         NSString *wrapperTouchUpActionName = [kWrapperUpPrefix stringByAppendingString:[NSString stringWithUTF8String:sel_getName(action)]];
         
         // Create the method dynamically and add it to the UIControl class
         SEL wrapperTouchUpActionSel = sel_registerName([wrapperTouchUpActionName UTF8String]);
-        class_addMethod([target class],
+        class_addMethod(class,
                         wrapperTouchUpActionSel,
                         (IMP)wrapperTouchUpActionImp,
                         "v@:@");            // Same prototype as action, i.e. - (void)methodName:(id)sender 
@@ -376,10 +404,9 @@ static void wrapperTouchDownActionImp(id self, SEL sel, id sender)
     NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:kWrapperDownPrefix
                                                                                                          withString:@""];
     
-    // Call the original selector
+    // Deduce the original action and call it
     SEL originalSel = sel_registerName([selectorName UTF8String]);
-    IMP originalImp = method_getImplementation(class_getInstanceMethod([self class], originalSel));
-    (*originalImp)(self, originalSel, sender);
+    callWrappedAction(self, originalSel, sender);
 }
 
 static void wrapperTouchUpActionImp(id self, SEL sel, id sender)
@@ -394,8 +421,21 @@ static void wrapperTouchUpActionImp(id self, SEL sel, id sender)
     NSString *selectorName = [[NSString stringWithUTF8String:sel_getName(sel)] stringByReplacingOccurrencesOfString:kWrapperUpPrefix
                                                                                                          withString:@""];
     
-    // Call the original selector
+    // Deduce the original action and call it
     SEL originalSel = sel_registerName([selectorName UTF8String]);
-    IMP originalImp = method_getImplementation(class_getInstanceMethod([self class], originalSel));
-    (*originalImp)(self, originalSel, sender);
+    callWrappedAction(self, originalSel, sender);
+}
+
+static void callWrappedAction(id self, SEL sel, id sender)
+{
+    // Original action defined on self; case where the wrapper has been directly added to the target class; we can call the original
+    // action directly
+    if ([self respondsToSelector:sel]) {
+        IMP originalImp = method_getImplementation(class_getInstanceMethod([self class], sel));
+        (*originalImp)(self, sel, sender);
+    }
+    // Original action not defined on self; send it along the responder chain until some responder deals with it
+    else {
+        [self sendAction:sel to:nil forEvent:nil];
+    }
 }
