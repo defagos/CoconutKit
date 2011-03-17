@@ -22,7 +22,7 @@
  *   2) Rotate the device (keyboardWillHide, then keyboardWillShow are called for A)
  *   3) Click on another field B (B receives becomeFirstResponder, which calls resignFirstResponder on A)
  *   4) Rotate the device (keyboardWillHide, then keyboardWillShow are called for B)
- *   5) Dismiss the keyboardd (B receives resignFirstResponder)
+ *   5) Dismiss the keyboard (B receives resignFirstResponder)
  */
 
 // The minimal distance to be kept between the active text field and the top of the scroll view top or the keyboard. If the 
@@ -235,7 +235,12 @@ static UIScrollView *s_scrollView = nil;
     
     // Get the keyboard frame (should be available); the text field might be covered by it
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-    NSAssert(keyboardInformation != nil, @"Keyboard information not available");
+    if (! keyboardInformation) {
+        // Not available (e.g. if becomeFirstResponder is sent in a viewDidLoad: programmatically). We cannot move the
+        // text field automatically, sorry
+        HLSLoggerWarn(@"Keyboard information not available. Did you call becomeFirstResponder too early (e.g. in a viewDidLoad method)?");
+        return;
+    }
     
     // Work in the scroll view coordinate system
     // Remark: Initially, I intended to work in the window coordinate system, but this is a bad idea
