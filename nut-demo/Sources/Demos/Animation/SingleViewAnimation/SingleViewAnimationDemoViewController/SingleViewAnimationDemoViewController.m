@@ -124,7 +124,7 @@
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = YES;
     self.animation.delegate = self;
-    [self.animation play];
+    [self.animation playAnimated:YES];
 }
 
 - (void)playBackwardButtonClicked:(id)sender
@@ -133,7 +133,7 @@
     
     // Create the reverse animation
     HLSAnimation *reverseAnimation = [self.animation reverseAnimation];
-    [reverseAnimation play];
+    [reverseAnimation playAnimated:YES];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation

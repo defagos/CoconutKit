@@ -69,9 +69,10 @@
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
 /**
- * Play the animation; there is no way to stop an animation once it has been started
+ * Play the animation; there is no way to stop an animation once it has been started. If animated is set to NO,
+ * the end state of the animation is reached instantly
  */
-- (void)play;
+- (void)playAnimated:(BOOL)animated;
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except the tag which gets an additional

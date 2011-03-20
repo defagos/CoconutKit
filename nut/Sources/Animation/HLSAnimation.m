@@ -19,9 +19,9 @@
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 
-- (void)animateStep:(HLSAnimationStep *)animationStep;
+- (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
-- (void)animateNextStep;
+- (void)playNextStepAnimated:(BOOL)animated;
 
 - (NSArray *)reverseAnimationSteps;
 
@@ -93,7 +93,7 @@
 
 #pragma mark Animation
 
-- (void)play
+- (void)playAnimated:(BOOL)animated
 {
     // Cannot be played if already running (equivalently, we can test we are iterating over steps)
     if (self.animationStepsEnumerator) {
@@ -107,14 +107,14 @@
     }
     
     // Begin with the first step
-    [self animateNextStep];
+    [self playNextStepAnimated:animated];
 }
 
-- (void)animateStep:(HLSAnimationStep *)animationStep
+- (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
-    if (! doubleeq(animationStep.duration, 0.f)) {
+    if (animated && ! doubleeq(animationStep.duration, 0.f)) {
         [UIView beginAnimations:nil context:animationStep];
         
         [UIView setAnimationDuration:animationStep.duration];
@@ -160,7 +160,7 @@
     }
     
     // Animated
-    if (! doubleeq(animationStep.duration, 0.f)) {
+    if (animated && ! doubleeq(animationStep.duration, 0.f)) {
         [UIView commitAnimations];
         
         // The code will resume in the animationDidStop:finished:context: method
@@ -172,11 +172,11 @@
             [self.delegate animationStepFinished:animationStep];
         }
         
-        [self animateNextStep];
+        [self playNextStepAnimated:animated];
     }
 }
 
-- (void)animateNextStep
+- (void)playNextStepAnimated:(BOOL)animated
 {
     // First call?
     if (! self.animationStepsEnumerator) {
@@ -187,7 +187,7 @@
     // Proceeed with the next step (if any)
     HLSAnimationStep *nextAnimationStep = [self.animationStepsEnumerator nextObject];
     if (nextAnimationStep) {
-        [self animateStep:nextAnimationStep];
+        [self playStep:nextAnimationStep animated:animated];
     }
     // Done with the animation
     else {
@@ -286,7 +286,7 @@
         [self.delegate animationStepFinished:animationStep];
     }
     
-    [self animateNextStep];
+    [self playNextStepAnimated:YES];
 }
 
 @end

@@ -245,7 +245,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         animation.lockingUI = YES;
         animation.bringToFront = YES;
         animation.delegate = self;
-        [animation play];
+        [animation playAnimated:YES];
     }
 }
 
