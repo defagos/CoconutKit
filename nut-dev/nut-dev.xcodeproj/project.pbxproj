@@ -10,7 +10,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6F391B18132774890032F977 /* UIControl+HLSInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F391B17132774890032F977 /* UIControl+HLSInjection.m */; };
 		6FA6990913432746003ACC1F /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698FA13432746003ACC1F /* nut_Localizable.strings */; };
 		6FA6990A13432746003ACC1F /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */; };
 		6FA6990B13432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990113432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png */; };
@@ -18,6 +17,7 @@
 		6FA6990D13432746003ACC1F /* nut_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990313432746003ACC1F /* nut_ButtonBarArrowRight@2x.png */; };
 		6FA6990E13432746003ACC1F /* nut_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990413432746003ACC1F /* nut_ButtonBarRefresh.png */; };
 		6FA6990F13432746003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990513432746003ACC1F /* nut_ButtonBarRefresh@2x.png */; };
+		6FA6996B13433386003ACC1F /* UIButton+HLSInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6996A13433386003ACC1F /* UIButton+HLSInjection.m */; };
 		6FEF8436131F76510015B57C /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF83AA131F76510015B57C /* HLSAnimation.m */; };
 		6FEF8437131F76510015B57C /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF83AC131F76510015B57C /* HLSAnimationStep.m */; };
 		6FEF8438131F76510015B57C /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF83AE131F76510015B57C /* HLSOneViewAnimationStepDefinition.m */; };
@@ -143,8 +143,6 @@
 		1D6058910D05DD3D006BFB54 /* nut-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nut-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6F391B17132774890032F977 /* UIControl+HLSInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+HLSInjection.m"; sourceTree = "<group>"; };
-		6F51133C132929AD00A7EFAE /* UIControl+HLSInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSInjection.h"; sourceTree = "<group>"; };
 		6FA698FB13432746003ACC1F /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FC13432746003ACC1F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FD13432746003ACC1F /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -158,6 +156,8 @@
 		6FA6990613432746003ACC1F /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA6990713432746003ACC1F /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA6990813432746003ACC1F /* ko */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6FA6996913433386003ACC1F /* UIButton+HLSInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HLSInjection.h"; sourceTree = "<group>"; };
+		6FA6996A13433386003ACC1F /* UIButton+HLSInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HLSInjection.m"; sourceTree = "<group>"; };
 		6FEF83A9131F76510015B57C /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FEF83AA131F76510015B57C /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FEF83AB131F76510015B57C /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
@@ -529,8 +529,8 @@
 				6FEF83D1131F76510015B57C /* NSObject+HLSExtensions.m */,
 				6FEF83D2131F76510015B57C /* NSString+HLSExtensions.h */,
 				6FEF83D3131F76510015B57C /* NSString+HLSExtensions.m */,
-				6F51133C132929AD00A7EFAE /* UIControl+HLSInjection.h */,
-				6F391B17132774890032F977 /* UIControl+HLSInjection.m */,
+				6FA6996913433386003ACC1F /* UIButton+HLSInjection.h */,
+				6FA6996A13433386003ACC1F /* UIButton+HLSInjection.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1349,7 +1349,7 @@
 				6FEF853C131F76BD0015B57C /* WizardPageViewController.m in Sources */,
 				6FEF853E131F76BD0015B57C /* DemosListViewController.m in Sources */,
 				6FEF8556131F77490015B57C /* main.m in Sources */,
-				6F391B18132774890032F977 /* UIControl+HLSInjection.m in Sources */,
+				6FA6996B13433386003ACC1F /* UIButton+HLSInjection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,6 +1393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Samuel DÃ©fago (X96M3N2CT6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1401,6 +1402,7 @@
 				INFOPLIST_FILE = "nut_dev-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "nut-dev";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84B67883-7978-42A7-BC64-26D23179E805";
 			};
 			name = Debug;
 		};
@@ -1408,11 +1410,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Samuel DÃ©fago (X96M3N2CT6)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = nut_dev_Prefix.pch;
 				INFOPLIST_FILE = "nut_dev-Info.plist";
 				PRODUCT_NAME = "nut-dev";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84B67883-7978-42A7-BC64-26D23179E805";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -11,7 +11,7 @@
 #import "nut_demoApplication.h"
 
 // Disable quasi-simultaneous taps
-HLSEnableUIControlInjection();
+HLSEnableUIButtonInjection();
 
 @interface nut_demoAppDelegate ()
 
