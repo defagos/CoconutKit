@@ -63,6 +63,7 @@ typedef enum {
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
+    ViewControllersDemoIndexWebViewController,
 //    ViewControllersDemoIndexPageController,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
@@ -244,6 +245,11 @@ typedef enum {
                     cell.textLabel.text = @"HLSTableSearchDisplayController";
                     break;
                 }
+                
+                case ViewControllersDemoIndexWebViewController: {
+                    cell.textLabel.text = @"HLSWebViewController";
+                    break;
+                }
 #if 0
                 case ViewControllersDemoIndexPageController: {
                     cell.textLabel.text = @"HLSPageController";
@@ -363,6 +369,13 @@ typedef enum {
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
                     TableSearchDisplayDemoViewController *demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                
+                case ViewControllersDemoIndexWebViewController: {
+                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lestudio.hortis.ch"]];
+                    HLSWebViewController *webViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
+                    [self.navigationController pushViewController:webViewController animated:YES];
                     break;
                 }
 #if 0
