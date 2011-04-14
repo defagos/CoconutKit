@@ -54,11 +54,7 @@ static HLSKeyboardInformation *s_instance = nil;
 - (id)initWithUserInfo:(NSDictionary *)userInfo
 {
     if ((self = [super init])) {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 30200
-        NSValue *beginFrameValue = [userInfo objectForKey:UIKeyboardBoundsUserInfoKey];
-#else   
         NSValue *beginFrameValue = [userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey];
-#endif
         CGRect beginFrame = CGRectZero;
         [beginFrameValue getValue:&beginFrame];
         self.beginFrame = beginFrame;
