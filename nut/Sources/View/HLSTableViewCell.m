@@ -71,11 +71,27 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName
 {
     if (backgroundImageName) {
-        self.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:backgroundImageName]] autorelease];
+        UIImage *backgroundImage = [UIImage imageNamed:backgroundImageName];
+        if (backgroundImage) {
+            self.backgroundView = [[[UIImageView alloc] initWithImage:backgroundImage] autorelease];
+        }
+        else {
+            HLSLoggerWarn(@"The image %@ does not exist", backgroundImageName);
+            self.backgroundView = nil;
+        }
+        
     }
     
     if (selectedBackgroundImageName) {
-        self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedBackgroundImageName]] autorelease];
+        UIImage *selectedBackgroundImage = [UIImage imageNamed:selectedBackgroundImageName];
+        if (selectedBackgroundImage) {
+            self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:selectedBackgroundImage] autorelease];
+        }
+        else {
+            HLSLoggerWarn(@"The image %@ does not exist", selectedBackgroundImage);
+            self.selectedBackgroundView = nil;
+        }
+        self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:selectedBackgroundImage] autorelease];
     }
 }
 
