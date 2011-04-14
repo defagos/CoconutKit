@@ -154,12 +154,20 @@ static UIScrollView *s_scrollView = nil;
 }
 
 - (BOOL)resignFirstResponder
-{    
-    // Note that s_currentTextField can never nil here
-    NSAssert(s_currentTextField != nil, @"Can only resign if a text field was active!");
-    
+{
+    // If no text field is currently active, nothing to do
+    if (! s_currentTextField) {
+        HLSLoggerDebug(@"No text field is active");
+        return YES;
+    }
+        
     // Unregister from the notification center first; important since we only want to track rotation events
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];    
     
     // Calling the super method first; two cases can lead to resignFirstResponder being called:
     //   - we are exiting input mode. The keyboard disappears, which fires a UIKeyboardWillHideNotification during
@@ -236,9 +244,9 @@ static UIScrollView *s_scrollView = nil;
     // Get the keyboard frame (should be available); the text field might be covered by it
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
     if (! keyboardInformation) {
-        // Not available (e.g. if becomeFirstResponder is sent in a viewDidLoad: programmatically). We cannot move the
+        // Not available (e.g. if becomeFirstResponder is sent in a viewDidLoad: programmatically when starting the app). We cannot move the
         // text field automatically, sorry
-        HLSLoggerWarn(@"Keyboard information not available. Did you call becomeFirstResponder too early (e.g. in a viewDidLoad method)?");
+        HLSLoggerWarn(@"Keyboard information not available. Did you call becomeFirstResponder too early?");
         return;
     }
     

@@ -79,7 +79,9 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidChangeStatusBarFrameNotification
+                                                  object:nil];
     self.backgroundView = nil;
     self.scrollView = nil;
     self.pageControl = nil;
