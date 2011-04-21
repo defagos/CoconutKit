@@ -82,7 +82,7 @@
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except the tag which gets an additional
- * "reverse_" prefix. You might of course change these attributes if needed
+ * "reverse_" prefix, and the userInfo. You might of course change these attributes if needed
  */
 - (HLSAnimation *)reverseAnimation;
 
