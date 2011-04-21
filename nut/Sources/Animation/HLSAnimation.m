@@ -61,6 +61,7 @@
     self.animationSteps = nil;
     self.animationStepsEnumerator = nil;
     self.tag = nil;
+    self.userInfo = nil;
     self.delegate = nil;
     [super dealloc];
 }
@@ -72,6 +73,8 @@
 @synthesize animationStepsEnumerator = m_animationStepsEnumerator;
 
 @synthesize tag = m_tag;
+
+@synthesize userInfo = m_userInfo;
 
 @synthesize lockingUI = m_lockingUI;
 

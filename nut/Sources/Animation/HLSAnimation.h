@@ -29,6 +29,7 @@
     NSArray *m_animationSteps;                              // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;               // enumerator over steps
     NSString *m_tag;
+    NSDictionary *m_userInfo;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
     BOOL m_firstStep;
@@ -50,6 +51,11 @@
  * Tag which can optionally be used to help identifying an animation
  */
 @property (nonatomic, retain) NSString *tag;
+
+/**
+ * Dictionary which can be used freely to convey additional information
+ */
+@property (nonatomic, retain) NSDictionary *userInfo;
 
 /**
  * If set to YES, the user interface interaction is blocked during animation
