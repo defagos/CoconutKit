@@ -15,6 +15,7 @@
 		6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */; };
 		6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143AFD130A6DF00075E94C /* StretchableViewController.m */; };
 		6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143AFE130A6DF00075E94C /* StretchableViewController.xib */; };
+		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
 		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
 		6F7A275D130AE83A00AB1926 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A275C130AE83A00AB1926 /* HeavyViewController.m */; };
@@ -95,6 +96,7 @@
 		6F143AFC130A6DF00075E94C /* StretchableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableViewController.h; sourceTree = "<group>"; };
 		6F143AFD130A6DF00075E94C /* StretchableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableViewController.m; sourceTree = "<group>"; };
 		6F143AFE130A6DF00075E94C /* StretchableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
+		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
 		6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FixedSizeViewController.xib; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6FA698A813432606003ACC1F /* nut.framework in Frameworks */,
+				6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +252,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
