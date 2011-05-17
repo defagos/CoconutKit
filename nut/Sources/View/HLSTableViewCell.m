@@ -47,6 +47,10 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
         // A xib file is used
         if (xibFileName) {
             NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
+            if ([bundleContents count] == 0) {
+                HLSLoggerError(@"Missing cell object in xib file %@", xibFileName);
+                return nil;
+            }
             cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
             
             // Check that the reuse identifier defined in the xib is correct
