@@ -359,6 +359,8 @@
 {
     // Check if this orientation is supported
     if (! [self allViewControllersShouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+        // Assume portrait orientation
+        self.pageControl.numberOfPages = MIN(MAX_NBR_DOTS_PAGE_CONTROLLER_PORTRAIT, [self viewControllerCount]);
         return NO;
     }
     
