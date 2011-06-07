@@ -56,4 +56,4 @@ NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
-UIButton+HLSInjection.h
+UIControl+HLSExclusiveTouch.h

@@ -67,5 +67,5 @@
     #import "NSDate+HLSExtensions.h"
     #import "NSObject+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
-    #import "UIButton+HLSInjection.h"
+    #import "UIControl+HLSExclusiveTouch.h"
 #endif

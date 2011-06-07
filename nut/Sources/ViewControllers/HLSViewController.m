@@ -131,7 +131,8 @@
  *         been sent twice (when a container controller nils a view it manages, it is likely it will set the view
  *         to nil and send it the viewDidUnload afterwards. If all view controller containers of the world knew
  *         about HLSViewController, this would work, but since they don't this would lead to viewDidUnload be
- *         called twice in most cases)! */
+ *         called twice in most cases)! 
+ */
 - (void)unloadViews
 {
     self.view = nil;
