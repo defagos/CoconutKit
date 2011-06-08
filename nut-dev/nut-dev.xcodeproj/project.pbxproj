@@ -398,7 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				6FEF8584131F791A0015B57C /* Shared */,
-				6FEF8547131F77180015B57C /* nut-dev Other Sources */,
+				6FEF8547131F77180015B57C /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -1139,7 +1139,7 @@
 			path = DemosListViewController;
 			sourceTree = "<group>";
 		};
-		6FEF8547131F77180015B57C /* nut-dev Other Sources */ = {
+		6FEF8547131F77180015B57C /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
 				6FEF8552131F77490015B57C /* main.m */,
@@ -1147,7 +1147,7 @@
 				6FEF8554131F77490015B57C /* nut_dev_Prefix.pch */,
 				6FEF8555131F77490015B57C /* nut_dev-Info.plist */,
 			);
-			name = "nut-dev Other Sources";
+			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		6FEF8584131F791A0015B57C /* Shared */ = {
