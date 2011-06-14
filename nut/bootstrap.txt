@@ -7,4 +7,5 @@ NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
+UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:nut-demo/Sources/Demos/View/Cursor/CursorDemoViewController/CursorDemoViewController.xib">
+   </FileRef>
+   <FileRef
       location = "group:nut/nut.xcodeproj">
    </FileRef>
    <FileRef

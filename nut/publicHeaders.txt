@@ -3,6 +3,7 @@ HLSAnimationStep.h
 HLSAssert.h
 HLSContainerControllerLoader.h
 HLSConverters.h
+HLSCursor.h
 HLSDownloader.h
 HLSDownloaderTools.h
 HLSFloat.h
@@ -56,4 +57,5 @@ NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
+UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h

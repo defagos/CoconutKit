@@ -56,6 +56,8 @@
 		6FA698AF13432606003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698A413432606003ACC1F /* nut_ButtonBarRefresh@2x.png */; };
 		6FA698B013432606003ACC1F /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698A513432606003ACC1F /* nut_HLSSingleValuePickerViewController.xib */; };
 		6FA698B113432606003ACC1F /* nut_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698A613432606003ACC1F /* nut_HLSWebViewController.xib */; };
+		6FAF20ED13A24C56009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */; };
+		6FAF20EF13A24C73009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
 		6FBDA7261303E481004B9617 /* nut_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */; };
 		6FBDA78E1303EA81004B9617 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA78D1303EA81004B9617 /* DemosListViewController.m */; };
@@ -155,6 +157,9 @@
 		6FA698A413432606003ACC1F /* nut_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		6FA698A513432606003ACC1F /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6FA698A613432606003ACC1F /* nut_HLSWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nut_HLSWebViewController.xib; sourceTree = "<group>"; };
+		6FAF20EB13A24C56009A5645 /* CursorDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorDemoViewController.h; sourceTree = "<group>"; };
+		6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorDemoViewController.m; sourceTree = "<group>"; };
+		6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorDemoViewController.xib; sourceTree = "<group>"; };
 		6FBDA71F1303E481004B9617 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FBDA7201303E481004B9617 /* nut_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FBDA7211303E481004B9617 /* nut_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoAppDelegate.m; sourceTree = "<group>"; };
@@ -163,7 +168,7 @@
 		6FBDA7951303EAD3004B9617 /* nut_demoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demoApplication.h; sourceTree = "<group>"; };
 		6FBDA7961303EAD3004B9617 /* nut_demoApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nut_demoApplication.m; sourceTree = "<group>"; };
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA8C513041CB1004B9617 /* TableViewCellsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellsDemoViewController.h; sourceTree = "<group>"; };
 		6FBDA8C613041CB1004B9617 /* TableViewCellsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellsDemoViewController.m; sourceTree = "<group>"; };
 		6FBDA8FD130426DC004B9617 /* ProgrammaticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgrammaticTableViewCell.h; sourceTree = "<group>"; };
@@ -425,6 +430,24 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6FAF20E913A24C33009A5645 /* Cursor */ = {
+			isa = PBXGroup;
+			children = (
+				6FAF20EA13A24C33009A5645 /* CursorDemoViewController */,
+			);
+			path = Cursor;
+			sourceTree = "<group>";
+		};
+		6FAF20EA13A24C33009A5645 /* CursorDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FAF20EB13A24C56009A5645 /* CursorDemoViewController.h */,
+				6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */,
+				6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */,
+			);
+			path = CursorDemoViewController;
+			sourceTree = "<group>";
+		};
 		6FBDA71D1303E481004B9617 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +582,7 @@
 		6FBDA8BF13041C43004B9617 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6FAF20E913A24C33009A5645 /* Cursor */,
 				6FBDA8C313041CA0004B9617 /* TableViewCells */,
 				6FBDACE71306806A004B9617 /* TextFields */,
 			);
@@ -838,6 +862,7 @@
 				6FA698AF13432606003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */,
 				6FA698B013432606003ACC1F /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FA698B113432606003ACC1F /* nut_HLSWebViewController.xib in Resources */,
+				6FAF20EF13A24C73009A5645 /* CursorDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +903,7 @@
 				6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */,
 				6F84B23F131BF53B002C3D05 /* Customer.m in Sources */,
 				6FA698A713432606003ACC1F /* nut_bootstrap.m in Sources */,
+				6FAF20ED13A24C56009A5645 /* CursorDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
