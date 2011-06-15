@@ -79,9 +79,9 @@ static const CGFloat kDefaultSpacing = 20.f;
     
     // Fill with views generated from the data source, and calculate the needed frame size
     CGFloat totalWidth = 0.f;
-    if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:)]) {
+    if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
         for (NSUInteger index = 0; index < nbrElements; ++index) {
-            UIView *elementView = [self.dataSource cursor:self viewAtIndex:index];
+            UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:NO];
             [self addSubview:elementView];
             
             totalWidth += elementView.frame.size.width;
@@ -93,8 +93,8 @@ static const CGFloat kDefaultSpacing = 20.f;
     else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
         for (NSUInteger index = 0; index < nbrElements; ++index) {
             UIFont *font = nil;
-            if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:)]) {
-                font = [self.dataSource cursor:self fontAtIndex:index];
+            if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
+                font = [self.dataSource cursor:self fontAtIndex:index selected:NO];
             }
             else {
                 font = [UIFont systemFontOfSize:17.f];
@@ -105,17 +105,17 @@ static const CGFloat kDefaultSpacing = 20.f;
             UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
             elementLabel.text = title;
             elementLabel.backgroundColor = [UIColor clearColor];
-            if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:)]) {
-                elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index];
+            if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
+                elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:NO];
             }
             else {
                 elementLabel.textColor = [self.backgroundColor invertColor];
             }
-            if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:)]) {
-                elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index];
+            if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
+                elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:NO];
             }
-            if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:)]) {
-                elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index];
+            if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
+                elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:NO];
             }
             [self addSubview:elementLabel];
             
