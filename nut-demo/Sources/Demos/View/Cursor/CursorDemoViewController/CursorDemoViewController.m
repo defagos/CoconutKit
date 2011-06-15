@@ -26,11 +26,14 @@ static NSArray *s_days = nil;
     [super releaseViews];
     
     self.daysCursor = nil;
+    self.moveDaysPointerButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize daysCursor = m_daysCursor;
+
+@synthesize moveDaysPointerButton = m_moveDaysPointerButton;
 
 #pragma mark View lifecycle
 
@@ -75,6 +78,13 @@ static NSArray *s_days = nil;
         HLSLoggerDebug(@"Unknown cursor");
         return @"";
     }
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)moveDaysPointerToNextDay
+{
+    ++self.daysCursor.selectedIndex;
 }
 
 @end

@@ -21,14 +21,26 @@
 @private
     NSArray *m_elementViews;
     CGFloat m_spacing;
+    UIView *m_pointerView;
+    UIColor *m_defaultPointerColor;
     UIImage *m_highlightImage;
     CGRect m_highlightContentStretch;
-    NSUInteger m_selectedIndex;
+    CGFloat m_xPos;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
 
 @property (nonatomic, assign) CGFloat spacing;
+
+/**
+ * Can be programatically set or using a xib. If nil, the default pointer is used
+ */
+@property (nonatomic, retain) IBOutlet UIView *pointerView;
+
+/**
+ * Set the color of the default pointer (if used). Has no effect if a custom pointer is used
+ */
+@property (nonatomic, retain) UIColor *defaultPointerColor;
 
 @property (nonatomic, retain) UIImage *highlightImage;
 @property (nonatomic, assign) CGRect highlightContentStretch;

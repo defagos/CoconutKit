@@ -12,8 +12,12 @@
 @interface CursorDemoViewController : HLSViewController <HLSCursorDataSource, HLSCursorDelegate> {
 @private
     HLSCursor *m_daysCursor;
+    UIButton *m_moveDaysPointerButton;
 }
 
 @property (nonatomic, retain) IBOutlet HLSCursor *daysCursor;
+@property (nonatomic, retain) IBOutlet UIButton *moveDaysPointerButton;
+
+- (IBAction)moveDaysPointerToNextDay;
 
 @end

@@ -19,6 +19,10 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 @property (nonatomic, retain) NSArray *elementViews;
 
+- (CGFloat)xPosForIndex:(NSUInteger)index;
+- (NSUInteger)indexForXPos:(CGFloat)xPos;
+
+- (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
 
 @end
@@ -46,6 +50,8 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)dealloc
 {
     self.elementViews = nil;
+    self.pointerView = nil;
+    self.defaultPointerColor = nil;
     self.highlightImage = nil;
     self.dataSource = nil;
     
@@ -63,11 +69,24 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 @synthesize spacing = m_spacing;
 
+@synthesize pointerView = m_pointerView;
+
+- (void)setPointerView:(UIView *)pointerView
+{
+    if (m_pointerView) {
+        HLSLoggerError(@"A pointer view has already been defined and cannot be changed");
+        return;
+    }
+    
+    [m_pointerView release];
+    m_pointerView = [pointerView retain];
+}
+
+@synthesize defaultPointerColor = m_defaultPointerColor;
+
 @synthesize highlightImage = m_highlightImage;
 
 @synthesize highlightContentStretch = m_highlightContentStretch;
-
-@synthesize selectedIndex = m_selectedIndex;
 
 @synthesize dataSource = m_dataSource;
 
@@ -77,6 +96,11 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)layoutSubviews
 {
+    // TODO: Maybe avoid destroying everything: Create views in init, just fix frames here
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
+    }
+    
     self.elementViews = [NSArray array];
     
     // Check data source
@@ -158,12 +182,45 @@ static const CGFloat kDefaultSpacing = 20.f;
         elementView.frame = CGRectMake(xPos, yPos, elementView.frame.size.width, elementView.frame.size.height);
         xPos += elementView.frame.size.width + self.spacing;
     }
+    
+    // If no custom pointer view specified, use default one
+    if (! self.pointerView) {
+        // TODO: Better!
+        CGRect pointerFrame = [self pointerFrameForIndex:0];
+        self.pointerView = [[[UIView alloc] initWithFrame:pointerFrame] autorelease];
+        self.pointerView.backgroundColor = [UIColor redColor];
+        self.pointerView.alpha = 0.5f;
+    }
+    [self addSubview:self.pointerView];
 }
 
 #pragma mark Pointer management
 
-// xPos is here where the pointer is located, i.e. the center of the pointer rectangle
-- (CGRect)pointerFrameForXPos:(CGFloat)xPos
+- (NSUInteger)selectedIndex
+{
+    return [self indexForXPos:m_xPos];
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex
+{
+    m_xPos = [self xPosForIndex:selectedIndex];
+    
+    // TODO: Animate
+    self.pointerView.frame = [self pointerFrameForIndex:selectedIndex];
+}
+
+- (CGFloat)xPosForIndex:(NSUInteger)index
+{
+    if (index >= [self.elementViews count]) {
+        HLSLoggerError(@"Invalid index");
+        return 0.f;
+    }
+    
+    UIView *elementView = [self.elementViews objectAtIndex:index];
+    return elementView.center.x;
+}
+
+- (NSUInteger)indexForXPos:(CGFloat)xPos
 {
     // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
     NSUInteger index = 0;
@@ -174,7 +231,20 @@ static const CGFloat kDefaultSpacing = 20.f;
         ++index;
     }
     
+    return index;
+}
+
+- (CGRect)pointerFrameForIndex:(NSUInteger)index
+{
+    CGFloat xPos = [self xPosForIndex:index];
+    return [self pointerFrameForXPos:xPos];
+}
+
+// xPos is here where the pointer is located, i.e. the center of the pointer rectangle
+- (CGRect)pointerFrameForXPos:(CGFloat)xPos
+{
     // Too far on the left; cursor around the first view
+    NSUInteger index = [self indexForXPos:xPos];
     CGRect pointerRect;
     if (index == 0) {
         UIView *firstElementView = [self.elementViews firstObject];
