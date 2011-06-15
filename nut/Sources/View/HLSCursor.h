@@ -19,6 +19,7 @@
  */
 @interface HLSCursor : UIView {
 @private
+    NSArray *m_elementViews;
     CGFloat m_spacing;
     UIImage *m_highlightImage;
     CGRect m_highlightContentStretch;

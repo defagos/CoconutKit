@@ -17,6 +17,10 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)initialize;
 
+@property (nonatomic, retain) NSArray *elementViews;
+
+- (CGRect)pointerFrameForXPos:(CGFloat)xPos;
+
 @end
 
 @implementation HLSCursor
@@ -41,6 +45,7 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)dealloc
 {
+    self.elementViews = nil;
     self.highlightImage = nil;
     self.dataSource = nil;
     
@@ -53,6 +58,8 @@ static const CGFloat kDefaultSpacing = 20.f;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize elementViews = m_elementViews;
 
 @synthesize spacing = m_spacing;
 
@@ -70,6 +77,8 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)layoutSubviews
 {
+    self.elementViews = [NSArray array];
+    
     // Check data source
     NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
     if (nbrElements == 0) {
@@ -83,6 +92,7 @@ static const CGFloat kDefaultSpacing = 20.f;
         for (NSUInteger index = 0; index < nbrElements; ++index) {
             UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:NO];
             [self addSubview:elementView];
+            self.elementViews = [self.elementViews arrayByAddingObject:elementView];
             
             totalWidth += elementView.frame.size.width;
             if (index != nbrElements - 1) {
@@ -118,6 +128,7 @@ static const CGFloat kDefaultSpacing = 20.f;
                 elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:NO];
             }
             [self addSubview:elementLabel];
+            self.elementViews = [self.elementViews arrayByAddingObject:elementLabel];
             
             totalWidth += elementLabel.frame.size.width;
             if (index != nbrElements - 1) {
@@ -130,23 +141,68 @@ static const CGFloat kDefaultSpacing = 20.f;
         return;
     }
     
-    // Adjust individual frames so that the subviews are centered within the available frame; warn if too large (will still
+    // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
     CGFloat xPos = floorf(fabs(self.frame.size.width - totalWidth) / 2.f);
     if (floatgt(totalWidth, self.frame.size.width)) {
         HLSLoggerWarn(@"Cursor frame not wide enough");
         xPos = -xPos;
     }
-    for (UIView *subView in self.subviews) {
-        CGFloat yPos = floorf(fabs(self.frame.size.height - subView.frame.size.height) / 2.f);
-        if (floatgt(subView.frame.size.height, self.frame.size.height)) {
+    for (UIView *elementView in self.elementViews) {
+        CGFloat yPos = floorf(fabs(self.frame.size.height - elementView.frame.size.height) / 2.f);
+        if (floatgt(elementView.frame.size.height, self.frame.size.height)) {
             HLSLoggerWarn(@"Cursor frame not tall enough");
             yPos = -yPos;
         }
         
-        subView.frame = CGRectMake(xPos, yPos, subView.frame.size.width, subView.frame.size.height);
-        xPos += subView.frame.size.width + self.spacing;
+        elementView.frame = CGRectMake(xPos, yPos, elementView.frame.size.width, elementView.frame.size.height);
+        xPos += elementView.frame.size.width + self.spacing;
     }
+}
+
+#pragma mark Pointer management
+
+// xPos is here where the pointer is located, i.e. the center of the pointer rectangle
+- (CGRect)pointerFrameForXPos:(CGFloat)xPos
+{
+    // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
+    NSUInteger index = 0;
+    for (UIView *elementView in self.elementViews) {
+        if (floatle(xPos, elementView.center.x)) {
+            break;
+        }
+        ++index;
+    }
+    
+    // Too far on the left; cursor around the first view
+    CGRect pointerRect;
+    if (index == 0) {
+        UIView *firstElementView = [self.elementViews firstObject];
+        pointerRect = firstElementView.frame;
+    }
+    // Too far on the right; cursor around the last view
+    else if (index == [self.elementViews count]) {
+        UIView *lastElementView = [self.elementViews lastObject];
+        pointerRect = lastElementView.frame;
+    }
+    // Cursor in between views with indices index-1 and index. Interpolate
+    else {
+        UIView *previousElementView = [self.elementViews objectAtIndex:index - 1];
+        UIView *nextElementView = [self.elementViews objectAtIndex:index];
+        
+        // Linear interpolation
+        CGFloat width = ((xPos - nextElementView.center.x) * previousElementView.frame.size.width 
+                         + (previousElementView.center.x - xPos) * nextElementView.frame.size.width) / (previousElementView.center.x - nextElementView.center.x);
+        CGFloat height = ((xPos - nextElementView.center.x) * previousElementView.frame.size.height 
+                          + (previousElementView.center.x - xPos) * nextElementView.frame.size.height) / (previousElementView.center.x - nextElementView.center.x);
+        
+        pointerRect = CGRectMake(xPos - width / 2.f, 
+                                 previousElementView.frame.origin.y,      /* all element views are aligned vertically; so is the cursor. Can randomly pick one */
+                                 width, 
+                                 height);
+    }
+    
+    return pointerRect;
 }
 
 @end
