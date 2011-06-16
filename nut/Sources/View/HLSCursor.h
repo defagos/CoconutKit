@@ -27,6 +27,7 @@
     BOOL m_clicked;
     BOOL m_grabbed;
     BOOL m_viewsCreated;
+    NSUInteger m_initialIndex;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }

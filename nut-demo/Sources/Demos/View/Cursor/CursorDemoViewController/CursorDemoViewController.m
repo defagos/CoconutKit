@@ -46,6 +46,7 @@ static NSArray *s_days = nil;
     
     self.daysCursor.dataSource = self;
     self.daysCursor.delegate = self;
+    [self.daysCursor setSelectedIndex:8 animated:NO];
 }
 
 #pragma mark Orientation management
