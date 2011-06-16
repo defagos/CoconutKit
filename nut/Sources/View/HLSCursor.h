@@ -6,10 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// TODO: Boutons équidistants 
-//                 Janvier  Février  Mars  Avril  Mai  ...
-//    et non       Janvier   Février   Mars      Avril     Mai ...
-
 // Forward declarations
 @protocol HLSCursorDataSource;
 @protocol HLSCursorDelegate;
@@ -22,6 +18,7 @@
     NSArray *m_elementViews;
     CGFloat m_spacing;
     UIView *m_pointerView;
+    CGSize m_pointerViewOffset;
     UIColor *m_defaultPointerColor;
     UIImage *m_highlightImage;
     CGRect m_highlightContentStretch;
@@ -30,12 +27,21 @@
     id<HLSCursorDelegate> m_delegate;
 }
 
+/**
+ * Spacing between element views (default is 20 px)
+ */
 @property (nonatomic, assign) CGFloat spacing;
 
 /**
- * Can be programatically set or using a xib. If nil, the default pointer is used
+ * Can be programatically set or using a xib. If nil, the default pointer is used. Should be stretchable so that it
+ * can accomodate any element size
  */
 @property (nonatomic, retain) IBOutlet UIView *pointerView;
+
+/**
+ * Pointer view offset around an element view. Default is (-10px, -10px)
+ */
+@property (nonatomic, assign) CGSize pointerViewOffset;
 
 /**
  * Set the color of the default pointer (if used). Has no effect if a custom pointer is used

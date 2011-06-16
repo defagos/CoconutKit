@@ -61,6 +61,7 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)initialize
 {
     self.spacing = kDefaultSpacing;
+    self.pointerViewOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
 }
 
 #pragma mark Accessors and mutators
@@ -81,6 +82,8 @@ static const CGFloat kDefaultSpacing = 20.f;
     [m_pointerView release];
     m_pointerView = [pointerView retain];
 }
+
+@synthesize pointerViewOffset = m_pointerViewOffset;
 
 @synthesize defaultPointerColor = m_defaultPointerColor;
 
@@ -225,8 +228,8 @@ static const CGFloat kDefaultSpacing = 20.f;
 {
     NSUInteger index = 0;
     for (UIView *elementView in self.elementViews) {
-        if (floatge(xPos, elementView.frame.origin.x) 
-                && floatle(xPos, elementView.frame.origin.x + elementView.frame.size.width)) {
+        if (floatge(xPos, elementView.frame.origin.x - self.spacing / 2.f) 
+                && floatle(xPos, elementView.frame.origin.x + elementView.frame.size.width + self.spacing / 2.f)) {
             return index;
         }
         ++index;
@@ -234,7 +237,7 @@ static const CGFloat kDefaultSpacing = 20.f;
     
     // No match found; return leftmost or rightmost element view
     UIView *firstElementView = [self.elementViews firstObject];
-    if (floatlt(xPos, firstElementView.frame.origin.x)) {
+    if (floatlt(xPos, firstElementView.frame.origin.x - self.spacing / 2.f)) {
         return 0;
     }
     else {
@@ -288,6 +291,11 @@ static const CGFloat kDefaultSpacing = 20.f;
                                  height);
     }
     
+    // Adjust the rect according to the offset to be applied
+    pointerRect = CGRectMake(pointerRect.origin.x + self.pointerViewOffset.width,
+                             pointerRect.origin.y + self.pointerViewOffset.height,
+                             pointerRect.size.width - 2 * self.pointerViewOffset.width,
+                             pointerRect.size.height - 2 * self.pointerViewOffset.height);
     return pointerRect;
 }
 
