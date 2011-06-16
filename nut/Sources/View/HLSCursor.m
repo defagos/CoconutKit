@@ -193,6 +193,11 @@ static const CGFloat kDefaultSpacing = 20.f;
             self.pointerView = [[[UIView alloc] init] autorelease];
             self.pointerView.backgroundColor = [UIColor redColor];
             self.pointerView.alpha = 0.5f;
+            
+            if (m_initialIndex > [self.elementViews count]) {
+                m_initialIndex = [self.elementViews count] - 1;
+                HLSLoggerWarn(@"Initial index too large; fixed");
+            }
             [self setSelectedIndex:m_initialIndex animated:NO];
         }
         [self addSubview:self.pointerView];
@@ -209,13 +214,7 @@ static const CGFloat kDefaultSpacing = 20.f;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
-{
-    // Sanitize input
-    if (selectedIndex > [self.elementViews count]) {
-        HLSLoggerWarn(@"Invalid index");
-        selectedIndex = [self.elementViews count] - 1;
-    }
-    
+{    
     m_xPos = [self xPosForIndex:selectedIndex];
     
     if (animated) {

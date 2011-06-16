@@ -11,15 +11,17 @@
  */
 @interface CursorDemoViewController : HLSViewController <HLSCursorDataSource, HLSCursorDelegate> {
 @private
-    HLSCursor *m_daysCursor;
-    UIButton *m_moveDaysPointerButton;
-    UILabel *m_dayIndexLabel;
+    HLSCursor *m_weekDaysCursor;
+    UIButton *m_moveWeekDaysPointerButton;
+    UILabel *m_weekDayIndexLabel;
+    HLSCursor *m_monthDaysCursor;
 }
 
-@property (nonatomic, retain) IBOutlet HLSCursor *daysCursor;
-@property (nonatomic, retain) IBOutlet UIButton *moveDaysPointerButton;
-@property (nonatomic, retain) IBOutlet UILabel *dayIndexLabel;
+@property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
+@property (nonatomic, retain) IBOutlet UIButton *moveWeekDaysPointerButton;
+@property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
+@property (nonatomic, retain) IBOutlet HLSCursor *monthDaysCursor;
 
-- (IBAction)moveDaysPointerToNextDay;
+- (IBAction)moveWeekDaysPointerToNextDay;
 
 @end
