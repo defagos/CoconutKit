@@ -13,10 +13,12 @@
 @private
     HLSCursor *m_daysCursor;
     UIButton *m_moveDaysPointerButton;
+    UILabel *m_dayIndexLabel;
 }
 
 @property (nonatomic, retain) IBOutlet HLSCursor *daysCursor;
 @property (nonatomic, retain) IBOutlet UIButton *moveDaysPointerButton;
+@property (nonatomic, retain) IBOutlet UILabel *dayIndexLabel;
 
 - (IBAction)moveDaysPointerToNextDay;
 

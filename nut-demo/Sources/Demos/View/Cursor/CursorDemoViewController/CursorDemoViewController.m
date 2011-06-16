@@ -27,6 +27,7 @@ static NSArray *s_days = nil;
     
     self.daysCursor = nil;
     self.moveDaysPointerButton = nil;
+    self.dayIndexLabel = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -34,6 +35,8 @@ static NSArray *s_days = nil;
 @synthesize daysCursor = m_daysCursor;
 
 @synthesize moveDaysPointerButton = m_moveDaysPointerButton;
+
+@synthesize dayIndexLabel = m_dayIndexLabel;;
 
 #pragma mark View lifecycle
 
@@ -78,6 +81,13 @@ static NSArray *s_days = nil;
         HLSLoggerDebug(@"Unknown cursor");
         return @"";
     }
+}
+
+#pragma mark HLSCursorDelegate protocol implementation
+
+- (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index
+{
+    self.dayIndexLabel.text = [NSString stringWithFormat:@"%d", index];
 }
 
 #pragma mark Event callbacks

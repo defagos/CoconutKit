@@ -26,8 +26,6 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
 
-- (void)movePointerToIndex:(NSUInteger)index animated:(BOOL)animated duration:(NSTimeInterval)duration;
-
 - (void)pointerAnimationWillStart:(NSString *)animationID context:(void *)context;
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
@@ -105,8 +103,6 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)layoutSubviews
 {
-    HLSLoggerError(@"Called");
-    
     // Create subviews views lazily the first time they are needed; not doing this in init allows clients to customize
     // the views before they are displayed
     if (! m_viewsCreated) {
@@ -194,10 +190,10 @@ static const CGFloat kDefaultSpacing = 20.f;
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
             // TODO: Better!
-            CGRect pointerFrame = [self pointerFrameForIndex:0];
-            self.pointerView = [[[UIView alloc] initWithFrame:pointerFrame] autorelease];
+            self.pointerView = [[[UIView alloc] init] autorelease];
             self.pointerView.backgroundColor = [UIColor redColor];
             self.pointerView.alpha = 0.5f;
+            [self setSelectedIndex:0 animated:NO];
         }
         [self addSubview:self.pointerView];
     }
@@ -215,7 +211,22 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
     m_xPos = [self xPosForIndex:selectedIndex];
-    [self movePointerToIndex:selectedIndex animated:animated duration:0.3f];
+    
+    if (animated) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
+        [UIView setAnimationDelegate:self];
+    }
+    
+    self.pointerView.frame = [self pointerFrameForIndex:selectedIndex];
+    
+    if (animated) {
+        [UIView commitAnimations];
+    }
+    else {
+        [self.delegate cursor:self didSelectIndex:selectedIndex];
+    }
 }
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
@@ -305,23 +316,6 @@ static const CGFloat kDefaultSpacing = 20.f;
     return pointerRect;
 }
 
-- (void)movePointerToIndex:(NSUInteger)index animated:(BOOL)animated duration:(NSTimeInterval)duration
-{
-    if (animated) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
-        [UIView setAnimationDuration:duration];
-        [UIView setAnimationDelegate:self];
-    }
-    
-    self.pointerView.frame = [self pointerFrameForIndex:index];
-    
-    if (animated) {
-        [UIView commitAnimations];
-    }
-}
-
 #pragma mark Touch events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -351,22 +345,31 @@ static const CGFloat kDefaultSpacing = 20.f;
     
     if (m_grabbed) {
         self.pointerView.frame = [self pointerFrameForXPos:pos.x];
+        m_xPos = pos.x;
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (m_dragging) {
+        CGPoint pos = [[touches anyObject] locationInView:self];
+        NSUInteger index = [self indexForXPos:pos.x];
+        [self setSelectedIndex:index animated:YES];
+    }
+    
 	m_dragging = NO;
     m_grabbed = NO;
-    m_clicked = NO;
-    
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    NSUInteger index = [self indexForXPos:pos.x];
-    [self movePointerToIndex:index animated:YES duration:0.2f];
+    m_clicked = NO;    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (m_dragging) {
+        CGPoint pos = [[touches anyObject] locationInView:self];
+        NSUInteger index = [self indexForXPos:pos.x];
+        [self setSelectedIndex:index animated:NO];
+    }
+    
     m_dragging = NO;
     m_grabbed = NO;
     m_clicked = NO;
@@ -382,6 +385,7 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
+    [self.delegate cursor:self didSelectIndex:[self selectedIndex]];
 }
 
 @end
