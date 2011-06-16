@@ -191,6 +191,7 @@ static const CGFloat kDefaultSpacing = 20.f;
         self.pointerView.backgroundColor = [UIColor redColor];
         self.pointerView.alpha = 0.5f;
     }
+    // TODO: Maybe avoid destroying everything: Create views in init, just fix frames here
     [self addSubview:self.pointerView];
 }
 
@@ -222,16 +223,23 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (NSUInteger)indexForXPos:(CGFloat)xPos
 {
-    // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
     NSUInteger index = 0;
     for (UIView *elementView in self.elementViews) {
-        if (floatle(xPos, elementView.center.x)) {
-            break;
+        if (floatge(xPos, elementView.frame.origin.x) 
+                && floatle(xPos, elementView.frame.origin.x + elementView.frame.size.width)) {
+            return index;
         }
         ++index;
     }
     
-    return index;
+    // No match found; return leftmost or rightmost element view
+    UIView *firstElementView = [self.elementViews firstObject];
+    if (floatlt(xPos, firstElementView.frame.origin.x)) {
+        return 0;
+    }
+    else {
+        return [self.elementViews count] - 1;
+    }
 }
 
 - (CGRect)pointerFrameForIndex:(NSUInteger)index
@@ -243,8 +251,16 @@ static const CGFloat kDefaultSpacing = 20.f;
 // xPos is here where the pointer is located, i.e. the center of the pointer rectangle
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos
 {
+    // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
+    NSUInteger index = 0;
+    for (UIView *elementView in self.elementViews) {
+        if (floatle(xPos, elementView.center.x)) {
+            break;
+        }
+        ++index;
+    }
+    
     // Too far on the left; cursor around the first view
-    NSUInteger index = [self indexForXPos:xPos];
     CGRect pointerRect;
     if (index == 0) {
         UIView *firstElementView = [self.elementViews firstObject];
@@ -273,6 +289,14 @@ static const CGFloat kDefaultSpacing = 20.f;
     }
     
     return pointerRect;
+}
+
+#pragma mark Touch events
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    self.selectedIndex = [self indexForXPos:pos.x];
 }
 
 @end
