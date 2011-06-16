@@ -99,74 +99,72 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)layoutSubviews
 {
-    // TODO: Maybe avoid destroying everything: Create views in init, just fix frames here
-    for (UIView *subview in self.subviews) {
-        [subview removeFromSuperview];
+    HLSLoggerError(@"Called");
+    
+    // Create subviews views lazily the first time they are needed; not doing this in init allows clients to customize
+    // the views before they are displayed
+    if (! m_viewsCreated) {
+        // Create the subview set
+        self.elementViews = [NSArray array];
+        
+        // Check the data source
+        NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
+        if (nbrElements == 0) {
+            HLSLoggerError(@"Cursor data source is empty");
+            return;
+        }
+        
+        // Fill with views generated from the data source
+        if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
+            for (NSUInteger index = 0; index < nbrElements; ++index) {
+                UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:NO];
+                [self addSubview:elementView];
+                self.elementViews = [self.elementViews arrayByAddingObject:elementView];
+            }
+        }
+        else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
+            for (NSUInteger index = 0; index < nbrElements; ++index) {
+                UIFont *font = nil;
+                if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
+                    font = [self.dataSource cursor:self fontAtIndex:index selected:NO];
+                }
+                else {
+                    font = [UIFont systemFontOfSize:17.f];
+                }
+                NSString *title = [self.dataSource cursor:self titleAtIndex:index];
+                CGSize titleSize = [title sizeWithFont:font];
+                
+                UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
+                elementLabel.text = title;
+                elementLabel.backgroundColor = [UIColor clearColor];
+                if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
+                    elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:NO];
+                }
+                else {
+                    elementLabel.textColor = [self.backgroundColor invertColor];
+                }
+                if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
+                    elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:NO];
+                }
+                if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
+                    elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:NO];
+                }
+                [self addSubview:elementLabel];
+                self.elementViews = [self.elementViews arrayByAddingObject:elementLabel];
+            }
+        }
+        else {
+            HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
+            return;
+        }
     }
-    
-    self.elementViews = [NSArray array];
-    
-    // Check data source
-    NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
-    if (nbrElements == 0) {
-        HLSLoggerError(@"Cursor data source is empty");
-        return;
-    }
-    
-    // Fill with views generated from the data source, and calculate the needed frame size
+        
+    // Calculate the needed total width
     CGFloat totalWidth = 0.f;
-    if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
-        for (NSUInteger index = 0; index < nbrElements; ++index) {
-            UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:NO];
-            [self addSubview:elementView];
-            self.elementViews = [self.elementViews arrayByAddingObject:elementView];
-            
-            totalWidth += elementView.frame.size.width;
-            if (index != nbrElements - 1) {
-                totalWidth += self.spacing;
-            }
-        }
+    for (UIView *elementView in self.elementViews) {
+        totalWidth += elementView.frame.size.width + self.spacing;
     }
-    else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
-        for (NSUInteger index = 0; index < nbrElements; ++index) {
-            UIFont *font = nil;
-            if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
-                font = [self.dataSource cursor:self fontAtIndex:index selected:NO];
-            }
-            else {
-                font = [UIFont systemFontOfSize:17.f];
-            }
-            NSString *title = [self.dataSource cursor:self titleAtIndex:index];
-            CGSize titleSize = [title sizeWithFont:font];
-            
-            UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
-            elementLabel.text = title;
-            elementLabel.backgroundColor = [UIColor clearColor];
-            if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
-                elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:NO];
-            }
-            else {
-                elementLabel.textColor = [self.backgroundColor invertColor];
-            }
-            if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
-                elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:NO];
-            }
-            if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
-                elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:NO];
-            }
-            [self addSubview:elementLabel];
-            self.elementViews = [self.elementViews arrayByAddingObject:elementLabel];
-            
-            totalWidth += elementLabel.frame.size.width;
-            if (index != nbrElements - 1) {
-                totalWidth += self.spacing;
-            }
-        }
-    }
-    else {
-        HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
-        return;
-    }
+    totalWidth -= self.spacing;
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
@@ -186,16 +184,19 @@ static const CGFloat kDefaultSpacing = 20.f;
         xPos += elementView.frame.size.width + self.spacing;
     }
     
-    // If no custom pointer view specified, use default one
-    if (! self.pointerView) {
-        // TODO: Better!
-        CGRect pointerFrame = [self pointerFrameForIndex:0];
-        self.pointerView = [[[UIView alloc] initWithFrame:pointerFrame] autorelease];
-        self.pointerView.backgroundColor = [UIColor redColor];
-        self.pointerView.alpha = 0.5f;
+    if (! m_viewsCreated) {
+        // If no custom pointer view specified, create a default one
+        if (! self.pointerView) {
+            // TODO: Better!
+            CGRect pointerFrame = [self pointerFrameForIndex:0];
+            self.pointerView = [[[UIView alloc] initWithFrame:pointerFrame] autorelease];
+            self.pointerView.backgroundColor = [UIColor redColor];
+            self.pointerView.alpha = 0.5f;
+        }
+        [self addSubview:self.pointerView];
     }
-    // TODO: Maybe avoid destroying everything: Create views in init, just fix frames here
-    [self addSubview:self.pointerView];
+    
+    m_viewsCreated = YES;
 }
 
 #pragma mark Pointer management
@@ -296,6 +297,7 @@ static const CGFloat kDefaultSpacing = 20.f;
                              pointerRect.origin.y + self.pointerViewOffset.height,
                              pointerRect.size.width - 2 * self.pointerViewOffset.width,
                              pointerRect.size.height - 2 * self.pointerViewOffset.height);
+    
     return pointerRect;
 }
 
@@ -303,8 +305,48 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // If clicking on the pointer, do not select it again. This corresponds to the user grabbing the pointer
     CGPoint pos = [[touches anyObject] locationInView:self];
-    self.selectedIndex = [self indexForXPos:pos.x];
+    if (! CGRectContainsPoint(self.pointerView.frame, pos)) {
+        m_clicked = YES;
+        self.selectedIndex = [self indexForXPos:pos.x];    
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    if (! m_dragging && ! m_clicked) {
+        m_dragging = YES;
+        
+        // Check that we are actually grabbing the pointer view
+        if (CGRectContainsPoint(self.pointerView.frame, pos)) {
+            m_grabbed = YES;
+        }
+        else {
+            m_grabbed = NO;
+        }
+    }
+    
+    if (m_grabbed) {
+        self.pointerView.frame = [self pointerFrameForXPos:pos.x];
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	m_dragging = NO;
+    m_grabbed = NO;
+    m_clicked = NO;
+    
+    // TODO: Animate to final position when released
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    m_dragging = NO;
+    m_grabbed = NO;
+    m_clicked = NO;
 }
 
 @end

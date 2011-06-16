@@ -23,6 +23,10 @@
     UIImage *m_highlightImage;
     CGRect m_highlightContentStretch;
     CGFloat m_xPos;
+    BOOL m_dragging;
+    BOOL m_clicked;
+    BOOL m_grabbed;
+    BOOL m_viewsCreated;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
