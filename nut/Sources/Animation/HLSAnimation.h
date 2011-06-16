@@ -40,6 +40,7 @@
  * Convenience constructor for creating an animation from HLSAnimationStep objects
  */
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
++ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
 /**
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation

@@ -39,6 +39,11 @@
     return [[[[self class] alloc] initWithAnimationSteps:animationSteps] autorelease];
 }
 
++ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
+{
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObject:animationStep]];
+}
+
 #pragma mark Object creation and destruction
 
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;

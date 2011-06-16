@@ -84,7 +84,7 @@ static NSArray *s_days = nil;
 
 - (IBAction)moveDaysPointerToNextDay
 {
-    ++self.daysCursor.selectedIndex;
+    [self.daysCursor setSelectedIndex:[self.daysCursor selectedIndex] + 1 animated:YES];
 }
 
 @end

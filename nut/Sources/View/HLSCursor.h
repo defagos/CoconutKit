@@ -55,7 +55,8 @@
 @property (nonatomic, retain) UIImage *highlightImage;
 @property (nonatomic, assign) CGRect highlightContentStretch;
 
-@property (nonatomic, assign) NSUInteger selectedIndex;
+- (NSUInteger)selectedIndex;
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 
 @property (nonatomic, retain) id<HLSCursorDataSource> dataSource;
 @property (nonatomic, assign) id<HLSCursorDelegate> delegate;

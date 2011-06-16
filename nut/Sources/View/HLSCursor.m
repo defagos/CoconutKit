@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSUserInterfaceLock.h"
 
 static const CGFloat kDefaultSpacing = 20.f;
 
@@ -24,6 +25,11 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
+
+- (void)movePointerToIndex:(NSUInteger)index animated:(BOOL)animated duration:(NSTimeInterval)duration;
+
+- (void)pointerAnimationWillStart:(NSString *)animationID context:(void *)context;
+- (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
 
@@ -206,12 +212,10 @@ static const CGFloat kDefaultSpacing = 20.f;
     return [self indexForXPos:m_xPos];
 }
 
-- (void)setSelectedIndex:(NSUInteger)selectedIndex
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
     m_xPos = [self xPosForIndex:selectedIndex];
-    
-    // TODO: Animate
-    self.pointerView.frame = [self pointerFrameForIndex:selectedIndex];
+    [self movePointerToIndex:selectedIndex animated:animated duration:0.3f];
 }
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
@@ -301,6 +305,23 @@ static const CGFloat kDefaultSpacing = 20.f;
     return pointerRect;
 }
 
+- (void)movePointerToIndex:(NSUInteger)index animated:(BOOL)animated duration:(NSTimeInterval)duration
+{
+    if (animated) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
+        [UIView setAnimationDuration:duration];
+        [UIView setAnimationDelegate:self];
+    }
+    
+    self.pointerView.frame = [self pointerFrameForIndex:index];
+    
+    if (animated) {
+        [UIView commitAnimations];
+    }
+}
+
 #pragma mark Touch events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -309,7 +330,7 @@ static const CGFloat kDefaultSpacing = 20.f;
     CGPoint pos = [[touches anyObject] locationInView:self];
     if (! CGRectContainsPoint(self.pointerView.frame, pos)) {
         m_clicked = YES;
-        self.selectedIndex = [self indexForXPos:pos.x];    
+        [self setSelectedIndex:[self indexForXPos:pos.x] animated:YES];
     }
 }
 
@@ -339,7 +360,9 @@ static const CGFloat kDefaultSpacing = 20.f;
     m_grabbed = NO;
     m_clicked = NO;
     
-    // TODO: Animate to final position when released
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    NSUInteger index = [self indexForXPos:pos.x];
+    [self movePointerToIndex:index animated:YES duration:0.2f];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -347,6 +370,18 @@ static const CGFloat kDefaultSpacing = 20.f;
     m_dragging = NO;
     m_grabbed = NO;
     m_clicked = NO;
+}
+
+#pragma mark Animation callbacks
+
+- (void)pointerAnimationWillStart:(NSString *)animationID context:(void *)context
+{
+    [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
+}
+
+- (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
 }
 
 @end
