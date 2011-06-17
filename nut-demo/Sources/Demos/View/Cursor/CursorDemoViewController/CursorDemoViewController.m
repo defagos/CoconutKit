@@ -62,8 +62,8 @@ static NSArray *s_monthDays = nil;
     self.weekDaysCursor.delegate = self;
     [self.weekDaysCursor setSelectedIndex:3 animated:NO];
     self.weekDaysCursor.spacing = 30.f;
-    self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-20.f, -10.f);
-    self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(20.f, 40.f);
+    self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
+    self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
     self.monthDaysCursor.dataSource = self;
     self.monthDaysCursor.delegate = self;

@@ -68,9 +68,6 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)initialize
 {
-    // Warnings will be logged if the view frame is too small to fit its content
-    self.clipsToBounds = YES;
-    
     self.spacing = kDefaultSpacing;
     self.pointerViewTopLeftOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
     self.pointerViewBottomRightOffset = CGSizeMake(kDefaultSpacing / 2.f, kDefaultSpacing / 2.f);
@@ -133,7 +130,9 @@ static const CGFloat kDefaultSpacing = 20.f;
     for (UIView *elementView in self.elementViews) {
         totalWidth += elementView.frame.size.width + self.spacing;
     }
-    totalWidth += -self.spacing /* one too much */ + floatmax(0.f, self.pointerViewBottomRightOffset.width) /* pointer must fit as well! */;
+    totalWidth += - self.spacing                                        /* one too much; remove */ 
+        + floatmax(0.f, -self.pointerViewTopLeftOffset.width)           /* pointer must fit left if larger than element views */
+        + floatmax(0.f, self.pointerViewBottomRightOffset.width);       /* pointer must fit right if larger than element views */
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
@@ -143,14 +142,18 @@ static const CGFloat kDefaultSpacing = 20.f;
         xPos = -xPos;
     }
     for (UIView *elementView in self.elementViews) {
-        CGFloat yPos = floorf(fabs(self.frame.size.height - elementView.frame.size.height) / 2.f);
-        if (floatgt(elementView.frame.size.height, self.frame.size.height)) {
-            HLSLoggerWarn(@"Cursor frame not tall enough");
-            yPos = -yPos;
-        }
-        
-        elementView.frame = CGRectMake(xPos, yPos, elementView.frame.size.width, elementView.frame.size.height);
+        // Centered in main frame
+        elementView.frame = CGRectMake(xPos, 
+                                       floorf(self.frame.size.height - elementView.frame.size.height) / 2.f, 
+                                       elementView.frame.size.width, 
+                                       elementView.frame.size.height);
         xPos += elementView.frame.size.width + self.spacing;
+        
+        // Check if element view (including cursor if larger) fits vertically (at the top, respectively at the bottom)
+        if (floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), self.frame.size.height / 2.f)
+                || floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
+            HLSLoggerWarn(@"Cursor frame not tall enough");
+        }
     }
     
     if (! m_viewsCreated) {
