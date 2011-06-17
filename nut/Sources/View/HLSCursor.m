@@ -160,9 +160,12 @@ static const CGFloat kDefaultSpacing = 20.f;
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
             // TODO: Better!
-            self.pointerView = [[[UIView alloc] init] autorelease];
-            self.pointerView.backgroundColor = [UIColor redColor];
-            self.pointerView.alpha = 0.5f;
+            UIImage *pointerImage = [UIImage imageNamed:@"nut_cursor_default_pointer.png"];
+            self.pointerView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
+            self.pointerView.contentStretch = CGRectMake(0.5f, 
+                                                         0.5f, 
+                                                         1.f / self.pointerView.frame.size.width, 
+                                                         1.f / self.pointerView.frame.size.height);
             
             if (m_initialIndex > [self.elementViews count]) {
                 m_initialIndex = [self.elementViews count] - 1;
@@ -405,10 +408,10 @@ static const CGFloat kDefaultSpacing = 20.f;
     }
     
     // Adjust the rect according to the offsets to be applied
-    pointerRect = CGRectMake(pointerRect.origin.x + self.pointerViewTopLeftOffset.width,
-                             pointerRect.origin.y + self.pointerViewTopLeftOffset.height,
-                             pointerRect.size.width - self.pointerViewTopLeftOffset.width + self.pointerViewBottomRightOffset.width,
-                             pointerRect.size.height - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height);
+    pointerRect = CGRectMake(floorf(pointerRect.origin.x + self.pointerViewTopLeftOffset.width),
+                             floorf(pointerRect.origin.y + self.pointerViewTopLeftOffset.height),
+                             floorf(pointerRect.size.width - self.pointerViewTopLeftOffset.width + self.pointerViewBottomRightOffset.width),
+                             floorf(pointerRect.size.height - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height));
     
     return pointerRect;
 }
