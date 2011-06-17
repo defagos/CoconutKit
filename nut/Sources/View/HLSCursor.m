@@ -375,25 +375,28 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint pos = [[touches anyObject] locationInView:self];
-    if (! m_dragging && ! m_clicked) {
-        m_dragging = YES;
-        
-        // Check that we are actually grabbing the pointer view
-        if (CGRectContainsPoint(self.pointerView.frame, pos)) {
-            m_grabbed = YES;
-            
-            NSUInteger index = [self indexForXPos:m_xPos];
-            [self swapElementViewAtIndex:index selected:NO];
-        }
-        else {
-            m_grabbed = NO;
-        }
-    }
     
-    if (m_grabbed) {
-        self.pointerView.frame = [self pointerFrameForXPos:pos.x];
-        m_xPos = pos.x;
-    }
+    if (! m_clicked) {
+        if (! m_dragging) {
+            m_dragging = YES;
+            
+            // Check that we are actually grabbing the pointer view
+            if (CGRectContainsPoint(self.pointerView.frame, pos)) {
+                m_grabbed = YES;
+                
+                NSUInteger index = [self indexForXPos:m_xPos];
+                [self swapElementViewAtIndex:index selected:NO];
+            }
+            else {
+                m_grabbed = NO;
+            }
+        }
+        
+        if (m_grabbed) {
+            self.pointerView.frame = [self pointerFrameForXPos:pos.x];
+            m_xPos = pos.x;
+        }
+    }    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
