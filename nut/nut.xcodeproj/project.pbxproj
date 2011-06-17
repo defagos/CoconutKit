@@ -139,6 +139,7 @@
 
 /* Begin PBXFileReference section */
 		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F1A58E113AB779E0029B714 /* nut_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_cursor_default_pointer.png; sourceTree = "<group>"; };
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSUserInterfaceLock.h; sourceTree = "<group>"; };
@@ -568,6 +569,7 @@
 				DA8383CA131E86FC00ECAED3 /* nut_ButtonBarArrowRight@2x.png */,
 				DA8383CD131E86FC00ECAED3 /* nut_ButtonBarRefresh.png */,
 				DA8383CE131E86FC00ECAED3 /* nut_ButtonBarRefresh@2x.png */,
+				6F1A58E113AB779E0029B714 /* nut_cursor_default_pointer.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";

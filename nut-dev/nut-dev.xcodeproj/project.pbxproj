@@ -10,6 +10,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F1A58E513AB77D20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */; };
+		6F1A58E613AB77D20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */; };
 		6FA6990913432746003ACC1F /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698FA13432746003ACC1F /* nut_Localizable.strings */; };
 		6FA6990A13432746003ACC1F /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */; };
 		6FA6990B13432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990113432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png */; };
@@ -147,6 +149,8 @@
 		1D6058910D05DD3D006BFB54 /* nut-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nut-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6FA698FB13432746003ACC1F /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FC13432746003ACC1F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FD13432746003ACC1F /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -425,6 +429,15 @@
 				6FEF8541131F76DA0015B57C /* MessageUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F1A58E213AB77D20029B714 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */,
+				6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6FA698F913432746003ACC1F /* Resources */ = {
@@ -722,6 +735,7 @@
 		6FEF8480131F76BD0015B57C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F1A58E213AB77D20029B714 /* Fonts */,
 				6FEF8481131F76BD0015B57C /* Images */,
 			);
 			name = Resources;
@@ -1291,6 +1305,8 @@
 				6FA6990E13432746003ACC1F /* nut_ButtonBarRefresh.png in Resources */,
 				6FA6990F13432746003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */,
 				6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */,
+				6F1A58E513AB77D20029B714 /* ProximaNova-Bold.otf in Resources */,
+				6F1A58E613AB77D20029B714 /* ProximaNova-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

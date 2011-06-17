@@ -102,7 +102,7 @@ static NSArray *s_timeScales = nil;
         return [s_timeScales count];
     }
     else {
-        HLSLoggerDebug(@"Unknown cursor");
+        HLSLoggerError(@"Unknown cursor");
         return 0;
     }
 }
@@ -119,8 +119,23 @@ static NSArray *s_timeScales = nil;
         return [s_timeScales objectAtIndex:index];
     }
     else {
-        HLSLoggerDebug(@"Unknown cursor");
         return @"";
+    }
+}
+
+- (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (cursor == self.timeScalesCursor) {
+        if (selected) {
+            return [UIFont fontWithName:@"ProximaNova-Bold" size:20.f];
+        }
+        else {
+            return [UIFont fontWithName:@"ProximaNova-Regular" size:20.f];
+        }
+    }
+    else {
+        // Default
+        return nil;
     }
 }
 
@@ -141,7 +156,7 @@ static NSArray *s_timeScales = nil;
         return [UIColor blackColor];
     }
     else {
-        HLSLoggerDebug(@"Unknown cursor");
+        // Default
         return nil;
     }
 }

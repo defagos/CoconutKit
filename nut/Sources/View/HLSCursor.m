@@ -213,8 +213,8 @@ static const CGFloat kDefaultSpacing = 20.f;
         }
         // Check alpha-component to ease problem detection
         const CGFloat *components = CGColorGetComponents(textColor.CGColor);
-        if (components[3] == 0) {
-            HLSLoggerError(@"Text color has 0 alpha component. The text at index %d will not be visible", index);
+        if (floateq(components[3], 0.f)) {
+            HLSLoggerWarn(@"Text color has 0 alpha component. The text at index %d will not be visible", index);
         }
         
         // Shadow color. If not defined by the data source, none

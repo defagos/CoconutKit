@@ -15,6 +15,8 @@
 		6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */; };
 		6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143AFD130A6DF00075E94C /* StretchableViewController.m */; };
 		6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143AFE130A6DF00075E94C /* StretchableViewController.xib */; };
+		6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */; };
+		6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
 		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
@@ -98,6 +100,8 @@
 		6F143AFC130A6DF00075E94C /* StretchableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableViewController.h; sourceTree = "<group>"; };
 		6F143AFD130A6DF00075E94C /* StretchableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableViewController.m; sourceTree = "<group>"; };
 		6F143AFE130A6DF00075E94C /* StretchableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
+		6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -289,6 +293,15 @@
 				6F7A3B18130DCC2100AB1926 /* StretchableLargeViewController.xib */,
 			);
 			path = StretchableViewController;
+			sourceTree = "<group>";
+		};
+		6F1A58E713AB77E20029B714 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */,
+				6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6F7A26BE130AA1C200AB1926 /* FixedSizeViewController */ = {
@@ -632,6 +645,7 @@
 		6FBDA9201304315B004B9617 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F1A58E713AB77E20029B714 /* Fonts */,
 				6FBDA9211304315B004B9617 /* Images */,
 			);
 			path = Resources;
@@ -863,6 +877,8 @@
 				6FA698B013432606003ACC1F /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FA698B113432606003ACC1F /* nut_HLSWebViewController.xib in Resources */,
 				6FAF20EF13A24C73009A5645 /* CursorDemoViewController.xib in Resources */,
+				6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */,
+				6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
