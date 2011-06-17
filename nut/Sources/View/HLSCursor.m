@@ -194,12 +194,7 @@ static const CGFloat kDefaultSpacing = 20.f;
             elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:selected];
         }
         else {
-            if (! selected) {
-                elementLabel.textColor = [self.backgroundColor invertColor];
-            }
-            else {
-                elementLabel.textColor = [UIColor blueColor];
-            }
+            elementLabel.textColor = [self.backgroundColor invertColor];
         }
         if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
             elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:selected];

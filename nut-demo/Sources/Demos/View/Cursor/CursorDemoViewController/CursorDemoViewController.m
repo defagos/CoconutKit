@@ -110,6 +110,21 @@ static NSArray *s_monthDays = nil;
     }
 }
 
+- (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (cursor == self.weekDaysCursor) {
+        if (selected) {
+            return [UIColor blackColor];
+        }
+        else {
+            return [UIColor grayColor];
+        }        
+    }
+    else if (cursor == self.monthDaysCursor) {
+        return [UIColor blueColor];
+    }
+}
+
 #pragma mark HLSCursorDelegate protocol implementation
 
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index
