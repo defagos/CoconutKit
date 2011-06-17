@@ -144,7 +144,7 @@ static const CGFloat kDefaultSpacing = 20.f;
     for (UIView *elementView in self.elementViews) {
         // Centered in main frame
         elementView.frame = CGRectMake(xPos, 
-                                       floorf(self.frame.size.height - elementView.frame.size.height) / 2.f, 
+                                       floorf((self.frame.size.height - elementView.frame.size.height) / 2.f),
                                        elementView.frame.size.width, 
                                        elementView.frame.size.height);
         xPos += elementView.frame.size.width + self.spacing;
