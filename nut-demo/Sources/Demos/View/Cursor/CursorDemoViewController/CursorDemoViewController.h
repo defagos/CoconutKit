@@ -16,6 +16,7 @@
     UILabel *m_weekDayIndexLabel;
     HLSCursor *m_monthDaysCursor;
     HLSCursor *m_timeScalesCursor;
+    HLSCursor *m_foldersCursor;
 }
 
 @property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
@@ -23,6 +24,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
 @property (nonatomic, retain) IBOutlet HLSCursor *monthDaysCursor;
 @property (nonatomic, retain) IBOutlet HLSCursor *timeScalesCursor;
+@property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;
 
 - (IBAction)moveWeekDaysPointerToNextDay;
 

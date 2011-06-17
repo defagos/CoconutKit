@@ -12,6 +12,11 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F1A58E513AB77D20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58E613AB77D20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */; };
+		6F1A58FC13AB86770029B714 /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58FB13AB86770029B714 /* icn_folder.png */; };
+		6F1A590113AB86E60029B714 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A590013AB86E60029B714 /* CursorFolderView.m */; };
+		6F1A590613AB870E0029B714 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A590513AB870E0029B714 /* CursorFolderView.xib */; };
+		6F1A590813AB872E0029B714 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */; };
+		6F1A590B13AB87420029B714 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */; };
 		6FA6990913432746003ACC1F /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698FA13432746003ACC1F /* nut_Localizable.strings */; };
 		6FA6990A13432746003ACC1F /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */; };
 		6FA6990B13432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990113432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png */; };
@@ -151,6 +156,13 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		6F1A58FB13AB86770029B714 /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
+		6F1A58FF13AB86E60029B714 /* CursorFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorFolderView.h; sourceTree = "<group>"; };
+		6F1A590013AB86E60029B714 /* CursorFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorFolderView.m; sourceTree = "<group>"; };
+		6F1A590513AB870E0029B714 /* CursorFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorFolderView.xib; sourceTree = "<group>"; };
+		6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
+		6F1A590913AB87410029B714 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
+		6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6FA698FB13432746003ACC1F /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FC13432746003ACC1F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FD13432746003ACC1F /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -477,6 +489,12 @@
 				6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */,
 				6FAF20F213A24CCB009A5645 /* CursorDemoViewController.h */,
 				6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */,
+				6F1A58FF13AB86E60029B714 /* CursorFolderView.h */,
+				6F1A590013AB86E60029B714 /* CursorFolderView.m */,
+				6F1A590513AB870E0029B714 /* CursorFolderView.xib */,
+				6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */,
+				6F1A590913AB87410029B714 /* CursorSelectedFolderView.h */,
+				6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */,
 			);
 			path = CursorDemoViewController;
 			sourceTree = "<group>";
@@ -756,6 +774,7 @@
 				6FEF8483131F76BD0015B57C /* cell_bkgr_brown_large.png */,
 				6FEF8484131F76BD0015B57C /* cell_bkgr_brown_large_selected.png */,
 				6FEF8485131F76BD0015B57C /* icn_bookmark.png */,
+				6F1A58FB13AB86770029B714 /* icn_folder.png */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1307,6 +1326,9 @@
 				6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */,
 				6F1A58E513AB77D20029B714 /* ProximaNova-Bold.otf in Resources */,
 				6F1A58E613AB77D20029B714 /* ProximaNova-Regular.otf in Resources */,
+				6F1A58FC13AB86770029B714 /* icn_folder.png in Resources */,
+				6F1A590613AB870E0029B714 /* CursorFolderView.xib in Resources */,
+				6F1A590813AB872E0029B714 /* CursorSelectedFolderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1426,8 @@
 				6FAF20F513A24CCB009A5645 /* CursorDemoViewController.m in Sources */,
 				6FAF20F913A24D36009A5645 /* HLSCursor.m in Sources */,
 				6FAF210A13A7C425009A5645 /* UIColor+HLSExtensions.m in Sources */,
+				6F1A590113AB86E60029B714 /* CursorFolderView.m in Sources */,
+				6F1A590B13AB87420029B714 /* CursorSelectedFolderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

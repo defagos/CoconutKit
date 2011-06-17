@@ -180,9 +180,23 @@ static const CGFloat kDefaultSpacing = 20.f;
 {
     // First check if a custom view is used
     if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
+        // The size must accomodate both the selected and non-selected versions of an element view (i.e. be the largest).
+        // To avoid changing the frame of the views we receive, we simply find the rectangle in which both versions fit,
+        // then we create a view with this size and we put the view we receive at its center. 
         UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:selected];
-        if (elementView) {
-            return elementView;
+        UIView *otherElementView = [self.dataSource cursor:self viewAtIndex:index selected:! selected];
+        if (elementView && otherElementView) {
+            CGSize elementViewSize = elementView.frame.size;
+            CGSize otherElementViewSize = otherElementView.frame.size;
+            UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 
+                                                                              0.f,
+                                                                              floatmax(elementViewSize.width, otherElementViewSize.width), 
+                                                                              floatmax(elementViewSize.height, otherElementViewSize.height))]
+                                     autorelease];
+            containerView.backgroundColor = [UIColor clearColor];
+            [containerView addSubview:elementView];
+            elementView.center = containerView.center;
+            return containerView;
         }
     }
     
@@ -196,11 +210,14 @@ static const CGFloat kDefaultSpacing = 20.f;
         
         // Font. If not defined by the data source, use standard font
         UIFont *font = nil;
+        UIFont *otherFont = nil;
         if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
             font = [self.dataSource cursor:self fontAtIndex:index selected:selected];
+            otherFont = [self.dataSource cursor:self fontAtIndex:index selected:! selected];
         }
         if (! font) {
-            font = [UIFont systemFontOfSize:17.f];
+            font = selected ? [UIFont boldSystemFontOfSize:17.f] : [UIFont systemFontOfSize:17.f];
+            otherFont = selected ? [UIFont systemFontOfSize:17.f] : [UIFont boldSystemFontOfSize:17.f];
         }
         
         // Text color. If not defined by the data source, use standard color always visible on the cursor background
@@ -210,11 +227,6 @@ static const CGFloat kDefaultSpacing = 20.f;
         }
         if (! textColor) {
             textColor = [self.backgroundColor invertColor];
-        }
-        // Check alpha-component to ease problem detection
-        const CGFloat *components = CGColorGetComponents(textColor.CGColor);
-        if (floateq(components[3], 0.f)) {
-            HLSLoggerWarn(@"Text color has 0 alpha component. The text at index %d will not be visible", index);
         }
         
         // Shadow color. If not defined by the data source, none
@@ -229,9 +241,15 @@ static const CGFloat kDefaultSpacing = 20.f;
             shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
         }
         
-        // Create a label with appropriate size
+        // Create a label with appropriate size. The size must accomodate both the font sizes for selected and non-selected
+        // states
         CGSize titleSize = [title sizeWithFont:font];
-        UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
+        CGSize otherTitleSize = [title sizeWithFont:otherFont];
+        UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 
+                                                                           0.f, 
+                                                                           floatmax(titleSize.width, otherTitleSize.width), 
+                                                                           floatmax(titleSize.height, otherTitleSize.height))] 
+                                 autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
         elementLabel.font = font;
@@ -306,6 +324,10 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
 {
+    if (! self.elementViews) {
+        return 0.f;
+    }
+    
     if (index >= [self.elementViews count]) {
         HLSLoggerError(@"Invalid index");
         return 0.f;

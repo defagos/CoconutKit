@@ -133,11 +133,21 @@
 						<string key="NSFrame">{{181, 360}, {407, 60}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<reference key="NSNextKeyView" ref="367974868"/>
+						<object class="NSColor" key="IBUIBackgroundColor" id="537349591">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="367974868">
+						<reference key="NSNextResponder" ref="463507662"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 505}, {728, 105}}</string>
+						<reference key="NSSuperview" ref="463507662"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<reference key="IBUIBackgroundColor" ref="537349591"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</object>
@@ -209,6 +219,14 @@
 					</object>
 					<int key="connectionID">27</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">foldersCursor</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="367974868"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -240,6 +258,7 @@
 							<reference ref="330930698"/>
 							<reference ref="411449780"/>
 							<reference ref="1047325668"/>
+							<reference ref="367974868"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -268,6 +287,11 @@
 						<reference key="object" ref="1047325668"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="367974868"/>
+						<reference key="parent" ref="463507662"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -283,6 +307,8 @@
 					<string>23.IBPluginDependency</string>
 					<string>26.CustomClassName</string>
 					<string>26.IBPluginDependency</string>
+					<string>30.CustomClassName</string>
+					<string>30.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -290,6 +316,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CursorDemoViewController</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>HLSCursor</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>HLSCursor</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -313,7 +341,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">31</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -336,6 +364,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>foldersCursor</string>
 							<string>monthDaysCursor</string>
 							<string>moveWeekDaysPointerButton</string>
 							<string>timeScalesCursor</string>
@@ -344,6 +373,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>HLSCursor</string>
 							<string>HLSCursor</string>
 							<string>UIButton</string>
 							<string>HLSCursor</string>
@@ -355,6 +385,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>foldersCursor</string>
 							<string>monthDaysCursor</string>
 							<string>moveWeekDaysPointerButton</string>
 							<string>timeScalesCursor</string>
@@ -363,6 +394,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">foldersCursor</string>
+								<string key="candidateClassName">HLSCursor</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">monthDaysCursor</string>
 								<string key="candidateClassName">HLSCursor</string>

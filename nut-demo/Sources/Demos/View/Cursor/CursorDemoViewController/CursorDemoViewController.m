@@ -8,11 +8,15 @@
 
 #import "CursorDemoViewController.h"
 
+#import "CursorFolderView.h"
+#import "CursorSelectedFolderView.h"
+
 @implementation CursorDemoViewController
 
 static NSArray *s_weekDays = nil;
 static NSArray *s_monthDays = nil;
 static NSArray *s_timeScales = nil;
+static NSArray *s_folders = nil;
 
 #pragma mark Class methods
 
@@ -22,6 +26,7 @@ static NSArray *s_timeScales = nil;
     s_monthDays = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", 
                     @"17", nil] retain];
     s_timeScales = [[NSArray arrayWithObjects:@"YEAR", @"MONTH", @"WEEK", @"DAY", nil] retain];
+    s_folders = [[NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil] retain];
 }
 
 #pragma mark Object creation and destruction
@@ -43,6 +48,7 @@ static NSArray *s_timeScales = nil;
     self.weekDayIndexLabel = nil;
     self.monthDaysCursor = nil;
     self.timeScalesCursor = nil;
+    self.foldersCursor = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -56,6 +62,8 @@ static NSArray *s_timeScales = nil;
 @synthesize monthDaysCursor = m_monthDaysCursor;
 
 @synthesize timeScalesCursor = m_timeScalesCursor;
+
+@synthesize foldersCursor = m_foldersCursor;
 
 #pragma mark View lifecycle
 
@@ -75,6 +83,11 @@ static NSArray *s_timeScales = nil;
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
+    
+    self.foldersCursor.dataSource = self;
+    self.foldersCursor.delegate = self;
+    self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(5.f, 5.f);
+    self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(-5.f, -5.f);
 }
 
 #pragma mark Orientation management
@@ -90,6 +103,26 @@ static NSArray *s_timeScales = nil;
 
 #pragma mark HLSCursorDataSource protocol implementation
 
+- (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (cursor == self.foldersCursor) {
+        if (selected) {
+            CursorSelectedFolderView *view = HLSXibViewGet(CursorSelectedFolderView);
+            view.nameLabel.text = [s_folders objectAtIndex:index];
+            return view;
+        }
+        else {
+            CursorFolderView *view = HLSXibViewGet(CursorFolderView);
+            view.nameLabel.text = [s_folders objectAtIndex:index];
+            return view;        
+        }
+    }
+    else {
+        // Not defined using a view
+        return nil;
+    }
+}
+
 - (NSUInteger)numberOfElementsForCursor:(HLSCursor *)cursor
 {
     if (cursor == self.weekDaysCursor) {
@@ -100,6 +133,9 @@ static NSArray *s_timeScales = nil;
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];
+    }
+    else if (cursor == self.foldersCursor) {
+        return [s_folders count];
     }
     else {
         HLSLoggerError(@"Unknown cursor");

@@ -17,6 +17,11 @@
 		6F143B00130A6DF00075E94C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143AFE130A6DF00075E94C /* StretchableViewController.xib */; };
 		6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */; };
+		6F1A58FE13AB86920029B714 /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58FD13AB86920029B714 /* icn_folder.png */; };
+		6F1A591213AB876A0029B714 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A590D13AB876A0029B714 /* CursorFolderView.m */; };
+		6F1A591313AB876A0029B714 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A590E13AB876A0029B714 /* CursorFolderView.xib */; };
+		6F1A591413AB876A0029B714 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */; };
+		6F1A591513AB876A0029B714 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
 		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
@@ -102,6 +107,13 @@
 		6F143AFE130A6DF00075E94C /* StretchableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
 		6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		6F1A58FD13AB86920029B714 /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
+		6F1A590C13AB876A0029B714 /* CursorFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorFolderView.h; sourceTree = "<group>"; };
+		6F1A590D13AB876A0029B714 /* CursorFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorFolderView.m; sourceTree = "<group>"; };
+		6F1A590E13AB876A0029B714 /* CursorFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorFolderView.xib; sourceTree = "<group>"; };
+		6F1A590F13AB876A0029B714 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
+		6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
+		6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -457,6 +469,12 @@
 				6FAF20EB13A24C56009A5645 /* CursorDemoViewController.h */,
 				6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */,
 				6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */,
+				6F1A590C13AB876A0029B714 /* CursorFolderView.h */,
+				6F1A590D13AB876A0029B714 /* CursorFolderView.m */,
+				6F1A590E13AB876A0029B714 /* CursorFolderView.xib */,
+				6F1A590F13AB876A0029B714 /* CursorSelectedFolderView.h */,
+				6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */,
+				6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */,
 			);
 			path = CursorDemoViewController;
 			sourceTree = "<group>";
@@ -665,6 +683,7 @@
 				6FBDA9231304315B004B9617 /* cell_bkgr_brown_large.png */,
 				6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */,
 				6FBDA9251304315B004B9617 /* icn_bookmark.png */,
+				6F1A58FD13AB86920029B714 /* icn_folder.png */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -879,6 +898,9 @@
 				6FAF20EF13A24C73009A5645 /* CursorDemoViewController.xib in Resources */,
 				6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */,
 				6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */,
+				6F1A58FE13AB86920029B714 /* icn_folder.png in Resources */,
+				6F1A591313AB876A0029B714 /* CursorFolderView.xib in Resources */,
+				6F1A591513AB876A0029B714 /* CursorSelectedFolderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,6 +942,8 @@
 				6F84B23F131BF53B002C3D05 /* Customer.m in Sources */,
 				6FA698A713432606003ACC1F /* nut_bootstrap.m in Sources */,
 				6FAF20ED13A24C56009A5645 /* CursorDemoViewController.m in Sources */,
+				6F1A591213AB876A0029B714 /* CursorFolderView.m in Sources */,
+				6F1A591413AB876A0029B714 /* CursorSelectedFolderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
