@@ -7,6 +7,9 @@
 //
 
 // TODO: Gestion du selected dans les méthodes de datasource
+// TODO: Optimize respondsToSelector calls
+// TODO: Bug: On devrait pouvoir prendre le pointeur sur toute sa surface, pas seulement sur celle correspondant à
+//       l'élément en dessous!!
 
 // Forward declarations
 @protocol HLSCursorDataSource;

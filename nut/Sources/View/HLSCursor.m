@@ -20,8 +20,14 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 @property (nonatomic, retain) NSArray *elementViews;
 
+- (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
+
 - (CGFloat)xPosForIndex:(NSUInteger)index;
 - (NSUInteger)indexForXPos:(CGFloat)xPos;
+
+- (void)finalizeSelectionForIndex:(NSUInteger)index;
+
+- (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected;
 
 - (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
@@ -112,47 +118,10 @@ static const CGFloat kDefaultSpacing = 20.f;
         }
         
         // Fill with views generated from the data source
-        if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
-            for (NSUInteger index = 0; index < nbrElements; ++index) {
-                UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:NO];
-                [self addSubview:elementView];
-                self.elementViews = [self.elementViews arrayByAddingObject:elementView];
-            }
-        }
-        else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
-            for (NSUInteger index = 0; index < nbrElements; ++index) {
-                UIFont *font = nil;
-                if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
-                    font = [self.dataSource cursor:self fontAtIndex:index selected:NO];
-                }
-                else {
-                    font = [UIFont systemFontOfSize:17.f];
-                }
-                NSString *title = [self.dataSource cursor:self titleAtIndex:index];
-                CGSize titleSize = [title sizeWithFont:font];
-                
-                UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
-                elementLabel.text = title;
-                elementLabel.backgroundColor = [UIColor clearColor];
-                if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
-                    elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:NO];
-                }
-                else {
-                    elementLabel.textColor = [self.backgroundColor invertColor];
-                }
-                if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
-                    elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:NO];
-                }
-                if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
-                    elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:NO];
-                }
-                [self addSubview:elementLabel];
-                self.elementViews = [self.elementViews arrayByAddingObject:elementLabel];
-            }
-        }
-        else {
-            HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
-            return;
+        for (NSInteger index = 0; index < nbrElements; ++index) {
+            UIView *elementView = [self elementViewForIndex:index selected:NO];
+            [self addSubview:elementView];
+            self.elementViews = [self.elementViews arrayByAddingObject:elementView];            
         }
     }
         
@@ -201,6 +170,51 @@ static const CGFloat kDefaultSpacing = 20.f;
     m_viewsCreated = YES;
 }
 
+- (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
+        UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:selected];
+        return elementView;
+    }
+    else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
+        UIFont *font = nil;
+        if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
+            font = [self.dataSource cursor:self fontAtIndex:index selected:selected];
+        }
+        else {
+            font = [UIFont systemFontOfSize:17.f];
+        }
+        NSString *title = [self.dataSource cursor:self titleAtIndex:index];
+        CGSize titleSize = [title sizeWithFont:font];
+        
+        UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
+        elementLabel.text = title;
+        elementLabel.backgroundColor = [UIColor clearColor];
+        if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
+            elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:selected];
+        }
+        else {
+            if (! selected) {
+                elementLabel.textColor = [self.backgroundColor invertColor];
+            }
+            else {
+                elementLabel.textColor = [UIColor blueColor];
+            }
+        }
+        if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
+            elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:selected];
+        }
+        if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
+            elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
+        }
+        return elementLabel;
+    }
+    else {
+        HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
+        return nil;
+    }
+}
+
 #pragma mark Pointer management
 
 - (NSUInteger)selectedIndex
@@ -209,7 +223,10 @@ static const CGFloat kDefaultSpacing = 20.f;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
-{    
+{   
+    // Set appearance of previously selected element view to "not selected"
+    [self swapElementViewAtIndex:[self indexForXPos:m_xPos] selected:NO];
+    
     m_xPos = [self xPosForIndex:selectedIndex];
     
     if (animated) {
@@ -225,11 +242,34 @@ static const CGFloat kDefaultSpacing = 20.f;
         [UIView commitAnimations];
     }
     else {
-        [self.delegate cursor:self didSelectIndex:selectedIndex];
+        [self finalizeSelectionForIndex:selectedIndex];
     }
     
     // Will only be used if setSelectedIndex has been called before the views are actually created
     m_initialIndex = selectedIndex;
+}
+
+- (void)finalizeSelectionForIndex:(NSUInteger)index
+{
+    [self swapElementViewAtIndex:index selected:YES];
+    
+    // Notify the delegate
+    [self.delegate cursor:self didSelectIndex:index];
+}
+
+- (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (self.elementViews) {
+        // Swap selected element view with selected version of it
+        UIView *elementView = [self.elementViews objectAtIndex:index];
+        UIView *newElementView = [self elementViewForIndex:index selected:selected];
+        newElementView.frame = elementView.frame;
+        [self insertSubview:newElementView belowSubview:elementView];
+        [elementView removeFromSuperview];
+        NSMutableArray *mutableElementViews = [NSMutableArray arrayWithArray:self.elementViews];
+        [mutableElementViews replaceObjectAtIndex:index withObject:newElementView];
+        self.elementViews = [NSArray arrayWithArray:mutableElementViews];
+    }
 }
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
@@ -340,6 +380,9 @@ static const CGFloat kDefaultSpacing = 20.f;
         // Check that we are actually grabbing the pointer view
         if (CGRectContainsPoint(self.pointerView.frame, pos)) {
             m_grabbed = YES;
+            
+            NSUInteger index = [self indexForXPos:m_xPos];
+            [self swapElementViewAtIndex:index selected:NO];
         }
         else {
             m_grabbed = NO;
@@ -388,7 +431,7 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
-    [self.delegate cursor:self didSelectIndex:[self selectedIndex]];
+    [self finalizeSelectionForIndex:[self selectedIndex]];
 }
 
 @end
