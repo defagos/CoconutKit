@@ -49,7 +49,7 @@
 						<string key="NSFrame">{{676, 100}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="484376232"/>
+						<reference key="NSNextKeyView" ref="411449780"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -101,7 +101,7 @@
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUIView" id="514407732">
+					<object class="IBUIView" id="258081618">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 20}, {728, 60}}</string>
@@ -114,16 +114,29 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="484376232">
+					<object class="IBUIView" id="411449780">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 202}, {728, 60}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1047325668"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC43MDc3NzAzODkzIDAuNjg0ODc2NzEzMSAxAA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="1047325668">
+						<reference key="NSNextResponder" ref="463507662"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{181, 360}, {407, 60}}</string>
+						<reference key="NSSuperview" ref="463507662"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -131,7 +144,7 @@
 				<string key="NSFrameSize">{768, 1004}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="514407732"/>
+				<reference key="NSNextKeyView" ref="258081618"/>
 				<reference key="IBUIBackgroundColor" ref="899741955"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -176,7 +189,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">weekDaysCursor</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="514407732"/>
+						<reference key="destination" ref="258081618"/>
 					</object>
 					<int key="connectionID">24</int>
 				</object>
@@ -184,9 +197,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">monthDaysCursor</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="484376232"/>
+						<reference key="destination" ref="411449780"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">timeScalesCursor</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1047325668"/>
+					</object>
+					<int key="connectionID">27</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -214,10 +235,11 @@
 						<reference key="object" ref="463507662"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="514407732"/>
+							<reference ref="258081618"/>
 							<reference ref="808294600"/>
 							<reference ref="330930698"/>
-							<reference ref="484376232"/>
+							<reference ref="411449780"/>
+							<reference ref="1047325668"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -233,12 +255,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
-						<reference key="object" ref="514407732"/>
+						<reference key="object" ref="258081618"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
-						<reference key="object" ref="484376232"/>
+						<reference key="object" ref="411449780"/>
+						<reference key="parent" ref="463507662"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">26</int>
+						<reference key="object" ref="1047325668"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
 				</object>
@@ -254,6 +281,8 @@
 					<string>22.IBPluginDependency</string>
 					<string>23.CustomClassName</string>
 					<string>23.IBPluginDependency</string>
+					<string>26.CustomClassName</string>
+					<string>26.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -261,6 +290,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CursorDemoViewController</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>HLSCursor</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>HLSCursor</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -282,7 +313,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">25</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -307,6 +338,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>monthDaysCursor</string>
 							<string>moveWeekDaysPointerButton</string>
+							<string>timeScalesCursor</string>
 							<string>weekDayIndexLabel</string>
 							<string>weekDaysCursor</string>
 						</object>
@@ -314,6 +346,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>HLSCursor</string>
 							<string>UIButton</string>
+							<string>HLSCursor</string>
 							<string>UILabel</string>
 							<string>HLSCursor</string>
 						</object>
@@ -324,6 +357,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>monthDaysCursor</string>
 							<string>moveWeekDaysPointerButton</string>
+							<string>timeScalesCursor</string>
 							<string>weekDayIndexLabel</string>
 							<string>weekDaysCursor</string>
 						</object>
@@ -336,6 +370,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">moveWeekDaysPointerButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">timeScalesCursor</string>
+								<string key="candidateClassName">HLSCursor</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">weekDayIndexLabel</string>

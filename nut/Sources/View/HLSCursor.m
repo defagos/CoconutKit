@@ -178,42 +178,73 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected
 {
+    // First check if a custom view is used
     if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
         UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:selected];
-        return elementView;
+        if (elementView) {
+            return elementView;
+        }
     }
-    else if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
+    
+    // Check if a bare label is used
+    if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
+        // Title
+        NSString *title = [self.dataSource cursor:self titleAtIndex:index];
+        if ([title length] == 0) {
+            HLSLoggerWarn(@"Empty title string at index %d", index);
+        }
+        
+        // Font. If not defined by the data source, use standard font
         UIFont *font = nil;
         if ([self.dataSource respondsToSelector:@selector(cursor:fontAtIndex:selected:)]) {
             font = [self.dataSource cursor:self fontAtIndex:index selected:selected];
         }
-        else {
+        if (! font) {
             font = [UIFont systemFontOfSize:17.f];
         }
-        NSString *title = [self.dataSource cursor:self titleAtIndex:index];
-        CGSize titleSize = [title sizeWithFont:font];
         
+        // Text color. If not defined by the data source, use standard color always visible on the cursor background
+        UIColor *textColor = nil;
+        if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
+            textColor = [self.dataSource cursor:self textColorAtIndex:index selected:selected];
+        }
+        if (! textColor) {
+            textColor = [self.backgroundColor invertColor];
+        }
+        // Check alpha-component to ease problem detection
+        const CGFloat *components = CGColorGetComponents(textColor.CGColor);
+        if (components[3] == 0) {
+            HLSLoggerError(@"Text color has 0 alpha component. The text at index %d will not be visible", index);
+        }
+        
+        // Shadow color. If not defined by the data source, none
+        UIColor *shadowColor = nil;
+        if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
+            shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:selected];
+        }
+        
+        // Shadow offset. If not defined, default value (CGSizeMake(0, -1), see UILabel documentation)
+        CGSize shadowOffset = CGSizeMake(0, -1);
+        if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
+            shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
+        }
+        
+        // Create a label with appropriate size
+        CGSize titleSize = [title sizeWithFont:font];
         UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)] autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
-        if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
-            elementLabel.textColor = [self.dataSource cursor:self textColorAtIndex:index selected:selected];
-        }
-        else {
-            elementLabel.textColor = [self.backgroundColor invertColor];
-        }
-        if ([self.dataSource respondsToSelector:@selector(cursor:shadowColorAtIndex:selected:)]) {
-            elementLabel.shadowColor = [self.dataSource cursor:self shadowColorAtIndex:index selected:selected];
-        }
-        if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
-            elementLabel.shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
-        }
+        elementLabel.font = font;
+        elementLabel.textColor = textColor;
+        elementLabel.shadowColor = shadowColor;
+        elementLabel.shadowOffset = shadowOffset;
+        
         return elementLabel;
     }
-    else {
-        HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
-        return nil;
-    }
+    
+    // Incorrect data source implementation
+    HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
+    return nil;
 }
 
 #pragma mark Pointer management

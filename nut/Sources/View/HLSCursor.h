@@ -8,6 +8,7 @@
 
 // TODO: Gestion du selected dans les méthodes de datasource
 // TODO: Optimize respondsToSelector calls
+// TODO: Exemple mélangeant les deux approches custom view (pour l'él. sélectionné) et label
 
 // Forward declarations
 @protocol HLSCursorDataSource;
@@ -73,7 +74,7 @@
 - (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented: system font, size 17
 - (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented: invert background color
 - (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented
-- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented
+- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented, i.e. CGSizeMake(0, -1)
 
 @end
 

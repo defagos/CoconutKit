@@ -12,6 +12,7 @@
 
 static NSArray *s_weekDays = nil;
 static NSArray *s_monthDays = nil;
+static NSArray *s_timeScales = nil;
 
 #pragma mark Class methods
 
@@ -20,6 +21,7 @@ static NSArray *s_monthDays = nil;
     s_weekDays = [[NSArray arrayWithObjects:@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday", nil] retain];
     s_monthDays = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", 
                     @"17", nil] retain];
+    s_timeScales = [[NSArray arrayWithObjects:@"YEAR", @"MONTH", @"WEEK", @"DAY", nil] retain];
 }
 
 #pragma mark Object creation and destruction
@@ -40,6 +42,7 @@ static NSArray *s_monthDays = nil;
     self.moveWeekDaysPointerButton = nil;
     self.weekDayIndexLabel = nil;
     self.monthDaysCursor = nil;
+    self.timeScalesCursor = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -51,6 +54,8 @@ static NSArray *s_monthDays = nil;
 @synthesize weekDayIndexLabel = m_weekDayIndexLabel;
 
 @synthesize monthDaysCursor = m_monthDaysCursor;
+
+@synthesize timeScalesCursor = m_timeScalesCursor;
 
 #pragma mark View lifecycle
 
@@ -67,6 +72,9 @@ static NSArray *s_monthDays = nil;
     
     self.monthDaysCursor.dataSource = self;
     self.monthDaysCursor.delegate = self;
+    
+    self.timeScalesCursor.dataSource = self;
+    self.timeScalesCursor.delegate = self;
 }
 
 #pragma mark Orientation management
@@ -90,6 +98,9 @@ static NSArray *s_monthDays = nil;
     else if (cursor == self.monthDaysCursor) {
         return [s_monthDays count];
     }
+    else if (cursor == self.timeScalesCursor) {
+        return [s_timeScales count];
+    }
     else {
         HLSLoggerDebug(@"Unknown cursor");
         return 0;
@@ -103,6 +114,9 @@ static NSArray *s_monthDays = nil;
     }
     else if (cursor == self.monthDaysCursor) {
         return [s_monthDays objectAtIndex:index];
+    }
+    else if (cursor == self.timeScalesCursor) {
+        return [s_timeScales objectAtIndex:index];
     }
     else {
         HLSLoggerDebug(@"Unknown cursor");
@@ -122,6 +136,9 @@ static NSArray *s_monthDays = nil;
     }
     else if (cursor == self.monthDaysCursor) {
         return [UIColor blueColor];
+    }
+    else if (cursor == self.timeScalesCursor) {
+        return [UIColor blackColor];
     }
     else {
         HLSLoggerDebug(@"Unknown cursor");
