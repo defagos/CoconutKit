@@ -68,6 +68,9 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)initialize
 {
+    // Warnings will be logged if the view frame is too small to fit its content
+    self.clipsToBounds = YES;
+    
     self.spacing = kDefaultSpacing;
     self.pointerViewTopLeftOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
     self.pointerViewBottomRightOffset = CGSizeMake(kDefaultSpacing / 2.f, kDefaultSpacing / 2.f);
@@ -130,7 +133,7 @@ static const CGFloat kDefaultSpacing = 20.f;
     for (UIView *elementView in self.elementViews) {
         totalWidth += elementView.frame.size.width + self.spacing;
     }
-    totalWidth -= self.spacing;
+    totalWidth += -self.spacing /* one too much */ + floatmax(0.f, self.pointerViewBottomRightOffset.width) /* pointer must fit as well! */;
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)

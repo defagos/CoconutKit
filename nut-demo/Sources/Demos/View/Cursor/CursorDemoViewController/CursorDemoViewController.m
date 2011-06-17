@@ -123,6 +123,10 @@ static NSArray *s_monthDays = nil;
     else if (cursor == self.monthDaysCursor) {
         return [UIColor blueColor];
     }
+    else {
+        HLSLoggerDebug(@"Unknown cursor");
+        return nil;
+    }
 }
 
 #pragma mark HLSCursorDelegate protocol implementation
