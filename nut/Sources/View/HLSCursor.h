@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+// TODO: Gestion du selected dans les méthodes de datasource
+
 // Forward declarations
 @protocol HLSCursorDataSource;
 @protocol HLSCursorDelegate;
@@ -18,7 +20,8 @@
     NSArray *m_elementViews;
     CGFloat m_spacing;
     UIView *m_pointerView;
-    CGSize m_pointerViewOffset;
+    CGSize m_pointerViewTopLeftOffset;
+    CGSize m_pointerViewBottomRightOffset;
     UIColor *m_defaultPointerColor;
     UIImage *m_highlightImage;
     CGRect m_highlightContentStretch;
@@ -44,9 +47,11 @@
 @property (nonatomic, retain) IBOutlet UIView *pointerView;
 
 /**
- * Pointer view offset around an element view. Default is (-10px, -10px)
+ * Pointer view offset around an element view. Use them to make the pointer rectangle larger or smaller around the element
+ * views
  */
-@property (nonatomic, assign) CGSize pointerViewOffset;
+@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
+@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
 
 /**
  * Set the color of the default pointer (if used). Has no effect if a custom pointer is used

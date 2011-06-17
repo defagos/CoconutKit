@@ -65,7 +65,8 @@ static const CGFloat kDefaultSpacing = 20.f;
 - (void)initialize
 {
     self.spacing = kDefaultSpacing;
-    self.pointerViewOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
+    self.pointerViewTopLeftOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(kDefaultSpacing / 2.f, kDefaultSpacing / 2.f);
 }
 
 #pragma mark Accessors and mutators
@@ -87,7 +88,9 @@ static const CGFloat kDefaultSpacing = 20.f;
     m_pointerView = [pointerView retain];
 }
 
-@synthesize pointerViewOffset = m_pointerViewOffset;
+@synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
+
+@synthesize pointerViewBottomRightOffset = m_pointerViewBottomRightOffset;
 
 @synthesize defaultPointerColor = m_defaultPointerColor;
 
@@ -315,11 +318,11 @@ static const CGFloat kDefaultSpacing = 20.f;
                                  height);
     }
     
-    // Adjust the rect according to the offset to be applied
-    pointerRect = CGRectMake(pointerRect.origin.x + self.pointerViewOffset.width,
-                             pointerRect.origin.y + self.pointerViewOffset.height,
-                             pointerRect.size.width - 2 * self.pointerViewOffset.width,
-                             pointerRect.size.height - 2 * self.pointerViewOffset.height);
+    // Adjust the rect according to the offsets to be applied
+    pointerRect = CGRectMake(pointerRect.origin.x + self.pointerViewTopLeftOffset.width,
+                             pointerRect.origin.y + self.pointerViewTopLeftOffset.height,
+                             pointerRect.size.width - self.pointerViewTopLeftOffset.width + self.pointerViewBottomRightOffset.width,
+                             pointerRect.size.height - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height);
     
     return pointerRect;
 }
