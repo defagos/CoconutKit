@@ -22,9 +22,6 @@
     UIView *m_pointerView;
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
-    UIColor *m_defaultPointerColor;
-    UIImage *m_highlightImage;
-    CGRect m_highlightContentStretch;
     CGFloat m_xPos;
     BOOL m_dragging;
     BOOL m_clicked;
@@ -52,14 +49,6 @@
  */
 @property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
 @property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
-
-/**
- * Set the color of the default pointer (if used). Has no effect if a custom pointer is used
- */
-@property (nonatomic, retain) UIColor *defaultPointerColor;
-
-@property (nonatomic, retain) UIImage *highlightImage;
-@property (nonatomic, assign) CGRect highlightContentStretch;
 
 - (NSUInteger)selectedIndex;
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;

@@ -55,8 +55,6 @@ static const CGFloat kDefaultSpacing = 20.f;
 {
     self.elementViews = nil;
     self.pointerView = nil;
-    self.defaultPointerColor = nil;
-    self.highlightImage = nil;
     self.dataSource = nil;
     
     [super dealloc];
@@ -91,12 +89,6 @@ static const CGFloat kDefaultSpacing = 20.f;
 @synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
 
 @synthesize pointerViewBottomRightOffset = m_pointerViewBottomRightOffset;
-
-@synthesize defaultPointerColor = m_defaultPointerColor;
-
-@synthesize highlightImage = m_highlightImage;
-
-@synthesize highlightContentStretch = m_highlightContentStretch;
 
 @synthesize dataSource = m_dataSource;
 
