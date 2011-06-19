@@ -88,8 +88,15 @@ static const CGFloat kDefaultSpacing = 20.f;
         return;
     }
     
-    [m_pointerView release];
-    m_pointerView = [pointerView retain];
+    // To avoid issues with transparent images, we put the pointer view we receive on a transparent
+    // background view
+    m_pointerView = [[UIView alloc] init];
+    m_pointerView.backgroundColor = [UIColor clearColor];
+    m_pointerView.autoresizesSubviews = YES;
+    
+    pointerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    pointerView.frame = m_pointerView.bounds;
+    [m_pointerView addSubview:pointerView];
 }
 
 @synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
@@ -151,7 +158,7 @@ static const CGFloat kDefaultSpacing = 20.f;
         
         // Check if element view (including cursor if larger) fits vertically (at the top, respectively at the bottom)
         if (floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), self.frame.size.height / 2.f)
-                || floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
+            || floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
             HLSLoggerWarn(@"Cursor frame not tall enough");
         }
     }
@@ -159,13 +166,13 @@ static const CGFloat kDefaultSpacing = 20.f;
     if (! m_viewsCreated) {
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
-            // TODO: Better!
             UIImage *pointerImage = [UIImage imageNamed:@"nut_cursor_default_pointer.png"];
-            self.pointerView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
-            self.pointerView.contentStretch = CGRectMake(0.5f, 
-                                                         0.5f, 
-                                                         1.f / self.pointerView.frame.size.width, 
-                                                         1.f / self.pointerView.frame.size.height);
+            UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
+            imageView.contentStretch = CGRectMake(0.5f, 
+                                                  0.5f, 
+                                                  1.f / imageView.frame.size.width, 
+                                                  1.f / imageView.frame.size.height);
+            self.pointerView = imageView;
             
             if (m_initialIndex > [self.elementViews count]) {
                 m_initialIndex = [self.elementViews count] - 1;

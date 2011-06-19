@@ -8,7 +8,10 @@
 
 // TODO: Gestion du selected dans les méthodes de datasource
 // TODO: Optimize respondsToSelector calls
-// TODO: Exemple mélangeant les deux approches custom view (pour l'él. sélectionné) et label
+// TODO:Exemple mélangeant les deux approches custom view (pour l'él. sélectionné) et label, par exemple pair = normal, impair = custom
+
+//TODO: Définir kCursorDefaultShadowOffset et documenter que c'est la valeur à retourner de la méthode dataSource pour valeur par défaut. Faire
+//de même pour nil et les autres méthodes
 
 // Forward declarations
 @protocol HLSCursorDataSource;
