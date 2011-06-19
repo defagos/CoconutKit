@@ -49,6 +49,7 @@ static NSArray *s_folders = nil;
     self.monthDaysCursor = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
+    self.mixedFoldersCursor = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -64,6 +65,8 @@ static NSArray *s_folders = nil;
 @synthesize timeScalesCursor = m_timeScalesCursor;
 
 @synthesize foldersCursor = m_foldersCursor;
+
+@synthesize mixedFoldersCursor = m_mixedFoldersCursor;
 
 #pragma mark View lifecycle
 
@@ -88,6 +91,9 @@ static NSArray *s_folders = nil;
     self.foldersCursor.delegate = self;
     self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(5.f, 5.f);
     self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(-5.f, -5.f);
+    
+    self.mixedFoldersCursor.dataSource = self;
+    self.mixedFoldersCursor.delegate = self;
 }
 
 #pragma mark Orientation management
@@ -105,7 +111,7 @@ static NSArray *s_folders = nil;
 
 - (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (cursor == self.foldersCursor) {
+    if (cursor == self.foldersCursor || (cursor == self.mixedFoldersCursor && index % 2 == 0)) {
         if (selected) {
             CursorSelectedFolderView *view = HLSXibViewGet(CursorSelectedFolderView);
             view.nameLabel.text = [s_folders objectAtIndex:index];
@@ -134,7 +140,7 @@ static NSArray *s_folders = nil;
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];
     }
-    else if (cursor == self.foldersCursor) {
+    else if (cursor == self.foldersCursor || cursor == self.mixedFoldersCursor) {
         return [s_folders count];
     }
     else {
@@ -153,6 +159,9 @@ static NSArray *s_folders = nil;
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales objectAtIndex:index];
+    }
+    else if (cursor == self.mixedFoldersCursor && index % 2 != 0) {
+        return [s_folders objectAtIndex:index];
     }
     else {
         return @"";
@@ -187,9 +196,6 @@ static NSArray *s_folders = nil;
     }
     else if (cursor == self.monthDaysCursor) {
         return [UIColor blueColor];
-    }
-    else if (cursor == self.timeScalesCursor) {
-        return [UIColor blackColor];
     }
     else {
         // Default
