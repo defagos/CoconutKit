@@ -226,17 +226,16 @@ static const CGFloat kDefaultSpacing = 20.f;
             otherFont = [self.dataSource cursor:self fontAtIndex:index selected:! selected];
         }
         if (! font) {
-            font = selected ? [UIFont boldSystemFontOfSize:17.f] : [UIFont systemFontOfSize:17.f];
-            otherFont = selected ? [UIFont systemFontOfSize:17.f] : [UIFont boldSystemFontOfSize:17.f];
+            font = [UIFont systemFontOfSize:17.f];
         }
         
-        // Text color. If not defined by the data source, use standard color always visible on the cursor background
+        // Text color. If not defined by the data source, use standard colors
         UIColor *textColor = nil;
         if ([self.dataSource respondsToSelector:@selector(cursor:textColorAtIndex:selected:)]) {
             textColor = [self.dataSource cursor:self textColorAtIndex:index selected:selected];
         }
         if (! textColor) {
-            textColor = [self.backgroundColor invertColor];
+            textColor = selected ? [UIColor blackColor] : [UIColor grayColor];
         }
         
         // Shadow color. If not defined by the data source, none

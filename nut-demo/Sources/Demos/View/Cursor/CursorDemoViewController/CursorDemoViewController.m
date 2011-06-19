@@ -186,15 +186,7 @@ static NSArray *s_folders = nil;
 
 - (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (cursor == self.weekDaysCursor) {
-        if (selected) {
-            return [UIColor blackColor];
-        }
-        else {
-            return [UIColor grayColor];
-        }        
-    }
-    else if (cursor == self.monthDaysCursor) {
+    if (cursor == self.monthDaysCursor) {
         return [UIColor blueColor];
     }
     else if (cursor == self.timeScalesCursor) {

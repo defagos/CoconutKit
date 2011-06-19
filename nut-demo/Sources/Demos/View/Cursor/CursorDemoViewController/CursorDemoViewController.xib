@@ -108,9 +108,9 @@
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="330930698"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC43NzU1MTAyMDQxIDAuNzc1NTEwMjA0MSAwLjc3NTUxMDIwNDEAA</bytes>
+						<object class="NSColor" key="IBUIBackgroundColor" id="537349591">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -134,10 +134,7 @@
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="367974868"/>
-						<object class="NSColor" key="IBUIBackgroundColor" id="537349591">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="537349591"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIView" id="367974868">
@@ -146,11 +143,11 @@
 						<string key="NSFrame">{{20, 505}, {728, 105}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="894533489"/>
+						<reference key="NSNextKeyView" ref="361292682"/>
 						<reference key="IBUIBackgroundColor" ref="537349591"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="894533489">
+					<object class="IBUIView" id="361292682">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 728}, {728, 140}}</string>
@@ -241,7 +238,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mixedFoldersCursor</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="894533489"/>
+						<reference key="destination" ref="361292682"/>
 					</object>
 					<int key="connectionID">33</int>
 				</object>
@@ -277,7 +274,7 @@
 							<reference ref="411449780"/>
 							<reference ref="1047325668"/>
 							<reference ref="367974868"/>
-							<reference ref="894533489"/>
+							<reference ref="361292682"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -313,7 +310,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
-						<reference key="object" ref="894533489"/>
+						<reference key="object" ref="361292682"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
 				</object>
