@@ -409,7 +409,7 @@ static const CGFloat kDefaultSpacing = 20.f;
                           + (previousElementView.center.x - xPos) * nextElementView.frame.size.height) / (previousElementView.center.x - nextElementView.center.x);
         
         pointerRect = CGRectMake(xPos - width / 2.f, 
-                                 previousElementView.frame.origin.y,      /* all element views are aligned vertically; so is the cursor. Can randomly pick one */
+                                 (self.frame.size.height - height) / 2.f,
                                  width, 
                                  height);
     }

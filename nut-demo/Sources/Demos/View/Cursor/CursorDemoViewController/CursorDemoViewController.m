@@ -197,6 +197,12 @@ static NSArray *s_folders = nil;
     else if (cursor == self.monthDaysCursor) {
         return [UIColor blueColor];
     }
+    else if (cursor == self.timeScalesCursor) {
+        return [UIColor blackColor];
+    }
+    else if (cursor == self.mixedFoldersCursor) {
+        return [UIColor blackColor];
+    }
     else {
         // Default
         return nil;
