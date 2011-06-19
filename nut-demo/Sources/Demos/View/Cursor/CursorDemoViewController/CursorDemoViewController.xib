@@ -143,11 +143,11 @@
 						<string key="NSFrame">{{20, 505}, {728, 105}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="361292682"/>
+						<reference key="NSNextKeyView" ref="186346864"/>
 						<reference key="IBUIBackgroundColor" ref="537349591"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="361292682">
+					<object class="IBUIView" id="186346864">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 728}, {728, 140}}</string>
@@ -238,7 +238,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mixedFoldersCursor</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="361292682"/>
+						<reference key="destination" ref="186346864"/>
 					</object>
 					<int key="connectionID">33</int>
 				</object>
@@ -272,9 +272,9 @@
 							<reference ref="808294600"/>
 							<reference ref="330930698"/>
 							<reference ref="411449780"/>
-							<reference ref="1047325668"/>
 							<reference ref="367974868"/>
-							<reference ref="361292682"/>
+							<reference ref="186346864"/>
+							<reference ref="1047325668"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -310,7 +310,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
-						<reference key="object" ref="361292682"/>
+						<reference key="object" ref="186346864"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
 				</object>
