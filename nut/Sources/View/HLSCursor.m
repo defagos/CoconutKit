@@ -12,7 +12,7 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 
-static const CGFloat kDefaultSpacing = 20.f;
+static const CGFloat kCursorDefaultSpacing = 20.f;
 
 @interface HLSCursor ()
 
@@ -68,9 +68,9 @@ static const CGFloat kDefaultSpacing = 20.f;
 
 - (void)initialize
 {
-    self.spacing = kDefaultSpacing;
-    self.pointerViewTopLeftOffset = CGSizeMake(-kDefaultSpacing / 2.f, -kDefaultSpacing / 2.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(kDefaultSpacing / 2.f, kDefaultSpacing / 2.f);
+    self.spacing = kCursorDefaultSpacing;
+    self.pointerViewTopLeftOffset = CGSizeMake(-kCursorDefaultSpacing / 2.f, -kCursorDefaultSpacing / 2.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(kCursorDefaultSpacing / 2.f, kCursorDefaultSpacing / 2.f);
 }
 
 #pragma mark Accessors and mutators
@@ -245,7 +245,7 @@ static const CGFloat kDefaultSpacing = 20.f;
         }
         
         // Shadow offset. If not defined, default value (CGSizeMake(0, -1), see UILabel documentation)
-        CGSize shadowOffset = CGSizeMake(0, -1);
+        CGSize shadowOffset = kCursorShadowOffsetDefault;
         if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
             shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
         }

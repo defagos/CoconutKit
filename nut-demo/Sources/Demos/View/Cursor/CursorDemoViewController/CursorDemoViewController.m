@@ -198,6 +198,27 @@ static NSArray *s_folders = nil;
     }
 }
 
+- (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (cursor == self.monthDaysCursor) {
+        return [UIColor whiteColor];
+    }
+    else {
+        // Default (no shadow)
+        return nil;
+    }
+}
+
+- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected
+{
+    if (cursor == self.monthDaysCursor) {
+        return CGSizeMake(0, 1);
+    }
+    else {
+        return kCursorShadowOffsetDefault;
+    }
+}
+
 #pragma mark HLSCursorDelegate protocol implementation
 
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index

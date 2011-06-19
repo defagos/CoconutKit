@@ -6,18 +6,36 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// TODO: Gestion du selected dans les méthodes de datasource
-// TODO: Optimize respondsToSelector calls
-// TODO:Exemple mélangeant les deux approches custom view (pour l'él. sélectionné) et label, par exemple pair = normal, impair = custom
+// TODO: Crash dans demo si setSelectedIndex avec animated à NO.
+// TODO: Exemple 2: Modifier pour avoir une pointerView avec valeur courante affichée sur la pointer view (=> se déplace)
 
-//TODO: Définir kCursorDefaultShadowOffset et documenter que c'est la valeur à retourner de la méthode dataSource pour valeur par défaut. Faire
-//de même pour nil et les autres méthodes
+// Macros
+#define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
 
 // Forward declarations
 @protocol HLSCursorDataSource;
 @protocol HLSCursorDelegate;
 
 /**
+ * A class for creating value cursors, i.e. sets of elements from which one is exactly active at any time. The current 
+ * element is identified by a graphical pointer. This pointer can either be moved by clicking another value or by dragging
+ * it. 
+ *
+ * Adding a cursor to your application is very easy:
+ *   - add a HLSCursor, either programmatically or using Interface Builder
+ *   - implement a data source (HLSCursorDataSource protocol) to set the elements to display
+ *   - implement a delegate (HLSCursorDelegate protocol) to respond to cursor events
+ *
+ * The cursor layout is automatically created for you: You just need to set the main cursor frame size, the layout is
+ * calculated for you depending on the size of the elements which need to be displayed. During development, if you use the
+ * debug version of the library, warnings will be displayed in the console if the frame is too small to display the cursor
+ * contents correctly (see HLSLogger for the available logging levels).
+ *
+ * There are two ways to set the cursor contents. Both can be mixed within the same cursor:
+ *   - basic: You just set the text and basic text properties (font, colors, shadows)
+ *   - custom: Each element is a view and can be customized using Interface Builder
+ * Cursors using both ways of customization can coexist in the same source file.
+ *
  * Designated initializer: initWithFrame:
  */
 @interface HLSCursor : UIView {
@@ -38,27 +56,47 @@
 }
 
 /**
- * Spacing between element views (default is 20 px)
+ * Spacing between elements displayed by the cursor (default is 20 px)
  */
 @property (nonatomic, assign) CGFloat spacing;
 
 /**
- * Can be programatically set or using a xib. If nil, the default pointer is used. Should be stretchable so that it
- * can accomodate any element size
+ * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
+ * If you use a custom view, be sure it can stretch properly since the pointer view frame will be adjusted depending
+ * on the element it is on. In general, your custom pointer view is likely to be transparent so that the element
+ * below it can be seen.
+ *
+ * As soon as the pointer view has been set it cannot be changed anymore.
  */
 @property (nonatomic, retain) IBOutlet UIView *pointerView;
 
 /**
- * Pointer view offset around an element view. Use them to make the pointer rectangle larger or smaller around the element
- * views
+ * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
+ * at. By default the pointer view frame is 10px larger in all directions
  */
 @property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
 @property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
 
+/**
+ * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value
+ * is only updated as soon as the pointer reaches a new element.
+ */
 - (NSUInteger)selectedIndex;
+
+/**
+ * Set the currently selected element. This setter can also be used to set the initially selected element before the
+ * cursor is displayed (in this case, the animated parameter is ignored)
+ */
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 
+/**
+ * Set / get the data source used to fill the cursor with elements
+ */
 @property (nonatomic, retain) id<HLSCursorDataSource> dataSource;
+
+/**
+ * Set / get the cursor delegate receiving the cursor events
+ */
 @property (nonatomic, assign) id<HLSCursorDelegate> delegate;
 
 @end
@@ -66,24 +104,28 @@
 @protocol HLSCursorDataSource <NSObject>
 
 @required
+// The number of elements to display
 - (NSUInteger)numberOfElementsForCursor:(HLSCursor *)cursor;
 
 @optional
-// Fully customized by specifying a view
+// Fully customized by specifying a view. You can use the selected boolean to set a different view for selected and
+// non-selected elements
 - (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected;
 
-// Less customization, but no xib needed
+// Less customization, but no view is needed. You can use the selected boolean to set different properties for
+// selected and non-selected elements
 - (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index;
-- (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented: system font, size 17
-- (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented: invert background color
-- (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented
-- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented, i.e. CGSizeMake(0, -1)
+- (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented or returning nil: system font, size 17
+- (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented or returning nil: invert background color
+- (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented or returning nil
+- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented or returning kCursorShadowOffsetDefault
 
 @end
 
 @protocol HLSCursorDelegate <NSObject>
 
 @optional
+// Triggered when a new element has been selected (triggered when the pointer stops moving)
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index;
 
 @end
