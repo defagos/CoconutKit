@@ -319,6 +319,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
     if (self.elementViews) {
+        // Sanitize input
+        if (index >= [self.elementViews count]) {
+            index = 0;
+        }
+        
         // Swap selected element view with selected version of it
         UIView *elementView = [self.elementViews objectAtIndex:index];
         UIView *newElementView = [self elementViewForIndex:index selected:selected];
