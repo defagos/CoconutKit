@@ -7,7 +7,6 @@
 //
 
 // TODO: Crash dans demo si setSelectedIndex avec animated à NO.
-// TODO: Exemple 2: Modifier pour avoir une pointerView avec valeur courante affichée sur la pointer view (=> se déplace)
 
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
@@ -43,6 +42,7 @@
     NSArray *m_elementViews;
     CGFloat m_spacing;
     UIView *m_pointerView;
+    UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
     CGFloat m_xPos;

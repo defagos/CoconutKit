@@ -18,6 +18,8 @@
 		6F1A590813AB872E0029B714 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */; };
 		6F1A590B13AB87420029B714 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */; };
 		6F1A591713ABC00F0029B714 /* nut_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A591613ABC00F0029B714 /* nut_cursor_default_pointer.png */; };
+		6F2E93DF13AF301400C8F5D1 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E93DE13AF301300C8F5D1 /* CursorCustomPointerView.m */; };
+		6F2E93E113AF303100C8F5D1 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */; };
 		6FA6990913432746003ACC1F /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698FA13432746003ACC1F /* nut_Localizable.strings */; };
 		6FA6990A13432746003ACC1F /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */; };
 		6FA6990B13432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990113432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png */; };
@@ -165,6 +167,9 @@
 		6F1A590913AB87410029B714 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
 		6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6F1A591613ABC00F0029B714 /* nut_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_cursor_default_pointer.png; sourceTree = "<group>"; };
+		6F2E93DD13AF301300C8F5D1 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
+		6F2E93DE13AF301300C8F5D1 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
+		6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
 		6FA698FB13432746003ACC1F /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FC13432746003ACC1F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FD13432746003ACC1F /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -489,15 +494,18 @@
 		6FAF20F113A24CCB009A5645 /* CursorDemoViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */,
+				6F2E93DD13AF301300C8F5D1 /* CursorCustomPointerView.h */,
+				6F2E93DE13AF301300C8F5D1 /* CursorCustomPointerView.m */,
+				6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */,
 				6FAF20F213A24CCB009A5645 /* CursorDemoViewController.h */,
 				6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */,
+				6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */,
 				6F1A58FF13AB86E60029B714 /* CursorFolderView.h */,
 				6F1A590013AB86E60029B714 /* CursorFolderView.m */,
 				6F1A590513AB870E0029B714 /* CursorFolderView.xib */,
-				6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */,
 				6F1A590913AB87410029B714 /* CursorSelectedFolderView.h */,
 				6F1A590A13AB87410029B714 /* CursorSelectedFolderView.m */,
+				6F1A590713AB872D0029B714 /* CursorSelectedFolderView.xib */,
 			);
 			path = CursorDemoViewController;
 			sourceTree = "<group>";
@@ -1333,6 +1341,7 @@
 				6F1A590613AB870E0029B714 /* CursorFolderView.xib in Resources */,
 				6F1A590813AB872E0029B714 /* CursorSelectedFolderView.xib in Resources */,
 				6F1A591713ABC00F0029B714 /* nut_cursor_default_pointer.png in Resources */,
+				6F2E93E113AF303100C8F5D1 /* CursorCustomPointerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1432,6 +1441,7 @@
 				6FAF210A13A7C425009A5645 /* UIColor+HLSExtensions.m in Sources */,
 				6F1A590113AB86E60029B714 /* CursorFolderView.m in Sources */,
 				6F1A590B13AB87420029B714 /* CursorSelectedFolderView.m in Sources */,
+				6F2E93DF13AF301400C8F5D1 /* CursorCustomPointerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

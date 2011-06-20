@@ -8,6 +8,7 @@
 
 #import "CursorDemoViewController.h"
 
+#import "CursorCustomPointerView.h"
 #import "CursorFolderView.h"
 #import "CursorSelectedFolderView.h"
 
@@ -80,6 +81,8 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.spacing = 30.f;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
+    
+    self.monthDaysCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
     
     self.monthDaysCursor.dataSource = self;
     self.monthDaysCursor.delegate = self;
@@ -225,6 +228,10 @@ static NSArray *s_folders = nil;
 {
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%d", index];
+    }
+    else if (cursor == self.monthDaysCursor) {
+        CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
+        pointerView.valueLabel.text = [s_monthDays objectAtIndex:index];
     }
 }
 

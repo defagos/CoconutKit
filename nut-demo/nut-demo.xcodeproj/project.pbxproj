@@ -22,6 +22,8 @@
 		6F1A591313AB876A0029B714 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A590E13AB876A0029B714 /* CursorFolderView.xib */; };
 		6F1A591413AB876A0029B714 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */; };
 		6F1A591513AB876A0029B714 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */; };
+		6F2E93EA13AF321B00C8F5D1 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E93E813AF321B00C8F5D1 /* CursorCustomPointerView.m */; };
+		6F2E93EB13AF321B00C8F5D1 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E93E913AF321B00C8F5D1 /* CursorCustomPointerView.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F7A26C2130AA1C200AB1926 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */; };
 		6F7A26C3130AA1C200AB1926 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A26C1130AA1C200AB1926 /* FixedSizeViewController.xib */; };
@@ -114,6 +116,9 @@
 		6F1A590F13AB876A0029B714 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
 		6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
+		6F2E93E713AF321A00C8F5D1 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
+		6F2E93E813AF321B00C8F5D1 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
+		6F2E93E913AF321B00C8F5D1 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F7A26BF130AA1C200AB1926 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F7A26C0130AA1C200AB1926 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -466,6 +471,9 @@
 		6FAF20EA13A24C33009A5645 /* CursorDemoViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6F2E93E713AF321A00C8F5D1 /* CursorCustomPointerView.h */,
+				6F2E93E813AF321B00C8F5D1 /* CursorCustomPointerView.m */,
+				6F2E93E913AF321B00C8F5D1 /* CursorCustomPointerView.xib */,
 				6FAF20EB13A24C56009A5645 /* CursorDemoViewController.h */,
 				6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */,
 				6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */,
@@ -901,6 +909,7 @@
 				6F1A58FE13AB86920029B714 /* icn_folder.png in Resources */,
 				6F1A591313AB876A0029B714 /* CursorFolderView.xib in Resources */,
 				6F1A591513AB876A0029B714 /* CursorSelectedFolderView.xib in Resources */,
+				6F2E93EB13AF321B00C8F5D1 /* CursorCustomPointerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,6 +953,7 @@
 				6FAF20ED13A24C56009A5645 /* CursorDemoViewController.m in Sources */,
 				6F1A591213AB876A0029B714 /* CursorFolderView.m in Sources */,
 				6F1A591413AB876A0029B714 /* CursorSelectedFolderView.m in Sources */,
+				6F2E93EA13AF321B00C8F5D1 /* CursorCustomPointerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

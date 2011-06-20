@@ -19,6 +19,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)initialize;
 
 @property (nonatomic, retain) NSArray *elementViews;
+@property (nonatomic, retain) UIView *pointerContainerView;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
 
@@ -61,6 +62,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     self.elementViews = nil;
     self.pointerView = nil;
+    self.pointerContainerView = nil;
     self.dataSource = nil;
     
     [super dealloc];
@@ -79,25 +81,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 @synthesize spacing = m_spacing;
 
-@synthesize pointerView = m_pointerView;
+@synthesize pointerContainerView = m_pointerContainerView;
 
-- (void)setPointerView:(UIView *)pointerView
-{
-    if (m_pointerView) {
-        HLSLoggerError(@"A pointer view has already been defined and cannot be changed");
-        return;
-    }
-    
-    // To avoid issues with transparent images, we put the pointer view we receive on a transparent
-    // background view
-    m_pointerView = [[UIView alloc] init];
-    m_pointerView.backgroundColor = [UIColor clearColor];
-    m_pointerView.autoresizesSubviews = YES;
-    
-    pointerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    pointerView.frame = m_pointerView.bounds;
-    [m_pointerView addSubview:pointerView];
-}
+@synthesize pointerView = m_pointerView;
 
 @synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
 
@@ -178,9 +164,18 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                 m_initialIndex = [self.elementViews count] - 1;
                 HLSLoggerWarn(@"Initial index too large; fixed");
             }
-            [self setSelectedIndex:m_initialIndex animated:NO];
         }
-        [self addSubview:self.pointerView];
+        
+        // Create a view to container the pointer view. This avoid issues with transparent pointer views
+        self.pointerContainerView = [[[UIView alloc] initWithFrame:self.pointerView.frame] autorelease];
+        self.pointerContainerView.backgroundColor = [UIColor clearColor];
+        self.pointerContainerView.autoresizesSubviews = YES;
+        
+        self.pointerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.pointerContainerView addSubview:self.pointerView];
+        [self addSubview:self.pointerContainerView];
+        
+        [self setSelectedIndex:m_initialIndex animated:NO];
     }
     
     m_viewsCreated = YES;
@@ -295,7 +290,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         [UIView setAnimationDelegate:self];
     }
     
-    self.pointerView.frame = [self pointerFrameForIndex:selectedIndex];
+    self.pointerContainerView.frame = [self pointerFrameForIndex:selectedIndex];
     
     if (animated) {
         [UIView commitAnimations];
@@ -428,7 +423,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     // If clicking on the pointer, do not select it again. This corresponds to the user grabbing the pointer
     CGPoint pos = [[touches anyObject] locationInView:self];
-    if (! CGRectContainsPoint(self.pointerView.frame, pos)) {
+    if (! CGRectContainsPoint(self.pointerContainerView.frame, pos)) {
         m_clicked = YES;
         [self setSelectedIndex:[self indexForXPos:pos.x] animated:YES];
     }
@@ -443,7 +438,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             m_dragging = YES;
             
             // Check that we are actually grabbing the pointer view
-            if (CGRectContainsPoint(self.pointerView.frame, pos)) {
+            if (CGRectContainsPoint(self.pointerContainerView.frame, pos)) {
                 m_grabbed = YES;
                 
                 NSUInteger index = [self indexForXPos:m_xPos];
@@ -455,7 +450,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         
         if (m_grabbed) {
-            self.pointerView.frame = [self pointerFrameForXPos:pos.x];
+            self.pointerContainerView.frame = [self pointerFrameForXPos:pos.x];
             m_xPos = pos.x;
         }
     }    
