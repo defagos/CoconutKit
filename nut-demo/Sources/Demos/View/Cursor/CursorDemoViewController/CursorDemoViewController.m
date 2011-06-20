@@ -174,12 +174,7 @@ static NSArray *s_folders = nil;
 - (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
     if (cursor == self.timeScalesCursor) {
-        if (selected) {
-            return [UIFont fontWithName:@"ProximaNova-Bold" size:20.f];
-        }
-        else {
-            return [UIFont fontWithName:@"ProximaNova-Regular" size:20.f];
-        }
+        return [UIFont fontWithName:@"ProximaNova-Regular" size:20.f];
     }
     else {
         // Default
