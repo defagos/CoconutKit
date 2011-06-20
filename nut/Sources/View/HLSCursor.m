@@ -308,7 +308,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     [self swapElementViewAtIndex:index selected:YES];
     
     // Notify the delegate
-    [self.delegate cursor:self didSelectIndex:index];
+    if ([self.delegate respondsToSelector:@selector(cursor:movingPointerWithNearestIndex:)]) {
+        [self.delegate cursor:self movingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
+    }
+    if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
+        [self.delegate cursor:self didSelectIndex:index];
+    }
 }
 
 - (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -452,6 +457,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         if (m_grabbed) {
             self.pointerContainerView.frame = [self pointerFrameForXPos:pos.x];
             m_xPos = pos.x;
+            if ([self.delegate respondsToSelector:@selector(cursor:movingPointerWithNearestIndex:)]) {
+                [self.delegate cursor:self movingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
+            }
         }
     }    
 }

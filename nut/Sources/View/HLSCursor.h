@@ -128,4 +128,7 @@
 // Triggered when a new element has been selected (triggered when the pointer stops moving)
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index;
 
+// Triggered when the cursor pointer is moved. The nearest index is received as parameter
+- (void)cursor:(HLSCursor *)cursor movingPointerWithNearestIndex:(NSInteger)index;
+
 @end

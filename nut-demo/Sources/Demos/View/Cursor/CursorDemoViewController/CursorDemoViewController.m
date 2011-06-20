@@ -229,7 +229,11 @@ static NSArray *s_folders = nil;
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%d", index];
     }
-    else if (cursor == self.monthDaysCursor) {
+}
+
+- (void)cursor:(HLSCursor *)cursor movingPointerWithNearestIndex:(NSInteger)index
+{
+    if (cursor == self.monthDaysCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_monthDays objectAtIndex:index];
     }
