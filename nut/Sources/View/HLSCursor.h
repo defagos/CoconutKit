@@ -90,7 +90,7 @@
 /**
  * Set / get the data source used to fill the cursor with elements
  */
-@property (nonatomic, retain) id<HLSCursorDataSource> dataSource;
+@property (nonatomic, assign) id<HLSCursorDataSource> dataSource;
 
 /**
  * Set / get the cursor delegate receiving the cursor events
