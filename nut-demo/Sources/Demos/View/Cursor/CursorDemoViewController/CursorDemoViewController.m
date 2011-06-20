@@ -89,6 +89,8 @@ static NSArray *s_folders = nil;
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
+    // Not perfectly centered with the font used. Tweak a little bit to get a perfect result
+    self.timeScalesCursor.pointerViewTopLeftOffset = CGSizeMake(-11.f, -12.f);
     
     self.foldersCursor.dataSource = self;
     self.foldersCursor.delegate = self;

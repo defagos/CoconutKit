@@ -134,7 +134,10 @@
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="367974868"/>
-						<reference key="IBUIBackgroundColor" ref="537349591"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC45MTgzNjczNDY5IDAuOTE4MzY3MzQ2OSAwLjkxODM2NzM0NjkAA</bytes>
+						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIView" id="367974868">
@@ -306,6 +309,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">30</int>
 						<reference key="object" ref="367974868"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="parent" ref="463507662"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -366,7 +372,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">43</int>
+			<int key="maxID">44</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
