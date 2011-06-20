@@ -6,8 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// TODO: Crash dans demo si setSelectedIndex avec animated à NO.
-
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
 
