@@ -22,6 +22,7 @@
 "Custom cell from xib"="Custom cell from xib";
 "Custom transition"="Custom transition";
 "Customer Information"="Customer Information";
+"DAY"="DAY";
 "Demos"="Demos";
 "Details"="Details";
 "Dismiss"="Dismiss";
@@ -30,6 +31,7 @@
 "Error"="Error";
 "First Name"="First Name";
 "Fixed size"="Fixed size";
+"Friday"="Friday";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
 "Heavy view (cached)"="Heavy view (cached)";
@@ -39,6 +41,8 @@
 "Invalid e-mail address"="Invalid e-mail address";
 "Landscape only"="Landscape only";
 "Last Name"="Last Name";
+"Monday"="Monday";
+"MONTH"="MONTH";
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
 "Music players"="Music players";
@@ -49,6 +53,7 @@
 "Portrait only"="Portrait only";
 "Previous"="Previous";
 "Remaining time estimate"="Remaining time estimate";
+"Saturday"="Saturday";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Start"="Start";
@@ -57,6 +62,7 @@
 "Street"="Street";
 "Stretchable"="Stretchable";
 "Sub-tasks"="Sub-tasks";
+"Sunday"="Sunday";
 "Table view cells"="Table view cells";
 "Tablets"="Tablets";
 "Task"="Task";
@@ -64,6 +70,11 @@
 "Tasks"="Tasks";
 "Text fields"="Text fields";
 "Text fields (large)"="Text fields (large)";
+"Thursday"="Thursday";
 "Transition"="Transition";
+"Tuesday"="Tuesday";
 "Views"="Views";
 "View controllers"="View controllers";
+"Wednesday"="Wednesday";
+"WEEK"="WEEK";
+"YEAR"="YEAR";

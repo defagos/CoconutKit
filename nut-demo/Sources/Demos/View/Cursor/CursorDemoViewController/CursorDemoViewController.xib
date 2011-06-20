@@ -46,7 +46,7 @@
 					<object class="IBUIButton" id="808294600">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{676, 100}, {72, 37}}</string>
+						<string key="NSFrame">{{672, 100}, {81, 37}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="411449780"/>
@@ -60,7 +60,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Move</string>
+						<string key="IBUINormalTitle">-&gt;</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="899741955">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>

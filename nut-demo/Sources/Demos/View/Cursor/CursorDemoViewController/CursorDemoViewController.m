@@ -23,10 +23,21 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
-    s_weekDays = [[NSArray arrayWithObjects:@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday", nil] retain];
+    s_weekDays = [[NSArray arrayWithObjects:NSLocalizedString(@"Monday", @"Monday"), 
+                   NSLocalizedString(@"Tuesday", @"Tuesday"), 
+                   NSLocalizedString(@"Wednesday", @"Wednesday"), 
+                   NSLocalizedString(@"Thursday", @"Thursday"), 
+                   NSLocalizedString(@"Friday", @"Friday"), 
+                   NSLocalizedString(@"Saturday", @"Saturday"),
+                   NSLocalizedString(@"Sunday", @"Sunday"),
+                   nil] retain];
     s_monthDays = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", 
                     @"17", nil] retain];
-    s_timeScales = [[NSArray arrayWithObjects:@"YEAR", @"MONTH", @"WEEK", @"DAY", nil] retain];
+    s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
+                     NSLocalizedString(@"MONTH", @"MONTH"),
+                     NSLocalizedString(@"WEEK", @"WEEK"),
+                     NSLocalizedString(@"DAY", @"DAY"),
+                     nil] retain];
     s_folders = [[NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil] retain];
 }
 

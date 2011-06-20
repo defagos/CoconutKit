@@ -22,6 +22,7 @@
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
 "Custom transition"="Transition personnalisée";
 "Customer Information"="Données du client";
+"DAY"="JOUR";
 "Demos"="Démos";
 "Details"="Détails";
 "Dismiss"="Fermer";
@@ -30,6 +31,7 @@
 "Error"="Erreur";
 "First Name"="Prénom";
 "Fixed size"="Taille fixe";
+"Friday"="Vendredi";
 "Header: custom cells"="En-tête: cellules personnalisées";
 "Header: simple cells"="En-tête: cellules basiques";
 "Heavy view (cached)"="Vue lourde (mise en cache)";
@@ -39,6 +41,8 @@
 "Invalid e-mail address"="Adresse e-mail invalide";
 "Landscape only"="Uniquement paysage";
 "Last Name"="Nom";
+"Monday"="Lundi";
+"MONTH"="MOIS";
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
@@ -49,6 +53,7 @@
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Remaining time estimate"="Temps restant estimé";
+"Saturday"="Samedi";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Start"="Démarrer";
@@ -57,6 +62,7 @@
 "Street"="Rue";
 "Stretchable"="Etirable";
 "Sub-tasks"="Sous-tâches";
+"Sunday"="Dimanche";
 "Table view cells"="Cellules";
 "Tablets"="Tablettes";
 "Task"="Tâche";
@@ -64,6 +70,11 @@
 "Tasks"="Tâches";
 "Text fields"="Champs textuels";
 "Text fields (large)"="Champs textuels (large)";
+"Thursday"="Jeudi";
 "Transition"="Transition";
+"Tuesday"="Mardi";
 "Views"="Vues";
 "View controllers"="View controllers";
+"Wednesday"="Mercredi";
+"WEEK"="SEMAINE";
+"YEAR"="ANNEE";
