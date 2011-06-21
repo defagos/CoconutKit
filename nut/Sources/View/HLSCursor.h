@@ -88,7 +88,8 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 
 /**
- * Reload the cursor from the data source
+ * Reload the cursor from the data source. The pointer is left at the same index where it was, except if the index
+ * is out of range after the reload (in which case the pointer is reset to point on the first element)
  */
 - (void)reloadData;
 

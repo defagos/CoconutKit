@@ -15,6 +15,7 @@
     UILabel *m_weekDayIndexLabel;
     UIButton *m_nextWeekDayButton;
     HLSCursor *m_randomRangeCursor;
+    UILabel *m_randomRangeIndexLabel;
     UIButton *m_randomRangeCursorReloadButton;
     HLSCursor *m_timeScalesCursor;
     HLSCursor *m_foldersCursor;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
 @property (nonatomic, retain) IBOutlet UIButton *nextWeekDayButton;
 @property (nonatomic, retain) IBOutlet HLSCursor *randomRangeCursor;
+@property (nonatomic, retain) IBOutlet UILabel *randomRangeIndexLabel;
 @property (nonatomic, retain) IBOutlet UIButton *randomRangeCursorReloadButton;
 @property (nonatomic, retain) IBOutlet HLSCursor *timeScalesCursor;
 @property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;

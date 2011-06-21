@@ -89,6 +89,16 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 @synthesize pointerView = m_pointerView;
 
+- (void)setPointerView:(UIView *)pointerView
+{
+    if (m_pointerView) {
+        HLSLoggerError(@"Cannot change the pointer view once it has been set");
+        return;
+    }
+    
+    m_pointerView = [pointerView retain];
+}
+
 @synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
 
 @synthesize pointerViewBottomRightOffset = m_pointerViewBottomRightOffset;
@@ -162,12 +172,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                                                   0.5f, 
                                                   1.f / imageView.frame.size.width, 
                                                   1.f / imageView.frame.size.height);
-            self.pointerView = imageView;
-            
-            if (m_initialIndex > [self.elementViews count]) {
-                m_initialIndex = [self.elementViews count] - 1;
-                HLSLoggerWarn(@"Initial index too large; fixed");
-            }
+            self.pointerView = imageView;            
+        }
+        
+        if (m_initialIndex >= [self.elementViews count]) {
+            m_initialIndex = 0;
+            HLSLoggerWarn(@"Initial index too large; fixed");
         }
         
         // Create a view to container the pointer view. This avoid issues with transparent pointer views
@@ -303,7 +313,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         [self finalizeSelectionForIndex:selectedIndex];
     }
     
-    // Will only be used if setSelectedIndex has been called before the views are actually created
+    // Will only be used if setSelectedIndex has been called before the views are actually created; not
+    // wrapped in an "if (! m_viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
+    // the most recently set value is used as initial index
     m_initialIndex = selectedIndex;
 }
 
@@ -449,8 +461,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
-    self.pointerView = nil;
     
+    m_xPos = 0.f;
     m_viewsCreated = NO;
 }
 

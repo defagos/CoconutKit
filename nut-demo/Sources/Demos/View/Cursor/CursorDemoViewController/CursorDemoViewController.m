@@ -22,7 +22,7 @@
 @implementation CursorDemoViewController
 
 static NSArray *s_weekDays = nil;
-static NSArray *s_randomRange = nil;
+static NSArray *s_completeRange = nil;
 static NSArray *s_timeScales = nil;
 static NSArray *s_folders = nil;
 
@@ -30,6 +30,8 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
+    srand(time(NULL));
+    
     s_weekDays = [[NSArray arrayWithObjects:NSLocalizedString(@"Monday", @"Monday"), 
                    NSLocalizedString(@"Tuesday", @"Tuesday"), 
                    NSLocalizedString(@"Wednesday", @"Wednesday"), 
@@ -38,7 +40,7 @@ static NSArray *s_folders = nil;
                    NSLocalizedString(@"Saturday", @"Saturday"),
                    NSLocalizedString(@"Sunday", @"Sunday"),
                    nil] retain];
-    s_randomRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+    s_completeRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                       @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
     s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
                      NSLocalizedString(@"MONTH", @"MONTH"),
@@ -73,6 +75,7 @@ static NSArray *s_folders = nil;
     self.weekDayIndexLabel = nil;
     self.nextWeekDayButton = nil;
     self.randomRangeCursor = nil;
+    self.randomRangeIndexLabel = nil;
     self.randomRangeCursorReloadButton = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
@@ -88,6 +91,8 @@ static NSArray *s_folders = nil;
 @synthesize nextWeekDayButton = m_nextWeekDayButton;
 
 @synthesize randomRangeCursor = m_randomRangeCursor;
+
+@synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
 
 @synthesize randomRangeCursorReloadButton = m_randomRangeCursorReloadButton;
 
@@ -115,7 +120,7 @@ static NSArray *s_folders = nil;
     [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
     
     self.randomRangeCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
-    
+    [self.randomRangeCursor setSelectedIndex:4 animated:NO];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
     
@@ -183,7 +188,8 @@ static NSArray *s_folders = nil;
         return [s_weekDays count];
     }
     else if (cursor == self.randomRangeCursor) {
-        return [s_randomRange count];
+        // Omit up to 10 objects at the end of the array
+        return rand() % 10 + [s_completeRange count] - 10 + 1;
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];
@@ -203,7 +209,7 @@ static NSArray *s_folders = nil;
         return [s_weekDays objectAtIndex:index];
     }
     else if (cursor == self.randomRangeCursor) {
-        return [s_randomRange objectAtIndex:index];
+        return [s_completeRange objectAtIndex:index];
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales objectAtIndex:index];
@@ -267,7 +273,7 @@ static NSArray *s_folders = nil;
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index
 {
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%d", index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
     }
 }
 
@@ -275,7 +281,9 @@ static NSArray *s_folders = nil;
 {
     if (cursor == self.randomRangeCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_randomRange objectAtIndex:index];
+        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
+        
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
     }
 }
 
@@ -294,7 +302,7 @@ static NSArray *s_folders = nil;
 {
     if (cursor == self.randomRangeCursor) {
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
-        infoViewController.valueLabel.text = [s_randomRange objectAtIndex:index];
+        infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
         
         [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
                                                 inView:cursor.pointerView
