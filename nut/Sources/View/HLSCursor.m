@@ -297,7 +297,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     m_xPos = [self xPosForIndex:selectedIndex];
     
-    if (m_viewsCreated) {
+    if (self.elementViews) {
         if (animated) {
             [UIView beginAnimations:nil context:NULL];
             [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];

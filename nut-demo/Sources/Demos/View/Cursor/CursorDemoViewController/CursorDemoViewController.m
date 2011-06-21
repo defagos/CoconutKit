@@ -275,6 +275,9 @@ static NSArray *s_folders = nil;
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
     }
+    else if (cursor == self.randomRangeCursor) {
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+    }
 }
 
 - (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index
@@ -282,8 +285,6 @@ static NSArray *s_folders = nil;
     if (cursor == self.randomRangeCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
-        
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
     }
 }
 
