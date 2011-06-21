@@ -36,6 +36,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)pointerAnimationWillStart:(NSString *)animationID context:(void *)context;
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
+- (void)endTouches:(NSSet *)touches animated:(BOOL)animated;
+
 @end
 
 @implementation HLSCursor
@@ -308,8 +310,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     [self swapElementViewAtIndex:index selected:YES];
     
     // Notify the delegate
-    if ([self.delegate respondsToSelector:@selector(cursor:movingPointerWithNearestIndex:)]) {
-        [self.delegate cursor:self movingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
+    if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
+        [self.delegate cursor:self isMovingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
     }
     if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
         [self.delegate cursor:self didSelectIndex:index];
@@ -453,6 +455,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                 
                 NSUInteger index = [self indexForXPos:m_xPos];
                 [self swapElementViewAtIndex:index selected:NO];
+                
+                if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
+                    [self.delegate cursorDidStartDragging:self];
+                }
             }
             else {
                 m_grabbed = NO;
@@ -462,8 +468,13 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         if (m_grabbed) {
             self.pointerContainerView.frame = [self pointerFrameForXPos:pos.x];
             m_xPos = pos.x;
-            if ([self.delegate respondsToSelector:@selector(cursor:movingPointerWithNearestIndex:)]) {
-                [self.delegate cursor:self movingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
+            NSUInteger index = [self indexForXPos:m_xPos];
+            if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
+                [self.delegate cursor:self isMovingPointerWithNearestIndex:index];
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(cursor:isDraggingWithNearestIndex:)]) {
+                [self.delegate cursor:self isDraggingWithNearestIndex:index];
             }
         }
     }    
@@ -471,23 +482,24 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (m_dragging) {
-        CGPoint pos = [[touches anyObject] locationInView:self];
-        NSUInteger index = [self indexForXPos:pos.x];
-        [self setSelectedIndex:index animated:YES];
-    }
-    
-	m_dragging = NO;
-    m_grabbed = NO;
-    m_clicked = NO;    
+    [self endTouches:touches animated:YES];   
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (m_dragging) {
+    [self endTouches:touches animated:NO];
+}
+
+- (void)endTouches:(NSSet *)touches animated:(BOOL)animated
+{
+    if (m_grabbed) {
         CGPoint pos = [[touches anyObject] locationInView:self];
         NSUInteger index = [self indexForXPos:pos.x];
-        [self setSelectedIndex:index animated:NO];
+        [self setSelectedIndex:index animated:animated];
+        
+        if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
+            [self.delegate cursorDidStopDragging:self];
+        }
     }
     
     m_dragging = NO;

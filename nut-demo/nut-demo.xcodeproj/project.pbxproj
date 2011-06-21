@@ -93,6 +93,8 @@
 		6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */; };
 		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
 		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
+		6FEAEFD113B07BB60088753B /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCF13B07BB60088753B /* CursorPointerInfoViewController.m */; };
+		6FEAEFD213B07BB60088753B /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEAEFD013B07BB60088753B /* CursorPointerInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,6 +225,9 @@
 		6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
 		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		6FEAEFCE13B07BB60088753B /* CursorPointerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorPointerInfoViewController.h; sourceTree = "<group>"; };
+		6FEAEFCF13B07BB60088753B /* CursorPointerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorPointerInfoViewController.m; sourceTree = "<group>"; };
+		6FEAEFD013B07BB60088753B /* CursorPointerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorPointerInfoViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* nut_demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -483,6 +488,9 @@
 				6F1A590C13AB876A0029B714 /* CursorFolderView.h */,
 				6F1A590D13AB876A0029B714 /* CursorFolderView.m */,
 				6F1A590E13AB876A0029B714 /* CursorFolderView.xib */,
+				6FEAEFCE13B07BB60088753B /* CursorPointerInfoViewController.h */,
+				6FEAEFCF13B07BB60088753B /* CursorPointerInfoViewController.m */,
+				6FEAEFD013B07BB60088753B /* CursorPointerInfoViewController.xib */,
 				6F1A590F13AB876A0029B714 /* CursorSelectedFolderView.h */,
 				6F1A591013AB876A0029B714 /* CursorSelectedFolderView.m */,
 				6F1A591113AB876A0029B714 /* CursorSelectedFolderView.xib */,
@@ -914,6 +922,7 @@
 				6F91D48D13AF63A900DB3848 /* nut_cursor_default_pointer.png in Resources */,
 				6F91D48E13AF63A900DB3848 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F91D48F13AF63A900DB3848 /* nut_HLSWebViewController.xib in Resources */,
+				6FEAEFD213B07BB60088753B /* CursorPointerInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +967,7 @@
 				6F1A591413AB876A0029B714 /* CursorSelectedFolderView.m in Sources */,
 				6F2E93EA13AF321B00C8F5D1 /* CursorCustomPointerView.m in Sources */,
 				6F91D48413AF63A900DB3848 /* nut_bootstrap.m in Sources */,
+				6FEAEFD113B07BB60088753B /* CursorPointerInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

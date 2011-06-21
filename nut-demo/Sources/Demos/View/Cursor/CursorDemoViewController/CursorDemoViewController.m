@@ -10,7 +10,14 @@
 
 #import "CursorCustomPointerView.h"
 #import "CursorFolderView.h"
+#import "CursorPointerInfoViewController.h"
 #import "CursorSelectedFolderView.h"
+
+@interface CursorDemoViewController ()
+
+@property (nonatomic, retain) UIPopoverController *popoverController;
+
+@end
 
 @implementation CursorDemoViewController
 
@@ -51,6 +58,13 @@ static NSArray *s_folders = nil;
     return self;
 }
 
+- (void)dealloc
+{
+    self.popoverController = nil;
+    
+    [super dealloc];
+}
+
 - (void)releaseViews
 {
     [super releaseViews];
@@ -79,6 +93,8 @@ static NSArray *s_folders = nil;
 @synthesize foldersCursor = m_foldersCursor;
 
 @synthesize mixedFoldersCursor = m_mixedFoldersCursor;
+
+@synthesize popoverController = m_popoverController;
 
 #pragma mark View lifecycle
 
@@ -121,6 +137,15 @@ static NSArray *s_folders = nil;
     }
     
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+#pragma mark Memory warnings
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    self.popoverController = nil;
 }
 
 #pragma mark HLSCursorDataSource protocol implementation
@@ -239,11 +264,42 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursor:(HLSCursor *)cursor movingPointerWithNearestIndex:(NSInteger)index
+- (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index
 {
     if (cursor == self.monthDaysCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_monthDays objectAtIndex:index];
+    }
+}
+
+- (void)cursorDidStartDragging:(HLSCursor *)cursor
+{
+    if (cursor == self.monthDaysCursor) {
+        if (! self.popoverController) {
+            CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
+            self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
+            self.popoverController.popoverContentSize = infoViewController.view.frame.size;
+        }        
+    }
+}
+
+- (void)cursor:(HLSCursor *)cursor isDraggingWithNearestIndex:(NSUInteger)index
+{
+    if (cursor == self.monthDaysCursor) {
+        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
+        infoViewController.valueLabel.text = [s_monthDays objectAtIndex:index];
+        
+        [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
+                                                inView:cursor.pointerView
+                              permittedArrowDirections:UIPopoverArrowDirectionDown
+                                              animated:NO];
+    }
+}
+
+- (void)cursorDidStopDragging:(HLSCursor *)cursor
+{
+    if (cursor == self.monthDaysCursor) {
+        [self.popoverController dismissPopoverAnimated:NO];
     }
 }
 

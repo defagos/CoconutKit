@@ -18,6 +18,7 @@
     HLSCursor *m_timeScalesCursor;
     HLSCursor *m_foldersCursor;
     HLSCursor *m_mixedFoldersCursor;
+    UIPopoverController *m_popoverController;
 }
 
 @property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;

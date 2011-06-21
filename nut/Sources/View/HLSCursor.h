@@ -127,6 +127,15 @@
 - (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index;
 
 // Triggered when the cursor pointer is moved. The nearest index is received as parameter
-- (void)cursor:(HLSCursor *)cursor movingPointerWithNearestIndex:(NSInteger)index;
+- (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index;
+
+// Triggered when the user starts dragging the pointer
+- (void)cursorDidStartDragging:(HLSCursor *)cursor;
+
+// Triggered when the user is dragging the pointer
+- (void)cursor:(HLSCursor *)cursor isDraggingWithNearestIndex:(NSUInteger)index;
+
+// Triggered when the user stops dragging the pointer
+- (void)cursorDidStopDragging:(HLSCursor *)cursor;
 
 @end
