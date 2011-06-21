@@ -297,20 +297,22 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     m_xPos = [self xPosForIndex:selectedIndex];
     
-    if (animated) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
-        [UIView setAnimationDelegate:self];
-    }
-    
-    self.pointerContainerView.frame = [self pointerFrameForIndex:selectedIndex];
-    
-    if (animated) {
-        [UIView commitAnimations];
-    }
-    else {
-        [self finalizeSelectionForIndex:selectedIndex];
+    if (m_viewsCreated) {
+        if (animated) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
+            [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
+            [UIView setAnimationDelegate:self];
+        }
+        
+        self.pointerContainerView.frame = [self pointerFrameForIndex:selectedIndex];
+        
+        if (animated) {
+            [UIView commitAnimations];
+        }
+        else {
+            [self finalizeSelectionForIndex:selectedIndex];
+        }        
     }
     
     // Will only be used if setSelectedIndex has been called before the views are actually created; not
