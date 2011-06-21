@@ -33,10 +33,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
 
+- (void)endTouches:(NSSet *)touches animated:(BOOL)animated;
+
 - (void)pointerAnimationWillStart:(NSString *)animationID context:(void *)context;
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
-- (void)endTouches:(NSSet *)touches animated:(BOOL)animated;
+- (void)clear;
 
 @end
 
@@ -427,6 +429,29 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                              floorf(pointerRect.size.height - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height));
     
     return pointerRect;
+}
+
+#pragma mark Managing contents
+
+- (void)reloadData
+{
+    [self clear];
+    [self setNeedsLayout];
+}
+
+- (void)clear
+{
+    // Clear all views
+    for (UIView *view in self.elementViews) {
+        [view removeFromSuperview];
+    }
+    self.elementViews = nil;
+    
+    [self.pointerContainerView removeFromSuperview];
+    self.pointerContainerView = nil;
+    self.pointerView = nil;
+    
+    m_viewsCreated = NO;
 }
 
 #pragma mark Touch events

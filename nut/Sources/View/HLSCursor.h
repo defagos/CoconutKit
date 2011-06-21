@@ -88,6 +88,11 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 
 /**
+ * Reload the cursor from the data source
+ */
+- (void)reloadData;
+
+/**
  * Set / get the data source used to fill the cursor with elements
  */
 @property (nonatomic, assign) id<HLSCursorDataSource> dataSource;

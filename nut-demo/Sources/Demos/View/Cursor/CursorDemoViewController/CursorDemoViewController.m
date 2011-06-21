@@ -22,7 +22,7 @@
 @implementation CursorDemoViewController
 
 static NSArray *s_weekDays = nil;
-static NSArray *s_monthDays = nil;
+static NSArray *s_randomRange = nil;
 static NSArray *s_timeScales = nil;
 static NSArray *s_folders = nil;
 
@@ -38,8 +38,8 @@ static NSArray *s_folders = nil;
                    NSLocalizedString(@"Saturday", @"Saturday"),
                    NSLocalizedString(@"Sunday", @"Sunday"),
                    nil] retain];
-    s_monthDays = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", 
-                    @"17", nil] retain];
+    s_randomRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+                      @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
     s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
                      NSLocalizedString(@"MONTH", @"MONTH"),
                      NSLocalizedString(@"WEEK", @"WEEK"),
@@ -70,9 +70,10 @@ static NSArray *s_folders = nil;
     [super releaseViews];
     
     self.weekDaysCursor = nil;
-    self.moveWeekDaysPointerButton = nil;
     self.weekDayIndexLabel = nil;
-    self.monthDaysCursor = nil;
+    self.nextWeekDayButton = nil;
+    self.randomRangeCursor = nil;
+    self.randomRangeCursorReloadButton = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
@@ -82,11 +83,13 @@ static NSArray *s_folders = nil;
 
 @synthesize weekDaysCursor = m_weekDaysCursor;
 
-@synthesize moveWeekDaysPointerButton = m_moveWeekDaysPointerButton;
-
 @synthesize weekDayIndexLabel = m_weekDayIndexLabel;
 
-@synthesize monthDaysCursor = m_monthDaysCursor;
+@synthesize nextWeekDayButton = m_nextWeekDayButton;
+
+@synthesize randomRangeCursor = m_randomRangeCursor;
+
+@synthesize randomRangeCursorReloadButton = m_randomRangeCursorReloadButton;
 
 @synthesize timeScalesCursor = m_timeScalesCursor;
 
@@ -109,10 +112,14 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
-    self.monthDaysCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
+    [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
     
-    self.monthDaysCursor.dataSource = self;
-    self.monthDaysCursor.delegate = self;
+    self.randomRangeCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
+    
+    self.randomRangeCursor.dataSource = self;
+    self.randomRangeCursor.delegate = self;
+    
+    [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
@@ -175,8 +182,8 @@ static NSArray *s_folders = nil;
     if (cursor == self.weekDaysCursor) {
         return [s_weekDays count];
     }
-    else if (cursor == self.monthDaysCursor) {
-        return [s_monthDays count];
+    else if (cursor == self.randomRangeCursor) {
+        return [s_randomRange count];
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];
@@ -195,8 +202,8 @@ static NSArray *s_folders = nil;
     if (cursor == self.weekDaysCursor) {
         return [s_weekDays objectAtIndex:index];
     }
-    else if (cursor == self.monthDaysCursor) {
-        return [s_monthDays objectAtIndex:index];
+    else if (cursor == self.randomRangeCursor) {
+        return [s_randomRange objectAtIndex:index];
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales objectAtIndex:index];
@@ -222,7 +229,7 @@ static NSArray *s_folders = nil;
 
 - (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         return [UIColor blueColor];
     }
     else if (cursor == self.mixedFoldersCursor) {
@@ -236,7 +243,7 @@ static NSArray *s_folders = nil;
 
 - (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         return [UIColor whiteColor];
     }
     else {
@@ -247,7 +254,7 @@ static NSArray *s_folders = nil;
 
 - (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         return CGSizeMake(0, 1);
     }
     else {
@@ -266,15 +273,15 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_monthDays objectAtIndex:index];
+        pointerView.valueLabel.text = [s_randomRange objectAtIndex:index];
     }
 }
 
 - (void)cursorDidStartDragging:(HLSCursor *)cursor
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         if (! self.popoverController) {
             CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
             self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
@@ -285,9 +292,9 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor isDraggingWithNearestIndex:(NSUInteger)index
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
-        infoViewController.valueLabel.text = [s_monthDays objectAtIndex:index];
+        infoViewController.valueLabel.text = [s_randomRange objectAtIndex:index];
         
         [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
                                                 inView:cursor.pointerView
@@ -298,7 +305,7 @@ static NSArray *s_folders = nil;
 
 - (void)cursorDidStopDragging:(HLSCursor *)cursor
 {
-    if (cursor == self.monthDaysCursor) {
+    if (cursor == self.randomRangeCursor) {
         [self.popoverController dismissPopoverAnimated:NO];
     }
 }
@@ -308,6 +315,11 @@ static NSArray *s_folders = nil;
 - (IBAction)moveWeekDaysPointerToNextDay
 {
     [self.weekDaysCursor setSelectedIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
+}
+
+- (IBAction)reloadRandomRangeCursor
+{
+    [self.randomRangeCursor reloadData];
 }
 
 @end
