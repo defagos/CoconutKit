@@ -320,7 +320,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (self.elementViews) {
+    if ([self.elementViews count] != 0) {
         // Sanitize input
         if (index >= [self.elementViews count]) {
             index = 0;
@@ -340,7 +340,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
 {
-    if (! self.elementViews) {
+    if ([self.elementViews count] == 0) {
         return 0.f;
     }
     
