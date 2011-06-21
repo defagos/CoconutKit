@@ -327,9 +327,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // Notify the delegate
     if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
+        HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
         [self.delegate cursor:self isMovingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
     }
     if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
+        HLSLoggerDebug(@"Calling cursor:didSelectIndex:");
         [self.delegate cursor:self didSelectIndex:index];
     }
 }
@@ -496,6 +498,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                 [self swapElementViewAtIndex:index selected:NO];
                 
                 if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
+                    HLSLoggerDebug(@"Calling cursorDidStartDragging:");
                     [self.delegate cursorDidStartDragging:self];
                 }
             }
@@ -509,10 +512,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             m_xPos = pos.x;
             NSUInteger index = [self indexForXPos:m_xPos];
             if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
+                HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
                 [self.delegate cursor:self isMovingPointerWithNearestIndex:index];
             }
             
             if ([self.delegate respondsToSelector:@selector(cursor:isDraggingWithNearestIndex:)]) {
+                HLSLoggerDebug(@"Calling cursor:isDraggingWithNearestIndex:");
                 [self.delegate cursor:self isDraggingWithNearestIndex:index];
             }
         }
@@ -537,6 +542,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         [self setSelectedIndex:index animated:animated];
         
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
+            HLSLoggerDebug(@"Calling cursorDidStopDragging:");
             [self.delegate cursorDidStopDragging:self];
         }
     }
