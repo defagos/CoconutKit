@@ -184,6 +184,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         self.pointerContainerView = [[[UIView alloc] initWithFrame:self.pointerView.frame] autorelease];
         self.pointerContainerView.backgroundColor = [UIColor clearColor];
         self.pointerContainerView.autoresizesSubviews = YES;
+        self.pointerContainerView.exclusiveTouch = YES;
         
         self.pointerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.pointerContainerView addSubview:self.pointerView];
