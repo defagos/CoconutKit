@@ -8,9 +8,58 @@
 
 #import "HLSStripContainerView.h"
 
+#import "HLSLogger.h"
+
+#pragma mark -
+#pragma mark HLSStrip class interface
+
+@interface HLSStrip : NSObject {
+@private
+    NSUInteger m_beginPosition;
+    NSUInteger m_endPosition;
+}
+
+@property (nonatomic, assign) NSUInteger beginPosition;
+@property (nonatomic, assign) NSUInteger endPosition;
+
+@end
+
+#pragma mark -
+#pragma mark HLSStripContainerView class extension
+
+@interface HLSStripContainerView ()
+
+- (void)initialize;
+
+@end
+
+#pragma mark -
+#pragma mark HLSStripContainerView class implementation
+
 @implementation HLSStripContainerView
 
 #pragma mark Object creation and destruction
+
+- (id)initWithFrame:(CGRect)frame
+{
+    if ((self = [super initWithFrame:frame])) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize
+{
+    m_subdivisions = NSUIntegerMax;
+}
 
 - (void)dealloc
 {
@@ -21,9 +70,17 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize numberOfUnits = m_numberOfUnits;
+@synthesize subdivisions = m_subdivisions;
 
-@synthesize maximumNumberOfStrips = m_maximumNumberOfStrips;
+- (void)setSubdivisions:(NSUInteger)subdivisions
+{
+    if (m_subdivisionsUsed) {
+        HLSLoggerWarn(@"Number of subdivisions cannot be altered anymore");
+        return;
+    }
+    
+    m_subdivisionsUsed = subdivisions;
+}
 
 @synthesize enabled = m_enabled;
 
@@ -59,6 +116,30 @@
 {
     // TODO
     return NO;
+}
+
+@end
+
+#pragma mark -
+#pragma mark HLSStrip class implementation
+
+@implementation HLSStrip
+
+#pragma mark Accessors and mutators
+
+@synthesize beginPosition = m_beginPosition;
+
+@synthesize endPosition = m_endPosition;
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; beginPosition: %d; endPosition: %d>", 
+            [self class],
+            self,
+            self.beginPosition,
+            self.endPosition];
 }
 
 @end

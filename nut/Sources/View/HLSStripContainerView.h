@@ -18,17 +18,23 @@
  */
 @interface HLSStripContainerView : UIView {
 @private
-    NSUInteger m_numberOfUnits;
-    NSUInteger m_maximumNumberOfStrips;
+    NSUInteger m_subdivisions;
+    BOOL m_subdivisionsUsed;
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 
 /**
+ * Set this value right after construction to alter the number of subdivisions used. Default is NSUIntegerMax. This value
+ * cannot be altered once it has been used
+ */
+@property (nonatomic, assign) NSUInteger subdivisions;
+
+/**
  * Create a strip between the specified positions if there is enough room left. If this is not the case, the strip
  * is not created, except if forced is set to YES. In this case, the strip will take the available space in
  * begin / end direction. Note that it still won't be created if it completely overlaps with an existing strip.
- * Positions are measured in units
+ * Positions are measured in units.
  * The method returns YES iff a strip could be added.
  */
 - (BOOL)addStripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition forced:(BOOL)forced;
@@ -63,17 +69,6 @@
  * The method returns YES iff a strip could be deleted.
  */
 - (BOOL)deleteStripWithIndex:(NSUInteger)index;
-
-/**
- * Number of units which are used to define strips (and to which strips will snap); can be changed on the fly, which
- * will trigger a scale
- */
-@property (nonatomic, assign) NSUInteger numberOfUnits;
-
-/**
- * Maximum number of strips which can be created
- */
-@property (nonatomic, assign) NSUInteger maximumNumberOfStrips;
 
 /**
  * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show stripes
