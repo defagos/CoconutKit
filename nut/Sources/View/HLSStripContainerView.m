@@ -126,7 +126,7 @@
     
     // Find an insertion point
     NSUInteger previousEndPosition = 0;
-    NSUInteger nextBeginPosition = 0;
+    NSUInteger nextBeginPosition = self.positions - 1;
     NSUInteger index = 0;
     HLSStrip *newStrip = nil;
     for (HLSStrip *strip in self.strips) {
@@ -135,13 +135,13 @@
             return NO;
         }
         
-        previousEndPosition = strip.endPosition;
-        
         // Insertion point found
         if (strip.beginPosition > position) {
             nextBeginPosition = strip.beginPosition;
             break;
         }
+        
+        previousEndPosition = strip.endPosition;
         
         ++index;
     }
@@ -151,9 +151,10 @@
         nextBeginPosition = self.positions - 1;
     }
     
+    // Arrived here, we know that space for insertion is available in [previousEndPosition; nextBeginPosition]
+    
     // If not enough space, fill it completely
-    NSUInteger availableLength = nextBeginPosition - previousEndPosition;
-    if (length >= availableLength) {
+    if (length >= nextBeginPosition - previousEndPosition) {
         newStrip = [HLSStrip stripWithBeginPosition:previousEndPosition endPosition:nextBeginPosition];
     }
     // Try to center around position if possible, otherwise center as close as possible to position so that there
