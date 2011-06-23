@@ -27,6 +27,7 @@
 		6FA6990D13432746003ACC1F /* nut_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990313432746003ACC1F /* nut_ButtonBarArrowRight@2x.png */; };
 		6FA6990E13432746003ACC1F /* nut_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990413432746003ACC1F /* nut_ButtonBarRefresh.png */; };
 		6FA6990F13432746003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990513432746003ACC1F /* nut_ButtonBarRefresh@2x.png */; };
+		6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21013B337190039622A /* HLSStripContainerView.m */; };
 		6FAF20F513A24CCB009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */; };
 		6FAF20F913A24D36009A5645 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F813A24D36009A5645 /* HLSCursor.m */; };
 		6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */; };
@@ -180,6 +181,8 @@
 		6FA6990313432746003ACC1F /* nut_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
 		6FA6990413432746003ACC1F /* nut_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarRefresh.png; sourceTree = "<group>"; };
 		6FA6990513432746003ACC1F /* nut_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		6FA6C20F13B337190039622A /* HLSStripContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripContainerView.h; sourceTree = "<group>"; };
+		6FA6C21013B337190039622A /* HLSStripContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripContainerView.m; sourceTree = "<group>"; };
 		6FAF20F213A24CCB009A5645 /* CursorDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorDemoViewController.h; sourceTree = "<group>"; };
 		6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorDemoViewController.m; sourceTree = "<group>"; };
 		6FAF20F713A24D36009A5645 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
@@ -675,6 +678,8 @@
 			children = (
 				6FAF20F713A24D36009A5645 /* HLSCursor.h */,
 				6FAF20F813A24D36009A5645 /* HLSCursor.m */,
+				6FA6C20F13B337190039622A /* HLSStripContainerView.h */,
+				6FA6C21013B337190039622A /* HLSStripContainerView.m */,
 				6FEF83F2131F76510015B57C /* HLSSubtitleTableViewCell.h */,
 				6FEF83F3131F76510015B57C /* HLSSubtitleTableViewCell.m */,
 				6FEF83F4131F76510015B57C /* HLSTableViewCell+Protected.h */,
@@ -1447,6 +1452,7 @@
 				6F1A590B13AB87420029B714 /* CursorSelectedFolderView.m in Sources */,
 				6F2E93DF13AF301400C8F5D1 /* CursorCustomPointerView.m in Sources */,
 				6FEAEFCB13B07AFE0088753B /* CursorPointerInfoViewController.m in Sources */,
+				6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
