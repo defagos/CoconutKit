@@ -246,6 +246,17 @@
     return YES;
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; positions: %d; strips: %@>", 
+            [self class],
+            self,
+            self.positions,
+            self.strips];
+}
+
 @end
 
 #pragma mark -

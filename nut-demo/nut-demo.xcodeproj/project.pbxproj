@@ -440,8 +440,8 @@
 				6F91D47213AF63A900DB3848 /* Resources */,
 			);
 			name = "nut-trunk-Release.staticframework";
-			path = "../../../../Binaries/nut/nut-trunk-Release.staticframework";
-			sourceTree = "<group>";
+			path = "/LeStudioSDK/Binaries/nut/nut-0.5.2-Release.staticframework";
+			sourceTree = "<absolute>";
 		};
 		6F91D46F13AF63A900DB3848 /* Bootstrap */ = {
 			isa = PBXGroup;

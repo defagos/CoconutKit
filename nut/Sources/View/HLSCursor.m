@@ -65,7 +65,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)dealloc
 {
     self.elementViews = nil;
-    self.pointerView = nil;
+    
+    // Very special case here. Cannot use the property since it cannot change the pointer view once set!
+    [m_pointerView release];
+    
     self.pointerContainerView = nil;
     self.dataSource = nil;
     
