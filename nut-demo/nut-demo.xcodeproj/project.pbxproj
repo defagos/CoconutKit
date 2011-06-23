@@ -66,6 +66,8 @@
 		6F91D48D13AF63A900DB3848 /* nut_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F91D48113AF63A900DB3848 /* nut_cursor_default_pointer.png */; };
 		6F91D48E13AF63A900DB3848 /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F91D48213AF63A900DB3848 /* nut_HLSSingleValuePickerViewController.xib */; };
 		6F91D48F13AF63A900DB3848 /* nut_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F91D48313AF63A900DB3848 /* nut_HLSWebViewController.xib */; };
+		6FA6C22113B3969D0039622A /* StripsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21F13B3969D0039622A /* StripsDemoViewController.m */; };
+		6FA6C22213B3969D0039622A /* StripsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6C22013B3969D0039622A /* StripsDemoViewController.xib */; };
 		6FAF20ED13A24C56009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */; };
 		6FAF20EF13A24C73009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */; };
 		6FBDA7251303E481004B9617 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA71F1303E481004B9617 /* MainWindow.xib */; };
@@ -177,6 +179,9 @@
 		6F91D48113AF63A900DB3848 /* nut_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_cursor_default_pointer.png; sourceTree = "<group>"; };
 		6F91D48213AF63A900DB3848 /* nut_HLSSingleValuePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = nut_HLSSingleValuePickerViewController.xib; sourceTree = "<group>"; };
 		6F91D48313AF63A900DB3848 /* nut_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = nut_HLSWebViewController.xib; sourceTree = "<group>"; };
+		6FA6C21E13B3969D0039622A /* StripsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripsDemoViewController.h; sourceTree = "<group>"; };
+		6FA6C21F13B3969D0039622A /* StripsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripsDemoViewController.m; sourceTree = "<group>"; };
+		6FA6C22013B3969D0039622A /* StripsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsDemoViewController.xib; sourceTree = "<group>"; };
 		6FAF20EB13A24C56009A5645 /* CursorDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorDemoViewController.h; sourceTree = "<group>"; };
 		6FAF20EC13A24C56009A5645 /* CursorDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorDemoViewController.m; sourceTree = "<group>"; };
 		6FAF20EE13A24C73009A5645 /* CursorDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorDemoViewController.xib; sourceTree = "<group>"; };
@@ -463,6 +468,24 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6FA6C21C13B3969D0039622A /* Strips */ = {
+			isa = PBXGroup;
+			children = (
+				6FA6C21D13B3969D0039622A /* StripsDemoViewController */,
+			);
+			path = Strips;
+			sourceTree = "<group>";
+		};
+		6FA6C21D13B3969D0039622A /* StripsDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FA6C21E13B3969D0039622A /* StripsDemoViewController.h */,
+				6FA6C21F13B3969D0039622A /* StripsDemoViewController.m */,
+				6FA6C22013B3969D0039622A /* StripsDemoViewController.xib */,
+			);
+			path = StripsDemoViewController;
+			sourceTree = "<group>";
+		};
 		6FAF20E913A24C33009A5645 /* Cursor */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				6FAF20E913A24C33009A5645 /* Cursor */,
+				6FA6C21C13B3969D0039622A /* Strips */,
 				6FBDA8C313041CA0004B9617 /* TableViewCells */,
 				6FBDACE71306806A004B9617 /* TextFields */,
 			);
@@ -918,6 +942,7 @@
 				6F91D48E13AF63A900DB3848 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F91D48F13AF63A900DB3848 /* nut_HLSWebViewController.xib in Resources */,
 				6FEAEFD213B07BB60088753B /* CursorPointerInfoViewController.xib in Resources */,
+				6FA6C22213B3969D0039622A /* StripsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,6 +988,7 @@
 				6F2E93EA13AF321B00C8F5D1 /* CursorCustomPointerView.m in Sources */,
 				6F91D48413AF63A900DB3848 /* nut_bootstrap.m in Sources */,
 				6FEAEFD113B07BB60088753B /* CursorPointerInfoViewController.m in Sources */,
+				6FA6C22113B3969D0039622A /* StripsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

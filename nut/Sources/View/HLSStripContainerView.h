@@ -18,8 +18,9 @@
  */
 @interface HLSStripContainerView : UIView {
 @private
-    NSArray *m_strips;              // contains HLSStrip objects
+    NSArray *m_strips;              // contains HLSStrip objects (ordered by beginPosition)
     NSUInteger m_positions;
+    NSUInteger m_defaultStripLength;
     BOOL m_positionsUsed;
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
@@ -31,22 +32,15 @@
  */
 @property (nonatomic, assign) NSUInteger positions;
 
-/**
- * Create a strip between the specified positions if there is no overlap with another strip. If this is not the case, 
- * the strip is not created, except if forced is set to YES. In this case, the strip will take the available space in
- * begin / end direction. Note that it still won't be created if it completely overlaps with an existing strip.
- * The method returns YES iff a strip could be added.
- */
-- (BOOL)addStripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition forced:(BOOL)forced;
+@property (nonatomic, assign) NSUInteger defaultStripLength;
 
 /**
- * Add a strip, trying to center it at the specified position. If a strip already exists at this position, no other strip
- * is added. If no strip exists, then a new strip with the specified length is created if it fits in. If possible, this
- * strip is centered at position. If no room is available for the specified length, then the strip is not created,
- * except if forced is set to YES (in which case it will take the available space).
+ * Add a strip with the default length, trying to center it at the specified position. If a strip already exists at
+ * this position, nothing happens. If there is not enough space for the complete strip to fit, then all available
+ * space is filled
  * The method returns YES iff a strip could be added.
  */
-- (BOOL)addStripAroundPosition:(NSUInteger)position length:(NSUInteger)length forced:(BOOL)forced;
+- (BOOL)addStripAtPosition:(NSUInteger)position;
 
 /**
  * Split a strip at some position. If no strip exists at this position, does nothing.
