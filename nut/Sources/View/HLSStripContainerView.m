@@ -19,8 +19,16 @@
     NSUInteger m_endPosition;
 }
 
++ (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
++ (HLSStrip *)strip;
+
 @property (nonatomic, assign) NSUInteger beginPosition;
 @property (nonatomic, assign) NSUInteger endPosition;
+
+- (BOOL)isOverlappingWithStrip:(HLSStrip *)strip;
+- (BOOL)isContainedInStrip:(HLSStrip *)strip;
+
+- (BOOL)containsPosition:(NSUInteger)position;
 
 @end
 
@@ -30,6 +38,8 @@
 @interface HLSStripContainerView ()
 
 - (void)initialize;
+
+@property (nonatomic, retain) NSArray *strips;
 
 @end
 
@@ -58,11 +68,13 @@
 
 - (void)initialize
 {
-    m_subdivisions = NSUIntegerMax;
+    m_positions = NSUIntegerMax;
+    self.strips = [NSMutableArray array];
 }
 
 - (void)dealloc
 {
+    self.strips = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -70,16 +82,18 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize subdivisions = m_subdivisions;
+@synthesize strips = m_strips;
 
-- (void)setSubdivisions:(NSUInteger)subdivisions
+@synthesize positions = m_positions;
+
+- (void)setPositions:(NSUInteger)positions
 {
-    if (m_subdivisionsUsed) {
-        HLSLoggerWarn(@"Number of subdivisions cannot be altered anymore");
+    if (m_positionsUsed) {
+        HLSLoggerWarn(@"Number of positions cannot be altered anymore");
         return;
     }
     
-    m_subdivisionsUsed = subdivisions;
+    m_positions = positions;
 }
 
 @synthesize enabled = m_enabled;
@@ -102,20 +116,61 @@
 
 - (BOOL)splitStripAtPosition:(NSUInteger)position
 {
-    // TODO
-    return NO;
+    if (position >= self.positions) {
+        HLSLoggerWarn(@"Incorrect position");
+        return NO;
+    }    
+    
+    BOOL split = NO;
+    NSMutableArray *stripsModified = [NSMutableArray array];
+    for (HLSStrip *strip in self.strips) {
+        if ([strip containsPosition:position] && position != strip.beginPosition && position != strip.endPosition) {
+            HLSStrip *subStrip1 = [HLSStrip stripWithBeginPosition:strip.beginPosition endPosition:position];
+            [stripsModified addObject:subStrip1];
+            HLSStrip *subStrip2 = [HLSStrip stripWithBeginPosition:position endPosition:strip.endPosition];
+            [stripsModified addObject:subStrip2];
+            split = YES;
+        }
+        else {
+            [stripsModified addObject:strip];
+        }
+    }
+    self.strips = [NSArray arrayWithArray:stripsModified];
+    return split;
 }
 
-- (BOOL)deleteStripAtPosition:(NSUInteger)position
+- (BOOL)deleteStripsAtPosition:(NSUInteger)position
 {
-    // TODO
-    return NO;
+    if (position >= self.positions) {
+        HLSLoggerWarn(@"Incorrect position");
+        return NO;
+    }
+    
+    BOOL deleted = NO;
+    NSMutableArray *stripsCleaned = [NSMutableArray array];
+    for (HLSStrip *strip in self.strips) {
+        if (! [strip containsPosition:position]) {
+            [stripsCleaned addObject:strip];
+        }
+        else {
+            deleted = YES;
+        }
+    }
+    self.strips = [NSArray arrayWithArray:stripsCleaned];
+    return deleted;
 }
 
 - (BOOL)deleteStripWithIndex:(NSUInteger)index
 {
-    // TODO
-    return NO;
+    if (index >= [self.strips count]) {
+        HLSLoggerWarn(@"Incorrect index");
+        return NO;
+    }
+    
+    NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
+    [stripsCopy removeObjectAtIndex:index];
+    self.strips = [NSArray arrayWithArray:stripsCopy];
+    return YES;
 }
 
 @end
@@ -125,11 +180,43 @@
 
 @implementation HLSStrip
 
+#pragma mark Class methods
+
++ (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
+{
+    HLSStrip *strip = [[[[self class] alloc] init] autorelease];
+    strip.beginPosition = beginPosition;
+    strip.endPosition = endPosition;
+    return strip;
+}
+
++ (HLSStrip *)strip
+{
+    return [[[[self class] alloc] init] autorelease];
+}
+
 #pragma mark Accessors and mutators
 
 @synthesize beginPosition = m_beginPosition;
 
 @synthesize endPosition = m_endPosition;
+
+#pragma mark Testing strips
+
+- (BOOL)isOverlappingWithStrip:(HLSStrip *)strip
+{
+    return self.endPosition > strip.beginPosition && strip.endPosition > self.beginPosition;
+}
+
+- (BOOL)isContainedInStrip:(HLSStrip *)strip
+{
+    return strip.beginPosition <= self.beginPosition && self.endPosition <= strip.endPosition;
+}
+
+- (BOOL)containsPosition:(NSUInteger)position
+{
+    return self.beginPosition <= position && position <= self.endPosition;
+}
 
 #pragma mark Description
 

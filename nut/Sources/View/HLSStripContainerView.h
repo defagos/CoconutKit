@@ -18,23 +18,23 @@
  */
 @interface HLSStripContainerView : UIView {
 @private
-    NSUInteger m_subdivisions;
-    BOOL m_subdivisionsUsed;
+    NSArray *m_strips;              // contains HLSStrip objects
+    NSUInteger m_positions;
+    BOOL m_positionsUsed;
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 
 /**
- * Set this value right after construction to alter the number of subdivisions used. Default is NSUIntegerMax. This value
+ * Set this value right after construction to set the number of positions used. Default is NSUIntegerMax. This value
  * cannot be altered once it has been used
  */
-@property (nonatomic, assign) NSUInteger subdivisions;
+@property (nonatomic, assign) NSUInteger positions;
 
 /**
- * Create a strip between the specified positions if there is enough room left. If this is not the case, the strip
- * is not created, except if forced is set to YES. In this case, the strip will take the available space in
+ * Create a strip between the specified positions if there is no overlap with another strip. If this is not the case, 
+ * the strip is not created, except if forced is set to YES. In this case, the strip will take the available space in
  * begin / end direction. Note that it still won't be created if it completely overlaps with an existing strip.
- * Positions are measured in units.
  * The method returns YES iff a strip could be added.
  */
 - (BOOL)addStripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition forced:(BOOL)forced;
@@ -44,25 +44,22 @@
  * is added. If no strip exists, then a new strip with the specified length is created if it fits in. If possible, this
  * strip is centered at position. If no room is available for the specified length, then the strip is not created,
  * except if forced is set to YES (in which case it will take the available space).
- * Positions are measured in units.
  * The method returns YES iff a strip could be added.
  */
 - (BOOL)addStripAroundPosition:(NSUInteger)position length:(NSUInteger)length forced:(BOOL)forced;
 
 /**
  * Split a strip at some position. If no strip exists at this position, does nothing.
- * Positions are measured in units.
  * The method returns YES iff a strip could be splitted.
  */
 - (BOOL)splitStripAtPosition:(NSUInteger)position;
 
 /**
- * Delete any strip lying at the specified position. No-op if no strip exists at this position or if it corresponds to
- * two strips (i.e. where two neighbouring strips meet).
- * Positions are measured in units.
+ * Delete any strip lying at the specified position. The method in general deletes one strip, except if position
+ * is where two neighbouring strips meet.
  * The method returns YES iff a strip could be deleted.
  */
-- (BOOL)deleteStripAtPosition:(NSUInteger)position;
+- (BOOL)deleteStripsAtPosition:(NSUInteger)position;
 
 /**
  * Delete the strip with the specified index (if it exists)
@@ -72,7 +69,7 @@
 
 /**
  * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show stripes
- * in read-only mode
+ * in read-only mode, i.e. when no user interaction must be possible
  */
 @property (nonatomic, assign) BOOL enabled;
 
