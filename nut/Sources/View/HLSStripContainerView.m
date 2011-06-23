@@ -10,9 +10,14 @@
 
 #import "HLSLogger.h"
 
+// TODO: Set m_positionsUsed to YES somewhere!!!!
+
 #pragma mark -
 #pragma mark HLSStrip class interface
 
+/**
+ * Lightweight object representing a strip in the container view
+ */
 @interface HLSStrip : NSObject {
 @private
     NSUInteger m_beginPosition;
@@ -68,7 +73,7 @@
 
 - (void)initialize
 {
-    m_positions = NSUIntegerMax;
+    self.positions = NSUIntegerMax;
     self.strips = [NSMutableArray array];
 }
 
@@ -96,31 +101,30 @@
     m_positions = positions;
 }
 
-@synthesize defaultStripLength = m_defaultStripLength;
-
-- (void)setDefaultStripLength:(NSUInteger)defaultStripLength
-{
-    if (defaultStripLength >= m_positions) {
-        HLSLoggerWarn(@"Default length must not exceed number of available positions");
-        return;
-    }
-    
-    m_defaultStripLength = defaultStripLength;
-}
-
 @synthesize enabled = m_enabled;
 
 @synthesize delegate = m_delegate;
 
 #pragma mark Strip management
 
-- (BOOL)addStripAtPosition:(NSUInteger)position
-{
+- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length
+{    
     if (position >= self.positions) {
         HLSLoggerWarn(@"Incorrect position");
         return NO;
     }
     
+    if (length == 0) {
+        HLSLoggerError(@"Length cannot be 0");
+        return NO;
+    }
+    
+    if (length >= self.positions) {
+        HLSLoggerWarn(@"Default length must not exceed number of available positions");
+        return NO;
+    }
+    
+    // Find an insertion point
     NSUInteger previousEndPosition = 0;
     NSUInteger nextBeginPosition = 0;
     NSUInteger index = 0;
@@ -142,22 +146,22 @@
         ++index;
     }
     
-    // No next strip; can reach max position
+    // No strip after insertion point
     if (index == [self.strips count]) {
         nextBeginPosition = self.positions - 1;
     }
     
     // If not enough space, fill it completely
     NSUInteger availableLength = nextBeginPosition - previousEndPosition;
-    if (m_defaultStripLength >= availableLength) {
+    if (length >= availableLength) {
         newStrip = [HLSStrip stripWithBeginPosition:previousEndPosition endPosition:nextBeginPosition];
     }
     // Try to center around position if possible, otherwise center as close as possible to position so that there
     // is no overlap with forbidden left / right regions
     else {
         // Fix position if needed
-        NSUInteger minPosition = previousEndPosition + (NSUInteger)floorf(m_defaultStripLength / 2.f);
-        NSUInteger maxPosition = nextBeginPosition - (NSUInteger)ceilf(m_defaultStripLength / 2.f);
+        NSUInteger minPosition = previousEndPosition + (NSUInteger)floorf(length / 2.f);
+        NSUInteger maxPosition = nextBeginPosition - (NSUInteger)ceilf(length / 2.f);
         if (position < minPosition) {
             position = minPosition;
         }
@@ -166,11 +170,11 @@
         }
         
         // Create the new strip, centered at position
-        newStrip = [HLSStrip stripWithBeginPosition:position - (NSUInteger)floorf(m_defaultStripLength / 2.f)
-                                        endPosition:position + (NSUInteger)ceilf(m_defaultStripLength / 2.f)];
+        newStrip = [HLSStrip stripWithBeginPosition:position - (NSUInteger)floorf(length / 2.f)
+                                        endPosition:position + (NSUInteger)ceilf(length / 2.f)];
     }
     
-    // Insert the new strip in the correct order so that the array stays sorted by beginPosition
+    // Insert the new strip in the correct order so that the array is sorted by beginPosition
     NSMutableArray *strips = [NSMutableArray arrayWithArray:self.strips];
     if (index == [self.strips count]) {
         [strips addObject:newStrip];
@@ -181,7 +185,6 @@
     self.strips = [NSArray arrayWithArray:strips];
     return YES;
 }
-
 
 - (BOOL)splitStripAtPosition:(NSUInteger)position
 {

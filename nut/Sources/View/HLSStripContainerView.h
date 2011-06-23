@@ -8,50 +8,53 @@
 
 // TODO: Use strip identifiers? Returning them when strips are added / removed. This would then offer an opaque handle
 //       to get the strip itself without having to return the rectangular view. Well, maybe that's too much
-// Remark: Strips can never overlap, even when they are moved. This way, at most two strips can be merged at any time
+// Remark: Strips must never overlap, even when they are moved. This way, at most two strips can be merged at any time
 
 // Forward declarations
 @protocol HLSStripContainerViewDelegate;
 
 /**
+ * A view to which strips (rectangles) can be added, either interactively or progammatically. These strips snap to
+ * equidistant positions whose number can be set at creation time.
+ *
+ * TODO: More documentation
+ *
  * Designated initializer: initWithFrame:
  */
 @interface HLSStripContainerView : UIView {
 @private
-    NSArray *m_strips;              // contains HLSStrip objects (ordered by beginPosition)
-    NSUInteger m_positions;
-    NSUInteger m_defaultStripLength;
-    BOOL m_positionsUsed;
+    NSArray *m_strips;                      // contains HLSStrip objects (ordered by beginPosition)
+    NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
+    BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 
 /**
- * Set this value right after construction to set the number of positions used. Default is NSUIntegerMax. This value
- * cannot be altered once it has been used
+ * The number of positions to use. Default is NSUIntegerMax (highest granularity).
+ * This value cannot be altered once the container view has used it, you should therefore set it as soon as possible
+ * (ideally right after creation)
  */
 @property (nonatomic, assign) NSUInteger positions;
 
-@property (nonatomic, assign) NSUInteger defaultStripLength;
-
 /**
- * Add a strip with the default length, trying to center it at the specified position. If a strip already exists at
+ * Add a strip with the the specified length, trying to center it at the specified position. If a strip already exists at
  * this position, nothing happens. If there is not enough space for the complete strip to fit, then all available
- * space is filled
+ * space will be filled.
  * The method returns YES iff a strip could be added.
  */
-- (BOOL)addStripAtPosition:(NSUInteger)position;
+- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length;
 
 /**
- * Split a strip at some position. If no strip exists at this position, does nothing.
+ * Split a strip into two strips at some position. If no strip exists at this position, this method does nothing.
  * The method returns YES iff a strip could be splitted.
  */
 - (BOOL)splitStripAtPosition:(NSUInteger)position;
 
 /**
  * Delete any strip lying at the specified position. The method in general deletes one strip, except if position
- * is where two neighbouring strips meet.
- * The method returns YES iff a strip could be deleted.
+ * is where two neighbouring strips meet (in which case two strips will be deleted)
+ * The method returns YES iff at least one strip could be deleted.
  */
 - (BOOL)deleteStripsAtPosition:(NSUInteger)position;
 
@@ -62,8 +65,8 @@
 - (BOOL)deleteStripWithIndex:(NSUInteger)index;
 
 /**
- * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show stripes
- * in read-only mode, i.e. when no user interaction must be possible
+ * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show strips
+ * in read-only mode
  */
 @property (nonatomic, assign) BOOL enabled;
 
