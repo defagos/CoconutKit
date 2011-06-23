@@ -42,6 +42,7 @@
     #import "HLSSingleValuePicker.h"
     #import "HLSSingleValuePickerViewController.h"
     #import "HLSStandardWidgetConstants.h"
+    #import "HLSStripContainerView.h"
     #import "HLSSubtitleTableViewCell.h"
     #import "HLSTableSearchDisplayViewController.h"
     #import "HLSTableViewCell.h"

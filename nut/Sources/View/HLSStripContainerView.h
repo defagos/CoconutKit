@@ -19,38 +19,44 @@
     NSUInteger m_numberOfUnits;
     NSUInteger m_maximumNumberOfStrips;
     BOOL m_enabled;
+    id<HLSStripContainerViewDelegate> m_delegate;
 }
 
 /**
  * Create a strip between the specified positions if there is enough room left. If this is not the case, the strip
  * is not created, except if forced is set to YES. In this case, the strip will take the available space in
- * begin / end direction. Note that it still won't be created if it completely overlaps with an existing strip
+ * begin / end direction. Note that it still won't be created if it completely overlaps with an existing strip.
+ * The method returns YES iff a strip could be added.
  */
-- (void)addStripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition forced:(BOOL)forced;
+- (BOOL)addStripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition forced:(BOOL)forced;
 
 /**
  * Add a strip, trying to center it at the specified position. If a strip already exists at this position, no other strip
  * is added. If no strip exists, then a new strip with the specified length is created if it fits in. If possible, this
  * strip is centered at position. If no room is available for the specified length, then the strip is not created,
  * except if forced is set to YES (in which case it will take the available space)
+ * The method returns YES iff a strip could be added.
  */
-- (void)addStripAroundPosition:(NSUInteger)position length:(NSUInteger)length forced:(BOOL)forced;
+- (BOOL)addStripAroundPosition:(NSUInteger)position length:(NSUInteger)length forced:(BOOL)forced;
 
 /**
  * Split a strip at some position. If no strip exists at this position, does nothing.
+ * The method returns YES iff a strip could be splitted.
  */
-- (void)splitStripAtPosition:(NSUInteger)position;
+- (BOOL)splitStripAtPosition:(NSUInteger)position;
 
 /**
  * Delete any strip lying at the specified position. No-op if no strip exists at this position or if it corresponds to
- * two strips (i.e. where two neighbouring strips meet)
+ * two strips (i.e. where two neighbouring strips meet).
+ * The method returns YES iff a strip could be deleted.
  */
-- (void)deleteStripAtPosition:(NSUInteger)position;
+- (BOOL)deleteStripAtPosition:(NSUInteger)position;
 
 /**
  * Delete the strip with the specified index (if it exists)
+ * The method returns YES iff a strip could be deleted.
  */
-- (void)deleteStripWithIndex:(NSUInteger)index;
+- (BOOL)deleteStripWithIndex:(NSUInteger)index;
 
 /**
  * Number of units which are used to define strips (and to which strips will snap); can be changed on the fly, which
@@ -69,14 +75,11 @@
  */
 @property (nonatomic, assign) BOOL enabled;
 
+@property (nonatomic, assign) id<HLSStripContainerViewDelegate> delegate;
+
 @end
 
 @protocol HLSStripContainerViewDelegate <NSObject>
-
-/**
- * A strip could be not be added
- */
-- (void)stripContainerViewFailedToAddStrip:(HLSStripContainerView *)stripContainerView;
 
 /**
  * Called right before two strips are merged. Return NO if you do not want the merge to happen, in which case rollback

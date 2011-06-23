@@ -14,6 +14,7 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "StripsDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
@@ -55,6 +56,7 @@ typedef enum {
     ViewDemoIndexTextFieldsFixed,
     ViewDemoIndexTextFieldsLarge,
     ViewDemoIndexCursor,
+    ViewDemoIndexStrips,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -228,6 +230,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexStrips: {
+                    cell.textLabel.text = NSLocalizedString(@"Strips", @"Strips");
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -344,6 +351,12 @@ typedef enum {
                     
                 case ViewDemoIndexCursor: {
                     CursorDemoViewController *demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
+                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewDemoIndexStrips: {
+                    StripsDemoViewController *demoViewController = [[[StripsDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }

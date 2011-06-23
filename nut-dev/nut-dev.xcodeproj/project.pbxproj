@@ -28,6 +28,8 @@
 		6FA6990E13432746003ACC1F /* nut_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990413432746003ACC1F /* nut_ButtonBarRefresh.png */; };
 		6FA6990F13432746003ACC1F /* nut_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990513432746003ACC1F /* nut_ButtonBarRefresh@2x.png */; };
 		6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21013B337190039622A /* HLSStripContainerView.m */; };
+		6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21513B337C80039622A /* StripsDemoViewController.m */; };
+		6FA6C21813B337D40039622A /* StripsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6C21713B337D40039622A /* StripsDemoViewController.xib */; };
 		6FAF20F513A24CCB009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */; };
 		6FAF20F913A24D36009A5645 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F813A24D36009A5645 /* HLSCursor.m */; };
 		6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */; };
@@ -183,6 +185,9 @@
 		6FA6990513432746003ACC1F /* nut_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nut_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		6FA6C20F13B337190039622A /* HLSStripContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripContainerView.h; sourceTree = "<group>"; };
 		6FA6C21013B337190039622A /* HLSStripContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripContainerView.m; sourceTree = "<group>"; };
+		6FA6C21413B337C80039622A /* StripsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripsDemoViewController.h; sourceTree = "<group>"; };
+		6FA6C21513B337C80039622A /* StripsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripsDemoViewController.m; sourceTree = "<group>"; };
+		6FA6C21713B337D40039622A /* StripsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsDemoViewController.xib; sourceTree = "<group>"; };
 		6FAF20F213A24CCB009A5645 /* CursorDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorDemoViewController.h; sourceTree = "<group>"; };
 		6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorDemoViewController.m; sourceTree = "<group>"; };
 		6FAF20F713A24D36009A5645 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
@@ -484,6 +489,24 @@
 				6F1A591613ABC00F0029B714 /* nut_cursor_default_pointer.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		6FA6C21213B337AD0039622A /* Strips */ = {
+			isa = PBXGroup;
+			children = (
+				6FA6C21313B337AD0039622A /* StripsDemoViewController */,
+			);
+			path = Strips;
+			sourceTree = "<group>";
+		};
+		6FA6C21313B337AD0039622A /* StripsDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FA6C21413B337C80039622A /* StripsDemoViewController.h */,
+				6FA6C21513B337C80039622A /* StripsDemoViewController.m */,
+				6FA6C21713B337D40039622A /* StripsDemoViewController.xib */,
+			);
+			path = StripsDemoViewController;
 			sourceTree = "<group>";
 		};
 		6FAF20F013A24CCB009A5645 /* Cursor */ = {
@@ -1028,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				6FAF20F013A24CCB009A5645 /* Cursor */,
+				6FA6C21213B337AD0039622A /* Strips */,
 				6FEF84CC131F76BD0015B57C /* TableViewCells */,
 				6FEF84DF131F76BD0015B57C /* TextFields */,
 			);
@@ -1351,6 +1375,7 @@
 				6F1A591713ABC00F0029B714 /* nut_cursor_default_pointer.png in Resources */,
 				6F2E93E113AF303100C8F5D1 /* CursorCustomPointerView.xib in Resources */,
 				6FEAEFCD13B07B130088753B /* CursorPointerInfoViewController.xib in Resources */,
+				6FA6C21813B337D40039622A /* StripsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,6 +1478,7 @@
 				6F2E93DF13AF301400C8F5D1 /* CursorCustomPointerView.m in Sources */,
 				6FEAEFCB13B07AFE0088753B /* CursorPointerInfoViewController.m in Sources */,
 				6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */,
+				6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
