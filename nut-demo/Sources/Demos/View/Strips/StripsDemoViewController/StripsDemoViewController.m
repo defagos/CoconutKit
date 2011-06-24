@@ -32,11 +32,50 @@
     [super releaseViews];
     
     self.stripContainerView = nil;
+    self.addLabel = nil;
+    self.addBeginPositionTextField = nil;
+    self.addLengthTextField = nil;
+    self.addButton = nil;
+    self.splitlabel = nil;
+    self.splitPositionTextField = nil;
+    self.splitButton = nil;
+    self.deleteAtPositionLabel = nil;
+    self.deletePositionTextField = nil;
+    self.deleteAtPositionButton = nil;
+    self.deleteAtIndexLabel = nil;
+    self.deleteIndexTextField = nil;
+    self.deleteAtIndexButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize stripContainerView = m_stripContainerView;
+
+@synthesize addLabel = m_addLabel;
+
+@synthesize addBeginPositionTextField = m_addBeginPositionTextField;
+
+@synthesize addLengthTextField = m_addLengthTextField;
+
+@synthesize addButton = m_addButton;
+
+@synthesize splitlabel = m_splitlabel;
+
+@synthesize splitPositionTextField = m_splitPositionTextField;
+
+@synthesize splitButton = m_splitButton;
+
+@synthesize deleteAtPositionLabel = m_deleteAtPositionLabel;
+
+@synthesize deletePositionTextField = m_deletePositionTextField;
+
+@synthesize deleteAtPositionButton = m_deleteAtPositionButton;
+
+@synthesize deleteAtIndexLabel = m_deleteAtIndexLabel;
+
+@synthesize deleteIndexTextField = m_deleteIndexTextField;
+
+@synthesize deleteAtIndexButton = m_deleteAtIndexButton;
 
 #pragma mark View lifecycle
 
@@ -44,9 +83,18 @@
 {
     [super viewDidLoad];
     
-    self.stripContainerView.positions = 6;
-    [self.stripContainerView addStripAtPosition:0 length:1];
-    [self.stripContainerView addStripAtPosition:3 length:2];
+    self.stripContainerView.positions = 50;
+
+    self.addLabel.text = NSLocalizedString(@"Add (begin - length)", @"Add (begin - length)");
+    self.splitlabel.text = NSLocalizedString(@"Split (position)", @"Split (position)");
+    self.deleteAtPositionLabel.text = NSLocalizedString(@"Delete (position)", @"Delete (position)");
+    self.deleteAtIndexLabel.text = NSLocalizedString(@"Delete (index)", @"Delete (index)");
+    
+    self.addBeginPositionTextField.delegate = self;
+    self.addLengthTextField.delegate = self;
+    self.splitPositionTextField.delegate = self;
+    self.deleteIndexTextField.delegate = self;
+    self.deleteIndexTextField.delegate = self;
 }
 
 #pragma mark Orientation management
@@ -58,6 +106,45 @@
     }
     
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)addStrip
+{
+    NSUInteger beginPosition = (NSUInteger)[self.addBeginPositionTextField.text intValue];
+    NSUInteger length = (NSUInteger)[self.addLengthTextField.text intValue];
+    
+    [self.stripContainerView addStripAtPosition:beginPosition length:length];
+}
+
+- (IBAction)splitStrip
+{
+    NSUInteger splitPosition = (NSUInteger)[self.splitPositionTextField.text intValue];
+    
+    [self.stripContainerView splitStripAtPosition:splitPosition];
+}
+
+- (IBAction)deleteStripAtPosition
+{
+    NSUInteger deletePosition = (NSUInteger)[self.deletePositionTextField.text intValue];
+    
+    [self.stripContainerView deleteStripsAtPosition:deletePosition];
+}
+
+- (IBAction)deleteStripAtIndex
+{
+    NSUInteger deleteIndex = (NSUInteger)[self.deleteIndexTextField.text intValue];
+    
+    [self.stripContainerView deleteStripWithIndex:deleteIndex];
+}
+
+#pragma mark UITextFieldDelegate protocol implementation
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

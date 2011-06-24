@@ -6,6 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
  
+"Add (begin - length)"="Ajout (début - longueur)";
 "Adjust inset"="Ajustement du contenu";
 "All"="Tous";
 "All fields are mandatory"="Tous les champs sont obligatoires";
@@ -23,6 +24,8 @@
 "Custom transition"="Transition personnalisée";
 "Customer Information"="Données du client";
 "DAY"="JOUR";
+"Delete (position)"="Supprimer (position)";
+"Delete (index)"="Supprimer (index)";
 "Demos"="Démos";
 "Details"="Détails";
 "Dismiss"="Fermer";
@@ -58,6 +61,7 @@
 "Saturday"="Samedi";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
+"Split (position)"="Séparer (position)";
 "Start"="Démarrer";
 "State"="Etat";
 "Stop"="Arrêter";
