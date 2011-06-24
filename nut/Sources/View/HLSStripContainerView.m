@@ -201,7 +201,7 @@
     NSUInteger index = 0;
     HLSStrip *newStrip = nil;
     for (HLSStrip *strip in self.strips) {
-        if ([strip containsPosition:position]) {
+        if (strip.beginPosition <= position && position < strip.endPosition) {
             HLSLoggerInfo(@"A strip already exists at the given position");
             return NO;
         }
