@@ -10,6 +10,14 @@
 
 @implementation UIColor (HLSExtensions)
 
++ (UIColor *)randomColor
+{
+    return [UIColor colorWithRed:(rand() % 256)/256.f
+                           green:(rand() % 256)/256.f 
+                            blue:(rand() % 256)/256.f 
+                           alpha:1.f];
+}
+
 - (UIColor *)invertColor
 {
     const CGFloat *components = CGColorGetComponents(self.CGColor);

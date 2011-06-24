@@ -12,6 +12,10 @@
 
 // TODO: Set m_positionsUsed to YES somewhere!!!!
 
+// TODO: Currently, subview layout is maybe far from optimal. The whole view hierarchy is created. Moreover, whenever
+//       a strip is added, removed or split, we trigger a complete reload. That will do the trick for now, but there
+//       is certainly room for optimization here
+
 #pragma mark -
 #pragma mark HLSStrip class interface
 
@@ -45,6 +49,10 @@
 - (void)initialize;
 
 @property (nonatomic, retain) NSArray *strips;
+
+- (CGFloat)getXPosForPosition:(NSUInteger)position;
+- (NSUInteger)getLowerPositionForXPos:(CGFloat)xPos;
+- (CGRect)getFrameForStrip:(HLSStrip *)strip;
 
 @end
 
@@ -104,6 +112,53 @@
 @synthesize enabled = m_enabled;
 
 @synthesize delegate = m_delegate;
+
+#pragma mark Laying out subviews
+
+- (void)layoutSubviews
+{
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+    for (HLSStrip *strip in self.strips) {
+        CGRect stripFrame = [self getFrameForStrip:strip];
+        UIView *stripView = [[[UIView alloc] initWithFrame:stripFrame] autorelease];
+        // TODO: Temporary. Should provide with customization hooks
+        stripView.backgroundColor = [UIColor randomColor];
+        [self addSubview:stripView];
+    }
+}
+
+#pragma mark Converting between positions and view coordinates and objects
+
+// Return the x position (in the coordinate system of the container view) corresponding to a given position
+- (CGFloat)getXPosForPosition:(NSUInteger)position
+{
+    if (position >= self.positions) {
+        HLSLoggerWarn(@"Incorrect position");
+        return 0.f;
+    }    
+    
+    return ((CGFloat)position / (self.positions - 1.f)) * self.frame.size.width;
+}
+
+// Return the position located before xPos (in the coordinate system of the container view)
+- (NSUInteger)getLowerPositionForXPos:(CGFloat)xPos
+{
+    return floorf(((self.positions - 1.f) * xPos) / self.frame.size.width);
+}
+
+// Return the frame corresponding to a strip (in the coordinate system of the container view)
+- (CGRect)getFrameForStrip:(HLSStrip *)strip
+{
+    CGFloat beginXPos = [self getXPosForPosition:strip.beginPosition];
+    CGFloat endXPos = [self getXPosForPosition:strip.endPosition];
+    return CGRectMake(beginXPos, 
+                      0.f, 
+                      endXPos - beginXPos,
+                      self.frame.size.height);
+}
 
 #pragma mark Strip management
 
@@ -184,6 +239,7 @@
         [strips insertObject:newStrip atIndex:index];
     }
     self.strips = [NSArray arrayWithArray:strips];
+    [self setNeedsLayout];
     return YES;
 }
 
@@ -209,6 +265,7 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsModified];
+    [self setNeedsLayout];
     return split;
 }
 
@@ -230,6 +287,7 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsCleaned];
+    [self setNeedsLayout];
     return deleted;
 }
 
@@ -243,6 +301,7 @@
     NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
     [stripsCopy removeObjectAtIndex:index];
     self.strips = [NSArray arrayWithArray:stripsCopy];
+    [self setNeedsLayout];
     return YES;
 }
 

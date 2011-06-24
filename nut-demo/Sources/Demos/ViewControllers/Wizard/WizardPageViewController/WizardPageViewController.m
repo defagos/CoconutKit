@@ -90,10 +90,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:(rand() % 256)/256.f
-                                                green:(rand() % 256)/256.f 
-                                                 blue:(rand() % 256)/256.f 
-                                                alpha:1.f];
+    self.view.backgroundColor = [UIColor randomColor];
     
     self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");    
     self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");

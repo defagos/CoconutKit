@@ -8,6 +8,8 @@
 
 @interface UIColor (HLSExtensions)
 
++ (UIColor *)randomColor;
+
 - (UIColor *)invertColor;
 
 @end

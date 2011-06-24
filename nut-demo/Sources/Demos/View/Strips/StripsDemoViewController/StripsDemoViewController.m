@@ -44,7 +44,9 @@
 {
     [super viewDidLoad];
     
-    // Code
+    self.stripContainerView.positions = 6;
+    [self.stripContainerView addStripAtPosition:0 length:1];
+    [self.stripContainerView addStripAtPosition:3 length:2];
 }
 
 #pragma mark Orientation management
