@@ -93,18 +93,28 @@
 @optional
 
 /**
+ * Called right before a new strip is added. Return NO to cancel
+ */
+- (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldAddStrip:(HLSStrip *)strip;
+
+/**
  * Called after a new strip has been added
  */
 - (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip;
 
 /**
- * Called right before one strip is split. Return NO if your do not want the split to happen
+ * Called right before a strip is split. Return NO to cancel
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldSplitStrip:(HLSStrip *)strip;
 
 /**
- * Called right before two strips are merged. Return NO if you do not want the merge to happen, in which case rollback
- * will occur
+ * Called right before a strip is deleted. Return NO to cancel
+ */
+- (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldDeleteStrip:(HLSStrip *)strip;
+
+/**
+ * Called right before two strips are merged. Return NO if to cancel, in which case the strips will be rollbacked
+ * to their original position
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldMergeStrip:(HLSStrip *)strip1 withStrip:(HLSStrip *)strip2;
 

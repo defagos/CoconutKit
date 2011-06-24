@@ -215,6 +215,13 @@
                                         endPosition:position + (NSUInteger)ceilf(length / 2.f)];
     }
     
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldAddStrip:)]) {
+        if (! [self.delegate stripContainerView:self shouldAddStrip:newStrip]) {
+            HLSLoggerInfo(@"Cancelled creation of strip %@", newStrip);
+            return NO;
+        }
+    }
+    
     // Insert the new strip in the correct order so that the array is sorted by beginPosition
     NSMutableArray *strips = [NSMutableArray arrayWithArray:self.strips];
     if (index == [self.strips count]) {
@@ -225,6 +232,11 @@
     }
     self.strips = [NSArray arrayWithArray:strips];
     [self setNeedsLayout];
+    
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
+        [self.delegate stripContainerView:self hasAddedStrip:newStrip];
+    }
+    
     return YES;
 }
 
@@ -244,6 +256,13 @@
     NSMutableArray *stripsModified = [NSMutableArray array];
     for (HLSStrip *strip in self.strips) {
         if ([strip containsPosition:position] && position != strip.beginPosition && position != strip.endPosition) {
+            if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldSplitStrip:)]) {
+                if (! [self.delegate stripContainerView:self shouldSplitStrip:strip]) {
+                    HLSLoggerInfo(@"Cancelled split of strip %@", strip);
+                    return NO;
+                }
+            }
+            
             HLSStrip *subStrip1 = [HLSStrip stripWithBeginPosition:strip.beginPosition endPosition:position];
             [stripsModified addObject:subStrip1];
             HLSStrip *subStrip2 = [HLSStrip stripWithBeginPosition:position endPosition:strip.endPosition];
@@ -258,6 +277,7 @@
     if (split) {
         [self setNeedsLayout];
     }
+        
     return split;
 }
 
@@ -275,6 +295,14 @@
             [stripsCleaned addObject:strip];
         }
         else {
+            if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
+                if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
+                    HLSLoggerInfo(@"Cancelled deletion of strip %@", strip);
+                    [stripsCleaned addObject:strip];
+                    continue;
+                }
+            }
+            
             deleted = YES;
         }
     }
@@ -290,6 +318,14 @@
     if (index >= [self.strips count]) {
         HLSLoggerWarn(@"Incorrect index");
         return NO;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
+        HLSStrip *strip = [self.strips objectAtIndex:index];
+        if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
+            HLSLoggerInfo(@"Cancelled deletion of strip %@", strip);
+            return NO;
+        }
     }
     
     NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
