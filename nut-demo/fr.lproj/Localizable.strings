@@ -80,6 +80,7 @@
 "Thursday"="Jeudi";
 "Transition"="Transition";
 "Tuesday"="Mardi";
+"Valid positions: 0 - %d"="Positions valides: 0 - %d";
 "Views"="Vues";
 "View controllers"="View controllers";
 "Wednesday"="Mercredi";

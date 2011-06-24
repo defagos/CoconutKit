@@ -12,6 +12,7 @@
 @interface StripsDemoViewController : HLSViewController <UITextFieldDelegate> {
 @private
     HLSStripContainerView *m_stripContainerView;
+    UILabel *m_infoLabel;
     UILabel *m_addLabel;
     UITextField *m_addBeginPositionTextField;
     UITextField *m_addLengthTextField;
@@ -28,6 +29,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet HLSStripContainerView *stripContainerView;
+@property (nonatomic, retain) IBOutlet UILabel *infoLabel;
 @property (nonatomic, retain) IBOutlet UILabel *addLabel;
 @property (nonatomic, retain) IBOutlet UITextField *addBeginPositionTextField;
 @property (nonatomic, retain) IBOutlet UITextField *addLengthTextField;

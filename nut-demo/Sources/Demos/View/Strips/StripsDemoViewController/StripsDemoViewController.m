@@ -32,6 +32,7 @@
     [super releaseViews];
     
     self.stripContainerView = nil;
+    self.infoLabel = nil;
     self.addLabel = nil;
     self.addBeginPositionTextField = nil;
     self.addLengthTextField = nil;
@@ -50,6 +51,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize stripContainerView = m_stripContainerView;
+
+@synthesize infoLabel = m_infoLabel;
 
 @synthesize addLabel = m_addLabel;
 
@@ -85,6 +88,9 @@
     
     self.stripContainerView.positions = 50;
 
+    self.infoLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Valid positions: 0 - %d", @"Valid positions: 0 - %d"), 
+                           self.stripContainerView.positions - 1];
+    
     self.addLabel.text = NSLocalizedString(@"Add (begin - length)", @"Add (begin - length)");
     self.splitlabel.text = NSLocalizedString(@"Split (position)", @"Split (position)");
     self.deleteAtPositionLabel.text = NSLocalizedString(@"Delete (position)", @"Delete (position)");

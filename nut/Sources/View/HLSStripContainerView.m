@@ -175,7 +175,7 @@
     }
     
     if (length >= self.positions) {
-        HLSLoggerWarn(@"Default length must not exceed number of available positions");
+        HLSLoggerWarn(@"Length must not exceed number of available positions");
         return NO;
     }
     
@@ -265,7 +265,9 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsModified];
-    [self setNeedsLayout];
+    if (split) {
+        [self setNeedsLayout];
+    }
     return split;
 }
 
@@ -287,7 +289,9 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsCleaned];
-    [self setNeedsLayout];
+    if (deleted) {
+        [self setNeedsLayout];
+    }
     return deleted;
 }
 
