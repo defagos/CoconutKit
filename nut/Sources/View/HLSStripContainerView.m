@@ -16,8 +16,6 @@
 //       a strip is added, removed or split, we trigger a complete reload. That will do the trick for now, but there
 //       is certainly room for optimization here
 
-// TODO: Bug with small strips when added. Seems not to be able to insert in such cases
-
 @interface HLSStripContainerView ()
 
 - (void)initialize;
@@ -108,9 +106,20 @@
     
     for (HLSStrip *strip in self.strips) {
         CGRect stripFrame = [self frameForStrip:strip];
-        UIView *stripView = [[[UIView alloc] initWithFrame:stripFrame] autorelease];
-        // TODO: Temporary. Should provide with customization hooks
-        stripView.backgroundColor = [UIColor randomColor];
+        
+        UIView *stripView = nil;
+        if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
+            stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
+            stripView.frame = stripFrame;
+        }
+        
+        // If no view provied, use default style
+        if (! stripView) {
+            // TODO: Temporary. Should use beautiful image :-)
+            stripView = [[[UIView alloc] initWithFrame:stripFrame] autorelease];
+            stripView.backgroundColor = [UIColor randomColor];
+        }
+        
         [self addSubview:stripView];
     }
 }

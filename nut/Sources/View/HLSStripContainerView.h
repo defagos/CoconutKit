@@ -55,7 +55,7 @@
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length;
 
 /**
- * Add a strip with the default length
+ * Add a strip with the default length. Same behaviour as addStripAtPosition:length: otherwise
  */
 - (BOOL)addStripAtPosition:(NSUInteger)position;
 
@@ -96,6 +96,12 @@
  * Called right before a new strip is added. Return NO to cancel
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldAddStrip:(HLSStrip *)strip;
+
+/**
+ * Called when a split view is created. Return the view to be used (must be properly stretchable). If not implemented or 
+ * if returning nil, a default style is applied.
+ */
+- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip;
 
 /**
  * Called after a new strip has been added
