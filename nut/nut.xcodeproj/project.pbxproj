@@ -132,6 +132,8 @@
 		6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD2313068956004B9617 /* HLSViewController.m */; };
 		6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */; };
 		6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */; };
+		6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */; };
+		6FFFBA0C13B4A94300FD9A82 /* HLSStrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFBA0A13B4A94300FD9A82 /* HLSStrip.m */; };
 		AA747D9F0F9514B9006C5449 /* nut_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		DA83830D131E78B800ECAED3 /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA83830A131E78B800ECAED3 /* HLSWebViewController.h */; };
@@ -269,6 +271,8 @@
 		6FBDAD2313068956004B9617 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
+		6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStrip.h; sourceTree = "<group>"; };
+		6FFFBA0A13B4A94300FD9A82 /* HLSStrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStrip.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* nut_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libnut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnut.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -528,6 +532,8 @@
 			children = (
 				6F43346A13A238540072F5D8 /* HLSCursor.h */,
 				6F43346B13A238540072F5D8 /* HLSCursor.m */,
+				6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */,
+				6FFFBA0A13B4A94300FD9A82 /* HLSStrip.m */,
 				6FA6C20B13B32C190039622A /* HLSStripContainerView.h */,
 				6FA6C20C13B32C190039622A /* HLSStripContainerView.m */,
 				6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */,
@@ -655,6 +661,7 @@
 				6F43346C13A238540072F5D8 /* HLSCursor.h in Headers */,
 				6FAF210613A7C2FA009A5645 /* UIColor+HLSExtensions.h in Headers */,
 				6FA6C20D13B32C190039622A /* HLSStripContainerView.h in Headers */,
+				6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +780,7 @@
 				6F43346D13A238540072F5D8 /* HLSCursor.m in Sources */,
 				6FAF210713A7C2FA009A5645 /* UIColor+HLSExtensions.m in Sources */,
 				6FA6C20E13B32C190039622A /* HLSStripContainerView.m in Sources */,
+				6FFFBA0C13B4A94300FD9A82 /* HLSStrip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

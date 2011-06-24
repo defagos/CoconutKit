@@ -31,6 +31,7 @@ HLSServiceSettings.h
 HLSSingleValuePicker.h
 HLSSingleValuePickerViewController.h
 HLSStandardWidgetConstants.h
+HLSStrip.h
 HLSStripContainerView.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h

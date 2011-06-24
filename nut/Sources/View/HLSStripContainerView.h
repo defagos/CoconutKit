@@ -10,6 +10,8 @@
 //       to get the strip itself without having to return the rectangular view. Well, maybe that's too much
 // Remark: Strips must never overlap, even when they are moved. This way, at most two strips can be merged at any time
 
+#import "HLSStrip.h"
+
 // Forward declarations
 @protocol HLSStripContainerViewDelegate;
 
@@ -91,14 +93,19 @@
 @optional
 
 /**
- * Called right before a strip is splot. Return NO if your do not want the split to happen
+ * Called after a new strip has been added
  */
-- (BOOL)stripContainerViewShouldSplitStrip:(HLSStripContainerView *)stripContainerView;
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip;
+
+/**
+ * Called right before one strip is split. Return NO if your do not want the split to happen
+ */
+- (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldSplitStrip:(HLSStrip *)strip;
 
 /**
  * Called right before two strips are merged. Return NO if you do not want the merge to happen, in which case rollback
  * will occur
  */
-- (BOOL)stripContainerViewShouldMergeStrips:(HLSStripContainerView *)stripContainerView;
+- (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldMergeStrip:(HLSStrip *)strip1 withStrip:(HLSStrip *)strip2;
 
 @end

@@ -18,34 +18,6 @@
 
 // TODO: Bug with small strips when added. Seems not to be able to insert in such cases
 
-#pragma mark -
-#pragma mark HLSStrip class interface
-
-/**
- * Lightweight object representing a strip in the container view
- */
-@interface HLSStrip : NSObject {
-@private
-    NSUInteger m_beginPosition;
-    NSUInteger m_endPosition;
-}
-
-+ (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
-+ (HLSStrip *)strip;
-
-@property (nonatomic, assign) NSUInteger beginPosition;
-@property (nonatomic, assign) NSUInteger endPosition;
-
-- (BOOL)isOverlappingWithStrip:(HLSStrip *)strip;
-- (BOOL)isContainedInStrip:(HLSStrip *)strip;
-
-- (BOOL)containsPosition:(NSUInteger)position;
-
-@end
-
-#pragma mark -
-#pragma mark HLSStripContainerView class extension
-
 @interface HLSStripContainerView ()
 
 - (void)initialize;
@@ -57,9 +29,6 @@
 - (CGRect)frameForStrip:(HLSStrip *)strip;
 
 @end
-
-#pragma mark -
-#pragma mark HLSStripContainerView class implementation
 
 @implementation HLSStripContainerView
 
@@ -336,6 +305,7 @@
 {
     UITouch *touch = [touches anyObject];
     switch ([touch tapCount]) {
+        // Double tap to add a strip
         case 2: {
             CGPoint pos = [touch locationInView:self];
             NSUInteger position = [self lowerPositionForXPos:pos.x];
@@ -378,62 +348,6 @@
             self,
             self.positions,
             self.strips];
-}
-
-@end
-
-#pragma mark -
-#pragma mark HLSStrip class implementation
-
-@implementation HLSStrip
-
-#pragma mark Class methods
-
-+ (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
-{
-    HLSStrip *strip = [[[[self class] alloc] init] autorelease];
-    strip.beginPosition = beginPosition;
-    strip.endPosition = endPosition;
-    return strip;
-}
-
-+ (HLSStrip *)strip
-{
-    return [[[[self class] alloc] init] autorelease];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize beginPosition = m_beginPosition;
-
-@synthesize endPosition = m_endPosition;
-
-#pragma mark Testing strips
-
-- (BOOL)isOverlappingWithStrip:(HLSStrip *)strip
-{
-    return self.endPosition > strip.beginPosition && strip.endPosition > self.beginPosition;
-}
-
-- (BOOL)isContainedInStrip:(HLSStrip *)strip
-{
-    return strip.beginPosition <= self.beginPosition && self.endPosition <= strip.endPosition;
-}
-
-- (BOOL)containsPosition:(NSUInteger)position
-{
-    return self.beginPosition <= position && position <= self.endPosition;
-}
-
-#pragma mark Description
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; beginPosition: %d; endPosition: %d>", 
-            [self class],
-            self,
-            self.beginPosition,
-            self.endPosition];
 }
 
 @end

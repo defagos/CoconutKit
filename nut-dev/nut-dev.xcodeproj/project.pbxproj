@@ -155,6 +155,7 @@
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FEF8557131F77490015B57C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEF8553131F77490015B57C /* MainWindow.xib */; };
 		6FF4B012139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4B011139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.m */; };
+		6FFFBA0F13B4AA1700FD9A82 /* HLSStrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFBA0E13B4AA1700FD9A82 /* HLSStrip.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -411,6 +412,8 @@
 		6FEF8555131F77490015B57C /* nut_dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "nut_dev-Info.plist"; sourceTree = "<group>"; };
 		6FF4B010139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSExclusiveTouch.h"; sourceTree = "<group>"; };
 		6FF4B011139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+HLSExclusiveTouch.m"; sourceTree = "<group>"; };
+		6FFFBA0D13B4AA1700FD9A82 /* HLSStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStrip.h; sourceTree = "<group>"; };
+		6FFFBA0E13B4AA1700FD9A82 /* HLSStrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStrip.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +704,8 @@
 			children = (
 				6FAF20F713A24D36009A5645 /* HLSCursor.h */,
 				6FAF20F813A24D36009A5645 /* HLSCursor.m */,
+				6FFFBA0D13B4AA1700FD9A82 /* HLSStrip.h */,
+				6FFFBA0E13B4AA1700FD9A82 /* HLSStrip.m */,
 				6FA6C20F13B337190039622A /* HLSStripContainerView.h */,
 				6FA6C21013B337190039622A /* HLSStripContainerView.m */,
 				6FEF83F2131F76510015B57C /* HLSSubtitleTableViewCell.h */,
@@ -1479,6 +1484,7 @@
 				6FEAEFCB13B07AFE0088753B /* CursorPointerInfoViewController.m in Sources */,
 				6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */,
 				6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */,
+				6FFFBA0F13B4AA1700FD9A82 /* HLSStrip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

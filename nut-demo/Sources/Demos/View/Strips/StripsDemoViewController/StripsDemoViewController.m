@@ -99,8 +99,14 @@
     self.addBeginPositionTextField.delegate = self;
     self.addLengthTextField.delegate = self;
     self.splitPositionTextField.delegate = self;
+    self.deletePositionTextField.delegate = self;
     self.deleteIndexTextField.delegate = self;
-    self.deleteIndexTextField.delegate = self;
+    
+    self.addBeginPositionTextField.text = @"0";
+    self.addLengthTextField.text = @"0";
+    self.splitPositionTextField.text = @"0";
+    self.deletePositionTextField.text = @"0";
+    self.deleteIndexTextField.text = @"0";
 }
 
 #pragma mark Orientation management
