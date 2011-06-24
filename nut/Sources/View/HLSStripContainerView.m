@@ -107,7 +107,11 @@
     }
     
     m_positions = positions;
+    
+    self.defaultLength = m_positions / 10;
 }
+
+@synthesize defaultLength = m_defaultLength;
 
 @synthesize enabled = m_enabled;
 
@@ -241,6 +245,11 @@
     self.strips = [NSArray arrayWithArray:strips];
     [self setNeedsLayout];
     return YES;
+}
+
+- (BOOL)addStripAtPosition:(NSUInteger)position
+{
+    return [self addStripAtPosition:position length:self.defaultLength];
 }
 
 - (BOOL)splitStripAtPosition:(NSUInteger)position

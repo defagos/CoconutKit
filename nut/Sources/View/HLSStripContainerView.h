@@ -25,6 +25,7 @@
 @private
     NSArray *m_strips;                      // contains HLSStrip objects (ordered by beginPosition)
     NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
+    NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
@@ -38,12 +39,23 @@
 @property (nonatomic, assign) NSUInteger positions;
 
 /**
+ * The default length of strips when added interactively or using addStripAtPosition:. Reset to 1/10th of the number of
+ * (positions - 1) when positions is changed
+ */
+@property (nonatomic, assign) NSUInteger defaultLength;
+
+/**
  * Add a strip with the the specified length, trying to center it at the specified position. If a strip already exists at
  * this position, nothing happens. If there is not enough space for the complete strip to fit, then all available
  * space will be filled.
  * The method returns YES iff a strip could be added.
  */
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length;
+
+/**
+ * Add a strip with the default length
+ */
+- (BOOL)addStripAtPosition:(NSUInteger)position;
 
 /**
  * Split a strip into two strips at some position. If no strip exists at this position, this method does nothing.
