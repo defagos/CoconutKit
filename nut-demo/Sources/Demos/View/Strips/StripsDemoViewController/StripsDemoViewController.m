@@ -114,6 +114,14 @@
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
+#pragma mark UITextFieldDelegate protocol implementation
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)addStrip
@@ -143,14 +151,6 @@
     NSUInteger deleteIndex = (NSUInteger)[self.deleteIndexTextField.text intValue];
     
     [self.stripContainerView deleteStripWithIndex:deleteIndex];
-}
-
-#pragma mark UITextFieldDelegate protocol implementation
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 @end
