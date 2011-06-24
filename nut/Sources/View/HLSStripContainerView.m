@@ -334,9 +334,19 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    NSUInteger position = [self lowerPositionForXPos:pos.x];
-    [self addStripAtPosition:position];
+    UITouch *touch = [touches anyObject];
+    switch ([touch tapCount]) {
+        case 2: {
+            CGPoint pos = [touch locationInView:self];
+            NSUInteger position = [self lowerPositionForXPos:pos.x];
+            [self addStripAtPosition:position];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
