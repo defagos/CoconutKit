@@ -12,10 +12,6 @@
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
-// TODO: Currently, subview layout is maybe far from optimal. The whole view hierarchy is created. Moreover, whenever
-//       a strip is added, removed or split, we trigger a complete reload. That will do the trick for now, but there
-//       is certainly room for optimization here
-
 @interface HLSStripContainerView ()
 
 - (void)initialize;
@@ -161,9 +157,11 @@
     
     // If no view provied, use default style
     if (! stripView) {
-        // TODO: Temporary. Should use beautiful image :-)
-        stripView = [[[UIView alloc] init] autorelease];
-        stripView.backgroundColor = [UIColor randomColor];
+        stripView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nut_strip_default_background.png"]] autorelease];
+        stripView.contentStretch = CGRectMake(0.5f, 
+                                              0.5f, 
+                                              1.f / stripView.frame.size.width, 
+                                              1.f / stripView.frame.size.height);
     }
     
     [self addSubview:stripView];
