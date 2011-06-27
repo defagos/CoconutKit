@@ -8,11 +8,14 @@
 
 #import "HLSStripContainerView.h"
 
+#import "HLSAnimation.h"
 #import "HLSLogger.h"
+
+static NSString *kAddStripAnimationTag = @"addStrip";
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
-@interface HLSStripContainerView ()
+@interface HLSStripContainerView () <HLSAnimationDelegate>
 
 - (void)initialize;
 
@@ -26,6 +29,8 @@
 - (UIView *)addViewForStrip:(HLSStrip *)strip;
 - (void)removeViewForStrip:(HLSStrip *)strip;
 - (UIView *)viewForStrip:(HLSStrip *)strip;
+
+- (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
 
 @end
 
@@ -285,10 +290,9 @@
     self.strips = [NSArray arrayWithArray:strips];
     
     [self addViewForStrip:newStrip];
-        
-    if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
-        [self.delegate stripContainerView:self hasAddedStrip:newStrip];
-    }
+    
+    HLSAnimation *animation = [self animationAddingStrip:newStrip];
+    [animation playAnimated:animated];
     
     return YES;
 }
@@ -321,11 +325,11 @@
             HLSStrip *subStrip1 = [HLSStrip stripWithBeginPosition:strip.beginPosition endPosition:position];
             [stripsModified addObject:subStrip1];
             [self addViewForStrip:subStrip1];
-                         
+            
             HLSStrip *subStrip2 = [HLSStrip stripWithBeginPosition:position endPosition:strip.endPosition];
             [stripsModified addObject:subStrip2];
             [self addViewForStrip:subStrip2];
-             
+            
             split = YES;
         }
         else {
@@ -333,7 +337,7 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsModified];
-        
+    
     return split;
 }
 
@@ -390,6 +394,45 @@
     [stripsCopy removeObjectAtIndex:index];
     self.strips = [NSArray arrayWithArray:stripsCopy];
     return YES;
+}
+
+#pragma mark Animations
+
+- (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip
+{
+    UIView *stripView = [self viewForStrip:strip];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)
+                                                                    alphaVariation:0.f];
+    animationStep1.duration = 0.;
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformMakeScale(120.f, 110.f)
+                                                                    alphaVariation:0.f];
+    animationStep2.duration = 0.15;
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformMakeScale(100.f/120.f, 100.f/120.f)
+                                                                    alphaVariation:0.f];
+    animationStep3.duration = 0.15;
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    animation.delegate = self;
+    animation.lockingUI = YES;
+    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
+    animation.tag = kAddStripAnimationTag;
+    
+    return animation;
+}
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationDidStop:(HLSAnimation *)animation
+{
+    if ([animation.tag isEqual:kAddStripAnimationTag]) {
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
+            HLSStrip *newStrip = [animation.userInfo objectForKey:@"strip"];
+            [self.delegate stripContainerView:self hasAddedStrip:newStrip];
+        }        
+    }
 }
 
 #pragma mark Touch events

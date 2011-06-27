@@ -9,7 +9,7 @@
 /**
  * Designated initializer: init
  */
-@interface StripsDemoViewController : HLSViewController <UITextFieldDelegate> {
+@interface StripsDemoViewController : HLSViewController <HLSStripContainerViewDelegate, UITextFieldDelegate> {
 @private
     HLSStripContainerView *m_stripContainerView;
     UILabel *m_infoLabel;

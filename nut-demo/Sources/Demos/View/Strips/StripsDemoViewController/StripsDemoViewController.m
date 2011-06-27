@@ -87,6 +87,7 @@
     [super viewDidLoad];
     
     self.stripContainerView.positions = 50;
+    self.stripContainerView.delegate = self;
 
     self.infoLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Valid positions: 0 - %d", @"Valid positions: 0 - %d"), 
                            self.stripContainerView.positions - 1];
@@ -118,6 +119,13 @@
     }
     
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+#pragma mark HLSStripContainerViewDelegate protocol implementation
+
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip
+{
+
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
