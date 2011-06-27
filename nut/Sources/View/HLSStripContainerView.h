@@ -98,10 +98,11 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldAddStrip:(HLSStrip *)strip;
 
 /**
- * Called when a split view is created. Return the view to be used (must be properly stretchable). If not implemented or 
- * if returning nil, a default style is applied.
+ * Called when a split view is created. Return the view to be used. If not implemented or if returning nil, a default 
+ * style is applied. The frame can be used as a hint to tailor the view contents to its size (if your view displays
+ * some information, you probably want to hide it completely rather than truncate it when the view size is small).
  */
-- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip;
+- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip withFrame:(CGRect)frame;
 
 /**
  * Called after a new strip has been added

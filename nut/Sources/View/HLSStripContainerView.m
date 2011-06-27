@@ -108,8 +108,8 @@
         CGRect stripFrame = [self frameForStrip:strip];
         
         UIView *stripView = nil;
-        if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
-            stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
+        if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:withFrame:)]) {
+            stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip withFrame:stripFrame];
             stripView.frame = stripFrame;
         }
         
