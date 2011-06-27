@@ -135,28 +135,28 @@
     NSUInteger beginPosition = (NSUInteger)[self.addBeginPositionTextField.text intValue];
     NSUInteger length = (NSUInteger)[self.addLengthTextField.text intValue];
     
-    [self.stripContainerView addStripAtPosition:beginPosition length:length];
+    [self.stripContainerView addStripAtPosition:beginPosition length:length animated:YES];
 }
 
 - (IBAction)splitStrip
 {
     NSUInteger splitPosition = (NSUInteger)[self.splitPositionTextField.text intValue];
     
-    [self.stripContainerView splitStripAtPosition:splitPosition];
+    [self.stripContainerView splitStripAtPosition:splitPosition animated:YES];
 }
 
 - (IBAction)deleteStripAtPosition
 {
     NSUInteger deletePosition = (NSUInteger)[self.deletePositionTextField.text intValue];
     
-    [self.stripContainerView deleteStripsAtPosition:deletePosition];
+    [self.stripContainerView deleteStripsAtPosition:deletePosition animated:YES];
 }
 
 - (IBAction)deleteStripAtIndex
 {
     NSUInteger deleteIndex = (NSUInteger)[self.deleteIndexTextField.text intValue];
     
-    [self.stripContainerView deleteStripWithIndex:deleteIndex];
+    [self.stripContainerView deleteStripWithIndex:deleteIndex animated:YES];
 }
 
 @end

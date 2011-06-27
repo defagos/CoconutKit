@@ -26,6 +26,7 @@
 @interface HLSStripContainerView : UIView {
 @private
     NSArray *m_strips;                      // contains HLSStrip objects (ordered by beginPosition)
+    NSMutableDictionary *m_stripToViewMap;  // maps a strip to its corresponding view
     NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
@@ -52,31 +53,31 @@
  * space will be filled.
  * The method returns YES iff a strip could be added.
  */
-- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length;
+- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
 
 /**
  * Add a strip with the default length. Same behaviour as addStripAtPosition:length: otherwise
  */
-- (BOOL)addStripAtPosition:(NSUInteger)position;
+- (BOOL)addStripAtPosition:(NSUInteger)position animated:(BOOL)animated;
 
 /**
  * Split a strip into two strips at some position. If no strip exists at this position, this method does nothing.
  * The method returns YES iff a strip could be splitted.
  */
-- (BOOL)splitStripAtPosition:(NSUInteger)position;
+- (BOOL)splitStripAtPosition:(NSUInteger)position animated:(BOOL)animated;
 
 /**
  * Delete any strip lying at the specified position. The method in general deletes one strip, except if position
  * is where two neighbouring strips meet (in which case two strips will be deleted)
  * The method returns YES iff at least one strip could be deleted.
  */
-- (BOOL)deleteStripsAtPosition:(NSUInteger)position;
+- (BOOL)deleteStripsAtPosition:(NSUInteger)position animated:(BOOL)animated;
 
 /**
  * Delete the strip with the specified index (if it exists)
  * The method returns YES iff a strip could be deleted.
  */
-- (BOOL)deleteStripWithIndex:(NSUInteger)index;
+- (BOOL)deleteStripWithIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
  * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show strips
@@ -99,10 +100,9 @@
 
 /**
  * Called when a split view is created. Return the view to be used. If not implemented or if returning nil, a default 
- * style is applied. The frame can be used as a hint to tailor the view contents to its size (if your view displays
- * some information, you probably want to hide it completely rather than truncate it when the view size is small).
+ * style is applied. The view returned should exhibit proper stretching behaviour
  */
-- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip withFrame:(CGRect)frame;
+- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip;
 
 /**
  * Called after a new strip has been added

@@ -10,7 +10,7 @@
 
 #import "HLSLogger.h"
 
-// TODO: Set m_positionsUsed to YES somewhere!!!!
+// TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
 // TODO: Currently, subview layout is maybe far from optimal. The whole view hierarchy is created. Moreover, whenever
 //       a strip is added, removed or split, we trigger a complete reload. That will do the trick for now, but there
@@ -21,10 +21,15 @@
 - (void)initialize;
 
 @property (nonatomic, retain) NSArray *strips;
+@property (nonatomic, retain) NSMutableDictionary *stripToViewMap;
 
 - (CGFloat)xPosForPosition:(NSUInteger)position;
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
 - (CGRect)frameForStrip:(HLSStrip *)strip;
+
+- (UIView *)addViewForStrip:(HLSStrip *)strip;
+- (void)removeViewForStrip:(HLSStrip *)strip;
+- (UIView *)viewForStrip:(HLSStrip *)strip;
 
 @end
 
@@ -52,11 +57,13 @@
 {
     self.positions = NSUIntegerMax;
     self.strips = [NSMutableArray array];
+    self.stripToViewMap = [NSMutableDictionary dictionary];
 }
 
 - (void)dealloc
 {
     self.strips = nil;
+    self.stripToViewMap = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -65,6 +72,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize strips = m_strips;
+
+@synthesize stripToViewMap = m_stripToViewMap;
 
 @synthesize positions = m_positions;
 
@@ -100,27 +109,9 @@
 
 - (void)layoutSubviews
 {
-    for (UIView *subview in self.subviews) {
-        [subview removeFromSuperview];
-    }
-    
     for (HLSStrip *strip in self.strips) {
-        CGRect stripFrame = [self frameForStrip:strip];
-        
-        UIView *stripView = nil;
-        if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:withFrame:)]) {
-            stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip withFrame:stripFrame];
-            stripView.frame = stripFrame;
-        }
-        
-        // If no view provied, use default style
-        if (! stripView) {
-            // TODO: Temporary. Should use beautiful image :-)
-            stripView = [[[UIView alloc] initWithFrame:stripFrame] autorelease];
-            stripView.backgroundColor = [UIColor randomColor];
-        }
-        
-        [self addSubview:stripView];
+        UIView *stripView = [self viewForStrip:strip];
+        stripView.frame = [self frameForStrip:strip];
     }
 }
 
@@ -154,9 +145,63 @@
                       self.frame.size.height);
 }
 
+// Create and install the view associated with a strip, and register it into the index
+- (UIView *)addViewForStrip:(HLSStrip *)strip
+{
+    NSValue *stripKey = [NSValue valueWithPointer:strip];
+    UIView *stripView = [self.stripToViewMap objectForKey:stripKey];
+    if (stripView) {
+        HLSLoggerError(@"View already added for strip %@", strip);
+        return stripView;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
+        stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
+    }
+    
+    // If no view provied, use default style
+    if (! stripView) {
+        // TODO: Temporary. Should use beautiful image :-)
+        stripView = [[[UIView alloc] init] autorelease];
+        stripView.backgroundColor = [UIColor randomColor];
+    }
+    
+    [self addSubview:stripView];
+    [self.stripToViewMap setObject:stripView forKey:stripKey];
+    
+    return stripView;
+}
+
+// Remove the view associated with a strip, and unregister it from the index
+- (void)removeViewForStrip:(HLSStrip *)strip
+{
+    UIView *stripView = [self viewForStrip:strip];
+    if (stripView) {
+        [stripView removeFromSuperview];
+    }
+    else {
+        HLSLoggerError(@"View not added for strip %@", strip);
+    }
+    
+    NSValue *stripKey = [NSValue valueWithPointer:strip];
+    [self.stripToViewMap removeObjectForKey:stripKey];
+}
+
+// Return the view associated with a strip
+- (UIView *)viewForStrip:(HLSStrip *)strip
+{
+    NSValue *stripKey = [NSValue valueWithPointer:strip];
+    UIView *stripView = [self.stripToViewMap objectForKey:stripKey];
+    if (! stripView) {
+        HLSLoggerError(@"View not found for strip %@", strip);
+        return nil;
+    }
+    return stripView;
+}
+
 #pragma mark Strip management
 
-- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length
+- (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated
 {    
     if (position >= self.positions) {
         HLSLoggerWarn(@"Incorrect position");
@@ -240,8 +285,9 @@
         [strips insertObject:newStrip atIndex:index];
     }
     self.strips = [NSArray arrayWithArray:strips];
-    [self setNeedsLayout];
     
+    [self addViewForStrip:newStrip];
+        
     if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
         [self.delegate stripContainerView:self hasAddedStrip:newStrip];
     }
@@ -249,12 +295,12 @@
     return YES;
 }
 
-- (BOOL)addStripAtPosition:(NSUInteger)position
+- (BOOL)addStripAtPosition:(NSUInteger)position animated:(BOOL)animated
 {
-    return [self addStripAtPosition:position length:self.defaultLength];
+    return [self addStripAtPosition:position length:self.defaultLength animated:animated];
 }
 
-- (BOOL)splitStripAtPosition:(NSUInteger)position
+- (BOOL)splitStripAtPosition:(NSUInteger)position animated:(BOOL)animated
 {
     if (position >= self.positions) {
         HLSLoggerWarn(@"Incorrect position");
@@ -272,10 +318,16 @@
                 }
             }
             
+            [self removeViewForStrip:strip];
+            
             HLSStrip *subStrip1 = [HLSStrip stripWithBeginPosition:strip.beginPosition endPosition:position];
             [stripsModified addObject:subStrip1];
+            [self addViewForStrip:subStrip1];
+                         
             HLSStrip *subStrip2 = [HLSStrip stripWithBeginPosition:position endPosition:strip.endPosition];
             [stripsModified addObject:subStrip2];
+            [self addViewForStrip:subStrip2];
+             
             split = YES;
         }
         else {
@@ -283,14 +335,11 @@
         }
     }
     self.strips = [NSArray arrayWithArray:stripsModified];
-    if (split) {
-        [self setNeedsLayout];
-    }
         
     return split;
 }
 
-- (BOOL)deleteStripsAtPosition:(NSUInteger)position
+- (BOOL)deleteStripsAtPosition:(NSUInteger)position animated:(BOOL)animated
 {
     if (position >= self.positions) {
         HLSLoggerWarn(@"Incorrect position");
@@ -312,17 +361,16 @@
                 }
             }
             
+            [self removeViewForStrip:strip];
+            
             deleted = YES;
         }
     }
     self.strips = [NSArray arrayWithArray:stripsCleaned];
-    if (deleted) {
-        [self setNeedsLayout];
-    }
     return deleted;
 }
 
-- (BOOL)deleteStripWithIndex:(NSUInteger)index
+- (BOOL)deleteStripWithIndex:(NSUInteger)index animated:(BOOL)animated
 {
     if (index >= [self.strips count]) {
         HLSLoggerWarn(@"Incorrect index");
@@ -337,10 +385,12 @@
         }
     }
     
+    HLSStrip *strip = [self.strips objectAtIndex:index];
+    [self removeViewForStrip:strip];
+    
     NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
     [stripsCopy removeObjectAtIndex:index];
     self.strips = [NSArray arrayWithArray:stripsCopy];
-    [self setNeedsLayout];
     return YES;
 }
 
@@ -354,7 +404,7 @@
         case 2: {
             CGPoint pos = [touch locationInView:self];
             NSUInteger position = [self lowerPositionForXPos:pos.x];
-            [self addStripAtPosition:position];
+            [self addStripAtPosition:position animated:YES];
             break;
         }
             
