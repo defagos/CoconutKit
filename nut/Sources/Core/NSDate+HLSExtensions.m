@@ -38,4 +38,15 @@
     return comparisonResult == NSOrderedSame;
 }
 
+- (NSDate *)firstDayOfTheWeek
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *firstDayOfWeek = nil;
+    [calendar rangeOfUnit:NSWeekCalendarUnit 
+                startDate:&firstDayOfWeek
+                 interval:NULL
+                  forDate:self];
+    return firstDayOfWeek;
+}
+
 @end
