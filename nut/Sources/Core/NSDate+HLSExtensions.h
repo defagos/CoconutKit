@@ -9,6 +9,12 @@
 @interface NSDate (HLSExtensions)
 
 /**
+ * Sometimes it is just easier to work with dates at noon to avoid issues regarding timezones. This method
+ * just return the receiver date at noon
+ */
+- (NSDate *)dateAtNoon;
+
+/**
  * Compare the receiver with another date
  */
 - (NSComparisonResult)compareDaysWithDate:(NSDate *)date;

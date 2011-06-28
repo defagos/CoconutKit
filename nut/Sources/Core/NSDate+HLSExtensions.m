@@ -10,6 +10,15 @@
 
 @implementation NSDate (HLSExtensions)
 
+- (NSDate *)dateAtNoon
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:self];
+    [dateComponents setHour:12];
+    return [calendar dateFromComponents:dateComponents];
+}
+
 - (NSComparisonResult)compareDaysWithDate:(NSDate *)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
