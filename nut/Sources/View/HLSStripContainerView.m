@@ -351,26 +351,21 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     BOOL deleted = NO;
-    NSMutableArray *stripsCleaned = [NSMutableArray array];
     for (HLSStrip *strip in self.strips) {
-        if (! [strip containsPosition:position]) {
-            [stripsCleaned addObject:strip];
-        }
-        else {
+        if ([strip containsPosition:position]) {
             if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
                 if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
                     HLSLoggerInfo(@"Cancelled deletion of strip %@", strip);
-                    [stripsCleaned addObject:strip];
                     continue;
                 }
             }
             
-            [self removeViewForStrip:strip];
+            HLSAnimation *animation = [self animationRemovingStrip:strip];
+            [animation playAnimated:animated];
             
             deleted = YES;
         }
     }
-    self.strips = [NSArray arrayWithArray:stripsCleaned];
     return deleted;
 }
 
