@@ -12,6 +12,7 @@
 #import "HLSLogger.h"
 
 static NSString *kAddStripAnimationTag = @"addStrip";
+static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
@@ -31,6 +32,7 @@ static NSString *kAddStripAnimationTag = @"addStrip";
 - (UIView *)viewForStrip:(HLSStrip *)strip;
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
+- (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
 
 @end
 
@@ -388,11 +390,9 @@ static NSString *kAddStripAnimationTag = @"addStrip";
     }
     
     HLSStrip *strip = [self.strips objectAtIndex:index];
-    [self removeViewForStrip:strip];
+    HLSAnimation *animation = [self animationRemovingStrip:strip];
+    [animation playAnimated:animated];
     
-    NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
-    [stripsCopy removeObjectAtIndex:index];
-    self.strips = [NSArray arrayWithArray:stripsCopy];
     return YES;
 }
 
@@ -411,7 +411,8 @@ static NSString *kAddStripAnimationTag = @"addStrip";
                                                                     alphaVariation:0.f];
     animationStep2.duration = 0.15;
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformMakeScale(100.f/120.f, 100.f/120.f)
+                                                                     withTransform:CGAffineTransformConcat(CGAffineTransformInvert(CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)), 
+                                                                                                           CGAffineTransformInvert(CGAffineTransformMakeScale(120.f, 110.f)))
                                                                     alphaVariation:0.f];
     animationStep3.duration = 0.15;
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
@@ -419,6 +420,22 @@ static NSString *kAddStripAnimationTag = @"addStrip";
     animation.lockingUI = YES;
     animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
     animation.tag = kAddStripAnimationTag;
+    
+    return animation;
+}
+
+- (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip
+{
+    UIView *stripView = [self viewForStrip:strip];
+    
+    HLSAnimationStep *animationStep = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                               withAlphaVariation:-1.f];
+    animationStep.duration = 0.3;
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
+    animation.delegate = self;
+    animation.lockingUI = YES;
+    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
+    animation.tag = kRemoveStripAnimationTag;
     
     return animation;
 }
@@ -432,6 +449,14 @@ static NSString *kAddStripAnimationTag = @"addStrip";
             HLSStrip *newStrip = [animation.userInfo objectForKey:@"strip"];
             [self.delegate stripContainerView:self hasAddedStrip:newStrip];
         }        
+    }
+    else if ([animation.tag isEqual:kRemoveStripAnimationTag]) {
+        HLSStrip *strip = [animation.userInfo objectForKey:@"strip"];
+        [self removeViewForStrip:strip];
+        
+        NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
+        [stripsCopy removeObject:strip];
+        self.strips = [NSArray arrayWithArray:stripsCopy];
     }
 }
 
