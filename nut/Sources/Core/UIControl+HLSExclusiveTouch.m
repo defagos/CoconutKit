@@ -8,17 +8,14 @@
 
 #import "UIControl+HLSExclusiveTouch.h"
 
-#import <objc/runtime.h> 
 #import "HLSLogger.h"
+#import "HLSRuntime.h"
 
 static BOOL m_injected = NO;
 
 // Original implementation of the methods we swizzle
 static IMP s_initWithFrame$Imp;
 static IMP s_initWithCoder$Imp;
-
-// Static methods
-static void swizzleSelector(Class class, SEL origSel, SEL newSel);
 
 #pragma mark -
 #pragma mark UIControl (HLSExclusiveTouchPrivate) interface
@@ -44,15 +41,9 @@ static void swizzleSelector(Class class, SEL origSel, SEL newSel);
         return;
     }
     
-    // Get the original implementations we want to swizzle
-    s_initWithFrame$Imp = method_getImplementation(class_getInstanceMethod([self class], 
-                                                                           @selector(initWithFrame:)));
-    s_initWithCoder$Imp = method_getImplementation(class_getInstanceMethod([self class], 
-                                                                           @selector(initWithCoder:)));
-    
-    // Swizzle with custom wrappers
-    swizzleSelector([self class], @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
-    swizzleSelector([self class], @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
+    // Swizzle the original implementations (keep a hand on them)
+    s_initWithFrame$Imp = HLSSwizzleSelector([self class], @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
+    s_initWithCoder$Imp = HLSSwizzleSelector([self class], @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
     
     m_injected = YES;
 }
@@ -89,11 +80,3 @@ static void swizzleSelector(Class class, SEL origSel, SEL newSel);
 }
 
 @end
-
-#pragma mark Swizzler
-
-static void swizzleSelector(Class class, SEL origSel, SEL newSel)
-{
-    Method newMethod = class_getInstanceMethod(class, newSel);
-    class_replaceMethod(class, origSel, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));
-}

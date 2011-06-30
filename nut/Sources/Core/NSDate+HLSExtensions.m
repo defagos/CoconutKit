@@ -8,7 +8,39 @@
 
 #import "NSDate+HLSExtensions.h"
 
+#import "HLSRuntime.h"
+
+static IMP s_descriptionImp;
+static IMP s_debugDescriptionImp;
+static NSDateFormatter *s_dateFormatter;
+
+@interface NSDate (HLSExtensionsPrivate)
+
+// Private method used for debugging purposes; swizzled, but declared here to suppress compilation warnings
+- (NSString *)debugDescription;
+
+- (NSString *)swizzledDescription;
+- (NSString *)swizzledDebugDescription;
+
+@end
+
+__attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    s_descriptionImp = HLSSwizzleSelector([NSDate class], @selector(description), @selector(swizzledDescription));
+    s_debugDescriptionImp = HLSSwizzleSelector([NSDate class], @selector(debugDescription), @selector(swizzledDescription));
+    
+    // Create time formatter for system timezone (which is the default one if not set)
+    s_dateFormatter = [[NSDateFormatter alloc] init];
+    [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
+    
+    [pool release];
+}
+
 @implementation NSDate (HLSExtensions)
+
+#pragma mark Convenience methods
 
 - (NSDate *)dateAtNoon
 {
@@ -72,6 +104,20 @@
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays
 {
     return [self dateByAddingTimeInterval:24 * 60 * 60 * numberOfDays];
+}
+
+#pragma mark Injected methods
+
+- (NSString *)swizzledDescription
+{
+    NSString *originalString = (*s_descriptionImp)(self, @selector(description));
+    return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
+}
+
+- (NSString *)swizzledDebugDescription
+{
+    NSString *originalString = (*s_debugDescriptionImp)(self, @selector(debugDescription));
+    return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }
 
 @end

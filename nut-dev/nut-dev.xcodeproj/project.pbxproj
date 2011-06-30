@@ -35,6 +35,7 @@
 		6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */; };
 		6FAF210A13A7C425009A5645 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF210913A7C425009A5645 /* UIColor+HLSExtensions.m */; };
 		6FDC13C813B8A67B00247620 /* nut_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */; };
+		6FDD066213BC6F8900BF880A /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD066113BC6F8800BF880A /* HLSRuntime.m */; };
 		6FEAEFCB13B07AFE0088753B /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCA13B07AFE0088753B /* CursorPointerInfoViewController.m */; };
 		6FEAEFCD13B07B130088753B /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCC13B07B130088753B /* CursorPointerInfoViewController.xib */; };
 		6FEF8436131F76510015B57C /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF83AA131F76510015B57C /* HLSAnimation.m */; };
@@ -198,6 +199,8 @@
 		6FAF210813A7C425009A5645 /* UIColor+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FAF210913A7C425009A5645 /* UIColor+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_strip_default_background.png; sourceTree = "<group>"; };
+		6FDD066013BC6F8800BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
+		6FDD066113BC6F8800BF880A /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
 		6FEAEFC913B07AFE0088753B /* CursorPointerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorPointerInfoViewController.h; sourceTree = "<group>"; };
 		6FEAEFCA13B07AFE0088753B /* CursorPointerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorPointerInfoViewController.m; sourceTree = "<group>"; };
 		6FEAEFCC13B07B130088753B /* CursorPointerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorPointerInfoViewController.xib; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				6FEF83BE131F76510015B57C /* HLSNotifications.m */,
 				6FEF83BF131F76510015B57C /* HLSOrientationCloner.h */,
 				6FEF83C0131F76510015B57C /* HLSReloadable.h */,
+				6FDD066013BC6F8800BF880A /* HLSRuntime.h */,
+				6FDD066113BC6F8800BF880A /* HLSRuntime.m */,
 				6FEF83C1131F76510015B57C /* HLSStandardWidgetConstants.h */,
 				6FEF83C2131F76510015B57C /* HLSStandardWidgetConstants.m */,
 				6FEF83C3131F76510015B57C /* HLSUserInterfaceLock.h */,
@@ -1489,6 +1494,7 @@
 				6FA6C21113B337190039622A /* HLSStripContainerView.m in Sources */,
 				6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */,
 				6FFFBA0F13B4AA1700FD9A82 /* HLSStrip.m in Sources */,
+				6FDD066213BC6F8900BF880A /* HLSRuntime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
