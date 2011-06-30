@@ -12,10 +12,22 @@
 
 - (NSDate *)dateAtNoon
 {
+    return [self dateAtHour:12 minute:0 second:0];
+}
+
+- (NSDate *)dateAtMidnight
+{
+    return [self dateAtHour:0 minute:0 second:0];
+}
+
+- (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
+{
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
     NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:self];
-    [dateComponents setHour:12];
+    [dateComponents setHour:hour];
+    [dateComponents setMinute:minute];
+    [dateComponents setSecond:second];
     return [calendar dateFromComponents:dateComponents];
 }
 
@@ -38,7 +50,6 @@
                              [dateComponents2 day]];
     
     return [dateString1 compare:dateString2];
-    
 }
 
 - (BOOL)isSameDayAsDate:(NSDate *)date
@@ -56,6 +67,11 @@
                  interval:NULL
                   forDate:self];
     return firstDayOfWeek;
+}
+
+- (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays
+{
+    return [self dateByAddingTimeInterval:24 * 60 * 60 * numberOfDays];
 }
 
 @end
