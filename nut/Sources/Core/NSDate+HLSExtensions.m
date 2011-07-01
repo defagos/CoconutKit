@@ -10,17 +10,12 @@
 
 #import "HLSRuntime.h"
 
-static IMP s_descriptionImp;
-static IMP s_debugDescriptionImp;
+static IMP s_descriptionWithLocale$Imp;
 static NSDateFormatter *s_dateFormatter;
 
 @interface NSDate (HLSExtensionsPrivate)
 
-// Private method used for debugging purposes; swizzled, but declared here to suppress compilation warnings
-- (NSString *)debugDescription;
-
-- (NSString *)swizzledDescription;
-- (NSString *)swizzledDebugDescription;
+- (NSString *)swizzledDescriptionWithLocale:(id)locale;
 
 @end
 
@@ -28,8 +23,7 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    s_descriptionImp = HLSSwizzleSelector([NSDate class], @selector(description), @selector(swizzledDescription));
-    s_debugDescriptionImp = HLSSwizzleSelector([NSDate class], @selector(debugDescription), @selector(swizzledDescription));
+    s_descriptionWithLocale$Imp = HLSSwizzleSelector([NSDate class], @selector(descriptionWithLocale:), @selector(swizzledDescriptionWithLocale:));
     
     // Create time formatter for system timezone (which is the default one if not set)
     s_dateFormatter = [[NSDateFormatter alloc] init];
@@ -42,17 +36,27 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 
 #pragma mark Convenience methods
 
-- (NSDate *)dateAtNoon
+- (NSDate *)dateSameDayAtNoon
 {
-    return [self dateAtHour:12 minute:0 second:0];
+    return [self dateSameDayAtHour:12 minute:0 second:0];
 }
 
-- (NSDate *)dateAtMidnight
+- (NSDate *)dateSameDayAtNoonInTimeZone:(NSTimeZone *)timeZone
 {
-    return [self dateAtHour:0 minute:0 second:0];
+    return [self dateSameDayAtHour:12 minute:0 second:0 inTimeZone:timeZone];
 }
 
-- (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
+- (NSDate *)dateSameDayAtMidnight
+{
+    return [self dateSameDayAtHour:0 minute:0 second:0];
+}
+
+- (NSDate *)dateSameDayAtMidnightInTimeZone:(NSTimeZone *)timeZone
+{
+    return [self dateSameDayAtHour:0 minute:0 second:0 inTimeZone:timeZone];
+}
+
+- (NSDate *)dateSameDayAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
@@ -63,10 +67,26 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
     return [calendar dateFromComponents:dateComponents];
 }
 
-- (NSComparisonResult)compareDaysWithDate:(NSDate *)date
+- (NSDate *)dateSameDayAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second inTimeZone:(NSTimeZone *)timeZone
+{
+    // NSDateComponents are calculated using a calendar object. The problem with calendar objects is that they seem to
+    // be immutable (a setter for the time zone exists, e.g., but it does not do anything when called). The result is
+    // the same whether the calendar object is created via initWithCalendarIdentifier: or using a convenience constructor
+    // (and the init method returns nil)
+    // The problem is that components are calculated using the time zone associated with the calendar object, and this
+    // cannot be changed (I still cannot figure out why in the hell a time zone appears in NSCalendar interface). The 
+    // only choice we have to "override" the calendar time zone is therefore to alter the date we have (the receiver) 
+    // so that it takes into account the time offset between the calendar time zone (which we cannot change) and timeZone
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
+    return [dateInTimeZone dateSameDayAtHour:hour - timeZoneOffset / (60 * 60) 
+                                      minute:minute 
+                                      second:second];
+}
+
+- (NSComparisonResult)compareDayWithDate:(NSDate *)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    
     NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
     NSDateComponents *dateComponents1 = [calendar components:unitFlags fromDate:self];
     NSDateComponents *dateComponents2 = [calendar components:unitFlags fromDate:date];
@@ -84,9 +104,24 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
     return [dateString1 compare:dateString2];
 }
 
+- (NSComparisonResult)compareDayWithDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    // see comment in dateAtHour:minute:second:inTimeZone:
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
+    NSDate *selfInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [selfInTimeZone compareDayWithDate:dateInTimeZone];
+}
+
 - (BOOL)isSameDayAsDate:(NSDate *)date
 {
-    NSComparisonResult comparisonResult = [self compareDaysWithDate:date];
+    NSComparisonResult comparisonResult = [self compareDayWithDate:date];
+    return comparisonResult == NSOrderedSame;
+}
+
+- (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSComparisonResult comparisonResult = [self compareDayWithDate:date inTimeZone:timeZone];
     return comparisonResult == NSOrderedSame;
 }
 
@@ -108,15 +143,9 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 
 #pragma mark Injected methods
 
-- (NSString *)swizzledDescription
+- (NSString *)swizzledDescriptionWithLocale:(id)locale
 {
-    NSString *originalString = (*s_descriptionImp)(self, @selector(description));
-    return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
-}
-
-- (NSString *)swizzledDebugDescription
-{
-    NSString *originalString = (*s_debugDescriptionImp)(self, @selector(debugDescription));
+    NSString *originalString = (*s_descriptionWithLocale$Imp)(self, @selector(descriptionWithLocale:), locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }
 

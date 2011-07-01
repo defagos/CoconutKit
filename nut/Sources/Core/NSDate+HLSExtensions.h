@@ -9,29 +9,58 @@
 @interface NSDate (HLSExtensions)
 
 /**
- * Return the receiver at noon (for the system calendar and timezone)
+ * Return the date corresponding to noon the same day as the receiver (for the system calendar and time zone)
  */
-- (NSDate *)dateAtNoon;
+- (NSDate *)dateSameDayAtNoon;
 
 /**
- * Return the receiver at midnight (for the system calendar and timezone)
+ * Return the date corresponding to noon the same day as the receiver (for the system calendar overridden with the given 
+ * time zone)
  */
-- (NSDate *)dateAtMidnight;
+- (NSDate *)dateSameDayAtNoonInTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Return the receiver at the specified hour / minute / second (for the system calendar and timezone)
+ * Return the date corresponding to midnight the same day as the receiver (for the system calendar and time zone)
  */
-- (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;
+- (NSDate *)dateSameDayAtMidnight;
 
 /**
- * Compare the receiver with another date (for the system calendar and timezone)
+ * Return the date corresponding to midnight the same day as the receiver (for the system calendar overridden with the given 
+ * time zone)
  */
-- (NSComparisonResult)compareDaysWithDate:(NSDate *)date;
+- (NSDate *)dateSameDayAtMidnightInTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Compare the day part of the receiver with the one of another date (for the system calendar and timezone)
+ * Return the date corresponding to the specified hour / minute / second the same day as the receiver (for the system 
+ * calendar and time zone)
+ */
+- (NSDate *)dateSameDayAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;
+
+/**
+ * Return the date corresponding to the specified hour / minute / second the same day as the receiver (for the system 
+ * calendar overridden with the given time zone)
+ */
+- (NSDate *)dateSameDayAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second inTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Compare the receiver with another date (for the system calendar and time zone)
+ */
+- (NSComparisonResult)compareDayWithDate:(NSDate *)date;
+
+/**
+ * Compare the receiver with another date (for the system calendar overridden with the given time zone)
+ */
+- (NSComparisonResult)compareDayWithDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Compare the day part of the receiver with the one of another date (for the system calendar and time zone)
  */
 - (BOOL)isSameDayAsDate:(NSDate *)date;
+
+/**
+ * Compare the day part of the receiver with the one of another date (for the system calendar overridden with the given time zone)
+ */
+- (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
  * Return the first day of the week the receiver belongs to, taking system calendar settings into account (return 
@@ -40,7 +69,7 @@
 - (NSDate *)firstDayOfTheWeek;
 
 /**
- * Return the date obtained by adding some number of days to the receiver. This number can be negative
+ * Return the date obtained by adding some number of days to the receiver (can be negative for days in the past)
  */
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays;
 
