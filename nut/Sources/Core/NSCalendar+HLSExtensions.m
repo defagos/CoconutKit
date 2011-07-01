@@ -24,4 +24,40 @@
     return [self components:unitFlags fromDate:dateInTimeZone];
 }
 
+- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date
+{
+    NSRange daysRange = [self rangeOfUnit:NSDayCalendarUnit
+                                   inUnit:NSMonthCalendarUnit 
+                                  forDate:date];
+    return daysRange.length;    
+}
+
+- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [self numberOfDaysInMonthContainingDate:dateInTimeZone];
+}
+
+- (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [self rangeOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
+}
+
+- (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
+}
+
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)datep interval:(NSTimeInterval *)tip forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [self rangeOfUnit:unit startDate:datep interval:tip forDate:dateInTimeZone];
+}
+
 @end
