@@ -132,6 +132,8 @@
 		6FBDAD2513068956004B9617 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDAD2313068956004B9617 /* HLSViewController.m */; };
 		6FBDB27113090FDF004B9617 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */; };
 		6FBDB27213090FDF004B9617 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */; };
+		6FD71F6913BDC139008B51C4 /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FD71F6713BDC138008B51C4 /* NSCalendar+HLSExtensions.h */; };
+		6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */; };
 		6FDD065E13BC6D8F00BF880A /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */; };
 		6FDD065F13BC6D8F00BF880A /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD065D13BC6D8F00BF880A /* HLSRuntime.m */; };
 		6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */; };
@@ -273,6 +275,8 @@
 		6FBDAD2313068956004B9617 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
+		6FD71F6713BDC138008B51C4 /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDC13C613B8A66700247620 /* nut_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_strip_default_background.png; sourceTree = "<group>"; };
 		6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FDD065D13BC6D8F00BF880A /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
@@ -509,6 +513,8 @@
 				6F8FA7B9131650BB003886FB /* NSArray+HLSExtensions.m */,
 				6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */,
 				6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */,
+				6FD71F6713BDC138008B51C4 /* NSCalendar+HLSExtensions.h */,
+				6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */,
 				6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */,
 				6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */,
 				6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */,
@@ -671,6 +677,7 @@
 				6FA6C20D13B32C190039622A /* HLSStripContainerView.h in Headers */,
 				6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */,
 				6FDD065E13BC6D8F00BF880A /* HLSRuntime.h in Headers */,
+				6FD71F6913BDC139008B51C4 /* NSCalendar+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,6 +798,7 @@
 				6FA6C20E13B32C190039622A /* HLSStripContainerView.m in Sources */,
 				6FFFBA0C13B4A94300FD9A82 /* HLSStrip.m in Sources */,
 				6FDD065F13BC6D8F00BF880A /* HLSRuntime.m in Sources */,
+				6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
