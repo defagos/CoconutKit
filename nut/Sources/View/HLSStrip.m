@@ -8,21 +8,48 @@
 
 #import "HLSStrip.h"
 
+#import "HLSAssert.h"
+#import "HLSLogger.h"
+
+@interface HLSStrip ()
+
+@property (nonatomic, assign) NSUInteger beginPosition;
+@property (nonatomic, assign) NSUInteger endPosition;
+
+@end
+
 @implementation HLSStrip
 
 #pragma mark Class methods
 
 + (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
 {
-    HLSStrip *strip = [[[[self class] alloc] init] autorelease];
-    strip.beginPosition = beginPosition;
-    strip.endPosition = endPosition;
+    HLSStrip *strip = [[[[self class] alloc] initWithBeginPosition:beginPosition endPosition:endPosition] autorelease];
     return strip;
 }
 
-+ (HLSStrip *)strip
+#pragma mark Object creation and destruction
+
+- (id)initWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
 {
-    return [[[[self class] alloc] init] autorelease];
+    if ((self = [super init])) {
+        // Check input
+        if (endPosition <= beginPosition) {
+            HLSLoggerError(@"End position must be larger than begin position");
+            [self release];
+            return nil;
+        }
+        
+        self.beginPosition = beginPosition;
+        self.endPosition = endPosition;
+    }
+    return self;
+}
+
+- (id)init
+{
+    HLSForbiddenInheritedMethod();
+    return nil;
 }
 
 #pragma mark Accessors and mutators

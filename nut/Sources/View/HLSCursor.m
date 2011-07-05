@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
+#import "NSArray+HLSExtensions.h"
 
 static const CGFloat kCursorDefaultSpacing = 20.f;
 

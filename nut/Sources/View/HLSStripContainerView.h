@@ -25,7 +25,7 @@
  */
 @interface HLSStripContainerView : UIView {
 @private
-    NSArray *m_strips;                      // contains HLSStrip objects (ordered by beginPosition)
+    NSArray *m_allStrips;                   // contains HLSStrip objects (ordered by beginPosition)
     NSMutableDictionary *m_stripToViewMap;  // maps a strip to its corresponding view
     NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
     NSUInteger m_defaultLength;
@@ -33,6 +33,18 @@
     BOOL m_enabled;
     id<HLSStripContainerViewDelegate> m_delegate;
 }
+
+/**
+ * Return the array of HLSStrip objects currently displayed in the container. Setting strips this way does not fire
+ * the related addition events
+ */
+- (NSArray *)strips;
+
+/**
+ * Set the array of HLSStrip objects to be displayed in the container. Strips should not overlap (if overlapping, only the 
+ * one with the lowest begin position will be displayed)
+ */
+- (void)setStrips:(NSArray *)strips;
 
 /**
  * The number of positions to use. Default is NSUIntegerMax (highest granularity).

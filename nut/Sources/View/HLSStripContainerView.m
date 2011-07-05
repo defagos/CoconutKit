@@ -9,6 +9,7 @@
 #import "HLSStripContainerView.h"
 
 #import "HLSAnimation.h"
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 static NSString *kAddStripAnimationTag = @"addStrip";
@@ -20,7 +21,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)initialize;
 
-@property (nonatomic, retain) NSArray *strips;
+@property (nonatomic, retain) NSArray *allStrips;
 @property (nonatomic, retain) NSMutableDictionary *stripToViewMap;
 
 - (CGFloat)xPosForPosition:(NSUInteger)position;
@@ -28,6 +29,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (CGRect)frameForStrip:(HLSStrip *)strip;
 
 - (UIView *)addViewForStrip:(HLSStrip *)strip;
+- (UIView *)buildStripViewForStrip:(HLSStrip *)strip;
 - (void)removeViewForStrip:(HLSStrip *)strip;
 - (UIView *)viewForStrip:(HLSStrip *)strip;
 
@@ -59,13 +61,13 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (void)initialize
 {
     self.positions = NSUIntegerMax;
-    self.strips = [NSMutableArray array];
+    self.allStrips = [NSMutableArray array];
     self.stripToViewMap = [NSMutableDictionary dictionary];
 }
 
 - (void)dealloc
 {
-    self.strips = nil;
+    self.allStrips = nil;
     self.stripToViewMap = nil;
     self.delegate = nil;
     
@@ -74,7 +76,48 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 #pragma mark Accessors and mutators
 
-@synthesize strips = m_strips;
+@synthesize allStrips = m_allStrips;
+
+- (NSArray *)strips
+{
+    return self.allStrips;
+}
+
+- (void)setStrips:(NSArray *)strips
+{
+    HLSAssertObjectsInEnumerationAreMembersOfClass(strips, HLSStrip);
+    
+    // Order and remove bad and overlapping strips
+    NSSortDescriptor *beginDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"beginPosition" ascending:YES];
+    NSArray *sortedStrips = [strips sortedArrayUsingDescriptors:[NSArray arrayWithObject:beginDateSortDescriptor]];
+    NSMutableArray *cleanedStrips = [NSMutableArray array];
+    HLSStrip *previousStrip = nil;
+    for (HLSStrip *strip in sortedStrips) {
+        if (strip.endPosition >= self.positions) {
+            HLSLoggerError(@"Strip %@ ends outside range; dropped", strip);
+            continue;
+        }
+        
+        if (previousStrip && strip.beginPosition < previousStrip.endPosition) {
+            HLSLoggerError(@"Strip %@ overlaps with strip %@; dropped", strip, previousStrip);
+            continue;
+        }
+        [cleanedStrips addObject:strip];
+        previousStrip = strip;
+    }
+    
+    [self clear];
+    
+    self.allStrips = cleanedStrips;
+    for (HLSStrip *strip in self.allStrips) {
+        UIView *stripView = [self buildStripViewForStrip:strip];
+        stripView.frame = [self frameForStrip:strip];
+        [self addSubview:stripView];
+        
+        NSValue *stripKey = [NSValue valueWithPointer:strip];
+        [self.stripToViewMap setObject:stripView forKey:stripKey];
+    }
+}
 
 @synthesize stripToViewMap = m_stripToViewMap;
 
@@ -112,7 +155,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)layoutSubviews
 {
-    for (HLSStrip *strip in self.strips) {
+    for (HLSStrip *strip in self.allStrips) {
         UIView *stripView = [self viewForStrip:strip];
         stripView.frame = [self frameForStrip:strip];
     }
@@ -158,6 +201,17 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return stripView;
     }
     
+    stripView = [self buildStripViewForStrip:strip];    
+    [self addSubview:stripView];
+    [self.stripToViewMap setObject:stripView forKey:stripKey];
+    
+    return stripView;
+}
+
+// Create the view associated with a strip
+- (UIView *)buildStripViewForStrip:(HLSStrip *)strip
+{
+    UIView *stripView = nil;
     if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
         stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
     }
@@ -170,10 +224,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                                               1.f / stripView.frame.size.width, 
                                               1.f / stripView.frame.size.height);
     }
-    
-    [self addSubview:stripView];
-    [self.stripToViewMap setObject:stripView forKey:stripKey];
-    
     return stripView;
 }
 
@@ -228,7 +278,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     NSUInteger nextBeginPosition = self.positions - 1;
     NSUInteger index = 0;
     HLSStrip *newStrip = nil;
-    for (HLSStrip *strip in self.strips) {
+    for (HLSStrip *strip in self.allStrips) {
         if (strip.beginPosition <= position && position < strip.endPosition) {
             HLSLoggerInfo(@"A strip already exists at the given position");
             return NO;
@@ -246,7 +296,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     // No strip after insertion point
-    if (index == [self.strips count]) {
+    if (index == [self.allStrips count]) {
         nextBeginPosition = self.positions - 1;
     }
     
@@ -282,14 +332,14 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     // Insert the new strip in the correct order so that the array is sorted by beginPosition
-    NSMutableArray *strips = [NSMutableArray arrayWithArray:self.strips];
-    if (index == [self.strips count]) {
+    NSMutableArray *strips = [NSMutableArray arrayWithArray:self.allStrips];
+    if (index == [self.allStrips count]) {
         [strips addObject:newStrip];
     }
     else {
         [strips insertObject:newStrip atIndex:index];
     }
-    self.strips = [NSArray arrayWithArray:strips];
+    self.allStrips = [NSArray arrayWithArray:strips];
     
     [self addViewForStrip:newStrip];
     
@@ -313,7 +363,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     
     BOOL split = NO;
     NSMutableArray *stripsModified = [NSMutableArray array];
-    for (HLSStrip *strip in self.strips) {
+    for (HLSStrip *strip in self.allStrips) {
         if ([strip containsPosition:position] && position != strip.beginPosition && position != strip.endPosition) {
             if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldSplitStrip:)]) {
                 if (! [self.delegate stripContainerView:self shouldSplitStrip:strip]) {
@@ -338,7 +388,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             [stripsModified addObject:strip];
         }
     }
-    self.strips = [NSArray arrayWithArray:stripsModified];
+    self.allStrips = [NSArray arrayWithArray:stripsModified];
     
     return split;
 }
@@ -351,7 +401,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     BOOL deleted = NO;
-    for (HLSStrip *strip in self.strips) {
+    for (HLSStrip *strip in self.allStrips) {
         if ([strip containsPosition:position]) {
             if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
                 if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
@@ -371,34 +421,35 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (BOOL)deleteStripWithIndex:(NSUInteger)index animated:(BOOL)animated
 {
-    if (index >= [self.strips count]) {
+    if (index >= [self.allStrips count]) {
         HLSLoggerWarn(@"Incorrect index");
         return NO;
     }
     
     if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
-        HLSStrip *strip = [self.strips objectAtIndex:index];
+        HLSStrip *strip = [self.allStrips objectAtIndex:index];
         if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
             HLSLoggerInfo(@"Cancelled deletion of strip %@", strip);
             return NO;
         }
     }
     
-    HLSStrip *strip = [self.strips objectAtIndex:index];
+    HLSStrip *strip = [self.allStrips objectAtIndex:index];
     HLSAnimation *animation = [self animationRemovingStrip:strip];
     [animation playAnimated:animated];
     
     return YES;
 }
 
-#pragma mark Clearing all strips
+#pragma mark Managing displayed content
 
 - (void)clear
 {
-    for (HLSStrip *strip in self.strips) {
+    for (HLSStrip *strip in self.allStrips) {
         [self removeViewForStrip:strip];
     }
-    self.strips = nil;
+    self.allStrips = [NSMutableArray array];
+    self.stripToViewMap = [NSMutableDictionary dictionary];
 }
 
 #pragma mark Animations
@@ -459,9 +510,9 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         HLSStrip *strip = [animation.userInfo objectForKey:@"strip"];
         [self removeViewForStrip:strip];
         
-        NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.strips];
+        NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.allStrips];
         [stripsCopy removeObject:strip];
-        self.strips = [NSArray arrayWithArray:stripsCopy];
+        self.allStrips = [NSArray arrayWithArray:stripsCopy];
     }
 }
 
@@ -513,7 +564,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             [self class],
             self,
             self.positions,
-            self.strips];
+            self.allStrips];
 }
 
 @end

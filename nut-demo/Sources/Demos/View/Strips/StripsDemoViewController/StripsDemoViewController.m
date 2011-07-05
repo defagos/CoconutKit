@@ -91,7 +91,12 @@
     
     self.stripContainerView.positions = 50;
     self.stripContainerView.delegate = self;
-
+    
+    // Start with two strips (can be set in any order)
+    HLSStrip *strip1 = [HLSStrip stripWithBeginPosition:20 endPosition:30];
+    HLSStrip *strip2 = [HLSStrip stripWithBeginPosition:3 endPosition:10];
+    [self.stripContainerView setStrips:[NSArray arrayWithObjects:strip1, strip2, nil]];
+    
     self.infoLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Valid positions: 0 - %d", @"Valid positions: 0 - %d"), 
                            self.stripContainerView.positions - 1];
     

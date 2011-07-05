@@ -6,12 +6,10 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 /**
  * Lightweight object representing a strip in the container view
  *
- * Designated intializer: init
+ * Designated intializer: initWithBeginPosition:endPosition:
  */
 @interface HLSStrip : NSObject {
 @private
@@ -20,10 +18,11 @@
 }
 
 + (HLSStrip *)stripWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
-+ (HLSStrip *)strip;
 
-@property (nonatomic, assign) NSUInteger beginPosition;
-@property (nonatomic, assign) NSUInteger endPosition;
+- (id)initWithBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
+
+@property (nonatomic, readonly, assign) NSUInteger beginPosition;
+@property (nonatomic, readonly, assign) NSUInteger endPosition;
 
 - (BOOL)isOverlappingWithStrip:(HLSStrip *)strip;
 - (BOOL)isContainedInStrip:(HLSStrip *)strip;
