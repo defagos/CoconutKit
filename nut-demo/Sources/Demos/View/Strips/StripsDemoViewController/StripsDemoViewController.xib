@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -402,7 +402,7 @@
 						<string key="NSFrame">{{625, 553}, {72, 27}}</string>
 						<reference key="NSSuperview" ref="1072331156"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="149886212"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -410,6 +410,27 @@
 						<reference key="IBUIFont" ref="855222864"/>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">OK</string>
+						<reference key="IBUIHighlightedTitleColor" ref="736447663"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="147331490"/>
+					</object>
+					<object class="IBUIButton" id="149886212">
+						<reference key="NSNextResponder" ref="1072331156"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{481, 617}, {116, 37}}</string>
+						<reference key="NSSuperview" ref="1072331156"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIFont" ref="855222864"/>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">&lt;clear&gt;</string>
 						<reference key="IBUIHighlightedTitleColor" ref="736447663"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -597,6 +618,23 @@
 					</object>
 					<int key="connectionID">48</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clearButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="149886212"/>
+					</object>
+					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">clearStrips</string>
+						<reference key="source" ref="149886212"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -639,6 +677,7 @@
 							<reference ref="247335734"/>
 							<reference ref="279269738"/>
 							<reference ref="400326255"/>
+							<reference ref="149886212"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -731,6 +770,11 @@
 						<reference key="object" ref="501922895"/>
 						<reference key="parent" ref="400326255"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="149886212"/>
+						<reference key="parent" ref="1072331156"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -755,6 +799,7 @@
 					<string>3.IBPluginDependency</string>
 					<string>47.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
+					<string>50.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -782,6 +827,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -796,7 +842,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">52</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -825,12 +871,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addStrip</string>
+							<string>clearStrips</string>
 							<string>deleteStripAtIndex</string>
 							<string>deleteStripAtPosition</string>
 							<string>splitStrip</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -842,6 +890,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addStrip</string>
+							<string>clearStrips</string>
 							<string>deleteStripAtIndex</string>
 							<string>deleteStripAtPosition</string>
 							<string>splitStrip</string>
@@ -850,6 +899,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">addStrip</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">clearStrips</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -874,6 +927,7 @@
 							<string>addButton</string>
 							<string>addLabel</string>
 							<string>addLengthTextField</string>
+							<string>clearButton</string>
 							<string>deleteAtIndexButton</string>
 							<string>deleteAtIndexLabel</string>
 							<string>deleteAtPositionButton</string>
@@ -892,6 +946,7 @@
 							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UITextField</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UIButton</string>
@@ -913,6 +968,7 @@
 							<string>addButton</string>
 							<string>addLabel</string>
 							<string>addLengthTextField</string>
+							<string>clearButton</string>
 							<string>deleteAtIndexButton</string>
 							<string>deleteAtIndexLabel</string>
 							<string>deleteAtPositionButton</string>
@@ -942,6 +998,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">addLengthTextField</string>
 								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">clearButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">deleteAtIndexButton</string>

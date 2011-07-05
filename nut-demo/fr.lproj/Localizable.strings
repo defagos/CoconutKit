@@ -15,6 +15,7 @@
 "Animation"="Animation";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
 "City"="Ville";
+"Clear"="Effacer";
 "Close"="Fermer";
 "Congratulations"="Félicitations";
 "Country"="Pays";

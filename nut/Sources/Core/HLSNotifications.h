@@ -17,7 +17,7 @@
  *      macro
  * If two modules try to introduce the same notification name, a linker error will occur
  * (since the symbol is in this case multiply defined in two separate translation units).
- * This is good an expected behavior, and this matches the approach applied in the Apple
+ * This is good expected behavior, and this matches the approach applied in the Apple
  * frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
  *
  * Note that notification names should end with "Notification"

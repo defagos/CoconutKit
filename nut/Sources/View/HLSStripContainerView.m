@@ -391,6 +391,16 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return YES;
 }
 
+#pragma mark Clearing all strips
+
+- (void)clear
+{
+    for (HLSStrip *strip in self.strips) {
+        [self removeViewForStrip:strip];
+    }
+    self.strips = nil;
+}
+
 #pragma mark Animations
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip

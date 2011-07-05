@@ -46,6 +46,7 @@
     self.deleteAtIndexLabel = nil;
     self.deleteIndexTextField = nil;
     self.deleteAtIndexButton = nil;
+    self.clearButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -80,6 +81,8 @@
 
 @synthesize deleteAtIndexButton = m_deleteAtIndexButton;
 
+@synthesize clearButton = m_clearButton;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -108,6 +111,8 @@
     self.splitPositionTextField.text = @"0";
     self.deletePositionTextField.text = @"0";
     self.deleteIndexTextField.text = @"0";
+    
+    [self.clearButton setTitle:NSLocalizedString(@"Clear", @"Clear") forState:UIControlStateNormal];
 }
 
 #pragma mark Orientation management
@@ -165,6 +170,11 @@
     NSUInteger deleteIndex = (NSUInteger)[self.deleteIndexTextField.text intValue];
     
     [self.stripContainerView deleteStripWithIndex:deleteIndex animated:YES];
+}
+
+- (IBAction)clearStrips
+{
+    [self.stripContainerView clear];
 }
 
 @end

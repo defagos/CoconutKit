@@ -26,6 +26,7 @@
     UILabel *m_deleteAtIndexLabel;
     UITextField *m_deleteIndexTextField;
     UIButton *m_deleteAtIndexButton;
+    UIButton *m_clearButton;
 }
 
 @property (nonatomic, retain) IBOutlet HLSStripContainerView *stripContainerView;
@@ -43,10 +44,12 @@
 @property (nonatomic, retain) IBOutlet UILabel *deleteAtIndexLabel;
 @property (nonatomic, retain) IBOutlet UITextField *deleteIndexTextField;
 @property (nonatomic, retain) IBOutlet UIButton *deleteAtIndexButton;
+@property (nonatomic, retain) IBOutlet UIButton *clearButton;
 
 - (IBAction)addStrip;
 - (IBAction)splitStrip;
 - (IBAction)deleteStripAtPosition;
 - (IBAction)deleteStripAtIndex;
+- (IBAction)clearStrips;
 
 @end

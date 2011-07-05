@@ -80,6 +80,12 @@
 - (BOOL)deleteStripWithIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
+ * Clear the strip container view area, without generating any deletion events. Useful if you reuse the same container
+ * view and you need to start again from scratch
+ */
+- (void)clear;
+
+/**
  * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show strips
  * in read-only mode
  */
