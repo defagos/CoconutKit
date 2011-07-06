@@ -110,6 +110,8 @@
 		6FAF210713A7C2FA009A5645 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF210513A7C2FA009A5645 /* UIColor+HLSExtensions.m */; };
 		6FAF57861248B8F300A8B23E /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF57841248B8F300A8B23E /* HLSConverters.h */; };
 		6FAF57871248B8F300A8B23E /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF57851248B8F300A8B23E /* HLSConverters.m */; };
+		6FAF8E0E13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAF8E0C13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h */; };
+		6FAF8E0F13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF8E0D13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m */; };
 		6FBDA2CE1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2CC1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h */; };
 		6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */; };
 		6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */; };
@@ -253,6 +255,8 @@
 		6FAF210513A7C2FA009A5645 /* UIColor+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FAF57841248B8F300A8B23E /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FAF57851248B8F300A8B23E /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
+		6FAF8E0C13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FAF8E0D13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FBDA2CC1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTwoViewAnimationStepDefinition.h; sourceTree = "<group>"; };
 		6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTwoViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 				6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */,
 				6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */,
 				6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */,
+				6FAF8E0C13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h */,
+				6FAF8E0D13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m */,
 				6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */,
 				6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */,
 				6F8FA7D913165AB2003886FB /* NSString+HLSExtensions.h */,
@@ -678,6 +684,7 @@
 				6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */,
 				6FDD065E13BC6D8F00BF880A /* HLSRuntime.h in Headers */,
 				6FD71F6913BDC139008B51C4 /* NSCalendar+HLSExtensions.h in Headers */,
+				6FAF8E0E13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +806,7 @@
 				6FFFBA0C13B4A94300FD9A82 /* HLSStrip.m in Sources */,
 				6FDD065F13BC6D8F00BF880A /* HLSRuntime.m in Sources */,
 				6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
+				6FAF8E0F13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

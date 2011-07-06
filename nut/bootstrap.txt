@@ -8,6 +8,7 @@ NSBundle+HLSExtensions.m
 NSCalendar+HLSExtensions.m
 NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
+NSDateFormatter+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
 UIColor+HLSExtensions.m

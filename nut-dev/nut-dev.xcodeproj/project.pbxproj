@@ -34,6 +34,7 @@
 		6FAF20F913A24D36009A5645 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F813A24D36009A5645 /* HLSCursor.m */; };
 		6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */; };
 		6FAF210A13A7C425009A5645 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF210913A7C425009A5645 /* UIColor+HLSExtensions.m */; };
+		6FAF8E1213C4812B0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF8E1113C4812B0065F909 /* NSDateFormatter+HLSExtensions.m */; };
 		6FD71F6D13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD71F6C13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m */; };
 		6FDC13C813B8A67B00247620 /* nut_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */; };
 		6FDD066213BC6F8900BF880A /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD066113BC6F8800BF880A /* HLSRuntime.m */; };
@@ -199,6 +200,8 @@
 		6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorDemoViewController.xib; sourceTree = "<group>"; };
 		6FAF210813A7C425009A5645 /* UIColor+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FAF210913A7C425009A5645 /* UIColor+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FAF8E1013C4812B0065F909 /* NSDateFormatter+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FAF8E1113C4812B0065F909 /* NSDateFormatter+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FD71F6B13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FD71F6C13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_strip_default_background.png; sourceTree = "<group>"; };
@@ -641,6 +644,8 @@
 				6FEF83CD131F76510015B57C /* NSData+HLSExtensions.m */,
 				6FEF83CE131F76510015B57C /* NSDate+HLSExtensions.h */,
 				6FEF83CF131F76510015B57C /* NSDate+HLSExtensions.m */,
+				6FAF8E1013C4812B0065F909 /* NSDateFormatter+HLSExtensions.h */,
+				6FAF8E1113C4812B0065F909 /* NSDateFormatter+HLSExtensions.m */,
 				6FEF83D0131F76510015B57C /* NSObject+HLSExtensions.h */,
 				6FEF83D1131F76510015B57C /* NSObject+HLSExtensions.m */,
 				6FEF83D2131F76510015B57C /* NSString+HLSExtensions.h */,
@@ -1501,6 +1506,7 @@
 				6FFFBA0F13B4AA1700FD9A82 /* HLSStrip.m in Sources */,
 				6FDD066213BC6F8900BF880A /* HLSRuntime.m in Sources */,
 				6FD71F6D13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
+				6FAF8E1213C4812B0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

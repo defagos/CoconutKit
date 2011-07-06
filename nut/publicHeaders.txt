@@ -59,6 +59,7 @@ NSBundle+HLSExtensions.h
 NSCalendar+HLSExtensions.h
 NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
+NSDateFormatter+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
 UIColor+HLSExtensions.h

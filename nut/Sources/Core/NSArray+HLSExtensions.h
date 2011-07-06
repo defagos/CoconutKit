@@ -13,4 +13,10 @@
  */
 - (id)firstObject;
 
+/**
+ * Rotate array elements left or right (elements disappearing at an end are moved to the other end)
+ */
+- (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+- (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+
 @end
