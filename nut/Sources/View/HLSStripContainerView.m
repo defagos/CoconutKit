@@ -11,13 +11,14 @@
 #import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "HLSStripView.h"
 
 static NSString *kAddStripAnimationTag = @"addStrip";
 static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
-@interface HLSStripContainerView () <HLSAnimationDelegate>
+@interface HLSStripContainerView () <HLSAnimationDelegate, HLSStripViewDelegate>
 
 - (void)initialize;
 
@@ -28,10 +29,10 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
 - (CGRect)frameForStrip:(HLSStrip *)strip;
 
-- (UIView *)addViewForStrip:(HLSStrip *)strip;
-- (UIView *)buildStripViewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)addViewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)buildStripViewForStrip:(HLSStrip *)strip;
 - (void)removeViewForStrip:(HLSStrip *)strip;
-- (UIView *)viewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)viewForStrip:(HLSStrip *)strip;
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
@@ -110,7 +111,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     
     self.allStrips = cleanedStrips;
     for (HLSStrip *strip in self.allStrips) {
-        UIView *stripView = [self buildStripViewForStrip:strip];
+        HLSStripView *stripView = [self buildStripViewForStrip:strip];
         stripView.frame = [self frameForStrip:strip];
         [self addSubview:stripView];
         
@@ -156,7 +157,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (void)layoutSubviews
 {
     for (HLSStrip *strip in self.allStrips) {
-        UIView *stripView = [self viewForStrip:strip];
+        HLSStripView *stripView = [self viewForStrip:strip];
         stripView.frame = [self frameForStrip:strip];
     }
 }
@@ -192,10 +193,10 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 // Create and install the view associated with a strip, and register it into the index
-- (UIView *)addViewForStrip:(HLSStrip *)strip
+- (HLSStripView *)addViewForStrip:(HLSStrip *)strip
 {
     NSValue *stripKey = [NSValue valueWithPointer:strip];
-    UIView *stripView = [self.stripToViewMap objectForKey:stripKey];
+    HLSStripView *stripView = [self.stripToViewMap objectForKey:stripKey];
     if (stripView) {
         HLSLoggerError(@"View already added for strip %@", strip);
         return stripView;
@@ -209,28 +210,31 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 // Create the view associated with a strip
-- (UIView *)buildStripViewForStrip:(HLSStrip *)strip
+- (HLSStripView *)buildStripViewForStrip:(HLSStrip *)strip
 {
-    UIView *stripView = nil;
+    UIView *view = nil;
     if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
-        stripView = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
+        view = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
     }
     
-    // If no view provied, use default style
-    if (! stripView) {
-        stripView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nut_strip_default_background.png"]] autorelease];
-        stripView.contentStretch = CGRectMake(0.5f, 
-                                              0.5f, 
-                                              1.f / stripView.frame.size.width, 
-                                              1.f / stripView.frame.size.height);
+    // If no custom view provied, use default style
+    if (! view) {
+        view = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nut_strip_default_background.png"]] autorelease];
+        view.contentStretch = CGRectMake(0.5f, 
+                                         0.5f, 
+                                         1.f / view.frame.size.width, 
+                                         1.f / view.frame.size.height);
     }
+    
+    HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip view:view] autorelease];
+    stripView.delegate = self;
     return stripView;
 }
 
 // Remove the view associated with a strip, and unregister it from the index
 - (void)removeViewForStrip:(HLSStrip *)strip
 {
-    UIView *stripView = [self viewForStrip:strip];
+    HLSStripView *stripView = [self viewForStrip:strip];
     if (stripView) {
         [stripView removeFromSuperview];
     }
@@ -243,10 +247,10 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 // Return the view associated with a strip
-- (UIView *)viewForStrip:(HLSStrip *)strip
+- (HLSStripView *)viewForStrip:(HLSStrip *)strip
 {
     NSValue *stripKey = [NSValue valueWithPointer:strip];
-    UIView *stripView = [self.stripToViewMap objectForKey:stripKey];
+    HLSStripView *stripView = [self.stripToViewMap objectForKey:stripKey];
     if (! stripView) {
         HLSLoggerError(@"View not found for strip %@", strip);
         return nil;
@@ -456,7 +460,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip
 {
-    UIView *stripView = [self viewForStrip:strip];
+    HLSStripView *stripView = [self viewForStrip:strip];
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingView:stripView
                                                                      withTransform:CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)
@@ -482,7 +486,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip
 {
-    UIView *stripView = [self viewForStrip:strip];
+    HLSStripView *stripView = [self viewForStrip:strip];
     
     HLSAnimationStep *animationStep = [HLSAnimationStep animationStepUpdatingView:stripView
                                                                withAlphaVariation:-1.f];
@@ -513,6 +517,35 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.allStrips];
         [stripsCopy removeObject:strip];
         self.allStrips = [NSArray arrayWithArray:stripsCopy];
+    }
+}
+
+#pragma mark HLSStripViewDelegate protocol implementation
+
+- (void)stripViewHasBeenClicked:(HLSStripView *)stripView
+{
+    HLSStrip *strip = stripView.strip;
+    
+    if (! stripView.edited) {
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldEnterEditModeForStrip:)]) {
+            if (! [self.delegate stripContainerView:self shouldEnterEditModeForStrip:strip]) {
+                HLSLoggerInfo(@"Cancelled entering edit mode for strip %@", strip);
+                return;
+            }
+        }
+        
+        [stripView enterEditMode];
+        
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:didEnterEditModeForStrip:)]) {
+            [self.delegate stripContainerView:self didEnterEditModeForStrip:strip];
+        }    
+    }
+    else {
+        [stripView exitEditMode];
+        
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:didExitEditModeForStrip:)]) {
+            [self.delegate stripContainerView:self didExitEditModeForStrip:strip];
+        }
     }
 }
 

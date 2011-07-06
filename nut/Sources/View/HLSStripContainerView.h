@@ -8,7 +8,8 @@
 
 // TODO: Use strip identifiers? Returning them when strips are added / removed. This would then offer an opaque handle
 //       to get the strip itself without having to return the rectangular view. Well, maybe that's too much
-// Remark: Strips must never overlap, even when they are moved. This way, at most two strips can be merged at any time
+// Remark: Strips must never overlap, even when they are moved (and their distance must be at least 1 unit if they
+//         have the same type, otherwise merge will occur). At most two strips can be merged at any time
 
 #import "HLSStrip.h"
 
@@ -26,7 +27,7 @@
 @interface HLSStripContainerView : UIView {
 @private
     NSArray *m_allStrips;                   // contains HLSStrip objects (ordered by beginPosition)
-    NSMutableDictionary *m_stripToViewMap;  // maps a strip to its corresponding view
+    NSMutableDictionary *m_stripToViewMap;  // maps a strip to its corresponding view (HLSStripView)
     NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
@@ -117,7 +118,7 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldAddStrip:(HLSStrip *)strip;
 
 /**
- * Called when a split view is created. Return the view to be used. If not implemented or if returning nil, a default 
+ * Called when a strip view is created. Return the view to be used. If not implemented or if returning nil, a default 
  * style is applied. The view returned should exhibit proper stretching behaviour
  */
 - (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip;
@@ -142,5 +143,20 @@
  * to their original position
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldMergeStrip:(HLSStrip *)strip1 withStrip:(HLSStrip *)strip2;
+
+/**
+ * Called when a strip is about to enter edit mode. Return NO to prevent resizing
+ */
+- (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldEnterEditModeForStrip:(HLSStrip *)strip;
+
+/**
+ * Called when edit mode has been entered
+ */
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didEnterEditModeForStrip:(HLSStrip *)strip;
+
+/**
+ * Called when edit mode has exited
+ */
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didExitEditModeForStrip:(HLSStrip *)strip;
 
 @end
