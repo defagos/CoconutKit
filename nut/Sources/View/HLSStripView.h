@@ -34,6 +34,8 @@
 @property (nonatomic, assign, getter=isEdited) BOOL edited;
 @property (nonatomic, assign) id<HLSStripViewDelegate> delegate;
 
+- (void)setContentFrame:(CGRect)contentFrame;
+
 - (void)enterEditMode;
 - (void)exitEditMode;
 

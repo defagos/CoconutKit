@@ -112,7 +112,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     self.allStrips = cleanedStrips;
     for (HLSStrip *strip in self.allStrips) {
         HLSStripView *stripView = [self buildStripViewForStrip:strip];
-        stripView.frame = [self frameForStrip:strip];
+        [stripView setContentFrame:[self frameForStrip:strip]];
         [self addSubview:stripView];
         
         NSValue *stripKey = [NSValue valueWithPointer:strip];
@@ -158,7 +158,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 {
     for (HLSStrip *strip in self.allStrips) {
         HLSStripView *stripView = [self viewForStrip:strip];
-        stripView.frame = [self frameForStrip:strip];
+        [stripView setContentFrame:[self frameForStrip:strip]];
     }
 }
 

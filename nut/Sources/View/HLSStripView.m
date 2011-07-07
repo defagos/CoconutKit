@@ -21,6 +21,8 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 @property (nonatomic, retain) UILabel *leftLabel;
 @property (nonatomic, retain) UILabel *rightLabel;
 
+- (CGRect)frameForContentFrame:(CGRect)contentFrame;
+
 @end
 
 // TODO: Text at both ends. Adjust size, apply fast fade out effect when text are brought near enough so that no
@@ -32,13 +34,14 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 
 - (id)initWithStrip:(HLSStrip *)strip view:(UIView *)view
 {
-    if ((self = [super initWithFrame:view.frame])) {
+    if ((self = [super initWithFrame:[self frameForContentFrame:view.frame]])) {
         self.strip = strip;
         
         self.backgroundColor = [UIColor clearColor];
         
         // The view inside must stretch with the strip view wrapper
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        view.frame = CGRectMake(kStripViewHandleWidth, 0.f, view.frame.size.width, view.frame.size.height);
         [self addSubview:view];
         
         // Add labels at strip ends. When the strip is large enough, this makes it possible to display
@@ -87,11 +90,24 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 
 @synthesize delegate = m_delegate;
 
+- (void)setContentFrame:(CGRect)contentFrame
+{
+    self.frame = [self frameForContentFrame:contentFrame];
+}
+
 #pragma mark Layout
 
 - (void)layoutSubviews
 {
     HLSLoggerInfo(@"Laying out subviews");
+}
+
+- (CGRect)frameForContentFrame:(CGRect)contentFrame
+{
+    return CGRectMake(contentFrame.origin.x - kStripViewHandleWidth, 
+                      0.f, 
+                      contentFrame.size.width + 2 * kStripViewHandleWidth, 
+                      contentFrame.size.height);
 }
 
 #pragma mark Edit mode
@@ -106,7 +122,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
     
     // Display handles around the strip view
-    self.leftHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(-kStripViewHandleWidth, 
+    self.leftHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(0.f, 
                                                                     0.f, 
                                                                     kStripViewHandleWidth, 
                                                                     self.frame.size.height)]
@@ -114,7 +130,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     self.leftHandleView.backgroundColor = [UIColor blueColor];
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(self.frame.size.width, 
+    self.rightHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(self.frame.size.width - kStripViewHandleWidth, 
                                                                      0.f, 
                                                                      kStripViewHandleWidth, 
                                                                      self.frame.size.height)]

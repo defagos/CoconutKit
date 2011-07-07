@@ -17,7 +17,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        //self.exclusiveTouch = YES;
+        self.exclusiveTouch = YES;
     }
     return self;
 }
