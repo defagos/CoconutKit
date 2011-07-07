@@ -579,13 +579,3 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 }
 
 @end
-
-@interface HLSCursor_Linker
-+ (void)link;
-@end
-
-
-@implementation HLSCursor_Linker
-+ (void)link {}
-@end
-
