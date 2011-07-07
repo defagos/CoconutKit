@@ -499,6 +499,13 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             if (CGRectContainsPoint(self.pointerContainerView.frame, pos)) {
                 m_grabbed = YES;
                 
+                // Offset between the point where the finger touches the screen when dragging begins and initial center
+                // of the view which will be moved. This makes it possible to compensate this initial offset so that
+                // the view frame does not "jump" at the finger location (so that the finger is then at the view center) once 
+                // the first finger motion is detected. Instead, the frame will nicely follow the finger, even if it was not
+                // initially touched at its center
+                m_initialDraggingXOffset = pos.x - self.pointerContainerView.center.x;
+                
                 NSUInteger index = [self indexForXPos:m_xPos];
                 [self swapElementViewAtIndex:index selected:NO];
                 
@@ -513,8 +520,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         
         if (m_grabbed) {
-            self.pointerContainerView.frame = [self pointerFrameForXPos:pos.x];
-            m_xPos = pos.x;
+            CGFloat xPos = pos.x + - m_initialDraggingXOffset;
+            self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
+            m_xPos = xPos;
             NSUInteger index = [self indexForXPos:m_xPos];
             if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
                 HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
@@ -571,3 +579,13 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 }
 
 @end
+
+@interface HLSCursor_Linker
++ (void)link;
+@end
+
+
+@implementation HLSCursor_Linker
++ (void)link {}
+@end
+
