@@ -15,13 +15,11 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @interface HLSStripView ()
 
-@property (nonatomic, retain) IBOutlet UIView *contentView;
+@property (nonatomic, retain) UIView *contentView;
 @property (nonatomic, retain) UIView *leftHandleView;
 @property (nonatomic, retain) UIView *rightHandleView;
 @property (nonatomic, retain) UILabel *leftLabel;
 @property (nonatomic, retain) UILabel *rightLabel;
-
-- (void)endTouches:(NSSet *)touches;
 
 @end
 
@@ -41,7 +39,7 @@ static const CGFloat kStripViewHandleWidth = 20.f;
         self.contentView = contentView;
         [self addSubview:contentView];
         
-        self.contentFrame = contentView.frame;
+        self.contentFrameInParent = CGRectZero;
         
         self.backgroundColor = [UIColor clearColor];
         
@@ -74,7 +72,6 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     self.rightHandleView = nil;
     self.leftLabel = nil;
     self.rightLabel = nil;
-    self.delegate = nil;
     
     [super dealloc];
 }
@@ -85,12 +82,28 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @synthesize contentView = m_contentView;
 
-@synthesize contentFrame = m_contentFrame;
+@synthesize contentFrameInParent = m_contentFrameInParent;
 
-- (void)setContentFrame:(CGRect)contentFrame
+- (void)setContentFrameInParent:(CGRect)contentFrameInParent
 {
-    m_contentFrame = contentFrame;
+    m_contentFrameInParent = contentFrameInParent;
     [self setNeedsLayout];
+}
+
+- (CGRect)leftHandleFrameInParent
+{
+    return CGRectMake(self.contentFrameInParent.origin.x - kStripViewHandleWidth,
+                      self.contentFrameInParent.origin.y,
+                      kStripViewHandleWidth,
+                      self.contentFrameInParent.size.height);
+}
+
+- (CGRect)rightHandleFrameInParent
+{
+    return CGRectMake(self.contentFrameInParent.origin.x + self.contentFrameInParent.size.width,
+                      self.contentFrameInParent.origin.y,
+                      kStripViewHandleWidth,
+                      self.contentFrameInParent.size.height);
 }
 
 @synthesize leftHandleView = m_leftHandleView;
@@ -103,8 +116,6 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @synthesize edited = m_edited;
 
-@synthesize delegate = m_delegate;
-
 #pragma mark Layout
 
 - (void)layoutSubviews
@@ -112,29 +123,29 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     HLSLoggerInfo(@"Laying out subviews");
     
     if (self.edited) {
-        self.frame = CGRectMake(self.contentFrame.origin.x - kStripViewHandleWidth,
-                                self.contentFrame.origin.y, 
-                                self.contentFrame.size.width + 2 * kStripViewHandleWidth,
-                                self.contentFrame.size.height);
+        self.frame = CGRectMake(self.contentFrameInParent.origin.x - kStripViewHandleWidth,
+                                self.contentFrameInParent.origin.y, 
+                                self.contentFrameInParent.size.width + 2 * kStripViewHandleWidth,
+                                self.contentFrameInParent.size.height);
         self.leftHandleView.frame = CGRectMake(0.f, 
                                                0.f, 
                                                kStripViewHandleWidth, 
-                                               self.contentFrame.size.height);
-        self.rightHandleView.frame = CGRectMake(kStripViewHandleWidth + self.contentFrame.size.width, 
+                                               self.contentFrameInParent.size.height);
+        self.rightHandleView.frame = CGRectMake(kStripViewHandleWidth + self.contentFrameInParent.size.width, 
                                                 0.f, 
                                                 kStripViewHandleWidth, 
-                                                self.contentFrame.size.height);
+                                                self.contentFrameInParent.size.height);
         self.contentView.frame = CGRectMake(kStripViewHandleWidth,
                                             0.f,
-                                            self.contentFrame.size.width,
-                                            self.contentFrame.size.height);        
+                                            self.contentFrameInParent.size.width,
+                                            self.contentFrameInParent.size.height);        
     }
     else {
-        self.frame = self.contentFrame;
+        self.frame = self.contentFrameInParent;
         self.contentView.frame = CGRectMake(0.f, 
                                             0.f, 
-                                            self.contentFrame.size.width, 
-                                            self.contentFrame.size.height);
+                                            self.contentFrameInParent.size.width, 
+                                            self.contentFrameInParent.size.height);
     }
 }
 
@@ -179,61 +190,6 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     
     self.edited = NO;
     [self setNeedsLayout];
-}
-
-#pragma mark Touch events
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    HLSLoggerInfo(@"Touches began");
-    
-    // Has the content view been touched?
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    if (CGRectContainsPoint(self.contentView.frame, pos)) {
-        [self.delegate stripViewHasBeenClicked:self];    
-    }    
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    // Has the left handle been touched?
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    if (CGRectContainsPoint(self.leftHandleView.frame, pos)) {
-        if (! m_draggingLeftHandle) {
-            m_draggingLeftHandle = YES;
-            HLSLoggerInfo(@"Dragging left handle");
-        }
-    }
-    // Has the right handle been touched?
-    else if (CGRectContainsPoint(self.rightHandleView.frame, pos)) {
-        if (! m_draggingRightHandle) {
-            m_draggingRightHandle = YES;
-            HLSLoggerInfo(@"Dragging right handle");
-        }
-    }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self endTouches:touches];
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self endTouches:touches];
-}
-
-- (void)endTouches:(NSSet *)touches
-{
-    if (m_draggingLeftHandle) {
-        HLSLoggerInfo(@"Stopped dragging left handle");
-    }
-    if (m_draggingRightHandle) {
-        HLSLoggerInfo(@"Stopped dragging right handle");
-    }
-    
-    m_draggingLeftHandle = NO;
-    m_draggingRightHandle = NO;
 }
 
 @end

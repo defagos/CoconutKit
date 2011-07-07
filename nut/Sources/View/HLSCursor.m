@@ -520,7 +520,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         
         if (m_grabbed) {
-            CGFloat xPos = pos.x + - m_initialDraggingXOffset;
+            CGFloat xPos = pos.x - m_initialDraggingXOffset;
             self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
             m_xPos = xPos;
             NSUInteger index = [self indexForXPos:m_xPos];

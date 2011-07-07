@@ -14,6 +14,7 @@
 #import "HLSStrip.h"
 
 // Forward declarations
+@class HLSStripView;
 @protocol HLSStripContainerViewDelegate;
 
 /**
@@ -32,6 +33,10 @@
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
     BOOL m_enabled;
+    BOOL m_draggingLeftHandle;              // YES if dragging the left handle of a strip view
+    BOOL m_draggingRightHandle;             // YES if dragging the right handle of a strip view
+    HLSStripView *m_resizedStripView;       // The view which is resized by dragging handles
+    CGFloat m_handlePreviousXPos;           // Previous position of the handle when grabbed for resizing a strip
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 

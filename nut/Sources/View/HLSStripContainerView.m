@@ -18,24 +18,30 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
-@interface HLSStripContainerView () <HLSAnimationDelegate, HLSStripViewDelegate>
+@interface HLSStripContainerView () <HLSAnimationDelegate>
 
 - (void)initialize;
 
 @property (nonatomic, retain) NSArray *allStrips;
 @property (nonatomic, retain) NSMutableDictionary *stripToViewMap;
+@property (nonatomic, retain) HLSStripView *resizedStripView;
 
 - (CGFloat)xPosForPosition:(NSUInteger)position;
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
 - (CGRect)frameForStrip:(HLSStrip *)strip;
 
-- (HLSStripView *)addViewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)addStripViewForStrip:(HLSStrip *)strip;
 - (HLSStripView *)buildStripViewForStrip:(HLSStrip *)strip;
-- (void)removeViewForStrip:(HLSStrip *)strip;
-- (HLSStripView *)viewForStrip:(HLSStrip *)strip;
+- (void)removeStripViewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)stripViewForStrip:(HLSStrip *)strip;
+- (HLSStripView *)stripViewAtXPos:(CGFloat)xPos;
+
+- (void)toggleEditModeForStripView:(HLSStripView *)stripView;
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
+
+- (void)endTouches:(NSSet *)touches;
 
 @end
 
@@ -70,6 +76,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 {
     self.allStrips = nil;
     self.stripToViewMap = nil;
+    self.resizedStripView = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -112,7 +119,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     self.allStrips = cleanedStrips;
     for (HLSStrip *strip in self.allStrips) {
         HLSStripView *stripView = [self buildStripViewForStrip:strip];
-        [stripView setContentFrame:[self frameForStrip:strip]];
+        [stripView setContentFrameInParent:[self frameForStrip:strip]];
         [self addSubview:stripView];
         
         NSValue *stripKey = [NSValue valueWithPointer:strip];
@@ -150,6 +157,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 @synthesize enabled = m_enabled;
 
+@synthesize resizedStripView = m_resizedStripView;
+
 @synthesize delegate = m_delegate;
 
 #pragma mark Laying out subviews
@@ -157,8 +166,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (void)layoutSubviews
 {
     for (HLSStrip *strip in self.allStrips) {
-        HLSStripView *stripView = [self viewForStrip:strip];
-        [stripView setContentFrame:[self frameForStrip:strip]];
+        HLSStripView *stripView = [self stripViewForStrip:strip];
+        [stripView setContentFrameInParent:[self frameForStrip:strip]];
     }
 }
 
@@ -193,7 +202,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 // Create and install the view associated with a strip, and register it into the index
-- (HLSStripView *)addViewForStrip:(HLSStrip *)strip
+- (HLSStripView *)addStripViewForStrip:(HLSStrip *)strip
 {
     NSValue *stripKey = [NSValue valueWithPointer:strip];
     HLSStripView *stripView = [self.stripToViewMap objectForKey:stripKey];
@@ -207,6 +216,19 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     [self.stripToViewMap setObject:stripView forKey:stripKey];
     
     return stripView;
+}
+
+// Return the strip view at the given position, or nil if none. Take into account the full strip view, including the handles
+// which are displayed in edit mode
+- (HLSStripView *)stripViewAtXPos:(CGFloat)xPos
+{
+    for (HLSStrip *strip in self.allStrips) {
+        HLSStripView *stripView = [self stripViewForStrip:strip];
+        if (CGRectContainsPoint(stripView.frame, CGPointMake(xPos, self.frame.size.height / 2.f))) {
+            return stripView;
+        }
+    }
+    return nil;
 }
 
 // Create the view associated with a strip
@@ -227,14 +249,13 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip contentView:view] autorelease];
-    stripView.delegate = self;
     return stripView;
 }
 
 // Remove the view associated with a strip, and unregister it from the index
-- (void)removeViewForStrip:(HLSStrip *)strip
+- (void)removeStripViewForStrip:(HLSStrip *)strip
 {
-    HLSStripView *stripView = [self viewForStrip:strip];
+    HLSStripView *stripView = [self stripViewForStrip:strip];
     if (stripView) {
         [stripView removeFromSuperview];
     }
@@ -247,7 +268,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 // Return the view associated with a strip
-- (HLSStripView *)viewForStrip:(HLSStrip *)strip
+- (HLSStripView *)stripViewForStrip:(HLSStrip *)strip
 {
     NSValue *stripKey = [NSValue valueWithPointer:strip];
     HLSStripView *stripView = [self.stripToViewMap objectForKey:stripKey];
@@ -257,7 +278,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     return stripView;
 }
-
 
 #pragma mark Strip management
 
@@ -346,7 +366,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     self.allStrips = [NSArray arrayWithArray:strips];
     
-    [self addViewForStrip:newStrip];
+    [self addStripViewForStrip:newStrip];
     
     HLSAnimation *animation = [self animationAddingStrip:newStrip];
     [animation playAnimated:animated];
@@ -377,15 +397,15 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                 }
             }
             
-            [self removeViewForStrip:strip];
+            [self removeStripViewForStrip:strip];
             
             HLSStrip *subStrip1 = [HLSStrip stripWithBeginPosition:strip.beginPosition endPosition:position];
             [stripsModified addObject:subStrip1];
-            [self addViewForStrip:subStrip1];
+            [self addStripViewForStrip:subStrip1];
             
             HLSStrip *subStrip2 = [HLSStrip stripWithBeginPosition:position endPosition:strip.endPosition];
             [stripsModified addObject:subStrip2];
-            [self addViewForStrip:subStrip2];
+            [self addStripViewForStrip:subStrip2];
             
             split = YES;
         }
@@ -446,84 +466,9 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return YES;
 }
 
-#pragma mark Managing displayed content
+#pragma mark Edit mode
 
-- (void)clear
-{
-    for (HLSStrip *strip in self.allStrips) {
-        [self removeViewForStrip:strip];
-    }
-    self.allStrips = [NSMutableArray array];
-    self.stripToViewMap = [NSMutableDictionary dictionary];
-}
-
-#pragma mark Animations
-
-- (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip
-{
-    HLSStripView *stripView = [self viewForStrip:strip];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)
-                                                                    alphaVariation:0.f];
-    animationStep1.duration = 0.;
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformMakeScale(120.f, 110.f)
-                                                                    alphaVariation:0.f];
-    animationStep2.duration = 0.15;
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformConcat(CGAffineTransformInvert(CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)), 
-                                                                                                           CGAffineTransformInvert(CGAffineTransformMakeScale(120.f, 110.f)))
-                                                                    alphaVariation:0.f];
-    animationStep3.duration = 0.15;
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
-    animation.delegate = self;
-    animation.lockingUI = YES;
-    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
-    animation.tag = kAddStripAnimationTag;
-    
-    return animation;
-}
-
-- (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip
-{
-    HLSStripView *stripView = [self viewForStrip:strip];
-    
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                               withAlphaVariation:-1.f];
-    animationStep.duration = 0.3;
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
-    animation.delegate = self;
-    animation.lockingUI = YES;
-    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
-    animation.tag = kRemoveStripAnimationTag;
-    
-    return animation;
-}
-
-#pragma mark HLSAnimationDelegate protocol implementation
-
-- (void)animationDidStop:(HLSAnimation *)animation
-{
-    if ([animation.tag isEqual:kAddStripAnimationTag]) {
-        if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
-            HLSStrip *newStrip = [animation.userInfo objectForKey:@"strip"];
-            [self.delegate stripContainerView:self hasAddedStrip:newStrip];
-        }        
-    }
-    else if ([animation.tag isEqual:kRemoveStripAnimationTag]) {
-        HLSStrip *strip = [animation.userInfo objectForKey:@"strip"];
-        [self removeViewForStrip:strip];
-        
-        NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.allStrips];
-        [stripsCopy removeObject:strip];
-        self.allStrips = [NSArray arrayWithArray:stripsCopy];
-    }
-}
-
-#pragma mark HLSStripViewDelegate protocol implementation
-
-- (void)stripViewHasBeenClicked:(HLSStripView *)stripView
+- (void)toggleEditModeForStripView:(HLSStripView *)stripView
 {
     HLSStrip *strip = stripView.strip;
     
@@ -553,44 +498,169 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
 }
 
+#pragma mark Managing displayed content
+
+- (void)clear
+{
+    for (HLSStrip *strip in self.allStrips) {
+        [self removeStripViewForStrip:strip];
+    }
+    self.allStrips = [NSMutableArray array];
+    self.stripToViewMap = [NSMutableDictionary dictionary];
+}
+
+#pragma mark Animations
+
+- (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip
+{
+    HLSStripView *stripView = [self stripViewForStrip:strip];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)
+                                                                    alphaVariation:0.f];
+    animationStep1.duration = 0.;
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformMakeScale(120.f, 110.f)
+                                                                    alphaVariation:0.f];
+    animationStep2.duration = 0.15;
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                                     withTransform:CGAffineTransformConcat(CGAffineTransformInvert(CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)), 
+                                                                                                           CGAffineTransformInvert(CGAffineTransformMakeScale(120.f, 110.f)))
+                                                                    alphaVariation:0.f];
+    animationStep3.duration = 0.15;
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    animation.delegate = self;
+    animation.lockingUI = YES;
+    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
+    animation.tag = kAddStripAnimationTag;
+    
+    return animation;
+}
+
+- (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip
+{
+    HLSStripView *stripView = [self stripViewForStrip:strip];
+    
+    HLSAnimationStep *animationStep = [HLSAnimationStep animationStepUpdatingView:stripView
+                                                               withAlphaVariation:-1.f];
+    animationStep.duration = 0.3;
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
+    animation.delegate = self;
+    animation.lockingUI = YES;
+    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:strip, @"strip", nil];
+    animation.tag = kRemoveStripAnimationTag;
+    
+    return animation;
+}
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationDidStop:(HLSAnimation *)animation
+{
+    if ([animation.tag isEqual:kAddStripAnimationTag]) {
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
+            HLSStrip *newStrip = [animation.userInfo objectForKey:@"strip"];
+            [self.delegate stripContainerView:self hasAddedStrip:newStrip];
+        }        
+    }
+    else if ([animation.tag isEqual:kRemoveStripAnimationTag]) {
+        HLSStrip *strip = [animation.userInfo objectForKey:@"strip"];
+        [self removeStripViewForStrip:strip];
+        
+        NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.allStrips];
+        [stripsCopy removeObject:strip];
+        self.allStrips = [NSArray arrayWithArray:stripsCopy];
+    }
+}
+
 #pragma mark Touch events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
-    switch ([touch tapCount]) {
-        // Double tap to add a strip
-        case 2: {
-            CGPoint pos = [touch locationInView:self];
-            NSUInteger position = [self lowerPositionForXPos:pos.x];
-            [self addStripAtPosition:position animated:YES];
-            break;
+    CGPoint pos = [touch locationInView:self];
+    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
+    // Strip view found
+    if (stripView) {
+        // Content view part of a strip view touched. Toggle edit mode on or off
+        if (CGRectContainsPoint(stripView.contentFrameInParent, pos)) {
+            [self toggleEditModeForStripView:stripView];
         }
-            
-        default: {
-            break;
-        }
+    }
+    // No strip view found. A double tap create a strip
+    else {
+        switch ([touch tapCount]) {
+                // Double tap to add a strip
+            case 2: {
+                CGPoint pos = [touch locationInView:self];
+                NSUInteger position = [self lowerPositionForXPos:pos.x];
+                [self addStripAtPosition:position animated:YES];
+                break;
+            }
+                
+            default: {
+                break;
+            }
+        }    
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
+    // Strip view found
+    if (stripView) {
+        if (CGRectContainsPoint([stripView leftHandleFrameInParent], pos)) {
+            if (! m_draggingLeftHandle) {
+                m_draggingLeftHandle = YES;
+                m_handlePreviousXPos = pos.x;
+                self.resizedStripView = stripView;
+            }            
+        }
+        else if (CGRectContainsPoint([stripView rightHandleFrameInParent], pos)) {
+            if (! m_draggingRightHandle) {
+                m_draggingRightHandle = YES;
+                m_handlePreviousXPos = pos.x;
+                self.resizedStripView = stripView;
+            }            
+        }
+    }
     
+    if (m_draggingLeftHandle) {
+        CGFloat leftSizeIncrement = m_handlePreviousXPos - pos.x;
+        self.resizedStripView.contentFrameInParent = CGRectMake(self.resizedStripView.contentFrameInParent.origin.x - leftSizeIncrement,
+                                                                self.resizedStripView.contentFrameInParent.origin.y,
+                                                                self.resizedStripView.contentFrameInParent.size.width + leftSizeIncrement,
+                                                                self.resizedStripView.contentFrameInParent.size.height);
+        m_handlePreviousXPos = pos.x;
+    }
+    else if (m_draggingRightHandle) {
+        CGFloat rightSizeIncrement = pos.x - m_handlePreviousXPos;
+        self.resizedStripView.contentFrameInParent = CGRectMake(self.resizedStripView.contentFrameInParent.origin.x,
+                                                                self.resizedStripView.contentFrameInParent.origin.y,
+                                                                self.resizedStripView.contentFrameInParent.size.width + rightSizeIncrement,
+                                                                self.resizedStripView.contentFrameInParent.size.height);
+        m_handlePreviousXPos = pos.x;
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    [self endTouches:touches];    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    [self endTouches:touches];
 }
 
-- (void)endTouches:(NSSet *)touches animated:(BOOL)animated
+- (void)endTouches:(NSSet *)touches
 {
-    
+    self.resizedStripView = nil;
+    m_draggingLeftHandle = NO;
+    m_draggingRightHandle = NO;
+    m_handlePreviousXPos = 0.f;
 }
 
 #pragma mark Description
