@@ -226,7 +226,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                                          1.f / view.frame.size.height);
     }
     
-    HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip view:view] autorelease];
+    HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip contentView:view] autorelease];
     stripView.delegate = self;
     return stripView;
 }

@@ -19,6 +19,8 @@
 @interface HLSStripView : UIView {
 @private
     HLSStrip *m_strip;
+    UIView *m_contentView;
+    CGRect m_contentFrame;
     UIView *m_leftHandleView;
     UIView *m_rightHandleView;
     UILabel *m_leftLabel;
@@ -29,13 +31,12 @@
     id<HLSStripViewDelegate> m_delegate;
 }
 
-- (id)initWithStrip:(HLSStrip *)strip view:(UIView *)view;
+- (id)initWithStrip:(HLSStrip *)strip contentView:(UIView *)contentView;
 
 @property (nonatomic, retain) HLSStrip *strip;
+@property (nonatomic, assign) CGRect contentFrame;
 @property (nonatomic, assign, getter=isEdited) BOOL edited;
 @property (nonatomic, assign) id<HLSStripViewDelegate> delegate;
-
-- (void)setContentFrame:(CGRect)contentFrame;
 
 - (void)enterEditMode;
 - (void)exitEditMode;

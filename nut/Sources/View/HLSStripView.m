@@ -15,13 +15,11 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @interface HLSStripView ()
 
+@property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) UIView *leftHandleView;
 @property (nonatomic, retain) UIView *rightHandleView;
 @property (nonatomic, retain) UILabel *leftLabel;
 @property (nonatomic, retain) UILabel *rightLabel;
-
-- (CGRect)frameForContentFrame:(CGRect)contentFrame;
-- (CGRect)contentFrame;
 
 - (void)endTouches:(NSSet *)touches;
 
@@ -34,26 +32,30 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithStrip:(HLSStrip *)strip view:(UIView *)view
+- (id)initWithStrip:(HLSStrip *)strip contentView:(UIView *)contentView
 {
-    if ((self = [super initWithFrame:[self frameForContentFrame:view.frame]])) {
+    // CGRectZero. Dimensions will be set in layoutSubviews
+    if ((self = [super initWithFrame:CGRectZero])) {
         self.strip = strip;
+        
+        self.contentView = contentView;
+        [self addSubview:contentView];
+        
+        self.contentFrame = contentView.frame;
         
         self.backgroundColor = [UIColor clearColor];
         
-        // The view inside must stretch with the strip view wrapper
-        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        view.frame = CGRectMake(kStripViewHandleWidth, 0.f, view.frame.size.width, view.frame.size.height);
-        [self addSubview:view];
-        
         // Add labels at strip ends. When the strip is large enough, this makes it possible to display
         // some text (e.g. the values at the end)
+        // TODO
+#if 0
         self.leftLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.leftLabel.backgroundColor = [UIColor redColor];
         [self addSubview:self.leftLabel];
         self.rightLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.rightLabel.backgroundColor = [UIColor redColor];
         [self addSubview:self.rightLabel];
+#endif
     }
     return self;
 }
@@ -67,6 +69,7 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 - (void)dealloc
 {
     self.strip = nil;
+    self.contentView = nil;
     self.leftHandleView = nil;
     self.rightHandleView = nil;
     self.leftLabel = nil;
@@ -80,6 +83,16 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @synthesize strip = m_strip;
 
+@synthesize contentView = m_contentView;
+
+@synthesize contentFrame = m_contentFrame;
+
+- (void)setContentFrame:(CGRect)contentFrame
+{
+    m_contentFrame = contentFrame;
+    [self setNeedsLayout];
+}
+
 @synthesize leftHandleView = m_leftHandleView;
 
 @synthesize rightHandleView = m_rightHandleView;
@@ -92,32 +105,37 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 @synthesize delegate = m_delegate;
 
-- (void)setContentFrame:(CGRect)contentFrame
-{
-    self.frame = [self frameForContentFrame:contentFrame];
-}
-
 #pragma mark Layout
 
 - (void)layoutSubviews
 {
     HLSLoggerInfo(@"Laying out subviews");
-}
-
-- (CGRect)frameForContentFrame:(CGRect)contentFrame
-{
-    return CGRectMake(contentFrame.origin.x - kStripViewHandleWidth, 
-                      0.f, 
-                      contentFrame.size.width + 2 * kStripViewHandleWidth, 
-                      contentFrame.size.height);
-}
-
-- (CGRect)contentFrame
-{
-    return CGRectMake(kStripViewHandleWidth,
-                      0.f, 
-                      self.frame.size.width - 2 * kStripViewHandleWidth,
-                      self.frame.size.height);
+    
+    if (self.edited) {
+        self.frame = CGRectMake(self.contentFrame.origin.x - kStripViewHandleWidth,
+                                self.contentFrame.origin.y, 
+                                self.contentFrame.size.width + 2 * kStripViewHandleWidth,
+                                self.contentFrame.size.height);
+        self.leftHandleView.frame = CGRectMake(0.f, 
+                                               0.f, 
+                                               kStripViewHandleWidth, 
+                                               self.contentFrame.size.height);
+        self.rightHandleView.frame = CGRectMake(kStripViewHandleWidth + self.contentFrame.size.width, 
+                                                0.f, 
+                                                kStripViewHandleWidth, 
+                                                self.contentFrame.size.height);
+        self.contentView.frame = CGRectMake(kStripViewHandleWidth,
+                                            0.f,
+                                            self.contentFrame.size.width,
+                                            self.contentFrame.size.height);        
+    }
+    else {
+        self.frame = self.contentFrame;
+        self.contentView.frame = CGRectMake(0.f, 
+                                            0.f, 
+                                            self.contentFrame.size.width, 
+                                            self.contentFrame.size.height);
+    }
 }
 
 #pragma mark Edit mode
@@ -131,24 +149,19 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     
     // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
     
-    // Display handles around the strip view
-    self.leftHandleView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 
-                                                                    0.f, 
-                                                                    kStripViewHandleWidth, 
-                                                                    self.frame.size.height)]
-                           autorelease];
+    // Add handles around the strip view
+    self.leftHandleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     self.leftHandleView.backgroundColor = [UIColor blueColor];
+    self.leftHandleView.exclusiveTouch = YES;
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - kStripViewHandleWidth, 
-                                                                     0.f, 
-                                                                     kStripViewHandleWidth, 
-                                                                     self.frame.size.height)]
-                            autorelease];
+    self.rightHandleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     self.rightHandleView.backgroundColor = [UIColor blueColor];
+    self.rightHandleView.exclusiveTouch = YES;
     [self addSubview:self.rightHandleView];
     
     self.edited = YES;
+    [self setNeedsLayout];
 }
 
 - (void)exitEditMode
@@ -165,6 +178,7 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     self.rightHandleView = nil;
     
     self.edited = NO;
+    [self setNeedsLayout];
 }
 
 #pragma mark Touch events
@@ -175,9 +189,9 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     
     // Has the content view been touched?
     CGPoint pos = [[touches anyObject] locationInView:self];
-    if (CGRectContainsPoint([self contentFrame], pos)) {
+    if (CGRectContainsPoint(self.contentView.frame, pos)) {
         [self.delegate stripViewHasBeenClicked:self];    
-    }
+    }    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -196,7 +210,7 @@ static const CGFloat kStripViewHandleWidth = 20.f;
             m_draggingRightHandle = YES;
             HLSLoggerInfo(@"Dragging right handle");
         }
-    }    
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
