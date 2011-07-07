@@ -10,9 +10,8 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSStripHandleView.h"
 
-static const CGFloat kStripViewHandleWidth = 10.f;
+static const CGFloat kStripViewHandleWidth = 20.f;
 
 @interface HLSStripView ()
 
@@ -22,6 +21,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 @property (nonatomic, retain) UILabel *rightLabel;
 
 - (CGRect)frameForContentFrame:(CGRect)contentFrame;
+- (CGRect)contentFrame;
 
 @end
 
@@ -110,6 +110,14 @@ static const CGFloat kStripViewHandleWidth = 10.f;
                       contentFrame.size.height);
 }
 
+- (CGRect)contentFrame
+{
+    return CGRectMake(kStripViewHandleWidth,
+                      0.f, 
+                      self.frame.size.width - 2 * kStripViewHandleWidth,
+                      self.frame.size.height);
+}
+
 #pragma mark Edit mode
 
 - (void)enterEditMode
@@ -122,7 +130,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
     
     // Display handles around the strip view
-    self.leftHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(0.f, 
+    self.leftHandleView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 
                                                                     0.f, 
                                                                     kStripViewHandleWidth, 
                                                                     self.frame.size.height)]
@@ -130,7 +138,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     self.leftHandleView.backgroundColor = [UIColor blueColor];
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(self.frame.size.width - kStripViewHandleWidth, 
+    self.rightHandleView = [[[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - kStripViewHandleWidth, 
                                                                      0.f, 
                                                                      kStripViewHandleWidth, 
                                                                      self.frame.size.height)]
@@ -162,7 +170,21 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     HLSLoggerInfo(@"Touches began");
-    [self.delegate stripViewHasBeenClicked:self];
+    
+    // Has the content view been touched?
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    if (CGRectContainsPoint([self contentFrame], pos)) {
+        HLSLoggerInfo(@"Content clicked");
+        [self.delegate stripViewHasBeenClicked:self];    
+    }
+    // Has the left handle been touched?
+    else if (CGRectContainsPoint(self.leftHandleView.frame, pos)) {
+        HLSLoggerInfo(@"Left handle clicked");
+    }
+    // Has the right handle been touched?
+    else if (CGRectContainsPoint(self.rightHandleView.frame, pos)) {
+        HLSLoggerInfo(@"Right handle clicked");
+    }    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

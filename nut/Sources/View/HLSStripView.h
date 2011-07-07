@@ -9,7 +9,6 @@
 #import "HLSStrip.h"
 
 // Forward declarations
-@class HLSStripHandleView;
 @protocol HLSStripViewDelegate;
 
 /**
@@ -20,8 +19,8 @@
 @interface HLSStripView : UIView {
 @private
     HLSStrip *m_strip;
-    HLSStripHandleView *m_leftHandleView;
-    HLSStripHandleView *m_rightHandleView;
+    UIView *m_leftHandleView;
+    UIView *m_rightHandleView;
     UILabel *m_leftLabel;
     UILabel *m_rightLabel;
     BOOL m_edited;
