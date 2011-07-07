@@ -23,6 +23,8 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 - (CGRect)frameForContentFrame:(CGRect)contentFrame;
 - (CGRect)contentFrame;
 
+- (void)endTouches:(NSSet *)touches;
+
 @end
 
 // TODO: Text at both ends. Adjust size, apply fast fade out effect when text are brought near enough so that no
@@ -174,37 +176,50 @@ static const CGFloat kStripViewHandleWidth = 20.f;
     // Has the content view been touched?
     CGPoint pos = [[touches anyObject] locationInView:self];
     if (CGRectContainsPoint([self contentFrame], pos)) {
-        HLSLoggerInfo(@"Content clicked");
         [self.delegate stripViewHasBeenClicked:self];    
     }
-    // Has the left handle been touched?
-    else if (CGRectContainsPoint(self.leftHandleView.frame, pos)) {
-        HLSLoggerInfo(@"Left handle clicked");
-    }
-    // Has the right handle been touched?
-    else if (CGRectContainsPoint(self.rightHandleView.frame, pos)) {
-        HLSLoggerInfo(@"Right handle clicked");
-    }    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    HLSLoggerInfo(@"Touches moved");
+    // Has the left handle been touched?
+    CGPoint pos = [[touches anyObject] locationInView:self];
+    if (CGRectContainsPoint(self.leftHandleView.frame, pos)) {
+        if (! m_draggingLeftHandle) {
+            m_draggingLeftHandle = YES;
+            HLSLoggerInfo(@"Dragging left handle");
+        }
+    }
+    // Has the right handle been touched?
+    else if (CGRectContainsPoint(self.rightHandleView.frame, pos)) {
+        if (! m_draggingRightHandle) {
+            m_draggingRightHandle = YES;
+            HLSLoggerInfo(@"Dragging right handle");
+        }
+    }    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    HLSLoggerInfo(@"Touches ended");
+    [self endTouches:touches];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    HLSLoggerInfo(@"Touches cancelled");
+    [self endTouches:touches];
 }
 
-- (void)endTouches:(NSSet *)touches animated:(BOOL)animated
+- (void)endTouches:(NSSet *)touches
 {
-    HLSLoggerInfo(@"Touches ended");
+    if (m_draggingLeftHandle) {
+        HLSLoggerInfo(@"Stopped dragging left handle");
+    }
+    if (m_draggingRightHandle) {
+        HLSLoggerInfo(@"Stopped dragging right handle");
+    }
+    
+    m_draggingLeftHandle = NO;
+    m_draggingRightHandle = NO;
 }
 
 @end

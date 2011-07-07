@@ -24,6 +24,8 @@
     UILabel *m_leftLabel;
     UILabel *m_rightLabel;
     BOOL m_edited;
+    BOOL m_draggingLeftHandle;
+    BOOL m_draggingRightHandle;
     id<HLSStripViewDelegate> m_delegate;
 }
 
