@@ -258,6 +258,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return stripView;
 }
 
+
 #pragma mark Strip management
 
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated
@@ -533,6 +534,9 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                 return;
             }
         }
+        
+        // Bring the edited strip to the top
+        [self bringSubviewToFront:stripView];
         
         [stripView enterEditMode];
         

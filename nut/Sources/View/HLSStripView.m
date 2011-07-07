@@ -10,15 +10,21 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "HLSStripHandleView.h"
 
 static const CGFloat kStripViewHandleWidth = 10.f;
 
 @interface HLSStripView ()
 
-@property (nonatomic, retain) IBOutlet UIView *leftHandleView;
-@property (nonatomic, retain) IBOutlet UIView *rightHandleView;
+@property (nonatomic, retain) UIView *leftHandleView;
+@property (nonatomic, retain) UIView *rightHandleView;
+@property (nonatomic, retain) UILabel *leftLabel;
+@property (nonatomic, retain) UILabel *rightLabel;
 
 @end
+
+// TODO: Text at both ends. Adjust size, apply fast fade out effect when text are brought near enough so that no
+//       overlap occurs
 
 @implementation HLSStripView
 
@@ -34,6 +40,15 @@ static const CGFloat kStripViewHandleWidth = 10.f;
         // The view inside must stretch with the strip view wrapper
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:view];
+        
+        // Add labels at strip ends. When the strip is large enough, this makes it possible to display
+        // some text (e.g. the values at the end)
+        self.leftLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.leftLabel.backgroundColor = [UIColor redColor];
+        [self addSubview:self.leftLabel];
+        self.rightLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.rightLabel.backgroundColor = [UIColor redColor];
+        [self addSubview:self.rightLabel];
     }
     return self;
 }
@@ -49,6 +64,8 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     self.strip = nil;
     self.leftHandleView = nil;
     self.rightHandleView = nil;
+    self.leftLabel = nil;
+    self.rightLabel = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -62,16 +79,34 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 
 @synthesize rightHandleView = m_rightHandleView;
 
+@synthesize leftLabel = m_leftLabel;
+
+@synthesize rightLabel = m_rightLabel;
+
 @synthesize edited = m_edited;
 
 @synthesize delegate = m_delegate;
+
+#pragma mark Layout
+
+- (void)layoutSubviews
+{
+    HLSLoggerInfo(@"Laying out subviews");
+}
 
 #pragma mark Edit mode
 
 - (void)enterEditMode
 {
+    if (self.edited) {
+        HLSLoggerWarn(@"Already in edit mode");
+        return;
+    }
+    
+    // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
+    
     // Display handles around the strip view
-    self.leftHandleView = [[[UIView alloc] initWithFrame:CGRectMake(-kStripViewHandleWidth, 
+    self.leftHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(-kStripViewHandleWidth, 
                                                                     0.f, 
                                                                     kStripViewHandleWidth, 
                                                                     self.frame.size.height)]
@@ -79,7 +114,7 @@ static const CGFloat kStripViewHandleWidth = 10.f;
     self.leftHandleView.backgroundColor = [UIColor blueColor];
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width, 
+    self.rightHandleView = [[[HLSStripHandleView alloc] initWithFrame:CGRectMake(self.frame.size.width, 
                                                                      0.f, 
                                                                      kStripViewHandleWidth, 
                                                                      self.frame.size.height)]
@@ -92,6 +127,11 @@ static const CGFloat kStripViewHandleWidth = 10.f;
 
 - (void)exitEditMode
 {
+    if (! self.edited) {
+        HLSLoggerWarn(@"Not in edit mode");
+        return;
+    }
+    
     [self.leftHandleView removeFromSuperview];
     self.leftHandleView = nil;
     

@@ -38,6 +38,7 @@
 		6FD71F6D13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD71F6C13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m */; };
 		6FDC13C813B8A67B00247620 /* nut_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */; };
 		6FDD066213BC6F8900BF880A /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD066113BC6F8800BF880A /* HLSRuntime.m */; };
+		6FE6017313C58C1F0067B9A2 /* HLSStripHandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE6017213C58C1F0067B9A2 /* HLSStripHandleView.m */; };
 		6FEAEFCB13B07AFE0088753B /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCA13B07AFE0088753B /* CursorPointerInfoViewController.m */; };
 		6FEAEFCD13B07B130088753B /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCC13B07B130088753B /* CursorPointerInfoViewController.xib */; };
 		6FEF8436131F76510015B57C /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF83AA131F76510015B57C /* HLSAnimation.m */; };
@@ -208,6 +209,8 @@
 		6FDC13C713B8A67B00247620 /* nut_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_strip_default_background.png; sourceTree = "<group>"; };
 		6FDD066013BC6F8800BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FDD066113BC6F8800BF880A /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
+		6FE6017113C58C1F0067B9A2 /* HLSStripHandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripHandleView.h; sourceTree = "<group>"; };
+		6FE6017213C58C1F0067B9A2 /* HLSStripHandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripHandleView.m; sourceTree = "<group>"; };
 		6FEAEFC913B07AFE0088753B /* CursorPointerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorPointerInfoViewController.h; sourceTree = "<group>"; };
 		6FEAEFCA13B07AFE0088753B /* CursorPointerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorPointerInfoViewController.m; sourceTree = "<group>"; };
 		6FEAEFCC13B07B130088753B /* CursorPointerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorPointerInfoViewController.xib; sourceTree = "<group>"; };
@@ -727,10 +730,12 @@
 				6FAF20F813A24D36009A5645 /* HLSCursor.m */,
 				6FFFBA0D13B4AA1700FD9A82 /* HLSStrip.h */,
 				6FFFBA0E13B4AA1700FD9A82 /* HLSStrip.m */,
+				6FA6C20F13B337190039622A /* HLSStripContainerView.h */,
+				6FE6017113C58C1F0067B9A2 /* HLSStripHandleView.h */,
+				6FE6017213C58C1F0067B9A2 /* HLSStripHandleView.m */,
+				6FA6C21013B337190039622A /* HLSStripContainerView.m */,
 				6FFAC8EA13C4EB3C00C00025 /* HLSStripView.h */,
 				6FFAC8EB13C4EB3D00C00025 /* HLSStripView.m */,
-				6FA6C20F13B337190039622A /* HLSStripContainerView.h */,
-				6FA6C21013B337190039622A /* HLSStripContainerView.m */,
 				6FEF83F2131F76510015B57C /* HLSSubtitleTableViewCell.h */,
 				6FEF83F3131F76510015B57C /* HLSSubtitleTableViewCell.m */,
 				6FEF83F4131F76510015B57C /* HLSTableViewCell+Protected.h */,
@@ -1513,6 +1518,7 @@
 				6FD71F6D13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FAF8E1213C4812B0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */,
 				6FFAC8EC13C4EB3D00C00025 /* HLSStripView.m in Sources */,
+				6FE6017313C58C1F0067B9A2 /* HLSStripHandleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
