@@ -37,6 +37,7 @@
     BOOL m_draggingRightHandle;             // YES if dragging the right handle of a strip view
     HLSStripView *m_movedStripView;         // The view which is being moved or resized (nil if none)
     CGFloat m_handlePreviousXPos;           // Previous position of the handle when grabbed for resizing a strip
+    BOOL m_stripJustMadeLarger;             // When a stripped is moved or resized, stores in which direction the handle is moved
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 

@@ -89,7 +89,7 @@
 {
     [super viewDidLoad];
     
-    self.stripContainerView.positions = 10;
+    self.stripContainerView.positions = 50;
     self.stripContainerView.delegate = self;
     
     // Start with two strips (can be set in any order)

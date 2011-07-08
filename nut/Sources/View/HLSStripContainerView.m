@@ -30,10 +30,11 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (CGFloat)xPosForPosition:(NSUInteger)position;
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
+- (NSUInteger)upperPositionForXPos:(CGFloat)xPos;
 - (NSUInteger)nearestPositionForXPos:(CGFloat)xPos;
 - (CGRect)frameForStrip:(HLSStrip *)strip;
+- (CGRect)frameForBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
 - (CGRect)frameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos;
-- (CGRect)bestFrameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos;
 
 - (HLSStripView *)addStripViewForStrip:(HLSStrip *)strip;
 - (HLSStripView *)buildStripViewForStrip:(HLSStrip *)strip;
@@ -200,6 +201,17 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return floorf(((self.positions - 1.f) * xPos) / self.frame.size.width);
 }
 
+// Return the position located before xPos (in the coordinate system of the container view)
+- (NSUInteger)upperPositionForXPos:(CGFloat)xPos
+{
+    if (floatlt(xPos, 0.f) || floatgt(xPos, self.frame.size.width)) {
+        HLSLoggerError(@"Position outside range");
+        return 0;
+    }
+    
+    return ceilf(((self.positions - 1.f) * xPos) / self.frame.size.width);
+}
+
 // Return the nearest position for xPos (in the coordinate system of the container view)
 - (NSUInteger)nearestPositionForXPos:(CGFloat)xPos
 {
@@ -214,8 +226,14 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 // Return the frame corresponding to a strip (in the coordinate system of the container view)
 - (CGRect)frameForStrip:(HLSStrip *)strip
 {
-    CGFloat beginXPos = [self xPosForPosition:strip.beginPosition];
-    CGFloat endXPos = [self xPosForPosition:strip.endPosition];
+    return [self frameForBeginPosition:strip.beginPosition endPosition:strip.endPosition];
+}
+
+// Return the frame corresponding to two positions (in the coordinate system of the container view)
+- (CGRect)frameForBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
+{
+    CGFloat beginXPos = [self xPosForPosition:beginPosition];
+    CGFloat endXPos = [self xPosForPosition:endPosition];
     return CGRectMake(beginXPos, 
                       0.f, 
                       endXPos - beginXPos,
@@ -751,11 +769,13 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             CGFloat leftSizeIncrement = m_handlePreviousXPos - pos.x;
             beginXPos = self.movedStripView.contentFrameInParent.origin.x - leftSizeIncrement;
             endXPos = self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width;
+            m_stripJustMadeLarger = floatge(leftSizeIncrement, 0.f);
         }
         else if (m_draggingRightHandle) {
             CGFloat rightSizeIncrement = pos.x - m_handlePreviousXPos;
             beginXPos = self.movedStripView.contentFrameInParent.origin.x;
             endXPos = self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width + rightSizeIncrement;
+            m_stripJustMadeLarger = floatge(rightSizeIncrement, 0.f);
         }
         
         self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos
@@ -780,12 +800,37 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 {
     // Dragging: Snap to nearest position
     if (m_draggingLeftHandle || m_draggingRightHandle) {
-        self.movedStripView.contentFrameInParent = [self bestFrameForBeginXPos:self.movedStripView.contentFrameInParent.origin.x
-                                                                       endXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+        // Calculate in which direction we snap. Take into account the last direction towards which the user was dragging to snap
+        // in this direction. This just feels more natural
+        NSUInteger beginPosition = 0;
+        NSUInteger endPosition = 0;
+        if (m_draggingLeftHandle) {
+            if (m_stripJustMadeLarger) {
+                beginPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
+                endPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];                
+            }
+            else {
+                beginPosition = [self upperPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
+                endPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+            }
+        }
+        else {
+            if (m_stripJustMadeLarger) {
+                beginPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
+                endPosition = [self upperPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+            }
+            else {
+                beginPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
+                endPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+            }
+        }
         
-        // Update strip with new positions
-        self.movedStripView.strip.beginPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
-        self.movedStripView.strip.endPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+        // Adjust the strip view accordingly
+        self.movedStripView.contentFrameInParent = [self frameForBeginPosition:beginPosition endPosition:endPosition];
+        
+        // Adjust the strip object accordingly
+        self.movedStripView.strip.beginPosition = beginPosition;
+        self.movedStripView.strip.endPosition = endPosition;
         
         if ([self.delegate respondsToSelector:@selector(stripContainerView:didMoveStrip:animated:)]) {
             [self.delegate stripContainerView:self didMoveStrip:self.movedStripView.strip animated:YES];
@@ -795,6 +840,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     self.movedStripView = nil;
     m_draggingLeftHandle = NO;
     m_draggingRightHandle = NO;
+    m_stripJustMadeLarger = NO;
     
     m_handlePreviousXPos = 0.f;
 }
