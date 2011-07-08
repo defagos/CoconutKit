@@ -92,8 +92,8 @@
 @protocol HLSAnimationDelegate <NSObject>
 @optional
 
-- (void)animationWillStart:(HLSAnimation *)animation;
-- (void)animationDidStop:(HLSAnimation *)animation;
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep;
+- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated;
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated;
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end

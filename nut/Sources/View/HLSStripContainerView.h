@@ -66,10 +66,11 @@
 @property (nonatomic, assign) NSUInteger defaultLength;
 
 /**
- * Add a strip with the the specified length, trying to center it at the specified position. If a strip already exists at
+ * Add a strip with the specified length, trying to center it at the specified position. If a strip already exists at
  * this position, nothing happens. If there is not enough space for the complete strip to fit, then all available
  * space will be filled.
- * The method returns YES iff a strip could be added.
+ * The method returns YES iff a strip can be added (use the stripContainerView:hasAddedStrip: delegate method to
+ * know when this is done).
  */
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
 
@@ -93,9 +94,27 @@
 
 /**
  * Delete the strip with the specified index (if it exists)
- * The method returns YES iff a strip could be deleted.
+ * The method returns YES iff the strip could be deleted.
  */
 - (BOOL)deleteStripWithIndex:(NSUInteger)index animated:(BOOL)animated;
+
+/**
+ * Delete the specified strip (if it exists)
+ * The method returns YES iff the strip could be deleted.
+ */
+- (BOOL)deleteStrip:(HLSStrip *)strip animated:(BOOL)animated;
+
+/**
+ * Move the strip with the specified index to a position and change its length.
+ * The method returns YES iff the strip could be moved.
+ */
+- (BOOL)moveStripWithIndex:(NSUInteger)index position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
+
+/**
+ * Move the specified strip to a position and change its length.
+ * The method returns YES iff the strip could be moved.
+ */
+- (BOOL)moveStrip:(HLSStrip *)strip position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
 
 /**
  * Clear the strip container view area, without generating any deletion events. Useful if you reuse the same container
@@ -131,7 +150,7 @@
 /**
  * Called after a new strip has been added
  */
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip;
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip animated:(BOOL)animated;
 
 /**
  * Called right before a strip is split. Return NO to cancel
@@ -142,6 +161,11 @@
  * Called right before a strip is deleted. Return NO to cancel
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldDeleteStrip:(HLSStrip *)strip;
+
+/**
+ * Called after a strip has been resized
+ */
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasResizedStrip:(HLSStrip *)strip animated:(BOOL)animated;
 
 /**
  * Called right before two strips are merged. Return NO if to cancel, in which case the strips will be rollbacked

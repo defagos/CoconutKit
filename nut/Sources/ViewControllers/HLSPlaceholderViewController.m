@@ -705,11 +705,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationDidStop:(HLSAnimation *)animation
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     // The old inset view controller has disappeared
     [self.oldInsetViewController.view removeFromSuperview];
-    [self.oldInsetViewController viewDidDisappear:YES];
+    [self.oldInsetViewController viewDidDisappear:animated];
     
     // Restore the original view properties we might have altered during the time the view controller was
     // set as inset
@@ -725,11 +725,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
         [self.delegate placeholderViewController:self
                       didShowInsetViewController:self.insetViewController 
-                                        animated:YES];
+                                        animated:animated];
     } 
     
     // Forward appearance event of the new inset
-    [self.insetViewController viewDidAppear:YES];
+    [self.insetViewController viewDidAppear:animated];
 }
 
 @end

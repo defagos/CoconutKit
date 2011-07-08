@@ -114,6 +114,13 @@
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
     
+    // This will be done in the animationStepWillStart:context: if animated
+    if (! animated) {
+        if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+            [self.delegate animationWillStart:self animated:NO];
+        }
+    }
+    
     // Begin with the first step
     [self playNextStepAnimated:animated];
 }
@@ -176,8 +183,8 @@
     // Instantaneous
     else {
         // Notify the end of the animation
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:)]) {
-            [self.delegate animationStepFinished:animationStep];
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            [self.delegate animationStepFinished:animationStep animated:NO];
         }
         
         [self playNextStepAnimated:animated];
@@ -206,8 +213,8 @@
             [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
         }
         
-        if ([self.delegate respondsToSelector:@selector(animationDidStop:)]) {
-            [self.delegate animationDidStop:self];
+        if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
+            [self.delegate animationDidStop:self animated:animated];
         }
     }    
 }
@@ -278,8 +285,8 @@
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
     if (m_firstStep) {
-        if ([self.delegate respondsToSelector:@selector(animationWillStart:)]) {
-            [self.delegate animationWillStart:self];
+        if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+            [self.delegate animationWillStart:self animated:YES];
         }
         
         m_firstStep = NO;
@@ -290,8 +297,8 @@
 {
     HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
     
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:)]) {
-        [self.delegate animationStepFinished:animationStep];
+    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+        [self.delegate animationStepFinished:animationStep animated:YES];
     }
     
     [self playNextStepAnimated:YES];

@@ -451,19 +451,40 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return NO;
     }
     
+    HLSStrip *strip = [self.allStrips objectAtIndex:index];
+    return [self deleteStrip:strip animated:animated];
+}
+
+- (BOOL)deleteStrip:(HLSStrip *)strip animated:(BOOL)animated
+{
+    if ([self.allStrips indexOfObject:strip] == NSNotFound) {
+        HLSLoggerWarn(@"This strip is not loaded into this container");
+        return NO;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldDeleteStrip:)]) {
-        HLSStrip *strip = [self.allStrips objectAtIndex:index];
         if (! [self.delegate stripContainerView:self shouldDeleteStrip:strip]) {
             HLSLoggerInfo(@"Cancelled deletion of strip %@", strip);
             return NO;
         }
     }
     
-    HLSStrip *strip = [self.allStrips objectAtIndex:index];
     HLSAnimation *animation = [self animationRemovingStrip:strip];
     [animation playAnimated:animated];
     
-    return YES;
+    return YES;    
+}
+
+- (BOOL)moveStripWithIndex:(NSUInteger)index position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated
+{
+    // TODO:
+    return NO;
+}
+
+- (BOOL)moveStrip:(HLSStrip *)strip position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated
+{
+    // TODO:
+    return NO;
 }
 
 #pragma mark Edit mode
@@ -555,13 +576,13 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationDidStop:(HLSAnimation *)animation
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     if ([animation.tag isEqual:kAddStripAnimationTag]) {
-        if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:)]) {
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:hasAddedStrip:animated:)]) {
             HLSStrip *newStrip = [animation.userInfo objectForKey:@"strip"];
-            [self.delegate stripContainerView:self hasAddedStrip:newStrip];
-        }        
+            [self.delegate stripContainerView:self hasAddedStrip:newStrip animated:animated];
+        }
     }
     else if ([animation.tag isEqual:kRemoveStripAnimationTag]) {
         HLSStrip *strip = [animation.userInfo objectForKey:@"strip"];
@@ -660,6 +681,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     self.resizedStripView = nil;
     m_draggingLeftHandle = NO;
     m_draggingRightHandle = NO;
+    
     m_handlePreviousXPos = 0.f;
 }
 

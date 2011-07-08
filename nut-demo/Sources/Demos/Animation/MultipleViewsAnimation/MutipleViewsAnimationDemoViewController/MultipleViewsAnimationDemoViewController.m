@@ -158,7 +158,7 @@
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationDidStop:(HLSAnimation *)animation
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     // Can find which animation ended using its tag
     if ([animation.tag isEqual:@"multipleViewsAnimation"]) {
