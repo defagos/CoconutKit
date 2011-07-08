@@ -120,8 +120,6 @@ static const CGFloat kStripViewHandleWidth = 20.f;
 
 - (void)layoutSubviews
 {
-    HLSLoggerInfo(@"Laying out subviews");
-    
     if (self.edited) {
         self.frame = CGRectMake(self.contentFrameInParent.origin.x - kStripViewHandleWidth,
                                 self.contentFrameInParent.origin.y, 

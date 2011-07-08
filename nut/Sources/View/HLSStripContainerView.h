@@ -106,15 +106,15 @@
 
 /**
  * Move the strip with the specified index to a position and change its length.
- * The method returns YES iff the strip could be moved.
+ * The method returns YES iff the strip could be moved (no overlap, must not cross other strips)
  */
-- (BOOL)moveStripWithIndex:(NSUInteger)index position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
+- (BOOL)moveStripWithIndex:(NSUInteger)index newPosition:(NSUInteger)newPosition newLength:(NSUInteger)newLength animated:(BOOL)animated;
 
 /**
  * Move the specified strip to a position and change its length.
  * The method returns YES iff the strip could be moved.
  */
-- (BOOL)moveStrip:(HLSStrip *)strip position:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
+- (BOOL)moveStrip:(HLSStrip *)strip newPosition:(NSUInteger)newPosition newLength:(NSUInteger)newLength animated:(BOOL)animated;
 
 /**
  * Clear the strip container view area, without generating any deletion events. Useful if you reuse the same container
@@ -163,9 +163,9 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldDeleteStrip:(HLSStrip *)strip;
 
 /**
- * Called after a strip has been resized
+ * Called after a strip has been moved
  */
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasResizedStrip:(HLSStrip *)strip animated:(BOOL)animated;
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasMovedStrip:(HLSStrip *)strip animated:(BOOL)animated;
 
 /**
  * Called right before two strips are merged. Return NO if to cancel, in which case the strips will be rollbacked

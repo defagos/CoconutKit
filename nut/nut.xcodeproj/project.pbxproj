@@ -138,6 +138,7 @@
 		6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */; };
 		6FDD065E13BC6D8F00BF880A /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */; };
 		6FDD065F13BC6D8F00BF880A /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD065D13BC6D8F00BF880A /* HLSRuntime.m */; };
+		6FE6019713C6F3990067B9A2 /* HLSStrip+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE6019513C6F3980067B9A2 /* HLSStrip+Friend.h */; };
 		6FFAC8E813C4E42200C00025 /* HLSStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAC8E613C4E42200C00025 /* HLSStripView.h */; };
 		6FFAC8E913C4E42200C00025 /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAC8E713C4E42200C00025 /* HLSStripView.m */; };
 		6FFFBA0B13B4A94300FD9A82 /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */; };
@@ -286,6 +287,7 @@
 		6FDC13C613B8A66700247620 /* nut_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_strip_default_background.png; sourceTree = "<group>"; };
 		6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FDD065D13BC6D8F00BF880A /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
+		6FE6019513C6F3980067B9A2 /* HLSStrip+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSStrip+Friend.h"; sourceTree = "<group>"; };
 		6FFAC8E613C4E42200C00025 /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
 		6FFAC8E713C4E42200C00025 /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
 		6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStrip.h; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 				6F43346B13A238540072F5D8 /* HLSCursor.m */,
 				6FFFBA0913B4A94300FD9A82 /* HLSStrip.h */,
 				6FFFBA0A13B4A94300FD9A82 /* HLSStrip.m */,
+				6FE6019513C6F3980067B9A2 /* HLSStrip+Friend.h */,
 				6FA6C20B13B32C190039622A /* HLSStripContainerView.h */,
 				6FA6C20C13B32C190039622A /* HLSStripContainerView.m */,
 				6FFAC8E613C4E42200C00025 /* HLSStripView.h */,
@@ -692,6 +695,7 @@
 				6FD71F6913BDC139008B51C4 /* NSCalendar+HLSExtensions.h in Headers */,
 				6FAF8E0E13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h in Headers */,
 				6FFAC8E813C4E42200C00025 /* HLSStripView.h in Headers */,
+				6FE6019713C6F3990067B9A2 /* HLSStrip+Friend.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
