@@ -22,6 +22,10 @@
  * therefore ensure that an animation has ended before its views are destroyed. The easiest solution to both problems
  * is to lock the UI during the animation (lockingUI animation property).
  *
+ * An HLSAnimation applies transforms to views. It does not alter the frame, which means view inside it won't resize
+ * (according to their autoresizing mask) but rather scale. If scaling is not an option, you cannot use HLSAnimation
+ * objects to manage your animation. Stick with usual UIView animation blocks for the moment.
+ *
  * Designated initializer: initWithAnimationSteps:
  */
 @interface HLSAnimation : NSObject {
