@@ -20,7 +20,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 // TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
 
-@interface HLSStripContainerView () <HLSAnimationDelegate>
+@interface HLSStripContainerView () <HLSAnimationDelegate, HLSStripViewDelegate>
 
 - (void)initialize;
 
@@ -323,6 +323,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     
     HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip contentView:view] autorelease];
+    stripView.delegate = self;
     return stripView;
 }
 
@@ -578,18 +579,10 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         // Bring the edited strip to the top
         [self bringSubviewToFront:stripView];
         
-        [stripView enterEditMode];
-        
-        if ([self.delegate respondsToSelector:@selector(stripContainerView:didEnterEditModeForStrip:)]) {
-            [self.delegate stripContainerView:self didEnterEditModeForStrip:strip];
-        }    
+        [stripView enterEditModeAnimated:YES];        
     }
     else {
-        [stripView exitEditMode];
-        
-        if ([self.delegate respondsToSelector:@selector(stripContainerView:didExitEditModeForStrip:)]) {
-            [self.delegate stripContainerView:self didExitEditModeForStrip:strip];
-        }
+        [stripView exitEditModeAnimated:YES];        
     }
 }
 
@@ -665,6 +658,22 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         NSMutableArray *stripsCopy = [NSMutableArray arrayWithArray:self.allStrips];
         [stripsCopy removeObject:strip];
         self.allStrips = [NSArray arrayWithArray:stripsCopy];
+    }
+}
+
+#pragma mark HLSStripViewDelegate protocol implementation
+
+- (void)stripView:(HLSStripView *)stripView didEnterEditModeAnimated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:didEnterEditModeForStrip:)]) {
+        [self.delegate stripContainerView:self didEnterEditModeForStrip:stripView.strip];
+    }
+}
+
+- (void)stripView:(HLSStripView *)stripView didExitEditModeAnimated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:didExitEditModeForStrip:)]) {
+        [self.delegate stripContainerView:self didExitEditModeForStrip:stripView.strip];
     }
 }
 
@@ -776,7 +785,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         
         // Update strip with new positions
         self.movedStripView.strip.beginPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
-        self.movedStripView.strip.beginPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+        self.movedStripView.strip.endPosition = [self lowerPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
         
         if ([self.delegate respondsToSelector:@selector(stripContainerView:didMoveStrip:animated:)]) {
             [self.delegate stripContainerView:self didMoveStrip:self.movedStripView.strip animated:YES];

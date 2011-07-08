@@ -8,6 +8,9 @@
 
 #import "HLSStrip.h"
 
+// Forward declarations
+@protocol HLSStripViewDelegate;
+
 /**
  * The view corresponding to a strip. Built around a customizable view, it provides an edit mode allowing to resize
  * a strip using handles appearing at the left and right of the strip itself.
@@ -28,6 +31,8 @@
     BOOL m_edited;
     BOOL m_draggingLeftHandle;
     BOOL m_draggingRightHandle;
+    HLSAnimation *m_editModeAnimation;
+    id<HLSStripViewDelegate> m_delegate;
 }
 
 - (id)initWithStrip:(HLSStrip *)strip contentView:(UIView *)contentView;
@@ -64,10 +69,22 @@
  */
 @property (nonatomic, assign, getter=isEdited) BOOL edited;
 
+@property (nonatomic, assign) id<HLSStripViewDelegate> delegate;
+
 /**
  * Toggle edit mode on or off
  */
-- (void)enterEditMode;
-- (void)exitEditMode;
+- (void)enterEditModeAnimated:(BOOL)animated;
+- (void)exitEditModeAnimated:(BOOL)animated;
+
+@end
+
+@protocol HLSStripViewDelegate <NSObject>
+
+@required
+
+- (void)stripViewDidResize:(HLSStripView *)stripView;
+- (void)stripView:(HLSStripView *)stripView didEnterEditModeAnimated:(BOOL)animated;
+- (void)stripView:(HLSStripView *)stripView didExitEditModeAnimated:(BOOL)animated;
 
 @end

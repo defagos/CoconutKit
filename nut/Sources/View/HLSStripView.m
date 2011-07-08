@@ -8,18 +8,20 @@
 
 #import "HLSStripView.h"
 
+#import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
 static const CGFloat kStripViewHandleWidth = 30.f;
 
-@interface HLSStripView ()
+@interface HLSStripView () <HLSAnimationDelegate>
 
 @property (nonatomic, retain) UIView *contentView;
 @property (nonatomic, retain) UIView *leftHandleView;
 @property (nonatomic, retain) UIView *rightHandleView;
 @property (nonatomic, retain) UILabel *leftLabel;
 @property (nonatomic, retain) UILabel *rightLabel;
+@property (nonatomic, retain) HLSAnimation *editModeAnimation;
 
 @end
 
@@ -72,6 +74,8 @@ static const CGFloat kStripViewHandleWidth = 30.f;
     self.rightHandleView = nil;
     self.leftLabel = nil;
     self.rightLabel = nil;
+    self.editModeAnimation = nil;
+    self.delegate = nil;
     
     [super dealloc];
 }
@@ -116,6 +120,10 @@ static const CGFloat kStripViewHandleWidth = 30.f;
 
 @synthesize edited = m_edited;
 
+@synthesize editModeAnimation = m_editModeAnimation;
+
+@synthesize delegate = m_delegate;
+
 #pragma mark Layout
 
 - (void)layoutSubviews
@@ -149,7 +157,7 @@ static const CGFloat kStripViewHandleWidth = 30.f;
 
 #pragma mark Edit mode
 
-- (void)enterEditMode
+- (void)enterEditModeAnimated:(BOOL)animated
 {
     if (self.edited) {
         HLSLoggerWarn(@"Already in edit mode");
@@ -170,24 +178,54 @@ static const CGFloat kStripViewHandleWidth = 30.f;
     [self addSubview:self.rightHandleView];
     
     self.edited = YES;
-    [self setNeedsLayout];
+    
+    // Calling directly. We want the layout to be up-to-date before the animation takes place
+    [self layoutSubviews];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingViews:[NSArray arrayWithObjects:self.leftHandleView, self.rightHandleView, nil] 
+                                                                 withAlphaVariation:-1.f];
+    animationStep1.duration = 0.;
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingViews:[NSArray arrayWithObjects:self.leftHandleView, self.rightHandleView, nil] 
+                                                                 withAlphaVariation:1.f];
+    self.editModeAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+    self.editModeAnimation.tag = @"editMode";
+    self.editModeAnimation.delegate = self;
+    self.editModeAnimation.lockingUI = YES;
+    [self.editModeAnimation playAnimated:animated];
 }
 
-- (void)exitEditMode
+- (void)exitEditModeAnimated:(BOOL)animated
 {
     if (! self.edited) {
         HLSLoggerWarn(@"Not in edit mode");
         return;
     }
     
-    [self.leftHandleView removeFromSuperview];
-    self.leftHandleView = nil;
-    
-    [self.rightHandleView removeFromSuperview];
-    self.rightHandleView = nil;
-    
-    self.edited = NO;
-    [self setNeedsLayout];
+    HLSAnimation *reverseEditModeAnimation = [self.editModeAnimation reverseAnimation];
+    [reverseEditModeAnimation playAnimated:animated];
+}
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    // Forward animation
+    if ([animation.tag isEqual:@"editMode"]) {
+        [self.delegate stripView:self didEnterEditModeAnimated:animated];
+    }
+    // Reverse animation
+    else {
+        [self.leftHandleView removeFromSuperview];
+        self.leftHandleView = nil;
+        
+        [self.rightHandleView removeFromSuperview];
+        self.rightHandleView = nil;
+        
+        self.edited = NO;
+        [self setNeedsLayout];
+        
+        [self.delegate stripView:self didExitEditModeAnimated:animated];
+    }
 }
 
 @end
