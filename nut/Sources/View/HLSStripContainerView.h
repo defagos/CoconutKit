@@ -35,7 +35,7 @@
     BOOL m_enabled;
     BOOL m_draggingLeftHandle;              // YES if dragging the left handle of a strip view
     BOOL m_draggingRightHandle;             // YES if dragging the right handle of a strip view
-    HLSStripView *m_resizedStripView;       // The view which is resized by dragging handles
+    HLSStripView *m_movedStripView;         // The view which is being moved or resized (nil if none)
     CGFloat m_handlePreviousXPos;           // Previous position of the handle when grabbed for resizing a strip
     id<HLSStripContainerViewDelegate> m_delegate;
 }
@@ -69,7 +69,7 @@
  * Add a strip with the specified length, trying to center it at the specified position. If a strip already exists at
  * this position, nothing happens. If there is not enough space for the complete strip to fit, then all available
  * space will be filled.
- * The method returns YES iff a strip can be added (use the stripContainerView:hasAddedStrip: delegate method to
+ * The method returns YES iff a strip can be added (use the stripContainerView:didAddStrip: delegate method to
  * know when this is done).
  */
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
@@ -150,7 +150,7 @@
 /**
  * Called after a new strip has been added
  */
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip animated:(BOOL)animated;
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didAddStrip:(HLSStrip *)strip animated:(BOOL)animated;
 
 /**
  * Called right before a strip is split. Return NO to cancel
@@ -163,9 +163,14 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldDeleteStrip:(HLSStrip *)strip;
 
 /**
- * Called after a strip has been moved
+ * Called when a strip is about to be moved or resized
  */
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasMovedStrip:(HLSStrip *)strip animated:(BOOL)animated;
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView willMoveStrip:(HLSStrip *)strip animated:(BOOL)animated;
+
+/**
+ * Called after a strip has been moved or resized
+ */
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didMoveStrip:(HLSStrip *)strip animated:(BOOL)animated;
 
 /**
  * Called right before two strips are merged. Return NO if to cancel, in which case the strips will be rollbacked

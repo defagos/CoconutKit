@@ -133,7 +133,7 @@
 
 #pragma mark HLSStripContainerViewDelegate protocol implementation
 
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView hasAddedStrip:(HLSStrip *)strip
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didAddStrip:(HLSStrip *)strip
 {
 
 }
