@@ -9,6 +9,7 @@
 #import "HLSStrip.h"
 
 // Forward declarations
+@class HLSAnimation;
 @protocol HLSStripViewDelegate;
 
 /**
@@ -83,7 +84,6 @@
 
 @required
 
-- (void)stripViewDidResize:(HLSStripView *)stripView;
 - (void)stripView:(HLSStripView *)stripView didEnterEditModeAnimated:(BOOL)animated;
 - (void)stripView:(HLSStripView *)stripView didExitEditModeAnimated:(BOOL)animated;
 
