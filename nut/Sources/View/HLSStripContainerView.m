@@ -774,28 +774,50 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             endXPos = self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width;
             m_stripJustMadeLarger = floatge(leftSizeIncrement, 0.f);
         }
-        else if (m_draggingRightHandle) {
+        else {
             CGFloat rightSizeIncrement = pos.x - m_handlePreviousXPos;
             beginXPos = self.movedStripView.contentFrameInParent.origin.x;
             endXPos = self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width + rightSizeIncrement;
             m_stripJustMadeLarger = floatge(rightSizeIncrement, 0.f);
         }
         
+        // Cannot lie outside range; must block against view bounds
+        if (floatlt(beginXPos, 0.f)) {
+            beginXPos = 0.f;
+        }
+        if (floatgt(endXPos, self.frame.size.width)) {
+            endXPos = self.frame.size.width;
+        }
+        
+        // Calculate the new strip content frame corresponding to the new finger position
         CGRect contentFrame = [self frameForBeginXPos:beginXPos
                                               endXPos:endXPos];
-        for (HLSStripView *stripView in [self.stripToViewMap allValues]) {
-            if (stripView == self.movedStripView) {
-                continue;
-            }
-            
-            if (CGRectIntersectsRect(contentFrame, stripView.frame)) {
+        
+        // If dragging a handle to the left, we must stop if we encounter another strip
+        NSUInteger movedStripIndex = [self.allStrips indexOfObject:self.movedStripView.strip];
+        NSAssert(movedStripIndex != NSNotFound, @"Strip not found");
+        if (m_draggingLeftHandle && movedStripIndex > 0) {
+            HLSStrip *leftStrip = [self.allStrips objectAtIndex:movedStripIndex - 1];
+            HLSStripView *leftNeighbouringStripView = [self stripViewForStrip:leftStrip];
+            if (CGRectIntersectsRect(contentFrame, leftNeighbouringStripView.frame)) {
+                self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMaxX(leftNeighbouringStripView.frame)
+                                                                           endXPos:endXPos];
                 return;
             }
         }
+        if (m_draggingRightHandle && movedStripIndex < [self.allStrips count] - 1) {
+            HLSStrip *rightStrip = [self.allStrips objectAtIndex:movedStripIndex + 1];
+            HLSStripView *rightNeighbouringStripView = [self stripViewForStrip:rightStrip];
+            if (CGRectIntersectsRect(contentFrame, rightNeighbouringStripView.frame)) {
+                self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos 
+                                                                           endXPos:CGRectGetMinX(rightNeighbouringStripView.frame)];
+                return;
+            }
+        }
+        
+        // No obstacle on the left or right. Can set the content frame and save the new handle position
         self.movedStripView.contentFrameInParent = contentFrame;
         m_handlePreviousXPos = pos.x;
-        
-        // TODO: Check overlaps with other strips. Prevent them or ask for merge
     }    
 }
 
@@ -870,3 +892,4 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 @end
+
