@@ -310,14 +310,17 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return stripView;
 }
 
-// Return the strip view at the given position, or nil if none. Take into account the full strip view, including the handles
+// Return the topmost strip view found at the given position, or nil if none. Take into account the full strip view, including the handles
 // which are displayed in edit mode
 - (HLSStripView *)stripViewAtXPos:(CGFloat)xPos
 {
-    for (HLSStrip *strip in self.allStrips) {
-        HLSStripView *stripView = [self stripViewForStrip:strip];
-        if (CGRectContainsPoint(stripView.frame, CGPointMake(xPos, self.frame.size.height / 2.f))) {
-            return stripView;
+    // Loop through all subviews, from the topmost to the bottommost one
+    for (UIView *view in [self.subviews reverseObjectEnumerator]) {
+        if ([view isKindOfClass:[HLSStripView class]]) {
+            HLSStripView *stripView = (HLSStripView *)view;
+            if (CGRectContainsPoint(stripView.frame, CGPointMake(xPos, self.frame.size.height / 2.f))) {
+                return stripView;
+            }            
         }
     }
     return nil;
@@ -600,7 +603,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         [stripView enterEditModeAnimated:YES];        
     }
     else {
-        [stripView exitEditModeAnimated:YES];        
+        [stripView exitEditModeAnimated:YES];
     }
 }
 
@@ -689,7 +692,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 - (void)stripView:(HLSStripView *)stripView didExitEditModeAnimated:(BOOL)animated
-{
+{    
     if ([self.delegate respondsToSelector:@selector(stripContainerView:didExitEditModeForStrip:)]) {
         [self.delegate stripContainerView:self didExitEditModeForStrip:stripView.strip];
     }
@@ -778,8 +781,18 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             m_stripJustMadeLarger = floatge(rightSizeIncrement, 0.f);
         }
         
-        self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos
-                                                                   endXPos:endXPos];
+        CGRect contentFrame = [self frameForBeginXPos:beginXPos
+                                              endXPos:endXPos];
+        for (HLSStripView *stripView in [self.stripToViewMap allValues]) {
+            if (stripView == self.movedStripView) {
+                continue;
+            }
+            
+            if (CGRectIntersectsRect(contentFrame, stripView.frame)) {
+                return;
+            }
+        }
+        self.movedStripView.contentFrameInParent = contentFrame;
         m_handlePreviousXPos = pos.x;
         
         // TODO: Check overlaps with other strips. Prevent them or ask for merge
