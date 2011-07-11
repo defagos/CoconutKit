@@ -12,7 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
-static const CGFloat kStripViewHandleWidth = 30.f;
+const CGFloat kStripViewHandleWidth = 30.f;
 
 @interface HLSStripView () <HLSAnimationDelegate>
 

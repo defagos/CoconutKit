@@ -28,6 +28,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 @property (nonatomic, retain) NSMutableDictionary *stripToViewMap;
 @property (nonatomic, retain) HLSStripView *movedStripView;
 
+- (CGRect)activeFrame;
+
 - (CGFloat)xPosForPosition:(NSUInteger)position;
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
 - (NSUInteger)upperPositionForXPos:(CGFloat)xPos;
@@ -73,6 +75,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)initialize
 {
+    // TODO: NSUIntegerMax is a bad idea. Should be small enough so that at least one position corresponds to 1 pixel.
+    //       1px is not enough, though (cannot be easily clicked), so positions should be even smaller
     self.positions = NSUIntegerMax;
     self.allStrips = [NSMutableArray array];
     self.stripToViewMap = [NSMutableDictionary dictionary];
@@ -177,6 +181,18 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
 }
 
+#pragma mark Active frame
+
+// Return the active frame, i.e. the area onto which strips are drawn. This area is smaller than the total available area. The reason
+// is that handles used to resize strips are drawn outside the strip view frame. We therefore need a margin on both sides (equal to the
+// width of the handles) so that when a strip is completely on the left / on the right, its handles remain in the container view frame.
+// If this was not the case, we would not be able to trap touch events as soon a handle is outside the container frame, which would
+// prevent the user from grabbing them (making strip resizing impossible!)
+- (CGRect)activeFrame
+{
+    return CGRectMake(kStripViewHandleWidth, 0.f, CGRectGetWidth(self.frame) - 2 * kStripViewHandleWidth, CGRectGetHeight(self.frame));
+}
+
 #pragma mark Converting between positions and view coordinates and objects
 
 // Return the x position (in the coordinate system of the container view) corresponding to a given position
@@ -187,40 +203,44 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return 0.f;
     }    
     
-    return ((CGFloat)position / (self.positions - 1)) * self.frame.size.width;
+    CGRect activeFrame = [self activeFrame];
+    return kStripViewHandleWidth + ((CGFloat)position / (self.positions - 1)) * CGRectGetWidth(activeFrame);
 }
 
 // Return the position located before xPos (in the coordinate system of the container view)
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos
 {
-    if (floatlt(xPos, 0.f) || floatgt(xPos, self.frame.size.width)) {
+    CGRect activeFrame = [self activeFrame];
+    if (floatlt(xPos, CGRectGetMinX(activeFrame)) || floatgt(xPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"Position outside range");
         return 0;
     }
     
-    return floorf(((self.positions - 1) * xPos) / self.frame.size.width);
+    return floorf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
 }
 
 // Return the position located before xPos (in the coordinate system of the container view)
 - (NSUInteger)upperPositionForXPos:(CGFloat)xPos
 {
-    if (floatlt(xPos, 0.f) || floatgt(xPos, self.frame.size.width)) {
+    CGRect activeFrame = [self activeFrame];
+    if (floatlt(xPos, CGRectGetMinX(activeFrame)) || floatgt(xPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"Position outside range");
         return 0;
     }
     
-    return ceilf(((self.positions - 1) * xPos) / self.frame.size.width);
+    return ceilf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
 }
 
 // Return the nearest position for xPos (in the coordinate system of the container view)
 - (NSUInteger)nearestPositionForXPos:(CGFloat)xPos
 {
-    if (floatlt(xPos, 0.f) || floatgt(xPos, self.frame.size.width)) {
+    CGRect activeFrame = [self activeFrame];
+    if (floatlt(xPos, CGRectGetMinX(activeFrame)) || floatgt(xPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"Position outside range");
         return 0;
     }
     
-    return roundf(((self.positions - 1) * xPos) / self.frame.size.width);
+    return roundf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
 }
 
 // Return the frame corresponding to a strip (in the coordinate system of the container view)
@@ -232,24 +252,26 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 // Return the frame corresponding to two positions (in the coordinate system of the container view)
 - (CGRect)frameForBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition
 {
+    CGRect activeFrame = [self activeFrame];
     CGFloat beginXPos = [self xPosForPosition:beginPosition];
     CGFloat endXPos = [self xPosForPosition:endPosition];
     return CGRectMake(beginXPos, 
                       0.f, 
                       endXPos - beginXPos,
-                      self.frame.size.height);
+                      CGRectGetHeight(activeFrame));
 }
 
 // Return the frame corresponding to the begin and end x coordinates provided, or CGRectZero if an error occurred. Does
 // not snap on positions
 - (CGRect)frameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos
 {
-    if (floatlt(beginXPos, 0.f) || floatgt(beginXPos, self.frame.size.width)) {
+    CGRect activeFrame = [self activeFrame];
+    if (floatlt(beginXPos, CGRectGetMinX(activeFrame)) || floatgt(beginXPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"Begin position outside range");
         return CGRectZero;
     }
     
-    if (floatlt(endXPos, 0.f) || floatgt(endXPos, self.frame.size.width)) {
+    if (floatlt(endXPos, CGRectGetMinX(activeFrame)) || floatgt(endXPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"End position outside range");
         return CGRectZero;
     }
@@ -262,18 +284,19 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return CGRectMake(beginXPos,
                       0.f,
                       endXPos - beginXPos,
-                      self.frame.size.height);
+                      CGRectGetHeight(activeFrame));
 }
 
 // Return the best match (i.e. snapping on positions) for a begin and an end x coordinates, or CGRectZero if an error occurred
 - (CGRect)bestFrameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos
 {
-    if (floatlt(beginXPos, 0.f) || floatgt(beginXPos, self.frame.size.width)) {
+    CGRect activeFrame = [self activeFrame];
+    if (floatlt(beginXPos, CGRectGetMinX(activeFrame)) || floatgt(beginXPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"Begin position outside range");
         return CGRectZero;
     }
     
-    if (floatlt(endXPos, 0.f) || floatgt(endXPos, self.frame.size.width)) {
+    if (floatlt(endXPos, CGRectGetMinX(activeFrame)) || floatgt(endXPos, CGRectGetMaxX(activeFrame))) {
         HLSLoggerError(@"End position outside range");
         return CGRectZero;
     }
@@ -288,7 +311,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return CGRectMake(nearestBeginPositionXPos,
                       0.f,
                       nearestEndPositionXPos - nearestBeginPositionXPos,
-                      self.frame.size.height);
+                      CGRectGetHeight(activeFrame));
 }
 
 #pragma mark Strip view management
@@ -318,9 +341,10 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     for (UIView *view in [self.subviews reverseObjectEnumerator]) {
         if ([view isKindOfClass:[HLSStripView class]]) {
             HLSStripView *stripView = (HLSStripView *)view;
-            if (CGRectContainsPoint(stripView.frame, CGPointMake(xPos, self.frame.size.height / 2.f))) {
+            // Point in the middle along the y-axis (we are only interested about the x-axis anyway)
+            if (CGRectContainsPoint(stripView.frame, CGPointMake(xPos, CGRectGetMidY(stripView.frame)))) {
                 return stripView;
-            }            
+            }
         }
     }
     return nil;
@@ -339,8 +363,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         view = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nut_strip_default_background.png"]] autorelease];
         view.contentStretch = CGRectMake(0.5f, 
                                          0.5f, 
-                                         1.f / view.frame.size.width, 
-                                         1.f / view.frame.size.height);
+                                         1.f / CGRectGetWidth(view.frame), 
+                                         1.f / CGRectGetHeight(view.frame));
     }
     
     HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip contentView:view] autorelease];
@@ -625,7 +649,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     HLSStripView *stripView = [self stripViewForStrip:strip];
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)
+                                                                     withTransform:CGAffineTransformMakeScale(1.f / 100.f, 1.f / 100.f)
                                                                     alphaVariation:0.f];
     animationStep1.duration = 0.;
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingView:stripView
@@ -633,7 +657,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                                                                     alphaVariation:0.f];
     animationStep2.duration = 0.15;
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepUpdatingView:stripView
-                                                                     withTransform:CGAffineTransformConcat(CGAffineTransformInvert(CGAffineTransformMakeScale(1.f/100.f, 1.f/100.f)), 
+                                                                     withTransform:CGAffineTransformConcat(CGAffineTransformInvert(CGAffineTransformMakeScale(1.f / 100.f, 1.f / 100.f)), 
                                                                                                            CGAffineTransformInvert(CGAffineTransformMakeScale(120.f, 110.f)))
                                                                     alphaVariation:0.f];
     animationStep3.duration = 0.15;
@@ -715,7 +739,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     // No strip view found. A double tap create a strip
     else {
         switch ([touch tapCount]) {
-                // Double tap to add a strip
+            // Double tap to add a strip
             case 2: {
                 CGPoint pos = [touch locationInView:self];
                 NSUInteger position = [self lowerPositionForXPos:pos.x];
@@ -772,13 +796,15 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         CGFloat endXPos = 0.f;
         if (m_draggingLeftHandle) {
             CGFloat leftSizeIncrement = m_handlePreviousXPos - pos.x;
-            beginXPos = floatmax(self.movedStripView.contentFrameInParent.origin.x - leftSizeIncrement, 0.f  /* avoid getting out to the left */);
-            endXPos = self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width;
+            CGRect activeFrame = [self activeFrame];
+            beginXPos = floatmax(CGRectGetMinX(self.movedStripView.contentFrameInParent) - leftSizeIncrement,
+                                 CGRectGetMinX(activeFrame)  /* avoid getting out to the left */);
+            endXPos = CGRectGetMaxX(self.movedStripView.contentFrameInParent);
             m_stripJustMadeLarger = floatge(leftSizeIncrement, 0.f);
             
             // Guarantee minimal strip size: the interval between two positions
-            if (floatle(endXPos - beginXPos, self.frame.size.width / (self.positions - 1))) {
-                beginXPos = endXPos - self.frame.size.width / (self.positions - 1);
+            if (floatle(endXPos - beginXPos, CGRectGetWidth(activeFrame) / (self.positions - 1))) {
+                beginXPos = endXPos - CGRectGetWidth(activeFrame) / (self.positions - 1);
                 self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos
                                                                            endXPos:endXPos];
                 return;
@@ -786,14 +812,15 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         }
         else {
             CGFloat rightSizeIncrement = pos.x - m_handlePreviousXPos;
-            beginXPos = self.movedStripView.contentFrameInParent.origin.x;
-            endXPos = floatmin(self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width + rightSizeIncrement,
-                               self.frame.size.width  /* avoid getting out to the right */);
+            CGRect activeFrame = [self activeFrame];
+            beginXPos = CGRectGetMinX(self.movedStripView.contentFrameInParent);
+            endXPos = floatmin(CGRectGetMaxX(self.movedStripView.contentFrameInParent) + rightSizeIncrement,
+                               CGRectGetMaxX(activeFrame)  /* avoid getting out to the right */);
             m_stripJustMadeLarger = floatge(rightSizeIncrement, 0.f);
             
             // Guarantee minimal strip size: the interval between two positions
-            if (floatle(endXPos - beginXPos, self.frame.size.width / (self.positions - 1))) {
-                endXPos = beginXPos + self.frame.size.width / (self.positions - 1);
+            if (floatle(endXPos - beginXPos, CGRectGetWidth(activeFrame) / (self.positions - 1))) {
+                endXPos = beginXPos + CGRectGetWidth(activeFrame) / (self.positions - 1);
                 self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos
                                                                            endXPos:endXPos];
                 return;
@@ -816,6 +843,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                 return;
             }
         }
+        // Similar when dragging a handle to the right
         if (m_draggingRightHandle && movedStripIndex < [self.allStrips count] - 1) {
             HLSStrip *rightStrip = [self.allStrips objectAtIndex:movedStripIndex + 1];
             HLSStripView *rightNeighbouringStripView = [self stripViewForStrip:rightStrip];
@@ -847,8 +875,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     // Dragging: Snap to nearest position
     if (m_draggingLeftHandle || m_draggingRightHandle) {
         // Calculate positions
-        NSUInteger beginPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x];
-        NSUInteger endPosition = [self nearestPositionForXPos:self.movedStripView.contentFrameInParent.origin.x + self.movedStripView.contentFrameInParent.size.width];
+        NSUInteger beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
+        NSUInteger endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
         
         // Adjust the strip view accordingly
         self.movedStripView.contentFrameInParent = [self frameForBeginPosition:beginPosition endPosition:endPosition];
@@ -882,4 +910,3 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 @end
-

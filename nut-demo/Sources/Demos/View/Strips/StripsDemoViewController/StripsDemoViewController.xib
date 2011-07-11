@@ -47,26 +47,10 @@
 					<object class="IBUIView" id="400326255">
 						<reference key="NSNextResponder" ref="1072331156"/>
 						<int key="NSvFlags">292</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="501922895">
-								<reference key="NSNextResponder" ref="400326255"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{17, 20}, {588, 76}}</string>
-								<reference key="NSSuperview" ref="400326255"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="279269738"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwAA</bytes>
-								</object>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							</object>
-						</object>
 						<string key="NSFrame">{{72, 245}, {625, 113}}</string>
 						<reference key="NSSuperview" ref="1072331156"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="501922895"/>
+						<reference key="NSNextKeyView" ref="279269738"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC45MTgzNjczNDY5IDAuOTE4MzY3MzQ2OSAwLjkxODM2NzM0NjkAA</bytes>
@@ -464,14 +448,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">stripContainerView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="501922895"/>
-					</object>
-					<int key="connectionID">5</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addLabel</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="612278774"/>
@@ -635,6 +611,14 @@
 					</object>
 					<int key="connectionID">52</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">stripContainerView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="400326255"/>
+					</object>
+					<int key="connectionID">53</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -757,22 +741,16 @@
 						<reference key="parent" ref="1072331156"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="149886212"/>
+						<reference key="parent" ref="1072331156"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
 						<reference key="object" ref="400326255"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="501922895"/>
 						</object>
-						<reference key="parent" ref="1072331156"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">3</int>
-						<reference key="object" ref="501922895"/>
-						<reference key="parent" ref="400326255"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">50</int>
-						<reference key="object" ref="149886212"/>
 						<reference key="parent" ref="1072331156"/>
 					</object>
 				</object>
@@ -795,9 +773,8 @@
 					<string>22.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
 					<string>24.IBPluginDependency</string>
-					<string>3.CustomClassName</string>
-					<string>3.IBPluginDependency</string>
 					<string>47.IBPluginDependency</string>
+					<string>49.CustomClassName</string>
 					<string>49.IBPluginDependency</string>
 					<string>50.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -820,9 +797,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>HLSStripContainerView</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -842,7 +818,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
