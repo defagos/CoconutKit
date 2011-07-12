@@ -6,7 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
 
-"Add (begin - length)"="Add (begin - length)";
+"Add (center - length)"="Add (center - length)";
 "Adjust inset"="Adjust inset";
 "All"="All";
 "All fields are mandatory"="All fields are mandatory";
@@ -35,7 +35,6 @@
 "Error"="Error";
 "First Name"="First Name";
 "Fixed size"="Fixed size";
-"Friday"="Friday";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
 "Heavy view (cached)"="Heavy view (cached)";
@@ -46,7 +45,6 @@
 "Invalid e-mail address"="Invalid e-mail address";
 "Landscape only"="Landscape only";
 "Last Name"="Last Name";
-"Monday"="Monday";
 "MONTH"="MONTH";
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
@@ -59,7 +57,6 @@
 "Previous"="Previous";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
-"Saturday"="Saturday";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Split (position)"="Split (position)";
@@ -70,7 +67,6 @@
 "Stretchable"="Stretchable";
 "Strips"="Strips";
 "Sub-tasks"="Sub-tasks";
-"Sunday"="Sunday";
 "Table view cells"="Table view cells";
 "Tablets"="Tablets";
 "Task"="Task";
@@ -78,12 +74,10 @@
 "Tasks"="Tasks";
 "Text fields"="Text fields";
 "Text fields (large)"="Text fields (large)";
-"Thursday"="Thursday";
 "Transition"="Transition";
-"Tuesday"="Tuesday";
+"User interaction"="User interaction";
 "Valid positions: 0 - %d"="Valid positions: 0 - %d";
 "Views"="Views";
 "View controllers"="View controllers";
-"Wednesday"="Wednesday";
 "WEEK"="WEEK";
 "YEAR"="YEAR";

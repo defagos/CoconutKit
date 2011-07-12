@@ -46,6 +46,8 @@
     self.deleteAtIndexLabel = nil;
     self.deleteIndexTextField = nil;
     self.deleteAtIndexButton = nil;
+    self.userInteractionLabel = nil;
+    self.userInteractionSwitch = nil;
     self.clearButton = nil;
 }
 
@@ -81,6 +83,10 @@
 
 @synthesize deleteAtIndexButton = m_deleteAtIndexButton;
 
+@synthesize userInteractionLabel = m_userInteractionLabel;
+
+@synthesize userInteractionSwitch = m_userInteractionSwitch;
+
 @synthesize clearButton = m_clearButton;
 
 #pragma mark View lifecycle
@@ -100,7 +106,7 @@
     self.infoLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Valid positions: 0 - %d", @"Valid positions: 0 - %d"), 
                            self.stripContainerView.positions - 1];
     
-    self.addLabel.text = NSLocalizedString(@"Add (begin - length)", @"Add (begin - length)");
+    self.addLabel.text = NSLocalizedString(@"Add (center - length)", @"Add (center - length)");
     self.splitlabel.text = NSLocalizedString(@"Split (position)", @"Split (position)");
     self.deleteAtPositionLabel.text = NSLocalizedString(@"Delete (position)", @"Delete (position)");
     self.deleteAtIndexLabel.text = NSLocalizedString(@"Delete (index)", @"Delete (index)");
@@ -116,6 +122,10 @@
     self.splitPositionTextField.text = @"0";
     self.deletePositionTextField.text = @"0";
     self.deleteIndexTextField.text = @"0";
+    
+    self.userInteractionLabel.text = NSLocalizedString(@"User interaction", @"User interaction");
+    
+    self.userInteractionSwitch.on = self.stripContainerView.userInteractionEnabled;
     
     [self.clearButton setTitle:NSLocalizedString(@"Clear", @"Clear") forState:UIControlStateNormal];
 }
@@ -148,7 +158,7 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)addStrip
+- (IBAction)addStrip:(id)sender
 {
     NSUInteger beginPosition = (NSUInteger)[self.addBeginPositionTextField.text intValue];
     NSUInteger length = (NSUInteger)[self.addLengthTextField.text intValue];
@@ -156,28 +166,33 @@
     [self.stripContainerView addStripAtPosition:beginPosition length:length animated:YES];
 }
 
-- (IBAction)splitStrip
+- (IBAction)splitStrip:(id)sender
 {
     NSUInteger splitPosition = (NSUInteger)[self.splitPositionTextField.text intValue];
     
     [self.stripContainerView splitStripAtPosition:splitPosition animated:YES];
 }
 
-- (IBAction)deleteStripAtPosition
+- (IBAction)deleteStripAtPosition:(id)sender
 {
     NSUInteger deletePosition = (NSUInteger)[self.deletePositionTextField.text intValue];
     
     [self.stripContainerView deleteStripsAtPosition:deletePosition animated:YES];
 }
 
-- (IBAction)deleteStripAtIndex
+- (IBAction)deleteStripAtIndex:(id)sender
 {
     NSUInteger deleteIndex = (NSUInteger)[self.deleteIndexTextField.text intValue];
     
     [self.stripContainerView deleteStripWithIndex:deleteIndex animated:YES];
 }
 
-- (IBAction)clearStrips
+- (IBAction)toggleUserInteraction:(id)sender
+{
+    self.stripContainerView.userInteractionEnabled = self.userInteractionSwitch.on;
+}
+
+- (IBAction)clearStrips:(id)sender
 {
     [self.stripContainerView clear];
 }

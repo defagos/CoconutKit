@@ -32,14 +32,8 @@ static NSArray *s_folders = nil;
 {
     srand(time(NULL));
     
-    s_weekDays = [[NSArray arrayWithObjects:NSLocalizedString(@"Monday", @"Monday"), 
-                   NSLocalizedString(@"Tuesday", @"Tuesday"), 
-                   NSLocalizedString(@"Wednesday", @"Wednesday"), 
-                   NSLocalizedString(@"Thursday", @"Thursday"), 
-                   NSLocalizedString(@"Friday", @"Friday"), 
-                   NSLocalizedString(@"Saturday", @"Saturday"),
-                   NSLocalizedString(@"Sunday", @"Sunday"),
-                   nil] retain];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    s_weekDays = [[dateFormatter orderedWeekdaySymbols] retain];    
     s_completeRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                       @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
     s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),

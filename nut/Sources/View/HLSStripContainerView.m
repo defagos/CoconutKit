@@ -18,7 +18,7 @@
 static NSString *kAddStripAnimationTag = @"addStrip";
 static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
-// TODO: Set m_positionsUsed to YES somewhere!!!! Implement disabled mode
+// TODO: Set m_positionsUsed to YES somewhere!!!!
 
 @interface HLSStripContainerView () <HLSAnimationDelegate, HLSStripViewDelegate>
 
@@ -167,11 +167,16 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     m_defaultLength = defaultLength;
 }
 
-@synthesize enabled = m_enabled;
-
 @synthesize movedStripView = m_movedStripView;
 
 @synthesize delegate = m_delegate;
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    
+    [self exitEditModeAnimated:NO];
+}
 
 #pragma mark Laying out subviews
 

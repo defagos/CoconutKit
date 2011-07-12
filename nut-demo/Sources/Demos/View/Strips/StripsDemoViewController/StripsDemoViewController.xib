@@ -14,6 +14,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBUITextField</string>
 			<string>IBUIButton</string>
+			<string>IBUISwitch</string>
 			<string>IBUIView</string>
 			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
@@ -386,7 +387,7 @@
 						<string key="NSFrame">{{625, 553}, {72, 27}}</string>
 						<reference key="NSSuperview" ref="1072331156"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="149886212"/>
+						<reference key="NSNextKeyView" ref="475162655"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -401,10 +402,42 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="147331490"/>
 					</object>
+					<object class="IBUILabel" id="475162655">
+						<reference key="NSNextResponder" ref="1072331156"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{72, 595}, {282, 21}}</string>
+						<reference key="NSSuperview" ref="1072331156"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="932984922"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">&lt;userInteraction&gt;</string>
+						<reference key="IBUIFont" ref="369900173"/>
+						<reference key="IBUITextColor" ref="93437300"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUISwitch" id="932984922">
+						<reference key="NSNextResponder" ref="1072331156"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{360, 592}, {94, 27}}</string>
+						<reference key="NSSuperview" ref="1072331156"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="149886212"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIOn">YES</bool>
+					</object>
 					<object class="IBUIButton" id="149886212">
 						<reference key="NSNextResponder" ref="1072331156"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{481, 617}, {116, 37}}</string>
+						<string key="NSFrame">{{581, 649}, {116, 37}}</string>
 						<reference key="NSSuperview" ref="1072331156"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -543,42 +576,6 @@
 					<int key="connectionID">39</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">addStrip</string>
-						<reference key="source" ref="988444103"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">40</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">splitStrip</string>
-						<reference key="source" ref="330866014"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">41</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">deleteStripAtPosition</string>
-						<reference key="source" ref="913193504"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">42</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">deleteStripAtIndex</string>
-						<reference key="source" ref="647409209"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">43</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addLengthTextField</string>
 						<reference key="source" ref="841351856"/>
@@ -603,21 +600,82 @@
 					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">clearStrips</string>
-						<reference key="source" ref="149886212"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">52</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">stripContainerView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="400326255"/>
 					</object>
 					<int key="connectionID">53</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">userInteractionSwitch</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="932984922"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">userInteractionLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="475162655"/>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleUserInteraction:</string>
+						<reference key="source" ref="932984922"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">addStrip:</string>
+						<reference key="source" ref="988444103"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">splitStrip:</string>
+						<reference key="source" ref="330866014"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">deleteStripAtPosition:</string>
+						<reference key="source" ref="913193504"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">deleteStripAtIndex:</string>
+						<reference key="source" ref="647409209"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">clearStrips:</string>
+						<reference key="source" ref="149886212"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">64</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -662,6 +720,8 @@
 							<reference ref="279269738"/>
 							<reference ref="400326255"/>
 							<reference ref="149886212"/>
+							<reference ref="475162655"/>
+							<reference ref="932984922"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -753,6 +813,16 @@
 						</object>
 						<reference key="parent" ref="1072331156"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">54</int>
+						<reference key="object" ref="475162655"/>
+						<reference key="parent" ref="1072331156"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="932984922"/>
+						<reference key="parent" ref="1072331156"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -777,6 +847,8 @@
 					<string>49.CustomClassName</string>
 					<string>49.IBPluginDependency</string>
 					<string>50.IBPluginDependency</string>
+					<string>54.IBPluginDependency</string>
+					<string>55.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -804,6 +876,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -818,7 +892,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">64</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -846,14 +920,16 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addStrip</string>
-							<string>clearStrips</string>
-							<string>deleteStripAtIndex</string>
-							<string>deleteStripAtPosition</string>
-							<string>splitStrip</string>
+							<string>addStrip:</string>
+							<string>clearStrips:</string>
+							<string>deleteStripAtIndex:</string>
+							<string>deleteStripAtPosition:</string>
+							<string>splitStrip:</string>
+							<string>toggleUserInteraction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -865,32 +941,37 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addStrip</string>
-							<string>clearStrips</string>
-							<string>deleteStripAtIndex</string>
-							<string>deleteStripAtPosition</string>
-							<string>splitStrip</string>
+							<string>addStrip:</string>
+							<string>clearStrips:</string>
+							<string>deleteStripAtIndex:</string>
+							<string>deleteStripAtPosition:</string>
+							<string>splitStrip:</string>
+							<string>toggleUserInteraction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">addStrip</string>
+								<string key="name">addStrip:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">clearStrips</string>
+								<string key="name">clearStrips:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">deleteStripAtIndex</string>
+								<string key="name">deleteStripAtIndex:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">deleteStripAtPosition</string>
+								<string key="name">deleteStripAtPosition:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">splitStrip</string>
+								<string key="name">splitStrip:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleUserInteraction:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -915,6 +996,8 @@
 							<string>splitPositionTextField</string>
 							<string>splitlabel</string>
 							<string>stripContainerView</string>
+							<string>userInteractionLabel</string>
+							<string>userInteractionSwitch</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -934,6 +1017,8 @@
 							<string>UITextField</string>
 							<string>UILabel</string>
 							<string>HLSStripContainerView</string>
+							<string>UILabel</string>
+							<string>UISwitch</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -956,6 +1041,8 @@
 							<string>splitPositionTextField</string>
 							<string>splitlabel</string>
 							<string>stripContainerView</string>
+							<string>userInteractionLabel</string>
+							<string>userInteractionSwitch</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1022,6 +1109,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">stripContainerView</string>
 								<string key="candidateClassName">HLSStripContainerView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">userInteractionLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">userInteractionSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
 							</object>
 						</object>
 					</object>

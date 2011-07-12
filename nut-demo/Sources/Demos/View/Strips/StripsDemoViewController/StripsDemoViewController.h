@@ -26,6 +26,8 @@
     UILabel *m_deleteAtIndexLabel;
     UITextField *m_deleteIndexTextField;
     UIButton *m_deleteAtIndexButton;
+    UILabel *m_userInteractionLabel;
+    UISwitch *m_userInteractionSwitch;
     UIButton *m_clearButton;
 }
 
@@ -44,12 +46,15 @@
 @property (nonatomic, retain) IBOutlet UILabel *deleteAtIndexLabel;
 @property (nonatomic, retain) IBOutlet UITextField *deleteIndexTextField;
 @property (nonatomic, retain) IBOutlet UIButton *deleteAtIndexButton;
+@property (nonatomic, retain) IBOutlet UILabel *userInteractionLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *userInteractionSwitch;
 @property (nonatomic, retain) IBOutlet UIButton *clearButton;
 
-- (IBAction)addStrip;
-- (IBAction)splitStrip;
-- (IBAction)deleteStripAtPosition;
-- (IBAction)deleteStripAtIndex;
-- (IBAction)clearStrips;
+- (IBAction)addStrip:(id)sender;
+- (IBAction)splitStrip:(id)sender;
+- (IBAction)deleteStripAtPosition:(id)sender;
+- (IBAction)deleteStripAtIndex:(id)sender;
+- (IBAction)toggleUserInteraction:(id)sender;
+- (IBAction)clearStrips:(id)sender;
 
 @end

@@ -6,11 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// TODO: Use strip identifiers? Returning them when strips are added / removed. This would then offer an opaque handle
-//       to get the strip itself without having to return the rectangular view. Well, maybe that's too much
-// Remark: Strips must never overlap, even when they are moved (and their distance must be at least 1 unit if they
-//         have the same type, otherwise merge will occur). At most two strips can be merged at any time
-
 #import "HLSStrip.h"
 
 // Forward declarations
@@ -19,9 +14,16 @@
 
 /**
  * A view to which strips (rectangles) can be added, either interactively or progammatically. These strips snap to
- * equidistant positions whose number can be set at creation time.
+ * equidistant positions whose number can be set at creation time. The following gestures have been implemented:
+ *   - double-tap on an empty location to create a new strip. Strips are created with a default size which can
+ *     be freely defined. A strip is created even if not enough space is available (but not if no space is available)
+ *     at the tap location
+ *   - tap on an existing strip to enter edit mode. Handles are displayed. Tap on one, hold and move the handle
+ *     in either direction to resize the strip. Tap again on the strip or on an empty space to leave edit mode. You
+ *     can even tap on another strip to enter edit mode for it while leaving edit mode for the previous one.
  *
- * TODO: More documentation
+ * You can create a non-interactive strip container by setting the userInteractionEnabled boolean to NO. In this
+ * mode, strips can still be added or removed, but only programmatically.
  *
  * Designated initializer: initWithFrame:
  */
@@ -129,12 +131,6 @@
  * If any strip is in edit mode, exit it
  */
 - (void)exitEditModeAnimated:(BOOL)animated;
-
-/**
- * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show strips
- * in read-only mode
- */
-@property (nonatomic, assign) BOOL enabled;
 
 @property (nonatomic, assign) id<HLSStripContainerViewDelegate> delegate;
 
