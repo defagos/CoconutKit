@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
+@property (nonatomic, assign, getter=isRunning) BOOL running;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
@@ -85,19 +86,9 @@
 
 @synthesize bringToFront = m_bringToFront;
 
-@synthesize delegate = m_delegate;
+@synthesize running = m_running;
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; animationSteps: %@; tag: %@; lockingUI: %@, bringToFront: %@, delegate: %p>", 
-            [self class],
-            self,
-            self.animationSteps,
-            self.tag,
-            [HLSConverters stringFromBool:self.lockingUI],
-            [HLSConverters stringFromBool:self.bringToFront],
-            self.delegate];
-}
+@synthesize delegate = m_delegate;
 
 #pragma mark Animation
 
@@ -119,6 +110,8 @@
         if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
             [self.delegate animationWillStart:self animated:NO];
         }
+        
+        self.running = YES;
     }
     
     // Begin with the first step
@@ -213,6 +206,8 @@
             [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
         }
         
+        self.running = NO;
+        
         if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
             [self.delegate animationDidStop:self animated:animated];
         }
@@ -289,6 +284,8 @@
             [self.delegate animationWillStart:self animated:YES];
         }
         
+        self.running = YES;
+        
         m_firstStep = NO;
     }
 }
@@ -302,6 +299,20 @@
     }
     
     [self playNextStepAnimated:YES];
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; animationSteps: %@; tag: %@; lockingUI: %@, bringToFront: %@, delegate: %p>", 
+            [self class],
+            self,
+            self.animationSteps,
+            self.tag,
+            [HLSConverters stringFromBool:self.lockingUI],
+            [HLSConverters stringFromBool:self.bringToFront],
+            self.delegate];
 }
 
 @end

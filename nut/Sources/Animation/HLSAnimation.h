@@ -37,6 +37,7 @@
     BOOL m_lockingUI;
     BOOL m_bringToFront;
     BOOL m_firstStep;
+    BOOL m_running;
     id<HLSAnimationDelegate> m_delegate;
 }
 
@@ -76,6 +77,11 @@
  * Default is NO
  */
 @property (nonatomic, assign) BOOL bringToFront;
+
+/**
+ * Return YES while the animation is running
+ */
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
