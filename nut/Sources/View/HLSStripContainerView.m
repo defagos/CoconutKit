@@ -46,6 +46,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)toggleEditModeForStripView:(HLSStripView *)stripView;
 
+- (void)snapMovedStripToNearestPosition;
+
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
 
@@ -634,6 +636,29 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
 }
 
+#pragma mark Moving strips
+
+- (void)snapMovedStripToNearestPosition
+{
+    // Dragging: Snap to nearest position
+    if (self.movedStripView) {
+        // Calculate positions
+        NSUInteger beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
+        NSUInteger endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
+        
+        // Adjust the strip view accordingly
+        self.movedStripView.contentFrameInParent = [self frameForBeginPosition:beginPosition endPosition:endPosition];
+        
+        // Adjust the strip object accordingly
+        self.movedStripView.strip.beginPosition = beginPosition;
+        self.movedStripView.strip.endPosition = endPosition;
+        
+        if ([self.delegate respondsToSelector:@selector(stripContainerView:didMoveStrip:animated:)]) {
+            [self.delegate stripContainerView:self didMoveStrip:self.movedStripView.strip animated:YES];
+        }
+    }
+}
+
 #pragma mark Managing displayed content
 
 - (void)clear
@@ -737,39 +762,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 }
 
 #pragma mark Touch events
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint pos = [touch locationInView:self];
-    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
-    // Strip view found
-    if (stripView) {
-        // Content view part of a strip view touched. Toggle edit mode on or off
-        if (CGRectContainsPoint(stripView.contentFrameInParent, pos)) {
-            [self toggleEditModeForStripView:stripView];
-        }
-    }
-    // No strip view found. A double tap create a strip
-    else {
-        switch ([touch tapCount]) {
-            // Double tap to add a strip
-            case 2: {
-                // Exit edit mode if a strip was being edited
-                [self exitEditModeAnimated:YES];
-                
-                CGPoint pos = [touch locationInView:self];
-                NSUInteger position = [self lowerPositionForXPos:pos.x];
-                [self addStripAtPosition:position animated:YES];
-                break;
-            }
-                
-            default: {
-                break;
-            }
-        }    
-    }
-}
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -879,35 +871,65 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    UITouch *touch = [touches anyObject];
+    CGPoint pos = [touch locationInView:self];
+    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
+    // Strip view found at the finger location. This must not be the result of the finger reaching another strip
+    // while dragging a handle, otherwise we would switch from dragging to edit mode on another strip, which is ugly
+    if (stripView && ! self.movedStripView) {
+        // Content view part of a strip view touched. Toggle edit mode on or off
+        if (CGRectContainsPoint(stripView.contentFrameInParent, pos)) {
+            [self toggleEditModeForStripView:stripView];
+        }
+    }
+    // No strip view found at the finger location
+    else {
+        switch ([touch tapCount]) {
+            // Single tap exits edit mode
+            case 1: {
+                [self exitEditModeAnimated:YES];
+                break;
+            }
+                
+            // Double tap to add a strip
+            case 2: {
+                // Exit edit mode if a strip was being edited
+                [self exitEditModeAnimated:YES];
+                
+                CGPoint pos = [touch locationInView:self];
+                NSUInteger position = [self lowerPositionForXPos:pos.x];
+                [self addStripAtPosition:position animated:YES];
+                break;
+            }
+                
+            default: {
+                break;
+            }
+        }    
+    }
+    
     [self endTouches:touches];    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // If was dragging: Snap to nearest position
+    if (self.movedStripView) {
+        [self snapMovedStripToNearestPosition];
+    }
+    
     [self endTouches:touches];
 }
 
 - (void)endTouches:(NSSet *)touches
-{
+{    
     // Dragging: Snap to nearest position
-    if (m_draggingLeftHandle || m_draggingRightHandle) {
-        // Calculate positions
-        NSUInteger beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
-        NSUInteger endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
-        
-        // Adjust the strip view accordingly
-        self.movedStripView.contentFrameInParent = [self frameForBeginPosition:beginPosition endPosition:endPosition];
-        
-        // Adjust the strip object accordingly
-        self.movedStripView.strip.beginPosition = beginPosition;
-        self.movedStripView.strip.endPosition = endPosition;
-        
-        if ([self.delegate respondsToSelector:@selector(stripContainerView:didMoveStrip:animated:)]) {
-            [self.delegate stripContainerView:self didMoveStrip:self.movedStripView.strip animated:YES];
-        }
+    if (self.movedStripView) {
+        [self snapMovedStripToNearestPosition];
     }
     
     self.movedStripView = nil;
+    
     m_draggingLeftHandle = NO;
     m_draggingRightHandle = NO;
     m_stripJustMadeLarger = NO;
