@@ -371,6 +371,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     
     HLSStripView *stripView = [[[HLSStripView alloc] initWithStrip:strip contentView:view] autorelease];
     stripView.delegate = self;
+    stripView.exclusiveTouch = YES;
     return stripView;
 }
 
