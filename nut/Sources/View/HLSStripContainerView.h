@@ -124,6 +124,11 @@
 - (void)clear;
 
 /**
+ * If any strip is in edit mode, exit it
+ */
+- (void)exitEditModeAnimated:(BOOL)animated;
+
+/**
  * If set to YES, then the strip view cannot be modified using gestures, only programmatically. Useful to show strips
  * in read-only mode
  */

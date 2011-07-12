@@ -621,6 +621,9 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             }
         }
         
+        // If any other strip was in edit mode, exit
+        [self exitEditModeAnimated:YES];
+        
         // Bring the edited strip to the top
         [self bringSubviewToFront:stripView];
         
@@ -640,6 +643,17 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     }
     self.allStrips = [NSMutableArray array];
     self.stripToViewMap = [NSMutableDictionary dictionary];
+}
+
+#pragma mark Edit mode
+
+- (void)exitEditModeAnimated:(BOOL)animated
+{
+    for (HLSStripView *stripView in [self.stripToViewMap allValues]) {
+        if (stripView.edited) {
+            [stripView exitEditModeAnimated:animated];
+        }
+    }
 }
 
 #pragma mark Animations
@@ -741,6 +755,9 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         switch ([touch tapCount]) {
             // Double tap to add a strip
             case 2: {
+                // Exit edit mode if a strip was being edited
+                [self exitEditModeAnimated:YES];
+                
                 CGPoint pos = [touch locationInView:self];
                 NSUInteger position = [self lowerPositionForXPos:pos.x];
                 [self addStripAtPosition:position animated:YES];

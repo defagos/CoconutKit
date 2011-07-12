@@ -52,11 +52,23 @@
     return nil;
 }
 
+- (void)dealloc
+{
+    self.tag = nil;
+    self.userInfo = nil;
+    
+    [super dealloc];
+}
+
 #pragma mark Accessors and mutators
 
 @synthesize beginPosition = m_beginPosition;
 
 @synthesize endPosition = m_endPosition;
+
+@synthesize tag = m_tag;
+
+@synthesize userInfo = m_userInfo;
 
 #pragma mark Testing strips
 
@@ -79,11 +91,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; beginPosition: %d; endPosition: %d>", 
+    return [NSString stringWithFormat:@"<%@: %p; beginPosition: %d; endPosition: %d; tag: %@>", 
             [self class],
             self,
             self.beginPosition,
-            self.endPosition];
+            self.endPosition,
+            self.tag];
 }
 
 @end

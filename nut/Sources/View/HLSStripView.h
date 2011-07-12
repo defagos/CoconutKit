@@ -13,7 +13,7 @@
 @protocol HLSStripViewDelegate;
 
 // Constants
-extern const CGFloat kStripViewHandleWidth;                             // The width of a handle in pixels
+extern const CGFloat kStripViewHandleWidth;                             // The width of a handle in pixels (30 pixels)
 
 /**
  * The view corresponding to a strip. Built around a customizable view, it provides an edit mode allowing to resize
