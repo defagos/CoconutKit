@@ -49,7 +49,9 @@
 
 /**
  * Set the array of HLSStrip objects to be displayed in the container. Strips should not overlap (if overlapping, only the 
- * one with the lowest begin position will be displayed)
+ * one with the lowest begin position will be displayed).
+ *
+ * Do not update strips if a strip is already being added or removed, the behavior is undefined.
  */
 - (void)setStrips:(NSArray *)strips;
 
