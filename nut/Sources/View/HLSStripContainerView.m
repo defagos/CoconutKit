@@ -885,9 +885,11 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     // No strip view found at the finger location
     else {
         switch ([touch tapCount]) {
-            // Single tap exits edit mode
+            // Single tap exits edit mode if not dragging
             case 1: {
-                [self exitEditModeAnimated:YES];
+                if (! self.movedStripView) {
+                    [self exitEditModeAnimated:YES];
+                }
                 break;
             }
                 
