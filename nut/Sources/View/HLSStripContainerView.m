@@ -34,6 +34,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (NSUInteger)lowerPositionForXPos:(CGFloat)xPos;
 - (NSUInteger)upperPositionForXPos:(CGFloat)xPos;
 - (NSUInteger)nearestPositionForXPos:(CGFloat)xPos;
+- (NSUInteger)nearestInteractiveSnapPositionForXPos:(CGFloat)xPos;
 - (CGRect)frameForStrip:(HLSStrip *)strip;
 - (CGRect)frameForBeginPosition:(NSUInteger)beginPosition endPosition:(NSUInteger)endPosition;
 - (CGRect)frameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos;
@@ -46,7 +47,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)toggleEditModeForStripView:(HLSStripView *)stripView;
 
-- (void)snapMovedStripToNearestPosition;
+- (void)snapStripToNearestPosition;
 
 - (HLSAnimation *)animationAddingStrip:(HLSStrip *)strip;
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
@@ -82,6 +83,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     self.positions = NSUIntegerMax;
     self.allStrips = [NSMutableArray array];
     self.stripToViewMap = [NSMutableDictionary dictionary];
+    self.interactiveSnapFactor = 1;
 }
 
 - (void)dealloc
@@ -152,7 +154,28 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     
     m_positions = positions;
     
+    // Reset values depending on the number of positions
     self.defaultLength = m_positions / 10;
+    self.interactiveSnapFactor = 1;
+}
+
+@synthesize interactiveSnapFactor = m_interactiveSnapFactor;
+
+- (void)setInteractiveSnapFactor:(NSUInteger)interactiveSnapFactor
+{
+    if (interactiveSnapFactor == 0) {
+        HLSLoggerWarn(@"Factor cannot be 0; fixed to 1");
+        m_interactiveSnapFactor = 1;
+    }
+    else if ((self.positions - 1) % interactiveSnapFactor != 0) {
+        HLSLoggerWarn(@"Factor %d should divide number of intervals %d exactly; fixed to 1", 
+                      interactiveSnapFactor,
+                      self.positions - 1);
+        m_interactiveSnapFactor = 1;
+    }
+    else {
+        m_interactiveSnapFactor = interactiveSnapFactor;
+    }
 }
 
 @synthesize defaultLength = m_defaultLength;
@@ -223,7 +246,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return 0;
     }
     
-    return floorf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
+    return (NSUInteger)floorf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
 }
 
 // Return the position located before xPos (in the coordinate system of the container view)
@@ -235,7 +258,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return 0;
     }
     
-    return ceilf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
+    return (NSUInteger)ceilf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
 }
 
 // Return the nearest position for xPos (in the coordinate system of the container view)
@@ -247,7 +270,14 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         return 0;
     }
     
-    return roundf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
+    return (NSUInteger)roundf(((self.positions - 1) * (xPos - kStripViewHandleWidth)) / CGRectGetWidth(activeFrame));
+}
+
+// Return the nearest position where we can snap interactively when located in xPos (in the coordinate system of the container view)
+- (NSUInteger)nearestInteractiveSnapPositionForXPos:(CGFloat)xPos
+{
+    NSUInteger position = [self nearestPositionForXPos:xPos];
+    return self.interactiveSnapFactor * (NSUInteger)roundf((float)position / self.interactiveSnapFactor);
 }
 
 // Return the frame corresponding to a strip (in the coordinate system of the container view)
@@ -291,33 +321,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     return CGRectMake(beginXPos,
                       0.f,
                       endXPos - beginXPos,
-                      CGRectGetHeight(activeFrame));
-}
-
-// Return the best match (i.e. snapping on positions) for a begin and an end x coordinates, or CGRectZero if an error occurred
-- (CGRect)bestFrameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos
-{
-    CGRect activeFrame = [self activeFrame];
-    if (floatlt(beginXPos, CGRectGetMinX(activeFrame)) || floatgt(beginXPos, CGRectGetMaxX(activeFrame))) {
-        HLSLoggerError(@"Begin position outside range");
-        return CGRectZero;
-    }
-    
-    if (floatlt(endXPos, CGRectGetMinX(activeFrame)) || floatgt(endXPos, CGRectGetMaxX(activeFrame))) {
-        HLSLoggerError(@"End position outside range");
-        return CGRectZero;
-    }
-    
-    if (floatge(beginXPos, endXPos)) {
-        HLSLoggerError(@"Begin position must be located before end position");
-        return CGRectZero;
-    }
-    
-    CGFloat nearestBeginPositionXPos = [self xPosForPosition:[self nearestPositionForXPos:beginXPos]];
-    CGFloat nearestEndPositionXPos = [self xPosForPosition:[self nearestPositionForXPos:endXPos]];
-    return CGRectMake(nearestBeginPositionXPos,
-                      0.f,
-                      nearestEndPositionXPos - nearestBeginPositionXPos,
                       CGRectGetHeight(activeFrame));
 }
 
@@ -644,13 +647,21 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 #pragma mark Moving strips
 
-- (void)snapMovedStripToNearestPosition
+- (void)snapStripToNearestPosition
 {
     // Dragging: Snap to nearest position
     if (self.movedStripView) {
-        // Calculate positions
-        NSUInteger beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
-        NSUInteger endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
+        // Calculate positions nearest snap positions. Must avoid zero-length strips, therefore the additional MIN / MAX
+        NSUInteger beginPosition = 0;
+        NSUInteger endPosition = 0;
+        if (m_draggingLeftHandle) {
+            endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
+            beginPosition = MIN([self nearestInteractiveSnapPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)], endPosition - 1);
+        }
+        else {
+            beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
+            endPosition = MAX([self nearestInteractiveSnapPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)], beginPosition + 1);
+        }
         
         // Adjust the strip view accordingly
         self.movedStripView.contentFrameInParent = [self frameForBeginPosition:beginPosition endPosition:endPosition];
@@ -923,7 +934,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 {
     // If was dragging: Snap to nearest position
     if (self.movedStripView) {
-        [self snapMovedStripToNearestPosition];
+        [self snapStripToNearestPosition];
     }
     
     [self endTouches:touches];
@@ -933,7 +944,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 {    
     // Dragging: Snap to nearest position
     if (self.movedStripView) {
-        [self snapMovedStripToNearestPosition];
+        [self snapStripToNearestPosition];
     }
     
     self.movedStripView = nil;

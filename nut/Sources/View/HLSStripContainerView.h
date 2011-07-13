@@ -13,8 +13,10 @@
 @protocol HLSStripContainerViewDelegate;
 
 /**
- * A view to which strips (rectangles) can be added, either interactively or progammatically. These strips snap to
- * equidistant positions whose number can be set at creation time. The following gestures have been implemented:
+ * A view to which strips (rectangles) can be added, either interactively or progammatically. These strips are defined
+ * based on a set of equidistant positions whose number can be set at creation time.
+ *
+ * The following gestures have been implemented:
  *   - double-tap on an empty location to create a new strip. Strips are created with a default size which can
  *     be freely defined. A strip is created even if not enough space is available (but not if no space is available)
  *     at the tap location
@@ -31,7 +33,8 @@
 @private
     NSArray *m_allStrips;                   // contains HLSStrip objects (ordered by beginPosition)
     NSMutableDictionary *m_stripToViewMap;  // maps a strip to its corresponding view (HLSStripView)
-    NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1)
+    NSUInteger m_positions;                 // total number of positions (numbered 0 ... m_positions - 1). Those define m_positions - 1 intervals
+    NSUInteger m_interactiveSnapFactor;     // instead of snapping on m_positions - 1 intervals interactively, reduce snap to (m_positions - 1) / m_snapFactor intervals
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
     BOOL m_enabled;
@@ -58,11 +61,25 @@
 - (void)setStrips:(NSArray *)strips;
 
 /**
- * The number of positions to use. Default is NSUIntegerMax (highest granularity).
- * This value cannot be altered once the container view has used it, you should therefore set it as soon as possible
- * (ideally right after creation)
+ * The number of positions to use (delimit positions - 1 intervals). Default is NSUIntegerMax (highest granularity).
  */
 @property (nonatomic, assign) NSUInteger positions;
+
+/**
+ * In some cases, you want to be able to measure strips according to some number of positions, but you only want them to
+ * snap to a subset of those positions when manipulated interactively. Consider for example a calendar application: You
+ * might want to be able to draw strips with minute precision, but you only want the user to define strips in 15
+ * minute increments interactively. In this case, interactiveSnapFactor must be 15.
+ *
+ * As for the iPod / Music application, note that the coarse-grained behavior obtained by setting a factor > 1 affects
+ * interactions when the finger is near or on the strip container. For move / resize operations, a finer-grained control 
+ * can still be obtained interactively by dragging the finger away while maintaining contact with the screen.
+ * 
+ * The default value for the snap factor is 1. It must be >= 1 and must divide (positions - 1) (i.e. the number of 
+ * intervals) exactly, otherwise it will be fixed to 1. Moreover, this factor is reset when the number of positions
+ * is altered.
+ */
+@property (nonatomic, assign) NSUInteger interactiveSnapFactor;
 
 /**
  * The default length of strips when added interactively or using addStripAtPosition:. Reset to 1/10th of the number of
