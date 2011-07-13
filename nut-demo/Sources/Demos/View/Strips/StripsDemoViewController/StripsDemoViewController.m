@@ -143,11 +143,11 @@
 
 #pragma mark HLSStripContainerViewDelegate protocol implementation
 
-- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didAddStrip:(HLSStrip *)strip
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didFireActionForStrip:(HLSStrip *)strip
 {
-
+    // TODO: Implement some action here
 }
-
+   
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

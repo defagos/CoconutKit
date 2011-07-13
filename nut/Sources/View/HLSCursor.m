@@ -480,23 +480,23 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // If clicking on the pointer, do not select it again. This corresponds to the user grabbing the pointer
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    if (! CGRectContainsPoint(self.pointerContainerView.frame, pos)) {
+    CGPoint point = [[touches anyObject] locationInView:self];
+    if (! CGRectContainsPoint(self.pointerContainerView.frame, point)) {
         m_clicked = YES;
-        [self setSelectedIndex:[self indexForXPos:pos.x] animated:YES];
+        [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint pos = [[touches anyObject] locationInView:self];
+    CGPoint point = [[touches anyObject] locationInView:self];
     
     if (! m_clicked) {
         if (! m_dragging) {
             m_dragging = YES;
             
             // Check that we are actually grabbing the pointer view
-            if (CGRectContainsPoint(self.pointerContainerView.frame, pos)) {
+            if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
                 m_grabbed = YES;
                 
                 // Offset between the point where the finger touches the screen when dragging begins and initial center
@@ -504,7 +504,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                 // the view frame does not "jump" at the finger location (so that the finger is then at the view center) once 
                 // the first finger motion is detected. Instead, the frame will nicely follow the finger, even if it was not
                 // initially touched at its center
-                m_initialDraggingXOffset = pos.x - self.pointerContainerView.center.x;
+                m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
                 
                 NSUInteger index = [self indexForXPos:m_xPos];
                 [self swapElementViewAtIndex:index selected:NO];
@@ -520,7 +520,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         
         if (m_grabbed) {
-            CGFloat xPos = pos.x - m_initialDraggingXOffset;
+            CGFloat xPos = point.x - m_initialDraggingXOffset;
             self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
             m_xPos = xPos;
             NSUInteger index = [self indexForXPos:m_xPos];
@@ -550,8 +550,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)endTouches:(NSSet *)touches animated:(BOOL)animated
 {
     if (m_grabbed) {
-        CGPoint pos = [[touches anyObject] locationInView:self];
-        NSUInteger index = [self indexForXPos:pos.x];
+        CGPoint point = [[touches anyObject] locationInView:self];
+        NSUInteger index = [self indexForXPos:point.x];
         [self setSelectedIndex:index animated:animated];
         
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {

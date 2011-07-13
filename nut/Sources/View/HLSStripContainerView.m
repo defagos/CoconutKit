@@ -53,6 +53,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (HLSAnimation *)animationRemovingStrip:(HLSStrip *)strip;
 
 - (void)endTouches:(NSSet *)touches;
+- (void)containerViewTouched:(UITouch *)touch;
 
 @end
 
@@ -782,17 +783,17 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint pos = [[touches anyObject] locationInView:self];
-    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
+    CGPoint point = [[touches anyObject] locationInView:self];
+    HLSStripView *stripView = [self stripViewAtXPos:point.x];
     // Strip view found; the two tests at the end are not only less costly than CGRectContainsPoint, but also
     // guarantee that we cannot grab a handle while another one is already grabbed (otherwise, when shrinking
     // a strip, we could "transfer" the grab from one handle to the other one, which works but is not user-friendly)
     if (stripView && ! m_draggingLeftHandle && ! m_draggingRightHandle) {
-        if (CGRectContainsPoint([stripView leftHandleFrameInParent], pos)) {
+        if (CGRectContainsPoint([stripView leftHandleFrameInParent], point)) {
             if (! m_draggingLeftHandle) {
                 m_draggingLeftHandle = YES;
                 
-                m_handlePreviousXPos = pos.x;
+                m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
                 
                 if ([self.delegate respondsToSelector:@selector(stripContainerView:willMoveStrip:animated:)]) {
@@ -800,11 +801,11 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
                 }
             }            
         }
-        else if (CGRectContainsPoint([stripView rightHandleFrameInParent], pos)) {
+        else if (CGRectContainsPoint([stripView rightHandleFrameInParent], point)) {
             if (! m_draggingRightHandle) {
                 m_draggingRightHandle = YES;
                 
-                m_handlePreviousXPos = pos.x;
+                m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
                 
                 if ([self.delegate respondsToSelector:@selector(stripContainerView:willMoveStrip:animated:)]) {
@@ -821,7 +822,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         CGFloat beginXPos = 0.f;
         CGFloat endXPos = 0.f;
         if (m_draggingLeftHandle) {
-            CGFloat leftSizeIncrement = m_handlePreviousXPos - pos.x;
+            CGFloat leftSizeIncrement = m_handlePreviousXPos - point.x;
             CGRect activeFrame = [self activeFrame];
             beginXPos = floatmax(CGRectGetMinX(self.movedStripView.contentFrameInParent) - leftSizeIncrement,
                                  CGRectGetMinX(activeFrame)  /* avoid getting out to the left */);
@@ -837,7 +838,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             }
         }
         else {
-            CGFloat rightSizeIncrement = pos.x - m_handlePreviousXPos;
+            CGFloat rightSizeIncrement = point.x - m_handlePreviousXPos;
             CGRect activeFrame = [self activeFrame];
             beginXPos = CGRectGetMinX(self.movedStripView.contentFrameInParent);
             endXPos = floatmin(CGRectGetMaxX(self.movedStripView.contentFrameInParent) + rightSizeIncrement,
@@ -882,49 +883,38 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         
         // No obstacle on the left or right. Can set the content frame and save the new handle position
         self.movedStripView.contentFrameInParent = contentFrame;
-        m_handlePreviousXPos = pos.x;
+        m_handlePreviousXPos = point.x;
     }    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // Quite messy, but this is a clean way to be able to make a difference between different tap counts
+    static UITouch *s_previousTouch = nil;
     UITouch *touch = [touches anyObject];
-    CGPoint pos = [touch locationInView:self];
-    HLSStripView *stripView = [self stripViewAtXPos:pos.x];
-    // Strip view found at the finger location. This must not be the result of the finger reaching another strip
-    // while dragging a handle, otherwise we would switch from dragging to edit mode on another strip, which is ugly
-    if (stripView && ! self.movedStripView) {
-        // Content view part of a strip view touched. Toggle edit mode on or off
-        if (CGRectContainsPoint(stripView.contentFrameInParent, pos)) {
-            [self toggleEditModeForStripView:stripView];
+    switch ([touch tapCount]) {
+        case 1: {
+            s_previousTouch = [touch retain];
+            // TODO: The timing is must be well chosen here. This single-tapping might trigger edit mode animations, and this can conflict
+            //       with the inverse animation if a double tap is detected right after the single tap, i.e. if the delay between both
+            //       is too small. To fix this issue, we should be able to cancel HLSAnimations. This way, when entering or exiting edit
+            //       mode, we could cancel any running animation before, thus avoiding this issue.
+            //       Maybe some advice: Handle event code differently, comparing timestamps to deduce tap count
+            [self performSelector:@selector(containerViewTouched:) withObject:touch afterDelay:0.3];
+            break;
         }
-    }
-    // No strip view found at the finger location
-    else {
-        switch ([touch tapCount]) {
-            // Single tap exits edit mode if not dragging
-            case 1: {
-                if (! self.movedStripView) {
-                    [self exitEditModeAnimated:YES];
-                }
-                break;
-            }
-                
-            // Double tap to add a strip
-            case 2: {
-                // Exit edit mode if a strip was being edited
-                [self exitEditModeAnimated:YES];
-                
-                CGPoint pos = [touch locationInView:self];
-                NSUInteger position = [self lowerPositionForXPos:pos.x];
-                [self addStripAtPosition:position animated:YES];
-                break;
-            }
-                
-            default: {
-                break;
-            }
-        }    
+            
+        case 2: {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(containerViewTouched:) object:s_previousTouch];
+            [s_previousTouch release];
+            s_previousTouch = nil;
+            [self containerViewTouched:touch];
+            break;
+        }
+            
+        default: {
+            break;
+        }
     }
     
     [self endTouches:touches];    
@@ -954,6 +944,56 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     m_stripJustMadeLarger = NO;
     
     m_handlePreviousXPos = 0.f;
+}
+
+- (void)containerViewTouched:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self];
+    NSUInteger tapCount = [touch tapCount];
+    HLSStripView *stripView = [self stripViewAtXPos:point.x];
+    switch (tapCount) {
+        // Single tap
+        case 1: {
+            // Strip view found at the finger location. Single tap toggles edit mode on or off.
+            // This tap must not be the result of releasing the finger when releasing a handle over another strip (which
+            // is possible), otherwise we would switch from dragging to edit mode on another strip, which is ugly.
+            if (stripView && ! self.movedStripView) {
+                // Content view part of a strip view touched?
+                if (CGRectContainsPoint(stripView.contentFrameInParent, point)) {
+                    [self toggleEditModeForStripView:stripView];
+                } 
+            }
+            // No strip view found at the finger location. Exit edit mode (if active)
+            else {
+                if (! self.movedStripView) {
+                    [self exitEditModeAnimated:YES];
+                }
+            }
+            break;
+        }
+         
+        // Double tap
+        case 2: {
+            [self exitEditModeAnimated:YES];
+            
+            // Strip view found at the finger location. Double tap can be used to implement a custom action
+            if (stripView) {
+                if ([self.delegate respondsToSelector:@selector(stripContainerView:didFireActionForStrip:)]) {                    
+                    [self.delegate stripContainerView:self didFireActionForStrip:stripView.strip];
+                }
+            }
+            // No strip view found at the finger location. Create a new strip
+            else {
+                NSUInteger position = [self lowerPositionForXPos:point.x];
+                [self addStripAtPosition:position animated:YES];
+            }
+            break;
+        }
+                        
+        default: {
+            break;
+        }
+    }
 }
 
 #pragma mark Description

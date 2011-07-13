@@ -214,4 +214,10 @@
  */
 - (void)stripContainerView:(HLSStripContainerView *)stripContainerView didExitEditModeForStrip:(HLSStrip *)strip;
 
+/**
+ * If this method is implemented, a strip will respond to double tap events and fire this method. This let clients
+ * implement their own custom action for double taps
+ */
+- (void)stripContainerView:(HLSStripContainerView *)stripContainerView didFireActionForStrip:(HLSStrip *)strip;
+
 @end
