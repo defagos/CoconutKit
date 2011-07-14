@@ -264,19 +264,28 @@ static NSArray *s_folders = nil;
 
 #pragma mark HLSCursorDelegate protocol implementation
 
-- (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index
+- (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index
 {
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.textColor = [UIColor redColor];
     }
     else if (cursor == self.randomRangeCursor) {
         self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
-    }
+        self.randomRangeIndexLabel.textColor = [UIColor redColor];
+    }    
 }
 
-- (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index
+- (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index
 {
-    if (cursor == self.randomRangeCursor) {
+    if (cursor == self.weekDaysCursor) {
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.textColor = [UIColor blackColor];
+    }
+    else if (cursor == self.randomRangeCursor) {
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.randomRangeIndexLabel.textColor = [UIColor blackColor];
+        
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
     }
@@ -293,7 +302,7 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursor:(HLSCursor *)cursor isDraggingWithNearestIndex:(NSUInteger)index
+- (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index
 {
     if (cursor == self.randomRangeCursor) {
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
@@ -303,6 +312,9 @@ static NSArray *s_folders = nil;
                                                 inView:cursor.pointerView
                               permittedArrowDirections:UIPopoverArrowDirectionDown
                                               animated:NO];
+        
+        CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
+        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
     }
 }
 

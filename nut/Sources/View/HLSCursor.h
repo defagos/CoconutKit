@@ -16,7 +16,7 @@
 /**
  * A class for creating value cursors, i.e. sets of elements from which one is exactly active at any time. The current 
  * element is identified by a graphical pointer. This pointer can either be moved by clicking another value or by dragging
- * it. 
+ * it.
  *
  * Adding a cursor to your application is very easy:
  *   - add a HLSCursor, either programmatically or using Interface Builder
@@ -50,7 +50,6 @@
     BOOL m_grabbed;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
-    NSUInteger m_previousIndex;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
@@ -131,17 +130,17 @@
 @protocol HLSCursorDelegate <NSObject>
 
 @optional
-// Triggered when a new element has been selected (triggered when the pointer stops moving)
-- (void)cursor:(HLSCursor *)cursor didSelectIndex:(NSUInteger)index;
+// Triggered when the pointer leaves a selected element at a given index
+- (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index;
 
-// Triggered when the cursor pointer is moved. The nearest index is received as parameter
-- (void)cursor:(HLSCursor *)cursor isMovingPointerWithNearestIndex:(NSUInteger)index;
+// Triggered when the pointer stops moving, selecting a new element
+- (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index;
 
 // Triggered when the user starts dragging the pointer
 - (void)cursorDidStartDragging:(HLSCursor *)cursor;
 
-// Triggered when the user is dragging the pointer
-- (void)cursor:(HLSCursor *)cursor isDraggingWithNearestIndex:(NSUInteger)index;
+// Triggered when the user is dragging the pointer. The nearest index is given as parameter
+- (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index;
 
 // Triggered when the user stops dragging the pointer
 - (void)cursorDidStopDragging:(HLSCursor *)cursor;

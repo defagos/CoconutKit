@@ -134,9 +134,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             [self addSubview:elementView];
             self.elementViews = [self.elementViews arrayByAddingObject:elementView];            
         }
-        
-        // No element selected; set to invalid index
-        m_previousIndex = nbrElements;
     }
         
     // Calculate the needed total width
@@ -333,20 +330,14 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     [self swapElementViewAtIndex:index selected:YES];
     
-    // Notify the delegate
-    if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
-        HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
-        [self.delegate cursor:self isMovingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
+    // Send selection event; also sent if the user drags the cursor and release it on the same element that was
+    // previously selected. This is needed (and makes sense) since the deselect event is sent as soon the user
+    // starts dragging the pointer. Even if we arrive on the same element as before, we must get the corresponding
+    // anti-event, i.e. select.
+    HLSLoggerDebug(@"Calling cursor:didMoveToIndex:");
+    if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
+        [self.delegate cursor:self didMoveToIndex:index];
     }
-    
-    // Send selection event only if the selection has changed
-    if (m_previousIndex != index) {
-        if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
-            HLSLoggerDebug(@"Calling cursor:didSelectIndex:");
-            [self.delegate cursor:self didSelectIndex:index];
-        }
-    }
-    m_previousIndex = index;
 }
 
 - (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -491,6 +482,17 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     CGPoint point = [[touches anyObject] locationInView:self];
     if (! CGRectContainsPoint(self.pointerContainerView.frame, point)) {
         m_clicked = YES;
+        
+        // Set appearance of previously selected element view to "not selected"
+        NSUInteger previousIndex = [self indexForXPos:m_xPos];
+        [self swapElementViewAtIndex:previousIndex selected:NO];
+        
+        // Notify deselection
+        HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
+        if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+            [self.delegate cursor:self didMoveFromIndex:previousIndex];
+        }
+        
         [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
     }
 }
@@ -517,8 +519,13 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
                 NSUInteger index = [self indexForXPos:m_xPos];
                 [self swapElementViewAtIndex:index selected:NO];
                 
+                HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
+                if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+                    [self.delegate cursor:self didMoveFromIndex:index];
+                }
+                
+                HLSLoggerDebug(@"Calling cursorDidStartDragging:");
                 if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
-                    HLSLoggerDebug(@"Calling cursorDidStartDragging:");
                     [self.delegate cursorDidStartDragging:self];
                 }
             }
@@ -530,16 +537,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         if (m_grabbed) {
             CGFloat xPos = point.x - m_initialDraggingXOffset;
             self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
-            m_xPos = xPos;
-            NSUInteger index = [self indexForXPos:m_xPos];
-            if ([self.delegate respondsToSelector:@selector(cursor:isMovingPointerWithNearestIndex:)]) {
-                HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
-                [self.delegate cursor:self isMovingPointerWithNearestIndex:index];
-            }
-            
-            if ([self.delegate respondsToSelector:@selector(cursor:isDraggingWithNearestIndex:)]) {
-                HLSLoggerDebug(@"Calling cursor:isDraggingWithNearestIndex:");
-                [self.delegate cursor:self isDraggingWithNearestIndex:index];
+            HLSLoggerDebug(@"Calling cursor:didDragNearIndex:");
+            if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
+                [self.delegate cursor:self didDragNearIndex:[self indexForXPos:xPos]];
             }
         }
     }    
@@ -562,8 +562,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         NSUInteger index = [self indexForXPos:point.x];
         [self setSelectedIndex:index animated:animated];
         
+        HLSLoggerDebug(@"Calling cursorDidStopDragging:");
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
-            HLSLoggerDebug(@"Calling cursorDidStopDragging:");
             [self.delegate cursorDidStopDragging:self];
         }
     }
