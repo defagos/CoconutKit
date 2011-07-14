@@ -83,10 +83,10 @@
 - (NSUInteger)selectedIndex;
 
 /**
- * Set the currently selected element. This setter can also be used to set the initially selected element before the
+ * Move the pointer to a specific element. This setter can also be used to set the initially selected element before the
  * cursor is displayed (in this case, the animated parameter is ignored)
  */
-- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
+- (void)moveToIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
  * Reload the cursor from the data source. The pointer is left at the same index where it was, except if the index

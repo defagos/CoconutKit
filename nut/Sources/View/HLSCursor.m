@@ -24,6 +24,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
 
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
+- (void)deselectPreviousIndex;
+
 - (CGFloat)xPosForIndex:(NSUInteger)index;
 - (NSUInteger)indexForXPos:(CGFloat)xPos;
 
@@ -297,9 +300,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {   
-    // Set appearance of previously selected element view to "not selected"
-    [self swapElementViewAtIndex:[self indexForXPos:m_xPos] selected:NO];
-    
     m_xPos = [self xPosForIndex:selectedIndex];
     
     if (self.elementViews) {
@@ -324,6 +324,25 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // wrapped in an "if (! m_viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
     // the most recently set value is used as initial index
     m_initialIndex = selectedIndex;
+}
+
+- (void)deselectPreviousIndex
+{
+    // Set appearance of previously selected element view to "not selected"
+    NSUInteger previousIndex = [self indexForXPos:m_xPos];
+    [self swapElementViewAtIndex:previousIndex selected:NO];
+    
+    // Notify deselection
+    HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
+    if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+        [self.delegate cursor:self didMoveFromIndex:previousIndex];
+    }
+}
+
+- (void)moveToIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    [self deselectPreviousIndex];
+    [self setSelectedIndex:index animated:animated];
 }
 
 - (void)finalizeSelectionForIndex:(NSUInteger)index
@@ -483,16 +502,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if (! CGRectContainsPoint(self.pointerContainerView.frame, point)) {
         m_clicked = YES;
         
-        // Set appearance of previously selected element view to "not selected"
-        NSUInteger previousIndex = [self indexForXPos:m_xPos];
-        [self swapElementViewAtIndex:previousIndex selected:NO];
-        
-        // Notify deselection
-        HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
-        if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-            [self.delegate cursor:self didMoveFromIndex:previousIndex];
-        }
-        
+        [self deselectPreviousIndex];
         [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
     }
 }

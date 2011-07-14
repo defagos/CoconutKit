@@ -106,7 +106,7 @@ static NSArray *s_folders = nil;
     
     self.weekDaysCursor.dataSource = self;
     self.weekDaysCursor.delegate = self;
-    [self.weekDaysCursor setSelectedIndex:3 animated:NO];
+    [self.weekDaysCursor moveToIndex:3 animated:NO];
     self.weekDaysCursor.spacing = 30.f;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
@@ -114,7 +114,7 @@ static NSArray *s_folders = nil;
     [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
     
     self.randomRangeCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
-    [self.randomRangeCursor setSelectedIndex:4 animated:NO];
+    [self.randomRangeCursor moveToIndex:4 animated:NO];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
     
@@ -329,7 +329,7 @@ static NSArray *s_folders = nil;
 
 - (IBAction)moveWeekDaysPointerToNextDay
 {
-    [self.weekDaysCursor setSelectedIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
+    [self.weekDaysCursor moveToIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
 }
 
 - (IBAction)reloadRandomRangeCursor
