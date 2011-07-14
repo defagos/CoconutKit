@@ -147,7 +147,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
-    CGFloat xPos = floorf(fabs(self.frame.size.width - totalWidth) / 2.f);
+    CGFloat xPos = floorf(fabs(self.frame.size.width - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
     if (floatgt(totalWidth, self.frame.size.width)) {
         HLSLoggerWarn(@"Cursor frame not wide enough");
         xPos = -xPos;
