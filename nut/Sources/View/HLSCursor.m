@@ -134,6 +134,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             [self addSubview:elementView];
             self.elementViews = [self.elementViews arrayByAddingObject:elementView];            
         }
+        
+        // No element selected; set to invalid index
+        m_previousIndex = nbrElements;
     }
         
     // Calculate the needed total width
@@ -335,10 +338,15 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         HLSLoggerDebug(@"Calling cursor:isMovingPointerWithNearestIndex:");
         [self.delegate cursor:self isMovingPointerWithNearestIndex:[self indexForXPos:m_xPos]];
     }
-    if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
-        HLSLoggerDebug(@"Calling cursor:didSelectIndex:");
-        [self.delegate cursor:self didSelectIndex:index];
+    
+    // Send selection event only if the selection has changed
+    if (m_previousIndex != index) {
+        if ([self.delegate respondsToSelector:@selector(cursor:didSelectIndex:)]) {
+            HLSLoggerDebug(@"Calling cursor:didSelectIndex:");
+            [self.delegate cursor:self didSelectIndex:index];
+        }
     }
+    m_previousIndex = index;
 }
 
 - (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected

@@ -50,6 +50,7 @@
     BOOL m_grabbed;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
+    NSUInteger m_previousIndex;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
