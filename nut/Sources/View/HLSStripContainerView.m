@@ -365,8 +365,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 - (HLSStripView *)buildStripViewForStrip:(HLSStrip *)strip
 {
     UIView *view = nil;
-    if ([self.delegate respondsToSelector:@selector(stripContainerViewIsRequestingViewForStrip:)]) {
-        view = [self.delegate stripContainerViewIsRequestingViewForStrip:strip];
+    if ([self.delegate respondsToSelector:@selector(stripContainerView:isRequestingViewForStrip:)]) {
+        view = [self.delegate stripContainerView:self isRequestingViewForStrip:strip];
     }
     
     // If no custom view provied, use default style

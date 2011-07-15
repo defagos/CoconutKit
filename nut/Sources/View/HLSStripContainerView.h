@@ -166,7 +166,7 @@
  * Called when a strip view is created. Return the view to be used. If not implemented or if returning nil, a default 
  * style is applied. The view returned should exhibit proper stretching behaviour
  */
-- (UIView *)stripContainerViewIsRequestingViewForStrip:(HLSStrip *)strip;
+- (UIView *)stripContainerView:(HLSStripContainerView *)stripContainerView isRequestingViewForStrip:(HLSStrip *)strip;
 
 /**
  * Called after a new strip has been added
