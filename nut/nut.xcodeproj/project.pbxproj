@@ -26,6 +26,8 @@
 		6F3D04071301D901009ACE4D /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D04051301D901009ACE4D /* HLSAnimation.m */; };
 		6F3DFB4712FF1F67009ACE4D /* HLSTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */; };
 		6F3DFB4812FF1F67009ACE4D /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */; };
+		6F3ED67913CF22C800419BF7 /* UIImage+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3ED67713CF22C800419BF7 /* UIImage+HLSExtensions.h */; };
+		6F3ED67A13CF22C800419BF7 /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3ED67813CF22C800419BF7 /* UIImage+HLSExtensions.m */; };
 		6F3F4B2F139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F4B2D139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h */; };
 		6F3F4B30139E623B00269BA9 /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F4B2E139E623B00269BA9 /* UIControl+HLSExclusiveTouch.m */; };
 		6F43346C13A238540072F5D8 /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F43346A13A238540072F5D8 /* HLSCursor.h */; };
@@ -172,6 +174,8 @@
 		6F3D04051301D901009ACE4D /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransform.h; sourceTree = "<group>"; };
 		6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransform.m; sourceTree = "<group>"; };
+		6F3ED67713CF22C800419BF7 /* UIImage+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F3ED67813CF22C800419BF7 /* UIImage+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3F4B2D139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSExclusiveTouch.h"; sourceTree = "<group>"; };
 		6F3F4B2E139E623B00269BA9 /* UIControl+HLSExclusiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+HLSExclusiveTouch.m"; sourceTree = "<group>"; };
 		6F43346A13A238540072F5D8 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
@@ -539,6 +543,8 @@
 				6FAF210513A7C2FA009A5645 /* UIColor+HLSExtensions.m */,
 				6F3F4B2D139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h */,
 				6F3F4B2E139E623B00269BA9 /* UIControl+HLSExclusiveTouch.m */,
+				6F3ED67713CF22C800419BF7 /* UIImage+HLSExtensions.h */,
+				6F3ED67813CF22C800419BF7 /* UIImage+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -696,6 +702,7 @@
 				6FAF8E0E13C4770F0065F909 /* NSDateFormatter+HLSExtensions.h in Headers */,
 				6FFAC8E813C4E42200C00025 /* HLSStripView.h in Headers */,
 				6FE6019713C6F3990067B9A2 /* HLSStrip+Friend.h in Headers */,
+				6F3ED67913CF22C800419BF7 /* UIImage+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,6 +826,7 @@
 				6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FAF8E0F13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */,
 				6FFAC8E913C4E42200C00025 /* HLSStripView.m in Sources */,
+				6F3ED67A13CF22C800419BF7 /* UIImage+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

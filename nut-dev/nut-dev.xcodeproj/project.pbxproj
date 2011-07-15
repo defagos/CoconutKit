@@ -20,6 +20,7 @@
 		6F1A591713ABC00F0029B714 /* nut_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A591613ABC00F0029B714 /* nut_cursor_default_pointer.png */; };
 		6F2E93DF13AF301400C8F5D1 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E93DE13AF301300C8F5D1 /* CursorCustomPointerView.m */; };
 		6F2E93E113AF303100C8F5D1 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */; };
+		6F3ED67D13CF252200419BF7 /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3ED67C13CF252200419BF7 /* UIImage+HLSExtensions.m */; };
 		6FA6990913432746003ACC1F /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FA698FA13432746003ACC1F /* nut_Localizable.strings */; };
 		6FA6990A13432746003ACC1F /* nut_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */; };
 		6FA6990B13432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6990113432746003ACC1F /* nut_ButtonBarArrowLeft@2x.png */; };
@@ -181,6 +182,8 @@
 		6F2E93DD13AF301300C8F5D1 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
 		6F2E93DE13AF301300C8F5D1 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
 		6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
+		6F3ED67B13CF252200419BF7 /* UIImage+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F3ED67C13CF252200419BF7 /* UIImage+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FA698FC13432746003ACC1F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA698FE13432746003ACC1F /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
 		6FA6990013432746003ACC1F /* nut_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -657,6 +660,8 @@
 				6FAF210913A7C425009A5645 /* UIColor+HLSExtensions.m */,
 				6FF4B010139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.h */,
 				6FF4B011139E5CFE0080A6F9 /* UIControl+HLSExclusiveTouch.m */,
+				6F3ED67B13CF252200419BF7 /* UIImage+HLSExtensions.h */,
+				6F3ED67C13CF252200419BF7 /* UIImage+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1513,6 +1518,7 @@
 				6FD71F6D13BDC3B8008B51C4 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FAF8E1213C4812B0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */,
 				6FFAC8EC13C4EB3D00C00025 /* HLSStripView.m in Sources */,
+				6F3ED67D13CF252200419BF7 /* UIImage+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

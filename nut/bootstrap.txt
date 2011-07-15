@@ -13,3 +13,4 @@ NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
+UIImage+HLSExtensions.m

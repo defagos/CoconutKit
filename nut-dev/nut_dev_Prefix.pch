@@ -74,4 +74,5 @@
     #import "NSString+HLSExtensions.h"
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
+    #import "UIImage+HLSExtensions.h"
 #endif
