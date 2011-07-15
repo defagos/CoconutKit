@@ -143,6 +143,16 @@
 
 #pragma mark HLSStripContainerViewDelegate protocol implementation
 
+- (UIView *)stripContainerView:(HLSStripContainerView *)stripContainerView isRequestingViewForStrip:(HLSStrip *)strip
+{
+    UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"strip_bkgr_green.png"]] autorelease];
+    imageView.contentStretch = CGRectMake(0.5f, 
+                                          0.5f, 
+                                          1.f / CGRectGetWidth(imageView.frame), 
+                                          1.f / CGRectGetHeight(imageView.frame));
+    return imageView;
+}
+
 - (void)stripContainerView:(HLSStripContainerView *)stripContainerView didFireActionForStrip:(HLSStrip *)strip
 {
     // TODO: Implement some action here

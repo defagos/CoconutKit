@@ -11,6 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F0682DB13D0235700167AEF /* strip_bkgr_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0682DA13D0235700167AEF /* strip_bkgr_green.png */; };
 		6F143A9B130999DD0075E94C /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143A9A130999DD0075E94C /* PlaceholderDemoViewController.m */; };
 		6F143A9D13099A0E0075E94C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */; };
 		6F143AFF130A6DF00075E94C /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F143AFD130A6DF00075E94C /* StretchableViewController.m */; };
@@ -107,6 +108,7 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* nut_demo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut_demo_Prefix.pch; sourceTree = "<group>"; };
+		6F0682DA13D0235700167AEF /* strip_bkgr_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strip_bkgr_green.png; sourceTree = "<group>"; };
 		6F143A99130999DD0075E94C /* PlaceholderDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderDemoViewController.h; sourceTree = "<group>"; };
 		6F143A9A130999DD0075E94C /* PlaceholderDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderDemoViewController.m; sourceTree = "<group>"; };
 		6F143A9C13099A0E0075E94C /* PlaceholderDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderDemoViewController.xib; sourceTree = "<group>"; };
@@ -730,6 +732,7 @@
 				6FBDA9241304315B004B9617 /* cell_bkgr_brown_large_selected.png */,
 				6FBDA9251304315B004B9617 /* icn_bookmark.png */,
 				6F1A58FD13AB86920029B714 /* icn_folder.png */,
+				6F0682DA13D0235700167AEF /* strip_bkgr_green.png */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -952,6 +955,7 @@
 				6F1616E413BC7AB000BB4B0F /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6F1616E513BC7AB000BB4B0F /* nut_HLSWebViewController.xib in Resources */,
 				6F1616E613BC7AB000BB4B0F /* nut_strip_default_background.png in Resources */,
+				6F0682DB13D0235700167AEF /* strip_bkgr_green.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
