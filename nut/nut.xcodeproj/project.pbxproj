@@ -361,7 +361,6 @@
 		0867D691FE84028FC02AAC07 /* nut */ = {
 			isa = PBXGroup;
 			children = (
-				6FC900F213D465F700834900 /* CoreData.framework */,
 				08FB77AEFE84172EC02AAC07 /* Sources */,
 				6F8D09A4123F5E4B00FCF2AF /* Resources */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
@@ -374,6 +373,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FC900F213D465F700834900 /* CoreData.framework */,
 				6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				DA838786131EAD1000ECAED3 /* MessageUI.framework */,

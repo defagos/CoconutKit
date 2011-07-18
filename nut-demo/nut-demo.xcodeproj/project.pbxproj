@@ -270,7 +270,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6FC900F613D4662400834900 /* CoreData.framework */,
 				6FBDA9201304315B004B9617 /* Resources */,
 				6FBDA71D1303E481004B9617 /* Sources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -295,10 +294,11 @@
 			isa = PBXGroup;
 			children = (
 				6F1616C313BC7AB000BB4B0F /* nut-trunk-Release.staticframework */,
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
