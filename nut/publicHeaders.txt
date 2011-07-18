@@ -6,9 +6,11 @@ HLSConverters.h
 HLSCursor.h
 HLSDownloader.h
 HLSDownloaderTools.h
+HLSError.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLogger.h
+HLSModelManager.h
 HLSNotifications.h
 HLSOneViewAnimationStepDefinition.h
 HLSOrientationCloner.h
@@ -60,6 +62,7 @@ NSCalendar+HLSExtensions.h
 NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSDateFormatter+HLSExtensions.h
+NSDictionary+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
 UIColor+HLSExtensions.h

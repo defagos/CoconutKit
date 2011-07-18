@@ -4,9 +4,11 @@
 
 #ifdef __OBJC__
     // Additional required framework global headers
-    #import <MessageUI/MessageUI.h>
     #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import <CoreGraphics/CoreGraphics.h>
     #import <UIKit/UIKit.h>
+    #import <MessageUI/MessageUI.h>
 
     // nut library public header files
     #import "HLSAnimation.h"
@@ -17,9 +19,11 @@
     #import "HLSCursor.h"
     #import "HLSDownloader.h"
     #import "HLSDownloaderTools.h"
+    #import "HLSError.h"
     #import "HLSFloat.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLogger.h"
+    #import "HLSModelManager.h"
     #import "HLSNotifications.h"
     #import "HLSOneViewAnimationStepDefinition.h"
     #import "HLSOrientationCloner.h"
@@ -70,6 +74,7 @@
     #import "NSData+HLSExtensions.h"
     #import "NSDate+HLSExtensions.h"
     #import "NSDateFormatter+HLSExtensions.h"
+    #import "NSDictionary+HLSExtensions.h"
     #import "NSObject+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "UIColor+HLSExtensions.h"

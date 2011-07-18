@@ -97,6 +97,7 @@
 		6FBDB1B61308F95F004B9617 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B51308F95F004B9617 /* TableSearchDisplayDemoViewController.m */; };
 		6FBDB1B81308F973004B9617 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */; };
 		6FBDB2B1130915F9004B9617 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDB2B0130915F9004B9617 /* DeviceInfo.m */; };
+		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FEAEFD113B07BB60088753B /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEAEFCF13B07BB60088753B /* CursorPointerInfoViewController.m */; };
 		6FEAEFD213B07BB60088753B /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEAEFD013B07BB60088753B /* CursorPointerInfoViewController.xib */; };
 /* End PBXBuildFile section */
@@ -234,6 +235,7 @@
 		6FBDB1B71308F973004B9617 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
 		6FBDB2AF13091593004B9617 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		6FBDB2B0130915F9004B9617 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FEAEFCE13B07BB60088753B /* CursorPointerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorPointerInfoViewController.h; sourceTree = "<group>"; };
 		6FEAEFCF13B07BB60088753B /* CursorPointerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorPointerInfoViewController.m; sourceTree = "<group>"; };
 		6FEAEFD013B07BB60088753B /* CursorPointerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorPointerInfoViewController.xib; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC900F713D4662400834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -267,6 +270,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6FC900F613D4662400834900 /* CoreData.framework */,
 				6FBDA9201304315B004B9617 /* Resources */,
 				6FBDA71D1303E481004B9617 /* Sources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
