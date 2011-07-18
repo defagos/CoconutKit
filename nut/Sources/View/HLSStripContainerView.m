@@ -111,7 +111,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     HLSAssertObjectsInEnumerationAreMembersOfClass(strips, HLSStrip);
     
     // Order and remove bad and overlapping strips
-    NSSortDescriptor *beginDateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"beginPosition" ascending:YES];
+    NSSortDescriptor *beginDateSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"beginPosition" ascending:YES] autorelease];
     NSArray *sortedStrips = [strips sortedArrayUsingDescriptors:[NSArray arrayWithObject:beginDateSortDescriptor]];
     NSMutableArray *cleanedStrips = [NSMutableArray array];
     HLSStrip *previousStrip = nil;
