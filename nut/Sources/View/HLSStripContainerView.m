@@ -984,7 +984,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             }
             // No strip view found at the finger location. Create a new strip
             else {
-                NSUInteger position = [self lowerPositionForXPos:point.x];
+                NSUInteger position = [self nearestInteractiveSnapPositionForXPos:point.x];
                 [self addStripAtPosition:position animated:YES];
             }
             break;
