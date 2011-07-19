@@ -29,6 +29,18 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 @implementation NSString (HLSExtensions)
 
+#pragma mark Convenience methods
+
+- (NSString *)stringByTrimmingWhitespaces
+{
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+- (BOOL)isFilled
+{
+    return [[self stringByTrimmingWhitespaces] length] != 0;
+}
+
 #pragma mark URL encoding
 
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding

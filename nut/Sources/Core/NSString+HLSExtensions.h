@@ -9,6 +9,16 @@
 @interface NSString (HLSExtensions)
 
 /**
+ * Trims spaces left and right
+ */
+- (NSString *)stringByTrimmingWhitespaces;
+
+/**
+ * Returns NO if the string is empty of only made of whitespaces
+ */
+- (BOOL)isFilled;
+
+/**
  * URL encoded (aka percent encoded) string with RFC 3986 compliance
  * See http://www.openradar.me/6546984
  */
