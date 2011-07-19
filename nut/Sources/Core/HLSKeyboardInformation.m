@@ -8,7 +8,7 @@
 
 #import "HLSKeyboardInformation.h"
 
-#import "HLSAssert.h"s
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @interface HLSKeyboardInformation ()
