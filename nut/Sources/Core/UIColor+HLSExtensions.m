@@ -10,6 +10,11 @@
 
 @implementation UIColor (HLSExtensions)
 
++ (void)initialize
+{
+    srand(time(NULL));
+}
+
 + (UIColor *)randomColor
 {
     return [UIColor colorWithRed:(rand() % 256)/256.f
