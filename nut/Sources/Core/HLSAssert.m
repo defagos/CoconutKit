@@ -36,7 +36,7 @@
                              object:object 
                                file:fileName
                          lineNumber:line
-                        description:description];
+                        description:@"%@", description];
     }
 }
 
@@ -55,7 +55,7 @@
         [self handleFailureInFunction:functionName
                                  file:fileName
                            lineNumber:line
-                          description:description];
+                          description:@"%@", description];
     }
 }
 
