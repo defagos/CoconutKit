@@ -8,6 +8,10 @@
 
 #import "UIImage+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(UIImage_HLSExtensions)
+
 @implementation UIImage (HLSExtensions)
 
 - (UIImage *)imageMaskedWithImage:(UIImage *)maskImage

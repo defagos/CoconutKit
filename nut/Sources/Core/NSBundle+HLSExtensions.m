@@ -9,6 +9,9 @@
 #import "NSBundle+HLSExtensions.h"
 
 #import "NSString+HLSExtensions.h"
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSBundle_HLSExtensions)
 
 @implementation NSBundle (HLSExtensions)
 

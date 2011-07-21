@@ -8,6 +8,10 @@
 
 #import "NSArray+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSArray_HLSExtensions)
+
 @interface NSArray (HLSExtensionsPrivate)
 
 - (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfElements;

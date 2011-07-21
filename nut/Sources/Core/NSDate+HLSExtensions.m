@@ -9,6 +9,9 @@
 #import "NSDate+HLSExtensions.h"
 
 #import "HLSRuntime.h"
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSDate_HLSExtensions)
 
 static IMP s_descriptionWithLocale$Imp;
 static NSDateFormatter *s_dateFormatter;

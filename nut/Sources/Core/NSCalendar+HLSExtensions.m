@@ -8,6 +8,10 @@
 
 #import "NSCalendar+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSCalendar_HLSExtensions)
+
 @implementation NSCalendar (HLSExtensions)
 
 - (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone

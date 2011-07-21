@@ -9,6 +9,9 @@
 #import "NSData+HLSExtensions.h"
 
 #import <CommonCrypto/CommonDigest.h>
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSData_HLSExtensions)
 
 static NSData* digest(NSData *data, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {

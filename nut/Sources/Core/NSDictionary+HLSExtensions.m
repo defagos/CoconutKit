@@ -8,6 +8,10 @@
 
 #import "NSDictionary+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSDictionary_HLSExtensions)
+
 @implementation NSDictionary (HLSExtensions)
 
 - (id)dictionaryBySettingObject:(id)object forKey:(id)key

@@ -9,6 +9,9 @@
 #import "NSObject+HLSExtensions.h"
 
 #import <objc/runtime.h>
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(NSObject_HLSExtensions)
 
 @implementation NSObject (HLSExtensions)
 

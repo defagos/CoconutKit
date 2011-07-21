@@ -10,6 +10,9 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSCategoryLinker.h"
+
+LINK_CATEGORY(UIControl_HLSExclusiveTouch)
 
 static BOOL m_injected = NO;
 
