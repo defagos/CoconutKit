@@ -3,7 +3,7 @@
 //  nut
 //
 //  Created by Samuel Défago on 06.07.11.
-//  Copyright 2011 arrayByLeftRotatingNumberOfObjects. All rights reserved.
+//  Copyright 2011 Hortis. All rights reserved.
 //
 
 #import "NSDateFormatter+HLSExtensions.h"
@@ -12,7 +12,7 @@
 
 @implementation NSDateFormatter (HLSExtensions)
 
-- (NSArray *)orderedWeekdaySymbols
++ (NSArray *)orderedWeekdaySymbols
 {
     static NSArray *s_orderedWeekdays = nil;
     if (! s_orderedWeekdays) {
@@ -25,7 +25,7 @@
     return s_orderedWeekdays;
 }
 
-- (NSArray *)orderedShortWeekdaySymbols
++ (NSArray *)orderedShortWeekdaySymbols
 {
     static NSArray *s_orderedShortWeekdays = nil;
     if (! s_orderedShortWeekdays) {
