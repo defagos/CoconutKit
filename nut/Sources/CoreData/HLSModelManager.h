@@ -36,6 +36,7 @@
 /**
  * Convenience methods to deal with the default model manager context
  */
++ (NSManagedObjectContext *)defaultModelContext;
 + (BOOL)saveDefaultModelContext:(NSError **)pError;
 + (void)rollbackDefaultModelContext;
 

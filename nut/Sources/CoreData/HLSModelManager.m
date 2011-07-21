@@ -44,6 +44,16 @@ static HLSModelManager *s_defaultModelManager = nil;
     return s_defaultModelManager;
 }
 
++ (NSManagedObjectContext *)defaultModelContext
+{
+    if (! s_defaultModelManager) {
+        HLSLoggerWarn(@"No default context has been installed. Nothing saved");
+        return nil;
+    }
+    
+    return s_defaultModelManager.managedObjectContext;
+}
+
 + (BOOL)saveDefaultModelContext:(NSError **)pError
 {
     if (! s_defaultModelManager) {
