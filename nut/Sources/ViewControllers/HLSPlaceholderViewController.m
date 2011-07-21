@@ -8,6 +8,7 @@
 
 #import "HLSPlaceholderViewController.h"
 
+#import <objc/runtime.h>
 #import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
