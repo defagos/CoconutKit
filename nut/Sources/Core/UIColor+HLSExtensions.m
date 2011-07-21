@@ -20,9 +20,9 @@ LINK_CATEGORY(UIColor_HLSExtensions)
 
 + (UIColor *)randomColor
 {
-    return [UIColor colorWithRed:(rand() % 256)/256.f
-                           green:(rand() % 256)/256.f 
-                            blue:(rand() % 256)/256.f 
+    return [UIColor colorWithRed:(arc4random() % 256)/256.f
+                           green:(arc4random() % 256)/256.f 
+                            blue:(arc4random() % 256)/256.f 
                            alpha:1.f];
 }
 
