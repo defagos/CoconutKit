@@ -160,11 +160,21 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * If set to YES, the inset view controller's view frame is automatically adjusted to match the placeholder bounds. The resizing
  * behavior stiull depends on the autoresizing behavior of the inset view, though (for example, if an inset view is able to stretch 
  * in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used as is.
- * Default value is NO
+ * Default value is NO.
  */
 @property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;
 
-@property (nonatomic, assign) id<HLSPlaceholderViewControllerDelegate> delegate;
+/**
+ * If set to YES, the following properties of the inset view controller are forwarded to the placeholder view controller:
+ * - navigationController
+ * - navigationItem
+ * - title
+ *
+ * Default value is NO.
+ */
+@property (nonatomic, assign) BOOL forwardInsetViewControllerProperties;
+
+@property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 @end
 

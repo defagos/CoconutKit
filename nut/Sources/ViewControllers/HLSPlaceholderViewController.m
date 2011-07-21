@@ -25,6 +25,49 @@
 
 @implementation HLSPlaceholderViewController
 
+#pragma mark Inset View Controller properties forwarding
+
+static void *HLSPlaceholderViewControllerKey = &HLSPlaceholderViewControllerKey;
+
+static id(*UIViewController__navigationController)(id, SEL) = NULL;
+static id(*UIViewController__navigationItem)(id, SEL) = NULL;
+static id(*UIViewController__title)(id, SEL) = NULL;
+
+static id placeholderForward(UIViewController *self, SEL _cmd)
+{
+    id(*UIViewControllerMethod)(id, SEL) = NULL;
+    if (_cmd == @selector(navigationController)) {
+        UIViewControllerMethod = UIViewController__navigationController;
+    }
+    else if (_cmd == @selector(navigationItem)) {
+        UIViewControllerMethod = UIViewController__navigationItem;
+    }
+    else if (_cmd == @selector(title)) {
+        UIViewControllerMethod = UIViewController__title;
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property forwarding (%@)", NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+    }
+    
+    HLSPlaceholderViewController *placeholderViewController = objc_getAssociatedObject(self, HLSPlaceholderViewControllerKey);
+    if (placeholderViewController) {
+        return UIViewControllerMethod(placeholderViewController, _cmd);
+    }
+    else {
+        return UIViewControllerMethod(self, _cmd);
+    }
+}
+
+@synthesize forwardInsetViewControllerProperties = m_forwardInsetViewControllerProperties;
+
++ (void)load
+{
+    UIViewController__navigationController = (id(*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForward, NULL);
+    UIViewController__navigationItem = (id(*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)placeholderForward, NULL);
+    UIViewController__title = (id(*)(id, SEL))class_replaceMethod([UIViewController class], @selector(title), (IMP)placeholderForward, NULL);
+}
+
 #pragma mark Object creation and destruction
 
 - (void)dealloc
@@ -114,6 +157,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
             return;
         }
+    }
+    
+    if (insetViewController && self.forwardInsetViewControllerProperties) {
+        objc_setAssociatedObject(insetViewController, HLSPlaceholderViewControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
     
     // Remove any existing inset first
