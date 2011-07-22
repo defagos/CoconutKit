@@ -13,11 +13,6 @@ LINK_CATEGORY(UIColor_HLSExtensions)
 
 @implementation UIColor (HLSExtensions)
 
-+ (void)initialize
-{
-    srand(time(NULL));
-}
-
 + (UIColor *)randomColor
 {
     return [UIColor colorWithRed:(arc4random() % 256)/256.f

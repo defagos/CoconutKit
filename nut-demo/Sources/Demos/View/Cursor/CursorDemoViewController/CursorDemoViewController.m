@@ -30,8 +30,6 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
-    srand(time(NULL));
-    
     s_weekDays = [[NSDateFormatter orderedWeekdaySymbols] retain];    
     s_completeRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                       @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
@@ -182,7 +180,7 @@ static NSArray *s_folders = nil;
     }
     else if (cursor == self.randomRangeCursor) {
         // Omit up to 10 objects at the end of the array
-        return rand() % 10 + [s_completeRange count] - 10 + 1;
+        return arc4random() % 10 + [s_completeRange count] - 10 + 1;
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];
