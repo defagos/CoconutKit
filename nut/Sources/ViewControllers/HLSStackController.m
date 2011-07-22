@@ -10,10 +10,15 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "HLSOrientationCloner.h"
+
+// TODO: When pushing a view controller, insert an invisible view just below it for preventing
+//       user interaction with the views below in the stack
 
 @interface HLSStackController ()
 
-@property (nonatomic, retain) NSArray *viewControllers;
+@property (nonatomic, retain) NSMutableArray *contentViewControllers;
+@property (nonatomic, retain) NSMutableArray *addedAsSubviewFlags;
 
 @end
 
@@ -24,7 +29,8 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 {
     if ((self = [super init])) {
-        self.viewControllers = [NSArray arrayWithObject:rootViewController];
+        self.contentViewControllers = [NSMutableArray arrayWithObject:rootViewController];
+        self.addedAsSubviewFlags = [NSMutableArray arrayWithObject:[NSNumber numberWithBool:NO]];
     }
     return self;
 }
@@ -37,7 +43,8 @@
 
 - (void)dealloc
 {
-    self.viewControllers = nil;
+    self.contentViewControllers = nil;
+    self.addedAsSubviewFlags = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -45,13 +52,20 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize viewControllers = m_viewControllers;
+@synthesize contentViewControllers = m_contentViewControllers;
+
+@synthesize addedAsSubviewFlags = m_addedAsSubviewFlags;
 
 @synthesize delegate = m_delegate;
 
 - (UIViewController *)topViewController
 {
-    return [self.viewControllers lastObject];
+    return [self.contentViewControllers lastObject];
+}
+
+- (NSArray *)viewControllers
+{
+    return [NSArray arrayWithArray:self.contentViewControllers];
 }
 
 #pragma mark View lifecycle
@@ -62,24 +76,31 @@
     
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
+    
+    // Take all space available. Parent container view controllers should be responsible of adjusting
+    // the view size properly
+    self.view.frame = [[UIScreen mainScreen] applicationFrame];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    // View controllers not added in viewDidLoad. Only after viewWillAppear are view dimensions known
-    if (! m_viewsAdded) {
-        for (UIViewController *viewController in self.viewControllers) {
+    // Add those view controller views which have not been added yet
+    NSUInteger i = 0;
+    for (UIViewController *viewController in self.contentViewControllers) {
+        BOOL addedAsSubview = [[self.addedAsSubviewFlags objectAtIndex:i] boolValue];
+        if (! addedAsSubview) {
             [self.view addSubview:viewController.view];
         }
-        
-        m_viewsAdded = YES;
+        [self.addedAsSubviewFlags replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
+        ++i;
     }
     
     // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
-    // to the top view controller, so that when this event is received dimensions are known
-    for (UIViewController *viewController in self.viewControllers) {
+    // to the top view controller, so that when this event is received view controller dimensions are known
+    for (UIViewController *viewController in self.contentViewControllers) {
         viewController.view.frame = self.view.bounds;
     }
     
@@ -124,12 +145,15 @@
 {
     [super viewDidUnload];
     
-    if (m_viewsAdded) {
-        for (UIViewController *viewController in self.viewControllers) {
+    NSUInteger i = 0;
+    for (UIViewController *viewController in self.contentViewControllers) {
+        BOOL addedAsSubview = [[self.addedAsSubviewFlags objectAtIndex:i] boolValue];
+        if (addedAsSubview) {
             viewController.view = nil;
             [viewController viewDidUnload];
+            [self.addedAsSubviewFlags replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
         }
-        m_viewsAdded = NO;
+        ++i;
     }
 }
 
@@ -141,8 +165,36 @@
         return NO;
     }
     
-    // TODO:
+    // If one view controller in the stack does not support the orientation, neither will the container
+    for (UIViewController *viewController in self.contentViewControllers) {
+        if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
+            && ! [viewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
+            return NO;
+        }
+    }
+    
     return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{   
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // TODO:
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // TODO:
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    // TODO:
 }
 
 #pragma mark Memory warnings
@@ -158,19 +210,20 @@
 
 - (void)pushViewController:(UIViewController *)viewController
 {
+    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:nil];
 }
 
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-
+    
 }
 
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
 {
-
+    
 }
 
 - (void)pushViewController:(UIViewController *)viewController
@@ -178,6 +231,68 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
     // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
     //       will occur, but the animation will be registered for the pop
+    NSAssert(viewController != nil, @"Cannot push nil");
+    
+    // Check that the view controller to be pushed is compatible with the current orientation
+    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        if (! [viewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
+            HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
+            return;
+        }
+    }
+    
+    // Notify disappearance of previous top view controller if visible
+    UIViewController *previousTopViewController = [self topViewController];
+    BOOL topAddedAsSubview = [[self.addedAsSubviewFlags lastObject] boolValue];
+    if (topAddedAsSubview) {
+        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+            // TODO: Animated case!
+            [previousTopViewController viewWillDisappear:NO];
+            [previousTopViewController viewDidDisappear:NO];
+        }
+    }
+    
+    // Push the new view controller
+    [self.contentViewControllers addObject:viewController];
+    [self.addedAsSubviewFlags addObject:[NSNumber numberWithBool:NO]];
+    
+    // Add the view if the container view has been loaded
+    if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewDidLoad && [self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidUnload) {
+        // Instantiate the view lazily
+        UIView *view = viewController.view;
+        
+        // If container already visible, resize and forward events
+        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+            view.frame = self.view.bounds;
+            
+            // TODO: Animated case!
+            if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+                [self.delegate stackController:self
+                        willShowViewController:viewController 
+                                      animated:NO];
+            }
+            
+            [viewController viewWillAppear:NO];
+            [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] -1
+                                                withObject:[NSNumber numberWithBool:YES]];
+            
+            [self.view addSubview:viewController.view];
+            
+            if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+                [self.delegate stackController:self
+                         didShowViewController:viewController 
+                                      animated:NO];
+            }
+            
+            [viewController viewDidAppear:NO];
+        }
+        // Not visible or disappearing
+        else {
+            [self.view addSubview:view];
+            [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] -1
+                                                withObject:[NSNumber numberWithBool:YES]];            
+        }
+    }
 }
 
 #pragma mark Popping view controllers
@@ -204,11 +319,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 - (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
     // Cannot pop if only one view controller remains
-    if ([self.viewControllers count] == 1) {
+    if ([self.contentViewControllers count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
         return nil;
     }
-
+    
     // TODO:
     return nil;
 }

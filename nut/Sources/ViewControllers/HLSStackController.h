@@ -21,13 +21,18 @@
  * to behave as if it disappeared (though it still stays visible).
  * Not meant to be subclassed
  *
+ * Question: Not meant to be subclassed => which size? Probably largest size available by default and rely on the parent 
+ *           view controller's behavior (should be able to automatically resize its child view controller's views properly).
+ *           This is the case for UINavigationController, UITabBarController, HLSPlaceholderViewController
+ *
  * Designated initializer: initWithRootCiewController:
  */
 @interface HLSStackController : HLSViewController {
 @private
-    NSArray *m_viewControllers;                     // contains UIViewController objects. The last one is the top one
+    NSMutableArray *m_contentViewControllers;              // contains UIViewController objects. The last one is the top one
+    NSMutableArray *m_addedAsSubviewFlags;                 // contains NSNumber (BOOL) objects flagging whether a view controller's 
+                                                           // view has been added as subview. Same order as m_viewControllers
     BOOL m_adjustingContent;
-    BOOL m_viewsAdded;
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -97,7 +102,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 /**
  * The view controllers in the stack. The first one is the root view controller, the last one the top one
  */
-@property (nonatomic, readonly, retain) NSArray *viewControllers;
+- (NSArray *)viewControllers;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 

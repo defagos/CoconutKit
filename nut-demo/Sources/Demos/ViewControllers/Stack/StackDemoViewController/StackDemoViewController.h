@@ -11,7 +11,9 @@
  */
 @interface StackDemoViewController : HLSPlaceholderViewController {
 @private
-    
+    UIButton *m_lifecycleTestSampleButton;
 }
+
+@property (nonatomic, retain) IBOutlet UIButton *lifecycleTestSampleButton;
 
 @end

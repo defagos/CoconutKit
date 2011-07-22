@@ -10,6 +10,12 @@
 
 #import "LifeCycleTestViewController.h"
 
+@interface StackDemoViewController ()
+
+- (void)lifeCycleTestSampleButtonClicked:(id)sender;
+
+@end
+
 @implementation StackDemoViewController
 
 #pragma mark Object creation and destruction
@@ -30,10 +36,12 @@
 { 
     [super releaseViews];
     
-    // Code
+    self.lifecycleTestSampleButton = nil;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize lifecycleTestSampleButton = m_lifecycleTestSampleButton;
 
 #pragma mark View lifecycle
 
@@ -41,7 +49,20 @@
 {
     [super viewDidLoad];
     
-    // Code
+    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test")
+                                    forState:UIControlStateNormal];
+    [self.lifecycleTestSampleButton addTarget:self
+                                       action:@selector(lifeCycleTestSampleButtonClicked:)
+                             forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark Event callbacks
+
+- (void)lifeCycleTestSampleButtonClicked:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+    [stackController pushViewController:lifeCycleTestViewController];
 }
 
 @end
