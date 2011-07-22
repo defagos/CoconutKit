@@ -33,6 +33,7 @@ HLSServiceRequester.h
 HLSServiceSettings.h
 HLSSingleValuePicker.h
 HLSSingleValuePickerViewController.h
+HLSStackController.h
 HLSStandardWidgetConstants.h
 HLSStrip.h
 HLSStripContainerView.h
@@ -45,6 +46,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
+HLSTransitionStyle.h
 HLSTwoViewAnimationStepDefinition.h
 HLSUserInterfaceLock.h
 HLSValidable.h
