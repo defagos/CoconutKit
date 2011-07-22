@@ -52,7 +52,7 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
     }
     
     HLSPlaceholderViewController *placeholderViewController = objc_getAssociatedObject(self, HLSPlaceholderViewControllerKey);
-    if (placeholderViewController) {
+    if (placeholderViewController && placeholderViewController.forwardInsetViewControllerProperties) {
         return UIViewControllerMethod(placeholderViewController, _cmd);
     }
     else {
@@ -159,10 +159,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         }
     }
     
-    if (insetViewController && self.forwardInsetViewControllerProperties) {
+    // Associate the view controller with its container
+    if (insetViewController) {
+        NSAssert(! objc_getAssociatedObject(insetViewController, HLSPlaceholderViewControllerKey), @"A view controller can only be inserted into one placeholder view controller");
         objc_setAssociatedObject(insetViewController, HLSPlaceholderViewControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
-    
+        
     // Remove any existing inset first
     if (m_insetViewAddedAsSubview) {
         // If the container is visible, deal with animation and lifecycle events for the old inset view
@@ -194,6 +196,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
                 // set as inset
                 m_insetViewController.view.transform = m_originalInsetViewTransform;
                 m_insetViewController.view.alpha = m_originalInsetViewAlpha;
+                
+                // Remove the old view controller association with its container
+                NSAssert(objc_getAssociatedObject(m_insetViewController, HLSPlaceholderViewControllerKey), @"The view controller was not inserted into a placeholder view controller");
+                objc_setAssociatedObject(m_insetViewController, HLSPlaceholderViewControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
             }
         }
     }
@@ -765,6 +771,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     self.oldInsetViewController.view.transform = m_oldOriginalInsetViewTransform;
     self.oldInsetViewController.view.alpha = m_oldOriginalInsetViewAlpha;
     
+    // Remove the old view controller association with its container
+    NSAssert(objc_getAssociatedObject(self.oldInsetViewController, HLSPlaceholderViewControllerKey), @"The view controller was not inserted into a placeholder view controller");
+    objc_setAssociatedObject(self.oldInsetViewController, HLSPlaceholderViewControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    
     // Done with the old inset view controller.
     self.oldInsetViewController = nil;
     m_oldOriginalInsetViewTransform = CGAffineTransformIdentity;
@@ -779,6 +789,15 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     // Forward appearance event of the new inset
     [self.insetViewController viewDidAppear:animated];
+}
+
+@end
+
+@implementation UIViewController (HLSPlaceholderViewController)
+
+- (HLSPlaceholderViewController *)placeholderViewController
+{
+    return objc_getAssociatedObject(self, HLSPlaceholderViewControllerKey);
 }
 
 @end

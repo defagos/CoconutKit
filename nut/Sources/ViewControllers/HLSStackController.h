@@ -131,6 +131,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 @interface UIViewController (HLSStackController)
 
-@property (nonatomic, assign, readonly) HLSStackController *stackController;
+@property (nonatomic, readonly, assign) HLSStackController *stackController;
 
 @end

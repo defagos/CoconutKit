@@ -169,3 +169,9 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
                          animated:(BOOL)animated;
 
 @end
+
+@interface UIViewController (HLSPlaceholderViewController)
+
+@property (nonatomic, readonly, assign) HLSPlaceholderViewController *placeholderViewController;
+
+@end
