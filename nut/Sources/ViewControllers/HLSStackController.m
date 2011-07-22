@@ -13,7 +13,10 @@
 #import "HLSOrientationCloner.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
-//       user interaction with the views below in the stack
+//       user interaction with the views below in the stack. Could maybe just be a screenshot of
+//       the content below, so that we can avoid always having the view hierarchy loaded (would
+//       not be good when memory gets low)
+//       See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
 
 @interface HLSStackController ()
 
@@ -242,14 +245,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // Notify disappearance of previous top view controller if visible
-    UIViewController *previousTopViewController = [self topViewController];
-    BOOL topAddedAsSubview = [[self.addedAsSubviewFlags lastObject] boolValue];
-    if (topAddedAsSubview) {
-        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-            // TODO: Animated case!
-            [previousTopViewController viewWillDisappear:NO];
-            [previousTopViewController viewDidDisappear:NO];
-        }
+    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        // TODO: Animated case!
+        UIViewController *topViewController = [self topViewController];
+        [topViewController viewWillDisappear:NO];
+        [topViewController viewDidDisappear:NO];
     }
     
     // Push the new view controller
@@ -299,8 +299,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (UIViewController *)popViewController
 {
-    // TODO:
-    return nil;
+    // TODO: Must retrieve the animation used when pushed to play it backwards
+    return [self popViewControllerWithTwoViewAnimationStepDefinitions:nil];
 }
 
 - (UIViewController *)popViewControllerWithTransitionStyle:(HLSTransitionStyle)transitionStyle
@@ -324,8 +324,46 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         return nil;
     }
     
-    // TODO:
-    return nil;
+    // If the top view controller is visible, notify disappearance
+    UIViewController *previousTopViewController = [self topViewController];
+    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        // TODO: Animated case!
+        [previousTopViewController viewWillDisappear:NO];
+    }
+    
+    [previousTopViewController.view removeFromSuperview];
+    
+    // TODO: Will be replace later by a property (because we need to retain the view controller during animation); will let the view
+    //       controller live a little bit longer
+    [[previousTopViewController retain] autorelease];
+    
+    [self.contentViewControllers removeLastObject];
+    [self.addedAsSubviewFlags removeLastObject];
+    
+    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        // TODO: Animated case!
+        [previousTopViewController viewDidDisappear:NO];
+        
+        UIViewController *topViewController = [self topViewController];
+        
+        if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+            [self.delegate stackController:self
+                    willShowViewController:topViewController
+                                  animated:NO];
+        }
+        
+        [topViewController viewWillAppear:NO];
+        
+        if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+            [self.delegate stackController:self
+                     didShowViewController:topViewController
+                                  animated:NO];
+        }
+        
+        [topViewController viewDidAppear:NO];
+    }
+    
+    return previousTopViewController;
 }
 
 @end

@@ -13,6 +13,7 @@
 @interface StackDemoViewController ()
 
 - (void)lifeCycleTestSampleButtonClicked:(id)sender;
+- (void)popButtonClicked:(id)sender;
 
 @end
 
@@ -37,11 +38,14 @@
     [super releaseViews];
     
     self.lifecycleTestSampleButton = nil;
+    self.popButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize lifecycleTestSampleButton = m_lifecycleTestSampleButton;
+
+@synthesize popButton = m_popButton;
 
 #pragma mark View lifecycle
 
@@ -54,6 +58,12 @@
     [self.lifecycleTestSampleButton addTarget:self
                                        action:@selector(lifeCycleTestSampleButtonClicked:)
                              forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop")
+                    forState:UIControlStateNormal];
+    [self.popButton addTarget:self
+                       action:@selector(popButtonClicked:)
+             forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark Event callbacks
@@ -63,6 +73,12 @@
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [stackController pushViewController:lifeCycleTestViewController];
+}
+
+- (void)popButtonClicked:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    [stackController popViewController];
 }
 
 @end
