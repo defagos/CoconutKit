@@ -24,7 +24,7 @@
  */
 @interface HLSStackController : HLSViewController {
 @private
-    NSArray *m_viewControllers;
+    NSArray *m_viewControllers;                     // contains UIViewController objects. The last one is the top one
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -111,5 +111,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (void)stackController:(HLSStackController *)stackController
   didShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
+
+@end
+
+@interface UIViewController (HLSStackController)
+
+- (HLSStackController *)stackController;
 
 @end

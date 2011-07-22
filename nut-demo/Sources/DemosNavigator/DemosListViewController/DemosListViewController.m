@@ -14,6 +14,7 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "StackDemoViewController.h"
 #import "StripsDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
@@ -66,6 +67,7 @@ typedef enum {
     ViewControllersDemoIndexEnumBegin = 0,
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
     ViewControllersDemoIndexWizardViewController,
+    ViewControllersDemoIndexStackController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
 //    ViewControllersDemoIndexPageController,
@@ -255,6 +257,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewControllersDemoIndexStackController: {
+                    cell.textLabel.text = @"HLSStackController";
+                    break;
+                }
+                    
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
                     cell.textLabel.text = @"HLSTableSearchDisplayController";
                     break;
@@ -388,6 +395,12 @@ typedef enum {
                                                           wizardPageViewController2,
                                                           wizardPageViewController3,
                                                           nil];                    
+                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexStackController: {
+                    StackDemoViewController *demoViewController = [[[StackDemoViewController alloc] init] autorelease];
                     [self.navigationController pushViewController:demoViewController animated:YES];
                     break;
                 }

@@ -17,7 +17,7 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 {
     if ((self = [super init])) {
-        
+        self.viewControllers = [NSArray arrayWithObject:rootViewController];
     }
     return self;
 }
@@ -44,8 +44,7 @@
 
 - (UIViewController *)topViewController
 {
-    // TODO:
-    return nil;
+    return [self.viewControllers lastObject];
 }
 
 #pragma mark View lifecycle
@@ -163,6 +162,16 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 - (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
     // TODO:
+    return nil;
+}
+
+@end
+
+@implementation UIViewController (HLSStackController)
+
+- (HLSStackController *)stackController
+{
+    // TODO: Implement using runtime associated objects
     return nil;
 }
 

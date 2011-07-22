@@ -63,6 +63,8 @@
 		6F7A3B21130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */; };
 		6F7A3E27130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */; };
 		6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */; };
+		6F82492013D96B2400688D0C /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82491E13D96B2400688D0C /* StackDemoViewController.m */; };
+		6F82492113D96B2400688D0C /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82491F13D96B2400688D0C /* StackDemoViewController.xib */; };
 		6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */; };
 		6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */; };
 		6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */; };
@@ -181,6 +183,9 @@
 		6F7A3B20130DCD1600AB1926 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6F7A3E25130E707500AB1926 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
 		6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
+		6F82491D13D96B2400688D0C /* StackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackDemoViewController.h; sourceTree = "<group>"; };
+		6F82491E13D96B2400688D0C /* StackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackDemoViewController.m; sourceTree = "<group>"; };
+		6F82491F13D96B2400688D0C /* StackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackDemoViewController.xib; sourceTree = "<group>"; };
 		6F84AF2B131BAC71002C3D05 /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
 		6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
@@ -443,6 +448,24 @@
 			path = TextFieldsDemoViewController;
 			sourceTree = "<group>";
 		};
+		6F82491B13D96B2400688D0C /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				6F82491C13D96B2400688D0C /* StackDemoViewController */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		6F82491C13D96B2400688D0C /* StackDemoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F82491D13D96B2400688D0C /* StackDemoViewController.h */,
+				6F82491E13D96B2400688D0C /* StackDemoViewController.m */,
+				6F82491F13D96B2400688D0C /* StackDemoViewController.xib */,
+			);
+			path = StackDemoViewController;
+			sourceTree = "<group>";
+		};
 		6F84AF27131BAC39002C3D05 /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				6F143A97130999CA0075E94C /* Placeholder */,
+				6F82491B13D96B2400688D0C /* Stack */,
 				6FBDB1B21308F925004B9617 /* TableSearchDisplay */,
 				6F84AF27131BAC39002C3D05 /* Wizard */,
 			);
@@ -960,6 +984,7 @@
 				6F1616E513BC7AB000BB4B0F /* nut_HLSWebViewController.xib in Resources */,
 				6F1616E613BC7AB000BB4B0F /* nut_strip_default_background.png in Resources */,
 				6F0682DB13D0235700167AEF /* strip_bkgr_green.png in Resources */,
+				6F82492113D96B2400688D0C /* StackDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,6 +1031,7 @@
 				6FEAEFD113B07BB60088753B /* CursorPointerInfoViewController.m in Sources */,
 				6FA6C22113B3969D0039622A /* StripsDemoViewController.m in Sources */,
 				6F1616DA13BC7AB000BB4B0F /* nut_bootstrap.m in Sources */,
+				6F82492013D96B2400688D0C /* StackDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
