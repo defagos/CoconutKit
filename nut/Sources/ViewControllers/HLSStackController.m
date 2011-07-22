@@ -47,8 +47,6 @@
 
 @synthesize viewControllers = m_viewControllers;
 
-@synthesize adjustingContent = m_adjustingContent;
-
 @synthesize delegate = m_delegate;
 
 - (UIViewController *)topViewController
@@ -81,10 +79,8 @@
     
     // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
     // to the top view controller, so that when this event is received dimensions are known
-    if (self.adjustingContent) {
-        for (UIViewController *viewController in self.viewControllers) {
-            viewController.view.frame = self.view.bounds;
-        }
+    for (UIViewController *viewController in self.viewControllers) {
+        viewController.view.frame = self.view.bounds;
     }
     
     // Forward events for the top view controller
@@ -180,7 +176,8 @@
 - (void)pushViewController:(UIViewController *)viewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
-
+    // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
+    //       will occur, but the animation will be registered for the pop
 }
 
 #pragma mark Popping view controllers

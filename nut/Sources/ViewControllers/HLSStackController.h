@@ -19,6 +19,7 @@
  * with transparency would have been way too difficult (you have to consider all superimposed views to know if some
  * view controller's view down the stack is partially visible), and in general we want the covered view controller
  * to behave as if it disappeared (though it still stays visible).
+ * Not meant to be subclassed
  *
  * Designated initializer: initWithRootCiewController:
  */
@@ -97,14 +98,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * The view controllers in the stack. The first one is the root view controller, the last one the top one
  */
 @property (nonatomic, readonly, retain) NSArray *viewControllers;
-
-/**
- * If set to YES, the content view controller's view frames are automatically adjusted to match the view bounds. The resizing
- * behavior still depends on the autoresizing behavior of the content views, though (for example, if a content view is able 
- * to stretch  in both directions, it will fill the entire view). If set to NO, the content view is used as is.
- * Default value is NO.
- */
-@property (nonatomic, assign, getter=isAdjustingContent) BOOL adjustingContent;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 

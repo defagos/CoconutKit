@@ -8,6 +8,8 @@
 
 #import "StackDemoViewController.h"
 
+#import "LifeCycleTestViewController.h"
+
 @implementation StackDemoViewController
 
 #pragma mark Object creation and destruction
@@ -16,12 +18,16 @@
 {
     if ((self = [super init])) {
         self.title = @"HLSStackController";
+        
+        UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        self.insetViewController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        self.adjustingInset = YES;
     }
     return self;
 }
 
 - (void)releaseViews
-{
+{ 
     [super releaseViews];
     
     // Code
