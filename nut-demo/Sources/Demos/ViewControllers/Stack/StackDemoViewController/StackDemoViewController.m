@@ -9,11 +9,13 @@
 #import "StackDemoViewController.h"
 
 #import "LifeCycleTestViewController.h"
+#import "MemoryWarningTestCoverViewController.h"
 
 @interface StackDemoViewController ()
 
 - (void)lifeCycleTestSampleButtonClicked:(id)sender;
 - (void)popButtonClicked:(id)sender;
+- (void)hideWithModalButtonClicked:(id)sender;
 
 @end
 
@@ -39,6 +41,7 @@
     
     self.lifecycleTestSampleButton = nil;
     self.popButton = nil;
+    self.hideWithModalButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -46,6 +49,8 @@
 @synthesize lifecycleTestSampleButton = m_lifecycleTestSampleButton;
 
 @synthesize popButton = m_popButton;
+
+@synthesize hideWithModalButton = m_hideWithModalButton;
 
 #pragma mark View lifecycle
 
@@ -64,6 +69,13 @@
     [self.popButton addTarget:self
                        action:@selector(popButtonClicked:)
              forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal")
+                              forState:UIControlStateNormal];
+    [self.hideWithModalButton addTarget:self
+                                 action:@selector(hideWithModalButtonClicked:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 #pragma mark Event callbacks
@@ -79,6 +91,12 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     [stackController popViewController];
+}
+
+- (void)hideWithModalButtonClicked:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
 @end

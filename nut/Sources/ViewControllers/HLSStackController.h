@@ -104,6 +104,14 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  */
 - (NSArray *)viewControllers;
 
+/**
+ * If set to YES, the content view controller's view frames are automatically adjusted to match the container view bounds. The resizing
+ * behavior still depends on the autoresizing behavior of the content views, though (for example, if a content view is able to stretch 
+ * in both directions, it will fill the entire container view). If set to NO, the content view is used as is.
+ * Default value is NO.
+ */
+@property (nonatomic, assign, getter=isAdjustingContent) BOOL adjustingContent;
+
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 
 @end
@@ -123,6 +131,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 @interface UIViewController (HLSStackController)
 
-- (HLSStackController *)stackController;
+@property (nonatomic, assign, readonly) HLSStackController *stackController;
 
 @end

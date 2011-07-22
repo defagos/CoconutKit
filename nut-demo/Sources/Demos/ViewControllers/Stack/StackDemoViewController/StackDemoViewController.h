@@ -13,9 +13,11 @@
 @private
     UIButton *m_lifecycleTestSampleButton;
     UIButton *m_popButton;
+    UIButton *m_hideWithModalButton;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *lifecycleTestSampleButton;
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
+@property (nonatomic, retain) IBOutlet UIButton *hideWithModalButton;
 
 @end

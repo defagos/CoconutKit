@@ -8,6 +8,7 @@
 
 #import "HLSStackController.h"
 
+#import <objc/runtime.h>
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
@@ -17,6 +18,8 @@
 //       the content below, so that we can avoid always having the view hierarchy loaded (would
 //       not be good when memory gets low)
 //       See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
+
+static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
 
@@ -34,6 +37,8 @@
     if ((self = [super init])) {
         self.contentViewControllers = [NSMutableArray arrayWithObject:rootViewController];
         self.addedAsSubviewFlags = [NSMutableArray arrayWithObject:[NSNumber numberWithBool:NO]];
+        NSAssert(! objc_getAssociatedObject(rootViewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
+        objc_setAssociatedObject(rootViewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
     return self;
 }
@@ -58,6 +63,8 @@
 @synthesize contentViewControllers = m_contentViewControllers;
 
 @synthesize addedAsSubviewFlags = m_addedAsSubviewFlags;
+
+@synthesize adjustingContent = m_adjustingContent;
 
 @synthesize delegate = m_delegate;
 
@@ -103,8 +110,10 @@
     
     // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
     // to the top view controller, so that when this event is received view controller dimensions are known
-    for (UIViewController *viewController in self.contentViewControllers) {
-        viewController.view.frame = self.view.bounds;
+    if (self.adjustingContent) {
+        for (UIViewController *viewController in self.contentViewControllers) {
+            viewController.view.frame = self.view.bounds;
+        }        
     }
     
     // Forward events for the top view controller
@@ -252,6 +261,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         [topViewController viewDidDisappear:NO];
     }
     
+    // Associate the view controller with its container
+    NSAssert(! objc_getAssociatedObject(viewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
+    objc_setAssociatedObject(viewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
+    
     // Push the new view controller
     [self.contentViewControllers addObject:viewController];
     [self.addedAsSubviewFlags addObject:[NSNumber numberWithBool:NO]];
@@ -263,7 +276,9 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         
         // If container already visible, resize and forward events
         if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-            view.frame = self.view.bounds;
+            if (self.adjustingContent) {
+                view.frame = self.view.bounds;
+            }
             
             // TODO: Animated case!
             if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
@@ -337,6 +352,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     //       controller live a little bit longer
     [[previousTopViewController retain] autorelease];
     
+    // Remove the view controller association with its container
+    NSAssert(objc_getAssociatedObject(previousTopViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
+    objc_setAssociatedObject(previousTopViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    
     [self.contentViewControllers removeLastObject];
     [self.addedAsSubviewFlags removeLastObject];
     
@@ -372,8 +391,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (HLSStackController *)stackController
 {
-    // TODO: Implement using runtime associated objects
-    return nil;
+    return objc_getAssociatedObject(self, HLSStackControllerKey);
 }
 
 @end
