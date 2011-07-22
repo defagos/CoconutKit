@@ -22,6 +22,7 @@
 		6F2E93E113AF303100C8F5D1 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E93E013AF303100C8F5D1 /* CursorCustomPointerView.xib */; };
 		6F82492713D96B3700688D0C /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82492513D96B3700688D0C /* StackDemoViewController.m */; };
 		6F82492813D96B3700688D0C /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82492613D96B3700688D0C /* StackDemoViewController.xib */; };
+		6F82492C13D96E5300688D0C /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82492A13D96E5300688D0C /* HLSStackController.m */; };
 		6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21513B337C80039622A /* StripsDemoViewController.m */; };
 		6FA6C21813B337D40039622A /* StripsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6C21713B337D40039622A /* StripsDemoViewController.xib */; };
 		6FAF20F513A24CCB009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */; };
@@ -184,6 +185,9 @@
 		6F82492413D96B3700688D0C /* StackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackDemoViewController.h; sourceTree = "<group>"; };
 		6F82492513D96B3700688D0C /* StackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackDemoViewController.m; sourceTree = "<group>"; };
 		6F82492613D96B3700688D0C /* StackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackDemoViewController.xib; sourceTree = "<group>"; };
+		6F82492913D96E5300688D0C /* HLSStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackController.h; sourceTree = "<group>"; };
+		6F82492A13D96E5300688D0C /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
+		6F82492B13D96E5300688D0C /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
 		6FA6C21413B337C80039622A /* StripsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripsDemoViewController.h; sourceTree = "<group>"; };
 		6FA6C21513B337C80039622A /* StripsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripsDemoViewController.m; sourceTree = "<group>"; };
 		6FA6C21713B337D40039622A /* StripsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsDemoViewController.xib; sourceTree = "<group>"; };
@@ -757,8 +761,11 @@
 				6FC9008613D4649F00834900 /* HLSPlaceholderViewController.m */,
 				6FC9008713D4649F00834900 /* HLSSingleValuePickerViewController.h */,
 				6FC9008813D4649F00834900 /* HLSSingleValuePickerViewController.m */,
+				6F82492913D96E5300688D0C /* HLSStackController.h */,
+				6F82492A13D96E5300688D0C /* HLSStackController.m */,
 				6FC9008913D4649F00834900 /* HLSTableSearchDisplayViewController.h */,
 				6FC9008A13D4649F00834900 /* HLSTableSearchDisplayViewController.m */,
+				6F82492B13D96E5300688D0C /* HLSTransitionStyle.h */,
 				6FC9008B13D4649F00834900 /* HLSViewController.h */,
 				6FC9008C13D4649F00834900 /* HLSViewController.m */,
 				6FC9008D13D4649F00834900 /* HLSWebViewController.h */,
@@ -1525,6 +1532,7 @@
 				6FC900F013D4649F00834900 /* HLSServiceRequester.m in Sources */,
 				6FC900F113D4649F00834900 /* HLSServiceSettings.m in Sources */,
 				6F82492713D96B3700688D0C /* StackDemoViewController.m in Sources */,
+				6F82492C13D96E5300688D0C /* HLSStackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

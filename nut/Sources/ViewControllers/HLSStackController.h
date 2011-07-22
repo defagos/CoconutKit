@@ -25,6 +25,8 @@
 @interface HLSStackController : HLSViewController {
 @private
     NSArray *m_viewControllers;                     // contains UIViewController objects. The last one is the top one
+    BOOL m_adjustingContent;
+    BOOL m_viewsAdded;
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -92,10 +94,17 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (UIViewController *)topViewController;
 
 /**
- * The view controllers in the stack. This property can be used to change all loaded view controllers at once (no animation
- * will occur)
+ * The view controllers in the stack. The first one is the root view controller, the last one the top one
  */
-@property (nonatomic, retain) NSArray *viewControllers;
+@property (nonatomic, readonly, retain) NSArray *viewControllers;
+
+/**
+ * If set to YES, the content view controller's view frames are automatically adjusted to match the view bounds. The resizing
+ * behavior still depends on the autoresizing behavior of the content views, though (for example, if a content view is able 
+ * to stretch  in both directions, it will fill the entire view). If set to NO, the content view is used as is.
+ * Default value is NO.
+ */
+@property (nonatomic, assign, getter=isAdjustingContent) BOOL adjustingContent;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 

@@ -9,6 +9,13 @@
 #import "HLSStackController.h"
 
 #import "HLSAssert.h"
+#import "HLSLogger.h"
+
+@interface HLSStackController ()
+
+@property (nonatomic, retain) NSArray *viewControllers;
+
+@end
 
 @implementation HLSStackController
 
@@ -40,6 +47,8 @@
 
 @synthesize viewControllers = m_viewControllers;
 
+@synthesize adjustingContent = m_adjustingContent;
+
 @synthesize delegate = m_delegate;
 
 - (UIViewController *)topViewController
@@ -53,42 +62,79 @@
 {
     [super viewDidLoad];
     
-    // Code
+    // All animation must take place inside the view controller's view
+    self.view.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    // Code
+    // View controllers not added in viewDidLoad. Only after viewWillAppear are view dimensions known
+    if (! m_viewsAdded) {
+        for (UIViewController *viewController in self.viewControllers) {
+            [self.view addSubview:viewController.view];
+        }
+        
+        m_viewsAdded = YES;
+    }
+    
+    // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
+    // to the top view controller, so that when this event is received dimensions are known
+    if (self.adjustingContent) {
+        for (UIViewController *viewController in self.viewControllers) {
+            viewController.view.frame = self.view.bounds;
+        }
+    }
+    
+    // Forward events for the top view controller
+    UIViewController *topViewController = [self topViewController];
+    if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+        [self.delegate stackController:self willShowViewController:topViewController animated:animated];
+    }
+    
+    [topViewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 	
-    // Code
+    UIViewController *topViewController = [self topViewController];
+    if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+        [self.delegate stackController:self didShowViewController:topViewController animated:animated];
+    }
+    
+    [topViewController viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    // Code
+    UIViewController *topViewController = [self topViewController];
+    [topViewController viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    // Code
+    UIViewController *topViewController = [self topViewController];
+    [topViewController viewDidDisappear:animated];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     
-    // Code
+    if (m_viewsAdded) {
+        for (UIViewController *viewController in self.viewControllers) {
+            viewController.view = nil;
+            [viewController viewDidUnload];
+        }
+        m_viewsAdded = NO;
+    }
 }
 
 #pragma mark Orientation management
@@ -116,7 +162,6 @@
 
 - (void)pushViewController:(UIViewController *)viewController
 {
-
 }
 
 - (void)pushViewController:(UIViewController *)viewController 
@@ -161,6 +206,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
+    // Cannot pop if only one view controller remains
+    if ([self.viewControllers count] == 1) {
+        HLSLoggerWarn(@"The root view controller cannot be popped");
+        return nil;
+    }
+
     // TODO:
     return nil;
 }

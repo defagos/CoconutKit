@@ -60,8 +60,6 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
     }
 }
 
-@synthesize forwardInsetViewControllerProperties = m_forwardInsetViewControllerProperties;
-
 + (void)load
 {
     UIViewController__navigationController = (id(*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForward, NULL);
@@ -304,6 +302,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 @synthesize adjustingInset = m_adjustingInset;
 
+@synthesize forwardInsetViewControllerProperties = m_forwardInsetViewControllerProperties;
+
 @synthesize delegate = m_delegate;
 
 #pragma mark View lifecycle
@@ -418,7 +418,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     return [self.insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-    || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
+        || [self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
