@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller which only supports portrait orientation
+ */
 @interface PortraitOnlyViewController : HLSViewController {
 @private
     

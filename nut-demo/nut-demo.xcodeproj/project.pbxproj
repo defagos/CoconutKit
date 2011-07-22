@@ -65,6 +65,8 @@
 		6F7A3E28130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7A3E26130E707500AB1926 /* OrientationClonerLargeViewControllerPortrait.xib */; };
 		6F82492013D96B2400688D0C /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82491E13D96B2400688D0C /* StackDemoViewController.m */; };
 		6F82492113D96B2400688D0C /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82491F13D96B2400688D0C /* StackDemoViewController.xib */; };
+		6F82496D13D9BF1600688D0C /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82496C13D9BF1600688D0C /* ContainerCustomizationViewController.m */; };
+		6F82496F13D9BF2A00688D0C /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82496E13D9BF2A00688D0C /* ContainerCustomizationViewController.xib */; };
 		6F84AF2D131BAC71002C3D05 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */; };
 		6F84AF2F131BAC9C002C3D05 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */; };
 		6F84AF5A131BB09A002C3D05 /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84AF59131BB09A002C3D05 /* WizardPageViewController.m */; };
@@ -186,6 +188,9 @@
 		6F82491D13D96B2400688D0C /* StackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackDemoViewController.h; sourceTree = "<group>"; };
 		6F82491E13D96B2400688D0C /* StackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackDemoViewController.m; sourceTree = "<group>"; };
 		6F82491F13D96B2400688D0C /* StackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackDemoViewController.xib; sourceTree = "<group>"; };
+		6F82496B13D9BF1600688D0C /* ContainerCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCustomizationViewController.h; sourceTree = "<group>"; };
+		6F82496C13D9BF1600688D0C /* ContainerCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCustomizationViewController.m; sourceTree = "<group>"; };
+		6F82496E13D9BF2A00688D0C /* ContainerCustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCustomizationViewController.xib; sourceTree = "<group>"; };
 		6F84AF2B131BAC71002C3D05 /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6F84AF2C131BAC71002C3D05 /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
 		6F84AF2E131BAC9C002C3D05 /* WizardDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
@@ -466,6 +471,16 @@
 			path = StackDemoViewController;
 			sourceTree = "<group>";
 		};
+		6F82496A13D9BEFC00688D0C /* ContainerCustomizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F82496B13D9BF1600688D0C /* ContainerCustomizationViewController.h */,
+				6F82496C13D9BF1600688D0C /* ContainerCustomizationViewController.m */,
+				6F82496E13D9BF2A00688D0C /* ContainerCustomizationViewController.xib */,
+			);
+			path = ContainerCustomizationViewController;
+			sourceTree = "<group>";
+		};
 		6F84AF27131BAC39002C3D05 /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +641,7 @@
 		6FBDA79E1303EDAB004B9617 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F82496A13D9BEFC00688D0C /* ContainerCustomizationViewController */,
 				6F7A26BE130AA1C200AB1926 /* FixedSizeViewController */,
 				6FBDA7A11303EDAB004B9617 /* HeavyViewController */,
 				6FBDA7A21303EDAB004B9617 /* LandscapeOnlyViewController */,
@@ -985,6 +1001,7 @@
 				6F1616E613BC7AB000BB4B0F /* nut_strip_default_background.png in Resources */,
 				6F0682DB13D0235700167AEF /* strip_bkgr_green.png in Resources */,
 				6F82492113D96B2400688D0C /* StackDemoViewController.xib in Resources */,
+				6F82496F13D9BF2A00688D0C /* ContainerCustomizationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1049,7 @@
 				6FA6C22113B3969D0039622A /* StripsDemoViewController.m in Sources */,
 				6F1616DA13BC7AB000BB4B0F /* nut_bootstrap.m in Sources */,
 				6F82492013D96B2400688D0C /* StackDemoViewController.m in Sources */,
+				6F82496D13D9BF1600688D0C /* ContainerCustomizationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller which has different xibs for portrait and landscape modes
+ */
 @interface OrientationClonerViewController : HLSViewController <HLSOrientationCloner, HLSReloadable, UITextFieldDelegate> {
 @private
     HLSTextField *m_textField;

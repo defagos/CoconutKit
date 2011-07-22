@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller logging view lifecycle events
+ */
 @interface LifeCycleTestViewController : HLSViewController {
 @private
     UILabel *m_instructionLabel;

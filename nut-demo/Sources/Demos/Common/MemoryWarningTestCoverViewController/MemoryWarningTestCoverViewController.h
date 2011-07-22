@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller, intended to be prsented modally in order to test behavior after memory warnings have been received
+ */
 @interface MemoryWarningTestCoverViewController : HLSViewController {
 @private
     UIBarButtonItem *m_closeBarButtonItem;

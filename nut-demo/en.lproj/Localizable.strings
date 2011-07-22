@@ -13,11 +13,13 @@
 "All fields have been validated"="All fields have been validated";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animation"="Animation";
+"Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "City"="City";
 "Clear"="Clear";
 "Close"="Close";
 "Congratulations"="Congratulations";
+"Container customization"="Container customization";
 "Country"="Country";
 "Cursor"="Cursor";
 "Custom cell created programmatically"="Custom cell created programmatically";
@@ -35,6 +37,7 @@
 "Error"="Error";
 "First Name"="First Name";
 "Fixed size"="Fixed size";
+"Forward properties"="Forward properties";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
 "Heavy view (cached)"="Heavy view (cached)";

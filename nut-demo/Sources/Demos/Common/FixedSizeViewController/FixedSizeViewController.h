@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller with fixed size
+ */
 @interface FixedSizeViewController : HLSViewController {
 @private
     

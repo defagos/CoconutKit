@@ -8,6 +8,7 @@
 
 #import "PlaceholderDemoViewController.h"
 
+#import "ContainerCustomizationViewController.h"
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
@@ -31,7 +32,9 @@
 - (void)landscapeOnlyButtonClicked:(id)sender;
 - (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
+- (void)containerCustomizationButtonClicked:(id)sender;
 - (void)adjustingInsetSwitchValueChanged:(id)sender;
+- (void)forwardingPropertiesSwitchValueChanged:(id)sender;
 
 @end
 
@@ -67,11 +70,14 @@
     self.portraitOnlyButton = nil;
     self.landscapeOnlyButton = nil;
     self.orientationClonerButton = nil;
+    self.containerCustomizationButton = nil;
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
     self.adjustingInsetLabel = nil;
     self.adjustingInsetSwitch = nil;
+    self.forwardingPropertiesLabel = nil;
+    self.forwardingPropertiesSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -90,6 +96,8 @@
 
 @synthesize orientationClonerButton = m_orientationClonerButton;
 
+@synthesize containerCustomizationButton = m_containerCustomizationButton;
+
 @synthesize hideWithModalButton = m_hideWithModalButton;
 
 @synthesize transitionLabel = m_transitionLabel;
@@ -99,6 +107,10 @@
 @synthesize adjustingInsetLabel = m_adjustingInsetLabel;
 
 @synthesize adjustingInsetSwitch = m_adjustingInsetSwitch;
+
+@synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
+
+@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 @synthesize heavyViewController = m_heavyViewController;
 
@@ -115,16 +127,16 @@
                              forControlEvents:UIControlEventTouchUpInside];
     
     [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
-                                   forState:UIControlStateNormal];
+                                  forState:UIControlStateNormal];
     [self.stretchableSampleButton addTarget:self
-                                      action:@selector(stretchableSampleButtonClicked:)
-                            forControlEvents:UIControlEventTouchUpInside];
+                                     action:@selector(stretchableSampleButtonClicked:)
+                           forControlEvents:UIControlEventTouchUpInside];
     
     [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") 
-                            forState:UIControlStateNormal];
+                                forState:UIControlStateNormal];
     [self.fixedSizeSampleButton addTarget:self
-                               action:@selector(fixedSizeSampleButtonClicked:)
-                     forControlEvents:UIControlEventTouchUpInside];
+                                   action:@selector(fixedSizeSampleButtonClicked:)
+                         forControlEvents:UIControlEventTouchUpInside];
     
     [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view (cached)", @"Heavy view (cached)") 
                             forState:UIControlStateNormal];
@@ -150,6 +162,12 @@
                                      action:@selector(orientationClonerButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
+    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization")
+                                       forState:UIControlStateNormal];
+    [self.containerCustomizationButton addTarget:self
+                                          action:@selector(containerCustomizationButtonClicked:)
+                                forControlEvents:UIControlEventTouchUpInside];
+    
     [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal")
                               forState:UIControlStateNormal];
     [self.hideWithModalButton addTarget:self
@@ -161,7 +179,14 @@
     self.adjustingInsetSwitch.on = self.adjustingInset;
     [self.adjustingInsetSwitch addTarget:self
                                   action:@selector(adjustingInsetSwitchValueChanged:)
-                        forControlEvents:UIControlEventValueChanged];    
+                        forControlEvents:UIControlEventValueChanged];
+    
+    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
+    
+    self.forwardingPropertiesSwitch.on = self.forwardInsetViewControllerProperties;
+    [self.forwardingPropertiesSwitch addTarget:self
+                                        action:@selector(forwardingPropertiesSwitchValueChanged:)
+                              forControlEvents:UIControlEventValueChanged];
     
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
     
@@ -258,6 +283,12 @@
     [self displayInsetViewController:orientationClonerViewController];
 }
 
+- (void)containerCustomizationButtonClicked:(id)sender
+{
+    ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
+    [self displayInsetViewController:containerCustomizationViewController];
+}
+
 - (void)hideWithModalButtonClicked:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
@@ -267,6 +298,11 @@
 - (void)adjustingInsetSwitchValueChanged:(id)sender
 {
     self.adjustingInset = self.adjustingInsetSwitch.on;
+}
+
+- (void)forwardingPropertiesSwitchValueChanged:(id)sender
+{
+    self.forwardInsetViewControllerProperties = self.forwardingPropertiesSwitch.on;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

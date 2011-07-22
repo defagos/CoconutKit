@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+/**
+ * A view controller stretchable in all directions
+ */
 @interface StretchableViewController : HLSViewController {
 @private
     

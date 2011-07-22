@@ -23,6 +23,8 @@
 		6F82492713D96B3700688D0C /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82492513D96B3700688D0C /* StackDemoViewController.m */; };
 		6F82492813D96B3700688D0C /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82492613D96B3700688D0C /* StackDemoViewController.xib */; };
 		6F82492C13D96E5300688D0C /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82492A13D96E5300688D0C /* HLSStackController.m */; };
+		6F82497413D9C02200688D0C /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82497213D9C02200688D0C /* ContainerCustomizationViewController.m */; };
+		6F82497513D9C02200688D0C /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82497313D9C02200688D0C /* ContainerCustomizationViewController.xib */; };
 		6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C21513B337C80039622A /* StripsDemoViewController.m */; };
 		6FA6C21813B337D40039622A /* StripsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA6C21713B337D40039622A /* StripsDemoViewController.xib */; };
 		6FAF20F513A24CCB009A5645 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF20F313A24CCB009A5645 /* CursorDemoViewController.m */; };
@@ -188,6 +190,9 @@
 		6F82492913D96E5300688D0C /* HLSStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackController.h; sourceTree = "<group>"; };
 		6F82492A13D96E5300688D0C /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
 		6F82492B13D96E5300688D0C /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
+		6F82497113D9C02200688D0C /* ContainerCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCustomizationViewController.h; sourceTree = "<group>"; };
+		6F82497213D9C02200688D0C /* ContainerCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCustomizationViewController.m; sourceTree = "<group>"; };
+		6F82497313D9C02200688D0C /* ContainerCustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCustomizationViewController.xib; sourceTree = "<group>"; };
 		6FA6C21413B337C80039622A /* StripsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripsDemoViewController.h; sourceTree = "<group>"; };
 		6FA6C21513B337C80039622A /* StripsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripsDemoViewController.m; sourceTree = "<group>"; };
 		6FA6C21713B337D40039622A /* StripsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsDemoViewController.xib; sourceTree = "<group>"; };
@@ -512,6 +517,16 @@
 				6F82492613D96B3700688D0C /* StackDemoViewController.xib */,
 			);
 			path = StackDemoViewController;
+			sourceTree = "<group>";
+		};
+		6F82497013D9C02200688D0C /* ContainerCustomizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F82497113D9C02200688D0C /* ContainerCustomizationViewController.h */,
+				6F82497213D9C02200688D0C /* ContainerCustomizationViewController.m */,
+				6F82497313D9C02200688D0C /* ContainerCustomizationViewController.xib */,
+			);
+			path = ContainerCustomizationViewController;
 			sourceTree = "<group>";
 		};
 		6FA6C21213B337AD0039622A /* Strips */ = {
@@ -959,6 +974,7 @@
 		6FEF849A131F76BD0015B57C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F82497013D9C02200688D0C /* ContainerCustomizationViewController */,
 				6FEF849B131F76BD0015B57C /* FixedSizeViewController */,
 				6FEF84A0131F76BD0015B57C /* HeavyViewController */,
 				6FEF84A4131F76BD0015B57C /* LandscapeOnlyViewController */,
@@ -1418,6 +1434,7 @@
 				6FC900E413D4649F00834900 /* nut_HLSSingleValuePickerViewController.xib in Resources */,
 				6FC900E513D4649F00834900 /* nut_HLSWebViewController.xib in Resources */,
 				6F82492813D96B3700688D0C /* StackDemoViewController.xib in Resources */,
+				6F82497513D9C02200688D0C /* ContainerCustomizationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,6 +1550,7 @@
 				6FC900F113D4649F00834900 /* HLSServiceSettings.m in Sources */,
 				6F82492713D96B3700688D0C /* StackDemoViewController.m in Sources */,
 				6F82492C13D96E5300688D0C /* HLSStackController.m in Sources */,
+				6F82497413D9C02200688D0C /* ContainerCustomizationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
