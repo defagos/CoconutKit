@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
+#import "HLSReloadable.h"
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
@@ -27,7 +29,7 @@
  *
  * Designated initializer: initWithRootCiewController:
  */
-@interface HLSStackController : HLSViewController {
+@interface HLSStackController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
 @private
     NSMutableArray *m_contentViewControllers;              // contains UIViewController objects. The last one is the top one
     NSMutableArray *m_addedAsSubviewFlags;                 // contains NSNumber (BOOL) objects flagging whether a view controller's 
@@ -64,7 +66,7 @@
 
 /**
  * Push a view controller onto the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = pushed view controller's view, second view = previous top view controller's view).
+ * objects (first view = previous top view controller's view, second view = pushed view controller's view).
  */
 - (void)pushViewController:(UIViewController *)viewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;

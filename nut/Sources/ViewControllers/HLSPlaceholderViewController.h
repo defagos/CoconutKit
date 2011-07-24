@@ -80,7 +80,7 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
+@interface HLSPlaceholderViewController : HLSViewController <HLSAnimationDelegate, HLSReloadable> {
 @private
     UIViewController *m_insetViewController;                // The view controller displayed as inset
     BOOL m_insetViewAddedAsSubview;                         // Avoid testing the view controller view property (this triggers view loading,

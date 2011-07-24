@@ -19,9 +19,6 @@
 
 @property (nonatomic, retain) UIViewController *oldInsetViewController;
 
-- (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
-                                        oldInsetViewController:(UIViewController *)oldInsetViewController
-                                        newInsetViewController:(UIViewController *)newInsetViewController;
 @end
 
 @implementation HLSPlaceholderViewController
@@ -98,9 +95,10 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle
-                                                                         oldInsetViewController:self.insetViewController 
-                                                                         newInsetViewController:insetViewController];
+    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
+                                                                                                            disappearingView:self.insetViewController.view
+                                                                                                               appearingView:insetViewController.view 
+                                                                                                               inCommonFrame:self.placeholderView.frame];
     [self setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];
     
 }
@@ -116,10 +114,10 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
     }
     
     // The returned animation steps contain the default durations set for this transition
-    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle
-                                                                         oldInsetViewController:self.insetViewController 
-                                                                         newInsetViewController:insetViewController];
-    
+    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
+                                                                                                            disappearingView:self.insetViewController.view
+                                                                                                               appearingView:insetViewController.view 
+                                                                                                               inCommonFrame:self.placeholderView.frame];    
     // Calculate the total animation duration
     NSTimeInterval totalDuration = 0.;
     for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
@@ -294,11 +292,18 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             [animationSteps addObject:animationStep];
         }
         
-        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
         animation.lockingUI = YES;
         animation.bringToFront = YES;
         animation.delegate = self;
-        [animation playAnimated:YES];
+        
+        // Animation occurs if the container is visible
+        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+            [animation playAnimated:YES];
+        }
+        else {
+            [animation playAnimated:NO];
+        }
     }
 }
 
@@ -440,7 +445,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // we cannot swap it in the middle of the animation. Instead, we use a cross-dissolve transition so that the change
     // happens smoothly during the rotation
     if ([self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
-        UIViewController<HLSOrientationCloner> *clonableInsetViewController = self.insetViewController;
+        UIViewController<HLSOrientationCloner> *clonableInsetViewController = (UIViewController<HLSOrientationCloner> *)self.insetViewController;
         UIViewController *clonedInsetViewController = [clonableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
         [self setInsetViewController:clonedInsetViewController 
                  withTransitionStyle:HLSTransitionStyleCrossDissolve
@@ -481,279 +486,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     [self.insetViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-#pragma mark Built-in transitions (return an array of HLSTwoViewAnimationStepDefinition objects)
-
-- (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
-                                        oldInsetViewController:(UIViewController *)oldInsetViewController
-                                        newInsetViewController:(UIViewController *)newInsetViewController
-{
-    switch (transitionStyle) {
-        case HLSTransitionStyleNone: {
-            return nil;
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        } 
-            
-        case HLSTransitionStyleCoverFromRight: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }  
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }  
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }   
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        } 
-            
-        case HLSTransitionStyleCrossDissolve: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-newInsetViewController.view.alpha];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.firstViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-oldInsetViewController.view.alpha];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:newInsetViewController.view.alpha];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.firstViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                        deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        } 
-            
-        case HLSTransitionStylePushFromTop: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:-self.placeholderView.frame.size.height];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.firstViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                        deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                         deltaY:self.placeholderView.frame.size.height];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }    
-            
-        case HLSTransitionStylePushFromLeft: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.firstViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                        deltaY:0.f];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        } 
-            
-        case HLSTransitionStylePushFromRight: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            animationStepDefinition2.firstViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                        deltaY:0.f];
-            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-self.placeholderView.frame.size.width
-                                                                                                                         deltaY:0.f];
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        } 
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            HLSViewAnimationStep *secondViewAnimationStep1 = [HLSViewAnimationStep viewAnimationStep];
-            secondViewAnimationStep1.transform = CGAffineTransformMakeScale(0.01f, 0.01f);      // cannot use 0.f, otherwise infinite matrix elements
-            animationStepDefinition1.secondViewAnimationStep = secondViewAnimationStep1;
-            animationStepDefinition1.duration = 0.;
-            
-            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-            HLSViewAnimationStep *secondViewAnimationStep2 = [HLSViewAnimationStep viewAnimationStep];
-            secondViewAnimationStep2.transform = CGAffineTransformInvert(secondViewAnimationStep1.transform);
-            animationStepDefinition2.secondViewAnimationStep = secondViewAnimationStep2;
-            animationStepDefinition2.duration = 0.4;
-            
-            return [NSArray arrayWithObjects:animationStepDefinition1,
-                    animationStepDefinition2,
-                    nil];
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown transition style");
-            return nil;
-            break;
-        }
-    }
-}
-
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
 {
     if ([self.insetViewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        UIViewController<HLSReloadable> *reloadableInsetViewController = self.insetViewController;
+        UIViewController<HLSReloadable> *reloadableInsetViewController = (UIViewController<HLSReloadable> *)self.insetViewController;
         [reloadableInsetViewController reloadData];
     }
 }

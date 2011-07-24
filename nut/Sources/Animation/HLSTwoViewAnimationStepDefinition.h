@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimationStep.h"
+#import "HLSTransitionStyle.h"
 #import "HLSViewAnimationStep.h"
 
 /**
@@ -39,6 +40,17 @@
  */
 + (HLSTwoViewAnimationStepDefinition *)twoViewAnimationStepDefinition;
 
+/**
+ * Return an array of HLSTwoViewAnimationStepDefinition objects corresponding to the built-in transition style given as 
+ * parameter. Requires the two views between which the animation creates a transition, as well as the common rectangle
+ * where animation takes place. In the HLSTwoViewAnimationStepDefinition objects, firstViewAnimationStep refers to
+ * the view which disappears, and secondViewAnimationStep to the one which appears.
+ * Return nil for HLSTransitionStyleNone
+ */
++ (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                              disappearingView:(UIView *)disappearingView
+                                                 appearingView:(UIView *)appearingView
+                                                 inCommonFrame:(CGRect)commonFrame;
 /**
  * View animation steps for the involved views
  */

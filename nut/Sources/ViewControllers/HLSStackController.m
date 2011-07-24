@@ -14,10 +14,14 @@
 #import "HLSOrientationCloner.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
-//       user interaction with the views below in the stack. Could maybe just be a screenshot of
-//       the content below, so that we can avoid always having the view hierarchy loaded (would
-//       not be good when memory gets low)
-//       See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
+//       user interaction with the views below in the stack.
+
+// TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
+//       will occur, but the animation will be saved for use during pop
+
+// TODO: Factor out the code creating twoStepAnimations for HLSTransitionStyles in HLSTransitionStyle
+//       or HLSTwoStepAnimationDefinition. Use it from both HLSPlaceholderViewController and
+//       HLSStackController
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -25,6 +29,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @property (nonatomic, retain) NSMutableArray *contentViewControllers;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlags;
+
+- (UIViewController *)secondTopViewController;
 
 @end
 
@@ -71,6 +77,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (UIViewController *)topViewController
 {
     return [self.contentViewControllers lastObject];
+}
+
+- (UIViewController *)secondTopViewController
+{
+    if ([self.contentViewControllers count] < 2) {
+        return nil;
+    }
+    return [self.contentViewControllers objectAtIndex:[self.contentViewControllers count] - 2];
 }
 
 - (NSArray *)viewControllers
@@ -241,8 +255,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (void)pushViewController:(UIViewController *)viewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
-    // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
-    //       will occur, but the animation will be registered for the pop
+    HLSAssertObjectsInEnumerationAreKindOfClass(twoViewAnimationStepDefinitions, HLSTwoViewAnimationStepDefinition);
     NSAssert(viewController != nil, @"Cannot push nil");
     
     // Check that the view controller to be pushed is compatible with the current orientation
@@ -255,10 +268,16 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     // Notify disappearance of previous top view controller if visible
     if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-        // TODO: Animated case!
         UIViewController *topViewController = [self topViewController];
-        [topViewController viewWillDisappear:NO];
-        [topViewController viewDidDisappear:NO];
+        // Animated
+        if ([twoViewAnimationStepDefinitions count] != 0) {
+            [topViewController viewWillDisappear:YES];
+        }
+        // Not animated
+        else {
+            [topViewController viewWillDisappear:NO];            
+            [topViewController viewDidDisappear:NO];
+        }        
     }
     
     // Associate the view controller with its container
@@ -280,32 +299,75 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
                 view.frame = self.view.bounds;
             }
             
-            // TODO: Animated case!
-            if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
-                [self.delegate stackController:self
-                        willShowViewController:viewController 
-                                      animated:NO];
+            // Animated
+            if ([twoViewAnimationStepDefinitions count] != 0) {
+                if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+                    [self.delegate stackController:self
+                            willShowViewController:viewController 
+                                          animated:YES];
+                }
+
+                [viewController viewWillAppear:YES];
+                [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] - 1
+                                                    withObject:[NSNumber numberWithBool:YES]];
+                
+                [self.view addSubview:viewController.view];             
             }
-            
-            [viewController viewWillAppear:NO];
-            [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] -1
-                                                withObject:[NSNumber numberWithBool:YES]];
-            
-            [self.view addSubview:viewController.view];
-            
-            if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
-                [self.delegate stackController:self
-                         didShowViewController:viewController 
-                                      animated:NO];
-            }
-            
-            [viewController viewDidAppear:NO];
+            // Not animated
+            else {
+                if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+                    [self.delegate stackController:self
+                            willShowViewController:viewController 
+                                          animated:NO];
+                }
+                
+                [viewController viewWillAppear:NO];
+                [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] - 1
+                                                    withObject:[NSNumber numberWithBool:YES]];
+                
+                [self.view addSubview:viewController.view];
+                
+                if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+                    [self.delegate stackController:self
+                             didShowViewController:viewController 
+                                          animated:NO];
+                }
+                
+                [viewController viewDidAppear:NO];
+            }            
         }
         // Not visible or disappearing
         else {
             [self.view addSubview:view];
-            [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] -1
+            [self.addedAsSubviewFlags replaceObjectAtIndex:[self.addedAsSubviewFlags count] - 1
                                                 withObject:[NSNumber numberWithBool:YES]];            
+        }
+    }
+    
+    // Create the animation if any
+    if ([twoViewAnimationStepDefinitions count] != 0) {
+        UIView *topView = [self topViewController].view;
+        UIView *previousTopView = [self secondTopViewController].view;
+        
+        NSMutableArray *animationSteps = [NSMutableArray array];
+        for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in twoViewAnimationStepDefinitions) {
+            HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:previousTopView 
+                                                                                       secondView:topView];
+            [animationSteps addObject:animationStep];
+        }
+        
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+        animation.tag = @"push_animation";
+        animation.lockingUI = YES;
+        animation.bringToFront = YES;
+        animation.delegate = self;
+        
+        // Animation occurs if the container is visible
+        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+            [animation playAnimated:YES];
+        }
+        else {
+            [animation playAnimated:NO];
         }
     }
 }
@@ -333,6 +395,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 {
+    // TODO: Remove associated object for popped view controller (both in animated / non-animated cases)
+    
     // Cannot pop if only one view controller remains
     if ([self.contentViewControllers count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
@@ -383,6 +447,35 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     return previousTopViewController;
+}
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    // TODO: Restore original view properties
+    // TODO: Remove associated object after pop animation
+    
+    if ([animation.tag isEqual:@"push_animation"]) {
+        UIViewController *previousTopViewController = [self secondTopViewController];
+        [previousTopViewController viewDidDisappear:YES];
+        
+        UIViewController *topViewController = [self topViewController];
+        if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+            [self.delegate stackController:self
+                     didShowViewController:topViewController 
+                                  animated:YES];
+        }
+        
+        [topViewController viewDidAppear:NO];
+    }
+}
+
+#pragma mark HLSReloadable protocol implementation
+
+- (void)reloadData
+{
+
 }
 
 @end
