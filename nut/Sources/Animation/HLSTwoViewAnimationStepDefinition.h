@@ -44,13 +44,24 @@
  * Return an array of HLSTwoViewAnimationStepDefinition objects corresponding to the built-in transition style given as 
  * parameter. Requires the two views between which the animation creates a transition, as well as the common rectangle
  * where animation takes place. In the HLSTwoViewAnimationStepDefinition objects, firstViewAnimationStep refers to
- * the view which disappears, and secondViewAnimationStep to the one which appears.
+ * the view which disappears, and secondViewAnimationStep to the one which appears. The animation duration is defined
+ * by the transition style.
  * Return nil for HLSTransitionStyleNone
  */
 + (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
                                               disappearingView:(UIView *)disappearingView
                                                  appearingView:(UIView *)appearingView
                                                  inCommonFrame:(CGRect)commonFrame;
+
+/**
+ * Same as method above, except that the duration can be freely set. The total duration will be distributed evenly on 
+ * the animation steps composing the animation, preserving its original aspect
+ */
++ (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                              disappearingView:(UIView *)disappearingView
+                                                 appearingView:(UIView *)appearingView
+                                                 inCommonFrame:(CGRect)commonFrame
+                                                      duration:(NSTimeInterval)duration;
 /**
  * View animation steps for the involved views
  */

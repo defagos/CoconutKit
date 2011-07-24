@@ -8,6 +8,7 @@
 
 #import "HLSTwoViewAnimationStepDefinition.h"
 
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 
 static const double kTwoViewAnimationStepDefinitionDefaultDuration = 0.2;
@@ -286,6 +287,40 @@ static const UIViewAnimationCurve kTwoViewAnimationStepDefinition = UIViewAnimat
             break;
         }
     }
+}
+
++ (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                              disappearingView:(UIView *)disappearingView
+                                                 appearingView:(UIView *)appearingView
+                                                 inCommonFrame:(CGRect)commonFrame
+                                                      duration:(NSTimeInterval)duration;
+{
+    // Sanitize input
+    if (doublelt(duration, 0.)) {
+        HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
+        duration = 0.;
+    }
+    
+    // The returned animation steps contain the default durations set for this transition
+    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
+                                                                                                            disappearingView:disappearingView
+                                                                                                               appearingView:appearingView
+                                                                                                               inCommonFrame:commonFrame];
+    // Calculate the total animation duration
+    NSTimeInterval totalDuration = 0.;
+    for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
+        totalDuration += animationStepDefinition.duration;
+    }
+    
+    // Find out which factor must be applied to each animation step to preserve the animation appearance for the specified duration
+    double factor = duration / totalDuration;
+    
+    // Distribute the total duration evenly among animation steps
+    for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
+        animationStepDefinition.duration *= factor;
+    }
+    
+    return animationStepDefinitions;
 }
 
 #pragma mark Object creation and destruction

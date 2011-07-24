@@ -107,31 +107,11 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration
 {
-    // Sanitize input
-    if (doublelt(duration, 0.)) {
-        HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
-        duration = 0.;
-    }
-    
-    // The returned animation steps contain the default durations set for this transition
     NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
                                                                                                             disappearingView:self.insetViewController.view
                                                                                                                appearingView:insetViewController.view 
-                                                                                                               inCommonFrame:self.placeholderView.frame];    
-    // Calculate the total animation duration
-    NSTimeInterval totalDuration = 0.;
-    for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
-        totalDuration += animationStepDefinition.duration;
-    }
-    
-    // Find out which factor must be applied to each animation step to preserve the animation appearance for the specified duration
-    double factor = duration / totalDuration;
-    
-    // Distribute the total duration evenly among animation steps
-    for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
-        animationStepDefinition.duration *= factor;
-    }
-    
+                                                                                                               inCommonFrame:self.placeholderView.frame
+                                                                                                                    duration:duration];
     [self setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];
 }
 
