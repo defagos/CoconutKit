@@ -9,6 +9,7 @@
 #import "HLSAnimation.h"
 #import "HLSReloadable.h"
 #import "HLSTransitionStyle.h"
+#import "HLSTwoViewAnimationStepDefinition.h"
 #import "HLSViewController.h"
 
 // Forward declarations
@@ -34,6 +35,9 @@
     NSMutableArray *m_contentViewControllers;              // contains UIViewController objects. The last one is the top one
     NSMutableArray *m_addedAsSubviewFlags;                 // contains NSNumber (BOOL) objects flagging whether a view controller's 
                                                            // view has been added as subview. Same order as m_viewControllers
+    NSMutableArray *m_viewAnimationStepDefinitions;        // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
+                                                           // describing the animation steps used when pushing views ([NSNull null]
+                                                           // if none)
     BOOL m_adjustingContent;
     id<HLSStackControllerDelegate> m_delegate;
 }
@@ -76,25 +80,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * The root view controller cannot be popped
  */
 - (UIViewController *)popViewController;
-
-/**
- * Remove the top view controller from the stack using one of the built-in transition styles. The transition duration
- * is set by the animation itself
- */
-- (UIViewController *)popViewControllerWithTransitionStyle:(HLSTransitionStyle)transitionStyle;
-
-/**
- * Same as popViewControllerWithTransitionStyle:, but the transition duration can be overridden (the duration will be 
- * evenly distributed on the animation steps composing the animation)
- */
-- (UIViewController *)popViewControllerWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                                                  duration:(NSTimeInterval)duration;
-
-/**
- * Remove the top view controller from the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = popped view controller's view, second view = view of the view controller below it).
- */
-- (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 /**
  * Return the view controller currently on top

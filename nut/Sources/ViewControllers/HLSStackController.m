@@ -29,6 +29,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @property (nonatomic, retain) NSMutableArray *contentViewControllers;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlags;
+@property (nonatomic, retain) NSMutableArray *viewAnimationStepDefinitions;
 
 - (UIViewController *)secondTopViewController;
 
@@ -43,6 +44,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     if ((self = [super init])) {
         self.contentViewControllers = [NSMutableArray arrayWithObject:rootViewController];
         self.addedAsSubviewFlags = [NSMutableArray arrayWithObject:[NSNumber numberWithBool:NO]];
+        self.viewAnimationStepDefinitions = [NSMutableArray arrayWithObject:[NSNull null]];
         NSAssert(! objc_getAssociatedObject(rootViewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
         objc_setAssociatedObject(rootViewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
@@ -69,6 +71,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @synthesize contentViewControllers = m_contentViewControllers;
 
 @synthesize addedAsSubviewFlags = m_addedAsSubviewFlags;
+
+@synthesize viewAnimationStepDefinitions = m_viewAnimationStepDefinitions;
 
 @synthesize adjustingContent = m_adjustingContent;
 
@@ -242,14 +246,23 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-    
+    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
+                                                                                                            disappearingView:[self topViewController].view
+                                                                                                               appearingView:viewController.view
+                                                                                                               inCommonFrame:self.view.frame];
+    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];
 }
 
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
 {
-    
+    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
+                                                                                                            disappearingView:[self topViewController].view
+                                                                                                               appearingView:viewController.view
+                                                                                                               inCommonFrame:self.view.frame
+                                                                                                                    duration:duration];
+    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];    
 }
 
 - (void)pushViewController:(UIViewController *)viewController
@@ -287,6 +300,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Push the new view controller
     [self.contentViewControllers addObject:viewController];
     [self.addedAsSubviewFlags addObject:[NSNumber numberWithBool:NO]];
+    if (twoViewAnimationStepDefinitions) {
+        [self.viewAnimationStepDefinitions addObject:twoViewAnimationStepDefinitions];
+    }
+    else {
+        [self.viewAnimationStepDefinitions addObject:[NSNull null]];
+    }
     
     // Add the view if the container view has been loaded
     if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewDidLoad && [self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidUnload) {
@@ -376,27 +395,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (UIViewController *)popViewController
 {
-    // TODO: Must retrieve the animation used when pushed to play it backwards
-    return [self popViewControllerWithTwoViewAnimationStepDefinitions:nil];
-}
-
-- (UIViewController *)popViewControllerWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-{
-    // TODO:
-    return nil;
-}
-
-- (UIViewController *)popViewControllerWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                                                  duration:(NSTimeInterval)duration
-{
-    // TODO:
-    return nil;
-}
-
-- (UIViewController *)popViewControllerWithTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
-{
-    // TODO: Remove associated object for popped view controller (both in animated / non-animated cases)
-    
     // Cannot pop if only one view controller remains
     if ([self.contentViewControllers count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
@@ -422,6 +420,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     [self.contentViewControllers removeLastObject];
     [self.addedAsSubviewFlags removeLastObject];
+    [self.viewAnimationStepDefinitions removeLastObject];
     
     if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
         // TODO: Animated case!
