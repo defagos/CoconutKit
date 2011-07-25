@@ -8,6 +8,8 @@
 
 #import "HLSViewController.h"
 
+#import <MessageUI/MessageUI.h>
+
 @interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
 
 - (id)initWithRequest:(NSURLRequest *)request;
@@ -20,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, retain) UIImage *refreshImage;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)goForward:(id)sender;

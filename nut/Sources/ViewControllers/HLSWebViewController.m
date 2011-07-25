@@ -8,14 +8,16 @@
 
 #import "HLSWebViewController.h"
 
+#import "NSBundle+HLSExtensions.h"
+
 @implementation HLSWebViewController
 
 @synthesize request;
-@synthesize webView, toolbar, goBackButtonItem, goForwardButtonItem, refreshButtonItem, activityIndicator;
+@synthesize webView, toolbar, goBackButtonItem, goForwardButtonItem, refreshButtonItem, activityIndicator, refreshImage;
 
 - (id)initWithRequest:(NSURLRequest *)aRequest
 {
-	if ((self = [super initWithNibName:@"nut_HLSWebViewController" bundle:nil])) {
+	if ((self = [super initWithNibName:@"nut_HLSWebViewController" bundle:[NSBundle nutBundle]])) {
 		request = [aRequest retain];
 	}
 	return self;
@@ -32,12 +34,13 @@
 	self.goBackButtonItem.enabled = self.webView.canGoBack;
 	self.goForwardButtonItem.enabled = self.webView.canGoForward;
 	self.refreshButtonItem.enabled = !self.activityIndicator.isAnimating;
-	self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : [UIImage imageNamed:@"nut_ButtonBarRefresh.png"];
+	self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : self.refreshImage; //[UIImage imageNamed:@"nut_ButtonBarRefresh.png" inBundle:[NSBundle nutBundle]];
 }
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.refreshImage = self.refreshButtonItem.image;
 	[self.webView loadRequest:self.request];
 }
 
@@ -82,6 +85,7 @@
 	self.goForwardButtonItem = nil;
 	self.refreshButtonItem = nil;
 	self.activityIndicator = nil;
+	self.refreshImage = nil;
 }
 
 // MARK: -
@@ -131,8 +135,8 @@
 {
 	NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
 	NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", nil, uiKitBundle ?: [NSBundle mainBundle], @"");
-	NSString *openInSafari = NSLocalizedStringFromTable(@"Open in Safari", @"nut_Localizable", @"HLSWebViewController 'Open in Safari' action");
-	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTable(@"Mail Link", @"nut_Localizable", @"HLSWebViewController 'Mail Link' action") : nil;
+	NSString *openInSafari = NSLocalizedStringFromTableInBundle(@"Open in Safari", @"nut_Localizable", [NSBundle nutBundle], @"HLSWebViewController 'Open in Safari' action");
+	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTableInBundle(@"Mail Link", @"nut_Localizable", [NSBundle nutBundle], @"HLSWebViewController 'Mail Link' action") : nil;
 	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString] delegate:self cancelButtonTitle:cancel destructiveButtonTitle:nil otherButtonTitles:openInSafari, mailLink, nil] autorelease];
 	[actionSheet showFromToolbar:self.toolbar];
 }
