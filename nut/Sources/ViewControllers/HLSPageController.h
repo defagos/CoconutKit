@@ -22,7 +22,7 @@
  * protocol:
  *   - if the number of view controllers to display is small and they can be created fast, then simply set the
  *     view controllers to display directly using setViewControllers
- *   - if the number of view controlllers to display is large and / or they are slow to create, then create a
+ *   - if the number of view controllers to display is large and / or they are slow to create, then create a
  *     view controller loader by implementing the HLSContainerControllerLoader protocol and setting it as loader
  * The behavior is undefined if you attempt to do both.
  *

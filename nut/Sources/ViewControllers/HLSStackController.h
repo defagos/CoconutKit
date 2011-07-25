@@ -38,6 +38,7 @@
     NSMutableArray *m_viewAnimationStepDefinitions;        // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
                                                            // describing the animation steps used when pushing views ([NSNull null]
                                                            // if none)
+    NSMutableArray *m_originalViewFrames;                  // original frames of the view controller's views
     BOOL m_stretchingContent;
     id<HLSStackControllerDelegate> m_delegate;
 }

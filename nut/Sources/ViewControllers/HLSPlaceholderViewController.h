@@ -163,10 +163,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 @optional
 
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willShowInsetViewController:(UIViewController *)viewControlller
+      willShowInsetViewController:(UIViewController *)viewController
                          animated:(BOOL)animated;
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didShowInsetViewController:(UIViewController *)viewControlller
+       didShowInsetViewController:(UIViewController *)viewController
                          animated:(BOOL)animated;
 
 @end

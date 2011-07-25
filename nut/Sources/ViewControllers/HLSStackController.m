@@ -19,6 +19,12 @@
 // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
 //       will occur, but the animation will be saved for use during pop
 
+// TODO: Access views later where possible (not in initWithRootViewController, for example)
+
+// TODO: Factor out content stretching code. Implement in HLSPlaceholderViewController as well (see setStretchingContent)
+
+// TODO: Improve code. Cleanup, factor out code, etc.
+
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
@@ -26,6 +32,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @property (nonatomic, retain) NSMutableArray *contentViewControllers;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlags;
 @property (nonatomic, retain) NSMutableArray *viewAnimationStepDefinitions;
+@property (nonatomic, retain) NSMutableArray *originalViewFrames;
 
 - (UIViewController *)secondTopViewController;
 
@@ -41,6 +48,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
         self.contentViewControllers = [NSMutableArray arrayWithObject:rootViewController];
         self.addedAsSubviewFlags = [NSMutableArray arrayWithObject:[NSNumber numberWithBool:NO]];
         self.viewAnimationStepDefinitions = [NSMutableArray arrayWithObject:[NSArray array]];
+        self.originalViewFrames = [NSMutableArray arrayWithObject:[NSValue valueWithCGRect:rootViewController.view.frame]];
         NSAssert(! objc_getAssociatedObject(rootViewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
         objc_setAssociatedObject(rootViewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
@@ -57,6 +65,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {
     self.contentViewControllers = nil;
     self.addedAsSubviewFlags = nil;
+    self.viewAnimationStepDefinitions = nil;
+    self.originalViewFrames = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -70,7 +80,32 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @synthesize viewAnimationStepDefinitions = m_viewAnimationStepDefinitions;
 
+@synthesize originalViewFrames = m_originalViewFrames;
+
 @synthesize stretchingContent = m_stretchingContent;
+
+- (void)setStretchingContent:(BOOL)stretchingContent
+{
+    if (m_stretchingContent == stretchingContent) {
+        return;
+    }
+    
+    m_stretchingContent = stretchingContent;
+    
+    NSUInteger i = 0;
+    for (UIViewController *viewController in self.contentViewControllers) {
+        BOOL addedAsSubview = [[self.addedAsSubviewFlags objectAtIndex:i] boolValue];
+        if (addedAsSubview) {
+            if (m_stretchingContent) {
+                viewController.view.frame = self.view.bounds;
+            }
+            else {
+                viewController.view.frame = [[self.originalViewFrames objectAtIndex:i] CGRectValue];
+            }
+        }
+        ++i;
+    }
+}
 
 @synthesize delegate = m_delegate;
 
@@ -302,6 +337,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     else {
         [self.viewAnimationStepDefinitions addObject:[NSArray array]];
     }
+    [self.originalViewFrames addObject:[NSValue valueWithCGRect:viewController.view.frame]];
     
     // Add the view if the container view has been loaded
     if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewDidLoad && [self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidUnload) {
@@ -429,6 +465,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             [self.contentViewControllers removeLastObject];
             [self.addedAsSubviewFlags removeLastObject];
             [self.viewAnimationStepDefinitions removeLastObject];
+            [self.originalViewFrames removeLastObject];
             
             if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
                 [self.delegate stackController:self
@@ -505,6 +542,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         [self.contentViewControllers removeLastObject];
         [self.addedAsSubviewFlags removeLastObject];
         [self.viewAnimationStepDefinitions removeLastObject];
+        [self.originalViewFrames removeLastObject];
         
         if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
             [self.delegate stackController:self
