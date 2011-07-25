@@ -42,6 +42,8 @@
     self.rectangleView = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
+    self.animatedLabel = nil;
+    self.animatedSwitch = nil;
 }
 
 #pragma mark View lifecycle
@@ -62,6 +64,9 @@
                         action:@selector(playBackwardButtonClicked:)
               forControlEvents:UIControlEventTouchUpInside];
     self.playBackwardButton.hidden = YES;
+    
+    self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
+    self.animatedSwitch.on = YES;
 }
 
 #pragma mark Accessors and mutators
@@ -71,6 +76,10 @@
 @synthesize playForwardButton = m_playForwardButton;
 
 @synthesize playBackwardButton = m_playBackwardButton;
+
+@synthesize animatedLabel = m_animatedLabel;
+
+@synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize animation = m_animation;
 
@@ -124,7 +133,7 @@
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = YES;
     self.animation.delegate = self;
-    [self.animation playAnimated:YES];
+    [self.animation playAnimated:self.animatedSwitch.on];
 }
 
 - (void)playBackwardButtonClicked:(id)sender
@@ -133,13 +142,25 @@
     
     // Create the reverse animation
     HLSAnimation *reverseAnimation = [self.animation reverseAnimation];
-    [reverseAnimation playAnimated:YES];
+    [reverseAnimation playAnimated:self.animatedSwitch.on];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
+- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, [HLSConverters stringFromBool:animated]);
+}
+
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Animated = %@", [HLSConverters stringFromBool:animated]);
+}
+
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, [HLSConverters stringFromBool:animated]);
+    
     // Can find which animation ended using its tag
     if ([animation.tag isEqual:@"singleViewAnimation"]) {
         self.playBackwardButton.hidden = NO;

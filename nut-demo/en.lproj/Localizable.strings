@@ -11,6 +11,7 @@
 "All fields are mandatory"="All fields are mandatory";
 "All fields have been validated"="All fields have been validated";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
+"Animated"="Animated";
 "Animation"="Animation";
 "Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";

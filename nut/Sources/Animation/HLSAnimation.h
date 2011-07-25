@@ -14,17 +14,28 @@
 /**
  * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective changes
  * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
- * a complete animation. It also provide a convenient way to generate the corresponding reverse animation.
+ * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
  *
  * Currently, there is sadly no way to stop an animation once it has begun. You must therefore be especially careful
  * if a delegate registered for an animation dies before the animation ends (do not forget to unregister it before).
  * Moreover, an animation does not retain the view it animates (see HLSViewAnimationStep documentation). You should
  * therefore ensure that an animation has ended before its views are destroyed. The easiest solution to both problems
- * is to lock the UI during the animation (lockingUI animation property).
+ * is to lock the UI during the animation (lockingUI animation property). This prevents the user from doing anything
+ * nasty (like navigating away).
+ *
+ * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
+ * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
+ * when rebuilding a view which has been unloaded (typically after a memory warning has been received). Animation
+ * steps with duration equal to 0 also occur instantaneously.
+ *
+ * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
+ * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
+ * also YES if the animation was run using playAnimated:YES (even though the step was not animated, it is still
+ * part of an animation which was played animated).
  *
  * An HLSAnimation applies transforms to views. It does not alter the frame, which means view inside it won't resize
- * (according to their autoresizing mask) but rather scale. If scaling is not an option, you cannot use HLSAnimation
- * objects to manage your animation. Stick with usual UIView animation blocks for the moment.
+ * (according to their autoresizing mask) but rather scale. If scaling is not what you want, you cannot use HLSAnimation
+ * objects to manage your animation. In such cases, stick with usual UIView animation blocks for the moment.
  *
  * Designated initializer: initWithAnimationSteps:
  */
@@ -38,6 +49,7 @@
     BOOL m_bringToFront;
     BOOL m_firstStep;
     BOOL m_running;
+    BOOL m_animated;
     id<HLSAnimationDelegate> m_delegate;
 }
 
@@ -87,7 +99,8 @@
 
 /**
  * Play the animation; there is no way to stop an animation once it has been started. If animated is set to NO,
- * the end state of the animation is reached instantly
+ * the end state of the animation is reached instantly (i.e. the animation does take place synchronously at
+ * the location of the call to playAnimated:)
  */
 - (void)playAnimated:(BOOL)animated;
 
