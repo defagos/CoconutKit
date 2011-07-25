@@ -354,10 +354,7 @@
 		DA7C22D513DD66780008B31D /* HLSServiceSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSServiceSettings.h; sourceTree = "<group>"; };
 		DA7C22D613DD66780008B31D /* HLSServiceSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSServiceSettings.m; sourceTree = "<group>"; };
 		DA7C237F13DD68010008B31D /* nut.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nut.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA7C238813DD68010008B31D /* Resources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Resources-Info.plist"; sourceTree = "<group>"; };
-		DA7C238A13DD68010008B31D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA7C238C13DD68010008B31D /* Resources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Resources-Prefix.pch"; sourceTree = "<group>"; };
-		DA7C23A513DD6DEC0008B31D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7C23A513DD6DEC0008B31D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nut/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,7 +375,6 @@
 				DA7C23A513DD6DEC0008B31D /* Info.plist */,
 				DA7C223013DD66780008B31D /* Sources */,
 				DA7C221E13DD66780008B31D /* Resources */,
-				DA7C238613DD68010008B31D /* Resources */,
 				DA7C220C13DD662B0008B31D /* Frameworks */,
 				DA7C220B13DD662B0008B31D /* Products */,
 			);
@@ -408,7 +404,8 @@
 				DA7C221F13DD66780008B31D /* nut_Localizable.strings */,
 				DA7C222413DD66780008B31D /* Images */,
 			);
-			path = Resources;
+			name = Resources;
+			path = nut/Resources;
 			sourceTree = "<group>";
 		};
 		DA7C222413DD66780008B31D /* Images */ = {
@@ -441,7 +438,8 @@
 				DA7C22AA13DD66780008B31D /* ViewControllers */,
 				DA7C22BE13DD66780008B31D /* WebServices */,
 			);
-			path = Sources;
+			name = Sources;
+			path = nut/Sources;
 			sourceTree = "<group>";
 		};
 		DA7C223113DD66780008B31D /* Animation */ = {
@@ -671,24 +669,6 @@
 				DA7C22D613DD66780008B31D /* HLSServiceSettings.m */,
 			);
 			path = WebServices;
-			sourceTree = "<group>";
-		};
-		DA7C238613DD68010008B31D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DA7C238713DD68010008B31D /* Supporting Files */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		DA7C238713DD68010008B31D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA7C238813DD68010008B31D /* Resources-Info.plist */,
-				DA7C238913DD68010008B31D /* InfoPlist.strings */,
-				DA7C238C13DD68010008B31D /* Resources-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1015,14 +995,6 @@
 			name = nut_Localizable.strings;
 			sourceTree = "<group>";
 		};
-		DA7C238913DD68010008B31D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA7C238A13DD68010008B31D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1075,8 +1047,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = nut_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = nut/nut_Prefix.pch;
+				INFOPLIST_FILE = nut/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
@@ -1090,8 +1062,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = nut_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = nut/nut_Prefix.pch;
+				INFOPLIST_FILE = nut/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
