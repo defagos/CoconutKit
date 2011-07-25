@@ -7,156 +7,148 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA43718F13DDA49000C6A5C0 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228D13DD66780008B31D /* HLSTaskOperation+Protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA43719013DDA4AB00C6A5C0 /* HLSPageController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AB13DD66780008B31D /* HLSPageController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C220E13DD662B0008B31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7C220D13DD662B0008B31D /* Foundation.framework */; };
-		DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223213DD66780008B31D /* HLSAnimation.h */; };
+		DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223213DD66780008B31D /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E113DD66780008B31D /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223313DD66780008B31D /* HLSAnimation.m */; };
-		DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223413DD66780008B31D /* HLSAnimationStep.h */; };
+		DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223413DD66780008B31D /* HLSAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E313DD66780008B31D /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223513DD66780008B31D /* HLSAnimationStep.m */; };
-		DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223613DD66780008B31D /* HLSOneViewAnimationStepDefinition.h */; };
+		DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223613DD66780008B31D /* HLSOneViewAnimationStepDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E513DD66780008B31D /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223713DD66780008B31D /* HLSOneViewAnimationStepDefinition.m */; };
-		DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223813DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h */; };
+		DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223813DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E713DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223913DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m */; };
-		DA7C22E813DD66780008B31D /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223A13DD66780008B31D /* HLSViewAnimationStep.h */; };
+		DA7C22E813DD66780008B31D /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223A13DD66780008B31D /* HLSViewAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E913DD66780008B31D /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223B13DD66780008B31D /* HLSViewAnimationStep.m */; };
-		DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223D13DD66780008B31D /* HLSAssert.h */; };
+		DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223D13DD66780008B31D /* HLSAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22EB13DD66780008B31D /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223E13DD66780008B31D /* HLSAssert.m */; };
-		DA7C22EC13DD66780008B31D /* HLSCategoryLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223F13DD66780008B31D /* HLSCategoryLinker.h */; };
-		DA7C22ED13DD66780008B31D /* HLSContainerControllerLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224013DD66780008B31D /* HLSContainerControllerLoader.h */; };
-		DA7C22EE13DD66780008B31D /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224113DD66780008B31D /* HLSConverters.h */; };
+		DA7C22ED13DD66780008B31D /* HLSContainerControllerLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224013DD66780008B31D /* HLSContainerControllerLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7C22EE13DD66780008B31D /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224113DD66780008B31D /* HLSConverters.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22EF13DD66780008B31D /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224213DD66780008B31D /* HLSConverters.m */; };
-		DA7C22F013DD66780008B31D /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224313DD66780008B31D /* HLSError.h */; };
+		DA7C22F013DD66780008B31D /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224313DD66780008B31D /* HLSError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22F113DD66780008B31D /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224413DD66780008B31D /* HLSError.m */; };
-		DA7C22F213DD66780008B31D /* HLSErrorTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224513DD66780008B31D /* HLSErrorTemplate.h */; };
 		DA7C22F313DD66780008B31D /* HLSErrorTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224613DD66780008B31D /* HLSErrorTemplate.m */; };
-		DA7C22F413DD66780008B31D /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224713DD66780008B31D /* HLSFloat.h */; };
+		DA7C22F413DD66780008B31D /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224713DD66780008B31D /* HLSFloat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22F513DD66780008B31D /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224813DD66780008B31D /* HLSFloat.m */; };
-		DA7C22F613DD66780008B31D /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224913DD66780008B31D /* HLSKeyboardInformation.h */; };
+		DA7C22F613DD66780008B31D /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224913DD66780008B31D /* HLSKeyboardInformation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22F713DD66780008B31D /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224A13DD66780008B31D /* HLSKeyboardInformation.m */; };
-		DA7C22F813DD66780008B31D /* HLSNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224B13DD66780008B31D /* HLSNotifications.h */; };
+		DA7C22F813DD66780008B31D /* HLSNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224B13DD66780008B31D /* HLSNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22F913DD66780008B31D /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C224C13DD66780008B31D /* HLSNotifications.m */; };
-		DA7C22FA13DD66780008B31D /* HLSOrientationCloner.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224D13DD66780008B31D /* HLSOrientationCloner.h */; };
-		DA7C22FB13DD66780008B31D /* HLSReloadable.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224E13DD66780008B31D /* HLSReloadable.h */; };
-		DA7C22FC13DD66780008B31D /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224F13DD66780008B31D /* HLSRuntime.h */; };
+		DA7C22FA13DD66780008B31D /* HLSOrientationCloner.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224D13DD66780008B31D /* HLSOrientationCloner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7C22FB13DD66780008B31D /* HLSReloadable.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224E13DD66780008B31D /* HLSReloadable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7C22FC13DD66780008B31D /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C224F13DD66780008B31D /* HLSRuntime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22FD13DD66780008B31D /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225013DD66780008B31D /* HLSRuntime.m */; };
-		DA7C22FE13DD66780008B31D /* HLSStandardWidgetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225113DD66780008B31D /* HLSStandardWidgetConstants.h */; };
+		DA7C22FE13DD66780008B31D /* HLSStandardWidgetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225113DD66780008B31D /* HLSStandardWidgetConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22FF13DD66780008B31D /* HLSStandardWidgetConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225213DD66780008B31D /* HLSStandardWidgetConstants.m */; };
-		DA7C230013DD66780008B31D /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225313DD66780008B31D /* HLSUserInterfaceLock.h */; };
+		DA7C230013DD66780008B31D /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225313DD66780008B31D /* HLSUserInterfaceLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230113DD66780008B31D /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225413DD66780008B31D /* HLSUserInterfaceLock.m */; };
-		DA7C230213DD66780008B31D /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225513DD66780008B31D /* HLSValidable.h */; };
-		DA7C230313DD66780008B31D /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225613DD66780008B31D /* HLSValidators.h */; };
+		DA7C230213DD66780008B31D /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225513DD66780008B31D /* HLSValidable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7C230313DD66780008B31D /* HLSValidators.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225613DD66780008B31D /* HLSValidators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230413DD66780008B31D /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225713DD66780008B31D /* HLSValidators.m */; };
-		DA7C230513DD66780008B31D /* NSArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225813DD66780008B31D /* NSArray+HLSExtensions.h */; };
+		DA7C230513DD66780008B31D /* NSArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225813DD66780008B31D /* NSArray+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230613DD66780008B31D /* NSArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225913DD66780008B31D /* NSArray+HLSExtensions.m */; };
-		DA7C230713DD66780008B31D /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225A13DD66780008B31D /* NSBundle+HLSExtensions.h */; };
+		DA7C230713DD66780008B31D /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225A13DD66780008B31D /* NSBundle+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230813DD66780008B31D /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225B13DD66780008B31D /* NSBundle+HLSExtensions.m */; };
-		DA7C230913DD66780008B31D /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225C13DD66780008B31D /* NSCalendar+HLSExtensions.h */; };
+		DA7C230913DD66780008B31D /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225C13DD66780008B31D /* NSCalendar+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230A13DD66780008B31D /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225D13DD66780008B31D /* NSCalendar+HLSExtensions.m */; };
-		DA7C230B13DD66780008B31D /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225E13DD66780008B31D /* NSData+HLSExtensions.h */; };
+		DA7C230B13DD66780008B31D /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C225E13DD66780008B31D /* NSData+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230C13DD66780008B31D /* NSData+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C225F13DD66780008B31D /* NSData+HLSExtensions.m */; };
-		DA7C230D13DD66780008B31D /* NSDate+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226013DD66780008B31D /* NSDate+HLSExtensions.h */; };
+		DA7C230D13DD66780008B31D /* NSDate+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226013DD66780008B31D /* NSDate+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C230E13DD66780008B31D /* NSDate+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226113DD66780008B31D /* NSDate+HLSExtensions.m */; };
-		DA7C230F13DD66780008B31D /* NSDateFormatter+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226213DD66780008B31D /* NSDateFormatter+HLSExtensions.h */; };
+		DA7C230F13DD66780008B31D /* NSDateFormatter+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226213DD66780008B31D /* NSDateFormatter+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231013DD66780008B31D /* NSDateFormatter+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226313DD66780008B31D /* NSDateFormatter+HLSExtensions.m */; };
-		DA7C231113DD66780008B31D /* NSDictionary+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226413DD66780008B31D /* NSDictionary+HLSExtensions.h */; };
+		DA7C231113DD66780008B31D /* NSDictionary+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226413DD66780008B31D /* NSDictionary+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231213DD66780008B31D /* NSDictionary+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226513DD66780008B31D /* NSDictionary+HLSExtensions.m */; };
-		DA7C231313DD66780008B31D /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226613DD66780008B31D /* NSObject+HLSExtensions.h */; };
+		DA7C231313DD66780008B31D /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226613DD66780008B31D /* NSObject+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231413DD66780008B31D /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226713DD66780008B31D /* NSObject+HLSExtensions.m */; };
-		DA7C231513DD66780008B31D /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226813DD66780008B31D /* NSString+HLSExtensions.h */; };
+		DA7C231513DD66780008B31D /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226813DD66780008B31D /* NSString+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231613DD66780008B31D /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226913DD66780008B31D /* NSString+HLSExtensions.m */; };
-		DA7C231813DD66780008B31D /* UIColor+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226B13DD66780008B31D /* UIColor+HLSExtensions.h */; };
+		DA7C231813DD66780008B31D /* UIColor+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226B13DD66780008B31D /* UIColor+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231913DD66780008B31D /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226C13DD66780008B31D /* UIColor+HLSExtensions.m */; };
-		DA7C231A13DD66780008B31D /* UIControl+HLSExclusiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226D13DD66780008B31D /* UIControl+HLSExclusiveTouch.h */; };
+		DA7C231A13DD66780008B31D /* UIControl+HLSExclusiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C226D13DD66780008B31D /* UIControl+HLSExclusiveTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231B13DD66780008B31D /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C226E13DD66780008B31D /* UIControl+HLSExclusiveTouch.m */; };
-		DA7C231E13DD66780008B31D /* UIImage+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227113DD66780008B31D /* UIImage+HLSExtensions.h */; };
+		DA7C231E13DD66780008B31D /* UIImage+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227113DD66780008B31D /* UIImage+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C231F13DD66780008B31D /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C227213DD66780008B31D /* UIImage+HLSExtensions.m */; };
-		DA7C232013DD66780008B31D /* HLSModelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227413DD66780008B31D /* HLSModelManager.h */; };
+		DA7C232013DD66780008B31D /* HLSModelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227413DD66780008B31D /* HLSModelManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232113DD66780008B31D /* HLSModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C227513DD66780008B31D /* HLSModelManager.m */; };
-		DA7C232213DD66780008B31D /* HLSTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227713DD66780008B31D /* HLSTransform.h */; };
+		DA7C232213DD66780008B31D /* HLSTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227713DD66780008B31D /* HLSTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232313DD66780008B31D /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C227813DD66780008B31D /* HLSTransform.m */; };
-		DA7C232413DD66780008B31D /* HLSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227A13DD66780008B31D /* HLSLogger.h */; };
+		DA7C232413DD66780008B31D /* HLSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227A13DD66780008B31D /* HLSLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232513DD66780008B31D /* HLSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C227B13DD66780008B31D /* HLSLogger.m */; };
-		DA7C232613DD66780008B31D /* HLSDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227D13DD66780008B31D /* HLSDownloader.h */; };
+		DA7C232613DD66780008B31D /* HLSDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227D13DD66780008B31D /* HLSDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232713DD66780008B31D /* HLSDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C227E13DD66780008B31D /* HLSDownloader.m */; };
-		DA7C232813DD66780008B31D /* HLSDownloaderTools.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227F13DD66780008B31D /* HLSDownloaderTools.h */; };
+		DA7C232813DD66780008B31D /* HLSDownloaderTools.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C227F13DD66780008B31D /* HLSDownloaderTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232913DD66780008B31D /* HLSDownloaderTools.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228013DD66780008B31D /* HLSDownloaderTools.m */; };
-		DA7C232A13DD66780008B31D /* HLSRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228113DD66780008B31D /* HLSRequester.h */; };
+		DA7C232A13DD66780008B31D /* HLSRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228113DD66780008B31D /* HLSRequester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232B13DD66780008B31D /* HLSRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228213DD66780008B31D /* HLSRequester.m */; };
-		DA7C232C13DD66780008B31D /* HLSTask+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228413DD66780008B31D /* HLSTask+Friend.h */; };
-		DA7C232D13DD66780008B31D /* HLSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228513DD66780008B31D /* HLSTask.h */; };
+		DA7C232D13DD66780008B31D /* HLSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228513DD66780008B31D /* HLSTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C232E13DD66780008B31D /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228613DD66780008B31D /* HLSTask.m */; };
-		DA7C232F13DD66780008B31D /* HLSTaskGroup+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228713DD66780008B31D /* HLSTaskGroup+Friend.h */; };
-		DA7C233013DD66780008B31D /* HLSTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228813DD66780008B31D /* HLSTaskGroup.h */; };
+		DA7C233013DD66780008B31D /* HLSTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228813DD66780008B31D /* HLSTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233113DD66780008B31D /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228913DD66780008B31D /* HLSTaskGroup.m */; };
-		DA7C233213DD66780008B31D /* HLSTaskManager+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228A13DD66780008B31D /* HLSTaskManager+Friend.h */; };
-		DA7C233313DD66780008B31D /* HLSTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228B13DD66780008B31D /* HLSTaskManager.h */; };
+		DA7C233313DD66780008B31D /* HLSTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228B13DD66780008B31D /* HLSTaskManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233413DD66780008B31D /* HLSTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228C13DD66780008B31D /* HLSTaskManager.m */; };
-		DA7C233513DD66780008B31D /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228D13DD66780008B31D /* HLSTaskOperation+Protected.h */; };
-		DA7C233613DD66780008B31D /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228E13DD66780008B31D /* HLSTaskOperation.h */; };
+		DA7C233613DD66780008B31D /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228E13DD66780008B31D /* HLSTaskOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233713DD66780008B31D /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C228F13DD66780008B31D /* HLSTaskOperation.m */; };
-		DA7C233813DD66780008B31D /* HLSSingleValuePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229113DD66780008B31D /* HLSSingleValuePicker.h */; };
+		DA7C233813DD66780008B31D /* HLSSingleValuePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229113DD66780008B31D /* HLSSingleValuePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233913DD66780008B31D /* HLSSingleValuePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229213DD66780008B31D /* HLSSingleValuePicker.m */; };
-		DA7C233A13DD66780008B31D /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229413DD66780008B31D /* HLSCursor.h */; };
+		DA7C233A13DD66780008B31D /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229413DD66780008B31D /* HLSCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233B13DD66780008B31D /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229513DD66780008B31D /* HLSCursor.m */; };
-		DA7C233C13DD66780008B31D /* HLSStrip+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229613DD66780008B31D /* HLSStrip+Friend.h */; };
-		DA7C233D13DD66780008B31D /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229713DD66780008B31D /* HLSStrip.h */; };
+		DA7C233D13DD66780008B31D /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229713DD66780008B31D /* HLSStrip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C233E13DD66780008B31D /* HLSStrip.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229813DD66780008B31D /* HLSStrip.m */; };
-		DA7C233F13DD66780008B31D /* HLSStripContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229913DD66780008B31D /* HLSStripContainerView.h */; };
+		DA7C233F13DD66780008B31D /* HLSStripContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229913DD66780008B31D /* HLSStripContainerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234013DD66780008B31D /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229A13DD66780008B31D /* HLSStripContainerView.m */; };
-		DA7C234113DD66780008B31D /* HLSStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229B13DD66780008B31D /* HLSStripView.h */; };
 		DA7C234213DD66780008B31D /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229C13DD66780008B31D /* HLSStripView.m */; };
-		DA7C234313DD66780008B31D /* HLSSubtitleTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229D13DD66780008B31D /* HLSSubtitleTableViewCell.h */; };
+		DA7C234313DD66780008B31D /* HLSSubtitleTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229D13DD66780008B31D /* HLSSubtitleTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234413DD66780008B31D /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C229E13DD66780008B31D /* HLSSubtitleTableViewCell.m */; };
-		DA7C234513DD66780008B31D /* HLSTableViewCell+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C229F13DD66780008B31D /* HLSTableViewCell+Protected.h */; };
-		DA7C234613DD66780008B31D /* HLSTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A013DD66780008B31D /* HLSTableViewCell.h */; };
+		DA7C234613DD66780008B31D /* HLSTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A013DD66780008B31D /* HLSTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234713DD66780008B31D /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22A113DD66780008B31D /* HLSTableViewCell.m */; };
-		DA7C234813DD66780008B31D /* HLSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A213DD66780008B31D /* HLSTextField.h */; };
+		DA7C234813DD66780008B31D /* HLSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A213DD66780008B31D /* HLSTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234913DD66780008B31D /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22A313DD66780008B31D /* HLSTextField.m */; };
-		DA7C234A13DD66780008B31D /* HLSValue1TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A413DD66780008B31D /* HLSValue1TableViewCell.h */; };
+		DA7C234A13DD66780008B31D /* HLSValue1TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A413DD66780008B31D /* HLSValue1TableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234B13DD66780008B31D /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22A513DD66780008B31D /* HLSValue1TableViewCell.m */; };
-		DA7C234C13DD66780008B31D /* HLSValue2TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A613DD66780008B31D /* HLSValue2TableViewCell.h */; };
+		DA7C234C13DD66780008B31D /* HLSValue2TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A613DD66780008B31D /* HLSValue2TableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234D13DD66780008B31D /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22A713DD66780008B31D /* HLSValue2TableViewCell.m */; };
-		DA7C234E13DD66780008B31D /* HLSXibView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A813DD66780008B31D /* HLSXibView.h */; };
+		DA7C234E13DD66780008B31D /* HLSXibView.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22A813DD66780008B31D /* HLSXibView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C234F13DD66780008B31D /* HLSXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22A913DD66780008B31D /* HLSXibView.m */; };
-		DA7C235013DD66780008B31D /* HLSPageController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AB13DD66780008B31D /* HLSPageController.h */; };
 		DA7C235113DD66780008B31D /* HLSPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22AC13DD66780008B31D /* HLSPageController.m */; };
-		DA7C235213DD66780008B31D /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AD13DD66780008B31D /* HLSPlaceholderViewController.h */; };
+		DA7C235213DD66780008B31D /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AD13DD66780008B31D /* HLSPlaceholderViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235313DD66780008B31D /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22AE13DD66780008B31D /* HLSPlaceholderViewController.m */; };
-		DA7C235413DD66780008B31D /* HLSSingleValuePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AF13DD66780008B31D /* HLSSingleValuePickerViewController.h */; };
+		DA7C235413DD66780008B31D /* HLSSingleValuePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AF13DD66780008B31D /* HLSSingleValuePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235513DD66780008B31D /* HLSSingleValuePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22B013DD66780008B31D /* HLSSingleValuePickerViewController.m */; };
-		DA7C235613DD66780008B31D /* HLSStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B113DD66780008B31D /* HLSStackController.h */; };
+		DA7C235613DD66780008B31D /* HLSStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B113DD66780008B31D /* HLSStackController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235713DD66780008B31D /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22B213DD66780008B31D /* HLSStackController.m */; };
-		DA7C235813DD66780008B31D /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B313DD66780008B31D /* HLSTableSearchDisplayViewController.h */; };
+		DA7C235813DD66780008B31D /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B313DD66780008B31D /* HLSTableSearchDisplayViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235913DD66780008B31D /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22B413DD66780008B31D /* HLSTableSearchDisplayViewController.m */; };
-		DA7C235A13DD66780008B31D /* HLSTransitionStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B513DD66780008B31D /* HLSTransitionStyle.h */; };
-		DA7C235B13DD66780008B31D /* HLSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B613DD66780008B31D /* HLSViewController.h */; };
+		DA7C235A13DD66780008B31D /* HLSTransitionStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B513DD66780008B31D /* HLSTransitionStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7C235B13DD66780008B31D /* HLSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B613DD66780008B31D /* HLSViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235C13DD66780008B31D /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22B713DD66780008B31D /* HLSViewController.m */; };
-		DA7C235D13DD66780008B31D /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B813DD66780008B31D /* HLSWebViewController.h */; };
+		DA7C235D13DD66780008B31D /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22B813DD66780008B31D /* HLSWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C235E13DD66780008B31D /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22B913DD66780008B31D /* HLSWebViewController.m */; };
-		DA7C235F13DD66780008B31D /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22BA13DD66780008B31D /* HLSWizardViewController.h */; };
+		DA7C235F13DD66780008B31D /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22BA13DD66780008B31D /* HLSWizardViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236013DD66780008B31D /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22BB13DD66780008B31D /* HLSWizardViewController.m */; };
-		DA7C236313DD66780008B31D /* HLSServiceAggregator.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22BF13DD66780008B31D /* HLSServiceAggregator.h */; };
+		DA7C236313DD66780008B31D /* HLSServiceAggregator.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22BF13DD66780008B31D /* HLSServiceAggregator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236413DD66780008B31D /* HLSServiceAggregator.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22C013DD66780008B31D /* HLSServiceAggregator.m */; };
-		DA7C236513DD66780008B31D /* HLSServiceAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C113DD66780008B31D /* HLSServiceAnswer.h */; };
+		DA7C236513DD66780008B31D /* HLSServiceAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C113DD66780008B31D /* HLSServiceAnswer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236613DD66780008B31D /* HLSServiceAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22C213DD66780008B31D /* HLSServiceAnswer.m */; };
-		DA7C236713DD66780008B31D /* HLSServiceBoundArray.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C313DD66780008B31D /* HLSServiceBoundArray.h */; };
+		DA7C236713DD66780008B31D /* HLSServiceBoundArray.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C313DD66780008B31D /* HLSServiceBoundArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236813DD66780008B31D /* HLSServiceBoundArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22C413DD66780008B31D /* HLSServiceBoundArray.m */; };
-		DA7C236913DD66780008B31D /* HLSServiceBoundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C513DD66780008B31D /* HLSServiceBoundObject.h */; };
+		DA7C236913DD66780008B31D /* HLSServiceBoundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C513DD66780008B31D /* HLSServiceBoundObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236A13DD66780008B31D /* HLSServiceBoundObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22C613DD66780008B31D /* HLSServiceBoundObject.m */; };
-		DA7C236B13DD66780008B31D /* HLSServiceBroker.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C713DD66780008B31D /* HLSServiceBroker.h */; };
+		DA7C236B13DD66780008B31D /* HLSServiceBroker.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C713DD66780008B31D /* HLSServiceBroker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236C13DD66780008B31D /* HLSServiceBroker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22C813DD66780008B31D /* HLSServiceBroker.m */; };
-		DA7C236D13DD66780008B31D /* HLSServiceCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C913DD66780008B31D /* HLSServiceCache.h */; };
+		DA7C236D13DD66780008B31D /* HLSServiceCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22C913DD66780008B31D /* HLSServiceCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C236E13DD66780008B31D /* HLSServiceCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22CA13DD66780008B31D /* HLSServiceCache.m */; };
-		DA7C236F13DD66780008B31D /* HLSServiceDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CB13DD66780008B31D /* HLSServiceDecoder.h */; };
+		DA7C236F13DD66780008B31D /* HLSServiceDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CB13DD66780008B31D /* HLSServiceDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237013DD66780008B31D /* HLSServiceDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22CC13DD66780008B31D /* HLSServiceDecoder.m */; };
-		DA7C237113DD66780008B31D /* HLSServiceObject.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CD13DD66780008B31D /* HLSServiceObject.h */; };
+		DA7C237113DD66780008B31D /* HLSServiceObject.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CD13DD66780008B31D /* HLSServiceObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237213DD66780008B31D /* HLSServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22CE13DD66780008B31D /* HLSServiceObject.m */; };
-		DA7C237313DD66780008B31D /* HLSServiceObjectDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CF13DD66780008B31D /* HLSServiceObjectDescription.h */; };
+		DA7C237313DD66780008B31D /* HLSServiceObjectDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22CF13DD66780008B31D /* HLSServiceObjectDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237413DD66780008B31D /* HLSServiceObjectDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22D013DD66780008B31D /* HLSServiceObjectDescription.m */; };
-		DA7C237513DD66780008B31D /* HLSServiceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D113DD66780008B31D /* HLSServiceRequest.h */; };
+		DA7C237513DD66780008B31D /* HLSServiceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D113DD66780008B31D /* HLSServiceRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237613DD66780008B31D /* HLSServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22D213DD66780008B31D /* HLSServiceRequest.m */; };
-		DA7C237713DD66780008B31D /* HLSServiceRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D313DD66780008B31D /* HLSServiceRequester.h */; };
+		DA7C237713DD66780008B31D /* HLSServiceRequester.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D313DD66780008B31D /* HLSServiceRequester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237813DD66780008B31D /* HLSServiceRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22D413DD66780008B31D /* HLSServiceRequester.m */; };
-		DA7C237913DD66780008B31D /* HLSServiceSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D513DD66780008B31D /* HLSServiceSettings.h */; };
+		DA7C237913DD66780008B31D /* HLSServiceSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22D513DD66780008B31D /* HLSServiceSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C237A13DD66780008B31D /* HLSServiceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C22D613DD66780008B31D /* HLSServiceSettings.m */; };
 		DA7C239213DD68870008B31D /* nut.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DA7C237F13DD68010008B31D /* nut.bundle */; };
 		DA7C239C13DD69370008B31D /* nut_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA7C221F13DD66780008B31D /* nut_Localizable.strings */; };
@@ -680,73 +672,25 @@
 			files = (
 				DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */,
 				DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */,
-				DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */,
-				DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */,
-				DA7C22E813DD66780008B31D /* HLSViewAnimationStep.h in Headers */,
 				DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */,
-				DA7C22EC13DD66780008B31D /* HLSCategoryLinker.h in Headers */,
 				DA7C22ED13DD66780008B31D /* HLSContainerControllerLoader.h in Headers */,
 				DA7C22EE13DD66780008B31D /* HLSConverters.h in Headers */,
-				DA7C22F013DD66780008B31D /* HLSError.h in Headers */,
-				DA7C22F213DD66780008B31D /* HLSErrorTemplate.h in Headers */,
-				DA7C22F413DD66780008B31D /* HLSFloat.h in Headers */,
-				DA7C22F613DD66780008B31D /* HLSKeyboardInformation.h in Headers */,
-				DA7C22F813DD66780008B31D /* HLSNotifications.h in Headers */,
-				DA7C22FA13DD66780008B31D /* HLSOrientationCloner.h in Headers */,
-				DA7C22FB13DD66780008B31D /* HLSReloadable.h in Headers */,
-				DA7C22FC13DD66780008B31D /* HLSRuntime.h in Headers */,
-				DA7C22FE13DD66780008B31D /* HLSStandardWidgetConstants.h in Headers */,
-				DA7C230013DD66780008B31D /* HLSUserInterfaceLock.h in Headers */,
-				DA7C230213DD66780008B31D /* HLSValidable.h in Headers */,
-				DA7C230313DD66780008B31D /* HLSValidators.h in Headers */,
-				DA7C230513DD66780008B31D /* NSArray+HLSExtensions.h in Headers */,
-				DA7C230713DD66780008B31D /* NSBundle+HLSExtensions.h in Headers */,
-				DA7C230913DD66780008B31D /* NSCalendar+HLSExtensions.h in Headers */,
-				DA7C230B13DD66780008B31D /* NSData+HLSExtensions.h in Headers */,
-				DA7C230D13DD66780008B31D /* NSDate+HLSExtensions.h in Headers */,
-				DA7C230F13DD66780008B31D /* NSDateFormatter+HLSExtensions.h in Headers */,
-				DA7C231113DD66780008B31D /* NSDictionary+HLSExtensions.h in Headers */,
-				DA7C231313DD66780008B31D /* NSObject+HLSExtensions.h in Headers */,
-				DA7C231513DD66780008B31D /* NSString+HLSExtensions.h in Headers */,
-				DA7C231813DD66780008B31D /* UIColor+HLSExtensions.h in Headers */,
-				DA7C231A13DD66780008B31D /* UIControl+HLSExclusiveTouch.h in Headers */,
-				DA7C231E13DD66780008B31D /* UIImage+HLSExtensions.h in Headers */,
-				DA7C232013DD66780008B31D /* HLSModelManager.h in Headers */,
-				DA7C232213DD66780008B31D /* HLSTransform.h in Headers */,
-				DA7C232413DD66780008B31D /* HLSLogger.h in Headers */,
+				DA7C233A13DD66780008B31D /* HLSCursor.h in Headers */,
 				DA7C232613DD66780008B31D /* HLSDownloader.h in Headers */,
 				DA7C232813DD66780008B31D /* HLSDownloaderTools.h in Headers */,
-				DA7C232A13DD66780008B31D /* HLSRequester.h in Headers */,
-				DA7C232C13DD66780008B31D /* HLSTask+Friend.h in Headers */,
-				DA7C232D13DD66780008B31D /* HLSTask.h in Headers */,
-				DA7C232F13DD66780008B31D /* HLSTaskGroup+Friend.h in Headers */,
-				DA7C233013DD66780008B31D /* HLSTaskGroup.h in Headers */,
-				DA7C233213DD66780008B31D /* HLSTaskManager+Friend.h in Headers */,
-				DA7C233313DD66780008B31D /* HLSTaskManager.h in Headers */,
-				DA7C233513DD66780008B31D /* HLSTaskOperation+Protected.h in Headers */,
-				DA7C233613DD66780008B31D /* HLSTaskOperation.h in Headers */,
-				DA7C233813DD66780008B31D /* HLSSingleValuePicker.h in Headers */,
-				DA7C233A13DD66780008B31D /* HLSCursor.h in Headers */,
-				DA7C233C13DD66780008B31D /* HLSStrip+Friend.h in Headers */,
-				DA7C233D13DD66780008B31D /* HLSStrip.h in Headers */,
-				DA7C233F13DD66780008B31D /* HLSStripContainerView.h in Headers */,
-				DA7C234113DD66780008B31D /* HLSStripView.h in Headers */,
-				DA7C234313DD66780008B31D /* HLSSubtitleTableViewCell.h in Headers */,
-				DA7C234513DD66780008B31D /* HLSTableViewCell+Protected.h in Headers */,
-				DA7C234613DD66780008B31D /* HLSTableViewCell.h in Headers */,
-				DA7C234813DD66780008B31D /* HLSTextField.h in Headers */,
-				DA7C234A13DD66780008B31D /* HLSValue1TableViewCell.h in Headers */,
-				DA7C234C13DD66780008B31D /* HLSValue2TableViewCell.h in Headers */,
-				DA7C234E13DD66780008B31D /* HLSXibView.h in Headers */,
-				DA7C235013DD66780008B31D /* HLSPageController.h in Headers */,
+				DA7C22F013DD66780008B31D /* HLSError.h in Headers */,
+				DA7C22F413DD66780008B31D /* HLSFloat.h in Headers */,
+				DA7C22F613DD66780008B31D /* HLSKeyboardInformation.h in Headers */,
+				DA7C232413DD66780008B31D /* HLSLogger.h in Headers */,
+				DA7C232013DD66780008B31D /* HLSModelManager.h in Headers */,
+				DA7C22F813DD66780008B31D /* HLSNotifications.h in Headers */,
+				DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */,
+				DA7C22FA13DD66780008B31D /* HLSOrientationCloner.h in Headers */,
+				DA43719013DDA4AB00C6A5C0 /* HLSPageController.h in Headers */,
 				DA7C235213DD66780008B31D /* HLSPlaceholderViewController.h in Headers */,
-				DA7C235413DD66780008B31D /* HLSSingleValuePickerViewController.h in Headers */,
-				DA7C235613DD66780008B31D /* HLSStackController.h in Headers */,
-				DA7C235813DD66780008B31D /* HLSTableSearchDisplayViewController.h in Headers */,
-				DA7C235A13DD66780008B31D /* HLSTransitionStyle.h in Headers */,
-				DA7C235B13DD66780008B31D /* HLSViewController.h in Headers */,
-				DA7C235D13DD66780008B31D /* HLSWebViewController.h in Headers */,
-				DA7C235F13DD66780008B31D /* HLSWizardViewController.h in Headers */,
+				DA7C22FB13DD66780008B31D /* HLSReloadable.h in Headers */,
+				DA7C232A13DD66780008B31D /* HLSRequester.h in Headers */,
+				DA7C22FC13DD66780008B31D /* HLSRuntime.h in Headers */,
 				DA7C236313DD66780008B31D /* HLSServiceAggregator.h in Headers */,
 				DA7C236513DD66780008B31D /* HLSServiceAnswer.h in Headers */,
 				DA7C236713DD66780008B31D /* HLSServiceBoundArray.h in Headers */,
@@ -759,6 +703,46 @@
 				DA7C237513DD66780008B31D /* HLSServiceRequest.h in Headers */,
 				DA7C237713DD66780008B31D /* HLSServiceRequester.h in Headers */,
 				DA7C237913DD66780008B31D /* HLSServiceSettings.h in Headers */,
+				DA7C233813DD66780008B31D /* HLSSingleValuePicker.h in Headers */,
+				DA7C235413DD66780008B31D /* HLSSingleValuePickerViewController.h in Headers */,
+				DA7C235613DD66780008B31D /* HLSStackController.h in Headers */,
+				DA7C22FE13DD66780008B31D /* HLSStandardWidgetConstants.h in Headers */,
+				DA7C233D13DD66780008B31D /* HLSStrip.h in Headers */,
+				DA7C233F13DD66780008B31D /* HLSStripContainerView.h in Headers */,
+				DA7C234313DD66780008B31D /* HLSSubtitleTableViewCell.h in Headers */,
+				DA7C235813DD66780008B31D /* HLSTableSearchDisplayViewController.h in Headers */,
+				DA7C234613DD66780008B31D /* HLSTableViewCell.h in Headers */,
+				DA7C232D13DD66780008B31D /* HLSTask.h in Headers */,
+				DA7C233013DD66780008B31D /* HLSTaskGroup.h in Headers */,
+				DA7C233313DD66780008B31D /* HLSTaskManager.h in Headers */,
+				DA7C233613DD66780008B31D /* HLSTaskOperation.h in Headers */,
+				DA43718F13DDA49000C6A5C0 /* HLSTaskOperation+Protected.h in Headers */,
+				DA7C234813DD66780008B31D /* HLSTextField.h in Headers */,
+				DA7C232213DD66780008B31D /* HLSTransform.h in Headers */,
+				DA7C235A13DD66780008B31D /* HLSTransitionStyle.h in Headers */,
+				DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */,
+				DA7C230013DD66780008B31D /* HLSUserInterfaceLock.h in Headers */,
+				DA7C230213DD66780008B31D /* HLSValidable.h in Headers */,
+				DA7C230313DD66780008B31D /* HLSValidators.h in Headers */,
+				DA7C234A13DD66780008B31D /* HLSValue1TableViewCell.h in Headers */,
+				DA7C234C13DD66780008B31D /* HLSValue2TableViewCell.h in Headers */,
+				DA7C22E813DD66780008B31D /* HLSViewAnimationStep.h in Headers */,
+				DA7C235B13DD66780008B31D /* HLSViewController.h in Headers */,
+				DA7C235D13DD66780008B31D /* HLSWebViewController.h in Headers */,
+				DA7C235F13DD66780008B31D /* HLSWizardViewController.h in Headers */,
+				DA7C234E13DD66780008B31D /* HLSXibView.h in Headers */,
+				DA7C230513DD66780008B31D /* NSArray+HLSExtensions.h in Headers */,
+				DA7C230713DD66780008B31D /* NSBundle+HLSExtensions.h in Headers */,
+				DA7C230913DD66780008B31D /* NSCalendar+HLSExtensions.h in Headers */,
+				DA7C230B13DD66780008B31D /* NSData+HLSExtensions.h in Headers */,
+				DA7C230D13DD66780008B31D /* NSDate+HLSExtensions.h in Headers */,
+				DA7C230F13DD66780008B31D /* NSDateFormatter+HLSExtensions.h in Headers */,
+				DA7C231113DD66780008B31D /* NSDictionary+HLSExtensions.h in Headers */,
+				DA7C231313DD66780008B31D /* NSObject+HLSExtensions.h in Headers */,
+				DA7C231513DD66780008B31D /* NSString+HLSExtensions.h in Headers */,
+				DA7C231813DD66780008B31D /* UIColor+HLSExtensions.h in Headers */,
+				DA7C231A13DD66780008B31D /* UIControl+HLSExclusiveTouch.h in Headers */,
+				DA7C231E13DD66780008B31D /* UIImage+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

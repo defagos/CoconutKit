@@ -46,6 +46,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
+HLSTransform.h
 HLSTransitionStyle.h
 HLSTwoViewAnimationStepDefinition.h
 HLSUserInterfaceLock.h
