@@ -79,7 +79,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * Remove the top view controller from the stack. The same animation as when it was pushed onto the stack will be played.
  * The root view controller cannot be popped
  */
-- (UIViewController *)popViewController;
+- (void)popViewController;
 
 /**
  * Return the view controller currently on top

@@ -30,7 +30,7 @@ static const UIViewAnimationCurve kTwoViewAnimationStepDefinition = UIViewAnimat
 {
     switch (transitionStyle) {
         case HLSTransitionStyleNone: {
-            return nil;
+            return [NSArray array];
             break;
         }
             

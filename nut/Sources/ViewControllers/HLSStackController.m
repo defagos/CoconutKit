@@ -19,10 +19,6 @@
 // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
 //       will occur, but the animation will be saved for use during pop
 
-// TODO: Factor out the code creating twoStepAnimations for HLSTransitionStyles in HLSTransitionStyle
-//       or HLSTwoStepAnimationDefinition. Use it from both HLSPlaceholderViewController and
-//       HLSStackController
-
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
@@ -44,7 +40,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     if ((self = [super init])) {
         self.contentViewControllers = [NSMutableArray arrayWithObject:rootViewController];
         self.addedAsSubviewFlags = [NSMutableArray arrayWithObject:[NSNumber numberWithBool:NO]];
-        self.viewAnimationStepDefinitions = [NSMutableArray arrayWithObject:[NSNull null]];
+        self.viewAnimationStepDefinitions = [NSMutableArray arrayWithObject:[NSArray array]];
         NSAssert(! objc_getAssociatedObject(rootViewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
         objc_setAssociatedObject(rootViewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
@@ -279,7 +275,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         }
     }
     
-    // Notify disappearance of previous top view controller if visible
+    // Notify disappearance of current top view controller if visible
     if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
         UIViewController *topViewController = [self topViewController];
         // Animated
@@ -300,11 +296,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Push the new view controller
     [self.contentViewControllers addObject:viewController];
     [self.addedAsSubviewFlags addObject:[NSNumber numberWithBool:NO]];
-    if (twoViewAnimationStepDefinitions) {
+    if ([twoViewAnimationStepDefinitions count] != 0) {
         [self.viewAnimationStepDefinitions addObject:twoViewAnimationStepDefinitions];
     }
     else {
-        [self.viewAnimationStepDefinitions addObject:[NSNull null]];
+        [self.viewAnimationStepDefinitions addObject:[NSArray array]];
     }
     
     // Add the view if the container view has been loaded
@@ -366,11 +362,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Create the animation if any
     if ([twoViewAnimationStepDefinitions count] != 0) {
         UIView *topView = [self topViewController].view;
-        UIView *previousTopView = [self secondTopViewController].view;
+        UIView *secondTopView = [self secondTopViewController].view;
         
         NSMutableArray *animationSteps = [NSMutableArray array];
         for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in twoViewAnimationStepDefinitions) {
-            HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:previousTopView 
+            HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:secondTopView 
                                                                                        secondView:topView];
             [animationSteps addObject:animationStep];
         }
@@ -393,80 +389,138 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 #pragma mark Popping view controllers
 
-- (UIViewController *)popViewController
+- (void)popViewController
 {
     // Cannot pop if only one view controller remains
     if ([self.contentViewControllers count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
-        return nil;
+        return;
     }
     
-    // If the top view controller is visible, notify disappearance
-    UIViewController *previousTopViewController = [self topViewController];
-    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-        // TODO: Animated case!
-        [previousTopViewController viewWillDisappear:NO];
-    }
+    // Get the animation (if any)
+    NSArray *twoViewAnimationStepDefinitions = [self.viewAnimationStepDefinitions lastObject];
     
-    [previousTopViewController.view removeFromSuperview];
-    
-    // TODO: Will be replace later by a property (because we need to retain the view controller during animation); will let the view
-    //       controller live a little bit longer
-    [[previousTopViewController retain] autorelease];
-    
-    // Remove the view controller association with its container
-    NSAssert(objc_getAssociatedObject(previousTopViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
-    objc_setAssociatedObject(previousTopViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
-    
-    [self.contentViewControllers removeLastObject];
-    [self.addedAsSubviewFlags removeLastObject];
-    [self.viewAnimationStepDefinitions removeLastObject];
+    UIViewController *topViewController = [self topViewController];
+    UIViewController *secondTopViewController = [self secondTopViewController];
     
     if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-        // TODO: Animated case!
-        [previousTopViewController viewDidDisappear:NO];
-        
-        UIViewController *topViewController = [self topViewController];
-        
-        if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
-            [self.delegate stackController:self
-                    willShowViewController:topViewController
-                                  animated:NO];
+        // Animated
+        if ([twoViewAnimationStepDefinitions count] != 0) {
+            [topViewController viewWillDisappear:YES];
+            
+            if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+                [self.delegate stackController:self
+                        willShowViewController:secondTopViewController
+                                      animated:YES];
+            }
+            
+            [secondTopViewController viewWillAppear:YES];
         }
-        
-        [topViewController viewWillAppear:NO];
-        
-        if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
-            [self.delegate stackController:self
-                     didShowViewController:topViewController
-                                  animated:NO];
+        // Not animated
+        else {
+            [topViewController viewWillDisappear:NO];
+            [topViewController.view removeFromSuperview];
+            [topViewController viewDidDisappear:NO];
+            
+            // Remove the view controller association with its container
+            NSAssert(objc_getAssociatedObject(topViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
+            objc_setAssociatedObject(topViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+            
+            [self.contentViewControllers removeLastObject];
+            [self.addedAsSubviewFlags removeLastObject];
+            [self.viewAnimationStepDefinitions removeLastObject];
+            
+            if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+                [self.delegate stackController:self
+                        willShowViewController:secondTopViewController
+                                      animated:NO];
+            }
+            
+            [secondTopViewController viewWillAppear:NO];
+            
+            if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+                [self.delegate stackController:self
+                         didShowViewController:secondTopViewController
+                                      animated:NO];
+            }
+            
+            [secondTopViewController viewDidAppear:NO];
         }
-        
-        [topViewController viewDidAppear:NO];
     }
     
-    return previousTopViewController;
+    // TODO: Can probably factor out this code nicely
+    if ([twoViewAnimationStepDefinitions count]) {
+        NSMutableArray *animationSteps = [NSMutableArray array];
+        for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in twoViewAnimationStepDefinitions) {
+            HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:secondTopViewController.view 
+                                                                                       secondView:topViewController.view];
+            [animationSteps addObject:animationStep];
+        }
+        
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+        animation.tag = @"push_animation";
+        animation.lockingUI = YES;
+        animation.bringToFront = YES;
+        animation.delegate = self;
+        
+        // Play the reverse animation during pop
+        HLSAnimation *reverseAnimation = [animation reverseAnimation];
+        
+        // Animation occurs if the container is visible
+        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+            [reverseAnimation playAnimated:YES];
+        }
+        else {
+            [reverseAnimation playAnimated:NO];
+        }
+    }
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    // TODO: Restore original view properties
-    // TODO: Remove associated object after pop animation
+    UIViewController *topViewController = [self topViewController];
+    UIViewController *secondTopViewController = [self secondTopViewController];
     
     if ([animation.tag isEqual:@"push_animation"]) {
-        UIViewController *previousTopViewController = [self secondTopViewController];
-        [previousTopViewController viewDidDisappear:YES];
+        [secondTopViewController viewDidDisappear:YES];
         
-        UIViewController *topViewController = [self topViewController];
         if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
             [self.delegate stackController:self
                      didShowViewController:topViewController 
                                   animated:YES];
         }
         
-        [topViewController viewDidAppear:NO];
+        [topViewController viewDidAppear:YES];
+    }
+    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+        [topViewController.view removeFromSuperview];
+        [topViewController viewDidDisappear:YES];
+        
+        // Remove the view controller association with its container
+        NSAssert(objc_getAssociatedObject(topViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
+        objc_setAssociatedObject(topViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+        
+        [self.contentViewControllers removeLastObject];
+        [self.addedAsSubviewFlags removeLastObject];
+        [self.viewAnimationStepDefinitions removeLastObject];
+        
+        if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+            [self.delegate stackController:self
+                    willShowViewController:secondTopViewController
+                                  animated:YES];
+        }
+        
+        [secondTopViewController viewWillAppear:YES];
+        
+        if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+            [self.delegate stackController:self
+                     didShowViewController:secondTopViewController
+                                  animated:YES];
+        }
+        
+        [secondTopViewController viewDidAppear:YES];
     }
 }
 
@@ -474,7 +528,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (void)reloadData
 {
-
+    // TODO: Implement
 }
 
 @end

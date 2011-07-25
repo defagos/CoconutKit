@@ -46,7 +46,7 @@
  * where animation takes place. In the HLSTwoViewAnimationStepDefinition objects, firstViewAnimationStep refers to
  * the view which disappears, and secondViewAnimationStep to the one which appears. The animation duration is defined
  * by the transition style.
- * Return nil for HLSTransitionStyleNone
+ * Return an empty array for HLSTransitionStyleNone, nil on failure
  */
 + (NSArray *)twoViewAnimationStepDefinitionsForTransitionStyle:(HLSTransitionStyle)transitionStyle
                                               disappearingView:(UIView *)disappearingView
