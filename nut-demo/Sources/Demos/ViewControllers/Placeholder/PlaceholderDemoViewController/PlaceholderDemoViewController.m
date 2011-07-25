@@ -33,7 +33,7 @@
 - (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)containerCustomizationButtonClicked:(id)sender;
-- (void)adjustingInsetSwitchValueChanged:(id)sender;
+- (void)stretchingContentSwitchValueChanged:(id)sender;
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender;
 
 @end
@@ -74,8 +74,8 @@
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
-    self.adjustingInsetLabel = nil;
-    self.adjustingInsetSwitch = nil;
+    self.stretchingContentLabel = nil;
+    self.stretchingContentSwitch = nil;
     self.forwardingPropertiesLabel = nil;
     self.forwardingPropertiesSwitch = nil;
 }
@@ -104,9 +104,9 @@
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
-@synthesize adjustingInsetLabel = m_adjustingInsetLabel;
+@synthesize stretchingContentLabel = m_stretchingContentLabel;
 
-@synthesize adjustingInsetSwitch = m_adjustingInsetSwitch;
+@synthesize stretchingContentSwitch = m_stretchingContentSwitch;
 
 @synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
 
@@ -174,11 +174,11 @@
                                  action:@selector(hideWithModalButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
-    self.adjustingInsetLabel.text = NSLocalizedString(@"Adjust inset", @"Adjust inset");
+    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     
-    self.adjustingInsetSwitch.on = self.adjustingInset;
-    [self.adjustingInsetSwitch addTarget:self
-                                  action:@selector(adjustingInsetSwitchValueChanged:)
+    self.stretchingContentSwitch.on = self.stretchingContent;
+    [self.stretchingContentSwitch addTarget:self
+                                  action:@selector(stretchingContentSwitchValueChanged:)
                         forControlEvents:UIControlEventValueChanged];
     
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
@@ -222,7 +222,7 @@
         // Now that the new inset is in place, make it opaque
         HLSTwoViewAnimationStepDefinition *animationStepDefinition3 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
         animationStepDefinition3.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:0.7f];
-        animationStepDefinition2.duration = 0.6f;
+        animationStepDefinition2.duration = 0.6;
         
         [self setInsetViewController:viewController withTwoViewAnimationStepDefinitions:[NSArray arrayWithObjects:animationStepDefinition1,
                                                                                          animationStepDefinition2,
@@ -274,6 +274,12 @@
     [self displayInsetViewController:landscapeOnlyViewController];
 }
 
+- (void)hideWithModalButtonClicked:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestViewController animated:YES];
+}
+
 - (void)orientationClonerButtonClicked:(id)sender
 {
     OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
@@ -289,15 +295,9 @@
     [self displayInsetViewController:containerCustomizationViewController];
 }
 
-- (void)hideWithModalButtonClicked:(id)sender
+- (void)stretchingContentSwitchValueChanged:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestViewController animated:YES];
-}
-
-- (void)adjustingInsetSwitchValueChanged:(id)sender
-{
-    self.adjustingInset = self.adjustingInsetSwitch.on;
+    self.stretchingContent = self.stretchingContentSwitch.on;
 }
 
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender

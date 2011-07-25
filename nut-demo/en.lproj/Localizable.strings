@@ -7,7 +7,6 @@
  */
 
 "Add (center - length)"="Add (center - length)";
-"Adjust inset"="Adjust inset";
 "All"="All";
 "All fields are mandatory"="All fields are mandatory";
 "All fields have been validated"="All fields have been validated";
@@ -67,6 +66,7 @@
 "State"="State";
 "Stop"="Stop";
 "Street"="Street";
+"Stretch content"="Stretch content";
 "Stretchable"="Stretchable";
 "Strips"="Strips";
 "Sub-tasks"="Sub-tasks";

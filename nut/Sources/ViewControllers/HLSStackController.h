@@ -38,7 +38,7 @@
     NSMutableArray *m_viewAnimationStepDefinitions;        // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
                                                            // describing the animation steps used when pushing views ([NSNull null]
                                                            // if none)
-    BOOL m_adjustingContent;
+    BOOL m_stretchingContent;
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -97,7 +97,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * in both directions, it will fill the entire container view). If set to NO, the content view is used as is.
  * Default value is NO.
  */
-@property (nonatomic, assign, getter=isAdjustingContent) BOOL adjustingContent;
+@property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 

@@ -95,7 +95,8 @@
     CGAffineTransform m_oldOriginalInsetViewTransform;      // Save the original properties during animation
     CGFloat m_oldOriginalInsetViewAlpha;                    // (same as above)
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
-    BOOL m_adjustingInset;                                  // Automatically adjust the inset view according to its autoresizing mask?
+    BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
+                                                            // it fills the placeholder area?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 
@@ -142,7 +143,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
  * in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used as is.
  * Default value is NO.
  */
-@property (nonatomic, assign, getter=isAdjustingInset) BOOL adjustingInset;
+@property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
 
 /**
  * If set to YES, the following properties of the inset view controller are forwarded to the placeholder view controller:

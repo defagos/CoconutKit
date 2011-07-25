@@ -22,8 +22,8 @@
     UIButton *m_hideWithModalButton;
     UILabel *m_transitionLabel;
     UIPickerView *m_transitionPickerView;
-    UILabel *m_adjustingInsetLabel;
-    UISwitch *m_adjustingInsetSwitch;
+    UILabel *m_stretchingContentLabel;
+    UISwitch *m_stretchingContentSwitch;
     UILabel *m_forwardingPropertiesLabel;
     UISwitch *m_forwardingPropertiesSwitch;
     HeavyViewController *m_heavyViewController;
@@ -40,8 +40,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *hideWithModalButton;
 @property (nonatomic, retain) IBOutlet UILabel *transitionLabel;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
-@property (nonatomic, retain) IBOutlet UILabel *adjustingInsetLabel;
-@property (nonatomic, retain) IBOutlet UISwitch *adjustingInsetSwitch;
+@property (nonatomic, retain) IBOutlet UILabel *stretchingContentLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *stretchingContentSwitch;
 @property (nonatomic, retain) IBOutlet UILabel *forwardingPropertiesLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 

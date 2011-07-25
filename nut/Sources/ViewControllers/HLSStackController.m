@@ -70,7 +70,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @synthesize viewAnimationStepDefinitions = m_viewAnimationStepDefinitions;
 
-@synthesize adjustingContent = m_adjustingContent;
+@synthesize stretchingContent = m_stretchingContent;
 
 @synthesize delegate = m_delegate;
 
@@ -101,7 +101,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    // Take all space available. Parent container view controllers should be responsible of adjusting
+    // Take all space available. Parent container view controllers should be responsible of StretchingContentg
     // the view size properly
     self.view.frame = [[UIScreen mainScreen] applicationFrame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -124,7 +124,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     
     // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
     // to the top view controller, so that when this event is received view controller dimensions are known
-    if (self.adjustingContent) {
+    if (self.stretchingContent) {
         for (UIViewController *viewController in self.contentViewControllers) {
             viewController.view.frame = self.view.bounds;
         }        
@@ -310,7 +310,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         
         // If container already visible, resize and forward events
         if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
-            if (self.adjustingContent) {
+            if (self.stretchingContent) {
                 view.frame = self.view.bounds;
             }
             

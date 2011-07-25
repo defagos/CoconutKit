@@ -204,7 +204,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             // Adjust the frame to get proper autoresizing behavior (if autoresizesSubviews has been enabled for the placeholder
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
-            if (self.adjustingInset) {
+            if (self.stretchingContent) {
                 // Cannot apply a transform here; we must adjust the frame for autoresizing behavior to occur
                 self.insetViewController.view.frame = self.placeholderView.bounds;
             }
@@ -291,7 +291,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 @synthesize placeholderView = m_placeholderView;
 
-@synthesize adjustingInset = m_adjustingInset;
+@synthesize stretchingContent = m_stretchingContent;
 
 @synthesize forwardInsetViewControllerProperties = m_forwardInsetViewControllerProperties;
 
@@ -333,7 +333,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         // Adjust the frame to get proper autoresizing behavior (if autoresizesSubviews has been enabled for the placeholder
         // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
         // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
-        if (self.adjustingInset) {
+        if (self.stretchingContent) {
             // Cannot apply a transform here; we must adjust the frame for autoresizing behavior to occur
             self.insetViewController.view.frame = self.placeholderView.bounds;
         }
