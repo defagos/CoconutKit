@@ -425,8 +425,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // we cannot swap it in the middle of the animation. Instead, we use a cross-dissolve transition so that the change
     // happens smoothly during the rotation
     if ([self.insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
-        UIViewController<HLSOrientationCloner> *clonableInsetViewController = (UIViewController<HLSOrientationCloner> *)self.insetViewController;
-        UIViewController *clonedInsetViewController = [clonableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
+        UIViewController<HLSOrientationCloner> *cloneableInsetViewController = (UIViewController<HLSOrientationCloner> *)self.insetViewController;
+        UIViewController *clonedInsetViewController = [cloneableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
         [self setInsetViewController:clonedInsetViewController 
                  withTransitionStyle:HLSTransitionStyleCrossDissolve
                             duration:duration];

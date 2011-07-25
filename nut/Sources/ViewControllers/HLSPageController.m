@@ -427,13 +427,13 @@
         
         // If the view controller can rotate by cloning, create and use the clone for the new orientation
         if ([viewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
-            UIViewController<HLSOrientationCloner> *clonableViewController = (UIViewController<HLSOrientationCloner>*)viewController;
-            UIViewController *clonedViewController = [clonableViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
+            UIViewController<HLSOrientationCloner> *cloneableViewController = (UIViewController<HLSOrientationCloner>*)viewController;
+            UIViewController *clonedViewController = [cloneableViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
             
             // Special case: If the currently displayed view controller rotates by cloning, we must generate corresponding 
             // view lifecycle notifications that views will change
-            if (clonableViewController == currentViewController) {
-                [clonableViewController viewWillDisappear:YES];
+            if (cloneableViewController == currentViewController) {
+                [cloneableViewController viewWillDisappear:YES];
                 [clonedViewController viewWillAppear:YES];
             }
             
@@ -441,14 +441,14 @@
             [self reloadData];
             
             // Special case of currently displayed view controller: views have been swapped
-            if (clonableViewController == currentViewController) {
-                [clonableViewController viewDidDisappear:YES];
+            if (cloneableViewController == currentViewController) {
+                [cloneableViewController viewDidDisappear:YES];
                 [clonedViewController viewDidAppear:YES];
             }
             
             // In the case of lazy loading, it is the responsibility of the caller to ensure that all view controllers
             // support the new orientation. Check and log if programming error
-            if (! clonableViewController) {
+            if (! cloneableViewController) {
                 HLSLoggerError(@"A view controller does not support the new orientation");
             }
             

@@ -19,7 +19,7 @@
 // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
 //       will occur, but the animation will be saved for use during pop
 
-// TODO: Access views later where possible (not in initWithRootViewController, for example)
+// TODO: Access views later where possible (not in initWithRootViewController, for example).
 
 // TODO: Factor out content stretching code. Implement in HLSPlaceholderViewController as well (see setStretchingContent)
 
@@ -240,8 +240,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    // TODO:
+        
+    // TODO: Not trivial. Since transparency can occur, we must rotate all view controllers. This means we might need
+    //       to rebuild the whole stack if some (or all!) view controllers support rotation by cloning. In HLSPlaceholderViewController,
+    //       we could reuse the setter to achieve this elegantly. Here we might be able to do the same, but this is more difficult
+    //       (and probably expensive). The easiest solution would be that all view controllers deal with their rotation
+    //       themselves, but is this possible? In such cases, containers would not need to change the view controllers
+    //       (since they stay the same), the view controller itself would update its view. But I don't think this is
+    //       feasible...
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -256,15 +262,6 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     // TODO:
-}
-
-#pragma mark Memory warnings
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-    // Code    
 }
 
 #pragma mark Pushing view controllers onto the stack
@@ -425,12 +422,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 #pragma mark Popping view controllers
 
-- (void)popViewController
+- (UIViewController *)popViewController
 {
     // Cannot pop if only one view controller remains
     if ([self.contentViewControllers count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
-        return;
+        return nil;
     }
     
     // Get the animation (if any)
@@ -461,6 +458,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             // Remove the view controller association with its container
             NSAssert(objc_getAssociatedObject(topViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
             objc_setAssociatedObject(topViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+            
+            // Keep the popped-off view controller alive a little bit longer
+            // TODO: Cleaner way?
+            [[topViewController retain] autorelease];
             
             [self.contentViewControllers removeLastObject];
             [self.addedAsSubviewFlags removeLastObject];
@@ -511,6 +512,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             [reverseAnimation playAnimated:NO];
         }
     }
+    
+    return topViewController;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -566,7 +569,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 - (void)reloadData
 {
-    // TODO: Implement
+    UIViewController *topViewController = [self topViewController];
+    if ([topViewController conformsToProtocol:@protocol(HLSReloadable)]) {
+        UIViewController<HLSReloadable> *reloadableTopViewController = (UIViewController<HLSReloadable> *)topViewController;
+        [reloadableTopViewController reloadData];
+    }
 }
 
 @end
