@@ -427,7 +427,7 @@
         
         // If the view controller can rotate by cloning, create and use the clone for the new orientation
         if ([viewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
-            UIViewController<HLSOrientationCloner> *clonableViewController = viewController;
+            UIViewController<HLSOrientationCloner> *clonableViewController = (UIViewController<HLSOrientationCloner>*)viewController;
             UIViewController *clonedViewController = [clonableViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
             
             // Special case: If the currently displayed view controller rotates by cloning, we must generate corresponding 
@@ -598,8 +598,7 @@
     
     // Reload it if it supports the HLSReloadable protocol
     if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        UIViewController<HLSReloadable> *reloadableViewController = viewController;
-        [reloadableViewController reloadData];
+        [(UIViewController<HLSReloadable>*)viewController reloadData];
     }
 }
 

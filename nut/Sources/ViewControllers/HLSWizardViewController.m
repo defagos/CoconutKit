@@ -216,8 +216,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     // Reload the current page content (if supported)
     UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
     if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        UIViewController<HLSReloadable> *reloadableViewController = viewController;
-        [reloadableViewController reloadData];
+        [(UIViewController<HLSReloadable>*)viewController reloadData];
     }
 }
 
@@ -279,8 +278,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     // Validate the current page if it implements a validation mechanism
     UIViewController *viewController = [self.viewControllers objectAtIndex:page];
     if ([viewController conformsToProtocol:@protocol(HLSValidable)]) {
-        UIViewController<HLSValidable> *validableViewController = viewController;
-        return [validableViewController validate];
+        return [(UIViewController<HLSValidable>*)viewController validate];
     }
     // Else assume it is always valid
     else {
