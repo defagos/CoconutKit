@@ -17,6 +17,7 @@ typedef enum {
     HLSTransitionStyleCoverFromTopRight,                                                        // The new view covers the old one starting from the top right corner
     HLSTransitionStyleCoverFromBottomLeft,                                                      // The new view covers the old one starting from the bottom left corner
     HLSTransitionStyleCoverFromBottomRight,                                                     // The new view covers the old one starting from the bottom right corner
+    HLSTransitionStyleFadeIn,                                                                   // The new view fades in, the old one does not change
     HLSTransitionStyleCrossDissolve,                                                            // The old view fades out as the new one fades in
     HLSTransitionStylePushFromBottom,                                                           // The new view pushes up the old one
     HLSTransitionStylePushFromTop,                                                              // The new view pushes down the old one

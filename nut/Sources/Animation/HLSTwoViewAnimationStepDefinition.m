@@ -170,6 +170,21 @@ static const UIViewAnimationCurve kTwoViewAnimationStepDefinition = UIViewAnimat
             break;
         } 
             
+        case HLSTransitionStyleFadeIn: {
+            HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
+            animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-appearingView.alpha];
+            animationStepDefinition1.duration = 0.;
+            
+            HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
+            animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:appearingView.alpha];
+            animationStepDefinition2.duration = 0.4;
+            
+            return [NSArray arrayWithObjects:animationStepDefinition1,
+                    animationStepDefinition2,
+                    nil];
+            break;
+        }
+            
         case HLSTransitionStyleCrossDissolve: {
             HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
             animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-appearingView.alpha];

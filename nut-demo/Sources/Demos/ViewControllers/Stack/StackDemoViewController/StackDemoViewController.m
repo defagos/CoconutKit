@@ -337,6 +337,11 @@
             break;
         }
             
+        case HLSTransitionStyleFadeIn: {
+            return @"HLSTransitionStyleFadeIn";
+            break;
+        }
+            
         case HLSTransitionStyleCrossDissolve: {
             return @"HLSTransitionStyleCrossDissolve";
             break;
