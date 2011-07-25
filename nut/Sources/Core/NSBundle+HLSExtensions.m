@@ -21,4 +21,14 @@ LINK_CATEGORY(NSBundle_HLSExtensions)
     return [versionNumber friendlyVersionNumber];
 }
 
++ (NSBundle *)nutBundle
+{
+    static NSBundle *nutBundle = nil;
+    if (nutBundle == nil) {
+        NSString *nutPath = [[NSBundle mainBundle] pathForResource:@"nut" ofType:@"bundle"];
+        nutBundle = [[NSBundle alloc] initWithPath:nutPath];
+    }
+    return nutBundle;
+}
+
 @end

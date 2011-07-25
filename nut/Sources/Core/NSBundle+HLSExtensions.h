@@ -15,4 +15,9 @@
  */
 + (NSString *)friendlyVersionNumber;
 
+/**
+ * Returns the "resources" bundle (images + nibs + localizations)
+ */
++ (NSBundle *)nutBundle;
+
 @end
