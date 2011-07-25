@@ -8,8 +8,6 @@
 
 #import "HLSViewController.h"
 
-#import <MessageUI/MessageUI.h>
-
 @interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
 
 - (id)initWithRequest:(NSURLRequest *)request;

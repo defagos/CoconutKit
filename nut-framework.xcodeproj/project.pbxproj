@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DA43718F13DDA49000C6A5C0 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C228D13DD66780008B31D /* HLSTaskOperation+Protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA43719013DDA4AB00C6A5C0 /* HLSPageController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C22AB13DD66780008B31D /* HLSPageController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA43719F13DDA90100C6A5C0 /* nut.h in Headers */ = {isa = PBXBuildFile; fileRef = DA43719E13DDA90100C6A5C0 /* nut.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C220E13DD662B0008B31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7C220D13DD662B0008B31D /* Foundation.framework */; };
 		DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223213DD66780008B31D /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E113DD66780008B31D /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223313DD66780008B31D /* HLSAnimation.m */; };
@@ -176,6 +177,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA43719E13DDA90100C6A5C0 /* nut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nut.h; sourceTree = "<group>"; };
 		DA7C220A13DD662B0008B31D /* nut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = nut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7C220D13DD662B0008B31D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA7C222013DD66780008B31D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		DA7C223013DD66780008B31D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DA43719E13DDA90100C6A5C0 /* nut.h */,
 				DA7C223113DD66780008B31D /* Animation */,
 				DA7C223C13DD66780008B31D /* Core */,
 				DA7C227313DD66780008B31D /* CoreData */,
@@ -670,6 +673,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA43719F13DDA90100C6A5C0 /* nut.h in Headers */,
 				DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */,
 				DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */,
 				DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */,
