@@ -464,27 +464,6 @@
     self.pageViewControllers = orientedViewControllers;
 }
 
-- (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // Forward to the currently displayed view controller first    
-    UIViewController *currentViewController = [self viewControllerObjectAtIndex:self.currentPage];
-    [currentViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    // Forward to the currently displayed view controller first
-    UIViewController *currentViewController = [self viewControllerObjectAtIndex:self.currentPage];
-    [currentViewController didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];    
-}
-
-- (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // Forward to the currently displayed view controller first
-    UIViewController *currentViewController = [self viewControllerObjectAtIndex:self.currentPage];
-    [currentViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     // Forward to the currently displayed view controller first
