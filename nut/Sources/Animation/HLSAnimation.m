@@ -26,7 +26,6 @@
 
 - (NSArray *)reverseAnimationSteps;
 
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
@@ -42,6 +41,7 @@
 
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
 {
+    NSAssert(animationStep != nil, @"Animation step cannot be nil");
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObject:animationStep]];
 }
 
@@ -107,14 +107,11 @@
     
     m_animated = animated;
     
-    // This will be done in the animationStepWillStart:context: if animated
-    if (! animated) {
-        if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-            [self.delegate animationWillStart:self animated:m_animated];
-        }
-        
-        self.running = YES;
+    if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+        [self.delegate animationWillStart:self animated:m_animated];
     }
+    
+    self.running = YES;
     
     // Begin with the first step
     [self playNextStepAnimated:animated];
@@ -132,7 +129,6 @@
         
         // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context: (though appearing
         //         in the UIKit UIView header documentation) are reserved by Apple. Using them might lead to app rejection!
-        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];        
     }
@@ -278,19 +274,6 @@
 }
 
 #pragma mark Animation callbacks
-
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
-{
-    if (m_firstStep) {
-        if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-            [self.delegate animationWillStart:self animated:m_animated];
-        }
-        
-        self.running = YES;
-        
-        m_firstStep = NO;
-    }
-}
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {

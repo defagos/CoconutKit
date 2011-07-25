@@ -54,7 +54,8 @@
 }
 
 /**
- * Convenience constructor for creating an animation from HLSAnimationStep objects
+ * Convenience constructor for creating an animation from HLSAnimationStep objects. The animationSteps array might
+ * be nil (in which case the animationWillStart: and animationDidStop: events still will be fired)
  */
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
