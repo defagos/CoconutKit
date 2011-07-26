@@ -168,14 +168,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
         }        
     }
     
-    // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
-    // to the top view controller, so that when this event is received view controller dimensions are known
-    if (self.stretchingContent) {
-        for (UIViewController *viewController in self.viewControllerStack) {
-            viewController.view.frame = self.view.bounds;
-        }        
-    }
-    
     // Forward events for the top view controller
     UIViewController *topViewController = [self topViewController];
     if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
@@ -328,11 +320,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         // The view controllers involved in the animation
         UIViewController *topViewController = [self topViewController];
         
-        // Adjust size
-        if (self.stretchingContent) {
-            topViewController.view.frame = self.view.bounds;
-        }
-        
         // Install the view
         [self pushViewForViewController:topViewController];        
     }    
@@ -424,6 +411,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Now that the view has not been unnecessarily created, save its original frame
     [self.originalViewFrameStack replaceObjectAtIndex:index
                                            withObject:[NSValue valueWithCGRect:viewController.view.frame]];
+    
+    // Adjust size if enabled
+    if (self.stretchingContent) {
+        viewController.view.frame = self.view.bounds;
+    }
     
     // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
     // expect it to occur animated, even if instantaneously
