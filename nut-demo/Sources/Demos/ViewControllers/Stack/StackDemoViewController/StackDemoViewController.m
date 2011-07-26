@@ -43,8 +43,21 @@
     if ((self = [super init])) {
         self.title = @"HLSStackController";
         
-        UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        self.insetViewController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
+        HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        
+        // Push other view controllers before display. Yep, this is possible!
+        UIViewController *firstViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleCoverFromTopRight];
+// TODO: Does not work correctly        [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
+        
+        UIViewController *secondViewController = [[[StretchableViewController alloc] init] autorelease];
+        [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
+        
+        UIViewController *thirdViewController = [[[StretchableViewController alloc] init] autorelease];
+        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        
+        self.insetViewController = stackController;
         self.stretchingContent = YES;
     }
     return self;

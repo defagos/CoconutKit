@@ -50,13 +50,15 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 
 /**
- * Push a view controller onto the stack without animation
+ * Push a view controller onto the stack without animation.
+ * This method can also be called before the stack controller is displayed
  */
 - (void)pushViewController:(UIViewController *)viewController;
 
 /**
  * Push a view controller onto the stack using one of the built-in transition styles. The transition duration is set by 
  * the animation itself
+ * This method can also be called before the stack controller is displayed
  */
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle;
@@ -64,6 +66,7 @@
 /**
  * Same as pushViewController:withTransitionStyle:, but the transition duration can be overridden (the duration will be 
  * evenly distributed on the animation steps composing the animation)
+ * This method can also be called before the stack controller is displayed
  */
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
@@ -71,7 +74,8 @@
 
 /**
  * Push a view controller onto the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = previous top view controller's view, second view = pushed view controller's view).
+ * objects (first view = previous top view controller's view, second view = pushed view controller's view)
+ * This method can also be called before the stack controller is displayed
  */
 - (void)pushViewController:(UIViewController *)viewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
