@@ -15,6 +15,10 @@
 #import "HLSOrientationCloner.h"
 #import "HLSTransform.h"
 
+// TODO: Implement stretching when property is updated as well (see setStretchingContent in HLSStackController)
+
+// TODO: As in HLSStackController, call some unregister method when deallocating (must cleanup associated objects)
+
 @interface HLSPlaceholderViewController ()
 
 @property (nonatomic, retain) UIViewController *oldInsetViewController;

@@ -19,19 +19,14 @@
 // TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
 //       will occur, but the animation will be saved for use during pop. Test!
 
-// TODO: Access views later where possible (not in initWithRootViewController, for example).
-
-// TODO: Factor out content stretching code. Implement in HLSPlaceholderViewController as well (see setStretchingContent)
-
-// TODO: Call unregister when deallocating!! Do something similar for HLSPlaceholderViewController! (we must clean
-//       up associated objects!)
-
 // TODO: Chercher tous les .view, en particulier self.view. S'assurer qu'ils sont appelés au dernier moment
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
 
+// TODO: Could be replaced by a dictionary pointing at an object encapsulating this information. Lookup would be better.
+//       But this should not be a bottleneck
 @property (nonatomic, retain) NSMutableArray *viewControllerStack;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
 @property (nonatomic, retain) NSMutableArray *twoViewAnimationStepDefinitionsStack;
@@ -45,7 +40,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (void)addViewForViewController:(UIViewController *)viewController;
 - (void)removeViewForViewController:(UIViewController *)viewController;
-- (BOOL)isViewAddedForViewController:(UIViewController *)viewController;
+
+- (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
+- (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController;
+- (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
 
 - (HLSAnimation *)pushAnimationForTwoViewAnimationStepDefinitions:(NSArray *)animationStepDefinitions;
 
@@ -76,6 +74,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (void)dealloc
 {
+    // Must cleanup view controller registrations properly, in particular associated objects
+    for (UIViewController *viewController in self.viewControllerStack) {
+        [self unregisterViewController:viewController];
+    }
+    
     self.viewControllerStack = nil;
     self.addedAsSubviewFlagStack = nil;
     self.twoViewAnimationStepDefinitionsStack = nil;
@@ -105,18 +108,17 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     
     m_stretchingContent = stretchingContent;
     
-    NSUInteger i = 0;
-    for (UIViewController *viewController in self.viewControllerStack) {
-        BOOL addedAsSubview = [[self.addedAsSubviewFlagStack objectAtIndex:i] boolValue];
-        if (addedAsSubview) {
-            if (m_stretchingContent) {
-                viewController.view.frame = self.view.bounds;
+    if ([self isViewVisible]) {
+        for (UIViewController *viewController in self.viewControllerStack) {
+            if ([self addedAsSubviewFlagForViewController:viewController]) {
+                if (m_stretchingContent) {
+                    viewController.view.frame = self.view.bounds;
+                }
+                else {
+                    viewController.view.frame = [self originalViewFrameForViewController:viewController];
+                }            
             }
-            else {
-                viewController.view.frame = [[self.originalViewFrameStack objectAtIndex:i] CGRectValue];
-            }
-        }
-        ++i;
+        }        
     }
 }
 
@@ -161,7 +163,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     
     // Add those view controller views which have not been added yet
     for (UIViewController *viewController in self.viewControllerStack) {
-        if (! [self isViewAddedForViewController:viewController]) {
+        if (! [self addedAsSubviewFlagForViewController:viewController]) {
             [self addViewForViewController:viewController];
         }        
     }
@@ -215,15 +217,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 {
     [super viewDidUnload];
     
-    NSUInteger i = 0;
     for (UIViewController *viewController in self.viewControllerStack) {
-        BOOL addedAsSubview = [[self.addedAsSubviewFlagStack objectAtIndex:i] boolValue];
-        if (addedAsSubview) {
+        if ([self addedAsSubviewFlagForViewController:viewController]) {
+            [self removeViewForViewController:viewController];
             viewController.view = nil;
             [viewController viewDidUnload];
-            [self.addedAsSubviewFlagStack replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
         }
-        ++i;
     }
 }
 
@@ -360,9 +359,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // If the view is loaded, the popped view controller will be unregistered at the end of the animation
+    UIViewController *topViewController = [self topViewController];
     if ([self isViewLoaded]) {
         // Pop animation = reverse push animation
-        NSArray *twoViewAnimationStepDefinitions = [self.twoViewAnimationStepDefinitionsStack lastObject];
+        NSArray *twoViewAnimationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:topViewController];
         HLSAnimation *popAnimation = [[self pushAnimationForTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
@@ -373,7 +373,6 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     // If the view is not loaded, we can unregister the popped view controller on the spot
     else {
-        UIViewController *topViewController = [self topViewController];
         [self unregisterViewController:topViewController];
     }
 }
@@ -453,7 +452,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
                                            withObject:[NSNull null]];
 }
 
-- (BOOL)isViewAddedForViewController:(UIViewController *)viewController
+- (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
     if (index == NSNotFound) {
@@ -462,6 +461,28 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     return [[self.addedAsSubviewFlagStack objectAtIndex:index] boolValue];
+}
+
+- (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return nil;
+    }
+
+    return [self.twoViewAnimationStepDefinitionsStack objectAtIndex:index];
+}
+
+- (CGRect)originalViewFrameForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return CGRectZero;
+    }
+
+    return [[self.originalViewFrameStack objectAtIndex:index] CGRectValue];
 }
 
 #pragma mark Animation
