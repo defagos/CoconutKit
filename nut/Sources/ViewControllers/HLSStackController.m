@@ -70,9 +70,12 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (void)dealloc
 {
-    // Must cleanup view controller registrations properly, in particular associated objects
+    // Must cleanup view controller registrations properly (cannot call unregisterViewController:, would mutate arrays
+    // while iterating)
     for (UIViewController *viewController in self.viewControllerStack) {
-        [self unregisterViewController:viewController];
+        // Remove the view controller association with its container
+        NSAssert(objc_getAssociatedObject(viewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
+        objc_setAssociatedObject(viewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     }
     
     self.viewControllerStack = nil;

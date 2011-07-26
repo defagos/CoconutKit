@@ -48,13 +48,13 @@
         stackController.stretchingContent = YES;
         
         // Push other view controllers before display. Yep, this is possible!
-        UIViewController *firstViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
-        UIViewController *secondViewController = [[[StretchableViewController alloc] init] autorelease];
+        UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
-        UIViewController *thirdViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
-        UIViewController *fourthViewController = [[[StretchableViewController alloc] init] autorelease];
+        UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
         
         self.insetViewController = stackController;
