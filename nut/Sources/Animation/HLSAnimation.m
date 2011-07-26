@@ -41,8 +41,14 @@
 
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
 {
-    NSAssert(animationStep != nil, @"Animation step cannot be nil");
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObject:animationStep]];
+    NSArray *animationSteps = nil;
+    if (animationSteps) {
+        animationSteps = [NSArray arrayWithObject:animationStep];
+    }
+    else {
+        animationSteps = [NSArray array];
+    }
+    return [HLSAnimation animationWithAnimationSteps:animationSteps];
 }
 
 #pragma mark Object creation and destruction
@@ -51,7 +57,12 @@
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
     if ((self = [super init])) {
-        self.animationSteps = animationSteps;
+        if (! animationSteps) {
+            self.animationSteps = [NSArray array];
+        }
+        else {
+            self.animationSteps = animationSteps;
+        }
     }
     return self;
 }

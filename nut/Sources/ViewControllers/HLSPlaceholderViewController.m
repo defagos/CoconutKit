@@ -130,7 +130,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // Check that the new inset can be displayed for the current orientation
-    if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+    if ([self isViewVisible]) {
         if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
             HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
             return;
@@ -146,7 +146,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Remove any existing inset first
     if (m_insetViewAddedAsSubview) {
         // If the container is visible, deal with animation and lifecycle events for the old inset view
-        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {                        
+        if ([self isViewVisible]) {
             // Animated
             if ([twoViewAnimationStepDefinitions count] != 0) {
                 // Forward disappearance events
@@ -187,7 +187,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     m_insetViewController = [insetViewController retain];
     
     // Add the new inset if the placeholder is available
-    if (m_insetViewController && [self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewDidLoad && [self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidUnload) {
+    if (m_insetViewController && [self isViewLoaded]) {
         // Instantiate the view lazily (if it has not been already been instantiated, which should be the case in most
         // situations). This will trigger the associated viewDidLoad
         UIView *insetView = m_insetViewController.view;
@@ -200,7 +200,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         m_originalInsetViewAlpha = insetView.alpha;
         
         // If already visible, forward appearance events (this event here correctly occurs after viewDidLoad)
-        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        if ([self isViewVisible]) {
             // Adjust the frame to get proper autoresizing behavior (if autoresizesSubviews has been enabled for the placeholder
             // view). This is carefully made before notifying the inset view controller that it will appear, so that clients can
             // safely rely on the fact that dimensions of view controller's views have been set before viewWillAppear gets called
@@ -278,7 +278,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         animation.delegate = self;
         
         // Animation occurs if the container is visible
-        if ([self lifeCyclePhase] == HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        if ([self isViewVisible]) {
             [animation playAnimated:YES];
         }
         else {

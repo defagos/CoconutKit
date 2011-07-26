@@ -78,6 +78,16 @@
     return m_lifeCyclePhase;
 }
 
+- (BOOL)isViewLoaded
+{
+    return m_lifeCyclePhase >= HLSViewControllerLifeCyclePhaseViewDidLoad && m_lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidUnload;
+}
+
+- (BOOL)isViewVisible
+{
+    return m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

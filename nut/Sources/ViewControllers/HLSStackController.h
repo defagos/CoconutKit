@@ -32,13 +32,13 @@
  */
 @interface HLSStackController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
 @private
-    NSMutableArray *m_contentViewControllers;              // contains UIViewController objects. The last one is the top one
-    NSMutableArray *m_addedAsSubviewFlags;                 // contains NSNumber (BOOL) objects flagging whether a view controller's 
-                                                           // view has been added as subview. Same order as m_viewControllers
-    NSMutableArray *m_viewAnimationStepDefinitions;        // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
-                                                           // describing the animation steps used when pushing views ([NSNull null]
-                                                           // if none)
-    NSMutableArray *m_originalViewFrames;                  // original frames of the view controller's views
+    NSMutableArray *m_viewControllerStack;                      // contains UIViewController objects. The last one is the top one
+    NSMutableArray *m_addedAsSubviewFlagStack;                  // contains NSNumber (BOOL) objects flagging whether a view controller's 
+                                                                // view has been added as subview. Same order as m_viewControllers
+    NSMutableArray *m_twoViewAnimationStepDefinitionsStack;     // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
+                                                                // describing the animation steps used when pushing views ([NSNull null]
+                                                                // if none)
+    NSMutableArray *m_originalViewFrameStack;                   // original frames of the view controller's views
     BOOL m_stretchingContent;
     id<HLSStackControllerDelegate> m_delegate;
 }
@@ -79,9 +79,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 /**
  * Remove the top view controller from the stack. The same animation as when it was pushed onto the stack will be played.
  * The root view controller cannot be popped
- * Return the view controller which has been popped, or nil if none
  */
-- (UIViewController *)popViewController;
+- (void)popViewController;
 
 /**
  * Return the view controller currently on top
