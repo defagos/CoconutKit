@@ -43,6 +43,10 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (void)unregisterViewController:(UIViewController *)viewController;
 
+- (void)addViewForViewController:(UIViewController *)viewController;
+- (void)removeViewForViewController:(UIViewController *)viewController;
+- (BOOL)isViewAddedForViewController:(UIViewController *)viewController;
+
 - (HLSAnimation *)pushAnimationForTwoViewAnimationStepDefinitions:(NSArray *)animationStepDefinitions;
 
 @end
@@ -156,14 +160,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     [super viewWillAppear:animated];
     
     // Add those view controller views which have not been added yet
-    NSUInteger i = 0;
     for (UIViewController *viewController in self.viewControllerStack) {
-        BOOL addedAsSubview = [[self.addedAsSubviewFlagStack objectAtIndex:i] boolValue];
-        if (! addedAsSubview) {
-            [self.view addSubview:viewController.view];
-        }
-        [self.addedAsSubviewFlagStack replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
-        ++i;
+        if (! [self isViewAddedForViewController:viewController]) {
+            [self addViewForViewController:viewController];
+        }        
     }
     
     // Adjust frames to get proper autoresizing behavior. Made before the viewWillAppear: event is forwarded
@@ -335,10 +335,8 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         }
         
         // Install the view
-        [self.view addSubview:topViewController.view];
-        [self.addedAsSubviewFlagStack replaceObjectAtIndex:[self.addedAsSubviewFlagStack count] - 1
-                                                withObject:[NSNumber numberWithBool:YES]];
-                
+        [self addViewForViewController:topViewController];
+        
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
         HLSAnimation *pushAnimation = [self pushAnimationForTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];
@@ -398,7 +396,9 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     else {
         [self.twoViewAnimationStepDefinitionsStack addObject:[NSArray array]];
     }
-    [self.originalViewFrameStack addObject:[NSValue valueWithCGRect:viewController.view.frame]];
+    // Put a placeholder. Will be filled when displaying the view (we do not want to access the view property too early since this triggers
+    // lazy view creation)
+    [self.originalViewFrameStack addObject:[NSNull null]];
 }
 
 - (void)unregisterViewController:(UIViewController *)viewController
@@ -417,6 +417,51 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     [self.addedAsSubviewFlagStack removeObjectAtIndex:index];
     [self.twoViewAnimationStepDefinitionsStack removeObjectAtIndex:index];
     [self.originalViewFrameStack removeObjectAtIndex:index];
+}
+
+- (void)addViewForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return;
+    }
+    
+    // This triggers lazy view cration
+    [self.view addSubview:viewController.view];
+    
+    [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
+                                            withObject:[NSNumber numberWithBool:YES]];
+    
+    // Now that the view has not been unnecessarily created, save its original frame
+    [self.originalViewFrameStack replaceObjectAtIndex:index
+                                           withObject:[NSValue valueWithCGRect:viewController.view.frame]];
+}
+
+- (void)removeViewForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return;
+    }
+
+    [viewController.view removeFromSuperview];
+    [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
+                                            withObject:[NSNumber numberWithBool:NO]];
+    [self.originalViewFrameStack replaceObjectAtIndex:index
+                                           withObject:[NSNull null]];
+}
+
+- (BOOL)isViewAddedForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return NO;
+    }
+    
+    return [[self.addedAsSubviewFlagStack objectAtIndex:index] boolValue];
 }
 
 #pragma mark Animation
@@ -491,7 +536,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             disappearingViewController = [self topViewController];
             
             // Remove the popped view controller's view
-            [disappearingViewController.view removeFromSuperview];
+            [self removeViewForViewController:disappearingViewController];
         }
         else {
             HLSLoggerWarn(@"Other animation; nothing to do");

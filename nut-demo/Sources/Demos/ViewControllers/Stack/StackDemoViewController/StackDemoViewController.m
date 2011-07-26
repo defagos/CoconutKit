@@ -54,7 +54,7 @@
         UIViewController *secondViewController = [[[StretchableViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
         
-        UIViewController *thirdViewController = [[[StretchableViewController alloc] init] autorelease];
+        UIViewController *thirdViewController = [[[FixedSizeViewController alloc] init] autorelease];
         [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
         
         self.insetViewController = stackController;
