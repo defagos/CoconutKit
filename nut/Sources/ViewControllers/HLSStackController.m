@@ -38,14 +38,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (void)unregisterViewController:(UIViewController *)viewController;
 
-- (void)addViewForViewController:(UIViewController *)viewController;
+- (void)pushViewForViewController:(UIViewController *)viewController;
 - (void)removeViewForViewController:(UIViewController *)viewController;
 
 - (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
 - (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController;
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
 
-- (HLSAnimation *)pushAnimationForTwoViewAnimationStepDefinitions:(NSArray *)animationStepDefinitions;
+- (HLSAnimation *)pushAnimation;
 
 @end
 
@@ -164,7 +164,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     // Add those view controller views which have not been added yet
     for (UIViewController *viewController in self.viewControllerStack) {
         if (! [self addedAsSubviewFlagForViewController:viewController]) {
-            [self addViewForViewController:viewController];
+            [self pushViewForViewController:viewController];
         }        
     }
     
@@ -334,17 +334,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         }
         
         // Install the view
-        [self addViewForViewController:topViewController];
-        
-        // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-        // expect it to occur animated, even if instantaneously
-        HLSAnimation *pushAnimation = [self pushAnimationForTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];
-        if ([self isViewVisible]) {
-            [pushAnimation playAnimated:YES];
-        }
-        else {
-            [pushAnimation playAnimated:NO];
-        }
+        [self pushViewForViewController:topViewController];        
     }    
 }
 
@@ -362,8 +352,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     UIViewController *topViewController = [self topViewController];
     if ([self isViewLoaded]) {
         // Pop animation = reverse push animation
-        NSArray *twoViewAnimationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:topViewController];
-        HLSAnimation *popAnimation = [[self pushAnimationForTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions] reverseAnimation];
+        HLSAnimation *popAnimation = [[self pushAnimation] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
         }
@@ -418,7 +407,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     [self.originalViewFrameStack removeObjectAtIndex:index];
 }
 
-- (void)addViewForViewController:(UIViewController *)viewController
+- (void)pushViewForViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
     if (index == NSNotFound) {
@@ -435,6 +424,16 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Now that the view has not been unnecessarily created, save its original frame
     [self.originalViewFrameStack replaceObjectAtIndex:index
                                            withObject:[NSValue valueWithCGRect:viewController.view.frame]];
+    
+    // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
+    // expect it to occur animated, even if instantaneously
+    HLSAnimation *pushAnimation = [self pushAnimation];
+    if ([self isViewVisible]) {
+        [pushAnimation playAnimated:YES];
+    }
+    else {
+        [pushAnimation playAnimated:NO];
+    }
 }
 
 - (void)removeViewForViewController:(UIViewController *)viewController
@@ -487,13 +486,14 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 #pragma mark Animation
 
-- (HLSAnimation *)pushAnimationForTwoViewAnimationStepDefinitions:(NSArray *)animationStepDefinitions
+- (HLSAnimation *)pushAnimation
 
 {
     UIViewController *topViewController = [self topViewController];
     UIViewController *secondTopViewController = [self secondTopViewController];
     
     NSMutableArray *animationSteps = [NSMutableArray array];
+    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:topViewController];
     for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
         HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:secondTopViewController.view 
                                                                                    secondView:topViewController.view];
