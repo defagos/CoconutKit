@@ -87,6 +87,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (void)popViewController;
 
 /**
+ * Return the view controller at the bottom
+ */
+- (UIViewController *)rootViewController;
+
+/**
  * Return the view controller currently on top
  */
 - (UIViewController *)topViewController;

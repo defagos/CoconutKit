@@ -12,14 +12,10 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
+#import "NSArray+HLSExtensions.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
 //       user interaction with the views below in the stack.
-
-// TODO: Must be able to push view controllers before the view controller is displayed. In such cases, no animation
-//       will occur, but the animation will be saved for use during pop. Test!
-
-// TODO: Chercher tous les .view, en particulier self.view. S'assurer qu'ils sont appelés au dernier moment
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -123,6 +119,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 }
 
 @synthesize delegate = m_delegate;
+
+- (UIViewController *)rootViewController
+{
+    return [self.viewControllerStack firstObject];
+}
 
 - (UIViewController *)topViewController
 {
@@ -418,14 +419,16 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-    // expect it to occur animated, even if instantaneously
-    HLSAnimation *pushAnimation = [self pushAnimationForViewController:viewController];
-    if ([self isViewVisible]) {
-        [pushAnimation playAnimated:YES];
-    }
-    else {
-        [pushAnimation playAnimated:NO];
-    }
+    // expect it to occur animated, even if instantaneously. The root view controller is never pushed
+    if (index != 0) {
+        HLSAnimation *pushAnimation = [self pushAnimationForViewController:viewController];
+        if ([self isViewVisible]) {
+            [pushAnimation playAnimated:YES];
+        }
+        else {
+            [pushAnimation playAnimated:NO];
+        }        
+    }    
 }
 
 - (void)removeViewForViewController:(UIViewController *)viewController
