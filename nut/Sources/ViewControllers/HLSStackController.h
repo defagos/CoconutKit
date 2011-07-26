@@ -9,7 +9,6 @@
 #import "HLSAnimation.h"
 #import "HLSReloadable.h"
 #import "HLSTransitionStyle.h"
-#import "HLSTwoViewAnimationStepDefinition.h"
 #import "HLSViewController.h"
 
 // Forward declarations
@@ -71,14 +70,6 @@
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration;
-
-/**
- * Push a view controller onto the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = previous top view controller's view, second view = pushed view controller's view)
- * This method can also be called before the stack controller is displayed
- */
-- (void)pushViewController:(UIViewController *)viewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 /**
  * Remove the top view controller from the stack. The same animation as when it was pushed onto the stack will be played.

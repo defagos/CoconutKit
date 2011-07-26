@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
+#import "HLSTwoViewAnimationStepDefinition.h"
 #import "NSArray+HLSExtensions.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
@@ -29,6 +30,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @property (nonatomic, retain) NSMutableArray *originalViewFrameStack;
 
 - (UIViewController *)secondTopViewController;
+
+/**
+ * Push a view controller onto the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
+ * objects (first view = previous top view controller's view, second view = pushed view controller's view)
+ * This method can also be called before the stack controller is displayed
+ */
+- (void)pushViewController:(UIViewController *)viewController
+withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (void)registerViewController:(UIViewController *)viewController
 withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;

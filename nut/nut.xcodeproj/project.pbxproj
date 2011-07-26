@@ -119,8 +119,6 @@
 		6FAF8E0F13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF8E0D13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m */; };
 		6FBDA2CE1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2CC1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h */; };
 		6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */; };
-		6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */; };
-		6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */; };
 		6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */; };
 		6FBDA9EC130522DE004B9617 /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */; };
 		6FBDA9ED130522DE004B9617 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */; };
@@ -281,8 +279,6 @@
 		6FAF8E0D13C4770F0065F909 /* NSDateFormatter+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FBDA2CC1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTwoViewAnimationStepDefinition.h; sourceTree = "<group>"; };
 		6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTwoViewAnimationStepDefinition.m; sourceTree = "<group>"; };
-		6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
-		6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSOneViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FBDA82713040FC4004B9617 /* HLSStandardWidgetConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardWidgetConstants.m; sourceTree = "<group>"; };
 		6FBDA9EA130522DE004B9617 /* NSObject+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FBDA9EB130522DE004B9617 /* NSObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensions.m"; sourceTree = "<group>"; };
@@ -483,8 +479,6 @@
 				6F3D04051301D901009ACE4D /* HLSAnimation.m */,
 				6F8D0909123F51DF00FCF2AF /* HLSAnimationStep.h */,
 				6F8D090A123F51DF00FCF2AF /* HLSAnimationStep.m */,
-				6FBDA2D61302E313004B9617 /* HLSOneViewAnimationStepDefinition.h */,
-				6FBDA2D71302E313004B9617 /* HLSOneViewAnimationStepDefinition.m */,
 				6FBDA2CC1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h */,
 				6FBDA2CD1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m */,
 				6F3D03CD1301C7D5009ACE4D /* HLSViewAnimationStep.h */,
@@ -721,7 +715,6 @@
 				6F3D03CF1301C7D5009ACE4D /* HLSViewAnimationStep.h in Headers */,
 				6F3D04061301D901009ACE4D /* HLSAnimation.h in Headers */,
 				6FBDA2CE1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.h in Headers */,
-				6FBDA2D81302E313004B9617 /* HLSOneViewAnimationStepDefinition.h in Headers */,
 				6FBDA9EC130522DE004B9617 /* NSObject+HLSExtensions.h in Headers */,
 				6FBDAA1313052D09004B9617 /* HLSValue1TableViewCell.h in Headers */,
 				6FBDAA1713052D18004B9617 /* HLSValue2TableViewCell.h in Headers */,
@@ -855,7 +848,6 @@
 				6F3D03D01301C7D5009ACE4D /* HLSViewAnimationStep.m in Sources */,
 				6F3D04071301D901009ACE4D /* HLSAnimation.m in Sources */,
 				6FBDA2CF1302DA57004B9617 /* HLSTwoViewAnimationStepDefinition.m in Sources */,
-				6FBDA2D91302E313004B9617 /* HLSOneViewAnimationStepDefinition.m in Sources */,
 				6FBDA82813040FC4004B9617 /* HLSStandardWidgetConstants.m in Sources */,
 				6FBDA9ED130522DE004B9617 /* NSObject+HLSExtensions.m in Sources */,
 				6FBDAA1413052D09004B9617 /* HLSValue1TableViewCell.m in Sources */,

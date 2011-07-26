@@ -31,7 +31,6 @@
 		6FAF210313A7AA65009A5645 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF210213A7AA65009A5645 /* CursorDemoViewController.xib */; };
 		6FC900AC13D4649F00834900 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9000F13D4649F00834900 /* HLSAnimation.m */; };
 		6FC900AD13D4649F00834900 /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9001113D4649F00834900 /* HLSAnimationStep.m */; };
-		6FC900AE13D4649F00834900 /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9001313D4649F00834900 /* HLSOneViewAnimationStepDefinition.m */; };
 		6FC900AF13D4649F00834900 /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9001513D4649F00834900 /* HLSTwoViewAnimationStepDefinition.m */; };
 		6FC900B013D4649F00834900 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9001713D4649F00834900 /* HLSViewAnimationStep.m */; };
 		6FC900B113D4649F00834900 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9001A13D4649F00834900 /* HLSAssert.m */; };
@@ -205,8 +204,6 @@
 		6FC9000F13D4649F00834900 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FC9001013D4649F00834900 /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
 		6FC9001113D4649F00834900 /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
-		6FC9001213D4649F00834900 /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
-		6FC9001313D4649F00834900 /* HLSOneViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSOneViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FC9001413D4649F00834900 /* HLSTwoViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTwoViewAnimationStepDefinition.h; sourceTree = "<group>"; };
 		6FC9001513D4649F00834900 /* HLSTwoViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTwoViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		6FC9001613D4649F00834900 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -608,8 +605,6 @@
 				6FC9000F13D4649F00834900 /* HLSAnimation.m */,
 				6FC9001013D4649F00834900 /* HLSAnimationStep.h */,
 				6FC9001113D4649F00834900 /* HLSAnimationStep.m */,
-				6FC9001213D4649F00834900 /* HLSOneViewAnimationStepDefinition.h */,
-				6FC9001313D4649F00834900 /* HLSOneViewAnimationStepDefinition.m */,
 				6FC9001413D4649F00834900 /* HLSTwoViewAnimationStepDefinition.h */,
 				6FC9001513D4649F00834900 /* HLSTwoViewAnimationStepDefinition.m */,
 				6FC9001613D4649F00834900 /* HLSViewAnimationStep.h */,
@@ -1502,7 +1497,6 @@
 				6FA6C21613B337C80039622A /* StripsDemoViewController.m in Sources */,
 				6FC900AC13D4649F00834900 /* HLSAnimation.m in Sources */,
 				6FC900AD13D4649F00834900 /* HLSAnimationStep.m in Sources */,
-				6FC900AE13D4649F00834900 /* HLSOneViewAnimationStepDefinition.m in Sources */,
 				6FC900AF13D4649F00834900 /* HLSTwoViewAnimationStepDefinition.m in Sources */,
 				6FC900B013D4649F00834900 /* HLSViewAnimationStep.m in Sources */,
 				6FC900B113D4649F00834900 /* HLSAssert.m in Sources */,

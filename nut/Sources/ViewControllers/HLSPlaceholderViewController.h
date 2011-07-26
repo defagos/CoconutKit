@@ -11,7 +11,6 @@
 #import "HLSAnimation.h"
 #import "HLSAnimationStep.h"
 #import "HLSTransitionStyle.h"
-#import "HLSTwoViewAnimationStepDefinition.h"
 #import "HLSViewController.h"
 
 // Forward declarations
@@ -34,10 +33,9 @@
  * view).
  *
  * The inset view controller can be swapped with another one at any time. Several built-in transition styles are
- * available when swapping insets, or you can provide your own animation definition. If the transition is animated, 
- * all inset view controller viewWill / viewDid lifecycle methods will receive animated = YES, even if one of the views 
- * is not moved. This is not an error (what matters is whether the transition is animated or not, not if individual 
- * views are).
+ * available when swapping insets. If the transition is animated, all inset view controller viewWill / viewDid lifecycle 
+ * methods will receive animated = YES, even if one of the views is not moved. This is not an error (what matters is 
+ * whether the transition is animated or not, not if individual views are).
  *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
@@ -53,7 +51,7 @@
  *   - didRotateFromInterfaceOrientation:
  *   - viewAnimation...
  * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
- * in subclasses (it will be ignored, see UIViewController documentation).
+ * in subclasses (it will be ignored, see UIViewController documentation), and it is deprecated starting with iOS 5.
  *
  * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rect is known
  * when viewWillAppear: gets called for it, not earlier. If you need to insert code requiring to know the final view dimensions
@@ -120,16 +118,6 @@
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
-
-/**
- * Set the view controller to display as inset. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = old inset view, second view = new inset view). The new inset view is animated on top of the old one
- * Remark: If you want to customize the inset mutator in subclasses, you only have to override this method (be sure to call the super
- *         method in your implementation, though). Other inset mutators are implemented in terms of this method and do not need to
- *         be overridden as well.
- */
-- (void)setInsetViewController:(UIViewController *)insetViewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 /**
  * The view where inset view controller's view must be drawn. Must either created programmatically in a subclass' loadView method 

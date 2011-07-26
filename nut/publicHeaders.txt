@@ -12,7 +12,6 @@ HLSKeyboardInformation.h
 HLSLogger.h
 HLSModelManager.h
 HLSNotifications.h
-HLSOneViewAnimationStepDefinition.h
 HLSOrientationCloner.h
 HLSPageController.h
 HLSPlaceholderViewController.h
@@ -48,7 +47,6 @@ HLSTaskOperation+Protected.h
 HLSTextField.h
 HLSTransform.h
 HLSTransitionStyle.h
-HLSTwoViewAnimationStepDefinition.h
 HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h

@@ -195,32 +195,6 @@
     if (pickedIndex < HLSTransitionStyleEnumSize) {
         [stackController pushViewController:viewController withTransitionStyle:pickedIndex];
     }
-    // Custom transition effects in picker
-    else {
-        // Move the new inset outside of the screen first
-        HLSTwoViewAnimationStepDefinition *animationStepDefinition1 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-        animationStepDefinition1.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(stackController.view.frame)
-                                                                                                                     deltaY:0.f
-                                                                                                             alphaVariation:-1.f];
-        animationStepDefinition1.duration = 0.;
-        
-        // Cover from the right, will remain transparent
-        HLSTwoViewAnimationStepDefinition *animationStepDefinition2 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-        animationStepDefinition2.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(stackController.view.frame)
-                                                                                                                     deltaY:0.f
-                                                                                                             alphaVariation:0.3f];
-        animationStepDefinition2.duration = 0.4;
-        
-        // Now that the new inset is in place, make it opaque
-        HLSTwoViewAnimationStepDefinition *animationStepDefinition3 = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinition];
-        animationStepDefinition3.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:0.7f];
-        animationStepDefinition2.duration = 0.6;
-        
-        [stackController pushViewController:viewController withTwoViewAnimationStepDefinitions:[NSArray arrayWithObjects:animationStepDefinition1,
-                                                                                                animationStepDefinition2,
-                                                                                                animationStepDefinition3,
-                                                                                                nil]];
-    }
 }
 
 #pragma mark Event callbacks
@@ -297,7 +271,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return HLSTransitionStyleEnumSize + 1;              // + 1 is for a custom style; first HLSTransitionStyleEnumSize are reserved for built-in transitions
+    return HLSTransitionStyleEnumSize;
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
