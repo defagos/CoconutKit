@@ -45,7 +45,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 - (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController;
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
 
-- (HLSAnimation *)pushAnimation;
+- (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController;
 
 @end
 
@@ -352,7 +352,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     UIViewController *topViewController = [self topViewController];
     if ([self isViewLoaded]) {
         // Pop animation = reverse push animation
-        HLSAnimation *popAnimation = [[self pushAnimation] reverseAnimation];
+        HLSAnimation *popAnimation = [[self pushAnimationForViewController:topViewController] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
         }
@@ -427,7 +427,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
     // expect it to occur animated, even if instantaneously
-    HLSAnimation *pushAnimation = [self pushAnimation];
+    HLSAnimation *pushAnimation = [self pushAnimationForViewController:viewController];
     if ([self isViewVisible]) {
         [pushAnimation playAnimated:YES];
     }
@@ -486,17 +486,21 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 
 #pragma mark Animation
 
-- (HLSAnimation *)pushAnimation
-
+- (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController
 {
-    UIViewController *topViewController = [self topViewController];
-    UIViewController *secondTopViewController = [self secondTopViewController];
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == 0) {
+        HLSLoggerError(@"Cannot push the root view controller");
+        return nil;
+    }
+    
+    UIViewController *belowViewController = [self.viewControllerStack objectAtIndex:index - 1];
     
     NSMutableArray *animationSteps = [NSMutableArray array];
-    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:topViewController];
+    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:viewController];
     for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
-        HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:secondTopViewController.view 
-                                                                                   secondView:topViewController.view];
+        HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:belowViewController.view 
+                                                                                   secondView:viewController.view];
         [animationSteps addObject:animationStep];
     }
     
