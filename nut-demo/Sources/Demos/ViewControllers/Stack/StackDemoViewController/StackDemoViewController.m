@@ -56,7 +56,7 @@
         [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
         UIViewController *fourthViewController = [[[FixedSizeViewController alloc] init] autorelease];
         [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
-
+        
         self.insetViewController = stackController;
         self.stretchingContent = YES;
     }
@@ -133,7 +133,7 @@
     [self.fixedSizeSampleButton addTarget:self
                                    action:@selector(fixedSizeSampleButtonClicked:)
                          forControlEvents:UIControlEventTouchUpInside];
-        
+    
     [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") 
                              forState:UIControlStateNormal];
     [self.portraitOnlyButton addTarget:self
@@ -177,7 +177,7 @@
     [self.stretchingContentSwitch addTarget:self
                                      action:@selector(stretchingContentSwitchValueChanged:)
                            forControlEvents:UIControlEventValueChanged];
-        
+    
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
     
     self.transitionPickerView.delegate = self;
@@ -216,10 +216,10 @@
         animationStepDefinition3.secondViewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:0.7f];
         animationStepDefinition2.duration = 0.6;
         
-        [self setInsetViewController:viewController withTwoViewAnimationStepDefinitions:[NSArray arrayWithObjects:animationStepDefinition1,
-                                                                                         animationStepDefinition2,
-                                                                                         animationStepDefinition3,
-                                                                                         nil]];
+        [stackController pushViewController:viewController withTwoViewAnimationStepDefinitions:[NSArray arrayWithObjects:animationStepDefinition1,
+                                                                                                animationStepDefinition2,
+                                                                                                animationStepDefinition3,
+                                                                                                nil]];
     }
 }
 
