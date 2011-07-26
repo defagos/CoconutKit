@@ -113,7 +113,8 @@
 /**
  * Display an inset view controller using one of the available built-in transition styles (the duration can be
  * freely set; it will be distributed evenly on the animation steps composing the animation, preserving its original
- * aspect)
+ * aspect). Use the special value kAnimationTransitionDefaultDuration as duration to get the default transition duration 
+ * (same result as the method above)
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle

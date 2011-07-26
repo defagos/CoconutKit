@@ -9,12 +9,10 @@
 #import "HLSPlaceholderViewController.h"
 
 #import <objc/runtime.h>
-#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "HLSTransform.h"
-#import "HLSTwoViewAnimationStepDefinition.h"
 
 // TODO: Implement stretching when property is updated as well (see setStretchingContent in HLSStackController)
 
@@ -23,16 +21,6 @@
 @interface HLSPlaceholderViewController ()
 
 @property (nonatomic, retain) UIViewController *oldInsetViewController;
-
-/**
- * Set the view controller to display as inset. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = old inset view, second view = new inset view). The new inset view is animated on top of the old one
- * Remark: If you want to customize the inset mutator in subclasses, you only have to override this method (be sure to call the super
- *         method in your implementation, though). Other inset mutators are implemented in terms of this method and do not need to
- *         be overridden as well.
- */
-- (void)setInsetViewController:(UIViewController *)insetViewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 @end
 
@@ -104,30 +92,13 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
 {
-    return [self setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:nil];
+    [self setInsetViewController:insetViewController withTransitionStyle:HLSTransitionStyleNone];
 }
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
-                                                                                                            disappearingView:self.insetViewController.view
-                                                                                                               appearingView:insetViewController.view 
-                                                                                                               inCommonFrame:self.placeholderView.frame];
-    [self setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];
-    
-}
-
-- (void)setInsetViewController:(UIViewController *)insetViewController
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                      duration:(NSTimeInterval)duration
-{
-    NSArray *animationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
-                                                                                                            disappearingView:self.insetViewController.view
-                                                                                                               appearingView:insetViewController.view 
-                                                                                                               inCommonFrame:self.placeholderView.frame
-                                                                                                                    duration:duration];
-    [self setInsetViewController:insetViewController withTwoViewAnimationStepDefinitions:animationStepDefinitions];
+    [self setInsetViewController:insetViewController withTransitionStyle:transitionStyle duration:kAnimationTransitionDefaultDuration];
 }
 
 // TODO: When bringToFront is set to YES for HLSAnimation (which is the case here), we can change the z-order of views during the animation.
@@ -135,10 +106,9 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 //       the left, the new one to the right. When their borders match, the new one is brought on top, the old one to the bottom, and
 //       both are moved to the center again.
 - (void)setInsetViewController:(UIViewController *)insetViewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
-{
-    HLSAssertObjectsInEnumerationAreKindOfClass(twoViewAnimationStepDefinitions, HLSTwoViewAnimationStepDefinition);
-    
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration
+{    
     // If not changed, nothing to do
     if (m_insetViewController == insetViewController) {
         return;
@@ -157,13 +127,13 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
         NSAssert(! objc_getAssociatedObject(insetViewController, HLSPlaceholderViewControllerKey), @"A view controller can only be inserted into one placeholder view controller");
         objc_setAssociatedObject(insetViewController, HLSPlaceholderViewControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     }
-        
+    
     // Remove any existing inset first
     if (m_insetViewAddedAsSubview) {
         // If the container is visible, deal with animation and lifecycle events for the old inset view
         if ([self isViewVisible]) {
             // Animated
-            if ([twoViewAnimationStepDefinitions count] != 0) {
+            if (transitionStyle != HLSTransitionStyleNone) {
                 // Forward disappearance events
                 [m_insetViewController viewWillDisappear:YES];
                 m_insetViewAddedAsSubview = NO;
@@ -225,7 +195,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
             }
             
             // Animated
-            if ([twoViewAnimationStepDefinitions count] != 0) {
+            if (transitionStyle != HLSTransitionStyleNone) {
                 // Notify the delegate
                 if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
                     [self.delegate placeholderViewController:self
@@ -276,18 +246,15 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // Create the animation if any
-    if ([twoViewAnimationStepDefinitions count] != 0) {
+    if (transitionStyle != HLSTransitionStyleNone) {
         UIView *oldInsetView = self.oldInsetViewController.view;
         UIView *newInsetView = m_insetViewController.view;
         
-        NSMutableArray *animationSteps = [NSMutableArray array];
-        for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in twoViewAnimationStepDefinitions) {
-            HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:oldInsetView
-                                                                                       secondView:newInsetView];
-            [animationSteps addObject:animationStep];
-        }
-        
-        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+        HLSAnimation *animation = [HLSAnimation animationForTransitionStyle:transitionStyle
+                                                      withDisappearingViews:[NSArray arrayWithObject:oldInsetView] 
+                                                             appearingViews:[NSArray arrayWithObject:newInsetView] 
+                                                                commonFrame:self.placeholderView.frame
+                                                                   duration:duration];        
         animation.lockingUI = YES;
         animation.bringToFront = YES;
         animation.delegate = self;

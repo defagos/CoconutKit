@@ -34,9 +34,8 @@
     NSMutableArray *m_viewControllerStack;                      // contains UIViewController objects. The last one is the top one
     NSMutableArray *m_addedAsSubviewFlagStack;                  // contains NSNumber (BOOL) objects flagging whether a view controller's 
                                                                 // view has been added as subview. Same order as m_viewControllers
-    NSMutableArray *m_twoViewAnimationStepDefinitionsStack;     // contains NSArray objects (of HLSTwoViewAnimationStepDefinition objects)
-                                                                // describing the animation steps used when pushing views ([NSNull null]
-                                                                // if none)
+    NSMutableArray *m_transitionStyleStack;                     // contains NSNumber objects wrapping the HLSTransitionStyles used
+                                                                // when pushing the corresponding view controller onto the stack
     NSMutableArray *m_originalViewFrameStack;                   // original frames of the view controller's views
     BOOL m_stretchingContent;
     id<HLSStackControllerDelegate> m_delegate;
@@ -64,7 +63,8 @@
 
 /**
  * Same as pushViewController:withTransitionStyle:, but the transition duration can be overridden (the duration will be 
- * evenly distributed on the animation steps composing the animation)
+ * evenly distributed on the animation steps composing the animation). Use the special value kAnimationTransitionDefaultDuration 
+ * as duration to get the default transition duration (same result as the method above)
  * This method can also be called before the stack controller is displayed
  */
 - (void)pushViewController:(UIViewController *)viewController

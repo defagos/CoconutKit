@@ -14,6 +14,8 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 
+const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
+
 @interface HLSAnimation ()
 
 @property (nonatomic, retain) NSArray *animationSteps;
@@ -49,6 +51,405 @@
         animationSteps = [NSArray array];
     }
     return [HLSAnimation animationWithAnimationSteps:animationSteps];
+}
+
++ (HLSAnimation *)animationForTransitionStyle:(HLSTransitionStyle)transitionStyle
+                        withDisappearingViews:(NSArray *)disappearingViews
+                               appearingViews:(NSArray *)appearingViews
+                                  commonFrame:(CGRect)commonFrame
+{
+    HLSAssertObjectsInEnumerationAreKindOfClass(disappearingViews, UIView);
+    HLSAssertObjectsInEnumerationAreKindOfClass(appearingViews, UIView);
+    
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    switch (transitionStyle) {
+        case HLSTransitionStyleNone: {
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottom: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        } 
+            
+        case HLSTransitionStyleCoverFromRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }  
+            
+        case HLSTransitionStyleCoverFromTopLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }  
+            
+        case HLSTransitionStyleCoverFromTopRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }   
+            
+        case HLSTransitionStyleCoverFromBottomRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        } 
+            
+        case HLSTransitionStyleFadeIn: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-appearingView.alpha];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:appearingView.alpha];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStyleCrossDissolve: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-appearingView.alpha];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *disappearingView in disappearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-disappearingView.alpha];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:disappearingView];                 
+            }
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:appearingView.alpha];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStylePushFromBottom: {            
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *disappearingView in disappearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:disappearingView]; 
+            }
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        } 
+            
+        case HLSTransitionStylePushFromTop: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:-CGRectGetHeight(commonFrame)];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *disappearingView in disappearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:disappearingView]; 
+            }
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
+                                                                                                                    deltaY:CGRectGetHeight(commonFrame)];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }    
+            
+        case HLSTransitionStylePushFromLeft: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *disappearingView in disappearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:disappearingView]; 
+            }
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        } 
+            
+        case HLSTransitionStylePushFromRight: {
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *disappearingView in disappearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:disappearingView]; 
+            }
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(commonFrame)
+                                                                                                                    deltaY:0.f];
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        } 
+            
+        case HLSTransitionStyleEmergeFromCenter: {
+            CGAffineTransform shrinkTransform = CGAffineTransformMakeScale(0.01f, 0.01f);      // cannot use 0.f, otherwise infinite matrix elements
+            
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep.transform = shrinkTransform;
+                [animationStep1 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (UIView *appearingView in appearingViews) {
+                HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep.transform = CGAffineTransformInvert(shrinkTransform);
+                [animationStep2 addViewAnimationStep:viewAnimationStep forView:appearingView]; 
+            }
+            animationStep2.duration = 0.4;
+            [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        default: {
+            HLSLoggerError(@"Unknown transition style");
+            return nil;
+            break;
+        }
+    }
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
++ (HLSAnimation *)animationForTransitionStyle:(HLSTransitionStyle)transitionStyle
+                        withDisappearingViews:(NSArray *)disappearingViews
+                               appearingViews:(NSArray *)appearingViews
+                                  commonFrame:(CGRect)commonFrame
+                                     duration:(NSTimeInterval)duration
+{
+    HLSAnimation *animation = [self animationForTransitionStyle:transitionStyle 
+                                          withDisappearingViews:disappearingViews 
+                                                 appearingViews:appearingViews
+                                                    commonFrame:commonFrame];
+    
+    if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+        return animation;
+    }
+    
+    // Sanitize input
+    if (doublelt(duration, 0.)) {
+        HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
+        duration = 0.;
+    }
+    
+    // Calculate the total animation duration
+    NSTimeInterval totalDuration = 0.;
+    for (HLSAnimationStep *animationStep in animation.animationSteps) {
+        totalDuration += animationStep.duration;
+    }
+    
+    // Find out which factor must be applied to each animation step to preserve the animation appearance for the specified duration
+    double factor = duration / totalDuration;
+    
+    // Distribute the total duration evenly among animation steps
+    for (HLSAnimationStep *animationStep in animation.animationSteps) {
+        animationStep.duration *= factor;
+    }
+    
+    return animation;
 }
 
 #pragma mark Object creation and destruction

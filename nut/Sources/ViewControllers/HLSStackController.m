@@ -12,11 +12,14 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
-#import "HLSTwoViewAnimationStepDefinition.h"
 #import "NSArray+HLSExtensions.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
 //       user interaction with the views below in the stack.
+
+// TODO: Apply same animation to all views below the pushed one! Better effect!
+
+// TODO: Must now also save the duration applied when pushing a view controller
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -26,28 +29,20 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 //       But this should not be a bottleneck
 @property (nonatomic, retain) NSMutableArray *viewControllerStack;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
-@property (nonatomic, retain) NSMutableArray *twoViewAnimationStepDefinitionsStack;
+@property (nonatomic, retain) NSMutableArray *transitionStyleStack;
 @property (nonatomic, retain) NSMutableArray *originalViewFrameStack;
 
 - (UIViewController *)secondTopViewController;
 
-/**
- * Push a view controller onto the stack. The transition can be animated by providing an NSArray of HLSTwoViewAnimationStepDefinition 
- * objects (first view = previous top view controller's view, second view = pushed view controller's view)
- * This method can also be called before the stack controller is displayed
- */
-- (void)pushViewController:(UIViewController *)viewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
-
 - (void)registerViewController:(UIViewController *)viewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 - (void)unregisterViewController:(UIViewController *)viewController;
 
 - (void)pushViewForViewController:(UIViewController *)viewController;
 - (void)removeViewForViewController:(UIViewController *)viewController;
 
 - (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
-- (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController;
+- (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController;
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
 
 - (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController;
@@ -63,10 +58,10 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     if ((self = [super init])) {
         self.viewControllerStack = [NSMutableArray array];
         self.addedAsSubviewFlagStack = [NSMutableArray array];
-        self.twoViewAnimationStepDefinitionsStack = [NSMutableArray array];
+        self.transitionStyleStack = [NSMutableArray array];
         self.originalViewFrameStack = [NSMutableArray array];
         
-        [self registerViewController:rootViewController withTwoViewAnimationStepDefinitions:nil];
+        [self registerViewController:rootViewController withTransitionStyle:HLSTransitionStyleNone];
     }
     return self;
 }
@@ -89,7 +84,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
     
     self.viewControllerStack = nil;
     self.addedAsSubviewFlagStack = nil;
-    self.twoViewAnimationStepDefinitionsStack = nil;
+    self.transitionStyleStack = nil;
     self.originalViewFrameStack = nil;
     self.delegate = nil;
     
@@ -102,7 +97,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 @synthesize addedAsSubviewFlagStack = m_addedAsSubviewFlagStack;
 
-@synthesize twoViewAnimationStepDefinitionsStack = m_twoViewAnimationStepDefinitionsStack;
+@synthesize transitionStyleStack = m_transitionStyleStack;
 
 @synthesize originalViewFrameStack = m_originalViewFrameStack;
 
@@ -281,41 +276,19 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions;
 
 - (void)pushViewController:(UIViewController *)viewController
 {
-    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:nil];
+    [self pushViewController:viewController withTransitionStyle:HLSTransitionStyleNone];
 }
 
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-    // Cannot use self.view.frame here! Would trigger lazy creation, but pushViewController:withTransitionStyle: must also be callable before
-    // the view is actually created!
-    CGRect viewFrame = [UIScreen mainScreen].applicationFrame;
-    NSArray *twoViewAnimationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
-                                                                                                                   disappearingView:[self topViewController].view
-                                                                                                                      appearingView:viewController.view
-                                                                                                                      inCommonFrame:viewFrame];
-    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];    
+    [self pushViewController:viewController withTransitionStyle:transitionStyle duration:kAnimationTransitionDefaultDuration];
 }
 
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
 {
-    // Cannot use self.view.frame here! Would trigger lazy creation, but pushViewController:withTransitionStyle: must also be callable before
-    // the view is actually created!
-    CGRect viewFrame = [UIScreen mainScreen].applicationFrame;
-    NSArray *twoViewAnimationStepDefinitions = [HLSTwoViewAnimationStepDefinition twoViewAnimationStepDefinitionsForTransitionStyle:transitionStyle 
-                                                                                                                   disappearingView:[self topViewController].view
-                                                                                                                      appearingView:viewController.view
-                                                                                                                      inCommonFrame:viewFrame
-                                                                                                                           duration:duration];
-    [self pushViewController:viewController withTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];    
-}
-
-- (void)pushViewController:(UIViewController *)viewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
-{
-    HLSAssertObjectsInEnumerationAreKindOfClass(twoViewAnimationStepDefinitions, HLSTwoViewAnimationStepDefinition);
     NSAssert(viewController != nil, @"Cannot push nil");
     
     // Check that the view controller to be pushed is compatible with the current orientation
@@ -327,7 +300,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     }
     
     // Associate the view controller with its container
-    [self registerViewController:viewController withTwoViewAnimationStepDefinitions:twoViewAnimationStepDefinitions];
+    [self registerViewController:viewController withTransitionStyle:transitionStyle];
     
     if ([self isViewLoaded]) {
         // The view controllers involved in the animation
@@ -369,7 +342,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
 #pragma mark Managing view controllers
 
 - (void)registerViewController:(UIViewController *)viewController
-withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
     // Associate the view controller with its container
     NSAssert(! objc_getAssociatedObject(viewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
@@ -378,14 +351,9 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     // Add the new view controller
     [self.viewControllerStack addObject:viewController];
     [self.addedAsSubviewFlagStack addObject:[NSNumber numberWithBool:NO]];
-    if ([twoViewAnimationStepDefinitions count] != 0) {
-        [self.twoViewAnimationStepDefinitionsStack addObject:twoViewAnimationStepDefinitions];
-    }
-    else {
-        [self.twoViewAnimationStepDefinitionsStack addObject:[NSArray array]];
-    }
-    // Put a placeholder. Will be filled when displaying the view (we do not want to access the view property too early since this triggers
-    // lazy view creation)
+    [self.transitionStyleStack addObject:[NSNumber numberWithInt:transitionStyle]];
+    // Put a placeholder for the moment. Will be filled when displaying the view (we do not want to access the view 
+    // property too early since this triggers lazy view creation)
     [self.originalViewFrameStack addObject:[NSNull null]];
 }
 
@@ -403,7 +371,7 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     [self.viewControllerStack removeObjectAtIndex:index];
     [self.addedAsSubviewFlagStack removeObjectAtIndex:index];
-    [self.twoViewAnimationStepDefinitionsStack removeObjectAtIndex:index];
+    [self.transitionStyleStack removeObjectAtIndex:index];
     [self.originalViewFrameStack removeObjectAtIndex:index];
 }
 
@@ -469,15 +437,15 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     return [[self.addedAsSubviewFlagStack objectAtIndex:index] boolValue];
 }
 
-- (NSArray *)twoViewAnimationStepDefinitionsForViewController:(UIViewController *)viewController
+- (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
     if (index == NSNotFound) {
         HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return nil;
+        return HLSTransitionStyleNone;
     }
 
-    return [self.twoViewAnimationStepDefinitionsStack objectAtIndex:index];
+    return (HLSTransitionStyle)[[self.transitionStyleStack objectAtIndex:index] intValue];
 }
 
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController
@@ -503,15 +471,11 @@ withTwoViewAnimationStepDefinitions:(NSArray *)twoViewAnimationStepDefinitions
     
     UIViewController *belowViewController = [self.viewControllerStack objectAtIndex:index - 1];
     
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    NSArray *animationStepDefinitions = [self twoViewAnimationStepDefinitionsForViewController:viewController];
-    for (HLSTwoViewAnimationStepDefinition *animationStepDefinition in animationStepDefinitions) {
-        HLSAnimationStep *animationStep = [animationStepDefinition animationStepWithFirstView:belowViewController.view 
-                                                                                   secondView:viewController.view];
-        [animationSteps addObject:animationStep];
-    }
-    
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    HLSTransitionStyle transitionStyle = [self transitionStyleForViewController:viewController];
+    HLSAnimation *animation = [HLSAnimation animationForTransitionStyle:transitionStyle
+                                                  withDisappearingViews:[NSArray arrayWithObject:belowViewController.view]
+                                                         appearingViews:[NSArray arrayWithObject:viewController .view]
+                                                            commonFrame:[UIScreen mainScreen].applicationFrame];    
     animation.tag = @"push_animation";
     animation.lockingUI = YES;
     animation.bringToFront = YES;
