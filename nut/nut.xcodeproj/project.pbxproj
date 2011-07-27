@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1A139B13E04A92006957BA /* HLSContainedViewControllerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1A139913E04A92006957BA /* HLSContainedViewControllerInfo.h */; };
+		6F1A139C13E04A92006957BA /* HLSContainedViewControllerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A139A13E04A92006957BA /* HLSContainedViewControllerInfo.m */; };
 		6F21D4361246163A00252AF1 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F21D4341246163A00252AF1 /* HLSFloat.h */; };
 		6F21D4371246163A00252AF1 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F21D4351246163A00252AF1 /* HLSFloat.m */; };
 		6F248A4D129180FB000A6996 /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F248A4B129180FB000A6996 /* HLSUserInterfaceLock.h */; };
@@ -162,6 +164,8 @@
 
 /* Begin PBXFileReference section */
 		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/nut_Localizable.strings; sourceTree = "<group>"; };
+		6F1A139913E04A92006957BA /* HLSContainedViewControllerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainedViewControllerInfo.h; sourceTree = "<group>"; };
+		6F1A139A13E04A92006957BA /* HLSContainedViewControllerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainedViewControllerInfo.m; sourceTree = "<group>"; };
 		6F1A58E113AB779E0029B714 /* nut_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nut_cursor_default_pointer.png; sourceTree = "<group>"; };
 		6F21D4341246163A00252AF1 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6F21D4351246163A00252AF1 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
@@ -493,6 +497,8 @@
 		6F8D0907123F4FB500FCF2AF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6F1A139913E04A92006957BA /* HLSContainedViewControllerInfo.h */,
+				6F1A139A13E04A92006957BA /* HLSContainedViewControllerInfo.m */,
 				6F8D0921123F530400FCF2AF /* HLSPageController.h */,
 				6F8D0922123F530400FCF2AF /* HLSPageController.m */,
 				6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */,
@@ -741,6 +747,7 @@
 				6FC9000A13D4637400834900 /* HLSModelManager.h in Headers */,
 				6F82490013D9551100688D0C /* HLSStackController.h in Headers */,
 				6F82490413D95CBB00688D0C /* HLSTransitionStyle.h in Headers */,
+				6F1A139B13E04A92006957BA /* HLSContainedViewControllerInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,6 +878,7 @@
 				6FC9000613D4635900834900 /* NSDictionary+HLSExtensions.m in Sources */,
 				6FC9000B13D4637400834900 /* HLSModelManager.m in Sources */,
 				6F82490113D9551100688D0C /* HLSStackController.m in Sources */,
+				6F1A139C13E04A92006957BA /* HLSContainedViewControllerInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

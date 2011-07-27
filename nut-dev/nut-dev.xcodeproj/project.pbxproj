@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F0682D913D0234A00167AEF /* strip_bkgr_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0682D813D0234A00167AEF /* strip_bkgr_green.png */; };
+		6F1A139F13E09CA4006957BA /* HLSContainedViewControllerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A139E13E09CA4006957BA /* HLSContainedViewControllerInfo.m */; };
 		6F1A58E513AB77D20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58E613AB77D20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */; };
 		6F1A58FC13AB86770029B714 /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58FB13AB86770029B714 /* icn_folder.png */; };
@@ -172,6 +173,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F0682D813D0234A00167AEF /* strip_bkgr_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strip_bkgr_green.png; sourceTree = "<group>"; };
+		6F1A139D13E09CA4006957BA /* HLSContainedViewControllerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainedViewControllerInfo.h; sourceTree = "<group>"; };
+		6F1A139E13E09CA4006957BA /* HLSContainedViewControllerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainedViewControllerInfo.m; sourceTree = "<group>"; };
 		6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6F1A58FB13AB86770029B714 /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
@@ -765,6 +768,8 @@
 		6FC9008213D4649F00834900 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6F1A139D13E09CA4006957BA /* HLSContainedViewControllerInfo.h */,
+				6F1A139E13E09CA4006957BA /* HLSContainedViewControllerInfo.m */,
 				6FC9008313D4649F00834900 /* HLSPageController.h */,
 				6FC9008413D4649F00834900 /* HLSPageController.m */,
 				6FC9008513D4649F00834900 /* HLSPlaceholderViewController.h */,
@@ -1560,6 +1565,7 @@
 				6F82492C13D96E5300688D0C /* HLSStackController.m in Sources */,
 				6F82497413D9C02200688D0C /* ContainerCustomizationViewController.m in Sources */,
 				6FCAF60213DC4F1E0061D737 /* TransparentViewController.m in Sources */,
+				6F1A139F13E09CA4006957BA /* HLSContainedViewControllerInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

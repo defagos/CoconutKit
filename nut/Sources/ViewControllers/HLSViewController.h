@@ -42,9 +42,8 @@ typedef enum {
  *   // Rest of the implementation here
  *
  * This class also provides a way to debug view controller events (lifecycle, rotation, memory warnings). You must
- * use the debug version of the library (obtained by compiling it with -DDEBUG added to your target "Other C flags"),
- * and set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use 
- * the console when running your application to have a look at view controller events.
+ * set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use the 
+ * console when running your application to have a look at view controller events.
  *
  * Remark:
  * -------

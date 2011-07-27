@@ -10,44 +10,24 @@
 
 #import <objc/runtime.h>
 #import "HLSAssert.h"
+#import "HLSContainedViewControllerInfo.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
-
-// TODO: Replace separate addedAsSubViewFlag / transitionStyle / originalViewFrame / (+ add originalViewAlpha)
-//       by an class ContainedViewControllerDescription. Use it to track  view controller's view properties
-//       and to restore them when the view controller is released (this is currently not properly done
-//       in HLSStackController). Use the same class to track content view controllers in HLSPlaceholderViewController
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
 
-@property (nonatomic, retain) NSMutableArray *viewControllerStack;
-@property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
-@property (nonatomic, retain) NSMutableArray *blockingViewStack;
-@property (nonatomic, retain) NSMutableArray *transitionStyleStack;
-@property (nonatomic, retain) NSMutableArray *durationStack;
+@property (nonatomic, retain) NSMutableArray *viewControllerInfoStack;
 @property (nonatomic, retain) NSMutableArray *pushAnimationStack;
-@property (nonatomic, retain) NSMutableArray *originalViewFrameStack;
 
 - (UIViewController *)secondTopViewController;
 
-- (void)registerViewController:(UIViewController *)viewController
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                      duration:(NSTimeInterval)duration;
-- (void)unregisterViewController:(UIViewController *)viewController;
-- (HLSAnimation *)createAndCacheAnimationForViewController:(UIViewController *)viewController;
-
-- (void)pushViewForViewController:(UIViewController *)viewController;
-- (void)removeViewForViewController:(UIViewController *)viewController;
-
-- (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
-- (UIView *)blockingViewForViewController:(UIViewController *)viewController;
-- (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController;
-- (NSTimeInterval)durationForViewController:(UIViewController *)viewController;
-- (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
-
-- (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController;
+- (HLSContainedViewControllerInfo *)registerViewController:(UIViewController *)viewController
+                                       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                                  duration:(NSTimeInterval)duration;
+- (void)unregisterTopViewController;
+- (HLSAnimation *)createAndCacheAnimationForViewControllerInfo:(HLSContainedViewControllerInfo *)viewControllerInfo;
 
 @end
 
@@ -58,15 +38,12 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 {
     if ((self = [super init])) {
-        self.viewControllerStack = [NSMutableArray array];
-        self.addedAsSubviewFlagStack = [NSMutableArray array];
-        self.blockingViewStack = [NSMutableArray array];
-        self.transitionStyleStack = [NSMutableArray array];
-        self.durationStack = [NSMutableArray array];
+        self.viewControllerInfoStack = [NSMutableArray array];        
         self.pushAnimationStack = [NSMutableArray array];
-        self.originalViewFrameStack = [NSMutableArray array];
         
-        [self registerViewController:rootViewController withTransitionStyle:HLSTransitionStyleNone duration:kAnimationTransitionDefaultDuration];
+        [self registerViewController:rootViewController 
+                 withTransitionStyle:HLSTransitionStyleNone 
+                            duration:kAnimationTransitionDefaultDuration];
     }
     return self;
 }
@@ -79,21 +56,17 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 - (void)dealloc
 {
-    // Must cleanup view controller registrations properly (cannot call unregisterViewController:, would mutate arrays
-    // while iterating)
-    for (UIViewController *viewController in self.viewControllerStack) {
+    // Must cleanup view controller registrations properly (cannot call unregisterTopViewController:, this would mutate
+    // the collection while iterating over it)
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
         // Remove the view controller association with its container
+        UIViewController *viewController = viewControllerInfo.viewController;
         NSAssert(objc_getAssociatedObject(viewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
         objc_setAssociatedObject(viewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     }
     
-    self.viewControllerStack = nil;
-    self.addedAsSubviewFlagStack = nil;
-    self.blockingViewStack = nil;
-    self.transitionStyleStack = nil;
-    self.durationStack = nil;
+    self.viewControllerInfoStack = nil;
     self.pushAnimationStack = nil;
-    self.originalViewFrameStack = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -101,19 +74,9 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 #pragma mark Accessors and mutators
 
-@synthesize viewControllerStack = m_viewControllerStack;
-
-@synthesize addedAsSubviewFlagStack = m_addedAsSubviewFlagStack;
-
-@synthesize blockingViewStack = m_blockingViewStack;
-
-@synthesize transitionStyleStack = m_transitionStyleStack;
-
-@synthesize durationStack = m_durationStack;
+@synthesize viewControllerInfoStack = m_viewControllerInfoStack;
 
 @synthesize pushAnimationStack = m_pushAnimationStack;
-
-@synthesize originalViewFrameStack = m_originalViewFrameStack;
 
 @synthesize stretchingContent = m_stretchingContent;
 
@@ -121,25 +84,32 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 - (UIViewController *)rootViewController
 {
-    return [self.viewControllerStack firstObject];
+    HLSContainedViewControllerInfo *viewControllerInfo = [self.viewControllerInfoStack firstObject];
+    return viewControllerInfo.viewController;
 }
 
 - (UIViewController *)topViewController
 {
-    return [self.viewControllerStack lastObject];
+    HLSContainedViewControllerInfo *viewControllerInfo = [self.viewControllerInfoStack lastObject];
+    return viewControllerInfo.viewController;
 }
 
 - (UIViewController *)secondTopViewController
 {
-    if ([self.viewControllerStack count] < 2) {
+    if ([self.viewControllerInfoStack count] < 2) {
         return nil;
     }
-    return [self.viewControllerStack objectAtIndex:[self.viewControllerStack count] - 2];
+    HLSContainedViewControllerInfo *viewControllerInfo = [self.viewControllerInfoStack objectAtIndex:[self.viewControllerInfoStack count] - 2];
+    return viewControllerInfo.viewController;
 }
 
 - (NSArray *)viewControllers
 {
-    return [NSArray arrayWithArray:self.viewControllerStack];
+    NSMutableArray *viewControllers = [NSMutableArray array];
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        [viewControllers addObject:viewControllerInfo.viewController];
+    }
+    return [NSArray arrayWithArray:viewControllers];
 }
 
 #pragma mark View lifecycle
@@ -162,13 +132,22 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [super viewWillAppear:animated];
     
     // Add those view controller views which have not been added yet
-    for (UIViewController *viewController in self.viewControllerStack) {
-        if (! [self addedAsSubviewFlagForViewController:viewController]) {
-            [self pushViewForViewController:viewController];
-        }        
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        [viewControllerInfo addContainedViewToContainerView:self.view
+                                           blockInteraction:YES];
+        
+        // Adjust size if enabled
+        if (self.stretchingContent) {
+            UIView *view = [viewControllerInfo containedView];
+            view.frame = self.view.bounds;
+        }
+        
+        // Push non-animated
+        HLSAnimation *pushAnimation = [self createAndCacheAnimationForViewControllerInfo:viewControllerInfo];
+        [pushAnimation playAnimated:NO];
     }
     
-    // Forward events for the top view controller
+    // Forward events to the top view controller
     UIViewController *topViewController = [self topViewController];
     if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
         [self.delegate stackController:self willShowViewController:topViewController animated:animated];
@@ -209,13 +188,13 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {
     [super viewDidUnload];
     
-    for (UIViewController *viewController in self.viewControllerStack) {
-        if ([self addedAsSubviewFlagForViewController:viewController]) {
-            [self removeViewForViewController:viewController];
-            viewController.view = nil;
-            [viewController viewDidUnload];
-        }
-    }
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        [viewControllerInfo removeContainedViewFromSuperview];
+        
+        // Release views and forward events to the attached view controllers
+        [viewControllerInfo releaseContainedView];
+        [viewControllerInfo.viewController viewDidUnload];
+    }    
 }
 
 #pragma mark Orientation management
@@ -226,13 +205,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
         return NO;
     }
     
-    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently
+    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday...
     
     // If one view controller in the stack does not support the orientation, neither will the container
-    for (UIViewController *viewController in self.viewControllerStack) {
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        UIViewController *viewController = viewControllerInfo.viewController;
         if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
             return NO;
-        }
+        }        
     }
     
     return YES;
@@ -242,7 +222,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    for (UIViewController *viewController in self.viewControllerStack) {
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        UIViewController *viewController = viewControllerInfo.viewController;
         [viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
 }
@@ -251,10 +232,13 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    for (UIViewController *viewController in self.viewControllerStack) {
-        // Create the animation again: The frames have changed!
-        [self createAndCacheAnimationForViewController:viewController];
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {        
+        // Generate the animation again: The view frames are changed by the rotation!
+        // TODO: Cannot work for cross-fade: Calculated with the existing alphas => will not be the same. Should only recalculate
+        //       frames!!!
+        [self createAndCacheAnimationForViewControllerInfo:viewControllerInfo];
         
+        UIViewController *viewController = viewControllerInfo.viewController;
         [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
 }
@@ -263,7 +247,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    for (UIViewController *viewController in self.viewControllerStack) {
+    for (HLSContainedViewControllerInfo *viewControllerInfo in self.viewControllerInfoStack) {
+        UIViewController *viewController = viewControllerInfo.viewController;
         [viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     }
 }
@@ -296,14 +281,33 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     }
     
     // Associate the view controller with its container
-    [self registerViewController:viewController withTransitionStyle:transitionStyle duration:duration];
+    HLSContainedViewControllerInfo *viewControllerInfo = [self registerViewController:viewController 
+                                                                  withTransitionStyle:transitionStyle
+                                                                             duration:duration];
     
-    if ([self isViewLoaded]) {
-        // The view controllers involved in the animation
-        UIViewController *topViewController = [self topViewController];
-        
+    if ([self isViewLoaded]) {        
         // Install the view
-        [self pushViewForViewController:topViewController];        
+        [viewControllerInfo addContainedViewToContainerView:self.view
+                                           blockInteraction:YES];
+        
+        // Frame reliable only after viewWillAppear
+        if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewWillAppear) {
+            // Adjust size if enabled
+            if (self.stretchingContent) {
+                UIView *view = [viewControllerInfo containedView];
+                view.frame = self.view.bounds;
+            }
+        }
+        
+        // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
+        // expect it to occur animated, even if instantaneously. The root view controller is never pushed
+        HLSAnimation *pushAnimation = [self createAndCacheAnimationForViewControllerInfo:viewControllerInfo];
+        if ([self isViewVisible]) {
+            [pushAnimation playAnimated:YES];
+        }
+        else {
+            [pushAnimation playAnimated:NO];
+        }
     }    
 }
 
@@ -312,16 +316,15 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (void)popViewController
 {
     // Cannot pop if only one view controller remains
-    if ([self.viewControllerStack count] == 1) {
+    if ([self.viewControllerInfoStack count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
         return;
     }
     
     // If the view is loaded, the popped view controller will be unregistered at the end of the animation
-    UIViewController *topViewController = [self topViewController];
     if ([self isViewLoaded]) {
         // Pop animation = reverse push animation
-        HLSAnimation *popAnimation = [[self pushAnimationForViewController:topViewController] reverseAnimation];
+        HLSAnimation *popAnimation = [[self.pushAnimationStack lastObject] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
         }
@@ -331,77 +334,61 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     }
     // If the view is not loaded, we can unregister the popped view controller on the spot
     else {
-        [self unregisterViewController:topViewController];
+        [self unregisterTopViewController];
     }
 }
 
 #pragma mark Managing view controllers
 
-- (void)registerViewController:(UIViewController *)viewController
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                      duration:(NSTimeInterval)duration
+- (HLSContainedViewControllerInfo *)registerViewController:(UIViewController *)viewController
+                                       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                                  duration:(NSTimeInterval)duration
 {
     // Associate the view controller with its container
     NSAssert(! objc_getAssociatedObject(viewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
     objc_setAssociatedObject(viewController, HLSStackControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     
-    // Add the new view controller
-    [self.viewControllerStack addObject:viewController];
-    [self.addedAsSubviewFlagStack addObject:[NSNumber numberWithBool:NO]];
-    [self.blockingViewStack addObject:[NSNull null]];
-    [self.transitionStyleStack addObject:[NSNumber numberWithInt:transitionStyle]];
-    [self.durationStack addObject:[NSNumber numberWithDouble:duration]];
-    // Put placeholders for objects depending on the view frame, which might not be known at the moment a view controller is registered (most
-    // notably when this occurs before the stack controller is actually displayed). Ths information will be filled when the view gets actually
-    // displayed
+    HLSContainedViewControllerInfo *viewControllerInfo = [[[HLSContainedViewControllerInfo alloc] initWithViewController:viewController
+                                                                                                         transitionStyle:transitionStyle
+                                                                                                                duration:duration]
+                                                          autorelease];
+    [self.viewControllerInfoStack addObject:viewControllerInfo];
+    // Just a placeholder currently. We will create the animation when needed (because the contained view controller's view frame must be
+    // known, and registerViewController:withTransitionStyle:duration: might be called before the container is actually displayed
     [self.pushAnimationStack addObject:[NSNull null]];
-    [self.originalViewFrameStack addObject:[NSNull null]];
+    
+    return viewControllerInfo;
 }
 
-- (void)unregisterViewController:(UIViewController *)viewController
+- (void)unregisterTopViewController
 {
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"The view controller was not registered with this stack controller");
-        return;
-    }
-    
+    HLSContainedViewControllerInfo *topViewControllerInfo = [self.viewControllerInfoStack lastObject];
+    UIViewController *topViewController = topViewControllerInfo.viewController;
+        
     // Remove the view controller association with its container
-    NSAssert(objc_getAssociatedObject(viewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
-    objc_setAssociatedObject(viewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    NSAssert(objc_getAssociatedObject(topViewController, HLSStackControllerKey), @"The view controller was not inserted into a stack controller");
+    objc_setAssociatedObject(topViewController, HLSStackControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
-    [self.viewControllerStack removeObjectAtIndex:index];
-    [self.addedAsSubviewFlagStack removeObjectAtIndex:index];
-    [self.blockingViewStack removeObjectAtIndex:index];
-    [self.transitionStyleStack removeObjectAtIndex:index];
-    [self.durationStack removeObjectAtIndex:index];
-    [self.pushAnimationStack removeObjectAtIndex:index];
-    [self.originalViewFrameStack removeObjectAtIndex:index];
+    [self.viewControllerInfoStack removeLastObject];
+    [self.pushAnimationStack removeLastObject];
 }
 
-- (HLSAnimation *)createAndCacheAnimationForViewController:(UIViewController *)viewController
+- (HLSAnimation *)createAndCacheAnimationForViewControllerInfo:(HLSContainedViewControllerInfo *)viewControllerInfo
 {
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"The view controller was not registered with this stack controller");
-        return nil;
-    }
-    
     // Apply the same effect to all disappearing views; much better (we see all views below the added one as a single one). This is
     // a lot better with push or fade animations
+    NSUInteger index = [self.viewControllerInfoStack indexOfObject:viewControllerInfo];
     NSMutableArray *disappearingViews = [NSMutableArray array];
     for (NSUInteger i = 0; i < index; i++) {
-        UIViewController *belowViewController = [self.viewControllerStack objectAtIndex:i];
-        [disappearingViews addObject:belowViewController.view];
+        HLSContainedViewControllerInfo *belowViewControllerInfo = [self.viewControllerInfoStack objectAtIndex:i];
+        [disappearingViews addObject:[belowViewControllerInfo containedView]];
     }
-        
-    HLSTransitionStyle transitionStyle = [self transitionStyleForViewController:viewController];
-    NSTimeInterval duration = [self durationForViewController:viewController];
-    HLSAnimation *pushAnimation = [HLSAnimation animationForTransitionStyle:transitionStyle
+    
+    HLSAnimation *pushAnimation = [HLSAnimation animationForTransitionStyle:viewControllerInfo.transitionStyle
                                                       withDisappearingViews:[NSArray arrayWithArray:disappearingViews]
-                                                             appearingViews:[NSArray arrayWithObject:viewController .view]
+                                                             appearingViews:[NSArray arrayWithObject:[viewControllerInfo containedView]]
                                                                 commonFrame:self.view.frame
-                                                                   duration:duration];
+                                                                   duration:viewControllerInfo.duration];
     pushAnimation.tag = @"push_animation";
     pushAnimation.lockingUI = YES;
     pushAnimation.bringToFront = YES;
@@ -410,142 +397,6 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
                                        withObject:pushAnimation];
     
     return pushAnimation;
-}
-
-- (void)pushViewForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return;
-    }
-    
-    // This triggers lazy view cration
-    [self.view addSubview:viewController.view];
-    
-    [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
-                                            withObject:[NSNumber numberWithBool:YES]];
-    
-    // Add a transparent stretchable view just below to prevent the user from interacting with view controllers below in the stack
-    UIView *blockingView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
-    blockingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.blockingViewStack replaceObjectAtIndex:index
-                                      withObject:blockingView];
-    [self.view insertSubview:blockingView belowSubview:viewController.view];
-    
-    // Now that the view has not been unnecessarily created, update original frame information
-    [self.originalViewFrameStack replaceObjectAtIndex:index
-                                           withObject:[NSValue valueWithCGRect:viewController.view.frame]];
-    
-    // Adjust size if enabled
-    if (self.stretchingContent) {
-        viewController.view.frame = self.view.bounds;
-    }
-    
-    // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-    // expect it to occur animated, even if instantaneously. The root view controller is never pushed
-    if (index != 0) {
-        HLSAnimation *pushAnimation = [self createAndCacheAnimationForViewController:viewController];
-        if ([self isViewVisible]) {
-            [pushAnimation playAnimated:YES];
-        }
-        else {
-            [pushAnimation playAnimated:NO];
-        }        
-    }    
-}
-
-- (void)removeViewForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return;
-    }
-    
-    [viewController.view removeFromSuperview];
-    [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
-                                            withObject:[NSNumber numberWithBool:NO]];
-    
-    UIView *blockingView = [self blockingViewForViewController:viewController];
-    [blockingView removeFromSuperview];
-    [self.blockingViewStack replaceObjectAtIndex:index
-                                      withObject:[NSNull null]];
-    
-    [self.originalViewFrameStack replaceObjectAtIndex:index
-                                           withObject:[NSNull null]];
-    
-    // Remove the corresponding push animation (if any)
-    [self.pushAnimationStack replaceObjectAtIndex:index
-                                       withObject:[NSNull null]];
-}
-
-- (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return NO;
-    }
-    
-    return [[self.addedAsSubviewFlagStack objectAtIndex:index] boolValue];
-}
-     
-- (UIView *)blockingViewForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return NO;
-    }
-    
-    return [self.blockingViewStack objectAtIndex:index];
-}
-
-- (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return HLSTransitionStyleNone;
-    }
-    
-    return (HLSTransitionStyle)[[self.transitionStyleStack objectAtIndex:index] intValue];
-}
-
-- (NSTimeInterval)durationForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return HLSTransitionStyleNone;
-    }
-    
-    return [[self.durationStack objectAtIndex:index] doubleValue];
-}
-
-- (CGRect)originalViewFrameForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"View controller %@ not found in stack", viewController);
-        return CGRectZero;
-    }
-    
-    return [[self.originalViewFrameStack objectAtIndex:index] CGRectValue];
-}
-
-#pragma mark Animation
-
-- (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController
-{
-    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
-    if (index == 0) {
-        HLSLoggerError(@"Cannot push the root view controller");
-        return nil;
-    }
-    
-    return [self.pushAnimationStack objectAtIndex:index];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -596,7 +447,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
             disappearingViewController = [self topViewController];
             
             // Remove the popped view controller's view
-            [self removeViewForViewController:disappearingViewController];
+            HLSContainedViewControllerInfo *disappearingViewControllerInfo = [self.viewControllerInfoStack lastObject];
+            [disappearingViewControllerInfo removeContainedViewFromSuperview];
         }
         else {
             HLSLoggerWarn(@"Other animation; nothing to do");
@@ -615,7 +467,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     
     // At the end of the pop animation, we must always remove the popped view controller from the stack
     if ([animation.tag isEqual:@"reverse_push_animation"]) {
-        [self unregisterViewController:disappearingViewController];
+        [self unregisterTopViewController];
     }
 }
 

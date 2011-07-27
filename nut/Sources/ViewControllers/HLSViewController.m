@@ -8,11 +8,8 @@
 
 #import "HLSViewController.h"
 
-#import "HLSLogger.h"
-
-#ifdef DEBUG
 #import "HLSConverters.h"
-#endif
+#import "HLSLogger.h"
 
 @interface HLSViewController ()
 
@@ -61,8 +58,6 @@
 
 #pragma mark Accessors and mutators
 
-#ifdef DEBUG
-
 - (void)setView:(UIView *)view
 {
     [super setView:view];
@@ -70,8 +65,6 @@
         HLSLoggerDebug(@"View controller %@: view set to nil", self);
     }
 }
-
-#endif
 
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
@@ -152,8 +145,6 @@
     return YES;
 }
 
-#ifdef DEBUG
-
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -166,18 +157,12 @@
     HLSLoggerDebug(@"View controller %@ did rotate from interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
 }
 
-#endif
-
 #pragma mark Memory warnings
-
-#ifdef DEBUG
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
 }
-
-#endif
 
 @end
