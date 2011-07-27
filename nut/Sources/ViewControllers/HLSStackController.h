@@ -34,6 +34,8 @@
     NSMutableArray *m_viewControllerStack;                      // contains UIViewController objects. The last one is the top one
     NSMutableArray *m_addedAsSubviewFlagStack;                  // contains NSNumber (BOOL) objects flagging whether a view controller's 
                                                                 // view has been added as subview. Same order as m_viewControllers
+    NSMutableArray *m_blockingViewStack;                        // views put behind each view controller's view to prevent interaction
+                                                                // with view controllers below in the stack
     NSMutableArray *m_transitionStyleStack;                     // contains NSNumber objects wrapping the HLSTransitionStyles used
                                                                 // when pushing the corresponding view controller onto the stack
     NSMutableArray *m_durationStack;                            // contains NSNumber objects wrapping NSTimeInterval values

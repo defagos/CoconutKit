@@ -13,15 +13,10 @@
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 
-// TODO: When pushing a view controller, insert an invisible view just below it for preventing
-//       user interaction with the views below in the stack.
-
 // TODO: Replace separate addedAsSubViewFlag / transitionStyle / originalViewFrame / (+ add originalViewAlpha)
 //       by an class ContainedViewControllerDescription. Use it to track  view controller's view properties
 //       and to restore them when the view controller is released (this is currently not properly done
 //       in HLSStackController). Use the same class to track content view controllers in HLSPlaceholderViewController
-
-// TODO: Animations 3D
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -29,6 +24,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @property (nonatomic, retain) NSMutableArray *viewControllerStack;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
+@property (nonatomic, retain) NSMutableArray *blockingViewStack;
 @property (nonatomic, retain) NSMutableArray *transitionStyleStack;
 @property (nonatomic, retain) NSMutableArray *durationStack;
 @property (nonatomic, retain) NSMutableArray *pushAnimationStack;
@@ -46,6 +42,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 - (void)removeViewForViewController:(UIViewController *)viewController;
 
 - (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
+- (UIView *)blockingViewForViewController:(UIViewController *)viewController;
 - (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController;
 - (NSTimeInterval)durationForViewController:(UIViewController *)viewController;
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
@@ -63,6 +60,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     if ((self = [super init])) {
         self.viewControllerStack = [NSMutableArray array];
         self.addedAsSubviewFlagStack = [NSMutableArray array];
+        self.blockingViewStack = [NSMutableArray array];
         self.transitionStyleStack = [NSMutableArray array];
         self.durationStack = [NSMutableArray array];
         self.pushAnimationStack = [NSMutableArray array];
@@ -91,6 +89,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     
     self.viewControllerStack = nil;
     self.addedAsSubviewFlagStack = nil;
+    self.blockingViewStack = nil;
     self.transitionStyleStack = nil;
     self.durationStack = nil;
     self.pushAnimationStack = nil;
@@ -105,6 +104,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @synthesize viewControllerStack = m_viewControllerStack;
 
 @synthesize addedAsSubviewFlagStack = m_addedAsSubviewFlagStack;
+
+@synthesize blockingViewStack = m_blockingViewStack;
 
 @synthesize transitionStyleStack = m_transitionStyleStack;
 
@@ -347,6 +348,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     // Add the new view controller
     [self.viewControllerStack addObject:viewController];
     [self.addedAsSubviewFlagStack addObject:[NSNumber numberWithBool:NO]];
+    [self.blockingViewStack addObject:[NSNull null]];
     [self.transitionStyleStack addObject:[NSNumber numberWithInt:transitionStyle]];
     [self.durationStack addObject:[NSNumber numberWithDouble:duration]];
     // Put placeholders for objects depending on the view frame, which might not be known at the moment a view controller is registered (most
@@ -370,6 +372,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     
     [self.viewControllerStack removeObjectAtIndex:index];
     [self.addedAsSubviewFlagStack removeObjectAtIndex:index];
+    [self.blockingViewStack removeObjectAtIndex:index];
     [self.transitionStyleStack removeObjectAtIndex:index];
     [self.durationStack removeObjectAtIndex:index];
     [self.pushAnimationStack removeObjectAtIndex:index];
@@ -423,7 +426,14 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
                                             withObject:[NSNumber numberWithBool:YES]];
     
-    // Now that the view has not been unnecessarily creted, update original frame information
+    // Add a transparent stretchable view just below to prevent the user from interacting with view controllers below in the stack
+    UIView *blockingView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+    blockingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.blockingViewStack replaceObjectAtIndex:index
+                                      withObject:blockingView];
+    [self.view insertSubview:blockingView belowSubview:viewController.view];
+    
+    // Now that the view has not been unnecessarily created, update original frame information
     [self.originalViewFrameStack replaceObjectAtIndex:index
                                            withObject:[NSValue valueWithCGRect:viewController.view.frame]];
     
@@ -456,6 +466,12 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [viewController.view removeFromSuperview];
     [self.addedAsSubviewFlagStack replaceObjectAtIndex:index
                                             withObject:[NSNumber numberWithBool:NO]];
+    
+    UIView *blockingView = [self blockingViewForViewController:viewController];
+    [blockingView removeFromSuperview];
+    [self.blockingViewStack replaceObjectAtIndex:index
+                                      withObject:[NSNull null]];
+    
     [self.originalViewFrameStack replaceObjectAtIndex:index
                                            withObject:[NSNull null]];
     
@@ -473,6 +489,17 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     }
     
     return [[self.addedAsSubviewFlagStack objectAtIndex:index] boolValue];
+}
+     
+- (UIView *)blockingViewForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return NO;
+    }
+    
+    return [self.blockingViewStack objectAtIndex:index];
 }
 
 - (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController

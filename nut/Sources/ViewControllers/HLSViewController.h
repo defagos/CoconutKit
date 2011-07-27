@@ -91,11 +91,6 @@ typedef enum {
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 
 /**
- * Return YES iff the view has been loaded
- */
-- (BOOL)isViewLoaded;
-
-/**
  * Return YES iff the view has appeared
  */
 - (BOOL)isViewVisible;

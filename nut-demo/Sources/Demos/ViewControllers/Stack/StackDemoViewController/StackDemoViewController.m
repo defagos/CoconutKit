@@ -359,12 +359,6 @@
             break;
         }
             
-        // From now on: Custom transitions
-        case HLSTransitionStyleEnumSize: {
-            return NSLocalizedString(@"Custom transition", @"Custom transition");
-            break;
-        }
-            
         default: {
             return @"";
             break;
