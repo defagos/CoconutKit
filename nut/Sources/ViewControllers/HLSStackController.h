@@ -36,6 +36,7 @@
                                                                 // view has been added as subview. Same order as m_viewControllers
     NSMutableArray *m_transitionStyleStack;                     // contains NSNumber objects wrapping the HLSTransitionStyles used
                                                                 // when pushing the corresponding view controller onto the stack
+    NSMutableArray *m_durationStack;                            // contains NSNumber objects wrapping NSTimeInterval values
     NSMutableArray *m_pushAnimationStack;                       // stack for storing push animations generated for transitions
     NSMutableArray *m_originalViewFrameStack;                   // original frames of the view controller's views
     BOOL m_stretchingContent;

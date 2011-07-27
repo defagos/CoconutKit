@@ -17,18 +17,12 @@
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
 //       user interaction with the views below in the stack.
 
-// TODO: Apply same animation to all views below the pushed one! Better effect!
-
 // TODO: Must now also save the duration applied when pushing a view controller
-
-// TODO: Bug: In non-stretching mode, pre-pushed view controllers are not popped correctly
 
 // TODO: Replace separate addedAsSubViewFlag / transitionStyle / originalViewFrame / (+ add originalViewAlpha)
 //       by an class ContainedViewControllerDescription. Use it to track  view controller's view properties
 //       and to restore them when the view controller is released (this is currently not properly done
 //       in HLSStackController). Use the same class to track content view controllers in HLSPlaceholderViewController
-
-// TODO: Bug: Fade in + cross fade out + autre: bug en pop
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -37,13 +31,15 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @property (nonatomic, retain) NSMutableArray *viewControllerStack;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
 @property (nonatomic, retain) NSMutableArray *transitionStyleStack;
+@property (nonatomic, retain) NSMutableArray *durationStack;
 @property (nonatomic, retain) NSMutableArray *pushAnimationStack;
 @property (nonatomic, retain) NSMutableArray *originalViewFrameStack;
 
 - (UIViewController *)secondTopViewController;
 
 - (void)registerViewController:(UIViewController *)viewController
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle;
+           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration;
 - (void)unregisterViewController:(UIViewController *)viewController;
 
 - (HLSAnimation *)createAndCacheAnimationForViewController:(UIViewController *)viewController;
@@ -53,6 +49,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 - (BOOL)addedAsSubviewFlagForViewController:(UIViewController *)viewController;
 - (HLSTransitionStyle)transitionStyleForViewController:(UIViewController *)viewController;
+- (NSTimeInterval)durationForViewController:(UIViewController *)viewController;
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController;
 
 - (HLSAnimation *)pushAnimationForViewController:(UIViewController *)viewController;
@@ -69,10 +66,11 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
         self.viewControllerStack = [NSMutableArray array];
         self.addedAsSubviewFlagStack = [NSMutableArray array];
         self.transitionStyleStack = [NSMutableArray array];
+        self.durationStack = [NSMutableArray array];
         self.pushAnimationStack = [NSMutableArray array];
         self.originalViewFrameStack = [NSMutableArray array];
         
-        [self registerViewController:rootViewController withTransitionStyle:HLSTransitionStyleNone];
+        [self registerViewController:rootViewController withTransitionStyle:HLSTransitionStyleNone duration:kAnimationTransitionDefaultDuration];
     }
     return self;
 }
@@ -96,6 +94,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     self.viewControllerStack = nil;
     self.addedAsSubviewFlagStack = nil;
     self.transitionStyleStack = nil;
+    self.durationStack = nil;
     self.pushAnimationStack = nil;
     self.originalViewFrameStack = nil;
     self.delegate = nil;
@@ -110,6 +109,8 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @synthesize addedAsSubviewFlagStack = m_addedAsSubviewFlagStack;
 
 @synthesize transitionStyleStack = m_transitionStyleStack;
+
+@synthesize durationStack = m_durationStack;
 
 @synthesize pushAnimationStack = m_pushAnimationStack;
 
@@ -292,7 +293,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     }
     
     // Associate the view controller with its container
-    [self registerViewController:viewController withTransitionStyle:transitionStyle];
+    [self registerViewController:viewController withTransitionStyle:transitionStyle duration:duration];
     
     if ([self isViewLoaded]) {
         // The view controllers involved in the animation
@@ -335,6 +336,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 - (void)registerViewController:(UIViewController *)viewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                      duration:(NSTimeInterval)duration
 {
     // Associate the view controller with its container
     NSAssert(! objc_getAssociatedObject(viewController, HLSStackControllerKey), @"A view controller can only be inserted into one stack controller");
@@ -344,6 +346,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [self.viewControllerStack addObject:viewController];
     [self.addedAsSubviewFlagStack addObject:[NSNumber numberWithBool:NO]];
     [self.transitionStyleStack addObject:[NSNumber numberWithInt:transitionStyle]];
+    [self.durationStack addObject:[NSNumber numberWithDouble:duration]];
     // Put placeholders for objects depending on the view frame, which might not be known at the moment a view controller is registered (most
     // notably when this occurs before the stack controller is actually displayed). Ths information will be filled when the view gets actually
     // displayed
@@ -366,6 +369,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     [self.viewControllerStack removeObjectAtIndex:index];
     [self.addedAsSubviewFlagStack removeObjectAtIndex:index];
     [self.transitionStyleStack removeObjectAtIndex:index];
+    [self.durationStack removeObjectAtIndex:index];
     [self.pushAnimationStack removeObjectAtIndex:index];
     [self.originalViewFrameStack removeObjectAtIndex:index];
 }
@@ -378,18 +382,21 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
         return nil;
     }
     
-    // No disappearing view if root view controller
-    NSArray *disappearingViews = nil;
-    if (index > 0) {
-        UIViewController *belowViewController = [self.viewControllerStack objectAtIndex:index - 1];
-        disappearingViews = [NSArray arrayWithObject:belowViewController.view];
+    // Apply the same effect to all disappearing views; much better (we see all views below the added one as a single one). This is
+    // a lot better with push or fade animations
+    NSMutableArray *disappearingViews = [NSMutableArray array];
+    for (NSUInteger i = 0; i < index; i++) {
+        UIViewController *belowViewController = [self.viewControllerStack objectAtIndex:i];
+        [disappearingViews addObject:belowViewController.view];
     }
-    
+        
     HLSTransitionStyle transitionStyle = [self transitionStyleForViewController:viewController];
+    NSTimeInterval duration = [self durationForViewController:viewController];
     HLSAnimation *pushAnimation = [HLSAnimation animationForTransitionStyle:transitionStyle
-                                                      withDisappearingViews:disappearingViews
+                                                      withDisappearingViews:[NSArray arrayWithArray:disappearingViews]
                                                              appearingViews:[NSArray arrayWithObject:viewController .view]
-                                                                commonFrame:[UIScreen mainScreen].applicationFrame];
+                                                                commonFrame:self.view.frame
+                                                                   duration:duration];
     pushAnimation.tag = @"push_animation";
     pushAnimation.lockingUI = YES;
     pushAnimation.bringToFront = YES;
@@ -475,6 +482,17 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     }
     
     return (HLSTransitionStyle)[[self.transitionStyleStack objectAtIndex:index] intValue];
+}
+
+- (NSTimeInterval)durationForViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self.viewControllerStack indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"View controller %@ not found in stack", viewController);
+        return HLSTransitionStyleNone;
+    }
+    
+    return [[self.durationStack objectAtIndex:index] doubleValue];
 }
 
 - (CGRect)originalViewFrameForViewController:(UIViewController *)viewController
