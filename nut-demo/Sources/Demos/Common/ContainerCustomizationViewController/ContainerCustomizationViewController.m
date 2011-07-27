@@ -10,6 +10,8 @@
 
 @interface ContainerCustomizationViewController ()
 
+@property (nonatomic, retain) UIColor *originalNavigationBarTintColor;
+
 - (void)changeButtonClicked:(id)sender;
 
 @end
@@ -31,11 +33,14 @@
     [super releaseViews];
     
     self.changeButton = nil;
+    self.originalNavigationBarTintColor = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize changeButton = m_changeButton;
+
+@synthesize originalNavigationBarTintColor = m_originalNavigationBarTintColor;
 
 #pragma mark View lifecycle
 
@@ -48,6 +53,20 @@
     [self.changeButton addTarget:self
                           action:@selector(changeButtonClicked:)
                 forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.originalNavigationBarTintColor = self.navigationController.navigationBar.tintColor;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.navigationController.navigationBar.tintColor = self.originalNavigationBarTintColor;
 }
 
 #pragma mark Orientation management

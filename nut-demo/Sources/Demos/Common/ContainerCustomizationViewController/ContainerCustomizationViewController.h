@@ -12,6 +12,7 @@
 @interface ContainerCustomizationViewController : HLSViewController {
 @private
     UIButton *m_changeButton;
+    UIColor *m_originalNavigationBarTintColor;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *changeButton;
