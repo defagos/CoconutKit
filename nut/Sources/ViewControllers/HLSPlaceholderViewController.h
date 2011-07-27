@@ -130,6 +130,8 @@
  * If set to YES, the inset view controller's view frame is automatically adjusted to match the placeholder bounds. The resizing
  * behavior still depends on the autoresizing behavior of the inset view, though (for example, if an inset view is able to stretch 
  * in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used as is.
+ * Changing this property only affect view controllers which will be displayed. In general, you should set this property at creation 
+ * time and do not alter it afterwards.
  * Default value is NO.
  */
 @property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;

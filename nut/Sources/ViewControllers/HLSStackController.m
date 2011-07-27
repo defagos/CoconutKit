@@ -21,12 +21,19 @@
 
 // TODO: Must now also save the duration applied when pushing a view controller
 
+// TODO: Bug: In non-stretching mode, pre-pushed view controllers are not popped correctly
+
+// TODO: Replace separate addedAsSubViewFlag / transitionStyle / originalViewFrame / (+ add originalViewAlpha)
+//       by an class ContainedViewControllerDescription. Use it to track  view controller's view properties
+//       and to restore them when the view controller is released (this is currently not properly done
+//       in HLSStackController). Use the same class to track content view controllers in HLSPlaceholderViewController
+
+// TODO: Bug: Fade in + cross fade out + autre: bug en pop
+
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
 @interface HLSStackController ()
 
-// TODO: Could be replaced by a dictionary pointing at an object encapsulating this information. Lookup would be better.
-//       But this should not be a bottleneck
 @property (nonatomic, retain) NSMutableArray *viewControllerStack;
 @property (nonatomic, retain) NSMutableArray *addedAsSubviewFlagStack;
 @property (nonatomic, retain) NSMutableArray *transitionStyleStack;
@@ -102,28 +109,6 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 @synthesize originalViewFrameStack = m_originalViewFrameStack;
 
 @synthesize stretchingContent = m_stretchingContent;
-
-- (void)setStretchingContent:(BOOL)stretchingContent
-{
-    if (m_stretchingContent == stretchingContent) {
-        return;
-    }
-    
-    m_stretchingContent = stretchingContent;
-    
-    if ([self isViewVisible]) {
-        for (UIViewController *viewController in self.viewControllerStack) {
-            if ([self addedAsSubviewFlagForViewController:viewController]) {
-                if (m_stretchingContent) {
-                    viewController.view.frame = self.view.bounds;
-                }
-                else {
-                    viewController.view.frame = [self originalViewFrameForViewController:viewController];
-                }            
-            }
-        }        
-    }
-}
 
 @synthesize delegate = m_delegate;
 
@@ -475,7 +460,7 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
     HLSAnimation *animation = [HLSAnimation animationForTransitionStyle:transitionStyle
                                                   withDisappearingViews:[NSArray arrayWithObject:belowViewController.view]
                                                          appearingViews:[NSArray arrayWithObject:viewController .view]
-                                                            commonFrame:[UIScreen mainScreen].applicationFrame];    
+                                                            commonFrame:[UIScreen mainScreen].applicationFrame];
     animation.tag = @"push_animation";
     animation.lockingUI = YES;
     animation.bringToFront = YES;

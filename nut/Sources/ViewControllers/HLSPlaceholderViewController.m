@@ -18,6 +18,8 @@
 
 // TODO: As in HLSStackController, call some unregister method when deallocating (must cleanup associated objects)
 
+// TODO: Bug: Stretching mode does not work correctly anymore
+
 @interface HLSPlaceholderViewController ()
 
 @property (nonatomic, retain) UIViewController *oldInsetViewController;

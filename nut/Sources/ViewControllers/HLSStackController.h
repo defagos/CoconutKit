@@ -96,6 +96,9 @@
  * If set to YES, the content view controller's view frames are automatically adjusted to match the container view bounds. The resizing
  * behavior still depends on the autoresizing behavior of the content views, though (for example, if a content view is able to stretch 
  * in both directions, it will fill the entire container view). If set to NO, the content view is used as is.
+ * Changing this property only affect view controllers which will be displayed. In general, you should set this property at creation 
+ * time and do not alter it afterwards.
+ *
  * Default value is NO.
  */
 @property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
