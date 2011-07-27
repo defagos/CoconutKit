@@ -11,18 +11,17 @@
 #import <objc/runtime.h>
 #import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "HLSOrientationCloner.h"
 #import "NSArray+HLSExtensions.h"
 
 // TODO: When pushing a view controller, insert an invisible view just below it for preventing
 //       user interaction with the views below in the stack.
 
-// TODO: Must now also save the duration applied when pushing a view controller
-
 // TODO: Replace separate addedAsSubViewFlag / transitionStyle / originalViewFrame / (+ add originalViewAlpha)
 //       by an class ContainedViewControllerDescription. Use it to track  view controller's view properties
 //       and to restore them when the view controller is released (this is currently not properly done
 //       in HLSStackController). Use the same class to track content view controllers in HLSPlaceholderViewController
+
+// TODO: Animations 3D
 
 static void *HLSStackControllerKey = &HLSStackControllerKey;
 
@@ -41,7 +40,6 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
 - (void)unregisterViewController:(UIViewController *)viewController;
-
 - (HLSAnimation *)createAndCacheAnimationForViewController:(UIViewController *)viewController;
 
 - (void)pushViewForViewController:(UIViewController *)viewController;
@@ -227,10 +225,11 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
         return NO;
     }
     
+    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently
+    
     // If one view controller in the stack does not support the orientation, neither will the container
     for (UIViewController *viewController in self.viewControllerStack) {
-        if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-            && ! [viewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
+        if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
             return NO;
         }
     }
@@ -242,27 +241,30 @@ static void *HLSStackControllerKey = &HLSStackControllerKey;
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    // TODO: Not trivial. Since transparency can occur, we must rotate all view controllers. This means we might need
-    //       to rebuild the whole stack if some (or all!) view controllers support rotation by cloning. In HLSPlaceholderViewController,
-    //       we could reuse the setter to achieve this elegantly. Here we might be able to do the same, but this is more difficult
-    //       (and probably expensive). The easiest solution would be that all view controllers deal with their rotation
-    //       themselves, but is this possible? In such cases, containers would not need to change the view controllers
-    //       (since they stay the same), the view controller itself would update its view. But I don't think this is
-    //       feasible...
+    for (UIViewController *viewController in self.viewControllerStack) {
+        [viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    // TODO:
+    for (UIViewController *viewController in self.viewControllerStack) {
+        // Create the animation again: The frames have changed!
+        [self createAndCacheAnimationForViewController:viewController];
+        
+        [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    // TODO:
+    for (UIViewController *viewController in self.viewControllerStack) {
+        [viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    }
 }
 
 #pragma mark Pushing view controllers onto the stack
