@@ -116,7 +116,7 @@
     // Add those view controller views which have not been added yet
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         [containerContent addViewToContainerView:self.view
-                                         blockInteraction:YES];
+                                blockInteraction:YES];
         
         // Adjust size if enabled
         if (self.stretchingContent) {
@@ -271,7 +271,7 @@
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
-                                         blockInteraction:YES];
+                                blockInteraction:YES];
         
         // Frame reliable only after viewWillAppear
         if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewWillAppear) {

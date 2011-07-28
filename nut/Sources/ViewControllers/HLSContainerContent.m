@@ -16,7 +16,7 @@
 @interface HLSContainerContent ()
 
 /**
- * Creating an animation corresponding to some transition style. The disappearing view controllers will be applied a 
+ * Create an animation corresponding to some transition style. The disappearing view controllers will be applied a 
  * corresponding disapperance effect, the appearing view controllers an appearance effect. The commonFrame parameter 
  * is the frame where all animations take place.
  * The timing of the animation depends on the transition style
@@ -39,7 +39,7 @@
                                      duration:(NSTimeInterval)duration;
 
 @property (nonatomic, retain) UIViewController *viewController;
-@property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedAsSubview;
+@property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
 @property (nonatomic, retain) IBOutlet UIView *blockingView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
@@ -49,6 +49,7 @@
 
 @end
 
+// Key for runtime container - view controller object association
 static void *kContainerKey = &kContainerKey;
 
 @implementation HLSContainerContent
@@ -495,10 +496,10 @@ static void *kContainerKey = &kContainerKey;
 
 - (void)dealloc
 {
-    // Restore the view controller's frame. If the view controller was not retained elsewhere, this is
-    // unnecessary. But clients might keep additional references to view controllers for caching purposes.
-    // The cleanest we can do is to restore view controller properties when it is removed from a container,
-    // no matter whether it is actually reused later or not
+    // Restore the view controller's frame. If the view controller was not retained elsewhere, this would not be necessary. 
+    // But clients might keep additional references to view controllers for caching purposes. The cleanest we can do is to 
+    // restore a view controller's properties when it is removed from a container, no matter whether or not it is later 
+    // reused by the client
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
     
@@ -517,7 +518,7 @@ static void *kContainerKey = &kContainerKey;
 
 @synthesize viewController = m_viewController;
 
-@synthesize addedAsSubview = m_addedAsSubview;
+@synthesize addedToContainerView = m_addedToContainerView;
 
 @synthesize blockingView = m_blockingView;
 
@@ -533,8 +534,8 @@ static void *kContainerKey = &kContainerKey;
 
 - (UIView *)view
 {
-    if (! self.addedAsSubview) {
-        HLSLoggerWarn(@"View not loaded");
+    if (! self.addedToContainerView) {
+        HLSLoggerWarn(@"View not added to a container view");
         return nil;
     }
     else {
@@ -547,14 +548,14 @@ static void *kContainerKey = &kContainerKey;
 - (void)addViewToContainerView:(UIView *)containerView 
               blockInteraction:(BOOL)blockInteraction
 {
-    if (self.addedAsSubview) {
-        HLSLoggerInfo(@"View controller's view already added as subview");
+    if (self.addedToContainerView) {
+        HLSLoggerInfo(@"View controller's view already added as to a container view");
         return;
     }
     
     // This triggers lazy view creation
     [containerView addSubview:self.viewController.view];
-    self.addedAsSubview = YES;
+    self.addedToContainerView = YES;
     
     // Insert blocking subview if required
     if (blockInteraction) {
@@ -570,14 +571,14 @@ static void *kContainerKey = &kContainerKey;
 
 - (void)removeViewFromContainerView
 {
-    if (! self.addedAsSubview) {
+    if (! self.addedToContainerView) {
         HLSLoggerInfo(@"View controller's view is not added as subview");
         return;
     }
     
     // Remove the view controller's view
     [self.viewController.view removeFromSuperview];
-    self.addedAsSubview = NO;
+    self.addedToContainerView = NO;
     
     // Remove the blocking view (if any)
     [self.blockingView removeFromSuperview];
@@ -620,11 +621,11 @@ static void *kContainerKey = &kContainerKey;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedAsSubview: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@>", 
             [self class],
             self,
             self.viewController,
-            self.addedAsSubview];
+            self.addedToContainerView];
 }
 
 @end
