@@ -21,6 +21,8 @@
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
  *     happen that a client caches this view controller for later reuse
  *   - in general, we want to restrict user interaction to the most recently view controller inserted into a container
+ *   - we sometimes may want the view controller container to forward some properties of a contained view controller
+ *     (e.g. title, navigation elements, toolbar, etc.) transparently
  * The HLSContainerContent class provides a way to ensure that those common properties can be fulfilled. It can be seen
  * as some kind of smart pointer object, taking ownership of a view controller inserted into a view controller
  * container.
@@ -39,6 +41,7 @@
     UIView *m_blockingView;
     HLSTransitionStyle m_transitionStyle;
     NSTimeInterval m_duration;
+    BOOL m_viewControllerContainerForwardingEnabled;
     HLSAnimation *m_cachedAnimation;
     CGRect m_originalViewFrame;
     CGFloat m_originalViewAlpha;
@@ -126,5 +129,12 @@
  * created this way.
  */
 @property (nonatomic, readonly, retain) UIViewController *viewController;
+
+/**
+ * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
+ * are forwarded through the container controller if this controller is a view controller. This makes it possible
+ * to display those elements transparently higher up in the view controller hierarchy
+ */
+@property (nonatomic, assign, getter=isViewControllerContainerForwardingEnabled) BOOL viewControllerContainerForwardingEnabled;
 
 @end

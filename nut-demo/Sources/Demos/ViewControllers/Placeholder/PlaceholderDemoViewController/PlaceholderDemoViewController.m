@@ -197,7 +197,7 @@
     
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     
-    self.forwardingPropertiesSwitch.on = self.forwardInsetViewControllerProperties;
+    self.forwardingPropertiesSwitch.on = self.forwardingPropertiesEnabled;
     [self.forwardingPropertiesSwitch addTarget:self
                                         action:@selector(forwardingPropertiesSwitchValueChanged:)
                               forControlEvents:UIControlEventValueChanged];
@@ -295,7 +295,7 @@
 
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender
 {
-    self.forwardInsetViewControllerProperties = self.forwardingPropertiesSwitch.on;
+    self.forwardingPropertiesEnabled = self.forwardingPropertiesSwitch.on;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

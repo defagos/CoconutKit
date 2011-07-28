@@ -78,13 +78,36 @@
 
 @synthesize containerContent = m_containerContent;
 
+- (void)setContainerContent:(HLSContainerContent *)containerContent
+{
+    if (m_containerContent == containerContent) {
+        return;
+    }
+    
+    [m_containerContent release];
+    m_containerContent = [containerContent retain];
+    
+    containerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
+}
+
 @synthesize oldContainerContent = m_oldContainerContent;
 
 @synthesize placeholderView = m_placeholderView;
 
 @synthesize stretchingContent = m_stretchingContent;
 
-@synthesize forwardInsetViewControllerProperties = m_forwardInsetViewControllerProperties;
+@synthesize forwardingPropertiesEnabled = m_forwardingPropertiesEnabled;
+
+- (void)setForwardingPropertiesEnabled:(BOOL)forwardingPropertiesEnabled
+{
+    if (m_forwardingPropertiesEnabled == forwardingPropertiesEnabled) {
+        return;
+    }
+    
+    m_forwardingPropertiesEnabled = forwardingPropertiesEnabled;
+    
+    self.containerContent.viewControllerContainerForwardingEnabled = m_forwardingPropertiesEnabled;
+}
 
 @synthesize delegate = m_delegate;
 

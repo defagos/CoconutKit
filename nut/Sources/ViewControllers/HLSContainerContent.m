@@ -14,6 +14,50 @@
 
 #import <objc/runtime.h>
 
+// Keys for runtime container - view controller object association
+static void *kContainerControllerKey = &kContainerControllerKey;
+static void *kContainerContentKey = &kContainerContentKey;
+
+static id (*UIViewController__navigationController)(id, SEL) = NULL;
+static id (*UIViewController__navigationItem)(id, SEL) = NULL;
+static id (*UIViewController__title)(id, SEL) = NULL;
+
+// Container content property forwarding
+// TODO: Other methods (setTitle, toolbar, etc.). Update documentation accordingly
+static id placeholderForward(UIViewController *self, SEL _cmd)
+{
+    id (*UIViewControllerMethod)(id, SEL) = NULL;
+    if (_cmd == @selector(navigationController)) {
+        UIViewControllerMethod = UIViewController__navigationController;
+    }
+    else if (_cmd == @selector(navigationItem)) {
+        UIViewControllerMethod = UIViewController__navigationItem;
+    }
+    else if (_cmd == @selector(title)) {
+        UIViewControllerMethod = UIViewController__title;
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property forwarding (%@)", NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+    }
+    
+    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
+    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
+    if (! [containerController isKindOfClass:[UIViewController class]]) {
+        return UIViewControllerMethod(self, _cmd);
+    }
+    
+    // Is forwarding enabled? Retrieve associated container content object to know it
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
+    if (containerContent.viewControllerContainerForwardingEnabled) {
+        return UIViewControllerMethod(containerController, _cmd);
+    }
+    // No forwarding. Call original implementation
+    else {
+        return UIViewControllerMethod(self, _cmd);
+    }
+}
+
 @interface HLSContainerContent ()
 
 /**
@@ -50,12 +94,18 @@
 
 @end
 
-// Key for runtime container - view controller object association
-static void *kContainerKey = &kContainerKey;
-
 @implementation HLSContainerContent
 
 #pragma mark Class methods
+
++ (void)load
+{
+    // Swizzle methods ASAP. Cannot be in +initialize since those methods might be called before an HLSContainerContent is actually created for the
+    // first tiime
+    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForward, NULL);
+    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)placeholderForward, NULL);
+    UIViewController__title = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(title), (IMP)placeholderForward, NULL);
+}
 
 // TODO: When bringToFront is set to YES for HLSAnimation (which is the case here), we can change the z-order of views during the animation.
 //       This could let create funny effects (e.g. shuffling views: the new inset is below the new one, both centered; the old one moves to 
@@ -466,7 +516,7 @@ static void *kContainerKey = &kContainerKey;
 
 + (id)containerControllerForViewController:(UIViewController *)viewController;
 {
-    return objc_getAssociatedObject(viewController, kContainerKey);
+    return objc_getAssociatedObject(viewController, kContainerControllerKey);
 }
 
 #pragma mark Object creation and destruction
@@ -481,8 +531,13 @@ static void *kContainerKey = &kContainerKey;
         NSAssert(containerController != nil, @"The container cannot be nil");
         
         // Associate the view controller with its container
-        NSAssert(! objc_getAssociatedObject(viewController, kContainerKey), @"A view controller can only be inserted into one container controller");
-        objc_setAssociatedObject(viewController, kContainerKey, containerController, OBJC_ASSOCIATION_ASSIGN);
+        NSAssert(! objc_getAssociatedObject(viewController, kContainerControllerKey), @"A view controller can only be inserted into one container controller");
+        objc_setAssociatedObject(viewController, kContainerControllerKey, containerController, OBJC_ASSOCIATION_ASSIGN);
+        
+        // Associate the view controller with its container content object
+        // Associate the view controller with its container
+        NSAssert(! objc_getAssociatedObject(viewController, kContainerContentKey), @"A view controller can only be associated with one container content object");
+        objc_setAssociatedObject(viewController, kContainerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
         self.viewController = viewController;
         self.transitionStyle = transitionStyle;
@@ -509,8 +564,12 @@ static void *kContainerKey = &kContainerKey;
     self.viewController.view.alpha = self.originalViewAlpha;
     
     // Remove the association of the view controller with its container
-    NSAssert(objc_getAssociatedObject(self.viewController, kContainerKey), @"The view controller was not inserted into a container controller");
-    objc_setAssociatedObject(self.viewController, kContainerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    NSAssert(objc_getAssociatedObject(self.viewController, kContainerControllerKey), @"The view controller was not inserted into a container controller");
+    objc_setAssociatedObject(self.viewController, kContainerControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    
+    // Remove the association of the view controller with its content container object
+    NSAssert(objc_getAssociatedObject(self.viewController, kContainerContentKey), @"The view controller was not associated with a content container");
+    objc_setAssociatedObject(self.viewController, kContainerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     self.viewController = nil;
     self.blockingView = nil;
@@ -530,6 +589,8 @@ static void *kContainerKey = &kContainerKey;
 @synthesize transitionStyle = m_transitionStyle;
 
 @synthesize duration = m_duration;
+
+@synthesize viewControllerContainerForwardingEnabled = m_viewControllerContainerForwardingEnabled;
 
 @synthesize cachedAnimation = m_cachedAnimation;
 
