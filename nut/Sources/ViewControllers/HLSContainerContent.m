@@ -546,6 +546,7 @@ static void *kContainerKey = &kContainerKey;
 #pragma mark View management
 
 - (void)addViewToContainerView:(UIView *)containerView 
+                       stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction
 {
     if (self.addedToContainerView) {
@@ -567,6 +568,11 @@ static void *kContainerKey = &kContainerKey;
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
+
+    // Stretching
+    if (stretch) {
+        self.viewController.view.frame = containerView.bounds;
+    }
 }
 
 - (void)removeViewFromContainerView

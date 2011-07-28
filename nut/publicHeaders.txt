@@ -1,6 +1,7 @@
 HLSAnimation.h
 HLSAnimationStep.h
 HLSAssert.h
+HLSContainerContent.h
 HLSContainerControllerLoader.h
 HLSConverters.h
 HLSCursor.h

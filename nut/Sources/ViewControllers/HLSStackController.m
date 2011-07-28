@@ -116,13 +116,8 @@
     // Add those view controller views which have not been added yet
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         [containerContent addViewToContainerView:self.view
+                                         stretch:self.stretchingContent
                                 blockInteraction:YES];
-        
-        // Adjust size if enabled
-        if (self.stretchingContent) {
-            UIView *view = [containerContent view];
-            view.frame = self.view.bounds;
-        }
         
         // Push non-animated
         HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
@@ -271,16 +266,8 @@
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
+                                         stretch:self.stretchingContent
                                 blockInteraction:YES];
-        
-        // Frame reliable only after viewWillAppear
-        if ([self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewWillAppear) {
-            // Adjust size if enabled
-            if (self.stretchingContent) {
-                UIView *view = [containerContent view];
-                view.frame = self.view.bounds;
-            }
-        }
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously. The root view controller is never pushed

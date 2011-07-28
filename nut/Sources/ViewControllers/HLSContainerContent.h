@@ -13,8 +13,9 @@
  * View controllers inserted into view controller containers exhibit common properties:
  *   - they belong to a container, which they must be able to identify, and they should not be inserted into several
  *     containers at the same time
- *   - they are displayed using some transition style
- *   - the view controller's view must be created lazily at the time it is really required
+ *   - they are displayed using some transition style, and might be stretched to fill the view when the container
+ *     displayed them
+ *   - a view controller's view must be created lazily at the time it is really required
  *   - it must be possible to pre-load a view controller container before it gets actually displayed
  *   - a view controller container must retain the view controllers it manages
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
@@ -64,8 +65,11 @@
  * which it displays its content). If blockInteraction is set to YES, a transparent stretchable view is inserted below 
  * the view controller's view to prevent interaction with other views below.
  * 
+ * If the stretch boolean is set to YES, the view controller's view is stretched to fill the whole container view.
+ * How this happens depends on the view controller's view autoresizing mask.
  */
 - (void)addViewToContainerView:(UIView *)containerView 
+                       stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction;
 
 /**
