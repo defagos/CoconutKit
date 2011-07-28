@@ -578,7 +578,7 @@ static void *kContainerKey = &kContainerKey;
 - (void)removeViewFromContainerView
 {
     if (! self.addedToContainerView) {
-        HLSLoggerInfo(@"View controller's view is not added as subview");
+        HLSLoggerInfo(@"View controller's view is not added to a container view");
         return;
     }
     
@@ -590,7 +590,8 @@ static void *kContainerKey = &kContainerKey;
     [self.blockingView removeFromSuperview];
     self.blockingView = nil;
     
-    // Restore view controller original properties (this way, it might be reused somewhere else)
+    // Restore view controller original properties (this way, if addViewToContainerView:stretch:blockInteraction:
+    // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
     
@@ -599,9 +600,10 @@ static void *kContainerKey = &kContainerKey;
     self.originalViewAlpha = 0.f;
 }
 
-- (void)releaseView
+- (void)releaseViews
 {
     self.viewController.view = nil;
+    self.blockingView = nil;
     self.cachedAnimation = nil;
 }
 

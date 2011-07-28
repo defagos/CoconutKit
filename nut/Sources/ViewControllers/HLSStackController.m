@@ -169,7 +169,7 @@
         [containerContent removeViewFromContainerView];
         
         // Release views and forward events to the attached view controllers
-        [containerContent releaseView];
+        [containerContent releaseViews];
         [containerContent.viewController viewDidUnload];
     }    
 }

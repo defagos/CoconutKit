@@ -85,9 +85,10 @@
 - (UIView *)view;
 
 /**
- * Release the view and associated resources (setting it to nil)
+ * Release all view and view-related resources. Intended to be called from a viewDidUnload method implementation if 
+ * the container is a view controller itself
  */
-- (void)releaseView;
+- (void)releaseViews;
 
 /**
  * Create and cache an animation which displays the view controller using the defined transition style and duration. 
