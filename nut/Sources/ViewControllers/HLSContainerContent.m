@@ -478,7 +478,7 @@ static void *kContainerKey = &kContainerKey;
         
         // Associate the view controller with its container
         NSAssert(! objc_getAssociatedObject(viewController, kContainerKey), @"A view controller can only be inserted into one container controller");
-        objc_setAssociatedObject(viewController, kContainerKey, self, OBJC_ASSOCIATION_ASSIGN);
+        objc_setAssociatedObject(viewController, kContainerKey, containerController, OBJC_ASSOCIATION_ASSIGN);
         
         self.viewController = viewController;
         self.transitionStyle = transitionStyle;
