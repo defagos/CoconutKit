@@ -13,6 +13,15 @@
 /**
  * For a discussion of float comparison functions, see
  *   http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+ *
+ *
+ * TODO: Warning: Might be unsafe (maybe safe, I think asserting that the sizes are the same should suffice to make it safe), see:
+ *           http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_21.html
+ *           http://labs.qt.nokia.com/2011/06/10/type-punning-and-strict-aliasing/
+ *           http://cellperformance.beyond3d.com/articles/2006/06/understanding-strict-aliasing.html)
+ *
+ *       Possible solution:
+ *           http://en.wikipedia.org/wiki/Unit_in_the_last_place
  */
 
 BOOL floateq_dist(float x, float y, int32_t maxDist)
