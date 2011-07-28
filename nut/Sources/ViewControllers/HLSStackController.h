@@ -31,7 +31,7 @@
  */
 @interface HLSStackController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
 @private
-    NSMutableArray *m_viewControllerInfoStack;         // contains HLSContainedViewControllerInfo objects    
+    NSMutableArray *m_containerContentStack;                    // contains HLSContainerContent objects    
     NSMutableArray *m_pushAnimationStack;                       // stack for storing push animations generated for transitions
     BOOL m_stretchingContent;
     id<HLSStackControllerDelegate> m_delegate;

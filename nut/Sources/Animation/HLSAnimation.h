@@ -9,9 +9,6 @@
 #import "HLSAnimationStep.h"
 #import "HLSTransitionStyle.h"
 
-// Default duration for a transition.
-extern const NSTimeInterval kAnimationTransitionDefaultDuration;
-
 // Forward declarations
 @protocol HLSAnimationDelegate;
 
@@ -64,6 +61,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
+// TODO: These two methods will be removed when HLSPlaceholderViewController has been refactored
 /**
  * Creating an animation corresponding to some transition style. The disappearing views will be applied a corresponding
  * disapperance effect, the appearing views an appearance effect. The commonFrame parameter is the frame where all
@@ -93,6 +91,11 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * animationDidStop: events when played)
  */
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;
+
+/**
+ * The animation steps the animation is made of
+ */
+@property (nonatomic, readonly, retain) NSArray *animationSteps;
 
 /**
  * Tag which can optionally be used to help identifying an animation
