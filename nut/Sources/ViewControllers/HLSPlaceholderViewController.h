@@ -85,7 +85,8 @@
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
                                                             // it fills the placeholder area?
-    BOOL m_forwardInsetViewControllerProperties;
+    BOOL m_forwardInsetViewControllerProperties;            // Does the container forward inset navigation properties transparently?
+    BOOL m_animatingTransition;                             // Is a transition animation running?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 

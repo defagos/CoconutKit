@@ -163,12 +163,13 @@
         return NO;
     }
     
-    // If no inset has been defined, let the placeholder rotate
-    UIViewController *insetViewController = [self insetViewController];
-    if (! insetViewController) {
-        return YES;
+    // If a rotation occurs during a transition, do not let rotate. Could lead to complications
+    if (m_animatingTransition) {
+        HLSLoggerWarn(@"A transition animation is running; rotation aborted");
+        return NO;
     }
     
+    UIViewController *insetViewController = [self insetViewController];
     return [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
         || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
@@ -177,47 +178,35 @@
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-#if 0
-    // If no inset has been defined, we are done
-    UIViewController *insetViewController = [self insetViewController];
-    if (! insetViewController) {
-        return;
-    }
-    
     // If the view controller can rotate by cloning, clone it. Since we use 1-step rotation (smoother, default since iOS3),
     // we cannot swap it in the middle of the animation. Instead, we use a cross-dissolve transition so that the change
     // happens smoothly during the rotation
+    UIViewController *insetViewController = [self insetViewController];
+    [insetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     if ([insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
         UIViewController<HLSOrientationCloner> *cloneableInsetViewController = (UIViewController<HLSOrientationCloner> *)insetViewController;
         UIViewController *clonedInsetViewController = [cloneableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
         [self setInsetViewController:clonedInsetViewController 
                  withTransitionStyle:HLSTransitionStyleCrossDissolve
                             duration:duration];
+        [clonedInsetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
-    
-    [insetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [clonedInsetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-#endif
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-#if 0
     UIViewController *insetViewController = [self insetViewController];
     [insetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-#endif
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-#if 0
     UIViewController *insetViewController = [self insetViewController];
     [insetViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-#endif
 }
 
 #pragma mark Setting the inset view controller
@@ -328,6 +317,8 @@
         return;
     }
     
+    m_animatingTransition = YES;
+    
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = self.containerContent.viewController;
         UIViewController *disappearingViewController = self.oldContainerContent.viewController;
@@ -370,6 +361,8 @@
     if ([animation.tag isEqual:@"add_animation"]) {
         self.oldContainerContent = nil;
     }
+    
+    m_animatingTransition = NO;
 }
 
 #pragma mark HLSReloadable protocol implementation

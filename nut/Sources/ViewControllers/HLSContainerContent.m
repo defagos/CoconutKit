@@ -624,7 +624,8 @@ static void *kContainerKey = &kContainerKey;
     self.cachedAnimation = [HLSContainerContent animationForTransitionStyle:self.transitionStyle 
                                           withDisappearingContainerContents:disappearingContainerContents 
                                                  appearingContainerContents:[NSArray arrayWithObject:self] 
-                                                                commonFrame:commonFrame];
+                                                                commonFrame:commonFrame
+                                                                   duration:self.duration];
     return self.cachedAnimation;
 }
 
