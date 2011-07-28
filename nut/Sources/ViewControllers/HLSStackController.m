@@ -103,8 +103,7 @@
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    // Take all space available. Parent container view controllers should be responsible of StretchingContentg
-    // the view size properly
+    // Take all space available. Parent container view controllers are responsible of stretching the view size properly
     self.view.frame = [[UIScreen mainScreen] applicationFrame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
@@ -166,8 +165,6 @@
     [super viewDidUnload];
     
     for (HLSContainerContent *containerContent in self.containerContentStack) {
-        [containerContent removeViewFromContainerView];
-        
         // Release views and forward events to the attached view controllers
         [containerContent releaseViews];
         [containerContent.viewController viewDidUnload];
@@ -238,7 +235,9 @@
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
-    [self pushViewController:viewController withTransitionStyle:transitionStyle duration:kAnimationTransitionDefaultDuration];
+    [self pushViewController:viewController 
+         withTransitionStyle:transitionStyle
+                    duration:kAnimationTransitionDefaultDuration];
 }
 
 - (void)pushViewController:(UIViewController *)viewController

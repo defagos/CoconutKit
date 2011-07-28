@@ -9,6 +9,7 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 
 #import <objc/runtime.h>
@@ -602,8 +603,9 @@ static void *kContainerKey = &kContainerKey;
 
 - (void)releaseViews
 {
+    [self removeViewFromContainerView];
+    
     self.viewController.view = nil;
-    self.blockingView = nil;
     self.cachedAnimation = nil;
 }
 

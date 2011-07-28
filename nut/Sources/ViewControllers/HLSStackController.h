@@ -15,17 +15,22 @@
 @protocol HLSStackControllerDelegate;
 
 /**
- * TODO: Better documentation
- * About view lifecycle events: When a view controller gets covered by pushing another one, it will receive the viewWill
- * and viewDidDisappear events, even if it stays visible because the newly pushed view controller is transparent. Dealing
- * with transparency would have been way too difficult (you have to consider all superimposed views to know if some
- * view controller's view down the stack is partially visible), and in general we want the covered view controller
- * to behave as if it disappeared (though it still stays visible).
- * Not meant to be subclassed
+ * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
+ * to use custom animations, and those look quite ugly on the iPad. Sometimes, we also want to show view controllers
+ * modally, but often the usual presentModalViewController:animated: method of UIViewController is too limited (modal
+ * sheets on the iPad have pre-defined sizes, and when displaying full screen the view below disappears, which prevents
+ * from displaying transparent modal windows.
  *
- * Question: Not meant to be subclassed => which size? Probably largest size available by default and rely on the parent 
- *           view controller's behavior (should be able to automatically resize its child view controller's views properly).
- *           This is the case for UINavigationController, UITabBarController, HLSPlaceholderViewController
+ * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack. It can
+ * be applied a richer set of transition animations. HLSStackController is used as is and is not meant to be subclassed.
+ *
+ * This view controller container guarantees correct view lifecycle and rotation event propagation to the view controllers
+ * it manages. Note that when a view controller gets pushed onto the stack, the view controller below will get the
+ * viewWillDisappear: and viewDidDisappear: events, even if it stays visible through transparency (the same holds for
+ * the viewWillAppear: and viewDidAppear: events when the view controller on top gets popped).
+ * This decision was made because it would have been extremely difficult and costly to look at all view controller's 
+ * views in the stack to find those which are really visible (this would have required to find the intersections of all 
+ * view and subview rectangles, cumulating alphas to find which parts of the view stack are visible and which aren't).
  *
  * Designated initializer: initWithRootCiewController:
  */
@@ -37,8 +42,8 @@
 }
 
 /**
- * Create a new stack controller with the specified view controller as root. This view controller can neither be animated 
- * when installed, nor removed
+ * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
+ * installed, and can neither be replaced, nor removed
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 
@@ -51,16 +56,19 @@
 /**
  * Push a view controller onto the stack using one of the built-in transition styles. The transition duration is set by 
  * the animation itself
- * This method can also be called before the stack controller is displayed
+ * This method can also be called before the stack controller is displayed (the animation does not get played, but this
+ * sets the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 
 /**
  * Same as pushViewController:withTransitionStyle:, but the transition duration can be overridden (the duration will be 
- * evenly distributed on the animation steps composing the animation). Use the special value kAnimationTransitionDefaultDuration 
- * as duration to get the default transition duration (same result as the method above)
- * This method can also be called before the stack controller is displayed
+ * evenly distributed on the animation steps composing the animation so that the animation rhythm stays the same). Use 
+ * the reserved kAnimationTransitionDefaultDuration value as duration to get the default transition duration (same 
+ * result as the method above)
+ * This method can also be called before the stack controller is displayed (the animation does not get played, but this
+ * sets the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
@@ -88,11 +96,11 @@
 - (NSArray *)viewControllers;
 
 /**
- * If set to YES, the content view controller's view frames are automatically adjusted to match the container view bounds. The resizing
- * behavior still depends on the autoresizing behavior of the content views, though (for example, if a content view is able to stretch 
- * in both directions, it will fill the entire container view). If set to NO, the content view is used as is.
- * Changing this property only affect view controllers which will be displayed. In general, you should set this property at creation 
- * time and do not alter it afterwards.
+ * If set to YES, the view controller's view frames are automatically adjusted to match the container view bounds. The 
+ * resizing behavior still depends on the autoresizing behavior of the content views, though (for example, if a content 
+ * view is able to stretch in both directions, it will fill the entire container view). If set to NO, the content view 
+ * is used as is. Changing this property only affect view controllers which are displayed afterwards. In general, this
+ * property is set right after the stack controller is instantiated and never changed.
  *
  * Default value is NO.
  */
@@ -106,9 +114,18 @@
 
 @optional
 
+/**
+ * Called when a view controller will be shown. This happens when a view controller is pushed onto the stack or
+ * revealed by popping the one on top of it
+ */
 - (void)stackController:(HLSStackController *)stackController 
  willShowViewController:(UIViewController *)viewController 
                animated:(BOOL)animated;
+
+/**
+ * Called when a view controller has been shown. This happens when a view controller is pushed onto the stack or
+ * revealed by popping the one on top of it
+ */
 - (void)stackController:(HLSStackController *)stackController
   didShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
@@ -117,6 +134,9 @@
 
 @interface UIViewController (HLSStackController)
 
+/**
+ * Return the stack controller the view controller is inserted in, nil if none.
+ */
 @property (nonatomic, readonly, assign) HLSStackController *stackController;
 
 @end
