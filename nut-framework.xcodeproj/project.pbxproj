@@ -158,6 +158,9 @@
 		DA7C23A313DD69370008B31D /* nut_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7C222B13DD66780008B31D /* nut_cursor_default_pointer.png */; };
 		DA7C23A413DD69370008B31D /* nut_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7C222C13DD66780008B31D /* nut_strip_default_background.png */; };
 		DA7C23A613DD6DED0008B31D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA7C23A513DD6DEC0008B31D /* Info.plist */; };
+		DA80EE2413E1785700B0947F /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = DA80EE2213E1785700B0947F /* HLSContainerContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA80EE2513E1785700B0947F /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DA80EE2313E1785700B0947F /* HLSContainerContent.m */; };
+		DA80EE2713E17B0900B0947F /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DA80EE2613E17B0900B0947F /* HLSTransitionStyle.m */; };
 		DAA742E013DD72B4001979EA /* nut_HLSSingleValuePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7C22BC13DD66780008B31D /* nut_HLSSingleValuePickerViewController.xib */; };
 		DAA742E113DD72B4001979EA /* nut_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7C22BD13DD66780008B31D /* nut_HLSWebViewController.xib */; };
 /* End PBXBuildFile section */
@@ -341,6 +344,9 @@
 		DA7C22D613DD66780008B31D /* HLSServiceSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSServiceSettings.m; sourceTree = "<group>"; };
 		DA7C237F13DD68010008B31D /* nut.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nut.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7C23A513DD6DEC0008B31D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nut/Info.plist; sourceTree = "<group>"; };
+		DA80EE2213E1785700B0947F /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
+		DA80EE2313E1785700B0947F /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
+		DA80EE2613E17B0900B0947F /* HLSTransitionStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransitionStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -600,6 +606,8 @@
 		DA7C22AA13DD66780008B31D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA80EE2213E1785700B0947F /* HLSContainerContent.h */,
+				DA80EE2313E1785700B0947F /* HLSContainerContent.m */,
 				DA7C22AB13DD66780008B31D /* HLSPageController.h */,
 				DA7C22AC13DD66780008B31D /* HLSPageController.m */,
 				DA7C22AD13DD66780008B31D /* HLSPlaceholderViewController.h */,
@@ -611,6 +619,7 @@
 				DA7C22B313DD66780008B31D /* HLSTableSearchDisplayViewController.h */,
 				DA7C22B413DD66780008B31D /* HLSTableSearchDisplayViewController.m */,
 				DA7C22B513DD66780008B31D /* HLSTransitionStyle.h */,
+				DA80EE2613E17B0900B0947F /* HLSTransitionStyle.m */,
 				DA7C22B613DD66780008B31D /* HLSViewController.h */,
 				DA7C22B713DD66780008B31D /* HLSViewController.m */,
 				DA7C22B813DD66780008B31D /* HLSWebViewController.h */,
@@ -665,6 +674,7 @@
 				DA7C22E013DD66780008B31D /* HLSAnimation.h in Headers */,
 				DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */,
 				DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */,
+				DA80EE2413E1785700B0947F /* HLSContainerContent.h in Headers */,
 				DA7C22ED13DD66780008B31D /* HLSContainerControllerLoader.h in Headers */,
 				DA7C22EE13DD66780008B31D /* HLSConverters.h in Headers */,
 				DA7C233A13DD66780008B31D /* HLSCursor.h in Headers */,
@@ -939,6 +949,8 @@
 				DA7C237613DD66780008B31D /* HLSServiceRequest.m in Sources */,
 				DA7C237813DD66780008B31D /* HLSServiceRequester.m in Sources */,
 				DA7C237A13DD66780008B31D /* HLSServiceSettings.m in Sources */,
+				DA80EE2513E1785700B0947F /* HLSContainerContent.m in Sources */,
+				DA80EE2713E17B0900B0947F /* HLSTransitionStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

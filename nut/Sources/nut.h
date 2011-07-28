@@ -7,6 +7,7 @@
 #import <nut/HLSAnimation.h>
 #import <nut/HLSAnimationStep.h>
 #import <nut/HLSAssert.h>
+#import <nut/HLSContainerContent.h>
 #import <nut/HLSContainerControllerLoader.h>
 #import <nut/HLSConverters.h>
 #import <nut/HLSCursor.h>
@@ -18,7 +19,6 @@
 #import <nut/HLSLogger.h>
 #import <nut/HLSModelManager.h>
 #import <nut/HLSNotifications.h>
-#import <nut/HLSOneViewAnimationStepDefinition.h>
 #import <nut/HLSOrientationCloner.h>
 #import <nut/HLSPageController.h>
 #import <nut/HLSPlaceholderViewController.h>
@@ -54,7 +54,6 @@
 #import <nut/HLSTextField.h>
 #import <nut/HLSTransform.h>
 #import <nut/HLSTransitionStyle.h>
-#import <nut/HLSTwoViewAnimationStepDefinition.h>
 #import <nut/HLSUserInterfaceLock.h>
 #import <nut/HLSValidable.h>
 #import <nut/HLSValidators.h>
