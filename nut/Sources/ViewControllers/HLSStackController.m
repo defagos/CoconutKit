@@ -180,6 +180,12 @@
         return NO;
     }
     
+    // If a rotation occurs during a transition, do not let rotate. Could lead to complications
+    if (m_animatingTransition) {
+        HLSLoggerWarn(@"A transition animation is running; rotation aborted");
+        return NO;
+    }
+    
     // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday... The easiest
     //       way is probably not to rotate all view, but only the visible one. If it is an HLSOrientationCloner,
     //       swap it just before it will appear (if a view controller on top of it is popped) or in place (if it
@@ -334,6 +340,8 @@
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {    
+    m_animatingTransition = YES;
+    
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = nil;
         UIViewController *disappearingViewController = nil;
@@ -380,6 +388,7 @@
             [disappearingContainerContent removeViewFromContainerView];
         }
         else {
+            m_animatingTransition = NO;
             return;
         }
         
@@ -397,6 +406,8 @@
     if ([animation.tag isEqual:@"reverse_push_animation"]) {
         [self.containerContentStack removeLastObject];
     }
+    
+    m_animatingTransition = NO;
 }
 
 #pragma mark HLSReloadable protocol implementation

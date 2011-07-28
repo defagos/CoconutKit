@@ -41,8 +41,10 @@
  */
 @interface HLSStackController : HLSViewController <HLSReloadable> {
 @private
-    NSMutableArray *m_containerContentStack;                    // contains HLSContainerContent objects
-    BOOL m_stretchingContent;
+    NSMutableArray *m_containerContentStack;                    // Contains HLSContainerContent objects
+    BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
+                                                                // container view frame?
+    BOOL m_animatingTransition;                                 // Is a transition animation running?
     id<HLSStackControllerDelegate> m_delegate;
 }
 
