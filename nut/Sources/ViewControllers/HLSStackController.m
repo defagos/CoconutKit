@@ -8,6 +8,7 @@
 
 #import "HLSStackController.h"
 
+#import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
@@ -15,7 +16,7 @@
 
 // TODO: Bug: self.interfaceOrientation always returns portrait. WTF?
 
-@interface HLSStackController ()
+@interface HLSStackController () <HLSAnimationDelegate>
 
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
 
@@ -54,6 +55,17 @@
     self.delegate = nil;
     
     [super dealloc];
+}
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    for (HLSContainerContent *containerContent in self.containerContentStack) {
+        // Release views and forward events to the attached view controllers
+        [containerContent releaseViews];
+        [containerContent.viewController viewDidUnload];
+    }
 }
 
 #pragma mark Accessors and mutators
@@ -114,13 +126,13 @@
     
     // Add those view controller views which have not been added yet
     for (HLSContainerContent *containerContent in self.containerContentStack) {
-        [containerContent addViewToContainerView:self.view
-                                         stretch:self.stretchingContent
-                                blockInteraction:YES];
-        
-        // Push non-animated
-        HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
-        [pushAnimation playAnimated:NO];
+        if ([containerContent addViewToContainerView:self.view
+                                             stretch:self.stretchingContent
+                                    blockInteraction:YES]) {
+            // Push non-animated
+            HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
+            [pushAnimation playAnimated:NO];            
+        }        
     }
     
     // Forward events to the top view controller
@@ -158,17 +170,6 @@
     
     UIViewController *topViewController = [self topViewController];
     [topViewController viewDidDisappear:animated];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    for (HLSContainerContent *containerContent in self.containerContentStack) {
-        // Release views and forward events to the attached view controllers
-        [containerContent releaseViews];
-        [containerContent.viewController viewDidUnload];
-    }    
 }
 
 #pragma mark Orientation management
@@ -269,7 +270,7 @@
                                 blockInteraction:YES];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-        // expect it to occur animated, even if instantaneously. The root view controller is never pushed
+        // expect it to occur animated, even if instantaneously
         HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
         if ([self isViewVisible]) {
             [pushAnimation playAnimated:YES];
@@ -308,7 +309,7 @@
     }
 }
 
-#pragma mark Managing view controllers
+#pragma mark Animation
 
 - (HLSAnimation *)createAnimationForContainerContent:(HLSContainerContent *)containerContent
 {
@@ -342,7 +343,6 @@
             disappearingViewController = [self topViewController];
         }
         else {
-            HLSLoggerWarn(@"Other animation; nothing to do");
             return;
         }
         
@@ -359,10 +359,9 @@
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    UIViewController *disappearingViewController = nil;
-    
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = nil;
+        UIViewController *disappearingViewController = nil;
         
         if ([animation.tag isEqual:@"push_animation"]) {
             appearingViewController = [self topViewController];
@@ -377,7 +376,6 @@
             [disappearingContainerContent removeViewFromContainerView];
         }
         else {
-            HLSLoggerWarn(@"Other animation; nothing to do");
             return;
         }
         

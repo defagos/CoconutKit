@@ -6,7 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSAnimation.h"
 #import "HLSReloadable.h"
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
@@ -32,9 +31,15 @@
  * views in the stack to find those which are really visible (this would have required to find the intersections of all 
  * view and subview rectangles, cumulating alphas to find which parts of the view stack are visible and which aren't).
  *
- * Designated initializer: initWithRootCiewController:
+ * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
+ * for view controllers you pushed in it (it will be ignored, see UIViewController documentation). The 2-step rotation
+ * is deprecated starting with iOS 5, you should not use it anymore anyway.
+ *
+ * TODO: This class currently does not support view controllers implementing the HLSOrientationCloner protocol
+ *
+ * Designated initializer: initWithRootViewController:
  */
-@interface HLSStackController : HLSViewController <HLSReloadable, HLSAnimationDelegate> {
+@interface HLSStackController : HLSViewController <HLSReloadable> {
 @private
     NSMutableArray *m_containerContentStack;                    // contains HLSContainerContent objects
     BOOL m_stretchingContent;
@@ -99,8 +104,9 @@
  * If set to YES, the view controller's view frames are automatically adjusted to match the container view bounds. The 
  * resizing behavior still depends on the autoresizing behavior of the content views, though (for example, if a content 
  * view is able to stretch in both directions, it will fill the entire container view). If set to NO, the content view 
- * is used as is. Changing this property only affect view controllers which are displayed afterwards. In general, this
- * property is set right after the stack controller is instantiated and never changed.
+ * is used as is. 
+ * Changing this property only affect view controllers which are displayed afterwards. In general, this property is set 
+ * right after the stack controller is instantiated and never changed.
  *
  * Default value is NO.
  */
@@ -135,7 +141,7 @@
 @interface UIViewController (HLSStackController)
 
 /**
- * Return the stack controller the view controller is inserted in, nil if none.
+ * Return the stack controller the view controller is inserted in, or nil if none.
  */
 @property (nonatomic, readonly, assign) HLSStackController *stackController;
 
