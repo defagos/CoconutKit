@@ -180,7 +180,11 @@
         return NO;
     }
     
-    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday...
+    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday... The easiest
+    //       way is probably not to rotate all view, but only the visible one. If it is an HLSOrientationCloner,
+    //       swap it just before it will appear (if a view controller on top of it is popped) or in place (if it
+    //       is at the top of the stack). Maybe this is not so difficult to implement after all, but this means
+    //       that some calls to will...rotate / did...rotate will probably be made directly from viewWillAppear:
     
     // If one view controller in the stack does not support the orientation, neither will the container
     for (HLSContainerContent *containerContent in self.containerContentStack) {

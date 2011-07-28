@@ -30,6 +30,7 @@
 - (void)heavySampleButtonClicked:(id)sender;
 - (void)portraitOnlyButtonClicked:(id)sender;
 - (void)landscapeOnlyButtonClicked:(id)sender;
+- (void)removeButtonClicked:(id)sender;
 - (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)containerCustomizationButtonClicked:(id)sender;
@@ -48,8 +49,7 @@
         self.title = @"HLSPlaceholderViewController";
         
         // Pre-load a view controller before display. Yep, this is possible!
-        UIViewController *viewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
-        self.insetViewController = viewController;
+        self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         self.stretchingContent = YES;
     }
     return self;
@@ -76,6 +76,7 @@
     self.landscapeOnlyButton = nil;
     self.orientationClonerButton = nil;
     self.containerCustomizationButton = nil;
+    self.removeButton = nil;
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
@@ -102,6 +103,8 @@
 @synthesize orientationClonerButton = m_orientationClonerButton;
 
 @synthesize containerCustomizationButton = m_containerCustomizationButton;
+
+@synthesize removeButton = m_removeButton;
 
 @synthesize hideWithModalButton = m_hideWithModalButton;
 
@@ -161,6 +164,12 @@
                                  action:@selector(landscapeOnlyButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
+    [self.removeButton setTitle:NSLocalizedString(@"Remove", @"Remove") 
+                       forState:UIControlStateNormal];
+    [self.removeButton addTarget:self
+                          action:@selector(removeButtonClicked:)
+                forControlEvents:UIControlEventTouchUpInside];
+    
     [self.orientationClonerButton setTitle:@"HLSOrientationCloner"
                                   forState:UIControlStateNormal];
     [self.orientationClonerButton addTarget:self
@@ -183,8 +192,8 @@
     
     self.stretchingContentSwitch.on = self.stretchingContent;
     [self.stretchingContentSwitch addTarget:self
-                                  action:@selector(stretchingContentSwitchValueChanged:)
-                        forControlEvents:UIControlEventValueChanged];
+                                     action:@selector(stretchingContentSwitchValueChanged:)
+                           forControlEvents:UIControlEventValueChanged];
     
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     
@@ -251,6 +260,11 @@
 {
     LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
     [self displayInsetViewController:landscapeOnlyViewController];
+}
+
+- (void)removeButtonClicked:(id)sender
+{
+    [self displayInsetViewController:nil];
 }
 
 - (void)hideWithModalButtonClicked:(id)sender

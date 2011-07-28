@@ -91,6 +91,7 @@
 
 /**
  * Set the view controller to display as inset. The transition is made without animation.
+ * Setting the inset view controller to nil removes the one currently display (if any)
  * This property can also be set before the placeholder view controller is displayed.
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController;
@@ -98,6 +99,8 @@
 /**
  * Display an inset view controller using one of the available built-in transition styles. The transition duration is 
  * set by the animation itself
+ * Setting the inset view controller to nil removes the one currently display (if any). Only the following styles are
+ * available in this case: HLSTransitionStyleNone, HLSTransitionStyleFadeIn and HLSTransitionStyleCrossDissolve
  * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
@@ -108,6 +111,8 @@
  * evenly distributed on the animation steps composing the animation so that the animation rhythm stays the same)
  * Use the special value kAnimationTransitionDefaultDuration as duration to get the default transition duration 
  * (same result as the method above)
+ * Setting the inset view controller to nil removes the one currently display (if any). Only the following styles are
+ * available in this case: HLSTransitionStyleNone and HLSTransitionStyleCrossDissolve
  * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController

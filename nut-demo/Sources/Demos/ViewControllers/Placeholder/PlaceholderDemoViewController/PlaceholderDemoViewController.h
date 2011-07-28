@@ -19,6 +19,7 @@
     UIButton *m_landscapeOnlyButton;
     UIButton *m_orientationClonerButton;
     UIButton *m_containerCustomizationButton;
+    UIButton *m_removeButton;
     UIButton *m_hideWithModalButton;
     UILabel *m_transitionLabel;
     UIPickerView *m_transitionPickerView;
@@ -38,6 +39,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *orientationClonerButton;
 @property (nonatomic, retain) IBOutlet UIButton *containerCustomizationButton;
 @property (nonatomic, retain) IBOutlet UIButton *hideWithModalButton;
+@property (nonatomic, retain) IBOutlet UIButton *removeButton;
 @property (nonatomic, retain) IBOutlet UILabel *transitionLabel;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UILabel *stretchingContentLabel;
