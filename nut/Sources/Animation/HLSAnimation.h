@@ -61,30 +61,6 @@
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
-// TODO: These two methods will be removed when HLSPlaceholderViewController has been refactored
-/**
- * Creating an animation corresponding to some transition style. The disappearing views will be applied a corresponding
- * disapperance effect, the appearing views an appearance effect. The commonFrame parameter is the frame where all
- * animations take place.
- * The timing of the animation depends on the transition style
- */
-+ (HLSAnimation *)animationForTransitionStyle:(HLSTransitionStyle)transitionStyle
-                        withDisappearingViews:(NSArray *)disappearingViews
-                               appearingViews:(NSArray *)appearingViews
-                                  commonFrame:(CGRect)commonFrame;
-
-/**
- * Same as the previous method, but with the default transition duration overridden. The total duration is distributed
- * among the animation steps so that the animation still looks the same, only slower / faster. Use the special value
- * kAnimationTransitionDefaultDuration as duration to get the default transition duration (same result as the method
- * above)
- */
-+ (HLSAnimation *)animationForTransitionStyle:(HLSTransitionStyle)transitionStyle
-                        withDisappearingViews:(NSArray *)disappearingViews
-                               appearingViews:(NSArray *)appearingViews
-                                  commonFrame:(CGRect)commonFrame
-                                     duration:(NSTimeInterval)duration;
-
 /**
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
  * is played. If nil is provided, an empty animation is created (such animations still fires animationWillStart: and 

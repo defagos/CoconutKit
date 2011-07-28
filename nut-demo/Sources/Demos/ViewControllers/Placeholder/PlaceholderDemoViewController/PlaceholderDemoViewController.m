@@ -46,6 +46,11 @@
 {
     if ((self = [super init])) {
         self.title = @"HLSPlaceholderViewController";
+        
+        // Pre-load a view controller before display. Yep, this is possible!
+        UIViewController *viewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
+        self.insetViewController = viewController;
+        self.stretchingContent = YES;
     }
     return self;
 }

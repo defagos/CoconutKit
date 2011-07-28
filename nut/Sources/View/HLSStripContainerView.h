@@ -97,7 +97,7 @@
 - (BOOL)addStripAtPosition:(NSUInteger)position length:(NSUInteger)length animated:(BOOL)animated;
 
 /**
- * Add a strip with the default length. Same behaviour as addStripAtPosition:length: otherwise
+ * Add a strip with the default length. Same behavior as addStripAtPosition:length: otherwise
  */
 - (BOOL)addStripAtPosition:(NSUInteger)position animated:(BOOL)animated;
 
@@ -164,7 +164,7 @@
 
 /**
  * Called when a strip view is created. Return the view to be used. If not implemented or if returning nil, a default 
- * style is applied. The view returned should exhibit proper stretching behaviour
+ * style is applied. The view returned should exhibit proper stretching behavior
  */
 - (UIView *)stripContainerView:(HLSStripContainerView *)stripContainerView isRequestingViewForStrip:(HLSStrip *)strip;
 

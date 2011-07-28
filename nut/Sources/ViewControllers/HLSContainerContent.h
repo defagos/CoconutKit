@@ -67,8 +67,10 @@
  * 
  * If the stretch boolean is set to YES, the view controller's view is stretched to fill the whole container view.
  * How this happens depends on the view controller's view autoresizing mask.
+ *
+ * Return YES if the view has been added, NO if it was already added.
  */
-- (void)addViewToContainerView:(UIView *)containerView 
+- (BOOL)addViewToContainerView:(UIView *)containerView 
                        stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction;
 

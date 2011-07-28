@@ -57,6 +57,10 @@ static void *kContainerKey = &kContainerKey;
 
 #pragma mark Class methods
 
+// TODO: When bringToFront is set to YES for HLSAnimation (which is the case here), we can change the z-order of views during the animation.
+//       This could let create funny effects (e.g. shuffling views: the new inset is below the new one, both centered; the old one moves to 
+//       the left, the new one to the right. When their borders match, the new one is brought on top, the old one to the bottom, and
+//       both are moved to the center again.
 + (HLSAnimation *)animationForTransitionStyle:(HLSTransitionStyle)transitionStyle
             withDisappearingContainerContents:(NSArray *)disappearingContainerContents
                    appearingContainerContents:(NSArray *)appearingContainerContents
@@ -546,13 +550,13 @@ static void *kContainerKey = &kContainerKey;
 
 #pragma mark View management
 
-- (void)addViewToContainerView:(UIView *)containerView 
+- (BOOL)addViewToContainerView:(UIView *)containerView 
                        stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction
 {
     if (self.addedToContainerView) {
         HLSLoggerInfo(@"View controller's view already added as to a container view");
-        return;
+        return NO;
     }
     
     // This triggers lazy view creation
@@ -574,6 +578,8 @@ static void *kContainerKey = &kContainerKey;
     if (stretch) {
         self.viewController.view.frame = containerView.bounds;
     }
+    
+    return YES;
 }
 
 - (void)removeViewFromContainerView

@@ -47,7 +47,7 @@
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
         stackController.stretchingContent = YES;
         
-        // Push other view controllers before display. Yep, this is possible!
+        // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
         UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];

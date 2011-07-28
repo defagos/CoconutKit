@@ -25,7 +25,7 @@ typedef enum {
  * you should subclass it to define your own view controllers.
  *
  * If your subclass overrides any of the view lifecycle events methods (viewWill..., viewDid...), be sure to call the super
- * method first, otherwise the behaviour is undefined. The same holds for view orientation events.
+ * method first, otherwise the behavior is undefined. The same holds for view orientation events.
  *
  * There is only one major difference with UIViewController. For UIViewController, shouldAutorotateToInterfaceOrientation:
  * returns YES only for portrait orientations when not overridden. This creates an exception to the rule that subclasses

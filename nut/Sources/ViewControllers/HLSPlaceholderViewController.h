@@ -7,13 +7,11 @@
 //
 
 #import "HLSReloadable.h"
-
-#import "HLSAnimation.h"
-#import "HLSAnimationStep.h"
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
 // Forward declarations
+@class HLSContainerContent;
 @protocol HLSPlaceholderViewControllerDelegate;
 
 /**
@@ -39,7 +37,7 @@
  *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
- * behaviour is undefined:
+ * behavior is undefined:
  *   - initWithNibName:bundle:
  *   - initWithCoder: (for view controllers instantiated from a xib)
  *   - viewWill...
@@ -51,7 +49,8 @@
  *   - didRotateFromInterfaceOrientation:
  *   - viewAnimation...
  * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
- * in subclasses (it will be ignored, see UIViewController documentation), and it is deprecated starting with iOS 5.
+ * in subclasses (it will be ignored, see UIViewController documentation) and inset view controllers. The 2-step
+ * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
  * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rect is known
  * when viewWillAppear: gets called for it, not earlier. If you need to insert code requiring to know the final view dimensions
@@ -59,11 +58,12 @@
  * (in other words, NOT in viewDidLoad). You should not alter the inset view controller's view frame or transform yourself, 
  * otherwise the behavior is undefined.
  *
- * About view reuse: A view controller is retained when set as inset, and released when removed. If no other object keeps
- * a strong reference to it, it will get deallocated, and so will its view. This is perfectly fine in general since
- * it contributes to saving resources. But if you need to reuse a view controller's view instead of creating it from
- * scratch again (most likely if you plan to display it later within the same placeholder view controller), you need 
- * to have another object retain the view controller to keep it alive.
+ * About view controller reuse:
+ * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
+ * to it, it will get deallocated, and so will its view. This is perfectly fine in general since it contributes to saving 
+ * resources. But if you need to reuse a view controller's view instead of creating it from scratch again (most likely if 
+ * you plan to display it later within the same placeholder view controller), you need to have another object retain the 
+ * view controller to keep it alive.
  * For example, you might use HLSPlaceholderViewController to switch through a set of view controllers using a button bar. 
  * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, since
  * this would make navigating between tabs slow. You want to pay the price once, either by creating all views at the 
@@ -80,61 +80,62 @@
  */
 @interface HLSPlaceholderViewController : HLSViewController <HLSAnimationDelegate, HLSReloadable> {
 @private
-    UIViewController *m_insetViewController;                // The view controller displayed as inset
-    BOOL m_insetViewAddedAsSubview;                         // Avoid testing the view controller view property (this triggers view loading,
-                                                            // which we want to precisely control so that it happens when it has to). Test
-                                                            // this boolean value instead, which means that the inset view controller's view
-                                                            // has been added to the placeholder view as subview (which is actually when
-                                                            // we precisely need view loading to occur)
-    CGAffineTransform m_originalInsetViewTransform;         // Save initial inset view properties that the placeholder might alter to restore
-    CGFloat m_originalInsetViewAlpha;                       // it when it is released
-    UIViewController *m_oldInsetViewController;             // View controller which is being removed. Kept alive during the whole transition 
-                                                            // animation (even if no fade out animation occurs)
-    CGAffineTransform m_oldOriginalInsetViewTransform;      // Save the original properties during animation
-    CGFloat m_oldOriginalInsetViewAlpha;                    // (same as above)
+    HLSContainerContent *m_containerContent;                // Wraps the view controller added as inset
+    HLSContainerContent *m_oldContainerContent;             // Retains the old inset view controller wrapper when swapping with a new one
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
                                                             // it fills the placeholder area?
+    BOOL m_forwardInsetViewControllerProperties;
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 
 /**
- * Set the view controller to display as inset. The transition is made without animation
+ * Set the view controller to display as inset. The transition is made without animation.
+ * This property can also be set before the placeholder view controller is displayed.
  */
-@property (nonatomic, retain) UIViewController *insetViewController;
+- (void)setInsetViewController:(UIViewController *)insetViewController;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles. The transition duration is set
- * by the animation itself
+ * Display an inset view controller using one of the available built-in transition styles. The transition duration is 
+ * set by the animation itself
+ * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles (the duration can be
- * freely set; it will be distributed evenly on the animation steps composing the animation, preserving its original
- * aspect). Use the special value kAnimationTransitionDefaultDuration as duration to get the default transition duration 
+ * Display an inset view controller using one of the available built-in transition styles (the duration will be 
+ * evenly distributed on the animation steps composing the animation so that the animation rhythm stays the same)
+ * Use the special value kAnimationTransitionDefaultDuration as duration to get the default transition duration 
  * (same result as the method above)
+ * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
 
 /**
- * The view where inset view controller's view must be drawn. Must either created programmatically in a subclass' loadView method 
- * or bound to a UIView in Interface Builder
+ * The view where inset view controller's views must be drawn. Must either created programmatically in a subclass' loadView 
+ * method or bound to a UIView using Interface Builder
  */
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
 
 /**
- * If set to YES, the inset view controller's view frame is automatically adjusted to match the placeholder bounds. The resizing
- * behavior still depends on the autoresizing behavior of the inset view, though (for example, if an inset view is able to stretch 
- * in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used as is.
- * Changing this property only affect view controllers which will be displayed. In general, you should set this property at creation 
- * time and do not alter it afterwards.
+ * If set to YES, the inset view controller's view frames are automatically adjusted to match the placeholder bounds. The
+ * resizing behavior still depends on the autoresizing behavior of the inset view, though (for example, if an inset view 
+ * is able to stretch in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used 
+ * as is.
+ * Changing this property only affect view controllers which are displayed afterwards. In general, this property is set 
+ * right after the placeholder view controller is instantiated and never changed.
+ *
  * Default value is NO.
  */
 @property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
+
+/**
+ * Return the view controller set as inset, nil if none
+ */
+- (UIViewController *)insetViewController;
 
 /**
  * If set to YES, the following properties of the inset view controller are forwarded to the placeholder view controller:
@@ -153,9 +154,15 @@
 @protocol HLSPlaceholderViewControllerDelegate <NSObject>
 @optional
 
+/**
+ * Called when an inset view controller will be shown, before the transition happens
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willShowInsetViewController:(UIViewController *)viewController
                          animated:(BOOL)animated;
+/**
+ * Called when an inset view controller will be shown, before the transition has ended
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
                          animated:(BOOL)animated;
@@ -164,6 +171,9 @@
 
 @interface UIViewController (HLSPlaceholderViewController)
 
+/**
+ * Return the placeholder view controller the view controller is inserted in, or nil if none.
+ */
 @property (nonatomic, readonly, assign) HLSPlaceholderViewController *placeholderViewController;
 
 @end
