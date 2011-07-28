@@ -15,10 +15,6 @@
 		DA7C22E113DD66780008B31D /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223313DD66780008B31D /* HLSAnimation.m */; };
 		DA7C22E213DD66780008B31D /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223413DD66780008B31D /* HLSAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E313DD66780008B31D /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223513DD66780008B31D /* HLSAnimationStep.m */; };
-		DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223613DD66780008B31D /* HLSOneViewAnimationStepDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA7C22E513DD66780008B31D /* HLSOneViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223713DD66780008B31D /* HLSOneViewAnimationStepDefinition.m */; };
-		DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223813DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA7C22E713DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223913DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m */; };
 		DA7C22E813DD66780008B31D /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223A13DD66780008B31D /* HLSViewAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA7C22E913DD66780008B31D /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7C223B13DD66780008B31D /* HLSViewAnimationStep.m */; };
 		DA7C22EA13DD66780008B31D /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C223D13DD66780008B31D /* HLSAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -199,10 +195,6 @@
 		DA7C223313DD66780008B31D /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		DA7C223413DD66780008B31D /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
 		DA7C223513DD66780008B31D /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
-		DA7C223613DD66780008B31D /* HLSOneViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOneViewAnimationStepDefinition.h; sourceTree = "<group>"; };
-		DA7C223713DD66780008B31D /* HLSOneViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSOneViewAnimationStepDefinition.m; sourceTree = "<group>"; };
-		DA7C223813DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTwoViewAnimationStepDefinition.h; sourceTree = "<group>"; };
-		DA7C223913DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTwoViewAnimationStepDefinition.m; sourceTree = "<group>"; };
 		DA7C223A13DD66780008B31D /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
 		DA7C223B13DD66780008B31D /* HLSViewAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimationStep.m; sourceTree = "<group>"; };
 		DA7C223D13DD66780008B31D /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
@@ -444,10 +436,6 @@
 				DA7C223313DD66780008B31D /* HLSAnimation.m */,
 				DA7C223413DD66780008B31D /* HLSAnimationStep.h */,
 				DA7C223513DD66780008B31D /* HLSAnimationStep.m */,
-				DA7C223613DD66780008B31D /* HLSOneViewAnimationStepDefinition.h */,
-				DA7C223713DD66780008B31D /* HLSOneViewAnimationStepDefinition.m */,
-				DA7C223813DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h */,
-				DA7C223913DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m */,
 				DA7C223A13DD66780008B31D /* HLSViewAnimationStep.h */,
 				DA7C223B13DD66780008B31D /* HLSViewAnimationStep.m */,
 			);
@@ -688,7 +676,6 @@
 				DA7C232413DD66780008B31D /* HLSLogger.h in Headers */,
 				DA7C232013DD66780008B31D /* HLSModelManager.h in Headers */,
 				DA7C22F813DD66780008B31D /* HLSNotifications.h in Headers */,
-				DA7C22E413DD66780008B31D /* HLSOneViewAnimationStepDefinition.h in Headers */,
 				DA7C22FA13DD66780008B31D /* HLSOrientationCloner.h in Headers */,
 				DA43719013DDA4AB00C6A5C0 /* HLSPageController.h in Headers */,
 				DA7C235213DD66780008B31D /* HLSPlaceholderViewController.h in Headers */,
@@ -724,7 +711,6 @@
 				DA7C234813DD66780008B31D /* HLSTextField.h in Headers */,
 				DA7C232213DD66780008B31D /* HLSTransform.h in Headers */,
 				DA7C235A13DD66780008B31D /* HLSTransitionStyle.h in Headers */,
-				DA7C22E613DD66780008B31D /* HLSTwoViewAnimationStepDefinition.h in Headers */,
 				DA7C230013DD66780008B31D /* HLSUserInterfaceLock.h in Headers */,
 				DA7C230213DD66780008B31D /* HLSValidable.h in Headers */,
 				DA7C230313DD66780008B31D /* HLSValidators.h in Headers */,
@@ -888,8 +874,6 @@
 			files = (
 				DA7C22E113DD66780008B31D /* HLSAnimation.m in Sources */,
 				DA7C22E313DD66780008B31D /* HLSAnimationStep.m in Sources */,
-				DA7C22E513DD66780008B31D /* HLSOneViewAnimationStepDefinition.m in Sources */,
-				DA7C22E713DD66780008B31D /* HLSTwoViewAnimationStepDefinition.m in Sources */,
 				DA7C22E913DD66780008B31D /* HLSViewAnimationStep.m in Sources */,
 				DA7C22EB13DD66780008B31D /* HLSAssert.m in Sources */,
 				DA7C22EF13DD66780008B31D /* HLSConverters.m in Sources */,
