@@ -78,7 +78,7 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSAnimationDelegate, HLSReloadable> {
+@interface HLSPlaceholderViewController : HLSViewController <HLSReloadable> {
 @private
     HLSContainerContent *m_containerContent;                // Wraps the view controller added as inset
     HLSContainerContent *m_oldContainerContent;             // Retains the old inset view controller wrapper when swapping with a new one
