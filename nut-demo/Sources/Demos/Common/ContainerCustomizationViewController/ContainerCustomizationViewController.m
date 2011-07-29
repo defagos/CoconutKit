@@ -102,7 +102,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor randomColor];
     
     // Puts a random button on the right
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:arc4random() % 10
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:arc4random() % 4
                                                                                             target:nil 
                                                                                             action:NULL]
                                               autorelease];
