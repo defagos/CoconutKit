@@ -58,7 +58,7 @@ extern const NSUInteger kStackUnlimitedViewDepth;
     NSUInteger m_viewDepth;
     BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
                                                                 // container view frame?
-    BOOL m_animatingTransition;                                 // Is a transition animation running?
+    NSUInteger m_animationCount;                                // Number of transition animations which are running
     id<HLSStackControllerDelegate> m_delegate;
 }
 

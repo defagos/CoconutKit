@@ -205,7 +205,7 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
     }
     
     // If a rotation occurs during a transition, do not let rotate. Could lead to complications
-    if (m_animatingTransition) {
+    if (m_animationCount != 0) {
         HLSLoggerWarn(@"A transition animation is running; rotation aborted");
         return NO;
     }
@@ -411,7 +411,7 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {    
-    m_animatingTransition = YES;
+    ++m_animationCount;
     
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = nil;
@@ -459,7 +459,7 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
             [disappearingContainerContent removeViewFromContainerView];
         }
         else {
-            m_animatingTransition = NO;
+            --m_animationCount;
             return;
         }
         
@@ -478,7 +478,7 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
         [self.containerContentStack removeLastObject];
     }
     
-    m_animatingTransition = NO;
+    --m_animationCount;
 }
 
 #pragma mark HLSReloadable protocol implementation

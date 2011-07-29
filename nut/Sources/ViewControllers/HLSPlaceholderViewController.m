@@ -186,7 +186,7 @@
     }
     
     // If a rotation occurs during a transition, do not let rotate. Could lead to complications
-    if (m_animatingTransition) {
+    if (m_animationCount != 0) {
         HLSLoggerWarn(@"A transition animation is running; rotation aborted");
         return NO;
     }
@@ -339,7 +339,7 @@
         return;
     }
     
-    m_animatingTransition = YES;
+    ++m_animationCount;
     
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = self.containerContent.viewController;
@@ -384,7 +384,7 @@
         self.oldContainerContent = nil;
     }
     
-    m_animatingTransition = NO;
+    --m_animationCount;
 }
 
 #pragma mark HLSReloadable protocol implementation
