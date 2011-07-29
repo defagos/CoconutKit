@@ -21,11 +21,11 @@ static void *kContainerContentKey = &kContainerContentKey;
 
 static id (*UIViewController__navigationController)(id, SEL) = NULL;
 static id (*UIViewController__navigationItem)(id, SEL) = NULL;
-static id (*UIViewController__title)(id, SEL) = NULL;
+static void (*UIViewController__setTitle)(id, SEL, id) = NULL;
 
 // Container content property forwarding
 // TODO: Other methods (setTitle, toolbar, etc.). Update documentation accordingly
-static id placeholderForward(UIViewController *self, SEL _cmd)
+static id placeholderForwardGetter(UIViewController *self, SEL _cmd)
 {
     id (*UIViewControllerMethod)(id, SEL) = NULL;
     if (_cmd == @selector(navigationController)) {
@@ -34,28 +34,43 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
     else if (_cmd == @selector(navigationItem)) {
         UIViewControllerMethod = UIViewController__navigationItem;
     }
-    else if (_cmd == @selector(title)) {
-        UIViewControllerMethod = UIViewController__title;
-    }
     else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property forwarding (%@)", NSStringFromSelector(_cmd)];
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property getter forwarding (%@)", NSStringFromSelector(_cmd)];
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }
-    
-    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
-    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
-    if (! [containerController isKindOfClass:[UIViewController class]]) {
-        return UIViewControllerMethod(self, _cmd);
     }
     
     // Is forwarding enabled? Retrieve associated container content object to know it
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
-    if (containerContent.viewControllerContainerForwardingEnabled) {
+    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
+    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
+    if (containerContent.viewControllerContainerForwardingEnabled && [containerController isKindOfClass:[UIViewController class]]) {
         return UIViewControllerMethod(containerController, _cmd);
     }
-    // No forwarding. Call original implementation
     else {
         return UIViewControllerMethod(self, _cmd);
+    }
+}
+
+static void placeholderForwardSetter(UIViewController *self, SEL _cmd, id value)
+{
+    void(*UIViewControllerMethod)(id, SEL, id) = NULL;
+    if (_cmd == @selector(setTitle:)) {
+        UIViewControllerMethod = UIViewController__setTitle;
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+    }
+    
+    // Is forwarding enabled? Retrieve associated container content object to know it
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
+    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
+    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
+    if (containerContent.viewControllerContainerForwardingEnabled && [containerController isKindOfClass:[UIViewController class]]) {
+        UIViewControllerMethod(containerController, _cmd, value);
+    }
+    else {
+        UIViewControllerMethod(self, _cmd, value);
     }
 }
 
@@ -109,9 +124,9 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 {
     // Swizzle methods ASAP. Cannot be in +initialize since those methods might be called before an HLSContainerContent is actually created for the
     // first tiime
-    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForward, NULL);
-    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)placeholderForward, NULL);
-    UIViewController__title = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(title), (IMP)placeholderForward, NULL);
+    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForwardGetter, NULL);
+    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)placeholderForwardGetter, NULL);
+    UIViewController__setTitle = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)placeholderForwardSetter, NULL);
 }
 
 // TODO: When bringToFront is set to YES for HLSAnimation (which is the case here), we can change the z-order of views during the animation.
@@ -542,7 +557,6 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
         objc_setAssociatedObject(viewController, kContainerControllerKey, containerController, OBJC_ASSOCIATION_ASSIGN);
         
         // Associate the view controller with its container content object
-        // Associate the view controller with its container
         NSAssert(! objc_getAssociatedObject(viewController, kContainerContentKey), @"A view controller can only be associated with one container content object");
         objc_setAssociatedObject(viewController, kContainerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
                 
