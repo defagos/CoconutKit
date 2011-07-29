@@ -14,6 +14,10 @@
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 
+const NSUInteger kStackMinimalViewDepth = 1;
+const NSUInteger kStackDefaultViewDepth = 2;
+const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
+
 // TODO: Bug: self.interfaceOrientation always returns portrait. WTF?
 
 @interface HLSStackController () <HLSAnimationDelegate>
@@ -24,23 +28,38 @@
 
 - (HLSAnimation *)createAnimationForContainerContent:(HLSContainerContent *)containerContent;
 
+- (BOOL)isContainerContentInViewRange:(HLSContainerContent *)containerContent;
+- (HLSContainerContent *)lastContainerContentInViewRange;
+- (HLSContainerContent *)beforeLastContainerContentInViewRange;
+
 @end
 
 @implementation HLSStackController
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController;
+- (id)initWithRootViewController:(UIViewController *)rootViewController viewDepth:(NSUInteger)viewDepth
 {
     if ((self = [super init])) {
+        if (viewDepth < kStackMinimalViewDepth) {
+            viewDepth = kStackMinimalViewDepth;
+            HLSLoggerWarn(@"View depth cannot be smaller than minimal value %d; set to this value", kStackMinimalViewDepth);
+        }
+        
         HLSContainerContent *rootContainerContent = [[[HLSContainerContent alloc] initWithViewController:rootViewController 
                                                                                      containerController:self 
                                                                                          transitionStyle:HLSTransitionStyleNone 
                                                                                                 duration:kAnimationTransitionDefaultDuration]
                                                      autorelease];
         self.containerContentStack = [NSMutableArray arrayWithObject:rootContainerContent];
+        m_viewDepth = viewDepth;
     }
     return self;
+}
+
+- (id)initWithRootViewController:(UIViewController *)rootViewController
+{
+    return [self initWithRootViewController:rootViewController viewDepth:kStackDefaultViewDepth];
 }
 
 - (id)init
@@ -64,7 +83,6 @@
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         // Release views and forward events to the attached view controllers
         [containerContent releaseViews];
-        [containerContent.viewController viewDidUnload];
     }
 }
 
@@ -124,15 +142,21 @@
 {
     [super viewWillAppear:animated];
     
-    // Add those view controller views which have not been added yet
+    // Display those views required by the view depth set
     for (HLSContainerContent *containerContent in self.containerContentStack) {
-        if ([containerContent addViewToContainerView:self.view
-                                             stretch:self.stretchingContent
-                                    blockInteraction:YES]) {
-            // Push non-animated
-            HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
-            [pushAnimation playAnimated:NO];            
-        }        
+        if ([self isContainerContentInViewRange:containerContent]) {
+            if ([containerContent addViewToContainerView:self.view
+                                                 stretch:self.stretchingContent
+                                        blockInteraction:YES]) {
+                // Push non-animated
+                HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
+                [pushAnimation playAnimated:NO];            
+            }
+        }
+        // Otherwise remove them (if loaded; should be quite rare here)
+        else {
+            [containerContent releaseViews];
+        }
     }
     
     // Forward events to the top view controller
@@ -273,6 +297,10 @@
                                              autorelease];
     [self.containerContentStack addObject:containerContent];
     
+    // Can release the view not needed according to the view depth set
+    HLSContainerContent *lastContainerContent = [self lastContainerContentInViewRange];
+    [lastContainerContent releaseViews];
+    
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
@@ -303,6 +331,21 @@
     
     // If the view is loaded, the popped view controller will be unregistered at the end of the animation
     if ([self isViewLoaded]) {
+        // A view being popped, we need one more view to be visible so that the view depth can be guaranteed
+        HLSContainerContent *lastContainerContent = [self lastContainerContentInViewRange];
+        if (lastContainerContent) {
+            HLSContainerContent *nextContainerContent = [self beforeLastContainerContentInViewRange];
+            [lastContainerContent insertViewIntoContainerView:self.view
+                                        belowContainerContent:nextContainerContent
+                                                      stretch:self.stretchingContent
+                                             blockInteraction:YES]; 
+            
+            // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
+            // expect it to occur animated, even if instantaneously
+            HLSAnimation *pushAnimation = [self createAnimationForContainerContent:lastContainerContent];
+            [pushAnimation playAnimated:NO];
+        }
+        
         // Pop animation = reverse push animation
         HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
         HLSAnimation *popAnimation = [topContainerContent reverseAnimation];
@@ -311,11 +354,39 @@
         }
         else {
             [popAnimation playAnimated:NO];
-        }
+        }        
     }
     // If the view is not loaded, we can unregister the popped view controller on the spot
-    else {
+    else {        
         [self.containerContentStack removeLastObject];
+    }
+}
+
+#pragma mark View depth
+
+- (BOOL)isContainerContentInViewRange:(HLSContainerContent *)containerContent
+{
+    NSUInteger index = [self.containerContentStack indexOfObject:containerContent];
+    return  [self.containerContentStack count] - index <= m_viewDepth;
+}
+
+- (HLSContainerContent *)lastContainerContentInViewRange
+{
+    if ([self.containerContentStack count] > m_viewDepth) {
+        return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - m_viewDepth - 1       /* trick: One more */];
+    }
+    else {
+        return nil;
+    }
+}
+
+- (HLSContainerContent *)beforeLastContainerContentInViewRange
+{
+    if ([self.containerContentStack count] >= m_viewDepth) {
+        return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - m_viewDepth];
+    }
+    else {
+        return nil;
     }
 }
 
@@ -366,7 +437,7 @@
                     willShowViewController:appearingViewController 
                                   animated:animated];
         }
-    }
+    }    
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated

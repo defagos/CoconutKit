@@ -70,8 +70,10 @@ const NSInteger kWizardViewControllerNoPage = -1;
     
     // Release views in cache (since view controllers are retained by a wizard view controller object, so are their view)
     for (UIViewController *viewController in self.viewControllers) {
-        viewController.view = nil;
-        [viewController viewDidUnload];
+        if ([viewController isViewLoaded]) {
+            viewController.view = nil;
+            [viewController viewDidUnload];
+        }
     }
     
     self.previousButton = nil;
@@ -111,8 +113,10 @@ const NSInteger kWizardViewControllerNoPage = -1;
             continue;
         }
         
-        viewController.view = nil;
-        [viewController viewDidUnload];
+        if ([viewController isViewLoaded]) {
+            viewController.view = nil;
+            [viewController viewDidUnload];            
+        }
         
         ++page;
     }

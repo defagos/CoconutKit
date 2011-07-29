@@ -10,6 +10,11 @@
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
+// Standard view depths
+extern const NSUInteger kStackMinimalViewDepth;
+extern const NSUInteger kStackDefaultViewDepth;
+extern const NSUInteger kStackUnlimitedViewDepth;
+
 // Forward declarations
 @protocol HLSStackControllerDelegate;
 
@@ -35,13 +40,22 @@
  * for view controllers you pushed in it (it will be ignored, see UIViewController documentation). The 2-step rotation
  * is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
+ * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
+ * need to be visible, it would be a waste of resources to keep all views loaded at any time. The concept of a "view
+ * depth" has thus been introduced. By default, the view depth is set to 2, which means that the container guarantees
+ * that the two top view controller's views are loaded at any time. The controller unloads the view controller's views
+ * below in the stack. You can set this depth to 1 if all your view controllers are opaque, or you can increase the 
+ * depth if more layers of transparency are needed (a value of 2 is what you typically need if you need to push
+ * a transparent view controller in the stack)
+ *
  * TODO: This class currently does not support view controllers implementing the HLSOrientationCloner protocol
  *
- * Designated initializer: initWithRootViewController:
+ * Designated initializer: initWithRootViewController:visibilityDepth:
  */
 @interface HLSStackController : HLSViewController <HLSReloadable> {
 @private
     NSMutableArray *m_containerContentStack;                    // Contains HLSContainerContent objects
+    NSUInteger m_viewDepth;
     BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
                                                                 // container view frame?
     BOOL m_animatingTransition;                                 // Is a transition animation running?
@@ -50,7 +64,13 @@
 
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
- * installed, and can neither be replaced, nor removed
+ * installed, and can neither be replaced, nor removed. Typical view depth constants are available at the top of this file
+ */
+- (id)initWithRootViewController:(UIViewController *)rootViewController viewDepth:(NSUInteger)viewDepth;
+
+/**
+ * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
+ * installed, and can neither be replaced, nor removed. The standard view depth (2) is applied
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 

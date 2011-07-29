@@ -69,7 +69,6 @@
     [super releaseViews];
     
     [self.containerContent releaseViews];
-    [self.containerContent.viewController viewDidUnload];
     
     self.placeholderView = nil;
 }

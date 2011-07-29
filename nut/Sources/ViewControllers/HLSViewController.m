@@ -133,8 +133,10 @@
  */
 - (void)unloadViews
 {
-    self.view = nil;
-    [self viewDidUnload];
+    if ([self isViewLoaded]) {
+        self.view = nil;
+        [self viewDidUnload];        
+    }
 }
 
 #pragma mark Orientation management

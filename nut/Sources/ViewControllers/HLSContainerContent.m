@@ -9,6 +9,7 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
+#import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 
@@ -91,6 +92,12 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 @property (nonatomic, retain) HLSAnimation *cachedAnimation;
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
+
+- (BOOL)addViewIntoContainerView:(UIView *)containerView 
+           otherContainerContent:(HLSContainerContent *)otherContainerContent
+                           above:(BOOL)above
+                         stretch:(BOOL)stretch
+                blockInteraction:(BOOL)blockInteraction;
 
 @end
 
@@ -615,13 +622,67 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
                        stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction
 {
+    return [self addViewIntoContainerView:containerView
+                    otherContainerContent:nil 
+                                    above:NO
+                                  stretch:stretch
+                         blockInteraction:blockInteraction];
+}
+
+- (BOOL)insertViewIntoContainerView:(UIView *)containerView 
+              belowContainerContent:(HLSContainerContent *)containerContent
+                            stretch:(BOOL)stretch
+                   blockInteraction:(BOOL)blockInteraction
+{
+    return [self addViewIntoContainerView:containerView
+                    otherContainerContent:containerContent 
+                                    above:NO
+                                  stretch:stretch
+                         blockInteraction:blockInteraction];
+}
+
+- (BOOL)insertViewIntoContainerView:(UIView *)containerView 
+              aboveContainerContent:(HLSContainerContent *)containerContent
+                            stretch:(BOOL)stretch
+                   blockInteraction:(BOOL)blockInteraction
+{
+    return [self addViewIntoContainerView:containerView
+                    otherContainerContent:containerContent 
+                                    above:YES
+                                  stretch:stretch
+                         blockInteraction:blockInteraction];    
+}
+
+- (BOOL)addViewIntoContainerView:(UIView *)containerView 
+           otherContainerContent:(HLSContainerContent *)otherContainerContent
+                           above:(BOOL)above        // irrelevant when no other container controller
+                         stretch:(BOOL)stretch
+                blockInteraction:(BOOL)blockInteraction
+{
     if (self.addedToContainerView) {
         HLSLoggerInfo(@"View controller's view already added as to a container view");
         return NO;
     }
     
-    // This triggers lazy view creation
-    [containerView addSubview:self.viewController.view];
+    // If no other container content provided, simply add it to the as top container subview
+    if (! otherContainerContent) {
+        [containerView addSubview:self.viewController.view];    
+    }
+    // Other container content provided, insert above or below
+    else {
+        NSAssert([HLSContainerContent containerControllerForViewController:self.viewController] 
+                 == [HLSContainerContent containerControllerForViewController:otherContainerContent.viewController], 
+                 @"Both container contents must be associated with the same container controller");
+        NSAssert([otherContainerContent view].superview == containerView, 
+                 @"Other container contents was not added to the same container view");
+        if (above) {
+            [containerView insertSubview:self.viewController.view aboveSubview:[otherContainerContent view]];
+        }
+        else {
+            [containerView insertSubview:self.viewController.view belowSubview:otherContainerContent.blockingView];
+        }
+    }
+    
     self.addedToContainerView = YES;
     
     // Insert blocking subview if required
@@ -634,7 +695,7 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
-
+    
     // Stretching
     if (stretch) {
         self.viewController.view.frame = containerView.bounds;
@@ -671,9 +732,12 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 - (void)releaseViews
 {
     [self removeViewFromContainerView];
-    
-    self.viewController.view = nil;
     self.cachedAnimation = nil;
+    
+    if ([self.viewController isViewLoaded]) {
+        self.viewController.view = nil;
+        [self.viewController viewDidUnload];
+    }
 }
 
 #pragma mark Animation
@@ -699,11 +763,12 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@; view: %@>", 
             [self class],
             self,
             self.viewController,
-            self.addedToContainerView];
+            [HLSConverters stringFromBool:self.addedToContainerView],
+            [self view]];
 }
 
 @end

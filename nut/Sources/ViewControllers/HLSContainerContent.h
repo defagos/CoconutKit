@@ -78,6 +78,19 @@
               blockInteraction:(BOOL)blockInteraction;
 
 /**
+ * Same as addViewToContainerView:stretch:blockInteraction, but inserting the view below / above the view of another 
+ * container content (which must of course belong to the same container)
+ */
+- (BOOL)insertViewIntoContainerView:(UIView *)containerView 
+              belowContainerContent:(HLSContainerContent *)containerContent
+                            stretch:(BOOL)stretch
+                   blockInteraction:(BOOL)blockInteraction;
+- (BOOL)insertViewIntoContainerView:(UIView *)containerView 
+              aboveContainerContent:(HLSContainerContent *)containerContent
+                            stretch:(BOOL)stretch
+                   blockInteraction:(BOOL)blockInteraction;
+
+/**
  * Remove the view controller's view from the container view
  */
 - (void)removeViewFromContainerView;
@@ -90,8 +103,8 @@
 - (UIView *)view;
 
 /**
- * Release all view and view-related resources. Intended to be called from a viewDidUnload method implementation if 
- * the container is a view controller itself
+ * Release all view and view-related resources. This also forwards the viewDidUnload message to the corresponding view
+ * controller
  */
 - (void)releaseViews;
 
