@@ -11,6 +11,11 @@
 @interface ContainerCustomizationViewController ()
 
 @property (nonatomic, retain) UIColor *originalNavigationBarTintColor;
+@property (nonatomic, retain) UIBarButtonItem *originalRightBarButtonItem;
+
+- (void)saveOriginalSkin;
+- (void)updateSkinRandomly;
+- (void)restoreOriginalSkin;
 
 - (void)changeButtonClicked:(id)sender;
 
@@ -34,6 +39,7 @@
     
     self.changeButton = nil;
     self.originalNavigationBarTintColor = nil;
+    self.originalRightBarButtonItem = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -41,6 +47,8 @@
 @synthesize changeButton = m_changeButton;
 
 @synthesize originalNavigationBarTintColor = m_originalNavigationBarTintColor;
+
+@synthesize originalRightBarButtonItem = m_originalRightBarButtonItem;
 
 #pragma mark View lifecycle
 
@@ -59,14 +67,15 @@
 {
     [super viewWillAppear:animated];
     
-    self.originalNavigationBarTintColor = self.navigationController.navigationBar.tintColor;
+    [self saveOriginalSkin];
+    [self updateSkinRandomly];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    self.navigationController.navigationBar.tintColor = self.originalNavigationBarTintColor;
+    [self restoreOriginalSkin];
 }
 
 #pragma mark Orientation management
@@ -80,10 +89,16 @@
     return YES;
 }
 
-#pragma mark Event callbacks
+#pragma mark Changing appearance
 
-- (void)changeButtonClicked:(id)sender
-{   
+- (void)saveOriginalSkin
+{
+    self.originalNavigationBarTintColor = self.navigationController.navigationBar.tintColor;
+    self.originalRightBarButtonItem = self.navigationItem.rightBarButtonItem;
+}
+
+- (void)updateSkinRandomly
+{
     self.navigationController.navigationBar.tintColor = [UIColor randomColor];
     
     // Puts a random button on the right
@@ -91,6 +106,19 @@
                                                                                             target:nil 
                                                                                             action:NULL]
                                               autorelease];
+}
+
+- (void)restoreOriginalSkin
+{
+    self.navigationController.navigationBar.tintColor = self.originalNavigationBarTintColor;
+    self.navigationItem.rightBarButtonItem = self.originalRightBarButtonItem;
+}
+
+#pragma mark Event callbacks
+
+- (void)changeButtonClicked:(id)sender
+{
+    [self updateSkinRandomly];
 }
 
 @end

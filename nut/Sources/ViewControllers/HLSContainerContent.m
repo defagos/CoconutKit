@@ -545,7 +545,7 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
         // Associate the view controller with its container
         NSAssert(! objc_getAssociatedObject(viewController, kContainerContentKey), @"A view controller can only be associated with one container content object");
         objc_setAssociatedObject(viewController, kContainerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
-        
+                
         self.viewController = viewController;
         self.transitionStyle = transitionStyle;
         self.duration = duration;
@@ -598,6 +598,30 @@ static id placeholderForward(UIViewController *self, SEL _cmd)
 @synthesize duration = m_duration;
 
 @synthesize viewControllerContainerForwardingEnabled = m_viewControllerContainerForwardingEnabled;
+
+- (void)setViewControllerContainerForwardingEnabled:(BOOL)viewControllerContainerForwardingEnabled
+{
+    if (m_viewControllerContainerForwardingEnabled == viewControllerContainerForwardingEnabled) {
+        return;
+    }
+    
+    m_viewControllerContainerForwardingEnabled = viewControllerContainerForwardingEnabled;
+
+    if (viewControllerContainerForwardingEnabled) {
+        id containerController = [HLSContainerContent containerControllerForViewController:self.viewController];
+        if ([containerController isKindOfClass:[UIViewController class]]) {
+            UIViewController *containerViewController = (UIViewController *)containerController;
+            containerViewController.title = self.viewController.title;
+            containerViewController.navigationItem.title = self.viewController.navigationItem.title;
+            containerViewController.navigationItem.backBarButtonItem = self.viewController.navigationItem.backBarButtonItem;
+            containerViewController.navigationItem.titleView = self.viewController.navigationItem.titleView;
+            containerViewController.navigationItem.prompt = self.viewController.navigationItem.prompt;
+            containerViewController.navigationItem.hidesBackButton = self.viewController.navigationItem.hidesBackButton;
+            containerViewController.navigationItem.leftBarButtonItem = self.viewController.navigationItem.leftBarButtonItem;
+            containerViewController.navigationItem.rightBarButtonItem = self.viewController.navigationItem.rightBarButtonItem;
+        }   
+    }
+}
 
 @synthesize cachedAnimation = m_cachedAnimation;
 
