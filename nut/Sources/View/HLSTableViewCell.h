@@ -33,6 +33,8 @@
  *     (the class name) does not suit your needs, which should be rarely the case
  * Your custom classes can then be instantiated using the provided factory macro.
  *
+ * To customize your cells via code after they have been loaded from a xib, implement the awakeFromNib method
+ *
  * When your class uses a xib to define its layout:
  *   - the first object in the xib must be the cell object. Do not forget to set its type to match your cell class name
  *     (if you need to bind outlets). Use this class as origin when drawing bindings (do not use the file's owner)
