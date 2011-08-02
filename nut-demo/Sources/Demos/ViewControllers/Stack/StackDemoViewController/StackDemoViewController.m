@@ -16,6 +16,7 @@
 #import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
+#import "TransparentViewController.h"
 
 @interface StackDemoViewController ()
 
@@ -29,6 +30,7 @@
 - (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)containerCustomizationButtonClicked:(id)sender;
+- (void)transparentButtonClicked:(id)sender;
 - (void)popButtonClicked:(id)sender;
 - (void)stretchingContentSwitchValueChanged:(id)sender;
 
@@ -74,6 +76,7 @@
     self.landscapeOnlyButton = nil;
     self.orientationClonerButton = nil;
     self.containerCustomizationButton = nil;
+    self.transparentButton = nil;
     self.popButton = nil;
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
@@ -97,6 +100,8 @@
 @synthesize orientationClonerButton = m_orientationClonerButton;
 
 @synthesize containerCustomizationButton = m_containerCustomizationButton;
+
+@synthesize transparentButton = m_transparentButton;
 
 @synthesize popButton = m_popButton;
 
@@ -157,6 +162,12 @@
     [self.containerCustomizationButton addTarget:self
                                           action:@selector(containerCustomizationButtonClicked:)
                                 forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.transparentButton setTitle:NSLocalizedString(@"Transparent", @"Transparent")
+                            forState:UIControlStateNormal];
+    [self.transparentButton addTarget:self
+                               action:@selector(transparentButtonClicked:)
+                     forControlEvents:UIControlEventTouchUpInside];
     
     [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop")
                     forState:UIControlStateNormal];
@@ -242,6 +253,12 @@
                                                                          large:NO]
                                                                         autorelease];
     [self displayContentViewController:orientationClonerViewController];
+}
+
+- (void)transparentButtonClicked:(id)sender
+{
+    TransparentViewController *transparentViewController = [[[TransparentViewController alloc] init] autorelease];
+    [self displayContentViewController:transparentViewController];
 }
 
 - (void)containerCustomizationButtonClicked:(id)sender

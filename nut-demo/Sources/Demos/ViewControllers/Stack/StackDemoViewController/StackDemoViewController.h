@@ -18,6 +18,7 @@
     UIButton *m_landscapeOnlyButton;
     UIButton *m_orientationClonerButton;
     UIButton *m_containerCustomizationButton;
+    UIButton *m_transparentButton;
     UIButton *m_popButton;
     UIButton *m_hideWithModalButton;
     UILabel *m_transitionLabel;
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *landscapeOnlyButton;
 @property (nonatomic, retain) IBOutlet UIButton *orientationClonerButton;
 @property (nonatomic, retain) IBOutlet UIButton *containerCustomizationButton;
+@property (nonatomic, retain) IBOutlet UIButton *transparentButton;
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
 @property (nonatomic, retain) IBOutlet UIButton *hideWithModalButton;
 @property (nonatomic, retain) IBOutlet UILabel *transitionLabel;
