@@ -259,7 +259,7 @@
     // If no inset set, put an empty view controller instead
     if (! insetViewController) {
         // Only some transition styles are allowed
-        if (transitionStyle != HLSTransitionStyleNone && transitionStyle != HLSTransitionStyleCrossDissolve) {
+        if (transitionStyle != HLSTransitionStyleNone) {
             HLSLoggerWarn(@"Transition style not available when removing an inset; set to none");
             transitionStyle = HLSTransitionStyleNone;
         }

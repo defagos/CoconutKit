@@ -100,8 +100,8 @@
 /**
  * Display an inset view controller using one of the available built-in transition styles. The transition duration is 
  * set by the animation itself
- * Setting the inset view controller to nil removes the one currently display (if any). Only the following styles are
- * available in this case: HLSTransitionStyleNone, HLSTransitionStyleFadeIn and HLSTransitionStyleCrossDissolve
+ * Setting the inset view controller to nil removes the one currently display (if any). Only the HLSTransitionStyleNone
+ * transition is available in such cases.
  * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
