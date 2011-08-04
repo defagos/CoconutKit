@@ -14,7 +14,7 @@
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 
-const NSUInteger kStackMinimalViewDepth = 1;
+const NSUInteger kStackMinimalViewDepth = 2;
 const NSUInteger kStackDefaultViewDepth = 2;
 const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 
@@ -26,11 +26,10 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 
 - (UIViewController *)secondTopViewController;
 
-- (HLSAnimation *)createAnimationForContainerContent:(HLSContainerContent *)containerContent;
+- (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent;
 
-- (BOOL)isContainerContentInViewRange:(HLSContainerContent *)containerContent;
-- (HLSContainerContent *)lastContainerContentInViewRange;
-- (HLSContainerContent *)beforeLastContainerContentInViewRange;
+- (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent;
+- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
 @end
 
@@ -143,14 +142,12 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
     [super viewWillAppear:animated];
     
     // Display those views required by the view depth set
-    for (HLSContainerContent *containerContent in self.containerContentStack) {
-        if ([self isContainerContentInViewRange:containerContent]) {
-            if ([containerContent addViewToContainerView:self.view
-                                                 stretch:self.stretchingContent
-                                        blockInteraction:YES]) {
-                // Push non-animated
-                HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
-                [pushAnimation playAnimated:NO];            
+    for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
+        if ([self isContainerContentVisible:containerContent]) {
+            if ([containerContent addViewToContainerView:self.view 
+                                                 stretch:self.stretchingContent 
+                                        blockInteraction:YES 
+                                 inContainerContentStack:self.containerContentStack]) {        
             }
         }
         // Otherwise remove them (if loaded; should be quite rare here)
@@ -241,10 +238,7 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    for (HLSContainerContent *containerContent in self.containerContentStack) {        
-        // Generate the animation again: The view frames have been changed by the rotation!
-        [self createAnimationForContainerContent:containerContent];
-        
+    for (HLSContainerContent *containerContent in self.containerContentStack) {
         UIViewController *viewController = containerContent.viewController;
         [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
@@ -289,6 +283,10 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
         }
     }
     
+    // Can release the view not needed according to the view depth set
+    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:m_viewDepth - 1];
+    [newlyInvisibleContainerContent releaseViews];
+    
     // Associate the view controller with its container
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
                                                                              containerController:self
@@ -297,26 +295,23 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
                                              autorelease];
     [self.containerContentStack addObject:containerContent];
     
-    // Can release the view not needed according to the view depth set
-    HLSContainerContent *lastContainerContent = [self lastContainerContentInViewRange];
-    [lastContainerContent releaseViews];
-    
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
-                                         stretch:self.stretchingContent
-                                blockInteraction:YES];
+                                         stretch:self.stretchingContent 
+                                blockInteraction:YES 
+                         inContainerContentStack:self.containerContentStack];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
-        HLSAnimation *pushAnimation = [self createAnimationForContainerContent:containerContent];
+        HLSAnimation *pushAnimation = [self animationForContainerContent:containerContent];
         if ([self isViewVisible]) {
             [pushAnimation playAnimated:YES];
         }
         else {
             [pushAnimation playAnimated:NO];
         }
-    }    
+    }
 }
 
 #pragma mark Popping view controllers
@@ -331,24 +326,18 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
     
     // If the view is loaded, the popped view controller will be unregistered at the end of the animation
     if ([self isViewLoaded]) {
-        // A view being popped, we need one more view to be visible so that the view depth can be guaranteed
-        HLSContainerContent *lastContainerContent = [self lastContainerContentInViewRange];
-        if (lastContainerContent) {
-            HLSContainerContent *nextContainerContent = [self beforeLastContainerContentInViewRange];
-            [lastContainerContent insertViewIntoContainerView:self.view
-                                        belowContainerContent:nextContainerContent
-                                                      stretch:self.stretchingContent
-                                             blockInteraction:YES]; 
-            
-            // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-            // expect it to occur animated, even if instantaneously
-            HLSAnimation *pushAnimation = [self createAnimationForContainerContent:lastContainerContent];
-            [pushAnimation playAnimated:NO];
+        // A view being popped, we need one more view to be visible so that the view depth can be guaranteed (if stack deep enough)
+        HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:m_viewDepth];
+        if (newlyVisibleContainerContent) {
+            [newlyVisibleContainerContent addViewToContainerView:self.view 
+                                                         stretch:self.stretchingContent 
+                                                blockInteraction:YES 
+                                         inContainerContentStack:self.containerContentStack];
         }
         
         // Pop animation = reverse push animation
         HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
-        HLSAnimation *popAnimation = [topContainerContent reverseAnimation];
+        HLSAnimation *popAnimation = [[self animationForContainerContent:topContainerContent] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
         }
@@ -364,26 +353,16 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 
 #pragma mark View depth
 
-- (BOOL)isContainerContentInViewRange:(HLSContainerContent *)containerContent
+- (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent
 {
     NSUInteger index = [self.containerContentStack indexOfObject:containerContent];
-    return  [self.containerContentStack count] - index <= m_viewDepth;
+    return [self.containerContentStack count] - index <= m_viewDepth;
 }
 
-- (HLSContainerContent *)lastContainerContentInViewRange
+- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
 {
-    if ([self.containerContentStack count] > m_viewDepth) {
-        return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - m_viewDepth - 1       /* trick: One more */];
-    }
-    else {
-        return nil;
-    }
-}
-
-- (HLSContainerContent *)beforeLastContainerContentInViewRange
-{
-    if ([self.containerContentStack count] >= m_viewDepth) {
-        return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - m_viewDepth];
+    if ([self.containerContentStack count] > depth) {
+        return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - depth - 1];
     }
     else {
         return nil;
@@ -392,14 +371,13 @@ const NSUInteger kStackUnlimitedViewDepth = NSUIntegerMax;
 
 #pragma mark Animation
 
-- (HLSAnimation *)createAnimationForContainerContent:(HLSContainerContent *)containerContent
+- (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent
 {
     // Apply the same effect to all disappearing views; much better (we see all views below the added one as a single one). This is
     // a lot better with push or fade animations    
     NSUInteger index = [self.containerContentStack indexOfObject:containerContent];
     NSAssert(index != NSNotFound, @"Content not found in the container");
-    HLSAnimation *animation = [containerContent createAnimationWithDisappearingContainerContents:[self.containerContentStack subarrayWithRange:NSMakeRange(0, index)] 
-                                                                                     commonFrame:self.view.frame];    
+    HLSAnimation *animation = [containerContent animationWithContainerContentStack:self.containerContentStack containerView:self.view];
     animation.tag = @"push_animation";
     animation.lockingUI = YES;
     animation.bringToFront = YES;

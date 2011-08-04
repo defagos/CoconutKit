@@ -132,9 +132,10 @@
     [super viewWillAppear:animated];
     
     // If an inset has been defined but not displayed yet, display it
-    if ([self.containerContent addViewToContainerView:self.placeholderView 
+    if ([self.containerContent addViewToContainerView:self.placeholderView
                                               stretch:self.stretchingContent 
-                                     blockInteraction:NO]) {
+                                     blockInteraction:NO 
+                              inContainerContentStack:nil]) {
         // Push non-animated
         HLSAnimation *pushAnimation = [self createAnimation];
         [pushAnimation playAnimated:NO];
@@ -193,7 +194,7 @@
     
     UIViewController *insetViewController = [self insetViewController];
     return [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-        || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
+    || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -265,7 +266,7 @@
         
         insetViewController = [self emptyViewController];   
     }
-     
+    
     // Check that the view controller to be pushed is compatible with the current orientation
     if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
         HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
@@ -287,7 +288,8 @@
         // Install the new view
         [self.containerContent addViewToContainerView:self.placeholderView 
                                               stretch:self.stretchingContent 
-                                     blockInteraction:NO];
+                                     blockInteraction:NO 
+                              inContainerContentStack:nil];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
@@ -310,8 +312,7 @@
         disappearingContainerContents = [NSArray arrayWithObject:self.oldContainerContent];
     }
     
-    HLSAnimation *animation = [self.containerContent createAnimationWithDisappearingContainerContents:disappearingContainerContents
-                                                                                          commonFrame:self.placeholderView.frame];
+    HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:nil containerView:self.placeholderView];
     animation.tag = @"add_animation";
     animation.lockingUI = YES;
     animation.bringToFront = YES;
@@ -365,7 +366,7 @@
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = self.containerContent.viewController;
         UIViewController *disappearingViewController = self.oldContainerContent.viewController;
-            
+        
         // Remove the old view controller
         [self.oldContainerContent removeViewFromContainerView];
         
