@@ -21,17 +21,28 @@ static void *kContainerContentKey = &kContainerContentKey;
 
 static id (*UIViewController__navigationController)(id, SEL) = NULL;
 static id (*UIViewController__navigationItem)(id, SEL) = NULL;
+static id (*UIViewController__interfaceOrientation)(id, SEL) = NULL;
 static void (*UIViewController__setTitle)(id, SEL, id) = NULL;
 
 // Container content property forwarding
-static id placeholderForwardGetter(UIViewController *self, SEL _cmd)
+static id swizzledGetter(UIViewController *self, SEL _cmd)
 {
+    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
+    
     id (*UIViewControllerMethod)(id, SEL) = NULL;
     if (_cmd == @selector(navigationController)) {
         UIViewControllerMethod = UIViewController__navigationController;
     }
     else if (_cmd == @selector(navigationItem)) {
         UIViewControllerMethod = UIViewController__navigationItem;
+    }
+    else if (_cmd == @selector(interfaceOrientation)) {
+        if ([containerController isKindOfClass:[UIViewController class]]) {
+            return UIViewController__interfaceOrientation(containerController, _cmd);
+        }
+        else {
+            return UIViewController__interfaceOrientation(self, _cmd);
+        }
     }
     else {
         NSString *reason = [NSString stringWithFormat:@"Unsupported property getter forwarding (%@)", NSStringFromSelector(_cmd)];
@@ -40,7 +51,6 @@ static id placeholderForwardGetter(UIViewController *self, SEL _cmd)
     
     // Is forwarding enabled? Retrieve associated container content object to know it
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
-    id containerController = objc_getAssociatedObject(self, kContainerControllerKey);
     // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
     if (containerContent.viewControllerContainerForwardingEnabled && [containerController isKindOfClass:[UIViewController class]]) {
         return UIViewControllerMethod(containerController, _cmd);
@@ -50,7 +60,7 @@ static id placeholderForwardGetter(UIViewController *self, SEL _cmd)
     }
 }
 
-static void placeholderForwardSetter(UIViewController *self, SEL _cmd, id value)
+static void swizzledSetter(UIViewController *self, SEL _cmd, id value)
 {
     void(*UIViewControllerMethod)(id, SEL, id) = NULL;
     if (_cmd == @selector(setTitle:)) {
@@ -104,9 +114,11 @@ static void placeholderForwardSetter(UIViewController *self, SEL _cmd, id value)
 {
     // Swizzle methods ASAP. Cannot be in +initialize since those methods might be called before an HLSContainerContent is actually created for the
     // first tiime
-    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)placeholderForwardGetter, NULL);
-    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)placeholderForwardGetter, NULL);
-    UIViewController__setTitle = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)placeholderForwardSetter, NULL);
+    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)swizzledGetter, NULL);
+    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)swizzledGetter, NULL);
+    UIViewController__interfaceOrientation = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
+    
+    UIViewController__setTitle = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledSetter, NULL);
 }
 
 + (id)containerControllerForViewController:(UIViewController *)viewController;

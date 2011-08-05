@@ -23,6 +23,9 @@
  *   - in general, we want to restrict user interaction to the most recently view controller inserted into a container
  *   - we sometimes may want the view controller container to forward some properties of a contained view controller
  *     (e.g. title, navigation elements, toolbar, etc.) transparently
+ *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
+ *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
+ *     presented using a custom container.
  * The HLSContainerContent class provides a way to ensure that those common properties can be easily implemented. It 
  * can be seen as some kind of smart pointer object, taking ownership of a view controller when inserted into a view 
  * controller container.

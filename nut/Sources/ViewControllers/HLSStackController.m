@@ -18,8 +18,6 @@ const NSUInteger kStackMinimalCapacity = 2;
 const NSUInteger kStackDefaultCapacity = 2;
 const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
-// TODO: Bug: self.interfaceOrientation always returns portrait. WTF?
-
 @interface HLSStackController () <HLSAnimationDelegate>
 
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
