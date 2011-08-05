@@ -405,7 +405,7 @@
 
 - (HLSPlaceholderViewController *)placeholderViewController
 {
-    return [HLSContainerContent containerControllerForViewController:self];
+    return [HLSContainerContent containerControllerKindOfClass:[HLSPlaceholderViewController class] forViewController:self];
 }
 
 @end

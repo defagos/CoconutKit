@@ -26,12 +26,18 @@
  *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
  *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
  *     presented using a custom container
- *   - the UIViewController parentViewController property returns the parent view controller if it is one of the
- *     buit-in containers (according to UIViewController documentation). But it makes sense to return a parent 
- *     when a view controller has been displayed by a custom container view controller. This does not match the 
- *     documentation, but as for the interfaceOrientation property, it seems that Apple was assuming that no other
- *     containers could exist besides built-in ones
- * The HLSContainerContent class provides a way to ensure that those common properties can be easily implemented. It 
+ *   - a remark: The UIViewController parentViewController property returns the parent view controller if it is one 
+ *     of the buit-in UIKit containers (according to UIViewController documentation). It would make sense to have this
+ *     property also return a container for view controllers displayed in custom container view controllers. Sadly
+ *     this is not possible: Doing so has some real benefits (automatic forwarding of navigation title and bar color,
+ *     correct value for interfaceOrientation), but we lose the ability to choose whether we actually want forwarding
+ *     to occur or not. UIKit built-in containers automatically reflect their content, but this must namely not be the 
+ *     case for containers in general (imagine a container displaying two view controllers simultaneously: Which one 
+ *     is going to give its title to the container controller? The container may also want to have its own title after 
+ *     all). For this reason, the parentViewController property has not been altered and returns nil even when a view
+ *     controller is embedded into a custom container view controller.
+ *
+ * The HLSContainerContent class provides a way to ensure that the above common properties can be easily implemented. It 
  * can be seen as some kind of smart pointer object, taking ownership of a view controller when inserted into a view 
  * controller container.
  * 
@@ -45,6 +51,7 @@
 @interface HLSContainerContent : NSObject {
 @private
     UIViewController *m_viewController;
+    id m_containerController;
     BOOL m_addedToContainerView;
     UIView *m_blockingView;
     HLSTransitionStyle m_transitionStyle;
@@ -55,9 +62,9 @@
 }
 
 /**
- * Return the container in which the specified view controller has been inserted, nil if none
+ * Return the container of the specified class, in which a given view controller has been inserted, or nil if none
  */
-+ (id)containerControllerForViewController:(UIViewController *)viewController;
++ (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
 
 /**
  * Initialize a container content manager object. Requires the view controller to be managed, the container in which

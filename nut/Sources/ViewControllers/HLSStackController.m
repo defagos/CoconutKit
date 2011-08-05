@@ -473,8 +473,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (HLSStackController *)stackController
 {
-    
-    return [HLSContainerContent containerControllerForViewController:self];
+    return [HLSContainerContent containerControllerKindOfClass:[HLSStackController class] forViewController:self];
 }
 
 @end
