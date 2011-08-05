@@ -238,7 +238,6 @@ static void placeholderForwardSetter(UIViewController *self, SEL _cmd, id value)
 - (UIView *)view
 {
     if (! self.addedToContainerView) {
-        HLSLoggerWarn(@"View not added to a container view");
         return nil;
     }
     else {

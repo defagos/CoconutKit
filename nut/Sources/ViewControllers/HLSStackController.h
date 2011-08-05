@@ -10,23 +10,23 @@
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
-// Standard view depths
-extern const NSUInteger kStackMinimalViewDepth;
-extern const NSUInteger kStackDefaultViewDepth;
-extern const NSUInteger kStackUnlimitedViewDepth;
+// Standard capacities
+extern const NSUInteger kStackMinimalCapacity;
+extern const NSUInteger kStackDefaultCapacity;
+extern const NSUInteger kStackUnlimitedCapacity;
 
 // Forward declarations
 @protocol HLSStackControllerDelegate;
 
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
- * to use custom animations, and those look quite ugly on the iPad. Sometimes, we also want to show view controllers
+ * to use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
  * modally, but often the usual presentModalViewController:animated: method of UIViewController is too limited (modal
  * sheets on the iPad have pre-defined sizes, and when displaying full screen the view below disappears, which prevents
- * from displaying transparent modal windows.
+ * from displaying transparent modal windows).
  *
  * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack. It can
- * be applied a richer set of transition animations. HLSStackController is used as is and is not meant to be subclassed.
+ * be applied a richer set of transition animations. HLSStackController is not meant to be subclassed.
  *
  * This view controller container guarantees correct view lifecycle and rotation event propagation to the view controllers
  * it manages. Note that when a view controller gets pushed onto the stack, the view controller below will get the
@@ -34,28 +34,29 @@ extern const NSUInteger kStackUnlimitedViewDepth;
  * the viewWillAppear: and viewDidAppear: events when the view controller on top gets popped).
  * This decision was made because it would have been extremely difficult and costly to look at all view controller's 
  * views in the stack to find those which are really visible (this would have required to find the intersections of all 
- * view and subview rectangles, cumulating alphas to find which parts of the view stack are visible and which aren't).
+ * view and subview rectangles, cumulating alphas to find which parts of the view stack are visible and which aren't;
+ * clearly not worth it).
  *
- * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
- * for view controllers you pushed in it (it will be ignored, see UIViewController documentation). The 2-step rotation
- * is deprecated starting with iOS 5, you should not use it anymore anyway.
+ * HLSStackController uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation for view 
+ * controllers you pushed in it (it will be ignored, see UIViewController documentation). The 2-step rotation is deprecated 
+ * starting with iOS 5, you should not use it anymore anyway.
  *
  * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
- * need to be visible, it would be a waste of resources to keep all views loaded at any time. The concept of a "view
- * depth" has thus been introduced. By default, the view depth is set to 2, which means that the container guarantees
- * that the two top view controller's views are loaded at any time. The controller unloads the view controller's views
- * below in the stack. You can set this depth to 1 if all your view controllers are opaque, or you can increase the 
- * depth if more layers of transparency are needed (a value of 2 is what you typically need if you need to push
- * a transparent view controller in the stack)
+ * need to be visible, it would be a waste of resources to keep all views loaded at any time. At creation time, the
+ * maximal number of loaded view controllers ("capacity") can be provided. By default, the capacity is set to 2, 
+ * which means that the container guarantees that at most the two top view controller's views are loaded. The 
+ * controller simply unloads the view controller's views below in the stack so save memory. Usually, the default value
+ * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
+ * operations, you can increase this value. Standard capacity values are provided at the beginning of this file.
  *
  * TODO: This class currently does not support view controllers implementing the HLSOrientationCloner protocol
  *
- * Designated initializer: initWithRootViewController:visibilityDepth:
+ * Designated initializer: initWithRootViewController:capacity:
  */
 @interface HLSStackController : HLSViewController <HLSReloadable> {
 @private
     NSMutableArray *m_containerContentStack;                    // Contains HLSContainerContent objects
-    NSUInteger m_viewDepth;
+    NSUInteger m_capacity;
     BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
                                                                 // container view frame?
     NSUInteger m_animationCount;                                // Number of transition animations which are running
@@ -64,13 +65,13 @@ extern const NSUInteger kStackUnlimitedViewDepth;
 
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
- * installed, and can neither be replaced, nor removed. Typical view depth constants are available at the top of this file
+ * installed, and can neither be replaced, nor removed. The capacity can be freely set.
  */
-- (id)initWithRootViewController:(UIViewController *)rootViewController viewDepth:(NSUInteger)viewDepth;
+- (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity;
 
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
- * installed, and can neither be replaced, nor removed. The standard view depth (2) is applied
+ * installed, and can neither be replaced, nor removed. The default capacity is used.
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 
@@ -84,7 +85,7 @@ extern const NSUInteger kStackUnlimitedViewDepth;
  * Push a view controller onto the stack using one of the built-in transition styles. The transition duration is set by 
  * the animation itself
  * This method can also be called before the stack controller is displayed (the animation does not get played, but this
- * sets the pop animation which will get played when the view controller is later removed)
+ * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle;
@@ -95,7 +96,7 @@ extern const NSUInteger kStackUnlimitedViewDepth;
  * the reserved kAnimationTransitionDefaultDuration value as duration to get the default transition duration (same 
  * result as the method above)
  * This method can also be called before the stack controller is displayed (the animation does not get played, but this
- * sets the pop animation which will get played when the view controller is later removed)
+ * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle

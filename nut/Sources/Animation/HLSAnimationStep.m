@@ -177,12 +177,12 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 - (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view
 {   
     if (! viewAnimationStep) {
-        HLSLoggerWarn(@"View animation step is nil");
+        HLSLoggerInfo(@"View animation step is nil; no animation step added");
         return;
     }
     
     if (! view) {
-        HLSLoggerWarn(@"View is nil");
+        HLSLoggerInfo(@"View is nil; no animation step added");
         return;
     }
     
