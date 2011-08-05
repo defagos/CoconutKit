@@ -25,7 +25,12 @@
  *     (e.g. title, navigation elements, toolbar, etc.) transparently
  *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
  *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
- *     presented using a custom container.
+ *     presented using a custom container
+ *   - the UIViewController parentViewController property returns the parent view controller if it is one of the
+ *     buit-in containers (according to UIViewController documentation). But it makes sense to return a parent 
+ *     when a view controller has been displayed by a custom container view controller. This does not match the 
+ *     documentation, but as for the interfaceOrientation property, it seems that Apple was assuming that no other
+ *     containers could exist besides built-in ones
  * The HLSContainerContent class provides a way to ensure that those common properties can be easily implemented. It 
  * can be seen as some kind of smart pointer object, taking ownership of a view controller when inserted into a view 
  * controller container.

@@ -22,6 +22,8 @@ static void *kContainerContentKey = &kContainerContentKey;
 static id (*UIViewController__navigationController)(id, SEL) = NULL;
 static id (*UIViewController__navigationItem)(id, SEL) = NULL;
 static id (*UIViewController__interfaceOrientation)(id, SEL) = NULL;
+static id (*UIViewController__parentViewController)(id, SEL) = NULL;
+
 static void (*UIViewController__setTitle)(id, SEL, id) = NULL;
 
 // Container content property forwarding
@@ -43,6 +45,14 @@ static id swizzledGetter(UIViewController *self, SEL _cmd)
         else {
             return UIViewController__interfaceOrientation(self, _cmd);
         }
+    }
+    else if (_cmd == @selector(parentViewController)) {
+        if ([containerController isKindOfClass:[UIViewController class]]) {
+            return containerController;
+        }
+        else {
+            return UIViewController__parentViewController(self, _cmd);
+        }    
     }
     else {
         NSString *reason = [NSString stringWithFormat:@"Unsupported property getter forwarding (%@)", NSStringFromSelector(_cmd)];
@@ -117,6 +127,7 @@ static void swizzledSetter(UIViewController *self, SEL _cmd, id value)
     UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)swizzledGetter, NULL);
     UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)swizzledGetter, NULL);
     UIViewController__interfaceOrientation = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
+    UIViewController__parentViewController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(parentViewController), (IMP)swizzledGetter, NULL);
     
     UIViewController__setTitle = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledSetter, NULL);
 }
