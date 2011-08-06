@@ -295,11 +295,6 @@
 
 - (HLSAnimation *)createAnimation
 {
-    NSArray *disappearingContainerContents = nil;
-    if (self.oldContainerContent) {
-        disappearingContainerContents = [NSArray arrayWithObject:self.oldContainerContent];
-    }
-    
     HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:nil containerView:self.placeholderView];
     animation.tag = @"add_animation";
     animation.lockingUI = YES;

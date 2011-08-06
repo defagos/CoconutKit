@@ -11,7 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSString_HLSExtensions)
+HLSLinkCategory(NSString_HLSExtensions)
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
@@ -49,7 +49,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), cfEncoding));
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+s_NSDate__descriptionWithLocale_Imp,/?%#[]"), cfEncoding));
     return [result autorelease];
 }
 

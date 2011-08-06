@@ -12,13 +12,13 @@
 #import "HLSRuntime.h"
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(UIControl_HLSExclusiveTouch)
+HLSLinkCategory(UIControl_HLSExclusiveTouch)
 
 static BOOL m_injected = NO;
 
 // Original implementation of the methods we swizzle
-static IMP s_initWithFrame$Imp;
-static IMP s_initWithCoder$Imp;
+static id (*s_UIControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
+static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
 
 #pragma mark -
 #pragma mark UIControl (HLSExclusiveTouchPrivate) interface
@@ -40,13 +40,13 @@ static IMP s_initWithCoder$Imp;
 + (void)injectExclusiveTouch
 {
     if (m_injected) {
-        HLSLoggerWarn(@"Exclusive touch already injected");
+        HLSLoggerInfo(@"Exclusive touch already injected");
         return;
     }
     
     // Swizzle the original implementations (keep a hand on them)
-    s_initWithFrame$Imp = HLSSwizzleSelector([self class], @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
-    s_initWithCoder$Imp = HLSSwizzleSelector([self class], @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
+    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector([self class], @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
+    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector([self class], @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
     
     m_injected = YES;
 }
@@ -65,7 +65,7 @@ static IMP s_initWithCoder$Imp;
     HLSLoggerDebug(@"Called swizzled initWithFrame:");
     
     // Call the original implementation
-    if ((self = (*s_initWithFrame$Imp)(self, @selector(initWithFrame:), frame))) {
+    if ((self = (*s_UIControl__initWithFrame_Imp)(self, @selector(initWithFrame:), frame))) {
         self.exclusiveTouch = YES;
     }
     return self;
@@ -76,7 +76,7 @@ static IMP s_initWithCoder$Imp;
     HLSLoggerDebug(@"Called swizzled initWithCoder:");
     
     // Call the original implementation
-    if ((self = (*s_initWithCoder$Imp)(self, @selector(initWithCoder:), aDecoder))) {
+    if ((self = (*s_UIControl__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
         self.exclusiveTouch = YES;
     }
     return self;

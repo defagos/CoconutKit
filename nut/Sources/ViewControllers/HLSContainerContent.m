@@ -16,13 +16,14 @@
 #import <objc/runtime.h>
 
 // Keys for runtime container - view controller object association
-static void *kContainerContentKey = &kContainerContentKey;
+static void *s_containerContentKey = &s_containerContentKey;
 
-static id (*UIViewController__navigationController)(id, SEL) = NULL;
-static id (*UIViewController__navigationItem)(id, SEL) = NULL;
-static id (*UIViewController__interfaceOrientation)(id, SEL) = NULL;
+static id (*s_UIViewController__navigationController_Imp)(id, SEL) = NULL;
+static id (*s_UIViewController__navigationItem_Imp)(id, SEL) = NULL;
+static id (*s_UIViewController__interfaceOrientation_Imp)(id, SEL) = NULL;
 
-static void (*UIViewController__setTitle)(id, SEL, id) = NULL;
+static void (*s_UIViewController__setTitle_Imp)(id, SEL, id) = NULL;
+
 static id swizzledGetter(UIViewController *self, SEL _cmd);
 static id swizzledForwardGetter(UIViewController *self, SEL _cmd);
 static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value);
@@ -53,7 +54,7 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value);
 
 static id swizzledGetter(UIViewController *self, SEL _cmd)
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     
     // We cannot not forward parentViewController (see why in the .h documentation), we must therefore swizzle
     // interfaceOrientation to fix its behavior
@@ -64,7 +65,7 @@ static id swizzledGetter(UIViewController *self, SEL _cmd)
             return swizzledGetter(containerContent.containerController, _cmd);
         }
         else {
-            return UIViewController__interfaceOrientation(self, _cmd);
+            return s_UIViewController__interfaceOrientation_Imp(self, _cmd);
         }
     }
     else {
@@ -75,14 +76,14 @@ static id swizzledGetter(UIViewController *self, SEL _cmd)
 
 static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     
     id (*UIViewControllerMethod)(id, SEL) = NULL;
     if (_cmd == @selector(navigationController)) {
-        UIViewControllerMethod = UIViewController__navigationController;
+        UIViewControllerMethod = s_UIViewController__navigationController_Imp;
     }
     else if (_cmd == @selector(navigationItem)) {
-        UIViewControllerMethod = UIViewController__navigationItem;
+        UIViewControllerMethod = s_UIViewController__navigationItem_Imp;
     }
     else {
         NSString *reason = [NSString stringWithFormat:@"Unsupported property getter forwarding (%@)", NSStringFromSelector(_cmd)];
@@ -103,11 +104,11 @@ static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
 
 static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     
     void (*UIViewControllerMethod)(id, SEL, id) = NULL;
     if (_cmd == @selector(setTitle:)) {
-        UIViewControllerMethod = UIViewController__setTitle;
+        UIViewControllerMethod = s_UIViewController__setTitle_Imp;
     }
     else {
         NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
@@ -134,17 +135,17 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
 {
     // Swizzle methods ASAP. Cannot be in +initialize since those methods might be called before an HLSContainerContent is actually created for the
     // first tiime
-    UIViewController__navigationController = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)swizzledForwardGetter, NULL);
-    UIViewController__navigationItem = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)swizzledForwardGetter, NULL);
+    s_UIViewController__navigationController_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)swizzledForwardGetter, NULL);
+    s_UIViewController__navigationItem_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)swizzledForwardGetter, NULL);
     
-    UIViewController__interfaceOrientation = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
+    s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
     
-    UIViewController__setTitle = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledForwardSetter, NULL);
+    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledForwardSetter, NULL);
 }
 
 + (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, kContainerContentKey);
+    HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
     if ([containerContent.containerController isKindOfClass:containerControllerClass]) {
         return containerContent.containerController;
     }
@@ -168,8 +169,8 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
         self.containerController = containerController;
                 
         // Associate the view controller with its container content object
-        NSAssert(! objc_getAssociatedObject(viewController, kContainerContentKey), @"A view controller can only be associated with one container content object");
-        objc_setAssociatedObject(viewController, kContainerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
+        NSAssert(! objc_getAssociatedObject(viewController, s_containerContentKey), @"A view controller can only be associated with one container content object");
+        objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
         self.viewController = viewController;
         self.transitionStyle = transitionStyle;
@@ -206,8 +207,8 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
     self.viewController.view.alpha = self.originalViewAlpha;
         
     // Remove the association of the view controller with its content container object
-    NSAssert(objc_getAssociatedObject(self.viewController, kContainerContentKey), @"The view controller was not associated with a content container");
-    objc_setAssociatedObject(self.viewController, kContainerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
+    objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     self.viewController = nil;
     self.containerController = nil;

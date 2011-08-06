@@ -11,4 +11,4 @@
  * See Technical Q&A QA1490: Building Objective-C static libraries with categories
  * http://developer.apple.com/mac/library/qa/qa2006/qa1490.html
  */
-#define LINK_CATEGORY(NAME) @interface LINK_##NAME @end @implementation LINK_##NAME @end
+#define HLSLinkCategory(NAME) @interface LINK_##NAME @end @implementation LINK_##NAME @end

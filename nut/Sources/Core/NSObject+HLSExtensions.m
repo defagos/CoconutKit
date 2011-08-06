@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSObject_HLSExtensions)
+HLSLinkCategory(NSObject_HLSExtensions)
 
 @implementation NSObject (HLSExtensions)
 

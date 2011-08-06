@@ -10,7 +10,7 @@
 
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSArray_HLSExtensions)
+HLSLinkCategory(NSArray_HLSExtensions)
 
 @interface NSArray (HLSExtensionsPrivate)
 

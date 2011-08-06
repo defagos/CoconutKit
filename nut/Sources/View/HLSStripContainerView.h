@@ -37,7 +37,6 @@
     NSUInteger m_interactiveSnapFactor;     // instead of snapping on m_positions - 1 intervals interactively, reduce snap to (m_positions - 1) / m_snapFactor intervals
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
-    BOOL m_enabled;
     BOOL m_draggingLeftHandle;              // YES if dragging the left handle of a strip view
     BOOL m_draggingRightHandle;             // YES if dragging the right handle of a strip view
     HLSStripView *m_movedStripView;         // The view which is being moved or resized (nil if none)

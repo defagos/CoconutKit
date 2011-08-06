@@ -10,7 +10,7 @@
 
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSCalendar_HLSExtensions)
+HLSLinkCategory(NSCalendar_HLSExtensions)
 
 @implementation NSCalendar (HLSExtensions)
 

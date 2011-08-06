@@ -213,7 +213,12 @@ static UIScrollView *s_scrollView = nil;
         [HLSTextField restoreScrollAnimated:YES];
         
         // Changing scroll view (or set to nil). Save the original offset to be able to restore it later
-        s_originalYOffset = bottomMostscrollView.contentOffset.y;
+        if (bottomMostscrollView) {
+            s_originalYOffset = bottomMostscrollView.contentOffset.y;
+        }
+        else {
+            s_originalYOffset = 0.f;
+        }
     }
     
     s_scrollView = bottomMostscrollView;

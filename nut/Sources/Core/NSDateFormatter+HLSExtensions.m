@@ -11,7 +11,7 @@
 #import "NSArray+HLSExtensions.h"
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSDateFormatter_HLSExtensions)
+HLSLinkCategory(NSDateFormatter_HLSExtensions)
 
 @implementation NSDateFormatter (HLSExtensions)
 

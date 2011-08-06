@@ -11,7 +11,7 @@
 #import "NSObject+HLSExtensions.h"
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(HLSAssert)
+HLSLinkCategory(HLSAssert)
 
 @interface NSAssertionHandler (HLSAssertPrivate)
 

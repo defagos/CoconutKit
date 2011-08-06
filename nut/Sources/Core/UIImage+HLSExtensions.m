@@ -10,7 +10,7 @@
 
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(UIImage_HLSExtensions)
+HLSLinkCategory(UIImage_HLSExtensions)
 
 @implementation UIImage (HLSExtensions)
 

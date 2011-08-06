@@ -10,7 +10,7 @@
 
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSDictionary_HLSExtensions)
+HLSLinkCategory(NSDictionary_HLSExtensions)
 
 @implementation NSDictionary (HLSExtensions)
 

@@ -11,10 +11,10 @@
 #import "HLSRuntime.h"
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSDate_HLSExtensions)
+HLSLinkCategory(NSDate_HLSExtensions)
 
-static IMP s_descriptionWithLocale$Imp;
-static NSDateFormatter *s_dateFormatter;
+static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;
+static NSDateFormatter *s_dateFormatter = nil;
 
 @interface NSDate (HLSExtensionsPrivate)
 
@@ -26,7 +26,7 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    s_descriptionWithLocale$Imp = HLSSwizzleSelector([NSDate class], @selector(descriptionWithLocale:), @selector(swizzledDescriptionWithLocale:));
+    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector([NSDate class], @selector(descriptionWithLocale:), @selector(swizzledDescriptionWithLocale:));
     
     // Create time formatter for system timezone (which is the default one if not set)
     s_dateFormatter = [[NSDateFormatter alloc] init];
@@ -148,7 +148,7 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 
 - (NSString *)swizzledDescriptionWithLocale:(id)locale
 {
-    NSString *originalString = (*s_descriptionWithLocale$Imp)(self, @selector(descriptionWithLocale:), locale);
+    NSString *originalString = (*s_NSDate__descriptionWithLocale_Imp)(self, @selector(descriptionWithLocale:), locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }
 

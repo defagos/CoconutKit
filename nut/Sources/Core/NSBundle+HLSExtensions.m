@@ -11,7 +11,7 @@
 #import "NSString+HLSExtensions.h"
 #import "HLSCategoryLinker.h"
 
-LINK_CATEGORY(NSBundle_HLSExtensions)
+HLSLinkCategory(NSBundle_HLSExtensions)
 
 @implementation NSBundle (HLSExtensions)
 
