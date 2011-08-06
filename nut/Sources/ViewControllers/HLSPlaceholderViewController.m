@@ -77,18 +77,6 @@
 
 @synthesize containerContent = m_containerContent;
 
-- (void)setContainerContent:(HLSContainerContent *)containerContent
-{
-    if (m_containerContent == containerContent) {
-        return;
-    }
-    
-    [m_containerContent release];
-    m_containerContent = [containerContent retain];
-    
-    containerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
-}
-
 @synthesize oldContainerContent = m_oldContainerContent;
 
 @synthesize placeholderView = m_placeholderView;
@@ -379,6 +367,9 @@
                                             animated:animated];
         }
     }
+    
+    // Now that the view controller is installed, can set forwarding so that the properties can get sync if enabled
+    self.containerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
     
     // Discard the old view controller
     if ([animation.tag isEqual:@"add_animation"]) {

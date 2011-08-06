@@ -33,6 +33,7 @@
 - (void)transparentButtonClicked:(id)sender;
 - (void)popButtonClicked:(id)sender;
 - (void)stretchingContentSwitchValueChanged:(id)sender;
+- (void)forwardingPropertiesSwitchValueChanged:(id)sender;
 
 @end
 
@@ -43,10 +44,9 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.title = @"HLSStackController";
-        
         UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        stackController.title = @"HLSStackController";
         stackController.stretchingContent = YES;
         
         // Pre-load other view controllers before display. Yep, this is possible!
@@ -61,6 +61,7 @@
         
         self.insetViewController = stackController;
         self.stretchingContent = YES;
+        self.forwardingPropertiesEnabled = YES;
     }
     return self;
 }
@@ -83,6 +84,8 @@
     self.transitionPickerView = nil;
     self.stretchingContentLabel = nil;
     self.stretchingContentSwitch = nil;
+    self.forwardingPropertiesLabel = nil;
+    self.forwardingPropertiesSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -114,6 +117,10 @@
 @synthesize stretchingContentLabel = m_stretchingContentLabel;
 
 @synthesize stretchingContentSwitch = m_stretchingContentSwitch;
+
+@synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
+
+@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 #pragma mark View lifecycle
 
@@ -181,6 +188,11 @@
                                  action:@selector(hideWithModalButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
+    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
+    
+    self.transitionPickerView.delegate = self;
+    self.transitionPickerView.dataSource = self;
+    
     self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
@@ -189,10 +201,12 @@
                                      action:@selector(stretchingContentSwitchValueChanged:)
                            forControlEvents:UIControlEventValueChanged];
     
-    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
+    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     
-    self.transitionPickerView.delegate = self;
-    self.transitionPickerView.dataSource = self;    
+    self.forwardingPropertiesSwitch.on = stackController.forwardingPropertiesEnabled;
+    [self.forwardingPropertiesSwitch addTarget:self
+                                        action:@selector(forwardingPropertiesSwitchValueChanged:)
+                              forControlEvents:UIControlEventValueChanged];    
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -277,6 +291,12 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     stackController.stretchingContent = self.stretchingContentSwitch.on;
+}
+
+- (void)forwardingPropertiesSwitchValueChanged:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    stackController.forwardingPropertiesEnabled = self.forwardingPropertiesSwitch.on;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

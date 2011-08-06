@@ -23,6 +23,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
 
 - (UIViewController *)secondTopViewController;
+- (HLSContainerContent *)secondTopContainerContent;
 
 - (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent;
 
@@ -89,6 +90,20 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize stretchingContent = m_stretchingContent;
 
+@synthesize forwardingPropertiesEnabled = m_forwardingPropertiesEnabled;
+
+- (void)setForwardingPropertiesEnabled:(BOOL)forwardingPropertiesEnabled
+{
+    if (m_forwardingPropertiesEnabled == forwardingPropertiesEnabled) {
+        return;
+    }
+    
+    m_forwardingPropertiesEnabled = forwardingPropertiesEnabled;
+    
+    HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
+    topContainerContent.viewControllerContainerForwardingEnabled = m_forwardingPropertiesEnabled;
+}
+
 @synthesize delegate = m_delegate;
 
 - (UIViewController *)rootViewController
@@ -105,11 +120,15 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (UIViewController *)secondTopViewController
 {
+    return [self secondTopContainerContent].viewController;
+}
+
+- (HLSContainerContent *)secondTopContainerContent
+{
     if ([self.containerContentStack count] < 2) {
         return nil;
     }
-    HLSContainerContent *containerContent = [self.containerContentStack objectAtIndex:[self.containerContentStack count] - 2];
-    return containerContent.viewController;
+    return [self.containerContentStack objectAtIndex:[self.containerContentStack count] - 2];
 }
 
 - (NSArray *)viewControllers
@@ -448,9 +467,21 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
-    // At the end of the pop animation, we must always remove the popped view controller from the stack
-    if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    if ([animation.tag isEqual:@"push_animation"]) {
+        // Stop property synchronization for the old top view controller
+        HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
+        secondTopContainerContent.viewControllerContainerForwardingEnabled = NO;
+        
+        // Now that the new view controller is installed, can set forwarding so that the properties can get sync if enabled
+        HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
+        topContainerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;        
+    }
+    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
         [self.containerContentStack removeLastObject];
+        
+        // Now that the view controller is visible, can set forwarding so that the properties can get sync if enabled
+        HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
+        topContainerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
     }
     
     --m_animationCount;

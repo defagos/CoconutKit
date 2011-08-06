@@ -25,6 +25,8 @@
     UIPickerView *m_transitionPickerView;
     UILabel *m_stretchingContentLabel;
     UISwitch *m_stretchingContentSwitch;
+    UILabel *m_forwardingPropertiesLabel;
+    UISwitch *m_forwardingPropertiesSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *lifecycleTestSampleButton;
@@ -41,5 +43,7 @@
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UILabel *stretchingContentLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *stretchingContentSwitch;
+@property (nonatomic, retain) IBOutlet UILabel *forwardingPropertiesLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 
 @end

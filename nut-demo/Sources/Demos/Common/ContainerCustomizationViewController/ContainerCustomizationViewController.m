@@ -68,7 +68,6 @@
     [super viewWillAppear:animated];
     
     [self saveOriginalSkin];
-    [self updateSkinRandomly];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

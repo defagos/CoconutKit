@@ -55,12 +55,13 @@ static id swizzledGetter(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, kContainerContentKey);
     
-    // We could not forward parentViewController (see why in the .h documentation), we must therefore swizzle
-    // interfaceOrientation to fix its behaviour
+    // We cannot not forward parentViewController (see why in the .h documentation), we must therefore swizzle
+    // interfaceOrientation to fix its behavior
     if (_cmd == @selector(interfaceOrientation)) {
         if (containerContent
                 && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-            return UIViewController__interfaceOrientation(containerContent.containerController, _cmd);
+            // Call the same method, but on the container. This handles view controller nesting correctly
+            return swizzledGetter(containerContent.containerController, _cmd);
         }
         else {
             return UIViewController__interfaceOrientation(self, _cmd);
@@ -92,7 +93,8 @@ static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
     if (containerContent
             && containerContent.viewControllerContainerForwardingEnabled 
             && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        return UIViewControllerMethod(containerContent.containerController, _cmd);
+        // Call the same method, but on the container. This handles view controller nesting correctly
+        return swizzledForwardGetter(containerContent.containerController, _cmd);
     }
     else {
         return UIViewControllerMethod(self, _cmd);
@@ -112,14 +114,15 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
     }
     
-    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
+    // Set the view controller title in all cases
+    UIViewControllerMethod(self, _cmd, value);
+    
+    // Also set the title of the container controller if it is a view controller and forwarding is enabled
     if (containerContent
             && containerContent.viewControllerContainerForwardingEnabled 
             && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewControllerMethod(containerContent.containerController, _cmd, value);
-    }
-    else {
-        UIViewControllerMethod(self, _cmd, value);
+        // Call the same method, but on the container. This handles view controller nesting correctly
+        swizzledForwardSetter(containerContent.containerController, _cmd, value);
     }
 }
 

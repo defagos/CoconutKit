@@ -60,6 +60,7 @@ extern const NSUInteger kStackUnlimitedCapacity;
     BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
                                                                 // container view frame?
     NSUInteger m_animationCount;                                // Number of transition animations which are running
+    BOOL m_forwardingPropertiesEnabled;                         // Does the container forward inset navigation properties transparently?
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -134,6 +135,15 @@ extern const NSUInteger kStackUnlimitedCapacity;
  * Default value is NO.
  */
 @property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
+
+/**
+ * If set to YES, properties of the top view controller (title, navigation item, toolbar) are forwarded to the stack 
+ * controller. When inserted into a navigation controller, the stack view controller thus behaves as if its
+ * top view controller would had directly pushed into it.
+ *
+ * Default value is NO.
+ */
+@property (nonatomic, assign, getter=isForwardingEnabled) BOOL forwardingPropertiesEnabled;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 
