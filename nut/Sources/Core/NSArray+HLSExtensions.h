@@ -20,3 +20,12 @@
 - (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 
 @end
+
+@interface NSMutableArray (HLSExtensions)
+
+/**
+ * Same as addObject:, but does not attempt to insert nil objects
+ */
+- (void)safelyAddObject:(id)object;
+
+@end

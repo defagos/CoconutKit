@@ -56,3 +56,15 @@ HLSLinkCategory(NSArray_HLSExtensions)
 }
 
 @end
+
+@implementation NSMutableArray (HLSExtensions)
+
+- (void)safelyAddObject:(id)object
+{
+    if (! object) {
+        return;
+    }
+    [self addObject:object];
+}
+
+@end

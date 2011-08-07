@@ -12,6 +12,7 @@
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
+#import "NSArray+HLSExtensions.h"
 
 @interface HLSPlaceholderViewController () <HLSAnimationDelegate>
 
@@ -278,7 +279,7 @@
         [self.containerContent addViewToContainerView:self.placeholderView 
                                               stretch:self.stretchingContent 
                                      blockInteraction:NO 
-                              inContainerContentStack:nil];
+                              inContainerContentStack:[NSArray arrayWithObjects:self.oldContainerContent, self.containerContent, nil]];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
@@ -296,7 +297,12 @@
 
 - (HLSAnimation *)createAnimation
 {
-    HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:nil containerView:self.placeholderView];
+    NSMutableArray *containerContentStack = [NSMutableArray array];
+    [containerContentStack safelyAddObject:self.oldContainerContent];
+    [containerContentStack addObject:self.containerContent];
+    
+    HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:[NSArray arrayWithArray:containerContentStack]
+                                                                          containerView:self.placeholderView];
     animation.tag = @"add_animation";
     animation.lockingUI = YES;
     animation.bringToFront = YES;
