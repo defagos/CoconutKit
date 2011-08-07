@@ -452,10 +452,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
-    
-    // Reset saved properties
-    self.originalViewFrame = CGRectZero;
-    self.originalViewAlpha = 0.f;
 }
 
 - (void)releaseViews

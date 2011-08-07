@@ -271,6 +271,7 @@
                                                                  transitionStyle:transitionStyle 
                                                                         duration:duration]
                              autorelease];
+    self.containerContent.forwardingProperties = self.forwardingProperties;
     
     if ([self isViewLoaded]) {
         // Install the new view
@@ -362,9 +363,6 @@
                                             animated:animated];
         }
     }
-    
-    // Now that the view controller is installed, can set forwarding so that the properties can get sync if enabled
-    self.containerContent.forwardingProperties = self.forwardingProperties;
     
     // Discard the old view controller
     if ([animation.tag isEqual:@"add_animation"]) {
