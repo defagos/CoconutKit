@@ -83,17 +83,17 @@
 
 @synthesize stretchingContent = m_stretchingContent;
 
-@synthesize forwardingPropertiesEnabled = m_forwardingPropertiesEnabled;
+@synthesize forwardingProperties = m_forwardingProperties;
 
-- (void)setForwardingPropertiesEnabled:(BOOL)forwardingPropertiesEnabled
+- (void)setForwardingProperties:(BOOL)forwardingProperties
 {
-    if (m_forwardingPropertiesEnabled == forwardingPropertiesEnabled) {
+    if (m_forwardingProperties == forwardingProperties) {
         return;
     }
     
-    m_forwardingPropertiesEnabled = forwardingPropertiesEnabled;
+    m_forwardingProperties = forwardingProperties;
     
-    self.containerContent.viewControllerContainerForwardingEnabled = m_forwardingPropertiesEnabled;
+    self.containerContent.forwardingProperties = m_forwardingProperties;
 }
 
 @synthesize delegate = m_delegate;
@@ -364,7 +364,7 @@
     }
     
     // Now that the view controller is installed, can set forwarding so that the properties can get sync if enabled
-    self.containerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
+    self.containerContent.forwardingProperties = self.forwardingProperties;
     
     // Discard the old view controller
     if ([animation.tag isEqual:@"add_animation"]) {

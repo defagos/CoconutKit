@@ -17,7 +17,7 @@
  * the UISearchDisplayDelegate delegate methods to suit your needs.
  *
  * To provide the user with the ability to customize the view controller layout, this class does not inherit directly from
- * UITableViewController, but from UIViewController. Classes derived from this class are therefore expected to initialize
+ * UITableViewController, but from HLSViewController. Classes derived from this class are therefore expected to initialize
  * the table view outlet provided, either using Interface Builder or programmatically.
  *
  * As for UITableViewController, this class conforms to the table view protocols for convenience, but does not provide

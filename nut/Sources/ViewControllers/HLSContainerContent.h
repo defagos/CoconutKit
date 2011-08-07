@@ -56,7 +56,7 @@
     UIView *m_blockingView;
     HLSTransitionStyle m_transitionStyle;
     NSTimeInterval m_duration;
-    BOOL m_viewControllerContainerForwardingEnabled;
+    BOOL m_forwardingProperties;
     CGRect m_originalViewFrame;
     CGFloat m_originalViewAlpha;
 }
@@ -146,9 +146,9 @@
 
 /**
  * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
- * are forwarded through the container controller if this controller is a view controller. This makes it possible
+ * are forwarded through the container controller if the container is iteslf a view controller. This makes it possible
  * to display those elements transparently higher up in the view controller hierarchy
  */
-@property (nonatomic, assign, getter=isViewControllerContainerForwardingEnabled) BOOL viewControllerContainerForwardingEnabled;
+@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @end

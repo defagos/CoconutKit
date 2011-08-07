@@ -48,7 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+     
     HLSLoggerInfo(@"Called for object %@, animated = %@", self, [HLSConverters stringFromBool:animated]);
 }
 

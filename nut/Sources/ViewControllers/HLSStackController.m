@@ -22,7 +22,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
 
-- (UIViewController *)secondTopViewController;
+- (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
 
 - (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent;
@@ -90,18 +90,18 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize stretchingContent = m_stretchingContent;
 
-@synthesize forwardingPropertiesEnabled = m_forwardingPropertiesEnabled;
+@synthesize forwardingProperties = m_forwardingProperties;
 
-- (void)setForwardingPropertiesEnabled:(BOOL)forwardingPropertiesEnabled
+- (void)setForwardingProperties:(BOOL)forwardingProperties
 {
-    if (m_forwardingPropertiesEnabled == forwardingPropertiesEnabled) {
+    if (m_forwardingProperties == forwardingProperties) {
         return;
     }
     
-    m_forwardingPropertiesEnabled = forwardingPropertiesEnabled;
+    m_forwardingProperties = forwardingProperties;
     
-    HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
-    topContainerContent.viewControllerContainerForwardingEnabled = m_forwardingPropertiesEnabled;
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    topContainerContent.forwardingProperties = m_forwardingProperties;
 }
 
 @synthesize delegate = m_delegate;
@@ -114,13 +114,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (UIViewController *)topViewController
 {
-    HLSContainerContent *containerContent = [self.containerContentStack lastObject];
-    return containerContent.viewController;
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    return topContainerContent.viewController;
 }
 
-- (UIViewController *)secondTopViewController
+- (HLSContainerContent *)topContainerContent
 {
-    return [self secondTopContainerContent].viewController;
+    return [self.containerContentStack lastObject];
 }
 
 - (HLSContainerContent *)secondTopContainerContent
@@ -329,6 +329,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
             [pushAnimation playAnimated:NO];
         }
     }
+    else {
+        // The top view controller must be the one that forwards its content (if forwarding enabled)
+        HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
+        secondTopContainerContent.forwardingProperties = NO;
+        
+        containerContent.forwardingProperties = self.forwardingProperties;
+    }
 }
 
 #pragma mark Popping view controllers
@@ -353,7 +360,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         // Pop animation = reverse push animation
-        HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
+        HLSContainerContent *topContainerContent = [self topContainerContent];
         HLSAnimation *popAnimation = [[self animationForContainerContent:topContainerContent] reverseAnimation];
         if ([self isViewVisible]) {
             [popAnimation playAnimated:YES];
@@ -363,8 +370,12 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         }        
     }
     // If the view is not loaded, we can unregister the popped view controller on the spot
-    else {        
+    else {
         [self.containerContentStack removeLastObject];
+        
+        // The top view controller must be the one that forwards its content (if forwarding enabled)
+        HLSContainerContent *topContainerContent = [self topContainerContent];
+        topContainerContent.forwardingProperties = self.forwardingProperties;
     }
 }
 
@@ -407,28 +418,34 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {    
     ++m_animationCount;
     
-    if ([self isViewVisible]) {
-        UIViewController *appearingViewController = nil;
-        UIViewController *disappearingViewController = nil;
-        
-        if ([animation.tag isEqual:@"push_animation"]) {
-            appearingViewController = [self topViewController];
-            disappearingViewController = [self secondTopViewController];
-        }
-        else if ([animation.tag isEqual:@"reverse_push_animation"]) {
-            appearingViewController = [self secondTopViewController];
-            disappearingViewController = [self topViewController];
-        }
-        else {
-            return;
-        }
-        
-        [disappearingViewController viewWillDisappear:animated];
-        [appearingViewController viewWillAppear:animated];
+    HLSContainerContent *appearingContainerContent = nil;
+    HLSContainerContent *disappearingContainerContent = nil;
+    
+    if ([animation.tag isEqual:@"push_animation"]) {
+        appearingContainerContent = [self topContainerContent];
+        disappearingContainerContent = [self secondTopContainerContent];        
+    }
+    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+        appearingContainerContent = [self secondTopContainerContent];
+        disappearingContainerContent = [self topContainerContent];
+    }
+    else {
+        return;
+    }
+    
+    // During the time the animation is running, we ensure that if forwarding is enabled the two top view controllers forward their
+    // properties. This is made on purpose: This way, implementers of viewWill* and viewDid* methods will still get access to the 
+    // correct properties through forwarding. Only at the end of the animation will the top view controller be the only one
+    // forwarding properties
+    appearingContainerContent.forwardingProperties = self.forwardingProperties;
+    
+    if ([self isViewVisible]) {        
+        [disappearingContainerContent.viewController viewWillDisappear:animated];
+        [appearingContainerContent.viewController viewWillAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
             [self.delegate stackController:self
-                    willShowViewController:appearingViewController 
+                    willShowViewController:appearingContainerContent.viewController 
                                   animated:animated];
         }
     }    
@@ -436,55 +453,49 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    --m_animationCount;
+    
+    HLSContainerContent *appearingContainerContent = nil;
+    HLSContainerContent *disappearingContainerContent = nil;
+    
+    if ([animation.tag isEqual:@"push_animation"]) {
+        appearingContainerContent = [self topContainerContent];
+        disappearingContainerContent = [self secondTopContainerContent];
+    }
+    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+        appearingContainerContent = [self secondTopContainerContent];
+        disappearingContainerContent = [self topContainerContent];
+        
+        // At the end of the pop animation, the popped view controller's view is removed
+        [disappearingContainerContent removeViewFromContainerView];
+    }
+    else {
+        return;
+    }
+    
     if ([self isViewVisible]) {
-        UIViewController *appearingViewController = nil;
-        UIViewController *disappearingViewController = nil;
-        
-        if ([animation.tag isEqual:@"push_animation"]) {
-            appearingViewController = [self topViewController];
-            disappearingViewController = [self secondTopViewController];
-        }
-        else if ([animation.tag isEqual:@"reverse_push_animation"]) {
-            appearingViewController = [self secondTopViewController];
-            disappearingViewController = [self topViewController];
-            
-            // Remove the popped view controller's view
-            HLSContainerContent *disappearingContainerContent = [self.containerContentStack lastObject];
-            [disappearingContainerContent removeViewFromContainerView];
-        }
-        else {
-            --m_animationCount;
-            return;
-        }
-        
-        [disappearingViewController viewDidDisappear:animated];      
-        [appearingViewController viewDidAppear:animated];
+        [disappearingContainerContent.viewController viewDidDisappear:animated];
+    }
+    
+    // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
+    // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
+    // has been called for it. This way, implementations of viewDidDisappear: could still access the forwarded
+    // properties
+    disappearingContainerContent.forwardingProperties = NO;
+    
+    if ([self isViewVisible]) {
+        [appearingContainerContent.viewController viewDidAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
             [self.delegate stackController:self
-                     didShowViewController:appearingViewController 
+                     didShowViewController:appearingContainerContent.viewController 
                                   animated:animated];
         }
     }
     
-    if ([animation.tag isEqual:@"push_animation"]) {
-        // Stop property synchronization for the old top view controller
-        HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
-        secondTopContainerContent.viewControllerContainerForwardingEnabled = NO;
-        
-        // Now that the new view controller is installed, can set forwarding so that the properties can get sync if enabled
-        HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
-        topContainerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;        
-    }
-    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    if ([animation.tag isEqual:@"reverse_push_animation"]) {
         [self.containerContentStack removeLastObject];
-        
-        // Now that the view controller is visible, can set forwarding so that the properties can get sync if enabled
-        HLSContainerContent *topContainerContent = [self.containerContentStack lastObject];
-        topContainerContent.viewControllerContainerForwardingEnabled = self.forwardingPropertiesEnabled;
     }
-    
-    --m_animationCount;
 }
 
 #pragma mark HLSReloadable protocol implementation

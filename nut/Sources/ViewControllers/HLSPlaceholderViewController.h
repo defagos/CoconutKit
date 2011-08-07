@@ -85,7 +85,7 @@
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
     BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
                                                             // it fills the placeholder area?
-    BOOL m_forwardingPropertiesEnabled;                     // Does the container forward inset navigation properties transparently?
+    BOOL m_forwardingProperties;                            // Does the container forward inset navigation properties transparently?
     NSUInteger m_animationCount;                            // Number of transition animations which are running
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
@@ -150,7 +150,7 @@
  *
  * Default value is NO.
  */
-@property (nonatomic, assign, getter=isForwardingEnabled) BOOL forwardingPropertiesEnabled;
+@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 

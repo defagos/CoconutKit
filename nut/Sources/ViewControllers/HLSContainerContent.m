@@ -23,10 +23,15 @@ static id (*s_UIViewController__navigationItem_Imp)(id, SEL) = NULL;
 static id (*s_UIViewController__interfaceOrientation_Imp)(id, SEL) = NULL;
 
 static void (*s_UIViewController__setTitle_Imp)(id, SEL, id) = NULL;
+static void (*s_UIViewController__setHidesBottomBarWhenPushed_Imp)(id, SEL, BOOL) = NULL;
+static void (*s_UIViewController__setToolbarItems_Imp)(id, SEL, id) = NULL;
+static void (*s_UIViewController__setToolbarItems_animated_Imp)(id, SEL, id, BOOL) = NULL;
 
 static id swizzledGetter(UIViewController *self, SEL _cmd);
 static id swizzledForwardGetter(UIViewController *self, SEL _cmd);
-static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value);
+static void swizzledForwardSetter1(UIViewController *self, SEL _cmd, id value);
+static void swizzledForwardSetter2(UIViewController *self, SEL _cmd, BOOL value);
+static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, BOOL value2);
 
 @interface HLSContainerContent ()
 
@@ -92,7 +97,7 @@ static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
     
     // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
     if (containerContent
-            && containerContent.viewControllerContainerForwardingEnabled 
+            && containerContent.forwardingProperties 
             && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
         return swizzledForwardGetter(containerContent.containerController, _cmd);
@@ -102,7 +107,7 @@ static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
     }
 }
 
-static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
+static void swizzledForwardSetter1(UIViewController *self, SEL _cmd, id value)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     
@@ -110,20 +115,73 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
     if (_cmd == @selector(setTitle:)) {
         UIViewControllerMethod = s_UIViewController__setTitle_Imp;
     }
+    else if (_cmd == @selector(setToolbarItems:)) {
+        UIViewControllerMethod = s_UIViewController__setToolbarItems_Imp;
+    }
     else {
         NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
     }
     
-    // Set the view controller title in all cases
+    // Call the setter on the view controller first
     UIViewControllerMethod(self, _cmd, value);
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
     if (containerContent
-            && containerContent.viewControllerContainerForwardingEnabled 
+            && containerContent.forwardingProperties 
             && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
-        swizzledForwardSetter(containerContent.containerController, _cmd, value);
+        swizzledForwardSetter1(containerContent.containerController, _cmd, value);
+    }
+}
+
+static void swizzledForwardSetter2(UIViewController *self, SEL _cmd, BOOL value)
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    
+    void (*UIViewControllerMethod)(id, SEL, BOOL) = NULL;
+    if (_cmd == @selector(setHidesBottomBarWhenPushed:)) {
+        UIViewControllerMethod = s_UIViewController__setHidesBottomBarWhenPushed_Imp;
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+    }
+    
+    // Call the setter on the view controller first
+    UIViewControllerMethod(self, _cmd, value);
+    
+    // Also set the title of the container controller if it is a view controller and forwarding is enabled
+    if (containerContent
+            && containerContent.forwardingProperties 
+            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        // Call the same method, but on the container. This handles view controller nesting correctly
+        swizzledForwardSetter2(containerContent.containerController, _cmd, value);
+    }
+}
+
+static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, BOOL value2)
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    
+    void (*UIViewControllerMethod)(id, SEL, id, BOOL) = NULL;
+    if (_cmd == @selector(setToolbarItems:animated:)) {
+        UIViewControllerMethod = s_UIViewController__setToolbarItems_animated_Imp;
+    }
+    else {
+        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+    }
+    
+    // Call the setter on the view controller first
+    UIViewControllerMethod(self, _cmd, value1, value2);
+    
+    // Also set the title of the container controller if it is a view controller and forwarding is enabled
+    if (containerContent
+            && containerContent.forwardingProperties 
+            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        // Call the same method, but on the container. This handles view controller nesting correctly
+        swizzledForwardSetter3(containerContent.containerController, _cmd, value1, value2);
     }
 }
 
@@ -140,7 +198,10 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
     
     s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
     
-    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledForwardSetter, NULL);
+    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledForwardSetter1, NULL);
+    s_UIViewController__setHidesBottomBarWhenPushed_Imp = (void (*)(id, SEL, BOOL))class_replaceMethod([UIViewController class], @selector(setHidesBottomBarWhenPushed:), (IMP)swizzledForwardSetter2, NULL);
+    s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setToolbarItems:), (IMP)swizzledForwardSetter1, NULL);
+    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))class_replaceMethod([UIViewController class], @selector(setToolbarItems:animated:), (IMP)swizzledForwardSetter3, NULL);
 }
 
 + (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
@@ -243,17 +304,17 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
     }
 }
 
-@synthesize viewControllerContainerForwardingEnabled = m_viewControllerContainerForwardingEnabled;
+@synthesize forwardingProperties = m_forwardingProperties;
 
-- (void)setViewControllerContainerForwardingEnabled:(BOOL)viewControllerContainerForwardingEnabled
+- (void)setForwardingProperties:(BOOL)forwardingProperties
 {
-    if (m_viewControllerContainerForwardingEnabled == viewControllerContainerForwardingEnabled) {
+    if (m_forwardingProperties == forwardingProperties) {
         return;
     }
     
-    m_viewControllerContainerForwardingEnabled = viewControllerContainerForwardingEnabled;
+    m_forwardingProperties = forwardingProperties;
     
-    if (viewControllerContainerForwardingEnabled) {
+    if (forwardingProperties) {
         if ([self.containerController isKindOfClass:[UIViewController class]]) {
             UIViewController *containerViewController = (UIViewController *)self.containerController;
             containerViewController.title = self.viewController.title;
@@ -264,6 +325,8 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
             containerViewController.navigationItem.hidesBackButton = self.viewController.navigationItem.hidesBackButton;
             containerViewController.navigationItem.leftBarButtonItem = self.viewController.navigationItem.leftBarButtonItem;
             containerViewController.navigationItem.rightBarButtonItem = self.viewController.navigationItem.rightBarButtonItem;
+            containerViewController.toolbarItems = self.viewController.toolbarItems;
+            containerViewController.hidesBottomBarWhenPushed = self.viewController.hidesBottomBarWhenPushed;
         }   
     }
 }
@@ -765,12 +828,13 @@ static void swizzledForwardSetter(UIViewController *self, SEL _cmd, id value)
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@; view: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@; view: %@; forwardingProperties: %@>", 
             [self class],
             self,
             self.viewController,
             [HLSConverters stringFromBool:self.addedToContainerView],
-            [self view]];
+            [self view],
+            [HLSConverters stringFromBool:self.forwardingProperties]];
 }
 
 @end

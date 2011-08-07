@@ -60,19 +60,24 @@
                        forState:UIControlStateNormal];
     [self.changeButton addTarget:self
                           action:@selector(changeButtonClicked:)
-                forControlEvents:UIControlEventTouchUpInside];
+                forControlEvents:UIControlEventTouchUpInside];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self.navigationController setToolbarHidden:NO animated:animated];
+    
     [self saveOriginalSkin];
+    [self updateSkinRandomly];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    [self.navigationController setToolbarHidden:YES animated:animated];
     
     [self restoreOriginalSkin];
 }
@@ -105,6 +110,12 @@
                                                                                             target:nil 
                                                                                             action:NULL]
                                               autorelease];
+    
+    UIBarButtonItem *toolbarItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:arc4random() % 4
+                                                                                  target:nil 
+                                                                                  action:NULL]
+                                    autorelease];
+    self.toolbarItems = [NSArray arrayWithObject:toolbarItem];
 }
 
 - (void)restoreOriginalSkin

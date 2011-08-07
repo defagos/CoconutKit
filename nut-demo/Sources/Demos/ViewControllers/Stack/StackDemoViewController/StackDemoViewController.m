@@ -61,7 +61,7 @@
         
         self.insetViewController = stackController;
         self.stretchingContent = YES;
-        self.forwardingPropertiesEnabled = YES;
+        self.forwardingProperties = YES;
     }
     return self;
 }
@@ -203,7 +203,7 @@
     
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     
-    self.forwardingPropertiesSwitch.on = stackController.forwardingPropertiesEnabled;
+    self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
     [self.forwardingPropertiesSwitch addTarget:self
                                         action:@selector(forwardingPropertiesSwitchValueChanged:)
                               forControlEvents:UIControlEventValueChanged];    
@@ -296,7 +296,7 @@
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
-    stackController.forwardingPropertiesEnabled = self.forwardingPropertiesSwitch.on;
+    stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
