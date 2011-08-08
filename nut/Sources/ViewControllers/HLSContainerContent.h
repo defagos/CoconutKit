@@ -39,7 +39,10 @@
  *
  * The HLSContainerContent class provides a way to ensure that the above common properties can be easily implemented. It 
  * can be seen as some kind of smart pointer object, taking ownership of a view controller when inserted into a view 
- * controller container.
+ * controller container. Note that the view controller's view is NOT released when the HLSContainerContent object is
+ * destroyed. This lets clients decide whether they want to cache the view (by retaining the associating view controller
+ * themeselves) or not (if the view controller is not retained elsewhere, it will simply be deallocated when the 
+ * HLSContainerContent object managing it is destroyed, and so will be its view).
  * 
  * When implementing a view controller container, use HLSContainerContent objects (retained by the container) to take 
  * ownership of a view controller when it is inserted, and simply release the HLSContainerContent object when the view 
@@ -85,9 +88,9 @@
              transitionStyle:(HLSTransitionStyle)transitionStyle;
 
 /**
- * Instantiate and add the view controller's view as subview of a view managed by the container controller (the view in 
- * which it displays its content). If blockInteraction is set to YES, a transparent stretchable view is inserted below 
- * the view controller's view to prevent interaction with other views below.
+ * Instantiate (if not already) and add the view controller's view as subview of a view managed by the container 
+ * controller (the view in which it displays its content). If blockInteraction is set to YES, a transparent 
+ * stretchable view is inserted below the view controller's view to prevent interaction with other views below.
  *
  * Some view controller containers might display several view controllers simultaneously in the same content view. In
  * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
@@ -106,7 +109,8 @@
        inContainerContentStack:(NSArray *)containerContentStack;
 
 /**
- * Remove the view controller's view from the container view
+ * Remove the view controller's view from the container view. Does not release the view (call releaseViews for this
+ * purpose)
  */
 - (void)removeViewFromContainerView;
 

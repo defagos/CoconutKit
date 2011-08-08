@@ -183,7 +183,7 @@
     
     UIViewController *insetViewController = [self insetViewController];
     return [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-    || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
+        || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
