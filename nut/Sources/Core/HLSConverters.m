@@ -11,16 +11,12 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
-@implementation HLSConverters
-
-#pragma mark Class methods
-
-+ (NSString *)stringFromBool:(BOOL)yesOrNo
+NSString *HLSStringFromBool(BOOL yesOrNo)
 {
     return yesOrNo ? @"YES" : @"NO";
 }
 
-+ (NSString *)stringFromInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation)
 {
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait: {
@@ -51,7 +47,8 @@
     }
 }
 
-+ (NSString *)stringFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation
+
+NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
 {
     switch (deviceOrientation) {
         case UIDeviceOrientationPortrait: {
@@ -82,7 +79,7 @@
     }
 }
 
-+ (NSNumber *)unsignedIntNumberFromString:(NSString *)string
+NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
 {
     if (! string) {
         return nil;
@@ -92,6 +89,10 @@
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     return [formatter numberFromString:string];
 }
+
+@implementation HLSConverters
+
+#pragma mark Class methods
 
 + (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString
 {
@@ -123,7 +124,7 @@
 {
     NSString *stringValue = [sourceDictionary objectForKey:sourceKey];
     if (stringValue) {
-        NSNumber *number = [HLSConverters unsignedIntNumberFromString:stringValue];
+        NSNumber *number = HLSUnsignedIntNumberFromString(stringValue);
         if (number) {
             [destDictionary setObject:number forKey:destKey];
         }

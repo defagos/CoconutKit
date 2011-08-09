@@ -7,20 +7,26 @@
 //
 
 /**
+ * Conversions to string
+ */
+NSString *HLSStringFromBool(BOOL yesOrNo);
+NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
+NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
+
+/**
+ * Conversions to numbers
+ */
+NSNumber *HLSUnsignedIntNumberFromString(NSString *string);
+
+/**
+ * Conversions requiring several arguments. As methods since method signatures more explicit
+ *
  * Not meant to be instantiated
  */
 @interface HLSConverters : NSObject {
 @private
     
 }
-
-+ (NSString *)stringFromBool:(BOOL)yesOrNo;
-
-+ (NSString *)stringFromInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-
-+ (NSString *)stringFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation;
-
-+ (NSNumber *)unsignedIntNumberFromString:(NSString *)string;
 
 + (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString;
 

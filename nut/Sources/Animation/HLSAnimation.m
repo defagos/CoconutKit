@@ -306,8 +306,8 @@
             self,
             self.animationSteps,
             self.tag,
-            [HLSConverters stringFromBool:self.lockingUI],
-            [HLSConverters stringFromBool:self.bringToFront],
+            HLSStringFromBool(self.lockingUI),
+            HLSStringFromBool(self.bringToFront),
             self.delegate];
 }
 

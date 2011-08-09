@@ -34,8 +34,8 @@
  * also YES if the animation was run using playAnimated:YES (even though the step was not animated, it is still
  * part of an animation which was played animated).
  *
- * An HLSAnimation applies transforms to views. It does not alter the frame, which means view inside it won't resize
- * (according to their autoresizing mask) but rather scale. If scaling is not what you want, you cannot use HLSAnimation
+ * An HLSAnimation applies transforms to views. It does not alter the frame, which means views inside it won't resize
+ * according to their autoresizing mask, but rather scale. If scaling is not what you want, you cannot use HLSAnimation
  * objects to manage your animation. In such cases, stick with usual UIView animation blocks for the moment.
  *
  * Designated initializer: initWithAnimationSteps:

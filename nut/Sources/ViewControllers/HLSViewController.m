@@ -150,13 +150,13 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    HLSLoggerDebug(@"View controller %@ will rotate to interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:toInterfaceOrientation]);
+    HLSLoggerDebug(@"View controller %@ will rotate to interface orientation %@", self, HLSStringFromInterfaceOrientation(toInterfaceOrientation));
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    HLSLoggerDebug(@"View controller %@ did rotate from interface orientation %@", self, [HLSConverters stringFromInterfaceOrientation:fromInterfaceOrientation]);
+    HLSLoggerDebug(@"View controller %@ did rotate from interface orientation %@", self, HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
 }
 
 #pragma mark Memory warnings

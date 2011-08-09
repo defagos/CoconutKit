@@ -39,7 +39,7 @@
 
 /**
  * The following macros check the type of objects in a collection. Useful for a class to verify that a collection it 
- * receives from a client through its public interface contains objects og the expected type. HLSAssert... macros can 
+ * receives from a client through its public interface contains objects of the expected type. HLSAssert... macros can 
  * be used in methods only. In C-functions use the HLSCAssert... macros instead.
  *
  * Example: HLSAssertObjectsInEnumerationAreKindOfClass(views, UIScrollView);

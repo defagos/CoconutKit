@@ -828,9 +828,9 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             [self class],
             self,
             self.viewController,
-            [HLSConverters stringFromBool:self.addedToContainerView],
+            HLSStringFromBool(self.addedToContainerView),
             [self view],
-            [HLSConverters stringFromBool:self.forwardingProperties]];
+            HLSStringFromBool(self.forwardingProperties)];
 }
 
 @end

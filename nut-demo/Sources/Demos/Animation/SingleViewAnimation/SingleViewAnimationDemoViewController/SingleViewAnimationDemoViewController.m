@@ -149,17 +149,17 @@
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
 - (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animated = %@", [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Animated = %@", HLSStringFromBool(animated));
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, [HLSConverters stringFromBool:animated]);
+    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
     
     // Can find which animation ended using its tag
     if ([animation.tag isEqual:@"singleViewAnimation"]) {
