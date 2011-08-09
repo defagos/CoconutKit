@@ -14,7 +14,7 @@
 - (NSDate *)dateSameDayAtNoon;
 
 /**
- * Return the date corresponding to noon the same day as the receiver (for the system calendar overridden with the given 
+ * Return the date corresponding to noon the same day as the receiver (for the system calendar and for the given 
  * time zone)
  */
 - (NSDate *)dateSameDayAtNoonInTimeZone:(NSTimeZone *)timeZone;
@@ -25,7 +25,7 @@
 - (NSDate *)dateSameDayAtMidnight;
 
 /**
- * Return the date corresponding to midnight the same day as the receiver (for the system calendar overridden with the given 
+ * Return the date corresponding to midnight the same day as the receiver (for the system calendar and for the given 
  * time zone)
  */
 - (NSDate *)dateSameDayAtMidnightInTimeZone:(NSTimeZone *)timeZone;
@@ -38,7 +38,7 @@
 
 /**
  * Return the date corresponding to the specified hour / minute / second the same day as the receiver (for the system 
- * calendar overridden with the given time zone)
+ * calendar and for the given time zone)
  */
 - (NSDate *)dateSameDayAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second inTimeZone:(NSTimeZone *)timeZone;
 
@@ -48,7 +48,7 @@
 - (NSComparisonResult)compareDayWithDate:(NSDate *)date;
 
 /**
- * Compare the receiver with another date (for the system calendar overridden with the given time zone)
+ * Compare the receiver with another date (for the system calendar and for the given time zone)
  */
 - (NSComparisonResult)compareDayWithDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
@@ -58,7 +58,7 @@
 - (BOOL)isSameDayAsDate:(NSDate *)date;
 
 /**
- * Compare the day part of the receiver with the one of another date (for the system calendar overridden with the given time zone)
+ * Compare the day part of the receiver with the one of another date (for the system calendar and for the given time zone)
  */
 - (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 

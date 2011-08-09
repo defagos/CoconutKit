@@ -15,7 +15,7 @@
  *
  * A delegation mechanism is used to notify clients about the task processing status. Objects register themselves
  * to get notified about a task status. Note that a delegate registration is removed automatically when the 
- * associated task processing ends. This means that when you are re-submitting a task you may need to register
+ * associated task processing ends. This means that when you are re-submitting a task you will need to register
  * a delegate even if one was already registered for this task.
  *
  * As always with delegation in asynchronous contexts, it is especially important that delegates do not forget to
@@ -101,13 +101,13 @@
  * Return an NSArray of running or pending HLSTask objects bearing the specified tag (already completed tasks are not
  * returned). If no match is found, this method returns an empty array
  */
-- (NSArray *)findTasksWithTag:(NSString *)tag;
+- (NSArray *)tasksWithTag:(NSString *)tag;
 
 /**
  * Return an NSArray of running or pending HLSTaskGroup objects bearing the specified tag (already completed tasks are not
  * returned). If no match is found, this method returns an empty array
  */
-- (NSArray *)findTaskGroupsWithTag:(NSString *)tag;
+- (NSArray *)taskGroupsWithTag:(NSString *)tag;
 
 /**
  * Register delegates for tasks. Only one delegate can be registered. If another delegate registers itself,

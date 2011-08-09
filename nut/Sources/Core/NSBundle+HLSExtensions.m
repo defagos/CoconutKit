@@ -8,8 +8,8 @@
 
 #import "NSBundle+HLSExtensions.h"
 
-#import "NSString+HLSExtensions.h"
 #import "HLSCategoryLinker.h"
+#import "NSString+HLSExtensions.h"
 
 HLSLinkCategory(NSBundle_HLSExtensions)
 

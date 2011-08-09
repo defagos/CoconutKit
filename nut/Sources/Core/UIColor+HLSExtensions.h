@@ -8,8 +8,14 @@
 
 @interface UIColor (HLSExtensions)
 
+/**
+ * Return a random color
+ */
 + (UIColor *)randomColor;
 
+/**
+ * Return the ivert color corresponding to the receiver
+ */
 - (UIColor *)invertColor;
 
 @end

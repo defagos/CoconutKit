@@ -296,7 +296,7 @@
 
 - (void)cancelTasksWithTag:(NSString *)tag
 {
-    NSArray *tasks = [self findTasksWithTag:tag];
+    NSArray *tasks = [self tasksWithTag:tag];
     for (HLSTask *task in tasks) {
         [self cancelTask:task];
     }
@@ -304,7 +304,7 @@
 
 - (void)cancelTaskGroupsWithTag:(NSString *)tag
 {
-    NSArray *taskGroups = [self findTaskGroupsWithTag:tag];
+    NSArray *taskGroups = [self taskGroupsWithTag:tag];
     for (HLSTaskGroup *taskGroup in taskGroups) {
         [self cancelTaskGroup:taskGroup];
     }
@@ -329,13 +329,13 @@
 #pragma mark -
 #pragma mark Finding tasks
 
-- (NSArray *)findTasksWithTag:(NSString *)tag
+- (NSArray *)tasksWithTag:(NSString *)tag
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tag MATCHES %@", tag];
     return [[self.tasks filteredSetUsingPredicate:predicate] allObjects];
 }
 
-- (NSArray *)findTaskGroupsWithTag:(NSString *)tag
+- (NSArray *)taskGroupsWithTag:(NSString *)tag
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tag MATCHES %@", tag];
     return [[self.taskGroups filteredSetUsingPredicate:predicate] allObjects];    

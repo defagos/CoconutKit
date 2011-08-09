@@ -29,8 +29,8 @@
  */
 @interface HLSTaskOperation : NSOperation {
 @private
-    HLSTaskManager *_taskManager;    // The task manager which spawned the operation
-    HLSTask *_task;                  // The task the operation is processing
+    HLSTaskManager *_taskManager;       // The task manager which spawned the operation
+    HLSTask *_task;                     // The task the operation is processing
     NSThread *_callingThread;           // Thread onto which spawned the operation
 }
 

@@ -74,7 +74,7 @@
  *       x.x[.x[.x]]            represents "standard" versions
  *       x.x[.x[.x]]+bN         represents the N-th beta for version x.x[.x[.x]]
  *       x.x[.x[.x]]+rcN        represents the N-th release candidate for version x.x[.x[.x]]
- *     This ordering matches because it matches the alphabetical ordering.
+ *     This ordering works because it matches the alphabetical ordering.
  *   - qualifier is either:
  *       dev                    for development versions (trunk). This qualifier is never to be used for tags
  *       test                   for tagged versions used with test environments (e.g. test servers)

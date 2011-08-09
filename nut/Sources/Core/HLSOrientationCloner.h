@@ -13,10 +13,10 @@
  *    and all its subviews must have their autoresizing flags properly set (usually flexible width and height, and
  *    fixed margins). Such view controllers do not need to implement the HLSOrientationCloner protocol.
  * 2) View controllers which cannot resize properly, or which require a different layout depending on the device
- *    orientation. In such cases, since a nib loaded by a view controller cannot be changed at runtime, a new view
+ *    orientation. In such cases, since a xib loaded by a view controller cannot be changed at runtime, a new view
  *    controller clone with the proper orientation is needed when the device is rotated. In order to be able to
- *    implement container view controllers (like UITabBarController, for example), it was required to have a common
- *    language for generating clones for orientations. This is just the goal of the HLSOrientationCloner protocol.
+ *    implement container view controllers, it was required to have a common language for generating clones for orientations. 
+ *    This is just the purpose of the HLSOrientationCloner protocol.
  */
 @protocol HLSOrientationCloner <NSObject>
 

@@ -11,18 +11,14 @@
  *
  * A module introducing new notifications should:
  *   1) import this header file in its own header file
- *   2) in its header file, declare the new notification name using the HLSDeclareNotification
- *      macro
- *   3) in its implementation file, define the new notification using the HLSDefineNotification
- *      macro
- * If two modules try to introduce the same notification name, a linker error will occur
- * (since the symbol is in this case multiply defined in two separate translation units).
- * This is good expected behavior, and this matches the approach applied in the Apple
- * frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
+ *   2) in its header file, declare the new notification name using the HLSDeclareNotification macro
+ *   3) in its implementation file, define the new notification using the HLSDefineNotification macro
+ * If two modules try to introduce the same notification name, a linker error will occur (since the symbol 
+ * is in this case multiply defined in two separate translation units). This is good expected behavior, and 
+ * this matches the approach applied in the Apple frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
  *
  * Note that notification names should end with "Notification"
  */
-
 #define HLSDeclareNotification(name)      extern NSString * const name
 #define HLSDefineNotification(name)       NSString * const name = @#name
 
@@ -44,9 +40,21 @@ HLSDeclareNotification(HLSNetworkActivityStopNotification);
     NSUInteger m_networkActivityCount;
 }
 
+/**
+ * Get the shared object managing application-wide notifications
+ */
 + (HLSNotificationManager *)sharedNotificationManager;
 
+/**
+ * Call this method when a network tasks starts. When the first network task starts, an HLSNetworkActivityStartNotification
+ * notification is sent (you could e.g. use it to display a network activity indicator)
+ */
 - (void)notifyBeginNetworkActivity;
+
+/**
+ * Call this method when a network tasks ends. When all network tasks have ended, an HLSNetworkActivityStartNotification
+ * notification is sent (you could e.g. use it to hide a network activity indicator)
+ */
 - (void)notifyEndNetworkActivity;
 
 @end
@@ -108,7 +116,7 @@ HLSDeclareNotification(HLSNetworkActivityStopNotification);
 @end
 
 /**
- * Extension for writing less notification code in the most common cases
+ * Extensions for writing less notification code in the most common cases
  */
 @interface NSObject (HLSNotificationExtensions)
 

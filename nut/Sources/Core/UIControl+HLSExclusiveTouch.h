@@ -18,7 +18,6 @@
 
 /**
  * Globally sets exclusiveTouch for all UIControl objects, preventing quasi-simultaneous taps.
- * Will be the default for UIControl starting with iOS 5
  */
 @interface UIControl (HLSExclusiveTouch)
 

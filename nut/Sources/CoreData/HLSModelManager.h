@@ -8,8 +8,8 @@
 
 /**
  * A class collecting the usual Core Data bolierplate code, and providing some additional convenience methods.
- * If your application is single-threaded, you usually cannot use the default model manager and the associated
- * class methods. If your application is multi-threaded, you can easily generate additional model managers by
+ * If your application is single-threaded, the default model manager and the associated class methods usually
+ * suffice. If your application is multi-threaded, you can easily generate additional model managers by
  * duplicating the one of your main thread (use the duplicate method).
  *
  * Designated initializer: initWithModelFileName:storeDirectory:

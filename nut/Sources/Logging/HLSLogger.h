@@ -74,7 +74,6 @@ typedef enum {
 
 /**
  * Logging functions; should never be called directly, use the macros instead
- * release binaries
  */
 - (void)debug:(NSString *)message;
 - (void)info:(NSString *)message;

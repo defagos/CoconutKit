@@ -6,8 +6,15 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+/**
+ * A protocol for objects supporting validation
+ */
 @protocol HLSValidable <NSObject>
 @required
+
+/**
+ * Must return YES iff validation is succesful
+ */
 - (BOOL)validate;
 
 @end

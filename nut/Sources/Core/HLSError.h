@@ -11,25 +11,21 @@
  *
  * A module introducing new errors should:
  *   1) import this header file in its own header file
- *   2) in its header file, declare the new error identifier using the HLSDeclareError
- *      macro
- *   3) in its implementation file, define the new error identifier using the HLSDefineError
- *      macro
- * If two modules try to introduce the same error identifier, a linker error will occur
- * (since the symbol is in this case multiply defined in two separate translation units).
- * This is good expected behavior, and this matches the approach applied in the Apple
- * frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
+ *   2) in its header file, declare the new error identifier using the HLSDeclareError macro
+ *   3) in its implementation file, define the new error identifier using the HLSDefineError macro
+ * If two modules try to introduce the same error identifier, a linker error will occur (since the symbol 
+ * is in this case multiply defined in two separate translation units). This is good expected behavior, 
+ * and this matches the approach applied in the Apple frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
  *
  * Note that error identifier names should end with "Error"
  */
-
 #define HLSDeclareError(name)           extern NSString * const name
 #define HLSDefineError(name)            NSString * const name = @#name
 
 /**
  * Class for easy NSError creation. Provides a mechanism for defining standard errors, and enforces each error
- * code to be associated with a domain and a unique code (inside the domain) first. Each set of standard properties
- * is associated with a unique identifier, through which default errors can be created in a snap.
+ * code to be associated with a domain and a unique code (unique inside the domain) first. Each set of standard 
+ * properties is associated with a unique identifier, through which default errors can be created in a snap.
  *
  * Use the convenience methods to instantiate error objects.
  */

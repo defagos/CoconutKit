@@ -6,8 +6,12 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#define HLS_DEFAULT_MAX_DIST                5
+// Default distance used by macros without distance parameter
+#define HLSFloatDefaultMaxDist              5
 
+/**
+ * Macros for comparing float or double values
+ */
 #define floatle_dist(x, y, maxDist)         ((x) < (y) || floateq_dist((x), (y), (maxDist)))
 #define floatge_dist(x, y, maxDist)         ((x) > (y) || floateq_dist((x), (y), (maxDist)))
 #define floatlt_dist(x, y, maxDist)         ! floatge_dist((x), (y), (maxDist))
@@ -18,24 +22,24 @@
 #define doublelt_dist(x, y, maxDist)        ! doublege_dist((x), (y), (maxDist))
 #define doublegt_dist(x, y, maxDist)        ! doublele_dist((x), (y), (maxDist))
 
-#define floateq(x, y)                       floateq_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define doubleeq(x, y)                      doubleeq_dist((x), (y), HLS_DEFAULT_MAX_DIST)
+#define floateq(x, y)                       floateq_dist((x), (y), HLSFloatDefaultMaxDist)
+#define doubleeq(x, y)                      doubleeq_dist((x), (y), HLSFloatDefaultMaxDist)
 
-#define floatle(x, y)                       floatle_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define floatge(x, y)                       floatge_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define floatlt(x, y)                       floatlt_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define floatgt(x, y)                       floatgt_dist((x), (y), HLS_DEFAULT_MAX_DIST)
+#define floatle(x, y)                       floatle_dist((x), (y), HLSFloatDefaultMaxDist)
+#define floatge(x, y)                       floatge_dist((x), (y), HLSFloatDefaultMaxDist)
+#define floatlt(x, y)                       floatlt_dist((x), (y), HLSFloatDefaultMaxDist)
+#define floatgt(x, y)                       floatgt_dist((x), (y), HLSFloatDefaultMaxDist)
 
-#define doublele(x, y)                      doublele_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define doublege(x, y)                      doublege_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define doublelt(x, y)                      doublelt_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define doublegt(x, y)                      doublegt_dist((x), (y), HLS_DEFAULT_MAX_DIST)
+#define doublele(x, y)                      doublele_dist((x), (y), HLSFloatDefaultMaxDist)
+#define doublege(x, y)                      doublege_dist((x), (y), HLSFloatDefaultMaxDist)
+#define doublelt(x, y)                      doublelt_dist((x), (y), HLSFloatDefaultMaxDist)
+#define doublegt(x, y)                      doublegt_dist((x), (y), HLSFloatDefaultMaxDist)
 
-#define floatmin(x, y)                      floatmin_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define floatmax(x, y)                      floatmax_dist((x), (y), HLS_DEFAULT_MAX_DIST)
+#define floatmin(x, y)                      floatmin_dist((x), (y), HLSFloatDefaultMaxDist)
+#define floatmax(x, y)                      floatmax_dist((x), (y), HLSFloatDefaultMaxDist)
 
-#define doublemin(x, y)                     doublemin_dist((x), (y), HLS_DEFAULT_MAX_DIST)
-#define doublemax(x, y)                     doublemax_dist((x), (y), HLS_DEFAULT_MAX_DIST)
+#define doublemin(x, y)                     doublemin_dist((x), (y), HLSFloatDefaultMaxDist)
+#define doublemax(x, y)                     doublemax_dist((x), (y), HLSFloatDefaultMaxDist)
 
 /**
  * Comparison function for floating point numbers. The parameter maxDist is the maximum distance between two (discrete)
