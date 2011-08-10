@@ -15,6 +15,8 @@ HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
 HLSStackController.h
+HLSStrip.h
+HLSStripContainerView.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h

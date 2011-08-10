@@ -23,6 +23,8 @@
     #import "HLSPlaceholderViewController.h"
     #import "HLSReloadable.h"
     #import "HLSStackController.h"
+    #import "HLSStrip.h"
+    #import "HLSStripContainerView.h"
     #import "HLSSubtitleTableViewCell.h"
     #import "HLSTableSearchDisplayViewController.h"
     #import "HLSTableViewCell.h"

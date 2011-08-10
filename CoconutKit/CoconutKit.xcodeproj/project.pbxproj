@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F02AEB813F2F0A300A1EA7C /* HLSStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F02AEB113F2F0A300A1EA7C /* HLSStrip.h */; };
+		6F02AEB913F2F0A300A1EA7C /* HLSStrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02AEB213F2F0A300A1EA7C /* HLSStrip.m */; };
+		6F02AEBA13F2F0A300A1EA7C /* HLSStrip+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F02AEB313F2F0A300A1EA7C /* HLSStrip+Friend.h */; };
+		6F02AEBB13F2F0A300A1EA7C /* HLSStripContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F02AEB413F2F0A300A1EA7C /* HLSStripContainerView.h */; };
+		6F02AEBC13F2F0A300A1EA7C /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02AEB513F2F0A300A1EA7C /* HLSStripContainerView.m */; };
+		6F02AEBD13F2F0A300A1EA7C /* HLSStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F02AEB613F2F0A300A1EA7C /* HLSStripView.h */; };
+		6F02AEBE13F2F0A300A1EA7C /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02AEB713F2F0A300A1EA7C /* HLSStripView.m */; };
 		6F1A139B13E04A92006957BA /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1A139913E04A92006957BA /* HLSContainerContent.h */; };
 		6F1A139C13E04A92006957BA /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A139A13E04A92006957BA /* HLSContainerContent.m */; };
 		6F1A13AF13E12D07006957BA /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A13AE13E12D07006957BA /* HLSTransitionStyle.m */; };
@@ -118,6 +125,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F02AEAF13F2EAB900A1EA7C /* CoconutKit_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_strip_default_background.png; sourceTree = "<group>"; };
+		6F02AEB113F2F0A300A1EA7C /* HLSStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStrip.h; sourceTree = "<group>"; };
+		6F02AEB213F2F0A300A1EA7C /* HLSStrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStrip.m; sourceTree = "<group>"; };
+		6F02AEB313F2F0A300A1EA7C /* HLSStrip+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSStrip+Friend.h"; sourceTree = "<group>"; };
+		6F02AEB413F2F0A300A1EA7C /* HLSStripContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripContainerView.h; sourceTree = "<group>"; };
+		6F02AEB513F2F0A300A1EA7C /* HLSStripContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripContainerView.m; sourceTree = "<group>"; };
+		6F02AEB613F2F0A300A1EA7C /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
+		6F02AEB713F2F0A300A1EA7C /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
 		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F1A139913E04A92006957BA /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6F1A139A13E04A92006957BA /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
@@ -438,6 +453,13 @@
 			children = (
 				6F43346A13A238540072F5D8 /* HLSCursor.h */,
 				6F43346B13A238540072F5D8 /* HLSCursor.m */,
+				6F02AEB113F2F0A300A1EA7C /* HLSStrip.h */,
+				6F02AEB213F2F0A300A1EA7C /* HLSStrip.m */,
+				6F02AEB313F2F0A300A1EA7C /* HLSStrip+Friend.h */,
+				6F02AEB413F2F0A300A1EA7C /* HLSStripContainerView.h */,
+				6F02AEB513F2F0A300A1EA7C /* HLSStripContainerView.m */,
+				6F02AEB613F2F0A300A1EA7C /* HLSStripView.h */,
+				6F02AEB713F2F0A300A1EA7C /* HLSStripView.m */,
 				6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */,
 				6FBDAA1A13052D23004B9617 /* HLSSubtitleTableViewCell.m */,
 				6FBDAC791305939B004B9617 /* HLSTableViewCell.h */,
@@ -494,6 +516,7 @@
 				DA8383CD131E86FC00ECAED3 /* CoconutKit_ButtonBarRefresh.png */,
 				DA8383CE131E86FC00ECAED3 /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F1A58E113AB779E0029B714 /* CoconutKit_cursor_default_pointer.png */,
+				6F02AEAF13F2EAB900A1EA7C /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -561,6 +584,10 @@
 				6F82490013D9551100688D0C /* HLSStackController.h in Headers */,
 				6F82490413D95CBB00688D0C /* HLSTransitionStyle.h in Headers */,
 				6F1A139B13E04A92006957BA /* HLSContainerContent.h in Headers */,
+				6F02AEB813F2F0A300A1EA7C /* HLSStrip.h in Headers */,
+				6F02AEBA13F2F0A300A1EA7C /* HLSStrip+Friend.h in Headers */,
+				6F02AEBB13F2F0A300A1EA7C /* HLSStripContainerView.h in Headers */,
+				6F02AEBD13F2F0A300A1EA7C /* HLSStripView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +698,9 @@
 				6F82490113D9551100688D0C /* HLSStackController.m in Sources */,
 				6F1A139C13E04A92006957BA /* HLSContainerContent.m in Sources */,
 				6F1A13AF13E12D07006957BA /* HLSTransitionStyle.m in Sources */,
+				6F02AEB913F2F0A300A1EA7C /* HLSStrip.m in Sources */,
+				6F02AEBC13F2F0A300A1EA7C /* HLSStripContainerView.m in Sources */,
+				6F02AEBE13F2F0A300A1EA7C /* HLSStripView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

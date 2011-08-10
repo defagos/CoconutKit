@@ -6,6 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
 
+"Add (center - length)"="Add (center - length)";
 "All"="All";
 "All fields are mandatory"="All fields are mandatory";
 "All fields have been validated"="All fields have been validated";
@@ -15,6 +16,7 @@
 "Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "City"="City";
+"Clear"="Clear";
 "Close"="Close";
 "Congratulations"="Congratulations";
 "Container customization"="Container customization";
@@ -24,6 +26,8 @@
 "Custom cell from xib"="Custom cell from xib";
 "Customer Information"="Customer Information";
 "DAY"="DAY";
+"Delete (position)"="Supprimer (position)";
+"Delete (index)"="Supprimer (index)";
 "Demos"="Demos";
 "Details"="Details";
 "Dismiss"="Dismiss";
@@ -58,12 +62,14 @@
 "Remove"="Remove";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
+"Split (position)"="Split (position)";
 "Start"="Start";
 "State"="State";
 "Stop"="Stop";
 "Street"="Street";
 "Stretch content"="Stretch content";
 "Stretchable"="Stretchable";
+"Strips"="Strips";
 "Sub-tasks"="Sub-tasks";
 "Table view cells"="Table view cells";
 "Tablets"="Tablets";
@@ -74,6 +80,8 @@
 "Text fields (large)"="Text fields (large)";
 "Transition"="Transition";
 "Transparent"="Transparent";
+"User interaction"="User interaction";
+"Valid positions: 0 - %d"="Valid positions: 0 - %d";
 "Views"="Views";
 "View controllers"="View controllers";
 "WEEK"="WEEK";
