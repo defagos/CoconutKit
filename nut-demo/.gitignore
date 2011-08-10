@@ -1,0 +1,6 @@
+build/
+nut-demo.xcodeproj/xcuserdata/
+nut-demo.xcodeproj/*.pbxuser
+nut-demo.xcodeproj/*.mode1v3
+nut-demo.xcodeproj/*.perspectivev3
+
