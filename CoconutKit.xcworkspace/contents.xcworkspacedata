@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:CoconutKit/CoconutKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CoconutKit-dev/CoconutKit-dev.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CoconutKit-demo/CoconutKit-demo.xcodeproj">
+   </FileRef>
+</Workspace>

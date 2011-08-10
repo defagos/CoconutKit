@@ -1,0 +1,7 @@
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import <CoreGraphics/CoreGraphics.h>
+    #import <UIKit/UIKit.h>
+    #import <MessageUI/MessageUI.h>
+#endif
