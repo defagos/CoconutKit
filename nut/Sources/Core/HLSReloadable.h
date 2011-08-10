@@ -13,8 +13,4 @@
 
 - (void)reloadData;
 
-// TODO: Enrich with interface for implementing behavior when reloading data. This way (e.g.) an object managing
-//       a data source can put a view controllr in "loading mode" (as defined by the HLSReloadable view controller
-//       by implementing this protocl) and then in "loaded mode"
-
 @end

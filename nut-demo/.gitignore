@@ -1,3 +1,4 @@
+.DS_Store
 build/
 nut-demo.xcodeproj/xcuserdata/
 nut-demo.xcodeproj/*.pbxuser

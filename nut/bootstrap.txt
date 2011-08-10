@@ -1,6 +1,5 @@
 HLSAssert.m
 HLSCursor.m
-HLSStripContainerView.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m

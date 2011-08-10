@@ -9,7 +9,6 @@
 #import "HLSXibView.h"
 
 #import "HLSLogger.h"
-#import "HLSStandardWidgetConstants.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToHeightMap = nil;

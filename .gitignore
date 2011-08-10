@@ -1,6 +1,1 @@
-build/
-nut.xcworkspace/xcuserdata/
-nut-framework.xcodeproj/*.pbxuser
-nut-framework.xcodeproj/*.mode1v3
-nut-framework.xcodeproj/*.perspectivev3
-
+.DS_Store
