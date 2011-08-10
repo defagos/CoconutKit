@@ -1,9 +1,0 @@
-//
-// Prefix header for all source files of the 'nut-demo' target in the 'nut-demo' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-    #import <nut/nut.h>
-#endif
