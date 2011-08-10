@@ -1,0 +1,80 @@
+/* 
+   Localizable.strings
+   CoconutKit-demo
+
+   Created by Samuel Défago on 2/10/11.
+   Copyright 2011 Hortis. All rights reserved.
+ */
+
+"All"="All";
+"All fields are mandatory"="All fields are mandatory";
+"All fields have been validated"="All fields have been validated";
+"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
+"Animated"="Animated";
+"Animation"="Animation";
+"Change"="Change";
+"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
+"City"="City";
+"Close"="Close";
+"Congratulations"="Congratulations";
+"Container customization"="Container customization";
+"Country"="Country";
+"Cursor"="Cursor";
+"Custom cell created programmatically"="Custom cell created programmatically";
+"Custom cell from xib"="Custom cell from xib";
+"Customer Information"="Customer Information";
+"DAY"="DAY";
+"Demos"="Demos";
+"Details"="Details";
+"Dismiss"="Dismiss";
+"Done"="Done";
+"E-mail"="E-mail";
+"Error"="Error";
+"First Name"="First Name";
+"Fixed size"="Fixed size";
+"Forward properties"="Forward properties";
+"Header: custom cells"="Header: custom cells";
+"Header: simple cells"="Header: simple cells";
+"Heavy view (cached)"="Heavy view (cached)";
+"Hide with modal"="Hide with modal";
+"Houston, we've got a problem"="Houston, we've got a problem";
+"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
+"Index"="Index";
+"Invalid e-mail address"="Invalid e-mail address";
+"Landscape only"="Landscape only";
+"Last Name"="Last Name";
+"MONTH"="MONTH";
+"Multiple view animation"="Multiple view animation";
+"Next"="Next";
+"Music players"="Music players";
+"Parallel processing"="Parallel processing";
+"Phones"="Phones";
+"Play forward"="Play forward";
+"Play backward"="Play backward";
+"Portrait only"="Portrait only";
+"Previous"="Previous";
+"Reload"="Reload";
+"Remaining time estimate"="Remaining time estimate";
+"Remove"="Remove";
+"Section end"="Section end";
+"Single view animation"="Single view animation";
+"Start"="Start";
+"State"="State";
+"Stop"="Stop";
+"Street"="Street";
+"Stretch content"="Stretch content";
+"Stretchable"="Stretchable";
+"Sub-tasks"="Sub-tasks";
+"Table view cells"="Table view cells";
+"Tablets"="Tablets";
+"Task"="Task";
+"Task group"="Task group";
+"Tasks"="Tasks";
+"Text fields"="Text fields";
+"Text fields (large)"="Text fields (large)";
+"Transition"="Transition";
+"Transparent"="Transparent";
+"Views"="Views";
+"View controllers"="View controllers";
+"WEEK"="WEEK";
+"YEAR"="YEAR";
