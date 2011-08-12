@@ -33,6 +33,9 @@
  *     (the class name) does not suit your needs, which should be rarely the case
  * Your custom classes can then be instantiated using the provided factory macro.
  *
+ * Be careful when using a xib. Resource lookup is case-insensitive when running in the simulator, and case-sensitive
+ * on the device.
+ *
  * To customize your cells via code after they have been loaded from a xib, implement the awakeFromNib method
  *
  * When your class uses a xib to define its layout:
