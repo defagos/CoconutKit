@@ -42,7 +42,7 @@
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
 {
     NSArray *animationSteps = nil;
-    if (animationSteps) {
+    if (animationStep) {
         animationSteps = [NSArray arrayWithObject:animationStep];
     }
     else {
@@ -53,7 +53,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithAnimationSteps:(NSArray *)animationSteps;
+- (id)initWithAnimationSteps:(NSArray *)animationSteps
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
     if ((self = [super init])) {
