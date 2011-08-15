@@ -11,7 +11,7 @@
 #import "HLSAssert.h"
 
 // Height of the UIKit search bar
-static CGFloat kSearchBarStandardHeight = 44.f;
+static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSTableSearchDisplayViewController ()
 
