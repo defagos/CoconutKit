@@ -49,23 +49,8 @@ There are some requirements when contributing, though:
 * Use of private APIs is strictly forbidden
 * Development and demo projects are also included. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
 
-### How can write code for CoconutKit?
-After checking out the code, open the Xcode 4 workspace. Three projects have been created:
-
-* CoconutKit: The project used to build the CoconutKit static library (see below)
-* CoconutKit-demo: The project used to test the CoconutKit .staticframework package. I use it to check that no link issues arise when the library is packaged as .staticframework. If you contribute to the project, I will usually do this for you
-* CoconutKit-dev: The project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
-
-Use the CoconutKit-dev project to easily write and test code. When you are done, update the CoconutKit and CoconutKit-demo to mirror the changes you made to the project file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
-
-If you really do want to check that no link issues arise with the library when it is packaged as .staticframework, here is roughly how:
-
-* Build the CoconutKit .staticframework packages (see below)
-* Add the release package to the CoconutKit-demo project, as any project using the library would do
-* Test your code
-
 ### How can I build CoconutKit?
-CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit directory, as follows:
+CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory (see below), as follows:
 
 * make-fmwk.sh -o <output_directory> -u <version> Release
 * make-fmwk.sh -o <output_directory> -u <version> Debug
@@ -74,6 +59,26 @@ e.g.
 
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
+
+### How can write code for CoconutKit?
+After checking out the code, open the Xcode 4 workspace. Four projects have been created:
+
+* CoconutKit: The project used to build the CoconutKit static library
+* CoconutKit-demo: The project used to test the CoconutKit .staticframework package. This project is mostly used to check that no linker issues arise
+* CoconutKit-dev: The project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
+* CoconutKit-test: The project used for writing unit tests. This project uses the CoconutKit .staticframework package. Note that since the unit testing library, GHUnit, does require the -ObjC and -all_load linker flags to be enabled, the test project does not currently reveal linker issues
+
+Use the CoconutKit-dev project to easily write and test your code. For "non-interactive" components, you should consider adding some test cases to the CoconutKit-test project as well. When you are done with the CoconutKit project, update the CoconutKit and CoconutKit-demo projects to mirror the changes you made to the source and resource file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
+
+To build the CoconutKit .staticframework packages needed by the CoconutKit-demo and CoconutKit-test projects, proceed as follows:
+
+* Build the trunk CoconutKit .staticframework packages into /LeStudioSDK/Binaries/CoconutKit (this is the standard directory which we use at hortis le studio). Run the following commands from the CoconutKit static library project directory:
+  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release
+  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug
+* If the resource list has changed, you must remove CoconutKit-trunk-Release.staticframework from both the CoconutKit-demo and CoconutKit-test projects, then the one you just built
+* Build the CoconutKit-demo and CoconutKit-test projects and run them to test your code
+
+The CoconutKit-test project also requires the GHUnit framework GHUnitIOS.framework (https://github.com/gabriel/gh-unit) to be installed under /Developer/Frameworks.
 
 ### Why are all classes prefixed with HLS?
 HLS stands for hortis le studio.

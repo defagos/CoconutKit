@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F33348813FAF9E0000FC9FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348713FAF9E0000FC9FD /* UIKit.framework */; };
+		6F33348A13FAF9E0000FC9FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348913FAF9E0000FC9FD /* Foundation.framework */; };
+		6F33348C13FAF9E0000FC9FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348B13FAF9E0000FC9FD /* CoreGraphics.framework */; };
+		6F3334A213FAFA6F000FC9FD /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334A113FAFA6F000FC9FD /* GHUnitIOS.framework */; };
+		6F3334D913FAFF95000FC9FD /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334C613FAFF95000FC9FD /* CoconutKit_bootstrap.m */; };
+		6F3334DA13FAFF95000FC9FD /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334C713FAFF95000FC9FD /* CoconutKit.framework */; };
+		6F3334DB13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334C913FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft.png */; };
+		6F3334DC13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CA13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
+		6F3334DD13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CB13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight.png */; };
+		6F3334DE13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CC13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight@2x.png */; };
+		6F3334DF13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CD13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh.png */; };
+		6F3334E013FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CE13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh@2x.png */; };
+		6F3334E113FAFF95000FC9FD /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334CF13FAFF95000FC9FD /* CoconutKit_cursor_default_pointer.png */; };
+		6F3334E213FAFF95000FC9FD /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334D013FAFF95000FC9FD /* CoconutKit_HLSWebViewController.xib */; };
+		6F3334E313FAFF95000FC9FD /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F3334D113FAFF95000FC9FD /* CoconutKit_Localizable.strings */; };
+		6F3334E513FB00DC000FC9FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334E413FB00DC000FC9FD /* CoreData.framework */; };
+		6F3334E713FB00E2000FC9FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334E613FB00E2000FC9FD /* MessageUI.framework */; };
+		6F3334ED13FB08F3000FC9FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334EB13FB08F3000FC9FD /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F33348713FAF9E0000FC9FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6F33348913FAF9E0000FC9FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6F33348B13FAF9E0000FC9FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F3334A113FAFA6F000FC9FD /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = DEVELOPER_DIR; };
+		6F3334C613FAFF95000FC9FD /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
+		6F3334C713FAFF95000FC9FD /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
+		6F3334C913FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		6F3334CA13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
+		6F3334CB13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowRight.png; sourceTree = "<group>"; };
+		6F3334CC13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
+		6F3334CD13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarRefresh.png; sourceTree = "<group>"; };
+		6F3334CE13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		6F3334CF13FAFF95000FC9FD /* CoconutKit_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_cursor_default_pointer.png; sourceTree = "<group>"; };
+		6F3334D013FAFF95000FC9FD /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
+		6F3334D313FAFF95000FC9FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F3334E413FB00DC000FC9FD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6F3334E613FB00E2000FC9FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6F3334E913FB08F3000FC9FD /* CoconutKit-test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-test-Info.plist"; sourceTree = SOURCE_ROOT; };
+		6F3334EA13FB08F3000FC9FD /* CoconutKit-test-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-test-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		6F3334EB13FB08F3000FC9FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F33348013FAF9E0000FC9FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F3334E713FB00E2000FC9FD /* MessageUI.framework in Frameworks */,
+				6F3334E513FB00DC000FC9FD /* CoreData.framework in Frameworks */,
+				6F33348813FAF9E0000FC9FD /* UIKit.framework in Frameworks */,
+				6F33348A13FAF9E0000FC9FD /* Foundation.framework in Frameworks */,
+				6F33348C13FAF9E0000FC9FD /* CoreGraphics.framework in Frameworks */,
+				6F3334A213FAFA6F000FC9FD /* GHUnitIOS.framework in Frameworks */,
+				6F3334DA13FAFF95000FC9FD /* CoconutKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F33347813FAF9E0000FC9FD = {
+			isa = PBXGroup;
+			children = (
+				6F3334E813FB0112000FC9FD /* Sources */,
+				6F33348E13FAF9E0000FC9FD /* Other Sources */,
+				6F33348613FAF9E0000FC9FD /* Frameworks */,
+				6F33348413FAF9E0000FC9FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6F33348413FAF9E0000FC9FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F33348613FAF9E0000FC9FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F3334C413FAFF95000FC9FD /* CoconutKit-trunk-Release.staticframework */,
+				6F3334E413FB00DC000FC9FD /* CoreData.framework */,
+				6F33348B13FAF9E0000FC9FD /* CoreGraphics.framework */,
+				6F33348913FAF9E0000FC9FD /* Foundation.framework */,
+				6F3334A113FAFA6F000FC9FD /* GHUnitIOS.framework */,
+				6F3334E613FB00E2000FC9FD /* MessageUI.framework */,
+				6F33348713FAF9E0000FC9FD /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F33348E13FAF9E0000FC9FD /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6F3334E913FB08F3000FC9FD /* CoconutKit-test-Info.plist */,
+				6F3334EA13FB08F3000FC9FD /* CoconutKit-test-Prefix.pch */,
+				6F3334EB13FB08F3000FC9FD /* main.m */,
+			);
+			name = "Other Sources";
+			path = "CoconutKit-test";
+			sourceTree = "<group>";
+		};
+		6F3334C413FAFF95000FC9FD /* CoconutKit-trunk-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F3334C513FAFF95000FC9FD /* Bootstrap */,
+				6F3334C713FAFF95000FC9FD /* CoconutKit.framework */,
+				6F3334C813FAFF95000FC9FD /* Resources */,
+			);
+			name = "CoconutKit-trunk-Release.staticframework";
+			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
+			sourceTree = "<absolute>";
+		};
+		6F3334C513FAFF95000FC9FD /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F3334C613FAFF95000FC9FD /* CoconutKit_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F3334C813FAFF95000FC9FD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F3334C913FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft.png */,
+				6F3334CA13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft@2x.png */,
+				6F3334CB13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight.png */,
+				6F3334CC13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight@2x.png */,
+				6F3334CD13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh.png */,
+				6F3334CE13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh@2x.png */,
+				6F3334CF13FAFF95000FC9FD /* CoconutKit_cursor_default_pointer.png */,
+				6F3334D013FAFF95000FC9FD /* CoconutKit_HLSWebViewController.xib */,
+				6F3334D113FAFF95000FC9FD /* CoconutKit_Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F3334E813FB0112000FC9FD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sources;
+			path = "CoconutKit-test";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F33348213FAF9E0000FC9FD /* CoconutKit-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F33349E13FAF9E0000FC9FD /* Build configuration list for PBXNativeTarget "CoconutKit-test" */;
+			buildPhases = (
+				6F33347F13FAF9E0000FC9FD /* Sources */,
+				6F33348013FAF9E0000FC9FD /* Frameworks */,
+				6F33348113FAF9E0000FC9FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoconutKit-test";
+			productName = "CoconutKit-test";
+			productReference = 6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F33347A13FAF9E0000FC9FD /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6F33347D13FAF9E0000FC9FD /* Build configuration list for PBXProject "CoconutKit-test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				es,
+				fr,
+				it,
+				ja,
+				ko,
+			);
+			mainGroup = 6F33347813FAF9E0000FC9FD;
+			productRefGroup = 6F33348413FAF9E0000FC9FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F33348213FAF9E0000FC9FD /* CoconutKit-test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F33348113FAF9E0000FC9FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F3334DB13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft.png in Resources */,
+				6F3334DC13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */,
+				6F3334DD13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight.png in Resources */,
+				6F3334DE13FAFF95000FC9FD /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */,
+				6F3334DF13FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh.png in Resources */,
+				6F3334E013FAFF95000FC9FD /* CoconutKit_ButtonBarRefresh@2x.png in Resources */,
+				6F3334E113FAFF95000FC9FD /* CoconutKit_cursor_default_pointer.png in Resources */,
+				6F3334E213FAFF95000FC9FD /* CoconutKit_HLSWebViewController.xib in Resources */,
+				6F3334E313FAFF95000FC9FD /* CoconutKit_Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F33347F13FAF9E0000FC9FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F3334D913FAFF95000FC9FD /* CoconutKit_bootstrap.m in Sources */,
+				6F3334ED13FB08F3000FC9FD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6F3334D113FAFF95000FC9FD /* CoconutKit_Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F3334D313FAFF95000FC9FD /* en */,
+			);
+			name = CoconutKit_Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6F33349C13FAF9E0000FC9FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6F33349D13FAF9E0000FC9FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F33349F13FAF9E0000FC9FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Frameworks\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
+				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6F3334A013FAF9E0000FC9FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Frameworks\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
+				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F33347D13FAF9E0000FC9FD /* Build configuration list for PBXProject "CoconutKit-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F33349C13FAF9E0000FC9FD /* Debug */,
+				6F33349D13FAF9E0000FC9FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F33349E13FAF9E0000FC9FD /* Build configuration list for PBXNativeTarget "CoconutKit-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F33349F13FAF9E0000FC9FD /* Debug */,
+				6F3334A013FAF9E0000FC9FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F33347A13FAF9E0000FC9FD /* Project object */;
+}
