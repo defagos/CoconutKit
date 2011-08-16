@@ -19,29 +19,16 @@
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Return the number of days in a week
+ * Given a date, return the number of days in the unit containing it, for the time zone associated with the calendar. For 
+ * example, if the date corresponds to some date in March, the method will return 31 if unit is NSMonthCalendarUnit, and 
+ * usually 365 if unit is NSYearCalendarUnit (366 for leap years)
  */
-- (NSUInteger)numberOfDaysInWeek;
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
 /**
- * Given a date, return the number of days in the month containing it. Uses the NSCalendar time zone
+ * Same as numberOfDaysInUnit:containingDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date;
-
-/**
- * Same as numberOfDaysInMonthContainingDate:, but in the specified time zone. The NSCalendar time zone is ignored
- */
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
-
-/**
- * Given a date, return the number of days in the year containing it. Uses the NSCalendar time zone
- */
-- (NSUInteger)numberOfDaysInYearContainingDate:(NSDate *)date;
-
-/**
- * Same as numberOfDaysInYearContainingDate:, but in the specified time zone. The NSCalendar time zone is ignored
- */
-- (NSUInteger)numberOfDaysInYearContainingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
  * Same as rangeOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored

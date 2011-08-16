@@ -129,103 +129,37 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
     return comparisonResult == NSOrderedSame;
 }
 
-- (NSDate *)startDateOfTheWeek
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *startDateOfTheWeek = nil;
-    [calendar rangeOfUnit:NSWeekCalendarUnit 
-                startDate:&startDateOfTheWeek
+    NSDate *startDateOfUnit = nil;
+    [calendar rangeOfUnit:unit 
+                startDate:&startDateOfUnit
                  interval:NULL
                   forDate:self];
-    return startDateOfTheWeek;
+    return startDateOfUnit;
 }
 
-- (NSDate *)startDateOfTheWeekInTimeZone:(NSTimeZone *)timeZone
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone
 {
     // see comment in dateAtHour:minute:second:inTimeZone:
     NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
     NSDate *selfInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
-    return [selfInTimeZone startDateOfTheWeek];
+    return [[selfInTimeZone startDateOfUnit:unit] dateByAddingTimeInterval:-timeZoneOffset];
 }
 
-- (NSDate *)endDateOfTheWeek
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInWeek = [calendar numberOfDaysInWeek];
-    return [[self startDateOfTheWeek] dateByAddingNumberOfDays:numberOfDaysInWeek];
+    NSUInteger numberOfDaysInUnit = [calendar numberOfDaysInUnit:unit containingDate:self];
+    return [[self startDateOfUnit:unit] dateByAddingNumberOfDays:numberOfDaysInUnit];
 }
 
-- (NSDate *)endDateOfTheWeekInTimeZone:(NSTimeZone *)timeZone
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInWeek = [calendar numberOfDaysInWeek];
-    return [[self startDateOfTheWeekInTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInWeek];
-}
-
-- (NSDate *)startDateOfTheMonth
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *startDateOfTheMonth = nil;
-    [calendar rangeOfUnit:NSMonthCalendarUnit 
-                startDate:&startDateOfTheMonth
-                 interval:NULL
-                  forDate:self];
-    return startDateOfTheMonth;
-}
-
-- (NSDate *)startDateOfTheMonthInTimeZone:(NSTimeZone *)timeZone
-{
-    // see comment in dateAtHour:minute:second:inTimeZone:
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
-    NSDate *selfInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
-    return [selfInTimeZone startDateOfTheMonth];
-}
-
-- (NSDate *)endDateOfTheMonth
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInMonth = [calendar numberOfDaysInMonthContainingDate:self];
-    return [[self startDateOfTheMonth] dateByAddingNumberOfDays:numberOfDaysInMonth]; 
-}
-
-- (NSDate *)endDateOfTheMonthInTimeZone:(NSTimeZone *)timeZone
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInMonth = [calendar numberOfDaysInMonthContainingDate:self inTimeZone:timeZone];
-    return [[self startDateOfTheMonthInTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInMonth]; 
-}
-
-- (NSDate *)startDateOfTheYear
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *startDateOfTheYear = nil;
-    [calendar rangeOfUnit:NSYearCalendarUnit 
-                startDate:&startDateOfTheYear
-                 interval:NULL
-                  forDate:self];
-    return startDateOfTheYear;
-}
-
-- (NSDate *)startDateOfTheYearInTimeZone:(NSTimeZone *)timeZone
-{
-    // see comment in dateAtHour:minute:second:inTimeZone:
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
-    NSDate *selfInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
-    return [selfInTimeZone startDateOfTheYear];
-}
-
-- (NSDate *)endDateOfTheYear
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInYear = [calendar numberOfDaysInYearContainingDate:self];
-    return [[self startDateOfTheYear] dateByAddingNumberOfDays:numberOfDaysInYear]; 
-}
-
-- (NSDate *)endDateOfTheYearInTimeZone:(NSTimeZone *)timeZone
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInYear = [calendar numberOfDaysInYearContainingDate:self inTimeZone:timeZone];
-    return [[self startDateOfTheYearInTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInYear]; 
+    NSUInteger numberOfDaysInUnit = [calendar numberOfDaysInUnit:unit containingDate:self inTimeZone:timeZone];
+    return [[self startDateOfUnit:unit inTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInUnit];
 }
 
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays
