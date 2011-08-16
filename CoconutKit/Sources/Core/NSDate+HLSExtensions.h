@@ -63,10 +63,66 @@
 - (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Return the first day of the week the receiver belongs to, taking system calendar settings into account (return 
+ * Return the start date of the week the receiver belongs to, taking system calendar and time zone settings into account (return 
  * Sundays if US regional settings, or Mondays if CH regional settings, for example)
  */
-- (NSDate *)firstDayOfTheWeek;
+- (NSDate *)startDateOfTheWeek;
+
+/**
+ * Return the start date of the week the receiver belongs to, taking system calendar and the given time zone into account (return 
+ * Sundays if US regional settings, or Mondays if CH regional settings, for example)
+ */
+- (NSDate *)startDateOfTheWeekInTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Same as startDateOfTheWeek, but returning the first date not belonging to the week (week = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheWeek;
+
+/**
+ * Same as startDateOfTheWeekInTimeZone:, but returning the first date not belonging to the week (week = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheWeekInTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Return the start date of the month the receiver belongs to, taking system calendar and time zone settings into account
+ */
+- (NSDate *)startDateOfTheMonth;
+
+/**
+ * Return the start date of the month the receiver belongs to, taking system calendar and the given time zone into account
+ */
+- (NSDate *)startDateOfTheMonthInTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Same as startDateOfTheMonth, but returning the first date not belonging to the month (month = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheMonth;
+
+/**
+ * Same as startDateOfTheMonthInTimeZone:, but returning the first date not belonging to the month (month = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheMonthInTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Return the start date of the year the receiver belongs to, taking system calendar and time zone settings into account
+ */
+- (NSDate *)startDateOfTheYear;
+
+/**
+ * Return the start date of the year the receiver belongs to, taking system calendar and the given time zone into account
+ */
+- (NSDate *)startDateOfTheYearInTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Same as startDateOfTheYear, but returning the first date not belonging to the year (year = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheYear;
+
+/**
+ * Same as startDateOfTheYearInTimeZone:, but returning the first date not belonging to the year (year = [startDate, endDate[)
+ */
+- (NSDate *)endDateOfTheYearInTimeZone:(NSTimeZone *)timeZone;
 
 /**
  * Return the date obtained by adding some number of days to the receiver (can be negative for days in the past)
