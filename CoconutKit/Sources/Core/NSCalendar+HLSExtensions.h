@@ -19,14 +19,16 @@
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Given a date, return the number of days in the month containing it. Uses the NSCalendar time zone
+ * Given a date, return the number of days in the unit containing it, for the time zone associated with the calendar. For 
+ * example, if the date corresponds to some date in March, the method will return 31 if unit is NSMonthCalendarUnit, and 
+ * usually 365 if unit is NSYearCalendarUnit (366 for leap years)
  */
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date;
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
 /**
- * Given a date and a time zone, return the number of days in the month containing it. The NSCalendar time zone is ignored
+ * Same as numberOfDaysInUnit:containingDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
  * Same as rangeOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
@@ -41,6 +43,6 @@
 /**
  * Same as rangeOfUnit:startDate:interval:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
-- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)datep interval:(NSTimeInterval *)tip forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 @end

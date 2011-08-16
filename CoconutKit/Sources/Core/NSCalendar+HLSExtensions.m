@@ -28,19 +28,21 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     return [self components:unitFlags fromDate:dateInTimeZone];
 }
 
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
-    NSRange daysRange = [self rangeOfUnit:NSDayCalendarUnit
-                                   inUnit:NSMonthCalendarUnit 
-                                  forDate:date];
-    return daysRange.length;    
+    NSTimeInterval interval = 0.;
+    [self rangeOfUnit:unit
+            startDate:NULL 
+             interval:&interval 
+              forDate:date];
+    return interval / (24 * 60 * 60);
 }
 
-- (NSUInteger)numberOfDaysInMonthContainingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+- (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
     NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self numberOfDaysInMonthContainingDate:dateInTimeZone];
+    return [self numberOfDaysInUnit:unit containingDate:dateInTimeZone];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
@@ -57,11 +59,15 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
 }
 
-- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)datep interval:(NSTimeInterval *)tip forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
     NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self rangeOfUnit:unit startDate:datep interval:tip forDate:dateInTimeZone];
+    BOOL result = [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:dateInTimeZone];
+    if (pStartDate) {
+        *pStartDate = [*pStartDate dateByAddingTimeInterval:-timeZoneOffset];
+    }
+    return result;
 }
 
 @end

@@ -37,7 +37,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     // A xib has been found, use it
     NSString *xibFileName = [self xibFileName];
     if ([[NSBundle mainBundle] pathForResource:xibFileName ofType:@"nib"]) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:self options:nil];
+        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:nil options:nil];
         if ([bundleContents count] == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", xibFileName);
             return nil;
