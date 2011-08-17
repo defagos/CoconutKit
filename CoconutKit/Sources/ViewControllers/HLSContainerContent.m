@@ -38,7 +38,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic, assign) id containerController;           // weak ref
 @property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
-@property (nonatomic, retain) IBOutlet UIView *blockingView;
+@property (nonatomic, retain) UIView *blockingView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
@@ -381,7 +381,13 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
                     NSAssert([aboveContainerContent view].superview == containerView, 
                              @"Other container contents has not been added to the same container view");
                     
-                    [containerView insertSubview:self.viewController.view belowSubview:aboveContainerContent.blockingView];
+                    if (aboveContainerContent.blockingView) {
+                        [containerView insertSubview:self.viewController.view belowSubview:aboveContainerContent.blockingView];
+                    }
+                    else {
+                        [containerView insertSubview:self.viewController.view belowSubview:[aboveContainerContent view]];
+                    }
+                    
                     added = YES;
                     break;
                 }                

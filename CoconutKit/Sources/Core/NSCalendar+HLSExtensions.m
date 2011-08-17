@@ -9,6 +9,7 @@
 #import "NSCalendar+HLSExtensions.h"
 
 #import "HLSCategoryLinker.h"
+#import "NSDate+HLSExtensions.h"
 
 HLSLinkCategory(NSCalendar_HLSExtensions)
 
@@ -43,6 +44,35 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
     NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
     return [self numberOfDaysInUnit:unit containingDate:dateInTimeZone];
+}
+
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
+{
+    NSDate *startDateOfUnit = nil;
+    [self rangeOfUnit:unit 
+            startDate:&startDateOfUnit
+             interval:NULL
+              forDate:date];
+    return startDateOfUnit;
+}
+
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
+    return [[self startDateOfUnit:unit containingDate:dateInTimeZone] dateByAddingTimeInterval:-timeZoneOffset];
+}
+
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
+{
+    NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date];
+    return [[self startDateOfUnit:unit containingDate:date] dateByAddingNumberOfDays:numberOfDaysInUnit];
+}
+
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
+    return [[self startDateOfUnit:unit containingDate:date inTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInUnit];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone

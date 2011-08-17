@@ -63,29 +63,6 @@
 - (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Return the start date of the unit the receiver belongs to, taking system calendar and time zone settings into account. For
- * example, if unit is NSWeekCalendarUnit, the method returns the date corresponding to the first day (at midnight) of the week 
- * to which the receiver belongs
- */
-- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit;
-
-/**
- * Same as startDateOfUnit:, except that the given time zone is used. The NSCalendar time zone is ignored
- */
-- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone;
-
-/**
- * Same as startDateOfUnit:, but returning the first date after the unit. For example, if unit is NSWeekCalendarUnit, the method
- * returns the date corresponding to the first day (at midnight) of the week after the week to which the receiver belongs
- */
-- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit;
-
-/**
- * Same as endDateOfUnit:, except that the given time zone is used. The NSCalendar time zone is ignored
- */
-- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone;
-
-/**
  * Return the date obtained by adding some number of days to the receiver (can be negative for days in the past)
  */
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays;

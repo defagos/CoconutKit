@@ -129,39 +129,6 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
     return comparisonResult == NSOrderedSame;
 }
 
-- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *startDateOfUnit = nil;
-    [calendar rangeOfUnit:unit 
-                startDate:&startDateOfUnit
-                 interval:NULL
-                  forDate:self];
-    return startDateOfUnit;
-}
-
-- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone
-{
-    // see comment in dateAtHour:minute:second:inTimeZone:
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[[NSCalendar currentCalendar] timeZone] secondsFromGMT];
-    NSDate *selfInTimeZone = [self dateByAddingTimeInterval:timeZoneOffset];
-    return [[selfInTimeZone startDateOfUnit:unit] dateByAddingTimeInterval:-timeZoneOffset];
-}
-
-- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInUnit = [calendar numberOfDaysInUnit:unit containingDate:self];
-    return [[self startDateOfUnit:unit] dateByAddingNumberOfDays:numberOfDaysInUnit];
-}
-
-- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit inTimeZone:(NSTimeZone *)timeZone
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger numberOfDaysInUnit = [calendar numberOfDaysInUnit:unit containingDate:self inTimeZone:timeZone];
-    return [[self startDateOfUnit:unit inTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInUnit];
-}
-
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays
 {
     return [self dateByAddingTimeInterval:24 * 60 * 60 * numberOfDays];
