@@ -9,8 +9,8 @@
 @interface NSCalendar_HLSExtensionsTestCase : GHTestCase {
 @private
     NSCalendar *m_calendar;
-    NSTimeZone *m_timeZone1;
-    NSTimeZone *m_timeZone2;
+    NSTimeZone *m_timeZoneZurich;
+    NSTimeZone *m_timeZoneTahiti;
     NSDate *m_date1;
     NSDate *m_date2;
 }
