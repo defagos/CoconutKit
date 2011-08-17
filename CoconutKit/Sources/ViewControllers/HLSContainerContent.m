@@ -381,7 +381,13 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
                     NSAssert([aboveContainerContent view].superview == containerView, 
                              @"Other container contents has not been added to the same container view");
                     
-                    [containerView insertSubview:self.viewController.view belowSubview:aboveContainerContent.blockingView];
+                    if (aboveContainerContent.blockingView) {
+                        [containerView insertSubview:self.viewController.view belowSubview:aboveContainerContent.blockingView];
+                    }
+                    else {
+                        [containerView insertSubview:self.viewController.view belowSubview:[aboveContainerContent view]];
+                    }
+                    
                     added = YES;
                     break;
                 }                
