@@ -31,6 +31,29 @@
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
+ * Return the start date of the unit containing a given date. This method uses the time zone associated with the calendar. For
+ * example, if unit is NSWeekCalendarUnit, the method returns the date corresponding to the first day (at midnight) of the week 
+ * containing the given date
+ */
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
+
+/**
+ * Same as startDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
+ */
+- (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Same as startDateOfUnit:containingDate:, but returning the first date after the unit. For example, if unit is NSWeekCalendarUnit, 
+ * the method returns the date corresponding to the first day (at midnight) of the week after the week to which the given date belongs
+ */
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
+
+/**
+ * Same as endDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
+ */
+- (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+
+/**
  * Same as rangeOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
