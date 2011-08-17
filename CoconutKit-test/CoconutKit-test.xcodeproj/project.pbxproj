@@ -25,6 +25,8 @@
 		6F3334E513FB00DC000FC9FD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334E413FB00DC000FC9FD /* CoreData.framework */; };
 		6F3334E713FB00E2000FC9FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3334E613FB00E2000FC9FD /* MessageUI.framework */; };
 		6F3334ED13FB08F3000FC9FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334EB13FB08F3000FC9FD /* main.m */; };
+		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
+		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,10 @@
 		6F3334E913FB08F3000FC9FD /* CoconutKit-test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-test-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6F3334EA13FB08F3000FC9FD /* CoconutKit-test-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-test-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		6F3334EB13FB08F3000FC9FD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		6F33351413FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,10 +156,23 @@
 		6F3334E813FB0112000FC9FD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6F33351313FB7F80000FC9FD /* Core */,
 			);
 			name = Sources;
 			path = "CoconutKit-test";
 			sourceTree = "<group>";
+		};
+		6F33351313FB7F80000FC9FD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F33351413FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.h */,
+				6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */,
+				6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */,
+				6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */,
+			);
+			name = Core;
+			path = Sources/Core;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -229,6 +248,8 @@
 			files = (
 				6F3334D913FAFF95000FC9FD /* CoconutKit_bootstrap.m in Sources */,
 				6F3334ED13FB08F3000FC9FD /* main.m in Sources */,
+				6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
+				6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +371,7 @@
 				6F3334A013FAF9E0000FC9FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
