@@ -13,16 +13,16 @@
 + (CGAffineTransform)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {
     // Scaling matrix
-    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(toRect.size.width / fromRect.size.width, 
-                                                                  toRect.size.height / fromRect.size.height);
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(CGRectGetWidth(toRect) / CGRectGetWidth(fromRect), 
+                                                                  CGRectGetHeight(toRect) / CGRectGetHeight(fromRect));
     
     // Rect centers in the parent view coordinate system
-    CGPoint beginCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(fromRect), CGRectGetMidY(fromRect));
-    CGPoint endCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(toRect), CGRectGetMidY(toRect));
+    CGPoint fromRectCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(fromRect), CGRectGetMidY(fromRect));
+    CGPoint toRectCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(toRect), CGRectGetMidY(toRect));
     
     // Translation matrix
-    CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(endCenterInCommonCoordinateSystem.x - beginCenterInCommonCoordinateSystem.x, 
-                                                                              endCenterInCommonCoordinateSystem.y - beginCenterInCommonCoordinateSystem.y);
+    CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(toRectCenterInCommonCoordinateSystem.x - fromRectCenterInCommonCoordinateSystem.x, 
+                                                                              toRectCenterInCommonCoordinateSystem.y - fromRectCenterInCommonCoordinateSystem.y);
     
     return CGAffineTransformConcat(scaleTransform, translationTransform);
 }

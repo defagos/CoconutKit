@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F133FF713FBB70100B53677 /* HLSManagedObjectCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F133FF613FBB70100B53677 /* HLSManagedObjectCopying.h */; };
 		6F1A139B13E04A92006957BA /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1A139913E04A92006957BA /* HLSContainerContent.h */; };
 		6F1A139C13E04A92006957BA /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A139A13E04A92006957BA /* HLSContainerContent.m */; };
 		6F1A13AF13E12D07006957BA /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A13AE13E12D07006957BA /* HLSTransitionStyle.m */; };
@@ -119,6 +120,7 @@
 
 /* Begin PBXFileReference section */
 		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F133FF613FBB70100B53677 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
 		6F1A139913E04A92006957BA /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6F1A139A13E04A92006957BA /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
 		6F1A13AE13E12D07006957BA /* HLSTransitionStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransitionStyle.m; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		6FC9000713D4637400834900 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6F133FF613FBB70100B53677 /* HLSManagedObjectCopying.h */,
 				6FC9000813D4637400834900 /* HLSModelManager.h */,
 				6FC9000913D4637400834900 /* HLSModelManager.m */,
 			);
@@ -561,6 +564,7 @@
 				6F82490013D9551100688D0C /* HLSStackController.h in Headers */,
 				6F82490413D95CBB00688D0C /* HLSTransitionStyle.h in Headers */,
 				6F1A139B13E04A92006957BA /* HLSContainerContent.h in Headers */,
+				6F133FF713FBB70100B53677 /* HLSManagedObjectCopying.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
