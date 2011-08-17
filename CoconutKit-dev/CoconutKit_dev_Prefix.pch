@@ -44,6 +44,7 @@
     #import "HLSWizardViewController.h"
     #import "HLSXibView.h"
     #import "NSArray+HLSExtensions.h"
+    #import "NSBundle+DynamicLocalization.h"
     #import "NSBundle+HLSExtensions.h"
     #import "NSCalendar+HLSExtensions.h"
     #import "NSData+HLSExtensions.h"

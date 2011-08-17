@@ -64,7 +64,7 @@ typedef enum {
 }
 
 /**
- * Override this method in you subclass, and release all views retained by the view controller in its implementation. This method 
+ * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 
  * gets called automatically when deallocating or receiving a viewDidUnload event. This allows to cleanly separate the object releasing
  * code of a view controller into two blocks:
  *   - in releaseViews: Release all views created when loading the view, and retained by the view controller. If your view controller 
@@ -82,6 +82,14 @@ typedef enum {
  * Note: Originally I intented to call this method unloadView, but UIViewController already implements this method... privately
  */
 - (void)unloadViews;
+
+/**
+ * Override this method in your subclass if your application is localized. You must not call this method, it is automatically
+ * called when needed.
+ * To ensure that your application is properly localized - even when the localization changes at runtime using +[NSBundle setLocalization:]
+ * (from NSBundle+DynamicLocalization.h) - you must access localized resources only inside this method.
+ */
+- (void)localize;
 
 /**
  * Return the life cycle phase the view controller is currently in
