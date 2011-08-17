@@ -173,6 +173,7 @@
 		6F02AEEB13F2F47300A1EA7C /* StripsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripsDemoViewController.h; sourceTree = "<group>"; };
 		6F02AEEC13F2F47300A1EA7C /* StripsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripsDemoViewController.m; sourceTree = "<group>"; };
 		6F02AEED13F2F47300A1EA7C /* StripsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsDemoViewController.xib; sourceTree = "<group>"; };
+		6F1172A513FBFA8300C4982A /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
 		6F1A58E313AB77D20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E413AB77D20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6F1A58FB13AB86770029B714 /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
@@ -593,6 +594,7 @@
 		6F37FE1E13EBE478003E33EF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6F1172A513FBFA8300C4982A /* HLSManagedObjectCopying.h */,
 				6F37FE1F13EBE478003E33EF /* HLSModelManager.h */,
 				6F37FE2013EBE478003E33EF /* HLSModelManager.m */,
 			);

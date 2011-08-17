@@ -14,6 +14,7 @@
 		6F02AEBC13F2F0A300A1EA7C /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02AEB513F2F0A300A1EA7C /* HLSStripContainerView.m */; };
 		6F02AEBD13F2F0A300A1EA7C /* HLSStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F02AEB613F2F0A300A1EA7C /* HLSStripView.h */; };
 		6F02AEBE13F2F0A300A1EA7C /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02AEB713F2F0A300A1EA7C /* HLSStripView.m */; };
+		6F1172A313FBFA6F00C4982A /* HLSManagedObjectCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1172A213FBFA6F00C4982A /* HLSManagedObjectCopying.h */; };
 		6F1A139B13E04A92006957BA /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1A139913E04A92006957BA /* HLSContainerContent.h */; };
 		6F1A139C13E04A92006957BA /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A139A13E04A92006957BA /* HLSContainerContent.m */; };
 		6F1A13AF13E12D07006957BA /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A13AE13E12D07006957BA /* HLSTransitionStyle.m */; };
@@ -134,6 +135,7 @@
 		6F02AEB613F2F0A300A1EA7C /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
 		6F02AEB713F2F0A300A1EA7C /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
 		6F05065C12F1A4550077E119 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F1172A213FBFA6F00C4982A /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
 		6F1A139913E04A92006957BA /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6F1A139A13E04A92006957BA /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
 		6F1A13AE13E12D07006957BA /* HLSTransitionStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransitionStyle.m; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 		6FC9000713D4637400834900 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6F1172A213FBFA6F00C4982A /* HLSManagedObjectCopying.h */,
 				6FC9000813D4637400834900 /* HLSModelManager.h */,
 				6FC9000913D4637400834900 /* HLSModelManager.m */,
 			);
@@ -588,6 +591,7 @@
 				6F02AEBA13F2F0A300A1EA7C /* HLSStrip+Friend.h in Headers */,
 				6F02AEBB13F2F0A300A1EA7C /* HLSStripContainerView.h in Headers */,
 				6F02AEBD13F2F0A300A1EA7C /* HLSStripView.h in Headers */,
+				6F1172A313FBFA6F00C4982A /* HLSManagedObjectCopying.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

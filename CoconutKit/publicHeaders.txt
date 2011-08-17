@@ -8,6 +8,7 @@ HLSError.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLogger.h
+HLSManagedObjectCopying.h
 HLSModelManager.h
 HLSNotifications.h
 HLSOrientationCloner.h
