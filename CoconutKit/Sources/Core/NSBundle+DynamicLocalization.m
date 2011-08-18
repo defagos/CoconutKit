@@ -10,6 +10,7 @@
 
 #import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
+#import "HLSLogger.h"
 
 HLSLinkCategory(NSBundle_DynamicLocalization)
 
