@@ -36,7 +36,7 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
             startDate:NULL 
              interval:&interval 
               forDate:date];
-    return interval / (24 * 60 * 60);
+    return round(interval / (24 * 60 * 60));
 }
 
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
