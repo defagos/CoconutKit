@@ -305,6 +305,7 @@ static NSArray *s_folders = nil;
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
         infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
         
+        [self.popoverController dismissPopoverAnimated:NO];
         [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
                                                 inView:cursor.pointerView
                               permittedArrowDirections:UIPopoverArrowDirectionDown
