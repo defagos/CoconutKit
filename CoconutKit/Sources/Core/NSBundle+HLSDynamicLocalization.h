@@ -17,6 +17,15 @@ extern NSString * const HLSCurrentLocalizationDidChangeNotification;
  */
 NSString *HLSLanguageForLocalization(NSString *localization);
 
+/**
+ * Returns a localized string from the UIKit bundle
+ *
+ * If the localized version of the key parameter is not found in the UIKit bundle
+ * then this function searches for the localized string inside the main bundle using
+ * the NSLocalizedStringFromTableInBundle() macro.
+ */
+NSString *HLSLocalizedStringFromUIKit(NSString *key);
+
 @interface NSBundle (HLSDynamicLocalization)
 
 /**

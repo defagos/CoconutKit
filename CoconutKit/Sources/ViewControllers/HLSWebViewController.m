@@ -133,8 +133,7 @@
 
 - (IBAction)displayActionSheet:(id)sender;
 {
-	NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
-	NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", nil, uiKitBundle ?: [NSBundle mainBundle], @"");
+	NSString *cancel = HLSLocalizedStringFromUIKit(@"Cancel");
 	NSString *openInSafari = NSLocalizedStringFromTableInBundle(@"Open in Safari", @"CoconutKit_Localizable", [NSBundle CoconutKitBundle], @"HLSWebViewController 'Open in Safari' action");
 	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTableInBundle(@"Mail Link", @"CoconutKit_Localizable", [NSBundle CoconutKitBundle], @"HLSWebViewController 'Mail Link' action") : nil;
 	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString] delegate:self cancelButtonTitle:cancel destructiveButtonTitle:nil otherButtonTitles:openInSafari, mailLink, nil] autorelease];

@@ -23,6 +23,15 @@ NSString *HLSLanguageForLocalization(NSString *localization)
     return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
 }
 
+NSString *HLSLocalizedStringFromUIKit(NSString *key)
+{
+    NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
+    if (!uiKitBundle) {
+        HLSLoggerWarn(@"UIKit bundle not found");
+    }
+    return NSLocalizedStringFromTableInBundle(key, nil, uiKitBundle ?: [NSBundle mainBundle], @"");
+}
+
 @implementation NSBundle (HLSDynamicLocalization)
 
 static NSString *currentLocalization = nil;
