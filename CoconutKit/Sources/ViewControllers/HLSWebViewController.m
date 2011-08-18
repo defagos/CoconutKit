@@ -131,7 +131,7 @@
 	[self.webView loadRequest:self.webView.request];
 }
 
-- (IBAction)displayActionShet:(id)sender;
+- (IBAction)displayActionSheet:(id)sender;
 {
 	NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
 	NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", nil, uiKitBundle ?: [NSBundle mainBundle], @"");
