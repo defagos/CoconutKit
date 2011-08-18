@@ -8,6 +8,7 @@
 
 #import "HLSWebViewController.h"
 
+#import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 
 @implementation HLSWebViewController
