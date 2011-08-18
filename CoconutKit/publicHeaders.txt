@@ -39,7 +39,7 @@ HLSWizardViewController.h
 HLSXibView.h
 NSArray+HLSExtensions.h
 NSBundle+HLSExtensions.h
-NSBundle+DynamicLocalization.h
+NSBundle+HLSDynamicLocalization.h
 NSCalendar+HLSExtensions.h
 NSData+HLSExtensions.h
 NSDate+HLSExtensions.h

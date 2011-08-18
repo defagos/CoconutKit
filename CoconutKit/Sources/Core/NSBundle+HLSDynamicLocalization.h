@@ -1,5 +1,5 @@
 //
-//  NSBundle+DynamicLocalization.h
+//  NSBundle+HLSDynamicLocalization.h
 //  CoconutKit
 //
 //  Created by Cédric Luthi on 08/15/11.
@@ -17,7 +17,7 @@ extern NSString * const HLSCurrentLocalizationDidChangeNotification;
  */
 NSString *HLSLanguageForLocalization(NSString *localization);
 
-@interface NSBundle (DynamicLocalization)
+@interface NSBundle (HLSDynamicLocalization)
 
 /**
  * Returns the current localization used by all bundles.

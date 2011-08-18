@@ -3,7 +3,7 @@ HLSCursor.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
-NSBundle+DynamicLocalization.m
+NSBundle+HLSDynamicLocalization.m
 NSBundle+HLSExtensions.m
 NSCalendar+HLSExtensions.m
 NSData+HLSExtensions.m

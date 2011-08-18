@@ -87,7 +87,7 @@ typedef enum {
  * Override this method in your subclass if your application is localized. You must not call this method, it is automatically
  * called when needed.
  * To ensure that your application is properly localized - even when the localization changes at runtime using +[NSBundle setLocalization:]
- * (from NSBundle+DynamicLocalization.h) - you must access localized resources only inside this method.
+ * (from NSBundle+HLSDynamicLocalization.h) - you must access localized resources only inside this method.
  */
 - (void)localize;
 

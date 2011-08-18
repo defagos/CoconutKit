@@ -147,7 +147,7 @@
 		6FEF853E131F76BD0015B57C /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8502131F76BD0015B57C /* DemosListViewController.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
-		DA2D58AE13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2D58AD13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.m */; };
+		DA2D58AE13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2D58AD13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -388,8 +388,8 @@
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit_dev_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_dev_Prefix.pch; sourceTree = "<group>"; };
 		6FEF8555131F77490015B57C /* CoconutKit_dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit_dev-Info.plist"; sourceTree = "<group>"; };
-		DA2D58AC13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+DynamicLocalization.h"; sourceTree = "<group>"; };
-		DA2D58AD13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+DynamicLocalization.m"; sourceTree = "<group>"; };
+		DA2D58AC13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
+		DA2D58AD13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,8 +533,8 @@
 				6F37FE0513EBE478003E33EF /* HLSValidators.m */,
 				6F37FE0613EBE478003E33EF /* NSArray+HLSExtensions.h */,
 				6F37FE0713EBE478003E33EF /* NSArray+HLSExtensions.m */,
-				DA2D58AC13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.h */,
-				DA2D58AD13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.m */,
+				DA2D58AC13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.h */,
+				DA2D58AD13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m */,
 				6F37FE0813EBE478003E33EF /* NSBundle+HLSExtensions.h */,
 				6F37FE0913EBE478003E33EF /* NSBundle+HLSExtensions.m */,
 				6F37FE0A13EBE478003E33EF /* NSCalendar+HLSExtensions.h */,
@@ -1442,7 +1442,7 @@
 				6F37FEC513EBE478003E33EF /* HLSViewController.m in Sources */,
 				6F37FEC613EBE478003E33EF /* HLSWebViewController.m in Sources */,
 				6F37FEC713EBE478003E33EF /* HLSWizardViewController.m in Sources */,
-				DA2D58AE13F905DD00F8C9E6 /* NSBundle+DynamicLocalization.m in Sources */,
+				DA2D58AE13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

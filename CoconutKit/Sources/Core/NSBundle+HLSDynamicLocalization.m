@@ -1,18 +1,18 @@
 //
-//  NSBundle+DynamicLocalization.m
+//  NSBundle+HLSDynamicLocalization.m
 //  CoconutKit
 //
 //  Created by Cédric Luthi on 08/15/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "NSBundle+DynamicLocalization.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 #import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 
-HLSLinkCategory(NSBundle_DynamicLocalization)
+HLSLinkCategory(NSBundle_HLSDynamicLocalization)
 
 NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
@@ -23,7 +23,7 @@ NSString *HLSLanguageForLocalization(NSString *localization)
     return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
 }
 
-@implementation NSBundle (DynamicLocalization)
+@implementation NSBundle (HLSDynamicLocalization)
 
 static NSString *currentLocalization = nil;
 

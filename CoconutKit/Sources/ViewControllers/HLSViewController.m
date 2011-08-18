@@ -10,7 +10,7 @@
 
 #import "HLSConverters.h"
 #import "HLSLogger.h"
-#import "NSBundle+DynamicLocalization.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 @interface HLSViewController ()
 
