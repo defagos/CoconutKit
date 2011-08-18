@@ -128,80 +128,54 @@
 {
     [super viewDidLoad];
     
-    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test")
-                                    forState:UIControlStateNormal];
     [self.lifecycleTestSampleButton addTarget:self
                                        action:@selector(lifeCycleTestSampleButtonClicked:)
                              forControlEvents:UIControlEventTouchUpInside];
     
-    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
-                                  forState:UIControlStateNormal];
     [self.stretchableSampleButton addTarget:self
                                      action:@selector(stretchableSampleButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
-    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") 
-                                forState:UIControlStateNormal];
     [self.fixedSizeSampleButton addTarget:self
                                    action:@selector(fixedSizeSampleButtonClicked:)
                          forControlEvents:UIControlEventTouchUpInside];
     
-    [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") 
-                             forState:UIControlStateNormal];
     [self.portraitOnlyButton addTarget:self
                                 action:@selector(portraitOnlyButtonClicked:)
                       forControlEvents:UIControlEventTouchUpInside];
     
-    [self.landscapeOnlyButton setTitle:NSLocalizedString(@"Landscape only", @"Landscape only") 
-                              forState:UIControlStateNormal];
     [self.landscapeOnlyButton addTarget:self
                                  action:@selector(landscapeOnlyButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
-    [self.orientationClonerButton setTitle:@"HLSOrientationCloner"
-                                  forState:UIControlStateNormal];
     [self.orientationClonerButton addTarget:self
                                      action:@selector(orientationClonerButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
-    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization")
-                                       forState:UIControlStateNormal];
     [self.containerCustomizationButton addTarget:self
                                           action:@selector(containerCustomizationButtonClicked:)
                                 forControlEvents:UIControlEventTouchUpInside];
     
-    [self.transparentButton setTitle:NSLocalizedString(@"Transparent", @"Transparent")
-                            forState:UIControlStateNormal];
     [self.transparentButton addTarget:self
                                action:@selector(transparentButtonClicked:)
                      forControlEvents:UIControlEventTouchUpInside];
     
-    [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop")
-                    forState:UIControlStateNormal];
     [self.popButton addTarget:self
                        action:@selector(popButtonClicked:)
              forControlEvents:UIControlEventTouchUpInside];
     
-    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal")
-                              forState:UIControlStateNormal];
     [self.hideWithModalButton addTarget:self
                                  action:@selector(hideWithModalButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
-    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
-    
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
-    
-    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     self.stretchingContentSwitch.on = stackController.stretchingContent;
     [self.stretchingContentSwitch addTarget:self
                                      action:@selector(stretchingContentSwitchValueChanged:)
                            forControlEvents:UIControlEventValueChanged];
-    
-    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
     [self.forwardingPropertiesSwitch addTarget:self
@@ -401,6 +375,25 @@
             break;
         }            
     }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test") forState:UIControlStateNormal];
+    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") forState:UIControlStateNormal];
+    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") forState:UIControlStateNormal];
+    [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") forState:UIControlStateNormal];
+    [self.landscapeOnlyButton setTitle:NSLocalizedString(@"Landscape only", @"Landscape only") forState:UIControlStateNormal];
+    [self.orientationClonerButton setTitle:@"HLSOrientationCloner" forState:UIControlStateNormal];
+    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization") forState:UIControlStateNormal];
+    [self.transparentButton setTitle:NSLocalizedString(@"Transparent", @"Transparent") forState:UIControlStateNormal];
+    [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal") forState:UIControlStateNormal];
+    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
+    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
+    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
 }
 
 @end

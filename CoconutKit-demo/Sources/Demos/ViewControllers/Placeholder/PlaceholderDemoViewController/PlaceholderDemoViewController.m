@@ -46,8 +46,6 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.title = @"HLSPlaceholderViewController";
-        
         // Pre-load a view controller before display. Yep, this is possible!
         self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         self.stretchingContent = YES;
@@ -128,44 +126,30 @@
 {
     [super viewDidLoad];
     
-    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test")
-                                    forState:UIControlStateNormal];
     [self.lifecycleTestSampleButton addTarget:self
                                        action:@selector(lifeCycleTestSampleButtonClicked:)
                              forControlEvents:UIControlEventTouchUpInside];
     
-    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") 
-                                  forState:UIControlStateNormal];
     [self.stretchableSampleButton addTarget:self
                                      action:@selector(stretchableSampleButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
-    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") 
-                                forState:UIControlStateNormal];
     [self.fixedSizeSampleButton addTarget:self
                                    action:@selector(fixedSizeSampleButtonClicked:)
                          forControlEvents:UIControlEventTouchUpInside];
     
-    [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view (cached)", @"Heavy view (cached)") 
-                            forState:UIControlStateNormal];
     [self.heavySampleButton addTarget:self
                                action:@selector(heavySampleButtonClicked:)
                      forControlEvents:UIControlEventTouchUpInside];
     
-    [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") 
-                             forState:UIControlStateNormal];
     [self.portraitOnlyButton addTarget:self
                                 action:@selector(portraitOnlyButtonClicked:)
                       forControlEvents:UIControlEventTouchUpInside];
     
-    [self.landscapeOnlyButton setTitle:NSLocalizedString(@"Landscape only", @"Landscape only") 
-                              forState:UIControlStateNormal];
     [self.landscapeOnlyButton addTarget:self
                                  action:@selector(landscapeOnlyButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
     
-    [self.removeButton setTitle:NSLocalizedString(@"Remove", @"Remove") 
-                       forState:UIControlStateNormal];
     [self.removeButton addTarget:self
                           action:@selector(removeButtonClicked:)
                 forControlEvents:UIControlEventTouchUpInside];
@@ -176,33 +160,23 @@
                                      action:@selector(orientationClonerButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
-    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization")
-                                       forState:UIControlStateNormal];
     [self.containerCustomizationButton addTarget:self
                                           action:@selector(containerCustomizationButtonClicked:)
                                 forControlEvents:UIControlEventTouchUpInside];
     
-    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal")
-                              forState:UIControlStateNormal];
     [self.hideWithModalButton addTarget:self
                                  action:@selector(hideWithModalButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
-    
-    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     
     self.stretchingContentSwitch.on = self.stretchingContent;
     [self.stretchingContentSwitch addTarget:self
                                      action:@selector(stretchingContentSwitchValueChanged:)
                            forControlEvents:UIControlEventValueChanged];
     
-    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
-    
     self.forwardingPropertiesSwitch.on = self.forwardingProperties;
     [self.forwardingPropertiesSwitch addTarget:self
                                         action:@selector(forwardingPropertiesSwitchValueChanged:)
                               forControlEvents:UIControlEventValueChanged];
-    
-    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -400,6 +374,25 @@
             break;
         }            
     }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    self.title = @"HLSPlaceholderViewController";
+    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test") forState:UIControlStateNormal];
+    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") forState:UIControlStateNormal];
+    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") forState:UIControlStateNormal];
+    [self.heavySampleButton setTitle:NSLocalizedString(@"Heavy view (cached)", @"Heavy view (cached)") forState:UIControlStateNormal];
+    [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") forState:UIControlStateNormal];
+    [self.landscapeOnlyButton setTitle:NSLocalizedString(@"Landscape only", @"Landscape only") forState:UIControlStateNormal];
+    [self.removeButton setTitle:NSLocalizedString(@"Remove", @"Remove") forState:UIControlStateNormal];
+    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization") forState:UIControlStateNormal];
+    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal") forState:UIControlStateNormal];
+    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
+    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
+    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
 }
 
 @end

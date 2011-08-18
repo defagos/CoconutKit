@@ -34,4 +34,10 @@
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+}
+
 @end

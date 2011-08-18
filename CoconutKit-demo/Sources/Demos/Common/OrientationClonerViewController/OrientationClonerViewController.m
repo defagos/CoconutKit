@@ -26,37 +26,26 @@
 
 - (id)initWithPortraitOrientation:(BOOL)portraitOrientation large:(BOOL)large
 {
+    NSString *nibName = nil;
     if (portraitOrientation) {
         if (large) {
-            self = [super initWithNibName:@"OrientationClonerLargeViewControllerPortrait" bundle:nil];
-            if (self) {
-                self.title = @"OrientationClonerViewController (portrait, large)";
-                m_large = large;
-            }            
+            nibName = @"OrientationClonerLargeViewControllerPortrait";
         }
         else {
-            self = [super initWithNibName:@"OrientationClonerViewControllerPortrait" bundle:nil];
-            if (self) {
-                self.title = @"OrientationClonerViewController (portrait)";
-                m_large = large;
-            }            
+            nibName = @"OrientationClonerViewControllerPortrait";
         }
     }
     else {
         if (large) {
-            self = [super initWithNibName:@"OrientationClonerLargeViewControllerLandscape" bundle:nil];
-            if (self) {
-                self.title = @"OrientationClonerViewController (landscape, large)";
-                m_large = large;
-            }            
+            nibName = @"OrientationClonerLargeViewControllerLandscape";
         }
         else {
-            self = [super initWithNibName:@"OrientationClonerViewControllerLandscape" bundle:nil];
-            if (self) {
-                self.title = @"OrientationClonerViewController (landscape)";
-                m_large = large;
-            }            
+            nibName = @"OrientationClonerViewControllerLandscape";
         }
+    }
+    
+    if ((self = [super initWithNibName:nibName bundle:nil])) {
+        self.large = large;
     }
     return self;
 }
@@ -82,6 +71,10 @@
 #pragma mark Accessors and mutators
 
 @synthesize textField = m_textField;
+
+@synthesize portraitOrientation = m_portraitOrientation;
+
+@synthesize large = m_large;
 
 @synthesize text = m_text;
 
@@ -127,6 +120,28 @@
     self.text = self.textField.text;
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    if (self.isPortraitOrientation) {
+        if (self.isLarge) {
+            self.title = @"OrientationClonerViewController (portrait, large)";
+        }
+        else {
+            self.title = @"OrientationClonerViewController (portrait)";
+        }
+    }
+    else {
+        if (self.isLarge) {
+            self.title = @"OrientationClonerViewController (landscape, large)";
+        }
+        else {
+            self.title = @"OrientationClonerViewController (landscape)";
+        }
+    }
 }
 
 @end

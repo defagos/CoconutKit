@@ -92,15 +92,6 @@
     
     self.view.backgroundColor = [UIColor randomColor];
     
-    self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");    
-    self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");
-    self.lastNameLabel.text = NSLocalizedString(@"Last Name", @"Last Name");
-    self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
-    self.streetLabel.text = NSLocalizedString(@"Street", @"Street");
-    self.cityLabel.text = NSLocalizedString(@"City", @"City");
-    self.stateLabel.text = NSLocalizedString(@"State", @"State");
-    self.countryLabel.text = NSLocalizedString(@"Country", @"Country");
-    
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;
     self.emailTextField.delegate = self;
@@ -191,6 +182,20 @@
     [textField resignFirstResponder];
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");
+    self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");
+    self.lastNameLabel.text = NSLocalizedString(@"Last Name", @"Last Name");
+    self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
+    self.streetLabel.text = NSLocalizedString(@"Street", @"Street");
+    self.cityLabel.text = NSLocalizedString(@"City", @"City");
+    self.stateLabel.text = NSLocalizedString(@"State", @"State");
+    self.countryLabel.text = NSLocalizedString(@"Country", @"Country");
 }
 
 @end

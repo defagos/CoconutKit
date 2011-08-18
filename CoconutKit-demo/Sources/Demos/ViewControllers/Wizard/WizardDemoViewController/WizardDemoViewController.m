@@ -17,24 +17,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.title = @"WizardDemoViewController";
         self.delegate = self;
+        self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;
     }
     return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;
-    
-    [self.previousButton setTitle:NSLocalizedString(@"Previous", @"Previous") 
-                         forState:UIControlStateNormal];
-    [self.nextButton setTitle:NSLocalizedString(@"Next", @"Next") 
-                     forState:UIControlStateNormal];
-    [self.doneButton setTitle:NSLocalizedString(@"Done", @"Done") 
-                     forState:UIControlStateNormal];
 }
 
 #pragma mark Orientation management
@@ -54,6 +40,16 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestViewController animated:YES];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    self.title = @"WizardDemoViewController";
+    [self.previousButton setTitle:NSLocalizedString(@"Previous", @"Previous") forState:UIControlStateNormal];
+    [self.nextButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
+    [self.doneButton setTitle:NSLocalizedString(@"Done", @"Done") forState:UIControlStateNormal];
 }
 
 @end
