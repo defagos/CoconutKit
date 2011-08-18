@@ -13,7 +13,7 @@
 
 @interface HLSViewController ()
 
-- (void)initialize;
+- (void)hlsViewControllerInit;
 
 @end
 
@@ -24,7 +24,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
@@ -32,13 +32,13 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
 
 // Common initialization code
-- (void)initialize
+- (void)hlsViewControllerInit
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
     HLSLoggerDebug(@"View controller %@ initialized", self);
