@@ -42,19 +42,25 @@ typedef enum {
     CustomCellIndexEnumSize = CustomCellIndexEnumEnd - CustomCellIndexEnumBegin
 } CustomCellIndex;
 
+@interface TableViewCellsDemoViewController ()
+
+@property (nonatomic, retain) UITableView *tableView;
+
+@end
+
 @implementation TableViewCellsDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
-    }
-    return self;
-}
+@synthesize tableView = m_tableView;
 
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.view = self.tableView;
+}
 
 - (void)viewDidLoad
 {
@@ -62,6 +68,18 @@ typedef enum {
     
     self.tableView.sectionHeaderHeight = HLSXibViewHeight(HeaderView);
     self.tableView.sectionFooterHeight = HLSXibViewHeight(FooterView);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+}
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    self.tableView = nil;
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -261,6 +279,14 @@ typedef enum {
             break;
         }            
     }     
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
+    [self.tableView reloadData];
 }
 
 @end

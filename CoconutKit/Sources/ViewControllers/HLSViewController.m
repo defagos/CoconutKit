@@ -14,6 +14,7 @@
 @interface HLSViewController ()
 
 - (void)hlsViewControllerInit;
+- (void)currentLocalizationDidChange:(NSNotification *)notification;
 
 @end
 
@@ -41,12 +42,15 @@
 - (void)hlsViewControllerInit
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+    [self localize];
     HLSLoggerDebug(@"View controller %@ initialized", self);
 }
 
 - (void)dealloc
 {
     HLSLoggerDebug(@"View controller %@ deallocated", self);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self releaseViews];
     [super dealloc];
 }
@@ -82,6 +86,7 @@
 {
     [super viewDidLoad];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
+    [self localize];
     HLSLoggerDebug(@"View controller %@: view did load", self);
 }
 
@@ -137,6 +142,20 @@
         self.view = nil;
         [self viewDidUnload];        
     }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    if ([[[NSBundle mainBundle] localizations] count] > 1) {
+        HLSLoggerWarn(@"%@ is not localized.", [self class]);
+    }
+}
+
+- (void)currentLocalizationDidChange:(NSNotification *)notification
+{
+    [self localize];
 }
 
 #pragma mark Orientation management

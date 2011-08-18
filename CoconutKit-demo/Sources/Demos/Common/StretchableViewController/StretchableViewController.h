@@ -16,4 +16,6 @@
 
 - (id)initLarge:(BOOL)large;
 
+@property (nonatomic, assign, getter = isLarge) BOOL large;
+
 @end
