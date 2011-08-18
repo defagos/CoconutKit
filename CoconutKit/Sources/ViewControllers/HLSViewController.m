@@ -13,7 +13,7 @@
 
 @interface HLSViewController ()
 
-- (void)initialize;
+- (void)hlsViewControllerInit;
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
 
 @end
@@ -25,7 +25,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
@@ -33,13 +33,13 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
 
 // Common initialization code
-- (void)initialize
+- (void)hlsViewControllerInit
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];

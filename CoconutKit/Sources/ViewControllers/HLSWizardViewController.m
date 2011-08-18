@@ -16,7 +16,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
-- (void)initialize;
+- (void)hlsWizardViewControllerInit;
 
 @property (nonatomic, assign) NSInteger currentPage;
 
@@ -37,7 +37,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self initialize];
+        [self hlsWizardViewControllerInit];
     }
     return self;
 }
@@ -45,13 +45,13 @@ const NSInteger kWizardViewControllerNoPage = -1;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsWizardViewControllerInit];
     }
     return self;
 }
 
 // Common initialization code
-- (void)initialize
+- (void)hlsWizardViewControllerInit
 {
     m_currentPage = kWizardViewControllerNoPage;
     m_wizardTransitionStyle = HLSWizardTransitionStyleNone;
