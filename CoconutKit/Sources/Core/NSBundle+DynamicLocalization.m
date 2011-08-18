@@ -9,6 +9,9 @@
 #import "NSBundle+DynamicLocalization.h"
 
 #import <objc/runtime.h>
+#import "HLSCategoryLinker.h"
+
+HLSLinkCategory(NSBundle_DynamicLocalization)
 
 NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
