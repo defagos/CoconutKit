@@ -282,12 +282,7 @@ typedef enum {
                     cell.textLabel.text = @"HLSWebViewController";
                     break;
                 }
-#if 0
-                case ViewControllersDemoIndexPageController: {
-                    cell.textLabel.text = @"HLSPageController";
-                    break;
-                }
-#endif                    
+
                 default: {
                     return nil;
                     break;
@@ -412,12 +407,7 @@ typedef enum {
                     demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
                     break;
                 }
-#if 0
-                case ViewControllersDemoIndexPageController: {
-
-                    break;
-                }
-#endif                    
+                    
                 default: {
                     return;
                     break;
@@ -440,6 +430,8 @@ typedef enum {
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Demos", @"Demos");
     [self.tableView reloadData];
 }

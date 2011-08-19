@@ -161,6 +161,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
     [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
     [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];

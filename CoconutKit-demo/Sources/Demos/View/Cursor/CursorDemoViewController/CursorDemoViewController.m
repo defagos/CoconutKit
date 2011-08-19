@@ -322,6 +322,8 @@ static NSArray *s_folders = nil;
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Cursor", @"Cursor");
     [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
     [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];

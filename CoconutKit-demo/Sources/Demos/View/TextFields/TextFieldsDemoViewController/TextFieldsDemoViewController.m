@@ -102,6 +102,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.instructionLabel.text = NSLocalizedString(@"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct", 
                                                    @"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct");
 }

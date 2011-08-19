@@ -125,6 +125,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"ContainerCustomizationViewController";
     [self.changeButton setTitle:NSLocalizedString(@"Change", @"Change") forState:UIControlStateNormal];
 }

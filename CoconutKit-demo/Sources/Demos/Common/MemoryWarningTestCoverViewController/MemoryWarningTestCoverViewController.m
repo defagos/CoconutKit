@@ -64,6 +64,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"MemoryWarningTestCoverViewController";
     self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
     self.instructionLabel.text = NSLocalizedString(@"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct",

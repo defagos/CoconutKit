@@ -148,11 +148,7 @@
 #pragma mark Localization
 
 - (void)localize
-{
-    if ([[[NSBundle mainBundle] localizations] count] > 1) {
-        HLSLoggerWarn(@"%@ is not localized.", [self class]);
-    }
-}
+{}
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {

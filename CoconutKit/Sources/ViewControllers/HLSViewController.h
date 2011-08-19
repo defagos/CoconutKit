@@ -21,11 +21,21 @@ typedef enum {
 } HLSViewControllerLifeCyclePhase;
 
 /**
- * Raw view controller class adding useful stuff to UIViewController. This class is not meant to be instantiated directly,
- * you should subclass it to define your own view controllers.
+ * Raw view controller class adding useful stuff to UIViewController:
+ *   - localization is isolated in a single method. This is not only convenient to have a single place for localization code, 
+ *     but this also makes HLSViewController compatible with the NSBundle+HLSDynamicLocalization.h class extension, making
+ *     it possible to change a view controller localization at runtime (if this is not needed, HLSViewController of course
+ *     remains compatible with the usual way of changing localization via system preferences)
+ *   - view cleanup and general cleanup are separated
+ *   - the view lifecycle state can be queried
+ *   - overriding methods is cleaner: The rule is now "Always call the super implementation first" (the behavior is otherwise
+ *     undefined)
+ *
+ * This class is not meant to be instantiated directly, you should subclass it to define your own view controllers.
  *
  * If your subclass overrides any of the view lifecycle events methods (viewWill..., viewDid...), be sure to call the super
- * method first, otherwise the behavior is undefined. The same holds for view orientation events.
+ * method first, otherwise the behavior is undefined. The same holds for view orientation events and for the -localize
+ * method.
  *
  * There is only one major difference with UIViewController. For UIViewController, shouldAutorotateToInterfaceOrientation:
  * returns YES only for portrait orientations when not overridden. This creates an exception to the rule that subclasses
@@ -79,15 +89,17 @@ typedef enum {
 /**
  * Convenience method to set the view controller to nil and forward viewDidUnload to its view controller
  * Not meant to be overridden
- * Note: Originally I intented to call this method unloadView, but UIViewController already implements this method... privately
+ * Note: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
  */
 - (void)unloadViews;
 
 /**
- * Override this method in your subclass if your application is localized. You must not call this method, it is automatically
+ * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
  * called when needed.
+ * When overriding the method, be sure to call the super method first, otherwise the behavior is undefined
+ *
  * To ensure that your application is properly localized - even when the localization changes at runtime using +[NSBundle setLocalization:]
- * (from NSBundle+HLSDynamicLocalization.h) - you must access localized resources only inside this method.
+ * (from NSBundle+HLSDynamicLocalization.h) - you must access localized resources only from within this method.
  */
 - (void)localize;
 

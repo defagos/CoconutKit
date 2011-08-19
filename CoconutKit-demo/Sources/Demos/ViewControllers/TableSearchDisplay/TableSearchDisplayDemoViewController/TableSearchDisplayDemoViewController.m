@@ -238,8 +238,9 @@ typedef enum {
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.placeholder = HLSLocalizedStringFromUIKit(@"Search");
     self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
                                         NSLocalizedString(@"Music players", @"Music players"),
                                         NSLocalizedString(@"Phones", @"Phones"),

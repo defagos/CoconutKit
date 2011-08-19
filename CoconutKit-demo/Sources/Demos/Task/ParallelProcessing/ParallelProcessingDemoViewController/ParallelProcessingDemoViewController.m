@@ -503,6 +503,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
     self.taskLabel.text = NSLocalizedString(@"Task", @"Task");
     self.taskRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");

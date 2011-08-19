@@ -285,6 +285,8 @@ typedef enum {
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
     [self.tableView reloadData];
 }

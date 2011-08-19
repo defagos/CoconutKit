@@ -177,8 +177,12 @@
     }
 }
 
+#pragma mark Localization
+
 - (void)localize
 {
+    [super localize];
+    
     self.title = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
     [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
     [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];

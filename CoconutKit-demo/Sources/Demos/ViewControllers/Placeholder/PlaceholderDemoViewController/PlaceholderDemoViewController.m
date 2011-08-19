@@ -380,6 +380,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"HLSPlaceholderViewController";
     [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test") forState:UIControlStateNormal];
     [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") forState:UIControlStateNormal];

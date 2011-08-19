@@ -126,6 +126,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     if (self.isPortraitOrientation) {
         if (self.isLarge) {
             self.title = @"OrientationClonerViewController (portrait, large)";

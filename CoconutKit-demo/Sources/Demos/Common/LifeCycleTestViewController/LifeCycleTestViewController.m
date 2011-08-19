@@ -106,6 +106,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"LifeCycleTestViewController";
     
     self.instructionLabel.text = NSLocalizedString(@"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)",

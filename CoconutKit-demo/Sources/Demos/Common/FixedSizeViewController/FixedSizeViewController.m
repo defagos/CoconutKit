@@ -53,6 +53,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = self.isLarge ? @"FixedSizeViewController (large)" : @"FixedSizeViewController";
 }
 

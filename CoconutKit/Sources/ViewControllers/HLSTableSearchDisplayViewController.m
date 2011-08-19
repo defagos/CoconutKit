@@ -191,4 +191,13 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     return nil;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.searchBar.placeholder = HLSLocalizedStringFromUIKit(@"Search");
+}
+
 @end

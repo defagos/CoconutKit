@@ -188,6 +188,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");
     self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");
     self.lastNameLabel.text = NSLocalizedString(@"Last Name", @"Last Name");

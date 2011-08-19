@@ -36,6 +36,8 @@
 
 - (void)localize
 {
+    [super localize];
+    
     self.title = @"PortraitOnlyViewController";
 }
 
