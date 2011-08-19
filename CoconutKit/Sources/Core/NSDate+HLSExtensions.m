@@ -23,7 +23,7 @@ static NSDateFormatter *s_dateFormatter = nil;
 
 @end
 
-__attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
+__attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
 {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
