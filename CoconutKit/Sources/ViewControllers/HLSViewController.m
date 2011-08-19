@@ -8,6 +8,7 @@
 
 #import "HLSViewController.h"
 
+#import <objc/runtime.h>
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -148,7 +149,14 @@
 #pragma mark Localization
 
 - (void)localize
-{}
+{
+    IMP selfIMP = class_getMethodImplementation([self class], _cmd);
+    IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
+    BOOL isOverriden = selfIMP != superIMP;
+    if (!isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
+        HLSLoggerWarn(@"%@ is not localized.", [self class]);
+    }
+}
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {
