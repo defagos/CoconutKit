@@ -18,21 +18,21 @@ HLSLinkCategory(NSDictionary_HLSExtensions)
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
     [dictionary setObject:object forKey:key];
-    return [[self class] dictionaryWithDictionary:dictionary];
+    return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
 - (id)dictionaryByRemovingObjectForKey:(id)key
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
     [dictionary removeObjectForKey:key];
-    return [[self class] dictionaryWithDictionary:dictionary];
+    return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
 - (id)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
     [dictionary removeObjectsForKeys:keyArray];
-    return [[self class] dictionaryWithDictionary:dictionary];
+    return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
 @end
