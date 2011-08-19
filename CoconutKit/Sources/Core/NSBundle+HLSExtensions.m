@@ -21,7 +21,7 @@ HLSLinkCategory(NSBundle_HLSExtensions)
     return [versionNumber friendlyVersionNumber];
 }
 
-+ (NSBundle *)CoconutKitBundle
++ (NSBundle *)coconutKitBundle
 {
     static NSBundle *CoconutKitBundle = nil;
     if (CoconutKitBundle == nil) {
