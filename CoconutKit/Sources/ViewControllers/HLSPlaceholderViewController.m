@@ -106,6 +106,11 @@
 
 #pragma mark View lifecycle
 
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
