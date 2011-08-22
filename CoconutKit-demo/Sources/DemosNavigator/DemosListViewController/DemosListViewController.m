@@ -73,25 +73,43 @@ typedef enum {
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
 
+@interface DemosListViewController ()
+
+@property (nonatomic, retain) UITableView *tableView;
+
+@end
+
 @implementation DemosListViewController
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = NSLocalizedString(@"Demos", @"Demos");
-    }
-    return self;
-}
+@synthesize tableView = m_tableView;
 
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.view = self.tableView;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.tableView.rowHeight = HLSTableViewCellHeight(HLSTableViewCell);
+    self.tableView.rowHeight = [HLSTableViewCell height];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+}
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    self.tableView = nil;
 }
 
 #pragma mark Orientation management
@@ -170,7 +188,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLSTableViewCellGet(HLSSubtitleTableViewCell, tableView);
+    UITableViewCell *cell = [HLSSubtitleTableViewCell tableViewCellForTableView:tableView];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
@@ -264,12 +282,7 @@ typedef enum {
                     cell.textLabel.text = @"HLSWebViewController";
                     break;
                 }
-#if 0
-                case ViewControllersDemoIndexPageController: {
-                    cell.textLabel.text = @"HLSPageController";
-                    break;
-                }
-#endif                    
+
                 default: {
                     return nil;
                     break;
@@ -290,18 +303,17 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIViewController *demoViewController = nil;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
                 case AnimationDemoIndexSingleView: {
-                    SingleViewAnimationDemoViewController *demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
                 case AnimationDemoIndexMultipleViews: {
-                    MultipleViewsAnimationDemoViewController *demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
@@ -316,8 +328,7 @@ typedef enum {
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
-                    ParallelProcessingDemoViewController *demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
@@ -332,26 +343,22 @@ typedef enum {
         case DemoCategoryIndexView: {
             switch (indexPath.row) {
                 case ViewDemoIndexTableViewCells: {
-                    TableViewCellsDemoViewController *demoViewController = [[[TableViewCellsDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[TableViewCellsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
                 case ViewDemoIndexTextFieldsFixed: {
-                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:NO] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:NO] autorelease];
                     break;
                 }
                     
                 case ViewDemoIndexTextFieldsLarge: {
-                    TextFieldsDemoViewController *demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:YES] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:YES] autorelease];
                     break;
                 } 
                     
                 case ViewDemoIndexCursor: {
-                    CursorDemoViewController *demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
@@ -366,50 +373,41 @@ typedef enum {
         case DemoCategoryIndexViewControllers: {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
-                    PlaceholderDemoViewController *demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
-                    WizardDemoViewController *demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
-                    demoViewController.stretchingContent = YES;
+                    demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
+                    WizardDemoViewController *wizardDemoViewController = (WizardDemoViewController*)demoViewController;
+                    wizardDemoViewController.stretchingContent = YES;
                     
                     WizardPageViewController *wizardPageViewController1 = [[[WizardPageViewController alloc] init] autorelease];
                     WizardPageViewController *wizardPageViewController2 = [[[WizardPageViewController alloc] init] autorelease];
                     WizardPageViewController *wizardPageViewController3 = [[[WizardPageViewController alloc] init] autorelease];
-                    demoViewController.viewControllers = [NSArray arrayWithObjects:wizardPageViewController1,
-                                                          wizardPageViewController2,
-                                                          wizardPageViewController3,
-                                                          nil];                    
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    wizardDemoViewController.viewControllers = [NSArray arrayWithObjects:wizardPageViewController1,
+                                                                wizardPageViewController2,
+                                                                wizardPageViewController3,
+                                                                nil];                    
                     break;
                 }
                     
                 case ViewControllersDemoIndexStackController: {
-                    StackDemoViewController *demoViewController = [[[StackDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[StackDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
-                    TableSearchDisplayDemoViewController *demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
                     break;
                 }
                 
                 case ViewControllersDemoIndexWebViewController: {
                     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lestudio.hortis.ch"]];
-                    HLSWebViewController *webViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
-                    [self.navigationController pushViewController:webViewController animated:YES];
+                    demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
                     break;
                 }
-#if 0
-                case ViewControllersDemoIndexPageController: {
-
-                    break;
-                }
-#endif                    
+                    
                 default: {
                     return;
                     break;
@@ -423,6 +421,19 @@ typedef enum {
             break;
         }
     }
+	
+	if (demoViewController) {
+		demoViewController.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+		[self.navigationController pushViewController:demoViewController animated:YES];
+	}
+}
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Demos", @"Demos");
+    [self.tableView reloadData];
 }
 
 @end

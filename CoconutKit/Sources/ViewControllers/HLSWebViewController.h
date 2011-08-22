@@ -25,6 +25,6 @@
 - (IBAction)goBack:(id)sender;
 - (IBAction)goForward:(id)sender;
 - (IBAction)refresh:(id)sender;
-- (IBAction)displayActionShet:(id)sender;
+- (IBAction)displayActionSheet:(id)sender;
 
 @end

@@ -37,8 +37,6 @@ typedef enum {
 - (id)init
 {
     if ((self = [super init])) {
-        self.title = @"HLSTableSearchDisplayViewController";
-        
         NSMutableArray *devices = [NSMutableArray array];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod" type:DeviceTypeMusicPlayer]];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Touch" type:DeviceTypeMusicPlayer]];
@@ -88,22 +86,6 @@ typedef enum {
 @synthesize devices = m_devices;
 
 @synthesize filteredDevices = m_filteredDevices;
-
-#pragma mark View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Can further customize the search bar (color, scope buttons, etc. from viewDidLoad on)
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
-                                        NSLocalizedString(@"Music players", @"Music players"),
-                                        NSLocalizedString(@"Phones", @"Phones"),
-                                        NSLocalizedString(@"Tablets", @"Tablets"),
-                                        nil];
-    
-    // No [tableView reloadData] needed here, the search display controller does it for us
-}
 
 #pragma mark Orientation management
 
@@ -170,7 +152,7 @@ typedef enum {
         device = [self.devices objectAtIndex:indexPath.row];
     }
     
-    HLSTableViewCell *cell = HLSTableViewCellGet(HLSTableViewCell, tableView);
+    HLSTableViewCell *cell = [HLSTableViewCell tableViewCellForTableView:tableView];
     cell.textLabel.text = device.name;
     
     // In navigation controller: Can test behavior when another level is pushed
@@ -250,6 +232,20 @@ typedef enum {
     }
     
     self.filteredDevices = [NSArray arrayWithArray:filteredDevices];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSTableSearchDisplayViewController";
+    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
+                                        NSLocalizedString(@"Music players", @"Music players"),
+                                        NSLocalizedString(@"Phones", @"Phones"),
+                                        NSLocalizedString(@"Tablets", @"Tablets"),
+                                        nil];
 }
 
 @end

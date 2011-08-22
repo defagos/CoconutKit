@@ -6,23 +6,15 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Convenience factory macro for creating table view cells of a given class (either HLSTableViewCell or a
-// subclass); useful since no covariant return types in Objective-C
-#define HLSTableViewCellGet(className, tableView)           (className *)[className tableViewCellForTableView:tableView]
-
-// Convenience factory macro for retrieving the height of cells for a given class (either HLSTableViewCell or a
-// subclass)
-#define HLSTableViewCellHeight(className)                   [className height]
-
 /**
  * Class for easy table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
  * every time you instantiate cells. This class also forces centralization of common cell class properties, like
  * cell identifier, dimensions, style and xib file (if any).
  *
  * If you do not need other customization properties than the ones offered by a UITableViewCell with default style
- * (UITableViewCellStyleDefault), you can simply instantiate HLSTableViewCell using the factory macro.
- * Other simple table view cells also exist for the other built-in cell styles (HLSValue1TableViewCell,
- * HLSValue1TableViewCell and HLSSubtitleTableViewCell). Those are similarly instantiated using the factory macro.
+ * (UITableViewCellStyleDefault), you can simply instantiate HLSTableViewCell by calling the tableViewCellForTableView:
+ * class method on it. Other simple table view cells also exist for the other built-in cell styles (HLSValue1TableViewCell,
+ * HLSValue1TableViewCell and HLSSubtitleTableViewCell). Those are similarly instantiated using the factory class method.
  *
  * If you need further customization abilities, like cells whose layout is defined using a xib or programmatically, 
  * you must sublcass HLSTableViewCell and:
@@ -31,12 +23,13 @@
  *     corresponding class or if your cell layout is created programmatically, do not override this accessor
  *   - override the identifier method to return the cell identifier used by the reuse mechanism if the default value
  *     (the class name) does not suit your needs, which should be rarely the case
- * Your custom classes can then be instantiated using the provided factory macro.
+ * Custom classes can then be instantiated by calling the tableViewCellForTableView: class method on your cell
+ * classes.
  *
  * Be careful when using a xib. Resource lookup is case-insensitive when running in the simulator, and case-sensitive
  * on the device.
  *
- * To customize your cells via code after they have been loaded from a xib, implement the awakeFromNib method
+ * To customize your cells via code after they have been loaded from a xib, implement the awakeFromNib method.
  *
  * When your class uses a xib to define its layout:
  *   - the first object in the xib must be the cell object. Do not forget to set its type to match your cell class name
@@ -54,11 +47,10 @@
 }
 
 /**
- * Factory method for creating a table view cell. A downcast might be needed to be able to edit cell attributes,
- * that is why you should use the HLSTableViewCellGet factory method which does this cast for you
+ * Factory method for creating a table view cell. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView;
++ (id)tableViewCellForTableView:(UITableView *)tableView;
 
 /**
  * Obtaining a cell with custom background and selected background images is surprisingly not so easy, especially if

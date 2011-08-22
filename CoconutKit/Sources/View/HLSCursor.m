@@ -17,7 +17,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 @interface HLSCursor ()
 
-- (void)initialize;
+- (void)hlsCursorInit;
 
 @property (nonatomic, retain) NSArray *elementViews;
 @property (nonatomic, retain) UIView *pointerContainerView;
@@ -53,7 +53,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        [self initialize];
+        [self hlsCursorInit];
     }
     return self;
 }
@@ -61,7 +61,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsCursorInit];
     }
     return self;
 }
@@ -79,7 +79,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     [super dealloc];
 }
 
-- (void)initialize
+- (void)hlsCursorInit
 {
     self.spacing = kCursorDefaultSpacing;
     self.pointerViewTopLeftOffset = CGSizeMake(-kCursorDefaultSpacing / 2.f, -kCursorDefaultSpacing / 2.f);

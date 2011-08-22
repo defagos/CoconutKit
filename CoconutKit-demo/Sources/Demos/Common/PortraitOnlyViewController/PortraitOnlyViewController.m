@@ -12,14 +12,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = @"PortraitOnlyViewController";
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -38,6 +30,15 @@
     }
     
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"PortraitOnlyViewController";
 }
 
 @end

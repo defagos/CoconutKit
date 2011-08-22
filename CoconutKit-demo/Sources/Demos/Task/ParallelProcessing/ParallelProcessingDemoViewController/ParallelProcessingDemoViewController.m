@@ -32,14 +32,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
-    }
-    return self;
-}
-
 - (void)dealloc
 {
     // Just to be sure we do not let a dying object listen to task events; this would not be needed here since
@@ -91,17 +83,10 @@
     [super viewDidLoad];
     
     // Task
-    self.taskLabel.text = NSLocalizedString(@"Task", @"Task");
-    self.taskRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    
-    [self.taskStartButton setTitle:NSLocalizedString(@"Start", @"Start")
-                          forState:UIControlStateNormal];
     [self.taskStartButton addTarget:self 
                              action:@selector(taskStartButtonClicked:) 
                    forControlEvents:UIControlEventTouchUpInside];
     
-    [self.taskStopButton setTitle:NSLocalizedString(@"Stop", @"Stop")
-                         forState:UIControlStateNormal];
     [self.taskStopButton addTarget:self 
                             action:@selector(taskStopButtonClicked:) 
                   forControlEvents:UIControlEventTouchUpInside];
@@ -112,17 +97,10 @@
     self.taskRemainingTimeLabel.hidden = YES;
     
     // Task group
-    self.taskGroupLabel.text = NSLocalizedString(@"Task group", @"Task group");
-    self.taskGroupRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    
-    [self.taskGroupStartButton setTitle:NSLocalizedString(@"Start", @"Start")
-                               forState:UIControlStateNormal];
     [self.taskGroupStartButton addTarget:self 
                                   action:@selector(taskGroupStartButtonClicked:) 
                         forControlEvents:UIControlEventTouchUpInside];
     
-    [self.taskGroupStopButton setTitle:NSLocalizedString(@"Stop", @"Stop")
-                              forState:UIControlStateNormal];
     [self.taskGroupStopButton addTarget:self 
                                  action:@selector(taskGroupStopButtonClicked:) 
                        forControlEvents:UIControlEventTouchUpInside];
@@ -132,14 +110,7 @@
     self.taskGroupRemainingTimeEstimateLabel.hidden = YES;
     self.taskGroupRemainingTimeLabel.hidden = YES;
     
-    // Sub-tasks
-    self.subTasksLabel.text = NSLocalizedString(@"Sub-tasks", @"Sub-tasks");
-    
     // Sub-task 1
-    self.subTask1RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    
-    [self.subTask1StopButton setTitle:NSLocalizedString(@"Stop", @"Stop")
-                             forState:UIControlStateNormal];
     [self.subTask1StopButton addTarget:self 
                                 action:@selector(subTask1StopButtonClicked:) 
                       forControlEvents:UIControlEventTouchUpInside];
@@ -150,10 +121,6 @@
     self.subTask1RemainingTimeLabel.hidden = YES;
     
     // Sub-task 2
-    self.subTask2RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    
-    [self.subTask2StopButton setTitle:NSLocalizedString(@"Stop", @"Stop")
-                             forState:UIControlStateNormal];
     [self.subTask2StopButton addTarget:self 
                                 action:@selector(subTask2StopButtonClicked:) 
                       forControlEvents:UIControlEventTouchUpInside];
@@ -164,10 +131,6 @@
     self.subTask2RemainingTimeLabel.hidden = YES;
     
     // Sub-task 3
-    self.subTask3RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    
-    [self.subTask3StopButton setTitle:NSLocalizedString(@"Stop", @"Stop")
-                             forState:UIControlStateNormal];
     [self.subTask3StopButton addTarget:self 
                                 action:@selector(subTask3StopButtonClicked:) 
                       forControlEvents:UIControlEventTouchUpInside];
@@ -534,6 +497,30 @@
     self.subTask3StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask3"];    
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+    self.taskLabel.text = NSLocalizedString(@"Task", @"Task");
+    self.taskRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
+    [self.taskStartButton setTitle:NSLocalizedString(@"Start", @"Start") forState:UIControlStateNormal];
+    [self.taskStopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
+    self.taskGroupLabel.text = NSLocalizedString(@"Task group", @"Task group");
+    self.taskGroupRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
+    [self.taskGroupStartButton setTitle:NSLocalizedString(@"Start", @"Start") forState:UIControlStateNormal];
+    [self.taskGroupStopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
+    self.subTasksLabel.text = NSLocalizedString(@"Sub-tasks", @"Sub-tasks");
+    self.subTask1RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
+    [self.subTask1StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
+    self.subTask2RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
+    [self.subTask2StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
+    self.subTask3RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
+    [self.subTask3StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
 }
 
 @end

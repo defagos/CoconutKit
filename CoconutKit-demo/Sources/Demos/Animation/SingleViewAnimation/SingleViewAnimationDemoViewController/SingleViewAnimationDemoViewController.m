@@ -21,14 +21,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
-    }
-    return self;
-}
-
 - (void)dealloc
 {    
     self.animation = nil;
@@ -52,20 +44,15 @@
 {
     [super viewDidLoad];
     
-    [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") 
-                      forState:UIControlStateNormal];
     [self.playForwardButton addTarget:self 
                          action:@selector(playForwardButtonClicked:)
                forControlEvents:UIControlEventTouchUpInside];
     
-    [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") 
-                     forState:UIControlStateNormal];
     [self.playBackwardButton addTarget:self 
                         action:@selector(playBackwardButtonClicked:)
               forControlEvents:UIControlEventTouchUpInside];
     self.playBackwardButton.hidden = YES;
     
-    self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
     self.animatedSwitch.on = YES;
 }
 
@@ -168,6 +155,18 @@
     else if ([animation.tag isEqual:@"reverse_singleViewAnimation"]) {
         self.playForwardButton.hidden = NO;
     }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+    [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
+    [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];
+    self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
 }
 
 @end

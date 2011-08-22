@@ -63,7 +63,7 @@ static UIScrollView *s_scrollView = nil;
 + (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated;
 + (void)restoreScrollAnimated:(BOOL)animated;
 
-- (void)initialize;
+- (void)hlsTextFieldInit;
 
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
@@ -77,18 +77,18 @@ static UIScrollView *s_scrollView = nil;
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        [self initialize];
+        [self hlsTextFieldInit];
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
-    [self initialize];
+    [self hlsTextFieldInit];
 }
 
 // Common initialization code
-- (void)initialize
+- (void)hlsTextFieldInit
 {
     self.minVisibilityDistance = kTextFieldMinVisibilityDistance;
 }

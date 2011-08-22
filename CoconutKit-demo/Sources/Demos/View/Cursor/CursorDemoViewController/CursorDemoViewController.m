@@ -33,23 +33,10 @@ static NSArray *s_folders = nil;
     s_weekDays = [[NSDateFormatter orderedWeekdaySymbols] retain];    
     s_completeRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                       @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
-    s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
-                     NSLocalizedString(@"MONTH", @"MONTH"),
-                     NSLocalizedString(@"WEEK", @"WEEK"),
-                     NSLocalizedString(@"DAY", @"DAY"),
-                     nil] retain];
     s_folders = [[NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil] retain];
 }
 
 #pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = NSLocalizedString(@"Cursor", @"Cursor");
-    }
-    return self;
-}
 
 - (void)dealloc
 {
@@ -108,14 +95,10 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
-    [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
-    
-    self.randomRangeCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
+    self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
     [self.randomRangeCursor moveToIndex:4 animated:NO];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
-    
-    [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
@@ -157,12 +140,12 @@ static NSArray *s_folders = nil;
 {
     if (cursor == self.foldersCursor || (cursor == self.mixedFoldersCursor && index % 2 == 0)) {
         if (selected) {
-            CursorSelectedFolderView *view = HLSXibViewGet(CursorSelectedFolderView);
+            CursorSelectedFolderView *view = [CursorSelectedFolderView view];
             view.nameLabel.text = [s_folders objectAtIndex:index];
             return view;
         }
         else {
-            CursorFolderView *view = HLSXibViewGet(CursorFolderView);
+            CursorFolderView *view = [CursorFolderView view];
             view.nameLabel.text = [s_folders objectAtIndex:index];
             return view;        
         }
@@ -305,6 +288,7 @@ static NSArray *s_folders = nil;
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
         infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
         
+        [self.popoverController dismissPopoverAnimated:NO];
         [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
                                                 inView:cursor.pointerView
                               permittedArrowDirections:UIPopoverArrowDirectionDown
@@ -332,6 +316,27 @@ static NSArray *s_folders = nil;
 - (IBAction)reloadRandomRangeCursor
 {
     [self.randomRangeCursor reloadData];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Cursor", @"Cursor");
+    [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
+    [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];
+    
+    [s_timeScales release];
+    s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
+                     NSLocalizedString(@"MONTH", @"MONTH"),
+                     NSLocalizedString(@"WEEK", @"WEEK"),
+                     NSLocalizedString(@"DAY", @"DAY"),
+                     nil] retain];
+    
+    [self.weekDaysCursor reloadData];
+    [self.timeScalesCursor reloadData];
 }
 
 @end

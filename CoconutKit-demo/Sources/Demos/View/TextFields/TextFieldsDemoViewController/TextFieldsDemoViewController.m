@@ -60,9 +60,6 @@
                                             self.view.frame.size.height);
     }
     
-    self.instructionLabel.text = NSLocalizedString(@"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct", 
-                                                   @"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct");
-    
     self.textField1.delegate = self;
     self.textField2.delegate = self;
     self.textField3.delegate = self;
@@ -99,6 +96,16 @@
     [textField resignFirstResponder];
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.instructionLabel.text = NSLocalizedString(@"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct", 
+                                                   @"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct");
 }
 
 @end

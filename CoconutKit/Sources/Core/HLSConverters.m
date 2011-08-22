@@ -47,7 +47,6 @@ NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrie
     }
 }
 
-
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
 {
     switch (deviceOrientation) {

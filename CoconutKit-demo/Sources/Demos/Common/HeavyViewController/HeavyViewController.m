@@ -12,14 +12,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super init])) {
-        self.title = @"HeavyViewController";
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -41,6 +33,15 @@
     }
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HeavyViewController";
 }
 
 @end

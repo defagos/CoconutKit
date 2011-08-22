@@ -27,7 +27,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
 }
 
-+ (UIView *)xibView
++ (id)view
 {   
     if ([self isMemberOfClass:[HLSXibView class]]) {
         HLSLoggerError(@"HLSXibView cannot be instantiated directly");
@@ -57,7 +57,8 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     // Cache the view height
     NSNumber *viewHeight = [s_classNameToHeightMap objectForKey:[self className]];
     if (! viewHeight) {
-        viewHeight = [NSNumber numberWithFloat:CGRectGetHeight([self xibView].frame)];
+        UIView *view = [self view];
+        viewHeight = [NSNumber numberWithFloat:CGRectGetHeight(view.frame)];
         [s_classNameToHeightMap setObject:viewHeight forKey:[self className]];
     }
     return [viewHeight floatValue];

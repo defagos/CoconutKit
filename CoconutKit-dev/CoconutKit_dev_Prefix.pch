@@ -44,6 +44,7 @@
     #import "HLSWizardViewController.h"
     #import "HLSXibView.h"
     #import "NSArray+HLSExtensions.h"
+    #import "NSBundle+HLSDynamicLocalization.h"
     #import "NSBundle+HLSExtensions.h"
     #import "NSCalendar+HLSExtensions.h"
     #import "NSData+HLSExtensions.h"
@@ -55,4 +56,5 @@
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"
+    #import "UIView+HLSUserInfo.h"
 #endif

@@ -6,12 +6,6 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Convenience factory macro for creating views of a given class; useful since no covariant return types in Objective-C
-#define HLSXibViewGet(className)                (className *)[className xibView]
-
-// Convenience macro for retrieving the height of a view
-#define HLSXibViewHeight(className)             [className height]
-
 /**
  * Abstract class for easy view creation using xibs.
  *
@@ -23,7 +17,7 @@
  * To create your own view class, simply subclass HLSXibView. If your view layout is created using a xib file not 
  * bearing the same name as the view class, override the xibFileName accessor to return the name of the xib file. 
  * If the xib file bears the same name as its corresponding class, you do not need to override this accessor.
- * Your custom classes can then be instantiated using the provided factory macro.
+ * Your custom classes can then be instantiated using the view class method.
  *
  * To define the view layout in Interface Builder, the first object in the xib must be the view object. Do not forget 
  * to set its type to match your view class name (if you need to bind outlets). Use this class as origin when drawing 
@@ -38,10 +32,10 @@
 }
 
 /**
- * Factory method for creating the view
+ * Factory method for creating the view. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (UIView *)xibView;
++ (id)view;
 
 /**
  * Return the height of the view.

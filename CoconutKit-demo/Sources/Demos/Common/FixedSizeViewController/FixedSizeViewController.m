@@ -14,15 +14,8 @@
 
 - (id)initLarge:(BOOL)large
 {
-    if (large) {
-        if ((self = [super initWithNibName:@"FixedSizeLargeViewController" bundle:nil])) {
-            self.title = @"FixedSizeViewController (large)";
-        }
-    }
-    else {
-        if ((self = [super initWithNibName:@"FixedSizeViewController" bundle:nil])) {
-            self.title = @"FixedSizeViewController";
-        }
+    if ((self = [super initWithNibName:large ? @"FixedSizeLargeViewController" : @"FixedSizeViewController" bundle:nil])) {
+        self.large = large;
     }
     return self;
 }
@@ -31,6 +24,10 @@
 {
     return [self initLarge:NO];
 }
+
+#pragma mark Accessors and mutators
+
+@synthesize large = m_large;
 
 #pragma mark View lifecycle
 
@@ -50,6 +47,15 @@
     }
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = self.isLarge ? @"FixedSizeViewController (large)" : @"FixedSizeViewController";
 }
 
 @end
