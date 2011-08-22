@@ -9,6 +9,7 @@
 #import "HLSTableSearchDisplayViewController.h"
 
 #import "HLSAssert.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 // Height of the UIKit search bar
 static const CGFloat kSearchBarStandardHeight = 44.f;

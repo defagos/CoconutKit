@@ -40,6 +40,26 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 
 #pragma mark Convenience methods
 
+- (BOOL)isEarlierThanDate:(NSDate *)date
+{
+    return [self compare:date] == NSOrderedAscending;
+}
+
+- (BOOL)isEarlierThanOrEqualToDate:(NSDate *)date
+{
+    return [self compare:date] != NSOrderedDescending;
+}
+
+- (BOOL)isLaterThanDate:(NSDate *)date
+{
+    return [self compare:date] == NSOrderedDescending;
+}
+
+- (BOOL)isLaterThanOrEqualToDate:(NSDate *)date
+{
+    return [self compare:date] != NSOrderedAscending;
+}
+
 - (NSDate *)dateSameDayAtNoon
 {
     return [self dateSameDayAtHour:12 minute:0 second:0];
