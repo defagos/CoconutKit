@@ -152,7 +152,7 @@ typedef enum {
         device = [self.devices objectAtIndex:indexPath.row];
     }
     
-    HLSTableViewCell *cell = HLSTableViewCellGet(HLSTableViewCell, tableView);
+    HLSTableViewCell *cell = [HLSTableViewCell tableViewCellForTableView:tableView];
     cell.textLabel.text = device.name;
     
     // In navigation controller: Can test behavior when another level is pushed

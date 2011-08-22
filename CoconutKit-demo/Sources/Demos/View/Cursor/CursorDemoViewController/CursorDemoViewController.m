@@ -95,7 +95,7 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
-    self.randomRangeCursor.pointerView = HLSXibViewGet(CursorCustomPointerView);
+    self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
     [self.randomRangeCursor moveToIndex:4 animated:NO];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
@@ -140,12 +140,12 @@ static NSArray *s_folders = nil;
 {
     if (cursor == self.foldersCursor || (cursor == self.mixedFoldersCursor && index % 2 == 0)) {
         if (selected) {
-            CursorSelectedFolderView *view = HLSXibViewGet(CursorSelectedFolderView);
+            CursorSelectedFolderView *view = [CursorSelectedFolderView view];
             view.nameLabel.text = [s_folders objectAtIndex:index];
             return view;
         }
         else {
-            CursorFolderView *view = HLSXibViewGet(CursorFolderView);
+            CursorFolderView *view = [CursorFolderView view];
             view.nameLabel.text = [s_folders objectAtIndex:index];
             return view;        
         }

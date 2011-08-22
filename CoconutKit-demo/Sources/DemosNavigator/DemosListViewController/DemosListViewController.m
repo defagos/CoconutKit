@@ -97,7 +97,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.tableView.rowHeight = HLSTableViewCellHeight(HLSTableViewCell);
+    self.tableView.rowHeight = [HLSTableViewCell height];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -188,7 +188,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = HLSTableViewCellGet(HLSSubtitleTableViewCell, tableView);
+    UITableViewCell *cell = [HLSSubtitleTableViewCell tableViewCellForTableView:tableView];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
