@@ -28,6 +28,11 @@
 		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
+		6F93C4D214042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */; };
+		6F93C4D8140437D200FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */; };
+		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
+		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
+		6F93C500140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4FF140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,16 @@
 		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
 		6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
+		6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F93C4D6140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F93C4E81404400000FEC9B0 /* NSString+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F93C4FE140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F93C4FF140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,12 +183,22 @@
 		6F33351313FB7F80000FC9FD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
+				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
 				6F33351413FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.h */,
 				6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */,
 				6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */,
 				6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */,
-				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
-				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
+				6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */,
+				6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */,
+				6F93C4D6140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.h */,
+				6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */,
+				6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */,
+				6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */,
+				6F93C4E81404400000FEC9B0 /* NSString+HLSExtensionsTestCase.h */,
+				6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */,
+				6F93C4FE140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.h */,
+				6F93C4FF140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.m */,
 			);
 			name = Core;
 			path = Sources/Core;
@@ -256,6 +281,11 @@
 				6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
 				6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */,
 				6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */,
+				6F93C4D214042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m in Sources */,
+				6F93C4D8140437D200FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
+				6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */,
+				6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */,
+				6F93C500140443AE00FEC9B0 /* UIView+HLSExtensionsTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

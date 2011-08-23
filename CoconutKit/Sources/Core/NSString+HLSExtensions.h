@@ -14,7 +14,7 @@
 - (NSString *)stringByTrimmingWhitespaces;
 
 /**
- * Returns NO if the string is empty of only made of whitespaces
+ * Returns NO if the string is empty or only made of whitespaces
  */
 - (BOOL)isFilled;
 
