@@ -27,6 +27,7 @@
 		6F3334ED13FB08F3000FC9FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334EB13FB08F3000FC9FD /* main.m */; };
 		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
+		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
+		6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */,
 				6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */,
 				6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */,
+				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
+				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
 			);
 			name = Core;
 			path = Sources/Core;
@@ -250,6 +255,7 @@
 				6F3334ED13FB08F3000FC9FD /* main.m in Sources */,
 				6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
 				6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */,
+				6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
