@@ -254,7 +254,7 @@
     [expectedEndDateMonthComponentsZurich2 setYear:2012];
     [expectedEndDateMonthComponentsZurich2 setMonth:4];
     [expectedEndDateMonthComponentsZurich2 setDay:1];
-    [expectedEndDateMonthComponentsZurich2 setHour:1];          // CEST, at +2 at the beginning of April, not +1
+    [expectedEndDateMonthComponentsZurich2 setHour:1];          // CEST, at +1 in April, not 0
     NSDate *expectedEndDateMonthZurich2 = [self.calendar dateFromComponents:expectedEndDateMonthComponentsZurich2 inTimeZone:self.timeZoneZurich];
     GHAssertTrue([endDateMonthZurich2 isEqualToDate:expectedEndDateMonthZurich2], @"Incorrect date");
     
