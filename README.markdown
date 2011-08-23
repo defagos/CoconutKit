@@ -9,6 +9,7 @@ You can download CoconutKit from [my github page](https://github.com/defagos), b
 CoconutKit provides your with several kinds of classes covering various aspects of iOS development:
 
 * High-quality view controller containers (view controller embedding, view controller stacking) with several transition animations
+* Easy way to change the language used by an application at runtime, without having to alter system preferences
 * View controllers for web browsing and for easier table view search management
 * Multi-threaded task management, including task grouping, cancelation, progress status, task dependencies and remaining time estimation
 * New controls (text field moving automatically with the keyboard, new kind of segmented control)
@@ -86,7 +87,7 @@ HLS stands for hortis le studio.
 ### Acknowledgements
 I really would like to thank my company for having allowed me to publish this work, as well as all my colleagues which have contributed and given me invaluable advice. This work is yours as well!
 
-HLSWebViewController was kindly contributed by [0xced](http://0xced.blogspot.com/).
+Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
 
 ### Contact
 Feel free to contact me if you have any questions or suggestions:
