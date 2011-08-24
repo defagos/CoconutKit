@@ -12,6 +12,13 @@
 
 #pragma mark Tests
 
+- (void)testTag
+{
+    UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithFrame:CGRectZero] autorelease];
+    segmentedControl.tag_hls = @"tag";
+    GHAssertEqualStrings(segmentedControl.tag_hls, @"tag", @"tag");
+}
+
 - (void)testUserInfo
 {
     UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithFrame:CGRectZero] autorelease];
