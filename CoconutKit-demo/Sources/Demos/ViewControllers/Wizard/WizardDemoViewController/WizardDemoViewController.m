@@ -12,13 +12,13 @@
 
 @implementation WizardDemoViewController
 
-#pragma mark View lifecycle
+#pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
         self.delegate = self;
-        self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;
+        self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;        
     }
     return self;
 }

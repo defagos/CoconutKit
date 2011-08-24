@@ -83,6 +83,15 @@ typedef enum {
 
 @synthesize tableView = m_tableView;
 
+#pragma mark Object creation and destruction
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    self.tableView = nil;
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -103,13 +112,8 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    self.tableView = nil;
 }
 
 #pragma mark Orientation management

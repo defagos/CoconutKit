@@ -43,7 +43,7 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
         UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
         stackController.title = @"HLSStackController";

@@ -32,6 +32,14 @@
 
 #pragma mark Object creation and destruction
 
+- (id)init
+{
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     // Just to be sure we do not let a dying object listen to task events; this would not be needed here since
