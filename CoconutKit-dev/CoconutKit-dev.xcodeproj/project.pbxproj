@@ -66,7 +66,7 @@
 		6F37FEC613EBE478003E33EF /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE6813EBE478003E33EF /* HLSWebViewController.m */; };
 		6F37FEC713EBE478003E33EF /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE6A13EBE478003E33EF /* HLSWizardViewController.m */; };
 		6F37FEC913EBE478003E33EF /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */; };
-		6F48D31913FD699400460C62 /* UIView+HLSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48D31813FD699400460C62 /* UIView+HLSUserInfo.m */; };
+		6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D3D140500090043693E /* UIView+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FDB13041404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB126D1404D1C000469DEC /* Localizable.strings */; };
 		6FDB13051404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12701404D1C000469DEC /* Localizable.strings */; };
@@ -270,8 +270,8 @@
 		6F37FE6913EBE478003E33EF /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
 		6F37FE6A13EBE478003E33EF /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
-		6F48D31713FD699400460C62 /* UIView+HLSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+HLSUserInfo.h"; path = "../View/UIView+HLSUserInfo.h"; sourceTree = "<group>"; };
-		6F48D31813FD699400460C62 /* UIView+HLSUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+HLSUserInfo.m"; path = "../View/UIView+HLSUserInfo.m"; sourceTree = "<group>"; };
+		6FA74D3C140500090043693E /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FA74D3D140500090043693E /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FDB126E1404D1C000469DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12711404D1C000469DEC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
@@ -551,8 +551,6 @@
 				6F37FE1B13EBE478003E33EF /* UIControl+HLSExclusiveTouch.m */,
 				6F37FE1C13EBE478003E33EF /* UIImage+HLSExtensions.h */,
 				6F37FE1D13EBE478003E33EF /* UIImage+HLSExtensions.m */,
-				6F48D31713FD699400460C62 /* UIView+HLSUserInfo.h */,
-				6F48D31813FD699400460C62 /* UIView+HLSUserInfo.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -622,6 +620,8 @@
 				6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */,
 				6F37FE5413EBE478003E33EF /* HLSXibView.h */,
 				6F37FE5513EBE478003E33EF /* HLSXibView.m */,
+				6FA74D3C140500090043693E /* UIView+HLSExtensions.h */,
+				6FA74D3D140500090043693E /* UIView+HLSExtensions.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1260,7 +1260,6 @@
 				6F37FEC613EBE478003E33EF /* HLSWebViewController.m in Sources */,
 				6F37FEC713EBE478003E33EF /* HLSWizardViewController.m in Sources */,
 				DA2D58AE13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m in Sources */,
-				6F48D31913FD699400460C62 /* UIView+HLSUserInfo.m in Sources */,
 				6FDB130C1404D1C000469DEC /* CoconutKit_demoAppDelegate.m in Sources */,
 				6FDB130E1404D1C000469DEC /* CoconutKit_demoApplication.m in Sources */,
 				6FDB130F1404D1C000469DEC /* MultipleViewsAnimationDemoViewController.m in Sources */,
@@ -1297,6 +1296,7 @@
 				6FDB134D1404D1C000469DEC /* WizardDemoViewController.m in Sources */,
 				6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */,
 				6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */,
+				6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
