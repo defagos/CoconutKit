@@ -14,8 +14,8 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
-        self.title = @"HeavyViewController";
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
     }
     return self;
 }
@@ -41,6 +41,15 @@
     }
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HeavyViewController";
 }
 
 @end

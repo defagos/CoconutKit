@@ -14,8 +14,8 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
-        self.title = @"LifeCycleTestViewController";
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
     }
     return self;
 }
@@ -36,9 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.instructionLabel.text = NSLocalizedString(@"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)",
-                                                   @"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)");
     
     self.view.backgroundColor = [UIColor randomColor];    
     
@@ -111,6 +108,18 @@
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     HLSLoggerInfo(@"Called, fromInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"LifeCycleTestViewController";
+    
+    self.instructionLabel.text = NSLocalizedString(@"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)",
+                                                   @"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)");
 }
 
 @end

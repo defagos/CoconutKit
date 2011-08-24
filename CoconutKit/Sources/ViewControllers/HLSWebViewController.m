@@ -8,6 +8,7 @@
 
 #import "HLSWebViewController.h"
 
+#import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 
 @implementation HLSWebViewController
@@ -17,7 +18,7 @@
 
 - (id)initWithRequest:(NSURLRequest *)aRequest
 {
-	if ((self = [super initWithNibName:@"CoconutKit_HLSWebViewController" bundle:[NSBundle CoconutKitBundle]])) {
+	if ((self = [super initWithNibName:@"CoconutKit_HLSWebViewController" bundle:[NSBundle coconutKitBundle]])) {
 		request = [aRequest retain];
 	}
 	return self;
@@ -131,12 +132,11 @@
 	[self.webView loadRequest:self.webView.request];
 }
 
-- (IBAction)displayActionShet:(id)sender;
+- (IBAction)displayActionSheet:(id)sender;
 {
-	NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
-	NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", nil, uiKitBundle ?: [NSBundle mainBundle], @"");
-	NSString *openInSafari = NSLocalizedStringFromTableInBundle(@"Open in Safari", @"CoconutKit_Localizable", [NSBundle CoconutKitBundle], @"HLSWebViewController 'Open in Safari' action");
-	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTableInBundle(@"Mail Link", @"CoconutKit_Localizable", [NSBundle CoconutKitBundle], @"HLSWebViewController 'Mail Link' action") : nil;
+	NSString *cancel = HLSLocalizedStringFromUIKit(@"Cancel");
+	NSString *openInSafari = NSLocalizedStringFromTableInBundle(@"Open in Safari", @"CoconutKit_Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Open in Safari' action");
+	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTableInBundle(@"Mail Link", @"CoconutKit_Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Mail Link' action") : nil;
 	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString] delegate:self cancelButtonTitle:cancel destructiveButtonTitle:nil otherButtonTitles:openInSafari, mailLink, nil] autorelease];
 	[actionSheet showFromToolbar:self.toolbar];
 }

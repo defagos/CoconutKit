@@ -6,9 +6,10 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface CoconutKit_demoApplication : NSObject {
+@interface CoconutKit_demoApplication : NSObject <UIActionSheetDelegate> {
 @private
     UINavigationController *m_navigationController;
+    UIActionSheet *m_languageActionSheet;
 }
 
 - (UIViewController *)viewController;

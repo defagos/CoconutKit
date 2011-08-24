@@ -16,7 +16,7 @@
 
 @interface HLSPlaceholderViewController () <HLSAnimationDelegate>
 
-- (void)initialize;
+- (void)hlsPlaceholderViewControllerInit;
 
 @property (nonatomic, retain) HLSContainerContent *containerContent;
 @property (nonatomic, retain) HLSContainerContent *oldContainerContent;
@@ -34,7 +34,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self initialize];
+        [self hlsPlaceholderViewControllerInit];
     }
     return self;
 }
@@ -42,12 +42,12 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsPlaceholderViewControllerInit];
     }
     return self;
 }
 
-- (void)initialize
+- (void)hlsPlaceholderViewControllerInit
 {
     // Crate a dummy view controller with a transparent view; HLSContainerContent objects cannot manage nil
     self.containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
@@ -105,6 +105,11 @@
 }
 
 #pragma mark View lifecycle
+
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
 
 - (void)viewDidLoad
 {

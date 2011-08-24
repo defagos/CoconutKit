@@ -20,8 +20,8 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
-        self.title = @"MemoryWarningTestCoverViewController";
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
     }
     return self;
 }
@@ -46,12 +46,8 @@
 {
     [super viewDidLoad];
     
-    self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
     self.closeBarButtonItem.target = self;
     self.closeBarButtonItem.action = @selector(closeBarButtonItemClicked:);
-    
-    self.instructionLabel.text = NSLocalizedString(@"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct",
-                                                   @"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct");
 }
 
 #pragma mark Orientation management
@@ -70,6 +66,18 @@
 - (void)closeBarButtonItemClicked:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"MemoryWarningTestCoverViewController";
+    self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
+    self.instructionLabel.text = NSLocalizedString(@"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct",
+                                                   @"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct");
 }
 
 @end

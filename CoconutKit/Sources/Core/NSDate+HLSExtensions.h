@@ -9,6 +9,14 @@
 @interface NSDate (HLSExtensions)
 
 /**
+ * Convenience methods for date comparisons. Easier to read than - [NSDate compare:]
+ */
+- (BOOL)isEarlierThanDate:(NSDate *)date;
+- (BOOL)isEarlierThanOrEqualToDate:(NSDate *)date;
+- (BOOL)isLaterThanDate:(NSDate *)date;
+- (BOOL)isLaterThanOrEqualToDate:(NSDate *)date;
+
+/**
  * Return the date corresponding to noon the same day as the receiver (for the system calendar and time zone)
  */
 - (NSDate *)dateSameDayAtNoon;

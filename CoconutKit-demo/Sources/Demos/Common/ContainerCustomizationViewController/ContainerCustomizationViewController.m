@@ -27,8 +27,8 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
-        self.title = @"ContainerCustomizationViewController";
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
     }
     return self;
 }
@@ -56,8 +56,6 @@
 {
     [super viewDidLoad];
     
-    [self.changeButton setTitle:NSLocalizedString(@"Change", @"Change")
-                       forState:UIControlStateNormal];
     [self.changeButton addTarget:self
                           action:@selector(changeButtonClicked:)
                 forControlEvents:UIControlEventTouchUpInside];    
@@ -129,6 +127,16 @@
 - (void)changeButtonClicked:(id)sender
 {
     [self updateSkinRandomly];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"ContainerCustomizationViewController";
+    [self.changeButton setTitle:NSLocalizedString(@"Change", @"Change") forState:UIControlStateNormal];
 }
 
 @end

@@ -35,7 +35,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
 }
 
-+ (UITableViewCell *)tableViewCellForTableView:(UITableView *)tableView
++ (id)tableViewCellForTableView:(UITableView *)tableView
 {
     // Try to find if a cell is available for the cell class identifier
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];

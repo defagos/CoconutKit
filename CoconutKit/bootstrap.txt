@@ -4,6 +4,7 @@ HLSStripContainerView.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
+NSBundle+HLSDynamicLocalization.m
 NSBundle+HLSExtensions.m
 NSCalendar+HLSExtensions.m
 NSData+HLSExtensions.m
@@ -15,3 +16,4 @@ NSString+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
+UIView+HLSUserInfo.m
