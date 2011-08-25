@@ -21,9 +21,6 @@
 /* No remaining time estimate available */
 "No remaining time estimate available"="Aucune estimation du temps restant";
 
-/* Search */
-"Search"="Rechercher";
-
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Ouvrir dans Safari";
 
