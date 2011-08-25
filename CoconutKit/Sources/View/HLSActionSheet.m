@@ -143,32 +143,44 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         }        
     }
     
-    [self.realDelegate actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
+    if ([self.realDelegate respondsToSelector:@selector(actionSheet:clickedButtonAtIndex:)]) {
+        [self.realDelegate actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
+    }
 }
 
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet
 {
-    [self.realDelegate actionSheetCancel:actionSheet];
+    if ([self.realDelegate respondsToSelector:@selector(actionSheetCancel:)]) {
+        [self.realDelegate actionSheetCancel:actionSheet];
+    }
 }
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {
-    [self.realDelegate willPresentActionSheet:actionSheet];
+    if ([self.delegate respondsToSelector:@selector(willPresentActionSheet:)]) {
+        [self.realDelegate willPresentActionSheet:actionSheet];
+    }
 }
 
 - (void)didPresentActionSheet:(UIActionSheet *)actionSheet
 {
-    [self.realDelegate didPresentActionSheet:actionSheet];
+    if ([self.realDelegate respondsToSelector:@selector(didPresentActionSheet:)]) {
+        [self.realDelegate didPresentActionSheet:actionSheet];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self.realDelegate actionSheet:actionSheet willDismissWithButtonIndex:buttonIndex];
+    if ([self.delegate respondsToSelector:@selector(actionSheet:willDismissWithButtonIndex:)]) {
+        [self.realDelegate actionSheet:actionSheet willDismissWithButtonIndex:buttonIndex];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self.realDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+    if ([self.delegate respondsToSelector:@selector(actionSheet:didDismissWithButtonIndex:)]) {
+        [self.realDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+    }
 }
 
 @end

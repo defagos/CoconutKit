@@ -19,6 +19,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) UIImage *refreshImage;
 

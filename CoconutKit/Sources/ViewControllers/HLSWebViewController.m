@@ -8,85 +8,103 @@
 
 #import "HLSWebViewController.h"
 
+#import "HLSActionSheet.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
+
+@interface HLSWebViewController ()
+
+@property (nonatomic, retain) HLSActionSheet *actionSheet;
+
+- (void)openInSafari:(id)sender;
+- (void)mailLink:(id)sender;
+
+@end
 
 @implementation HLSWebViewController
 
 @synthesize request;
-@synthesize webView, toolbar, goBackButtonItem, goForwardButtonItem, refreshButtonItem, activityIndicator, refreshImage;
+@synthesize webView, toolbar, goBackButtonItem, goForwardButtonItem, refreshButtonItem, actionButtonItem, activityIndicator, refreshImage, actionSheet;
 
 - (id)initWithRequest:(NSURLRequest *)aRequest
 {
-	if ((self = [super initWithNibName:@"CoconutKit_HLSWebViewController" bundle:[NSBundle coconutKitBundle]])) {
-		request = [aRequest retain];
-	}
-	return self;
+    if ((self = [super initWithNibName:@"CoconutKit_HLSWebViewController" bundle:nil])) {
+        request = [aRequest retain];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[request release];
-	[super dealloc];
+    [request release];
+    [super dealloc];
 }
 
 - (void)updateView
 {
-	self.goBackButtonItem.enabled = self.webView.canGoBack;
-	self.goForwardButtonItem.enabled = self.webView.canGoForward;
-	self.refreshButtonItem.enabled = !self.activityIndicator.isAnimating;
-	self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : self.refreshImage; //[UIImage imageNamed:@"CoconutKit_ButtonBarRefresh.png" inBundle:[NSBundle CoconutKitBundle]];
+    self.goBackButtonItem.enabled = self.webView.canGoBack;
+    self.goForwardButtonItem.enabled = self.webView.canGoForward;
+    self.refreshButtonItem.enabled = !self.activityIndicator.isAnimating;
+    self.refreshButtonItem.image = self.activityIndicator.isAnimating ? nil : self.refreshImage;
 }
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
-	self.refreshImage = self.refreshButtonItem.image;
-	[self.webView loadRequest:self.request];
+    [super viewDidLoad];
+    self.refreshImage = self.refreshButtonItem.image;
+    [self.webView loadRequest:self.request];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	[super viewWillAppear:animated];
-	[self updateView];
+    [super viewWillAppear:animated];
+    [self updateView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+        return NO;
+    }
+    
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
-	self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-	self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
-	
-	UIBarButtonItem *fixedSpaceLeft = [self.toolbar.items objectAtIndex:2];
-	UIBarButtonItem *fixedSpaceRight = [self.toolbar.items objectAtIndex:6];
-	CGFloat activityIndicatorYPosition = CGRectGetMinY(self.toolbar.frame) + roundf(toolbarSize.height / 2.0f);
-	if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
-	{
-		fixedSpaceLeft.width = fixedSpaceRight.width = 40.0f;
-		activityIndicator.center = CGPointMake(214, activityIndicatorYPosition);
-	}
-	else
-	{
-		fixedSpaceLeft.width = fixedSpaceRight.width = 83.0f;
-		activityIndicator.center = CGPointMake(334, activityIndicatorYPosition);
-	}
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
+    self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
+    self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
+    
+    UIBarButtonItem *fixedSpaceLeft = [self.toolbar.items objectAtIndex:2];
+    UIBarButtonItem *fixedSpaceRight = [self.toolbar.items objectAtIndex:6];
+    CGFloat activityIndicatorYPosition = CGRectGetMinY(self.toolbar.frame) + roundf(toolbarSize.height / 2.0f);
+    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
+    {
+        fixedSpaceLeft.width = fixedSpaceRight.width = 40.0f;
+        activityIndicator.center = CGPointMake(214, activityIndicatorYPosition);
+    }
+    else
+    {
+        fixedSpaceLeft.width = fixedSpaceRight.width = 83.0f;
+        activityIndicator.center = CGPointMake(334, activityIndicatorYPosition);
+    }
 }
 
 - (void)releaseViews
 {
-	[super releaseViews];
-	self.webView = nil;
-	self.toolbar = nil;
-	self.goBackButtonItem = nil;
-	self.goForwardButtonItem = nil;
-	self.refreshButtonItem = nil;
-	self.activityIndicator = nil;
-	self.refreshImage = nil;
+    [super releaseViews];
+    self.webView = nil;
+    self.toolbar = nil;
+    self.goBackButtonItem = nil;
+    self.goForwardButtonItem = nil;
+    self.refreshButtonItem = nil;
+    self.actionButtonItem = nil;
+    self.activityIndicator = nil;
+    self.refreshImage = nil;
+    self.actionSheet = nil;
 }
 
 // MARK: -
@@ -94,22 +112,22 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[self.activityIndicator startAnimating];
-	[self updateView];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self.activityIndicator startAnimating];
+    [self updateView];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)aWebView
 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	[self.activityIndicator stopAnimating];
-	self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-	[self updateView];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.activityIndicator stopAnimating];
+    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self updateView];
 }
 
 - (void)webView:(UIWebView *)aWebView didFailLoadWithError:(NSError *)error;
 {
-	[self webViewDidFinishLoad:aWebView];
+    [self webViewDidFinishLoad:aWebView];
 }
 
 // MARK: -
@@ -117,67 +135,69 @@
 
 - (IBAction)goBack:(id)sender
 {
-	[self.webView goBack];
-	[self updateView];
+    [self.webView goBack];
+    [self updateView];
 }
 
 - (IBAction)goForward:(id)sender
 {
-	[self.webView goForward];
-	[self updateView];
+    [self.webView goForward];
+    [self updateView];
 }
 
 - (IBAction)refresh:(id)sender
 {
-	[self.webView loadRequest:self.webView.request];
+    [self.webView loadRequest:self.webView.request];
 }
 
 - (IBAction)displayActionSheet:(id)sender;
-{
-	NSString *cancel = HLSLocalizedStringFromUIKit(@"Cancel");
-	NSString *openInSafari = NSLocalizedStringFromTableInBundle(@"Open in Safari", @"CoconutKit_Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Open in Safari' action");
-	NSString *mailLink = [MFMailComposeViewController canSendMail] ? NSLocalizedStringFromTableInBundle(@"Mail Link", @"CoconutKit_Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Mail Link' action") : nil;
-	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString] delegate:self cancelButtonTitle:cancel destructiveButtonTitle:nil otherButtonTitles:openInSafari, mailLink, nil] autorelease];
-	[actionSheet showFromToolbar:self.toolbar];
+{    
+    if (self.actionSheet) {
+        [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:YES];
+    }
+    else {    
+        self.actionSheet = [[[HLSActionSheet alloc] init] autorelease];
+        self.actionSheet.delegate = self;
+        self.actionSheet.title = [self.webView.request.URL absoluteString];
+        [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
+                                            target:nil
+                                            action:NULL];
+        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_localizable", @"HLSWebViewController 'Open in Safari' action")
+                                      target:self
+                                      action:@selector(openInSafari:)];
+        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_localizable", @"HLSWebViewController 'Mail Link' action")
+                                      target:self
+                                      action:@selector(mailLink:)];
+        [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
+    }
 }
 
 // MARK: -
 // MARK: Action Sheet
 
-- (void)openInBrowser
-{
-	[[UIApplication sharedApplication] openURL:self.webView.request.URL];
-}
-
-- (void)mailLink
-{
-	MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-	mailComposeViewController.mailComposeDelegate = self;
-	[mailComposeViewController setSubject:self.title];
-	[mailComposeViewController setMessageBody:[self.webView.request.URL absoluteString] isHTML:NO];
-	[self presentModalViewController:mailComposeViewController animated:YES];
-	[mailComposeViewController release];
-}
-
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-	[self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)openInSafari:(id)sender
 {
-	if (buttonIndex == actionSheet.cancelButtonIndex)
-		return;
-	
-	switch (buttonIndex)
-	{
-		case 0:
-			[self openInBrowser];
-			break;
-		case 1:
-			[self mailLink];
-			break;
-	}
+    [[UIApplication sharedApplication] openURL:self.webView.request.URL];
+}
+
+- (void)mailLink:(id)sender
+{
+    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+    mailComposeViewController.mailComposeDelegate = self;
+    [mailComposeViewController setSubject:self.title];
+    [mailComposeViewController setMessageBody:[self.webView.request.URL absoluteString] isHTML:NO];
+    [self presentModalViewController:mailComposeViewController animated:YES];
+    [mailComposeViewController release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    self.actionSheet = nil;
 }
 
 @end
