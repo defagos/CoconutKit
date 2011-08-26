@@ -10,18 +10,23 @@
 
 #import "HLSAssert.h"
 
+// Only one action sheet can be opened at a time. Remember it here
+static HLSActionSheet *s_actionSheet = nil;                 // weak ref
+
+// Variables used to fix UIActionShet behavior when shown from a bar button. See .h documentation
+static UIBarButtonItem *s_barButtonItem = nil;              // strong ref
+static id s_barButtonItemTarget = nil;                      // weak ref
+static SEL s_barButtonItemAction = NULL;
+static BOOL s_barButtonItemShowAnimated = NO;
+
 @interface HLSActionSheet () <UIActionSheetDelegate>
 
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *barButtonItem;
-@property (nonatomic, assign) id barButtonItemTarget;       // weak ref
-@property (nonatomic, assign) SEL barButtonItemAction;
 @property (nonatomic, assign) id<UIActionSheetDelegate> realDelegate;
 
 - (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated;
 - (void)restoreBehaviorOfBarButtonItem;
-
 
 - (void)dismissActionSheetForBarButtonItem:(id)sender;
 
@@ -56,8 +61,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 {
     self.targets = nil;
     self.actions = nil;
-    self.barButtonItem = nil;
-    self.barButtonItemTarget = nil;
     self.realDelegate = nil;
     
     [super dealloc];
@@ -132,12 +135,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 @synthesize actions = m_actions;
 
-@synthesize barButtonItem = m_barButtonItem;
-
-@synthesize barButtonItemTarget = m_barButtonItemTarget;
-
-@synthesize barButtonItemAction = m_barButtonItemAction;
-
 @synthesize realDelegate = m_realDelegate;
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex
@@ -152,39 +149,92 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 #pragma mark Showing the action sheet
 
+- (void)showFromToolbar:(UIToolbar *)toolbar
+{
+    // If an action sheet was visible, dismiss it first
+    if (s_actionSheet) {
+       [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
+    }
+    s_actionSheet = self;
+    [super showFromToolbar:toolbar];
+}
+
+- (void)showFromTabBar:(UITabBar *)tabBar
+{
+    // If an action sheet was visible, dismiss it first
+    if (s_actionSheet) {
+        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
+    }
+    s_actionSheet = self;
+    [super showFromTabBar:tabBar];
+}
+
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
+    // If an action sheet was visible, dismiss it first
+    if (s_actionSheet) {
+        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
+        animated = NO;
+    }
+    
+    // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
     [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
+    
+    s_actionSheet = self;
     [super showFromBarButtonItem:barButtonItem animated:animated];    
 }
 
+- (void)showFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
+{
+    // If an action sheet was visible, dismiss it first
+    if (s_actionSheet) {
+        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
+        animated = NO;
+    }
+    s_actionSheet = self;
+    [super showFromRect:rect inView:view animated:animated];
+}
+
+- (void)showInView:(UIView *)view
+{
+    // If an action sheet was visible, dismiss it first
+    if (s_actionSheet) {
+        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
+    }
+    s_actionSheet = self;
+    [super showInView:view];
+}
+
+#pragma mark Fixing special case of bar button items
+
 - (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
-    if (self.barButtonItem) {
-        HLSLoggerWarn(@"A bar button item has already been modified");
+    if (s_barButtonItem) {
+        HLSLoggerWarn(@"A button behavior has already been replaced");
         return;
     }
     
-    self.barButtonItem = barButtonItem;
-    self.barButtonItemTarget = barButtonItem.target;
-    self.barButtonItemAction = barButtonItem.action;
-    m_barButtonItemShowAnimated = animated;
+    s_barButtonItem = [barButtonItem retain];
+    s_barButtonItemTarget = barButtonItem.target;
+    s_barButtonItemAction = barButtonItem.action;
+    s_barButtonItemShowAnimated = animated;
     
-    barButtonItem.target = self;
-    barButtonItem.action = @selector(dismissActionSheetForBarButtonItem:);
+    s_barButtonItem.target = self;
+    s_barButtonItem.action = @selector(dismissActionSheetForBarButtonItem:);
 }
 
 - (void)restoreBehaviorOfBarButtonItem
 {
-    if (! self.barButtonItem) {
+    if (! s_barButtonItem) {
         return;
     }
     
-    self.barButtonItem.target = m_barButtonItemTarget;
-    self.barButtonItem.action = m_barButtonItemAction;
-    m_barButtonItemShowAnimated = NO;
+    s_barButtonItem.target = s_barButtonItemTarget;
+    s_barButtonItem.action = s_barButtonItemAction;
+    s_barButtonItemShowAnimated = NO;
     
-    self.barButtonItem = nil;
+    [s_barButtonItem release];
+    s_barButtonItem = nil;
 }
 
 #pragma mark UIActionSheetDelegate protocol implementation
@@ -239,14 +289,18 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         [self.realDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
     }
     
+    // Pop-up dismissed. If it was presented by a bar button item, this is not the case anymore. Restore
+    // original behavior
     [self restoreBehaviorOfBarButtonItem];
+    
+    s_actionSheet = nil;
 }
 
 #pragma mark Action callbacks
 
 - (void)dismissActionSheetForBarButtonItem:(id)sender
 {
-    [self dismissWithClickedButtonIndex:self.cancelButtonIndex animated:m_barButtonItemShowAnimated];
+    [self dismissWithClickedButtonIndex:self.cancelButtonIndex animated:s_barButtonItemShowAnimated];
 }
 
 @end

@@ -11,14 +11,26 @@
  * some context. Imagine for example a menu letting you take a picture using the camera, or choose one
  * from your library. If either one is unavailable for some reason, the corresponding option should not
  * be displayed in the menu. In such cases it is rather inconvenient for the delegate to implement the 
- * actionSheet:clickedButtonAtIndex:, since the index it receives does not always correspond to the
- * same action depending on which actions buttons were actually available.
+ * actionSheet:clickedButtonAtIndex: protocol method, since the index it receives does not always correspond 
+ * to the same action depending on which actions buttons were actually available.
  *
- * The HLSActionSheet class solves both issues. When creating an action sheet, you add buttons to
- * it, attaching targets and actions as you would for a button. This makes it easy to keep your
- * code well organized.
+ * Moreover, UIActionSheet has a strange behavior on the iPad: When an action sheet is shown, it usually 
+ * can be dismissed when the user taps outside it. The only exception is when the action sheet is shown
+ * from a bar button item: In such cases, all toolbar buttons (in the same toolbar) remain active, including 
+ * of course the one which shows the action sheet. Tapping outside an action sheet therefore does not 
+ * dismiss it if the tap occurs in the same toolbar which the button showing it belongs to. In such cases, 
+ * additional code has to be written by clients so that the behavior stays correct, which means:
+ *   - avoiding the user to be able to stack up action sheets by repeatedly tapping the same bar button item
+ *   - if a toolbar contains several buttons opening action sheets, and if a bar button with some action sheet
+ *     is tapped while another action sheet for another bar button is visible, the currently visible
+ *     sheet should be dismissed without animation, while the new one is made visible without animation
+ *     as well. This is what Safari does, for example.
+ *
+ * The HLSActionSheet class solves all the above issues. When creating an action sheet, you add buttons to
+ * it, attaching targets and actions as you would for a button. This makes it easy to keep your code well 
+ * organized. Moreover, correct behavior with bar buttons is guaranteed.
  * 
- * To create an action sheet menu, you now proceed as follows:
+ * To create and display an HLSActionSheet object, proceed as follows:
  *   - initialize the object using the init method (the designated intializer inherited from
  *     UIActionSheet cannot be used anymore)
  *   - further customize the action sheet using the properties inherited from UIActionSheet (if
@@ -27,7 +39,7 @@
  *   - add the buttons in the order you want them displayed on screen, using the add... methods
  * Then display the HLSActionSheet using the show... methods inherited from UIActionSheet.
  *
- * Wherever you use a UIActionSheet, you can replace it with an HLSActionSheet with little effort.
+ * Wherever you used a UIActionSheet, you can replace it with an HLSActionSheet with little effort.
  * HLSActionSheet is not strictly a drop-in replacement for UIActionSheet, but almost. In general,
  * all you have to do is replacing the 
  *     initWithTitle:delegate:cancelButtonTitle:destructiveButtonTitle:otherButtonTitles:
@@ -36,7 +48,8 @@
  *
  * Remarks:
  *   - You can still have a delegate if you want. It will catch the exact same events as if you had used
- *     a built-in UIActionSheet.
+ *     a built-in UIActionSheet. This is useful for menus letting you choose a value from a set of elements
+ *     (e.g. a set of languages given by the system)
  *   - iPad: If you tap outside the pop-up, the protocol methods
  *        actionSheet:clickedButtonAtIndex:
  *        actionSheet:willDismissWithButtonIndex:
@@ -50,10 +63,6 @@
 @private
     NSArray *m_targets;
     NSArray *m_actions;
-    UIBarButtonItem *m_barButtonItem;
-    id m_barButtonItemTarget;
-    SEL m_barButtonItemAction;
-    BOOL m_barButtonItemShowAnimated;
     id<UIActionSheetDelegate> m_realDelegate;
 }
 

@@ -40,6 +40,7 @@
     self.showInViewButton = nil;
     self.toolbar = nil;
     self.showFromToolbarBarButtonItem = nil;
+    self.otherShowFromToolbarBarButtonItem = nil;
     self.showFromBarButtonItemBarButtonItem = nil;
     self.choiceLabel = nil;
 }
@@ -53,6 +54,8 @@
 @synthesize toolbar = m_toolbar;
 
 @synthesize showFromToolbarBarButtonItem = m_showFromToolbarBarButtonItem;
+
+@synthesize otherShowFromToolbarBarButtonItem = m_otherShowFromToolbarBarButtonItem;
 
 @synthesize showFromBarButtonItemBarButtonItem = m_showFromBarButtonItemBarButtonItem;
 
@@ -88,6 +91,7 @@
     [self.showFromRectButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
     [self.showInViewButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
     self.showFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
+    self.otherShowFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
     self.showFromBarButtonItemBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
 }
 
@@ -138,8 +142,9 @@
 
 - (IBAction)makeChoiceFromBarButtonItem:(id)sender
 {
+    UIBarButtonItem *barButtonItem = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromBarButtonItem:self.showFromBarButtonItemBarButtonItem 
+    [actionSheet showFromBarButtonItem:barButtonItem
                               animated:YES];
 }
 
