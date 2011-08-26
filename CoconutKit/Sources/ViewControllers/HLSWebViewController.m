@@ -152,24 +152,19 @@
 
 - (IBAction)displayActionSheet:(id)sender;
 {    
-    if (self.actionSheet) {
-        [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:YES];
-    }
-    else {    
-        self.actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-        self.actionSheet.delegate = self;
-        self.actionSheet.title = [self.webView.request.URL absoluteString];
-        [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
-                                            target:nil
-                                            action:NULL];
-        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_localizable", @"HLSWebViewController 'Open in Safari' action")
-                                      target:self
-                                      action:@selector(openInSafari:)];
-        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_localizable", @"HLSWebViewController 'Mail Link' action")
-                                      target:self
-                                      action:@selector(mailLink:)];
-        [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
-    }
+    self.actionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    self.actionSheet.delegate = self;
+    self.actionSheet.title = [self.webView.request.URL absoluteString];
+    [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
+                                        target:nil
+                                        action:NULL];
+    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_localizable", @"HLSWebViewController 'Open in Safari' action")
+                                  target:self
+                                  action:@selector(openInSafari:)];
+    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_localizable", @"HLSWebViewController 'Mail Link' action")
+                                  target:self
+                                  action:@selector(mailLink:)];
+    [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
 }
 
 // MARK: -

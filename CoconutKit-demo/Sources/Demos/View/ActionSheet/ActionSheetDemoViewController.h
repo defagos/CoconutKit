@@ -8,13 +8,24 @@
 
 @interface ActionSheetDemoViewController : HLSViewController {
 @private
-    UIButton *m_actionSheetButton;
+    UIButton *m_showFromRectButton;
+    UIButton *m_showInViewButton;
+    UIToolbar *m_toolbar;
+    UIBarButtonItem *m_showFromToolbarBarButtonItem;
+    UIBarButtonItem *m_showFromBarButtonItemBarButtonItem;
     UILabel *m_choiceLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *actionSheetButton;
+@property (nonatomic, retain) IBOutlet UIButton *showFromRectButton;
+@property (nonatomic, retain) IBOutlet UIButton *showInViewButton;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *showFromToolbarBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *showFromBarButtonItemBarButtonItem;
 @property (nonatomic, retain) IBOutlet UILabel *choiceLabel;
 
-- (IBAction)makeChoice:(id)sender;
+- (IBAction)makeChoiceFromRect:(id)sender;
+- (IBAction)makeChoiceInView:(id)sender;
+- (IBAction)makeChoiceFromToolbar:(id)sender;
+- (IBAction)makeChoiceFromBarButtonItem:(id)sender;
 
 @end

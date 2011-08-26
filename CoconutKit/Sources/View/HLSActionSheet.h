@@ -50,6 +50,10 @@
 @private
     NSArray *m_targets;
     NSArray *m_actions;
+    UIBarButtonItem *m_barButtonItem;
+    id m_barButtonItemTarget;
+    SEL m_barButtonItemAction;
+    BOOL m_barButtonItemShowAnimated;
     id<UIActionSheetDelegate> m_realDelegate;
 }
 

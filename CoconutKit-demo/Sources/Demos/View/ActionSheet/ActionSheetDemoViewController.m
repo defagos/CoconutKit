@@ -10,6 +10,8 @@
 
 @interface ActionSheetDemoViewController ()
 
+- (HLSActionSheet *)actionSheetForChoice;
+
 - (void)choose1:(id)sender;
 - (void)choose2:(id)sender;
 - (void)choose3:(id)sender;
@@ -34,13 +36,25 @@
 {
     [super releaseViews];
     
-    self.actionSheetButton = nil;
+    self.showFromRectButton = nil;
+    self.showInViewButton = nil;
+    self.toolbar = nil;
+    self.showFromToolbarBarButtonItem = nil;
+    self.showFromBarButtonItemBarButtonItem = nil;
     self.choiceLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize actionSheetButton = m_actionSheetButton;
+@synthesize showFromRectButton = m_showFromRectButton;
+
+@synthesize showInViewButton = m_showInViewButton;
+
+@synthesize toolbar = m_toolbar;
+
+@synthesize showFromToolbarBarButtonItem = m_showFromToolbarBarButtonItem;
+
+@synthesize showFromBarButtonItemBarButtonItem = m_showFromBarButtonItemBarButtonItem;
 
 @synthesize choiceLabel = m_choiceLabel;
 
@@ -71,12 +85,15 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Action sheet", @"Action sheet");
-    [self.actionSheetButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
+    [self.showFromRectButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
+    [self.showInViewButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
+    self.showFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
+    self.showFromBarButtonItemBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
 }
 
-#pragma mark Event callbacks
+#pragma mark Common action sheet code
 
-- (IBAction)makeChoice:(id)sender
+- (HLSActionSheet *)actionSheetForChoice
 {
     HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
     [actionSheet addDestructiveButtonWithTitle:NSLocalizedString(@"Reset", @"Reset") 
@@ -94,10 +111,36 @@
     [actionSheet addButtonWithTitle:@"4"
                              target:self
                              action:@selector(choose4:)];
-    [actionSheet showFromRect:self.actionSheetButton.frame
+    return actionSheet;
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)makeChoiceFromRect:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromRect:self.showFromRectButton.frame
                        inView:self.view 
                      animated:YES];
+}
 
+- (IBAction)makeChoiceInView:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showInView:self.view];
+}
+
+- (IBAction)makeChoiceFromToolbar:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromToolbar:self.toolbar];
+}
+
+- (IBAction)makeChoiceFromBarButtonItem:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromBarButtonItem:self.showFromBarButtonItemBarButtonItem 
+                              animated:YES];
 }
 
 - (void)choose1:(id)sender

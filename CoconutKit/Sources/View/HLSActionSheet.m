@@ -10,13 +10,20 @@
 
 #import "HLSAssert.h"
 
-// TODO: When implemented, check all methods of the UIActionSheet interface
-
 @interface HLSActionSheet () <UIActionSheetDelegate>
 
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *barButtonItem;
+@property (nonatomic, assign) id barButtonItemTarget;       // weak ref
+@property (nonatomic, assign) SEL barButtonItemAction;
 @property (nonatomic, assign) id<UIActionSheetDelegate> realDelegate;
+
+- (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated;
+- (void)restoreBehaviorOfBarButtonItem;
+
+
+- (void)dismissActionSheetForBarButtonItem:(id)sender;
 
 @end
 
@@ -49,6 +56,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 {
     self.targets = nil;
     self.actions = nil;
+    self.barButtonItem = nil;
+    self.barButtonItemTarget = nil;
     self.realDelegate = nil;
     
     [super dealloc];
@@ -101,7 +110,12 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 {
     self.targets = [self.targets arrayByAddingObject:[NSValue valueWithPointer:target]];
     self.actions = [self.actions arrayByAddingObject:[NSValue valueWithPointer:action]];
-    return [self addButtonWithTitle:title];
+    return [super addButtonWithTitle:title];
+}
+
+- (NSInteger)addButtonWithTitle:(NSString *)title
+{
+    return [self addButtonWithTitle:title target:nil action:NULL];
 }
 
 - (id<UIActionSheetDelegate>)delegate
@@ -118,6 +132,12 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 @synthesize actions = m_actions;
 
+@synthesize barButtonItem = m_barButtonItem;
+
+@synthesize barButtonItemTarget = m_barButtonItemTarget;
+
+@synthesize barButtonItemAction = m_barButtonItemAction;
+
 @synthesize realDelegate = m_realDelegate;
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex
@@ -128,6 +148,43 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)setDestructiveButtonIndex:(NSInteger)destructiveButtonIndex
 {
     HLSLoggerError(@"Use addDestructiveButtonWithTitle:withTarget:action to set the cancel button");
+}
+
+#pragma mark Showing the action sheet
+
+- (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
+{
+    [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
+    [super showFromBarButtonItem:barButtonItem animated:animated];    
+}
+
+- (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
+{
+    if (self.barButtonItem) {
+        HLSLoggerWarn(@"A bar button item has already been modified");
+        return;
+    }
+    
+    self.barButtonItem = barButtonItem;
+    self.barButtonItemTarget = barButtonItem.target;
+    self.barButtonItemAction = barButtonItem.action;
+    m_barButtonItemShowAnimated = animated;
+    
+    barButtonItem.target = self;
+    barButtonItem.action = @selector(dismissActionSheetForBarButtonItem:);
+}
+
+- (void)restoreBehaviorOfBarButtonItem
+{
+    if (! self.barButtonItem) {
+        return;
+    }
+    
+    self.barButtonItem.target = m_barButtonItemTarget;
+    self.barButtonItem.action = m_barButtonItemAction;
+    m_barButtonItemShowAnimated = NO;
+    
+    self.barButtonItem = nil;
 }
 
 #pragma mark UIActionSheetDelegate protocol implementation
@@ -181,6 +238,15 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if ([self.delegate respondsToSelector:@selector(actionSheet:didDismissWithButtonIndex:)]) {
         [self.realDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
     }
+    
+    [self restoreBehaviorOfBarButtonItem];
+}
+
+#pragma mark Action callbacks
+
+- (void)dismissActionSheetForBarButtonItem:(id)sender
+{
+    [self dismissWithClickedButtonIndex:self.cancelButtonIndex animated:m_barButtonItemShowAnimated];
 }
 
 @end
