@@ -9,6 +9,7 @@
 #import "HLSActionSheet.h"
 
 #import "HLSAssert.h"
+#import "HLSLogger.h"
 
 // Only one action sheet can be opened at a time. Remember it here
 static HLSActionSheet *s_actionSheet = nil;                 // weak ref
