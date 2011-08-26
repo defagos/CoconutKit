@@ -5,7 +5,7 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Hortis. All rights reserved.
  */
- 
+"Action sheet"="Menu action"; 
 "Add (center - length)"="Ajout (centre - longueur)";
 "All"="Tous";
 "All fields are mandatory"="Tous les champs sont obligatoires";
@@ -15,6 +15,7 @@
 "Animation"="Animation";
 "Change"="Changer";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
+"Choose"="Choisir";
 "City"="Ville";
 "Clear"="Effacer";
 "Close"="Fermer";
@@ -61,6 +62,7 @@
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
+"Reset"="Mettre à zéro";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Split (position)"="Séparer (position)";
