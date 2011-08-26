@@ -5,7 +5,7 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Hortis. All rights reserved.
  */
-
+"Action sheet"="Action sheet";
 "All"="All";
 "All fields are mandatory"="All fields are mandatory";
 "All fields have been validated"="All fields have been validated";
@@ -14,6 +14,7 @@
 "Animation"="Animation";
 "Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
+"Choose"="Choose";
 "City"="City";
 "Close"="Close";
 "Congratulations"="Congratulations";
@@ -57,6 +58,7 @@
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
+"Reset"="Reset";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Start"="Start";

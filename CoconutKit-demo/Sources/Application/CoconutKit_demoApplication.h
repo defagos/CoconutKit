@@ -9,7 +9,7 @@
 @interface CoconutKit_demoApplication : NSObject <UIActionSheetDelegate> {
 @private
     UINavigationController *m_navigationController;
-    UIActionSheet *m_languageActionSheet;
+    HLSActionSheet *m_languageActionSheet;
 }
 
 - (UIViewController *)viewController;

@@ -16,7 +16,7 @@
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
 
 @property (nonatomic, retain) UINavigationController *navigationController;
-@property (nonatomic, retain) UIActionSheet *languageActionSheet;
+@property (nonatomic, retain) HLSActionSheet *languageActionSheet;
 
 @end
 
@@ -48,19 +48,12 @@
 
 - (void)toggleLanguageSheet:(id)sender
 {
-    if (!self.languageActionSheet) {
-        self.languageActionSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil] autorelease];
-        for (NSString *localization in [[NSBundle mainBundle] localizations]) {
-            [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
-        }
+    self.languageActionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    self.languageActionSheet.delegate = self;
+    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
+        [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
     }
-    
-    if (self.languageActionSheet.isVisible) {
-        [self.languageActionSheet dismissWithClickedButtonIndex:self.languageActionSheet.cancelButtonIndex animated:YES];
-    }
-    else {
-        [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
-    }
+    [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex

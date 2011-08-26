@@ -7,6 +7,7 @@
     #import <MessageUI/MessageUI.h>
 
     // CoconutKit library public header files
+    #import "HLSActionSheet.h"
     #import "HLSAnimation.h"
     #import "HLSAnimationStep.h"
     #import "HLSAssert.h"

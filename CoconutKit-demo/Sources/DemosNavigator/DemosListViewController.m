@@ -8,6 +8,7 @@
 
 #import "DemosListViewController.h"
 
+#import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
@@ -56,6 +57,7 @@ typedef enum {
     ViewDemoIndexTextFieldsFixed,
     ViewDemoIndexTextFieldsLarge,
     ViewDemoIndexCursor,
+    ViewDemoIndexActionSheet,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -251,6 +253,11 @@ typedef enum {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
                     break;
                 }
+                    
+                case ViewDemoIndexActionSheet: {
+                    cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
+                    break;
+                }
                 
                 default: {
                     return nil;
@@ -363,6 +370,11 @@ typedef enum {
                     
                 case ViewDemoIndexCursor: {
                     demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexActionSheet: {
+                    demoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

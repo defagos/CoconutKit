@@ -14,6 +14,8 @@
 		6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */; };
 		6F1A58FE13AB86920029B714 /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58FD13AB86920029B714 /* icn_folder.png */; };
+		6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */; };
+		6F1C64BB14066B0B006F63FC /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */; };
 		6F48D34313FD71C000460C62 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48D33013FD71C000460C62 /* CoconutKit_bootstrap.m */; };
 		6F48D34413FD71C000460C62 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F48D33113FD71C000460C62 /* CoconutKit.framework */; };
 		6F48D34513FD71C000460C62 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48D33313FD71C000460C62 /* CoconutKit_ButtonBarArrowLeft.png */; };
@@ -113,6 +115,9 @@
 		6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6F1A58FD13AB86920029B714 /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
+		6F1C64B714066AF7006F63FC /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
+		6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
+		6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
 		6F48D33013FD71C000460C62 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F48D33113FD71C000460C62 /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F48D33313FD71C000460C62 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -312,6 +317,16 @@
 				6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6F1C64B314066AD0006F63FC /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				6F1C64B714066AF7006F63FC /* ActionSheetDemoViewController.h */,
+				6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */,
+				6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */,
+			);
+			path = ActionSheet;
 			sourceTree = "<group>";
 		};
 		6F48D32E13FD71C000460C62 /* CoconutKit-trunk-Release.staticframework */ = {
@@ -567,6 +582,7 @@
 		6F93C64C1404CE0600FEC9B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F1C64B314066AD0006F63FC /* ActionSheet */,
 				6F93C64D1404CE0600FEC9B0 /* Cursor */,
 				6F93C65D1404CE0600FEC9B0 /* TableViewCells */,
 				6F93C66B1404CE0600FEC9B0 /* TextFields */,
@@ -831,6 +847,7 @@
 				6F93C6CA1404CE0700FEC9B0 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6F93C6CD1404CE0700FEC9B0 /* WizardDemoViewController.xib in Resources */,
 				6F93C6CF1404CE0700FEC9B0 /* WizardPageViewController.xib in Resources */,
+				6F1C64BB14066B0B006F63FC /* ActionSheetDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +896,7 @@
 				6F93C6CC1404CE0700FEC9B0 /* WizardDemoViewController.m in Sources */,
 				6F93C6CE1404CE0700FEC9B0 /* WizardPageViewController.m in Sources */,
 				6F93C6D01404CE0700FEC9B0 /* DemosListViewController.m in Sources */,
+				6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
 		6F37FE8613EBE478003E33EF /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD113EBE478003E33EF /* CoconutKit_Localizable.strings */; };
 		6F37FE8713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F37FE8813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -148,6 +149,8 @@
 		6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB13031404D1C000469DEC /* DemosListViewController.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
+		6FF935851406AB7A00649482 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */; };
+		6FF935861406AB7A00649482 /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF935841406AB7A00649482 /* ActionSheetDemoViewController.xib */; };
 		DA2D58AE13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2D58AD13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +160,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F133FF913FBB79300B53677 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
+		6F1C649214061273006F63FC /* HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSActionSheet.h; sourceTree = "<group>"; };
+		6F1C649314061273006F63FC /* HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSActionSheet.m; sourceTree = "<group>"; };
 		6F37FDD313EBE478003E33EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD513EBE478003E33EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -391,6 +396,9 @@
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit_dev_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_dev_Prefix.pch; sourceTree = "<group>"; };
 		6FEF8555131F77490015B57C /* CoconutKit_dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit_dev-Info.plist"; sourceTree = "<group>"; };
+		6FF935821406AB7A00649482 /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
+		6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
+		6FF935841406AB7A00649482 /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
 		DA2D58AC13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		DA2D58AD13F905DD00F8C9E6 /* NSBundle+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -605,6 +613,8 @@
 		6F37FE3F13EBE478003E33EF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F1C649214061273006F63FC /* HLSActionSheet.h */,
+				6F1C649314061273006F63FC /* HLSActionSheet.m */,
 				6F37FE4013EBE478003E33EF /* HLSCursor.h */,
 				6F37FE4113EBE478003E33EF /* HLSCursor.m */,
 				6F37FE4913EBE478003E33EF /* HLSSubtitleTableViewCell.h */,
@@ -945,6 +955,7 @@
 		6FDB12C51404D1C000469DEC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6FF935811406AB7A00649482 /* ActionSheet */,
 				6FDB12C61404D1C000469DEC /* Cursor */,
 				6FDB12D61404D1C000469DEC /* TableViewCells */,
 				6FDB12E41404D1C000469DEC /* TextFields */,
@@ -1091,6 +1102,16 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		6FF935811406AB7A00649482 /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				6FF935821406AB7A00649482 /* ActionSheetDemoViewController.h */,
+				6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */,
+				6FF935841406AB7A00649482 /* ActionSheetDemoViewController.xib */,
+			);
+			path = ActionSheet;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1201,6 +1222,7 @@
 				6FDB134B1404D1C000469DEC /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6FDB134E1404D1C000469DEC /* WizardDemoViewController.xib in Resources */,
 				6FDB13501404D1C000469DEC /* WizardPageViewController.xib in Resources */,
+				6FF935861406AB7A00649482 /* ActionSheetDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,6 +1319,8 @@
 				6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */,
 				6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */,
 				6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */,
+				6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */,
+				6FF935851406AB7A00649482 /* ActionSheetDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,12 +23,12 @@ HLSLinkCategory(NSBundle_HLSExtensions)
 
 + (NSBundle *)coconutKitBundle
 {
-    static NSBundle *CoconutKitBundle = nil;
-    if (CoconutKitBundle == nil) {
-        NSString *CoconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit" ofType:@"bundle"];
-        CoconutKitBundle = [[NSBundle alloc] initWithPath:CoconutKitPath];
+    static NSBundle *coconutKitBundle = nil;
+    if (! coconutKitBundle) {
+        NSString *coconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit" ofType:@"bundle"];
+        coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitPath];
     }
-    return CoconutKitBundle;
+    return coconutKitBundle;
 }
 
 @end
