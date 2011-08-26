@@ -61,7 +61,7 @@ e.g.
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
 
-### How can write code for CoconutKit?
+### How can I write code for CoconutKit?
 After checking out the code, open the Xcode 4 workspace. Four projects have been created:
 
 * CoconutKit: The project used to build the CoconutKit static library
