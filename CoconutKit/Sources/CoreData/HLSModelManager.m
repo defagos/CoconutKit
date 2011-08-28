@@ -74,14 +74,14 @@ static HLSModelManager *s_defaultModelManager = nil;
     [s_defaultModelManager.managedObjectContext rollback];
 }
 
-+ (id)copyObjectInDefaultModelContext:(NSManagedObject *)managedObject
++ (id)duplicateObjectInDefaultModelContext:(NSManagedObject *)managedObject
 {
     if (! s_defaultModelManager) {
         HLSLoggerWarn(@"No default context has been installed. Nothing to rollback");
         return nil;
     }
     
-    return [s_defaultModelManager copyObject:managedObject];
+    return [s_defaultModelManager duplicateObject:managedObject];
 }
 
 + (void)deleteObjectFromDefaultModelContext:(NSManagedObject *)managedObject
@@ -216,7 +216,7 @@ static HLSModelManager *s_defaultModelManager = nil;
 
 #pragma mark Creating object copies
 
-- (id)copyObject:(NSManagedObject *)managedObject
+- (id)duplicateObject:(NSManagedObject *)managedObject
 {
     if ([managedObject managedObjectContext] != self.managedObjectContext) {
         HLSLoggerError(@"The object to be copied does not belong to the managed context");
@@ -266,7 +266,7 @@ static HLSModelManager *s_defaultModelManager = nil;
                 NSSet *ownedObjects = [managedObjectCopyable valueForKey:relationshipName];
                 NSMutableSet *ownedObjectCopies = [NSMutableSet set];
                 for (NSManagedObject *ownedObject in ownedObjects) {
-                    NSManagedObject *ownedObjectCopy = [self copyObject:ownedObject];
+                    NSManagedObject *ownedObjectCopy = [self duplicateObject:ownedObject];
                     if (! ownedObjectCopy) {
                         return nil;
                     }
@@ -276,7 +276,7 @@ static HLSModelManager *s_defaultModelManager = nil;
             }
             else {
                 NSManagedObject *ownedObject = [managedObjectCopyable valueForKey:relationshipName];
-                NSManagedObject *ownedObjectCopy = [self copyObject:ownedObject];
+                NSManagedObject *ownedObjectCopy = [self duplicateObject:ownedObject];
                 [objectCopy setValue:ownedObjectCopy forKey:relationshipName];
             }
         }

@@ -41,7 +41,7 @@
 + (NSManagedObjectContext *)defaultModelContext;
 + (BOOL)saveDefaultModelContext:(NSError **)pError;
 + (void)rollbackDefaultModelContext;
-+ (id)copyObjectInDefaultModelContext:(NSManagedObject *)managedObject;
++ (id)duplicateObjectInDefaultModelContext:(NSManagedObject *)managedObject;
 
 /**
  * Convenience methods to deal with managed objects in the default model manager context
@@ -67,8 +67,8 @@
  * Method to create a copy of a managed object. The behavior is as follows:
  *   - if the object implements the HLSManagedObjectCopying protocol, a clone is created, otherwise
  *     the object itself is returned. In the context of reference counting, this is actually
- *     equivalent to a shallow copy (since an object is likely to acquire a reference to the returned
- *     object)
+ *     equivalent to a shallow copy (since another object is likely to acquire a reference to the 
+ *     returned object)
  *   - when creating the clone of an object implementing HLSManagedObjectCopying, all attributes and
  *     relationships are copied, except those excluded by implementing the keysToExclude protocol
  *     method. Copy is made as follows:
@@ -83,6 +83,6 @@
  * method returns nil, you should rollback your changes as soon as possible to avoid saving changes in an
  * inconsistent state.
  */
-- (id)copyObject:(NSManagedObject *)managedObject;
+- (id)duplicateObject:(NSManagedObject *)managedObject;
 
 @end
