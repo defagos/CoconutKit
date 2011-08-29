@@ -12,7 +12,7 @@
 #import "HLSLogger.h"
 
 // Only one action sheet can be opened at a time. Remember it here
-static HLSActionSheet *s_actionSheet = nil;                 // weak ref
+static HLSActionSheet *s_actionSheet = nil;                 // strong ref
 
 // Variables used to fix UIActionShet behavior when shown from a bar button. See .h documentation
 static UIBarButtonItem *s_barButtonItem = nil;              // strong ref
@@ -156,7 +156,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if (s_actionSheet) {
        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     }
-    s_actionSheet = self;
+    [s_actionSheet release];
+    s_actionSheet = [self retain];
     [super showFromToolbar:toolbar];
 }
 
@@ -166,7 +167,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if (s_actionSheet) {
         [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     }
-    s_actionSheet = self;
+    [s_actionSheet release];
+    s_actionSheet = [self retain];
     [super showFromTabBar:tabBar];
 }
 
@@ -180,7 +182,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
     [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
     
-    s_actionSheet = self;
+    [s_actionSheet release];
+    s_actionSheet = [self retain];
     [super showFromBarButtonItem:barButtonItem animated:animated];    
 }
 
@@ -190,7 +193,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if (s_actionSheet) {
         [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
     }
-    s_actionSheet = self;
+    [s_actionSheet release];
+    s_actionSheet = [self retain];
     [super showFromRect:rect inView:view animated:animated];
 }
 
@@ -200,7 +204,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if (s_actionSheet) {
         [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     }
-    s_actionSheet = self;
+    [s_actionSheet release];
+    s_actionSheet = [self retain];
     [super showInView:view];
 }
 
@@ -292,6 +297,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     // original behavior
     [self restoreBehaviorOfBarButtonItem];
     
+    [s_actionSheet release];
     s_actionSheet = nil;
 }
 
