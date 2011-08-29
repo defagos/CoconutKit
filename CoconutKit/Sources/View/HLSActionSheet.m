@@ -175,7 +175,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     // If an action sheet was visible, dismiss it first
     if (s_actionSheet) {
         [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-        animated = NO;
     }
     
     // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
@@ -190,7 +189,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     // If an action sheet was visible, dismiss it first
     if (s_actionSheet) {
         [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-        animated = NO;
     }
     s_actionSheet = self;
     [super showFromRect:rect inView:view animated:animated];
