@@ -265,6 +265,15 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // Just to suppress localization warning
+}
+
 #pragma mark Pushing view controllers onto the stack
 
 - (void)pushViewController:(UIViewController *)viewController
