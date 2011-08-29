@@ -180,12 +180,6 @@
         return NO;
     }
     
-    // If a rotation occurs during a transition, do not let rotate. Could lead to complications
-    if (m_animationCount != 0) {
-        HLSLoggerWarn(@"A transition animation is running; rotation aborted");
-        return NO;
-    }
-    
     UIViewController *insetViewController = [self insetViewController];
     return [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
         || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
@@ -335,8 +329,6 @@
         return;
     }
     
-    ++m_animationCount;
-    
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = self.containerContent.viewController;
         UIViewController *disappearingViewController = self.oldContainerContent.viewController;
@@ -379,8 +371,6 @@
     if ([animation.tag isEqual:@"add_animation"]) {
         self.oldContainerContent = nil;
     }
-    
-    --m_animationCount;
 }
 
 #pragma mark HLSReloadable protocol implementation
