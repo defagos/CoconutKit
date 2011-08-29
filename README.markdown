@@ -69,9 +69,11 @@ After checking out the code, open the Xcode 4 workspace. Four projects have been
 * CoconutKit: The project used to build the CoconutKit static library
 * CoconutKit-demo: The project used to test the CoconutKit .staticframework package. This project is mostly used to check that no linker issues arise
 * CoconutKit-dev: The project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
-* CoconutKit-test: The project used for writing unit tests. This project uses the CoconutKit .staticframework package. Note that since the unit testing library, GHUnit, does require the -ObjC and -all_load linker flags to be enabled, the test project does not currently reveal linker issues
+* CoconutKit-test: The project used for writing unit tests. This project references files from the CoconutKit project
 
-Use the CoconutKit-dev project to easily write and test your code. For "non-interactive" components, you should consider adding some test cases to the CoconutKit-test project as well. When you are done with the CoconutKit project, update the CoconutKit and CoconutKit-demo projects to mirror the changes you made to the source and resource file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
+Use the CoconutKit-dev project to easily write and test your code. When you are done with the CoconutKit project, update the CoconutKit and CoconutKit-demo projects to mirror the changes you made to the source and resource file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
+
+For "non-interactive" components, you should consider adding some test cases to the CoconutKit-test project as well. Update it to mirror the changes made to the source and resource files of the CoconutKit project, and update the .pch to reference any new public header.
 
 To build the CoconutKit .staticframework packages needed by the CoconutKit-demo and CoconutKit-test projects, proceed as follows:
 

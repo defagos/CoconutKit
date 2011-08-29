@@ -218,12 +218,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    // If a rotation occurs during a transition, do not let rotate. Could lead to complications
-    if (m_animationCount != 0) {
-        HLSLoggerWarn(@"A transition animation is running; rotation aborted");
-        return NO;
-    }
-    
     // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday... The easiest
     //       way is probably not to rotate all view, but only the visible one. If it is an HLSOrientationCloner,
     //       swap it just before it will appear (if a view controller on top of it is popped) or in place (if it
@@ -415,9 +409,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
-{    
-    ++m_animationCount;
-    
+{
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
@@ -453,8 +445,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    --m_animationCount;
-    
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     

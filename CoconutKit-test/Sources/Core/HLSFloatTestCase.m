@@ -16,9 +16,11 @@
 {
     GHAssertTrue(floateq(1.f, 1.f), @"floateq");
     GHAssertFalse(floateq(1.f, 2.f), @"!floateq");
+    GHAssertFalse(floateq(-1.f, 4.f), @"!floateq");
     
     GHAssertTrue(doubleeq(1., 1.), @"doubleeq");
     GHAssertFalse(doubleeq(1., 2.), @"!doubleeq");
+    GHAssertFalse(doubleeq(-1., 4.), @"!doubleeq");
 
     GHAssertTrue(floatle(1.f, 1.f), @"floatle");
     GHAssertTrue(floatle(1.f, 2.f), @"floatle");

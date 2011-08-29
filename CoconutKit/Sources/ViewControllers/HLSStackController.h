@@ -59,7 +59,6 @@ extern const NSUInteger kStackUnlimitedCapacity;
     NSUInteger m_capacity;
     BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
                                                                 // container view frame?
-    NSUInteger m_animationCount;                                // Number of transition animations which are running
     BOOL m_forwardingProperties;                                // Does the container forward inset navigation properties transparently?
     id<HLSStackControllerDelegate> m_delegate;
 }
