@@ -9,6 +9,11 @@
 @interface UIImage (HLSExtensions)
 
 /**
+ * Return a 1x1 px image having a given color
+ */
++ (UIImage *)imageWithColor:(UIColor *)color;
+
+/**
  * Return the receiver masked with some image. Black mask pixels correspond to unmasked portions. To make parts of
  * the mask transparent, use pixels between black (opaque) and white (transparent), not an alpha
  */
