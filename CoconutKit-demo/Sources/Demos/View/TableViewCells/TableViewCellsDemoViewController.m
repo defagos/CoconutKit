@@ -115,7 +115,7 @@ typedef enum {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    HLSTableViewCell *cell = [HLSTableViewCell tableViewCellForTableView:tableView];
+                    HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSTableViewCell";
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -123,7 +123,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexValue1: {
-                    HLSValue1TableViewCell *cell = [HLSValue1TableViewCell tableViewCellForTableView:tableView];
+                    HLSValue1TableViewCell *cell = [HLSValue1TableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSValue1TableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -132,7 +132,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexValue2: {
-                    HLSValue2TableViewCell *cell = [HLSValue2TableViewCell tableViewCellForTableView:tableView];
+                    HLSValue2TableViewCell *cell = [HLSValue2TableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSValue2TableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -141,7 +141,7 @@ typedef enum {
                 }
                     
                 case SimpleCellIndexSubtitle: {
-                    HLSSubtitleTableViewCell *cell = [HLSSubtitleTableViewCell tableViewCellForTableView:tableView];
+                    HLSSubtitleTableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSSubtitleTableViewCell";
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -160,7 +160,7 @@ typedef enum {
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    XibTableViewCell *cell = [XibTableViewCell tableViewCellForTableView:tableView];
+                    XibTableViewCell *cell = [XibTableViewCell cellForTableView:tableView];
                     cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
                     cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
                     // Selection enabled to show that customization works
@@ -169,7 +169,7 @@ typedef enum {
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    ProgrammaticTableViewCell *cell = [ProgrammaticTableViewCell tableViewCellForTableView:tableView];
+                    ProgrammaticTableViewCell *cell = [ProgrammaticTableViewCell cellForTableView:tableView];
                     cell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;

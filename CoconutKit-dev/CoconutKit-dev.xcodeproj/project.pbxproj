@@ -57,7 +57,7 @@
 		6F37FEBA13EBE478003E33EF /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE4F13EBE478003E33EF /* HLSTextField.m */; };
 		6F37FEBB13EBE478003E33EF /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5113EBE478003E33EF /* HLSValue1TableViewCell.m */; };
 		6F37FEBC13EBE478003E33EF /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */; };
-		6F37FEBD13EBE478003E33EF /* HLSXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5513EBE478003E33EF /* HLSXibView.m */; };
+		6F37FEBD13EBE478003E33EF /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5513EBE478003E33EF /* HLSNibView.m */; };
 		6F37FEBE13EBE478003E33EF /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5813EBE478003E33EF /* HLSContainerContent.m */; };
 		6F37FEC013EBE478003E33EF /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE5C13EBE478003E33EF /* HLSPlaceholderViewController.m */; };
 		6F37FEC213EBE478003E33EF /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE6013EBE478003E33EF /* HLSStackController.m */; };
@@ -256,8 +256,8 @@
 		6F37FE5113EBE478003E33EF /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6F37FE5213EBE478003E33EF /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6F37FE5413EBE478003E33EF /* HLSXibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSXibView.h; sourceTree = "<group>"; };
-		6F37FE5513EBE478003E33EF /* HLSXibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSXibView.m; sourceTree = "<group>"; };
+		6F37FE5413EBE478003E33EF /* HLSNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNibView.h; sourceTree = "<group>"; };
+		6F37FE5513EBE478003E33EF /* HLSNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNibView.m; sourceTree = "<group>"; };
 		6F37FE5713EBE478003E33EF /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6F37FE5813EBE478003E33EF /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
 		6F37FE5B13EBE478003E33EF /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
@@ -617,6 +617,8 @@
 				6F1C649314061273006F63FC /* HLSActionSheet.m */,
 				6F37FE4013EBE478003E33EF /* HLSCursor.h */,
 				6F37FE4113EBE478003E33EF /* HLSCursor.m */,
+				6F37FE5413EBE478003E33EF /* HLSNibView.h */,
+				6F37FE5513EBE478003E33EF /* HLSNibView.m */,
 				6F37FE4913EBE478003E33EF /* HLSSubtitleTableViewCell.h */,
 				6F37FE4A13EBE478003E33EF /* HLSSubtitleTableViewCell.m */,
 				6F37FE4B13EBE478003E33EF /* HLSTableViewCell+Protected.h */,
@@ -628,8 +630,6 @@
 				6F37FE5113EBE478003E33EF /* HLSValue1TableViewCell.m */,
 				6F37FE5213EBE478003E33EF /* HLSValue2TableViewCell.h */,
 				6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */,
-				6F37FE5413EBE478003E33EF /* HLSXibView.h */,
-				6F37FE5513EBE478003E33EF /* HLSXibView.m */,
 				6FA74D3C140500090043693E /* UIView+HLSExtensions.h */,
 				6FA74D3D140500090043693E /* UIView+HLSExtensions.m */,
 			);
@@ -1264,7 +1264,7 @@
 				6F37FEBA13EBE478003E33EF /* HLSTextField.m in Sources */,
 				6F37FEBB13EBE478003E33EF /* HLSValue1TableViewCell.m in Sources */,
 				6F37FEBC13EBE478003E33EF /* HLSValue2TableViewCell.m in Sources */,
-				6F37FEBD13EBE478003E33EF /* HLSXibView.m in Sources */,
+				6F37FEBD13EBE478003E33EF /* HLSNibView.m in Sources */,
 				6F37FEBE13EBE478003E33EF /* HLSContainerContent.m in Sources */,
 				6F37FEC013EBE478003E33EF /* HLSPlaceholderViewController.m in Sources */,
 				6F37FEC213EBE478003E33EF /* HLSStackController.m in Sources */,
@@ -1356,9 +1356,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CoconutKit_dev_Prefix.pch;
+				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				INFOPLIST_FILE = "CoconutKit_dev-Info.plist";
+				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "826F178B-1B43-454E-AF7C-4D1ED1DB62CF";
@@ -1372,9 +1372,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: le studio hortis (36HKZU4CJJ)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CoconutKit_dev_Prefix.pch;
+				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				INFOPLIST_FILE = "CoconutKit_dev-Info.plist";
+				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				PRODUCT_NAME = "CoconutKit-dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90D8F6A6-C705-4D39-9F7F-4C88E2B95CCC";
 				VALIDATE_PRODUCT = YES;

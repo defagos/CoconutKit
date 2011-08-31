@@ -1,26 +1,26 @@
 //
-//  HLSXibView.m
+//  HLSNibView.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 9/1/10.
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSXibView.h"
+#import "HLSNibView.h"
 
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToHeightMap = nil;
 
-@implementation HLSXibView
+@implementation HLSNibView
 
 #pragma mark Class methods for creation
 
 + (void)initialize
 {
     // Perform initialization once for the whole inheritance hierarchy
-    if (self != [HLSXibView class]) {
+    if (self != [HLSNibView class]) {
         return;
     }
     
@@ -29,17 +29,17 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
 
 + (id)view
 {   
-    if ([self isMemberOfClass:[HLSXibView class]]) {
-        HLSLoggerError(@"HLSXibView cannot be instantiated directly");
+    if ([self isMemberOfClass:[HLSNibView class]]) {
+        HLSLoggerError(@"HLSNibView cannot be instantiated directly");
         return nil;
     }
     
     // A xib has been found, use it
-    NSString *xibFileName = [self xibFileName];
-    if ([[NSBundle mainBundle] pathForResource:xibFileName ofType:@"nib"]) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:xibFileName owner:nil options:nil];
+    NSString *nibName = [self nibName];
+    if ([[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"]) {
+        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
         if ([bundleContents count] == 0) {
-            HLSLoggerError(@"Missing view object in xib file %@", xibFileName);
+            HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
         }        
         return [bundleContents objectAtIndex:0];
@@ -64,7 +64,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
     return [viewHeight floatValue];
 }
 
-+ (NSString *)xibFileName
++ (NSString *)nibName
 {
     return [self className];
 }

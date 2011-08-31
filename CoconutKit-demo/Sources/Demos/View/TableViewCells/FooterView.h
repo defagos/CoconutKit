@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface FooterView : HLSXibView {
+@interface FooterView : HLSNibView {
 @private
     UILabel *m_label;
 }
