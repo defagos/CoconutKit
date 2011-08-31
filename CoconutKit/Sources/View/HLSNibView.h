@@ -38,10 +38,12 @@
 + (id)view;
 
 /**
- * Return the height of the view.
+ * Return the view dimensions
  * Not meant to be overridden
  */
 + (CGFloat)height;
++ (CGFloat)width;
++ (CGSize)size;
 
 /**
  * If the view layout is created using Interface Builder, override this accessor to return the name of the associated xib

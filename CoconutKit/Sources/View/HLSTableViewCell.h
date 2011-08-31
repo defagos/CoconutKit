@@ -84,10 +84,12 @@
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
 
 /**
- * Returns the cell height
+ * Returns the cell dimensions
  * Not meant to be overridden
  */
 + (CGFloat)height;
++ (CGFloat)width;
++ (CGSize)size;
 
 /**
  * If the cell layout is created using Interface Builder, override this accessor to return the name of the associated xib

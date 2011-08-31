@@ -12,7 +12,7 @@
 #import "HLSTableViewCell+Protected.h"
 #import "NSObject+HLSExtensions.h"
 
-static NSMutableDictionary *s_classNameToHeightMap = nil;
+static NSMutableDictionary *s_classNameToSizeMap = nil;
 
 @interface HLSTableViewCell ()
 
@@ -31,8 +31,8 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
         return;
     }
     
-    // The height map is common for the whole HLSTableViewCell inheritance hierarchy
-    s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
+    // The size map is common for the whole HLSTableViewCell inheritance hierarchy
+    s_classNameToSizeMap = [[NSMutableDictionary dictionary] retain];
 }
 
 + (id)cellForTableView:(UITableView *)tableView
@@ -103,16 +103,26 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
 
 + (CGFloat)height
 {
-    // Cache the cell height; this way the user does pay the same performance penalty for height whether she
+    return [self size].height;
+}
+
++ (CGFloat)width
+{
+    return [self size].width;
+}
+
++ (CGSize)size
+{
+    // Cache the cell size; this way the user does pay the same performance penalty for height whether she
     // sets the UITableView rowHeight property or uses the row height callback
-    NSNumber *cellHeight = [s_classNameToHeightMap objectForKey:[self className]];
-    if (! cellHeight) {
+    NSValue *cellSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    if (! cellSizeValue) {
         // Instantiate a dummy cell
         UITableViewCell *cell = [self cellForTableView:nil];
-        cellHeight = [NSNumber numberWithFloat:CGRectGetHeight(cell.frame)];
-        [s_classNameToHeightMap setObject:cellHeight forKey:[self className]];
+        cellSizeValue = [NSValue valueWithCGSize:cell.bounds.size];
+        [s_classNameToSizeMap setObject:cellSizeValue forKey:[self className]];
     }
-    return [cellHeight floatValue];
+    return [cellSizeValue CGSizeValue];
 }
 
 + (NSString *)nibName

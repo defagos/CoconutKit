@@ -71,6 +71,7 @@ typedef enum {
 @interface HLSViewController : UIViewController {
 @private
     HLSViewControllerLifeCyclePhase m_lifeCyclePhase;
+    CGSize m_originalViewSize;
 }
 
 /**
@@ -113,5 +114,10 @@ typedef enum {
  * Return YES iff the view has appeared
  */
 - (BOOL)isViewVisible;
+
+/**
+ * Original size of the view right after creation (i.e. right after xib deserialization or construction by loadView)
+ */
+- (CGSize)originalViewSize;
 
 @end

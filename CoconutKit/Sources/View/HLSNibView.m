@@ -11,7 +11,7 @@
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
 
-static NSMutableDictionary *s_classNameToHeightMap = nil;
+static NSMutableDictionary *s_classNameToSizeMap = nil;
 
 @implementation HLSNibView
 
@@ -24,7 +24,7 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
         return;
     }
     
-    s_classNameToHeightMap = [[NSMutableDictionary dictionary] retain];
+    s_classNameToSizeMap = [[NSMutableDictionary dictionary] retain];
 }
 
 + (id)view
@@ -54,14 +54,24 @@ static NSMutableDictionary *s_classNameToHeightMap = nil;
 
 + (CGFloat)height
 {
+    return [self size].height;
+}
+
++ (CGFloat)width
+{
+    return [self size].width;
+}
+
++ (CGSize)size
+{
     // Cache the view height
-    NSNumber *viewHeight = [s_classNameToHeightMap objectForKey:[self className]];
-    if (! viewHeight) {
+    NSValue *viewSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    if (! viewSizeValue) {
         UIView *view = [self view];
-        viewHeight = [NSNumber numberWithFloat:CGRectGetHeight(view.frame)];
-        [s_classNameToHeightMap setObject:viewHeight forKey:[self className]];
+        viewSizeValue = [NSValue valueWithCGSize:view.bounds.size];
+        [s_classNameToSizeMap setObject:viewSizeValue forKey:[self className]];
     }
-    return [viewHeight floatValue];
+    return [viewSizeValue CGSizeValue];
 }
 
 + (NSString *)nibName
