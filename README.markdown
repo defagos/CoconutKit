@@ -93,6 +93,23 @@ I really would like to thank my company for having allowed me to publish this wo
 
 Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
 
+### Release notes
+
+#### Version 1.0.1
+* Added dynamic localization (thanks to Cédric Luthi)
+* Added unit tests
+* Added action sheet
+* Added UIView category for conveying custom information and tagging a view using a string
+* Added code snippets
+* Renamed HLSXibView as HLSNibView, and the xibViewName method as nibName. Removed macros HLSTableViewCellGet and HLSXibViewGet (use class methods instead)
+* Moved methods for calculating start and end dates to NSCalendar extension
+* Flatter project layout
+* Fixes for iOS 5
+* Various bug fixes
+
+#### Version 1.0
+Initial release
+
 ### Contact
 Feel free to contact me if you have any questions or suggestions:
 
