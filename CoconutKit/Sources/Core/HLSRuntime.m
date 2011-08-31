@@ -8,13 +8,13 @@
 
 #import "HLSRuntime.h"
 
-IMP HLSSwizzleSelector(Class class, SEL origSel, SEL newSel)
+IMP HLSSwizzleSelector(Class clazz, SEL origSel, SEL newSel)
 {
     // Get the original implementation we are replacing
-    IMP origImp = method_getImplementation(class_getInstanceMethod(class, origSel));
+    IMP origImp = method_getImplementation(class_getInstanceMethod(clazz, origSel));
     
-    Method newMethod = class_getInstanceMethod(class, newSel);
-    class_replaceMethod(class, origSel, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));
+    Method newMethod = class_getInstanceMethod(clazz, newSel);
+    class_replaceMethod(clazz, origSel, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));
     
     return origImp;
 }
