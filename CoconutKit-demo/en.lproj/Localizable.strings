@@ -27,8 +27,8 @@
 "Custom cell from xib"="Custom cell from xib";
 "Customer Information"="Customer Information";
 "DAY"="DAY";
-"Delete (position)"="Supprimer (position)";
-"Delete (index)"="Supprimer (index)";
+"Delete (position)"="Delete (position)";
+"Delete (index)"="Delete (index)";
 "Demos"="Demos";
 "Details"="Details";
 "Dismiss"="Dismiss";

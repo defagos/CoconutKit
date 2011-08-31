@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface CursorCustomPointerView : HLSXibView {
+@interface CursorCustomPointerView : HLSNibView {
 @private
     UILabel *m_valueLabel;
 }

@@ -44,6 +44,7 @@
 - (void)hlsViewControllerInit
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    m_originalViewSize = CGSizeZero;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self localize];
     HLSLoggerDebug(@"View controller %@ initialized", self);
@@ -82,11 +83,22 @@
     return m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear;
 }
 
+- (CGSize)originalViewSize
+{
+    if (m_lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidLoad) {
+        HLSLoggerError(@"The view has not been created. Size is unknown yet");
+        return m_originalViewSize;
+    }
+    
+    return m_originalViewSize;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    m_originalViewSize = self.view.bounds.size;
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
     [self localize];
     HLSLoggerDebug(@"View controller %@: view did load", self);

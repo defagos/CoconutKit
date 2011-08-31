@@ -12,4 +12,4 @@
  * Replace the implementation of the origSel selector of the specified class with the one of the
  * newSel selector of the same class. Return the original implementation
  */
-IMP HLSSwizzleSelector(Class class, SEL origSel, SEL newSel);
+IMP HLSSwizzleSelector(Class clazz, SEL origSel, SEL newSel);

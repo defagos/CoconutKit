@@ -55,7 +55,7 @@
 		6F2FCE10140BB8E60080A775 /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDC8140BB8E60080A775 /* HLSTextField.m */; };
 		6F2FCE11140BB8E60080A775 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDCA140BB8E60080A775 /* HLSValue1TableViewCell.m */; };
 		6F2FCE12140BB8E60080A775 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDCC140BB8E60080A775 /* HLSValue2TableViewCell.m */; };
-		6F2FCE13140BB8E60080A775 /* HLSXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDCE140BB8E60080A775 /* HLSXibView.m */; };
+		6F2FCE13140BB8E60080A775 /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDCE140BB8E60080A775 /* HLSNibView.m */; };
 		6F2FCE14140BB8E60080A775 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDD0140BB8E60080A775 /* UIView+HLSExtensions.m */; };
 		6F2FCE15140BB8E60080A775 /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCDD2140BB8E60080A775 /* CoconutKit_HLSWebViewController.xib */; };
 		6F2FCE16140BB8E60080A775 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDD4140BB8E60080A775 /* HLSContainerContent.m */; };
@@ -75,6 +75,10 @@
 		6F3334ED13FB08F3000FC9FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334EB13FB08F3000FC9FD /* main.m */; };
 		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
+		6F482FBC140EBCEB00D679E7 /* HLSStrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FB6140EBCEB00D679E7 /* HLSStrip.m */; };
+		6F482FBD140EBCEB00D679E7 /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FB9140EBCEB00D679E7 /* HLSStripContainerView.m */; };
+		6F482FBE140EBCEB00D679E7 /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FBB140EBCEB00D679E7 /* HLSStripView.m */; };
+		6F482FC3140EBD1500D679E7 /* CoconutKit_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
 		6F93C4D214042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */; };
 		6F93C4D8140437D200FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */; };
@@ -188,8 +192,8 @@
 		6F2FCDCA140BB8E60080A775 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6F2FCDCB140BB8E60080A775 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6F2FCDCC140BB8E60080A775 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6F2FCDCD140BB8E60080A775 /* HLSXibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSXibView.h; sourceTree = "<group>"; };
-		6F2FCDCE140BB8E60080A775 /* HLSXibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSXibView.m; sourceTree = "<group>"; };
+		6F2FCDCD140BB8E60080A775 /* HLSNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNibView.h; sourceTree = "<group>"; };
+		6F2FCDCE140BB8E60080A775 /* HLSNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNibView.m; sourceTree = "<group>"; };
 		6F2FCDCF140BB8E60080A775 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2FCDD0140BB8E60080A775 /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2FCDD2140BB8E60080A775 /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
@@ -223,6 +227,14 @@
 		6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F482FB5140EBCEB00D679E7 /* HLSStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStrip.h; sourceTree = "<group>"; };
+		6F482FB6140EBCEB00D679E7 /* HLSStrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStrip.m; sourceTree = "<group>"; };
+		6F482FB7140EBCEB00D679E7 /* HLSStrip+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSStrip+Friend.h"; sourceTree = "<group>"; };
+		6F482FB8140EBCEB00D679E7 /* HLSStripContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripContainerView.h; sourceTree = "<group>"; };
+		6F482FB9140EBCEB00D679E7 /* HLSStripContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripContainerView.m; sourceTree = "<group>"; };
+		6F482FBA140EBCEB00D679E7 /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
+		6F482FBB140EBCEB00D679E7 /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
+		6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_strip_default_background.png; sourceTree = "<group>"; };
 		6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
 		6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 		6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
@@ -282,6 +294,7 @@
 				6F2FCD65140BB8E60080A775 /* CoconutKit_ButtonBarRefresh.png */,
 				6F2FCD66140BB8E60080A775 /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F2FCD67140BB8E60080A775 /* CoconutKit_cursor_default_pointer.png */,
+				6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -426,6 +439,15 @@
 				6F2FCDBF140BB8E60080A775 /* HLSActionSheet.m */,
 				6F2FCDC0140BB8E60080A775 /* HLSCursor.h */,
 				6F2FCDC1140BB8E60080A775 /* HLSCursor.m */,
+				6F2FCDCD140BB8E60080A775 /* HLSNibView.h */,
+				6F2FCDCE140BB8E60080A775 /* HLSNibView.m */,
+				6F482FB5140EBCEB00D679E7 /* HLSStrip.h */,
+				6F482FB6140EBCEB00D679E7 /* HLSStrip.m */,
+				6F482FB7140EBCEB00D679E7 /* HLSStrip+Friend.h */,
+				6F482FB8140EBCEB00D679E7 /* HLSStripContainerView.h */,
+				6F482FB9140EBCEB00D679E7 /* HLSStripContainerView.m */,
+				6F482FBA140EBCEB00D679E7 /* HLSStripView.h */,
+				6F482FBB140EBCEB00D679E7 /* HLSStripView.m */,
 				6F2FCDC2140BB8E60080A775 /* HLSSubtitleTableViewCell.h */,
 				6F2FCDC3140BB8E60080A775 /* HLSSubtitleTableViewCell.m */,
 				6F2FCDC4140BB8E60080A775 /* HLSTableViewCell+Protected.h */,
@@ -437,8 +459,6 @@
 				6F2FCDCA140BB8E60080A775 /* HLSValue1TableViewCell.m */,
 				6F2FCDCB140BB8E60080A775 /* HLSValue2TableViewCell.h */,
 				6F2FCDCC140BB8E60080A775 /* HLSValue2TableViewCell.m */,
-				6F2FCDCD140BB8E60080A775 /* HLSXibView.h */,
-				6F2FCDCE140BB8E60080A775 /* HLSXibView.m */,
 				6F2FCDCF140BB8E60080A775 /* UIView+HLSExtensions.h */,
 				6F2FCDD0140BB8E60080A775 /* UIView+HLSExtensions.m */,
 			);
@@ -625,6 +645,7 @@
 				6F2FCDE9140BB8E60080A775 /* CoconutKit_ButtonBarRefresh@2x.png in Resources */,
 				6F2FCDEA140BB8E60080A775 /* CoconutKit_cursor_default_pointer.png in Resources */,
 				6F2FCE15140BB8E60080A775 /* CoconutKit_HLSWebViewController.xib in Resources */,
+				6F482FC3140EBD1500D679E7 /* CoconutKit_strip_default_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,7 +705,7 @@
 				6F2FCE10140BB8E60080A775 /* HLSTextField.m in Sources */,
 				6F2FCE11140BB8E60080A775 /* HLSValue1TableViewCell.m in Sources */,
 				6F2FCE12140BB8E60080A775 /* HLSValue2TableViewCell.m in Sources */,
-				6F2FCE13140BB8E60080A775 /* HLSXibView.m in Sources */,
+				6F2FCE13140BB8E60080A775 /* HLSNibView.m in Sources */,
 				6F2FCE14140BB8E60080A775 /* UIView+HLSExtensions.m in Sources */,
 				6F2FCE16140BB8E60080A775 /* HLSContainerContent.m in Sources */,
 				6F2FCE17140BB8E60080A775 /* HLSPlaceholderViewController.m in Sources */,
@@ -694,6 +715,9 @@
 				6F2FCE1B140BB8E60080A775 /* HLSViewController.m in Sources */,
 				6F2FCE1C140BB8E60080A775 /* HLSWebViewController.m in Sources */,
 				6F2FCE1D140BB8E60080A775 /* HLSWizardViewController.m in Sources */,
+				6F482FBC140EBCEB00D679E7 /* HLSStrip.m in Sources */,
+				6F482FBD140EBCEB00D679E7 /* HLSStripContainerView.m in Sources */,
+				6F482FBE140EBCEB00D679E7 /* HLSStripView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

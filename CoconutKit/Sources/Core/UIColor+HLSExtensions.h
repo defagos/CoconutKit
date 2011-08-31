@@ -18,4 +18,18 @@
  */
 - (UIColor *)invertColor;
 
+/**
+ * Return color components (0 - 255)
+ */
+- (NSUInteger)redComponent;
+- (NSUInteger)greenComponent;
+- (NSUInteger)blueComponent;
+
+/**
+ * Return the normalized color components (0.f - 1.f)
+ */
+- (CGFloat)normalizedRedComponent;
+- (CGFloat)normalizedGreenComponent;
+- (CGFloat)normalizedBlueComponent;
+
 @end

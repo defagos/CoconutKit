@@ -196,7 +196,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
-    UITableViewCell *cell = [HLSSubtitleTableViewCell tableViewCellForTableView:tableView];
+    UITableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
@@ -381,8 +381,7 @@ typedef enum {
                 }
                     
                 case ViewDemoIndexStrips: {
-                    StripsDemoViewController *demoViewController = [[[StripsDemoViewController alloc] init] autorelease];
-                    [self.navigationController pushViewController:demoViewController animated:YES];
+                    demoViewController = [[[StripsDemoViewController alloc] init] autorelease];
                     break;
                 }
                 

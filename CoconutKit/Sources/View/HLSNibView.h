@@ -1,5 +1,5 @@
 //
-//  HLSXibView.h
+//  HLSNibView.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 9/1/10.
@@ -14,8 +14,8 @@
  * in the implementation file of the corresponding class), instead of putting redundant code in all source files using
  * the view.
  *
- * To create your own view class, simply subclass HLSXibView. If your view layout is created using a xib file not 
- * bearing the same name as the view class, override the xibFileName accessor to return the name of the xib file. 
+ * To create your own view class, simply subclass HLSNibView. If your view layout is created using a xib file not 
+ * bearing the same name as the view class, override the nibName accessor to return the name of the xib file. 
  * If the xib file bears the same name as its corresponding class, you do not need to override this accessor.
  * Your custom classes can then be instantiated using the view class method.
  *
@@ -26,7 +26,7 @@
  * Designated initializer: initWithFrame: (you usually do not need to create a view manually. Use the factory method 
  * instead)
  */
-@interface HLSXibView : UIView {
+@interface HLSNibView : UIView {
 @private
     
 }
@@ -38,15 +38,17 @@
 + (id)view;
 
 /**
- * Return the height of the view.
+ * Return the view dimensions
  * Not meant to be overridden
  */
 + (CGFloat)height;
++ (CGFloat)width;
++ (CGSize)size;
 
 /**
  * If the view layout is created using Interface Builder, override this accessor to return the name of the associated xib
  * file. This is not needed if the xib file name is identical to the class name
  */
-+ (NSString *)xibFileName;
++ (NSString *)nibName;
 
 @end

@@ -12,19 +12,18 @@
  * cell identifier, dimensions, style and xib file (if any).
  *
  * If you do not need other customization properties than the ones offered by a UITableViewCell with default style
- * (UITableViewCellStyleDefault), you can simply instantiate HLSTableViewCell by calling the tableViewCellForTableView:
+ * (UITableViewCellStyleDefault), you can simply instantiate HLSTableViewCell by calling the cellForTableView:
  * class method on it. Other simple table view cells also exist for the other built-in cell styles (HLSValue1TableViewCell,
  * HLSValue1TableViewCell and HLSSubtitleTableViewCell). Those are similarly instantiated using the factory class method.
  *
  * If you need further customization abilities, like cells whose layout is defined using a xib or programmatically, 
  * you must sublcass HLSTableViewCell and:
  *   - if your cell layout is created using a xib file not bearing the same name as the cell class, override the
- *     xibFileName accessor to return the name of the xib file. If the xib file bears the same name as its
+ *     nibName accessor to return the name of the xib file. If the xib file bears the same name as its
  *     corresponding class or if your cell layout is created programmatically, do not override this accessor
  *   - override the identifier method to return the cell identifier used by the reuse mechanism if the default value
  *     (the class name) does not suit your needs, which should be rarely the case
- * Custom classes can then be instantiated by calling the tableViewCellForTableView: class method on your cell
- * classes.
+ * Custom classes can then be instantiated by calling the cellForTableView: class method on your cell classes.
  *
  * Be careful when using a xib. Resource lookup is case-insensitive when running in the simulator, and case-sensitive
  * on the device.
@@ -50,7 +49,7 @@
  * Factory method for creating a table view cell. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (id)tableViewCellForTableView:(UITableView *)tableView;
++ (id)cellForTableView:(UITableView *)tableView;
 
 /**
  * Obtaining a cell with custom background and selected background images is surprisingly not so easy, especially if
@@ -85,16 +84,18 @@
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
 
 /**
- * Returns the cell height
+ * Returns the cell dimensions
  * Not meant to be overridden
  */
 + (CGFloat)height;
++ (CGFloat)width;
++ (CGSize)size;
 
 /**
  * If the cell layout is created using Interface Builder, override this accessor to return the name of the associated xib
  * file. This is not needed if the xib file name is identical to the class name
  */
-+ (NSString *)xibFileName;
++ (NSString *)nibName;
 
 /**
  * The cell identifier to apply for cell reuse. You can override this method if you do really want to define your
