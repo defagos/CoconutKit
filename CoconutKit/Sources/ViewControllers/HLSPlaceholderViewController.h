@@ -86,7 +86,6 @@
     BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
                                                             // it fills the placeholder area?
     BOOL m_forwardingProperties;                            // Does the container forward inset navigation properties transparently?
-    NSUInteger m_animationCount;                            // Number of transition animations which are running
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
 

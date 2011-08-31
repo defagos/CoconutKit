@@ -15,9 +15,9 @@ HLSLinkCategory(UIColor_HLSExtensions)
 
 + (UIColor *)randomColor
 {
-    return [UIColor colorWithRed:(arc4random() % 256)/256.f
-                           green:(arc4random() % 256)/256.f 
-                            blue:(arc4random() % 256)/256.f 
+    return [UIColor colorWithRed:(arc4random() % 256) / 255.f
+                           green:(arc4random() % 256) / 255.f 
+                            blue:(arc4random() % 256) / 255.f 
                            alpha:1.f];
 }
 
@@ -31,6 +31,41 @@ HLSLinkCategory(UIColor_HLSExtensions)
                                                    alpha:components[3]] autorelease];
     
     return invertColor;
+}
+
+#pragma mark Color components
+
+- (NSUInteger)redComponent
+{
+    return (NSUInteger)roundf(255.f * [self normalizedRedComponent]);
+}
+
+- (NSUInteger)greenComponent
+{
+    return (NSUInteger)roundf(255.f * [self normalizedGreenComponent]);
+}
+
+- (NSUInteger)blueComponent
+{
+    return (NSUInteger)roundf(255.f * [self normalizedBlueComponent]);
+}
+
+- (CGFloat)normalizedRedComponent
+{
+    const CGFloat *components = CGColorGetComponents(self.CGColor);
+    return components[0];
+}
+
+- (CGFloat)normalizedGreenComponent
+{
+    const CGFloat *components = CGColorGetComponents(self.CGColor);
+    return components[1];
+}
+
+- (CGFloat)normalizedBlueComponent
+{
+    const CGFloat *components = CGColorGetComponents(self.CGColor);
+    return components[2];
 }
 
 @end

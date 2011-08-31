@@ -9,6 +9,7 @@ You can download CoconutKit from [my github page](https://github.com/defagos), b
 CoconutKit provides your with several kinds of classes covering various aspects of iOS development:
 
 * High-quality view controller containers (view controller embedding, view controller stacking) with several transition animations
+* Easy way to change the language used by an application at runtime, without having to alter system preferences
 * View controllers for web browsing and for easier table view search management
 * Multi-threaded task management, including task grouping, cancelation, progress status, task dependencies and remaining time estimation
 * New controls (text field moving automatically with the keyboard, new kind of segmented control)
@@ -21,7 +22,13 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 * ... and even more to come!
 
 ### How should I use CoconutKit?
-The easiest and recommended way to use CoconutKit is to use the latest tagged binary package available for download. Simply drag and drop the .staticframework package onto your project (adding references to it), remove the language files you do not use from your project, include the CoconutKit.h header file in your project .pch file, and you are ready to go! If you enjoyed the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
+The easiest and recommended way to use CoconutKit is to grab the latest tagged binary package available for download. Right-click on your project, select "Add files", and add the .staticframework directory ("Copy items into destination group's folder" must be turned off, and "Create groups for any added folders" selected). Then **remove the CoconutKit language files your project does not need (see below why)**. Also import the CoconutKit.h header file from your project .pch file (`#import <CoconutKit/CoconutKit.h>`). You are now ready to go!
+
+Some code snippets have been provided in the Snippets directory (and more will probably be added in the future). Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
+
+If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
+
+**It is especially important that your remove those languages you do not need. Fortunately, this is easy to do using Xcode 4: Click on your project, select the info tab and press backspace on each language you want to discard (usually the ones with a lower number of localized files). If you fail to do so you could run into troubles: When a localized file is found, an application is namely assumed to be localized for the corresponding language, even if other files are missing for it. Usually, this means some translations or localized images will be missing. But if you are also using localized xib files your application is likely to crash when your device is set in some language, while it works perfectly when the device language is another one. Removing languages has to be done every time you add a .staticframework file, you should also be careful when updating CoconutKit**
 
 ### With which versions of iOS is CoconutKit compatible?
 CoconutKit should be compatible with iOS 3.2 and later (this might change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
@@ -45,23 +52,8 @@ There are some requirements when contributing, though:
 * Use of private APIs is strictly forbidden
 * Development and demo projects are also included. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
 
-### How can write code for CoconutKit?
-After checking out the code, open the Xcode 4 workspace. Three projects have been created:
-
-* CoconutKit: The project used to build the CoconutKit static library (see below)
-* CoconutKit-demo: The project used to test the CoconutKit .staticframework package. I use it to check that no link issues arise when the library is packaged as .staticframework. If you contribute to the project, I will usually do this for you
-* CoconutKit-dev: The project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
-
-Use the CoconutKit-dev project to easily write and test code. When you are done, update the CoconutKit and CoconutKit-demo to mirror the changes you made to the project file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
-
-If you really do want to check that no link issues arise with the library when it is packaged as .staticframework, here is roughly how:
-
-* Build the CoconutKit .staticframework packages (see below)
-* Add the release package to the CoconutKit-demo project, as any project using the library would do
-* Test your code
-
 ### How can I build CoconutKit?
-CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit directory, as follows:
+CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory (see below), as follows:
 
 * make-fmwk.sh -o <output_directory> -u <version> Release
 * make-fmwk.sh -o <output_directory> -u <version> Debug
@@ -71,13 +63,52 @@ e.g.
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
 * make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
 
+### How can I write code for CoconutKit?
+After checking out the code, open the Xcode 4 workspace. Four projects have been created:
+
+* CoconutKit: The project used to build the CoconutKit static library
+* CoconutKit-demo: The project used to test the CoconutKit .staticframework package. This project is mostly used to check that no linker issues arise
+* CoconutKit-dev: The project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
+* CoconutKit-test: The project used for writing unit tests. This project references files from the CoconutKit project
+
+Use the CoconutKit-dev project to easily write and test your code. When you are done with the CoconutKit project, update the CoconutKit and CoconutKit-demo projects to mirror the changes you made to the source and resource file list. Any new public header file must be added to CoconutKit-dev pch file, as well as to the publicHeaders.txt file located in the CoconutKit-dev directory. Source files with link issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the bootstrap.txt file. Please refer to the make-fmwk.sh documentation for more information.
+
+For "non-interactive" components, you should consider adding some test cases to the CoconutKit-test project as well. Update it to mirror the changes made to the source and resource files of the CoconutKit project, and update the .pch to reference any new public header.
+
+To build the CoconutKit .staticframework packages needed by the CoconutKit-demo and CoconutKit-test projects, proceed as follows:
+
+* Build the trunk CoconutKit .staticframework packages into /LeStudioSDK/Binaries/CoconutKit (this is the standard directory which we use at hortis le studio). Run the following commands from the CoconutKit static library project directory:
+  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release
+  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug
+* If the resource list has changed, you must remove CoconutKit-trunk-Release.staticframework from both the CoconutKit-demo and CoconutKit-test projects, then the one you just built
+* Build the CoconutKit-demo and CoconutKit-test projects and run them to test your code
+
+The CoconutKit-test project also requires the GHUnit framework GHUnitIOS.framework (https://github.com/gabriel/gh-unit) to be installed under /Developer/Frameworks.
+
 ### Why are all classes prefixed with HLS?
 HLS stands for hortis le studio.
 
 ### Acknowledgements
 I really would like to thank my company for having allowed me to publish this work, as well as all my colleagues which have contributed and given me invaluable advice. This work is yours as well!
 
-HLSWebViewController was kindly contributed by [0xced](http://0xced.blogspot.com/).
+Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
+
+### Release notes
+
+#### Version 1.0.1
+* Added dynamic localization (thanks to Cédric Luthi)
+* Added unit tests
+* Added action sheet
+* Added UIView category for conveying custom information and tagging a view using a string
+* Added code snippets
+* Renamed HLSXibView as HLSNibView, and the xibViewName method as nibName. Removed macros HLSTableViewCellGet and HLSXibViewGet (use class methods instead)
+* Moved methods for calculating start and end dates to NSCalendar extension
+* Flatter project layout
+* Fixes for iOS 5
+* Various bug fixes
+
+#### Version 1.0
+Initial release
 
 ### Contact
 Feel free to contact me if you have any questions or suggestions:

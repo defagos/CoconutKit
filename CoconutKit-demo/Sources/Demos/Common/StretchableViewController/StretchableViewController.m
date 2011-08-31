@@ -14,15 +14,8 @@
 
 - (id)initLarge:(BOOL)large
 {
-    if (large) {
-        if ((self = [super initWithNibName:@"StretchableLargeViewController" bundle:nil])) {
-            self.title = @"StretchableViewController (large)";
-        }                
-    }
-    else {
-        if ((self = [super initWithNibName:@"StretchableViewController" bundle:nil])) {
-            self.title = @"StretchableViewController";
-        }        
+    if ((self = [super initWithNibName:large ? @"StretchableLargeViewController" : @"StretchableViewController" bundle:nil])) {
+        self.large = large;
     }
     return self;
 }
@@ -31,6 +24,10 @@
 {
     return [self initLarge:NO];
 }
+
+#pragma mark Accessors and mutators
+
+@synthesize large = m_large;
 
 #pragma mark View lifecycle
 
@@ -50,6 +47,15 @@
     }
     
     return YES;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = self.isLarge ? @"StretchableViewController (large)" : @"StretchableViewController";
 }
 
 @end

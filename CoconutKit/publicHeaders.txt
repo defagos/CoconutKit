@@ -1,3 +1,4 @@
+HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
 HLSAssert.h
@@ -8,7 +9,9 @@ HLSError.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLogger.h
+HLSManagedObjectCopying.h
 HLSModelManager.h
+HLSNibView.h
 HLSNotifications.h
 HLSOrientationCloner.h
 HLSPlaceholderViewController.h
@@ -35,9 +38,9 @@ HLSViewAnimationStep.h
 HLSViewController.h
 HLSWebViewController.h
 HLSWizardViewController.h
-HLSXibView.h
 NSArray+HLSExtensions.h
 NSBundle+HLSExtensions.h
+NSBundle+HLSDynamicLocalization.h
 NSCalendar+HLSExtensions.h
 NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
@@ -48,3 +51,4 @@ NSString+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
+UIView+HLSExtensions.h

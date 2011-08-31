@@ -9,9 +9,10 @@
 #import "HLSTableSearchDisplayViewController.h"
 
 #import "HLSAssert.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 // Height of the UIKit search bar
-static CGFloat kSearchBarStandardHeight = 44.f;
+static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSTableSearchDisplayViewController ()
 
@@ -189,6 +190,15 @@ static CGFloat kSearchBarStandardHeight = 44.f;
 {
     HLSMissingMethodImplementation();
     return nil;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.searchBar.placeholder = HLSLocalizedStringFromUIKit(@"Search");
 }
 
 @end

@@ -14,8 +14,8 @@
 
 - (id)init
 {
-    if ((self = [super init])) {
-        self.title = @"LandscapeOnlyViewController";
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
     }
     return self;
 }
@@ -38,6 +38,15 @@
     }
     
     return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"LandscapeOnlyViewController";
 }
 
 @end

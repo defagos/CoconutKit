@@ -1,0 +1,64 @@
+#ifdef __OBJC__
+// GHUnit
+#import <GHUnitIOS/GHUnit.h> 
+
+// Additional required framework global headers
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
+// CoconutKit library public header files
+#import "HLSActionSheet.h"
+#import "HLSAnimation.h"
+#import "HLSAnimationStep.h"
+#import "HLSAssert.h"
+#import "HLSContainerContent.h"
+#import "HLSConverters.h"
+#import "HLSCursor.h"
+#import "HLSError.h"
+#import "HLSFloat.h"
+#import "HLSKeyboardInformation.h"
+#import "HLSLogger.h"
+#import "HLSModelManager.h"
+#import "HLSNibView.h"
+#import "HLSNotifications.h"
+#import "HLSOrientationCloner.h"
+#import "HLSPlaceholderViewController.h"
+#import "HLSReloadable.h"
+#import "HLSStackController.h"
+#import "HLSSubtitleTableViewCell.h"
+#import "HLSTableSearchDisplayViewController.h"
+#import "HLSTableViewCell.h"
+#import "HLSTask.h"
+#import "HLSTaskGroup.h"
+#import "HLSTaskManager.h"
+#import "HLSTaskOperation.h"
+#import "HLSTaskOperation+Protected.h"
+#import "HLSTextField.h"
+#import "HLSTransitionStyle.h"
+#import "HLSUserInterfaceLock.h"
+#import "HLSValidable.h"
+#import "HLSValidators.h"
+#import "HLSValue1TableViewCell.h"
+#import "HLSValue2TableViewCell.h"
+#import "HLSViewAnimationStep.h"
+#import "HLSViewController.h"
+#import "HLSWebViewController.h"
+#import "HLSWizardViewController.h"
+#import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSDynamicLocalization.h"
+#import "NSBundle+HLSExtensions.h"
+#import "NSCalendar+HLSExtensions.h"
+#import "NSData+HLSExtensions.h"
+#import "NSDate+HLSExtensions.h"
+#import "NSDateFormatter+HLSExtensions.h"
+#import "NSDictionary+HLSExtensions.h"
+#import "NSObject+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
+#import "UIColor+HLSExtensions.h"
+#import "UIControl+HLSExclusiveTouch.h"
+#import "UIImage+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
+#endif

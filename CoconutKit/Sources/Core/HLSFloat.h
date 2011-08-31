@@ -45,13 +45,13 @@
  * Comparison function for floating point numbers. The parameter maxDist is the maximum distance between two (discrete)
  * numbers so that they can be considered to be equal
  */
-BOOL floateq_dist(float x, float y, int32_t maxDist);
-BOOL doubleeq_dist(double x, double y, int64_t maxDist);
+BOOL floateq_dist(float x, float y, uint32_t maxDist);
+BOOL doubleeq_dist(double x, double y, uint64_t maxDist);
 
 /**
  * Max / min functions (not macros; this would have provided weaker type-checking)
  */
-float floatmin_dist(float x, float y, int32_t maxDist);
-float floatmax_dist(float x, float y, int32_t maxDist);
-double doublemin_dist(double x, double y, int64_t maxDist);
-double doublemax_dist(double x, double y, int64_t maxDist);
+float floatmin_dist(float x, float y, uint32_t maxDist);
+float floatmax_dist(float x, float y, uint32_t maxDist);
+double doublemin_dist(double x, double y, uint64_t maxDist);
+double doublemax_dist(double x, double y, uint64_t maxDist);

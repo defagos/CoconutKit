@@ -24,56 +24,50 @@
  *           http://en.wikipedia.org/wiki/Unit_in_the_last_place
  */
 
-BOOL floateq_dist(float x, float y, int32_t maxDist)
+BOOL floateq_dist(float x, float y, uint32_t maxDist)
 {
-    HLSStaticAssert(sizeof(float) == sizeof(int32_t));
+    HLSStaticAssert(sizeof(float) == sizeof(uint32_t));
     
     int32_t i_x = *(int32_t *)&x;
-    if (i_x < 0) {
-        i_x = 0x80000000L - i_x;
-    }
+    i_x = (i_x < 0) ? 0x80000000L - i_x : i_x;
     
     int32_t i_y = *(int32_t *)&y;
-    if (i_y < 0) {
-        i_y = 0x80000000L - i_y;
-    }
+    i_y = (i_y < 0) ? 0x80000000L - i_y : i_y;
     
-    return(abs(i_x - i_y) <= maxDist);
+    uint32_t dist = (i_x > i_y) ? i_x - i_y : i_y - i_x;
+    return(dist <= maxDist);
 }
 
-BOOL doubleeq_dist(double x, double y, int64_t maxDist)
+BOOL doubleeq_dist(double x, double y, uint64_t maxDist)
 {
-    HLSStaticAssert(sizeof(double) == sizeof(int64_t));
+    HLSStaticAssert(sizeof(double) == sizeof(uint64_t));
     
     int64_t i_x = *(int64_t *)&x;
-    if (i_x < 0) {
-        i_x = 0x8000000000000000LL - i_x;
-    }
+    i_x = (i_x < 0) ? 0x8000000000000000LL - i_x : i_x;
     
     int64_t i_y = *(int64_t *)&y;
-    if (i_y < 0) {
-        i_y = 0x8000000000000000LL - i_y;
-    }
+    i_y = (i_y < 0) ? 0x8000000000000000LL - i_y : i_y;
     
-    return(llabs(i_x - i_y) <= maxDist);
+    uint64_t dist = (i_x - i_y) ? i_x - i_y : i_y - i_x;
+    return(dist <= maxDist);
 }
 
-float floatmin_dist(float x, float y, int32_t maxDist)
+float floatmin_dist(float x, float y, uint32_t maxDist)
 {
     return floatlt_dist(x, y, maxDist) ? x : y;
 }
 
-float floatmax_dist(float x, float y, int32_t maxDist)
+float floatmax_dist(float x, float y, uint32_t maxDist)
 {
     return floatlt_dist(x, y, maxDist) ? y : x;
 }
 
-double doublemin_dist(double x, double y, int64_t maxDist)
+double doublemin_dist(double x, double y, uint64_t maxDist)
 {
     return doublelt_dist(x, y, maxDist) ? x : y;
 }
 
-double doublemax_dist(double x, double y, int64_t maxDist)
+double doublemax_dist(double x, double y, uint64_t maxDist)
 {
     return doublelt_dist(x, y, maxDist) ? y : x;
 }

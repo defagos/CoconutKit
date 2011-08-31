@@ -8,12 +8,15 @@
 
 #import "HLSViewController.h"
 
+#import <objc/runtime.h>
 #import "HLSConverters.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 @interface HLSViewController ()
 
-- (void)initialize;
+- (void)hlsViewControllerInit;
+- (void)currentLocalizationDidChange:(NSNotification *)notification;
 
 @end
 
@@ -24,7 +27,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
@@ -32,21 +35,25 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self initialize];
+        [self hlsViewControllerInit];
     }
     return self;
 }
 
 // Common initialization code
-- (void)initialize
+- (void)hlsViewControllerInit
 {
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    m_originalViewSize = CGSizeZero;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+    [self localize];
     HLSLoggerDebug(@"View controller %@ initialized", self);
 }
 
 - (void)dealloc
 {
     HLSLoggerDebug(@"View controller %@ deallocated", self);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self releaseViews];
     [super dealloc];
 }
@@ -76,12 +83,24 @@
     return m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear;
 }
 
+- (CGSize)originalViewSize
+{
+    if (m_lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidLoad) {
+        HLSLoggerError(@"The view has not been created. Size is unknown yet");
+        return m_originalViewSize;
+    }
+    
+    return m_originalViewSize;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    m_originalViewSize = self.view.bounds.size;
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
+    [self localize];
     HLSLoggerDebug(@"View controller %@: view did load", self);
 }
 
@@ -137,6 +156,23 @@
         self.view = nil;
         [self viewDidUnload];        
     }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    IMP selfIMP = class_getMethodImplementation([self class], _cmd);
+    IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
+    BOOL isOverriden = selfIMP != superIMP;
+    if (!isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
+        HLSLoggerWarn(@"%@ is not localized.", [self class]);
+    }
+}
+
+- (void)currentLocalizationDidChange:(NSNotification *)notification
+{
+    [self localize];
 }
 
 #pragma mark Orientation management

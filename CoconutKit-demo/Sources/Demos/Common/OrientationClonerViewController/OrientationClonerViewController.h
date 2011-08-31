@@ -19,5 +19,7 @@
 - (id)initWithPortraitOrientation:(BOOL)portraitOrientation large:(BOOL)large;
 
 @property (nonatomic, retain) IBOutlet HLSTextField *textField;
+@property (nonatomic, assign, getter = isPortraitOrientation) BOOL portraitOrientation;
+@property (nonatomic, assign, getter = isLarge) BOOL large;
 
 @end

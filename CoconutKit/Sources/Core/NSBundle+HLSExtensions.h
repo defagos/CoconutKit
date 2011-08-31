@@ -18,6 +18,6 @@
 /**
  * Returns the "resources" bundle (images + nibs + localizations)
  */
-+ (NSBundle *)CoconutKitBundle;
++ (NSBundle *)coconutKitBundle;
 
 @end

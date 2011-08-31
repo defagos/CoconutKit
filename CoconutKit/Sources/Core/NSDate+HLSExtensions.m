@@ -8,8 +8,9 @@
 
 #import "NSDate+HLSExtensions.h"
 
-#import "HLSRuntime.h"
 #import "HLSCategoryLinker.h"
+#import "HLSRuntime.h"
+#import "NSCalendar+HLSExtensions.h"
 
 HLSLinkCategory(NSDate_HLSExtensions)
 
@@ -22,7 +23,7 @@ static NSDateFormatter *s_dateFormatter = nil;
 
 @end
 
-__attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
+__attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
 {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
@@ -38,6 +39,26 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 @implementation NSDate (HLSExtensions)
 
 #pragma mark Convenience methods
+
+- (BOOL)isEarlierThanDate:(NSDate *)date
+{
+    return [self compare:date] == NSOrderedAscending;
+}
+
+- (BOOL)isEarlierThanOrEqualToDate:(NSDate *)date
+{
+    return [self compare:date] != NSOrderedDescending;
+}
+
+- (BOOL)isLaterThanDate:(NSDate *)date
+{
+    return [self compare:date] == NSOrderedDescending;
+}
+
+- (BOOL)isLaterThanOrEqualToDate:(NSDate *)date
+{
+    return [self compare:date] != NSOrderedAscending;
+}
 
 - (NSDate *)dateSameDayAtNoon
 {
@@ -126,17 +147,6 @@ __attribute__ ((constructor)) static void HLSExtensionsInjectNS(void)
 {
     NSComparisonResult comparisonResult = [self compareDayWithDate:date inTimeZone:timeZone];
     return comparisonResult == NSOrderedSame;
-}
-
-- (NSDate *)firstDayOfTheWeek
-{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *firstDayOfWeek = nil;
-    [calendar rangeOfUnit:NSWeekCalendarUnit 
-                startDate:&firstDayOfWeek
-                 interval:NULL
-                  forDate:self];
-    return firstDayOfWeek;
 }
 
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays
