@@ -9,7 +9,12 @@
 @interface NSCalendar (HLSExtensions)
 
 /**
- * Return the date corresponding to given components in the specified time zone. The NSCalendar time zone is ignored
+ * Return the date corresponding to given components in the specified time zone. The NSCalendar time zone is ignored.
+ * This function replaces the NSDateComponents setTimeZone: instance method which is available starting with iOS 4.
+ * If you are targeting iOS 4 or higher, you have two options:
+ *   - either use dateFromComponents:inTimeZone:
+ *   - or use dateFromComponents: with the time zone set using setTimeZone:
+ * You cannot mix both approaches (an assertion is fired if you try)
  */
 - (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone;
 

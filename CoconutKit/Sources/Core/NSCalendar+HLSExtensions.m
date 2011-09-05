@@ -10,23 +10,51 @@
 
 #import "HLSCategoryLinker.h"
 #import "NSDate+HLSExtensions.h"
+#import "NSTimeZone+HLSExtensions.h"
 
 HLSLinkCategory(NSCalendar_HLSExtensions)
+
+@interface NSDateComponents (HLSExtensionsPrivate)
+
++ (NSString *)stringForComponentValue:(NSInteger)componentValue;
+
+@end
 
 @implementation NSCalendar (HLSExtensions)
 
 - (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone
 {
+    // iOS 4 and above: The time zone can be specified in the date components. We do not want this method to be called 
+    // in such cases
+    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
+    NSAssert(! [components respondsToSelector:@selector(timeZone)] || ! [components timeZone], 
+             @"The time zone must not be specified in the date components");
+    
     NSDate *dateInCalendarTimeZone = [self dateFromComponents:components];
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:[self timeZone] forDate:dateInCalendarTimeZone];
     return [dateInCalendarTimeZone dateByAddingTimeInterval:-timeZoneOffset];
 }
 
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
+    NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:[self timeZone] forDate:date];
     NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self components:unitFlags fromDate:dateInTimeZone];
+    
+    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
+    NSTimeInterval dstTransitionCorrection = [[self timeZone] daylightSavingTimeOffsetForDate:date]
+        - [[self timeZone] daylightSavingTimeOffsetForDate:dateInTimeZone];
+    dateInTimeZone = [dateInTimeZone dateByAddingTimeInterval:dstTransitionCorrection];
+    
+    NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInTimeZone];
+    
+    // iOS 4 and above: NSTimeZoneCalendarUnit = (1 << 21)
+    // TODO: When iOS 4 and above required: Can use NSTimeZoneCalendarUnit and remove respondsToSelector test
+    if (unitFlags & (1 << 21)) {
+        if ([dateComponents respondsToSelector:@selector(setTimeZone:)]) {
+            [dateComponents setTimeZone:timeZone];
+        }
+    }
+    return dateComponents;
 }
 
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
@@ -66,13 +94,13 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date];
-    return [[self startDateOfUnit:unit containingDate:date] dateByAddingNumberOfDays:numberOfDaysInUnit];
+    return [[self startDateOfUnit:unit containingDate:date] dateSameTimeByAddingNumberOfDays:numberOfDaysInUnit];
 }
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
-    return [[self startDateOfUnit:unit containingDate:date inTimeZone:timeZone] dateByAddingNumberOfDays:numberOfDaysInUnit];
+    return [[self startDateOfUnit:unit containingDate:date inTimeZone:timeZone] dateSameTimeByAddingNumberOfDays:numberOfDaysInUnit];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
@@ -101,3 +129,50 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 }
 
 @end
+
+@implementation NSDateComponents (HLSExtensionsPrivate)
+
+#pragma mark Class methods
+
++ (NSString *)stringForComponentValue:(NSInteger)componentValue
+{
+    if (componentValue != NSUndefinedDateComponent) {
+        return [NSString stringWithFormat:@"%d", componentValue];
+    }
+    else {
+        return @"undefined";
+    }
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p;\n"
+            "\tyear: %@\n"
+            "\tmonth: %@\n"
+            "\tday: %@\n"
+            "\thour: %@\n"
+            "\tminute: %@\n"
+            "\tsecond: %@\n"
+            "\tweek: %@\n"
+            "\tweekday: %@\n"
+            "\tweekdayOrdinal: %@\n"
+            "\tera: %@\n"
+            ">", 
+            [self class],
+            self,
+            [NSDateComponents stringForComponentValue:[self year]],
+            [NSDateComponents stringForComponentValue:[self month]],
+            [NSDateComponents stringForComponentValue:[self day]],
+            [NSDateComponents stringForComponentValue:[self hour]],
+            [NSDateComponents stringForComponentValue:[self minute]],
+            [NSDateComponents stringForComponentValue:[self second]],
+            [NSDateComponents stringForComponentValue:[self week]],
+            [NSDateComponents stringForComponentValue:[self weekday]],
+            [NSDateComponents stringForComponentValue:[self weekdayOrdinal]],
+            [NSDateComponents stringForComponentValue:[self era]]];
+}
+
+@end
+

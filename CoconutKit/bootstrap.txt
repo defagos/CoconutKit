@@ -12,6 +12,7 @@ NSDateFormatter+HLSExtensions.m
 NSDictionary+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
+NSTimeZone+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
