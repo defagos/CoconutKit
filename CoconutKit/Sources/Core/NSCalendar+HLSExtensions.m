@@ -9,7 +9,6 @@
 #import "NSCalendar+HLSExtensions.h"
 
 #import "HLSCategoryLinker.h"
-#import "NSDate+HLSExtensions.h"
 #import "NSTimeZone+HLSExtensions.h"
 
 /**
@@ -93,14 +92,14 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
-    NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date];
-    return [[self startDateOfUnit:unit containingDate:date] dateSameTimeByAddingNumberOfDays:numberOfDaysInUnit];
+    return [self endDateOfUnit:unit containingDate:date inTimeZone:[self timeZone]];
 }
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
-    return [[self startDateOfUnit:unit containingDate:date inTimeZone:timeZone] dateSameTimeByAddingNumberOfDays:numberOfDaysInUnit];
+    NSDate *startDateOfUnit = [self startDateOfUnit:unit containingDate:date inTimeZone:timeZone];
+    return [timeZone dateWithSameTimeComponentsByAddingNumberOfDays:numberOfDaysInUnit toDate:startDateOfUnit];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
@@ -112,18 +111,16 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInCalendarTimeZone];
 }
 
 - (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    BOOL result = [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:dateInTimeZone];
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    BOOL result = [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:dateInCalendarTimeZone];
     if (pStartDate) {
-        *pStartDate = [*pStartDate dateByAddingTimeInterval:-timeZoneOffset];
+        *pStartDate = [timeZone dateWithSameComponentsAsDate:*pStartDate fromTimeZone:[self timeZone]];
     }
     return result;
 }

@@ -70,16 +70,4 @@
  */
 - (BOOL)isSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
-/**
- * Return the date obtained by adding some number of days to the receiver (can be negative for days in the past). Apply Dayilight
- * Saving Time corrections so that the time is the same for both dates (for the system time zone)
- */
-- (NSDate *)dateSameTimeByAddingNumberOfDays:(NSInteger)numberOfDays;
-
-/**
- * Return the date obtained by adding some number of days to the receiver (can be negative for days in the past). Apply Dayilight
- * Saving Time corrections so that the time is the same for both dates (for the given time zone)
- */
-- (NSDate *)dateSameTimeByAddingNumberOfDays:(NSInteger)numberOfDays inTimeZone:(NSTimeZone *)timeZone;
-
 @end

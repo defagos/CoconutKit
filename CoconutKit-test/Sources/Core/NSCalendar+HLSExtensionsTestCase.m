@@ -386,7 +386,6 @@
     [expectedEndDateMonthComponentsZurich2 setYear:2012];
     [expectedEndDateMonthComponentsZurich2 setMonth:4];
     [expectedEndDateMonthComponentsZurich2 setDay:1];
-    [expectedEndDateMonthComponentsZurich2 setHour:1];          // CEST, at +1 in April, not 0
     NSDate *expectedEndDateMonthZurich2 = [self.calendar dateFromComponents:expectedEndDateMonthComponentsZurich2 inTimeZone:self.timeZoneZurich];
     GHAssertTrue([endDateMonthZurich2 isEqualToDate:expectedEndDateMonthZurich2], @"Incorrect date");
     
@@ -499,25 +498,51 @@
 
 - (void)testRangeOfUnitStartDateIntervalForDateInTimeZone
 {
-    // Just a wrapper around rangeOfUnit:startDate:interval:forDate:. It suffices to test whether one of the outputs is correct (interval is the easiest
-    // one), the other (startDate, which is more cumbersome to test) will be correct as well
     NSTimeInterval intervalDayInMonthZurich1 = 0.;
-    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:NULL interval:&intervalDayInMonthZurich1 forDate:self.date1 inTimeZone:self.timeZoneZurich];
+    NSDate *startDateZurich1 = nil;
+    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:&startDateZurich1 interval:&intervalDayInMonthZurich1 forDate:self.date1 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedStartDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedStartDateComponentsZurich1 setYear:2012];
+    [expectedStartDateComponentsZurich1 setMonth:1];
+    [expectedStartDateComponentsZurich1 setDay:1];
+    NSDate *expectedStartDateZurich1 = [self.calendar dateFromComponents:expectedStartDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([startDateZurich1 isEqualToDate:expectedStartDateZurich1], @"Incorrect date");
     GHAssertEquals(round(intervalDayInMonthZurich1 / (24 * 60 * 60)), 31.,        // January 2012: 31 days
                    @"Incorrect time interval");
     
     NSTimeInterval intervalDayInMonthZurich2 = 0.;
-    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:NULL interval:&intervalDayInMonthZurich2 forDate:self.date2 inTimeZone:self.timeZoneZurich];
+    NSDate *startDateZurich2 = nil;
+    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:&startDateZurich2 interval:&intervalDayInMonthZurich2 forDate:self.date2 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedStartDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedStartDateComponentsZurich2 setYear:2012];
+    [expectedStartDateComponentsZurich2 setMonth:3];
+    [expectedStartDateComponentsZurich2 setDay:1];
+    NSDate *expectedStartDateZurich2 = [self.calendar dateFromComponents:expectedStartDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([startDateZurich2 isEqualToDate:expectedStartDateZurich2], @"Incorrect date");
     GHAssertEquals(round(intervalDayInMonthZurich2 / (24 * 60 * 60)), 31.,        // March 2012: 31 days
                    @"Incorrect time interval");
     
     NSTimeInterval intervalDayInMonthTahiti1 = 0.;
-    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:NULL interval:&intervalDayInMonthTahiti1 forDate:self.date1 inTimeZone:self.timeZoneTahiti];
+    NSDate *startDateTahiti1 = nil;
+    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:&startDateTahiti1 interval:&intervalDayInMonthTahiti1 forDate:self.date1 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedStartDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedStartDateComponentsTahiti1 setYear:2011];
+    [expectedStartDateComponentsTahiti1 setMonth:12];
+    [expectedStartDateComponentsTahiti1 setDay:1];
+    NSDate *expectedStartDateTahiti1 = [self.calendar dateFromComponents:expectedStartDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([startDateTahiti1 isEqualToDate:expectedStartDateTahiti1], @"Incorrect date");
     GHAssertEquals(round(intervalDayInMonthTahiti1 / (24 * 60 * 60)), 31.,        // December 2011: 31 days
                    @"Incorrect time interval");
     
     NSTimeInterval intervalDayInMonthTahiti2 = 0.;
-    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:NULL interval:&intervalDayInMonthTahiti2 forDate:self.date2 inTimeZone:self.timeZoneTahiti];
+    NSDate *startDateTahiti2 = nil;
+    [self.calendar rangeOfUnit:NSMonthCalendarUnit startDate:&startDateTahiti2 interval:&intervalDayInMonthTahiti2 forDate:self.date2 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedStartDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedStartDateComponentsTahiti2 setYear:2012];
+    [expectedStartDateComponentsTahiti2 setMonth:2];
+    [expectedStartDateComponentsTahiti2 setDay:1];
+    NSDate *expectedStartDateTahiti2 = [self.calendar dateFromComponents:expectedStartDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([startDateTahiti2 isEqualToDate:expectedStartDateTahiti2], @"Incorrect date");
     GHAssertEquals(round(intervalDayInMonthTahiti2 / (24 * 60 * 60)), 29.,        // February 2012: 29 days
                    @"Incorrect time interval");
 }

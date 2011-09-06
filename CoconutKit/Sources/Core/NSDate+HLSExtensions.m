@@ -149,19 +149,6 @@ __attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
     return comparisonResult == NSOrderedSame;
 }
 
-- (NSDate *)dateSameTimeByAddingNumberOfDays:(NSInteger)numberOfDays
-{
-    return [self dateSameTimeByAddingNumberOfDays:numberOfDays inTimeZone:[[NSCalendar currentCalendar] timeZone]];
-}
-
-- (NSDate *)dateSameTimeByAddingNumberOfDays:(NSInteger)numberOfDays inTimeZone:(NSTimeZone *)timeZone
-{
-    NSDate *resultDate = [self dateByAddingTimeInterval:24 * 60 * 60 * numberOfDays];
-    
-    // Fix any DST offset so that we end up at the same time as the receiver
-    return [resultDate dateByAddingTimeInterval:[timeZone daylightSavingTimeOffsetForDate:resultDate]];
-}
-
 #pragma mark Injected methods
 
 - (NSString *)swizzledDescriptionWithLocale:(id)locale

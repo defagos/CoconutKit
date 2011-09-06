@@ -24,4 +24,10 @@
  */
 - (NSDate *)dateWithSameComponentsAsDate:(NSDate *)date fromTimeZone:(NSTimeZone *)timeZone;
 
+/**
+ * Add some number of days to a date (can be negative). Time zone daylight saving time issues are taken into account so 
+ * that the returned date has the same time components as the date given as parameter
+ */
+- (NSDate *)dateWithSameTimeComponentsByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date;
+
 @end
