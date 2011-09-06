@@ -9,15 +9,14 @@
 #import "NSCalendar+HLSExtensions.h"
 
 #import "HLSCategoryLinker.h"
+#import "NSDate+HLSExtensions.h"
 #import "NSTimeZone+HLSExtensions.h"
 
 /**
- * The strategy is always the same here: Since all methods available from NSCalendar work with the calendar time zone,
- * we always need to convert dates from the time zone in which we want to work to the calendar time zone. In this time 
- * we can then apply all methods readily available from NSCalendar. If the result is not a date, we are done. If the
- * result is a date, though, we need to convert back
- * methods can be applied. If we get a date as a result, we convert it back into the time zone in which we want to
- * work.
+ * The strategy is always the same here: Since all methods available from NSCalendar use the calendar time zone, we
+ * always have to convert dates from the time zone in which we want to work to the calendar time zone. In this time 
+ * zone we can then apply all methods readily available from NSCalendar. If the result is not a date, we are done. If 
+ * the result is a date, though, we need to convert it back to the time zone in which we work
  */
 
 HLSLinkCategory(NSCalendar_HLSExtensions)
@@ -30,8 +29,146 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 @implementation NSCalendar (HLSExtensions)
 
+#pragma mark Class methods
+
++ (NSDate *)dateFromComponents:(NSDateComponents *)components
+{
+    return [[NSCalendar currentCalendar] dateFromComponents:components];
+}
+
++ (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] dateFromComponents:components inTimeZone:timeZone];
+}
+
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] components:unitFlags fromDate:date];
+}
+
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] components:unitFlags fromDate:date inTimeZone:timeZone];
+}
+
++ (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] numberOfDaysInUnit:unit containingDate:date];
+}
+
++ (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] startDateOfUnit:unit containingDate:date];
+}
+
++ (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] startDateOfUnit:unit containingDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] endDateOfUnit:unit containingDate:date];
+}
+
++ (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] endDateOfUnit:unit containingDate:date inTimeZone:timeZone];
+}
+
++ (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] rangeOfUnit:smaller inUnit:larger forDate:date];
+}
+
++ (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] rangeOfUnit:smaller inUnit:larger forDate:date inTimeZone:timeZone];
+}
+
++ (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] ordinalityOfUnit:smaller inUnit:larger forDate:date];
+}
+
++ (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] ordinalityOfUnit:smaller inUnit:larger forDate:date inTimeZone:timeZone];
+}
+
++ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date];
+}
+
++ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] dateAtNoonTheSameDayAsDate:date];
+}
+
++ (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] dateAtNoonTheSameDayAsDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] dateAtMidnightTheSameDayAsDate:date];
+}
+
++ (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] dateAtMidnightTheSameDayAsDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] dateAtHour:hour minute:minute second:second theSameDayAsDate:date];
+}
+
++ (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] dateAtHour:hour minute:minute second:second theSameDayAsDate:date inTimeZone:timeZone];
+}
+
++ (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
+{
+    return [[NSCalendar currentCalendar] compareDaysBetweenDate:date1 andDate:date2];
+}
+
++ (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] compareDaysBetweenDate:date1 andDate:date2 inTimeZone:timeZone];
+}
+
++ (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2
+{
+    return [[NSCalendar currentCalendar] isDate:date1 theSameDayAsDate:date2];
+}
+
++ (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] isDate:date1 theSameDayAsDate:date2 inTimeZone:timeZone];
+}
+
+#pragma mark Calendrical calculations
+
 - (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self dateFromComponents:components];
+    }
+    
     // iOS 4 and above: The time zone can be specified in the date components. We do not want this method to be called 
     // in such cases
     // TODO: When iOS 4 and above required: Can remove respondsToSelector test
@@ -43,7 +180,11 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 }
 
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
-{    
+{
+    if (! timeZone) {
+        return [self components:unitFlags fromDate:date];
+    }
+    
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
@@ -69,6 +210,10 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self numberOfDaysInUnit:unit containingDate:date];
+    }
+    
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     return [self numberOfDaysInUnit:unit containingDate:dateInCalendarTimeZone];
 }
@@ -85,6 +230,10 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self startDateOfUnit:unit containingDate:date];
+    }
+    
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDate *startDateInCalendarTimeZone = [self startDateOfUnit:unit containingDate:dateInCalendarTimeZone];
     return [timeZone dateWithSameComponentsAsDate:startDateInCalendarTimeZone fromTimeZone:[self timeZone]];
@@ -97,13 +246,21 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self endDateOfUnit:unit containingDate:date];
+    }
+    
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
     NSDate *startDateOfUnit = [self startDateOfUnit:unit containingDate:date inTimeZone:timeZone];
-    return [timeZone dateWithSameTimeComponentsByAddingNumberOfDays:numberOfDaysInUnit toDate:startDateOfUnit];
+    return [startDateOfUnit dateWithSameTimeComponentsByAddingNumberOfDays:numberOfDaysInUnit inTimeZone:timeZone];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self rangeOfUnit:smaller inUnit:larger forDate:date];
+    }
+    
     NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
     NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
     return [self rangeOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
@@ -111,18 +268,108 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self ordinalityOfUnit:smaller inUnit:larger forDate:date];
+    }
+    
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInCalendarTimeZone];
 }
 
 - (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
+    if (! timeZone) {
+        return [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date];
+    }
+    
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     BOOL result = [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:dateInCalendarTimeZone];
     if (pStartDate) {
         *pStartDate = [timeZone dateWithSameComponentsAsDate:*pStartDate fromTimeZone:[self timeZone]];
     }
     return result;
+}
+
+- (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date
+{
+    return [self dateAtHour:12 minute:0 second:0 theSameDayAsDate:date];
+}
+
+- (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [self dateAtHour:12 minute:0 second:0 theSameDayAsDate:date inTimeZone:timeZone];
+}
+
+- (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date
+{
+    return [self dateAtHour:0 minute:0 second:0 theSameDayAsDate:date];
+}
+
+- (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    return [self dateAtHour:0 minute:0 second:0 theSameDayAsDate:date inTimeZone:timeZone];
+}
+
+- (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date
+{
+    return [self dateAtHour:hour minute:minute second:second theSameDayAsDate:date inTimeZone:[self timeZone]];
+}
+
+- (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+{
+    if (! timeZone) {
+        return [self dateAtHour:hour minute:minute second:second theSameDayAsDate:date];
+    }
+    
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *dateComponents = [self components:unitFlags fromDate:date inTimeZone:timeZone];
+    [dateComponents setHour:hour];
+    [dateComponents setMinute:minute];
+    [dateComponents setSecond:second];
+    return [self dateFromComponents:dateComponents inTimeZone:timeZone];
+}
+
+- (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
+{
+    return [self compareDaysBetweenDate:date1 andDate:date2 inTimeZone:[self timeZone]];
+}
+
+- (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone
+{
+    if (! timeZone) {
+        return [self compareDaysBetweenDate:date1 andDate:date2];
+    }
+    
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *dateComponents1 = [self components:unitFlags fromDate:date1 inTimeZone:timeZone];
+    NSDateComponents *dateComponents2 = [self components:unitFlags fromDate:date2 inTimeZone:timeZone];
+    
+    // Create comparable strings from those components
+    NSString *dateString1 = [NSString stringWithFormat:@"%d%02d%02d", 
+                             [dateComponents1 year],
+                             [dateComponents1 month],
+                             [dateComponents1 day]];
+    NSString *dateString2 = [NSString stringWithFormat:@"%d%02d%02d", 
+                             [dateComponents2 year],
+                             [dateComponents2 month],
+                             [dateComponents2 day]];
+    
+    return [dateString1 compare:dateString2];
+}
+
+- (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2
+{
+    return [self isDate:date1 theSameDayAsDate:date2 inTimeZone:[self timeZone]];
+}
+
+- (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone
+{
+    if (! timeZone) {
+        return [self isDate:date1 theSameDayAsDate:date2];
+    }
+    
+    NSComparisonResult comparisonResult = [self compareDaysBetweenDate:date1 andDate:date2 inTimeZone:timeZone];
+    return comparisonResult == NSOrderedSame;
 }
 
 @end

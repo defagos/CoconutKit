@@ -190,46 +190,4 @@
     GHAssertEquals([dateComponentsFromTahiti5 hour], 17, @"Incorrect hour");
 }
 
-- (void)testdateWithSameTimeComponentsByAddingNumberOfDaysToDate
-{
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
-    
-    NSDate *dateZurich1 = [self.timeZoneZurich dateWithSameTimeComponentsByAddingNumberOfDays:5 toDate:self.date1];
-    NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich1 year], 2012, @"Incorrect year");
-    GHAssertEquals([dateComponentsZurich1 month], 1, @"Incorrect month");
-    GHAssertEquals([dateComponentsZurich1 day], 6, @"Incorrect day");
-    GHAssertEquals([dateComponentsZurich1 hour], 8, @"Incorrect hour");
-    GHAssertEquals([dateComponentsZurich1 minute], 23, @"Incorrect minute");
-    
-    NSDate *dateZurich2 = [self.timeZoneZurich dateWithSameTimeComponentsByAddingNumberOfDays:-3 toDate:self.date2];
-    NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich2 year], 2012, @"Incorrect year");
-    GHAssertEquals([dateComponentsZurich2 month], 2, @"Incorrect month");
-    GHAssertEquals([dateComponentsZurich2 day], 27, @"Incorrect day");
-    GHAssertEquals([dateComponentsZurich2 hour], 6, @"Incorrect hour");
-    GHAssertEquals([dateComponentsZurich2 minute], 12, @"Incorrect minute");
-    
-    NSDate *dateZurich3 = [self.timeZoneZurich dateWithSameTimeComponentsByAddingNumberOfDays:2 toDate:self.date3];
-    NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich3 year], 2012, @"Incorrect year");
-    GHAssertEquals([dateComponentsZurich3 month], 3, @"Incorrect month");
-    GHAssertEquals([dateComponentsZurich3 day], 27, @"Incorrect day");
-    GHAssertEquals([dateComponentsZurich3 hour], 1, @"Incorrect hour");
-    
-    NSDate *dateZurich4 = [self.timeZoneZurich dateWithSameTimeComponentsByAddingNumberOfDays:2 toDate:self.date4];
-    NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich4 year], 2012, @"Incorrect year");
-    GHAssertEquals([dateComponentsZurich4 month], 3, @"Incorrect month");
-    GHAssertEquals([dateComponentsZurich4 day], 27, @"Incorrect day");
-    GHAssertEquals([dateComponentsZurich4 hour], 3, @"Incorrect hour");
-
-    NSDate *dateZurich5 = [self.timeZoneZurich dateWithSameTimeComponentsByAddingNumberOfDays:2 toDate:self.date5];
-    NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich5 year], 2012, @"Incorrect year");
-    GHAssertEquals([dateComponentsZurich5 month], 3, @"Incorrect month");
-    GHAssertEquals([dateComponentsZurich5 day], 28, @"Incorrect day");
-    GHAssertEquals([dateComponentsZurich5 hour], 5, @"Incorrect hour");
-}
-
 @end

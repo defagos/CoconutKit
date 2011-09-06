@@ -9,6 +9,13 @@
 @interface NSTimeZone (HLSExtensions)
 
 /**
+ * Shortcuts to apply time zone calculation methods to [NSTimeZone systemTimeZone]. Refer to the instance method documentation
+ * for more information
+ */
++ (NSTimeInterval)offsetFromTimeZone:(NSTimeZone *)timeZone forDate:(NSDate *)date;
++ (NSDate *)dateWithSameComponentsAsDate:(NSDate *)date fromTimeZone:(NSTimeZone *)timeZone;
+
+/**
  * Return the offset (in seconds) between the receiver and another time zone for a given date. Take into account dailight 
  * saving time issues. For example, if the receiver is at UTC+2 for the given date, while the other time zone is at 
  * UTC-3, the method returns 1800 (5 * 60 * 60). If the receiver is UTC+1 for the given date, while the other time zone
@@ -23,11 +30,5 @@
  * This method takes into account dailight saving time issues.
  */
 - (NSDate *)dateWithSameComponentsAsDate:(NSDate *)date fromTimeZone:(NSTimeZone *)timeZone;
-
-/**
- * Add some number of days to a date (can be negative). Time zone daylight saving time issues are taken into account so 
- * that the returned date has the same time components as the date given as parameter
- */
-- (NSDate *)dateWithSameTimeComponentsByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date;
 
 @end

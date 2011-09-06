@@ -15,6 +15,9 @@
 @property (nonatomic, retain) NSTimeZone *timeZoneTahiti;
 @property (nonatomic, retain) NSDate *date1;
 @property (nonatomic, retain) NSDate *date2;
+@property (nonatomic, retain) NSDate *date3;
+@property (nonatomic, retain) NSDate *date4;
+@property (nonatomic, retain) NSDate *date5;
 
 @end
 
@@ -29,6 +32,9 @@
     self.timeZoneTahiti = nil;
     self.date1 = nil;
     self.date2 = nil;
+    self.date3 = nil;
+    self.date4 = nil;
+    self.date5 = nil;
 
     [super dealloc];
 }
@@ -45,33 +51,49 @@
 
 @synthesize date2 = m_date2;
 
+@synthesize date3 = m_date3;
+
+@synthesize date4 = m_date4;
+
+@synthesize date5 = m_date5;
+
 #pragma mark Test setup and tear down
 
 - (void)setUpClass
 {
     [super setUpClass];
     
+    // Europe/Zurich uses CEST during summer, between 1:00 UTC on the last Sunday of March and until 1:00 on the last Sunday of October. 
+    // CET is used for the rest of the year. Pacific/Tahiti does not use daylight saving times. In summary:
+    //   - when Europe/Zurich uses CET (UTC+1): Zurich is 11 hours ahead of Tahiti (UTC-10)
+    //   - when Europe/Zurich uses CEST (UTC+2): Zurich is 12 hours ahead of Tahiti (UTC-10)
     self.calendar = [NSCalendar currentCalendar];
     self.timeZoneZurich = [NSTimeZone timeZoneWithName:@"Europe/Zurich"];
-    self.timeZoneTahiti = [NSTimeZone timeZoneWithName:@"Pacific/Tahiti"];           // Europe/Zurich - 12 hours
+    self.timeZoneTahiti = [NSTimeZone timeZoneWithName:@"Pacific/Tahiti"];
     
+    // The two dates below correspond to days which are different whether we are in the Zurich time zone or in the Tahiti time zone
+    // Date corresponding to the beginning of the year
     
-    
-    // TODO: Update as for NSCalendar tests
-    
-    
-    
-    
-    // Pick two dates which correspond to two different days in the Zurich / Tahiti time zones
-    
-    // For Europe/Zurich, this corresponds to 2012-01-01 08:23:00; for Pacific/Tahiti, to 2011-12-31 20:23:00
+    // For Europe/Zurich, this corresponds to 2012-01-01 08:23:00 (CET, UTC+1); for Pacific/Tahiti to 2011-12-31 21:23:00 (UTC-10)
     self.date1 = [NSDate dateWithTimeIntervalSinceReferenceDate:347095380.];
     
-    // For Europe/Zurich, this corresponds to 2012-03-01 06:12:00; for Pacific/Tahiti, to 2012-02-29 18:12:00 (leap year)
+    // Date corresponding to March 1st on a leap year
+    // For Europe/Zurich, this corresponds to 2012-03-01 06:12:00 (CET, UTC+1); for Pacific/Tahiti to 2012-02-29 19:12:00 (UTC-10)
     self.date2 = [NSDate dateWithTimeIntervalSinceReferenceDate:352271520.];
     
-    // TODO: Comment
-    // date1 = 322880400 = 2012-04-27 03:00:00 (CEST +200)
+    // The three dates below are used to test the CET -> CEST transition in the Europe/Zurich time zone
+    
+    // For Europe/Zurich, this corresponds to 2012-03-25 01:00:00 (CET, UTC+1); for Pacific/Tahiti to 2012-03-24 14:00:00 (UTC-10). This
+    // is one hour before the transition occurs
+    self.date3 = [NSDate dateWithTimeIntervalSinceReferenceDate:354326400.];
+    
+    // For Europe/Zurich, this corresponds to 2012-03-25 03:00:00 (CEST, UTC+2); for Pacific/Tahiti to 2012-03-24 15:00:00 (UTC-10). This
+    // is the exact time at which the transition occurs (i.e. the first date in CEST)
+    self.date4 = [NSDate dateWithTimeIntervalSinceReferenceDate:354330000.];
+    
+    // For Europe/Zurich, this corresponds to 2012-03-26 05:00:00 (CEST, UTC+2); for Pacific/Tahiti to 2012-03-25 17:00:00 (UTC-10). This
+    // is about a day after the CET -> CEST transition has occurred
+    self.date5 = [NSDate dateWithTimeIntervalSinceReferenceDate:354423600.];
 }
 
 #pragma mark Tests
@@ -92,269 +114,46 @@
     GHAssertTrue([date1 isLaterThanOrEqualToDate:date1], @"Later date");
 }
 
-- (void)testDateSameDayAtNoon
+- (void)testdateWithSameTimeComponentsByAddingNumberOfDaysToDate
 {
-    NSDateComponents *expectedDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents1 setYear:2012];
-    [expectedDateComponents1 setMonth:1];
-    [expectedDateComponents1 setDay:1];
-    [expectedDateComponents1 setHour:12];
-    NSDate *expectedDate1 = [self.calendar dateFromComponents:expectedDateComponents1];
-    NSDate *date1 = [self.date1 dateSameDayAtNoon];
-    GHAssertTrue([date1 isEqualToDate:expectedDate1], @"Date");
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
     
-    NSDateComponents *expectedDateComponents2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents2 setYear:2012];
-    [expectedDateComponents2 setMonth:3];
-    [expectedDateComponents2 setDay:1];
-    [expectedDateComponents2 setHour:12];
-    NSDate *expectedDate2 = [self.calendar dateFromComponents:expectedDateComponents2];
-    NSDate *date2 = [self.date2 dateSameDayAtNoon];
-    GHAssertTrue([date2 isEqualToDate:expectedDate2], @"Date");
-}
-
-- (void)testDateSameDayAtNoonInTimeZone
-{
-    NSDateComponents *expectedDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich1 setYear:2012];
-    [expectedDateComponentsZurich1 setMonth:1];
-    [expectedDateComponentsZurich1 setDay:1];
-    [expectedDateComponentsZurich1 setHour:12];
-    NSDate *expectedDateZurich1 = [self.calendar dateFromComponents:expectedDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich1 = [self.date1 dateSameDayAtNoonInTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich1 isEqualToDate:expectedDateZurich1], @"Date");
+    NSDate *dateZurich1 = [self.date1 dateWithSameTimeComponentsByAddingNumberOfDays:5 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich1 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich1 month], 1, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich1 day], 6, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich1 hour], 8, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich1 minute], 23, @"Incorrect minute");
     
-    NSDateComponents *expectedDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich2 setYear:2012];
-    [expectedDateComponentsZurich2 setMonth:3];
-    [expectedDateComponentsZurich2 setDay:1];
-    [expectedDateComponentsZurich2 setHour:12];
-    NSDate *expectedDateZurich2 = [self.calendar dateFromComponents:expectedDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich2 = [self.date2 dateSameDayAtNoonInTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich2 isEqualToDate:expectedDateZurich2], @"Date");
+    NSDate *dateZurich2 = [self.date2 dateWithSameTimeComponentsByAddingNumberOfDays:-3 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich2 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich2 month], 2, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich2 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich2 hour], 6, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich2 minute], 12, @"Incorrect minute");
     
-    NSDateComponents *expectedDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti1 setYear:2011];
-    [expectedDateComponentsTahiti1 setMonth:12];
-    [expectedDateComponentsTahiti1 setDay:31];
-    [expectedDateComponentsTahiti1 setHour:12];
-    NSDate *expectedDateTahiti1 = [self.calendar dateFromComponents:expectedDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti1 = [self.date1 dateSameDayAtNoonInTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti1 isEqualToDate:expectedDateTahiti1], @"Date");
+    NSDate *dateZurich3 = [self.date3 dateWithSameTimeComponentsByAddingNumberOfDays:2 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich3 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich3 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich3 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich3 hour], 1, @"Incorrect hour");
     
-    NSDateComponents *expectedDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti2 setYear:2012];
-    [expectedDateComponentsTahiti2 setMonth:2];
-    [expectedDateComponentsTahiti2 setDay:29];
-    [expectedDateComponentsTahiti2 setHour:12];
-    NSDate *expectedDateTahiti2 = [self.calendar dateFromComponents:expectedDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti2 = [self.date2 dateSameDayAtNoonInTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti2 isEqualToDate:expectedDateTahiti2], @"Date");
-}
-
-- (void)testDateSameDayAtMidnight
-{
-    NSDateComponents *expectedDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents1 setYear:2012];
-    [expectedDateComponents1 setMonth:1];
-    [expectedDateComponents1 setDay:1];
-    NSDate *expectedDate1 = [self.calendar dateFromComponents:expectedDateComponents1];
-    NSDate *date1 = [self.date1 dateSameDayAtMidnight];
-    GHAssertTrue([date1 isEqualToDate:expectedDate1], @"Date");
+    NSDate *dateZurich4 = [self.date4 dateWithSameTimeComponentsByAddingNumberOfDays:2 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich4 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich4 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich4 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich4 hour], 3, @"Incorrect hour");
     
-    NSDateComponents *expectedDateComponents2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents2 setYear:2012];
-    [expectedDateComponents2 setMonth:3];
-    [expectedDateComponents2 setDay:1];
-    NSDate *expectedDate2 = [self.calendar dateFromComponents:expectedDateComponents2];
-    NSDate *date2 = [self.date2 dateSameDayAtMidnight];
-    GHAssertTrue([date2 isEqualToDate:expectedDate2], @"Date");
-}
-
-- (void)testDateSameDayAtMidnightInTimeZone
-{
-    NSDateComponents *expectedDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich1 setYear:2012];
-    [expectedDateComponentsZurich1 setMonth:1];
-    [expectedDateComponentsZurich1 setDay:1];
-    NSDate *expectedDateZurich1 = [self.calendar dateFromComponents:expectedDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich1 = [self.date1 dateSameDayAtMidnightInTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich1 isEqualToDate:expectedDateZurich1], @"Date");
-    
-    NSDateComponents *expectedDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich2 setYear:2012];
-    [expectedDateComponentsZurich2 setMonth:3];
-    [expectedDateComponentsZurich2 setDay:1];
-    NSDate *expectedDateZurich2 = [self.calendar dateFromComponents:expectedDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich2 = [self.date2 dateSameDayAtMidnightInTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich2 isEqualToDate:expectedDateZurich2], @"Date");
-    
-    NSDateComponents *expectedDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti1 setYear:2011];
-    [expectedDateComponentsTahiti1 setMonth:12];
-    [expectedDateComponentsTahiti1 setDay:31];
-    NSDate *expectedDateTahiti1 = [self.calendar dateFromComponents:expectedDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti1 = [self.date1 dateSameDayAtMidnightInTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti1 isEqualToDate:expectedDateTahiti1], @"Date");
-    
-    NSDateComponents *expectedDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti2 setYear:2012];
-    [expectedDateComponentsTahiti2 setMonth:2];
-    [expectedDateComponentsTahiti2 setDay:29];
-    NSDate *expectedDateTahiti2 = [self.calendar dateFromComponents:expectedDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti2 = [self.date2 dateSameDayAtMidnightInTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti2 isEqualToDate:expectedDateTahiti2], @"Date");
-}
-
-- (void)testDateSameDayAtHourMinuteSecond
-{
-    NSDateComponents *expectedDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents1 setYear:2012];
-    [expectedDateComponents1 setMonth:1];
-    [expectedDateComponents1 setDay:1];
-    [expectedDateComponents1 setHour:14];
-    [expectedDateComponents1 setMinute:27];
-    [expectedDateComponents1 setSecond:36];
-    NSDate *expectedDate1 = [self.calendar dateFromComponents:expectedDateComponents1];
-    NSDate *date1 = [self.date1 dateSameDayAtHour:14 minute:27 second:36];
-    GHAssertTrue([date1 isEqualToDate:expectedDate1], @"Date");
-    
-    NSDateComponents *expectedDateComponents2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponents2 setYear:2012];
-    [expectedDateComponents2 setMonth:3];
-    [expectedDateComponents2 setDay:1];
-    [expectedDateComponents2 setHour:14];
-    [expectedDateComponents2 setMinute:27];
-    [expectedDateComponents2 setSecond:36];
-    NSDate *expectedDate2 = [self.calendar dateFromComponents:expectedDateComponents2];
-    NSDate *date2 = [self.date2 dateSameDayAtHour:14 minute:27 second:36];
-    GHAssertTrue([date2 isEqualToDate:expectedDate2], @"Date");
-}
-
-- (void)testDateSameDayAtHourMinuteSecondInTimeZone
-{
-    NSDateComponents *expectedDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich1 setYear:2012];
-    [expectedDateComponentsZurich1 setMonth:1];
-    [expectedDateComponentsZurich1 setDay:1];
-    [expectedDateComponentsZurich1 setHour:14];
-    [expectedDateComponentsZurich1 setMinute:27];
-    [expectedDateComponentsZurich1 setSecond:36];
-    NSDate *expectedDateZurich1 = [self.calendar dateFromComponents:expectedDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich1 = [self.date1 dateSameDayAtHour:14 minute:27 second:36 inTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich1 isEqualToDate:expectedDateZurich1], @"Date");
-    
-    NSDateComponents *expectedDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsZurich2 setYear:2012];
-    [expectedDateComponentsZurich2 setMonth:3];
-    [expectedDateComponentsZurich2 setDay:1];
-    [expectedDateComponentsZurich2 setHour:14];
-    [expectedDateComponentsZurich2 setMinute:27];
-    [expectedDateComponentsZurich2 setSecond:36];
-    NSDate *expectedDateZurich2 = [self.calendar dateFromComponents:expectedDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
-    NSDate *dateZurich2 = [self.date2 dateSameDayAtHour:14 minute:27 second:36 inTimeZone:self.timeZoneZurich];
-    GHAssertTrue([dateZurich2 isEqualToDate:expectedDateZurich2], @"Date");
-    
-    NSDateComponents *expectedDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti1 setYear:2011];
-    [expectedDateComponentsTahiti1 setMonth:12];
-    [expectedDateComponentsTahiti1 setDay:31];
-    [expectedDateComponentsTahiti1 setHour:14];
-    [expectedDateComponentsTahiti1 setMinute:27];
-    [expectedDateComponentsTahiti1 setSecond:36];
-    NSDate *expectedDateTahiti1 = [self.calendar dateFromComponents:expectedDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti1 = [self.date1 dateSameDayAtHour:14 minute:27 second:36 inTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti1 isEqualToDate:expectedDateTahiti1], @"Date");
-    
-    NSDateComponents *expectedDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
-    [expectedDateComponentsTahiti2 setYear:2012];
-    [expectedDateComponentsTahiti2 setMonth:2];
-    [expectedDateComponentsTahiti2 setDay:29];
-    [expectedDateComponentsTahiti2 setHour:14];
-    [expectedDateComponentsTahiti2 setMinute:27];
-    [expectedDateComponentsTahiti2 setSecond:36];
-    NSDate *expectedDateTahiti2 = [self.calendar dateFromComponents:expectedDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
-    NSDate *dateTahiti2 = [self.date2 dateSameDayAtHour:14 minute:27 second:36 inTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([dateTahiti2 isEqualToDate:expectedDateTahiti2], @"Date");
-}
-
-- (void)testCompareDayWithDate
-{
-    NSDateComponents *otherDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponents1 setYear:2012];
-    [otherDateComponents1 setMonth:1];
-    [otherDateComponents1 setDay:1];
-    [otherDateComponents1 setHour:15];
-    NSDate *otherDate1 = [self.calendar dateFromComponents:otherDateComponents1];
-    GHAssertTrue([self.date1 compareDayWithDate:otherDate1] == NSOrderedSame, @"Day");
-    
-    NSDateComponents *otherDateComponents2 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponents2 setYear:2012];
-    [otherDateComponents2 setMonth:3];
-    [otherDateComponents2 setDay:1];
-    [otherDateComponents2 setHour:15];
-    NSDate *otherDate2 = [self.calendar dateFromComponents:otherDateComponents2];
-    GHAssertTrue([self.date2 compareDayWithDate:otherDate2] == NSOrderedSame, @"Day");
-}
-
-- (void)testCompareDayWithDateInTimeZone
-{
-    NSDateComponents *otherDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponentsZurich1 setYear:2012];
-    [otherDateComponentsZurich1 setMonth:1];
-    [otherDateComponentsZurich1 setDay:1];
-    [otherDateComponentsZurich1 setHour:15];
-    NSDate *otherDateZurich1 = [self.calendar dateFromComponents:otherDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
-    GHAssertTrue([self.date1 compareDayWithDate:otherDateZurich1] == NSOrderedSame, @"Day");
-    
-    NSDateComponents *otherDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponentsZurich2 setYear:2012];
-    [otherDateComponentsZurich2 setMonth:3];
-    [otherDateComponentsZurich2 setDay:1];
-    [otherDateComponentsZurich2 setHour:15];
-    NSDate *otherDateZurich2 = [self.calendar dateFromComponents:otherDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
-    GHAssertTrue([self.date2 compareDayWithDate:otherDateZurich2] == NSOrderedSame, @"Day");
-    
-    NSDateComponents *otherDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponentsTahiti1 setYear:2011];
-    [otherDateComponentsTahiti1 setMonth:12];
-    [otherDateComponentsTahiti1 setDay:31];
-    [otherDateComponentsTahiti1 setHour:15];
-    NSDate *otherDateTahiti1 = [self.calendar dateFromComponents:otherDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([self.date1 compareDayWithDate:otherDateTahiti1] == NSOrderedSame, @"Day");
-
-    NSDateComponents *otherDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponentsTahiti2 setYear:2012];
-    [otherDateComponentsTahiti2 setMonth:2];
-    [otherDateComponentsTahiti2 setDay:29];
-    [otherDateComponentsTahiti2 setHour:15];
-    NSDate *otherDateTahiti2 = [self.calendar dateFromComponents:otherDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
-    GHAssertTrue([self.date2 compareDayWithDate:otherDateTahiti2] == NSOrderedSame, @"Day");
-}
-
-- (void)testDateByAddingNumberOfDays
-{
-#if 0
-    NSDateComponents *otherDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponents1 setYear:2012];
-    [otherDateComponents1 setMonth:1];
-    [otherDateComponents1 setDay:21];
-    [otherDateComponents1 setHour:8];
-    [otherDateComponents1 setMinute:23];
-    NSDate *otherDate1 = [self.calendar dateFromComponents:otherDateComponents1 inTimeZone:self.timeZoneZurich];
-    NSDate *date1 = [self.date1 dateByAddingNumberOfDays:20];
-    GHAssertTrue([date1 isEqualToDate:otherDate1], @"Add");    
-    
-    NSDateComponents *otherDateComponents2 = [[[NSDateComponents alloc] init] autorelease];
-    [otherDateComponents2 setYear:2012];
-    [otherDateComponents2 setMonth:2];
-    [otherDateComponents2 setDay:19];
-    [otherDateComponents2 setHour:18];
-    [otherDateComponents2 setMinute:12];
-    NSDate *otherDate2 = [self.calendar dateFromComponents:otherDateComponents2 inTimeZone:self.timeZoneTahiti];
-    NSDate *date2 = [self.date2 dateByAddingNumberOfDays:-10];
-    GHAssertTrue([date2 isEqualToDate:otherDate2], @"Add");
-#endif
+    NSDate *dateZurich5 = [self.date5 dateWithSameTimeComponentsByAddingNumberOfDays:2 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich5 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich5 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich5 day], 28, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich5 hour], 5, @"Incorrect hour");
 }
 
 @end
