@@ -12,6 +12,15 @@
 #import "NSDate+HLSExtensions.h"
 #import "NSTimeZone+HLSExtensions.h"
 
+/**
+ * The strategy is always the same here: Since all methods available from NSCalendar work with the calendar time zone,
+ * we always need to convert dates from the time zone in which we want to work to the calendar time zone. In this time 
+ * we can then apply all methods readily available from NSCalendar. If the result is not a date, we are done. If the
+ * result is a date, though, we need to convert back
+ * methods can be applied. If we get a date as a result, we convert it back into the time zone in which we want to
+ * work.
+ */
+
 HLSLinkCategory(NSCalendar_HLSExtensions)
 
 @interface NSDateComponents (HLSExtensionsPrivate)
@@ -31,21 +40,13 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
              @"The time zone must not be specified in the date components");
     
     NSDate *dateInCalendarTimeZone = [self dateFromComponents:components];
-    NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:[self timeZone] forDate:dateInCalendarTimeZone];
-    return [dateInCalendarTimeZone dateByAddingTimeInterval:-timeZoneOffset];
+    return [timeZone dateWithSameComponentsAsDate:dateInCalendarTimeZone fromTimeZone:[self timeZone]];
 }
 
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
-{
-    NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:[self timeZone] forDate:date];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    
-    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
-    NSTimeInterval dstTransitionCorrection = [[self timeZone] daylightSavingTimeOffsetForDate:date]
-        - [[self timeZone] daylightSavingTimeOffsetForDate:dateInTimeZone];
-    dateInTimeZone = [dateInTimeZone dateByAddingTimeInterval:dstTransitionCorrection];
-    
-    NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInTimeZone];
+{    
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
     // iOS 4 and above: NSTimeZoneCalendarUnit = (1 << 21)
     // TODO: When iOS 4 and above required: Can use NSTimeZoneCalendarUnit and remove respondsToSelector test
@@ -69,9 +70,8 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self numberOfDaysInUnit:unit containingDate:dateInTimeZone];
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    return [self numberOfDaysInUnit:unit containingDate:dateInCalendarTimeZone];
 }
 
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
@@ -86,9 +86,9 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [[self startDateOfUnit:unit containingDate:dateInTimeZone] dateByAddingTimeInterval:-timeZoneOffset];
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    NSDate *startDateInCalendarTimeZone = [self startDateOfUnit:unit containingDate:dateInCalendarTimeZone];
+    return [timeZone dateWithSameComponentsAsDate:startDateInCalendarTimeZone fromTimeZone:[self timeZone]];
 }
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date

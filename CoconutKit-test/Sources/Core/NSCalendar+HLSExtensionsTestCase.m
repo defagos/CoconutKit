@@ -74,7 +74,7 @@
     // The two dates below correspond to days which are different whether we are in the Zurich time zone or in the Tahiti time zone
     // Date corresponding to the beginning of the year
     
-    // For Europe/Zurich, this corresponds to 2012-01-01 08:23:00 (CET, UTC+1); for Pacific/Tahiti to 2011-12-31 21:23:00
+    // For Europe/Zurich, this corresponds to 2012-01-01 08:23:00 (CET, UTC+1); for Pacific/Tahiti to 2011-12-31 21:23:00 (UTC-10)
     self.date1 = [NSDate dateWithTimeIntervalSinceReferenceDate:347095380.];
     
     // Date corresponding to March 1st on a leap year
