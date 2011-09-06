@@ -50,6 +50,7 @@ NSDateFormatter+HLSExtensions.h
 NSDictionary+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
+NSTimeZone+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h

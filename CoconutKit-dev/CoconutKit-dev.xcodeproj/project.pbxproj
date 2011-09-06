@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
+		6F1FD30F1416B73300B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD30E1416B73300B3BE61 /* NSTimeZone+HLSExtensions.m */; };
 		6F37FE8613EBE478003E33EF /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD113EBE478003E33EF /* CoconutKit_Localizable.strings */; };
 		6F37FE8713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F37FE8813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -169,6 +170,8 @@
 		6F133FF913FBB79300B53677 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
 		6F1C649214061273006F63FC /* HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSActionSheet.h; sourceTree = "<group>"; };
 		6F1C649314061273006F63FC /* HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSActionSheet.m; sourceTree = "<group>"; };
+		6F1FD30D1416B73300B3BE61 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F1FD30E1416B73300B3BE61 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F37FDD313EBE478003E33EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD513EBE478003E33EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -413,8 +416,8 @@
 		6FDB13031404D1C000469DEC /* DemosListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemosListViewController.m; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6FEF8554131F77490015B57C /* CoconutKit_dev_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_dev_Prefix.pch; sourceTree = "<group>"; };
-		6FEF8555131F77490015B57C /* CoconutKit_dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit_dev-Info.plist"; sourceTree = "<group>"; };
+		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
+		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
 		6FF935821406AB7A00649482 /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
 		6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
 		6FF935841406AB7A00649482 /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
@@ -573,6 +576,8 @@
 				6F37FE1513EBE478003E33EF /* NSObject+HLSExtensions.m */,
 				6F37FE1613EBE478003E33EF /* NSString+HLSExtensions.h */,
 				6F37FE1713EBE478003E33EF /* NSString+HLSExtensions.m */,
+				6F1FD30D1416B73300B3BE61 /* NSTimeZone+HLSExtensions.h */,
+				6F1FD30E1416B73300B3BE61 /* NSTimeZone+HLSExtensions.m */,
 				6F37FE1813EBE478003E33EF /* UIColor+HLSExtensions.h */,
 				6F37FE1913EBE478003E33EF /* UIColor+HLSExtensions.m */,
 				6F37FE1A13EBE478003E33EF /* UIControl+HLSExclusiveTouch.h */,
@@ -1118,8 +1123,8 @@
 			isa = PBXGroup;
 			children = (
 				6FEF8552131F77490015B57C /* main.m */,
-				6FEF8554131F77490015B57C /* CoconutKit_dev_Prefix.pch */,
-				6FEF8555131F77490015B57C /* CoconutKit_dev-Info.plist */,
+				6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */,
+				6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1359,6 +1364,7 @@
 				6F482FB2140EBCD500D679E7 /* HLSStripContainerView.m in Sources */,
 				6F482FB3140EBCD500D679E7 /* HLSStripView.m in Sources */,
 				6F482FC8140EBD4800D679E7 /* StripsDemoViewController.m in Sources */,
+				6F1FD30F1416B73300B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

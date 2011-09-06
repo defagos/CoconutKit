@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1FD3141416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD3131416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m */; };
+		6F1FD3181416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD3171416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m */; };
 		6F2FCDE3140BB8E60080A775 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD5B140BB8E60080A775 /* CoconutKit_Localizable.strings */; };
 		6F2FCDE4140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD61140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F2FCDE5140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD62140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -88,6 +90,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F1FD3121416B77E00B3BE61 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F1FD3131416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F1FD3161416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F1FD3171416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F2FCD5C140BB8E60080A775 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5D140BB8E60080A775 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5E140BB8E60080A775 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -375,6 +381,8 @@
 				6F2FCD9D140BB8E60080A775 /* NSObject+HLSExtensions.m */,
 				6F2FCD9E140BB8E60080A775 /* NSString+HLSExtensions.h */,
 				6F2FCD9F140BB8E60080A775 /* NSString+HLSExtensions.m */,
+				6F1FD3121416B77E00B3BE61 /* NSTimeZone+HLSExtensions.h */,
+				6F1FD3131416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m */,
 				6F2FCDA0140BB8E60080A775 /* UIColor+HLSExtensions.h */,
 				6F2FCDA1140BB8E60080A775 /* UIColor+HLSExtensions.m */,
 				6F2FCDA2140BB8E60080A775 /* UIControl+HLSExclusiveTouch.h */,
@@ -568,6 +576,8 @@
 				6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */,
 				6F93C4E81404400000FEC9B0 /* NSString+HLSExtensionsTestCase.h */,
 				6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */,
+				6F1FD3161416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.h */,
+				6F1FD3171416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m */,
 			);
 			name = Core;
 			path = Sources/Core;
@@ -718,6 +728,8 @@
 				6F482FBC140EBCEB00D679E7 /* HLSStrip.m in Sources */,
 				6F482FBD140EBCEB00D679E7 /* HLSStripContainerView.m in Sources */,
 				6F482FBE140EBCEB00D679E7 /* HLSStripView.m in Sources */,
+				6F1FD3141416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */,
+				6F1FD3181416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
