@@ -60,21 +60,6 @@ __attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
     return [self compare:date] != NSOrderedAscending;
 }
 
-- (NSDate *)dateWithSameTimeComponentsByAddingNumberOfDays:(NSInteger)numberOfDays
-{
-    return [self dateWithSameTimeComponentsByAddingNumberOfDays:numberOfDays inTimeZone:nil];
-}
-
-- (NSDate *)dateWithSameTimeComponentsByAddingNumberOfDays:(NSInteger)numberOfDays inTimeZone:(NSTimeZone *)timeZone
-{
-    NSDate *date = [self dateByAddingTimeInterval:24. * 60. * 60. * numberOfDays];
-    
-    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
-    NSTimeInterval dstTransitionCorrection = [timeZone daylightSavingTimeOffsetForDate:self]
-        - [timeZone daylightSavingTimeOffsetForDate:date];
-    return [date dateByAddingTimeInterval:dstTransitionCorrection];
-}
-
 #pragma mark Injected methods
 
 - (NSString *)swizzledDescriptionWithLocale:(id)locale

@@ -44,4 +44,19 @@ HLSLinkCategory(NSTimeZone_HLSExtensions)
     return [dateInSelf dateByAddingTimeInterval:dstTransitionCorrection];
 }
 
+- (NSDate *)dateByAddingTimeInterval:(NSTimeInterval)timeInterval toDate:(NSDate *)date
+{
+    NSDate *resultDate = [date dateByAddingTimeInterval:timeInterval];
+    
+    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
+    NSTimeInterval dstTransitionCorrection = [self daylightSavingTimeOffsetForDate:date]
+        - [self daylightSavingTimeOffsetForDate:resultDate];
+    return [resultDate dateByAddingTimeInterval:dstTransitionCorrection];
+}
+
+- (NSDate *)dateByAddingNumberOfDays:(NSTimeInterval)numberOfDays toDate:(NSDate *)date
+{
+    return [self dateByAddingTimeInterval:24. * 60. * 60. * numberOfDays toDate:date];
+}
+
 @end

@@ -23,6 +23,8 @@
 + (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone;
 + (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date;
 + (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
++ (NSRange)minimumRangeOfUnit:(NSCalendarUnit)unit;
++ (NSRange)maximumRangeOfUnit:(NSCalendarUnit)unit;
 + (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 + (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 + (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
@@ -35,6 +37,10 @@
 + (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 + (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date;
 + (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
++ (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options;
++ (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options;
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
 + (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date;
 + (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 + (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date;
@@ -111,6 +117,13 @@
  * Same as rangeOfUnit:startDate:interval:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
+
+/**
+ * Same as dateByAddingComponents:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
+ *
+ * Addition of components can be ambiguous. Please refer to the dateByAddingComponents:toDate:options: documentation for more information
+ */
+- (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
 
 /**
  * Return the date corresponding to noon the same day as a given date (for the system calendar and time zone)
