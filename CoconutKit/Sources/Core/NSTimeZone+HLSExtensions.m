@@ -26,6 +26,21 @@ HLSLinkCategory(NSTimeZone_HLSExtensions)
     return [[NSTimeZone systemTimeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
 }
 
++ (NSDate *)dateByAddingTimeInterval:(NSTimeInterval)timeInterval toDate:(NSDate *)date
+{
+    return [[NSTimeZone systemTimeZone] dateByAddingTimeInterval:timeInterval toDate:date];
+}
+
++ (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date
+{
+    return [[NSTimeZone systemTimeZone] dateByAddingNumberOfDays:numberOfDays toDate:date];
+}
+
++ (NSTimeInterval)timeIntervalBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
+{
+    return [[NSTimeZone systemTimeZone] timeIntervalBetweenDate:date1 andDate:date2];
+}
+
 #pragma mark Time zone calculations
 
 - (NSTimeInterval)offsetFromTimeZone:(NSTimeZone *)timeZone forDate:(NSDate *)date
@@ -38,7 +53,7 @@ HLSLinkCategory(NSTimeZone_HLSExtensions)
     NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:self forDate:date];
     NSDate *dateInSelf = [date dateByAddingTimeInterval:timeZoneOffset];
     
-    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
+    // If we crossed the DST transition, we must compensante its effect
     NSTimeInterval dstTransitionCorrection = [self daylightSavingTimeOffsetForDate:date]
         - [self daylightSavingTimeOffsetForDate:dateInSelf];
     return [dateInSelf dateByAddingTimeInterval:dstTransitionCorrection];
@@ -48,15 +63,25 @@ HLSLinkCategory(NSTimeZone_HLSExtensions)
 {
     NSDate *resultDate = [date dateByAddingTimeInterval:timeInterval];
     
-    // If we crossed the DST transition in the calendar time zone, we must compensante its effect
+    // If we crossed the DST transition, we must compensante its effect
     NSTimeInterval dstTransitionCorrection = [self daylightSavingTimeOffsetForDate:date]
         - [self daylightSavingTimeOffsetForDate:resultDate];
     return [resultDate dateByAddingTimeInterval:dstTransitionCorrection];
 }
 
-- (NSDate *)dateByAddingNumberOfDays:(NSTimeInterval)numberOfDays toDate:(NSDate *)date
+- (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date
 {
     return [self dateByAddingTimeInterval:24. * 60. * 60. * numberOfDays toDate:date];
+}
+
+- (NSTimeInterval)timeIntervalBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
+{
+    NSTimeInterval timeInterval = [date1 timeIntervalSinceDate:date2];
+    
+    // If we crossed the DST transition, we must compensante its effect
+    NSTimeInterval dstTransitionCorrection = [self daylightSavingTimeOffsetForDate:date1]
+        - [self daylightSavingTimeOffsetForDate:date2];
+    return timeInterval + dstTransitionCorrection;
 }
 
 @end
