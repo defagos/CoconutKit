@@ -51,6 +51,16 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     return [[NSCalendar currentCalendar] components:unitFlags fromDate:date inTimeZone:timeZone];
 }
 
++ (NSRange)minimumRangeOfUnit:(NSCalendarUnit)unit
+{
+    return [[NSCalendar currentCalendar] minimumRangeOfUnit:unit];
+}
+
++ (NSRange)maximumRangeOfUnit:(NSCalendarUnit)unit
+{
+    return [[NSCalendar currentCalendar] maximumRangeOfUnit:unit];
+}
+
 + (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
     return [[NSCalendar currentCalendar] numberOfDaysInUnit:unit containingDate:date];
@@ -109,6 +119,26 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
 + (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     return [[NSCalendar currentCalendar] rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date inTimeZone:timeZone];
+}
+
++ (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options
+{
+    return [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:date options:options];
+}
+
++ (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:date options:options inTimeZone:timeZone];
+}
+
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options
+{
+    return [[NSCalendar currentCalendar] components:unitFlags fromDate:startDate toDate:endDate options:options];
+}
+
++ (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone
+{
+    return [[NSCalendar currentCalendar] components:unitFlags fromDate:startDate toDate:endDate options:options inTimeZone:timeZone];
 }
 
 + (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date
@@ -188,9 +218,9 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
-    // iOS 4 and above: NSTimeZoneCalendarUnit = (1 << 21)
-    // TODO: When iOS 4 and above required: Can use NSTimeZoneCalendarUnit and remove respondsToSelector test
-    if (unitFlags & (1 << 21)) {
+    // iOS 4 and above only
+    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
+    if (unitFlags & NSTimeZoneCalendarUnit) {
         if ([dateComponents respondsToSelector:@selector(setTimeZone:)]) {
             [dateComponents setTimeZone:timeZone];
         }
@@ -252,7 +282,7 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
     
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date inTimeZone:timeZone];
     NSDate *startDateOfUnit = [self startDateOfUnit:unit containingDate:date inTimeZone:timeZone];
-    return [startDateOfUnit dateWithSameTimeComponentsByAddingNumberOfDays:numberOfDaysInUnit inTimeZone:timeZone];
+    return [timeZone dateByAddingNumberOfDays:numberOfDaysInUnit toDate:startDateOfUnit];
 }
 
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
@@ -261,9 +291,8 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
         return [self rangeOfUnit:smaller inUnit:larger forDate:date];
     }
     
-    NSTimeInterval timeZoneOffset = [timeZone secondsFromGMT] - [[self timeZone] secondsFromGMT];
-    NSDate *dateInTimeZone = [date dateByAddingTimeInterval:timeZoneOffset];
-    return [self rangeOfUnit:smaller inUnit:larger forDate:dateInTimeZone];
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    return [self rangeOfUnit:smaller inUnit:larger forDate:dateInCalendarTimeZone];
 }
 
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
@@ -288,6 +317,28 @@ HLSLinkCategory(NSCalendar_HLSExtensions)
         *pStartDate = [timeZone dateWithSameComponentsAsDate:*pStartDate fromTimeZone:[self timeZone]];
     }
     return result;
+}
+
+- (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone
+{
+    if (! timeZone) {
+        return [self dateByAddingComponents:components toDate:date options:options];
+    }
+    
+    NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
+    NSDate *resultDateInCalendarTimeZone = [self dateByAddingComponents:components toDate:dateInCalendarTimeZone options:options];
+    return [timeZone dateWithSameComponentsAsDate:resultDateInCalendarTimeZone fromTimeZone:[self timeZone]];
+}
+
+- (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone
+{
+    if (! timeZone) {
+        return [self components:unitFlags fromDate:startDate toDate:endDate options:options];
+    }
+    
+    NSDate *startDateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:startDate fromTimeZone:timeZone];
+    NSDate *endDateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:endDate fromTimeZone:timeZone];
+    return [self components:unitFlags fromDate:startDateInCalendarTimeZone toDate:endDateInCalendarTimeZone options:options];
 }
 
 - (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date

@@ -189,9 +189,9 @@
 {
     NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
     
-    // iOS 4 and above: NSTimeZoneCalendarUnit = (1 << 21)
+    // iOS 4 and above only
     // TODO: When iOS 4 and above required: Can use NSTimeZoneCalendarUnit and remove respondsToSelector test
-    unitFlags |= (1 << 21);
+    unitFlags |= NSTimeZoneCalendarUnit;
     
     NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:self.date1 inTimeZone:self.timeZoneZurich];
     GHAssertEquals([dateComponentsZurich1 year], 2012, @"Incorrect year");
@@ -547,6 +547,121 @@
                    @"Incorrect time interval");
 }
 
+- (void)testDateByAddingComponentsToDateOptionsInTimeZone
+{
+    NSDateComponents *addedDateComponents = [[[NSDateComponents alloc] init] autorelease];
+    [addedDateComponents setYear:2];
+    [addedDateComponents setMonth:-1];
+    [addedDateComponents setDay:6];
+    [addedDateComponents setHour:2];
+    [addedDateComponents setMinute:-20];
+    
+    NSDate *dateZurich1 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date1 options:0 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsZurich1 setYear:2013];
+    [expectedDateComponentsZurich1 setMonth:12];
+    [expectedDateComponentsZurich1 setDay:7];
+    [expectedDateComponentsZurich1 setHour:10];
+    [expectedDateComponentsZurich1 setMinute:3];
+    NSDate *expectedDateZurich1 = [self.calendar dateFromComponents:expectedDateComponentsZurich1 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([dateZurich1 isEqualToDate:expectedDateZurich1], @"Date");
+    
+    NSDate *dateZurich2 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date2 options:0 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedDateComponentsZurich2 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsZurich2 setYear:2014];
+    [expectedDateComponentsZurich2 setMonth:2];
+    [expectedDateComponentsZurich2 setDay:7];
+    [expectedDateComponentsZurich2 setHour:7];
+    [expectedDateComponentsZurich2 setMinute:52];
+    NSDate *expectedDateZurich2 = [self.calendar dateFromComponents:expectedDateComponentsZurich2 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([dateZurich2 isEqualToDate:expectedDateZurich2], @"Date");
+    
+    NSDate *dateZurich3 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date3 options:0 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedDateComponentsZurich3 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsZurich3 setYear:2014];
+    [expectedDateComponentsZurich3 setMonth:3];
+    [expectedDateComponentsZurich3 setDay:3];
+    [expectedDateComponentsZurich3 setHour:2];
+    [expectedDateComponentsZurich3 setMinute:40];
+    NSDate *expectedDateZurich3 = [self.calendar dateFromComponents:expectedDateComponentsZurich3 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([dateZurich3 isEqualToDate:expectedDateZurich3], @"Date");
+    
+    NSDate *dateZurich4 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date4 options:0 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedDateComponentsZurich4 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsZurich4 setYear:2014];
+    [expectedDateComponentsZurich4 setMonth:3];
+    [expectedDateComponentsZurich4 setDay:3];
+    [expectedDateComponentsZurich4 setHour:4];
+    [expectedDateComponentsZurich4 setMinute:40];
+    NSDate *expectedDateZurich4 = [self.calendar dateFromComponents:expectedDateComponentsZurich4 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([dateZurich4 isEqualToDate:expectedDateZurich4], @"Date");
+    
+    NSDate *dateZurich5 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date5 options:0 inTimeZone:self.timeZoneZurich];
+    NSDateComponents *expectedDateComponentsZurich5 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsZurich5 setYear:2014];
+    [expectedDateComponentsZurich5 setMonth:3];
+    [expectedDateComponentsZurich5 setDay:4];
+    [expectedDateComponentsZurich5 setHour:6];
+    [expectedDateComponentsZurich5 setMinute:40];
+    NSDate *expectedDateZurich5 = [self.calendar dateFromComponents:expectedDateComponentsZurich5 inTimeZone:self.timeZoneZurich];
+    GHAssertTrue([dateZurich5 isEqualToDate:expectedDateZurich5], @"Date");
+    
+    NSDate *dateTahiti1 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date1 options:0 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedDateComponentsTahiti1 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsTahiti1 setYear:2013];
+    [expectedDateComponentsTahiti1 setMonth:12];
+    [expectedDateComponentsTahiti1 setDay:6];
+    [expectedDateComponentsTahiti1 setHour:23];
+    [expectedDateComponentsTahiti1 setMinute:3];
+    NSDate *expectedDateTahiti1 = [self.calendar dateFromComponents:expectedDateComponentsTahiti1 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([dateTahiti1 isEqualToDate:expectedDateTahiti1], @"Date");
+    
+    NSDate *dateTahiti2 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date2 options:0 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedDateComponentsTahiti2 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsTahiti2 setYear:2014];
+    [expectedDateComponentsTahiti2 setMonth:2];
+    [expectedDateComponentsTahiti2 setDay:3];
+    [expectedDateComponentsTahiti2 setHour:20];
+    [expectedDateComponentsTahiti2 setMinute:52];
+    NSDate *expectedDateTahiti2 = [self.calendar dateFromComponents:expectedDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([dateTahiti2 isEqualToDate:expectedDateTahiti2], @"Date");
+    
+    NSDate *dateTahiti3 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date3 options:0 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedDateComponentsTahiti3 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsTahiti3 setYear:2014];
+    [expectedDateComponentsTahiti3 setMonth:3];
+    [expectedDateComponentsTahiti3 setDay:2];
+    [expectedDateComponentsTahiti3 setHour:15];
+    [expectedDateComponentsTahiti3 setMinute:40];
+    NSDate *expectedDateTahiti3 = [self.calendar dateFromComponents:expectedDateComponentsTahiti3 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([dateTahiti3 isEqualToDate:expectedDateTahiti3], @"Date");
+    
+    NSDate *dateTahiti4 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date4 options:0 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedDateComponentsTahiti4 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsTahiti4 setYear:2014];
+    [expectedDateComponentsTahiti4 setMonth:3];
+    [expectedDateComponentsTahiti4 setDay:2];
+    [expectedDateComponentsTahiti4 setHour:16];
+    [expectedDateComponentsTahiti4 setMinute:40];
+    NSDate *expectedDateTahiti4 = [self.calendar dateFromComponents:expectedDateComponentsTahiti4 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([dateTahiti4 isEqualToDate:expectedDateTahiti4], @"Date");
+    
+    NSDate *dateTahiti5 = [self.calendar dateByAddingComponents:addedDateComponents toDate:self.date5 options:0 inTimeZone:self.timeZoneTahiti];
+    NSDateComponents *expectedDateComponentsTahiti5 = [[[NSDateComponents alloc] init] autorelease];
+    [expectedDateComponentsTahiti5 setYear:2014];
+    [expectedDateComponentsTahiti5 setMonth:3];
+    [expectedDateComponentsTahiti5 setDay:3];
+    [expectedDateComponentsTahiti5 setHour:18];
+    [expectedDateComponentsTahiti5 setMinute:40];
+    NSDate *expectedDateTahiti5 = [self.calendar dateFromComponents:expectedDateComponentsTahiti5 inTimeZone:self.timeZoneTahiti];
+    GHAssertTrue([dateTahiti5 isEqualToDate:expectedDateTahiti5], @"Date");
+}
+
+- (void)testComponentsFromDateToDateOptionsInTimeZone
+{
+    // TODO:
+}
+
 - (void)testDateAtNoonTheSameDayAsDate
 {
     NSDateComponents *expectedDateComponents1 = [[[NSDateComponents alloc] init] autorelease];
@@ -785,6 +900,48 @@
     [otherDateComponentsTahiti2 setHour:15];
     NSDate *otherDateTahiti2 = [self.calendar dateFromComponents:otherDateComponentsTahiti2 inTimeZone:self.timeZoneTahiti];
     GHAssertTrue([self.calendar compareDaysBetweenDate:self.date2 andDate:otherDateTahiti2 inTimeZone:self.timeZoneTahiti] == NSOrderedSame, @"Day");
+}
+
+- (void)dateByAddingNumberOfDaysToDate
+{
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    
+    NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingNumberOfDays:5 toDate:self.date1];
+    NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich1 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich1 month], 1, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich1 day], 6, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich1 hour], 8, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich1 minute], 23, @"Incorrect minute");
+    
+    NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingNumberOfDays:-3 toDate:self.date2];
+    NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich2 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich2 month], 2, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich2 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich2 hour], 6, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich2 minute], 12, @"Incorrect minute");
+    
+    NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingNumberOfDays:5 toDate:self.date3];
+    NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich3 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich3 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich3 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich3 hour], 1, @"Incorrect hour");
+    
+    NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date4];
+    NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich4 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich4 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich4 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich4 hour], 3, @"Incorrect hour");
+    
+    NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date5];
+    NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich5 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich5 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich5 day], 28, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich5 hour], 5, @"Incorrect hour");
 }
 
 @end
