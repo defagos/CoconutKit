@@ -192,7 +192,81 @@
 
 - (void)testDateByAddingTimeIntervalToDate
 {
-    // TODO:
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    
+    NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
+    NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich1 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich1 month], 1, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich1 day], 1, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich1 hour], 18, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich1 minute], 23, @"Incorrect minute");
+    
+    NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
+    NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich2 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich2 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich2 day], 1, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich2 hour], 2, @"Incorrect hour");
+    GHAssertEquals([dateComponentsZurich2 minute], 12, @"Incorrect minute");
+    
+    NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
+    NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich3 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich3 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich3 day], 25, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich3 hour], 6, @"Incorrect hour");
+    
+    NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
+    NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich4 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich4 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich4 day], 25, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich4 hour], 1, @"Incorrect hour");
+    
+    NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
+    NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich5 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsZurich5 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsZurich5 day], 26, @"Incorrect day");
+    GHAssertEquals([dateComponentsZurich5 hour], 10, @"Incorrect hour");
+    
+    NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
+    NSDateComponents *dateComponentsTahiti1 = [self.calendar components:unitFlags fromDate:dateTahiti1 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti1 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti1 month], 1, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti1 day], 1, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti1 hour], 7, @"Incorrect hour");
+    GHAssertEquals([dateComponentsTahiti1 minute], 23, @"Incorrect minute");
+    
+    NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
+    NSDateComponents *dateComponentsTahiti2 = [self.calendar components:unitFlags fromDate:dateTahiti2 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti2 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti2 month], 2, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti2 day], 29, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti2 hour], 15, @"Incorrect hour");
+    GHAssertEquals([dateComponentsTahiti2 minute], 12, @"Incorrect minute");
+    
+    NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
+    NSDateComponents *dateComponentsTahiti3 = [self.calendar components:unitFlags fromDate:dateTahiti3 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti3 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti3 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti3 day], 24, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti3 hour], 19, @"Incorrect hour");
+    
+    NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
+    NSDateComponents *dateComponentsTahiti4 = [self.calendar components:unitFlags fromDate:dateTahiti4 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti4 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti4 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti4 day], 24, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti4 hour], 13, @"Incorrect hour");
+    
+    NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
+    NSDateComponents *dateComponentsTahiti5 = [self.calendar components:unitFlags fromDate:dateTahiti5 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti5 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti5 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti5 day], 25, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti5 hour], 22, @"Incorrect hour");
 }
 
 - (void)testDateByAddingNumberOfDaysToDate
@@ -235,11 +309,64 @@
     GHAssertEquals([dateComponentsZurich5 month], 3, @"Incorrect month");
     GHAssertEquals([dateComponentsZurich5 day], 28, @"Incorrect day");
     GHAssertEquals([dateComponentsZurich5 hour], 5, @"Incorrect hour");
+    
+    NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingNumberOfDays:5 toDate:self.date1];
+    NSDateComponents *dateComponentsTahiti1 = [self.calendar components:unitFlags fromDate:dateTahiti1 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti1 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti1 month], 1, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti1 day], 5, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti1 hour], 21, @"Incorrect hour");
+    GHAssertEquals([dateComponentsTahiti1 minute], 23, @"Incorrect minute");
+    
+    NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingNumberOfDays:-3 toDate:self.date2];
+    NSDateComponents *dateComponentsTahiti2 = [self.calendar components:unitFlags fromDate:dateTahiti2 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti2 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti2 month], 2, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti2 day], 26, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti2 hour], 19, @"Incorrect hour");
+    GHAssertEquals([dateComponentsTahiti2 minute], 12, @"Incorrect minute");
+    
+    NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date3];
+    NSDateComponents *dateComponentsTahiti3 = [self.calendar components:unitFlags fromDate:dateTahiti3 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti3 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti3 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti3 day], 26, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti3 hour], 14, @"Incorrect hour");
+    
+    NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date4];
+    NSDateComponents *dateComponentsTahiti4 = [self.calendar components:unitFlags fromDate:dateTahiti4 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti4 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti4 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti4 day], 26, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti4 hour], 15, @"Incorrect hour");
+    
+    NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date5];
+    NSDateComponents *dateComponentsTahiti5 = [self.calendar components:unitFlags fromDate:dateTahiti5 inTimeZone:self.timeZoneTahiti];
+    GHAssertEquals([dateComponentsTahiti5 year], 2012, @"Incorrect year");
+    GHAssertEquals([dateComponentsTahiti5 month], 3, @"Incorrect month");
+    GHAssertEquals([dateComponentsTahiti5 day], 27, @"Incorrect day");
+    GHAssertEquals([dateComponentsTahiti5 hour], 17, @"Incorrect hour");
 }
 
 - (void)testTimeIntervalBetweenDateAndDate
 {
-    // TODO:
+    NSTimeInterval timeIntervalZurich43 = [self.timeZoneZurich timeIntervalBetweenDate:self.date4 andDate:self.date3];
+    GHAssertEquals(timeIntervalZurich43, 2. * 60. * 60., @"Incorrect time interval");
+    
+    NSTimeInterval timeIntervalZurich53 = [self.timeZoneZurich timeIntervalBetweenDate:self.date5 andDate:self.date3];
+    GHAssertEquals(timeIntervalZurich53, 28. * 60. * 60., @"Incorrect time interval");
+    
+    NSTimeInterval timeIntervalZurich54 = [self.timeZoneZurich timeIntervalBetweenDate:self.date5 andDate:self.date4];
+    GHAssertEquals(timeIntervalZurich54, 26. * 60. * 60., @"Incorrect time interval");
+    
+    NSTimeInterval timeIntervalTahiti43 = [self.timeZoneTahiti timeIntervalBetweenDate:self.date4 andDate:self.date3];
+    GHAssertEquals(timeIntervalTahiti43, 1. * 60. * 60., @"Incorrect time interval");
+    
+    NSTimeInterval timeIntervalTahiti53 = [self.timeZoneTahiti timeIntervalBetweenDate:self.date5 andDate:self.date3];
+    GHAssertEquals(timeIntervalTahiti53, 27. * 60. * 60., @"Incorrect time interval");
+    
+    NSTimeInterval timeIntervalTahiti54 = [self.timeZoneTahiti timeIntervalBetweenDate:self.date5 andDate:self.date4];
+    GHAssertEquals(timeIntervalTahiti54, 26. * 60. * 60., @"Incorrect time interval");
 }
 
 @end

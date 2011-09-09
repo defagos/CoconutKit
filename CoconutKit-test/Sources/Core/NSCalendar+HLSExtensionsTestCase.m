@@ -659,7 +659,18 @@
 
 - (void)testComponentsFromDateToDateOptionsInTimeZone
 {
-    // TODO:
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    
+    NSDateComponents *dateComponentsZurich43 = [self.calendar components:unitFlags fromDate:self.date3 toDate:self.date4 options:0 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich43 hour], 1, @"Hour");
+    
+    NSDateComponents *dateComponentsZurich53 = [self.calendar components:unitFlags fromDate:self.date3 toDate:self.date5 options:0 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich53 day], 1, @"Day");
+    GHAssertEquals([dateComponentsZurich53 hour], 4, @"Hour");
+    
+    NSDateComponents *dateComponentsZurich54 = [self.calendar components:unitFlags fromDate:self.date4 toDate:self.date5 options:0 inTimeZone:self.timeZoneZurich];
+    GHAssertEquals([dateComponentsZurich54 day], 1, @"Day");
+    GHAssertEquals([dateComponentsZurich54 hour], 2, @"Hour");
 }
 
 - (void)testDateAtNoonTheSameDayAsDate
@@ -867,7 +878,7 @@
     GHAssertTrue([self.calendar compareDaysBetweenDate:self.date2 andDate:otherDate2] == NSOrderedSame, @"Day");
 }
 
-- (void)testCompareDayWithDateInTimeZone
+- (void)testCompareDaysBetweenDateAndDateInTimeZone
 {
     NSDateComponents *otherDateComponentsZurich1 = [[[NSDateComponents alloc] init] autorelease];
     [otherDateComponentsZurich1 setYear:2012];
