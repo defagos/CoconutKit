@@ -126,6 +126,11 @@
 - (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
 
 /**
+ * Same as components:fromDate:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
+ */
+- (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
+
+/**
  * Return the date corresponding to noon the same day as a given date (for the system calendar and time zone)
  */
 - (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date;
