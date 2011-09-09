@@ -18,6 +18,8 @@
 static NSString *kAddStripAnimationTag = @"addStrip";
 static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
+static const NSTimeInterval kLongTouchThreshold = 0.3;
+
 // TODO: Set m_positionsUsed to YES somewhere!!!!
 
 @interface HLSStripContainerView () <HLSAnimationDelegate, HLSStripViewDelegate>
@@ -303,22 +305,12 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 // not snap on positions
 - (CGRect)frameForBeginXPos:(CGFloat)beginXPos endXPos:(CGFloat)endXPos
 {
-    CGRect activeFrame = [self activeFrame];
-    if (floatlt(beginXPos, CGRectGetMinX(activeFrame)) || floatgt(beginXPos, CGRectGetMaxX(activeFrame))) {
-        HLSLoggerError(@"Begin position outside range");
-        return CGRectZero;
-    }
-    
-    if (floatlt(endXPos, CGRectGetMinX(activeFrame)) || floatgt(endXPos, CGRectGetMaxX(activeFrame))) {
-        HLSLoggerError(@"End position outside range");
-        return CGRectZero;
-    }
-    
     if (floatge(beginXPos, endXPos)) {
         HLSLoggerError(@"Begin position must be located before end position");
         return CGRectZero;
     }
-    
+ 
+    CGRect activeFrame = [self activeFrame];
     return CGRectMake(beginXPos,
                       0.f,
                       endXPos - beginXPos,
@@ -659,8 +651,13 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             endPosition = [self nearestPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)];
             beginPosition = MIN([self nearestInteractiveSnapPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)], endPosition - 1);
         }
-        else {
+        else if (m_draggingRightHandle) {
             beginPosition = [self nearestPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
+            endPosition = MAX([self nearestInteractiveSnapPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)], beginPosition + 1);
+        }
+        // Dragging strip
+        else {
+            beginPosition = [self nearestInteractiveSnapPositionForXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent)];
             endPosition = MAX([self nearestInteractiveSnapPositionForXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent)], beginPosition + 1);
         }
         
@@ -781,9 +778,16 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 #pragma mark Touch events
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    m_touchTimestamp = touch.timestamp;
+}
+
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint point = [[touches anyObject] locationInView:self];
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
     HLSStripView *stripView = [self stripViewAtXPos:point.x];
     // Strip view found; the two tests at the end are not only less costly than CGRectContainsPoint, but also
     // guarantee that we cannot grab a handle while another one is already grabbed (otherwise, when shrinking
@@ -815,6 +819,25 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         }
     }
     
+    if (stripView && ! m_draggingStripView && ! m_draggingLeftHandle && ! m_draggingRightHandle) {
+        if (doublege(touch.timestamp - m_touchTimestamp, kLongTouchThreshold)) {
+            // Moving, threshold reached. Begin dragging
+            if (doubleeq(m_stripPreviousXPos, 0.)) {
+                [self exitEditModeAnimated:YES];
+                
+                m_draggingStripView = YES;
+                
+                m_stripPreviousXPos = point.x;
+                
+                self.movedStripView = stripView;
+                
+                if ([self.delegate respondsToSelector:@selector(stripContainerView:willMoveStrip:animated:)]) {
+                    [self.delegate stripContainerView:self willMoveStrip:self.movedStripView.strip animated:YES];
+                }
+            }
+        }
+    }    
+    
     // Not snapping strip views when dragging. Snapping would be weird since the handles would not follow the finger
     // (and this would rise technical issues due to the fact that handles do not move between snapping positions). Our
     // best bet is therefore to stretch the strip rectangle when resizing and to snap it when done
@@ -827,7 +850,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             beginXPos = floatmax(CGRectGetMinX(self.movedStripView.contentFrameInParent) - leftSizeIncrement,
                                  CGRectGetMinX(activeFrame)  /* avoid getting out to the left */);
             endXPos = CGRectGetMaxX(self.movedStripView.contentFrameInParent);
-            m_stripJustMadeLarger = floatge(leftSizeIncrement, 0.f);
             
             // Guarantee minimal strip size: the interval between two positions
             if (floatle(endXPos - beginXPos, CGRectGetWidth(activeFrame) / (self.positions - 1))) {
@@ -843,7 +865,6 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             beginXPos = CGRectGetMinX(self.movedStripView.contentFrameInParent);
             endXPos = floatmin(CGRectGetMaxX(self.movedStripView.contentFrameInParent) + rightSizeIncrement,
                                CGRectGetMaxX(activeFrame)  /* avoid getting out to the right */);
-            m_stripJustMadeLarger = floatge(rightSizeIncrement, 0.f);
             
             // Guarantee minimal strip size: the interval between two positions
             if (floatle(endXPos - beginXPos, CGRectGetWidth(activeFrame) / (self.positions - 1))) {
@@ -884,6 +905,65 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
         // No obstacle on the left or right. Can set the content frame and save the new handle position
         self.movedStripView.contentFrameInParent = contentFrame;
         m_handlePreviousXPos = point.x;
+    }
+    
+    if (m_draggingStripView) {
+        // Calculate the new expected strip position
+        CGFloat deltaX = point.x - m_stripPreviousXPos;
+        CGRect contentFrame = [self frameForBeginXPos:CGRectGetMinX(self.movedStripView.contentFrameInParent) + deltaX
+                                              endXPos:CGRectGetMaxX(self.movedStripView.contentFrameInParent) + deltaX];
+        
+        // If moving to the left, we must stop if we encounter another strip or the left end              
+        NSUInteger movedStripIndex = [self.allStrips indexOfObject:self.movedStripView.strip];
+        NSAssert(movedStripIndex != NSNotFound, @"Strip not found");
+        if (floatlt(deltaX, 0.f)) {
+            // There is a strip on the left 
+            if (movedStripIndex > 0) {
+                HLSStrip *leftStrip = [self.allStrips objectAtIndex:movedStripIndex - 1];
+                HLSStripView *leftNeighbouringStripView = [self stripViewForStrip:leftStrip];
+                if (CGRectIntersectsRect(contentFrame, leftNeighbouringStripView.frame)) {
+                    self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMaxX(leftNeighbouringStripView.frame)
+                                                                               endXPos:CGRectGetMaxX(leftNeighbouringStripView.frame) + CGRectGetWidth(self.movedStripView.contentFrameInParent)];
+                    return;
+                }
+            }
+            // There is no strip on the left
+            else {
+                CGRect activeFrame = [self activeFrame];
+                if (floatle(CGRectGetMinX(contentFrame), CGRectGetMinX(activeFrame))) {
+                    self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMinX(activeFrame)
+                                                                               endXPos:CGRectGetMinX(activeFrame) + CGRectGetWidth(self.movedStripView.contentFrameInParent)];
+                    return;
+                }
+            }
+        }
+        
+        // Similar when moving to the right
+        if (floatgt(deltaX, 0.f)) {
+            // There is a strip on the right
+            if (movedStripIndex < [self.allStrips count] - 1) {
+                HLSStrip *rightStrip = [self.allStrips objectAtIndex:movedStripIndex + 1];
+                HLSStripView *rightNeighbouringStripView = [self stripViewForStrip:rightStrip];
+                if (CGRectIntersectsRect(contentFrame, rightNeighbouringStripView.frame)) {
+                    self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMinX(rightNeighbouringStripView.frame) - CGRectGetWidth(self.movedStripView.contentFrameInParent)
+                                                                               endXPos:CGRectGetMinX(rightNeighbouringStripView.frame)];
+                    return;
+                }                        
+            }
+            // There is no strip on the right
+            else {
+                CGRect activeFrame = [self activeFrame];
+                if (floatge(CGRectGetMaxX(contentFrame), CGRectGetMaxX(activeFrame))) {
+                    self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMaxX(activeFrame) - CGRectGetWidth(self.movedStripView.contentFrameInParent)
+                                                                               endXPos:CGRectGetMaxX(activeFrame)];
+                    return;
+                }
+            }
+        }
+        
+        // No obstacle on the left or right. Can set the content frame and save the new handle position
+        self.movedStripView.contentFrameInParent = contentFrame;
+        m_stripPreviousXPos = point.x;
     }    
 }
 
@@ -941,9 +1021,11 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     
     m_draggingLeftHandle = NO;
     m_draggingRightHandle = NO;
-    m_stripJustMadeLarger = NO;
     
     m_handlePreviousXPos = 0.f;
+    
+    m_draggingStripView = NO;
+    m_stripPreviousXPos = 0.f;
 }
 
 - (void)containerViewTouched:(UITouch *)touch
@@ -952,7 +1034,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
     NSUInteger tapCount = [touch tapCount];
     HLSStripView *stripView = [self stripViewAtXPos:point.x];
     switch (tapCount) {
-        // Single tap
+            // Single tap
         case 1: {
             // Strip view found at the finger location. Single tap toggles edit mode on or off.
             // This tap must not be the result of releasing the finger when releasing a handle over another strip (which
@@ -971,8 +1053,8 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             }
             break;
         }
-         
-        // Double tap
+            
+            // Double tap
         case 2: {
             [self exitEditModeAnimated:YES];
             
@@ -989,7 +1071,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
             }
             break;
         }
-                        
+            
         default: {
             break;
         }

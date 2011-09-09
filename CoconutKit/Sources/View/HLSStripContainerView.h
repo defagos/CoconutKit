@@ -37,11 +37,13 @@
     NSUInteger m_interactiveSnapFactor;     // instead of snapping on m_positions - 1 intervals interactively, reduce snap to (m_positions - 1) / m_snapFactor intervals
     NSUInteger m_defaultLength;
     BOOL m_positionsUsed;                   // YES as soon as the value of m_positions has been used (and cannot be changed anymore)
+    NSTimeInterval m_touchTimestamp;        // Timestamp at which a touch starts
     BOOL m_draggingLeftHandle;              // YES if dragging the left handle of a strip view
     BOOL m_draggingRightHandle;             // YES if dragging the right handle of a strip view
     HLSStripView *m_movedStripView;         // The view which is being moved or resized (nil if none)
     CGFloat m_handlePreviousXPos;           // Previous position of the handle when grabbed for resizing a strip
-    BOOL m_stripJustMadeLarger;             // When a stripped is moved or resized, stores in which direction the handle is moved
+    BOOL m_draggingStripView;               // YES if dragging a strip view
+    CGFloat m_stripPreviousXPos;            // Previous position of the strip when grabbed and moved
     id<HLSStripContainerViewDelegate> m_delegate;
 }
 
