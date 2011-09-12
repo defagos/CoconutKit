@@ -20,7 +20,7 @@ static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
 static const CGFloat kGrabbedViewAlpha = 0.5f;
 
-static const NSTimeInterval kLongTouchThreshold = 0.3;
+static const NSTimeInterval kLongTouchThreshold = 0.2;
 
 // TODO: Set m_positionsUsed to YES somewhere!!!!
 
@@ -892,7 +892,7 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
         if (m_draggingLeftHandle && movedStripIndex > 0) {
             HLSStrip *leftStrip = [self.allStrips objectAtIndex:movedStripIndex - 1];
             HLSStripView *leftNeighbouringStripView = [self stripViewForStrip:leftStrip];
-            if (CGRectIntersectsRect(contentFrame, leftNeighbouringStripView.frame)) {
+            if (floatle(CGRectGetMinX(contentFrame), CGRectGetMaxX(leftNeighbouringStripView.frame))) {
                 self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMaxX(leftNeighbouringStripView.frame)
                                                                            endXPos:endXPos];
                 return;
@@ -902,7 +902,7 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
         if (m_draggingRightHandle && movedStripIndex < [self.allStrips count] - 1) {
             HLSStrip *rightStrip = [self.allStrips objectAtIndex:movedStripIndex + 1];
             HLSStripView *rightNeighbouringStripView = [self stripViewForStrip:rightStrip];
-            if (CGRectIntersectsRect(contentFrame, rightNeighbouringStripView.frame)) {
+            if (floatge(CGRectGetMaxX(contentFrame), CGRectGetMinX(rightNeighbouringStripView.frame))) {
                 self.movedStripView.contentFrameInParent = [self frameForBeginXPos:beginXPos 
                                                                            endXPos:CGRectGetMinX(rightNeighbouringStripView.frame)];
                 return;
@@ -928,7 +928,7 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
             if (movedStripIndex > 0) {
                 HLSStrip *leftStrip = [self.allStrips objectAtIndex:movedStripIndex - 1];
                 HLSStripView *leftNeighbouringStripView = [self stripViewForStrip:leftStrip];
-                if (CGRectIntersectsRect(contentFrame, leftNeighbouringStripView.frame)) {
+                if (floatle(CGRectGetMinX(contentFrame), CGRectGetMaxX(leftNeighbouringStripView.frame))) {
                     self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMaxX(leftNeighbouringStripView.frame)
                                                                                endXPos:CGRectGetMaxX(leftNeighbouringStripView.frame) + CGRectGetWidth(self.movedStripView.contentFrameInParent)];
                     return;
@@ -951,7 +951,7 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
             if (movedStripIndex < [self.allStrips count] - 1) {
                 HLSStrip *rightStrip = [self.allStrips objectAtIndex:movedStripIndex + 1];
                 HLSStripView *rightNeighbouringStripView = [self stripViewForStrip:rightStrip];
-                if (CGRectIntersectsRect(contentFrame, rightNeighbouringStripView.frame)) {
+                if (floatge(CGRectGetMaxX(contentFrame), CGRectGetMinX(rightNeighbouringStripView.frame))) {
                     self.movedStripView.contentFrameInParent = [self frameForBeginXPos:CGRectGetMinX(rightNeighbouringStripView.frame) - CGRectGetWidth(self.movedStripView.contentFrameInParent)
                                                                                endXPos:CGRectGetMinX(rightNeighbouringStripView.frame)];
                     return;
