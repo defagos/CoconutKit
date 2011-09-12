@@ -12,7 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
-const CGFloat kStripViewHandleWidth = 30.f;
+const CGFloat kStripViewHandleWidth = 22.f;
 
 @interface HLSStripView () <HLSAnimationDelegate>
 
@@ -167,13 +167,19 @@ const CGFloat kStripViewHandleWidth = 30.f;
     // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
     
     // Add handles around the strip view
-    self.leftHandleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-    self.leftHandleView.backgroundColor = [UIColor blueColor];
+    self.leftHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default.png"]] autorelease];
+    self.leftHandleView.contentStretch = CGRectMake(0.f, 
+                                                    0.5f, 
+                                                    1.f, 
+                                                    1.f / self.leftHandleView.frame.size.height);
     self.leftHandleView.exclusiveTouch = YES;
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-    self.rightHandleView.backgroundColor = [UIColor blueColor];
+    self.rightHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default.png"]] autorelease];
+    self.rightHandleView.contentStretch = CGRectMake(0.f, 
+                                                     0.5f, 
+                                                     1.f, 
+                                                     1.f / self.rightHandleView.frame.size.height);
     self.rightHandleView.exclusiveTouch = YES;
     [self addSubview:self.rightHandleView];
     

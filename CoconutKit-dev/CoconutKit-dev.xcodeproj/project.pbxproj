@@ -155,6 +155,7 @@
 		6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */; };
 		6FDB13501404D1C000469DEC /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB13001404D1C000469DEC /* WizardPageViewController.xib */; };
 		6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB13031404D1C000469DEC /* DemosListViewController.m */; };
+		6FEDD6C6141E2F6900D59BFC /* CoconutKit_handle_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FF935851406AB7A00649482 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */; };
@@ -414,10 +415,11 @@
 		6FDB13001404D1C000469DEC /* WizardPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
 		6FDB13021404D1C000469DEC /* DemosListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemosListViewController.h; sourceTree = "<group>"; };
 		6FDB13031404D1C000469DEC /* DemosListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemosListViewController.m; sourceTree = "<group>"; };
+		6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default.png; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
-		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
+		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
+		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
 		6FF935821406AB7A00649482 /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
 		6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
 		6FF935841406AB7A00649482 /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				6F37FDDB13EBE478003E33EF /* CoconutKit_ButtonBarRefresh.png */,
 				6F37FDDC13EBE478003E33EF /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F37FDDD13EBE478003E33EF /* CoconutKit_cursor_default_pointer.png */,
+				6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */,
 				6F482FC0140EBD0600D679E7 /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;
@@ -1262,6 +1265,7 @@
 				6F482FC1140EBD0600D679E7 /* CoconutKit_strip_default_background.png in Resources */,
 				6F482FC9140EBD4800D679E7 /* StripsDemoViewController.xib in Resources */,
 				6F482FCB140EBD7D00D679E7 /* strip_bkgr_green.png in Resources */,
+				6FEDD6C6141E2F6900D59BFC /* CoconutKit_handle_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
