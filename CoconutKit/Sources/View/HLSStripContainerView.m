@@ -18,6 +18,8 @@
 static NSString *kAddStripAnimationTag = @"addStrip";
 static NSString *kRemoveStripAnimationTag = @"removeStrip";
 
+static const CGFloat kGrabbedViewAlpha = 0.5f;
+
 static const NSTimeInterval kLongTouchThreshold = 0.3;
 
 // TODO: Set m_positionsUsed to YES somewhere!!!!
@@ -797,6 +799,8 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
             if (! m_draggingLeftHandle) {
                 m_draggingLeftHandle = YES;
                 
+                [stripView leftHandleView].alpha = kGrabbedViewAlpha;
+                
                 m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
                 
@@ -808,6 +812,8 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
         else if (CGRectContainsPoint([stripView rightHandleFrameInParent], point)) {
             if (! m_draggingRightHandle) {
                 m_draggingRightHandle = YES;
+                
+                [stripView rightHandleView].alpha = kGrabbedViewAlpha;
                 
                 m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
@@ -826,6 +832,7 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
                 [self exitEditModeAnimated:YES];
                 
                 m_draggingStripView = YES;
+                stripView.alpha = kGrabbedViewAlpha;
                 
                 m_stripPreviousXPos = point.x;
                 
@@ -1016,6 +1023,10 @@ static const NSTimeInterval kLongTouchThreshold = 0.3;
     if (self.movedStripView) {
         [self snapStripToNearestPosition];
     }
+    
+    self.movedStripView.alpha = 1.f;
+    [self.movedStripView leftHandleView].alpha = 1.f;
+    [self.movedStripView rightHandleView].alpha = 1.f;
     
     self.movedStripView = nil;
     
