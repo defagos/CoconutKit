@@ -827,6 +827,13 @@ static const NSTimeInterval kLongTouchThreshold = 0.2;
     
     if (stripView && ! m_draggingStripView && ! m_draggingLeftHandle && ! m_draggingRightHandle) {
         if (doublege(touch.timestamp - m_touchTimestamp, kLongTouchThreshold)) {
+            // No move operation allowed if edit mode disabled
+            if ([self.delegate respondsToSelector:@selector(stripContainerView:shouldEnterEditModeForStrip:)]) {
+                if (! [self.delegate stripContainerView:self shouldEnterEditModeForStrip:stripView.strip]) {
+                    return;
+                }
+            }
+            
             // Moving, threshold reached. Begin dragging
             if (doubleeq(m_stripPreviousXPos, 0.)) {
                 [self exitEditModeAnimated:YES];

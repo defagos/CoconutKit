@@ -159,7 +159,8 @@
 @optional
 
 /**
- * Called right before a new strip is added. Return NO to cancel
+ * Called right before a new strip is added. Return NO to cancel (when this method is not implemtented, th
+ * behavior defaults to YES)
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldAddStrip:(HLSStrip *)strip;
 
@@ -180,7 +181,8 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldSplitStrip:(HLSStrip *)strip;
 
 /**
- * Called right before a strip is deleted. Return NO to cancel
+ * Called right before a strip is deleted. Return NO to cancel (when this method is not implemtented, th
+ * behavior defaults to YES)
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldDeleteStrip:(HLSStrip *)strip;
 
@@ -201,7 +203,8 @@
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldMergeStrip:(HLSStrip *)strip1 withStrip:(HLSStrip *)strip2;
 
 /**
- * Called when a strip is about to enter edit mode. Return NO to prevent resizing
+ * Called when a strip is about to enter edit mode. Return NO to prevent resizing (when this method is not implemtented, th
+ * behavior defaults to YES). Note that returning NO also prevents drag & drop operations
  */
 - (BOOL)stripContainerView:(HLSStripContainerView *)stripContainerView shouldEnterEditModeForStrip:(HLSStrip *)strip;
 
