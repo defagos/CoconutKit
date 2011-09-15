@@ -103,4 +103,15 @@
  */
 - (NSString *)friendlyVersionNumber;
 
+/**
+ * Draw the string in the specified rect, with the specified font and alignment properties
+ */
+- (CGSize)drawInRect:(CGRect)rect 
+            withFont:(UIFont *)font 
+         minFontSize:(CGFloat)minFontSize
+      actualFontSize:(CGFloat *)pActualFontSize
+       textAlignment:(UITextAlignment)textAlignment 
+       lineBreakMode:(UILineBreakMode)lineBreakMode
+  baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
+
 @end

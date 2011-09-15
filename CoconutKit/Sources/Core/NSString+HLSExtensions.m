@@ -109,4 +109,63 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return self;
 }
 
+#pragma mark Drawing
+
+- (CGSize)drawInRect:(CGRect)rect 
+            withFont:(UIFont *)font 
+         minFontSize:(CGFloat)minFontSize
+      actualFontSize:(CGFloat *)pActualFontSize
+       textAlignment:(UITextAlignment)textAlignment 
+       lineBreakMode:(UILineBreakMode)lineBreakMode
+  baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    CGSize textSize = [self sizeWithFont:font 
+                             minFontSize:minFontSize 
+                          actualFontSize:NULL 
+                                forWidth:CGRectGetWidth(rect) 
+                           lineBreakMode:lineBreakMode];
+    
+    // Calculate the origin so that the text we draw is centered in rect
+    CGPoint origin;
+    switch (textAlignment) {
+        case UITextAlignmentLeft: {
+            origin = CGPointMake(CGRectGetMinX(rect), 
+                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+            break;
+        }
+            
+        case UITextAlignmentCenter: {
+            origin = CGPointMake(CGRectGetMinX(rect) + (CGRectGetWidth(rect) - textSize.width) / 2.f, 
+                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+            break;
+        }
+            
+        case UITextAlignmentRight: {
+            origin = CGPointMake(CGRectGetWidth(rect) - textSize.width, 
+                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);            
+            break;
+        }
+            
+        default: {
+            HLSLoggerError(@"Unknown text alignment");
+            break;
+        }
+    }
+    
+    CGSize actualSize = [self drawAtPoint:origin
+                                 forWidth:CGRectGetWidth(rect)
+                                 withFont:font
+                              minFontSize:minFontSize
+                           actualFontSize:pActualFontSize
+                            lineBreakMode:lineBreakMode
+                       baselineAdjustment:baselineAdjustment];
+    
+    CGContextRestoreGState(context);
+    
+    return actualSize;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "UILabel+HLSPDFLayout.h"
 
 #import "HLSCategoryLinker.h"
+#import "NSString+HLSExtensions.h"
 #import "UIView+HLSPDFLayout.h"
 
 HLSLinkCategory(UILabel_HLSPDFLayout)
@@ -34,22 +35,22 @@ HLSLinkCategory(UILabel_HLSPDFLayout)
     UIColor *shadowColor = self.shadowColor ? self.shadowColor : [UIColor clearColor];
     CGContextSetShadowWithColor(context, self.shadowOffset, 0.f, shadowColor.CGColor);
         
-    CGFloat minimumFontSize = 0.f;
+    CGFloat minFontSize = 0.f;
     if (self.adjustsFontSizeToFitWidth) {
-        minimumFontSize = [self minimumFontSize];
+        minFontSize = [self minimumFontSize];
     }
     else {
-        minimumFontSize = self.font.pointSize;
+        minFontSize = self.font.pointSize;
     }
     
-    [self.text drawAtPoint:self.frame.origin
-                  forWidth:CGRectGetWidth(self.frame)
-                  withFont:self.font
-               minFontSize:minimumFontSize
-            actualFontSize:NULL
-             lineBreakMode:self.lineBreakMode
-        baselineAdjustment:self.baselineAdjustment];
-    
+    [self.text drawInRect:self.frame 
+                 withFont:self.font
+              minFontSize:minFontSize 
+           actualFontSize:NULL
+            textAlignment:self.textAlignment 
+            lineBreakMode:self.lineBreakMode 
+       baselineAdjustment:self.baselineAdjustment];
+        
     CGContextRestoreGState(context);
 }
 
