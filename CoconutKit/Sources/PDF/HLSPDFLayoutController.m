@@ -110,9 +110,15 @@
     //         method manually (mirroring what drawRect: should do). This requires some more work but allows us to
     //         taylor drawing as needed. Moreover, not so many drawElement methods have to be implemented, this is not
     //         a no-go
+    //         Some QuartzCore methods could maybe make implementing drawElement easy (especially [CALayer renderInContext:]).
+    //         But replacing the drawElement call below by a renderInContext does not work correctly (well, almost): Masks
+    //         are not applied to images, and the problem is that renderInContext renders the whole layer tree. It is
+    //         therefore difficult to render such trees. Moreover, we want to be able to use nib and views to design
+    //         the screen, but this means we do not necessarily want to create an exact clone of the view: We only want
+    //         some properties to be copied, and some objects might be drawn differently (e.g. a table view)
     
     NSMutableData *pdfData = [NSMutableData data];
-    UIGraphicsBeginPDFContextToData(pdfData, self.layout.frame, nil);
+    UIGraphicsBeginPDFContextToData(pdfData, self.layout.bounds, nil);
     
     UIGraphicsBeginPDFPage();
     

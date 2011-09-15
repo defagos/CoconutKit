@@ -1,6 +1,6 @@
 //
 //  UIImageView+HLSPDFLayout.m
-//  CoconutKit-dev
+//  CoconutKit
 //
 //  Created by Samuel Défago on 15.09.11.
 //  Copyright 2011 Hortis. All rights reserved.
@@ -26,18 +26,18 @@
     // view)
     CGRect frame = CGRectZero;
     switch (self.contentMode) {            
-        case UIViewContentModeScaleAspectFit: {
+        case UIViewContentModeScaleAspectFit: 
+        case UIViewContentModeScaleAspectFill: {
             // Aspect ratios of frame and image
             CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
             CGFloat imageRatio = self.image.size.width / self.image.size.height;
             
             // Calculate the zoom scale so that the image fits exactly inside the frame
             CGFloat zoomScale;
-            // The image is more landscape-shaped than the frame
-            if (floatge(imageRatio, frameRatio)) {
+            if ((self.contentMode == UIViewContentModeScaleAspectFit && floatge(imageRatio, frameRatio))
+                    || (self.contentMode == UIViewContentModeScaleAspectFill && ! floatge(imageRatio, frameRatio))) {
                 zoomScale = CGRectGetWidth(self.frame) / self.image.size.width;
             }
-            // The image is more portrait-shaped than frame
             else {
                 zoomScale = CGRectGetHeight(self.frame) / self.image.size.height;
             }
@@ -48,31 +48,6 @@
                                CGRectGetMinY(self.frame) + (CGRectGetHeight(self.frame) - resizedImageHeight) / 2.f,
                                resizedImageWidth,
                                resizedImageHeight);
-            break;
-        }
-            
-        case UIViewContentModeScaleAspectFill: {
-            // Aspect ratios of frame and image
-            CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
-            CGFloat imageRatio = self.image.size.width / self.image.size.height;
-            
-            // Calculate the zoom scale so that the image fits exactly inside the frame
-            CGFloat zoomScale;
-            // The image is more landscape-shaped than the frame
-            if (floatge(imageRatio, frameRatio)) {
-                zoomScale = CGRectGetHeight(self.frame) / self.image.size.height;
-            }
-            // The image is more portrait-shaped than frame
-            else {
-                zoomScale = CGRectGetWidth(self.frame) / self.image.size.width;
-            }
-            
-            CGFloat resizedImageWidth = self.image.size.width * zoomScale;
-            CGFloat resizedImageHeight = self.image.size.height * zoomScale;
-            frame = CGRectMake(CGRectGetMinX(self.frame) + (CGRectGetWidth(self.frame) - resizedImageWidth) / 2.f,
-                               CGRectGetMinY(self.frame) + (CGRectGetHeight(self.frame) - resizedImageHeight) / 2.f,
-                               resizedImageWidth,
-                               resizedImageHeight);            
             break;
         }
             
@@ -169,6 +144,5 @@
     
     CGContextRestoreGState(context);
 }
-
 
 @end
