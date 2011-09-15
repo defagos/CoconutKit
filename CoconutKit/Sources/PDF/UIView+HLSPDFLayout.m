@@ -20,6 +20,69 @@ HLSLinkCategory(UIView_HLSPDFLayout)
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
+    switch (self.contentMode) {
+        case UIViewContentModeScaleToFill: {
+            
+            break;
+        }
+            
+        case UIViewContentModeScaleAspectFit: {
+            
+            break;
+        }
+            
+        case UIViewContentModeScaleAspectFill: {
+            
+            break;
+        }
+            
+        case UIViewContentModeRedraw: {
+            
+            break;
+        }
+            
+        case UIViewContentModeCenter: {
+            
+            break;
+        }
+            
+        case UIViewContentModeBottom: {
+            
+            break;
+        }
+            
+        case UIViewContentModeRight: {
+            
+            break;
+        }
+
+        case UIViewContentModeTopLeft: {
+            
+            break;
+        }
+
+        case UIViewContentModeTopRight: {
+            
+            break;
+        }
+
+        case UIViewContentModeBottomLeft: {
+            
+            break;
+        }
+
+        case UIViewContentModeBottomRight: {
+            
+            break;
+        }
+            
+        case UIViewContentModeLeft: 
+        default: {
+            
+            break;
+        }
+    }
+    
     // Background color (can be nil for default)
     UIColor *backgroundColor = self.backgroundColor ? self.backgroundColor : [UIColor clearColor];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);

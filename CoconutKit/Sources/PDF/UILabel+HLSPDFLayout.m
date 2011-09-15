@@ -24,17 +24,16 @@ HLSLinkCategory(UILabel_HLSPDFLayout)
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    // Draw label properties
-    // TODO: Even with "Adjusting font size" enabled, the font size is the one
-    //       defined in the xib, and no truncation occurs (unlike what happens
-    //       with a real label). Should reimplement this behaviour here
+    // TODO: Labels on several lines: Are not drawn currently yet
     
+    // Label context properties    
     UIColor *textColor = self.textColor ? self.textColor : [UIColor blackColor];
     CGContextSetFillColorWithColor(context, textColor.CGColor);
     
     UIColor *shadowColor = self.shadowColor ? self.shadowColor : [UIColor clearColor];
     CGContextSetShadowWithColor(context, self.shadowOffset, 0.f, shadowColor.CGColor);
         
+    // Draw the label
     CGFloat minFontSize = 0.f;
     if (self.adjustsFontSizeToFitWidth) {
         minFontSize = [self minimumFontSize];

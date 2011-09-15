@@ -130,13 +130,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     
     // Calculate the origin so that the text we draw is centered in rect
     CGPoint origin;
-    switch (textAlignment) {
-        case UITextAlignmentLeft: {
-            origin = CGPointMake(CGRectGetMinX(rect), 
-                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
-            break;
-        }
-            
+    switch (textAlignment) {            
         case UITextAlignmentCenter: {
             origin = CGPointMake(CGRectGetMinX(rect) + (CGRectGetWidth(rect) - textSize.width) / 2.f, 
                                  CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
@@ -149,10 +143,19 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
             break;
         }
             
-        default: {
-            HLSLoggerError(@"Unknown text alignment");
+        case UITextAlignmentLeft: {
+            origin = CGPointMake(CGRectGetMinX(rect), 
+                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
             break;
         }
+            
+        default: {
+            HLSLoggerError(@"Unknown text alignment. Fixed to left alignment");
+            origin = CGPointMake(CGRectGetMinX(rect), 
+                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+            break;
+        }
+
     }
     
     CGSize actualSize = [self drawAtPoint:origin
