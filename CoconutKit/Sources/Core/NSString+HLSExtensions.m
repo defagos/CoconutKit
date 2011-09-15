@@ -113,6 +113,8 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 - (CGSize)drawInRect:(CGRect)rect 
             withFont:(UIFont *)font 
+       numberOfLines:(NSUInteger)numberOfLines
+adjustsFontSizeToFitWidth:(BOOL)adjustsFontSizeToFitWidth
          minFontSize:(CGFloat)minFontSize
       actualFontSize:(CGFloat *)pActualFontSize
        textAlignment:(UITextAlignment)textAlignment 
@@ -122,49 +124,88 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGSize textSize = [self sizeWithFont:font 
-                             minFontSize:minFontSize 
-                          actualFontSize:NULL 
-                                forWidth:CGRectGetWidth(rect) 
-                           lineBreakMode:lineBreakMode];
+    // Warning: Some UIStringDrawing methods only works with a single line, other with multiple ones. We reproduce the 
+    // UILabel behavior here, i.e.:
+    //   - if single line & shrinking: The text can shrink
+    //   - otherwise: The text does not shrink
+    CGSize actualSize = CGSizeZero;
     
-    // Calculate the origin so that the text we draw is centered in rect
-    CGPoint origin;
-    switch (textAlignment) {            
-        case UITextAlignmentCenter: {
-            origin = CGPointMake(CGRectGetMinX(rect) + (CGRectGetWidth(rect) - textSize.width) / 2.f, 
-                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
-            break;
+    // Single line, shrinking enabled: Use single line method supporting shrinking
+    if (numberOfLines == 1 && adjustsFontSizeToFitWidth) {
+        CGSize textSize = [self sizeWithFont:font 
+                                 minFontSize:minFontSize 
+                              actualFontSize:NULL 
+                                    forWidth:CGRectGetWidth(rect) 
+                               lineBreakMode:lineBreakMode];
+        
+        // We must center the text ourselves, the method has no knowledge of the rect we are drawing in. Calculate the 
+        // origin so that the text we draw is centered in rect
+        CGPoint origin = CGPointZero;
+        switch (textAlignment) {            
+            case UITextAlignmentCenter: {
+                origin = CGPointMake(CGRectGetMinX(rect) + (CGRectGetWidth(rect) - textSize.width) / 2.f, 
+                                     CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+                break;
+            }
+                
+            case UITextAlignmentRight: {
+                origin = CGPointMake(CGRectGetMinX(rect) + CGRectGetWidth(rect) - textSize.width, 
+                                     CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);            
+                break;
+            }
+                
+            case UITextAlignmentLeft: {
+                origin = CGPointMake(CGRectGetMinX(rect), 
+                                     CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+                break;
+            }
+                
+            default: {
+                HLSLoggerError(@"Unknown text alignment. Fixed to left alignment");
+                origin = CGPointMake(CGRectGetMinX(rect), 
+                                     CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
+                break;
+            }            
         }
-            
-        case UITextAlignmentRight: {
-            origin = CGPointMake(CGRectGetWidth(rect) - textSize.width, 
-                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);            
-            break;
-        }
-            
-        case UITextAlignmentLeft: {
-            origin = CGPointMake(CGRectGetMinX(rect), 
-                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown text alignment. Fixed to left alignment");
-            origin = CGPointMake(CGRectGetMinX(rect), 
-                                 CGRectGetMinY(rect) + (CGRectGetHeight(rect) - textSize.height) / 2.f);
-            break;
-        }
-
+        
+        actualSize = [self drawAtPoint:origin
+                              forWidth:CGRectGetWidth(rect)
+                              withFont:font
+                           minFontSize:minFontSize
+                        actualFontSize:pActualFontSize
+                         lineBreakMode:lineBreakMode
+                    baselineAdjustment:baselineAdjustment];        
     }
-    
-    CGSize actualSize = [self drawAtPoint:origin
-                                 forWidth:CGRectGetWidth(rect)
-                                 withFont:font
-                              minFontSize:minFontSize
-                           actualFontSize:pActualFontSize
-                            lineBreakMode:lineBreakMode
-                       baselineAdjustment:baselineAdjustment];
+    // Otherwise: Use multiple line method which does not support shrinking
+    else {        
+        // Calculate the size needed for the text. This does not take into account the constrained number of lines,
+        // we need to fix it afterwards
+        CGSize textSize = [self sizeWithFont:font 
+                           constrainedToSize:rect.size
+                               lineBreakMode:lineBreakMode];
+        
+        // Find the height of a line (prevents from shrinking the font so that we get the height we are interested in)
+        // TODO: When CoconutKit only for iOS 4 and higher: Use UIFont lineHeight 
+        CGSize singleLineTextSize = [self sizeWithFont:font 
+                                           minFontSize:font.pointSize
+                                        actualFontSize:NULL 
+                                              forWidth:CGFLOAT_MAX
+                                         lineBreakMode:lineBreakMode];
+
+        // Take into account the maximal number of lines constraint
+        CGFloat bestHeight = MIN(textSize.height, singleLineTextSize.height * numberOfLines);
+        
+        CGRect bestRect = CGRectMake(CGRectGetMinX(rect),
+                                     CGRectGetMinY(rect) + (CGRectGetHeight(rect) - bestHeight) / 2.f,
+                                     CGRectGetWidth(rect),
+                                     bestHeight);
+        
+        // This method does the horizontal centering in the target rectangle
+        actualSize = [self drawInRect:bestRect
+                             withFont:font 
+                        lineBreakMode:lineBreakMode 
+                            alignment:textAlignment];
+    }
     
     CGContextRestoreGState(context);
     

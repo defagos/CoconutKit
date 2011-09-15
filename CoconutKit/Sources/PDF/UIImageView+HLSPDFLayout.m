@@ -153,8 +153,8 @@
             break;
         }
         case UIViewContentModeRedraw: {
-            HLSLoggerWarn(@"Redraw content mode does not make sense for image views in PDF layouts. Fixed to Scale to fill");
-            frame = self.frame;
+            HLSLoggerWarn(@"Redraw content mode does not make sense for image views in PDF layouts. Nothing drawn");
+            frame = CGRectZero;
             break;
         }
         default: {

@@ -34,17 +34,11 @@ HLSLinkCategory(UILabel_HLSPDFLayout)
     CGContextSetShadowWithColor(context, self.shadowOffset, 0.f, shadowColor.CGColor);
         
     // Draw the label
-    CGFloat minFontSize = 0.f;
-    if (self.adjustsFontSizeToFitWidth) {
-        minFontSize = [self minimumFontSize];
-    }
-    else {
-        minFontSize = self.font.pointSize;
-    }
-    
     [self.text drawInRect:self.frame 
                  withFont:self.font
-              minFontSize:minFontSize 
+            numberOfLines:self.numberOfLines
+adjustsFontSizeToFitWidth:self.adjustsFontSizeToFitWidth
+              minFontSize:self.minimumFontSize 
            actualFontSize:NULL
             textAlignment:self.textAlignment 
             lineBreakMode:self.lineBreakMode 
