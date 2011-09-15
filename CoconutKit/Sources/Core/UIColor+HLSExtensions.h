@@ -24,6 +24,7 @@
 - (NSUInteger)redComponent;
 - (NSUInteger)greenComponent;
 - (NSUInteger)blueComponent;
+- (NSUInteger)alphaComponent;
 
 /**
  * Return the normalized color components (0.f - 1.f)
@@ -31,5 +32,6 @@
 - (CGFloat)normalizedRedComponent;
 - (CGFloat)normalizedGreenComponent;
 - (CGFloat)normalizedBlueComponent;
+- (CGFloat)normalizedAlphaComponent;
 
 @end

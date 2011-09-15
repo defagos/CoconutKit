@@ -9,18 +9,15 @@
 #import "HLSPDFLayout.h"
 
 #import "HLSCategoryLinker.h"
+#import "UIView+HLSPDFLayout.h"
 
 HLSLinkCategory(HLSPDFLayout)
 
 @implementation HLSPDFLayout
 
-// TODO: Disable addSubview and similar methods
-
-#pragma mark HLSPDFLayoutElement protocol implementation
-
-- (void)draw
+- (void)drawElement
 {
-
+    [super drawElement];
 }
 
 @end

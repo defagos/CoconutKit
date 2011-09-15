@@ -10,6 +10,8 @@
 
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
+#import "UILabel+HLSPDFLayout.h"
+#import "UIView+HLSPDFLayout.h"
 
 @interface HLSPDFLayoutController ()
 
@@ -102,21 +104,19 @@
         return nil;
     }
     
+    // Remark: It would have been rather convenient if we could have called the drawRect: method directly. It does not
+    //         seem to work (after some tests: everything is drawn at the origin, and view backgrounds are not filled), 
+    //         though, therefore the need for a drawElement method. But this requires us to implement each drawElement 
+    //         method manually (mirroring what drawRect: should do). This requires some more work but allows us to
+    //         taylor drawing as needed. Moreover, not so many drawElement methods have to be implemented, this is not
+    //         a no-go
+    
     NSMutableData *pdfData = [NSMutableData data];
     UIGraphicsBeginPDFContextToData(pdfData, self.layout.frame, nil);
     
     UIGraphicsBeginPDFPage();
     
-    // TODO: Must be recursive, relative to parent view coosys, etc.. Just a test here :-)
-    for (UIView *view in self.layout.subviews) {
-        if (! [view conformsToProtocol:@protocol(HLSPDFLayoutElement)]) {
-            HLSLoggerWarn(@"The view %@ is not a layout element. Ignored");
-            continue;
-        }
-        
-        UIView<HLSPDFLayoutElement> *layoutElement = (UIView<HLSPDFLayoutElement> *)view;
-        [layoutElement draw];
-    }
+    [layout drawElement];
     
     // This write the pdf data
     UIGraphicsEndPDFContext();

@@ -6,8 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSPDFLayoutElement.h"
-
 /**
  * An HLSPDFLayout is always the bottom of the layout hierarchy (and cannot be added elsewhere in the hierarchy).
  * It comprises three elements:
@@ -18,7 +16,7 @@
  * notably tables), a layout can namely expand into several pages, on which the header and footer will always
  * be added.
  */
-@interface HLSPDFLayout : UIView <HLSPDFLayoutElement> {
+@interface HLSPDFLayout : UIView {
 @private
     
 }

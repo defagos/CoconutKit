@@ -24,8 +24,6 @@
     #import "HLSOrientationCloner.h"
     #import "HLSPDFLayout.h"
     #import "HLSPDFLayoutController.h"
-    #import "HLSPDFLayoutElement.h"
-    #import "HLSPDFLayoutLabel.h"
     #import "HLSPlaceholderViewController.h"
     #import "HLSReloadable.h"
     #import "HLSStackController.h"
