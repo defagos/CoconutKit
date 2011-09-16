@@ -1,6 +1,6 @@
 //
 //  PDFGenerationDemoViewController.m
-//  CoconutKit-dev
+//  CoconutKit-demo
 //
 //  Created by Samuel Défago on 14.09.11.
 //  Copyright 2011 Hortis. All rights reserved.

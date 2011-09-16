@@ -22,9 +22,6 @@ HLSLinkCategory(UILabel_HLSPDFLayout)
     [super drawElement];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    // TODO: Labels on several lines: Are not drawn currently yet
     
     // Label context properties    
     UIColor *textColor = self.textColor ? self.textColor : [UIColor blackColor];
@@ -34,7 +31,7 @@ HLSLinkCategory(UILabel_HLSPDFLayout)
     CGContextSetShadowWithColor(context, self.shadowOffset, 0.f, shadowColor.CGColor);
         
     // Draw the label
-    [self.text drawInRect:self.frame 
+    [self.text drawInRect:self.frame
                  withFont:self.font
             numberOfLines:self.numberOfLines
 adjustsFontSizeToFitWidth:self.adjustsFontSizeToFitWidth
@@ -43,8 +40,6 @@ adjustsFontSizeToFitWidth:self.adjustsFontSizeToFitWidth
             textAlignment:self.textAlignment 
             lineBreakMode:self.lineBreakMode 
        baselineAdjustment:self.baselineAdjustment];
-        
-    CGContextRestoreGState(context);
 }
 
 @end

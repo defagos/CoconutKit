@@ -106,10 +106,10 @@
     
     // Remark: It would have been rather convenient if we could have called the drawRect: method directly. It does not
     //         seem to work (after some tests: everything is drawn at the origin, and view backgrounds are not filled), 
-    //         though, therefore the need for a drawElement method. But this requires us to implement each drawElement 
-    //         method manually (mirroring what drawRect: should do). This requires some more work but allows us to
-    //         taylor drawing as needed. Moreover, not so many drawElement methods have to be implemented, this is not
-    //         a no-go
+    //         though, therefore the need for a drawElement method. But this requires us to implement each 
+    //         drawElement method manually (mirroring what drawRect: should do). This requires some more work but 
+    //         allows us to taylor drawing as needed. Moreover, not so many drawElement methods have to be implemented, 
+    //         this is not a no-go
     //         Some QuartzCore methods could maybe make implementing drawElement easy (especially [CALayer renderInContext:]).
     //         But replacing the drawElement call below by a renderInContext does not work correctly (well, almost): Masks
     //         are not applied to images, and the problem is that renderInContext renders the whole layer tree. It is

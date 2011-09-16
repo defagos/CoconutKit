@@ -18,14 +18,19 @@ HLSLinkCategory(UIView_HLSPDFLayout)
 - (void)drawElement
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
         
     // Background color (can be nil for default)
     UIColor *backgroundColor = self.backgroundColor ? self.backgroundColor : [UIColor clearColor];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        
     CGContextFillRect(context, self.frame);
     
-    // Subviews recursively
+    // Switch to relative coordinate system for drawing subviews (whose frame is given relative to
+    // its parent view)
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
+    
+    // Draw subviews recursively
     for (UIView *view in self.subviews) {
         if (! [view respondsToSelector:@selector(drawElement)]) {
             HLSLoggerWarn(@"The view %@ is not a layout element. Ignored");

@@ -15,9 +15,4 @@ HLSLinkCategory(HLSPDFLayout)
 
 @implementation HLSPDFLayout
 
-- (void)drawElement
-{
-    [super drawElement];
-}
-
 @end
