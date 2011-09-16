@@ -28,23 +28,52 @@ HLSLinkCategory(UITableView_HLSPDFLayout)
 
 - (void)drawElement
 {
-    // We do not call super here. This would draw other elements, like scroll bars. We just draw
-    // the background
+    // We do not call super here. This would draw other elements, like scroll bars. Moreover, this would
+    // draw the background as it is in the nib file, but this is not what we want: We want the height to
+    // be determined by the table contents
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    // Background color (can be nil for default)
+    // Calculate the total height
+    CGFloat totalHeight = 0.f;
+    NSInteger numberOfSections = [self.dataSource numberOfSectionsInTableView:self];
+    for (NSInteger section = 0; section < numberOfSections; ++section) {
+        // Header
+        UIView *headerView = [self headerViewForSection:section];
+        if (headerView) {
+            totalHeight += [self headerViewHeightForSection:section];
+        }
+        
+        // Cells
+        NSInteger numberOfRows = [self.dataSource tableView:self numberOfRowsInSection:section];
+        for (NSInteger row = 0; row < numberOfRows; ++row) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            totalHeight += [self cellHeightAtIndexPath:indexPath];
+        }
+        
+        // Footer
+        UIView *footerView = [self footerViewForSection:section];
+        if (footerView) {
+            totalHeight += [self footerViewHeightForSection:section];
+        }
+    }
+    
+    // Draw the background. Must begin with the background since "paint" is applied in layers
     UIColor *backgroundColor = self.backgroundColor ? self.backgroundColor : [UIColor clearColor];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     
-    CGContextFillRect(context, self.frame);
-    
+    CGRect exactFrame = CGRectMake(CGRectGetMinX(self.frame), 
+                                   CGRectGetMinY(self.frame),
+                                   CGRectGetWidth(self.frame), 
+                                   totalHeight);
+    CGContextFillRect(context, exactFrame);
+        
     // Switch to relative coordinate system for drawing subviews (whose frame is given relative to
     // its parent view)
     CGContextSaveGState(context);
     CGContextTranslateCTM(context, CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
     
-    NSInteger numberOfSections = [self.dataSource numberOfSectionsInTableView:self];
+    // Draw contents
     for (NSInteger section = 0; section < numberOfSections; ++section) {
         // Header
         UIView *headerView = [self headerViewForSection:section];
@@ -60,6 +89,7 @@ HLSLinkCategory(UITableView_HLSPDFLayout)
         for (NSInteger row = 0; row < numberOfRows; ++row) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
             UITableViewCell *cell = [self.dataSource tableView:self cellForRowAtIndexPath:indexPath];
+            NSAssert(cell != nil, @"Missing cell at indexPath %@", indexPath);
             [cell drawElement];
             
             // Upate the CTM matrix to draw the next element at the correct location
