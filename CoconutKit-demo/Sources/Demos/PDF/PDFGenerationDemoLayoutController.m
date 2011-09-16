@@ -8,6 +8,8 @@
 
 #import "PDFGenerationDemoLayoutController.h"
 
+#import "PDFGenerationDemoLayoutFooterView.h"
+#import "PDFGenerationDemoLayoutHeaderView.h"
 #import "PDFGenerationDemoLayoutTableViewCell.h"
 
 @implementation PDFGenerationDemoLayoutController
@@ -33,65 +35,48 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    self.tableView.rowHeight = [PDFGenerationDemoLayoutTableViewCell height];
+    self.tableView.sectionHeaderHeight = [PDFGenerationDemoLayoutHeaderView height];
+    self.tableView.sectionFooterHeight = [PDFGenerationDemoLayoutFooterView height];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
-
-#if 0
-
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    
-}
-
-#endif
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     PDFGenerationDemoLayoutTableViewCell *cell = [PDFGenerationDemoLayoutTableViewCell cellForTableView:tableView];
     cell.indexLabel.text = [NSString stringWithFormat:@"%d:%d", indexPath.section, indexPath.row];
+    cell.backgroundColor = indexPath.row % 2 ? [UIColor orangeColor] : [UIColor yellowColor];
     return cell;
 }
 
 #pragma mark UITableViewDelegate protocol implementation
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [PDFGenerationDemoLayoutTableViewCell height];
-}
-
-#if 0
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
+    // TODO: localize
+    PDFGenerationDemoLayoutHeaderView *headerView = [PDFGenerationDemoLayoutHeaderView view];
+    headerView.titleLabel.text = [NSString stringWithFormat:@"Header for section %d", section];
+    return headerView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    
+    // TODO: localize
+    PDFGenerationDemoLayoutHeaderView *footerView = [PDFGenerationDemoLayoutFooterView view];
+    footerView.titleLabel.text = [NSString stringWithFormat:@"Footer for section %d", section];
+    return footerView;    
 }
-
-#endif
 
 @end

@@ -78,6 +78,10 @@
 		6F7E51B214212E7D003C104A /* HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7E51B114212E7C003C104A /* HLSPDFLayout.m */; };
 		6F86A33814237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F86A33714237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.m */; };
 		6F86A33B142375D2005EC589 /* PDFGenerationDemoLayoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F86A33A142375D2005EC589 /* PDFGenerationDemoLayoutTableViewCell.xib */; };
+		6F86A3421423B68C005EC589 /* PDFGenerationDemoLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F86A3411423B68C005EC589 /* PDFGenerationDemoLayoutHeaderView.m */; };
+		6F86A3441423B6A4005EC589 /* PDFGenerationDemoLayoutHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F86A3431423B6A4005EC589 /* PDFGenerationDemoLayoutHeaderView.xib */; };
+		6F86A3471423B6BF005EC589 /* PDFGenerationDemoLayoutFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F86A3461423B6BF005EC589 /* PDFGenerationDemoLayoutFooterView.m */; };
+		6F86A3491423B6D4005EC589 /* PDFGenerationDemoLayoutFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F86A3481423B6D3005EC589 /* PDFGenerationDemoLayoutFooterView.xib */; };
 		6F9BFE701414FC0200184973 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9BFE6F1414FC0200184973 /* NSTimeZone+HLSExtensions.m */; };
 		6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D3D140500090043693E /* UIView+HLSExtensions.m */; };
 		6FB624C11423696D00A76DF8 /* UITableView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB624C01423696C00A76DF8 /* UITableView+HLSPDFLayout.m */; };
@@ -307,6 +311,12 @@
 		6F86A33614237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutTableViewCell.h; sourceTree = "<group>"; };
 		6F86A33714237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutTableViewCell.m; sourceTree = "<group>"; };
 		6F86A33A142375D2005EC589 /* PDFGenerationDemoLayoutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutTableViewCell.xib; sourceTree = "<group>"; };
+		6F86A3401423B68B005EC589 /* PDFGenerationDemoLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutHeaderView.h; sourceTree = "<group>"; };
+		6F86A3411423B68C005EC589 /* PDFGenerationDemoLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutHeaderView.m; sourceTree = "<group>"; };
+		6F86A3431423B6A4005EC589 /* PDFGenerationDemoLayoutHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutHeaderView.xib; sourceTree = "<group>"; };
+		6F86A3451423B6BE005EC589 /* PDFGenerationDemoLayoutFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutFooterView.h; sourceTree = "<group>"; };
+		6F86A3461423B6BF005EC589 /* PDFGenerationDemoLayoutFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutFooterView.m; sourceTree = "<group>"; };
+		6F86A3481423B6D3005EC589 /* PDFGenerationDemoLayoutFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutFooterView.xib; sourceTree = "<group>"; };
 		6F9BFE6E1414FC0200184973 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F9BFE6F1414FC0200184973 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FA74D3C140500090043693E /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -714,6 +724,12 @@
 				6F7765C61421D4920043D472 /* PDFGenerationDemoLayoutController.h */,
 				6F7765C71421D4920043D472 /* PDFGenerationDemoLayoutController.m */,
 				6F7765C81421D4920043D472 /* PDFGenerationDemoLayoutController.xib */,
+				6F86A3451423B6BE005EC589 /* PDFGenerationDemoLayoutFooterView.h */,
+				6F86A3461423B6BF005EC589 /* PDFGenerationDemoLayoutFooterView.m */,
+				6F86A3481423B6D3005EC589 /* PDFGenerationDemoLayoutFooterView.xib */,
+				6F86A3401423B68B005EC589 /* PDFGenerationDemoLayoutHeaderView.h */,
+				6F86A3411423B68C005EC589 /* PDFGenerationDemoLayoutHeaderView.m */,
+				6F86A3431423B6A4005EC589 /* PDFGenerationDemoLayoutHeaderView.xib */,
 				6F86A33614237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.h */,
 				6F86A33714237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.m */,
 				6F86A33A142375D2005EC589 /* PDFGenerationDemoLayoutTableViewCell.xib */,
@@ -1293,6 +1309,8 @@
 				6F7765CD1421D4920043D472 /* PDFGenerationDemoLayoutController.xib in Resources */,
 				6F7765CF1421D4920043D472 /* PDFGenerationDemoViewController.xib in Resources */,
 				6F86A33B142375D2005EC589 /* PDFGenerationDemoLayoutTableViewCell.xib in Resources */,
+				6F86A3441423B6A4005EC589 /* PDFGenerationDemoLayoutHeaderView.xib in Resources */,
+				6F86A3491423B6D4005EC589 /* PDFGenerationDemoLayoutFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1401,6 +1419,8 @@
 				6F7765D2142200CD0043D472 /* UIImageView+HLSPDFLayout.m in Sources */,
 				6FB624C11423696D00A76DF8 /* UITableView+HLSPDFLayout.m in Sources */,
 				6F86A33814237498005EC589 /* PDFGenerationDemoLayoutTableViewCell.m in Sources */,
+				6F86A3421423B68C005EC589 /* PDFGenerationDemoLayoutHeaderView.m in Sources */,
+				6F86A3471423B6BF005EC589 /* PDFGenerationDemoLayoutFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
