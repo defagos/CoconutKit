@@ -1,5 +1,6 @@
 HLSAssert.m
 HLSCursor.m
+HLSPDFLayout.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m

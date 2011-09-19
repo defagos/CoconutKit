@@ -9,6 +9,7 @@
 #import "UIView+HLSPDFLayout.h"
 
 #import "HLSCategoryLinker.h"
+#import "HLSLogger.h"
 #import "UIColor+HLSExtensions.h"
 
 HLSLinkCategory(UIView_HLSPDFLayout)

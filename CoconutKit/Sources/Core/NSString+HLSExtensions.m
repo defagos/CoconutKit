@@ -10,6 +10,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSCategoryLinker.h"
+#import "HLSLogger.h"
 
 HLSLinkCategory(NSString_HLSExtensions)
 
