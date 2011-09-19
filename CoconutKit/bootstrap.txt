@@ -18,4 +18,8 @@ NSTimeZone+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
+UIImageView+HLSPDFLayout.m
+UILabel+HLSPDFLayout.m
+UITableView+HLSPDFLayout.m
 UIView+HLSExtensions.m
+UIView+HLSPDFLayout.m
