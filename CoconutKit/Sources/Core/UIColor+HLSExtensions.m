@@ -50,6 +50,11 @@ HLSLinkCategory(UIColor_HLSExtensions)
     return (NSUInteger)roundf(255.f * [self normalizedBlueComponent]);
 }
 
+- (NSUInteger)alphaComponent
+{
+    return (NSUInteger)roundf(255.f * [self normalizedAlphaComponent]);
+}
+
 - (CGFloat)normalizedRedComponent
 {
     const CGFloat *components = CGColorGetComponents(self.CGColor);
@@ -66,6 +71,12 @@ HLSLinkCategory(UIColor_HLSExtensions)
 {
     const CGFloat *components = CGColorGetComponents(self.CGColor);
     return components[2];
+}
+
+- (CGFloat)normalizedAlphaComponent
+{
+    const CGFloat *components = CGColorGetComponents(self.CGColor);
+    return components[3];
 }
 
 @end

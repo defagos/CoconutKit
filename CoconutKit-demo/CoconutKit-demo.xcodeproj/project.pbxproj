@@ -16,6 +16,16 @@
 		6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */; };
 		6F1C64BB14066B0B006F63FC /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
+		6F63A51414271E0A004E701E /* PDFGenerationDemoLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A50614271E0A004E701E /* PDFGenerationDemoLayoutController.m */; };
+		6F63A51514271E0A004E701E /* PDFGenerationDemoLayoutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F63A50714271E0A004E701E /* PDFGenerationDemoLayoutController.xib */; };
+		6F63A51614271E0A004E701E /* PDFGenerationDemoLayoutFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A50914271E0A004E701E /* PDFGenerationDemoLayoutFooterView.m */; };
+		6F63A51714271E0A004E701E /* PDFGenerationDemoLayoutFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F63A50A14271E0A004E701E /* PDFGenerationDemoLayoutFooterView.xib */; };
+		6F63A51814271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A50C14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.m */; };
+		6F63A51914271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F63A50D14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.xib */; };
+		6F63A51A14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A50F14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.m */; };
+		6F63A51B14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F63A51014271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.xib */; };
+		6F63A51C14271E0A004E701E /* PDFGenerationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A51214271E0A004E701E /* PDFGenerationDemoViewController.m */; };
+		6F63A51D14271E0A004E701E /* PDFGenerationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F63A51314271E0A004E701E /* PDFGenerationDemoViewController.xib */; };
 		6F8F99E8140B64D3007472B6 /* cell_bkgr_brown_large_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8F99E3140B64D3007472B6 /* cell_bkgr_brown_large_selected.png */; };
 		6F8F99E9140B64D3007472B6 /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8F99E4140B64D3007472B6 /* cell_bkgr_brown_large.png */; };
 		6F8F99EA140B64D3007472B6 /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8F99E5140B64D3007472B6 /* icn_bookmark.png */; };
@@ -123,6 +133,21 @@
 		6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
 		6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6F63A50514271E0A004E701E /* PDFGenerationDemoLayoutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutController.h; sourceTree = "<group>"; };
+		6F63A50614271E0A004E701E /* PDFGenerationDemoLayoutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutController.m; sourceTree = "<group>"; };
+		6F63A50714271E0A004E701E /* PDFGenerationDemoLayoutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutController.xib; sourceTree = "<group>"; };
+		6F63A50814271E0A004E701E /* PDFGenerationDemoLayoutFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutFooterView.h; sourceTree = "<group>"; };
+		6F63A50914271E0A004E701E /* PDFGenerationDemoLayoutFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutFooterView.m; sourceTree = "<group>"; };
+		6F63A50A14271E0A004E701E /* PDFGenerationDemoLayoutFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutFooterView.xib; sourceTree = "<group>"; };
+		6F63A50B14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutHeaderView.h; sourceTree = "<group>"; };
+		6F63A50C14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutHeaderView.m; sourceTree = "<group>"; };
+		6F63A50D14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutHeaderView.xib; sourceTree = "<group>"; };
+		6F63A50E14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoLayoutTableViewCell.h; sourceTree = "<group>"; };
+		6F63A50F14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoLayoutTableViewCell.m; sourceTree = "<group>"; };
+		6F63A51014271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoLayoutTableViewCell.xib; sourceTree = "<group>"; };
+		6F63A51114271E0A004E701E /* PDFGenerationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerationDemoViewController.h; sourceTree = "<group>"; };
+		6F63A51214271E0A004E701E /* PDFGenerationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerationDemoViewController.m; sourceTree = "<group>"; };
+		6F63A51314271E0A004E701E /* PDFGenerationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFGenerationDemoViewController.xib; sourceTree = "<group>"; };
 		6F8F99E3140B64D3007472B6 /* cell_bkgr_brown_large_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large_selected.png; sourceTree = "<group>"; };
 		6F8F99E4140B64D3007472B6 /* cell_bkgr_brown_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large.png; sourceTree = "<group>"; };
 		6F8F99E5140B64D3007472B6 /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
@@ -345,6 +370,28 @@
 			path = ActionSheet;
 			sourceTree = "<group>";
 		};
+		6F63A50414271E0A004E701E /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				6F63A50514271E0A004E701E /* PDFGenerationDemoLayoutController.h */,
+				6F63A50614271E0A004E701E /* PDFGenerationDemoLayoutController.m */,
+				6F63A50714271E0A004E701E /* PDFGenerationDemoLayoutController.xib */,
+				6F63A50814271E0A004E701E /* PDFGenerationDemoLayoutFooterView.h */,
+				6F63A50914271E0A004E701E /* PDFGenerationDemoLayoutFooterView.m */,
+				6F63A50A14271E0A004E701E /* PDFGenerationDemoLayoutFooterView.xib */,
+				6F63A50B14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.h */,
+				6F63A50C14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.m */,
+				6F63A50D14271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.xib */,
+				6F63A50E14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.h */,
+				6F63A50F14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.m */,
+				6F63A51014271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.xib */,
+				6F63A51114271E0A004E701E /* PDFGenerationDemoViewController.h */,
+				6F63A51214271E0A004E701E /* PDFGenerationDemoViewController.m */,
+				6F63A51314271E0A004E701E /* PDFGenerationDemoViewController.xib */,
+			);
+			path = PDF;
+			sourceTree = "<group>";
+		};
 		6F93C6031404CE0600FEC9B0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +427,7 @@
 			children = (
 				6F93C60C1404CE0600FEC9B0 /* Animation */,
 				6F93C6151404CE0600FEC9B0 /* Common */,
+				6F63A50414271E0A004E701E /* PDF */,
 				6F93C6431404CE0600FEC9B0 /* Task */,
 				6F93C64C1404CE0600FEC9B0 /* View */,
 				6F93C6701404CE0600FEC9B0 /* ViewControllers */,
@@ -874,6 +922,11 @@
 				6FEDD6EF141E455C00D59BFC /* CoconutKit_HLSWebViewController.xib in Resources */,
 				6FEDD6F0141E455C00D59BFC /* CoconutKit_strip_default_background.png in Resources */,
 				6FEDD6F1141E455C00D59BFC /* CoconutKit_Localizable.strings in Resources */,
+				6F63A51514271E0A004E701E /* PDFGenerationDemoLayoutController.xib in Resources */,
+				6F63A51714271E0A004E701E /* PDFGenerationDemoLayoutFooterView.xib in Resources */,
+				6F63A51914271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.xib in Resources */,
+				6F63A51B14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.xib in Resources */,
+				6F63A51D14271E0A004E701E /* PDFGenerationDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,6 +977,11 @@
 				6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */,
 				6FBF59801407E66C00F7D5EE /* StripsDemoViewController.m in Sources */,
 				6FEDD6E5141E455C00D59BFC /* CoconutKit_bootstrap.m in Sources */,
+				6F63A51414271E0A004E701E /* PDFGenerationDemoLayoutController.m in Sources */,
+				6F63A51614271E0A004E701E /* PDFGenerationDemoLayoutFooterView.m in Sources */,
+				6F63A51814271E0A004E701E /* PDFGenerationDemoLayoutHeaderView.m in Sources */,
+				6F63A51A14271E0A004E701E /* PDFGenerationDemoLayoutTableViewCell.m in Sources */,
+				6F63A51C14271E0A004E701E /* PDFGenerationDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

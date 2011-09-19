@@ -13,6 +13,7 @@
 #import "FixedSizeViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
+#import "PDFGenerationDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
 #import "StackDemoViewController.h"
@@ -28,6 +29,7 @@ typedef enum {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
     DemoCategoryIndexTask,
+    DemoCategoryIndexPDF,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
     DemoCategoryIndexEnumEnd,
@@ -50,6 +52,14 @@ typedef enum {
     TaskDemoIndexEnumEnd,
     TaskDemoIndexEnumSize = TaskDemoIndexEnumEnd - TaskDemoIndexEnumBegin
 } TaskDemoIndex;
+
+// Demos for PDF
+typedef enum {
+    PDFDemoIndexEnumBegin = 0,
+    PDFDemoIndexGeneration = PDFDemoIndexEnumBegin,
+    PDFDemoIndexEnumEnd,
+    PDFDemoIndexEnumSize = PDFDemoIndexEnumEnd - PDFDemoIndexEnumBegin
+} PDFDemoIndex;
 
 // Demos for views
 typedef enum {
@@ -146,6 +156,11 @@ typedef enum {
             return NSLocalizedString(@"Tasks", @"Tasks");
             break;
         }
+            
+        case DemoCategoryIndexPDF: {
+            return @"PDF";
+            break;
+        }
 
         case DemoCategoryIndexView: {
             return NSLocalizedString(@"Views", @"Views");
@@ -175,7 +190,12 @@ typedef enum {
         case DemoCategoryIndexTask: {
             return TaskDemoIndexEnumSize;
             break;
-        }            
+        }
+            
+        case DemoCategoryIndexPDF: {
+            return PDFDemoIndexEnumSize;
+            break;
+        }
             
         case DemoCategoryIndexView: {
             return ViewDemoIndexEnumSize;
@@ -223,6 +243,21 @@ typedef enum {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
                     cell.textLabel.text = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexPDF: {
+            switch (indexPath.row) {
+                case PDFDemoIndexGeneration: {
+                    cell.textLabel.text = NSLocalizedString(@"PDF generation", @"PDF generation");
                     break;
                 }
                     
@@ -347,6 +382,21 @@ typedef enum {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
                     demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexPDF: {
+            switch (indexPath.row) {
+                case PDFDemoIndexGeneration: {
+                    demoViewController = [[[PDFGenerationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

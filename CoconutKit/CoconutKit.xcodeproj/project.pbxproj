@@ -47,6 +47,18 @@
 		6F482FA5140EBCA400D679E7 /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482F9E140EBCA400D679E7 /* HLSStripContainerView.m */; };
 		6F482FA6140EBCA400D679E7 /* HLSStripView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F482F9F140EBCA400D679E7 /* HLSStripView.h */; };
 		6F482FA7140EBCA400D679E7 /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FA0140EBCA400D679E7 /* HLSStripView.m */; };
+		6F63A4CF14271DC9004E701E /* HLSPDFLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4C314271DC9004E701E /* HLSPDFLayout.h */; };
+		6F63A4D014271DC9004E701E /* HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4C414271DC9004E701E /* HLSPDFLayout.m */; };
+		6F63A4D114271DC9004E701E /* HLSPDFLayoutController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4C514271DC9004E701E /* HLSPDFLayoutController.h */; };
+		6F63A4D214271DC9004E701E /* HLSPDFLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4C614271DC9004E701E /* HLSPDFLayoutController.m */; };
+		6F63A4D314271DC9004E701E /* UIImageView+HLSPDFLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4C714271DC9004E701E /* UIImageView+HLSPDFLayout.h */; };
+		6F63A4D414271DC9004E701E /* UIImageView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4C814271DC9004E701E /* UIImageView+HLSPDFLayout.m */; };
+		6F63A4D514271DC9004E701E /* UILabel+HLSPDFLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4C914271DC9004E701E /* UILabel+HLSPDFLayout.h */; };
+		6F63A4D614271DC9004E701E /* UILabel+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4CA14271DC9004E701E /* UILabel+HLSPDFLayout.m */; };
+		6F63A4D714271DC9004E701E /* UITableView+HLSPDFLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4CB14271DC9004E701E /* UITableView+HLSPDFLayout.h */; };
+		6F63A4D814271DC9004E701E /* UITableView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4CC14271DC9004E701E /* UITableView+HLSPDFLayout.m */; };
+		6F63A4D914271DC9004E701E /* UIView+HLSPDFLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63A4CD14271DC9004E701E /* UIView+HLSPDFLayout.h */; };
+		6F63A4DA14271DC9004E701E /* UIView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4CE14271DC9004E701E /* UIView+HLSPDFLayout.m */; };
 		6F6E99B9131690C20075DD7A /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */; };
 		6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */; };
 		6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */; };
@@ -177,6 +189,18 @@
 		6F482F9F140EBCA400D679E7 /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
 		6F482FA0140EBCA400D679E7 /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
 		6F482FA9140EBCB800D679E7 /* CoconutKit_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_strip_default_background.png; sourceTree = "<group>"; };
+		6F63A4C314271DC9004E701E /* HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPDFLayout.h; sourceTree = "<group>"; };
+		6F63A4C414271DC9004E701E /* HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPDFLayout.m; sourceTree = "<group>"; };
+		6F63A4C514271DC9004E701E /* HLSPDFLayoutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPDFLayoutController.h; sourceTree = "<group>"; };
+		6F63A4C614271DC9004E701E /* HLSPDFLayoutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPDFLayoutController.m; sourceTree = "<group>"; };
+		6F63A4C714271DC9004E701E /* UIImageView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4C814271DC9004E701E /* UIImageView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4C914271DC9004E701E /* UILabel+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4CA14271DC9004E701E /* UILabel+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4CB14271DC9004E701E /* UITableView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4CC14271DC9004E701E /* UITableView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4CD14271DC9004E701E /* UIView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4CE14271DC9004E701E /* UIView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSPDFLayout.m"; sourceTree = "<group>"; };
 		6F6E99B7131690C20075DD7A /* NSBundle+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -337,6 +361,7 @@
 				6FC9000713D4637400834900 /* CoreData */,
 				6F3DFB4012FF1F18009ACE4D /* Graphics */,
 				6F8D0906123F4FA400FCF2AF /* Logging */,
+				6F63A4C214271DC9004E701E /* PDF */,
 				6F93EE5F12DE55080039A2B2 /* Task */,
 				6F8D09AB123F602000FCF2AF /* View */,
 				6F8D0907123F4FB500FCF2AF /* ViewControllers */,
@@ -359,6 +384,25 @@
 				6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */,
 			);
 			path = Graphics;
+			sourceTree = "<group>";
+		};
+		6F63A4C214271DC9004E701E /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				6F63A4C314271DC9004E701E /* HLSPDFLayout.h */,
+				6F63A4C414271DC9004E701E /* HLSPDFLayout.m */,
+				6F63A4C514271DC9004E701E /* HLSPDFLayoutController.h */,
+				6F63A4C614271DC9004E701E /* HLSPDFLayoutController.m */,
+				6F63A4C714271DC9004E701E /* UIImageView+HLSPDFLayout.h */,
+				6F63A4C814271DC9004E701E /* UIImageView+HLSPDFLayout.m */,
+				6F63A4C914271DC9004E701E /* UILabel+HLSPDFLayout.h */,
+				6F63A4CA14271DC9004E701E /* UILabel+HLSPDFLayout.m */,
+				6F63A4CB14271DC9004E701E /* UITableView+HLSPDFLayout.h */,
+				6F63A4CC14271DC9004E701E /* UITableView+HLSPDFLayout.m */,
+				6F63A4CD14271DC9004E701E /* UIView+HLSPDFLayout.h */,
+				6F63A4CE14271DC9004E701E /* UIView+HLSPDFLayout.m */,
+			);
+			path = PDF;
 			sourceTree = "<group>";
 		};
 		6F8D0905123F4F9B00FCF2AF /* Animation */ = {
@@ -625,6 +669,12 @@
 				6F482FA4140EBCA400D679E7 /* HLSStripContainerView.h in Headers */,
 				6F482FA6140EBCA400D679E7 /* HLSStripView.h in Headers */,
 				6F1FD30A1416B72100B3BE61 /* NSTimeZone+HLSExtensions.h in Headers */,
+				6F63A4CF14271DC9004E701E /* HLSPDFLayout.h in Headers */,
+				6F63A4D114271DC9004E701E /* HLSPDFLayoutController.h in Headers */,
+				6F63A4D314271DC9004E701E /* UIImageView+HLSPDFLayout.h in Headers */,
+				6F63A4D514271DC9004E701E /* UILabel+HLSPDFLayout.h in Headers */,
+				6F63A4D714271DC9004E701E /* UITableView+HLSPDFLayout.h in Headers */,
+				6F63A4D914271DC9004E701E /* UIView+HLSPDFLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +792,12 @@
 				6F482FA5140EBCA400D679E7 /* HLSStripContainerView.m in Sources */,
 				6F482FA7140EBCA400D679E7 /* HLSStripView.m in Sources */,
 				6F1FD30B1416B72100B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */,
+				6F63A4D014271DC9004E701E /* HLSPDFLayout.m in Sources */,
+				6F63A4D214271DC9004E701E /* HLSPDFLayoutController.m in Sources */,
+				6F63A4D414271DC9004E701E /* UIImageView+HLSPDFLayout.m in Sources */,
+				6F63A4D614271DC9004E701E /* UILabel+HLSPDFLayout.m in Sources */,
+				6F63A4D814271DC9004E701E /* UITableView+HLSPDFLayout.m in Sources */,
+				6F63A4DA14271DC9004E701E /* UIView+HLSPDFLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

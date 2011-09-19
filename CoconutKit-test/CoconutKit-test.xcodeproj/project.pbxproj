@@ -81,6 +81,12 @@
 		6F482FBD140EBCEB00D679E7 /* HLSStripContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FB9140EBCEB00D679E7 /* HLSStripContainerView.m */; };
 		6F482FBE140EBCEB00D679E7 /* HLSStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F482FBB140EBCEB00D679E7 /* HLSStripView.m */; };
 		6F482FC3140EBD1500D679E7 /* CoconutKit_strip_default_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */; };
+		6F63A4FD14271DF3004E701E /* HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4F214271DF3004E701E /* HLSPDFLayout.m */; };
+		6F63A4FE14271DF3004E701E /* HLSPDFLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4F414271DF3004E701E /* HLSPDFLayoutController.m */; };
+		6F63A4FF14271DF3004E701E /* UIImageView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4F614271DF3004E701E /* UIImageView+HLSPDFLayout.m */; };
+		6F63A50014271DF3004E701E /* UILabel+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4F814271DF3004E701E /* UILabel+HLSPDFLayout.m */; };
+		6F63A50114271DF3004E701E /* UITableView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4FA14271DF3004E701E /* UITableView+HLSPDFLayout.m */; };
+		6F63A50214271DF3004E701E /* UIView+HLSPDFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63A4FC14271DF3004E701E /* UIView+HLSPDFLayout.m */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
 		6F93C4D214042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */; };
 		6F93C4D8140437D200FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */; };
@@ -242,6 +248,18 @@
 		6F482FBA140EBCEB00D679E7 /* HLSStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStripView.h; sourceTree = "<group>"; };
 		6F482FBB140EBCEB00D679E7 /* HLSStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStripView.m; sourceTree = "<group>"; };
 		6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_strip_default_background.png; sourceTree = "<group>"; };
+		6F63A4F114271DF3004E701E /* HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPDFLayout.h; sourceTree = "<group>"; };
+		6F63A4F214271DF3004E701E /* HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPDFLayout.m; sourceTree = "<group>"; };
+		6F63A4F314271DF3004E701E /* HLSPDFLayoutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPDFLayoutController.h; sourceTree = "<group>"; };
+		6F63A4F414271DF3004E701E /* HLSPDFLayoutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPDFLayoutController.m; sourceTree = "<group>"; };
+		6F63A4F514271DF3004E701E /* UIImageView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4F614271DF3004E701E /* UIImageView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4F714271DF3004E701E /* UILabel+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4F814271DF3004E701E /* UILabel+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4F914271DF3004E701E /* UITableView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4FA14271DF3004E701E /* UITableView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HLSPDFLayout.m"; sourceTree = "<group>"; };
+		6F63A4FB14271DF3004E701E /* UIView+HLSPDFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSPDFLayout.h"; sourceTree = "<group>"; };
+		6F63A4FC14271DF3004E701E /* UIView+HLSPDFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSPDFLayout.m"; sourceTree = "<group>"; };
 		6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
 		6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 		6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
@@ -316,6 +334,7 @@
 				6F2FCDA6140BB8E60080A775 /* CoreData */,
 				6F2FCDAA140BB8E60080A775 /* Graphics */,
 				6F2FCDAD140BB8E60080A775 /* Logging */,
+				6F63A4F014271DF3004E701E /* PDF */,
 				6F2FCDB0140BB8E60080A775 /* Task */,
 				6F2FCDBD140BB8E60080A775 /* View */,
 				6F2FCDD1140BB8E60080A775 /* ViewControllers */,
@@ -586,6 +605,25 @@
 			path = Sources/Core;
 			sourceTree = SOURCE_ROOT;
 		};
+		6F63A4F014271DF3004E701E /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				6F63A4F114271DF3004E701E /* HLSPDFLayout.h */,
+				6F63A4F214271DF3004E701E /* HLSPDFLayout.m */,
+				6F63A4F314271DF3004E701E /* HLSPDFLayoutController.h */,
+				6F63A4F414271DF3004E701E /* HLSPDFLayoutController.m */,
+				6F63A4F514271DF3004E701E /* UIImageView+HLSPDFLayout.h */,
+				6F63A4F614271DF3004E701E /* UIImageView+HLSPDFLayout.m */,
+				6F63A4F714271DF3004E701E /* UILabel+HLSPDFLayout.h */,
+				6F63A4F814271DF3004E701E /* UILabel+HLSPDFLayout.m */,
+				6F63A4F914271DF3004E701E /* UITableView+HLSPDFLayout.h */,
+				6F63A4FA14271DF3004E701E /* UITableView+HLSPDFLayout.m */,
+				6F63A4FB14271DF3004E701E /* UIView+HLSPDFLayout.h */,
+				6F63A4FC14271DF3004E701E /* UIView+HLSPDFLayout.m */,
+			);
+			path = PDF;
+			sourceTree = "<group>";
+		};
 		6FA74D40140500CC0043693E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -734,6 +772,12 @@
 				6F482FBE140EBCEB00D679E7 /* HLSStripView.m in Sources */,
 				6F1FD3141416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F1FD3181416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
+				6F63A4FD14271DF3004E701E /* HLSPDFLayout.m in Sources */,
+				6F63A4FE14271DF3004E701E /* HLSPDFLayoutController.m in Sources */,
+				6F63A4FF14271DF3004E701E /* UIImageView+HLSPDFLayout.m in Sources */,
+				6F63A50014271DF3004E701E /* UILabel+HLSPDFLayout.m in Sources */,
+				6F63A50114271DF3004E701E /* UITableView+HLSPDFLayout.m in Sources */,
+				6F63A50214271DF3004E701E /* UIView+HLSPDFLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

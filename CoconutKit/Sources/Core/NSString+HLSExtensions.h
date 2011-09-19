@@ -103,4 +103,22 @@
  */
 - (NSString *)friendlyVersionNumber;
 
+/**
+ * Draw the string in the specified rect, with the specified font and alignment properties, cloning the way a UILabel renders
+ * its text. As for a UILabel, if the number of lines is different from 1, the font size is not adjusted (i.e. the 
+ * adjustsFontSizeToFitWidth and minFontSize parameters are ignored). The text is always centered vertically, horizontal
+ * centering can be controlled using the textAlignment parameter.
+ *
+ * Refer to UIStringDrawing.h and the corresponding documentation for more information about the available parameters
+ */
+- (CGSize)drawInRect:(CGRect)rect 
+            withFont:(UIFont *)font 
+       numberOfLines:(NSUInteger)numberOfLines
+adjustsFontSizeToFitWidth:(BOOL)adjustsFontSizeToFitWidth
+         minFontSize:(CGFloat)minFontSize
+      actualFontSize:(CGFloat *)pActualFontSize
+       textAlignment:(UITextAlignment)textAlignment 
+       lineBreakMode:(UILineBreakMode)lineBreakMode
+  baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
+
 @end
