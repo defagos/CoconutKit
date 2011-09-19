@@ -89,7 +89,7 @@ HLSLinkCategory(UITableView_HLSPDFLayout)
         for (NSInteger row = 0; row < numberOfRows; ++row) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
             UITableViewCell *cell = [self.dataSource tableView:self cellForRowAtIndexPath:indexPath];
-            NSAssert(cell != nil, @"Missing cell at indexPath %@", indexPath);
+            NSAssert1(cell != nil, @"Missing cell at indexPath %@", indexPath);
             [cell drawElement];
             
             // Upate the CTM matrix to draw the next element at the correct location

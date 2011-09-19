@@ -14,6 +14,8 @@ HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
 HLSOrientationCloner.h
+HLSPDFLayout.h
+HLSPDFLayoutController.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h

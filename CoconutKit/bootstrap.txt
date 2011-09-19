@@ -1,5 +1,6 @@
 HLSAssert.m
 HLSCursor.m
+HLSPDFLayout.m
 HLSStripContainerView.m
 HLSTextField.m
 HLSViewController.m

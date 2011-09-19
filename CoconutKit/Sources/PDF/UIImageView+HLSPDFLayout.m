@@ -8,6 +8,8 @@
 
 #import "UIImageView+HLSPDFLayout.h"
 
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 #import "UIView+HLSPDFLayout.h"
 
 @implementation UIImageView (HLSPDFLayout)
