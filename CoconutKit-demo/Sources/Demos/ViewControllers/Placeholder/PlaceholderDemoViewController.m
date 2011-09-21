@@ -186,11 +186,8 @@
 
 - (void)displayInsetViewController:(UIViewController *)viewController
 {
-    // Built-in transition effects in picker
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    if (pickedIndex < HLSTransitionStyleEnumSize) {
-        [self setInsetViewController:viewController withTransitionStyle:pickedIndex];
-    }
+    [self setInsetViewController:viewController withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks
