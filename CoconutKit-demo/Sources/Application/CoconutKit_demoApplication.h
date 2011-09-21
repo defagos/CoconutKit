@@ -8,10 +8,10 @@
 
 @interface CoconutKit_demoApplication : NSObject <UIActionSheetDelegate> {
 @private
-    UINavigationController *m_navigationController;
+    UIViewController *m_rootViewController;
     HLSActionSheet *m_languageActionSheet;
 }
 
-- (UIViewController *)viewController;
+- (UIViewController *)rootViewController;
 
 @end

@@ -55,6 +55,8 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
                                  containerView:(UIView *)containerView
                                       duration:(NSTimeInterval)duration;
 
++ (CGRect)fixedFrameForView:(UIView *)view;
+
 @end
 
 static id swizzledGetter(UIViewController *self, SEL _cmd)
@@ -65,7 +67,7 @@ static id swizzledGetter(UIViewController *self, SEL _cmd)
     // interfaceOrientation to fix its behavior
     if (_cmd == @selector(interfaceOrientation)) {
         if (containerContent
-                && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
             // Call the same method, but on the container. This handles view controller nesting correctly
             return swizzledGetter(containerContent.containerController, _cmd);
         }
@@ -97,8 +99,8 @@ static id swizzledForwardGetter(UIViewController *self, SEL _cmd)
     
     // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
     if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        && containerContent.forwardingProperties 
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
         return swizzledForwardGetter(containerContent.containerController, _cmd);
     }
@@ -128,8 +130,8 @@ static void swizzledForwardSetter1(UIViewController *self, SEL _cmd, id value)
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
     if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        && containerContent.forwardingProperties 
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
         swizzledForwardSetter1(containerContent.containerController, _cmd, value);
     }
@@ -153,8 +155,8 @@ static void swizzledForwardSetter2(UIViewController *self, SEL _cmd, BOOL value)
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
     if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        && containerContent.forwardingProperties 
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
         swizzledForwardSetter2(containerContent.containerController, _cmd, value);
     }
@@ -178,8 +180,8 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
     if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        && containerContent.forwardingProperties 
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
         // Call the same method, but on the container. This handles view controller nesting correctly
         swizzledForwardSetter3(containerContent.containerController, _cmd, value1, value2);
     }
@@ -215,6 +217,27 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     }
 }
 
+/**
+ * When a view controller is added as root view controller, there is a subtlety: When the device is rotated into landscape mode, the
+ * root view is applied a rotation matrix transform. When a view controller container is set as root, there is an issue if the contentView
+ * happens to be the root view: We cannot just use contentView.frame to calculate animations in landscape mode, otherwise animations
+ * will be incorrect (they will correspond to the animations in portrait mode!). This method just fixes this issue, providing the
+ * correct frame in all situations
+ */
++ (CGRect)fixedFrameForView:(UIView *)view
+{
+    CGRect frame = CGRectZero;
+    // Root view
+    if ([view.superview isKindOfClass:[UIWindow class]]) {
+        frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
+    }
+    // All other cases
+    else {
+        frame = view.frame;
+    }
+    return frame;
+}
+
 #pragma mark Object creation and destruction
 
 - (id)initWithViewController:(UIViewController *)viewController
@@ -228,7 +251,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         
         // Associate the view controller with its container
         self.containerController = containerController;
-                
+        
         // Associate the view controller with its container content object
         NSAssert(! objc_getAssociatedObject(viewController, s_containerContentKey), @"A view controller can only be associated with one container content object");
         objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
@@ -266,7 +289,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     // reused by the client
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
-        
+    
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
@@ -408,7 +431,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     
     // Insert blocking subview if required
     if (blockInteraction) {
-        self.blockingView = [[[UIView alloc] initWithFrame:containerView.frame] autorelease];
+        self.blockingView = [[[UIView alloc] initWithFrame:[HLSContainerContent fixedFrameForView:containerView]] autorelease];
         self.blockingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [containerView insertSubview:self.blockingView belowSubview:self.viewController.view];
     }
@@ -474,10 +497,12 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                           disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                           containerView:(UIView *)containerView
+                 disappearingContainerContents:(NSArray *)disappearingContainerContents
+                                 containerView:(UIView *)containerView
 {
     HLSAssertObjectsInEnumerationAreMembersOfClass(disappearingContainerContents, HLSContainerContent);
+    
+    CGRect frame = [HLSContainerContent fixedFrameForView:containerView];
     
     NSMutableArray *animationSteps = [NSMutableArray array];
     switch (transitionStyle) {
@@ -488,14 +513,14 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         case HLSTransitionStyleCoverFromBottom: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -505,14 +530,14 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         case HLSTransitionStyleCoverFromTop: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -521,14 +546,14 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
@@ -538,14 +563,14 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
@@ -555,15 +580,15 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromTopLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -572,15 +597,15 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromTopRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -589,15 +614,15 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromBottomLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -606,15 +631,15 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStyleCoverFromBottomRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -658,7 +683,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         case HLSTransitionStylePushFromBottom: {            
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
@@ -666,11 +691,11 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
                 HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                      deltaY:-CGRectGetHeight(containerView.frame)];
+                                                                                                                      deltaY:-CGRectGetHeight(frame)];
                 [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
             }
             HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -680,7 +705,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         case HLSTransitionStylePushFromTop: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:-CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:-CGRectGetHeight(frame)];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
             [animationSteps addObject:animationStep1];
@@ -688,11 +713,11 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
                 HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                      deltaY:CGRectGetHeight(containerView.frame)];
+                                                                                                                      deltaY:CGRectGetHeight(frame)];
                 [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
             }
             HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:0.f
-                                                                                                                  deltaY:CGRectGetHeight(containerView.frame)];
+                                                                                                                  deltaY:CGRectGetHeight(frame)];
             [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
@@ -701,7 +726,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStylePushFromLeft: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
@@ -709,11 +734,11 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
+                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
                                                                                                                       deltaY:0.f];
                 [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
             }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
@@ -723,7 +748,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
         case HLSTransitionStylePushFromRight: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
             animationStep1.duration = 0.;
@@ -731,11 +756,11 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             
             HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
             for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
+                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
                                                                                                                       deltaY:0.f];
                 [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
             }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(containerView.frame)
+            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:-CGRectGetWidth(frame)
                                                                                                                   deltaY:0.f];
             [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;

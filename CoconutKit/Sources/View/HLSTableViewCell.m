@@ -10,6 +10,7 @@
 
 #import "HLSLogger.h"
 #import "HLSTableViewCell+Protected.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
@@ -51,7 +52,15 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
                 HLSLoggerError(@"Missing cell object in xib file %@", nibName);
                 return nil;
             }
-            cell = (UITableViewCell *)[bundleContents objectAtIndex:0];
+            
+            // Get the first object and check that it is what we expect
+            id firstObject = [bundleContents firstObject];
+            if (! [firstObject isKindOfClass:self]) {
+                HLSLoggerError(@"The cell object must be the first one in the xib file, and must be of type %@", [self className]);
+                return nil;
+            }
+            
+            cell = (UITableViewCell *)firstObject;
             
             // Check that the reuse identifier defined in the xib is correct
             if (! [[cell reuseIdentifier] isEqual:[self identifier]]) {

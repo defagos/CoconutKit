@@ -189,11 +189,8 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     
-    // Built-in transition effects in picker
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    if (pickedIndex < HLSTransitionStyleEnumSize) {
-        [stackController pushViewController:viewController withTransitionStyle:pickedIndex];
-    }
+    [stackController pushViewController:viewController withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks

@@ -9,6 +9,7 @@
 #import "HLSNibView.h"
 
 #import "HLSLogger.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
@@ -41,8 +42,16 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         if ([bundleContents count] == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
-        }        
-        return [bundleContents objectAtIndex:0];
+        }
+        
+        // Get the first object and check that it is what we expect
+        id firstObject = [bundleContents firstObject];
+        if (! [firstObject isKindOfClass:self]) {
+            HLSLoggerError(@"The view object must be the first one in the xib file, and must be of type %@", [self className]);
+            return nil;
+        }
+        
+        return firstObject;
     }
     else {
         HLSLoggerError(@"xib file not found");

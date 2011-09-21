@@ -58,8 +58,10 @@
 "Phones"="Téléphones";
 "Play forward"="Jouer l'animation";
 "Play backward"="Jouer l'animation inverse";
+"Pop"="Pop";
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
+"Push"="Push";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
