@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1AF7C1142A8E8500925B7A /* HLSStackControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF7C0142A8E8500925B7A /* HLSStackControllerView.m */; };
 		6F2FCDE3140BB8E60080A775 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD5B140BB8E60080A775 /* CoconutKit_Localizable.strings */; };
 		6F2FCDE4140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD61140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F2FCDE5140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD62140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -86,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F1AF7BF142A8E8500925B7A /* HLSStackControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackControllerView.h; sourceTree = "<group>"; };
+		6F1AF7C0142A8E8500925B7A /* HLSStackControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackControllerView.m; sourceTree = "<group>"; };
 		6F2FCD5C140BB8E60080A775 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5D140BB8E60080A775 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5E140BB8E60080A775 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -463,6 +466,8 @@
 				6F2FCDD6140BB8E60080A775 /* HLSPlaceholderViewController.m */,
 				6F2FCDD7140BB8E60080A775 /* HLSStackController.h */,
 				6F2FCDD8140BB8E60080A775 /* HLSStackController.m */,
+				6F1AF7BF142A8E8500925B7A /* HLSStackControllerView.h */,
+				6F1AF7C0142A8E8500925B7A /* HLSStackControllerView.m */,
 				6F2FCDD9140BB8E60080A775 /* HLSTableSearchDisplayViewController.h */,
 				6F2FCDDA140BB8E60080A775 /* HLSTableSearchDisplayViewController.m */,
 				6F2FCDDB140BB8E60080A775 /* HLSTransitionStyle.h */,
@@ -706,6 +711,7 @@
 				6F2FCE1D140BB8E60080A775 /* HLSWizardViewController.m in Sources */,
 				6F8456E71414FF390073040E /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
+				6F1AF7C1142A8E8500925B7A /* HLSStackControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

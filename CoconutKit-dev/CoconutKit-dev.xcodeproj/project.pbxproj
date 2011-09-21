@@ -10,6 +10,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F1AF6C8142A88FE00925B7A /* HLSStackControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF6C7142A88FE00925B7A /* HLSStackControllerView.m */; };
 		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
 		6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */; };
 		6F2C0ABD142A576D00AFA6EE /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABB142A576D00AFA6EE /* RootStackDemoViewController.xib */; };
@@ -163,6 +164,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F133FF913FBB79300B53677 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
+		6F1AF6C6142A88FE00925B7A /* HLSStackControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackControllerView.h; sourceTree = "<group>"; };
+		6F1AF6C7142A88FE00925B7A /* HLSStackControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackControllerView.m; sourceTree = "<group>"; };
 		6F1C649214061273006F63FC /* HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSActionSheet.h; sourceTree = "<group>"; };
 		6F1C649314061273006F63FC /* HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSActionSheet.m; sourceTree = "<group>"; };
 		6F2C0AB9142A576D00AFA6EE /* RootStackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootStackDemoViewController.h; sourceTree = "<group>"; };
@@ -659,12 +662,15 @@
 		6F37FE5613EBE478003E33EF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */,
 				6F37FE5713EBE478003E33EF /* HLSContainerContent.h */,
 				6F37FE5813EBE478003E33EF /* HLSContainerContent.m */,
 				6F37FE5B13EBE478003E33EF /* HLSPlaceholderViewController.h */,
 				6F37FE5C13EBE478003E33EF /* HLSPlaceholderViewController.m */,
 				6F37FE5F13EBE478003E33EF /* HLSStackController.h */,
 				6F37FE6013EBE478003E33EF /* HLSStackController.m */,
+				6F1AF6C6142A88FE00925B7A /* HLSStackControllerView.h */,
+				6F1AF6C7142A88FE00925B7A /* HLSStackControllerView.m */,
 				6F37FE6113EBE478003E33EF /* HLSTableSearchDisplayViewController.h */,
 				6F37FE6213EBE478003E33EF /* HLSTableSearchDisplayViewController.m */,
 				6F37FE6313EBE478003E33EF /* HLSTransitionStyle.h */,
@@ -675,7 +681,6 @@
 				6F37FE6813EBE478003E33EF /* HLSWebViewController.m */,
 				6F37FE6913EBE478003E33EF /* HLSWizardViewController.h */,
 				6F37FE6A13EBE478003E33EF /* HLSWizardViewController.m */,
-				6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1337,6 +1342,7 @@
 				6FF935851406AB7A00649482 /* ActionSheetDemoViewController.m in Sources */,
 				6F9BFE701414FC0200184973 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */,
+				6F1AF6C8142A88FE00925B7A /* HLSStackControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
