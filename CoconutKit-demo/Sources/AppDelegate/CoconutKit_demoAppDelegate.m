@@ -43,7 +43,7 @@ HLSEnableUIControlExclusiveTouch();
     [self.window makeKeyAndVisible];
     
     self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
-    UIViewController *rootViewController = [self.application viewController];
+    UIViewController *rootViewController = [self.application rootViewController];
     [self.window addSubview:rootViewController.view];
     
     return YES;

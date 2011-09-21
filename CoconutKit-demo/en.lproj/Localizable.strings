@@ -53,8 +53,10 @@
 "Phones"="Phones";
 "Play forward"="Play forward";
 "Play backward"="Play backward";
+"Pop"="Pop";
 "Portrait only"="Portrait only";
 "Previous"="Previous";
+"Push"="Push";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
