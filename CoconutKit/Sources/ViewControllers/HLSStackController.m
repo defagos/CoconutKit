@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
+#import "HLSStackControllerView.h"
 #import "NSArray+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
@@ -142,6 +143,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    self.view = [[[HLSStackControllerView alloc] init] autorelease];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -149,15 +155,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    // Take all space available. Parent container view controllers are responsible of stretching the view size properly
-    self.view.frame = [[UIScreen mainScreen] applicationFrame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+        
     // Display those views required by the capacity
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {

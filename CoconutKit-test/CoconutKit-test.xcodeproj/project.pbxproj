@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1AF7E2142A931600925B7A /* HLSStackControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF7E1142A931600925B7A /* HLSStackControllerView.m */; };
 		6F1FD3141416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD3131416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m */; };
 		6F1FD3181416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD3171416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.m */; };
 		6F2FCDE3140BB8E60080A775 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD5B140BB8E60080A775 /* CoconutKit_Localizable.strings */; };
@@ -97,6 +98,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F1AF7E0142A931600925B7A /* HLSStackControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackControllerView.h; sourceTree = "<group>"; };
+		6F1AF7E1142A931600925B7A /* HLSStackControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackControllerView.m; sourceTree = "<group>"; };
 		6F1FD3121416B77E00B3BE61 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F1FD3131416B77E00B3BE61 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F1FD3161416B7B500B3BE61 /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 				6F2FCDD6140BB8E60080A775 /* HLSPlaceholderViewController.m */,
 				6F2FCDD7140BB8E60080A775 /* HLSStackController.h */,
 				6F2FCDD8140BB8E60080A775 /* HLSStackController.m */,
+				6F1AF7E0142A931600925B7A /* HLSStackControllerView.h */,
+				6F1AF7E1142A931600925B7A /* HLSStackControllerView.m */,
 				6F2FCDD9140BB8E60080A775 /* HLSTableSearchDisplayViewController.h */,
 				6F2FCDDA140BB8E60080A775 /* HLSTableSearchDisplayViewController.m */,
 				6F2FCDDB140BB8E60080A775 /* HLSTransitionStyle.h */,
@@ -778,6 +783,7 @@
 				6F63A50014271DF3004E701E /* UILabel+HLSPDFLayout.m in Sources */,
 				6F63A50114271DF3004E701E /* UITableView+HLSPDFLayout.m in Sources */,
 				6F63A50214271DF3004E701E /* UIView+HLSPDFLayout.m in Sources */,
+				6F1AF7E2142A931600925B7A /* HLSStackControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
