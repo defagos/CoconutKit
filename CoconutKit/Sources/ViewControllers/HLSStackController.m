@@ -12,7 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
-#import "HLSStackControllerView.h"
+#import "HLSStretchingContainerView.h"
 #import "NSArray+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
@@ -145,7 +145,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)loadView
 {
-    self.view = [[[HLSStackControllerView alloc] init] autorelease];
+    self.view = [[[HLSStretchingContainerView alloc] init] autorelease];
 }
 
 - (void)viewDidLoad
