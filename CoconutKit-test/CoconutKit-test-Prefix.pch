@@ -28,6 +28,7 @@
 #import "HLSPlaceholderViewController.h"
 #import "HLSReloadable.h"
 #import "HLSStackController.h"
+#import "HLSStretchingContainerView.h"
 #import "HLSSubtitleTableViewCell.h"
 #import "HLSTableSearchDisplayViewController.h"
 #import "HLSTableViewCell.h"

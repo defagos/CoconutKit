@@ -13,6 +13,17 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */; };
+		6F1AF859142B046600925B7A /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */; };
+		6F1AF85A142B046600925B7A /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AF847142B046600925B7A /* CoconutKit.framework */; };
+		6F1AF85B142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF849142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png */; };
+		6F1AF85C142B046600925B7A /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84A142B046600925B7A /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
+		6F1AF85D142B046600925B7A /* CoconutKit_ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84B142B046600925B7A /* CoconutKit_ButtonBarArrowRight.png */; };
+		6F1AF85E142B046600925B7A /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84C142B046600925B7A /* CoconutKit_ButtonBarArrowRight@2x.png */; };
+		6F1AF85F142B046600925B7A /* CoconutKit_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84D142B046600925B7A /* CoconutKit_ButtonBarRefresh.png */; };
+		6F1AF860142B046600925B7A /* CoconutKit_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84E142B046600925B7A /* CoconutKit_ButtonBarRefresh@2x.png */; };
+		6F1AF861142B046600925B7A /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */; };
+		6F1AF862142B046600925B7A /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */; };
+		6F1AF863142B046600925B7A /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */; };
 		6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */; };
 		6F1C64BB14066B0B006F63FC /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */; };
 		6F2C0AB4142A53E000AFA6EE /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C0AB3142A53E000AFA6EE /* RootStackDemoViewController.m */; };
@@ -94,17 +105,6 @@
 		6FBF59B81407E85400F7D5EE /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59B41407E85400F7D5EE /* icn_bookmark.png */; };
 		6FBF59B91407E85400F7D5EE /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59B51407E85400F7D5EE /* icn_folder.png */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
-		6FD47627140F4886006BBDD5 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD47614140F4886006BBDD5 /* CoconutKit_bootstrap.m */; };
-		6FD47628140F4886006BBDD5 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD47615140F4886006BBDD5 /* CoconutKit.framework */; };
-		6FD47629140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD47617140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft.png */; };
-		6FD4762A140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD47618140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
-		6FD4762B140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD47619140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight.png */; };
-		6FD4762C140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761A140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight@2x.png */; };
-		6FD4762D140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761B140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh.png */; };
-		6FD4762E140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761C140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh@2x.png */; };
-		6FD4762F140F4886006BBDD5 /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761D140F4886006BBDD5 /* CoconutKit_cursor_default_pointer.png */; };
-		6FD47630140F4886006BBDD5 /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761E140F4886006BBDD5 /* CoconutKit_HLSWebViewController.xib */; };
-		6FD47631140F4886006BBDD5 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4761F140F4886006BBDD5 /* CoconutKit_Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +116,18 @@
 		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
 		6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
+		6F1AF847142B046600925B7A /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
+		6F1AF849142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		6F1AF84A142B046600925B7A /* CoconutKit_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
+		6F1AF84B142B046600925B7A /* CoconutKit_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowRight.png; sourceTree = "<group>"; };
+		6F1AF84C142B046600925B7A /* CoconutKit_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
+		6F1AF84D142B046600925B7A /* CoconutKit_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarRefresh.png; sourceTree = "<group>"; };
+		6F1AF84E142B046600925B7A /* CoconutKit_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_cursor_default_pointer.png; sourceTree = "<group>"; };
+		6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
+		6F1AF853142B046600925B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F1AF855142B046600925B7A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F1C64B714066AF7006F63FC /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
 		6F1C64B814066AF7006F63FC /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
 		6F1C64BA14066B0B006F63FC /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
@@ -236,18 +248,6 @@
 		6FBF59B41407E85400F7D5EE /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
 		6FBF59B51407E85400F7D5EE /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6FD47614140F4886006BBDD5 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
-		6FD47615140F4886006BBDD5 /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
-		6FD47617140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
-		6FD47618140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
-		6FD47619140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowRight.png; sourceTree = "<group>"; };
-		6FD4761A140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
-		6FD4761B140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarRefresh.png; sourceTree = "<group>"; };
-		6FD4761C140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
-		6FD4761D140F4886006BBDD5 /* CoconutKit_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_cursor_default_pointer.png; sourceTree = "<group>"; };
-		6FD4761E140F4886006BBDD5 /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
-		6FD47621140F4886006BBDD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FD47623140F4886006BBDD5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,7 +261,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */,
-				6FD47628140F4886006BBDD5 /* CoconutKit.framework in Frameworks */,
+				6F1AF85A142B046600925B7A /* CoconutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +305,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FD47612140F4886006BBDD5 /* CoconutKit-trunk-Release.staticframework */,
+				6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -322,6 +322,41 @@
 				6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F1AF845142B046600925B7A /* Bootstrap */,
+				6F1AF847142B046600925B7A /* CoconutKit.framework */,
+				6F1AF848142B046600925B7A /* Resources */,
+			);
+			name = "CoconutKit-trunk-Release.staticframework";
+			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
+			sourceTree = "<absolute>";
+		};
+		6F1AF845142B046600925B7A /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */,
+			);
+			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F1AF848142B046600925B7A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F1AF849142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png */,
+				6F1AF84A142B046600925B7A /* CoconutKit_ButtonBarArrowLeft@2x.png */,
+				6F1AF84B142B046600925B7A /* CoconutKit_ButtonBarArrowRight.png */,
+				6F1AF84C142B046600925B7A /* CoconutKit_ButtonBarArrowRight@2x.png */,
+				6F1AF84D142B046600925B7A /* CoconutKit_ButtonBarRefresh.png */,
+				6F1AF84E142B046600925B7A /* CoconutKit_ButtonBarRefresh@2x.png */,
+				6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */,
+				6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */,
+				6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6F1C64B314066AD0006F63FC /* ActionSheet */ = {
@@ -711,41 +746,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		6FD47612140F4886006BBDD5 /* CoconutKit-trunk-Release.staticframework */ = {
-			isa = PBXGroup;
-			children = (
-				6FD47613140F4886006BBDD5 /* Bootstrap */,
-				6FD47615140F4886006BBDD5 /* CoconutKit.framework */,
-				6FD47616140F4886006BBDD5 /* Resources */,
-			);
-			name = "CoconutKit-trunk-Release.staticframework";
-			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
-			sourceTree = "<absolute>";
-		};
-		6FD47613140F4886006BBDD5 /* Bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				6FD47614140F4886006BBDD5 /* CoconutKit_bootstrap.m */,
-			);
-			path = Bootstrap;
-			sourceTree = "<group>";
-		};
-		6FD47616140F4886006BBDD5 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6FD47617140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft.png */,
-				6FD47618140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft@2x.png */,
-				6FD47619140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight.png */,
-				6FD4761A140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight@2x.png */,
-				6FD4761B140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh.png */,
-				6FD4761C140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh@2x.png */,
-				6FD4761D140F4886006BBDD5 /* CoconutKit_cursor_default_pointer.png */,
-				6FD4761E140F4886006BBDD5 /* CoconutKit_HLSWebViewController.xib */,
-				6FD4761F140F4886006BBDD5 /* CoconutKit_Localizable.strings */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -847,16 +847,16 @@
 				6FBF59B71407E85400F7D5EE /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FBF59B81407E85400F7D5EE /* icn_bookmark.png in Resources */,
 				6FBF59B91407E85400F7D5EE /* icn_folder.png in Resources */,
-				6FD47629140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft.png in Resources */,
-				6FD4762A140F4886006BBDD5 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */,
-				6FD4762B140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight.png in Resources */,
-				6FD4762C140F4886006BBDD5 /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */,
-				6FD4762D140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh.png in Resources */,
-				6FD4762E140F4886006BBDD5 /* CoconutKit_ButtonBarRefresh@2x.png in Resources */,
-				6FD4762F140F4886006BBDD5 /* CoconutKit_cursor_default_pointer.png in Resources */,
-				6FD47630140F4886006BBDD5 /* CoconutKit_HLSWebViewController.xib in Resources */,
-				6FD47631140F4886006BBDD5 /* CoconutKit_Localizable.strings in Resources */,
 				6F2C0AB6142A53EF00AFA6EE /* RootStackDemoViewController.xib in Resources */,
+				6F1AF85B142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png in Resources */,
+				6F1AF85C142B046600925B7A /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */,
+				6F1AF85D142B046600925B7A /* CoconutKit_ButtonBarArrowRight.png in Resources */,
+				6F1AF85E142B046600925B7A /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */,
+				6F1AF85F142B046600925B7A /* CoconutKit_ButtonBarRefresh.png in Resources */,
+				6F1AF860142B046600925B7A /* CoconutKit_ButtonBarRefresh@2x.png in Resources */,
+				6F1AF861142B046600925B7A /* CoconutKit_cursor_default_pointer.png in Resources */,
+				6F1AF862142B046600925B7A /* CoconutKit_HLSWebViewController.xib in Resources */,
+				6F1AF863142B046600925B7A /* CoconutKit_Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,14 +905,23 @@
 				6F93C6CE1404CE0700FEC9B0 /* WizardPageViewController.m in Sources */,
 				6F93C6D01404CE0700FEC9B0 /* DemosListViewController.m in Sources */,
 				6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */,
-				6FD47627140F4886006BBDD5 /* CoconutKit_bootstrap.m in Sources */,
 				6F2C0AB4142A53E000AFA6EE /* RootStackDemoViewController.m in Sources */,
+				6F1AF859142B046600925B7A /* CoconutKit_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F1AF853142B046600925B7A /* en */,
+				6F1AF855142B046600925B7A /* fr */,
+			);
+			name = CoconutKit_Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6FBDA7A61303EE9B004B9617 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -920,15 +929,6 @@
 				6FBDA7A91303EEAD004B9617 /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		6FD4761F140F4886006BBDD5 /* CoconutKit_Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6FD47621140F4886006BBDD5 /* en */,
-				6FD47623140F4886006BBDD5 /* fr */,
-			);
-			name = CoconutKit_Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -941,8 +941,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.0.1-$(CONFIGURATION).staticframework\"",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -963,8 +962,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.0.1-$(CONFIGURATION).staticframework\"",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";

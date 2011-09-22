@@ -1,14 +1,14 @@
 //
-//  HLSStackControllerView.m
+//  HLSStretchingContainerView.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 21.09.11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSStackControllerView.h"
+#import "HLSStretchingContainerView.h"
 
-@implementation HLSStackControllerView
+@implementation HLSStretchingContainerView
 
 #pragma mark Object creation and destruction
 
