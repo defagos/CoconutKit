@@ -242,6 +242,8 @@
 		6FBDAD2313068956004B9617 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FBDB26F13090FDF004B9617 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FBDB27013090FDF004B9617 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
+		6FC26C5E142C7E6700BAEE9C /* CoconutKit_handle_default_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_left.png; sourceTree = "<group>"; };
+		6FC26C5F142C7E6700BAEE9C /* CoconutKit_handle_default_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_right.png; sourceTree = "<group>"; };
 		6FC9000013D4635900834900 /* NSDictionary+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC9000813D4637400834900 /* HLSModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManager.h; sourceTree = "<group>"; };
 		6FC9000913D4637400834900 /* HLSModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManager.m; sourceTree = "<group>"; };
@@ -255,7 +257,6 @@
 		6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FDD065D13BC6D8F00BF880A /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
-		6FEDD6C1141E2E2F00D59BFC /* CoconutKit_handle_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default.png; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoconutKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoconutKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -547,7 +548,8 @@
 				DA8383CD131E86FC00ECAED3 /* CoconutKit_ButtonBarRefresh.png */,
 				DA8383CE131E86FC00ECAED3 /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F1A58E113AB779E0029B714 /* CoconutKit_cursor_default_pointer.png */,
-				6FEDD6C1141E2E2F00D59BFC /* CoconutKit_handle_default.png */,
+				6FC26C5E142C7E6700BAEE9C /* CoconutKit_handle_default_left.png */,
+				6FC26C5F142C7E6700BAEE9C /* CoconutKit_handle_default_right.png */,
 				6F482FA9140EBCB800D679E7 /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;

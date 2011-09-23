@@ -87,7 +87,8 @@
 		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
-		6FEDD6CB141E2F8200D59BFC /* CoconutKit_handle_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEDD6C9141E2F8200D59BFC /* CoconutKit_handle_default.png */; };
+		6FC26C68142C7EA500BAEE9C /* CoconutKit_handle_default_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC26C66142C7EA500BAEE9C /* CoconutKit_handle_default_left.png */; };
+		6FC26C69142C7EA500BAEE9C /* CoconutKit_handle_default_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC26C67142C7EA500BAEE9C /* CoconutKit_handle_default_right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -254,7 +255,8 @@
 		6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6FEDD6C9141E2F8200D59BFC /* CoconutKit_handle_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default.png; sourceTree = "<group>"; };
+		6FC26C66142C7EA500BAEE9C /* CoconutKit_handle_default_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_left.png; sourceTree = "<group>"; };
+		6FC26C67142C7EA500BAEE9C /* CoconutKit_handle_default_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_right.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,7 +304,8 @@
 				6F2FCD65140BB8E60080A775 /* CoconutKit_ButtonBarRefresh.png */,
 				6F2FCD66140BB8E60080A775 /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F2FCD67140BB8E60080A775 /* CoconutKit_cursor_default_pointer.png */,
-				6FEDD6C9141E2F8200D59BFC /* CoconutKit_handle_default.png */,
+				6FC26C66142C7EA500BAEE9C /* CoconutKit_handle_default_left.png */,
+				6FC26C67142C7EA500BAEE9C /* CoconutKit_handle_default_right.png */,
 				6F482FC2140EBD1500D679E7 /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;
@@ -659,7 +662,8 @@
 				6F2FCDEA140BB8E60080A775 /* CoconutKit_cursor_default_pointer.png in Resources */,
 				6F2FCE15140BB8E60080A775 /* CoconutKit_HLSWebViewController.xib in Resources */,
 				6F482FC3140EBD1500D679E7 /* CoconutKit_strip_default_background.png in Resources */,
-				6FEDD6CB141E2F8200D59BFC /* CoconutKit_handle_default.png in Resources */,
+				6FC26C68142C7EA500BAEE9C /* CoconutKit_handle_default_left.png in Resources */,
+				6FC26C69142C7EA500BAEE9C /* CoconutKit_handle_default_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -80,6 +80,8 @@
 		6FBF59AD1407E84000F7D5EE /* cell_bkgr_brown_large_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59A91407E84000F7D5EE /* cell_bkgr_brown_large_selected.png */; };
 		6FBF59AE1407E84000F7D5EE /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59AA1407E84000F7D5EE /* icn_bookmark.png */; };
 		6FBF59AF1407E84000F7D5EE /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59AB1407E84000F7D5EE /* icn_folder.png */; };
+		6FC26C63142C7E8500BAEE9C /* CoconutKit_handle_default_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC26C61142C7E8500BAEE9C /* CoconutKit_handle_default_left.png */; };
+		6FC26C64142C7E8500BAEE9C /* CoconutKit_handle_default_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC26C62142C7E8500BAEE9C /* CoconutKit_handle_default_right.png */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FDB13041404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB126D1404D1C000469DEC /* Localizable.strings */; };
 		6FDB13051404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12701404D1C000469DEC /* Localizable.strings */; };
@@ -155,7 +157,6 @@
 		6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */; };
 		6FDB13501404D1C000469DEC /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB13001404D1C000469DEC /* WizardPageViewController.xib */; };
 		6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB13031404D1C000469DEC /* DemosListViewController.m */; };
-		6FEDD6C6141E2F6900D59BFC /* CoconutKit_handle_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FF935851406AB7A00649482 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF935831406AB7A00649482 /* ActionSheetDemoViewController.m */; };
@@ -304,6 +305,8 @@
 		6FBF59A91407E84000F7D5EE /* cell_bkgr_brown_large_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bkgr_brown_large_selected.png; sourceTree = "<group>"; };
 		6FBF59AA1407E84000F7D5EE /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
 		6FBF59AB1407E84000F7D5EE /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
+		6FC26C61142C7E8500BAEE9C /* CoconutKit_handle_default_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_left.png; sourceTree = "<group>"; };
+		6FC26C62142C7E8500BAEE9C /* CoconutKit_handle_default_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default_right.png; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FDB126E1404D1C000469DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12711404D1C000469DEC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
@@ -415,7 +418,6 @@
 		6FDB13001404D1C000469DEC /* WizardPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
 		6FDB13021404D1C000469DEC /* DemosListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemosListViewController.h; sourceTree = "<group>"; };
 		6FDB13031404D1C000469DEC /* DemosListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemosListViewController.m; sourceTree = "<group>"; };
-		6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_handle_default.png; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
@@ -497,7 +499,8 @@
 				6F37FDDB13EBE478003E33EF /* CoconutKit_ButtonBarRefresh.png */,
 				6F37FDDC13EBE478003E33EF /* CoconutKit_ButtonBarRefresh@2x.png */,
 				6F37FDDD13EBE478003E33EF /* CoconutKit_cursor_default_pointer.png */,
-				6FEDD6C4141E2F6900D59BFC /* CoconutKit_handle_default.png */,
+				6FC26C61142C7E8500BAEE9C /* CoconutKit_handle_default_left.png */,
+				6FC26C62142C7E8500BAEE9C /* CoconutKit_handle_default_right.png */,
 				6F482FC0140EBD0600D679E7 /* CoconutKit_strip_default_background.png */,
 			);
 			path = Images;
@@ -1265,7 +1268,8 @@
 				6F482FC1140EBD0600D679E7 /* CoconutKit_strip_default_background.png in Resources */,
 				6F482FC9140EBD4800D679E7 /* StripsDemoViewController.xib in Resources */,
 				6F482FCB140EBD7D00D679E7 /* strip_bkgr_green.png in Resources */,
-				6FEDD6C6141E2F6900D59BFC /* CoconutKit_handle_default.png in Resources */,
+				6FC26C63142C7E8500BAEE9C /* CoconutKit_handle_default_left.png in Resources */,
+				6FC26C64142C7E8500BAEE9C /* CoconutKit_handle_default_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

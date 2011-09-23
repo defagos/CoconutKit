@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 
 const CGFloat kStripViewHandleWidth = 22.f;
+const CGFloat kStripViewHandleHeight = 22.f;
 
 @interface HLSStripView () <HLSAnimationDelegate>
 
@@ -134,17 +135,17 @@ const CGFloat kStripViewHandleWidth = 22.f;
                                 self.contentFrameInParent.size.width + 2 * kStripViewHandleWidth,
                                 self.contentFrameInParent.size.height);
         self.leftHandleView.frame = CGRectMake(0.f, 
-                                               0.f, 
+                                               (self.contentFrameInParent.size.height - kStripViewHandleHeight) / 2.f , 
                                                kStripViewHandleWidth, 
-                                               self.contentFrameInParent.size.height);
+                                               kStripViewHandleHeight);
         self.rightHandleView.frame = CGRectMake(kStripViewHandleWidth + self.contentFrameInParent.size.width, 
-                                                0.f, 
+                                                (self.contentFrameInParent.size.height - kStripViewHandleHeight) / 2.f , 
                                                 kStripViewHandleWidth, 
-                                                self.contentFrameInParent.size.height);
+                                                kStripViewHandleHeight);
         self.contentView.frame = CGRectMake(kStripViewHandleWidth,
                                             0.f,
                                             self.contentFrameInParent.size.width,
-                                            self.contentFrameInParent.size.height);        
+                                            self.contentFrameInParent.size.height);
     }
     else {
         self.frame = self.contentFrameInParent;
@@ -167,19 +168,11 @@ const CGFloat kStripViewHandleWidth = 22.f;
     // TODO: Add a view all around to trap clicks outside the strip view (triggering exitMode)
     
     // Add handles around the strip view
-    self.leftHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default.png"]] autorelease];
-    self.leftHandleView.contentStretch = CGRectMake(0.f, 
-                                                    0.5f, 
-                                                    1.f, 
-                                                    1.f / self.leftHandleView.frame.size.height);
+    self.leftHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default_left.png"]] autorelease];
     self.leftHandleView.exclusiveTouch = YES;
     [self addSubview:self.leftHandleView];
     
-    self.rightHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default.png"]] autorelease];
-    self.rightHandleView.contentStretch = CGRectMake(0.f, 
-                                                     0.5f, 
-                                                     1.f, 
-                                                     1.f / self.rightHandleView.frame.size.height);
+    self.rightHandleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoconutKit_handle_default_right.png"]] autorelease];
     self.rightHandleView.exclusiveTouch = YES;
     [self addSubview:self.rightHandleView];
     
