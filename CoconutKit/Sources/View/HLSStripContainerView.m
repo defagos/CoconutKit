@@ -799,8 +799,6 @@ static const NSTimeInterval kLongTouchThreshold = 0.2;
             if (! m_draggingLeftHandle) {
                 m_draggingLeftHandle = YES;
                 
-                [stripView leftHandleView].alpha = kGrabbedViewAlpha;
-                
                 m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
                 
@@ -812,8 +810,6 @@ static const NSTimeInterval kLongTouchThreshold = 0.2;
         else if (CGRectContainsPoint([stripView rightHandleFrameInParent], point)) {
             if (! m_draggingRightHandle) {
                 m_draggingRightHandle = YES;
-                
-                [stripView rightHandleView].alpha = kGrabbedViewAlpha;
                 
                 m_handlePreviousXPos = point.x;
                 self.movedStripView = stripView;
@@ -1032,8 +1028,6 @@ static const NSTimeInterval kLongTouchThreshold = 0.2;
     }
     
     self.movedStripView.alpha = 1.f;
-    [self.movedStripView leftHandleView].alpha = 1.f;
-    [self.movedStripView rightHandleView].alpha = 1.f;
     
     self.movedStripView = nil;
     
