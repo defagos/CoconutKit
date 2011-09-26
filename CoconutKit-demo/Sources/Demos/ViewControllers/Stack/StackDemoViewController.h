@@ -19,12 +19,11 @@
     UIButton *m_orientationClonerButton;
     UIButton *m_containerCustomizationButton;
     UIButton *m_transparentButton;
+    UIButton *m_testInModalButton;
     UIButton *m_popButton;
     UIButton *m_hideWithModalButton;
     UILabel *m_transitionLabel;
     UIPickerView *m_transitionPickerView;
-    UILabel *m_stretchingContentLabel;
-    UISwitch *m_stretchingContentSwitch;
     UILabel *m_forwardingPropertiesLabel;
     UISwitch *m_forwardingPropertiesSwitch;
 }
@@ -37,12 +36,11 @@
 @property (nonatomic, retain) IBOutlet UIButton *orientationClonerButton;
 @property (nonatomic, retain) IBOutlet UIButton *containerCustomizationButton;
 @property (nonatomic, retain) IBOutlet UIButton *transparentButton;
+@property (nonatomic, retain) IBOutlet UIButton *testInModalButton;
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
 @property (nonatomic, retain) IBOutlet UIButton *hideWithModalButton;
 @property (nonatomic, retain) IBOutlet UILabel *transitionLabel;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
-@property (nonatomic, retain) IBOutlet UILabel *stretchingContentLabel;
-@property (nonatomic, retain) IBOutlet UISwitch *stretchingContentSwitch;
 @property (nonatomic, retain) IBOutlet UILabel *forwardingPropertiesLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 

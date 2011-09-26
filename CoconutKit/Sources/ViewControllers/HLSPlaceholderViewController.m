@@ -82,8 +82,6 @@
 
 @synthesize placeholderView = m_placeholderView;
 
-@synthesize stretchingContent = m_stretchingContent;
-
 @synthesize forwardingProperties = m_forwardingProperties;
 
 - (void)setForwardingProperties:(BOOL)forwardingProperties
@@ -126,8 +124,7 @@
     [super viewWillAppear:animated];
     
     // If an inset has been defined but not displayed yet, display it
-    if ([self.containerContent addViewToContainerView:self.placeholderView
-                                              stretch:self.stretchingContent 
+    if ([self.containerContent addViewToContainerView:self.placeholderView 
                                      blockInteraction:NO 
                               inContainerContentStack:nil]) {
         // Push non-animated
@@ -275,8 +272,7 @@
     
     if ([self isViewLoaded]) {
         // Install the new view
-        [self.containerContent addViewToContainerView:self.placeholderView 
-                                              stretch:self.stretchingContent 
+        [self.containerContent addViewToContainerView:self.placeholderView  
                                      blockInteraction:NO 
                               inContainerContentStack:[NSArray arrayWithObjects:self.oldContainerContent, self.containerContent, nil]];
         

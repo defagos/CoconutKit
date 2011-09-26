@@ -87,7 +87,13 @@
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
     
     [self.pushButton setTitle:NSLocalizedString(@"Push", @"Push") forState:UIControlStateNormal];
-    [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+    
+    if (self == [self.stackController rootViewController]) {
+        [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
+    }
+    else {
+        [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
@@ -207,7 +213,12 @@
 
 - (void)popButtonClicked:(id)sender
 {
-    [self.stackController popViewController];
+    if (self == [self.stackController rootViewController]) {
+        [self.stackController dismissModalViewControllerAnimated:YES];
+    }
+    else {
+        [self.stackController popViewController];
+    }
 }
 
 @end

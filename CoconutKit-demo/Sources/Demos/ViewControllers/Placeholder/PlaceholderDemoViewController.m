@@ -34,7 +34,6 @@
 - (void)hideWithModalButtonClicked:(id)sender;
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)containerCustomizationButtonClicked:(id)sender;
-- (void)stretchingContentSwitchValueChanged:(id)sender;
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender;
 
 @end
@@ -48,7 +47,6 @@
     if ((self = [super initWithNibName:[self className] bundle:nil])) {
         // Pre-load a view controller before display. Yep, this is possible!
         self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        self.stretchingContent = YES;
     }
     return self;
 }
@@ -78,8 +76,6 @@
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
-    self.stretchingContentLabel = nil;
-    self.stretchingContentSwitch = nil;
     self.forwardingPropertiesLabel = nil;
     self.forwardingPropertiesSwitch = nil;
 }
@@ -109,10 +105,6 @@
 @synthesize transitionLabel = m_transitionLabel;
 
 @synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize stretchingContentLabel = m_stretchingContentLabel;
-
-@synthesize stretchingContentSwitch = m_stretchingContentSwitch;
 
 @synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
 
@@ -167,12 +159,7 @@
     [self.hideWithModalButton addTarget:self
                                  action:@selector(hideWithModalButtonClicked:)
                        forControlEvents:UIControlEventTouchUpInside];
-    
-    self.stretchingContentSwitch.on = self.stretchingContent;
-    [self.stretchingContentSwitch addTarget:self
-                                     action:@selector(stretchingContentSwitchValueChanged:)
-                           forControlEvents:UIControlEventValueChanged];
-    
+        
     self.forwardingPropertiesSwitch.on = self.forwardingProperties;
     [self.forwardingPropertiesSwitch addTarget:self
                                         action:@selector(forwardingPropertiesSwitchValueChanged:)
@@ -257,11 +244,6 @@
 {
     ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
     [self displayInsetViewController:containerCustomizationViewController];
-}
-
-- (void)stretchingContentSwitchValueChanged:(id)sender
-{
-    self.stretchingContent = self.stretchingContentSwitch.on;
 }
 
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender
@@ -389,7 +371,6 @@
     [self.removeButton setTitle:NSLocalizedString(@"Remove", @"Remove") forState:UIControlStateNormal];
     [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization") forState:UIControlStateNormal];
     [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal") forState:UIControlStateNormal];
-    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
 }

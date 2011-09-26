@@ -396,7 +396,6 @@ typedef enum {
                 case ViewControllersDemoIndexWizardViewController: {
                     demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
                     WizardDemoViewController *wizardDemoViewController = (WizardDemoViewController*)demoViewController;
-                    wizardDemoViewController.stretchingContent = YES;
                     
                     WizardPageViewController *wizardPageViewController1 = [[[WizardPageViewController alloc] init] autorelease];
                     WizardPageViewController *wizardPageViewController2 = [[[WizardPageViewController alloc] init] autorelease];

@@ -371,7 +371,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 #pragma mark View management
 
 - (BOOL)addViewToContainerView:(UIView *)containerView 
-                       stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction
        inContainerContentStack:(NSArray *)containerContentStack
 {
@@ -440,10 +439,8 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
     
-    // Stretching
-    if (stretch) {
-        self.viewController.view.frame = containerView.bounds;
-    }
+    // Match the inserted view frame so that it fills the container bounds
+    self.viewController.view.frame = containerView.bounds;
     
     // The transitions of the contents above in the stack might move views below in the stack. To account for this
     // effect, we must replay them so that the view we have inserted is put at the proper location
@@ -477,7 +474,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     [self.blockingView removeFromSuperview];
     self.blockingView = nil;
     
-    // Restore view controller original properties (this way, if addViewToContainerView:stretch:blockInteraction:
+    // Restore view controller original properties (this way, if addViewToContainerView:blockInteraction:
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;

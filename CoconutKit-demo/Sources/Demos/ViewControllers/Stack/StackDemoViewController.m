@@ -17,6 +17,7 @@
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 #import "TransparentViewController.h"
+#import "RootStackDemoViewController.h"
 
 @interface StackDemoViewController ()
 
@@ -31,8 +32,8 @@
 - (void)orientationClonerButtonClicked:(id)sender;
 - (void)containerCustomizationButtonClicked:(id)sender;
 - (void)transparentButtonClicked:(id)sender;
+- (void)testInModalButtonClicked:(id)sender;
 - (void)popButtonClicked:(id)sender;
-- (void)stretchingContentSwitchValueChanged:(id)sender;
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender;
 
 @end
@@ -47,7 +48,6 @@
         UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
         stackController.title = @"HLSStackController";
-        stackController.stretchingContent = YES;
         
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
@@ -60,7 +60,6 @@
         [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
         
         self.insetViewController = stackController;
-        self.stretchingContent = YES;
         self.forwardingProperties = YES;
     }
     return self;
@@ -78,12 +77,11 @@
     self.orientationClonerButton = nil;
     self.containerCustomizationButton = nil;
     self.transparentButton = nil;
+    self.testInModalButton = nil;
     self.popButton = nil;
     self.hideWithModalButton = nil;
     self.transitionLabel = nil;
     self.transitionPickerView = nil;
-    self.stretchingContentLabel = nil;
-    self.stretchingContentSwitch = nil;
     self.forwardingPropertiesLabel = nil;
     self.forwardingPropertiesSwitch = nil;
 }
@@ -106,6 +104,8 @@
 
 @synthesize transparentButton = m_transparentButton;
 
+@synthesize testInModalButton = m_testInModalButton;
+
 @synthesize popButton = m_popButton;
 
 @synthesize hideWithModalButton = m_hideWithModalButton;
@@ -113,10 +113,6 @@
 @synthesize transitionLabel = m_transitionLabel;
 
 @synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize stretchingContentLabel = m_stretchingContentLabel;
-
-@synthesize stretchingContentSwitch = m_stretchingContentSwitch;
 
 @synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
 
@@ -160,6 +156,10 @@
                                action:@selector(transparentButtonClicked:)
                      forControlEvents:UIControlEventTouchUpInside];
     
+    [self.testInModalButton addTarget:self
+                               action:@selector(testInModalButtonClicked:)
+                     forControlEvents:UIControlEventTouchUpInside];
+    
     [self.popButton addTarget:self
                        action:@selector(popButtonClicked:)
              forControlEvents:UIControlEventTouchUpInside];
@@ -172,11 +172,6 @@
     self.transitionPickerView.dataSource = self;
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
-    self.stretchingContentSwitch.on = stackController.stretchingContent;
-    [self.stretchingContentSwitch addTarget:self
-                                     action:@selector(stretchingContentSwitchValueChanged:)
-                           forControlEvents:UIControlEventValueChanged];
-    
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
     [self.forwardingPropertiesSwitch addTarget:self
                                         action:@selector(forwardingPropertiesSwitchValueChanged:)
@@ -246,6 +241,13 @@
     [self displayContentViewController:transparentViewController];
 }
 
+- (void)testInModalButtonClicked:(id)sender
+{
+    RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+    HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    [self presentModalViewController:stackController animated:YES];
+}
+
 - (void)containerCustomizationButtonClicked:(id)sender
 {
     ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
@@ -256,12 +258,6 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     [stackController popViewController];
-}
-
-- (void)stretchingContentSwitchValueChanged:(id)sender
-{
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
-    stackController.stretchingContent = self.stretchingContentSwitch.on;
 }
 
 - (void)forwardingPropertiesSwitchValueChanged:(id)sender
@@ -388,10 +384,10 @@
     [self.orientationClonerButton setTitle:@"HLSOrientationCloner" forState:UIControlStateNormal];
     [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization") forState:UIControlStateNormal];
     [self.transparentButton setTitle:NSLocalizedString(@"Transparent", @"Transparent") forState:UIControlStateNormal];
+    [self.testInModalButton setTitle:NSLocalizedString(@"Test in modal", @"Test in modal") forState:UIControlStateNormal];
     [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
     [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal") forState:UIControlStateNormal];
     self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
-    self.stretchingContentLabel.text = NSLocalizedString(@"Stretch content", @"Stretch content");
     self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
 }
 

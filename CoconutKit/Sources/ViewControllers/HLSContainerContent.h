@@ -13,8 +13,8 @@
  * View controllers inserted into view controller containers exhibit common properties:
  *   - they belong to a container, which they must be able to identify, and they should not be inserted into several
  *     containers at the same time
- *   - they are added and removed using some transition style, and might be stretched to fill the container's view 
- *     where they are displayed
+ *   - they are added and removed using some transition style, and their view frame is adjusted to match the container
+ *     view they are added to
  *   - a view controller's view should be created lazily at the time it is really required
  *   - it must be possible to pre-load a view controller container before it gets actually displayed
  *   - a view controller container must retain the view controllers it manages
@@ -98,13 +98,12 @@
  * view is simply added on top.
  * The first element in the stack array is interpreted as the bottommost one.
  * 
- * If the stretch boolean is set to YES, the view controller's view is stretched to fill the whole container view.
- * How this happens depends on the view controller's view autoresizing mask.
+ * The frame of the view which is added is automatically adjusted to match the container view bounds. This is the
+ * usual behavior of built-in view controller containers (UINavigationController, UITabBarController)
  *
  * Return YES if the view has been added, NO if it was already added.
  */
 - (BOOL)addViewToContainerView:(UIView *)containerView 
-                       stretch:(BOOL)stretch
               blockInteraction:(BOOL)blockInteraction
        inContainerContentStack:(NSArray *)containerContentStack;
 

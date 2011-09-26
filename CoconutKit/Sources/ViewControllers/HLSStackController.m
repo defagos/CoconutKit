@@ -89,8 +89,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize containerContentStack = m_containerContentStack;
 
-@synthesize stretchingContent = m_stretchingContent;
-
 @synthesize forwardingProperties = m_forwardingProperties;
 
 - (void)setForwardingProperties:(BOOL)forwardingProperties
@@ -166,7 +164,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {
             if ([containerContent addViewToContainerView:self.view 
-                                                 stretch:self.stretchingContent 
                                         blockInteraction:YES 
                                  inContainerContentStack:self.containerContentStack]) {        
             }
@@ -322,7 +319,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
-                                         stretch:self.stretchingContent 
                                 blockInteraction:YES 
                          inContainerContentStack:self.containerContentStack];
         
@@ -361,7 +357,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:m_capacity];
         if (newlyVisibleContainerContent) {
             [newlyVisibleContainerContent addViewToContainerView:self.view 
-                                                         stretch:self.stretchingContent 
                                                 blockInteraction:YES 
                                          inContainerContentStack:self.containerContentStack];
         }

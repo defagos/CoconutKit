@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
+		<string key="IBDocument.SystemVersion">11B26</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
 		<string key="IBDocument.AppKitVersion">1138</string>
 		<string key="IBDocument.HIToolboxVersion">566.00</string>
@@ -257,45 +257,6 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
 					</object>
-					<object class="IBUILabel" id="178406867">
-						<reference key="NSNextResponder" ref="490296611"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{283, 872}, {363, 21}}</string>
-						<reference key="NSSuperview" ref="490296611"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="342031782"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;stretchingContent&gt;</string>
-						<object class="NSFont" key="IBUIFont" id="87448287">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<object class="NSColor" key="IBUITextColor" id="222767216">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-						</object>
-						<reference key="IBUIHighlightedColor" ref="114470078"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-					</object>
-					<object class="IBUISwitch" id="342031782">
-						<reference key="NSNextResponder" ref="490296611"/>
-						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{654, 869}, {94, 27}}</string>
-						<reference key="NSSuperview" ref="490296611"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="154317067"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<bool key="IBUIOn">YES</bool>
-					</object>
 					<object class="IBUILabel" id="47782108">
 						<reference key="NSNextResponder" ref="490296611"/>
 						<int key="NSvFlags">319</int>
@@ -309,8 +270,15 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">&lt;forwardingProperties&gt;</string>
-						<reference key="IBUIFont" ref="87448287"/>
-						<reference key="IBUITextColor" ref="222767216"/>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<object class="NSColor" key="IBUITextColor" id="222767216">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
 						<reference key="IBUIHighlightedColor" ref="114470078"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
@@ -321,7 +289,6 @@
 						<string key="NSFrame">{{654, 925}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -353,7 +320,7 @@
 						<string key="NSFrame">{{283, 598}, {465, 216}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="178406867"/>
+						<reference key="NSNextKeyView"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
 					</object>
@@ -512,22 +479,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">stretchingContentLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="178406867"/>
-					</object>
-					<int key="connectionID">46</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">stretchingContentSwitch</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="342031782"/>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">removeButton</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="483437656"/>
@@ -565,7 +516,6 @@
 							<reference ref="973887671"/>
 							<reference ref="262548350"/>
 							<reference ref="576299195"/>
-							<reference ref="342031782"/>
 							<reference ref="154317067"/>
 							<reference ref="16578721"/>
 							<reference ref="988827800"/>
@@ -576,7 +526,6 @@
 							<reference ref="347996817"/>
 							<reference ref="483437656"/>
 							<reference ref="375668740"/>
-							<reference ref="178406867"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -611,16 +560,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
 						<reference key="object" ref="262548350"/>
-						<reference key="parent" ref="490296611"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="342031782"/>
-						<reference key="parent" ref="490296611"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="178406867"/>
 						<reference key="parent" ref="490296611"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -682,8 +621,6 @@
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
-					<string>16.IBPluginDependency</string>
-					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
@@ -702,8 +639,6 @@
 					<string>PlaceholderDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -807,8 +742,6 @@
 							<string>portraitOnlyButton</string>
 							<string>removeButton</string>
 							<string>stretchableSampleButton</string>
-							<string>stretchingContentLabel</string>
-							<string>stretchingContentSwitch</string>
 							<string>transitionLabel</string>
 							<string>transitionPickerView</string>
 						</object>
@@ -826,8 +759,6 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>UILabel</string>
-							<string>UISwitch</string>
 							<string>UILabel</string>
 							<string>UIPickerView</string>
 						</object>
@@ -848,8 +779,6 @@
 							<string>portraitOnlyButton</string>
 							<string>removeButton</string>
 							<string>stretchableSampleButton</string>
-							<string>stretchingContentLabel</string>
-							<string>stretchingContentSwitch</string>
 							<string>transitionLabel</string>
 							<string>transitionPickerView</string>
 						</object>
@@ -902,14 +831,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">stretchableSampleButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">stretchingContentLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">stretchingContentSwitch</string>
-								<string key="candidateClassName">UISwitch</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">transitionLabel</string>

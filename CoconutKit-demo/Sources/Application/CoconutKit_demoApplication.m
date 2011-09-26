@@ -37,7 +37,6 @@
         if ([demoMode isEqual:@"RootStack"]) {
             RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
             HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
-            stackController.stretchingContent = YES;
             self.rootViewController = stackController;
         }
         else {
