@@ -125,7 +125,6 @@
     
     // If an inset has been defined but not displayed yet, display it
     if ([self.containerContent addViewToContainerView:self.placeholderView 
-                                     blockInteraction:NO 
                               inContainerContentStack:nil]) {
         // Push non-animated
         HLSAnimation *pushAnimation = [self createAnimation];
@@ -273,7 +272,6 @@
     if ([self isViewLoaded]) {
         // Install the new view
         [self.containerContent addViewToContainerView:self.placeholderView  
-                                     blockInteraction:NO 
                               inContainerContentStack:[NSArray arrayWithObjects:self.oldContainerContent, self.containerContent, nil]];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we

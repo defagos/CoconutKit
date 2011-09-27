@@ -38,7 +38,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic, assign) id containerController;           // weak ref
 @property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
-@property (nonatomic, retain) UIView *blockingView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
@@ -296,7 +295,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     
     self.viewController = nil;
     self.containerController = nil;
-    self.blockingView = nil;
     
     [super dealloc];
 }
@@ -308,8 +306,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 @synthesize containerController = m_containerController;
 
 @synthesize addedToContainerView = m_addedToContainerView;
-
-@synthesize blockingView = m_blockingView;
 
 @synthesize transitionStyle = m_transitionStyle;
 
@@ -371,7 +367,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 #pragma mark View management
 
 - (BOOL)addViewToContainerView:(UIView *)containerView 
-              blockInteraction:(BOOL)blockInteraction
        inContainerContentStack:(NSArray *)containerContentStack
 {
     if (self.addedToContainerView) {
@@ -403,13 +398,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
                     NSAssert([aboveContainerContent view].superview == containerView, 
                              @"Other container contents has not been added to the same container view");
                     
-                    if (aboveContainerContent.blockingView) {
-                        [containerView insertSubview:self.viewController.view belowSubview:aboveContainerContent.blockingView];
-                    }
-                    else {
-                        [containerView insertSubview:self.viewController.view belowSubview:[aboveContainerContent view]];
-                    }
-                    
+                    [containerView insertSubview:self.viewController.view belowSubview:[aboveContainerContent view]];
                     added = YES;
                     break;
                 }                
@@ -427,13 +416,6 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     }
     
     self.addedToContainerView = YES;
-    
-    // Insert blocking subview if required
-    if (blockInteraction) {
-        self.blockingView = [[[UIView alloc] initWithFrame:[HLSContainerContent fixedFrameForView:containerView]] autorelease];
-        self.blockingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [containerView insertSubview:self.blockingView belowSubview:self.viewController.view];
-    }
     
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
@@ -470,11 +452,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     [self.viewController.view removeFromSuperview];
     self.addedToContainerView = NO;
     
-    // Remove the blocking view (if any)
-    [self.blockingView removeFromSuperview];
-    self.blockingView = nil;
-    
-    // Restore view controller original properties (this way, if addViewToContainerView:blockInteraction:
+    // Restore view controller original properties (this way, if addViewToContainerView:inContainerContentStack:
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;

@@ -164,7 +164,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {
             if ([containerContent addViewToContainerView:self.view 
-                                        blockInteraction:YES 
                                  inContainerContentStack:self.containerContentStack]) {        
             }
         }
@@ -319,7 +318,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
-                                blockInteraction:YES 
                          inContainerContentStack:self.containerContentStack];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
@@ -357,7 +355,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:m_capacity];
         if (newlyVisibleContainerContent) {
             [newlyVisibleContainerContent addViewToContainerView:self.view 
-                                                blockInteraction:YES 
                                          inContainerContentStack:self.containerContentStack];
         }
         
