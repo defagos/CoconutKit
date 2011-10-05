@@ -16,6 +16,8 @@
     BOOL m_large;
 }
 
+- (id)initLarge:(BOOL)large;
+
 @property (nonatomic, retain) IBOutlet UILabel *instructionLabel;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField2;
