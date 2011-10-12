@@ -195,4 +195,14 @@
     self.actionSheet = nil;
 }
 
+// MARK: -
+// MARK: Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // Just to remove the associated warning. Nothing here yet
+}
+
 @end
