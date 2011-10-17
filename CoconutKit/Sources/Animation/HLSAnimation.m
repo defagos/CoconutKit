@@ -14,10 +14,13 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface HLSAnimation ()
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
+@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
@@ -77,6 +80,7 @@
 {
     self.animationSteps = nil;
     self.animationStepsEnumerator = nil;
+    self.currentAnimationStep = nil;
     self.tag = nil;
     self.userInfo = nil;
     self.delegate = nil;
@@ -88,6 +92,8 @@
 @synthesize animationSteps = m_animationSteps;
 
 @synthesize animationStepsEnumerator = m_animationStepsEnumerator;
+
+@synthesize currentAnimationStep = m_currentAnimationStep;
 
 @synthesize tag = m_tag;
 
@@ -123,6 +129,7 @@
     }
     
     self.running = YES;
+    m_cancelling = NO;
     
     // Begin with the first step
     [self playNextStepAnimated:animated];
@@ -198,13 +205,12 @@
     // First call?
     if (! self.animationStepsEnumerator) {
         self.animationStepsEnumerator = [self.animationSteps objectEnumerator];
-        m_firstStep = YES;
     }
     
     // Proceeed with the next step (if any)
-    HLSAnimationStep *nextAnimationStep = [self.animationStepsEnumerator nextObject];
-    if (nextAnimationStep) {
-        [self playStep:nextAnimationStep animated:animated];
+    self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
+    if (self.currentAnimationStep) {
+        [self playStep:self.currentAnimationStep animated:animated];
     }
     // Done with the animation
     else {
@@ -221,6 +227,24 @@
             [self.delegate animationDidStop:self animated:m_animated];
         }
     }    
+}
+
+- (void)cancel
+{
+    if (! self.running) {
+        HLSLoggerInfo(@"The animation is not running, nothing to cancel");
+        return;
+    }
+    
+    m_cancelling = YES;
+    
+    // Cancel all animations
+    for (UIView *view in [self.currentAnimationStep views]) {
+        [view.layer removeAllAnimations];
+    }
+    
+    // Play all remaining steps without animation
+    [self playNextStepAnimated:NO];
 }
 
 #pragma mark Creating the reverse animation
@@ -288,6 +312,10 @@
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
+    if (m_cancelling) {
+        return;
+    }
+    
     HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
     
     if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {

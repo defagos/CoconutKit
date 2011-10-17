@@ -12,6 +12,8 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
+"Blocking"="Bloquant";
+"Cancel"="Annuler";
 "Change"="Changer";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
 "Choose"="Choisir";

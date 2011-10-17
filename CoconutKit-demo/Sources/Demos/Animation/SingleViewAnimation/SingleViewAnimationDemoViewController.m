@@ -11,9 +11,11 @@
 @interface SingleViewAnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
+@property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
 - (void)playForwardButtonClicked:(id)sender;
 - (void)playBackwardButtonClicked:(id)sender;
+- (void)cancelButtonClicked:(id)sender;
 
 @end
 
@@ -29,21 +31,24 @@
     return self;
 }
 
-- (void)dealloc
-{    
-    self.animation = nil;
-    [super dealloc];
-}
-
 - (void)releaseViews
 {
     [super releaseViews];
     
+    [self.animation cancel];
+    self.animation = nil;
+    
+    [self.reverseAnimation cancel];
+    self.reverseAnimation = nil;
+    
     self.rectangleView = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
+    self.cancelButton = nil;
     self.animatedLabel = nil;
     self.animatedSwitch = nil;
+    self.blockingLabel = nil;
+    self.blockingSwitch = nil;
 }
 
 #pragma mark View lifecycle
@@ -61,7 +66,13 @@
               forControlEvents:UIControlEventTouchUpInside];
     self.playBackwardButton.hidden = YES;
     
+    [self.cancelButton addTarget:self
+                          action:@selector(cancelButtonClicked:)
+                forControlEvents:UIControlEventTouchUpInside];
+    self.cancelButton.hidden = YES;
+    
     self.animatedSwitch.on = YES;
+    self.blockingSwitch.on = NO;
 }
 
 #pragma mark Accessors and mutators
@@ -72,11 +83,19 @@
 
 @synthesize playBackwardButton = m_playBackwardButton;
 
+@synthesize cancelButton = m_cancelButton;
+
 @synthesize animatedLabel = m_animatedLabel;
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
+@synthesize blockingLabel = m_blockingLabel;
+
+@synthesize blockingSwitch = m_blockingSwitch;
+
 @synthesize animation = m_animation;
+
+@synthesize reverseAnimation = m_reverseAnimation;
 
 #pragma mark Orientation management
 
@@ -94,6 +113,7 @@
 - (void)playForwardButtonClicked:(id)sender
 {
     self.playForwardButton.hidden = YES;
+    self.cancelButton.hidden = NO;
     
     // Only a single view to animate; can use the convenience constructor of HLSAnimation step for animation
     // creation using less code
@@ -126,7 +146,7 @@
                                                                 animationStep4,
                                                                 nil]];
     self.animation.tag = @"singleViewAnimation";
-    self.animation.lockingUI = YES;
+    self.animation.lockingUI = self.blockingSwitch.on;
     self.animation.delegate = self;
     [self.animation playAnimated:self.animatedSwitch.on];
 }
@@ -134,10 +154,18 @@
 - (void)playBackwardButtonClicked:(id)sender
 {
     self.playBackwardButton.hidden = YES;
+    self.cancelButton.hidden = NO;
     
     // Create the reverse animation
-    HLSAnimation *reverseAnimation = [self.animation reverseAnimation];
-    [reverseAnimation playAnimated:self.animatedSwitch.on];
+    self.reverseAnimation = [self.animation reverseAnimation];
+    self.reverseAnimation.lockingUI = self.blockingSwitch.on;
+    [self.reverseAnimation playAnimated:self.animatedSwitch.on];
+}
+
+- (void)cancelButtonClicked:(id)sender
+{
+    [self.animation cancel];
+    [self.reverseAnimation cancel];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -163,6 +191,8 @@
     else if ([animation.tag isEqual:@"reverse_singleViewAnimation"]) {
         self.playForwardButton.hidden = NO;
     }
+    
+    self.cancelButton.hidden = YES;
 }
 
 #pragma mark Localization
@@ -174,7 +204,9 @@
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
     [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
     [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];
+    [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"Cancel") forState:UIControlStateNormal];
     self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
+    self.blockingLabel.text = NSLocalizedString(@"Blocking", @"Blocking");
 }
 
 @end

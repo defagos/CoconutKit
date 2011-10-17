@@ -10,6 +10,7 @@
 #import "HLSTransitionStyle.h"
 
 // Forward declarations
+@class HLSAnimationStep;
 @protocol HLSAnimationDelegate;
 
 /**
@@ -17,12 +18,12 @@
  * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
  * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
  *
- * Currently, there is sadly no way to stop an animation once it has begun. You must therefore be especially careful
- * if a delegate registered for an animation dies before the animation ends (do not forget to unregister it before).
- * Moreover, an animation does not retain the view it animates (see HLSViewAnimationStep documentation). You should
- * therefore ensure that an animation has ended before its views are destroyed. The easiest solution to both problems
- * is to lock the UI during the animation (lockingUI animation property). This prevents the user from doing anything
- * nasty (like navigating away).
+ * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
+ * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
+ *   - cancel the animation first
+ *   - unregister the delegate, but let the animation run
+ *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
+ *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
@@ -44,13 +45,14 @@
 @private
     NSArray *m_animationSteps;                              // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;               // enumerator over steps
+    HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
-    BOOL m_firstStep;
-    BOOL m_running;
     BOOL m_animated;
+    BOOL m_running;
+    BOOL m_cancelling;
     id<HLSAnimationDelegate> m_delegate;
 }
 
@@ -106,11 +108,16 @@
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
 /**
- * Play the animation; there is no way to stop an animation once it has been started. If animated is set to NO,
- * the end state of the animation is reached instantly (i.e. the animation does take place synchronously at
- * the location of the call to playAnimated:)
+ * Play the animation. If animated is set to NO, the end state of the animation is reached instantly (i.e. the animation 
+ * does take place synchronously at the location of the call to playAnimated:)
  */
 - (void)playAnimated:(BOOL)animated;
+
+/**
+ * Cancel the animation. This does not stop the animation where it is, but plays it until its end immediately. All 
+ * delegate events are still received as if the animation had been played normally
+ */
+- (void)cancel;
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except the tag which gets an additional

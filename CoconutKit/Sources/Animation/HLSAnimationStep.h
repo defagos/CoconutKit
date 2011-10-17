@@ -98,7 +98,7 @@
 - (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view;
 
 /**
- * All views changed by the animation, returned in the order they were added to the animation step object
+ * All views changed by the animation step, returned in the order they were added to the animation step object
  */
 - (NSArray *)views;
 
