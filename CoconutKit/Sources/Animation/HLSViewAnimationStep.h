@@ -12,10 +12,6 @@
  * represent the collective set of changes applied to these views during some time interval. An animation (HLSAnimation) 
  * is then simply a collection of animation steps.
  *
- * Several convenience constructors are available to help you create view animation steps without requiring you to calculate 
- * coordinates explicitly (you can if you require this flexibility, of course). After you have created a view animation step 
- * object, you can use the other available accessors to set more properties.
- *
  * Designated initializer: init (create a view animation step with default settings)
  */
 @interface HLSViewAnimationStep : NSObject {
@@ -25,45 +21,15 @@
 }
 
 /**
- * Convenience constructor for instantiating a view animation step with default settings (no change)
+ * Identity view animation step
  */
 + (HLSViewAnimationStep *)viewAnimationStep;
 
 /**
- * View animation step moving a view between two frames. Both frames must describe positions of the view to animate
- * in the coordinate system of its superview (otherwise the result of the animation step is undefined)
- */
-+ (HLSViewAnimationStep *)viewAnimationStepAnimatingViewFromFrame:(CGRect)fromFrame 
-                                                          toFrame:(CGRect)toFrame;
-
-+ (HLSViewAnimationStep *)viewAnimationStepAnimatingViewFromFrame:(CGRect)fromFrame 
-                                                          toFrame:(CGRect)toFrame
-                                               withAlphaVariation:(CGFloat)alphaVariation;
-
-/**
- * View animation step applying a translation to a view frame
- */
-+ (HLSViewAnimationStep *)viewAnimationStepTranslatingViewWithDeltaX:(CGFloat)deltaX
-                                                              deltaY:(CGFloat)deltaY;
-
-+ (HLSViewAnimationStep *)viewAnimationStepTranslatingViewWithDeltaX:(CGFloat)deltaX
-                                                              deltaY:(CGFloat)deltaY
-                                                      alphaVariation:(CGFloat)alphaVariation;
-
-/**
- * View animation step applying a transform and an alpha variation
- */
-+ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithTransform:(CGAffineTransform)transform
-                                                      alphaVariation:(CGFloat)alphaVariation;
-
-/**
- * View animation step varying the alpha of a view
- */
-+ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithAlphaVariation:(CGFloat)alphaVariation;
-
-/**
- * The affine transformation which must be applied during the view animation step
- * Default value is the identity
+ * The affine transformation corresponding to the animation step. Use the convenience methods available from
+ * CGAffineTransform.h to create translation, rotation, scaling transformations, etc. You can even combine
+ * them using transformation composition (beware of the order since composing transforms is not a commutative
+ * operation)
  */
 @property (nonatomic, assign) CGAffineTransform transform;
 
@@ -73,5 +39,10 @@
  * Default value is 0.f
  */
 @property (nonatomic, assign) CGFloat alphaVariation;
+
+/**
+ * Return the inverse animation step
+ */
+- (HLSViewAnimationStep *)reverseViewAnimationStep;
 
 @end

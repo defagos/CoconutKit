@@ -48,7 +48,6 @@
 		6F37FEA713EBE478003E33EF /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE1B13EBE478003E33EF /* UIControl+HLSExclusiveTouch.m */; };
 		6F37FEA813EBE478003E33EF /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE1D13EBE478003E33EF /* UIImage+HLSExtensions.m */; };
 		6F37FEA913EBE478003E33EF /* HLSModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE2013EBE478003E33EF /* HLSModelManager.m */; };
-		6F37FEAA13EBE478003E33EF /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE2313EBE478003E33EF /* HLSTransform.m */; };
 		6F37FEAB13EBE478003E33EF /* HLSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE2613EBE478003E33EF /* HLSLogger.m */; };
 		6F37FEAF13EBE478003E33EF /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE3213EBE478003E33EF /* HLSTask.m */; };
 		6F37FEB013EBE478003E33EF /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE3513EBE478003E33EF /* HLSTaskGroup.m */; };
@@ -70,6 +69,13 @@
 		6F37FEC613EBE478003E33EF /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE6813EBE478003E33EF /* HLSWebViewController.m */; };
 		6F37FEC713EBE478003E33EF /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F37FE6A13EBE478003E33EF /* HLSWizardViewController.m */; };
 		6F37FEC913EBE478003E33EF /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */; };
+		6F3BC4E6144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3BC4E4144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m */; };
+		6F3BC4E7144C5E1900685502 /* KenBurnsSlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3BC4E5144C5E1900685502 /* KenBurnsSlideshowDemoViewController.xib */; };
+		6F3BC4F8144C609400685502 /* img_coconut1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F3BC4F4144C609400685502 /* img_coconut1.jpg */; };
+		6F3BC4F9144C609400685502 /* img_coconut2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F3BC4F5144C609400685502 /* img_coconut2.jpg */; };
+		6F3BC4FA144C609400685502 /* img_coconut3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F3BC4F6144C609400685502 /* img_coconut3.jpg */; };
+		6F3BC4FB144C609400685502 /* img_coconut4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F3BC4F7144C609400685502 /* img_coconut4.jpg */; };
+		6F734E19144C1076007FAF15 /* HLSKenBurnsSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F734E18144C1076007FAF15 /* HLSKenBurnsSlideshow.m */; };
 		6F9BFE701414FC0200184973 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9BFE6F1414FC0200184973 /* NSTimeZone+HLSExtensions.m */; };
 		6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D3D140500090043693E /* UIView+HLSExtensions.m */; };
 		6FBF59AC1407E84000F7D5EE /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59A81407E84000F7D5EE /* cell_bkgr_brown_large.png */; };
@@ -236,8 +242,6 @@
 		6F37FE1D13EBE478003E33EF /* UIImage+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F37FE1F13EBE478003E33EF /* HLSModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManager.h; sourceTree = "<group>"; };
 		6F37FE2013EBE478003E33EF /* HLSModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManager.m; sourceTree = "<group>"; };
-		6F37FE2213EBE478003E33EF /* HLSTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransform.h; sourceTree = "<group>"; };
-		6F37FE2313EBE478003E33EF /* HLSTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransform.m; sourceTree = "<group>"; };
 		6F37FE2513EBE478003E33EF /* HLSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLogger.h; sourceTree = "<group>"; };
 		6F37FE2613EBE478003E33EF /* HLSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLogger.m; sourceTree = "<group>"; };
 		6F37FE3013EBE478003E33EF /* HLSTask+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTask+Friend.h"; sourceTree = "<group>"; };
@@ -284,6 +288,15 @@
 		6F37FE6913EBE478003E33EF /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
 		6F37FE6A13EBE478003E33EF /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6F37FE6C13EBE478003E33EF /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
+		6F3BC4E3144C5E1900685502 /* KenBurnsSlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KenBurnsSlideshowDemoViewController.h; sourceTree = "<group>"; };
+		6F3BC4E4144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KenBurnsSlideshowDemoViewController.m; sourceTree = "<group>"; };
+		6F3BC4E5144C5E1900685502 /* KenBurnsSlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KenBurnsSlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F3BC4F4144C609400685502 /* img_coconut1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_coconut1.jpg; sourceTree = "<group>"; };
+		6F3BC4F5144C609400685502 /* img_coconut2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_coconut2.jpg; sourceTree = "<group>"; };
+		6F3BC4F6144C609400685502 /* img_coconut3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_coconut3.jpg; sourceTree = "<group>"; };
+		6F3BC4F7144C609400685502 /* img_coconut4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_coconut4.jpg; sourceTree = "<group>"; };
+		6F734E17144C1076007FAF15 /* HLSKenBurnsSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKenBurnsSlideshow.h; sourceTree = "<group>"; };
+		6F734E18144C1076007FAF15 /* HLSKenBurnsSlideshow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKenBurnsSlideshow.m; sourceTree = "<group>"; };
 		6F9BFE6E1414FC0200184973 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F9BFE6F1414FC0200184973 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FA74D3C140500090043693E /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -504,7 +517,6 @@
 				6F37FDE313EBE478003E33EF /* Animation */,
 				6F37FDEA13EBE478003E33EF /* Core */,
 				6F37FE1E13EBE478003E33EF /* CoreData */,
-				6F37FE2113EBE478003E33EF /* Graphics */,
 				6F37FE2413EBE478003E33EF /* Logging */,
 				6F37FE2F13EBE478003E33EF /* Task */,
 				6F37FE3F13EBE478003E33EF /* View */,
@@ -596,15 +608,6 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		6F37FE2113EBE478003E33EF /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				6F37FE2213EBE478003E33EF /* HLSTransform.h */,
-				6F37FE2313EBE478003E33EF /* HLSTransform.m */,
-			);
-			path = Graphics;
-			sourceTree = "<group>";
-		};
 		6F37FE2413EBE478003E33EF /* Logging */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +643,8 @@
 				6F1C649314061273006F63FC /* HLSActionSheet.m */,
 				6F37FE4013EBE478003E33EF /* HLSCursor.h */,
 				6F37FE4113EBE478003E33EF /* HLSCursor.m */,
+				6F734E17144C1076007FAF15 /* HLSKenBurnsSlideshow.h */,
+				6F734E18144C1076007FAF15 /* HLSKenBurnsSlideshow.m */,
 				6F37FE5413EBE478003E33EF /* HLSNibView.h */,
 				6F37FE5513EBE478003E33EF /* HLSNibView.m */,
 				6F37FE4913EBE478003E33EF /* HLSSubtitleTableViewCell.h */,
@@ -694,6 +699,16 @@
 			name = CoconutKit;
 			sourceTree = "<group>";
 		};
+		6F734E1F144C5CAB007FAF15 /* KenBurnsSlideshow */ = {
+			isa = PBXGroup;
+			children = (
+				6F3BC4E3144C5E1900685502 /* KenBurnsSlideshowDemoViewController.h */,
+				6F3BC4E4144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m */,
+				6F3BC4E5144C5E1900685502 /* KenBurnsSlideshowDemoViewController.xib */,
+			);
+			path = KenBurnsSlideshow;
+			sourceTree = "<group>";
+		};
 		6FBF59A71407E84000F7D5EE /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +716,10 @@
 				6FBF59A91407E84000F7D5EE /* cell_bkgr_brown_large_selected.png */,
 				6FBF59AA1407E84000F7D5EE /* icn_bookmark.png */,
 				6FBF59AB1407E84000F7D5EE /* icn_folder.png */,
+				6F3BC4F4144C609400685502 /* img_coconut1.jpg */,
+				6F3BC4F5144C609400685502 /* img_coconut2.jpg */,
+				6F3BC4F6144C609400685502 /* img_coconut3.jpg */,
+				6F3BC4F7144C609400685502 /* img_coconut4.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -974,6 +993,7 @@
 			children = (
 				6FF935811406AB7A00649482 /* ActionSheet */,
 				6FDB12C61404D1C000469DEC /* Cursor */,
+				6F734E1F144C5CAB007FAF15 /* KenBurnsSlideshow */,
 				6FDB12D61404D1C000469DEC /* TableViewCells */,
 				6FDB12E41404D1C000469DEC /* TextFields */,
 			);
@@ -1242,6 +1262,11 @@
 				6FBF59AE1407E84000F7D5EE /* icn_bookmark.png in Resources */,
 				6FBF59AF1407E84000F7D5EE /* icn_folder.png in Resources */,
 				6F2C0ABD142A576D00AFA6EE /* RootStackDemoViewController.xib in Resources */,
+				6F3BC4E7144C5E1900685502 /* KenBurnsSlideshowDemoViewController.xib in Resources */,
+				6F3BC4F8144C609400685502 /* img_coconut1.jpg in Resources */,
+				6F3BC4F9144C609400685502 /* img_coconut2.jpg in Resources */,
+				6F3BC4FA144C609400685502 /* img_coconut3.jpg in Resources */,
+				6F3BC4FB144C609400685502 /* img_coconut4.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1279,7 +1304,6 @@
 				6F37FEA713EBE478003E33EF /* UIControl+HLSExclusiveTouch.m in Sources */,
 				6F37FEA813EBE478003E33EF /* UIImage+HLSExtensions.m in Sources */,
 				6F37FEA913EBE478003E33EF /* HLSModelManager.m in Sources */,
-				6F37FEAA13EBE478003E33EF /* HLSTransform.m in Sources */,
 				6F37FEAB13EBE478003E33EF /* HLSLogger.m in Sources */,
 				6F37FEAF13EBE478003E33EF /* HLSTask.m in Sources */,
 				6F37FEB013EBE478003E33EF /* HLSTaskGroup.m in Sources */,
@@ -1343,6 +1367,8 @@
 				6F9BFE701414FC0200184973 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */,
 				6F1AF83E142B031000925B7A /* HLSStretchingContainerView.m in Sources */,
+				6F734E19144C1076007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
+				6F3BC4E6144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

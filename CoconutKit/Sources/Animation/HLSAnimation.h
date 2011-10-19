@@ -35,9 +35,12 @@
  * also YES if the animation was run using playAnimated:YES (even though the step was not animated, it is still
  * part of an animation which was played animated).
  *
- * An HLSAnimation applies transforms to views. It does not alter the frame, which means views inside it won't resize
- * according to their autoresizing mask, but rather scale. If scaling is not what you want, you cannot use HLSAnimation
- * objects to manage your animation. In such cases, stick with usual UIView animation blocks for the moment.
+ * If the resizeViews property is set to YES, an animation alters the frames of the involved views. If this property 
+ * is set to NO, the animation only alters the view transforms, which means the views will be applied a zoom level.
+ * View resizing is currently quite experimental and is therefore disabled by default.
+ *
+ * When resizeViews is set to YES, only translation and scale transforms can be applied since the frame is involved.
+ * Other transforms will be ignored, and a warning message will be logged in such cases
  *
  * Designated initializer: initWithAnimationSteps:
  */
@@ -48,6 +51,7 @@
     HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
+    BOOL m_resizeViews;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
     BOOL m_animated;
@@ -84,6 +88,14 @@
  * Dictionary which can be used freely to convey additional information
  */
 @property (nonatomic, retain) NSDictionary *userInfo;
+
+/**
+ * If set to YES (experimental), the views and their subviews will be resized according to their autoresizing mask during 
+ * the animation. Otherwise views will only be scaled.
+ *
+ * Default is NO
+ */
+@property (nonatomic, assign, getter=isResizeViews) BOOL resizeViews;
 
 /**
  * If set to YES, the user interface interaction is blocked during animation

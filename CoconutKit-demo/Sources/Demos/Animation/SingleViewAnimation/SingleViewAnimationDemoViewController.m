@@ -115,35 +115,50 @@
     self.playForwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
     
-    // Only a single view to animate; can use the convenience constructor of HLSAnimation step for animation
-    // creation using less code
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStepTranslatingView:self.rectangleView
-                                                                           withDeltaX:100.f
-                                                                               deltaY:100.f];
-    animationStep1.duration = 2.f;
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.duration = 2.;
     animationStep1.curve = UIViewAnimationCurveEaseIn;
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CGAffineTransformMakeTranslation(100.f, 100.f);
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView];
+        
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.duration = 1.;
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.alphaVariation = -0.3f;
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStepUpdatingView:self.rectangleView
-                                                                withAlphaVariation:-0.3f];
-    animationStep1.duration = 1.f;
-    
-    // We can of course also create a view animation step and apply it to the view to animate
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep3 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep3.transform = CGAffineTransformMakeRotation(M_PI/4);
-    [animationStep3 addViewAnimationStep:viewAnimationStep3 forView:self.rectangleView];
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView];
     
-    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStepUpdatingView:self.rectangleView
-                                                                     withTransform:CGAffineTransformMakeScale(2.f, 3.f) 
-                                                                    alphaVariation:0.f];
-    animationStep4.duration = 1.f;
-    animationStep4.curve = UIViewAnimationCurveLinear;
+    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep41.transform = CGAffineTransformMakeRotation(M_PI_4);
+    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:self.rectangleView];
+    
+    HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
+    animationStep5.duration = 1.;
+    animationStep5.curve = UIViewAnimationCurveLinear;
+    HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep51.transform = CGAffineTransformMakeTranslation(0.f, 200.f);
+    [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:self.rectangleView];
+    
+    HLSAnimationStep *animationStep6 = [HLSAnimationStep animationStep];
+    animationStep6.curve = UIViewAnimationCurveLinear;
+    HLSViewAnimationStep *viewAnimationStep61 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep61.transform = CGAffineTransformMakeRotation(M_PI_4);
+    viewAnimationStep61.alphaVariation = 0.3f;
+    [animationStep6 addViewAnimationStep:viewAnimationStep61 forView:self.rectangleView];
     
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
                                                                 animationStep2,
                                                                 animationStep3,
                                                                 animationStep4,
+                                                                animationStep5,
+                                                                animationStep6,
                                                                 nil]];
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = self.blockingSwitch.on;

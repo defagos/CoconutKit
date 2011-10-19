@@ -13,13 +13,6 @@
  * to a set of views, and represent the collective set of changes applied to these views during some time interval. An 
  * animation (HLSAnimation) is then simply a collection of animation steps.
  *
- * Several convenience constructors are available to help you create animation steps for common cases, most notably
- * when a single view is involved (in such cases, you do no really want to instantiate view animation step objects
- * individually, do you?)
- *
- * Remark: This class was initially named HLSAnimationFrame, but was renamed to avoid confusion with the UIView frame property
- *         (which is the view property an animation step usually alters!)
- *
  * Designated initializer: init (create an animation step with default settings)
  */
 @interface HLSAnimationStep : NSObject {
@@ -35,60 +28,6 @@
  * Convenience constructor for an animation step with default settings and no view to animate
  */
 + (HLSAnimationStep *)animationStep;
-
-/**
- * Animation step moving a single view between two frames. Both frames must describe positions of the view to animate
- * in the coordinate system of its superview (otherwise the result of the animation step is undefined)
- */
-+ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
-                                       fromFrame:(CGRect)fromFrame 
-                                         toFrame:(CGRect)toFrame;
-
-+ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
-                                       fromFrame:(CGRect)fromFrame 
-                                         toFrame:(CGRect)toFrame
-                              withAlphaVariation:(CGFloat)alphaVariation;
-
-/**
- * Animation step applying a translation to a view or an NSArray of UIView objects
- */
-+ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
-                                        withDeltaX:(CGFloat)deltaX
-                                            deltaY:(CGFloat)deltaY;
-
-+ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
-                                        withDeltaX:(CGFloat)deltaX
-                                            deltaY:(CGFloat)deltaY
-                                    alphaVariation:(CGFloat)alphaVariation;
-
-+ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
-                                         withDeltaX:(CGFloat)deltaX
-                                             deltaY:(CGFloat)deltaY;
-
-+ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
-                                         withDeltaX:(CGFloat)deltaX
-                                             deltaY:(CGFloat)deltaY
-                                     alphaVariation:(CGFloat)alphaVariation;
-
-/**
- * Animation step applying a transform and an alpha variation to a view or an NSArray of UIView objects
- */
-+ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
-                                  withTransform:(CGAffineTransform)transform
-                                 alphaVariation:(CGFloat)alphaVariation;
-
-+ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
-                                   withTransform:(CGAffineTransform)transform
-                                  alphaVariation:(CGFloat)alphaVariation;
-
-/**
- * Animation step varying the alpha of a view or of an NSArray of UIView objects
- */
-+ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
-                             withAlphaVariation:(CGFloat)alphaVariation;
-
-+ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
-                              withAlphaVariation:(CGFloat)alphaVariation;
 
 /**
  * Setting a view animation step for a view. Only one animation step can be defined at most for a view during

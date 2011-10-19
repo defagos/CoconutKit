@@ -44,6 +44,7 @@
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Index"="Index";
 "Invalid e-mail address"="Adresse e-mail invalide";
+"Ken Burns effect"="Effet Ken Burns";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
 "Last Name"="Nom";
@@ -63,6 +64,7 @@
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
 "Reset"="Mettre à zéro";
+"Resizing"="Redimensionnement";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Start"="Démarrer";

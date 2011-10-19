@@ -19,6 +19,8 @@
     UISwitch *m_animatedSwitch;
     UILabel *m_blockingLabel;
     UISwitch *m_blockingSwitch;
+    UILabel *m_resizingLabel;
+    UISwitch *m_resizingSwitch;
     HLSAnimation *m_animation;
     HLSAnimation *m_reverseAnimation;
 }
@@ -34,5 +36,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 @property (nonatomic, retain) IBOutlet UILabel *blockingLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
+@property (nonatomic, retain) IBOutlet UILabel *resizingLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *resizingSwitch;
 
 @end

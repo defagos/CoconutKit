@@ -44,6 +44,7 @@
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
 "Invalid e-mail address"="Invalid e-mail address";
+"Ken Burns effect"="Ken Burns effect";
 "Landscape only"="Landscape only";
 "Language"="Language";
 "Last Name"="Last Name";
@@ -63,6 +64,7 @@
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
 "Reset"="Reset";
+"Resizing"="Resizing";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Start"="Start";

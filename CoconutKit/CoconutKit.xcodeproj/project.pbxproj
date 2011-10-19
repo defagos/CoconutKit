@@ -44,6 +44,8 @@
 		6F6E99BA131690C20075DD7A /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */; };
 		6F6E9A091316997E0075DD7A /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */; };
 		6F6E9A0A1316997E0075DD7A /* NSData+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */; };
+		6F734E14144C105E007FAF15 /* HLSKenBurnsSlideshow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F734E12144C105E007FAF15 /* HLSKenBurnsSlideshow.h */; };
+		6F734E15144C105E007FAF15 /* HLSKenBurnsSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F734E13144C105E007FAF15 /* HLSKenBurnsSlideshow.m */; };
 		6F752D29125F0A0D00C95B6B /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */; };
 		6F752D2A125F0A0D00C95B6B /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */; };
 		6F7A34C0130D02AB00AB1926 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */; };
@@ -168,6 +170,8 @@
 		6F6E99B8131690C20075DD7A /* NSBundle+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F6E9A071316997E0075DD7A /* NSData+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F6E9A081316997E0075DD7A /* NSData+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F734E12144C105E007FAF15 /* HLSKenBurnsSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKenBurnsSlideshow.h; sourceTree = "<group>"; };
+		6F734E13144C105E007FAF15 /* HLSKenBurnsSlideshow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKenBurnsSlideshow.m; sourceTree = "<group>"; };
 		6F752D27125F0A0D00C95B6B /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F752D28125F0A0D00C95B6B /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F7A34BE130D02AB00AB1926 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -471,6 +475,8 @@
 				6F1C647B140557BD006F63FC /* HLSActionSheet.m */,
 				6F43346A13A238540072F5D8 /* HLSCursor.h */,
 				6F43346B13A238540072F5D8 /* HLSCursor.m */,
+				6F734E12144C105E007FAF15 /* HLSKenBurnsSlideshow.h */,
+				6F734E13144C105E007FAF15 /* HLSKenBurnsSlideshow.m */,
 				6FBDAC7C1305939B004B9617 /* HLSNibView.h */,
 				6FBDAC7D1305939B004B9617 /* HLSNibView.m */,
 				6FBDAA1913052D23004B9617 /* HLSSubtitleTableViewCell.h */,
@@ -603,6 +609,7 @@
 				6F1C647C140557BD006F63FC /* HLSActionSheet.h in Headers */,
 				6F9BFE6B1414FB4C00184973 /* NSTimeZone+HLSExtensions.h in Headers */,
 				6F1AF7BC142A8E5C00925B7A /* HLSStretchingContainerView.h in Headers */,
+				6F734E14144C105E007FAF15 /* HLSKenBurnsSlideshow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +639,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CoconutKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -718,6 +725,7 @@
 				6F1C647D140557BD006F63FC /* HLSActionSheet.m in Sources */,
 				6F9BFE6C1414FB4C00184973 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F1AF7BD142A8E5C00925B7A /* HLSStretchingContainerView.m in Sources */,
+				6F734E15144C105E007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
