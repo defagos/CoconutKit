@@ -179,8 +179,16 @@
 
 - (void)cancelButtonClicked:(id)sender
 {
-    [self.animation cancel];
-    [self.reverseAnimation cancel];
+    if (self.animation.running) {
+        self.playBackwardButton.hidden = NO;
+        [self.animation cancel];
+    }
+    if (self.reverseAnimation.running) {
+        self.playForwardButton.hidden = NO;
+        [self.reverseAnimation cancel];
+    }
+
+    self.cancelButton.hidden = YES;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation

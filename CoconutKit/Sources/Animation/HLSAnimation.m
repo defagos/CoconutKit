@@ -214,8 +214,10 @@
     // Instantaneous
     else {
         // Notify the end of the animation
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:m_animated];
+        if (! m_cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:m_animated];
+            }            
         }
         
         [self playNextStepAnimated:animated];
@@ -245,8 +247,10 @@
         
         self.running = NO;
         
-        if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
-            [self.delegate animationDidStop:self animated:m_animated];
+        if (! m_cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
+                [self.delegate animationDidStop:self animated:m_animated];
+            }            
         }
     }    
 }
@@ -255,6 +259,11 @@
 {
     if (! self.running) {
         HLSLoggerInfo(@"The animation is not running, nothing to cancel");
+        return;
+    }
+    
+    if (m_cancelling) {
+        HLSLoggerInfo(@"The animation is already being cancelled");
         return;
     }
     
@@ -333,10 +342,11 @@
         return;
     }
     
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-    
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        [self.delegate animationStepFinished:animationStep animated:m_animated];
+    if (! m_cancelling) {
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+            [self.delegate animationStepFinished:animationStep animated:m_animated];
+        }        
     }
     
     [self playNextStepAnimated:m_animated];

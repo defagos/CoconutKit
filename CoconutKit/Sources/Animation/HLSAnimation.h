@@ -21,7 +21,7 @@
  * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
  * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
  *   - cancel the animation first
- *   - unregister the delegate, but let the animation run
+ *   - unregister the delegate, and let the animation run until the end
  *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
  *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
  *
@@ -126,8 +126,8 @@
 - (void)playAnimated:(BOOL)animated;
 
 /**
- * Cancel the animation. This does not stop the animation where it is, but plays it until its end immediately. All 
- * delegate events are still received as if the animation had been played normally
+ * Cancel the animation. The animation immediately reaches its end state. The delegate does not receive subsequent
+ * events
  */
 - (void)cancel;
 

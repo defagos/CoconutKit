@@ -53,7 +53,6 @@ const NSTimeInterval kKenBurnsSlideshowDefaultDuration = 3.;
     
     self.imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.imageView.backgroundColor = [UIColor redColor];
     [self addSubview:self.imageView];
         
     self.images = [NSArray array];
@@ -65,6 +64,8 @@ const NSTimeInterval kKenBurnsSlideshowDefaultDuration = 3.;
 
 - (void)dealloc
 {
+    [self stopAnimating];
+    
     self.imageView = nil;
     self.images = nil;
     self.finalFrames = nil;
@@ -106,29 +107,27 @@ const NSTimeInterval kKenBurnsSlideshowDefaultDuration = 3.;
 
 - (void)startAnimating
 {
-#if 0
-    
     NSMutableArray *animationSteps = [NSMutableArray array];
     for (NSUInteger i = 0; i < [self.images count]; ++i) {
         // TODO: Calculate correct end frame
-        //CGRect endFrame = CGRectMake(10.f, 10.f, 300.f, 300.f);
-        CGRect endFrame = CGRectMake(10.f, 10.f, 100.f, 100.f);
+        HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+        animationStep1.duration = [[self.durations objectAtIndex:i] doubleValue];
+        HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep11.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
+        [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.imageView];
+        [animationSteps addObject:animationStep1];
         
-        CGRect originalFrame = self.imageView.frame;
-        
-        HLSAnimationStep *animationStepZoom = [HLSAnimationStep animationStepAnimatingView:self.imageView fromFrame:originalFrame toFrame:endFrame];
-        animationStepZoom.duration = [[self.durations objectAtIndex:i] doubleValue];
-        [animationSteps addObject:animationStepZoom];
-        
-        HLSAnimationStep *animationStepReset = [HLSAnimationStep animationStepAnimatingView:self.imageView fromFrame:endFrame toFrame:originalFrame];
-        animationStepReset.duration = 0.2;
-        [animationSteps addObject:animationStepReset];
+        HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+        animationStep2.duration = 0.;
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.transform = CGAffineTransformInvert(CGAffineTransformMakeScale(1.3f, 1.3f));
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.imageView];
+        [animationSteps addObject:animationStep2];
     }
     
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
     self.animation.delegate = self;
     [self.animation playAnimated:YES];
-#endif
 }
 
 - (void)stopAnimating
