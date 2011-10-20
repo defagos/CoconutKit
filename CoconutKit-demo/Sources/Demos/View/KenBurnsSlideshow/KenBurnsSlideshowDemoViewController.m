@@ -25,11 +25,17 @@
     [super releaseViews];
     
     self.slideshow = nil;
+    self.playButton = nil;
+    self.stopButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize slideshow = m_slideshow;
+
+@synthesize playButton = m_playButton;
+
+@synthesize stopButton = m_stopButton;
 
 #pragma mark View lifecycle
 
@@ -38,17 +44,10 @@
     [super viewDidLoad];
     
     // TODO: Frames!
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut1.jpg"] withFinalFrame:CGRectZero];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut2.jpg"] withFinalFrame:CGRectZero];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut3.jpg"] withFinalFrame:CGRectZero];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut4.jpg"] withFinalFrame:CGRectZero];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.slideshow startAnimating];
+    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut1.jpg"]];
+    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut2.jpg"]];
+    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut3.jpg"]];
+    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut4.jpg"]];
 }
 
 #pragma mark Orientation management
@@ -69,6 +68,18 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)play:(id)sender
+{
+    [self.slideshow play];
+}
+
+- (IBAction)stop:(id)sender
+{
+    [self.slideshow stop];
 }
 
 @end

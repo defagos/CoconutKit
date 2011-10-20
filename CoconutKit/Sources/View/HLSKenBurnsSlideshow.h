@@ -6,26 +6,18 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-extern const NSTimeInterval kKenBurnsSlideshowDefaultDuration;
-
-// Forward declarations
-@class HLSAnimation;
-
 @interface HLSKenBurnsSlideshow : UIView {
 @private
-    UIImageView *m_imageView;
+    NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
     NSArray *m_images;
-    NSArray *m_finalFrames;
-    NSArray *m_durations;
+    NSMutableArray *m_animations;               // Two animations in parallel (at most)
     BOOL m_animating;
     NSInteger m_currentImageIndex;
-    HLSAnimation *m_animation;
 }
 
-- (void)addImage:(UIImage *)image withFinalFrame:(CGRect)finalFrame;
-- (void)addImage:(UIImage *)image withFinalFrame:(CGRect)finalFrame duration:(NSTimeInterval)duration;
+- (void)addImage:(UIImage *)image;
 
-- (void)startAnimating;
-- (void)stopAnimating;
+- (void)play;
+- (void)stop;
 
 @end
