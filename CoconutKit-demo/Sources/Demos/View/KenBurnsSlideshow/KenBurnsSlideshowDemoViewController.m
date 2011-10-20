@@ -50,10 +50,11 @@
 {
     [super viewDidLoad];
     
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut1.jpg"]];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut2.jpg"]];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut3.jpg"]];
-    [self.slideshow addImage:[UIImage imageNamed:@"img_coconut4.jpg"]];
+    self.slideshow.images = [NSArray arrayWithObjects:[UIImage imageNamed:@"img_coconut1.jpg"],
+                             [UIImage imageNamed:@"img_coconut2.jpg"],
+                             [UIImage imageNamed:@"img_coconut3.jpg"],
+                             [UIImage imageNamed:@"img_coconut4.jpg"],
+                             nil];
     
     [self.playButton addTarget:self
                         action:@selector(play:)

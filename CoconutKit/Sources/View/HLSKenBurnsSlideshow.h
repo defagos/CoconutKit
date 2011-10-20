@@ -15,7 +15,7 @@
     NSInteger m_currentImageIndex;
 }
 
-- (void)addImage:(UIImage *)image;
+@property (nonatomic, retain) NSArray *images;
 
 - (void)play;
 - (void)stop;

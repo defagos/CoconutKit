@@ -19,7 +19,6 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
 - (void)hlsKenBurnsSlideshowInit;
 
 @property (nonatomic, retain) NSArray *imageViews;
-@property (nonatomic, retain) NSArray *images;
 @property (nonatomic, retain) NSMutableArray *animations;
 
 - (void)playNextImageAnimation;
