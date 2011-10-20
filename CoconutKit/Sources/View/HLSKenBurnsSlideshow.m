@@ -24,6 +24,11 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
 
 - (void)playNextImageAnimation;
 
+- (HLSAnimation *)animationForImageView:(UIImageView *)imageView
+                        WithScaleFactor:(CGFloat)scaleFactor
+                                xOffset:(CGFloat)xOffset
+                                yOffset:(CGFloat)yOffset;
+
 @end
 
 @implementation HLSKenBurnsSlideshow
@@ -128,17 +133,44 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
     imageView.image = [self.images objectAtIndex:m_currentImageIndex];
     imageView.transform = CGAffineTransformIdentity;
     imageView.alpha = 0.f;
+        
+    // TODO: Apply custom random values in proper ranges
+    HLSAnimation *animation = [self animationForImageView:imageView 
+                                          WithScaleFactor:1.3f
+                                                  xOffset:30.f 
+                                                  yOffset:30.f];    
+    [animation playAnimated:YES];
     
+    [self.animations replaceObjectAtIndex:currentImageViewIndex withObject:animation];
+}
+
+- (void)stop
+{
+    for (HLSAnimation *animation in self.animations) {
+        [animation cancel];
+    }
+}
+
+#pragma mark Creating the animation
+
+- (HLSAnimation *)animationForImageView:(UIImageView *)imageView
+                        WithScaleFactor:(CGFloat)scaleFactor
+                                xOffset:(CGFloat)xOffset
+                                yOffset:(CGFloat)yOffset
+{
     NSTimeInterval totalDuration = 2 * kKenBurnsFadeDefaultDuration + kKenBurnsZoomDefaultDuration;
-    CGFloat factor = 1.3f;          // TODO: Should be custom
-    CGFloat xOffset = 30.f;
-    CGFloat yOffset = 30.f;
     
+    // To understand how to calculate the scale factor for each step, divide the total time interval in N equal intervals.
+    // To get a smooth scale animation with total factor scaleFactor, each interval must be assigned a factor (scaleFactor)^(1/N),
+    // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the corresponding
+    // scale factor is therefore (scaleFactor)^(m/N), thus the formula for the scale factor of each step.
+    
+    // Fade in step: Scale + fade in
     HLSAnimationStep *fadeInAnimationStep = [HLSAnimationStep animationStep];
-    fadeInAnimationStep.curve = UIViewAnimationCurveLinear;
+    fadeInAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
     fadeInAnimationStep.duration = kKenBurnsFadeDefaultDuration;
     HLSViewAnimationStep *fadeInViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat fadeInFactor = powf(factor, kKenBurnsFadeDefaultDuration / totalDuration);
+    CGFloat fadeInFactor = powf(scaleFactor, kKenBurnsFadeDefaultDuration / totalDuration);
     CGFloat fadeInXOffset = xOffset * kKenBurnsFadeDefaultDuration / totalDuration;
     CGFloat fadeInYOffset = yOffset * kKenBurnsFadeDefaultDuration / totalDuration;
     fadeInViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeInFactor, fadeInFactor),
@@ -146,23 +178,25 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
     fadeInViewAnimationStep.alphaVariation = 1.f;
     [fadeInAnimationStep addViewAnimationStep:fadeInViewAnimationStep forView:imageView];
     
+    // Main step: Only scale
     HLSAnimationStep *mainAnimationStep = [HLSAnimationStep animationStep];
-    mainAnimationStep.curve = UIViewAnimationCurveLinear;
+    mainAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
     mainAnimationStep.duration = kKenBurnsZoomDefaultDuration;
     mainAnimationStep.tag = @"zoom";
     HLSViewAnimationStep *mainViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat mainFactor = powf(factor, kKenBurnsZoomDefaultDuration / totalDuration);
+    CGFloat mainFactor = powf(scaleFactor, kKenBurnsZoomDefaultDuration / totalDuration);
     CGFloat mainXOffset = xOffset * kKenBurnsZoomDefaultDuration / totalDuration;
     CGFloat mainYOffset = yOffset * kKenBurnsZoomDefaultDuration / totalDuration;
     mainViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(mainFactor, mainFactor),
                                                               CGAffineTransformMakeTranslation(mainXOffset, mainYOffset));
     [mainAnimationStep addViewAnimationStep:mainViewAnimationStep forView:imageView];
     
+    // Fade out: Scale + fade out
     HLSAnimationStep *fadeOutAnimationStep = [HLSAnimationStep animationStep];
-    fadeOutAnimationStep.curve = UIViewAnimationCurveLinear;
+    fadeOutAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
     fadeOutAnimationStep.duration = kKenBurnsFadeDefaultDuration;
     HLSViewAnimationStep *fadeOutViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    float fadeOutFactor = pow(factor, kKenBurnsFadeDefaultDuration / totalDuration);
+    float fadeOutFactor = pow(scaleFactor, kKenBurnsFadeDefaultDuration / totalDuration);
     CGFloat fadeOutXOffset = xOffset * kKenBurnsFadeDefaultDuration / totalDuration;
     CGFloat fadeOutYOffset = yOffset * kKenBurnsFadeDefaultDuration / totalDuration;
     fadeOutViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeOutFactor, fadeOutFactor),
@@ -176,16 +210,8 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
                                                                          nil]];
     animation.delegate = self;
     animation.bringToFront = YES;
-    [animation playAnimated:YES];
     
-    [self.animations replaceObjectAtIndex:currentImageViewIndex withObject:animation];
-}
-
-- (void)stop
-{
-    for (HLSAnimation *animation in self.animations) {
-        [animation cancel];
-    }
+    return animation;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
