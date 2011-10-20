@@ -37,8 +37,8 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="470735770">
 						<reference key="NSNextResponder" ref="265186128"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{124, 68}, {521, 571}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{20, 20}, {728, 903}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="766305996"/>
@@ -51,8 +51,8 @@
 					</object>
 					<object class="IBUIButton" id="766305996">
 						<reference key="NSNextResponder" ref="265186128"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{222, 795}, {150, 37}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{222, 947}, {150, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="534600584"/>
@@ -62,7 +62,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Play</string>
+						<string key="IBUINormalTitle">&lt;play&gt;</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="728868163">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -87,8 +87,8 @@
 					</object>
 					<object class="IBUIButton" id="534600584">
 						<reference key="NSNextResponder" ref="265186128"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{396, 795}, {150, 37}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{396, 947}, {150, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -98,7 +98,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Stop</string>
+						<string key="IBUINormalTitle">&lt;stop&gt;</string>
 						<reference key="IBUIHighlightedTitleColor" ref="728868163"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -158,24 +158,6 @@
 					</object>
 					<int key="connectionID">27</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">play:</string>
-						<reference key="source" ref="766305996"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stop:</string>
-						<reference key="source" ref="534600584"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">22</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -201,8 +183,8 @@
 						<reference key="object" ref="265186128"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="470735770"/>
-							<reference ref="766305996"/>
 							<reference ref="534600584"/>
+							<reference ref="766305996"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

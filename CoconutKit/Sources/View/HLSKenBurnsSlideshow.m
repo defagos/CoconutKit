@@ -63,7 +63,6 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
     self.animations = [NSMutableArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
         UIImageView *imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.hidden = YES;
         [self addSubview:imageView];
         
@@ -126,19 +125,66 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
 
 - (void)playNextImageAnimation
 {
+    // Find the involved image and image view and 
     m_currentImageIndex = (m_currentImageIndex + 1) % [self.images count];
     NSUInteger currentImageViewIndex = m_currentImageIndex % 2;
     
     UIImageView *imageView = [self.imageViews objectAtIndex:currentImageViewIndex];
-    imageView.image = [self.images objectAtIndex:m_currentImageIndex];
-    imageView.transform = CGAffineTransformIdentity;
+    UIImage *image = [self.images objectAtIndex:m_currentImageIndex];
+    imageView.image = image;
+    imageView.clipsToBounds = NO;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;       // The calculation below targets this special case
     imageView.alpha = 0.f;
-        
-    // TODO: Apply custom random values in proper ranges
+    
+    // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
+    //       be reused
+    // Aspect ratios of frame and image
+    CGFloat imageViewRatio = CGRectGetWidth(imageView.frame) / CGRectGetHeight(imageView.frame);
+    CGFloat imageRatio = image.size.width / image.size.height;
+    
+    // Calculate the scale which needs to be applied when the image is added to the image view with aspect fill content mode
+    CGFloat zoomScale;
+    // The image is more portrait-shaped than the image view
+    if (floatlt(imageRatio, imageViewRatio)) {
+        zoomScale = CGRectGetWidth(imageView.frame) / image.size.width;
+    }
+    // The image is more landscape-shaped than the image view
+    else {
+        zoomScale = CGRectGetHeight(imageView.frame) / image.size.height;
+    }
+    
+    // Calculate the image size
+    CGFloat resizedImageWidth = image.size.width * zoomScale;
+    CGFloat resizedImageHeight = image.size.height * zoomScale;
+    
+    // Pick up a random initial scale factor. Must be >= 1, and not too large (1.4 should be sufficient)
+    CGFloat scaleFactor = 1.f + 0.4f * (arc4random() % 1000) / 1000.f;
+    
+    // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
+    // scale factor so that the image still covers the whole view
+    CGFloat maxXOffset = (scaleFactor * resizedImageWidth - CGRectGetWidth(imageView.frame)) / 4.f;     // should be / 2.f theoretically, but was not perfect
+    CGFloat maxYOffset = (scaleFactor * resizedImageHeight - CGRectGetHeight(imageView.frame)) / 4.f;   // should be / 2.f theoretically, but was not perfect
+    
+    // Pick up some random offsets
+    CGFloat xOffset = (arc4random() % 1000) / 1000.f * maxXOffset;
+    CGFloat yOffset = (arc4random() % 1000) / 1000.f * maxYOffset;
+    
+    // Apply initial transform
+    imageView.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleFactor, scaleFactor),
+                                                  CGAffineTransformMakeTranslation(xOffset, yOffset));
+    
+    // Pick up random scale factor to reach during the animation
+    CGFloat finalScaleFactor = 1.f + 0.4f * (arc4random() % 1000) / 1000.f;
+    CGFloat maxFinalXOffset = (finalScaleFactor * resizedImageWidth - CGRectGetWidth(imageView.frame)) / 4.f;     // should be / 2.f theoretically, but was not perfect
+    CGFloat maxFinalYOffset = (finalScaleFactor * resizedImageHeight - CGRectGetHeight(imageView.frame)) / 4.f;   // should be / 2.f theoretically, but was not perfect
+    CGFloat finalXOffset = (arc4random() % 1000) / 1000.f * maxFinalXOffset;
+    CGFloat finalYOffset = (arc4random() % 1000) / 1000.f * maxFinalYOffset;
+    
+    // Create the corresponding animation
     HLSAnimation *animation = [self animationForImageView:imageView 
-                                          WithScaleFactor:1.3f
-                                                  xOffset:30.f 
-                                                  yOffset:30.f];    
+                                          WithScaleFactor:finalScaleFactor / scaleFactor
+                                                  xOffset:finalXOffset - xOffset 
+                                                  yOffset:finalYOffset - yOffset];
     [animation playAnimated:YES];
     
     [self.animations replaceObjectAtIndex:currentImageViewIndex withObject:animation];

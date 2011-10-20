@@ -8,6 +8,13 @@
 
 #import "KenBurnsSlideshowDemoViewController.h"
 
+@interface KenBurnsSlideshowDemoViewController ()
+
+- (void)play:(id)sender;
+- (void)stop:(id)sender;
+
+@end
+
 @implementation KenBurnsSlideshowDemoViewController
 
 #pragma mark Object creation and destruction
@@ -43,11 +50,17 @@
 {
     [super viewDidLoad];
     
-    // TODO: Frames!
     [self.slideshow addImage:[UIImage imageNamed:@"img_coconut1.jpg"]];
     [self.slideshow addImage:[UIImage imageNamed:@"img_coconut2.jpg"]];
     [self.slideshow addImage:[UIImage imageNamed:@"img_coconut3.jpg"]];
     [self.slideshow addImage:[UIImage imageNamed:@"img_coconut4.jpg"]];
+    
+    [self.playButton addTarget:self
+                        action:@selector(play:)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.stopButton addTarget:self
+                        action:@selector(stop:)
+              forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark Orientation management
@@ -58,7 +71,7 @@
         return NO;
     }
     
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return YES;
 }
 
 #pragma mark Localization
@@ -68,16 +81,18 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+    [self.playButton setTitle:NSLocalizedString(@"Play", @"Play") forState:UIControlStateNormal];
+    [self.stopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
 }
 
 #pragma mark Action callbacks
 
-- (IBAction)play:(id)sender
+- (void)play:(id)sender
 {
     [self.slideshow play];
 }
 
-- (IBAction)stop:(id)sender
+- (void)stop:(id)sender
 {
     [self.slideshow stop];
 }
