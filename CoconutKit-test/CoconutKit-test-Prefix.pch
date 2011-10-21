@@ -57,6 +57,7 @@
     #import "NSDate+HLSExtensions.h"
     #import "NSDateFormatter+HLSExtensions.h"
     #import "NSDictionary+HLSExtensions.h"
+    #import "NSManagedObject+HLSExtensions.h"
     #import "NSObject+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "NSTimeZone+HLSExtensions.h"

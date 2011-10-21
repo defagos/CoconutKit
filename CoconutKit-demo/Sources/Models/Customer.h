@@ -5,9 +5,6 @@
     
 }
 
-+ (id)insert;
-+ (NSEntityDescription *)entity;
-
 + (Customer *)customer;               // uses the default model manager
 + (Customer *)customerInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
