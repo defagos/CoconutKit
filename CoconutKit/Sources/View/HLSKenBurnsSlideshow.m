@@ -9,6 +9,7 @@
 #import "HLSKenBurnsSlideshow.h"
 
 #import "HLSAnimation.h"
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 
 static const NSTimeInterval kKenBurnsDefaultImageDuration = 10.;

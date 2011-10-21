@@ -7,6 +7,7 @@ HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSFloat.h
+HLSKenBurnsSlideshow.h
 HLSKeyboardInformation.h
 HLSLogger.h
 HLSManagedObjectCopying.h
@@ -28,7 +29,6 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
-HLSTransform.h
 HLSTransitionStyle.h
 HLSUserInterfaceLock.h
 HLSValidable.h

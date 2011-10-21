@@ -11,6 +11,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F08DF8714514934008A9A08 /* KenBurnsSlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F08DF8514514934008A9A08 /* KenBurnsSlideshowDemoViewController.m */; };
+		6F08DF8814514934008A9A08 /* KenBurnsSlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F08DF8614514934008A9A08 /* KenBurnsSlideshowDemoViewController.xib */; };
 		6F1A58EA13AB77E20029B714 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */; };
 		6F1A58EB13AB77E20029B714 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */; };
 		6F1AF859142B046600925B7A /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */; };
@@ -118,6 +120,9 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
+		6F08DF8414514934008A9A08 /* KenBurnsSlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KenBurnsSlideshowDemoViewController.h; sourceTree = "<group>"; };
+		6F08DF8514514934008A9A08 /* KenBurnsSlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KenBurnsSlideshowDemoViewController.m; sourceTree = "<group>"; };
+		6F08DF8614514934008A9A08 /* KenBurnsSlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KenBurnsSlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F1A58E813AB77E20029B714 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6F1A58E913AB77E20029B714 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
@@ -321,6 +326,16 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F08DF8314514934008A9A08 /* KenBurnsSlideshow */ = {
+			isa = PBXGroup;
+			children = (
+				6F08DF8414514934008A9A08 /* KenBurnsSlideshowDemoViewController.h */,
+				6F08DF8514514934008A9A08 /* KenBurnsSlideshowDemoViewController.m */,
+				6F08DF8614514934008A9A08 /* KenBurnsSlideshowDemoViewController.xib */,
+			);
+			path = KenBurnsSlideshow;
 			sourceTree = "<group>";
 		};
 		6F1A58E713AB77E20029B714 /* Fonts */ = {
@@ -607,6 +622,7 @@
 			children = (
 				6F1C64B314066AD0006F63FC /* ActionSheet */,
 				6F93C64D1404CE0600FEC9B0 /* Cursor */,
+				6F08DF8314514934008A9A08 /* KenBurnsSlideshow */,
 				6F93C65D1404CE0600FEC9B0 /* TableViewCells */,
 				6F93C66B1404CE0600FEC9B0 /* TextFields */,
 			);
@@ -873,6 +889,7 @@
 				6F3BC501144C60A400685502 /* img_coconut2.jpg in Resources */,
 				6F3BC502144C60A400685502 /* img_coconut3.jpg in Resources */,
 				6F3BC503144C60A400685502 /* img_coconut4.jpg in Resources */,
+				6F08DF8814514934008A9A08 /* KenBurnsSlideshowDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +940,7 @@
 				6F1C64B914066AF7006F63FC /* ActionSheetDemoViewController.m in Sources */,
 				6F2C0AB4142A53E000AFA6EE /* RootStackDemoViewController.m in Sources */,
 				6F1AF859142B046600925B7A /* CoconutKit_bootstrap.m in Sources */,
+				6F08DF8714514934008A9A08 /* KenBurnsSlideshowDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

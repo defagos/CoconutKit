@@ -43,7 +43,6 @@
 		6F2FCE03140BB8E60080A775 /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDA3140BB8E60080A775 /* UIControl+HLSExclusiveTouch.m */; };
 		6F2FCE04140BB8E60080A775 /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDA5140BB8E60080A775 /* UIImage+HLSExtensions.m */; };
 		6F2FCE05140BB8E60080A775 /* HLSModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDA9140BB8E60080A775 /* HLSModelManager.m */; };
-		6F2FCE06140BB8E60080A775 /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDAC140BB8E60080A775 /* HLSTransform.m */; };
 		6F2FCE07140BB8E60080A775 /* HLSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDAF140BB8E60080A775 /* HLSLogger.m */; };
 		6F2FCE08140BB8E60080A775 /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDB3140BB8E60080A775 /* HLSTask.m */; };
 		6F2FCE09140BB8E60080A775 /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FCDB6140BB8E60080A775 /* HLSTaskGroup.m */; };
@@ -76,7 +75,6 @@
 		6F3334ED13FB08F3000FC9FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3334EB13FB08F3000FC9FD /* main.m */; };
 		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
-		6F3BC50E144D698600685502 /* HLSTransformTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3BC50D144D698600685502 /* HLSTransformTestCase.m */; };
 		6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */; };
 		6F734E1D144C1089007FAF15 /* HLSKenBurnsSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F734E1C144C1089007FAF15 /* HLSKenBurnsSlideshow.m */; };
 		6F8456E71414FF390073040E /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8456E61414FF390073040E /* NSTimeZone+HLSExtensions.m */; };
@@ -164,8 +162,6 @@
 		6F2FCDA7140BB8E60080A775 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
 		6F2FCDA8140BB8E60080A775 /* HLSModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManager.h; sourceTree = "<group>"; };
 		6F2FCDA9140BB8E60080A775 /* HLSModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManager.m; sourceTree = "<group>"; };
-		6F2FCDAB140BB8E60080A775 /* HLSTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransform.h; sourceTree = "<group>"; };
-		6F2FCDAC140BB8E60080A775 /* HLSTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransform.m; sourceTree = "<group>"; };
 		6F2FCDAE140BB8E60080A775 /* HLSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLogger.h; sourceTree = "<group>"; };
 		6F2FCDAF140BB8E60080A775 /* HLSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLogger.m; sourceTree = "<group>"; };
 		6F2FCDB1140BB8E60080A775 /* HLSTask+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTask+Friend.h"; sourceTree = "<group>"; };
@@ -230,8 +226,6 @@
 		6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F3BC50C144D698600685502 /* HLSTransformTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformTestCase.h; sourceTree = "<group>"; };
-		6F3BC50D144D698600685502 /* HLSTransformTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformTestCase.m; sourceTree = "<group>"; };
 		6F61D12C14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F734E1B144C1089007FAF15 /* HLSKenBurnsSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKenBurnsSlideshow.h; sourceTree = "<group>"; };
@@ -307,7 +301,6 @@
 				6F2FCD6C140BB8E60080A775 /* Animation */,
 				6F2FCD73140BB8E60080A775 /* Core */,
 				6F2FCDA6140BB8E60080A775 /* CoreData */,
-				6F2FCDAA140BB8E60080A775 /* Graphics */,
 				6F2FCDAD140BB8E60080A775 /* Logging */,
 				6F2FCDB0140BB8E60080A775 /* Task */,
 				6F2FCDBD140BB8E60080A775 /* View */,
@@ -397,15 +390,6 @@
 				6F2FCDA9140BB8E60080A775 /* HLSModelManager.m */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		6F2FCDAA140BB8E60080A775 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				6F2FCDAB140BB8E60080A775 /* HLSTransform.h */,
-				6F2FCDAC140BB8E60080A775 /* HLSTransform.m */,
-			);
-			path = Graphics;
 			sourceTree = "<group>";
 		};
 		6F2FCDAD140BB8E60080A775 /* Logging */ = {
@@ -546,7 +530,6 @@
 			isa = PBXGroup;
 			children = (
 				6F33351313FB7F80000FC9FD /* Core */,
-				6F3BC50A144D695800685502 /* Graphics */,
 				6FA74D40140500CC0043693E /* View */,
 			);
 			name = Sources;
@@ -575,16 +558,6 @@
 			);
 			name = Core;
 			path = Sources/Core;
-			sourceTree = SOURCE_ROOT;
-		};
-		6F3BC50A144D695800685502 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				6F3BC50C144D698600685502 /* HLSTransformTestCase.h */,
-				6F3BC50D144D698600685502 /* HLSTransformTestCase.m */,
-			);
-			name = Graphics;
-			path = Sources/Graphics;
 			sourceTree = SOURCE_ROOT;
 		};
 		6FA74D40140500CC0043693E /* View */ = {
@@ -705,7 +678,6 @@
 				6F2FCE03140BB8E60080A775 /* UIControl+HLSExclusiveTouch.m in Sources */,
 				6F2FCE04140BB8E60080A775 /* UIImage+HLSExtensions.m in Sources */,
 				6F2FCE05140BB8E60080A775 /* HLSModelManager.m in Sources */,
-				6F2FCE06140BB8E60080A775 /* HLSTransform.m in Sources */,
 				6F2FCE07140BB8E60080A775 /* HLSLogger.m in Sources */,
 				6F2FCE08140BB8E60080A775 /* HLSTask.m in Sources */,
 				6F2FCE09140BB8E60080A775 /* HLSTaskGroup.m in Sources */,
@@ -732,7 +704,6 @@
 				6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
 				6F1AF842142B032500925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E1D144C1089007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
-				6F3BC50E144D698600685502 /* HLSTransformTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

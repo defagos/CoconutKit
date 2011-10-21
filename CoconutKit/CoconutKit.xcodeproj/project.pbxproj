@@ -32,8 +32,6 @@
 		6F3D03D01301C7D5009ACE4D /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D03CE1301C7D5009ACE4D /* HLSViewAnimationStep.m */; };
 		6F3D04061301D901009ACE4D /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3D04041301D901009ACE4D /* HLSAnimation.h */; };
 		6F3D04071301D901009ACE4D /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D04051301D901009ACE4D /* HLSAnimation.m */; };
-		6F3DFB4712FF1F67009ACE4D /* HLSTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */; };
-		6F3DFB4812FF1F67009ACE4D /* HLSTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */; };
 		6F3ED67913CF22C800419BF7 /* UIImage+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3ED67713CF22C800419BF7 /* UIImage+HLSExtensions.h */; };
 		6F3ED67A13CF22C800419BF7 /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3ED67813CF22C800419BF7 /* UIImage+HLSExtensions.m */; };
 		6F3F4B2F139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F4B2D139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h */; };
@@ -158,8 +156,6 @@
 		6F3D03CE1301C7D5009ACE4D /* HLSViewAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimationStep.m; sourceTree = "<group>"; };
 		6F3D04041301D901009ACE4D /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6F3D04051301D901009ACE4D /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
-		6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransform.h; sourceTree = "<group>"; };
-		6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransform.m; sourceTree = "<group>"; };
 		6F3ED67713CF22C800419BF7 /* UIImage+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3ED67813CF22C800419BF7 /* UIImage+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3F4B2D139E623B00269BA9 /* UIControl+HLSExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSExclusiveTouch.h"; sourceTree = "<group>"; };
@@ -327,7 +323,6 @@
 				6F8D0905123F4F9B00FCF2AF /* Animation */,
 				6F8D0908123F4FF500FCF2AF /* Core */,
 				6FC9000713D4637400834900 /* CoreData */,
-				6F3DFB4012FF1F18009ACE4D /* Graphics */,
 				6F8D0906123F4FA400FCF2AF /* Logging */,
 				6F93EE5F12DE55080039A2B2 /* Task */,
 				6F8D09AB123F602000FCF2AF /* View */,
@@ -342,15 +337,6 @@
 				AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */,
 			);
 			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		6F3DFB4012FF1F18009ACE4D /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				6F3DFB4512FF1F67009ACE4D /* HLSTransform.h */,
-				6F3DFB4612FF1F67009ACE4D /* HLSTransform.m */,
-			);
-			path = Graphics;
 			sourceTree = "<group>";
 		};
 		6F8D0905123F4F9B00FCF2AF /* Animation */ = {
@@ -570,7 +556,6 @@
 				6F93EE7312DE55080039A2B2 /* HLSTaskManager.h in Headers */,
 				6F93EE7512DE55080039A2B2 /* HLSTaskOperation+Protected.h in Headers */,
 				6F93EE7612DE55080039A2B2 /* HLSTaskOperation.h in Headers */,
-				6F3DFB4712FF1F67009ACE4D /* HLSTransform.h in Headers */,
 				6F3D03CF1301C7D5009ACE4D /* HLSViewAnimationStep.h in Headers */,
 				6F3D04061301D901009ACE4D /* HLSAnimation.h in Headers */,
 				6FBDA9EC130522DE004B9617 /* NSObject+HLSExtensions.h in Headers */,
@@ -688,7 +673,6 @@
 				6F93EE7112DE55080039A2B2 /* HLSTaskGroup.m in Sources */,
 				6F93EE7412DE55080039A2B2 /* HLSTaskManager.m in Sources */,
 				6F93EE7712DE55080039A2B2 /* HLSTaskOperation.m in Sources */,
-				6F3DFB4812FF1F67009ACE4D /* HLSTransform.m in Sources */,
 				6F3D03D01301C7D5009ACE4D /* HLSViewAnimationStep.m in Sources */,
 				6F3D04071301D901009ACE4D /* HLSAnimation.m in Sources */,
 				6FBDA9ED130522DE004B9617 /* NSObject+HLSExtensions.m in Sources */,
