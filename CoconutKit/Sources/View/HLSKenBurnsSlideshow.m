@@ -73,6 +73,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     
     self.imageDuration = kKenBurnsDefaultImageDuration;
     self.transitionDuration = kKenBurnsDefaultTransitionDuration;
+    self.random = NO;
 }
 
 - (void)dealloc
@@ -123,6 +124,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     m_transitionDuration = transitionDuration;
 }
 
+@synthesize random = m_random;
+
 #pragma mark Loading images
 
 - (void)addImage:(UIImage *)image
@@ -149,17 +152,24 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     }
     
     m_currentImageIndex = -1;
+    m_currentImageViewIndex = -1;
     
     [self playNextImageAnimation];
 }
 
 - (void)playNextImageAnimation
 {
-    // Find the involved image and image view 
-    m_currentImageIndex = (m_currentImageIndex + 1) % [self.images count];
-    NSUInteger currentImageViewIndex = m_currentImageIndex % 2;
+    // Find the involved image
+    if (self.random) {
+        m_currentImageIndex = arc4random() % [self.images count];
+    }
+    else {
+        m_currentImageIndex = (m_currentImageIndex + 1) % [self.images count];
+    }
     
-    UIImageView *imageView = [self.imageViews objectAtIndex:currentImageViewIndex];
+    // Find the involved image view
+    m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
+    UIImageView *imageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
     UIImage *image = [self.images objectAtIndex:m_currentImageIndex];
     
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
@@ -217,7 +227,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
                                                   yOffset:finalYOffset - yOffset];
     [animation playAnimated:YES];
     
-    [self.animations replaceObjectAtIndex:currentImageViewIndex withObject:animation];
+    [self.animations replaceObjectAtIndex:m_currentImageViewIndex withObject:animation];
 }
 
 - (void)stop

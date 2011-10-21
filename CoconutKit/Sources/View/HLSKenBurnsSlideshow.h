@@ -23,12 +23,15 @@
     NSMutableArray *m_animations;               // Two animations in parallel (at most)
     BOOL m_animating;
     NSInteger m_currentImageIndex;
+    NSInteger m_currentImageViewIndex;
     NSTimeInterval m_imageDuration;
     NSTimeInterval m_transitionDuration;
+    BOOL m_random;
 }
 
 /**
- * The array of images to be displayed. Images will be displayed sequentially and in a endless loop
+ * The array of images to be displayed. Images will be displayed in a endless loop, either sequentially or in a random
+ * order (see random property)
  */
 @property (nonatomic, retain) NSArray *images;
 
@@ -41,6 +44,12 @@
  * The duration of the cross dissolve transition between two images. Default is 3 seconds
  */
 @property (nonatomic, assign) NSTimeInterval transitionDuration;
+
+/**
+ * If set to YES, images will be played in a random order. If set to NO, they are played sequentially
+ * Default is NO
+ */
+@property (nonatomic, assign) BOOL random;
 
 /**
  * Start / stop the slideshow
