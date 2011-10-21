@@ -11,8 +11,8 @@
 #import "HLSAnimation.h"
 #import "HLSLogger.h"
 
-static const NSTimeInterval kKenBurnsZoomDefaultDuration = 4.;
-static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
+static const NSTimeInterval kKenBurnsDefaultImageDuration = 10.;
+static const NSTimeInterval kKenBurnsDefaultTransitionDuration = 3.;
 static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @interface HLSKenBurnsSlideshow () <HLSAnimationDelegate>
@@ -70,6 +70,9 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     }
     
     self.images = [NSArray array];
+    
+    self.imageDuration = kKenBurnsDefaultImageDuration;
+    self.transitionDuration = kKenBurnsDefaultTransitionDuration;
 }
 
 - (void)dealloc
@@ -89,6 +92,35 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 @synthesize images = m_images;
 
 @synthesize animations = m_animations;
+
+@synthesize imageDuration = m_imageDuration;
+
+- (void)setImageDuration:(NSTimeInterval)imageDuration
+{
+    if (doublelt(imageDuration, 0.)) {
+        HLSLoggerWarn(@"Image duration must be > 0; fixed to default value");
+        imageDuration = kKenBurnsDefaultImageDuration;
+    }
+    
+    m_imageDuration = imageDuration;
+}
+
+@synthesize transitionDuration = m_transitionDuration;
+
+- (void)setTransitionDuration:(NSTimeInterval)transitionDuration
+{
+    if (doublelt(transitionDuration, 0.)) {
+        HLSLoggerWarn(@"Transition duration must be > 0; fixed to 2/5 of total duration");
+        transitionDuration = 2. * self.imageDuration / 5.;
+    }
+    
+    if (doublelt(self.imageDuration - 2 * transitionDuration, 0.)) {
+        HLSLoggerWarn(@"Transition duration must not exceed half the total duration");
+        transitionDuration = self.imageDuration / 2.;
+    }
+    
+    m_transitionDuration = transitionDuration;
+}
 
 #pragma mark Loading images
 
@@ -202,8 +234,6 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
                                 xOffset:(CGFloat)xOffset
                                 yOffset:(CGFloat)yOffset
 {
-    NSTimeInterval totalDuration = 2 * kKenBurnsFadeDefaultDuration + kKenBurnsZoomDefaultDuration;
-    
     // To understand how to calculate the scale factor for each step, divide the total time interval in N equal intervals.
     // To get a smooth scale animation with total factor scaleFactor, each interval must be assigned a factor (scaleFactor)^(1/N),
     // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the corresponding
@@ -212,11 +242,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     // Fade in step: Scale + fade in
     HLSAnimationStep *fadeInAnimationStep = [HLSAnimationStep animationStep];
     fadeInAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    fadeInAnimationStep.duration = kKenBurnsFadeDefaultDuration;
+    fadeInAnimationStep.duration = self.transitionDuration;
     HLSViewAnimationStep *fadeInViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat fadeInFactor = powf(scaleFactor, kKenBurnsFadeDefaultDuration / totalDuration);
-    CGFloat fadeInXOffset = xOffset * kKenBurnsFadeDefaultDuration / totalDuration;
-    CGFloat fadeInYOffset = yOffset * kKenBurnsFadeDefaultDuration / totalDuration;
+    CGFloat fadeInFactor = powf(scaleFactor, self.transitionDuration / self.imageDuration);
+    CGFloat fadeInXOffset = xOffset * self.transitionDuration / self.imageDuration;
+    CGFloat fadeInYOffset = yOffset * self.transitionDuration / self.imageDuration;
     fadeInViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeInFactor, fadeInFactor),
                                                                 CGAffineTransformMakeTranslation(fadeInXOffset, fadeInYOffset));
     fadeInViewAnimationStep.alphaVariation = 1.f;
@@ -225,12 +255,13 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     // Main step: Only scale
     HLSAnimationStep *mainAnimationStep = [HLSAnimationStep animationStep];
     mainAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    mainAnimationStep.duration = kKenBurnsZoomDefaultDuration;
+    NSTimeInterval mainDuration = self.imageDuration - 2 * self.transitionDuration; 
+    mainAnimationStep.duration = mainDuration;
     mainAnimationStep.tag = @"zoom";
     HLSViewAnimationStep *mainViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat mainFactor = powf(scaleFactor, kKenBurnsZoomDefaultDuration / totalDuration);
-    CGFloat mainXOffset = xOffset * kKenBurnsZoomDefaultDuration / totalDuration;
-    CGFloat mainYOffset = yOffset * kKenBurnsZoomDefaultDuration / totalDuration;
+    CGFloat mainFactor = powf(scaleFactor, mainDuration / self.imageDuration);
+    CGFloat mainXOffset = xOffset * mainDuration / self.imageDuration;
+    CGFloat mainYOffset = yOffset * mainDuration / self.imageDuration;
     mainViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(mainFactor, mainFactor),
                                                               CGAffineTransformMakeTranslation(mainXOffset, mainYOffset));
     [mainAnimationStep addViewAnimationStep:mainViewAnimationStep forView:imageView];
@@ -238,11 +269,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     // Fade out: Scale + fade out
     HLSAnimationStep *fadeOutAnimationStep = [HLSAnimationStep animationStep];
     fadeOutAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    fadeOutAnimationStep.duration = kKenBurnsFadeDefaultDuration;
+    fadeOutAnimationStep.duration = self.transitionDuration;
     HLSViewAnimationStep *fadeOutViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    float fadeOutFactor = pow(scaleFactor, kKenBurnsFadeDefaultDuration / totalDuration);
-    CGFloat fadeOutXOffset = xOffset * kKenBurnsFadeDefaultDuration / totalDuration;
-    CGFloat fadeOutYOffset = yOffset * kKenBurnsFadeDefaultDuration / totalDuration;
+    float fadeOutFactor = pow(scaleFactor, self.transitionDuration / self.imageDuration);
+    CGFloat fadeOutXOffset = xOffset * self.transitionDuration / self.imageDuration;
+    CGFloat fadeOutYOffset = yOffset * self.transitionDuration / self.imageDuration;
     fadeOutViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeOutFactor, fadeOutFactor),
                                                                  CGAffineTransformMakeTranslation(fadeOutXOffset, fadeOutYOffset));
     fadeOutViewAnimationStep.alphaVariation = -1.f;

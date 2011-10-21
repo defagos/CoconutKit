@@ -13,9 +13,14 @@
     NSMutableArray *m_animations;               // Two animations in parallel (at most)
     BOOL m_animating;
     NSInteger m_currentImageIndex;
+    NSTimeInterval m_imageDuration;
+    NSTimeInterval m_transitionDuration;
 }
 
 @property (nonatomic, retain) NSArray *images;
+
+@property (nonatomic, assign) NSTimeInterval imageDuration;
+@property (nonatomic, assign) NSTimeInterval transitionDuration;
 
 - (void)play;
 - (void)stop;
