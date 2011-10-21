@@ -80,6 +80,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     [self stop];
     
     self.imageViews = nil;
+    self.images = nil;
     self.animations = nil;
     
     [super dealloc];
@@ -154,7 +155,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)playNextImageAnimation
 {
-    // Find the involved image and image view and 
+    // Find the involved image and image view 
     m_currentImageIndex = (m_currentImageIndex + 1) % [self.images count];
     NSUInteger currentImageViewIndex = m_currentImageIndex % 2;
     
@@ -163,22 +164,22 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
-    // Aspect ratios of frame and image view frame
+    // Aspect ratios of frame and image
     CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
     CGFloat imageRatio = image.size.width / image.size.height;
     
     // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
     CGFloat zoomScale;
-    // The image is more portrait-shaped than the image view
+    // The image is more portrait-shaped than self
     if (floatlt(imageRatio, frameRatio)) {
         zoomScale = CGRectGetWidth(self.frame) / image.size.width;
     }
-    // The image is more landscape-shaped than the image view
+    // The image is more landscape-shaped than self
     else {
         zoomScale = CGRectGetHeight(self.frame) / image.size.height;
     }
     
-    // Update the image view accordingly
+    // Update the image view to match the image dimensions with an aspect fill behavior inside self
     CGFloat scaledImageWidth = image.size.width * zoomScale;
     CGFloat scaledImageHeight = image.size.height * zoomScale;
     imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
@@ -186,12 +187,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     imageView.image = image;
     imageView.alpha = 0.f;
     
-    // Pick up a random initial scale factor. Must be >= 1, and not too large (1.4 should be sufficient). Use random
-    // factor in [0;1]
+    // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
     CGFloat scaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
     
     // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
-    // scale factor so that the image still covers the whole view
+    // scale factor so that the image view still covers self
     CGFloat maxXOffset = (scaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
     CGFloat maxYOffset = (scaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
     
@@ -199,18 +199,18 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
     CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
     
-    // Apply initial transform
+    // Apply initial transform to get initial image view position
     imageView.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleFactor, scaleFactor),
                                                   CGAffineTransformMakeTranslation(xOffset, yOffset));
     
-    // Pick up random scale factor to reach during the animation
+    // Pick up random scale factor to reach at the end of the animation. Same constraints as above
     CGFloat finalScaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
     CGFloat maxFinalXOffset = (finalScaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
     CGFloat maxFinalYOffset = (finalScaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
     CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
     CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
     
-    // Create the corresponding animation
+    // Create the corresponding animation and plays it
     HLSAnimation *animation = [self animationForImageView:imageView 
                                           WithScaleFactor:finalScaleFactor / scaleFactor
                                                   xOffset:finalXOffset - xOffset 
@@ -236,8 +236,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 {
     // To understand how to calculate the scale factor for each step, divide the total time interval in N equal intervals.
     // To get a smooth scale animation with total factor scaleFactor, each interval must be assigned a factor (scaleFactor)^(1/N),
-    // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the corresponding
-    // scale factor is therefore (scaleFactor)^(m/N), thus the formula for the scale factor of each step.
+    // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the scale factor
+    // for the m intervals is therefore (scaleFactor)^(m/N), thus the formula for the scale factor of each step.
     
     // Fade in step: Scale + fade in
     HLSAnimationStep *fadeInAnimationStep = [HLSAnimationStep animationStep];
