@@ -10,7 +10,6 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
-#import "HLSTransform.h"
 
 static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
@@ -23,59 +22,6 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return [[[[self class] alloc] init] autorelease];
 }
 
-+ (HLSViewAnimationStep *)viewAnimationStepAnimatingViewFromFrame:(CGRect)fromFrame 
-                                                          toFrame:(CGRect)toFrame
-{
-    return [HLSViewAnimationStep viewAnimationStepAnimatingViewFromFrame:fromFrame
-                                                                 toFrame:toFrame 
-                                                      withAlphaVariation:0.f];
-}
-
-+ (HLSViewAnimationStep *)viewAnimationStepAnimatingViewFromFrame:(CGRect)fromFrame
-                                                          toFrame:(CGRect)toFrame
-                                               withAlphaVariation:(CGFloat)alphaVariation
-{
-    // Return the resulting animation step
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep.transform = [HLSTransform transformFromRect:fromFrame toRect:toFrame];
-    viewAnimationStep.alphaVariation = alphaVariation;
-    return viewAnimationStep;    
-}
-
-+ (HLSViewAnimationStep *)viewAnimationStepTranslatingViewWithDeltaX:(CGFloat)deltaX
-                                                              deltaY:(CGFloat)deltaY
-{
-    return [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:deltaX
-                                                                     deltaY:deltaY
-                                                             alphaVariation:0.f];
-}
-
-+ (HLSViewAnimationStep *)viewAnimationStepTranslatingViewWithDeltaX:(CGFloat)deltaX
-                                                              deltaY:(CGFloat)deltaY
-                                                      alphaVariation:(CGFloat)alphaVariation
-{
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep.transform = CGAffineTransformMakeTranslation(deltaX, deltaY);
-    viewAnimationStep.alphaVariation = alphaVariation;
-    return viewAnimationStep;
-}
-
-+ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithTransform:(CGAffineTransform)transform
-                                                      alphaVariation:(CGFloat)alphaVariation
-{
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep.transform = transform;
-    viewAnimationStep.alphaVariation = alphaVariation;
-    return viewAnimationStep;
-}
-
-+ (HLSViewAnimationStep *)viewAnimationStepUpdatingViewWithAlphaVariation:(CGFloat)alphaVariation
-{
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep.alphaVariation = alphaVariation;
-    return viewAnimationStep;
-}
-
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -83,7 +29,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     if ((self = [super init])) {
         // Default: No change
         self.transform = CGAffineTransformIdentity;
-        self.alphaVariation = kAnimationStepDefaultAlphaVariation;  
+        self.alphaVariation = kAnimationStepDefaultAlphaVariation; 
     }
     return self;
 }
@@ -108,6 +54,16 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     else {
         m_alphaVariation = alphaVariation;
     }
+}
+
+#pragma mark Reverse
+
+- (HLSViewAnimationStep *)reverseViewAnimationStep
+{
+    HLSViewAnimationStep *reverseViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
+    reverseViewAnimationStep.transform = CGAffineTransformInvert(self.transform);
+    reverseViewAnimationStep.alphaVariation = -self.alphaVariation;
+    return reverseViewAnimationStep;
 }
 
 #pragma mark Description

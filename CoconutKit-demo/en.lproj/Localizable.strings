@@ -12,6 +12,8 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Blocking"="Blocking";
+"Cancel"="Cancel";
 "Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "Choose"="Choose";
@@ -42,6 +44,7 @@
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
 "Invalid e-mail address"="Invalid e-mail address";
+"Ken Burns effect"="Ken Burns effect";
 "Landscape only"="Landscape only";
 "Language"="Language";
 "Last Name"="Last Name";
@@ -51,6 +54,7 @@
 "Music players"="Music players";
 "Parallel processing"="Parallel processing";
 "Phones"="Phones";
+"Play"="Play";
 "Play forward"="Play forward";
 "Play backward"="Play backward";
 "Pop"="Pop";
@@ -61,6 +65,7 @@
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
 "Reset"="Reset";
+"Resizing"="Resizing";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Start"="Start";

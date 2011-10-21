@@ -14,10 +14,13 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface HLSAnimation ()
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
+@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
@@ -63,6 +66,7 @@
         else {
             self.animationSteps = animationSteps;
         }
+        self.resizeViews = NO;
     }
     return self;
 }
@@ -77,6 +81,7 @@
 {
     self.animationSteps = nil;
     self.animationStepsEnumerator = nil;
+    self.currentAnimationStep = nil;
     self.tag = nil;
     self.userInfo = nil;
     self.delegate = nil;
@@ -89,9 +94,13 @@
 
 @synthesize animationStepsEnumerator = m_animationStepsEnumerator;
 
+@synthesize currentAnimationStep = m_currentAnimationStep;
+
 @synthesize tag = m_tag;
 
 @synthesize userInfo = m_userInfo;
+
+@synthesize resizeViews = m_resizeViews;
 
 @synthesize lockingUI = m_lockingUI;
 
@@ -123,6 +132,7 @@
     }
     
     self.running = YES;
+    m_cancelling = NO;
     
     // Begin with the first step
     [self playNextStepAnimated:animated];
@@ -168,12 +178,31 @@
             view.alpha = alpha;
         }
         
-        // The fact that transform is a property is essential. If you "po" a UIView in gdb, you will see something like:
-        //   <UIView: 0x4d57c40; frame = (141 508; 136 102); transform = [1, 0, 0, 1, 30, -60]; autoresize = RM+BM; layer = <CALayer: 0x4d57cc0>>
-        // i.e. the view is attached a transform, not applied a transform which would get lost after it has been applied. If
-        // we already have a transform which is applied, we therefore need to compose it with the transform we are applying during
-        // the step
-        view.transform = CGAffineTransformConcat(viewAnimationStep.transform, view.transform);
+        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system of
+        // centered on the view.
+        
+        // Alter frame
+        if (self.resizeViews) {
+            // Only translation or scale transforms are allowed
+            if (! floateq(viewAnimationStep.transform.b, 0.f) || ! floateq(viewAnimationStep.transform.c, 0.f)) {
+                HLSLoggerWarn(@"Animations with resizeViews set to YES only support translation or scale transforms");
+                continue;
+            }
+            
+            CGAffineTransform translation = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
+            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, viewAnimationStep.transform), 
+                                                                      CGAffineTransformInvert(translation));
+            
+            // TODO: This does not resize subviews correctly. Maybe that is not possible?
+            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);            
+        }
+        // Alter transform
+        else {
+            CGAffineTransform translation = CGAffineTransformMakeTranslation(-view.transform.tx, -view.transform.ty);
+            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, viewAnimationStep.transform), 
+                                                                      CGAffineTransformInvert(translation));
+            view.transform = CGAffineTransformConcat(view.transform, convTransform);
+        }
     }
     
     // Animated
@@ -185,8 +214,10 @@
     // Instantaneous
     else {
         // Notify the end of the animation
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:m_animated];
+        if (! m_cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:m_animated];
+            }            
         }
         
         [self playNextStepAnimated:animated];
@@ -198,13 +229,12 @@
     // First call?
     if (! self.animationStepsEnumerator) {
         self.animationStepsEnumerator = [self.animationSteps objectEnumerator];
-        m_firstStep = YES;
     }
     
     // Proceeed with the next step (if any)
-    HLSAnimationStep *nextAnimationStep = [self.animationStepsEnumerator nextObject];
-    if (nextAnimationStep) {
-        [self playStep:nextAnimationStep animated:animated];
+    self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
+    if (self.currentAnimationStep) {
+        [self playStep:self.currentAnimationStep animated:animated];
     }
     // Done with the animation
     else {
@@ -217,10 +247,35 @@
         
         self.running = NO;
         
-        if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
-            [self.delegate animationDidStop:self animated:m_animated];
+        if (! m_cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
+                [self.delegate animationDidStop:self animated:m_animated];
+            }            
         }
     }    
+}
+
+- (void)cancel
+{
+    if (! self.running) {
+        HLSLoggerInfo(@"The animation is not running, nothing to cancel");
+        return;
+    }
+    
+    if (m_cancelling) {
+        HLSLoggerInfo(@"The animation is already being cancelled");
+        return;
+    }
+    
+    m_cancelling = YES;
+    
+    // Cancel all animations
+    for (UIView *view in [self.currentAnimationStep views]) {
+        [view.layer removeAllAnimations];
+    }
+    
+    // Play all remaining steps without animation
+    [self playNextStepAnimated:NO];
 }
 
 #pragma mark Creating the reverse animation
@@ -230,6 +285,7 @@
     NSArray *reverseAnimationSteps = [self reverseAnimationSteps];
     HLSAnimation *reverseAnimation = [HLSAnimation animationWithAnimationSteps:reverseAnimationSteps];
     reverseAnimation.tag = [NSString stringWithFormat:@"reverse_%@", self.tag];
+    reverseAnimation.resizeViews = self.resizeViews;
     reverseAnimation.lockingUI = self.lockingUI;
     reverseAnimation.bringToFront = self.bringToFront;
     reverseAnimation.delegate = self.delegate;
@@ -251,13 +307,7 @@
         // Reverse the associated view animation steps
         for (UIView *view in [animationStep views]) {
             HLSViewAnimationStep *viewAnimationStep = [animationStep viewAnimationStepForView:view];
-            
-            // Create the reverse view animation step
-            HLSViewAnimationStep *reverseViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-            reverseViewAnimationStep.transform = CGAffineTransformInvert(viewAnimationStep.transform);
-            reverseViewAnimationStep.alphaVariation = -viewAnimationStep.alphaVariation;
-            
-            [reverseAnimationStep addViewAnimationStep:reverseViewAnimationStep forView:view];
+            [reverseAnimationStep addViewAnimationStep:[viewAnimationStep reverseViewAnimationStep] forView:view];
         }
         
         // Animation step properties
@@ -288,10 +338,15 @@
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+    if (m_cancelling) {
+        return;
+    }
     
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        [self.delegate animationStepFinished:animationStep animated:m_animated];
+    if (! m_cancelling) {
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+            [self.delegate animationStepFinished:animationStep animated:m_animated];
+        }        
     }
     
     [self playNextStepAnimated:m_animated];

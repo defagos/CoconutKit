@@ -11,9 +11,11 @@
 @interface MultipleViewsAnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
+@property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
 - (void)playForwardButtonClicked:(id)sender;
 - (void)playBackwardButtonClicked:(id)sender;
+- (void)cancelButtonClicked:(id)sender;
 
 @end
 
@@ -29,15 +31,15 @@
     return self;
 }
 
-- (void)dealloc
-{    
-    self.animation = nil;
-    [super dealloc];
-}
-
 - (void)releaseViews
 {
     [super releaseViews];
+    
+    [self.animation cancel];
+    self.animation = nil;
+    
+    [self.reverseAnimation cancel];
+    self.reverseAnimation = nil;
     
     self.rectangleView1 = nil;
     self.rectangleView2 = nil;
@@ -45,8 +47,13 @@
     self.rectangleView4 = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
+    self.cancelButton = nil;
     self.animatedLabel = nil;
     self.animatedSwitch = nil;
+    self.blockingLabel = nil;
+    self.blockingSwitch = nil;
+    self.resizingLabel = nil;
+    self.resizingSwitch = nil;
 }
 
 #pragma mark View lifecycle
@@ -64,7 +71,14 @@
                       forControlEvents:UIControlEventTouchUpInside];
     self.playBackwardButton.hidden = YES;
     
+    [self.cancelButton addTarget:self
+                          action:@selector(cancelButtonClicked:)
+                forControlEvents:UIControlEventTouchUpInside];
+    self.cancelButton.hidden = YES;
+    
     self.animatedSwitch.on = YES;
+    self.blockingSwitch.on = NO;
+    self.resizingSwitch.on = NO;
 }
 
 #pragma mark Accessors and mutators
@@ -81,11 +95,23 @@
 
 @synthesize playBackwardButton = m_playBackwardButton;
 
+@synthesize cancelButton = m_cancelButton;
+
 @synthesize animatedLabel = m_animatedLabel;
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
+@synthesize blockingLabel = m_blockingLabel;
+
+@synthesize blockingSwitch = m_blockingSwitch;
+
+@synthesize resizingLabel = m_resizingLabel;
+
+@synthesize resizingSwitch = m_resizingSwitch;
+
 @synthesize animation = m_animation;
+
+@synthesize reverseAnimation = m_reverseAnimation;
 
 #pragma mark Orientation management
 
@@ -103,50 +129,55 @@
 - (void)playForwardButtonClicked:(id)sender
 {
     self.playForwardButton.hidden = YES;
+    self.cancelButton.hidden = NO;
     
-    // Several views animated; build the animation step from a set of view animation steps
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    animationStep1.duration = 2.f;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:50.f 
-                                                                                                          deltaY:60.f];
+    animationStep1.duration = 2.;
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CGAffineTransformMakeTranslation(50.f, 60.f);    
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView1];
-    HLSViewAnimationStep *viewAnimationStep12 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:CGAffineTransformMakeRotation(-M_PI)
-                                                                                                  alphaVariation:-0.4f];
+    HLSViewAnimationStep *viewAnimationStep12 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep12.transform = CGAffineTransformMakeTranslation(40.f, -10.f);
+    viewAnimationStep12.alphaVariation = -0.4f;
     [animationStep1 addViewAnimationStep:viewAnimationStep12 forView:self.rectangleView2];
-    HLSViewAnimationStep *viewAnimationStep13 = [HLSViewAnimationStep viewAnimationStepAnimatingViewFromFrame:self.rectangleView3.frame
-                                                                                                      toFrame:self.rectangleView4.frame];
+    HLSViewAnimationStep *viewAnimationStep13 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep13.transform = CGAffineTransformMakeTranslation(0.f, -100.f);
     [animationStep1 addViewAnimationStep:viewAnimationStep13 forView:self.rectangleView3];
-    HLSViewAnimationStep *viewAnimationStep14 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:-0.8f];
+    HLSViewAnimationStep *viewAnimationStep14 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep14.alphaVariation = -0.8f;
     [animationStep1 addViewAnimationStep:viewAnimationStep14 forView:self.rectangleView4];
     
     // Can also apply the same view animation step to all views
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    animationStep2.duration = 1.f;
-    HLSViewAnimationStep *viewAnimationStep2 = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:CGAffineTransformMakeScale(1.5f, 1.5f)
-                                                                                                 alphaVariation:0.f];
+    animationStep2.duration = 1.;
+    HLSViewAnimationStep *viewAnimationStep2 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep2.transform = CGAffineTransformMakeTranslation(80.f, 0.f);
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView1];
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView2];
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView3];
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView4];
     
-    // In fact, there is an even easier way to achieve this
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStepTranslatingViews:[NSArray arrayWithObjects:self.rectangleView1,
-                                                                                        self.rectangleView2,
-                                                                                        self.rectangleView3,
-                                                                                        self.rectangleView4,
-                                                                                        nil]
-                                                                            withDeltaX:0.f
-                                                                                deltaY:50.f
-                                                                        alphaVariation:0.f];
-    animationStep3.duration = 0.8f;
-    
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    animationStep3.duration = 0.5;
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.transform = CGAffineTransformMakeScale(1.5f, 2.f);
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView1];
+    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep32.transform = CGAffineTransformMakeScale(2.f, 1.5f);
+    viewAnimationStep32.alphaVariation = -0.3f;
+    [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:self.rectangleView2];
+    HLSViewAnimationStep *viewAnimationStep33 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep33.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    [animationStep3 addViewAnimationStep:viewAnimationStep33 forView:self.rectangleView3];
+            
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
                                                                 animationStep2,
                                                                 animationStep3,
                                                                 nil]];
     self.animation.tag = @"multipleViewsAnimation";
-    self.animation.lockingUI = YES;
+    self.animation.resizeViews = self.resizingSwitch.on;
+    self.animation.lockingUI = self.blockingSwitch.on;
     self.animation.delegate = self;
     [self.animation playAnimated:self.animatedSwitch.on];
 }
@@ -154,10 +185,26 @@
 - (void)playBackwardButtonClicked:(id)sender
 {
     self.playBackwardButton.hidden = YES;
+    self.cancelButton.hidden = NO;
     
     // Create the reverse animation
-    HLSAnimation *reverseAnimation = [self.animation reverseAnimation];
-    [reverseAnimation playAnimated:self.animatedSwitch.on];
+    self.reverseAnimation = [self.animation reverseAnimation];
+    self.reverseAnimation.lockingUI = self.blockingSwitch.on;
+    [self.reverseAnimation playAnimated:self.animatedSwitch.on];
+}
+
+- (void)cancelButtonClicked:(id)sender
+{
+    if (self.animation.running) {
+        self.playBackwardButton.hidden = NO;
+        [self.animation cancel];        
+    }
+    if (self.reverseAnimation.running) {
+        self.playForwardButton.hidden = NO;
+        [self.reverseAnimation cancel];
+    }
+    
+    self.cancelButton.hidden = YES;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -183,6 +230,8 @@
     else if ([animation.tag isEqual:@"reverse_multipleViewsAnimation"]) {
         self.playForwardButton.hidden = NO;
     }
+    
+    self.cancelButton.hidden = YES;
 }
 
 #pragma mark Localization
@@ -194,7 +243,10 @@
     self.title = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
     [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
     [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];
+    [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"Cancel") forState:UIControlStateNormal];
     self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
+    self.blockingLabel.text = NSLocalizedString(@"Blocking", @"Blocking");
+    self.resizingLabel.text = NSLocalizedString(@"Resizing", @"Resizing");
 }
 
 @end

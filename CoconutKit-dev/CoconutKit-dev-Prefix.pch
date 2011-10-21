@@ -16,6 +16,7 @@
     #import "HLSCursor.h"
     #import "HLSError.h"
     #import "HLSFloat.h"
+    #import "HLSKenBurnsSlideshow.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLogger.h"
     #import "HLSModelManager.h"

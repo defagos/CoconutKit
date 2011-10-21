@@ -141,6 +141,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark View lifecycle
 
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
+
 - (void)loadView
 {
     self.view = [[[HLSStretchingContainerView alloc] init] autorelease];
