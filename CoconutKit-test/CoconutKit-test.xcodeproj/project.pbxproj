@@ -84,6 +84,7 @@
 		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
+		6FCA9D1214518F8400004E12 /* NSManagedObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D1114518F8400004E12 /* NSManagedObject+HLSExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +245,8 @@
 		6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FCA9D1014518F8400004E12 /* NSManagedObject+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FCA9D1114518F8400004E12 /* NSManagedObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +391,8 @@
 				6F2FCDA7140BB8E60080A775 /* HLSManagedObjectCopying.h */,
 				6F2FCDA8140BB8E60080A775 /* HLSModelManager.h */,
 				6F2FCDA9140BB8E60080A775 /* HLSModelManager.m */,
+				6FCA9D1014518F8400004E12 /* NSManagedObject+HLSExtensions.h */,
+				6FCA9D1114518F8400004E12 /* NSManagedObject+HLSExtensions.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -704,6 +709,7 @@
 				6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
 				6F1AF842142B032500925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E1D144C1089007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
+				6FCA9D1214518F8400004E12 /* NSManagedObject+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -115,6 +115,8 @@
 		6FC9000A13D4637400834900 /* HLSModelManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC9000813D4637400834900 /* HLSModelManager.h */; };
 		6FC9000B13D4637400834900 /* HLSModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9000913D4637400834900 /* HLSModelManager.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
+		6FCA9D0A14518EAE00004E12 /* NSManagedObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCA9D0814518EAE00004E12 /* NSManagedObject+HLSExtensions.h */; };
+		6FCA9D0B14518EAE00004E12 /* NSManagedObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D0914518EAE00004E12 /* NSManagedObject+HLSExtensions.m */; };
 		6FD71F6913BDC139008B51C4 /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FD71F6713BDC138008B51C4 /* NSCalendar+HLSExtensions.h */; };
 		6FD71F6A13BDC139008B51C4 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */; };
 		6FDD065E13BC6D8F00BF880A /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */; };
@@ -240,6 +242,8 @@
 		6FC9FFFD13D4635900834900 /* HLSErrorTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTemplate.h; sourceTree = "<group>"; };
 		6FC9FFFE13D4635900834900 /* HLSErrorTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTemplate.m; sourceTree = "<group>"; };
 		6FC9FFFF13D4635900834900 /* NSDictionary+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FCA9D0814518EAE00004E12 /* NSManagedObject+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FCA9D0914518EAE00004E12 /* NSManagedObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FD71F6713BDC138008B51C4 /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FD71F6813BDC138008B51C4 /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDD065C13BC6D8F00BF880A /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				6F133FF613FBB70100B53677 /* HLSManagedObjectCopying.h */,
 				6FC9000813D4637400834900 /* HLSModelManager.h */,
 				6FC9000913D4637400834900 /* HLSModelManager.m */,
+				6FCA9D0814518EAE00004E12 /* NSManagedObject+HLSExtensions.h */,
+				6FCA9D0914518EAE00004E12 /* NSManagedObject+HLSExtensions.m */,
 			);
 			name = CoreData;
 			path = Sources/CoreData;
@@ -595,6 +601,7 @@
 				6F9BFE6B1414FB4C00184973 /* NSTimeZone+HLSExtensions.h in Headers */,
 				6F1AF7BC142A8E5C00925B7A /* HLSStretchingContainerView.h in Headers */,
 				6F734E14144C105E007FAF15 /* HLSKenBurnsSlideshow.h in Headers */,
+				6FCA9D0A14518EAE00004E12 /* NSManagedObject+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +717,7 @@
 				6F9BFE6C1414FB4C00184973 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F1AF7BD142A8E5C00925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E15144C105E007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
+				6FCA9D0B14518EAE00004E12 /* NSManagedObject+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

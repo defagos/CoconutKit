@@ -30,6 +30,13 @@
     if ((self = [super init])) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
         
+        // Create the default model entry point and context
+        NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
+                                                                         storeDirectory:documentsDirectoryPath]
+                                         autorelease];
+        [HLSModelManager setDefaultModelManager:modelManager];
+        
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:
         //    - "Normal" (or not set): Full set of demos
         //    - "RootStack": Test a stack controller as root view controller of the application
@@ -98,5 +105,20 @@
 }
 
 @synthesize languageActionSheet = m_languageActionSheet;
+
+#pragma mark Core Data
+
+- (void)savePendingChanges
+{
+    // Save any pending changes in the default context
+    NSManagedObjectContext *managedObjectContext = [HLSModelManager defaultModelContext];
+    if ([managedObjectContext hasChanges]) {
+        HLSLoggerInfo(@"Saving pending changes on exit");
+        NSError *error = nil;
+        if (! [managedObjectContext save:&error]) {
+            HLSLoggerError(@"Failed to save pending changes. Reason: %@", [error localizedDescription]);
+        }
+    }
+}
 
 @end

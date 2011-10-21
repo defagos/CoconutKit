@@ -83,6 +83,10 @@
 		6FBF59AE1407E84000F7D5EE /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59AA1407E84000F7D5EE /* icn_bookmark.png */; };
 		6FBF59AF1407E84000F7D5EE /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF59AB1407E84000F7D5EE /* icn_folder.png */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
+		6FCA9D0E14518F3F00004E12 /* NSManagedObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D0D14518F3F00004E12 /* NSManagedObject+HLSExtensions.m */; };
+		6FCA9D2B145195A400004E12 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D27145195A400004E12 /* Customer.m */; };
+		6FCA9D2C145195A400004E12 /* _Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D2A145195A400004E12 /* _Customer.m */; };
+		6FCA9D2F1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D2D1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld */; };
 		6FDB13041404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB126D1404D1C000469DEC /* Localizable.strings */; };
 		6FDB13051404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12701404D1C000469DEC /* Localizable.strings */; };
 		6FDB13061404D1C000469DEC /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12741404D1C000469DEC /* ProximaNova-Bold.otf */; };
@@ -151,7 +155,6 @@
 		6FDB13491404D1C000469DEC /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12F41404D1C000469DEC /* DeviceInfo.m */; };
 		6FDB134A1404D1C000469DEC /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12F61404D1C000469DEC /* TableSearchDisplayDemoViewController.m */; };
 		6FDB134B1404D1C000469DEC /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12F71404D1C000469DEC /* TableSearchDisplayDemoViewController.xib */; };
-		6FDB134C1404D1C000469DEC /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FA1404D1C000469DEC /* Customer.m */; };
 		6FDB134D1404D1C000469DEC /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */; };
 		6FDB134E1404D1C000469DEC /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */; };
 		6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */; };
@@ -306,6 +309,13 @@
 		6FBF59AA1407E84000F7D5EE /* icn_bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bookmark.png; sourceTree = "<group>"; };
 		6FBF59AB1407E84000F7D5EE /* icn_folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_folder.png; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6FCA9D0C14518F3F00004E12 /* NSManagedObject+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FCA9D0D14518F3F00004E12 /* NSManagedObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FCA9D26145195A400004E12 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		6FCA9D27145195A400004E12 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		6FCA9D29145195A400004E12 /* _Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Customer.h; sourceTree = "<group>"; };
+		6FCA9D2A145195A400004E12 /* _Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Customer.m; sourceTree = "<group>"; };
+		6FCA9D2E1451A0B500004E12 /* CoconutKitDemoData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitDemoData.xcdatamodel; sourceTree = "<group>"; };
 		6FDB126E1404D1C000469DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12711404D1C000469DEC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12741404D1C000469DEC /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
@@ -406,8 +416,6 @@
 		6FDB12F51404D1C000469DEC /* TableSearchDisplayDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSearchDisplayDemoViewController.h; sourceTree = "<group>"; };
 		6FDB12F61404D1C000469DEC /* TableSearchDisplayDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSearchDisplayDemoViewController.m; sourceTree = "<group>"; };
 		6FDB12F71404D1C000469DEC /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
-		6FDB12F91404D1C000469DEC /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
-		6FDB12FA1404D1C000469DEC /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		6FDB12FB1404D1C000469DEC /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
 		6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
@@ -604,6 +612,8 @@
 				6F133FF913FBB79300B53677 /* HLSManagedObjectCopying.h */,
 				6F37FE1F13EBE478003E33EF /* HLSModelManager.h */,
 				6F37FE2013EBE478003E33EF /* HLSModelManager.m */,
+				6FCA9D0C14518F3F00004E12 /* NSManagedObject+HLSExtensions.h */,
+				6FCA9D0D14518F3F00004E12 /* NSManagedObject+HLSExtensions.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -724,6 +734,33 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		6FCA9D141451917A00004E12 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6FCA9D2D1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6FCA9D181451933C00004E12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6FCA9D26145195A400004E12 /* Customer.h */,
+				6FCA9D27145195A400004E12 /* Customer.m */,
+				6FCA9D28145195A400004E12 /* Generated */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6FCA9D28145195A400004E12 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6FCA9D29145195A400004E12 /* _Customer.h */,
+				6FCA9D2A145195A400004E12 /* _Customer.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		6FDB126B1404D19E00469DEC /* CoconutKit-demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +793,7 @@
 		6FDB12721404D1C000469DEC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FCA9D141451917A00004E12 /* Data */,
 				6FDB12731404D1C000469DEC /* Fonts */,
 				6FBF59A71407E84000F7D5EE /* Images */,
 			);
@@ -779,6 +817,7 @@
 				6FDB12811404D1C000469DEC /* Application */,
 				6FDB12841404D1C000469DEC /* Demos */,
 				6FDB13011404D1C000469DEC /* DemosNavigator */,
+				6FCA9D181451933C00004E12 /* Models */,
 			);
 			name = Sources;
 			path = "../CoconutKit-demo/Sources";
@@ -1100,8 +1139,6 @@
 		6FDB12F81404D1C000469DEC /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
-				6FDB12F91404D1C000469DEC /* Customer.h */,
-				6FDB12FA1404D1C000469DEC /* Customer.m */,
 				6FDB12FB1404D1C000469DEC /* WizardDemoViewController.h */,
 				6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */,
 				6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */,
@@ -1158,6 +1195,7 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "CoconutKit-dev" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
+				6FCA9D231451951400004E12 /* ShellScript */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 			);
@@ -1272,6 +1310,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6FCA9D231451951400004E12 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "${PROJECT_DIR}/../CoconutKit-demo/generate_model.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1357,7 +1411,6 @@
 				6FDB13471404D1C000469DEC /* StackDemoViewController.m in Sources */,
 				6FDB13491404D1C000469DEC /* DeviceInfo.m in Sources */,
 				6FDB134A1404D1C000469DEC /* TableSearchDisplayDemoViewController.m in Sources */,
-				6FDB134C1404D1C000469DEC /* Customer.m in Sources */,
 				6FDB134D1404D1C000469DEC /* WizardDemoViewController.m in Sources */,
 				6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */,
 				6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */,
@@ -1369,6 +1422,10 @@
 				6F1AF83E142B031000925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E19144C1076007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
 				6F3BC4E6144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m in Sources */,
+				6FCA9D0E14518F3F00004E12 /* NSManagedObject+HLSExtensions.m in Sources */,
+				6FCA9D2B145195A400004E12 /* Customer.m in Sources */,
+				6FCA9D2C145195A400004E12 /* _Customer.m in Sources */,
+				6FCA9D2F1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1508,6 +1565,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6FCA9D2D1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6FCA9D2E1451A0B500004E12 /* CoconutKitDemoData.xcdatamodel */,
+			);
+			currentVersion = 6FCA9D2E1451A0B500004E12 /* CoconutKitDemoData.xcdatamodel */;
+			path = CoconutKitDemoData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

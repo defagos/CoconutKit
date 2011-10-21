@@ -26,7 +26,12 @@
 - (id)init
 {
     if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
+        // Only one customer in the DB. If does not exist yet, create it
+        Customer *customer = [Customer customer];
+        if (! customer) {
+            customer = [Customer insert];
+        }
+        self.customer = customer;
     }
     return self;
 }
