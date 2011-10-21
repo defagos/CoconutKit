@@ -8,7 +8,8 @@
 
 #import "WizardDemoViewController.h"
 
-#import "MemoryWarningTestCoverViewController.h"
+#import "WizardAddressPageViewController.h"
+#import "WizardIdentityPageViewController.h"
 
 @implementation WizardDemoViewController
 
@@ -18,9 +19,24 @@
 {
     if ((self = [super initWithNibName:[self className] bundle:nil])) {
         self.delegate = self;
-        self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally;        
+        self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally; 
+        
+        WizardIdentityPageViewController *wizardIdentityPageController = [[[WizardIdentityPageViewController alloc] init] autorelease];
+        WizardAddressPageViewController *wizardAddressPageController = [[[WizardAddressPageViewController alloc] init] autorelease];
+        self.viewControllers = [NSArray arrayWithObjects:wizardIdentityPageController,
+                                                    wizardAddressPageController,
+                                                    nil];
     }
     return self;
+}
+
+#pragma mark View lifecycle
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HLSModelManager rollbackDefaultModelContext];
 }
 
 #pragma mark Orientation management
@@ -38,8 +54,13 @@
 
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestViewController animated:YES];
+    NSError *error = nil;
+    if (! [HLSModelManager saveDefaultModelContext:&error]) {
+        [HLSModelManager rollbackDefaultModelContext];
+        HLSLoggerError(@"Failed to save context; reason: %@", error);        
+    }
+            
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark Localization

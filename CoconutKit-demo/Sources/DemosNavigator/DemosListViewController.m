@@ -21,7 +21,6 @@
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
 #import "WizardDemoViewController.h"
-#import "WizardPageViewController.h"
 
 // Categories
 typedef enum {
@@ -407,15 +406,6 @@ typedef enum {
                     
                 case ViewControllersDemoIndexWizardViewController: {
                     demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
-                    WizardDemoViewController *wizardDemoViewController = (WizardDemoViewController*)demoViewController;
-                    
-                    WizardPageViewController *wizardPageViewController1 = [[[WizardPageViewController alloc] init] autorelease];
-                    WizardPageViewController *wizardPageViewController2 = [[[WizardPageViewController alloc] init] autorelease];
-                    WizardPageViewController *wizardPageViewController3 = [[[WizardPageViewController alloc] init] autorelease];
-                    wizardDemoViewController.viewControllers = [NSArray arrayWithObjects:wizardPageViewController1,
-                                                                wizardPageViewController2,
-                                                                wizardPageViewController3,
-                                                                nil];                    
                     break;
                 }
                     

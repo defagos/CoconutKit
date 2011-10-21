@@ -87,6 +87,8 @@
 		6FCA9D2B145195A400004E12 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D27145195A400004E12 /* Customer.m */; };
 		6FCA9D2C145195A400004E12 /* _Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D2A145195A400004E12 /* _Customer.m */; };
 		6FCA9D2F1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D2D1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld */; };
+		6FCA9D321451A46500004E12 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA9D311451A46400004E12 /* WizardAddressPageViewController.m */; };
+		6FCA9D341451A48100004E12 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCA9D331451A48000004E12 /* WizardAddressPageViewController.xib */; };
 		6FDB13041404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB126D1404D1C000469DEC /* Localizable.strings */; };
 		6FDB13051404D1C000469DEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12701404D1C000469DEC /* Localizable.strings */; };
 		6FDB13061404D1C000469DEC /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12741404D1C000469DEC /* ProximaNova-Bold.otf */; };
@@ -157,8 +159,8 @@
 		6FDB134B1404D1C000469DEC /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12F71404D1C000469DEC /* TableSearchDisplayDemoViewController.xib */; };
 		6FDB134D1404D1C000469DEC /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */; };
 		6FDB134E1404D1C000469DEC /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */; };
-		6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */; };
-		6FDB13501404D1C000469DEC /* WizardPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB13001404D1C000469DEC /* WizardPageViewController.xib */; };
+		6FDB134F1404D1C000469DEC /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB12FF1404D1C000469DEC /* WizardIdentityPageViewController.m */; };
+		6FDB13501404D1C000469DEC /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB13001404D1C000469DEC /* WizardIdentityPageViewController.xib */; };
 		6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB13031404D1C000469DEC /* DemosListViewController.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
@@ -316,6 +318,9 @@
 		6FCA9D29145195A400004E12 /* _Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Customer.h; sourceTree = "<group>"; };
 		6FCA9D2A145195A400004E12 /* _Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Customer.m; sourceTree = "<group>"; };
 		6FCA9D2E1451A0B500004E12 /* CoconutKitDemoData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitDemoData.xcdatamodel; sourceTree = "<group>"; };
+		6FCA9D301451A46300004E12 /* WizardAddressPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardAddressPageViewController.h; sourceTree = "<group>"; };
+		6FCA9D311451A46400004E12 /* WizardAddressPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardAddressPageViewController.m; sourceTree = "<group>"; };
+		6FCA9D331451A48000004E12 /* WizardAddressPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardAddressPageViewController.xib; sourceTree = "<group>"; };
 		6FDB126E1404D1C000469DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12711404D1C000469DEC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		6FDB12741404D1C000469DEC /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
@@ -419,9 +424,9 @@
 		6FDB12FB1404D1C000469DEC /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
 		6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
-		6FDB12FE1404D1C000469DEC /* WizardPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardPageViewController.h; sourceTree = "<group>"; };
-		6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardPageViewController.m; sourceTree = "<group>"; };
-		6FDB13001404D1C000469DEC /* WizardPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardPageViewController.xib; sourceTree = "<group>"; };
+		6FDB12FE1404D1C000469DEC /* WizardIdentityPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardIdentityPageViewController.h; sourceTree = "<group>"; };
+		6FDB12FF1404D1C000469DEC /* WizardIdentityPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardIdentityPageViewController.m; sourceTree = "<group>"; };
+		6FDB13001404D1C000469DEC /* WizardIdentityPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardIdentityPageViewController.xib; sourceTree = "<group>"; };
 		6FDB13021404D1C000469DEC /* DemosListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemosListViewController.h; sourceTree = "<group>"; };
 		6FDB13031404D1C000469DEC /* DemosListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemosListViewController.m; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1139,12 +1144,15 @@
 		6FDB12F81404D1C000469DEC /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				6FCA9D301451A46300004E12 /* WizardAddressPageViewController.h */,
+				6FCA9D311451A46400004E12 /* WizardAddressPageViewController.m */,
+				6FCA9D331451A48000004E12 /* WizardAddressPageViewController.xib */,
 				6FDB12FB1404D1C000469DEC /* WizardDemoViewController.h */,
 				6FDB12FC1404D1C000469DEC /* WizardDemoViewController.m */,
 				6FDB12FD1404D1C000469DEC /* WizardDemoViewController.xib */,
-				6FDB12FE1404D1C000469DEC /* WizardPageViewController.h */,
-				6FDB12FF1404D1C000469DEC /* WizardPageViewController.m */,
-				6FDB13001404D1C000469DEC /* WizardPageViewController.xib */,
+				6FDB12FE1404D1C000469DEC /* WizardIdentityPageViewController.h */,
+				6FDB12FF1404D1C000469DEC /* WizardIdentityPageViewController.m */,
+				6FDB13001404D1C000469DEC /* WizardIdentityPageViewController.xib */,
 			);
 			path = Wizard;
 			sourceTree = "<group>";
@@ -1293,7 +1301,7 @@
 				6FDB13481404D1C000469DEC /* StackDemoViewController.xib in Resources */,
 				6FDB134B1404D1C000469DEC /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6FDB134E1404D1C000469DEC /* WizardDemoViewController.xib in Resources */,
-				6FDB13501404D1C000469DEC /* WizardPageViewController.xib in Resources */,
+				6FDB13501404D1C000469DEC /* WizardIdentityPageViewController.xib in Resources */,
 				6FF935861406AB7A00649482 /* ActionSheetDemoViewController.xib in Resources */,
 				6FBF59AC1407E84000F7D5EE /* cell_bkgr_brown_large.png in Resources */,
 				6FBF59AD1407E84000F7D5EE /* cell_bkgr_brown_large_selected.png in Resources */,
@@ -1305,6 +1313,7 @@
 				6F3BC4F9144C609400685502 /* img_coconut2.jpg in Resources */,
 				6F3BC4FA144C609400685502 /* img_coconut3.jpg in Resources */,
 				6F3BC4FB144C609400685502 /* img_coconut4.jpg in Resources */,
+				6FCA9D341451A48100004E12 /* WizardAddressPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,7 +1421,7 @@
 				6FDB13491404D1C000469DEC /* DeviceInfo.m in Sources */,
 				6FDB134A1404D1C000469DEC /* TableSearchDisplayDemoViewController.m in Sources */,
 				6FDB134D1404D1C000469DEC /* WizardDemoViewController.m in Sources */,
-				6FDB134F1404D1C000469DEC /* WizardPageViewController.m in Sources */,
+				6FDB134F1404D1C000469DEC /* WizardIdentityPageViewController.m in Sources */,
 				6FDB13511404D1C000469DEC /* DemosListViewController.m in Sources */,
 				6FA74D3E140500090043693E /* UIView+HLSExtensions.m in Sources */,
 				6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */,
@@ -1426,6 +1435,7 @@
 				6FCA9D2B145195A400004E12 /* Customer.m in Sources */,
 				6FCA9D2C145195A400004E12 /* _Customer.m in Sources */,
 				6FCA9D2F1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld in Sources */,
+				6FCA9D321451A46500004E12 /* WizardAddressPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

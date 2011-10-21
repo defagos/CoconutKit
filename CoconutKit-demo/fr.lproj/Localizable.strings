@@ -8,7 +8,6 @@
 "Action sheet"="Menu action"; 
 "All"="Tous";
 "All fields are mandatory"="Tous les champs sont obligatoires";
-"All fields have been validated"="Tous les champs ont été validés";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
@@ -19,7 +18,6 @@
 "Choose"="Choisir";
 "City"="Ville";
 "Close"="Fermer";
-"Congratulations"="Félicitations";
 "Container customization"="Personnalisation conteneur";
 "Country"="Pays";
 "Cursor"="Curseur";
