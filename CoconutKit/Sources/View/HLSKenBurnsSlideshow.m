@@ -13,6 +13,7 @@
 
 static const NSTimeInterval kKenBurnsZoomDefaultDuration = 4.;
 static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
+static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @interface HLSKenBurnsSlideshow () <HLSAnimationDelegate>
 
@@ -52,16 +53,13 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
 
 - (void)hlsKenBurnsSlideshowInit
 {
-    self.clipsToBounds = YES;
-    
-    self.backgroundColor = [UIColor blackColor];
-    
-    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
     
     self.imageViews = [NSArray array];
     self.animations = [NSMutableArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
         UIImageView *imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         imageView.hidden = YES;
         [self addSubview:imageView];
         
@@ -130,54 +128,55 @@ static const NSTimeInterval kKenBurnsFadeDefaultDuration = 3.;
     
     UIImageView *imageView = [self.imageViews objectAtIndex:currentImageViewIndex];
     UIImage *image = [self.images objectAtIndex:m_currentImageIndex];
-    imageView.image = image;
-    imageView.clipsToBounds = NO;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;       // The calculation below targets this special case
-    imageView.alpha = 0.f;
     
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
-    // Aspect ratios of frame and image
-    CGFloat imageViewRatio = CGRectGetWidth(imageView.frame) / CGRectGetHeight(imageView.frame);
+    // Aspect ratios of frame and image view frame
+    CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
     CGFloat imageRatio = image.size.width / image.size.height;
     
-    // Calculate the scale which needs to be applied when the image is added to the image view with aspect fill content mode
+    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
     CGFloat zoomScale;
     // The image is more portrait-shaped than the image view
-    if (floatlt(imageRatio, imageViewRatio)) {
-        zoomScale = CGRectGetWidth(imageView.frame) / image.size.width;
+    if (floatlt(imageRatio, frameRatio)) {
+        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
     }
     // The image is more landscape-shaped than the image view
     else {
-        zoomScale = CGRectGetHeight(imageView.frame) / image.size.height;
+        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
     }
     
-    // Calculate the image size
-    CGFloat resizedImageWidth = image.size.width * zoomScale;
-    CGFloat resizedImageHeight = image.size.height * zoomScale;
+    // Update the image view accordingly
+    CGFloat scaledImageWidth = image.size.width * zoomScale;
+    CGFloat scaledImageHeight = image.size.height * zoomScale;
+    imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
+    imageView.center = CGPointMake(roundf(CGRectGetWidth(self.frame) / 2.f), roundf(CGRectGetHeight(self.frame) / 2.f));
+    imageView.image = image;
+    imageView.alpha = 0.f;
     
-    // Pick up a random initial scale factor. Must be >= 1, and not too large (1.4 should be sufficient)
-    CGFloat scaleFactor = 1.f + 0.4f * (arc4random() % 1000) / 1000.f;
+    // Pick up a random initial scale factor. Must be >= 1, and not too large (1.4 should be sufficient). Use random
+    // factor in [0;1]
+    CGFloat scaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
     
     // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
     // scale factor so that the image still covers the whole view
-    CGFloat maxXOffset = (scaleFactor * resizedImageWidth - CGRectGetWidth(imageView.frame)) / 4.f;     // should be / 2.f theoretically, but was not perfect
-    CGFloat maxYOffset = (scaleFactor * resizedImageHeight - CGRectGetHeight(imageView.frame)) / 4.f;   // should be / 2.f theoretically, but was not perfect
+    CGFloat maxXOffset = (scaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
+    CGFloat maxYOffset = (scaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
     
-    // Pick up some random offsets
-    CGFloat xOffset = (arc4random() % 1000) / 1000.f * maxXOffset;
-    CGFloat yOffset = (arc4random() % 1000) / 1000.f * maxYOffset;
+    // Pick up some random offsets. Use random factor in [-1;1]
+    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
+    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
     
     // Apply initial transform
     imageView.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleFactor, scaleFactor),
                                                   CGAffineTransformMakeTranslation(xOffset, yOffset));
     
     // Pick up random scale factor to reach during the animation
-    CGFloat finalScaleFactor = 1.f + 0.4f * (arc4random() % 1000) / 1000.f;
-    CGFloat maxFinalXOffset = (finalScaleFactor * resizedImageWidth - CGRectGetWidth(imageView.frame)) / 4.f;     // should be / 2.f theoretically, but was not perfect
-    CGFloat maxFinalYOffset = (finalScaleFactor * resizedImageHeight - CGRectGetHeight(imageView.frame)) / 4.f;   // should be / 2.f theoretically, but was not perfect
-    CGFloat finalXOffset = (arc4random() % 1000) / 1000.f * maxFinalXOffset;
-    CGFloat finalYOffset = (arc4random() % 1000) / 1000.f * maxFinalYOffset;
+    CGFloat finalScaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat maxFinalXOffset = (finalScaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
+    CGFloat maxFinalYOffset = (finalScaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
+    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
+    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
     
     // Create the corresponding animation
     HLSAnimation *animation = [self animationForImageView:imageView 
