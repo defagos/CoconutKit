@@ -21,7 +21,7 @@
     NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
     NSArray *m_images;
     NSMutableArray *m_animations;               // Two animations in parallel (at most)
-    BOOL m_animating;
+    BOOL m_running;
     NSInteger m_currentImageIndex;
     NSInteger m_currentImageViewIndex;
     NSTimeInterval m_imageDuration;

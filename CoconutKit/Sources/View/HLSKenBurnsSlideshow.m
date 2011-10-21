@@ -94,6 +94,21 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @synthesize images = m_images;
 
+- (void)setImages:(NSArray *)images
+{    
+    if (m_running) {
+        HLSLoggerWarn(@"Cannot add an image while the animation is running");
+        return;
+    }
+    
+    if (m_images == images) {
+        return;
+    }
+    
+    [m_images release];
+    m_images = [images retain];
+}
+
 @synthesize animations = m_animations;
 
 @synthesize imageDuration = m_imageDuration;
@@ -127,18 +142,6 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @synthesize random = m_random;
 
-#pragma mark Loading images
-
-- (void)addImage:(UIImage *)image
-{
-    if (m_animating) {
-        HLSLoggerWarn(@"Cannot add an image while the animation is running");
-        return;
-    }
-    
-    self.images = [self.images arrayByAddingObject:image];
-}
-
 #pragma mark Playing the slideshow
 
 - (void)play
@@ -147,6 +150,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         HLSLoggerInfo(@"No images loaded. Nothing to animate");
         return;
     }
+    
+    m_running = YES;
     
     for (UIImageView *imageView in self.imageViews) {
         imageView.hidden = NO;
@@ -236,6 +241,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     for (HLSAnimation *animation in self.animations) {
         [animation cancel];
     }
+    
+    m_running = NO;
 }
 
 #pragma mark Creating the animation
