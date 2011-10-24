@@ -59,7 +59,7 @@
 
 - (BOOL)checkForConsistency:(NSError **)pError
 {
-    return NO;
+    return YES;
 }
 
 @end

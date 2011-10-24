@@ -168,6 +168,8 @@ static BOOL validateObject(id self, SEL sel, NSError **pError);
 
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
 {
+    // TODO: respondsToSelector test not needed? Can just test checkImp?
+    
     // Try to locate a check method. If none is found, the value is always valid
     NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
     NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
@@ -196,8 +198,26 @@ static BOOL validateForDelete(id self, SEL sel, NSError **pError)
 
 static BOOL validateObject(id self, SEL sel, NSError **pError)
 {
-    BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation([self class], sel);
-    return (*checkImp)(self, sel, pError);
+    BOOL valid = YES;
     
-    // TODO: Chain errors with those stemming from super (to be called first)
+    // TODO: Chain errors
+    BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation([self class], sel);
+    if (! (*checkImp)(self, sel, pError)) {
+        valid = NO;
+    }
+    
+    // Loop other the parent classes and perform global validation for them too
+    Class superclass = class_getSuperclass([self class]);
+    while (superclass != [NSObject class]) {
+        // Avoid calling the same method implementation twice
+        BOOL (*superCheckImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(superclass, sel);
+        if (superCheckImp && checkImp != superCheckImp) {
+            if (! (*superCheckImp)(self, sel, pError)) {
+                valid = NO;
+            }
+        }
+        superclass = class_getSuperclass(superclass);
+    }
+    
+    return valid;
 }
