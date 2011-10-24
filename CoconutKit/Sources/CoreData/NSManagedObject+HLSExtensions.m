@@ -128,6 +128,18 @@ static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError);
 
 static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError)
 {
-    NSLog(@"Called!");
-    return YES;
+    // Try to locate a check method. If none is found, the value is always valid
+    NSString *selectorName = [NSString stringWithCString:(char *)cmd encoding:NSUTF8StringEncoding];
+    NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
+    SEL checkSelector = NSSelectorFromString(checkSelectorName);
+    if (! [self respondsToSelector:checkSelector]) {
+        return YES;
+    }
+    
+    // Call the check method
+    id value = pValue ? *pValue : nil;
+    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))class_getMethodImplementation([self class], checkSelector);
+    return (*checkImp)(self, checkSelector, value, pError);
+    
+    // TODO: Chain errors
 }
