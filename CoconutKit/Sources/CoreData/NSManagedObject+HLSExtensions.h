@@ -6,6 +6,12 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+/**
+ * TODO: Document:
+ *   - naming scheme
+ *   - never need to call [super check...] (unlike validate... methods). Is fre
+ *   - only one single method for consistency check during updates / inserts
+ */
 @interface NSManagedObject (HLSExtensions)
 
 + (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
@@ -23,5 +29,8 @@
 
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjects;
+
+- (BOOL)checkForConsistency:(NSError **)pError;
+- (BOOL)checkForDelete:(NSError **)pError;
 
 @end

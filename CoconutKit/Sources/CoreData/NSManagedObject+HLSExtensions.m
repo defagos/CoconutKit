@@ -14,7 +14,10 @@
 
 #import <objc/runtime.h>
 
-static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError);
+static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
+static BOOL validateForConsistency(id self, SEL sel, NSError **pError);
+static BOOL validateForDelete(id self, SEL sel, NSError **pError);
+static BOOL validateObject(id self, SEL sel, NSError **pError);
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -81,6 +84,18 @@ static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError);
     return [self allObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
 }
 
+#pragma mark Global validation method stubs
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    return YES;
+}
+
+- (BOOL)checkForDelete:(NSError **)pError
+{
+    return YES;
+}
+
 @end
 
 @implementation NSManagedObject (HLSExtensionsPrivate)
@@ -92,6 +107,7 @@ static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError);
     
     unsigned int numberOfProperties = 0;
     objc_property_t *properties = class_copyPropertyList(self, &numberOfProperties);
+    BOOL added = NO;
     for (unsigned int i = 0; i < numberOfProperties; ++i) {
         objc_property_t property = properties[i];
         
@@ -114,32 +130,74 @@ static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError);
                               NSSelectorFromString(validationSelectorName),         // Remark: (SEL)[validationSelectorName cStringUsingEncoding:NSUTF8StringEncoding] does NOT work (returns YES, but IMP does not get called)
                               (IMP)validateProperty, 
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
-            HLSLoggerError(@"Failed to add validation method dynamically");
+            HLSLoggerError(@"Failed to add %@ method dynamically", validationSelectorName);
             continue;
         }
         
         HLSLoggerDebug(@"Automatically added validation wrapper %@ on class %@", validationSelectorName, self);
+        
+        added = YES;
     }
-    
     free(properties);
+    
+    // If a validation method was injected, we must also inject global validations
+    if (added) {
+        NSString *types = [NSString stringWithFormat:@"%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(id *)];
+        if (! class_addMethod(self, 
+                              @selector(validateForInsert:), 
+                              (IMP)validateForConsistency,
+                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+            HLSLoggerError(@"Failed to add validateForInsert: method dynamically");
+        }
+        if (! class_addMethod(self, 
+                              @selector(validateForUpdate:), 
+                              (IMP)validateForConsistency,
+                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+            HLSLoggerError(@"Failed to add validateForUpdate: method dynamically");
+        }        
+        if (! class_addMethod(self, 
+                              @selector(validateForDelete:), 
+                              (IMP)validateForDelete,
+                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+            HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
+        }
+    }
 }
 
 @end
 
-static BOOL validateProperty(id self, SEL cmd, id *pValue, NSError **pError)
+static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
 {
     // Try to locate a check method. If none is found, the value is always valid
-    NSString *selectorName = [NSString stringWithCString:(char *)cmd encoding:NSUTF8StringEncoding];
+    NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
     NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
-    SEL checkSelector = NSSelectorFromString(checkSelectorName);
-    if (! [self respondsToSelector:checkSelector]) {
+    SEL checkSel = NSSelectorFromString(checkSelectorName);
+    if (! [self respondsToSelector:checkSel]) {
         return YES;
     }
     
     // Call the check method
     id value = pValue ? *pValue : nil;
-    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))class_getMethodImplementation([self class], checkSelector);
-    return (*checkImp)(self, checkSelector, value, pError);
+    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))class_getMethodImplementation([self class], checkSel);
+    return (*checkImp)(self, checkSel, value, pError);
     
-    // TODO: Chain errors
+    // TODO: Chain errors; Core Data namely performs all validations, even if one fails, when the object is saved
+}
+
+static BOOL validateForConsistency(id self, SEL sel, NSError **pError)
+{
+    return validateObject(self, @selector(checkForConsistency:), pError);
+}
+
+static BOOL validateForDelete(id self, SEL sel, NSError **pError)
+{
+    return validateObject(self, @selector(checkForDelete:), pError);
+}
+
+static BOOL validateObject(id self, SEL sel, NSError **pError)
+{
+    BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation([self class], sel);
+    return (*checkImp)(self, sel, pError);
+    
+    // TODO: Chain errors with those stemming from super (to be called first)
 }

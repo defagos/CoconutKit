@@ -18,7 +18,7 @@
     return [customers firstObject];
 }
 
-#pragma mark Validation methods
+#pragma mark Individudal validation methods
 
 - (BOOL)checkFirstName:(NSString *)firstName error:(NSError **)pError
 {
@@ -53,6 +53,13 @@
 - (BOOL)checkCountry:(NSString *)country error:(NSError **)pError
 {
     return [country length] != 0;
+}
+
+#pragma mark Global validation methods
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    return NO;
 }
 
 @end
