@@ -9,8 +9,9 @@
 /**
  * TODO: Document:
  *   - naming scheme
- *   - never need to call [super check...] (unlike validate... methods). Is fre
+ *   - never need to call [super check...] (unlike validate... methods). Extremely error-prone if forgotten
  *   - only one single method for consistency check during updates / inserts
+ *   - probable: Validation settings set in the data model file are ignored. Not bad after all: Better to have it in code
  */
 @interface NSManagedObject (HLSExtensions)
 

@@ -10,6 +10,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F1A5B481455F22500474EAB /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5B471455F22500474EAB /* Person.m */; };
+		6F1A5B4C1455F22F00474EAB /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5B4B1455F22F00474EAB /* _Person.m */; };
 		6F1AF83E142B031000925B7A /* HLSStretchingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF83D142B031000925B7A /* HLSStretchingContainerView.m */; };
 		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
 		6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */; };
@@ -175,6 +177,10 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F133FF913FBB79300B53677 /* HLSManagedObjectCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectCopying.h; sourceTree = "<group>"; };
+		6F1A5B461455F22500474EAB /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6F1A5B471455F22500474EAB /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6F1A5B4A1455F22F00474EAB /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
+		6F1A5B4B1455F22F00474EAB /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
 		6F1AF83C142B031000925B7A /* HLSStretchingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStretchingContainerView.h; sourceTree = "<group>"; };
 		6F1AF83D142B031000925B7A /* HLSStretchingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStretchingContainerView.m; sourceTree = "<group>"; };
 		6F1C649214061273006F63FC /* HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSActionSheet.h; sourceTree = "<group>"; };
@@ -752,6 +758,8 @@
 			children = (
 				6FCA9D26145195A400004E12 /* Customer.h */,
 				6FCA9D27145195A400004E12 /* Customer.m */,
+				6F1A5B461455F22500474EAB /* Person.h */,
+				6F1A5B471455F22500474EAB /* Person.m */,
 				6FCA9D28145195A400004E12 /* Generated */,
 			);
 			path = Models;
@@ -762,6 +770,8 @@
 			children = (
 				6FCA9D29145195A400004E12 /* _Customer.h */,
 				6FCA9D2A145195A400004E12 /* _Customer.m */,
+				6F1A5B4A1455F22F00474EAB /* _Person.h */,
+				6F1A5B4B1455F22F00474EAB /* _Person.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -1436,6 +1446,8 @@
 				6FCA9D2C145195A400004E12 /* _Customer.m in Sources */,
 				6FCA9D2F1451A0B500004E12 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FCA9D321451A46500004E12 /* WizardAddressPageViewController.m in Sources */,
+				6F1A5B481455F22500474EAB /* Person.m in Sources */,
+				6F1A5B4C1455F22F00474EAB /* _Person.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

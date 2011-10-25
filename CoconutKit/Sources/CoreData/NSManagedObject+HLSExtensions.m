@@ -14,10 +14,11 @@
 
 #import <objc/runtime.h>
 
+static SEL checkSelectorForValidationSelector(SEL sel);
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
-static BOOL validateForConsistency(id self, SEL sel, NSError **pError);
+static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
+static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
 static BOOL validateForDelete(id self, SEL sel, NSError **pError);
-static BOOL validateObject(id self, SEL sel, NSError **pError);
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -145,19 +146,19 @@ static BOOL validateObject(id self, SEL sel, NSError **pError);
         NSString *types = [NSString stringWithFormat:@"%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(id *)];
         if (! class_addMethod(self, 
                               @selector(validateForInsert:), 
-                              (IMP)validateForConsistency,
+                              (IMP)validateObjectConsistency,
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
             HLSLoggerError(@"Failed to add validateForInsert: method dynamically");
         }
         if (! class_addMethod(self, 
                               @selector(validateForUpdate:), 
-                              (IMP)validateForConsistency,
+                              (IMP)validateObjectConsistency,
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
             HLSLoggerError(@"Failed to add validateForUpdate: method dynamically");
         }        
         if (! class_addMethod(self, 
                               @selector(validateForDelete:), 
-                              (IMP)validateForDelete,
+                              (IMP)validateObjectConsistency,
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
@@ -166,58 +167,91 @@ static BOOL validateObject(id self, SEL sel, NSError **pError);
 
 @end
 
-static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
+/**
+ * Return the check selector associated with a validation selector
+ */
+static SEL checkSelectorForValidationSelector(SEL sel)
 {
-    // TODO: respondsToSelector test not needed? Can just test checkImp?
-    
-    // Try to locate a check method. If none is found, the value is always valid
+    // The check method bears the same name as the validation method, but beginning with "check"
     NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
     NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
-    SEL checkSel = NSSelectorFromString(checkSelectorName);
-    if (! [self respondsToSelector:checkSel]) {
+    return  NSSelectorFromString(checkSelectorName);
+}
+
+/**
+ * Implementation common to all injected single validation methods (validate<FieldName>:error:)
+ *
+ * This implementation calls the underlying check method and performs Core Data error chaining
+ */
+static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
+{
+    // TODO: Chain errors; Core Data namely performs all validations, even if one fails, when the object is saved
+        
+    // If the method does not exist, valid
+    SEL checkSel = checkSelectorForValidationSelector(sel);
+    Method method = class_getInstanceMethod([self class], checkSel);
+    if (! method) {
         return YES;
     }
     
     // Call the check method
     id value = pValue ? *pValue : nil;
-    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))class_getMethodImplementation([self class], checkSel);
+    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))method_getImplementation(method);
     return (*checkImp)(self, checkSel, value, pError);
-    
-    // TODO: Chain errors; Core Data namely performs all validations, even if one fails, when the object is saved
 }
 
-static BOOL validateForConsistency(id self, SEL sel, NSError **pError)
+/**
+ * Implementation common to all injected global validation methods:
+ *   -[NSManagedObject validateForInsert:]
+ *   -[NSManagedObject validateForUpdate:]
+ *   -[NSManagedObject validateForDelete:]
+ *
+ * This implementation calls the underlying check methods, performs Core Data error chaining, and ensures that these methods 
+ * get consistently called along the inheritance hierarchy. This is strongly recommended by the Core Data documentation, and
+ * in fact failing to do so leads to undefined behavior: The -[NSManagedObject validateForUpdate:] and 
+ * -[NSManagedObject validateForInsert:] methods are namely where individual validations are called! If those were not
+ * called, individual validations would not be called either!
+ */
+static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError)
 {
-    return validateObject(self, @selector(checkForConsistency:), pError);
+    return validateObjectConsistencyInClassHierarchy(self, [self class], sel, pError);
 }
 
-static BOOL validateForDelete(id self, SEL sel, NSError **pError)
-{
-    return validateObject(self, @selector(checkForDelete:), pError);
-}
-
-static BOOL validateObject(id self, SEL sel, NSError **pError)
-{
-    BOOL valid = YES;
-    
+/**
+ * Validate the consistency of self, applying to it the sel defined for the class given as parameter. This methods can
+ * therefore be used to check global object consistency at all levels of the managed object inheritance hierarchy
+ */
+static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError)
+{    
     // TODO: Chain errors
-    BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation([self class], sel);
-    if (! (*checkImp)(self, sel, pError)) {
-        valid = NO;
-    }
     
-    // Loop other the parent classes and perform global validation for them too
-    Class superclass = class_getSuperclass([self class]);
-    while (superclass != [NSObject class]) {
-        // Avoid calling the same method implementation twice
-        BOOL (*superCheckImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(superclass, sel);
-        if (superCheckImp && checkImp != superCheckImp) {
-            if (! (*superCheckImp)(self, sel, pError)) {
-                valid = NO;
-            }
+    if (class == [NSManagedObject class]) {
+        // These implementations exist, no need to test if respondsToSelector:
+        BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
+        return (*imp)(self, sel, pError);
+    }
+    else {
+        // Climb up the inheritance hierarchy
+        BOOL valid = YES;
+        if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, pError)) {
+            valid = NO;
         }
-        superclass = class_getSuperclass(superclass);
+        
+        // If no check method has been defined at this level, valid (i.e. does not alter the above
+        // validation status)
+        SEL checkSel = checkSelectorForValidationSelector(sel);
+        Method method = class_getInstanceMethod(class, checkSel);
+        if (! method) {
+            return valid;
+        }
+        
+        // Call the underlying check method implementation
+        BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))method_getImplementation(method);
+        if (! (*checkImp)(self, checkSel, pError)) {
+            return NO;
+        }
+        
+        return valid;
     }
-    
-    return valid;
 }
+

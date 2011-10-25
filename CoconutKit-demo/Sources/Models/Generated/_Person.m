@@ -1,29 +1,29 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Customer.m instead.
+// Make changes to Person.m instead.
 
-#import "_Customer.h"
+#import "_Person.h"
 
-@implementation CustomerID
+@implementation PersonID
 @end
 
-@implementation _Customer
+@implementation _Person
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Customer" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"Customer";
+	return @"Person";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Customer" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"Person" inManagedObjectContext:moc_];
 }
 
-- (CustomerID*)objectID {
-	return (CustomerID*)[super objectID];
+- (PersonID*)objectID {
+	return (PersonID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
@@ -36,35 +36,14 @@
 
 
 
-@dynamic city;
+@dynamic firstName;
 
 
 
 
 
 
-@dynamic country;
-
-
-
-
-
-
-@dynamic email;
-
-
-
-
-
-
-@dynamic state;
-
-
-
-
-
-
-@dynamic street;
+@dynamic lastName;
 
 
 

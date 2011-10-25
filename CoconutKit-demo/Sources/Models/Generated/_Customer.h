@@ -2,9 +2,7 @@
 // Make changes to Customer.h instead.
 
 #import <CoreData/CoreData.h>
-
-
-
+#import "Person.h"
 
 
 
@@ -16,7 +14,7 @@
 @interface CustomerID : NSManagedObjectID {}
 @end
 
-@interface _Customer : NSManagedObject {}
+@interface _Customer : Person {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -45,22 +43,6 @@
 
 
 //- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, retain) NSString *firstName;
-
-
-//- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, retain) NSString *lastName;
-
-
-//- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -105,18 +87,6 @@
 
 - (NSString*)primitiveEmail;
 - (void)setPrimitiveEmail:(NSString*)value;
-
-
-
-
-- (NSString*)primitiveFirstName;
-- (void)setPrimitiveFirstName:(NSString*)value;
-
-
-
-
-- (NSString*)primitiveLastName;
-- (void)setPrimitiveLastName:(NSString*)value;
 
 
 
