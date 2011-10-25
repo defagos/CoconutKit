@@ -14,4 +14,11 @@
     return [lastName length] != 0;
 }
 
+#pragma mark Global validation methods
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    return YES;
+}
+
 @end

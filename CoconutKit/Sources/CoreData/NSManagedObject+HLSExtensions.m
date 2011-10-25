@@ -14,11 +14,11 @@
 
 #import <objc/runtime.h>
 
+static Method instanceMethodOnClass(Class class, SEL sel);
 static SEL checkSelectorForValidationSelector(SEL sel);
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
 static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
-static BOOL validateForDelete(id self, SEL sel, NSError **pError);
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -167,16 +167,43 @@ static BOOL validateForDelete(id self, SEL sel, NSError **pError);
 
 @end
 
+#pragma mark Utility functions
+
+/**
+ * Given a class and a selector, returns the underlying method iff it is implemented by this class. Unlike
+ * class_getInstanceMethod, this method returns NULL if a parent class implements the method
+ */
+static Method instanceMethodOnClass(Class class, SEL sel)
+{
+    unsigned int numberOfMethods = 0;
+    Method *methods = class_copyMethodList(class, &numberOfMethods);
+    for (unsigned int i = 0; i < numberOfMethods; ++i) {
+        Method method = methods[i];
+        if (method_getName(method) == sel) {
+            return method;
+        }
+    }
+    return NULL;
+}
+
 /**
  * Return the check selector associated with a validation selector
  */
 static SEL checkSelectorForValidationSelector(SEL sel)
 {
-    // The check method bears the same name as the validation method, but beginning with "check"
+    // Special cases of global validation for insert / update: One common method since always identical
     NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
-    NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
-    return  NSSelectorFromString(checkSelectorName);
+    if ([selectorName isEqual:@"validateForInsert:"] || [selectorName isEqual:@"validateForUpdate:"]) {
+        return NSSelectorFromString(@"checkForConsistency:");
+    }
+    // In all other cases, the check method bears the same name as the validation method, but beginning with "check"
+    else {
+        NSString *checkSelectorName = [selectorName stringByReplacingOccurrencesOfString:@"validate" withString:@"check"];
+        return  NSSelectorFromString(checkSelectorName);
+    }    
 }
+
+#pragma mark Injected validations
 
 /**
  * Implementation common to all injected single validation methods (validate<FieldName>:error:)
@@ -186,7 +213,7 @@ static SEL checkSelectorForValidationSelector(SEL sel)
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
 {
     // TODO: Chain errors; Core Data namely performs all validations, even if one fails, when the object is saved
-        
+    
     // If the method does not exist, valid
     SEL checkSel = checkSelectorForValidationSelector(sel);
     Method method = class_getInstanceMethod([self class], checkSel);
@@ -226,7 +253,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     // TODO: Chain errors
     
     if (class == [NSManagedObject class]) {
-        // These implementations exist, no need to test if respondsToSelector:
+        // These implementations exist, no need to test if responding to selector
         BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
         return (*imp)(self, sel, pError);
     }
@@ -237,10 +264,10 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             valid = NO;
         }
         
-        // If no check method has been defined at this level, valid (i.e. does not alter the above
+        // If no check method has been defined at this class hierarchy level, valid (i.e. does not alter the above
         // validation status)
         SEL checkSel = checkSelectorForValidationSelector(sel);
-        Method method = class_getInstanceMethod(class, checkSel);
+        Method method = instanceMethodOnClass(class, checkSel);
         if (! method) {
             return valid;
         }
