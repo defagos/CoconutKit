@@ -10,8 +10,11 @@
  * TODO: Document:
  *   - naming scheme
  *   - never need to call [super check...] (unlike validate... methods). Extremely error-prone if forgotten
- *   - only one single method for consistency check during updates / inserts
- *   - probable: Validation settings set in the data model file are ignored. Not bad after all: Better to have it in code
+ *   - only one single method for consistency check during updates / inserts (checkForConsistency:)
+ *   - no more inout parameter for value to validate. As said in the Core Data doc, changing the value could lead
+ *     to potentially serious memory management issues
+ *   - never call validations defined in the model object. Call the validate method provided below (which takes
+ *     into account validations defined in the xcdatamodel)
  */
 @interface NSManagedObject (HLSExtensions)
 
@@ -30,6 +33,8 @@
 
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjects;
+
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 
 - (BOOL)checkForConsistency:(NSError **)pError;
 - (BOOL)checkForDelete:(NSError **)pError;

@@ -8,17 +8,23 @@
 
 #import "NSManagedObject+HLSExtensions.h"
 
+#import "HLSError.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
+#import "NSDictionary+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 #import <objc/runtime.h>
+
+static NSString * const kManagedObjectMulitpleValidationError = @"kManagedObjectMulitpleValidationError";
 
 static Method instanceMethodOnClass(Class class, SEL sel);
 static SEL checkSelectorForValidationSelector(SEL sel);
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
 static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
+
+static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -163,6 +169,23 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
     }
+    
+    // To be done only once
+    if (self == [NSManagedObject class]) {
+        [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
+                               domain:@"ch.hortis.coconutkit" 
+                 localizedDescription:NSLocalizedString(@"Multiple validation errors", @"Multiple validation errors")
+                        forIdentifier:kManagedObjectMulitpleValidationError];
+    }
+}
+
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
+{
+    // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
+    //         that any validation logic in the xcdatamodel is also triggered
+    //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
+    // (remark: also deals with &nil)
+    return [self validateValue:&value forKey:key error:pError];
 }
 
 @end
@@ -203,7 +226,7 @@ static SEL checkSelectorForValidationSelector(SEL sel)
     }    
 }
 
-#pragma mark Injected validations
+#pragma mark Validation
 
 /**
  * Implementation common to all injected single validation methods (validate<FieldName>:error:)
@@ -282,3 +305,45 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }
 }
 
+#pragma mark Combining Core Data errors correctly
+
+/**
+ * Combine a new error with an existing error. This function implements the approach recommended in the Core Data
+ * programming guide, see http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
+ */
+static void combineErrors(NSError *newError, NSError **pExistingError)
+{
+    // If no new error, nothing to do
+    if (! newError) {
+        return;
+    }
+    
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return;
+    }
+    
+    // An existing error is already available. Combine as multiple error
+    if (*pExistingError) {
+        // Already a multiple error. Add error to the list (this can only be done cleanly by creating a new error)
+        NSDictionary *userInfo = nil;
+        if ([*pExistingError code] == NSValidationMultipleErrorsError) {
+            userInfo = [*pExistingError userInfo];
+            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+            errors = [errors arrayByAddingObject:newError];
+            userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
+        }
+        // Not a multiple error yet. Combine into a multiple error
+        else {
+            NSArray *errors = [NSArray arrayWithObjects:*pExistingError, newError, nil];
+            userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
+        }
+        *pExistingError = [HLSError errorFromIdentifier:kManagedObjectMulitpleValidationError
+                                               userInfo:userInfo];                               
+
+    }
+    // No error yet, just use the new error
+    else {
+        *pExistingError = newError;
+    }
+}
