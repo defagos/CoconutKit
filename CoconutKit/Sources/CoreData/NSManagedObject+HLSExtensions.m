@@ -8,13 +8,20 @@
 
 #import "NSManagedObject+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
 #import "HLSError.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
+#import "HLSRuntime.h"
 #import "NSDictionary+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 #import <objc/runtime.h>
+
+HLSLinkCategory(NSManagedObject_HLSExtensions)
+
+// Original implementation of the methods we swizzle
+static void (*s_NSManagedObject_HLSExtensions__initialize_Imp)(id, SEL) = NULL;
 
 static NSString * const kManagedObjectMulitpleValidationError = @"kManagedObjectMulitpleValidationError";
 
@@ -25,6 +32,12 @@ static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
 
 static void combineErrors(NSError *newError, NSError **pOriginalError);
+
+@interface NSManagedObject (HLSExtensionsPrivate)
+
++ (void)swizzledInitialize;
+
+@end
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -91,6 +104,17 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     return [self allObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
 }
 
+#pragma mark Checking if a value is correct for a specific field
+
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
+{
+    // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
+    //         that any validation logic in the xcdatamodel is also triggered
+    //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
+    // (remark: also deals with &nil)
+    return [self validateValue:&value forKey:key error:pError];
+}
+
 #pragma mark Global validation method stubs
 
 - (BOOL)checkForConsistency:(NSError **)pError
@@ -107,8 +131,41 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 @implementation NSManagedObject (HLSExtensionsPrivate)
 
-+ (void)initialize
++ (void)load
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    s_NSManagedObject_HLSExtensions__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector([NSManagedObject class], @selector(initialize), @selector(swizzledInitialize));
+    
+    [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
+                           domain:@"ch.hortis.CoconutKit" 
+             localizedDescription:NSLocalizedString(@"Multiple validation errors", @"Multiple validation errors")
+                    forIdentifier:kManagedObjectMulitpleValidationError];
+    
+    [pool drain];
+}
+
+// TODO: Check if a validation method already exists when trying to replace it with the wrapper
+
+/**
+ * Inject validation wrappers into managed object classes automagically.
+ *
+ * Registering validation wrappers in +load is not an option, because the load method is executed once. Since we need to inject
+ * code in each model object class, we must do it in +initialize since this methos will be called for each subclass. We could
+ * have implemented +load to run over all classes, finding out which ones are managed object classes, then injecting validation
+ * wrappers, but swizzling +initialize is conceptually better: It namely would behave well if classes were also added at runtime
+ * (this would not be the case with +load which would already have been executed in such cases)
+ *
+ * Note that we cannot have an +initialize method in a category (it would prevent any +initialize method defined on the class from 
+ * being called, and here there exists such a method on NSManagedObject; it is also extremely important to call it, otherwise the Core
+ * Data runtime will be incomplete and silly crashes will occur). We therefore must swizzle the existing +initialize method instead
+ * and call the existing implementation first.
+ */
++ (void)swizzledInitialize
+{
+    // Call swizzled implementation
+    (*s_NSManagedObject_HLSExtensions__initialize_Imp)([NSManagedObject class], @selector(initialize));
+        
     // No class identity test here. This must be executed for all objects in the hierarchy rooted at NSManagedObject, so that we can
     // locate the @dynamic properties we are interested in (those which need validation)
     
@@ -168,24 +225,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
-    }
-    
-    // To be done only once
-    if (self == [NSManagedObject class]) {
-        [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
-                               domain:@"ch.hortis.coconutkit" 
-                 localizedDescription:NSLocalizedString(@"Multiple validation errors", @"Multiple validation errors")
-                        forIdentifier:kManagedObjectMulitpleValidationError];
-    }
-}
-
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
-{
-    // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
-    //         that any validation logic in the xcdatamodel is also triggered
-    //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
-    // (remark: also deals with &nil)
-    return [self validateValue:&value forKey:key error:pError];
+    }    
 }
 
 @end
@@ -228,6 +268,8 @@ static SEL checkSelectorForValidationSelector(SEL sel)
 
 #pragma mark Validation
 
+// TODO: check methods: Chain errors iff return value is NO. Warn if an error has been returned with YES as validation status
+
 /**
  * Implementation common to all injected single validation methods (validate<FieldName>:error:)
  *
@@ -235,8 +277,6 @@ static SEL checkSelectorForValidationSelector(SEL sel)
  */
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
 {
-    // TODO: Chain errors; Core Data namely performs all validations, even if one fails, when the object is saved
-    
     // If the method does not exist, valid
     SEL checkSel = checkSelectorForValidationSelector(sel);
     Method method = class_getInstanceMethod([self class], checkSel);
@@ -244,10 +284,18 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
         return YES;
     }
     
-    // Call the check method
+    // Get the check method
     id value = pValue ? *pValue : nil;
     BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))method_getImplementation(method);
-    return (*checkImp)(self, checkSel, value, pError);
+    
+    // Check
+    NSError *newError = nil;
+    BOOL valid = (*checkImp)(self, checkSel, value, &newError);
+    
+    // Combine errors
+    combineErrors(newError, pError);
+    
+    return valid;
 }
 
 /**
@@ -272,22 +320,32 @@ static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError)
  * therefore be used to check global object consistency at all levels of the managed object inheritance hierarchy
  */
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError)
-{    
-    // TODO: Chain errors
-    
+{
+    BOOL valid = YES;
     if (class == [NSManagedObject class]) {
-        // These implementations exist, no need to test if responding to selector
+        // Get the validation method. These implementations exist, no need to test if responding to selector
         BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
-        return (*imp)(self, sel, pError);
+        
+        // Validate. This is where individual validations are triggered
+        NSError *newError = nil;
+        valid = (*imp)(self, sel, &newError);
+        
+        // Combine errors
+        combineErrors(newError, pError);
+        
+        return valid;
     }
     else {
         // Climb up the inheritance hierarchy
-        BOOL valid = YES;
-        if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, pError)) {
+        NSError *newError = nil;
+        if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
             valid = NO;
         }
         
-        // If no check method has been defined at this class hierarchy level, valid (i.e. does not alter the above
+        // Combine errors
+        combineErrors(newError, pError);
+        
+        // If no check method has been defined at this class hierarchy level, valid (i.e. we do not alter the above
         // validation status)
         SEL checkSel = checkSelectorForValidationSelector(sel);
         Method method = instanceMethodOnClass(class, checkSel);
@@ -295,14 +353,18 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             return valid;
         }
         
-        // Call the underlying check method implementation
+        // A check method has been found. Call the underlying check method implementation
         BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))method_getImplementation(method);
-        if (! (*checkImp)(self, checkSel, pError)) {
-            return NO;
+        newError = nil;
+        if (! (*checkImp)(self, checkSel, &newError)) {
+            valid = NO;
         }
         
-        return valid;
+        // Combine errors
+        combineErrors(newError, pError);
     }
+    
+    return valid;
 }
 
 #pragma mark Combining Core Data errors correctly
@@ -339,8 +401,7 @@ static void combineErrors(NSError *newError, NSError **pExistingError)
             userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
         }
         *pExistingError = [HLSError errorFromIdentifier:kManagedObjectMulitpleValidationError
-                                               userInfo:userInfo];                               
-
+                                               userInfo:userInfo];
     }
     // No error yet, just use the new error
     else {

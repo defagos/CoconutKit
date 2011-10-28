@@ -15,6 +15,9 @@
  *     to potentially serious memory management issues
  *   - never call validations defined in the model object. Call the validate method provided below (which takes
  *     into account validations defined in the xcdatamodel)
+ *   - to be documented: Check methods always receive *pError = nil when called. The implementation must replace it with
+ *     an error on validation failure. These methods are never to be called directly. Therefore, no need to check pError
+ *     in them, the implementation can directly assign *pError without testing if pError != NULL
  */
 @interface NSManagedObject (HLSExtensions)
 
