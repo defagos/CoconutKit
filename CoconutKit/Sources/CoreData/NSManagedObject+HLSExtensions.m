@@ -145,8 +145,6 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     [pool drain];
 }
 
-// TODO: Check if a validation method already exists when trying to replace it with the wrapper
-
 /**
  * Inject validation wrappers into managed object classes automagically.
  *
@@ -169,6 +167,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     // No class identity test here. This must be executed for all objects in the hierarchy rooted at NSManagedObject, so that we can
     // locate the @dynamic properties we are interested in (those which need validation)
     
+    // Inject validation methods for each managed object property
     unsigned int numberOfProperties = 0;
     objc_property_t *properties = class_copyPropertyList(self, &numberOfProperties);
     BOOL added = NO;
@@ -204,7 +203,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     }
     free(properties);
     
-    // If a validation method was injected, we must also inject global validations
+    // If at least one validation method was injected (i.e. if there are fields to validate), we must also inject a global validation
     if (added) {
         NSString *types = [NSString stringWithFormat:@"%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(id *)];
         if (! class_addMethod(self, 
@@ -268,8 +267,6 @@ static SEL checkSelectorForValidationSelector(SEL sel)
 
 #pragma mark Validation
 
-// TODO: check methods: Chain errors iff return value is NO. Warn if an error has been returned with YES as validation status
-
 /**
  * Implementation common to all injected single validation methods (validate<FieldName>:error:)
  *
@@ -290,12 +287,16 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
     
     // Check
     NSError *newError = nil;
-    BOOL valid = (*checkImp)(self, checkSel, value, &newError);
-    
-    // Combine errors
-    combineErrors(newError, pError);
-    
-    return valid;
+    if (! (*checkImp)(self, checkSel, value, &newError)) {
+        combineErrors(newError, pError);
+        return NO;
+    }
+    else if (newError) {
+        HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method implementation is incorrect", 
+                      (char *)checkSel);
+    }
+        
+    return YES;
 }
 
 /**
@@ -321,29 +322,28 @@ static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError)
  */
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError)
 {
-    BOOL valid = YES;
     if (class == [NSManagedObject class]) {
-        // Get the validation method. These implementations exist, no need to test if responding to selector
+        // Get the validation method. This method exists on NSManagedObject, no need to test if responding to selector
         BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
         
         // Validate. This is where individual validations are triggered
         NSError *newError = nil;
-        valid = (*imp)(self, sel, &newError);
+        if (! (*imp)(self, sel, &newError)) {
+            combineErrors(newError, pError);
+            return NO;
+        }
         
-        // Combine errors
-        combineErrors(newError, pError);
-        
-        return valid;
+        return YES;
     }
     else {
+        BOOL valid = YES;
+        
         // Climb up the inheritance hierarchy
         NSError *newError = nil;
         if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
+            combineErrors(newError, pError);
             valid = NO;
         }
-        
-        // Combine errors
-        combineErrors(newError, pError);
         
         // If no check method has been defined at this class hierarchy level, valid (i.e. we do not alter the above
         // validation status)
@@ -357,14 +357,16 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))method_getImplementation(method);
         newError = nil;
         if (! (*checkImp)(self, checkSel, &newError)) {
+            combineErrors(newError, pError);
             valid = NO;
         }
+        else if (newError) {
+            HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method implementation is incorrect", 
+                          (char *)checkSel);
+        }
         
-        // Combine errors
-        combineErrors(newError, pError);
+        return valid;
     }
-    
-    return valid;
 }
 
 #pragma mark Combining Core Data errors correctly
