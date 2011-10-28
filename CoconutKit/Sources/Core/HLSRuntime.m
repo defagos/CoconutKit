@@ -8,13 +8,34 @@
 
 #import "HLSRuntime.h"
 
-IMP HLSSwizzleSelector(Class clazz, SEL origSel, SEL newSel)
+IMP HLSSwizzleClassSelector(Class class, SEL origSel, SEL newSel)
+{
+    Class metaClass = objc_getMetaClass(class_getName(class));
+        
+    // Get the original implementation we are replacing
+    IMP origImp = method_getImplementation(class_getClassMethod(metaClass, origSel));
+    
+    Method newMethod = class_getClassMethod(metaClass, newSel);
+    IMP oldImp = class_replaceMethod(metaClass, 
+                                     origSel, 
+                                     method_getImplementation(newMethod), 
+                                     method_getTypeEncoding(newMethod));
+    NSCAssert(origImp == oldImp, @"Method not swizzled properly");
+    
+    return origImp;
+}
+
+IMP HLSSwizzleSelector(Class class, SEL origSel, SEL newSel)
 {
     // Get the original implementation we are replacing
-    IMP origImp = method_getImplementation(class_getInstanceMethod(clazz, origSel));
+    IMP origImp = method_getImplementation(class_getInstanceMethod(class, origSel));
     
-    Method newMethod = class_getInstanceMethod(clazz, newSel);
-    class_replaceMethod(clazz, origSel, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));
+    Method newMethod = class_getInstanceMethod(class, newSel);
+    IMP oldImp = class_replaceMethod(class,
+                                     origSel, 
+                                     method_getImplementation(newMethod),
+                                     method_getTypeEncoding(newMethod));
+    NSCAssert(origImp == oldImp, @"Method not swizzled properly");
     
     return origImp;
 }
