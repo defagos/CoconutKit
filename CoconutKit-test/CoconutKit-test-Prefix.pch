@@ -63,5 +63,6 @@
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"
+    #import "UINavigationBar+HLSExtensions.h"
     #import "UIView+HLSExtensions.h"
 #endif

@@ -26,6 +26,8 @@
 		6F2863061265A65300D04F08 /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863051265A65300D04F08 /* HLSValidable.h */; };
 		6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863091265B3E500D04F08 /* HLSWizardViewController.h */; };
 		6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */; };
+		6F2D57281462CF3F00FC960D /* UINavigationBar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D57261462CF3F00FC960D /* UINavigationBar+HLSExtensions.h */; };
+		6F2D57291462CF3F00FC960D /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D57271462CF3F00FC960D /* UINavigationBar+HLSExtensions.m */; };
 		6F32E220129F8A7700FCA2FF /* NSDate+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */; };
 		6F32E221129F8A7700FCA2FF /* NSDate+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */; };
 		6F3D03CF1301C7D5009ACE4D /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3D03CD1301C7D5009ACE4D /* HLSViewAnimationStep.h */; };
@@ -150,6 +152,8 @@
 		6F2863051265A65300D04F08 /* HLSValidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidable.h; sourceTree = "<group>"; };
 		6F2863091265B3E500D04F08 /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
 		6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
+		6F2D57261462CF3F00FC960D /* UINavigationBar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F2D57271462CF3F00FC960D /* UINavigationBar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D03CD1301C7D5009ACE4D /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				6FBDAA1213052D09004B9617 /* HLSValue1TableViewCell.m */,
 				6FBDAA1513052D18004B9617 /* HLSValue2TableViewCell.h */,
 				6FBDAA1613052D18004B9617 /* HLSValue2TableViewCell.m */,
+				6F2D57261462CF3F00FC960D /* UINavigationBar+HLSExtensions.h */,
+				6F2D57271462CF3F00FC960D /* UINavigationBar+HLSExtensions.m */,
 				6FA74D381404FFF70043693E /* UIView+HLSExtensions.h */,
 				6FA74D391404FFF70043693E /* UIView+HLSExtensions.m */,
 			);
@@ -595,6 +601,7 @@
 				6F9BFE6B1414FB4C00184973 /* NSTimeZone+HLSExtensions.h in Headers */,
 				6F1AF7BC142A8E5C00925B7A /* HLSStretchingContainerView.h in Headers */,
 				6F734E14144C105E007FAF15 /* HLSKenBurnsSlideshow.h in Headers */,
+				6F2D57281462CF3F00FC960D /* UINavigationBar+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +717,7 @@
 				6F9BFE6C1414FB4C00184973 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F1AF7BD142A8E5C00925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E15144C105E007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
+				6F2D57291462CF3F00FC960D /* UINavigationBar+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

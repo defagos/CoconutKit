@@ -14,6 +14,7 @@
 		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
 		6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */; };
 		6F2C0ABD142A576D00AFA6EE /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABB142A576D00AFA6EE /* RootStackDemoViewController.xib */; };
+		6F2D57241462C7C400FC960D /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D57231462C7C400FC960D /* UINavigationBar+HLSExtensions.m */; };
 		6F37FE8613EBE478003E33EF /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD113EBE478003E33EF /* CoconutKit_Localizable.strings */; };
 		6F37FE8713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F37FE8813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -177,6 +178,8 @@
 		6F2C0AB9142A576D00AFA6EE /* RootStackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootStackDemoViewController.h; sourceTree = "<group>"; };
 		6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootStackDemoViewController.m; sourceTree = "<group>"; };
 		6F2C0ABB142A576D00AFA6EE /* RootStackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootStackDemoViewController.xib; sourceTree = "<group>"; };
+		6F2D57221462C7C400FC960D /* UINavigationBar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F2D57231462C7C400FC960D /* UINavigationBar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F37FDD313EBE478003E33EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD513EBE478003E33EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -658,6 +661,8 @@
 				6F37FE5113EBE478003E33EF /* HLSValue1TableViewCell.m */,
 				6F37FE5213EBE478003E33EF /* HLSValue2TableViewCell.h */,
 				6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */,
+				6F2D57221462C7C400FC960D /* UINavigationBar+HLSExtensions.h */,
+				6F2D57231462C7C400FC960D /* UINavigationBar+HLSExtensions.m */,
 				6FA74D3C140500090043693E /* UIView+HLSExtensions.h */,
 				6FA74D3D140500090043693E /* UIView+HLSExtensions.m */,
 			);
@@ -1369,6 +1374,7 @@
 				6F1AF83E142B031000925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E19144C1076007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
 				6F3BC4E6144C5E1900685502 /* KenBurnsSlideshowDemoViewController.m in Sources */,
+				6F2D57241462C7C400FC960D /* UINavigationBar+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,4 +17,5 @@ NSTimeZone+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
+UINavigationBar+HLSExtensions.m
 UIView+HLSExtensions.m
