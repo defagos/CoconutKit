@@ -13,6 +13,9 @@
 // Disable quasi-simultaneous taps
 HLSEnableUIControlExclusiveTouch();
 
+// Enable Core Data easy validation
+HLSEnableNSManagedObjectValidation();
+
 @interface CoconutKit_demoAppDelegate ()
 
 @property (nonatomic, retain) CoconutKit_demoApplication *application;

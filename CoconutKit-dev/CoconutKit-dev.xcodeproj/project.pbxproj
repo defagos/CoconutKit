@@ -16,6 +16,8 @@
 		6F1C649414061273006F63FC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C649314061273006F63FC /* HLSActionSheet.m */; };
 		6F2C0ABC142A576D00AFA6EE /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */; };
 		6F2C0ABD142A576D00AFA6EE /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C0ABB142A576D00AFA6EE /* RootStackDemoViewController.xib */; };
+		6F2D563E145FD98200FC960D /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D563D145FD98200FC960D /* UITextField+HLSExtensions.m */; };
+		6F2D56D81462977F00FC960D /* HLSManagedTextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D56D71462977F00FC960D /* HLSManagedTextFieldValidator.m */; };
 		6F37FE8613EBE478003E33EF /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD113EBE478003E33EF /* CoconutKit_Localizable.strings */; };
 		6F37FE8713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F37FE8813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F37FDD813EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -188,6 +190,10 @@
 		6F2C0AB9142A576D00AFA6EE /* RootStackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootStackDemoViewController.h; sourceTree = "<group>"; };
 		6F2C0ABA142A576D00AFA6EE /* RootStackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootStackDemoViewController.m; sourceTree = "<group>"; };
 		6F2C0ABB142A576D00AFA6EE /* RootStackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootStackDemoViewController.xib; sourceTree = "<group>"; };
+		6F2D563C145FD98200FC960D /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F2D563D145FD98200FC960D /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F2D56D61462977F00FC960D /* HLSManagedTextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedTextFieldValidator.h; sourceTree = "<group>"; };
+		6F2D56D71462977F00FC960D /* HLSManagedTextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSManagedTextFieldValidator.m; sourceTree = "<group>"; };
 		6F37FDD313EBE478003E33EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD513EBE478003E33EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F37FDD713EBE478003E33EF /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -625,6 +631,8 @@
 				6F37FE2013EBE478003E33EF /* HLSModelManager.m */,
 				6FCA9D0C14518F3F00004E12 /* NSManagedObject+HLSExtensions.h */,
 				6FCA9D0D14518F3F00004E12 /* NSManagedObject+HLSExtensions.m */,
+				6F2D56D61462977F00FC960D /* HLSManagedTextFieldValidator.h */,
+				6F2D56D71462977F00FC960D /* HLSManagedTextFieldValidator.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -679,6 +687,8 @@
 				6F37FE5113EBE478003E33EF /* HLSValue1TableViewCell.m */,
 				6F37FE5213EBE478003E33EF /* HLSValue2TableViewCell.h */,
 				6F37FE5313EBE478003E33EF /* HLSValue2TableViewCell.m */,
+				6F2D563C145FD98200FC960D /* UITextField+HLSExtensions.h */,
+				6F2D563D145FD98200FC960D /* UITextField+HLSExtensions.m */,
 				6FA74D3C140500090043693E /* UIView+HLSExtensions.h */,
 				6FA74D3D140500090043693E /* UIView+HLSExtensions.m */,
 			);
@@ -1448,6 +1458,8 @@
 				6FCA9D321451A46500004E12 /* WizardAddressPageViewController.m in Sources */,
 				6F1A5B481455F22500474EAB /* Person.m in Sources */,
 				6F1A5B4C1455F22F00474EAB /* _Person.m in Sources */,
+				6F2D563E145FD98200FC960D /* UITextField+HLSExtensions.m in Sources */,
+				6F2D56D81462977F00FC960D /* HLSManagedTextFieldValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,6 @@
  */
 "Action sheet"="Menu action"; 
 "All"="Tous";
-"All fields are mandatory"="Tous les champs sont obligatoires";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
@@ -41,7 +40,6 @@
 "Houston, we've got a problem"="Houston, nous avons un problème";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Index"="Index";
-"Invalid e-mail address"="Adresse e-mail invalide";
 "Ken Burns effect"="Effet Ken Burns";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";

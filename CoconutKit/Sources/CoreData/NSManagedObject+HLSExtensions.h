@@ -7,6 +7,16 @@
 //
 
 /**
+ * Simply call this macro somewhere in global scope to enable the UIControl injection early, disabling quasi-
+ * simultaneous taps. Good places are for example main.m or your application delegate .m file
+ */
+#define HLSEnableNSManagedObjectValidation()                                                          \
+    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)            \
+    {                                                                                                 \
+        [NSManagedObject injectValidation];                                                           \
+    }
+
+/**
  * TODO: Document:
  *   - naming scheme
  *   - never need to call [super check...] (unlike validate... methods). Extremely error-prone if forgotten
@@ -18,6 +28,7 @@
  *   - to be documented: Check methods always receive *pError = nil when called. The implementation must replace it with
  *     an error on validation failure. These methods are never to be called directly. Therefore, no need to check pError
  *     in them, the implementation can directly assign *pError without testing if pError != NULL
+ *   - document: Behavior undefined if a valid<fieldName>:error: is implemented manually
  */
 @interface NSManagedObject (HLSExtensions)
 
@@ -36,6 +47,8 @@
 
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjects;
+
++ (void)injectValidation;
 
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 

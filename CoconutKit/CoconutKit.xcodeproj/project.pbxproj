@@ -26,6 +26,8 @@
 		6F2863061265A65300D04F08 /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863051265A65300D04F08 /* HLSValidable.h */; };
 		6F28630B1265B3E500D04F08 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2863091265B3E500D04F08 /* HLSWizardViewController.h */; };
 		6F28630C1265B3E500D04F08 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */; };
+		6F2D56DC1462978700FC960D /* HLSManagedTextFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D56DA1462978700FC960D /* HLSManagedTextFieldValidator.h */; };
+		6F2D56DD1462978700FC960D /* HLSManagedTextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D56DB1462978700FC960D /* HLSManagedTextFieldValidator.m */; };
 		6F32E220129F8A7700FCA2FF /* NSDate+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */; };
 		6F32E221129F8A7700FCA2FF /* NSDate+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */; };
 		6F3D03CF1301C7D5009ACE4D /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3D03CD1301C7D5009ACE4D /* HLSViewAnimationStep.h */; };
@@ -79,6 +81,8 @@
 		6F93EE7512DE55080039A2B2 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F93EE6912DE55080039A2B2 /* HLSTaskOperation+Protected.h */; };
 		6F93EE7612DE55080039A2B2 /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F93EE6A12DE55080039A2B2 /* HLSTaskOperation.h */; };
 		6F93EE7712DE55080039A2B2 /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93EE6B12DE55080039A2B2 /* HLSTaskOperation.m */; };
+		6F9AD2B6145B094D00BBA7CD /* UITextField+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F9AD2B4145B094D00BBA7CD /* UITextField+HLSExtensions.h */; };
+		6F9AD2B7145B094D00BBA7CD /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9AD2B5145B094D00BBA7CD /* UITextField+HLSExtensions.m */; };
 		6F9BFE6B1414FB4C00184973 /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F9BFE691414FB4C00184973 /* NSTimeZone+HLSExtensions.h */; };
 		6F9BFE6C1414FB4C00184973 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9BFE6A1414FB4C00184973 /* NSTimeZone+HLSExtensions.m */; };
 		6FA74D3A1404FFF70043693E /* UIView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA74D381404FFF70043693E /* UIView+HLSExtensions.h */; };
@@ -152,6 +156,8 @@
 		6F2863051265A65300D04F08 /* HLSValidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidable.h; sourceTree = "<group>"; };
 		6F2863091265B3E500D04F08 /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
 		6F28630A1265B3E500D04F08 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
+		6F2D56DA1462978700FC960D /* HLSManagedTextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedTextFieldValidator.h; sourceTree = "<group>"; };
+		6F2D56DB1462978700FC960D /* HLSManagedTextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSManagedTextFieldValidator.m; sourceTree = "<group>"; };
 		6F32E21E129F8A7700FCA2FF /* NSDate+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F32E21F129F8A7700FCA2FF /* NSDate+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D03CD1301C7D5009ACE4D /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -206,6 +212,8 @@
 		6F93EE6912DE55080039A2B2 /* HLSTaskOperation+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTaskOperation+Protected.h"; sourceTree = "<group>"; };
 		6F93EE6A12DE55080039A2B2 /* HLSTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTaskOperation.h; sourceTree = "<group>"; };
 		6F93EE6B12DE55080039A2B2 /* HLSTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTaskOperation.m; sourceTree = "<group>"; };
+		6F9AD2B4145B094D00BBA7CD /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F9AD2B5145B094D00BBA7CD /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F9BFE691414FB4C00184973 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F9BFE6A1414FB4C00184973 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FA74D381404FFF70043693E /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -480,6 +488,8 @@
 				6FBDAA1213052D09004B9617 /* HLSValue1TableViewCell.m */,
 				6FBDAA1513052D18004B9617 /* HLSValue2TableViewCell.h */,
 				6FBDAA1613052D18004B9617 /* HLSValue2TableViewCell.m */,
+				6F9AD2B4145B094D00BBA7CD /* UITextField+HLSExtensions.h */,
+				6F9AD2B5145B094D00BBA7CD /* UITextField+HLSExtensions.m */,
 				6FA74D381404FFF70043693E /* UIView+HLSExtensions.h */,
 				6FA74D391404FFF70043693E /* UIView+HLSExtensions.m */,
 			);
@@ -509,6 +519,8 @@
 			isa = PBXGroup;
 			children = (
 				6F133FF613FBB70100B53677 /* HLSManagedObjectCopying.h */,
+				6F2D56DA1462978700FC960D /* HLSManagedTextFieldValidator.h */,
+				6F2D56DB1462978700FC960D /* HLSManagedTextFieldValidator.m */,
 				6FC9000813D4637400834900 /* HLSModelManager.h */,
 				6FC9000913D4637400834900 /* HLSModelManager.m */,
 				6FCA9D0814518EAE00004E12 /* NSManagedObject+HLSExtensions.h */,
@@ -602,6 +614,8 @@
 				6F1AF7BC142A8E5C00925B7A /* HLSStretchingContainerView.h in Headers */,
 				6F734E14144C105E007FAF15 /* HLSKenBurnsSlideshow.h in Headers */,
 				6FCA9D0A14518EAE00004E12 /* NSManagedObject+HLSExtensions.h in Headers */,
+				6F9AD2B6145B094D00BBA7CD /* UITextField+HLSExtensions.h in Headers */,
+				6F2D56DC1462978700FC960D /* HLSManagedTextFieldValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +732,8 @@
 				6F1AF7BD142A8E5C00925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E15144C105E007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
 				6FCA9D0B14518EAE00004E12 /* NSManagedObject+HLSExtensions.m in Sources */,
+				6F9AD2B7145B094D00BBA7CD /* UITextField+HLSExtensions.m in Sources */,
+				6F2D56DD1462978700FC960D /* HLSManagedTextFieldValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

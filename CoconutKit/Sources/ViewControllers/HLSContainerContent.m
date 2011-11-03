@@ -370,7 +370,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
        inContainerContentStack:(NSArray *)containerContentStack
 {
     if (self.addedToContainerView) {
-        HLSLoggerInfo(@"View controller's view already added as to a container view");
+        HLSLoggerInfo(@"View controller's view already added to a container view");
         return NO;
     }
     

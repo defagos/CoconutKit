@@ -19,6 +19,7 @@
     #import "HLSKenBurnsSlideshow.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLogger.h"
+    #import "HLSManagedObjectCopying.h"
     #import "HLSModelManager.h"
     #import "HLSNibView.h"
     #import "HLSNotifications.h"
@@ -61,5 +62,6 @@
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"
+    #import "UITextField+HLSExtensions.h"
     #import "UIView+HLSExtensions.h"
 #endif

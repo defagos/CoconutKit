@@ -20,6 +20,11 @@
 
 HLSLinkCategory(NSManagedObject_HLSExtensions)
 
+static BOOL s_injectedManagedObjectValidation = NO;
+
+// External linkage
+BOOL hlsInjectedManagedObjectValidation(void);
+
 // Original implementation of the methods we swizzle
 static void (*s_NSManagedObject_HLSExtensions__initialize_Imp)(id, SEL) = NULL;
 
@@ -40,6 +45,8 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 @end
 
 @implementation NSManagedObject (HLSExtensions)
+
+#pragma mark Query helpers
 
 + (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
@@ -104,6 +111,20 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     return [self allObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
 }
 
+#pragma mark Validation wrapper injection
+
++ (void)injectValidation
+{
+    if (s_injectedManagedObjectValidation) {
+        HLSLoggerInfo(@"Managed object validations already injected");
+        return;
+    }
+    
+    s_NSManagedObject_HLSExtensions__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector([NSManagedObject class], @selector(initialize), @selector(swizzledInitialize));
+    
+    s_injectedManagedObjectValidation = YES;
+}
+
 #pragma mark Checking if a value is correct for a specific field
 
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
@@ -134,8 +155,6 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 + (void)load
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    s_NSManagedObject_HLSExtensions__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector([NSManagedObject class], @selector(initialize), @selector(swizzledInitialize));
     
     [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
                            domain:@"ch.hortis.CoconutKit" 
@@ -228,6 +247,13 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 }
 
 @end
+
+#pragma mark Injection status
+
+BOOL injectedManagedObjectValidation(void)
+{
+    return s_injectedManagedObjectValidation;
+}
 
 #pragma mark Utility functions
 

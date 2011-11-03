@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6F1AF842142B032500925B7A /* HLSStretchingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF841142B032500925B7A /* HLSStretchingContainerView.m */; };
+		6F1EBE3B145DD88A002A7EC7 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EBE3A145DD88A002A7EC7 /* UITextField+HLSExtensions.m */; };
+		6F2D56E11462979C00FC960D /* HLSManagedTextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D56E01462979C00FC960D /* HLSManagedTextFieldValidator.m */; };
 		6F2FCDE3140BB8E60080A775 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD5B140BB8E60080A775 /* CoconutKit_Localizable.strings */; };
 		6F2FCDE4140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD61140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6F2FCDE5140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FCD62140BB8E60080A775 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -90,6 +92,10 @@
 /* Begin PBXFileReference section */
 		6F1AF840142B032500925B7A /* HLSStretchingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStretchingContainerView.h; sourceTree = "<group>"; };
 		6F1AF841142B032500925B7A /* HLSStretchingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStretchingContainerView.m; sourceTree = "<group>"; };
+		6F1EBE39145DD88A002A7EC7 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F1EBE3A145DD88A002A7EC7 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F2D56DF1462979C00FC960D /* HLSManagedTextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedTextFieldValidator.h; sourceTree = "<group>"; };
+		6F2D56E01462979C00FC960D /* HLSManagedTextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSManagedTextFieldValidator.m; sourceTree = "<group>"; };
 		6F2FCD5C140BB8E60080A775 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5D140BB8E60080A775 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F2FCD5E140BB8E60080A775 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -389,6 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				6F2FCDA7140BB8E60080A775 /* HLSManagedObjectCopying.h */,
+				6F2D56DF1462979C00FC960D /* HLSManagedTextFieldValidator.h */,
+				6F2D56E01462979C00FC960D /* HLSManagedTextFieldValidator.m */,
 				6F2FCDA8140BB8E60080A775 /* HLSModelManager.h */,
 				6F2FCDA9140BB8E60080A775 /* HLSModelManager.m */,
 				6FCA9D1014518F8400004E12 /* NSManagedObject+HLSExtensions.h */,
@@ -447,6 +455,8 @@
 				6F2FCDCA140BB8E60080A775 /* HLSValue1TableViewCell.m */,
 				6F2FCDCB140BB8E60080A775 /* HLSValue2TableViewCell.h */,
 				6F2FCDCC140BB8E60080A775 /* HLSValue2TableViewCell.m */,
+				6F1EBE39145DD88A002A7EC7 /* UITextField+HLSExtensions.h */,
+				6F1EBE3A145DD88A002A7EC7 /* UITextField+HLSExtensions.m */,
 				6F2FCDCF140BB8E60080A775 /* UIView+HLSExtensions.h */,
 				6F2FCDD0140BB8E60080A775 /* UIView+HLSExtensions.m */,
 			);
@@ -710,6 +720,8 @@
 				6F1AF842142B032500925B7A /* HLSStretchingContainerView.m in Sources */,
 				6F734E1D144C1089007FAF15 /* HLSKenBurnsSlideshow.m in Sources */,
 				6FCA9D1214518F8400004E12 /* NSManagedObject+HLSExtensions.m in Sources */,
+				6F1EBE3B145DD88A002A7EC7 /* UITextField+HLSExtensions.m in Sources */,
+				6F2D56E11462979C00FC960D /* HLSManagedTextFieldValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

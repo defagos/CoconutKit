@@ -14,7 +14,6 @@
 
 @property (nonatomic, retain) Customer *customer;
 
-- (void)updateViewFromModel;
 - (void)updateModelFromView;
 
 @end
@@ -59,6 +58,18 @@
 
 @synthesize customer = m_customer;
 
+- (void)setCustomer:(Customer *)customer
+{
+    if (m_customer == customer) {
+        return;
+    }
+    
+    [m_customer release];
+    m_customer = [customer retain];
+    
+    [self reloadData];
+}
+
 @synthesize customerInformationLabel = m_customerInformationLabel;
 
 @synthesize firstNameLabel = m_firstNameLabel;
@@ -85,17 +96,10 @@
     self.lastNameTextField.delegate = self;
     self.emailTextField.delegate = self;
     
-    [self updateViewFromModel];
+    [self reloadData];
 }
 
 #pragma mark Model synchronization methods
-
-- (void)updateViewFromModel
-{
-    self.firstNameTextField.text = self.customer.firstName;
-    self.lastNameTextField.text = self.customer.lastName;
-    self.emailTextField.text = self.customer.email;
-}
 
 - (void)updateModelFromView
 {
@@ -104,34 +108,23 @@
     self.customer.email = self.emailTextField.text;
 }
 
+#pragma mark HLSReloadable protocol implementation
+
+- (void)reloadData
+{
+    // TODO: Sync should really be performed by bound text field itself
+    self.firstNameTextField.text = self.customer.firstName;
+    [self.firstNameTextField bindToField:@"firstName" ofManagedObject:self.customer];
+    self.firstNameTextField.validationDelegate = self;
+    
+    self.lastNameTextField.text = self.customer.lastName;
+    self.emailTextField.text = self.customer.email;
+}
+
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {
-    if ([self.firstNameTextField.text length] == 0
-            || [self.lastNameTextField.text length] == 0
-            || [self.emailTextField.text length] == 0) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"All fields are mandatory", @"All fields are mandatory") 
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-        [alertView show];
-        return NO;
-    }
-    
-    if (! [HLSValidators validateEmailAddress:self.emailTextField.text]) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"Invalid e-mail address", @"Invalid e-mail address") 
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-        [alertView show];
-        return NO;        
-    }
-    
     // All fields valid; save into model object
     [self updateModelFromView];
     

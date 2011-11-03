@@ -7,7 +7,6 @@
  */
 "Action sheet"="Action sheet";
 "All"="All";
-"All fields are mandatory"="All fields are mandatory";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
@@ -41,7 +40,6 @@
 "Houston, we've got a problem"="Houston, we've got a problem";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
-"Invalid e-mail address"="Invalid e-mail address";
 "Ken Burns effect"="Ken Burns effect";
 "Landscape only"="Landscape only";
 "Language"="Language";

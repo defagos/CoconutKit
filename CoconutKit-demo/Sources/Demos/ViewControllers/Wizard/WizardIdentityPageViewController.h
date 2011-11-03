@@ -9,7 +9,7 @@
 // Forward declarations
 @class Customer;
 
-@interface WizardIdentityPageViewController : HLSViewController <HLSValidable, UITextFieldDelegate> {
+@interface WizardIdentityPageViewController : HLSViewController <HLSReloadable, HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
 @private
     Customer *m_customer;
     UILabel *m_customerInformationLabel;

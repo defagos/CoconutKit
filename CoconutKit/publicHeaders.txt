@@ -54,4 +54,5 @@ NSTimeZone+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
+UITextField+HLSExtensions.h
 UIView+HLSExtensions.h

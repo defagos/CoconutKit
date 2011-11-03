@@ -112,21 +112,7 @@
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
-{
-    if ([self.streetTextField.text length] == 0
-            || [self.cityTextField.text length] == 0
-            || [self.stateTextField.text length] == 0
-            || [self.countryTextField.text length] == 0) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"All fields are mandatory", @"All fields are mandatory") 
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-        [alertView show];
-        return NO;
-    }
-    
+{    
     // All fields valid; save into model object
     [self updateModelFromView];
     
