@@ -11,17 +11,15 @@
 
 @interface UITextField (HLSExtensions)
 
-- (void)bindToField:(NSString *)field ofManagedObject:(NSManagedObject *)managedObject;
+- (void)bindToField:(NSString *)fieldName 
+      managedObject:(NSManagedObject *)managedObject
+ validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
+
 - (void)unbind;
 
 - (NSManagedObject *)boundManagedObject;
 - (NSString *)boundTextField;
-
-/**
- * The delegate to which validation events must be forwarded. This delegate can only be defined after a text field
- * has been bound to a model object
- */
-@property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
+- (id<HLSTextFieldValidationDelegate>)validationDelegate;
 
 @end
 

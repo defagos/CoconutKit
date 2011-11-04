@@ -114,8 +114,7 @@
 {
     // TODO: Sync should really be performed by bound text field itself
     self.firstNameTextField.text = self.customer.firstName;
-    [self.firstNameTextField bindToField:@"firstName" ofManagedObject:self.customer];
-    self.firstNameTextField.validationDelegate = self;
+    [self.firstNameTextField bindToField:@"firstName" managedObject:self.customer validationDelegate:self];
     
     self.lastNameTextField.text = self.customer.lastName;
     self.emailTextField.text = self.customer.email;
@@ -138,6 +137,19 @@
     [textField resignFirstResponder];
     
     return YES;
+}
+
+#pragma mark HLSTextFieldValidationDelegate protocol implementation
+
+- (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                         message:[error localizedDescription] 
+                                                        delegate:nil 
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil]
+                              autorelease];
+    [alertView show];
 }
 
 #pragma mark Localization

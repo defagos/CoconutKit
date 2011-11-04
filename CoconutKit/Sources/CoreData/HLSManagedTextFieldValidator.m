@@ -9,12 +9,17 @@
 #import "HLSManagedTextFieldValidator.h"
 
 #import "HLSAssert.h"
+#import "HLSLogger.h"
 #import <objc/runtime.h>
+
+// TODO: Sync value. Provide with callback to let perform customization in both
+//       directions value -> field and field -> value, typically formatting / parsing
 
 @interface HLSManagedTextFieldValidator ()
 
 @property (nonatomic, retain) NSManagedObject *managedObject;
 @property (nonatomic, retain) NSString *fieldName;
+@property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
 @end
 
@@ -22,11 +27,20 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFieldName:(NSString *)fieldName ofManagedObject:(NSManagedObject *)managedObject
+- (id)initWithFieldName:(NSString *)fieldName 
+          managedObject:(NSManagedObject *)managedObject 
+     validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
 {
     if ((self = [super init])) {
+        if (! fieldName /* || property does not exist for managed object class */) {
+            HLSLoggerError(@"The property %@ does not exist for the object %@", fieldName, managedObject);
+            [self release];
+            return nil;
+        }
+        
         self.managedObject = managedObject;
         self.fieldName = fieldName;
+        self.validationDelegate = validationDelegate;
     }
     return self;
 }
@@ -78,7 +92,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    // TODO: Should also probably sync
+    // TODO: Should sync model object with field
     
     // Validate the field
     NSString *checkSelectorName = [NSString stringWithFormat:@"check%@%@:error:", [[self.fieldName substringToIndex:1] uppercaseString], 

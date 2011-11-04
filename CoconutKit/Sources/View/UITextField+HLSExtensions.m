@@ -35,7 +35,9 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark Binding to managed object fields
 
-- (void)bindToField:(NSString *)fieldName ofManagedObject:(NSManagedObject *)managedObject
+- (void)bindToField:(NSString *)fieldName 
+      managedObject:(NSManagedObject *)managedObject
+ validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
     // Ensure that injection has been enabled
     if (! injectedManagedObjectValidation()) {
@@ -46,27 +48,24 @@ extern BOOL injectedManagedObjectValidation(void);
     // First unbind any bound field
     [self unbind];
     
-    // No object. Nothing to do
+    // No object to bind. Nothing to do
     if (! managedObject) {
         return;
     }
     
-    if (! fieldName /* || property does not exist */) {
-        HLSLoggerError(@"The property %@ does not exist for the object %@", fieldName, managedObject);
+    // Bind to a validator object, with the current text field delegate as validator delegate
+    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithFieldName:fieldName 
+                                                                                         managedObject:managedObject
+                                                                                    validationDelegate:validationDelegate] 
+                                               autorelease];
+    if (! validator) {
         return;
     }
     
-    // TODO: Sync value. Provide with callback to let perform customization in both
-    //       directions value -> field and field -> value, typically formatting / parsing
-    
-    // Bind to a validator object, with the current text field delegate as validator delegate
-    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithFieldName:fieldName 
-                                                                                       ofManagedObject:managedObject] 
-                                               autorelease];
     validator.delegate = (*s_UITextField__delegate_Imp)(self, @selector(delegate));
     objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
-    // Set the validator as text field delegate to catch events and perform validation. We need an additonal object 
+    // Set the validator as text field delegate to catch events and perform validation. We need an intermediate object 
     // because trying to set self as delegate does not work for a UITextField
     (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator);
 }
@@ -104,17 +103,6 @@ extern BOOL injectedManagedObjectValidation(void);
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     return validator.validationDelegate;    
-}
-
-- (void)setValidationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (! validator) {
-        HLSLoggerWarn(@"A validation delegate can only be defined once a text field has been bound to a model object");
-        return;
-    }
-    
-    validator.validationDelegate = validationDelegate;
 }
 
 @end
