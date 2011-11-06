@@ -29,6 +29,10 @@
  *     an error on validation failure. These methods are never to be called directly. Therefore, no need to check pError
  *     in them, the implementation can directly assign *pError without testing if pError != NULL
  *   - document: Behavior undefined if a valid<fieldName>:error: is implemented manually
+ *
+ * Also add unit tests for:
+ *   - managed object hierarchies
+ *   - validation of relationships between managed objects
  */
 @interface NSManagedObject (HLSExtensions)
 

@@ -11,9 +11,10 @@
 
 @interface UITextField (HLSExtensions)
 
-- (void)bindToField:(NSString *)fieldName 
-      managedObject:(NSManagedObject *)managedObject
- validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
+- (void)bindToManagedObject:(NSManagedObject *)managedObject
+                  fieldName:(NSString *)fieldName
+                  formatter:(NSFormatter *)formatter
+         validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
 
 - (void)unbind;
 
@@ -26,6 +27,7 @@
 @protocol HLSTextFieldValidationDelegate <NSObject>
 
 @optional
+
 - (void)textFieldDidPassValidation:(UITextField *)textField;
 - (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error;
 

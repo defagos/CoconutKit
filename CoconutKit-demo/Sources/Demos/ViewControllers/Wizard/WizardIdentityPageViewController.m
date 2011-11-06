@@ -103,7 +103,6 @@
 
 - (void)updateModelFromView
 {
-    self.customer.firstName = self.firstNameTextField.text;
     self.customer.lastName = self.lastNameTextField.text;
     self.customer.email = self.emailTextField.text;
 }
@@ -112,9 +111,10 @@
 
 - (void)reloadData
 {
-    // TODO: Sync should really be performed by bound text field itself
-    self.firstNameTextField.text = self.customer.firstName;
-    [self.firstNameTextField bindToField:@"firstName" managedObject:self.customer validationDelegate:self];
+    [self.firstNameTextField bindToManagedObject:self.customer 
+                                       fieldName:@"firstName" 
+                                       formatter:nil
+                              validationDelegate:self];
     
     self.lastNameTextField.text = self.customer.lastName;
     self.emailTextField.text = self.customer.email;

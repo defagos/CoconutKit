@@ -35,9 +35,10 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark Binding to managed object fields
 
-- (void)bindToField:(NSString *)fieldName 
-      managedObject:(NSManagedObject *)managedObject
- validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
+- (void)bindToManagedObject:(NSManagedObject *)managedObject
+                  fieldName:(NSString *)fieldName 
+                  formatter:(NSFormatter *)formatter
+         validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
     // Ensure that injection has been enabled
     if (! injectedManagedObjectValidation()) {
@@ -54,8 +55,10 @@ extern BOOL injectedManagedObjectValidation(void);
     }
     
     // Bind to a validator object, with the current text field delegate as validator delegate
-    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithFieldName:fieldName 
+    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithTextField:self 
                                                                                          managedObject:managedObject
+                                                                                             fieldName:fieldName 
+                                                                                             formatter:formatter
                                                                                     validationDelegate:validationDelegate] 
                                                autorelease];
     if (! validator) {
