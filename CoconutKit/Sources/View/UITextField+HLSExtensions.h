@@ -19,7 +19,7 @@
 - (void)unbind;
 
 - (NSManagedObject *)boundManagedObject;
-- (NSString *)boundTextField;
+- (NSString *)boundFieldName;
 - (id<HLSTextFieldValidationDelegate>)validationDelegate;
 
 @end

@@ -152,9 +152,10 @@
 
 - (BOOL)validate
 {
-    // TODO: Should not be able to go forward if not all fields are valid
+    NSError *error = nil;
+    return [self checkBoundManagedObjectFields:&error];
     
-    return YES;
+    // TODO: Display the errors to the user
 }
 
 #pragma mark UITextFieldDelegate protocol implementation

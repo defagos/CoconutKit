@@ -96,7 +96,7 @@ extern BOOL injectedManagedObjectValidation(void);
     return validator.managedObject;
 }
 
-- (NSString *)boundTextField
+- (NSString *)boundFieldName
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     return validator.fieldName;

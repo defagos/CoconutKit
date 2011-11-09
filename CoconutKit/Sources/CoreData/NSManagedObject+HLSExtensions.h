@@ -54,9 +54,22 @@
 
 + (void)injectValidation;
 
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
+- (BOOL)checkCurrentValueForKey:(NSString *)key error:(NSError **)pError;
+- (BOOL)checkCurrentValuesForKeys:(NSArray *)keys error:(NSError **)pError;         // Performs all validations, chain errors
 
 - (BOOL)checkForConsistency:(NSError **)pError;
 - (BOOL)checkForDelete:(NSError **)pError;
+
+@end
+
+@interface UIViewController (HLSManagedObjectValidation)
+
+- (BOOL)checkBoundManagedObjectFields:(NSError **)pError;
+
+@end
+
+@interface UIView (HLSManagedObjectValidation)
+
+- (BOOL)checkBoundManagedObjectFields:(NSError **)pError;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "NSManagedObject+HLSExtensions.h"
 
+#import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
 #import "HLSError.h"
 #import "HLSLogger.h"
@@ -15,6 +16,7 @@
 #import "HLSRuntime.h"
 #import "NSDictionary+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
+#import "UITextField+HLSExtensions.h"
 
 #import <objc/runtime.h>
 
@@ -127,13 +129,26 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 #pragma mark Checking if a value is correct for a specific field
 
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
+- (BOOL)checkCurrentValueForKey:(NSString *)key error:(NSError **)pError
 {
     // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
     //         that any validation logic in the xcdatamodel is also triggered
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
     // (remark: also deals with &nil)
+    id value = [self valueForKey:key];
     return [self validateValue:&value forKey:key error:pError];
+}
+
+- (BOOL)checkCurrentValuesForKeys:(NSArray *)keys error:(NSError **)pError
+{
+    HLSAssertObjectsInEnumerationAreKindOfClass(keys, NSString);
+    BOOL valid = YES;
+    for (NSString *key in keys) {
+        if (! [self checkCurrentValueForKey:key error:pError]) {
+            valid = NO;
+        }
+    }
+    return valid;
 }
 
 #pragma mark Global validation method stubs
@@ -182,7 +197,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 {
     // Call swizzled implementation
     (*s_NSManagedObject_HLSExtensions__initialize_Imp)([NSManagedObject class], @selector(initialize));
-        
+    
     // No class identity test here. This must be executed for all objects in the hierarchy rooted at NSManagedObject, so that we can
     // locate the @dynamic properties we are interested in (those which need validation)
     
@@ -244,6 +259,52 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
     }    
+}
+
+@end
+
+#pragma mark View controller additions
+
+@implementation UIViewController (HLSManagedObjectValidation)
+
+- (BOOL)checkBoundManagedObjectFields:(NSError **)pError
+{
+    if (! [self isViewLoaded]) {
+        HLSLoggerError(@"The view controller's view has not been loaded yet");
+        return NO;
+    }
+    
+    return [self.view checkBoundManagedObjectFields:pError];
+}
+
+@end
+
+#pragma mark View additions
+
+@implementation UIView (HLSManagedObjectValidation)
+
+- (BOOL)checkBoundManagedObjectFields:(NSError **)pError
+{
+    // Check self first (if bound to a model object field)
+    BOOL valid = YES;
+    if ([self isKindOfClass:[UITextField class]]) {
+        UITextField *textField = (UITextField *)self;
+        NSManagedObject *managedObject = [textField boundManagedObject];
+        if (managedObject) {
+            if (! [managedObject checkCurrentValueForKey:[textField boundFieldName] error:pError]) {
+                valid = NO;
+            }
+        }
+    }
+    
+    // Check subviews recursively
+    for (UIView *subview in self.subviews) {
+        if (! [subview checkBoundManagedObjectFields:pError]) {
+            valid = NO;
+        }
+    }
+    
+    return valid;
 }
 
 @end
@@ -321,7 +382,7 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
         HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method implementation is incorrect", 
                       (char *)checkSel);
     }
-        
+    
     return YES;
 }
 

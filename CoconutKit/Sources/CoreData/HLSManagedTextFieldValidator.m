@@ -11,8 +11,6 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 
-#import <objc/runtime.h>
-
 @interface HLSManagedTextFieldValidator ()
 
 @property (nonatomic, assign) UITextField *textField;
@@ -156,25 +154,18 @@
     [self.managedObject setValue:value forKey:self.fieldName];
     
     // Validate the field
-    NSString *checkSelectorName = [NSString stringWithFormat:@"check%@%@:error:", [[self.fieldName substringToIndex:1] uppercaseString], 
-                                   [self.fieldName substringFromIndex:1]];
-    SEL checkSel = NSSelectorFromString(checkSelectorName);
-    Method checkMethod = class_getInstanceMethod([self.managedObject class], checkSel);
-    if (checkMethod) {
-        NSError *error = nil;
-        BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))method_getImplementation(checkMethod);
-        if ((*checkImp)(self, checkSel, value, &error)) {
-            if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
-                [self.validationDelegate textFieldDidPassValidation:textField];
-            }
-        }
-        else {
-            if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-                [self.validationDelegate textField:textField didFailValidationWithError:error];
-            }
-        }
+    NSError *error = nil;
+    if ([self.managedObject checkCurrentValueForKey:self.fieldName error:&error]) {
+        if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
+            [self.validationDelegate textFieldDidPassValidation:textField];
+        }    
     }
-    
+    else {
+        if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
+            [self.validationDelegate textField:textField didFailValidationWithError:error];
+        }        
+    }
+        
     if ([self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
         return [self.delegate textFieldShouldEndEditing:textField];
     }
