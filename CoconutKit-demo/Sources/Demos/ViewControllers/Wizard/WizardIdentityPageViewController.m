@@ -8,13 +8,11 @@
 
 #import "WizardIdentityPageViewController.h"
 
-#import "Customer.h"
+#import "Person.h"
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, retain) Customer *customer;
-
-- (void)updateModelFromView;
+@property (nonatomic, retain) Person *person;
 
 @end
 
@@ -25,19 +23,20 @@
 - (id)init
 {
     if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        // Only one customer in the DB. If does not exist yet, create it
-        Customer *customer = [Customer customer];
-        if (! customer) {
-            customer = [Customer insert];
+        // Only one person in the DB. If does not exist yet, create it
+        Person *person = [[Person allObjects] firstObject];
+        if (! person) {
+            person = [Person insert];
         }
-        self.customer = customer;
+        self.person = person;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.customer = nil;
+    self.person = nil;
+    
     [super dealloc];
 }
 
@@ -45,32 +44,33 @@
 {
     [super releaseViews];
     
-    self.customerInformationLabel = nil;
     self.firstNameLabel = nil;
     self.firstNameTextField = nil;
     self.lastNameLabel = nil;
     self.lastNameTextField = nil;
     self.emailLabel = nil;
     self.emailTextField = nil;
+    self.birthdateLabel = nil;
+    self.birthdateTextField = nil;
+    self.nbrChildrenLabel = nil;
+    self.nbrChildrenTextField = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize customer = m_customer;
+@synthesize person = m_person;
 
-- (void)setCustomer:(Customer *)customer
+- (void)setPerson:(Person *)person
 {
-    if (m_customer == customer) {
+    if (m_person == person) {
         return;
     }
     
-    [m_customer release];
-    m_customer = [customer retain];
+    [m_person release];
+    m_person = [person retain];
     
     [self reloadData];
 }
-
-@synthesize customerInformationLabel = m_customerInformationLabel;
 
 @synthesize firstNameLabel = m_firstNameLabel;
 
@@ -84,6 +84,14 @@
 
 @synthesize emailTextField = m_emailTextField;
 
+@synthesize birthdateLabel = m_birthdateLabel;
+
+@synthesize birthdateTextField = m_birthdateTextField;
+
+@synthesize nbrChildrenLabel = m_nbrChildrenLabel;
+
+@synthesize nbrChildrenTextField = m_nbrChildrenTextField;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -95,37 +103,56 @@
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;
     self.emailTextField.delegate = self;
+    self.birthdateTextField.delegate = self;
+    self.nbrChildrenTextField.delegate = self;
     
     [self reloadData];
-}
-
-#pragma mark Model synchronization methods
-
-- (void)updateModelFromView
-{
-    self.customer.lastName = self.lastNameTextField.text;
-    self.customer.email = self.emailTextField.text;
 }
 
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
 {
-    [self.firstNameTextField bindToManagedObject:self.customer 
+    static NSDateFormatter *s_dateFormatter = nil;
+    if (! s_dateFormatter) {
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        [s_dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    }
+    
+    static NSNumberFormatter *s_numberFormatter = nil;
+    if (! s_numberFormatter) {
+        s_numberFormatter = [[NSNumberFormatter alloc] init];
+        [s_numberFormatter setPositiveFormat:@"#0.#"];
+        [s_numberFormatter setNegativeFormat:@"-#0.#"];
+    }
+    
+    [self.firstNameTextField bindToManagedObject:self.person
                                        fieldName:@"firstName" 
                                        formatter:nil
                               validationDelegate:self];
-    
-    self.lastNameTextField.text = self.customer.lastName;
-    self.emailTextField.text = self.customer.email;
+    [self.lastNameTextField bindToManagedObject:self.person
+                                      fieldName:@"lastName"
+                                      formatter:nil 
+                             validationDelegate:self];
+    [self.emailTextField bindToManagedObject:self.person
+                                   fieldName:@"email" 
+                                   formatter:nil 
+                          validationDelegate:self];
+    [self.birthdateTextField bindToManagedObject:self.person
+                                       fieldName:@"birthdate"
+                                       formatter:s_dateFormatter 
+                              validationDelegate:self];
+    [self.nbrChildrenTextField bindToManagedObject:self.person 
+                                         fieldName:@"nbrChildren"
+                                         formatter:s_numberFormatter 
+                                validationDelegate:self];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {
-    // All fields valid; save into model object
-    [self updateModelFromView];
+    // TODO: Should not be able to go forward if not all fields are valid
     
     return YES;
 }
@@ -158,10 +185,11 @@
 {
     [super localize];
     
-    self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");
     self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");
     self.lastNameLabel.text = NSLocalizedString(@"Last Name", @"Last Name");
     self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    self.nbrChildrenLabel.text = NSLocalizedString(@"Number of children", @"Number of children");
 }
 
 @end

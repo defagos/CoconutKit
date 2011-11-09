@@ -10,6 +10,7 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Birthdate"="Birthdate";
 "Blocking"="Blocking";
 "Cancel"="Cancel";
 "Change"="Change";
@@ -22,7 +23,6 @@
 "Cursor"="Cursor";
 "Custom cell created programmatically"="Custom cell created programmatically";
 "Custom cell from xib"="Custom cell from xib";
-"Customer Information"="Customer Information";
 "DAY"="DAY";
 "Demos"="Demos";
 "Details"="Details";
@@ -47,6 +47,7 @@
 "MONTH"="MONTH";
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
+"Number of children"="Number of children";
 "Music players"="Music players";
 "Parallel processing"="Parallel processing";
 "Phones"="Phones";
@@ -84,3 +85,4 @@
 "View controllers"="View controllers";
 "WEEK"="WEEK";
 "YEAR"="YEAR";
+"yyyy/MM/dd"="yyyy/MM/dd";

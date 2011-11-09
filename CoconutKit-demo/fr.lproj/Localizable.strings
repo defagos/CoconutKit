@@ -10,6 +10,7 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
+"Birthdate"="Date de naissance";
 "Blocking"="Bloquant";
 "Cancel"="Annuler";
 "Change"="Changer";
@@ -22,7 +23,6 @@
 "Cursor"="Curseur";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
-"Customer Information"="Données du client";
 "DAY"="JOUR";
 "Demos"="Démos";
 "Details"="Détails";
@@ -48,6 +48,7 @@
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
+"Number of children"="Nombre d'enfants";
 "Parallel processing"="Calculs en parallèle";
 "Phones"="Téléphones";
 "Play"="Jouer";
@@ -84,3 +85,4 @@
 "View controllers"="View controllers";
 "WEEK"="SEMAINE";
 "YEAR"="ANNEE";
+"yyyy/MM/dd"="dd.MM.yyyy";

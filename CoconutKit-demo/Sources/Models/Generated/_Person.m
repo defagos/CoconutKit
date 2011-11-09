@@ -36,6 +36,34 @@
 
 
 
+@dynamic birthdate;
+
+
+
+
+
+
+@dynamic city;
+
+
+
+
+
+
+@dynamic country;
+
+
+
+
+
+
+@dynamic email;
+
+
+
+
+
+
 @dynamic firstName;
 
 
@@ -44,6 +72,27 @@
 
 
 @dynamic lastName;
+
+
+
+
+
+
+@dynamic nbrChildren;
+
+
+
+
+
+
+@dynamic state;
+
+
+
+
+
+
+@dynamic street;
 
 
 

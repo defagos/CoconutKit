@@ -8,14 +8,11 @@
 
 #import "WizardAddressPageViewController.h"
 
-#import "Customer.h"
+#import "Person.h"
 
 @interface WizardAddressPageViewController ()
 
-@property (nonatomic, retain) Customer *customer;
-
-- (void)updateViewFromModel;
-- (void)updateModelFromView;
+@property (nonatomic, retain) Person *person;
 
 @end
 
@@ -26,15 +23,16 @@
 - (id)init
 {
     if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        self.customer = [Customer customer];
-        NSAssert(self.customer != nil, @"A customer must be available");
+        self.person = [[Person allObjects] firstObject];
+        NSAssert(self.person != nil, @"A person must be available");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.customer = nil;
+    self.person = nil;
+    
     [super dealloc];
 }
 
@@ -42,7 +40,6 @@
 {
     [super releaseViews];
     
-    self.customerInformationLabel = nil;
     self.streetLabel = nil;
     self.streetTextField = nil;
     self.cityLabel = nil;
@@ -55,9 +52,19 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize customer = m_customer;
+@synthesize person = m_person;
 
-@synthesize customerInformationLabel = m_customerInformationLabel;
+- (void)setPerson:(Person *)person
+{
+    if (m_person == person) {
+        return;
+    }
+    
+    [m_person release];
+    m_person = [person retain];
+    
+    [self reloadData];
+}
 
 @synthesize streetLabel = m_streetLabel;
 
@@ -88,33 +95,36 @@
     self.stateTextField.delegate = self;
     self.countryTextField.delegate = self;
     
-    [self updateViewFromModel];
+    [self reloadData];
 }
 
-#pragma mark Model synchronization methods
+#pragma mark HLSReloadable protocol implementation
 
-- (void)updateViewFromModel
+- (void)reloadData
 {
-    self.streetTextField.text = self.customer.street;
-    self.cityTextField.text = self.customer.city;
-    self.stateTextField.text = self.customer.state;
-    self.countryTextField.text = self.customer.country;
-}
-
-- (void)updateModelFromView
-{
-    self.customer.street = self.streetTextField.text;
-    self.customer.city = self.cityTextField.text;
-    self.customer.state = self.stateTextField.text;
-    self.customer.country = self.countryTextField.text;
+    [self.streetTextField bindToManagedObject:self.person 
+                                    fieldName:@"street"
+                                    formatter:nil 
+                           validationDelegate:self];
+    [self.cityTextField bindToManagedObject:self.person
+                                  fieldName:@"city"
+                                  formatter:nil 
+                         validationDelegate:self];
+    [self.stateTextField bindToManagedObject:self.person 
+                                   fieldName:@"state"
+                                   formatter:nil 
+                          validationDelegate:self];
+    [self.countryTextField bindToManagedObject:self.person 
+                                     fieldName:@"country"
+                                     formatter:nil 
+                            validationDelegate:self];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {    
-    // All fields valid; save into model object
-    [self updateModelFromView];
+    // TODO: Should not be able to go forward if not all fields are valid
     
     return YES;
 }
@@ -128,13 +138,25 @@
     return YES;
 }
 
+#pragma mark HLSTextFieldValidationDelegate protocol implementation
+
+- (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                         message:[error localizedDescription] 
+                                                        delegate:nil 
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil]
+                              autorelease];
+    [alertView show];
+}
+
 #pragma mark Localization
 
 - (void)localize
 {
     [super localize];
     
-    self.customerInformationLabel.text = NSLocalizedString(@"Customer Information", @"Customer Information");
     self.streetLabel.text = NSLocalizedString(@"Street", @"Street");
     self.cityLabel.text = NSLocalizedString(@"City", @"City");
     self.stateLabel.text = NSLocalizedString(@"State", @"State");

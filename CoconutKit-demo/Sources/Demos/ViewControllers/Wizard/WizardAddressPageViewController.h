@@ -7,12 +7,11 @@
 //
 
 // Forward declarations
-@class Customer;
+@class Person;
 
-@interface WizardAddressPageViewController : HLSViewController <HLSValidable, UITextFieldDelegate> {
+@interface WizardAddressPageViewController : HLSViewController <HLSReloadable, HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
 @private
-    Customer *m_customer;
-    UILabel *m_customerInformationLabel;
+    Person *m_person;
     UILabel *m_streetLabel;
     HLSTextField *m_streetTextField;
     UILabel *m_cityLabel;
@@ -23,7 +22,6 @@
     HLSTextField *m_countryTextField;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *customerInformationLabel;
 @property (nonatomic, retain) IBOutlet UILabel *streetLabel;
 @property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;
 @property (nonatomic, retain) IBOutlet UILabel *cityLabel;

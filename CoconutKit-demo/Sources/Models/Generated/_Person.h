@@ -8,6 +8,13 @@
 
 
 
+
+
+
+
+
+
+
 @interface PersonID : NSManagedObjectID {}
 @end
 
@@ -16,6 +23,38 @@
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (PersonID*)objectID;
+
+
+
+
+@property (nonatomic, retain) NSDate *birthdate;
+
+
+//- (BOOL)validateBirthdate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *city;
+
+
+//- (BOOL)validateCity:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *country;
+
+
+//- (BOOL)validateCountry:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *email;
+
+
+//- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -36,6 +75,30 @@
 
 
 
+@property (nonatomic, retain) NSDecimalNumber *nbrChildren;
+
+
+//- (BOOL)validateNbrChildren:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *state;
+
+
+//- (BOOL)validateState:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *street;
+
+
+//- (BOOL)validateStreet:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -46,6 +109,30 @@
 @interface _Person (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSDate*)primitiveBirthdate;
+- (void)setPrimitiveBirthdate:(NSDate*)value;
+
+
+
+
+- (NSString*)primitiveCity;
+- (void)setPrimitiveCity:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveCountry;
+- (void)setPrimitiveCountry:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveEmail;
+- (void)setPrimitiveEmail:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveFirstName;
 - (void)setPrimitiveFirstName:(NSString*)value;
 
@@ -54,6 +141,24 @@
 
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
+
+
+
+
+- (NSDecimalNumber*)primitiveNbrChildren;
+- (void)setPrimitiveNbrChildren:(NSDecimalNumber*)value;
+
+
+
+
+- (NSString*)primitiveState;
+- (void)setPrimitiveState:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveStreet;
+- (void)setPrimitiveStreet:(NSString*)value;
 
 
 

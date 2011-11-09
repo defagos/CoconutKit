@@ -14,6 +14,41 @@
     return [lastName length] != 0;
 }
 
+- (BOOL)checkBirthdate:(NSDate *)birthdate error:(NSError **)pError
+{
+    return birthdate != nil;
+}
+
+- (BOOL)checkNbrChildren:(NSInteger)nbrChildren error:(NSError **)pError
+{
+    return nbrChildren >= 0;
+}
+
+- (BOOL)checkEmail:(NSString *)email error:(NSError **)pError
+{
+    return [HLSValidators validateEmailAddress:email];
+}
+
+- (BOOL)checkStreet:(NSString *)street error:(NSError **)pError
+{
+    return YES;
+}
+
+- (BOOL)checkCity:(NSString *)city error:(NSError **)pError
+{
+    return [city length] != 0;
+}
+
+- (BOOL)checkState:(NSString *)state error:(NSError **)pError
+{
+    return YES;
+}
+
+- (BOOL)checkCountry:(NSString *)country error:(NSError **)pError
+{
+    return [country length] != 0;
+}
+
 #pragma mark Global validation methods
 
 - (BOOL)checkForConsistency:(NSError **)pError
