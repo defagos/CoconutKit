@@ -9,6 +9,7 @@
 #import "HLSKenBurnsSlideshow.h"
 
 #import "HLSAnimation.h"
+#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 
@@ -95,7 +96,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 @synthesize images = m_images;
 
 - (void)setImages:(NSArray *)images
-{    
+{   
+    HLSAssertObjectsInEnumerationAreKindOfClass(images, UIImage);
     if (m_running) {
         HLSLoggerWarn(@"Cannot add an image while the animation is running");
         return;
