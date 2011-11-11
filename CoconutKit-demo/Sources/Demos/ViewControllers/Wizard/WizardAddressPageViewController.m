@@ -124,9 +124,8 @@
 
 - (BOOL)validate
 {    
-    // TODO: Should not be able to go forward if not all fields are valid
-    
-    return YES;
+    // Not interested in the error list here, each field already deals with its own errors
+    return [self checkBoundManagedObjectFields:NULL];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -140,15 +139,14 @@
 
 #pragma mark HLSTextFieldValidationDelegate protocol implementation
 
+- (void)textFieldDidPassValidation:(UITextField *)textField
+{
+    textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
+}
+
 - (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
 {
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                         message:[error localizedDescription] 
-                                                        delegate:nil 
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                               otherButtonTitles:nil]
-                              autorelease];
-    [alertView show];
+    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
 }
 
 #pragma mark Localization

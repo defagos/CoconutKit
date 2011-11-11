@@ -75,8 +75,12 @@
 
 
 
-@property (nonatomic, retain) NSDecimalNumber *nbrChildren;
+@property (nonatomic, retain) NSNumber *nbrChildren;
 
+
+@property short nbrChildrenValue;
+- (short)nbrChildrenValue;
+- (void)setNbrChildrenValue:(short)value_;
 
 //- (BOOL)validateNbrChildren:(id*)value_ error:(NSError**)error_;
 
@@ -145,8 +149,11 @@
 
 
 
-- (NSDecimalNumber*)primitiveNbrChildren;
-- (void)setPrimitiveNbrChildren:(NSDecimalNumber*)value;
+- (NSNumber*)primitiveNbrChildren;
+- (void)setPrimitiveNbrChildren:(NSNumber*)value;
+
+- (short)primitiveNbrChildrenValue;
+- (void)setPrimitiveNbrChildrenValue:(short)value_;
 
 
 

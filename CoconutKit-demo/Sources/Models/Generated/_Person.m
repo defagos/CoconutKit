@@ -29,6 +29,10 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"nbrChildrenValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"nbrChildren"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
@@ -80,6 +84,25 @@
 
 @dynamic nbrChildren;
 
+
+
+- (short)nbrChildrenValue {
+	NSNumber *result = [self nbrChildren];
+	return [result shortValue];
+}
+
+- (void)setNbrChildrenValue:(short)value_ {
+	[self setNbrChildren:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveNbrChildrenValue {
+	NSNumber *result = [self primitiveNbrChildren];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveNbrChildrenValue:(short)value_ {
+	[self setPrimitiveNbrChildren:[NSNumber numberWithShort:value_]];
+}
 
 
 
