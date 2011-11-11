@@ -50,7 +50,7 @@
 
 /**
  * Minimal (positive) distance to keep between keyboard and text field, respectively scroll view top and text field
- * Default value is 30.f
+ * Default value is 20.f
  */
 @property (nonatomic, assign) CGFloat minVisibilityDistance;
 

@@ -27,7 +27,7 @@
 
 // The minimal distance to be kept between the active text field and the top of the scroll view top or the keyboard. If the 
 // scroll view area is too small to fulfill both, visibility at the top wins
-const CGFloat kTextFieldMinVisibilityDistance = 30.f;
+const CGFloat kTextFieldMinVisibilityDistance = 20.f;           // Corresponds to IB guides
 
 /**
  * Keep a reference to the currently active HLSTextField (if any) and to its original offset. This is safe since UIKit 
