@@ -154,18 +154,8 @@
     [self.managedObject setValue:value forKey:self.fieldName];
     
     // Validate the field
-    NSError *error = nil;
-    if ([self.managedObject checkCurrentValueForKey:self.fieldName error:&error]) {
-        if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
-            [self.validationDelegate textFieldDidPassValidation:textField];
-        }    
-    }
-    else {
-        if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-            [self.validationDelegate textField:textField didFailValidationWithError:error];
-        }        
-    }
-        
+    [self check];
+    
     if ([self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
         return [self.delegate textFieldShouldEndEditing:textField];
     }
@@ -212,6 +202,25 @@
     }
     else {
         return YES;
+    }
+}
+
+#pragma mark Checking
+
+- (BOOL)check
+{
+    NSError *error = nil;
+    if ([self.managedObject checkCurrentValueForKey:self.fieldName error:&error]) {
+        if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
+            [self.validationDelegate textFieldDidPassValidation:self.textField];
+        }
+        return YES;
+    }
+    else {
+        if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
+            [self.validationDelegate textField:self.textField didFailValidationWithError:error];
+        }
+        return NO;
     }
 }
 

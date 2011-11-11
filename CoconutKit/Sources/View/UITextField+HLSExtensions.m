@@ -108,6 +108,14 @@ extern BOOL injectedManagedObjectValidation(void);
     return validator.validationDelegate;    
 }
 
+#pragma mark Checking values
+
+- (BOOL)check
+{
+    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
+    return [validator check];
+}
+
 @end
 
 @implementation UITextField (HLSExtensionsPrivate)
@@ -145,3 +153,47 @@ extern BOOL injectedManagedObjectValidation(void);
 }
 
 @end
+
+#pragma mark View controller additions
+
+@implementation UIViewController (HLSTextFieldValidation)
+
+- (BOOL)checkTextFields:(NSError **)pError
+{
+    if (! [self isViewLoaded]) {
+        HLSLoggerError(@"The view controller's view has not been loaded yet");
+        return NO;
+    }
+    
+    return [self.view checkTextFields:pError];
+}
+
+@end
+
+#pragma mark View additions
+
+@implementation UIView (HLSTextFieldValidation)
+
+- (BOOL)checkTextFields:(NSError **)pError
+{
+    // Check self first (if bound to a model object field)
+    BOOL valid = YES;
+    if ([self isKindOfClass:[UITextField class]]) {
+        UITextField *textField = (UITextField *)self;
+        if (! [textField check]) {
+            valid = NO;
+        }
+    }
+    
+    // Check subviews recursively
+    for (UIView *subview in self.subviews) {
+        if (! [subview checkTextFields:pError]) {
+            valid = NO;
+        }
+    }
+    
+    return valid;
+}
+
+@end
+

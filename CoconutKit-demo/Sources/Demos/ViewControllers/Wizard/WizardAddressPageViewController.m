@@ -125,7 +125,7 @@
 - (BOOL)validate
 {    
     // Not interested in the error list here, each field already deals with its own errors
-    return [self checkBoundManagedObjectFields:NULL];
+    return [self checkTextFields:NULL];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation

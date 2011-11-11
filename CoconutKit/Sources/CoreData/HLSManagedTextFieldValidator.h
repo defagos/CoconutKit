@@ -37,7 +37,6 @@
               formatter:(NSFormatter *)formatter
      validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
 
-
 /**
  * Object, field and delegate which have been bound to the validator
  */
@@ -46,6 +45,8 @@
 @property (nonatomic, readonly, retain) NSString *fieldName;
 @property (nonatomic, readonly, retain) NSFormatter *formatter;
 @property (nonatomic, readonly, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
+
+- (BOOL)check;
 
 /**
  * The delegate to forward UITextFieldDelegate events to after the validator has performed its work

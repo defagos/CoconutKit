@@ -263,52 +263,6 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 @end
 
-#pragma mark View controller additions
-
-@implementation UIViewController (HLSManagedObjectValidation)
-
-- (BOOL)checkBoundManagedObjectFields:(NSError **)pError
-{
-    if (! [self isViewLoaded]) {
-        HLSLoggerError(@"The view controller's view has not been loaded yet");
-        return NO;
-    }
-    
-    return [self.view checkBoundManagedObjectFields:pError];
-}
-
-@end
-
-#pragma mark View additions
-
-@implementation UIView (HLSManagedObjectValidation)
-
-- (BOOL)checkBoundManagedObjectFields:(NSError **)pError
-{
-    // Check self first (if bound to a model object field)
-    BOOL valid = YES;
-    if ([self isKindOfClass:[UITextField class]]) {
-        UITextField *textField = (UITextField *)self;
-        NSManagedObject *managedObject = [textField boundManagedObject];
-        if (managedObject) {
-            if (! [managedObject checkCurrentValueForKey:[textField boundFieldName] error:pError]) {
-                valid = NO;
-            }
-        }
-    }
-    
-    // Check subviews recursively
-    for (UIView *subview in self.subviews) {
-        if (! [subview checkBoundManagedObjectFields:pError]) {
-            valid = NO;
-        }
-    }
-    
-    return valid;
-}
-
-@end
-
 #pragma mark Injection status
 
 BOOL injectedManagedObjectValidation(void)

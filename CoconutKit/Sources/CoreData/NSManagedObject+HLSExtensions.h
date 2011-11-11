@@ -61,15 +61,3 @@
 - (BOOL)checkForDelete:(NSError **)pError;
 
 @end
-
-@interface UIViewController (HLSManagedObjectValidation)
-
-- (BOOL)checkBoundManagedObjectFields:(NSError **)pError;
-
-@end
-
-@interface UIView (HLSManagedObjectValidation)
-
-- (BOOL)checkBoundManagedObjectFields:(NSError **)pError;
-
-@end

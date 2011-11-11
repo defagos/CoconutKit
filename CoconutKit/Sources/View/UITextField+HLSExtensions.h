@@ -18,6 +18,8 @@
 
 - (void)unbind;
 
+- (BOOL)check;
+
 - (NSManagedObject *)boundManagedObject;
 - (NSString *)boundFieldName;
 - (id<HLSTextFieldValidationDelegate>)validationDelegate;
@@ -30,5 +32,17 @@
 
 - (void)textFieldDidPassValidation:(UITextField *)textField;
 - (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error;
+
+@end
+
+@interface UIViewController (HLSTextFieldValidation)
+
+- (BOOL)checkTextFields:(NSError **)pError;
+
+@end
+
+@interface UIView (HLSTextFieldValidation)
+
+- (BOOL)checkTextFields:(NSError **)pError;
 
 @end
