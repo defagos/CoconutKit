@@ -158,10 +158,10 @@
     [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
                                         target:nil
                                         action:NULL];
-    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_localizable", @"HLSWebViewController 'Open in Safari' action")
+    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_Localizable", @"HLSWebViewController 'Open in Safari' action")
                                   target:self
                                   action:@selector(openInSafari:)];
-    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_localizable", @"HLSWebViewController 'Mail Link' action")
+    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_Localizable", @"HLSWebViewController 'Mail Link' action")
                                   target:self
                                   action:@selector(mailLink:)];
     [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
