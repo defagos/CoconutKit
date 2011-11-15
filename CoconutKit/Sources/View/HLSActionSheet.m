@@ -153,9 +153,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showFromToolbar:(UIToolbar *)toolbar
 {
     // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-       [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     [s_actionSheet release];
     s_actionSheet = [self retain];
     [super showFromToolbar:toolbar];
@@ -164,9 +162,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showFromTabBar:(UITabBar *)tabBar
 {
     // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     [s_actionSheet release];
     s_actionSheet = [self retain];
     [super showFromTabBar:tabBar];
@@ -175,9 +171,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
     // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-    }
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
     
     // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
     [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
@@ -190,9 +184,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
 {
     // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-    }
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
     [s_actionSheet release];
     s_actionSheet = [self retain];
     [super showFromRect:rect inView:view animated:animated];
@@ -201,9 +193,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showInView:(UIView *)view
 {
     // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
     [s_actionSheet release];
     s_actionSheet = [self retain];
     [super showInView:view];
