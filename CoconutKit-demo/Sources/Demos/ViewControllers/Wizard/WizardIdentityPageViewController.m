@@ -138,10 +138,12 @@
                                    fieldName:@"email" 
                                    formatter:nil 
                           validationDelegate:self];
+    [self.emailTextField setCheckingOnChange:YES];
     [self.birthdateTextField bindToManagedObject:self.person
                                        fieldName:@"birthdate"
                                        formatter:s_dateFormatter 
                               validationDelegate:self];
+    [self.birthdateTextField setCheckingOnChange:YES];
     [self.nbrChildrenTextField bindToManagedObject:self.person 
                                          fieldName:@"nbrChildren"
                                          formatter:s_numberFormatter 
@@ -152,8 +154,7 @@
 
 - (BOOL)validate
 {
-    // Not interested in the error list here, each field already deals with its own errors
-    return [self checkTextFields:NULL];
+    return [self checkAndSynchronize];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation

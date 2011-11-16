@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSFormatter *formatter;
 @property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
+- (BOOL)getValue:(id *)pValue forString:(NSString *)string;
+- (BOOL)checkValue:(id)value;
+
 @end
 
 @implementation HLSManagedTextFieldValidator
@@ -115,6 +118,8 @@
 
 @synthesize validationDelegate = m_validationDelegate;
 
+@synthesize checkingOnChange = m_checkingOnChange;
+
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -140,28 +145,24 @@
 {
     NSAssert(self.textField == textField, @"Text field mismatch");
     
-    // Sync model object with field text
-    id value = nil;
-    if (self.formatter) {
-        NSString *errorDescription = nil;
-        if (! [self.formatter getObjectValue:&value forString:textField.text errorDescription:&errorDescription]) {
-            HLSLoggerWarn(@"Formatting failed; reason: %@", errorDescription);
+    // Forward to text field delegate first
+    if ([self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+        if (! [self.delegate textFieldShouldEndEditing:textField]) {
+            return NO;
         }
     }
-    else {
-        value = textField.text;
-    }
-    [self.managedObject setValue:value forKey:self.fieldName];
     
-    // Validate the field
-    [self check];
+    // Only check the value if it can be properly formatted
+    id value = nil;
+    if ([self getValue:&value forString:textField.text]) {
+        // If valid, then sync model object
+        if ([self checkValue:value]) {
+            [self.managedObject setValue:value forKey:self.fieldName];
+        }
+    }
     
-    if ([self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
-        return [self.delegate textFieldShouldEndEditing:textField];
-    }
-    else {
-        return YES;
-    }
+    // In all cases end editing, even if the value is invalid. In this case, the model object won't be updated
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -176,11 +177,21 @@
 {
     NSAssert(self.textField == textField, @"Text field mismatch");
     if ([self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
-        return [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+        if (! [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
+            return NO;
+        }
     }
-    else {
-        return YES;
+    
+    if (self.checkingOnChange) {
+        id value = nil;
+        NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if ([self getValue:&value forString:updatedText]) {
+            // Check, but do not sync. Sync is always done when exiting edit mode
+            [self checkValue:value];
+        }
     }
+    
+    return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -205,12 +216,37 @@
     }
 }
 
-#pragma mark Checking
+#pragma mark Sync and check
 
-- (BOOL)check
+// Does not return nil on failure, but a BOOL. nil could namely be a valid value, and if formatting fails we want
+// to return an error to the user in all cases
+- (BOOL)getValue:(id *)pValue forString:(NSString *)string
+{
+    NSAssert(pValue, @"Missing value reference");
+    
+    if (self.formatter) {
+        // The error descriptions are not explicit. No need to have a look at them 
+        if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
+            // TODO: Create a nice HLSError here with the errorDescription as text
+            NSError *error = [NSError errorWithDomain:@"coconut" code:1012 userInfo:nil];
+            if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
+                [self.validationDelegate textField:self.textField didFailValidationWithError:error];
+            }
+            
+            return NO;
+        }
+    }
+    else {
+        *pValue = string;
+    }
+    
+    return YES;
+}
+
+- (BOOL)checkValue:(id)value
 {
     NSError *error = nil;
-    if ([self.managedObject checkCurrentValueForKey:self.fieldName error:&error]) {
+    if ([self.managedObject checkValue:value forKey:self.fieldName error:&error]) {
         if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
             [self.validationDelegate textFieldDidPassValidation:self.textField];
         }
@@ -222,6 +258,27 @@
         }
         return NO;
     }
+}
+
+- (BOOL)checkDisplayedValue
+{
+    id value = nil;
+    if (! [self getValue:&value forString:self.textField.text]) {
+        return NO;
+    }
+    
+    return [self checkValue:value];
+}
+
+- (void)synchronizeWithDisplayedValue
+{
+    id value = nil;
+    if (! [self getValue:&value forString:self.textField.text]) {
+        HLSLoggerError(@"The value could not be formatted and therefore not synchronized");
+        return;
+    }
+    
+    [self.managedObject setValue:value forKey:self.fieldName];
 }
 
 #pragma mark Description

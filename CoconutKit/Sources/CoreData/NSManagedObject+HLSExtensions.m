@@ -129,26 +129,13 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 #pragma mark Checking if a value is correct for a specific field
 
-- (BOOL)checkCurrentValueForKey:(NSString *)key error:(NSError **)pError
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
 {
     // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
     //         that any validation logic in the xcdatamodel is also triggered
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
-    // (remark: also deals with &nil)
-    id value = [self valueForKey:key];
+    // (remark: The code below also deals correctly with &nil)
     return [self validateValue:&value forKey:key error:pError];
-}
-
-- (BOOL)checkCurrentValuesForKeys:(NSArray *)keys error:(NSError **)pError
-{
-    HLSAssertObjectsInEnumerationAreKindOfClass(keys, NSString);
-    BOOL valid = YES;
-    for (NSString *key in keys) {
-        if (! [self checkCurrentValueForKey:key error:pError]) {
-            valid = NO;
-        }
-    }
-    return valid;
 }
 
 #pragma mark Global validation method stubs

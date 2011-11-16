@@ -54,8 +54,7 @@
 
 + (void)injectValidation;
 
-- (BOOL)checkCurrentValueForKey:(NSString *)key error:(NSError **)pError;
-- (BOOL)checkCurrentValuesForKeys:(NSArray *)keys error:(NSError **)pError;         // Performs all validations, chain errors
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 
 - (BOOL)checkForConsistency:(NSError **)pError;
 - (BOOL)checkForDelete:(NSError **)pError;

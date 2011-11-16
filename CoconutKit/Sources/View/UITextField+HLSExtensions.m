@@ -31,6 +31,13 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
+@interface UIView (HLSTextFieldValidationPrivate)
+
+- (BOOL)checkTextFields;
+- (void)synchronizeTextFields;
+
+@end
+
 @implementation UITextField (HLSExtensions)
 
 #pragma mark Binding to managed object fields
@@ -108,12 +115,26 @@ extern BOOL injectedManagedObjectValidation(void);
     return validator.validationDelegate;    
 }
 
-#pragma mark Checking values
-
-- (BOOL)check
+- (BOOL)isCheckingOnChange
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    return [validator check];
+    if (! validator) {
+        HLSLoggerInfo(@"The text field has not been bound to a model object");
+        return NO;
+    }
+    
+    return validator.checkingOnChange;
+}
+
+- (void)setCheckingOnChange:(BOOL)checkingOnChange
+{
+    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
+    if (! validator) {
+        HLSLoggerError(@"The text field has not been bound to a model object");
+        return;
+    }
+    
+    validator.checkingOnChange = checkingOnChange;
 }
 
 @end
@@ -158,14 +179,14 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UIViewController (HLSTextFieldValidation)
 
-- (BOOL)checkTextFields:(NSError **)pError
+- (BOOL)checkAndSynchronize
 {
     if (! [self isViewLoaded]) {
         HLSLoggerError(@"The view controller's view has not been loaded yet");
         return NO;
     }
     
-    return [self.view checkTextFields:pError];
+    return [self.view checkAndSynchronize];
 }
 
 @end
@@ -174,25 +195,53 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UIView (HLSTextFieldValidation)
 
-- (BOOL)checkTextFields:(NSError **)pError
+- (BOOL)checkAndSynchronize
 {
-    // Check self first (if bound to a model object field)
+    BOOL valid = [self checkTextFields];
+    if (valid) {
+        [self synchronizeTextFields];
+    }
+    
+    return valid;
+}
+
+@end
+
+@implementation UIView (HLSTextFieldValidationPrivate)
+
+- (BOOL)checkTextFields
+{
+    // Check self first (if bound to a validator)
     BOOL valid = YES;
     if ([self isKindOfClass:[UITextField class]]) {
-        UITextField *textField = (UITextField *)self;
-        if (! [textField check]) {
+        HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
+        if (validator && ! [validator checkDisplayedValue]) {
             valid = NO;
         }
     }
     
     // Check subviews recursively
     for (UIView *subview in self.subviews) {
-        if (! [subview checkTextFields:pError]) {
+        if (! [subview checkTextFields]) {
             valid = NO;
         }
     }
-    
+        
     return valid;
+}
+
+- (void)synchronizeTextFields
+{
+    // Sync self first (if bound to a validator)
+    if ([self isKindOfClass:[UITextField class]]) {
+        HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
+        [validator synchronizeWithDisplayedValue];
+    }
+    
+    // Sync subviews recursively
+    for (UIView *subview in self.subviews) {
+        [subview synchronizeTextFields];
+    }
 }
 
 @end

@@ -25,6 +25,7 @@
     NSFormatter *m_formatter;
     id<UITextFieldDelegate> m_delegate;
     id<HLSTextFieldValidationDelegate> m_validationDelegate;
+    BOOL m_checkingOnChange;
 }
 
 /**
@@ -46,7 +47,10 @@
 @property (nonatomic, readonly, retain) NSFormatter *formatter;
 @property (nonatomic, readonly, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
-- (BOOL)check;
+@property (nonatomic, assign, getter=ischeckingOnChange) BOOL checkingOnChange;
+
+- (BOOL)checkDisplayedValue;
+- (void)synchronizeWithDisplayedValue;
 
 /**
  * The delegate to forward UITextFieldDelegate events to after the validator has performed its work

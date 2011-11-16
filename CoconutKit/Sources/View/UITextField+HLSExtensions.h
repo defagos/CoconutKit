@@ -18,11 +18,15 @@
 
 - (void)unbind;
 
-- (BOOL)check;
-
 - (NSManagedObject *)boundManagedObject;
 - (NSString *)boundFieldName;
 - (id<HLSTextFieldValidationDelegate>)validationDelegate;
+
+/**
+ * Validate each time the content of a text field changes
+ */
+- (BOOL)isCheckingOnChange;
+- (void)setCheckingOnChange:(BOOL)checkingOnChange;
 
 @end
 
@@ -37,12 +41,14 @@
 
 @interface UIViewController (HLSTextFieldValidation)
 
-- (BOOL)checkTextFields:(NSError **)pError;
+// TODO: Document: This checks all fields and does not stop when an error is encountered
+- (BOOL)checkAndSynchronize;
 
 @end
 
 @interface UIView (HLSTextFieldValidation)
 
-- (BOOL)checkTextFields:(NSError **)pError;
+// TODO: See above
+- (BOOL)checkAndSynchronize;
 
 @end
