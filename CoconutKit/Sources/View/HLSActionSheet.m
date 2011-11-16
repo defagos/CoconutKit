@@ -150,62 +150,47 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 #pragma mark Showing the action sheet
 
+- (void)replaceCurrentActionSheet
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // If an action sheet was visible, dismiss it first
+        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
+        [s_actionSheet release];
+        s_actionSheet = [self retain];
+    }
+}
+
 - (void)showFromToolbar:(UIToolbar *)toolbar
 {
-    // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-       [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
-    [s_actionSheet release];
-    s_actionSheet = [self retain];
+    [self replaceCurrentActionSheet];
     [super showFromToolbar:toolbar];
 }
 
 - (void)showFromTabBar:(UITabBar *)tabBar
 {
-    // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
-    [s_actionSheet release];
-    s_actionSheet = [self retain];
+    [self replaceCurrentActionSheet];
     [super showFromTabBar:tabBar];
 }
 
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
-    // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-    }
+    [self replaceCurrentActionSheet];
     
     // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
     [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
     
-    [s_actionSheet release];
-    s_actionSheet = [self retain];
-    [super showFromBarButtonItem:barButtonItem animated:animated];    
+    [super showFromBarButtonItem:barButtonItem animated:animated];
 }
 
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
 {
-    // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-    }
-    [s_actionSheet release];
-    s_actionSheet = [self retain];
+    [self replaceCurrentActionSheet];
     [super showFromRect:rect inView:view animated:animated];
 }
 
 - (void)showInView:(UIView *)view
 {
-    // If an action sheet was visible, dismiss it first
-    if (s_actionSheet) {
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO]; 
-    }
-    [s_actionSheet release];
-    s_actionSheet = [self retain];
+    [self replaceCurrentActionSheet];
     [super showInView:view];
 }
 
