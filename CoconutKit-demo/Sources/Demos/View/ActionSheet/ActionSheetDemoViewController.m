@@ -14,8 +14,8 @@
 
 - (void)choose1:(id)sender;
 - (void)choose2:(id)sender;
-- (void)choose3:(id)sender;
-- (void)choose4:(id)sender;
+- (void)choose3;
+- (void)choose4;
 - (void)resetChoice:(id)sender;
 
 @end
@@ -111,10 +111,10 @@
                              action:@selector(choose2:)];
     [actionSheet addButtonWithTitle:@"3"
                              target:self
-                             action:@selector(choose3:)];
+                             action:@selector(choose3)];
     [actionSheet addButtonWithTitle:@"4"
                              target:self
-                             action:@selector(choose4:)];
+                             action:@selector(choose4)];
     return actionSheet;
 }
 
@@ -158,14 +158,27 @@
     self.choiceLabel.text = @"2";
 }
 
-- (void)choose3:(id)sender
+- (void)choose3
 {
     self.choiceLabel.text = @"3";
 }
 
-- (void)choose4:(id)sender
+- (void)choose4
 {
     self.choiceLabel.text = @"4";
+    HLSActionSheet *actionSheet = [[HLSActionSheet alloc] init];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Yes", @"Yes") target:nil action:NULL];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"No", @"No") target:nil action:NULL];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+    }
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+}
+
+- (void)cancel
+{
+    self.choiceLabel.text = nil;
 }
 
 - (void)resetChoice:(id)sender
