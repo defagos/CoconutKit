@@ -23,6 +23,15 @@
 		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
+		6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */; };
+		6FDE68F31475771E005EA5FA /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E71475771E005EA5FA /* Employee.m */; };
+		6FDE68F41475771E005EA5FA /* _Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EA1475771E005EA5FA /* _Employee.m */; };
+		6FDE68F51475771E005EA5FA /* _Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EC1475771E005EA5FA /* _Manager.m */; };
+		6FDE68F61475771E005EA5FA /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EE1475771E005EA5FA /* _Person.m */; };
+		6FDE68F71475771E005EA5FA /* Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68F01475771E005EA5FA /* Manager.m */; };
+		6FDE68F81475771E005EA5FA /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68F21475771E005EA5FA /* Person.m */; };
+		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
+		6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */; };
 		6FFE38D91468FDCA00C02549 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE38481468FDCA00C02549 /* CoconutKit_Localizable.strings */; };
 		6FFE38DA1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE384E1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6FFE38DB1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE384F1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -118,6 +127,23 @@
 		6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
+		6FDE68E61475771E005EA5FA /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
+		6FDE68E71475771E005EA5FA /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
+		6FDE68E91475771E005EA5FA /* _Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Employee.h; sourceTree = "<group>"; };
+		6FDE68EA1475771E005EA5FA /* _Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Employee.m; sourceTree = "<group>"; };
+		6FDE68EB1475771E005EA5FA /* _Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Manager.h; sourceTree = "<group>"; };
+		6FDE68EC1475771E005EA5FA /* _Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Manager.m; sourceTree = "<group>"; };
+		6FDE68ED1475771E005EA5FA /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
+		6FDE68EE1475771E005EA5FA /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
+		6FDE68EF1475771E005EA5FA /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
+		6FDE68F01475771E005EA5FA /* Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manager.m; sourceTree = "<group>"; };
+		6FDE68F11475771E005EA5FA /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6FDE68F21475771E005EA5FA /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManagerTestCase.h; sourceTree = "<group>"; };
+		6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManagerTestCase.m; sourceTree = "<group>"; };
 		6FFE38491468FDCA00C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE384A1468FDCA00C02549 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE384B1468FDCA00C02549 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -293,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				6F2FCD59140BB8C70080A775 /* Shared */,
+				6FF56D091474F5390041B40F /* Resources */,
 				6F3334E813FB0112000FC9FD /* Sources */,
 				6F33348E13FAF9E0000FC9FD /* Other Sources */,
 				6F33348613FAF9E0000FC9FD /* Frameworks */,
@@ -336,6 +363,8 @@
 			isa = PBXGroup;
 			children = (
 				6F33351313FB7F80000FC9FD /* Core */,
+				6FDE68F9147577B0005EA5FA /* CoreData */,
+				6FDE68E51475771E005EA5FA /* Models */,
 				6FA74D40140500CC0043693E /* View */,
 			);
 			name = Sources;
@@ -375,6 +404,62 @@
 			name = View;
 			path = Sources/View;
 			sourceTree = SOURCE_ROOT;
+		};
+		6FDE68E114757669005EA5FA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6FDE68E51475771E005EA5FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE68E61475771E005EA5FA /* Employee.h */,
+				6FDE68E71475771E005EA5FA /* Employee.m */,
+				6FDE68E81475771E005EA5FA /* Generated */,
+				6FDE68EF1475771E005EA5FA /* Manager.h */,
+				6FDE68F01475771E005EA5FA /* Manager.m */,
+				6FDE68F11475771E005EA5FA /* Person.h */,
+				6FDE68F21475771E005EA5FA /* Person.m */,
+			);
+			name = Models;
+			path = Sources/Models;
+			sourceTree = SOURCE_ROOT;
+		};
+		6FDE68E81475771E005EA5FA /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE68E91475771E005EA5FA /* _Employee.h */,
+				6FDE68EA1475771E005EA5FA /* _Employee.m */,
+				6FDE68EB1475771E005EA5FA /* _Manager.h */,
+				6FDE68EC1475771E005EA5FA /* _Manager.m */,
+				6FDE68ED1475771E005EA5FA /* _Person.h */,
+				6FDE68EE1475771E005EA5FA /* _Person.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		6FDE68F9147577B0005EA5FA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */,
+				6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */,
+				6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */,
+				6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */,
+			);
+			name = CoreData;
+			path = Sources/CoreData;
+			sourceTree = SOURCE_ROOT;
+		};
+		6FF56D091474F5390041B40F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE68E114757669005EA5FA /* Data */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
 		};
 		6FFE38471468FDCA00C02549 /* Resources */ = {
 			isa = PBXGroup;
@@ -592,9 +677,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F33349E13FAF9E0000FC9FD /* Build configuration list for PBXNativeTarget "CoconutKit-test" */;
 			buildPhases = (
+				6F33348113FAF9E0000FC9FD /* Resources */,
+				6FDE68DE147575DC005EA5FA /* ShellScript */,
 				6F33347F13FAF9E0000FC9FD /* Sources */,
 				6F33348013FAF9E0000FC9FD /* Frameworks */,
-				6F33348113FAF9E0000FC9FD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -610,6 +696,9 @@
 /* Begin PBXProject section */
 		6F33347A13FAF9E0000FC9FD /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 6F33347D13FAF9E0000FC9FD /* Build configuration list for PBXProject "CoconutKit-test" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -651,6 +740,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6FDE68DE147575DC005EA5FA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "${PROJECT_DIR}/generate_model.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6F33347F13FAF9E0000FC9FD /* Sources */ = {
@@ -722,6 +827,15 @@
 				6FFE39161468FDCA00C02549 /* HLSViewController.m in Sources */,
 				6FFE39171468FDCA00C02549 /* HLSWebViewController.m in Sources */,
 				6FFE39181468FDCA00C02549 /* HLSWizardViewController.m in Sources */,
+				6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */,
+				6FDE68F31475771E005EA5FA /* Employee.m in Sources */,
+				6FDE68F41475771E005EA5FA /* _Employee.m in Sources */,
+				6FDE68F51475771E005EA5FA /* _Manager.m in Sources */,
+				6FDE68F61475771E005EA5FA /* _Person.m in Sources */,
+				6FDE68F71475771E005EA5FA /* Manager.m in Sources */,
+				6FDE68F81475771E005EA5FA /* Person.m in Sources */,
+				6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
+				6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,7 +864,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -775,7 +888,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -793,7 +905,6 @@
 		6F33349F13FAF9E0000FC9FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: le studio hortis (36HKZU4CJJ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Frameworks\"",
@@ -807,7 +918,6 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "826F178B-1B43-454E-AF7C-4D1ED1DB62CF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -815,7 +925,6 @@
 		6F3334A013FAF9E0000FC9FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: le studio hortis (36HKZU4CJJ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Frameworks\"",
@@ -829,7 +938,6 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "826F178B-1B43-454E-AF7C-4D1ED1DB62CF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -856,6 +964,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */,
+			);
+			currentVersion = 6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */;
+			path = CoconutKitTestData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6F33347A13FAF9E0000FC9FD /* Project object */;
 }

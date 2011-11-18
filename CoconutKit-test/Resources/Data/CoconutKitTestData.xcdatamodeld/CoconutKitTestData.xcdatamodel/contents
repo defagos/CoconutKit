@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Employee" representedClassName="Employee" parentEntity="Person" syncable="YES">
+        <attribute name="income" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="manager" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Manager" inverseName="employees" inverseEntity="Manager" syncable="YES"/>
+    </entity>
+    <entity name="Manager" representedClassName="Manager" parentEntity="Person" syncable="YES">
+        <attribute name="department" attributeType="String" syncable="YES"/>
+        <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Employee" inverseName="manager" inverseEntity="Employee" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Person" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Employee" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Manager" positionX="160" positionY="192" width="128" height="75"/>
+    </elements>
+</model>

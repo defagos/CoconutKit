@@ -1,6 +1,6 @@
 //
 //  HLSManagedTextFieldValidator.m
-//  CoconutKit-dev
+//  CoconutKit
 //
 //  Created by Samuel Défago on 03.11.11.
 //  Copyright (c) 2011 Hortis. All rights reserved.
@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "NSManagedObject+HLSExtensions.h"
 
 @interface HLSManagedTextFieldValidator ()
 

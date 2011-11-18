@@ -22,6 +22,8 @@
 
 HLSLinkCategory(NSManagedObject_HLSExtensions)
 
+BOOL injectedManagedObjectValidation(void);
+
 static BOOL s_injectedManagedObjectValidation = NO;
 
 // External linkage
