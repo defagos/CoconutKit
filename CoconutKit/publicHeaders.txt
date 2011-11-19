@@ -48,11 +48,12 @@ NSDate+HLSExtensions.h
 NSDateFormatter+HLSExtensions.h
 NSDictionary+HLSExtensions.h
 NSManagedObject+HLSExtensions.h
+NSManagedObject+HLSValidation.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
 NSTimeZone+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
-UITextField+HLSExtensions.h
+UITextField+HLSValidation.h
 UIView+HLSExtensions.h

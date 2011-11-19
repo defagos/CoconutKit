@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "UITextField+HLSExtensions.h"
+#import "UITextField+HLSValidation.h"
 
 /**
  * A UITextField cannot be its own delegate (this leads to infinite recursion when entering edit mode of a text field

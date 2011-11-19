@@ -1,5 +1,5 @@
 //
-//  UITextField+HLSExtensions.h
+//  UITextField+HLSValidation.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.10.11.
@@ -9,7 +9,7 @@
 // Forward declarations
 @protocol HLSTextFieldValidationDelegate;
 
-@interface UITextField (HLSExtensions)
+@interface UITextField (HLSValidation)
 
 - (void)bindToManagedObject:(NSManagedObject *)managedObject
                   fieldName:(NSString *)fieldName

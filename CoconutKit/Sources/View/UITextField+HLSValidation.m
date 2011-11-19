@@ -1,12 +1,12 @@
 //
-//  UITextField+HLSExtensions.m
+//  UITextField+HLSValidation.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.10.11.
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "UITextField+HLSExtensions.h"
+#import "UITextField+HLSValidation.h"
 
 #import "HLSLogger.h"
 #import "HLSManagedTextFieldValidator.h"

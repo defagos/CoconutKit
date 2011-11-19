@@ -10,7 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "NSManagedObject+HLSExtensions.h"
+#import "NSManagedObject+HLSValidation.h"
 
 @interface HLSManagedTextFieldValidator ()
 
