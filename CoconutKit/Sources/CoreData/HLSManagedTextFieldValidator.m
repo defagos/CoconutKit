@@ -9,8 +9,11 @@
 #import "HLSManagedTextFieldValidator.h"
 
 #import "HLSAssert.h"
+#import "HLSError.h"
 #import "HLSLogger.h"
 #import "NSManagedObject+HLSValidation.h"
+
+static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFormattingError";
 
 @interface HLSManagedTextFieldValidator ()
 
@@ -26,6 +29,20 @@
 @end
 
 @implementation HLSManagedTextFieldValidator
+
+#pragma mark Class methods
+
++ (void)load
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    [HLSError registerDefaultCode:NSManagedObjectValidationError
+                           domain:@"ch.hortis.CoconutKit" 
+             localizedDescription:NSLocalizedStringFromTable(@"Formatting error", @"CoconutKit_Localizable", @"Formatting error")
+                    forIdentifier:kManagedTextFieldFormattingError];
+    
+    [pool drain];
+}
 
 #pragma mark Object creation and destruction
 
@@ -228,8 +245,7 @@
     if (self.formatter) {
         // The error descriptions are not explicit. No need to have a look at them 
         if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
-            // TODO: Create a nice HLSError here with the errorDescription as text
-            NSError *error = [NSError errorWithDomain:@"coconut" code:1012 userInfo:nil];
+            HLSError *error = [HLSError errorFromIdentifier:kManagedTextFieldFormattingError];
             if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
                 [self.validationDelegate textField:self.textField didFailValidationWithError:error];
             }

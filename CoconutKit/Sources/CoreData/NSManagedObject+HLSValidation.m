@@ -99,7 +99,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     
     [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
                            domain:@"ch.hortis.CoconutKit" 
-             localizedDescription:NSLocalizedString(@"Multiple validation errors", @"Multiple validation errors")
+             localizedDescription:NSLocalizedStringFromTable(@"Multiple validation errors", @"CoconutKit_Localizable", @"Multiple validation errors")
                     forIdentifier:kManagedObjectMulitpleValidationError];
     
     [pool drain];

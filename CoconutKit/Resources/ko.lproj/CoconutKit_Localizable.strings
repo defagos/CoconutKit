@@ -6,8 +6,8 @@
    Copyright 2010 Hortis. All rights reserved.
  */
 
+ /* HLSWebViewController 'Mail Link' action */
+ "Mail Link"="링크를 이메일로 전송하기";
+
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Safari에서 열기";
-
-/* HLSWebViewController 'Mail Link' action */
-"Mail Link"="링크를 이메일로 전송하기";
