@@ -8,6 +8,7 @@
 
 #import "NSManagedObject+HLSExtensions.h"
 
+#import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
@@ -33,6 +34,8 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
                     sortedUsingDescriptors:(NSArray *)sortDescriptors
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
+    HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
+    
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
     NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];

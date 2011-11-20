@@ -31,7 +31,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
-@interface UIView (HLSTextFieldValidationPrivate)
+@interface UIView (HLSValidationPrivate)
 
 - (BOOL)checkTextFields;
 - (void)synchronizeTextFields;
@@ -177,7 +177,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark View controller additions
 
-@implementation UIViewController (HLSTextFieldValidation)
+@implementation UIViewController (HLSValidation)
 
 - (BOOL)checkAndSynchronize
 {
@@ -193,7 +193,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark View additions
 
-@implementation UIView (HLSTextFieldValidation)
+@implementation UIView (HLSValidation)
 
 - (BOOL)checkAndSynchronize
 {
@@ -207,7 +207,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
-@implementation UIView (HLSTextFieldValidationPrivate)
+@implementation UIView (HLSValidationPrivate)
 
 - (BOOL)checkTextFields
 {

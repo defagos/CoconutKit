@@ -17,36 +17,90 @@
     }
 
 /**
- * TODO: Document:
- *   - naming scheme
- *   - never need to call [super check...] (unlike validate... methods). Extremely error-prone if forgotten
- *   - only one single method for consistency check during updates / inserts (checkForConsistency:)
- *   - no more inout parameter for value to validate. As said in the Core Data doc, changing the value could lead
- *     to potentially serious memory management issues
- *   - never call validations defined in the model object. Call the validate method provided below (which takes
- *     into account validations defined in the xcdatamodel)
- *   - to be documented: Check methods always receive *pError = nil when called. The implementation must replace it with
- *     an error on validation failure. These methods are never to be called directly. Therefore, no need to check pError
- *     in them, the implementation can directly assign *pError without testing if pError != NULL
- *   - document: Behavior undefined if a valid<fieldName>:error: is implemented manually
- *   - document: The methods in this category are only available if validations have been injected (TODO: In their
- *               implementation, check this!)
+ * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 
+ * is good (writing a set of methods beginning with 'validate' and which perform individual and consistency
+ * validations), there are several issues which make writing object validations rather inconvenient
+ * (read http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
+ * for more information):
+ *   - the parameter received by the validation methods is an object pointer, not an object. Having to
+ *     dereference an object is ugly (moreover, the pointer itself must be tested against NULL before
+ *     dereferencing it), and even uglier when the documentation says you should never use this reference 
+ *     to alter the object
+ *   - when implementing the consistency validation methods, the super method must always be called first.
+ *     If done improperly, i.e. if the NSManagedObject implementation of the consistency methods is not
+ *     ultimately called, then neither will individual validations
+ *   - validation methods implemented on model object classes are called when a managed object context
+ *     containing a modified object is saved. On the user side, this generally happens after some form has 
+ *     been completely filled. Sometimes, though, you want validations to occur as the form is being filled, 
+ *     so that the user gets more accurate information about which values are incorrect and why. In such cases,
+ *     validation has to be triggered for each field. Always having to write the required code (which means 
+ *     catching end of input and synchronizing the model and the view) is often leads to a bunch of redundant 
+ *     code which is hard to maintain
+ *   - errors received by validation methods (both individual or global validation methods) must be chained 
+ *     manually in their implementation according to the documentation. Not only is this error-prone and
+ *     distracting (you end up merging validation code with error-chaining code), it also does not make sense 
+ *     if the validation methods need to be called directly (e.g. when validating a text field interactively). 
+ *     You could imagine having two sets of validation methods, one performing chaining, the other not, but
+ *     this is far from ideal
+ *   - global validation for insertion / update is the same, but Core Data lets you implement both separately.
+ *     This does not really make sense, the logic should be the same in both cases
  *
- * Also add unit tests for:
- *   - managed object hierarchies
- *   - validation of relationships between managed objects
+ * The HLSValidation class extensions (there are several of them) are meant to solve those issues. Those
+ * extensions need to be enabled by calling the HLSEnableNSManagedObjectValidation macro at global scope.
+ * When HLSValidation extensions have been enabled, model object validation must be implemented in a different
+ * way:
+ *   - instead of implementing 
+ *         -validate<fieldName>:(<class> *)pValue error:(NSError **)pError
+ *     for each model field to validate, you now implement methods with signature
+ *         -check<fieldName>:(<class>)value error:(NSError **)pError
+ *     As for the 'validate' methods, the 'check' methods are not meant to be called directly (i.e. public)
+ *     and should remain hidden in the model object implementation file. Note that the first parameter of 
+ *     'check' methods is an object, not an object pointer anymore. The pError pointer is guaranteed to be 
+ *     valid (and such that *pError = nil upon method entry), eliminating the need to check the pointer 
+ *     before dereferencing it. You can use this pointer to return errors which might be encountered during 
+ *     field validation. Those errors will automatically be chained for you.
+ *   - instead of implementing -validateForUpdate: and -validateForInsert: methods, you now implement a single
+ *     -checkForConsistency: method which will be called when an inserted or updated object is saved. As for
+ *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
+ *     therefore do not need to check the pointer before dereferencing it. Moreover, error-chaining will be
+ *     performed for you
+ * Other HLSValidation class extensions leverage this new set of validation methods by providing binding
+ * between widgets (currently UITextField) and model object fields. This makes synchronization and validation 
+ * of forms very easy to implement. Refer to the documentation of the other HLSValidation class extensions
+ * for more information.
+ * 
+ * This magic is implemented behing the scene by having usual -validate<fieldName>:error: methods being
+ * created and injected at runtime. Those are wrappers around -check<fieldName>:error: methods which
+ * factor out all usual Core Data boilerplate validation code. When you enable HLSValidation class
+ * extensions, it is therefore especially important that you NEVER implement 'validate' methods anymore,
+ * since this would likely conflict with the methods added at runtime.
  */
 @interface NSManagedObject (HLSValidation)
 
 /**
- * Inject the improved validation extensions of NSManagedObject (disabled by default). You should not call this method
+ * Inject the validation extensions of NSManagedObject (disabled by default). You should not call this method
  * directly, use the HLSEnableNSManagedObjectValidation macro instead
  */
 + (void)injectValidation;
 
+/**
+ * Check that a given value is valid for a specific field. The validation logic can implemented in the xcdatamodel
+ * and / or in a -check<fieldName>:error: method. The method returns YES iff the value is valid
+ */
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 
+/**
+ * Subclasses of NSManagedObject can override this method to perform additional consistency validations when
+ * inserted or updated objects are committed (i.e. when the managed object context they live in is saved).
+ * This defaut implementation does nothing and returns YES.
+ *
+ * When implementing this method, you do not have to (and should not) call the method on super first.
+ */
 - (BOOL)checkForConsistency:(NSError **)pError;
+
+/**
+ * Same as checkForConsistency: (see above), but when an object deletion is committed
+ */
 - (BOOL)checkForDelete:(NSError **)pError;
 
 @end

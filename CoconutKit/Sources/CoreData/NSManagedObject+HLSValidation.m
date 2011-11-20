@@ -68,6 +68,8 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     // Remark: Do not invoke validation methods directly. Use validateValue:forKey:error: with a key. This guarantees
     //         that any validation logic in the xcdatamodel is also triggered
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html

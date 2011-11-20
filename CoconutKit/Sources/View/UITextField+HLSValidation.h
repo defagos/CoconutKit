@@ -39,14 +39,14 @@
 
 @end
 
-@interface UIViewController (HLSTextFieldValidation)
+@interface UIViewController (HLSValidation)
 
 // TODO: Document: This checks all fields and does not stop when an error is encountered
 - (BOOL)checkAndSynchronize;
 
 @end
 
-@interface UIView (HLSTextFieldValidation)
+@interface UIView (HLSValidation)
 
 // TODO: See above
 - (BOOL)checkAndSynchronize;
