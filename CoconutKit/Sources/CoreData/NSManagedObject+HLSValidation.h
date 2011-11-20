@@ -50,9 +50,9 @@
  * When HLSValidation extensions have been enabled, model object validation must be implemented in a different
  * way:
  *   - instead of implementing 
- *         -validate<fieldName>:(<class> *)pValue error:(NSError **)pError
+ *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError **)pError
  *     for each model field to validate, you now implement methods with signature
- *         -check<fieldName>:(<class>)value error:(NSError **)pError
+ *         - (BOOL)check<fieldName>:(<class>)value error:(NSError **)pError
  *     As for the 'validate' methods, the 'check' methods are not meant to be called directly (i.e. public)
  *     and should remain hidden in the model object implementation file. Note that the first parameter of 
  *     'check' methods is an object, not an object pointer anymore. The pError pointer is guaranteed to be 
