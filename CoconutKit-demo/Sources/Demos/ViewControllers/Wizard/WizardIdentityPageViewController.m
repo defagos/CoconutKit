@@ -154,7 +154,7 @@
 
 - (BOOL)validate
 {
-    return [self checkAndSynchronize];
+    return [self checkAndSynchronizeTextFields];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation

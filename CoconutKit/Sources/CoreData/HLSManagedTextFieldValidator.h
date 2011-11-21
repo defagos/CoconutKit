@@ -11,11 +11,11 @@
 /**
  * A UITextField cannot be its own delegate (this leads to infinite recursion when entering edit mode of a text field
  * which is its own delegate). In general, it is probably better to avoid having an object being its own delegate. If
- * we want to trap text field delegate events to do additional validation, we therefore need an additional object
- * as delegate, and having the real text field delegate as its delegate. This is just the purpose of the (private)
- * HLSManagedTextFieldValidator class.
+ * we want to trap text field delegate events to perform additional tasks (here validation), we therefore need an 
+ * additional object as delegate, and having the real text field delegate as its delegate. This is just the purpose 
+ * of this (private) HLSManagedTextFieldValidator class.
  *
- * Designated initializer: initWithManagedObject:fieldName:validationDelegate:
+ * Designated initializer: initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
 @interface HLSManagedTextFieldValidator : NSObject <UITextFieldDelegate> {
 @private
@@ -30,7 +30,7 @@
 
 /**
  * Initialize with a managed object and the field we want to validate, as well as a delegate which must receive
- * validation events. An optional formatter can be provided if needed (e.g. for date or numeric field)
+ * validation events. An optional formatter can be provided if needed (e.g. for date or numeric fields)
  */
 - (id)initWithTextField:(UITextField *)textField
           managedObject:(NSManagedObject *)managedObject 
@@ -39,7 +39,7 @@
      validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
 
 /**
- * Object, field and delegate which have been bound to the validator
+ * Validator properties set at creation time
  */
 @property (nonatomic, readonly, assign) UITextField *textField;
 @property (nonatomic, readonly, retain) NSManagedObject *managedObject;
@@ -47,7 +47,11 @@
 @property (nonatomic, readonly, retain) NSFormatter *formatter;
 @property (nonatomic, readonly, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
-@property (nonatomic, assign, getter=ischeckingOnChange) BOOL checkingOnChange;
+/**
+ * If set to YES, validation is also called during input.
+ * Default value is NO
+ */
+@property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
 - (BOOL)checkDisplayedValue;
 - (void)synchronizeWithDisplayedValue;

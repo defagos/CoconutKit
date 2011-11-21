@@ -15,6 +15,9 @@
 
 #import <objc/runtime.h>
 
+// TODO: Observe the model object field. If its value changes, update the text field accordingly (warning: Is there a
+//       recursion problem?)
+
 HLSLinkCategory(UITextField_HLSValidation)
 
 // Associated object keys
@@ -27,12 +30,18 @@ static void (*s_UITextField__setDelegate_Imp)(id, SEL, id) = NULL;
 // Extern declarations
 extern BOOL injectedManagedObjectValidation(void);
 
-@interface UITextField (HLSExtensionsPrivate)
+#pragma mark -
+#pragma mark HLSValidationPrivate UITextField category interface
+
+@interface UITextField (HLSValidationPrivate)
 
 - (id<UITextFieldDelegate>)swizzledDelegate;
 - (void)swizzledSetDelegate:(id<UITextFieldDelegate>) delegate;
 
 @end
+
+#pragma mark -
+#pragma mark HLSValidationPrivate UIView category interface
 
 @interface UIView (HLSValidationPrivate)
 
@@ -41,7 +50,10 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
-@implementation UITextField (HLSExtensions)
+#pragma mark -
+#pragma mark HLSValidation UITextField category implementation
+
+@implementation UITextField (HLSValidation)
 
 #pragma mark Binding to managed object fields
 
@@ -50,11 +62,7 @@ extern BOOL injectedManagedObjectValidation(void);
                   formatter:(NSFormatter *)formatter
          validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
-    // Ensure that injection has been enabled
-    if (! injectedManagedObjectValidation()) {
-        HLSLoggerError(@"Text field cannot be bound, call HLSEnableNSManagedObjectValidation() first");
-        return;
-    }
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
     
     // First unbind any bound field
     [self unbind];
@@ -79,12 +87,15 @@ extern BOOL injectedManagedObjectValidation(void);
     objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     // Set the validator as text field delegate to catch events and perform validation. We need an intermediate object 
-    // because trying to set self as delegate does not work for a UITextField
+    // because trying to set self as delegate does not work for a UITextField (this conflicts with the text field
+    // implementation and leads to infinite recursion)
     (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator);
 }
 
 - (void)unbind
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     // If not bound to a validator, nothing to do
     if (! objc_getAssociatedObject(self, s_validatorKey)) {
         return;
@@ -102,24 +113,32 @@ extern BOOL injectedManagedObjectValidation(void);
 
 - (NSManagedObject *)boundManagedObject
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     return validator.managedObject;
 }
 
 - (NSString *)boundFieldName
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     return validator.fieldName;
 }
 
 - (id<HLSTextFieldValidationDelegate>)validationDelegate
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     return validator.validationDelegate;    
 }
 
 - (BOOL)isCheckingOnChange
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (! validator) {
         HLSLoggerInfo(@"The text field has not been bound to a model object");
@@ -131,6 +150,8 @@ extern BOOL injectedManagedObjectValidation(void);
 
 - (void)setCheckingOnChange:(BOOL)checkingOnChange
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (! validator) {
         HLSLoggerError(@"The text field has not been bound to a model object");
@@ -142,7 +163,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
-@implementation UITextField (HLSExtensionsPrivate)
+@implementation UITextField (HLSValidationPrivate)
 
 #pragma mark Class methods
 
@@ -178,28 +199,15 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
-#pragma mark View controller additions
-
-@implementation UIViewController (HLSValidation)
-
-- (BOOL)checkAndSynchronize
-{
-    if (! [self isViewLoaded]) {
-        HLSLoggerError(@"The view controller's view has not been loaded yet");
-        return NO;
-    }
-    
-    return [self.view checkAndSynchronize];
-}
-
-@end
-
-#pragma mark View additions
+#pragma mark -
+#pragma mark HLSValidation UIView category implementation
 
 @implementation UIView (HLSValidation)
 
-- (BOOL)checkAndSynchronize
+- (BOOL)checkAndSynchronizeTextFields
 {
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
     BOOL valid = [self checkTextFields];
     if (valid) {
         [self synchronizeTextFields];
@@ -209,6 +217,9 @@ extern BOOL injectedManagedObjectValidation(void);
 }
 
 @end
+
+#pragma mark -
+#pragma mark HLSValidationPrivate UIView category implementation
 
 @implementation UIView (HLSValidationPrivate)
 
@@ -249,3 +260,21 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @end
 
+#pragma mark -
+#pragma mark HLSValidation UIViewController category implementation
+
+@implementation UIViewController (HLSValidation)
+
+- (BOOL)checkAndSynchronizeTextFields
+{
+    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
+    
+    if (! [self isViewLoaded]) {
+        HLSLoggerError(@"The view controller's view has not been loaded yet");
+        return NO;
+    }
+    
+    return [self.view checkAndSynchronizeTextFields];
+}
+
+@end

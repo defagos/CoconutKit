@@ -42,7 +42,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 static void combineErrors(NSError *newError, NSError **pOriginalError);
 
 #pragma mark -
-#pragma mark HLSValidationPrivate class extension interface
+#pragma mark HLSValidationPrivate category interface
 
 @interface NSManagedObject (HLSValidationPrivate)
 
@@ -51,7 +51,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 @end
 
 #pragma mark -
-#pragma mark HLSValidation class extension implementation
+#pragma mark HLSValidation category implementation
 
 @implementation NSManagedObject (HLSValidation)
 
@@ -97,7 +97,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 @end
 
 #pragma mark -
-#pragma mark HLSValidationPrivate class extension implementation
+#pragma mark HLSValidationPrivate category implementation
 
 @implementation NSManagedObject (HLSValidationPrivate)
 
