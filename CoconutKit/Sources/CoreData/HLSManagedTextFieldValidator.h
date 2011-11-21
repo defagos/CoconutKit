@@ -53,6 +53,9 @@
  */
 @property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
+- (BOOL)checkDisplayedValue;
+- (void)synchronizeWithDisplayedValue;
+
 /**
  * The delegate to forward UITextFieldDelegate events to after the validator has performed its work
  */

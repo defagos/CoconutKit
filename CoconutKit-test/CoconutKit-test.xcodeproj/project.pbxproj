@@ -147,7 +147,6 @@
 		6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManagerTestCase.h; sourceTree = "<group>"; };
 		6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManagerTestCase.m; sourceTree = "<group>"; };
-		6FE981E3147A4F9B00C3A5C8 /* HLSManagedTextFieldValidator+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSManagedTextFieldValidator+Friend.h"; sourceTree = "<group>"; };
 		6FFE38491468FDCA00C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE384A1468FDCA00C02549 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE384B1468FDCA00C02549 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -260,7 +259,7 @@
 		6FFE38BE1468FDCA00C02549 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6FFE38BF1468FDCA00C02549 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6FFE38C01468FDCA00C02549 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6FFE38C11468FDCA00C02549 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
+		6FFE38C11468FDCA00C02549 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
 		6FFE38C21468FDCA00C02549 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FFE38C31468FDCA00C02549 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FFE38C41468FDCA00C02549 /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
@@ -584,7 +583,6 @@
 				6FFE38961468FDCA00C02549 /* HLSManagedObjectCopying.h */,
 				6FFE38971468FDCA00C02549 /* HLSManagedTextFieldValidator.h */,
 				6FFE38981468FDCA00C02549 /* HLSManagedTextFieldValidator.m */,
-				6FE981E3147A4F9B00C3A5C8 /* HLSManagedTextFieldValidator+Friend.h */,
 				6FFE38991468FDCA00C02549 /* HLSModelManager.h */,
 				6FFE389A1468FDCA00C02549 /* HLSModelManager.m */,
 				6FFE389B1468FDCA00C02549 /* NSManagedObject+HLSExtensions.h */,

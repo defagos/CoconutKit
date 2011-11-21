@@ -11,7 +11,6 @@
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSManagedTextFieldValidator.h"
-#import "HLSManagedTextFieldValidator+Friend.h"
 #import "HLSRuntime.h"
 
 #import <objc/runtime.h>

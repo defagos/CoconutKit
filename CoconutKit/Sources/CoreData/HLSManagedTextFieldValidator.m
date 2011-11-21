@@ -26,9 +26,6 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 - (BOOL)getValue:(id *)pValue forString:(NSString *)string;
 - (BOOL)checkValue:(id)value;
 
-- (BOOL)checkDisplayedValue;
-- (void)synchronizeWithDisplayedValue;
-
 @end
 
 @implementation HLSManagedTextFieldValidator
