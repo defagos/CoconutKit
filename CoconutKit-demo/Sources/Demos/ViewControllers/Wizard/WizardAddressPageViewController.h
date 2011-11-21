@@ -20,6 +20,7 @@
     HLSTextField *m_stateTextField;
     UILabel *m_countryLabel;
     HLSTextField *m_countryTextField;
+    UIButton *m_resetButton;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *streetLabel;
@@ -30,5 +31,8 @@
 @property (nonatomic, retain) IBOutlet HLSTextField *stateTextField;
 @property (nonatomic, retain) IBOutlet UILabel *countryLabel;
 @property (nonatomic, retain) IBOutlet HLSTextField *countryTextField;
+@property (nonatomic, retain) IBOutlet UIButton *resetButton;
+
+- (IBAction)reset:(id)sender;
 
 @end

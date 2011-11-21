@@ -22,6 +22,7 @@
     HLSTextField *m_birthdateTextField;
     UILabel *m_nbrChildrenLabel;
     HLSTextField *m_nbrChildrenTextField;
+    UIButton *m_resetButton;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *firstNameLabel;
@@ -34,5 +35,8 @@
 @property (nonatomic, retain) IBOutlet HLSTextField *birthdateTextField;
 @property (nonatomic, retain) IBOutlet UILabel *nbrChildrenLabel;
 @property (nonatomic, retain) IBOutlet HLSTextField *nbrChildrenTextField;
+@property (nonatomic, retain) IBOutlet UIButton *resetButton;
+
+- (IBAction)reset:(id)sender;
 
 @end

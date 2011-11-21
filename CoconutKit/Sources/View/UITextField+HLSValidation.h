@@ -12,7 +12,7 @@
 /**
  * This class extension allows UITextField objects to be bound to model object fields when HLSValidation has been
  * enabled on NSManagedObject (for more information, please refer to NSManagedObject+HLSValidation.h first).
- 
+ *
  * Binding eliminates the need to write code to synchronize a model object field and the text field used to display
  * and edit its value. Moreover, if a -check<fieldName>:error: has been defined for the managed object field, it
  * will automatically be called, either when exiting input mode or when the field value changes (depending on a
@@ -89,20 +89,17 @@
 @interface UIView (HLSValidation)
 
 /**
- * Fina all bound text fields on a view and performs validation for each of them (the method does not
- * stop if an error is encountered, validation is triggered for all fields). If all fields are valid,
- * the model object is updated and the method returns YES. Otherwise the model object is not updated
- * and the method returns NO
+ * Check all text fields in the receiver view hierarchy. Returns YES iff all of them are valid
  */
-- (BOOL)checkAndSynchronizeTextFields;
+- (BOOL)checkTextFields;
 
 @end
 
 @interface UIViewController (HLSValidation)
 
 /**
- * Same as -[UIView checkAndSynchronizeTextFields], but applied on a view controller's view
+ * Same as -[UIView checkTextFields], but applied on a view controller's view
  */
-- (BOOL)checkAndSynchronizeTextFields;
+- (BOOL)checkTextFields;
 
 @end

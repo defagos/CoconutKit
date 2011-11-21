@@ -59,11 +59,6 @@
 - (BOOL)checkDisplayedValue;
 
 /**
- * Update the model object with the value currently displayed by the text field
- */
-- (void)synchronizeWithDisplayedValue;
-
-/**
  * The delegate to forward UITextFieldDelegate events to after the validator has performed its work
  */
 @property (nonatomic, assign) id<UITextFieldDelegate> delegate;

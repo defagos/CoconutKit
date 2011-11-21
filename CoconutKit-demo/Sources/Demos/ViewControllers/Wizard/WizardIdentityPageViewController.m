@@ -54,6 +54,7 @@
     self.birthdateTextField = nil;
     self.nbrChildrenLabel = nil;
     self.nbrChildrenTextField = nil;
+    self.resetButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -91,6 +92,8 @@
 @synthesize nbrChildrenLabel = m_nbrChildrenLabel;
 
 @synthesize nbrChildrenTextField = m_nbrChildrenTextField;
+
+@synthesize resetButton = m_resetButton;
 
 #pragma mark View lifecycle
 
@@ -154,7 +157,7 @@
 
 - (BOOL)validate
 {
-    return [self checkAndSynchronizeTextFields];
+    return [self checkTextFields];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -189,6 +192,19 @@
     self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
     self.nbrChildrenLabel.text = NSLocalizedString(@"Number of children", @"Number of children");
+    [self.resetButton setTitle:NSLocalizedString(@"Reset", @"Reset") forState:UIControlStateNormal];
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)reset:(id)sender
+{
+    // Reset values programmatically. This shows that text fields update accordingly
+    self.person.firstName = nil;
+    self.person.lastName = nil;
+    self.person.email = nil;
+    self.person.birthdate = nil;
+    self.person.nbrChildrenValue = 0;
 }
 
 @end

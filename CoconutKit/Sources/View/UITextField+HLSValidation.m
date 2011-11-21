@@ -41,16 +41,6 @@ extern BOOL injectedManagedObjectValidation(void);
 @end
 
 #pragma mark -
-#pragma mark HLSValidationPrivate UIView category interface
-
-@interface UIView (HLSValidationPrivate)
-
-- (BOOL)checkTextFields;
-- (void)synchronizeTextFields;
-
-@end
-
-#pragma mark -
 #pragma mark HLSValidation UITextField category implementation
 
 @implementation UITextField (HLSValidation)
@@ -204,27 +194,10 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UIView (HLSValidation)
 
-- (BOOL)checkAndSynchronizeTextFields
+- (BOOL)checkTextFields
 {
     NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
     
-    BOOL valid = [self checkTextFields];
-    if (valid) {
-        [self synchronizeTextFields];
-    }
-    
-    return valid;
-}
-
-@end
-
-#pragma mark -
-#pragma mark HLSValidationPrivate UIView category implementation
-
-@implementation UIView (HLSValidationPrivate)
-
-- (BOOL)checkTextFields
-{
     // Check self first (if bound to a validator)
     BOOL valid = YES;
     if ([self isKindOfClass:[UITextField class]]) {
@@ -240,22 +213,8 @@ extern BOOL injectedManagedObjectValidation(void);
             valid = NO;
         }
     }
-        
-    return valid;
-}
-
-- (void)synchronizeTextFields
-{
-    // Sync self first (if bound to a validator)
-    if ([self isKindOfClass:[UITextField class]]) {
-        HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-        [validator synchronizeWithDisplayedValue];
-    }
     
-    // Sync subviews recursively
-    for (UIView *subview in self.subviews) {
-        [subview synchronizeTextFields];
-    }
+    return valid;
 }
 
 @end
@@ -265,7 +224,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UIViewController (HLSValidation)
 
-- (BOOL)checkAndSynchronizeTextFields
+- (BOOL)checkTextFields
 {
     NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
     
@@ -274,7 +233,7 @@ extern BOOL injectedManagedObjectValidation(void);
         return NO;
     }
     
-    return [self.view checkAndSynchronizeTextFields];
+    return [self.view checkTextFields];
 }
 
 @end

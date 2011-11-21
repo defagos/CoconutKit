@@ -26,6 +26,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 
 - (BOOL)getValue:(id *)pValue forString:(NSString *)string;
 - (BOOL)checkValue:(id)value;
+- (void)synchronizeTextField;
 
 @end
 
@@ -85,22 +86,13 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         self.validationDelegate = validationDelegate;
         
         // Initially update the text field with the current property value
-        id value = [self.managedObject valueForKey:self.fieldName];
-        if (value) {
-            if (formatter) {
-                NSString *stringValue = [formatter stringForObjectValue:value];
-                if (! stringValue) {
-                    HLSLoggerWarn(@"Formatting failed");
-                }
-                self.textField.text = stringValue;
-            }
-            else {
-                self.textField.text = value;
-            }            
-        }
-        else {
-            self.textField.text = nil;
-        }
+        [self synchronizeTextField];
+        
+        // Enable KVO to update the text field automatically when the model field value changes
+        [self.managedObject addObserver:self
+                             forKeyPath:self.fieldName 
+                                options:NSKeyValueObservingOptionNew 
+                                context:NULL];
     }
     return self;
 }
@@ -113,6 +105,8 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 
 - (void)dealloc
 {
+    [self.managedObject removeObserver:self forKeyPath:self.fieldName];
+    
     self.textField = nil;
     self.managedObject = nil;
     self.fieldName = nil;
@@ -174,10 +168,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     // Only check the value if it can be properly formatted
     id value = nil;
     if ([self getValue:&value forString:textField.text]) {
-        // If valid, then sync model object
-        if ([self checkValue:value]) {
-            [self.managedObject setValue:value forKey:self.fieldName];
-        }
+        [self.managedObject setValue:value forKey:self.fieldName];
     }
     
     // In all cases end editing, even if the value is invalid. In this case, the model object won't be updated
@@ -248,6 +239,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
             HLSError *error = [HLSError errorFromIdentifier:kManagedTextFieldFormattingError];
             if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
+                HLSLoggerDebug(@"String %@ for field %@ could not be parsed", string, self.fieldName);
                 [self.validationDelegate textField:self.textField didFailValidationWithError:error];
             }
             
@@ -266,12 +258,14 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     NSError *error = nil;
     if ([self.managedObject checkValue:value forKey:self.fieldName error:&error]) {
         if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
+            HLSLoggerDebug(@"Value %@ for field %@ is valid", value, self.fieldName);
             [self.validationDelegate textFieldDidPassValidation:self.textField];
         }
         return YES;
     }
     else {
         if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
+            HLSLoggerDebug(@"Value %@ for field %@ is invalid", value, self.fieldName);
             [self.validationDelegate textField:self.textField didFailValidationWithError:error];
         }
         return NO;
@@ -288,15 +282,31 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     return [self checkValue:value];
 }
 
-- (void)synchronizeWithDisplayedValue
+- (void)synchronizeTextField
 {
-    id value = nil;
-    if (! [self getValue:&value forString:self.textField.text]) {
-        HLSLoggerError(@"The value could not be formatted and therefore not synchronized");
-        return;
+    id value = [self.managedObject valueForKey:self.fieldName];
+    if (value) {
+        if (self.formatter) {
+            self.textField.text = [self.formatter stringForObjectValue:value];
+        }
+        else {
+            self.textField.text = value;
+        }            
     }
+    else {
+        self.textField.text = @"";
+    }
+}
+
+#pragma mark Key-value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    id newValue = [object valueForKey:keyPath];
+    [self checkValue:newValue];
     
-    [self.managedObject setValue:value forKey:self.fieldName];
+    // The value might have been changed programmatically. Update the text field text accordingly
+    [self synchronizeTextField];
 }
 
 #pragma mark Description

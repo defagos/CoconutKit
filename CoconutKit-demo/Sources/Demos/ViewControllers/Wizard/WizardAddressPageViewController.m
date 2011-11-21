@@ -48,6 +48,7 @@
     self.stateTextField = nil;
     self.countryLabel = nil;
     self.countryTextField = nil;
+    self.resetButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -81,6 +82,8 @@
 @synthesize countryLabel = m_countryLabel;
 
 @synthesize countryTextField = m_countryTextField;
+
+@synthesize resetButton = m_resetButton;
 
 #pragma mark View lifecycle
 
@@ -124,7 +127,7 @@
 
 - (BOOL)validate
 {    
-    return [self checkAndSynchronizeTextFields];
+    return [self checkTextFields];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -158,6 +161,17 @@
     self.cityLabel.text = NSLocalizedString(@"City", @"City");
     self.stateLabel.text = NSLocalizedString(@"State", @"State");
     self.countryLabel.text = NSLocalizedString(@"Country", @"Country");
+    [self.resetButton setTitle:NSLocalizedString(@"Reset", @"Reset") forState:UIControlStateNormal];
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)reset:(id)sender
+{
+    self.person.street = nil;
+    self.person.city = nil;
+    self.person.state = nil;
+    self.person.country = nil;
 }
 
 @end
