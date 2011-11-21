@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "NSManagedObject+HLSValidation.h"
 
+// Variables with internal linkage
 static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFormattingError";
 
 @interface HLSManagedTextFieldValidator ()
@@ -54,13 +55,13 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 {
     if ((self = [super init])) {
         // Sanity check
-        if (! managedObject) {
+        if (! managedObject || ! fieldName) {
             HLSLoggerError(@"Missing managed object or field name");
             [self release];
             return nil;
         }
         
-        // Property must exist for the managed object class
+        // The property must exist for the managed object class
         NSPropertyDescription *propertyDescription = [[[managedObject entity] propertiesByName] objectForKey:fieldName];
         if (! propertyDescription) {
             HLSLoggerError(@"The property %@ does not exist for %@", fieldName, managedObject);
@@ -83,7 +84,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         self.formatter = formatter;
         self.validationDelegate = validationDelegate;
         
-        // Initially sync text field with property value
+        // Initially update the text field with the current property value
         id value = [self.managedObject valueForKey:self.fieldName];
         if (value) {
             if (formatter) {

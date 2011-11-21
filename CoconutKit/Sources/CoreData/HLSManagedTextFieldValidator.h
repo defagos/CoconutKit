@@ -53,7 +53,14 @@
  */
 @property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
+/**
+ * Check the value currently displayed by the text field. Returns YES iff valid
+ */
 - (BOOL)checkDisplayedValue;
+
+/**
+ * Update the model object with the value currently displayed by the text field
+ */
 - (void)synchronizeWithDisplayedValue;
 
 /**
