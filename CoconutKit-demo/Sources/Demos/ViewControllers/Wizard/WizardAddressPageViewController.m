@@ -48,7 +48,8 @@
     self.stateTextField = nil;
     self.countryLabel = nil;
     self.countryTextField = nil;
-    self.resetButton = nil;
+    self.resetModelButton = nil;
+    self.resetTextFieldsButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -83,7 +84,9 @@
 
 @synthesize countryTextField = m_countryTextField;
 
-@synthesize resetButton = m_resetButton;
+@synthesize resetModelButton = m_resetModelButton;
+
+@synthesize resetTextFieldsButton = m_resetTextFieldsButton;
 
 #pragma mark View lifecycle
 
@@ -161,17 +164,28 @@
     self.cityLabel.text = NSLocalizedString(@"City", @"City");
     self.stateLabel.text = NSLocalizedString(@"State", @"State");
     self.countryLabel.text = NSLocalizedString(@"Country", @"Country");
-    [self.resetButton setTitle:NSLocalizedString(@"Reset", @"Reset") forState:UIControlStateNormal];
+    [self.resetModelButton setTitle:NSLocalizedString(@"Reset model fields", @"Reset model fields") forState:UIControlStateNormal];
+    [self.resetTextFieldsButton setTitle:NSLocalizedString(@"Reset text fields", @"Reset text fields") forState:UIControlStateNormal];
 }
 
 #pragma mark Event callbacks
 
-- (IBAction)reset:(id)sender
+- (IBAction)resetModel:(id)sender
 {
+    // Reset the model programmatically. This shows that the text fields are updated accordingly
     self.person.street = nil;
     self.person.city = nil;
     self.person.state = nil;
     self.person.country = nil;
+}
+
+- (IBAction)resetTextFields:(id)sender
+{
+    // Reset text fields programmatically. This shows that the model is updated accordingly
+    self.streetTextField.text = nil;
+    self.cityTextField.text = nil;
+    self.stateTextField.text = nil;
+    self.countryTextField.text = nil;
 }
 
 @end

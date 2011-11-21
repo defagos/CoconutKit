@@ -13,6 +13,8 @@
 #import "HLSLogger.h"
 #import "NSManagedObject+HLSValidation.h"
 
+extern void (*UITextField__setText_Imp)(id, SEL, id);
+
 // Variables with internal linkage
 static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFormattingError";
 
@@ -24,7 +26,6 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 @property (nonatomic, retain) NSFormatter *formatter;
 @property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
-- (BOOL)getValue:(id *)pValue forString:(NSString *)string;
 - (BOOL)checkValue:(id)value;
 - (void)synchronizeTextField;
 
@@ -165,11 +166,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         }
     }
     
-    // Only check the value if it can be properly formatted
-    id value = nil;
-    if ([self getValue:&value forString:textField.text]) {
-        [self.managedObject setValue:value forKey:self.fieldName];
-    }
+    // After this method returns, the text field text gets updated (ultimately triggering validation)
     
     // In all cases end editing, even if the value is invalid. In this case, the model object won't be updated
     return YES;
@@ -239,7 +236,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
             HLSError *error = [HLSError errorFromIdentifier:kManagedTextFieldFormattingError];
             if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-                HLSLoggerDebug(@"String %@ for field %@ could not be parsed", string, self.fieldName);
+                HLSLoggerInfo(@"String %@ for field %@ could not be parsed", string, self.fieldName);
                 [self.validationDelegate textField:self.textField didFailValidationWithError:error];
             }
             
@@ -258,14 +255,14 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     NSError *error = nil;
     if ([self.managedObject checkValue:value forKey:self.fieldName error:&error]) {
         if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
-            HLSLoggerDebug(@"Value %@ for field %@ is valid", value, self.fieldName);
+            HLSLoggerInfo(@"Value %@ for field %@ is valid", value, self.fieldName);
             [self.validationDelegate textFieldDidPassValidation:self.textField];
         }
         return YES;
     }
     else {
         if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-            HLSLoggerDebug(@"Value %@ for field %@ is invalid", value, self.fieldName);
+            HLSLoggerInfo(@"Value %@ for field %@ is invalid", value, self.fieldName);
             [self.validationDelegate textField:self.textField didFailValidationWithError:error];
         }
         return NO;
@@ -285,17 +282,20 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 - (void)synchronizeTextField
 {
     id value = [self.managedObject valueForKey:self.fieldName];
+    NSString *text = nil;
     if (value) {
         if (self.formatter) {
-            self.textField.text = [self.formatter stringForObjectValue:value];
+            text = [self.formatter stringForObjectValue:value];
         }
         else {
-            self.textField.text = value;
+            text = value;
         }            
     }
     else {
-        self.textField.text = @"";
+        text = @"";
     }
+    
+    (*UITextField__setText_Imp)(self.textField, @selector(setText:), text);
 }
 
 #pragma mark Key-value observing

@@ -15,9 +15,6 @@
 
 #import <objc/runtime.h>
 
-// TODO: Observe the model object field. If its value changes, update the text field accordingly (warning: Is there a
-//       recursion problem?)
-
 HLSLinkCategory(UITextField_HLSValidation)
 
 // Associated object keys
@@ -26,6 +23,7 @@ static void *s_validatorKey = &s_validatorKey;
 // Original implementation of the methods we swizzle
 static id<UITextFieldDelegate> (*s_UITextField__delegate_Imp)(id, SEL) = NULL;
 static void (*s_UITextField__setDelegate_Imp)(id, SEL, id) = NULL;
+void (*UITextField__setText_Imp)(id, SEL, id) = NULL;
 
 // Extern declarations
 extern BOOL injectedManagedObjectValidation(void);
@@ -37,6 +35,7 @@ extern BOOL injectedManagedObjectValidation(void);
 
 - (id<UITextFieldDelegate>)swizzledDelegate;
 - (void)swizzledSetDelegate:(id<UITextFieldDelegate>) delegate;
+- (void)swizzledSetText:(NSString *)text;
 
 @end
 
@@ -161,6 +160,7 @@ extern BOOL injectedManagedObjectValidation(void);
 {
     s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))HLSSwizzleSelector(self, @selector(delegate), @selector(swizzledDelegate));
     s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setDelegate:), @selector(swizzledSetDelegate:));
+    UITextField__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector([UITextField class], @selector(setText:), @selector(swizzledSetText:));
 }
 
 #pragma mark Swizzled method implementations
@@ -185,6 +185,20 @@ extern BOOL injectedManagedObjectValidation(void);
     else {
         (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), delegate);
     }
+}
+
+- (void)swizzledSetText:(NSString *)text
+{
+    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
+    if (validator) {
+        // Formatters does not always handle nil strings gracefully. Fix
+        id value = nil;
+        [validator getValue:&value forString:text ?: @""];
+        [self.boundManagedObject setValue:value forKey:self.boundFieldName];
+    }
+    else {
+        (*UITextField__setText_Imp)(self, @selector(setText:), text);
+    }    
 }
 
 @end

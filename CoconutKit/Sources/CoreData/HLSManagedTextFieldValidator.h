@@ -53,6 +53,9 @@
  */
 @property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
+// TODO: Document
+- (BOOL)getValue:(id *)pValue forString:(NSString *)string;
+
 /**
  * Check the value currently displayed by the text field. Returns YES iff valid
  */

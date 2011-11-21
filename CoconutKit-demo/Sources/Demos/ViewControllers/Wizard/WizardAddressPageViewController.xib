@@ -226,7 +226,7 @@
 						<string key="NSFrame">{{392, 492}, {271, 31}}</string>
 						<reference key="NSSuperview" ref="958803835"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="975931918"/>
+						<reference key="NSNextKeyView" ref="974467966"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -247,10 +247,43 @@
 						<reference key="IBUIFontDescription" ref="608173466"/>
 						<reference key="IBUIFont" ref="392920793"/>
 					</object>
-					<object class="IBUIButton" id="975931918">
+					<object class="IBUIButton" id="974467966">
 						<reference key="NSNextResponder" ref="958803835"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{568, 840}, {140, 37}}</string>
+						<string key="NSFrame">{{207, 685}, {315, 37}}</string>
+						<reference key="NSSuperview" ref="958803835"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="159985334"/>
+						<string key="NSReuseIdentifierKey">_NS:241</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">&lt;resetModel&gt;</string>
+						<reference key="IBUIHighlightedTitleColor" ref="524110732"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="243953475">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="527256923">
+							<int key="type">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="808987880">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUIButton" id="159985334">
+						<reference key="NSNextResponder" ref="958803835"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{207, 640}, {315, 37}}</string>
 						<reference key="NSSuperview" ref="958803835"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -260,25 +293,15 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;reset&gt;</string>
+						<string key="IBUINormalTitle">&lt;resetTextFields&gt;</string>
 						<reference key="IBUIHighlightedTitleColor" ref="524110732"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
-						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
-							<double key="pointSize">15</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="243953475"/>
+						<reference key="IBUIFontDescription" ref="527256923"/>
+						<reference key="IBUIFont" ref="808987880"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{728, 897}</string>
@@ -369,20 +392,37 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">resetButton</string>
+						<string key="label">resetModelButton</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="975931918"/>
+						<reference key="destination" ref="974467966"/>
 					</object>
-					<int key="connectionID">52</int>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">resetTextFieldsButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="159985334"/>
+					</object>
+					<int key="connectionID">57</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">reset:</string>
-						<reference key="source" ref="975931918"/>
+						<string key="label">resetTextFields:</string>
+						<reference key="source" ref="159985334"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">51</int>
+					<int key="connectionID">54</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">resetModel:</string>
+						<reference key="source" ref="974467966"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">55</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -416,7 +456,8 @@
 							<reference ref="720736353"/>
 							<reference ref="175096984"/>
 							<reference ref="398803364"/>
-							<reference ref="975931918"/>
+							<reference ref="974467966"/>
+							<reference ref="159985334"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -462,7 +503,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
-						<reference key="object" ref="975931918"/>
+						<reference key="object" ref="159985334"/>
+						<reference key="parent" ref="958803835"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="974467966"/>
 						<reference key="parent" ref="958803835"/>
 					</object>
 				</array>
@@ -486,12 +532,13 @@
 				<string key="36.CustomClassName">HLSTextField</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">57</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -514,23 +561,27 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">WizardAddressPageViewController</string>
 					<string key="superclassName">HLSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">reset:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">reset:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">reset:</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="resetModel:">id</string>
+						<string key="resetTextFields:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="resetModel:">
+							<string key="name">resetModel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="resetTextFields:">
+							<string key="name">resetTextFields:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cityLabel">UILabel</string>
 						<string key="cityTextField">HLSTextField</string>
 						<string key="countryLabel">UILabel</string>
 						<string key="countryTextField">HLSTextField</string>
-						<string key="resetButton">UIButton</string>
+						<string key="resetModelButton">UIButton</string>
+						<string key="resetTextFieldsButton">UIButton</string>
 						<string key="stateLabel">UILabel</string>
 						<string key="stateTextField">HLSTextField</string>
 						<string key="streetLabel">UILabel</string>
@@ -553,8 +604,12 @@
 							<string key="name">countryTextField</string>
 							<string key="candidateClassName">HLSTextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="resetButton">
-							<string key="name">resetButton</string>
+						<object class="IBToOneOutletInfo" key="resetModelButton">
+							<string key="name">resetModelButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="resetTextFieldsButton">
+							<string key="name">resetTextFieldsButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="stateLabel">

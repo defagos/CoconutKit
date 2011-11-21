@@ -62,6 +62,8 @@
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
 "Reset"="Mettre à zéro";
+"Reset model fields"="Effacer champs modèle";
+"Reset text fields"="Effacer champs textuels";
 "Resizing"="Redimensionnement";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";

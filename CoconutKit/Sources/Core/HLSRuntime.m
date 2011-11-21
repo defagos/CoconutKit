@@ -21,6 +21,7 @@ IMP HLSSwizzleClassSelector(Class class, SEL origSel, SEL newSel)
                                      method_getImplementation(newMethod), 
                                      method_getTypeEncoding(newMethod));
     NSCAssert(origImp == oldImp, @"Method not swizzled properly");
+    oldImp = NULL;      // To remove unused variable warning when assertions have been disabled
     
     return origImp;
 }
@@ -36,6 +37,7 @@ IMP HLSSwizzleSelector(Class class, SEL origSel, SEL newSel)
                                      method_getImplementation(newMethod),
                                      method_getTypeEncoding(newMethod));
     NSCAssert(origImp == oldImp, @"Method not swizzled properly");
+    oldImp = NULL;      // To remove unused variable warning when assertions have been disabled
     
     return origImp;
 }

@@ -13,6 +13,7 @@
 @interface WizardIdentityPageViewController ()
 
 @property (nonatomic, retain) Person *person;
+@property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -36,6 +37,7 @@
 - (void)dealloc
 {
     self.person = nil;
+    self.dateFormatter = nil;
     
     [super dealloc];
 }
@@ -54,7 +56,8 @@
     self.birthdateTextField = nil;
     self.nbrChildrenLabel = nil;
     self.nbrChildrenTextField = nil;
-    self.resetButton = nil;
+    self.resetModelButton = nil;
+    self.resetTextFieldsButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -93,7 +96,11 @@
 
 @synthesize nbrChildrenTextField = m_nbrChildrenTextField;
 
-@synthesize resetButton = m_resetButton;
+@synthesize resetModelButton = m_resetModelButton;
+
+@synthesize resetTextFieldsButton = m_resetTextFieldsButton;
+
+@synthesize dateFormatter = m_dateFormatter;
 
 #pragma mark View lifecycle
 
@@ -115,13 +122,7 @@
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
-{
-    static NSDateFormatter *s_dateFormatter = nil;
-    if (! s_dateFormatter) {
-        s_dateFormatter = [[NSDateFormatter alloc] init];
-        [s_dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    }
-    
+{    
     static NSNumberFormatter *s_numberFormatter = nil;
     if (! s_numberFormatter) {
         s_numberFormatter = [[NSNumberFormatter alloc] init];
@@ -144,7 +145,7 @@
     [self.emailTextField setCheckingOnChange:YES];
     [self.birthdateTextField bindToManagedObject:self.person
                                        fieldName:@"birthdate"
-                                       formatter:s_dateFormatter 
+                                       formatter:self.dateFormatter 
                               validationDelegate:self];
     [self.birthdateTextField setCheckingOnChange:YES];
     [self.nbrChildrenTextField bindToManagedObject:self.person 
@@ -192,19 +193,37 @@
     self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
     self.nbrChildrenLabel.text = NSLocalizedString(@"Number of children", @"Number of children");
-    [self.resetButton setTitle:NSLocalizedString(@"Reset", @"Reset") forState:UIControlStateNormal];
+    [self.resetModelButton setTitle:NSLocalizedString(@"Reset model fields", @"Reset model fields") forState:UIControlStateNormal];
+    [self.resetTextFieldsButton setTitle:NSLocalizedString(@"Reset text fields", @"Reset text fields") forState:UIControlStateNormal];
+    
+    // The date formatter is also localized!
+    // TODO: Does not work yet. Try to switch languages!
+    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
 }
 
 #pragma mark Event callbacks
 
-- (IBAction)reset:(id)sender
+- (IBAction)resetModel:(id)sender
 {
-    // Reset values programmatically. This shows that text fields update accordingly
+    // Reset the model programmatically. This shows that the text fields are updated accordingly
+    self.person.firstName = nil;
+    self.person.lastName = nil;
     self.person.firstName = nil;
     self.person.lastName = nil;
     self.person.email = nil;
     self.person.birthdate = nil;
     self.person.nbrChildrenValue = 0;
+}
+
+- (IBAction)resetTextFields:(id)sender
+{
+    // Reset text fields programmatically. This shows that the model is updated accordingly
+    self.firstNameTextField.text = nil;
+    self.lastNameTextField.text = nil;
+    self.emailTextField.text = nil;
+    self.birthdateTextField.text = nil;
+    self.nbrChildrenTextField.text = @"0";
 }
 
 @end
