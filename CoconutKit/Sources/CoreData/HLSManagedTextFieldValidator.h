@@ -39,15 +39,6 @@
      validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
 
 /**
- * Validator properties set at creation time
- */
-@property (nonatomic, readonly, assign) UITextField *textField;
-@property (nonatomic, readonly, retain) NSManagedObject *managedObject;
-@property (nonatomic, readonly, retain) NSString *fieldName;
-@property (nonatomic, readonly, retain) NSFormatter *formatter;
-@property (nonatomic, readonly, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
-
-/**
  * If set to YES, validation is also called during input.
  * Default value is NO
  */
@@ -55,6 +46,7 @@
 
 // TODO: Document
 - (BOOL)getValue:(id *)pValue forString:(NSString *)string;
+- (void)setValue:(id)value;
 
 /**
  * Check the value currently displayed by the text field. Returns YES iff valid

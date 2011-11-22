@@ -50,13 +50,6 @@
 - (void)unbind;
 
 /**
- * Return the binding settings
- */
-- (NSManagedObject *)boundManagedObject;
-- (NSString *)boundFieldName;
-- (id<HLSTextFieldValidationDelegate>)validationDelegate;
-
-/**
  * If checking on change is enabled (it is disabled by default), then validation is performed each time the
  * content of the text field changes. Otherwise validation is only performed when exiting edit mode for this
  * field, or when the text field loses focus

@@ -100,30 +100,6 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark Accessors and mutators
 
-- (NSManagedObject *)boundManagedObject
-{
-    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
-    
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    return validator.managedObject;
-}
-
-- (NSString *)boundFieldName
-{
-    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
-    
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    return validator.fieldName;
-}
-
-- (id<HLSTextFieldValidationDelegate>)validationDelegate
-{
-    NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
-    
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    return validator.validationDelegate;    
-}
-
 - (BOOL)isCheckingOnChange
 {
     NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
@@ -194,7 +170,7 @@ extern BOOL injectedManagedObjectValidation(void);
         // Formatters does not always handle nil strings gracefully. Fix
         id value = nil;
         [validator getValue:&value forString:text ?: @""];
-        [self.boundManagedObject setValue:value forKey:self.boundFieldName];
+        [validator setValue:value];
     }
     else {
         (*UITextField__setText_Imp)(self, @selector(setText:), text);

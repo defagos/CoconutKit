@@ -250,6 +250,11 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     return YES;
 }
 
+- (void)setValue:(id)value
+{
+    [self.managedObject setValue:value forKey:self.fieldName];
+}
+
 - (BOOL)checkValue:(id)value
 {
     NSError *error = nil;
