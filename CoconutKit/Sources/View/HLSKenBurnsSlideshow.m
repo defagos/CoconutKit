@@ -27,7 +27,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 - (void)playNextImageAnimation;
 
 - (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        WithScaleFactor:(CGFloat)scaleFactor
+                        withScaleFactor:(CGFloat)scaleFactor
                                 xOffset:(CGFloat)xOffset
                                 yOffset:(CGFloat)yOffset;
 
@@ -230,7 +230,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     
     // Create the corresponding animation and plays it
     HLSAnimation *animation = [self animationForImageView:imageView 
-                                          WithScaleFactor:finalScaleFactor / scaleFactor
+                                          withScaleFactor:finalScaleFactor / scaleFactor
                                                   xOffset:finalXOffset - xOffset 
                                                   yOffset:finalYOffset - yOffset];
     [animation playAnimated:YES];
@@ -250,7 +250,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 #pragma mark Creating the animation
 
 - (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        WithScaleFactor:(CGFloat)scaleFactor
+                        withScaleFactor:(CGFloat)scaleFactor
                                 xOffset:(CGFloat)xOffset
                                 yOffset:(CGFloat)yOffset
 {
