@@ -10,10 +10,10 @@
 
 /**
  * A UITextField cannot be its own delegate (this leads to infinite recursion when entering edit mode of a text field
- * which is its own delegate). In general, it is probably better to avoid having an object being its own delegate. If
- * we want to trap text field delegate events to perform additional tasks (here validation), we therefore need an 
- * additional object as delegate, and having the real text field delegate as its delegate. This is just the purpose 
- * of this (private) HLSManagedTextFieldValidator class.
+ * which is its own delegate). In general, it is probably better to avoid having an object being its own delegate anyway. 
+ * If we want to trap text field delegate events to perform additional tasks (here validation), we therefore need an 
+ * additional object as delegate, and having the real text field delegate as this object's delegate. This is just the 
+ * purpose of this (private) HLSManagedTextFieldValidator class.
  *
  * Designated initializer: initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
@@ -44,8 +44,14 @@
  */
 @property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
-// TODO: Document
+/**
+ * Formats string and returns it by reference in pValue (must not be NULL). Returns YES iff successful
+ */
 - (BOOL)getValue:(id *)pValue forString:(NSString *)string;
+
+/**
+ * Set the managed object field using the value provided as parameter
+ */
 - (void)setValue:(id)value;
 
 /**

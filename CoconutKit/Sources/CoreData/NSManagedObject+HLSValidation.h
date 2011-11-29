@@ -84,8 +84,8 @@
 + (void)injectValidation;
 
 /**
- * Check that a given value is valid for a specific field. The validation logic can implemented in the xcdatamodel
- * and / or in a -check<fieldName>:error: method. The method returns YES iff the value is valid
+ * Check that a given value is valid for a specific field. The validation logic can be implemented in the 
+ * xcdatamodel and / or in a -check<fieldName>:error: method. The method returns YES iff the value is valid
  */
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 

@@ -14,11 +14,6 @@
     return [lastName length] != 0;
 }
 
-- (BOOL)checkBirthdate:(NSDate *)birthdate error:(NSError **)pError
-{
-    return birthdate != nil;
-}
-
 - (BOOL)checkNbrChildren:(NSInteger)nbrChildren error:(NSError **)pError
 {
     return nbrChildren >= 0;

@@ -172,6 +172,11 @@
 
 #pragma mark HLSTextFieldValidationDelegate protocol implementation
 
+- (void)textFieldDidFailFormatting:(UITextField *)textField
+{
+    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+}
+
 - (void)textFieldDidPassValidation:(UITextField *)textField
 {
     textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];

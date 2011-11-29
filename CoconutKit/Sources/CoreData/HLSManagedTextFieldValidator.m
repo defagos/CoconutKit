@@ -13,10 +13,8 @@
 #import "HLSLogger.h"
 #import "NSManagedObject+HLSValidation.h"
 
+// This implementation has been swizzled in UITextField+HLSValidation.m
 extern void (*UITextField__setText_Imp)(id, SEL, id);
-
-// Variables with internal linkage
-static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFormattingError";
 
 @interface HLSManagedTextFieldValidator ()
 
@@ -32,20 +30,6 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 @end
 
 @implementation HLSManagedTextFieldValidator
-
-#pragma mark Class methods
-
-+ (void)load
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    [HLSError registerDefaultCode:NSManagedObjectValidationError
-                           domain:@"ch.hortis.CoconutKit" 
-             localizedDescription:NSLocalizedStringFromTable(@"Formatting error", @"CoconutKit_Localizable", @"Formatting error")
-                    forIdentifier:kManagedTextFieldFormattingError];
-    
-    [pool drain];
-}
 
 #pragma mark Object creation and destruction
 
@@ -79,20 +63,20 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
             return nil;
         }
         
-        // Remember binding parameters
+        // Binding parameters correct. Remember them
         self.textField = textField;
         self.managedObject = managedObject;
         self.fieldName = fieldName;
         self.formatter = formatter;
         self.validationDelegate = validationDelegate;
         
-        // Initially update the text field with the current property value
+        // Perform initial synchronization of the text field with the model object field value
         [self synchronizeTextField];
         
         // Enable KVO to update the text field automatically when the model field value changes
         [self.managedObject addObserver:self
                              forKeyPath:self.fieldName 
-                                options:NSKeyValueObservingOptionNew 
+                                options:0 
                                 context:NULL];
     }
     return self;
@@ -166,9 +150,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         }
     }
     
-    // After this method returns, the text field text gets updated (ultimately triggering validation)
-    
-    // In all cases end editing, even if the value is invalid. In this case, the model object won't be updated
+    // After this method returns, the text field text gets updated (this ultimately triggers validation)
     return YES;
 }
 
@@ -189,13 +171,15 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         }
     }
     
+    // Check when typing?
     if (self.checkingOnChange) {
         id value = nil;
         NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if ([self getValue:&value forString:updatedText]) {
-            // Check, but do not sync. Sync is always done when exiting edit mode
             [self checkValue:value];
         }
+        
+        // The model is not updated here. It will be when input mode is exited
     }
     
     return YES;
@@ -225,26 +209,36 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 
 #pragma mark Sync and check
 
-// Does not return nil on failure, but a BOOL. nil could namely be a valid value, and if formatting fails we want
-// to return an error to the user in all cases
+// Does not return nil on failure, but a BOOL. nil could namely be a valid value
 - (BOOL)getValue:(id *)pValue forString:(NSString *)string
 {
     NSAssert(pValue, @"Missing value reference");
     
-    if (self.formatter) {
-        // The error descriptions are not explicit. No need to have a look at them 
-        if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
-            HLSError *error = [HLSError errorFromIdentifier:kManagedTextFieldFormattingError];
-            if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-                HLSLoggerInfo(@"String %@ for field %@ could not be parsed", string, self.fieldName);
-                [self.validationDelegate textField:self.textField didFailValidationWithError:error];
-            }
-            
-            return NO;
-        }
-    }
-    else {
+    // Do not attempt to format if no formatter has been attached. Output is a string as well
+    if (! self.formatter) {
         *pValue = string;
+        return YES;
+    }
+    
+    // Nothing to format
+    if ([string length] == 0) {
+        *pValue = nil;
+        return YES;
+    }
+    
+    // Format the value
+    // Remark: The formatting error descriptions are not explicit. No need to have a look at them 
+    if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
+        HLSLoggerInfo(@"Formatting failed for field %@", self.fieldName);
+        if ([self.validationDelegate respondsToSelector:@selector(textFieldDidFailFormatting:)]) {
+            [self.validationDelegate textFieldDidFailFormatting:self.textField];
+        }
+        return NO;
+    }
+    
+    HLSLoggerInfo(@"Formatting successful for field %@", self.fieldName);
+    if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassFormatting:)]) {
+        [self.validationDelegate textFieldDidPassFormatting:self.textField];
     }
     
     return YES;
@@ -255,6 +249,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     [self.managedObject setValue:value forKey:self.fieldName];
 }
 
+// Check the given value. Returns YES iff valid
 - (BOOL)checkValue:(id)value
 {
     NSError *error = nil;
@@ -284,6 +279,7 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
     return [self checkValue:value];
 }
 
+// Synchronize the string displayed by the text field with the underlying model object field value
 - (void)synchronizeTextField
 {
     id value = [self.managedObject valueForKey:self.fieldName];
@@ -297,9 +293,11 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
         }            
     }
     else {
-        text = @"";
+        text = nil;
     }
     
+    // Set the value. Use the original setter to avoid triggering validation again (which is why the setter has
+    // been swizzled)
     (*UITextField__setText_Imp)(self.textField, @selector(setText:), text);
 }
 
@@ -307,10 +305,13 @@ static NSString * const kManagedTextFieldFormattingError = @"kManagedTextFieldFo
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    // Every time the value of the model object field changes, we want to trigger validation to update the text field
+    // accordingly
     id newValue = [object valueForKey:keyPath];
     [self checkValue:newValue];
     
-    // The value might have been changed programmatically. Update the text field text accordingly
+    // The value might have been changed programmatically. Be sure to update the text field text in all cases to take
+    // this fact into account
     [self synchronizeTextField];
 }
 

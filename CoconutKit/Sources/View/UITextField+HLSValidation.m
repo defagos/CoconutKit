@@ -44,6 +44,15 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UITextField (HLSValidation)
 
+#pragma mark Class methods
+
++ (void)load
+{
+    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))HLSSwizzleSelector(self, @selector(delegate), @selector(swizzledDelegate));
+    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setDelegate:), @selector(swizzledSetDelegate:));
+    UITextField__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector([UITextField class], @selector(setText:), @selector(swizzledSetText:));
+}
+
 #pragma mark Binding to managed object fields
 
 - (void)bindToManagedObject:(NSManagedObject *)managedObject
@@ -130,15 +139,6 @@ extern BOOL injectedManagedObjectValidation(void);
 
 @implementation UITextField (HLSValidationPrivate)
 
-#pragma mark Class methods
-
-+ (void)load
-{
-    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))HLSSwizzleSelector(self, @selector(delegate), @selector(swizzledDelegate));
-    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setDelegate:), @selector(swizzledSetDelegate:));
-    UITextField__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector([UITextField class], @selector(setText:), @selector(swizzledSetText:));
-}
-
 #pragma mark Swizzled method implementations
 
 - (id<UITextFieldDelegate>)swizzledDelegate
@@ -163,13 +163,13 @@ extern BOOL injectedManagedObjectValidation(void);
     }
 }
 
+// Swizzled so that changes made to the text field (either programmatically or interactively) are trapped
 - (void)swizzledSetText:(NSString *)text
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (validator) {
-        // Formatters does not always handle nil strings gracefully. Fix
         id value = nil;
-        [validator getValue:&value forString:text ?: @""];
+        [validator getValue:&value forString:text];
         [validator setValue:value];
     }
     else {
