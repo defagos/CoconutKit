@@ -61,6 +61,12 @@
     [self updateView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.webView stopLoading];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
