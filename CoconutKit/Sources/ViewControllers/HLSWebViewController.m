@@ -155,15 +155,17 @@
     self.actionSheet = [[[HLSActionSheet alloc] init] autorelease];
     self.actionSheet.delegate = self;
     self.actionSheet.title = [self.webView.request.URL absoluteString];
-    [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
-                                        target:nil
-                                        action:NULL];
     [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_Localizable", @"HLSWebViewController 'Open in Safari' action")
                                   target:self
                                   action:@selector(openInSafari:)];
-    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_Localizable", @"HLSWebViewController 'Mail Link' action")
-                                  target:self
-                                  action:@selector(mailLink:)];
+    if ([MFMailComposeViewController canSendMail]) {
+        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_Localizable", @"HLSWebViewController 'Mail Link' action")
+                                      target:self
+                                      action:@selector(mailLink:)];
+    }
+    [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
+                                        target:nil
+                                        action:NULL];
     [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
 }
 
