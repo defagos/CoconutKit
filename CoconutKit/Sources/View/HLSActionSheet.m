@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "NSObject+HLSExtensions.h"
 
 // Only one action sheet can be opened at a time. Remember it here
 static HLSActionSheet *s_actionSheet = nil;                 // strong ref
@@ -34,6 +35,17 @@ static BOOL s_barButtonItemShowAnimated = NO;
 @end
 
 @implementation HLSActionSheet
+
+#pragma mark Class methods
+
++ (void)initialize
+{
+    if (self != [HLSActionSheet class]) {
+        return;
+    }
+    
+    NSAssert([self implementsProtocol:@protocol(UIActionSheetDelegate)], @"Incomplete implementation");
+}
 
 #pragma mark Object creation and destruction
 

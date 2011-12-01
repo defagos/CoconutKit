@@ -12,6 +12,7 @@
 #import "HLSError.h"
 #import "HLSLogger.h"
 #import "NSManagedObject+HLSValidation.h"
+#import "NSObject+HLSExtensions.h"
 
 // This implementation has been swizzled in UITextField+HLSValidation.m
 extern void (*UITextField__setText_Imp)(id, SEL, id);
@@ -30,6 +31,17 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 @end
 
 @implementation HLSManagedTextFieldValidator
+
+#pragma mark Class methods
+
++ (void)initialize
+{
+    if (self != [HLSManagedTextFieldValidator class]) {
+        return;
+    }
+    
+    NSAssert([self implementsProtocol:@protocol(UITextFieldDelegate)], @"Incomplete implementation");
+}
 
 #pragma mark Object creation and destruction
 
@@ -120,6 +132,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark UITextFieldDelegate protocol implementation
 
+#if 0
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     NSAssert(self.textField == textField, @"Text field mismatch");
@@ -130,6 +143,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         return YES;
     }
 }
+#endif
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
