@@ -132,7 +132,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark UITextFieldDelegate protocol implementation
 
-#if 0
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     NSAssert(self.textField == textField, @"Text field mismatch");
@@ -143,7 +142,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         return YES;
     }
 }
-#endif
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
