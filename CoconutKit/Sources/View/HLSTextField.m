@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
+#import "HLSTextFieldTouchDetector.h"
 
 /**
  * Test workflow:
@@ -60,6 +61,8 @@ static UIScrollView *s_scrollView = nil;
 
 @interface HLSTextField ()
 
+@property (nonatomic, retain) HLSTextFieldTouchDetector *touchDetector;
+
 + (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated;
 + (void)restoreScrollAnimated:(BOOL)animated;
 
@@ -91,9 +94,21 @@ static UIScrollView *s_scrollView = nil;
 - (void)hlsTextFieldInit
 {
     self.minVisibilityDistance = kTextFieldMinVisibilityDistance;
+    
+    self.touchDetector = [[[HLSTextFieldTouchDetector alloc] initWithTextField:self] autorelease];
+    super.delegate = self.touchDetector;
+}
+
+- (void)dealloc
+{
+    self.touchDetector = nil;
+    
+    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize touchDetector = m_touchDetector;
 
 @synthesize minVisibilityDistance = m_minVisibilityDistance;
 
@@ -107,6 +122,18 @@ static UIScrollView *s_scrollView = nil;
     else {
         m_minVisibilityDistance = minVisibilityDistance;
     }
+}
+
+- (void)setDelegate:(id<UITextFieldDelegate>)delegate
+{
+    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
+    touchDetector.delegate = delegate;
+}
+
+- (id<UITextFieldDelegate>)delegate
+{
+    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
+    return touchDetector.delegate;
 }
 
 #pragma mark Focus events

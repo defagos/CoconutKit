@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F2BDB971477C552000CAC7B /* NSManagedObject+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */; };
+		6F4608F3148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4608F2148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
@@ -179,6 +180,8 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F2BDB951477C552000CAC7B /* NSManagedObject+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidation.h"; sourceTree = "<group>"; };
 		6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidation.m"; sourceTree = "<group>"; };
+		6F4608F1148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldTouchDetector.h; sourceTree = "<group>"; };
+		6F4608F2148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldTouchDetector.m; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -296,7 +299,7 @@
 		6FFE35D61468FD7400C02549 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6FFE35D71468FD7400C02549 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6FFE35D81468FD7400C02549 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6FFE35D91468FD7400C02549 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
+		6FFE35D91468FD7400C02549 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
 		6FFE35DA1468FD7400C02549 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FFE35DB1468FD7400C02549 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FFE35DC1468FD7400C02549 /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
@@ -716,6 +719,8 @@
 				6FFE35D21468FD7400C02549 /* HLSTableViewCell.m */,
 				6FFE35D31468FD7400C02549 /* HLSTextField.h */,
 				6FFE35D41468FD7400C02549 /* HLSTextField.m */,
+				6F4608F1148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.h */,
+				6F4608F2148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m */,
 				6FFE35D51468FD7400C02549 /* HLSValue1TableViewCell.h */,
 				6FFE35D61468FD7400C02549 /* HLSValue1TableViewCell.m */,
 				6FFE35D71468FD7400C02549 /* HLSValue2TableViewCell.h */,
@@ -1467,6 +1472,7 @@
 				6FFE373D1468FD9D00C02549 /* _Person.m in Sources */,
 				6FFE373E1468FD9D00C02549 /* Person.m in Sources */,
 				6F2BDB971477C552000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
+				6F4608F3148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
