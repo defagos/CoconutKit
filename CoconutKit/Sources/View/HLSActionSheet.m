@@ -250,10 +250,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if (buttonIndex != -1) {
         id target = [[self.targets objectAtIndex:buttonIndex] pointerValue];
         SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
-        
-        if ([target respondsToSelector:action]) {
-            [target performSelector:action withObject:self];
-        }        
+        [target performSelector:action withObject:self];      
     }
     
     if ([self.realDelegate respondsToSelector:@selector(actionSheet:clickedButtonAtIndex:)]) {
