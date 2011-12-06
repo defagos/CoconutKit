@@ -6,24 +6,20 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+#import "HLSTextFieldInternalDelegate.h"
 #import "UITextField+HLSValidation.h"
 
 /**
- * A UITextField cannot be its own delegate (this leads to infinite recursion when entering edit mode of a text field
- * which is its own delegate). In general, it is probably better to avoid having an object being its own delegate anyway. 
- * If we want to trap text field delegate events to perform additional tasks (here validation), we therefore need an 
- * additional object as delegate, and having the real text field delegate as this object's delegate. This is just the 
- * purpose of this (private) HLSManagedTextFieldValidator class.
+ * Private class for implementation purposes. This internal delegate synchronizes the text field
+ * value with a managed field object and performs automatic validation when appropriate
  *
  * Designated initializer: initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
-@interface HLSManagedTextFieldValidator : NSObject <UITextFieldDelegate> {
+@interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate {
 @private
-    UITextField *m_textField;
     NSManagedObject *m_managedObject;
     NSString *m_fieldName;
     NSFormatter *m_formatter;
-    id<UITextFieldDelegate> m_delegate;
     id<HLSTextFieldValidationDelegate> m_validationDelegate;
     BOOL m_checkingOnChange;
 }
@@ -58,10 +54,5 @@
  * Check the value currently displayed by the text field. Returns YES iff valid
  */
 - (BOOL)checkDisplayedValue;
-
-/**
- * The delegate to forward UITextFieldDelegate events to after the validator has performed its work
- */
-@property (nonatomic, assign) id<UITextFieldDelegate> delegate;
 
 @end

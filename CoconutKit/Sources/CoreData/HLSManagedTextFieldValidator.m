@@ -19,7 +19,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 @interface HLSManagedTextFieldValidator ()
 
-@property (nonatomic, assign) UITextField *textField;
 @property (nonatomic, retain) NSManagedObject *managedObject;
 @property (nonatomic, retain) NSString *fieldName;
 @property (nonatomic, retain) NSFormatter *formatter;
@@ -32,17 +31,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 @implementation HLSManagedTextFieldValidator
 
-#pragma mark Class methods
-
-+ (void)initialize
-{
-    if (self != [HLSManagedTextFieldValidator class]) {
-        return;
-    }
-    
-    NSAssert([self implementsProtocol:@protocol(UITextFieldDelegate)], @"Incomplete implementation");
-}
-
 #pragma mark Object creation and destruction
 
 - (id)initWithTextField:(UITextField *)textField
@@ -51,7 +39,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
               formatter:(NSFormatter *)formatter
      validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
-    if ((self = [super init])) {
+    if ((self = [super initWithTextField:textField])) {
         // Sanity check
         if (! managedObject || ! fieldName) {
             HLSLoggerError(@"Missing managed object or field name");
@@ -76,7 +64,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         }
         
         // Binding parameters correct. Remember them
-        self.textField = textField;
         self.managedObject = managedObject;
         self.fieldName = fieldName;
         self.formatter = formatter;
@@ -94,21 +81,13 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     return self;
 }
 
-- (id)init
-{
-    HLSForbiddenInheritedMethod();
-    return nil;
-}
-
 - (void)dealloc
 {
     [self.managedObject removeObserver:self forKeyPath:self.fieldName];
     
-    self.textField = nil;
     self.managedObject = nil;
     self.fieldName = nil;
     self.formatter = nil;
-    self.delegate = nil;
     self.validationDelegate = nil;
     
     [super dealloc];
@@ -116,15 +95,11 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark Accessors and mutators
 
-@synthesize textField = m_textField;
-
 @synthesize managedObject = m_managedObject;
 
 @synthesize fieldName = m_fieldName;
 
 @synthesize formatter = m_formatter;
-
-@synthesize delegate = m_delegate;
 
 @synthesize validationDelegate = m_validationDelegate;
 
@@ -132,55 +107,10 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark UITextFieldDelegate protocol implementation
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
-        return [self.delegate textFieldShouldBeginEditing:textField];
-    }
-    else {
-        return YES;
-    }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
-        [self.delegate textFieldDidBeginEditing:textField];
-    }
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    
-    // Forward to text field delegate first
-    if ([self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
-        if (! [self.delegate textFieldShouldEndEditing:textField]) {
-            return NO;
-        }
-    }
-    
-    // After this method returns, the text field text gets updated (this ultimately triggers validation)
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
-        [self.delegate textFieldDidEndEditing:textField];
-    }
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
-        if (! [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
-            return NO;
-        }
+    if (! [super textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
+        return NO;
     }
     
     // Check when typing?
@@ -195,28 +125,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     }
     
     return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textFieldShouldClear:)]) {
-        return [self.delegate textFieldShouldClear:textField];
-    }
-    else {
-        return YES;
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSAssert(self.textField == textField, @"Text field mismatch");
-    if ([self.delegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
-        return [self.delegate textFieldShouldReturn:textField];
-    }
-    else {
-        return YES;
-    }
 }
 
 #pragma mark Sync and check
