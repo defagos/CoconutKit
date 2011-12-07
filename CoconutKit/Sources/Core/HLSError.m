@@ -13,6 +13,10 @@
 #import "HLSLogger.h"
 #import "NSDictionary+HLSExtensions.h"
 
+// TODO: Better (?): Instead of storing localization keys using the standard dictionary error keys, use other
+//       keys and fill the standard ones using the localized strings. When the localization changes, the error
+//       must recreate the dictionary to fill it with the proper localizations. Do it lazily?
+
 @interface HLSError ()
 
 + (BOOL)registerErrorTemplate:(HLSErrorTemplate *)errorTemplate forIdentifier:(NSString *)identifier;
@@ -30,19 +34,19 @@ static NSMutableDictionary *s_identifierToErrorTemplateMap = nil;
 
 + (BOOL)registerDefaultCode:(NSInteger)code
                      domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription 
-     localizedFailureReason:(NSString *)localizedFailureReason
-localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
-   localizedRecoveryOptions:(NSArray *)localizedRecoveryOptions
+    localizedDescriptionKey:(NSString *)localizedDescriptionKey 
+  localizedFailureReasonKey:(NSString *)localizedFailureReasonKey
+localizedRecoverySuggestionKey:(NSString *)localizedRecoverySuggestionKey
+localizedRecoveryOptionKeys:(NSArray *)localizedRecoveryOptionKeys
           recoveryAttempter:(id)recoveryAttempter
                  helpAnchor:(NSString *)helpAnchor
               forIdentifier:(NSString *)identifier
 {
     HLSErrorTemplate *errorTemplate = [[[HLSErrorTemplate alloc] initWithCode:code domain:domain] autorelease];
-    errorTemplate.localizedDescription = localizedDescription;
-    errorTemplate.localizedFailureReason = localizedFailureReason;
-    errorTemplate.localizedRecoverySuggestion = localizedRecoverySuggestion;
-    errorTemplate.localizedRecoveryOptions = localizedRecoveryOptions;
+    errorTemplate.localizedDescription = localizedDescriptionKey;
+    errorTemplate.localizedFailureReason = localizedFailureReasonKey;
+    errorTemplate.localizedRecoverySuggestion = localizedRecoverySuggestionKey;
+    errorTemplate.localizedRecoveryOptions = localizedRecoveryOptionKeys;
     errorTemplate.recoveryAttempter = recoveryAttempter;
     errorTemplate.helpAnchor = helpAnchor;
     
@@ -51,15 +55,15 @@ localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
 
 + (BOOL)registerDefaultCode:(NSInteger)code
                      domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription
+    localizedDescriptionKey:(NSString *)localizedDescriptionKey
               forIdentifier:(NSString *)identifier
 {
     return [self registerDefaultCode:code
                               domain:domain
-                localizedDescription:localizedDescription
-              localizedFailureReason:nil 
-         localizedRecoverySuggestion:nil 
-            localizedRecoveryOptions:nil
+             localizedDescriptionKey:localizedDescriptionKey
+           localizedFailureReasonKey:nil 
+      localizedRecoverySuggestionKey:nil 
+         localizedRecoveryOptionKeys:nil
                    recoveryAttempter:nil
                           helpAnchor:nil 
                        forIdentifier:identifier];
@@ -147,7 +151,7 @@ localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
         [fullUserInfo removeObjectForKey:NSLocalizedFailureReasonErrorKey];
     }
     [fullUserInfo safelySetObject:errorTemplate.localizedFailureReason forKey:NSLocalizedFailureReasonErrorKey];
-
+    
     // Localized recovery suggestion
     if ([fullUserInfo objectForKey:NSLocalizedRecoverySuggestionErrorKey]) {
         HLSLoggerWarn(@"userInfo already contains key %@; will be overwritten", NSLocalizedRecoverySuggestionErrorKey);
@@ -168,7 +172,7 @@ localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
         [fullUserInfo removeObjectForKey:NSRecoveryAttempterErrorKey];
     }
     [fullUserInfo safelySetObject:errorTemplate.recoveryAttempter forKey:NSRecoveryAttempterErrorKey];
-
+    
     // Help anchor
     if ([fullUserInfo objectForKey:NSHelpAnchorErrorKey]) {
         HLSLoggerWarn(@"userInfo already contains key %@; will be overwritten", NSHelpAnchorErrorKey);
@@ -215,6 +219,36 @@ localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
     [customUserInfo removeObjectForKey:NSHelpAnchorErrorKey];
     [customUserInfo removeObjectForKey:NSUnderlyingErrorKey];
     return [NSDictionary dictionaryWithDictionary:customUserInfo];
+}
+
+#pragma mark Localized error messages
+
+- (NSString *)localizedDescription
+{
+    NSString *localizedDescriptionKey = [super localizedDescription];
+    return NSLocalizedString(localizedDescriptionKey, @"");
+}
+
+- (NSString *)localizedFailureReason
+{
+    NSString *localizedFailureReasonKey = [super localizedFailureReason];
+    return NSLocalizedString(localizedFailureReasonKey, @"");
+}
+
+- (NSString *)localizedRecoverySuggestion
+{
+    NSString *localizedRecoverySuggestionKey = [super localizedRecoverySuggestion];
+    return NSLocalizedString(localizedRecoverySuggestionKey, @"");
+}
+
+- (NSArray *)localizedRecoveryOptions
+{
+    NSArray *localizedRecoveryOptionKeys = [super localizedRecoveryOptions];
+    NSArray *localizedRecoveryOptions = [NSArray array];
+    for (NSString *localizedRecoveryOptionKey in localizedRecoveryOptionKeys) {
+        localizedRecoveryOptions = [localizedRecoveryOptions arrayByAddingObject:NSLocalizedString(localizedRecoveryOptionKey, @"")];
+    }
+    return localizedRecoveryOptions;
 }
 
 @end

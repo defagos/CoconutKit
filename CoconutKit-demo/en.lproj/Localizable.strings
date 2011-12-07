@@ -32,6 +32,7 @@
 "Error"="Error";
 "First Name"="First Name";
 "Fixed size"="Fixed size";
+"Formatting error"="Formatting error";
 "Forward properties"="Forward properties";
 "Header: custom cells"="Header: custom cells";
 "Header: simple cells"="Header: simple cells";
@@ -81,6 +82,9 @@
 "Test in modal"="Test in modal";
 "Text fields"="Text fields";
 "Text fields (large)"="Text fields (large)";
+"This email address is invalid"="This email address is invalid";
+"This field is mandatory"="This field is mandatory";
+"This value must be greater or equal to zero"="This value must be greater or equal to zero";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Views"="Views";

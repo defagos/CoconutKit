@@ -107,7 +107,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     
     [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
                            domain:@"ch.hortis.CoconutKit" 
-             localizedDescription:NSLocalizedStringFromTable(@"Multiple validation errors", @"CoconutKit_Localizable", @"Multiple validation errors")
+          localizedDescriptionKey:@"Multiple validation errors"
                     forIdentifier:kManagedObjectMulitpleValidationError];
     
     [pool drain];
@@ -269,6 +269,9 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
     NSError *newError = nil;
     id value = pValue ? *pValue : nil;
     if (! (*checkImp)(self, checkSel, value, &newError)) {
+        if (! newError) {
+            HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
+        }
         combineErrors(newError, pError);
         return NO;
     }
@@ -340,6 +343,9 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))method_getImplementation(method);
         NSError *newCheckError = nil;
         if (! (*checkImp)(self, checkSel, &newCheckError)) {
+            if (! newCheckError) {
+                HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
+            }
             combineErrors(newCheckError, pError);
             valid = NO;
         }

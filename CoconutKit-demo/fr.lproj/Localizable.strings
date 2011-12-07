@@ -32,6 +32,7 @@
 "Error"="Erreur";
 "First Name"="Prénom";
 "Fixed size"="Taille fixe";
+"Formatting error"="Erreur de formattage";
 "Forward properties"="Propager les propriétés";
 "Header: custom cells"="En-tête: cellules personnalisées";
 "Header: simple cells"="En-tête: cellules basiques";
@@ -81,6 +82,9 @@
 "Test in modal"="Test dans modale";
 "Text fields"="Champs textuels";
 "Text fields (large)"="Champs textuels (large)";
+"This email address is invalid"="Cette adresse e-mail est invalide";
+"This field is mandatory"="Ce champ est obligatoire";
+"This value must be greater or equal to zero"="Cette valeur doit être positive ou nulle";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Views"="Vues";

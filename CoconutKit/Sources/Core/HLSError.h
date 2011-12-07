@@ -45,10 +45,10 @@
  */
 + (BOOL)registerDefaultCode:(NSInteger)code
                      domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription 
-     localizedFailureReason:(NSString *)localizedFailureReason
-localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
-   localizedRecoveryOptions:(NSArray *)localizedRecoveryOptions
+    localizedDescriptionKey:(NSString *)localizedDescriptionKey 
+  localizedFailureReasonKey:(NSString *)localizedFailureReasonKey
+localizedRecoverySuggestionKey:(NSString *)localizedRecoverySuggestionKey
+localizedRecoveryOptionKeys:(NSArray *)localizedRecoveryOptionKeys
           recoveryAttempter:(id)recoveryAttempter
                  helpAnchor:(NSString *)helpAnchor
               forIdentifier:(NSString *)identifier;
@@ -60,7 +60,7 @@ localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
  */
 + (BOOL)registerDefaultCode:(NSInteger)code
                      domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription 
+    localizedDescriptionKey:(NSString *)localizedDescriptionKey 
               forIdentifier:(NSString *)identifier;
 
 /**

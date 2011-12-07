@@ -15,6 +15,8 @@
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
+- (UILabel *)errorLabelForTextField:(UITextField *)textField;
+
 @end
 
 @implementation WizardIdentityPageViewController
@@ -48,14 +50,19 @@
     
     self.firstNameLabel = nil;
     self.firstNameTextField = nil;
+    self.firstNameErrorLabel = nil;
     self.lastNameLabel = nil;
     self.lastNameTextField = nil;
+    self.lastNameErrorLabel = nil;
     self.emailLabel = nil;
     self.emailTextField = nil;
+    self.emailErrorLabel = nil;
     self.birthdateLabel = nil;
     self.birthdateTextField = nil;
+    self.birthdateErrorLabel = nil;
     self.nbrChildrenLabel = nil;
     self.nbrChildrenTextField = nil;
+    self.nbrChildrenErrorLabel = nil;
     self.resetModelButton = nil;
     self.resetTextFieldsButton = nil;
 }
@@ -80,21 +87,31 @@
 
 @synthesize firstNameTextField = m_firstNameTextField;
 
+@synthesize firstNameErrorLabel = m_firstNameErrorLabel;
+
 @synthesize lastNameLabel = m_lastNameLabel;
 
 @synthesize lastNameTextField = m_lastNameTextField;
+
+@synthesize lastNameErrorLabel = m_lastNameErrorLabel;
 
 @synthesize emailLabel = m_emailLabel;
 
 @synthesize emailTextField = m_emailTextField;
 
+@synthesize emailErrorLabel = m_emailErrorLabel;
+
 @synthesize birthdateLabel = m_birthdateLabel;
 
 @synthesize birthdateTextField = m_birthdateTextField;
 
+@synthesize birthdateErrorLabel = m_birthdateErrorLabel;
+
 @synthesize nbrChildrenLabel = m_nbrChildrenLabel;
 
 @synthesize nbrChildrenTextField = m_nbrChildrenTextField;
+
+@synthesize nbrChildrenErrorLabel = m_nbrChildrenErrorLabel;
 
 @synthesize resetModelButton = m_resetModelButton;
 
@@ -107,8 +124,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor randomColor];
     
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;
@@ -126,8 +141,7 @@
     static NSNumberFormatter *s_numberFormatter = nil;
     if (! s_numberFormatter) {
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setPositiveFormat:@"#0.#"];
-        [s_numberFormatter setNegativeFormat:@"-#0.#"];
+        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     }
     
     [self.firstNameTextField bindToManagedObject:self.person
@@ -152,6 +166,9 @@
                                          fieldName:@"nbrChildren"
                                          formatter:s_numberFormatter 
                                 validationDelegate:self];
+    
+    // Perform an initial complete validation
+    [self checkTextFields];
 }
 
 #pragma mark HLSValidable protocol implementation
@@ -175,16 +192,50 @@
 - (void)textFieldDidFailFormatting:(UITextField *)textField
 {
     textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    errorLabel.text = NSLocalizedString(@"Formatting error", @"Formatting error");
 }
 
 - (void)textFieldDidPassValidation:(UITextField *)textField
 {
     textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    errorLabel.text = nil;
 }
 
 - (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
 {
     textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    errorLabel.text = [error localizedDescription];
+}
+
+#pragma mark Retrieving the error label associated with a text field
+
+- (UILabel *)errorLabelForTextField:(UITextField *)textField
+{
+    if (textField == self.firstNameTextField) {
+        return self.firstNameErrorLabel;
+    }
+    else if (textField == self.lastNameTextField) {
+        return self.lastNameErrorLabel;
+    }
+    else if (textField == self.emailTextField) {
+        return self.emailErrorLabel;
+    }
+    else if (textField == self.birthdateTextField) {
+        return self.birthdateErrorLabel;
+    }
+    else if (textField == self.nbrChildrenTextField) {
+        return self.nbrChildrenErrorLabel;
+    }
+    else {
+        HLSLoggerError(@"Unknown text field");
+        return nil;
+    }
 }
 
 #pragma mark Localization
@@ -205,6 +256,9 @@
     // TODO: Does not work yet. Try to switch languages!
     self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    
+    // Trigger a new validation to get localized error messages if any
+    [self checkTextFields];
 }
 
 #pragma mark Event callbacks
