@@ -202,18 +202,21 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 // Synchronize the string displayed by the text field with the underlying model object field value
 - (void)synchronizeTextField
 {
+    // By default, we display an empty string, not nil. As soon as a text field has been edited and is cleared, the empty
+    // value is namely an empty string, never nil. The value which therefore makes sense for an empty text field is always
+    // an empty string, not nil
     id value = [self.managedObject valueForKey:self.fieldName];
-    NSString *text = nil;
+    NSString *text = @"";
     if (value) {
         if (self.formatter) {
-            text = [self.formatter stringForObjectValue:value];
+            NSString *formattedValue = [self.formatter stringForObjectValue:value];
+            if (formattedValue) {
+                text = formattedValue;
+            }
         }
         else {
             text = value;
         }            
-    }
-    else {
-        text = nil;
     }
     
     // Set the value. Use the original setter to avoid triggering validation again (which is why the setter has
