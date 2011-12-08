@@ -142,6 +142,7 @@
     if (! s_numberFormatter) {
         s_numberFormatter = [[NSNumberFormatter alloc] init];
         [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [s_numberFormatter setAllowsFloats:NO];
     }
     
     [self.firstNameTextField bindToManagedObject:self.person
@@ -166,6 +167,7 @@
                                          fieldName:@"nbrChildren"
                                          formatter:s_numberFormatter 
                                 validationDelegate:self];
+    [self.nbrChildrenTextField setCheckingOnChange:YES];
     
     // Perform an initial complete validation
     [self checkTextFields];
