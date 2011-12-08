@@ -93,6 +93,7 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
 
 - (BOOL)checkState:(NSString *)state error:(NSError **)pError
 {
+    // Optional
     return YES;
 }
 

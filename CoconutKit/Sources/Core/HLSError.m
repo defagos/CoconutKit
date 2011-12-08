@@ -13,10 +13,6 @@
 #import "HLSLogger.h"
 #import "NSDictionary+HLSExtensions.h"
 
-// TODO: Better (?): Instead of storing localization keys using the standard dictionary error keys, use other
-//       keys and fill the standard ones using the localized strings. When the localization changes, the error
-//       must recreate the dictionary to fill it with the proper localizations. Do it lazily?
-
 @interface HLSError ()
 
 + (BOOL)registerErrorTemplate:(HLSErrorTemplate *)errorTemplate forIdentifier:(NSString *)identifier;
