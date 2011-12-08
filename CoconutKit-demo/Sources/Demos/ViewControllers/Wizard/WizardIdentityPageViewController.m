@@ -184,7 +184,21 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField == self.firstNameTextField) {
+        [self.lastNameTextField becomeFirstResponder];
+    }
+    else if (textField == self.lastNameTextField) {
+        [self.emailTextField becomeFirstResponder];
+    }
+    else if (textField == self.emailTextField) {
+        [self.birthdateTextField becomeFirstResponder];
+    }
+    else if (textField == self.birthdateTextField) {
+        [self.nbrChildrenTextField becomeFirstResponder];
+    }
+    else {
+        [textField resignFirstResponder];
+    }
     
     return YES;
 }

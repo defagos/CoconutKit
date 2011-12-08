@@ -156,7 +156,18 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField == self.streetTextField) {
+        [self.cityTextField becomeFirstResponder];
+    }
+    else if (textField == self.cityTextField) {
+        [self.stateTextField becomeFirstResponder];
+    }
+    else if (textField == self.stateTextField) {
+        [self.countryTextField becomeFirstResponder];
+    }
+    else {
+        [textField resignFirstResponder];
+    }
     
     return YES;
 }
