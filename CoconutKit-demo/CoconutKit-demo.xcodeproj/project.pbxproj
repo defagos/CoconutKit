@@ -22,6 +22,8 @@
 		6F1AF861142B046600925B7A /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */; };
 		6F1AF862142B046600925B7A /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */; };
 		6F1AF863142B046600925B7A /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */; };
+		6F26DC68149363ED00086BA5 /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC67149363ED00086BA5 /* DemoErrors.m */; };
+		6F26DC6B1493641800086BA5 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F26DC6A1493641800086BA5 /* WizardAddressPageViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
@@ -107,7 +109,6 @@
 		6FFE383B1468FDB500C02549 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE37D71468FDB500C02549 /* TableSearchDisplayDemoViewController.m */; };
 		6FFE383C1468FDB500C02549 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE37D81468FDB500C02549 /* TableSearchDisplayDemoViewController.xib */; };
 		6FFE383D1468FDB500C02549 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE37DB1468FDB500C02549 /* WizardAddressPageViewController.m */; };
-		6FFE383E1468FDB500C02549 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE37DC1468FDB500C02549 /* WizardAddressPageViewController.xib */; };
 		6FFE383F1468FDB500C02549 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE37DE1468FDB500C02549 /* WizardDemoViewController.m */; };
 		6FFE38401468FDB500C02549 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE37DF1468FDB500C02549 /* WizardDemoViewController.xib */; };
 		6FFE38411468FDB500C02549 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE37E11468FDB500C02549 /* WizardIdentityPageViewController.m */; };
@@ -136,6 +137,9 @@
 		6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
 		6F1AF853142B046600925B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F1AF855142B046600925B7A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F26DC66149363ED00086BA5 /* DemoErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoErrors.h; sourceTree = "<group>"; };
+		6F26DC67149363ED00086BA5 /* DemoErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoErrors.m; sourceTree = "<group>"; };
+		6F26DC6A1493641800086BA5 /* WizardAddressPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardAddressPageViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -258,7 +262,6 @@
 		6FFE37D81468FDB500C02549 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
 		6FFE37DA1468FDB500C02549 /* WizardAddressPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardAddressPageViewController.h; sourceTree = "<group>"; };
 		6FFE37DB1468FDB500C02549 /* WizardAddressPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardAddressPageViewController.m; sourceTree = "<group>"; };
-		6FFE37DC1468FDB500C02549 /* WizardAddressPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardAddressPageViewController.xib; sourceTree = "<group>"; };
 		6FFE37DD1468FDB500C02549 /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6FFE37DE1468FDB500C02549 /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
 		6FFE37DF1468FDB500C02549 /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
@@ -373,6 +376,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6F26DC65149363ED00086BA5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6F26DC66149363ED00086BA5 /* DemoErrors.h */,
+				6F26DC67149363ED00086BA5 /* DemoErrors.m */,
+			);
+			name = Helpers;
+			path = Sources/Helpers;
+			sourceTree = SOURCE_ROOT;
+		};
 		6FFE37401468FDB500C02549 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +464,7 @@
 			children = (
 				6FFE37591468FDB500C02549 /* Animation */,
 				6FFE37621468FDB500C02549 /* Common */,
+				6F26DC65149363ED00086BA5 /* Helpers */,
 				6FFE37901468FDB500C02549 /* Task */,
 				6FFE37991468FDB500C02549 /* View */,
 				6FFE37C61468FDB500C02549 /* ViewControllers */,
@@ -783,7 +797,7 @@
 			children = (
 				6FFE37DA1468FDB500C02549 /* WizardAddressPageViewController.h */,
 				6FFE37DB1468FDB500C02549 /* WizardAddressPageViewController.m */,
-				6FFE37DC1468FDB500C02549 /* WizardAddressPageViewController.xib */,
+				6F26DC6A1493641800086BA5 /* WizardAddressPageViewController.xib */,
 				6FFE37DD1468FDB500C02549 /* WizardDemoViewController.h */,
 				6FFE37DE1468FDB500C02549 /* WizardDemoViewController.m */,
 				6FFE37DF1468FDB500C02549 /* WizardDemoViewController.xib */,
@@ -937,9 +951,9 @@
 				6FFE38371468FDB500C02549 /* RootStackDemoViewController.xib in Resources */,
 				6FFE38391468FDB500C02549 /* StackDemoViewController.xib in Resources */,
 				6FFE383C1468FDB500C02549 /* TableSearchDisplayDemoViewController.xib in Resources */,
-				6FFE383E1468FDB500C02549 /* WizardAddressPageViewController.xib in Resources */,
 				6FFE38401468FDB500C02549 /* WizardDemoViewController.xib in Resources */,
 				6FFE38421468FDB500C02549 /* WizardIdentityPageViewController.xib in Resources */,
+				6F26DC6B1493641800086BA5 /* WizardAddressPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1024,7 @@
 				6FFE38431468FDB500C02549 /* DemosListViewController.m in Sources */,
 				6FFE38441468FDB500C02549 /* _Person.m in Sources */,
 				6FFE38451468FDB500C02549 /* Person.m in Sources */,
+				6F26DC68149363ED00086BA5 /* DemoErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

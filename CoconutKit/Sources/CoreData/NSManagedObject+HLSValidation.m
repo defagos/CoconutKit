@@ -10,7 +10,6 @@
 
 #import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
-#import "HLSError.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
@@ -27,7 +26,6 @@ BOOL injectedManagedObjectValidation(void);
 
 // Variables with internal linkage
 static BOOL s_injectedManagedObjectValidation = NO;
-static NSString * const kManagedObjectMulitpleValidationError = @"kManagedObjectMulitpleValidationError";
 
 // Original implementation of the methods we swizzle
 static void (*s_NSManagedObject_HLSExtensions__initialize_Imp)(id, SEL) = NULL;
@@ -100,18 +98,6 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
 #pragma mark HLSValidationPrivate category implementation
 
 @implementation NSManagedObject (HLSValidationPrivate)
-
-+ (void)load
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    [HLSError registerDefaultCode:NSValidationMultipleErrorsError 
-                           domain:@"ch.hortis.CoconutKit" 
-          localizedDescriptionKey:@"Multiple validation errors"
-                    forIdentifier:kManagedObjectMulitpleValidationError];
-    
-    [pool drain];
-}
 
 /**
  * Inject validation wrappers into managed object classes automagically.
@@ -398,9 +384,10 @@ static void combineErrors(NSError *newError, NSError **pExistingError)
             userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
         }
         
-        // Fill with error object
-        *pExistingError = [HLSError errorFromIdentifier:kManagedObjectMulitpleValidationError
-                                               userInfo:userInfo];
+        // Fill with error object (code in the NSSQLiteErrorDomain domain; cannot use HLSError here)
+        *pExistingError = [NSError errorWithDomain:NSSQLiteErrorDomain 
+                                              code:NSValidationMultipleErrorsError 
+                                          userInfo:userInfo];
     }
     // No error yet, just fill with the new error
     else {

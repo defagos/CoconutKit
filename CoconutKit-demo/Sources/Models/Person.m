@@ -1,39 +1,17 @@
 #import "Person.h"
 
-static NSString * const kPersonMandatoryFieldError = @"kPersonMandatoryFieldError";
-static NSString * const kPersonNegativeValueError = @"kPersonNegativeValueError";
-static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
+#import "DemoErrors.h"
 
 @implementation Person
-
-#pragma mark Class methods
-
-+ (void)initialize
-{
-    if (self != [Person class]) {
-        return;
-    }
-    
-    [HLSError registerDefaultCode:NSValidationMissingMandatoryPropertyError 
-                           domain:@"ch.hortis.CoconutKit-demo" 
-          localizedDescriptionKey:@"This field is mandatory"
-                    forIdentifier:kPersonMandatoryFieldError];
-    [HLSError registerDefaultCode:NSManagedObjectValidationError 
-                           domain:@"ch.hortis.CoconutKit-demo" 
-          localizedDescriptionKey:@"This value must be greater or equal to zero"
-                    forIdentifier:kPersonNegativeValueError];
-    [HLSError registerDefaultCode:NSManagedObjectValidationError 
-                           domain:@"ch.hortis.CoconutKit-demo" 
-          localizedDescriptionKey:@"This email address is invalid"
-                    forIdentifier:kPersonInvalidEmailError];
-}
 
 #pragma mark Individudal validation methods
 
 - (BOOL)checkFirstName:(NSString *)firstName error:(NSError **)pError
 {
     if (! [firstName isFilled]) {
-        *pError = [HLSError errorFromIdentifier:kPersonMandatoryFieldError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationMandatoryError
+                       localizedDescription:NSLocalizedString(@"Missing first name", @"Missing first name")];
         return NO;
     }
     
@@ -43,7 +21,9 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
 - (BOOL)checkLastName:(NSString *)lastName error:(NSError **)pError
 {
     if (! [lastName isFilled]) {
-        *pError = [HLSError errorFromIdentifier:kPersonMandatoryFieldError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationMandatoryError
+                       localizedDescription:NSLocalizedString(@"Missing last name", @"Missing last name")];
         return NO;
     }
     
@@ -58,7 +38,9 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
     }
     
     if (! [HLSValidators validateEmailAddress:email]) {
-        *pError = [HLSError errorFromIdentifier:kPersonInvalidEmailError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationIncorrectError
+                       localizedDescription:NSLocalizedString(@"Invalid email address", @"Invalid email address")];
         return NO;        
     }
     
@@ -68,7 +50,9 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
 - (BOOL)checkNbrChildren:(NSNumber *)nbrChildren error:(NSError **)pError
 {
     if ([nbrChildren integerValue] < 0) {
-        *pError = [HLSError errorFromIdentifier:kPersonNegativeValueError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationIncorrectError
+                       localizedDescription:NSLocalizedString(@"This value cannot be negative", @"This value cannot be negative")];
         return NO;
     }
     
@@ -84,7 +68,9 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
 - (BOOL)checkCity:(NSString *)city error:(NSError **)pError
 {
     if (! [city isFilled]) {
-        *pError = [HLSError errorFromIdentifier:kPersonMandatoryFieldError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationMandatoryError 
+                       localizedDescription:NSLocalizedString(@"Missing city", @"Missing city")];
         return NO;
     }
     
@@ -100,7 +86,9 @@ static NSString * const kPersonInvalidEmailError = @"kPersonInvalidEmailError";
 - (BOOL)checkCountry:(NSString *)country error:(NSError **)pError
 {
     if (! [country isFilled]) {
-        *pError = [HLSError errorFromIdentifier:kPersonMandatoryFieldError];
+        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                       code:DemoValidationMandatoryError 
+                       localizedDescription:NSLocalizedString(@"Missing country", @"Missing country")];
         return NO;
     }
     

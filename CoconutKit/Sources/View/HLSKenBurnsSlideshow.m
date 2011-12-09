@@ -148,11 +148,16 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)play
 {
+    if (m_running) {
+        HLSLoggerWarn(@"The slideshow is already running");
+        return;
+    }
+    
     if ([self.images count] == 0) {
         HLSLoggerInfo(@"No images loaded. Nothing to animate");
         return;
     }
-    
+        
     m_running = YES;
     
     for (UIImageView *imageView in self.imageViews) {
@@ -240,6 +245,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)stop
 {
+    if (! m_running) {
+        HLSLoggerInfo(@"The slideshow is not running");
+        return;
+    }
+    
     for (HLSAnimation *animation in self.animations) {
         [animation cancel];
     }

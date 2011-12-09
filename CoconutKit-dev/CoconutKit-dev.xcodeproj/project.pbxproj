@@ -10,12 +10,15 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F26DC621492CDC700086BA5 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC611492CDC700086BA5 /* HLSError.m */; };
 		6F2BDB971477C552000CAC7B /* NSManagedObject+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */; };
 		6F4608F3148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4608F2148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m */; };
 		6F4608FF148BFF7400E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4608FE148BFF7400E3BA79 /* HLSTextFieldInternalDelegate.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
+		6FF661E21492A8DE006E4987 /* HLSCoconutKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */; };
+		6FF661E91492CA3A006E4987 /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF661E81492CA3A006E4987 /* DemoErrors.m */; };
 		6FFE35F11468FD7400C02549 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE35601468FD7400C02549 /* CoconutKit_Localizable.strings */; };
 		6FFE35F21468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE35661468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6FFE35F31468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE35671468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -29,8 +32,6 @@
 		6FFE35FB1468FD7400C02549 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE35771468FD7400C02549 /* HLSViewAnimationStep.m */; };
 		6FFE35FC1468FD7400C02549 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE357A1468FD7400C02549 /* HLSAssert.m */; };
 		6FFE35FD1468FD7400C02549 /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE357D1468FD7400C02549 /* HLSConverters.m */; };
-		6FFE35FE1468FD7400C02549 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE357F1468FD7400C02549 /* HLSError.m */; };
-		6FFE35FF1468FD7400C02549 /* HLSErrorTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE35811468FD7400C02549 /* HLSErrorTemplate.m */; };
 		6FFE36001468FD7400C02549 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE35831468FD7400C02549 /* HLSFloat.m */; };
 		6FFE36011468FD7400C02549 /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE35851468FD7400C02549 /* HLSKeyboardInformation.m */; };
 		6FFE36021468FD7400C02549 /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE35871468FD7400C02549 /* HLSNotifications.m */; };
@@ -179,6 +180,8 @@
 		1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F26DC601492CDC700086BA5 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
+		6F26DC611492CDC700086BA5 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
 		6F2BDB951477C552000CAC7B /* NSManagedObject+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidation.h"; sourceTree = "<group>"; };
 		6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidation.m"; sourceTree = "<group>"; };
 		6F4608F1148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldTouchDetector.h; sourceTree = "<group>"; };
@@ -190,6 +193,10 @@
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
 		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
+		6FF661E01492A8DE006E4987 /* HLSCoconutKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCoconutKitError.h; sourceTree = "<group>"; };
+		6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCoconutKitError.m; sourceTree = "<group>"; };
+		6FF661E71492CA3A006E4987 /* DemoErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DemoErrors.h; sourceTree = "<group>"; };
+		6FF661E81492CA3A006E4987 /* DemoErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoErrors.m; sourceTree = "<group>"; };
 		6FFE35611468FD7400C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE35621468FD7400C02549 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE35631468FD7400C02549 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -215,10 +222,6 @@
 		6FFE357B1468FD7400C02549 /* HLSCategoryLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCategoryLinker.h; sourceTree = "<group>"; };
 		6FFE357C1468FD7400C02549 /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FFE357D1468FD7400C02549 /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
-		6FFE357E1468FD7400C02549 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
-		6FFE357F1468FD7400C02549 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
-		6FFE35801468FD7400C02549 /* HLSErrorTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTemplate.h; sourceTree = "<group>"; };
-		6FFE35811468FD7400C02549 /* HLSErrorTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTemplate.m; sourceTree = "<group>"; };
 		6FFE35821468FD7400C02549 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6FFE35831468FD7400C02549 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6FFE35841468FD7400C02549 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -549,6 +552,15 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		6FF661E61492CA20006E4987 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6FF661E71492CA3A006E4987 /* DemoErrors.h */,
+				6FF661E81492CA3A006E4987 /* DemoErrors.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6FFE355F1468FD7400C02549 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,12 +619,12 @@
 				6FFE35791468FD7400C02549 /* HLSAssert.h */,
 				6FFE357A1468FD7400C02549 /* HLSAssert.m */,
 				6FFE357B1468FD7400C02549 /* HLSCategoryLinker.h */,
+				6FF661E01492A8DE006E4987 /* HLSCoconutKitError.h */,
+				6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */,
 				6FFE357C1468FD7400C02549 /* HLSConverters.h */,
 				6FFE357D1468FD7400C02549 /* HLSConverters.m */,
-				6FFE357E1468FD7400C02549 /* HLSError.h */,
-				6FFE357F1468FD7400C02549 /* HLSError.m */,
-				6FFE35801468FD7400C02549 /* HLSErrorTemplate.h */,
-				6FFE35811468FD7400C02549 /* HLSErrorTemplate.m */,
+				6F26DC601492CDC700086BA5 /* HLSError.h */,
+				6F26DC611492CDC700086BA5 /* HLSError.m */,
 				6FFE35821468FD7400C02549 /* HLSFloat.h */,
 				6FFE35831468FD7400C02549 /* HLSFloat.m */,
 				6FFE35841468FD7400C02549 /* HLSKeyboardInformation.h */,
@@ -832,6 +844,7 @@
 				6FFE364C1468FD9D00C02549 /* Application */,
 				6FFE364F1468FD9D00C02549 /* Demos */,
 				6FFE36DA1468FD9D00C02549 /* DemosNavigator */,
+				6FF661E61492CA20006E4987 /* Helpers */,
 				6FFE36DD1468FD9D00C02549 /* Models */,
 			);
 			name = Sources;
@@ -1384,8 +1397,6 @@
 				6FFE35FB1468FD7400C02549 /* HLSViewAnimationStep.m in Sources */,
 				6FFE35FC1468FD7400C02549 /* HLSAssert.m in Sources */,
 				6FFE35FD1468FD7400C02549 /* HLSConverters.m in Sources */,
-				6FFE35FE1468FD7400C02549 /* HLSError.m in Sources */,
-				6FFE35FF1468FD7400C02549 /* HLSErrorTemplate.m in Sources */,
 				6FFE36001468FD7400C02549 /* HLSFloat.m in Sources */,
 				6FFE36011468FD7400C02549 /* HLSKeyboardInformation.m in Sources */,
 				6FFE36021468FD7400C02549 /* HLSNotifications.m in Sources */,
@@ -1479,6 +1490,9 @@
 				6F2BDB971477C552000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
 				6F4608F3148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F4608FF148BFF7400E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
+				6FF661E21492A8DE006E4987 /* HLSCoconutKitError.m in Sources */,
+				6FF661E91492CA3A006E4987 /* DemoErrors.m in Sources */,
+				6F26DC621492CDC700086BA5 /* HLSError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

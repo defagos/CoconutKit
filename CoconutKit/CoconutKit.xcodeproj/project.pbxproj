@@ -16,6 +16,8 @@
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
+		6FF661EC1492CC7C006E4987 /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF661EA1492CC7C006E4987 /* HLSError.h */; };
+		6FF661ED1492CC7C006E4987 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF661EB1492CC7C006E4987 /* HLSError.m */; };
 		6FFE34E71468FD5900C02549 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34681468FD5900C02549 /* HLSAnimation.h */; };
 		6FFE34E81468FD5900C02549 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE34691468FD5900C02549 /* HLSAnimation.m */; };
 		6FFE34E91468FD5900C02549 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE346A1468FD5900C02549 /* HLSAnimationStep.h */; };
@@ -27,10 +29,6 @@
 		6FFE34EF1468FD5900C02549 /* HLSCategoryLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34711468FD5900C02549 /* HLSCategoryLinker.h */; };
 		6FFE34F01468FD5900C02549 /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34721468FD5900C02549 /* HLSConverters.h */; };
 		6FFE34F11468FD5900C02549 /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE34731468FD5900C02549 /* HLSConverters.m */; };
-		6FFE34F21468FD5900C02549 /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34741468FD5900C02549 /* HLSError.h */; };
-		6FFE34F31468FD5900C02549 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE34751468FD5900C02549 /* HLSError.m */; };
-		6FFE34F41468FD5900C02549 /* HLSErrorTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34761468FD5900C02549 /* HLSErrorTemplate.h */; };
-		6FFE34F51468FD5900C02549 /* HLSErrorTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE34771468FD5900C02549 /* HLSErrorTemplate.m */; };
 		6FFE34F61468FD5900C02549 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE34781468FD5900C02549 /* HLSFloat.h */; };
 		6FFE34F71468FD5900C02549 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE34791468FD5900C02549 /* HLSFloat.m */; };
 		6FFE34F81468FD5900C02549 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFE347A1468FD5900C02549 /* HLSKeyboardInformation.h */; };
@@ -151,6 +149,8 @@
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6FF661EA1492CC7C006E4987 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
+		6FF661EB1492CC7C006E4987 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
 		6FFE34571468FD5900C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE34581468FD5900C02549 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FFE34591468FD5900C02549 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -176,10 +176,6 @@
 		6FFE34711468FD5900C02549 /* HLSCategoryLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCategoryLinker.h; sourceTree = "<group>"; };
 		6FFE34721468FD5900C02549 /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FFE34731468FD5900C02549 /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
-		6FFE34741468FD5900C02549 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
-		6FFE34751468FD5900C02549 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
-		6FFE34761468FD5900C02549 /* HLSErrorTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTemplate.h; sourceTree = "<group>"; };
-		6FFE34771468FD5900C02549 /* HLSErrorTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTemplate.m; sourceTree = "<group>"; };
 		6FFE34781468FD5900C02549 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6FFE34791468FD5900C02549 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6FFE347A1468FD5900C02549 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -409,10 +405,8 @@
 				6FFE34711468FD5900C02549 /* HLSCategoryLinker.h */,
 				6FFE34721468FD5900C02549 /* HLSConverters.h */,
 				6FFE34731468FD5900C02549 /* HLSConverters.m */,
-				6FFE34741468FD5900C02549 /* HLSError.h */,
-				6FFE34751468FD5900C02549 /* HLSError.m */,
-				6FFE34761468FD5900C02549 /* HLSErrorTemplate.h */,
-				6FFE34771468FD5900C02549 /* HLSErrorTemplate.m */,
+				6FF661EA1492CC7C006E4987 /* HLSError.h */,
+				6FF661EB1492CC7C006E4987 /* HLSError.m */,
 				6FFE34781468FD5900C02549 /* HLSFloat.h */,
 				6FFE34791468FD5900C02549 /* HLSFloat.m */,
 				6FFE347A1468FD5900C02549 /* HLSKeyboardInformation.h */,
@@ -579,8 +573,6 @@
 				6FFE34ED1468FD5900C02549 /* HLSAssert.h in Headers */,
 				6FFE34EF1468FD5900C02549 /* HLSCategoryLinker.h in Headers */,
 				6FFE34F01468FD5900C02549 /* HLSConverters.h in Headers */,
-				6FFE34F21468FD5900C02549 /* HLSError.h in Headers */,
-				6FFE34F41468FD5900C02549 /* HLSErrorTemplate.h in Headers */,
 				6FFE34F61468FD5900C02549 /* HLSFloat.h in Headers */,
 				6FFE34F81468FD5900C02549 /* HLSKeyboardInformation.h in Headers */,
 				6FFE34FA1468FD5900C02549 /* HLSNotifications.h in Headers */,
@@ -641,6 +633,7 @@
 				6F2BDB921477C53D000CAC7B /* NSManagedObject+HLSValidation.h in Headers */,
 				6F4608EE148BC0CA00E3BA79 /* HLSTextFieldTouchDetector.h in Headers */,
 				6F4608FB148BF53100E3BA79 /* HLSTextFieldInternalDelegate.h in Headers */,
+				6FF661EC1492CC7C006E4987 /* HLSError.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,8 +702,6 @@
 				6FFE34EC1468FD5900C02549 /* HLSViewAnimationStep.m in Sources */,
 				6FFE34EE1468FD5900C02549 /* HLSAssert.m in Sources */,
 				6FFE34F11468FD5900C02549 /* HLSConverters.m in Sources */,
-				6FFE34F31468FD5900C02549 /* HLSError.m in Sources */,
-				6FFE34F51468FD5900C02549 /* HLSErrorTemplate.m in Sources */,
 				6FFE34F71468FD5900C02549 /* HLSFloat.m in Sources */,
 				6FFE34F91468FD5900C02549 /* HLSKeyboardInformation.m in Sources */,
 				6FFE34FB1468FD5900C02549 /* HLSNotifications.m in Sources */,
@@ -762,6 +753,7 @@
 				6F2BDB931477C53D000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
 				6F4608EF148BC0CA00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F4608FC148BF53100E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
+				6FF661ED1492CC7C006E4987 /* HLSError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
