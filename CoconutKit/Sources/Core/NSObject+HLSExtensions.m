@@ -35,11 +35,11 @@ HLSLinkCategory(NSObject_HLSExtensions)
         struct objc_method_description methodDescription = methodDescriptions[i];
         SEL selector = methodDescription.name;
         if (! class_getInstanceMethod([self class], selector)) {
-#ifdef HLS_LOGGER
             NSString *selectorString = [NSString stringWithCString:(char *)selector encoding:NSUTF8StringEncoding];
             NSString *protocolName = [NSString stringWithCString:protocol_getName(protocol) encoding:NSUTF8StringEncoding];
             HLSLoggerInfo(@"Class %@ does not implement method %@ of protocol %@", [self className], selectorString, protocolName);
-#endif
+            selectorString = nil;               // Just to remove unused variable warnings
+            protocolName = nil;
             return NO;
         }
     }
