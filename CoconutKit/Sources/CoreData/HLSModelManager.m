@@ -96,15 +96,28 @@ static HLSModelManager *s_defaultModelManager = nil;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
+- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory reuse:(BOOL)reuse
 {
     if ((self = [super init])) {
         if (! [self initializeWithModelFileName:modelFileName storeDirectory:storeDirectory]) {
+            // Delete any existing store
+            if (! reuse) {
+                NSString *filePath = [[storeDirectory stringByAppendingPathComponent:modelFileName] stringByAppendingPathExtension:@"sqlite"];
+                if (! [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL]) {
+                    HLSLoggerWarn(@"Unable to delete previously existing store at %@", filePath);
+                }
+            }
+            
             [self release];
             return nil;
         }
     }
     return self;
+}
+
+- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
+{
+    return [self initWithModelFileName:modelFileName storeDirectory:storeDirectory reuse:YES];
 }
 
 - (void)dealloc

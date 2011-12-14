@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */; };
+		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
+		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
+		6F2908521498734100506DDC /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908431498734100506DDC /* ConcreteClassD.m */; };
+		6F2908531498734100506DDC /* ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908451498734100506DDC /* ConcreteSubclassB.m */; };
+		6F2908541498734100506DDC /* ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908471498734100506DDC /* ConcreteSubclassC.m */; };
+		6F2908551498734100506DDC /* _AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F29084A1498734100506DDC /* _AbstractClassA.m */; };
+		6F2908561498734100506DDC /* _ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F29084C1498734100506DDC /* _ConcreteClassD.m */; };
+		6F2908571498734100506DDC /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F29084E1498734100506DDC /* _ConcreteSubclassB.m */; };
+		6F2908581498734100506DDC /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908501498734100506DDC /* _ConcreteSubclassC.m */; };
+		6F290876149877F300506DDC /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F290875149877F300506DDC /* TestErrors.m */; };
 		6F2BDB9B1477C57E000CAC7B /* NSManagedObject+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2BDB9A1477C57E000CAC7B /* NSManagedObject+HLSValidation.m */; };
 		6F33348813FAF9E0000FC9FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348713FAF9E0000FC9FD /* UIKit.framework */; };
 		6F33348A13FAF9E0000FC9FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348913FAF9E0000FC9FD /* Foundation.framework */; };
@@ -28,12 +38,6 @@
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
 		6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */; };
-		6FDE68F31475771E005EA5FA /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E71475771E005EA5FA /* Employee.m */; };
-		6FDE68F41475771E005EA5FA /* _Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EA1475771E005EA5FA /* _Employee.m */; };
-		6FDE68F51475771E005EA5FA /* _Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EC1475771E005EA5FA /* _Manager.m */; };
-		6FDE68F61475771E005EA5FA /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68EE1475771E005EA5FA /* _Person.m */; };
-		6FDE68F71475771E005EA5FA /* Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68F01475771E005EA5FA /* Manager.m */; };
-		6FDE68F81475771E005EA5FA /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68F21475771E005EA5FA /* Person.m */; };
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
 		6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */; };
 		6FFE38D91468FDCA00C02549 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE38481468FDCA00C02549 /* CoconutKit_Localizable.strings */; };
@@ -104,6 +108,26 @@
 /* Begin PBXFileReference section */
 		6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
 		6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
+		6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
+		6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
+		6F2908401498734100506DDC /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
+		6F2908411498734100506DDC /* AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractClassA.m; sourceTree = "<group>"; };
+		6F2908421498734100506DDC /* ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteClassD.h; sourceTree = "<group>"; };
+		6F2908431498734100506DDC /* ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteClassD.m; sourceTree = "<group>"; };
+		6F2908441498734100506DDC /* ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F2908451498734100506DDC /* ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F2908461498734100506DDC /* ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F2908471498734100506DDC /* ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F2908491498734100506DDC /* _AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractClassA.h; sourceTree = "<group>"; };
+		6F29084A1498734100506DDC /* _AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractClassA.m; sourceTree = "<group>"; };
+		6F29084B1498734100506DDC /* _ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteClassD.h; sourceTree = "<group>"; };
+		6F29084C1498734100506DDC /* _ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteClassD.m; sourceTree = "<group>"; };
+		6F29084D1498734100506DDC /* _ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F29084E1498734100506DDC /* _ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F29084F1498734100506DDC /* _ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F2908501498734100506DDC /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F290874149877F300506DDC /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
+		6F290875149877F300506DDC /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
 		6F2BDB991477C57E000CAC7B /* NSManagedObject+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidation.h"; sourceTree = "<group>"; };
 		6F2BDB9A1477C57E000CAC7B /* NSManagedObject+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidation.m"; sourceTree = "<group>"; };
 		6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,18 +163,6 @@
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
-		6FDE68E61475771E005EA5FA /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
-		6FDE68E71475771E005EA5FA /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
-		6FDE68E91475771E005EA5FA /* _Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Employee.h; sourceTree = "<group>"; };
-		6FDE68EA1475771E005EA5FA /* _Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Employee.m; sourceTree = "<group>"; };
-		6FDE68EB1475771E005EA5FA /* _Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Manager.h; sourceTree = "<group>"; };
-		6FDE68EC1475771E005EA5FA /* _Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Manager.m; sourceTree = "<group>"; };
-		6FDE68ED1475771E005EA5FA /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
-		6FDE68EE1475771E005EA5FA /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
-		6FDE68EF1475771E005EA5FA /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
-		6FDE68F01475771E005EA5FA /* Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manager.m; sourceTree = "<group>"; };
-		6FDE68F11475771E005EA5FA /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		6FDE68F21475771E005EA5FA /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManagerTestCase.h; sourceTree = "<group>"; };
@@ -307,6 +319,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F29083F1498734100506DDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F2908401498734100506DDC /* AbstractClassA.h */,
+				6F2908411498734100506DDC /* AbstractClassA.m */,
+				6F2908421498734100506DDC /* ConcreteClassD.h */,
+				6F2908431498734100506DDC /* ConcreteClassD.m */,
+				6F2908441498734100506DDC /* ConcreteSubclassB.h */,
+				6F2908451498734100506DDC /* ConcreteSubclassB.m */,
+				6F2908461498734100506DDC /* ConcreteSubclassC.h */,
+				6F2908471498734100506DDC /* ConcreteSubclassC.m */,
+				6F2908481498734100506DDC /* Generated */,
+			);
+			name = Models;
+			path = Sources/Models;
+			sourceTree = SOURCE_ROOT;
+		};
+		6F2908481498734100506DDC /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6F2908491498734100506DDC /* _AbstractClassA.h */,
+				6F29084A1498734100506DDC /* _AbstractClassA.m */,
+				6F29084B1498734100506DDC /* _ConcreteClassD.h */,
+				6F29084C1498734100506DDC /* _ConcreteClassD.m */,
+				6F29084D1498734100506DDC /* _ConcreteSubclassB.h */,
+				6F29084E1498734100506DDC /* _ConcreteSubclassB.m */,
+				6F29084F1498734100506DDC /* _ConcreteSubclassC.h */,
+				6F2908501498734100506DDC /* _ConcreteSubclassC.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		6F290873149877F300506DDC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6F290874149877F300506DDC /* TestErrors.h */,
+				6F290875149877F300506DDC /* TestErrors.m */,
+			);
+			name = Helpers;
+			path = Sources/Helpers;
+			sourceTree = SOURCE_ROOT;
+		};
 		6F2FCD59140BB8C70080A775 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,7 +427,8 @@
 			children = (
 				6F33351313FB7F80000FC9FD /* Core */,
 				6FDE68F9147577B0005EA5FA /* CoreData */,
-				6FDE68E51475771E005EA5FA /* Models */,
+				6F290873149877F300506DDC /* Helpers */,
+				6F29083F1498734100506DDC /* Models */,
 				6FA74D40140500CC0043693E /* View */,
 			);
 			name = Sources;
@@ -424,39 +479,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		6FDE68E51475771E005EA5FA /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6FDE68E61475771E005EA5FA /* Employee.h */,
-				6FDE68E71475771E005EA5FA /* Employee.m */,
-				6FDE68E81475771E005EA5FA /* Generated */,
-				6FDE68EF1475771E005EA5FA /* Manager.h */,
-				6FDE68F01475771E005EA5FA /* Manager.m */,
-				6FDE68F11475771E005EA5FA /* Person.h */,
-				6FDE68F21475771E005EA5FA /* Person.m */,
-			);
-			name = Models;
-			path = Sources/Models;
-			sourceTree = SOURCE_ROOT;
-		};
-		6FDE68E81475771E005EA5FA /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				6FDE68E91475771E005EA5FA /* _Employee.h */,
-				6FDE68EA1475771E005EA5FA /* _Employee.m */,
-				6FDE68EB1475771E005EA5FA /* _Manager.h */,
-				6FDE68EC1475771E005EA5FA /* _Manager.m */,
-				6FDE68ED1475771E005EA5FA /* _Person.h */,
-				6FDE68EE1475771E005EA5FA /* _Person.m */,
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
 		6FDE68F9147577B0005EA5FA /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */,
 				6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */,
+				6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */,
+				6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */,
 				6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */,
 				6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */,
 			);
@@ -584,6 +613,8 @@
 		6FFE38951468FDCA00C02549 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6FFE389B1468FDCA00C02549 /* NSManagedObject+HLSExtensions.h */,
+				6FFE389C1468FDCA00C02549 /* NSManagedObject+HLSExtensions.m */,
 				6F2BDB991477C57E000CAC7B /* NSManagedObject+HLSValidation.h */,
 				6F2BDB9A1477C57E000CAC7B /* NSManagedObject+HLSValidation.m */,
 				6FFE38961468FDCA00C02549 /* HLSManagedObjectCopying.h */,
@@ -591,8 +622,6 @@
 				6FFE38981468FDCA00C02549 /* HLSManagedTextFieldValidator.m */,
 				6FFE38991468FDCA00C02549 /* HLSModelManager.h */,
 				6FFE389A1468FDCA00C02549 /* HLSModelManager.m */,
-				6FFE389B1468FDCA00C02549 /* NSManagedObject+HLSExtensions.h */,
-				6FFE389C1468FDCA00C02549 /* NSManagedObject+HLSExtensions.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -842,18 +871,22 @@
 				6FFE39171468FDCA00C02549 /* HLSWebViewController.m in Sources */,
 				6FFE39181468FDCA00C02549 /* HLSWizardViewController.m in Sources */,
 				6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */,
-				6FDE68F31475771E005EA5FA /* Employee.m in Sources */,
-				6FDE68F41475771E005EA5FA /* _Employee.m in Sources */,
-				6FDE68F51475771E005EA5FA /* _Manager.m in Sources */,
-				6FDE68F61475771E005EA5FA /* _Person.m in Sources */,
-				6FDE68F71475771E005EA5FA /* Manager.m in Sources */,
-				6FDE68F81475771E005EA5FA /* Person.m in Sources */,
 				6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
 				6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */,
 				6F2BDB9B1477C57E000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
 				6F4608F7148BCE9B00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F460902148BFF8800E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
 				6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */,
+				6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */,
+				6F2908511498734100506DDC /* AbstractClassA.m in Sources */,
+				6F2908521498734100506DDC /* ConcreteClassD.m in Sources */,
+				6F2908531498734100506DDC /* ConcreteSubclassB.m in Sources */,
+				6F2908541498734100506DDC /* ConcreteSubclassC.m in Sources */,
+				6F2908551498734100506DDC /* _AbstractClassA.m in Sources */,
+				6F2908561498734100506DDC /* _ConcreteClassD.m in Sources */,
+				6F2908571498734100506DDC /* _ConcreteSubclassB.m in Sources */,
+				6F2908581498734100506DDC /* _ConcreteSubclassC.m in Sources */,
+				6F290876149877F300506DDC /* TestErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@
                        localizedDescription:NSLocalizedString(@"Missing first name", @"Missing first name")];
         return NO;
     }
-    
+
     return YES;
 }
 
@@ -92,13 +92,6 @@
         return NO;
     }
     
-    return YES;
-}
-
-#pragma mark Global validation methods
-
-- (BOOL)checkForConsistency:(NSError **)pError
-{
     return YES;
 }
 

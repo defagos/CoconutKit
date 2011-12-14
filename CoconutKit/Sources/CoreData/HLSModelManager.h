@@ -14,7 +14,7 @@
  * suffice. If your application is multi-threaded, you can easily generate additional model managers by
  * duplicating the one of your main thread (use the duplicate method).
  *
- * Designated initializer: initWithModelFileName:storeDirectory:
+ * Designated initializer: initWithModelFileName:storeDirectory:reuse:
  */
 @interface HLSModelManager : NSObject {
 @private
@@ -50,7 +50,13 @@
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the main bundle) and
- * saving data at the specified store path
+ * saving data at the specified store path. If reuse is set to YES, any existing data store is reused (and
+ * migrated if needed), otherwise the store is destroyed first
+ */
+- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory reuse:(BOOL)reuse;
+
+/**
+ * Same as initWithModelFileName:storeDirectory:reuse:, with reuse set as YES (which is the value commonly used)
  */
 - (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory;
 

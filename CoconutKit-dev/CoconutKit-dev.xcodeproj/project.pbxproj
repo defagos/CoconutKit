@@ -675,15 +675,15 @@
 		6FFE35AD1468FD7400C02549 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6FFE35B31468FD7400C02549 /* NSManagedObject+HLSExtensions.h */,
+				6FFE35B41468FD7400C02549 /* NSManagedObject+HLSExtensions.m */,
+				6F2BDB951477C552000CAC7B /* NSManagedObject+HLSValidation.h */,
+				6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */,
 				6FFE35AE1468FD7400C02549 /* HLSManagedObjectCopying.h */,
 				6FFE35AF1468FD7400C02549 /* HLSManagedTextFieldValidator.h */,
 				6FFE35B01468FD7400C02549 /* HLSManagedTextFieldValidator.m */,
 				6FFE35B11468FD7400C02549 /* HLSModelManager.h */,
 				6FFE35B21468FD7400C02549 /* HLSModelManager.m */,
-				6FFE35B31468FD7400C02549 /* NSManagedObject+HLSExtensions.h */,
-				6FFE35B41468FD7400C02549 /* NSManagedObject+HLSExtensions.m */,
-				6F2BDB951477C552000CAC7B /* NSManagedObject+HLSValidation.h */,
-				6F2BDB961477C552000CAC7B /* NSManagedObject+HLSValidation.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

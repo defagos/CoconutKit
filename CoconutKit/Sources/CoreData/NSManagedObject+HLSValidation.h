@@ -64,7 +64,11 @@
  *     -checkForConsistency: method which will be called when an inserted or updated object is saved. As for
  *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
  *     therefore do not need to check the pointer before dereferencing it. Moreover, error-chaining will be
- *     performed for you
+ *     performed for you. The signature of this method must be
+ *         - (BOOL)checkForConsistency:(NSError **)pError
+ *   - similarly, instead of implementing the -validateForDelete: method to perform checks when deleting
+ *     an object, you now must implement a 'check' method with the following signature:
+ *         - (BOOL)checkForDelete:(NSError **)pError
  * Other HLSValidation class extensions leverage this new set of validation methods by providing binding
  * between widgets (currently UITextField) and model object fields. This makes synchronization and validation 
  * of forms very easy to implement. Refer to the documentation of the other HLSValidation class extensions
