@@ -37,8 +37,6 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
 static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
 static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
 
-static void combineErrors(NSError *newError, NSError **pOriginalError);
-
 #pragma mark -
 #pragma mark HLSValidationPrivate category interface
 
@@ -65,6 +63,48 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     s_NSManagedObject_HLSExtensions__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector([NSManagedObject class], @selector(initialize), @selector(swizzledInitialize));
     
     s_injectedManagedObjectValidation = YES;
+}
+
+#pragma mark Combining Core Data errors correctly
+
++ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError
+{
+    // If no new error, nothing to do
+    if (! newError) {
+        return;
+    }
+    
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return;
+    }
+    
+    // An existing error is already available. Combine as multiple error
+    if (*pExistingError) {
+        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new 
+        // error object)
+        NSDictionary *userInfo = nil;
+        if ([*pExistingError code] == NSValidationMultipleErrorsError) {
+            userInfo = [*pExistingError userInfo];
+            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+            errors = [errors arrayByAddingObject:newError];
+            userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
+        }
+        // Not a multiple error yet. Combine into a multiple error
+        else {
+            NSArray *errors = [NSArray arrayWithObjects:*pExistingError, newError, nil];
+            userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
+        }
+        
+        // Fill with error object (code in the NSSQLiteErrorDomain domain; cannot use HLSError here)
+        *pExistingError = [NSError errorWithDomain:NSSQLiteErrorDomain 
+                                              code:NSValidationMultipleErrorsError 
+                                          userInfo:userInfo];
+    }
+    // No error yet, just fill with the new error
+    else {
+        *pExistingError = newError;
+    }
 }
 
 #pragma mark Checking the object
@@ -263,7 +303,7 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
         if (! newError) {
             HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
         }
-        combineErrors(newError, pError);
+        [NSManagedObject combineError:newError withError:pError];
         return NO;
     }
     else if (newError) {
@@ -305,7 +345,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         // Validate. This is where individual validations are triggered
         NSError *newError = nil;
         if (! (*imp)(self, sel, &newError)) {
-            combineErrors(newError, pError);
+            [NSManagedObject combineError:newError withError:pError];
             return NO;
         }
         
@@ -318,7 +358,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         // Climb up the inheritance hierarchy
         NSError *newError = nil;
         if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
-            combineErrors(newError, pError);
+            [NSManagedObject combineError:newError withError:pError];
             valid = NO;
         }
         
@@ -337,7 +377,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             if (! newCheckError) {
                 HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
             }
-            combineErrors(newCheckError, pError);
+            [NSManagedObject combineError:newCheckError withError:pError];
             valid = NO;
         }
         else if (newCheckError) {
@@ -346,56 +386,5 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         }
         
         return valid;
-    }
-}
-
-#pragma mark Combining Core Data errors correctly
-
-/**
- * Combine a new error with an existing error. This function implements the approach recommended in the Core Data
- * programming guide, see
- *   http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
- */
-static void combineErrors(NSError *newError, NSError **pExistingError)
-{
-    // If no new error, nothing to do
-    if (! newError) {
-        return;
-    }
-    
-    // If the caller is not interested in errors, nothing to do
-    if (! pExistingError) {
-        return;
-    }
-    
-    // This method is responsible of chaining errors, producing NSValidationMultipleErrorsError errors. No newError
-    // must therefore be such an error
-    NSCAssert([newError code] != NSValidationMultipleErrorsError, @"Individual errors cannot be NSValidationMultipleErrorsError");
-    
-    // An existing error is already available. Combine as multiple error
-    if (*pExistingError) {
-        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new 
-        // error object)
-        NSDictionary *userInfo = nil;
-        if ([*pExistingError code] == NSValidationMultipleErrorsError) {
-            userInfo = [*pExistingError userInfo];
-            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
-            errors = [errors arrayByAddingObject:newError];
-            userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
-        }
-        // Not a multiple error yet. Combine into a multiple error
-        else {
-            NSArray *errors = [NSArray arrayWithObjects:*pExistingError, newError, nil];
-            userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
-        }
-        
-        // Fill with error object (code in the NSSQLiteErrorDomain domain; cannot use HLSError here)
-        *pExistingError = [NSError errorWithDomain:NSSQLiteErrorDomain 
-                                              code:NSValidationMultipleErrorsError 
-                                          userInfo:userInfo];
-    }
-    // No error yet, just fill with the new error
-    else {
-        *pExistingError = newError;
     }
 }

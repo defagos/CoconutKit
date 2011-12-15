@@ -59,7 +59,6 @@
     
     NSError *errorB14 = nil;
     GHAssertFalse([bInstance checkValue:nil forKey:@"modelMandatoryCodeNotEmptyStringA" error:&errorB14], @"Incorrect validation");
-    NSDictionary *userInfo = [errorB14 userInfo];
     GHAssertEquals([errorB14 code], NSValidationMissingMandatoryPropertyError, @"Incorrect error code");
     
     // We were just testing insertions
