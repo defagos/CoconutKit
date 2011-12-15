@@ -67,6 +67,27 @@
     NSError *errorB5 = nil;
     GHAssertFalse([bInstance checkValue:nil forKey:@"modelMandatoryBoundedNumberB" error:&errorB5], @"Incorrect validation");
     GHAssertEquals([errorB5 code], NSValidationMissingMandatoryPropertyError, @"Incorrect error code");
+
+    NSError *errorB6 = nil;
+    GHAssertFalse([bInstance checkValue:[NSNumber numberWithInt:11] forKey:@"modelMandatoryBoundedNumberB" error:&errorB6], @"Incorrect validation");
+    GHAssertEquals([errorB6 code], NSValidationNumberTooLargeError, @"Incorrect error code");
+
+    // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
+    //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
+    //       Data framework?
+#if 0
+    NSError *errorB7 = nil;
+    GHAssertFalse([bInstance checkValue:[NSNumber numberWithInt:2] forKey:@"modelMandatoryBoundedNumberB" error:&errorB7], @"Incorrect validation");
+    GHAssertEquals([errorB7 code], NSValidationNumberTooSmallError, @"Incorrect error code");
+#endif
+    
+    NSError *errorB8 = nil;
+    GHAssertTrue([bInstance checkValue:[NSNumber numberWithInt:10] forKey:@"modelMandatoryBoundedNumberB" error:&errorB8], @"Incorrect validation");
+    GHAssertNil(errorB8, @"Error incorrectly returned");
+    
+    NSError *errorB9 = nil;
+    GHAssertTrue([bInstance checkValue:[NSNumber numberWithInt:3] forKey:@"modelMandatoryBoundedNumberB" error:&errorB9], @"Incorrect validation");
+    GHAssertNil(errorB9, @"Error incorrectly returned");
 }
 
 @end
