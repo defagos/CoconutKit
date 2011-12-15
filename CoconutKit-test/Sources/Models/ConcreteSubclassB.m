@@ -4,10 +4,13 @@
 
 @implementation ConcreteSubclassB
 
+// noValidationNumberB: No validation constraints, neither in the code, nor in the xcdatamodel
+// modelMandatoryBoundedNumberB: Validation logic entirely in the xcdatamodel (mandatory and in [3;10])
+
 // codeMandatoryStringB: Validation entirely defined in code
-- (BOOL)checkCodeMandatoryStringB:(NSString *)codeMandatoryStringB error:(NSError **)pError
+- (BOOL)checkCodeMandatoryNumberB:(NSNumber *)codeMandatoryNumberB error:(NSError **)pError
 {
-    if (! codeMandatoryStringB) {
+    if (! codeMandatoryNumberB) {
         *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
                                        code:TestValidationMandatoryValueError];
         return NO;
@@ -15,21 +18,5 @@
     
     return YES;
 }
-
-// modelMandatoryCodeNotEmptyStringB: Validation defined in the xcdatamodel and in the code
-- (BOOL)checkModelMandatoryCodeNotEmptyStringB:(NSString *)modelMandatoryCodeNotEmptyStringB error:(NSError **)pError
-{
-    if (! [modelMandatoryCodeNotEmptyStringB isFilled]) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
-                                       code:TestValidationIncorrectValueError];
-        return NO;
-    }
-    
-    return YES;
-}
-
-// modelMandatoryStringB: Validation entierly in the xcdatamodel
-
-// noValidationStringB: No validation constraints, neither in the code, nor in the xcdatamodel
 
 @end

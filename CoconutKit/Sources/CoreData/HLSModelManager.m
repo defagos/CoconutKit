@@ -99,18 +99,19 @@ static HLSModelManager *s_defaultModelManager = nil;
 - (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory reuse:(BOOL)reuse
 {
     if ((self = [super init])) {
-        if (! [self initializeWithModelFileName:modelFileName storeDirectory:storeDirectory]) {
-            // Delete any existing store
-            if (! reuse) {
-                NSString *filePath = [[storeDirectory stringByAppendingPathComponent:modelFileName] stringByAppendingPathExtension:@"sqlite"];
-                if (! [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL]) {
-                    HLSLoggerWarn(@"Unable to delete previously existing store at %@", filePath);
-                }
+        // Delete any existing store
+        // TODO: Cleanest way: Move and delete on success
+        if (! reuse) {
+            NSString *filePath = [[storeDirectory stringByAppendingPathComponent:modelFileName] stringByAppendingPathExtension:@"sqlite"];
+            if (! [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL]) {
+                HLSLoggerWarn(@"Unable to delete previously existing store at %@", filePath);
             }
-            
+        }
+        
+        if (! [self initializeWithModelFileName:modelFileName storeDirectory:storeDirectory]) {            
             [self release];
             return nil;
-        }
+        }        
     }
     return self;
 }

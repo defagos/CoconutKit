@@ -36,34 +36,6 @@
 
 
 
-@dynamic codeMandatoryStringB;
-
-
-
-
-
-
-@dynamic modelMandatoryCodeNotEmptyStringB;
-
-
-
-
-
-
-@dynamic modelMandatoryStringB;
-
-
-
-
-
-
-@dynamic noValidationStringB;
-
-
-
-
-
-
 
 
 

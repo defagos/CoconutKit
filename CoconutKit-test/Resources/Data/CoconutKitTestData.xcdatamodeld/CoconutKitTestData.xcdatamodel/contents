@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractClassA" representedClassName="AbstractClassA" isAbstract="YES" syncable="YES">
-        <attribute name="codeMandatoryStringA" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryCodeNotEmptyStringA" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryStringA" attributeType="String" syncable="YES"/>
-        <attribute name="noValidationStringA" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="codeMandatoryNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="modelMandatoryBoundedNumberB" attributeType="Integer 16" minValueString="3" maxValueString="10" defaultValueString="5" syncable="YES"/>
+        <attribute name="noValidationNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES">
-        <attribute name="modelBoundedNumberD" optional="YES" attributeType="Integer 32" maxValueString="10" syncable="YES"/>
-        <attribute name="modelMandatoryDeletableBoolD" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <attribute name="modelMandatoryEndDateD" attributeType="Date" syncable="YES"/>
-        <attribute name="modelMandatoryStartDateD" attributeType="Date" syncable="YES"/>
-        <relationship name="subclassCOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteSubclassC" inverseName="classDObjects" inverseEntity="ConcreteSubclassC" syncable="YES"/>
-    </entity>
-    <entity name="ConcreteSubclassB" representedClassName="ConcreteSubclassB" parentEntity="AbstractClassA" syncable="YES">
-        <attribute name="codeMandatoryStringB" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryCodeNotEmptyStringB" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryStringB" attributeType="String" syncable="YES"/>
-        <attribute name="noValidationStringB" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="ConcreteSubclassC" representedClassName="ConcreteSubclassC" parentEntity="ConcreteSubclassB" syncable="YES">
-        <attribute name="codeMandatoryStringC" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryCodeNotEmptyStringC" attributeType="String" syncable="YES"/>
-        <attribute name="modelMandatoryStringC" attributeType="String" syncable="YES"/>
-        <attribute name="noValidationStringC" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="classDObjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteClassD" inverseName="subclassCOwner" inverseEntity="ConcreteClassD" syncable="YES"/>
-    </entity>
+    <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES"/>
+    <entity name="ConcreteSubclassB" representedClassName="ConcreteSubclassB" parentEntity="AbstractClassA" syncable="YES"/>
+    <entity name="ConcreteSubclassC" representedClassName="ConcreteSubclassC" parentEntity="ConcreteSubclassB" syncable="YES"/>
     <elements>
-        <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="90"/>
         <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="120"/>
         <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="105"/>
         <element name="ConcreteSubclassC" positionX="160" positionY="192" width="128" height="120"/>

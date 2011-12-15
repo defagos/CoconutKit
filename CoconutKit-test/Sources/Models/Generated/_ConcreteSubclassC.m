@@ -36,45 +36,6 @@
 
 
 
-@dynamic codeMandatoryStringC;
-
-
-
-
-
-
-@dynamic modelMandatoryCodeNotEmptyStringC;
-
-
-
-
-
-
-@dynamic modelMandatoryStringC;
-
-
-
-
-
-
-@dynamic noValidationStringC;
-
-
-
-
-
-
-@dynamic classDObjects;
-
-	
-- (NSMutableSet*)classDObjectsSet {
-	[self willAccessValueForKey:@"classDObjects"];
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"classDObjects"];
-	[self didAccessValueForKey:@"classDObjects"];
-	return result;
-}
-	
-
 
 
 

@@ -9,7 +9,6 @@
 
 
 
-
 @interface AbstractClassAID : NSManagedObjectID {}
 @end
 
@@ -22,34 +21,38 @@
 
 
 
-@property (nonatomic, retain) NSString *codeMandatoryStringA;
+@property (nonatomic, retain) NSNumber *codeMandatoryNumberB;
 
 
-//- (BOOL)validateCodeMandatoryStringA:(id*)value_ error:(NSError**)error_;
+@property short codeMandatoryNumberBValue;
+- (short)codeMandatoryNumberBValue;
+- (void)setCodeMandatoryNumberBValue:(short)value_;
 
-
-
-
-@property (nonatomic, retain) NSString *modelMandatoryCodeNotEmptyStringA;
-
-
-//- (BOOL)validateModelMandatoryCodeNotEmptyStringA:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCodeMandatoryNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSString *modelMandatoryStringA;
+@property (nonatomic, retain) NSNumber *modelMandatoryBoundedNumberB;
 
 
-//- (BOOL)validateModelMandatoryStringA:(id*)value_ error:(NSError**)error_;
+@property short modelMandatoryBoundedNumberBValue;
+- (short)modelMandatoryBoundedNumberBValue;
+- (void)setModelMandatoryBoundedNumberBValue:(short)value_;
+
+//- (BOOL)validateModelMandatoryBoundedNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSString *noValidationStringA;
+@property (nonatomic, retain) NSNumber *noValidationNumberB;
 
 
-//- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;
+@property short noValidationNumberBValue;
+- (short)noValidationNumberBValue;
+- (void)setNoValidationNumberBValue:(short)value_;
+
+//- (BOOL)validateNoValidationNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -64,26 +67,29 @@
 @interface _AbstractClassA (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSString*)primitiveCodeMandatoryStringA;
-- (void)setPrimitiveCodeMandatoryStringA:(NSString*)value;
+- (NSNumber*)primitiveCodeMandatoryNumberB;
+- (void)setPrimitiveCodeMandatoryNumberB:(NSNumber*)value;
+
+- (short)primitiveCodeMandatoryNumberBValue;
+- (void)setPrimitiveCodeMandatoryNumberBValue:(short)value_;
 
 
 
 
-- (NSString*)primitiveModelMandatoryCodeNotEmptyStringA;
-- (void)setPrimitiveModelMandatoryCodeNotEmptyStringA:(NSString*)value;
+- (NSNumber*)primitiveModelMandatoryBoundedNumberB;
+- (void)setPrimitiveModelMandatoryBoundedNumberB:(NSNumber*)value;
+
+- (short)primitiveModelMandatoryBoundedNumberBValue;
+- (void)setPrimitiveModelMandatoryBoundedNumberBValue:(short)value_;
 
 
 
 
-- (NSString*)primitiveModelMandatoryStringA;
-- (void)setPrimitiveModelMandatoryStringA:(NSString*)value;
+- (NSNumber*)primitiveNoValidationNumberB;
+- (void)setPrimitiveNoValidationNumberB:(NSNumber*)value;
 
-
-
-
-- (NSString*)primitiveNoValidationStringA;
-- (void)setPrimitiveNoValidationStringA:(NSString*)value;
+- (short)primitiveNoValidationNumberBValue;
+- (void)setPrimitiveNoValidationNumberBValue:(short)value_;
 
 
 
