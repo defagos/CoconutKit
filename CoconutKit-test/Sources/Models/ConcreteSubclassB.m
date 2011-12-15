@@ -19,4 +19,16 @@
     return YES;
 }
 
+// modelMandatoryCodeNotZeroNumberB: Validation defined in the xcdatamodel (mandatory) and in the code (not zero)
+- (BOOL)checkModelMandatoryCodeNotZeroNumberB:(NSNumber *)modelMandatoryCodeNotZeroNumberB error:(NSError **)pError
+{
+    if ([modelMandatoryCodeNotZeroNumberB intValue] == 0) {
+        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+                                       code:TestValidationIncorrectValueError];
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

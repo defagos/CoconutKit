@@ -88,6 +88,30 @@
     NSError *errorB9 = nil;
     GHAssertTrue([bInstance checkValue:[NSNumber numberWithInt:3] forKey:@"modelMandatoryBoundedNumberB" error:&errorB9], @"Incorrect validation");
     GHAssertNil(errorB9, @"Error incorrectly returned");
+    
+    // Field modelMandatoryCodeNotZeroNumberB
+    // TODO: Both the xcdatamodel validation and the manually written validation are triggered. We get
+    //       a multiple error with two embedded errors. Document: It appears that the custom validate... method
+    //       is called before the inner xcdatamodel validations (or at least the xcdatamodel error is bundled
+    //       with the custom validation method error after this custom method has been executed)
+    NSError *errorB10 = nil;
+    GHAssertFalse([bInstance checkValue:nil forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB10], @"Incorrect validation");
+    GHAssertEquals([errorB10 code], NSValidationMultipleErrorsError, @"Incorrect error code");
+    NSArray *subErrorsB10 = [[errorB10 userInfo] objectForKey:NSDetailedErrorsKey];
+    GHAssertEquals([subErrorsB10 count], 2U, @"Incorrect number of sub-errors");
+    NSError *subErrorB10_1 = [subErrorsB10 firstObject];
+    NSError *subErrorB10_2 = [subErrorsB10 objectAtIndex:1];
+    GHAssertTrue(([subErrorB10_1 code] == NSValidationMissingMandatoryPropertyError && [subErrorB10_2 code] == TestValidationIncorrectValueError)
+                 || ([subErrorB10_1 code] == TestValidationIncorrectValueError && [subErrorB10_2 code] == NSValidationMissingMandatoryPropertyError), 
+                 @"Incorrect error codes");
+    
+    NSError *errorB11 = nil;
+    GHAssertFalse([bInstance checkValue:[NSNumber numberWithInt:0] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB11], @"Incorrect validation");
+    GHAssertEquals([errorB11 code], TestValidationIncorrectValueError, @"Incorrect error code");
+    
+    NSError *errorB12 = nil;
+    GHAssertTrue([bInstance checkValue:[NSNumber numberWithInt:9] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB12], @"Incorrect validation");
+    GHAssertNil(errorB12, @"Error incorrectly returned");
 }
 
 @end
