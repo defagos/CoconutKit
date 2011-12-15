@@ -95,6 +95,11 @@
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 
 /**
+ * Check the object as a whole (i.e. individual and consistency validations)
+ */
+- (BOOL)check:(NSError **)pError;
+
+/**
  * Subclasses of NSManagedObject can override this method to perform additional consistency validations when
  * inserted or updated objects are committed (i.e. when the managed object context they live in is saved).
  * This defaut implementation does nothing and returns YES.

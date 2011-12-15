@@ -67,7 +67,7 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     s_injectedManagedObjectValidation = YES;
 }
 
-#pragma mark Checking if a value is correct for a specific field
+#pragma mark Checking the object
 
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
 {
@@ -78,6 +78,11 @@ static void combineErrors(NSError *newError, NSError **pOriginalError);
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
     // (remark: The code below also deals correctly with &nil)
     return [self validateValue:&value forKey:key error:pError];
+}
+
+- (BOOL)check:(NSError **)pError
+{
+    return [self validateForInsert:pError];
 }
 
 #pragma mark Global validation method stubs

@@ -10,25 +10,45 @@
 
 @implementation NSManagedObject_HLSExtensionsTestCase
 
+#pragma mark Object creation and destruction
+
+- (void)dealloc
+{
+    // Code
+    
+    [super dealloc];
+}
+
+#pragma mark Accessors and mutators
+
 #pragma mark Test setup and tear down
+
+- (void)setUp
+{
+    [super setUp];
+    
+    // Code to be run before each test
+}
+
+- (void)tearDown 
+{
+    [super tearDown];
+    
+    // Code to be run after each test
+}
 
 - (void)setUpClass
 {
     [super setUpClass];
     
-    NSString *libraryDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-    HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitTestData"
-                                                                     storeDirectory:libraryDirectoryPath 
-                                                                              reuse:NO] 
-                                     autorelease];
-    [HLSModelManager setDefaultModelManager:modelManager];
+    // Code to be run before the first test
 }
 
 - (void)tearDownClass
 {
     [super tearDownClass];
     
-    [HLSModelManager setDefaultModelManager:nil];
+    // Code to be run after the last test
 }
 
 #pragma mark Tests

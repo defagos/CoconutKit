@@ -18,10 +18,10 @@
     return YES;
 }
 
-// modelMandatoryCodeNotEmptryStringA: Validation defined in the xcdatamodel and in the code
-- (BOOL)checkModelMandatoryCodeNotEmptyStringA:(NSString *)modelMandatoryCodeNotEmptryStringA error:(NSError **)pError
+// modelMandatoryCodeNotEmptyStringA: Validation defined in the xcdatamodel and in the code
+- (BOOL)checkModelMandatoryCodeNotEmptyStringA:(NSString *)modelMandatoryCodeNotEmptyStringA error:(NSError **)pError
 {
-    if (! [modelMandatoryCodeNotEmptryStringA isFilled]) {
+    if (! [modelMandatoryCodeNotEmptyStringA isFilled]) {
         *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
                                        code:TestValidationIncorrectValueError];
         return NO;

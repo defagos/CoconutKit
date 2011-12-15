@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+HLSEnableNSManagedObjectValidation()
+
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
