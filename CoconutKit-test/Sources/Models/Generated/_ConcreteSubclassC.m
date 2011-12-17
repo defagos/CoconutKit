@@ -36,6 +36,27 @@
 
 
 
+@dynamic codeMandatoryStringC;
+
+
+
+
+
+
+@dynamic modelMandatoryBoundedPatternStringC;
+
+
+
+
+
+
+@dynamic noValidationNumberC;
+
+
+
+
+
+
 
 
 

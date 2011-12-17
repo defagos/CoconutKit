@@ -6,6 +6,7 @@
 
 
 
+
 @interface AbstractClassAID : NSManagedObjectID {}
 @end
 
@@ -18,6 +19,14 @@
 
 
 
+@property (nonatomic, retain) NSString *codeMandatoryNotEmptyStringA;
+
+
+//- (BOOL)validateCodeMandatoryNotEmptyStringA:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -26,6 +35,12 @@
 @end
 
 @interface _AbstractClassA (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSString*)primitiveCodeMandatoryNotEmptyStringA;
+- (void)setPrimitiveCodeMandatoryNotEmptyStringA:(NSString*)value;
+
+
 
 
 @end

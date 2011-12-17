@@ -4,10 +4,12 @@
 
 @implementation ConcreteSubclassB
 
+#pragma mark Individual validations
+
 // noValidationNumberB: No validation constraints, neither in the code, nor in the xcdatamodel
 // modelMandatoryBoundedNumberB: Validation logic entirely in the xcdatamodel (mandatory and in [3;10])
 
-// codeMandatoryStringB: Validation entirely defined in code
+// codeMandatoryNumberB: Validation entirely defined in code
 - (BOOL)checkCodeMandatoryNumberB:(NSNumber *)codeMandatoryNumberB error:(NSError **)pError
 {
     if (! codeMandatoryNumberB) {
