@@ -126,6 +126,11 @@
     GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:9] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB12], @"Incorrect validation");
     GHAssertNil(errorB12, @"Error incorrectly returned");
     
+    // Field codeMandatoryConcreteClassesD
+    NSError *errorB13 = nil;
+    GHAssertFalse([cInstance checkValue:nil forKey:@"codeMandatoryConcreteClassesD" error:&errorB13], @"Incorrect validation");
+    GHAssertEquals([errorB13 code], TestValidationMandatoryValueError, @"Incorrect error code");
+    
     // Field noValidationStringC
     NSError *errorC1 = nil;
     GHAssertTrue([cInstance checkValue:nil forKey:@"noValidationStringC" error:&errorC1], @"Incorrect validation");
@@ -187,5 +192,7 @@
     // Not testing insertion here. Rollback
     [HLSModelManager rollbackDefaultModelContext];
 }
+
+// TODO: Check global validations
 
 @end

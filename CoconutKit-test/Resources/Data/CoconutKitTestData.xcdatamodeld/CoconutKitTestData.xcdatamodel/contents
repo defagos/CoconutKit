@@ -3,12 +3,17 @@
     <entity name="AbstractClassA" representedClassName="AbstractClassA" isAbstract="YES" syncable="YES">
         <attribute name="codeMandatoryNotEmptyStringA" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES"/>
+    <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES">
+        <attribute name="noValidationNumberD" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="noValidationStringD" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="concreteSubclassB" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteSubclassB" inverseName="codeMandatoryConcreteClassesD" inverseEntity="ConcreteSubclassB" syncable="YES"/>
+    </entity>
     <entity name="ConcreteSubclassB" representedClassName="ConcreteSubclassB" parentEntity="AbstractClassA" syncable="YES">
         <attribute name="codeMandatoryNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="modelMandatoryBoundedNumberB" attributeType="Integer 16" maxValueString="10" defaultValueString="5" syncable="YES"/>
         <attribute name="modelMandatoryCodeNotZeroNumberB" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="noValidationNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="codeMandatoryConcreteClassesD" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteClassD" inverseName="concreteSubclassB" inverseEntity="ConcreteClassD" syncable="YES"/>
     </entity>
     <entity name="ConcreteSubclassC" representedClassName="ConcreteSubclassC" parentEntity="ConcreteSubclassB" syncable="YES">
         <attribute name="codeMandatoryStringC" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +23,7 @@
     <elements>
         <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="105"/>
         <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="120"/>
-        <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="105"/>
+        <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="120"/>
         <element name="ConcreteSubclassC" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

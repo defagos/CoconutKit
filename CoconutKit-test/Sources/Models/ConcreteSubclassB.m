@@ -13,7 +13,7 @@
 - (BOOL)checkCodeMandatoryNumberB:(NSNumber *)codeMandatoryNumberB error:(NSError **)pError
 {
     if (! codeMandatoryNumberB) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationMandatoryValueError];
         return NO;
     }
@@ -25,8 +25,20 @@
 - (BOOL)checkModelMandatoryCodeNotZeroNumberB:(NSNumber *)modelMandatoryCodeNotZeroNumberB error:(NSError **)pError
 {
     if ([modelMandatoryCodeNotZeroNumberB intValue] == 0) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationIncorrectValueError];
+        return NO;
+    }
+    
+    return YES;
+}
+
+// codeMandatoryConcreteClassesD
+- (BOOL)checkCodeMandatoryConcreteClassesD:(ConcreteClassD *)codeMandatoryConcreteClassesD error:(NSError **)pError
+{
+    if (! codeMandatoryConcreteClassesD) {
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                       code:TestValidationMandatoryValueError];
         return NO;
     }
     

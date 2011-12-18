@@ -29,12 +29,53 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"noValidationNumberDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberD"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
 
 
 
+
+@dynamic noValidationNumberD;
+
+
+
+- (short)noValidationNumberDValue {
+	NSNumber *result = [self noValidationNumberD];
+	return [result shortValue];
+}
+
+- (void)setNoValidationNumberDValue:(short)value_ {
+	[self setNoValidationNumberD:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveNoValidationNumberDValue {
+	NSNumber *result = [self primitiveNoValidationNumberD];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveNoValidationNumberDValue:(short)value_ {
+	[self setPrimitiveNoValidationNumberD:[NSNumber numberWithShort:value_]];
+}
+
+
+
+
+
+@dynamic noValidationStringD;
+
+
+
+
+
+
+@dynamic concreteSubclassB;
+
+	
 
 
 

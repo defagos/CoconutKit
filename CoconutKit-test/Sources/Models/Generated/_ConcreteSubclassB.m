@@ -156,6 +156,17 @@
 
 
 
+@dynamic codeMandatoryConcreteClassesD;
+
+	
+- (NSMutableSet*)codeMandatoryConcreteClassesDSet {
+	[self willAccessValueForKey:@"codeMandatoryConcreteClassesD"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"codeMandatoryConcreteClassesD"];
+	[self didAccessValueForKey:@"codeMandatoryConcreteClassesD"];
+	return result;
+}
+	
+
 
 
 

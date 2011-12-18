@@ -4,6 +4,9 @@
 #import <CoreData/CoreData.h>
 
 
+@class ConcreteSubclassB;
+
+
 
 
 @interface ConcreteClassDID : NSManagedObjectID {}
@@ -18,6 +21,33 @@
 
 
 
+@property (nonatomic, retain) NSNumber *noValidationNumberD;
+
+
+@property short noValidationNumberDValue;
+- (short)noValidationNumberDValue;
+- (void)setNoValidationNumberDValue:(short)value_;
+
+//- (BOOL)validateNoValidationNumberD:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *noValidationStringD;
+
+
+//- (BOOL)validateNoValidationStringD:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, retain) ConcreteSubclassB* concreteSubclassB;
+
+//- (BOOL)validateConcreteSubclassB:(id*)value_ error:(NSError**)error_;
+
+
+
 
 @end
 
@@ -26,6 +56,26 @@
 @end
 
 @interface _ConcreteClassD (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveNoValidationNumberD;
+- (void)setPrimitiveNoValidationNumberD:(NSNumber*)value;
+
+- (short)primitiveNoValidationNumberDValue;
+- (void)setPrimitiveNoValidationNumberDValue:(short)value_;
+
+
+
+
+- (NSString*)primitiveNoValidationStringD;
+- (void)setPrimitiveNoValidationStringD:(NSString*)value;
+
+
+
+
+
+- (ConcreteSubclassB*)primitiveConcreteSubclassB;
+- (void)setPrimitiveConcreteSubclassB:(ConcreteSubclassB*)value;
 
 
 @end

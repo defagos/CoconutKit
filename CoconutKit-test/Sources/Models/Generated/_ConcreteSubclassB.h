@@ -4,6 +4,7 @@
 #import <CoreData/CoreData.h>
 #import "AbstractClassA.h"
 
+@class ConcreteClassD;
 
 
 
@@ -71,9 +72,21 @@
 
 
 
+@property (nonatomic, retain) NSSet* codeMandatoryConcreteClassesD;
+
+- (NSMutableSet*)codeMandatoryConcreteClassesDSet;
+
+
+
+
 @end
 
 @interface _ConcreteSubclassB (CoreDataGeneratedAccessors)
+
+- (void)addCodeMandatoryConcreteClassesD:(NSSet*)value_;
+- (void)removeCodeMandatoryConcreteClassesD:(NSSet*)value_;
+- (void)addCodeMandatoryConcreteClassesDObject:(ConcreteClassD*)value_;
+- (void)removeCodeMandatoryConcreteClassesDObject:(ConcreteClassD*)value_;
 
 @end
 
@@ -114,6 +127,11 @@
 - (void)setPrimitiveNoValidationNumberBValue:(short)value_;
 
 
+
+
+
+- (NSMutableSet*)primitiveCodeMandatoryConcreteClassesD;
+- (void)setPrimitiveCodeMandatoryConcreteClassesD:(NSMutableSet*)value;
 
 
 @end

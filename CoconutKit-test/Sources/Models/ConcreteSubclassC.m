@@ -12,7 +12,7 @@
 - (BOOL)checkCodeMandatoryStringC:(NSString *)codeMandatoryStringC error:(NSError **)pError
 {
     if (! codeMandatoryStringC) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationMandatoryValueError];
         return NO;
     }

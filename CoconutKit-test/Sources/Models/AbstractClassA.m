@@ -8,13 +8,13 @@
 - (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError **)pError
 {
     if (! codeMandatoryNotEmptyStringA) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationMandatoryValueError];
         return NO;
     }
     
     if (! [codeMandatoryNotEmptyStringA isFilled]) {
-        *pError = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationIncorrectValueError];
         return NO;
     }
