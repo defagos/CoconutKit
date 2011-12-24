@@ -18,7 +18,7 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 @implementation NSManagedObject (HLSExtensions)
 
-#pragma mark Query helpers
+#pragma mark Class methods
 
 + (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
@@ -83,6 +83,19 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 + (NSArray *)allObjects
 {
     return [self allObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
+}
+
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSArray *allObjects = [self allObjects];
+    for (NSManagedObject *managedObject in allObjects) {
+        [managedObjectContext deleteObject:managedObject];
+    }
+}
+
++ (void)deleteAllObjects
+{
+    [self deleteAllObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
 }
 
 @end

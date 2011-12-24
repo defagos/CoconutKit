@@ -40,4 +40,11 @@
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjects;
 
+/**
+ * When called on an NSManagedObject subclass, deletes all of its instances (without context parameter, the default 
+ * HLSModelManager context is used)
+ */
++ (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (void)deleteAllObjects;
+
 @end
