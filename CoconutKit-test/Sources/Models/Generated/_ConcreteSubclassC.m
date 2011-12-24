@@ -29,6 +29,10 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"noValidationNumberCValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberC"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
@@ -52,6 +56,25 @@
 
 @dynamic noValidationNumberC;
 
+
+
+- (short)noValidationNumberCValue {
+	NSNumber *result = [self noValidationNumberC];
+	return [result shortValue];
+}
+
+- (void)setNoValidationNumberCValue:(short)value_ {
+	[self setNoValidationNumberC:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveNoValidationNumberCValue {
+	NSNumber *result = [self primitiveNoValidationNumberC];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveNoValidationNumberCValue:(short)value_ {
+	[self setPrimitiveNoValidationNumberC:[NSNumber numberWithShort:value_]];
+}
 
 
 

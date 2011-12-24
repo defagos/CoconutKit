@@ -37,8 +37,12 @@
 
 
 
-@property (nonatomic, retain) NSString *noValidationNumberC;
+@property (nonatomic, retain) NSNumber *noValidationNumberC;
 
+
+@property short noValidationNumberCValue;
+- (short)noValidationNumberCValue;
+- (void)setNoValidationNumberCValue:(short)value_;
 
 //- (BOOL)validateNoValidationNumberC:(id*)value_ error:(NSError**)error_;
 
@@ -67,8 +71,11 @@
 
 
 
-- (NSString*)primitiveNoValidationNumberC;
-- (void)setPrimitiveNoValidationNumberC:(NSString*)value;
+- (NSNumber*)primitiveNoValidationNumberC;
+- (void)setPrimitiveNoValidationNumberC:(NSNumber*)value;
+
+- (short)primitiveNoValidationNumberCValue;
+- (void)setPrimitiveNoValidationNumberCValue:(short)value_;
 
 
 

@@ -33,12 +33,27 @@
     return YES;
 }
 
+#if 0
 // codeMandatoryConcreteClassesD
-- (BOOL)checkCodeMandatoryConcreteClassesD:(ConcreteClassD *)codeMandatoryConcreteClassesD error:(NSError **)pError
+- (BOOL)checkCodeMandatoryConcreteClassesD:(NSSet *)codeMandatoryConcreteClassesD error:(NSError **)pError
 {
     if (! codeMandatoryConcreteClassesD) {
         *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationMandatoryValueError];
+        return NO;
+    }
+    
+    return YES;
+}
+#endif
+
+#pragma mark Consistency validations
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    if ([self.noValidationStringA isFilled] && ! self.noValidationNumberB) {
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                       code:TestValidationInconsistencyError];
         return NO;
     }
     

@@ -4,6 +4,10 @@
 
 @implementation AbstractClassA
 
+#pragma mark Individual validations
+
+// noValidationStringA: No validation constraints, neither in the code, nor in the xcdatamodel
+
 // codeMandatoryNotEmptyStringA: Validation entirely defined in code
 - (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError **)pError
 {
@@ -16,6 +20,19 @@
     if (! [codeMandatoryNotEmptyStringA isFilled]) {
         *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationIncorrectValueError];
+        return NO;
+    }
+    
+    return YES;
+}
+
+#pragma Consistency validationa
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    if ([self.noValidationStringA isFilled] && ! [self.codeMandatoryNotEmptyStringA isFilled]) {
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                       code:TestValidationInconsistencyError];
         return NO;
     }
     

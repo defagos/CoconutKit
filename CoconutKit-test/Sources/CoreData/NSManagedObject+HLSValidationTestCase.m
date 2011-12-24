@@ -87,7 +87,7 @@
 
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
     //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
-    //       Data framework?
+    //       Data framework?  It seems to be an Xcode bug (set a minimum value, save the project, close and reopen Xcode; the settings have disappeared)
 #if 0
     NSError *errorB7 = nil;
     GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:2] forKey:@"modelMandatoryBoundedNumberB" error:&errorB7], @"Incorrect validation");
@@ -170,7 +170,7 @@
     
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
     //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
-    //       Data framework?
+    //       Data framework? It seems to be an Xcode bug (set a minimum value, save the project, close and reopen Xcode; the settings have disappeared)
 #if 0
     NSError *errorC7 = nil;
     GHAssertFalse([cInstance checkValue:@"A" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC7], @"Incorrect validation");
@@ -193,6 +193,36 @@
     [HLSModelManager rollbackDefaultModelContext];
 }
 
-// TODO: Check global validations
+- (void)testSave
+{
+    ConcreteSubclassC *cInstance1 = [ConcreteSubclassC insert];
+    cInstance1.noValidationStringA = @"Optional A";
+    cInstance1.codeMandatoryNotEmptyStringA = @"Mandatory A";
+    cInstance1.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
+    cInstance1.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
+    cInstance1.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
+    cInstance1.noValidationNumberB = [NSNumber numberWithInteger:-12];
+    cInstance1.codeMandatoryStringC = @"Mandatory C";
+    cInstance1.modelMandatoryBoundedPatternStringC = @"Hello, World!";
+    cInstance1.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    
+    NSError *error1 = nil;
+    GHAssertTrue([HLSModelManager saveDefaultModelContext:&error1], @"Incorrect result when committing");
+    GHAssertNil(error1, @"Error incorrectly returned");
+    
+    ConcreteSubclassC *cInstance2 = [ConcreteSubclassC insert];
+    cInstance2.noValidationStringA = @"Optional A";
+    cInstance2.codeMandatoryNotEmptyStringA = @"Mandatory A";
+    cInstance2.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
+    cInstance2.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
+    cInstance2.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
+    cInstance2.codeMandatoryStringC = @"Mandatory C";
+    cInstance2.modelMandatoryBoundedPatternStringC = @"Hello, World!";
+    cInstance2.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    
+    NSError *error2 = nil;
+    GHAssertFalse([HLSModelManager saveDefaultModelContext:&error2], @"Incorrect result when committing");
+    GHAssertEquals([error2 code], TestValidationInconsistencyError, @"Incorrect error code");
+}
 
 @end

@@ -15,6 +15,7 @@ typedef enum {
     TestValidationEnumBegin = 100,
     TestValidationMandatoryValueError = TestValidationEnumBegin,
     TestValidationIncorrectValueError,
+    TestValidationInconsistencyError,
     TestValidationLockedObjectError,
     TestValidationEnumEnd,
     TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin

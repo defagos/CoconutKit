@@ -2,6 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractClassA" representedClassName="AbstractClassA" isAbstract="YES" syncable="YES">
         <attribute name="codeMandatoryNotEmptyStringA" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="noValidationStringA" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES">
         <attribute name="noValidationNumberD" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -10,18 +11,18 @@
     </entity>
     <entity name="ConcreteSubclassB" representedClassName="ConcreteSubclassB" parentEntity="AbstractClassA" syncable="YES">
         <attribute name="codeMandatoryNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="modelMandatoryBoundedNumberB" attributeType="Integer 16" maxValueString="10" defaultValueString="5" syncable="YES"/>
+        <attribute name="modelMandatoryBoundedNumberB" attributeType="Integer 16" maxValueString="10" syncable="YES"/>
         <attribute name="modelMandatoryCodeNotZeroNumberB" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="noValidationNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="noValidationNumberB" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <relationship name="codeMandatoryConcreteClassesD" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteClassD" inverseName="concreteSubclassB" inverseEntity="ConcreteClassD" syncable="YES"/>
     </entity>
     <entity name="ConcreteSubclassC" representedClassName="ConcreteSubclassC" parentEntity="ConcreteSubclassB" syncable="YES">
         <attribute name="codeMandatoryStringC" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modelMandatoryBoundedPatternStringC" attributeType="String" maxValueString="15" regularExpressionString="^H.*!$" syncable="YES"/>
-        <attribute name="noValidationNumberC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="noValidationNumberC" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="75"/>
         <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="120"/>
         <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="120"/>
         <element name="ConcreteSubclassC" positionX="160" positionY="192" width="128" height="90"/>

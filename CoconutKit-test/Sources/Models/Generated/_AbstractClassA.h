@@ -7,6 +7,7 @@
 
 
 
+
 @interface AbstractClassAID : NSManagedObjectID {}
 @end
 
@@ -27,6 +28,14 @@
 
 
 
+@property (nonatomic, retain) NSString *noValidationStringA;
+
+
+//- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -39,6 +48,12 @@
 
 - (NSString*)primitiveCodeMandatoryNotEmptyStringA;
 - (void)setPrimitiveCodeMandatoryNotEmptyStringA:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveNoValidationStringA;
+- (void)setPrimitiveNoValidationStringA:(NSString*)value;
 
 
 
