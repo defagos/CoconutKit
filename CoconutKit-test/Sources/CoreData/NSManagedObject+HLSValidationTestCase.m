@@ -195,6 +195,12 @@
 
 - (void)testSave
 {
+    ConcreteClassD *dInstance1 = [ConcreteClassD insert];
+    dInstance1.noValidationStringD = @"D1";
+
+    ConcreteClassD *dInstance2 = [ConcreteClassD insert];
+    dInstance2.noValidationStringD = @"D2";
+    
     ConcreteSubclassC *cInstance1 = [ConcreteSubclassC insert];
     cInstance1.noValidationStringA = @"Optional A";
     cInstance1.codeMandatoryNotEmptyStringA = @"Mandatory A";
@@ -205,6 +211,7 @@
     cInstance1.codeMandatoryStringC = @"Mandatory C";
     cInstance1.modelMandatoryBoundedPatternStringC = @"Hello, World!";
     cInstance1.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    cInstance1.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];
     
     NSError *error1 = nil;
     GHAssertTrue([HLSModelManager saveDefaultModelContext:&error1], @"Incorrect result when committing");
@@ -219,6 +226,7 @@
     cInstance2.codeMandatoryStringC = @"Mandatory C";
     cInstance2.modelMandatoryBoundedPatternStringC = @"Hello, World!";
     cInstance2.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    cInstance2.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, nil];
     
     NSError *error2 = nil;
     GHAssertFalse([HLSModelManager saveDefaultModelContext:&error2], @"Incorrect result when committing");

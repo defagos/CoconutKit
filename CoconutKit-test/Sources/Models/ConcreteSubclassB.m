@@ -33,11 +33,12 @@
     return YES;
 }
 
-#if 0
 // codeMandatoryConcreteClassesD
 - (BOOL)checkCodeMandatoryConcreteClassesD:(NSSet *)codeMandatoryConcreteClassesD error:(NSError **)pError
 {
-    if (! codeMandatoryConcreteClassesD) {
+    // To test to-many relationships, test the number of elements (there is always a set in this case, i.e.
+    // we cannot simply test against nil)
+    if ([codeMandatoryConcreteClassesD count] == 0) {
         *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationMandatoryValueError];
         return NO;
@@ -45,7 +46,6 @@
     
     return YES;
 }
-#endif
 
 #pragma mark Consistency validations
 
