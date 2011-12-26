@@ -202,7 +202,7 @@
     dInstance2.noValidationStringD = @"D2";
     
     ConcreteSubclassC *cInstance1 = [ConcreteSubclassC insert];
-    cInstance1.noValidationStringA = @"Optional A";
+    cInstance1.noValidationStringA = @"Consistency check";
     cInstance1.codeMandatoryNotEmptyStringA = @"Mandatory A";
     cInstance1.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
     cInstance1.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
@@ -218,7 +218,7 @@
     GHAssertNil(error1, @"Error incorrectly returned");
     
     ConcreteSubclassC *cInstance2 = [ConcreteSubclassC insert];
-    cInstance2.noValidationStringA = @"Optional A";
+    cInstance2.noValidationStringA = @"Consistency check";
     cInstance2.codeMandatoryNotEmptyStringA = @"Mandatory A";
     cInstance2.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
     cInstance2.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
@@ -231,6 +231,22 @@
     NSError *error2 = nil;
     GHAssertFalse([HLSModelManager saveDefaultModelContext:&error2], @"Incorrect result when committing");
     GHAssertEquals([error2 code], TestValidationInconsistencyError, @"Incorrect error code");
+    
+#if 0
+    ConcreteSubclassC *cInstance3 = [ConcreteSubclassC insert];
+    cInstance3.noValidationStringA = @"Unexpected string for consistency check";
+    cInstance3.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
+    cInstance3.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
+    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
+    cInstance3.codeMandatoryStringC = @"Mandatory C";
+    cInstance3.modelMandatoryBoundedPatternStringC = @"Hello, World!";
+    cInstance3.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];
+    
+    NSError *error3 = nil;
+    GHAssertFalse([HLSModelManager saveDefaultModelContext:&error3], @"Incorrect result when committing");
+    // TODO: Check that there are 3 errors
+    GHAssertEquals([error3 code], TestValidationInconsistencyError, @"Incorrect error code");
+#endif
 }
 
 @end

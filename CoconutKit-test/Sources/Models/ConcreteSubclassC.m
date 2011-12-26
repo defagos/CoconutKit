@@ -20,5 +20,18 @@
     return YES;
 }
 
+#pragma mark Global validations
+
+- (BOOL)checkForConsistency:(NSError **)pError
+{
+    if ([self.noValidationStringA isFilled] && ! self.noValidationNumberC) {
+        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                       code:TestValidationInconsistencyError];
+        return NO;
+    }
+    
+    return YES;
+
+}
 
 @end

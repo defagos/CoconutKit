@@ -47,7 +47,7 @@
     return YES;
 }
 
-#pragma mark Consistency validations
+#pragma mark Global validations
 
 - (BOOL)checkForConsistency:(NSError **)pError
 {

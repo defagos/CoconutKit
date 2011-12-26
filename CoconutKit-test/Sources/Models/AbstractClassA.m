@@ -30,7 +30,7 @@
 
 - (BOOL)checkForConsistency:(NSError **)pError
 {
-    if ([self.noValidationStringA isFilled] && ! [self.codeMandatoryNotEmptyStringA isFilled]) {
+    if ([self.noValidationStringA isFilled] && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
         *pError = [HLSError errorWithDomain:TestValidationErrorDomain
                                        code:TestValidationInconsistencyError];
         return NO;
