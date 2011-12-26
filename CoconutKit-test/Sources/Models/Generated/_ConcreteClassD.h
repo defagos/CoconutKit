@@ -42,9 +42,9 @@
 
 
 
-@property (nonatomic, retain) ConcreteSubclassB* concreteSubclassB;
+@property (nonatomic, retain) NSSet* concreteSubclassB;
 
-//- (BOOL)validateConcreteSubclassB:(id*)value_ error:(NSError**)error_;
+- (NSMutableSet*)concreteSubclassBSet;
 
 
 
@@ -52,6 +52,11 @@
 @end
 
 @interface _ConcreteClassD (CoreDataGeneratedAccessors)
+
+- (void)addConcreteSubclassB:(NSSet*)value_;
+- (void)removeConcreteSubclassB:(NSSet*)value_;
+- (void)addConcreteSubclassBObject:(ConcreteSubclassB*)value_;
+- (void)removeConcreteSubclassBObject:(ConcreteSubclassB*)value_;
 
 @end
 
@@ -74,8 +79,8 @@
 
 
 
-- (ConcreteSubclassB*)primitiveConcreteSubclassB;
-- (void)setPrimitiveConcreteSubclassB:(ConcreteSubclassB*)value;
+- (NSMutableSet*)primitiveConcreteSubclassB;
+- (void)setPrimitiveConcreteSubclassB:(NSMutableSet*)value;
 
 
 @end

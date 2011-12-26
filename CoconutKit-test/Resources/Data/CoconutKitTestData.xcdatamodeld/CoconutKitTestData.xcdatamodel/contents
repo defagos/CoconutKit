@@ -7,7 +7,7 @@
     <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES">
         <attribute name="noValidationNumberD" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="noValidationStringD" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="concreteSubclassB" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteSubclassB" inverseName="codeMandatoryConcreteClassesD" inverseEntity="ConcreteSubclassB" syncable="YES"/>
+        <relationship name="concreteSubclassB" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="ConcreteSubclassB" inverseName="codeMandatoryConcreteClassesD" inverseEntity="ConcreteSubclassB" syncable="YES"/>
     </entity>
     <entity name="ConcreteSubclassB" representedClassName="ConcreteSubclassB" parentEntity="AbstractClassA" syncable="YES">
         <attribute name="codeMandatoryNumberB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -23,7 +23,7 @@
     </entity>
     <elements>
         <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="120"/>
+        <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="90"/>
         <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="120"/>
         <element name="ConcreteSubclassC" positionX="160" positionY="192" width="128" height="90"/>
     </elements>

@@ -76,6 +76,13 @@
 @dynamic concreteSubclassB;
 
 	
+- (NSMutableSet*)concreteSubclassBSet {
+	[self willAccessValueForKey:@"concreteSubclassB"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"concreteSubclassB"];
+	[self didAccessValueForKey:@"concreteSubclassB"];
+	return result;
+}
+	
 
 
 
