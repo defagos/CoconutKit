@@ -47,6 +47,7 @@ NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSDateFormatter+HLSExtensions.h
 NSDictionary+HLSExtensions.h
+NSError+HLSExtensions.h
 NSManagedObject+HLSExtensions.h
 NSManagedObject+HLSValidation.h
 NSObject+HLSExtensions.h

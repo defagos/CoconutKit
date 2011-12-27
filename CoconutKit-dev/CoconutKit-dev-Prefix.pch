@@ -55,6 +55,7 @@
     #import "NSDate+HLSExtensions.h"
     #import "NSDateFormatter+HLSExtensions.h"
     #import "NSDictionary+HLSExtensions.h"
+    #import "NSError+HLSExtensions.h"
     #import "NSManagedObject+HLSExtensions.h"
     #import "NSManagedObject+HLSValidation.h"
     #import "NSObject+HLSExtensions.h"

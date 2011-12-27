@@ -75,14 +75,4 @@
  */
 - (void)setObject:(id)object forKey:(NSString *)key;
 
-/**
- * Return the user-specific information (i.e. without the information corresponding to reserved keys)
- */
-- (NSDictionary *)customUserInfo;
-
-/**
- * Return YES iff the receiver and error have the same domain and code
- */
-- (BOOL)isEqualToError:(HLSError *)error;
-
 @end

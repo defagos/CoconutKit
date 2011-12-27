@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
+#import "HLSManagedObjectValidationError.h"
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
 #import "NSDictionary+HLSExtensions.h"
@@ -81,10 +82,9 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     
     // An existing error is already available. Combine as multiple error
     if (*pExistingError) {
-        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new 
-        // error object)
+        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
         NSDictionary *userInfo = nil;
-        if ([*pExistingError code] == NSValidationMultipleErrorsError) {
+        if ([*pExistingError code] == NSValidationMultipleErrorsError && [[*pExistingError domain] isEqualToString:NSSQLiteErrorDomain]) {
             userInfo = [*pExistingError userInfo];
             NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
             errors = [errors arrayByAddingObject:newError];
@@ -117,7 +117,21 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     //         that any validation logic in the xcdatamodel is also triggered
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
     // (remark: The code below also deals correctly with &nil)
-    return [self validateValue:&value forKey:key error:pError];
+    BOOL valid = [self validateValue:&value forKey:key error:pError];
+    
+    if ([*pError code] == NSValidationMultipleErrorsError && [[*pError domain] isEqualToString:NSSQLiteErrorDomain]) {
+        NSArray *errors = [[*pError userInfo] objectForKey:NSDetailedErrorsKey];
+        *pError = [HLSManagedObjectValidationError errorWithManagedObject:self 
+                                                                fieldName:key 
+                                                                   errors:errors];
+    }
+    else {
+        *pError = [HLSManagedObjectValidationError errorWithManagedObject:self
+                                                                fieldName:key
+                                                                    error:*pError];
+    }
+    
+    return valid;
 }
 
 - (BOOL)check:(NSError **)pError

@@ -32,3 +32,6 @@
 
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Open in Safari";
+
+/* Validation error */
+"Validation error"="Validation error";

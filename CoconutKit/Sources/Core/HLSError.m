@@ -60,7 +60,6 @@
 @synthesize internalUserInfo = m_internalUserInfo;
 
 - (NSDictionary *)userInfo
-
 {
     return self.internalUserInfo;
 }
@@ -160,26 +159,6 @@
     else {
         self.internalUserInfo = [self.internalUserInfo dictionaryByRemovingObjectForKey:key];
     }
-}
-
-#pragma mark Accessing custom information
-
-- (NSDictionary *)customUserInfo
-{
-    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.internalUserInfo];
-    [customUserInfo removeObjectForKey:NSLocalizedDescriptionKey];
-    [customUserInfo removeObjectForKey:NSLocalizedFailureReasonErrorKey];
-    [customUserInfo removeObjectForKey:NSLocalizedRecoverySuggestionErrorKey];
-    [customUserInfo removeObjectForKey:NSLocalizedRecoveryOptionsErrorKey];
-    [customUserInfo removeObjectForKey:NSRecoveryAttempterErrorKey];
-    [customUserInfo removeObjectForKey:NSHelpAnchorErrorKey];
-    [customUserInfo removeObjectForKey:NSUnderlyingErrorKey];
-    return [NSDictionary dictionaryWithDictionary:customUserInfo];
-}
-             
-- (BOOL)isEqualToError:(HLSError *)error
-{
-    return [[self domain] isEqualToString:[error domain]] && [self code] == [error code];
 }
 
 @end

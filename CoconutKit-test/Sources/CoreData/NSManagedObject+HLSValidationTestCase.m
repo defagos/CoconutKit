@@ -193,6 +193,8 @@
     [HLSModelManager rollbackDefaultModelContext];
 }
 
+// TODO: Simply call check: from HLSManagedObject+Validation instead of saving (this only checks the object
+//       itself, not everything which has to be saved)
 - (void)testSave
 {
     ConcreteClassD *dInstance1 = [ConcreteClassD insert];
