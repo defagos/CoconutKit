@@ -64,19 +64,9 @@
     return self.internalUserInfo;
 }
 
-- (NSString *)localizedDescription
-{
-    return [self objectForKey:NSLocalizedDescriptionKey];
-}
-
 - (void)setLocalizedDescription:(NSString *)localizedDescription
 {
     [self setObject:localizedDescription forKey:NSLocalizedDescriptionKey];
-}
-
-- (NSString *)localizedFailureReason
-{
-    return [self objectForKey:NSLocalizedFailureReasonErrorKey];
 }
 
 - (void)setLocalizedFailureReason:(NSString *)localizedFailureReason
@@ -84,19 +74,9 @@
     [self setObject:localizedFailureReason forKey:NSLocalizedFailureReasonErrorKey];
 }
 
-- (NSString *)localizedRecoverySuggestion
-{
-    return [self objectForKey:NSLocalizedRecoverySuggestionErrorKey];
-}
-
 - (void)setLocalizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
 {
     [self setObject:localizedRecoverySuggestion forKey:NSLocalizedRecoverySuggestionErrorKey];
-}
-
-- (NSArray *)localizedRecoveryOptions
-{
-    return [self objectForKey:NSLocalizedRecoveryOptionsErrorKey];
 }
 
 - (void)setLocalizedRecoveryOptions:(NSArray *)localizedRecoveryOptions
@@ -106,19 +86,9 @@
     [self setObject:localizedRecoveryOptions forKey:NSLocalizedRecoveryOptionsErrorKey];
 }
 
-- (id)recoveryAttempter
-{
-    return [self objectForKey:NSRecoveryAttempterErrorKey];
-}
-
 - (void)setRecoveryAttempter:(id)recoveryAttempter
 {
     [self setObject:recoveryAttempter forKey:NSRecoveryAttempterErrorKey];
-}
-
-- (NSString *)helpAnchor
-{
-    return [self objectForKey:NSHelpAnchorErrorKey];
 }
 
 - (void)setHelpAnchor:(NSString *)helpAnchor
@@ -126,24 +96,9 @@
     [self setObject:helpAnchor forKey:NSHelpAnchorErrorKey];
 }
 
-- (NSError *)underlyingError
-{
-    return [self objectForKey:NSUnderlyingErrorKey];
-}
-
 - (void)setUnderlyingError:(NSError *)underlyingError
 {
     [self setObject:underlyingError forKey:NSUnderlyingErrorKey];
-}
-
-- (id)objectForKey:(NSString *)key
-{
-    if (! key) {
-        HLSLoggerError(@"Missing key");
-        return nil;
-    }
-    
-    return [self.internalUserInfo objectForKey:key];
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key

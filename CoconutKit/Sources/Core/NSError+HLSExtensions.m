@@ -16,6 +16,11 @@ HLSLinkCategory(NSError_HLSExtensions)
 
 #pragma mark Accessors and mutators
 
+- (NSError *)underlyingError
+{
+    return [self objectForKey:NSUnderlyingErrorKey];
+}
+
 - (NSArray *)errors
 {
     // At most one error can be stored in an NSError using the standard NSUnderlyingErrorKey key
@@ -26,6 +31,16 @@ HLSLinkCategory(NSError_HLSExtensions)
     else {
         return nil;
     }
+}
+
+- (id)objectForKey:(NSString *)key
+{
+    if (! key) {
+        HLSLoggerError(@"Missing key");
+        return nil;
+    }
+    
+    return [[self userInfo] objectForKey:key];
 }
 
 - (NSDictionary *)customUserInfo

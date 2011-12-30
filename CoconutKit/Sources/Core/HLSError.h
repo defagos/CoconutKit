@@ -52,21 +52,9 @@
 - (void)setHelpAnchor:(NSString *)helpAnchor;
 
 /**
- * Return the nested error which has been set (if any)
- */
-- (NSError *)underlyingError;
-
-/**
  * Set a nested error
  */
 - (void)setUnderlyingError:(NSError *)underlyingError;
-
-/**
- * Return the object set for a given key. The key can either be a reserved one (see NSError) or a custom
- * one. Instead of using this generic accessor to retrieve objects corresponding to reserved keys, use the
- * standard accessors provided by NSError and HLSError
- */
-- (id)objectForKey:(NSString *)key;
 
 /**
  * Sets an object for some key. The key can either be a reserved one (see NSError) or a custom one. Instead 
