@@ -16,8 +16,6 @@
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
-		6FE3671D14A901C000F9E2E0 /* HLSManagedObjectValidationError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE3671B14A901C000F9E2E0 /* HLSManagedObjectValidationError.h */; };
-		6FE3671E14A901C000F9E2E0 /* HLSManagedObjectValidationError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3671C14A901C000F9E2E0 /* HLSManagedObjectValidationError.m */; };
 		6FE3672A14A9B39200F9E2E0 /* NSError+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE3672814A9B39200F9E2E0 /* NSError+HLSExtensions.h */; };
 		6FE3672B14A9B39200F9E2E0 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3672914A9B39200F9E2E0 /* NSError+HLSExtensions.m */; };
 		6FF661EC1492CC7C006E4987 /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF661EA1492CC7C006E4987 /* HLSError.h */; };
@@ -153,8 +151,6 @@
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6FE3671B14A901C000F9E2E0 /* HLSManagedObjectValidationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSManagedObjectValidationError.h; sourceTree = "<group>"; };
-		6FE3671C14A901C000F9E2E0 /* HLSManagedObjectValidationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSManagedObjectValidationError.m; sourceTree = "<group>"; };
 		6FE3672814A9B39200F9E2E0 /* NSError+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FE3672914A9B39200F9E2E0 /* NSError+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FF661EA1492CC7C006E4987 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
@@ -467,8 +463,6 @@
 		6FFE34A31468FD5900C02549 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6FE3671B14A901C000F9E2E0 /* HLSManagedObjectValidationError.h */,
-				6FE3671C14A901C000F9E2E0 /* HLSManagedObjectValidationError.m */,
 				6FFE34A91468FD5900C02549 /* NSManagedObject+HLSExtensions.h */,
 				6FFE34AA1468FD5900C02549 /* NSManagedObject+HLSExtensions.m */,
 				6F2BDB901477C53D000CAC7B /* NSManagedObject+HLSValidation.h */,
@@ -646,7 +640,6 @@
 				6F4608EE148BC0CA00E3BA79 /* HLSTextFieldTouchDetector.h in Headers */,
 				6F4608FB148BF53100E3BA79 /* HLSTextFieldInternalDelegate.h in Headers */,
 				6FF661EC1492CC7C006E4987 /* HLSError.h in Headers */,
-				6FE3671D14A901C000F9E2E0 /* HLSManagedObjectValidationError.h in Headers */,
 				6FE3672A14A9B39200F9E2E0 /* NSError+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,7 +761,6 @@
 				6F4608EF148BC0CA00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F4608FC148BF53100E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
 				6FF661ED1492CC7C006E4987 /* HLSError.m in Sources */,
-				6FE3671E14A901C000F9E2E0 /* HLSManagedObjectValidationError.m in Sources */,
 				6FE3672B14A9B39200F9E2E0 /* NSError+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

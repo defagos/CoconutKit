@@ -108,4 +108,9 @@
     GHAssertFalse([self.error2 isEqualToError:self.error5], @"Comparison failure 2 vs 5");
 }
 
+- (void)testCopy
+{
+    GHAssertTrue(NO, @"To be implemented; implement copyWithZone: in HLSError first");
+}
+
 @end

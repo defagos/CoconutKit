@@ -24,14 +24,8 @@
 /* HLSWebViewController 'Mail Link' action */
 "Mail Link"="Mail Link";
 
-/* Multiple validation errors */
-"Multiple validation errors"="Multiple validation errors";
-
 /* No remaining time estimate available */
 "No remaining time estimate available"="No remaining time estimate available";
 
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Open in Safari";
-
-/* Validation error */
-"Validation error"="Validation error";

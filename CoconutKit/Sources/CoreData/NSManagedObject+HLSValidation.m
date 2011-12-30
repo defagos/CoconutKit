@@ -11,7 +11,6 @@
 #import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
-#import "HLSManagedObjectValidationError.h"
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
 #import "NSDictionary+HLSExtensions.h"
@@ -84,7 +83,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     if (*pExistingError) {
         // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
         NSDictionary *userInfo = nil;
-        if ([*pExistingError code] == NSValidationMultipleErrorsError && [[*pExistingError domain] isEqualToString:NSSQLiteErrorDomain]) {
+        if ([*pExistingError code] == NSValidationMultipleErrorsError && [[*pExistingError domain] isEqualToString:NSCocoaErrorDomain]) {
             userInfo = [*pExistingError userInfo];
             NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
             errors = [errors arrayByAddingObject:newError];
@@ -96,8 +95,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
         }
         
-        // Fill with error object (code in the NSSQLiteErrorDomain domain; cannot use HLSError here)
-        *pExistingError = [NSError errorWithDomain:NSSQLiteErrorDomain 
+        // Fill with error object (code in the NSCocoaErrorDomain domain; cannot use HLSError here)
+        *pExistingError = [NSError errorWithDomain:NSCocoaErrorDomain 
                                               code:NSValidationMultipleErrorsError 
                                           userInfo:userInfo];
     }
@@ -117,21 +116,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     //         that any validation logic in the xcdatamodel is also triggered
     //         See http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
     // (remark: The code below also deals correctly with &nil)
-    BOOL valid = [self validateValue:&value forKey:key error:pError];
-    
-    if ([*pError code] == NSValidationMultipleErrorsError && [[*pError domain] isEqualToString:NSSQLiteErrorDomain]) {
-        NSArray *errors = [[*pError userInfo] objectForKey:NSDetailedErrorsKey];
-        *pError = [HLSManagedObjectValidationError errorWithManagedObject:self 
-                                                                fieldName:key 
-                                                                   errors:errors];
-    }
-    else {
-        *pError = [HLSManagedObjectValidationError errorWithManagedObject:self
-                                                                fieldName:key
-                                                                    error:*pError];
-    }
-    
-    return valid;
+    return [self validateValue:&value forKey:key error:pError];
 }
 
 - (BOOL)check:(NSError **)pError
@@ -207,8 +192,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         NSString *types = [NSString stringWithFormat:@"%s%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(id *), @encode(NSError *)];
         if (! class_addMethod(self, 
                               NSSelectorFromString(validationSelectorName),         // Remark: (SEL)[validationSelectorName cStringUsingEncoding:NSUTF8StringEncoding] 
-                                                                                    //does NOT work (returns YES, but IMP does not get called since the selector has not 
-                                                                                    //been properly registered in this case)
+                                                                                    // does NOT work (returns YES, but IMP does not get called since the selector has not 
+                                                                                    // been properly registered in this case)
                               (IMP)validateProperty, 
                               [types cStringUsingEncoding:NSUTF8StringEncoding])) {
             HLSLoggerError(@"Failed to add %@ method dynamically", validationSelectorName);
@@ -367,21 +352,19 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }
     // NSManagedObject subclass
     else {
-        BOOL valid = YES;
-        
-        // Climb up the inheritance hierarchy
+        // Climb up the inheritance hierarchy. The exit condition is reached when NSManagedObject is reached, at
+        // which point individual validations are triggered. We exit as soon a validation error is encountered
         NSError *newError = nil;
         if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
             [NSManagedObject combineError:newError withError:pError];
-            valid = NO;
+            return NO;
         }
         
-        // Find whether a check method has been defined at this class hierarchy level. If none is found, valid 
-        // (i.e. we do not alter the above validation status)
+        // Find whether a check method has been defined at this class hierarchy level. If none is found, valid
         SEL checkSel = checkSelectorForValidationSelector(sel);
         Method method = instanceMethodOnClass(class, checkSel);
         if (! method) {
-            return valid;
+            return YES;
         }
         
         // A check method has been found. Call the underlying check method implementation
@@ -392,13 +375,13 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
                 HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
             }
             [NSManagedObject combineError:newCheckError withError:pError];
-            valid = NO;
+            return NO;
         }
         else if (newCheckError) {
             HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method "
                           "implementation is incorrect", (char *)checkSel);
         }
         
-        return valid;
+        return YES;
     }
 }
