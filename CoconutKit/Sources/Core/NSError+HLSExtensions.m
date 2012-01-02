@@ -58,9 +58,9 @@ HLSLinkCategory(NSError_HLSExtensions)
 
 #pragma mark Comparison
 
-- (BOOL)isEqualToError:(NSError *)error
+- (BOOL)hasCode:(NSInteger)code withinDomain:(NSString *)domain
 {
-    return [self code] == [error code] && [[self domain] isEqualToString:[error domain]];
+    return [self code] == code && [[self domain] isEqualToString:domain];
 }
 
 @end

@@ -99,15 +99,6 @@
     GHAssertEquals([[self.error2 customUserInfo] count], 3U, @"Incorrect custom user information");
 }
 
-- (void)testEquality
-{
-    GHAssertTrue([self.error1 isEqualToError:self.error1], @"Identity test");
-    GHAssertFalse([self.error1 isEqualToError:self.error2], @"Comparison failure 1 vs 2");
-    GHAssertTrue([self.error2 isEqualToError:self.error3], @"Comparison failure 2 vs 3");
-    GHAssertFalse([self.error2 isEqualToError:self.error4], @"Comparison failure 2 vs 4");
-    GHAssertFalse([self.error2 isEqualToError:self.error5], @"Comparison failure 2 vs 5");
-}
-
 - (void)testCopy
 {
     GHAssertTrue(NO, @"To be implemented; implement copyWithZone: in HLSError first");

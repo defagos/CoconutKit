@@ -14,6 +14,7 @@
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
 #import "NSDictionary+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "UITextField+HLSValidation.h"
 
@@ -43,6 +44,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 @interface NSManagedObject (HLSValidationPrivate)
 
 + (void)swizzledInitialize;
+
++ (NSError *)flattenHiearchyForError:(NSError *)error;
 
 @end
 
@@ -83,7 +86,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     if (*pExistingError) {
         // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
         NSDictionary *userInfo = nil;
-        if ([*pExistingError code] == NSValidationMultipleErrorsError && [[*pExistingError domain] isEqualToString:NSCocoaErrorDomain]) {
+        if ([*pExistingError hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
             userInfo = [*pExistingError userInfo];
             NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
             errors = [errors arrayByAddingObject:newError];
@@ -230,6 +233,104 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }    
 }
 
+/**
+ * When performing all individual validations in a row in -[NSManagedObject validateForInsert:] (and similar
+ * methods), Core Data considers fields in alphabetical order. When errors are discovered for two or more
+ * fields, Core Data combines them into an NSValidationMultipleErrorsError error. There is an issue, though:
+ * In some very specific cases, the resulting error hierarchy may depend on the alphabetical order of the
+ * involved fields, namely when a field is attached several validation criteria using the Core Data model
+ * editor (xcdatamodel file).
+ * Consider for example a model object with the following fields and validations:
+ *   - fieldStringA: mandatory string field according to the xcadatamodel
+ *   - fieldStringB: string field with a maximum length and which must match some regex pattern
+ * In this case, if fieldStringA is omitted, and if a string which is too long and does not match the regex
+ * is provided for fieldStringB, Core Data returns the following error hierarchy (the errors embedded into
+ * a NSValidationMultipleErrorsError error are stored using the NSDetailedErrorsKey key of the userInfo
+ * dictionary):
+ *
+ * NSValidationMultipleErrorsError ----- NSValidationMissingMandatoryPropertyError                                      (validation of fieldStringA)
+ *                                   |
+ *                                   \-- NSValidationMultipleErrorsError ----- NSValidationStringTooLongError           (validation of fieldStringB)
+ *                                                                         |                                                
+ *                                                                         \-- NSValidationStringPatternMatchingError   (validation of fieldStringB)
+ *
+ * This error hierarchy is built as follows:
+ *   - fieldStringA is validated, generating a NSValidationMissingMandatoryPropertyError
+ *   - fieldStringB is validated. Two errors are generated, combined by Core Data into a NSValidationMultipleErrorsError.
+ *     Since we already has an error after having validated fieldStringA, this NSValidationMultipleErrorsError is combined
+ *     with the existing NSValidationMissingMandatoryPropertyError into another NSValidationMultipleErrorsError level
+ *
+ * If we rename fieldStringA as fieldStringC, we now have:
+ *   - fieldStringB: string field with a maximum length and which must match some regex pattern
+ *   - fieldStringC: mandatory string field according to the xcadatamodel
+ * Though the situation is completely the same (after all, we just renamed a field), the error hierarchy returned by Core 
+ * Data is completely different:
+ * 
+ * NSValidationMultipleErrorsError ----- NSValidationStringTooLongError              (validation of fieldStringB)
+ *                                   |
+ *                                   |-- NSValidationStringPatternMatchingError      (validation of fieldStringB)
+ *                                   |
+ *                                   \-- NSValidationMissingMandatoryPropertyError   (validation of fieldStringC)
+ *
+ * This error hierarchy is built as follows:
+ *   - fieldStringB is validated, generating two errors combined as a NSValidationMultipleErrorsError
+ *   - fieldStringC is validated, generating a NSValidationMissingMandatoryPropertyError error. Since we already have
+ *     a NSValidationMultipleErrorsError error, this error is simply added as third error to the existing list
+ *
+ * Of course, this behavior is quite annoying and inconsistent. In general, we should expect Core Data to return
+ * either:
+ *   - a single error
+ *   - or a NSValidationMultipleErrorsError error, with all errors at the same level (see fieldStringB/C example)
+ *
+ * The purpose of the following method is to flatten out the error hierarchy to remove those inconsistencies
+ */
++ (NSError *)flattenHiearchyForError:(NSError *)error
+{
+    // Nothing to flatten
+    if (! [error hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
+        return error;
+    }
+    
+    // Extract the error list (should be one since this method is meant to flatten out errors returned by the
+    // Core Data runtime)
+    NSDictionary *userInfo = [error userInfo];
+    NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+    if ([errors count] == 0) {
+        HLSLoggerWarn(@"Error with code NSValidationMultipleErrorsError, but no error list found");
+        return error;
+    }
+    
+    // Flatten out errors if necessary
+    BOOL flattened = NO;
+    NSArray *flattenedErrors = [NSArray array];
+    for (NSError *error in errors) {
+        // Not a nested mulitple error. Nothing to do
+        if (! [error hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
+            flattenedErrors = [flattenedErrors arrayByAddingObject:error];
+            continue;
+        }
+        
+        // Flatten out nested errors
+        NSArray *errorsInError = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+        if ([errorsInError count] != 0) {
+            flattenedErrors = [flattenedErrors arrayByAddingObjectsFromArray:errorsInError];
+        }
+        
+        flattened = YES;
+    }
+    
+    // Nothing to flatten. Return the original error
+    if (! flattened) {
+        return error;
+    }
+    
+    // Return the flattened error
+    userInfo = [userInfo dictionaryBySettingObject:flattenedErrors forKey:NSDetailedErrorsKey];
+    return [NSError errorWithDomain:NSCocoaErrorDomain
+                               code:NSValidationMultipleErrorsError 
+                           userInfo:userInfo];
+}
+
 @end
 
 #pragma mark Injection status
@@ -344,6 +445,9 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         // Validate. This is where individual validations are triggered
         NSError *newError = nil;
         if (! (*imp)(self, sel, &newError)) {
+            // Make the error hierarchy returned by Core Data flat in all cases
+            newError = [NSManagedObject flattenHiearchyForError:newError];
+            
             [NSManagedObject combineError:newError withError:pError];
             return NO;
         }

@@ -48,11 +48,11 @@
     // Field codeMandatoryNotEmptyStringA
     NSError *errorA1 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"codeMandatoryNotEmptyStringA" error:&errorA1], @"Incorrect validation");
-    GHAssertEquals([errorA1 code], TestValidationMandatoryValueError, @"Incorrect error code");
+    GHAssertTrue([errorA1 hasCode:TestValidationMandatoryValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorA2 = nil;
     GHAssertFalse([cInstance checkValue:@"      " forKey:@"codeMandatoryNotEmptyStringA" error:&errorA2], @"Incorrect validation");
-    GHAssertEquals([errorA2 code], TestValidationIncorrectValueError, @"Incorrect error code");
+    GHAssertTrue([errorA2 hasCode:TestValidationIncorrectValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorA3 = nil;
     GHAssertTrue([cInstance checkValue:@"Hello, World!" forKey:@"codeMandatoryNotEmptyStringA" error:&errorA3], @"Incorrect validation");    
@@ -70,7 +70,7 @@
     // Field codeMandatoryNumberB
     NSError *errorB3 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"codeMandatoryNumberB" error:&errorB3], @"Incorrect validation");
-    GHAssertEquals([errorB3 code], TestValidationMandatoryValueError, @"Incorrect error code");
+    GHAssertTrue([errorB3 hasCode:TestValidationMandatoryValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorB4 = nil;
     GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:7] forKey:@"codeMandatoryNumberB" error:&errorB4], @"Incorrect validation");
@@ -79,11 +79,11 @@
     // Field modelMandatoryBoundedNumberB
     NSError *errorB5 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"modelMandatoryBoundedNumberB" error:&errorB5], @"Incorrect validation");
-    GHAssertEquals([errorB5 code], NSValidationMissingMandatoryPropertyError, @"Incorrect error code");
+    GHAssertTrue([errorB5 hasCode:NSValidationMissingMandatoryPropertyError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
 
     NSError *errorB6 = nil;
     GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:11] forKey:@"modelMandatoryBoundedNumberB" error:&errorB6], @"Incorrect validation");
-    GHAssertEquals([errorB6 code], NSValidationNumberTooLargeError, @"Incorrect error code");
+    GHAssertTrue([errorB6 hasCode:NSValidationNumberTooLargeError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
 
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
     //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
@@ -91,7 +91,7 @@
 #if 0
     NSError *errorB7 = nil;
     GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:2] forKey:@"modelMandatoryBoundedNumberB" error:&errorB7], @"Incorrect validation");
-    GHAssertEquals([errorB7 code], NSValidationNumberTooSmallError, @"Incorrect error code");
+    GHAssertTrue([errorB7 hasCode:NSValidationNumberTooSmallError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
 #endif
     
     NSError *errorB8 = nil;
@@ -112,15 +112,10 @@
     GHAssertEquals([errorB10 code], NSValidationMultipleErrorsError, @"Incorrect error code");
     NSArray *subErrorsB10 = [[errorB10 userInfo] objectForKey:NSDetailedErrorsKey];
     GHAssertEquals([subErrorsB10 count], 2U, @"Incorrect number of sub-errors");
-    NSError *suberrorB10_1 = [subErrorsB10 firstObject];
-    NSError *suberrorB10_2 = [subErrorsB10 objectAtIndex:1];
-    GHAssertTrue(([suberrorB10_1 code] == NSValidationMissingMandatoryPropertyError && [suberrorB10_2 code] == TestValidationIncorrectValueError)
-                 || ([suberrorB10_1 code] == TestValidationIncorrectValueError && [suberrorB10_2 code] == NSValidationMissingMandatoryPropertyError), 
-                 @"Incorrect error codes");
     
     NSError *errorB11 = nil;
     GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:0] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB11], @"Incorrect validation");
-    GHAssertEquals([errorB11 code], TestValidationIncorrectValueError, @"Incorrect error code");
+    GHAssertTrue([errorB11 hasCode:TestValidationIncorrectValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorB12 = nil;
     GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:9] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB12], @"Incorrect validation");
@@ -129,7 +124,7 @@
     // Field codeMandatoryConcreteClassesD
     NSError *errorB13 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"codeMandatoryConcreteClassesD" error:&errorB13], @"Incorrect validation");
-    GHAssertEquals([errorB13 code], TestValidationMandatoryValueError, @"Incorrect error code");
+    GHAssertTrue([errorB13 hasCode:TestValidationMandatoryValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     // Field noValidationStringC
     NSError *errorC1 = nil;
@@ -143,7 +138,7 @@
     // Field codeMandatoryStringC
     NSError *errorC3 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"codeMandatoryStringC" error:&errorC3], @"Incorrect validation");
-    GHAssertEquals([errorC3 code], TestValidationMandatoryValueError, @"Incorrect error code");
+    GHAssertTrue([errorC3 hasCode:TestValidationMandatoryValueError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorC4 = nil;
     GHAssertTrue([cInstance checkValue:@"Hello, World!" forKey:@"codeMandatoryStringC" error:&errorC4], @"Incorrect validation");
@@ -152,7 +147,7 @@
     // Field modelMandatoryBoundedPatternStringC (pattern regex: ^H.*!$)
     NSError *errorC5 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC5], @"Incorrect validation");
-    GHAssertEquals([errorC5 code], NSValidationMissingMandatoryPropertyError, @"Incorrect error code");
+    GHAssertTrue([errorC5 hasCode:NSValidationMissingMandatoryPropertyError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
     
     // TODO: Document this Core Data behavior: When a validation defined in the xcdatamodel fails (and there are several of them),
     //       the corresponding errors ARE chained, the validation does not stop after the first condition fails (except if the
@@ -162,11 +157,6 @@
     GHAssertEquals([errorC6 code], NSValidationMultipleErrorsError, @"Incorrect error code");
     NSArray *subErrorsC6 = [[errorC6 userInfo] objectForKey:NSDetailedErrorsKey];
     GHAssertEquals([subErrorsC6 count], 2U, @"Incorrect number of sub-errors");
-    NSError *suberrorC6_1 = [subErrorsC6 firstObject];
-    NSError *suberrorC6_2 = [subErrorsC6 objectAtIndex:1];
-    GHAssertTrue(([suberrorC6_1 code] == NSValidationStringTooLongError && [suberrorC6_2 code] == NSValidationStringPatternMatchingError)
-                 || ([suberrorC6_1 code] == NSValidationStringPatternMatchingError && [suberrorC6_2 code] == NSValidationStringTooLongError), 
-                 @"Incorrect error codes");
     
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
     //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
@@ -174,12 +164,12 @@
 #if 0
     NSError *errorC7 = nil;
     GHAssertFalse([cInstance checkValue:@"A" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC7], @"Incorrect validation");
-    GHAssertEquals([errorC7 code], NSValidationStringTooShortError, @"Incorrect error code");
+    GHAssertTrue([errorC7 hasCode:NSValidationStringTooShortError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
 #endif
     
     NSError *errorC8 = nil;
     GHAssertFalse([cInstance checkValue:@"Bad pattern" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC8], @"Incorrect validation");
-    GHAssertEquals([errorC8 code], NSValidationStringPatternMatchingError, @"Incorrect error code");    
+    GHAssertTrue([errorC8 hasCode:NSValidationStringPatternMatchingError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
     
     NSError *errorC9 = nil;
     GHAssertTrue([cInstance checkValue:@"He!" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC9], @"Incorrect validation");
@@ -203,6 +193,7 @@
     ConcreteClassD *dInstance2 = [ConcreteClassD insert];
     dInstance2.noValidationStringD = @"D2";
     
+    // Valid ConcreteSubclassC instance
     ConcreteSubclassC *cInstance1 = [ConcreteSubclassC insert];
     cInstance1.noValidationStringA = @"Consistency check";
     cInstance1.codeMandatoryNotEmptyStringA = @"Mandatory A";
@@ -218,7 +209,8 @@
     NSError *error1 = nil;
     GHAssertTrue([HLSModelManager saveDefaultModelContext:&error1], @"Incorrect result when committing");
     GHAssertNil(error1, @"Error incorrectly returned");
-    
+
+    // Invalid ConcreteSubclassC instance (inconsistency error only, all individual validations are successful)
     ConcreteSubclassC *cInstance2 = [ConcreteSubclassC insert];
     cInstance2.noValidationStringA = @"Consistency check";
     cInstance2.codeMandatoryNotEmptyStringA = @"Mandatory A";
@@ -232,23 +224,25 @@
     
     NSError *error2 = nil;
     GHAssertFalse([HLSModelManager saveDefaultModelContext:&error2], @"Incorrect result when committing");
-    GHAssertEquals([error2 code], TestValidationInconsistencyError, @"Incorrect error code");
+    GHAssertTrue([error2 hasCode:TestValidationInconsistencyError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
-#if 0
+    // Invalid ConcreteSubclassC instance (inconsistency error and 4 other validation errors)
     ConcreteSubclassC *cInstance3 = [ConcreteSubclassC insert];
-    cInstance3.noValidationStringA = @"Unexpected string for consistency check";
+    cInstance3.noValidationStringA = @"Consistency check";
+    cInstance2.codeMandatoryNotEmptyStringA = @"Mandatory A";               // <-- 1 error
     cInstance3.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
     cInstance3.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
-    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
+    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:0];       // <-- 1 error
     cInstance3.codeMandatoryStringC = @"Mandatory C";
-    cInstance3.modelMandatoryBoundedPatternStringC = @"Hello, World!";
+    cInstance3.modelMandatoryBoundedPatternStringC = @"This string is too long, and does not match the expected pattern";       // <-- 2 errors
+    cInstance3.noValidationNumberC = [NSNumber numberWithInteger:1012];
     cInstance3.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];
     
     NSError *error3 = nil;
     GHAssertFalse([HLSModelManager saveDefaultModelContext:&error3], @"Incorrect result when committing");
-    // TODO: Check that there are 3 errors
-    GHAssertEquals([error3 code], TestValidationInconsistencyError, @"Incorrect error code");
-#endif
+    GHAssertTrue([error3 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
+    NSArray *subErrors3 = [[error3 userInfo] objectForKey:NSDetailedErrorsKey];
+    GHAssertEquals([subErrors3 count], 5U, @"Incorrect number of sub-errors");
 }
 
 @end

@@ -31,8 +31,8 @@
 - (NSDictionary *)customUserInfo;
 
 /**
- * Return YES iff the receiver and error have the same domain and code
+ * Return YES iff the receiver has the provided error domain and code
  */
-- (BOOL)isEqualToError:(NSError *)error;
+- (BOOL)hasCode:(NSInteger)code withinDomain:(NSString *)domain;
 
 @end
