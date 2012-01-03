@@ -45,6 +45,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 + (void)swizzledInitialize;
 
++ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError;
+
 + (NSError *)flattenHiearchyForError:(NSError *)error;
 
 @end
@@ -66,47 +68,6 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     s_NSManagedObject_HLSExtensions__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector([NSManagedObject class], @selector(initialize), @selector(swizzledInitialize));
     
     s_injectedManagedObjectValidation = YES;
-}
-
-#pragma mark Combining Core Data errors correctly
-
-+ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError
-{
-    // If no new error, nothing to do
-    if (! newError) {
-        return;
-    }
-    
-    // If the caller is not interested in errors, nothing to do
-    if (! pExistingError) {
-        return;
-    }
-    
-    // An existing error is already available. Combine as multiple error
-    if (*pExistingError) {
-        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
-        NSDictionary *userInfo = nil;
-        if ([*pExistingError hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
-            userInfo = [*pExistingError userInfo];
-            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
-            errors = [errors arrayByAddingObject:newError];
-            userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
-        }
-        // Not a multiple error yet. Combine into a multiple error
-        else {
-            NSArray *errors = [NSArray arrayWithObjects:*pExistingError, newError, nil];
-            userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
-        }
-        
-        // Fill with error object (code in the NSCocoaErrorDomain domain; cannot use HLSError here)
-        *pExistingError = [NSError errorWithDomain:NSCocoaErrorDomain 
-                                              code:NSValidationMultipleErrorsError 
-                                          userInfo:userInfo];
-    }
-    // No error yet, just fill with the new error
-    else {
-        *pExistingError = newError;
-    }
 }
 
 #pragma mark Checking the object
@@ -231,6 +192,62 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
     }    
+}
+
+#pragma mark Combining Core Data errors correctly
+
+/**
+ * Combine a new error with an existing error. This function implements the approach recommended in the Core Data
+ * programming guide, see
+ *   http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
+ * This method was originally intended to be made public (to make error combination easy when implementing
+ * custom validation methods), but I discovered a strange Core Data issue. Consider a field for which you have
+ * implemented a method returning an NSValidationMultipleErrorsError. If a validation defined for the same
+ * field, but in the xcdatamodel file, returns an error, Core Data has issues combining the multiple errors
+ * with this error, and crashes (an immutable array is altered somewhere in the Core Data runtime, throwing an
+ * exception).
+ *
+ * This brought me to the conclusion that NSValidationMultipleErrorsError should be reserved, that is why the
+ * method below has been made private. If you need to return several errors from a validation method implementation,
+ * define your own code replacing NSValidationMultipleErrorsError.
+ */
++ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError
+{
+    // If no new error, nothing to do
+    if (! newError) {
+        return;
+    }
+    
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return;
+    }
+    
+    // An existing error is already available. Combine as multiple error
+    if (*pExistingError) {
+        // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
+        NSDictionary *userInfo = nil;
+        if ([*pExistingError hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
+            userInfo = [*pExistingError userInfo];
+            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+            errors = [errors arrayByAddingObject:newError];
+            userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
+        }
+        // Not a multiple error yet. Combine into a multiple error
+        else {
+            NSArray *errors = [NSArray arrayWithObjects:*pExistingError, newError, nil];
+            userInfo = [NSDictionary dictionaryWithObject:errors forKey:NSDetailedErrorsKey];
+        }
+        
+        // Fill with error object (code in the NSCocoaErrorDomain domain; cannot use HLSError here)
+        *pExistingError = [NSError errorWithDomain:NSCocoaErrorDomain 
+                                              code:NSValidationMultipleErrorsError 
+                                          userInfo:userInfo];
+    }
+    // No error yet, just fill with the new error
+    else {
+        *pExistingError = newError;
+    }
 }
 
 /**

@@ -224,24 +224,23 @@
     GHAssertFalse([cInstance2 check:&error2], @"Incorrect result when performing global check");
     GHAssertTrue([error2 hasCode:TestValidationInconsistencyError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     
-    // Invalid ConcreteSubclassC instance (5 errors: 4 invidual validation errors and 1 consistency error). Also tests
+    // Invalid ConcreteSubclassC instance (5 errors: 4 invidual validation errors and 3 consistency error). Also tests
     // that the error hierarchy is correctly flattened out
     ConcreteSubclassC *cInstance3 = [ConcreteSubclassC insert];
-    cInstance3.noValidationStringA = @"Consistency check";
-    cInstance3.codeMandatoryNotEmptyStringA = nil;               // <-- 1 error
+    cInstance3.noValidationStringA = @"Unexpected string for consistency check";
+    cInstance3.codeMandatoryNotEmptyStringA = nil;               // <-- 1 individual error
     cInstance3.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
     cInstance3.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
-    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:0];       // <-- 1 error
+    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:0];       // <-- 1 individual error
     cInstance3.codeMandatoryStringC = @"Mandatory C";
-    cInstance3.modelMandatoryBoundedPatternStringC = @"This string is too long, and does not match the expected pattern";       // <-- 2 errors
-    cInstance3.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    cInstance3.modelMandatoryBoundedPatternStringC = @"This string is too long, and does not match the expected pattern";       // <-- 2 individual errors
     cInstance3.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];
     
     NSError *error3 = nil;
     GHAssertFalse([cInstance3 check:&error3], @"Incorrect result when performing global check");
     GHAssertTrue([error3 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
     NSArray *subErrors3 = [[error3 userInfo] objectForKey:NSDetailedErrorsKey];
-    GHAssertEquals([subErrors3 count], 5U, @"Incorrect number of sub-errors");
+    GHAssertEquals([subErrors3 count], 7U, @"Incorrect number of sub-errors");
     
     // Not testing insertion here. Rollback
     [HLSModelManager rollbackDefaultModelContext];

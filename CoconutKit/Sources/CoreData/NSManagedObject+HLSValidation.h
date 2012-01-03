@@ -106,13 +106,6 @@
 + (void)injectValidation;
 
 /**
- * Combine a new error with an existing error. This function implements the approach recommended in the Core Data
- * programming guide, see
- *   http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CoreData/Articles/cdValidation.html
- */
-+ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError;
-
-/**
  * Check that a given value is valid for a specific field. The validation logic can be implemented in the 
  * xcdatamodel and / or in a -check<fieldName>:error: method. The method returns YES iff the value is valid
  */
