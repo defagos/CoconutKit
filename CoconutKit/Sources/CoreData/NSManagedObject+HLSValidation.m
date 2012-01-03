@@ -456,19 +456,21 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }
     // NSManagedObject subclass
     else {
-        // Climb up the inheritance hierarchy. The exit condition is reached when NSManagedObject is reached, at
-        // which point individual validations are triggered. We exit as soon a validation error is encountered
+        BOOL valid = YES;
+        
+        // Climb up the inheritance hierarchy
         NSError *newError = nil;
         if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
             [NSManagedObject combineError:newError withError:pError];
-            return NO;
+            valid = NO;
         }
         
-        // Find whether a check method has been defined at this class hierarchy level. If none is found, valid
+        // Find whether a check method has been defined at this class hierarchy level. If none is found, valid 
+        // (i.e. we do not alter the above validation status)
         SEL checkSel = checkSelectorForValidationSelector(sel);
         Method method = instanceMethodOnClass(class, checkSel);
         if (! method) {
-            return YES;
+            return valid;
         }
         
         // A check method has been found. Call the underlying check method implementation
@@ -479,13 +481,13 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
                 HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
             }
             [NSManagedObject combineError:newCheckError withError:pError];
-            return NO;
+            valid = NO;
         }
         else if (newCheckError) {
             HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method "
                           "implementation is incorrect", (char *)checkSel);
         }
         
-        return YES;
+        return valid;
     }
 }
