@@ -24,18 +24,19 @@
  * for more information):
  *   - the parameter received by the validation methods is an object pointer, not an object. Having to
  *     dereference an object is ugly (moreover, the pointer itself must be tested against NULL before
- *     dereferencing it), and even uglier when the documentation says you should never use this reference 
- *     to alter the object
- *   - when implementing the consistency validation methods, the super method must always be called first.
- *     If done improperly, i.e. if the NSManagedObject implementation of the consistency methods is not
- *     ultimately called, then neither will individual validations
+ *     dereferencing it), and even uglier given the fact the documentation says you should never use this
+ *     reference to alter the object
+ *   - when implementing the consistency validation methods (called when inserts, updates or deletions are
+ *     committed), the super methods must always be called by subclasses. If done improperly along the managed
+ *     object hierarchy, i.e. if the NSManagedObject implementation of the consistency methods is not
+ *     ultimately called for some objects, then neither will their individual validation methods
  *   - validation methods implemented on model object classes are called when a managed object context
  *     containing a modified object is saved. On the user side, this generally happens after some form has 
- *     been completely filled. Sometimes, though, you want validations to occur as the form is being filled, 
- *     so that the user gets more accurate information about which values are incorrect and why. In such cases,
- *     validation has to be triggered for each field. Always having to write the required code (which means 
- *     catching end of input and synchronizing the model and the view) is often leads to a bunch of redundant 
- *     code which is hard to maintain
+ *     been completely filled. Often, though, the user experience can be improved by having validations occur 
+ *     as the form is being filled, so that the user gets more accurate information about which values are 
+ *     incorrect and why. In such cases, validation has to be triggered for each field. Always having to write 
+ *     the required code (which means catching end of input and synchronizing the model and the view) leads 
+ *     to a bunch of redundant code which is hard to maintain
  *   - errors received by validation methods (both individual or global validation methods) must be chained 
  *     manually in their implementation according to the documentation. Not only is this error-prone and
  *     distracting (you end up merging validation code with error-chaining code), it also does not make sense 
@@ -47,19 +48,20 @@
  *
  * The HLSValidation class extensions (there are several of them) are meant to solve those issues. Those
  * extensions need to be enabled by calling the HLSEnableNSManagedObjectValidation macro at global scope.
- * When HLSValidation extensions have been enabled, model object validation must be implemented in a different
- * way:
+ * When HLSValidation extensions have been enabled, model object validation must be implemented in a 
+ * different way:
  *   - instead of implementing 
  *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError **)pError
  *     for each model field to validate, you now implement methods with signature
  *         - (BOOL)check<fieldName>:(<class>)value error:(NSError **)pError
- *     (value is always an object)
+ *     (value can never be of a primitive type here)
  *     As for the 'validate' methods, the 'check' methods are not meant to be called directly (i.e. public)
- *     and should remain hidden in the model object implementation file. Note that the first parameter of 
- *     'check' methods is an object, not an object pointer anymore. The pError pointer is guaranteed to be 
- *     valid (and such that *pError = nil upon method entry), eliminating the need to check the pointer 
- *     before dereferencing it. You can use this pointer to return errors which might be encountered during 
- *     field validation. Those errors will automatically be chained for you.
+ *     and should remain hidden in the model object implementation file. If you need to call a validation
+ *     method, use one of the check methods available from the HLSValidation category. Note that the first 
+ *     parameter of 'check' methods is an object, not an object pointer anymore. The pError pointer is 
+ *     guaranteed to be valid (and such that *pError = nil upon method entry), eliminating the need to check it 
+ *     before dereferencing it. You can use this pointer to return errors (usually one) which might be 
+ *     encountered during field validation. Those errors will automatically be chained for you.
  *   - instead of implementing -validateForUpdate: and -validateForInsert: methods, you now implement a single
  *     -checkForConsistency: method which will be called when an inserted or updated object is saved. As for
  *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
@@ -69,30 +71,32 @@
  *   - similarly, instead of implementing the -validateForDelete: method to perform checks when deleting
  *     an object, you now must implement a 'check' method with the following signature:
  *         - (BOOL)checkForDelete:(NSError **)pError
- * Other HLSValidation class extensions leverage this new set of validation methods by providing binding
- * between widgets (currently UITextField) and model object fields. This makes synchronization and validation 
- * of forms very easy to implement. Refer to the documentation of the other HLSValidation class extensions
+ * UITextField leverage this new set of validation methods by providing binding witg and model object fields. 
+ * This makes synchronization and validation of forms very easy to implement. Refer to UITextField+HLSValidation.h
  * for more information.
  *
- * When implementing a check method, you can choose to either stop after an error has been encountered
- * (just fill *pError with the error which has been discovered). Alternatively, you may want not to stop
- * after an error has been encountered in a validaton method. In such cases, you can combine errors
- * by calling the +combineError:withError: class method. Note that if you define validations both
- * in the xcdatamodel file as well as in code, the errors generated by the xcdatamodel validation logic
- * will always be combined with those generated by the manually implemented validations (as a multiple
- * error NSValidationMultipleErrorsError) by Core Data. In general, though, I strongly suggest implementing 
- * validations for all fields using one of the following rules exclusively:
- *   - create the field in the xcdatamodel file without changing its default properties. Then implement
- *     a check method manually
+ * When validation has been performed and failed, errors are returned. There are only two cases to consider:
+ *    - either a single error was encountered, in which case it is simply returned
+ *    - several errors have been returned (which might involve several fields and / or objects depending on which
+ *      objects are validated, e.g. during a commit), in which case an NSValidationMultipleErrorsError in the
+ *      NSCocoaErrorDomain domain is returned. The userInfo dictionary contains an NSDetailedErrorsKey key
+ *      storing the array of errors which have been generated.
+ *
+ * Core Data lets you implement validation logic both using the Core Data model editor and / or by implementing
+ * validation methods, as described above. I you define validations both in the xcdatamodel file as well as in 
+ * code, the errors generated by the xcdatamodel validation logic will always be combined with those generated 
+ * by the manually implemented validations (as an NSValidationMultipleErrorsError) by Core Data. In general, 
+ * though, I strongly suggest implementing validations for all fields using one of the following rules exclusively:
+ *   - create the field in the xcdatamodel file without changing its default properties (except maybe the default
+ *     value setting for numbers, which is enabled by default). Then implement a check method manually
  *   - create the field in the xcdatamodel and set all its validation properties there
  * Ensuring that all validation logic resides in one place is namely easier to understand and maintain.
- * Since the validation logic which can be defined in the xcdatamodel is quite basic, I therefore
- * strongly recommend defining all validation logic by manually implementing validation methods. This
- * also makes it easier to localize the application since Core Data error messages are cryptic and not
- * localized.
+ * Since the validation logic which can be defined in the xcdatamodel is quite basic, I strongly recommend 
+ * defining all validation logic by manually implementing validation methods. This also makes it easier to 
+ * localize the application since Core Data error messages are cryptic and not localized.
  * 
- * This magic is implemented behing the scene by having usual -validate<fieldName>:error: methods being
- * created and injected at runtime. Those are wrappers around -check<fieldName>:error: methods which
+ * The magic behind HLSValidation extensions is implemented behind the scene by having usual -validate<fieldName>:error: 
+ * methods being created and injected at runtime. Those are wrappers around -check<fieldName>:error: methods which
  * factor out all usual Core Data boilerplate validation code. When you enable HLSValidation class
  * extensions, it is therefore especially important that you NEVER implement 'validate' methods anymore,
  * since this would likely conflict with the methods added at runtime.

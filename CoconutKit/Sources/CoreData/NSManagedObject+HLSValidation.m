@@ -114,12 +114,12 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * need to inject code in each model object class, we must do it in +initialize since this method will be called for each subclass. 
  * We could have implemented +load to run over all classes, finding out which ones are managed object classes, then injecting validation
  * wrappers, but swizzling +initialize is conceptually better: It namely would behave well if classes were also added at runtime
- * (this would not be the case with +load which would already have been executed in such cases)
+ * (this would not be the case with +load which would already have been executed)
  *
  * Note that we cannot have an +initialize method in a category (it would prevent any +initialize method defined on the class from 
- * being called, and here there exists such a method on NSManagedObject; it is also extremely important to call it, otherwise the Core
- * Data runtime will be incomplete and silly crashes will occur at runtime. Yeah, I tried). We therefore must swizzle the existing 
- * +initialize method instead and call the existing implementation first.
+ * being called, and here there exists such a method on NSManagedObject; it is here also extremely important to call this existing
+ * initialize method, otherwise the Core Data runtime will be incomplete and silly crashes will occur at runtime). We therefore must 
+ * swizzle the existing  +initialize method instead and call the existing implementation first.
  */
 + (void)swizzledInitialize
 {
@@ -203,13 +203,13 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * This method was originally intended to be made public (to make error combination easy when implementing
  * custom validation methods), but I discovered a strange Core Data issue. Consider a field for which you have
  * implemented a method returning an NSValidationMultipleErrorsError. If a validation defined for the same
- * field, but in the xcdatamodel file, returns an error, Core Data has issues combining the multiple errors
+ * field, but in the xcdatamodel file, returns an error, Core Data has issues combining the multiple error
  * with this error, and crashes (an immutable array is altered somewhere in the Core Data runtime, throwing an
  * exception).
  *
  * This brought me to the conclusion that NSValidationMultipleErrorsError should be reserved, that is why the
  * method below has been made private. If you need to return several errors from a validation method implementation,
- * define your own code replacing NSValidationMultipleErrorsError.
+ * you should define your own error code playing the same role as NSValidationMultipleErrorsError.
  */
 + (void)combineError:(NSError *)newError withError:(NSError **)pExistingError
 {
@@ -257,6 +257,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * In some very specific cases, the resulting error hierarchy may depend on the alphabetical order of the
  * involved fields, namely when a field is attached several validation criteria using the Core Data model
  * editor (xcdatamodel file).
+ *
  * Consider for example a model object with the following fields and validations:
  *   - fieldStringA: mandatory string field according to the xcadatamodel
  *   - fieldStringB: string field with a maximum length and which must match some regex pattern
@@ -271,13 +272,13 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  *                                                                         |                                                
  *                                                                         \-- NSValidationStringPatternMatchingError   (validation of fieldStringB)
  *
- * This error hierarchy is built as follows:
+ * This error hierarchy was built as follows:
  *   - fieldStringA is validated, generating a NSValidationMissingMandatoryPropertyError
  *   - fieldStringB is validated. Two errors are generated, combined by Core Data into a NSValidationMultipleErrorsError.
- *     Since we already has an error after having validated fieldStringA, this NSValidationMultipleErrorsError is combined
+ *     Since we already have an error after having validated fieldStringA, this NSValidationMultipleErrorsError is combined
  *     with the existing NSValidationMissingMandatoryPropertyError into another NSValidationMultipleErrorsError level
  *
- * If we rename fieldStringA as fieldStringC, we now have:
+ * If we now rename fieldStringA as fieldStringC, we have:
  *   - fieldStringB: string field with a maximum length and which must match some regex pattern
  *   - fieldStringC: mandatory string field according to the xcadatamodel
  * Though the situation is completely the same (after all, we just renamed a field), the error hierarchy returned by Core 
@@ -289,7 +290,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  *                                   |
  *                                   \-- NSValidationMissingMandatoryPropertyError   (validation of fieldStringC)
  *
- * This error hierarchy is built as follows:
+ * This error hierarchy was built as follows:
  *   - fieldStringB is validated, generating two errors combined as a NSValidationMultipleErrorsError
  *   - fieldStringC is validated, generating a NSValidationMissingMandatoryPropertyError error. Since we already have
  *     a NSValidationMultipleErrorsError error, this error is simply added as third error to the existing list
@@ -297,9 +298,10 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * Of course, this behavior is quite annoying and inconsistent. In general, we should expect Core Data to return
  * either:
  *   - a single error
- *   - or a NSValidationMultipleErrorsError error, with all errors at the same level (see fieldStringB/C example)
+ *   - or a NSValidationMultipleErrorsError error, with all embedded errors at the same level (as in the
+ *     fieldStringB/C example)
  *
- * The purpose of the following method is to flatten out the error hierarchy to remove those inconsistencies
+ * The purpose of the following method is therefore to flatten out the error hierarchy to remove those inconsistencies
  */
 + (NSError *)flattenHiearchyForError:(NSError *)error
 {
@@ -440,7 +442,7 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
  * This implementation calls the underlying check methods, performs Core Data error chaining, and ensures that these methods 
  * get consistently called along the inheritance hierarchy. This is strongly recommended by the Core Data documentation, and
  * in fact failing to do so leads to undefined behavior: The -[NSManagedObject validateForUpdate:] and 
- * -[NSManagedObject validateForInsert:] methods are namely where individual validations are called!
+ * -[NSManagedObject validateForInsert:] methods are namely where individual validations get called!
  */
 static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError)
 {
