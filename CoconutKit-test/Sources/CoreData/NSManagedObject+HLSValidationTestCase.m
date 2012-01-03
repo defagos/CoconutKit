@@ -15,7 +15,26 @@
 #import "ConcreteClassD.h"
 #import "TestErrors.h"
 
+@interface NSManagedObject_HLSValidationTestCase ()
+
+@property (nonatomic, retain) ConcreteClassD *lockedDInstance;
+
+@end
+
 @implementation NSManagedObject_HLSValidationTestCase
+
+#pragma mark Object creation and destruction
+
+- (void)dealloc
+{
+    self.lockedDInstance = nil;
+    
+    [super dealloc];
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize lockedDInstance = m_lockedDInstance;
 
 #pragma mark Test setup and tear down
 
@@ -29,7 +48,12 @@
                                                                      storeDirectory:libraryDirectoryPath 
                                                                               reuse:NO] 
                                      autorelease];
-    [HLSModelManager setDefaultModelManager:modelManager];    
+    [HLSModelManager setDefaultModelManager:modelManager];
+    
+    // Create an object which cannot be destroyed
+    self.lockedDInstance = [ConcreteClassD insert];
+    self.lockedDInstance.noValidationStringD = @"LOCKED";
+    [HLSModelManager saveDefaultModelContext:NULL];
 }
 
 - (void)tearDownClass
@@ -109,7 +133,7 @@
     //       with the custom validation method error after this custom method has been executed)
     NSError *errorB10 = nil;
     GHAssertFalse([cInstance checkValue:nil forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB10], @"Incorrect validation");
-    GHAssertEquals([errorB10 code], NSValidationMultipleErrorsError, @"Incorrect error code");
+    GHAssertTrue([errorB10 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
     NSArray *subErrorsB10 = [[errorB10 userInfo] objectForKey:NSDetailedErrorsKey];
     GHAssertEquals([subErrorsB10 count], 2U, @"Incorrect number of sub-errors");
     
@@ -154,7 +178,7 @@
     //       mandatory test fails)
     NSError *errorC6 = nil;
     GHAssertFalse([cInstance checkValue:@"This string is too long" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC6], @"Incorrect validation");
-    GHAssertEquals([errorC6 code], NSValidationMultipleErrorsError, @"Incorrect error code");
+    GHAssertTrue([errorC6 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], @"Incorrect error domain and code");
     NSArray *subErrorsC6 = [[errorC6 userInfo] objectForKey:NSDetailedErrorsKey];
     GHAssertEquals([subErrorsC6 count], 2U, @"Incorrect number of sub-errors");
     
@@ -243,6 +267,16 @@
     GHAssertEquals([subErrors3 count], 7U, @"Incorrect number of sub-errors");
     
     // Not testing insertion here. Rollback
+    [HLSModelManager rollbackDefaultModelContext];
+}
+
+- (void)testDelete
+{    
+    [HLSModelManager deleteObjectFromDefaultModelContext:self.lockedDInstance];
+    
+    NSError *error = nil;
+    GHAssertFalse([HLSModelManager saveDefaultModelContext:&error], @"Incorrect result when saving");
+    GHAssertTrue([error hasCode:TestValidationLockedObjectError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
     [HLSModelManager rollbackDefaultModelContext];
 }
 

@@ -6,9 +6,12 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+// Forward declarations
+@class ConcreteClassD;
+
 @interface NSManagedObject_HLSValidationTestCase : GHTestCase {
 @private
-    
+    ConcreteClassD *m_lockedDInstance;
 }
 
 @end
