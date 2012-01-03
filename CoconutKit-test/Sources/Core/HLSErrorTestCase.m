@@ -101,7 +101,11 @@
 
 - (void)testCopy
 {
-    GHAssertTrue(NO, @"To be implemented; implement copyWithZone: in HLSError first");
+    NSError *error2Copy = [self.error2 copy];
+    
+    // The userInfo was deep-copied. Must check some of its information to assert the copy went well
+    GHAssertEqualStrings([error2Copy localizedDescription], [self.error2 localizedDescription], @"Incorrect description");
+    GHAssertEqualStrings([error2Copy localizedFailureReason], @"Localized failure reason", @"Incorrect failure reason");
 }
 
 @end

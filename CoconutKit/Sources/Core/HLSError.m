@@ -116,4 +116,14 @@
     }
 }
 
+#pragma mark NSCopying protocol implementation
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    // Unlike a conventional NSError, the userInfo dictionary is here mutable. A deep copy must therefore be made
+    HLSError *errorCopy = [super copyWithZone:zone];
+    errorCopy.internalUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.internalUserInfo];
+    return errorCopy;
+}
+
 @end

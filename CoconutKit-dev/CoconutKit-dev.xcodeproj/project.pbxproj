@@ -18,7 +18,6 @@
 		6FE3672E14A9C23B00F9E2E0 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3672D14A9C23B00F9E2E0 /* NSError+HLSExtensions.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
-		6FF661E21492A8DE006E4987 /* HLSCoconutKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */; };
 		6FF661E91492CA3A006E4987 /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF661E81492CA3A006E4987 /* DemoErrors.m */; };
 		6FFE35F11468FD7400C02549 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE35601468FD7400C02549 /* CoconutKit_Localizable.strings */; };
 		6FFE35F21468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE35661468FD7400C02549 /* CoconutKit_ButtonBarArrowLeft.png */; };
@@ -196,8 +195,6 @@
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
 		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
-		6FF661E01492A8DE006E4987 /* HLSCoconutKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCoconutKitError.h; sourceTree = "<group>"; };
-		6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCoconutKitError.m; sourceTree = "<group>"; };
 		6FF661E71492CA3A006E4987 /* DemoErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoErrors.h; sourceTree = "<group>"; };
 		6FF661E81492CA3A006E4987 /* DemoErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoErrors.m; sourceTree = "<group>"; };
 		6FFE35611468FD7400C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -622,8 +619,6 @@
 				6FFE35791468FD7400C02549 /* HLSAssert.h */,
 				6FFE357A1468FD7400C02549 /* HLSAssert.m */,
 				6FFE357B1468FD7400C02549 /* HLSCategoryLinker.h */,
-				6FF661E01492A8DE006E4987 /* HLSCoconutKitError.h */,
-				6FF661E11492A8DE006E4987 /* HLSCoconutKitError.m */,
 				6FFE357C1468FD7400C02549 /* HLSConverters.h */,
 				6FFE357D1468FD7400C02549 /* HLSConverters.m */,
 				6F26DC601492CDC700086BA5 /* HLSError.h */,
@@ -1495,7 +1490,6 @@
 				6F2BDB971477C552000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
 				6F4608F3148BCE2D00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F4608FF148BFF7400E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
-				6FF661E21492A8DE006E4987 /* HLSCoconutKitError.m in Sources */,
 				6FF661E91492CA3A006E4987 /* DemoErrors.m in Sources */,
 				6F26DC621492CDC700086BA5 /* HLSError.m in Sources */,
 				6FE3672E14A9C23B00F9E2E0 /* NSError+HLSExtensions.m in Sources */,
