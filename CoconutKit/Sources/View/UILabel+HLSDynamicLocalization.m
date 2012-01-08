@@ -36,12 +36,8 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
 
 @implementation UILabel (HLSDynamicLocalization)
 
-+ (void)initialize
++ (void)load
 {
-    if (self != [UILabel class]) {
-        return;
-    }
-    
     s_UILabel__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector(self, @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
     s_UILabel__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
     s_UILabel__dealloc_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(dealloc), @selector(swizzledDealloc));
@@ -141,7 +137,7 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
     
     self.text = text;
     
-    // Special case of buttons: Must adjust the label when the string is updated2
+    // Special case of buttons: Must adjust the label when the string is updated
     if ([[self superview] isKindOfClass:[UIButton class]]) {
         [self sizeToFit];
     }
