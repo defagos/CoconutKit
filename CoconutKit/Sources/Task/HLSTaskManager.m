@@ -11,7 +11,6 @@
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
 #import "HLSTaskGroup+Friend.h"
-#import "HLSTaskManager+Friend.h"
 #import "HLSTaskOperation.h"
 
 @interface HLSTaskManager ()
@@ -32,6 +31,9 @@
 
 - (void)registerTaskGroup:(HLSTaskGroup *)taskGroup;
 - (void)unregisterTaskGroup:(HLSTaskGroup *)taskGroup;
+
+- (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task;
+- (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup;
 
 @end
 

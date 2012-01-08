@@ -10,7 +10,6 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
-#import "HLSTask+Friend.h"
 #import "HLSTaskGroup.h"
 
 const NSUInteger kProgressStepsCounterThreshold = 50;
@@ -26,6 +25,8 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, retain) NSDictionary *returnInfo;
 @property (nonatomic, retain) NSError *error;
 @property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
+
+- (void)reset;
 
 @end
 

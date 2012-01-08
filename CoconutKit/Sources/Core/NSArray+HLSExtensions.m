@@ -55,6 +55,11 @@ HLSLinkCategory(NSArray_HLSExtensions)
             arrayByAddingObjectsFromArray:[self subarrayWithRange:NSMakeRange(0, numberOfObjects)]];
 }
 
+- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    return [self sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+}
+
 @end
 
 @implementation NSMutableArray (HLSExtensions)

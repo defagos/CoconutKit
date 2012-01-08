@@ -337,10 +337,10 @@ static NSArray *s_folders = nil;
     [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];
     
     [s_timeScales release];
-    s_timeScales = [[NSArray arrayWithObjects:NSLocalizedString(@"YEAR", @"YEAR"),
-                     NSLocalizedString(@"MONTH", @"MONTH"),
-                     NSLocalizedString(@"WEEK", @"WEEK"),
-                     NSLocalizedString(@"DAY", @"DAY"),
+    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],
+                     [NSLocalizedString(@"Month", @"Month") uppercaseString],
+                     [NSLocalizedString(@"Week", @"Week") uppercaseString],
+                     [NSLocalizedString(@"Day", @"Day") uppercaseString],
                      nil] retain];
     
     [self.weekDaysCursor reloadData];

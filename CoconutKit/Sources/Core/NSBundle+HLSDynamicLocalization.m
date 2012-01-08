@@ -143,7 +143,7 @@ static void setDefaultLocalization(void)
     
     if (!localizedString) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NSShowNonLocalizedStrings"]) {
-            NSLog(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
+            HLSLoggerWarn(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
             return [key uppercaseString];
         }
         return [value length] > 0 ? value : key;

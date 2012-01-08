@@ -1,6 +1,6 @@
 //
 //  UIControl+HLSExclusiveTouch.h
-//  CoconutKit-dev
+//  CoconutKit
 //
 //  Created by Samuel Défago on 07.06.11.
 //  Copyright 2011 Hortis. All rights reserved.

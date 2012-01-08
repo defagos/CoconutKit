@@ -1,6 +1,6 @@
 //
 //  UIControl+HLSExclusiveTouch.m
-//  CoconutKit-dev
+//  CoconutKit
 //
 //  Created by Samuel Défago on 07.06.11.
 //  Copyright 2011 Hortis. All rights reserved.
@@ -61,9 +61,7 @@ static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
 #pragma mark Methods injected by swizzling
 
 - (id)swizzledInitWithFrame:(CGRect)frame
-{
-    HLSLoggerDebug(@"Called swizzled initWithFrame:");
-    
+{   
     // Call the original implementation
     if ((self = (*s_UIControl__initWithFrame_Imp)(self, @selector(initWithFrame:), frame))) {
         self.exclusiveTouch = YES;

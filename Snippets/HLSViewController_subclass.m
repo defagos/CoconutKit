@@ -85,6 +85,7 @@
     }
     
     // Code, most probably one of:
+    // return toInterfaceOrientation == UIInterfaceOrientationPortrait;
     // return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
     // return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
     // return YES;

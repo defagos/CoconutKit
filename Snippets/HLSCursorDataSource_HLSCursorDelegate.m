@@ -37,7 +37,6 @@
 
 #pragma mark HLSCursorDelegate protocol implementation
 
-
 - (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index
 {
 

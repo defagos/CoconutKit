@@ -14,4 +14,6 @@
 
 - (UIViewController *)rootViewController;
 
+- (void)savePendingChanges;
+
 @end

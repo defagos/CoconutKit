@@ -9,6 +9,7 @@
 #import "HLSKenBurnsSlideshow.h"
 
 #import "HLSAnimation.h"
+#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 
@@ -26,7 +27,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 - (void)playNextImageAnimation;
 
 - (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        WithScaleFactor:(CGFloat)scaleFactor
+                        withScaleFactor:(CGFloat)scaleFactor
                                 xOffset:(CGFloat)xOffset
                                 yOffset:(CGFloat)yOffset;
 
@@ -95,7 +96,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 @synthesize images = m_images;
 
 - (void)setImages:(NSArray *)images
-{    
+{   
+    HLSAssertObjectsInEnumerationAreKindOfClass(images, UIImage);
     if (m_running) {
         HLSLoggerWarn(@"Cannot add an image while the animation is running");
         return;
@@ -146,11 +148,16 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)play
 {
+    if (m_running) {
+        HLSLoggerWarn(@"The slideshow is already running");
+        return;
+    }
+    
     if ([self.images count] == 0) {
         HLSLoggerInfo(@"No images loaded. Nothing to animate");
         return;
     }
-    
+        
     m_running = YES;
     
     for (UIImageView *imageView in self.imageViews) {
@@ -228,7 +235,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     
     // Create the corresponding animation and plays it
     HLSAnimation *animation = [self animationForImageView:imageView 
-                                          WithScaleFactor:finalScaleFactor / scaleFactor
+                                          withScaleFactor:finalScaleFactor / scaleFactor
                                                   xOffset:finalXOffset - xOffset 
                                                   yOffset:finalYOffset - yOffset];
     [animation playAnimated:YES];
@@ -238,6 +245,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)stop
 {
+    if (! m_running) {
+        HLSLoggerInfo(@"The slideshow is not running");
+        return;
+    }
+    
     for (HLSAnimation *animation in self.animations) {
         [animation cancel];
     }
@@ -248,7 +260,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 #pragma mark Creating the animation
 
 - (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        WithScaleFactor:(CGFloat)scaleFactor
+                        withScaleFactor:(CGFloat)scaleFactor
                                 xOffset:(CGFloat)xOffset
                                 yOffset:(CGFloat)yOffset
 {
