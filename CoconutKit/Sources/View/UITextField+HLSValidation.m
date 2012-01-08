@@ -9,7 +9,6 @@
 #import "UITextField+HLSValidation.h"
 
 #import "HLSCategoryLinker.h"
-#import "HLSLogger.h"
 #import "HLSManagedTextFieldValidator.h"
 #import "HLSRuntime.h"
 
@@ -115,7 +114,6 @@ extern BOOL injectedManagedObjectValidation(void);
     
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (! validator) {
-        HLSLoggerInfo(@"The text field has not been bound to a model object");
         return NO;
     }
     
@@ -128,7 +126,6 @@ extern BOOL injectedManagedObjectValidation(void);
     
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (! validator) {
-        HLSLoggerError(@"The text field has not been bound to a model object");
         return;
     }
     
@@ -219,7 +216,6 @@ extern BOOL injectedManagedObjectValidation(void);
     NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
     
     if (! [self isViewLoaded]) {
-        HLSLoggerError(@"The view controller's view has not been loaded yet");
         return NO;
     }
     

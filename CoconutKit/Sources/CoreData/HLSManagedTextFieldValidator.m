@@ -149,14 +149,14 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     // Format the value
     // Remark: The formatting error descriptions are not explicit. No need to have a look at them 
     if (! [self.formatter getObjectValue:pValue forString:string errorDescription:NULL]) {
-        HLSLoggerInfo(@"Formatting failed for field %@", self.fieldName);
+        HLSLoggerDebug(@"Formatting failed for field %@", self.fieldName);
         if ([self.validationDelegate respondsToSelector:@selector(textFieldDidFailFormatting:)]) {
             [self.validationDelegate textFieldDidFailFormatting:self.textField];
         }
         return NO;
     }
     
-    HLSLoggerInfo(@"Formatting successful for field %@", self.fieldName);
+    HLSLoggerDebug(@"Formatting successful for field %@", self.fieldName);
     if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassFormatting:)]) {
         [self.validationDelegate textFieldDidPassFormatting:self.textField];
     }
@@ -175,14 +175,14 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     NSError *error = nil;
     if ([self.managedObject checkValue:value forKey:self.fieldName error:&error]) {
         if ([self.validationDelegate respondsToSelector:@selector(textFieldDidPassValidation:)]) {
-            HLSLoggerInfo(@"Value %@ for field %@ is valid", value, self.fieldName);
+            HLSLoggerDebug(@"Value %@ for field %@ is valid", value, self.fieldName);
             [self.validationDelegate textFieldDidPassValidation:self.textField];
         }
         return YES;
     }
     else {
         if ([self.validationDelegate respondsToSelector:@selector(textField:didFailValidationWithError:)]) {
-            HLSLoggerInfo(@"Value %@ for field %@ is invalid", value, self.fieldName);
+            HLSLoggerDebug(@"Value %@ for field %@ is invalid", value, self.fieldName);
             [self.validationDelegate textField:self.textField didFailValidationWithError:error];
         }
         return NO;
