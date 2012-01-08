@@ -137,6 +137,8 @@
 		6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59614BA0494007EE121 /* HLSWebViewController.m */; };
 		6FADE61714BA0494007EE121 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59714BA0494007EE121 /* HLSWizardViewController.h */; };
 		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
+		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
+		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
 		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
@@ -289,6 +291,8 @@
 		6FADE59614BA0494007EE121 /* HLSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWebViewController.m; sourceTree = "<group>"; };
 		6FADE59714BA0494007EE121 /* HLSWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWizardViewController.h; sourceTree = "<group>"; };
 		6FADE59814BA0494007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
+		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
+		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -534,6 +538,8 @@
 				6FADE57C14BA0494007EE121 /* HLSValue1TableViewCell.m */,
 				6FADE57D14BA0494007EE121 /* HLSValue2TableViewCell.h */,
 				6FADE57E14BA0494007EE121 /* HLSValue2TableViewCell.m */,
+				6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */,
+				6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE57F14BA0494007EE121 /* UINavigationBar+HLSExtensions.h */,
 				6FADE58014BA0494007EE121 /* UINavigationBar+HLSExtensions.m */,
 				6FADE58114BA0494007EE121 /* UITextField+HLSValidation.h */,
@@ -647,6 +653,7 @@
 				6FADE61314BA0494007EE121 /* HLSViewController.h in Headers */,
 				6FADE61514BA0494007EE121 /* HLSWebViewController.h in Headers */,
 				6FADE61714BA0494007EE121 /* HLSWizardViewController.h in Headers */,
+				6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +776,7 @@
 				6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */,
 				6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */,
+				6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
