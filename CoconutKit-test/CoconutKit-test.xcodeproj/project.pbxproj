@@ -45,7 +45,6 @@
 		6FADE49114B9E475007EE121 /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE49014B9E474007EE121 /* BankAccount.m */; };
 		6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */; };
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
-		6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */; };
 		6FE3673114A9C26100F9E2E0 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3673014A9C26100F9E2E0 /* NSError+HLSExtensions.m */; };
 		6FFE38D91468FDCA00C02549 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE38481468FDCA00C02549 /* CoconutKit_Localizable.strings */; };
 		6FFE38DA1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE384E1468FDCA00C02549 /* CoconutKit_ButtonBarArrowLeft.png */; };
@@ -184,8 +183,6 @@
 		6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
 		6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSModelManagerTestCase.h; sourceTree = "<group>"; };
-		6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSModelManagerTestCase.m; sourceTree = "<group>"; };
 		6FE3672F14A9C26100F9E2E0 /* NSError+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FE3673014A9C26100F9E2E0 /* NSError+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FFE38491468FDCA00C02549 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -519,8 +516,6 @@
 				6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */,
 				6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */,
 				6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */,
-				6FDE68FD1475785E005EA5FA /* HLSModelManagerTestCase.h */,
-				6FDE68FE1475785E005EA5FA /* HLSModelManagerTestCase.m */,
 			);
 			name = CoreData;
 			path = Sources/CoreData;
@@ -907,7 +902,6 @@
 				6FFE39181468FDCA00C02549 /* HLSWizardViewController.m in Sources */,
 				6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */,
 				6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
-				6FDE68FF1475785E005EA5FA /* HLSModelManagerTestCase.m in Sources */,
 				6F2BDB9B1477C57E000CAC7B /* NSManagedObject+HLSValidation.m in Sources */,
 				6F4608F7148BCE9B00E3BA79 /* HLSTextFieldTouchDetector.m in Sources */,
 				6F460902148BFF8800E3BA79 /* HLSTextFieldInternalDelegate.m in Sources */,
