@@ -4,6 +4,11 @@
         <attribute name="codeMandatoryNotEmptyStringA" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="noValidationStringA" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="BankAccount" representedClassName="BankAccount" syncable="YES">
+        <attribute name="balance" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="accounts" inverseEntity="Person" syncable="YES"/>
+    </entity>
     <entity name="ConcreteClassD" representedClassName="ConcreteClassD" syncable="YES">
         <attribute name="noValidationNumberD" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="noValidationStringD" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,10 +26,23 @@
         <attribute name="modelMandatoryBoundedPatternStringC" attributeType="String" maxValueString="15" regularExpressionString="^H.*!$" syncable="YES"/>
         <attribute name="noValidationNumberC" optional="YES" attributeType="Integer 16" syncable="YES"/>
     </entity>
+    <entity name="House" representedClassName="House" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="houses" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BankAccount" inverseName="owner" inverseEntity="BankAccount" syncable="YES"/>
+        <relationship name="houses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="owners" inverseEntity="House" syncable="YES"/>
+    </entity>
     <elements>
         <element name="AbstractClassA" positionX="160" positionY="192" width="128" height="75"/>
         <element name="ConcreteClassD" positionX="522" positionY="351" width="128" height="90"/>
         <element name="ConcreteSubclassB" positionX="169" positionY="378" width="128" height="120"/>
         <element name="ConcreteSubclassC" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Person" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="BankAccount" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="House" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

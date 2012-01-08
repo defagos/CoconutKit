@@ -47,4 +47,22 @@
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (void)deleteAllObjects;
 
+/**
+ * Create a copy of the receiver if it implements the HLSManagedObjectCopying protocol. The copy is created in the same
+ * managed object context which the receiver belongs to. If the receiver does not implement the HLSManagedObjectCopying
+ * protocol, nil is returned.
+ *
+ * The copy is created as follows:
+ *   - all attributes and relationships are copied, except when explicitly disabled by implementing the keysToExclude 
+ *     property of the HLSManagedObjectCopying protocol
+ *   - a shallow copy is performed for attributes
+ *   - for relationships, a shallow copy is performed, except if the relationship corresponds to ownership of one
+ *     or more objects also implementing the HLSManagedObjectCopying protocol (ownership is assumed when the relationship
+ *     deletion behavior is set to cascade)
+ *
+ * After the method successfully returns an object, you must still commit the changes by calling save: on the
+ * managed object context in which it was created.
+ */
+- (id)duplicate;
+
 @end

@@ -74,16 +74,6 @@ static HLSModelManager *s_defaultModelManager = nil;
     [s_defaultModelManager.managedObjectContext rollback];
 }
 
-+ (id)duplicateObjectInDefaultModelContext:(NSManagedObject *)managedObject
-{
-    if (! s_defaultModelManager) {
-        HLSLoggerWarn(@"No default context has been installed. Nothing to rollback");
-        return nil;
-    }
-    
-    return [s_defaultModelManager duplicateObject:managedObject];
-}
-
 + (void)deleteObjectFromDefaultModelContext:(NSManagedObject *)managedObject
 {
     if (! s_defaultModelManager) {
@@ -226,81 +216,6 @@ static HLSModelManager *s_defaultModelManager = nil;
     modelManager.persistentStoreCoordinator = self.persistentStoreCoordinator;
     
     return modelManager;
-}
-
-#pragma mark Creating object copies
-
-- (id)duplicateObject:(NSManagedObject *)managedObject
-{
-    if ([managedObject managedObjectContext] != self.managedObjectContext) {
-        HLSLoggerError(@"The object to be copied does not belong to the managed context");
-        return nil;
-    }
-    
-    // Return the object itself, in effect a shallow copy
-    if (! [managedObject conformsToProtocol:@protocol(HLSManagedObjectCopying)]) {
-        return managedObject;
-    }
-    
-    NSManagedObject<HLSManagedObjectCopying> *managedObjectCopyable = (NSManagedObject<HLSManagedObjectCopying> *)managedObject;
-        
-    // Create the deep copy
-    NSManagedObject *objectCopy = [NSEntityDescription insertNewObjectForEntityForName:managedObjectCopyable.entity.name
-                                                                inManagedObjectContext:self.managedObjectContext];
-    
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:managedObjectCopyable.entity.name
-                                                         inManagedObjectContext:self.managedObjectContext];
-    
-    // Get keys to exclude (if any)
-    NSSet *keysToExclude = nil;
-    if ([managedObjectCopyable respondsToSelector:@selector(keysToExclude)]) {
-        keysToExclude = [managedObjectCopyable keysToExclude];
-    }
-    
-    // Attributes
-    NSDictionary *attributes = [entityDescription attributesByName];
-    for (NSString *attributeName in [attributes allKeys]) {
-        if ([keysToExclude containsObject:attributeName]) {
-            continue;
-        }
-        [objectCopy setValue:[managedObject valueForKey:attributeName] forKey:attributeName];
-    }
-    
-    // Relationships
-    NSDictionary *relationships = [entityDescription relationshipsByName];
-    for (NSString *relationshipName in [relationships allKeys]) {
-        if ([keysToExclude containsObject:relationshipName]) {
-            continue;
-        }
-        
-        // Deep copy owned objects implementing the NSManagedObjectCopying protocol
-        NSRelationshipDescription *relationshipDescription = [relationships objectForKey:relationshipName];
-        if ([relationshipDescription deleteRule] == NSCascadeDeleteRule) {
-            if ([relationshipDescription isToMany]) {
-                NSSet *ownedObjects = [managedObjectCopyable valueForKey:relationshipName];
-                NSMutableSet *ownedObjectCopies = [NSMutableSet set];
-                for (NSManagedObject *ownedObject in ownedObjects) {
-                    NSManagedObject *ownedObjectCopy = [self duplicateObject:ownedObject];
-                    if (! ownedObjectCopy) {
-                        return nil;
-                    }
-                    [ownedObjectCopies addObject:ownedObjectCopy];
-                }
-                [objectCopy setValue:[NSSet setWithSet:ownedObjectCopies] forKey:relationshipName];
-            }
-            else {
-                NSManagedObject *ownedObject = [managedObjectCopyable valueForKey:relationshipName];
-                NSManagedObject *ownedObjectCopy = [self duplicateObject:ownedObject];
-                [objectCopy setValue:ownedObjectCopy forKey:relationshipName];
-            }
-        }
-        // Shallow copy in all other cases
-        else {
-            [objectCopy setValue:[managedObjectCopyable valueForKey:relationshipName] forKey:relationshipName];
-        }
-    }
-    
-    return objectCopy;
 }
 
 @end

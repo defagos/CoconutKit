@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
+#import "HLSManagedObjectCopying.h"
 #import "HLSModelManager.h"
 #import "NSObject+HLSExtensions.h"
 
@@ -96,6 +97,84 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 + (void)deleteAllObjects
 {
     [self deleteAllObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
+}
+
+#pragma mark Creating a copy
+
+- (id)duplicate
+{
+    if (! [self conformsToProtocol:@protocol(HLSManagedObjectCopying)]) {
+        return nil;
+    }
+    
+    // Create the deep copy
+    NSManagedObject *objectCopy = [NSEntityDescription insertNewObjectForEntityForName:self.entity.name
+                                                                inManagedObjectContext:self.managedObjectContext];
+        
+    // Get keys to exclude (if any)
+    NSSet *keysToExclude = nil;
+    NSManagedObject<HLSManagedObjectCopying> *managedObjectCopyable = (NSManagedObject<HLSManagedObjectCopying> *)self;
+    if ([managedObjectCopyable respondsToSelector:@selector(keysToExclude)]) {
+        keysToExclude = [managedObjectCopyable keysToExclude];
+    }
+    
+    // Copy attributes (shallow copy for all: Those are of "primitive" immutable types anyway)
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:self.entity.name
+                                                         inManagedObjectContext:self.managedObjectContext];
+    NSDictionary *attributes = [entityDescription attributesByName];
+    for (NSString *attributeName in [attributes allKeys]) {
+        if ([keysToExclude containsObject:attributeName]) {
+            continue;
+        }
+        [objectCopy setValue:[self valueForKey:attributeName] forKey:attributeName];
+    }
+    
+    // Copy relationships
+    NSDictionary *relationships = [entityDescription relationshipsByName];
+    for (NSString *relationshipName in [relationships allKeys]) {
+        if ([keysToExclude containsObject:relationshipName]) {
+            continue;
+        }
+        
+        // Deep copy owned objects implementing the NSManagedObjectCopying protocol
+        NSRelationshipDescription *relationshipDescription = [relationships objectForKey:relationshipName];
+        if ([relationshipDescription deleteRule] == NSCascadeDeleteRule) {
+            // To-many relationship
+            if ([relationshipDescription isToMany]) {
+                // The set of owned objects might be altered when we duplicate them below. To avoid iterating
+                // over mutating sets, we copy it first
+                NSSet *ownedObjects = [NSSet setWithSet:[managedObjectCopyable valueForKey:relationshipName]];
+                NSMutableSet *ownedObjectCopies = [NSMutableSet set];
+                for (NSManagedObject *ownedObject in ownedObjects) {
+                    NSManagedObject *ownedObjectCopy = [ownedObject duplicate];
+                    if (ownedObjectCopy) {
+                        [ownedObjectCopies addObject:ownedObjectCopy];
+                    }
+                    else {
+                        [ownedObjectCopies addObject:ownedObject];
+                    }   
+                }
+                [objectCopy setValue:[NSSet setWithSet:ownedObjectCopies] forKey:relationshipName];
+            }
+            // To-one relationship
+            else {
+                NSManagedObject *ownedObject = [managedObjectCopyable valueForKey:relationshipName];
+                NSManagedObject *ownedObjectCopy = [ownedObject duplicate];
+                if (ownedObjectCopy) {
+                    [objectCopy setValue:ownedObjectCopy forKey:relationshipName];
+                }
+                else {
+                    [objectCopy setValue:ownedObject forKey:relationshipName];
+                }
+            }
+        }
+        // Shallow copy in all other cases
+        else {
+            [objectCopy setValue:[managedObjectCopyable valueForKey:relationshipName] forKey:relationshipName];
+        }
+    }
+    
+    return objectCopy;
 }
 
 @end

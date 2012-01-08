@@ -53,7 +53,7 @@
     // Create an object which cannot be destroyed
     self.lockedDInstance = [ConcreteClassD insert];
     self.lockedDInstance.noValidationStringD = @"LOCKED";
-    [HLSModelManager saveDefaultModelContext:NULL];
+    NSAssert([HLSModelManager saveDefaultModelContext:NULL], @"Failed to insert test data");
 }
 
 - (void)tearDownClass
