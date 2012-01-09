@@ -89,7 +89,7 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)playForwardButtonClicked:(id)sender
+- (IBAction)playForward:(id)sender
 {
     self.playForwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
@@ -145,7 +145,7 @@
     [self.animation playAnimated:self.animatedSwitch.on];
 }
 
-- (IBAction)playBackwardButtonClicked:(id)sender
+- (IBAction)playBackward:(id)sender
 {
     self.playBackwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
@@ -156,7 +156,7 @@
     [self.reverseAnimation playAnimated:self.animatedSwitch.on];
 }
 
-- (IBAction)cancelButtonClicked:(id)sender
+- (IBAction)cancelButton:(id)sender
 {
     if (self.animation.running) {
         self.playBackwardButton.hidden = NO;

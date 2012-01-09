@@ -82,7 +82,6 @@
 						<string key="NSFrame">{{136, 370}, {128, 37}}</string>
 						<reference key="NSSuperview" ref="838534362"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -135,6 +134,15 @@
 						<reference key="destination" ref="838534362"/>
 					</object>
 					<int key="connectionID">4</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">changeAppearance:</string>
+						<reference key="source" ref="428046667"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">7</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -216,7 +224,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">6</int>
+			<int key="maxID">7</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -225,13 +233,13 @@
 					<string key="className">ContainerCustomizationViewController</string>
 					<string key="superclassName">HLSViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">changeButtonClicked:</string>
+						<string key="NS.key.0">changeAppearance:</string>
 						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">changeButtonClicked:</string>
+						<string key="NS.key.0">changeAppearance:</string>
 						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">changeButtonClicked:</string>
+							<string key="name">changeAppearance:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>

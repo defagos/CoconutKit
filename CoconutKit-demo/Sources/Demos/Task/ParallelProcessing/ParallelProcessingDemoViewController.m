@@ -385,7 +385,7 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)taskStartButtonClicked:(id)sender
+- (IBAction)startTask:(id)sender
 {
     self.taskStartButton.hidden = YES;
     
@@ -395,14 +395,14 @@
     [[HLSTaskManager defaultManager] submitTask:sleepTask];
 }
 
-- (IBAction)taskStopButtonClicked:(id)sender
+- (IBAction)stopTask:(id)sender
 {
     self.taskStopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_task"];
 }
 
-- (IBAction)taskGroupStartButtonClicked:(id)sender
+- (IBAction)startTaskGroup:(id)sender
 {
     self.taskGroupStartButton.hidden = YES;
     
@@ -432,28 +432,28 @@
     [[HLSTaskManager defaultManager] submitTaskGroup:taskGroup];
 }
 
-- (IBAction)taskGroupStopButtonClicked:(id)sender
+- (IBAction)stopTaskGroup:(id)sender
 {
     self.taskGroupStopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTaskGroupsWithTag:@"TG_taskGroup"];
 }
 
-- (IBAction)subTask1StopButtonClicked:(id)sender
+- (IBAction)stopSubTask1:(id)sender
 {
     self.subTask1StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask1"];
 }
 
-- (IBAction)subTask2StopButtonClicked:(id)sender
+- (IBAction)stopSubTask2:(id)sender
 {
     self.subTask2StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask2"];    
 }
 
-- (IBAction)subTask3StopButtonClicked:(id)sender
+- (IBAction)stopSubTask3:(id)sender
 {
     self.subTask3StopButton.hidden = YES;
     

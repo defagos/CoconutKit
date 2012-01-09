@@ -10,7 +10,7 @@
 
 @interface MemoryWarningTestCoverViewController ()
 
-- (void)closeBarButtonItemClicked:(id)sender;
+- (void)close:(id)sender;
 
 @end
 
@@ -44,7 +44,7 @@
     [super viewDidLoad];
     
     self.closeBarButtonItem.target = self;
-    self.closeBarButtonItem.action = @selector(closeBarButtonItemClicked:);
+    self.closeBarButtonItem.action = @selector(close:);
 }
 
 #pragma mark Orientation management
@@ -60,7 +60,7 @@
 
 #pragma mark Event callbacks
 
-- (void)closeBarButtonItemClicked:(id)sender
+- (void)close:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }

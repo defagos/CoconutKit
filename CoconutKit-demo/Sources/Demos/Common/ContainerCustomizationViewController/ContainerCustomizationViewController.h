@@ -15,6 +15,6 @@
     UIBarButtonItem *m_originalRightBarButtonItem;
 }
 
-- (IBAction)changeButtonClicked:(id)sender;
+- (IBAction)changeAppearance:(id)sender;
 
 @end

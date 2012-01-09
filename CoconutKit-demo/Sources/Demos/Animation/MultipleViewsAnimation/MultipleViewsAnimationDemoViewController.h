@@ -33,8 +33,8 @@
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *resizingSwitch;
 
-- (IBAction)playForwardButtonClicked:(id)sender;
-- (IBAction)playBackwardButtonClicked:(id)sender;
-- (IBAction)cancelButtonClicked:(id)sender;
+- (IBAction)playForward:(id)sender;
+- (IBAction)playBackward:(id)sender;
+- (IBAction)cancelButton:(id)sender;
 
 @end

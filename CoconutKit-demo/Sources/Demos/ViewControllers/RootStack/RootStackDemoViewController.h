@@ -15,7 +15,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 
-- (IBAction)pushButtonClicked:(id)sender;
-- (IBAction)popButtonClicked:(id)sender;
+- (IBAction)push:(id)sender;
+- (IBAction)pop:(id)sender;
 
 @end

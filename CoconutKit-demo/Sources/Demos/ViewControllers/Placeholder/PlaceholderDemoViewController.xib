@@ -80,7 +80,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="646793945">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="877932827">
 							<string key="name">Helvetica-Bold</string>
 							<string key="family">Helvetica</string>
 							<int key="traits">2</int>
@@ -111,7 +111,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="1063045559">
@@ -133,7 +133,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="973887671">
@@ -155,7 +155,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="375668740">
@@ -177,7 +177,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="262548350">
@@ -199,7 +199,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="347996817">
@@ -221,7 +221,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="962906467">
@@ -243,7 +243,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUIButton" id="483437656">
@@ -265,7 +265,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 					<object class="IBUILabel" id="47782108">
@@ -294,7 +294,7 @@
 							<int key="traits">0</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="840370589">
+						<object class="NSFont" key="IBUIFont" id="1037250186">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -335,7 +335,7 @@
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
 						</object>
-						<reference key="IBUIFont" ref="840370589"/>
+						<reference key="IBUIFont" ref="1037250186"/>
 					</object>
 					<object class="IBUIPickerView" id="988827800">
 						<reference key="NSNextResponder" ref="490296611"/>
@@ -366,7 +366,7 @@
 							<bytes key="NSRGB">MC45OTIxNTY5MjI4IDAuMDAzOTIxNTY4ODU5IDAAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="646793945"/>
+						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
 				</object>
@@ -412,6 +412,105 @@
 						<reference key="destination" ref="645552904"/>
 					</object>
 					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayStretchable:</string>
+						<reference key="source" ref="61978082"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayFixedSize:</string>
+						<reference key="source" ref="1063045559"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayHeavy:</string>
+						<reference key="source" ref="973887671"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">53</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayPortraitOnly:</string>
+						<reference key="source" ref="375668740"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">54</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayLandscapeOnly:</string>
+						<reference key="source" ref="262548350"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayOrientationCloner:</string>
+						<reference key="source" ref="347996817"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">hideWithModal:</string>
+						<reference key="source" ref="154317067"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayLifeCycleTest:</string>
+						<reference key="source" ref="225216660"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleForwardingProperties:</string>
+						<reference key="source" ref="645552904"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">displayContainerCustomization:</string>
+						<reference key="source" ref="962906467"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">remove:</string>
+						<reference key="source" ref="483437656"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">58</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -600,7 +699,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">60</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -660,17 +759,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>containerCustomizationButtonClicked:</string>
-							<string>fixedSizeSampleButtonClicked:</string>
-							<string>forwardingPropertiesSwitchValueChanged:</string>
-							<string>heavySampleButtonClicked:</string>
-							<string>hideWithModalButtonClicked:</string>
-							<string>landscapeOnlyButtonClicked:</string>
-							<string>lifeCycleTestSampleButtonClicked:</string>
-							<string>orientationClonerButtonClicked:</string>
-							<string>portraitOnlyButtonClicked:</string>
-							<string>removeButtonClicked:</string>
-							<string>stretchableSampleButtonClicked:</string>
+							<string>displayContainerCustomization:</string>
+							<string>displayFixedSize:</string>
+							<string>displayHeavy:</string>
+							<string>displayLandscapeOnly:</string>
+							<string>displayLifeCycleTest:</string>
+							<string>displayOrientationCloner:</string>
+							<string>displayPortraitOnly:</string>
+							<string>displayStretchable:</string>
+							<string>hideWithModal:</string>
+							<string>remove:</string>
+							<string>toggleForwardingProperties:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -691,62 +790,62 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>containerCustomizationButtonClicked:</string>
-							<string>fixedSizeSampleButtonClicked:</string>
-							<string>forwardingPropertiesSwitchValueChanged:</string>
-							<string>heavySampleButtonClicked:</string>
-							<string>hideWithModalButtonClicked:</string>
-							<string>landscapeOnlyButtonClicked:</string>
-							<string>lifeCycleTestSampleButtonClicked:</string>
-							<string>orientationClonerButtonClicked:</string>
-							<string>portraitOnlyButtonClicked:</string>
-							<string>removeButtonClicked:</string>
-							<string>stretchableSampleButtonClicked:</string>
+							<string>displayContainerCustomization:</string>
+							<string>displayFixedSize:</string>
+							<string>displayHeavy:</string>
+							<string>displayLandscapeOnly:</string>
+							<string>displayLifeCycleTest:</string>
+							<string>displayOrientationCloner:</string>
+							<string>displayPortraitOnly:</string>
+							<string>displayStretchable:</string>
+							<string>hideWithModal:</string>
+							<string>remove:</string>
+							<string>toggleForwardingProperties:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">containerCustomizationButtonClicked:</string>
+								<string key="name">displayContainerCustomization:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">fixedSizeSampleButtonClicked:</string>
+								<string key="name">displayFixedSize:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">forwardingPropertiesSwitchValueChanged:</string>
+								<string key="name">displayHeavy:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">heavySampleButtonClicked:</string>
+								<string key="name">displayLandscapeOnly:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">hideWithModalButtonClicked:</string>
+								<string key="name">displayLifeCycleTest:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">landscapeOnlyButtonClicked:</string>
+								<string key="name">displayOrientationCloner:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">lifeCycleTestSampleButtonClicked:</string>
+								<string key="name">displayPortraitOnly:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">orientationClonerButtonClicked:</string>
+								<string key="name">displayStretchable:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">portraitOnlyButtonClicked:</string>
+								<string key="name">hideWithModal:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">removeButtonClicked:</string>
+								<string key="name">remove:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">stretchableSampleButtonClicked:</string>
+								<string key="name">toggleForwardingProperties:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

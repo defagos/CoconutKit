@@ -110,7 +110,7 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)changeButtonClicked:(id)sender
+- (IBAction)changeAppearance:(id)sender
 {
     [self updateSkinRandomly];
 }

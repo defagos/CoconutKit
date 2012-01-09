@@ -63,14 +63,14 @@
 @property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeEstimateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeLabel;
 
-- (IBAction)taskStartButtonClicked:(id)sender;
-- (IBAction)taskStopButtonClicked:(id)sender;
+- (IBAction)startTask:(id)sender;
+- (IBAction)stopTask:(id)sender;
 
-- (IBAction)taskGroupStartButtonClicked:(id)sender;
-- (IBAction)taskGroupStopButtonClicked:(id)sender;
+- (IBAction)startTaskGroup:(id)sender;
+- (IBAction)stopTaskGroup:(id)sender;
 
-- (IBAction)subTask1StopButtonClicked:(id)sender;
-- (IBAction)subTask2StopButtonClicked:(id)sender;
-- (IBAction)subTask3StopButtonClicked:(id)sender;
+- (IBAction)stopSubTask1:(id)sender;
+- (IBAction)stopSubTask2:(id)sender;
+- (IBAction)stopSubTask3:(id)sender;
 
 @end

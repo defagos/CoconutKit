@@ -86,25 +86,25 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)lifeCycleTestSampleButtonClicked:(id)sender
+- (IBAction)displayLifeCycleTest:(id)sender
 {
     LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [self displayInsetViewController:lifecycleTestViewController];
 }
 
-- (IBAction)stretchableSampleButtonClicked:(id)sender
+- (IBAction)displayStretchable:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
     [self displayInsetViewController:stretchableViewController];
 }
 
-- (IBAction)fixedSizeSampleButtonClicked:(id)sender
+- (IBAction)displayFixedSize:(id)sender
 {
     FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
     [self displayInsetViewController:fixedSizeViewController];
 }
 
-- (IBAction)heavySampleButtonClicked:(id)sender
+- (IBAction)displayHeavy:(id)sender
 {
     // Store a strong ref to an already built HeavyViewController; this way, this view controller is kept alive and does
     // not need to be recreated from scratch each time it is displayed as inset (lazy creation suffices). This proves 
@@ -115,30 +115,30 @@
     [self displayInsetViewController:self.heavyViewController];
 }
 
-- (IBAction)portraitOnlyButtonClicked:(id)sender
+- (IBAction)displayPortraitOnly:(id)sender
 {
     PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
     [self displayInsetViewController:portraitOnlyViewController];
 }
 
-- (IBAction)landscapeOnlyButtonClicked:(id)sender
+- (IBAction)displayLandscapeOnly:(id)sender
 {
     LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
     [self displayInsetViewController:landscapeOnlyViewController];
 }
 
-- (IBAction)removeButtonClicked:(id)sender
+- (IBAction)remove:(id)sender
 {
     [self displayInsetViewController:nil];
 }
 
-- (IBAction)hideWithModalButtonClicked:(id)sender
+- (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
-- (IBAction)orientationClonerButtonClicked:(id)sender
+- (IBAction)displayOrientationCloner:(id)sender
 {
     OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
                                                                          initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
@@ -147,13 +147,13 @@
     [self displayInsetViewController:orientationClonerViewController];
 }
 
-- (IBAction)containerCustomizationButtonClicked:(id)sender
+- (IBAction)displayContainerCustomization:(id)sender
 {
     ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
     [self displayInsetViewController:containerCustomizationViewController];
 }
 
-- (IBAction)forwardingPropertiesSwitchValueChanged:(id)sender
+- (IBAction)toggleForwardingProperties:(id)sender
 {
     self.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }

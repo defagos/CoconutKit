@@ -19,16 +19,16 @@
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 
-- (IBAction)lifeCycleTestSampleButtonClicked:(id)sender;
-- (IBAction)stretchableSampleButtonClicked:(id)sender;
-- (IBAction)fixedSizeSampleButtonClicked:(id)sender;
-- (IBAction)heavySampleButtonClicked:(id)sender;
-- (IBAction)portraitOnlyButtonClicked:(id)sender;
-- (IBAction)landscapeOnlyButtonClicked:(id)sender;
-- (IBAction)removeButtonClicked:(id)sender;
-- (IBAction)hideWithModalButtonClicked:(id)sender;
-- (IBAction)orientationClonerButtonClicked:(id)sender;
-- (IBAction)containerCustomizationButtonClicked:(id)sender;
-- (IBAction)forwardingPropertiesSwitchValueChanged:(id)sender;
+- (IBAction)displayLifeCycleTest:(id)sender;
+- (IBAction)displayStretchable:(id)sender;
+- (IBAction)displayFixedSize:(id)sender;
+- (IBAction)displayHeavy:(id)sender;
+- (IBAction)displayPortraitOnly:(id)sender;
+- (IBAction)displayLandscapeOnly:(id)sender;
+- (IBAction)remove:(id)sender;
+- (IBAction)hideWithModal:(id)sender;
+- (IBAction)displayOrientationCloner:(id)sender;
+- (IBAction)displayContainerCustomization:(id)sender;
+- (IBAction)toggleForwardingProperties:(id)sender;
 
 @end

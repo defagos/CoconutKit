@@ -91,43 +91,43 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)lifeCycleTestSampleButtonClicked:(id)sender
+- (IBAction)displayLifeCycleTest:(id)sender
 {
     LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [self displayContentViewController:lifecycleTestViewController];
 }
 
-- (IBAction)stretchableSampleButtonClicked:(id)sender
+- (IBAction)displayStretchable:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
     [self displayContentViewController:stretchableViewController];
 }
 
-- (IBAction)fixedSizeSampleButtonClicked:(id)sender
+- (IBAction)displayFixedSize:(id)sender
 {
     FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
     [self displayContentViewController:fixedSizeViewController];
 }
 
-- (IBAction)portraitOnlyButtonClicked:(id)sender
+- (IBAction)displayPortraitOnly:(id)sender
 {
     PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
     [self displayContentViewController:portraitOnlyViewController];
 }
 
-- (IBAction)landscapeOnlyButtonClicked:(id)sender
+- (IBAction)displayLandscapeOnly:(id)sender
 {
     LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
     [self displayContentViewController:landscapeOnlyViewController];
 }
 
-- (IBAction)hideWithModalButtonClicked:(id)sender
+- (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
-- (IBAction)orientationClonerButtonClicked:(id)sender
+- (IBAction)displayOrientationCloner:(id)sender
 {
     OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
                                                                          initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
@@ -136,32 +136,32 @@
     [self displayContentViewController:orientationClonerViewController];
 }
 
-- (IBAction)transparentButtonClicked:(id)sender
+- (IBAction)displayTransparent:(id)sender
 {
     TransparentViewController *transparentViewController = [[[TransparentViewController alloc] init] autorelease];
     [self displayContentViewController:transparentViewController];
 }
 
-- (IBAction)testInModalButtonClicked:(id)sender
+- (IBAction)testInModal:(id)sender
 {
     RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
     [self presentModalViewController:stackController animated:YES];
 }
 
-- (IBAction)containerCustomizationButtonClicked:(id)sender
+- (IBAction)displayContainerCustomization:(id)sender
 {
     ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
     [self displayContentViewController:containerCustomizationViewController];
 }
 
-- (IBAction)popButtonClicked:(id)sender
+- (IBAction)pop:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     [stackController popViewController];
 }
 
-- (IBAction)forwardingPropertiesSwitchValueChanged:(id)sender
+- (IBAction)toggleForwardingProperties:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;

@@ -177,7 +177,7 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)pushButtonClicked:(id)sender
+- (IBAction)push:(id)sender
 {
     RootStackDemoViewController *demoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     
@@ -186,7 +186,7 @@
     [self.stackController pushViewController:demoViewController withTransitionStyle:pickedIndex];
 }
 
-- (IBAction)popButtonClicked:(id)sender
+- (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
         [self.stackController dismissModalViewControllerAnimated:YES];
