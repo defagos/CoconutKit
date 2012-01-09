@@ -65,7 +65,7 @@
     // TODO: Display localized image in imageView
 }
 
-#pragma mark Action callbacks
+#pragma mark Event callbacks
 
 - (IBAction)toggleMissingLocalizationVisibility:(id)sender
 {

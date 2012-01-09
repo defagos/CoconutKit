@@ -14,20 +14,6 @@
 // Please apologize for the copy-paste code, but this is a sample and this was the fastest option. Your production
 // code should always be more cleverly written
 
-@interface ParallelProcessingDemoViewController ()
-
-- (void)taskStartButtonClicked:(id)sender;
-- (void)taskStopButtonClicked:(id)sender;
-
-- (void)taskGroupStartButtonClicked:(id)sender;
-- (void)taskGroupStopButtonClicked:(id)sender;
-
-- (void)subTask1StopButtonClicked:(id)sender;
-- (void)subTask2StopButtonClicked:(id)sender;
-- (void)subTask3StopButtonClicked:(id)sender;
-
-@end
-
 @implementation ParallelProcessingDemoViewController
 
 #pragma mark Object creation and destruction
@@ -52,21 +38,17 @@
 {
     [super releaseViews];
     
-    self.taskLabel = nil;
     self.taskStartButton = nil;
     self.taskStopButton = nil;
     self.taskProgressView = nil;
     self.taskRemainingTimeEstimateLabel = nil;
     self.taskRemainingTimeLabel = nil;
     
-    self.taskGroupLabel = nil;
     self.taskGroupStartButton = nil;
     self.taskGroupStopButton = nil;
     self.taskGroupProgressView = nil;
     self.taskGroupRemainingTimeEstimateLabel = nil;
     self.taskGroupRemainingTimeLabel = nil;
-    
-    self.subTasksLabel = nil;
     
     self.subTask1StopButton = nil;
     self.subTask1ProgressView = nil;
@@ -90,14 +72,7 @@
 {
     [super viewDidLoad];
     
-    // Task
-    [self.taskStartButton addTarget:self 
-                             action:@selector(taskStartButtonClicked:) 
-                   forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.taskStopButton addTarget:self 
-                            action:@selector(taskStopButtonClicked:) 
-                  forControlEvents:UIControlEventTouchUpInside];
+    // Task    
     self.taskStopButton.hidden = YES;
     
     self.taskProgressView.hidden = YES;
@@ -105,13 +80,6 @@
     self.taskRemainingTimeLabel.hidden = YES;
     
     // Task group
-    [self.taskGroupStartButton addTarget:self 
-                                  action:@selector(taskGroupStartButtonClicked:) 
-                        forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.taskGroupStopButton addTarget:self 
-                                 action:@selector(taskGroupStopButtonClicked:) 
-                       forControlEvents:UIControlEventTouchUpInside];
     self.taskGroupStopButton.hidden = YES;
     
     self.taskGroupProgressView.hidden = YES;
@@ -119,9 +87,6 @@
     self.taskGroupRemainingTimeLabel.hidden = YES;
     
     // Sub-task 1
-    [self.subTask1StopButton addTarget:self 
-                                action:@selector(subTask1StopButtonClicked:) 
-                      forControlEvents:UIControlEventTouchUpInside];
     self.subTask1StopButton.hidden = YES;
     
     self.subTask1ProgressView.hidden = YES;
@@ -129,9 +94,6 @@
     self.subTask1RemainingTimeLabel.hidden = YES;
     
     // Sub-task 2
-    [self.subTask2StopButton addTarget:self 
-                                action:@selector(subTask2StopButtonClicked:) 
-                      forControlEvents:UIControlEventTouchUpInside];
     self.subTask2StopButton.hidden = YES;
     
     self.subTask2ProgressView.hidden = YES;
@@ -139,9 +101,6 @@
     self.subTask2RemainingTimeLabel.hidden = YES;
     
     // Sub-task 3
-    [self.subTask3StopButton addTarget:self 
-                                action:@selector(subTask3StopButtonClicked:) 
-                      forControlEvents:UIControlEventTouchUpInside];
     self.subTask3StopButton.hidden = YES;
     
     self.subTask3ProgressView.hidden = YES;
@@ -168,8 +127,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize taskLabel = m_taskLabel;
-
 @synthesize taskStartButton = m_taskStartButton;
 
 @synthesize taskStopButton = m_taskStopButton;
@@ -180,8 +137,6 @@
 
 @synthesize taskRemainingTimeLabel = m_taskRemainingTimeLabel;
 
-@synthesize taskGroupLabel = m_taskGroupLabel;
-
 @synthesize taskGroupStartButton = m_taskGroupStartButton;
 
 @synthesize taskGroupStopButton = m_taskGroupStopButton;
@@ -191,8 +146,6 @@
 @synthesize taskGroupRemainingTimeEstimateLabel = m_taskGroupRemainingTimeEstimateLabel;
 
 @synthesize taskGroupRemainingTimeLabel = m_taskGroupRemainingTimeLabel;
-
-@synthesize subTasksLabel = m_subTasksLabel;
 
 @synthesize subTask1StopButton = m_subTask1StopButton;
 
@@ -432,7 +385,7 @@
 
 #pragma mark Event callbacks
 
-- (void)taskStartButtonClicked:(id)sender
+- (IBAction)taskStartButtonClicked:(id)sender
 {
     self.taskStartButton.hidden = YES;
     
@@ -442,14 +395,14 @@
     [[HLSTaskManager defaultManager] submitTask:sleepTask];
 }
 
-- (void)taskStopButtonClicked:(id)sender
+- (IBAction)taskStopButtonClicked:(id)sender
 {
     self.taskStopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_task"];
 }
 
-- (void)taskGroupStartButtonClicked:(id)sender
+- (IBAction)taskGroupStartButtonClicked:(id)sender
 {
     self.taskGroupStartButton.hidden = YES;
     
@@ -479,28 +432,28 @@
     [[HLSTaskManager defaultManager] submitTaskGroup:taskGroup];
 }
 
-- (void)taskGroupStopButtonClicked:(id)sender
+- (IBAction)taskGroupStopButtonClicked:(id)sender
 {
     self.taskGroupStopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTaskGroupsWithTag:@"TG_taskGroup"];
 }
 
-- (void)subTask1StopButtonClicked:(id)sender
+- (IBAction)subTask1StopButtonClicked:(id)sender
 {
     self.subTask1StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask1"];
 }
 
-- (void)subTask2StopButtonClicked:(id)sender
+- (IBAction)subTask2StopButtonClicked:(id)sender
 {
     self.subTask2StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask2"];    
 }
 
-- (void)subTask3StopButtonClicked:(id)sender
+- (IBAction)subTask3StopButtonClicked:(id)sender
 {
     self.subTask3StopButton.hidden = YES;
     
@@ -514,21 +467,6 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
-    self.taskLabel.text = NSLocalizedString(@"Task", @"Task");
-    self.taskRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    [self.taskStartButton setTitle:NSLocalizedString(@"Start", @"Start") forState:UIControlStateNormal];
-    [self.taskStopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
-    self.taskGroupLabel.text = NSLocalizedString(@"Task group", @"Task group");
-    self.taskGroupRemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    [self.taskGroupStartButton setTitle:NSLocalizedString(@"Start", @"Start") forState:UIControlStateNormal];
-    [self.taskGroupStopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
-    self.subTasksLabel.text = NSLocalizedString(@"Sub-tasks", @"Sub-tasks");
-    self.subTask1RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    [self.subTask1StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
-    self.subTask2RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    [self.subTask2StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
-    self.subTask3RemainingTimeEstimateLabel.text = NSLocalizedString(@"Remaining time estimate", @"Remaining time estimate");
-    [self.subTask3StopButton setTitle:NSLocalizedString(@"Stop", @"Stop") forState:UIControlStateNormal];
 }
 
 @end

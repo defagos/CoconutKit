@@ -386,13 +386,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		6F4169E214BB4F3A006020E6 /* DynamicLocalizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DynamicLocalizationViewController;
-			sourceTree = "<group>";
-		};
 		6F4169E414BB4F98006020E6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +524,6 @@
 			isa = PBXGroup;
 			children = (
 				6FADE90514BA04E2007EE121 /* ContainerCustomizationViewController */,
-				6F4169E214BB4F3A006020E6 /* DynamicLocalizationViewController */,
 				6FADE90914BA04E2007EE121 /* FixedSizeViewController */,
 				6FADE90E14BA04E2007EE121 /* HeavyViewController */,
 				6FADE91214BA04E2007EE121 /* LandscapeOnlyViewController */,
@@ -678,7 +670,6 @@
 				6FADE93C14BA04E2007EE121 /* ActionSheet */,
 				6FADE94014BA04E2007EE121 /* Cursor */,
 				6FADE95014BA04E2007EE121 /* KenBurnsSlideshow */,
-				6FADE95414BA04E2007EE121 /* Strips */,
 				6FADE95514BA04E2007EE121 /* TableViewCells */,
 				6FADE96314BA04E2007EE121 /* TextFields */,
 			);
@@ -725,13 +716,6 @@
 				6FADE95314BA04E2007EE121 /* KenBurnsSlideshowDemoViewController.xib */,
 			);
 			path = KenBurnsSlideshow;
-			sourceTree = "<group>";
-		};
-		6FADE95414BA04E2007EE121 /* Strips */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Strips;
 			sourceTree = "<group>";
 		};
 		6FADE95514BA04E2007EE121 /* TableViewCells */ = {

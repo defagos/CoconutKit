@@ -48,23 +48,17 @@
 {
     [super releaseViews];
     
-    self.firstNameLabel = nil;
     self.firstNameTextField = nil;
     self.firstNameErrorLabel = nil;
-    self.lastNameLabel = nil;
     self.lastNameTextField = nil;
     self.lastNameErrorLabel = nil;
-    self.emailLabel = nil;
     self.emailTextField = nil;
     self.emailErrorLabel = nil;
     self.birthdateLabel = nil;
     self.birthdateTextField = nil;
     self.birthdateErrorLabel = nil;
-    self.nbrChildrenLabel = nil;
     self.nbrChildrenTextField = nil;
     self.nbrChildrenErrorLabel = nil;
-    self.resetModelButton = nil;
-    self.resetTextFieldsButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -83,19 +77,13 @@
     [self reloadData];
 }
 
-@synthesize firstNameLabel = m_firstNameLabel;
-
 @synthesize firstNameTextField = m_firstNameTextField;
 
 @synthesize firstNameErrorLabel = m_firstNameErrorLabel;
 
-@synthesize lastNameLabel = m_lastNameLabel;
-
 @synthesize lastNameTextField = m_lastNameTextField;
 
 @synthesize lastNameErrorLabel = m_lastNameErrorLabel;
-
-@synthesize emailLabel = m_emailLabel;
 
 @synthesize emailTextField = m_emailTextField;
 
@@ -107,15 +95,9 @@
 
 @synthesize birthdateErrorLabel = m_birthdateErrorLabel;
 
-@synthesize nbrChildrenLabel = m_nbrChildrenLabel;
-
 @synthesize nbrChildrenTextField = m_nbrChildrenTextField;
 
 @synthesize nbrChildrenErrorLabel = m_nbrChildrenErrorLabel;
-
-@synthesize resetModelButton = m_resetModelButton;
-
-@synthesize resetTextFieldsButton = m_resetTextFieldsButton;
 
 @synthesize dateFormatter = m_dateFormatter;
 
@@ -260,13 +242,7 @@
 {
     [super localize];
     
-    self.firstNameLabel.text = NSLocalizedString(@"First Name", @"First Name");
-    self.lastNameLabel.text = NSLocalizedString(@"Last Name", @"Last Name");
-    self.emailLabel.text = NSLocalizedString(@"E-mail", @"E-mail");
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    self.nbrChildrenLabel.text = NSLocalizedString(@"Number of children", @"Number of children");
-    [self.resetModelButton setTitle:NSLocalizedString(@"Reset model fields", @"Reset model fields") forState:UIControlStateNormal];
-    [self.resetTextFieldsButton setTitle:NSLocalizedString(@"Reset text fields", @"Reset text fields") forState:UIControlStateNormal];
     
     // The date formatter is also localized!
     // TODO: Does not work yet. Try to switch languages!

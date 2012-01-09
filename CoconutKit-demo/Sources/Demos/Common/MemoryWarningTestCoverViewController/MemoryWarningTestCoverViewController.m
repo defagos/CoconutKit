@@ -31,14 +31,11 @@
     [super releaseViews];
     
     self.closeBarButtonItem = nil;
-    self.instructionLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize closeBarButtonItem = m_closeBarButtonItem;
-
-@synthesize instructionLabel = m_instructionLabel;
 
 #pragma mark View lifecycle
 
@@ -76,8 +73,6 @@
     
     self.title = @"MemoryWarningTestCoverViewController";
     self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
-    self.instructionLabel.text = NSLocalizedString(@"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct",
-                                                   @"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct");
 }
 
 @end

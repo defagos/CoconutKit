@@ -40,7 +40,6 @@
 {
     [super releaseViews];
     
-    self.instructionLabel = nil;
     self.textField1 = nil;
     self.textField2 = nil;
     self.textField3 = nil;
@@ -79,8 +78,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize instructionLabel = m_instructionLabel;
-
 @synthesize textField1 = m_textField1;
 
 @synthesize textField2 = m_textField2;
@@ -103,9 +100,8 @@
 - (void)localize
 {
     [super localize];
-    
-    self.instructionLabel.text = NSLocalizedString(@"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct", 
-                                                   @"Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct");
+
+    // Just to suppress localization warning
 }
 
 @end

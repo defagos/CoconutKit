@@ -23,19 +23,6 @@
 
 - (void)displayContentViewController:(UIViewController *)viewController;
 
-- (void)lifeCycleTestSampleButtonClicked:(id)sender;
-- (void)stretchableSampleButtonClicked:(id)sender;
-- (void)fixedSizeSampleButtonClicked:(id)sender;
-- (void)portraitOnlyButtonClicked:(id)sender;
-- (void)landscapeOnlyButtonClicked:(id)sender;
-- (void)hideWithModalButtonClicked:(id)sender;
-- (void)orientationClonerButtonClicked:(id)sender;
-- (void)containerCustomizationButtonClicked:(id)sender;
-- (void)transparentButtonClicked:(id)sender;
-- (void)testInModalButtonClicked:(id)sender;
-- (void)popButtonClicked:(id)sender;
-- (void)forwardingPropertiesSwitchValueChanged:(id)sender;
-
 @end
 
 @implementation StackDemoViewController
@@ -69,52 +56,13 @@
 { 
     [super releaseViews];
     
-    self.lifecycleTestSampleButton = nil;
-    self.stretchableSampleButton = nil;
-    self.fixedSizeSampleButton = nil;
-    self.portraitOnlyButton = nil;
-    self.landscapeOnlyButton = nil;
-    self.orientationClonerButton = nil;
-    self.containerCustomizationButton = nil;
-    self.transparentButton = nil;
-    self.testInModalButton = nil;
-    self.popButton = nil;
-    self.hideWithModalButton = nil;
-    self.transitionLabel = nil;
     self.transitionPickerView = nil;
-    self.forwardingPropertiesLabel = nil;
     self.forwardingPropertiesSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize lifecycleTestSampleButton = m_lifecycleTestSampleButton;
-
-@synthesize stretchableSampleButton = m_stretchableSampleButton;
-
-@synthesize fixedSizeSampleButton = m_fixedSizeSampleButton;
-
-@synthesize portraitOnlyButton = m_portraitOnlyButton;
-
-@synthesize landscapeOnlyButton = m_landscapeOnlyButton;
-
-@synthesize orientationClonerButton = m_orientationClonerButton;
-
-@synthesize containerCustomizationButton = m_containerCustomizationButton;
-
-@synthesize transparentButton = m_transparentButton;
-
-@synthesize testInModalButton = m_testInModalButton;
-
-@synthesize popButton = m_popButton;
-
-@synthesize hideWithModalButton = m_hideWithModalButton;
-
-@synthesize transitionLabel = m_transitionLabel;
-
 @synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize forwardingPropertiesLabel = m_forwardingPropertiesLabel;
 
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
@@ -123,59 +71,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.lifecycleTestSampleButton addTarget:self
-                                       action:@selector(lifeCycleTestSampleButtonClicked:)
-                             forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.stretchableSampleButton addTarget:self
-                                     action:@selector(stretchableSampleButtonClicked:)
-                           forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.fixedSizeSampleButton addTarget:self
-                                   action:@selector(fixedSizeSampleButtonClicked:)
-                         forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.portraitOnlyButton addTarget:self
-                                action:@selector(portraitOnlyButtonClicked:)
-                      forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.landscapeOnlyButton addTarget:self
-                                 action:@selector(landscapeOnlyButtonClicked:)
-                       forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.orientationClonerButton addTarget:self
-                                     action:@selector(orientationClonerButtonClicked:)
-                           forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.containerCustomizationButton addTarget:self
-                                          action:@selector(containerCustomizationButtonClicked:)
-                                forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.transparentButton addTarget:self
-                               action:@selector(transparentButtonClicked:)
-                     forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.testInModalButton addTarget:self
-                               action:@selector(testInModalButtonClicked:)
-                     forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.popButton addTarget:self
-                       action:@selector(popButtonClicked:)
-             forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.hideWithModalButton addTarget:self
-                                 action:@selector(hideWithModalButtonClicked:)
-                       forControlEvents:UIControlEventTouchUpInside];
-    
+        
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
-    [self.forwardingPropertiesSwitch addTarget:self
-                                        action:@selector(forwardingPropertiesSwitchValueChanged:)
-                              forControlEvents:UIControlEventValueChanged];    
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -190,43 +91,43 @@
 
 #pragma mark Event callbacks
 
-- (void)lifeCycleTestSampleButtonClicked:(id)sender
+- (IBAction)lifeCycleTestSampleButtonClicked:(id)sender
 {
     LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [self displayContentViewController:lifecycleTestViewController];
 }
 
-- (void)stretchableSampleButtonClicked:(id)sender
+- (IBAction)stretchableSampleButtonClicked:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
     [self displayContentViewController:stretchableViewController];
 }
 
-- (void)fixedSizeSampleButtonClicked:(id)sender
+- (IBAction)fixedSizeSampleButtonClicked:(id)sender
 {
     FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
     [self displayContentViewController:fixedSizeViewController];
 }
 
-- (void)portraitOnlyButtonClicked:(id)sender
+- (IBAction)portraitOnlyButtonClicked:(id)sender
 {
     PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
     [self displayContentViewController:portraitOnlyViewController];
 }
 
-- (void)landscapeOnlyButtonClicked:(id)sender
+- (IBAction)landscapeOnlyButtonClicked:(id)sender
 {
     LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
     [self displayContentViewController:landscapeOnlyViewController];
 }
 
-- (void)hideWithModalButtonClicked:(id)sender
+- (IBAction)hideWithModalButtonClicked:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestViewController animated:YES];
 }
 
-- (void)orientationClonerButtonClicked:(id)sender
+- (IBAction)orientationClonerButtonClicked:(id)sender
 {
     OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
                                                                          initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
@@ -235,32 +136,32 @@
     [self displayContentViewController:orientationClonerViewController];
 }
 
-- (void)transparentButtonClicked:(id)sender
+- (IBAction)transparentButtonClicked:(id)sender
 {
     TransparentViewController *transparentViewController = [[[TransparentViewController alloc] init] autorelease];
     [self displayContentViewController:transparentViewController];
 }
 
-- (void)testInModalButtonClicked:(id)sender
+- (IBAction)testInModalButtonClicked:(id)sender
 {
     RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
     [self presentModalViewController:stackController animated:YES];
 }
 
-- (void)containerCustomizationButtonClicked:(id)sender
+- (IBAction)containerCustomizationButtonClicked:(id)sender
 {
     ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
     [self displayContentViewController:containerCustomizationViewController];
 }
 
-- (void)popButtonClicked:(id)sender
+- (IBAction)popButtonClicked:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     [stackController popViewController];
 }
 
-- (void)forwardingPropertiesSwitchValueChanged:(id)sender
+- (IBAction)forwardingPropertiesSwitchValueChanged:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
@@ -376,19 +277,7 @@
 {
     [super localize];
     
-    [self.lifecycleTestSampleButton setTitle:NSLocalizedString(@"Lifecycle test", @"Lifecycle test") forState:UIControlStateNormal];
-    [self.stretchableSampleButton setTitle:NSLocalizedString(@"Stretchable", @"Stretchable") forState:UIControlStateNormal];
-    [self.fixedSizeSampleButton setTitle:NSLocalizedString(@"Fixed size", @"Fixed size") forState:UIControlStateNormal];
-    [self.portraitOnlyButton setTitle:NSLocalizedString(@"Portrait only", @"Portrait only") forState:UIControlStateNormal];
-    [self.landscapeOnlyButton setTitle:NSLocalizedString(@"Landscape only", @"Landscape only") forState:UIControlStateNormal];
-    [self.orientationClonerButton setTitle:@"HLSOrientationCloner" forState:UIControlStateNormal];
-    [self.containerCustomizationButton setTitle:NSLocalizedString(@"Container customization", @"Container customization") forState:UIControlStateNormal];
-    [self.transparentButton setTitle:NSLocalizedString(@"Transparent", @"Transparent") forState:UIControlStateNormal];
-    [self.testInModalButton setTitle:NSLocalizedString(@"Test in modal", @"Test in modal") forState:UIControlStateNormal];
-    [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
-    [self.hideWithModalButton setTitle:NSLocalizedString(@"Hide with modal", @"Hide with modal") forState:UIControlStateNormal];
-    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
-    self.forwardingPropertiesLabel.text = NSLocalizedString(@"Forwarding properties", @"Forwarding properties");
+    // Just to suppress localization warning
 }
 
 @end

@@ -9,12 +9,11 @@
 @interface KenBurnsSlideshowDemoViewController : HLSViewController {
 @private
     HLSKenBurnsSlideshow *m_slideshow;
-    UIButton *m_playButton;
-    UIButton *m_stopButton;
 }
 
 @property (nonatomic, retain) IBOutlet HLSKenBurnsSlideshow *slideshow;
-@property (nonatomic, retain) IBOutlet UIButton *playButton;
-@property (nonatomic, retain) IBOutlet UIButton *stopButton;
+
+- (IBAction)play:(id)sender;
+- (IBAction)stop:(id)sender;
 
 @end

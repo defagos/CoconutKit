@@ -34,7 +34,7 @@
 "Dynamic localization"="Dynamic localization";
 "E-mail"="E-mail";
 "Error"="Error";
-"First Name"="First Name";
+"First name"="First name";
 "Fixed size"="Fixed size";
 "Formatting error"="Formatting error";
 "Forward properties"="Forward properties";
@@ -50,7 +50,8 @@
 "Label with some missing translation"="Label with some missing translation";
 "Landscape only"="Landscape only";
 "Language"="Language";
-"Last Name"="Last Name";
+"Last name"="Last name";
+"Lifecycle test"="Lifecycle test";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
 "Missing city"="Missing city";
 "Missing country"="Missing country";

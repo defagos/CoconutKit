@@ -70,9 +70,6 @@
     [super localize];
     
     self.title = @"WizardDemoViewController";
-    [self.previousButton setTitle:NSLocalizedString(@"Previous", @"Previous") forState:UIControlStateNormal];
-    [self.nextButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
-    [self.doneButton setTitle:NSLocalizedString(@"Done", @"Done") forState:UIControlStateNormal];
 }
 
 @end

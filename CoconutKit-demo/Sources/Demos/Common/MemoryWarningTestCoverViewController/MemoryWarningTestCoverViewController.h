@@ -12,10 +12,8 @@
 @interface MemoryWarningTestCoverViewController : HLSViewController {
 @private
     UIBarButtonItem *m_closeBarButtonItem;
-    UILabel *m_instructionLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *closeBarButtonItem;
-@property (nonatomic, retain) IBOutlet UILabel *instructionLabel;
 
 @end

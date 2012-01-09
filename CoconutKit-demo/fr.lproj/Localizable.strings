@@ -34,7 +34,7 @@
 "Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
 "Error"="Erreur";
-"First Name"="Prénom";
+"First name"="Prénom";
 "Fixed size"="Taille fixe";
 "Formatting error"="Erreur de formattage";
 "Forward properties"="Propager les propriétés";
@@ -49,7 +49,8 @@
 "Ken Burns effect"="Effet Ken Burns";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
-"Last Name"="Nom";
+"Last name"="Nom";
+"Lifecycle test"="Test du cycle de vie";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";

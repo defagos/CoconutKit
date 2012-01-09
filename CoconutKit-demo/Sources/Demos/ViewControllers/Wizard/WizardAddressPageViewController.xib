@@ -49,7 +49,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;street&gt;</string>
+						<string key="IBUIText">LS/Street</string>
 						<object class="NSColor" key="IBUITextColor" id="703636709">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -150,7 +150,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;city&gt;</string>
+						<string key="IBUIText">LS/City</string>
 						<reference key="IBUITextColor" ref="703636709"/>
 						<reference key="IBUIHighlightedColor" ref="524110732"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -222,7 +222,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;state&gt;</string>
+						<string key="IBUIText">LS/State</string>
 						<reference key="IBUITextColor" ref="703636709"/>
 						<reference key="IBUIHighlightedColor" ref="524110732"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -294,7 +294,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;country&gt;</string>
+						<string key="IBUIText">LS/Country</string>
 						<reference key="IBUITextColor" ref="703636709"/>
 						<reference key="IBUIHighlightedColor" ref="524110732"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -335,7 +335,7 @@
 						<string key="NSFrame">{{392, 428}, {271, 21}}</string>
 						<reference key="NSSuperview" ref="958803835"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="159985334"/>
+						<reference key="NSNextKeyView" ref="974467966"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -360,14 +360,14 @@
 						<string key="NSFrame">{{207, 616}, {315, 37}}</string>
 						<reference key="NSSuperview" ref="958803835"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="159985334"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;resetModel&gt;</string>
+						<string key="IBUINormalTitle">LS/Reset model fields</string>
 						<reference key="IBUIHighlightedTitleColor" ref="524110732"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -393,14 +393,14 @@
 						<string key="NSFrame">{{207, 661}, {315, 37}}</string>
 						<reference key="NSSuperview" ref="958803835"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="974467966"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;resetTextFields&gt;</string>
+						<string key="IBUINormalTitle">LS/Reset text fields</string>
 						<reference key="IBUIHighlightedTitleColor" ref="524110732"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -435,14 +435,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">streetLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="579060614"/>
-					</object>
-					<int key="connectionID">37</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">streetTextField</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="129068697"/>
@@ -451,35 +443,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cityLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="652984344"/>
-					</object>
-					<int key="connectionID">39</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">stateTextField</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="720736353"/>
 					</object>
 					<int key="connectionID">42</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">stateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="378549063"/>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">countryLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="175096984"/>
-					</object>
-					<int key="connectionID">45</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -496,22 +464,6 @@
 						<reference key="destination" ref="673109148"/>
 					</object>
 					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">resetModelButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="974467966"/>
-					</object>
-					<int key="connectionID">56</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">resetTextFieldsButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="159985334"/>
-					</object>
-					<int key="connectionID">57</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -744,27 +696,17 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cityErrorLabel">UILabel</string>
-						<string key="cityLabel">UILabel</string>
 						<string key="cityTextField">HLSTextField</string>
 						<string key="countryErrorLabel">UILabel</string>
-						<string key="countryLabel">UILabel</string>
 						<string key="countryTextField">HLSTextField</string>
-						<string key="resetModelButton">UIButton</string>
-						<string key="resetTextFieldsButton">UIButton</string>
 						<string key="stateErrorLabel">UILabel</string>
-						<string key="stateLabel">UILabel</string>
 						<string key="stateTextField">HLSTextField</string>
 						<string key="streetErrorLabel">UILabel</string>
-						<string key="streetLabel">UILabel</string>
 						<string key="streetTextField">HLSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="cityErrorLabel">
 							<string key="name">cityErrorLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cityLabel">
-							<string key="name">cityLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="cityTextField">
@@ -775,28 +717,12 @@
 							<string key="name">countryErrorLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="countryLabel">
-							<string key="name">countryLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="countryTextField">
 							<string key="name">countryTextField</string>
 							<string key="candidateClassName">HLSTextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="resetModelButton">
-							<string key="name">resetModelButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="resetTextFieldsButton">
-							<string key="name">resetTextFieldsButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="stateErrorLabel">
 							<string key="name">stateErrorLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="stateLabel">
-							<string key="name">stateLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="stateTextField">
@@ -805,10 +731,6 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="streetErrorLabel">
 							<string key="name">streetErrorLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="streetLabel">
-							<string key="name">streetLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="streetTextField">

@@ -53,7 +53,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;firstName&gt;</string>
+						<string key="IBUIText">LS/First name</string>
 						<object class="NSColor" key="IBUITextColor" id="796383632">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -154,7 +154,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;lastName&gt;</string>
+						<string key="IBUIText">LS/Last name</string>
 						<reference key="IBUITextColor" ref="796383632"/>
 						<reference key="IBUIHighlightedColor" ref="760516111"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -226,7 +226,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;email&gt;</string>
+						<string key="IBUIText">LS/E-mail</string>
 						<reference key="IBUITextColor" ref="796383632"/>
 						<reference key="IBUIHighlightedColor" ref="760516111"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -370,7 +370,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;nbrChildren&gt;</string>
+						<string key="IBUIText">LS/Number of children</string>
 						<reference key="IBUITextColor" ref="796383632"/>
 						<reference key="IBUIHighlightedColor" ref="760516111"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -443,7 +443,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;resetModel&gt;</string>
+						<string key="IBUINormalTitle">LS/Reset model fields</string>
 						<reference key="IBUIHighlightedTitleColor" ref="760516111"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -469,13 +469,14 @@
 						<string key="NSFrame">{{207, 661}, {315, 37}}</string>
 						<reference key="NSSuperview" ref="3297064"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;resetTextFields&gt;</string>
+						<string key="IBUINormalTitle">LS/Reset text fields</string>
 						<reference key="IBUIHighlightedTitleColor" ref="760516111"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -535,14 +536,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="594825964"/>
-					</object>
-					<int key="connectionID">106</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">emailTextField</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="1007833323"/>
@@ -556,14 +549,6 @@
 						<reference key="destination" ref="350501652"/>
 					</object>
 					<int key="connectionID">108</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">firstNameLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="652961285"/>
-					</object>
-					<int key="connectionID">109</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -583,14 +568,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lastNameLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="786453296"/>
-					</object>
-					<int key="connectionID">112</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lastNameTextField</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="632174595"/>
@@ -607,35 +584,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">nbrChildrenLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="145890376"/>
-					</object>
-					<int key="connectionID">115</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">nbrChildrenTextField</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="264947978"/>
 					</object>
 					<int key="connectionID">116</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">resetModelButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="463163235"/>
-					</object>
-					<int key="connectionID">117</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">resetTextFieldsButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="344407752"/>
-					</object>
-					<int key="connectionID">118</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -937,19 +890,13 @@
 							<string>birthdateLabel</string>
 							<string>birthdateTextField</string>
 							<string>emailErrorLabel</string>
-							<string>emailLabel</string>
 							<string>emailTextField</string>
 							<string>firstNameErrorLabel</string>
-							<string>firstNameLabel</string>
 							<string>firstNameTextField</string>
 							<string>lastNameErrorLabel</string>
-							<string>lastNameLabel</string>
 							<string>lastNameTextField</string>
 							<string>nbrChildrenErrorLabel</string>
-							<string>nbrChildrenLabel</string>
 							<string>nbrChildrenTextField</string>
-							<string>resetModelButton</string>
-							<string>resetTextFieldsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -957,19 +904,13 @@
 							<string>UILabel</string>
 							<string>HLSTextField</string>
 							<string>UILabel</string>
+							<string>HLSTextField</string>
 							<string>UILabel</string>
 							<string>HLSTextField</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>HLSTextField</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>HLSTextField</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>HLSTextField</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -980,19 +921,13 @@
 							<string>birthdateLabel</string>
 							<string>birthdateTextField</string>
 							<string>emailErrorLabel</string>
-							<string>emailLabel</string>
 							<string>emailTextField</string>
 							<string>firstNameErrorLabel</string>
-							<string>firstNameLabel</string>
 							<string>firstNameTextField</string>
 							<string>lastNameErrorLabel</string>
-							<string>lastNameLabel</string>
 							<string>lastNameTextField</string>
 							<string>nbrChildrenErrorLabel</string>
-							<string>nbrChildrenLabel</string>
 							<string>nbrChildrenTextField</string>
-							<string>resetModelButton</string>
-							<string>resetTextFieldsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1013,19 +948,11 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">emailLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">emailTextField</string>
 								<string key="candidateClassName">HLSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">firstNameErrorLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">firstNameLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1037,10 +964,6 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">lastNameLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">lastNameTextField</string>
 								<string key="candidateClassName">HLSTextField</string>
 							</object>
@@ -1049,20 +972,8 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">nbrChildrenLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">nbrChildrenTextField</string>
 								<string key="candidateClassName">HLSTextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">resetModelButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">resetTextFieldsButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>
 					</object>

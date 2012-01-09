@@ -20,17 +20,6 @@
     return self;
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.instructionLabel = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize instructionLabel = m_instructionLabel;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -117,9 +106,6 @@
     [super localize];
     
     self.title = @"LifeCycleTestViewController";
-    
-    self.instructionLabel.text = NSLocalizedString(@"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)",
-                                                   @"Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)");
 }
 
 @end

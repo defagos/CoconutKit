@@ -1037,7 +1037,6 @@
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
 				6FADE84514BA04C8007EE121 /* KenBurnsSlideshow */,
-				6FADE84914BA04C8007EE121 /* Strips */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6FADE85814BA04C9007EE121 /* TextFields */,
 			);
@@ -1084,13 +1083,6 @@
 				6FADE84814BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.xib */,
 			);
 			path = KenBurnsSlideshow;
-			sourceTree = "<group>";
-		};
-		6FADE84914BA04C8007EE121 /* Strips */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Strips;
 			sourceTree = "<group>";
 		};
 		6FADE84A14BA04C8007EE121 /* TableViewCells */ = {

@@ -17,8 +17,6 @@
 - (void)updateSkinRandomly;
 - (void)restoreOriginalSkin;
 
-- (void)changeButtonClicked:(id)sender;
-
 @end
 
 @implementation ContainerCustomizationViewController
@@ -37,29 +35,17 @@
 {
     [super releaseViews];
     
-    self.changeButton = nil;
     self.originalNavigationBarTintColor = nil;
     self.originalRightBarButtonItem = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize changeButton = m_changeButton;
-
 @synthesize originalNavigationBarTintColor = m_originalNavigationBarTintColor;
 
 @synthesize originalRightBarButtonItem = m_originalRightBarButtonItem;
 
 #pragma mark View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self.changeButton addTarget:self
-                          action:@selector(changeButtonClicked:)
-                forControlEvents:UIControlEventTouchUpInside];    
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -124,7 +110,7 @@
 
 #pragma mark Event callbacks
 
-- (void)changeButtonClicked:(id)sender
+- (IBAction)changeButtonClicked:(id)sender
 {
     [self updateSkinRandomly];
 }
@@ -136,7 +122,6 @@
     [super localize];
     
     self.title = @"ContainerCustomizationViewController";
-    [self.changeButton setTitle:NSLocalizedString(@"Change", @"Change") forState:UIControlStateNormal];
 }
 
 @end

@@ -13,10 +13,6 @@
 @property (nonatomic, retain) HLSAnimation *animation;
 @property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
-- (void)playForwardButtonClicked:(id)sender;
-- (void)playBackwardButtonClicked:(id)sender;
-- (void)cancelButtonClicked:(id)sender;
-
 @end
 
 @implementation SingleViewAnimationDemoViewController
@@ -45,9 +41,7 @@
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
     self.cancelButton = nil;
-    self.animatedLabel = nil;
     self.animatedSwitch = nil;
-    self.blockingLabel = nil;
     self.blockingSwitch = nil;
 }
 
@@ -57,18 +51,7 @@
 {
     [super viewDidLoad];
     
-    [self.playForwardButton addTarget:self 
-                         action:@selector(playForwardButtonClicked:)
-               forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.playBackwardButton addTarget:self 
-                        action:@selector(playBackwardButtonClicked:)
-              forControlEvents:UIControlEventTouchUpInside];
     self.playBackwardButton.hidden = YES;
-    
-    [self.cancelButton addTarget:self
-                          action:@selector(cancelButtonClicked:)
-                forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.hidden = YES;
     
     self.animatedSwitch.on = YES;
@@ -85,11 +68,7 @@
 
 @synthesize cancelButton = m_cancelButton;
 
-@synthesize animatedLabel = m_animatedLabel;
-
 @synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize blockingLabel = m_blockingLabel;
 
 @synthesize blockingSwitch = m_blockingSwitch;
 
@@ -110,7 +89,7 @@
 
 #pragma mark Event callbacks
 
-- (void)playForwardButtonClicked:(id)sender
+- (IBAction)playForwardButtonClicked:(id)sender
 {
     self.playForwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
@@ -166,7 +145,7 @@
     [self.animation playAnimated:self.animatedSwitch.on];
 }
 
-- (void)playBackwardButtonClicked:(id)sender
+- (IBAction)playBackwardButtonClicked:(id)sender
 {
     self.playBackwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
@@ -177,7 +156,7 @@
     [self.reverseAnimation playAnimated:self.animatedSwitch.on];
 }
 
-- (void)cancelButtonClicked:(id)sender
+- (IBAction)cancelButtonClicked:(id)sender
 {
     if (self.animation.running) {
         self.playBackwardButton.hidden = NO;
@@ -193,17 +172,17 @@
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
+- (IBAction)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (IBAction)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Animated = %@", HLSStringFromBool(animated));
 }
 
-- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
+- (IBAction)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
     
@@ -225,11 +204,6 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
-    [self.playForwardButton setTitle:NSLocalizedString(@"Play forward", @"Play forward") forState:UIControlStateNormal];
-    [self.playBackwardButton setTitle:NSLocalizedString(@"Play backward", @"Play backward") forState:UIControlStateNormal];
-    [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"Cancel") forState:UIControlStateNormal];
-    self.animatedLabel.text = NSLocalizedString(@"Animated", @"Animated");
-    self.blockingLabel.text = NSLocalizedString(@"Blocking", @"Blocking");
 }
 
 @end
