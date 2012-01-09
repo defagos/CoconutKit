@@ -10,7 +10,9 @@
 
 #import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
+#import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 
 HLSLinkCategory(UILabel_HLSDynamicLocalization)
