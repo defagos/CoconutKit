@@ -37,7 +37,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="589436624">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">319</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,6 +46,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrameSize">{773, 20}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1041203929"/>
 						<string key="NSReuseIdentifierKey">_NS:195</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="462043543">
@@ -59,6 +60,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{152, 641}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="84458871"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -95,6 +97,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{400, 641}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="54487450"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -116,6 +119,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{152, 269}, {465, 21}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="122962429"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -146,6 +150,7 @@
 						<int key="NSvFlags">303</int>
 						<string key="NSFrame">{{152, 332}, {465, 216}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="747078023"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
@@ -155,12 +160,15 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{0, 960}, {773, 20}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:195</string>
 						<reference key="IBUIBackgroundColor" ref="462043543"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</object>
 				<string key="NSFrameSize">{768, 980}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="341156522"/>
 				<reference key="IBUIBackgroundColor" ref="24430831"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -343,11 +351,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>pop:</string>
 							<string>popButtonClicked:</string>
+							<string>push:</string>
 							<string>pushButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -356,13 +368,23 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>pop:</string>
 							<string>popButtonClicked:</string>
+							<string>push:</string>
 							<string>pushButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
+								<string key="name">pop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">popButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">push:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
