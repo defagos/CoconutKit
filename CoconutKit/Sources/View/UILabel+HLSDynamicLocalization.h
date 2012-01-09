@@ -51,7 +51,7 @@
 
 /**
  * When set to YES, reveals those labels for which a localization string is missing (for the current language)
- * (font color red, background color yellow)
+ * (yellow background)
  */
 + (void)setMissingLocalizationsVisible:(BOOL)visible;
 
