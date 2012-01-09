@@ -22,7 +22,11 @@
 		6F1AF861142B046600925B7A /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */; };
 		6F1AF862142B046600925B7A /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */; };
 		6F1AF863142B046600925B7A /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */; };
+		6F4169E814BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169E714BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m */; };
+		6F4169EA14BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169E914BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
+		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
+		6F507D7014BB743000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6FADE99114BA04E3007EE121 /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE8E414BA04E2007EE121 /* CoconutKitDemoData.xcdatamodeld */; };
 		6FADE99214BA04E3007EE121 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE8E714BA04E2007EE121 /* ProximaNova-Bold.otf */; };
 		6FADE99314BA04E3007EE121 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE8E814BA04E2007EE121 /* ProximaNova-Regular.otf */; };
@@ -137,7 +141,12 @@
 		6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
 		6F1AF853142B046600925B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F1AF855142B046600925B7A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F4169E614BB4FAF006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F4169E714BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F4169E914BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6F507D6D14BB742800D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = "<group>"; };
+		6F507D6F14BB743000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6FADE8E514BA04E2007EE121 /* CoconutKitDemoData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitDemoData.xcdatamodel; sourceTree = "<group>"; };
 		6FADE8E714BA04E2007EE121 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		6FADE8E814BA04E2007EE121 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
@@ -320,6 +329,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6F507D6C14BB742800D54088 /* DemoTable.strings */,
 				8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */,
 				32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -374,6 +384,31 @@
 				6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F4169E214BB4F3A006020E6 /* DynamicLocalizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DynamicLocalizationViewController;
+			sourceTree = "<group>";
+		};
+		6F4169E414BB4F98006020E6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F4169E514BB4F98006020E6 /* DynamicLocalizationViewController */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6F4169E514BB4F98006020E6 /* DynamicLocalizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F4169E614BB4FAF006020E6 /* DynamicLocalizationDemoViewController.h */,
+				6F4169E714BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m */,
+				6F4169E914BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
 		6FADE8E214BA04E2007EE121 /* Resources */ = {
@@ -455,6 +490,7 @@
 			children = (
 				6FADE8FB14BA04E2007EE121 /* Animation */,
 				6FADE90414BA04E2007EE121 /* Common */,
+				6F4169E414BB4F98006020E6 /* Core */,
 				6FADE93214BA04E2007EE121 /* Task */,
 				6FADE93B14BA04E2007EE121 /* View */,
 				6FADE96814BA04E2007EE121 /* ViewControllers */,
@@ -495,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				6FADE90514BA04E2007EE121 /* ContainerCustomizationViewController */,
+				6F4169E214BB4F3A006020E6 /* DynamicLocalizationViewController */,
 				6FADE90914BA04E2007EE121 /* FixedSizeViewController */,
 				6FADE90E14BA04E2007EE121 /* HeavyViewController */,
 				6FADE91214BA04E2007EE121 /* LandscapeOnlyViewController */,
@@ -954,6 +991,9 @@
 				6FADE9E314BA04E3007EE121 /* WizardAddressPageViewController.xib in Resources */,
 				6FADE9E514BA04E3007EE121 /* WizardDemoViewController.xib in Resources */,
 				6FADE9E714BA04E3007EE121 /* WizardIdentityPageViewController.xib in Resources */,
+				6F4169EA14BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */,
+				6F507D7014BB743000D54088 /* DemoTable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,6 +1065,7 @@
 				6FADE9E914BA04E3007EE121 /* DemoErrors.m in Sources */,
 				6FADE9EA14BA04E3007EE121 /* _Person.m in Sources */,
 				6FADE9EB14BA04E3007EE121 /* Person.m in Sources */,
+				6F4169E814BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,6 +1079,15 @@
 				6F1AF855142B046600925B7A /* fr */,
 			);
 			name = CoconutKit_Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6F507D6C14BB742800D54088 /* DemoTable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F507D6D14BB742800D54088 /* fr */,
+				6F507D6F14BB743000D54088 /* en */,
+			);
+			name = DemoTable.strings;
 			sourceTree = "<group>";
 		};
 		6FBDA7A61303EE9B004B9617 /* Localizable.strings */ = {

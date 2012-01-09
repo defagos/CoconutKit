@@ -10,6 +10,10 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
+		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
+		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
+		6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7514BB75D900D54088 /* DemoTable.strings */; };
 		6FADE6B414BA04A7007EE121 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */; };
 		6FADE6B514BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6FADE6B614BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62214BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -182,6 +186,11 @@
 		1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
+		6F507D7214BB75D000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DemoTable.strings; sourceTree = "<group>"; };
+		6F507D7614BB75D900D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = DemoTable.strings; sourceTree = "<group>"; };
 		6FADE61D14BA04A6007EE121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE61F14BA04A6007EE121 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -523,6 +532,24 @@
 			name = CoconutKit;
 			sourceTree = "<group>";
 		};
+		6F4169EB14BB67D5006020E6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */,
+				6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */,
+				6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalizationViewController;
+			sourceTree = "<group>";
+		};
 		6FADE61A14BA04A6007EE121 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +850,7 @@
 			children = (
 				6FADE7F014BA04C8007EE121 /* Animation */,
 				6FADE7F914BA04C8007EE121 /* Common */,
+				6F4169EB14BB67D5006020E6 /* Core */,
 				6FADE82714BA04C8007EE121 /* Task */,
 				6FADE83014BA04C8007EE121 /* View */,
 				6FADE85D14BA04C9007EE121 /* ViewControllers */,
@@ -1236,6 +1264,7 @@
 		6FFE36311468FD9D00C02549 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				6F507D7114BB75D000D54088 /* DemoTable.strings */,
 				6FFE36321468FD9D00C02549 /* Localizable.strings */,
 			);
 			name = en.lproj;
@@ -1245,6 +1274,7 @@
 		6FFE36341468FD9D00C02549 /* fr.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				6F507D7514BB75D900D54088 /* DemoTable.strings */,
 				6FFE36351468FD9D00C02549 /* Localizable.strings */,
 			);
 			name = fr.lproj;
@@ -1371,6 +1401,9 @@
 				6FADE8D814BA04C9007EE121 /* WizardAddressPageViewController.xib in Resources */,
 				6FADE8DA14BA04C9007EE121 /* WizardDemoViewController.xib in Resources */,
 				6FADE8DC14BA04C9007EE121 /* WizardIdentityPageViewController.xib in Resources */,
+				6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */,
+				6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1501,12 +1534,29 @@
 				6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */,
 				6FADE8E014BA04C9007EE121 /* Person.m in Sources */,
 				6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
+				6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6F507D7114BB75D000D54088 /* DemoTable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F507D7214BB75D000D54088 /* en */,
+			);
+			name = DemoTable.strings;
+			sourceTree = "<group>";
+		};
+		6F507D7514BB75D900D54088 /* DemoTable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F507D7614BB75D900D54088 /* fr */,
+			);
+			name = DemoTable.strings;
+			sourceTree = "<group>";
+		};
 		6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

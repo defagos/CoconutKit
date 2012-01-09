@@ -1,0 +1,11 @@
+/* 
+  DemoTable.strings
+  CoconutKit-demo
+
+  Created by Samuel Défago on 09.01.12.
+  Copyright (c) 2012 Hortis. All rights reserved.
+*/
+"Key containing a slash / and another one / "="Key containing a slash / and another one / ";
+"Lowercase string in DemoTable.strings"="Lowercase string in DemoTable.strings";
+"String in DemoTable.strings"="String in DemoTable.strings";
+"Uppercase string in DemoTable.strings"="Uppercase string in DemoTable.strings";

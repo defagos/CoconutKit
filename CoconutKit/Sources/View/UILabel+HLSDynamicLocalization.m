@@ -67,6 +67,11 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:self];
 }
 
++ (BOOL)missingLocalizationsVisible
+{
+    return s_missingLocalizationsVisible;
+}
+
 @end
 
 @implementation UILabel (HLSDynamicLocalizationPrivate)
@@ -253,7 +258,8 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
         
         // Make labels with missing localizations visible (saving the original color first)
         if (s_missingLocalizationsVisible) {
-            self.backgroundColor = [UIColor yellowColor];
+            // We must use the original method here
+            (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }    
     }
     

@@ -55,4 +55,9 @@
  */
 + (void)setMissingLocalizationsVisible:(BOOL)visible;
 
+/**
+ * Return YES iff missing localization visibility has been turned on
+ */
++ (BOOL)missingLocalizationsVisible;
+
 @end
