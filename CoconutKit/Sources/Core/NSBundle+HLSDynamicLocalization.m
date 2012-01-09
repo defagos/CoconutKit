@@ -94,7 +94,7 @@ static void setDefaultLocalization(void)
     }
     
     if (![currentLocalization isEqualToString:previousLocalization]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:currentLocalization];
+        [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:self];
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:currentLocalization forKey:HLSPreferredLocalizationDefaultsKey];

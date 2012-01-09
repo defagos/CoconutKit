@@ -7,32 +7,52 @@
 //
 
 /**
- * Private category for easier label localization in nib files. Instead of having to define and bind an outlet
- * just to localize a label or a button, this category makes it easy to attach a localization key to a label
+ * Category for easier label localization in nib files. Instead of having to define and bind an outlet just 
+ * to localize a UILabel or a UIButton, this category makes it easy to attach a localization key to a label
  * or a button label directly in a nib file. Simply set the text in the nib using one of the following
  * constructs:
- *   - LS:<localizationKey>: For standard localized strings
- *   - ULS:<localizationKey>: Same as LS:, but uppercase
- *   - LLS:<localizationKey>: Same as LS:, but lowercase
- * This category integrates with HLSBundle+HLSDynamicLocalization so that the text is updated when the localization
- * language is updated at runtime.
+ *   - LS/<localizationKey>[/T/<table>/]: Will be replaced by the localized string corresponding to the 
+ *                                        localization key (lookup is performed in the main bundle 
+ *                                        Localizable.strings file if no explicit table is provided)
+ *   - ULS/<localizationKey>[/T/<table>/]: Same as LS:, but uppercase
+ *   - LLS/<localizationKey>[/T/<table>/]: Same as LS:, but lowercase
  *
- * If the key is not found, the text is set to "(missing)"
+ * Some examples:
+ *   LS/Cancel
+ *   ULS/Send link/T/LocalizationFileName
  *
- * TODO: Add LST:<table>: (and similar constructs) for localized strings from other tables
+ * Note that lookup is always performed in the main bundle only. If you want to use localization dictionaries
+ * in other bundles, you will have to create and bind outlets.
+ *
+ * If the key is not found, the localization key itself is used instead. At runtime, you can reveal labels for 
+ * which a localization entry is missing (for the current application language) by using the provided
+ * +setMissingLocalizationsVisible: class method. You can of course still use the NSShowNonLocalizedStrings
+ * default setting which logs missing keys to the console if you prefer:
+ *   [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"NSShowNonLocalizedStrings"];
+ *
+ * This category integrates with HLSBundle+HLSDynamicLocalization so that localized labels are updated when the 
+ * localization language is changed at runtime.
+ *
+ * This category currently has three limitations, but which should not be real issues:
+ *   - only localization dictionaries in the main bundle are considered. For applications this should not be
+ *     a problem since this is in general the only bundle you have. Libraries, on the other hand, might provide 
+ *     their resources as a separate .bundle. But since nib files should be quite rare in libraries (usually, 
+ *     library components are created completely in code) this should not be a problem either
+ *   - no comment can be provided. This would have been too verbose, and in my experience comments added
+ *     to NSLocalizedString macros are not really useful (they are seen by the programmer, not by the translator). 
+ *     Having them only in the .strings files is what I usually recommend. Tools like Linguan or iLocalize can
+ *     help you to add those comments after localization dictionaries have been extracted from the source code
+ *   - this brings me to the (currently) really annoying limitation of this category: Automatic localization key 
+ *     extraction using genstrings does not work, since genstrings is of course unable to find the constructs
+ *     listed above in nib files. I intend to provide a modified genstrings command as part of CoconutKit, this 
+ *     should therefore not be a problem anymore soon :-)
  */
 @interface UILabel (HLSDynamicLocalization)
 
-- (id)swizzledInitWithFrame:(CGRect)frame;
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
-- (void)swizzledDealloc;
-- (void)swizzledAwakeFromNib;
-- (void)swizzledSetText:(NSString *)text;
-
-- (void)initCommon;
-- (void)updateLocalizationKey;
-- (void)localizeText;
-
-- (void)currentLocalizationDidChange:(NSNotification *)notification;
+/**
+ * When set to YES, reveals those labels for which a localization string is missing (for the current language)
+ * (font color red, background color yellow)
+ */
++ (void)setMissingLocalizationsVisible:(BOOL)visible;
 
 @end

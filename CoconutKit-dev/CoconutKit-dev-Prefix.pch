@@ -64,6 +64,7 @@
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"
+    #import "UILabel+HLSDynamicLocalization.h"
     #import "UINavigationBar+HLSExtensions.h"
     #import "UITextField+HLSValidation.h"
     #import "UIView+HLSExtensions.h"

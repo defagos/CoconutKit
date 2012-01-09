@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 
 HLSLinkCategory(UILabel_HLSDynamicLocalization)
 
@@ -23,9 +24,12 @@ typedef enum {
     LocalizationAttributeEnumSize = LocalizationAttributeEnumEnd - LocalizationAttributeEnumBegin
 } LocalizationAttribute;
 
+static BOOL m_missingLocalizationsVisible = NO;
+
 // Keys for associated objects
 static void *s_localizationKeyKey = &s_localizationKeyKey;
 static void *s_localizationAttributeKey = &s_localizationAttributeKey;
+static void *s_localizationTableKey = &s_localizationTableKey;
 
 // Original implementations of the methods we swizzle
 static id (*s_UILabel__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
@@ -34,7 +38,35 @@ static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
 
+@interface UILabel (HLSDynamicLocalizationPrivate)
+
+- (id)swizzledInitWithFrame:(CGRect)frame;
+- (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
+- (void)swizzledDealloc;
+- (void)swizzledAwakeFromNib;
+- (void)swizzledSetText:(NSString *)text;
+
+- (void)initCommon;
+- (void)updateLocalizationKey;
+- (void)localizeText;
+
+- (void)currentLocalizationDidChange:(NSNotification *)notification;
+
+@end
+
 @implementation UILabel (HLSDynamicLocalization)
+
++ (void)setMissingLocalizationsVisible:(BOOL)visible
+{
+    m_missingLocalizationsVisible = visible;
+    
+    // Emit a localization notification to trigger a global label update
+    [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:self];
+}
+
+@end
+
+@implementation UILabel (HLSDynamicLocalizationPrivate)
 
 + (void)load
 {
@@ -88,12 +120,15 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(currentLocalizationDidChange:) 
-                                                 name:HLSCurrentLocalizationDidChangeNotification object:nil];
+                                                 name:HLSCurrentLocalizationDidChangeNotification 
+                                               object:nil];
 }
 
 // Update the attached localization key by extracting it (if there is one) from the current text
 - (void)updateLocalizationKey
 {
+    // TODO: Extract prefix first. Then extract table and key
+    
     NSString *localizationKey = nil;
     LocalizationAttribute attribute = LocalizationAttributeNormal;
     if ([self.text hasPrefix:@"LS:"]) {
@@ -125,7 +160,20 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
         return;
     }
     
-    NSString *text = [[NSBundle mainBundle] localizedStringForKey:localizationKey value:@"(missing)" table:nil];
+    // We use an explicit constant string for missing localizations since otherwise the key would be returned
+    static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
+    NSString *text = [[NSBundle mainBundle] localizedStringForKey:localizationKey value:kMissingLocalizedString table:nil];
+    
+    // Use the localization key as text if missing
+    if ([text isEqualToString:kMissingLocalizedString]) {
+        text = localizationKey;
+        
+        // Make labels with missing localizations visible
+        if (m_missingLocalizationsVisible) {
+            self.textColor = [UIColor redColor];
+            self.backgroundColor = [UIColor yellowColor];
+        }    
+    }
     
     LocalizationAttribute attribute = [objc_getAssociatedObject(self, s_localizationAttributeKey) intValue];
     if (attribute == LocalizationAttributeUppercase) {
