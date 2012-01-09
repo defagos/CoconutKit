@@ -38,6 +38,7 @@ static id (*s_UILabel__initWithCoder_Imp)(id, SEL, id) = NULL;
 static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
+static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 @interface UILabel (HLSDynamicLocalizationPrivate)
 
@@ -46,6 +47,7 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
 - (void)swizzledDealloc;
 - (void)swizzledAwakeFromNib;
 - (void)swizzledSetText:(NSString *)text;
+- (void)swizzledSetBackgroundColor:(NSString *)backgroundColor;
 
 - (void)initCommon;
 - (void)updateLocalizationKey;
@@ -76,6 +78,7 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
     s_UILabel__dealloc_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(dealloc), @selector(swizzledDealloc));
     s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(awakeFromNib), @selector(swizzledAwakeFromNib));
     s_UILabel__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setText:), @selector(swizzledSetText:));
+    s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setBackgroundColor:), @selector(swizzledSetBackgroundColor:));
 }
 
 - (id)swizzledInitWithFrame:(CGRect)frame
@@ -115,6 +118,13 @@ static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
     (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
     
     [self updateLocalizationKey];
+}
+
+- (void)swizzledSetBackgroundColor:(NSString *)backgroundColor
+{
+    (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), backgroundColor);
+    
+    objc_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)initCommon
