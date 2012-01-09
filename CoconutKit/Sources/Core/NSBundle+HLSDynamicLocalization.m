@@ -86,6 +86,7 @@ static void setDefaultLocalization(void)
     }
     else {
         if (currentLocalization == localization) {
+            [previousLocalization release];
             return;
         }
         
