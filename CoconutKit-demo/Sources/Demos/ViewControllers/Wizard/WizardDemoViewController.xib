@@ -61,13 +61,13 @@
 						<string key="NSFrame">{{20, 947}, {105, 37}}</string>
 						<reference key="NSSuperview" ref="77683947"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="243774226"/>
+						<reference key="NSNextKeyView" ref="977938841"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;previous&gt;</string>
+						<string key="IBUINormalTitle">LS/Previous</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="514962287">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -98,13 +98,13 @@
 						<string key="NSFrame">{{643, 947}, {105, 37}}</string>
 						<reference key="NSSuperview" ref="77683947"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="243774226"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;next&gt;</string>
+						<string key="IBUINormalTitle">LS/Next</string>
 						<reference key="IBUIHighlightedTitleColor" ref="514962287"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -120,13 +120,13 @@
 						<string key="NSFrame">{{643, 947}, {105, 37}}</string>
 						<reference key="NSSuperview" ref="77683947"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="977938841"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;done&gt;</string>
+						<string key="IBUINormalTitle">LS/Done</string>
 						<reference key="IBUIHighlightedTitleColor" ref="514962287"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>

@@ -59,10 +59,8 @@ static NSArray *s_folders = nil;
     
     self.weekDaysCursor = nil;
     self.weekDayIndexLabel = nil;
-    self.nextWeekDayButton = nil;
     self.randomRangeCursor = nil;
     self.randomRangeIndexLabel = nil;
-    self.randomRangeCursorReloadButton = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
@@ -74,13 +72,9 @@ static NSArray *s_folders = nil;
 
 @synthesize weekDayIndexLabel = m_weekDayIndexLabel;
 
-@synthesize nextWeekDayButton = m_nextWeekDayButton;
-
 @synthesize randomRangeCursor = m_randomRangeCursor;
 
 @synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
-
-@synthesize randomRangeCursorReloadButton = m_randomRangeCursorReloadButton;
 
 @synthesize timeScalesCursor = m_timeScalesCursor;
 
@@ -333,8 +327,6 @@ static NSArray *s_folders = nil;
     [super localize];
     
     self.title = NSLocalizedString(@"Cursor", @"Cursor");
-    [self.nextWeekDayButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
-    [self.randomRangeCursorReloadButton setTitle:NSLocalizedString(@"Reload", @"Reload") forState:UIControlStateNormal];
     
     [s_timeScales release];
     s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],

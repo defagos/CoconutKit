@@ -296,7 +296,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     s_actionSheet = nil;
 }
 
-#pragma mark Action callbacks
+#pragma mark Event callbacks
 
 - (void)dismissActionSheetForBarButtonItem:(id)sender
 {

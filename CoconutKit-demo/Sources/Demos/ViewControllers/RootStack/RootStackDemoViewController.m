@@ -8,13 +8,6 @@
 
 #import "RootStackDemoViewController.h"
 
-@interface RootStackDemoViewController ()
-
-- (void)pushButtonClicked:(id)sender;
-- (void)popButtonClicked:(id)sender;
-
-@end
-
 @implementation RootStackDemoViewController
 
 #pragma mark Object creation and destruction
@@ -31,19 +24,13 @@
 {
     [super releaseViews];
 
-    self.pushButton = nil;
     self.popButton = nil;
-    self.transitionLabel = nil;
     self.transitionPickerView = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize pushButton = m_pushButton;
-
 @synthesize popButton = m_popButton;
-
-@synthesize transitionLabel = m_transitionLabel;
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
@@ -54,15 +41,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor randomColor];
-    
-    [self.pushButton addTarget:self
-                        action:@selector(pushButtonClicked:)
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.popButton addTarget:self
-                       action:@selector(popButtonClicked:)
-             forControlEvents:UIControlEventTouchUpInside];
-    
+        
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
 }
@@ -83,10 +62,6 @@
 - (void)localize
 {
     [super localize];
-    
-    self.transitionLabel.text = NSLocalizedString(@"Transition", @"Transition");
-    
-    [self.pushButton setTitle:NSLocalizedString(@"Push", @"Push") forState:UIControlStateNormal];
     
     if (self == [self.stackController rootViewController]) {
         [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
@@ -202,7 +177,7 @@
 
 #pragma mark Event callbacks
 
-- (void)pushButtonClicked:(id)sender
+- (IBAction)push:(id)sender
 {
     RootStackDemoViewController *demoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     
@@ -211,7 +186,7 @@
     [self.stackController pushViewController:demoViewController withTransitionStyle:pickedIndex];
 }
 
-- (void)popButtonClicked:(id)sender
+- (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
         [self.stackController dismissModalViewControllerAnimated:YES];

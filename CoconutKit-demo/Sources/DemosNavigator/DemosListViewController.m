@@ -10,6 +10,7 @@
 
 #import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
+#import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "KenBurnsSlideshowDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
@@ -26,6 +27,7 @@
 typedef enum {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
+    DemoCategoryIndexCore,
     DemoCategoryIndexTask,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
@@ -41,6 +43,14 @@ typedef enum {
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
+
+// Demos for core
+typedef enum {
+    CoreDemoIndexEnumBegin = 0,
+    CoreDemoIndexDynamicLocalization = CoreDemoIndexEnumBegin,
+    CoreDemoIndexEnumEnd,
+    CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
+} CoreDemoIndex;
 
 // Demos for tasks
 typedef enum {
@@ -141,6 +151,11 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexCore: {
+            return NSLocalizedString(@"Core", @"Core");
+            break;
+        }
+            
         case DemoCategoryIndexTask: {
             return NSLocalizedString(@"Tasks", @"Tasks");
             break;
@@ -168,6 +183,11 @@ typedef enum {
     switch (section) {
         case DemoCategoryIndexAnimation: {
             return AnimationDemoIndexEnumSize;
+            break;
+        }
+            
+        case DemoCategoryIndexCore: {
+            return CoreDemoIndexEnumSize;
             break;
         }
             
@@ -214,6 +234,21 @@ typedef enum {
                     return nil;
                     break;
                 }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexCore: {
+            switch (indexPath.row) {
+                case CoreDemoIndexDynamicLocalization: {
+                    cell.textLabel.text = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }
             }
             break;
         }
@@ -338,6 +373,21 @@ typedef enum {
                     return;
                     break;
                 }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexCore: {
+            switch (indexPath.row) {
+                case CoreDemoIndexDynamicLocalization: {
+                    demoViewController = [[[DynamicLocalizationDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }
             }
             break;
         }

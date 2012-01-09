@@ -12,6 +12,8 @@
 "Animation"="Animation";
 "Birthdate"="Date de naissance";
 "Blocking"="Bloquant";
+"Button label, default"="Libellé de bouton, normal";
+"Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
 "Change"="Changer";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
@@ -19,6 +21,7 @@
 "City"="Ville";
 "Close"="Fermer";
 "Container customization"="Personnalisation conteneur";
+"Core"="Core";
 "Country"="Pays";
 "Cursor"="Curseur";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
@@ -28,9 +31,10 @@
 "Details"="Détails";
 "Dismiss"="Fermer";
 "Done"="Terminé";
+"Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
 "Error"="Erreur";
-"First Name"="Prénom";
+"First name"="Prénom";
 "Fixed size"="Taille fixe";
 "Formatting error"="Erreur de formattage";
 "Forward properties"="Propager les propriétés";
@@ -45,11 +49,14 @@
 "Ken Burns effect"="Effet Ken Burns";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
-"Last Name"="Nom";
+"Last name"="Nom";
+"Lifecycle test"="Test du cycle de vie";
+"Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
 "Missing first name"="Prénom manquant";
 "Missing last name"="Nom manquant";
+"Missing localization visibility"="Afficher les localisations de libellés manquantes";
 "Month"="Mois";
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
@@ -78,6 +85,7 @@
 "Stop"="Arrêter";
 "Street"="Rue";
 "Stretchable"="Etirable";
+"String in Localizable.strings"="Chaîne de Localizable.strings";
 "Sub-tasks"="Sous-tâches";
 "Table view cells"="Cellules";
 "Tablets"="Tablettes";
@@ -90,6 +98,7 @@
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Transition"="Transition";
 "Transparent"="Transparent";
+"Uppercase string in Localizable.strings"="Chaîne de Localizable.strings en majuscules";
 "Views"="Vues";
 "View controllers"="View controllers";
 "Week"="Semaine";

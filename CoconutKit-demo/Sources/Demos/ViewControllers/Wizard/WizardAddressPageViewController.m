@@ -42,20 +42,14 @@
 {
     [super releaseViews];
     
-    self.streetLabel = nil;
     self.streetTextField = nil;
     self.streetErrorLabel = nil;
-    self.cityLabel = nil;
     self.cityTextField = nil;
     self.cityErrorLabel = nil;
-    self.stateLabel = nil;
     self.stateTextField = nil;
     self.stateErrorLabel = nil;
-    self.countryLabel = nil;
     self.countryTextField = nil;
     self.countryErrorLabel = nil;
-    self.resetModelButton = nil;
-    self.resetTextFieldsButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -74,33 +68,21 @@
     [self reloadData];
 }
 
-@synthesize streetLabel = m_streetLabel;
-
 @synthesize streetTextField = m_streetTextField;
 
 @synthesize streetErrorLabel = m_streetErrorLabel;
-
-@synthesize cityLabel = m_cityLabel;
 
 @synthesize cityTextField = m_cityTextField;
 
 @synthesize cityErrorLabel = m_cityErrorLabel;
 
-@synthesize stateLabel = m_stateLabel;
-
 @synthesize stateTextField = m_stateTextField;
 
 @synthesize stateErrorLabel = m_stateErrorLabel;
 
-@synthesize countryLabel = m_countryLabel;
-
 @synthesize countryTextField = m_countryTextField;
 
 @synthesize countryErrorLabel = m_countryErrorLabel;
-
-@synthesize resetModelButton = m_resetModelButton;
-
-@synthesize resetTextFieldsButton = m_resetTextFieldsButton;
 
 #pragma mark View lifecycle
 
@@ -217,14 +199,7 @@
 - (void)localize
 {
     [super localize];
-    
-    self.streetLabel.text = NSLocalizedString(@"Street", @"Street");
-    self.cityLabel.text = NSLocalizedString(@"City", @"City");
-    self.stateLabel.text = NSLocalizedString(@"State", @"State");
-    self.countryLabel.text = NSLocalizedString(@"Country", @"Country");
-    [self.resetModelButton setTitle:NSLocalizedString(@"Reset model fields", @"Reset model fields") forState:UIControlStateNormal];
-    [self.resetTextFieldsButton setTitle:NSLocalizedString(@"Reset text fields", @"Reset text fields") forState:UIControlStateNormal];
-    
+        
     // Trigger a new validation to get localized error messages if any
     [self checkTextFields];
 }

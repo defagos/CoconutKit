@@ -8,7 +8,6 @@
 
 @interface TextFieldsDemoViewController : HLSViewController <UITextFieldDelegate> {
 @private
-    UILabel *m_instructionLabel;
     HLSTextField *m_textField1;
     HLSTextField *m_textField2;
     HLSTextField *m_textField3;
@@ -18,7 +17,6 @@
 
 - (id)initLarge:(BOOL)large;
 
-@property (nonatomic, retain) IBOutlet UILabel *instructionLabel;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField2;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField3;

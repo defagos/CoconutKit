@@ -22,7 +22,7 @@
  * object field value changes after it has been bound, the text field gets updated (and validated) accordingly.
  * Conversely, when a text field has been edited (i.e. when exiting input mode), the model object field value
  * is automatically updated. An optional NSFormatter can be attached to the field to automatically format or parse
- * the value displayed by the text field. An validation delegate, optional as well, receives validation events.
+ * the value displayed by the text field. A validation delegate, optional as well, receives validation events.
  *
  * Otherwise, a bound text field behaves exactly as a normal text field. In particular, some delegate must implement
  * UITextFieldDelegate protocol methods to dismiss the keyboard when appropriate.

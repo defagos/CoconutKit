@@ -37,7 +37,6 @@
     [super releaseViews];
     
     self.showFromRectButton = nil;
-    self.showInViewButton = nil;
     self.toolbar = nil;
     self.showFromToolbarBarButtonItem = nil;
     self.otherShowFromToolbarBarButtonItem = nil;
@@ -48,8 +47,6 @@
 #pragma mark Accessors and mutators
 
 @synthesize showFromRectButton = m_showFromRectButton;
-
-@synthesize showInViewButton = m_showInViewButton;
 
 @synthesize toolbar = m_toolbar;
 
@@ -88,8 +85,6 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Action sheet", @"Action sheet");
-    [self.showFromRectButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
-    [self.showInViewButton setTitle:NSLocalizedString(@"Choose", @"Choose") forState:UIControlStateNormal];
     self.showFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
     self.otherShowFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
     self.showFromBarButtonItemBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");

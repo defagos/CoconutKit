@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">933</string>
@@ -54,7 +54,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;choose&gt;</string>
+						<string key="IBUINormalTitle">LS/Choose</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="802814271">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -91,7 +91,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;choose&gt;</string>
+						<string key="IBUINormalTitle">LS/Choose</string>
 						<reference key="IBUIHighlightedTitleColor" ref="802814271"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -217,14 +217,6 @@
 						<reference key="destination" ref="183346266"/>
 					</object>
 					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">showInViewButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="344901517"/>
-					</object>
-					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -502,7 +494,6 @@
 							<string>showFromBarButtonItemBarButtonItem</string>
 							<string>showFromRectButton</string>
 							<string>showFromToolbarBarButtonItem</string>
-							<string>showInViewButton</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -512,7 +503,6 @@
 							<string>UIBarButtonItem</string>
 							<string>UIButton</string>
 							<string>UIBarButtonItem</string>
-							<string>UIButton</string>
 							<string>UIToolbar</string>
 						</object>
 					</object>
@@ -525,7 +515,6 @@
 							<string>showFromBarButtonItemBarButtonItem</string>
 							<string>showFromRectButton</string>
 							<string>showFromToolbarBarButtonItem</string>
-							<string>showInViewButton</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -549,10 +538,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">showFromToolbarBarButtonItem</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">showInViewButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toolbar</string>

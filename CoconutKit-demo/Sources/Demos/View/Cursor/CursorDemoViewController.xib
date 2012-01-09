@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<int key="IBDocument.SystemTarget">1280</int>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">301</string>
+			<string key="NS.object.0">933</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -22,11 +22,8 @@
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<reference key="dict.values" ref="0"/>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -59,7 +56,7 @@
 					<object class="IBUILabel" id="330930698">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{531, 108}, {133, 21}}</string>
+						<string key="NSFrame">{{520, 108}, {133, 21}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="808294600"/>
@@ -69,11 +66,6 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">9</string>
-						<object class="NSFont" key="IBUIFont" id="233401515">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<object class="NSColor" key="IBUITextColor" id="251398656">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -82,11 +74,22 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">2</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="141902341">
+							<string key="name">Helvetica</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">0</int>
+							<double key="pointSize">17</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="233401515">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIButton" id="808294600">
 						<reference key="NSNextResponder" ref="463507662"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{672, 100}, {81, 37}}</string>
+						<string key="NSFrame">{{661, 100}, {92, 37}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="411449780"/>
@@ -94,13 +97,8 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="991843558">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;next&gt;</string>
+						<string key="IBUINormalTitle">LS/Next</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="899741955">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -113,6 +111,17 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="541421548">
+							<string key="name">Helvetica-Bold</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="991843558">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIView" id="411449780">
 						<reference key="NSNextResponder" ref="463507662"/>
@@ -120,7 +129,7 @@
 						<string key="NSFrame">{{20, 202}, {728, 60}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="899278541"/>
+						<reference key="NSNextKeyView" ref="356569897"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC43MDc3NzAzODkzIDAuNjg0ODc2NzEzMSAxAA</bytes>
@@ -133,18 +142,20 @@
 						<string key="NSFrame">{{520, 278}, {133, 21}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="899278541"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">9</string>
-						<reference key="IBUIFont" ref="233401515"/>
 						<reference key="IBUITextColor" ref="251398656"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">2</int>
+						<reference key="IBUIFontDescription" ref="141902341"/>
+						<reference key="IBUIFont" ref="233401515"/>
 					</object>
 					<object class="IBUIButton" id="899278541">
 						<reference key="NSNextResponder" ref="463507662"/>
@@ -157,15 +168,16 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="991843558"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">&lt;reload&gt;</string>
+						<string key="IBUINormalTitle">LS/Reload</string>
 						<reference key="IBUIHighlightedTitleColor" ref="899741955"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="137214366"/>
+						<reference key="IBUIFontDescription" ref="541421548"/>
+						<reference key="IBUIFont" ref="991843558"/>
 					</object>
 					<object class="IBUIView" id="1047325668">
 						<reference key="NSNextResponder" ref="463507662"/>
@@ -229,15 +241,6 @@
 					<int key="connectionID">11</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">moveWeekDaysPointerToNextDay</string>
-						<reference key="source" ref="808294600"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">weekDaysCursor</string>
 						<reference key="source" ref="841351856"/>
@@ -271,27 +274,28 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">nextWeekDayButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="808294600"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">randomRangeCursorReloadButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="899278541"/>
-					</object>
-					<int key="connectionID">50</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">randomRangeCursor</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="411449780"/>
 					</object>
 					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">randomRangeIndexLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="356569897"/>
+					</object>
+					<int key="connectionID">54</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">moveWeekDaysPointerToNextDay</string>
+						<reference key="source" ref="808294600"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">14</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -302,21 +306,15 @@
 					</object>
 					<int key="connectionID">52</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">randomRangeIndexLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="356569897"/>
-					</object>
-					<int key="connectionID">54</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<object class="NSArray" key="object" id="0">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -342,9 +340,9 @@
 							<reference ref="186346864"/>
 							<reference ref="1047325668"/>
 							<reference ref="899278541"/>
-							<reference ref="330930698"/>
 							<reference ref="808294600"/>
 							<reference ref="356569897"/>
+							<reference ref="330930698"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -403,7 +401,9 @@
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
+					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
+					<string>-2.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>22.CustomClassName</string>
 					<string>22.IBPluginDependency</string>
@@ -423,7 +423,9 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CursorDemoViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>HLSCursor</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -499,9 +501,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>foldersCursor</string>
 							<string>mixedFoldersCursor</string>
-							<string>nextWeekDayButton</string>
 							<string>randomRangeCursor</string>
-							<string>randomRangeCursorReloadButton</string>
 							<string>randomRangeIndexLabel</string>
 							<string>timeScalesCursor</string>
 							<string>weekDayIndexLabel</string>
@@ -511,9 +511,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>HLSCursor</string>
 							<string>HLSCursor</string>
-							<string>UIButton</string>
 							<string>HLSCursor</string>
-							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>HLSCursor</string>
 							<string>UILabel</string>
@@ -526,9 +524,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>foldersCursor</string>
 							<string>mixedFoldersCursor</string>
-							<string>nextWeekDayButton</string>
 							<string>randomRangeCursor</string>
-							<string>randomRangeCursorReloadButton</string>
 							<string>randomRangeIndexLabel</string>
 							<string>timeScalesCursor</string>
 							<string>weekDayIndexLabel</string>
@@ -545,16 +541,8 @@
 								<string key="candidateClassName">HLSCursor</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">nextWeekDayButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">randomRangeCursor</string>
 								<string key="candidateClassName">HLSCursor</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">randomRangeCursorReloadButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">randomRangeIndexLabel</string>
@@ -616,6 +604,6 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">301</string>
+		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>
