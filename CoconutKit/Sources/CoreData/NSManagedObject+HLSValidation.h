@@ -112,6 +112,8 @@
 /**
  * Check that a given value is valid for a specific field. The validation logic can be implemented in the 
  * xcdatamodel and / or in a -check<fieldName>:error: method. The method returns YES iff the value is valid
+ *
+ * If the key does not exist, the method returns YES and no error (as -validateValue:forKey:error does)
  */
 - (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
 
