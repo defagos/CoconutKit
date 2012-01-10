@@ -70,5 +70,7 @@
     #import "UILabel+HLSDynamicLocalization.h"
     #import "UINavigationBar+HLSExtensions.h"
     #import "UITextField+HLSValidation.h"
+    #import "UIToolbar+HLSExtensions.h"
     #import "UIView+HLSExtensions.h"
+    #import "UIWebView+HLSExtensions.h"
 #endif
