@@ -96,7 +96,8 @@ typedef enum {
 
 /**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
- * called when needed. The method body itself should not contain any logic, only localization code.
+ * called when needed. The method body itself should not contain any logic, only localization code (e.g. setting outlets using
+ * NSLocalizedString macros, reloading table views containing localized strings, etc.)
  * When overriding the method, be sure to call the super method first, otherwise the behavior is undefined
  *
  * To ensure that your application is properly localized - even when the localization changes at runtime using +[NSBundle setLocalization:]

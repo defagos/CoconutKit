@@ -62,7 +62,9 @@
     
     self.title = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
     
-    // TODO: Display localized image in imageView
+    // Cannot use [UIImage imageNamed:] for localized images because of caching
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"img_localized" ofType:@"png"];
+    self.imageView.image = [UIImage imageWithContentsOfFile:imagePath];
 }
 
 #pragma mark Event callbacks

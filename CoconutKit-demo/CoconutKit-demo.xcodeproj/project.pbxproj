@@ -22,6 +22,9 @@
 		6F1AF861142B046600925B7A /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF84F142B046600925B7A /* CoconutKit_cursor_default_pointer.png */; };
 		6F1AF862142B046600925B7A /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */; };
 		6F1AF863142B046600925B7A /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF851142B046600925B7A /* CoconutKit_Localizable.strings */; };
+		6F3B05C514BC0A2A0026F512 /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE8EA14BA04E2007EE121 /* cell_bkgr_brown_large.png */; };
+		6F3B05E514BC0A6D0026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05E014BC0A6D0026F512 /* img_localized.png */; };
+		6F3B05E614BC0A6D0026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05E314BC0A6D0026F512 /* img_localized.png */; };
 		6F4169E814BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169E714BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169EA14BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169E914BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
@@ -141,6 +144,8 @@
 		6F1AF850142B046600925B7A /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
 		6F1AF853142B046600925B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6F1AF855142B046600925B7A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
+		6F3B05E114BC0A6D0026F512 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = img_localized.png; sourceTree = "<group>"; };
+		6F3B05E414BC0A6D0026F512 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = img_localized.png; sourceTree = "<group>"; };
 		6F4169E614BB4FAF006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
 		6F4169E714BB4FAF006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
 		6F4169E914BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
@@ -386,6 +391,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6F3B05DF14BC0A6D0026F512 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6F3B05E014BC0A6D0026F512 /* img_localized.png */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		6F3B05E214BC0A6D0026F512 /* fr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6F3B05E314BC0A6D0026F512 /* img_localized.png */,
+			);
+			path = fr.lproj;
+			sourceTree = "<group>";
+		};
 		6F4169E414BB4F98006020E6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +455,8 @@
 		6FADE8E914BA04E2007EE121 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6F3B05DF14BC0A6D0026F512 /* en.lproj */,
+				6F3B05E214BC0A6D0026F512 /* fr.lproj */,
 				6FADE8EA14BA04E2007EE121 /* cell_bkgr_brown_large.png */,
 				6FADE8EB14BA04E2007EE121 /* cell_bkgr_brown_large_selected.png */,
 				6FADE8EC14BA04E2007EE121 /* icn_bookmark.png */,
@@ -978,6 +1001,9 @@
 				6F4169EA14BB4FC9006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */,
 				6F507D7014BB743000D54088 /* DemoTable.strings in Resources */,
+				6F3B05C514BC0A2A0026F512 /* cell_bkgr_brown_large.png in Resources */,
+				6F3B05E514BC0A6D0026F512 /* img_localized.png in Resources */,
+				6F3B05E614BC0A6D0026F512 /* img_localized.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,6 +1089,22 @@
 				6F1AF855142B046600925B7A /* fr */,
 			);
 			name = CoconutKit_Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6F3B05E014BC0A6D0026F512 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F3B05E114BC0A6D0026F512 /* en */,
+			);
+			name = img_localized.png;
+			sourceTree = "<group>";
+		};
+		6F3B05E314BC0A6D0026F512 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F3B05E414BC0A6D0026F512 /* fr */,
+			);
+			name = img_localized.png;
 			sourceTree = "<group>";
 		};
 		6F507D6C14BB742800D54088 /* DemoTable.strings */ = {

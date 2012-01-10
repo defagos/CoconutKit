@@ -10,6 +10,9 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05BC14BC0A0E0026F512 /* img_localized.png */; };
+		6F3B05CE14BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05C714BC0A500026F512 /* img_localized.png */; };
+		6F3B05D014BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05CC14BC0A510026F512 /* img_localized.png */; };
 		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
@@ -186,6 +189,8 @@
 		1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F3B05C814BC0A500026F512 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = img_localized.png; sourceTree = "<group>"; };
+		6F3B05CD14BC0A510026F512 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = img_localized.png; sourceTree = "<group>"; };
 		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
 		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
 		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
@@ -532,6 +537,22 @@
 			name = CoconutKit;
 			sourceTree = "<group>";
 		};
+		6F3B05C614BC0A500026F512 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6F3B05C714BC0A500026F512 /* img_localized.png */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		6F3B05CB14BC0A510026F512 /* fr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6F3B05CC14BC0A510026F512 /* img_localized.png */,
+			);
+			path = fr.lproj;
+			sourceTree = "<group>";
+		};
 		6F4169EB14BB67D5006020E6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +821,8 @@
 		6FADE7DE14BA04C8007EE121 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6F3B05C614BC0A500026F512 /* en.lproj */,
+				6F3B05CB14BC0A510026F512 /* fr.lproj */,
 				6FADE7DF14BA04C8007EE121 /* cell_bkgr_brown_large.png */,
 				6FADE7E014BA04C8007EE121 /* cell_bkgr_brown_large_selected.png */,
 				6FADE7E114BA04C8007EE121 /* icn_bookmark.png */,
@@ -1396,6 +1419,9 @@
 				6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */,
 				6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */,
+				6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */,
+				6F3B05CE14BC0A510026F512 /* img_localized.png in Resources */,
+				6F3B05D014BC0A510026F512 /* img_localized.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,6 +1559,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6F3B05BC14BC0A0E0026F512 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+			);
+			name = img_localized.png;
+			path = "/Users/defagos/hortis/devhortis/CoconutKit/CoconutKit-demo/Resources/Images";
+			sourceTree = "<absolute>";
+		};
+		6F3B05C714BC0A500026F512 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F3B05C814BC0A500026F512 /* en */,
+			);
+			name = img_localized.png;
+			sourceTree = "<group>";
+		};
+		6F3B05CC14BC0A510026F512 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F3B05CD14BC0A510026F512 /* fr */,
+			);
+			name = img_localized.png;
+			sourceTree = "<group>";
+		};
 		6F507D7114BB75D000D54088 /* DemoTable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
