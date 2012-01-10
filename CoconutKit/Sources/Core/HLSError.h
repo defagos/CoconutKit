@@ -6,8 +6,6 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-// TODO: Add method to UIAlertView, similar to NSAlert
-
 /**
  * Lightweight abstract subclass of HLSError providing a convenient way to create errors and to define and access
  * their properties.

@@ -37,7 +37,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic, assign) id containerController;           // weak ref
-@property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
+@property (nonatomic, assign, getter = isAddedAsSubview) BOOL addedToContainerView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;

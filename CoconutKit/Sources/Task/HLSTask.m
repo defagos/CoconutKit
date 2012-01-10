@@ -16,9 +16,9 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 @interface HLSTask ()
 
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
-@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, assign, getter = isRunning) BOOL running;
+@property (nonatomic, assign, getter = isFinished) BOOL finished;
+@property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
 @property (nonatomic, retain) NSDate *lastEstimateDate;

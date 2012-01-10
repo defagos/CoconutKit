@@ -71,17 +71,17 @@
 /**
  * Return YES if the task group is being processed
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, assign, getter = isRunning) BOOL running;
 
 /**
  * Return YES if the task group processing is done (i.e. all contained tasks are finished as well)
  */
-@property (nonatomic, readonly, assign, getter=isFinished) BOOL finished;
+@property (nonatomic, readonly, assign, getter = isFinished) BOOL finished;
 
 /**
  * Return YES if the task group processing has been cancelled
  */
-@property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, readonly, assign, getter = isCancelled) BOOL cancelled;
 
 /**
  * Overall progress value (between 0.f and 1.f). If some tasks fail this value may not reach 1.f

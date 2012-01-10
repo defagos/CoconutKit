@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 @property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
-@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter = isRunning) BOOL running;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
