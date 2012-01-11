@@ -17,12 +17,12 @@
  * If set to YES, remove the shadow seen behind the web view when it is scrolled to the top of the bottom.
  * Default value is NO
  */
-@property (nonatomic, assign, getter = isShadowHidden) BOOL shadowHidden;
+@property (nonatomic, assign, getter=isShadowHidden) BOOL shadowHidden;
 
 /**
  * If set to NO, disable scrolling in both directions
  * Default value is YES
  */
-@property (nonatomic, assign, getter = isScrollEnabled) BOOL scrollEnabled;
+@property (nonatomic, assign, getter=isScrollEnabled) BOOL scrollEnabled;
 
 @end

@@ -95,7 +95,7 @@
  *
  * Default is NO
  */
-@property (nonatomic, assign, getter = isResizeViews) BOOL resizeViews;
+@property (nonatomic, assign, getter=isResizeViews) BOOL resizeViews;
 
 /**
  * If set to YES, the user interface interaction is blocked during animation
@@ -115,7 +115,7 @@
 /**
  * Return YES while the animation is running
  */
-@property (nonatomic, readonly, assign, getter = isRunning) BOOL running;
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
