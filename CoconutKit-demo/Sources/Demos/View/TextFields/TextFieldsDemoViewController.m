@@ -63,6 +63,8 @@
     self.textField2.delegate = self;
     self.textField3.delegate = self;
     self.textField4.delegate = self;
+    
+    self.textField2.resigningFirstResponderOnTap = NO;
 }
 
 #pragma mark Orientation management

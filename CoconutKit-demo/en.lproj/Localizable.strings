@@ -14,6 +14,7 @@
 "Blocking"="Blocking";
 "Button label, default"="Button label, default";
 "Button label, highlighted"="Button label, highlighted";
+"By default, an HLSTextField exits edit mode when the user taps outside it"="By default, an HLSTextField exits edit mode when the user taps outside it";
 "Cancel"="Cancel";
 "Change"="Change";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
@@ -98,6 +99,7 @@
 "Test in modal"="Test in modal";
 "Text fields"="Text fields";
 "Text fields (large)"="Text fields (large)";
+"The behavior above can be disabled"="The behavior above can be disabled";
 "This value cannot be negative"="This value cannot be negative";
 "Transition"="Transition";
 "Transparent"="Transparent";

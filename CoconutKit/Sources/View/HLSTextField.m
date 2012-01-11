@@ -124,6 +124,18 @@ static UIScrollView *s_scrollView = nil;
     }
 }
 
+- (BOOL)resigningFirstResponderOnTap
+{
+    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
+    return touchDetector.resigningFirstResponderOnTap;
+}
+
+- (void)setResigningFirstResponderOnTap:(BOOL)resigningFirstResponderOnTap
+{
+    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
+    touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
+}
+
 - (void)setDelegate:(id<UITextFieldDelegate>)delegate
 {
     HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;

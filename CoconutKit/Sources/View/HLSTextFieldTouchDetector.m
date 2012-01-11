@@ -27,6 +27,8 @@
         self.gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(dismissKeyboard:)] autorelease];
         self.gestureRecognizer.cancelsTouchesInView = NO;       // Let the taps go through
+        
+        self.resigningFirstResponderOnTap = YES;
     }
     return self;
 }
@@ -41,6 +43,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize gestureRecognizer = m_gestureRecognizer;
+
+@synthesize resigningFirstResponderOnTap = m_resigningFirstResponderOnTap;
 
 #pragma mark UITextFieldDelegate protocol implementation
 
@@ -62,8 +66,10 @@
 
 - (void)dismissKeyboard:(UIGestureRecognizer *)gestureRecognizer
 {
-    // Dismiss the keyboard
-    [self.textField resignFirstResponder];
+    if (self.resigningFirstResponderOnTap) {
+        // Dismiss the keyboard
+        [self.textField resignFirstResponder];        
+    }
 }
 
 @end
