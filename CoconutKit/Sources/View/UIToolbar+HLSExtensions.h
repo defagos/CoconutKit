@@ -9,8 +9,8 @@
 @interface UIToolbar (HLSExtensions)
 
 /**
- * Display the specified image as toolbar background
+ * Set or returned an image set as toolbar background
  */
-- (void)setBackgroundImage:(UIImage *)backgroundImage;
+@property (nonatomic, retain) UIImage *backgroundImage;
 
 @end

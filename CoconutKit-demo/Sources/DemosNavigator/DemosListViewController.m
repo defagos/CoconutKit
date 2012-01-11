@@ -17,6 +17,7 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "SkinningDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
@@ -70,6 +71,7 @@ typedef enum {
     ViewDemoIndexCursor,
     ViewDemoIndexActionSheet,
     ViewDemoIndexKenBurns,
+    ViewDemoIndexSkinning,
     ViewDemoIndexWebView,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
@@ -301,6 +303,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexSkinning: {
+                    cell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
+                    break;
+                }
+                    
                 case ViewDemoIndexWebView: {
                     cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
                     break;
@@ -442,6 +449,11 @@ typedef enum {
                     
                 case ViewDemoIndexKenBurns: {
                     demoViewController = [[[KenBurnsSlideshowDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexSkinning: {
+                    demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

@@ -12,14 +12,22 @@
 
 HLSLinkCategory(UIToolbar_HLSExtensions)
 
+static const NSInteger kBackgroundImageViewTag = 28756;         // Very unlikely to be used by another view in the toolbar view hierarchy
+
 @implementation UIToolbar (HLSExtensions)
 
 #pragma mark Accessors and mutators
 
+@dynamic backgroundImage;
+
+- (UIImage *)backgroundImage
+{
+    UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
+    return backgroundImageView.image;
+}
+
 - (void)setBackgroundImage:(UIImage *)backgroundImage
 {
-    const NSInteger kBackgroundImageViewTag = 28756;         // Very unlikely to be used by another view in the toolbar view hierarchy
-    
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
     
     // Already added
