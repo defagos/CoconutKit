@@ -132,7 +132,7 @@ extern const NSUInteger kStackUnlimitedCapacity;
  *
  * Default value is NO.
  */
-@property (nonatomic, assign, getter = isForwardingProperties) BOOL forwardingProperties;
+@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 

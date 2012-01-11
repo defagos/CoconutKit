@@ -14,11 +14,11 @@
  */
 @interface HLSTask (Friend)
 
-@property (nonatomic, assign, getter = isRunning) BOOL running;
+@property (nonatomic, assign, getter=isRunning) BOOL running;
 
-@property (nonatomic, assign, getter = isFinished) BOOL finished;
+@property (nonatomic, assign, getter=isFinished) BOOL finished;
 
-@property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 
 /**
  * Set the operation progress to 0.f (task not processed), 1.f (task fully processed), or a value in between 

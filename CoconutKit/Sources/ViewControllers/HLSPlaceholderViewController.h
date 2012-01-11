@@ -139,7 +139,7 @@
  *
  * Default value is NO.
  */
-@property (nonatomic, assign, getter = isForwardingProperties) BOOL forwardingProperties;
+@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 

@@ -78,8 +78,10 @@
 "Reset model fields"="Effacer champs modèle";
 "Reset text fields"="Effacer champs textuels";
 "Resizing"="Redimensionnement";
+"Scrolling"="Défilement";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
+"Skinning"="Skinning";
 "Start"="Démarrer";
 "State"="Etat";
 "Stop"="Arrêter";
@@ -101,6 +103,7 @@
 "Uppercase string in Localizable.strings"="Chaîne de Localizable.strings en majuscules";
 "Views"="Vues";
 "View controllers"="View controllers";
+"Web view"="Vue web";
 "Week"="Semaine";
 "Year"="Année";
 "yyyy/MM/dd"="dd.MM.yyyy";

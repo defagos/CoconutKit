@@ -51,6 +51,14 @@ static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
 
 #pragma mark Accessors and mutators
 
+@dynamic backgroundImage;
+
+- (UIImage *)backgroundImage
+{
+    UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
+    return backgroundImageView.image;
+}
+
 - (void)setBackgroundImage:(UIImage *)backgroundImage
 {
     // iOS 5 and above: Built-in support

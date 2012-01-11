@@ -38,7 +38,7 @@
  * If set to YES, validation is also called during input.
  * Default value is NO
  */
-@property (nonatomic, assign, getter = isCheckingOnChange) BOOL checkingOnChange;
+@property (nonatomic, assign, getter=isCheckingOnChange) BOOL checkingOnChange;
 
 /**
  * Formats string and returns it by reference in pValue (must not be NULL). Returns YES iff successful

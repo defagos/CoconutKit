@@ -59,4 +59,6 @@ UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
 UINavigationBar+HLSExtensions.h
 UITextField+HLSValidation.h
+UIToolbar+HLSExtensions.h
 UIView+HLSExtensions.h
+UIWebView+HLSExtensions.h

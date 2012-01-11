@@ -62,18 +62,18 @@
  * Return YES if the task processing is running
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign, getter = isRunning) BOOL running;
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
 /**
  * Return YES if the task processing is over (this can be because the operation has completed its task,
  * or after it has been cancelled)
  */
-@property (nonatomic, readonly, assign, getter = isFinished) BOOL finished;
+@property (nonatomic, readonly, assign, getter=isFinished) BOOL finished;
 
 /**
  * Return YES if the task group has been cancelled
  */
-@property (nonatomic, readonly, assign, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
 
 /**
  * Task progress value (always between 0.f and 1.f). A task might not reach 1.f if it fails

@@ -148,6 +148,6 @@
  * are forwarded through the container controller if the container is iteslf a view controller. This makes it possible
  * to display those elements transparently higher up in the view controller hierarchy
  */
-@property (nonatomic, assign, getter = isForwardingProperties) BOOL forwardingProperties;
+@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @end

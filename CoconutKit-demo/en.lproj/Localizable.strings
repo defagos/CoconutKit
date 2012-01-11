@@ -79,7 +79,9 @@
 "Reset model fields"="Reset model fields";
 "Reset text fields"="Reset text fields";
 "Resizing"="Resizing";
+"Scrolling"="Scrolling";
 "Section end"="Section end";
+"Skinning"="Skinning";
 "Single view animation"="Single view animation";
 "Start"="Start";
 "State"="State";
@@ -102,6 +104,7 @@
 "Uppercase string in Localizable.strings"="Uppercase string in Localizable.strings";
 "Views"="Views";
 "View controllers"="View controllers";
+"Web view"="Web view";
 "Week"="Week";
 "Year"="Year";
 "yyyy/MM/dd"="yyyy/MM/dd";

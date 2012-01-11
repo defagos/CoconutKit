@@ -17,10 +17,12 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "SkinningDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
 
 // Categories
@@ -69,6 +71,8 @@ typedef enum {
     ViewDemoIndexCursor,
     ViewDemoIndexActionSheet,
     ViewDemoIndexKenBurns,
+    ViewDemoIndexSkinning,
+    ViewDemoIndexWebView,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -81,7 +85,6 @@ typedef enum {
     ViewControllersDemoIndexStackController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
-//    ViewControllersDemoIndexPageController,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
@@ -299,6 +302,16 @@ typedef enum {
                     cell.textLabel.text = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
                     break;
                 }
+                    
+                case ViewDemoIndexSkinning: {
+                    cell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
+                    break;
+                }
+                    
+                case ViewDemoIndexWebView: {
+                    cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
+                    break;
+                }
                 
                 default: {
                     return nil;
@@ -436,6 +449,16 @@ typedef enum {
                     
                 case ViewDemoIndexKenBurns: {
                     demoViewController = [[[KenBurnsSlideshowDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexSkinning: {
+                    demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexWebView: {
+                    demoViewController = [[[WebViewDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

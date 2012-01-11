@@ -17,11 +17,11 @@
  */
 - (void)updateStatus;
 
-@property (nonatomic, assign, getter = isRunning) BOOL running;
+@property (nonatomic, assign, getter=isRunning) BOOL running;
 
-@property (nonatomic, assign, getter = isFinished) BOOL finished;
+@property (nonatomic, assign, getter=isFinished) BOOL finished;
 
-@property (nonatomic, assign, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 
 /**
  * Return the set of tasks which a task depends on
