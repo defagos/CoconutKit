@@ -423,11 +423,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqual:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"push_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];        
     }
-    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    else if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
     }
@@ -458,11 +458,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqual:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"push_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];
     }
-    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    else if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
         
@@ -493,7 +493,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
-    if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         [self.containerContentStack removeLastObject];
     }
 }

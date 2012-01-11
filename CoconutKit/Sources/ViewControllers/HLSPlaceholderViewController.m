@@ -319,7 +319,7 @@
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (! [animation.tag isEqual:@"add_animation"]) {
+    if (! [animation.tag isEqualToString:@"add_animation"]) {
         return;
     }
     
@@ -340,7 +340,7 @@
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (! [animation.tag isEqual:@"add_animation"]) {
+    if (! [animation.tag isEqualToString:@"add_animation"]) {
         return;
     }
     
@@ -362,7 +362,7 @@
     }
     
     // Discard the old view controller
-    if ([animation.tag isEqual:@"add_animation"]) {
+    if ([animation.tag isEqualToString:@"add_animation"]) {
         self.oldContainerContent = nil;
     }
 }

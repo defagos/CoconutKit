@@ -323,7 +323,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 - (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    if ([animationStep.tag isEqual:@"zoom"]) {
+    if ([animationStep.tag isEqualToString:@"zoom"]) {
         [self playNextImageAnimation];
     }
 }

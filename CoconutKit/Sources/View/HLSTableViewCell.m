@@ -63,7 +63,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             cell = (UITableViewCell *)firstObject;
             
             // Check that the reuse identifier defined in the xib is correct
-            if (! [[cell reuseIdentifier] isEqual:[self identifier]]) {
+            if (! [[cell reuseIdentifier] isEqualToString:[self identifier]]) {
                 HLSLoggerWarn(@"The reuse identifier in the xib %@ (%@) does not match the one defined for the class "
                               "(%@). The reuse mechanism will not work properly and the table view will suffer from "
                               "performance issues", nibName, [cell reuseIdentifier], [self identifier]);

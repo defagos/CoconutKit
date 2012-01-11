@@ -200,10 +200,10 @@
     HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
     
     // Can find which animation ended using its tag
-    if ([animation.tag isEqual:@"multipleViewsAnimation"]) {
+    if ([animation.tag isEqualToString:@"multipleViewsAnimation"]) {
         self.playBackwardButton.hidden = NO;
     }
-    else if ([animation.tag isEqual:@"reverse_multipleViewsAnimation"]) {
+    else if ([animation.tag isEqualToString:@"reverse_multipleViewsAnimation"]) {
         self.playForwardButton.hidden = NO;
     }
     

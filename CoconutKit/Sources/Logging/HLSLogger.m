@@ -49,19 +49,19 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
                 // Create a logger with the corresponding level
                 NSString *levelName = [infoProperties valueForKey:@"HLSLoggerLevel"];
                 HLSLoggerLevel level;
-                if ([levelName isEqual:kLoggerModeDebug.name]) {
+                if ([levelName isEqualToString:kLoggerModeDebug.name]) {
                     level = HLSLoggerLevelDebug;
                 }
-                else if ([levelName isEqual:kLoggerModeInfo.name]) {
+                else if ([levelName isEqualToString:kLoggerModeInfo.name]) {
                     level = HLSLoggerLevelInfo;		
                 }
-                else if ([levelName isEqual:kLoggerModeWarn.name]) {
+                else if ([levelName isEqualToString:kLoggerModeWarn.name]) {
                     level = HLSLoggerLevelWarn;
                 }
-                else if ([levelName isEqual:kLoggerModeError.name]) {
+                else if ([levelName isEqualToString:kLoggerModeError.name]) {
                     level = HLSLoggerLevelError;
                 }
-                else if ([levelName isEqual:kLoggerModeFatal.name]) {
+                else if ([levelName isEqualToString:kLoggerModeFatal.name]) {
                     level = HLSLoggerLevelFatal;
                 }
                 else {

@@ -41,7 +41,7 @@
         //    - "Normal" (or not set): Full set of demos
         //    - "RootStack": Test a stack controller as root view controller of the application
         NSString *demoMode = [[[NSProcessInfo processInfo] environment] objectForKey:@"CoconutKitDemoMode"];
-        if ([demoMode isEqual:@"RootStack"]) {
+        if ([demoMode isEqualToString:@"RootStack"]) {
             RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
             HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
             self.rootViewController = stackController;

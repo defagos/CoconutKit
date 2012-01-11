@@ -175,7 +175,7 @@
 
 - (void)taskHasStartedProcessing:(HLSTask *)task
 {
-    if ([task.tag isEqual:@"T_task"]) {
+    if ([task.tag isEqualToString:@"T_task"]) {
         self.taskStopButton.hidden = NO;
         self.taskProgressView.hidden = NO;
         self.taskRemainingTimeEstimateLabel.hidden = NO;
@@ -184,7 +184,7 @@
         self.taskProgressView.progress = task.progress;
         self.taskRemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask1"]) {
+    else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1StopButton.hidden = NO;
         self.subTask1ProgressView.hidden = NO;
         self.subTask1RemainingTimeEstimateLabel.hidden = NO;
@@ -193,7 +193,7 @@
         self.subTask1ProgressView.progress = task.progress;
         self.subTask1RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask2"]) {
+    else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2StopButton.hidden = NO;
         self.subTask2ProgressView.hidden = NO;
         self.subTask2RemainingTimeEstimateLabel.hidden = NO;
@@ -202,7 +202,7 @@
         self.subTask2ProgressView.progress = task.progress;
         self.subTask2RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask3"]) {
+    else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3StopButton.hidden = NO;
         self.subTask3ProgressView.hidden = NO;
         self.subTask3RemainingTimeEstimateLabel.hidden = NO;
@@ -215,19 +215,19 @@
 
 - (void)taskProgressUpdated:(HLSTask *)task
 {
-    if ([task.tag isEqual:@"T_task"]) {
+    if ([task.tag isEqualToString:@"T_task"]) {
         self.taskProgressView.progress = task.progress;
         self.taskRemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask1"]) {
+    else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1ProgressView.progress = task.progress;
         self.subTask1RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask2"]) {
+    else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2ProgressView.progress = task.progress;
         self.subTask2RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }
-    else if ([task.tag isEqual:@"T_subTask3"]) {
+    else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3ProgressView.progress = task.progress;
         self.subTask3RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
     }    
@@ -235,7 +235,7 @@
 
 - (void)taskHasBeenProcessed:(HLSTask *)task
 {
-    if ([task.tag isEqual:@"T_task"]) {
+    if ([task.tag isEqualToString:@"T_task"]) {
         // Failure?
         if ([task error]) {
             UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
@@ -253,7 +253,7 @@
         self.taskStartButton.hidden = NO;
         self.taskStopButton.hidden = YES;
     } 
-    else if ([task.tag isEqual:@"T_subTask1"]) {
+    else if ([task.tag isEqualToString:@"T_subTask1"]) {
         // Failure?
         if ([task error]) {
             UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
@@ -270,7 +270,7 @@
         self.subTask1RemainingTimeLabel.hidden = YES;
         self.subTask1StopButton.hidden = YES;
     } 
-    else if ([task.tag isEqual:@"T_subTask2"]) {
+    else if ([task.tag isEqualToString:@"T_subTask2"]) {
         // Failure?
         if ([task error]) {
             UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
@@ -287,7 +287,7 @@
         self.subTask2RemainingTimeLabel.hidden = YES;
         self.subTask2StopButton.hidden = YES;
     }
-    else if ([task.tag isEqual:@"T_subTask3"]) {
+    else if ([task.tag isEqualToString:@"T_subTask3"]) {
         // Failure?
         if ([task error]) {
             UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
@@ -308,26 +308,26 @@
 
 - (void)taskHasBeenCancelled:(HLSTask *)task
 {
-    if ([task.tag isEqual:@"T_task"]) {
+    if ([task.tag isEqualToString:@"T_task"]) {
         self.taskProgressView.hidden = YES;
         self.taskRemainingTimeEstimateLabel.hidden = YES;
         self.taskRemainingTimeLabel.hidden = YES;        
         self.taskStartButton.hidden = NO;
         self.taskStopButton.hidden = YES;
     }
-    else if ([task.tag isEqual:@"T_subTask1"]) {
+    else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1ProgressView.hidden = YES;
         self.subTask1RemainingTimeEstimateLabel.hidden = YES;
         self.subTask1RemainingTimeLabel.hidden = YES;        
         self.subTask1StopButton.hidden = YES;
     }
-    else if ([task.tag isEqual:@"T_subTask2"]) {
+    else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2ProgressView.hidden = YES;
         self.subTask2RemainingTimeEstimateLabel.hidden = YES;
         self.subTask2RemainingTimeLabel.hidden = YES;        
         self.subTask2StopButton.hidden = YES;
     }
-    else if ([task.tag isEqual:@"T_subTask3"]) {
+    else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3ProgressView.hidden = YES;
         self.subTask3RemainingTimeEstimateLabel.hidden = YES;
         self.subTask3RemainingTimeLabel.hidden = YES;        
@@ -339,7 +339,7 @@
 
 - (void)taskGroupHasStartedProcessing:(HLSTaskGroup *)taskGroup
 {
-    if ([taskGroup.tag isEqual:@"TG_taskGroup"]) {
+    if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.hidden = NO;
         self.taskGroupStopButton.hidden = NO;
         self.taskGroupRemainingTimeEstimateLabel.hidden = NO;
@@ -352,7 +352,7 @@
 
 - (void)taskGroupProgressUpdated:(HLSTaskGroup *)taskGroup
 {
-    if ([taskGroup.tag isEqual:@"TG_taskGroup"]) {
+    if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.progress = taskGroup.progress;
         self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeIntervalEstimateLocalizedString];
     }
@@ -360,7 +360,7 @@
 
 - (void)taskGroupHasBeenProcessed:(HLSTaskGroup *)taskGroup
 {
-    if ([taskGroup.tag isEqual:@"TG_taskGroup"]) {
+    if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         // Failures could be tested here using [taskGroup nbrFailures]. This is not made here since we already
         // manage failures at the task level
         
@@ -374,7 +374,7 @@
 
 - (void)taskGroupHasBeenCancelled:(HLSTaskGroup *)taskGroup
 {
-    if ([taskGroup.tag isEqual:@"TG_taskGroup"]) {
+    if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.hidden = YES;
         self.taskGroupRemainingTimeEstimateLabel.hidden = YES;
         self.taskGroupRemainingTimeLabel.hidden = YES;        

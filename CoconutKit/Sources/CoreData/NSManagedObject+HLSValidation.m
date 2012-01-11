@@ -385,7 +385,7 @@ static SEL checkSelectorForValidationSelector(SEL sel)
 {
     // Special cases of global validation for insert / update: One common method since always identical
     NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
-    if ([selectorName isEqual:@"validateForInsert:"] || [selectorName isEqual:@"validateForUpdate:"]) {
+    if ([selectorName isEqualToString:@"validateForInsert:"] || [selectorName isEqualToString:@"validateForUpdate:"]) {
         return NSSelectorFromString(@"checkForConsistency:");
     }
     // In all other cases, the check method bears the same name as the validation method, but beginning with "check"
