@@ -1,6 +1,10 @@
 ### What is CoconutKit?
 
-CoconutKit is a library of high-quality iOS components written at [hortis le studio](http://www.hortis.ch/) and in my spare time. It includes several tools for dealing with view controllers, multi-threading, view animations, as well as some new controls and various utility classes. CoconutKit is distributed under a permissive [MIT license](http://www.opensource.org/licenses/mit-license.php), which means you can freely use it in your own projects (commercial or not).
+CoconutKit is a library of high-quality iOS components written at [hortis le studio](http://www.hortis.ch/) and in my spare time. It includes several tools for dealing with view controllers, multi-threading, view animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.
+
+Most of CoconutKit components are not meant to be sexy, but rather useful. Do not be freaked out! These components are meant to make you more productive, less focused on debugging, so that you can spend more time working on the design of your application (if you have a great designer at hand, of course!)
+
+CoconutKit is distributed under a permissive [MIT license](http://www.opensource.org/licenses/mit-license.php), which means you can freely use it in your own projects (commercial or not).
 
 ### Where can I download CoconutKit?
 You can download CoconutKit from [my github page](https://github.com/defagos), both in binary and source forms.
@@ -10,13 +14,16 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 * High-quality view controller containers (view controller embedding, view controller stacking) with several transition animations
 * Easy way to change the language used by an application at runtime, without having to alter system preferences
-* View controllers for web browsing and for easier table view search management
+* Localization of labels and buttons directly in nib files, without having to create and bind outlets anymore
+* Core Data validation made easy: No more boilerplate code to write, which lets you focus on the validation business logic. Moreover, text fields can be bound for field formatting and synchronization, both in model -> view and view -> model directions. Forms filling model objects managed by Core Data have never been easier to write!
+* View controllers for web browsing and easier table view search management
 * Multi-threaded task management, including task grouping, cancelation, progress status, task dependencies and remaining time estimation
-* New controls (text field moving automatically with the keyboard, new kind of segmented control)
-* Various extensions to Cocoa and UIKit classes (date and time, collections, notifications, etc.)
+* New controls (text field moving automatically with the keyboard, new kind of segmented control, Ken Burns slideshow)
+* Various extensions to Cocoa and UIKit classes (calendrical calculations, collections, notifications, etc.)
 * Classes for common UI tasks (keyboard management, interface locking)
 * Classes for single-line table view cell and view instantiations
 * Classes for creating complex view animations made of several sub-animations
+* Methods for skinning some built-in controls prior to iOS 5 appearance API
 * Lightweight logger, assertions, float comparisons, etc.
 * ... and more!
 * ... and even more to come!
@@ -28,19 +35,22 @@ Some code snippets have been provided in the Snippets directory (and more will p
 
 If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
 
-**It is especially important that your remove those languages you do not need. Fortunately, this is easy to do using Xcode 4: Click on your project, select the info tab and press backspace on each language you want to discard (usually the ones with a lower number of localized files). If you fail to do so you could run into troubles: When a localized file is found, an application is namely assumed to be localized for the corresponding language, even if other files are missing for it. Usually, this means some translations or localized images will be missing. But if you are also using localized xib files your application is likely to crash when your device is set in some language, while it works perfectly when the device language is another one. Removing languages has to be done every time you add a .staticframework file, you should also be careful when updating CoconutKit**
+**It is especially important that your remove those languages you do not need. Fortunately, this is easy to do using Xcode 4: Click on your project, select the info tab and press backspace on each language you want to discard (usually the ones with a lower number of localized files). If you fail to do so you could run into troubles: When a localized file is found, an application is namely assumed to be localized for the corresponding language, even if other files are missing for it. Usually, this means some translations or localized images will be missing. But if you are also using localized nib files your application is likely to crash when your device is set in some language, while it works perfectly when the device language is another one. Removing languages has to be done every time you add a .staticframework file, you should also be careful when updating CoconutKit**
 
 ### With which versions of iOS is CoconutKit compatible?
-CoconutKit should be compatible with iOS 3.2 and later (this might change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
+CoconutKit should be compatible with iOS 3.2 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
 
 ### How can I learn using CoconutKit?
-Learning how to use CoconutKit components always starts with header documentation (I try to keep documentation close to the code). All you need to know should be written there. After you have read this documentation, have a look at the demos to see how the component is used in a concrete case.
+Learning how to use CoconutKit components always starts with header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there, I avoid external documentation which often gets outdated. After you have read this documentation, have a look at the demos and unit tests to see how the component is used in a concrete case.
 
 ### Why have you released CoconutKit?
 My company, [hortis](http://www.hortis.ch/), has a long tradition of open source development. This is one of the major reasons why I  started to work for its entity devoted to mobile development, hortis le studio. After months of hard work, I felt the library was getting mature enough to deserve being published. I sincerely hope people will find this work interesting and start contributing code or ideas, so that a fruitful collaboration process can arise.
 
 ### Why should I use CoconutKit?
-When designing components, I strongly emphasize on clean and documented interfaces, as well as on code quality. My goal is to create components that are easy to use, reliable, and which do what they claim they do, without nasty surprises. You should never have to look at a component implementation to know how it works, this should be obvious just by looking at its interface. I also strive to avoid components that leak or crash. If those are qualities you love to find in libraries, then you should start using CoconutKit now! Moreover, CoconutKit will never use any private API and will therefore always be AppStore friendly.
+When designing components, I strongly emphasize on clean and documented interfaces, as well as on code quality. My goal is to create components that are easy to use, reliable, and which do what they claim they do, without nasty surprises. You should never have to look at a component implementation to know how it works, this should be obvious just by looking at its interface. I also strive to avoid components that leak or crash. If those are qualities you love to find in libraries, then you should start using CoconutKit now! Moreover, CoconutKit will never use any private API and will therefore always remain AppStore friendly.
+
+### Does CoconutKit use ARC?
+No, CoconutKit currently does not use ARC. This will change in the future as ARC is adopted. Because of the large code base and features currently still in development, I am currently not able to start the conversion process immediately. This should however happen somewhere in 2012.
 
 ### Can I contribute?
 You can, and you are strongly encouraged to. Use github pull requests to submit your improvements and bug fixes. You can submit everything you want, documentation and comment fixes included! Everything that tends to increase code quality is always warmly welcome.
@@ -94,6 +104,13 @@ I really would like to thank my company for having allowed me to publish this wo
 Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
 
 ### Release notes
+
+### Version 1.0.2
+* Added easy Core Data validation
+* Added UILabel and UIButton localization in nib files
+* Added Ken Burns slideshow
+* Added categories for UIToolbar, UINavigationBar and UIWebView skinning
+* Various bug fixes
 
 #### Version 1.0.1
 * Added dynamic localization (thanks to Cédric Luthi)
