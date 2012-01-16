@@ -8,31 +8,20 @@
 
 #import "UILabel+HLSDynamicLocalization.h"
 
-#import <objc/runtime.h>
 #import "HLSCategoryLinker.h"
+#import "HLSLabelLocalizationInfo.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "NSDictionary+HLSExtensions.h"
 
 HLSLinkCategory(UILabel_HLSDynamicLocalization)
-
-typedef enum {
-    LocalizationAttributeEnumBegin = 0,
-    LocalizationAttributeNormal = LocalizationAttributeEnumBegin,
-    LocalizationAttributeUppercase,
-    LocalizationAttributeLowercase,
-    LocalizationAttributeEnumEnd,
-    LocalizationAttributeEnumSize = LocalizationAttributeEnumEnd - LocalizationAttributeEnumBegin
-} LocalizationAttribute;
 
 static BOOL s_missingLocalizationsVisible = NO;
 
 // Keys for associated objects
-static void *s_localizationKeyKey = &s_localizationKeyKey;
-static void *s_localizationAttributeKey = &s_localizationAttributeKey;
-static void *s_localizationTableKey = &s_localizationTableKey;
-static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
+static void *s_localizationInfosKey = &s_localizationInfosKey;
 
 // Original implementations of the methods we swizzle
 static id (*s_UILabel__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
@@ -49,10 +38,12 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 - (void)swizzledDealloc;
 - (void)swizzledAwakeFromNib;
 - (void)swizzledSetText:(NSString *)text;
-- (void)swizzledSetBackgroundColor:(NSString *)backgroundColor;
+- (void)swizzledSetBackgroundColor:(UIColor *)backgroundColor;
 
-- (void)initCommon;
-- (void)updateLocalizationKey;
+- (HLSLabelLocalizationInfo *)localizationInfo;
+
+- (void)registerForLocalizationChanges;
+- (void)updateLocalizationInfos;
 - (void)localizeText;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
@@ -60,6 +51,8 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 @end
 
 @implementation UILabel (HLSDynamicLocalization)
+
+#pragma mark Class methods
 
 + (void)setMissingLocalizationsVisible:(BOOL)visible
 {
@@ -78,6 +71,8 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 @implementation UILabel (HLSDynamicLocalizationPrivate)
 
+#pragma mark Class methods
+
 + (void)load
 {
     s_UILabel__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector(self, @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
@@ -88,10 +83,12 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setBackgroundColor:), @selector(swizzledSetBackgroundColor:));
 }
 
+#pragma mark Swizzled method implementations
+
 - (id)swizzledInitWithFrame:(CGRect)frame
 {   
     if ((self = (*s_UILabel__initWithFrame_Imp)(self, @selector(initWithFrame:), frame))) {
-        [self initCommon];
+        [self registerForLocalizationChanges];
     }
     return self;
 }
@@ -99,7 +96,7 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 - (id)swizzledInitWithCoder:(NSCoder *)aDecoder
 {
     if ((self = (*s_UILabel__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
-        [self initCommon];
+        [self registerForLocalizationChanges];
     }
     return self;
 }
@@ -117,24 +114,70 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 {
     (*s_UILabel__awakeFromNib_Imp)(self, @selector(awakeFromNib));
     
-    [self updateLocalizationKey];
+    [self updateLocalizationInfos];
+    [self localizeText];
 }
 
 - (void)swizzledSetText:(NSString *)text
 {
     (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
     
-    [self updateLocalizationKey];
+    [self updateLocalizationInfos];
+    [self localizeText];
 }
 
-- (void)swizzledSetBackgroundColor:(NSString *)backgroundColor
+- (void)swizzledSetBackgroundColor:(UIColor *)backgroundColor
 {
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), backgroundColor);
     
-    objc_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
+    localizationInfo.originalBackgroundColor = backgroundColor;
 }
 
-- (void)initCommon
+#pragma mark Localization
+
+// Returns the localization information associated with the current label. This information is lazily created and
+// attached to the appropriate object
+- (HLSLabelLocalizationInfo *)localizationInfo
+{
+    // The label is a button label
+    if ([[self superview] isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)[self superview];
+        
+        // Get localization info for all states (lazily added if needed). Attached to the button, see below
+        NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
+        if (! buttonStateToLocalizationInfoMap) {
+            buttonStateToLocalizationInfoMap = [NSDictionary dictionary];
+        }
+        
+        // Get the information for the current button state (add it lazily if it does not exist yet)
+        NSNumber *buttonStateKey = [NSNumber numberWithInt:button.state];
+        HLSLabelLocalizationInfo *localizationInfo = [buttonStateToLocalizationInfoMap objectForKey:buttonStateKey];
+        if (! localizationInfo) {
+            localizationInfo = [[[HLSLabelLocalizationInfo alloc] init] autorelease];
+            buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
+                                                                                                    forKey:buttonStateKey];
+        }
+        
+        // Attach the localization to the button (cleaner; titles are button properties, and we cannot know for sure
+        // whether the button label is reused or not)
+        objc_setAssociatedObject(button, s_localizationInfosKey, buttonStateToLocalizationInfoMap, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        return localizationInfo;
+    }
+    // Standalone label
+    else {
+        HLSLabelLocalizationInfo *localizationInfo = objc_getAssociatedObject(self, s_localizationInfosKey);
+        if (! localizationInfo) {
+            localizationInfo = [[[HLSLabelLocalizationInfo alloc] init] autorelease];
+            objc_setAssociatedObject(self, s_localizationInfosKey, localizationInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+        
+        return localizationInfo;
+    }
+}
+
+- (void)registerForLocalizationChanges
 {
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(currentLocalizationDidChange:) 
@@ -142,45 +185,53 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
                                                object:nil];
 }
 
-// Update the attached localization key by extracting it (if there is one) from the current text
-- (void)updateLocalizationKey
+// Update the attached localization information by extracting it (if there is one) from the current text and label
+// properties
+- (void)updateLocalizationInfos
 {
+    // Get and reset any currently existing information
+    HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
+    localizationInfo.localizationKey = nil;
+    
+    // Syntactic elements
     static NSString * const kSeparator = @"/";
     static NSString * const kNormalLeadingPrefix = @"LS";
     static NSString * const kUppercaseLeadingPrefix = @"ULS";
     static NSString * const kLowercaseLeadingPrefix = @"LLS";
+    static NSString * const kCapitalizedLeadingPrefix = @"CLS";
     static NSString * const kTableNamePrefix = @"T";
     
     static NSArray *s_leadingPrefixes = nil;
     if (! s_leadingPrefixes) {
-        s_leadingPrefixes = [[NSArray arrayWithObjects:kNormalLeadingPrefix, kUppercaseLeadingPrefix, kLowercaseLeadingPrefix, nil] retain];
+        s_leadingPrefixes = [[NSArray arrayWithObjects:kNormalLeadingPrefix, kUppercaseLeadingPrefix, kLowercaseLeadingPrefix, 
+                              kCapitalizedLeadingPrefix, nil] retain];
     }
     
-    // Break into components
+    // Break text into components
     NSArray *components = [self.text componentsSeparatedByString:kSeparator];
     if ([components count] == 0) {
         return;
     }
     
-    // If no leading prefix, nothing to do
+    // If no leading prefix, we are done
     NSString *leadingPrefix = [components firstObject];
     if (! [s_leadingPrefixes containsObject:leadingPrefix]) {
         return;
     }
     
-    // Extract attribute
-    LocalizationAttribute attribute = LocalizationAttributeNormal;
-    if ([leadingPrefix isEqualToString:kNormalLeadingPrefix]) {
-        attribute = LocalizationAttributeNormal;
-    }
-    else if ([leadingPrefix isEqualToString:kUppercaseLeadingPrefix]) {
-        attribute = LocalizationAttributeUppercase;
+    // Extract representation
+    if ([leadingPrefix isEqualToString:kUppercaseLeadingPrefix]) {
+        localizationInfo.representation = HLSLabelRepresentationUppercase;
     }
     else if ([leadingPrefix isEqualToString:kLowercaseLeadingPrefix]) {
-        attribute = LocalizationAttributeLowercase;
+        localizationInfo.representation = HLSLabelRepresentationLowercase;
     }
-    
-    objc_setAssociatedObject(self, s_localizationAttributeKey, [NSNumber numberWithInt:attribute], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    else if ([leadingPrefix isEqualToString:kCapitalizedLeadingPrefix]) {
+        localizationInfo.representation = HLSLabelRepresentationCapitalized;
+    }
+    else {
+        localizationInfo.representation = HLSLabelRepresentationNormal;
+    }
     
     // Extract the localization key
     NSString *localizationKey = @"";
@@ -208,8 +259,7 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     if ([localizationKey length] == 0) {
         HLSLoggerWarn(@"Leading localization prefix %@ detected, but empty localization key", [components firstObject]);
     }
-    
-    objc_setAssociatedObject(self, s_localizationKeyKey, localizationKey, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    localizationInfo.localizationKey = localizationKey;
     
     // Extract the table name
     if (hasTable) {
@@ -229,55 +279,83 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
             HLSLoggerWarn(@"Table name prefix detected, but empty table name", [components firstObject]);
         }
         
-        objc_setAssociatedObject(self, s_localizationTableKey, table, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        localizationInfo.table = table;
     }
-    
-    [self localizeText];
 }
 
-// Localize the current text using the attached localization key (if any)
+// Localize the current text using the corresponding localization information
 - (void)localizeText
 {
-    NSString *localizationKey = objc_getAssociatedObject(self, s_localizationKeyKey);
-    if (! localizationKey) {
+    HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
+    
+    if ([localizationInfo.localizationKey isEqualToString:@"LS/Button label, normal"]) {
+        NSLog(@"localize text for key %@", localizationInfo.localizationKey);
+    }
+    
+    // Restore the original background color if it had been altered
+    // (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), localizationInfo.originalBackgroundColor);
+    
+#if 0
+    // Restore the original background color if it had been altered
+    UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
+    self.backgroundColor = originalBackgroundColor;
+    objc_setAssociatedObject(self, s_originalBackgroundColorKey, self.backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+#endif
+    
+    // If no localization key, nothing to do
+    if (! localizationInfo.localizationKey) {
         return;
     }
     
     // We use an explicit constant string for missing localizations since otherwise the key would be returned by 
     // localizedStringForKey:value:table
     static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
-    NSString *table = objc_getAssociatedObject(self, s_localizationTableKey);
-    NSString *text = [[NSBundle mainBundle] localizedStringForKey:localizationKey value:kMissingLocalizedString table:table];
-    
-    // Restore the original background color if it had been altered
-    UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
-    self.backgroundColor = originalBackgroundColor;
-    objc_setAssociatedObject(self, s_originalBackgroundColorKey, self.backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
+    NSString *text = [[NSBundle mainBundle] localizedStringForKey:localizationInfo.localizationKey
+                                                            value:kMissingLocalizedString
+                                                            table:localizationInfo.table];
+            
     // Use the localization key as text if missing
     if ([text isEqualToString:kMissingLocalizedString]) {
-        text = [localizationKey length] != 0 ? localizationKey : @"(no key)";
+        text = [localizationInfo.localizationKey length] != 0 ? localizationInfo.localizationKey : @"(no key)";
         
         // Make labels with missing localizations visible (saving the original color first)
         if (s_missingLocalizationsVisible) {
             // We must use the original method here
-            (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
+            // (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }    
     }
     
-    LocalizationAttribute attribute = [objc_getAssociatedObject(self, s_localizationAttributeKey) intValue];
-    if (attribute == LocalizationAttributeUppercase) {
-        text = [text uppercaseString];
-    }
-    else if (attribute == LocalizationAttributeLowercase) {
-        text = [text lowercaseString];
+    // Formatting
+    switch (localizationInfo.representation) {
+        case HLSLabelRepresentationUppercase: {
+            text = [text uppercaseString];
+            break;
+        }
+            
+        case HLSLabelRepresentationLowercase: {
+            text = [text lowercaseString];
+            break;
+        }
+            
+        case HLSLabelRepresentationCapitalized: {
+            text = [text capitalizedString];
+            break;
+        }
+            
+        default: {
+            break;
+        }
     }
     
-    self.text = text;
-    
-    // Special case of buttons: Must adjust the label when the string is updated
+    // Button label
     if ([[self superview] isKindOfClass:[UIButton class]]) {
-        [self sizeToFit];
+        UIButton *button = (UIButton *)[self superview];
+        [button setTitle:text forState:button.state];
+    }
+    // Standalone label
+    else {
+        (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
     }
 }
 

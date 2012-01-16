@@ -16,6 +16,7 @@
  *                                        Localizable.strings file if no explicit table is provided)
  *   - ULS/<localizationKey>[/T/<table>/]: Same as LS:, but uppercase
  *   - LLS/<localizationKey>[/T/<table>/]: Same as LS:, but lowercase
+ *   - CLS/<localizationKey>[/T/<table>/]: Same as LS:, but capitalized
  *
  * Some examples:
  *   LS/Cancel

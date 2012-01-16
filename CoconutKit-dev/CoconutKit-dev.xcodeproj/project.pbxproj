@@ -186,6 +186,7 @@
 		6FDE68A714BD61F500F8CD3A /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */; };
 		6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */; };
 		6FDE68AA14BD6C6E00F8CD3A /* bkgr_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A914BD6C6E00F8CD3A /* bkgr_bar.png */; };
+		6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
@@ -490,6 +491,8 @@
 		6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinningDemoViewController.m; sourceTree = "<group>"; };
 		6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SkinningDemoViewController.xib; sourceTree = "<group>"; };
 		6FDE68A914BD6C6E00F8CD3A /* bkgr_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkgr_bar.png; sourceTree = "<group>"; };
+		6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
+		6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
@@ -755,6 +758,8 @@
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
 				6FADE68714BA04A6007EE121 /* HLSKenBurnsSlideshow.h */,
 				6FADE68814BA04A6007EE121 /* HLSKenBurnsSlideshow.m */,
+				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
+				6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE68914BA04A6007EE121 /* HLSNibView.h */,
 				6FADE68A14BA04A6007EE121 /* HLSNibView.m */,
 				6FADE68B14BA04A6007EE121 /* HLSSubtitleTableViewCell.h */,
@@ -1617,6 +1622,7 @@
 				6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */,
 				6FDE68A714BD61F500F8CD3A /* SkinningDemoViewController.m in Sources */,
+				6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
