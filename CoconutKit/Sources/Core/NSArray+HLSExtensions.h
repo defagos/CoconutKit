@@ -19,6 +19,11 @@
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 - (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 
+/**
+ * Sort an array using a single descriptor
+ */
+- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+
 @end
 
 @interface NSMutableArray (HLSExtensions)

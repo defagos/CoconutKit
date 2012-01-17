@@ -82,8 +82,6 @@
 
 @synthesize placeholderView = m_placeholderView;
 
-@synthesize stretchingContent = m_stretchingContent;
-
 @synthesize forwardingProperties = m_forwardingProperties;
 
 - (void)setForwardingProperties:(BOOL)forwardingProperties
@@ -126,9 +124,7 @@
     [super viewWillAppear:animated];
     
     // If an inset has been defined but not displayed yet, display it
-    if ([self.containerContent addViewToContainerView:self.placeholderView
-                                              stretch:self.stretchingContent 
-                                     blockInteraction:NO 
+    if ([self.containerContent addViewToContainerView:self.placeholderView 
                               inContainerContentStack:nil]) {
         // Push non-animated
         HLSAnimation *pushAnimation = [self createAnimation];
@@ -275,9 +271,7 @@
     
     if ([self isViewLoaded]) {
         // Install the new view
-        [self.containerContent addViewToContainerView:self.placeholderView 
-                                              stretch:self.stretchingContent 
-                                     blockInteraction:NO 
+        [self.containerContent addViewToContainerView:self.placeholderView  
                               inContainerContentStack:[NSArray arrayWithObjects:self.oldContainerContent, self.containerContent, nil]];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
@@ -325,7 +319,7 @@
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (! [animation.tag isEqual:@"add_animation"]) {
+    if (! [animation.tag isEqualToString:@"add_animation"]) {
         return;
     }
     
@@ -346,7 +340,7 @@
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (! [animation.tag isEqual:@"add_animation"]) {
+    if (! [animation.tag isEqualToString:@"add_animation"]) {
         return;
     }
     
@@ -368,7 +362,7 @@
     }
     
     // Discard the old view controller
-    if ([animation.tag isEqual:@"add_animation"]) {
+    if ([animation.tag isEqualToString:@"add_animation"]) {
         self.oldContainerContent = nil;
     }
 }

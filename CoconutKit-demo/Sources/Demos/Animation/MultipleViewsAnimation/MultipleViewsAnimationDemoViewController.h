@@ -14,9 +14,12 @@
     UIView *m_rectangleView4;
     UIButton *m_playForwardButton;
     UIButton *m_playBackwardButton;
-    UILabel *m_animatedLabel;
+    UIButton *m_cancelButton;
     UISwitch *m_animatedSwitch;
+    UISwitch *m_blockingSwitch;
+    UISwitch *m_resizingSwitch;
     HLSAnimation *m_animation;
+    HLSAnimation *m_reverseAnimation;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView1;
@@ -25,7 +28,13 @@
 @property (nonatomic, retain) IBOutlet UIView *rectangleView4;
 @property (nonatomic, retain) IBOutlet UIButton *playForwardButton;
 @property (nonatomic, retain) IBOutlet UIButton *playBackwardButton;
-@property (nonatomic, retain) IBOutlet UILabel *animatedLabel;
+@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *resizingSwitch;
+
+- (IBAction)playForward:(id)sender;
+- (IBAction)playBackward:(id)sender;
+- (IBAction)cancelButton:(id)sender;
 
 @end

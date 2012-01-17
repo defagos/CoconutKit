@@ -9,7 +9,6 @@
 @interface ActionSheetDemoViewController : HLSViewController {
 @private
     UIButton *m_showFromRectButton;
-    UIButton *m_showInViewButton;
     UIToolbar *m_toolbar;
     UIBarButtonItem *m_showFromToolbarBarButtonItem;
     UIBarButtonItem *m_otherShowFromToolbarBarButtonItem;
@@ -18,7 +17,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *showFromRectButton;
-@property (nonatomic, retain) IBOutlet UIButton *showInViewButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *showFromToolbarBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *otherShowFromToolbarBarButtonItem;

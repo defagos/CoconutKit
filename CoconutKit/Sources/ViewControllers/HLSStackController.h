@@ -37,6 +37,10 @@ extern const NSUInteger kStackUnlimitedCapacity;
  * view and subview rectangles, cumulating alphas to find which parts of the view stack are visible and which aren't;
  * clearly not worth it).
  *
+ * When a view controller's view is inserted into a stack controller, its view frame is automatically adjusted to match 
+ * the container view bounds, as for usual UIKit containers (UITabBarController, UINavigationController). Be sure that
+ * the view controller's view size and autoresizing behaviors are correctly set.
+ *
  * HLSStackController uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation for view 
  * controllers you pushed in it (it will be ignored, see UIViewController documentation). The 2-step rotation is deprecated 
  * starting with iOS 5, you should not use it anymore anyway.
@@ -57,8 +61,6 @@ extern const NSUInteger kStackUnlimitedCapacity;
 @private
     NSMutableArray *m_containerContentStack;                    // Contains HLSContainerContent objects
     NSUInteger m_capacity;
-    BOOL m_stretchingContent;                                   // Automatically stretch view controller's views to match
-                                                                // container view frame?
     BOOL m_forwardingProperties;                                // Does the container forward inset navigation properties transparently?
     id<HLSStackControllerDelegate> m_delegate;
 }
@@ -122,18 +124,6 @@ extern const NSUInteger kStackUnlimitedCapacity;
  * The view controllers in the stack. The first one is the root view controller, the last one the top one
  */
 - (NSArray *)viewControllers;
-
-/**
- * If set to YES, the view controller's view frames are automatically adjusted to match the container view bounds. The 
- * resizing behavior still depends on the autoresizing behavior of the content views, though (for example, if a content 
- * view is able to stretch in both directions, it will fill the entire container view). If set to NO, the content view 
- * is used as is. 
- * Changing this property only affect view controllers which are displayed afterwards. In general, this property is set 
- * right after the stack controller is instantiated and never changed.
- *
- * Default value is NO.
- */
-@property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
 
 /**
  * If set to YES, properties of the top view controller (title, navigation item, toolbar) are forwarded to the stack 

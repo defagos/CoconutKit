@@ -11,7 +11,6 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
-#import "HLSTaskGroup+Friend.h"
 
 // Remark:
 // HLSTaskGroup is not a subclass of HLSTask. This would have been nice, but this would also have introduced subtle
@@ -35,6 +34,18 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign) float fullProgress;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
 @property (nonatomic, retain) NSDate *lastEstimateDate;
+
+- (void)updateStatus;
+
+- (NSSet *)dependenciesForTask:(HLSTask *)task;
+- (NSSet *)weakDependenciesForTask:(HLSTask *)task;
+- (NSSet *)strongDependenciesForTask:(HLSTask *)task;
+
+- (NSSet *)dependentsForTask:(HLSTask *)task;
+- (NSSet *)weakDependentsForTask:(HLSTask *)task;
+- (NSSet *)strongDependentsForTask:(HLSTask *)task;
+
+- (void)reset;
 
 @end
 

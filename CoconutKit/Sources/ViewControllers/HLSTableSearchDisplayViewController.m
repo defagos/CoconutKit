@@ -72,6 +72,10 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
                                                                     kSearchBarStandardHeight)]
                       autorelease];
     
+    // The search bar might be localized as well. Localization is made in [HLSViewController viewDidLoad], but at that
+    // time the search bar was not available. Run through localization again to solve this issue
+    [self localize];
+    
     // Manage the search interface using the built-in UISearchDisplayController. We therefore benefit from its
     // features (animations, dimming view, navigation controller dedicated support, etc.) for free
     self.searchController = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar 

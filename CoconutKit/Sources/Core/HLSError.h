@@ -2,103 +2,63 @@
 //  HLSError.h
 //  CoconutKit
 //
-//  Created by Samuel Défago on 04.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Created by Samuel Défago on 10.12.11.
+//  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
 /**
- * Helper macros for defining error identifiers.
+ * Lightweight abstract subclass of HLSError providing a convenient way to create errors and to define and access
+ * their properties.
  *
- * A module introducing new errors should:
- *   1) import this header file in its own header file
- *   2) in its header file, declare the new error identifier using the HLSDeclareError macro
- *   3) in its implementation file, define the new error identifier using the HLSDefineError macro
- * If two modules try to introduce the same error identifier, a linker error will occur (since the symbol 
- * is in this case multiply defined in two separate translation units). This is good expected behavior, 
- * and this matches the approach applied in the Apple frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
+ * This class enforces the link between accessor methods and underlying userInfo dictionary keys. This is not
+ * required, as explained in the documentation:
+ *   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/ErrorHandlingCocoa/ErrorHandling/ErrorHandling.html
  *
- * Note that error identifier names should end with "Error"
- */
-#define HLSDeclareError(name)           extern NSString * const name
-#define HLSDefineError(name)            NSString * const name = @#name
-
-/**
- * Class for easy NSError creation. Provides a mechanism for defining standard errors, and enforces each error
- * code to be associated with a domain and a unique code (unique inside the domain) first. Each set of standard 
- * properties is associated with a unique identifier, through which default errors can be created in a snap.
- *
- * Use the convenience methods to instantiate error objects.
+ * Designated initializer: initWithCode:
  */
 @interface HLSError : NSError {
 @private
-    
+    NSDictionary *m_internalUserInfo;
 }
 
 /**
- * Register default properties for an HLSError, and associate them with a given error identifier. These properties
- * will be used when instantiating an error from this identifier.
- * The method returns NO if it could not register the new error definition.
- *
- * If you do not need to set more than a domain and a description, use the shorter form of this method below
- *
- * This method is thread-safe
+ * Instantiate an error with some code within a domain. The error is created with no information, use the mutators below to 
+ * add the information you need
  */
-+ (BOOL)registerDefaultCode:(NSInteger)code
-                     domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription 
-     localizedFailureReason:(NSString *)localizedFailureReason
-localizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion
-   localizedRecoveryOptions:(NSArray *)localizedRecoveryOptions
-          recoveryAttempter:(id)recoveryAttempter
-                 helpAnchor:(NSString *)helpAnchor
-              forIdentifier:(NSString *)identifier;
++ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
- * Shorter form of the default property registration method. Should be sufficient most of the time
- *
- * This method is thread-safe
+ * Convenience instantiation method for the most common case (an error conveying a description message). You can still
+ * use the mutators below to add more information if needed
  */
-+ (BOOL)registerDefaultCode:(NSInteger)code
-                     domain:(NSString *)domain 
-       localizedDescription:(NSString *)localizedDescription 
-              forIdentifier:(NSString *)identifier;
++ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
 
 /**
- * Create an error using the standard set of properties associated with the identifier
- * 
- * The userInfo dictionary can be used to convey additional information. As documented in NSError.h, some keys can be 
- * used to define error properties (e.g. NSLocalizedDescriptionKey for localizedDescription). These keys are used
- * by HLSError for consistency. If userInfo happens to contain one of them, it will be omitted.
- *
- * If the identifier has not been registered, nil is returned.
- *
- * This method is thread-safe
+ * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
+ * add the information you need
  */
-+ (id)errorFromIdentifier:(NSString *)identifier nestedError:(NSError *)nestedError userInfo:(NSDictionary *)userInfo;
+- (id)initWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
- * Same as errorFromIdentifier:nestedError:userInfo:, but without user information
+ * Various mutators for setting standard NSError properties. Please refer to the NSError documentation for more information
  */
-+ (id)errorFromIdentifier:(NSString *)identifier nestedError:(NSError *)nestedError;
+- (void)setLocalizedDescription:(NSString *)localizedDescription;
+- (void)setLocalizedFailureReason:(NSString *)localizedFailureReason;
+- (void)setLocalizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion;
+- (void)setLocalizedRecoveryOptions:(NSArray *)localizedRecoveryOptions;
+- (void)setRecoveryAttempter:(id)recoveryAttempter;
+- (void)setHelpAnchor:(NSString *)helpAnchor;
 
 /**
- * Same as errorFromIdentifier:nestedError:userInfo:, but without nested error
+ * Set a nested error
  */
-+ (id)errorFromIdentifier:(NSString *)identifier userInfo:(NSDictionary *)userInfo;
+- (void)setUnderlyingError:(NSError *)underlyingError;
 
 /**
- * Same as errorFromIdentifier:nestedError:userInfo:, but without nested error and user information
+ * Sets an object for some key. The key can either be a reserved one (see NSError) or a custom one. Instead 
+ * of using this generic mutator to set objects corresponding to reserved keys, use the mutators provided
+ * by HLSError
  */
-+ (id)errorFromIdentifier:(NSString *)identifier;
-
-/**
- * Return the nested error if any
- */
-- (NSError *)nestedError;
-
-/**
- * Return the really user-specific information conveyed by the error (i.e. without all "reserved" keys)
- */
-- (NSDictionary *)customUserInfo;
+- (void)setObject:(id)object forKey:(NSString *)key;
 
 @end

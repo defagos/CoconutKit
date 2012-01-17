@@ -10,22 +10,26 @@
 
 #import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
+#import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
+#import "KenBurnsSlideshowDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
+#import "SkinningDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
-#import "WizardPageViewController.h"
 
 // Categories
 typedef enum {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
+    DemoCategoryIndexCore,
     DemoCategoryIndexTask,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
@@ -41,6 +45,14 @@ typedef enum {
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
+
+// Demos for core
+typedef enum {
+    CoreDemoIndexEnumBegin = 0,
+    CoreDemoIndexDynamicLocalization = CoreDemoIndexEnumBegin,
+    CoreDemoIndexEnumEnd,
+    CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
+} CoreDemoIndex;
 
 // Demos for tasks
 typedef enum {
@@ -58,6 +70,9 @@ typedef enum {
     ViewDemoIndexTextFieldsLarge,
     ViewDemoIndexCursor,
     ViewDemoIndexActionSheet,
+    ViewDemoIndexKenBurns,
+    ViewDemoIndexSkinning,
+    ViewDemoIndexWebView,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -70,7 +85,6 @@ typedef enum {
     ViewControllersDemoIndexStackController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
-//    ViewControllersDemoIndexPageController,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
@@ -140,6 +154,11 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexCore: {
+            return NSLocalizedString(@"Core", @"Core");
+            break;
+        }
+            
         case DemoCategoryIndexTask: {
             return NSLocalizedString(@"Tasks", @"Tasks");
             break;
@@ -167,6 +186,11 @@ typedef enum {
     switch (section) {
         case DemoCategoryIndexAnimation: {
             return AnimationDemoIndexEnumSize;
+            break;
+        }
+            
+        case DemoCategoryIndexCore: {
+            return CoreDemoIndexEnumSize;
             break;
         }
             
@@ -217,6 +241,21 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexCore: {
+            switch (indexPath.row) {
+                case CoreDemoIndexDynamicLocalization: {
+                    cell.textLabel.text = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }
+            }
+            break;
+        }
+            
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
@@ -256,6 +295,21 @@ typedef enum {
                     
                 case ViewDemoIndexActionSheet: {
                     cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
+                    break;
+                }
+                    
+                case ViewDemoIndexKenBurns: {
+                    cell.textLabel.text = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+                    break;
+                }
+                    
+                case ViewDemoIndexSkinning: {
+                    cell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
+                    break;
+                }
+                    
+                case ViewDemoIndexWebView: {
+                    cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
                     break;
                 }
                 
@@ -336,6 +390,21 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexCore: {
+            switch (indexPath.row) {
+                case CoreDemoIndexDynamicLocalization: {
+                    demoViewController = [[[DynamicLocalizationDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }
+            }
+            break;
+        }
+            
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
@@ -378,6 +447,21 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexKenBurns: {
+                    demoViewController = [[[KenBurnsSlideshowDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexSkinning: {
+                    demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexWebView: {
+                    demoViewController = [[[WebViewDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
                 default: {
                     return;
                     break;
@@ -395,16 +479,6 @@ typedef enum {
                     
                 case ViewControllersDemoIndexWizardViewController: {
                     demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
-                    WizardDemoViewController *wizardDemoViewController = (WizardDemoViewController*)demoViewController;
-                    wizardDemoViewController.stretchingContent = YES;
-                    
-                    WizardPageViewController *wizardPageViewController1 = [[[WizardPageViewController alloc] init] autorelease];
-                    WizardPageViewController *wizardPageViewController2 = [[[WizardPageViewController alloc] init] autorelease];
-                    WizardPageViewController *wizardPageViewController3 = [[[WizardPageViewController alloc] init] autorelease];
-                    wizardDemoViewController.viewControllers = [NSArray arrayWithObjects:wizardPageViewController1,
-                                                                wizardPageViewController2,
-                                                                wizardPageViewController3,
-                                                                nil];                    
                     break;
                 }
                     

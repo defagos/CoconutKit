@@ -10,7 +10,7 @@
 
 @interface MemoryWarningTestCoverViewController ()
 
-- (void)closeBarButtonItemClicked:(id)sender;
+- (void)close:(id)sender;
 
 @end
 
@@ -31,14 +31,11 @@
     [super releaseViews];
     
     self.closeBarButtonItem = nil;
-    self.instructionLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize closeBarButtonItem = m_closeBarButtonItem;
-
-@synthesize instructionLabel = m_instructionLabel;
 
 #pragma mark View lifecycle
 
@@ -47,7 +44,7 @@
     [super viewDidLoad];
     
     self.closeBarButtonItem.target = self;
-    self.closeBarButtonItem.action = @selector(closeBarButtonItemClicked:);
+    self.closeBarButtonItem.action = @selector(close:);
 }
 
 #pragma mark Orientation management
@@ -63,7 +60,7 @@
 
 #pragma mark Event callbacks
 
-- (void)closeBarButtonItemClicked:(id)sender
+- (void)close:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -76,8 +73,6 @@
     
     self.title = @"MemoryWarningTestCoverViewController";
     self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
-    self.instructionLabel.text = NSLocalizedString(@"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct",
-                                                   @"In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct");
 }
 
 @end

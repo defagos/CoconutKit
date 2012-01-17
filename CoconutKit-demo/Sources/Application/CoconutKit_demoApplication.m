@@ -9,13 +9,14 @@
 #import "CoconutKit_demoApplication.h"
 
 #import "DemosListViewController.h"
+#import "RootStackDemoViewController.h"
 
 @interface CoconutKit_demoApplication ()
 
 - (void)toggleLanguageSheet:(id)sender;
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
 
-@property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) UIViewController *rootViewController;
 @property (nonatomic, retain) HLSActionSheet *languageActionSheet;
 
 @end
@@ -27,11 +28,30 @@
 - (id)init
 {
     if ((self = [super init])) {
-        DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
-        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
-        UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleLanguageSheet:)] autorelease];
-        demosListViewController.navigationItem.rightBarButtonItem = languageBarButtonItem;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+        
+        // Create the default model entry point and context
+        NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
+                                                                         storeDirectory:documentsDirectoryPath]
+                                         autorelease];
+        [HLSModelManager setDefaultModelManager:modelManager];
+        
+        // Special modes can be set by setting the CoconutKitDemoMode environment variable:
+        //    - "Normal" (or not set): Full set of demos
+        //    - "RootStack": Test a stack controller as root view controller of the application
+        NSString *demoMode = [[[NSProcessInfo processInfo] environment] objectForKey:@"CoconutKitDemoMode"];
+        if ([demoMode isEqualToString:@"RootStack"]) {
+            RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+            HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+            self.rootViewController = stackController;
+        }
+        else {
+            DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
+            self.rootViewController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
+            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleLanguageSheet:)] autorelease];
+            demosListViewController.navigationItem.rightBarButtonItem = languageBarButtonItem;
+        }
     }
     return self;
 }
@@ -39,7 +59,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
-    self.navigationController = nil;
+    self.rootViewController = nil;
     self.languageActionSheet = nil;
     [super dealloc];
 }
@@ -68,18 +88,37 @@
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {
-    self.navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", @"Language");
+    // Normal demo mode
+    if ([self.rootViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)self.rootViewController;
+        navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", @"Language");
+    }
 }
 
 #pragma mark Accesors and mutators
 
-@synthesize navigationController = m_navigationController;
+@synthesize rootViewController = m_rootViewController;
 
 - (UIViewController *)viewController
 {
-    return self.navigationController;
+    return self.rootViewController;
 }
 
 @synthesize languageActionSheet = m_languageActionSheet;
+
+#pragma mark Core Data
+
+- (void)savePendingChanges
+{
+    // Save any pending changes in the default context
+    NSManagedObjectContext *managedObjectContext = [HLSModelManager defaultModelContext];
+    if ([managedObjectContext hasChanges]) {
+        HLSLoggerInfo(@"Saving pending changes on exit");
+        NSError *error = nil;
+        if (! [managedObjectContext save:&error]) {
+            HLSLoggerError(@"Failed to save pending changes. Reason: %@", [error localizedDescription]);
+        }
+    }
+}
 
 @end

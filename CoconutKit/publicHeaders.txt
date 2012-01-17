@@ -7,6 +7,7 @@ HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSFloat.h
+HLSKenBurnsSlideshow.h
 HLSKeyboardInformation.h
 HLSLogger.h
 HLSManagedObjectCopying.h
@@ -18,6 +19,7 @@ HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
 HLSStackController.h
+HLSStretchingContainerView.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h
@@ -27,7 +29,6 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
-HLSTransform.h
 HLSTransitionStyle.h
 HLSUserInterfaceLock.h
 HLSValidable.h
@@ -46,9 +47,18 @@ NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSDateFormatter+HLSExtensions.h
 NSDictionary+HLSExtensions.h
+NSError+HLSExtensions.h
+NSManagedObject+HLSExtensions.h
+NSManagedObject+HLSValidation.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
+NSTimeZone+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
+UILabel+HLSDynamicLocalization.h
+UINavigationBar+HLSExtensions.h
+UITextField+HLSValidation.h
+UIToolbar+HLSExtensions.h
 UIView+HLSExtensions.h
+UIWebView+HLSExtensions.h

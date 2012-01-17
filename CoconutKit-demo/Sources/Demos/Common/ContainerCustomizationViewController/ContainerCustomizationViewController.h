@@ -11,11 +11,10 @@
  */
 @interface ContainerCustomizationViewController : HLSViewController {
 @private
-    UIButton *m_changeButton;
     UIColor *m_originalNavigationBarTintColor;
     UIBarButtonItem *m_originalRightBarButtonItem;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *changeButton;
+- (IBAction)changeAppearance:(id)sender;
 
 @end

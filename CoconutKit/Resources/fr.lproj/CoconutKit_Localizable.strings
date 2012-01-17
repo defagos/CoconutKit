@@ -18,11 +18,14 @@
 /* %dh %dm remaining (estimate) */
 "%dh %dm remaining (estimate)"="%dh %dm restants (estimation)";
 
+/* Formatting error */
+"Formatting error"="Erreur de formattage";
+
+/* HLSWebViewController 'Mail Link' action */
+"Mail Link"="Envoyer par E-mail";
+
 /* No remaining time estimate available */
 "No remaining time estimate available"="Aucune estimation du temps restant";
 
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Ouvrir dans Safari";
-
-/* HLSWebViewController 'Mail Link' action */
-"Mail Link"="Envoyer par E-mail";

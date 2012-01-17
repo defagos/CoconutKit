@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
+#import "HLSStretchingContainerView.h"
 #import "NSArray+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
@@ -88,8 +89,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize containerContentStack = m_containerContentStack;
 
-@synthesize stretchingContent = m_stretchingContent;
-
 @synthesize forwardingProperties = m_forwardingProperties;
 
 - (void)setForwardingProperties:(BOOL)forwardingProperties
@@ -142,6 +141,16 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark View lifecycle
 
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
+
+- (void)loadView
+{
+    self.view = [[[HLSStretchingContainerView alloc] init] autorelease];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -149,21 +158,17 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    // Take all space available. Parent container view controllers are responsible of stretching the view size properly
-    self.view.frame = [[UIScreen mainScreen] applicationFrame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+        
     // Display those views required by the capacity
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {
             if ([containerContent addViewToContainerView:self.view 
-                                                 stretch:self.stretchingContent 
-                                        blockInteraction:YES 
                                  inContainerContentStack:self.containerContentStack]) {        
             }
         }
@@ -318,8 +323,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     if ([self isViewLoaded]) {        
         // Install the view
         [containerContent addViewToContainerView:self.view
-                                         stretch:self.stretchingContent 
-                                blockInteraction:YES 
                          inContainerContentStack:self.containerContentStack];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
@@ -357,8 +360,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:m_capacity];
         if (newlyVisibleContainerContent) {
             [newlyVisibleContainerContent addViewToContainerView:self.view 
-                                                         stretch:self.stretchingContent 
-                                                blockInteraction:YES 
                                          inContainerContentStack:self.containerContentStack];
         }
         
@@ -422,11 +423,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqual:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"push_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];        
     }
-    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    else if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
     }
@@ -457,11 +458,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqual:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"push_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];
     }
-    else if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    else if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
         
@@ -492,7 +493,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
-    if ([animation.tag isEqual:@"reverse_push_animation"]) {
+    if ([animation.tag isEqualToString:@"reverse_push_animation"]) {
         [self.containerContentStack removeLastObject];
     }
 }

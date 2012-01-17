@@ -6,12 +6,17 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+// Forward declarations
+@class HLSTextFieldTouchDetector;
+
 /**
  * Thin wrapper to UITextField adding standard useful functionality.
  *
  * Most notably, when wrapped within a scroll view (either as direct parent view or higher in the view hierarchy),
  * the scroll view is automatically applied an offset so that the field stays completely visible (vertically) when 
- * the keyboard is displayed. When exiting input mode, the original scroll view offset is restored.
+ * the keyboard is displayed. When exiting input mode, the original scroll view offset is restored. Moreover, such
+ * text fields allow the user to exit edit mode by tapping outside the text field (this behavior is enabled by
+ * default).
  *
  * Using HLSTextField, creating forms is very easy: You usually start with a scroll view (even if the form fits 
  * on a single screen), then you add HLSTextFields to it, usually as direct children.
@@ -45,13 +50,20 @@
  */
 @interface HLSTextField : UITextField {
 @private
+    HLSTextFieldTouchDetector *m_touchDetector;
     CGFloat m_minVisibilityDistance;
 }
 
 /**
  * Minimal (positive) distance to keep between keyboard and text field, respectively scroll view top and text field
- * Default value is 30.f
+ * Default value is 20.f
  */
 @property (nonatomic, assign) CGFloat minVisibilityDistance;
+
+/**
+ * If set to YES, the text field relinquishes its first responder status (if it is the first responder)
+ * Default value is YES
+ */
+@property (nonatomic, assign) BOOL resigningFirstResponderOnTap;
 
 @end

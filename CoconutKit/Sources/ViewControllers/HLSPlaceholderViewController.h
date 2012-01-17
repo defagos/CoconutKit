@@ -35,6 +35,10 @@
  * methods will receive animated = YES, even if one of the views is not moved. This is not an error (what matters is 
  * whether the transition is animated or not, not if individual views are).
  *
+ * When a view controller's view is set as inset view controller, its view frame is automatically adjusted to match 
+ * the placeholder view bounds, as for usual UIKit containers (UITabBarController, UINavigationController). Be sure that
+ * the view controller's view size and autoresizing behaviors are correctly set.
+ *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
  * behavior is undefined:
@@ -83,8 +87,6 @@
     HLSContainerContent *m_containerContent;                // Wraps the view controller added as inset
     HLSContainerContent *m_oldContainerContent;             // Retains the old inset view controller wrapper when swapping with a new one
     UIView *m_placeholderView;                              // View onto which the inset view is drawn
-    BOOL m_stretchingContent;                               // Automatically stretch the inset view according to its autoresizing mask so that 
-                                                            // it fills the placeholder area?
     BOOL m_forwardingProperties;                            // Does the container forward inset navigation properties transparently?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
 }
@@ -124,18 +126,6 @@
  * method or bound to a UIView using Interface Builder
  */
 @property (nonatomic, retain) IBOutlet UIView *placeholderView;
-
-/**
- * If set to YES, the inset view controller's view frames are automatically adjusted to match the placeholder bounds. The
- * resizing behavior still depends on the autoresizing behavior of the inset view, though (for example, if an inset view 
- * is able to stretch in both directions, it will fill the entire placeholder view). If set to NO, the inset view is used 
- * as is.
- * Changing this property only affect view controllers which are displayed afterwards. In general, this property is set 
- * right after the placeholder view controller is instantiated and never changed.
- *
- * Default value is NO.
- */
-@property (nonatomic, assign, getter=isStretchingContent) BOOL stretchingContent;
 
 /**
  * Return the view controller set as inset, nil if none

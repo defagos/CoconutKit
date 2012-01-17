@@ -24,9 +24,9 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 - (BOOL)validatePage:(NSInteger)page;
 
-- (void)previousButtonClicked:(id)sender;
-- (void)nextButtonClicked:(id)sender;
-- (void)doneButtonClicked:(id)sender;
+- (void)previousPage:(id)sender;
+- (void)nextPage:(id)sender;
+- (void)done:(id)sender;
 
 @end
 
@@ -88,13 +88,13 @@ const NSInteger kWizardViewControllerNoPage = -1;
     [super viewDidLoad];
     
     [self.previousButton addTarget:self 
-                            action:@selector(previousButtonClicked:) 
+                            action:@selector(previousPage:) 
                   forControlEvents:UIControlEventTouchUpInside];
     [self.nextButton addTarget:self 
-                        action:@selector(nextButtonClicked:) 
+                        action:@selector(nextPage:) 
               forControlEvents:UIControlEventTouchUpInside];
     [self.doneButton addTarget:self 
-                        action:@selector(doneButtonClicked:) 
+                        action:@selector(done:) 
               forControlEvents:UIControlEventTouchUpInside];
     
     [self refreshWizardInterface];
@@ -318,12 +318,12 @@ const NSInteger kWizardViewControllerNoPage = -1;
 
 #pragma mark Event callbacks
 
-- (void)previousButtonClicked:(id)sender
+- (void)previousPage:(id)sender
 {
     --self.currentPage;
 }
 
-- (void)nextButtonClicked:(id)sender
+- (void)nextPage:(id)sender
 {
     if (! [self validatePage:self.currentPage]) {
         return;
@@ -331,7 +331,7 @@ const NSInteger kWizardViewControllerNoPage = -1;
     ++self.currentPage;
 }
 
-- (void)doneButtonClicked:(id)sender
+- (void)done:(id)sender
 {
     if (! [self validatePage:self.currentPage]) {
         return;

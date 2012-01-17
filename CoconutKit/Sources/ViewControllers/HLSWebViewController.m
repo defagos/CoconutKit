@@ -61,6 +61,12 @@
     [self updateView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.webView stopLoading];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
@@ -155,15 +161,17 @@
     self.actionSheet = [[[HLSActionSheet alloc] init] autorelease];
     self.actionSheet.delegate = self;
     self.actionSheet.title = [self.webView.request.URL absoluteString];
+    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_Localizable", @"HLSWebViewController 'Open in Safari' action")
+                                  target:self
+                                  action:@selector(openInSafari:)];
+    if ([MFMailComposeViewController canSendMail]) {
+        [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_Localizable", @"HLSWebViewController 'Mail Link' action")
+                                      target:self
+                                      action:@selector(mailLink:)];
+    }
     [self.actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
                                         target:nil
                                         action:NULL];
-    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_localizable", @"HLSWebViewController 'Open in Safari' action")
-                                  target:self
-                                  action:@selector(openInSafari:)];
-    [self.actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Mail Link", @"CoconutKit_localizable", @"HLSWebViewController 'Mail Link' action")
-                                  target:self
-                                  action:@selector(mailLink:)];
     [self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
 }
 
@@ -193,6 +201,16 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     self.actionSheet = nil;
+}
+
+// MARK: -
+// MARK: Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // Just to remove the associated warning. Nothing here yet
 }
 
 @end

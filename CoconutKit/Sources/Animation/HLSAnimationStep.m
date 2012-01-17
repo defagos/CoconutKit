@@ -31,124 +31,6 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
     return [[[[self class] alloc] init] autorelease];
 }
 
-+ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
-                                       fromFrame:(CGRect)fromFrame 
-                                         toFrame:(CGRect)toFrame
-{
-    return [HLSAnimationStep animationStepAnimatingView:view
-                                              fromFrame:fromFrame
-                                                toFrame:toFrame
-                                     withAlphaVariation:0.f];
-}
-
-+ (HLSAnimationStep *)animationStepAnimatingView:(UIView *)view 
-                                       fromFrame:(CGRect)fromFrame 
-                                         toFrame:(CGRect)toFrame
-                              withAlphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepAnimatingViewFromFrame:fromFrame 
-                                                                                                    toFrame:toFrame
-                                                                                         withAlphaVariation:alphaVariation];
-    [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
-                                        withDeltaX:(CGFloat)deltaX
-                                            deltaY:(CGFloat)deltaY
-{
-    return [HLSAnimationStep animationStepTranslatingView:view
-                                               withDeltaX:deltaX
-                                                   deltaY:deltaY
-                                           alphaVariation:0.f];
-}
-
-+ (HLSAnimationStep *)animationStepTranslatingView:(UIView *)view 
-                                        withDeltaX:(CGFloat)deltaX
-                                            deltaY:(CGFloat)deltaY
-                                    alphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:deltaX
-                                                                                                        deltaY:deltaY
-                                                                                                alphaVariation:alphaVariation];
-    [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
-                                         withDeltaX:(CGFloat)deltaX
-                                             deltaY:(CGFloat)deltaY
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:deltaX
-                                                                                                        deltaY:deltaY];    
-    for (UIView *view in views) {
-        [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    }
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepTranslatingViews:(NSArray *)views 
-                                         withDeltaX:(CGFloat)deltaX
-                                             deltaY:(CGFloat)deltaY
-                                     alphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepTranslatingViewWithDeltaX:deltaX
-                                                                                                        deltaY:deltaY
-                                                                                                alphaVariation:alphaVariation];    
-    for (UIView *view in views) {
-        [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    }
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
-                                  withTransform:(CGAffineTransform)transform
-                                 alphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:transform 
-                                                                                                alphaVariation:alphaVariation];
-    [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
-                                   withTransform:(CGAffineTransform)transform
-                                  alphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithTransform:transform 
-                                                                                                alphaVariation:alphaVariation];
-    for (UIView *view in views) {
-        [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    }
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepUpdatingView:(UIView *)view
-                             withAlphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:alphaVariation];
-    [animationStep addViewAnimationStep:viewAnimationStep forView:view];
-    return animationStep;
-}
-
-+ (HLSAnimationStep *)animationStepUpdatingViews:(NSArray *)views
-                              withAlphaVariation:(CGFloat)alphaVariation
-{
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStepUpdatingViewWithAlphaVariation:alphaVariation];
-    for (UIView *view in views) {
-        [animationStep addViewAnimationStep:viewAnimationStep forView:view];    
-    }
-    return animationStep;
-}
-
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -237,11 +119,18 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; views: %@; viewAnimationSteps: %@; duration: %f; tag: %@>", 
+    NSString *viewAnimationStepDescriptions = @"{";
+    for (NSValue *viewKey in self.viewKeys) {
+        UIView *view = [viewKey pointerValue];
+        HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
+        viewAnimationStepDescriptions = [viewAnimationStepDescriptions stringByAppendingFormat:@"\n\t%@ - %@", view, viewAnimationStep];
+    }
+    viewAnimationStepDescriptions = [viewAnimationStepDescriptions stringByAppendingFormat:@"\n}"];
+    
+    return [NSString stringWithFormat:@"<%@: %p; viewAnimationSteps: %@; duration: %f; tag: %@>", 
             [self class],
             self,
-            [self views],
-            [self.viewToViewAnimationStepMap allValues],
+            viewAnimationStepDescriptions,
             self.duration,
             self.tag];
 }

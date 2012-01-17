@@ -1,5 +1,6 @@
 HLSAssert.m
 HLSCursor.m
+HLSKenBurnsSlideshow.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
@@ -10,9 +11,17 @@ NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSDateFormatter+HLSExtensions.m
 NSDictionary+HLSExtensions.m
+NSManagedObject+HLSExtensions.m
+NSManagedObject+HLSValidation.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
+NSTimeZone+HLSExtensions.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
+UILabel+HLSDynamicLocalization.m
+UINavigationBar+HLSExtensions.m
+UITextField+HLSValidation.m
+UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
+UIWebView+HLSExtensions.m

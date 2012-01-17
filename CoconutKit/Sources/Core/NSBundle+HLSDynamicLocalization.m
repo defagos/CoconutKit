@@ -86,6 +86,7 @@ static void setDefaultLocalization(void)
     }
     else {
         if (currentLocalization == localization) {
+            [previousLocalization release];
             return;
         }
         
@@ -94,7 +95,7 @@ static void setDefaultLocalization(void)
     }
     
     if (![currentLocalization isEqualToString:previousLocalization]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:currentLocalization];
+        [[NSNotificationCenter defaultCenter] postNotificationName:HLSCurrentLocalizationDidChangeNotification object:self];
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:currentLocalization forKey:HLSPreferredLocalizationDefaultsKey];
@@ -143,7 +144,7 @@ static void setDefaultLocalization(void)
     
     if (!localizedString) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NSShowNonLocalizedStrings"]) {
-            NSLog(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
+            HLSLoggerWarn(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
             return [key uppercaseString];
         }
         return [value length] > 0 ? value : key;

@@ -13,6 +13,9 @@
 // Disable quasi-simultaneous taps
 HLSEnableUIControlExclusiveTouch();
 
+// Enable Core Data easy validation
+HLSEnableNSManagedObjectValidation();
+
 @interface CoconutKit_demoAppDelegate ()
 
 @property (nonatomic, retain) CoconutKit_demoApplication *application;
@@ -43,7 +46,7 @@ HLSEnableUIControlExclusiveTouch();
     [self.window makeKeyAndVisible];
     
     self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
-    UIViewController *rootViewController = [self.application viewController];
+    UIViewController *rootViewController = [self.application rootViewController];
     [self.window addSubview:rootViewController.view];
     
     return YES;
