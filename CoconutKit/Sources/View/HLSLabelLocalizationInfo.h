@@ -17,7 +17,7 @@ typedef enum {
 } HLSLabelRepresentation;
 
 /**
- * Designated initializer: init
+ * Designated initializer: initWithText:
  */
 @interface HLSLabelLocalizationInfo : NSObject {
 @private
@@ -25,11 +25,16 @@ typedef enum {
     NSString *m_table;
     HLSLabelRepresentation m_representation;
     UIColor *m_originalBackgroundColor;
+    BOOL m_locked;
 }
 
-@property (nonatomic, retain) NSString *localizationKey;
-@property (nonatomic, retain) NSString *table;
-@property (nonatomic, assign) HLSLabelRepresentation representation;
+- (id)initWithText:(NSString *)text;
+
+@property (nonatomic, readonly, retain) NSString *localizationKey;
+@property (nonatomic, readonly, retain) NSString *table;
+@property (nonatomic, readonly, assign) HLSLabelRepresentation representation;
+
 @property (nonatomic, retain) UIColor *originalBackgroundColor;
+@property (nonatomic, assign, getter=isLocked) BOOL locked;
 
 @end
