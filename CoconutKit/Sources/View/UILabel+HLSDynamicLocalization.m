@@ -24,8 +24,6 @@ static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
 
 // Original implementations of the methods we swizzle
-static id (*s_UILabel__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UILabel__initWithCoder_Imp)(id, SEL, id) = NULL;
 static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
@@ -33,8 +31,6 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 @interface UILabel (HLSDynamicLocalizationPrivate)
 
-- (id)swizzledInitWithFrame:(CGRect)frame;
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
 - (void)swizzledDealloc;
 - (void)swizzledAwakeFromNib;
 - (void)swizzledSetText:(NSString *)text;
@@ -45,8 +41,6 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 - (void)setAndLocalizeText:(NSString *)text;
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
-
-- (void)registerForLocalizationChanges;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
 
@@ -77,8 +71,6 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 + (void)load
 {
-    s_UILabel__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector(self, @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
-    s_UILabel__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
     s_UILabel__dealloc_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(dealloc), @selector(swizzledDealloc));
     s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(awakeFromNib), @selector(swizzledAwakeFromNib));
     s_UILabel__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(setText:), @selector(swizzledSetText:));
@@ -86,22 +78,6 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 }
 
 #pragma mark Swizzled method implementations
-
-- (id)swizzledInitWithFrame:(CGRect)frame
-{   
-    if ((self = (*s_UILabel__initWithFrame_Imp)(self, @selector(initWithFrame:), frame))) {
-        [self registerForLocalizationChanges];
-    }
-    return self;
-}
-
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = (*s_UILabel__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
-        [self registerForLocalizationChanges];
-    }
-    return self;
-}
 
 - (void)swizzledDealloc
 {
@@ -210,6 +186,14 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     if (! localizationInfo) {
         localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text] autorelease];
         [self setLocalizationInfo:localizationInfo];
+        
+        // For labels localized with prefixes only: Listen to localization change notifications
+        if ([localizationInfo isLocalized]) {
+            [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                     selector:@selector(currentLocalizationDidChange:) 
+                                                         name:HLSCurrentLocalizationDidChangeNotification 
+                                                       object:nil];
+        }
     }
     
     // Prevent the call to -[UIButton setTitle:forState:] in localizeTextWithLocalizationInfo: from ending
@@ -258,14 +242,6 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
             (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }
     }
-}
-
-- (void)registerForLocalizationChanges
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(currentLocalizationDidChange:) 
-                                                 name:HLSCurrentLocalizationDidChangeNotification 
-                                               object:nil];
 }
 
 #pragma mark Notification callbacks
