@@ -22,6 +22,9 @@
  *   LS/Cancel
  *   ULS/Send link/T/LocalizationFileName
  *
+ * Sadly UIBarButtonItem objects cannot be localized this way. Achieving this goal would require messing
+ * with a toolbar's view hierarchy, an approach I considered not robust enough to deserve being implemented.
+ *
  * Note that lookup is always performed in the main bundle only. If you want to use localization dictionaries
  * in other bundles, you will have to create and bind outlets.
  *
