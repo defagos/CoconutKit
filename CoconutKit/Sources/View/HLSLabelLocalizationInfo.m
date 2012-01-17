@@ -12,6 +12,8 @@
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 
+static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
+
 static NSString *stringForLabelRepresentation(HLSLabelRepresentation representation);
 
 @interface HLSLabelLocalizationInfo ()
@@ -164,25 +166,44 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return self.localizationKey != nil;
 }
 
-- (NSString *)localizedText
-{    
-    static NSString * const kMissingLocalizationKeyString = @"(no key)";
-    
-    // If no localization key, nothing to do
+- (BOOL)isMissing
+{
+    // Missing localization key
     if ([self.localizationKey length] == 0) {
-        return kMissingLocalizationKeyString;
+        return YES;
     }
     
-    // We use an explicit constant string for missing localizations since otherwise the key would be returned by 
-    // localizedStringForKey:value:table
-    static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
+    // Missing translation
+    NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
+                                                            value:kMissingLocalizedString
+                                                            table:self.table];
+    if ([text isEqualToString:kMissingLocalizedString]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (NSString *)localizedText
+{    
+    if (! self.localizationKey) {
+        return nil;
+    }
+    
+    // Missing localization key. Return some label to make it clear when the label is displayed on screen
+    if ([self.localizationKey length] == 0) {
+        return @"(no key)";
+    }
+    
+    // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
+    // be returned by the localizedStringForKey:value:table method
     NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
                                                             value:kMissingLocalizedString
                                                             table:self.table];
     
     // Use the localization key as text if missing
     if ([text isEqualToString:kMissingLocalizedString]) {
-        text = self.localizationKey;        
+        text = self.localizationKey;
     }
     
     // Formatting

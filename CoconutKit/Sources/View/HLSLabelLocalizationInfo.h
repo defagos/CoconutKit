@@ -40,12 +40,18 @@ typedef enum {
 - (id)initWithText:(NSString *)text;
 
 /**
- * Return YES if the information object corresponds to localized content
+ * Return YES iff the information object corresponds to localized content
  */
 - (BOOL)isLocalized;
 
 /**
- * Build and return the corresponding localized text
+ * Return YES iff some localization information is missing (localized key, corresponding translation, etc.)
+ */
+- (BOOL)isMissing;
+
+/**
+ * Build and return the corresponding localized text. Return nil if the object does not contain localized information
+ * (i.e. if isLocalized returns NO)
  */
 - (NSString *)localizedText;
 
