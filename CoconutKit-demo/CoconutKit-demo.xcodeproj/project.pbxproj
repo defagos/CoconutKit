@@ -358,7 +358,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F1AF844142B046600925B7A /* CoconutKit-1.1-Release.staticframework */,
+				6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -368,15 +368,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F1AF844142B046600925B7A /* CoconutKit-1.1-Release.staticframework */ = {
+		6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */ = {
 			isa = PBXGroup;
 			children = (
 				6F1AF845142B046600925B7A /* Bootstrap */,
 				6F1AF847142B046600925B7A /* CoconutKit.framework */,
 				6F1AF848142B046600925B7A /* Resources */,
 			);
-			name = "CoconutKit-1.1-Release.staticframework";
-			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-Release.staticframework";
+			name = "CoconutKit-trunk-Release.staticframework";
+			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
 			sourceTree = "<absolute>";
 		};
 		6F1AF845142B046600925B7A /* Bootstrap */ = {
@@ -1167,13 +1167,13 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"";
+				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-demo";
@@ -1187,11 +1187,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"";
+				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				PRODUCT_NAME = "CoconutKit-demo";
 				VALIDATE_PRODUCT = YES;
