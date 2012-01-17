@@ -29,7 +29,6 @@ typedef enum {
     NSString *m_localizationKey;
     NSString *m_table;
     HLSLabelRepresentation m_representation;
-    UIColor *m_originalBackgroundColor;
     BOOL m_locked;
 }
 
@@ -47,18 +46,13 @@ typedef enum {
 /**
  * Return YES iff some localization information is missing (localized key, corresponding translation, etc.)
  */
-- (BOOL)isMissing;
+- (BOOL)isIncomplete;
 
 /**
  * Build and return the corresponding localized text. Return nil if the object does not contain localized information
  * (i.e. if isLocalized returns NO)
  */
 - (NSString *)localizedText;
-
-/**
- * Used to save and restore the label background color
- */
-@property (nonatomic, retain) UIColor *originalBackgroundColor;
 
 /**
  * Used to mark the object as locked

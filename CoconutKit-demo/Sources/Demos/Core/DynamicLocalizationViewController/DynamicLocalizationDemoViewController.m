@@ -24,11 +24,14 @@
 {
     [super releaseViews];
     
+    self.coloredLabel = nil;
     self.imageView = nil;
     self.missingLocalizationVisibilitySwitch = nil;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize coloredLabel = m_coloredLabel;
 
 @synthesize imageView = m_imageView;
 
@@ -68,6 +71,11 @@
 }
 
 #pragma mark Event callbacks
+
+- (IBAction)changeColor:(id)sender
+{
+    self.coloredLabel.backgroundColor = [UIColor randomColor];
+}
 
 - (IBAction)toggleMissingLocalizationVisibility:(id)sender
 {

@@ -21,6 +21,7 @@ static BOOL s_missingLocalizationsVisible = NO;
 
 // Keys for associated objects
 static void *s_localizationInfosKey = &s_localizationInfosKey;
+static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
 
 // Original implementations of the methods we swizzle
 static id (*s_UILabel__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
@@ -126,8 +127,10 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 {
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), backgroundColor);
     
-    HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
-    localizationInfo.originalBackgroundColor = backgroundColor;
+    // The background color is stored as separate associated object, not in the HLSLabelLocalizationInfo object. The reason
+    // is that the HLSLabelLocalizationInfo is only attached when the text is first set, while the background color is
+    // usually set earlier (i.e. when this object is not available)
+    objc_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Localization
@@ -230,6 +233,10 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 {
     NSString *localizedText = [localizationInfo localizedText];
     
+    // Restore the original background color if it had been altered
+    UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
+    (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
+    
     // Button label
     if ([[self superview] isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)[self superview];
@@ -241,6 +248,15 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     // Standalone label
     else {
         (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
+    }
+    
+    // Make labels with missing localizations visible (saving the original color first)
+    if (s_missingLocalizationsVisible) {
+        if ([localizationInfo isIncomplete]) {
+            // Using the original implementation here. We do not want to update the color stored in the information
+            // object
+            (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
+        }
     }
 }
 

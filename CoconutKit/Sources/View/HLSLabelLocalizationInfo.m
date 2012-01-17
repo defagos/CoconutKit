@@ -48,7 +48,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 {
     self.localizationKey = nil;
     self.table = nil;
-    self.originalBackgroundColor = nil;
     
     [super dealloc];
 }
@@ -60,8 +59,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 @synthesize table = m_table;
 
 @synthesize representation = m_representation;
-
-@synthesize originalBackgroundColor = m_originalBackgroundColor;
 
 @synthesize locked = m_locked;
 
@@ -166,7 +163,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return self.localizationKey != nil;
 }
 
-- (BOOL)isMissing
+- (BOOL)isIncomplete
 {
     // Missing localization key
     if ([self.localizationKey length] == 0) {
@@ -190,7 +187,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         return nil;
     }
     
-    // Missing localization key. Return some label to make it clear when the label is displayed on screen
+    // Missing localization key. Return some label to make it clear when the label is displayed on screenyy
     if ([self.localizationKey length] == 0) {
         return @"(no key)";
     }
