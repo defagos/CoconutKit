@@ -18,9 +18,16 @@
  *   - LLS/<localizationKey>[/T/<table>/]: Same as LS:, but lowercase
  *   - CLS/<localizationKey>[/T/<table>/]: Same as LS:, but capitalized
  *
+ * It is important to note that when a label has been localized in a nib using one of the above prefixes,
+ * the attached localization key cannot be altered anymore. This is not a problem, though, since this
+ * approach is intended for "static" labels which are defined once in a nib file and not altered later.
+ * If you need to be able to change the text of a label, do not use prefixes in the nib, use outlets 
+ * (after all, if you need to be able to change the text of a label, you probably need an outlet anyway, 
+ * which is just what the prefix approach is intended to avoid).
+ *
  * Some examples:
- *   LS/Cancel
- *   ULS/Send link/T/LocalizationFileName
+ *   LS/Cancel: Looks for a "Cancel" key in Localizable.strings
+ *   ULS/Send link/T/LocalizationFileName: Looks for a "Send link" key in LocalizationFileName.strings
  *
  * Sadly UIBarButtonItem objects cannot be localized this way. Achieving this goal would require messing
  * with a toolbar's view hierarchy, an approach I considered not robust enough to deserve being implemented.
