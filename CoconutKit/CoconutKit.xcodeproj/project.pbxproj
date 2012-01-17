@@ -144,6 +144,8 @@
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
+		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
+		6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		DA838787131EAD1000ECAED3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA838786131EAD1000ECAED3 /* MessageUI.framework */; };
@@ -302,6 +304,8 @@
 		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
+		6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoconutKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoconutKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -529,6 +533,8 @@
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
 				6FADE56C14BA0494007EE121 /* HLSKenBurnsSlideshow.h */,
 				6FADE56D14BA0494007EE121 /* HLSKenBurnsSlideshow.m */,
+				6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */,
+				6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE56E14BA0494007EE121 /* HLSNibView.h */,
 				6FADE56F14BA0494007EE121 /* HLSNibView.m */,
 				6FADE57014BA0494007EE121 /* HLSSubtitleTableViewCell.h */,
@@ -668,6 +674,7 @@
 				6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */,
 				6F3B063514BC7B950026F512 /* UIToolbar+HLSExtensions.h in Headers */,
 				6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */,
+				6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +801,7 @@
 				6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
 				6F3B063614BC7B950026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */,
+				6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

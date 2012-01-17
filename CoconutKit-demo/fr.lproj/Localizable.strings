@@ -17,9 +17,11 @@
 "Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
 "Change"="Changer";
+"Change color"="Changer couleur";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
 "Choose"="Choisir";
 "City"="Ville";
+"Click for missing translation"="Cliquer pour traduction manquante";
 "Close"="Fermer";
 "Container customization"="Personnalisation conteneur";
 "Core"="Core";
