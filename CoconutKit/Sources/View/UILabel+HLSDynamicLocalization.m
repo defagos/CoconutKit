@@ -12,7 +12,6 @@
 #import "HLSLabelLocalizationInfo.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
 
@@ -43,7 +42,7 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 - (HLSLabelLocalizationInfo *)localizationInfo;
 - (void)setLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
-- (void)localizeAndSetText:(NSString *)text;
+- (void)setAndLocalizeText:(NSString *)text;
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
 - (void)registerForLocalizationChanges;
@@ -115,12 +114,12 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 - (void)swizzledAwakeFromNib
 {
     // Here self.text returns the string filled by deserialization from the nib (which is not set using setText:)
-    [self localizeAndSetText:self.text];    
+    [self setAndLocalizeText:self.text];    
 }
 
 - (void)swizzledSetText:(NSString *)text
 {
-    [self localizeAndSetText:text];
+    [self setAndLocalizeText:text];
 }
 
 - (void)swizzledSetBackgroundColor:(UIColor *)backgroundColor
@@ -180,7 +179,7 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     }
 }
 
-- (void)localizeAndSetText:(NSString *)text
+- (void)setAndLocalizeText:(NSString *)text
 {
     // Each label is lazily associated with localization information the first time its text is set (even
     // if the label is not localized). The localization settings it contains (most notably the key) cannot 
@@ -210,13 +209,16 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
         [self setLocalizationInfo:localizationInfo];
     }
     
+    // Prevent the call to -[UIButton setTitle:forState:] in localizeTextWithLocalizationInfo: from ending
+    // up in an infinite recursion
     if (localizationInfo.locked) {
         (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
         localizationInfo.locked = NO;
         return;
     }
     
-    if (localizationInfo.localizationKey) {
+    // Update the label text
+    if ([localizationInfo isLocalized]) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
     else {
@@ -224,74 +226,21 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
     }
 }
 
-// Localize the current text using the corresponding localization information
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
-    // Restore the original background color if it had been altered
-    // (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), localizationInfo.originalBackgroundColor);
-    
-#if 0
-    // Restore the original background color if it had been altered
-    UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
-    self.backgroundColor = originalBackgroundColor;
-    objc_setAssociatedObject(self, s_originalBackgroundColorKey, self.backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-#endif
-    
-    // If no localization key, nothing to do
-    if (! localizationInfo.localizationKey) {
-        return;
-    }
-    
-    // We use an explicit constant string for missing localizations since otherwise the key would be returned by 
-    // localizedStringForKey:value:table
-    static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
-    NSString *text = [[NSBundle mainBundle] localizedStringForKey:localizationInfo.localizationKey
-                                                            value:kMissingLocalizedString
-                                                            table:localizationInfo.table];
-            
-    // Use the localization key as text if missing
-    if ([text isEqualToString:kMissingLocalizedString]) {
-        text = [localizationInfo.localizationKey length] != 0 ? localizationInfo.localizationKey : @"(no key)";
-        
-        // Make labels with missing localizations visible (saving the original color first)
-        if (s_missingLocalizationsVisible) {
-            // We must use the original method here
-            // (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
-        }    
-    }
-    
-    // Formatting
-    switch (localizationInfo.representation) {
-        case HLSLabelRepresentationUppercase: {
-            text = [text uppercaseString];
-            break;
-        }
-            
-        case HLSLabelRepresentationLowercase: {
-            text = [text lowercaseString];
-            break;
-        }
-            
-        case HLSLabelRepresentationCapitalized: {
-            text = [text capitalizedString];
-            break;
-        }
-            
-        default: {
-            break;
-        }
-    }
+    NSString *localizedText = [localizationInfo localizedText];
     
     // Button label
     if ([[self superview] isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)[self superview];
         localizationInfo.locked = YES;
-        [button setTitle:text forState:button.state];
+        
+        // We must call setTitle:forState: on the button to get proper reszing behavior
+        [button setTitle:localizedText forState:button.state];
     }
     // Standalone label
     else {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
+        (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
     }
 }
 
@@ -308,7 +257,9 @@ static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {
     HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
-    [self localizeTextWithLocalizationInfo:localizationInfo];
+    if ([localizationInfo isLocalized]) {
+        [self localizeTextWithLocalizationInfo:localizationInfo];
+    }
 }
 
 @end

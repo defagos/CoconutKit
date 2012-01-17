@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "NSArray+HLSExtensions.h"
 
 static NSString *stringForLabelRepresentation(HLSLabelRepresentation representation);
 
@@ -154,6 +155,59 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         
         self.table = table;
     }
+}
+
+#pragma mark Localizing
+
+- (BOOL)isLocalized
+{
+    return self.localizationKey != nil;
+}
+
+- (NSString *)localizedText
+{    
+    static NSString * const kMissingLocalizationKeyString = @"(no key)";
+    
+    // If no localization key, nothing to do
+    if ([self.localizationKey length] == 0) {
+        return kMissingLocalizationKeyString;
+    }
+    
+    // We use an explicit constant string for missing localizations since otherwise the key would be returned by 
+    // localizedStringForKey:value:table
+    static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
+    NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
+                                                            value:kMissingLocalizedString
+                                                            table:self.table];
+    
+    // Use the localization key as text if missing
+    if ([text isEqualToString:kMissingLocalizedString]) {
+        text = self.localizationKey;        
+    }
+    
+    // Formatting
+    switch (self.representation) {
+        case HLSLabelRepresentationUppercase: {
+            text = [text uppercaseString];
+            break;
+        }
+            
+        case HLSLabelRepresentationLowercase: {
+            text = [text lowercaseString];
+            break;
+        }
+            
+        case HLSLabelRepresentationCapitalized: {
+            text = [text capitalizedString];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
+    
+    return text;
 }
 
 #pragma mark Description

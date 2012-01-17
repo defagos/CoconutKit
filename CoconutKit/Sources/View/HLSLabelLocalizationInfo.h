@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+/**
+ * The way the localized string must be displayed
+ */
 typedef enum {
     HLSLabelRepresentationEnumBegin = 0,
     HLSLabelRepresentationNormal = HLSLabelRepresentationEnumBegin,
@@ -17,6 +20,8 @@ typedef enum {
 } HLSLabelRepresentation;
 
 /**
+ * Internal class for containing the localization information attached to a UILabel (see UILabel+HLSDynamicLocalization.m)
+ *
  * Designated initializer: initWithText:
  */
 @interface HLSLabelLocalizationInfo : NSObject {
@@ -28,13 +33,30 @@ typedef enum {
     BOOL m_locked;
 }
 
+/**
+ * Create a localization object from a given text, processing any prefix contained in the text (see complete list in
+ * UILabel+HLSDynamicLocalization.h)
+ */
 - (id)initWithText:(NSString *)text;
 
-@property (nonatomic, readonly, retain) NSString *localizationKey;
-@property (nonatomic, readonly, retain) NSString *table;
-@property (nonatomic, readonly, assign) HLSLabelRepresentation representation;
+/**
+ * Return YES if the information object corresponds to localized content
+ */
+- (BOOL)isLocalized;
 
+/**
+ * Build and return the corresponding localized text
+ */
+- (NSString *)localizedText;
+
+/**
+ * Used to save and restore the label background color
+ */
 @property (nonatomic, retain) UIColor *originalBackgroundColor;
+
+/**
+ * Used to mark the object as locked
+ */
 @property (nonatomic, assign, getter=isLocked) BOOL locked;
 
 @end
