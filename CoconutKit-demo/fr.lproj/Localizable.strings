@@ -16,6 +16,7 @@
 "Button label, default"="Libellé de bouton, normal";
 "Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
+"Capitalized string in Localizable.strings"="Chaîne de Localizable.strings capitalisée";
 "Change"="Changer";
 "Change color"="Changer couleur";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
