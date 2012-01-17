@@ -105,7 +105,7 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 
 ### Release notes
 
-### Version 1.0.2
+### Version 1.1
 * Added easy Core Data validation
 * Added UILabel and UIButton localization in nib files
 * Added Ken Burns slideshow
