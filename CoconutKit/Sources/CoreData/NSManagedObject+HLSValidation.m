@@ -372,9 +372,11 @@ static Method instanceMethodOnClass(Class class, SEL sel)
     for (unsigned int i = 0; i < numberOfMethods; ++i) {
         Method method = methods[i];
         if (method_getName(method) == sel) {
+            free(methods);
             return method;
         }
     }
+    free(methods);
     return NULL;
 }
 
