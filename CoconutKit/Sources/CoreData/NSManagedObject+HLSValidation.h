@@ -60,13 +60,14 @@
  *     method, use one of the check methods available from the HLSValidation category. Note that the first 
  *     parameter of 'check' methods is an object, not an object pointer anymore. The pError pointer is 
  *     guaranteed to be valid (and such that *pError = nil upon method entry), eliminating the need to check it 
- *     before dereferencing it. You can use this pointer to return errors (usually one) which might be 
- *     encountered during field validation. Those errors will automatically be chained for you.
+ *     before dereferencing it (though in such cases the static analyzer may warn you). You can use this 
+ *     pointer to return errors (usually one) which might be encountered during field validation. Those 
+ *     errors will automatically be chained for you.
  *   - instead of implementing -validateForUpdate: and -validateForInsert: methods, you now implement a single
  *     -checkForConsistency: method which will be called when an inserted or updated object is saved. As for
  *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
- *     therefore do not need to check the pointer before dereferencing it. Moreover, error-chaining will be
- *     performed for you. The signature of this method must be
+ *     therefore do not need to check the pointer before dereferencing it (read remark above, though). Moreover, 
+ *     error-chaining will be performed for you. The signature of this method must be
  *         - (BOOL)checkForConsistency:(NSError **)pError
  *   - similarly, instead of implementing the -validateForDelete: method to perform checks when deleting
  *     an object, you now must implement a 'check' method with the following signature:

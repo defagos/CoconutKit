@@ -45,7 +45,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 + (void)swizzledInitialize;
 
-+ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError;
++ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError;
 
 + (NSError *)flattenHiearchyForError:(NSError *)error;
 
@@ -210,17 +210,19 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * This brought me to the conclusion that NSValidationMultipleErrorsError should be reserved, that is why the
  * method below has been made private. If you need to return several errors from a validation method implementation,
  * you should define your own error code playing the same role as NSValidationMultipleErrorsError.
+ *
+ * The method returns the combined error both by reference as well as return value.
  */
-+ (void)combineError:(NSError *)newError withError:(NSError **)pExistingError
-{
-    // If no new error, nothing to do
-    if (! newError) {
-        return;
-    }
-    
++ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
+{    
     // If the caller is not interested in errors, nothing to do
     if (! pExistingError) {
-        return;
+        return nil;
+    }
+    
+    // If no new error, nothing to do
+    if (! newError) {
+        return *pExistingError;
     }
     
     // An existing error is already available. Combine as multiple error
@@ -248,6 +250,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     else {
         *pExistingError = newError;
     }
+    
+    return *pExistingError;
 }
 
 /**

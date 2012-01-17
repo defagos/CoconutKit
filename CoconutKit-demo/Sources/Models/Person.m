@@ -9,9 +9,11 @@
 - (BOOL)checkFirstName:(NSString *)firstName error:(NSError **)pError
 {
     if (! [firstName isFilled]) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationMandatoryError
-                       localizedDescription:NSLocalizedString(@"Missing first name", @"Missing first name")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationMandatoryError
+                           localizedDescription:NSLocalizedString(@"Missing first name", @"Missing first name")];            
+        }
         return NO;
     }
 
@@ -21,9 +23,11 @@
 - (BOOL)checkLastName:(NSString *)lastName error:(NSError **)pError
 {
     if (! [lastName isFilled]) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationMandatoryError
-                       localizedDescription:NSLocalizedString(@"Missing last name", @"Missing last name")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationMandatoryError
+                           localizedDescription:NSLocalizedString(@"Missing last name", @"Missing last name")];
+        }
         return NO;
     }
     
@@ -38,9 +42,11 @@
     }
     
     if (! [HLSValidators validateEmailAddress:email]) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationIncorrectError
-                       localizedDescription:NSLocalizedString(@"Invalid email address", @"Invalid email address")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationIncorrectError
+                           localizedDescription:NSLocalizedString(@"Invalid email address", @"Invalid email address")];            
+        }
         return NO;        
     }
     
@@ -50,9 +56,11 @@
 - (BOOL)checkNbrChildren:(NSNumber *)nbrChildren error:(NSError **)pError
 {
     if ([nbrChildren integerValue] < 0) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationIncorrectError
-                       localizedDescription:NSLocalizedString(@"This value cannot be negative", @"This value cannot be negative")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationIncorrectError
+                           localizedDescription:NSLocalizedString(@"This value cannot be negative", @"This value cannot be negative")];            
+        }
         return NO;
     }
     
@@ -68,9 +76,11 @@
 - (BOOL)checkCity:(NSString *)city error:(NSError **)pError
 {
     if (! [city isFilled]) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationMandatoryError 
-                       localizedDescription:NSLocalizedString(@"Missing city", @"Missing city")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationMandatoryError 
+                           localizedDescription:NSLocalizedString(@"Missing city", @"Missing city")];   
+        }
         return NO;
     }
     
@@ -86,9 +96,11 @@
 - (BOOL)checkCountry:(NSString *)country error:(NSError **)pError
 {
     if (! [country isFilled]) {
-        *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                       code:DemoValidationMandatoryError 
-                       localizedDescription:NSLocalizedString(@"Missing country", @"Missing country")];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
+                                           code:DemoValidationMandatoryError 
+                           localizedDescription:NSLocalizedString(@"Missing country", @"Missing country")];            
+        }
         return NO;
     }
     
