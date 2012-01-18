@@ -8,7 +8,10 @@
 
 #import "UIWebView+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
+
+HLSLinkCategory(UIWebView_HLSExtensions)
 
 @interface UIWebView (HLSExtensionsPrivate)
 

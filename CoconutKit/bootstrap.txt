@@ -11,6 +11,7 @@ NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSDateFormatter+HLSExtensions.m
 NSDictionary+HLSExtensions.m
+NSError+HLSExtensions.m
 NSManagedObject+HLSExtensions.m
 NSManagedObject+HLSValidation.m
 NSObject+HLSExtensions.m
