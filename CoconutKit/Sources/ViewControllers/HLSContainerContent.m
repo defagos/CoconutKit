@@ -378,6 +378,13 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
         return NO;
     }
     
+    // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
+    // added to the container view, a 20px displacement may arise at the top if the container is the root view controller of the
+    // application (the implementations of UITabBarController and UINavigationController probably mess up with status bar dimensions internally)
+    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController isKindOfClass:[UITabBarController class]]) {
+        self.viewController.view.frame = containerView.bounds;
+    }
+    
     // If a non-empty stack has been provided, find insertion point
     HLSAssertObjectsInEnumerationAreKindOfClass(containerContentStack, HLSContainerContent);
     if ([containerContentStack count] != 0) {

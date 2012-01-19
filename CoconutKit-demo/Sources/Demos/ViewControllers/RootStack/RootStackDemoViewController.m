@@ -8,6 +8,16 @@
 
 #import "RootStackDemoViewController.h"
 
+#import "StretchableViewController.h"
+
+@interface RootStackDemoViewController ()
+
+- (void)displayViewController:(UIViewController *)viewController;
+
+- (void)closeNativeContainer:(id)sender;
+
+@end
+
 @implementation RootStackDemoViewController
 
 #pragma mark Object creation and destruction
@@ -175,15 +185,20 @@
     }
 }
 
+#pragma mark Displaying view controllers
+
+- (void)displayViewController:(UIViewController *)viewController
+{
+    NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
+    [self.stackController pushViewController:viewController withTransitionStyle:pickedIndex];
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)push:(id)sender
 {
     RootStackDemoViewController *demoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
-    
-    // Built-in transition effects in picker
-    NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self.stackController pushViewController:demoViewController withTransitionStyle:pickedIndex];
+    [self displayViewController:demoViewController];
 }
 
 - (IBAction)pop:(id)sender
@@ -194,6 +209,35 @@
     else {
         [self.stackController popViewController];
     }
+}
+
+- (IBAction)pushTabBarController:(id)sender
+{
+    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+                                                                                                   style:UIBarButtonItemStyleDone 
+                                                                                                  target:self 
+                                                                                                  action:@selector(closeNativeContainer:)] autorelease];
+    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+    tabBarController.viewControllers = [NSArray arrayWithObject:navigationController];
+    [self displayViewController:tabBarController];    
+}
+
+- (IBAction)pushNavigationController:(id)sender
+{
+    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+                                                                                                   style:UIBarButtonItemStyleDone 
+                                                                                                  target:self 
+                                                                                                  action:@selector(closeNativeContainer:)] autorelease];
+    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    [self displayViewController:navigationController];
+}
+
+- (void)closeNativeContainer:(id)sender
+{
+    [self.stackController popViewController];
 }
 
 @end

@@ -58,7 +58,7 @@
 					<object class="IBUIButton" id="747078023">
 						<reference key="NSNextResponder" ref="589436624"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{152, 641}, {217, 37}}</string>
+						<string key="NSFrame">{{130, 637}, {252, 37}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="84458871"/>
@@ -95,10 +95,10 @@
 					<object class="IBUIButton" id="84458871">
 						<reference key="NSNextResponder" ref="589436624"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{400, 641}, {217, 37}}</string>
+						<string key="NSFrame">{{390, 637}, {252, 37}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="54487450"/>
+						<reference key="NSNextKeyView" ref="1068241617"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -161,9 +161,59 @@
 						<string key="NSFrame">{{0, 960}, {773, 20}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:195</string>
 						<reference key="IBUIBackgroundColor" ref="462043543"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIButton" id="1068241617">
+						<reference key="NSNextResponder" ref="589436624"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{130, 682}, {252, 37}}</string>
+						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="586031490"/>
+						<string key="NSReuseIdentifierKey">_NS:241</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">LS/Push UITabBarController</string>
+						<reference key="IBUIHighlightedTitleColor" ref="24430831"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="682775380"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="801403765">
+							<int key="type">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<reference key="IBUIFont" ref="25421740"/>
+					</object>
+					<object class="IBUIButton" id="586031490">
+						<reference key="NSNextResponder" ref="589436624"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{390, 682}, {252, 37}}</string>
+						<reference key="NSSuperview" ref="589436624"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="54487450"/>
+						<string key="NSReuseIdentifierKey">_NS:241</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">LS/Push UINavigationController</string>
+						<reference key="IBUIHighlightedTitleColor" ref="24430831"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="682775380"/>
+						<reference key="IBUIFontDescription" ref="801403765"/>
+						<reference key="IBUIFont" ref="25421740"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{768, 980}</string>
@@ -219,6 +269,24 @@
 					</object>
 					<int key="connectionID">31</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">pushTabBarController:</string>
+						<reference key="source" ref="1068241617"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">36</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">pushNavigationController:</string>
+						<reference key="source" ref="586031490"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -247,12 +315,14 @@
 						<reference key="object" ref="589436624"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="747078023"/>
-							<reference ref="84458871"/>
 							<reference ref="1041203929"/>
 							<reference ref="122962429"/>
 							<reference ref="54487450"/>
 							<reference ref="341156522"/>
+							<reference ref="747078023"/>
+							<reference ref="84458871"/>
+							<reference ref="1068241617"/>
+							<reference ref="586031490"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -286,6 +356,16 @@
 						<reference key="object" ref="341156522"/>
 						<reference key="parent" ref="589436624"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">33</int>
+						<reference key="object" ref="1068241617"/>
+						<reference key="parent" ref="589436624"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="586031490"/>
+						<reference key="parent" ref="589436624"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -301,6 +381,8 @@
 					<string>20.IBPluginDependency</string>
 					<string>27.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
+					<string>33.IBPluginDependency</string>
+					<string>34.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -309,6 +391,8 @@
 					<string>RootStackDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -331,7 +415,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">32</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -352,9 +436,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>pop:</string>
-							<string>popButtonClicked:</string>
 							<string>push:</string>
-							<string>pushButtonClicked:</string>
+							<string>pushNavigationController:</string>
+							<string>pushTabBarController:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -369,9 +453,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>pop:</string>
-							<string>popButtonClicked:</string>
 							<string>push:</string>
-							<string>pushButtonClicked:</string>
+							<string>pushNavigationController:</string>
+							<string>pushTabBarController:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -380,15 +464,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">popButtonClicked:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">push:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">pushButtonClicked:</string>
+								<string key="name">pushNavigationController:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">pushTabBarController:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
