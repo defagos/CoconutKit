@@ -42,6 +42,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
+@property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
@@ -288,6 +289,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     // reused by the client
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
+    self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
     
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
@@ -353,6 +355,8 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
 @synthesize originalViewFrame = m_originalViewFrame;
 
 @synthesize originalViewAlpha = m_originalViewAlpha;
+
+@synthesize originalAutoresizingMask = m_originalAutoresizingMask;
 
 - (UIView *)view
 {
@@ -420,6 +424,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
+    self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
     
     // The background view of view controller's views inserted into a container must fill its bounds completely, no matter
     // what this original frame is. This is required because of how the root view controller is displayed, and leads to
@@ -468,6 +473,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
+    self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
 }
 
 - (void)releaseViews

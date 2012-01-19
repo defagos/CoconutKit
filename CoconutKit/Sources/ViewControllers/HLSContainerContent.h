@@ -60,6 +60,7 @@
     BOOL m_forwardingProperties;
     CGRect m_originalViewFrame;
     CGFloat m_originalViewAlpha;
+    UIViewAutoresizing m_originalAutoresizingMask;
 }
 
 /**
