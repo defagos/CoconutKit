@@ -110,5 +110,7 @@
 "View controllers"="View controllers";
 "Web view"="Vue web";
 "Week"="Semaine";
+"Wrapped into UINavigationController"="Inséré dans un UINavigationController";
+"Wrapped into UITabBarController"="Inséré dans un UITabBarController";
 "Year"="Année";
 "yyyy/MM/dd"="dd.MM.yyyy";

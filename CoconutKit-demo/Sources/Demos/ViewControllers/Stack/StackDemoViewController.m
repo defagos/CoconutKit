@@ -64,6 +64,10 @@
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
+@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
+
+@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
+
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 #pragma mark View lifecycle
@@ -76,6 +80,9 @@
     self.transitionPickerView.dataSource = self;
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    
+    self.inTabBarControllerSwitch.on = NO;
+    self.inNavigationControllerSwitch.on = NO;
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
 }
 
@@ -85,8 +92,22 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     
+    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    UIViewController *pushedViewController = viewController;
+    if (pushedViewController) {
+        if (self.inNavigationControllerSwitch.on) {
+            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
+            pushedViewController = navigationController;
+        }
+        if (self.inTabBarControllerSwitch.on) {
+            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            tabBarController.viewControllers = [NSArray arrayWithObject:pushedViewController];
+            pushedViewController = tabBarController;
+        }    
+    }
+    
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [stackController pushViewController:viewController withTransitionStyle:pickedIndex];
+    [stackController pushViewController:pushedViewController withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks

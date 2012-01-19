@@ -208,7 +208,7 @@
 						<string key="NSFrame">{{20, 763}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="962906467"/>
+						<reference key="NSNextKeyView" ref="988827800"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -230,7 +230,7 @@
 						<string key="NSFrame">{{19, 808}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="988827800"/>
+						<reference key="NSNextKeyView" ref="384731418"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -252,7 +252,7 @@
 						<string key="NSFrame">{{20, 864}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="154317067"/>
+						<reference key="NSNextKeyView" ref="876432982"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -268,6 +268,84 @@
 						<reference key="IBUIFontDescription" ref="877932827"/>
 						<reference key="IBUIFont" ref="186321935"/>
 					</object>
+					<object class="IBUILabel" id="384731418">
+						<reference key="NSNextResponder" ref="490296611"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{283, 813}, {363, 24}}</string>
+						<reference key="NSSuperview" ref="490296611"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="240484124"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">LS/Wrapped into UITabBarController</string>
+						<object class="NSColor" key="IBUITextColor" id="222767216">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<reference key="IBUIHighlightedColor" ref="114470078"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="820248577">
+							<string key="name">Helvetica</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">0</int>
+							<double key="pointSize">17</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="832576810">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUISwitch" id="240484124">
+						<reference key="NSNextResponder" ref="490296611"/>
+						<int key="NSvFlags">301</int>
+						<string key="NSFrame">{{654, 813}, {94, 27}}</string>
+						<reference key="NSSuperview" ref="490296611"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="483437656"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIOn">YES</bool>
+					</object>
+					<object class="IBUILabel" id="876432982">
+						<reference key="NSNextResponder" ref="490296611"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{283, 869}, {363, 24}}</string>
+						<reference key="NSSuperview" ref="490296611"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="435300190"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">LS/Wrapped into UINavigationController</string>
+						<reference key="IBUITextColor" ref="222767216"/>
+						<reference key="IBUIHighlightedColor" ref="114470078"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<reference key="IBUIFontDescription" ref="820248577"/>
+						<reference key="IBUIFont" ref="832576810"/>
+					</object>
+					<object class="IBUISwitch" id="435300190">
+						<reference key="NSNextResponder" ref="490296611"/>
+						<int key="NSvFlags">301</int>
+						<string key="NSFrame">{{654, 869}, {94, 27}}</string>
+						<reference key="NSSuperview" ref="490296611"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="154317067"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIOn">YES</bool>
+					</object>
 					<object class="IBUILabel" id="47782108">
 						<reference key="NSNextResponder" ref="490296611"/>
 						<int key="NSvFlags">319</int>
@@ -281,24 +359,12 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">LS/Forward properties</string>
-						<object class="NSColor" key="IBUITextColor" id="222767216">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="222767216"/>
 						<reference key="IBUIHighlightedColor" ref="114470078"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<string key="name">Helvetica</string>
-							<string key="family">Helvetica</string>
-							<int key="traits">0</int>
-							<double key="pointSize">17</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="1037250186">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFontDescription" ref="820248577"/>
+						<reference key="IBUIFont" ref="832576810"/>
 					</object>
 					<object class="IBUISwitch" id="645552904">
 						<reference key="NSNextResponder" ref="490296611"/>
@@ -316,7 +382,7 @@
 					<object class="IBUILabel" id="16578721">
 						<reference key="NSNextResponder" ref="490296611"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{283, 562}, {465, 21}}</string>
+						<string key="NSFrame">{{283, 521}, {465, 21}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1063045559"/>
@@ -335,15 +401,15 @@
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
 						</object>
-						<reference key="IBUIFont" ref="1037250186"/>
+						<reference key="IBUIFont" ref="832576810"/>
 					</object>
 					<object class="IBUIPickerView" id="988827800">
 						<reference key="NSNextResponder" ref="490296611"/>
 						<int key="NSvFlags">303</int>
-						<string key="NSFrame">{{283, 598}, {465, 216}}</string>
+						<string key="NSFrame">{{283, 557}, {465, 216}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="483437656"/>
+						<reference key="NSNextKeyView" ref="962906467"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
 					</object>
@@ -412,6 +478,22 @@
 						<reference key="destination" ref="645552904"/>
 					</object>
 					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">inTabBarControllerSwitch</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="240484124"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">inNavigationControllerSwitch</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="435300190"/>
+					</object>
+					<int key="connectionID">68</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -555,6 +637,10 @@
 							<reference ref="347996817"/>
 							<reference ref="483437656"/>
 							<reference ref="375668740"/>
+							<reference ref="876432982"/>
+							<reference ref="435300190"/>
+							<reference ref="240484124"/>
+							<reference ref="384731418"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -636,6 +722,26 @@
 						<reference key="object" ref="483437656"/>
 						<reference key="parent" ref="490296611"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="876432982"/>
+						<reference key="parent" ref="490296611"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">62</int>
+						<reference key="object" ref="435300190"/>
+						<reference key="parent" ref="490296611"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="384731418"/>
+						<reference key="parent" ref="490296611"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">65</int>
+						<reference key="object" ref="240484124"/>
+						<reference key="parent" ref="490296611"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -661,6 +767,10 @@
 					<string>41.IBPluginDependency</string>
 					<string>44.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
+					<string>61.IBPluginDependency</string>
+					<string>62.IBPluginDependency</string>
+					<string>64.IBPluginDependency</string>
+					<string>65.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -668,6 +778,10 @@
 					<string>PlaceholderDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -699,7 +813,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">68</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -855,10 +969,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>forwardingPropertiesSwitch</string>
+							<string>inNavigationControllerSwitch</string>
+							<string>inTabBarControllerSwitch</string>
 							<string>transitionPickerView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UISwitch</string>
+							<string>UISwitch</string>
 							<string>UISwitch</string>
 							<string>UIPickerView</string>
 						</object>
@@ -868,12 +986,22 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>forwardingPropertiesSwitch</string>
+							<string>inNavigationControllerSwitch</string>
+							<string>inTabBarControllerSwitch</string>
 							<string>transitionPickerView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">forwardingPropertiesSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">inNavigationControllerSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">inTabBarControllerSwitch</string>
 								<string key="candidateClassName">UISwitch</string>
 							</object>
 							<object class="IBToOneOutletInfo">
