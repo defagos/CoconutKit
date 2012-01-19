@@ -165,7 +165,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {
     [super viewWillAppear:animated];
         
-    // Display those views required by the capacity
+    // Display those views required according to the capacity
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {
             if ([containerContent addViewToContainerView:self.view 

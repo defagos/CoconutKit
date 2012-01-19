@@ -421,9 +421,21 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
     
+    // The background view of view controller's views inserted into a container must fill its bounds completely, no matter
+    // what this original frame is. This is required because of how the root view controller is displayed, and leads to
+    // issues when a container is set as root view controller for an application starting in landscape mode. Overriding the
+    // autoresizing mask is here not a problem, though: We already are adjusting the view controller's view frame (see below),
+    // and this overriding the autoresizing mask should not conflict with how the view controller is displayed:
+    //   - if the view controller's view can resize in all directions, nothing is changed by overriding the autoresizing
+    //     mask
+    //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed 
+    //     must have been designed accordingly (i.e. its dimensions match the container view). In such cases the autoresizing
+    //     mask of the view is irrelevant and can be safely overridden
+    self.viewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
     // Match the inserted view frame so that it fills the container bounds
     self.viewController.view.frame = containerView.bounds;
-    
+        
     // The transitions of the contents above in the stack might move views below in the stack. To account for this
     // effect, we must replay them so that the view we have inserted is put at the proper location
     if ([containerContentStack count] != 0) {

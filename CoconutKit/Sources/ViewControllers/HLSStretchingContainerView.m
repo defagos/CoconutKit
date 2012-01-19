@@ -27,7 +27,7 @@
     if ([superview isKindOfClass:[UIWindow class]]) {
         self.frame = [[UIScreen mainScreen] applicationFrame];
     }
-    // Added to a view. Fit the parent frme size
+    // Added to a view. Fit the parent frame size
     else if (superview) {
         self.frame = superview.bounds;
     }
