@@ -19,5 +19,6 @@
 - (IBAction)pop:(id)sender;
 - (IBAction)pushTabBarController:(id)sender;
 - (IBAction)pushNavigationController:(id)sender;
+- (IBAction)hideWithModal:(id)sender;
 
 @end

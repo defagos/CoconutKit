@@ -22,6 +22,9 @@
  *     happen that a client caches this view controller for later reuse
  *   - we sometimes may want the view controller container to forward some properties of a contained view controller
  *     (e.g. title, navigation elements, toolbar, etc.) transparently
+ *   - a view controller added to a a container should be able to present or dismiss another view controller modally
+ *     by calling the corresponding UIViewController methods on self. In such cases, it is actually the container
+ *     which must present the modal view controller. This mechanism must be transparent for the user
  *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
  *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
  *     presented using a custom container

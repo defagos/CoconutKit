@@ -8,6 +8,7 @@
 
 #import "RootStackDemoViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
 #import "StretchableViewController.h"
 
 @interface RootStackDemoViewController ()
@@ -204,7 +205,7 @@
 - (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
-        [self.stackController dismissModalViewControllerAnimated:YES];
+        [self dismissModalViewControllerAnimated:YES];
     }
     else {
         [self.stackController popViewController];
@@ -233,6 +234,12 @@
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
     [self displayViewController:navigationController];
+}
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 - (void)closeNativeContainer:(id)sender
