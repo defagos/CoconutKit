@@ -254,6 +254,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
+    HLSAnimation *animation = [HLSContainerContent rotationAnimationForContainerContentStack:self.containerContentStack 
+                                                                               containerView:self.view
+                                                                                withDuration:duration];
+    [animation playAnimated:YES];
+    
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         UIViewController *viewController = containerContent.viewController;
         [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];

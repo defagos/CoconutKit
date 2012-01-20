@@ -238,6 +238,72 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
     return frame;
 }
 
++ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
+                                              containerView:(UIView *)containerView
+                                               withDuration:(NSTimeInterval)duration
+{
+    CGRect fixedFrame = [self fixedFrameForView:containerView];
+    
+    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
+    animationStep.duration = duration;
+    
+    // Apply a fix for each contained view controller (except the bottommost one which has no other view controller
+    // below)
+    for (NSUInteger index = 1; index < [containerContentStack count]; ++index) {
+        HLSContainerContent *containerContent = [containerContentStack objectAtIndex:index];
+        
+        // Fix all view controller's views below
+        NSArray *belowContainerContents = [containerContentStack subarrayWithRange:NSMakeRange(0, index)];
+        for (HLSContainerContent *belowContainerContent in belowContainerContents) {
+            UIView *belowView = [belowContainerContent view];
+            
+            // This creates the animations needed to fix the view controller's view positions during rotation. To 
+            // understand the applied animation transforms, use transparent view controllers loaded into the stack. Push 
+            // one view controller into the stack using one of the transitions, then rotate the device, and pop it. For 
+            // each transition style, do it once with push in portrait mode and pop in landscape mode, and once with push 
+            // in landscape mode and pop in portrait mode. Try to remove the transforms to understand what happens if no 
+            // correction is applied during rotation
+            HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
+            switch (containerContent.transitionStyle) {
+                case HLSTransitionStylePushFromTop: {
+                    CGFloat offset = CGRectGetHeight(fixedFrame) - belowView.transform.ty;
+                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(0.f, offset);
+                    break;
+                }
+                    
+                case HLSTransitionStylePushFromBottom: {
+                    CGFloat offset = CGRectGetHeight(fixedFrame) + belowView.transform.ty;
+                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(0.f, -offset);
+                    break;
+                }
+                    
+                case HLSTransitionStylePushFromLeft: {
+                    CGFloat offset = CGRectGetWidth(fixedFrame) - belowView.transform.tx;
+                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(offset, 0.f);
+                    break;
+                }
+                    
+                case HLSTransitionStylePushFromRight: {
+                    CGFloat offset = CGRectGetWidth(fixedFrame) + belowView.transform.tx;
+                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(-offset, 0.f);
+                    break;
+                }
+                    
+                default: {
+                    // Nothing to do
+                    break;
+                }
+            }
+            [animationStep addViewAnimationStep:viewAnimationStep forView:[belowContainerContent view]];
+        }        
+    }
+    
+    // Return the animation to be played
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
+    animation.lockingUI = YES;
+    return animation;
+}
+
 #pragma mark Object creation and destruction
 
 - (id)initWithViewController:(UIViewController *)viewController
@@ -685,7 +751,7 @@ static void swizzledForwardSetter3(UIViewController *self, SEL _cmd, id value1, 
             break;
         }
             
-        case HLSTransitionStylePushFromBottom: {            
+        case HLSTransitionStylePushFromBottom: {
             HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
             HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
             viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));

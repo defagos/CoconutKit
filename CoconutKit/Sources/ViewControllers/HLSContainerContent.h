@@ -69,6 +69,21 @@
 + (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
 
 /**
+ * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved
+ * outside the screen, e.g. "push from" animations) depend on the frame size: For a push from left animation, the
+ * applied horizontal translation used to move view controllers outside view depends on the interface orientation. 
+ * For such animations, we must update the view controller's view positions when the device goes from landscape into 
+ * portrait mode, otherwise the views might be incorrectly located after a rotation has occurred. 
+ *
+ * To perform this change, the following method generates an animation object which must be played when the container
+ * your are implementing rotates (if your container is itself a view controller, this means this method must be called 
+ * from the willAnimateRotationToInterfaceOrientation:duration: method)
+ */
++ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
+                                              containerView:(UIView *)containerView
+                                               withDuration:(NSTimeInterval)duration;
+
+/**
  * Initialize a container content manager object. Requires the view controller to be managed, the container in which
  * it is inserted, as well as the details of the transition with which it gets displayed. Use the reserved
  * kAnimationTransitionDefaultDuration duration for the default animation duration.
