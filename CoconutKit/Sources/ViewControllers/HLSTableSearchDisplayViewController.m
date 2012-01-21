@@ -65,7 +65,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     // Create the search bar for displaying at the top of the table view (created at initialization time so that it
     // can be further customized by the subclass viewDidLoad method)
-    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.f,
                                                                     0.f,
                                                                     applicationFrame.size.width, 

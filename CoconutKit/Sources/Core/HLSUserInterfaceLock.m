@@ -69,7 +69,7 @@
         // Prevents user interaction using a modal transparent view covering the whole screen. To get modal-like behavior 
         // for views, it suffices to add them as subviews of window, blocking interaction with the root application view
         // (usually the only child view of window)
-        self.modalView = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+        self.modalView = [[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease];
         // Use color with alpha = 0 to get transparency while keeping the view alive (i.e. interactive). If the alpha
         // view property is set to 0, the view is like removed and unable to trap clicks
         self.modalView.backgroundColor = [UIColor clearColor];

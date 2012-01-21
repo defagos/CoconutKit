@@ -12,7 +12,6 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
-#import "HLSStretchingContainerView.h"
 #import "NSArray+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
@@ -148,7 +147,9 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)loadView
 {
-    self.view = [[[HLSStretchingContainerView alloc] init] autorelease];
+    // Take all space available
+    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
 }
 
 - (void)viewDidLoad

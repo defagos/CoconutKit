@@ -129,8 +129,6 @@
 		6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE60B14BA0494007EE121 /* HLSStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58B14BA0494007EE121 /* HLSStackController.h */; };
 		6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; };
-		6FADE60D14BA0494007EE121 /* HLSStretchingContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58D14BA0494007EE121 /* HLSStretchingContainerView.h */; };
-		6FADE60E14BA0494007EE121 /* HLSStretchingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58E14BA0494007EE121 /* HLSStretchingContainerView.m */; };
 		6FADE60F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */; };
 		6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		6FADE61114BA0494007EE121 /* HLSTransitionStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59114BA0494007EE121 /* HLSTransitionStyle.h */; };
@@ -289,8 +287,6 @@
 		6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6FADE58B14BA0494007EE121 /* HLSStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackController.h; sourceTree = "<group>"; };
 		6FADE58C14BA0494007EE121 /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
-		6FADE58D14BA0494007EE121 /* HLSStretchingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStretchingContainerView.h; sourceTree = "<group>"; };
-		6FADE58E14BA0494007EE121 /* HLSStretchingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStretchingContainerView.m; sourceTree = "<group>"; };
 		6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
 		6FADE59114BA0494007EE121 /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
@@ -578,8 +574,6 @@
 				6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE58B14BA0494007EE121 /* HLSStackController.h */,
 				6FADE58C14BA0494007EE121 /* HLSStackController.m */,
-				6FADE58D14BA0494007EE121 /* HLSStretchingContainerView.h */,
-				6FADE58E14BA0494007EE121 /* HLSStretchingContainerView.m */,
 				6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */,
 				6FADE59114BA0494007EE121 /* HLSTransitionStyle.h */,
@@ -665,7 +659,6 @@
 				6FADE60714BA0494007EE121 /* HLSContainerContent.h in Headers */,
 				6FADE60914BA0494007EE121 /* HLSPlaceholderViewController.h in Headers */,
 				6FADE60B14BA0494007EE121 /* HLSStackController.h in Headers */,
-				6FADE60D14BA0494007EE121 /* HLSStretchingContainerView.h in Headers */,
 				6FADE60F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h in Headers */,
 				6FADE61114BA0494007EE121 /* HLSTransitionStyle.h in Headers */,
 				6FADE61314BA0494007EE121 /* HLSViewController.h in Headers */,
@@ -792,7 +785,6 @@
 				6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */,
 				6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */,
 				6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */,
-				6FADE60E14BA0494007EE121 /* HLSStretchingContainerView.m in Sources */,
 				6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */,
 				6FADE61214BA0494007EE121 /* HLSTransitionStyle.m in Sources */,
 				6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */,
