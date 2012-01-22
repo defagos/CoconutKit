@@ -31,6 +31,11 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 ### How should I use CoconutKit?
 The easiest and recommended way to use CoconutKit is to grab the latest tagged binary package available for download. Right-click on your project, select "Add files", and add the .staticframework directory ("Copy items into destination group's folder" must be turned off, and "Create groups for any added folders" selected). Then **remove the CoconutKit language files your project does not need (see below why)**. Also import the CoconutKit.h header file from your project .pch file (`#import <CoconutKit/CoconutKit.h>`). You are now ready to go!
 
+Note that depending on the CoconutKit components you use you might need to link against one or several of the following frameworks:
+
+* CoreData.framework
+* MessageUI.framework
+
 Some code snippets have been provided in the Snippets directory (and more will probably be added in the future). Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
 
 If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
