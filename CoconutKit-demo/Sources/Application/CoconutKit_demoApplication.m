@@ -28,7 +28,10 @@
 - (id)init
 {
     if ((self = [super init])) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(currentLocalizationDidChange:) 
+                                                     name:HLSCurrentLocalizationDidChangeNotification 
+                                                   object:nil];
         
         // Create the default model entry point and context
         NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -49,7 +52,10 @@
         else {
             DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
             self.rootViewController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
-            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleLanguageSheet:)] autorelease];
+            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") 
+                                                                                       style:UIBarButtonItemStyleBordered 
+                                                                                      target:self 
+                                                                                      action:@selector(toggleLanguageSheet:)] autorelease];
             demosListViewController.navigationItem.rightBarButtonItem = languageBarButtonItem;
         }
     }
