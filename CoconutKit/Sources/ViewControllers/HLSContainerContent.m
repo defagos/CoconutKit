@@ -31,19 +31,10 @@ static void (*s_UIViewController__dismissViewControllerAnimated_completion_Imp)(
 static void (*s_UIViewController__presentModalViewController_animated_Imp)(id, SEL, id, BOOL) = NULL;
 static void (*s_UIViewController__dismissModalViewControllerAnimated_Imp)(id, SEL, BOOL) = NULL;
 
-// TODO: We must probably swizzle the following methods as well:
-#if 0
-@property(nonatomic,readonly) UIViewController *parentViewController;
-
-// This property has been replaced by presentedViewController. It will be DEPRECATED, plan accordingly.
-@property(nonatomic,readonly) UIViewController *modalViewController; 
-
-// The view controller that was presented by this view controller or its nearest ancestor.
-@property(nonatomic,readonly) UIViewController *presentedViewController  __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
-
-// The view controller that presented this view controller (or its farthest ancestor.)
-@property(nonatomic,readonly) UIViewController *presentingViewController __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
-#endif
+// Remark: We cannot swizzle parentViewController to return the container (see .h file to know why). There is also
+//         no need to swizzle presentingViewControlller since the present... methods have been swizzled
+static id (*s_UIViewController__modalViewController_Imp)(id, SEL) = NULL;
+static id (*s_UIViewController__presentedViewController_Imp)(id, SEL) = NULL;
 
 static id swizzledGetter(UIViewController *self, SEL _cmd);
 static id swizzledForwardGetter(UIViewController *self, SEL _cmd);
@@ -83,6 +74,8 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
 - (void)swizzledDismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion;
 - (void)swizzledPresentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
 - (void)swizzledDismissModalViewControllerAnimated:(BOOL)animated;
+- (UIViewController *)swizzledModalViewController;
+- (UIViewController *)swizzledPresentedViewController;
 
 @end
 
@@ -980,6 +973,12 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     s_UIViewController__dismissModalViewControllerAnimated_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
                                                                                                              @selector(dismissModalViewControllerAnimated:), 
                                                                                                              @selector(swizzledDismissModalViewControllerAnimated:));
+    s_UIViewController__modalViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
+                                                                                      @selector(modalViewController), 
+                                                                                      @selector(swizzledModalViewController));
+    s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
+                                                                                          @selector(presentedViewController), 
+                                                                                          @selector(swizzledPresentedViewController));
 }
 
 /**
@@ -1036,6 +1035,32 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     }
     else {
         (*s_UIViewController__dismissModalViewControllerAnimated_Imp)(self, @selector(dismissModalViewControllerAnimated:), animated);
+    }
+}
+
+- (UIViewController *)swizzledModalViewController
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    if (containerContent
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
+        return containerViewController.modalViewController;
+    }
+    else {
+        return (*s_UIViewController__modalViewController_Imp)(self, @selector(modalViewController));
+    }
+}
+
+- (UIViewController *)swizzledPresentedViewController
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    if (containerContent
+        && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
+        return containerViewController.presentedViewController;
+    }
+    else {
+        return (*s_UIViewController__presentedViewController_Imp)(self, @selector(presentedViewController));
     }
 }
 
