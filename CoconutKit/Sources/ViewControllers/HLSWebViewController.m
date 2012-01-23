@@ -211,13 +211,15 @@
     [self updateInterface];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
     [self updateInterface];
     
+    // We can also encounter other types of errors here (e.g. if a user clicks on two links consecutively on the same page. 
+    // The first request is cancelled and ends with NSURLErrorCancelled)
     if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"Cannot Open Page", @"CoconutKit_Localizable", @"Cannot Open Page") 
                                                              message:NSLocalizedStringFromTable(@"No Internet connection is available", @"CoconutKit_Localizable", 
