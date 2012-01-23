@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSURLRequest *request;
 @property (nonatomic, retain) UIImage *refreshImage;
 
+- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+
 - (void)openInSafari:(id)sender;
 - (void)mailLink:(id)sender;
 
@@ -94,6 +96,7 @@
     [super viewWillAppear:animated];
     
     [self reloadData];
+    [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -123,21 +126,7 @@
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
-    self.toolbar.frame = (CGRect){CGPointMake(0, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-    self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
-    
-    UIBarButtonItem *fixedSpaceLeft = [self.toolbar.items objectAtIndex:2];
-    UIBarButtonItem *fixedSpaceRight = [self.toolbar.items objectAtIndex:6];
-    CGFloat activityIndicatorYPosition = CGRectGetMinY(self.toolbar.frame) + roundf(toolbarSize.height / 2.f);
-    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-        fixedSpaceLeft.width = fixedSpaceRight.width = 40.f;
-        self.activityIndicator.center = CGPointMake(214.f, activityIndicatorYPosition);
-    }
-    else {
-        fixedSpaceLeft.width = fixedSpaceRight.width = 83.f;
-        self.activityIndicator.center = CGPointMake(334.f, activityIndicatorYPosition);
-    }
+    [self layoutForInterfaceOrientation:toInterfaceOrientation];
 }
 
 #pragma mark Localization
@@ -149,13 +138,26 @@
     // Just to remove the associated warning. Nothing here yet
 }
 
+#pragma mark Layout
+
+- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Adjust the toolbar height depending on the screen orientation
+    CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
+    self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
+    self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
+    
+    // Center UI elements accordinglys
+    self.activityIndicator.center = CGPointMake(self.activityIndicator.center.x, CGRectGetMidY(self.toolbar.frame));
+}
+
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
 {
     self.goBackBarButtonItem.enabled = self.webView.canGoBack;
     self.goForwardBarButtonItem.enabled = self.webView.canGoForward;
-    self.refreshBarButtonItem.enabled = !self.activityIndicator.isAnimating;
+    self.refreshBarButtonItem.enabled = ! self.activityIndicator.isAnimating;
     self.refreshBarButtonItem.image = self.activityIndicator.isAnimating ? nil : self.refreshImage;
 }
 
