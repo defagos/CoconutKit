@@ -10,9 +10,6 @@
 
 #import "HLSLogger.h"
 
-HLSDefineNotification(HLSNetworkActivityStartNotification);
-HLSDefineNotification(HLSNetworkActivityStopNotification);
-
 #pragma mark -
 #pragma mark NotificationSender class interface
 
@@ -84,7 +81,7 @@ HLSDefineNotification(HLSNetworkActivityStopNotification);
     HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 1) {
-        [self postCoalescingNotificationWithName:HLSNetworkActivityStartNotification];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
 }
 
@@ -100,7 +97,7 @@ HLSDefineNotification(HLSNetworkActivityStopNotification);
     HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 0) {
-        [self postCoalescingNotificationWithName:HLSNetworkActivityStopNotification];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;        
     }
 }
 
