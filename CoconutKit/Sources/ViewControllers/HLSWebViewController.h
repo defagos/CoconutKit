@@ -6,22 +6,38 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSReloadable.h"
 #import "HLSViewController.h"
 
-@interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
+/**
+ * A web browser with standard features (navigation buttons, link sharing, etc.)
+ *
+ * Designated initializer: initWithRequest:
+ */
+@interface HLSWebViewController : HLSViewController <HLSReloadable, MFMailComposeViewControllerDelegate, UIWebViewDelegate> {
+@private
+    NSURLRequest *m_request;
+    UIWebView *m_webView;
+    UIToolbar *m_toolbar;
+    UIBarButtonItem *m_goBackBarButtonItem;
+    UIBarButtonItem *m_goForwardBarButtonItem;
+    UIBarButtonItem *m_refreshBarButtonItem;
+    UIBarButtonItem *m_actionBarButtonItem;
+    UIActivityIndicatorView *m_activityIndicator;
+    UIImage *m_refreshImage;
+}
 
 - (id)initWithRequest:(NSURLRequest *)request;
 
-@property (nonatomic, readonly) NSURLRequest *request;
+@property (nonatomic, readonly, retain) NSURLRequest *request;
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, retain) UIImage *refreshImage;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)goForward:(id)sender;

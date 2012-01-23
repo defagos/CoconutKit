@@ -161,14 +161,13 @@
 - (void)choose4
 {
     self.choiceLabel.text = @"4";
-    HLSActionSheet *actionSheet = [[HLSActionSheet alloc] init];
+    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"Yes", @"Yes") target:nil action:NULL];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"No", @"No") target:nil action:NULL];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
     }
     [actionSheet showInView:self.view];
-    [actionSheet release];
 }
 
 - (void)cancel
