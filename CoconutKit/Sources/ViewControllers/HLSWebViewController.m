@@ -1,4 +1,3 @@
-
 //
 //  HLSWebViewController.m
 //  CoconutKit
@@ -12,14 +11,20 @@
 #import "HLSActionSheet.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 #import "HLSNotifications.h"
+#import "NSString+HLSExtensions.h"
 
 @interface HLSWebViewController ()
 
 @property (nonatomic, retain) NSURLRequest *request;
+@property (nonatomic, retain) NSURL *currentURL;
+
 @property (nonatomic, retain) UIImage *refreshImage;
 
 - (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (void)updateInterface;
+- (void)updateTitle;
 
 - (void)openInSafari:(id)sender;
 - (void)mailLink:(id)sender;
@@ -41,6 +46,7 @@
 - (void)dealloc
 {
     self.request = nil;
+    self.currentURL = nil;
     
     [super dealloc];
 }
@@ -62,6 +68,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize request = m_request;
+
+@synthesize currentURL = m_currentURL;
 
 @synthesize webView = m_webView;
 
@@ -87,6 +95,9 @@
     
     self.refreshImage = self.refreshBarButtonItem.image;
     
+    // Start with the initial URL when the view gets (re)loaded
+    self.currentURL = nil;
+    
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
 }
@@ -95,7 +106,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self reloadData];
+    [self updateInterface];
     [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
@@ -135,10 +146,10 @@
 {
     [super localize];
     
-    // Just to remove the associated warning. Nothing here yet
+    [self updateTitle];
 }
 
-#pragma mark Layout
+#pragma mark Layout and display
 
 - (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -151,14 +162,25 @@
     self.activityIndicator.center = CGPointMake(self.activityIndicator.center.x, CGRectGetMidY(self.toolbar.frame));
 }
 
-#pragma mark HLSReloadable protocol implementation
-
-- (void)reloadData
+- (void)updateInterface
 {
     self.goBackBarButtonItem.enabled = self.webView.canGoBack;
     self.goForwardBarButtonItem.enabled = self.webView.canGoForward;
-    self.refreshBarButtonItem.enabled = ! self.activityIndicator.isAnimating;
-    self.refreshBarButtonItem.image = self.activityIndicator.isAnimating ? nil : self.refreshImage;
+    self.refreshBarButtonItem.enabled = ! self.webView.loading;
+    self.refreshBarButtonItem.image = self.webView.loading ? nil : self.refreshImage;
+    self.actionBarButtonItem.enabled = ! self.webView.loading && self.currentURL;
+    
+    [self updateTitle];
+}
+
+- (void)updateTitle
+{
+    if (self.currentURL) {
+        self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
+    else {
+        self.title = NSLocalizedStringFromTable(@"Untitled", @"CoconutKit_Localizable", @"Untitled");
+    }
 }
 
 #pragma mark MFMailComposeViewControllerDelegate protocol implementation
@@ -173,23 +195,38 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
-    
     [self.activityIndicator startAnimating];
-    [self reloadData];
+    
+    [self updateInterface];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
-    
     [self.activityIndicator stopAnimating];
-    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    [self reloadData];
+    
+    // A new page has been displayed. Remember its URL
+    self.currentURL = [self.webView.request URL];
+    
+    [self updateInterface];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
 {
-    [self webViewDidFinishLoad:webView];
+    [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
+    [self.activityIndicator stopAnimating];
+    
+    [self updateInterface];
+    
+    if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"Cannot Open Page", @"CoconutKit_Localizable", @"Cannot Open Page") 
+                                                             message:NSLocalizedStringFromTable(@"No Internet connection is available", @"CoconutKit_Localizable", 
+                                                                                                @"No Internet connection is available")
+                                                            delegate:nil 
+                                                   cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK") 
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
 #pragma mark Action callbacks
@@ -197,24 +234,35 @@
 - (IBAction)goBack:(id)sender
 {
     [self.webView goBack];
-    [self reloadData];
+    [self updateInterface];
 }
 
 - (IBAction)goForward:(id)sender
 {
     [self.webView goForward];
-    [self reloadData];
+    [self updateInterface];
 }
 
 - (IBAction)refresh:(id)sender
 {
-    [self.webView loadRequest:self.webView.request];
+    NSURL *webViewURL = [self.webView.request URL];
+    
+    // Reload the currently displayed page (if any)
+    if ([[webViewURL absoluteString] isFilled]) {
+        [self.webView loadRequest:self.webView.request];
+    }
+    // Reload the start page
+    else {
+        [self.webView loadRequest:self.request];
+    }
+    
+    [self updateInterface];
 }
 
 - (IBAction)displayActionSheet:(id)sender
 {    
     HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    actionSheet.title = [self.webView.request.URL absoluteString];
+    actionSheet.title = [self.currentURL absoluteString];
     [actionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"Open in Safari", @"CoconutKit_Localizable", @"HLSWebViewController 'Open in Safari' action")
                              target:self
                              action:@selector(openInSafari:)];
@@ -231,7 +279,7 @@
 
 - (void)openInSafari:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:self.webView.request.URL];
+    [[UIApplication sharedApplication] openURL:[self.webView.request URL]];
 }
 
 - (void)mailLink:(id)sender
@@ -239,7 +287,7 @@
     MFMailComposeViewController *mailComposeViewController = [[[MFMailComposeViewController alloc] init] autorelease];
     mailComposeViewController.mailComposeDelegate = self;
     [mailComposeViewController setSubject:self.title];
-    [mailComposeViewController setMessageBody:[self.webView.request.URL absoluteString] isHTML:NO];
+    [mailComposeViewController setMessageBody:[[self.webView.request URL] absoluteString] isHTML:NO];
     [self presentModalViewController:mailComposeViewController animated:YES];
 }
 

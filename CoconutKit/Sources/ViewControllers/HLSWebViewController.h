@@ -6,7 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSReloadable.h"
 #import "HLSViewController.h"
 
 /**
@@ -14,9 +13,10 @@
  *
  * Designated initializer: initWithRequest:
  */
-@interface HLSWebViewController : HLSViewController <HLSReloadable, MFMailComposeViewControllerDelegate, UIWebViewDelegate> {
+@interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIWebViewDelegate> {
 @private
     NSURLRequest *m_request;
+    NSURL *m_currentURL;
     UIWebView *m_webView;
     UIToolbar *m_toolbar;
     UIBarButtonItem *m_goBackBarButtonItem;
