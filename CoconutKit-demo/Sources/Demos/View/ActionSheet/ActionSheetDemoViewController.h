@@ -8,24 +8,20 @@
 
 @interface ActionSheetDemoViewController : HLSViewController {
 @private
-    UIButton *m_showFromRectButton;
     UIToolbar *m_toolbar;
-    UIBarButtonItem *m_showFromToolbarBarButtonItem;
-    UIBarButtonItem *m_otherShowFromToolbarBarButtonItem;
-    UIBarButtonItem *m_showFromBarButtonItemBarButtonItem;
     UILabel *m_choiceLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *showFromRectButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *showFromToolbarBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *otherShowFromToolbarBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *showFromBarButtonItemBarButtonItem;
 @property (nonatomic, retain) IBOutlet UILabel *choiceLabel;
 
-- (IBAction)makeChoiceFromRect:(id)sender;
-- (IBAction)makeChoiceInView:(id)sender;
+- (IBAction)makeChoiceFromRectAnimated:(id)sender;
+- (IBAction)makeChoiceFromRectNotAnimated:(id)sender;
+- (IBAction)makeChoiceInView;       // Intentionally no parameter for tests purposes
 - (IBAction)makeChoiceFromToolbar:(id)sender;
-- (IBAction)makeChoiceFromBarButtonItem:(id)sender;
+- (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender;
+- (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender;
+
+- (IBAction)resetChoice:(id)sender;
 
 @end

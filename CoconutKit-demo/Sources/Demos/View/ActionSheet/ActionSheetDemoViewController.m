@@ -16,7 +16,6 @@
 - (void)choose2:(id)sender;
 - (void)choose3;
 - (void)choose4;
-- (void)resetChoice:(id)sender;
 
 @end
 
@@ -36,25 +35,13 @@
 {
     [super releaseViews];
     
-    self.showFromRectButton = nil;
     self.toolbar = nil;
-    self.showFromToolbarBarButtonItem = nil;
-    self.otherShowFromToolbarBarButtonItem = nil;
-    self.showFromBarButtonItemBarButtonItem = nil;
     self.choiceLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize showFromRectButton = m_showFromRectButton;
-
 @synthesize toolbar = m_toolbar;
-
-@synthesize showFromToolbarBarButtonItem = m_showFromToolbarBarButtonItem;
-
-@synthesize otherShowFromToolbarBarButtonItem = m_otherShowFromToolbarBarButtonItem;
-
-@synthesize showFromBarButtonItemBarButtonItem = m_showFromBarButtonItemBarButtonItem;
 
 @synthesize choiceLabel = m_choiceLabel;
 
@@ -85,9 +72,6 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Action sheet", @"Action sheet");
-    self.showFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
-    self.otherShowFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
-    self.showFromBarButtonItemBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
 }
 
 #pragma mark Common action sheet code
@@ -115,15 +99,26 @@
 
 #pragma mark Event callbacks
 
-- (IBAction)makeChoiceFromRect:(id)sender
+- (IBAction)makeChoiceFromRectAnimated:(id)sender
 {
+    UIButton *button = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromRect:self.showFromRectButton.frame
+    [actionSheet showFromRect:button.frame
                        inView:self.view 
                      animated:YES];
 }
 
-- (IBAction)makeChoiceInView:(id)sender
+- (IBAction)makeChoiceFromRectNotAnimated:(id)sender
+{
+    UIButton *button = sender;
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromRect:button.frame
+                       inView:self.view 
+                     animated:NO];
+}
+
+// Test methods without parameter (checks UIBarButtonItem+HLSActionSheet implementation correctness)
+- (IBAction)makeChoiceInView
 {
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
     [actionSheet showInView:self.view];
@@ -135,12 +130,20 @@
     [actionSheet showFromToolbar:self.toolbar];
 }
 
-- (IBAction)makeChoiceFromBarButtonItem:(id)sender
+- (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender
 {
     UIBarButtonItem *barButtonItem = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
     [actionSheet showFromBarButtonItem:barButtonItem
                               animated:YES];
+}
+
+- (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender
+{
+    UIBarButtonItem *barButtonItem = sender;
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromBarButtonItem:barButtonItem
+                              animated:NO];
 }
 
 - (void)choose1:(id)sender

@@ -13,24 +13,19 @@
 #import "NSObject+HLSExtensions.h"
 
 // Only one action sheet can be opened at a time. Remember it here
-static HLSActionSheet *s_actionSheet = nil;                 // strong ref
-
-// Variables used to fix UIActionShet behavior when shown from a bar button. See .h documentation
-static UIBarButtonItem *s_barButtonItem = nil;              // strong ref
-static id s_barButtonItemTarget = nil;                      // weak ref
-static SEL s_barButtonItemAction = NULL;
-static BOOL s_barButtonItemShowAnimated = NO;
+static HLSActionSheet *s_actionSheet = nil;                 // weak ref to the currently opened sheet, one at most (no need to retain; action 
+                                                            // sheet ownership is automatically managed behind the scenes)
+static UIBarButtonItem *s_barButtonItemOwner = nil;         // weak ref to the bar button item which displayed the action sheet (if any)
 
 @interface HLSActionSheet () <UIActionSheetDelegate>
+
++ (void)dismissCurrentActionSheetAnimated:(BOOL)animated;
++ (UIBarButtonItem *)barButtonItemOwner;
++ (BOOL)isVisible;
 
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
 @property (nonatomic, assign) id<UIActionSheetDelegate> realDelegate;
-
-- (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated;
-- (void)restoreBehaviorOfBarButtonItem;
-
-- (void)dismissActionSheetForBarButtonItem:(id)sender;
 
 @end
 
@@ -45,6 +40,23 @@ static BOOL s_barButtonItemShowAnimated = NO;
     }
     
     NSAssert([self implementsProtocol:@protocol(UIActionSheetDelegate)], @"Incomplete implementation");
+}
+
+#pragma mark Managing the current action sheet
+
++ (void)dismissCurrentActionSheetAnimated:(BOOL)animated
+{
+    [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:animated];
+}
+
++ (UIBarButtonItem *)barButtonItemOwner
+{
+    return s_barButtonItemOwner;
+}
+
++ (BOOL)isVisible
+{
+    return s_actionSheet != nil;
 }
 
 #pragma mark Object creation and destruction
@@ -162,80 +174,12 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 #pragma mark Showing the action sheet
 
-- (void)replaceCurrentActionSheet
-{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        // If an action sheet was visible, dismiss it first
-        [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:NO];
-        [s_actionSheet release];
-        s_actionSheet = [self retain];
-    }
-}
-
-- (void)showFromToolbar:(UIToolbar *)toolbar
-{
-    [self replaceCurrentActionSheet];
-    [super showFromToolbar:toolbar];
-}
-
-- (void)showFromTabBar:(UITabBar *)tabBar
-{
-    [self replaceCurrentActionSheet];
-    [super showFromTabBar:tabBar];
-}
-
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
-    [self replaceCurrentActionSheet];
-    
-    // Replace bar button item actions. This way we can trigger a close if the same button is tapped again
-    [self replaceBehaviorForBarButtonItem:barButtonItem animated:animated];
+    s_actionSheet = self;
+    s_barButtonItemOwner = barButtonItem;
     
     [super showFromBarButtonItem:barButtonItem animated:animated];
-}
-
-- (void)showFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
-{
-    [self replaceCurrentActionSheet];
-    [super showFromRect:rect inView:view animated:animated];
-}
-
-- (void)showInView:(UIView *)view
-{
-    [self replaceCurrentActionSheet];
-    [super showInView:view];
-}
-
-#pragma mark Fixing special case of bar button items
-
-- (void)replaceBehaviorForBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
-{
-    if (s_barButtonItem) {
-        HLSLoggerWarn(@"A button behavior has already been replaced");
-        return;
-    }
-    
-    s_barButtonItem = [barButtonItem retain];
-    s_barButtonItemTarget = barButtonItem.target;
-    s_barButtonItemAction = barButtonItem.action;
-    s_barButtonItemShowAnimated = animated;
-    
-    s_barButtonItem.target = self;
-    s_barButtonItem.action = @selector(dismissActionSheetForBarButtonItem:);
-}
-
-- (void)restoreBehaviorOfBarButtonItem
-{
-    if (! s_barButtonItem) {
-        return;
-    }
-    
-    s_barButtonItem.target = s_barButtonItemTarget;
-    s_barButtonItem.action = s_barButtonItemAction;
-    s_barButtonItemShowAnimated = NO;
-    
-    [s_barButtonItem release];
-    s_barButtonItem = nil;
 }
 
 #pragma mark UIActionSheetDelegate protocol implementation
@@ -246,6 +190,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         id target = [[self.targets objectAtIndex:buttonIndex] pointerValue];
         SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
         
+        // Support both selectors of the form - (void)action:(id)sender and - (void)action
         [target performSelector:action withObject:self];
     }
     
@@ -280,6 +225,9 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if ([self.delegate respondsToSelector:@selector(actionSheet:willDismissWithButtonIndex:)]) {
         [self.realDelegate actionSheet:actionSheet willDismissWithButtonIndex:buttonIndex];
     }
+    
+    s_actionSheet = nil;
+    s_barButtonItemOwner = nil;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -287,20 +235,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     if ([self.delegate respondsToSelector:@selector(actionSheet:didDismissWithButtonIndex:)]) {
         [self.realDelegate actionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
     }
-    
-    // Pop-up dismissed. If it was presented by a bar button item, this is not the case anymore. Restore
-    // original behavior
-    [self restoreBehaviorOfBarButtonItem];
-    
-    [s_actionSheet release];
-    s_actionSheet = nil;
-}
-
-#pragma mark Event callbacks
-
-- (void)dismissActionSheetForBarButtonItem:(id)sender
-{
-    [self dismissWithClickedButtonIndex:self.cancelButtonIndex animated:s_barButtonItemShowAnimated];
 }
 
 @end

@@ -21,10 +21,7 @@
  * dismiss it if the tap occurs in the same toolbar which the button showing it belongs to. In such cases, 
  * additional code has to be written by clients so that the behavior stays correct, which means:
  *   - avoiding the user to be able to stack up action sheets by repeatedly tapping the same bar button item
- *   - if a toolbar contains several buttons opening action sheets, and if a bar button with some action sheet
- *     is tapped while another action sheet for another bar button is visible, the currently visible
- *     sheet should be dismissed without animation, while the new one is made visible without animation
- *     as well. This is what Safari does, for example.
+ *   - tapping a bar button while another one is displaying an action sheet must dismiss the action sheet
  *
  * The HLSActionSheet class solves all the above issues. When creating an action sheet, you add buttons to
  * it, attaching targets and actions as you would for a button. This makes it easy to keep your code well 
