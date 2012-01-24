@@ -273,9 +273,11 @@
                                  target:self
                                  action:@selector(mailLink:)];
     }
-    [actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
-                                   target:nil
-                                   action:NULL];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
+                                       target:nil
+                                       action:NULL];
+    }
     [actionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
 }
 
