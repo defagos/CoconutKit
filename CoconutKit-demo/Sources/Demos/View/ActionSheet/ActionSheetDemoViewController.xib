@@ -39,12 +39,12 @@
 			</object>
 			<object class="IBUIView" id="957667757">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">319</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIButton" id="183346266">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{47, 386}, {218, 37}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
@@ -81,7 +81,7 @@
 					</object>
 					<object class="IBUIButton" id="1027830882">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{504, 386}, {218, 37}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
@@ -103,7 +103,7 @@
 					</object>
 					<object class="IBUIButton" id="344901517">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{275, 491}, {218, 37}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
@@ -125,7 +125,7 @@
 					</object>
 					<object class="IBUILabel" id="370613303">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{280, 327}, {208, 156}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
@@ -197,6 +197,17 @@
 								<reference key="IBUIToolbar" ref="541559536"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="433848372">
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<reference key="IBUIToolbar" ref="541559536"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="160388681">
+								<string key="IBUITitle">fromTabBar</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="541559536"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="698169771">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="541559536"/>
 								<int key="IBUISystemItemIdentifier">5</int>
@@ -310,6 +321,14 @@
 					</object>
 					<int key="connectionID">56</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">makeChoiceFromTabBar:</string>
+						<reference key="source" ref="160388681"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -368,6 +387,8 @@
 							<reference ref="137040155"/>
 							<reference ref="433848372"/>
 							<reference ref="761610283"/>
+							<reference ref="160388681"/>
+							<reference ref="698169771"/>
 						</object>
 						<reference key="parent" ref="957667757"/>
 					</object>
@@ -416,6 +437,16 @@
 						<reference key="object" ref="1027830882"/>
 						<reference key="parent" ref="957667757"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="160388681"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">65</int>
+						<reference key="object" ref="698169771"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -439,12 +470,16 @@
 					<string>40.IBPluginDependency</string>
 					<string>41.IBPluginDependency</string>
 					<string>51.IBPluginDependency</string>
+					<string>63.IBPluginDependency</string>
+					<string>65.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ActionSheetDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -473,7 +508,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -489,12 +524,14 @@
 							<string>makeChoiceFromBarButtonItemNotAnimated:</string>
 							<string>makeChoiceFromRectAnimated:</string>
 							<string>makeChoiceFromRectNotAnimated:</string>
+							<string>makeChoiceFromTabBar:</string>
 							<string>makeChoiceFromToolbar:</string>
 							<string>makeChoiceInView</string>
 							<string>resetChoice:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -512,6 +549,7 @@
 							<string>makeChoiceFromBarButtonItemNotAnimated:</string>
 							<string>makeChoiceFromRectAnimated:</string>
 							<string>makeChoiceFromRectNotAnimated:</string>
+							<string>makeChoiceFromTabBar:</string>
 							<string>makeChoiceFromToolbar:</string>
 							<string>makeChoiceInView</string>
 							<string>resetChoice:</string>
@@ -532,6 +570,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">makeChoiceFromRectNotAnimated:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">makeChoiceFromTabBar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

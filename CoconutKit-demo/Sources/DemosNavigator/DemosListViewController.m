@@ -443,7 +443,10 @@ typedef enum {
                 }
                     
                 case ViewDemoIndexActionSheet: {
-                    demoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
+                    ActionSheetDemoViewController *actionSheetDemoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
+                    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+                    tabBarController.viewControllers = [NSArray arrayWithObject:actionSheetDemoViewController];
+                    demoViewController = tabBarController;
                     break;
                 }
                     

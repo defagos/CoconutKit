@@ -159,6 +159,12 @@
     [actionSheet showFromToolbar:self.toolbar];
 }
 
+- (IBAction)makeChoiceFromTabBar:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
 - (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender
 {
     UIBarButtonItem *barButtonItem = sender;
