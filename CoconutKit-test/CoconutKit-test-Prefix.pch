@@ -63,6 +63,7 @@
     #import "NSObject+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "NSTimeZone+HLSExtensions.h"
+    #import "UIActionSheet+HLSExtensions.h"
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"

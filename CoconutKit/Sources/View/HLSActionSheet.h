@@ -69,7 +69,8 @@
  * Only one such button can be added, the function returns the index of the existing one if called
  * more than once.
  *
- * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet).
+ * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet)
+ * or - (void)methodName
  *
  * This method does nothing on the iPad
  */
@@ -83,7 +84,8 @@
  * Only one such button can be added, the function returns the index of the existing one if called
  * more than once.
  *
- * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet).
+ * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet)
+ * or - (void)methodName
  */
 - (NSInteger)addDestructiveButtonWithTitle:(NSString *)destructiveButtonTitle 
                                     target:(id)target
@@ -93,7 +95,8 @@
  * Add a standard button at the end of the current button list, with a specific target and action.
  * The index of the added button is returned.
  *
- * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet).
+ * The signature of action must be - (void)methodName:(id)sender (sender is the action sheet)
+ * or - (void)methodName
  */
 - (NSInteger)addButtonWithTitle:(NSString *)title
                          target:(id)target

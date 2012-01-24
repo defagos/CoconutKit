@@ -11,11 +11,13 @@
 @interface ActionSheetDemoViewController ()
 
 - (HLSActionSheet *)actionSheetForChoice;
+- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet;
 
 - (void)choose1:(id)sender;
 - (void)choose2:(id)sender;
-- (void)choose3;
-- (void)choose4;
+- (void)choose3:(id)sender;
+- (void)choose4:(id)sender;
+- (void)cancel;
 
 @end
 
@@ -90,11 +92,41 @@
                              action:@selector(choose2:)];
     [actionSheet addButtonWithTitle:@"3"
                              target:self
-                             action:@selector(choose3)];
+                             action:@selector(choose3:)];
     [actionSheet addButtonWithTitle:@"4"
                              target:self
-                             action:@selector(choose4)];
+                             action:@selector(choose4:)];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+    }
+    
     return actionSheet;
+}
+
+- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet
+{
+    HLSActionSheet *secondActionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    [secondActionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Yes") target:nil action:NULL];
+    [secondActionSheet addButtonWithTitle:[HLSLocalizedStringFromUIKit(@"No") capitalizedString] target:nil action:NULL];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [secondActionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+    }
+    
+    if ([actionSheet.parentView isKindOfClass:[UIBarButtonItem class]]) {
+        UIBarButtonItem *parentBarButtonItem = (UIBarButtonItem *)actionSheet.parentView;
+        [secondActionSheet showFromBarButtonItem:parentBarButtonItem animated:YES];
+    }
+    else if ([actionSheet.parentView isKindOfClass:[UIToolbar class]]) {
+        UIToolbar *parentToolbar = (UIToolbar *)actionSheet.parentView;
+        [secondActionSheet showFromToolbar:parentToolbar];
+    }
+    else if ([actionSheet.parentView isKindOfClass:[UITabBar class]]) {
+        UITabBar *parentTabBar = (UITabBar *)actionSheet.parentView;
+        [secondActionSheet showFromTabBar:parentTabBar];
+    }
+    else {
+        [secondActionSheet showInView:actionSheet.parentView];
+    }
 }
 
 #pragma mark Event callbacks
@@ -103,21 +135,18 @@
 {
     UIButton *button = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromRect:button.frame
-                       inView:self.view 
-                     animated:YES];
+    [actionSheet showFromRect:button.frame inView:self.view animated:YES];
 }
 
 - (IBAction)makeChoiceFromRectNotAnimated:(id)sender
 {
     UIButton *button = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromRect:button.frame
-                       inView:self.view 
-                     animated:NO];
+    [actionSheet showFromRect:button.frame inView:self.view animated:NO];
 }
 
-// Test methods without parameter (checks UIBarButtonItem+HLSActionSheet implementation correctness)
+// Test method without parameter (checks UIBarButtonItem+HLSActionSheet implementation correctness. Bar
+// button actions can namely have a sender parameter, but this is not required)
 - (IBAction)makeChoiceInView
 {
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
@@ -134,51 +163,47 @@
 {
     UIBarButtonItem *barButtonItem = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromBarButtonItem:barButtonItem
-                              animated:YES];
+    [actionSheet showFromBarButtonItem:barButtonItem animated:YES];
 }
 
 - (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender
 {
     UIBarButtonItem *barButtonItem = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromBarButtonItem:barButtonItem
-                              animated:NO];
+    [actionSheet showFromBarButtonItem:barButtonItem animated:NO];
 }
 
 - (void)choose1:(id)sender
 {
     self.choiceLabel.text = @"1";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
 - (void)choose2:(id)sender
 {
     self.choiceLabel.text = @"2";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
-- (void)choose3
+- (void)choose3:(id)sender
 {
     self.choiceLabel.text = @"3";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
-- (void)choose4
+- (void)choose4:(id)sender
 {
     self.choiceLabel.text = @"4";
-    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"Yes", @"Yes") target:nil action:NULL];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"No", @"No") target:nil action:NULL];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
-    }
-    [actionSheet showInView:self.view];
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
+// Has no sender parameter. Works too!
 - (void)cancel
 {
     self.choiceLabel.text = nil;
 }
 
-- (void)resetChoice:(id)sender
+- (IBAction)resetChoice:(id)sender
 {
     self.choiceLabel.text = @"0";
 }

@@ -17,7 +17,7 @@
 
 - (IBAction)makeChoiceFromRectAnimated:(id)sender;
 - (IBAction)makeChoiceFromRectNotAnimated:(id)sender;
-- (IBAction)makeChoiceInView;       // Intentionally no parameter for tests purposes
+- (IBAction)makeChoiceInView;
 - (IBAction)makeChoiceFromToolbar:(id)sender;
 - (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender;
 - (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender;
