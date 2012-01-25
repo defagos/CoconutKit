@@ -49,14 +49,22 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 
 - (void)dismissCurrentActionSheetAndForward:(id)sender
 {
-    // Warning: Cannot factor out [HLSActionSheet dismissCurrentActionSheet] since the result of [HLSActionSheet barButtonItemOwner]
-    //          depends on it!
-    if ([HLSActionSheet currentActionSheet].owner != (UIView *)self) {
+    // Remark: [HLSActionSheet dismissCurrentActionSheetAnimated:YES] cannot be factored out
+    //         below. It namely changes the result of [HLSActionSheet currentActionSheet], the
+    //         order is therefore especially important here
+    
+    // Clicking on a bar button item different than the one from which the action sheet is
+    // shown. Dismiss current action sheet and trigger button action
+    if ([HLSActionSheet currentActionSheet].owner != (id)self) {
         [HLSActionSheet dismissCurrentActionSheetAnimated:YES];
         
         // Support both selectors of the form - (void)action:(id)sender and - (void)action
-        [self.target performSelector:self.action withObject:sender];
+        SEL action = (*s_UIBarButtonItem__action_Imp)(self, @selector(action));
+        id target = (*s_UIBarButtonItem__target_Imp)(self, @selector(target));
+        [target performSelector:action withObject:sender];
     }
+    // Clicking on the same bar button item from which the action sheet was shown. Close it
+    // but do not trigger the button action again
     else {
         [HLSActionSheet dismissCurrentActionSheetAnimated:YES];
     }
