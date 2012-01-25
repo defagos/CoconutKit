@@ -11,6 +11,7 @@
 #import "HLSActionSheet+Friend.h"
 #import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
+#import "UIActionSheet+HLSExtensions.h"
 
 HLSLinkCategory(UIBarButtonItem_HLSActionSheet)
 
@@ -28,7 +29,7 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 
 - (SEL)swizzledAction
 {
-    if ([HLSActionSheet isVisible]) {
+    if ([HLSActionSheet currentActionSheet]) {
         return @selector(dismissCurrentActionSheetAndForward:);
     }
     else {
@@ -38,7 +39,7 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 
 - (id)swizzledTarget
 {
-    if ([HLSActionSheet isVisible]) {
+    if ([HLSActionSheet currentActionSheet]) {
         return self;
     }
     else {
@@ -50,7 +51,7 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 {
     // Warning: Cannot factor out [HLSActionSheet dismissCurrentActionSheet] since the result of [HLSActionSheet barButtonItemOwner]
     //          depends on it!
-    if ([HLSActionSheet barButtonItemOwner] != self) {
+    if ([HLSActionSheet currentActionSheet].parentView != (UIView *)self) {
         [HLSActionSheet dismissCurrentActionSheetAnimated:YES];
         
         // Support both selectors of the form - (void)action:(id)sender and - (void)action

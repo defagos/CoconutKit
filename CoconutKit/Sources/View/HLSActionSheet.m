@@ -15,13 +15,11 @@
 // Only one action sheet can be opened at a time. Remember it here
 static HLSActionSheet *s_actionSheet = nil;                 // weak ref to the currently opened sheet, one at most (no need to retain; action 
                                                             // sheet ownership is automatically managed behind the scenes)
-static UIBarButtonItem *s_barButtonItemOwner = nil;         // weak ref to the bar button item which displayed the action sheet (if any)
 
 @interface HLSActionSheet () <UIActionSheetDelegate>
 
++ (HLSActionSheet *)currentActionSheet;
 + (void)dismissCurrentActionSheetAnimated:(BOOL)animated;
-+ (UIBarButtonItem *)barButtonItemOwner;
-+ (BOOL)isVisible;
 
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
@@ -44,19 +42,14 @@ static UIBarButtonItem *s_barButtonItemOwner = nil;         // weak ref to the b
 
 #pragma mark Managing the current action sheet
 
++ (HLSActionSheet *)currentActionSheet
+{
+    return s_actionSheet;
+}
+
 + (void)dismissCurrentActionSheetAnimated:(BOOL)animated
 {
     [s_actionSheet dismissWithClickedButtonIndex:s_actionSheet.cancelButtonIndex animated:animated];
-}
-
-+ (UIBarButtonItem *)barButtonItemOwner
-{
-    return s_barButtonItemOwner;
-}
-
-+ (BOOL)isVisible
-{
-    return s_actionSheet != nil;
 }
 
 #pragma mark Object creation and destruction
@@ -177,7 +170,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
     s_actionSheet = self;
-    s_barButtonItemOwner = barButtonItem;
     
     [super showFromBarButtonItem:barButtonItem animated:animated];
 }
@@ -227,7 +219,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     }
     
     s_actionSheet = nil;
-    s_barButtonItemOwner = nil;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
