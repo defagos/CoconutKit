@@ -23,6 +23,7 @@ UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
 UINavigationBar+HLSExtensions.m
+UINavigationController+HLSActionSheet.m
 UITextField+HLSValidation.m
 UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m

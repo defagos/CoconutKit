@@ -22,10 +22,11 @@
  * additional code has to be written by clients so that the behavior stays correct, which means:
  *   - avoiding the user to be able to stack up action sheets by repeatedly tapping the same bar button item
  *   - tapping a bar button while another one is displaying an action sheet must dismiss the action sheet
+ *   - dismissing the action sheet when navigating back in a navigation controller
  *
  * The HLSActionSheet class solves all the above issues. When creating an action sheet, you add buttons to
  * it, attaching targets and actions as you would for a button. This makes it easy to keep your code well 
- * organized. Moreover, correct behavior with bar buttons is guaranteed.
+ * organized. Moreover, correct behavior with bar buttons is ensured.
  * 
  * To create and display an HLSActionSheet object, proceed as follows:
  *   - initialize the object using the init method (the designated intializer inherited from

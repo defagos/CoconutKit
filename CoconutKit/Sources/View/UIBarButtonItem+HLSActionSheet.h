@@ -7,8 +7,11 @@
 //
 
 /**
- * A private class used by HLSActionSheet to trap taps on bar button items so that any previously
+ * A private category used by HLSActionSheet to trap taps on bar button items so that any previously
  * opened HLSActionSheet can be properly dismissed
+ *
+ * Remark: This trick cannot catch the events associated with a navigation bar back button item. This
+ *         case is treated in UINavigationController+HLSActionSheet
  */
 @interface UIBarButtonItem (HLSActionSheet)
 
