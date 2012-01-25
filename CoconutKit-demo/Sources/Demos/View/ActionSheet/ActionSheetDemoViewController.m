@@ -73,7 +73,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Action sheet", @"Action sheet");
+    self.tabBarController.title = NSLocalizedString(@"Action sheet", @"Action sheet");
 }
 
 #pragma mark Common action sheet code
