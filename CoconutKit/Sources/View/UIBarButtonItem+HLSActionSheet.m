@@ -51,7 +51,7 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 {
     // Warning: Cannot factor out [HLSActionSheet dismissCurrentActionSheet] since the result of [HLSActionSheet barButtonItemOwner]
     //          depends on it!
-    if ([HLSActionSheet currentActionSheet].parentView != (UIView *)self) {
+    if ([HLSActionSheet currentActionSheet].owner != (UIView *)self) {
         [HLSActionSheet dismissCurrentActionSheetAnimated:YES];
         
         // Support both selectors of the form - (void)action:(id)sender and - (void)action

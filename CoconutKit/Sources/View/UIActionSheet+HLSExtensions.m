@@ -12,7 +12,7 @@
 #import "HLSRuntime.h"
 
 // Keys for associated objects
-static void *s_parentViewKey = &s_parentViewKey;
+static void *s_ownerKey = &s_ownerKey;
 
 // Original implementations of the methods we swizzle
 static void (*s_UIActionSheet__showFromToolbar_Imp)(id, SEL, id) = NULL;
@@ -37,9 +37,9 @@ HLSLinkCategory(UIActionSheet_HLSExtensions)
 
 @implementation UIActionSheet (HLSExtensions)
 
-- (UIView *)parentView
+- (id)owner
 {
-    return objc_getAssociatedObject(self, s_parentViewKey);
+    return objc_getAssociatedObject(self, s_ownerKey);
 }
 
 @end
@@ -64,31 +64,31 @@ HLSLinkCategory(UIActionSheet_HLSExtensions)
 
 - (void)swizzledShowFromToolbar:(UIToolbar *)toolbar
 {
-    objc_setAssociatedObject(self, s_parentViewKey, toolbar, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, toolbar, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIActionSheet__showFromToolbar_Imp)(self, @selector(showFromToolbar:), toolbar);
 }
 
 - (void)swizzledShowFromTabBar:(UITabBar *)tabBar
 {
-    objc_setAssociatedObject(self, s_parentViewKey, tabBar, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, tabBar, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIActionSheet__showFromTabBar_Imp)(self, @selector(showFromTabBar:), tabBar);
 }
 
 - (void)swizzledShowFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
 {
-    objc_setAssociatedObject(self, s_parentViewKey, barButtonItem, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, barButtonItem, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(self, @selector(showFromBarButtonItem:animated:), barButtonItem, animated);
 }
 
 - (void)swizzledShowFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
 {
-    objc_setAssociatedObject(self, s_parentViewKey, view, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIActionSheet__showFromRect_inView_animated_Imp)(self, @selector(showFromRect:inView:animated:), rect, view, animated);
 }
 
 - (void)swizzledShowInView:(UIView *)view
 {
-    objc_setAssociatedObject(self, s_parentViewKey, view, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIActionSheet__showInView_Imp)(self, @selector(showInView:), view);
 }
 
@@ -97,7 +97,7 @@ HLSLinkCategory(UIActionSheet_HLSExtensions)
 - (void)swizzledDismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
 {
     (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(self, @selector(dismissWithClickedButtonIndex:animated:), buttonIndex, animated);
-    objc_setAssociatedObject(self, s_parentViewKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, s_ownerKey, nil, OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end

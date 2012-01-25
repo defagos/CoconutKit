@@ -112,20 +112,21 @@
         [secondActionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
     }
     
-    if ([actionSheet.parentView isKindOfClass:[UIBarButtonItem class]]) {
-        UIBarButtonItem *parentBarButtonItem = (UIBarButtonItem *)actionSheet.parentView;
-        [secondActionSheet showFromBarButtonItem:parentBarButtonItem animated:YES];
+    if ([actionSheet.owner isKindOfClass:[UIBarButtonItem class]]) {
+        UIBarButtonItem *ownerBarButtonItem = (UIBarButtonItem *)actionSheet.owner;
+        [secondActionSheet showFromBarButtonItem:ownerBarButtonItem animated:YES];
     }
-    else if ([actionSheet.parentView isKindOfClass:[UIToolbar class]]) {
-        UIToolbar *parentToolbar = (UIToolbar *)actionSheet.parentView;
-        [secondActionSheet showFromToolbar:parentToolbar];
+    else if ([actionSheet.owner isKindOfClass:[UIToolbar class]]) {
+        UIToolbar *ownerToolbar = (UIToolbar *)actionSheet.owner;
+        [secondActionSheet showFromToolbar:ownerToolbar];
     }
-    else if ([actionSheet.parentView isKindOfClass:[UITabBar class]]) {
-        UITabBar *parentTabBar = (UITabBar *)actionSheet.parentView;
-        [secondActionSheet showFromTabBar:parentTabBar];
+    else if ([actionSheet.owner isKindOfClass:[UITabBar class]]) {
+        UITabBar *ownerTabBar = (UITabBar *)actionSheet.owner;
+        [secondActionSheet showFromTabBar:ownerTabBar];
     }
-    else {
-        [secondActionSheet showInView:actionSheet.parentView];
+    else if ([actionSheet.owner isKindOfClass:[UIView class]]) {
+        UIView *ownerView = (UIView *)actionSheet.owner;
+        [secondActionSheet showInView:ownerView];
     }
 }
 

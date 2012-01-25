@@ -9,10 +9,10 @@
 @interface UIActionSheet (HLSExtensions)
 
 /**
- * The view which is showing the parent sheet. Can be a UIBarButtonItem, a UIToolbar, a UITabBar
+ * The object which is showing the action sheet. Can be a UIBarButtonItem, a UIToolbar, a UITabBar
  * or simply a UIView depending on which show... method was called. If the action sheet is currently
  * not displayed, the property returns nil
  */
-@property (nonatomic, readonly, assign) UIView *parentView;
+@property (nonatomic, readonly, assign) id owner;
 
 @end
