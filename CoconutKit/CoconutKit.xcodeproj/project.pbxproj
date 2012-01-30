@@ -18,6 +18,10 @@
 		6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */; };
 		6F91451314CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91451114CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */; };
+		6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */; };
+		6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */; };
+		6F948C3A14D6E872003BF765 /* UITextField+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F948C3614D6E872003BF765 /* UITextField+HLSExtensions.h */; };
+		6F948C3B14D6E872003BF765 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3714D6E872003BF765 /* UITextField+HLSExtensions.m */; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
 		6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		6FADE59B14BA0494007EE121 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSAnimationStep.h */; };
@@ -166,6 +170,10 @@
 		6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91451114CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
+		6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
+		6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
+		6F948C3614D6E872003BF765 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F948C3714D6E872003BF765 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE50114BA0494007EE121 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE50214BA0494007EE121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE50314BA0494007EE121 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
@@ -567,6 +575,10 @@
 				6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE57F14BA0494007EE121 /* UINavigationBar+HLSExtensions.h */,
 				6FADE58014BA0494007EE121 /* UINavigationBar+HLSExtensions.m */,
+				6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */,
+				6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */,
+				6F948C3614D6E872003BF765 /* UITextField+HLSExtensions.h */,
+				6F948C3714D6E872003BF765 /* UITextField+HLSExtensions.m */,
 				6FADE58114BA0494007EE121 /* UITextField+HLSValidation.h */,
 				6FADE58214BA0494007EE121 /* UITextField+HLSValidation.m */,
 				6F3B063314BC7B950026F512 /* UIToolbar+HLSExtensions.h */,
@@ -686,6 +698,8 @@
 				6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */,
 				6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */,
 				6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */,
+				6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */,
+				6F948C3A14D6E872003BF765 /* UITextField+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,6 +828,8 @@
 				6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
 				6F91451314CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */,
 				6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
+				6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */,
+				6F948C3B14D6E872003BF765 /* UITextField+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -98,6 +98,7 @@
 "Task group"="Tâche groupée";
 "Tasks"="Tâches";
 "Test in modal"="Test dans modale";
+"Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text fields"="Champs textuels";
 "Text fields (large)"="Champs textuels (large)";
 "The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";

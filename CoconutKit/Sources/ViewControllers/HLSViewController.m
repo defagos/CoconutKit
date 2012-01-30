@@ -12,6 +12,7 @@
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "UITextField+HLSExtensions.h"
 
 @interface HLSViewController ()
 
@@ -121,6 +122,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[UITextField currentTextField] resignFirstResponder];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
     HLSLoggerDebug(@"View controller %@: view will disappear", self);
 }
