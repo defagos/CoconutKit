@@ -1516,7 +1516,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "${PROJECT_DIR}/../CoconutKit-demo/generate_model.sh";
+			shellScript = "\"${PROJECT_DIR}\"/../CoconutKit-demo/generate_model.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 

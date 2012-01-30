@@ -865,7 +865,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "${PROJECT_DIR}/generate_model.sh";
+			shellScript = "\"${PROJECT_DIR}\"/generate_model.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
