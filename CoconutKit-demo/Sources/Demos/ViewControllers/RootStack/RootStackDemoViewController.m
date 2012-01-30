@@ -34,12 +34,18 @@
 - (void)releaseViews
 {
     [super releaseViews];
-
+    
+    self.backBarButtonItem = nil;
+    self.actionSheetBarButtonItem = nil;
     self.popButton = nil;
     self.transitionPickerView = nil;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize backBarButtonItem = m_backBarButtonItem;
+
+@synthesize actionSheetBarButtonItem = m_actionSheetBarButtonItem;
 
 @synthesize popButton = m_popButton;
 
@@ -73,6 +79,9 @@
 - (void)localize
 {
     [super localize];
+    
+    self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
+    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", @"Action sheet");
     
     if (self == [self.stackController rootViewController]) {
         [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
@@ -240,6 +249,23 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+}
+
+- (IBAction)showActionSheet:(id)sender
+{
+    // Just to test behavior during pop
+    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    [actionSheet addButtonWithTitle:@"1"
+                             target:self
+                             action:NULL];
+    [actionSheet addButtonWithTitle:@"2"
+                             target:self
+                             action:NULL];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:NULL];
+    }
+    
+    [actionSheet showFromBarButtonItem:self.actionSheetBarButtonItem animated:YES];
 }
 
 - (void)closeNativeContainer:(id)sender

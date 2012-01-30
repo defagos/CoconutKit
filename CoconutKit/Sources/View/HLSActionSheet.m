@@ -188,7 +188,9 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
         
         // Support both selectors of the form - (void)action:(id)sender and - (void)action
-        [target performSelector:action withObject:self];
+        if (action) {
+            [target performSelector:action withObject:self];
+        }
     }
     
     if ([self.realDelegate respondsToSelector:@selector(actionSheet:clickedButtonAtIndex:)]) {
