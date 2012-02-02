@@ -42,9 +42,11 @@
         UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
         UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromRight2];
         UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
+        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
         
         self.insetViewController = stackController;
         self.forwardingProperties = YES;
@@ -247,6 +249,46 @@
             
         case HLSTransitionStyleCoverFromBottomRight: {
             return @"HLSTransitionStyleCoverFromBottomRight";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottom2: {
+            return @"HLSTransitionStyleCoverFromBottom2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop2: {
+            return @"HLSTransitionStyleCoverFromTop2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft2: {
+            return @"HLSTransitionStyleCoverFromLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromRight2: {
+            return @"HLSTransitionStyleCoverFromRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopLeft2: {
+            return @"HLSTransitionStyleCoverFromTopLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopRight2: {
+            return @"HLSTransitionStyleCoverFromTopRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft2: {
+            return @"HLSTransitionStyleCoverFromBottomLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomRight2: {
+            return @"HLSTransitionStyleCoverFromBottomRight2";
             break;
         }
             

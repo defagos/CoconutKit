@@ -81,6 +81,9 @@
  * To perform this change, the following method generates an animation object which must be played when the container
  * your are implementing rotates (if your container is itself a view controller, this means this method must be called 
  * from the willAnimateRotationToInterfaceOrientation:duration: method)
+ *
+ * The animation returned by this method has meaningful settings for a rotation animation (locking interaction, resizing 
+ * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
 + (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
                                               containerView:(UIView *)containerView
@@ -148,8 +151,8 @@
  *
  * The first element in the stack array is interpreted as the bottommost one.
  *
- * The animation returned by this method has default properties. You usually want to tweak some of them (e.g. delegate, 
- * tag, etc.) right after creation.
+ * The animation returned by this method has meaningful settings for a container animation (locking interaction, not resizing 
+ * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
 - (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
                                        containerView:(UIView *)containerView;

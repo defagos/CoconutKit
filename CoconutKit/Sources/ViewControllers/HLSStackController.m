@@ -416,8 +416,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     NSAssert([self.containerContentStack indexOfObject:containerContent] != NSNotFound, @"Content not found in the container");
     HLSAnimation *animation = [containerContent animationWithContainerContentStack:self.containerContentStack containerView:self.view];
     animation.tag = @"push_animation";
-    animation.lockingUI = YES;
-    animation.bringToFront = YES;
     animation.delegate = self;
     return animation;
 }

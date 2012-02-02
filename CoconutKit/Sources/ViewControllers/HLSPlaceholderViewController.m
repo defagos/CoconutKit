@@ -297,8 +297,6 @@
     HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:[NSArray arrayWithArray:containerContentStack]
                                                                           containerView:self.placeholderView];
     animation.tag = @"add_animation";
-    animation.lockingUI = YES;
-    animation.bringToFront = YES;
     animation.delegate = self;
     return animation;
 }

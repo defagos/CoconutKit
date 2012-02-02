@@ -194,7 +194,7 @@
                                                                       CGAffineTransformInvert(translation));
             
             // TODO: This does not resize subviews correctly. Maybe that is not possible?
-            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);            
+            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
         }
         // Alter transform
         else {

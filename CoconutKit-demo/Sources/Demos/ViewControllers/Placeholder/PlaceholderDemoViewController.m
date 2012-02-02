@@ -242,6 +242,46 @@
             break;
         }
             
+        case HLSTransitionStyleCoverFromBottom2: {
+            return @"HLSTransitionStyleCoverFromBottom2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop2: {
+            return @"HLSTransitionStyleCoverFromTop2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft2: {
+            return @"HLSTransitionStyleCoverFromLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromRight2: {
+            return @"HLSTransitionStyleCoverFromRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopLeft2: {
+            return @"HLSTransitionStyleCoverFromTopLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopRight2: {
+            return @"HLSTransitionStyleCoverFromTopRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft2: {
+            return @"HLSTransitionStyleCoverFromBottomLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomRight2: {
+            return @"HLSTransitionStyleCoverFromBottomRight2";
+            break;
+        }
+            
         case HLSTransitionStyleFadeIn: {
             return @"HLSTransitionStyleFadeIn";
             break;
