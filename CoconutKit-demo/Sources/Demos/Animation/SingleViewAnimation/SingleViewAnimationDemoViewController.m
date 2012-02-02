@@ -98,9 +98,9 @@
     animationStep1.duration = 2.;
     animationStep1.curve = UIViewAnimationCurveEaseIn;
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CGAffineTransformMakeTranslation(100.f, 100.f);
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(100.f, 100.f, 0.f);
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView];
-        
+    
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     animationStep2.duration = 1.;
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
@@ -109,25 +109,25 @@
     
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+    viewAnimationStep31.transform = CATransform3DMakeScale(1.5f, 1.5f, 1.f);
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep41.transform = CGAffineTransformMakeRotation(M_PI_4);
+    viewAnimationStep41.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
     animationStep5.duration = 1.;
     animationStep5.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep51.transform = CGAffineTransformMakeTranslation(0.f, 200.f);
+    viewAnimationStep51.transform = CATransform3DMakeTranslation(0.f, 200.f, 0.f);
     [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep6 = [HLSAnimationStep animationStep];
     animationStep6.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep61 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep61.transform = CGAffineTransformMakeRotation(M_PI_4);
+    viewAnimationStep61.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
     viewAnimationStep61.alphaVariation = 0.3f;
     [animationStep6 addViewAnimationStep:viewAnimationStep61 forView:self.rectangleView];
     
@@ -166,7 +166,7 @@
         self.playForwardButton.hidden = NO;
         [self.reverseAnimation cancel];
     }
-
+    
     self.cancelButton.hidden = YES;
 }
 

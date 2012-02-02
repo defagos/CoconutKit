@@ -183,14 +183,20 @@
         
         // Alter frame
         if (self.resizeViews) {
-            // Only translation or scale transforms are allowed
-            if (! floateq(viewAnimationStep.transform.b, 0.f) || ! floateq(viewAnimationStep.transform.c, 0.f)) {
+            // Only affine translation or scale transforms are allowed
+            if (! CATransform3DIsAffine(viewAnimationStep.transform)) {
+                HLSLoggerWarn(@"Animations with resizeViews set to YES only support affine transforms");
+                continue;
+            }
+            
+            CGAffineTransform affineTransform = CATransform3DGetAffineTransform(viewAnimationStep.transform);            
+            if (! floateq(affineTransform.b, 0.f) || ! floateq(affineTransform.c, 0.f)) {
                 HLSLoggerWarn(@"Animations with resizeViews set to YES only support translation or scale transforms");
                 continue;
             }
             
             CGAffineTransform translation = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
-            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, viewAnimationStep.transform), 
+            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, affineTransform), 
                                                                       CGAffineTransformInvert(translation));
             
             // TODO: This does not resize subviews correctly. Maybe that is not possible?
@@ -198,10 +204,10 @@
         }
         // Alter transform
         else {
-            CGAffineTransform translation = CGAffineTransformMakeTranslation(-view.transform.tx, -view.transform.ty);
-            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, viewAnimationStep.transform), 
-                                                                      CGAffineTransformInvert(translation));
-            view.transform = CGAffineTransformConcat(view.transform, convTransform);
+            CATransform3D translation = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
+            CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translation, viewAnimationStep.transform), 
+                                                              CATransform3DInvert(translation));
+            view.layer.transform = CATransform3DConcat(view.layer.transform, convTransform);
         }
     }
     

@@ -28,7 +28,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 {
     if ((self = [super init])) {
         // Default: No change
-        self.transform = CGAffineTransformIdentity;
+        self.transform = CATransform3DIdentity;
         self.alphaVariation = kAnimationStepDefaultAlphaVariation; 
     }
     return self;
@@ -61,7 +61,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 - (HLSViewAnimationStep *)reverseViewAnimationStep
 {
     HLSViewAnimationStep *reverseViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    reverseViewAnimationStep.transform = CGAffineTransformInvert(self.transform);
+    reverseViewAnimationStep.transform = CATransform3DInvert(self.transform);
     reverseViewAnimationStep.alphaVariation = -self.alphaVariation;
     return reverseViewAnimationStep;
 }
@@ -73,7 +73,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return [NSString stringWithFormat:@"<%@: %p; transform: %@; alphaVariation: %f>", 
             [self class],
             self,
-            NSStringFromCGAffineTransform(self.transform),
+            @"TODO",
             self.alphaVariation];
 }
 

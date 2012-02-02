@@ -54,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
     self.playBackwardButton.hidden = YES;
     self.cancelButton.hidden = YES;
     
@@ -110,14 +110,14 @@
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     animationStep1.duration = 2.;
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CGAffineTransformMakeTranslation(50.f, 60.f);    
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(50.f, 60.f, 0.f);    
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView1];
     HLSViewAnimationStep *viewAnimationStep12 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep12.transform = CGAffineTransformMakeTranslation(40.f, -10.f);
+    viewAnimationStep12.transform = CATransform3DMakeTranslation(40.f, -10.f, 0.f);
     viewAnimationStep12.alphaVariation = -0.4f;
     [animationStep1 addViewAnimationStep:viewAnimationStep12 forView:self.rectangleView2];
     HLSViewAnimationStep *viewAnimationStep13 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep13.transform = CGAffineTransformMakeTranslation(0.f, -100.f);
+    viewAnimationStep13.transform = CATransform3DMakeTranslation(0.f, -100.f, 0.f);
     [animationStep1 addViewAnimationStep:viewAnimationStep13 forView:self.rectangleView3];
     HLSViewAnimationStep *viewAnimationStep14 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep14.alphaVariation = -0.8f;
@@ -127,7 +127,7 @@
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     animationStep2.duration = 1.;
     HLSViewAnimationStep *viewAnimationStep2 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep2.transform = CGAffineTransformMakeTranslation(80.f, 0.f);
+    viewAnimationStep2.transform = CATransform3DMakeTranslation(80.f, 0.f, 0.f);
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView1];
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView2];
     [animationStep2 addViewAnimationStep:viewAnimationStep2 forView:self.rectangleView3];
@@ -136,16 +136,16 @@
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     animationStep3.duration = 0.5;
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.transform = CGAffineTransformMakeScale(1.5f, 2.f);
+    viewAnimationStep31.transform = CATransform3DMakeScale(1.5f, 2.f, 1.f);
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView1];
     HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep32.transform = CGAffineTransformMakeScale(2.f, 1.5f);
+    viewAnimationStep32.transform = CATransform3DMakeScale(2.f, 1.5f, 1.f);
     viewAnimationStep32.alphaVariation = -0.3f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:self.rectangleView2];
     HLSViewAnimationStep *viewAnimationStep33 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep33.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    viewAnimationStep33.transform = CATransform3DMakeScale(0.5f, 0.5f, 1.f);
     [animationStep3 addViewAnimationStep:viewAnimationStep33 forView:self.rectangleView3];
-            
+    
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
                                                                 animationStep2,

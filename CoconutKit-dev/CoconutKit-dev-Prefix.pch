@@ -4,6 +4,7 @@
     #import <CoreData/CoreData.h>
     #import <CoreGraphics/CoreGraphics.h>
     #import <UIKit/UIKit.h>
+    #import <QuartzCore/QuartzCore.h>
     #import <MessageUI/MessageUI.h>
 
     // CoconutKit library public header files
