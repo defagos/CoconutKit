@@ -605,6 +605,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
 
 #pragma mark Animation
 
+// TODO: Factor out common code
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                  disappearingContainerContents:(NSArray *)disappearingContainerContents
@@ -1083,6 +1084,114 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
             [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
             animationStep2.duration = 0.4;
             [animationSteps addObject:animationStep2];
+            break;
+        }
+            
+        case HLSTransitionStyleFlipVertical: {
+            CATransform3D flipTransform = CATransform3DMakeRotation(M_PI, 0.f, 1.f, 0.f);
+            CATransform3D halfFlipTransform = CATransform3DMakeRotation(M_PI_2, 0.f, 1.f, 0.f);
+            
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep11.transform = flipTransform;
+            viewAnimationStep11.alphaVariation = -1.f;
+            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep21.transform = CATransform3DInvert(halfFlipTransform);
+                viewAnimationStep21.alphaVariation = -0.5f;
+                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+            }
+            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep22.transform = CATransform3DInvert(halfFlipTransform);
+            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+            animationStep2.curve = UIViewAnimationCurveEaseOut;
+            animationStep2.duration = 0.2;
+            [animationSteps addObject:animationStep2];
+            
+            HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+            HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep31.alphaVariation = 0.5f;
+            [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent view]]; 
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep32.alphaVariation = -0.5f;
+                [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent view]]; 
+            }
+            animationStep3.duration = 0.;
+            [animationSteps addObject:animationStep3];
+            
+            HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep41.transform = CATransform3DInvert(halfFlipTransform);
+                [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
+            }
+            HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep42.transform = CATransform3DInvert(halfFlipTransform);
+            viewAnimationStep42.alphaVariation = 0.5f;
+            [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
+            animationStep4.curve = UIViewAnimationCurveEaseIn;
+            animationStep4.duration = 0.2;
+            [animationSteps addObject:animationStep4];
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            CATransform3D flipTransform = CATransform3DMakeRotation(M_PI, 1.f, 0.f, 0.f);
+            CATransform3D halfFlipTransform = CATransform3DMakeRotation(M_PI_2, 1.f, 0.f, 0.f);
+            
+            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep11.transform = flipTransform;
+            viewAnimationStep11.alphaVariation = -1.f;
+            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+            animationStep1.duration = 0.;
+            [animationSteps addObject:animationStep1];
+            
+            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep21.transform = CATransform3DInvert(halfFlipTransform);
+                viewAnimationStep21.alphaVariation = -0.5f;
+                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+            }
+            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep22.transform = CATransform3DInvert(halfFlipTransform);
+            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+            animationStep2.curve = UIViewAnimationCurveEaseOut;
+            animationStep2.duration = 0.2;
+            [animationSteps addObject:animationStep2];
+            
+            HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+            HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep31.alphaVariation = 0.5f;
+            [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent view]]; 
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep32.alphaVariation = -0.5f;
+                [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent view]]; 
+            }
+            animationStep3.duration = 0.;
+            [animationSteps addObject:animationStep3];
+            
+            HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+                HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+                viewAnimationStep41.transform = CATransform3DInvert(halfFlipTransform);
+                [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
+            }
+            HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
+            viewAnimationStep42.transform = CATransform3DInvert(halfFlipTransform);
+            viewAnimationStep42.alphaVariation = 0.5f;
+            [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
+            animationStep4.curve = UIViewAnimationCurveEaseIn;
+            animationStep4.duration = 0.2;
+            [animationSteps addObject:animationStep4];
             break;
         }
             

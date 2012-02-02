@@ -32,6 +32,8 @@ typedef enum {
     HLSTransitionStylePushFromLeft,                          // The new view pushes the old one to the right
     HLSTransitionStylePushFromRight,                         // The new view pushes the old one to the left
     HLSTransitionStyleEmergeFromCenter,                      // The new view emerges from the center of the placeholder view
+    HLSTransitionStyleFlipVertical,                        // The new view appears with a vertical 3D flip
+    HLSTransitionStyleFlipHorizontal,                      // The new view appears with a horizontal 3D flip
     HLSTransitionStyleEnumEnd,
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;

@@ -47,6 +47,8 @@
         [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
         UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
+        UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
         
         self.insetViewController = stackController;
         self.forwardingProperties = YES;
@@ -324,6 +326,16 @@
             
         case HLSTransitionStyleEmergeFromCenter: {
             return @"HLSTransitionStyleEmergeFromCenter";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipVertical: {
+            return @"HLSTransitionStyleFlipVertical";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            return @"HLSTransitionStyleFlipHorizontal";
             break;
         }
             

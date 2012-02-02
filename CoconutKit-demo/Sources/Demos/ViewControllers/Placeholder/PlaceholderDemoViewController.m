@@ -317,6 +317,16 @@
             break;
         }
             
+        case HLSTransitionStyleFlipVertical: {
+            return @"HLSTransitionStyleFlipVertical";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            return @"HLSTransitionStyleFlipHorizontal";
+            break;
+        }
+            
         default: {
             return @"";
             break;
