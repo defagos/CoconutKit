@@ -442,7 +442,6 @@
 		6F33347813FAF9E0000FC9FD = {
 			isa = PBXGroup;
 			children = (
-				6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */,
 				6F2FCD59140BB8C70080A775 /* Shared */,
 				6FF56D091474F5390041B40F /* Resources */,
 				6F3334E813FB0112000FC9FD /* Sources */,
@@ -468,6 +467,7 @@
 				6F33348913FAF9E0000FC9FD /* Foundation.framework */,
 				6F3334A113FAFA6F000FC9FD /* GHUnitIOS.framework */,
 				6F3334E613FB00E2000FC9FD /* MessageUI.framework */,
+				6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */,
 				6F33348713FAF9E0000FC9FD /* UIKit.framework */,
 			);
 			name = Frameworks;
