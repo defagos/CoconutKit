@@ -6,6 +6,9 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+// Formatting functions
+NSString *HLSStringFromCATransform3D(CATransform3D transform);
+
 @interface NSString (HLSExtensions)
 
 /**
