@@ -347,8 +347,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
                 case HLSTransitionStyleCoverFromTopLeft2:
                 case HLSTransitionStyleCoverFromTopRight2:
                 case HLSTransitionStyleCoverFromBottomLeft2:
-                case HLSTransitionStyleCoverFromBottomRight2: 
-                case HLSTransitionStyleEmergeFromCenter : {
+                case HLSTransitionStyleCoverFromBottomRight2: {
                     viewAnimationStep.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
                                                                          kPushFrom2ScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame),
                                                                          1.f);
