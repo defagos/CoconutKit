@@ -228,6 +228,16 @@
             break;
         }
             
+        case HLSTransitionStyleFlipVertical: {
+            return @"HLSTransitionStyleFlipVertical";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            return @"HLSTransitionStyleFlipHorizontal";
+            break;
+        }
+            
         default: {
             return @"";
             break;
@@ -288,6 +298,7 @@
 - (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    memoryWarningTestCoverViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 

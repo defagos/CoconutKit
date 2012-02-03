@@ -57,6 +57,34 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 
++ (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
+                                           yOffset:(CGFloat)yOffset
+                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent;
+
++ (HLSAnimation *)coverAnimation2WithInitialXOffset:(CGFloat)xOffset
+                                            yOffset:(CGFloat)yOffset
+                          appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                      disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
++ (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                 disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
++ (HLSAnimation *)crossDissolveAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                        disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
++ (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
+                                          yOffset:(CGFloat)yOffset
+                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                    disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
++ (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent;
+
++ (HLSAnimation *)flipAnimationAroundVectorWithXComponent:(CGFloat)xComponent
+                                               yComponent:(CGFloat)yComponent
+                                               zComponent:(CGFloat)zComponent
+                                appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                            disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                  disappearingContainerContents:(NSArray *)disappearingContainerContents
@@ -222,7 +250,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     s_UIViewController__navigationController_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationController), (IMP)swizzledForwardGetter, NULL);
     s_UIViewController__navigationItem_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(navigationItem), (IMP)swizzledForwardGetter, NULL);
     s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))class_replaceMethod([UIViewController class], @selector(interfaceOrientation), (IMP)swizzledGetter, NULL);
-        
+    
     s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setTitle:), (IMP)swizzledForwardSetter_id, NULL);
     s_UIViewController__setHidesBottomBarWhenPushed_Imp = (void (*)(id, SEL, BOOL))class_replaceMethod([UIViewController class], @selector(setHidesBottomBarWhenPushed:), (IMP)swizzledForwardSetter_BOOL, NULL);
     s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))class_replaceMethod([UIViewController class], @selector(setToolbarItems:), (IMP)swizzledForwardSetter_id, NULL);
@@ -290,25 +318,25 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
             switch (containerContent.transitionStyle) {
                 case HLSTransitionStylePushFromTop: {
                     CGFloat offset = CGRectGetHeight(fixedFrame) - belowView.transform.ty;
-                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(0.f, offset);
+                    viewAnimationStep.transform = CATransform3DMakeTranslation(0.f, offset, 0.f);
                     break;
                 }
                     
                 case HLSTransitionStylePushFromBottom: {
                     CGFloat offset = CGRectGetHeight(fixedFrame) + belowView.transform.ty;
-                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(0.f, -offset);
+                    viewAnimationStep.transform = CATransform3DMakeTranslation(0.f, -offset, 0.f);
                     break;
                 }
                     
                 case HLSTransitionStylePushFromLeft: {
                     CGFloat offset = CGRectGetWidth(fixedFrame) - belowView.transform.tx;
-                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(offset, 0.f);
+                    viewAnimationStep.transform = CATransform3DMakeTranslation(offset, 0.f, 0.f);
                     break;
                 }
                     
                 case HLSTransitionStylePushFromRight: {
                     CGFloat offset = CGRectGetWidth(fixedFrame) + belowView.transform.tx;
-                    viewAnimationStep.transform = CGAffineTransformMakeTranslation(-offset, 0.f);
+                    viewAnimationStep.transform = CATransform3DMakeTranslation(-offset, 0.f, 0.f);
                     break;
                 }
                     
@@ -319,10 +347,10 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
                 case HLSTransitionStyleCoverFromTopLeft2:
                 case HLSTransitionStyleCoverFromTopRight2:
                 case HLSTransitionStyleCoverFromBottomLeft2:
-                case HLSTransitionStyleCoverFromBottomRight2: 
-                case HLSTransitionStyleEmergeFromCenter : {
-                    viewAnimationStep.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
-                                                                             kPushFrom2ScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame));
+                case HLSTransitionStyleCoverFromBottomRight2: {
+                    viewAnimationStep.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
+                                                                         kPushFrom2ScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame),
+                                                                         1.f);
                     break;
                 }
                     
@@ -604,6 +632,231 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
 
 #pragma mark Animation
 
+// The new view covers the views below (which is not moved)
++ (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
+                                           yOffset:(CGFloat)yOffset
+                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view covers the views below, which get slightly shrinked (Fliboard-style)
++ (HLSAnimation *)coverAnimation2WithInitialXOffset:(CGFloat)xOffset
+                                            yOffset:(CGFloat)yOffset
+                          appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                      disappearingContainerContents:(NSArray *)disappearingContainerContents
+
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor, 1.f);
+        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
+    }
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep22.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view fades in. The view belows are left as is
++ (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                 disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view fades in while the views below fade out
++ (HLSAnimation *)crossDissolveAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                        disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha;
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];                 
+    }
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep22.alphaVariation = appearingContainerContent.originalViewAlpha;
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view pushes the other ones
++ (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
+                                          yOffset:(CGFloat)yOffset
+                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                    disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+    }
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep22.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view emerges from the center of the screen
++ (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    CATransform3D shrinkTransform = CATransform3DMakeScale(kEmergeFromCenterScaleFactor, kEmergeFromCenterScaleFactor, 1.f);
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = shrinkTransform;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.transform = CATransform3DInvert(shrinkTransform);
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The two views are flipped around an axis
++ (HLSAnimation *)flipAnimationAroundVectorWithXComponent:(CGFloat)xComponent
+                                               yComponent:(CGFloat)yComponent
+                                               zComponent:(CGFloat)zComponent
+                                appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                            disappearingContainerContents:(NSArray *)disappearingContainerContents
+
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    CATransform3D flipTransform = CATransform3DMakeRotation(M_PI, xComponent, yComponent, zComponent);
+    CATransform3D halfFlipTransform = CATransform3DMakeRotation(M_PI_2, xComponent, yComponent, zComponent);
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = flipTransform;
+    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.transform = CATransform3DInvert(halfFlipTransform);
+        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+    }
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep22.transform = CATransform3DInvert(halfFlipTransform);
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    animationStep2.curve = UIViewAnimationCurveEaseOut;
+    animationStep2.duration = 0.2;
+    [animationSteps addObject:animationStep2];
+    
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent view]]; 
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep32.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
+        [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent view]]; 
+    }
+    animationStep3.duration = 0.;
+    [animationSteps addObject:animationStep3];
+    
+    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep41.transform = CATransform3DInvert(halfFlipTransform);
+        [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
+    }
+    HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep42.transform = CATransform3DInvert(halfFlipTransform);
+    viewAnimationStep42.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
+    [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
+    animationStep4.curve = UIViewAnimationCurveEaseIn;
+    animationStep4.duration = 0.2;
+    [animationSteps addObject:animationStep4];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                  disappearingContainerContents:(NSArray *)disappearingContainerContents
@@ -613,475 +866,196 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     
     CGRect frame = [HLSContainerContent fixedFrameForView:containerView];
     
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    HLSAnimation *animation = nil;
     switch (transitionStyle) {
         case HLSTransitionStyleNone: {
             break;
         }
             
         case HLSTransitionStyleCoverFromBottom: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:0.f
+                                                       yOffset:CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }
             
         case HLSTransitionStyleCoverFromTop: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:0.f
+                                                       yOffset:-CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }
             
         case HLSTransitionStyleCoverFromLeft: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                       yOffset:0.f
+                                     appearingContainerContent:appearingContainerContent];
             break;
         } 
             
         case HLSTransitionStyleCoverFromRight: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                       yOffset:0.f
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }  
             
         case HLSTransitionStyleCoverFromTopLeft: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                       yOffset:-CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }  
             
         case HLSTransitionStyleCoverFromTopRight: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                       yOffset:-CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }
             
         case HLSTransitionStyleCoverFromBottomLeft: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                       yOffset:CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         }   
             
         case HLSTransitionStyleCoverFromBottomRight: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                       yOffset:CGRectGetHeight(frame) 
+                                     appearingContainerContent:appearingContainerContent];
             break;
         } 
             
         case HLSTransitionStyleCoverFromBottom2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-               // viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:0.f
+                                                        yOffset:CGRectGetHeight(frame) 
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCoverFromTop2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:0.f
+                                                        yOffset:-CGRectGetHeight(frame) 
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCoverFromLeft2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
+                                                        yOffset:0.f 
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
-
+            
         case HLSTransitionStyleCoverFromRight2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
+                                                        yOffset:0.f
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
-         
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
             
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+        case HLSTransitionStyleCoverFromTopLeft2: {
+            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
+                                                        yOffset:-CGRectGetHeight(frame)
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCoverFromTopRight2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
+                                                        yOffset:-CGRectGetHeight(frame)
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCoverFromBottomLeft2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
+                                                        yOffset:CGRectGetHeight(frame)
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCoverFromBottomRight2: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor);
-                viewAnimationStep21.alphaVariation = -0.5f;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
+                                                        yOffset:CGRectGetHeight(frame)
+                                      appearingContainerContent:appearingContainerContent
+                                  disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleFadeIn: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self fadeInAnimationWithAppearingContainerContent:appearingContainerContent
+                                             disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleCrossDissolve: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha;
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];                 
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.alphaVariation = appearingContainerContent.originalViewAlpha;
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self crossDissolveAnimationWithAppearingContainerContent:appearingContainerContent 
+                                                    disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStylePushFromBottom: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self pushAnimationWithInitialXOffset:0.f
+                                                      yOffset:CGRectGetHeight(frame)
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
             break;
         } 
             
         case HLSTransitionStylePushFromTop: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(0.f, -CGRectGetHeight(frame));
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(0.f, CGRectGetHeight(frame));
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self pushAnimationWithInitialXOffset:0.f
+                                                      yOffset:-CGRectGetHeight(frame)
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
             break;
         }    
             
         case HLSTransitionStylePushFromLeft: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self pushAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                      yOffset:0.f
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
             break;
         } 
             
         case HLSTransitionStylePushFromRight: {
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(frame), 0.f);
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
-            
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-                HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-                viewAnimationStep21.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-                [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-            }
-            HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep22.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(frame), 0.f);
-            [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+            animation = [self pushAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                      yOffset:0.f
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
             break;
         } 
             
         case HLSTransitionStyleEmergeFromCenter: {
-            CGAffineTransform shrinkTransform = CGAffineTransformMakeScale(kEmergeFromCenterScaleFactor, kEmergeFromCenterScaleFactor);
+            animation = [self emergeFromCenterAnimationWithAppearingContainerContent:appearingContainerContent];
+            break;
+        }
             
-            HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep11.transform = shrinkTransform;
-            [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-            animationStep1.duration = 0.;
-            [animationSteps addObject:animationStep1];
+        case HLSTransitionStyleFlipVertical: {
+            animation = [self flipAnimationAroundVectorWithXComponent:0.f 
+                                                           yComponent:1.f 
+                                                           zComponent:0.f 
+                                            appearingContainerContent:appearingContainerContent 
+                                        disappearingContainerContents:disappearingContainerContents];
+            break;
+        }
             
-            HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-            HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-            viewAnimationStep21.transform = CGAffineTransformInvert(shrinkTransform);
-            [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-            animationStep2.duration = 0.4;
-            [animationSteps addObject:animationStep2];
+        case HLSTransitionStyleFlipHorizontal: {
+            animation = [self flipAnimationAroundVectorWithXComponent:1.f 
+                                                           yComponent:0.f 
+                                                           zComponent:0.f 
+                                            appearingContainerContent:appearingContainerContent 
+                                        disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
@@ -1092,7 +1066,6 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
         }
     }
     
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
     animation.lockingUI = YES;
     animation.bringToFront = YES;
     return animation;
