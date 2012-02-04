@@ -524,7 +524,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     if ([containerContentStack count] != 0) {
         NSUInteger index = [containerContentStack indexOfObject:self];
         if (index == NSNotFound) {
-            HLSLoggerError(@"Receiver not found in the container content stack");
+            HLSLoggerError(@"Receiver not foundc  in the container content stack");
             return NO;
         }
         
@@ -869,6 +869,9 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     HLSAnimation *animation = nil;
     switch (transitionStyle) {
         case HLSTransitionStyleNone: {
+            // Empty animation (not simply nil) so that the animation is played (and the associated
+            // callback are called)
+            animation = [HLSAnimation animationWithAnimationStep:nil];
             break;
         }
             
