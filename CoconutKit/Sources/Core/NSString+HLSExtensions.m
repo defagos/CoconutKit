@@ -49,7 +49,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+s_NSDate__descriptionWithLocale_Imp,/?%#[]"), cfEncoding));
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), cfEncoding));
     return [result autorelease];
 }
 
