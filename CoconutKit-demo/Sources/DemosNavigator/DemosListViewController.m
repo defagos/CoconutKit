@@ -66,8 +66,7 @@ typedef enum {
 typedef enum {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
-    ViewDemoIndexTextFieldsFixed,
-    ViewDemoIndexTextFieldsLarge,
+    ViewDemoIndexTextFields,
     ViewDemoIndexCursor,
     ViewDemoIndexActionSheet,
     ViewDemoIndexKenBurns,
@@ -278,13 +277,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFieldsFixed: {
+                case ViewDemoIndexTextFields: {
                     cell.textLabel.text = NSLocalizedString(@"Text fields", @"Text fields");
-                    break;
-                }
-                    
-                case ViewDemoIndexTextFieldsLarge: {
-                    cell.textLabel.text = NSLocalizedString(@"Text fields (large)", @"Text fields (large)");
                     break;
                 }
                     
@@ -427,15 +421,10 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFieldsFixed: {
-                    demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:NO] autorelease];
+                case ViewDemoIndexTextFields: {
+                    demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
                     break;
                 }
-                    
-                case ViewDemoIndexTextFieldsLarge: {
-                    demoViewController = [[[TextFieldsDemoViewController alloc] initLarge:YES] autorelease];
-                    break;
-                } 
                     
                 case ViewDemoIndexCursor: {
                     demoViewController = [[[CursorDemoViewController alloc] init] autorelease];

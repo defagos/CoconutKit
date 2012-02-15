@@ -12,28 +12,12 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initLarge:(BOOL)large
-{
-    // The large version is taller than the screen and therefore can be browsed vertically; no demo for horizontal
-    // scrolling since issues remain (see HLSTextField documentation)
-    if (large) {
-        if ((self = [super initWithNibName:@"TextFieldsLargeDemoViewController" bundle:nil])) {
-            self.title = @"TextFieldsDemoViewController (large)";
-            m_large = YES;
-        }
-    }
-    else {
-        if ((self = [super initWithNibName:@"TextFieldsDemoViewController" bundle:nil])) {
-            self.title = @"TextFieldsDemoViewController";
-            m_large = NO;
-        }
-    }
-    return self;
-}
-
 - (id)init
 {
-    return [self initLarge:NO];
+    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+        
+    }
+    return self;
 }
 
 - (void)releaseViews
@@ -51,13 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Large version: Must adjust content size to make the IB-designed view scrollable
-    if (m_large) {
-        UIScrollView *scrollView = (UIScrollView *)self.view;
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 
-                                            self.view.frame.size.height);
-    }
     
     self.textField1.delegate = self;
     self.textField2.delegate = self;
@@ -103,7 +80,7 @@
 {
     [super localize];
 
-    // Just to suppress localization warning
+    self.title = NSLocalizedString(@"Text fields", @"Text fields");
 }
 
 @end

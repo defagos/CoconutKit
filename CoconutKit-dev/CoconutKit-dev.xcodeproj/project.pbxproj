@@ -160,7 +160,6 @@
 		6FADE8CA14BA04C9007EE121 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */; };
 		6FADE8CB14BA04C9007EE121 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */; };
 		6FADE8CC14BA04C9007EE121 /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */; };
-		6FADE8CD14BA04C9007EE121 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85C14BA04C9007EE121 /* TextFieldsLargeDemoViewController.xib */; };
 		6FADE8CE14BA04C9007EE121 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */; };
 		6FADE8CF14BA04C9007EE121 /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */; };
 		6FADE8D014BA04C9007EE121 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86414BA04C9007EE121 /* RootStackDemoViewController.m */; };
@@ -457,7 +456,6 @@
 		6FADE85914BA04C9007EE121 /* TextFieldsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsDemoViewController.h; sourceTree = "<group>"; };
 		6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsDemoViewController.m; sourceTree = "<group>"; };
 		6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldsDemoViewController.xib; sourceTree = "<group>"; };
-		6FADE85C14BA04C9007EE121 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6FADE85F14BA04C9007EE121 /* PlaceholderDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderDemoViewController.h; sourceTree = "<group>"; };
 		6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderDemoViewController.m; sourceTree = "<group>"; };
 		6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceholderDemoViewController.xib; sourceTree = "<group>"; };
@@ -1188,7 +1186,6 @@
 				6FADE85914BA04C9007EE121 /* TextFieldsDemoViewController.h */,
 				6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */,
 				6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */,
-				6FADE85C14BA04C9007EE121 /* TextFieldsLargeDemoViewController.xib */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -1490,7 +1487,6 @@
 				6FADE8C614BA04C9007EE121 /* HeaderView.xib in Resources */,
 				6FADE8CA14BA04C9007EE121 /* XibTableViewCell.xib in Resources */,
 				6FADE8CC14BA04C9007EE121 /* TextFieldsDemoViewController.xib in Resources */,
-				6FADE8CD14BA04C9007EE121 /* TextFieldsLargeDemoViewController.xib in Resources */,
 				6FADE8CF14BA04C9007EE121 /* PlaceholderDemoViewController.xib in Resources */,
 				6FADE8D114BA04C9007EE121 /* RootStackDemoViewController.xib in Resources */,
 				6FADE8D314BA04C9007EE121 /* StackDemoViewController.xib in Resources */,
