@@ -70,13 +70,13 @@ There are some requirements when contributing, though:
 ### How can I build CoconutKit?
 CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory (see below), as follows:
 
-* make-fmwk.sh -o <output_directory> -u <version> Release
-* make-fmwk.sh -o <output_directory> -u <version> Debug
+    make-fmwk.sh -o <output_directory> -u <version> Release
+    make-fmwk.sh -o <output_directory> -u <version> Debug
     
 e.g.
 
-* make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
-* make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
+    make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
+    make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
 
 ### How can I write code for CoconutKit?
 After checking out the code, open the Xcode 4 workspace. Four projects have been created:
@@ -93,12 +93,12 @@ For "non-interactive" components, you should consider adding some test cases to 
 To build the CoconutKit .staticframework packages needed by the CoconutKit-demo and CoconutKit-test projects, proceed as follows:
 
 * Build the trunk CoconutKit .staticframework packages into /LeStudioSDK/Binaries/CoconutKit (this is the standard directory which we use at hortis le studio). Run the following commands from the CoconutKit static library project directory:
-  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release
-  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug
+  * `make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release`
+  * `make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug`
 * If the resource list has changed, you must remove CoconutKit-trunk-Release.staticframework from both the CoconutKit-demo and CoconutKit-test projects, then the one you just built
 * Build the CoconutKit-demo and CoconutKit-test projects and run them to test your code
 
-The CoconutKit-test project also requires the GHUnit framework GHUnitIOS.framework (https://github.com/gabriel/gh-unit) to be installed under /Developer/Frameworks.
+The CoconutKit-test project also requires the [GHUnit framework](https://github.com/gabriel/gh-unit) GHUnitIOS.framework to be installed under /Developer/Frameworks.
 
 ### Why are all classes prefixed with HLS?
 HLS stands for hortis le studio.
