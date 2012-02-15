@@ -108,7 +108,15 @@ I really would like to thank my company for having allowed me to publish this wo
 
 Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
 
+### Known issues
+Starting with iOS 5, there is an issue when an HLSStackController is set as root view controller of an application or used modally: All child view controllers contained within it will receive the `viewWillAppear:` and `viewDidAppear:` events, even those which are not on top (the top one will receive the event twice). This corresponds what I consider a regression introduced with the new iOS 5 view controller containment API. I filed a bug report (see rdar://10822029) and I hope this should be fixed in a near future.
+
 ### Release notes
+
+#### Version 1.1.1
+* CGAffineTransform replaced by CATransform3D for creating richer animations
+* New transition styles for containers (Flipboard-like push, horizontal and vertical flips)
+* Various bug fixes
 
 #### Version 1.1
 * Added easy Core Data validation
