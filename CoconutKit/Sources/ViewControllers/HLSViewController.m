@@ -12,6 +12,7 @@
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "UITextField+HLSExtensions.h"
 
 @interface HLSViewController ()
 
@@ -121,6 +122,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[UITextField currentTextField] resignFirstResponder];
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
     HLSLoggerDebug(@"View controller %@: view will disappear", self);
 }
@@ -164,9 +166,9 @@
 {
     IMP selfIMP = class_getMethodImplementation([self class], _cmd);
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
-    BOOL isOverriden = selfIMP != superIMP;
-    if (!isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
-        HLSLoggerWarn(@"%@ is not localized.", [self class]);
+    BOOL isOverriden = (selfIMP != superIMP);
+    if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
+        HLSLoggerWarn(@"%@ is not localized", [self class]);
     }
 }
 

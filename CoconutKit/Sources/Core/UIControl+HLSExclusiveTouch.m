@@ -71,8 +71,6 @@ static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
 
 - (id)swizzledInitWithCoder:(NSCoder *)aDecoder
 {
-    HLSLoggerDebug(@"Called swizzled initWithCoder:");
-    
     // Call the original implementation
     if ((self = (*s_UIControl__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
         self.exclusiveTouch = YES;

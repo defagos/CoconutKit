@@ -92,7 +92,6 @@
 /**
  * If set to YES (experimental), the views and their subviews will be resized according to their autoresizing mask during 
  * the animation. Otherwise views will only be scaled.
- *
  * Default is NO
  */
 @property (nonatomic, assign, getter=isResizeViews) BOOL resizeViews;

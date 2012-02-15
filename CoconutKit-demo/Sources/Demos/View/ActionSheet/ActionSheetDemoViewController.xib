@@ -39,13 +39,13 @@
 			</object>
 			<object class="IBUIView" id="957667757">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">319</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIButton" id="183346266">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{150, 386}, {100, 37}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{47, 386}, {218, 37}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="370613303"/>
@@ -54,7 +54,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Choose</string>
+						<string key="IBUINormalTitle">fromRect, animated = YES</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="802814271">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -79,10 +79,32 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
+					<object class="IBUIButton" id="1027830882">
+						<reference key="NSNextResponder" ref="957667757"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{504, 386}, {218, 37}}</string>
+						<reference key="NSSuperview" ref="957667757"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="344901517"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">fromRect, animated = NO</string>
+						<reference key="IBUIHighlightedTitleColor" ref="802814271"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="157554370"/>
+						<reference key="IBUIFontDescription" ref="295668882"/>
+						<reference key="IBUIFont" ref="371274373"/>
+					</object>
 					<object class="IBUIButton" id="344901517">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{518, 386}, {100, 37}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{275, 491}, {218, 37}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="541559536"/>
@@ -91,7 +113,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Choose</string>
+						<string key="IBUINormalTitle">inView</string>
 						<reference key="IBUIHighlightedTitleColor" ref="802814271"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -103,11 +125,11 @@
 					</object>
 					<object class="IBUILabel" id="370613303">
 						<reference key="NSNextResponder" ref="957667757"/>
-						<int key="NSvFlags">301</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{280, 327}, {208, 156}}</string>
 						<reference key="NSSuperview" ref="957667757"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="344901517"/>
+						<reference key="NSNextKeyView" ref="1027830882"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -147,7 +169,7 @@
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIBarButtonItem" id="378893450">
-								<string key="IBUITitle">&lt;choose&gt;</string>
+								<string key="IBUITitle">fromBarButtonItem, animated = YES</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="541559536"/>
@@ -158,7 +180,7 @@
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="760648404">
-								<string key="IBUITitle">&lt;choose&gt;</string>
+								<string key="IBUITitle">fromBarButtonItem, animated = NO</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="541559536"/>
@@ -169,10 +191,32 @@
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="200138804">
-								<string key="IBUITitle">&lt;choose&gt;</string>
+								<string key="IBUITitle">fromToolbar</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="541559536"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="433848372">
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<reference key="IBUIToolbar" ref="541559536"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="160388681">
+								<string key="IBUITitle">fromTabBar</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="541559536"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="698169771">
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<reference key="IBUIToolbar" ref="541559536"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="761610283">
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="541559536"/>
+								<int key="IBUISystemItemIdentifier">14</int>
 							</object>
 						</object>
 					</object>
@@ -212,14 +256,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">showFromRectButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="183346266"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">toolbar</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="541559536"/>
@@ -227,54 +263,30 @@
 					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">showFromBarButtonItemBarButtonItem</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="378893450"/>
-					</object>
-					<int key="connectionID">29</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">showFromToolbarBarButtonItem</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="200138804"/>
-					</object>
-					<int key="connectionID">30</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">otherShowFromToolbarBarButtonItem</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="760648404"/>
-					</object>
-					<int key="connectionID">36</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">makeChoiceFromRect:</string>
+						<string key="label">makeChoiceFromRectAnimated:</string>
 						<reference key="source" ref="183346266"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">25</int>
+					<int key="connectionID">55</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">makeChoiceFromBarButtonItem:</string>
+						<string key="label">makeChoiceFromBarButtonItemAnimated:</string>
 						<reference key="source" ref="378893450"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">31</int>
+					<int key="connectionID">58</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">makeChoiceInView:</string>
+						<string key="label">makeChoiceInView</string>
 						<reference key="source" ref="344901517"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">26</int>
+					<int key="connectionID">57</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -282,15 +294,40 @@
 						<reference key="source" ref="200138804"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">33</int>
+					<int key="connectionID">60</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">makeChoiceFromBarButtonItem:</string>
+						<string key="label">makeChoiceFromBarButtonItemNotAnimated:</string>
 						<reference key="source" ref="760648404"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">37</int>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">resetChoice:</string>
+						<reference key="source" ref="761610283"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">makeChoiceFromRectNotAnimated:</string>
+						<reference key="source" ref="1027830882"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">makeChoiceFromTabBar:</string>
+						<reference key="source" ref="160388681"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">66</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -321,9 +358,10 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="541559536"/>
-							<reference ref="183346266"/>
-							<reference ref="344901517"/>
 							<reference ref="370613303"/>
+							<reference ref="344901517"/>
+							<reference ref="1027830882"/>
+							<reference ref="183346266"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -347,6 +385,10 @@
 							<reference ref="756640530"/>
 							<reference ref="760648404"/>
 							<reference ref="137040155"/>
+							<reference ref="433848372"/>
+							<reference ref="761610283"/>
+							<reference ref="160388681"/>
+							<reference ref="698169771"/>
 						</object>
 						<reference key="parent" ref="957667757"/>
 					</object>
@@ -380,6 +422,31 @@
 						<reference key="object" ref="137040155"/>
 						<reference key="parent" ref="541559536"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">40</int>
+						<reference key="object" ref="433848372"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">41</int>
+						<reference key="object" ref="761610283"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">51</int>
+						<reference key="object" ref="1027830882"/>
+						<reference key="parent" ref="957667757"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="160388681"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">65</int>
+						<reference key="object" ref="698169771"/>
+						<reference key="parent" ref="541559536"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -400,12 +467,22 @@
 					<string>34.IBPluginDependency</string>
 					<string>39.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
+					<string>40.IBPluginDependency</string>
+					<string>41.IBPluginDependency</string>
+					<string>51.IBPluginDependency</string>
+					<string>63.IBPluginDependency</string>
+					<string>65.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ActionSheetDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -431,7 +508,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -443,13 +520,21 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>makeChoiceFromBarButtonItem:</string>
-							<string>makeChoiceFromRect:</string>
+							<string>makeChoiceFromBarButtonItemAnimated:</string>
+							<string>makeChoiceFromBarButtonItemNotAnimated:</string>
+							<string>makeChoiceFromRectAnimated:</string>
+							<string>makeChoiceFromRectNotAnimated:</string>
+							<string>makeChoiceFromTabBar:</string>
 							<string>makeChoiceFromToolbar:</string>
-							<string>makeChoiceInView:</string>
+							<string>makeChoiceInView</string>
+							<string>resetChoice:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -460,19 +545,35 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>makeChoiceFromBarButtonItem:</string>
-							<string>makeChoiceFromRect:</string>
+							<string>makeChoiceFromBarButtonItemAnimated:</string>
+							<string>makeChoiceFromBarButtonItemNotAnimated:</string>
+							<string>makeChoiceFromRectAnimated:</string>
+							<string>makeChoiceFromRectNotAnimated:</string>
+							<string>makeChoiceFromTabBar:</string>
 							<string>makeChoiceFromToolbar:</string>
-							<string>makeChoiceInView:</string>
+							<string>makeChoiceInView</string>
+							<string>resetChoice:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">makeChoiceFromBarButtonItem:</string>
+								<string key="name">makeChoiceFromBarButtonItemAnimated:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">makeChoiceFromRect:</string>
+								<string key="name">makeChoiceFromBarButtonItemNotAnimated:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">makeChoiceFromRectAnimated:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">makeChoiceFromRectNotAnimated:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">makeChoiceFromTabBar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -480,7 +581,11 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">makeChoiceInView:</string>
+								<string key="name">makeChoiceInView</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">resetChoice:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -490,19 +595,11 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>choiceLabel</string>
-							<string>otherShowFromToolbarBarButtonItem</string>
-							<string>showFromBarButtonItemBarButtonItem</string>
-							<string>showFromRectButton</string>
-							<string>showFromToolbarBarButtonItem</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
-							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
-							<string>UIButton</string>
-							<string>UIBarButtonItem</string>
 							<string>UIToolbar</string>
 						</object>
 					</object>
@@ -511,10 +608,6 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>choiceLabel</string>
-							<string>otherShowFromToolbarBarButtonItem</string>
-							<string>showFromBarButtonItemBarButtonItem</string>
-							<string>showFromRectButton</string>
-							<string>showFromToolbarBarButtonItem</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -522,22 +615,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">choiceLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">otherShowFromToolbarBarButtonItem</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">showFromBarButtonItemBarButtonItem</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">showFromRectButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">showFromToolbarBarButtonItem</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toolbar</string>

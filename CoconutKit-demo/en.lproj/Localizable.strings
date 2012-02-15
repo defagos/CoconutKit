@@ -20,7 +20,6 @@
 "Change"="Change";
 "Change color"="Change color";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
-"Choose"="Choose";
 "City"="City";
 "Click for missing translation"="Click for missing translation";
 "Close"="Close";
@@ -100,8 +99,8 @@
 "Task group"="Task group";
 "Tasks"="Tasks";
 "Test in modal"="Test in modal";
+"Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
-"Text fields (large)"="Text fields (large)";
 "The behavior above can be disabled"="The behavior above can be disabled";
 "This value cannot be negative"="This value cannot be negative";
 "Transition"="Transition";
@@ -111,5 +110,7 @@
 "View controllers"="View controllers";
 "Web view"="Web view";
 "Week"="Week";
+"Wrapped into UINavigationController"="Wrapped into UINavigationController";
+"Wrapped into UITabBarController"="Wrapped into UITabBarController";
 "Year"="Year";
 "yyyy/MM/dd"="yyyy/MM/dd";

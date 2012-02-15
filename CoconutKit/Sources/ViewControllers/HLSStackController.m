@@ -12,7 +12,6 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
-#import "HLSStretchingContainerView.h"
 #import "NSArray+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
@@ -148,7 +147,9 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)loadView
 {
-    self.view = [[[HLSStretchingContainerView alloc] init] autorelease];
+    // Take all space available
+    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
 }
 
 - (void)viewDidLoad
@@ -165,7 +166,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {
     [super viewWillAppear:animated];
         
-    // Display those views required by the capacity
+    // Display those views required according to the capacity
     for (HLSContainerContent *containerContent in [self.containerContentStack reverseObjectEnumerator]) {
         if ([self isContainerContentVisible:containerContent]) {
             if ([containerContent addViewToContainerView:self.view 
@@ -253,6 +254,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    HLSAnimation *animation = [HLSContainerContent rotationAnimationForContainerContentStack:self.containerContentStack 
+                                                                               containerView:self.view
+                                                                                withDuration:duration];
+    [animation playAnimated:YES];
     
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         UIViewController *viewController = containerContent.viewController;
@@ -410,8 +416,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     NSAssert([self.containerContentStack indexOfObject:containerContent] != NSNotFound, @"Content not found in the container");
     HLSAnimation *animation = [containerContent animationWithContainerContentStack:self.containerContentStack containerView:self.view];
     animation.tag = @"push_animation";
-    animation.lockingUI = YES;
-    animation.bringToFront = YES;
     animation.delegate = self;
     return animation;
 }

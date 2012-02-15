@@ -49,7 +49,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+s_NSDate__descriptionWithLocale_Imp,/?%#[]"), cfEncoding));
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), cfEncoding));
     return [result autorelease];
 }
 
@@ -110,3 +110,19 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 }
 
 @end
+
+#pragma mark Utility functions
+
+NSString *HLSStringFromCATransform3D(CATransform3D transform)
+{
+    return [NSString stringWithFormat:@"[\n"
+            "    [%.2f, %.2f, %.2f, %.2f]\n"
+            "    [%.2f, %.2f, %.2f, %.2f]\n"
+            "    [%.2f, %.2f, %.2f, %.2f]\n"
+            "    [%.2f, %.2f, %.2f, %.2f]\n"
+            "]", 
+            transform.m11, transform.m12, transform.m13, transform.m14, 
+            transform.m21, transform.m22, transform.m23, transform.m24, 
+            transform.m31, transform.m32, transform.m33, transform.m34, 
+            transform.m41, transform.m42, transform.m43, transform.m44];
+}

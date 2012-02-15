@@ -45,4 +45,14 @@
     GHAssertEqualStrings([@"1.0+test" friendlyVersionNumber], @"1.0+test", @"version number");
 }
 
+- (void)testURLEncoding
+{
+    NSMutableString *string = [NSMutableString string];
+    for (UniChar character = 0; character <= 255; character++) {
+        [string appendFormat:@"%c", character];
+    }
+    NSString *encodedStringReference = @"%01%02%03%04%05%06%07%08%09%0A%0B%0C%0D%0E%0F%10%11%12%13%14%15%16%17%18%19%1A%1B%1C%1D%1E%1F%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%7F%C3%84%C3%85%C3%87%C3%89%C3%91%C3%96%C3%9C%C3%A1%C3%A0%C3%A2%C3%A4%C3%A3%C3%A5%C3%A7%C3%A9%C3%A8%C3%AA%C3%AB%C3%AD%C3%AC%C3%AE%C3%AF%C3%B1%C3%B3%C3%B2%C3%B4%C3%B6%C3%B5%C3%BA%C3%B9%C3%BB%C3%BC%E2%80%A0%C2%B0%C2%A2%C2%A3%C2%A7%E2%80%A2%C2%B6%C3%9F%C2%AE%C2%A9%E2%84%A2%C2%B4%C2%A8%E2%89%A0%C3%86%C3%98%E2%88%9E%C2%B1%E2%89%A4%E2%89%A5%C2%A5%C2%B5%E2%88%82%E2%88%91%E2%88%8F%CF%80%E2%88%AB%C2%AA%C2%BA%CE%A9%C3%A6%C3%B8%C2%BF%C2%A1%C2%AC%E2%88%9A%C6%92%E2%89%88%E2%88%86%C2%AB%C2%BB%E2%80%A6%C2%A0%C3%80%C3%83%C3%95%C5%92%C5%93%E2%80%93%E2%80%94%E2%80%9C%E2%80%9D%E2%80%98%E2%80%99%C3%B7%E2%97%8A%C3%BF%C5%B8%E2%81%84%E2%82%AC%E2%80%B9%E2%80%BA%EF%AC%81%EF%AC%82%E2%80%A1%C2%B7%E2%80%9A%E2%80%9E%E2%80%B0%C3%82%C3%8A%C3%81%C3%8B%C3%88%C3%8D%C3%8E%C3%8F%C3%8C%C3%93%C3%94%EF%A3%BF%C3%92%C3%9A%C3%9B%C3%99%C4%B1%CB%86%CB%9C%C2%AF%CB%98%CB%99%CB%9A%C2%B8%CB%9D%CB%9B%CB%87";
+    GHAssertEqualStrings([string urlEncodedStringUsingEncoding:NSUTF8StringEncoding], encodedStringReference, @"urlEncodedStringUsingEncoding");
+}
+
 @end

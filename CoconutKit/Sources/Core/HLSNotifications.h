@@ -23,12 +23,6 @@
 #define HLSDefineNotification(name)       NSString * const name = @#name
 
 /**
- * Notifications
- */
-HLSDeclareNotification(HLSNetworkActivityStartNotification);
-HLSDeclareNotification(HLSNetworkActivityStopNotification);
-
-/**
  * Manages application-wide notification mechanisms
  *
  * This class is not thread-safe
@@ -46,14 +40,16 @@ HLSDeclareNotification(HLSNetworkActivityStopNotification);
 + (HLSNotificationManager *)sharedNotificationManager;
 
 /**
- * Call this method when a network tasks starts. When the first network task starts, an HLSNetworkActivityStartNotification
- * notification is sent (you could e.g. use it to display a network activity indicator)
+ * Call this method to notify that a network task has started. This method can be called several times if several
+ * tasks are running simultaneously (an activity indicator is displayed in the status bar when at least one task 
+ * is running)
  */
 - (void)notifyBeginNetworkActivity;
 
 /**
- * Call this method when a network tasks ends. When all network tasks have ended, an HLSNetworkActivityStartNotification
- * notification is sent (you could e.g. use it to hide a network activity indicator)
+ * Call this method to notify that a network task has ended. This method can be called several times if several
+ * tasks are running simultaneously (an activity indicator is displayed in the status bar when at least one task 
+ * is running)
  */
 - (void)notifyEndNetworkActivity;
 

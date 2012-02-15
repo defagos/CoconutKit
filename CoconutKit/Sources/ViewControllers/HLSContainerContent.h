@@ -22,6 +22,9 @@
  *     happen that a client caches this view controller for later reuse
  *   - we sometimes may want the view controller container to forward some properties of a contained view controller
  *     (e.g. title, navigation elements, toolbar, etc.) transparently
+ *   - a view controller added to a a container should be able to present or dismiss another view controller modally
+ *     by calling the corresponding UIViewController methods on self. In such cases, it is actually the container
+ *     which must present the modal view controller. This mechanism must be transparent for the user
  *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
  *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
  *     presented using a custom container
@@ -60,12 +63,31 @@
     BOOL m_forwardingProperties;
     CGRect m_originalViewFrame;
     CGFloat m_originalViewAlpha;
+    UIViewAutoresizing m_originalAutoresizingMask;
 }
 
 /**
  * Return the container of the specified class, in which a given view controller has been inserted, or nil if none
  */
 + (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
+
+/**
+ * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved
+ * outside the screen, e.g. "push from" animations) depend on the frame size: For a push from left animation, the
+ * applied horizontal translation used to move view controllers outside view depends on the interface orientation. 
+ * For such animations, we must update the view controller's view positions when the device goes from landscape into 
+ * portrait mode, otherwise the views might be incorrectly located after a rotation has occurred. 
+ *
+ * To perform this change, the following method generates an animation object which must be played when the container
+ * your are implementing rotates (if your container is itself a view controller, this means this method must be called 
+ * from the willAnimateRotationToInterfaceOrientation:duration: method)
+ *
+ * The animation returned by this method has meaningful settings for a rotation animation (locking interaction, resizing 
+ * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
+ */
++ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
+                                              containerView:(UIView *)containerView
+                                               withDuration:(NSTimeInterval)duration;
 
 /**
  * Initialize a container content manager object. Requires the view controller to be managed, the container in which
@@ -129,8 +151,8 @@
  *
  * The first element in the stack array is interpreted as the bottommost one.
  *
- * The animation returned by this method has default properties. You usually want to tweak some of them (e.g. delegate, 
- * tag, etc.) right after creation.
+ * The animation returned by this method has meaningful settings for a container animation (locking interaction, not resizing 
+ * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
 - (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
                                        containerView:(UIView *)containerView;

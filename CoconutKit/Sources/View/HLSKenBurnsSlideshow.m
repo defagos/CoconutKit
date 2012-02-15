@@ -157,7 +157,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         HLSLoggerInfo(@"No images loaded. Nothing to animate");
         return;
     }
-        
+    
     m_running = YES;
     
     for (UIImageView *imageView in self.imageViews) {
@@ -223,8 +223,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
     
     // Apply initial transform to get initial image view position
-    imageView.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleFactor, scaleFactor),
-                                                  CGAffineTransformMakeTranslation(xOffset, yOffset));
+    imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
+                                                    CATransform3DMakeTranslation(xOffset, yOffset, 0.f));
     
     // Pick up random scale factor to reach at the end of the animation. Same constraints as above
     CGFloat finalScaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
@@ -277,8 +277,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     CGFloat fadeInFactor = powf(scaleFactor, self.transitionDuration / self.imageDuration);
     CGFloat fadeInXOffset = xOffset * self.transitionDuration / self.imageDuration;
     CGFloat fadeInYOffset = yOffset * self.transitionDuration / self.imageDuration;
-    fadeInViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeInFactor, fadeInFactor),
-                                                                CGAffineTransformMakeTranslation(fadeInXOffset, fadeInYOffset));
+    fadeInViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(fadeInFactor, fadeInFactor, 1.f),
+                                                            CATransform3DMakeTranslation(fadeInXOffset, fadeInYOffset, 0.f));
     fadeInViewAnimationStep.alphaVariation = 1.f;
     [fadeInAnimationStep addViewAnimationStep:fadeInViewAnimationStep forView:imageView];
     
@@ -292,8 +292,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     CGFloat mainFactor = powf(scaleFactor, mainDuration / self.imageDuration);
     CGFloat mainXOffset = xOffset * mainDuration / self.imageDuration;
     CGFloat mainYOffset = yOffset * mainDuration / self.imageDuration;
-    mainViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(mainFactor, mainFactor),
-                                                              CGAffineTransformMakeTranslation(mainXOffset, mainYOffset));
+    mainViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(mainFactor, mainFactor, 1.f),
+                                                          CATransform3DMakeTranslation(mainXOffset, mainYOffset, 0.f));
     [mainAnimationStep addViewAnimationStep:mainViewAnimationStep forView:imageView];
     
     // Fade out: Scale + fade out
@@ -304,8 +304,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     float fadeOutFactor = pow(scaleFactor, self.transitionDuration / self.imageDuration);
     CGFloat fadeOutXOffset = xOffset * self.transitionDuration / self.imageDuration;
     CGFloat fadeOutYOffset = yOffset * self.transitionDuration / self.imageDuration;
-    fadeOutViewAnimationStep.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(fadeOutFactor, fadeOutFactor),
-                                                                 CGAffineTransformMakeTranslation(fadeOutXOffset, fadeOutYOffset));
+    fadeOutViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(fadeOutFactor, fadeOutFactor, 1.f),
+                                                             CATransform3DMakeTranslation(fadeOutXOffset, fadeOutYOffset, 0.f));
     fadeOutViewAnimationStep.alphaVariation = -1.f;
     [fadeOutAnimationStep addViewAnimationStep:fadeOutViewAnimationStep forView:imageView];
     

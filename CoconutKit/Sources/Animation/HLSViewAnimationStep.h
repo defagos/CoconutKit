@@ -16,7 +16,7 @@
  */
 @interface HLSViewAnimationStep : NSObject {
 @private
-    CGAffineTransform m_transform;
+    CATransform3D m_transform;
     CGFloat m_alphaVariation;
 }
 
@@ -26,12 +26,12 @@
 + (HLSViewAnimationStep *)viewAnimationStep;
 
 /**
- * The affine transformation corresponding to the animation step. Use the convenience methods available from
- * CGAffineTransform.h to create translation, rotation, scaling transformations, etc. You can even combine
+ * The transform corresponding to the animation step. Use the convenience methods available from
+ * CATransform3D.h to create translation, rotation, scaling transformations, etc. You can even combine
  * them using transformation composition (beware of the order since composing transforms is not a commutative
  * operation)
  */
-@property (nonatomic, assign) CGAffineTransform transform;
+@property (nonatomic, assign) CATransform3D transform;
 
 /**
  * Alpha increment or decrement to be applied during the view animation step. Any value between 1.f and -1.f can be provided, 

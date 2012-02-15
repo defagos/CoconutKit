@@ -42,9 +42,13 @@
         UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
         UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromRight2];
         UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
+        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
+        UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
         
         self.insetViewController = stackController;
         self.forwardingProperties = YES;
@@ -64,6 +68,10 @@
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
+@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
+
+@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
+
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 #pragma mark View lifecycle
@@ -76,6 +84,9 @@
     self.transitionPickerView.dataSource = self;
     
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    
+    self.inTabBarControllerSwitch.on = NO;
+    self.inNavigationControllerSwitch.on = NO;
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
 }
 
@@ -85,8 +96,22 @@
 {
     HLSStackController *stackController = (HLSStackController *)self.insetViewController;
     
+    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    UIViewController *pushedViewController = viewController;
+    if (pushedViewController) {
+        if (self.inNavigationControllerSwitch.on) {
+            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
+            pushedViewController = navigationController;
+        }
+        if (self.inTabBarControllerSwitch.on) {
+            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            tabBarController.viewControllers = [NSArray arrayWithObject:pushedViewController];
+            pushedViewController = tabBarController;
+        }    
+    }
+    
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [stackController pushViewController:viewController withTransitionStyle:pickedIndex];
+    [stackController pushViewController:pushedViewController withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks
@@ -123,8 +148,8 @@
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestViewController animated:YES];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 - (IBAction)displayOrientationCloner:(id)sender
@@ -229,6 +254,46 @@
             break;
         }
             
+        case HLSTransitionStyleCoverFromBottom2: {
+            return @"HLSTransitionStyleCoverFromBottom2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop2: {
+            return @"HLSTransitionStyleCoverFromTop2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft2: {
+            return @"HLSTransitionStyleCoverFromLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromRight2: {
+            return @"HLSTransitionStyleCoverFromRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopLeft2: {
+            return @"HLSTransitionStyleCoverFromTopLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopRight2: {
+            return @"HLSTransitionStyleCoverFromTopRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft2: {
+            return @"HLSTransitionStyleCoverFromBottomLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomRight2: {
+            return @"HLSTransitionStyleCoverFromBottomRight2";
+            break;
+        }
+            
         case HLSTransitionStyleFadeIn: {
             return @"HLSTransitionStyleFadeIn";
             break;
@@ -261,6 +326,16 @@
             
         case HLSTransitionStyleEmergeFromCenter: {
             return @"HLSTransitionStyleEmergeFromCenter";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipVertical: {
+            return @"HLSTransitionStyleFlipVertical";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            return @"HLSTransitionStyleFlipHorizontal";
             break;
         }
             

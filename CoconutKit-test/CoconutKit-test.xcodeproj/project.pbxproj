@@ -31,11 +31,15 @@
 		6F3B063E14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */; };
 		6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */; };
+		6F7B848B14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F91452A14CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
 		6F93C4D214042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */; };
 		6F93C4D8140437D200FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */; };
 		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
+		6F948C3214D6E844003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */; };
+		6F948C3314D6E844003BF765 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3114D6E844003BF765 /* UITextField+HLSExtensions.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
 		6FADE47714B9DA1B007EE121 /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47414B9DA1B007EE121 /* House.m */; };
 		6FADE47814B9DA1B007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47614B9DA1B007EE121 /* Person.m */; };
@@ -105,13 +109,13 @@
 		6FADE7CE14BA04B7007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78214BA04B6007EE121 /* HLSContainerContent.m */; };
 		6FADE7CF14BA04B7007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78414BA04B6007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE7D014BA04B7007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78614BA04B6007EE121 /* HLSStackController.m */; };
-		6FADE7D114BA04B7007EE121 /* HLSStretchingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78814BA04B6007EE121 /* HLSStretchingContainerView.m */; };
 		6FADE7D214BA04B7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		6FADE7D314BA04B7007EE121 /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78C14BA04B6007EE121 /* HLSTransitionStyle.m */; };
 		6FADE7D414BA04B7007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78E14BA04B6007EE121 /* HLSViewController.m */; };
 		6FADE7D514BA04B7007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE79014BA04B6007EE121 /* HLSWebViewController.m */; };
 		6FADE7D614BA04B7007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE79214BA04B6007EE121 /* HLSWizardViewController.m */; };
 		6FADE9F514BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FCDA17214DAE61B00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */; };
 		6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */; };
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
 		6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */; };
@@ -162,6 +166,11 @@
 		6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F61D12C14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F7B848914CF32B20091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F91452714CEBDF100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
+		6F91452814CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
+		6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
 		6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 		6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
@@ -172,6 +181,10 @@
 		6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F948C2E14D6E844003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
+		6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
+		6F948C3014D6E844003BF765 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F948C3114D6E844003BF765 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FADE47314B9DA1B007EE121 /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
@@ -317,8 +330,6 @@
 		6FADE78414BA04B6007EE121 /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6FADE78514BA04B6007EE121 /* HLSStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackController.h; sourceTree = "<group>"; };
 		6FADE78614BA04B6007EE121 /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
-		6FADE78714BA04B6007EE121 /* HLSStretchingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStretchingContainerView.h; sourceTree = "<group>"; };
-		6FADE78814BA04B6007EE121 /* HLSStretchingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStretchingContainerView.m; sourceTree = "<group>"; };
 		6FADE78914BA04B6007EE121 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
 		6FADE78B14BA04B6007EE121 /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
@@ -331,6 +342,7 @@
 		6FADE79214BA04B6007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE9F314BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDE68E314757669005EA5FA /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
 		6FDE68FA147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
@@ -343,6 +355,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FCDA17214DAE61B00ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6F3334E713FB00E2000FC9FD /* MessageUI.framework in Frameworks */,
 				6F3334E513FB00DC000FC9FD /* CoreData.framework in Frameworks */,
 				6F33348813FAF9E0000FC9FD /* UIKit.framework in Frameworks */,
@@ -454,6 +467,7 @@
 				6F33348913FAF9E0000FC9FD /* Foundation.framework */,
 				6F3334A113FAFA6F000FC9FD /* GHUnitIOS.framework */,
 				6F3334E613FB00E2000FC9FD /* MessageUI.framework */,
+				6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */,
 				6F33348713FAF9E0000FC9FD /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -681,6 +695,7 @@
 			children = (
 				6FADE76214BA04B6007EE121 /* HLSActionSheet.h */,
 				6FADE76314BA04B6007EE121 /* HLSActionSheet.m */,
+				6F91452714CEBDF100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE76414BA04B6007EE121 /* HLSCursor.h */,
 				6FADE76514BA04B6007EE121 /* HLSCursor.m */,
 				6FADE76614BA04B6007EE121 /* HLSKenBurnsSlideshow.h */,
@@ -704,10 +719,18 @@
 				6FADE77614BA04B6007EE121 /* HLSValue1TableViewCell.m */,
 				6FADE77714BA04B6007EE121 /* HLSValue2TableViewCell.h */,
 				6FADE77814BA04B6007EE121 /* HLSValue2TableViewCell.m */,
+				6F7B848914CF32B20091EE4B /* UIActionSheet+HLSExtensions.h */,
+				6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */,
+				6F91452814CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.h */,
+				6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
 				6FADE9F314BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE77914BA04B6007EE121 /* UINavigationBar+HLSExtensions.h */,
 				6FADE77A14BA04B6007EE121 /* UINavigationBar+HLSExtensions.m */,
+				6F948C2E14D6E844003BF765 /* UINavigationController+HLSActionSheet.h */,
+				6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */,
+				6F948C3014D6E844003BF765 /* UITextField+HLSExtensions.h */,
+				6F948C3114D6E844003BF765 /* UITextField+HLSExtensions.m */,
 				6FADE77B14BA04B6007EE121 /* UITextField+HLSValidation.h */,
 				6FADE77C14BA04B6007EE121 /* UITextField+HLSValidation.m */,
 				6F3B063C14BC7BBB0026F512 /* UIToolbar+HLSExtensions.h */,
@@ -730,8 +753,6 @@
 				6FADE78414BA04B6007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE78514BA04B6007EE121 /* HLSStackController.h */,
 				6FADE78614BA04B6007EE121 /* HLSStackController.m */,
-				6FADE78714BA04B6007EE121 /* HLSStretchingContainerView.h */,
-				6FADE78814BA04B6007EE121 /* HLSStretchingContainerView.m */,
 				6FADE78914BA04B6007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */,
 				6FADE78B14BA04B6007EE121 /* HLSTransitionStyle.h */,
@@ -858,7 +879,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "${PROJECT_DIR}/generate_model.sh";
+			shellScript = "\"${PROJECT_DIR}\"/generate_model.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -949,7 +970,6 @@
 				6FADE7CE14BA04B7007EE121 /* HLSContainerContent.m in Sources */,
 				6FADE7CF14BA04B7007EE121 /* HLSPlaceholderViewController.m in Sources */,
 				6FADE7D014BA04B7007EE121 /* HLSStackController.m in Sources */,
-				6FADE7D114BA04B7007EE121 /* HLSStretchingContainerView.m in Sources */,
 				6FADE7D214BA04B7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */,
 				6FADE7D314BA04B7007EE121 /* HLSTransitionStyle.m in Sources */,
 				6FADE7D414BA04B7007EE121 /* HLSViewController.m in Sources */,
@@ -960,6 +980,10 @@
 				6F3B063E14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
+				6F91452A14CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */,
+				6F7B848B14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
+				6F948C3214D6E844003BF765 /* UINavigationController+HLSActionSheet.m in Sources */,
+				6F948C3314D6E844003BF765 /* UITextField+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

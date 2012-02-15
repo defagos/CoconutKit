@@ -16,7 +16,7 @@
 /**
  * Return the ivert color corresponding to the receiver
  */
-- (UIColor *)invertColor;
+- (UIColor *)invertedColor;
 
 /**
  * Return color components (0 - 255)

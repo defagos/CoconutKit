@@ -12,10 +12,7 @@
     HLSTextField *m_textField2;
     HLSTextField *m_textField3;
     HLSTextField *m_textField4;
-    BOOL m_large;
 }
-
-- (id)initLarge:(BOOL)large;
 
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField2;

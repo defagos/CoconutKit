@@ -52,6 +52,8 @@
     // Free heavy view in cache
     self.heavyViewController.view = nil;
     
+    self.inTabBarControllerSwitch = nil;
+    self.inNavigationControllerSwitch = nil;
     self.transitionPickerView = nil;
     self.forwardingPropertiesSwitch = nil;
 }
@@ -59,6 +61,10 @@
 #pragma mark Accessors and mutators
 
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
+
+@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
 
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
@@ -70,6 +76,8 @@
 {
     [super viewDidLoad];
     
+    self.inTabBarControllerSwitch.on = NO;
+    self.inNavigationControllerSwitch.on = NO;
     self.forwardingPropertiesSwitch.on = self.forwardingProperties;
     
     self.transitionPickerView.delegate = self;
@@ -80,8 +88,22 @@
 
 - (void)displayInsetViewController:(UIViewController *)viewController
 {
+    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    UIViewController *insetViewController = viewController;
+    if (insetViewController) {
+        if (self.inNavigationControllerSwitch.on) {
+            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
+            insetViewController = navigationController;
+        }
+        if (self.inTabBarControllerSwitch.on) {
+            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            tabBarController.viewControllers = [NSArray arrayWithObject:insetViewController];
+            insetViewController = tabBarController;
+        }    
+    }
+        
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self setInsetViewController:viewController withTransitionStyle:pickedIndex];
+    [self setInsetViewController:insetViewController withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks
@@ -134,8 +156,8 @@
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestViewController animated:YES];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 - (IBAction)displayOrientationCloner:(id)sender
@@ -220,6 +242,46 @@
             break;
         }
             
+        case HLSTransitionStyleCoverFromBottom2: {
+            return @"HLSTransitionStyleCoverFromBottom2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTop2: {
+            return @"HLSTransitionStyleCoverFromTop2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromLeft2: {
+            return @"HLSTransitionStyleCoverFromLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromRight2: {
+            return @"HLSTransitionStyleCoverFromRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopLeft2: {
+            return @"HLSTransitionStyleCoverFromTopLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromTopRight2: {
+            return @"HLSTransitionStyleCoverFromTopRight2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomLeft2: {
+            return @"HLSTransitionStyleCoverFromBottomLeft2";
+            break;
+        }
+            
+        case HLSTransitionStyleCoverFromBottomRight2: {
+            return @"HLSTransitionStyleCoverFromBottomRight2";
+            break;
+        }
+            
         case HLSTransitionStyleFadeIn: {
             return @"HLSTransitionStyleFadeIn";
             break;
@@ -252,6 +314,16 @@
             
         case HLSTransitionStyleEmergeFromCenter: {
             return @"HLSTransitionStyleEmergeFromCenter";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipVertical: {
+            return @"HLSTransitionStyleFlipVertical";
+            break;
+        }
+            
+        case HLSTransitionStyleFlipHorizontal: {
+            return @"HLSTransitionStyleFlipHorizontal";
             break;
         }
             

@@ -12,10 +12,14 @@
 @interface StackDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UIPickerView *m_transitionPickerView;
+    UISwitch *m_inTabBarControllerSwitch;
+    UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_forwardingPropertiesSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;

@@ -31,6 +31,11 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 ### How should I use CoconutKit?
 The easiest and recommended way to use CoconutKit is to grab the latest tagged binary package available for download. Right-click on your project, select "Add files", and add the .staticframework directory ("Copy items into destination group's folder" must be turned off, and "Create groups for any added folders" selected). Then **remove the CoconutKit language files your project does not need (see below why)**. Also import the CoconutKit.h header file from your project .pch file (`#import <CoconutKit/CoconutKit.h>`). You are now ready to go!
 
+Note that depending on the CoconutKit components you use you might need to link against one or several of the following frameworks:
+
+* CoreData.framework
+* MessageUI.framework
+
 Some code snippets have been provided in the Snippets directory (and more will probably be added in the future). Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
 
 If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
@@ -65,13 +70,13 @@ There are some requirements when contributing, though:
 ### How can I build CoconutKit?
 CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory (see below), as follows:
 
-* make-fmwk.sh -o <output_directory> -u <version> Release
-* make-fmwk.sh -o <output_directory> -u <version> Debug
+    make-fmwk.sh -o <output_directory> -u <version> Release
+    make-fmwk.sh -o <output_directory> -u <version> Debug
     
 e.g.
 
-* make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
-* make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
+    make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
+    make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
 
 ### How can I write code for CoconutKit?
 After checking out the code, open the Xcode 4 workspace. Four projects have been created:
@@ -88,12 +93,12 @@ For "non-interactive" components, you should consider adding some test cases to 
 To build the CoconutKit .staticframework packages needed by the CoconutKit-demo and CoconutKit-test projects, proceed as follows:
 
 * Build the trunk CoconutKit .staticframework packages into /LeStudioSDK/Binaries/CoconutKit (this is the standard directory which we use at hortis le studio). Run the following commands from the CoconutKit static library project directory:
-  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release
-  * make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug
+  * `make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Release`
+  * `make-fmwk.sh -o /LeStudioSDK/Binaries/CoconutKit -u trunk Debug`
 * If the resource list has changed, you must remove CoconutKit-trunk-Release.staticframework from both the CoconutKit-demo and CoconutKit-test projects, then the one you just built
 * Build the CoconutKit-demo and CoconutKit-test projects and run them to test your code
 
-The CoconutKit-test project also requires the GHUnit framework GHUnitIOS.framework (https://github.com/gabriel/gh-unit) to be installed under /Developer/Frameworks.
+The CoconutKit-test project also requires the [GHUnit framework](https://github.com/gabriel/gh-unit) GHUnitIOS.framework to be installed under /Developer/Frameworks.
 
 ### Why are all classes prefixed with HLS?
 HLS stands for hortis le studio.
@@ -103,9 +108,17 @@ I really would like to thank my company for having allowed me to publish this wo
 
 Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
 
+### Known issues
+Starting with iOS 5, there is an issue when an HLSStackController is set as root view controller of an application or used modally: All child view controllers contained within it will receive the `viewWillAppear:` and `viewDidAppear:` events, even those which are not on top (the top one will receive the event twice). This corresponds what I consider a regression introduced with the new iOS 5 view controller containment API. I filed a bug report (see rdar://10822029) and I hope this should be fixed in a near future.
+
 ### Release notes
 
-### Version 1.1
+#### Version 1.1.1
+* CGAffineTransform replaced by CATransform3D for creating richer animations
+* New transition styles for containers (Flipboard-like push, horizontal and vertical flips)
+* Various bug fixes
+
+#### Version 1.1
 * Added easy Core Data validation
 * Added UILabel and UIButton localization in nib files
 * Added Ken Burns slideshow

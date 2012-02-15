@@ -18,14 +18,23 @@
 /* %dh %dm remaining (estimate) */
 "%dh %dm remaining (estimate)"="%dh %dm remaining (estimate)";
 
+/* Cannot Open Page */
+"Cannot Open Page"="Cannot Open Page";
+
 /* Formatting error */
 "Formatting error"="Formatting error";
 
 /* HLSWebViewController 'Mail Link' action */
 "Mail Link"="Mail Link";
 
+/* No Internet connection is available */
+"No Internet connection is available"="No Internet connection is available";
+
 /* No remaining time estimate available */
 "No remaining time estimate available"="No remaining time estimate available";
 
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Open in Safari";
+
+/* Untitled */
+"Untitled"="Untitled";

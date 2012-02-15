@@ -89,7 +89,6 @@
 		6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */; };
 		6F9C468A14C5C30C00824AB2 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460E14C5C30B00824AB2 /* TextFieldsDemoViewController.m */; };
 		6F9C468B14C5C30C00824AB2 /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460F14C5C30B00824AB2 /* TextFieldsDemoViewController.xib */; };
-		6F9C468C14C5C30C00824AB2 /* TextFieldsLargeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461014C5C30B00824AB2 /* TextFieldsLargeDemoViewController.xib */; };
 		6F9C468D14C5C30C00824AB2 /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */; };
 		6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461414C5C30B00824AB2 /* WebViewDemoViewController.xib */; };
 		6F9C468F14C5C30C00824AB2 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461814C5C30B00824AB2 /* PlaceholderDemoViewController.m */; };
@@ -127,6 +126,7 @@
 		6F9C46C514C5C36300824AB2 /* img_coconut4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46B714C5C36300824AB2 /* img_coconut4.jpg */; };
 		6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
+		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -247,7 +247,6 @@
 		6F9C460D14C5C30B00824AB2 /* TextFieldsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsDemoViewController.h; sourceTree = "<group>"; };
 		6F9C460E14C5C30B00824AB2 /* TextFieldsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsDemoViewController.m; sourceTree = "<group>"; };
 		6F9C460F14C5C30B00824AB2 /* TextFieldsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldsDemoViewController.xib; sourceTree = "<group>"; };
-		6F9C461014C5C30B00824AB2 /* TextFieldsLargeDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldsLargeDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C461214C5C30B00824AB2 /* WebViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewDemoViewController.h; sourceTree = "<group>"; };
 		6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewDemoViewController.m; sourceTree = "<group>"; };
 		6F9C461414C5C30B00824AB2 /* WebViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewDemoViewController.xib; sourceTree = "<group>"; };
@@ -300,6 +299,7 @@
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -308,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F713D4662400834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -358,25 +359,26 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F1AF844142B046600925B7A /* CoconutKit-1.1-Release.staticframework */,
+				6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
+				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F1AF844142B046600925B7A /* CoconutKit-1.1-Release.staticframework */ = {
+		6F1AF844142B046600925B7A /* CoconutKit-trunk-Release.staticframework */ = {
 			isa = PBXGroup;
 			children = (
 				6F1AF845142B046600925B7A /* Bootstrap */,
 				6F1AF847142B046600925B7A /* CoconutKit.framework */,
 				6F1AF848142B046600925B7A /* Resources */,
 			);
-			name = "CoconutKit-1.1-Release.staticframework";
-			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-Release.staticframework";
+			name = "CoconutKit-trunk-Release.staticframework";
+			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
 			sourceTree = "<absolute>";
 		};
 		6F1AF845142B046600925B7A /* Bootstrap */ = {
@@ -739,7 +741,6 @@
 				6F9C460D14C5C30B00824AB2 /* TextFieldsDemoViewController.h */,
 				6F9C460E14C5C30B00824AB2 /* TextFieldsDemoViewController.m */,
 				6F9C460F14C5C30B00824AB2 /* TextFieldsDemoViewController.xib */,
-				6F9C461014C5C30B00824AB2 /* TextFieldsLargeDemoViewController.xib */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -1019,7 +1020,6 @@
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
 				6F9C468B14C5C30C00824AB2 /* TextFieldsDemoViewController.xib in Resources */,
-				6F9C468C14C5C30C00824AB2 /* TextFieldsLargeDemoViewController.xib in Resources */,
 				6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */,
 				6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
@@ -1058,7 +1058,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "${PROJECT_DIR}/generate_model.sh";
+			shellScript = "\"${PROJECT_DIR}\"/generate_model.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1167,13 +1167,13 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"";
+				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-demo";
@@ -1187,11 +1187,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1-$(CONFIGURATION).staticframework\"";
+				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				PRODUCT_NAME = "CoconutKit-demo";
 				VALIDATE_PRODUCT = YES;

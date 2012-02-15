@@ -25,11 +25,26 @@ NSString *HLSLanguageForLocalization(NSString *localization)
 
 NSString *HLSLocalizedStringFromUIKit(NSString *key)
 {
-    NSBundle *uiKitBundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
-    if (!uiKitBundle) {
-        HLSLoggerWarn(@"UIKit bundle not found");
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
+    if (! bundle) {
+        HLSLoggerWarn(@"UIKit bundle not found; searching in main bundle instead");
+        bundle = [NSBundle mainBundle];
     }
-    return NSLocalizedStringFromTableInBundle(key, nil, uiKitBundle ?: [NSBundle mainBundle], @"");
+    
+    // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
+    // be returned by the localizedStringForKey:value:table method
+    static NSString * const kMissingLocalizedString = @"NSBundle_HLSDynamicLocalization_missing";
+    NSString *localizedString = [bundle localizedStringForKey:key
+                                                        value:kMissingLocalizedString
+                                                        table:nil];
+    
+    // Use the localization key as text if missing
+    if ([localizedString isEqualToString:kMissingLocalizedString]) {
+        HLSLoggerWarn(@"Missing localization for key %@", key);
+        localizedString = key;
+    }
+    
+    return localizedString;
 }
 
 @implementation NSBundle (HLSDynamicLocalization)

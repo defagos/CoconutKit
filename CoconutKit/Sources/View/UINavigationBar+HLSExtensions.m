@@ -8,7 +8,10 @@
 
 #import "UINavigationBar+HLSExtensions.h"
 
+#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
+
+HLSLinkCategory(UINavigationBar_HLSExtensions)
 
 static const NSInteger kBackgroundImageViewTag = 7456;          // Hopefully not colliding with another tag :-)
 

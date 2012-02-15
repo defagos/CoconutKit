@@ -4,6 +4,7 @@
     #import <CoreData/CoreData.h>
     #import <CoreGraphics/CoreGraphics.h>
     #import <UIKit/UIKit.h>
+    #import <QuartzCore/QuartzCore.h>
     #import <MessageUI/MessageUI.h>
 
     // CoconutKit library public header files
@@ -27,7 +28,6 @@
     #import "HLSPlaceholderViewController.h"
     #import "HLSReloadable.h"
     #import "HLSStackController.h"
-    #import "HLSStretchingContainerView.h"
     #import "HLSSubtitleTableViewCell.h"
     #import "HLSTableSearchDisplayViewController.h"
     #import "HLSTableViewCell.h"
@@ -61,11 +61,13 @@
     #import "NSObject+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "NSTimeZone+HLSExtensions.h"
+    #import "UIActionSheet+HLSExtensions.h"
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
     #import "UIImage+HLSExtensions.h"
     #import "UILabel+HLSDynamicLocalization.h"
     #import "UINavigationBar+HLSExtensions.h"
+    #import "UITextFIeld+HLSExtensions.h"
     #import "UITextField+HLSValidation.h"
     #import "UIToolbar+HLSExtensions.h"
     #import "UIView+HLSExtensions.h"

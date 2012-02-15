@@ -11,12 +11,13 @@
 @interface ActionSheetDemoViewController ()
 
 - (HLSActionSheet *)actionSheetForChoice;
+- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet;
 
 - (void)choose1:(id)sender;
 - (void)choose2:(id)sender;
-- (void)choose3;
-- (void)choose4;
-- (void)resetChoice:(id)sender;
+- (void)choose3:(id)sender;
+- (void)choose4:(id)sender;
+- (void)cancel;
 
 @end
 
@@ -36,25 +37,13 @@
 {
     [super releaseViews];
     
-    self.showFromRectButton = nil;
     self.toolbar = nil;
-    self.showFromToolbarBarButtonItem = nil;
-    self.otherShowFromToolbarBarButtonItem = nil;
-    self.showFromBarButtonItemBarButtonItem = nil;
     self.choiceLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize showFromRectButton = m_showFromRectButton;
-
 @synthesize toolbar = m_toolbar;
-
-@synthesize showFromToolbarBarButtonItem = m_showFromToolbarBarButtonItem;
-
-@synthesize otherShowFromToolbarBarButtonItem = m_otherShowFromToolbarBarButtonItem;
-
-@synthesize showFromBarButtonItemBarButtonItem = m_showFromBarButtonItemBarButtonItem;
 
 @synthesize choiceLabel = m_choiceLabel;
 
@@ -84,10 +73,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Action sheet", @"Action sheet");
-    self.showFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
-    self.otherShowFromToolbarBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
-    self.showFromBarButtonItemBarButtonItem.title = NSLocalizedString(@"Choose", @"Choose");
+    self.tabBarController.title = NSLocalizedString(@"Action sheet", @"Action sheet");
 }
 
 #pragma mark Common action sheet code
@@ -106,24 +92,63 @@
                              action:@selector(choose2:)];
     [actionSheet addButtonWithTitle:@"3"
                              target:self
-                             action:@selector(choose3)];
+                             action:@selector(choose3:)];
     [actionSheet addButtonWithTitle:@"4"
                              target:self
-                             action:@selector(choose4)];
+                             action:@selector(choose4:)];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+    }
+    
     return actionSheet;
+}
+
+- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet
+{
+    HLSActionSheet *secondActionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    [secondActionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Yes") target:nil action:NULL];
+    [secondActionSheet addButtonWithTitle:[HLSLocalizedStringFromUIKit(@"No") capitalizedString] target:nil action:NULL];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [secondActionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+    }
+    
+    if ([actionSheet.owner isKindOfClass:[UIBarButtonItem class]]) {
+        UIBarButtonItem *ownerBarButtonItem = (UIBarButtonItem *)actionSheet.owner;
+        [secondActionSheet showFromBarButtonItem:ownerBarButtonItem animated:YES];
+    }
+    else if ([actionSheet.owner isKindOfClass:[UIToolbar class]]) {
+        UIToolbar *ownerToolbar = (UIToolbar *)actionSheet.owner;
+        [secondActionSheet showFromToolbar:ownerToolbar];
+    }
+    else if ([actionSheet.owner isKindOfClass:[UITabBar class]]) {
+        UITabBar *ownerTabBar = (UITabBar *)actionSheet.owner;
+        [secondActionSheet showFromTabBar:ownerTabBar];
+    }
+    else if ([actionSheet.owner isKindOfClass:[UIView class]]) {
+        UIView *ownerView = (UIView *)actionSheet.owner;
+        [secondActionSheet showInView:ownerView];
+    }
 }
 
 #pragma mark Event callbacks
 
-- (IBAction)makeChoiceFromRect:(id)sender
+- (IBAction)makeChoiceFromRectAnimated:(id)sender
 {
+    UIButton *button = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromRect:self.showFromRectButton.frame
-                       inView:self.view 
-                     animated:YES];
+    [actionSheet showFromRect:button.frame inView:self.view animated:YES];
 }
 
-- (IBAction)makeChoiceInView:(id)sender
+- (IBAction)makeChoiceFromRectNotAnimated:(id)sender
+{
+    UIButton *button = sender;
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromRect:button.frame inView:self.view animated:NO];
+}
+
+// Test method without parameter (checks UIBarButtonItem+HLSActionSheet implementation correctness. Bar
+// button actions can namely have a sender parameter, but this is not required)
+- (IBAction)makeChoiceInView
 {
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
     [actionSheet showInView:self.view];
@@ -135,48 +160,57 @@
     [actionSheet showFromToolbar:self.toolbar];
 }
 
-- (IBAction)makeChoiceFromBarButtonItem:(id)sender
+- (IBAction)makeChoiceFromTabBar:(id)sender
+{
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender
 {
     UIBarButtonItem *barButtonItem = sender;
     HLSActionSheet *actionSheet = [self actionSheetForChoice];
-    [actionSheet showFromBarButtonItem:barButtonItem
-                              animated:YES];
+    [actionSheet showFromBarButtonItem:barButtonItem animated:YES];
+}
+
+- (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender
+{
+    UIBarButtonItem *barButtonItem = sender;
+    HLSActionSheet *actionSheet = [self actionSheetForChoice];
+    [actionSheet showFromBarButtonItem:barButtonItem animated:NO];
 }
 
 - (void)choose1:(id)sender
 {
     self.choiceLabel.text = @"1";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
 - (void)choose2:(id)sender
 {
     self.choiceLabel.text = @"2";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
-- (void)choose3
+- (void)choose3:(id)sender
 {
     self.choiceLabel.text = @"3";
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
-- (void)choose4
+- (void)choose4:(id)sender
 {
     self.choiceLabel.text = @"4";
-    HLSActionSheet *actionSheet = [[HLSActionSheet alloc] init];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"Yes", @"Yes") target:nil action:NULL];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"No", @"No") target:nil action:NULL];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
-    }
-    [actionSheet showInView:self.view];
-    [actionSheet release];
+    [self showSecondActionSheetFromActionSheet:sender];
 }
 
+// Has no sender parameter. Works too!
 - (void)cancel
 {
     self.choiceLabel.text = nil;
 }
 
-- (void)resetChoice:(id)sender
+- (IBAction)resetChoice:(id)sender
 {
     self.choiceLabel.text = @"0";
 }
