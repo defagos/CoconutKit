@@ -111,7 +111,7 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 ### Release notes
 
 #### Version 1.1.2
-* Container view controllers bug fix for iOS 5: viewWillAppear: and viewDidAppear: are now forwarded correctly to child view controllers when the container is the root of an application or presented modally
+* Container view controller bug fix for iOS 5: viewWillAppear: and viewDidAppear: are now forwarded correctly to child view controllers when the container is the root of an application or presented modally
 
 #### Version 1.1.1
 * CGAffineTransform replaced by CATransform3D for creating richer animations
