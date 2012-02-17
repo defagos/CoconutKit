@@ -45,8 +45,12 @@
         //    - "RootStack": Test a stack controller as root view controller of the application
         NSString *demoMode = [[[NSProcessInfo processInfo] environment] objectForKey:@"CoconutKitDemoMode"];
         if ([demoMode isEqualToString:@"RootStack"]) {
-            RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
-            HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+            // Pre-load the stack with two view controllers (by enabling logging, one can discover that view events are correctly
+            // forwarded to the view controller on top only)
+            RootStackDemoViewController *rootStackDemoViewController1 = [[[RootStackDemoViewController alloc] init] autorelease];
+            HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1] autorelease];
+            RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
+            [stackController pushViewController:rootStackDemoViewController2];
             self.rootViewController = stackController;
         }
         else {

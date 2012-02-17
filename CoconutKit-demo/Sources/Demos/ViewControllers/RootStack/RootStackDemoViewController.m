@@ -61,6 +61,43 @@
         
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    HLSLoggerInfo(@"Called for object %@", self);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    HLSLoggerInfo(@"Called for object %@", self);
 }
 
 #pragma mark Orientation management
