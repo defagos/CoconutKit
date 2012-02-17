@@ -53,14 +53,6 @@ extern const NSUInteger kStackUnlimitedCapacity;
  * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
  * operations, you can increase this value. Standard capacity values are provided at the beginning of this file.
  *
- * Important:
- * ----------
- * Starting with iOS 5, there is an issue when an HLSStackController is set as root view controller of an application 
- * or used modally: All child view controllers contained within it will receive the viewWillAppear: and viewDidAppear: 
- * events, even those which are not on top (the top one will receive the event twice). This corresponds what I consider 
- * a regression introduced with the new iOS 5 view controller containment API. I filed a bug report (see rdar://10822029) 
- * and I hope this should be fixed in a near future.
- *
  * TODO: This class currently does not support view controllers implementing the HLSOrientationCloner protocol
  *
  * Designated initializer: initWithRootViewController:capacity:
