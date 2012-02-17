@@ -382,6 +382,30 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     if ((self = [super init])) {
         NSAssert(viewController != nil, @"View controller cannot be nil");
         NSAssert(containerController != nil, @"The container cannot be nil");
+                
+        // >= iOS 5: For containers having automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+        // return NO, we MUST use the UIViewController containment API to declare each view controller we insert
+        // into it as child. 
+        //
+        // If we don't, problems arise when the container is the root view controller of an application or is presented 
+        // modally. In such cases, view controller nesting is not detected, which yields to automatic viewWillAppear: 
+        // and viewDidAppear: event forwarding to ALL view controllers loaded into the container when the container 
+        // appears (i.e. when the application gets displayed or when the modal view appears). This leads to two
+        // undesired effects:
+        //   - invisible view controllers get viewWillAppear: and viewDidAppear: events
+        //   - the visible view controller gets each of these events twice (once from UIKit internals, and once
+        //     through manual forwarding by the container implementation)
+        if ([containerController isKindOfClass:[UIViewController class]]) {
+            UIViewController *containerViewController = (UIViewController *)containerController;
+            NSAssert(! [containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
+                     || ! [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers], @"HLSContainerContent can "
+                     "only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers has been "
+                     "implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
+                     "mechanism)");
+            if ([containerViewController respondsToSelector:@selector(addChildViewController:)]) {
+                [containerViewController addChildViewController:viewController];
+            }
+        }
         
         // Associate the view controller with its container
         self.containerController = containerController;
@@ -430,6 +454,12 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     self.viewController = nil;
+    
+    // See comment in initWithViewController:containerController:transitionStyle:duration:
+    if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
+        [self.viewController removeFromParentViewController];
+    }
+    
     self.containerController = nil;
     
     [super dealloc];

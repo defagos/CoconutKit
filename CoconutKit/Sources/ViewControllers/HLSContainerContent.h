@@ -50,6 +50,11 @@
  * ownership of a view controller when it is inserted, and simply release the HLSContainerContent object when the view 
  * controller gets removed from the container. When interacting with the view controller, use the HLSContainerContent
  * object as a proxy to help you guarantee that the common properties listed above are fulfilled.
+ *
+ * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
+ * has been disabled, i.e. for which the
+ *    automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+ * method returns NO (a feature available as of iOS 5).
  * 
  * Designated initializer: initWithViewController:containerController:transitionStyle:duration:
  */
