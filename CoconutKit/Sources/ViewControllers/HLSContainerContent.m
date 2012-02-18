@@ -453,13 +453,12 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
-    self.viewController = nil;
-    
     // See comment in initWithViewController:containerController:transitionStyle:duration:
     if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
         [self.viewController removeFromParentViewController];
     }
     
+    self.viewController = nil;
     self.containerController = nil;
     
     [super dealloc];
