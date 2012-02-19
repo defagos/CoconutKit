@@ -548,6 +548,31 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
         self.viewController.view.frame = containerView.bounds;
     }
     
+    // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
+    // view controller's view (if any), this view is neither reloaded nor added as subview of the tab bar controller's view 
+    // again. The tab bar controller ends up empty.
+    //
+    // This happens only if the new iOS 5 -[UIViewController addChildViewController:] method has been called to declare the 
+    // tab bar controller as child of a custom container implemented using HLSContainerContent. But since this containment
+    // relationship must be declared for correct behavior on iOS 5, we have to find a workaround.
+    //
+    // Steps to reproduce the issue (with the code below commented out):
+    //   - push a view controller wrapped into a tab bar controller into a custom stack-based container (e.g. HLSStackController)
+    //   - add another view controller on top
+    //   - cover with a modal, and trigger a memory warning
+    //   - dismiss the modal, and remove the view controller on top. The tab bar controller does not get properly reloaded
+    // 
+    // To fix this issue, we force the tab bar controller to reload its child view controller by setting the current view
+    // controller again.
+    if ([self.viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)self.viewController;
+        if (tabBarController.selectedViewController && ! [tabBarController.selectedViewController isViewLoaded]) {
+            UIViewController *currentViewController = tabBarController.selectedViewController;
+            tabBarController.selectedViewController = nil;
+            tabBarController.selectedViewController = currentViewController;
+        }
+    }
+    
     // If a non-empty stack has been provided, find insertion point
     HLSAssertObjectsInEnumerationAreKindOfClass(containerContentStack, HLSContainerContent);
     if ([containerContentStack count] != 0) {
