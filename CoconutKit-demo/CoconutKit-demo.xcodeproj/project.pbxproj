@@ -132,6 +132,7 @@
 		6FEEF84D14F2815B001585A6 /* ParallaxViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF84B14F2815B001585A6 /* ParallaxViewDemoViewController.m */; };
 		6FEEF84E14F2815B001585A6 /* ParallaxViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84C14F2815B001585A6 /* ParallaxViewDemoViewController.xib */; };
 		6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
+		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -312,6 +313,7 @@
 		6FEEF84B14F2815B001585A6 /* ParallaxViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewDemoViewController.m; sourceTree = "<group>"; };
 		6FEEF84C14F2815B001585A6 /* ParallaxViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxViewDemoViewController.xib; sourceTree = "<group>"; };
 		6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
+		6FEEF86914F29C9A001585A6 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -928,6 +930,7 @@
 				6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */,
 				6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */,
 				6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */,
+				6FEEF86914F29C9A001585A6 /* skyscraper.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */,
 				6FEEF84E14F2815B001585A6 /* ParallaxViewDemoViewController.xib in Resources */,
 				6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */,
+				6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

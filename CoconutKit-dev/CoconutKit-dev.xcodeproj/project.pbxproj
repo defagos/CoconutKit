@@ -197,6 +197,7 @@
 		6FEEF83814F27D34001585A6 /* ParallaxViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83714F27D34001585A6 /* ParallaxViewDemoViewController.xib */; };
 		6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; };
+		6FEEF86C14F29CA2001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
@@ -519,6 +520,7 @@
 		6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
 		6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 				6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */,
 				6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */,
 				6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */,
+				6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1542,6 +1545,7 @@
 				6FEEF83614F27C00001585A6 /* parallax_demo_trees_layer.png in Resources */,
 				6FEEF83814F27D34001585A6 /* ParallaxViewDemoViewController.xib in Resources */,
 				6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */,
+				6FEEF86C14F29CA2001585A6 /* skyscraper.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

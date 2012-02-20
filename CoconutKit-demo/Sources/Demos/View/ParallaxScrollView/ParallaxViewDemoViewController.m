@@ -24,6 +24,8 @@
 {
     [super releaseViews];
     
+    self.textView = nil;
+    self.textScrollView = nil;
     self.scrollView1 = nil;
     self.scrollView2 = nil;
     self.scrollView3 = nil;
@@ -31,6 +33,10 @@
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize textView = m_textView;
+
+@synthesize textScrollView = m_textScrollView;
 
 @synthesize scrollView1 = m_scrollView1;
 
@@ -45,6 +51,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.textView setupParallaxWithScrollViews:[NSArray arrayWithObject:self.textScrollView]];
     
     UIImageView *imageView1 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_trees_layer.png"]] autorelease];
     [self.scrollView1 addSubview:imageView1];
