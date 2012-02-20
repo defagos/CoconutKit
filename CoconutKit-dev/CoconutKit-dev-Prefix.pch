@@ -25,6 +25,7 @@
     #import "HLSNibView.h"
     #import "HLSNotifications.h"
     #import "HLSOrientationCloner.h"
+    #import "HLSParallaxScrollView.h"
     #import "HLSPlaceholderViewController.h"
     #import "HLSReloadable.h"
     #import "HLSStackController.h"

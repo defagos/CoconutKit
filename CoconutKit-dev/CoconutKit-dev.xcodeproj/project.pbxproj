@@ -19,6 +19,7 @@
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
 		6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7514BB75D900D54088 /* DemoTable.strings */; };
+		6F5A521814F269D100B1F824 /* HLSParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A521714F269D000B1F824 /* HLSParallaxScrollView.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F948C2D14D6E80F003BF765 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2C14D6E80F003BF765 /* UITextField+HLSExtensions.m */; };
@@ -190,6 +191,12 @@
 		6FDE68AA14BD6C6E00F8CD3A /* bkgr_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A914BD6C6E00F8CD3A /* bkgr_bar.png */; };
 		6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */; };
+		6FEEF83014F27ACF001585A6 /* ParallaxViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF82F14F27ACF001585A6 /* ParallaxViewDemoViewController.m */; };
+		6FEEF83414F27C00001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */; };
+		6FEEF83514F27C00001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */; };
+		6FEEF83614F27C00001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */; };
+		6FEEF83814F27D34001585A6 /* ParallaxViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83714F27D34001585A6 /* ParallaxViewDemoViewController.xib */; };
+		6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
@@ -212,6 +219,8 @@
 		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D7214BB75D000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DemoTable.strings; sourceTree = "<group>"; };
 		6F507D7614BB75D900D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = DemoTable.strings; sourceTree = "<group>"; };
+		6F5A521614F269D000B1F824 /* HLSParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSParallaxScrollView.h; sourceTree = "<group>"; };
+		6F5A521714F269D000B1F824 /* HLSParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSParallaxScrollView.m; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
@@ -503,6 +512,13 @@
 		6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FE8EA8F14CFE48E0081F249 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
+		6FEEF82E14F27ACF001585A6 /* ParallaxViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxViewDemoViewController.h; sourceTree = "<group>"; };
+		6FEEF82F14F27ACF001585A6 /* ParallaxViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewDemoViewController.m; sourceTree = "<group>"; };
+		6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
+		6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
+		6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
+		6FEEF83714F27D34001585A6 /* ParallaxViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxViewDemoViewController.xib; sourceTree = "<group>"; };
+		6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
@@ -775,6 +791,8 @@
 				6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE68914BA04A6007EE121 /* HLSNibView.h */,
 				6FADE68A14BA04A6007EE121 /* HLSNibView.m */,
+				6F5A521614F269D000B1F824 /* HLSParallaxScrollView.h */,
+				6F5A521714F269D000B1F824 /* HLSParallaxScrollView.m */,
 				6FADE68B14BA04A6007EE121 /* HLSSubtitleTableViewCell.h */,
 				6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */,
 				6FADE68D14BA04A6007EE121 /* HLSTableViewCell+Protected.h */,
@@ -881,6 +899,10 @@
 				6FADE7E414BA04C8007EE121 /* img_coconut2.jpg */,
 				6FADE7E514BA04C8007EE121 /* img_coconut3.jpg */,
 				6FADE7E614BA04C8007EE121 /* img_coconut4.jpg */,
+				6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */,
+				6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */,
+				6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */,
+				6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1110,6 +1132,7 @@
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
 				6FADE84514BA04C8007EE121 /* KenBurnsSlideshow */,
+				6FEEF82D14F27ACF001585A6 /* ParallaxScrollView */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6FADE85814BA04C9007EE121 /* TextFields */,
@@ -1336,6 +1359,16 @@
 			path = Skinning;
 			sourceTree = "<group>";
 		};
+		6FEEF82D14F27ACF001585A6 /* ParallaxScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				6FEEF82E14F27ACF001585A6 /* ParallaxViewDemoViewController.h */,
+				6FEEF82F14F27ACF001585A6 /* ParallaxViewDemoViewController.m */,
+				6FEEF83714F27D34001585A6 /* ParallaxViewDemoViewController.xib */,
+			);
+			path = ParallaxScrollView;
+			sourceTree = "<group>";
+		};
 		6FEF8547131F77180015B57C /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1504,6 +1537,11 @@
 				6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */,
 				6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */,
 				6FDE68AA14BD6C6E00F8CD3A /* bkgr_bar.png in Resources */,
+				6FEEF83414F27C00001585A6 /* parallax_demo_grass_layer.png in Resources */,
+				6FEEF83514F27C00001585A6 /* parallax_demo_sky_layer.png in Resources */,
+				6FEEF83614F27C00001585A6 /* parallax_demo_trees_layer.png in Resources */,
+				6FEEF83814F27D34001585A6 /* ParallaxViewDemoViewController.xib in Resources */,
+				6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1643,6 +1681,8 @@
 				6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
 				6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */,
 				6F948C2D14D6E80F003BF765 /* UITextField+HLSExtensions.m in Sources */,
+				6F5A521814F269D100B1F824 /* HLSParallaxScrollView.m in Sources */,
+				6FEEF83014F27ACF001585A6 /* ParallaxViewDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

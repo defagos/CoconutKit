@@ -1,6 +1,7 @@
 HLSAssert.m
 HLSCursor.m
 HLSKenBurnsSlideshow.m
+HLSParallaxScrollView.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
