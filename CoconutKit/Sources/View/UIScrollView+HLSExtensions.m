@@ -36,7 +36,7 @@ static void *s_parallaxScrollViews = &s_parallaxScrollViews;
         if (! parallaxScrollViews) {
             return;
         }
-        
+                
         // Find where the relative offset position (in [0; 1]) in the receiver
         CGFloat relativeXPos = 0.f;
         if (floateq(self.contentSize.width, CGRectGetWidth(self.frame))) {
@@ -45,13 +45,27 @@ static void *s_parallaxScrollViews = &s_parallaxScrollViews;
         else {
             relativeXPos = self.contentOffset.x / (self.contentSize.width - CGRectGetWidth(self.frame));
         }
+        if (floatlt(relativeXPos, 0.f)) {
+            relativeXPos = 0.f;
+        }
+        else if (floatgt(relativeXPos, 1.f)) {
+            relativeXPos = 1.f;
+        }
         
+        // If reaching the top or the bottom of the master scroll view, prevent the other scroll views from
+        // scrolling further
         CGFloat relativeYPos = 0.f;
         if (floateq(self.contentSize.height, CGRectGetHeight(self.frame))) {
             relativeYPos = 0.f;
         }
         else {
             relativeYPos = self.contentOffset.y / (self.contentSize.height - CGRectGetHeight(self.frame));
+        }
+        if (floatlt(relativeYPos, 0.f)) {
+            relativeYPos = 0.f;
+        }
+        else if (floatgt(relativeYPos, 1.f)) {
+            relativeYPos = 1.f;
         }
         
         // Apply the same relative offset position to all synchronized scroll views
