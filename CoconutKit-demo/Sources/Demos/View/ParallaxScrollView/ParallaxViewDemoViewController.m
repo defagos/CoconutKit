@@ -8,10 +8,6 @@
 
 #import "ParallaxViewDemoViewController.h"
 
-@interface ParallaxViewDemoViewController ()
-
-@end
-
 @implementation ParallaxViewDemoViewController
 
 #pragma mark Object creation and destruction
@@ -28,12 +24,21 @@
 {
     [super releaseViews];
     
-    self.parallaxScrollView = nil;
+    self.scrollView1 = nil;
+    self.scrollView2 = nil;
+    self.scrollView3 = nil;
+    self.scrollView4 = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize parallaxScrollView = m_parallaxScrollView;
+@synthesize scrollView1 = m_scrollView1;
+
+@synthesize scrollView2 = m_scrollView2;
+
+@synthesize scrollView3 = m_scrollView3;
+
+@synthesize scrollView4 = m_scrollView4;
 
 #pragma mark View lifecycle
 
@@ -41,17 +46,23 @@
 {
     [super viewDidLoad];
     
-    UIImageView *contentView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_trees_layer.png"]] autorelease];
-    [self.parallaxScrollView setContentView:contentView];
+    UIImageView *imageView1 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_trees_layer.png"]] autorelease];
+    [self.scrollView1 addSubview:imageView1];
+    self.scrollView1.contentSize = imageView1.frame.size;
     
-    UIImageView *backgroundView1 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_grass_layer.png"]] autorelease];
-    [self.parallaxScrollView addBackgroundView:backgroundView1];
+    UIImageView *imageView2 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_grass_layer.png"]] autorelease];
+    [self.scrollView2 addSubview:imageView2];
+    self.scrollView2.contentSize = imageView2.frame.size;
     
-    UIImageView *backgroundView2 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_mountains_layer.png"]] autorelease];
-    [self.parallaxScrollView addBackgroundView:backgroundView2];
+    UIImageView *imageView3 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_mountains_layer.png"]] autorelease];
+    [self.scrollView3 addSubview:imageView3];
+    self.scrollView3.contentSize = imageView3.frame.size;
     
-    UIImageView *backgroundView3 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_sky_layer.png"]] autorelease];
-    [self.parallaxScrollView addBackgroundView:backgroundView3];
+    UIImageView *imageView4 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_sky_layer.png"]] autorelease];
+    [self.scrollView4 addSubview:imageView4];
+    self.scrollView4.contentSize = imageView4.frame.size;
+    
+    [self.scrollView1 setupParallaxWithScrollViews:[NSArray arrayWithObjects:self.scrollView2, self.scrollView3, self.scrollView4, nil]];
 }
 
 #pragma mark Orientation management

@@ -15,7 +15,6 @@ HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
 HLSOrientationCloner.h
-HLSParallaxScrollView.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
@@ -59,6 +58,7 @@ UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
 UINavigationBar+HLSExtensions.h
+UIScrollView+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UIToolbar+HLSExtensions.h
