@@ -13,11 +13,12 @@
 #import <objc/runtime.h>
 
 static void *s_parallaxScrollViews = &s_parallaxScrollViews;
+static void *s_parallaxBounces = &s_parallaxBounces;
 
 @implementation UIScrollView (HLSExtensions)
 
 // TODO: Maybe a remove method or set to nil allowed
-- (void)setupParallaxWithScrollViews:(NSArray *)scrollViews
+- (void)setupParallaxWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(scrollViews, UIScrollView);
     
@@ -26,6 +27,7 @@ static void *s_parallaxScrollViews = &s_parallaxScrollViews;
               options:NSKeyValueObservingOptionNew 
               context:NULL];
     objc_setAssociatedObject(self, s_parallaxScrollViews, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_parallaxBounces, [NSNumber numberWithBool:bounces], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 // TODO: What if UIScrollView already implements this method? Swizzle?
@@ -45,15 +47,7 @@ static void *s_parallaxScrollViews = &s_parallaxScrollViews;
         else {
             relativeXPos = self.contentOffset.x / (self.contentSize.width - CGRectGetWidth(self.frame));
         }
-        if (floatlt(relativeXPos, 0.f)) {
-            relativeXPos = 0.f;
-        }
-        else if (floatgt(relativeXPos, 1.f)) {
-            relativeXPos = 1.f;
-        }
         
-        // If reaching the top or the bottom of the master scroll view, prevent the other scroll views from
-        // scrolling further
         CGFloat relativeYPos = 0.f;
         if (floateq(self.contentSize.height, CGRectGetHeight(self.frame))) {
             relativeYPos = 0.f;
@@ -61,11 +55,24 @@ static void *s_parallaxScrollViews = &s_parallaxScrollViews;
         else {
             relativeYPos = self.contentOffset.y / (self.contentSize.height - CGRectGetHeight(self.frame));
         }
-        if (floatlt(relativeYPos, 0.f)) {
-            relativeYPos = 0.f;
-        }
-        else if (floatgt(relativeYPos, 1.f)) {
-            relativeYPos = 1.f;
+                
+        // If reaching the top or the bottom of the master scroll view, prevent the other scroll views from
+        // scrolling further (if enabled)
+        BOOL bounces = [objc_getAssociatedObject(self, s_parallaxBounces) boolValue];
+        if (! bounces) {
+            if (floatlt(relativeXPos, 0.f)) {
+                relativeXPos = 0.f;
+            }
+            else if (floatgt(relativeXPos, 1.f)) {
+                relativeXPos = 1.f;
+            }
+            
+            if (floatlt(relativeYPos, 0.f)) {
+                relativeYPos = 0.f;
+            }
+            else if (floatgt(relativeYPos, 1.f)) {
+                relativeYPos = 1.f;
+            }            
         }
         
         // Apply the same relative offset position to all synchronized scroll views

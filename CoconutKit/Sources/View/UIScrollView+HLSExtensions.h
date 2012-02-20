@@ -8,6 +8,6 @@
 
 @interface UIScrollView (HLSExtensions)
 
-- (void)setupParallaxWithScrollViews:(NSArray *)scrollViews;
+- (void)setupParallaxWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces;
 
 @end
