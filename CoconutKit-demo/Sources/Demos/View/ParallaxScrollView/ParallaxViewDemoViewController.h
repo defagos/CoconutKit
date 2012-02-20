@@ -11,20 +11,30 @@
 @interface ParallaxViewDemoViewController : HLSViewController {
 @private
     UITextView *m_textView;
-    UIScrollView *m_textScrollView;
+    UIScrollView *m_skyScrapperScrollView;
+    UIImageView *m_skyScrapperImageView;
     
-    UIScrollView *m_scrollView1;
-    UIScrollView *m_scrollView2;
-    UIScrollView *m_scrollView3;
-    UIScrollView *m_scrollView4;
+    UIScrollView *m_skyScrollView;
+    UIScrollView *m_mountainsScrollView;
+    UIScrollView *m_grassScrollView;
+    UIScrollView *m_treesScrollView;
+    UIImageView *m_skyImageView;
+    UIImageView *m_mountainsImageView;
+    UIImageView *m_grassImageView;
+    UIImageView *m_treesImageView;
 }
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, retain) IBOutlet UIScrollView *textScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *skyScrapperScrollView;
+@property (nonatomic, retain) IBOutlet UIImageView *skyScrapperImageView;
 
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView1;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView2;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView3;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView4;
+@property (nonatomic, retain) IBOutlet UIScrollView *skyScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *mountainsScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *grassScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *treesScrollView;
+@property (nonatomic, retain) IBOutlet UIImageView *skyImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *mountainsImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *grassImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *treesImageView;
 
 @end

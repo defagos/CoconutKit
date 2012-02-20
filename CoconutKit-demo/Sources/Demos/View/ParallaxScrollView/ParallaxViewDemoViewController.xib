@@ -239,10 +239,27 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<object class="IBUIScrollView" id="1030063137">
 						<reference key="NSNextResponder" ref="658810709"/>
 						<int key="NSvFlags">274</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="292243703">
+								<reference key="NSNextResponder" ref="1030063137"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{305, 200}</string>
+								<reference key="NSSuperview" ref="1030063137"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="808813031"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">parallax_demo_sky_layer.png</string>
+								</object>
+							</object>
+						</array>
 						<string key="NSFrame">{{248, 740}, {273, 200}}</string>
 						<reference key="NSSuperview" ref="658810709"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="808813031"/>
+						<reference key="NSNextKeyView" ref="292243703"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -254,10 +271,27 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<object class="IBUIScrollView" id="808813031">
 						<reference key="NSNextResponder" ref="658810709"/>
 						<int key="NSvFlags">274</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="409100727">
+								<reference key="NSNextResponder" ref="808813031"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{320, 200}</string>
+								<reference key="NSSuperview" ref="808813031"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="953966427"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">parallax_demo_mountains_layer.png</string>
+								</object>
+							</object>
+						</array>
 						<string key="NSFrame">{{248, 740}, {273, 200}}</string>
 						<reference key="NSSuperview" ref="658810709"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="953966427"/>
+						<reference key="NSNextKeyView" ref="409100727"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -269,10 +303,27 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<object class="IBUIScrollView" id="953966427">
 						<reference key="NSNextResponder" ref="658810709"/>
 						<int key="NSvFlags">274</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="683977790">
+								<reference key="NSNextResponder" ref="953966427"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{640, 200}</string>
+								<reference key="NSSuperview" ref="953966427"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="323665716"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">parallax_demo_grass_layer.png</string>
+								</object>
+							</object>
+						</array>
 						<string key="NSFrame">{{248, 740}, {273, 200}}</string>
 						<reference key="NSSuperview" ref="658810709"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="323665716"/>
+						<reference key="NSNextKeyView" ref="683977790"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -284,9 +335,27 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<object class="IBUIScrollView" id="323665716">
 						<reference key="NSNextResponder" ref="658810709"/>
 						<int key="NSvFlags">274</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="931389364">
+								<reference key="NSNextResponder" ref="323665716"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{960, 200}</string>
+								<reference key="NSSuperview" ref="323665716"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">parallax_demo_trees_layer.png</string>
+								</object>
+							</object>
+						</array>
 						<string key="NSFrame">{{248, 740}, {273, 200}}</string>
 						<reference key="NSSuperview" ref="658810709"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="931389364"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -326,51 +395,91 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView1</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="323665716"/>
-					</object>
-					<int key="connectionID">18</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView2</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="953966427"/>
-					</object>
-					<int key="connectionID">19</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView3</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="808813031"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView4</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="1030063137"/>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">textScrollView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="242106834"/>
-					</object>
-					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">textView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="469308213"/>
 					</object>
 					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">skyScrollView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1030063137"/>
+					</object>
+					<int key="connectionID">32</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mountainsScrollView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="808813031"/>
+					</object>
+					<int key="connectionID">33</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">grassScrollView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="953966427"/>
+					</object>
+					<int key="connectionID">34</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">treesScrollView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="323665716"/>
+					</object>
+					<int key="connectionID">35</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">skyImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="292243703"/>
+					</object>
+					<int key="connectionID">36</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mountainsImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="409100727"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">grassImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="683977790"/>
+					</object>
+					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">treesImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="931389364"/>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">skyScrapperImageView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="924841720"/>
+					</object>
+					<int key="connectionID">40</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">skyScrapperScrollView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="242106834"/>
+					</object>
+					<int key="connectionID">41</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -408,22 +517,33 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
 						<reference key="object" ref="323665716"/>
-						<array class="NSMutableArray" key="children"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="931389364"/>
+						</array>
 						<reference key="parent" ref="658810709"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
 						<reference key="object" ref="953966427"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="683977790"/>
+						</array>
 						<reference key="parent" ref="658810709"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
 						<reference key="object" ref="808813031"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="409100727"/>
+						</array>
 						<reference key="parent" ref="658810709"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
 						<reference key="object" ref="1030063137"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="292243703"/>
+						</array>
 						<reference key="parent" ref="658810709"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -444,6 +564,26 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 						<reference key="object" ref="924841720"/>
 						<reference key="parent" ref="242106834"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">28</int>
+						<reference key="object" ref="292243703"/>
+						<reference key="parent" ref="1030063137"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">29</int>
+						<reference key="object" ref="409100727"/>
+						<reference key="parent" ref="808813031"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="683977790"/>
+						<reference key="parent" ref="953966427"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">31</int>
+						<reference key="object" ref="931389364"/>
+						<reference key="parent" ref="323665716"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -459,12 +599,16 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="24.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">41</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -480,37 +624,62 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					<string key="className">ParallaxViewDemoViewController</string>
 					<string key="superclassName">HLSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="scrollView1">UIScrollView</string>
-						<string key="scrollView2">UIScrollView</string>
-						<string key="scrollView3">UIScrollView</string>
-						<string key="scrollView4">UIScrollView</string>
-						<string key="textScrollView">UIScrollView</string>
+						<string key="grassImageView">UIImageView</string>
+						<string key="grassScrollView">UIScrollView</string>
+						<string key="mountainsImageView">UIImageView</string>
+						<string key="mountainsScrollView">UIScrollView</string>
+						<string key="skyImageView">UIImageView</string>
+						<string key="skyScrapperImageView">UIImageView</string>
+						<string key="skyScrapperScrollView">UIScrollView</string>
+						<string key="skyScrollView">UIScrollView</string>
 						<string key="textView">UITextView</string>
+						<string key="treesImageView">UIImageView</string>
+						<string key="treesScrollView">UIScrollView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="scrollView1">
-							<string key="name">scrollView1</string>
+						<object class="IBToOneOutletInfo" key="grassImageView">
+							<string key="name">grassImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="grassScrollView">
+							<string key="name">grassScrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="scrollView2">
-							<string key="name">scrollView2</string>
+						<object class="IBToOneOutletInfo" key="mountainsImageView">
+							<string key="name">mountainsImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mountainsScrollView">
+							<string key="name">mountainsScrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="scrollView3">
-							<string key="name">scrollView3</string>
+						<object class="IBToOneOutletInfo" key="skyImageView">
+							<string key="name">skyImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="skyScrapperImageView">
+							<string key="name">skyScrapperImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="skyScrapperScrollView">
+							<string key="name">skyScrapperScrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="scrollView4">
-							<string key="name">scrollView4</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textScrollView">
-							<string key="name">textScrollView</string>
+						<object class="IBToOneOutletInfo" key="skyScrollView">
+							<string key="name">skyScrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="textView">
 							<string key="name">textView</string>
 							<string key="candidateClassName">UITextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="treesImageView">
+							<string key="name">treesImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="treesScrollView">
+							<string key="name">treesScrollView</string>
+							<string key="candidateClassName">UIScrollView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -524,10 +693,13 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">skyscraper.jpg</string>
-			<string key="NS.object.0">{768, 1133}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="parallax_demo_grass_layer.png">{640, 200}</string>
+			<string key="parallax_demo_mountains_layer.png">{320, 200}</string>
+			<string key="parallax_demo_sky_layer.png">{305, 200}</string>
+			<string key="parallax_demo_trees_layer.png">{960, 200}</string>
+			<string key="skyscraper.jpg">{768, 1133}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1173</string>
 	</data>
 </archive>

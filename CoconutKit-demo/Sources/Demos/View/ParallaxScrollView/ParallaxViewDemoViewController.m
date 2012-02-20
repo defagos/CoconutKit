@@ -25,26 +25,41 @@
     [super releaseViews];
     
     self.textView = nil;
-    self.textScrollView = nil;
-    self.scrollView1 = nil;
-    self.scrollView2 = nil;
-    self.scrollView3 = nil;
-    self.scrollView4 = nil;
+    self.skyScrapperScrollView = nil;
+    self.skyScrapperImageView = nil;
+    self.skyScrollView = nil;
+    self.mountainsScrollView = nil;
+    self.grassScrollView = nil;
+    self.treesScrollView = nil;
+    self.skyImageView = nil;
+    self.mountainsImageView = nil;
+    self.grassImageView = nil;
+    self.treesImageView = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize textView = m_textView;
 
-@synthesize textScrollView = m_textScrollView;
+@synthesize skyScrapperScrollView = m_skyScrapperScrollView;
 
-@synthesize scrollView1 = m_scrollView1;
+@synthesize skyScrapperImageView = m_skyScrapperImageView;
 
-@synthesize scrollView2 = m_scrollView2;
+@synthesize skyScrollView = m_skyScrollView;
 
-@synthesize scrollView3 = m_scrollView3;
+@synthesize mountainsScrollView = m_mountainsScrollView;
 
-@synthesize scrollView4 = m_scrollView4;
+@synthesize grassScrollView = m_grassScrollView;
+
+@synthesize treesScrollView = m_treesScrollView;
+
+@synthesize skyImageView = m_skyImageView;
+
+@synthesize mountainsImageView = m_mountainsImageView;
+
+@synthesize grassImageView = m_grassImageView;
+
+@synthesize treesImageView = m_treesImageView;
 
 #pragma mark View lifecycle
 
@@ -52,25 +67,20 @@
 {
     [super viewDidLoad];
     
-    [self.textView setupParallaxWithScrollViews:[NSArray arrayWithObject:self.textScrollView]];
+    // Set content size so that scrolling can occur correctly (needed for all involved scroll views)
+    self.skyScrapperScrollView.contentSize = self.skyScrapperImageView.frame.size;
     
-    UIImageView *imageView1 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_trees_layer.png"]] autorelease];
-    [self.scrollView1 addSubview:imageView1];
-    self.scrollView1.contentSize = imageView1.frame.size;
+    self.skyScrollView.contentSize = self.skyImageView.frame.size;
+    self.mountainsScrollView.contentSize = self.mountainsImageView.frame.size;
+    self.grassScrollView.contentSize = self.grassImageView.frame.size;
+    self.treesScrollView.contentSize = self.treesImageView.frame.size;
     
-    UIImageView *imageView2 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_grass_layer.png"]] autorelease];
-    [self.scrollView2 addSubview:imageView2];
-    self.scrollView2.contentSize = imageView2.frame.size;
-    
-    UIImageView *imageView3 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_mountains_layer.png"]] autorelease];
-    [self.scrollView3 addSubview:imageView3];
-    self.scrollView3.contentSize = imageView3.frame.size;
-    
-    UIImageView *imageView4 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"parallax_demo_sky_layer.png"]] autorelease];
-    [self.scrollView4 addSubview:imageView4];
-    self.scrollView4.contentSize = imageView4.frame.size;
-    
-    [self.scrollView1 setupParallaxWithScrollViews:[NSArray arrayWithObjects:self.scrollView2, self.scrollView3, self.scrollView4, nil]];
+    // Create parallax effect
+    [self.textView setupParallaxWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]];
+    [self.treesScrollView setupParallaxWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
+                                                        self.mountainsScrollView, 
+                                                        self.grassScrollView, 
+                                                        nil]];
 }
 
 #pragma mark Orientation management
