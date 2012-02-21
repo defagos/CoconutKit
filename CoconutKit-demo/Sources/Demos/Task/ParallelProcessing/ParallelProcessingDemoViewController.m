@@ -110,6 +110,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     // We do not want to let tasks run when we leave the screen
     [[HLSTaskManager defaultManager] cancelTasksWithDelegate:self];
 }

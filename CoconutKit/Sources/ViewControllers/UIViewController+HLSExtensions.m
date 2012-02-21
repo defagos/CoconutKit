@@ -153,6 +153,11 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidLoad_Imp)(self, @selector(viewDidLoad));
     
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
+        HLSLoggerWarn(@"Unexpected viewDidLoad call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewDidLoad] has not been called correctly");
+    }
+    
     [self setOriginalViewSize:self.view.bounds.size];
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad];
 }
@@ -161,6 +166,12 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewWillAppear_Imp)(self, @selector(viewWillAppear:), animated);
     
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidLoad
+            && [self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidDisappear) {
+        HLSLoggerWarn(@"Unexpected viewWillAppear: call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewWillAppear:] has not been called correctly");
+    }
+    
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear];
 }
 
@@ -168,12 +179,22 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidAppear_Imp)(self, @selector(viewDidAppear:), animated);
     
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewWillAppear) {
+        HLSLoggerWarn(@"Unexpected viewDidAppear: call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewDidAppear:] has not been called correctly");
+    }
+    
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
 }
 
 - (void)swizzledViewWillDisappear:(BOOL)animated
 {
     (*s_UIViewController__viewWillDisappear_Imp)(self, @selector(viewWillDisappear:), animated);
+    
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidAppear) {
+        HLSLoggerWarn(@"Unexpected viewWillDisappear: call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewWillDisappear:] has not been called correctly");
+    }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
     [[UITextField currentTextField] resignFirstResponder];
@@ -183,12 +204,23 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidDisappear_Imp)(self, @selector(viewDidDisappear:), animated);
     
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewWillDisappear) {
+        HLSLoggerWarn(@"Unexpected viewDidDisappear: call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewDidDisappear:] has not been called correctly");
+    }
+    
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
 }
 
 - (void)swizzledViewDidUnload
 {
     (s_UIViewController__viewDidUnload_Imp)(self, @selector(viewDidUnload));
+    
+    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidLoad
+            && [self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidDisappear) {
+        HLSLoggerWarn(@"Unexpected viewDidUnload call. The view lifecycle of a container object is probably incorrect, or "
+                      "[super viewDidUnload] has not been called correctly");
+    }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
 }
