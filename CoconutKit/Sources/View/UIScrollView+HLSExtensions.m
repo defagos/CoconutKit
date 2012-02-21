@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import "HLSLogger.h"
 #import <objc/runtime.h>
 
 static void *s_parallaxScrollViews = &s_parallaxScrollViews;
@@ -17,10 +18,19 @@ static void *s_parallaxBounces = &s_parallaxBounces;
 
 @implementation UIScrollView (HLSExtensions)
 
-// TODO: Maybe a remove method or set to nil allowed
-- (void)setupParallaxWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
+- (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(scrollViews, UIScrollView);
+    
+    if (! scrollViews || [scrollViews count] == 0) {
+        HLSLoggerError(@"No scroll views to bind");
+        return;
+    }
+    
+    if ([scrollViews containsObject:self]) {
+        HLSLoggerError(@"The master scroll view cannot be bound to itself");
+        return;
+    }
     
     [self addObserver:self 
            forKeyPath:@"contentOffset"
@@ -30,7 +40,12 @@ static void *s_parallaxBounces = &s_parallaxBounces;
     objc_setAssociatedObject(self, s_parallaxBounces, [NSNumber numberWithBool:bounces], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-// TODO: What if UIScrollView already implements this method? Swizzle?
+- (void)removeSynchronization
+{
+    objc_setAssociatedObject(self, s_parallaxScrollViews, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_parallaxBounces, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {   
     if ([keyPath isEqualToString:@"contentOffset"]) {

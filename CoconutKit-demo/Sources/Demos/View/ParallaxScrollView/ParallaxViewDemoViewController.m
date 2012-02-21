@@ -76,13 +76,13 @@
     self.treesScrollView.contentSize = self.treesImageView.frame.size;
     
     // Create parallax effect
-    [self.textView setupParallaxWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
-                                        bounces:NO];
-    [self.treesScrollView setupParallaxWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
-                                                        self.mountainsScrollView, 
-                                                        self.grassScrollView, 
-                                                        nil]
-                                               bounces:YES      /* irrelevant here. The master scroll view bounces property has been set to NO in the nib */];
+    [self.textView synchronizeWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
+                                      bounces:NO];
+    [self.treesScrollView synchronizeWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
+                                                      self.mountainsScrollView, 
+                                                      self.grassScrollView, 
+                                                      nil]
+                                             bounces:YES      /* irrelevant here. The master scroll view bounces property has been set to NO in the nib */];
 }
 
 #pragma mark Orientation management
