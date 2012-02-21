@@ -342,12 +342,12 @@
         return;
     }
     
+    // Remove the old view controller
+    [self.oldContainerContent removeViewFromContainerView];
+    
     if ([self isViewVisible]) {
         UIViewController *appearingViewController = self.containerContent.viewController;
-        UIViewController *disappearingViewController = self.oldContainerContent.viewController;
-        
-        // Remove the old view controller
-        [self.oldContainerContent removeViewFromContainerView];
+        UIViewController *disappearingViewController = self.oldContainerContent.viewController;        
         
         [disappearingViewController viewDidDisappear:animated];
         [appearingViewController viewDidAppear:animated];
@@ -360,9 +360,7 @@
     }
     
     // Discard the old view controller
-    if ([animation.tag isEqualToString:@"add_animation"]) {
-        self.oldContainerContent = nil;
-    }
+    self.oldContainerContent = nil;
 }
 
 #pragma mark HLSReloadable protocol implementation
