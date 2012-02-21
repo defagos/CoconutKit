@@ -1,20 +1,20 @@
 //
-//  ParallaxViewDemoViewController.m
+//  ParallaxScrollingDemoViewController.m
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 20.02.12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "ParallaxViewDemoViewController.h"
+#import "ParallaxScrollingDemoViewController.h"
 
-@interface ParallaxViewDemoViewController ()
+@interface ParallaxScrollingDemoViewController ()
 
 - (void)setupParallax;
 
 @end
 
-@implementation ParallaxViewDemoViewController
+@implementation ParallaxScrollingDemoViewController
 
 #pragma mark Object creation and destruction
 
@@ -104,7 +104,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallax scroll view", @"Parallax scroll view");
+    self.title = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
 }
 
 #pragma mark Action callbacks

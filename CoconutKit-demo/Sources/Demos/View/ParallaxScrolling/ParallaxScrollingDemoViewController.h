@@ -1,5 +1,5 @@
 //
-//  ParallaxViewDemoViewController.h
+//  ParallaxScrollingDemoViewController.h
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 20.02.12.
@@ -8,7 +8,7 @@
 
 #import "HLSViewController.h"
 
-@interface ParallaxViewDemoViewController : HLSViewController {
+@interface ParallaxScrollingDemoViewController : HLSViewController {
 @private
     UITextView *m_textView;
     UIScrollView *m_skyScrapperScrollView;

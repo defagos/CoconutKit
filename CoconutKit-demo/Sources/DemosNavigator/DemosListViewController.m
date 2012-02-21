@@ -14,7 +14,7 @@
 #import "FixedSizeViewController.h"
 #import "KenBurnsSlideshowDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
-#import "ParallaxViewDemoViewController.h"
+#import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
@@ -73,7 +73,7 @@ typedef enum {
     ViewDemoIndexKenBurns,
     ViewDemoIndexSkinning,
     ViewDemoIndexWebView,
-    ViewDemoIndexParallaxScrollView,
+    ViewDemoIndexParallaxScrolling,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 } ViewDemoIndex;
@@ -309,8 +309,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexParallaxScrollView: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallax scroll view", @"Parallax scroll view");
+                case ViewDemoIndexParallaxScrolling: {
+                    cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
                     break;
                 }
                 
@@ -461,8 +461,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexParallaxScrollView: {
-                    demoViewController = [[[ParallaxViewDemoViewController alloc] init] autorelease];
+                case ViewDemoIndexParallaxScrolling: {
+                    demoViewController = [[[ParallaxScrollingDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

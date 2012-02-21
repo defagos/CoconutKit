@@ -375,7 +375,6 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 						<string key="NSFrame">{{324, 903}, {188, 37}}</string>
 						<reference key="NSSuperview" ref="658810709"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -447,7 +446,6 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<bool key="IBUIOn">YES</bool>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 64}, {768, 960}}</string>
@@ -716,7 +714,7 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">ParallaxViewDemoViewController</string>
+				<string key="-1.CustomClassName">ParallaxScrollingDemoViewController</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -753,7 +751,7 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ParallaxViewDemoViewController</string>
+					<string key="className">ParallaxScrollingDemoViewController</string>
 					<string key="superclassName">HLSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="reset:">id</string>
@@ -835,7 +833,7 @@ IGF0IGRhcGlidXMgZGlhbS4</bytes>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ParallaxViewDemoViewController.h</string>
+						<string key="minorKey">./Classes/ParallaxScrollingDemoViewController.h</string>
 					</object>
 				</object>
 			</array>
