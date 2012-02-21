@@ -13,6 +13,7 @@
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
+#import "UIViewController+HLSExtensions.h"
 
 const NSUInteger kStackMinimalCapacity = 2;
 const NSUInteger kStackDefaultCapacity = 2;

@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
 #import "NSArray+HLSExtensions.h"
+#import "UIViewController+HLSExtensions.h"
 
 @interface HLSPlaceholderViewController () <HLSAnimationDelegate>
 
