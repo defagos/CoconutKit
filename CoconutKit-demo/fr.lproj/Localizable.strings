@@ -13,6 +13,7 @@
 "Birthdate"="Date de naissance";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
+"Bounces"="Rebond";
 "Button label, default"="Libellé de bouton, normal";
 "Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
@@ -79,6 +80,7 @@
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
 "Reset"="Mettre à zéro";
+"Reset (animated)"="Mettre à zéro (animé)";
 "Reset model fields"="Effacer champs modèle";
 "Reset text fields"="Effacer champs textuels";
 "Resizing"="Redimensionnement";

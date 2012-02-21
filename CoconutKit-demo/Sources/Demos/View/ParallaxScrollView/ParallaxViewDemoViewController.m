@@ -8,6 +8,12 @@
 
 #import "ParallaxViewDemoViewController.h"
 
+@interface ParallaxViewDemoViewController ()
+
+- (void)setupParallax;
+
+@end
+
 @implementation ParallaxViewDemoViewController
 
 #pragma mark Object creation and destruction
@@ -35,6 +41,7 @@
     self.mountainsImageView = nil;
     self.grassImageView = nil;
     self.treesImageView = nil;
+    self.bouncesSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -61,6 +68,8 @@
 
 @synthesize treesImageView = m_treesImageView;
 
+@synthesize bouncesSwitch = m_bouncesSwitch;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -75,14 +84,7 @@
     self.grassScrollView.contentSize = self.grassImageView.frame.size;
     self.treesScrollView.contentSize = self.treesImageView.frame.size;
     
-    // Create parallax effect
-    [self.textView synchronizeWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
-                                      bounces:NO];
-    [self.treesScrollView synchronizeWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
-                                                      self.mountainsScrollView, 
-                                                      self.grassScrollView, 
-                                                      nil]
-                                             bounces:YES      /* irrelevant here. The master scroll view bounces property has been set to NO in the nib */];
+    [self setupParallax];
 }
 
 #pragma mark Orientation management
@@ -103,6 +105,33 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Parallax scroll view", @"Parallax scroll view");
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)reset:(id)sender
+{
+    [self.treesScrollView setContentOffset:CGPointMake(0.f, 0.f) animated:YES];
+}
+
+- (IBAction)toggleBounces:(id)sender
+{
+    [self setupParallax];
+}
+     
+#pragma mark Parallax effect
+
+- (void)setupParallax
+{
+    [self.textView synchronizeWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
+                                      bounces:self.bouncesSwitch.on];
+    
+    /* The bounces argument is irrelevant here. The master scroll view bounces property has namely been set to NO in the nib */
+    [self.treesScrollView synchronizeWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
+                                                      self.mountainsScrollView, 
+                                                      self.grassScrollView, 
+                                                      nil]
+                                             bounces:self.bouncesSwitch.on];
 }
 
 @end

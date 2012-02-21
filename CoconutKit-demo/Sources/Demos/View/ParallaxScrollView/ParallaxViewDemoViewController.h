@@ -22,6 +22,8 @@
     UIImageView *m_mountainsImageView;
     UIImageView *m_grassImageView;
     UIImageView *m_treesImageView;
+    
+    UISwitch *m_bouncesSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
@@ -36,5 +38,10 @@
 @property (nonatomic, retain) IBOutlet UIImageView *mountainsImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *grassImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *treesImageView;
+
+@property (nonatomic, retain) IBOutlet UISwitch *bouncesSwitch;
+
+- (IBAction)reset:(id)sender;
+- (IBAction)toggleBounces:(id)sender;
 
 @end
