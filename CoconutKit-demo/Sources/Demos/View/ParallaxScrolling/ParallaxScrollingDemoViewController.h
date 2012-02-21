@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSViewController.h"
-
 @interface ParallaxScrollingDemoViewController : HLSViewController {
 @private
     UITextView *m_textView;

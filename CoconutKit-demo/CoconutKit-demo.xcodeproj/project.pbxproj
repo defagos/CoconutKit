@@ -304,7 +304,7 @@
 		6F9C46B714C5C36300824AB2 /* img_coconut4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_coconut4.jpg; sourceTree = "<group>"; };
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6FC5E8B214F380B500C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
+		6FC5E8B214F380B500C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
 		6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
 		6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
