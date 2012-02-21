@@ -16,12 +16,12 @@
 
 /**
  * There are at least three way to detect contentOffset changes of the master view:
- *   - set a delegate which transparently forwards events to the real scroll view delegate, and which
- *     performs synchronization in the scrollViewDidScroll: method. This might break if UIScrollViewDelegate
- *     changes
- *   - use KVO on contentOffset. The problem is that the method to implement could be overridden by
- *     existing subclasses or by categories, which is not robust enough
- *   - swizzling contentOffset mutators. This is the safest approach which was retained here
+ *   - use an internal delegate which transparently forwards events to the real scroll view delegate, and which
+ *     performs synchronization in its scrollViewDidScroll: method implementation. This might break if 
+ *     UIScrollViewDelegate changes, though
+ *   - use KVO on contentOffset. The problem is that the observeValue... method to implement could be overridden by
+ *     existing subclasses of UIScrollView, or even by categories. This is clearly not robust enough
+ *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
 // Associated object keys
@@ -40,17 +40,19 @@ static void (*s_UIScrollView__setContentOffset)(id, SEL, CGPoint) = NULL;
 
 @implementation UIScrollView (HLSExtensions)
 
+#pragma mark Synchronizing scroll views
+
 - (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(scrollViews, UIScrollView);
     
     if (! scrollViews || [scrollViews count] == 0) {
-        HLSLoggerError(@"No scroll views to bind");
+        HLSLoggerError(@"No scroll views to synchronize");
         return;
     }
     
     if ([scrollViews containsObject:self]) {
-        HLSLoggerError(@"The master scroll view cannot be bound to itself");
+        HLSLoggerError(@"A scroll view cannot be synchronized with itself");
         return;
     }
     
@@ -68,16 +70,24 @@ static void (*s_UIScrollView__setContentOffset)(id, SEL, CGPoint) = NULL;
 
 @implementation UIScrollView (HLSExtensionsPrivate)
 
+#pragma mark Class methods
+
 + (void)load
 {
-    s_UIScrollView__setContentOffset = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, @selector(setContentOffset:), @selector(swizzledSetContentOffset:));
+    s_UIScrollView__setContentOffset = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
+                                                                                      @selector(setContentOffset:), 
+                                                                                      @selector(swizzledSetContentOffset:));
 }
+
+#pragma mark Swizzled methods
 
 - (void)swizzledSetContentOffset:(CGPoint)contentOffset
 {
     (*s_UIScrollView__setContentOffset)(self, @selector(setContentOffset:), contentOffset);
     [self synchronizeScrolling];
 }
+
+#pragma mark Scrolling synchronization
 
 - (void)synchronizeScrolling
 {
@@ -86,9 +96,9 @@ static void (*s_UIScrollView__setContentOffset)(id, SEL, CGPoint) = NULL;
         return;
     }
     
-    // Find where the relative offset position (in [0; 1]) in the receiver
+    // Calculate the relative offset position (in [0; 1]) of the receiver
     CGFloat relativeXPos = 0.f;
-    if (floateq(self.contentSize.width, CGRectGetWidth(self.frame))) {
+    if (floatle(self.contentSize.width, CGRectGetWidth(self.frame))) {
         relativeXPos = 0.f;
     }
     else {
@@ -96,7 +106,7 @@ static void (*s_UIScrollView__setContentOffset)(id, SEL, CGPoint) = NULL;
     }
     
     CGFloat relativeYPos = 0.f;
-    if (floateq(self.contentSize.height, CGRectGetHeight(self.frame))) {
+    if (floatle(self.contentSize.height, CGRectGetHeight(self.frame))) {
         relativeYPos = 0.f;
     }
     else {
@@ -122,7 +132,7 @@ static void (*s_UIScrollView__setContentOffset)(id, SEL, CGPoint) = NULL;
         }            
     }
     
-    // Apply the same relative offset position to all synchronized scroll views
+    // Apply the same relative offset position to all scroll views to keep in sync
     for (UIScrollView *scrollView in synchronizedScrollViews) {
         CGFloat xPos = relativeXPos * (scrollView.contentSize.width - CGRectGetWidth(scrollView.frame));
         CGFloat yPos = relativeYPos * (scrollView.contentSize.height - CGRectGetHeight(scrollView.frame));

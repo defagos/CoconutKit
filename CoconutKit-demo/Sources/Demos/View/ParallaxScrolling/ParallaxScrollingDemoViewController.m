@@ -126,7 +126,7 @@
     [self.textView synchronizeWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
                                       bounces:self.bouncesSwitch.on];
     
-    /* The bounces argument is irrelevant here. The master scroll view bounces property has namely been set to NO in the nib */
+    // The bounces argument is irrelevant here. The master scroll view bounces property has namely been set to NO in the nib
     [self.treesScrollView synchronizeWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
                                                       self.mountainsScrollView, 
                                                       self.grassScrollView, 
