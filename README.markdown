@@ -35,6 +35,7 @@ Note that depending on the CoconutKit components you use you might need to link 
 
 * CoreData.framework
 * MessageUI.framework
+* QuartzCore.framework
 
 Some code snippets have been provided in the Snippets directory (and more will probably be added in the future). Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
 
