@@ -12,6 +12,7 @@
 "Animation"="Animation";
 "Birthdate"="Birthdate";
 "Blocking"="Blocking";
+"Bounces"="Bounces";
 "Button label, default"="Button label, default";
 "Button label, highlighted"="Button label, highlighted";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="By default, an HLSTextField exits edit mode when the user taps outside it";
@@ -66,6 +67,7 @@
 "Next"="Next";
 "Number of children"="Number of children";
 "Music players"="Music players";
+"Parallax scrolling"="Parallax scrolling";
 "Parallel processing"="Parallel processing";
 "Phones"="Phones";
 "Play"="Play";
@@ -79,6 +81,7 @@
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
 "Reset"="Reset";
+"Reset (animated)"="Reset (animated)";
 "Reset model fields"="Reset model fields";
 "Reset text fields"="Reset text fields";
 "Resizing"="Resizing";

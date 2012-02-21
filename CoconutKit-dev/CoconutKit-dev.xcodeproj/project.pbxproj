@@ -180,6 +180,8 @@
 		6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
 		6FADE8E014BA04C9007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
+		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
 		6FDE686B14BC8CFC00F8CD3A /* sample_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE686A14BC8CFC00F8CD3A /* sample_text.html */; };
@@ -190,6 +192,12 @@
 		6FDE68AA14BD6C6E00F8CD3A /* bkgr_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A914BD6C6E00F8CD3A /* bkgr_bar.png */; };
 		6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */; };
+		6FEEF83414F27C00001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */; };
+		6FEEF83514F27C00001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */; };
+		6FEEF83614F27C00001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */; };
+		6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */; };
+		6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; };
+		6FEEF86C14F29CA2001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
@@ -489,6 +497,9 @@
 		6FADE88514BA04C9007EE121 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
+		6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
+		6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDE686A14BC8CFC00F8CD3A /* sample_text.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text.html; sourceTree = "<group>"; };
@@ -503,6 +514,13 @@
 		6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FE8EA8F14CFE48E0081F249 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
+		6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
+		6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
+		6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
+		6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
+		6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
@@ -800,6 +818,8 @@
 				6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */,
 				6FE8EA8F14CFE48E0081F249 /* UINavigationController+HLSActionSheet.h */,
 				6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */,
+				6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */,
+				6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */,
 				6F948C2B14D6E80F003BF765 /* UITextField+HLSExtensions.h */,
 				6F948C2C14D6E80F003BF765 /* UITextField+HLSExtensions.m */,
 				6FADE69C14BA04A6007EE121 /* UITextField+HLSValidation.h */,
@@ -881,6 +901,11 @@
 				6FADE7E414BA04C8007EE121 /* img_coconut2.jpg */,
 				6FADE7E514BA04C8007EE121 /* img_coconut3.jpg */,
 				6FADE7E614BA04C8007EE121 /* img_coconut4.jpg */,
+				6FEEF83114F27C00001585A6 /* parallax_demo_grass_layer.png */,
+				6FEEF84F14F2886F001585A6 /* parallax_demo_mountains_layer.png */,
+				6FEEF83214F27C00001585A6 /* parallax_demo_sky_layer.png */,
+				6FEEF83314F27C00001585A6 /* parallax_demo_trees_layer.png */,
+				6FEEF86B14F29CA2001585A6 /* skyscraper.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1110,6 +1135,7 @@
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
 				6FADE84514BA04C8007EE121 /* KenBurnsSlideshow */,
+				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6FADE85814BA04C9007EE121 /* TextFields */,
@@ -1295,6 +1321,16 @@
 				6FADE88314BA04C9007EE121 /* _Person.m */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */ = {
+			isa = PBXGroup;
+			children = (
+				6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */,
+				6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */,
+				6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */,
+			);
+			path = ParallaxScrolling;
 			sourceTree = "<group>";
 		};
 		6FDB126B1404D19E00469DEC /* CoconutKit-demo */ = {
@@ -1504,6 +1540,12 @@
 				6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */,
 				6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */,
 				6FDE68AA14BD6C6E00F8CD3A /* bkgr_bar.png in Resources */,
+				6FEEF83414F27C00001585A6 /* parallax_demo_grass_layer.png in Resources */,
+				6FEEF83514F27C00001585A6 /* parallax_demo_sky_layer.png in Resources */,
+				6FEEF83614F27C00001585A6 /* parallax_demo_trees_layer.png in Resources */,
+				6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */,
+				6FEEF86C14F29CA2001585A6 /* skyscraper.jpg in Resources */,
+				6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1643,6 +1685,8 @@
 				6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
 				6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */,
 				6F948C2D14D6E80F003BF765 /* UITextField+HLSExtensions.m in Sources */,
+				6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */,
+				6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

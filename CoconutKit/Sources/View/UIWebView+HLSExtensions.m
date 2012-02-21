@@ -15,7 +15,6 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 
 @interface UIWebView (HLSExtensionsPrivate)
 
-- (UIScrollView *)webScrollView;
 - (NSArray *)shadowViews;
 
 @end
@@ -23,6 +22,18 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 @implementation UIWebView (HLSExtensions)
 
 #pragma mark Accessors and mutators
+
+- (UIScrollView *)webScrollView
+{
+    for (id subview in self.subviews) {
+        if ([[subview class] isSubclassOfClass:[UIScrollView class]]) {
+            return (UIScrollView *)subview;
+        }
+    }
+    
+    HLSLoggerError(@"Scroll view not found in web view view hierarchy");
+    return nil;
+}
 
 - (void)makeBackgroundTransparent
 {
@@ -67,18 +78,6 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 @end
 
 @implementation UIWebView (HLSExtensionsPrivate)
-
-- (UIScrollView *)webScrollView
-{
-    for (id subview in self.subviews) {
-        if ([[subview class] isSubclassOfClass:[UIScrollView class]]) {
-            return (UIScrollView *)subview;
-        }
-    }
-    
-    HLSLoggerError(@"Scroll view not found in web view view hierarchy");
-    return nil;
-}
 
 // The shadow is obtained by the superposition of several image views. Remove them
 - (NSArray *)shadowViews

@@ -9,6 +9,13 @@
 @interface UIWebView (HLSExtensions)
 
 /**
+ * Return the scroll view embedded into the web view
+ *
+ * Starting with iOS 5 you should use the scrollView property which has been made available
+ */
+- (UIScrollView *)webScrollView;
+
+/**
  * Make the web view background transparent
  */
 - (void)makeBackgroundTransparent;
