@@ -205,8 +205,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidLoad_Imp)(self, @selector(viewDidLoad));
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
-        HLSLoggerWarn(@"Unexpected viewDidLoad call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewDidLoad] has not been called correctly");
+        HLSLoggerWarn(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setOriginalViewSize:self.view.bounds.size];
@@ -218,8 +219,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewWillAppear_Imp)(self, @selector(viewWillAppear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
-        HLSLoggerWarn(@"Unexpected viewWillAppear: call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewWillAppear:] has not been called correctly");
+        HLSLoggerWarn(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear];
@@ -230,8 +232,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidAppear_Imp)(self, @selector(viewDidAppear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        HLSLoggerWarn(@"Unexpected viewDidAppear: call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewDidAppear:] has not been called correctly");
+        HLSLoggerWarn(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
@@ -242,8 +245,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewWillDisappear_Imp)(self, @selector(viewWillDisappear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
-        HLSLoggerWarn(@"Unexpected viewWillDisappear: call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewWillDisappear:] has not been called correctly");
+        HLSLoggerWarn(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
@@ -255,8 +259,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidDisappear_Imp)(self, @selector(viewDidDisappear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        HLSLoggerWarn(@"Unexpected viewDidDisappear: call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewDidDisappear:] has not been called correctly");
+        HLSLoggerWarn(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
@@ -267,8 +272,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (s_UIViewController__viewDidUnload_Imp)(self, @selector(viewDidUnload));
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload]) {
-        HLSLoggerWarn(@"Unexpected viewDidUnload call. The view lifecycle of a container object is probably incorrect, or "
-                      "[super viewDidUnload] has not been called correctly");
+        HLSLoggerWarn(@"The viewDidUnload method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidUnload] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
