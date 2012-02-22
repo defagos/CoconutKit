@@ -63,4 +63,5 @@ UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UIToolbar+HLSExtensions.h
 UIView+HLSExtensions.h
+UIViewController+HLSExtensions.h
 UIWebView+HLSExtensions.h

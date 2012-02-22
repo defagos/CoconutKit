@@ -29,4 +29,5 @@ UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
+UIViewController+HLSExtensions.m
 UIWebView+HLSExtensions.m

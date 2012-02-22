@@ -615,6 +615,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     }
     
     self.addedToContainerView = YES;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
     
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
@@ -667,6 +668,8 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     [self.viewController.view removeFromSuperview];
     self.addedToContainerView = NO;
     
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    
     // Restore view controller original properties (this way, if addViewToContainerView:inContainerContentStack:
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
@@ -681,7 +684,49 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     if ([self.viewController isViewLoaded]) {
         self.viewController.view = nil;
         [self.viewController viewDidUnload];
+        
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
+    [self.viewController viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
+        return;
+    }
+
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
+    [self.viewController viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
+    [self.viewController viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
+    [self.viewController viewDidDisappear:animated];
 }
 
 #pragma mark Animation

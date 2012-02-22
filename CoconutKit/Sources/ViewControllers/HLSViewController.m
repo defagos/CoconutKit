@@ -12,7 +12,6 @@
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
-#import "UITextField+HLSExtensions.h"
 
 @interface HLSViewController ()
 
@@ -44,8 +43,6 @@
 // Common initialization code
 - (void)hlsViewControllerInit
 {
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
-    m_originalViewSize = CGSizeZero;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self localize];
     HLSLoggerDebug(@"View controller %@ initialized", self);
@@ -74,33 +71,11 @@
     }
 }
 
-- (HLSViewControllerLifeCyclePhase)lifeCyclePhase
-{
-    return m_lifeCyclePhase;
-}
-
-- (BOOL)isViewVisible
-{
-    return m_lifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear;
-}
-
-- (CGSize)originalViewSize
-{
-    if (m_lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidLoad) {
-        HLSLoggerError(@"The view has not been created. Size is unknown yet");
-        return m_originalViewSize;
-    }
-    
-    return m_originalViewSize;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    m_originalViewSize = self.view.bounds.size;
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
     [self localize];
     HLSLoggerDebug(@"View controller %@: view did load", self);
 }
@@ -108,29 +83,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
     HLSLoggerDebug(@"View controller %@: view will appear", self);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
     HLSLoggerDebug(@"View controller %@: view did appear", self);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UITextField currentTextField] resignFirstResponder];
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
     HLSLoggerDebug(@"View controller %@: view will disappear", self);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
     HLSLoggerDebug(@"View controller %@: view did disappear", self);
 }
 
@@ -138,26 +108,7 @@
 {
     [super viewDidUnload];
     [self releaseViews];
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
     HLSLoggerDebug(@"View controller %@: view did unload", self);
-}
-
-#pragma mark View management
-
-/**
- * Remark: We have NOT overridden the view property to perform the viewDidUnload, and on purpose. This would have been
- *         very convenient, but this would have been unusual and in most cases the viewDidUnload would have
- *         been sent twice (when a container controller nils a view it manages, it is likely it will set the view
- *         to nil and send it the viewDidUnload afterwards. If all view controller containers of the world knew
- *         about HLSViewController, this would work, but since they don't this would lead to viewDidUnload be
- *         called twice in most cases)! 
- */
-- (void)unloadViews
-{
-    if ([self isViewLoaded]) {
-        self.view = nil;
-        [self viewDidUnload];        
-    }
 }
 
 #pragma mark Localization
