@@ -89,6 +89,57 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     return [objc_getAssociatedObject(self, s_originalViewSizeKey) CGSizeValue];
 }
 
+- (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
+{
+    HLSViewControllerLifeCyclePhase currentLifeCyclePhase = [self lifeCyclePhase];
+    switch (lifeCyclePhase) {
+        case HLSViewControllerLifeCyclePhaseViewDidLoad: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseInitialized
+                || currentLifeCyclePhase  == HLSViewControllerLifeCyclePhaseViewDidUnload;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewWillAppear: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidLoad
+                || currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidDisappear;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewDidAppear: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewWillAppear;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewWillDisappear: {
+            // Having a view controller transition from ViewWillAppear to ViewWillDisappear directly is quite rare (in
+            // general we expect it to transition to ViewDidAppear first), but this can still happen if two container 
+            // animations are played simultaneously (i.e. if two containers are nested). If the first container is
+            // revealing the view controller while this view controller is being replaced in the second, and depending
+            // on the timing of the animations, the view controller might have disappeared before it actually appeared
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidAppear        // <-- usual case
+                || currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewWillAppear;      // <-- rare (see above)
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewDidDisappear: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewWillDisappear;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewDidUnload: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidLoad
+                || currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidDisappear;
+            break;
+        }
+            
+        default: {
+            HLSLoggerWarn(@"Invalid lifecycle phase, or testing for initialization");
+            return NO;
+            break;
+        }
+    }
+}
+
 @end
 
 @implementation UIViewController (HLSExtensionsPrivate)
@@ -153,7 +204,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidLoad_Imp)(self, @selector(viewDidLoad));
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
         HLSLoggerWarn(@"Unexpected viewDidLoad call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewDidLoad] has not been called correctly");
     }
@@ -166,8 +217,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewWillAppear_Imp)(self, @selector(viewWillAppear:), animated);
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidLoad
-            && [self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidDisappear) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
         HLSLoggerWarn(@"Unexpected viewWillAppear: call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewWillAppear:] has not been called correctly");
     }
@@ -179,7 +229,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidAppear_Imp)(self, @selector(viewDidAppear:), animated);
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewWillAppear) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
         HLSLoggerWarn(@"Unexpected viewDidAppear: call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewDidAppear:] has not been called correctly");
     }
@@ -191,7 +241,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewWillDisappear_Imp)(self, @selector(viewWillDisappear:), animated);
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidAppear) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
         HLSLoggerWarn(@"Unexpected viewWillDisappear: call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewWillDisappear:] has not been called correctly");
     }
@@ -204,7 +254,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (*s_UIViewController__viewDidDisappear_Imp)(self, @selector(viewDidDisappear:), animated);
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewWillDisappear) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
         HLSLoggerWarn(@"Unexpected viewDidDisappear: call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewDidDisappear:] has not been called correctly");
     }
@@ -216,8 +266,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     (s_UIViewController__viewDidUnload_Imp)(self, @selector(viewDidUnload));
     
-    if ([self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidLoad
-            && [self lifeCyclePhase] != HLSViewControllerLifeCyclePhaseViewDidDisappear) {
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload]) {
         HLSLoggerWarn(@"Unexpected viewDidUnload call. The view lifecycle of a container object is probably incorrect, or "
                       "[super viewDidUnload] has not been called correctly");
     }

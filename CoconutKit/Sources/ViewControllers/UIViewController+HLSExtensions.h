@@ -46,7 +46,7 @@ typedef enum {
 - (void)unloadViews;
 
 /**
- * Return the life cycle phase the view controller is currently in
+ * Return the lifecycle phase the view controller is currently in
  * Not meant to be overridden
  */
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase;
@@ -60,5 +60,10 @@ typedef enum {
  * Original size of the view right after creation (i.e. right after xib deserialization or construction by loadView)
  */
 - (CGSize)originalViewSize;
+
+/**
+ * Return YES iff the current view controller lifecycle can be transitioned to the one received as parameter
+ */
+- (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 
 @end

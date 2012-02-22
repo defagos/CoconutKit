@@ -181,40 +181,38 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Forward events to the top view controller
-    UIViewController *topViewController = [self topViewController];
+    HLSContainerContent *topContainerContent = self.topContainerContent;
     if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
-        [self.delegate stackController:self willShowViewController:topViewController animated:animated];
+        [self.delegate stackController:self willShowViewController:topContainerContent.viewController animated:animated];
     }
     
-    [topViewController viewWillAppear:animated];
+    [topContainerContent viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 	
-    UIViewController *topViewController = [self topViewController];
+    HLSContainerContent *topContainerContent = self.topContainerContent;
     if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
-        [self.delegate stackController:self didShowViewController:topViewController animated:animated];
+        [self.delegate stackController:self didShowViewController:topContainerContent.viewController animated:animated];
     }
     
-    [topViewController viewDidAppear:animated];
+    [topContainerContent viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    UIViewController *topViewController = [self topViewController];
-    [topViewController viewWillDisappear:animated];
+    [self.topContainerContent viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    UIViewController *topViewController = [self topViewController];
-    [topViewController viewDidDisappear:animated];
+    [self.topContainerContent viewDidDisappear:animated];
 }
 
 #pragma mark Orientation management
@@ -446,9 +444,9 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     // forwarding properties
     appearingContainerContent.forwardingProperties = self.forwardingProperties;
     
-    if ([self isViewVisible]) {        
-        [disappearingContainerContent.viewController viewWillDisappear:animated];
-        [appearingContainerContent.viewController viewWillAppear:animated];
+    if ([self isViewVisible]) {
+        [disappearingContainerContent viewWillDisappear:animated];
+        [appearingContainerContent viewWillAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
             [self.delegate stackController:self
@@ -479,7 +477,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if ([self isViewVisible]) {
-        [disappearingContainerContent.viewController viewDidDisappear:animated];
+        [disappearingContainerContent viewDidDisappear:animated];
     }
     
     // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
@@ -489,7 +487,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     disappearingContainerContent.forwardingProperties = NO;
     
     if ([self isViewVisible]) {
-        [appearingContainerContent.viewController viewDidAppear:animated];
+        [appearingContainerContent viewDidAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
             [self.delegate stackController:self

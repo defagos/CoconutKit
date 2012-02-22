@@ -138,7 +138,7 @@
         [self.delegate placeholderViewController:self willShowInsetViewController:insetViewController animated:animated];
     }
     
-    [insetViewController viewWillAppear:animated];
+    [self.containerContent viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -150,23 +150,21 @@
         [self.delegate placeholderViewController:self didShowInsetViewController:insetViewController animated:animated];
     }
     
-    [insetViewController viewDidAppear:animated];
+    [self.containerContent viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    UIViewController *insetViewController = [self insetViewController];
-    [insetViewController viewWillDisappear:animated];
+    [self.containerContent viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    UIViewController *insetViewController = [self insetViewController];
-    [insetViewController viewDidDisappear:animated];
+    [self.containerContent viewDidDisappear:animated];
 }
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)
@@ -323,15 +321,12 @@
     }
     
     if ([self isViewVisible]) {
-        UIViewController *appearingViewController = self.containerContent.viewController;
-        UIViewController *disappearingViewController = self.oldContainerContent.viewController;
-        
-        [disappearingViewController viewWillDisappear:animated];
-        [appearingViewController viewWillAppear:animated];
+        [self.oldContainerContent viewWillDisappear:animated];
+        [self.containerContent viewWillAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
             [self.delegate placeholderViewController:self
-                         willShowInsetViewController:appearingViewController
+                         willShowInsetViewController:self.containerContent.viewController
                                             animated:animated];
         }
     }
@@ -347,15 +342,12 @@
     [self.oldContainerContent removeViewFromContainerView];
     
     if ([self isViewVisible]) {
-        UIViewController *appearingViewController = self.containerContent.viewController;
-        UIViewController *disappearingViewController = self.oldContainerContent.viewController;        
-        
-        [disappearingViewController viewDidDisappear:animated];
-        [appearingViewController viewDidAppear:animated];
+        [self.oldContainerContent viewDidDisappear:animated];
+        [self.containerContent viewDidAppear:animated];
         
         if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
             [self.delegate placeholderViewController:self
-                          didShowInsetViewController:appearingViewController
+                          didShowInsetViewController:self.containerContent.viewController
                                             animated:animated];
         }
     }
