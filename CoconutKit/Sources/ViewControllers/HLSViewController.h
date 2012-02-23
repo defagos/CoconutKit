@@ -6,20 +6,6 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// Lifecycle phases
-typedef enum {
-    HLSViewControllerLifeCyclePhaseEnumBegin = 0,
-    HLSViewControllerLifeCyclePhaseInitialized = HLSViewControllerLifeCyclePhaseEnumBegin,
-    HLSViewControllerLifeCyclePhaseViewDidLoad,
-    HLSViewControllerLifeCyclePhaseViewWillAppear,
-    HLSViewControllerLifeCyclePhaseViewDidAppear,
-    HLSViewControllerLifeCyclePhaseViewWillDisappear,
-    HLSViewControllerLifeCyclePhaseViewDidDisappear,
-    HLSViewControllerLifeCyclePhaseViewDidUnload,
-    HLSViewControllerLifeCyclePhaseEnumEnd,
-    HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
-} HLSViewControllerLifeCyclePhase;
-
 /**
  * Raw view controller class adding useful stuff to UIViewController:
  *   - localization is isolated in a single method. This is not only convenient to have a single place for localization code, 
@@ -27,7 +13,6 @@ typedef enum {
  *     it possible to change a view controller localization at runtime (if this is not needed, HLSViewController of course
  *     remains compatible with the usual way of changing localization via system preferences)
  *   - view cleanup and general cleanup are separated
- *   - the view lifecycle state can be queried
  *   - overriding methods is cleaner: The rule is now "Always call the super implementation first" (the behavior is otherwise
  *     undefined)
  *
@@ -55,23 +40,11 @@ typedef enum {
  * set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use the 
  * console when running your application to have a look at view controller events.
  *
- * Remark:
- * -------
- * As written in UIKit documentation (though slightly scattered all around), view controller's view frame dimensions
- * are only known when viewWillAppear: gets called, not earlier (this means you should avoid making calculations
- * depending on it in the viewDidLoad method; the frame is the one you got from the xib, not necessarily the one which
- * will be used after status, navigation bar, etc. have been added, or after some container controller updates the
- * view controller's frame for display).
- * The same is true for rotations: The final frame dimensions are known in willAnimateRotationToInterfaceOrientation:duration:
- * (1-step rotation) or willAnimateFirstHalfOfRotationToInterfaceOrientation:duration: (2-step rotation, deprecated
- * starting with iOS 5).
- *
  * Designated initializer: initWithNibName:bundle:
  */
 @interface HLSViewController : UIViewController {
 @private
-    HLSViewControllerLifeCyclePhase m_lifeCyclePhase;
-    CGSize m_originalViewSize;
+    
 }
 
 /**
@@ -88,13 +61,6 @@ typedef enum {
 - (void)releaseViews;
 
 /**
- * Convenience method to set the view controller to nil and forward viewDidUnload to its view controller
- * Not meant to be overridden
- * Note: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
- */
-- (void)unloadViews;
-
-/**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
  * called when needed. The method body itself should not contain any logic, only localization code (e.g. setting outlets using
  * NSLocalizedString macros, reloading table views containing localized strings, etc.)
@@ -104,21 +70,5 @@ typedef enum {
  * (from NSBundle+HLSDynamicLocalization.h) - you must access localized resources only from within this method.
  */
 - (void)localize;
-
-/**
- * Return the life cycle phase the view controller is currently in
- * Not meant to be overridden
- */
-- (HLSViewControllerLifeCyclePhase)lifeCyclePhase;
-
-/**
- * Return YES iff the view has appeared
- */
-- (BOOL)isViewVisible;
-
-/**
- * Original size of the view right after creation (i.e. right after xib deserialization or construction by loadView)
- */
-- (CGSize)originalViewSize;
 
 @end

@@ -18,14 +18,17 @@ NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
 UIActionSheet+HLSExtensions.m
+UIBarButtonItem+HLSActionSheet.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
 UINavigationBar+HLSExtensions.m
 UINavigationController+HLSActionSheet.m
+UIScrollView+HLSExtensions.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
+UIViewController+HLSExtensions.m
 UIWebView+HLSExtensions.m

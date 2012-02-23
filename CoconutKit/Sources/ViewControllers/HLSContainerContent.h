@@ -8,6 +8,7 @@
 
 #import "HLSAnimation.h"
 #import "HLSTransitionStyle.h"
+#import "UIViewController+HLSExtensions.h"
 
 /**
  * View controllers inserted into view controller containers exhibit common properties:
@@ -20,6 +21,7 @@
  *   - a view controller container must retain the view controllers it manages
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
  *     happen that a client caches this view controller for later reuse
+ *   - view lifecycle events must be forwarded correctly from the container to the contained view controllers
  *   - we sometimes may want the view controller container to forward some properties of a contained view controller
  *     (e.g. title, navigation elements, toolbar, etc.) transparently
  *   - a view controller added to a a container should be able to present or dismiss another view controller modally
@@ -49,7 +51,8 @@
  * When implementing a view controller container, use HLSContainerContent objects (retained by the container) to take 
  * ownership of a view controller when it is inserted, and simply release the HLSContainerContent object when the view 
  * controller gets removed from the container. When interacting with the view controller, use the HLSContainerContent
- * object as a proxy to help you guarantee that the common properties listed above are fulfilled.
+ * object as a proxy to help you guarantee that the common properties listed above are fulfilled. In particular,
+ * use all provided methods for animating views, forwarding lifecycle events, etc.
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
@@ -69,6 +72,7 @@
     CGRect m_originalViewFrame;
     CGFloat m_originalViewAlpha;
     UIViewAutoresizing m_originalAutoresizingMask;
+    HLSViewControllerLifeCyclePhase m_lifeCyclePhase;
 }
 
 /**
@@ -148,6 +152,18 @@
  * controller
  */
 - (void)releaseViews;
+
+/**
+ * Forward the corresponding view lifecycle events to the view controller, ensuring that forwarding occurs only if
+ * the view controller current lifecycle phase is coherent
+ *
+ * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
+ *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
+ */
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewDidDisappear:(BOOL)animated;
 
 /**
  * Create the animation needed to display the view controller's view in the container view. If the receiver is part

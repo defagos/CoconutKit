@@ -35,6 +35,7 @@ Note that depending on the CoconutKit components you use you might need to link 
 
 * CoreData.framework
 * MessageUI.framework
+* QuartzCore.framework
 
 Some code snippets have been provided in the Snippets directory (and more will probably be added in the future). Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
 
@@ -110,8 +111,12 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 
 ### Release notes
 
+### Version 1.1.3
+* Added scroll view synchronization. This makes parallax scrolling easy to implement
+* Fixed bugs (tab bar controller in custom containers, simultaneous container add / removal operations, iOS 4 crashes) as well as link issues with HLSActionSheet
+
 #### Version 1.1.2
-* Container view controllers bug fix for iOS 5: viewWillAppear: and viewDidAppear: are now forwarded correctly to child view controllers when the container is the root of an application or presented modally
+* Container view controller bug fix for iOS 5: viewWillAppear: and viewDidAppear: are now forwarded correctly to child view controllers when the container is the root of an application or presented modally
 
 #### Version 1.1.1
 * CGAffineTransform replaced by CATransform3D for creating richer animations

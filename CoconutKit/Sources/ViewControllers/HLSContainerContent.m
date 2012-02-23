@@ -453,13 +453,12 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
-    self.viewController = nil;
-    
     // See comment in initWithViewController:containerController:transitionStyle:duration:
     if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
         [self.viewController removeFromParentViewController];
     }
     
+    self.viewController = nil;
     self.containerController = nil;
     
     [super dealloc];
@@ -549,6 +548,31 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
         self.viewController.view.frame = containerView.bounds;
     }
     
+    // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
+    // view controller's view (if any), this view is neither reloaded nor added as subview of the tab bar controller's view 
+    // again. The tab bar controller ends up empty.
+    //
+    // This happens only if the new iOS 5 -[UIViewController addChildViewController:] method has been called to declare the 
+    // tab bar controller as child of a custom container implemented using HLSContainerContent. But since this containment
+    // relationship must be declared for correct behavior on iOS 5, we have to find a workaround.
+    //
+    // Steps to reproduce the issue (with the code below commented out):
+    //   - push a view controller wrapped into a tab bar controller into a custom stack-based container (e.g. HLSStackController)
+    //   - add another view controller on top
+    //   - cover with a modal, and trigger a memory warning
+    //   - dismiss the modal, and remove the view controller on top. The tab bar controller does not get properly reloaded
+    // 
+    // To fix this issue, we force the tab bar controller to reload its child view controller by setting the current view
+    // controller again.
+    if ([self.viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)self.viewController;
+        if (tabBarController.selectedViewController && ! [tabBarController.selectedViewController isViewLoaded]) {
+            UIViewController *currentViewController = tabBarController.selectedViewController;
+            tabBarController.selectedViewController = nil;
+            tabBarController.selectedViewController = currentViewController;
+        }
+    }
+    
     // If a non-empty stack has been provided, find insertion point
     HLSAssertObjectsInEnumerationAreKindOfClass(containerContentStack, HLSContainerContent);
     if ([containerContentStack count] != 0) {
@@ -591,6 +615,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     }
     
     self.addedToContainerView = YES;
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
     
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
@@ -643,6 +668,8 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     [self.viewController.view removeFromSuperview];
     self.addedToContainerView = NO;
     
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
+    
     // Restore view controller original properties (this way, if addViewToContainerView:inContainerContentStack:
     // is called again later, it will get the view controller's view in its original state)
     self.viewController.view.frame = self.originalViewFrame;
@@ -657,7 +684,49 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     if ([self.viewController isViewLoaded]) {
         self.viewController.view = nil;
         [self.viewController viewDidUnload];
+        
+        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
+    [self.viewController viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
+        return;
+    }
+
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
+    [self.viewController viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
+    [self.viewController viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
+        return;
+    }
+    
+    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
+    [self.viewController viewDidDisappear:animated];
 }
 
 #pragma mark Animation
