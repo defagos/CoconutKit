@@ -9,7 +9,7 @@
 #import "TableSearchDisplayDemoViewController.h"
 
 #import "DeviceInfo.h"
-#import "FixedSizeViewController.h"
+#import "StretchableViewController.h"
 
 typedef enum {
     ScopeButtonIndexEnumBegin = 0,
@@ -177,8 +177,8 @@ typedef enum {
     
     // Push another dummy level
     if (self.navigationController) {
-        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
-        [self.navigationController pushViewController:fixedSizeViewController animated:YES];        
+        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        [self.navigationController pushViewController:stretchableViewController animated:YES];        
     }
 }
 
