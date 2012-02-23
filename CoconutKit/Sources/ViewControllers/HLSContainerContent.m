@@ -775,7 +775,6 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         viewAnimationStep21.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor, 1.f);
-        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
