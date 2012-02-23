@@ -18,6 +18,7 @@ NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
 UIActionSheet+HLSExtensions.m
+UIBarButtonItem+HLSActionSheet.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIImage+HLSExtensions.m
