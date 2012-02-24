@@ -33,7 +33,7 @@ __attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
     s_dateFormatter = [[NSDateFormatter alloc] init];
     [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
     
-    [pool release];
+    [pool drain];
 }
 
 @implementation NSDate (HLSExtensions)
