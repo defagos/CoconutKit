@@ -11,6 +11,10 @@
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 
+#import <objc/runtime.h>
+
+static UIScrollView *scrollView_Imp(UIWebView *self, SEL _cmd);
+
 HLSLinkCategory(UIWebView_HLSExtensions)
 
 @interface UIWebView (HLSExtensionsPrivate)
@@ -21,19 +25,23 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 
 @implementation UIWebView (HLSExtensions)
 
-#pragma mark Accessors and mutators
+#pragma mark Class methods
 
-- (UIScrollView *)webScrollView
++ (void)load
 {
-    for (id subview in self.subviews) {
-        if ([[subview class] isSubclassOfClass:[UIScrollView class]]) {
-            return (UIScrollView *)subview;
-        }
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    if (! class_getInstanceMethod(self, @selector(scrollView))) {
+        NSString *types = [NSString stringWithFormat:@"%s%s%s", @encode(UIScrollView *), @encode(id), @encode(SEL)];
+        class_addMethod(self, NSSelectorFromString(@"scrollView"), (IMP)scrollView_Imp, [types cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     
-    HLSLoggerError(@"Scroll view not found in web view view hierarchy");
-    return nil;
+    [pool drain];
 }
+
+#pragma mark Accessors and mutators
+
+@dynamic scrollView;
 
 - (void)makeBackgroundTransparent
 {
@@ -61,20 +69,6 @@ HLSLinkCategory(UIWebView_HLSExtensions)
     }
 }
 
-@dynamic scrollEnabled;
-
-- (BOOL)isScrollEnabled
-{
-    UIScrollView *scrollView = [self webScrollView];
-    return scrollView.scrollEnabled;
-}
-
-- (void)setScrollEnabled:(BOOL)scrollEnabled
-{
-    UIScrollView *scrollView = [self webScrollView];
-    scrollView.scrollEnabled = scrollEnabled;
-}
-
 @end
 
 @implementation UIWebView (HLSExtensionsPrivate)
@@ -83,8 +77,7 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 - (NSArray *)shadowViews
 {
     NSMutableArray *shadowViews = [NSMutableArray array];
-    UIScrollView *scrollView = [self webScrollView];
-    for (UIView *subView in [scrollView subviews]) {
+    for (UIView *subView in [self.scrollView subviews]) {
         if ([subView isKindOfClass:[UIImageView class]]) {
             [shadowViews addObject:subView];
         }
@@ -97,3 +90,17 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 }
 
 @end
+
+#pragma mark Method implementation functions
+
+static UIScrollView *scrollView_Imp(UIWebView *self, SEL _cmd)
+{
+    for (id subview in self.subviews) {
+        if ([[subview class] isSubclassOfClass:[UIScrollView class]]) {
+            return (UIScrollView *)subview;
+        }
+    }
+    
+    HLSLoggerError(@"Scroll view not found in web view view hierarchy");
+    return nil;
+}
