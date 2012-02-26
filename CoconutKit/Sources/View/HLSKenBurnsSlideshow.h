@@ -19,7 +19,7 @@
 @interface HLSKenBurnsSlideshow : UIView {
 @private
     NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
-    NSArray *m_images;
+    NSArray *m_imageNamesOrPaths;
     NSMutableArray *m_animations;               // Two animations in parallel (at most)
     BOOL m_running;
     NSInteger m_currentImageIndex;
@@ -30,24 +30,32 @@
 }
 
 /**
- * The array of images to be displayed. Images will be displayed in a endless loop, either sequentially or in a random
- * order (see random property)
+ * An array giving the names (for images inside the main bundle) or the full path of the images to be displayed. Images
+ * are displayed in an endless loop, either sequentially or in a random order (see random property). 
+ *
+ * This property can be changed while the slideshow is running
  */
-@property (nonatomic, retain) NSArray *images;
+@property (nonatomic, retain) NSArray *imageNamesOrPaths;
 
 /**
- * How much time an image stays visible. Default is 10 seconds
+ * How much time an image stays visible. Default is 10 seconds. 
+ *
+ * This property can be changed while the slideshow is running
  */
 @property (nonatomic, assign) NSTimeInterval imageDuration;
 
 /**
- * The duration of the cross dissolve transition between two images. Default is 3 seconds
+ * The duration of the cross dissolve transition between two images. Default is 3 seconds. 
+ *
+ * This property can be changed while the slideshow is running
  */
 @property (nonatomic, assign) NSTimeInterval transitionDuration;
 
 /**
  * If set to YES, images will be played in a random order. If set to NO, they are played sequentially
  * Default is NO
+ *
+ * This property can be changed while the slideshow is running
  */
 @property (nonatomic, assign) BOOL random;
 

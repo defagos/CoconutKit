@@ -20,6 +20,7 @@
 "Capitalized string in Localizable.strings"="Chaîne de Localizable.strings capitalisée";
 "Change"="Changer";
 "Change color"="Changer couleur";
+"Change image set"="Changer les images";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
 "City"="Ville";
 "Click for missing translation"="Cliquer pour traduction manquante";
@@ -76,6 +77,7 @@
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Push"="Push";
+"Random"="Aléatoire";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";

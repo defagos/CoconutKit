@@ -23,6 +23,10 @@
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6F948C2D14D6E80F003BF765 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2C14D6E80F003BF765 /* UITextField+HLSExtensions.m */; };
+		6FA9B09B14F8E753008B6D5A /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09714F8E753008B6D5A /* img_apple1.jpg */; };
+		6FA9B09C14F8E753008B6D5A /* img_apple2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09814F8E753008B6D5A /* img_apple2.jpg */; };
+		6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09914F8E753008B6D5A /* img_apple3.jpg */; };
+		6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09A14F8E753008B6D5A /* img_apple4.jpg */; };
 		6FADE6B414BA04A7007EE121 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */; };
 		6FADE6B514BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */; };
 		6FADE6B614BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62214BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
@@ -230,6 +234,10 @@
 		6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F948C2B14D6E80F003BF765 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F948C2C14D6E80F003BF765 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FA9B09714F8E753008B6D5A /* img_apple1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple1.jpg; sourceTree = "<group>"; };
+		6FA9B09814F8E753008B6D5A /* img_apple2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple2.jpg; sourceTree = "<group>"; };
+		6FA9B09914F8E753008B6D5A /* img_apple3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple3.jpg; sourceTree = "<group>"; };
+		6FA9B09A14F8E753008B6D5A /* img_apple4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple4.jpg; sourceTree = "<group>"; };
 		6FADE61D14BA04A6007EE121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE61F14BA04A6007EE121 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -902,6 +910,10 @@
 				6FADE7E014BA04C8007EE121 /* cell_bkgr_brown_large_selected.png */,
 				6FADE7E114BA04C8007EE121 /* icn_bookmark.png */,
 				6FADE7E214BA04C8007EE121 /* icn_folder.png */,
+				6FA9B09714F8E753008B6D5A /* img_apple1.jpg */,
+				6FA9B09814F8E753008B6D5A /* img_apple2.jpg */,
+				6FA9B09914F8E753008B6D5A /* img_apple3.jpg */,
+				6FA9B09A14F8E753008B6D5A /* img_apple4.jpg */,
 				6FADE7E314BA04C8007EE121 /* img_coconut1.jpg */,
 				6FADE7E414BA04C8007EE121 /* img_coconut2.jpg */,
 				6FADE7E514BA04C8007EE121 /* img_coconut3.jpg */,
@@ -1551,6 +1563,10 @@
 				6FEEF85014F2886F001585A6 /* parallax_demo_mountains_layer.png in Resources */,
 				6FEEF86C14F29CA2001585A6 /* skyscraper.jpg in Resources */,
 				6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
+				6FA9B09B14F8E753008B6D5A /* img_apple1.jpg in Resources */,
+				6FA9B09C14F8E753008B6D5A /* img_apple2.jpg in Resources */,
+				6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */,
+				6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

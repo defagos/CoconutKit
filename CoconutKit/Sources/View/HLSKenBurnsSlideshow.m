@@ -71,8 +71,6 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         [self.animations addObject:animation];
     }
     
-    self.images = [NSArray array];
-    
     self.imageDuration = kKenBurnsDefaultImageDuration;
     self.transitionDuration = kKenBurnsDefaultTransitionDuration;
     self.random = NO;
@@ -83,7 +81,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     [self stop];
     
     self.imageViews = nil;
-    self.images = nil;
+    self.imageNamesOrPaths = nil;
     self.animations = nil;
     
     [super dealloc];
@@ -93,22 +91,33 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @synthesize imageViews = m_imageViews;
 
-@synthesize images = m_images;
+@synthesize imageNamesOrPaths = m_imageNamesOrPaths;
 
-- (void)setImages:(NSArray *)images
+- (void)setImageNamesOrPaths:(NSArray *)imageNamesOrPaths
 {   
-    HLSAssertObjectsInEnumerationAreKindOfClass(images, UIImage);
-    if (m_running) {
-        HLSLoggerWarn(@"Cannot add an image while the animation is running");
+    HLSAssertObjectsInEnumerationAreKindOfClass(imageNamesOrPaths, NSString);
+    
+    if (m_imageNamesOrPaths == imageNamesOrPaths) {
         return;
     }
     
-    if (m_images == images) {
-        return;
+    if (m_currentImageIndex != -1) {
+        // Try to find whether the current image is also in the new array. If the answer is
+        // yes, start at the corresponding location to guarantee we won't see the same image
+        // soon afterwards (if images are not displayed randomly, of course)
+        NSString *currentImageNameOrPath = [m_imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+        NSUInteger currentImageIndexInNewArray = [imageNamesOrPaths indexOfObject:currentImageNameOrPath];
+        if (currentImageIndexInNewArray != NSNotFound) {
+            m_currentImageIndex = currentImageIndexInNewArray;
+        }
+        // Otherwise start at the beginning
+        else {
+            m_currentImageIndex = -1;
+        }
     }
     
-    [m_images release];
-    m_images = [images retain];
+    [m_imageNamesOrPaths release];
+    m_imageNamesOrPaths = [imageNamesOrPaths retain];
 }
 
 @synthesize animations = m_animations;
@@ -153,8 +162,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    if ([self.images count] == 0) {
-        HLSLoggerInfo(@"No images loaded. Nothing to animate");
+    if ([self.imageNamesOrPaths count] == 0) {
+        HLSLoggerInfo(@"No images to display. Nothing to animate");
         return;
     }
     
@@ -174,16 +183,25 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 {
     // Find the involved image
     if (self.random) {
-        m_currentImageIndex = arc4random() % [self.images count];
+        m_currentImageIndex = arc4random() % [self.imageNamesOrPaths count];
     }
     else {
-        m_currentImageIndex = (m_currentImageIndex + 1) % [self.images count];
+        m_currentImageIndex = (m_currentImageIndex + 1) % [self.imageNamesOrPaths count];
     }
     
     // Find the involved image view
     m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
     UIImageView *imageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
-    UIImage *image = [self.images objectAtIndex:m_currentImageIndex];
+    
+    // Load the image (try to find in bundle first)
+    NSString *imageNameOrPath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+    UIImage *image = [UIImage imageNamed:imageNameOrPath];
+    if (! image) {
+        image = [UIImage imageWithContentsOfFile:imageNameOrPath];
+    }
+    if (! image) {
+        HLSLoggerWarn(@"Missing image %@", imageNameOrPath);
+    }
     
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused

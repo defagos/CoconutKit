@@ -8,6 +8,12 @@
 
 #import "KenBurnsSlideshowDemoViewController.h"
 
+@interface KenBurnsSlideshowDemoViewController ()
+
+- (void)loadImages;
+
+@end
+
 @implementation KenBurnsSlideshowDemoViewController
 
 #pragma mark Object creation and destruction
@@ -25,11 +31,14 @@
     [super releaseViews];
     
     self.slideshow = nil;
+    self.randomSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize slideshow = m_slideshow;
+
+@synthesize randomSwitch = m_randomSwitch;
 
 #pragma mark View lifecycle
 
@@ -37,11 +46,9 @@
 {
     [super viewDidLoad];
     
-    self.slideshow.images = [NSArray arrayWithObjects:[UIImage imageNamed:@"img_coconut1.jpg"],
-                             [UIImage imageNamed:@"img_coconut2.jpg"],
-                             [UIImage imageNamed:@"img_coconut3.jpg"],
-                             [UIImage imageNamed:@"img_coconut4.jpg"],
-                             nil];
+    self.randomSwitch.on = self.slideshow.random;
+    
+    [self loadImages];
 }
 
 #pragma mark Orientation management
@@ -74,6 +81,29 @@
 - (IBAction)stop:(id)sender
 {
     [self.slideshow stop];
+}
+
+- (IBAction)changeImages:(id)sender
+{
+    m_secondSet = ! m_secondSet;
+    [self loadImages];
+}
+
+- (IBAction)toggleRandom:(id)sender
+{
+    self.slideshow.random = self.randomSwitch.on;
+}
+
+#pragma mark Slideshow
+
+- (void)loadImages
+{
+    if (m_secondSet) {
+        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg", nil];
+    }
+    else {
+        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_coconut1.jpg", @"img_coconut2.jpg", @"img_coconut3.jpg", @"img_coconut4.jpg", nil];
+    }
 }
 
 @end

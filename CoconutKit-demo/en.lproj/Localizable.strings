@@ -20,6 +20,7 @@
 "Capitalized string in Localizable.strings"="Capitalized string in Localizable.strings";
 "Change"="Change";
 "Change color"="Change color";
+"Change image set"="Change image set";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "City"="City";
 "Click for missing translation"="Click for missing translation";
@@ -77,6 +78,7 @@
 "Portrait only"="Portrait only";
 "Previous"="Previous";
 "Push"="Push";
+"Random"="Random";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
 "Remove"="Remove";
