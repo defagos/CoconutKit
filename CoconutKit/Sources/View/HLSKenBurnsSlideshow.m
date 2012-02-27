@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "UIImage+HLSExtensions.h"
 
 static const NSTimeInterval kKenBurnsDefaultImageDuration = 10.;
 static const NSTimeInterval kKenBurnsDefaultTransitionDuration = 3.;
@@ -101,19 +102,24 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    if (m_currentImageIndex != -1) {
-        // Try to find whether the current image is also in the new array. If the answer is
-        // yes, start at the corresponding location to guarantee we won't see the same image
-        // soon afterwards (if images are not displayed randomly, of course)
-        NSString *currentImageNameOrPath = [m_imageNamesOrPaths objectAtIndex:m_currentImageIndex];
-        NSUInteger currentImageIndexInNewArray = [imageNamesOrPaths indexOfObject:currentImageNameOrPath];
-        if (currentImageIndexInNewArray != NSNotFound) {
-            m_currentImageIndex = currentImageIndexInNewArray;
-        }
-        // Otherwise start at the beginning
-        else {
-            m_currentImageIndex = -1;
-        }
+    if (imageNamesOrPaths) {
+        if (m_currentImageIndex != -1) {
+            // Try to find whether the current image is also in the new array. If the answer is
+            // yes, start at the corresponding location to guarantee we won't see the same image
+            // soon afterwards (if images are not displayed randomly, of course)
+            NSString *currentImageNameOrPath = [m_imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+            NSUInteger currentImageIndexInNewArray = [imageNamesOrPaths indexOfObject:currentImageNameOrPath];
+            if (currentImageIndexInNewArray != NSNotFound) {
+                m_currentImageIndex = currentImageIndexInNewArray;
+            }
+            // Otherwise start at the beginning
+            else {
+                m_currentImageIndex = -1;
+            }
+        }        
+    }
+    else {
+        [self stop];
     }
     
     [m_imageNamesOrPaths release];
@@ -152,6 +158,11 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 }
 
 @synthesize random = m_random;
+
+- (BOOL)isRunning
+{
+    return m_running;
+}
 
 #pragma mark Playing the slideshow
 
@@ -201,6 +212,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     }
     if (! image) {
         HLSLoggerWarn(@"Missing image %@", imageNameOrPath);
+        image = [UIImage imageWithColor:self.backgroundColor];
     }
     
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily

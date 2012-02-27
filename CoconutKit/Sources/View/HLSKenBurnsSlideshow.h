@@ -67,4 +67,9 @@
 - (void)play;
 - (void)stop;
 
+/**
+ * Return YES iff the slideshow is running
+ */
+- (BOOL)isRunning;
+
 @end
