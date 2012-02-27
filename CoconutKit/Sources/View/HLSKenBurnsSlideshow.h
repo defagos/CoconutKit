@@ -14,6 +14,8 @@
  * images property to the array of images which must be displayed. Other properties provide for further
  * customization.
  *
+ * You should not change the frame of a slideshow while it is running. This does not behave properly for the moment.
+ *
  * Designated initializer: initWithFrame:
  */
 @interface HLSKenBurnsSlideshow : UIView {
