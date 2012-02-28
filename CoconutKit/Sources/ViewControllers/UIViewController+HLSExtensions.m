@@ -19,6 +19,7 @@ HLSLinkCategory(UIViewController_HLSExtensions)
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
 static void *s_originalViewSizeKey = &s_originalViewSizeKey;
+static void *s_previouslyActiveTextFieldKey = &s_previouslyActiveTextFieldKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__initWithNibName_bundle_Imp)(id, SEL, id, id) = NULL;
@@ -241,6 +242,13 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
+    
+    // Restore previous first responder (if any)
+    UITextField *previouslyActiveTextField = objc_getAssociatedObject(self, s_previouslyActiveTextFieldKey);
+    if (previouslyActiveTextField) {
+        [previouslyActiveTextField becomeFirstResponder];
+        objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
 }
 
 - (void)swizzledViewWillDisappear:(BOOL)animated
@@ -253,8 +261,13 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
                        "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
+    // Automatic keyboard dismissal when the view disappears (will be restored when the view appears again)
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
-    [[UITextField currentTextField] resignFirstResponder];
+    UITextField *currentTextField = [UITextField currentTextField];
+    if ([currentTextField isDescendantOfView:self.view]) {
+        objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, currentTextField, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [currentTextField resignFirstResponder];
+    }
 }
 
 - (void)swizzledViewDidDisappear:(BOOL)animated
@@ -281,6 +294,8 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
+    
+    objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
