@@ -1,12 +1,12 @@
 //
-//  HLSKenBurnsSlideshow.m
+//  HLSSlideshow.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 17.10.11.
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "HLSKenBurnsSlideshow.h"
+#import "HLSSlideshow.h"
 
 #import "HLSAnimation.h"
 #import "HLSAssert.h"
@@ -14,13 +14,13 @@
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
 
-static const NSTimeInterval kKenBurnsDefaultImageDuration = 10.;
-static const NSTimeInterval kKenBurnsDefaultTransitionDuration = 3.;
-static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
+static const NSTimeInterval kSlideshowDefaultImageDuration = 10.;
+static const NSTimeInterval kSlideshowDefaultTransitionDuration = 3.;
+static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
-@interface HLSKenBurnsSlideshow () <HLSAnimationDelegate>
+@interface HLSSlideshow () <HLSAnimationDelegate>
 
-- (void)hlsKenBurnsSlideshowInit;
+- (void)hlsSlideshowInit;
 
 @property (nonatomic, retain) NSArray *imageViews;
 @property (nonatomic, retain) NSMutableArray *animations;
@@ -34,14 +34,14 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 
 @end
 
-@implementation HLSKenBurnsSlideshow
+@implementation HLSSlideshow
 
 #pragma mark Object creation and destruction
 
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        [self hlsKenBurnsSlideshowInit];
+        [self hlsSlideshowInit];
     }
     return self;
 }
@@ -49,12 +49,12 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self hlsKenBurnsSlideshowInit];
+        [self hlsSlideshowInit];
     }
     return self;
 }
 
-- (void)hlsKenBurnsSlideshowInit
+- (void)hlsSlideshowInit
 {
     self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
     
@@ -72,8 +72,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
         [self.animations addObject:animation];
     }
     
-    self.imageDuration = kKenBurnsDefaultImageDuration;
-    self.transitionDuration = kKenBurnsDefaultTransitionDuration;
+    self.imageDuration = kSlideshowDefaultImageDuration;
+    self.transitionDuration = kSlideshowDefaultTransitionDuration;
     self.random = NO;
 }
 
@@ -89,6 +89,8 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize effect = m_effect;
 
 @synthesize imageViews = m_imageViews;
 
@@ -134,7 +136,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
 {
     if (doublelt(imageDuration, 0.)) {
         HLSLoggerWarn(@"Image duration must be > 0; fixed to default value");
-        imageDuration = kKenBurnsDefaultImageDuration;
+        imageDuration = kSlideshowDefaultImageDuration;
     }
     
     m_imageDuration = imageDuration;
@@ -241,7 +243,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
     imageView.alpha = 0.f;
     
     // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
-    CGFloat scaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
     
     // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
     // scale factor so that the image view still covers self
@@ -257,7 +259,7 @@ static const CGFloat kKenBurnsMaxScaleFactorDelta = 0.4f;
                                                     CATransform3DMakeTranslation(xOffset, yOffset, 0.f));
     
     // Pick up random scale factor to reach at the end of the animation. Same constraints as above
-    CGFloat finalScaleFactor = 1.f + kKenBurnsMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
     CGFloat maxFinalXOffset = (finalScaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
     CGFloat maxFinalYOffset = (finalScaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
     CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;

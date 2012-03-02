@@ -7,7 +7,6 @@ HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSFloat.h
-HLSKenBurnsSlideshow.h
 HLSKeyboardInformation.h
 HLSLogger.h
 HLSManagedObjectCopying.h
@@ -18,6 +17,7 @@ HLSOrientationCloner.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
+HLSSlideshow.h
 HLSStackController.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h

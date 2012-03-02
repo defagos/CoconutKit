@@ -17,7 +17,7 @@
     #import "HLSCursor.h"
     #import "HLSError.h"
     #import "HLSFloat.h"
-    #import "HLSKenBurnsSlideshow.h"
+    #import "HLSSlideshow.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLogger.h"
     #import "HLSManagedObjectCopying.h"

@@ -73,7 +73,7 @@
 		6FADE6DF14BA04A7007EE121 /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68114BA04A6007EE121 /* HLSTaskOperation.m */; };
 		6FADE6E014BA04A7007EE121 /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68414BA04A6007EE121 /* HLSActionSheet.m */; };
 		6FADE6E114BA04A7007EE121 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68614BA04A6007EE121 /* HLSCursor.m */; };
-		6FADE6E214BA04A7007EE121 /* HLSKenBurnsSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68814BA04A6007EE121 /* HLSKenBurnsSlideshow.m */; };
+		6FADE6E214BA04A7007EE121 /* HLSSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68814BA04A6007EE121 /* HLSSlideshow.m */; };
 		6FADE6E314BA04A7007EE121 /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68A14BA04A6007EE121 /* HLSNibView.m */; };
 		6FADE6E414BA04A7007EE121 /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */; };
 		6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */; };
@@ -332,8 +332,8 @@
 		6FADE68414BA04A6007EE121 /* HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSActionSheet.m; sourceTree = "<group>"; };
 		6FADE68514BA04A6007EE121 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
 		6FADE68614BA04A6007EE121 /* HLSCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCursor.m; sourceTree = "<group>"; };
-		6FADE68714BA04A6007EE121 /* HLSKenBurnsSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKenBurnsSlideshow.h; sourceTree = "<group>"; };
-		6FADE68814BA04A6007EE121 /* HLSKenBurnsSlideshow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKenBurnsSlideshow.m; sourceTree = "<group>"; };
+		6FADE68714BA04A6007EE121 /* HLSSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSlideshow.h; sourceTree = "<group>"; };
+		6FADE68814BA04A6007EE121 /* HLSSlideshow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSSlideshow.m; sourceTree = "<group>"; };
 		6FADE68914BA04A6007EE121 /* HLSNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNibView.h; sourceTree = "<group>"; };
 		6FADE68A14BA04A6007EE121 /* HLSNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNibView.m; sourceTree = "<group>"; };
 		6FADE68B14BA04A6007EE121 /* HLSSubtitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSubtitleTableViewCell.h; sourceTree = "<group>"; };
@@ -798,12 +798,12 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
-				6FADE68714BA04A6007EE121 /* HLSKenBurnsSlideshow.h */,
-				6FADE68814BA04A6007EE121 /* HLSKenBurnsSlideshow.m */,
 				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
 				6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE68914BA04A6007EE121 /* HLSNibView.h */,
 				6FADE68A14BA04A6007EE121 /* HLSNibView.m */,
+				6FADE68714BA04A6007EE121 /* HLSSlideshow.h */,
+				6FADE68814BA04A6007EE121 /* HLSSlideshow.m */,
 				6FADE68B14BA04A6007EE121 /* HLSSubtitleTableViewCell.h */,
 				6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */,
 				6FADE68D14BA04A6007EE121 /* HLSTableViewCell+Protected.h */,
@@ -1632,7 +1632,7 @@
 				6FADE6DF14BA04A7007EE121 /* HLSTaskOperation.m in Sources */,
 				6FADE6E014BA04A7007EE121 /* HLSActionSheet.m in Sources */,
 				6FADE6E114BA04A7007EE121 /* HLSCursor.m in Sources */,
-				6FADE6E214BA04A7007EE121 /* HLSKenBurnsSlideshow.m in Sources */,
+				6FADE6E214BA04A7007EE121 /* HLSSlideshow.m in Sources */,
 				6FADE6E314BA04A7007EE121 /* HLSNibView.m in Sources */,
 				6FADE6E414BA04A7007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */,

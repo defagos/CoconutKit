@@ -8,12 +8,12 @@
 
 @interface KenBurnsSlideshowDemoViewController : HLSViewController {
 @private
-    HLSKenBurnsSlideshow *m_slideshow;
+    HLSSlideshow *m_slideshow;
     UISwitch *m_randomSwitch;
     BOOL m_secondSet;
 }
 
-@property (nonatomic, retain) IBOutlet HLSKenBurnsSlideshow *slideshow;
+@property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
 @property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
 
 - (IBAction)play:(id)sender;

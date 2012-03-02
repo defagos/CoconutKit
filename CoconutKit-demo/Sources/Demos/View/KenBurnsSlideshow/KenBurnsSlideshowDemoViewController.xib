@@ -34,7 +34,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="265186128">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="279102532">
@@ -42,7 +42,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{20, 20}, {728, 853}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="766305996"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="702632813">
@@ -56,7 +55,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{20, 918}, {150, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="534600584"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -92,7 +90,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{178, 918}, {150, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="501486990"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -115,7 +112,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{558, 918}, {190, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1046417806"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -138,7 +134,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{20, 963}, {150, 21}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="640083975"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -166,7 +161,6 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{163, 963}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -176,8 +170,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{768, 1004}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="279102532"/>
 				<string key="NSReuseIdentifierKey">_NS:195</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -324,7 +316,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="30.CustomClassName">HLSKenBurnsSlideshow</string>
+				<string key="30.CustomClassName">HLSSlideshow</string>
 				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
