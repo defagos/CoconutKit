@@ -8,7 +8,6 @@
 
 #import "HLSSlideshow.h"
 
-#import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -23,14 +22,20 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 - (void)hlsSlideshowInit;
 
 @property (nonatomic, retain) NSArray *imageViews;
-@property (nonatomic, retain) NSMutableArray *animations;
+@property (nonatomic, retain) HLSAnimation *animation;
 
-- (void)playNextImageAnimation;
+- (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
 
-- (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        withScaleFactor:(CGFloat)scaleFactor
-                                xOffset:(CGFloat)xOffset
-                                yOffset:(CGFloat)yOffset;
+- (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                               nextImageView:(UIImageView *)nextImageView
+                                          transitionDuration:(NSTimeInterval)transitionDuration;
+- (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                          nextImageView:(UIImageView *)nextImageView;
+- (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
+                    currentImageView:(UIImageView *)currentImageView
+                       nextImageView:(UIImageView *)nextImageView;
+
+- (void)playNextAnimation;
 
 @end
 
@@ -59,7 +64,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
     
     self.imageViews = [NSArray array];
-    self.animations = [NSMutableArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
         UIImageView *imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -67,9 +71,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         [self addSubview:imageView];
         
         self.imageViews = [self.imageViews arrayByAddingObject:imageView];
-        
-        HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:nil];
-        [self.animations addObject:animation];
     }
     
     self.imageDuration = kSlideshowDefaultImageDuration;
@@ -83,7 +84,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     self.imageViews = nil;
     self.imageNamesOrPaths = nil;
-    self.animations = nil;
+    self.animation = nil;
     
     [super dealloc];
 }
@@ -128,49 +129,48 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     m_imageNamesOrPaths = [imageNamesOrPaths retain];
 }
 
-@synthesize animations = m_animations;
+@synthesize animation = m_animation;
 
 @synthesize imageDuration = m_imageDuration;
 
+#if 0
 - (void)setImageDuration:(NSTimeInterval)imageDuration
 {
-    if (doublelt(imageDuration, 0.)) {
+    if (doublele(imageDuration, 0.)) {
         HLSLoggerWarn(@"Image duration must be > 0; fixed to default value");
         imageDuration = kSlideshowDefaultImageDuration;
     }
     
     m_imageDuration = imageDuration;
 }
+#endif
 
 @synthesize transitionDuration = m_transitionDuration;
 
+#if 0
 - (void)setTransitionDuration:(NSTimeInterval)transitionDuration
 {
     if (doublelt(transitionDuration, 0.)) {
-        HLSLoggerWarn(@"Transition duration must be > 0; fixed to 2/5 of total duration");
-        transitionDuration = 2. * self.imageDuration / 5.;
+        HLSLoggerWarn(@"Transition duration must be >= 0; fixed to 0");
+        transitionDuration = 0.;
     }
-    
-    if (doublelt(self.imageDuration - 2 * transitionDuration, 0.)) {
-        HLSLoggerWarn(@"Transition duration must not exceed half the total duration");
-        transitionDuration = self.imageDuration / 2.;
-    }
-    
+        
     m_transitionDuration = transitionDuration;
 }
+#endif
 
 @synthesize random = m_random;
 
 - (BOOL)isRunning
 {
-    return m_running;
+    return self.animation.running;
 }
 
 #pragma mark Playing the slideshow
 
 - (void)play
 {
-    if (m_running) {
+    if (self.animation.running) {
         HLSLoggerWarn(@"The slideshow is already running");
         return;
     }
@@ -180,34 +180,41 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    m_running = YES;
-    
     for (UIImageView *imageView in self.imageViews) {
         imageView.hidden = NO;
     }
     
     m_currentImageIndex = -1;
+    m_nextImageIndex = -1;
     m_currentImageViewIndex = -1;
     
-    [self playNextImageAnimation];
+    [self playNextAnimation];
 }
 
-- (void)playNextImageAnimation
+- (void)stop
 {
-    // Find the involved image
-    if (self.random) {
-        m_currentImageIndex = arc4random() % [self.imageNamesOrPaths count];
-    }
-    else {
-        m_currentImageIndex = (m_currentImageIndex + 1) % [self.imageNamesOrPaths count];
+    if (! self.animation.running) {
+        HLSLoggerInfo(@"The slideshow is not running");
+        return;
     }
     
-    // Find the involved image view
-    m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
-    UIImageView *imageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
-    
-    // Load the image (try to find in bundle first)
-    NSString *imageNameOrPath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+    [self.animation cancel];    
+}
+
+- (void)skipToNextImage
+{
+    // TODO: Cancel current animation, but still play the next one next
+}
+
+- (void)skipToPreviousImage
+{
+    // TODO: Cancel current animation, and play the previous one next
+}
+
+#pragma mark Creating the animation
+
+- (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath
+{
     UIImage *image = [UIImage imageNamed:imageNameOrPath];
     if (! image) {
         image = [UIImage imageWithContentsOfFile:imageNameOrPath];
@@ -216,148 +223,142 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         HLSLoggerWarn(@"Missing image %@", imageNameOrPath);
         image = [UIImage imageWithColor:self.backgroundColor];
     }
-    
-    // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
-    //       be reused
-    // Aspect ratios of frame and image
-    CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
-    CGFloat imageRatio = image.size.width / image.size.height;
-    
-    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
-    CGFloat zoomScale;
-    // The image is more portrait-shaped than self
-    if (floatlt(imageRatio, frameRatio)) {
-        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
-    }
-    // The image is more landscape-shaped than self
-    else {
-        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
-    }
-    
-    // Update the image view to match the image dimensions with an aspect fill behavior inside self
-    CGFloat scaledImageWidth = image.size.width * zoomScale;
-    CGFloat scaledImageHeight = image.size.height * zoomScale;
-    imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
-    imageView.center = CGPointMake(roundf(CGRectGetWidth(self.frame) / 2.f), roundf(CGRectGetHeight(self.frame) / 2.f));
-    imageView.image = image;
-    imageView.alpha = 0.f;
-    
-    // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
-    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
-    
-    // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
-    // scale factor so that the image view still covers self
-    CGFloat maxXOffset = (scaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
-    CGFloat maxYOffset = (scaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
-    
-    // Pick up some random offsets. Use random factor in [-1;1]
-    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
-    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
-    
-    // Apply initial transform to get initial image view position
-    imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
-                                                    CATransform3DMakeTranslation(xOffset, yOffset, 0.f));
-    
-    // Pick up random scale factor to reach at the end of the animation. Same constraints as above
-    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
-    CGFloat maxFinalXOffset = (finalScaleFactor * scaledImageWidth - CGRectGetWidth(self.frame)) / 2.f;
-    CGFloat maxFinalYOffset = (finalScaleFactor * scaledImageHeight - CGRectGetHeight(self.frame)) / 2.f;
-    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
-    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
-    
-    // Create the corresponding animation and plays it
-    HLSAnimation *animation = [self animationForImageView:imageView 
-                                          withScaleFactor:finalScaleFactor / scaleFactor
-                                                  xOffset:finalXOffset - xOffset 
-                                                  yOffset:finalYOffset - yOffset];
-    [animation playAnimated:YES];
-    
-    [self.animations replaceObjectAtIndex:m_currentImageViewIndex withObject:animation];
+    return image;
 }
 
-- (void)stop
+// TODO: Problem with animation steps during which nothing has to be animated: Their duration is 0. Fix in HLSAnimation.m
+//       e.g. by adding a hidden dummy view to every animation step (of course, this dummy view must not be seen from
+//       the outside)
+- (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                               nextImageView:(UIImageView *)nextImageView
+                                          transitionDuration:(NSTimeInterval)transitionDuration
 {
-    if (! m_running) {
-        HLSLoggerInfo(@"The slideshow is not running");
-        return;
-    }
+    // Display the current image for the duration which has been set (identity view animation step)
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.duration = self.imageDuration;
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.alphaVariation = -0.01f;            // TODO: See above
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:currentImageView];
     
-    for (HLSAnimation *animation in self.animations) {
-        [animation cancel];
-    }
+    // Transition to the next image
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.duration = transitionDuration;
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.alphaVariation = -0.09f;            // TODO: See above
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep22.alphaVariation = 1.f;
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:nextImageView];
     
-    m_running = NO;
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
 }
 
-#pragma mark Creating the animation
-
-- (HLSAnimation *)animationForImageView:(UIImageView *)imageView
-                        withScaleFactor:(CGFloat)scaleFactor
-                                xOffset:(CGFloat)xOffset
-                                yOffset:(CGFloat)yOffset
+- (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                          nextImageView:(UIImageView *)nextImageView
 {
-    // To understand how to calculate the scale factor for each step, divide the total time interval in N equal intervals.
-    // To get a smooth scale animation with total factor scaleFactor, each interval must be assigned a factor (scaleFactor)^(1/N),
-    // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the scale factor
-    // for the m intervals is therefore (scaleFactor)^(m/N), thus the formula for the scale factor of each step.
+    return nil;
+}
+
+- (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
+                    currentImageView:(UIImageView *)currentImageView
+                       nextImageView:(UIImageView *)nextImageView
+{
+    HLSAnimation *animation = nil;
+    switch (effect) {
+        case HLSSlideShowEffectNone: {
+            animation = [self crossDissolveAnimationWithCurrentImageView:currentImageView
+                                                           nextImageView:nextImageView 
+                                                      transitionDuration:0.];
+            break;
+        }
+            
+        case HLSSlideShowEffectCrossDissolve: {
+            animation = [self crossDissolveAnimationWithCurrentImageView:currentImageView
+                                                           nextImageView:nextImageView
+                                                      transitionDuration:self.transitionDuration];
+            break;
+        }
+            
+        case HLSSlideShowEffectKenBurns: {
+            animation = [self kenBurnsAnimationWithCurrentImageView:currentImageView
+                                                      nextImageView:nextImageView];
+            break;
+        }
+            
+        case HLSSlideShowEffectHorizontalRibbon: {
+            // TODO
+            return nil;
+            break;
+        }
+            
+        case HLSSlideshowEffectInverseHorizontalRibbon: {
+            // TODO
+            return nil;
+            break;
+        }
+            
+        case HLSSlideshowEffectVerticalRibbon: {
+            // TODO
+            return nil;
+            break;
+        }
+            
+        case HLSSlideshowEffectInverseVerticalRibbon: {
+            // TODO
+            return nil;
+            break;
+        }
+            
+        default: {
+            HLSLoggerError(@"Unkown effect");
+            return nil;
+            break;
+        }
+    }
     
-    // Fade in step: Scale + fade in
-    HLSAnimationStep *fadeInAnimationStep = [HLSAnimationStep animationStep];
-    fadeInAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    fadeInAnimationStep.duration = self.transitionDuration;
-    HLSViewAnimationStep *fadeInViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat fadeInFactor = powf(scaleFactor, self.transitionDuration / self.imageDuration);
-    CGFloat fadeInXOffset = xOffset * self.transitionDuration / self.imageDuration;
-    CGFloat fadeInYOffset = yOffset * self.transitionDuration / self.imageDuration;
-    fadeInViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(fadeInFactor, fadeInFactor, 1.f),
-                                                            CATransform3DMakeTranslation(fadeInXOffset, fadeInYOffset, 0.f));
-    fadeInViewAnimationStep.alphaVariation = 1.f;
-    [fadeInAnimationStep addViewAnimationStep:fadeInViewAnimationStep forView:imageView];
-    
-    // Main step: Only scale
-    HLSAnimationStep *mainAnimationStep = [HLSAnimationStep animationStep];
-    mainAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    NSTimeInterval mainDuration = self.imageDuration - 2 * self.transitionDuration; 
-    mainAnimationStep.duration = mainDuration;
-    mainAnimationStep.tag = @"zoom";
-    HLSViewAnimationStep *mainViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    CGFloat mainFactor = powf(scaleFactor, mainDuration / self.imageDuration);
-    CGFloat mainXOffset = xOffset * mainDuration / self.imageDuration;
-    CGFloat mainYOffset = yOffset * mainDuration / self.imageDuration;
-    mainViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(mainFactor, mainFactor, 1.f),
-                                                          CATransform3DMakeTranslation(mainXOffset, mainYOffset, 0.f));
-    [mainAnimationStep addViewAnimationStep:mainViewAnimationStep forView:imageView];
-    
-    // Fade out: Scale + fade out
-    HLSAnimationStep *fadeOutAnimationStep = [HLSAnimationStep animationStep];
-    fadeOutAnimationStep.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
-    fadeOutAnimationStep.duration = self.transitionDuration;
-    HLSViewAnimationStep *fadeOutViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    float fadeOutFactor = pow(scaleFactor, self.transitionDuration / self.imageDuration);
-    CGFloat fadeOutXOffset = xOffset * self.transitionDuration / self.imageDuration;
-    CGFloat fadeOutYOffset = yOffset * self.transitionDuration / self.imageDuration;
-    fadeOutViewAnimationStep.transform = CATransform3DConcat(CATransform3DMakeScale(fadeOutFactor, fadeOutFactor, 1.f),
-                                                             CATransform3DMakeTranslation(fadeOutXOffset, fadeOutYOffset, 0.f));
-    fadeOutViewAnimationStep.alphaVariation = -1.f;
-    [fadeOutAnimationStep addViewAnimationStep:fadeOutViewAnimationStep forView:imageView];
-    
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:fadeInAnimationStep, 
-                                                                         mainAnimationStep, 
-                                                                         fadeOutAnimationStep, 
-                                                                         nil]];
     animation.delegate = self;
-    animation.bringToFront = YES;
-    
     return animation;
+}
+
+- (void)playNextAnimation
+{
+    // Find the current / next images
+    if (self.random) {
+        m_currentImageIndex = arc4random() % [self.imageNamesOrPaths count];
+        m_nextImageIndex = arc4random() % [self.imageNamesOrPaths count];
+    }
+    else {
+        m_currentImageIndex = (m_currentImageIndex + 1) % [self.imageNamesOrPaths count];
+        m_nextImageIndex = (m_currentImageIndex + 1) % [self.imageNamesOrPaths count];
+    }
+    
+    // Find the image views to use for the current / next images
+    m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
+    
+    // Assign the images to be displayed during the animation
+    NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+    NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
+    currentImageView.image = [self imageForNameOrPath:currentImagePath];
+    nextImageView.image = [self imageForNameOrPath:nextImagePath];
+    
+    // The current image view is alway fully visible, the next one starts invisible
+    currentImageView.alpha = 1.f;
+    nextImageView.alpha = 0.f;
+    
+    // Create and play the animation
+    HLSAnimation *animation = [self animationForEffect:self.effect
+                                      currentImageView:currentImageView
+                                         nextImageView:nextImageView];
+    [animation playAnimated:YES];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if ([animationStep.tag isEqualToString:@"zoom"]) {
-        [self playNextImageAnimation];
-    }
+    [self playNextAnimation];
 }
 
 @end

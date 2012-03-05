@@ -46,6 +46,8 @@
 {
     [super viewDidLoad];
     
+    self.slideshow.effect = HLSSlideShowEffectNone;
+    
     self.randomSwitch.on = self.slideshow.random;
     
     [self loadImages];

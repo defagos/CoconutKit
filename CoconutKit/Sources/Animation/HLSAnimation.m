@@ -348,12 +348,10 @@
         return;
     }
     
-    if (! m_cancelling) {
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-            [self.delegate animationStepFinished:animationStep animated:m_animated];
-        }        
-    }
+    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        [self.delegate animationStepFinished:animationStep animated:m_animated];
+    }        
     
     [self playNextStepAnimated:m_animated];
 }

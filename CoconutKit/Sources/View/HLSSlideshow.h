@@ -6,13 +6,15 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
+
 /**
- * Available transition effects
+ * Slideshow effects
  */
 typedef enum {
     HLSSlideShowEffectEnumBegin = 0,
-    HLSSlideShowEffectNone = HLSSlideShowEffectEnumBegin,                           // No transition
-    HLSSlideShowEffectCrossDissolve,                                                // Cross-dissolve
+    HLSSlideShowEffectNone = HLSSlideShowEffectEnumBegin,                           // No transition between images
+    HLSSlideShowEffectCrossDissolve,                                                // Cross-dissolve transition between images
     HLSSlideShowEffectKenBurns,                                                     // Ken-Burns effect (random zooming and panning, cross-dissolve)
     HLSSlideShowEffectHorizontalRibbon,                                             // Images slide from left to right
     HLSSlideshowEffectInverseHorizontalRibbon,                                      // Images slide from right to left
@@ -23,24 +25,24 @@ typedef enum {
 } HLSSlideShowEffect;
 
 /**
- * A slideshow creation displaying images using one of several built-in transition effects.
+ * A slideshow displaying images using one of several built-in transition effects.
  *
  * You can instantiate a slideshow view either using a nib or programmatically. It then suffices to set its images property 
- * to the array of images which must be displayed. Other properties provide for further customization.
+ * to the array of images which must be displayed. Other properties provide for further customization, e.g. timing.
  *
  * You should not alter the frame of a slideshow while it is running. This is currently not supported.
  *
  * Designated initializer: initWithFrame:
  */
-@interface HLSSlideshow : UIView {
+@interface HLSSlideshow : UIView <HLSAnimationDelegate> {
 @private
     HLSSlideShowEffect m_effect;
     NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
     NSArray *m_imageNamesOrPaths;
-    NSMutableArray *m_animations;               // Two animations in parallel (at most)
-    BOOL m_running;
     NSInteger m_currentImageIndex;
+    NSInteger m_nextImageIndex;
     NSInteger m_currentImageViewIndex;
+    HLSAnimation *m_animation;
     NSTimeInterval m_imageDuration;
     NSTimeInterval m_transitionDuration;
     BOOL m_random;
@@ -69,8 +71,8 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval imageDuration;
 
 /**
- * The duration of the cross dissolve transition between two images (this setting is ignored by slideshows which do
- * not involve a cross-dissolve transition between images). Default is 3 seconds. 
+ * The duration of the transition between two images (this setting is ignored by slideshows which do not involve a cross-dissolve 
+ * transition between images). Default is 3 seconds. 
  *
  * This property can be changed while the slideshow is running
  */
@@ -89,6 +91,13 @@ typedef enum {
  */
 - (void)play;
 - (void)stop;
+
+/**
+ * Interrupts the current transition and moves to the next or previous image directly (without animation). The animation
+ * starts again after a few seconds of inactivity
+ */
+- (void)skipToNextImage;
+- (void)skipToPreviousImage;
 
 /**
  * Return YES iff the slideshow is running
