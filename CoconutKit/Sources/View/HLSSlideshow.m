@@ -133,7 +133,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 @synthesize imageDuration = m_imageDuration;
 
-#if 0
 - (void)setImageDuration:(NSTimeInterval)imageDuration
 {
     if (doublele(imageDuration, 0.)) {
@@ -143,21 +142,18 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     m_imageDuration = imageDuration;
 }
-#endif
 
 @synthesize transitionDuration = m_transitionDuration;
 
-#if 0
 - (void)setTransitionDuration:(NSTimeInterval)transitionDuration
 {
     if (doublelt(transitionDuration, 0.)) {
         HLSLoggerWarn(@"Transition duration must be >= 0; fixed to 0");
         transitionDuration = 0.;
     }
-        
+    
     m_transitionDuration = transitionDuration;
 }
-#endif
 
 @synthesize random = m_random;
 
@@ -196,9 +192,14 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     if (! self.animation.running) {
         HLSLoggerInfo(@"The slideshow is not running");
         return;
-    }
+    }    
     
-    [self.animation cancel];    
+    [self.animation cancel];
+    
+    for (UIImageView *imageView in self.imageViews) {
+        imageView.image = nil;
+        imageView.hidden = YES;
+    }
 }
 
 - (void)skipToNextImage
@@ -256,7 +257,8 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 - (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                           nextImageView:(UIImageView *)nextImageView
 {
-    return nil;
+    
+    
 }
 
 - (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
@@ -379,10 +381,10 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     }
     
     // Create and play the animation
-    HLSAnimation *animation = [self animationForEffect:self.effect
-                                      currentImageView:currentImageView
-                                         nextImageView:nextImageView];
-    [animation playAnimated:YES];
+    self.animation = [self animationForEffect:self.effect
+                             currentImageView:currentImageView
+                                nextImageView:nextImageView];
+    [self.animation playAnimated:YES];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
