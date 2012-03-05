@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     
-    self.slideshow.effect = HLSSlideShowEffectNone;
+    self.slideshow.effect = HLSSlideShowEffectCrossDissolve;
     
     self.randomSwitch.on = self.slideshow.random;
     

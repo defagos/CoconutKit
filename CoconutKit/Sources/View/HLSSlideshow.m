@@ -244,7 +244,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     animationStep2.duration = transitionDuration;
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.alphaVariation = -0.09f;            // TODO: See above
+    viewAnimationStep21.alphaVariation = -0.99f;            // TODO: See above
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep22.alphaVariation = 1.f;
@@ -320,8 +320,35 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     return animation;
 }
 
-- (void)playNextAnimation
+- (void)displayImage:(UIImage *)image inImageView:(UIImageView *)imageView
 {
+    // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
+    //       be reused
+    // Aspect ratios of frame and image
+    CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
+    CGFloat imageRatio = image.size.width / image.size.height;
+    
+    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
+    CGFloat zoomScale;
+    // The image is more portrait-shaped than self
+    if (floatlt(imageRatio, frameRatio)) {
+        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
+    }
+    // The image is more landscape-shaped than self
+    else {
+        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
+    }
+    
+    // Update the image view to match the image dimensions with an aspect fill behavior inside self
+    CGFloat scaledImageWidth = image.size.width * zoomScale;
+    CGFloat scaledImageHeight = image.size.height * zoomScale;
+    imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
+    imageView.center = CGPointMake(floorf(CGRectGetWidth(self.frame) / 2.f), floorf(CGRectGetHeight(self.frame) / 2.f));
+    imageView.image = image;
+}
+
+- (void)playNextAnimation
+{    
     // Find the current / next images
     if (self.random) {
         m_currentImageIndex = arc4random() % [self.imageNamesOrPaths count];
@@ -332,20 +359,24 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         m_nextImageIndex = (m_currentImageIndex + 1) % [self.imageNamesOrPaths count];
     }
     
-    // Find the image views to use for the current / next images
+    // Find the image views to use for the current / next images. Only unused image views (i.e. with image == nil)
+    // have to be filled at each step
     m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
     UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    if (! currentImageView.image) {
+        currentImageView.alpha = 1.f;
+        NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
+        UIImage *currentImage = [self imageForNameOrPath:currentImagePath];
+        [self displayImage:currentImage inImageView:currentImageView];
+    }
+    
     UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
-    
-    // Assign the images to be displayed during the animation
-    NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
-    NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
-    currentImageView.image = [self imageForNameOrPath:currentImagePath];
-    nextImageView.image = [self imageForNameOrPath:nextImagePath];
-    
-    // The current image view is alway fully visible, the next one starts invisible
-    currentImageView.alpha = 1.f;
-    nextImageView.alpha = 0.f;
+    if (! nextImageView.image) {
+        nextImageView.alpha = 0.f;
+        NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
+        UIImage *nextImage = [self imageForNameOrPath:nextImagePath];
+        [self displayImage:nextImage inImageView:nextImageView];
+    }
     
     // Create and play the animation
     HLSAnimation *animation = [self animationForEffect:self.effect
@@ -358,6 +389,11 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    // Done with the current image view. Mark it as unused so that we know it must be initialized again
+    // when a new image is assigned to it
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    currentImageView.image = nil;
+    
     [self playNextAnimation];
 }
 
