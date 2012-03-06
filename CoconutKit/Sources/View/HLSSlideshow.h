@@ -64,7 +64,7 @@ typedef enum {
 @property (nonatomic, retain) NSArray *imageNamesOrPaths;
 
 /**
- * How much time an image stays visible. Default is 10 seconds. 
+ * How much time an image stays visible alone. Default is 4 seconds. 
  *
  * This property can be changed while the slideshow is running
  */
