@@ -25,6 +25,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 @property (nonatomic, retain) HLSAnimation *animation;
 
 - (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
+- (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image;
 
 - (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                                nextImageView:(UIImageView *)nextImageView
@@ -213,8 +214,9 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     // TODO: Cancel current animation, and play the previous one next
 }
 
-#pragma mark Creating the animation
+#pragma mark Image management
 
+// Return the image corresponding to a name or path. If the image is not found, return a dummy invisible image
 - (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath
 {
     UIImage *image = [UIImage imageNamed:imageNameOrPath];
@@ -223,9 +225,80 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     }
     if (! image) {
         HLSLoggerWarn(@"Missing image %@", imageNameOrPath);
-        image = [UIImage imageWithColor:self.backgroundColor];
+        image = [UIImage imageWithColor:[UIColor clearColor]];
     }
     return image;
+}
+
+// Setup an image view to display a given image. The image view frame is adjusted to get an aspect fill
+// behavior for the image view, and is centered in self
+- (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image
+{
+    // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
+    //       be reused
+    // Aspect ratios of frame and image
+    CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
+    CGFloat imageRatio = image.size.width / image.size.height;
+    
+    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
+    CGFloat zoomScale;
+    // The image is more portrait-shaped than self
+    if (floatlt(imageRatio, frameRatio)) {
+        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
+    }
+    // The image is more landscape-shaped than self
+    else {
+        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
+    }
+    
+    // Update the image view to match the image dimensions with an aspect fill behavior inside self
+    CGFloat scaledImageWidth = ceilf(image.size.width * zoomScale);
+    CGFloat scaledImageHeight = ceilf(image.size.height * zoomScale);
+    imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
+    imageView.center = CGPointMake(floorf(CGRectGetWidth(self.frame) / 2.f), floorf(CGRectGetHeight(self.frame) / 2.f));
+    imageView.layer.transform = CATransform3DIdentity;
+    imageView.image = image;
+}
+
+// Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
+// which can be applied to reach to a new random valid state
+- (void)randomlyMoveAndScaleImageView:(UIImageView *)imageView
+                          scaleFactor:(CGFloat *)pScaleFactor
+                              xOffset:(CGFloat *)pXOffset
+                              yOffset:(CGFloat *)pYOffset
+{
+    // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
+    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    
+    // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
+    // scale factor so that the image view still covers self
+    CGFloat maxXOffset = (scaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
+    CGFloat maxYOffset = (scaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
+    
+    // Pick up some random offsets. Use random factor in [-1;1]
+    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
+    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
+    
+    // Pick up random scale factor to reach at the end of the animation. Same constraints as above
+    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat maxFinalXOffset = (finalScaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
+    CGFloat maxFinalYOffset = (finalScaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
+    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
+    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
+    
+    // Apply initial transform to set initial image view position
+    imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
+                                                    CATransform3DMakeTranslation(xOffset, yOffset, 0.f));
+    
+    if (pScaleFactor) {
+        *pScaleFactor = finalScaleFactor / scaleFactor;
+    }
+    if (pXOffset) {
+        *pXOffset = finalXOffset - xOffset;
+    }
+    if (pYOffset) {
+        *pYOffset = finalYOffset - yOffset;
+    }
 }
 
 // TODO: Problem with animation steps during which nothing has to be animated: Their duration is 0. Fix in HLSAnimation.m
@@ -255,40 +328,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
 }
 
-- (void)moveAndScaleImageView:(UIImageView *)imageView
-                  scaleFactor:(CGFloat *)pScaleFactor
-                      xOffset:(CGFloat *)pXOffset
-                      yOffset:(CGFloat *)pYOffset
-{
-    // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
-    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
-    
-    // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
-    // scale factor so that the image view still covers self
-    CGFloat maxXOffset = (scaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
-    CGFloat maxYOffset = (scaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
-    
-    // Pick up some random offsets. Use random factor in [-1;1]
-    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
-    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
-        
-    // Pick up random scale factor to reach at the end of the animation. Same constraints as above
-    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
-    CGFloat maxFinalXOffset = (finalScaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
-    CGFloat maxFinalYOffset = (finalScaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
-    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
-    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
-    
-    // Apply initial transform to set initial image view position
-    imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
-                                                    CATransform3DMakeTranslation(xOffset, yOffset, 0.f));
-    
-    *pScaleFactor = finalScaleFactor / scaleFactor;
-    *pXOffset = finalXOffset - xOffset;
-    *pYOffset = finalYOffset - yOffset;
-}
-
-
 - (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                           nextImageView:(UIImageView *)nextImageView
 {
@@ -296,7 +335,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     // To get a smooth scale animation with total factor scaleFactor, each interval must be assigned a factor (scaleFactor)^(1/N),
     // so that the total scaleFactor is obtained by multiplying all of them. When grouping m such intervals, the scale factor
     // for the m intervals is therefore (scaleFactor)^(m/N), thus the formula for the scale factor of each step.
-
+    
     CGFloat currentImageScaleFactor = 0.f;
     CGFloat currentImageXOffset = 0.f;
     CGFloat currentImageYOffset = 0.f;
@@ -309,19 +348,19 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     else {
         // TODO: Fix original position as if the transition animation had been played
         
-        [self moveAndScaleImageView:currentImageView 
-                        scaleFactor:&currentImageScaleFactor
-                            xOffset:&currentImageXOffset 
-                            yOffset:&currentImageYOffset];
+        [self randomlyMoveAndScaleImageView:currentImageView 
+                                scaleFactor:&currentImageScaleFactor
+                                    xOffset:&currentImageXOffset 
+                                    yOffset:&currentImageYOffset];
     }
     
     CGFloat nextImageScaleFactor = 0.f;
     CGFloat nextImageXOffset = 0.f;
     CGFloat nextImageYOffset = 0.f;
-    [self moveAndScaleImageView:nextImageView 
-                    scaleFactor:&nextImageScaleFactor 
-                        xOffset:&nextImageXOffset 
-                        yOffset:&nextImageYOffset];
+    [self randomlyMoveAndScaleImageView:nextImageView 
+                            scaleFactor:&nextImageScaleFactor 
+                                xOffset:&nextImageXOffset 
+                                yOffset:&nextImageYOffset];
     
     CGFloat totalDuration = self.imageDuration + 2 * self.transitionDuration;
     
@@ -432,33 +471,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     return animation;
 }
 
-- (void)displayImage:(UIImage *)image inImageView:(UIImageView *)imageView
-{
-    // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
-    //       be reused
-    // Aspect ratios of frame and image
-    CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
-    CGFloat imageRatio = image.size.width / image.size.height;
-    
-    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
-    CGFloat zoomScale;
-    // The image is more portrait-shaped than self
-    if (floatlt(imageRatio, frameRatio)) {
-        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
-    }
-    // The image is more landscape-shaped than self
-    else {
-        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
-    }
-    
-    // Update the image view to match the image dimensions with an aspect fill behavior inside self
-    CGFloat scaledImageWidth = ceilf(image.size.width * zoomScale);
-    CGFloat scaledImageHeight = ceilf(image.size.height * zoomScale);
-    imageView.bounds = CGRectMake(0.f, 0.f, scaledImageWidth, scaledImageHeight);
-    imageView.center = CGPointMake(floorf(CGRectGetWidth(self.frame) / 2.f), floorf(CGRectGetHeight(self.frame) / 2.f));
-    imageView.image = image;
-}
-
 - (void)playNextAnimation
 {    
     // Find the current / next images
@@ -479,7 +491,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         currentImageView.alpha = 1.f;
         NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
         UIImage *currentImage = [self imageForNameOrPath:currentImagePath];
-        [self displayImage:currentImage inImageView:currentImageView];
+        [self prepareImageView:currentImageView withImage:currentImage];
     }
     
     UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
@@ -487,7 +499,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         nextImageView.alpha = 0.f;
         NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
         UIImage *nextImage = [self imageForNameOrPath:nextImagePath];
-        [self displayImage:nextImage inImageView:nextImageView];
+        [self prepareImageView:nextImageView withImage:nextImage];
     }
     
     // Create and play the animation

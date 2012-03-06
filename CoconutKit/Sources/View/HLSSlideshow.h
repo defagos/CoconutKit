@@ -28,7 +28,8 @@ typedef enum {
  * A slideshow displaying images using one of several built-in transition effects.
  *
  * You can instantiate a slideshow view either using a nib or programmatically. It then suffices to set its images property 
- * to the array of images which must be displayed. Other properties provide for further customization, e.g. timing.
+ * to the array of images which must be displayed. Other properties provide for further customization, e.g. animation
+ * effect or timings.
  *
  * You should not alter the frame of a slideshow while it is running. This is currently not supported.
  *
@@ -51,7 +52,7 @@ typedef enum {
 /**
  * The transition effect to be applied
  *
- * This property can be changed while the slideshow is running
+ * This property cannot be changed while the slideshow is running
  */
 @property (nonatomic, assign) HLSSlideShowEffect effect;
 
@@ -71,7 +72,7 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval imageDuration;
 
 /**
- * The duration of the transition between two images (this setting is ignored by slideshows which do not involve a cross-dissolve 
+ * The duration of the transition between two images (this setting is ignored by slideshows which do not involve a 
  * transition between images). Default is 3 seconds. 
  *
  * This property can be changed while the slideshow is running
@@ -93,8 +94,7 @@ typedef enum {
 - (void)stop;
 
 /**
- * Interrupts the current transition and moves to the next or previous image directly (without animation). The animation
- * starts again after a few seconds of inactivity
+ * Interrupts the current transition and moves to the next or previous image directly (without animation)
  */
 - (void)skipToNextImage;
 - (void)skipToPreviousImage;
