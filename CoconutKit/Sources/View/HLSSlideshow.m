@@ -35,6 +35,10 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 - (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
                     currentImageView:(UIImageView *)currentImageView
                        nextImageView:(UIImageView *)nextImageView;
+- (HLSAnimation *)translationAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                             nextImageView:(UIImageView *)nextImageView
+                                                   xOffset:(CGFloat)xOffset
+                                                   yOffset:(CGFloat)yOffset;
 
 - (void)playNextAnimation;
 
@@ -302,6 +306,8 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     }
 }
 
+#pragma mark Animations
+
 // TODO: Problem with animation steps during which nothing has to be animated: Their duration is 0. Fix in HLSAnimation.m
 //       e.g. by adding a hidden dummy view to every animation step (of course, this dummy view must not be seen from
 //       the outside)
@@ -426,6 +432,40 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     return animation;
 }
 
+- (HLSAnimation *)translationAnimationWithCurrentImageView:(UIImageView *)currentImageView
+                                             nextImageView:(UIImageView *)nextImageView
+                                                   xOffset:(CGFloat)xOffset
+                                                   yOffset:(CGFloat)yOffset
+{
+    // Initialize images
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.duration = 0.;
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    viewAnimationStep11.alphaVariation = 1.f;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:nextImageView];
+    
+    // Display the current image for the duration which has been set (identity view animation step)
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.duration = self.imageDuration;
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.alphaVariation = -0.01f;            // TODO: See above
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
+    
+    // Transition to the next image
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    animationStep3.duration = self.transitionDuration;
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    viewAnimationStep31.alphaVariation = 0.01f;            // TODO: See above
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
+    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep32.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:nextImageView];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+}
+
 - (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
                     currentImageView:(UIImageView *)currentImageView
                        nextImageView:(UIImageView *)nextImageView
@@ -453,26 +493,34 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         }
             
         case HLSSlideShowEffectHorizontalRibbon: {
-            // TODO
-            return nil;
+            animation = [self translationAnimationWithCurrentImageView:currentImageView 
+                                                         nextImageView:nextImageView 
+                                                               xOffset:(CGRectGetWidth(currentImageView.frame) + CGRectGetWidth(nextImageView.frame)) / 2.f
+                                                               yOffset:0.f];
             break;
         }
             
         case HLSSlideshowEffectInverseHorizontalRibbon: {
-            // TODO
-            return nil;
+            animation = [self translationAnimationWithCurrentImageView:currentImageView 
+                                                         nextImageView:nextImageView 
+                                                               xOffset:-(CGRectGetWidth(currentImageView.frame) + CGRectGetWidth(nextImageView.frame)) / 2.f
+                                                               yOffset:0.f];
             break;
         }
             
         case HLSSlideshowEffectVerticalRibbon: {
-            // TODO
-            return nil;
+            animation = [self translationAnimationWithCurrentImageView:currentImageView 
+                                                         nextImageView:nextImageView 
+                                                               xOffset:0.f
+                                                               yOffset:(CGRectGetHeight(currentImageView.frame) + CGRectGetHeight(nextImageView.frame)) / 2.f];
             break;
         }
             
         case HLSSlideshowEffectInverseVerticalRibbon: {
-            // TODO
-            return nil;
+            animation = [self translationAnimationWithCurrentImageView:currentImageView 
+                                                         nextImageView:nextImageView 
+                                                               xOffset:0.f
+                                                               yOffset:-(CGRectGetHeight(currentImageView.frame) + CGRectGetHeight(nextImageView.frame)) / 2.f];
             break;
         }
             
@@ -504,6 +552,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
     UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
     if (! currentImageView.image) {
+        // TODO: Should be performed by each animation in an initial step
         currentImageView.alpha = 1.f;
         NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
         UIImage *currentImage = [self imageForNameOrPath:currentImagePath];
@@ -512,6 +561,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
     if (! nextImageView.image) {
+        // TODO: Should be performed by each animation in an initial step
         nextImageView.alpha = 0.f;
         NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
         UIImage *nextImage = [self imageForNameOrPath:nextImagePath];
