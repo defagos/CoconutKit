@@ -98,6 +98,16 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 @synthesize effect = m_effect;
 
+- (void)setEffect:(HLSSlideShowEffect)effect
+{
+    if (self.animation.running) {
+        HLSLoggerWarn(@"The effect cannot be changed while the slideshow is running");
+        return;
+    }
+    
+    m_effect = effect;
+}
+
 @synthesize imageViews = m_imageViews;
 
 @synthesize imageNamesOrPaths = m_imageNamesOrPaths;
