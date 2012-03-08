@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     
-    self.slideshow.effect = HLSSlideShowEffectCrossDissolve;
+    self.slideshow.effect = HLSSlideShowEffectKenBurns;
     
     self.randomSwitch.on = self.slideshow.random;
     
@@ -74,6 +74,16 @@
 }
 
 #pragma mark Event callbacks
+
+- (IBAction)nextImage:(id)sender
+{
+    [self.slideshow skipToNextImage];
+}
+
+- (IBAction)previousImage:(id)sender
+{
+    [self.slideshow skipToPreviousImage];
+}
 
 - (IBAction)play:(id)sender
 {

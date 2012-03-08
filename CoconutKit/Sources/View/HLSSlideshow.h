@@ -65,7 +65,7 @@ typedef enum {
 @property (nonatomic, retain) NSArray *imageNamesOrPaths;
 
 /**
- * How much time an image stays visible alone. Default is 4 seconds. 
+ * How much time an image stays visible alone. Default is 4 seconds. Must be > 0
  *
  * This property can be changed while the slideshow is running
  */
@@ -73,7 +73,7 @@ typedef enum {
 
 /**
  * The duration of the transition between two images (this setting is ignored by slideshows which do not involve a 
- * transition between images). Default is 3 seconds. 
+ * transition between images). Default is 3 seconds. Must be >= 0
  *
  * This property can be changed while the slideshow is running
  */

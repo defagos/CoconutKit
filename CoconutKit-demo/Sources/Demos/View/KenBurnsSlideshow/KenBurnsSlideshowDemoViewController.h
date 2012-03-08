@@ -16,6 +16,9 @@
 @property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
 @property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
 
+- (IBAction)nextImage:(id)sender;
+- (IBAction)previousImage:(id)sender;
+
 - (IBAction)play:(id)sender;
 - (IBAction)stop:(id)sender;
 
