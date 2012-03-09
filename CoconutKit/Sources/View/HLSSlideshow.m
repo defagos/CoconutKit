@@ -26,6 +26,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 - (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
 - (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image;
+- (void)releaseCurrentImageView;
 
 - (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                                nextImageView:(UIImageView *)nextImageView
@@ -216,30 +217,24 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 - (void)skipToNextImage
 {
-    HLSLoggerError(@"Not implemented yet");
-    
-#if 0
     if (! self.animation.running) {
         return;
     }
     
     [self.animation cancel];
+    [self releaseCurrentImageView];
     [self playNextAnimation];
-#endif
 }
 
 - (void)skipToPreviousImage
 {
-    HLSLoggerError(@"Not implemented yet");
-    
-#if 0
     if (! self.animation.running) {
         return;
     }
     
     [self.animation cancel];
+    [self releaseCurrentImageView];
     [self playPreviousAnimation];
-#endif
 }
 
 #pragma mark Image management
@@ -287,6 +282,14 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     imageView.layer.transform = CATransform3DIdentity;
     imageView.alpha = 1.f;
     imageView.image = image;
+}
+
+- (void)releaseCurrentImageView
+{
+    // Done with the current image view. Mark it as unused by removing the attached image
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    currentImageView.image = nil;
+    currentImageView.layer.transform = CATransform3DIdentity;
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -627,11 +630,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    // Done with the current image view. Mark it as unused by removing the attached image
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
-    currentImageView.image = nil;
-    currentImageView.layer.transform = CATransform3DIdentity;
-    
+    [self releaseCurrentImageView];
     [self playNextAnimation];
 }
 
