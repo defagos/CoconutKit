@@ -19,6 +19,8 @@
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
 		6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7514BB75D900D54088 /* DemoTable.strings */; };
+		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
+		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
@@ -153,8 +155,6 @@
 		6FADE8BE14BA04C9007EE121 /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84114BA04C8007EE121 /* CursorPointerInfoViewController.xib */; };
 		6FADE8BF14BA04C9007EE121 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84314BA04C8007EE121 /* CursorSelectedFolderView.m */; };
 		6FADE8C014BA04C9007EE121 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84414BA04C8007EE121 /* CursorSelectedFolderView.xib */; };
-		6FADE8C114BA04C9007EE121 /* KenBurnsSlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84714BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.m */; };
-		6FADE8C214BA04C9007EE121 /* KenBurnsSlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84814BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.xib */; };
 		6FADE8C314BA04C9007EE121 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84C14BA04C8007EE121 /* FooterView.m */; };
 		6FADE8C414BA04C9007EE121 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84D14BA04C8007EE121 /* FooterView.xib */; };
 		6FADE8C514BA04C9007EE121 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84F14BA04C8007EE121 /* HeaderView.m */; };
@@ -225,6 +225,9 @@
 		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D7214BB75D000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DemoTable.strings; sourceTree = "<group>"; };
 		6F507D7614BB75D900D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = DemoTable.strings; sourceTree = "<group>"; };
+		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
+		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
+		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
@@ -456,9 +459,6 @@
 		6FADE84214BA04C8007EE121 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
 		6FADE84314BA04C8007EE121 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6FADE84414BA04C8007EE121 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
-		6FADE84614BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KenBurnsSlideshowDemoViewController.h; sourceTree = "<group>"; };
-		6FADE84714BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KenBurnsSlideshowDemoViewController.m; sourceTree = "<group>"; };
-		6FADE84814BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KenBurnsSlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6FADE84B14BA04C8007EE121 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		6FADE84C14BA04C8007EE121 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		6FADE84D14BA04C8007EE121 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
@@ -633,6 +633,16 @@
 				6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */,
 			);
 			path = DynamicLocalizationViewController;
+			sourceTree = "<group>";
+		};
+		6F5A0BAA1509D17B00A20DFF /* Slideshow */ = {
+			isa = PBXGroup;
+			children = (
+				6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */,
+				6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */,
+				6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */,
+			);
+			path = Slideshow;
 			sourceTree = "<group>";
 		};
 		6FADE61A14BA04A6007EE121 /* Resources */ = {
@@ -1151,9 +1161,9 @@
 			children = (
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
-				6FADE84514BA04C8007EE121 /* KenBurnsSlideshow */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
+				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6FADE85814BA04C9007EE121 /* TextFields */,
 				6FDE688014BC8E9300F8CD3A /* WebView */,
@@ -1191,16 +1201,6 @@
 				6FADE84414BA04C8007EE121 /* CursorSelectedFolderView.xib */,
 			);
 			path = Cursor;
-			sourceTree = "<group>";
-		};
-		6FADE84514BA04C8007EE121 /* KenBurnsSlideshow */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE84614BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.h */,
-				6FADE84714BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.m */,
-				6FADE84814BA04C8007EE121 /* KenBurnsSlideshowDemoViewController.xib */,
-			);
-			path = KenBurnsSlideshow;
 			sourceTree = "<group>";
 		};
 		6FADE84A14BA04C8007EE121 /* TableViewCells */ = {
@@ -1535,7 +1535,6 @@
 				6FADE8BC14BA04C9007EE121 /* CursorFolderView.xib in Resources */,
 				6FADE8BE14BA04C9007EE121 /* CursorPointerInfoViewController.xib in Resources */,
 				6FADE8C014BA04C9007EE121 /* CursorSelectedFolderView.xib in Resources */,
-				6FADE8C214BA04C9007EE121 /* KenBurnsSlideshowDemoViewController.xib in Resources */,
 				6FADE8C414BA04C9007EE121 /* FooterView.xib in Resources */,
 				6FADE8C614BA04C9007EE121 /* HeaderView.xib in Resources */,
 				6FADE8CA14BA04C9007EE121 /* XibTableViewCell.xib in Resources */,
@@ -1567,6 +1566,7 @@
 				6FA9B09C14F8E753008B6D5A /* img_apple2.jpg in Resources */,
 				6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */,
+				6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1676,7 +1676,6 @@
 				6FADE8BB14BA04C9007EE121 /* CursorFolderView.m in Sources */,
 				6FADE8BD14BA04C9007EE121 /* CursorPointerInfoViewController.m in Sources */,
 				6FADE8BF14BA04C9007EE121 /* CursorSelectedFolderView.m in Sources */,
-				6FADE8C114BA04C9007EE121 /* KenBurnsSlideshowDemoViewController.m in Sources */,
 				6FADE8C314BA04C9007EE121 /* FooterView.m in Sources */,
 				6FADE8C514BA04C9007EE121 /* HeaderView.m in Sources */,
 				6FADE8C714BA04C9007EE121 /* ProgrammaticTableViewCell.m in Sources */,
@@ -1709,6 +1708,7 @@
 				6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */,
 				6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */,
+				6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

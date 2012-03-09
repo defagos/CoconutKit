@@ -1,20 +1,20 @@
 //
-//  KenBurnsSlideshowDemoViewController.m
+//  SlideshowDemoViewController.m
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 17.10.11.
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "KenBurnsSlideshowDemoViewController.h"
+#import "SlideshowDemoViewController.h"
 
-@interface KenBurnsSlideshowDemoViewController ()
+@interface SlideshowDemoViewController ()
 
 - (void)loadImages;
 
 @end
 
-@implementation KenBurnsSlideshowDemoViewController
+@implementation SlideshowDemoViewController
 
 #pragma mark Object creation and destruction
 
@@ -70,7 +70,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+    self.title = NSLocalizedString(@"Slideshow", @"Slideshow");
 }
 
 #pragma mark Event callbacks
