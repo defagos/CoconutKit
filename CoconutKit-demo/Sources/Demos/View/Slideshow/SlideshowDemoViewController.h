@@ -9,12 +9,23 @@
 @interface SlideshowDemoViewController : HLSViewController {
 @private
     HLSSlideshow *m_slideshow;
+    UILabel *m_currentImageNameLabel;
+    UIButton *m_previousButton;
+    UIButton *m_nextButton;
+    UIButton *m_playButton;
+    UIButton *m_stopButton;
     UISwitch *m_randomSwitch;
-    BOOL m_secondSet;
+    UIButton *m_imageSetButton;
 }
 
 @property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
+@property (nonatomic, retain) IBOutlet UILabel *currentImageNameLabel;
+@property (nonatomic, retain) IBOutlet UIButton *previousButton;
+@property (nonatomic, retain) IBOutlet UIButton *nextButton;
+@property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
+@property (nonatomic, retain) IBOutlet UIButton *imageSetButton;
 
 - (IBAction)nextImage:(id)sender;
 - (IBAction)previousImage:(id)sender;

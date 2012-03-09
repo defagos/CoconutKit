@@ -31,14 +31,32 @@
     [super releaseViews];
     
     self.slideshow = nil;
+    self.currentImageNameLabel = nil;
+    self.previousButton = nil;
+    self.nextButton = nil;
+    self.playButton = nil;
+    self.stopButton = nil;
     self.randomSwitch = nil;
+    self.imageSetButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize slideshow = m_slideshow;
 
+@synthesize currentImageNameLabel = m_currentImageNameLabel;
+
+@synthesize previousButton = m_previousButton;
+
+@synthesize nextButton = m_nextButton;
+
+@synthesize playButton = m_playButton;
+
+@synthesize stopButton = m_stopButton;
+
 @synthesize randomSwitch = m_randomSwitch;
+
+@synthesize imageSetButton = m_imageSetButton;
 
 #pragma mark View lifecycle
 
@@ -97,7 +115,7 @@
 
 - (IBAction)changeImages:(id)sender
 {
-    m_secondSet = ! m_secondSet;
+    self.imageSetButton.selected = ! self.imageSetButton.selected;
     [self loadImages];
 }
 
@@ -110,7 +128,7 @@
 
 - (void)loadImages
 {
-    if (m_secondSet) {
+    if (self.imageSetButton.selected) {
         self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg", nil];
     }
     else {
