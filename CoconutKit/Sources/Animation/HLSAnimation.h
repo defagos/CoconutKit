@@ -20,7 +20,7 @@
  *
  * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
  * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
- *   - cancel the animation first
+ *   - cancel or terminate the animation first
  *   - unregister the delegate, and let the animation run until the end
  *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
  *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
@@ -36,11 +36,11 @@
  * part of an animation which was played animated).
  *
  * If the resizeViews property is set to YES, an animation alters the frames of the involved views. If this property 
- * is set to NO, the animation only alters the view transforms, which means the views will be applied a zoom level.
- * View resizing is currently quite experimental and is therefore disabled by default.
+ * is set to NO, the animation only alters the view transforms, which means the views will be stretched. View resizing 
+ * is currently quite experimental and is therefore disabled by default.
  *
  * When resizeViews is set to YES, only translation and scale transforms can be applied since the frame is involved.
- * Other transforms will be ignored, and a warning message will be logged in such cases
+ * Other transforms will be ignored, and a warning message will be logged
  *
  * Designated initializer: initWithAnimationSteps:
  */
@@ -57,6 +57,7 @@
     BOOL m_animated;
     BOOL m_running;
     BOOL m_cancelling;
+    BOOL m_terminating;
     id<HLSAnimationDelegate> m_delegate;
 }
 
@@ -131,8 +132,24 @@
 - (void)cancel;
 
 /**
- * Generate the reverse animation; all attributes are copied as is, except the tag which gets an additional
- * "reverse_" prefix, and the userInfo. You might of course change these attributes if needed
+ * Terminate the animation. The animation immediately reaches its end state. The delegate still receives all
+ * subsequent events, but with animated = NO
+ */
+- (void)terminate;
+
+/**
+ * Return YES iff the animation is being cancelled
+ */
+@property (nonatomic, readonly, assign, getter=isCancelling) BOOL cancelling;
+
+/**
+ * Return YES iff the animation is being terminated
+ */
+@property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
+
+/**
+ * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
+ * the animation steps get and additional "reverse_" prefix. Moreover, the userInfo is not copied
  */
 - (HLSAnimation *)reverseAnimation;
 

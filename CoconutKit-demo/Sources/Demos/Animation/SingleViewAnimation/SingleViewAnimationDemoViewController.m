@@ -41,6 +41,7 @@
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
     self.cancelButton = nil;
+    self.terminateButton = nil;
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
 }
@@ -53,6 +54,7 @@
     
     self.playBackwardButton.hidden = YES;
     self.cancelButton.hidden = YES;
+    self.terminateButton.hidden = YES;
     
     self.animatedSwitch.on = YES;
     self.blockingSwitch.on = NO;
@@ -67,6 +69,8 @@
 @synthesize playBackwardButton = m_playBackwardButton;
 
 @synthesize cancelButton = m_cancelButton;
+
+@synthesize terminateButton = m_terminateButton;
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
@@ -93,8 +97,10 @@
 {
     self.playForwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
+    self.terminateButton.hidden = NO;
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
     animationStep1.curve = UIViewAnimationCurveEaseIn;
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
@@ -102,22 +108,26 @@
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.tag = @"step2";
     animationStep2.duration = 1.;
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = -0.3f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    animationStep3.tag = @"step3";
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep31.transform = CATransform3DMakeScale(1.5f, 1.5f, 1.f);
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+    animationStep4.tag = @"step4";
     HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep41.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
+    animationStep5.tag = @"step5";
     animationStep5.duration = 1.;
     animationStep5.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
@@ -125,6 +135,7 @@
     [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep6 = [HLSAnimationStep animationStep];
+    animationStep6.tag = @"step6";
     animationStep6.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep61 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep61.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
@@ -149,6 +160,7 @@
 {
     self.playBackwardButton.hidden = YES;
     self.cancelButton.hidden = NO;
+    self.terminateButton.hidden = NO;
     
     // Create the reverse animation
     self.reverseAnimation = [self.animation reverseAnimation];
@@ -156,7 +168,7 @@
     [self.reverseAnimation playAnimated:self.animatedSwitch.on];
 }
 
-- (IBAction)cancelButton:(id)sender
+- (IBAction)cancel:(id)sender
 {
     if (self.animation.running) {
         self.playBackwardButton.hidden = NO;
@@ -168,23 +180,39 @@
     }
     
     self.cancelButton.hidden = YES;
+    self.terminateButton.hidden = YES;
+}
+
+- (IBAction)terminate:(id)sender
+{
+    if (self.animation.running) {
+        self.playBackwardButton.hidden = NO;
+        [self.animation terminate];
+    }
+    if (self.reverseAnimation.running) {
+        self.playForwardButton.hidden = NO;
+        [self.reverseAnimation terminate];
+    }
+    
+    self.cancelButton.hidden = YES;
+    self.terminateButton.hidden = YES;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (IBAction)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
 - (IBAction)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animated = %@", HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
 }
 
 - (IBAction)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@, animated = %@", animation.tag, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Animation %@ did stop, animated = %@", animation.tag, HLSStringFromBool(animated));
     
     // Can find which animation ended using its tag
     if ([animation.tag isEqualToString:@"singleViewAnimation"]) {
@@ -195,6 +223,7 @@
     }
     
     self.cancelButton.hidden = YES;
+    self.terminateButton.hidden = YES;
 }
 
 #pragma mark Localization
