@@ -65,6 +65,11 @@
     [super viewDidLoad];
     
     self.slideshow.effect = HLSSlideShowEffectKenBurns;
+    self.slideshow.delegate = self;
+    
+    self.currentImageNameLabel.text = nil;
+    self.previousButton.hidden = YES;
+    self.nextButton.hidden = YES;
     
     self.randomSwitch.on = self.slideshow.random;
     
@@ -91,6 +96,43 @@
     self.title = NSLocalizedString(@"Slideshow", @"Slideshow");
 }
 
+#pragma mark HLSSlideshowDelegate protocol implementation
+
+- (void)slideshow:(HLSSlideshow *)slideshow willShowImageAtIndex:(NSUInteger)index
+{
+    NSLog(@"Will show image %d", index);
+}
+
+- (void)slideshow:(HLSSlideshow *)slideshow didShowImageAtIndex:(NSUInteger)index
+{
+    NSLog(@"Did show image %d", index);
+    
+    NSString *imageName = [slideshow.imageNamesOrPaths objectAtIndex:index];
+    self.currentImageNameLabel.text = imageName;
+}
+
+- (void)slideshow:(HLSSlideshow *)slideshow willHideImageAtIndex:(NSUInteger)index
+{
+    NSLog(@"Will hide image %d", index);
+}
+
+- (void)slideshow:(HLSSlideshow *)slideshow didHideImageAtIndex:(NSUInteger)index
+{
+    NSLog(@"Did hide image %d", index);
+}
+
+#pragma mark Slideshow
+
+- (void)loadImages
+{
+    if (self.imageSetButton.selected) {
+        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg", nil];
+    }
+    else {
+        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_coconut1.jpg", @"img_coconut2.jpg", @"img_coconut3.jpg", @"img_coconut4.jpg", nil];
+    }
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)nextImage:(id)sender
@@ -105,12 +147,19 @@
 
 - (IBAction)play:(id)sender
 {
+    self.previousButton.hidden = NO;
+    self.nextButton.hidden = NO;
+    
     [self.slideshow play];
 }
 
 - (IBAction)stop:(id)sender
 {
     [self.slideshow stop];
+    
+    self.currentImageNameLabel.text = nil;
+    self.previousButton.hidden = YES;
+    self.nextButton.hidden = YES;
 }
 
 - (IBAction)changeImages:(id)sender
@@ -122,18 +171,6 @@
 - (IBAction)toggleRandom:(id)sender
 {
     self.slideshow.random = self.randomSwitch.on;
-}
-
-#pragma mark Slideshow
-
-- (void)loadImages
-{
-    if (self.imageSetButton.selected) {
-        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg", nil];
-    }
-    else {
-        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_coconut1.jpg", @"img_coconut2.jpg", @"img_coconut3.jpg", @"img_coconut4.jpg", nil];
-    }
-}
+} 
 
 @end

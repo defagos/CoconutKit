@@ -92,6 +92,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     self.imageViews = nil;
     self.imageNamesOrPaths = nil;
     self.animation = nil;
+    self.delegate = nil;
     
     [super dealloc];
 }
@@ -122,6 +123,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         return;
     }
     
+    // FIXME: Crash when an empty running slideshow gets loaded with images. Invalid index in empty array
     if ([imageNamesOrPaths count] != 0) {
         if (m_currentImageIndex != -1) {
             // Try to find whether the current image is also in the new array. If the answer is
@@ -179,6 +181,8 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     return self.animation.running;
 }
 
+@synthesize delegate = m_delegate;
+
 #pragma mark Playing the slideshow
 
 - (void)play
@@ -221,7 +225,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    [self.animation cancel];
+    [self.animation terminate];
     [self releaseCurrentImageView];
     [self playNextAnimation];
 }
@@ -232,7 +236,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    [self.animation cancel];
+    [self.animation terminate];
     [self releaseCurrentImageView];
     [self playPreviousAnimation];
 }
@@ -351,6 +355,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     // Display the current image for the duration which has been set (identity view animation step)
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = -0.01f;            // TODO: See above
@@ -422,6 +427,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     // Displaying the current image
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    animationStep1.tag = @"singleImage";
     animationStep1.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
     animationStep1.duration = self.imageDuration;
     
@@ -481,6 +487,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     // Display the current image for the duration which has been set (identity view animation step)
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = -0.01f;            // TODO: See above
@@ -564,7 +571,6 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
             break;
         }
     }
-    
     animation.delegate = self;
     return animation;
 }
@@ -628,10 +634,37 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+{
+    if ([animationStep.tag isEqualToString:@"singleImage"]) {
+        if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageAtIndex:)]) {
+            [self.delegate slideshow:self willHideImageAtIndex:m_currentImageIndex];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(slideshow:willShowImageAtIndex:)]) {
+            [self.delegate slideshow:self willShowImageAtIndex:m_nextImageIndex];
+        }
+    }
+}
+
+- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(slideshow:didShowImageAtIndex:)]) {
+        [self.delegate slideshow:self didShowImageAtIndex:m_currentImageIndex];
+    }
+}
+
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageAtIndex:)]) {
+        [self.delegate slideshow:self didHideImageAtIndex:m_currentImageIndex];
+    }
+            
     [self releaseCurrentImageView];
-    [self playNextAnimation];
+    
+    if (! animation.terminating) {
+        [self playNextAnimation];
+    }
 }
 
 @end

@@ -24,6 +24,9 @@ typedef enum {
     HLSSlideShowEffectEnumSize = HLSSlideShowEffectEnumEnd - HLSSlideShowEffectEnumBegin
 } HLSSlideShowEffect;
 
+// Forward declarations
+@protocol HLSSlideshowDelegate;
+
 /**
  * A slideshow displaying images using one of several built-in transition effects.
  *
@@ -47,6 +50,7 @@ typedef enum {
     NSTimeInterval m_imageDuration;
     NSTimeInterval m_transitionDuration;
     BOOL m_random;
+    id<HLSSlideshowDelegate> m_delegate;
 }
 
 /**
@@ -87,6 +91,8 @@ typedef enum {
  */
 @property (nonatomic, assign) BOOL random;
 
+@property (nonatomic, assign) id<HLSSlideshowDelegate> delegate;
+
 /**
  * Start / stop the slideshow
  */
@@ -103,5 +109,15 @@ typedef enum {
  * Return YES iff the slideshow is running
  */
 - (BOOL)isRunning;
+
+@end
+
+@protocol HLSSlideshowDelegate <NSObject>
+
+@optional
+- (void)slideshow:(HLSSlideshow *)slideshow willShowImageAtIndex:(NSUInteger)index;
+- (void)slideshow:(HLSSlideshow *)slideshow didShowImageAtIndex:(NSUInteger)index;
+- (void)slideshow:(HLSSlideshow *)slideshow willHideImageAtIndex:(NSUInteger)index;
+- (void)slideshow:(HLSSlideshow *)slideshow didHideImageAtIndex:(NSUInteger)index;
 
 @end

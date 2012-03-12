@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-@interface SlideshowDemoViewController : HLSViewController {
+@interface SlideshowDemoViewController : HLSViewController <HLSSlideshowDelegate> {
 @private
     HLSSlideshow *m_slideshow;
     UILabel *m_currentImageNameLabel;
