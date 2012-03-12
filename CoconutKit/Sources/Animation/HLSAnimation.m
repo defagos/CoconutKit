@@ -339,7 +339,7 @@
 {
     NSArray *reverseAnimationSteps = [self reverseAnimationSteps];
     HLSAnimation *reverseAnimation = [HLSAnimation animationWithAnimationSteps:reverseAnimationSteps];
-    reverseAnimation.tag = [NSString stringWithFormat:@"reverse_%@", self.tag];
+    reverseAnimation.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimation.resizeViews = self.resizeViews;
     reverseAnimation.lockingUI = self.lockingUI;
     reverseAnimation.bringToFront = self.bringToFront;
@@ -366,7 +366,7 @@
         }
         
         // Animation step properties
-        reverseAnimationStep.tag = [NSString stringWithFormat:@"reverse_%@", animationStep.tag];
+        reverseAnimationStep.tag = [animationStep.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", animationStep.tag] : nil;
         reverseAnimationStep.duration = animationStep.duration;
         switch (animationStep.curve) {
             case UIViewAnimationCurveEaseIn:
