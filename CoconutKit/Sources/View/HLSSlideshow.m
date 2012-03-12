@@ -17,6 +17,8 @@ static const NSTimeInterval kSlideshowDefaultImageDuration = 4.;
 static const NSTimeInterval kSlideshowDefaultTransitionDuration = 3.;
 static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
+static const NSInteger kSlideshowNoIndex = -1;
+
 @interface HLSSlideshow () <HLSAnimationDelegate>
 
 - (void)hlsSlideshowInit;
@@ -70,6 +72,8 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 - (void)hlsSlideshowInit
 {
     self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
+    
+    m_currentImageIndex = kSlideshowNoIndex;
     
     self.imageViews = [NSArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
@@ -125,7 +129,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
     
     // FIXME: Crash when an empty running slideshow gets loaded with images. Invalid index in empty array
     if ([imageNamesOrPaths count] != 0) {
-        if (m_currentImageIndex != -1) {
+        if (m_currentImageIndex != kSlideshowNoIndex) {
             // Try to find whether the current image is also in the new array. If the answer is
             // yes, start at the corresponding location to guarantee we won't see the same image
             // soon afterwards (if images are not displayed randomly, of course)
@@ -136,7 +140,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
             }
             // Otherwise start at the beginning
             else {
-                m_currentImageIndex = -1;
+                m_currentImageIndex = kSlideshowNoIndex;
             }
         }        
     }
@@ -197,9 +201,9 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
         return;
     }
     
-    m_currentImageIndex = -1;
-    m_nextImageIndex = -1;
-    m_currentImageViewIndex = -1;
+    m_currentImageIndex = kSlideshowNoIndex;
+    m_nextImageIndex = kSlideshowNoIndex;
+    m_currentImageViewIndex = kSlideshowNoIndex;
     
     [self playNextAnimation];
 }
