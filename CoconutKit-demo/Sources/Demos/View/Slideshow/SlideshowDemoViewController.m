@@ -31,6 +31,7 @@
     [super releaseViews];
     
     self.slideshow = nil;
+    self.effectPickerView = nil;
     self.currentImageNameLabel = nil;
     self.previousButton = nil;
     self.nextButton = nil;
@@ -38,11 +39,17 @@
     self.stopButton = nil;
     self.randomSwitch = nil;
     self.imageSetButton = nil;
+    self.imageDurationSlider = nil;
+    self.imageDurationLabel = nil;
+    self.transitionDurationSlider = nil;
+    self.transitionDurationLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize slideshow = m_slideshow;
+
+@synthesize effectPickerView = m_effectPickerView;
 
 @synthesize currentImageNameLabel = m_currentImageNameLabel;
 
@@ -58,20 +65,36 @@
 
 @synthesize imageSetButton = m_imageSetButton;
 
+@synthesize imageDurationSlider = m_imageDurationSlider;
+
+@synthesize imageDurationLabel = m_imageDurationLabel;
+
+@synthesize transitionDurationSlider = m_transitionDurationSlider;
+
+@synthesize transitionDurationLabel = m_transitionDurationLabel;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.slideshow.effect = HLSSlideShowEffectKenBurns;
+    self.slideshow.hidden = YES;
     self.slideshow.delegate = self;
+    
+    self.effectPickerView.dataSource = self;
+    self.effectPickerView.delegate = self;
     
     self.currentImageNameLabel.text = nil;
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
-    
+        
     self.randomSwitch.on = self.slideshow.random;
+    
+    self.imageDurationSlider.value = self.slideshow.imageDuration;
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+    self.transitionDurationSlider.value = self.slideshow.transitionDuration;
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
     
     [self loadImages];
 }
@@ -121,6 +144,65 @@
     NSLog(@"Did hide image %d", index);
 }
 
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return HLSSlideshowEffectEnumSize;
+}
+
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    switch (row) {
+        case HLSSlideshowEffectNone: {
+            return @"HLSSlideshowEffectNone";
+            break;
+        }
+            
+        case HLSSlideshowEffectCrossDissolve: {
+            return @"HLSSlideshowEffectCrossDissolve";
+            break;
+        }
+            
+        case HLSSlideshowEffectKenBurns: {
+            return @"HLSSlideshowEffectKenBurns";
+            break;
+        }
+            
+        case HLSSlideshowEffectHorizontalRibbon: {
+            return @"HLSSlideshowEffectHorizontalRibbon";
+            break;
+        }
+            
+        case HLSSlideshowEffectInverseHorizontalRibbon: {
+            return @"HLSSlideshowEffectInverseHorizontalRibbon";
+            break;
+        }
+            
+        case HLSSlideshowEffectVerticalRibbon: {
+            return @"HLSSlideshowEffectVerticalRibbon";
+            break;
+        }
+            
+        case HLSSlideshowEffectInverseVerticalRibbon: {
+            return @"HLSSlideshowEffectInverseVerticalRibbon";
+            break;
+        }
+            
+        default: {
+            return @"";
+            break;
+        }            
+    }
+}
+
 #pragma mark Slideshow
 
 - (void)loadImages
@@ -147,9 +229,12 @@
 
 - (IBAction)play:(id)sender
 {
+    self.slideshow.hidden = NO;
+    self.effectPickerView.hidden = YES;
     self.previousButton.hidden = NO;
     self.nextButton.hidden = NO;
     
+    self.slideshow.effect = [self.effectPickerView selectedRowInComponent:0];
     [self.slideshow play];
 }
 
@@ -157,6 +242,8 @@
 {
     [self.slideshow stop];
     
+    self.slideshow.hidden = YES;
+    self.effectPickerView.hidden = NO;
     self.currentImageNameLabel.text = nil;
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
@@ -171,6 +258,18 @@
 - (IBAction)toggleRandom:(id)sender
 {
     self.slideshow.random = self.randomSwitch.on;
-} 
+}
+
+- (IBAction)imageDurationValueChanged:(id)sender
+{
+    self.slideshow.imageDuration = round(self.imageDurationSlider.value);
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+}
+
+- (IBAction)transitionDurationValueChanged:(id)sender
+{
+    self.slideshow.transitionDuration = round(self.transitionDurationSlider.value);
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
+}
 
 @end

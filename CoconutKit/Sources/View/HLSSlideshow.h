@@ -12,17 +12,17 @@
  * Slideshow effects
  */
 typedef enum {
-    HLSSlideShowEffectEnumBegin = 0,
-    HLSSlideShowEffectNone = HLSSlideShowEffectEnumBegin,                           // No transition between images
-    HLSSlideShowEffectCrossDissolve,                                                // Cross-dissolve transition between images
-    HLSSlideShowEffectKenBurns,                                                     // Ken-Burns effect (random zooming and panning, cross-dissolve)
-    HLSSlideShowEffectHorizontalRibbon,                                             // Images slide from left to right
+    HLSSlideshowEffectEnumBegin = 0,
+    HLSSlideshowEffectNone = HLSSlideshowEffectEnumBegin,                           // No transition between images
+    HLSSlideshowEffectCrossDissolve,                                                // Cross-dissolve transition between images
+    HLSSlideshowEffectKenBurns,                                                     // Ken-Burns effect (random zooming and panning, cross-dissolve)
+    HLSSlideshowEffectHorizontalRibbon,                                             // Images slide from left to right
     HLSSlideshowEffectInverseHorizontalRibbon,                                      // Images slide from right to left
     HLSSlideshowEffectVerticalRibbon,                                               // Images slide from top to bottom
     HLSSlideshowEffectInverseVerticalRibbon,                                        // Images slide from bottom to top
-    HLSSlideShowEffectEnumEnd,
-    HLSSlideShowEffectEnumSize = HLSSlideShowEffectEnumEnd - HLSSlideShowEffectEnumBegin
-} HLSSlideShowEffect;
+    HLSSlideshowEffectEnumEnd,
+    HLSSlideshowEffectEnumSize = HLSSlideshowEffectEnumEnd - HLSSlideshowEffectEnumBegin
+} HLSSlideshowEffect;
 
 // Forward declarations
 @protocol HLSSlideshowDelegate;
@@ -40,7 +40,7 @@ typedef enum {
  */
 @interface HLSSlideshow : UIView <HLSAnimationDelegate> {
 @private
-    HLSSlideShowEffect m_effect;
+    HLSSlideshowEffect m_effect;
     NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
     NSArray *m_imageNamesOrPaths;
     NSInteger m_currentImageIndex;
@@ -58,7 +58,7 @@ typedef enum {
  *
  * This property cannot be changed while the slideshow is running
  */
-@property (nonatomic, assign) HLSSlideShowEffect effect;
+@property (nonatomic, assign) HLSSlideshowEffect effect;
 
 /**
  * An array giving the names (for images inside the main bundle) or the full path of the images to be displayed. Images

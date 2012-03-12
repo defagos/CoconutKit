@@ -35,7 +35,7 @@ static const NSInteger kSlideshowNoIndex = -1;
                                           transitionDuration:(NSTimeInterval)transitionDuration;
 - (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                           nextImageView:(UIImageView *)nextImageView;
-- (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
+- (HLSAnimation *)animationForEffect:(HLSSlideshowEffect)effect
                     currentImageView:(UIImageView *)currentImageView
                        nextImageView:(UIImageView *)nextImageView;
 - (HLSAnimation *)translationAnimationWithCurrentImageView:(UIImageView *)currentImageView
@@ -105,7 +105,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 @synthesize effect = m_effect;
 
-- (void)setEffect:(HLSSlideShowEffect)effect
+- (void)setEffect:(HLSSlideshowEffect)effect
 {
     if (self.animation.running) {
         HLSLoggerWarn(@"The effect cannot be changed while the slideshow is running");
@@ -511,33 +511,33 @@ static const NSInteger kSlideshowNoIndex = -1;
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
 }
 
-- (HLSAnimation *)animationForEffect:(HLSSlideShowEffect)effect
+- (HLSAnimation *)animationForEffect:(HLSSlideshowEffect)effect
                     currentImageView:(UIImageView *)currentImageView
                        nextImageView:(UIImageView *)nextImageView
 {
     HLSAnimation *animation = nil;
     switch (effect) {
-        case HLSSlideShowEffectNone: {
+        case HLSSlideshowEffectNone: {
             animation = [self crossDissolveAnimationWithCurrentImageView:currentImageView
                                                            nextImageView:nextImageView 
                                                       transitionDuration:0.];
             break;
         }
             
-        case HLSSlideShowEffectCrossDissolve: {
+        case HLSSlideshowEffectCrossDissolve: {
             animation = [self crossDissolveAnimationWithCurrentImageView:currentImageView
                                                            nextImageView:nextImageView
                                                       transitionDuration:self.transitionDuration];
             break;
         }
             
-        case HLSSlideShowEffectKenBurns: {
+        case HLSSlideshowEffectKenBurns: {
             animation = [self kenBurnsAnimationWithCurrentImageView:currentImageView
                                                       nextImageView:nextImageView];
             break;
         }
             
-        case HLSSlideShowEffectHorizontalRibbon: {
+        case HLSSlideshowEffectHorizontalRibbon: {
             animation = [self translationAnimationWithCurrentImageView:currentImageView 
                                                          nextImageView:nextImageView 
                                                                xOffset:(CGRectGetWidth(currentImageView.frame) + CGRectGetWidth(nextImageView.frame)) / 2.f
