@@ -64,7 +64,10 @@ typedef enum {
  * An array giving the names (for images inside the main bundle) or the full path of the images to be displayed. Images
  * are displayed in an endless loop, either sequentially or in a random order (see random property). 
  *
- * This property can be changed while the slideshow is running. 
+ * This property can be changed while the slideshow is running. The images are not changed immediately on screen, 
+ * though, one or two additional slideshow animations are required to display the new image set so that the 
+ * slideshow does not have to be stopped. If you want the change to happen immediately, stop the slideshow, update its 
+ * image set and start it again.
  */
 @property (nonatomic, retain) NSArray *imageNamesOrPaths;
 
