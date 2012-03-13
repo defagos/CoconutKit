@@ -64,7 +64,7 @@ typedef enum {
  * An array giving the names (for images inside the main bundle) or the full path of the images to be displayed. Images
  * are displayed in an endless loop, either sequentially or in a random order (see random property). 
  *
- * This property can be changed while the slideshow is running
+ * This property can be changed while the slideshow is running. 
  */
 @property (nonatomic, retain) NSArray *imageNamesOrPaths;
 
@@ -115,9 +115,9 @@ typedef enum {
 @protocol HLSSlideshowDelegate <NSObject>
 
 @optional
-- (void)slideshow:(HLSSlideshow *)slideshow willShowImageAtIndex:(NSUInteger)index;
-- (void)slideshow:(HLSSlideshow *)slideshow didShowImageAtIndex:(NSUInteger)index;
-- (void)slideshow:(HLSSlideshow *)slideshow willHideImageAtIndex:(NSUInteger)index;
-- (void)slideshow:(HLSSlideshow *)slideshow didHideImageAtIndex:(NSUInteger)index;
+- (void)slideshow:(HLSSlideshow *)slideshow willShowImageWithNameOrPath:(NSString *)imageNameOrPath;
+- (void)slideshow:(HLSSlideshow *)slideshow didShowImageWithNameOrPath:(NSString *)imageNameOrPath;
+- (void)slideshow:(HLSSlideshow *)slideshow willHideImageWithNameOrPath:(NSString *)imageNameOrPath;
+- (void)slideshow:(HLSSlideshow *)slideshow didHideImageWithNameOrPath:(NSString *)imageNameOrPath;
 
 @end

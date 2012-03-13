@@ -123,27 +123,28 @@
 
 #pragma mark HLSSlideshowDelegate protocol implementation
 
-- (void)slideshow:(HLSSlideshow *)slideshow willShowImageAtIndex:(NSUInteger)index
+- (void)slideshow:(HLSSlideshow *)slideshow willShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Will show image %d", index);
-}
-
-- (void)slideshow:(HLSSlideshow *)slideshow didShowImageAtIndex:(NSUInteger)index
-{
-    NSLog(@"Did show image %d", index);
+    NSLog(@"Will show image %@", imageNameOrPath);
     
-    NSString *imageName = [slideshow.imageNamesOrPaths objectAtIndex:index];
-    self.currentImageNameLabel.text = imageName;
+    self.currentImageNameLabel.text = @"<->";
 }
 
-- (void)slideshow:(HLSSlideshow *)slideshow willHideImageAtIndex:(NSUInteger)index
+- (void)slideshow:(HLSSlideshow *)slideshow didShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Will hide image %d", index);
+    NSLog(@"Did show image %@", imageNameOrPath);
+    
+    self.currentImageNameLabel.text = [imageNameOrPath lastPathComponent];
 }
 
-- (void)slideshow:(HLSSlideshow *)slideshow didHideImageAtIndex:(NSUInteger)index
+- (void)slideshow:(HLSSlideshow *)slideshow willHideImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Did hide image %d", index);
+    NSLog(@"Will hide image %@", imageNameOrPath);
+}
+
+- (void)slideshow:(HLSSlideshow *)slideshow didHideImageWithNameOrPath:(NSString *)imageNameOrPath
+{
+    NSLog(@"Did hide image %@", imageNameOrPath);
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

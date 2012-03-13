@@ -12,6 +12,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
 
 static const NSTimeInterval kSlideshowDefaultImageDuration = 4.;
 static const NSTimeInterval kSlideshowDefaultTransitionDuration = 3.;
@@ -27,8 +28,9 @@ static const NSInteger kSlideshowNoIndex = -1;
 @property (nonatomic, retain) HLSAnimation *animation;
 
 - (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
-- (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image;
+- (void)prepareImageView:(UIImageView *)imageView withImageNameOrPath:(NSString *)imageNameOrPath;
 - (void)releaseImageView:(UIImageView *)imageView;
+- (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView;
 
 - (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                                nextImageView:(UIImageView *)nextImageView
@@ -269,8 +271,10 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 // Setup an image view to display a given image. The image view frame is adjusted to get an aspect fill
 // behavior for the image view, and is centered in self. The view alpha is reset to 1
-- (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image
+- (void)prepareImageView:(UIImageView *)imageView withImageNameOrPath:(NSString *)imageNameOrPath
 {
+    UIImage *image = [self imageForNameOrPath:imageNameOrPath];
+    
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
     // Aspect ratios of frame and image
@@ -296,13 +300,20 @@ static const NSInteger kSlideshowNoIndex = -1;
     imageView.layer.transform = CATransform3DIdentity;
     imageView.alpha = 1.f;
     imageView.image = image;
+    imageView.userInfo_hls = [NSDictionary dictionaryWithObject:imageNameOrPath forKey:@"imageNameOrPath"];
 }
 
 - (void)releaseImageView:(UIImageView *)imageView
 {
     // Mark the image view as unused by removing the attached image
     imageView.image = nil;
+    imageView.userInfo_hls = nil;
     imageView.layer.transform = CATransform3DIdentity;
+}
+
+- (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView
+{
+    return [[imageView userInfo_hls] objectForKey:@"imageNameOrPath"];
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -631,15 +642,13 @@ static const NSInteger kSlideshowNoIndex = -1;
     UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
     if (! currentImageView.image) {
         NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:m_currentImageIndex];
-        UIImage *currentImage = [self imageForNameOrPath:currentImagePath];
-        [self prepareImageView:currentImageView withImage:currentImage];
+        [self prepareImageView:currentImageView withImageNameOrPath:currentImagePath];
     }
     
     UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
     if (! nextImageView.image) {
         NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:m_nextImageIndex];
-        UIImage *nextImage = [self imageForNameOrPath:nextImagePath];
-        [self prepareImageView:nextImageView withImage:nextImage];
+        [self prepareImageView:nextImageView withImageNameOrPath:nextImagePath];
     }
     
     // Create and play the animation
@@ -666,30 +675,33 @@ static const NSInteger kSlideshowNoIndex = -1;
 - (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     if ([animationStep.tag isEqualToString:@"singleImage"]) {
-        if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageAtIndex:)]) {
-            [self.delegate slideshow:self willHideImageAtIndex:m_currentImageIndex];
+        UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+        if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageWithNameOrPath:)]) {
+            [self.delegate slideshow:self willHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
         }
         
-        if ([self.delegate respondsToSelector:@selector(slideshow:willShowImageAtIndex:)]) {
-            [self.delegate slideshow:self willShowImageAtIndex:m_nextImageIndex];
+        UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
+        if ([self.delegate respondsToSelector:@selector(slideshow:willShowImageWithNameOrPath:)]) {
+            [self.delegate slideshow:self willShowImageWithNameOrPath:[self imageNameOrPathForImageView:nextImageView]];
         }
     }
 }
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if ([self.delegate respondsToSelector:@selector(slideshow:didShowImageAtIndex:)]) {
-        [self.delegate slideshow:self didShowImageAtIndex:m_currentImageIndex];
+    if ([self.delegate respondsToSelector:@selector(slideshow:didShowImageWithNameOrPath:)]) {
+        UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+        [self.delegate slideshow:self didShowImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageAtIndex:)]) {
-        [self.delegate slideshow:self didHideImageAtIndex:m_currentImageIndex];
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageWithNameOrPath:)]) {
+        [self.delegate slideshow:self didHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }
     
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
     [self releaseImageView:currentImageView];
     
     if (! animation.terminating) {
