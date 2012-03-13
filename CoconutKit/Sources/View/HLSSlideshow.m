@@ -28,7 +28,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
 - (void)prepareImageView:(UIImageView *)imageView withImage:(UIImage *)image;
-- (void)releaseCurrentImageView;
+- (void)releaseImageView:(UIImageView *)imageView;
 
 - (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                                nextImageView:(UIImageView *)nextImageView
@@ -43,9 +43,12 @@ static const NSInteger kSlideshowNoIndex = -1;
                                                    xOffset:(CGFloat)xOffset
                                                    yOffset:(CGFloat)yOffset;
 
+- (void)playNeighboringAnimation:(BOOL)next;
 - (void)playNextAnimation;
 - (void)playPreviousAnimation;
 - (void)animateImages;
+
+- (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex;
 
 @end
 
@@ -127,7 +130,6 @@ static const NSInteger kSlideshowNoIndex = -1;
         return;
     }
     
-    // FIXME: Crash when an empty running slideshow gets loaded with images. Invalid index in empty array
     if ([imageNamesOrPaths count] != 0) {
         if (m_currentImageIndex != kSlideshowNoIndex) {
             // Try to find whether the current image is also in the new array. If the answer is
@@ -230,7 +232,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     }
     
     [self.animation terminate];
-    [self releaseCurrentImageView];
+    for (UIImageView *imageView in self.imageViews) {
+        [self releaseImageView:imageView];
+    }
     [self playNextAnimation];
 }
 
@@ -241,7 +245,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     }
     
     [self.animation terminate];
-    [self releaseCurrentImageView];
+    for (UIImageView *imageView in self.imageViews) {
+        [self releaseImageView:imageView];
+    }
     [self playPreviousAnimation];
 }
 
@@ -292,12 +298,11 @@ static const NSInteger kSlideshowNoIndex = -1;
     imageView.image = image;
 }
 
-- (void)releaseCurrentImageView
+- (void)releaseImageView:(UIImageView *)imageView
 {
-    // Done with the current image view. Mark it as unused by removing the attached image
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
-    currentImageView.image = nil;
-    currentImageView.layer.transform = CATransform3DIdentity;
+    // Mark the image view as unused by removing the attached image
+    imageView.image = nil;
+    imageView.layer.transform = CATransform3DIdentity;
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -579,35 +584,43 @@ static const NSInteger kSlideshowNoIndex = -1;
     return animation;
 }
 
-- (void)playNextAnimation
+// Factor out the code common to -playNextAnimation and -playPreviousAnimation
+- (void)playNeighboringAnimation:(BOOL)next
 {
     NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     if (self.random) {
-        m_currentImageIndex = arc4random() % numberOfImages;
-        m_nextImageIndex = arc4random() % numberOfImages;
+        if (numberOfImages > 1) {
+            // Avoid displaying the same image twice in a row
+            if (m_currentImageIndex == kSlideshowNoIndex) {
+                m_currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:kSlideshowNoIndex];
+            }
+            else {
+                m_currentImageIndex = m_nextImageIndex;
+            }
+            m_nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+        }
+        else {
+            m_currentImageIndex = 0;
+            m_nextImageIndex = 0;
+        }        
     }
     else {
-        m_currentImageIndex = (m_currentImageIndex + 1) % numberOfImages;
+        m_currentImageIndex = (m_currentImageIndex + (next ? 1 : -1) + numberOfImages) % numberOfImages;
         m_nextImageIndex = (m_currentImageIndex + 1) % numberOfImages;
     }
     
-    [self animateImages];    
+    [self animateImages];
+}
+
+- (void)playNextAnimation
+{
+    [self playNeighboringAnimation:YES];
 }
 
 - (void)playPreviousAnimation
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
-    if (self.random) {
-        m_currentImageIndex = arc4random() % numberOfImages;
-        m_nextImageIndex = arc4random() % numberOfImages;
-    }
-    else {
-        // Add array size to avoid crossing 0
-        m_currentImageIndex = (m_currentImageIndex - 1 + numberOfImages) % numberOfImages;
-        m_nextImageIndex = (m_currentImageIndex - 1 + numberOfImages) % numberOfImages;
-    }
-    
-    [self animateImages];
+    [self playNeighboringAnimation:NO];
 }
 
 - (void)animateImages
@@ -634,6 +647,18 @@ static const NSInteger kSlideshowNoIndex = -1;
                              currentImageView:currentImageView
                                 nextImageView:nextImageView];
     [self.animation playAnimated:YES];
+}
+
+#pragma mark Miscellaneous
+
+// Return an index in [0; upperBound[ different from forbiddenIndex
+- (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex
+{
+    NSInteger randomIndex;
+    do {
+        randomIndex = arc4random() % upperBound;
+    } while (randomIndex == forbiddenIndex);
+    return randomIndex;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -663,8 +688,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageAtIndex:)]) {
         [self.delegate slideshow:self didHideImageAtIndex:m_currentImageIndex];
     }
-            
-    [self releaseCurrentImageView];
+    
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    [self releaseImageView:currentImageView];
     
     if (! animation.terminating) {
         [self playNextAnimation];

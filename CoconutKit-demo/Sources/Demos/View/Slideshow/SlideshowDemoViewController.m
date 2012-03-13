@@ -88,6 +88,8 @@
     self.currentImageNameLabel.text = nil;
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
+    
+    self.stopButton.hidden = YES;
         
     self.randomSwitch.on = self.slideshow.random;
     
@@ -233,6 +235,8 @@
     self.effectPickerView.hidden = YES;
     self.previousButton.hidden = NO;
     self.nextButton.hidden = NO;
+    self.playButton.hidden = YES;
+    self.stopButton.hidden = NO;
     
     self.slideshow.effect = [self.effectPickerView selectedRowInComponent:0];
     [self.slideshow play];
@@ -247,6 +251,8 @@
     self.currentImageNameLabel.text = nil;
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
+    self.playButton.hidden = NO;
+    self.stopButton.hidden = YES;
 }
 
 - (IBAction)changeImages:(id)sender
