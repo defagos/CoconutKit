@@ -200,17 +200,17 @@
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (IBAction)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
+- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
-- (IBAction)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
 }
 
-- (IBAction)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Animation %@ did stop, animated = %@", animation.tag, HLSStringFromBool(animated));
     
