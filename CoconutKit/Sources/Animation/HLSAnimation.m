@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 @property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
+@property (nonatomic, retain) UIView *dummyView;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
@@ -68,6 +69,14 @@
         else {
             self.animationSteps = animationSteps;
         }
+        
+        // This dummy view fixes an issue encountered with animation blocks: If no view is altered
+        // during an animation block, the block duration is reduced to 0. To prevent this, we create
+        // and animate a dummy invisible view in each animation step, so that the duration is never
+        // reduced to 0
+        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        
         self.resizeViews = NO;
     }
     return self;
@@ -86,6 +95,8 @@
     self.currentAnimationStep = nil;
     self.tag = nil;
     self.userInfo = nil;
+    [self.dummyView removeFromSuperview];
+    self.dummyView = nil;
     self.delegate = nil;
     [super dealloc];
 }
@@ -103,6 +114,8 @@
 @synthesize userInfo = m_userInfo;
 
 @synthesize resizeViews = m_resizeViews;
+
+@synthesize dummyView = m_dummyView;
 
 @synthesize lockingUI = m_lockingUI;
 
@@ -160,6 +173,9 @@
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];        
     }
+    
+    // Animate the dummy view
+    self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
     // Animate all views in the animation step
     for (UIView *view in [animationStep views]) {

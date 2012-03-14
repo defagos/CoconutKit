@@ -47,7 +47,8 @@
 - (HLSViewAnimationStep *)viewAnimationStepForView:(UIView *)view;
 
 /**
- * Animation step settings
+ * Animation step settings. Unlike UIView animation blocks, the duration of an animation step is never reduced
+ * to 0 if no view is altered by the animation block
  */
 @property (nonatomic, assign) NSTimeInterval duration;                      // default: 0.2
 @property (nonatomic, assign) UIViewAnimationCurve curve;                   // default: UIViewAnimationCurveEaseInOut

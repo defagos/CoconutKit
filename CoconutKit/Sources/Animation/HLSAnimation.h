@@ -51,6 +51,7 @@
     HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
+    UIView *m_dummyView;
     BOOL m_resizeViews;
     BOOL m_lockingUI;
     BOOL m_bringToFront;

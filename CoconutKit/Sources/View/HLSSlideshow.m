@@ -359,9 +359,6 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark Animations
 
-// TODO: Problem with animation steps during which nothing has to be animated: Their duration is 0. Fix in HLSAnimation.m
-//       e.g. by adding a hidden dummy view to every animation step (of course, this dummy view must not be seen from
-//       the outside)
 - (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
                                                nextImageView:(UIImageView *)nextImageView
                                           transitionDuration:(NSTimeInterval)transitionDuration
@@ -373,19 +370,16 @@ static const NSInteger kSlideshowNoIndex = -1;
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:nextImageView];
     
-    // Display the current image for the duration which has been set (identity view animation step)
+    // Display the current image for the duration which has been set
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.alphaVariation = -0.01f;            // TODO: See above
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
     
     // Transition to the next image
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     animationStep3.duration = transitionDuration;
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.alphaVariation = -0.99f;            // TODO: See above
+    viewAnimationStep31.alphaVariation = -1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
     HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep32.alphaVariation = 1.f;
@@ -509,16 +503,12 @@ static const NSInteger kSlideshowNoIndex = -1;
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.alphaVariation = -0.01f;            // TODO: See above
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
     
     // Transition to the next image
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     animationStep3.duration = self.transitionDuration;
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep31.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
-    viewAnimationStep31.alphaVariation = 0.01f;            // TODO: See above
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
     HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep32.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
