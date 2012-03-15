@@ -15,6 +15,7 @@
     UIButton *m_nextButton;
     UIButton *m_playButton;
     UIButton *m_stopButton;
+    UIButton *m_skipToSpecificButton;
     UISwitch *m_randomSwitch;
     UIButton *m_imageSetButton;
     UISlider *m_imageDurationSlider;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *nextButton;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
+@property (nonatomic, retain) IBOutlet UIButton *skipToSpecificButton;
 @property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
 @property (nonatomic, retain) IBOutlet UIButton *imageSetButton;
 @property (nonatomic, retain) IBOutlet UISlider *imageDurationSlider;
@@ -42,6 +44,8 @@
 
 - (IBAction)play:(id)sender;
 - (IBAction)stop:(id)sender;
+
+- (IBAction)skipToSpecificImage:(id)sender;
 
 - (IBAction)changeImages:(id)sender;
 - (IBAction)toggleRandom:(id)sender;

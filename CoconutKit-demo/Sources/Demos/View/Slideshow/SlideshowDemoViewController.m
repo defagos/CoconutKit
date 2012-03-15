@@ -37,6 +37,7 @@
     self.nextButton = nil;
     self.playButton = nil;
     self.stopButton = nil;
+    self.skipToSpecificButton = nil;
     self.randomSwitch = nil;
     self.imageSetButton = nil;
     self.imageDurationSlider = nil;
@@ -60,6 +61,8 @@
 @synthesize playButton = m_playButton;
 
 @synthesize stopButton = m_stopButton;
+
+@synthesize skipToSpecificButton = m_skipToSpecificButton;
 
 @synthesize randomSwitch = m_randomSwitch;
 
@@ -90,6 +93,7 @@
     self.nextButton.hidden = YES;
     
     self.stopButton.hidden = YES;
+    self.skipToSpecificButton.hidden = YES;
         
     self.randomSwitch.on = self.slideshow.random;
     
@@ -125,26 +129,26 @@
 
 - (void)slideshow:(HLSSlideshow *)slideshow willShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Will show image %@", imageNameOrPath);
+    HLSLoggerInfo(@"Will show image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
     
     self.currentImageNameLabel.text = @"<->";
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow didShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Did show image %@", imageNameOrPath);
+    HLSLoggerInfo(@"Did show image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
     
     self.currentImageNameLabel.text = [imageNameOrPath lastPathComponent];
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow willHideImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Will hide image %@", imageNameOrPath);
+    HLSLoggerInfo(@"Will hide image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow didHideImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSLog(@"Did hide image %@", imageNameOrPath);
+    HLSLoggerInfo(@"Did hide image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
@@ -238,6 +242,7 @@
     self.nextButton.hidden = NO;
     self.playButton.hidden = YES;
     self.stopButton.hidden = NO;
+    self.skipToSpecificButton.hidden = NO;
     
     self.slideshow.effect = [self.effectPickerView selectedRowInComponent:0];
     [self.slideshow play];
@@ -254,6 +259,12 @@
     self.nextButton.hidden = YES;
     self.playButton.hidden = NO;
     self.stopButton.hidden = YES;
+    self.skipToSpecificButton.hidden = YES;
+}
+
+- (IBAction)skipToSpecificImage:(id)sender
+{
+    [self.slideshow skipToImageWithNameOrPath:@"img_coconut1.jpg"];
 }
 
 - (IBAction)changeImages:(id)sender

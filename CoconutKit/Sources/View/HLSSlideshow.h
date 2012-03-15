@@ -104,10 +104,22 @@ typedef enum {
 - (void)stop;
 
 /**
- * Interrupts the current transition and moves to the next or previous image directly (without animation)
+ * Directly skip to the next or previous image (without animation). If the slideshow displays images randomly,
+ * both methods skip to a random image
  */
 - (void)skipToNextImage;
 - (void)skipToPreviousImage;
+
+/**
+ * Directly skip to a specific image (the method does nothing if the image is not loaded into the slideshow)
+ */
+- (void)skipToImageWithNameOrPath:(NSString *)imageNameOrPath;
+
+/**
+ * Return the currently displayed image (when a transition occurs, this method returns the disappearing image
+ * until the transition ends)
+ */
+- (NSString *)currentImageNameOrPath;
 
 /**
  * Return YES iff the slideshow is running

@@ -181,7 +181,7 @@
 						<string key="NSFrame">{{388, 850}, {150, 37}}</string>
 						<reference key="NSSuperview" ref="265186128"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1046417806"/>
+						<reference key="NSNextKeyView" ref="774900942"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -189,6 +189,29 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">LS/Stop</string>
+						<reference key="IBUIHighlightedTitleColor" ref="728868163"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="542391776"/>
+						<reference key="IBUIFontDescription" ref="444838672"/>
+						<reference key="IBUIFont" ref="612177231"/>
+					</object>
+					<object class="IBUIButton" id="774900942">
+						<reference key="NSNextResponder" ref="265186128"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{597, 850}, {153, 37}}</string>
+						<reference key="NSSuperview" ref="265186128"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1046417806"/>
+						<string key="NSReuseIdentifierKey">_NS:241</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">img_coconut1.jpg</string>
 						<reference key="IBUIHighlightedTitleColor" ref="728868163"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -525,6 +548,14 @@
 					<int key="connectionID">71</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">skipToSpecificButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="774900942"/>
+					</object>
+					<int key="connectionID">74</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">play:</string>
 						<reference key="source" ref="766305996"/>
@@ -596,6 +627,15 @@
 					</object>
 					<int key="connectionID">67</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">skipToSpecificImage:</string>
+						<reference key="source" ref="774900942"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">75</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -637,6 +677,7 @@
 							<reference ref="630603089"/>
 							<reference ref="228301981"/>
 							<reference ref="607849267"/>
+							<reference ref="774900942"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -726,6 +767,11 @@
 						<reference key="object" ref="607849267"/>
 						<reference key="parent" ref="265186128"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">72</int>
+						<reference key="object" ref="774900942"/>
+						<reference key="parent" ref="265186128"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -753,12 +799,13 @@
 				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="69.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">71</int>
+			<int key="maxID">75</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -787,6 +834,7 @@
 						<string key="nextImage:">id</string>
 						<string key="play:">id</string>
 						<string key="previousImage:">id</string>
+						<string key="skipToSpecificImage:">id</string>
 						<string key="stop:">id</string>
 						<string key="toggleRandom:">id</string>
 						<string key="transitionDurationValueChanged:">id</string>
@@ -812,6 +860,10 @@
 							<string key="name">previousImage:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="skipToSpecificImage:">
+							<string key="name">skipToSpecificImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="stop:">
 							<string key="name">stop:</string>
 							<string key="candidateClassName">id</string>
@@ -835,6 +887,7 @@
 						<string key="playButton">UIButton</string>
 						<string key="previousButton">UIButton</string>
 						<string key="randomSwitch">UISwitch</string>
+						<string key="skipToSpecificButton">UIButton</string>
 						<string key="slideshow">HLSSlideshow</string>
 						<string key="stopButton">UIButton</string>
 						<string key="transitionDurationLabel">UILabel</string>
@@ -876,6 +929,10 @@
 						<object class="IBToOneOutletInfo" key="randomSwitch">
 							<string key="name">randomSwitch</string>
 							<string key="candidateClassName">UISwitch</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="skipToSpecificButton">
+							<string key="name">skipToSpecificButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="slideshow">
 							<string key="name">slideshow</string>

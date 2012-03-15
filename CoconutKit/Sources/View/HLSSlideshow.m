@@ -45,9 +45,9 @@ static const NSInteger kSlideshowNoIndex = -1;
                                                    xOffset:(CGFloat)xOffset
                                                    yOffset:(CGFloat)yOffset;
 
-- (void)playNeighboringAnimation:(BOOL)next;
-- (void)playNextAnimation;
-- (void)playPreviousAnimation;
+- (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath;
+- (void)playAnimationForNextImage;
+- (void)playAnimationForPreviousImage;
 - (void)animateImages;
 
 - (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex;
@@ -209,7 +209,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     m_nextImageIndex = kSlideshowNoIndex;
     m_currentImageViewIndex = kSlideshowNoIndex;
     
-    [self playNextAnimation];
+    [self playAnimationForNextImage];
 }
 
 - (void)stop
@@ -221,6 +221,10 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     [self.animation cancel];
     self.animation = nil;
+    
+    m_currentImageIndex = kSlideshowNoIndex;
+    m_nextImageIndex = kSlideshowNoIndex;
+    m_currentImageViewIndex = kSlideshowNoIndex;
     
     for (UIImageView *imageView in self.imageViews) {
         imageView.image = nil;
@@ -237,7 +241,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     for (UIImageView *imageView in self.imageViews) {
         [self releaseImageView:imageView];
     }
-    [self playNextAnimation];
+    [self playAnimationForNextImage];
 }
 
 - (void)skipToPreviousImage
@@ -250,7 +254,36 @@ static const NSInteger kSlideshowNoIndex = -1;
     for (UIImageView *imageView in self.imageViews) {
         [self releaseImageView:imageView];
     }
-    [self playPreviousAnimation];
+    [self playAnimationForPreviousImage];
+}
+
+- (void)skipToImageWithNameOrPath:(NSString *)imageNameOrPath
+{
+    if (! self.animation.running) {
+        return;
+    }
+    
+    NSUInteger imageIndex = [self.imageNamesOrPaths indexOfObject:imageNameOrPath];
+    if (imageIndex == NSNotFound) {
+        HLSLoggerWarn(@"The image %@ does not appear in the slideshow image list", imageNameOrPath);
+        return;
+    }
+    
+    [self.animation terminate];
+    for (UIImageView *imageView in self.imageViews) {
+        [self releaseImageView:imageView];
+    }
+    [self playAnimationForImageWithNameOrPath:imageNameOrPath];
+}
+
+- (NSString *)currentImageNameOrPath
+{
+    if (m_currentImageViewIndex == kSlideshowNoIndex) {
+        return nil;
+    }
+    
+    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+    return [self imageNameOrPathForImageView:currentImageView];
 }
 
 #pragma mark Image management
@@ -598,47 +631,87 @@ static const NSInteger kSlideshowNoIndex = -1;
     return animation;
 }
 
-// Factor out the code common to -playNextAnimation and -playPreviousAnimation
-- (void)playNeighboringAnimation:(BOOL)next
+- (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath
 {
     NSUInteger numberOfImages = [self.imageNamesOrPaths count];
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
+    
+    NSUInteger imageIndex = [self.imageNamesOrPaths indexOfObject:imageNameOrPath];
+    if (imageIndex == NSNotFound) {
+        HLSLoggerWarn(@"The image %@ does not appear in the slideshow image list", imageNameOrPath);
+        return;
+    }
+    
+    m_currentImageIndex = imageIndex;
+    
     if (self.random) {
         if (numberOfImages > 1) {
             // Avoid displaying the same image twice in a row
-            if (m_currentImageIndex == kSlideshowNoIndex) {
-                m_currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:kSlideshowNoIndex];
-            }
-            else {
-                m_currentImageIndex = m_nextImageIndex;
-            }
             m_nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
         }
         else {
-            m_currentImageIndex = 0;
+            NSAssert(imageIndex == 0, @"Only one image, must have index 0");
             m_nextImageIndex = 0;
-        }        
+        }
     }
     else {
-        m_currentImageIndex = (m_currentImageIndex + (next ? 1 : -1) + numberOfImages) % numberOfImages;
         m_nextImageIndex = (m_currentImageIndex + 1) % numberOfImages;
     }
     
     [self animateImages];
 }
 
-- (void)playNextAnimation
+- (void)playAnimationForNextImage
 {
-    [self playNeighboringAnimation:YES];
+    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
+    
+    if (self.random) {
+        if (numberOfImages > 1) {
+            // Avoid displaying the same image twice in a row
+            m_currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+            m_nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+        }
+        else {
+            m_currentImageIndex = 0;
+            m_nextImageIndex = 0;
+        }
+    }
+    else {
+        m_currentImageIndex = (m_currentImageIndex + 1) % numberOfImages;
+        m_nextImageIndex = (m_currentImageIndex + 1) % numberOfImages;
+    }
+    
+    [self animateImages];
 }
 
-- (void)playPreviousAnimation
+- (void)playAnimationForPreviousImage
 {
-    [self playNeighboringAnimation:NO];
+    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
+    
+    if (self.random) {
+        if (numberOfImages > 1) {
+            // Avoid displaying the same image twice in a row
+            m_currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+            m_nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+        }
+        else {
+            m_currentImageIndex = 0;
+            m_nextImageIndex = 0;
+        }
+    }
+    else {
+        // Add numberOfImages to avoid issues when crossing 0
+        m_currentImageIndex = (m_currentImageIndex - 1 + numberOfImages) % numberOfImages;
+        m_nextImageIndex = (m_currentImageIndex - 1 + numberOfImages) % numberOfImages;
+    }
+    
+    [self animateImages];
 }
 
 - (void)animateImages
-{
+{    
     // Find the image views to use for the current / next images. Only unused image views (i.e. with image == nil)
     // have to be filled at each step.
     m_currentImageViewIndex = (m_currentImageViewIndex + 1) % 2;
@@ -663,7 +736,8 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark Miscellaneous
 
-// Return an index in [0; upperBound[ different from forbiddenIndex
+// Return an index in [0; upperBound[ different from forbiddenIndex (this correctly works when forbiddenIndex
+// is set to kSlideshowNoIndex, in which case no valid index is excluded)
 - (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex
 {
     NSInteger randomIndex;
@@ -708,7 +782,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     [self releaseImageView:currentImageView];
     
     if (! animation.terminating) {
-        [self playNextAnimation];
+        [self playAnimationForNextImage];
     }
 }
 
