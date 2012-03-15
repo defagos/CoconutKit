@@ -45,6 +45,7 @@ static const NSInteger kSlideshowNoIndex = -1;
                                                    xOffset:(CGFloat)xOffset
                                                    yOffset:(CGFloat)yOffset;
 
+- (void)playNextAnimation;
 - (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath;
 - (void)playAnimationForNextImage;
 - (void)playAnimationForPreviousImage;
@@ -631,6 +632,30 @@ static const NSInteger kSlideshowNoIndex = -1;
     return animation;
 }
 
+- (void)playNextAnimation
+{
+    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
+    
+    if (self.random) {
+        if (numberOfImages > 1) {
+            // Avoid displaying the same image twice in a row
+            m_currentImageIndex = m_nextImageIndex;
+            m_nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:m_currentImageIndex];
+        }
+        else {
+            m_currentImageIndex = 0;
+            m_nextImageIndex = 0;
+        }
+    }
+    else {
+        m_currentImageIndex = (m_currentImageIndex + 1) % numberOfImages;
+        m_nextImageIndex = (m_currentImageIndex + 1) % numberOfImages;
+    }
+    
+    [self animateImages];
+}
+
 - (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath
 {
     NSUInteger numberOfImages = [self.imageNamesOrPaths count];
@@ -782,7 +807,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     [self releaseImageView:currentImageView];
     
     if (! animation.terminating) {
-        [self playAnimationForNextImage];
+        [self playNextAnimation];
     }
 }
 
