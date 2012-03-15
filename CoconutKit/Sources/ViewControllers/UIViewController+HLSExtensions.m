@@ -209,9 +209,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidLoad_Imp)(self, @selector(viewDidLoad));
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
-        HLSLoggerDebug(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setOriginalViewSize:self.view.bounds.size];
@@ -223,9 +223,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewWillAppear_Imp)(self, @selector(viewWillAppear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
-        HLSLoggerDebug(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewWillAppear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear];
@@ -236,9 +236,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidAppear_Imp)(self, @selector(viewDidAppear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        HLSLoggerDebug(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
@@ -256,17 +256,21 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewWillDisappear_Imp)(self, @selector(viewWillDisappear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
-        HLSLoggerDebug(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
-    // Automatic keyboard dismissal when the view disappears (will be restored when the view appears again)
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
-    UITextField *currentTextField = [UITextField currentTextField];
-    if ([currentTextField isDescendantOfView:self.view]) {
-        objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, currentTextField, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [currentTextField resignFirstResponder];
+    
+    // Automatic keyboard dismissal when the view disappears (will be restored when the view appears again). We test that the view
+    // has been loaded to account for the possibility that the view lifecycle has been incorrectly implemented
+    if ([self isViewLoaded]) {
+        UITextField *currentTextField = [UITextField currentTextField];
+        if ([currentTextField isDescendantOfView:self.view]) {
+            objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, currentTextField, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            [currentTextField resignFirstResponder];
+        }        
     }
 }
 
@@ -275,9 +279,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (*s_UIViewController__viewDidDisappear_Imp)(self, @selector(viewDidDisappear:), animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        HLSLoggerDebug(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
@@ -288,9 +292,9 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     (s_UIViewController__viewDidUnload_Imp)(self, @selector(viewDidUnload));
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload]) {
-        HLSLoggerDebug(@"The viewDidUnload method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidUnload] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidUnload method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidUnload] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
