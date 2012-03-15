@@ -12,7 +12,7 @@
 #import "HLSLogger.h"
 #import "HLSValidable.h"
 
-const NSInteger kWizardViewControllerNoPage = -1;
+static const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 

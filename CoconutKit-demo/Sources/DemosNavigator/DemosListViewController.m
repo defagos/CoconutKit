@@ -12,13 +12,13 @@
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
-#import "KenBurnsSlideshowDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
 #import "SkinningDemoViewController.h"
+#import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
@@ -70,7 +70,7 @@ typedef enum {
     ViewDemoIndexTextFields,
     ViewDemoIndexCursor,
     ViewDemoIndexActionSheet,
-    ViewDemoIndexKenBurns,
+    ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
@@ -294,8 +294,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexKenBurns: {
-                    cell.textLabel.text = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+                case ViewDemoIndexSlideshow: {
+                    cell.textLabel.text = NSLocalizedString(@"Slideshow", @"Slideshow");
                     break;
                 }
                     
@@ -446,8 +446,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexKenBurns: {
-                    demoViewController = [[[KenBurnsSlideshowDemoViewController alloc] init] autorelease];
+                case ViewDemoIndexSlideshow: {
+                    demoViewController = [[[SlideshowDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

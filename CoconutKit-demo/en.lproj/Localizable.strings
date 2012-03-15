@@ -10,6 +10,7 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Apples & Coconut"="Apples & Coconut";
 "Birthdate"="Birthdate";
 "Blocking"="Blocking";
 "Bounces"="Bounces";
@@ -20,11 +21,11 @@
 "Capitalized string in Localizable.strings"="Capitalized string in Localizable.strings";
 "Change"="Change";
 "Change color"="Change color";
-"Change image set"="Change image set";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "City"="City";
 "Click for missing translation"="Click for missing translation";
 "Close"="Close";
+"Coconuts"="Coconuts";
 "Container customization"="Container customization";
 "Core"="Core";
 "Country"="Country";
@@ -48,10 +49,10 @@
 "Heavy view (cached)"="Heavy view (cached)";
 "Hide with modal"="Hide with modal";
 "Houston, we've got a problem"="Houston, we've got a problem";
+"Image set"="Image set";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
 "Invalid email address"="Invalid email address";
-"Ken Burns effect"="Ken Burns effect";
 "Label with some missing translation"="Label with some missing translation";
 "Landscape only"="Landscape only";
 "Language"="Language";
@@ -91,6 +92,7 @@
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Skinning"="Skinning";
+"Slideshow"="Slideshow";
 "Start"="Start";
 "State"="State";
 "Stop"="Stop";
@@ -103,6 +105,7 @@
 "Task"="Task";
 "Task group"="Task group";
 "Tasks"="Tasks";
+"Terminate"="Terminate";
 "Test in modal"="Test in modal";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
