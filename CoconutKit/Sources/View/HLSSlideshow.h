@@ -117,7 +117,7 @@ typedef enum {
 
 /**
  * Return the currently displayed image (when a transition occurs, this method returns the disappearing image
- * until the transition ends)
+ * until the image has been hidden)
  */
 - (NSString *)currentImageNameOrPath;
 

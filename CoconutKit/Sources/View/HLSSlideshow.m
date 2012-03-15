@@ -283,8 +283,14 @@ static const NSInteger kSlideshowNoIndex = -1;
         return nil;
     }
     
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
-    return [self imageNameOrPathForImageView:currentImageView];
+    if ([self.animation isRunning]) {
+        UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
+        return [self imageNameOrPathForImageView:currentImageView];        
+    }
+    else {
+        UIImageView *nextImageView = [self.imageViews objectAtIndex:(m_currentImageViewIndex + 1) % 2];
+        return [self imageNameOrPathForImageView:nextImageView];
+    }
 }
 
 #pragma mark Image management
