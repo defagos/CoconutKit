@@ -9,17 +9,18 @@
 #import "HLSAnimation.h"
 
 /**
- * Slideshow effects
+ * Slideshow effects. Depending on which effect is applied the images will be scaled to fill or fit the slideshow
+ * view frame (preserving their aspect ratio)
  */
 typedef enum {
     HLSSlideshowEffectEnumBegin = 0,
-    HLSSlideshowEffectNone = HLSSlideshowEffectEnumBegin,                           // No transition between images
-    HLSSlideshowEffectCrossDissolve,                                                // Cross-dissolve transition between images
-    HLSSlideshowEffectKenBurns,                                                     // Ken-Burns effect (random zooming and panning, cross-dissolve)
-    HLSSlideshowEffectHorizontalRibbon,                                             // Images slide from left to right
-    HLSSlideshowEffectInverseHorizontalRibbon,                                      // Images slide from right to left
-    HLSSlideshowEffectVerticalRibbon,                                               // Images slide from top to bottom
-    HLSSlideshowEffectInverseVerticalRibbon,                                        // Images slide from bottom to top
+    HLSSlideshowEffectNone = HLSSlideshowEffectEnumBegin,                           // No transition between images (aspect fit)
+    HLSSlideshowEffectCrossDissolve,                                                // Cross-dissolve transition between images (aspect fit)
+    HLSSlideshowEffectKenBurns,                                                     // Ken-Burns effect (random zooming and panning, cross-dissolve, aspect fill)
+    HLSSlideshowEffectHorizontalRibbon,                                             // Images slide from left to right (aspect fill)
+    HLSSlideshowEffectInverseHorizontalRibbon,                                      // Images slide from right to left (aspect fill)
+    HLSSlideshowEffectVerticalRibbon,                                               // Images slide from top to bottom (aspect fill)
+    HLSSlideshowEffectInverseVerticalRibbon,                                        // Images slide from bottom to top (aspect fill)
     HLSSlideshowEffectEnumEnd,
     HLSSlideshowEffectEnumSize = HLSSlideshowEffectEnumEnd - HLSSlideshowEffectEnumBegin
 } HLSSlideshowEffect;

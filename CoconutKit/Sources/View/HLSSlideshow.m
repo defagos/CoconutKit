@@ -269,27 +269,39 @@ static const NSInteger kSlideshowNoIndex = -1;
     return image;
 }
 
-// Setup an image view to display a given image. The image view frame is adjusted to get an aspect fill
+// Setup an image view to display a given image. The image view frame is adjusted to get an aspect fill / aspect fit
 // behavior for the image view, and is centered in self. The view alpha is reset to 1
 - (void)prepareImageView:(UIImageView *)imageView withImageNameOrPath:(NSString *)imageNameOrPath
 {
     UIImage *image = [self imageForNameOrPath:imageNameOrPath];
     
+    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
+    CGFloat zoomScale;
     // Aspect ratios of frame and image
     CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
     CGFloat imageRatio = image.size.width / image.size.height;
-    
-    // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
-    CGFloat zoomScale;
-    // The image is more portrait-shaped than self
-    if (floatlt(imageRatio, frameRatio)) {
-        zoomScale = CGRectGetWidth(self.frame) / image.size.width;
+    if (self.effect == HLSSlideshowEffectNone || self.effect == HLSSlideshowEffectCrossDissolve) {
+        // The image is more portrait-shaped than self
+        if (floatlt(imageRatio, frameRatio)) {
+            zoomScale = CGRectGetHeight(self.frame) / image.size.height;
+        }
+        // The image is more landscape-shaped than self
+        else {
+            zoomScale = CGRectGetWidth(self.frame) / image.size.width;
+        }
     }
-    // The image is more landscape-shaped than self
+    // Calculate the scale which needs to be applied to get aspect fit behavior for the image view
     else {
-        zoomScale = CGRectGetHeight(self.frame) / image.size.height;
+        // The image is more portrait-shaped than self
+        if (floatlt(imageRatio, frameRatio)) {
+            zoomScale = CGRectGetWidth(self.frame) / image.size.width;
+        }
+        // The image is more landscape-shaped than self
+        else {
+            zoomScale = CGRectGetHeight(self.frame) / image.size.height;
+        }
     }
     
     // Update the image view to match the image dimensions with an aspect fill behavior inside self
@@ -409,8 +421,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     viewAnimationStep01.alphaVariation = -1.f;
     [animationStep0 addViewAnimationStep:viewAnimationStep01 forView:nextImageView];
     
-    // User information attached: Not the first animation loop
-    if ([userInfo objectForKey:@"scaleFactor"]) {
+    // User information attached: Not the first animation loop (and not reset after skipping
+    // to the next or previous image)
+    if ([userInfo objectForKey:@"scaleFactor"] && ! self.animation.terminating) {
         currentImageScaleFactor = [[userInfo objectForKey:@"scaleFactor"] floatValue];
         currentImageXOffset = [[userInfo objectForKey:@"xOffset"] floatValue];
         currentImageYOffset = [[userInfo objectForKey:@"yOffset"] floatValue];
