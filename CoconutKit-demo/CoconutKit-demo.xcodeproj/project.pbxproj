@@ -1225,7 +1225,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-demo";
@@ -1243,7 +1242,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
-				IBC_PLUGIN_SEARCH_PATHS = "$(inherited) \"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				PRODUCT_NAME = "CoconutKit-demo";
 				VALIDATE_PRODUCT = YES;
