@@ -111,7 +111,7 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 
 ### Release notes
 
-### Version 1.1.3
+#### Version 1.1.3
 * Added scroll view synchronization. This makes parallax scrolling easy to implement
 * Fixed bugs (tab bar controller in custom containers, simultaneous container add / removal operations, iOS 4 crashes) as well as link issues with HLSActionSheet
 

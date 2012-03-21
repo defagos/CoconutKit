@@ -15,7 +15,7 @@
 #import "HLSRuntime.h"
 
 // Constants
-static CGFloat kPushFrom2ScaleFactor = 0.95f;
+static CGFloat kPushToTheBackScaleFactor = 0.95f;
 static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, otherwise infinite matrix elements
 
 // Keys for runtime container - view controller object association
@@ -68,6 +68,9 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
 
 + (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
                                  disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
++ (HLSAnimation *)fadeInAnimation2WithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                  disappearingContainerContents:(NSArray *)disappearingContainerContents;
 
 + (HLSAnimation *)crossDissolveAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
                                         disappearingContainerContents:(NSArray *)disappearingContainerContents;
@@ -347,9 +350,10 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
                 case HLSTransitionStyleCoverFromTopLeft2:
                 case HLSTransitionStyleCoverFromTopRight2:
                 case HLSTransitionStyleCoverFromBottomLeft2:
-                case HLSTransitionStyleCoverFromBottomRight2: {
-                    viewAnimationStep.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
-                                                                         kPushFrom2ScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame),
+                case HLSTransitionStyleCoverFromBottomRight2:
+                case HLSTransitionStyleFadeIn2: {
+                    viewAnimationStep.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
+                                                                         kPushToTheBackScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame),
                                                                          1.f);
                     break;
                 }
@@ -774,7 +778,7 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = CATransform3DMakeScale(kPushFrom2ScaleFactor, kPushFrom2ScaleFactor, 1.f);
+        viewAnimationStep21.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor, kPushToTheBackScaleFactor, 1.f);
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
@@ -800,6 +804,34 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
     [animationSteps addObject:animationStep1];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view fades in. The view belows are pushed to the back
++ (HLSAnimation *)fadeInAnimation2WithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                                  disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep21.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor, kPushToTheBackScaleFactor, 1.f);
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
+    }
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
@@ -1096,6 +1128,12 @@ static void swizzledForwardSetter_id_BOOL(UIViewController *self, SEL _cmd, id v
         case HLSTransitionStyleFadeIn: {
             animation = [self fadeInAnimationWithAppearingContainerContent:appearingContainerContent
                                              disappearingContainerContents:disappearingContainerContents];
+            break;
+        }
+            
+        case HLSTransitionStyleFadeIn2: {
+            animation = [self fadeInAnimation2WithAppearingContainerContent:appearingContainerContent
+                                              disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
