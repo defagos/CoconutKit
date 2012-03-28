@@ -20,7 +20,7 @@
  *
  * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
  * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
- *   - cancel or terminate the animation first
+ *   - cancel the animation first
  *   - unregister the delegate, and let the animation run until the end
  *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
  *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
