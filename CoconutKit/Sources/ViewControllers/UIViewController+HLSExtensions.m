@@ -12,14 +12,14 @@
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "UITextField+HLSExtensions.h"
+#import "UIResponder+HLSExtensions.h"
 
 HLSLinkCategory(UIViewController_HLSExtensions)
 
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
 static void *s_originalViewSizeKey = &s_originalViewSizeKey;
-static void *s_previouslyActiveTextFieldKey = &s_previouslyActiveTextFieldKey;
+static void *s_previousCurrentFirstResponder = &s_previousCurrentFirstResponder;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__initWithNibName_bundle_Imp)(id, SEL, id, id) = NULL;
@@ -244,10 +244,10 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
     
     // Restore previous first responder (if any)
-    UITextField *previouslyActiveTextField = objc_getAssociatedObject(self, s_previouslyActiveTextFieldKey);
+    UITextField *previouslyActiveTextField = objc_getAssociatedObject(self, s_previousCurrentFirstResponder);
     if (previouslyActiveTextField) {
         [previouslyActiveTextField becomeFirstResponder];
-        objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, s_previousCurrentFirstResponder, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 
@@ -266,10 +266,13 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     // Automatic keyboard dismissal when the view disappears (will be restored when the view appears again). We test that the view
     // has been loaded to account for the possibility that the view lifecycle has been incorrectly implemented
     if ([self isViewLoaded]) {
-        UITextField *currentTextField = [UITextField currentTextField];
-        if ([currentTextField isDescendantOfView:self.view]) {
-            objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, currentTextField, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            [currentTextField resignFirstResponder];
+        UIResponder *currentFirstResponder = [UIResponder currentFirstResponder];
+        if ([currentFirstResponder isKindOfClass:[UIView class]]) {
+            UIView *currentFirstResponderView = (UIView *)currentFirstResponder;
+            if ([currentFirstResponderView isDescendantOfView:self.view]) {
+                objc_setAssociatedObject(self, s_previousCurrentFirstResponder, currentFirstResponderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                [currentFirstResponderView resignFirstResponder];                
+            }
         }        
     }
 }
@@ -299,7 +302,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
     
-    objc_setAssociatedObject(self, s_previouslyActiveTextFieldKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_previousCurrentFirstResponder, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
