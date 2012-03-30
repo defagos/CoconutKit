@@ -29,7 +29,7 @@
  * to the delegate, and which would have been responsible to cancel the associated animation when the delegate
  * is destroyed. This approach sadly does not work, though, since associated objects are not released at the exact
  * same time the object they have been attached to is deallocated, but soon afterwards. This isn't sufficient to
- * implement reliable zeroing weak references.
+ * implement reliable zeroing weak references. Probably use dynamic subclassing instead
  *
  * The above behavior should be optional (HLSAnimation should provide a boolean setting for it)
  */
@@ -169,6 +169,7 @@
     }
     
     // Retains the delegate during the time the animation is played to avoid crashes
+    // TODO: Remove when replaced by zeroing weak refs
     [self.delegate retain];
         
     if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
@@ -304,6 +305,7 @@
             }            
         }
         
+        // TODO: Remove when replaced by zeroing weak refs
         [self.delegate release];
         
         // If the animation has been cancelled and was not played animated, update
