@@ -19,7 +19,6 @@ HLSLinkCategory(UIViewController_HLSExtensions)
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
 static void *s_originalViewSizeKey = &s_originalViewSizeKey;
-static void *s_previousCurrentFirstResponder = &s_previousCurrentFirstResponder;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__initWithNibName_bundle_Imp)(id, SEL, id, id) = NULL;
@@ -241,14 +240,7 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
                       "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
-    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
-    
-    // Restore previous first responder (if any)
-    UITextField *previouslyActiveTextField = objc_getAssociatedObject(self, s_previousCurrentFirstResponder);
-    if (previouslyActiveTextField) {
-        [previouslyActiveTextField becomeFirstResponder];
-        objc_setAssociatedObject(self, s_previousCurrentFirstResponder, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
+    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];    
 }
 
 - (void)swizzledViewWillDisappear:(BOOL)animated
@@ -263,14 +255,13 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
     
-    // Automatic keyboard dismissal when the view disappears (will be restored when the view appears again). We test that the view
-    // has been loaded to account for the possibility that the view lifecycle has been incorrectly implemented
+    // Automatic keyboard dismissal when the view disappears. We test that the view has been loaded to account for the possibility 
+    // that the view lifecycle has been incorrectly implemented
     if ([self isViewLoaded]) {
         UIResponder *currentFirstResponder = [UIResponder currentFirstResponder];
         if ([currentFirstResponder isKindOfClass:[UIView class]]) {
             UIView *currentFirstResponderView = (UIView *)currentFirstResponder;
             if ([currentFirstResponderView isDescendantOfView:self.view]) {
-                objc_setAssociatedObject(self, s_previousCurrentFirstResponder, currentFirstResponderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                 [currentFirstResponderView resignFirstResponder];                
             }
         }        
@@ -301,8 +292,6 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
-    
-    objc_setAssociatedObject(self, s_previousCurrentFirstResponder, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
