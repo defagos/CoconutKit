@@ -13,6 +13,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
+#import "HLSZeroingWeakRef.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -43,6 +44,7 @@
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
+@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
@@ -115,7 +117,7 @@
     self.userInfo = nil;
     [self.dummyView removeFromSuperview];
     self.dummyView = nil;
-    self.delegate = nil;
+    self.delegateZeroingWeakRef = nil;
     [super dealloc];
 }
 
@@ -145,7 +147,20 @@
 
 @synthesize terminating = m_terminating;
 
-@synthesize delegate = m_delegate;
+@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
+
+@dynamic delegate;
+
+- (id<HLSAnimationDelegate>)delegate
+{
+    return self.delegateZeroingWeakRef.object;
+}
+
+- (void)setDelegate:(id<HLSAnimationDelegate>)delegate
+{
+    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
+    [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
+}
 
 #pragma mark Animation
 
@@ -167,10 +182,6 @@
     if (self.lockingUI) {
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
-    
-    // Retains the delegate during the time the animation is played to avoid crashes
-    // TODO: Remove when replaced by zeroing weak refs
-    [self.delegate retain];
         
     if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
         [self.delegate animationWillStart:self animated:animated];
@@ -304,9 +315,6 @@
                 [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
             }            
         }
-        
-        // TODO: Remove when replaced by zeroing weak refs
-        [self.delegate release];
         
         // If the animation has been cancelled and was not played animated, update
         // its status. If the animation was played animated, the end animation callback 

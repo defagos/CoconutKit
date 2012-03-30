@@ -11,6 +11,7 @@
 
 // Forward declarations
 @class HLSAnimationStep;
+@class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
 /**
@@ -69,7 +70,7 @@
     BOOL m_running;
     BOOL m_cancelling;
     BOOL m_terminating;
-    id<HLSAnimationDelegate> m_delegate;
+    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 
 /**

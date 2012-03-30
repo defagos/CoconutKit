@@ -152,6 +152,8 @@
 		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
+		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
 		6FCDA16C14DAE5EF00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */; };
 		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
@@ -324,6 +326,8 @@
 		6FADE59814BA0494007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
+		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 				6FADE52C14BA0494007EE121 /* HLSValidable.h */,
 				6FADE52D14BA0494007EE121 /* HLSValidators.h */,
 				6FADE52E14BA0494007EE121 /* HLSValidators.m */,
+				6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */,
+				6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */,
 				6FADE52F14BA0494007EE121 /* NSArray+HLSExtensions.h */,
 				6FADE53014BA0494007EE121 /* NSArray+HLSExtensions.m */,
 				6FADE53114BA0494007EE121 /* NSBundle+HLSDynamicLocalization.h */,
@@ -718,6 +724,7 @@
 				6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */,
 				6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */,
 				6F87888C1522297600728B77 /* UIResponder+HLSExtensions.h in Headers */,
+				6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +857,7 @@
 				6FEEF85D14F29057001585A6 /* UIScrollView+HLSExtensions.m in Sources */,
 				6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */,
 				6F87888D1522297600728B77 /* UIResponder+HLSExtensions.m in Sources */,
+				6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

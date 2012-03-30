@@ -50,6 +50,7 @@
     #import "HLSViewController.h"
     #import "HLSWebViewController.h"
     #import "HLSWizardViewController.h"
+    #import "HLSZeroingWeakRef.h"
     #import "NSArray+HLSExtensions.h"
     #import "NSBundle+HLSDynamicLocalization.h"
     #import "NSBundle+HLSExtensions.h"

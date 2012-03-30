@@ -8,6 +8,8 @@
 
 #import "SingleViewAnimationDemoViewController.h"
 
+#import <objc/runtime.h>
+
 @interface SingleViewAnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
@@ -30,13 +32,7 @@
 - (void)releaseViews
 {
     [super releaseViews];
-    
-    [self.animation cancel];
-    self.animation = nil;
-    
-    [self.reverseAnimation cancel];
-    self.reverseAnimation = nil;
-    
+        
     self.rectangleView = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
@@ -44,6 +40,14 @@
     self.terminateButton = nil;
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
+    self.animation = nil;
+    self.reverseAnimation = nil;
+}
+
+- (void)dealloc
+{
+    objc_removeAssociatedObjects(self);
+    [super dealloc];
 }
 
 #pragma mark View lifecycle

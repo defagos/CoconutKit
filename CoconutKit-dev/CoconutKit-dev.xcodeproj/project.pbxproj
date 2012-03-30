@@ -185,6 +185,7 @@
 		6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
 		6FADE8E014BA04C9007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
@@ -508,6 +509,8 @@
 		6FADE88514BA04C9007EE121 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
+		6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
 		6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
 		6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
@@ -722,6 +725,8 @@
 				6FADE64714BA04A6007EE121 /* HLSValidable.h */,
 				6FADE64814BA04A6007EE121 /* HLSValidators.h */,
 				6FADE64914BA04A6007EE121 /* HLSValidators.m */,
+				6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */,
+				6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */,
 				6FADE64A14BA04A6007EE121 /* NSArray+HLSExtensions.h */,
 				6FADE64B14BA04A6007EE121 /* NSArray+HLSExtensions.m */,
 				6FADE64C14BA04A6007EE121 /* NSBundle+HLSDynamicLocalization.h */,
@@ -1709,6 +1714,7 @@
 				6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */,
 				6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8788911522299100728B77 /* UIResponder+HLSExtensions.m in Sources */,
+				6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
