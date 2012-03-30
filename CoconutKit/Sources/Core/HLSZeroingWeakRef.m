@@ -31,37 +31,39 @@ static void subclass_dealloc(id object, SEL _cmd);
 - (id)initWithObject:(id)object
 {
     if ((self = [super init])) {
-        static NSString * const kSubclassPrefix = @"HLSZeroingWeakRef_";
-        
-        self.object = object;
         self.invocations = [NSMutableArray array];
+        self.object = object;
         
-        // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
-        // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
-        // incur an unacceptable overhead on all NSObjects
-        NSString *className = [object className];
-        if (! [className hasPrefix:kSubclassPrefix]) {
-            NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
-            Class subclass = NSClassFromString(subclassName);
-            if (! subclass) {
-                subclass = objc_allocateClassPair([object class], [subclassName UTF8String], 0);
-                NSAssert(subclass != Nil, @"Could not register subclass");
-                class_addMethod(subclass, @selector(dealloc), (IMP)subclass_dealloc, "v@:");
-                objc_registerClassPair(subclass);
+        if (self.object) {
+            static NSString * const kSubclassPrefix = @"HLSZeroingWeakRef_";
+            
+            // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
+            // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
+            // incur an unacceptable overhead on all NSObjects
+            NSString *className = [object className];
+            if (! [className hasPrefix:kSubclassPrefix]) {
+                NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
+                Class subclass = NSClassFromString(subclassName);
+                if (! subclass) {
+                    subclass = objc_allocateClassPair([object class], [subclassName UTF8String], 0);
+                    NSAssert(subclass != Nil, @"Could not register subclass");
+                    class_addMethod(subclass, @selector(dealloc), (IMP)subclass_dealloc, "v@:");
+                    objc_registerClassPair(subclass);
+                }
+                
+                // Changes the object class
+                object_setClass(object, subclass);    
             }
             
-            // Changes the object class
-            object_setClass(object, subclass);    
-        }
-        
-        // Attach to object a list storing all zeroing weak references pointing at it
-        NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
-        if (! zeroingWeakRefValues) {
-            zeroingWeakRefValues = [NSMutableSet set];
-            objc_setAssociatedObject(object, s_zeroingWeakRefListKey, zeroingWeakRefValues, OBJC_ASSOCIATION_RETAIN);
-        }
-        NSValue *selfValue = [NSValue valueWithPointer:self];
-        [zeroingWeakRefValues addObject:selfValue];
+            // Attach to object a list storing all zeroing weak references pointing at it
+            NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
+            if (! zeroingWeakRefValues) {
+                zeroingWeakRefValues = [NSMutableSet set];
+                objc_setAssociatedObject(object, s_zeroingWeakRefListKey, zeroingWeakRefValues, OBJC_ASSOCIATION_RETAIN);
+            }
+            NSValue *selfValue = [NSValue valueWithPointer:self];
+            [zeroingWeakRefValues addObject:selfValue];
+        }        
     }
     return self;
 }
