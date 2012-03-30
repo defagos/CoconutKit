@@ -17,24 +17,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-/**
- * TODO:
- * It would be nice if we didn't need to retain the delegate during an animation. To avoid notifying the delegate
- * after its death, we would need the delegate to cancel its associated animations just before it dies. It is most 
- * likely possible to implement such a behavior using some kind of zeroing weak reference (providing the ability to 
- * hook some code just before the delegate weak reference is zeroed). ARC zeroing weak references would not work: They
- * would prevent crashes, but they do not allow custom code to be executed before destruction. Using MAZeroingWeakRef 
- * from Mike Ash could probably solve those issues.
- *
- * Note that I tried to implement a custom basic zeroing weak reference strategy using an associated object attached
- * to the delegate, and which would have been responsible to cancel the associated animation when the delegate
- * is destroyed. This approach sadly does not work, though, since associated objects are not released at the exact
- * same time the object they have been attached to is deallocated, but soon afterwards. This isn't sufficient to
- * implement reliable zeroing weak references. Probably use dynamic subclassing instead
- *
- * The above behavior should be optional (HLSAnimation should provide a boolean setting for it)
- */
-
 @interface HLSAnimation ()
 
 @property (nonatomic, retain) NSArray *animationSteps;

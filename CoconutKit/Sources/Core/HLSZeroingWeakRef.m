@@ -14,6 +14,7 @@
 // Associated object keys
 static void *s_zeroingWeakRefListKey = &s_zeroingWeakRefListKey;
 
+// Static methods
 static void subclass_dealloc(id object, SEL _cmd);
 
 @interface HLSZeroingWeakRef ()
@@ -35,8 +36,9 @@ static void subclass_dealloc(id object, SEL _cmd);
         self.object = object;
         self.invocations = [NSMutableArray array];
         
-        // Dynamically subclass the object class to override -dealloc selectively (swizzling -dealloc at the NSObject
-        // level is NOT an option)
+        // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
+        // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
+        // incur an unacceptable overhead on all NSObjects
         NSString *className = [object className];
         if (! [className hasPrefix:kSubclassPrefix]) {
             NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
@@ -52,7 +54,7 @@ static void subclass_dealloc(id object, SEL _cmd);
             object_setClass(object, subclass);    
         }
         
-        // Attach to object a list storing all weak references pointing at it
+        // Attach to object a list storing all zeroing weak references pointing at it
         NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
         if (! zeroingWeakRefValues) {
             zeroingWeakRefValues = [NSMutableSet set];
@@ -102,7 +104,7 @@ static void subclass_dealloc(id object, SEL _cmd);
 
 static void subclass_dealloc(id object, SEL _cmd)
 {
-    // Update the weak references
+    // Set all weak references bound to object to nil
     NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
     for (NSValue *zeroingWeakRefValue in zeroingWeakRefValues) {
         HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue pointerValue];
