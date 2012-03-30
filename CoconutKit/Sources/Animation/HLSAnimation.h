@@ -18,12 +18,22 @@
  * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
  * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
  *
- * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
- * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
- *   - cancel the animation first
- *   - unregister the delegate, and let the animation run until the end
- *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
- *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
+ * As for standard UIView animation blocks (upon which HLSAnimation is based), an HLSAnimation object retains its 
+ * delegate during the time it runs to prevent crashes. To avoid unnecessarily retaining an HLSAnimation delegate, 
+ * you should therefore stop (i.e. cancel or terminate) a running animation its delegate is about to be discarded.
+ * For example, a delegate view controller should stop the associated animations when it gets dismissed (e.g. popped 
+ * from a navigation controller). Forgetting to cancel an animation when its delegate is discarded does not hurt, but 
+ * leads to a waste of resources until the animation ends.
+ *
+ * Alternatively, you can lock the UI during the animation (lockingUI animation property). This way you ensure that
+ * your users cannot do anything while an animation is running, which in most cases means you do not have to deal
+ * with the above issues. In cases where locking the UI can be frustrating, be prepared to stop an animation when the
+ * user dismisses the view where the animation is played.
+ *
+ * Since an animation retains its delegate, note that it does not make sense to cancel the animations associated with
+ * the delegate in its dealloc method (which won't be called during the animation). You will need to consider other
+ * properties of your delegate to find where associated animations should be stopped (if the delegate is a view
+ * controller, consider using its view lifecycle).
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
