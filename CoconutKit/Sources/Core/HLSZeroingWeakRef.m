@@ -83,6 +83,12 @@ static Class subclass_class(id object, SEL _cmd);
     NSValue *selfValue = [NSValue valueWithPointer:self];
     [zeroingWeakRefValues removeObject:selfValue];
     
+    // No weak ref anymore. Can remove the dynamic subclass
+    if ([zeroingWeakRefValues count] == 0) {
+        Class superclass = class_getSuperclass(object_getClass(self.object));
+        object_setClass(self.object, superclass);
+    }
+    
     self.object = nil;
     self.invocations = nil;
     
