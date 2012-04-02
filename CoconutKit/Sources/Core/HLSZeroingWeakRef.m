@@ -16,6 +16,7 @@ static void *s_zeroingWeakRefListKey = &s_zeroingWeakRefListKey;
 
 // Static methods
 static void subclass_dealloc(id object, SEL _cmd);
+static Class subclass_class(id object, SEL _cmd);
 
 @interface HLSZeroingWeakRef ()
 
@@ -40,14 +41,22 @@ static void subclass_dealloc(id object, SEL _cmd);
             // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
             // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
             // incur an unacceptable overhead on all NSObjects
-            NSString *className = [object className];
+            Class class = object_getClass(object);      // Access the real class, do not use [self class] here since can be faked
+            NSString *className = [NSString stringWithUTF8String:class_getName(class)];
             if (! [className hasPrefix:kSubclassPrefix]) {
                 NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
                 Class subclass = NSClassFromString(subclassName);
                 if (! subclass) {
-                    subclass = objc_allocateClassPair([object class], [subclassName UTF8String], 0);
+                    subclass = objc_allocateClassPair(class, [subclassName UTF8String], 0);
                     NSAssert(subclass != Nil, @"Could not register subclass");
-                    class_addMethod(subclass, @selector(dealloc), (IMP)subclass_dealloc, "v@:");
+                    class_addMethod(subclass, 
+                                    @selector(dealloc), 
+                                    (IMP)subclass_dealloc, 
+                                    method_getTypeEncoding(class_getInstanceMethod(class, @selector(dealloc))));
+                    class_addMethod(subclass, 
+                                    @selector(class), 
+                                    (IMP)subclass_class, 
+                                    method_getTypeEncoding(class_getClassMethod(class, @selector(class))));
                     objc_registerClassPair(subclass);
                 }
                 
@@ -121,7 +130,15 @@ static void subclass_dealloc(id object, SEL _cmd)
     }
     
     // Call parent implementation
-    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation([object superclass], @selector(dealloc));
+    Class superclass = class_getSuperclass(object_getClass(object));
+    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, @selector(dealloc));
     NSCAssert(parent_dealloc_Imp != NULL, @"Could not locate parent dealloc implementation");
     (*parent_dealloc_Imp)(object, _cmd);
+}
+
+static Class subclass_class(id object, SEL _cmd)
+{
+    // Lie about the dynamic subclass existence, as the KVO implementation does (the real class can still be seen
+    // using object_getClass)
+    return class_getSuperclass(object_getClass(object));
 }

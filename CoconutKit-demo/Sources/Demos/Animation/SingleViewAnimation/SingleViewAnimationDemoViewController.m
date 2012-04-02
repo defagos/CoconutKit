@@ -44,12 +44,6 @@
     self.reverseAnimation = nil;
 }
 
-- (void)dealloc
-{
-    objc_removeAssociatedObjects(self);
-    [super dealloc];
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
