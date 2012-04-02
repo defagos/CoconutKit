@@ -14,6 +14,7 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 #import "HLSZeroingWeakRef.h"
+#import "NSString+HLSExtensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 

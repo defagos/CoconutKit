@@ -12,7 +12,8 @@
 #import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "UIResponder+HLSExtensions.h"
+#import "UITextField+HLSExtensions.h"
+#import "UITextView+HLSExtensions.h"
 
 HLSLinkCategory(UIViewController_HLSExtensions)
 
@@ -258,13 +259,15 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     // Automatic keyboard dismissal when the view disappears. We test that the view has been loaded to account for the possibility 
     // that the view lifecycle has been incorrectly implemented
     if ([self isViewLoaded]) {
-        UIResponder *currentFirstResponder = [UIResponder currentFirstResponder];
-        if ([currentFirstResponder isKindOfClass:[UIView class]]) {
-            UIView *currentFirstResponderView = (UIView *)currentFirstResponder;
-            if ([currentFirstResponderView isDescendantOfView:self.view]) {
-                [currentFirstResponderView resignFirstResponder];                
-            }
-        }        
+        UITextField *currentTextField = [UITextField currentTextField];
+        if ([currentTextField isDescendantOfView:self.view]) {
+            [currentTextField resignFirstResponder];                
+        }
+        
+        UITextView *currentTextView = [UITextView currentTextView];
+        if ([currentTextView isDescendantOfView:self.view]) {
+            [currentTextView resignFirstResponder];                
+        }
     }
 }
 
