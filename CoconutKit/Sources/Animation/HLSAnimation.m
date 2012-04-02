@@ -13,6 +13,8 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
+#import "HLSZeroingWeakRef.h"
+#import "NSString+HLSExtensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -25,6 +27,7 @@
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
+@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
@@ -97,7 +100,7 @@
     self.userInfo = nil;
     [self.dummyView removeFromSuperview];
     self.dummyView = nil;
-    self.delegate = nil;
+    self.delegateZeroingWeakRef = nil;
     [super dealloc];
 }
 
@@ -127,7 +130,20 @@
 
 @synthesize terminating = m_terminating;
 
-@synthesize delegate = m_delegate;
+@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
+
+@dynamic delegate;
+
+- (id<HLSAnimationDelegate>)delegate
+{
+    return self.delegateZeroingWeakRef.object;
+}
+
+- (void)setDelegate:(id<HLSAnimationDelegate>)delegate
+{
+    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
+    [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
+}
 
 #pragma mark Animation
 

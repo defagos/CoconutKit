@@ -11,6 +11,7 @@
 
 // Forward declarations
 @class HLSAnimationStep;
+@class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
 /**
@@ -18,12 +19,9 @@
  * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
  * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
  *
- * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
- * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
- *   - cancel the animation first
- *   - unregister the delegate, and let the animation run until the end
- *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
- *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
+ * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
+ * an HLSAnimation is automatically cancelled if it has a delegate and the delegate is deallocated. This eliminates
+ * the need to cancel the animation manually when the delegate is destroyed.
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
@@ -59,7 +57,7 @@
     BOOL m_running;
     BOOL m_cancelling;
     BOOL m_terminating;
-    id<HLSAnimationDelegate> m_delegate;
+    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 
 /**
@@ -118,6 +116,10 @@
  */
 @property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
+/**
+ * The animation delegate. Note that the animation is automatically cancelled if the delegate is deallocated while
+ * the animation is runnning
+ */
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
 /**

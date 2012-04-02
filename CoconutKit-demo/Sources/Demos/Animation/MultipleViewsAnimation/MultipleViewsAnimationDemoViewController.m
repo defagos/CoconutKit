@@ -31,12 +31,6 @@
 {
     [super releaseViews];
     
-    [self.animation cancel];
-    self.animation = nil;
-    
-    [self.reverseAnimation cancel];
-    self.reverseAnimation = nil;
-    
     self.rectangleView1 = nil;
     self.rectangleView2 = nil;
     self.rectangleView3 = nil;
@@ -48,6 +42,8 @@
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
     self.resizingSwitch = nil;
+    self.animation = nil;
+    self.reverseAnimation = nil;
 }
 
 #pragma mark View lifecycle

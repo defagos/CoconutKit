@@ -14,7 +14,8 @@
 + (NSString *)className;
 
 /**
- * Returns the name of an object's class as a string
+ * Returns the name of an object's class (as returned by [self class]) as a string. May be faked by dynamic subclasses
+ * (e.g. those added by KVO)
  */
 - (NSString *)className;
 
