@@ -13,7 +13,17 @@
  * way to execute custom code before the reference is zeroed. This is especially useful when it makes
  * sense to proactively stop some process whose delegate gets deallocated, for example.
  *
- * HLSZeroingWeakRef instances must be retained by the objects which store them
+ * HLSZeroingWeakRef instances must be retained by the objects which store them.
+ *
+ * The current implementation of HLSZeroingWeakRef is fairly basic:
+ *   - zeroing weak references to toll-free bridged objects (NSString, NSURL, NSNumber, etc.) are not 
+ *     supported. Attempting to initialize a zeroing weak with a toll-free bridged object results in 
+ *     an exception being thrown
+ *   - thread-safety issues have been ignored
+ *
+ * This implementation should suffice in most cases (weak pointers to instances of custom Objective-C 
+ * classes, accessed from a single thread). In other cases, consider using Mike Ash implementation
+ * found at https://github.com/mikeash/MAZeroingWeakRef or ARC zeroing weak references.
  */
 @interface HLSZeroingWeakRef : NSObject {
 @private
@@ -22,8 +32,8 @@
 }
 
 /**
- * Initialize a weak reference to an object. When the object gets deallocated, the weak reference object
- * is automatically set to nil
+ * Initialize a weak reference to an Objective-C object (throws an exception if object is a toll-free
+ * bridged object)
  */
 - (id)initWithObject:(id)object;
 

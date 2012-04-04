@@ -35,13 +35,24 @@ static Class subclass_class(id object, SEL _cmd);
         self.invocations = [NSMutableArray array];
         self.object = object;
         
-        if (self.object) {
+        if (object) {
             static NSString * const kSubclassPrefix = @"HLSZeroingWeakRef_";
+            
+            // Access the real class, do not use [self class] here since can be faked
+            Class class = object_getClass(object);
+            
+            // No support for Core Foundation objects (lead to infinite recursion)
+            // For more information, see
+            //   http://www.mikeash.com/pyblog/friday-qa-2010-01-22-toll-free-bridging-internals.html
+            if ([NSStringFromClass(class) hasPrefix: @"__NSCF"]) {
+                @throw [NSException exceptionWithName:NSInvalidArgumentException 
+                                               reason:@"Cannot create zeroing weak references to toll-free bridged objects"
+                                             userInfo:nil];
+            }
             
             // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
             // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
             // incur an unacceptable overhead on all NSObjects
-            Class class = object_getClass(object);      // Access the real class, do not use [self class] here since can be faked
             NSString *className = [NSString stringWithUTF8String:class_getName(class)];
             if (! [className hasPrefix:kSubclassPrefix]) {
                 NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
