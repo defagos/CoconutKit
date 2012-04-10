@@ -15,7 +15,7 @@ HLSLinkCategory(UITextField_HLSExtensions)
 
 static UITextField *s_currentTextField = nil;           // weak ref to the current first responder
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UITextField__becomeFirstResponder_Imp)(id, SEL) = NULL;
 static void (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
 

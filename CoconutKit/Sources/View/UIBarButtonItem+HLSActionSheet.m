@@ -15,7 +15,7 @@
 
 HLSLinkCategory(UIBarButtonItem_HLSActionSheet)
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static SEL (*s_UIBarButtonItem__action_Imp)(id, SEL) = NULL;
 static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 

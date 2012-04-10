@@ -23,7 +23,7 @@ static BOOL s_missingLocalizationsVisible = NO;
 static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;

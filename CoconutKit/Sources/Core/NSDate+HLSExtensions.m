@@ -16,7 +16,7 @@ HLSLinkCategory(NSDate_HLSExtensions)
 
 static NSDateFormatter *s_dateFormatter = nil;
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;
 
 // Swizzled method implementations

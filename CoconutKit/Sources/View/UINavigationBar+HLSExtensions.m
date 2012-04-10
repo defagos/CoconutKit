@@ -15,7 +15,7 @@ HLSLinkCategory(UINavigationBar_HLSExtensions)
 
 static const NSInteger kBackgroundImageViewTag = 7456;          // Hopefully not colliding with another tag :-)
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UINavigationBar__insertSubview_atIndex_Imp)(id, SEL, id, NSInteger) = NULL;
 static void (*s_UINavigationBar__insertSubview_belowSubview_Imp)(id, SEL, id, id) = NULL;
 static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;

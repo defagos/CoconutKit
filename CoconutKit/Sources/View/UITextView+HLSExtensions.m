@@ -15,7 +15,7 @@ HLSLinkCategory(UITextView_HLSExtensions)
 
 static UITextView *s_currentTextView = nil;           // weak ref to the current first responder
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UITextView__becomeFirstResponder_Imp)(id, SEL) = NULL;
 static void (*s_UITextView__resignFirstResponder_Imp)(id, SEL) = NULL;
 

@@ -14,7 +14,7 @@
 // Keys for associated objects
 static void *s_ownerKey = &s_ownerKey;
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UIActionSheet__showFromToolbar_Imp)(id, SEL, id) = NULL;
 static void (*s_UIActionSheet__showFromTabBar_Imp)(id, SEL, id) = NULL;
 static void (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(id, SEL, id, BOOL) = NULL;

@@ -14,7 +14,7 @@
 
 HLSLinkCategory(UINavigationController_HLSActionSheet)
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static BOOL (*s_UINavigationController__swizzledNavigationBar_shouldPopItem_Imp)(id, SEL, id, id) = NULL;
 
 @implementation UINavigationController (HLSActionSheet)
