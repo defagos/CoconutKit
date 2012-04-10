@@ -14,29 +14,35 @@
 
 HLSLinkCategory(NSDate_HLSExtensions)
 
-static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;
 static NSDateFormatter *s_dateFormatter = nil;
 
-@interface NSDate (HLSExtensionsPrivate)
+// Original implementations of the methods we swizzle
+static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;
 
-- (NSString *)swizzledDescriptionWithLocale:(id)locale;
+// Swizzled method implementations
+static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _cmd, id locale);
 
-@end
+@implementation NSDate (HLSExtensions)
 
-__attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
+#pragma mark Class methods
+
++ (void)load
 {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    
-    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector([NSDate class], @selector(descriptionWithLocale:), @selector(swizzledDescriptionWithLocale:));
+    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))HLSSwizzleSelectoR(self, 
+                                                                                  @selector(descriptionWithLocale:),
+                                                                                  (IMP)swizzled_NSDate__descriptionWithLocale_Imp);
+}
+
++ (void)initialize
+{
+    if (self != [NSDate class]) {
+        return;
+    }
     
     // Create time formatter for system timezone (which is the default one if not set)
     s_dateFormatter = [[NSDateFormatter alloc] init];
     [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
-    
-    [pool drain];
 }
-
-@implementation NSDate (HLSExtensions)
 
 #pragma mark Convenience methods
 
@@ -60,12 +66,12 @@ __attribute__ ((constructor)) static void NSDate_HLSExtensionsInject(void)
     return [self compare:date] != NSOrderedAscending;
 }
 
-#pragma mark Injected methods
+@end
 
-- (NSString *)swizzledDescriptionWithLocale:(id)locale
+#pragma mark Swizzled method implementations
+
+static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _cmd, id locale)
 {
-    NSString *originalString = (*s_NSDate__descriptionWithLocale_Imp)(self, @selector(descriptionWithLocale:), locale);
+    NSString *originalString = (*s_NSDate__descriptionWithLocale_Imp)(self, _cmd, locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }
-
-@end
