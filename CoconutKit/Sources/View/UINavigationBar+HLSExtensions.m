@@ -13,27 +13,26 @@
 
 HLSLinkCategory(UINavigationBar_HLSExtensions)
 
+/**
+ * As navigation levels are pushed onto the stack, the navigation bar is updated. During this process, and if we
+ * do nothing, the background view gets on top of the title and button widgets, hiding them. To avoid this, we
+ * ensure that any view hierarchy change leaves the background view at the bottom of the view hierarchy. This
+ * is done by swizzling methods which can potentially put a view behind the background view
+ *
+ * This idea was borrowed from http://sebastiancelis.com/2009/12/21/adding-background-image-uinavigationbar/
+ */
+
 static const NSInteger kBackgroundImageViewTag = 7456;          // Hopefully not colliding with another tag :-)
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UINavigationBar__insertSubview_atIndex_Imp)(id, SEL, id, NSInteger) = NULL;
 static void (*s_UINavigationBar__insertSubview_belowSubview_Imp)(id, SEL, id, id) = NULL;
 static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
 
-@interface UINavigationBar (HLSExtensionsPrivate)
-
-// As navigation levels are pushed onto the stack, the navigation bar is updated. During this process, and if we
-// do nothing, the background view gets on top of the title and button widgets, hiding them. To avoid this, we
-// ensure that any view hierarchy change leaves the background view at the bottom of the view hierarchy. This
-// is done by swizzling methods which can potentially put a view behind the background view
-//
-// This idea was borrowed from http://sebastiancelis.com/2009/12/21/adding-background-image-uinavigationbar/
-//
-- (void)swizzledInsertSubview:(UIView *)view atIndex:(NSInteger)index;
-- (void)swizzledInsertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview;
-- (void)swizzledSendSubviewToBack:(UIView *)view;
-
-@end
+// Swizzled method implementations
+static void swizzled_UINavigationBar__insertSubview_atIndex_Imp(UINavigationBar *self, SEL _cmd, UIView *view, NSInteger index);
+static void swizzled_UINavigationBar__insertSubview_belowSubview_Imp(UINavigationBar *self, SEL _cmd, UIView *view, UIView *siblingSubview);
+static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *self, SEL _cmd, UIView *view);
 
 @implementation UINavigationBar (HLSExtensions)
 
@@ -41,15 +40,15 @@ static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
 
 + (void)load
 {
-    s_UINavigationBar__insertSubview_atIndex_Imp = (void (*)(id, SEL, id, NSInteger))HLSSwizzleSelector([UINavigationBar class], 
+    s_UINavigationBar__insertSubview_atIndex_Imp = (void (*)(id, SEL, id, NSInteger))HLSSwizzleSelector(self, 
                                                                                                         @selector(insertSubview:atIndex:), 
-                                                                                                        @selector(swizzledInsertSubview:atIndex:));
-    s_UINavigationBar__insertSubview_belowSubview_Imp = (void (*)(id, SEL, id, id))HLSSwizzleSelector([UINavigationBar class], 
+                                                                                                        (IMP)swizzled_UINavigationBar__insertSubview_atIndex_Imp);
+    s_UINavigationBar__insertSubview_belowSubview_Imp = (void (*)(id, SEL, id, id))HLSSwizzleSelector(self, 
                                                                                                       @selector(insertSubview:belowSubview:), 
-                                                                                                      @selector(swizzledInsertSubview:belowSubview:));
-    s_UINavigationBar__sendSubviewToBack_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector([UINavigationBar class], 
+                                                                                                      (IMP)swizzled_UINavigationBar__insertSubview_belowSubview_Imp);
+    s_UINavigationBar__sendSubviewToBack_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                          @selector(sendSubviewToBack:), 
-                                                                                         @selector(swizzledSendSubviewToBack:));
+                                                                                         (IMP)swizzled_UINavigationBar__sendSubviewToBack_Imp);
 }
 
 #pragma mark Accessors and mutators
@@ -102,11 +101,11 @@ static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
 
 @end
 
-@implementation UINavigationBar (HLSExtensionsPrivate)
+#pragma mark Swizzled method implementations
 
-- (void)swizzledInsertSubview:(UIView *)view atIndex:(NSInteger)index
+static void swizzled_UINavigationBar__insertSubview_atIndex_Imp(UINavigationBar *self, SEL _cmd, UIView *view, NSInteger index)
 {
-    (*s_UINavigationBar__insertSubview_atIndex_Imp)(self, @selector(insertSubview:atIndex:), view, index);
+    (*s_UINavigationBar__insertSubview_atIndex_Imp)(self, _cmd, view, index);
     
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
     if (backgroundImageView) {
@@ -114,9 +113,9 @@ static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
     }
 }
 
-- (void)swizzledInsertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview
+static void swizzled_UINavigationBar__insertSubview_belowSubview_Imp(UINavigationBar *self, SEL _cmd, UIView *view, UIView *siblingSubview)
 {
-    (*s_UINavigationBar__insertSubview_belowSubview_Imp)(self, @selector(insertSubview:belowSubview:), view, siblingSubview);
+    (*s_UINavigationBar__insertSubview_belowSubview_Imp)(self, _cmd, view, siblingSubview);
     
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
     if (backgroundImageView) {
@@ -124,14 +123,12 @@ static void (*s_UINavigationBar__sendSubviewToBack_Imp)(id, SEL, id) = NULL;
     }
 }
 
-- (void)swizzledSendSubviewToBack:(UIView *)view
+static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *self, SEL _cmd, UIView *view)
 {
-    (*s_UINavigationBar__sendSubviewToBack_Imp)(self, @selector(sendSubviewToBack:), view);
+    (*s_UINavigationBar__sendSubviewToBack_Imp)(self, _cmd, view);
     
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];
     if (backgroundImageView) {
         (*s_UINavigationBar__sendSubviewToBack_Imp)(self, @selector(sendSubviewToBack:), backgroundImageView);
     }
 }
-
-@end
