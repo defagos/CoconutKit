@@ -19,33 +19,25 @@ HLSLinkCategory(UIBarButtonItem_HLSActionSheet)
 static SEL (*s_UIBarButtonItem__action_Imp)(id, SEL) = NULL;
 static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 
+// Swizzled method implementations
+static SEL swizzled_UIBarButtonItem__action_Imp(UIBarButtonItem *self, SEL _cmd);
+static id swizzled_UIBarButtonItem__target_Imp(UIBarButtonItem *self, SEL _cmd);
+
 @implementation UIBarButtonItem (HLSActionSheet)
+
+#pragma mark Class methods
 
 + (void)load
 {
-    s_UIBarButtonItem__action_Imp = (SEL (*)(id, SEL))HLSSwizzleSelector(self, @selector(action), @selector(swizzledAction));
-    s_UIBarButtonItem__target_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, @selector(target), @selector(swizzledTarget));
+    s_UIBarButtonItem__action_Imp = (SEL (*)(id, SEL))HLSSwizzleSelector2(self, 
+                                                                          @selector(action), 
+                                                                          (IMP)swizzled_UIBarButtonItem__action_Imp);
+    s_UIBarButtonItem__target_Imp = (id (*)(id, SEL))HLSSwizzleSelector2(self, 
+                                                                         @selector(target), 
+                                                                         (IMP)swizzled_UIBarButtonItem__target_Imp);
 }
 
-- (SEL)swizzledAction
-{
-    if ([HLSActionSheet currentActionSheet]) {
-        return @selector(dismissCurrentActionSheetAndForward:);
-    }
-    else {
-        return (*s_UIBarButtonItem__action_Imp)(self, @selector(action));
-    }
-}
-
-- (id)swizzledTarget
-{
-    if ([HLSActionSheet currentActionSheet]) {
-        return self;
-    }
-    else {
-        return (*s_UIBarButtonItem__target_Imp)(self, @selector(target));
-    }
-}
+#pragma mark Current action sheet dismissal
 
 - (void)dismissCurrentActionSheetAndForward:(id)sender
 {
@@ -71,3 +63,25 @@ static id (*s_UIBarButtonItem__target_Imp)(id, SEL) = NULL;
 }
 
 @end
+
+#pragma mark Swizzled method implementations
+
+static SEL swizzled_UIBarButtonItem__action_Imp(UIBarButtonItem *self, SEL _cmd)
+{
+    if ([HLSActionSheet currentActionSheet]) {
+        return @selector(dismissCurrentActionSheetAndForward:);
+    }
+    else {
+        return (*s_UIBarButtonItem__action_Imp)(self, _cmd);
+    }
+}
+
+static id swizzled_UIBarButtonItem__target_Imp(UIBarButtonItem *self, SEL _cmd)
+{
+    if ([HLSActionSheet currentActionSheet]) {
+        return self;
+    }
+    else {
+        return (*s_UIBarButtonItem__target_Imp)(self, _cmd);
+    }
+}
