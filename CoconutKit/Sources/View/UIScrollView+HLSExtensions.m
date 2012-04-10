@@ -32,7 +32,7 @@ static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
 static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIScrollView__setContentOffset_Imp(id self, SEL _cmd, CGPoint contentOffset);
+static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 
 @interface UIScrollView (HLSExtensionsPrivate)
 
@@ -138,7 +138,7 @@ static void swizzled_UIScrollView__setContentOffset_Imp(id self, SEL _cmd, CGPoi
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UIScrollView__setContentOffset_Imp(id self, SEL _cmd, CGPoint contentOffset)
+static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset)
 {
     (*s_UIScrollView__setContentOffset_Imp)(self, _cmd, contentOffset);
     [self synchronizeScrolling];

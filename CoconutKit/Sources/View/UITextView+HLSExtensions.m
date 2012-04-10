@@ -20,8 +20,8 @@ static void (*s_UITextView__becomeFirstResponder_Imp)(id, SEL) = NULL;
 static void (*s_UITextView__resignFirstResponder_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UITextView__becomeFirstResponder_Imp(id self, SEL _cmd);
-static void swizzled_UITextView__resignFirstResponder_Imp(id self, SEL _cmd);
+static void swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd);
+static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd);
 
 @implementation UITextView (HLSExtensions)
 
@@ -52,13 +52,13 @@ static void swizzled_UITextView__resignFirstResponder_Imp(id self, SEL _cmd);
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UITextView__becomeFirstResponder_Imp(id self, SEL _cmd)
+static void swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd)
 {
     s_currentTextView = self;
     (*s_UITextView__becomeFirstResponder_Imp)(self, _cmd);
 }
 
-static void swizzled_UITextView__resignFirstResponder_Imp(id self, SEL _cmd)
+static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd)
 {
     (*s_UITextView__resignFirstResponder_Imp)(self, _cmd);
     if (self == s_currentTextView) {

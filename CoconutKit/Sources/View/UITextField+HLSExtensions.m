@@ -20,8 +20,8 @@ static void (*s_UITextField__becomeFirstResponder_Imp)(id, SEL) = NULL;
 static void (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UITextField__becomeFirstResponder_Imp(id self, SEL _cmd);
-static void swizzled_UITextField__resignFirstResponder_Imp(id self, SEL _cmd);
+static void swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd);
+static void swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd);
 
 @implementation UITextField (HLSExtensions)
 
@@ -46,13 +46,13 @@ static void swizzled_UITextField__resignFirstResponder_Imp(id self, SEL _cmd);
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UITextField__becomeFirstResponder_Imp(id self, SEL _cmd)
+static void swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd)
 {
     s_currentTextField = self;
     (*s_UITextField__becomeFirstResponder_Imp)(self, _cmd);
 }
 
-static void swizzled_UITextField__resignFirstResponder_Imp(id self, SEL _cmd)
+static void swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd)
 {
     (*s_UITextField__resignFirstResponder_Imp)(self, _cmd);
     if (self == s_currentTextField) {
