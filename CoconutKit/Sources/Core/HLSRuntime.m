@@ -8,7 +8,7 @@
 
 #import "HLSRuntime.h"
 
-IMP HLSSwizzleClassSelector2(Class clazz, SEL selector, IMP newImplementation)
+IMP HLSSwizzleClassSelectoR(Class clazz, SEL selector, IMP newImplementation)
 {
     // Get the original implementation we are replacing
     Class metaClass = objc_getMetaClass(class_getName(clazz));
@@ -22,7 +22,7 @@ IMP HLSSwizzleClassSelector2(Class clazz, SEL selector, IMP newImplementation)
     return origImp;
 }
 
-IMP HLSSwizzleSelector2(Class clazz, SEL selector, IMP newImplementation)
+IMP HLSSwizzleSelectoR(Class clazz, SEL selector, IMP newImplementation)
 {
     // Get the original implementation we are replacing
     Method method = class_getInstanceMethod(clazz, selector);

@@ -19,16 +19,23 @@ static UITextField *s_currentTextField = nil;           // weak ref to the curre
 static void (*s_UITextField__becomeFirstResponder_Imp)(id, SEL) = NULL;
 static void (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
 
-@interface UITextField (HLSExtensionsPrivate)
-
-- (void)swizzledBecomeFirstResponder;
-- (void)swizzledResignFirstResponder;
-
-@end
+// Swizzled method implementations
+static void swizzled_UITextField__becomeFirstResponder_Imp(id self, SEL _cmd);
+static void swizzled_UITextField__resignFirstResponder_Imp(id self, SEL _cmd);
 
 @implementation UITextField (HLSExtensions)
 
 #pragma mark Class methods
+
++ (void)load
+{
+    s_UITextField__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+                                                                                    @selector(becomeFirstResponder), 
+                                                                                    (IMP)swizzled_UITextField__becomeFirstResponder_Imp);
+    s_UITextField__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+                                                                                    @selector(resignFirstResponder), 
+                                                                                    (IMP)swizzled_UITextField__resignFirstResponder_Imp);
+}
 
 + (UITextField *)currentTextField
 {
@@ -37,34 +44,18 @@ static void (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
 
 @end
 
-@implementation UITextField (HLSExtensionsPrivate)
-
-#pragma mark Class methods
-
-+ (void)load
-{
-    s_UITextField__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                    @selector(becomeFirstResponder), 
-                                                                                    @selector(swizzledBecomeFirstResponder));
-    s_UITextField__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                    @selector(resignFirstResponder), 
-                                                                                    @selector(swizzledResignFirstResponder));
-}
-
 #pragma mark Swizzled method implementations
 
-- (void)swizzledBecomeFirstResponder
+static void swizzled_UITextField__becomeFirstResponder_Imp(id self, SEL _cmd)
 {
     s_currentTextField = self;
-    (*s_UITextField__becomeFirstResponder_Imp)(self, @selector(becomeFirstResponder));
+    (*s_UITextField__becomeFirstResponder_Imp)(self, _cmd);
 }
 
-- (void)swizzledResignFirstResponder
+static void swizzled_UITextField__resignFirstResponder_Imp(id self, SEL _cmd)
 {
-    (*s_UITextField__resignFirstResponder_Imp)(self, @selector(resignFirstResponder));
+    (*s_UITextField__resignFirstResponder_Imp)(self, _cmd);
     if (self == s_currentTextField) {
         s_currentTextField = nil;
     }
 }
-
-@end
