@@ -29,10 +29,10 @@ static void swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SE
 
 + (void)load
 {
-    s_UITextField__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+    s_UITextField__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                     @selector(becomeFirstResponder), 
                                                                                     (IMP)swizzled_UITextField__becomeFirstResponder_Imp);
-    s_UITextField__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+    s_UITextField__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                     @selector(resignFirstResponder), 
                                                                                     (IMP)swizzled_UITextField__resignFirstResponder_Imp);
 }

@@ -66,7 +66,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         return;
     }
     
-    s_NSManagedObject__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelectoR(self,
+    s_NSManagedObject__initialize_Imp = (void (*)(id, SEL))HLSSwizzleClassSelector(self,
                                                                                    @selector(initialize), 
                                                                                    (IMP)swizzled_NSManagedObject__initialize_Imp);
     

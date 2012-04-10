@@ -76,7 +76,7 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
 
 + (void)load
 {
-    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelectoR(self, 
+    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
                                                                                           @selector(setContentOffset:), 
                                                                                           (IMP)swizzled_UIScrollView__setContentOffset_Imp);
 }

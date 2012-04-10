@@ -28,7 +28,7 @@ static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _c
 
 + (void)load
 {
-    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))HLSSwizzleSelectoR(self, 
+    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                   @selector(descriptionWithLocale:),
                                                                                   (IMP)swizzled_NSDate__descriptionWithLocale_Imp);
 }

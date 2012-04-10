@@ -40,10 +40,10 @@ static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL 
 
 + (void)load
 {
-    s_UITextView__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+    s_UITextView__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                    @selector(becomeFirstResponder), 
                                                                                    (IMP)swizzled_UITextView__becomeFirstResponder_Imp);
-    s_UITextView__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelectoR(self, 
+    s_UITextView__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                    @selector(resignFirstResponder), 
                                                                                    (IMP)swizzled_UITextView__resignFirstResponder_Imp);
 }

@@ -38,22 +38,22 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 + (void)load
 {
-    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelectoR(self, 
+    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                      @selector(showFromToolbar:), 
                                                                                      (IMP)swizzled_UIActionSheet__showFromToolbar_Imp);
-    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelectoR(self, 
+    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                     @selector(showFromTabBar:), 
                                                                                     (IMP)swizzled_UIActionSheet__showFromTabBar_Imp);
-    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelectoR(self, 
+    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
                                                                                                           @selector(showFromBarButtonItem:animated:), 
                                                                                                           (IMP)swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp);
-    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))HLSSwizzleSelectoR(self,
+    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))HLSSwizzleSelector(self,
                                                                                                                 @selector(showFromRect:inView:animated:), 
                                                                                                                 (IMP)swizzled_UIActionSheet__showFromRect_inView_animated_Imp);
-    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))HLSSwizzleSelectoR(self, 
+    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                 @selector(showInView:), 
                                                                                 (IMP)swizzled_UIActionSheet__showInView_Imp);
-    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))HLSSwizzleSelectoR(self,
+    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))HLSSwizzleSelector(self,
                                                                                                                          @selector(dismissWithClickedButtonIndex:animated:), 
                                                                                                                          (IMP)swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp);
 }
