@@ -31,9 +31,11 @@ static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
 // Original implementation of the methods we swizzle
 static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 
+// Swizzled method implementations
+static void swizzled_UIScrollView__setContentOffset_Imp(id self, SEL _cmd, CGPoint contentOffset);
+
 @interface UIScrollView (HLSExtensionsPrivate)
 
-- (void)swizzledSetContentOffset:(CGPoint)contentOffset;
 - (void)synchronizeScrolling;
 
 @end
@@ -74,17 +76,9 @@ static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 
 + (void)load
 {
-    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
+    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector2(self, 
                                                                                           @selector(setContentOffset:), 
-                                                                                          @selector(swizzledSetContentOffset:));
-}
-
-#pragma mark Swizzled methods
-
-- (void)swizzledSetContentOffset:(CGPoint)contentOffset
-{
-    (*s_UIScrollView__setContentOffset_Imp)(self, @selector(setContentOffset:), contentOffset);
-    [self synchronizeScrolling];
+                                                                                          (IMP)swizzled_UIScrollView__setContentOffset_Imp);
 }
 
 #pragma mark Scrolling synchronization
@@ -141,3 +135,12 @@ static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 }
 
 @end
+
+#pragma mark Swizzled method implementations
+
+static void swizzled_UIScrollView__setContentOffset_Imp(id self, SEL _cmd, CGPoint contentOffset)
+{
+    (*s_UIScrollView__setContentOffset_Imp)(self, _cmd, contentOffset);
+    [self synchronizeScrolling];
+
+}
