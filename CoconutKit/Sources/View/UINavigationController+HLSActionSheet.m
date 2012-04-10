@@ -15,25 +15,30 @@
 HLSLinkCategory(UINavigationController_HLSActionSheet)
 
 // Original implementation of the methods we swizzle
-static BOOL (*s_UINavigationController__swizzledNavigationBar_shouldPopItem_Imp)(id, SEL, id, id) = NULL;
+static BOOL (*s_UINavigationController__navigationBar_shouldPopItem_Imp)(id, SEL, id, id) = NULL;
+
+// Swizzled method implementations
+static BOOL swizzled_UINavigationController__navigationBar_shouldPopItem_Imp(UINavigationController *self, SEL _cmd, UINavigationBar *navigationBar, UINavigationBar *item);
 
 @implementation UINavigationController (HLSActionSheet)
 
 + (void)load
 {
-    s_UINavigationController__swizzledNavigationBar_shouldPopItem_Imp = (BOOL (*)(id, SEL, id, id))HLSSwizzleSelector(self, 
-                                                                                                                      @selector(navigationBar:shouldPopItem:), 
-                                                                                                                      @selector(swizzledNavigationBar:shouldPopItem:));
+    s_UINavigationController__navigationBar_shouldPopItem_Imp = (BOOL (*)(id, SEL, id, id))HLSSwizzleSelectoR(self, 
+                                                                                                              @selector(navigationBar:shouldPopItem:), 
+                                                                                                              (IMP)swizzled_UINavigationController__navigationBar_shouldPopItem_Imp);
 }
 
-- (BOOL)swizzledNavigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+@end
+
+#pragma mark Swizzled method implementations
+
+static BOOL swizzled_UINavigationController__navigationBar_shouldPopItem_Imp(UINavigationController *self, SEL _cmd, UINavigationBar *navigationBar, UINavigationBar *item)
 {
-    if (! (*s_UINavigationController__swizzledNavigationBar_shouldPopItem_Imp)(self, @selector(navigationBar:shouldPopItem:), navigationBar, item)) {
+    if (! (*s_UINavigationController__navigationBar_shouldPopItem_Imp)(self, _cmd, navigationBar, item)) {
         return NO;
     }
     
     [HLSActionSheet dismissCurrentActionSheetAnimated:NO];
     return YES;
 }
-
-@end

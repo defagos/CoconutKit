@@ -13,6 +13,4 @@
  */
 @interface UINavigationController (HLSActionSheet)
 
-- (BOOL)swizzledNavigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item;
-
 @end
