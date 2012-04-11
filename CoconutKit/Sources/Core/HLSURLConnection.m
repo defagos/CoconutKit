@@ -145,6 +145,8 @@ float HLSURLConnectionProgressUnavailable = -1.f;
         return;
     }
     
+    [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
+    
     [self.connection cancel];
     [self reset];
 }
