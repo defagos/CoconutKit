@@ -23,13 +23,12 @@
 + (NSArray *)coconutsFromDictionary:(NSDictionary *)dictionary
 {
     NSMutableArray *coconuts = [NSMutableArray array];
-    for (NSArray *coconutsDicts in [dictionary objectForKey:@"coconuts"]) {
-        for (NSDictionary *coconutDict in coconutsDicts) {
-            Coconut *coconut = [[[Coconut alloc] init] autorelease];
-            coconut.name_en = [coconutDict objectForKey:@"name_en"];
-            coconut.name_fr = [coconutDict objectForKey:@"name_fr"];
-            [coconuts addObject:coconut];
-        }
+    NSArray *coconutsDicts = [dictionary objectForKey:@"coconuts"];
+    for (NSDictionary *coconutDict in coconutsDicts) {
+        Coconut *coconut = [[[Coconut alloc] init] autorelease];
+        coconut.name_en = [coconutDict objectForKey:@"name_en"];
+        coconut.name_fr = [coconutDict objectForKey:@"name_fr"];
+        [coconuts addObject:coconut];
     }
     return [NSArray arrayWithArray:coconuts];
 }

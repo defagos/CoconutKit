@@ -87,6 +87,14 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Networking with HLSURLConnection", @"Networking with HLSURLConnection");
+    
+    // Must sort coconuts by name again when switching languages
+    NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" 
+                                                                         ascending:YES 
+                                                                          selector:@selector(localizedCaseInsensitiveCompare:)];
+    self.coconuts = [self.coconuts sortedArrayUsingDescriptor:nameSortDescriptor]; 
+    
+    [self reloadData];
 }
 
 #pragma mark HLSURLConnectionDelegate protocol implementation
@@ -106,6 +114,14 @@
     [[connection data] writeToFile:filePath atomically:NO];
     
     NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
+    
+    NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" 
+                                                                         ascending:YES 
+                                                                          selector:@selector(localizedCaseInsensitiveCompare:)];
+    self.coconuts = [coconuts sortedArrayUsingDescriptor:nameSortDescriptor]; 
+    
+    [self reloadData];
 }
 
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error
@@ -140,6 +156,7 @@
     
     Coconut *coconut = [self.coconuts objectAtIndex:indexPath.row];
     tableViewCell.textLabel.text = coconut.name;
+    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end
