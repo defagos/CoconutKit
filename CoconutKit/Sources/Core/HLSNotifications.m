@@ -81,7 +81,13 @@
     HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 1) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        if (! [UIApplication sharedApplication].networkActivityIndicatorVisible) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        }
+        else {
+            HLSLoggerWarn(@"The network activity indicator is already displayed. Some code is managing it "
+                          "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
+        }
     }
 }
 
@@ -97,7 +103,13 @@
     HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
     
     if (m_networkActivityCount == 0) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;        
+        if ([UIApplication sharedApplication].networkActivityIndicatorVisible) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }
+        else {
+            HLSLoggerWarn(@"The network activity indicator is not displayed. Some code is managing it "
+                          "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
+        }
     }
 }
 
