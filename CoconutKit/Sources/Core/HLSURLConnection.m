@@ -146,6 +146,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     }
     
     [self.connection cancel];
+    [self reset];
 }
 
 - (void)startSynchronous

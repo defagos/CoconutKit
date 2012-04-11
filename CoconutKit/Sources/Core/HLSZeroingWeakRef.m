@@ -139,6 +139,18 @@ static void subclass_dealloc(id object, SEL _cmd)
         
         // Execute optional invocations
         for (NSInvocation *invocation in zeroingWeakRef.invocations) {
+            // Executing invocations on arbitrary targets (which is the cas here) can potentially lead to nasty effects. 
+            // Imagine for example the case where executing one invocation leads to the destruction of the target it was
+            // executed on. If this object is the one who owns the zeroing weak ref, we will crash on the next loop
+            // iteration. Similarly, even if the zeroing weak ref does not die, the target referenced by one of its
+            // invocations could (as the result of the invocation), and if this target is the subject of a further 
+            // invocation in the list, a crash will occur when we execute it. To avoid those nasty effects, we therefore 
+            // just retain invocation targets a little bit more here. The same effect could be obtained without
+            // autorelease by wrapping the outer for in two loops, one retaining all invocation targets for all
+            // weak refs, the other one releasing them. I applied the autorelease approach since it leads to a much 
+            // shorter code.
+            [[invocation.target retain] autorelease];
+            
             [invocation invoke];
         }
         
