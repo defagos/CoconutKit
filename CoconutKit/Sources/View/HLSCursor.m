@@ -218,8 +218,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 
                                                                               0.f,
                                                                               floatmax(elementViewSize.width, otherElementViewSize.width), 
-                                                                              floatmax(elementViewSize.height, otherElementViewSize.height))]
-                                     autorelease];
+                                                                              floatmax(elementViewSize.height, otherElementViewSize.height))] autorelease];
             containerView.backgroundColor = [UIColor clearColor];
             [containerView addSubview:elementView];
             elementView.center = containerView.center;
@@ -274,8 +273,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 
                                                                            0.f, 
                                                                            floatmax(titleSize.width, otherTitleSize.width), 
-                                                                           floatmax(titleSize.height, otherTitleSize.height))] 
-                                 autorelease];
+                                                                           floatmax(titleSize.height, otherTitleSize.height))] autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
         elementLabel.font = font;

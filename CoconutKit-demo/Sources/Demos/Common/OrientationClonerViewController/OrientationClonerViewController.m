@@ -118,8 +118,7 @@
 - (UIViewController *)viewControllerCloneWithOrientation:(UIInterfaceOrientation)orientation
 {
     OrientationClonerViewController *viewControllerClone = [[[OrientationClonerViewController alloc] initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(orientation)
-                                                                                                                           large:m_large] 
-                                                            autorelease];
+                                                                                                                           large:m_large] autorelease];
     
     // Clone any meaningful internal variables here
     viewControllerClone.text = self.text;

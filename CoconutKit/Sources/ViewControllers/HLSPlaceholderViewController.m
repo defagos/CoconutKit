@@ -54,8 +54,7 @@
     self.containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
                                                              containerController:self
                                                                  transitionStyle:HLSTransitionStyleNone
-                                                                        duration:kAnimationTransitionDefaultDuration]
-                             autorelease];
+                                                                        duration:kAnimationTransitionDefaultDuration] autorelease];
 }
 
 - (void)dealloc
@@ -264,8 +263,7 @@
     self.containerContent = [[[HLSContainerContent alloc] initWithViewController:insetViewController
                                                              containerController:self 
                                                                  transitionStyle:transitionStyle 
-                                                                        duration:duration]
-                             autorelease];
+                                                                        duration:duration] autorelease];
     self.containerContent.forwardingProperties = self.forwardingProperties;
     
     if ([self isViewLoaded]) {

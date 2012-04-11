@@ -45,8 +45,7 @@
     // Destroy any existing previous store and create a new empty one
     HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitTestData"
                                                                      storeDirectory:HLSApplicationLibraryDirectoryPath() 
-                                                                              reuse:NO] 
-                                     autorelease];
+                                                                              reuse:NO] autorelease];
     [HLSModelManager setDefaultModelManager:modelManager];
     
     // Create an object which cannot be destroyed

@@ -48,8 +48,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *rootContainerContent = [[[HLSContainerContent alloc] initWithViewController:rootViewController 
                                                                                      containerController:self 
                                                                                          transitionStyle:HLSTransitionStyleNone 
-                                                                                                duration:kAnimationTransitionDefaultDuration]
-                                                     autorelease];
+                                                                                                duration:kAnimationTransitionDefaultDuration] autorelease];
         self.containerContentStack = [NSMutableArray arrayWithObject:rootContainerContent];
         m_capacity = capacity;
     }
@@ -321,8 +320,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
                                                                              containerController:self
                                                                                  transitionStyle:transitionStyle 
-                                                                                        duration:duration]
-                                             autorelease];
+                                                                                        duration:duration] autorelease];
     [self.containerContentStack addObject:containerContent];
     
     if ([self isViewLoaded]) {        

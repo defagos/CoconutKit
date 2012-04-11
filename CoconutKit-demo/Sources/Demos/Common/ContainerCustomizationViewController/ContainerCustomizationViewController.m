@@ -92,13 +92,11 @@
     // Puts a random button on the right
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:arc4random() % 4
                                                                                             target:nil 
-                                                                                            action:NULL]
-                                              autorelease];
+                                                                                            action:NULL] autorelease];
     
     UIBarButtonItem *toolbarItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:arc4random() % 4
                                                                                   target:nil 
-                                                                                  action:NULL]
-                                    autorelease];
+                                                                                  action:NULL] autorelease];
     self.toolbarItems = [NSArray arrayWithObject:toolbarItem];
 }
 

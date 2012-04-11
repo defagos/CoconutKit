@@ -44,8 +44,7 @@
     // Destroy any existing previous store and create a new empty one
     HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitTestData"
                                                                      storeDirectory:HLSApplicationLibraryDirectoryPath() 
-                                                                              reuse:NO] 
-                                     autorelease];
+                                                                              reuse:NO] autorelease];
     [HLSModelManager setDefaultModelManager:modelManager];
     
     // Idea: We work with three test classes: Person, Account and House. A person can have several accounts, and 

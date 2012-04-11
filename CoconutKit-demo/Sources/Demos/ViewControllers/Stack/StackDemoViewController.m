@@ -165,8 +165,7 @@
 {
     OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
                                                                          initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                         large:NO]
-                                                                        autorelease];
+                                                                         large:NO] autorelease];
     [self displayContentViewController:orientationClonerViewController];
 }
 

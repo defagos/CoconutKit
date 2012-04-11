@@ -35,8 +35,7 @@
         
         // Create the default model entry point and context
         HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
-                                                                         storeDirectory:HLSApplicationDocumentDirectoryPath()]
-                                         autorelease];
+                                                                         storeDirectory:HLSApplicationDocumentDirectoryPath()] autorelease];
         [HLSModelManager setDefaultModelManager:modelManager];
         
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:

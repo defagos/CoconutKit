@@ -69,8 +69,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.f,
                                                                     0.f,
                                                                     applicationFrame.size.width, 
-                                                                    kSearchBarStandardHeight)]
-                      autorelease];
+                                                                    kSearchBarStandardHeight)] autorelease];
     
     // The search bar might be localized as well. Localization is made in [HLSViewController viewDidLoad], but at that
     // time the search bar was not available. Run through localization again to solve this issue
@@ -79,8 +78,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     // Manage the search interface using the built-in UISearchDisplayController. We therefore benefit from its
     // features (animations, dimming view, navigation controller dedicated support, etc.) for free
     self.searchController = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar 
-                                                               contentsController:self] 
-                             autorelease];
+                                                               contentsController:self] autorelease];
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;

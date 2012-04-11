@@ -253,8 +253,7 @@
                                                                  message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil]
-                                      autorelease];
+                                                       otherButtonTitles:nil] autorelease];
             [alertView show];
             
         }
@@ -271,8 +270,7 @@
                                                                  message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil]
-                                      autorelease];
+                                                       otherButtonTitles:nil] autorelease];
             [alertView show];
             
         }
@@ -288,8 +286,7 @@
                                                                  message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil]
-                                      autorelease];
+                                                       otherButtonTitles:nil] autorelease];
             [alertView show];
             
         }
@@ -305,8 +302,7 @@
                                                                  message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil]
-                                      autorelease];
+                                                       otherButtonTitles:nil] autorelease];
             [alertView show];
             
         }

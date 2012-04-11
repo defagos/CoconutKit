@@ -485,8 +485,7 @@
         Class operationClass = [task operationClass];
         NSAssert([operationClass isSubclassOfClass:[HLSTaskOperation class]], @"Class %@ is not a subclass of HLSTaskOperation");
         HLSTaskOperation *operation = [[[operationClass alloc] initWithTaskManager:self
-                                                                              task:task]
-                                       autorelease];
+                                                                              task:task] autorelease];
         [operations addObject:operation];
     }
     return operations;

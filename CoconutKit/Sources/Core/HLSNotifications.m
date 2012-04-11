@@ -212,8 +212,7 @@
     
     // Create the rule object describing the new receiver
     NotificationSender *toSender = [[[NotificationSender alloc] initWithNotificationName:notificationNameTo
-                                                                               forObject:objectTo]
-                                    autorelease];
+                                                                               forObject:objectTo] autorelease];
     
     // Add the new rule
     [notificationMap setObject:toSender forKey:notificationNameFrom];

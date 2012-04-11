@@ -74,8 +74,7 @@ extern BOOL injectedManagedObjectValidation(void);
                                                                                          managedObject:managedObject
                                                                                              fieldName:fieldName 
                                                                                              formatter:formatter
-                                                                                    validationDelegate:validationDelegate] 
-                                               autorelease];
+                                                                                    validationDelegate:validationDelegate] autorelease];
     if (! validator) {
         return;
     }
