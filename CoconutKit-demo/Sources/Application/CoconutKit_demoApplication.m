@@ -34,9 +34,8 @@
                                                    object:nil];
         
         // Create the default model entry point and context
-        NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
-                                                                         storeDirectory:documentsDirectoryPath]
+                                                                         storeDirectory:HLSApplicationDocumentDirectoryPath()]
                                          autorelease];
         [HLSModelManager setDefaultModelManager:modelManager];
         

@@ -42,9 +42,8 @@
     [super setUpClass];
     
     // Destroy any existing previous store and create a new empty one
-    NSString *libraryDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
     HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitTestData"
-                                                                     storeDirectory:libraryDirectoryPath 
+                                                                     storeDirectory:HLSApplicationLibraryDirectoryPath() 
                                                                               reuse:NO] 
                                      autorelease];
     [HLSModelManager setDefaultModelManager:modelManager];

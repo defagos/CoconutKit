@@ -10,6 +10,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F17DE8C1535FC3E00A5777C /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17DE8B1535FC3E00A5777C /* HLSApplicationInformation.m */; };
 		6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05BC14BC0A0E0026F512 /* img_localized.png */; };
 		6F3B05CE14BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05C714BC0A500026F512 /* img_localized.png */; };
 		6F3B05D014BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05CC14BC0A510026F512 /* img_localized.png */; };
@@ -220,6 +221,8 @@
 		1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F17DE8A1535FC3E00A5777C /* HLSApplicationInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationInformation.h; sourceTree = "<group>"; };
+		6F17DE8B1535FC3E00A5777C /* HLSApplicationInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationInformation.m; sourceTree = "<group>"; };
 		6F3B05C814BC0A500026F512 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = img_localized.png; sourceTree = "<group>"; };
 		6F3B05CD14BC0A510026F512 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = img_localized.png; sourceTree = "<group>"; };
 		6F3B063814BC7BA60026F512 /* UIToolbar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -730,6 +733,8 @@
 		6FADE63314BA04A6007EE121 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6F17DE8A1535FC3E00A5777C /* HLSApplicationInformation.h */,
+				6F17DE8B1535FC3E00A5777C /* HLSApplicationInformation.m */,
 				6FADE63414BA04A6007EE121 /* HLSAssert.h */,
 				6FADE63514BA04A6007EE121 /* HLSAssert.m */,
 				6FADE63614BA04A6007EE121 /* HLSCategoryLinker.h */,
@@ -1751,6 +1756,7 @@
 				6F82786E1535893F00C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F82787A15358A0D00C51E6C /* URLConnectionDemoViewController.m in Sources */,
 				6F82788F1535AC8100C51E6C /* Coconut.m in Sources */,
+				6F17DE8C1535FC3E00A5777C /* HLSApplicationInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

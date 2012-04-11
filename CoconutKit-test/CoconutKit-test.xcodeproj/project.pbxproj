@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F17DE901535FC5400A5777C /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17DE8F1535FC5400A5777C /* HLSApplicationInformation.m */; };
 		6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */; };
 		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
 		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
@@ -128,6 +129,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F17DE8E1535FC5400A5777C /* HLSApplicationInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationInformation.h; sourceTree = "<group>"; };
+		6F17DE8F1535FC5400A5777C /* HLSApplicationInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationInformation.m; sourceTree = "<group>"; };
 		6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
 		6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
 		6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
@@ -610,6 +613,8 @@
 		6FADE71214BA04B6007EE121 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6F17DE8E1535FC5400A5777C /* HLSApplicationInformation.h */,
+				6F17DE8F1535FC5400A5777C /* HLSApplicationInformation.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
 				6FADE71414BA04B6007EE121 /* HLSAssert.m */,
 				6FADE71514BA04B6007EE121 /* HLSCategoryLinker.h */,
@@ -1020,6 +1025,7 @@
 				6FDDEC251529782500CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */,
 				6F82785315355C7E00C51E6C /* HLSURLConnection.m in Sources */,
+				6F17DE901535FC5400A5777C /* HLSApplicationInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

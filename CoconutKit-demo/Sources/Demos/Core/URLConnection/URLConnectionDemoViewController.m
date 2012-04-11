@@ -63,7 +63,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.hortis.ch/"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
     connection.delegate = self;
     [connection start];
@@ -99,6 +99,13 @@
 - (void)connectionDidFinish:(HLSURLConnection *)connection
 {
     HLSLoggerInfo(@"Connection did finish");
+    
+    // TODO: Directly load from download file path
+    
+    NSString *filePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
+    [[connection data] writeToFile:filePath atomically:NO];
+    
+    NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
 }
 
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error

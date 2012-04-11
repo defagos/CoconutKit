@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F17DE871535FC2000A5777C /* HLSApplicationInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F17DE851535FC1F00A5777C /* HLSApplicationInformation.h */; };
+		6F17DE881535FC2000A5777C /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17DE861535FC1F00A5777C /* HLSApplicationInformation.m */; };
 		6F3B063514BC7B950026F512 /* UIToolbar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3B063314BC7B950026F512 /* UIToolbar+HLSExtensions.h */; };
 		6F3B063614BC7B950026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063414BC7B950026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */; };
@@ -170,6 +172,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F17DE851535FC1F00A5777C /* HLSApplicationInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationInformation.h; sourceTree = "<group>"; };
+		6F17DE861535FC1F00A5777C /* HLSApplicationInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationInformation.m; sourceTree = "<group>"; };
 		6F3B063314BC7B950026F512 /* UIToolbar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B063414BC7B950026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -462,6 +466,8 @@
 		6FADE51814BA0494007EE121 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6F17DE851535FC1F00A5777C /* HLSApplicationInformation.h */,
+				6F17DE861535FC1F00A5777C /* HLSApplicationInformation.m */,
 				6FADE51914BA0494007EE121 /* HLSAssert.h */,
 				6FADE51A14BA0494007EE121 /* HLSAssert.m */,
 				6FADE51B14BA0494007EE121 /* HLSCategoryLinker.h */,
@@ -739,6 +745,7 @@
 				6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */,
 				6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */,
 				6F82784A1534B84800C51E6C /* HLSURLConnection.h in Headers */,
+				6F17DE871535FC2000A5777C /* HLSApplicationInformation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,6 +881,7 @@
 				6FDDEC1B1529778E00CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC1F1529780200CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F82784B1534B84800C51E6C /* HLSURLConnection.m in Sources */,
+				6F17DE881535FC2000A5777C /* HLSApplicationInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
