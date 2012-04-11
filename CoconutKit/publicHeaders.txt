@@ -3,6 +3,7 @@ CAMediaTimingFunction+HLSExtensions.h
 HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
+HLSApplicationInformation.h
 HLSApplicationPreloader.h
 HLSAssert.h
 HLSAutorotation.h

@@ -8,6 +8,7 @@
 
 #import "NSBundle+HLSExtensions.h"
 
+#import "HLSApplicationInformation.h"
 #import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 
@@ -57,16 +58,14 @@
     }
     
     // TODO: Use CoconutKit method returning the library folder (available on a branch)
-    NSString *libraryDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-    bundle = [self bundleWithName:name inDirectory:libraryDirectoryPath];
+    bundle = [self bundleWithName:name inDirectory:HLSApplicationLibraryDirectoryPath()];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
     }
     
     // TODO: Use CoconutKit method returning the documents folder (available on a branch)
-    NSString *documentDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    bundle = [self bundleWithName:name inDirectory:documentDirectoryPath];
+    bundle = [self bundleWithName:name inDirectory:HLSApplicationDocumentDirectoryPath()];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;

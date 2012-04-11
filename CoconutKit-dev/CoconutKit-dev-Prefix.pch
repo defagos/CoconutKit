@@ -15,6 +15,7 @@
     #import "HLSActionSheet.h"
     #import "HLSAnimation.h"
     #import "HLSAnimationStep.h"
+    #import "HLSApplicationInformation.h"
     #import "HLSApplicationPreloader.h"
     #import "HLSAssert.h"
     #import "HLSAutorotation.h"
