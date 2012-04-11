@@ -35,6 +35,8 @@ extern float HLSURLConnectionProgressUnavailable;
     HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 
++ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request;
+
 - (id)initWithRequest:(NSURLRequest *)request;
 
 - (void)start;

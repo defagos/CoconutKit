@@ -56,7 +56,17 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = [HLSTableViewCell height];
+    self.tableView.rowHeight = [HLSTableViewCell height];    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.hortis.ch/"]];
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.delegate = self;
+    [connection start];
 }
 
 #pragma mark Orientation management
@@ -77,6 +87,23 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Networking with HLSURLConnection", @"Networking with HLSURLConnection");
+}
+
+#pragma mark HLSURLConnectionDelegate protocol implementation
+
+- (void)connectionDidStart:(HLSURLConnection *)connection
+{
+    HLSLoggerInfo(@"Connection did start");
+}
+
+- (void)connectionDidFinish:(HLSURLConnection *)connection
+{
+    HLSLoggerInfo(@"Connection did finish");
+}
+
+- (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    HLSLoggerInfo(@"Connection did fail with error: %@", error);
 }
 
 #pragma mark HLSReloadable protocol implementation

@@ -29,6 +29,13 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 @implementation HLSURLConnection
 
+#pragma mark Class methods
+
++ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request
+{
+    return [[[[self class] alloc] initWithRequest:request] autorelease];
+}
+
 #pragma mark Object creation and destruction
 
 - (id)initWithRequest:(NSURLRequest *)request
@@ -127,9 +134,8 @@ float HLSURLConnectionProgressUnavailable = -1.f;
         return;
     }
     
-    self.status = HLSURLConnectionStatusStarting;
-    
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
+    self.status = HLSURLConnectionStatusStarting;
 }
 
 - (void)cancel
@@ -140,7 +146,6 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     }
     
     [self.connection cancel];
-    [self reset];
 }
 
 - (void)startSynchronous
@@ -153,6 +158,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     [self reset];
     
     self.status = HLSURLConnectionStatusStarting;
+    [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     
     // TODO: Check: The status / data should have been properly updated in the NSURLConnection callbacks. Similarly for the
     //       delegate method calls. If not, do it here
@@ -177,7 +183,12 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     // Each time a response is received we must discard any previously accumulated data
     // (refer to NSURLConnection documentation for more information)
     m_expectedContentLength = [response expectedContentLength];
-    [self.internalData setLength:m_expectedContentLength];
+    
+    // This clears the data
+    [self.internalData setLength:0];
+    if (m_expectedContentLength != NSURLResponseUnknownLength) {
+        [self.internalData setLength:m_expectedContentLength];
+    }
     
     self.status = HLSURLConnectionStatusStarted;
     if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
@@ -195,6 +206,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     HLSLoggerDebug(@"Connection failed with error: %@", error);
     
     [self reset];
+    [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     
     if ([self.delegate respondsToSelector:@selector(connection:didFailWithError:)]) {
         [self.delegate connection:self didFailWithError:error];
