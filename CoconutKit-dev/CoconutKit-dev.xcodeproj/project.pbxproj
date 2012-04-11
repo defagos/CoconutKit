@@ -22,6 +22,7 @@
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F82784F15355C6C00C51E6C /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82784E15355C6C00C51E6C /* HLSURLConnection.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6FA9B09B14F8E753008B6D5A /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09714F8E753008B6D5A /* img_apple1.jpg */; };
@@ -232,6 +233,8 @@
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F82784D15355C6C00C51E6C /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
+		6F82784E15355C6C00C51E6C /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -723,6 +726,8 @@
 				6FADE64214BA04A6007EE121 /* HLSReloadable.h */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
 				6FADE64414BA04A6007EE121 /* HLSRuntime.m */,
+				6F82784D15355C6C00C51E6C /* HLSURLConnection.h */,
+				6F82784E15355C6C00C51E6C /* HLSURLConnection.m */,
 				6FADE64514BA04A6007EE121 /* HLSUserInterfaceLock.h */,
 				6FADE64614BA04A6007EE121 /* HLSUserInterfaceLock.m */,
 				6FADE64714BA04A6007EE121 /* HLSValidable.h */,
@@ -1721,6 +1726,7 @@
 				6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */,
 				6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */,
+				6F82784F15355C6C00C51E6C /* HLSURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

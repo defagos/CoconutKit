@@ -13,6 +13,8 @@
 		6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */; };
 		6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F82784A1534B84800C51E6C /* HLSURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8278481534B84800C51E6C /* HLSURLConnection.h */; };
+		6F82784B1534B84800C51E6C /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8278491534B84800C51E6C /* HLSURLConnection.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
 		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
@@ -174,6 +176,8 @@
 		6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F8278481534B84800C51E6C /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
+		6F8278491534B84800C51E6C /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
 		6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -512,6 +516,8 @@
 				6FADE54A14BA0494007EE121 /* UIControl+HLSExclusiveTouch.m */,
 				6FADE54B14BA0494007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE54C14BA0494007EE121 /* UIImage+HLSExtensions.m */,
+				6F8278481534B84800C51E6C /* HLSURLConnection.h */,
+				6F8278491534B84800C51E6C /* HLSURLConnection.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -732,6 +738,7 @@
 				6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */,
 				6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */,
 				6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */,
+				6F82784A1534B84800C51E6C /* HLSURLConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,6 +873,7 @@
 				6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */,
 				6FDDEC1B1529778E00CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC1F1529780200CED462 /* UITextView+HLSExtensions.m in Sources */,
+				6F82784B1534B84800C51E6C /* HLSURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
