@@ -84,6 +84,15 @@
     self.transitionPickerView.dataSource = self;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSPlaceholderViewController";
+}
+
 #pragma mark Displaying an inset view controller according to the user settings
 
 - (void)displayInsetViewController:(UIViewController *)viewController
@@ -337,15 +346,6 @@
             break;
         }            
     }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"HLSPlaceholderViewController";
 }
 
 @end

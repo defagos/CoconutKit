@@ -100,6 +100,15 @@
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)playForward:(id)sender
@@ -230,15 +239,6 @@
     
     self.cancelButton.hidden = YES;
     self.terminateButton.hidden = YES;
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
 }
 
 @end

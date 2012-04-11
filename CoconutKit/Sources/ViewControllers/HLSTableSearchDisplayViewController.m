@@ -118,6 +118,15 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     }
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.searchBar.placeholder = HLSLocalizedStringFromUIKit(@"Search");
+}
+
 #pragma mark UISearchDisplayDelegate protocol implementation
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
@@ -194,15 +203,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 {
     HLSMissingMethodImplementation();
     return nil;
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.searchBar.placeholder = HLSLocalizedStringFromUIKit(@"Search");
 }
 
 @end

@@ -66,6 +66,52 @@
     self.subTask3RemainingTimeLabel = nil;    
 }
 
+#pragma mark Accessors and mutators
+
+@synthesize taskStartButton = m_taskStartButton;
+
+@synthesize taskStopButton = m_taskStopButton;
+
+@synthesize taskProgressView = m_taskProgressView;
+
+@synthesize taskRemainingTimeEstimateLabel = m_taskRemainingTimeEstimateLabel;
+
+@synthesize taskRemainingTimeLabel = m_taskRemainingTimeLabel;
+
+@synthesize taskGroupStartButton = m_taskGroupStartButton;
+
+@synthesize taskGroupStopButton = m_taskGroupStopButton;
+
+@synthesize taskGroupProgressView = m_taskGroupProgressView;
+
+@synthesize taskGroupRemainingTimeEstimateLabel = m_taskGroupRemainingTimeEstimateLabel;
+
+@synthesize taskGroupRemainingTimeLabel = m_taskGroupRemainingTimeLabel;
+
+@synthesize subTask1StopButton = m_subTask1StopButton;
+
+@synthesize subTask1ProgressView = m_subTask1ProgressView;
+
+@synthesize subTask1RemainingTimeEstimateLabel = m_subTask1RemainingTimeEstimateLabel;
+
+@synthesize subTask1RemainingTimeLabel = m_subTask1RemainingTimeLabel;
+
+@synthesize subTask2StopButton = m_subTask2StopButton;
+
+@synthesize subTask2ProgressView = m_subTask2ProgressView;
+
+@synthesize subTask2RemainingTimeEstimateLabel = m_subTask2RemainingTimeEstimateLabel;
+
+@synthesize subTask2RemainingTimeLabel = m_subTask2RemainingTimeLabel;
+
+@synthesize subTask3StopButton = m_subTask3StopButton;
+
+@synthesize subTask3ProgressView = m_subTask3ProgressView;
+
+@synthesize subTask3RemainingTimeEstimateLabel = m_subTask3RemainingTimeEstimateLabel;
+
+@synthesize subTask3RemainingTimeLabel = m_subTask3RemainingTimeLabel;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -127,51 +173,14 @@
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
-#pragma mark Accessors and mutators
+#pragma mark Localization
 
-@synthesize taskStartButton = m_taskStartButton;
-
-@synthesize taskStopButton = m_taskStopButton;
-
-@synthesize taskProgressView = m_taskProgressView;
-
-@synthesize taskRemainingTimeEstimateLabel = m_taskRemainingTimeEstimateLabel;
-
-@synthesize taskRemainingTimeLabel = m_taskRemainingTimeLabel;
-
-@synthesize taskGroupStartButton = m_taskGroupStartButton;
-
-@synthesize taskGroupStopButton = m_taskGroupStopButton;
-
-@synthesize taskGroupProgressView = m_taskGroupProgressView;
-
-@synthesize taskGroupRemainingTimeEstimateLabel = m_taskGroupRemainingTimeEstimateLabel;
-
-@synthesize taskGroupRemainingTimeLabel = m_taskGroupRemainingTimeLabel;
-
-@synthesize subTask1StopButton = m_subTask1StopButton;
-
-@synthesize subTask1ProgressView = m_subTask1ProgressView;
-
-@synthesize subTask1RemainingTimeEstimateLabel = m_subTask1RemainingTimeEstimateLabel;
-
-@synthesize subTask1RemainingTimeLabel = m_subTask1RemainingTimeLabel;
-
-@synthesize subTask2StopButton = m_subTask2StopButton;
-
-@synthesize subTask2ProgressView = m_subTask2ProgressView;
-
-@synthesize subTask2RemainingTimeEstimateLabel = m_subTask2RemainingTimeEstimateLabel;
-
-@synthesize subTask2RemainingTimeLabel = m_subTask2RemainingTimeLabel;
-
-@synthesize subTask3StopButton = m_subTask3StopButton;
-
-@synthesize subTask3ProgressView = m_subTask3ProgressView;
-
-@synthesize subTask3RemainingTimeEstimateLabel = m_subTask3RemainingTimeEstimateLabel;
-
-@synthesize subTask3RemainingTimeLabel = m_subTask3RemainingTimeLabel;
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+}
 
 #pragma mark HLSTaskDelegate protocol implementation
 
@@ -460,15 +469,6 @@
     self.subTask3StopButton.hidden = YES;
     
     [[HLSTaskManager defaultManager] cancelTasksWithTag:@"T_subTask3"];    
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
 }
 
 @end

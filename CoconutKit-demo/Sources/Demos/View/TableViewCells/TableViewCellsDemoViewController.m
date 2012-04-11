@@ -82,6 +82,16 @@ typedef enum {
     self.tableView = nil;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
+    [self.tableView reloadData];
+}
+
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -279,16 +289,6 @@ typedef enum {
             break;
         }            
     }     
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
-    [self.tableView reloadData];
 }
 
 @end

@@ -55,6 +55,15 @@
     return YES;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Text fields", @"Text fields");
+}
+
 #pragma mark Accessors and mutators
 
 @synthesize textField1 = m_textField1;
@@ -72,15 +81,6 @@
     [textField resignFirstResponder];
     
     return YES;
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-
-    self.title = NSLocalizedString(@"Text fields", @"Text fields");
 }
 
 @end

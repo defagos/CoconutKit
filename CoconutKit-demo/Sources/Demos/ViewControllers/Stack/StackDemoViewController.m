@@ -90,6 +90,15 @@
     self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // Just to suppress localization warning
+}
+
 #pragma mark Displaying a view controller according to the user settings
 
 - (void)displayContentViewController:(UIViewController *)viewController
@@ -349,15 +358,6 @@
             break;
         }            
     }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warning
 }
 
 @end

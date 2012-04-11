@@ -116,6 +116,23 @@
     [self reloadData];
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    
+    // The date formatter is also localized!
+    // TODO: Does not work yet. Try to switch languages!
+    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    
+    // Trigger a new validation to get localized error messages if any
+    [self checkTextFields];
+}
+
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
@@ -234,23 +251,6 @@
         HLSLoggerError(@"Unknown text field");
         return nil;
     }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    
-    // The date formatter is also localized!
-    // TODO: Does not work yet. Try to switch languages!
-    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    
-    // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
 }
 
 #pragma mark Event callbacks

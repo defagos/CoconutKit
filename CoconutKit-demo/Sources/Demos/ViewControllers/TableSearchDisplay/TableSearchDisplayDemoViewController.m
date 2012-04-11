@@ -98,6 +98,20 @@ typedef enum {
     return YES;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSTableSearchDisplayViewController";
+    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
+                                        NSLocalizedString(@"Music players", @"Music players"),
+                                        NSLocalizedString(@"Phones", @"Phones"),
+                                        NSLocalizedString(@"Tablets", @"Tablets"),
+                                        nil];
+}
+
 #pragma mark UISearchDisplayDelegate protocol implementation
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
@@ -232,20 +246,6 @@ typedef enum {
     }
     
     self.filteredDevices = [NSArray arrayWithArray:filteredDevices];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
-                                        NSLocalizedString(@"Music players", @"Music players"),
-                                        NSLocalizedString(@"Phones", @"Phones"),
-                                        NSLocalizedString(@"Tablets", @"Tablets"),
-                                        nil];
 }
 
 @end

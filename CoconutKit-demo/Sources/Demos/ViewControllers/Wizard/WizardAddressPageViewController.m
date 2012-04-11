@@ -98,6 +98,16 @@
     [self reloadData];
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // Trigger a new validation to get localized error messages if any
+    [self checkTextFields];
+}
+
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
@@ -192,16 +202,6 @@
         HLSLoggerError(@"Unknown text field");
         return nil;
     }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-        
-    // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
 }
 
 #pragma mark Event callbacks

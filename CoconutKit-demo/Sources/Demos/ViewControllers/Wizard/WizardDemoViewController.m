@@ -50,6 +50,15 @@
     return YES;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"WizardDemoViewController";
+}
+
 #pragma mark HLSWizardViewControllerDelegate protocol implementation
 
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController
@@ -61,15 +70,6 @@
     }
             
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"WizardDemoViewController";
 }
 
 @end

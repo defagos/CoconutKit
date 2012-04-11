@@ -136,6 +136,25 @@ static NSArray *s_folders = nil;
     self.popoverController = nil;
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Cursor", @"Cursor");
+    
+    [s_timeScales release];
+    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],
+                     [NSLocalizedString(@"Month", @"Month") uppercaseString],
+                     [NSLocalizedString(@"Week", @"Week") uppercaseString],
+                     [NSLocalizedString(@"Day", @"Day") uppercaseString],
+                     nil] retain];
+    
+    [self.weekDaysCursor reloadData];
+    [self.timeScalesCursor reloadData];
+}
+
 #pragma mark HLSCursorDataSource protocol implementation
 
 - (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -318,25 +337,6 @@ static NSArray *s_folders = nil;
 - (IBAction)reloadRandomRangeCursor
 {
     [self.randomRangeCursor reloadData];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Cursor", @"Cursor");
-    
-    [s_timeScales release];
-    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],
-                     [NSLocalizedString(@"Month", @"Month") uppercaseString],
-                     [NSLocalizedString(@"Week", @"Week") uppercaseString],
-                     [NSLocalizedString(@"Day", @"Day") uppercaseString],
-                     nil] retain];
-    
-    [self.weekDaysCursor reloadData];
-    [self.timeScalesCursor reloadData];
 }
 
 @end

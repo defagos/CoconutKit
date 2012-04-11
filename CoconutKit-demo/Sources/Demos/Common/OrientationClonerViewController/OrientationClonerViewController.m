@@ -89,6 +89,30 @@
     [self reloadData];
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    if (self.isPortraitOrientation) {
+        if (self.isLarge) {
+            self.title = @"OrientationClonerViewController (portrait, large)";
+        }
+        else {
+            self.title = @"OrientationClonerViewController (portrait)";
+        }
+    }
+    else {
+        if (self.isLarge) {
+            self.title = @"OrientationClonerViewController (landscape, large)";
+        }
+        else {
+            self.title = @"OrientationClonerViewController (landscape)";
+        }
+    }
+}
+
 #pragma mark HLSOrientationCloner protocol implementation
 
 - (UIViewController *)viewControllerCloneWithOrientation:(UIInterfaceOrientation)orientation
@@ -120,30 +144,6 @@
     self.text = self.textField.text;
     
     return YES;
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    if (self.isPortraitOrientation) {
-        if (self.isLarge) {
-            self.title = @"OrientationClonerViewController (portrait, large)";
-        }
-        else {
-            self.title = @"OrientationClonerViewController (portrait)";
-        }
-    }
-    else {
-        if (self.isLarge) {
-            self.title = @"OrientationClonerViewController (landscape, large)";
-        }
-        else {
-            self.title = @"OrientationClonerViewController (landscape)";
-        }
-    }
 }
 
 @end

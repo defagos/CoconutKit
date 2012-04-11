@@ -142,6 +142,16 @@ typedef enum {
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Demos", @"Demos");
+    [self.tableView reloadData];
+}
+
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -532,14 +542,6 @@ typedef enum {
 		demoViewController.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
 		[self.navigationController pushViewController:demoViewController animated:YES];
 	}
-}
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Demos", @"Demos");
-    [self.tableView reloadData];
 }
 
 @end
