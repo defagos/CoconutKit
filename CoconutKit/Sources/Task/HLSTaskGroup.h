@@ -45,7 +45,7 @@
     NSDate *_lastEstimateDate;                  // date & time when the remaining time was previously estimated ...
     float _lastEstimateFullProgress;            // ... and corresponding progress value 
     NSUInteger _fullProgressStepsCounter;     
-    NSUInteger _nbrFailures;
+    NSUInteger _numberOfFailures;
 }
 
 /**
@@ -108,7 +108,7 @@
 /**
  * Return the current number of failed tasks
  */
-- (NSUInteger)nbrFailures;
+- (NSUInteger)numberOfFailures;
 
 /**
  * Create dependencies between tasks of a task group (both tasks must have already been added to the task group. If task1 depends on task2, then 
@@ -126,24 +126,26 @@
 /**
  * The task group has started
  */
-- (void)taskGroupHasStartedProcessing:(HLSTaskGroup *)taskGroup;
+- (void)taskGroupDidStart:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group is being processed and has an updated status (you can e.g. call progress to get its completion
- * status)
+ * The task group is being processed and has an updated status (you can e.g. call progress to get its completion status)
  */
-- (void)taskGroupProgressUpdated:(HLSTaskGroup *)taskGroup;
+- (void)taskGroupDidProgress:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group has been fully processed. You can check the number of failures or loop over all tasks to get their
- * status or errors individually
+ * The task group has been fully processed. You can check the number of failures or loop over all tasks to get their status or errors 
+ * individually
  */
-- (void)taskGroupHasBeenProcessed:(HLSTaskGroup *)taskGroup;
+- (void)taskGroupDidFinish:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group has been cancelled
+ * The task group has been cancelled. Usually you wouldn't expect the need for delegate method to be called when a cancel request
+ * occurs, because cancel operations usually executed on the spot. With tasks, however, the exact time at which a task operation 
+ * ends after a cancel has been requested depends on the operation implementation itself. We thus cannot assume that an
+ * operation has ended right after a cancel has been sent, thus the need for a dedicated delegate method
  */
-- (void)taskGroupHasBeenCancelled:(HLSTaskGroup *)taskGroup;
+- (void)taskGroupDidCancel:(HLSTaskGroup *)taskGroup;
 
 @end
 

@@ -150,28 +150,28 @@
         
         taskGroup.running = YES;
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
-        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasStartedProcessing:)]) {
-            [taskGroupDelegate taskGroupHasStartedProcessing:taskGroup];
+        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidStart:)]) {
+            [taskGroupDelegate taskGroupDidStart:taskGroup];
         }
     }
     
     // ... then flag the task as running and notify ...
     id<HLSTaskDelegate> taskDelegate = [self.taskManager delegateForTask:self.task];
     self.task.running = YES;
-    if ([taskDelegate respondsToSelector:@selector(taskHasStartedProcessing:)]) {
-        [taskDelegate taskHasStartedProcessing:self.task];
+    if ([taskDelegate respondsToSelector:@selector(taskDidStart:)]) {
+        [taskDelegate taskDidStart:self.task];
     }
     self.task.progress = 0.f;
-    if ([taskDelegate respondsToSelector:@selector(taskProgressUpdated:)]) {
-        [taskDelegate taskProgressUpdated:self.task];
+    if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
+        [taskDelegate taskDidProgress:self.task];
     }
     
     // ... and finally update and notify about the task group status
     if (taskGroup) {
         [taskGroup updateStatus];
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
-        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupProgressUpdated:)]) {
-            [taskGroupDelegate taskGroupProgressUpdated:taskGroup];
+        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidProgress:)]) {
+            [taskGroupDelegate taskGroupDidProgress:taskGroup];
         }
     }
 }
@@ -181,8 +181,8 @@
     // Update and notify about the task progress
     self.task.progress = [progress floatValue];
     id<HLSTaskDelegate> taskDelegate = [self.taskManager delegateForTask:self.task];
-    if ([taskDelegate respondsToSelector:@selector(taskProgressUpdated:)]) {
-        [taskDelegate taskProgressUpdated:self.task];
+    if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
+        [taskDelegate taskDidProgress:self.task];
     }
     
     // If part of a task group, update and notify about its status as well
@@ -190,8 +190,8 @@
     if (taskGroup) {
         [taskGroup updateStatus];
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
-        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupProgressUpdated:)]) {
-            [taskGroupDelegate taskGroupProgressUpdated:taskGroup];
+        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidProgress:)]) {
+            [taskGroupDelegate taskGroupDidProgress:taskGroup];
         }
     }
 }
@@ -217,8 +217,8 @@
     // Update the progress to 1.f on success, else do not alter current value (so that the progress value cannot go backwards)
     if (! self.task.error && ! [self isCancelled]) {
         self.task.progress = 1.f;
-        if ([taskDelegate respondsToSelector:@selector(taskProgressUpdated:)]) {
-            [taskDelegate taskProgressUpdated:self.task];
+        if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
+            [taskDelegate taskDidProgress:self.task];
         }
     }
     self.task.finished = YES;
@@ -227,8 +227,8 @@
     // The task has been cancelled
     if ([self isCancelled]) {
         HLSLoggerDebug(@"Task %@ has been cancelled", self.task);
-        if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
-            [taskDelegate taskHasBeenCancelled:self.task];
+        if ([taskDelegate respondsToSelector:@selector(taskDidCancel:)]) {
+            [taskDelegate taskDidCancel:self.task];
         }        
     }
     // The task has been processed
@@ -242,8 +242,8 @@
             HLSLoggerDebug(@"Task %@ has encountered an error", self.task);
         }
         
-        if ([taskDelegate respondsToSelector:@selector(taskHasBeenProcessed:)]) {
-            [taskDelegate taskHasBeenProcessed:self.task];
+        if ([taskDelegate respondsToSelector:@selector(taskDidFinish:)]) {
+            [taskDelegate taskDidFinish:self.task];
         }        
     }
     
@@ -252,8 +252,8 @@
         // Update an notify about the task group progress as well
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self.taskManager delegateForTaskGroup:taskGroup];
         [taskGroup updateStatus];
-        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupProgressUpdated:)]) {
-            [taskGroupDelegate taskGroupProgressUpdated:taskGroup];
+        if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidProgress:)]) {
+            [taskGroupDelegate taskGroupDidProgress:taskGroup];
         }
         
         // If the task group is now complete, update and notify as well
@@ -262,14 +262,14 @@
             
             if (! taskGroup.cancelled) {
                 HLSLoggerDebug(@"Task group %@ ends successfully", taskGroup);
-                if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
-                    [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
+                if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidFinish:)]) {
+                    [taskGroupDelegate taskGroupDidFinish:taskGroup];
                 }
             }
             else {
                 HLSLoggerDebug(@"Task group %@ has been cancelled", taskGroup);
-                if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
-                    [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
+                if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidCancel:)]) {
+                    [taskGroupDelegate taskGroupDidCancel:taskGroup];
                 }
             }
         }

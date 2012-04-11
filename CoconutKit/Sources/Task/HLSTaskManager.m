@@ -156,12 +156,12 @@
     if ([[taskGroup tasks] count] == 0) {
         id<HLSTaskGroupDelegate> taskGroupDelegate = [self delegateForTaskGroup:taskGroup];
         if (taskGroupDelegate) {
-            if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasStartedProcessing:)]) {
-                [taskGroupDelegate taskGroupHasStartedProcessing:taskGroup];
+            if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidStart:)]) {
+                [taskGroupDelegate taskGroupDidStart:taskGroup];
             }
             
-            if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
-                [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
+            if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidFinish:)]) {
+                [taskGroupDelegate taskGroupDidFinish:taskGroup];
             }            
         }
         
@@ -253,8 +253,8 @@
         
         // Notify the task delegate
         id<HLSTaskDelegate> taskDelegate = [self delegateForTask:task];
-        if ([taskDelegate respondsToSelector:@selector(taskHasBeenCancelled:)]) {
-            [taskDelegate taskHasBeenCancelled:task];
+        if ([taskDelegate respondsToSelector:@selector(taskDidCancel:)]) {
+            [taskDelegate taskDidCancel:task];
         }
         
         if (taskGroup) {            
@@ -267,14 +267,14 @@
                 id<HLSTaskGroupDelegate> taskGroupDelegate = [self delegateForTaskGroup:taskGroup];
                 if (! taskGroup.cancelled) {
                     HLSLoggerDebug(@"Task group %@ ends successfully", taskGroup);
-                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenProcessed:)]) {
-                        [taskGroupDelegate taskGroupHasBeenProcessed:taskGroup];
+                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidFinish:)]) {
+                        [taskGroupDelegate taskGroupDidFinish:taskGroup];
                     }
                 }
                 else {
                     HLSLoggerDebug(@"Task group %@ has been cancelled", taskGroup);
-                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupHasBeenCancelled:)]) {
-                        [taskGroupDelegate taskGroupHasBeenCancelled:taskGroup];
+                    if ([taskGroupDelegate respondsToSelector:@selector(taskGroupDidCancel:)]) {
+                        [taskGroupDelegate taskGroupDidCancel:taskGroup];
                     }
                 }
             }

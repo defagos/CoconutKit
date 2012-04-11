@@ -118,23 +118,24 @@
 /**
  * The task has started processing
  */
-- (void)taskHasStartedProcessing:(HLSTask *)task;
+- (void)taskDidStart:(HLSTask *)task;
 
 /**
- * The task is being processed and has an updated status (you can call progress to get its completion
- * status)
+ * The task is being processed and has an updated status (you can call -progress to get its completion status)
  */
-- (void)taskProgressUpdated:(HLSTask *)task;
+- (void)taskDidProgress:(HLSTask *)task;
 
 /**
- * The task has been fully processed. Check the error property to find if the processing was successful or not (and
- * why)
+ * The task has been fully processed. Check the error property to find if the processing was successful or not (and why)
  */
-- (void)taskHasBeenProcessed:(HLSTask *)task;
+- (void)taskDidFinish:(HLSTask *)task;
 
 /**
- * The task has been cancelled
+ * The task has been cancelled. Usually you wouldn't expect the need for delegate method to be called when a cancel request
+ * occurs, because cancel operations are executed on the spot. With tasks, however, the exact time at which a task operation 
+ * ends after a cancel has been requested depends on the operation implementation itself. We thus cannot assume that an
+ * operation has ended right after a cancel has been sent, thus the need for a dedicated delegate method
  */
-- (void)taskHasBeenCancelled:(HLSTask *)task;
+- (void)taskDidCancel:(HLSTask *)task;
 
 @end

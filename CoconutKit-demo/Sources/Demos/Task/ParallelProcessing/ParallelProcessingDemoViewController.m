@@ -175,7 +175,7 @@
 
 #pragma mark HLSTaskDelegate protocol implementation
 
-- (void)taskHasStartedProcessing:(HLSTask *)task
+- (void)taskDidStart:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
         self.taskStopButton.hidden = NO;
@@ -215,7 +215,7 @@
     }
 }
 
-- (void)taskProgressUpdated:(HLSTask *)task
+- (void)taskDidProgress:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
         self.taskProgressView.progress = task.progress;
@@ -235,7 +235,7 @@
     }    
 }
 
-- (void)taskHasBeenProcessed:(HLSTask *)task
+- (void)taskDidFinish:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
         // Failure?
@@ -308,7 +308,7 @@
     }
 }
 
-- (void)taskHasBeenCancelled:(HLSTask *)task
+- (void)taskDidCancel:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
         self.taskProgressView.hidden = YES;
@@ -339,7 +339,7 @@
 
 #pragma mark TaskGroupDelegate protocol implementation
 
-- (void)taskGroupHasStartedProcessing:(HLSTaskGroup *)taskGroup
+- (void)taskGroupDidStart:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.hidden = NO;
@@ -352,7 +352,7 @@
     }
 }
 
-- (void)taskGroupProgressUpdated:(HLSTaskGroup *)taskGroup
+- (void)taskGroupDidProgress:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.progress = taskGroup.progress;
@@ -360,10 +360,10 @@
     }
 }
 
-- (void)taskGroupHasBeenProcessed:(HLSTaskGroup *)taskGroup
+- (void)taskGroupDidFinish:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
-        // Failures could be tested here using [taskGroup nbrFailures]. This is not made here since we already
+        // Failures could be tested here using [taskGroup numberOfFailures]. This is not made here since we already
         // manage failures at the task level
         
         self.taskGroupProgressView.hidden = YES;
@@ -374,7 +374,7 @@
     } 
 }
 
-- (void)taskGroupHasBeenCancelled:(HLSTaskGroup *)taskGroup
+- (void)taskGroupDidCancel:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.hidden = YES;

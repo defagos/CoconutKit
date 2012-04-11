@@ -66,22 +66,33 @@
 - (void)submitTaskGroup:(HLSTaskGroup *)taskGroup;
 
 /**
- * Cancel a single task
+ * Cancel a single task. 
+ *
+ * It is important to note that the cancel is only requested, the exact time at which the task operation ends 
+ * depends on how its implementation handles the cancel request. You should therefore not assume that an operation 
+ * has ended right after a cancel request has been submitted. Task and task group delegate protocols expose
+ * methods which get called when processing ends as a result of a cancel request.
  */
 - (void)cancelTask:(HLSTask *)task;
 
 /**
- * Cancel a task group
+ * Cancel a task group.
+ *
+ * Please read the remark added to cancelTask: documentation above
  */
 - (void)cancelTaskGroup:(HLSTaskGroup *)taskGroup;
 
 /**
- * Cancel tasks by tag. Several tasks may share the same tag, in which case they will all be cancellled 
+ * Cancel tasks by tag. Several tasks may share the same tag, in which case they will all be cancellled.
+ *
+ * Please read the remark added to cancelTask: documentation above
  */
 - (void)cancelTasksWithTag:(NSString *)tag;
 
 /**
  * Cancel task groups by tag. Several tasks may share the same tag, in which case they will all be cancelled
+ *
+ * Please read the remark added to cancelTask: documentation above
  */
 - (void)cancelTaskGroupsWithTag:(NSString *)tag;
 
@@ -94,6 +105,8 @@
  *
  * If you are not interested in end process notifications, call the safer unregisterDelegateAndCancelAssociatedTasks:
  * method instead
+ *
+ * Please read the remark added to cancelTask: documentation above
  */
 - (void)cancelTasksWithDelegate:(id)delegate;
 

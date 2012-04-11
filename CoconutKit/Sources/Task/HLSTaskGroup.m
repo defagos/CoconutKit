@@ -176,9 +176,9 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @synthesize lastEstimateDate = _lastEstimateDate;
 
 
-- (NSUInteger)nbrFailures
+- (NSUInteger)numberOfFailures
 {
-    return _nbrFailures;
+    return _numberOfFailures;
 }
 
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
@@ -242,7 +242,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         // Failed tasks increase the failure counter and count for 1 in fullProgress
         if (task.error) {
             fullProgress += 1.f;
-            ++_nbrFailures;
+            ++_numberOfFailures;
         }
         else {
             fullProgress += task.progress;
@@ -363,7 +363,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.fullProgress = 0.f;
     self.remainingTimeIntervalEstimate = kTaskGroupNoTimeIntervalEstimateAvailable;
     self.lastEstimateDate = nil;
-    _nbrFailures = 0;
+    _numberOfFailures = 0;
 }
 
 @end
