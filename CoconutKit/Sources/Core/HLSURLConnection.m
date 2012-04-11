@@ -187,11 +187,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     // (refer to NSURLConnection documentation for more information)
     m_expectedContentLength = [response expectedContentLength];
     
-    // This clears the data
     [self.internalData setLength:0];
-    if (m_expectedContentLength != NSURLResponseUnknownLength) {
-        [self.internalData setLength:m_expectedContentLength];
-    }
     
     self.status = HLSURLConnectionStatusStarted;
     if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
