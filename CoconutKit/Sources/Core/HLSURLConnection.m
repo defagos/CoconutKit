@@ -121,7 +121,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     
     // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference
     // for HLSURLConnection delegate
-    self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
+    self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self] autorelease];
     if (! self.connection) {
         HLSLoggerError(@"Unable to open connection");
         return;
