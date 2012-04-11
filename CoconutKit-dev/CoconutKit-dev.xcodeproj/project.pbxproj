@@ -15,14 +15,16 @@
 		6F3B05D014BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05CC14BC0A510026F512 /* img_localized.png */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
-		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
-		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
 		6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7514BB75D900D54088 /* DemoTable.strings */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F82784F15355C6C00C51E6C /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82784E15355C6C00C51E6C /* HLSURLConnection.m */; };
+		6F82786E1535893F00C51E6C /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82786B1535893F00C51E6C /* DynamicLocalizationDemoViewController.m */; };
+		6F82786F1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82786C1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib */; };
+		6F82787A15358A0D00C51E6C /* URLConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */; };
+		6F82787C15358A1800C51E6C /* URLConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6FA9B09B14F8E753008B6D5A /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09714F8E753008B6D5A /* img_apple1.jpg */; };
@@ -223,9 +225,6 @@
 		6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064714BC7D500026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
-		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
-		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D7214BB75D000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DemoTable.strings; sourceTree = "<group>"; };
 		6F507D7614BB75D900D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = DemoTable.strings; sourceTree = "<group>"; };
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
@@ -235,6 +234,12 @@
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F82784D15355C6C00C51E6C /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
 		6F82784E15355C6C00C51E6C /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
+		6F82786A1535893F00C51E6C /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F82786B1535893F00C51E6C /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F82786C1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
+		6F82787815358A0D00C51E6C /* URLConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionDemoViewController.h; sourceTree = "<group>"; };
+		6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionDemoViewController.m; sourceTree = "<group>"; };
+		6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLConnectionDemoViewController.xib; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -629,19 +634,10 @@
 		6F4169EB14BB67D5006020E6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */,
+				6F8278691535893F00C51E6C /* DynamicLocalization */,
+				6F82786D1535893F00C51E6C /* URLConnection */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */,
-				6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */,
-				6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */,
-			);
-			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
 		6F5A0BAA1509D17B00A20DFF /* Slideshow */ = {
@@ -652,6 +648,26 @@
 				6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */,
 			);
 			path = Slideshow;
+			sourceTree = "<group>";
+		};
+		6F8278691535893F00C51E6C /* DynamicLocalization */ = {
+			isa = PBXGroup;
+			children = (
+				6F82786A1535893F00C51E6C /* DynamicLocalizationDemoViewController.h */,
+				6F82786B1535893F00C51E6C /* DynamicLocalizationDemoViewController.m */,
+				6F82786C1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalization;
+			sourceTree = "<group>";
+		};
+		6F82786D1535893F00C51E6C /* URLConnection */ = {
+			isa = PBXGroup;
+			children = (
+				6F82787815358A0D00C51E6C /* URLConnectionDemoViewController.h */,
+				6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */,
+				6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */,
+			);
+			path = URLConnection;
 			sourceTree = "<group>";
 		};
 		6FADE61A14BA04A6007EE121 /* Resources */ = {
@@ -1561,7 +1577,6 @@
 				6FADE8D814BA04C9007EE121 /* WizardAddressPageViewController.xib in Resources */,
 				6FADE8DA14BA04C9007EE121 /* WizardDemoViewController.xib in Resources */,
 				6FADE8DC14BA04C9007EE121 /* WizardIdentityPageViewController.xib in Resources */,
-				6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */,
 				6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */,
 				6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */,
@@ -1582,6 +1597,8 @@
 				6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */,
+				6F82786F1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F82787C15358A1800C51E6C /* URLConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1710,7 +1727,6 @@
 				6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */,
 				6FADE8E014BA04C9007EE121 /* Person.m in Sources */,
 				6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
-				6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */,
@@ -1727,6 +1743,8 @@
 				6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F82784F15355C6C00C51E6C /* HLSURLConnection.m in Sources */,
+				6F82786E1535893F00C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F82787A15358A0D00C51E6C /* URLConnectionDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

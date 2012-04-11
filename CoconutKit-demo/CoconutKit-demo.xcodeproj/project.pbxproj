@@ -26,6 +26,10 @@
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
+		6F8278761535895500C51E6C /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8278731535895500C51E6C /* DynamicLocalizationDemoViewController.m */; };
+		6F8278771535895500C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F8278741535895500C51E6C /* DynamicLocalizationDemoViewController.xib */; };
+		6F82788015358A2400C51E6C /* URLConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */; };
+		6F82788115358A2400C51E6C /* URLConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -58,8 +62,6 @@
 		6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
 		6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F9C466C14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */; };
-		6F9C466D14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */; };
 		6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
 		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
@@ -164,6 +166,12 @@
 		6F5A0BB11509D19300A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F8278721535895500C51E6C /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F8278731535895500C51E6C /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F8278741535895500C51E6C /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
+		6F82787D15358A2400C51E6C /* URLConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionDemoViewController.h; sourceTree = "<group>"; };
+		6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionDemoViewController.m; sourceTree = "<group>"; };
+		6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLConnectionDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
 		6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoAppDelegate.m; sourceTree = "<group>"; };
 		6F9C459614C5C30B00824AB2 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -210,9 +218,6 @@
 		6F9C45CF14C5C30B00824AB2 /* TransparentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentViewController.h; sourceTree = "<group>"; };
 		6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentViewController.m; sourceTree = "<group>"; };
 		6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransparentViewController.xib; sourceTree = "<group>"; };
-		6F9C45D414C5C30B00824AB2 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45D914C5C30B00824AB2 /* ParallelProcessingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelProcessingDemoViewController.h; sourceTree = "<group>"; };
 		6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallelProcessingDemoViewController.m; sourceTree = "<group>"; };
 		6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallelProcessingDemoViewController.xib; sourceTree = "<group>"; };
@@ -437,6 +442,26 @@
 			path = Slideshow;
 			sourceTree = "<group>";
 		};
+		6F8278711535895500C51E6C /* DynamicLocalization */ = {
+			isa = PBXGroup;
+			children = (
+				6F8278721535895500C51E6C /* DynamicLocalizationDemoViewController.h */,
+				6F8278731535895500C51E6C /* DynamicLocalizationDemoViewController.m */,
+				6F8278741535895500C51E6C /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalization;
+			sourceTree = "<group>";
+		};
+		6F8278751535895500C51E6C /* URLConnection */ = {
+			isa = PBXGroup;
+			children = (
+				6F82787D15358A2400C51E6C /* URLConnectionDemoViewController.h */,
+				6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */,
+				6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */,
+			);
+			path = URLConnection;
+			sourceTree = "<group>";
+		};
 		6F9C459214C5C30B00824AB2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,19 +661,10 @@
 		6F9C45D214C5C30B00824AB2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45D314C5C30B00824AB2 /* DynamicLocalizationViewController */,
+				6F8278711535895500C51E6C /* DynamicLocalization */,
+				6F8278751535895500C51E6C /* URLConnection */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		6F9C45D314C5C30B00824AB2 /* DynamicLocalizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45D414C5C30B00824AB2 /* DynamicLocalizationDemoViewController.h */,
-				6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */,
-				6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */,
-			);
-			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
 		6F9C45D714C5C30B00824AB2 /* Task */ = {
@@ -1047,7 +1063,6 @@
 				6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
-				6F9C466D14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
@@ -1092,6 +1107,8 @@
 				6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
+				6F8278771535895500C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F82788115358A2400C51E6C /* URLConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,7 +1151,6 @@
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
 				6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
-				6F9C466C14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
@@ -1167,6 +1183,8 @@
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
+				6F8278761535895500C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F82788015358A2400C51E6C /* URLConnectionDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

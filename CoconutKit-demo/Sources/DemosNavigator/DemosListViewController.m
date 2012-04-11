@@ -23,6 +23,7 @@
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "URLConnectionDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
 
@@ -51,6 +52,7 @@ typedef enum {
 typedef enum {
     CoreDemoIndexEnumBegin = 0,
     CoreDemoIndexDynamicLocalization = CoreDemoIndexEnumBegin,
+    CoreDemoIndexURLConnection,
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
 } CoreDemoIndex;
@@ -249,6 +251,11 @@ typedef enum {
                     break;
                 }
                     
+                case CoreDemoIndexURLConnection: {
+                    cell.textLabel.text = NSLocalizedString(@"Networking with HLSURLConnection", @"Networking with HLSURLConnection");
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -395,6 +402,11 @@ typedef enum {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
                     demoViewController = [[[DynamicLocalizationDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case CoreDemoIndexURLConnection: {
+                    demoViewController = [[[URLConnectionDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
