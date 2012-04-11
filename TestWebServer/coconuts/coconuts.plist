@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>coconuts</key>
+	<array>
+		<dict>
+			<key>name_en</key>
+			<string>Nice coconut</string>
+			<key>name_fr</key>
+			<string>Chouette noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut1.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Beautiful coconut</string>
+			<key>name_fr</key>
+			<string>Belle noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut2.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Killer coconut</string>
+			<key>name_fr</key>
+			<string>Noix de coco de la mort</string>
+			<key>thumbnailImageName</key>
+			<string>coconut3.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Wonderful coconut</string>
+			<key>name_fr</key>
+			<string>Merveilleuse noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut4.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Fantastic coconut</string>
+			<key>name_fr</key>
+			<string>Fantastique noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut5.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Delicious coconut</string>
+			<key>name_fr</key>
+			<string>Délicieuse noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut6.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Excellent coconut</string>
+			<key>name_fr</key>
+			<string>Excellente noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut7.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Precious coconut</string>
+			<key>name_fr</key>
+			<string>Précieuse de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut8.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Sweet coconut</string>
+			<key>name_fr</key>
+			<string>Douce noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut9.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Top-notch coconut</string>
+			<key>name_fr</key>
+			<string>Noix de coco de premier ordre</string>
+			<key>thumbnailImageName</key>
+			<string>coconut10.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Tasty coconut</string>
+			<key>name_fr</key>
+			<string>Savoureuse noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut11.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Invaluable coconut</string>
+			<key>name_fr</key>
+			<string>Noix de coco inestimable</string>
+			<key>thumbnailImageName</key>
+			<string>coconut12.jpg</string>
+		</dict>
+		<dict>
+			<key>name_en</key>
+			<string>Best coconut</string>
+			<key>name_fr</key>
+			<string>Meilleure noix de coco</string>
+			<key>thumbnailImageName</key>
+			<string>coconut13.jpg</string>
+		</dict>
+	</array>
+</dict>
+</plist>
