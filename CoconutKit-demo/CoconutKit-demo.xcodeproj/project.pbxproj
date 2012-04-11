@@ -30,6 +30,7 @@
 		6F8278771535895500C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F8278741535895500C51E6C /* DynamicLocalizationDemoViewController.xib */; };
 		6F82788015358A2400C51E6C /* URLConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */; };
 		6F82788115358A2400C51E6C /* URLConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */; };
+		6F8278921535AC9000C51E6C /* Coconut.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8278911535AC9000C51E6C /* Coconut.m */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -172,6 +173,8 @@
 		6F82787D15358A2400C51E6C /* URLConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionDemoViewController.h; sourceTree = "<group>"; };
 		6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionDemoViewController.m; sourceTree = "<group>"; };
 		6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLConnectionDemoViewController.xib; sourceTree = "<group>"; };
+		6F8278901535AC9000C51E6C /* Coconut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coconut.h; sourceTree = "<group>"; };
+		6F8278911535AC9000C51E6C /* Coconut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coconut.m; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
 		6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoAppDelegate.m; sourceTree = "<group>"; };
 		6F9C459614C5C30B00824AB2 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 		6F8278751535895500C51E6C /* URLConnection */ = {
 			isa = PBXGroup;
 			children = (
+				6F8278901535AC9000C51E6C /* Coconut.h */,
+				6F8278911535AC9000C51E6C /* Coconut.m */,
 				6F82787D15358A2400C51E6C /* URLConnectionDemoViewController.h */,
 				6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */,
 				6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */,
@@ -1185,6 +1190,7 @@
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8278761535895500C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F82788015358A2400C51E6C /* URLConnectionDemoViewController.m in Sources */,
+				6F8278921535AC9000C51E6C /* Coconut.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

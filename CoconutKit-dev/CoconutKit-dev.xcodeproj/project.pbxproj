@@ -25,6 +25,7 @@
 		6F82786F1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82786C1535893F00C51E6C /* DynamicLocalizationDemoViewController.xib */; };
 		6F82787A15358A0D00C51E6C /* URLConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */; };
 		6F82787C15358A1800C51E6C /* URLConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */; };
+		6F82788F1535AC8100C51E6C /* Coconut.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F82788E1535AC8100C51E6C /* Coconut.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6FA9B09B14F8E753008B6D5A /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09714F8E753008B6D5A /* img_apple1.jpg */; };
@@ -240,6 +241,8 @@
 		6F82787815358A0D00C51E6C /* URLConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionDemoViewController.h; sourceTree = "<group>"; };
 		6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionDemoViewController.m; sourceTree = "<group>"; };
 		6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLConnectionDemoViewController.xib; sourceTree = "<group>"; };
+		6F82788D1535AC8000C51E6C /* Coconut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coconut.h; sourceTree = "<group>"; };
+		6F82788E1535AC8100C51E6C /* Coconut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coconut.m; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 		6F82786D1535893F00C51E6C /* URLConnection */ = {
 			isa = PBXGroup;
 			children = (
+				6F82788D1535AC8000C51E6C /* Coconut.h */,
+				6F82788E1535AC8100C51E6C /* Coconut.m */,
 				6F82787815358A0D00C51E6C /* URLConnectionDemoViewController.h */,
 				6F82787915358A0D00C51E6C /* URLConnectionDemoViewController.m */,
 				6F82787B15358A1800C51E6C /* URLConnectionDemoViewController.xib */,
@@ -1745,6 +1750,7 @@
 				6F82784F15355C6C00C51E6C /* HLSURLConnection.m in Sources */,
 				6F82786E1535893F00C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F82787A15358A0D00C51E6C /* URLConnectionDemoViewController.m in Sources */,
+				6F82788F1535AC8100C51E6C /* Coconut.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
