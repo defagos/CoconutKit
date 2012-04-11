@@ -110,6 +110,7 @@
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text fields"="Champs textuels";
 "The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
+"The data could not be retrieved"="Les données n'ont pas pu être récupérées";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Transition"="Transition";
 "Transparent"="Transparent";

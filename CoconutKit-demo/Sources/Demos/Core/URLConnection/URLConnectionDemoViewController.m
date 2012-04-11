@@ -127,6 +127,13 @@
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error
 {
     HLSLoggerInfo(@"Connection did fail with error: %@", error);
+    
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                         message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
+                                                        delegate:nil 
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
 }
 
 #pragma mark HLSReloadable protocol implementation
