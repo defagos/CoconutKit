@@ -65,6 +65,8 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
+    
     connection.delegate = self;
     [connection start];
 }
@@ -107,13 +109,8 @@
 - (void)connectionDidFinish:(HLSURLConnection *)connection
 {
     HLSLoggerInfo(@"Connection did finish");
-    
-    // TODO: Directly load from download file path
-    
-    NSString *filePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
-    [[connection data] writeToFile:filePath atomically:NO];
-    
-    NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+        
+    NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
     NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
     
     NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" 

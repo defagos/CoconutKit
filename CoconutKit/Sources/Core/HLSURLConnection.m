@@ -24,6 +24,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 - (void)reset;
+- (BOOL)prepareForDownload;
 
 @end
 
@@ -77,6 +78,21 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 @synthesize downloadFilePath = m_downloadFilePath;
 
+- (void)setDownloadFilePath:(NSString *)downloadFilePath
+{
+    if (self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted) {
+        HLSLoggerWarn(@"The download file path cannot be changed when a connection is started");
+        return;
+    }
+    
+    if (m_downloadFilePath == downloadFilePath) {
+        return;
+    }
+    
+    [m_downloadFilePath release];
+    m_downloadFilePath = [downloadFilePath retain];
+}
+
 @synthesize userInfo = m_userInfo;
 
 @synthesize internalData = m_internalData;
@@ -112,7 +128,12 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (NSData *)data
 {
-    return self.internalData;
+    if (self.downloadFilePath) {
+        return [NSData dataWithContentsOfFile:self.downloadFilePath];
+    }
+    else {
+        return self.internalData;
+    }
 }
 
 #pragma mark Managing the connection
@@ -124,8 +145,12 @@ float HLSURLConnectionProgressUnavailable = -1.f;
         return;
     }
     
-    [self reset];
+    if (! [self prepareForDownload]) {
+        return;
+    }
     
+    [self reset];
+        
     // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference
     // for HLSURLConnection delegate
     self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self] autorelease];
@@ -158,13 +183,16 @@ float HLSURLConnectionProgressUnavailable = -1.f;
         return;
     }
     
+    if (! [self prepareForDownload]) {
+        return;
+    }
+    
     [self reset];
     
     self.status = HLSURLConnectionStatusStarting;
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     
-    // TODO: Check: The status / data should have been properly updated in the NSURLConnection callbacks. Similarly for the
-    //       delegate method calls. If not, do it here
+    // As for an asynchronous connection, the connection status is handled by the NSURLConnection callbacks
     NSError *error = nil;
     if (! [NSURLConnection sendSynchronousRequest:self.request returningResponse:NULL error:&error]) {
         HLSLoggerError(@"The connection failed. Reason: %@", error);
@@ -179,6 +207,42 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     m_expectedContentLength = NSURLResponseUnknownLength;
 }
 
+- (BOOL)prepareForDownload
+{
+    if (self.downloadFilePath) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
+            NSError *fileDeletionError = nil;
+            if ([fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
+                HLSLoggerInfo(@"A file already existed at %@ and has been deleted", self.downloadFilePath);
+            }
+            else {
+                HLSLoggerError(@"The file existing at %@ could not be deleted. Aborting. Reason: %@", self.downloadFilePath, fileDeletionError);
+                return NO;
+            }    
+        }
+                
+        NSString *downloadFileDirectoryPath = [self.downloadFilePath stringByDeletingLastPathComponent];
+        NSError *directoryCreationError = nil;
+        if (! [fileManager createDirectoryAtPath:downloadFileDirectoryPath
+                     withIntermediateDirectories:YES 
+                                      attributes:nil 
+                                           error:&directoryCreationError]) {
+            HLSLoggerError(@"Could not create directory %@. Aborting. Reason: %@", downloadFileDirectoryPath, directoryCreationError);
+            return NO;
+        }
+        
+        NSError *fileCreationError = nil;
+        if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
+            HLSLoggerError(@"Could not create file at path %@. Aborting. Reason: %@", self.downloadFilePath, fileCreationError);
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 #pragma mark NSURLConnection events
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -186,9 +250,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     // Each time a response is received we must discard any previously accumulated data
     // (refer to NSURLConnection documentation for more information)
     m_expectedContentLength = [response expectedContentLength];
-    
-    [self.internalData setLength:0];
-    
+        
     self.status = HLSURLConnectionStatusStarted;
     if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
         [self.delegate connectionDidStart:self];
@@ -197,12 +259,41 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [self.internalData appendData:data];
+    if (self.downloadFilePath) {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:self.downloadFilePath];
+        if (! fileHandle) {
+            HLSLoggerError(@"The file at %@ could not be found. Aborting");
+            [self cancel];
+            return;
+        }
+        
+        @try {
+            [fileHandle seekToEndOfFile];
+            [fileHandle writeData:data];
+        }
+        @catch (NSException *exception) {
+            HLSLoggerError(@"The file at %@ could not be written. Aborting. Reason: %@", exception);
+            [self cancel];
+            return;
+        }
+    }
+    else {
+        [self.internalData appendData:data];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     HLSLoggerDebug(@"Connection failed with error: %@", error);
+    
+    // Remove file on failure
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
+        NSError *fileDeletionError = nil;
+        if (! [fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
+            HLSLoggerError(@"The file at %@ could not be deleted. Reason: %@", fileDeletionError);
+        }
+    }
     
     [self reset];
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
