@@ -120,42 +120,27 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
-{    
+{
     switch (indexPath.section) {
         case CellCategoryIndexSimple: {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
-                    HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSTableViewCell";
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
+                    return [HLSTableViewCell cellForTableView:tableView];
                     break;
                 }
                     
                 case SimpleCellIndexValue1: {
-                    HLSValue1TableViewCell *cell = [HLSValue1TableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSValue1TableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
+                    return [HLSValue1TableViewCell cellForTableView:tableView];
                     break;
                 }
                     
                 case SimpleCellIndexValue2: {
-                    HLSValue2TableViewCell *cell = [HLSValue2TableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSValue2TableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
+                    return [HLSValue2TableViewCell cellForTableView:tableView];
                     break;
                 }
                     
                 case SimpleCellIndexSubtitle: {
-                    HLSSubtitleTableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSSubtitleTableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;                    
+                    return [HLSSubtitleTableViewCell cellForTableView:tableView];
                     break;
                 }
                     
@@ -170,22 +155,15 @@ typedef enum {
         case CellCategoryIndexCustom: {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
-                    XibTableViewCell *cell = [XibTableViewCell cellForTableView:tableView];
-                    cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
-                    cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
-                    // Selection enabled to show that customization works
-                    return cell;
+                    return [XibTableViewCell cellForTableView:tableView];
                     break;
                 }
                     
                 case CustomCellIndexProgrammatically: {
-                    ProgrammaticTableViewCell *cell = [ProgrammaticTableViewCell cellForTableView:tableView];
-                    cell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
+                    return [ProgrammaticTableViewCell cellForTableView:tableView];
                     break;
                 }
-                
+                    
                 default: {
                     return nil;
                     break;
@@ -202,6 +180,79 @@ typedef enum {
 }
 
 #pragma mark UITableViewDelegate protocol implementation
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    switch (indexPath.section) {
+        case CellCategoryIndexSimple: {
+            switch (indexPath.row) {
+                case SimpleCellIndexDefault: {
+                    HLSTableViewCell *tableViewCell = (HLSTableViewCell *)cell;
+                    tableViewCell.textLabel.text = @"HLSTableViewCell";
+                    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                    
+                case SimpleCellIndexValue1: {
+                    HLSValue1TableViewCell *tableViewCell = (HLSValue1TableViewCell *)cell;
+                    tableViewCell.textLabel.text = @"HLSValue1TableViewCell";
+                    tableViewCell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                    
+                case SimpleCellIndexValue2: {
+                    HLSValue2TableViewCell *tableViewCell = (HLSValue2TableViewCell *)cell;
+                    tableViewCell.textLabel.text = @"HLSValue2TableViewCell";
+                    tableViewCell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                    
+                case SimpleCellIndexSubtitle: {
+                    HLSSubtitleTableViewCell *tableViewCell = (HLSSubtitleTableViewCell *)cell;
+                    tableViewCell.textLabel.text = @"HLSSubtitleTableViewCell";
+                    tableViewCell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;                    
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        case CellCategoryIndexCustom: {
+            switch (indexPath.row) {
+                case CustomCellIndexXib: {
+                    XibTableViewCell *tableViewCell = (XibTableViewCell *)cell;
+                    tableViewCell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
+                    tableViewCell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
+                    // Selection here enabled to show that customization works
+                    break;
+                }
+                    
+                case CustomCellIndexProgrammatically: {
+                    ProgrammaticTableViewCell *tableViewCell = (ProgrammaticTableViewCell *)cell;
+                    tableViewCell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
+                    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }            
+            }
+            break;
+        }
+            
+        default: {
+            break;
+        }            
+    }
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -289,6 +340,12 @@ typedef enum {
             break;
         }            
     }     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Nicer effect when clicking on the only active cell
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

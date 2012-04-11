@@ -158,6 +158,15 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {   
+    return [HLSTableViewCell cellForTableView:tableView];
+}
+
+#pragma mark UITableViewDelegate protocol implementation
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{   
+    HLSTableViewCell *tableViewCell = (HLSTableViewCell *)cell;
+    
     DeviceInfo *device = nil;
     if (tableView == self.searchResultsTableView) {
         device = [self.filteredDevices objectAtIndex:indexPath.row];
@@ -166,24 +175,19 @@ typedef enum {
         device = [self.devices objectAtIndex:indexPath.row];
     }
     
-    HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];
-    cell.textLabel.text = device.name;
+    tableViewCell.textLabel.text = device.name;
     
     // In navigation controller: Can test behavior when another level is pushed
     if (self.navigationController) {
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        tableViewCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     // Modal: In this example, we have no navigation controller available. Cannot navigate further
     else {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        tableViewCell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    return cell;
 }
-
-#pragma mark UITableViewDelegate protocol implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

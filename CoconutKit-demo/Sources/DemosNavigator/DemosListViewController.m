@@ -230,24 +230,30 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    return [HLSSubtitleTableViewCell cellForTableView:tableView];
+}
+
+#pragma mark UITableViewDelegate protocol implementation
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    UITableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    HLSSubtitleTableViewCell *tableViewCell = (HLSSubtitleTableViewCell *)cell;
+    tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
                 case AnimationDemoIndexSingleView: {
-                    cell.textLabel.text = NSLocalizedString(@"Single view animation", @"Single view animation");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Single view animation", @"Single view animation");
                     break;
                 }
-                
+                    
                 case AnimationDemoIndexMultipleViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
                     break;
                 }
                     
                 default: {
-                    return nil;
                     break;
                 }            
             }
@@ -257,17 +263,16 @@ typedef enum {
         case DemoCategoryIndexCore: {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
-                    cell.textLabel.text = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
                     break;
                 }
                     
                 case CoreDemoIndexURLConnection: {
-                    cell.textLabel.text = NSLocalizedString(@"Networking with HLSURLConnection", @"Networking with HLSURLConnection");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Networking with HLSURLConnection", @"Networking with HLSURLConnection");
                     break;
                 }
                     
                 default: {
-                    return nil;
                     break;
                 }
             }
@@ -277,12 +282,11 @@ typedef enum {
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Parallel processing", @"Parallel processing");
                     break;
                 }
                     
                 default: {
-                    return nil;
                     break;
                 }            
             }
@@ -292,47 +296,46 @@ typedef enum {
         case DemoCategoryIndexView: {
             switch (indexPath.row) {
                 case ViewDemoIndexTableViewCells: {
-                    cell.textLabel.text = NSLocalizedString(@"Table view cells", @"Table view cells");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Table view cells", @"Table view cells");
                     break;
                 }
                     
                 case ViewDemoIndexTextFields: {
-                    cell.textLabel.text = NSLocalizedString(@"Text fields", @"Text fields");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Text fields", @"Text fields");
                     break;
                 }
                     
                 case ViewDemoIndexCursor: {
-                    cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
                     break;
                 }
                     
                 case ViewDemoIndexActionSheet: {
-                    cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
                     break;
                 }
                     
                 case ViewDemoIndexSlideshow: {
-                    cell.textLabel.text = NSLocalizedString(@"Slideshow", @"Slideshow");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Slideshow", @"Slideshow");
                     break;
                 }
                     
                 case ViewDemoIndexSkinning: {
-                    cell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
                     break;
                 }
                     
                 case ViewDemoIndexWebView: {
-                    cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
                     break;
                 }
                     
                 case ViewDemoIndexParallaxScrolling: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
+                    tableViewCell.textLabel.text = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
                     break;
                 }
-                
+                    
                 default: {
-                    return nil;
                     break;
                 }            
             }
@@ -342,32 +345,31 @@ typedef enum {
         case DemoCategoryIndexViewControllers: {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
-                    cell.textLabel.text = @"HLSPlaceholderViewController";
+                    tableViewCell.textLabel.text = @"HLSPlaceholderViewController";
                     break;
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
-                    cell.textLabel.text = @"HLSWizardViewController";
+                    tableViewCell.textLabel.text = @"HLSWizardViewController";
                     break;
                 }
                     
                 case ViewControllersDemoIndexStackController: {
-                    cell.textLabel.text = @"HLSStackController";
+                    tableViewCell.textLabel.text = @"HLSStackController";
                     break;
                 }
                     
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
-                    cell.textLabel.text = @"HLSTableSearchDisplayController";
+                    tableViewCell.textLabel.text = @"HLSTableSearchDisplayController";
                     break;
                 }
-                
+                    
                 case ViewControllersDemoIndexWebViewController: {
-                    cell.textLabel.text = @"HLSWebViewController";
+                    tableViewCell.textLabel.text = @"HLSWebViewController";
                     break;
                 }
-
+                    
                 default: {
-                    return nil;
                     break;
                 }            
             }
@@ -375,14 +377,10 @@ typedef enum {
         }
             
         default: {
-            return nil;
             break;
         }
     }
-    return cell;
 }
-
-#pragma mark UITableViewDelegate protocol implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
