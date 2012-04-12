@@ -122,7 +122,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         return HLSURLConnectionProgressUnavailable;
     }
     else {
-        return [self.internalData length] / m_expectedContentLength;
+        return floatmin((float)m_currentContentLength / m_expectedContentLength, 1.f);
     }
 }
 
@@ -223,6 +223,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     self.status = HLSURLConnectionStatusIdle;
     self.connection = nil;
     m_expectedContentLength = NSURLResponseUnknownLength;
+    m_currentContentLength = 0;
 }
 
 - (BOOL)prepareForDownload
@@ -297,6 +298,14 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     }
     else {
         [self.internalData appendData:data];
+    }
+    
+    // We track the total length. It is more cumbersome, but it is faster than querying a file for his length
+    // (if we are downloading to a file)
+    m_currentContentLength += [data length];
+    
+    if ([self.delegate respondsToSelector:@selector(connectionDidProgress:)]) {
+        [self.delegate connectionDidProgress:self];
     }
 }
 

@@ -107,6 +107,11 @@
     HLSLoggerInfo(@"Connection did start");
 }
 
+- (void)connectionDidProgress:(HLSURLConnection *)connection
+{
+    HLSLoggerInfo(@"Connection did progress (progress = %f)", connection.progress);
+}
+
 - (void)connectionDidFinish:(HLSURLConnection *)connection
 {
     HLSLoggerInfo(@"Connection did finish");

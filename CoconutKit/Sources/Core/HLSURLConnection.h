@@ -56,6 +56,7 @@ extern const float HLSURLConnectionProgressUnavailable;
     NSDictionary *m_userInfo;
     NSMutableData *m_internalData;
     HLSURLConnectionStatus m_status;
+    long long m_currentContentLength;
     long long m_expectedContentLength;
     HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
@@ -156,6 +157,12 @@ extern const float HLSURLConnectionProgressUnavailable;
  * The connection has started and received a response
  */
 - (void)connectionDidStart:(HLSURLConnection *)connection;
+
+/**
+ * The connection has received data. You can call the -progress method to obtain a progress estimate (if
+ * available)
+ */
+- (void)connectionDidProgress:(HLSURLConnection *)connection;
 
 /**
  * The connection did finish successfully. You can use -data to get the data which has been retrieved, or you
