@@ -11,6 +11,7 @@
  * simultaneous taps. Good places are for example main.m or your application delegate .m file
  */
 #define HLSEnableUIControlExclusiveTouch()                                                                \
+    __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void);                 \
     __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                  \
     {                                                                                                     \
         [UIControl injectExclusiveTouch];                                                                 \

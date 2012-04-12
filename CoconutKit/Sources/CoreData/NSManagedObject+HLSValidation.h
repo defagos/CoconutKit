@@ -11,6 +11,7 @@
  * for example main.m or your application delegate .m file
  */
 #define HLSEnableNSManagedObjectValidation()                                                          \
+    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void);           \
     __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)            \
     {                                                                                                 \
         [NSManagedObject injectValidation];                                                           \
