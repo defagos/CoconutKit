@@ -44,6 +44,9 @@ extern const float HLSURLConnectionProgressUnavailable;
  * HLSURLConnection object is namely initialized with an NSURLRequest object, which means you can customize
  * it as you need, depending on the protocol you use, the caching policy you require, etc.
  *
+ * Note that you do not need to retain an HLSURLConnection while running (you only need to keep a reference to
+ * a connection object if you want to be able to cancel it manually)
+ *
  * Designated initializer: initWithRequest:runLoopMode:
  */
 @interface HLSURLConnection : NSObject {

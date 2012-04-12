@@ -13,6 +13,7 @@
 
 @interface URLConnectionDemoViewController ()
 
+@property (nonatomic, retain) HLSURLConnection *asynchronousConnection;
 @property (nonatomic, retain) NSArray *coconuts;
 
 @end
@@ -31,6 +32,7 @@
 
 - (void)dealloc
 {
+    self.asynchronousConnection = nil;
     self.coconuts = nil;
     
     [super dealloc];
@@ -41,13 +43,24 @@
     [super releaseViews];
     
     self.tableView = nil;
+    self.asynchronousLoadButton = nil;
+    self.cancelButton = nil;
+    self.synchronousLoadButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
+@synthesize asynchronousConnection = m_asynchronousConnection;
+
 @synthesize coconuts = m_coconuts;
 
 @synthesize tableView = m_tableView;
+
+@synthesize asynchronousLoadButton = m_asynchronousLoadButton;
+
+@synthesize cancelButton = m_cancelButton;
+
+@synthesize synchronousLoadButton = m_synchronousLoadButton;
 
 #pragma mark View lifecycle
 
@@ -57,19 +70,9 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = [CoconutTableViewCell height];    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    self.tableView.rowHeight = [CoconutTableViewCell height];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]];
-    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
-    connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
-    
-    connection.delegate = self;
-    [connection start];
+    self.cancelButton.hidden = YES;
 }
 
 #pragma mark Orientation management
@@ -115,6 +118,10 @@
 - (void)connectionDidFinish:(HLSURLConnection *)connection
 {
     HLSLoggerInfo(@"Connection did finish");
+    
+    self.asynchronousLoadButton.hidden = NO;
+    self.synchronousLoadButton.hidden = NO;
+    self.cancelButton.hidden = YES;
         
     NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
     NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
@@ -130,6 +137,10 @@
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error
 {
     HLSLoggerInfo(@"Connection did fail with error: %@", error);
+    
+    self.asynchronousLoadButton.hidden = NO;
+    self.synchronousLoadButton.hidden = NO;
+    self.cancelButton.hidden = YES;
     
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
                                                          message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
@@ -169,14 +180,55 @@
     // We must use a customm cell here. If we try to use a standard cell style and its imageView property, refresh does
     // not work correctly. UITableViewCell implementation probably does some nasty things under the hood
     if (coconut.thumbnailImageName) {
-        NSURL *url = [[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName];
-        [tableViewCell.thumbnailImageView loadWithImageAtURL:url];        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
+                                                 cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                             timeoutInterval:10.];
+        [tableViewCell.thumbnailImageView loadWithImageRequest:request];
     }
     else {
         tableViewCell.thumbnailImageView.image = nil;
     }
     tableViewCell.nameLabel.text = coconut.name;
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)loadAsynchronously:(id)sender
+{
+    self.asynchronousLoadButton.hidden = YES;
+    self.synchronousLoadButton.hidden = YES;
+    self.cancelButton.hidden = NO;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                            timeoutInterval:10.];
+    self.asynchronousConnection = [HLSURLConnection connectionWithRequest:request];
+    self.asynchronousConnection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
+    
+    self.asynchronousConnection.delegate = self;
+    [self.asynchronousConnection start];
+}
+
+- (IBAction)cancel:(id)sender
+{
+    self.asynchronousLoadButton.hidden = NO;
+    self.synchronousLoadButton.hidden = NO;
+    self.cancelButton.hidden = YES;
+    
+    [self.asynchronousConnection cancel];
+}
+
+- (IBAction)loadSynchronously:(id)sender
+{
+    self.asynchronousLoadButton.hidden = YES;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                            timeoutInterval:10.];
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
+    [connection startSynchronous];
 }
 
 @end
