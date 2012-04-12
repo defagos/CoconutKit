@@ -11,6 +11,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F17DEA415369EF000A5777C /* CoconutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17DEA215369EEF00A5777C /* CoconutTableViewCell.m */; };
+		6F17DEA515369EF000A5777C /* CoconutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F17DEA315369EEF00A5777C /* CoconutTableViewCell.xib */; };
 		6F1AF859142B046600925B7A /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */; };
 		6F1AF85A142B046600925B7A /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AF847142B046600925B7A /* CoconutKit.framework */; };
 		6F1AF85B142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AF849142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png */; };
@@ -149,6 +151,9 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
+		6F17DEA115369EEF00A5777C /* CoconutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutTableViewCell.h; sourceTree = "<group>"; };
+		6F17DEA215369EEF00A5777C /* CoconutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutTableViewCell.m; sourceTree = "<group>"; };
+		6F17DEA315369EEF00A5777C /* CoconutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutTableViewCell.xib; sourceTree = "<group>"; };
 		6F1AF846142B046600925B7A /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F1AF847142B046600925B7A /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F1AF849142B046600925B7A /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
@@ -460,6 +465,9 @@
 			children = (
 				6F8278901535AC9000C51E6C /* Coconut.h */,
 				6F8278911535AC9000C51E6C /* Coconut.m */,
+				6F17DEA115369EEF00A5777C /* CoconutTableViewCell.h */,
+				6F17DEA215369EEF00A5777C /* CoconutTableViewCell.m */,
+				6F17DEA315369EEF00A5777C /* CoconutTableViewCell.xib */,
 				6F82787D15358A2400C51E6C /* URLConnectionDemoViewController.h */,
 				6F82787E15358A2400C51E6C /* URLConnectionDemoViewController.m */,
 				6F82787F15358A2400C51E6C /* URLConnectionDemoViewController.xib */,
@@ -1114,6 +1122,7 @@
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F8278771535895500C51E6C /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F82788115358A2400C51E6C /* URLConnectionDemoViewController.xib in Resources */,
+				6F17DEA515369EF000A5777C /* CoconutTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,6 +1200,7 @@
 				6F8278761535895500C51E6C /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F82788015358A2400C51E6C /* URLConnectionDemoViewController.m in Sources */,
 				6F8278921535AC9000C51E6C /* Coconut.m in Sources */,
+				6F17DEA415369EF000A5777C /* CoconutTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

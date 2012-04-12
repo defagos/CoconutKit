@@ -9,6 +9,7 @@
 #import "URLConnectionDemoViewController.h"
 
 #import "Coconut.h"
+#import "CoconutTableViewCell.h"
 
 @interface URLConnectionDemoViewController ()
 
@@ -56,7 +57,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = [HLSTableViewCell height];    
+    self.tableView.rowHeight = [CoconutTableViewCell height];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -149,17 +150,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    return [HLSTableViewCell cellForTableView:tableView];
+    return [CoconutTableViewCell cellForTableView:tableView];
 }
 
 #pragma mark UITableViewDelegate protocol implementation
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    HLSTableViewCell *tableViewCell = (HLSTableViewCell *)cell;
+    CoconutTableViewCell *tableViewCell = (CoconutTableViewCell *)cell;
     
     Coconut *coconut = [self.coconuts objectAtIndex:indexPath.row];
-    tableViewCell.textLabel.text = coconut.name;
+    
+    // We must use a customm cell here. If we try to use a standard cell style and its imageView property, refresh does
+    // not work correctly. UITableViewCell implementation probably does some nasty things under the hood
+    if (coconut.thumbnailImageName) {
+        NSURL *url = [[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName];
+        [tableViewCell.thumbnailImageView loadWithImageAtURL:url];        
+    }
+    else {
+        tableViewCell.thumbnailImageView.image = nil;
+    }
+    tableViewCell.nameLabel.text = coconut.name;
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 

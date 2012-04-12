@@ -28,6 +28,7 @@
         Coconut *coconut = [[[Coconut alloc] init] autorelease];
         coconut.name_en = [coconutDict objectForKey:@"name_en"];
         coconut.name_fr = [coconutDict objectForKey:@"name_fr"];
+        coconut.thumbnailImageName = [coconutDict objectForKey:@"thumbnailImageName"];
         [coconuts addObject:coconut];
     }
     return [NSArray arrayWithArray:coconuts];
