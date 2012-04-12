@@ -13,11 +13,12 @@
 #import "HLSNotifications.h"
 #import "HLSZeroingWeakRef.h"
 
-float HLSURLConnectionProgressUnavailable = -1.f;
+const float HLSURLConnectionProgressUnavailable = -1.f;
 
 @interface HLSURLConnection ()
 
 @property (nonatomic, retain) NSURLRequest *request;
+@property (nonatomic, retain) NSString *runLoopMode;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *internalData;
 @property (nonatomic, assign) HLSURLConnectionStatus status;
@@ -32,6 +33,11 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 #pragma mark Class methods
 
++ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode
+{
+    return [[[[self class] alloc] initWithRequest:request runLoopMode:runLoopMode] autorelease];
+}
+
 + (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request
 {
     return [[[[self class] alloc] initWithRequest:request] autorelease];
@@ -39,14 +45,20 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request
+- (id)initWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode
 {
     if ((self = [super init])) {
         self.request = request;
+        self.runLoopMode = runLoopMode;
         self.internalData = [[[NSMutableData alloc] init] autorelease];
         [self reset];
     }
     return self;
+}
+
+- (id)initWithRequest:(NSURLRequest *)request
+{
+    return [self initWithRequest:request runLoopMode:NSDefaultRunLoopMode];
 }
 
 - (id)init
@@ -58,6 +70,7 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)dealloc
 {
     self.request = nil;
+    self.runLoopMode = nil;
     self.connection = nil;
     self.tag = nil;
     self.downloadFilePath = nil;
@@ -71,6 +84,8 @@ float HLSURLConnectionProgressUnavailable = -1.f;
 #pragma mark Accessors and mutators
 
 @synthesize request = m_request;
+
+@synthesize runLoopMode = m_runLoopMode;
 
 @synthesize connection = m_connection;
 
@@ -151,9 +166,9 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     
     [self reset];
         
-    // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference
-    // for HLSURLConnection delegate
-    self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self] autorelease];
+    // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference for HLSURLConnection
+    // delegate. Note that startImmediately has been set to NO to allow setting up the run loop mode
+    self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO] autorelease];
     if (! self.connection) {
         HLSLoggerError(@"Unable to open connection");
         return;
@@ -161,6 +176,9 @@ float HLSURLConnectionProgressUnavailable = -1.f;
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     self.status = HLSURLConnectionStatusStarting;
+    
+    [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:self.runLoopMode];
+    [self.connection start];
 }
 
 - (void)cancel

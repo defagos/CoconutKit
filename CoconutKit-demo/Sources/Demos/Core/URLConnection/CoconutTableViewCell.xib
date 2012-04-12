@@ -48,15 +48,17 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="316283336"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 							<object class="IBUILabel" id="316283336">
 								<reference key="NSNextResponder" ref="965435610"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{73, 23}, {227, 21}}</string>
+								<string key="NSFrame">{{73, 24}, {227, 21}}</string>
 								<reference key="NSSuperview" ref="965435610"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -85,7 +87,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 68}</string>
+						<string key="NSFrameSize">{320, 69}</string>
 						<reference key="NSSuperview" ref="301497436"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="155112826"/>
@@ -101,7 +103,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 69}</string>
+				<string key="NSFrameSize">{320, 70}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="965435610"/>
@@ -109,7 +111,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<reference key="IBUIContentView" ref="965435610"/>
 				<string key="IBUIReuseIdentifier">CoconutTableViewCell</string>
-				<real value="69" key="IBUIRowHeight"/>
+				<real value="71" key="IBUIRowHeight"/>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">

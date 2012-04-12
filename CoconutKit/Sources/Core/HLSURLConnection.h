@@ -21,7 +21,7 @@ typedef enum {
 } HLSURLConnectionStatus;
 
 // Value returned by the progress property when no progress estimate is available
-extern float HLSURLConnectionProgressUnavailable;
+extern const float HLSURLConnectionProgressUnavailable;
 
 // Forward declarations
 @class HLSZeroingWeakRef;
@@ -44,11 +44,12 @@ extern float HLSURLConnectionProgressUnavailable;
  * HLSURLConnection object is namely initialized with an NSURLRequest object, which means you can customize
  * it as you need, depending on the protocol you use, the caching policy you require, etc.
  *
- * Designated initializer: initWithRequest:
+ * Designated initializer: initWithRequest:runLoopMode:
  */
 @interface HLSURLConnection : NSObject {
 @private
     NSURLRequest *m_request;
+    NSString *m_runLoopMode;
     NSURLConnection *m_connection;
     NSString *m_tag;
     NSString *m_downloadFilePath;
@@ -60,13 +61,28 @@ extern float HLSURLConnectionProgressUnavailable;
 }
 
 /**
- * Convenience constructor
+ * Convenience constructors
  */
++ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode;
 + (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request;
 
 /**
  * Create a connection object. The connection must be started manually when appropriate, either synchronously
- * or asynchronously
+ * or asynchronously, and a run loop mode must be provided (the connection is scheduled with the run loop
+ * associated with the current thread). In general you should not have to care about run loop mode issues, 
+ * simply use -initWithRequest:
+ */
+- (id)initWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode;
+
+/**
+ * Same as -initWithRequest:runLoopMode:, with NSDefaultRunLoopMode set as run loop mode. This is perfectly
+ * fine in most cases, but can be an issue when the run loop mode is changed and does not match the one
+ * of the connection anymore, preventing connection delegate events from being received until the run loop
+ * mode is switched back to its original value.
+ *
+ * When scrolling occurs, for example, the run loop mode is temporarily set to NSEventTrackingRunLoopMode,
+ * inhibiting connection delegate events until scrolling ends. If this is an issue, you must use the 
+ * -initWithRequest:runLoopMode: method to set a more appropriate run loop mode (most probably NSRunLoopCommonModes)
  */
 - (id)initWithRequest:(NSURLRequest *)request;
 
