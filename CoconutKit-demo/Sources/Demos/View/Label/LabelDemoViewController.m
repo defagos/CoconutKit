@@ -68,6 +68,7 @@
     [super viewDidLoad];
     [self updateView];
     [self updateLabel];
+    self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
 }
 
 - (void)updateLabel
