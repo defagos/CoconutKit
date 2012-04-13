@@ -9,7 +9,6 @@
 // TODO: Add remaining time estimate
 // TODO: Credentials
 // TODO: When CoconutKit is iOS 5 only, use the formal NSURLConnectionDownloadDelegate and NSURLConnectionDataDelegate protocols
-// TODO: notifyBegin/EndNetworkActivity should be executed on the main thread (update the implementation of those methods)
 
 // The connection status
 typedef enum {

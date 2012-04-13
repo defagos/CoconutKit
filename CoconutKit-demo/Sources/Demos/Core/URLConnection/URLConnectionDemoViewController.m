@@ -13,7 +13,9 @@
 
 @interface URLConnectionDemoViewController ()
 
-@property (nonatomic, retain) HLSURLConnection *asynchronousConnection;
+// We keep a reference to the asynchronous connection to be able to cancel it manually. A weak reference
+// suffices since HLSURLConnection objects retain themselves while running
+@property (nonatomic, assign) HLSURLConnection *asynchronousConnection;
 @property (nonatomic, retain) NSArray *coconuts;
 
 @end
