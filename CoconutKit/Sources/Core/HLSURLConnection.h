@@ -114,6 +114,9 @@ extern const float HLSURLConnectionProgressUnavailable;
 
 /**
  * Start / stop an asynchronous connection
+ *
+ * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
+ * sense (the data cannot go anywhere, and the connection status remains unknown)
  */
 - (void)start;
 - (void)cancel;
@@ -121,6 +124,8 @@ extern const float HLSURLConnectionProgressUnavailable;
 /**
  * Start a synchronous connection. The data retrieval itself runs asynchronously, but the call to -startSynchronous
  * only returns when this retrieval has terminated
+ *
+ * Same remark as -start
  */
 - (void)startSynchronous;
 

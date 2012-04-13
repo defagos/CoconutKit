@@ -24,6 +24,10 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 @property (nonatomic, assign) HLSURLConnectionStatus status;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
+- (BOOL)isRunning;
+- (NSString *)connectionDebugNameCapitalized:(BOOL)capitalized;
+- (NSURL *)url;
+
 - (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
 - (void)reset;
 - (BOOL)prepareForDownload;
@@ -53,6 +57,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         self.request = request;
         self.runLoopMode = runLoopMode;
         self.internalData = [[[NSMutableData alloc] init] autorelease];
+        
         [self reset];
     }
     return self;
@@ -71,7 +76,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)dealloc
 {
-    HLSLoggerInfo(@"Connection %@ deallocated", self);
+    HLSLoggerInfo(@"%@ was deallocated", [self connectionDebugNameCapitalized:YES]);
     
     self.request = nil;
     self.runLoopMode = nil;
@@ -99,8 +104,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)setDownloadFilePath:(NSString *)downloadFilePath
 {
-    if (self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted) {
-        HLSLoggerWarn(@"The download file path cannot be changed when a connection is started");
+    if ([self isRunning]) {
+        HLSLoggerWarn(@"The download file path cannot be changed while %@ is running", [self connectionDebugNameCapitalized:NO]);
         return;
     }
     
@@ -141,8 +146,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)setDelegate:(id<HLSURLConnectionDelegate>)delegate
 {
-    if (self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted) {
-        HLSLoggerWarn(@"The delegagte cannot be changed when a connection is started");
+    if ([self isRunning]) {
+        HLSLoggerWarn(@"The delegate cannot be changed while %@ is running", [self connectionDebugNameCapitalized:NO]);
         return;
     }
     
@@ -150,6 +155,9 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         return;
     }
     
+    // Use a zeroing weak reference:
+    //   - to avoid propagating the delegate retain semantics of NSURLConnection further to HLSURLConnection delegate
+    //   - to be able to cancel the connection when the delegate gets deallocated
     self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
     [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
 }
@@ -164,17 +172,42 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     }
 }
 
-#pragma mark Managing the connection
+- (BOOL)isRunning
+{
+    return self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted;
+}
 
+- (NSString *)connectionDebugNameCapitalized:(BOOL)capitalized
+{
+    NSString *connectionIdentifier = self.tag ? [NSString stringWithFormat:@"'%@'", self.tag] : [NSString stringWithFormat:@"(%@)", self];
+    if (capitalized) {
+        return [NSString stringWithFormat:@"The connection %@", connectionIdentifier];
+    }
+    else {
+        return [NSString stringWithFormat:@"the connection %@", connectionIdentifier];
+    }
+}
+
+- (NSURL *)url
+{
+    return [self.request URL];
+}
+
+#pragma mark Starting and stopping the connection
+
+/**
+ * Start an asynchronous connection scheduled in the current run loop with the specified mode. Returns YES iff
+ * the connection could successfully be starteds
+ */
 - (BOOL)startWithRunLoopMode:(NSString *)runLoopMode
 {
-    if (self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted) {
-        HLSLoggerDebug(@"The connection has already been started");
+    if ([self isRunning]) {
+        HLSLoggerDebug(@"%@ has already been started", [self connectionDebugNameCapitalized:YES]);
         return NO;
     }
     
     if (! self.downloadFilePath && ! self.delegate) {
-        HLSLoggerError(@"Cannot start a dangling connection returning data without a delegate to process it");
+        HLSLoggerError(@"Cannot start %@. Cnnections must have least have a delegate or a download path defined", [self connectionDebugNameCapitalized:NO]);
         return NO;
     }
     
@@ -185,7 +218,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self reset];
     
     // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference for HLSURLConnection
-    // delegate. Note that startImmediately has been set to NO to allow setting up the run loop mode
+    // delegate. startImmediately has been set to NO to allow setting up the run loop mode before the connection is started
     self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO] autorelease];
     if (! self.connection) {
         HLSLoggerError(@"Unable to open connection");
@@ -210,7 +243,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)cancel
 {
-    if (self.status != HLSURLConnectionStatusStarting && self.status != HLSURLConnectionStatusStarted) {
+    if (! [self isRunning]) {
         HLSLoggerDebug(@"The connection has not been started");
         return;
     }
@@ -250,6 +283,11 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     }
 }
 
+#pragma mark Managing the connection internal status and resources
+
+/**
+ * Reset internal variables to a state from which a connection can be started
+ */
 - (void)reset
 {
     [self.internalData setLength:0];
