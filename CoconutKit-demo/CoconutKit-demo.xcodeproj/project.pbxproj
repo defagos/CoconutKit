@@ -137,6 +137,8 @@
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
 		6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
+		A9933E1D15380D04002CBE28 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9933E1B15380D04002CBE28 /* LabelDemoViewController.m */; };
+		A9933E1E15380D04002CBE28 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9933E1C15380D04002CBE28 /* LabelDemoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -323,6 +325,9 @@
 		6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
 		6FEEF86914F29C9A001585A6 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A9933E1A15380D04002CBE28 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
+		A9933E1B15380D04002CBE28 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
+		A9933E1C15380D04002CBE28 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,6 +683,7 @@
 			children = (
 				6F9C45E114C5C30B00824AB2 /* ActionSheet */,
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
+				A9933E1915380D04002CBE28 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
@@ -957,6 +963,16 @@
 			path = ParallaxScrolling;
 			sourceTree = "<group>";
 		};
+		A9933E1915380D04002CBE28 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				A9933E1A15380D04002CBE28 /* LabelDemoViewController.h */,
+				A9933E1B15380D04002CBE28 /* LabelDemoViewController.m */,
+				A9933E1C15380D04002CBE28 /* LabelDemoViewController.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1092,6 +1108,7 @@
 				6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
+				A9933E1E15380D04002CBE28 /* LabelDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,6 +1184,7 @@
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
+				A9933E1D15380D04002CBE28 /* LabelDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

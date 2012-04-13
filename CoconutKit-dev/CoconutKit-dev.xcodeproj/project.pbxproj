@@ -209,6 +209,9 @@
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
 		6FFE36E41468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36351468FD9D00C02549 /* Localizable.strings */; };
+		A9933E1715380C66002CBE28 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9933E1615380C66002CBE28 /* HLSLabel.m */; };
+		A9933E2415380D11002CBE28 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9933E2215380D11002CBE28 /* LabelDemoViewController.m */; };
+		A9933E2515380D11002CBE28 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9933E2315380D11002CBE28 /* LabelDemoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,6 +547,11 @@
 		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
 		6FFE36331468FD9D00C02549 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		6FFE36361468FD9D00C02549 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
+		A9933E1515380C66002CBE28 /* HLSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabel.h; sourceTree = "<group>"; };
+		A9933E1615380C66002CBE28 /* HLSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabel.m; sourceTree = "<group>"; };
+		A9933E2115380D11002CBE28 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
+		A9933E2215380D11002CBE28 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
+		A9933E2315380D11002CBE28 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -816,6 +824,8 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
+				A9933E1515380C66002CBE28 /* HLSLabel.h */,
+				A9933E1615380C66002CBE28 /* HLSLabel.m */,
 				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
 				6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE68914BA04A6007EE121 /* HLSNibView.h */,
@@ -1171,6 +1181,7 @@
 			children = (
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
+				A9933E2015380D11002CBE28 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
@@ -1438,6 +1449,16 @@
 			path = "../CoconutKit-demo/fr.lproj";
 			sourceTree = "<group>";
 		};
+		A9933E2015380D11002CBE28 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				A9933E2115380D11002CBE28 /* LabelDemoViewController.h */,
+				A9933E2215380D11002CBE28 /* LabelDemoViewController.m */,
+				A9933E2315380D11002CBE28 /* LabelDemoViewController.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1577,6 +1598,7 @@
 				6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */,
+				A9933E2515380D11002CBE28 /* LabelDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1721,6 +1743,8 @@
 				6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */,
 				6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */,
+				A9933E1715380C66002CBE28 /* HLSLabel.m in Sources */,
+				A9933E2415380D11002CBE28 /* LabelDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1799,6 +1823,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Joris Heuberger (8JMBWAFP63)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1807,6 +1832,7 @@
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
+				PROVISIONING_PROFILE = "2BFA975B-3A4F-4DE1-ADC5-F21836BB114C";
 			};
 			name = Debug;
 		};
