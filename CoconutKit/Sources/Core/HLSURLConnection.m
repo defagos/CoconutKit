@@ -24,7 +24,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 @property (nonatomic, assign) HLSURLConnectionStatus status;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
-- (void)startWithRunLoopMode:(NSString *)runLoopMode;
+- (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
 - (void)reset;
 - (BOOL)prepareForDownload;
 - (void)cleanupAfterIncompleteDownload;
@@ -166,20 +166,20 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 #pragma mark Managing the connection
 
-- (void)startWithRunLoopMode:(NSString *)runLoopMode
+- (BOOL)startWithRunLoopMode:(NSString *)runLoopMode
 {
     if (self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted) {
         HLSLoggerDebug(@"The connection has already been started");
-        return;
+        return NO;
     }
     
     if (! self.downloadFilePath && ! self.delegate) {
         HLSLoggerError(@"Cannot start a dangling connection returning data without a delegate to process it");
-        return;
+        return NO;
     }
     
     if (! [self prepareForDownload]) {
-        return;
+        return NO;
     }
     
     [self reset];
@@ -189,7 +189,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO] autorelease];
     if (! self.connection) {
         HLSLoggerError(@"Unable to open connection");
-        return;
+        return NO;
     }
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
@@ -199,6 +199,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     
     [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:runLoopMode];
     [self.connection start];
+    
+    return YES;
 }
 
 - (void)start
@@ -239,7 +241,9 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     // asynchronous connection in its own private run loop mode, and we run the run loop in this mode until
     // the NSURLConnection is done processing
     static NSString * const kHLSURLConnectionRunLoopPrivateMode = @"HLSURLConnectionRunLoopPrivateMode";
-    [self startWithRunLoopMode:kHLSURLConnectionRunLoopPrivateMode];
+    if (! [self startWithRunLoopMode:kHLSURLConnectionRunLoopPrivateMode]) {
+        return;
+    }
     
     while (self.status != HLSURLConnectionStatusIdle) {
         [[NSRunLoop currentRunLoop] runMode:kHLSURLConnectionRunLoopPrivateMode beforeDate:[NSDate distantFuture]];

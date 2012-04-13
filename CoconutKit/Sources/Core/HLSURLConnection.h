@@ -64,6 +64,10 @@ extern const float HLSURLConnectionProgressUnavailable;
  *   - a connection can be started asynchronously or synchronously. In both cases the same set of delegate methods
  *     will be called, which means you do not have to rewrite your code if you sometimes discover the need to
  *     switch between these modes
+ *   - connection objects can carry information around (identity, data) and provide information about their progress
+ *
+ * HLSURLConnection is not thread-safe. You need to manage a connection from a single thread (on which you also
+ * receive the associated delegate events), otherwise the behavior is undefined.
  *
  * Designated initializer: initWithRequest:runLoopMode:
  */
@@ -109,16 +113,14 @@ extern const float HLSURLConnectionProgressUnavailable;
 - (id)initWithRequest:(NSURLRequest *)request;
 
 /**
- * Start / stop an asynchronous connection. Use a delegate implementing the HLSURLConnectionDelegate protocol
- * to get information about the connection status (on the thread which started it)
+ * Start / stop an asynchronous connection
  */
 - (void)start;
 - (void)cancel;
 
 /**
  * Start a synchronous connection. The data retrieval itself runs asynchronously, but the call to -startSynchronous
- * only returns when this retrieval has terminated. Use a delegate implementing the HLSURLConnectionDelegate protocol 
- * to get information about the connection status (on the thread which started it)
+ * only returns when this retrieval has terminated
  */
 - (void)startSynchronous;
 
@@ -130,6 +132,8 @@ extern const float HLSURLConnectionProgressUnavailable;
 /**
  * If a download file path is specified, the downloaded data will be saved to this specific location. If a file
  * already exists at this location when a start method is called, it is deleted first
+ *
+ * The download file path cannot be changed when a connection is running
  */
 @property (nonatomic, retain) NSString *downloadFilePath;
 
@@ -155,13 +159,17 @@ extern const float HLSURLConnectionProgressUnavailable;
 @property (nonatomic, readonly, assign) float progress;
 
 /**
- * The data which has been downloaded (can be partial if queried when the connection is still retrieving data)
+ * The data which has been downloaded (can be partial if queried when the connection is still retrieving data).
+ * Do not call this method if the data does not fit in memory (this can happen when you downloaded a large file
+ * on disk by setting a download file path)
  */
 - (NSData *)data;
 
 /**
  * The connection delegate. If a delegate has been attached to a connection and gets deallocated, the connection
  * gets automatically cancelled
+ *
+ * The delegate cannot be changed when a connection is running
  */
 @property (nonatomic, assign) id<HLSURLConnectionDelegate> delegate;
 
@@ -187,7 +195,7 @@ extern const float HLSURLConnectionProgressUnavailable;
 
 /**
  * The connection did finish successfully. You can use -data to get the data which has been retrieved, or you
- * can access the file saved at -downloadFilePath (if you chose this option)
+ * can access the file saved at -downloadFilePath (if you chose this option, and if the data is large)
  */
 - (void)connectionDidFinish:(HLSURLConnection *)connection;
 
