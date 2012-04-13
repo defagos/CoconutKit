@@ -11,8 +11,7 @@
 /**
  * NSString Category that provides the necessary font size to fit in a given size
  *
- * Original author: Ortwin Gentz - http://stackoverflow.com/users/235297/ortwin-gentz
- * Reference: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
+ * Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
  */
 
 @interface NSString (fontSizeWithFont_constrainedToSize_)
@@ -37,17 +36,13 @@
 		height = [self sizeWithFont:newFont constrainedToSize:CGSizeMake(size.width,FLT_MAX) lineBreakMode:UILineBreakModeWordWrap].height;
 	};
 	
-	// Loop through words in string and resize to fit
-	for (NSString *word in [self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]])
-	{
-		CGFloat width = [word sizeWithFont:newFont].width;
-		while (width > size.width && width != 0)
-		{
-			fontSize--;
-			newFont = [UIFont fontWithName:font.fontName size:fontSize];   
-			width = [word sizeWithFont:newFont].width;
-		}
-	}
+    CGFloat width = [self sizeWithFont:newFont].width;
+    while (width > size.width && width != 0)
+    {
+        fontSize--;
+        newFont = [UIFont fontWithName:font.fontName size:fontSize];   
+        width = [self sizeWithFont:newFont].width;
+    }
 	return fontSize;
 }
 
@@ -128,7 +123,8 @@
 	
 	if (self.adjustsFontSizeToFitWidth)
 	{
-		CGFloat fontSize = [text fontSizeWithFont:self.font constrainedToSize:self.frame.size];
+        CGSize size = CGSizeMake(self.frame.size.width*self.numberOfLines /* UGLY CHEAT -> */ * 0.9 /* <- UGLY CHEAT */, self.frame.size.height);
+        CGFloat fontSize = [text fontSizeWithFont:self.font constrainedToSize:size];
 		fontSize = (fontSize < self.minimumFontSize) ? self.minimumFontSize : fontSize;
 		self.font = [UIFont fontWithName:self.font.fontName size:fontSize];
 	}
