@@ -25,6 +25,7 @@
 "Change color"="Changer couleur";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
 "City"="Ville";
+"Clear"="Effacer";
 "Click for missing translation"="Cliquer pour traduction manquante";
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
@@ -60,6 +61,7 @@
 "Last name"="Nom";
 "Lifecycle test"="Test du cycle de vie";
 "Load asynchronously"="Chargement asynchrone";
+"Load asynchronously (not able to cancel)"="Chargement asynchrone (ne peut annuler)";
 "Load synchronously"="Chargement synchrone";
 "Load tables (cache disabled)"="Charger les tables (cache désactivé)";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";

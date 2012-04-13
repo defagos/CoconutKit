@@ -25,6 +25,7 @@
 "Change color"="Change color";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)";
 "City"="City";
+"Clear"="Clear";
 "Click for missing translation"="Click for missing translation";
 "Close"="Close";
 "Coconuts"="Coconuts";
@@ -61,6 +62,7 @@
 "Last name"="Last name";
 "Lifecycle test"="Lifecycle test";
 "Load asynchronously"="Load asynchronously";
+"Load asynchronously (not able to cancel)"="Load asynchronously (not able to cancel)";
 "Load synchronously"="Load synchronously";
 "Load tables (cache disabled)"="Load tables (cache disabled)";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";

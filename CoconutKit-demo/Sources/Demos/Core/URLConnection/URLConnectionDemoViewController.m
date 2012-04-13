@@ -47,6 +47,8 @@
     self.asynchronousLoadButton = nil;
     self.cancelButton = nil;
     self.synchronousLoadButton = nil;
+    self.asynchronousLoadNoCancelButton = nil;
+    self.clearButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -64,6 +66,10 @@
 @synthesize cancelButton = m_cancelButton;
 
 @synthesize synchronousLoadButton = m_synchronousLoadButton;
+
+@synthesize asynchronousLoadNoCancelButton = m_asynchronousLoadNoCancelButton;
+
+@synthesize clearButton = m_clearButton;
 
 #pragma mark View lifecycle
 
@@ -127,8 +133,10 @@
     HLSLoggerInfo(@"Connection did finish");
     
     self.asynchronousLoadButton.hidden = NO;
+    self.asynchronousLoadNoCancelButton.hidden = NO;
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
+    self.clearButton.hidden = NO;
     
     NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
     NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
@@ -146,8 +154,10 @@
     HLSLoggerInfo(@"Connection did fail with error: %@", error);
     
     self.asynchronousLoadButton.hidden = NO;
+    self.asynchronousLoadNoCancelButton.hidden = NO;
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
+    self.clearButton.hidden = NO;
     
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
                                                          message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
@@ -213,8 +223,10 @@
 - (IBAction)loadAsynchronously:(id)sender
 {
     self.asynchronousLoadButton.hidden = YES;
+    self.asynchronousLoadNoCancelButton.hidden = YES;
     self.synchronousLoadButton.hidden = YES;
     self.cancelButton.hidden = NO;
+    self.clearButton.hidden = YES;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
@@ -226,11 +238,20 @@
     [self.asynchronousConnection start];
 }
 
-- (IBAction)loadAsynchronouslyDangling:(id)sender
+- (IBAction)loadAsynchronouslyNoCancel:(id)sender
 {
+    self.asynchronousLoadButton.hidden = YES;
+    self.asynchronousLoadNoCancelButton.hidden = YES;
+    self.synchronousLoadButton.hidden = YES;
+    self.cancelButton.hidden = YES;
+    self.clearButton.hidden = YES;
+    self.clearButton.hidden = YES;
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                          timeoutInterval:10.];
+    
+    // Does not need to keep any reference to the connection object
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
     
@@ -241,6 +262,7 @@
 - (IBAction)cancel:(id)sender
 {
     self.asynchronousLoadButton.hidden = NO;
+    self.asynchronousLoadNoCancelButton.hidden = NO;
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
     
@@ -249,8 +271,6 @@
 
 - (IBAction)loadSynchronously:(id)sender
 {
-    self.asynchronousLoadButton.hidden = YES;
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                          timeoutInterval:10.];
@@ -258,6 +278,12 @@
     connection.delegate = self;
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
     [connection startSynchronous];
+}
+
+- (IBAction)clear:(id)sender
+{
+    self.coconuts = nil;
+    [self reloadData];
 }
 
 @end
