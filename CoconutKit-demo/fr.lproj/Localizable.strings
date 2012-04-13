@@ -17,6 +17,8 @@
 "Bounces"="Rebond";
 "Button label, default"="Libellé de bouton, normal";
 "Button label, highlighted"="Libellé de bouton, activé";
+"Cache disabled for images"="Cache désactivé pour les images";
+"Cache enabled for images"="Cache activé pour les images";
 "Cancel"="Annuler";
 "Capitalized string in Localizable.strings"="Chaîne de Localizable.strings capitalisée";
 "Change"="Changer";
@@ -57,6 +59,9 @@
 "Language"="Langue";
 "Last name"="Nom";
 "Lifecycle test"="Test du cycle de vie";
+"Load asynchronously"="Chargement asynchrone";
+"Load synchronously"="Chargement synchrone";
+"Load tables (cache disabled)"="Charger les tables (cache désactivé)";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
@@ -115,6 +120,7 @@
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Chaîne de Localizable.strings en majuscules";
+"Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)"="Utilisez le panneau de préférences 'Network Link Conditioner' de Mac OS X Lion et le simulateur iOS pour tester diverses conditions réseau (tout particulièrement les mauvaises)";
 "Views"="Vues";
 "View controllers"="View controllers";
 "Web view"="Vue web";

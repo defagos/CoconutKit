@@ -17,6 +17,8 @@
 "Button label, default"="Button label, default";
 "Button label, highlighted"="Button label, highlighted";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="By default, an HLSTextField exits edit mode when the user taps outside it";
+"Cache disabled for images"="Cache disabled for images";
+"Cache enabled for images"="Cache enabled for images";
 "Cancel"="Cancel";
 "Capitalized string in Localizable.strings"="Capitalized string in Localizable.strings";
 "Change"="Change";
@@ -58,6 +60,9 @@
 "Language"="Language";
 "Last name"="Last name";
 "Lifecycle test"="Lifecycle test";
+"Load asynchronously"="Load asynchronously";
+"Load synchronously"="Load synchronously";
+"Load tables (cache disabled)"="Load tables (cache disabled)";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
 "Missing city"="Missing city";
 "Missing country"="Missing country";
@@ -116,6 +121,7 @@
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Uppercase string in Localizable.strings";
+"Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)"="Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)";
 "Views"="Views";
 "View controllers"="View controllers";
 "Web view"="Web view";

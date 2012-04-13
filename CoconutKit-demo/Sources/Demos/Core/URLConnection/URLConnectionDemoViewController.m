@@ -42,7 +42,8 @@
 {
     [super releaseViews];
     
-    self.tableView = nil;
+    self.cachedImagesTableView = nil;
+    self.nonCachedImagesTableView = nil;
     self.asynchronousLoadButton = nil;
     self.cancelButton = nil;
     self.synchronousLoadButton = nil;
@@ -54,7 +55,9 @@
 
 @synthesize coconuts = m_coconuts;
 
-@synthesize tableView = m_tableView;
+@synthesize cachedImagesTableView = m_cachedImagesTableView;
+
+@synthesize nonCachedImagesTableView = m_nonCachedImagesTableView;
 
 @synthesize asynchronousLoadButton = m_asynchronousLoadButton;
 
@@ -68,9 +71,13 @@
 {
     [super viewDidLoad];
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.rowHeight = [CoconutTableViewCell height];
+    self.cachedImagesTableView.dataSource = self;
+    self.cachedImagesTableView.delegate = self;
+    self.cachedImagesTableView.rowHeight = [CoconutTableViewCell height];
+    
+    self.nonCachedImagesTableView.dataSource = self;
+    self.nonCachedImagesTableView.delegate = self;
+    self.nonCachedImagesTableView.rowHeight = [CoconutTableViewCell height];
     
     self.cancelButton.hidden = YES;
 }
@@ -122,7 +129,7 @@
     self.asynchronousLoadButton.hidden = NO;
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
-        
+    
     NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
     NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
     
@@ -154,7 +161,8 @@
 
 - (void)reloadData
 {
-    [self.tableView reloadData];
+    [self.cachedImagesTableView reloadData];
+    [self.nonCachedImagesTableView reloadData];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -180,9 +188,17 @@
     // We must use a customm cell here. If we try to use a standard cell style and its imageView property, refresh does
     // not work correctly. UITableViewCell implementation probably does some nasty things under the hood
     if (coconut.thumbnailImageName) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
-                                                 cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                             timeoutInterval:10.];
+        NSURLRequest *request = nil;
+        if (tableView == self.nonCachedImagesTableView) {
+            request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
+                                       cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                   timeoutInterval:10.];
+        }
+        else {
+            request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
+                                       cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                   timeoutInterval:10.];        
+        }
         [tableViewCell.thumbnailImageView loadWithImageRequest:request];
     }
     else {
@@ -202,7 +218,7 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                            timeoutInterval:10.];
+                                         timeoutInterval:10.];
     self.asynchronousConnection = [HLSURLConnection connectionWithRequest:request];
     self.asynchronousConnection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
     
@@ -237,7 +253,7 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                            timeoutInterval:10.];
+                                         timeoutInterval:10.];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
     connection.delegate = self;
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];

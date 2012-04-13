@@ -10,13 +10,15 @@
 @private
     HLSURLConnection *m_asynchronousConnection;
     NSArray *m_coconuts;
-    UITableView *m_tableView;
+    UITableView *m_cachedImagesTableView;
+    UITableView *m_nonCachedImagesTableView;
     UIButton *m_asynchronousLoadButton;
     UIButton *m_cancelButton;
     UIButton *m_synchronousLoadButton;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableView *cachedImagesTableView;
+@property (nonatomic, retain) IBOutlet UITableView *nonCachedImagesTableView;
 @property (nonatomic, retain) IBOutlet UIButton *asynchronousLoadButton;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *synchronousLoadButton;
