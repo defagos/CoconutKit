@@ -9,6 +9,7 @@
 #import "HLSURLConnection.h"
 
 #import "HLSAssert.h"
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSNotifications.h"
 #import "HLSZeroingWeakRef.h"

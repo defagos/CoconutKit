@@ -8,6 +8,8 @@
 
 #import "HLSApplicationInformation.h"
 
+#import "NSArray+HLSExtensions.h"
+
 NSString *HLSApplicationLibraryDirectoryPath(void)
 {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
