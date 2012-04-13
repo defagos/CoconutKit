@@ -15,6 +15,12 @@
  * Reference: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
  */
 
+@interface NSString (fontSizeWithFont_constrainedToSize_)
+
+- (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
+
+@end
+
 @implementation NSString (fontSizeWithFont_constrainedToSize_)
 
 - (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size
