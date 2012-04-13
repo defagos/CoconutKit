@@ -63,9 +63,11 @@ extern const float HLSURLConnectionProgressUnavailable;
  *     ends it will release itself, leading to deallocation. If a delegate has been attached to the connection, and 
  *     if this delegate is deallocated before the connection ends, the connection will be cancelled, which will also
  *     lead to correct deallocation
- *   - a connection can be started asynchronously or synchronously. In both cases the same set of delegate methods
- *     will be called, which means you do not have to rewrite your code if you sometimes discover the need to
- *     switch between these modes
+ *   - a connection can be started asynchronously or (quasi-)synchronously. In both cases the same set of delegate 
+ *     methods will be called, which means you do not have to rewrite your code if you sometimes discover the need to
+ *     switch between these modes. This is why the synchronous mode is only quasi-synchronous in reality: The
+ *     call to the start method blocks, but the thread is not blocked as it continues to process connection
+ *     delegate events
  *   - connection objects can carry information around (identity, data) and provide information about their progress
  *
  * HLSURLConnection is not thread-safe. You need to manage a connection from a single thread (on which you also
@@ -124,10 +126,12 @@ extern const float HLSURLConnectionProgressUnavailable;
 - (void)cancel;
 
 /**
- * Start a synchronous connection. The data retrieval itself runs asynchronously, but the call to -startSynchronous
- * only returns when this retrieval has terminated
+ * Start a (quasi-)synchronous connection. The data retrieval itself runs asynchronously and the connection delegate
+ * events are still processed by the same thread which called -startSynchronous. The call to -startSynchronous itself,
+ * though, only returns when the connection has ended
  *
- * Same remark as -start
+ * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
+ * sense (the data cannot go anywhere, and the connection status remains unknown)
  */
 - (void)startSynchronous;
 
