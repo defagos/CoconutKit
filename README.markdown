@@ -58,6 +58,8 @@ When designing components, I strongly emphasize on clean and documented interfac
 ### Does CoconutKit use ARC?
 No, CoconutKit currently does not use ARC. This will change in the future as ARC is adopted. Because of the large code base and features currently still in development, I am currently not able to start the conversion process immediately. This should however happen somewhere in 2012.
 
+Also note that the CoconutKit static library is not currently built using LLVM. Though LLVM is the future of iOS development, I have experienced linker issues when trying to link a project built using GCC with a static library built using LLVM. This will change when GCC becomes deprecated. I might also consider providing binaries compiled with both compilers in the future.
+
 ### Can I contribute?
 You can, and you are strongly encouraged to. Use github pull requests to submit your improvements and bug fixes. You can submit everything you want, documentation and comment fixes included! Everything that tends to increase code quality is always warmly welcome.
 
