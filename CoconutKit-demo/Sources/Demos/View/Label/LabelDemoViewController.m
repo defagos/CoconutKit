@@ -142,7 +142,6 @@
 {
     [self updateLabel];
     [self updateView];
-    //self.fontSizeSlider.value = self.label.font.pointSize;
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
 }
 
