@@ -30,7 +30,9 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
 - (void)resetDownloadStatusVariables;
-- (void)cleanupAfterIncompleteDownload;
+
+- (BOOL)createDownloadFile;
+- (BOOL)deleteDownloadFile;
 
 @end
 
@@ -203,43 +205,20 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         return NO;
     }
     
-    // Prevent "fire and forget"
+    // A connection with no delegate nor file path cannot be started. This does not make sense, the downloaded
+    // data would go nowhere
     if (! self.downloadFilePath && ! self.delegate) {
-        HLSLoggerError(@"Cannot start %@. Connections must have least have a delegate or a download path defined", [self debugNameCapitalized:NO]);
+        HLSLoggerError(@"Cannot start %@. Connections must have least have an associated delegate or a download path", [self debugNameCapitalized:NO]);
         return NO;
     }
     
-    // Perform the setup required when downloading to a file
+    // Perform the setup required when downloading to a file (delete any existing file first)
     if (self.downloadFilePath) {
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        // Remove the destination file if it already existed
-        if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
-            NSError *fileDeletionError = nil;
-            if ([fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
-                HLSLoggerInfo(@"A file already existed at %@ and has been deleted", self.downloadFilePath);
-            }
-            else {
-                HLSLoggerError(@"The file existing at %@ could not be deleted. Aborting. Reason: %@", self.downloadFilePath, fileDeletionError);
-                return NO;
-            }    
-        }
-        
-        // Create the destination directory
-        NSString *downloadFileDirectoryPath = [self.downloadFilePath stringByDeletingLastPathComponent];
-        NSError *directoryCreationError = nil;
-        if (! [fileManager createDirectoryAtPath:downloadFileDirectoryPath
-                     withIntermediateDirectories:YES 
-                                      attributes:nil 
-                                           error:&directoryCreationError]) {
-            HLSLoggerError(@"Could not create destination directory %@. Aborting. Reason: %@", downloadFileDirectoryPath, directoryCreationError);
+        if (! [self deleteDownloadFile]) {
             return NO;
         }
         
-        // Create the destination file
-        NSError *fileCreationError = nil;
-        if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
-            HLSLoggerError(@"Could not create file at path %@. Aborting. Reason: %@", self.downloadFilePath, fileCreationError);
+        if (! [self createDownloadFile]) {
             return NO;
         }
     }
@@ -251,7 +230,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         HLSLoggerError(@"Unable to open %@", [self debugNameCapitalized:NO]);
         return NO;
     }
-    
+        
     // Makes it possible to run connections without keeping any strong reference to them. The corresponding release will be
     // made when the connection ends
     [self retain];
@@ -276,7 +255,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)cancel
 {
     if (! [self isRunning]) {
-        HLSLoggerDebug(@"% has not been started", [self debugNameCapitalized:YES]);
+        HLSLoggerDebug(@"%@ has not been started", [self debugNameCapitalized:YES]);
         return;
     }
     
@@ -285,7 +264,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self.connection cancel];
     self.connection = nil;
     
-    [self cleanupAfterIncompleteDownload];
+    // Cleanup to restore a state as if the connection had never been started
+    [self deleteDownloadFile];
     [self resetDownloadStatusVariables];
     
     // See -startWithRunLoopMode implementation
@@ -331,38 +311,85 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     m_currentContentLength = 0;
 }
 
-- (void)cleanupAfterIncompleteDownload
+#pragma mark Downloading to a file
+
+- (BOOL)createDownloadFile
 {
+    if (! self.downloadFilePath) {
+        // Nothing to do, successful
+        return YES;
+    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // Create the destination directory
+    NSString *downloadFileDirectoryPath = [self.downloadFilePath stringByDeletingLastPathComponent];
+    NSError *directoryCreationError = nil;
+    if (! [fileManager createDirectoryAtPath:downloadFileDirectoryPath
+                 withIntermediateDirectories:YES 
+                                  attributes:nil 
+                                       error:&directoryCreationError]) {
+        HLSLoggerError(@"Could not create destination directory %@. Aborting %@. Reason: %@", downloadFileDirectoryPath, 
+                       [self debugNameCapitalized:NO], directoryCreationError);
+        return NO;
+    }
+    
+    // Create the destination file
+    NSError *fileCreationError = nil;
+    if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
+        HLSLoggerError(@"Could not create file at path %@. Aborting %@. Reason: %@", self.downloadFilePath, 
+                       [self debugNameCapitalized:NO], fileCreationError);
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)deleteDownloadFile
+{
+    if (! self.downloadFilePath) {
+        // Nothing to do, successful
+        return YES;
+    }
+    
     // Remove file on failure
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
         NSError *fileDeletionError = nil;
         if (! [fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
-            HLSLoggerError(@"The file at %@ could not be deleted. Reason: %@", fileDeletionError);
+            HLSLoggerError(@"The file at %@ could not be deleted. Reason: %@", self.downloadFilePath, fileDeletionError);
+            return NO;
         }
     }
+    
+    return YES;
 }
 
 #pragma mark NSURLConnection events
 
+// This method may be called several times. Each time a response is received we must discard any previously accumulated data
+// (refer to NSURLConnection documentation for more information)
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    // Each time a response is received we must discard any previously accumulated data
-    // (refer to NSURLConnection documentation for more information)
     m_expectedContentLength = [response expectedContentLength];
-        
-    self.status = HLSURLConnectionStatusStarted;
-    if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
-        [self.delegate connectionDidStart:self];
+    [self.internalData setLength:0];
+    
+    // Ensure that the delegate gets notified only once
+    if (self.status == HLSURLConnectionStatusStarting) {
+        self.status = HLSURLConnectionStatusStarted;
+        if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
+            [self.delegate connectionDidStart:self];
+        }
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    // Append to the file
     if (self.downloadFilePath) {
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:self.downloadFilePath];
         if (! fileHandle) {
-            HLSLoggerError(@"The file at %@ could not be found. Aborting");
+            HLSLoggerError(@"The file at %@ could not be found. Aborting %@", self.downloadFilePath, [self debugNameCapitalized:NO]);
             [self cancel];
             return;
         }
@@ -372,17 +399,19 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
             [fileHandle writeData:data];
         }
         @catch (NSException *exception) {
-            HLSLoggerError(@"The file at %@ could not be written. Aborting. Reason: %@", exception);
+            HLSLoggerError(@"The file at %@ could not be written. Aborting %@. Reason: %@", self.downloadFilePath, 
+                           [self debugNameCapitalized:NO], exception);
             [self cancel];
             return;
         }
     }
+    // Save in-memory
     else {
         [self.internalData appendData:data];
     }
     
-    // We track the total length. It is more cumbersome, but it is faster than querying a file for his length
-    // (if we are downloading to a file)
+    // We track the total length. It could be tempting to simply use [[self data] length], but this does not work
+    // when downloading large files!
     m_currentContentLength += [data length];
     
     if ([self.delegate respondsToSelector:@selector(connectionDidProgress:)]) {
@@ -393,11 +422,11 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     HLSLoggerDebug(@"Connection failed with error: %@", error);
+    
     self.connection = nil;
     
-    // Remove file on failure
-    [self cleanupAfterIncompleteDownload];
-    
+    // Cleanup
+    [self deleteDownloadFile];
     [self resetDownloadStatusVariables];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];

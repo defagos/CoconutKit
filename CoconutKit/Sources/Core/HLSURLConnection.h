@@ -138,7 +138,8 @@ extern const float HLSURLConnectionProgressUnavailable;
 
 /**
  * If a download file path is specified, the downloaded data will be saved to this specific location. If a file
- * already exists at this location when a start method is called, it is deleted first
+ * already exists at this location when a connection starts, it is deleted first. If the connection fails or
+ * is cancelled, the incomplete file is discarded
  *
  * The download file path cannot be changed when a connection is running
  */
