@@ -58,9 +58,11 @@ extern const float HLSURLConnectionProgressUnavailable;
  *     connections having a delegate are automatically cancelled when their delegate is deallocated (which makes
  *     sense because the only object which was interested by connection events does not exist anymore)
  *   - a connection does not have to be retained if you do not need to cancel it manually (in which case you still
- *     need to keep a reference to it somewhere). Simply fire and forget. When the connection ends it will
- *     deallocates itself. If its delegate is deallocated first the connection will be cancelled and finally
- *     deallocated
+ *     need to keep a reference to it somewhere). Simply create an autoreleased HLSURLConnection object and
+ *     call a start method on it, the connection will retain itself during the time it is active. When the connection 
+ *     ends it will release itself, leading to deallocation. If a delegate has been attached to the connection, and 
+ *     if this delegate is deallocated before the connection ends, the connection will be cancelled, which will also
+ *     lead to correct deallocation
  *   - a connection can be started asynchronously or synchronously. In both cases the same set of delegate methods
  *     will be called, which means you do not have to rewrite your code if you sometimes discover the need to
  *     switch between these modes

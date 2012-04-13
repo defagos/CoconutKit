@@ -25,12 +25,11 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 - (BOOL)isRunning;
-- (NSString *)connectionDebugNameCapitalized:(BOOL)capitalized;
+- (NSString *)debugNameCapitalized:(BOOL)capitalized;
 - (NSURL *)url;
 
 - (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
-- (void)reset;
-- (BOOL)prepareForDownload;
+- (void)resetDownloadStatusVariables;
 - (void)cleanupAfterIncompleteDownload;
 
 @end
@@ -58,7 +57,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         self.runLoopMode = runLoopMode;
         self.internalData = [[[NSMutableData alloc] init] autorelease];
         
-        [self reset];
+        [self resetDownloadStatusVariables];
     }
     return self;
 }
@@ -76,8 +75,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)dealloc
 {
-    HLSLoggerInfo(@"%@ was deallocated", [self connectionDebugNameCapitalized:YES]);
-    
     self.request = nil;
     self.runLoopMode = nil;
     self.connection = nil;
@@ -105,7 +102,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)setDownloadFilePath:(NSString *)downloadFilePath
 {
     if ([self isRunning]) {
-        HLSLoggerWarn(@"The download file path cannot be changed while %@ is running", [self connectionDebugNameCapitalized:NO]);
+        HLSLoggerWarn(@"The download file path cannot be changed while %@ is running", [self debugNameCapitalized:NO]);
         return;
     }
     
@@ -147,7 +144,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)setDelegate:(id<HLSURLConnectionDelegate>)delegate
 {
     if ([self isRunning]) {
-        HLSLoggerWarn(@"The delegate cannot be changed while %@ is running", [self connectionDebugNameCapitalized:NO]);
+        HLSLoggerWarn(@"The delegate cannot be changed while %@ is running", [self debugNameCapitalized:NO]);
         return;
     }
     
@@ -177,7 +174,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     return self.status == HLSURLConnectionStatusStarting || self.status == HLSURLConnectionStatusStarted;
 }
 
-- (NSString *)connectionDebugNameCapitalized:(BOOL)capitalized
+- (NSString *)debugNameCapitalized:(BOOL)capitalized
 {
     NSString *connectionIdentifier = self.tag ? [NSString stringWithFormat:@"'%@'", self.tag] : [NSString stringWithFormat:@"(%@)", self];
     if (capitalized) {
@@ -202,37 +199,72 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (BOOL)startWithRunLoopMode:(NSString *)runLoopMode
 {
     if ([self isRunning]) {
-        HLSLoggerDebug(@"%@ has already been started", [self connectionDebugNameCapitalized:YES]);
+        HLSLoggerDebug(@"%@ has already been started", [self debugNameCapitalized:YES]);
         return NO;
     }
     
+    // Prevent "fire and forget"
     if (! self.downloadFilePath && ! self.delegate) {
-        HLSLoggerError(@"Cannot start %@. Cnnections must have least have a delegate or a download path defined", [self connectionDebugNameCapitalized:NO]);
+        HLSLoggerError(@"Cannot start %@. Connections must have least have a delegate or a download path defined", [self debugNameCapitalized:NO]);
         return NO;
     }
     
-    if (! [self prepareForDownload]) {
-        return NO;
+    // Perform the setup required when downloading to a file
+    if (self.downloadFilePath) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        // Remove the destination file if it already existed
+        if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
+            NSError *fileDeletionError = nil;
+            if ([fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
+                HLSLoggerInfo(@"A file already existed at %@ and has been deleted", self.downloadFilePath);
+            }
+            else {
+                HLSLoggerError(@"The file existing at %@ could not be deleted. Aborting. Reason: %@", self.downloadFilePath, fileDeletionError);
+                return NO;
+            }    
+        }
+        
+        // Create the destination directory
+        NSString *downloadFileDirectoryPath = [self.downloadFilePath stringByDeletingLastPathComponent];
+        NSError *directoryCreationError = nil;
+        if (! [fileManager createDirectoryAtPath:downloadFileDirectoryPath
+                     withIntermediateDirectories:YES 
+                                      attributes:nil 
+                                           error:&directoryCreationError]) {
+            HLSLoggerError(@"Could not create destination directory %@. Aborting. Reason: %@", downloadFileDirectoryPath, directoryCreationError);
+            return NO;
+        }
+        
+        // Create the destination file
+        NSError *fileCreationError = nil;
+        if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
+            HLSLoggerError(@"Could not create file at path %@. Aborting. Reason: %@", self.downloadFilePath, fileCreationError);
+            return NO;
+        }
     }
-    
-    [self reset];
     
     // Note that NSURLConnection retains its delegate. This is why we use a zeroing weak reference for HLSURLConnection
     // delegate. startImmediately has been set to NO to allow setting up the run loop mode before the connection is started
     self.connection = [[[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO] autorelease];
     if (! self.connection) {
-        HLSLoggerError(@"Unable to open connection");
+        HLSLoggerError(@"Unable to open %@", [self debugNameCapitalized:NO]);
         return NO;
     }
     
-    [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
-    self.status = HLSURLConnectionStatusStarting;
-    
+    // Makes it possible to run connections without keeping any strong reference to them. The corresponding release will be
+    // made when the connection ends
     [self retain];
     
+    // Setup initial state
+    [self resetDownloadStatusVariables];
+    self.status = HLSURLConnectionStatusStarting;
+    
+    // Start the connection
     [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:runLoopMode];
     [self.connection start];
     
+    [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     return YES;
 }
 
@@ -244,27 +276,30 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)cancel
 {
     if (! [self isRunning]) {
-        HLSLoggerDebug(@"The connection has not been started");
+        HLSLoggerDebug(@"% has not been started", [self debugNameCapitalized:YES]);
         return;
     }
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     
     [self.connection cancel];
-    [self cleanupAfterIncompleteDownload];
-    [self reset];
+    self.connection = nil;
     
+    [self cleanupAfterIncompleteDownload];
+    [self resetDownloadStatusVariables];
+    
+    // See -startWithRunLoopMode implementation
     [self release];
 }
 
 - (void)startSynchronous
 {
-    // We want to share the NSURLConnection delegate code here to avoid code duplication. Ideally, we would therefore
-    // like to be able to block the thread which executes -startSynchronous just after having started the
-    // asynchronous NSURLConnection. If everything happened on separate threads, we could use some kind of condition 
-    // variable (NSCondition) to implement the synchronous mechanism (the first threads initiates the connection,
-    // spawns a second thread to receive data, and waits; the second thread does its work and signals
-    // when it is done using the condition variable, at which point the first thread can resume). This
+    // We want to share the NSURLConnection delegate method implementations here to avoid code duplication. Ideally, 
+    // we would therefore like to be able to block the thread which executes -startSynchronous just after having started 
+    // the asynchronous NSURLConnection. If everything happened separately on two threads, we could use some kind of 
+    // condition variable (NSCondition) to implement the synchronous mechanism (the first thread initiates the connection,
+    // spawns a second thread to receive data, and waits for the condition to be signaled; the second thread does its work 
+    // and signals when it is done using the condition variable, at which point the first thread can resume). This
     // is not possible here, though: While a second thread receives data, the delegate events are sent back
     // for processing by the run loop associated with the thread which started the connection. If we blocked
     // it using a condition variable, we would block these events as well.
@@ -286,51 +321,14 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 #pragma mark Managing the connection internal status and resources
 
 /**
- * Reset internal variables to a state from which a connection can be started
+ * Reset internal variables to a state similar to the one corresponding to a download about to start
  */
-- (void)reset
+- (void)resetDownloadStatusVariables
 {
     [self.internalData setLength:0];
     self.status = HLSURLConnectionStatusIdle;
-    self.connection = nil;
     m_expectedContentLength = NSURLResponseUnknownLength;
     m_currentContentLength = 0;
-}
-
-- (BOOL)prepareForDownload
-{
-    if (self.downloadFilePath) {
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        if ([fileManager fileExistsAtPath:self.downloadFilePath]) {
-            NSError *fileDeletionError = nil;
-            if ([fileManager removeItemAtPath:self.downloadFilePath error:&fileDeletionError]) {
-                HLSLoggerInfo(@"A file already existed at %@ and has been deleted", self.downloadFilePath);
-            }
-            else {
-                HLSLoggerError(@"The file existing at %@ could not be deleted. Aborting. Reason: %@", self.downloadFilePath, fileDeletionError);
-                return NO;
-            }    
-        }
-                
-        NSString *downloadFileDirectoryPath = [self.downloadFilePath stringByDeletingLastPathComponent];
-        NSError *directoryCreationError = nil;
-        if (! [fileManager createDirectoryAtPath:downloadFileDirectoryPath
-                     withIntermediateDirectories:YES 
-                                      attributes:nil 
-                                           error:&directoryCreationError]) {
-            HLSLoggerError(@"Could not create directory %@. Aborting. Reason: %@", downloadFileDirectoryPath, directoryCreationError);
-            return NO;
-        }
-        
-        NSError *fileCreationError = nil;
-        if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
-            HLSLoggerError(@"Could not create file at path %@. Aborting. Reason: %@", self.downloadFilePath, fileCreationError);
-            return NO;
-        }
-    }
-    
-    return YES;
 }
 
 - (void)cleanupAfterIncompleteDownload
@@ -395,11 +393,13 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     HLSLoggerDebug(@"Connection failed with error: %@", error);
+    self.connection = nil;
     
     // Remove file on failure
     [self cleanupAfterIncompleteDownload];
     
-    [self reset];
+    [self resetDownloadStatusVariables];
+    
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     
     if ([self.delegate respondsToSelector:@selector(connection:didFailWithError:)]) {
