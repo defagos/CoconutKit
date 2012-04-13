@@ -71,6 +71,11 @@
 	return self;
 }
 
+- (void)awakeFromNib
+{
+    self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
+}
+
 - (void)setVerticalAlignment:(HLSLabelVerticalAlignment)verticalAlignment
 {
 	_verticalAlignment = verticalAlignment;
