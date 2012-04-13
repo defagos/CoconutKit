@@ -56,8 +56,13 @@
 {
     static HLSNotificationManager *s_instance = nil;
     
+    // Double-checked locking pattern
     if (! s_instance) {
-        s_instance = [[HLSNotificationManager alloc] init];
+        @synchronized(self) {
+            if (! s_instance) {
+                s_instance = [[HLSNotificationManager alloc] init];
+            }
+        }
     }
     return s_instance;
 }
@@ -76,41 +81,53 @@
 
 - (void)notifyBeginNetworkActivity
 {
-    ++m_networkActivityCount;
-    
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
-    
-    if (m_networkActivityCount == 1) {
-        if (! [UIApplication sharedApplication].networkActivityIndicatorVisible) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if ([NSThread isMainThread]) {
+        ++m_networkActivityCount;
+        
+        HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+        
+        if (m_networkActivityCount == 1) {
+            if (! [UIApplication sharedApplication].networkActivityIndicatorVisible) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            }
+            else {
+                HLSLoggerWarn(@"The network activity indicator is already displayed. Some code is managing it "
+                              "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
+            }
         }
-        else {
-            HLSLoggerWarn(@"The network activity indicator is already displayed. Some code is managing it "
-                          "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
-        }
+    }
+    // UIKit classes should only be used from the main thread
+    else {
+        [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:YES];
     }
 }
 
 - (void)notifyEndNetworkActivity
 {
-    if (m_networkActivityCount == 0) {
-        HLSLoggerWarn(@"Warning: Notifying the end of a network activity which has not been started");
-        return;
-    }
-    
-    --m_networkActivityCount;
-    
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
-    
-    if (m_networkActivityCount == 0) {
-        if ([UIApplication sharedApplication].networkActivityIndicatorVisible) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if ([NSThread isMainThread]) {
+        if (m_networkActivityCount == 0) {
+            HLSLoggerWarn(@"Warning: Notifying the end of a network activity which has not been started");
+            return;
         }
-        else {
-            HLSLoggerWarn(@"The network activity indicator is not displayed. Some code is managing it "
-                          "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
-        }
+        
+        --m_networkActivityCount;
+        
+        HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+        
+        if (m_networkActivityCount == 0) {
+            if ([UIApplication sharedApplication].networkActivityIndicatorVisible) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }
+            else {
+                HLSLoggerWarn(@"The network activity indicator is not displayed. Some code is managing it "
+                              "manually elsewhere, check if you can update it to use HLSNotificationManager instead");
+            }
+        }   
     }
+    // UIKit classes should only be used from the main thread
+    else {
+        [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:YES];
+    }    
 }
 
 @end

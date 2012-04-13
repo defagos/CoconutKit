@@ -25,7 +25,7 @@
 /**
  * Manages application-wide notification mechanisms
  *
- * This class is not thread-safe
+ * This class is thread-safe
  *
  * Designated initializer: init
  */
