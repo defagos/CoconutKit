@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "NSString+HLSExtensions.h"
 
 static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
@@ -73,7 +74,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return [NSString stringWithFormat:@"<%@: %p; transform: %@; alphaVariation: %f>", 
             [self class],
             self,
-            @"TODO",
+            HLSStringFromCATransform3D(self.transform),
             self.alphaVariation];
 }
 
