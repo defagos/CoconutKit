@@ -210,6 +210,18 @@
     [self.asynchronousConnection start];
 }
 
+- (IBAction)loadAsynchronouslyDangling:(id)sender
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                         timeoutInterval:10.];
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
+    
+    connection.delegate = self;
+    [connection start];
+}
+
 - (IBAction)cancel:(id)sender
 {
     self.asynchronousLoadButton.hidden = NO;
@@ -227,6 +239,7 @@
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                             timeoutInterval:10.];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.delegate = self;
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
     [connection startSynchronous];
 }

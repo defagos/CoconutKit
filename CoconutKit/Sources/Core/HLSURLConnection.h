@@ -9,6 +9,7 @@
 // TODO: Add remaining time estimate
 // TODO: Credentials
 // TODO: When CoconutKit is iOS 5 only, use the formal NSURLConnectionDownloadDelegate and NSURLConnectionDataDelegate protocols
+// TODO: notifyBegin/EndNetworkActivity should be executed on the main thread (update the implementation of those methods)
 
 // The connection status
 typedef enum {
@@ -43,9 +44,6 @@ extern const float HLSURLConnectionProgressUnavailable;
  * networking library do (they usually work with NSURL objects and a fixed protocol, most likely HTTP). An
  * HLSURLConnection object is namely initialized with an NSURLRequest object, which means you can customize
  * it as you need, depending on the protocol you use, the caching policy you require, etc.
- *
- * Note that you do not need to retain an HLSURLConnection while running (you only need to keep a reference to
- * a connection object if you want to be able to cancel it manually)
  *
  * Designated initializer: initWithRequest:runLoopMode:
  */
