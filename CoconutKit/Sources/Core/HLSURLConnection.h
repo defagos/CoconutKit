@@ -29,21 +29,41 @@ extern const float HLSURLConnectionProgressUnavailable;
 @protocol HLSURLConnectionDelegate;
 
 /**
- * Thin wrapper around NSURLConnection. It is tempting to implement a whole networking library, but in the end
- * NSURLConnection has all the power you usually need (caching, support for a large number of protocols, synchronous
- * and asynchronous connections, credentials, etc.).
+ * Thin wrapper around NSURLConnection. It is namely tempting to implement a whole networking library (several
+ * already exist), but in the end NSURLConnection has all the power you usually need (caching, support for a 
+ * large number of protocols, synchronous and asynchronous connections, credentials, etc.)
  *
- * Using NSURLConnection has some inconveniences, though:
- *   - data must be handled manually (whether it is saved in-memory or to disk)
- *   - progress has to be calculated manually
- *   - NSURLConnection delegate is retained, which most of the time leads to a waste of resources, or to running 
- *     connections which have to be cancelled manually when the delegate is discarded. This is error-prone and often 
- *     results in connections running longer than they should in the background
+ * Using NSURLConnection has some drawbacks, though:
+ *   - the data must be handled manually as it is received (whether it is saved in-memory or on disk)
+ *   - the progress has to be calculated manually
+ *   - an NSURLConnection object retains its delegate. This decision was probably made to avoid nasty
+ *     crashes (a connection trying to call a delegate method on a delegate which has been deallocated), 
+ *     but if often leads to connections running longer than expected (if not cancelled when appropriate). 
+ *     Consider the example of a view controller creating an NSURLConnection of which it is the delegate. 
+ *     The connection must usually be cancelled when the view controller gets removed from view (otherwise 
+ *     the view controller will survive until the connection terminates, which is often not what you
+ *     want). Having to cancel a connection manually in such cases is cumbersome.
+ *   - the synchronous method call is not appropriate for large downloads
+ *   - you have to carefully retain and release the connection objects
  *
- * HLSURLConnection is meant to solve these issues without sacrificing the power of NSURLConnection, as many
- * networking library do (they usually work with NSURL objects and a fixed protocol, most likely HTTP). An
+ * HLSURLConnection is meant to solve the above issues without sacrificing the power of NSURLConnection, as many
+ * networking library do (they usually work with NSURL objects and a fixed protocol, most likely HTTP, which
+ * means you have to get back to the good old NSURLConnection when your protocol differs). An
  * HLSURLConnection object is namely initialized with an NSURLRequest object, which means you can customize
  * it as you need, depending on the protocol you use, the caching policy you require, etc.
+ *
+ * Here are some features of HLSURLConnection:
+ *   - data can be saved in-memory (small files) or on disk (needed for large files which won't fit in memory)
+ *   - to minimize the need of having to cancel a connection manually (which you can still do if you want),
+ *     connections having a delegate are automatically cancelled when their delegate is deallocated (which makes
+ *     sense because the only object which was interested by connection events does not exist anymore)
+ *   - a connection does not have to be retained if you do not need to cancel it manually (in which case you still
+ *     need to keep a reference to it somewhere). Simply fire and forget. When the connection ends it will
+ *     deallocates itself. If its delegate is deallocated first the connection will be cancelled and finally
+ *     deallocated
+ *   - a connection can be started asynchronously or synchronously. In both cases the same set of delegate methods
+ *     will be called, which means you do not have to rewrite your code if you sometimes discover the need to
+ *     switch between these modes
  *
  * Designated initializer: initWithRequest:runLoopMode:
  */
