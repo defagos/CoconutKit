@@ -17,13 +17,14 @@ static void *s_connectionKey = &s_connectionKey;
 
 - (void)loadWithImageRequest:(NSURLRequest *)request
 {
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.delegate = self;
+    objc_setAssociatedObject(self, s_connectionKey, connection, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
     // Scheduled with the NSRunLoopCommonModes run loop mode to allow connection events (i.e. image assignment when
     // the download is complete) when scrolling occurs (which is quite common when image views are used within
     // table view cells)
-    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request runLoopMode:NSRunLoopCommonModes];
-    connection.delegate = self;
-    objc_setAssociatedObject(self, s_connectionKey, connection, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [connection start];
+    [connection startWithRunLoopMode:NSRunLoopCommonModes];
     
     // TODO: Customizable placeholder view / image
     self.image = nil;

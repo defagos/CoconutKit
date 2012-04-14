@@ -72,12 +72,11 @@ extern const float HLSURLConnectionProgressUnavailable;
  * HLSURLConnection is not thread-safe. You need to manage a connection from a single thread (on which you also
  * receive the associated delegate events), otherwise the behavior is undefined.
  *
- * Designated initializer: initWithRequest:runLoopMode:
+ * Designated initializer: initWithRequest:
  */
 @interface HLSURLConnection : NSObject {
 @private
     NSURLRequest *m_request;
-    NSString *m_runLoopMode;
     NSURLConnection *m_connection;
     NSString *m_tag;
     NSString *m_downloadFilePath;
@@ -90,49 +89,60 @@ extern const float HLSURLConnectionProgressUnavailable;
 }
 
 /**
- * Convenience constructors
+ * Convenience constructor
  */
-+ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode;
 + (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request;
 
 /**
- * Create a connection object. The connection must be started manually when appropriate, either synchronously
- * or asynchronously, and a run loop mode must be provided (the connection is scheduled with the run loop
- * associated with the current thread). In general you should not have to care about run loop mode issues, 
- * simply use -initWithRequest:
- */
-- (id)initWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode;
-
-/**
- * Same as -initWithRequest:runLoopMode:, with NSDefaultRunLoopMode set as run loop mode. This is perfectly
- * fine in most cases, but can be an issue when the run loop mode is changed and does not match the one
- * of the connection anymore, preventing connection delegate events from being received until the run loop
- * mode is switched back to its original value.
- *
- * When scrolling occurs, for example, the run loop mode is temporarily set to NSEventTrackingRunLoopMode,
- * inhibiting connection delegate events until scrolling ends. If this is an issue, you must use the 
- * -initWithRequest:runLoopMode: method to set a more appropriate run loop mode (most probably NSRunLoopCommonModes)
+ * Create a connection object
  */
 - (id)initWithRequest:(NSURLRequest *)request;
 
 /**
- * Start / stop an asynchronous connection
+ * Start the connection asynchronously. The method returns YES iff the connection could be started successfully.
+ *
+ * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
+ * sense (the data cannot be retrieved anywhere, and the connection status remains unknown)
+ *
+ * The connection is scheduled in the current thread run loop with NSDefaultRunLoopMode set as run loop mode. This
+ * is perfectly sufficient in most cases, but can be an issue when the run loop mode is changed and does not match 
+ * the one of the connection anymore, preventing connection delegate events from being received until the run loop 
+ * mode is switched back to its original value.
+ *
+ * When scrolling occurs, for example, the run loop mode is temporarily set to NSEventTrackingRunLoopMode,
+ * inhibiting connection delegate events until scrolling ends. If this is an issue, you must use the 
+ * -startWithRunLoopMode: method to set a more appropriate run loop mode (most probably NSRunLoopCommonModes) 
+ */
+- (BOOL)start;
+
+/**
+ * Start the connection asynchronously. The method returns YES iff the connection could be started successfully.
  *
  * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
  * sense (the data cannot go anywhere, and the connection status remains unknown)
+ *
+ * The connection is scheduled in the current thread run loop using the specified mode. In most cases you do
+ * not have to care about run loop mode issues, and calling -start suffices. Refer to the -start documentation
+ * for more information
  */
-- (void)start;
+- (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
+
+/**
+ * Cancel an asynchronous connection
+ */
 - (void)cancel;
 
 /**
- * Start a (quasi-)synchronous connection. The data retrieval itself runs asynchronously and the connection delegate
+ * Start the connection (quasi-)synchronously. The data retrieval itself runs asynchronously and the connection delegate
  * events are still processed by the same thread which called -startSynchronous. The call to -startSynchronous itself,
- * though, only returns when the connection has ended
+ * though, only returns when the connection has ended.
+ *
+ * The method returns YES iff the connection could be started successfully.
  *
  * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
  * sense (the data cannot go anywhere, and the connection status remains unknown)
  */
-- (void)startSynchronous;
+- (BOOL)startSynchronous;
 
 /**
  * A tag you can freely use to identify a connection

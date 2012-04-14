@@ -19,7 +19,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 @interface HLSURLConnection ()
 
 @property (nonatomic, retain) NSURLRequest *request;
-@property (nonatomic, retain) NSString *runLoopMode;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *internalData;
 @property (nonatomic, assign) HLSURLConnectionStatus status;
@@ -29,7 +28,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (NSString *)debugNameCapitalized:(BOOL)capitalized;
 - (NSURL *)url;
 
-- (BOOL)startWithRunLoopMode:(NSString *)runLoopMode;
 - (void)resetDownloadStatusVariables;
 
 - (BOOL)createDownloadFile;
@@ -41,11 +39,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 #pragma mark Class methods
 
-+ (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode
-{
-    return [[[[self class] alloc] initWithRequest:request runLoopMode:runLoopMode] autorelease];
-}
-
 + (HLSURLConnection *)connectionWithRequest:(NSURLRequest *)request
 {
     return [[[[self class] alloc] initWithRequest:request] autorelease];
@@ -53,21 +46,15 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request runLoopMode:(NSString *)runLoopMode
+- (id)initWithRequest:(NSURLRequest *)request
 {
     if ((self = [super init])) {
         self.request = request;
-        self.runLoopMode = runLoopMode;
         self.internalData = [[[NSMutableData alloc] init] autorelease];
         
         [self resetDownloadStatusVariables];
     }
     return self;
-}
-
-- (id)initWithRequest:(NSURLRequest *)request
-{
-    return [self initWithRequest:request runLoopMode:NSDefaultRunLoopMode];
 }
 
 - (id)init
@@ -79,7 +66,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (void)dealloc
 {
     self.request = nil;
-    self.runLoopMode = nil;
     self.connection = nil;
     self.tag = nil;
     self.downloadFilePath = nil;
@@ -93,8 +79,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 #pragma mark Accessors and mutators
 
 @synthesize request = m_request;
-
-@synthesize runLoopMode = m_runLoopMode;
 
 @synthesize connection = m_connection;
 
@@ -248,9 +232,9 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     return YES;
 }
 
-- (void)start
+- (BOOL)start
 {
-    [self startWithRunLoopMode:self.runLoopMode];
+    return [self startWithRunLoopMode:NSDefaultRunLoopMode];
 }
 
 - (void)cancel
@@ -273,7 +257,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self release];
 }
 
-- (void)startSynchronous
+- (BOOL)startSynchronous
 {
     // We want to share the NSURLConnection delegate method implementations here to avoid code duplication. Ideally, 
     // we would therefore like to be able to block the thread which executes -startSynchronous just after having started 
@@ -291,12 +275,14 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     // the NSURLConnection is done processing
     static NSString * const kHLSURLConnectionRunLoopPrivateMode = @"HLSURLConnectionRunLoopPrivateMode";
     if (! [self startWithRunLoopMode:kHLSURLConnectionRunLoopPrivateMode]) {
-        return;
+        return NO;
     }
     
     while (self.status != HLSURLConnectionStatusIdle) {
         [[NSRunLoop currentRunLoop] runMode:kHLSURLConnectionRunLoopPrivateMode beforeDate:[NSDate distantFuture]];
     }
+    
+    return YES;
 }
 
 #pragma mark Managing the connection internal status and resources
