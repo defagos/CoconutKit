@@ -17,7 +17,11 @@ static void *s_connectionKey = &s_connectionKey;
 
 - (void)loadWithImageRequest:(NSURLRequest *)request
 {
-    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    HLSURLConnection *connection = objc_getAssociatedObject(self, s_connectionKey);
+    if (connection) {
+        [connection cancel];
+    }
+    connection = [HLSURLConnection connectionWithRequest:request];
     connection.delegate = self;
     objc_setAssociatedObject(self, s_connectionKey, connection, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
