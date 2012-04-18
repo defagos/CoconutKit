@@ -233,12 +233,9 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }        
     }
     
-    // Return the animation to be played. During rotation, views must be resized to account for frame size changes 
-    // (because the container view dimensions in general change when it is rotated. If it is the screen area, e.g.,
-    // then the 768px x 1004px portrait screen becomes 1024px x 748px in landscape mode, not simply 1004px x 768px)
+    // Return the animation to be played
     HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
     animation.lockingUI = YES;
-    animation.resizeViews = YES;
     return animation;
 }
 
