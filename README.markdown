@@ -46,6 +46,9 @@ If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely 
 ### With which versions of iOS is CoconutKit compatible?
 CoconutKit should be compatible with iOS 3.2 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
 
+### Can I use CoconutKit with ARC projects?
+Yes, you can. As long as you use the .staticframework package, no additional configuration is required.
+
 ### How can I learn using CoconutKit?
 Learning how to use CoconutKit components always starts with header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there, I avoid external documentation which often gets outdated. After you have read this documentation, have a look at the demos and unit tests to see how the component is used in a concrete case.
 
@@ -56,7 +59,7 @@ My company, [hortis](http://www.hortis.ch/), has a long tradition of open source
 When designing components, I strongly emphasize on clean and documented interfaces, as well as on code quality. My goal is to create components that are easy to use, reliable, and which do what they claim they do, without nasty surprises. You should never have to look at a component implementation to know how it works, this should be obvious just by looking at its interface. I also strive to avoid components that leak or crash. If those are qualities you love to find in libraries, then you should start using CoconutKit now! Moreover, CoconutKit will never use any private API and will therefore always remain AppStore friendly.
 
 ### Does CoconutKit use ARC?
-No, CoconutKit currently does not use ARC. This will change in the future as ARC is adopted. Because of the large code base and features currently still in development, I am currently not able to start the conversion process immediately. This should however happen somewhere in 2012.
+No, CoconutKit currently does not use ARC. This will change in the future as ARC is adopted. Because of the large code base and features currently still in development, I am not able to start the conversion process immediately. This should however happen somewhere in the future.
 
 ### Can I contribute?
 You can, and you are strongly encouraged to. Use github pull requests to submit your improvements and bug fixes. You can submit everything you want, documentation and comment fixes included! Everything that tends to increase code quality is always warmly welcome.
