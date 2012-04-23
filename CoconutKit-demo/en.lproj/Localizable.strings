@@ -8,7 +8,6 @@
 "Action sheet"="Action sheet";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
-"An HTTP error has been encountered"="An HTTP error has been encountered";
 "Animated"="Animated";
 "Animation"="Animation";
 "Apples & Coconut"="Apples & Coconut";
@@ -53,6 +52,7 @@
 "Heavy view (cached)"="Heavy view (cached)";
 "Hide with modal"="Hide with modal";
 "Houston, we've got a problem"="Houston, we've got a problem";
+"HTTP error"="HTTP error";
 "Image set"="Image set";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";

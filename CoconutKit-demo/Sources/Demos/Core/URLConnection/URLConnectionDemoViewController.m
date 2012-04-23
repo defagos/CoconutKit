@@ -127,11 +127,12 @@
     // Cancel HTTP connections with errors
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if ([httpResponse statusCode] >= 400) {
+        NSInteger statusCode = [httpResponse statusCode];
+        if (statusCode >= 400) {
             [connection cancel];
             
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"An HTTP error has been encountered", @"An HTTP error has been encountered") 
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"HTTP error", @"HTTP error") 
+                                                                 message:[[NSHTTPURLResponse localizedStringForStatusCode:statusCode] capitalizedString]
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
                                                        otherButtonTitles:nil] autorelease];
