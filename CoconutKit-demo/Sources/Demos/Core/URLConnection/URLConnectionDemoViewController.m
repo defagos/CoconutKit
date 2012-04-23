@@ -120,19 +120,19 @@
 
 #pragma mark HLSURLConnectionDelegate protocol implementation
 
-- (void)connectionDidStart:(HLSURLConnection *)connection
+- (void)connection:(HLSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    HLSLoggerInfo(@"Connection did start");
+    HLSLoggerInfo(@"Connection did receive response");
 }
 
-- (void)connectionDidProgress:(HLSURLConnection *)connection
+- (void)connectionDidReceiveData:(HLSURLConnection *)connection
 {
-    HLSLoggerInfo(@"Connection did progress (progress = %f)", connection.progress);
+    HLSLoggerInfo(@"Connection did receive data (progress = %f)", connection.progress);
 }
 
-- (void)connectionDidFinish:(HLSURLConnection *)connection
+- (void)connectionDidFinishLoading:(HLSURLConnection *)connection
 {
-    HLSLoggerInfo(@"Connection did finish");
+    HLSLoggerInfo(@"Connection did finish loading");
     
     self.asynchronousLoadButton.hidden = NO;
     self.asynchronousLoadNoCancelButton.hidden = NO;

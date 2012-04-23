@@ -40,7 +40,7 @@ static void *s_connectionKey = &s_connectionKey;
     [self loadWithImageRequest:request];
 }
 
-- (void)connectionDidFinish:(HLSURLConnection *)connection
+- (void)connectionDidFinishLoading:(HLSURLConnection *)connection
 {
     UIImage *image = [UIImage imageWithData:[connection data]];
     self.image = image;

@@ -352,7 +352,17 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     return YES;
 }
 
-#pragma mark NSURLConnection events
+#pragma mark NSURLConnection (formal and informal) delegate protocol methods
+
+- (NSURLRequest *)connection:(HLSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
+{
+    if ([self.delegate respondsToSelector:@selector(connection:willSendRequest:redirectResponse:)]) {
+        return [self.delegate connection:self willSendRequest:request redirectResponse:response];
+    }
+    else {
+        return request;
+    }
+}
 
 // This method may be called several times. Each time a response is received we must discard any previously accumulated data
 // (refer to NSURLConnection documentation for more information)
@@ -364,8 +374,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     // Ensure that the delegate gets notified only once
     if (self.status == HLSURLConnectionStatusStarting) {
         self.status = HLSURLConnectionStatusStarted;
-        if ([self.delegate respondsToSelector:@selector(connectionDidStart:)]) {
-            [self.delegate connectionDidStart:self];
+        if ([self.delegate respondsToSelector:@selector(connection:didReceiveResponse:)]) {
+            [self.delegate connection:self didReceiveResponse:response];
         }
     }
 }
@@ -401,8 +411,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     // when downloading large files!
     m_currentContentLength += [data length];
     
-    if ([self.delegate respondsToSelector:@selector(connectionDidProgress:)]) {
-        [self.delegate connectionDidProgress:self];
+    if ([self.delegate respondsToSelector:@selector(connectionDidReceiveData:)]) {
+        [self.delegate connectionDidReceiveData:self];
     }
 }
 
@@ -432,11 +442,35 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     self.status = HLSURLConnectionStatusIdle;
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     
-    if ([self.delegate respondsToSelector:@selector(connectionDidFinish:)]) {
-        [self.delegate connectionDidFinish:self];
+    if ([self.delegate respondsToSelector:@selector(connectionDidFinishLoading:)]) {
+        [self.delegate connectionDidFinishLoading:self];
     }
     
     [self release];
+}
+
+- (void)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection
+{
+    if ([self.delegate respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
+        [self.delegate connectionShouldUseCredentialStorage:self];
+    }
+}
+
+- (void)connection:(HLSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    if ([self.delegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]) {
+        [self.delegate connection:self willSendRequestForAuthenticationChallenge:challenge];
+    }
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+    if ([self.delegate respondsToSelector:@selector(connection:willCacheResponse:)]) {
+        return [self.delegate connection:self willCacheResponse:cachedResponse];
+    }
+    else {
+        return cachedResponse;
+    }
 }
 
 #pragma mark Description

@@ -7,7 +7,6 @@
 //
 
 // TODO: Add remaining time estimate
-// TODO: Credentials
 // TODO: When CoconutKit is iOS 5 only, use the formal NSURLConnectionDownloadDelegate and NSURLConnectionDataDelegate protocols
 
 // The connection status
@@ -204,25 +203,40 @@ extern const float HLSURLConnectionProgressUnavailable;
 @optional
 
 /**
- * The connection has started and received a response
+ * URL redirection. Refer to the documentation of the same method of NSURLConnectionDataDelegate for more information
  */
-- (void)connectionDidStart:(HLSURLConnection *)connection;
+- (NSURLRequest *)connection:(HLSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response;
 
 /**
- * The connection has received data. You can call the -progress method to obtain a progress estimate (if
- * available)
+ * The connection has started and received a response
  */
-- (void)connectionDidProgress:(HLSURLConnection *)connection;
+- (void)connection:(HLSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+
+/**
+ * The connection has received data. You can call the -progress method to obtain a progress estimate (if available)
+ */
+- (void)connectionDidReceiveData:(HLSURLConnection *)connection;
 
 /**
  * The connection did finish successfully. You can use -data to get the data which has been retrieved, or you
- * can access the file saved at -downloadFilePath (if you chose this option, and if the data is large)
+ * can access the file saved at -downloadFilePath (if you chose this option)
  */
-- (void)connectionDidFinish:(HLSURLConnection *)connection;
+- (void)connectionDidFinishLoading:(HLSURLConnection *)connection;
 
 /**
  * The connection failed
  */
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error;
+
+/**
+ * Managing credentials. Refer to the documentation of the same methods of NSURLConnectionDelegate for more information
+ */
+- (void)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection;
+- (void)connection:(HLSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+/**
+ * Response caching. Refer to the documentation of the same method of NSURLConnectionDataDelegate for more information
+ */
+- (NSCachedURLResponse *)connection:(HLSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
 
 @end
