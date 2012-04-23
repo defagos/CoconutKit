@@ -18,6 +18,10 @@
 @property (nonatomic, assign) HLSURLConnection *asynchronousConnection;
 @property (nonatomic, retain) NSArray *coconuts;
 
+- (void)disableUserInterfaceForAsynchronousConnection;
+- (void)disableUserInterfaceForAsynchronousConnectionNoCancel;
+- (void)enableUserInterface;
+
 @end
 
 @implementation URLConnectionDemoViewController
@@ -51,6 +55,7 @@
     self.synchronousLoadButton = nil;
     self.asynchronousLoadNoCancelButton = nil;
     self.clearButton = nil;
+    self.testHTTP404ErrorButton = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -73,6 +78,8 @@
 
 @synthesize clearButton = m_clearButton;
 
+@synthesize testHTTP404ErrorButton = m_testHTTP404ErrorButton;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -87,7 +94,7 @@
     self.nonCachedImagesTableView.delegate = self;
     self.nonCachedImagesTableView.rowHeight = [CoconutTableViewCell height];
     
-    self.cancelButton.hidden = YES;
+    [self enableUserInterface];
 }
 
 #pragma mark Orientation management
@@ -116,6 +123,38 @@
     self.coconuts = [self.coconuts sortedArrayUsingDescriptor:nameSortDescriptor]; 
     
     [self reloadData];
+}
+
+#pragma mark User interface
+
+- (void)disableUserInterfaceForAsynchronousConnection
+{
+    self.asynchronousLoadButton.hidden = YES;
+    self.asynchronousLoadNoCancelButton.hidden = YES;
+    self.synchronousLoadButton.hidden = YES;
+    self.cancelButton.hidden = NO;
+    self.clearButton.hidden = YES;
+    self.testHTTP404ErrorButton.hidden = YES;
+}
+
+- (void)disableUserInterfaceForAsynchronousConnectionNoCancel
+{
+    self.asynchronousLoadButton.hidden = YES;
+    self.asynchronousLoadNoCancelButton.hidden = YES;
+    self.synchronousLoadButton.hidden = YES;
+    self.cancelButton.hidden = YES;
+    self.clearButton.hidden = YES;
+    self.testHTTP404ErrorButton.hidden = YES;
+}
+
+- (void)enableUserInterface
+{
+    self.asynchronousLoadButton.hidden = NO;
+    self.asynchronousLoadNoCancelButton.hidden = NO;
+    self.synchronousLoadButton.hidden = NO;
+    self.cancelButton.hidden = YES;
+    self.clearButton.hidden = NO;
+    self.testHTTP404ErrorButton.hidden = NO;
 }
 
 #pragma mark HLSURLConnectionDelegate protocol implementation
@@ -150,11 +189,7 @@
 {
     HLSLoggerInfo(@"Connection did finish loading");
     
-    self.asynchronousLoadButton.hidden = NO;
-    self.asynchronousLoadNoCancelButton.hidden = NO;
-    self.synchronousLoadButton.hidden = NO;
-    self.cancelButton.hidden = YES;
-    self.clearButton.hidden = NO;
+    [self enableUserInterface];
     
     NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
     NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
@@ -171,18 +206,21 @@
 {
     HLSLoggerInfo(@"Connection did fail with error: %@", error);
     
-    self.asynchronousLoadButton.hidden = NO;
-    self.asynchronousLoadNoCancelButton.hidden = NO;
-    self.synchronousLoadButton.hidden = NO;
-    self.cancelButton.hidden = YES;
-    self.clearButton.hidden = NO;
-    
+    [self enableUserInterface];
+        
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
                                                          message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
                                                         delegate:nil 
                                                cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
+}
+
+- (void)connectionDidCancel:(HLSURLConnection *)connection
+{
+    HLSLoggerInfo(@"Connection did cancel");
+    
+    [self enableUserInterface];
 }
 
 #pragma mark HLSReloadable protocol implementation
@@ -240,11 +278,7 @@
 
 - (IBAction)loadAsynchronously:(id)sender
 {
-    self.asynchronousLoadButton.hidden = YES;
-    self.asynchronousLoadNoCancelButton.hidden = YES;
-    self.synchronousLoadButton.hidden = YES;
-    self.cancelButton.hidden = NO;
-    self.clearButton.hidden = YES;
+    [self disableUserInterfaceForAsynchronousConnection];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
@@ -258,12 +292,7 @@
 
 - (IBAction)loadAsynchronouslyNoCancel:(id)sender
 {
-    self.asynchronousLoadButton.hidden = YES;
-    self.asynchronousLoadNoCancelButton.hidden = YES;
-    self.synchronousLoadButton.hidden = YES;
-    self.cancelButton.hidden = YES;
-    self.clearButton.hidden = YES;
-    self.clearButton.hidden = YES;
+    [self disableUserInterfaceForAsynchronousConnectionNoCancel];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
@@ -278,12 +307,7 @@
 }
 
 - (IBAction)cancel:(id)sender
-{
-    self.asynchronousLoadButton.hidden = NO;
-    self.asynchronousLoadNoCancelButton.hidden = NO;
-    self.synchronousLoadButton.hidden = NO;
-    self.cancelButton.hidden = YES;
-    
+{    
     [self.asynchronousConnection cancel];
 }
 
@@ -306,6 +330,8 @@
 
 - (IBAction)testHTTP404Error:(id)sender
 {
+    [self disableUserInterfaceForAsynchronousConnectionNoCancel];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/404_not_found.html"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                          timeoutInterval:10.];

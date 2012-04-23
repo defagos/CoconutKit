@@ -229,6 +229,12 @@ extern const float HLSURLConnectionProgressUnavailable;
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error;
 
 /**
+ * The connection was cancelled. A delegate method is required since cancel operations are not always initiated by
+ * the caller: A connection can namely be cancelled if it has a delegate which gets deallocated
+ */
+- (void)connectionDidCancel:(HLSURLConnection *)connection;
+
+/**
  * Managing credentials. Refer to the documentation of the same methods of NSURLConnectionDelegate for more information
  */
 - (void)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection;

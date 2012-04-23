@@ -253,6 +253,10 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self deleteDownloadFile];
     [self resetDownloadStatusVariables];
     
+    if ([self.delegate respondsToSelector:@selector(connectionDidCancel:)]) {
+        [self.delegate connectionDidCancel:self];
+    }
+    
     // See -startWithRunLoopMode implementation
     [self release];
 }
@@ -418,7 +422,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    HLSLoggerDebug(@"Connection failed with error: %@", error);
+    HLSLoggerDebug(@"%@ failed with error: %@", [self debugNameCapitalized:NO], error);
     
     self.connection = nil;
     

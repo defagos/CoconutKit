@@ -310,8 +310,8 @@
 					</object>
 					<object class="IBUIButton" id="510088204">
 						<reference key="NSNextResponder" ref="31345169"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{40, 887}, {192, 37}}</string>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{20, 947}, {192, 37}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="587535474"/>
@@ -411,6 +411,14 @@
 						<reference key="destination" ref="587535474"/>
 					</object>
 					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">testHTTP404ErrorButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="510088204"/>
+					</object>
+					<int key="connectionID">67</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -590,7 +598,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">63</int>
+			<int key="maxID">68</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -647,6 +655,7 @@
 						<string key="clearButton">UIButton</string>
 						<string key="nonCachedImagesTableView">UITableView</string>
 						<string key="synchronousLoadButton">UIButton</string>
+						<string key="testHTTP404ErrorButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="asynchronousLoadButton">
@@ -675,6 +684,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="synchronousLoadButton">
 							<string key="name">synchronousLoadButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="testHTTP404ErrorButton">
+							<string key="name">testHTTP404ErrorButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
