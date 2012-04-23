@@ -81,8 +81,8 @@ extern const float HLSURLConnectionProgressUnavailable;
     NSDictionary *m_userInfo;
     NSMutableData *m_internalData;
     HLSURLConnectionStatus m_status;
-    long long m_currentContentLength;
-    long long m_expectedContentLength;
+    long long m_currentLength;
+    long long m_expectedLength;
     HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 

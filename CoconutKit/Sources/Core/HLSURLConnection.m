@@ -111,11 +111,11 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (float)progress
 {
-    if (m_expectedContentLength == NSURLResponseUnknownLength) {
+    if (m_expectedLength == NSURLResponseUnknownLength) {
         return HLSURLConnectionProgressUnavailable;
     }
     else {
-        return floatmin((float)m_currentContentLength / m_expectedContentLength, 1.f);
+        return floatmin((float)m_currentLength / m_expectedLength, 1.f);
     }
 }
 
@@ -294,8 +294,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 {
     [self.internalData setLength:0];
     self.status = HLSURLConnectionStatusIdle;
-    m_expectedContentLength = NSURLResponseUnknownLength;
-    m_currentContentLength = 0;
+    m_expectedLength = NSURLResponseUnknownLength;
+    m_currentLength = 0;
 }
 
 #pragma mark Downloading to a file
@@ -368,7 +368,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 // (refer to NSURLConnection documentation for more information)
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    m_expectedContentLength = [response expectedContentLength];
+    m_expectedLength = [response expectedContentLength];
     [self.internalData setLength:0];
     
     // Ensure that the delegate gets notified only once
@@ -409,7 +409,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     
     // We track the total length. It could be tempting to simply use [[self data] length], but this does not work
     // when downloading large files!
-    m_currentContentLength += [data length];
+    m_currentLength += [data length];
     
     if ([self.delegate respondsToSelector:@selector(connectionDidReceiveData:)]) {
         [self.delegate connectionDidReceiveData:self];
@@ -471,6 +471,17 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     else {
         return cachedResponse;
     }
+}
+
+// Provide an estimate for the progress of an HTTP POST upload (not an exact measurement of upload progress, because the connection may 
+// fail or the connection may encounter an authentication challenge)
+- (void)connection:(NSURLConnection *)connection
+   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+    m_expectedLength = totalBytesExpectedToWrite;
+    m_currentLength += bytesWritten;
 }
 
 #pragma mark Description
