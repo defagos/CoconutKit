@@ -17,6 +17,8 @@
     UIButton *m_synchronousLoadButton;
     UIButton *m_asynchronousLoadNoCancelButton;
     UIButton *m_clearButton;
+    UILabel *m_treatingHTTPErrorsAsFailuresLabel;
+    UISwitch *m_treatingHTTPErrorsAsFailuresSwitch;
     UIButton *m_testHTTP404ErrorButton;
 }
 
@@ -27,6 +29,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *synchronousLoadButton;
 @property (nonatomic, retain) IBOutlet UIButton *asynchronousLoadNoCancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *clearButton;
+@property (nonatomic, retain) IBOutlet UILabel *treatingHTTPErrorsAsFailuresLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *treatingHTTPErrorsAsFailuresSwitch;
 @property (nonatomic, retain) IBOutlet UIButton *testHTTP404ErrorButton;
 
 - (IBAction)loadAsynchronously:(id)sender;

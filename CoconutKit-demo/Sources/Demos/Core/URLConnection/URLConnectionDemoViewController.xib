@@ -11,6 +11,7 @@
 			<string key="NS.object.0">1181</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>IBUISwitch</string>
 			<string>IBUITableView</string>
 			<string>IBUIButton</string>
 			<string>IBUIView</string>
@@ -37,6 +38,39 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUILabel" id="53264090">
+						<reference key="NSNextResponder" ref="31345169"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{20, 20}, {728, 64}}</string>
+						<reference key="NSSuperview" ref="31345169"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="40610920"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">LS/Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)</string>
+						<object class="NSColor" key="IBUITextColor" id="604540350">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUINumberOfLines">4</int>
+						<int key="IBUITextAlignment">1</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="710401821">
+							<int key="type">1</int>
+							<double key="pointSize">17</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="580716831">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
 					<object class="IBUITableView" id="40610920">
 						<reference key="NSNextResponder" ref="31345169"/>
 						<int key="NSvFlags">274</int>
@@ -169,7 +203,7 @@
 						<string key="NSFrame">{{212, 737}, {344, 37}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="510088204"/>
+						<reference key="NSNextKeyView" ref="182224026"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -185,39 +219,6 @@
 						<reference key="IBUINormalTitleShadowColor" ref="506708178"/>
 						<reference key="IBUIFontDescription" ref="702163502"/>
 						<reference key="IBUIFont" ref="100167551"/>
-					</object>
-					<object class="IBUILabel" id="53264090">
-						<reference key="NSNextResponder" ref="31345169"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 20}, {728, 64}}</string>
-						<reference key="NSSuperview" ref="31345169"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="40610920"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)</string>
-						<object class="NSColor" key="IBUITextColor" id="604540350">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">0</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUINumberOfLines">4</int>
-						<int key="IBUITextAlignment">1</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="710401821">
-							<int key="type">1</int>
-							<double key="pointSize">17</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="580716831">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
 					</object>
 					<object class="IBUILabel" id="949564825">
 						<reference key="NSNextResponder" ref="31345169"/>
@@ -285,28 +286,40 @@
 						<reference key="IBUIFontDescription" ref="710401821"/>
 						<reference key="IBUIFont" ref="580716831"/>
 					</object>
-					<object class="IBUIButton" id="587535474">
+					<object class="IBUILabel" id="182224026">
 						<reference key="NSNextResponder" ref="31345169"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{626, 947}, {122, 37}}</string>
+						<string key="NSFrame">{{20, 910}, {303, 21}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="623745972"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">LS/Treat HTTP errors as failures</string>
+						<reference key="IBUITextColor" ref="604540350"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<reference key="IBUIFontDescription" ref="710401821"/>
+						<reference key="IBUIFont" ref="580716831"/>
+					</object>
+					<object class="IBUISwitch" id="623745972">
+						<reference key="NSNextResponder" ref="31345169"/>
+						<int key="NSvFlags">301</int>
+						<string key="NSFrame">{{316, 907}, {94, 27}}</string>
+						<reference key="NSSuperview" ref="31345169"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="510088204"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Clear</string>
-						<reference key="IBUIHighlightedTitleColor" ref="668184819"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="506708178"/>
-						<reference key="IBUIFontDescription" ref="702163502"/>
-						<reference key="IBUIFont" ref="100167551"/>
+						<bool key="IBUIOn">YES</bool>
 					</object>
 					<object class="IBUIButton" id="510088204">
 						<reference key="NSNextResponder" ref="31345169"/>
@@ -322,6 +335,29 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">LS/Test HTTP 404 error</string>
+						<reference key="IBUIHighlightedTitleColor" ref="668184819"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="506708178"/>
+						<reference key="IBUIFontDescription" ref="702163502"/>
+						<reference key="IBUIFont" ref="100167551"/>
+					</object>
+					<object class="IBUIButton" id="587535474">
+						<reference key="NSNextResponder" ref="31345169"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{626, 947}, {122, 37}}</string>
+						<reference key="NSSuperview" ref="31345169"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">LS/Clear</string>
 						<reference key="IBUIHighlightedTitleColor" ref="668184819"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -421,6 +457,22 @@
 					<int key="connectionID">67</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">treatingHTTPErrorsAsFailuresLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="182224026"/>
+					</object>
+					<int key="connectionID">72</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">treatingHTTPErrorsAsFailuresSwitch</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="623745972"/>
+					</object>
+					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">loadAsynchronously:</string>
 						<reference key="source" ref="949004739"/>
@@ -500,7 +552,6 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="40610920"/>
 							<reference ref="855404085"/>
-							<reference ref="53264090"/>
 							<reference ref="949564825"/>
 							<reference ref="1014961928"/>
 							<reference ref="772960026"/>
@@ -508,8 +559,11 @@
 							<reference ref="243667952"/>
 							<reference ref="650328833"/>
 							<reference ref="1060747702"/>
-							<reference ref="587535474"/>
 							<reference ref="510088204"/>
+							<reference ref="53264090"/>
+							<reference ref="623745972"/>
+							<reference ref="587535474"/>
+							<reference ref="182224026"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -573,6 +627,16 @@
 						<reference key="object" ref="510088204"/>
 						<reference key="parent" ref="31345169"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">69</int>
+						<reference key="object" ref="623745972"/>
+						<reference key="parent" ref="31345169"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">70</int>
+						<reference key="object" ref="182224026"/>
+						<reference key="parent" ref="31345169"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -593,12 +657,14 @@
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="69.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="70.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">68</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -656,6 +722,8 @@
 						<string key="nonCachedImagesTableView">UITableView</string>
 						<string key="synchronousLoadButton">UIButton</string>
 						<string key="testHTTP404ErrorButton">UIButton</string>
+						<string key="treatingHTTPErrorsAsFailuresLabel">UILabel</string>
+						<string key="treatingHTTPErrorsAsFailuresSwitch">UISwitch</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="asynchronousLoadButton">
@@ -689,6 +757,14 @@
 						<object class="IBToOneOutletInfo" key="testHTTP404ErrorButton">
 							<string key="name">testHTTP404ErrorButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="treatingHTTPErrorsAsFailuresLabel">
+							<string key="name">treatingHTTPErrorsAsFailuresLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="treatingHTTPErrorsAsFailuresSwitch">
+							<string key="name">treatingHTTPErrorsAsFailuresSwitch</string>
+							<string key="candidateClassName">UISwitch</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

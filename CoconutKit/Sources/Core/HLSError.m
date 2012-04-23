@@ -12,6 +12,8 @@
 #import "HLSLogger.h"
 #import "NSDictionary+HLSExtensions.h"
 
+NSString * const HLSCoconutKitErrorDomain = @"HLSCoconutKitErrorDomain";
+
 @interface HLSError ()
 
 /**

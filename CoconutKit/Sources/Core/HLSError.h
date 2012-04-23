@@ -7,6 +7,11 @@
 //
 
 /**
+ * The domain used for CoconutKit errors
+ */
+extern NSString * const HLSCoconutKitErrorDomain;
+
+/**
  * Lightweight abstract subclass of HLSError providing a convenient way to create errors and to define and access
  * their properties.
  *

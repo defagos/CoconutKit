@@ -55,6 +55,8 @@
     self.synchronousLoadButton = nil;
     self.asynchronousLoadNoCancelButton = nil;
     self.clearButton = nil;
+    self.treatingHTTPErrorsAsFailuresLabel = nil;
+    self.treatingHTTPErrorsAsFailuresSwitch = nil;
     self.testHTTP404ErrorButton = nil;
 }
 
@@ -77,6 +79,10 @@
 @synthesize asynchronousLoadNoCancelButton = m_asynchronousLoadNoCancelButton;
 
 @synthesize clearButton = m_clearButton;
+
+@synthesize treatingHTTPErrorsAsFailuresLabel = m_treatingHTTPErrorsAsFailuresLabel;
+
+@synthesize treatingHTTPErrorsAsFailuresSwitch = m_treatingHTTPErrorsAsFailuresSwitch;
 
 @synthesize testHTTP404ErrorButton = m_testHTTP404ErrorButton;
 
@@ -134,6 +140,8 @@
     self.synchronousLoadButton.hidden = YES;
     self.cancelButton.hidden = NO;
     self.clearButton.hidden = YES;
+    self.treatingHTTPErrorsAsFailuresLabel.hidden = YES;
+    self.treatingHTTPErrorsAsFailuresSwitch.hidden = YES;
     self.testHTTP404ErrorButton.hidden = YES;
 }
 
@@ -144,6 +152,8 @@
     self.synchronousLoadButton.hidden = YES;
     self.cancelButton.hidden = YES;
     self.clearButton.hidden = YES;
+    self.treatingHTTPErrorsAsFailuresLabel.hidden = YES;
+    self.treatingHTTPErrorsAsFailuresSwitch.hidden = YES;
     self.testHTTP404ErrorButton.hidden = YES;
 }
 
@@ -154,6 +164,8 @@
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
     self.clearButton.hidden = NO;
+    self.treatingHTTPErrorsAsFailuresLabel.hidden = NO;
+    self.treatingHTTPErrorsAsFailuresSwitch.hidden = NO;
     self.testHTTP404ErrorButton.hidden = NO;
 }
 
@@ -171,7 +183,7 @@
             [connection cancel];
             
             UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"HTTP error", @"HTTP error") 
-                                                                 message:[[NSHTTPURLResponse localizedStringForStatusCode:statusCode] capitalizedString]
+                                                                 message:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]
                                                                 delegate:nil 
                                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
                                                        otherButtonTitles:nil] autorelease];
@@ -336,6 +348,7 @@
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                          timeoutInterval:10.];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.treatingHTTPErrorsAsFailures = self.treatingHTTPErrorsAsFailuresSwitch.on;
     connection.delegate = self;
     [connection start];
 }

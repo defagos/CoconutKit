@@ -124,6 +124,7 @@
 "This value cannot be negative"="This value cannot be negative";
 "Transition"="Transition";
 "Transparent"="Transparent";
+"Treat HTTP errors as failures"="Treat HTTP errors as failures";
 "Uppercase string in Localizable.strings"="Uppercase string in Localizable.strings";
 "Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)"="Use the Mac OS X Lion Network Link Conditioner preference pane with the iOS simulator to test various network conditions (especially bad ones)";
 "Views"="Views";

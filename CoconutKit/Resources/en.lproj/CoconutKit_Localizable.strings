@@ -27,6 +27,9 @@
 /* HLSWebViewController 'Mail Link' action */
 "Mail Link"="Mail Link";
 
+/* HTTP error: %@ */
+"HTTP error: %@"="HTTP error: %@";
+
 /* No Internet connection is available */
 "No Internet connection is available"="No Internet connection is available";
 

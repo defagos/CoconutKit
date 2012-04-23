@@ -9,6 +9,7 @@
 #import "HLSURLConnection.h"
 
 #import "HLSAssert.h"
+#import "HLSError.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSNotifications.h"
@@ -33,6 +34,10 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 - (BOOL)createDownloadFile;
 - (BOOL)deleteDownloadFile;
 
+// TODO: Can be removed when formal NSURLConnection delegate protocols are used
+// Informal protocol method called directly in the code. Needs to be declarated
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+
 @end
 
 @implementation HLSURLConnection
@@ -51,6 +56,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     if ((self = [super init])) {
         self.request = request;
         self.internalData = [[[NSMutableData alloc] init] autorelease];
+        self.treatingHTTPErrorsAsFailures = YES;
         
         [self resetDownloadStatusVariables];
     }
@@ -99,6 +105,18 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     
     [m_downloadFilePath release];
     m_downloadFilePath = [downloadFilePath retain];
+}
+
+@synthesize treatingHTTPErrorsAsFailures = m_treatingHTTPErrorsAsFailures;
+
+- (void)setTreatingHTTPErrorsAsFailures:(BOOL)treatingHTTPErrorsAsFailures
+{
+    if ([self isRunning]) {
+        HLSLoggerWarn(@"The treatingHTTPErrorsAsFailures setting cannot be changed while %@ is running", [self debugNameCapitalized:NO]);
+        return;
+    }
+    
+    m_treatingHTTPErrorsAsFailures = treatingHTTPErrorsAsFailures;
 }
 
 @synthesize userInfo = m_userInfo;
@@ -374,13 +392,33 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 {
     m_expectedLength = [response expectedContentLength];
     [self.internalData setLength:0];
+        
+    // Treat HTTP errors as failures. Credit for the original idea goes to Cédric Lüthi (https://github.com/0xced/CLURLConnection)
+    if (self.treatingHTTPErrorsAsFailures) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            NSInteger statusCode = [httpResponse statusCode];
+            if (statusCode >= 400) {
+                NSString *localizedDescription = [NSString stringWithFormat:NSLocalizedStringFromTable(@"HTTP error: %@", @"CoconutKit_Localizable", @"HTTP error: %@"),
+                                                  [NSHTTPURLResponse localizedStringForStatusCode:statusCode]];
+                HLSError *error = [HLSError errorWithDomain:HLSCoconutKitErrorDomain 
+                                                       code:statusCode 
+                                       localizedDescription:localizedDescription];
+                
+                // To avoid code duplication, calls NSURLConnection delegate method. The connection just needs to be
+                // cancelled first
+                NSAssert(connection == self.connection, @"Invalid connection");
+                [self.connection cancel];
+                [self connection:self.connection didFailWithError:error];
+                return;
+            }
+        }        
+    }
     
-    // Ensure that the delegate gets notified only once
-    if (self.status == HLSURLConnectionStatusStarting) {
-        self.status = HLSURLConnectionStatusStarted;
-        if ([self.delegate respondsToSelector:@selector(connection:didReceiveResponse:)]) {
-            [self.delegate connection:self didReceiveResponse:response];
-        }
+    self.status = HLSURLConnectionStatusStarted;
+    
+    if ([self.delegate respondsToSelector:@selector(connection:didReceiveResponse:)]) {
+        [self.delegate connection:self didReceiveResponse:response];
     }
 }
 
@@ -424,6 +462,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 {
     HLSLoggerDebug(@"%@ failed with error: %@", [self debugNameCapitalized:NO], error);
     
+    NSAssert(connection == self.connection, @"Invalid connection");
     self.connection = nil;
     
     // Cleanup
@@ -441,6 +480,7 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    NSAssert(connection == self.connection, @"Invalid connection");
     self.connection = nil;
     
     self.status = HLSURLConnectionStatusIdle;

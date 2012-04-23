@@ -39,6 +39,9 @@ extern const float HLSURLConnectionProgressUnavailable;
  *     but if often leads to connections running longer than expected if not cancelled when appropriate
  *   - the synchronous method call is not appropriate for large downloads
  *   - you have to carefully retain and release connection objects
+ *   - the network activity indicator must be managed manually
+ *   - HTTP connections: HTTP responses with status codes >= 400 are not treated as failures and must be
+ *     handled specifically
  *
  * HLSURLConnection is meant to solve the above issues without sacrificing the power of NSURLConnection, as many
  * networking library do (they usually work with NSURL objects and a fixed protocol, most likely HTTP, which
@@ -66,6 +69,9 @@ extern const float HLSURLConnectionProgressUnavailable;
  *     to process connection delegate events
  *   - connection objects can carry information around (identity, custom data) and provide information about their 
  *     progress
+ *   - the network activity indicator is managed automatically
+ *   - HTTP responses with status codes >= 400 are treated as failures by default. A boolean value allows the original
+ *     NSURLConnection to be used instead (e.g. if one really needs to access the HTTP body)
  *
  * HLSURLConnection is not thread-safe. You need to manage a connection from a single thread (on which you also
  * receive the associated delegate events), otherwise the behavior is undefined.
@@ -78,6 +84,7 @@ extern const float HLSURLConnectionProgressUnavailable;
     NSURLConnection *m_connection;
     NSString *m_tag;
     NSString *m_downloadFilePath;
+    BOOL m_treatingHTTPErrorsAsFailures;
     NSDictionary *m_userInfo;
     NSMutableData *m_internalData;
     HLSURLConnectionStatus m_status;
@@ -156,6 +163,23 @@ extern const float HLSURLConnectionProgressUnavailable;
  * The download file path cannot be changed when a connection is running
  */
 @property (nonatomic, retain) NSString *downloadFilePath;
+
+/**
+ * If this property is set to YES, HTTP requests receiving status codes >= 400 are treated as connection failures 
+ * (which means -connection:didFailWithError: will get called on the delegate, if any). The error received
+ * belongs to the HLSCoconutKitErrorDomain, has the status code as error code, and a localized description
+ * (returned by the system)
+ *
+ * If set to NO, responses with status codes >= 400 are not treated as connection failures (which means
+ * -connectionDidFinishLoading: will be called in the end if nothing bad happens while downloading data). Usually, 
+ * this is useful if you want to implement your own behavior when receiving a response with status code >= 400
+ * in -connection:didReceiveResponse: (e.g. you might decide to cancel the connection in such cases)
+ *
+ * This setting is ignored for non-HTTP requests, and cannot be changed when a connection is running
+ *
+ * Default value is YES
+ */
+@property (nonatomic, assign, getter=isTreatingHTTPErrorsAsFailures) BOOL treatingHTTPErrorsAsFailures;
 
 /**
  * A dictionary you can freely use to convey information about the connection
