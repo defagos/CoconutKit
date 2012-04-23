@@ -215,10 +215,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
         HLSLoggerError(@"Unable to open %@", [self debugNameCapitalized:NO]);
         return NO;
     }
-        
-    // Makes it possible to run connections without keeping any strong reference to them. The corresponding release will be
-    // made when the connection ends
-    [self retain];
     
     // Setup initial state
     [self resetDownloadStatusVariables];
@@ -252,9 +248,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     // Cleanup to restore a state as if the connection had never been started
     [self deleteDownloadFile];
     [self resetDownloadStatusVariables];
-    
-    // See -startWithRunLoopMode implementation
-    [self release];
 }
 
 - (BOOL)startSynchronous
@@ -421,8 +414,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     if ([self.delegate respondsToSelector:@selector(connection:didFailWithError:)]) {
         [self.delegate connection:self didFailWithError:error];
     }
-    
-    [self release];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -435,8 +426,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     if ([self.delegate respondsToSelector:@selector(connectionDidFinish:)]) {
         [self.delegate connectionDidFinish:self];
     }
-    
-    [self release];
 }
 
 #pragma mark Description
