@@ -8,6 +8,7 @@
 "Action sheet"="Action sheet";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
+"An HTTP error has been encountered"="An HTTP error has been encountered";
 "Animated"="Animated";
 "Animation"="Animation";
 "Apples & Coconut"="Apples & Coconut";
@@ -114,6 +115,7 @@
 "Task group"="Task group";
 "Tasks"="Tasks";
 "Terminate"="Terminate";
+"Test HTTP 404 error"="Test HTTP 404 error";
 "Test in modal"="Test in modal";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";

@@ -32,5 +32,6 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)loadSynchronously:(id)sender;
 - (IBAction)clear:(id)sender;
+- (IBAction)testHTTP404Error:(id)sender;
 
 @end

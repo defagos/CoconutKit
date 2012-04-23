@@ -123,6 +123,21 @@
 - (void)connection:(HLSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     HLSLoggerInfo(@"Connection did receive response");
+    
+    // Cancel HTTP connections with errors
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if ([httpResponse statusCode] >= 400) {
+            [connection cancel];
+            
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                                 message:NSLocalizedString(@"An HTTP error has been encountered", @"An HTTP error has been encountered") 
+                                                                delegate:nil 
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       otherButtonTitles:nil] autorelease];
+            [alertView show];
+        }
+    }
 }
 
 - (void)connectionDidReceiveData:(HLSURLConnection *)connection
@@ -286,6 +301,16 @@
 {
     self.coconuts = nil;
     [self reloadData];
+}
+
+- (IBAction)testHTTP404Error:(id)sender
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/404_not_found.html"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                         timeoutInterval:10.];
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.delegate = self;
+    [connection start];
 }
 
 @end
