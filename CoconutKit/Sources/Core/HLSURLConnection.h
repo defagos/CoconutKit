@@ -37,37 +37,36 @@ extern const float HLSURLConnectionProgressUnavailable;
  *   - the progress has to be calculated manually
  *   - an NSURLConnection object retains its delegate. This decision was probably made to avoid nasty
  *     crashes (a connection trying to call a delegate method on a delegate which has been deallocated), 
- *     but if often leads to connections running longer than expected (if not cancelled when appropriate). 
- *     Consider the example of a view controller creating an NSURLConnection of which it is the delegate. 
- *     The connection must usually be cancelled when the view controller gets removed from view (otherwise 
- *     the view controller will survive until the connection terminates, which is often not what you
- *     want). Having to cancel a connection manually in such cases is cumbersome.
+ *     but if often leads to connections running longer than expected if not cancelled when appropriate
  *   - the synchronous method call is not appropriate for large downloads
- *   - you have to carefully retain and release the connection objects
+ *   - you have to carefully retain and release connection objects
  *
  * HLSURLConnection is meant to solve the above issues without sacrificing the power of NSURLConnection, as many
  * networking library do (they usually work with NSURL objects and a fixed protocol, most likely HTTP, which
- * means you have to get back to the good old NSURLConnection when your protocol differs). An
- * HLSURLConnection object is namely initialized with an NSURLRequest object, which means you can customize
- * it as you need, depending on the protocol you use, the caching policy you require, etc.
+ * means you have to get back to the good old NSURLConnection when your protocol differs). An HLSURLConnection 
+ * object is namely initialized with an NSURLRequest object, which means you can customize it as you need, 
+ * depending on the protocol you use, the caching policy you require, etc.
  *
  * Here are some features of HLSURLConnection:
  *   - data can be saved in-memory (small files) or on disk (needed for large files which won't fit in memory)
- *   - to minimize the need of having to cancel a connection manually (which you can still do if you want),
- *     connections having a delegate are automatically cancelled when their delegate is deallocated (which makes
- *     sense because the only object which was interested by connection events does not exist anymore)
- *   - a connection does not have to be retained if you do not need to cancel it manually (in which case you still
- *     need to keep a reference to it somewhere). Simply create an autoreleased HLSURLConnection object and
- *     call a start method on it, the connection will retain itself during the time it is active. When the connection 
- *     ends it will release itself, leading to deallocation. If a delegate has been attached to the connection, and 
- *     if this delegate is deallocated before the connection ends, the connection will be cancelled, which will also
- *     lead to correct deallocation
+ *   - to minimize the need of having to cancel a connection manually, connections having a delegate are automatically 
+ *     cancelled when their delegate is deallocated (which makes sense because the only object which was interested by 
+ *     connection events does not exist anymore). This does not remove the need to cancel connections manually
+ *     in some cases, though (e.g. when the delegate is a view controller which disappears without being deallocated 
+ *     right afterwards)
+ *   - you do not need to keep a reference to a connection if you do not need to cancel it manually. Simply create 
+ *     an autoreleased HLSURLConnection object and call an asynchronous start method on it right aftwerwards. The 
+ *     connection object will survive during the time it is active. When the connection ends the connection
+ *     object will be deallocated automatically. If a delegate has been attached to the connection, and if this 
+ *     delegate gets deallocated before the connection ends, the connection will be cancelled, which also leads to
+ *     correct deallocation
  *   - a connection can be started asynchronously or (quasi-)synchronously. In both cases the same set of delegate 
  *     methods will be called, which means you do not have to rewrite your code if you sometimes discover the need to
- *     switch between these modes. This is why the synchronous mode is only quasi-synchronous in reality: The
- *     call to the start method blocks, but the thread is not blocked as it continues to process connection
- *     delegate events
- *   - connection objects can carry information around (identity, data) and provide information about their progress
+ *     switch between these synchronous and asynchronous behaviors. This is also why the synchronous mode is only 
+ *     quasi-synchronous in reality: The call to the start method blocks, but the thread is not blocked as it continues 
+ *     to process connection delegate events
+ *   - connection objects can carry information around (identity, custom data) and provide information about their 
+ *     progress
  *
  * HLSURLConnection is not thread-safe. You need to manage a connection from a single thread (on which you also
  * receive the associated delegate events), otherwise the behavior is undefined.
@@ -102,12 +101,13 @@ extern const float HLSURLConnectionProgressUnavailable;
  * Start the connection asynchronously. The method returns YES iff the connection could be started successfully.
  *
  * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
- * sense (the data cannot be retrieved anywhere, and the connection status remains unknown)
+ * sense (the data cannot be retrieved anywhere)
  *
  * The connection is scheduled in the current thread run loop with NSDefaultRunLoopMode set as run loop mode. This
- * is perfectly sufficient in most cases, but can be an issue when the run loop mode is changed and does not match 
- * the one of the connection anymore, preventing connection delegate events from being received until the run loop 
- * mode is switched back to its original value.
+ * is perfectly sufficient in most cases, but can be an issue when the run loop mode is changed (most probably
+ * by code which you cannot change, e.g. by system frameworks) and does not match the one of the connection anymore, 
+ * preventing connection delegate events from being received until the run loop mode is switched back to its original 
+ * value.
  *
  * When scrolling occurs, for example, the run loop mode is temporarily set to NSEventTrackingRunLoopMode,
  * inhibiting connection delegate events until scrolling ends. If this is an issue, you must use the 
@@ -119,7 +119,7 @@ extern const float HLSURLConnectionProgressUnavailable;
  * Start the connection asynchronously. The method returns YES iff the connection could be started successfully.
  *
  * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
- * sense (the data cannot go anywhere, and the connection status remains unknown)
+ * sense (the data cannot be retrieved anywhere)
  *
  * The connection is scheduled in the current thread run loop using the specified mode. In most cases you do
  * not have to care about run loop mode issues, and calling -start suffices. Refer to the -start documentation
@@ -140,7 +140,7 @@ extern const float HLSURLConnectionProgressUnavailable;
  * The method returns YES iff the connection could be started successfully.
  *
  * A connection which has no delegate and no download file path cannot be started. Such connections namely make no
- * sense (the data cannot go anywhere, and the connection status remains unknown)
+ * sense (the data cannot be retrieved anywhere)
  */
 - (BOOL)startSynchronous;
 
@@ -181,8 +181,8 @@ extern const float HLSURLConnectionProgressUnavailable;
 
 /**
  * The data which has been downloaded (can be partial if queried when the connection is still retrieving data).
- * Do not call this method if the data does not fit in memory (this can happen when you downloaded a large file
- * on disk by setting a download file path)
+ * Do not call this method if the data does not fit in memory (this can happen when you download a large file).
+ * In such cases, set a download file path and check the file instead
  */
 - (NSData *)data;
 
