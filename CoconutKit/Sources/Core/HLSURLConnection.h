@@ -165,15 +165,16 @@ extern const float HLSURLConnectionProgressUnavailable;
 @property (nonatomic, retain) NSString *downloadFilePath;
 
 /**
- * If this property is set to YES, HTTP requests receiving status codes >= 400 are treated as connection failures 
- * (which means -connection:didFailWithError: will get called on the delegate, if any). The error received
- * belongs to the HLSCoconutKitErrorDomain, has the status code as error code, and a localized description
- * (returned by the system)
+ * If treatingHTTPErrorsAsFailures is set to YES, HTTP requests receiving status codes >= 400 are treated as connection 
+ * failures (which means -connection:didFailWithError: will get called on the delegate, if any). The error received belongs 
+ * to the HLSCoconutKitErrorDomain, has the HTTP status code as error code, and a localized description. The delegate 
+ * method -connection:didReceiveResponse: will not be called.
  *
- * If set to NO, responses with status codes >= 400 are not treated as connection failures (which means
- * -connectionDidFinishLoading: will be called in the end if nothing bad happens while downloading data). Usually, 
- * this is useful if you want to implement your own behavior when receiving a response with status code >= 400
- * in -connection:didReceiveResponse: (e.g. you might decide to cancel the connection in such cases)
+ * If treatingHTTPErrorsAsFailures is set to NO, responses with status codes >= 400 are not treated as connection 
+ * failures (which means -connectionDidFinishLoading: will be called in the end if no error happens while 
+ * downloading data). Usually, this is useful if you want to implement your own behavior when receiving a response 
+ * with status code >= 400 in -connection:didReceiveResponse: (e.g. you might decide to cancel the connection in such 
+ * cases)
  *
  * This setting is ignored for non-HTTP requests, and cannot be changed when a connection is running
  *

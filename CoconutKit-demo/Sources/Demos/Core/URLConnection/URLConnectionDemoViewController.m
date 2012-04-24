@@ -175,7 +175,8 @@
 {
     HLSLoggerInfo(@"Connection did receive response");
     
-    // Cancel HTTP connections with errors
+    // Cancel HTTP connections with errors (only for connections with treatingHTTPErrorsAsFailures = NO, otherwise this method
+    // won't be called when an HTTP error status code is received)
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSInteger statusCode = [httpResponse statusCode];
