@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+// TODO: Add estimated size / downloaded size (in kB) and a formatted string (depending on the size, displays kB, MB, GB, etc.)
 // TODO: Add remaining time estimate
 // TODO: When CoconutKit is iOS 5 only, use the formal NSURLConnectionDownloadDelegate and NSURLConnectionDataDelegate protocols
 

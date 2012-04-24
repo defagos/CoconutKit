@@ -5,6 +5,7 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Hortis. All rights reserved.
  */
+"A connection failure occurred"="Une erreur de connexion est survenue";
 "Action sheet"="Menu action"; 
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
@@ -120,6 +121,8 @@
 "Text fields"="Champs textuels";
 "The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
 "The data could not be retrieved"="Les données n'ont pas pu être récupérées";
+"The data was transferred"="Les données ont été transférées";
+"The data could not be transferred"="Les données n'ont pas pu être transférées";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Transition"="Transition";
 "Transparent"="Transparent";

@@ -13,9 +13,12 @@
 
 @interface URLConnectionDemoViewController ()
 
-// We keep a reference to the asynchronous connection to be able to cancel it manually. A weak reference
-// suffices since HLSURLConnection objects retain themselves while running
+// We keep a reference to asynchronous connections we want to be able to cancel manually. A weak reference
+// suffices since HLSURLConnection objects survive while running
 @property (nonatomic, assign) HLSURLConnection *asynchronousConnection;
+@property (nonatomic, assign) HLSURLConnection *httpGetConnection;
+@property (nonatomic, assign) HLSURLConnection *httpPostConnection;
+
 @property (nonatomic, retain) NSArray *coconuts;
 
 - (void)disableUserInterfaceForAsynchronousConnection;
@@ -39,6 +42,8 @@
 - (void)dealloc
 {
     self.asynchronousConnection = nil;
+    self.httpGetConnection = nil;
+    self.httpPostConnection = nil;
     self.coconuts = nil;
     
     [super dealloc];
@@ -55,14 +60,19 @@
     self.synchronousLoadButton = nil;
     self.asynchronousLoadNoCancelButton = nil;
     self.clearButton = nil;
-    self.treatingHTTPErrorsAsFailuresLabel = nil;
+    self.httpGetProgressView = nil;
+    self.httpPostButton = nil;
+    self.httpPostProgressView = nil;
     self.treatingHTTPErrorsAsFailuresSwitch = nil;
-    self.testHTTP404ErrorButton = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize asynchronousConnection = m_asynchronousConnection;
+
+@synthesize httpGetConnection = m_httpGetConnection;
+
+@synthesize httpPostConnection = m_httpPostConnection;
 
 @synthesize coconuts = m_coconuts;
 
@@ -80,11 +90,15 @@
 
 @synthesize clearButton = m_clearButton;
 
-@synthesize treatingHTTPErrorsAsFailuresLabel = m_treatingHTTPErrorsAsFailuresLabel;
+@synthesize httpGetButton = m_httpGetButton;
+
+@synthesize httpGetProgressView = m_httpGetProgressView;
+
+@synthesize httpPostButton = m_httpPostButton;
+
+@synthesize httpPostProgressView = m_httpPostProgressView;
 
 @synthesize treatingHTTPErrorsAsFailuresSwitch = m_treatingHTTPErrorsAsFailuresSwitch;
-
-@synthesize testHTTP404ErrorButton = m_testHTTP404ErrorButton;
 
 #pragma mark View lifecycle
 
@@ -101,6 +115,9 @@
     self.nonCachedImagesTableView.rowHeight = [CoconutTableViewCell height];
     
     [self enableUserInterface];
+    
+    self.httpGetProgressView.hidden = YES;
+    self.httpPostProgressView.hidden = YES;
 }
 
 #pragma mark Orientation management
@@ -140,9 +157,6 @@
     self.synchronousLoadButton.hidden = YES;
     self.cancelButton.hidden = NO;
     self.clearButton.hidden = YES;
-    self.treatingHTTPErrorsAsFailuresLabel.hidden = YES;
-    self.treatingHTTPErrorsAsFailuresSwitch.hidden = YES;
-    self.testHTTP404ErrorButton.hidden = YES;
 }
 
 - (void)disableUserInterfaceForAsynchronousConnectionNoCancel
@@ -152,9 +166,6 @@
     self.synchronousLoadButton.hidden = YES;
     self.cancelButton.hidden = YES;
     self.clearButton.hidden = YES;
-    self.treatingHTTPErrorsAsFailuresLabel.hidden = YES;
-    self.treatingHTTPErrorsAsFailuresSwitch.hidden = YES;
-    self.testHTTP404ErrorButton.hidden = YES;
 }
 
 - (void)enableUserInterface
@@ -164,16 +175,13 @@
     self.synchronousLoadButton.hidden = NO;
     self.cancelButton.hidden = YES;
     self.clearButton.hidden = NO;
-    self.treatingHTTPErrorsAsFailuresLabel.hidden = NO;
-    self.treatingHTTPErrorsAsFailuresSwitch.hidden = NO;
-    self.testHTTP404ErrorButton.hidden = NO;
 }
 
 #pragma mark HLSURLConnectionDelegate protocol implementation
 
 - (void)connection:(HLSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    HLSLoggerInfo(@"Connection did receive response");
+    HLSLoggerInfo(@"Connection '%@' did receive response", connection.tag);
     
     // Cancel HTTP connections with errors (only for connections with treatingHTTPErrorsAsFailures = NO, otherwise this method
     // won't be called when an HTTP error status code is received)
@@ -190,48 +198,105 @@
                                                        otherButtonTitles:nil] autorelease];
             [alertView show];
         }
-    }
+    }    
 }
 
 - (void)connectionDidReceiveData:(HLSURLConnection *)connection
 {
-    HLSLoggerInfo(@"Connection did receive data (progress = %f)", connection.progress);
+    HLSLoggerInfo(@"Connection '%@' did receive data (progress = %f)", connection.tag, connection.progress);
+    
+    if ([connection.tag isEqualToString:@"httpGet"]) {
+        self.httpGetProgressView.progress = connection.progress;
+    }
+    else if ([connection.tag isEqualToString:@"httpPost"]) {
+        self.httpPostProgressView.progress = connection.progress;
+    }    
 }
 
 - (void)connectionDidFinishLoading:(HLSURLConnection *)connection
 {
-    HLSLoggerInfo(@"Connection did finish loading");
+    HLSLoggerInfo(@"Connection '%@' did finish loading", connection.tag);
     
-    [self enableUserInterface];
-    
-    NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
-    NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
-    
-    NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" 
-                                                                         ascending:YES 
-                                                                          selector:@selector(localizedCaseInsensitiveCompare:)];
-    self.coconuts = [coconuts sortedArrayUsingDescriptor:nameSortDescriptor]; 
-    
-    [self reloadData];
+    if ([connection.tag isEqualToString:@"asynchronousConnection"]
+            || [connection.tag isEqualToString:@"asynchronousConnectionNoCancel"]
+            || [connection.tag isEqualToString:@"synchronousConnection"]) {
+        [self enableUserInterface];
+        
+        NSDictionary *coconutsDictionary = [NSDictionary dictionaryWithContentsOfFile:connection.downloadFilePath];
+        NSArray *coconuts = [Coconut coconutsFromDictionary:coconutsDictionary];
+        
+        NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" 
+                                                                             ascending:YES 
+                                                                              selector:@selector(localizedCaseInsensitiveCompare:)];
+        self.coconuts = [coconuts sortedArrayUsingDescriptor:nameSortDescriptor]; 
+        
+        [self reloadData];
+    }
+    else if ([connection.tag isEqualToString:@"httpGet"] || [connection.tag isEqualToString:@"httpPost"]) {
+        if ([connection.tag isEqualToString:@"httpGet"]) {
+            self.httpGetButton.hidden = NO;
+            self.httpGetProgressView.hidden = YES;
+        }
+        else {
+            self.httpPostButton.hidden = NO;
+            self.httpPostProgressView.hidden = YES;
+        }
+        
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success")
+                                                             message:NSLocalizedString(@"The data was transferred", @"The data was transferred") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss") 
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
 - (void)connection:(HLSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    HLSLoggerInfo(@"Connection did fail with error: %@", error);
+    HLSLoggerInfo(@"Connection '%@' did fail with error: %@", connection.tag, error);
     
-    [self enableUserInterface];
+    if ([connection.tag isEqualToString:@"asynchronousConnection"]
+            || [connection.tag isEqualToString:@"asynchronousConnectionNoCancel"]
+            || [connection.tag isEqualToString:@"synchronousConnection"]) {
+        [self enableUserInterface];
         
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                         message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
-                                                        delegate:nil 
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                               otherButtonTitles:nil] autorelease];
-    [alertView show];
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The data could not be retrieved", @"The data could not be retrieved") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];   
+    }
+    else if ([connection.tag isEqualToString:@"httpGet"] || [connection.tag isEqualToString:@"httpPost"]) {
+        if ([connection.tag isEqualToString:@"httpGet"]) {
+            self.httpGetButton.hidden = NO;
+            self.httpGetProgressView.hidden = YES;
+        }
+        else {
+            self.httpPostButton.hidden = NO;
+            self.httpPostProgressView.hidden = YES;
+        }
+        
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The data could not be transferred", @"The data could not be transferred")
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss") 
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
+    else if ([connection.tag isEqualToString:@"http404"]) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error") 
+                                                             message:NSLocalizedString(@"A connection failure occurred", @"A connection failure occurred")
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
 - (void)connectionDidCancel:(HLSURLConnection *)connection
 {
-    HLSLoggerInfo(@"Connection did cancel");
+    HLSLoggerInfo(@"Connection '%@' did cancel", connection.tag);
     
     [self enableUserInterface];
 }
@@ -271,12 +336,12 @@
         if (tableView == self.nonCachedImagesTableView) {
             request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
                                        cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                   timeoutInterval:10.];
+                                   timeoutInterval:60.];
         }
         else {
             request = [NSURLRequest requestWithURL:[[NSURL URLWithString:@"http://localhost:8087"] URLByAppendingPathComponent:coconut.thumbnailImageName]
                                        cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                   timeoutInterval:10.];        
+                                   timeoutInterval:60.];        
         }
         [tableViewCell.thumbnailImageView loadWithImageRequest:request];
     }
@@ -295,10 +360,10 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                         timeoutInterval:10.];
+                                         timeoutInterval:60.];
     self.asynchronousConnection = [HLSURLConnection connectionWithRequest:request];
+    self.asynchronousConnection.tag = @"asynchronousConnection";
     self.asynchronousConnection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
-    
     self.asynchronousConnection.delegate = self;
     [self.asynchronousConnection start];
 }
@@ -309,12 +374,12 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                         timeoutInterval:10.];
+                                         timeoutInterval:60.];
     
     // Does not need to keep any reference to the connection object
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.tag = @"asynchronousConnectionNoCancel";
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
-    
     connection.delegate = self;
     [connection start];
 }
@@ -328,8 +393,9 @@
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/coconuts.plist"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                         timeoutInterval:10.];
+                                         timeoutInterval:60.];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.tag = @"synchronousConnection";
     connection.delegate = self;
     connection.downloadFilePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"coconuts.plist"];
     [connection startSynchronous];
@@ -341,14 +407,38 @@
     [self reloadData];
 }
 
+- (IBAction)testHTTPGet:(id)sender
+{
+    self.httpGetButton.hidden = YES;
+    self.httpGetProgressView.hidden = NO;
+    self.httpGetProgressView.progress = 0.f;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/large_coconut.jpg"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 
+                                         timeoutInterval:60.];
+    
+    HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.tag = @"httpGet";
+    connection.delegate = self;
+    [connection start];
+}
+
+- (IBAction)testHTTPPost:(id)sender
+{
+    self.httpPostButton.hidden = YES;
+    self.httpPostProgressView.hidden = NO;
+    self.httpPostProgressView.progress = 0.f;
+    
+    
+}
+
 - (IBAction)testHTTP404Error:(id)sender
 {
-    [self disableUserInterfaceForAsynchronousConnectionNoCancel];
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/404_not_found.html"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                         timeoutInterval:10.];
+                                         timeoutInterval:60.];
     HLSURLConnection *connection = [HLSURLConnection connectionWithRequest:request];
+    connection.tag = @"http404";
     connection.treatingHTTPErrorsAsFailures = self.treatingHTTPErrorsAsFailuresSwitch.on;
     connection.delegate = self;
     [connection start];

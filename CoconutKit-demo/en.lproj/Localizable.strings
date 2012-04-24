@@ -5,6 +5,7 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Hortis. All rights reserved.
  */
+"A connection failure occurred"="A connection failure occurred";
 "Action sheet"="Action sheet";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
@@ -121,6 +122,8 @@
 "Text fields"="Text fields";
 "The behavior above can be disabled"="The behavior above can be disabled";
 "The data could not be retrieved"="The data could not be retrieved";
+"The data could not be transferred"="The data could not be transferred";
+"The data was transferred"="The data was transferred";
 "This value cannot be negative"="This value cannot be negative";
 "Transition"="Transition";
 "Transparent"="Transparent";
