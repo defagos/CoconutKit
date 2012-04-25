@@ -193,7 +193,7 @@
         self.taskRemainingTimeLabel.hidden = NO;
         
         self.taskProgressView.progress = task.progress;
-        self.taskRemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.taskRemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1StopButton.hidden = NO;
@@ -202,7 +202,7 @@
         self.subTask1RemainingTimeLabel.hidden = NO;
         
         self.subTask1ProgressView.progress = task.progress;
-        self.subTask1RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask1RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2StopButton.hidden = NO;
@@ -211,7 +211,7 @@
         self.subTask2RemainingTimeLabel.hidden = NO;
         
         self.subTask2ProgressView.progress = task.progress;
-        self.subTask2RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask2RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3StopButton.hidden = NO;
@@ -220,7 +220,7 @@
         self.subTask3RemainingTimeLabel.hidden = NO;
         
         self.subTask3ProgressView.progress = task.progress;
-        self.subTask3RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask3RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
 }
 
@@ -228,19 +228,19 @@
 {
     if ([task.tag isEqualToString:@"T_task"]) {
         self.taskProgressView.progress = task.progress;
-        self.taskRemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.taskRemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1ProgressView.progress = task.progress;
-        self.subTask1RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask1RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2ProgressView.progress = task.progress;
-        self.subTask2RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask2RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3ProgressView.progress = task.progress;
-        self.subTask3RemainingTimeLabel.text = [task remainingTimeIntervalEstimateLocalizedString];
+        self.subTask3RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
     }    
 }
 
@@ -353,7 +353,7 @@
         self.taskGroupRemainingTimeLabel.hidden = NO;
         
         self.taskGroupProgressView.progress = taskGroup.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeIntervalEstimateLocalizedString];
+        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeEstimateLocalizedString];
     }
 }
 
@@ -361,7 +361,7 @@
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
         self.taskGroupProgressView.progress = taskGroup.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeIntervalEstimateLocalizedString];
+        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeEstimateLocalizedString];
     }
 }
 

@@ -32,7 +32,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
 @property (nonatomic, assign) float fullProgress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, assign) NSTimeInterval remainingTimeEstimate;
 @property (nonatomic, retain) NSDate *lastEstimateDate;
 
 - (void)updateStatus;
@@ -151,7 +151,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         // Calculate estimate based on velocity during previous step
         double fullProgressSinceLastEstimate = fullProgress - _lastEstimateFullProgress;
         if (! doubleeq(fullProgressSinceLastEstimate, 0.)) {
-            self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / fullProgressSinceLastEstimate) * (1 - fullProgress);
+            self.remainingTimeEstimate = (elapsedTimeIntervalSinceLastEstimate / fullProgressSinceLastEstimate) * (1 - fullProgress);
             
             // Get ready for next estimate
             _fullProgressStepsCounter = 0;
@@ -161,15 +161,15 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
+@synthesize remainingTimeEstimate = _remainingTimeEstimate;
 
-- (NSTimeInterval)remainingTimeIntervalEstimate
+- (NSTimeInterval)remainingTimeEstimate
 {
     if (! self.finished && ! self.cancelled) {
-        return _remainingTimeIntervalEstimate;
+        return _remainingTimeEstimate;
     }
     else {
-        return kTaskGroupNoTimeIntervalEstimateAvailable;
+        return HLSTaskRemainingTimeEstimateUnavailable;
     }
 }
 
@@ -181,13 +181,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     return _numberOfFailures;
 }
 
-- (NSString *)remainingTimeIntervalEstimateLocalizedString
+- (NSString *)remainingTimeEstimateLocalizedString
 {
-    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+    if (self.remainingTimeEstimate == HLSTaskRemainingTimeEstimateUnavailable) {
         return NSLocalizedStringFromTable(@"No remaining time estimate available", @"CoconutKit_Localizable", @"No remaining time estimate available");
     }
     
-    NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
+    NSTimeInterval timeInterval = self.remainingTimeEstimate;
     NSUInteger days = timeInterval / (24 * 60 * 60);
     timeInterval -= days * (24 * 60 * 60);
     NSUInteger hours = timeInterval / (60 * 60);
@@ -361,7 +361,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.cancelled = NO;
     self.progress = 0.f;
     self.fullProgress = 0.f;
-    self.remainingTimeIntervalEstimate = kTaskGroupNoTimeIntervalEstimateAvailable;
+    self.remainingTimeEstimate = HLSTaskRemainingTimeEstimateUnavailable;
     self.lastEstimateDate = nil;
     _numberOfFailures = 0;
 }

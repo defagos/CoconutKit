@@ -8,8 +8,6 @@
 
 #import "HLSTask.h"
 
-#define kTaskGroupNoTimeIntervalEstimateAvailable                     -1.
-
 // Forward declarations
 @protocol HLSTaskGroupDelegate;
 
@@ -41,7 +39,7 @@
     BOOL _cancelled;
     float _progress;                            // all individual progress values added
     float _fullProgress;                        // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
-    NSTimeInterval _remainingTimeIntervalEstimate;
+    NSTimeInterval _remainingTimeEstimate;
     NSDate *_lastEstimateDate;                  // date & time when the remaining time was previously estimated ...
     float _lastEstimateFullProgress;            // ... and corresponding progress value 
     NSUInteger _fullProgressStepsCounter;     
@@ -89,21 +87,22 @@
 @property (nonatomic, readonly, assign) float progress;
 
 /**
- * Return an estimate about the remaining time before the task group processing completes (or kTaskGroupNoTimeIntervalEstimateAvailable if no
- * estimate is available yet)
- * Important remark: Accurate measurements can only be obtained if the progress update rate of a task group is not varying fast (in another
- *                   words: constant over long enough periods of time). This is most likely to happen when all tasks are similar (i.e. the
- *                   underlying processing is similar) and roughly of the same size.
+ * Return an estimate about the remaining time before the task group processing completes (or 
+ * HLSTaskRemainingTimeEstimateUnavailable if no estimate is available yet)
+ * Important remark: Accurate measurements can only be obtained if the progress update rate of a task 
+ *                   group is not varying fast (in another words: constant over long enough periods of 
+ *                   time). This is most likely to happen when all tasks are similar (i.e. the underlying 
+ *                   processing is similar) and roughly of the same size.
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeEstimate;
 
 /**
  * Return a localized string describing the estimated time before completion
  * Not meant to be overridden
- * (see remark of remainingTimeIntervalEstimate method)
+ * (see remark of remainingTimeEstimate method)
  */
-- (NSString *)remainingTimeIntervalEstimateLocalizedString;
+- (NSString *)remainingTimeEstimateLocalizedString;
 
 /**
  * Return the current number of failed tasks
@@ -111,9 +110,10 @@
 - (NSUInteger)numberOfFailures;
 
 /**
- * Create dependencies between tasks of a task group (both tasks must have already been added to the task group. If task1 depends on task2, then 
- * task1 will only begin processing once task2 has been fully processed. Moreover, if the strong boolean is set to YES, task1 will be
- * cancelled before it starts if task2 failed or was cancelled ("strong dependency"). Otherwise task1 will be started after task2 ends, no
+ * Create dependencies between tasks of a task group (both tasks must have already been added to the task 
+ * group. If task1 depends on task2, then task1 will only begin processing once task2 has been fully processed. 
+ * Moreover, if the strong boolean is set to YES, task1 will be cancelled before it starts if task2 failed or 
+ * was cancelled ("strong dependency"). Otherwise task1 will be started after task2 ends, no
  * matter what happened with task2 ("weak dependency")
  */
 - (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2 strong:(BOOL)strong;
@@ -129,21 +129,24 @@
 - (void)taskGroupDidStart:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group is being processed and has an updated status (you can e.g. call progress to get its completion status)
+ * The task group is being processed and has an updated status (you can e.g. call progress to get its 
+ * completion status)
  */
 - (void)taskGroupDidProgress:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group has been fully processed. You can check the number of failures or loop over all tasks to get their status or errors 
+ * The task group has been fully processed. You can check the number of failures or loop over all tasks 
+ * to get their status or errors 
  * individually
  */
 - (void)taskGroupDidFinish:(HLSTaskGroup *)taskGroup;
 
 /**
- * The task group has been cancelled. Usually you wouldn't expect the need for delegate method to be called when a cancel request
- * occurs, because cancel operations usually executed on the spot. With tasks, however, the exact time at which a task operation 
- * ends after a cancel has been requested depends on the operation implementation itself. We thus cannot assume that an
- * operation has ended right after a cancel has been sent, thus the need for a dedicated delegate method
+ * The task group has been cancelled. Usually you wouldn't expect the need for delegate method to be 
+ * called when a cancel request occurs, because cancel operations usually executed on the spot. With tasks, 
+ * however, the exact time at which a task operation ends after a cancel has been requested depends on the 
+ * operation implementation itself. We thus cannot assume that an operation has ended right after a cancel 
+ * has been sent, thus the need for a dedicated delegate method
  */
 - (void)taskGroupDidCancel:(HLSTaskGroup *)taskGroup;
 

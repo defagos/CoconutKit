@@ -13,6 +13,7 @@
 #import "HLSTaskGroup.h"
 
 const NSUInteger kProgressStepsCounterThreshold = 50;
+const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 
 @interface HLSTask ()
 
@@ -20,7 +21,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, assign) NSTimeInterval remainingTimeEstimate;
 @property (nonatomic, retain) NSDate *lastEstimateDate;
 @property (nonatomic, retain) NSDictionary *returnInfo;
 @property (nonatomic, retain) NSError *error;
@@ -114,7 +115,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
         // Calculate estimate based on velocity during previous step (never 0 since this method returns if progress does not change)
         double progressSinceLastEstimate = progress - _lastEstimateProgress;
         if (! doubleeq(progressSinceLastEstimate, 0.)) {
-            self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / progressSinceLastEstimate) * (1 - progress);
+            self.remainingTimeEstimate = (elapsedTimeIntervalSinceLastEstimate / progressSinceLastEstimate) * (1 - progress);
             
             // Get ready for next estimate
             _progressStepsCounter = 0;
@@ -124,15 +125,15 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
+@synthesize remainingTimeEstimate = _remainingTimeEstimate;
 
-- (NSTimeInterval)remainingTimeIntervalEstimate
+- (NSTimeInterval)remainingTimeEstimate
 {
     if (! self.finished &&  ! self.cancelled) {
-        return _remainingTimeIntervalEstimate;
+        return _remainingTimeEstimate;
     }
     else {
-        return kTaskNoTimeIntervalEstimateAvailable;
+        return HLSTaskRemainingTimeEstimateUnavailable;
     }
 }
 
@@ -144,13 +145,13 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 @synthesize taskGroup = _taskGroup;
 
-- (NSString *)remainingTimeIntervalEstimateLocalizedString
+- (NSString *)remainingTimeEstimateLocalizedString
 {
-    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+    if (self.remainingTimeEstimate == HLSTaskRemainingTimeEstimateUnavailable) {
         return NSLocalizedStringFromTable(@"No remaining time estimate available", @"CoconutKit_Localizable", @"No remaining time estimate available");
     }    
     
-    NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
+    NSTimeInterval timeInterval = self.remainingTimeEstimate;
     NSUInteger days = timeInterval / (24 * 60 * 60);
     timeInterval -= days * (24 * 60 * 60);
     NSUInteger hours = timeInterval / (60 * 60);
@@ -180,7 +181,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     self.finished = NO;
     self.cancelled = NO;
     self.progress = 0.f;
-    self.remainingTimeIntervalEstimate = kTaskNoTimeIntervalEstimateAvailable;
+    self.remainingTimeEstimate = HLSTaskRemainingTimeEstimateUnavailable;
     self.lastEstimateDate = nil;
     self.returnInfo = nil;
     self.error = nil;

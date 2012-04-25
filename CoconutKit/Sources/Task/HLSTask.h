@@ -6,11 +6,14 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+/**
+ * Value returned when no remaining time estimate is available
+ */
+extern const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable;
+
 // Forward declarations
 @class HLSTaskGroup;
 @protocol HLSTaskDelegate;
-
-#define kTaskNoTimeIntervalEstimateAvailable        -1.
 
 /**
  * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status. To create your own
@@ -31,7 +34,7 @@
     BOOL _finished;
     BOOL _cancelled;
     float _progress;
-    NSTimeInterval _remainingTimeIntervalEstimate;
+    NSTimeInterval _remainingTimeEstimate;
     NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
     float _lastEstimateProgress;            // ... and corresponding progress value 
     NSUInteger _progressStepsCounter; 
@@ -82,21 +85,21 @@
 @property (nonatomic, readonly, assign) float progress;
 
 /**
- * Return an estimate about the remaining time before the task processing completes (or kTaskNoTimeIntervalEstimateAvailable if no
- * estimate is available yet)
- * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not varying fast (in another
- *                   words: constant over long enough periods of time). This is for example usually the case for download or
- *                   inflating / deflating tasks.
+ * Return an estimate about the remaining time before the task processing completes (or 
+ * HLSTaskRemainingTimeEstimateUnavailable if no estimate is available yet)
+ * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not 
+ *                   varying fast (in another words: constant over long enough periods of time). This is for 
+ *                   example usually the case for download or inflating / deflating tasks.
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeEstimate;
 
 /**
  * Return a localized string describing the estimated time before completion
- * (see remark of remainingTimeIntervalEstimate method)
+ * (see remark of remainingTimeEstimate method)
  * Not meant to be overridden
  */
-- (NSString *)remainingTimeIntervalEstimateLocalizedString;
+- (NSString *)remainingTimeEstimateLocalizedString;
 
 /**
  * NSDictionary which can freely be used to convey return information
@@ -121,20 +124,23 @@
 - (void)taskDidStart:(HLSTask *)task;
 
 /**
- * The task is being processed and has an updated status (you can call -progress to get its completion status)
+ * The task is being processed and has an updated status (you can call -progress to get its completion 
+ * status)
  */
 - (void)taskDidProgress:(HLSTask *)task;
 
 /**
- * The task has been fully processed. Check the error property to find if the processing was successful or not (and why)
+ * The task has been fully processed. Check the error property to find if the processing was successful or 
+ * not (and why)
  */
 - (void)taskDidFinish:(HLSTask *)task;
 
 /**
- * The task has been cancelled. Usually you wouldn't expect the need for delegate method to be called when a cancel request
- * occurs, because cancel operations are executed on the spot. With tasks, however, the exact time at which a task operation 
- * ends after a cancel has been requested depends on the operation implementation itself. We thus cannot assume that an
- * operation has ended right after a cancel has been sent, thus the need for a dedicated delegate method
+ * The task has been cancelled. Usually you wouldn't expect the need for delegate method to be called when 
+ * a cancel request occurs, because cancel operations are executed on the spot. With tasks, however, the 
+ * exact time at which a task operation  ends after a cancel has been requested depends on the operation 
+ * implementation itself. We thus cannot assume that an operation has ended right after a cancel has been 
+ * sent, thus the need for a dedicated delegate method
  */
 - (void)taskDidCancel:(HLSTask *)task;
 
