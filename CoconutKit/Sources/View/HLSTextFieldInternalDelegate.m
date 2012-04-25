@@ -9,7 +9,7 @@
 #import "HLSTextFieldInternalDelegate.h"
 
 #import "HLSAssert.h"
-#import "NSObject+HLSExtensions.h"
+#import "HLSRuntime.h"
 
 @interface HLSTextFieldInternalDelegate ()
 
@@ -28,7 +28,7 @@
     }
     
     // Ensure that our protocol implementation stays complete as UIKit evolves
-    NSAssert([self implementsProtocol:@protocol(UITextFieldDelegate)], @"Incomplete implementation");
+    NSAssert(hls_class_implementsProtocol(self, @protocol(UITextFieldDelegate)), @"Incomplete implementation");
 }
 
 #pragma mark Object creation and destruction

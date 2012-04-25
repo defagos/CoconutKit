@@ -19,9 +19,4 @@
  */
 - (NSString *)className;
 
-/**
- * Returns YES iff the object class implements all methods of a given protocol
- */
-- (BOOL)implementsProtocol:(Protocol *)protocol;
-
 @end

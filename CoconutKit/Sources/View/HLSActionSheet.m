@@ -10,7 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
-#import "NSObject+HLSExtensions.h"
+#import "HLSRuntime.h"
 
 // Only one action sheet can be opened and one dismissed at any time. More would be possible programmatically, but incorrect. These special cases are 
 // ignored for simplicity, they should never occur in practice
@@ -49,7 +49,7 @@ static HLSActionSheet *s_previousActionSheet = nil;                 // weak ref 
         return;
     }
     
-    NSAssert([self implementsProtocol:@protocol(UIActionSheetDelegate)], @"Incomplete implementation");
+    NSAssert(hls_class_implementsProtocol(self, @protocol(UIActionSheetDelegate)), @"Incomplete implementation");
 }
 
 #pragma mark Managing the current action sheet
