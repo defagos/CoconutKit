@@ -6,10 +6,7 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-/**
- * Value returned when no remaining time estimate is available
- */
-extern const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable;
+#import "HLSProgressTracker.h"
 
 // Forward declarations
 @class HLSTaskGroup;
@@ -33,11 +30,7 @@ extern const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable;
     BOOL _running;
     BOOL _finished;
     BOOL _cancelled;
-    float _progress;
-    NSTimeInterval _remainingTimeEstimate;
-    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
-    float _lastEstimateProgress;            // ... and corresponding progress value 
-    NSUInteger _progressStepsCounter; 
+    HLSProgressTracker *_progressTracker;
     NSDictionary *_returnInfo;
     NSError *_error;
     HLSTaskGroup *_taskGroup;               // parent task group if any, nil if none
@@ -69,7 +62,7 @@ extern const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable;
 
 /**
  * Return YES if the task processing is over (this can be because the operation has completed its task,
- * or after it has been cancelled)
+ * successfully or not, or after it has been cancelled)
  */
 @property (nonatomic, readonly, assign, getter=isFinished) BOOL finished;
 
@@ -79,27 +72,12 @@ extern const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable;
 @property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
 
 /**
- * Task progress value (always between 0.f and 1.f). A task might not reach 1.f if it fails
+ * Task progress tracker. The progress value always reaches 1.f when a task ends (whether it finishes successfully, 
+ * encounters an error, or is cancelled)
+ *
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) float progress;
-
-/**
- * Return an estimate about the remaining time before the task processing completes (or 
- * HLSTaskRemainingTimeEstimateUnavailable if no estimate is available yet)
- * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not 
- *                   varying fast (in another words: constant over long enough periods of time). This is for 
- *                   example usually the case for download or inflating / deflating tasks.
- * Not meant to be overridden
- */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeEstimate;
-
-/**
- * Return a localized string describing the estimated time before completion
- * (see remark of remainingTimeEstimate method)
- * Not meant to be overridden
- */
-- (NSString *)remainingTimeEstimateLocalizedString;
+@property (nonatomic, readonly, retain) HLSProgressTracker *progressTracker;
 
 /**
  * NSDictionary which can freely be used to convey return information

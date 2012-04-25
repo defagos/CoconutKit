@@ -192,8 +192,8 @@
         self.taskRemainingTimeEstimateLabel.hidden = NO;
         self.taskRemainingTimeLabel.hidden = NO;
         
-        self.taskProgressView.progress = task.progress;
-        self.taskRemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.taskProgressView.progress = task.progressTracker.progress;
+        self.taskRemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1StopButton.hidden = NO;
@@ -201,8 +201,8 @@
         self.subTask1RemainingTimeEstimateLabel.hidden = NO;
         self.subTask1RemainingTimeLabel.hidden = NO;
         
-        self.subTask1ProgressView.progress = task.progress;
-        self.subTask1RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask1ProgressView.progress = task.progressTracker.progress;
+        self.subTask1RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2StopButton.hidden = NO;
@@ -210,8 +210,8 @@
         self.subTask2RemainingTimeEstimateLabel.hidden = NO;
         self.subTask2RemainingTimeLabel.hidden = NO;
         
-        self.subTask2ProgressView.progress = task.progress;
-        self.subTask2RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask2ProgressView.progress = task.progressTracker.progress;
+        self.subTask2RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3StopButton.hidden = NO;
@@ -219,44 +219,34 @@
         self.subTask3RemainingTimeEstimateLabel.hidden = NO;
         self.subTask3RemainingTimeLabel.hidden = NO;
         
-        self.subTask3ProgressView.progress = task.progress;
-        self.subTask3RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask3ProgressView.progress = task.progressTracker.progress;
+        self.subTask3RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
 }
 
 - (void)taskDidProgress:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
-        self.taskProgressView.progress = task.progress;
-        self.taskRemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.taskProgressView.progress = task.progressTracker.progress;
+        self.taskRemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
-        self.subTask1ProgressView.progress = task.progress;
-        self.subTask1RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask1ProgressView.progress = task.progressTracker.progress;
+        self.subTask1RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
-        self.subTask2ProgressView.progress = task.progress;
-        self.subTask2RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask2ProgressView.progress = task.progressTracker.progress;
+        self.subTask2RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
-        self.subTask3ProgressView.progress = task.progress;
-        self.subTask3RemainingTimeLabel.text = [task remainingTimeEstimateLocalizedString];
+        self.subTask3ProgressView.progress = task.progressTracker.progress;
+        self.subTask3RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
     }    
 }
 
 - (void)taskDidFinish:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
-        // Failure?
-        if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
-                                                                delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil] autorelease];
-            [alertView show];
-            
-        }
         self.taskProgressView.hidden = YES;
         self.taskRemainingTimeEstimateLabel.hidden = YES;
         self.taskRemainingTimeLabel.hidden = YES;
@@ -264,48 +254,18 @@
         self.taskStopButton.hidden = YES;
     } 
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
-        // Failure?
-        if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
-                                                                delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil] autorelease];
-            [alertView show];
-            
-        }
         self.subTask1ProgressView.hidden = YES;
         self.subTask1RemainingTimeEstimateLabel.hidden = YES;
         self.subTask1RemainingTimeLabel.hidden = YES;
         self.subTask1StopButton.hidden = YES;
     } 
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
-        // Failure?
-        if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
-                                                                delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil] autorelease];
-            [alertView show];
-            
-        }
         self.subTask2ProgressView.hidden = YES;
         self.subTask2RemainingTimeEstimateLabel.hidden = YES;
         self.subTask2RemainingTimeLabel.hidden = YES;
         self.subTask2StopButton.hidden = YES;
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
-        // Failure?
-        if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
-                                                                delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
-                                                       otherButtonTitles:nil] autorelease];
-            [alertView show];
-            
-        }
         self.subTask3ProgressView.hidden = YES;
         self.subTask3RemainingTimeEstimateLabel.hidden = YES;
         self.subTask3RemainingTimeLabel.hidden = YES;
@@ -352,16 +312,16 @@
         self.taskGroupRemainingTimeEstimateLabel.hidden = NO;
         self.taskGroupRemainingTimeLabel.hidden = NO;
         
-        self.taskGroupProgressView.progress = taskGroup.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeEstimateLocalizedString];
+        self.taskGroupProgressView.progress = taskGroup.progressTracker.progress;
+        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTracker remainingTimeEstimateLocalizedString];
     }
 }
 
 - (void)taskGroupDidProgress:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
-        self.taskGroupProgressView.progress = taskGroup.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup remainingTimeEstimateLocalizedString];
+        self.taskGroupProgressView.progress = taskGroup.progressTracker.progress;
+        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTracker remainingTimeEstimateLocalizedString];
     }
 }
 
@@ -396,7 +356,7 @@
 {
     self.taskStartButton.hidden = YES;
     
-    SleepTask *sleepTask = [[[SleepTask alloc] initWithSecondsToSleep:10] autorelease];
+    SleepTask *sleepTask = [[[SleepTask alloc] initWithSecondsToSleep:130] autorelease];
     sleepTask.tag = @"T_task";
     [[HLSTaskManager defaultManager] registerDelegate:self forTask:sleepTask];
     [[HLSTaskManager defaultManager] submitTask:sleepTask];
@@ -413,16 +373,15 @@
 {
     self.taskGroupStartButton.hidden = YES;
     
-    SleepTask *sleepSubTask1 = [[[SleepTask alloc] initWithSecondsToSleep:5] autorelease];
+    SleepTask *sleepSubTask1 = [[[SleepTask alloc] initWithSecondsToSleep:10] autorelease];
     sleepSubTask1.tag = @"T_subTask1";
     [[HLSTaskManager defaultManager] registerDelegate:self forTask:sleepSubTask1];
     
-    SleepTask *sleepSubTask2 = [[[SleepTask alloc] initWithSecondsToSleep:10] autorelease];
+    SleepTask *sleepSubTask2 = [[[SleepTask alloc] initWithSecondsToSleep:480] autorelease];
     sleepSubTask2.tag = @"T_subTask2";
     [[HLSTaskManager defaultManager] registerDelegate:self forTask:sleepSubTask2];
     
-    // Tasks during more than 20 seconds fail (see SleepTaskOperation.m), allowing us to simulate... well... failures
-    SleepTask *sleepSubTask3 = [[[SleepTask alloc] initWithSecondsToSleep:25] autorelease];
+    SleepTask *sleepSubTask3 = [[[SleepTask alloc] initWithSecondsToSleep:60] autorelease];
     sleepSubTask3.tag = @"T_subTask3";
     [[HLSTaskManager defaultManager] registerDelegate:self forTask:sleepSubTask3];
     

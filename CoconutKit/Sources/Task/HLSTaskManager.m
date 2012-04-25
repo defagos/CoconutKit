@@ -249,7 +249,9 @@
             }
         }
         
+        // The progress is set to 1.f for tasks which have ended, no matter they have been successful or not
         task.finished = YES;
+        task.progressTracker.progress = 1.f;
         
         // Notify the task delegate
         id<HLSTaskDelegate> taskDelegate = [self delegateForTask:task];

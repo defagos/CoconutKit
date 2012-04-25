@@ -16,6 +16,7 @@ HLSNibView.h
 HLSNotifications.h
 HLSOrientationCloner.h
 HLSPlaceholderViewController.h
+HLSProgressTracker.h
 HLSReloadable.h
 HLSRuntime.h
 HLSSlideshow.h

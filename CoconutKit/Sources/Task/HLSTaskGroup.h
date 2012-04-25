@@ -6,6 +6,7 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+#import "HLSProgressTracker.h"
 #import "HLSTask.h"
 
 // Forward declarations
@@ -16,7 +17,7 @@
  * subclass HLSTask to implement your custom task logic, and use HLSTaskGroup for submitting many custom tasks
  * at once. This allows you to track not only the individual status of each task, but also the overall progress
  * of the task group. Moreover, dependencies between tasks can be set, which is impossible to achieve when
- * submitting single tasks.
+ * submitting individual tasks.
  *
  * A task group must not be submitted several times simultaneously (this leads to undefined behavior). A task 
  * group which was fully processed can be submitted again (and with another delegate if needed), but must not be 
@@ -37,12 +38,7 @@
     BOOL _running;
     BOOL _finished;
     BOOL _cancelled;
-    float _progress;                            // all individual progress values added
-    float _fullProgress;                        // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
-    NSTimeInterval _remainingTimeEstimate;
-    NSDate *_lastEstimateDate;                  // date & time when the remaining time was previously estimated ...
-    float _lastEstimateFullProgress;            // ... and corresponding progress value 
-    NSUInteger _fullProgressStepsCounter;     
+    HLSProgressTracker *_progressTracker;
     NSUInteger _numberOfFailures;
 }
 
@@ -82,27 +78,12 @@
 @property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
 
 /**
- * Overall progress value (between 0.f and 1.f). If some tasks fail this value may not reach 1.f
- */
-@property (nonatomic, readonly, assign) float progress;
-
-/**
- * Return an estimate about the remaining time before the task group processing completes (or 
- * HLSTaskRemainingTimeEstimateUnavailable if no estimate is available yet)
- * Important remark: Accurate measurements can only be obtained if the progress update rate of a task 
- *                   group is not varying fast (in another words: constant over long enough periods of 
- *                   time). This is most likely to happen when all tasks are similar (i.e. the underlying 
- *                   processing is similar) and roughly of the same size.
+ * Task progress tracker. The progress value always reaches 1.f when all tasks have ended (whether they finished 
+ * successfully, encountered an error, or have been cancelled)
+ *
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeEstimate;
-
-/**
- * Return a localized string describing the estimated time before completion
- * Not meant to be overridden
- * (see remark of remainingTimeEstimate method)
- */
-- (NSString *)remainingTimeEstimateLocalizedString;
+@property (nonatomic, readonly, retain) HLSProgressTracker *progressTracker;
 
 /**
  * Return the current number of failed tasks

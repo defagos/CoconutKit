@@ -8,6 +8,7 @@
 
 #import "HLSTaskGroup.h"
 
+#import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
@@ -30,10 +31,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;
-@property (nonatomic, assign) float fullProgress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;
+@property (nonatomic, retain) HLSProgressTracker *progressTracker;
 
 - (void)updateStatus;
 
@@ -51,7 +49,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @implementation HLSTaskGroup
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -76,11 +73,10 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.strongTaskDependencyMap = nil;
     self.taskToWeakDependentsMap = nil;
     self.taskToStrongDependentsMap = nil;
-    self.lastEstimateDate = nil;
+    self.progressTracker = nil;
     [super dealloc];
 }
 
-#pragma mark -
 #pragma mark Accessors and mutators
 
 @synthesize tag = _tag;
@@ -108,107 +104,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @synthesize cancelled = _cancelled;
 
-@synthesize progress = _progress;
-
-@synthesize fullProgress = _fullProgress;
-
-- (void)setFullProgress:(float)fullProgress
-{
-    // If the value has not changed, nothing to do
-    if (floateq(fullProgress, _fullProgress)) {
-        return;
-    }
-    
-    // Sanitize input
-    if (floatlt(fullProgress, 0.f) || floatgt(fullProgress, 1.f)) {
-        if (floatlt(fullProgress, 0.f)) {
-            _fullProgress = 0.f;
-        }
-        else {
-            _fullProgress = 1.f;
-        }
-        HLSLoggerWarn(@"Incorrect value %f for full progress value, must be between 0 and 1. Fixed", fullProgress);
-    }
-    else {
-        _fullProgress = fullProgress;
-    }    
-    
-    // Estimation is not made with each progress value change. If progress values are incremented fast, it is calculated
-    // after several changes. If progress value change is slow, we use a time difference criterium. This should provide
-    // accurate enough results
-    if (! _lastEstimateDate) {
-        _fullProgressStepsCounter = 0;
-        self.lastEstimateDate = [NSDate date];
-        _lastEstimateFullProgress = fullProgress;
-    }
-    else {
-        ++_fullProgressStepsCounter;
-    }
-    
-    // Should update estimate?
-    NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
-    if (_fullProgressStepsCounter > kFullProgressStepsCounterThreshold) {
-        // Calculate estimate based on velocity during previous step
-        double fullProgressSinceLastEstimate = fullProgress - _lastEstimateFullProgress;
-        if (! doubleeq(fullProgressSinceLastEstimate, 0.)) {
-            self.remainingTimeEstimate = (elapsedTimeIntervalSinceLastEstimate / fullProgressSinceLastEstimate) * (1 - fullProgress);
-            
-            // Get ready for next estimate
-            _fullProgressStepsCounter = 0;
-            self.lastEstimateDate = [NSDate date];
-            _lastEstimateFullProgress = fullProgress;
-        }
-    }
-}
-
-@synthesize remainingTimeEstimate = _remainingTimeEstimate;
-
-- (NSTimeInterval)remainingTimeEstimate
-{
-    if (! self.finished && ! self.cancelled) {
-        return _remainingTimeEstimate;
-    }
-    else {
-        return HLSTaskRemainingTimeEstimateUnavailable;
-    }
-}
-
-@synthesize lastEstimateDate = _lastEstimateDate;
-
+@synthesize progressTracker = _progressTracker;
 
 - (NSUInteger)numberOfFailures
 {
     return _numberOfFailures;
 }
 
-- (NSString *)remainingTimeEstimateLocalizedString
-{
-    if (self.remainingTimeEstimate == HLSTaskRemainingTimeEstimateUnavailable) {
-        return NSLocalizedStringFromTable(@"Unavailable", @"CoconutKit_Localizable", @"Unavailable");
-    }
-    
-    NSTimeInterval timeInterval = self.remainingTimeEstimate;
-    NSUInteger days = timeInterval / (24 * 60 * 60);
-    timeInterval -= days * (24 * 60 * 60);
-    NSUInteger hours = timeInterval / (60 * 60);
-    timeInterval -= hours * (60 * 60);
-    NSUInteger minutes = timeInterval / 60;
-    
-    if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dd %dh remaining", @"CoconutKit_Localizable", @"%dd %dh remaining"), days, hours];
-    }
-    else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dh %dm remaining", @"CoconutKit_Localizable", @"%dh %dm remaining"), hours, minutes];
-    }
-    else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%d min remaining", @"CoconutKit_Localizable", @"%d min remaining"), minutes];
-    }
-    else {
-        return NSLocalizedStringFromTable(@"< 1 min remaining", @"CoconutKit_Localizable", @"< 1 min remaining");
-    }
-}
-
-#pragma mark -
 #pragma mark Managing tasks
 
 - (void)addTask:(HLSTask *)task
@@ -222,38 +124,29 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     task.taskGroup = self;
 }
 
-#pragma mark -
 #pragma mark Recalculating the task group status
 
 - (void)updateStatus
 {
     // Calculate the overall progress and status
     float progress = 0.f;
-    float fullProgress = 0.f;
     BOOL finished = YES;
     for (HLSTask *task in self.taskSet) {
-        progress += task.progress;
-        
         // If at least one task is not finished, so is the task group
         if (! task.finished) {
             finished = NO;
         }
         
-        // Failed tasks increase the failure counter and count for 1 in fullProgress
+        // Count errors
         if (task.error) {
-            fullProgress += 1.f;
             ++_numberOfFailures;
         }
-        else {
-            fullProgress += task.progress;
-        }
+        
+        progress += task.progressTracker.progress;
     }
-    progress /= [self.taskSet count];
-    fullProgress /= [self.taskSet count];
     
     // Update the values stored internally
-    self.progress = progress;
-    self.fullProgress = fullProgress;
+    self.progressTracker.progress = progress / [self.taskSet count];
     self.finished = finished;
 }
 
@@ -351,7 +244,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     return [NSSet setWithSet:[self.taskToStrongDependentsMap objectForKey:taskKey]];    
 }
 
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset
@@ -359,11 +251,21 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.running = NO;
     self.finished = NO;
     self.cancelled = NO;
-    self.progress = 0.f;
-    self.fullProgress = 0.f;
-    self.remainingTimeEstimate = HLSTaskRemainingTimeEstimateUnavailable;
-    self.lastEstimateDate = nil;
+    self.progressTracker = [[[HLSProgressTracker alloc] init] autorelease];
     _numberOfFailures = 0;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; running: %@; finished: %@; cancelled: %@; progressTracker: %@>", 
+            [self class],
+            self,
+            HLSStringFromBool(self.running),
+            HLSStringFromBool(self.finished),
+            HLSStringFromBool(self.cancelled),
+            self.progressTracker];
 }
 
 @end

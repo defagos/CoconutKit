@@ -29,6 +29,7 @@
     #import "HLSNotifications.h"
     #import "HLSOrientationCloner.h"
     #import "HLSPlaceholderViewController.h"
+    #import "HLSProgressTracker.h"
     #import "HLSReloadable.h"
     #import "HLSSlideshow.h"
     #import "HLSStackController.h"

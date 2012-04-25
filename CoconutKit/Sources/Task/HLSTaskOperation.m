@@ -161,7 +161,7 @@
     if ([taskDelegate respondsToSelector:@selector(taskDidStart:)]) {
         [taskDelegate taskDidStart:self.task];
     }
-    self.task.progress = 0.f;
+    self.task.progressTracker.progress = 0.f;
     if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
         [taskDelegate taskDidProgress:self.task];
     }
@@ -179,7 +179,7 @@
 - (void)notifyRunningWithProgress:(NSNumber *)progress
 {
     // Update and notify about the task progress
-    self.task.progress = [progress floatValue];
+    self.task.progressTracker.progress = [progress floatValue];
     id<HLSTaskDelegate> taskDelegate = [self.taskManager delegateForTask:self.task];
     if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
         [taskDelegate taskDidProgress:self.task];
@@ -214,9 +214,10 @@
         }
     }
     
-    // Update the progress to 1.f on success, else do not alter current value (so that the progress value cannot go backwards)
+    // Update the progress to 1.f on success, but do not notify that the task has progressed if an error has been
+    // encountered or if the task has been cancelled
+    self.task.progressTracker.progress = 1.f;
     if (! self.task.error && ! [self isCancelled]) {
-        self.task.progress = 1.f;
         if ([taskDelegate respondsToSelector:@selector(taskDidProgress:)]) {
             [taskDelegate taskDidProgress:self.task];
         }

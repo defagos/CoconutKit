@@ -22,14 +22,6 @@
             return;
         }
         
-        // Simulate an error during the process (cannot wait more than 20 seconds, probably
-        // not so patient)
-        if (i >= 20 * 100) {
-            NSError *error = [NSError errorWithDomain:@"domain" code:1012 userInfo:nil];
-            [self attachError:error];
-            return;
-        }
-        
         [NSThread sleepForTimeInterval:0.01];
         [self updateProgressToValue:(double)i / ([sleepTask secondsToSleep] * 100)];
     }

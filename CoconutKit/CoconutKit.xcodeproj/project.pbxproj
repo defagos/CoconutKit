@@ -158,6 +158,8 @@
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
+		6FC85B051547E002004DD493 /* HLSProgressTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC85B031547E002004DD493 /* HLSProgressTracker.h */; };
+		6FC85B061547E002004DD493 /* HLSProgressTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B041547E002004DD493 /* HLSProgressTracker.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
 		6FCDA16C14DAE5EF00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */; };
 		6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */; };
@@ -340,6 +342,8 @@
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FC85B031547E002004DD493 /* HLSProgressTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProgressTracker.h; sourceTree = "<group>"; };
+		6FC85B041547E002004DD493 /* HLSProgressTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProgressTracker.m; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -489,6 +493,8 @@
 				6FADE52714BA0494007EE121 /* HLSReloadable.h */,
 				6FADE52814BA0494007EE121 /* HLSRuntime.h */,
 				6FADE52914BA0494007EE121 /* HLSRuntime.m */,
+				6F8278481534B84800C51E6C /* HLSURLConnection.h */,
+				6F8278491534B84800C51E6C /* HLSURLConnection.m */,
 				6FADE52A14BA0494007EE121 /* HLSUserInterfaceLock.h */,
 				6FADE52B14BA0494007EE121 /* HLSUserInterfaceLock.m */,
 				6FADE52C14BA0494007EE121 /* HLSValidable.h */,
@@ -514,6 +520,8 @@
 				6FADE53E14BA0494007EE121 /* NSDictionary+HLSExtensions.m */,
 				6FADE53F14BA0494007EE121 /* NSError+HLSExtensions.h */,
 				6FADE54014BA0494007EE121 /* NSError+HLSExtensions.m */,
+				6FC85B031547E002004DD493 /* HLSProgressTracker.h */,
+				6FC85B041547E002004DD493 /* HLSProgressTracker.m */,
 				6FADE54114BA0494007EE121 /* NSObject+HLSExtensions.h */,
 				6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */,
 				6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */,
@@ -526,8 +534,6 @@
 				6FADE54A14BA0494007EE121 /* UIControl+HLSExclusiveTouch.m */,
 				6FADE54B14BA0494007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE54C14BA0494007EE121 /* UIImage+HLSExtensions.m */,
-				6F8278481534B84800C51E6C /* HLSURLConnection.h */,
-				6F8278491534B84800C51E6C /* HLSURLConnection.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -753,6 +759,7 @@
 				6F82784A1534B84800C51E6C /* HLSURLConnection.h in Headers */,
 				6F17DE871535FC2000A5777C /* HLSApplicationInformation.h in Headers */,
 				6F17DE941536274800A5777C /* UIImageView+HLSURLConnection.h in Headers */,
+				6FC85B051547E002004DD493 /* HLSProgressTracker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,6 +897,7 @@
 				6F82784B1534B84800C51E6C /* HLSURLConnection.m in Sources */,
 				6F17DE881535FC2000A5777C /* HLSApplicationInformation.m in Sources */,
 				6F17DE951536274800A5777C /* UIImageView+HLSURLConnection.m in Sources */,
+				6FC85B061547E002004DD493 /* HLSProgressTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

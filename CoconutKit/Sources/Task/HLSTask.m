@@ -8,21 +8,17 @@
 
 #import "HLSTask.h"
 
+#import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTaskGroup.h"
-
-const NSUInteger kProgressStepsCounterThreshold = 50;
-const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 
 @interface HLSTask ()
 
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;
+@property (nonatomic, retain) HLSProgressTracker *progressTracker;
 @property (nonatomic, retain) NSDictionary *returnInfo;
 @property (nonatomic, retain) NSError *error;
 @property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
@@ -33,7 +29,6 @@ const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 
 @implementation HLSTask
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -48,14 +43,13 @@ const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 {
     self.tag = nil;
     self.userInfo = nil;
-    self.lastEstimateDate = nil;
+    self.progressTracker = nil;
     self.returnInfo = nil;
     self.error = nil;
     self.taskGroup = nil;
     [super dealloc];
 }
 
-#pragma mark -
 #pragma mark Accessors and mutators
 
 - (Class)operationClass
@@ -74,70 +68,7 @@ const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 
 @synthesize cancelled = _cancelled;
 
-@synthesize progress = _progress;
-
-- (void)setProgress:(float)progress
-{
-    // If the value has not changed, nothing to do
-    if (floateq(progress, _progress)) {
-        return;
-    }
-    
-    // Sanitize input
-    if (floatlt(progress, 0.f) || floatgt(progress, 1.f)) {
-        if (floatlt(progress, 0.f)) {
-            _progress = 0.f;
-        }
-        else {
-            _progress = 1.f;
-        }
-        HLSLoggerWarn(@"Incorrect value %f for progress value, must be between 0 and 1. Fixed", progress);
-    }
-    else {
-        _progress = progress;
-    }
-    
-    // Estimation is not made with each progress value change. If progress values are incremented fast, it is calculated
-    // after several changes. If progress value change is slow, we use a time difference criterium. This should provide
-    // accurate enough results
-    if (! _lastEstimateDate) {
-        _progressStepsCounter = 0;
-        self.lastEstimateDate = [NSDate date];
-        _lastEstimateProgress = progress;
-    }
-    else {
-        ++_progressStepsCounter;
-    }
-    
-    // Should update estimate?
-    NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
-    if (_progressStepsCounter > kProgressStepsCounterThreshold) {
-        // Calculate estimate based on velocity during previous step (never 0 since this method returns if progress does not change)
-        double progressSinceLastEstimate = progress - _lastEstimateProgress;
-        if (! doubleeq(progressSinceLastEstimate, 0.)) {
-            self.remainingTimeEstimate = (elapsedTimeIntervalSinceLastEstimate / progressSinceLastEstimate) * (1 - progress);
-            
-            // Get ready for next estimate
-            _progressStepsCounter = 0;
-            self.lastEstimateDate = [NSDate date];
-            _lastEstimateProgress = progress;
-        }
-    }
-}
-
-@synthesize remainingTimeEstimate = _remainingTimeEstimate;
-
-- (NSTimeInterval)remainingTimeEstimate
-{
-    if (! self.finished &&  ! self.cancelled) {
-        return _remainingTimeEstimate;
-    }
-    else {
-        return HLSTaskRemainingTimeEstimateUnavailable;
-    }
-}
-
-@synthesize lastEstimateDate = _lastEstimateDate;
+@synthesize progressTracker = _progressTracker;
 
 @synthesize returnInfo = _returnInfo;
 
@@ -145,34 +76,6 @@ const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
 
 @synthesize taskGroup = _taskGroup;
 
-- (NSString *)remainingTimeEstimateLocalizedString
-{
-    if (self.remainingTimeEstimate == HLSTaskRemainingTimeEstimateUnavailable) {
-        return NSLocalizedStringFromTable(@"Unavailable", @"CoconutKit_Localizable", @"Unavailable");
-    }    
-    
-    NSTimeInterval timeInterval = self.remainingTimeEstimate;
-    NSUInteger days = timeInterval / (24 * 60 * 60);
-    timeInterval -= days * (24 * 60 * 60);
-    NSUInteger hours = timeInterval / (60 * 60);
-    timeInterval -= hours * (60 * 60);
-    NSUInteger minutes = timeInterval / 60;
-    
-    if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dd %dh remaining", @"CoconutKit_Localizable", @"%dd %dh remaining"), days, hours];
-    }
-    else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dh %dm remaining", @"CoconutKit_Localizable", @"%dh %dm remaining"), hours, minutes];
-    }
-    else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%d min remaining", @"CoconutKit_Localizable", @"%d min remaining"), minutes];
-    }
-    else {
-        return NSLocalizedStringFromTable(@"< 1 min remaining", @"CoconutKit_Localizable", @"< 1 min remaining");
-    }
-}
-
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset
@@ -180,11 +83,23 @@ const NSTimeInterval HLSTaskRemainingTimeEstimateUnavailable = -1.f;
     self.running = NO;
     self.finished = NO;
     self.cancelled = NO;
-    self.progress = 0.f;
-    self.remainingTimeEstimate = HLSTaskRemainingTimeEstimateUnavailable;
-    self.lastEstimateDate = nil;
+    self.progressTracker = [[[HLSProgressTracker alloc] init] autorelease];
     self.returnInfo = nil;
     self.error = nil;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; running: %@; finished: %@; cancelled: %@; progressTracker: %@; error: %@>", 
+            [self class],
+            self,
+            HLSStringFromBool(self.running),
+            HLSStringFromBool(self.finished),
+            HLSStringFromBool(self.cancelled),
+            self.progressTracker,
+            self.error];
 }
 
 @end
