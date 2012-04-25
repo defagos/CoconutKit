@@ -15,9 +15,6 @@
  */
 @interface UIBarButtonItem (HLSActionSheet)
 
-- (SEL)swizzledAction;
-- (id)swizzledTarget;
-
 - (void)dismissCurrentActionSheetAndForward:(id)sender;
 
 @end

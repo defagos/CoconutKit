@@ -11,9 +11,9 @@
 /**
  * Return the scroll view embedded into the web view
  *
- * Starting with iOS 5 you should use the scrollView property which has been made available
+ * This property is available starting with iOS 5 (in which case its implementation will be used)
  */
-- (UIScrollView *)webScrollView;
+@property (nonatomic, readonly, retain) UIScrollView *scrollView;
 
 /**
  * Make the web view background transparent
@@ -25,11 +25,5 @@
  * Default value is NO
  */
 @property (nonatomic, assign, getter=isShadowHidden) BOOL shadowHidden;
-
-/**
- * If set to NO, disable scrolling in both directions
- * Default value is YES
- */
-@property (nonatomic, assign, getter=isScrollEnabled) BOOL scrollEnabled;
 
 @end

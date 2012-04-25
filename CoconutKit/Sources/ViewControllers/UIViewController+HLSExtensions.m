@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
+#import "UITextView+HLSExtensions.h"
 
 HLSLinkCategory(UIViewController_HLSExtensions)
 
@@ -30,18 +31,19 @@ static void (*s_UIViewController__viewWillDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 
+// Swizzled method implementations
+static id swizzled_UIViewController__initWithNibName_bundle_Imp(UIViewController *self, SEL _cmd, NSString *nibName, NSBundle *bundle);
+static id swizzled_UIViewController__initWithCoder_Imp(UIViewController *self, SEL _cmd, NSCoder *aDecoder);
+static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd);
+static void swizzled_UIViewController__viewWillAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewDidAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
+
 @interface UIViewController (HLSExtensionsPrivate)
 
 - (void)uiViewControllerHLSExtensionsInit;
-
-- (id)swizzledInitWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle;
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
-- (void)swizzledViewDidLoad;
-- (void)swizzledViewWillAppear:(BOOL)animated;
-- (void)swizzledViewDidAppear:(BOOL)animated;
-- (void)swizzledViewWillDisappear:(BOOL)animated;
-- (void)swizzledViewDidDisappear:(BOOL)animated;
-- (void)swizzledViewDidUnload;
 
 - (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 - (void)setOriginalViewSize:(CGSize)originalViewSize;
@@ -153,16 +155,28 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 {
     s_UIViewController__initWithNibName_bundle_Imp = (id (*)(id, SEL, id, id))HLSSwizzleSelector(self, 
                                                                                                  @selector(initWithNibName:bundle:), 
-                                                                                                 @selector(swizzledInitWithNibName:bundle:));
+                                                                                                 (IMP)swizzled_UIViewController__initWithNibName_bundle_Imp);
     s_UIViewController__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                     @selector(initWithCoder:), 
-                                                                                    @selector(swizzledInitWithCoder:));
-    s_UIViewController__viewDidLoad_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(viewDidLoad), @selector(swizzledViewDidLoad));
-    s_UIViewController__viewWillAppear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, @selector(viewWillAppear:), @selector(swizzledViewWillAppear:));
-    s_UIViewController__viewDidAppear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, @selector(viewDidAppear:), @selector(swizzledViewDidAppear:));
-    s_UIViewController__viewWillDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, @selector(viewWillDisappear:), @selector(swizzledViewWillDisappear:));
-    s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, @selector(viewDidDisappear:), @selector(swizzledViewDidDisappear:));
-    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(viewDidUnload), @selector(swizzledViewDidUnload));
+                                                                                    (IMP)swizzled_UIViewController__initWithCoder_Imp);
+    s_UIViewController__viewDidLoad_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
+                                                                                @selector(viewDidLoad), 
+                                                                                (IMP)swizzled_UIViewController__viewDidLoad_Imp);
+    s_UIViewController__viewWillAppear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
+                                                                                         @selector(viewWillAppear:), 
+                                                                                         (IMP)swizzled_UIViewController__viewWillAppear_Imp);
+    s_UIViewController__viewDidAppear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
+                                                                                        @selector(viewDidAppear:), 
+                                                                                        (IMP)swizzled_UIViewController__viewDidAppear_Imp);
+    s_UIViewController__viewWillDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
+                                                                                            @selector(viewWillDisappear:), 
+                                                                                            (IMP)swizzled_UIViewController__viewWillDisappear_Imp);
+    s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
+                                                                                           @selector(viewDidDisappear:),
+                                                                                           (IMP)swizzled_UIViewController__viewDidDisappear_Imp);
+    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
+                                                                                  @selector(viewDidUnload), 
+                                                                                  (IMP)swizzled_UIViewController__viewDidUnload_Imp);
 }
 
 #pragma mark Object creation and destruction
@@ -185,102 +199,115 @@ static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
     objc_setAssociatedObject(self, s_originalViewSizeKey, [NSValue valueWithCGSize:originalViewSize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-#pragma mark Swizzled methods
+@end
 
-- (id)swizzledInitWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
-{
-    if ((self = (*s_UIViewController__initWithNibName_bundle_Imp)(self, @selector(initWithNibName:bundle:), nibName, bundle))) {
-        [self uiViewControllerHLSExtensionsInit];
-    }
-    return self;    
-}
+#pragma mark Swizzled method implementations
 
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder
+static id swizzled_UIViewController__initWithNibName_bundle_Imp(UIViewController *self, SEL _cmd, NSString *nibName, NSBundle *bundle)
 {
-    if ((self = (*s_UIViewController__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
+    if ((self = (*s_UIViewController__initWithNibName_bundle_Imp)(self, _cmd, nibName, bundle))) {
         [self uiViewControllerHLSExtensionsInit];
     }
     return self;
 }
 
-- (void)swizzledViewDidLoad
+static id swizzled_UIViewController__initWithCoder_Imp(UIViewController *self, SEL _cmd, NSCoder *aDecoder)
 {
-    (*s_UIViewController__viewDidLoad_Imp)(self, @selector(viewDidLoad));
+    if ((self = (*s_UIViewController__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+        [self uiViewControllerHLSExtensionsInit];
+    }
+    return self;
+}
+
+static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd)
+{
+    (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
-        HLSLoggerDebug(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setOriginalViewSize:self.view.bounds.size];
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad];
 }
 
-- (void)swizzledViewWillAppear:(BOOL)animated
+static void swizzled_UIViewController__viewWillAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_UIViewController__viewWillAppear_Imp)(self, @selector(viewWillAppear:), animated);
+    (*s_UIViewController__viewWillAppear_Imp)(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
-        HLSLoggerDebug(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewWillAppear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear];
 }
 
-- (void)swizzledViewDidAppear:(BOOL)animated
+static void swizzled_UIViewController__viewDidAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_UIViewController__viewDidAppear_Imp)(self, @selector(viewDidAppear:), animated);
+    (*s_UIViewController__viewDidAppear_Imp)(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        HLSLoggerDebug(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidAppear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
-    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];
+    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear];    
 }
 
-- (void)swizzledViewWillDisappear:(BOOL)animated
+static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_UIViewController__viewWillDisappear_Imp)(self, @selector(viewWillDisappear:), animated);
+    (*s_UIViewController__viewWillDisappear_Imp)(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
-        HLSLoggerDebug(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
-    [[UITextField currentTextField] resignFirstResponder];
+    
+    // Automatic keyboard dismissal when the view disappears. We test that the view has been loaded to account for the possibility 
+    // that the view lifecycle has been incorrectly implemented
+    if ([self isViewLoaded]) {
+        UITextField *currentTextField = [UITextField currentTextField];
+        if ([currentTextField isDescendantOfView:self.view]) {
+            [currentTextField resignFirstResponder];                
+        }
+        
+        UITextView *currentTextView = [UITextView currentTextView];
+        if ([currentTextView isDescendantOfView:self.view]) {
+            [currentTextView resignFirstResponder];                
+        }
+    }
 }
 
-- (void)swizzledViewDidDisappear:(BOOL)animated
+static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_UIViewController__viewDidDisappear_Imp)(self, @selector(viewDidDisappear:), animated);
+    (*s_UIViewController__viewDidDisappear_Imp)(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        HLSLoggerDebug(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidDisappear:] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
 }
 
-- (void)swizzledViewDidUnload
+static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd)
 {
-    (s_UIViewController__viewDidUnload_Imp)(self, @selector(viewDidUnload));
+    (s_UIViewController__viewDidUnload_Imp)(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload]) {
-        HLSLoggerDebug(@"The viewDidUnload method has been called on %@, but its current view lifecycle state is not compatible. "
-                       "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
-                       "or maybe [super viewDidUnload] has not been called by class %@ or one of its parents", self, [self class]);
+        HLSLoggerWarn(@"The viewDidUnload method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewDidUnload] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
 }
-
-@end

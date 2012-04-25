@@ -47,7 +47,7 @@
     NSString *htmlText = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:NULL];
     [self.webView loadHTMLString:htmlText baseURL:[[NSBundle mainBundle] bundleURL]];
     
-    self.scrollEnabledSwitch.on = self.webView.scrollEnabled;
+    self.scrollEnabledSwitch.on = self.webView.scrollView.scrollEnabled;
 }
 
 #pragma mark Orientation management
@@ -74,7 +74,7 @@
 
 - (IBAction)toggleScrollEnabled:(id)sender
 {
-    self.webView.scrollEnabled = self.scrollEnabledSwitch.on;
+    self.webView.scrollView.scrollEnabled = self.scrollEnabledSwitch.on;
 }
 
 @end

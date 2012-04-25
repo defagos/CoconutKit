@@ -20,18 +20,9 @@ static BOOL m_injected = NO;
 static id (*s_UIControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
 
-#pragma mark -
-#pragma mark UIControl (HLSExclusiveTouchPrivate) interface
-
-@interface UIButton (HLSExclusiveTouchPrivate)
-
-- (id)swizzledInitWithFrame:(CGRect)frame;
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder;
-
-@end
-
-#pragma mark -
-#pragma mark UIControl (HLSExclusiveTouch) implementation
+// Swizzled method implementations
+static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRect frame);
+static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCoder *aDecoder);
 
 @implementation UIControl (HLSExclusiveTouch)
 
@@ -45,37 +36,32 @@ static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
     }
     
     // Swizzle the original implementations (keep a hand on them)
-    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector([self class], @selector(initWithFrame:), @selector(swizzledInitWithFrame:));
-    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector([self class], @selector(initWithCoder:), @selector(swizzledInitWithCoder:));
+    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector(self, 
+                                                                                 @selector(initWithFrame:), 
+                                                                                 (IMP)swizzled_UIControl__initWithFrame_Imp);
+    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, 
+                                                                             @selector(initWithCoder:), 
+                                                                             (IMP)swizzled_UIControl__initWithCoder_Imp);
     
     m_injected = YES;
 }
 
 @end
 
-#pragma mark -
-#pragma mark UIControl (HLSExclusiveTouchPrivate) implementation
+#pragma mark Swizzled method implementations
 
-@implementation UIControl (HLSExclusiveTouchPrivate)
-
-#pragma mark Methods injected by swizzling
-
-- (id)swizzledInitWithFrame:(CGRect)frame
-{   
-    // Call the original implementation
-    if ((self = (*s_UIControl__initWithFrame_Imp)(self, @selector(initWithFrame:), frame))) {
-        self.exclusiveTouch = YES;
-    }
-    return self;
-}
-
-- (id)swizzledInitWithCoder:(NSCoder *)aDecoder
+static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRect frame)
 {
-    // Call the original implementation
-    if ((self = (*s_UIControl__initWithCoder_Imp)(self, @selector(initWithCoder:), aDecoder))) {
+    if ((self = (*s_UIControl__initWithFrame_Imp)(self, _cmd, frame))) {
         self.exclusiveTouch = YES;
     }
     return self;
 }
 
-@end
+static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCoder *aDecoder)
+{
+    if ((self = (*s_UIControl__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+        self.exclusiveTouch = YES;
+    }
+    return self;
+}

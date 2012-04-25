@@ -10,6 +10,7 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
+"Apples & Coconut"="Pommes & noix de coco";
 "Birthdate"="Date de naissance";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
@@ -24,6 +25,7 @@
 "City"="Ville";
 "Click for missing translation"="Cliquer pour traduction manquante";
 "Close"="Fermer";
+"Coconuts"="Noix de coco";
 "Container customization"="Personnalisation conteneur";
 "Core"="Core";
 "Country"="Pays";
@@ -47,10 +49,10 @@
 "Heavy view (cached)"="Vue lourde (mise en cache)";
 "Hide with modal"="Masquer avec modale";
 "Houston, we've got a problem"="Houston, nous avons un problème";
+"Image set"="Images";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Index"="Index";
 "Invalid email address"="Adresse e-mail invalide";
-"Ken Burns effect"="Effet Ken Burns";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
 "Last name"="Nom";
@@ -76,6 +78,7 @@
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Push"="Push";
+"Random"="Aléatoire";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
 "Remove"="Retirer";
@@ -88,6 +91,7 @@
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Skinning"="Skinning";
+"Slideshow"="Slideshow";
 "Start"="Démarrer";
 "State"="Etat";
 "Stop"="Arrêter";
@@ -100,6 +104,7 @@
 "Task"="Tâche";
 "Task group"="Tâche groupée";
 "Tasks"="Tâches";
+"Terminate"="Terminer";
 "Test in modal"="Test dans modale";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text fields"="Champs textuels";

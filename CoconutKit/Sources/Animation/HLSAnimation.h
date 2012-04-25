@@ -11,6 +11,7 @@
 
 // Forward declarations
 @class HLSAnimationStep;
+@class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
 /**
@@ -18,12 +19,9 @@
  * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
  * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
  *
- * Be careful not to have an object dying earlier than the animation it is the delegate of, otherwise your code
- * will crash when the animation tries to notify the dead delegate about its status. You have several options here:
- *   - cancel the animation first
- *   - unregister the delegate, and let the animation run until the end
- *   - lock the UI during the animation (lockingUI animation property). This prevents the user from doing something
- *     which could lead to the delegate destruction (e.g. navigating away if the delegate is a view controller)
+ * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
+ * an HLSAnimation is automatically cancelled if it has a delegate and the delegate is deallocated. This eliminates
+ * the need to cancel the animation manually when the delegate is destroyed.
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
@@ -36,11 +34,11 @@
  * part of an animation which was played animated).
  *
  * If the resizeViews property is set to YES, an animation alters the frames of the involved views. If this property 
- * is set to NO, the animation only alters the view transforms, which means the views will be applied a zoom level.
- * View resizing is currently quite experimental and is therefore disabled by default.
+ * is set to NO, the animation only alters the view transforms, which means the views will be stretched. View resizing 
+ * is currently quite experimental and is therefore disabled by default.
  *
  * When resizeViews is set to YES, only translation and scale transforms can be applied since the frame is involved.
- * Other transforms will be ignored, and a warning message will be logged in such cases
+ * Other transforms will be ignored, and a warning message will be logged
  *
  * Designated initializer: initWithAnimationSteps:
  */
@@ -51,13 +49,15 @@
     HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
+    UIView *m_dummyView;
     BOOL m_resizeViews;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
     BOOL m_animated;
     BOOL m_running;
     BOOL m_cancelling;
-    id<HLSAnimationDelegate> m_delegate;
+    BOOL m_terminating;
+    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 
 /**
@@ -116,6 +116,10 @@
  */
 @property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
+/**
+ * The animation delegate. Note that the animation is automatically cancelled if the delegate is deallocated while
+ * the animation is runnning
+ */
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
 /**
@@ -131,8 +135,25 @@
 - (void)cancel;
 
 /**
- * Generate the reverse animation; all attributes are copied as is, except the tag which gets an additional
- * "reverse_" prefix, and the userInfo. You might of course change these attributes if needed
+ * Terminate the animation. The animation immediately reaches its end state. The delegate still receives all
+ * subsequent events, but with animated = NO
+ */
+- (void)terminate;
+
+/**
+ * Return YES iff the animation is being cancelled
+ */
+@property (nonatomic, readonly, assign, getter=isCancelling) BOOL cancelling;
+
+/**
+ * Return YES iff the animation is being terminated
+ */
+@property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
+
+/**
+ * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
+ * the animation steps get and additional "reverse_" prefix (if a tag is not filled, the reverse tag is nil). 
+ Moreover, the userInfo is not copied
  */
 - (HLSAnimation *)reverseAnimation;
 

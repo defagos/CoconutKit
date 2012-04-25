@@ -285,12 +285,9 @@ static UIScrollView *s_scrollView = nil;
         return;
     }
     
-    // Get the keyboard frame (should be available); the text field might be covered by it
+    // Get the keyboard frame (should be available, unless the keyboard is floating); the text field might be covered by it
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
     if (! keyboardInformation) {
-        // Not available (e.g. if becomeFirstResponder is sent in a viewDidLoad: programmatically when starting the app). We cannot move the
-        // text field automatically, sorry
-        HLSLoggerWarn(@"Keyboard information not available. Did you call becomeFirstResponder too early?");
         return;
     }
     

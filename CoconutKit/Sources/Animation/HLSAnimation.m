@@ -13,6 +13,8 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
+#import "HLSZeroingWeakRef.h"
+#import "NSString+HLSExtensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -21,7 +23,11 @@
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 @property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
+@property (nonatomic, retain) UIView *dummyView;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
+@property (nonatomic, assign, getter=isTerminating) BOOL terminating;
+@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
@@ -66,6 +72,14 @@
         else {
             self.animationSteps = animationSteps;
         }
+        
+        // This dummy view fixes an issue encountered with animation blocks: If no view is altered
+        // during an animation block, the block duration is reduced to 0. To prevent this, we create
+        // and animate a dummy invisible view in each animation step, so that the duration is never
+        // reduced to 0
+        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        
         self.resizeViews = NO;
     }
     return self;
@@ -84,7 +98,9 @@
     self.currentAnimationStep = nil;
     self.tag = nil;
     self.userInfo = nil;
-    self.delegate = nil;
+    [self.dummyView removeFromSuperview];
+    self.dummyView = nil;
+    self.delegateZeroingWeakRef = nil;
     [super dealloc];
 }
 
@@ -102,38 +118,58 @@
 
 @synthesize resizeViews = m_resizeViews;
 
+@synthesize dummyView = m_dummyView;
+
 @synthesize lockingUI = m_lockingUI;
 
 @synthesize bringToFront = m_bringToFront;
 
 @synthesize running = m_running;
 
-@synthesize delegate = m_delegate;
+@synthesize cancelling = m_cancelling;
+
+@synthesize terminating = m_terminating;
+
+@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
+
+@dynamic delegate;
+
+- (id<HLSAnimationDelegate>)delegate
+{
+    return self.delegateZeroingWeakRef.object;
+}
+
+- (void)setDelegate:(id<HLSAnimationDelegate>)delegate
+{
+    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
+    [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
+}
 
 #pragma mark Animation
 
 - (void)playAnimated:(BOOL)animated
 {
-    // Cannot be played if already running (equivalently, we can test we are iterating over steps)
-    if (self.animationStepsEnumerator) {
+    // Cannot be played if already running
+    if (self.running) {
         HLSLoggerDebug(@"The animation is already running");
         return;
     }
+    
+    self.running = YES;
+    self.cancelling = NO;
+    self.terminating = NO;
+    
+    m_animated = animated;
     
     // Lock the UI during the animation
     if (self.lockingUI) {
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
-    
-    m_animated = animated;
-    
+        
     if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-        [self.delegate animationWillStart:self animated:m_animated];
+        [self.delegate animationWillStart:self animated:animated];
     }
-    
-    self.running = YES;
-    m_cancelling = NO;
-    
+        
     // Begin with the first step
     [self playNextStepAnimated:animated];
 }
@@ -153,6 +189,9 @@
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];        
     }
+    
+    // Animate the dummy view
+    self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
     // Animate all views in the animation step
     for (UIView *view in [animationStep views]) {
@@ -178,7 +217,7 @@
             view.alpha = alpha;
         }
         
-        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system of
+        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system
         // centered on the view.
         
         // Alter frame
@@ -199,7 +238,7 @@
             CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, affineTransform), 
                                                                       CGAffineTransformInvert(translation));
             
-            // TODO: This does not resize subviews correctly. Maybe that is not possible?
+            // TODO: This does not resize subviews correctly in all cases. Maybe that is not possible?
             view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
         }
         // Alter transform
@@ -219,11 +258,12 @@
     }
     // Instantaneous
     else {
-        // Notify the end of the animation
-        if (! m_cancelling) {
+        // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
+        // played with animated = YES are still notified as animated)
+        if (! self.cancelling) {
             if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:animationStep animated:m_animated];
-            }            
+                [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+            }
         }
         
         [self playNextStepAnimated:animated];
@@ -253,10 +293,19 @@
         
         self.running = NO;
         
-        if (! m_cancelling) {
+        if (! self.cancelling) {
             if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
-                [self.delegate animationDidStop:self animated:m_animated];
+                [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
             }            
+        }
+        
+        // If the animation has been cancelled and was not played animated, update
+        // its status. If the animation was played animated, the end animation callback 
+        // will still be called for the interrupted animation step, and we must update
+        // the animation status there (it would be too early here)
+        if (animated) {
+            self.cancelling = NO;
+            self.terminating = NO;            
         }
     }    
 }
@@ -268,12 +317,12 @@
         return;
     }
     
-    if (m_cancelling) {
-        HLSLoggerInfo(@"The animation is already being cancelled");
+    if (self.cancelling || self.terminating) {
+        HLSLoggerInfo(@"The animation is already being cancelled or terminated");
         return;
     }
     
-    m_cancelling = YES;
+    self.cancelling = YES;
     
     // Cancel all animations
     for (UIView *view in [self.currentAnimationStep views]) {
@@ -284,13 +333,45 @@
     [self playNextStepAnimated:NO];
 }
 
+- (void)terminate
+{
+    if (! self.running) {
+        HLSLoggerInfo(@"The animation is not running, nothing to terminate");
+        return;
+    }
+    
+    if (self.cancelling || self.terminating) {
+        HLSLoggerInfo(@"The animation is already being cancelled or terminated");
+        return;
+    }
+    
+    self.terminating = YES;
+    
+    if (self.currentAnimationStep) {
+        // Cancel all animations
+        for (UIView *view in [self.currentAnimationStep views]) {
+            [view.layer removeAllAnimations];
+        }
+        
+        // The animation callback will be called, but to get delegate events in the proper order we cannot
+        // notify that the animation step has ended there. We must do it right now, and not anymore
+        // in -animationStepDidStop:finished:context:
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            [self.delegate animationStepFinished:self.currentAnimationStep animated:NO];
+        }
+    }
+        
+    // Play all remaining steps without animation
+    [self playNextStepAnimated:NO];
+}
+
 #pragma mark Creating the reverse animation
 
 - (HLSAnimation *)reverseAnimation
 {
     NSArray *reverseAnimationSteps = [self reverseAnimationSteps];
     HLSAnimation *reverseAnimation = [HLSAnimation animationWithAnimationSteps:reverseAnimationSteps];
-    reverseAnimation.tag = [NSString stringWithFormat:@"reverse_%@", self.tag];
+    reverseAnimation.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimation.resizeViews = self.resizeViews;
     reverseAnimation.lockingUI = self.lockingUI;
     reverseAnimation.bringToFront = self.bringToFront;
@@ -317,6 +398,7 @@
         }
         
         // Animation step properties
+        reverseAnimationStep.tag = [animationStep.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", animationStep.tag] : nil;
         reverseAnimationStep.duration = animationStep.duration;
         switch (animationStep.curve) {
             case UIViewAnimationCurveEaseIn:
@@ -344,15 +426,19 @@
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    if (m_cancelling) {
+    if (self.cancelling) {
+        self.cancelling = NO;
         return;
     }
     
-    if (! m_cancelling) {
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-            [self.delegate animationStepFinished:animationStep animated:m_animated];
-        }        
+    if (self.terminating) {
+        self.terminating = NO;
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        [self.delegate animationStepFinished:animationStep animated:m_animated];
     }
     
     [self playNextStepAnimated:m_animated];

@@ -10,15 +10,16 @@
 
 #import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
+#import "LabelDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
-#import "KenBurnsSlideshowDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "SingleViewAnimationDemoViewController.h"
 #import "SkinningDemoViewController.h"
+#import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
@@ -69,8 +70,9 @@ typedef enum {
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexTextFields,
     ViewDemoIndexCursor,
+    ViewDemoIndexLabel,
     ViewDemoIndexActionSheet,
-    ViewDemoIndexKenBurns,
+    ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
@@ -288,14 +290,19 @@ typedef enum {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
                     break;
                 }
-                    
+                
+                case ViewDemoIndexLabel: {
+                    cell.textLabel.text = NSLocalizedString(@"Label", @"Label");
+                    break;
+                }
+                
                 case ViewDemoIndexActionSheet: {
                     cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
                     break;
                 }
                     
-                case ViewDemoIndexKenBurns: {
-                    cell.textLabel.text = NSLocalizedString(@"Ken Burns effect", @"Ken Burns effect");
+                case ViewDemoIndexSlideshow: {
+                    cell.textLabel.text = NSLocalizedString(@"Slideshow", @"Slideshow");
                     break;
                 }
                     
@@ -438,6 +445,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexLabel: {
+                    demoViewController = [[[LabelDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
                 case ViewDemoIndexActionSheet: {
                     ActionSheetDemoViewController *actionSheetDemoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
                     UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
@@ -446,8 +458,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexKenBurns: {
-                    demoViewController = [[[KenBurnsSlideshowDemoViewController alloc] init] autorelease];
+                case ViewDemoIndexSlideshow: {
+                    demoViewController = [[[SlideshowDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

@@ -1,6 +1,6 @@
 HLSAssert.m
 HLSCursor.m
-HLSKenBurnsSlideshow.m
+HLSSlideshow.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m
@@ -28,6 +28,7 @@ UINavigationController+HLSActionSheet.m
 UIScrollView+HLSExtensions.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
+UITextView+HLSExtensions.m
 UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
 UIViewController+HLSExtensions.m
