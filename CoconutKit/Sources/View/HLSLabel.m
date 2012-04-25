@@ -72,9 +72,13 @@
 	return self;
 }
 
-- (void)awakeFromNib
+- (id)initWithCoder:(NSCoder *)decoder
 {
-    self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
+	if ((self = [super initWithCoder:decoder]))
+	{
+		self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
+	}
+	return self;
 }
 
 - (void)setVerticalAlignment:(HLSLabelVerticalAlignment)verticalAlignment
