@@ -142,7 +142,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
             ++_numberOfFailures;
         }
         
-        progress += task.progressTracker.progress;
+        progress += task.progressTrackerInfo.progress;
     }
     
     // Update the values stored internally

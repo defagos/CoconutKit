@@ -77,7 +77,7 @@
  *
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) HLSProgressTracker *progressTracker;
+- (HLSProgressTrackerInfo *)progressTrackerInfo;
 
 /**
  * NSDictionary which can freely be used to convey return information

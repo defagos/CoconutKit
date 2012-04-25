@@ -192,8 +192,10 @@
         self.taskRemainingTimeEstimateLabel.hidden = NO;
         self.taskRemainingTimeLabel.hidden = NO;
         
-        self.taskProgressView.progress = task.progressTracker.progress;
-        self.taskRemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        NSLog(@"%@", [task.progressTrackerInfo description]);
+        
+        self.taskProgressView.progress = task.progressTrackerInfo.progress;
+        self.taskRemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         self.subTask1StopButton.hidden = NO;
@@ -201,8 +203,8 @@
         self.subTask1RemainingTimeEstimateLabel.hidden = NO;
         self.subTask1RemainingTimeLabel.hidden = NO;
         
-        self.subTask1ProgressView.progress = task.progressTracker.progress;
-        self.subTask1RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask1ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask1RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         self.subTask2StopButton.hidden = NO;
@@ -210,8 +212,8 @@
         self.subTask2RemainingTimeEstimateLabel.hidden = NO;
         self.subTask2RemainingTimeLabel.hidden = NO;
         
-        self.subTask2ProgressView.progress = task.progressTracker.progress;
-        self.subTask2RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask2ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask2RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         self.subTask3StopButton.hidden = NO;
@@ -219,28 +221,28 @@
         self.subTask3RemainingTimeEstimateLabel.hidden = NO;
         self.subTask3RemainingTimeLabel.hidden = NO;
         
-        self.subTask3ProgressView.progress = task.progressTracker.progress;
-        self.subTask3RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask3ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask3RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
 }
 
 - (void)taskDidProgress:(HLSTask *)task
 {
     if ([task.tag isEqualToString:@"T_task"]) {
-        self.taskProgressView.progress = task.progressTracker.progress;
-        self.taskRemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.taskProgressView.progress = task.progressTrackerInfo.progress;
+        self.taskRemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
-        self.subTask1ProgressView.progress = task.progressTracker.progress;
-        self.subTask1RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask1ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask1RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
-        self.subTask2ProgressView.progress = task.progressTracker.progress;
-        self.subTask2RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask2ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask2RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
-        self.subTask3ProgressView.progress = task.progressTracker.progress;
-        self.subTask3RemainingTimeLabel.text = [task.progressTracker remainingTimeEstimateLocalizedString];
+        self.subTask3ProgressView.progress = task.progressTrackerInfo.progress;
+        self.subTask3RemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }    
 }
 

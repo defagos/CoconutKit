@@ -33,7 +33,7 @@
 
 /**
  * Initialize a weak reference to an Objective-C object (throws an exception if object is a toll-free
- * bridged object)
+ * bridged object). The object is not retained
  */
 - (id)initWithObject:(id)object;
 

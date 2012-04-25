@@ -30,6 +30,7 @@
     #import "HLSOrientationCloner.h"
     #import "HLSPlaceholderViewController.h"
     #import "HLSProgressTracker.h"
+    #import "HLSProtocolProxy.h"
     #import "HLSReloadable.h"
     #import "HLSSlideshow.h"
     #import "HLSStackController.h"

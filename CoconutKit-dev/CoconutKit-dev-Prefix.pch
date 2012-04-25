@@ -28,6 +28,7 @@
     #import "HLSOrientationCloner.h"
     #import "HLSPlaceholderViewController.h"
     #import "HLSProgressTracker.h"
+    #import "HLSProtocolProxy.h"
     #import "HLSReloadable.h"
     #import "HLSStackController.h"
     #import "HLSSubtitleTableViewCell.h"

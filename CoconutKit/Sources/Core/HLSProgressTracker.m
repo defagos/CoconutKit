@@ -22,6 +22,10 @@ const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable = -1.;
 
 @end
 
+@implementation HLSProgressTrackerInfo
+
+@end
+
 @implementation HLSProgressTracker
 
 #pragma mark Object creation and destruction

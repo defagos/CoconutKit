@@ -15,6 +15,8 @@
  */
 @interface HLSTask (Friend)
 
+@property (nonatomic, retain) HLSProgressTracker *progressTracker;
+
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 
 @property (nonatomic, assign, getter=isFinished) BOOL finished;

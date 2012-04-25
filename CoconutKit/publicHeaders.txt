@@ -17,6 +17,7 @@ HLSNotifications.h
 HLSOrientationCloner.h
 HLSPlaceholderViewController.h
 HLSProgressTracker.h
+HLSProtocolProxy.h
 HLSReloadable.h
 HLSRuntime.h
 HLSSlideshow.h

@@ -196,6 +196,7 @@
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC85B091547E7A5004DD493 /* HLSProgressTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B081547E7A5004DD493 /* HLSProgressTracker.m */; };
+		6FC85B5815483481004DD493 /* HLSProtocolProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B5715483481004DD493 /* HLSProtocolProxy.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
@@ -538,6 +539,8 @@
 		6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC85B071547E7A5004DD493 /* HLSProgressTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProgressTracker.h; sourceTree = "<group>"; };
 		6FC85B081547E7A5004DD493 /* HLSProgressTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProgressTracker.m; sourceTree = "<group>"; };
+		6FC85B5615483481004DD493 /* HLSProtocolProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProtocolProxy.h; sourceTree = "<group>"; };
+		6FC85B5715483481004DD493 /* HLSProtocolProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProtocolProxy.m; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDDEC141529777500CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -765,6 +768,8 @@
 				6FADE64114BA04A6007EE121 /* HLSOrientationCloner.h */,
 				6FC85B071547E7A5004DD493 /* HLSProgressTracker.h */,
 				6FC85B081547E7A5004DD493 /* HLSProgressTracker.m */,
+				6FC85B5615483481004DD493 /* HLSProtocolProxy.h */,
+				6FC85B5715483481004DD493 /* HLSProtocolProxy.m */,
 				6FADE64214BA04A6007EE121 /* HLSReloadable.h */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
 				6FADE64414BA04A6007EE121 /* HLSRuntime.m */,
@@ -1779,6 +1784,7 @@
 				6F17DE981536275A00A5777C /* UIImageView+HLSURLConnection.m in Sources */,
 				6F17DE9E15369E3A00A5777C /* CoconutTableViewCell.m in Sources */,
 				6FC85B091547E7A5004DD493 /* HLSProgressTracker.m in Sources */,
+				6FC85B5815483481004DD493 /* HLSProtocolProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

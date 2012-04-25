@@ -11,6 +11,7 @@
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSProtocolProxy.h"
 #import "HLSTaskGroup.h"
 
 @interface HLSTask ()
@@ -69,6 +70,11 @@
 @synthesize cancelled = _cancelled;
 
 @synthesize progressTracker = _progressTracker;
+
+- (HLSProgressTrackerInfo *)progressTrackerInfo
+{
+    return [HLSProgressTrackerInfo proxyWithTarget:self.progressTracker];
+}
 
 @synthesize returnInfo = _returnInfo;
 
