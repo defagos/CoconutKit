@@ -517,17 +517,6 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     }
 }
 
-// Provide an estimate for the progress of an HTTP POST upload (not an exact measurement of upload progress, because the connection may 
-// fail or the connection may encounter an authentication challenge)
-- (void)connection:(NSURLConnection *)connection
-   didSendBodyData:(NSInteger)bytesWritten
- totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
-{
-    m_expectedLength = totalBytesExpectedToWrite;
-    m_currentLength += bytesWritten;
-}
-
 #pragma mark Description
 
 - (NSString *)description

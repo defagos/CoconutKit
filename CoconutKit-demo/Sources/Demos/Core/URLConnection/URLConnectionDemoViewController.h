@@ -9,8 +9,6 @@
 @interface URLConnectionDemoViewController : HLSViewController <HLSReloadable, HLSURLConnectionDelegate, UITableViewDataSource, UITableViewDelegate> {
 @private
     HLSURLConnection *m_asynchronousConnection;
-    HLSURLConnection *m_httpGetConnection;
-    HLSURLConnection *m_httpPostConnection;
     NSArray *m_coconuts;
     UITableView *m_cachedImagesTableView;
     UITableView *m_nonCachedImagesTableView;
@@ -21,8 +19,6 @@
     UIButton *m_clearButton;
     UIButton *m_httpGetButton;
     UIProgressView *m_httpGetProgressView;
-    UIButton *m_httpPostButton;
-    UIProgressView *m_httpPostProgressView;
     UISwitch *m_treatingHTTPErrorsAsFailuresSwitch;
 }
 
@@ -35,8 +31,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *clearButton;
 @property (nonatomic, retain) IBOutlet UIButton *httpGetButton;
 @property (nonatomic, retain) IBOutlet UIProgressView *httpGetProgressView;
-@property (nonatomic, retain) IBOutlet UIButton *httpPostButton;
-@property (nonatomic, retain) IBOutlet UIProgressView *httpPostProgressView;
 @property (nonatomic, retain) IBOutlet UISwitch *treatingHTTPErrorsAsFailuresSwitch;
 
 - (IBAction)loadAsynchronously:(id)sender;
@@ -45,7 +39,6 @@
 - (IBAction)loadSynchronously:(id)sender;
 - (IBAction)clear:(id)sender;
 - (IBAction)testHTTPGet:(id)sender;
-- (IBAction)testHTTPPost:(id)sender;
 - (IBAction)testHTTP404Error:(id)sender;
 
 @end

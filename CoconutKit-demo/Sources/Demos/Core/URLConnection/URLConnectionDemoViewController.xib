@@ -313,10 +313,10 @@
 					<object class="IBUILabel" id="529276176">
 						<reference key="NSNextResponder" ref="31345169"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{224, 649}, {131, 21}}</string>
+						<string key="NSFrame">{{319, 722}, {131, 21}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="78336002"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -335,7 +335,7 @@
 					<object class="IBUIButton" id="187022037">
 						<reference key="NSNextResponder" ref="31345169"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{224, 678}, {131, 37}}</string>
+						<string key="NSFrame">{{319, 751}, {131, 37}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1026494432"/>
@@ -358,67 +358,10 @@
 					<object class="IBUIProgressView" id="1026494432">
 						<reference key="NSNextResponder" ref="31345169"/>
 						<int key="NSvFlags">303</int>
-						<string key="NSFrame">{{224, 692}, {131, 9}}</string>
+						<string key="NSFrame">{{319, 765}, {131, 9}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="287275280"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="78336002">
-						<reference key="NSNextResponder" ref="31345169"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{413, 649}, {131, 21}}</string>
-						<reference key="NSSuperview" ref="31345169"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="187022037"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">HTTP POST</string>
-						<reference key="IBUITextColor" ref="604540350"/>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">0</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">1</int>
-						<reference key="IBUIFontDescription" ref="710401821"/>
-						<reference key="IBUIFont" ref="580716831"/>
-					</object>
-					<object class="IBUIButton" id="287275280">
-						<reference key="NSNextResponder" ref="31345169"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{413, 678}, {131, 37}}</string>
-						<reference key="NSSuperview" ref="31345169"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="801940143"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Start</string>
-						<reference key="IBUIHighlightedTitleColor" ref="668184819"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="506708178"/>
-						<reference key="IBUIFontDescription" ref="702163502"/>
-						<reference key="IBUIFont" ref="100167551"/>
-					</object>
-					<object class="IBUIProgressView" id="801940143">
-						<reference key="NSNextResponder" ref="31345169"/>
-						<int key="NSvFlags">303</int>
-						<string key="NSFrame">{{413, 692}, {131, 9}}</string>
-						<reference key="NSSuperview" ref="31345169"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="182224026"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -581,27 +524,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">httpPostProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="801940143"/>
-					</object>
-					<int key="connectionID">89</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">httpGetButton</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="187022037"/>
 					</object>
 					<int key="connectionID">92</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">httpPostButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="287275280"/>
-					</object>
-					<int key="connectionID">93</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -666,15 +593,6 @@
 					</object>
 					<int key="connectionID">85</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">testHTTPPost:</string>
-						<reference key="source" ref="287275280"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">87</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -711,14 +629,11 @@
 							<reference ref="1014961928"/>
 							<reference ref="587535474"/>
 							<reference ref="187022037"/>
-							<reference ref="287275280"/>
 							<reference ref="1026494432"/>
 							<reference ref="182224026"/>
 							<reference ref="623745972"/>
 							<reference ref="510088204"/>
 							<reference ref="529276176"/>
-							<reference ref="78336002"/>
-							<reference ref="801940143"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -803,23 +718,8 @@
 						<reference key="parent" ref="31345169"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">81</int>
-						<reference key="object" ref="287275280"/>
-						<reference key="parent" ref="31345169"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">82</int>
-						<reference key="object" ref="801940143"/>
-						<reference key="parent" ref="31345169"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">90</int>
 						<reference key="object" ref="529276176"/>
-						<reference key="parent" ref="31345169"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">91</int>
-						<reference key="object" ref="78336002"/>
 						<reference key="parent" ref="31345169"/>
 					</object>
 				</array>
@@ -846,10 +746,7 @@
 				<string key="70.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="91.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -878,7 +775,6 @@
 						<string key="loadSynchronously:">id</string>
 						<string key="testHTTP404Error:">id</string>
 						<string key="testHTTPGet:">id</string>
-						<string key="testHTTPPost:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="cancel:">
@@ -909,10 +805,6 @@
 							<string key="name">testHTTPGet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="testHTTPPost:">
-							<string key="name">testHTTPPost:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="asynchronousLoadButton">UIButton</string>
@@ -922,8 +814,6 @@
 						<string key="clearButton">UIButton</string>
 						<string key="httpGetButton">UIButton</string>
 						<string key="httpGetProgressView">UIProgressView</string>
-						<string key="httpPostButton">UIButton</string>
-						<string key="httpPostProgressView">UIProgressView</string>
 						<string key="nonCachedImagesTableView">UITableView</string>
 						<string key="synchronousLoadButton">UIButton</string>
 						<string key="treatingHTTPErrorsAsFailuresSwitch">UISwitch</string>
@@ -955,14 +845,6 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="httpGetProgressView">
 							<string key="name">httpGetProgressView</string>
-							<string key="candidateClassName">UIProgressView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="httpPostButton">
-							<string key="name">httpPostButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="httpPostProgressView">
-							<string key="name">httpPostProgressView</string>
 							<string key="candidateClassName">UIProgressView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nonCachedImagesTableView">

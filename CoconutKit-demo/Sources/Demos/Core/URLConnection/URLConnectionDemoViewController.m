@@ -16,8 +16,6 @@
 // We keep a reference to asynchronous connections we want to be able to cancel manually. A weak reference
 // suffices since HLSURLConnection objects survive while running
 @property (nonatomic, assign) HLSURLConnection *asynchronousConnection;
-@property (nonatomic, assign) HLSURLConnection *httpGetConnection;
-@property (nonatomic, assign) HLSURLConnection *httpPostConnection;
 
 @property (nonatomic, retain) NSArray *coconuts;
 
@@ -42,8 +40,6 @@
 - (void)dealloc
 {
     self.asynchronousConnection = nil;
-    self.httpGetConnection = nil;
-    self.httpPostConnection = nil;
     self.coconuts = nil;
     
     [super dealloc];
@@ -61,18 +57,12 @@
     self.asynchronousLoadNoCancelButton = nil;
     self.clearButton = nil;
     self.httpGetProgressView = nil;
-    self.httpPostButton = nil;
-    self.httpPostProgressView = nil;
     self.treatingHTTPErrorsAsFailuresSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize asynchronousConnection = m_asynchronousConnection;
-
-@synthesize httpGetConnection = m_httpGetConnection;
-
-@synthesize httpPostConnection = m_httpPostConnection;
 
 @synthesize coconuts = m_coconuts;
 
@@ -94,10 +84,6 @@
 
 @synthesize httpGetProgressView = m_httpGetProgressView;
 
-@synthesize httpPostButton = m_httpPostButton;
-
-@synthesize httpPostProgressView = m_httpPostProgressView;
-
 @synthesize treatingHTTPErrorsAsFailuresSwitch = m_treatingHTTPErrorsAsFailuresSwitch;
 
 #pragma mark View lifecycle
@@ -117,7 +103,6 @@
     [self enableUserInterface];
     
     self.httpGetProgressView.hidden = YES;
-    self.httpPostProgressView.hidden = YES;
 }
 
 #pragma mark Orientation management
@@ -208,9 +193,6 @@
     if ([connection.tag isEqualToString:@"httpGet"]) {
         self.httpGetProgressView.progress = connection.progress;
     }
-    else if ([connection.tag isEqualToString:@"httpPost"]) {
-        self.httpPostProgressView.progress = connection.progress;
-    }    
 }
 
 - (void)connectionDidFinishLoading:(HLSURLConnection *)connection
@@ -232,15 +214,9 @@
         
         [self reloadData];
     }
-    else if ([connection.tag isEqualToString:@"httpGet"] || [connection.tag isEqualToString:@"httpPost"]) {
-        if ([connection.tag isEqualToString:@"httpGet"]) {
-            self.httpGetButton.hidden = NO;
-            self.httpGetProgressView.hidden = YES;
-        }
-        else {
-            self.httpPostButton.hidden = NO;
-            self.httpPostProgressView.hidden = YES;
-        }
+    else if ([connection.tag isEqualToString:@"httpGet"]) {
+        self.httpGetButton.hidden = NO;
+        self.httpGetProgressView.hidden = YES;
         
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success")
                                                              message:NSLocalizedString(@"The data was transferred", @"The data was transferred") 
@@ -267,15 +243,9 @@
                                                    otherButtonTitles:nil] autorelease];
         [alertView show];   
     }
-    else if ([connection.tag isEqualToString:@"httpGet"] || [connection.tag isEqualToString:@"httpPost"]) {
-        if ([connection.tag isEqualToString:@"httpGet"]) {
-            self.httpGetButton.hidden = NO;
-            self.httpGetProgressView.hidden = YES;
-        }
-        else {
-            self.httpPostButton.hidden = NO;
-            self.httpPostProgressView.hidden = YES;
-        }
+    else if ([connection.tag isEqualToString:@"httpGet"]) {
+        self.httpGetButton.hidden = NO;
+        self.httpGetProgressView.hidden = YES;
         
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
                                                              message:NSLocalizedString(@"The data could not be transferred", @"The data could not be transferred")
@@ -421,15 +391,6 @@
     connection.tag = @"httpGet";
     connection.delegate = self;
     [connection start];
-}
-
-- (IBAction)testHTTPPost:(id)sender
-{
-    self.httpPostButton.hidden = YES;
-    self.httpPostProgressView.hidden = NO;
-    self.httpPostProgressView.progress = 0.f;
-    
-    
 }
 
 - (IBAction)testHTTP404Error:(id)sender
