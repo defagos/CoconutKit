@@ -399,8 +399,9 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             NSInteger statusCode = [httpResponse statusCode];
             if (statusCode >= 400) {
-                NSString *localizedDescription = [NSString stringWithFormat:NSLocalizedStringFromTable(@"HTTP error: %@", @"CoconutKit_Localizable", @"HTTP error: %@"),
-                                                  [NSHTTPURLResponse localizedStringForStatusCode:statusCode]];
+                NSString *localizedDescription = [NSString stringWithFormat:NSLocalizedStringFromTable(@"HTTP error: %@ (%d)", @"CoconutKit_Localizable", @"HTTP error: %@ (%d)"),
+                                                  [NSHTTPURLResponse localizedStringForStatusCode:statusCode],
+                                                  statusCode];
                 HLSError *error = [HLSError errorWithDomain:HLSCoconutKitErrorDomain 
                                                        code:statusCode 
                                        localizedDescription:localizedDescription];
