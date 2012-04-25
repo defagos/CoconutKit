@@ -56,7 +56,7 @@
     self.synchronousLoadButton = nil;
     self.asynchronousLoadNoCancelButton = nil;
     self.clearButton = nil;
-    self.httpGetProgressView = nil;
+    self.progressView = nil;
     self.treatingHTTPErrorsAsFailuresSwitch = nil;
 }
 
@@ -80,9 +80,9 @@
 
 @synthesize clearButton = m_clearButton;
 
-@synthesize httpGetButton = m_httpGetButton;
+@synthesize progressTestButton = m_progressTestButton;
 
-@synthesize httpGetProgressView = m_httpGetProgressView;
+@synthesize progressView = m_progressView;
 
 @synthesize treatingHTTPErrorsAsFailuresSwitch = m_treatingHTTPErrorsAsFailuresSwitch;
 
@@ -102,7 +102,7 @@
     
     [self enableUserInterface];
     
-    self.httpGetProgressView.hidden = YES;
+    self.progressView.hidden = YES;
 }
 
 #pragma mark Orientation management
@@ -191,7 +191,7 @@
     HLSLoggerInfo(@"Connection '%@' did receive data (progress = %f)", connection.tag, connection.progress);
     
     if ([connection.tag isEqualToString:@"httpGet"]) {
-        self.httpGetProgressView.progress = connection.progress;
+        self.progressView.progress = connection.progress;
     }
 }
 
@@ -215,8 +215,8 @@
         [self reloadData];
     }
     else if ([connection.tag isEqualToString:@"httpGet"]) {
-        self.httpGetButton.hidden = NO;
-        self.httpGetProgressView.hidden = YES;
+        self.progressTestButton.hidden = NO;
+        self.progressView.hidden = YES;
         
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success")
                                                              message:NSLocalizedString(@"The data was transferred", @"The data was transferred") 
@@ -244,8 +244,8 @@
         [alertView show];   
     }
     else if ([connection.tag isEqualToString:@"httpGet"]) {
-        self.httpGetButton.hidden = NO;
-        self.httpGetProgressView.hidden = YES;
+        self.progressTestButton.hidden = NO;
+        self.progressView.hidden = YES;
         
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
                                                              message:NSLocalizedString(@"The data could not be transferred", @"The data could not be transferred")
@@ -377,11 +377,11 @@
     [self reloadData];
 }
 
-- (IBAction)testHTTPGet:(id)sender
+- (IBAction)testProgress:(id)sender
 {
-    self.httpGetButton.hidden = YES;
-    self.httpGetProgressView.hidden = NO;
-    self.httpGetProgressView.progress = 0.f;
+    self.progressTestButton.hidden = YES;
+    self.progressView.hidden = NO;
+    self.progressView.progress = 0.f;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8087/large_coconut.jpg"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData 

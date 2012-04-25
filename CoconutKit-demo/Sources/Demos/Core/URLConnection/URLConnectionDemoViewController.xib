@@ -316,14 +316,14 @@
 						<string key="NSFrame">{{319, 722}, {131, 21}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="187022037"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">HTTP GET</string>
+						<string key="IBUIText">LS/Progress</string>
 						<reference key="IBUITextColor" ref="604540350"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -361,7 +361,7 @@
 						<string key="NSFrame">{{319, 765}, {131, 9}}</string>
 						<reference key="NSSuperview" ref="31345169"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="182224026"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -516,19 +516,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">httpGetProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="1026494432"/>
-					</object>
-					<int key="connectionID">88</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">httpGetButton</string>
+						<string key="label">progressTestButton</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="187022037"/>
 					</object>
-					<int key="connectionID">92</int>
+					<int key="connectionID">94</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">progressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1026494432"/>
+					</object>
+					<int key="connectionID">95</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -586,12 +586,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">testHTTPGet:</string>
+						<string key="label">testProgress:</string>
 						<reference key="source" ref="187022037"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">85</int>
+					<int key="connectionID">96</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -752,7 +752,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">93</int>
+			<int key="maxID">96</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -774,7 +774,7 @@
 						<string key="loadAsynchronouslyNoCancel:">id</string>
 						<string key="loadSynchronously:">id</string>
 						<string key="testHTTP404Error:">id</string>
-						<string key="testHTTPGet:">id</string>
+						<string key="testProgress:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="cancel:">
@@ -801,8 +801,8 @@
 							<string key="name">testHTTP404Error:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="testHTTPGet:">
-							<string key="name">testHTTPGet:</string>
+						<object class="IBActionInfo" key="testProgress:">
+							<string key="name">testProgress:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -812,9 +812,9 @@
 						<string key="cachedImagesTableView">UITableView</string>
 						<string key="cancelButton">UIButton</string>
 						<string key="clearButton">UIButton</string>
-						<string key="httpGetButton">UIButton</string>
-						<string key="httpGetProgressView">UIProgressView</string>
 						<string key="nonCachedImagesTableView">UITableView</string>
+						<string key="progressTestButton">UIButton</string>
+						<string key="progressView">UIProgressView</string>
 						<string key="synchronousLoadButton">UIButton</string>
 						<string key="treatingHTTPErrorsAsFailuresSwitch">UISwitch</string>
 					</dictionary>
@@ -839,17 +839,17 @@
 							<string key="name">clearButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="httpGetButton">
-							<string key="name">httpGetButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="httpGetProgressView">
-							<string key="name">httpGetProgressView</string>
-							<string key="candidateClassName">UIProgressView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="nonCachedImagesTableView">
 							<string key="name">nonCachedImagesTableView</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressTestButton">
+							<string key="name">progressTestButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressView">
+							<string key="name">progressView</string>
+							<string key="candidateClassName">UIProgressView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="synchronousLoadButton">
 							<string key="name">synchronousLoadButton</string>
