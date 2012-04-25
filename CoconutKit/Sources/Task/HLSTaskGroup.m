@@ -184,7 +184,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 - (NSString *)remainingTimeEstimateLocalizedString
 {
     if (self.remainingTimeEstimate == HLSTaskRemainingTimeEstimateUnavailable) {
-        return NSLocalizedStringFromTable(@"No remaining time estimate available", @"CoconutKit_Localizable", @"No remaining time estimate available");
+        return NSLocalizedStringFromTable(@"Unavailable", @"CoconutKit_Localizable", @"Unavailable");
     }
     
     NSTimeInterval timeInterval = self.remainingTimeEstimate;
@@ -195,16 +195,16 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     NSUInteger minutes = timeInterval / 60;
     
     if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dd %dh remaining (estimate)", @"CoconutKit_Localizable", @"%dd %dh remaining (estimate)"), days, hours];
+        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dd %dh remaining", @"CoconutKit_Localizable", @"%dd %dh remaining"), days, hours];
     }
     else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dh %dm remaining (estimate)", @"CoconutKit_Localizable", @"%dh %dm remaining (estimate)"), hours, minutes];
+        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dh %dm remaining", @"CoconutKit_Localizable", @"%dh %dm remaining"), hours, minutes];
     }
     else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%d min remaining (estimate)", @"CoconutKit_Localizable", @"%d min remaining (estimate)"), minutes];
+        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%d min remaining", @"CoconutKit_Localizable", @"%d min remaining"), minutes];
     }
     else {
-        return NSLocalizedStringFromTable(@"< 1 min remaining (estimate)", @"CoconutKit_Localizable", @"< 1 min remaining (estimate)");
+        return NSLocalizedStringFromTable(@"< 1 min remaining", @"CoconutKit_Localizable", @"< 1 min remaining");
     }
 }
 

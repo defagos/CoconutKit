@@ -6,17 +6,17 @@
    Copyright 2010 Hortis. All rights reserved.
  */
  
-/* < 1 min remaining (estimate) */
-"< 1 min remaining (estimate)"="< 1 min restante (estimation)";
+/* < 1 min remaining */
+"< 1 min remaining"="< 1 min restante";
  
-/* %d min remaining (estimate) */
-"%d min remaining (estimate)"="%d min restante(s) (estimation)";
+/* %d min remaining */
+"%d min remaining"="%d min restante(s)";
 
-/* %dd %dh remaining (estimate) */
-"%dd %dh remaining (estimate)"="%dd %dh restants (estimation)";
+/* %dd %dh remaining */
+"%dd %dh remaining"="%dd %dh restants";
 
-/* %dh %dm remaining (estimate) */
-"%dh %dm remaining (estimate)"="%dh %dm restants (estimation)";
+/* %dh %dm remaining */
+"%dh %dm remaining"="%dh %dm restants";
 
 /* Cannot Open Page */
 "Cannot Open Page"="Impossible d'ouvrir la page";
@@ -33,11 +33,11 @@
 /* No Internet connection is available */
 "No Internet connection is available"="Aucune connexion à Internet n'est disponible";
 
-/* No remaining time estimate available */
-"No remaining time estimate available"="Aucune estimation du temps restant";
-
 /* HLSWebViewController 'Open in Safari' action */
 "Open in Safari"="Ouvrir dans Safari";
+
+/* Unavailable */
+"Unavailable"="Indisponible";
 
 /* Untitled */
 "Untitled"="Sans titre";
