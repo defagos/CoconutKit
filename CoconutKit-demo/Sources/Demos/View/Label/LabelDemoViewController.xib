@@ -295,9 +295,9 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<float key="IBUIValue">10</float>
+						<float key="IBUIValue">17</float>
 						<float key="IBUIMinValue">6</float>
-						<float key="IBUIMaxValue">36</float>
+						<float key="IBUIMaxValue">72</float>
 					</object>
 					<object class="IBUILabel" id="561457560">
 						<reference key="NSNextResponder" ref="71833693"/>
@@ -405,6 +405,7 @@
 						<string key="NSFrame">{{436, 563}, {312, 44}}</string>
 						<reference key="NSSuperview" ref="71833693"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
