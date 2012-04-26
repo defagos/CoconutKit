@@ -192,8 +192,6 @@
         self.taskRemainingTimeEstimateLabel.hidden = NO;
         self.taskRemainingTimeLabel.hidden = NO;
         
-        NSLog(@"%@", [task.progressTrackerInfo description]);
-        
         self.taskProgressView.progress = task.progressTrackerInfo.progress;
         self.taskRemainingTimeLabel.text = [task.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }

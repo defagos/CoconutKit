@@ -65,7 +65,7 @@ BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol)
     // Only interested in optional methods. Required methods are checked at compilation time
     unsigned int numberOfMethods = 0;
     
-    // TODO: Methods in other protocols adopted by this protocol are not included. Verify and fix
+    // TODO: Methods in other protocols adopted by this protocol are probably not included. Verify and fix
     struct objc_method_description *methodDescriptions = protocol_copyMethodDescriptionList(protocol, 
                                                                                             NO /* looking at optional methods suffices */, 
                                                                                             YES, 

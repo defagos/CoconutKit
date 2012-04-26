@@ -13,9 +13,10 @@
  */
 extern const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable;
 
-@protocol HLSProgressTrackerInfo <NSObject>
-
-@optional
+/**
+ * Read-only access interface for HLSProgressTracker
+ */
+@protocol HLSProgressTracker <NSObject>
 
 /**
  * Overall progress value (between 0.f and 1.f)
@@ -42,19 +43,7 @@ extern const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable;
 
 @end
 
-@interface HLSProgressTrackerInfo : HLSProtocolProxy <HLSProgressTrackerInfo>
-
-@end
-
-/**
- * Return an estimate about the remaining time before the task processing completes (or 
- * HLSTaskRemainingTimeEstimateUnavailable if no estimate is available yet)
- * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not 
- *                   varying fast (in another words: constant over long enough periods of time). This is for 
- *                   example usually the case for download or inflating / deflating tasks.
- * Not meant to be overridden
- */
-@interface HLSProgressTracker : NSObject <HLSProgressTrackerInfo> {
+@interface HLSProgressTracker : NSObject <HLSProgressTracker> {
 @private
     float _progress;
     NSTimeInterval _remainingTimeEstimate;

@@ -12,8 +12,6 @@
 #import "HLSRuntime.h"
 #import "HLSZeroingWeakRef.h"
 
-static NSMutableDictionary *s_classToCompatibleClassesMap = nil;
-
 @interface HLSProtocolProxy ()
 
 @property (nonatomic, retain) HLSZeroingWeakRef *targetZeroingWeakRef;
@@ -24,67 +22,34 @@ static NSMutableDictionary *s_classToCompatibleClassesMap = nil;
 
 #pragma mark Class methods
 
-+ (id)proxyWithTarget:(id)target
++ (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol
 {
-    return [[[[self class] alloc] initWithTarget:target] autorelease];
+    return [[[self class] alloc] initWithTarget:target protocol:protocol];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTarget:(id)target
+- (id)initWithTarget:(id)target protocol:(Protocol *)protocol
 {
+    if (! protocol) {
+        HLSLoggerError(@"Cannot create a proxy to target %@ without a protocol", target);
+        [self release];
+        return nil;
+    }
+    
     if (target) {
-        // Use the "public" class identities advertised by the classes (can be hidden, e.g. by some dynamic subclasses),
-        // not the ones which could be obtained by using <objc/runtime.h> functions. This avoids polluting the compatibility
-        // map with such classes
-        Class class = [self class];
+        // Consider the official class identity, not the real one which could be discovered by using runtime
+        // functions (-class can be faked by dynamic subclasses, e.g.)
         Class targetClass = [target class];
-        
-        @synchronized([HLSProtocolProxy class]) {
-            NSValue *classValue = [NSValue valueWithPointer:class];
-            NSValue *targetClassValue = [NSValue valueWithPointer:targetClass];
-            
-            // First check if we have already found both classes to be compatible (and cached this information)
-            if (! [[s_classToCompatibleClassesMap objectForKey:classValue] containsObject:targetClassValue]) {
-                // Get all protocols implemented by the instantiated HLSProtocolProxy subclass
-                unsigned int numberOfProtocols = 0;
-                Protocol **protocols = hls_class_copyProtocolList(class, &numberOfProtocols);
-                
-                // Check that all those protocols are also implemented by the target's class. This makes those protocols 
-                // define a common interface between self and target
-                BOOL compatible = YES;
-                for (unsigned int i = 0; i < numberOfProtocols; ++i) {
-                    Protocol *protocol = protocols[i];
-                    if (! hls_class_conformsToProtocol(targetClass, protocol)) {
-                        compatible = NO;
-                        break;
-                    }
-                }
-                free(protocols);
-                
-                if (! compatible) {
-                    HLSLoggerError(@"The class %@ must implement at least the same protocols as the proxy class %@", targetClass, class);
-                    [self release];
-                    return nil;
-                }
-                
-                // Cache the compatibility relationship. This is made lazily (not in +initialize, e.g.) to account
-                // for classes added at runtime
-                if (! s_classToCompatibleClassesMap) {
-                    s_classToCompatibleClassesMap = [[NSMutableDictionary dictionary] retain];
-                }
-                
-                NSMutableSet *compatibleClasses = [s_classToCompatibleClassesMap objectForKey:classValue];
-                if (! compatibleClasses) {
-                    compatibleClasses = [NSMutableSet set];
-                    [s_classToCompatibleClassesMap setObject:compatibleClasses forKey:classValue];
-                }
-                
-                [compatibleClasses addObject:targetClassValue];
-            }
+        if (! hls_class_conformsToProtocol(targetClass, protocol)) {
+            HLSLoggerError(@"The class %@ must implement the protocol %s", targetClass, protocol_getName(protocol));
+            [self release];
+            return nil;
         }
     }
+    
     self.targetZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:target] autorelease];
+    _protocol = protocol;
     
     return self;
 }
@@ -103,12 +68,27 @@ static NSMutableDictionary *s_classToCompatibleClassesMap = nil;
 #pragma mark Message forwarding
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
-{
+{    
     return [self.targetZeroingWeakRef.object methodSignatureForSelector:sel];
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
+    // Search in required methods first (should be the most common case for protocols defining an interface
+    // subset)
+    SEL selector = [invocation selector];
+    struct objc_method_description methodDescription = protocol_getMethodDescription(_protocol, selector, YES, YES);
+    if (! methodDescription.name) {
+        // Search in optional methods
+        methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
+        if (! methodDescription.name) {
+            NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
+                                (char *)selector, self];
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+            return;
+        }
+    }
+    
     [invocation invokeWithTarget:self.targetZeroingWeakRef.object];
 }
 
@@ -116,18 +96,11 @@ static NSMutableDictionary *s_classToCompatibleClassesMap = nil;
 
 - (NSString *)description
 {
-    // Retrieve the proxy subclass name (return the official public name to avoid revealing dynamic subclasses). The
-    // target class could be a proxy as well, we thus cannot use the CoconutKit -className method to retrieve its name 
-    // (since this method is on NSObject and NSProxy is a separate root class)
-    NSString *className = [NSString stringWithCString:class_getName([self class])
-                                             encoding:NSUTF8StringEncoding];
-    NSString *targetClassName = [NSString stringWithCString:class_getName([self.targetZeroingWeakRef.object class]) 
-                                                   encoding:NSUTF8StringEncoding];
-    
-    // Replace the target class name (if appearing in the description) with the proxy class name so
-    // that we get the impression that the proxy implements its own -description method
-    return [[self.targetZeroingWeakRef.object description] stringByReplacingOccurrencesOfString:targetClassName
-                                                                                     withString:className];
+    // Must override NSProxy implementation, not forwarded automatically. Replace the target class name (if appearing in the description)
+    // with the proxy object information
+    id target = self.targetZeroingWeakRef.object;
+    return [[target description] stringByReplacingOccurrencesOfString:[target className]
+                                                           withString:[NSString stringWithFormat:@"id<%s>", protocol_getName(_protocol)]];
 }
 
 @end

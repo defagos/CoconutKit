@@ -128,7 +128,20 @@ static Class subclass_class(id object, SEL _cmd);
     [self addInvocation:invocation];
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; object: %@; invocations: %@>", 
+            [self class],
+            self,
+            self.object,
+            self.invocations];
+}
+
 @end
+
+#pragma mark Dynamic subclass method implementations
 
 static void subclass_dealloc(id object, SEL _cmd)
 {

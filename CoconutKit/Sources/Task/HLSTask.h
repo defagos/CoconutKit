@@ -77,7 +77,7 @@
  *
  * Not meant to be overridden
  */
-- (HLSProgressTrackerInfo *)progressTrackerInfo;
+- (id<HLSProgressTracker>)progressTrackerInfo;
 
 /**
  * NSDictionary which can freely be used to convey return information
