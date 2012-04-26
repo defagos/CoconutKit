@@ -52,4 +52,13 @@ static void *s_connectionKey = &s_connectionKey;
     self.image = nil;
 }
 
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+    // When removed from display, stop downloading
+    if (! newWindow) {
+        HLSURLConnection *connection = objc_getAssociatedObject(self, s_connectionKey);
+        [connection cancel];
+    }
+}
+
 @end
