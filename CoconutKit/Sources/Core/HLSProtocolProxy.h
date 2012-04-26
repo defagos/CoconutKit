@@ -9,12 +9,34 @@
 // Forward declarations
 @class HLSZeroingWeakRef;
 
+// TODO: Put the restricted interface stuff first
+// TODO: 1st option: Depending on the set of files which get included, different views of the same object
+//       A single object type, not two. Can be misleading
+// TODO: Document: Useful: Use several protocols (not necessarily orthogonal) to create several different
+//       proxy interfaces
+
 /**
- * We often encounter classes which have slightly different interfaces but which are otherwise similar.
- * A common example is a mutable class which differs from its immutable class counterpart by the
- * ability to mutate some of its attributes. If we want to implement such classes, we have several
- * options:
- *   - create the immutable class interface, and an associated Friend category which collects all mutators.
+ * HLSProtocolProxy allows the easy creation of lightweight proxy objects through which interaction with the 
+ * underlying object only happens through a restricted subset of its interface. The common restricted 
+ * interface subset is formally declared using one or several protocols made of optional methods only. The
+ * protocols are used to check a class and a proxy class for compatibility when the proxy gets created. When 
+ * calling a method on a proxy object, the call is transparently forwarded to the underlying object. No deep
+ * copy of the original object is ever made. Clients of proxy objects are therefore guaranteed to access 
+ * the original object data, not simply a snapshot of it.
+ * 
+ * A common example is an object which offers readonly access only to an underlying otherwise mutable
+ * object. Where method forwarding does not conflict with performance requirements, an HLSProtocolProxy
+ * object is a very convenient way to create a from a mutable one without a single line
+ * of code
+ *
+ * If we want to implement an object offering a restricting interface to another one, we already have 
+ * several options, but none of them is optimal:
+ *   - use a single class for both objects.     , whose interface is spread on several header files. The main class interface 
+ *     declaration contains the restricted set of methods through which the common 
+ 
+ // cumbersome if different interface subsets wanted (severa)
+ 
+ *   - create a class  immutable class interface, and an associated Friend category which collects all mutators.
  *     The class interface itself must contain creation and accessor methods only. In the class .m implementation 
  *     file, and from any other source file which requires the ability to mutate the object, include the Friend 
  *     category header file to access the whole interface. Clients which only need to interact with the object 
@@ -54,9 +76,6 @@
  * (having required methods would be better, but this would lead to compiler warnings, though everything
  * would work fine at runtime. I could not find a way to inhibit such warnings, though).
  *
- * Of course, the use of HLSProtocolProxy is by no means limited to mutable and immutable classes. In general,
- * you can use an HLSProtocolProxy when you want to restrict interaction with an existing class. The proxy class
- * has is only there to expose a restricted interface.
  *
  * The common contract between original and proxy classes can be defined using several protocols if needed.
  * All that is required is that the original class at least conforms to all protocols the proxy class conforms
