@@ -65,6 +65,8 @@
 
 @synthesize targetZeroingWeakRef = _targetZeroingWeakRef;
 
+@synthesize safe = _safe;
+
 #pragma mark Message forwarding
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
@@ -82,9 +84,11 @@
         // Search in optional methods
         methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
         if (! methodDescription.name) {
-            NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
-                                (char *)selector, self];
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+            if (! self.safe) {
+                NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
+                                    (char *)selector, self];
+                @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];                
+            }
             return;
         }
     }
