@@ -160,8 +160,8 @@
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
 		6FC85B051547E002004DD493 /* HLSProgressTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC85B031547E002004DD493 /* HLSProgressTracker.h */; };
 		6FC85B061547E002004DD493 /* HLSProgressTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B041547E002004DD493 /* HLSProgressTracker.m */; };
-		6FC85B531548346E004DD493 /* HLSProtocolProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC85B511548346E004DD493 /* HLSProtocolProxy.h */; };
-		6FC85B541548346E004DD493 /* HLSProtocolProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B521548346E004DD493 /* HLSProtocolProxy.m */; };
+		6FC85B531548346E004DD493 /* HLSRestrictedInterfaceProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC85B511548346E004DD493 /* HLSRestrictedInterfaceProxy.h */; };
+		6FC85B541548346E004DD493 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC85B521548346E004DD493 /* HLSRestrictedInterfaceProxy.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
 		6FCDA16C14DAE5EF00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */; };
 		6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */; };
@@ -346,8 +346,8 @@
 		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FC85B031547E002004DD493 /* HLSProgressTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProgressTracker.h; sourceTree = "<group>"; };
 		6FC85B041547E002004DD493 /* HLSProgressTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProgressTracker.m; sourceTree = "<group>"; };
-		6FC85B511548346E004DD493 /* HLSProtocolProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProtocolProxy.h; sourceTree = "<group>"; };
-		6FC85B521548346E004DD493 /* HLSProtocolProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProtocolProxy.m; sourceTree = "<group>"; };
+		6FC85B511548346E004DD493 /* HLSRestrictedInterfaceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxy.h; sourceTree = "<group>"; };
+		6FC85B521548346E004DD493 /* HLSRestrictedInterfaceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxy.m; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -494,9 +494,9 @@
 				6FADE52414BA0494007EE121 /* HLSNotifications.h */,
 				6FADE52514BA0494007EE121 /* HLSNotifications.m */,
 				6FADE52614BA0494007EE121 /* HLSOrientationCloner.h */,
-				6FC85B511548346E004DD493 /* HLSProtocolProxy.h */,
-				6FC85B521548346E004DD493 /* HLSProtocolProxy.m */,
 				6FADE52714BA0494007EE121 /* HLSReloadable.h */,
+				6FC85B511548346E004DD493 /* HLSRestrictedInterfaceProxy.h */,
+				6FC85B521548346E004DD493 /* HLSRestrictedInterfaceProxy.m */,
 				6FADE52814BA0494007EE121 /* HLSRuntime.h */,
 				6FADE52914BA0494007EE121 /* HLSRuntime.m */,
 				6F8278481534B84800C51E6C /* HLSURLConnection.h */,
@@ -766,7 +766,7 @@
 				6F17DE871535FC2000A5777C /* HLSApplicationInformation.h in Headers */,
 				6F17DE941536274800A5777C /* UIImageView+HLSURLConnection.h in Headers */,
 				6FC85B051547E002004DD493 /* HLSProgressTracker.h in Headers */,
-				6FC85B531548346E004DD493 /* HLSProtocolProxy.h in Headers */,
+				6FC85B531548346E004DD493 /* HLSRestrictedInterfaceProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,7 +905,7 @@
 				6F17DE881535FC2000A5777C /* HLSApplicationInformation.m in Sources */,
 				6F17DE951536274800A5777C /* UIImageView+HLSURLConnection.m in Sources */,
 				6FC85B061547E002004DD493 /* HLSProgressTracker.m in Sources */,
-				6FC85B541548346E004DD493 /* HLSProtocolProxy.m in Sources */,
+				6FC85B541548346E004DD493 /* HLSRestrictedInterfaceProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

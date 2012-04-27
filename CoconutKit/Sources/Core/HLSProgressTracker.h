@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSProtocolProxy.h"
+#import "HLSRestrictedInterfaceProxy.h"
 
 /**
  * Value returned when no remaining time estimate is available

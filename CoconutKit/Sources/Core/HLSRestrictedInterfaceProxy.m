@@ -1,24 +1,24 @@
 //
-//  HLSProtocolProxy.m
+//  HLSRestrictedInterfaceProxy.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 25.04.12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSProtocolProxy.h"
+#import "HLSRestrictedInterfaceProxy.h"
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSZeroingWeakRef.h"
 
-@interface HLSProtocolProxy ()
+@interface HLSRestrictedInterfaceProxy ()
 
 @property (nonatomic, retain) HLSZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
-@implementation HLSProtocolProxy
+@implementation HLSRestrictedInterfaceProxy
 
 #pragma mark Class methods
 
@@ -41,8 +41,8 @@
         // Consider the official class identity, not the real one which could be discovered by using runtime
         // functions (-class can be faked by dynamic subclasses, e.g.)
         Class targetClass = [target class];
-        if (! hls_class_conformsToProtocol(targetClass, protocol)) {
-            HLSLoggerError(@"The class %@ must implement the protocol %s", targetClass, protocol_getName(protocol));
+        if (! hls_class_conformsToInformalProtocol(targetClass, protocol)) {
+            HLSLoggerError(@"The class %@ must implement the protocol %s (at least informally)", targetClass, protocol_getName(protocol));
             [self release];
             return nil;
         }
