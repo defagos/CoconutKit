@@ -344,10 +344,8 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     }
     
     // Create the destination file
-    NSError *fileCreationError = nil;
     if (! [fileManager createFileAtPath:self.downloadFilePath contents:nil attributes:nil]) {
-        HLSLoggerError(@"Could not create file at path %@. Aborting %@. Reason: %@", self.downloadFilePath, 
-                       [self debugNameCapitalized:NO], fileCreationError);
+        HLSLoggerError(@"Could not create file at path %@. Aborting %@", self.downloadFilePath, [self debugNameCapitalized:NO]);
         return NO;
     }
     
