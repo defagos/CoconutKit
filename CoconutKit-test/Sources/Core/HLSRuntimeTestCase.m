@@ -148,11 +148,18 @@
 
 @end
 
-@interface RuntimeTestClass6   // No NSObject superclass, no protocol
+@interface RuntimeTestClass6 : NSObject <RuntimeTestFormalSubProtocolA>
 
 @end
 
 @implementation RuntimeTestClass6
+
+- (void)methodA1
+{}
+
+
+- (void)methodA3
+{}
 
 @end
 
@@ -187,6 +194,14 @@
 @end
 
 @implementation RuntimeTestClass8
+
+@end
+
+@interface RuntimeTestClass9   // No NSObject superclass, no protocol
+
+@end
+
+@implementation RuntimeTestClass9
 
 @end
 
@@ -245,11 +260,11 @@
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestFormalProtocolB)), nil);
     
-    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass6"), @protocol(NSObject)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass6"), @protocol(RuntimeTestFormalProtocolA)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass6"), @protocol(RuntimeTestFormalSubProtocolA)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass6"), @protocol(RuntimeTestInformalProtocolA)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass6"), @protocol(RuntimeTestFormalProtocolB)), nil);
+    GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(NSObject)), nil);
+    GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalProtocolB)), nil);
     
     GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(NSObject)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolA)), nil);
@@ -262,16 +277,96 @@
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
 }
 
 - (void)test_class_conformsToInformalProtocol
 {
-
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestSubclass12 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass2 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass3 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_conformsToInformalProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
 }
 
 - (void)test_class_implementsProtocol
 {
-
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(NSObject)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestSubclass11 class], @protocol(NSObject)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestSubclass12 class], @protocol(NSObject)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestSubclass12 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestSubclass12 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestSubclass12 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestSubclass12 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass2 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass2 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass2 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass2 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass2 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass3 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass3 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass3 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass3 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass3 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass4 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass5 class], @protocol(NSObject)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass6 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass7 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass8 class], @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestFormalProtocolB)), nil);
+    
+    GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(NSObject)), nil);
+    GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
 }
 
 - (void)test_class_swizzleClassMethod
