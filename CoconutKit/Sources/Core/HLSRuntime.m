@@ -10,6 +10,8 @@
 
 #import "stdlib.h"
 
+static BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isRequired, BOOL isInstanceMethod);
+
 Protocol * __unsafe_unretained *hls_class_copyProtocolList(Class cls, unsigned int *pCount)
 {
     unsigned int numberOfProtocols = 0;
@@ -60,27 +62,20 @@ BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol)
     return NO;
 }
 
+BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol) 
+{
+    // Just checks that all required class and instance methods have been implemented
+    return hls_class_implementsProtocolMethods(cls, protocol, YES, NO)
+        && hls_class_implementsProtocolMethods(cls, protocol, YES, YES);
+}
+
 BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol)
 {
-    // Only interested in optional methods. Required methods are checked at compilation time
-    unsigned int numberOfMethods = 0;
-    
-    // TODO: Methods in other protocols adopted by this protocol are probably not included. Verify and fix
-    struct objc_method_description *methodDescriptions = protocol_copyMethodDescriptionList(protocol, 
-                                                                                            NO /* looking at optional methods suffices */, 
-                                                                                            YES, 
-                                                                                            &numberOfMethods);
-    for (unsigned int i = 0; i < numberOfMethods; ++i) {
-        struct objc_method_description methodDescription = methodDescriptions[i];
-        SEL selector = methodDescription.name;
-        
-        // This searches in superclasses as well
-        if (! class_getInstanceMethod(cls, selector)) {
-            return NO;
-        }
-    }
-    
-    return YES;
+    // Check that all required and optional class and instance methods have been implemented
+    return hls_class_implementsProtocolMethods(cls, protocol, YES, NO)
+        && hls_class_implementsProtocolMethods(cls, protocol, NO, NO)
+        && hls_class_implementsProtocolMethods(cls, protocol, YES, YES)
+        && hls_class_implementsProtocolMethods(cls, protocol, NO, YES);
 }
 
 IMP HLSSwizzleClassSelector(Class cls, SEL selector, IMP newImplementation)
@@ -108,4 +103,29 @@ IMP HLSSwizzleSelector(Class cls, SEL selector, IMP newImplementation)
     
     class_replaceMethod(cls, selector, newImplementation, method_getTypeEncoding(method));
     return origImp;
+}
+
+static BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isRequired, BOOL isInstanceMethod) 
+{
+    // TODO: Does not climb up the protocol hierarchy. Fix by creating hls_protocol_copyMethodDescriptionList
+    unsigned int numberOfMethods = 0;
+    struct objc_method_description *methodDescriptions = protocol_copyMethodDescriptionList(protocol, 
+                                                                                            isRequired,
+                                                                                            isInstanceMethod, 
+                                                                                            &numberOfMethods);
+    
+    BOOL result = YES;
+    for (unsigned int i = 0; i < numberOfMethods; ++i) {
+        struct objc_method_description methodDescription = methodDescriptions[i];
+        SEL selector = methodDescription.name;
+        
+        // This searches in superclasses as well
+        if (! class_getInstanceMethod(cls, selector)) {
+            result = NO;
+            break;
+        }
+    }
+    free(methodDescriptions);
+    
+    return result;
 }
