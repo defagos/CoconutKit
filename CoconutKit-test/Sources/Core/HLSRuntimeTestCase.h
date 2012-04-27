@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface HLSRuntimeTestCase : GHTestCase
+@interface HLSRuntimeTestCase : GHTestCase {
+@private
+    
+}
 
 @end

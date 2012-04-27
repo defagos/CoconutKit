@@ -32,6 +32,7 @@
     #import "HLSProgressTracker.h"
     #import "HLSProtocolProxy.h"
     #import "HLSReloadable.h"
+    #import "HLSRuntime.h"
     #import "HLSSlideshow.h"
     #import "HLSStackController.h"
     #import "HLSSubtitleTableViewCell.h"
