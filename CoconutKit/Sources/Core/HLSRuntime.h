@@ -13,17 +13,6 @@
  */
 
 /**
- * Return the array of all protocols which a class strictly conforms to (i.e. which are
- * explicitly declared in its @interface), including protocols which superclasses conform 
- * to. This is similar to protocol_copyMethodDescriptionList, but taking superclasses 
- * into account. If the class does not conform to any protocol or is Nil, the function 
- * returns NULL
- *
- * The returned array must be freed by calling free()
- */
-Protocol * __unsafe_unretained *hls_class_copyProtocolList(Class cls, unsigned int *pCount);
-
-/**
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
  * is similar to class_conformsToProtocol, but taking superclasses into account. As for 
  * class_conformsToProtocol, conformance is tested strictly, i.e. the protocol must be 
