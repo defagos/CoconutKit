@@ -45,6 +45,7 @@
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6F948C3214D6E844003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
+		6FADC423154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADC422154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.m */; };
 		6FADE47714B9DA1B007EE121 /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47414B9DA1B007EE121 /* House.m */; };
 		6FADE47814B9DA1B007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47614B9DA1B007EE121 /* Person.m */; };
 		6FADE48714B9DA58007EE121 /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE48414B9DA58007EE121 /* _House.m */; };
@@ -206,6 +207,8 @@
 		6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FADC421154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
+		6FADC422154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
 		6FADE47314B9DA1B007EE121 /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
 		6FADE47414B9DA1B007EE121 /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
 		6FADE47514B9DA1B007EE121 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 				6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */,
 				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
 				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
+				6FADC421154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.h */,
+				6FADC422154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.m */,
 				6FAEFA63154A5B1D00500791 /* HLSRuntimeTestCase.h */,
 				6FAEFA64154A5B1D00500791 /* HLSRuntimeTestCase.m */,
 				6F3B060A14BC4C2D0026F512 /* HLSValidatorsTestCase.h */,
@@ -1050,6 +1055,7 @@
 				6FC85B0D1547E7B8004DD493 /* HLSProgressTracker.m in Sources */,
 				6FC85B5C15483496004DD493 /* HLSRestrictedInterfaceProxy.m in Sources */,
 				6FAEFA65154A5B1D00500791 /* HLSRuntimeTestCase.m in Sources */,
+				6FADC423154AA11C00682040 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

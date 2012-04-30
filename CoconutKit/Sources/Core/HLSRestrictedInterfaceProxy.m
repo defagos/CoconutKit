@@ -16,6 +16,8 @@
 
 @property (nonatomic, retain) HLSZeroingWeakRef *targetZeroingWeakRef;
 
+- (BOOL)protocolDeclaresSelector:(SEL)selector;
+
 @end
 
 @implementation HLSRestrictedInterfaceProxy
@@ -65,9 +67,33 @@
 
 @synthesize targetZeroingWeakRef = _targetZeroingWeakRef;
 
-@synthesize safe = _safe;
-
 #pragma mark Message forwarding
+
+- (BOOL)respondsToSelector:(SEL)selector
+{
+    if (! [self protocolDeclaresSelector:selector]) {
+        return NO;
+    }
+    else {
+        // See -[NSObject respondsToSelector:] documentation
+        return [[self.targetZeroingWeakRef.object class] instancesRespondToSelector:selector];
+    }
+}
+
+- (BOOL)protocolDeclaresSelector:(SEL)selector
+{
+    // Search in required methods first (should be the most common case for protocols defining an interface subset)
+    struct objc_method_description methodDescription = protocol_getMethodDescription(_protocol, selector, YES, YES);
+    if (! methodDescription.name) {
+        // Search in optional methods
+        methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
+        if (! methodDescription.name) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
 {    
@@ -76,23 +102,14 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
-    // Search in required methods first (should be the most common case for protocols defining an interface
-    // subset)
     SEL selector = [invocation selector];
-    struct objc_method_description methodDescription = protocol_getMethodDescription(_protocol, selector, YES, YES);
-    if (! methodDescription.name) {
-        // Search in optional methods
-        methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
-        if (! methodDescription.name) {
-            if (! self.safe) {
-                NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
-                                    (char *)selector, self];
-                @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];                
-            }
-            return;
-        }
+    if (! [self protocolDeclaresSelector:selector]) {
+        NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
+                            (char *)selector, self];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];        
     }
     
+    // If the target does not implement the method, an exception will be raised
     [invocation invokeWithTarget:self.targetZeroingWeakRef.object];
 }
 
@@ -105,6 +122,24 @@
     id target = self.targetZeroingWeakRef.object;
     return [[target description] stringByReplacingOccurrencesOfString:[target className]
                                                            withString:[NSString stringWithFormat:@"id<%s>", protocol_getName(_protocol)]];
+}
+
+@end
+
+@implementation NSObject (HLSRestrictedInterfaceProxy)
+
+- (id)proxyWithRestrictedInterface:(Protocol *)protocol
+{
+    return [HLSRestrictedInterfaceProxy proxyWithTarget:self protocol:protocol];
+}
+
+@end
+
+@implementation NSProxy (HLSRestrictedInterfaceProxy)
+
+- (id)proxyWithRestrictedInterface:(Protocol *)protocol
+{
+    return [HLSRestrictedInterfaceProxy proxyWithTarget:self protocol:protocol];
 }
 
 @end

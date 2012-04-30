@@ -26,8 +26,8 @@
  *
  * When creating a proxy object, a protocol informally compatible with the target class must be provided. By 
  * informally we mean that the target class must implement at least all methods @required by the protocol. Calls
- * to non-implemented @optional methods are not safe by default and will raise an exception. This can be
- * controlled using the safe property.
+ * to non-implemented @optional methods will crash, callers must test whether the proxy object responds to
+ * @optional selectors.
  *
  * The proxy object introduces an additionaly safety indirection layer in comparison to the brute-force approach
  * of C-casting to id<RestrictedProtocol>. This approach works but makes it easy to cast the object back to its
@@ -42,7 +42,6 @@
 @private
     HLSZeroingWeakRef *_targetZeroingWeakRef;
     Protocol *_protocol;
-    BOOL _safe;
 }
 
 /**
@@ -57,11 +56,16 @@
  */
 - (id)initWithTarget:(id)target protocol:(Protocol *)protocol;
 
-/**
- * If set to YES, @optional protocol methods won't be called on the target if it does not respond to them
- *
- * Default value is NO
- */
-@property (nonatomic, assign, getter=is_safe) BOOL safe;
+@end
+
+@interface NSObject (HLSRestrictedInterfaceProxy)
+
+- (id)proxyWithRestrictedInterface:(Protocol *)protocol;
+
+@end
+
+@interface NSProxy (HLSRestrictedInterfaceProxy)
+
+- (id)proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end
