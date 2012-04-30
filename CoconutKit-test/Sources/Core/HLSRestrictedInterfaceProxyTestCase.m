@@ -33,10 +33,24 @@
 
 @end
 
-@protocol IncompatibleRestrictedInterface <NSObject>
+@protocol IncompatibleRestrictedInterfaceA <NSObject>
 
 - (NSInteger)method3;
 - (NSInteger)method6;
+
+@end
+
+// At this protocol level, interfaces are compatible, but the parent protocol level they aren't
+@protocol IncompatibleRestrictedSubInterfaceA <IncompatibleRestrictedInterfaceA>
+
+- (NSInteger)method4;
+
+@end
+
+// Incompatible method prototype
+@protocol IncompatibleRestrictedInterfaceB <NSObject>
+
+- (void)method2;
 
 @end
 
@@ -92,7 +106,9 @@
     GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceA)], nil);
     GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)], nil);
     GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)], nil);
-    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterface)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)], nil);
+//    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
 }
 
 - (void)testMethodCalls

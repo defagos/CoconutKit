@@ -82,10 +82,18 @@ static BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, B
         SEL selector = methodDescription.name;
         
         // This searches in superclasses as well
-        if (! class_getInstanceMethod(cls, selector)) {
+        Method method = class_getInstanceMethod(cls, selector);
+        if (! method) {
             result = NO;
             break;
         }
+        
+        // Check method signature consistency
+        if (strcmp(method_getTypeEncoding(method), methodDescription.types) != 0) {
+            result = NO;
+            break;
+        }
+        
     }
     free(methodDescriptions);
     
