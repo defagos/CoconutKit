@@ -35,11 +35,11 @@ static void (*s_NSManagedObject__initialize_Imp)(id, SEL) = NULL;
 static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd);
 
 // Static helper functions
-static Method instanceMethodOnClass(Class class, SEL sel);
+static Method instanceMethodOnClass(Class cls, SEL sel);
 static SEL checkSelectorForValidationSelector(SEL sel);
 static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError);
 static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError);
-static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError);
+static BOOL validateObjectConsistencyInClassHierarchy(id self, Class cls, SEL sel, NSError **pError);
 
 #pragma mark -
 #pragma mark HLSValidationPrivate category interface
@@ -285,10 +285,10 @@ BOOL injectedManagedObjectValidation(void)
  * Given a class and a selector, returns the underlying method iff it is implemented by this class (not by parent
  * classes). Unlike class_getInstanceMethod, this method returns NULL if a parent class implements the method
  */
-static Method instanceMethodOnClass(Class class, SEL sel)
+static Method instanceMethodOnClass(Class cls, SEL sel)
 {
     unsigned int numberOfMethods = 0;
-    Method *methods = class_copyMethodList(class, &numberOfMethods);
+    Method *methods = class_copyMethodList(cls, &numberOfMethods);
     for (unsigned int i = 0; i < numberOfMethods; ++i) {
         Method method = methods[i];
         if (method_getName(method) == sel) {
@@ -376,12 +376,12 @@ static BOOL validateObjectConsistency(id self, SEL sel, NSError **pError)
  * it the selector given as parameter (using the implementation defined for it by the class given as parameter). This 
  * method can therefore be used to check global object consistency at all levels of the managed object inheritance hierarchy
  */
-static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL sel, NSError **pError)
+static BOOL validateObjectConsistencyInClassHierarchy(id self, Class cls, SEL sel, NSError **pError)
 {
     // Top of the managed object hierarchy
-    if (class == [NSManagedObject class]) {
+    if (cls == [NSManagedObject class]) {
         // Get the implementation. This method exists on NSManagedObject, no need to test if responding to selector
-        BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
+        BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(cls, sel);
         
         // Validate. This is where individual validations are triggered
         NSError *newError = nil;
@@ -401,7 +401,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         
         // Climb up the inheritance hierarchy
         NSError *newError = nil;
-        if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(class), sel, &newError)) {
+        if (! validateObjectConsistencyInClassHierarchy(self, class_getSuperclass(cls), sel, &newError)) {
             [NSManagedObject combineError:newError withError:pError];
             valid = NO;
         }
@@ -409,7 +409,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         // Find whether a check method has been defined at this class hierarchy level. If none is found, valid 
         // (i.e. we do not alter the above validation status)
         SEL checkSel = checkSelectorForValidationSelector(sel);
-        Method method = instanceMethodOnClass(class, checkSel);
+        Method method = instanceMethodOnClass(cls, checkSel);
         if (! method) {
             return valid;
         }
