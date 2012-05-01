@@ -40,9 +40,11 @@
 
 @end
 
-// At this protocol level, interfaces are compatible, but at the parent protocol level they aren't
+// At this protocol level, FullInterfaceTestClass and the protocol are compatible, but at the parent protocol level 
+// they aren't
 @protocol IncompatibleRestrictedSubInterfaceA <IncompatibleRestrictedInterfaceA>
 
+- (NSInteger)method3;
 - (NSInteger)method4;
 
 @end

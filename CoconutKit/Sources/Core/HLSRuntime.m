@@ -27,9 +27,10 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
                                                                                                     &numberOfProtocolMethodDescriptions);
     if (protocolMethodDescriptions) {
         methodDescriptions = protocolMethodDescriptions;
-        numberOfMethodDescriptions += numberOfProtocolMethodDescriptions;
+        numberOfMethodDescriptions = numberOfProtocolMethodDescriptions;
     }
     
+    // Climb up the protocol inheritance hierarchy
     unsigned int numberOfParentProtocols = 0;
     Protocol **parentProtocols = protocol_copyProtocolList(protocol, &numberOfParentProtocols);
     for (unsigned int i = 0; i < numberOfParentProtocols; ++i) {
@@ -43,17 +44,47 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
             // First method list retrieved. Keep the allocated array we got
             if (numberOfMethodDescriptions == 0) {
                 methodDescriptions = parentProtocolMethodDescriptions;
+                numberOfMethodDescriptions = numberOfParentProtocolMethodDescriptions;
             }
-            // Methods already available. Resize and append by copy
+            // Methods already available. Resize and append by copy, avoiding duplicates, then stretch if duplicates have been found
             else {
+                // Work with the largest array we might need
                 methodDescriptions = realloc(methodDescriptions, 
                                              (numberOfMethodDescriptions + numberOfParentProtocolMethodDescriptions) * sizeof(struct objc_method_description));
+                
+                unsigned int numberOfNonDuplicateMethodDescriptions = 0;
                 for (unsigned int j = 0; j < numberOfParentProtocolMethodDescriptions; ++j) {
-                    methodDescriptions[numberOfMethodDescriptions + j] = parentProtocolMethodDescriptions[j]; 
+                    struct objc_method_description parentProtocolMethodDescription = parentProtocolMethodDescriptions[j];
+                    
+                    // Search for duplicates. Only need to search in already existing descriptions (those returned by 
+                    // protocol_copyMethodDescriptionList or hls_protocol_copyMethodDescriptionList are already unique
+                    // and do not need to be checked again)
+                    BOOL duplicateFound = NO;
+                    for (unsigned k = 0; k < numberOfMethodDescriptions; ++k) {
+                        // Compare selectors
+                        if (parentProtocolMethodDescription.name == methodDescriptions[k].name) {
+                            duplicateFound = YES;
+                            break;
+                        }                        
+                    }
+                    
+                    // Skip duplicates (if a second selector with a different signature is found, it is dropped)
+                    if (duplicateFound) {
+                        continue;                        
+                    }
+                    
+                    methodDescriptions[numberOfMethodDescriptions + numberOfNonDuplicateMethodDescriptions] = parentProtocolMethodDescriptions[j];
+                    ++numberOfNonDuplicateMethodDescriptions;
                 }
                 free(parentProtocolMethodDescriptions);
+                
+                // Shrink the array (if needed)
+                if (numberOfNonDuplicateMethodDescriptions != numberOfParentProtocolMethodDescriptions) {
+                    methodDescriptions = realloc(methodDescriptions, 
+                                                 (numberOfMethodDescriptions + numberOfNonDuplicateMethodDescriptions) * sizeof(struct objc_method_description));
+                }
+                numberOfMethodDescriptions += numberOfNonDuplicateMethodDescriptions;
             }
-            numberOfMethodDescriptions += numberOfParentProtocolMethodDescriptions;
         }
     }
     free(parentProtocols);
