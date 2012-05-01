@@ -26,7 +26,7 @@
 
 + (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol
 {
-    return [[[self class] alloc] initWithTarget:target protocol:protocol];
+    return [[[[self class] alloc] initWithTarget:target protocol:protocol] autorelease];
 }
 
 #pragma mark Object creation and destruction

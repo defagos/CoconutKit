@@ -34,6 +34,13 @@ const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable = -1.;
     return self;
 }
 
+- (void)dealloc
+{
+    self.lastEstimateDate = nil;
+
+    [super dealloc];
+}
+
 #pragma mark Accessors and mutators
 
 @synthesize progress = _progress;
