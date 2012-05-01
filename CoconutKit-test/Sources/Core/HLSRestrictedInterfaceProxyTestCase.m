@@ -40,7 +40,7 @@
 
 @end
 
-// At this protocol level, interfaces are compatible, but the parent protocol level they aren't
+// At this protocol level, interfaces are compatible, but at the parent protocol level they aren't
 @protocol IncompatibleRestrictedSubInterfaceA <IncompatibleRestrictedInterfaceA>
 
 - (NSInteger)method4;
@@ -107,7 +107,7 @@
     GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)], nil);
     GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)], nil);
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)], nil);
-//    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
 }
 
