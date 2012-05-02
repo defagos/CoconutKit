@@ -8,6 +8,8 @@
 
 #import "HLSRestrictedInterfaceProxyTestCase.h"
 
+// TODO: Test class methods
+
 @protocol CompatibleRestrictedInterfaceA <NSObject>
 
 - (NSInteger)method2;
@@ -30,6 +32,12 @@
 @optional
 - (NSInteger)method5;
 - (NSInteger)method6;
+
+@end
+
+@protocol CompatibleRestrictedInterfaceBSubset <NSObject>
+
+- (NSInteger)method3;
 
 @end
 
@@ -97,8 +105,6 @@
 
 @implementation HLSRestrictedInterfaceProxyTestCase
 
-// TODO: Test proxy as target, safe bool
-
 #pragma mark Tests
 
 - (void)testCreation
@@ -111,6 +117,9 @@
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)], nil);
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
+    
+    id<CompatibleRestrictedInterfaceA> proxy = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    GHAssertNil([[[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxy protocol:@protocol(CompatibleRestrictedInterfaceBSubset)] autorelease], nil);
 }
 
 - (void)testMethodCalls
@@ -142,7 +151,7 @@
     FullInterfaceTestClass *hackerCastProxyB = (FullInterfaceTestClass *)proxyB;
     GHAssertThrows([hackerCastProxyB method1], nil);
         
-    // Test respondsToSelector on proxy
+    // Test respondsToSelector: on proxy
     GHAssertFalse([proxyB respondsToSelector:@selector(method1)], nil);
     GHAssertFalse([proxyB respondsToSelector:@selector(method2)], nil);
     GHAssertTrue([proxyB respondsToSelector:@selector(method3)], nil);
@@ -157,17 +166,11 @@
     GHAssertTrue([proxyC respondsToSelector:@selector(method5)], nil);
     GHAssertFalse([proxyC respondsToSelector:@selector(method6)], nil);
     
-    // TODO: A proxy should check that the protocol signature and the target method signature are the same
-}
-
-- (void)testSafeMethodCalls
-{
-
-}
-
-- (void)testProxyTarget
-{
-    // TODO: Won't probably work
+    // Test conformsToProtocol: on proxy
+    GHAssertTrue([proxyB conformsToProtocol:@protocol(CompatibleRestrictedInterfaceB)], nil);
+    GHAssertFalse([proxyB conformsToProtocol:@protocol(CompatibleRestrictedInterfaceC)], nil);
+    GHAssertFalse([proxyC conformsToProtocol:@protocol(CompatibleRestrictedInterfaceB)], nil);
+    GHAssertTrue([proxyC conformsToProtocol:@protocol(CompatibleRestrictedInterfaceC)], nil);
 }
 
 @end

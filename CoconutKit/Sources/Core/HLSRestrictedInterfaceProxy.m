@@ -39,6 +39,12 @@
         return nil;
     }
     
+    if ([target isProxy]) {
+        HLSLoggerError(@"Cannot create a proxy to another proxy");
+        [self release];
+        return nil;
+    }
+    
     if (target) {
         // Consider the official class identity, not the real one which could be discovered by using runtime
         // functions (-class can be faked by dynamic subclasses, e.g.)
@@ -67,7 +73,12 @@
 
 @synthesize targetZeroingWeakRef = _targetZeroingWeakRef;
 
-#pragma mark Message forwarding
+#pragma mark Proxy implementation
+
+- (BOOL)conformsToProtocol:(Protocol *)protocol
+{
+    return _protocol == protocol;
+}
 
 - (BOOL)respondsToSelector:(SEL)selector
 {
@@ -127,15 +138,6 @@
 @end
 
 @implementation NSObject (HLSRestrictedInterfaceProxy)
-
-- (id)proxyWithRestrictedInterface:(Protocol *)protocol
-{
-    return [HLSRestrictedInterfaceProxy proxyWithTarget:self protocol:protocol];
-}
-
-@end
-
-@implementation NSProxy (HLSRestrictedInterfaceProxy)
 
 - (id)proxyWithRestrictedInterface:(Protocol *)protocol
 {
