@@ -72,12 +72,12 @@
 @property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
 
 /**
- * Task progress tracker. The progress value always reaches 1.f when a task ends (whether it finishes successfully, 
- * encounters an error, or is cancelled)
+ * Task progress information. The progress value always reaches 1.f when a task ends (whether it finishes 
+ * successfully, encounters an error, or is cancelled)
  *
  * Not meant to be overridden
  */
-- (id<HLSProgressTracker>)progressTrackerInfo;
+- (id<HLSProgressTrackerInfo>)progressTrackerInfo;
 
 /**
  * NSDictionary which can freely be used to convey return information

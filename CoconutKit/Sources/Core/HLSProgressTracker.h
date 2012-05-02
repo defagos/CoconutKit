@@ -14,14 +14,30 @@
 extern const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable;
 
 /**
- * Read-only access interface for HLSProgressTracker
+ * Read-only proxy interface for HLSProgressTracker
  */
-@protocol HLSProgressTracker <NSObject>
+@protocol HLSProgressTrackerInfo <NSObject>
+
+@property (nonatomic, readonly, assign) float progress;
+@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeEstimate;
+- (NSString *)remainingTimeEstimateLocalizedString;
+
+@end
+
+@interface HLSProgressTracker : NSObject {
+@private
+    float _progress;
+    NSTimeInterval _remainingTimeEstimate;
+    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
+    float _lastEstimateProgress;            // ... and corresponding progress value 
+    NSUInteger _progressStepsCounter;
+}
 
 /**
- * Overall progress value (between 0.f and 1.f)
+ * Overall progress value (between 0.f and 1.f). The new value must be larger than the previous one, otherwise
+ * no update will be made
  */
-@property (nonatomic, readonly, assign) float progress;
+@property (nonatomic, assign) float progress;
 
 /**
  * Return an estimate about the remaining time before the task group processing completes (or 
@@ -40,22 +56,5 @@ extern const NSTimeInterval HLSProgressTrackerTimeEstimateUnavailable;
  * (see remark of remainingTimeEstimate method)
  */
 - (NSString *)remainingTimeEstimateLocalizedString;
-
-@end
-
-@interface HLSProgressTracker : NSObject <HLSProgressTracker> {
-@private
-    float _progress;
-    NSTimeInterval _remainingTimeEstimate;
-    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
-    float _lastEstimateProgress;            // ... and corresponding progress value 
-    NSUInteger _progressStepsCounter;
-}
-
-/**
- * Overall progress value (between 0.f and 1.f). The new value must be larger than the previous one, otherwise
- * no update will be made
- */
-@property (nonatomic, assign) float progress;
 
 @end

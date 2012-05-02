@@ -71,9 +71,9 @@
 
 @synthesize progressTracker = _progressTracker;
 
-- (id<HLSProgressTracker>)progressTrackerInfo
+- (id<HLSProgressTrackerInfo>)progressTrackerInfo
 {
-    return [HLSRestrictedInterfaceProxy proxyWithTarget:self.progressTracker protocol:@protocol(HLSProgressTracker)];
+    return [HLSRestrictedInterfaceProxy proxyWithTarget:self.progressTracker protocol:@protocol(HLSProgressTrackerInfo)];
 }
 
 @synthesize returnInfo = _returnInfo;

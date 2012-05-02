@@ -106,6 +106,11 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @synthesize progressTracker = _progressTracker;
 
+- (id<HLSProgressTrackerInfo>)progressTrackerInfo
+{
+    return [HLSRestrictedInterfaceProxy proxyWithTarget:self.progressTracker protocol:@protocol(HLSProgressTrackerInfo)];
+}
+
 - (NSUInteger)numberOfFailures
 {
     return _numberOfFailures;

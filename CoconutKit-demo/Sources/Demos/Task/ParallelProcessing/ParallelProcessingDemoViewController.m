@@ -312,16 +312,16 @@
         self.taskGroupRemainingTimeEstimateLabel.hidden = NO;
         self.taskGroupRemainingTimeLabel.hidden = NO;
         
-        self.taskGroupProgressView.progress = taskGroup.progressTracker.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTracker remainingTimeEstimateLocalizedString];
+        self.taskGroupProgressView.progress = taskGroup.progressTrackerInfo.progress;
+        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
 }
 
 - (void)taskGroupDidProgress:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
-        self.taskGroupProgressView.progress = taskGroup.progressTracker.progress;
-        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTracker remainingTimeEstimateLocalizedString];
+        self.taskGroupProgressView.progress = taskGroup.progressTrackerInfo.progress;
+        self.taskGroupRemainingTimeLabel.text = [taskGroup.progressTrackerInfo remainingTimeEstimateLocalizedString];
     }
 }
 

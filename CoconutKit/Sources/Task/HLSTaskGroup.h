@@ -78,12 +78,12 @@
 @property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
 
 /**
- * Task progress tracker. The progress value always reaches 1.f when all tasks have ended (whether they finished 
- * successfully, encountered an error, or have been cancelled)
+ * Task progress information. The progress value always reaches 1.f when all tasks have ended (whether they
+ * finished successfully, encountered an error, or have been cancelled)
  *
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) HLSProgressTracker *progressTracker;
+- (id<HLSProgressTrackerInfo>)progressTrackerInfo;
 
 /**
  * Return the current number of failed tasks
