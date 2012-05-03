@@ -36,12 +36,12 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
     }
     
     // Swizzle the original implementations (keep a hand on them)
-    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))HLSSwizzleSelector(self, 
-                                                                                 @selector(initWithFrame:), 
-                                                                                 (IMP)swizzled_UIControl__initWithFrame_Imp);
-    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                             @selector(initWithCoder:), 
-                                                                             (IMP)swizzled_UIControl__initWithCoder_Imp);
+    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzle_selector(self, 
+                                                                                         @selector(initWithFrame:), 
+                                                                                         (IMP)swizzled_UIControl__initWithFrame_Imp);
+    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                                     @selector(initWithCoder:), 
+                                                                                     (IMP)swizzled_UIControl__initWithCoder_Imp);
     
     m_injected = YES;
 }

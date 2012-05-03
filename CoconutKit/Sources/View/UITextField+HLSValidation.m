@@ -41,15 +41,15 @@ extern BOOL injectedManagedObjectValidation(void);
 
 + (void)load
 {
-    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                           @selector(delegate), 
-                                                                                           (IMP)swizzled_UITextField__delegate_Imp);
-    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                               @selector(setDelegate:), 
-                                                                               (IMP)swizzled_UITextField__setDelegate_Imp);
-    UITextField__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                         @selector(setText:), 
-                                                                         (IMP)swizzled_UITextField__setText_Imp);
+    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))hls_class_swizzle_selector(self,
+                                                                                                   @selector(delegate), 
+                                                                                                   (IMP)swizzled_UITextField__delegate_Imp);
+    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                                       @selector(setDelegate:), 
+                                                                                       (IMP)swizzled_UITextField__setDelegate_Imp);
+    UITextField__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                                 @selector(setText:), 
+                                                                                 (IMP)swizzled_UITextField__setText_Imp);
 }
 
 #pragma mark Binding to managed object fields

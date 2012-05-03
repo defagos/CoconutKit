@@ -24,9 +24,9 @@ static BOOL swizzled_UINavigationController__navigationBar_shouldPopItem_Imp(UIN
 
 + (void)load
 {
-    s_UINavigationController__navigationBar_shouldPopItem_Imp = (BOOL (*)(id, SEL, id, id))HLSSwizzleSelector(self, 
-                                                                                                              @selector(navigationBar:shouldPopItem:), 
-                                                                                                              (IMP)swizzled_UINavigationController__navigationBar_shouldPopItem_Imp);
+    s_UINavigationController__navigationBar_shouldPopItem_Imp = (BOOL (*)(id, SEL, id, id))hls_class_swizzle_selector(self, 
+                                                                                                                      @selector(navigationBar:shouldPopItem:), 
+                                                                                                                      (IMP)swizzled_UINavigationController__navigationBar_shouldPopItem_Imp);
 }
 
 @end

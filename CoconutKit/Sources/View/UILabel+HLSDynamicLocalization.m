@@ -72,18 +72,18 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 
 + (void)load
 {
-    s_UILabel__dealloc_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                   @selector(dealloc), 
-                                                                   (IMP)swizzled_UILabel__dealloc_Imp);
-    s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                        @selector(awakeFromNib),
-                                                                        (IMP)swizzled_UILabel__awakeFromNib_Imp);
-    s_UILabel__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                       @selector(setText:), 
-                                                                       (IMP)swizzled_UILabel__setText_Imp);
-    s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self,
-                                                                                  @selector(setBackgroundColor:),
-                                                                                  (IMP)swizzled_UILabel__setBackgroundColor_Imp);
+    s_UILabel__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                           @selector(dealloc), 
+                                                                           (IMP)swizzled_UILabel__dealloc_Imp);
+    s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                                @selector(awakeFromNib),
+                                                                                (IMP)swizzled_UILabel__awakeFromNib_Imp);
+    s_UILabel__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                               @selector(setText:), 
+                                                                               (IMP)swizzled_UILabel__setText_Imp);
+    s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self,
+                                                                                          @selector(setBackgroundColor:),
+                                                                                          (IMP)swizzled_UILabel__setBackgroundColor_Imp);
 }
 
 #pragma mark Localization

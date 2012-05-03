@@ -157,7 +157,7 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
     return result;
 }
 
-IMP HLSSwizzleClassSelector(Class cls, SEL selector, IMP newImplementation)
+IMP hls_class_swizzle_class_selector(Class cls, SEL selector, IMP newImplementation)
 {
     // Get the original implementation we are replacing
     Class metaClass = objc_getMetaClass(class_getName(cls));
@@ -171,7 +171,7 @@ IMP HLSSwizzleClassSelector(Class cls, SEL selector, IMP newImplementation)
     return origImp;
 }
 
-IMP HLSSwizzleSelector(Class cls, SEL selector, IMP newImplementation)
+IMP hls_class_swizzle_selector(Class cls, SEL selector, IMP newImplementation)
 {
     // Get the original implementation we are replacing
     Method method = class_getInstanceMethod(cls, selector);

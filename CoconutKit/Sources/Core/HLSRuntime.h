@@ -67,10 +67,10 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
  * Replace the implementation of a class method, given its selector. Return the original 
  * implementation, or NULL if not found
  */
-IMP HLSSwizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
+IMP hls_class_swizzle_class_selector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Replace the implementation of an instance method, given its selector. Return the original 
  * implementation, or NULL if not found
  */
-IMP HLSSwizzleSelector(Class clazz, SEL selector, IMP newImplementation);
+IMP hls_class_swizzle_selector(Class clazz, SEL selector, IMP newImplementation);

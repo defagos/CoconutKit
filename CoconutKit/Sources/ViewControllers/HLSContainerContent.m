@@ -1149,48 +1149,48 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 + (void)load
 {
-    s_UIViewController__navigationController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                       @selector(navigationController), 
-                                                                                       (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
-    s_UIViewController__navigationItem_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                 @selector(navigationItem), 
-                                                                                 (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
-    s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                       @selector(interfaceOrientation), 
-                                                                                       (IMP)swizzled_UIViewController__id_accessor_Imp);
+    s_UIViewController__navigationController_Imp = (id (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                                               @selector(navigationController), 
+                                                                                               (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
+    s_UIViewController__navigationItem_Imp = (id (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                                         @selector(navigationItem), 
+                                                                                         (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
+    s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))hls_class_swizzle_selector(self,
+                                                                                               @selector(interfaceOrientation), 
+                                                                                               (IMP)swizzled_UIViewController__id_accessor_Imp);
     
-    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                 @selector(setTitle:), 
-                                                                                 (IMP)swizzled_UIViewController__void_mutator_id_Imp);
-    s_UIViewController__setHidesBottomBarWhenPushed_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self,
-                                                                                                      @selector(setHidesBottomBarWhenPushed:), 
-                                                                                                      (IMP)swizzled_UIViewController__void_mutator_BOOL_Imp);
-    s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                        @selector(setToolbarItems:), 
-                                                                                        (IMP)swizzled_UIViewController__void_mutator_id_Imp);
-    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
-                                                                                                       @selector(setToolbarItems:animated:), 
-                                                                                                       (IMP)swizzled_UIViewController__void_mutator_id_BOOL_Imp);
+    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                                         @selector(setTitle:), 
+                                                                                         (IMP)swizzled_UIViewController__void_mutator_id_Imp);
+    s_UIViewController__setHidesBottomBarWhenPushed_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzle_selector(self,
+                                                                                                              @selector(setHidesBottomBarWhenPushed:), 
+                                                                                                              (IMP)swizzled_UIViewController__void_mutator_BOOL_Imp);
+    s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))hls_class_swizzle_selector(self, 
+                                                                                                @selector(setToolbarItems:), 
+                                                                                                (IMP)swizzled_UIViewController__void_mutator_id_Imp);
+    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzle_selector(self, 
+                                                                                                               @selector(setToolbarItems:animated:), 
+                                                                                                               (IMP)swizzled_UIViewController__void_mutator_id_BOOL_Imp);
     
     // The two methods with blocks are only available starting with iOS 5. If we are running on a prior iOS version, their swizzling is a no-op
-    s_UIViewController__presentViewController_animated_completion_Imp = (void (*)(id, SEL, id, BOOL, void (^)(void)))HLSSwizzleSelector(self,
-                                                                                                                                        @selector(presentViewController:animated:completion:), 
-                                                                                                                                        (IMP)swizzled_UIViewController__presentViewController_animated_completion_Imp);
-    s_UIViewController__dismissViewControllerAnimated_completion_Imp = (void (*)(id, SEL, BOOL, void (^)(void)))HLSSwizzleSelector(self,
-                                                                                                                                   @selector(dismissViewControllerAnimated:completion:), 
-                                                                                                                                   (IMP)swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp);
-    s_UIViewController__presentModalViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
-                                                                                                                  @selector(presentModalViewController:animated:), 
-                                                                                                                  (IMP)swizzled_UIViewController__presentModalViewController_animated_Imp);
-    s_UIViewController__dismissModalViewControllerAnimated_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
-                                                                                                             @selector(dismissModalViewControllerAnimated:), 
-                                                                                                             (IMP)swizzled_UIViewController__dismissModalViewControllerAnimated_Imp);
-    s_UIViewController__modalViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                      @selector(modalViewController), 
-                                                                                      (IMP)swizzled_UIViewController__modalViewController_Imp);
-    s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                          @selector(presentedViewController), 
-                                                                                          (IMP)swizzled_UIViewController__presentedViewController_Imp);
+    s_UIViewController__presentViewController_animated_completion_Imp = (void (*)(id, SEL, id, BOOL, void (^)(void)))hls_class_swizzle_selector(self,
+                                                                                                                                                @selector(presentViewController:animated:completion:), 
+                                                                                                                                                (IMP)swizzled_UIViewController__presentViewController_animated_completion_Imp);
+    s_UIViewController__dismissViewControllerAnimated_completion_Imp = (void (*)(id, SEL, BOOL, void (^)(void)))hls_class_swizzle_selector(self,
+                                                                                                                                           @selector(dismissViewControllerAnimated:completion:), 
+                                                                                                                                           (IMP)swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp);
+    s_UIViewController__presentModalViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzle_selector(self, 
+                                                                                                                          @selector(presentModalViewController:animated:), 
+                                                                                                                          (IMP)swizzled_UIViewController__presentModalViewController_animated_Imp);
+    s_UIViewController__dismissModalViewControllerAnimated_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzle_selector(self, 
+                                                                                                                     @selector(dismissModalViewControllerAnimated:), 
+                                                                                                                     (IMP)swizzled_UIViewController__dismissModalViewControllerAnimated_Imp);
+    s_UIViewController__modalViewController_Imp = (id (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                                              @selector(modalViewController), 
+                                                                                              (IMP)swizzled_UIViewController__modalViewController_Imp);
+    s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))hls_class_swizzle_selector(self, 
+                                                                                                  @selector(presentedViewController), 
+                                                                                                  (IMP)swizzled_UIViewController__presentedViewController_Imp);
 }
 
 @end
