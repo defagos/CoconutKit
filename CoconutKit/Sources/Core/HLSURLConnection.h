@@ -261,9 +261,8 @@ extern const float HLSURLConnectionProgressUnavailable;
 - (void)connectionDidCancel:(HLSURLConnection *)connection;
 
 /**
- * Managing credentials. Refer to the documentation of the same methods of NSURLConnectionDelegate for more information
+ * Managing credentials. Refer to the documentation of the same method of NSURLConnectionDelegate for more information
  */
-- (BOOL)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection;
 - (void)connection:(HLSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 /**

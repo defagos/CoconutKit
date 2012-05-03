@@ -492,20 +492,13 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self release];
 }
 
-- (BOOL)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection
-{
-    if ([self.delegate respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
-        return [self.delegate connectionShouldUseCredentialStorage:self];
-    }
-    else {
-        return YES;
-    }
-}
-
 - (void)connection:(HLSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     if ([self.delegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]) {
         [self.delegate connection:self willSendRequestForAuthenticationChallenge:challenge];
+    }
+    else {
+        [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
     }
 }
 
