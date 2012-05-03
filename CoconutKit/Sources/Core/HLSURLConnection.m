@@ -492,10 +492,13 @@ const float HLSURLConnectionProgressUnavailable = -1.f;
     [self release];
 }
 
-- (void)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection
+- (BOOL)connectionShouldUseCredentialStorage:(HLSURLConnection *)connection
 {
     if ([self.delegate respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
-        [self.delegate connectionShouldUseCredentialStorage:self];
+        return [self.delegate connectionShouldUseCredentialStorage:self];
+    }
+    else {
+        return YES;
     }
 }
 
