@@ -28,14 +28,6 @@
 		6FA9B09C14F8E753008B6D5A /* img_apple2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09814F8E753008B6D5A /* img_apple2.jpg */; };
 		6FA9B09D14F8E753008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09914F8E753008B6D5A /* img_apple3.jpg */; };
 		6FA9B09E14F8E753008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B09A14F8E753008B6D5A /* img_apple4.jpg */; };
-		6FADE6B414BA04A7007EE121 /* CoconutKit_Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */; };
-		6FADE6B514BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */; };
-		6FADE6B614BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62214BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */; };
-		6FADE6B714BA04A7007EE121 /* CoconutKit_ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62314BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight.png */; };
-		6FADE6B814BA04A7007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62414BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png */; };
-		6FADE6B914BA04A7007EE121 /* CoconutKit_ButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62514BA04A6007EE121 /* CoconutKit_ButtonBarRefresh.png */; };
-		6FADE6BA14BA04A7007EE121 /* CoconutKit_ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62614BA04A6007EE121 /* CoconutKit_ButtonBarRefresh@2x.png */; };
-		6FADE6BB14BA04A7007EE121 /* CoconutKit_cursor_default_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE62714BA04A6007EE121 /* CoconutKit_cursor_default_pointer.png */; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
 		6FADE6BD14BA04A7007EE121 /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63014BA04A6007EE121 /* HLSAnimationStep.m */; };
 		6FADE6BE14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63214BA04A6007EE121 /* HLSViewAnimationStep.m */; };
@@ -86,7 +78,6 @@
 		6FADE6EB14BA04A7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */; };
 		6FADE6EC14BA04A7007EE121 /* UITextField+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */; };
 		6FADE6ED14BA04A7007EE121 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69F14BA04A6007EE121 /* UIView+HLSExtensions.m */; };
-		6FADE6EE14BA04A7007EE121 /* CoconutKit_HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE6A114BA04A6007EE121 /* CoconutKit_HLSWebViewController.xib */; };
 		6FADE6EF14BA04A7007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */; };
 		6FADE6F014BA04A7007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE6F114BA04A7007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A714BA04A6007EE121 /* HLSStackController.m */; };
@@ -241,15 +232,6 @@
 		6FA9B09814F8E753008B6D5A /* img_apple2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple2.jpg; sourceTree = "<group>"; };
 		6FA9B09914F8E753008B6D5A /* img_apple3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple3.jpg; sourceTree = "<group>"; };
 		6FA9B09A14F8E753008B6D5A /* img_apple4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple4.jpg; sourceTree = "<group>"; };
-		6FADE61D14BA04A6007EE121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE61F14BA04A6007EE121 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
-		6FADE62214BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
-		6FADE62314BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowRight.png; sourceTree = "<group>"; };
-		6FADE62414BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
-		6FADE62514BA04A6007EE121 /* CoconutKit_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarRefresh.png; sourceTree = "<group>"; };
-		6FADE62614BA04A6007EE121 /* CoconutKit_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
-		6FADE62714BA04A6007EE121 /* CoconutKit_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_cursor_default_pointer.png; sourceTree = "<group>"; };
 		6FADE62D14BA04A6007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE62E14BA04A6007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE62F14BA04A6007EE121 /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
@@ -360,7 +342,6 @@
 		6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FADE69E14BA04A6007EE121 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE69F14BA04A6007EE121 /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FADE6A114BA04A6007EE121 /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
 		6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
 		6FADE6A414BA04A6007EE121 /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
@@ -601,7 +582,6 @@
 		6F37FED613EBE480003E33EF /* CoconutKit */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE61A14BA04A6007EE121 /* Resources */,
 				6FADE62B14BA04A6007EE121 /* Sources */,
 			);
 			name = CoconutKit;
@@ -649,30 +629,6 @@
 				6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */,
 			);
 			path = Slideshow;
-			sourceTree = "<group>";
-		};
-		6FADE61A14BA04A6007EE121 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */,
-				6FADE62014BA04A6007EE121 /* Images */,
-			);
-			name = Resources;
-			path = ../CoconutKit/Resources;
-			sourceTree = "<group>";
-		};
-		6FADE62014BA04A6007EE121 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE62114BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft.png */,
-				6FADE62214BA04A6007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */,
-				6FADE62314BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight.png */,
-				6FADE62414BA04A6007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png */,
-				6FADE62514BA04A6007EE121 /* CoconutKit_ButtonBarRefresh.png */,
-				6FADE62614BA04A6007EE121 /* CoconutKit_ButtonBarRefresh@2x.png */,
-				6FADE62714BA04A6007EE121 /* CoconutKit_cursor_default_pointer.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		6FADE62B14BA04A6007EE121 /* Sources */ = {
@@ -868,7 +824,6 @@
 		6FADE6A014BA04A6007EE121 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE6A114BA04A6007EE121 /* CoconutKit_HLSWebViewController.xib */,
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
 				6FADE6A414BA04A6007EE121 /* HLSPlaceholderViewController.h */,
@@ -1501,15 +1456,6 @@
 			files = (
 				6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */,
 				6FFE36E41468FD9D00C02549 /* Localizable.strings in Resources */,
-				6FADE6B414BA04A7007EE121 /* CoconutKit_Localizable.strings in Resources */,
-				6FADE6B514BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft.png in Resources */,
-				6FADE6B614BA04A7007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png in Resources */,
-				6FADE6B714BA04A7007EE121 /* CoconutKit_ButtonBarArrowRight.png in Resources */,
-				6FADE6B814BA04A7007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png in Resources */,
-				6FADE6B914BA04A7007EE121 /* CoconutKit_ButtonBarRefresh.png in Resources */,
-				6FADE6BA14BA04A7007EE121 /* CoconutKit_ButtonBarRefresh@2x.png in Resources */,
-				6FADE6BB14BA04A7007EE121 /* CoconutKit_cursor_default_pointer.png in Resources */,
-				6FADE6EE14BA04A7007EE121 /* CoconutKit_HLSWebViewController.xib in Resources */,
 				6FADE88714BA04C9007EE121 /* ProximaNova-Bold.otf in Resources */,
 				6FADE88814BA04C9007EE121 /* ProximaNova-Regular.otf in Resources */,
 				6FADE88914BA04C9007EE121 /* cell_bkgr_brown_large.png in Resources */,
@@ -1767,15 +1713,6 @@
 			name = DemoTable.strings;
 			sourceTree = "<group>";
 		};
-		6FADE61B14BA04A6007EE121 /* CoconutKit_Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6FADE61D14BA04A6007EE121 /* en */,
-				6FADE61F14BA04A6007EE121 /* fr */,
-			);
-			name = CoconutKit_Localizable.strings;
-			sourceTree = "<group>";
-		};
 		6FFE36321468FD9D00C02549 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1804,6 +1741,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
@@ -1817,6 +1755,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				PRODUCT_NAME = "CoconutKit-dev";
 				VALIDATE_PRODUCT = YES;
@@ -1831,6 +1770,7 @@
 					armv7,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1858,6 +1798,7 @@
 					armv7,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;

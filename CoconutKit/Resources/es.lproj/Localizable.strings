@@ -1,5 +1,5 @@
 /* 
-   CoconutKit_Localizable.strings
+   Localizable.strings
    CoconutKit
 
    Created by Cédric Luthi on 3/10/11.
@@ -7,7 +7,7 @@
  */
 
  /* HLSWebViewController 'Mail Link' action */
- "Mail Link"="Link mailen";
+ "Mail Link"="Mandar enlace";
 
 /* HLSWebViewController 'Open in Safari' action */
-"Open in Safari"="In Safari öffnen";
+"Open in Safari"="Abre en Safari";

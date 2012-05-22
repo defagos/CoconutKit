@@ -172,6 +172,22 @@
 		6F3B063414BC7B950026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		6F44E9CD156BB00700B45BB4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9CE156BB00700B45BB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9CF156BB00700B45BB4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9D0156BB00700B45BB4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9D2156BB00700B45BB4 /* ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		6F44E9D3156BB00700B45BB4 /* ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
+		6F44E9D4156BB00700B45BB4 /* ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowRight.png; sourceTree = "<group>"; };
+		6F44E9D5156BB00700B45BB4 /* ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
+		6F44E9D6156BB00700B45BB4 /* ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarRefresh.png; sourceTree = "<group>"; };
+		6F44E9D7156BB00700B45BB4 /* ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		6F44E9D8156BB00700B45BB4 /* CursorDefaultPointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CursorDefaultPointer.png; sourceTree = "<group>"; };
+		6F44E9D9156BB00700B45BB4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9DA156BB00700B45BB4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9DB156BB00700B45BB4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F44E9DD156BB00700B45BB4 /* HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSWebViewController.xib; sourceTree = "<group>"; };
 		6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -183,20 +199,6 @@
 		6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
-		6FADE50114BA0494007EE121 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50214BA0494007EE121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50314BA0494007EE121 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50414BA0494007EE121 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50614BA0494007EE121 /* CoconutKit_ButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowLeft.png; sourceTree = "<group>"; };
-		6FADE50714BA0494007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
-		6FADE50814BA0494007EE121 /* CoconutKit_ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarArrowRight.png; sourceTree = "<group>"; };
-		6FADE50914BA0494007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
-		6FADE50A14BA0494007EE121 /* CoconutKit_ButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_ButtonBarRefresh.png; sourceTree = "<group>"; };
-		6FADE50B14BA0494007EE121 /* CoconutKit_ButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoconutKit_ButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
-		6FADE50C14BA0494007EE121 /* CoconutKit_cursor_default_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoconutKit_cursor_default_pointer.png; sourceTree = "<group>"; };
-		6FADE50D14BA0494007EE121 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50E14BA0494007EE121 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
-		6FADE50F14BA0494007EE121 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/CoconutKit_Localizable.strings; sourceTree = "<group>"; };
 		6FADE51214BA0494007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE51314BA0494007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE51414BA0494007EE121 /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
@@ -307,7 +309,6 @@
 		6FADE58214BA0494007EE121 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FADE58614BA0494007EE121 /* CoconutKit_HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoconutKit_HLSWebViewController.xib; sourceTree = "<group>"; };
 		6FADE58714BA0494007EE121 /* HLSContainerContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerContent.h; sourceTree = "<group>"; };
 		6FADE58814BA0494007EE121 /* HLSContainerContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerContent.m; sourceTree = "<group>"; };
 		6FADE58914BA0494007EE121 /* HLSPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderViewController.h; sourceTree = "<group>"; };
@@ -372,7 +373,7 @@
 		0867D691FE84028FC02AAC07 /* CoconutKit */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE4FF14BA0494007EE121 /* Resources */,
+				6F44E9CB156BB00700B45BB4 /* Resources */,
 				6FADE51014BA0494007EE121 /* Sources */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -393,6 +394,7 @@
 				DA838786131EAD1000ECAED3 /* MessageUI.framework */,
 				6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */,
 				6F8D09A0123F545D00FCF2AF /* UIKit.framework */,
+				6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -405,27 +407,36 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		6FADE4FF14BA0494007EE121 /* Resources */ = {
+		6F44E9CB156BB00700B45BB4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE50014BA0494007EE121 /* CoconutKit_Localizable.strings */,
-				6FADE50514BA0494007EE121 /* Images */,
+				6F44E9CC156BB00700B45BB4 /* Localizable.strings */,
+				6F44E9D1156BB00700B45BB4 /* Images */,
+				6F44E9DC156BB00700B45BB4 /* Nibs */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		6FADE50514BA0494007EE121 /* Images */ = {
+		6F44E9D1156BB00700B45BB4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE50614BA0494007EE121 /* CoconutKit_ButtonBarArrowLeft.png */,
-				6FADE50714BA0494007EE121 /* CoconutKit_ButtonBarArrowLeft@2x.png */,
-				6FADE50814BA0494007EE121 /* CoconutKit_ButtonBarArrowRight.png */,
-				6FADE50914BA0494007EE121 /* CoconutKit_ButtonBarArrowRight@2x.png */,
-				6FADE50A14BA0494007EE121 /* CoconutKit_ButtonBarRefresh.png */,
-				6FADE50B14BA0494007EE121 /* CoconutKit_ButtonBarRefresh@2x.png */,
-				6FADE50C14BA0494007EE121 /* CoconutKit_cursor_default_pointer.png */,
+				6F44E9D2156BB00700B45BB4 /* ButtonBarArrowLeft.png */,
+				6F44E9D3156BB00700B45BB4 /* ButtonBarArrowLeft@2x.png */,
+				6F44E9D4156BB00700B45BB4 /* ButtonBarArrowRight.png */,
+				6F44E9D5156BB00700B45BB4 /* ButtonBarArrowRight@2x.png */,
+				6F44E9D6156BB00700B45BB4 /* ButtonBarRefresh.png */,
+				6F44E9D7156BB00700B45BB4 /* ButtonBarRefresh@2x.png */,
+				6F44E9D8156BB00700B45BB4 /* CursorDefaultPointer.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		6F44E9DC156BB00700B45BB4 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6F44E9DD156BB00700B45BB4 /* HLSWebViewController.xib */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 		6FADE51014BA0494007EE121 /* Sources */ = {
@@ -620,7 +631,6 @@
 		6FADE58514BA0494007EE121 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE58614BA0494007EE121 /* CoconutKit_HLSWebViewController.xib */,
 				6FADE58714BA0494007EE121 /* HLSContainerContent.h */,
 				6FADE58814BA0494007EE121 /* HLSContainerContent.m */,
 				6FADE58914BA0494007EE121 /* HLSPlaceholderViewController.h */,
@@ -872,18 +882,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6FADE50014BA0494007EE121 /* CoconutKit_Localizable.strings */ = {
+		6F44E9CC156BB00700B45BB4 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6FADE50114BA0494007EE121 /* de */,
-				6FADE50214BA0494007EE121 /* en */,
-				6FADE50314BA0494007EE121 /* es */,
-				6FADE50414BA0494007EE121 /* fr */,
-				6FADE50D14BA0494007EE121 /* it */,
-				6FADE50E14BA0494007EE121 /* ja */,
-				6FADE50F14BA0494007EE121 /* ko */,
+				6F44E9CD156BB00700B45BB4 /* de */,
+				6F44E9CE156BB00700B45BB4 /* en */,
+				6F44E9CF156BB00700B45BB4 /* es */,
+				6F44E9D0156BB00700B45BB4 /* fr */,
+				6F44E9D9156BB00700B45BB4 /* it */,
+				6F44E9DA156BB00700B45BB4 /* ja */,
+				6F44E9DB156BB00700B45BB4 /* ko */,
 			);
-			name = CoconutKit_Localizable.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
