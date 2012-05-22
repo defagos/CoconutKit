@@ -3,6 +3,20 @@
 
 #import "_ConcreteSubclassB.h"
 
+const struct ConcreteSubclassBAttributes ConcreteSubclassBAttributes = {
+	.codeMandatoryNumberB = @"codeMandatoryNumberB",
+	.modelMandatoryBoundedNumberB = @"modelMandatoryBoundedNumberB",
+	.modelMandatoryCodeNotZeroNumberB = @"modelMandatoryCodeNotZeroNumberB",
+	.noValidationNumberB = @"noValidationNumberB",
+};
+
+const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
+	.codeMandatoryConcreteClassesD = @"codeMandatoryConcreteClassesD",
+};
+
+const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperties = {
+};
+
 @implementation ConcreteSubclassBID
 @end
 
@@ -56,21 +70,21 @@
 
 
 
-- (short)codeMandatoryNumberBValue {
+- (int16_t)codeMandatoryNumberBValue {
 	NSNumber *result = [self codeMandatoryNumberB];
 	return [result shortValue];
 }
 
-- (void)setCodeMandatoryNumberBValue:(short)value_ {
+- (void)setCodeMandatoryNumberBValue:(int16_t)value_ {
 	[self setCodeMandatoryNumberB:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveCodeMandatoryNumberBValue {
+- (int16_t)primitiveCodeMandatoryNumberBValue {
 	NSNumber *result = [self primitiveCodeMandatoryNumberB];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveCodeMandatoryNumberBValue:(short)value_ {
+- (void)setPrimitiveCodeMandatoryNumberBValue:(int16_t)value_ {
 	[self setPrimitiveCodeMandatoryNumberB:[NSNumber numberWithShort:value_]];
 }
 
@@ -82,21 +96,21 @@
 
 
 
-- (short)modelMandatoryBoundedNumberBValue {
+- (int16_t)modelMandatoryBoundedNumberBValue {
 	NSNumber *result = [self modelMandatoryBoundedNumberB];
 	return [result shortValue];
 }
 
-- (void)setModelMandatoryBoundedNumberBValue:(short)value_ {
+- (void)setModelMandatoryBoundedNumberBValue:(int16_t)value_ {
 	[self setModelMandatoryBoundedNumberB:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveModelMandatoryBoundedNumberBValue {
+- (int16_t)primitiveModelMandatoryBoundedNumberBValue {
 	NSNumber *result = [self primitiveModelMandatoryBoundedNumberB];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveModelMandatoryBoundedNumberBValue:(short)value_ {
+- (void)setPrimitiveModelMandatoryBoundedNumberBValue:(int16_t)value_ {
 	[self setPrimitiveModelMandatoryBoundedNumberB:[NSNumber numberWithShort:value_]];
 }
 
@@ -108,21 +122,21 @@
 
 
 
-- (short)modelMandatoryCodeNotZeroNumberBValue {
+- (int16_t)modelMandatoryCodeNotZeroNumberBValue {
 	NSNumber *result = [self modelMandatoryCodeNotZeroNumberB];
 	return [result shortValue];
 }
 
-- (void)setModelMandatoryCodeNotZeroNumberBValue:(short)value_ {
+- (void)setModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_ {
 	[self setModelMandatoryCodeNotZeroNumberB:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveModelMandatoryCodeNotZeroNumberBValue {
+- (int16_t)primitiveModelMandatoryCodeNotZeroNumberBValue {
 	NSNumber *result = [self primitiveModelMandatoryCodeNotZeroNumberB];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveModelMandatoryCodeNotZeroNumberBValue:(short)value_ {
+- (void)setPrimitiveModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_ {
 	[self setPrimitiveModelMandatoryCodeNotZeroNumberB:[NSNumber numberWithShort:value_]];
 }
 
@@ -134,21 +148,21 @@
 
 
 
-- (short)noValidationNumberBValue {
+- (int16_t)noValidationNumberBValue {
 	NSNumber *result = [self noValidationNumberB];
 	return [result shortValue];
 }
 
-- (void)setNoValidationNumberBValue:(short)value_ {
+- (void)setNoValidationNumberBValue:(int16_t)value_ {
 	[self setNoValidationNumberB:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveNoValidationNumberBValue {
+- (int16_t)primitiveNoValidationNumberBValue {
 	NSNumber *result = [self primitiveNoValidationNumberB];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveNoValidationNumberBValue:(short)value_ {
+- (void)setPrimitiveNoValidationNumberBValue:(int16_t)value_ {
 	[self setPrimitiveNoValidationNumberB:[NSNumber numberWithShort:value_]];
 }
 
@@ -161,11 +175,14 @@
 	
 - (NSMutableSet*)codeMandatoryConcreteClassesDSet {
 	[self willAccessValueForKey:@"codeMandatoryConcreteClassesD"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"codeMandatoryConcreteClassesD"];
+  
 	[self didAccessValueForKey:@"codeMandatoryConcreteClassesD"];
 	return result;
 }
 	
+
 
 
 

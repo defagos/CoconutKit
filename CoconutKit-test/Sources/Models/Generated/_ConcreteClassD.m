@@ -3,6 +3,18 @@
 
 #import "_ConcreteClassD.h"
 
+const struct ConcreteClassDAttributes ConcreteClassDAttributes = {
+	.noValidationNumberD = @"noValidationNumberD",
+	.noValidationStringD = @"noValidationStringD",
+};
+
+const struct ConcreteClassDRelationships ConcreteClassDRelationships = {
+	.concreteSubclassB = @"concreteSubclassB",
+};
+
+const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
+};
+
 @implementation ConcreteClassDID
 @end
 
@@ -44,21 +56,21 @@
 
 
 
-- (short)noValidationNumberDValue {
+- (int16_t)noValidationNumberDValue {
 	NSNumber *result = [self noValidationNumberD];
 	return [result shortValue];
 }
 
-- (void)setNoValidationNumberDValue:(short)value_ {
+- (void)setNoValidationNumberDValue:(int16_t)value_ {
 	[self setNoValidationNumberD:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveNoValidationNumberDValue {
+- (int16_t)primitiveNoValidationNumberDValue {
 	NSNumber *result = [self primitiveNoValidationNumberD];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveNoValidationNumberDValue:(short)value_ {
+- (void)setPrimitiveNoValidationNumberDValue:(int16_t)value_ {
 	[self setPrimitiveNoValidationNumberD:[NSNumber numberWithShort:value_]];
 }
 
@@ -78,11 +90,14 @@
 	
 - (NSMutableSet*)concreteSubclassBSet {
 	[self willAccessValueForKey:@"concreteSubclassB"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"concreteSubclassB"];
+  
 	[self didAccessValueForKey:@"concreteSubclassB"];
 	return result;
 }
 	
+
 
 
 

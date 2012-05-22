@@ -3,6 +3,24 @@
 
 #import "_Person.h"
 
+const struct PersonAttributes PersonAttributes = {
+	.birthdate = @"birthdate",
+	.city = @"city",
+	.country = @"country",
+	.email = @"email",
+	.firstName = @"firstName",
+	.lastName = @"lastName",
+	.nbrChildren = @"nbrChildren",
+	.state = @"state",
+	.street = @"street",
+};
+
+const struct PersonRelationships PersonRelationships = {
+};
+
+const struct PersonFetchedProperties PersonFetchedProperties = {
+};
+
 @implementation PersonID
 @end
 
@@ -86,21 +104,21 @@
 
 
 
-- (short)nbrChildrenValue {
+- (int16_t)nbrChildrenValue {
 	NSNumber *result = [self nbrChildren];
 	return [result shortValue];
 }
 
-- (void)setNbrChildrenValue:(short)value_ {
+- (void)setNbrChildrenValue:(int16_t)value_ {
 	[self setNbrChildren:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveNbrChildrenValue {
+- (int16_t)primitiveNbrChildrenValue {
 	NSNumber *result = [self primitiveNbrChildren];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveNbrChildrenValue:(short)value_ {
+- (void)setPrimitiveNbrChildrenValue:(int16_t)value_ {
 	[self setPrimitiveNbrChildren:[NSNumber numberWithShort:value_]];
 }
 
@@ -116,6 +134,7 @@
 
 
 @dynamic street;
+
 
 
 

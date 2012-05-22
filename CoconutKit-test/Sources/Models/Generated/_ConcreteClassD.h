@@ -4,6 +4,18 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct ConcreteClassDAttributes {
+	 NSString *noValidationNumberD;
+	 NSString *noValidationStringD;
+} ConcreteClassDAttributes;
+
+extern const struct ConcreteClassDRelationships {
+	 NSString *concreteSubclassB;
+} ConcreteClassDRelationships;
+
+extern const struct ConcreteClassDFetchedProperties {
+} ConcreteClassDFetchedProperties;
+
 @class ConcreteSubclassB;
 
 
@@ -21,19 +33,19 @@
 
 
 
-@property (nonatomic, retain) NSNumber *noValidationNumberD;
+@property (nonatomic, retain) NSNumber* noValidationNumberD;
 
 
-@property short noValidationNumberDValue;
-- (short)noValidationNumberDValue;
-- (void)setNoValidationNumberDValue:(short)value_;
+@property int16_t noValidationNumberDValue;
+- (int16_t)noValidationNumberDValue;
+- (void)setNoValidationNumberDValue:(int16_t)value_;
 
 //- (BOOL)validateNoValidationNumberD:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSString *noValidationStringD;
+@property (nonatomic, retain) NSString* noValidationStringD;
 
 
 //- (BOOL)validateNoValidationStringD:(id*)value_ error:(NSError**)error_;
@@ -45,6 +57,7 @@
 @property (nonatomic, retain) NSSet* concreteSubclassB;
 
 - (NSMutableSet*)concreteSubclassBSet;
+
 
 
 
@@ -66,8 +79,8 @@
 - (NSNumber*)primitiveNoValidationNumberD;
 - (void)setPrimitiveNoValidationNumberD:(NSNumber*)value;
 
-- (short)primitiveNoValidationNumberDValue;
-- (void)setPrimitiveNoValidationNumberDValue:(short)value_;
+- (int16_t)primitiveNoValidationNumberDValue;
+- (void)setPrimitiveNoValidationNumberDValue:(int16_t)value_;
 
 
 
