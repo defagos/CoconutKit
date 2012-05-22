@@ -10,15 +10,12 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05BC14BC0A0E0026F512 /* img_localized.png */; };
 		6F3B05CE14BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05C714BC0A500026F512 /* img_localized.png */; };
-		6F3B05D014BC0A510026F512 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B05CC14BC0A510026F512 /* img_localized.png */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7114BB75D000D54088 /* DemoTable.strings */; };
-		6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D7514BB75D900D54088 /* DemoTable.strings */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
@@ -199,7 +196,6 @@
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36321468FD9D00C02549 /* Localizable.strings */; };
-		6FFE36E41468FD9D00C02549 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FFE36351468FD9D00C02549 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1455,7 +1451,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FFE36E31468FD9D00C02549 /* Localizable.strings in Resources */,
-				6FFE36E41468FD9D00C02549 /* Localizable.strings in Resources */,
 				6FADE88714BA04C9007EE121 /* ProximaNova-Bold.otf in Resources */,
 				6FADE88814BA04C9007EE121 /* ProximaNova-Regular.otf in Resources */,
 				6FADE88914BA04C9007EE121 /* cell_bkgr_brown_large.png in Resources */,
@@ -1504,10 +1499,7 @@
 				6FADE8DC14BA04C9007EE121 /* WizardIdentityPageViewController.xib in Resources */,
 				6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F507D7314BB75D000D54088 /* DemoTable.strings in Resources */,
-				6F507D7714BB75D900D54088 /* DemoTable.strings in Resources */,
-				6F3B05BE14BC0A0E0026F512 /* img_localized.png in Resources */,
 				6F3B05CE14BC0A510026F512 /* img_localized.png in Resources */,
-				6F3B05D014BC0A510026F512 /* img_localized.png in Resources */,
 				6FDE686B14BC8CFC00F8CD3A /* sample_text.html in Resources */,
 				6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */,
 				6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */,
@@ -1673,14 +1665,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6F3B05BC14BC0A0E0026F512 /* img_localized.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-			);
-			name = img_localized.png;
-			path = "/Users/defagos/hortis/devhortis/CoconutKit/CoconutKit-demo/Resources/Images";
-			sourceTree = "<absolute>";
-		};
 		6F3B05C714BC0A500026F512 /* img_localized.png */ = {
 			isa = PBXVariantGroup;
 			children = (
