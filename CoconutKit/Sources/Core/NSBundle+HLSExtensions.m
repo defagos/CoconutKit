@@ -9,6 +9,7 @@
 #import "NSBundle+HLSExtensions.h"
 
 #import "HLSCategoryLinker.h"
+#import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 
 HLSLinkCategory(NSBundle_HLSExtensions)
@@ -25,8 +26,11 @@ HLSLinkCategory(NSBundle_HLSExtensions)
 {
     static NSBundle *coconutKitBundle = nil;
     if (! coconutKitBundle) {
-        NSString *coconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit" ofType:@"bundle"];
+        NSString *coconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit-resources" ofType:@"bundle"];
         coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitPath];
+        if (! coconutKitBundle) {
+            HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project?");
+        }
     }
     return coconutKitBundle;
 }
