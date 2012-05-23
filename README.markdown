@@ -30,22 +30,6 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms. [A companion repository](https://github.com/defagos/CoconutKit-binaries) exists for easy installation using CocoaPods, but you do not need to check it out directly.
 
-### How can I support CoconutKit development?
-
-CoconutKit is made available for free. If you still find CoconutKit useful and want to contribute to its development, donations are warmly welcomed. Thanks in advance!
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_donations">
-<input type="hidden" name="business" value="3V35ZXWYXGAYG">
-<input type="hidden" name="lc" value="CH">
-<input type="hidden" name="item_name" value="Samuel Defago">
-<input type="hidden" name="item_number" value="CoconutKit">
-<input type="hidden" name="currency_code" value="CHF">
-<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
-<input type="image" src="https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-
 ### Why should I use CoconutKit?
 
 When designing components, I strongly emphasize on clean and documented interfaces, as well as on code quality. My goal is to create components that are easy to use, reliable, and which do what they claim they do, without nasty surprises. You should never have to look at a component implementation to know how it works, this should be obvious just by looking at its interface. I also strive to avoid components that leak or crash. If those are qualities you love to find in libraries, then you should start using CoconutKit now!
