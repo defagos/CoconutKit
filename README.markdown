@@ -49,6 +49,8 @@ If the specification file is not available from the official CocoaPods specifica
 
     platform :ios
     dependency 'CoconutKit', :podspec => '/absolute/path/to/CoconutKit/Tools/CocoaPods/CoconutKit.podspec'
+    
+The specification file has successfully been tested with the latest stable CocoaPods release (0.5.1).
 
 #### Adding binaries manually
 
