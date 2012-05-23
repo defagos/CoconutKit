@@ -45,10 +45,10 @@ Since CoconutKit 1.1.4, the easiest and recommended way to add CoconutKit to a p
     platform :ios
     dependency 'CoconutKit', '~> <version>'
 
-If the specification file is not available from the official CocoaPods specification repository, use the specification file available in the `Tools/CocoaPods` directory. Either add it to your `~/.cocoapods` local specification repository, or edit your project `Podfile` to tell CocoaPods to use it:
+If the specification file is not available from the official CocoaPods specification repository, use the specification file available in the `Tools/CocoaPods` directory. Either add it to your `~/.cocoapods` local specification repository (creating the dedicated folder structure), or edit your project `Podfile` to tell CocoaPods to use the file directly:
 
     platform :ios
-    dependency 'CoconutKit', :podspec => 'path/to/CoconutKit/Tools/CocoaPods/CoconutKit.podspec'
+    dependency 'CoconutKit', :podspec => '/absolute/path/to/CoconutKit/Tools/CocoaPods/CoconutKit.podspec'
 
 #### Adding binaries manually
 

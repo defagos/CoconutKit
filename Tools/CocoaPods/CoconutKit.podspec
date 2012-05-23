@@ -1,8 +1,6 @@
-Lib_version = '1.1.4'
-
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = Lib_version
+  s.version = '1.1.4'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components'
   s.homepage = 'https://github.com/defagos/CoconutKit'
@@ -15,7 +13,7 @@ Pod::Spec.new do |s|
   # TODO: Starting with CocoaPods 0.6, we will be able to retrieve files over HTTP. s.resources and s.xcconfig will need to be updated
   #  s.source = { :http => 'https://github.com/downloads/defagos/CoconutKit/CoconutKit-' + Lib_version + '-Binaries.zip' }  
 
-  s.source   = { :git => 'git://github.com/defagos/CoconutKit-binaries.git', :tag => 'Lib_version' }
+  s.source   = { :git => 'git://github.com/defagos/CoconutKit-binaries.git', :tag => '1.1.4' }
   s.resources = 'CoconutKit-resources.bundle'
 
   s.xcconfig =  { 'FRAMEWORK_SEARCH_PATHS' => '${PODS_ROOT}/CoconutKit', 'OTHER_LDFLAGS' => '-framework CoconutKit' }
