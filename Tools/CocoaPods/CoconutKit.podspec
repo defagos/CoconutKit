@@ -9,10 +9,7 @@ Pod::Spec.new do |s|
   s.description = 'CoconutKit is a library of high-quality iOS components written at hortis le studio and in my spare time. It includes several tools for dealing with view controllers, multi-threading, view animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.'
 
   s.platform = :ios
-
-  # TODO: Starting with CocoaPods 0.6, we will be able to retrieve files over HTTP. s.resources and s.xcconfig will need to be updated
-  #  s.source = { :http => 'https://github.com/downloads/defagos/CoconutKit/CoconutKit-' + Lib_version + '-Binaries.zip' }  
-
+  
   s.source   = { :git => 'git://github.com/defagos/CoconutKit-binaries.git', :tag => '1.1.4' }
   s.resources = 'CoconutKit-resources.bundle'
 
