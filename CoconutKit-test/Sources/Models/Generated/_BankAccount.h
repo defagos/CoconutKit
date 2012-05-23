@@ -4,6 +4,18 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct BankAccountAttributes {
+	 NSString *balance;
+	 NSString *name;
+} BankAccountAttributes;
+
+extern const struct BankAccountRelationships {
+	 NSString *owner;
+} BankAccountRelationships;
+
+extern const struct BankAccountFetchedProperties {
+} BankAccountFetchedProperties;
+
 @class Person;
 
 
@@ -21,7 +33,7 @@
 
 
 
-@property (nonatomic, retain) NSNumber *balance;
+@property (nonatomic, retain) NSNumber* balance;
 
 
 @property double balanceValue;
@@ -33,7 +45,7 @@
 
 
 
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString* name;
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
@@ -45,6 +57,7 @@
 @property (nonatomic, retain) Person* owner;
 
 //- (BOOL)validateOwner:(id*)value_ error:(NSError**)error_;
+
 
 
 

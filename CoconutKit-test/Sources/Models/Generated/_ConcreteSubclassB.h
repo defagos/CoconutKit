@@ -4,6 +4,20 @@
 #import <CoreData/CoreData.h>
 #import "AbstractClassA.h"
 
+extern const struct ConcreteSubclassBAttributes {
+	 NSString *codeMandatoryNumberB;
+	 NSString *modelMandatoryBoundedNumberB;
+	 NSString *modelMandatoryCodeNotZeroNumberB;
+	 NSString *noValidationNumberB;
+} ConcreteSubclassBAttributes;
+
+extern const struct ConcreteSubclassBRelationships {
+	 NSString *codeMandatoryConcreteClassesD;
+} ConcreteSubclassBRelationships;
+
+extern const struct ConcreteSubclassBFetchedProperties {
+} ConcreteSubclassBFetchedProperties;
+
 @class ConcreteClassD;
 
 
@@ -23,48 +37,48 @@
 
 
 
-@property (nonatomic, retain) NSNumber *codeMandatoryNumberB;
+@property (nonatomic, retain) NSNumber* codeMandatoryNumberB;
 
 
-@property short codeMandatoryNumberBValue;
-- (short)codeMandatoryNumberBValue;
-- (void)setCodeMandatoryNumberBValue:(short)value_;
+@property int16_t codeMandatoryNumberBValue;
+- (int16_t)codeMandatoryNumberBValue;
+- (void)setCodeMandatoryNumberBValue:(int16_t)value_;
 
 //- (BOOL)validateCodeMandatoryNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSNumber *modelMandatoryBoundedNumberB;
+@property (nonatomic, retain) NSNumber* modelMandatoryBoundedNumberB;
 
 
-@property short modelMandatoryBoundedNumberBValue;
-- (short)modelMandatoryBoundedNumberBValue;
-- (void)setModelMandatoryBoundedNumberBValue:(short)value_;
+@property int16_t modelMandatoryBoundedNumberBValue;
+- (int16_t)modelMandatoryBoundedNumberBValue;
+- (void)setModelMandatoryBoundedNumberBValue:(int16_t)value_;
 
 //- (BOOL)validateModelMandatoryBoundedNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSNumber *modelMandatoryCodeNotZeroNumberB;
+@property (nonatomic, retain) NSNumber* modelMandatoryCodeNotZeroNumberB;
 
 
-@property short modelMandatoryCodeNotZeroNumberBValue;
-- (short)modelMandatoryCodeNotZeroNumberBValue;
-- (void)setModelMandatoryCodeNotZeroNumberBValue:(short)value_;
+@property int16_t modelMandatoryCodeNotZeroNumberBValue;
+- (int16_t)modelMandatoryCodeNotZeroNumberBValue;
+- (void)setModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_;
 
 //- (BOOL)validateModelMandatoryCodeNotZeroNumberB:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSNumber *noValidationNumberB;
+@property (nonatomic, retain) NSNumber* noValidationNumberB;
 
 
-@property short noValidationNumberBValue;
-- (short)noValidationNumberBValue;
-- (void)setNoValidationNumberBValue:(short)value_;
+@property int16_t noValidationNumberBValue;
+- (int16_t)noValidationNumberBValue;
+- (void)setNoValidationNumberBValue:(int16_t)value_;
 
 //- (BOOL)validateNoValidationNumberB:(id*)value_ error:(NSError**)error_;
 
@@ -75,6 +89,7 @@
 @property (nonatomic, retain) NSSet* codeMandatoryConcreteClassesD;
 
 - (NSMutableSet*)codeMandatoryConcreteClassesDSet;
+
 
 
 
@@ -96,8 +111,8 @@
 - (NSNumber*)primitiveCodeMandatoryNumberB;
 - (void)setPrimitiveCodeMandatoryNumberB:(NSNumber*)value;
 
-- (short)primitiveCodeMandatoryNumberBValue;
-- (void)setPrimitiveCodeMandatoryNumberBValue:(short)value_;
+- (int16_t)primitiveCodeMandatoryNumberBValue;
+- (void)setPrimitiveCodeMandatoryNumberBValue:(int16_t)value_;
 
 
 
@@ -105,8 +120,8 @@
 - (NSNumber*)primitiveModelMandatoryBoundedNumberB;
 - (void)setPrimitiveModelMandatoryBoundedNumberB:(NSNumber*)value;
 
-- (short)primitiveModelMandatoryBoundedNumberBValue;
-- (void)setPrimitiveModelMandatoryBoundedNumberBValue:(short)value_;
+- (int16_t)primitiveModelMandatoryBoundedNumberBValue;
+- (void)setPrimitiveModelMandatoryBoundedNumberBValue:(int16_t)value_;
 
 
 
@@ -114,8 +129,8 @@
 - (NSNumber*)primitiveModelMandatoryCodeNotZeroNumberB;
 - (void)setPrimitiveModelMandatoryCodeNotZeroNumberB:(NSNumber*)value;
 
-- (short)primitiveModelMandatoryCodeNotZeroNumberBValue;
-- (void)setPrimitiveModelMandatoryCodeNotZeroNumberBValue:(short)value_;
+- (int16_t)primitiveModelMandatoryCodeNotZeroNumberBValue;
+- (void)setPrimitiveModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_;
 
 
 
@@ -123,8 +138,8 @@
 - (NSNumber*)primitiveNoValidationNumberB;
 - (void)setPrimitiveNoValidationNumberB:(NSNumber*)value;
 
-- (short)primitiveNoValidationNumberBValue;
-- (void)setPrimitiveNoValidationNumberBValue:(short)value_;
+- (int16_t)primitiveNoValidationNumberBValue;
+- (void)setPrimitiveNoValidationNumberBValue:(int16_t)value_;
 
 
 

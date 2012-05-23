@@ -3,6 +3,17 @@
 
 #import "_AbstractClassA.h"
 
+const struct AbstractClassAAttributes AbstractClassAAttributes = {
+	.codeMandatoryNotEmptyStringA = @"codeMandatoryNotEmptyStringA",
+	.noValidationStringA = @"noValidationStringA",
+};
+
+const struct AbstractClassARelationships AbstractClassARelationships = {
+};
+
+const struct AbstractClassAFetchedProperties AbstractClassAFetchedProperties = {
+};
+
 @implementation AbstractClassAID
 @end
 
@@ -44,6 +55,7 @@
 
 
 @dynamic noValidationStringA;
+
 
 
 

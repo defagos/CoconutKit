@@ -3,6 +3,18 @@
 
 #import "_BankAccount.h"
 
+const struct BankAccountAttributes BankAccountAttributes = {
+	.balance = @"balance",
+	.name = @"name",
+};
+
+const struct BankAccountRelationships BankAccountRelationships = {
+	.owner = @"owner",
+};
+
+const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
+};
+
 @implementation BankAccountID
 @end
 
@@ -76,6 +88,7 @@
 @dynamic owner;
 
 	
+
 
 
 

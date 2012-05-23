@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTaskGroup.h"
+#import "NSBundle+HLSExtensions.h"
 
 const NSUInteger kProgressStepsCounterThreshold = 50;
 
@@ -147,7 +148,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
     if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
-        return NSLocalizedStringFromTable(@"No remaining time estimate available", @"CoconutKit_Localizable", @"No remaining time estimate available");
+        return NSLocalizedStringFromTableInBundle(@"No remaining time estimate available", @"Localizable", [NSBundle coconutKitBundle], @"No remaining time estimate available");
     }    
     
     NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
@@ -158,16 +159,16 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     NSUInteger minutes = timeInterval / 60;
     
     if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dd %dh remaining (estimate)", @"CoconutKit_Localizable", @"%dd %dh remaining (estimate)"), days, hours];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dd %dh remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dd %dh remaining (estimate)"), days, hours];
     }
     else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%dh %dm remaining (estimate)", @"CoconutKit_Localizable", @"%dh %dm remaining (estimate)"), hours, minutes];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dh %dm remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dh %dm remaining (estimate)"), hours, minutes];
     }
     else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTable(@"%d min remaining (estimate)", @"CoconutKit_Localizable", @"%d min remaining (estimate)"), minutes];
+        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%d min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%d min remaining (estimate)"), minutes];
     }
     else {
-        return NSLocalizedStringFromTable(@"< 1 min remaining (estimate)", @"CoconutKit_Localizable", @"< 1 min remaining (estimate)");
+        return NSLocalizedStringFromTableInBundle(@"< 1 min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"< 1 min remaining (estimate)");
     }
 }
 

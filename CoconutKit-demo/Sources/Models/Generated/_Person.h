@@ -4,6 +4,24 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct PersonAttributes {
+	 NSString *birthdate;
+	 NSString *city;
+	 NSString *country;
+	 NSString *email;
+	 NSString *firstName;
+	 NSString *lastName;
+	 NSString *nbrChildren;
+	 NSString *state;
+	 NSString *street;
+} PersonAttributes;
+
+extern const struct PersonRelationships {
+} PersonRelationships;
+
+extern const struct PersonFetchedProperties {
+} PersonFetchedProperties;
+
 
 
 
@@ -27,7 +45,7 @@
 
 
 
-@property (nonatomic, retain) NSDate *birthdate;
+@property (nonatomic, retain) NSDate* birthdate;
 
 
 //- (BOOL)validateBirthdate:(id*)value_ error:(NSError**)error_;
@@ -35,7 +53,7 @@
 
 
 
-@property (nonatomic, retain) NSString *city;
+@property (nonatomic, retain) NSString* city;
 
 
 //- (BOOL)validateCity:(id*)value_ error:(NSError**)error_;
@@ -43,7 +61,7 @@
 
 
 
-@property (nonatomic, retain) NSString *country;
+@property (nonatomic, retain) NSString* country;
 
 
 //- (BOOL)validateCountry:(id*)value_ error:(NSError**)error_;
@@ -51,7 +69,7 @@
 
 
 
-@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString* email;
 
 
 //- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
@@ -59,7 +77,7 @@
 
 
 
-@property (nonatomic, retain) NSString *firstName;
+@property (nonatomic, retain) NSString* firstName;
 
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
@@ -67,7 +85,7 @@
 
 
 
-@property (nonatomic, retain) NSString *lastName;
+@property (nonatomic, retain) NSString* lastName;
 
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
@@ -75,19 +93,19 @@
 
 
 
-@property (nonatomic, retain) NSNumber *nbrChildren;
+@property (nonatomic, retain) NSNumber* nbrChildren;
 
 
-@property short nbrChildrenValue;
-- (short)nbrChildrenValue;
-- (void)setNbrChildrenValue:(short)value_;
+@property int16_t nbrChildrenValue;
+- (int16_t)nbrChildrenValue;
+- (void)setNbrChildrenValue:(int16_t)value_;
 
 //- (BOOL)validateNbrChildren:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSString *state;
+@property (nonatomic, retain) NSString* state;
 
 
 //- (BOOL)validateState:(id*)value_ error:(NSError**)error_;
@@ -95,10 +113,11 @@
 
 
 
-@property (nonatomic, retain) NSString *street;
+@property (nonatomic, retain) NSString* street;
 
 
 //- (BOOL)validateStreet:(id*)value_ error:(NSError**)error_;
+
 
 
 
@@ -152,8 +171,8 @@
 - (NSNumber*)primitiveNbrChildren;
 - (void)setPrimitiveNbrChildren:(NSNumber*)value;
 
-- (short)primitiveNbrChildrenValue;
-- (void)setPrimitiveNbrChildrenValue:(short)value_;
+- (int16_t)primitiveNbrChildrenValue;
+- (void)setPrimitiveNbrChildrenValue:(int16_t)value_;
 
 
 

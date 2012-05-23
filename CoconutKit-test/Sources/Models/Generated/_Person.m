@@ -3,6 +3,19 @@
 
 #import "_Person.h"
 
+const struct PersonAttributes PersonAttributes = {
+	.firstName = @"firstName",
+	.lastName = @"lastName",
+};
+
+const struct PersonRelationships PersonRelationships = {
+	.accounts = @"accounts",
+	.houses = @"houses",
+};
+
+const struct PersonFetchedProperties PersonFetchedProperties = {
+};
+
 @implementation PersonID
 @end
 
@@ -55,7 +68,9 @@
 	
 - (NSMutableSet*)accountsSet {
 	[self willAccessValueForKey:@"accounts"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"accounts"];
+  
 	[self didAccessValueForKey:@"accounts"];
 	return result;
 }
@@ -66,11 +81,14 @@
 	
 - (NSMutableSet*)housesSet {
 	[self willAccessValueForKey:@"houses"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"houses"];
+  
 	[self didAccessValueForKey:@"houses"];
 	return result;
 }
 	
+
 
 
 

@@ -3,6 +3,18 @@
 
 #import "_ConcreteSubclassC.h"
 
+const struct ConcreteSubclassCAttributes ConcreteSubclassCAttributes = {
+	.codeMandatoryStringC = @"codeMandatoryStringC",
+	.modelMandatoryBoundedPatternStringC = @"modelMandatoryBoundedPatternStringC",
+	.noValidationNumberC = @"noValidationNumberC",
+};
+
+const struct ConcreteSubclassCRelationships ConcreteSubclassCRelationships = {
+};
+
+const struct ConcreteSubclassCFetchedProperties ConcreteSubclassCFetchedProperties = {
+};
+
 @implementation ConcreteSubclassCID
 @end
 
@@ -58,23 +70,24 @@
 
 
 
-- (short)noValidationNumberCValue {
+- (int16_t)noValidationNumberCValue {
 	NSNumber *result = [self noValidationNumberC];
 	return [result shortValue];
 }
 
-- (void)setNoValidationNumberCValue:(short)value_ {
+- (void)setNoValidationNumberCValue:(int16_t)value_ {
 	[self setNoValidationNumberC:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveNoValidationNumberCValue {
+- (int16_t)primitiveNoValidationNumberCValue {
 	NSNumber *result = [self primitiveNoValidationNumberC];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveNoValidationNumberCValue:(short)value_ {
+- (void)setPrimitiveNoValidationNumberCValue:(int16_t)value_ {
 	[self setPrimitiveNoValidationNumberC:[NSNumber numberWithShort:value_]];
 }
+
 
 
 
