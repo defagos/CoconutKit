@@ -123,7 +123,7 @@ There are some requirements when contributing, though:
 * Do not use ARC
 * Use of private APIs is strictly forbidden
 * Development and demo projects are also included. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
-* Unit tests require the [GHUnit framework](https://github.com/gabriel/gh-unit) `GHUnitIOS.framework` to be installed under `/Developer/Frameworks`.
+* Unit tests require version 4.32 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/4.32/GHUnitIOS.framework`. More recent versions either exhibit linking issues on the device or require LLVM and thus cannot be used currently.
 
 #### Writing code
 
