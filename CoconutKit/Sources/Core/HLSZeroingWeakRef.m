@@ -44,7 +44,7 @@ static Class subclass_class(id object, SEL _cmd);
             // No support for Core Foundation objects (lead to infinite recursion)
             // For more information, see
             //   http://www.mikeash.com/pyblog/friday-qa-2010-01-22-toll-free-bridging-internals.html
-            if ([NSStringFromClass(class) hasPrefix: @"__NSCF"]) {
+            if ([NSStringFromClass(class) hasPrefix:@"NSCF"] || [NSStringFromClass(class) hasPrefix: @"__NSCF"]) {
                 @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                                reason:@"Cannot create zeroing weak references to toll-free bridged objects"
                                              userInfo:nil];
