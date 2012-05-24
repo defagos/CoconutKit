@@ -161,9 +161,13 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 
 #### Version 1.1.4
 
-* CocoaPods can now be used for easy installation
+* CocoaPods can and should now be used for easy setup
 * Resources have been packaged into a bundle
 * Added new fade-in animation
+* Added zeroing weak references
+* An HLSAnimation is now automatically canceled if it has a delegate which gets deallocated
+* Animations can now be canceled (this inhibits remaining delegate events) or terminated (this does not inhibit them)
+* HLSKenBurnsSlideShow is now a special case of the new HLSSlideShow class (several transition effects available). The HLSSlideShowDelegate protocol has been added
 * Minor fixes and implementation improvements
 
 #### Version 1.1.3
