@@ -210,7 +210,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 			};
 			name = Debug;
 		};
@@ -218,7 +218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 			};
 			name = Release;
 		};

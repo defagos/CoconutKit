@@ -950,7 +950,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 			};
 			name = Debug;
 		};
@@ -980,7 +980,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 			};
 			name = Release;
 		};
