@@ -4,6 +4,18 @@
 #import <CoreData/CoreData.h>
 #import "ConcreteSubclassB.h"
 
+extern const struct ConcreteSubclassCAttributes {
+	 NSString *codeMandatoryStringC;
+	 NSString *modelMandatoryBoundedPatternStringC;
+	 NSString *noValidationNumberC;
+} ConcreteSubclassCAttributes;
+
+extern const struct ConcreteSubclassCRelationships {
+} ConcreteSubclassCRelationships;
+
+extern const struct ConcreteSubclassCFetchedProperties {
+} ConcreteSubclassCFetchedProperties;
+
 
 
 
@@ -21,7 +33,7 @@
 
 
 
-@property (nonatomic, retain) NSString *codeMandatoryStringC;
+@property (nonatomic, retain) NSString* codeMandatoryStringC;
 
 
 //- (BOOL)validateCodeMandatoryStringC:(id*)value_ error:(NSError**)error_;
@@ -29,7 +41,7 @@
 
 
 
-@property (nonatomic, retain) NSString *modelMandatoryBoundedPatternStringC;
+@property (nonatomic, retain) NSString* modelMandatoryBoundedPatternStringC;
 
 
 //- (BOOL)validateModelMandatoryBoundedPatternStringC:(id*)value_ error:(NSError**)error_;
@@ -37,14 +49,15 @@
 
 
 
-@property (nonatomic, retain) NSNumber *noValidationNumberC;
+@property (nonatomic, retain) NSNumber* noValidationNumberC;
 
 
-@property short noValidationNumberCValue;
-- (short)noValidationNumberCValue;
-- (void)setNoValidationNumberCValue:(short)value_;
+@property int16_t noValidationNumberCValue;
+- (int16_t)noValidationNumberCValue;
+- (void)setNoValidationNumberCValue:(int16_t)value_;
 
 //- (BOOL)validateNoValidationNumberC:(id*)value_ error:(NSError**)error_;
+
 
 
 
@@ -74,8 +87,8 @@
 - (NSNumber*)primitiveNoValidationNumberC;
 - (void)setPrimitiveNoValidationNumberC:(NSNumber*)value;
 
-- (short)primitiveNoValidationNumberCValue;
-- (void)setPrimitiveNoValidationNumberCValue:(short)value_;
+- (int16_t)primitiveNoValidationNumberCValue;
+- (void)setPrimitiveNoValidationNumberCValue:(int16_t)value_;
 
 
 

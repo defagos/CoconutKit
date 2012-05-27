@@ -15,6 +15,7 @@
     UIButton *m_playForwardButton;
     UIButton *m_playBackwardButton;
     UIButton *m_cancelButton;
+    UIButton *m_terminateButton;
     UISwitch *m_animatedSwitch;
     UISwitch *m_blockingSwitch;
     UISwitch *m_resizingSwitch;
@@ -29,12 +30,14 @@
 @property (nonatomic, retain) IBOutlet UIButton *playForwardButton;
 @property (nonatomic, retain) IBOutlet UIButton *playBackwardButton;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
+@property (nonatomic, retain) IBOutlet UIButton *terminateButton;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *resizingSwitch;
 
 - (IBAction)playForward:(id)sender;
 - (IBAction)playBackward:(id)sender;
-- (IBAction)cancelButton:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)terminate:(id)sender;
 
 @end

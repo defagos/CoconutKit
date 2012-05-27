@@ -11,10 +11,12 @@
 #import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
 
+HLSLinkCategory(UIActionSheet_HLSExtensions)
+
 // Keys for associated objects
 static void *s_ownerKey = &s_ownerKey;
 
-// Original implementations of the methods we swizzle
+// Original implementation of the methods we swizzle
 static void (*s_UIActionSheet__showFromToolbar_Imp)(id, SEL, id) = NULL;
 static void (*s_UIActionSheet__showFromTabBar_Imp)(id, SEL, id) = NULL;
 static void (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(id, SEL, id, BOOL) = NULL;
@@ -22,20 +24,41 @@ static void (*s_UIActionSheet__showFromRect_inView_animated_Imp)(id, SEL, CGRect
 static void (*s_UIActionSheet__showInView_Imp)(id, SEL, id) = NULL;
 static void (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(id, SEL, NSInteger, BOOL) = NULL;
 
-HLSLinkCategory(UIActionSheet_HLSExtensions)
-
-@interface UIActionSheet (HLSExtensionsPrivate)
-
-- (void)swizzledShowFromToolbar:(UIToolbar *)toolbar;
-- (void)swizzledShowFromTabBar:(UITabBar *)tabBar;
-- (void)swizzledShowFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated;
-- (void)swizzledShowFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated;
-- (void)swizzledShowInView:(UIView *)view;
-- (void)swizzledDismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
-
-@end
+// Swizzled method implementations
+static void swizzled_UIActionSheet__showFromToolbar_Imp(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar);
+static void swizzled_UIActionSheet__showFromTabBar_Imp(UIActionSheet *self, SEL _cmd, UITabBar *tabBar);
+static void swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated);
+static void swizzled_UIActionSheet__showFromRect_inView_animated_Imp(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated);
+static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd, UIView *view);
+static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated);
 
 @implementation UIActionSheet (HLSExtensions)
+
+#pragma mark Class methods
+
++ (void)load
+{
+    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
+                                                                                     @selector(showFromToolbar:), 
+                                                                                     (IMP)swizzled_UIActionSheet__showFromToolbar_Imp);
+    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
+                                                                                    @selector(showFromTabBar:), 
+                                                                                    (IMP)swizzled_UIActionSheet__showFromTabBar_Imp);
+    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
+                                                                                                          @selector(showFromBarButtonItem:animated:), 
+                                                                                                          (IMP)swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp);
+    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))HLSSwizzleSelector(self,
+                                                                                                                @selector(showFromRect:inView:animated:), 
+                                                                                                                (IMP)swizzled_UIActionSheet__showFromRect_inView_animated_Imp);
+    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
+                                                                                @selector(showInView:), 
+                                                                                (IMP)swizzled_UIActionSheet__showInView_Imp);
+    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))HLSSwizzleSelector(self,
+                                                                                                                         @selector(dismissWithClickedButtonIndex:animated:), 
+                                                                                                                         (IMP)swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp);
+}
+
+#pragma mark Accessors and mutators
 
 - (id)owner
 {
@@ -44,60 +67,42 @@ HLSLinkCategory(UIActionSheet_HLSExtensions)
 
 @end
 
-@implementation UIActionSheet (HLSExtensionsPrivate)
+#pragma mark Swizzled method implementations
 
-+ (void)load
-{
-    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(showFromToolbar:), @selector(swizzledShowFromToolbar:));
-    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(showFromTabBar:), @selector(swizzledShowFromTabBar:));
-    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
-                                                                                                          @selector(showFromBarButtonItem:animated:), 
-                                                                                                          @selector(swizzledShowFromBarButtonItem:animated:));
-    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))HLSSwizzleSelector(self,
-                                                                                                                @selector(showFromRect:inView:animated:), 
-                                                                                                                @selector(swizzledShowFromRect:inView:animated:));
-    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, @selector(showInView:), @selector(swizzledShowInView:));
-    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))HLSSwizzleSelector(self,
-                                                                                                                         @selector(dismissWithClickedButtonIndex:animated:), 
-                                                                                                                         @selector(swizzledDismissWithClickedButtonIndex:animated:));
-}
-
-- (void)swizzledShowFromToolbar:(UIToolbar *)toolbar
+static void swizzled_UIActionSheet__showFromToolbar_Imp(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar)
 {
     objc_setAssociatedObject(self, s_ownerKey, toolbar, OBJC_ASSOCIATION_ASSIGN);
-    (*s_UIActionSheet__showFromToolbar_Imp)(self, @selector(showFromToolbar:), toolbar);
+    (*s_UIActionSheet__showFromToolbar_Imp)(self, _cmd, toolbar);
 }
 
-- (void)swizzledShowFromTabBar:(UITabBar *)tabBar
+static void swizzled_UIActionSheet__showFromTabBar_Imp(UIActionSheet *self, SEL _cmd, UITabBar *tabBar)
 {
     objc_setAssociatedObject(self, s_ownerKey, tabBar, OBJC_ASSOCIATION_ASSIGN);
-    (*s_UIActionSheet__showFromTabBar_Imp)(self, @selector(showFromTabBar:), tabBar);
+    (*s_UIActionSheet__showFromTabBar_Imp)(self, _cmd, tabBar);
 }
 
-- (void)swizzledShowFromBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated
+static void swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated)
 {
     objc_setAssociatedObject(self, s_ownerKey, barButtonItem, OBJC_ASSOCIATION_ASSIGN);
-    (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(self, @selector(showFromBarButtonItem:animated:), barButtonItem, animated);
+    (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(self, _cmd, barButtonItem, animated);
 }
 
-- (void)swizzledShowFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated
+static void swizzled_UIActionSheet__showFromRect_inView_animated_Imp(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated)
 {
     objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
-    (*s_UIActionSheet__showFromRect_inView_animated_Imp)(self, @selector(showFromRect:inView:animated:), rect, view, animated);
+    (*s_UIActionSheet__showFromRect_inView_animated_Imp)(self, _cmd, rect, view, animated);
 }
 
-- (void)swizzledShowInView:(UIView *)view
+static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd, UIView *view)
 {
     objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
-    (*s_UIActionSheet__showInView_Imp)(self, @selector(showInView:), view);
+    (*s_UIActionSheet__showInView_Imp)(self, _cmd, view);
 }
 
 // The dismissWithClickedButtonIndex:animated: method is also called when the user dismisses
 // the action sheet by tapping outside it
-- (void)swizzledDismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
+static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated)
 {
-    (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(self, @selector(dismissWithClickedButtonIndex:animated:), buttonIndex, animated);
+    (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(self, _cmd, buttonIndex, animated);
     objc_setAssociatedObject(self, s_ownerKey, nil, OBJC_ASSOCIATION_ASSIGN);
 }
-
-@end

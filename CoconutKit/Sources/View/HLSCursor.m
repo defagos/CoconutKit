@@ -12,6 +12,7 @@
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 #import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSExtensions.h"
 
 static const CGFloat kCursorDefaultSpacing = 20.f;
 
@@ -173,7 +174,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if (! m_viewsCreated) {
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
-            UIImage *pointerImage = [UIImage imageNamed:@"CoconutKit_cursor_default_pointer.png"];
+            NSString *pointerImagePath = [[NSBundle coconutKitBundle] pathForResource:@"CursorDefaultPointer" ofType:@"png"];
+            UIImage *pointerImage = [UIImage imageWithContentsOfFile:pointerImagePath];
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
             imageView.contentStretch = CGRectMake(0.5f, 
                                                   0.5f, 

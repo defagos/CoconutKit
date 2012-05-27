@@ -3,6 +3,17 @@
 
 #import "_House.h"
 
+const struct HouseAttributes HouseAttributes = {
+	.name = @"name",
+};
+
+const struct HouseRelationships HouseRelationships = {
+	.owners = @"owners",
+};
+
+const struct HouseFetchedProperties HouseFetchedProperties = {
+};
+
 @implementation HouseID
 @end
 
@@ -48,11 +59,14 @@
 	
 - (NSMutableSet*)ownersSet {
 	[self willAccessValueForKey:@"owners"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"owners"];
+  
 	[self didAccessValueForKey:@"owners"];
 	return result;
 }
 	
+
 
 
 

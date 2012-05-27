@@ -4,6 +4,17 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct AbstractClassAAttributes {
+	 NSString *codeMandatoryNotEmptyStringA;
+	 NSString *noValidationStringA;
+} AbstractClassAAttributes;
+
+extern const struct AbstractClassARelationships {
+} AbstractClassARelationships;
+
+extern const struct AbstractClassAFetchedProperties {
+} AbstractClassAFetchedProperties;
+
 
 
 
@@ -20,7 +31,7 @@
 
 
 
-@property (nonatomic, retain) NSString *codeMandatoryNotEmptyStringA;
+@property (nonatomic, retain) NSString* codeMandatoryNotEmptyStringA;
 
 
 //- (BOOL)validateCodeMandatoryNotEmptyStringA:(id*)value_ error:(NSError**)error_;
@@ -28,10 +39,11 @@
 
 
 
-@property (nonatomic, retain) NSString *noValidationStringA;
+@property (nonatomic, retain) NSString* noValidationStringA;
 
 
 //- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;
+
 
 
 

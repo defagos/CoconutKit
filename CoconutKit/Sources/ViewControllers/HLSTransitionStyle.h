@@ -26,14 +26,15 @@ typedef enum {
     HLSTransitionStyleCoverFromBottomLeft2,                  // The new view covers the old one starting from the bottom left corner (the old view is pushed to the back)
     HLSTransitionStyleCoverFromBottomRight2,                 // The new view covers the old one starting from the bottom right corner (the old view is pushed to the back)
     HLSTransitionStyleFadeIn,                                // The new view fades in, the old one does not change
-    HLSTransitionStyleCrossDissolve,                         // The old view fades out as the new one fades in
-    HLSTransitionStylePushFromBottom,                        // The new view pushes up the old one
-    HLSTransitionStylePushFromTop,                           // The new view pushes down the old one
-    HLSTransitionStylePushFromLeft,                          // The new view pushes the old one to the right
-    HLSTransitionStylePushFromRight,                         // The new view pushes the old one to the left
+    HLSTransitionStyleFadeIn2,                               // The new view fades in, the old one is pushed to the back
+    HLSTransitionStyleCrossDissolve,                         // The old view fades out and disappears as the new one fades in
+    HLSTransitionStylePushFromBottom,                        // The new view pushes up the old one (which disappears)
+    HLSTransitionStylePushFromTop,                           // The new view pushes down the old one (which disappears)
+    HLSTransitionStylePushFromLeft,                          // The new view pushes the old one to the right (which disappears)
+    HLSTransitionStylePushFromRight,                         // The new view pushes the old one to the left (which disappears)
     HLSTransitionStyleEmergeFromCenter,                      // The new view emerges from the center of the placeholder view
-    HLSTransitionStyleFlipVertical,                        // The new view appears with a vertical 3D flip
-    HLSTransitionStyleFlipHorizontal,                      // The new view appears with a horizontal 3D flip
+    HLSTransitionStyleFlipVertical,                          // The new view appears with a vertical 3D flip
+    HLSTransitionStyleFlipHorizontal,                        // The new view appears with a horizontal 3D flip
     HLSTransitionStyleEnumEnd,
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;
