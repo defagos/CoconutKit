@@ -11,9 +11,11 @@ Pod::Spec.new do |s|
   s.platform = :ios
   
   s.source   = { :git => 'git://github.com/defagos/CoconutKit-binaries.git', :tag => '1.1.4' }
+  
+  s.source_files = 'empty.m'
   s.resources = 'CoconutKit-resources.bundle'
-
-  s.xcconfig =  { 'FRAMEWORK_SEARCH_PATHS' => '${PODS_ROOT}/CoconutKit', 'OTHER_LDFLAGS' => '-framework CoconutKit' }
+  
+  s.xcconfig =  { 'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/CoconutKit', 'OTHER_LDFLAGS' => '-framework CoconutKit' }
 
   s.frameworks = 'CoreData', 'MessageUI', 'QuartzCore'
 end

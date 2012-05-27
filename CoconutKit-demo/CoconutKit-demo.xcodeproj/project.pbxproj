@@ -364,7 +364,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F000178156BF2530055CED7 /* CoconutKit-trunk-Release.staticframework */,
+				6F000178156BF2530055CED7 /* CoconutKit-1.1.4-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -375,15 +375,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F000178156BF2530055CED7 /* CoconutKit-trunk-Release.staticframework */ = {
+		6F000178156BF2530055CED7 /* CoconutKit-1.1.4-Release.staticframework */ = {
 			isa = PBXGroup;
 			children = (
 				6F000179156BF2530055CED7 /* Bootstrap */,
 				6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */,
 				6F00017C156BF2530055CED7 /* CoconutKit.framework */,
 			);
-			name = "CoconutKit-trunk-Release.staticframework";
-			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
+			name = "CoconutKit-1.1.4-Release.staticframework";
+			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1.4-Release.staticframework";
 			sourceTree = "<absolute>";
 		};
 		6F000179156BF2530055CED7 /* Bootstrap */ = {
@@ -1169,7 +1169,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1.4-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1188,7 +1188,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
+					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-1.1.4-$(CONFIGURATION).staticframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
@@ -1220,7 +1220,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1248,7 +1248,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.1;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
