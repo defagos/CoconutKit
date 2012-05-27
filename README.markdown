@@ -167,7 +167,7 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 * Added zeroing weak references
 * An HLSAnimation is now automatically canceled if it has a delegate which gets deallocated
 * Animations can now be canceled (this inhibits remaining delegate events) or terminated (this does not inhibit them)
-* HLSKenBurnsSlideShow is now a special case of the new HLSSlideShow class (several transition effects available). The HLSSlideShowDelegate protocol has been added
+* HLSKenBurnsSlideshow is now a special case of the new HLSSlideshow class (several transition effects available). The HLSSlideshowDelegate protocol has been added
 * Minor fixes and implementation improvements
 
 #### Version 1.1.3
