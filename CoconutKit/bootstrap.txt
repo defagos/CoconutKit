@@ -17,6 +17,7 @@ NSManagedObject+HLSValidation.m
 NSObject+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
+NSURLRequest+HLSExtensions.m
 UIActionSheet+HLSExtensions.m
 UIBarButtonItem+HLSActionSheet.m
 UIColor+HLSExtensions.m
