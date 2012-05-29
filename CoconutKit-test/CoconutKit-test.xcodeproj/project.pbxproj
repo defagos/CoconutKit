@@ -19,6 +19,7 @@
 		6F2908571498734100506DDC /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F29084E1498734100506DDC /* _ConcreteSubclassB.m */; };
 		6F2908581498734100506DDC /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908501498734100506DDC /* _ConcreteSubclassC.m */; };
 		6F290876149877F300506DDC /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F290875149877F300506DDC /* TestErrors.m */; };
+		6F2D455C15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D455B15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m */; };
 		6F31A5C4156DF6690069CD98 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F31A5C3156DF6690069CD98 /* GHUnitIOS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6F33348813FAF9E0000FC9FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348713FAF9E0000FC9FD /* UIKit.framework */; };
 		6F33348A13FAF9E0000FC9FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F33348913FAF9E0000FC9FD /* Foundation.framework */; };
@@ -161,6 +162,8 @@
 		6F2908501498734100506DDC /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
 		6F290874149877F300506DDC /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
 		6F290875149877F300506DDC /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
+		6F2D455A15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F2D455B15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F31A5C3156DF6690069CD98 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = /Developer/Frameworks/GHUnitIOS/4.32/GHUnitIOS.framework; sourceTree = "<absolute>"; };
 		6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F33348713FAF9E0000FC9FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -541,6 +544,8 @@
 				6F897872152B505D006C8231 /* HLSZeroingWeakRefTestCase.m */,
 				6F33351413FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.h */,
 				6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */,
+				6F2D455A15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.h */,
+				6F2D455B15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m */,
 				6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */,
 				6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */,
 				6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */,
@@ -1017,6 +1022,7 @@
 				6FDDEC251529782500CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */,
 				6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
+				6F2D455C15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
