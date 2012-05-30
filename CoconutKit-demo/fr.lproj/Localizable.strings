@@ -78,6 +78,8 @@
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Push"="Push";
+"Push UINavigationController"="Push UINavigationController";
+"Push UITabBarController"="Push UITabBarController";
 "Random"="Aléatoire";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";

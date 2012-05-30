@@ -22,17 +22,6 @@
 
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Installs a test button to see the benefits of a toolbar tint color
-    UIBarButtonItem *actionBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                          target:nil 
-                                                                                          action:NULL] autorelease];
-    self.toolbarItems = [NSArray arrayWithObject:actionBarButtonItem];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -81,6 +70,12 @@
 - (void)localize
 {
     [super localize];
+    
+    // Installs a test button to see the benefits of a toolbar tint color
+    UIBarButtonItem *actionBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                          target:nil 
+                                                                                          action:NULL] autorelease];
+    self.toolbarItems = [NSArray arrayWithObject:actionBarButtonItem];
     
     self.title = NSLocalizedString(@"Skinning", @"Skinning");
 }

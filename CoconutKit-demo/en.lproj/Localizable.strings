@@ -79,6 +79,8 @@
 "Portrait only"="Portrait only";
 "Previous"="Previous";
 "Push"="Push";
+"Push UINavigationController"="Push UINavigationController";
+"Push UITabBarController"="Push UITabBarController";
 "Random"="Random";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
