@@ -25,6 +25,12 @@
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
                     sortedUsingDescriptors:(NSArray *)sortDescriptors;
 
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                    inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+
 /**
  * When called on an NSManagedObject subclass, query all instances of it, sorting them using the specified descriptors
  * (without context parameter, the default HLSModelManager context is used)
@@ -32,6 +38,10 @@
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
                        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors;
+
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 /**
  * When called on an NSManagedObject subclass, query all instances of it, without predictable ordering (without context 

@@ -14,7 +14,9 @@ NSDictionary+HLSExtensions.m
 NSError+HLSExtensions.m
 NSManagedObject+HLSExtensions.m
 NSManagedObject+HLSValidation.m
+NSMutableArray+HLSExtensions.m
 NSObject+HLSExtensions.m
+NSSet+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m

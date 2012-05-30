@@ -62,6 +62,24 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
                         inManagedObjectContext:[HLSModelManager defaultModelContext]];
 }
 
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                    inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self filteredObjectsUsingPredicate:predicate
+                        sortedUsingDescriptors:sortDescriptors 
+                        inManagedObjectContext:managedObjectContext];
+}
+
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self filteredObjectsUsingPredicate:predicate
+                        sortedUsingDescriptors:sortDescriptors];
+}
+
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
                        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
@@ -73,6 +91,20 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
 {
     return [self allObjectsSortedUsingDescriptors:sortDescriptors inManagedObjectContext:[HLSModelManager defaultModelContext]];
+}
+
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self allObjectsSortedUsingDescriptors:sortDescriptors
+                           inManagedObjectContext:managedObjectContext];
+}
+
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self allObjectsSortedUsingDescriptors:sortDescriptors];
 }
 
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
