@@ -39,8 +39,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *fontSizeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *minFontSizeLabel;
 
-- (void)updateLabel;
-- (void)updateView;
 - (IBAction)updateView:(id)sender;
 - (IBAction)changeFontSize:(id)sender;
 

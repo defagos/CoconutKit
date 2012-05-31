@@ -8,6 +8,13 @@
 
 #import "LabelDemoViewController.h"
 
+@interface LabelDemoViewController ()
+
+- (void)updateLabel;
+- (void)updateView;
+
+@end
+
 @implementation LabelDemoViewController
 
 #pragma mark Object creation and destruction
@@ -66,15 +73,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self updateView];
     [self updateLabel];
-    self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
+    self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];    
 }
 
 - (void)updateLabel
 {
     // HLSLabel
-    
     self.label.font = [UIFont fontWithName:[self.label.font fontName] size:self.fontSizeSlider.value];
     self.label.minimumFontSize = self.minFontSizeSlider.value;
     self.label.numberOfLines = (int)self.numberOfLinesSlider.value;
@@ -84,7 +91,6 @@
     self.label.text = self.textView.text;
     
     // UILabel
-    
     self.standardLabel.font = [UIFont fontWithName:[self.label.font fontName] size:self.fontSizeSlider.value];
     self.standardLabel.minimumFontSize = self.minFontSizeSlider.value;
     self.standardLabel.numberOfLines = (int)self.numberOfLinesSlider.value;
@@ -121,6 +127,14 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Label", @"Label");
+    self.textView.text = NSLocalizedString(@"This text is too long to be displayed on 2 lines in a UILabel", 
+                                           @"This text is too long to be displayed on 2 lines in a UILabel");
+    
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:0];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:1];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", @"Bottom") forSegmentAtIndex:2];
+    
+    [self updateLabel];
 }
 
 #pragma mark UITextViewDelegate Methods

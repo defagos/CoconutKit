@@ -6,6 +6,7 @@
    Copyright 2011 Hortis. All rights reserved.
  */
 "Action sheet"="Action sheet";
+"Adjust font size to width"="Adjust font size to width";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
@@ -13,6 +14,7 @@
 "Apples & Coconut"="Apples & Coconut";
 "Birthdate"="Birthdate";
 "Blocking"="Blocking";
+"Bottom"="Bottom";
 "Bounces"="Bounces";
 "Button label, default"="Button label, default";
 "Button label, highlighted"="Button label, highlighted";
@@ -42,6 +44,7 @@
 "Error"="Error";
 "First name"="First name";
 "Fixed size"="Fixed size";
+"Font size"="Font size";
 "Formatting error"="Formatting error";
 "Forward properties"="Forward properties";
 "Header: custom cells"="Header: custom cells";
@@ -53,12 +56,15 @@
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
 "Invalid email address"="Invalid email address";
+"Label"="Label";
 "Label with some missing translation"="Label with some missing translation";
 "Landscape only"="Landscape only";
 "Language"="Language";
 "Last name"="Last name";
 "Lifecycle test"="Lifecycle test";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
+"Middle"="Middle";
+"Min font size"="Min font size";
 "Missing city"="Missing city";
 "Missing country"="Missing country";
 "Missing first name"="Missing first name";
@@ -68,9 +74,11 @@
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
 "Number of children"="Number of children";
+"Number of lines"="Number of lines";
 "Music players"="Music players";
 "Parallax scrolling"="Parallax scrolling";
 "Parallel processing"="Parallel processing";
+"Parameters for the HLSLabel and UILabel above"="Parameters for the HLSLabel and UILabel above";
 "Phones"="Phones";
 "Play"="Play";
 "Play forward"="Play forward";
@@ -107,13 +115,17 @@
 "Tasks"="Tasks";
 "Terminate"="Terminate";
 "Test in modal"="Test in modal";
+"Text"="Text";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
 "The behavior above can be disabled"="The behavior above can be disabled";
+"This text is too long to be displayed on 2 lines in a UILabel"="This text is too long to be displayed on 2 lines in a UILabel";
 "This value cannot be negative"="This value cannot be negative";
+"Top"="Top";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Uppercase string in Localizable.strings";
+"Vertical alignment"="Vertical alignment";
 "Views"="Views";
 "View controllers"="View controllers";
 "Web view"="Web view";
