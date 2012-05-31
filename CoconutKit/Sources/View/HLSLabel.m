@@ -8,46 +8,7 @@
 
 #import "HLSLabel.h"
 
-/**
- * NSString Category that provides the necessary font size to fit in a given size
- *
- * Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
- */
-
-@interface NSString (fontSizeWithFont_constrainedToSize_)
-
-- (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
-
-@end
-
-@implementation NSString (fontSizeWithFont_constrainedToSize_)
-
-- (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size
-{
-	CGFloat fontSize = [font pointSize];
-	CGFloat height = [self sizeWithFont:font constrainedToSize:CGSizeMake(size.width,FLT_MAX) lineBreakMode:UILineBreakModeWordWrap].height;
-	UIFont *newFont = font;
-	
-	//Reduce font size while too large, break if no height (empty string)
-	while (height > size.height && height != 0)
-	{   
-		fontSize--;  
-		newFont = [UIFont fontWithName:font.fontName size:fontSize];   
-		height = [self sizeWithFont:newFont constrainedToSize:CGSizeMake(size.width,FLT_MAX) lineBreakMode:UILineBreakModeWordWrap].height;
-	};
-	
-    CGFloat width = [self sizeWithFont:newFont].width;
-    while (width > size.width && width != 0)
-    {
-        fontSize--;
-        newFont = [UIFont fontWithName:font.fontName size:fontSize];   
-        width = [self sizeWithFont:newFont].width;
-    }
-	return fontSize;
-}
-
-@end
-
+#import "NSString+HLSExtensions.h"
 
 @implementation HLSLabel
 
@@ -65,8 +26,7 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-	if ((self = [super initWithFrame:frame]))
-	{
+	if ((self = [super initWithFrame:frame])) {
 		self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
 	}
 	return self;
@@ -74,8 +34,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-	if ((self = [super initWithCoder:decoder]))
-	{
+	if ((self = [super initWithCoder:decoder])) {
 		self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
 	}
 	return self;
@@ -128,8 +87,7 @@
 	if (self.adjustsFontSizeToFitWidth)
 	{
         CGSize size = CGSizeMake(self.frame.size.width*self.numberOfLines /* UGLY CHEAT -> */ * 0.9 /* <- UGLY CHEAT */, self.frame.size.height);
-        CGFloat fontSize = [text fontSizeWithFont:self.font constrainedToSize:size];
-		fontSize = (fontSize < self.minimumFontSize) ? self.minimumFontSize : fontSize;
+        CGFloat fontSize = [text fontSizeWithFont:self.font constrainedToSize:size minFontSize:self.minimumFontSize lineBreakMode:self.lineBreakMode];
 		self.font = [UIFont fontWithName:self.font.fontName size:fontSize];
 	}
 }

@@ -1823,7 +1823,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Joris Heuberger (8JMBWAFP63)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1832,7 +1832,7 @@
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
-				PROVISIONING_PROFILE = "2BFA975B-3A4F-4DE1-ADC5-F21836BB114C";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};

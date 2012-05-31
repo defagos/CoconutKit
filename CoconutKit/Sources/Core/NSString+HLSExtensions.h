@@ -22,6 +22,16 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 - (BOOL)isFilled;
 
 /**
+ * Given a font, reduce its associated point size to the largest value so that the text fits within a given
+ * CGSize (the returned point size is never smaller than a given minimum point size). If the text does not fit
+ * entirely in the CGSize it will be truncated using the specified line break mode
+ */
+- (CGFloat)fontSizeWithFont:(UIFont *)font 
+          constrainedToSize:(CGSize)size 
+                minFontSize:(CGFloat)minFontSize 
+              lineBreakMode:(UILineBreakMode)lineBreakMode;
+
+/**
  * URL encoded (aka percent encoded) string with RFC 3986 compliance
  * See http://www.openradar.me/6546984
  */

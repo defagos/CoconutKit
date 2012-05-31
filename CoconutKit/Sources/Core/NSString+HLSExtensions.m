@@ -10,6 +10,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSCategoryLinker.h"
+#import "HLSFloat.h"
 
 HLSLinkCategory(NSString_HLSExtensions)
 
@@ -44,12 +45,52 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return [[self stringByTrimmingWhitespaces] length] != 0;
 }
 
+#pragma mark Font size adjustment
+
+// Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
+- (CGFloat)fontSizeWithFont:(UIFont *)font 
+          constrainedToSize:(CGSize)size 
+                minFontSize:(CGFloat)minFontSize 
+              lineBreakMode:(UILineBreakMode)lineBreakMode
+{
+    if (floatle(font.pointSize, minFontSize)) {
+        return minFontSize;
+    }
+    
+	CGFloat height = [self sizeWithFont:font 
+                      constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
+                          lineBreakMode:lineBreakMode].height;
+    
+    // Empty text
+    if (floateq(height, 0.f)) {
+        return font.pointSize;
+    }
+    
+	UIFont *newFont = font;
+    CGFloat newFontPointSize = font.pointSize;
+	
+	// Reduce font size while too large to fit vertically
+	while (floatgt(height, size.height) && ! floateq(newFontPointSize, minFontSize)) {
+		--newFontPointSize;  
+		newFont = [UIFont fontWithName:font.fontName size:newFontPointSize];   
+		height = [self sizeWithFont:newFont 
+                  constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
+                      lineBreakMode:lineBreakMode].height;
+	}
+	
+	return newFontPointSize;
+}
+
 #pragma mark URL encoding
 
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), cfEncoding));
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
+                                                                                 (CFStringRef)self, 
+                                                                                 NULL, 
+                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"), 
+                                                                                 cfEncoding));
     return [result autorelease];
 }
 

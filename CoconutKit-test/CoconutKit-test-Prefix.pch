@@ -21,6 +21,7 @@
     #import "HLSError.h"
     #import "HLSFloat.h"
     #import "HLSKeyboardInformation.h"
+    #import "HLSLabel.h"
     #import "HLSLogger.h"
     #import "HLSManagedObjectCopying.h"
     #import "HLSModelManager.h"

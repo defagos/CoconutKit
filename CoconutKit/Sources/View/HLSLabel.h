@@ -18,7 +18,6 @@ typedef enum {
     HLSLabelVerticalAlignmentEnumSize = HLSLabelVerticalAlignmentEnumEnd - HLSLabelVerticalAlignmentEnumBegin
 } HLSLabelVerticalAlignment;
 
-
 /**
  * A label that can have several lines, adjust its font size to fit its width and have a vertical alignment.
  *
