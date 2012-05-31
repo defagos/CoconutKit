@@ -10,19 +10,15 @@
 
 #import "NSString+HLSExtensions.h"
 
-@implementation HLSLabel
+@interface HLSLabel ()
 
-@synthesize verticalAlignment = _verticalAlignment;
+- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines;
 
 @end
 
-/**
- * Vertical Alignement
- *
- * Original author: jhoncybpr - http://www.iphonedevsdk.com/forum/iphone-sdk-development/35532-uilabel-vertical-align-top.html 
- */
+@implementation HLSLabel
 
-@implementation HLSLabel (VerticalAlignement)
+#pragma mark Object creation and destruction
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -40,56 +36,64 @@
 	return self;
 }
 
+#pragma mark Accessors and mutators
+
+@synthesize verticalAlignment = _verticalAlignment;
+
 - (void)setVerticalAlignment:(HLSLabelVerticalAlignment)verticalAlignment
 {
+    if (_verticalAlignment == verticalAlignment) {
+        return;
+    }
+    
 	_verticalAlignment = verticalAlignment;
+    
 	[self setNeedsDisplay];
 }
 
+#pragma mark UILabel drawing override points
+
+/**
+ * Vertical alignment
+ *
+ * Original author: jhoncybpr - http://www.iphonedevsdk.com/forum/iphone-sdk-development/35532-uilabel-vertical-align-top.html 
+ */
 - (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines
 {
 	CGRect textRect = [super textRectForBounds:bounds limitedToNumberOfLines:numberOfLines];
 	
-	switch (self.verticalAlignment)
-	{
-		case HLSLabelVerticalAlignmentTop:
-			textRect.origin.y = bounds.origin.y;
+	switch (self.verticalAlignment) {
+		case HLSLabelVerticalAlignmentTop: {
+			textRect.origin.y = CGRectGetMinY(bounds);
 			break;
-		case HLSLabelVerticalAlignmentBottom:
-			textRect.origin.y = bounds.origin.y + bounds.size.height - textRect.size.height;
+        }
+            
+		case HLSLabelVerticalAlignmentBottom: {
+			textRect.origin.y = CGRectGetMaxY(bounds) - textRect.size.height;
 			break;
-		case HLSLabelVerticalAlignmentMiddle:
-			// Fall through.
+        }
+            
+		case HLSLabelVerticalAlignmentMiddle: {
 		default:
-			textRect.origin.y = bounds.origin.y + (bounds.size.height - textRect.size.height) / 2.0;
+			textRect.origin.y =  CGRectGetMinY(bounds) + (bounds.size.height - textRect.size.height) / 2.f;
+        }
 	}
+    
 	return textRect;
 }
 
 - (void)drawTextInRect:(CGRect)requestedRect
 {
-	CGRect actualRect = [self textRectForBounds:requestedRect limitedToNumberOfLines:self.numberOfLines];
-	[super drawTextInRect:actualRect];
-}
-@end
-
-/**
- * Adjusting Font Size
- *
- */
-
-@implementation HLSLabel (AdjustFontSize)
-
-- (void)setText:(NSString *)text
-{
-	[super setText:text];
-	
-	if (self.adjustsFontSizeToFitWidth)
-	{
-        CGSize size = CGSizeMake(self.frame.size.width*self.numberOfLines /* UGLY CHEAT -> */ * 0.9 /* <- UGLY CHEAT */, self.frame.size.height);
-        CGFloat fontSize = [text fontSizeWithFont:self.font constrainedToSize:size minFontSize:self.minimumFontSize lineBreakMode:self.lineBreakMode];
+    if (self.adjustsFontSizeToFitWidth) {
+        CGFloat fontSize = [self.text fontSizeWithFont:self.font 
+                                     constrainedToSize:self.bounds.size 
+                                           minFontSize:self.minimumFontSize
+                                         numberOfLines:self.numberOfLines];
 		self.font = [UIFont fontWithName:self.font.fontName size:fontSize];
 	}
+    
+	CGRect actualRect = [self textRectForBounds:requestedRect limitedToNumberOfLines:self.numberOfLines];
+	[super drawTextInRect:actualRect];
 }
 
 @end
