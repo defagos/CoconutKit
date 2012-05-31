@@ -4,6 +4,19 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct PersonAttributes {
+	 NSString *firstName;
+	 NSString *lastName;
+} PersonAttributes;
+
+extern const struct PersonRelationships {
+	 NSString *accounts;
+	 NSString *houses;
+} PersonRelationships;
+
+extern const struct PersonFetchedProperties {
+} PersonFetchedProperties;
+
 @class BankAccount;
 @class House;
 
@@ -22,7 +35,7 @@
 
 
 
-@property (nonatomic, retain) NSString *firstName;
+@property (nonatomic, retain) NSString* firstName;
 
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
@@ -30,7 +43,7 @@
 
 
 
-@property (nonatomic, retain) NSString *lastName;
+@property (nonatomic, retain) NSString* lastName;
 
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
@@ -49,6 +62,7 @@
 @property (nonatomic, retain) NSSet* houses;
 
 - (NSMutableSet*)housesSet;
+
 
 
 
