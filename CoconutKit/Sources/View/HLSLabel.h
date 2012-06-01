@@ -7,7 +7,7 @@
 //
 
 /**
- * Vertical alignement of the string in the label (top, middle or bottom)
+ * Vertical alignments
  */
 typedef enum {
     HLSLabelVerticalAlignmentEnumBegin = 0,
@@ -19,17 +19,20 @@ typedef enum {
 } HLSLabelVerticalAlignment;
 
 /**
- * A label that can have several lines, adjust its font size to fit its width and have a vertical alignment.
- *
- * Note: unlike UILabel, you can have several lines AND the font size changing to fit the text in the label 
- *       (if numberOfLines>1 and adjustsFontSizeToFitWidth is set to YES)
+ * An HLSLabel is like a UILabel but differs in the following ways:
+ *   - a vertical alignment can be specified
+ *   - the font size can be automatically adjusted to fit the label width (adjustsFontSizeToFitWidth property)
+ *     even if several lines can be displayed by the label (numberOfLines property)
+ *   - the baselineAdjustment parameter is ignored
  */
-
 @interface HLSLabel : UILabel {
 @private
 	HLSLabelVerticalAlignment _verticalAlignment;
 }
 
+/**
+ * Vertical alignment of the string in the label
+ */
 @property (nonatomic, assign) HLSLabelVerticalAlignment verticalAlignment;
 
 @end

@@ -9,10 +9,7 @@
 @interface LabelDemoViewController : HLSViewController <HLSReloadable, UIPickerViewDataSource, UIPickerViewDelegate>{
 @private
     HLSLabel *_label;
-    UILabel *_labelPointSizeLabel;
-    
     UILabel *_standardLabel;
-    UILabel *_standardLabelPointSizeLabel;
     
     UIPickerView *_textPickerView;
     UIPickerView *_fontPickerView;
@@ -36,9 +33,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet HLSLabel *label;
-@property (nonatomic, retain) IBOutlet UILabel *labelPointSizeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *standardLabel;
-@property (nonatomic, retain) IBOutlet UILabel *standardLabelPointSizeLabel;
 @property (nonatomic, retain) IBOutlet UIPickerView *textPickerView;
 @property (nonatomic, retain) IBOutlet UIPickerView *fontPickerView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *baselineAdjustmentSegmentedControl;

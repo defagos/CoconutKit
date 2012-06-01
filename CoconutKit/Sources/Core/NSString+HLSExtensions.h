@@ -22,8 +22,8 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 - (BOOL)isFilled;
 
 /**
- * Given a font, reduce its associated point size to the largest value so that the text fits within a given
- * CGSize (the returned point size is never smaller than a given minimum point size)
+ * Given a font, return the largest font size (smaller than font.pointSize and larger than a given minimum size) so that
+ * the receiver fits within a given area on a maximum number of lines.
  */
 - (CGFloat)fontSizeWithFont:(UIFont *)font 
           constrainedToSize:(CGSize)size 

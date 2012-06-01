@@ -53,9 +53,7 @@ static NSArray *s_fontNames = nil;
     [super releaseViews];
     
     self.label = nil;
-    self.labelPointSizeLabel = nil;
     self.standardLabel = nil;
-    self.standardLabelPointSizeLabel = nil;
     self.textPickerView = nil;
     self.fontPickerView = nil;
     self.baselineAdjustmentSegmentedControl = nil;
@@ -74,11 +72,7 @@ static NSArray *s_fontNames = nil;
 
 @synthesize label = _label;
 
-@synthesize labelPointSizeLabel = _labelPointSizeLabel;
-
 @synthesize standardLabel = _standardLabel;
-
-@synthesize standardLabelPointSizeLabel = _standardLabelPointSizeLabel;
 
 @synthesize textPickerView = _textPickerView;
 
@@ -177,12 +171,7 @@ static NSArray *s_fontNames = nil;
     self.standardLabel.baselineAdjustment = baselineAdjustment;
     self.standardLabel.lineBreakMode = lineBreakMode;
     self.standardLabel.text = text;
-    
-    self.labelPointSizeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Font size", @"Font size"),
-                                     [NSString stringWithFormat:@"%.0f", self.label.font.pointSize]];
-    self.standardLabelPointSizeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Font size", @"Font size"),
-                                             [NSString stringWithFormat:@"%.0f", self.standardLabel.font.pointSize]];
-    
+        
     self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfLinesSlider.value];
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
     self.minFontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.minFontSizeSlider.value];

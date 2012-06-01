@@ -8,6 +8,7 @@
 
 #import "HLSLabel.h"
 
+#import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 
 @interface HLSLabel ()

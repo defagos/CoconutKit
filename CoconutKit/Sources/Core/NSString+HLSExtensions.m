@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSCategoryLinker.h"
 #import "HLSFloat.h"
+#import "HLSLogger.h"
 
 HLSLinkCategory(NSString_HLSExtensions)
 
@@ -52,9 +53,14 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
           constrainedToSize:(CGSize)size 
                 minFontSize:(CGFloat)minFontSize
               numberOfLines:(NSUInteger)numberOfLines
-{
+{    
     if (floatle(font.pointSize, minFontSize)) {
         return minFontSize;
+    }
+    
+    if (numberOfLines == 0) {
+        HLSLoggerWarn(@"The number of lines must be different from 0");
+        return font.pointSize;
     }
     
 	CGFloat height = [self sizeWithFont:font 
