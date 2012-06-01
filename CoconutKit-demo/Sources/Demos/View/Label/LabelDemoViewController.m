@@ -127,6 +127,7 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Label", @"Label");
+    
     self.textView.text = NSLocalizedString(@"This text is too long to be displayed on 2 lines in a UILabel", 
                                            @"This text is too long to be displayed on 2 lines in a UILabel");
     
