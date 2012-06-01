@@ -20,24 +20,6 @@
 
 @implementation HLSLabel
 
-#pragma mark Object creation and destruction
-
-- (id)initWithFrame:(CGRect)frame
-{
-    if ((self = [super initWithFrame:frame])) {
-        self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    if ((self = [super initWithCoder:decoder])) {
-        self.verticalAlignment = HLSLabelVerticalAlignmentMiddle;
-    }
-    return self;
-}
-
 #pragma mark Accessors and mutators
 
 @synthesize verticalAlignment = _verticalAlignment;

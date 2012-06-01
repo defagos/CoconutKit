@@ -539,10 +539,10 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBNumberOfSegments">3</int>
-						<int key="IBSelectedSegmentIndex">1</int>
+						<int key="IBSelectedSegmentIndex">0</int>
 						<array key="IBSegmentTitles">
-							<string>&lt;top&gt;</string>
 							<string>&lt;middle&gt;</string>
+							<string>&lt;top&gt;</string>
 							<string>&lt;bottom&gt;</string>
 						</array>
 						<array class="NSMutableArray" key="IBSegmentWidths">
@@ -593,6 +593,7 @@
 						<string key="NSFrame">{{397, 763}, {351, 216}}</string>
 						<reference key="NSSuperview" ref="71833693"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
@@ -1004,7 +1005,7 @@
 				<string key="66.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<integer value="2" key="68.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="0" key="68.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="88.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="89.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

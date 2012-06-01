@@ -139,8 +139,8 @@ static NSArray *s_fontNames = nil;
     [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", @"Centers") forSegmentAtIndex:1];
     [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", @"None") forSegmentAtIndex:2];
     
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:0];
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:1];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:0];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:1];
     [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", @"Bottom") forSegmentAtIndex:2];
     
     [self reloadData];

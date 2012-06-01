@@ -11,8 +11,8 @@
  */
 typedef enum {
     HLSLabelVerticalAlignmentEnumBegin = 0,
-    HLSLabelVerticalAlignmentTop = HLSLabelVerticalAlignmentEnumBegin,
-    HLSLabelVerticalAlignmentMiddle,
+    HLSLabelVerticalAlignmentMiddle = HLSLabelVerticalAlignmentEnumBegin,
+    HLSLabelVerticalAlignmentTop,
     HLSLabelVerticalAlignmentBottom,
     HLSLabelVerticalAlignmentEnumEnd,
     HLSLabelVerticalAlignmentEnumSize = HLSLabelVerticalAlignmentEnumEnd - HLSLabelVerticalAlignmentEnumBegin
@@ -35,6 +35,8 @@ typedef enum {
 
 /**
  * Vertical alignment of the string in the label
+ *
+ * Default value is HLSLabelVerticalAlignmentMiddle
  */
 @property (nonatomic, assign) HLSLabelVerticalAlignment verticalAlignment;
 
