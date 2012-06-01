@@ -36,7 +36,7 @@ typedef enum {
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         NSMutableArray *devices = [NSMutableArray array];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod" type:DeviceTypeMusicPlayer]];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Touch" type:DeviceTypeMusicPlayer]];

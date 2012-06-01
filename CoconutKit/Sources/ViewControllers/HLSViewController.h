@@ -15,6 +15,10 @@
  *   - view cleanup and general cleanup are separated
  *   - overriding methods is cleaner: The rule is now "Always call the super implementation first" (the behavior is otherwise
  *     undefined)
+ *   - instead of the default nib resolution mechanism of -[UIViewController init] (for @class MyViewController, first 
+ *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for a nib bearing the same name
+ *     as the class only (otherwise the view controller is assumed to be instantiated programmatically). This promotes 
+ *     a consistent naming between source and class files
  *
  * This class is not meant to be instantiated directly, you should subclass it to define your own view controllers.
  *
@@ -46,6 +50,12 @@
 @private
     
 }
+
+/**
+ * Instantiate a view controller, looking for a nib bearing the same name as the class in the given bundle. If the
+ * specified bundle is nil, lookup is performed in the main bundle
+ */
+- (id)initWithBundle:(NSBundle *)nibBundleOrNil;
 
 /**
  * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 

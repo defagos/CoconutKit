@@ -24,7 +24,7 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         self.person = [[Person allObjects] firstObject];
         NSAssert(self.person != nil, @"A person must be available");
     }

@@ -39,7 +39,7 @@
 
 - (id)initWithRequest:(NSURLRequest *)request
 {
-    if ((self = [super initWithNibName:[self className] bundle:[NSBundle coconutKitBundle]])) {
+    if ((self = [super initWithBundle:[NSBundle coconutKitBundle]])) {
         self.request = request;
     }
     return self;

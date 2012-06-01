@@ -32,7 +32,7 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         // Pre-load a view controller before display. Yep, this is possible!
         self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     }

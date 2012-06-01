@@ -12,6 +12,7 @@
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "NSObject+HLSExtensions.h"
 
 @interface HLSViewController ()
 
@@ -38,6 +39,26 @@
         [self hlsViewControllerInit];
     }
     return self;
+}
+
+- (id)initWithBundle:(NSBundle *)nibBundleOrNil
+{
+    NSString *nibName = nil;
+    if ([[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+        nibName = [self className];
+    }
+    
+    return [self initWithNibName:nibName bundle:nibBundleOrNil];
+}
+
+- (id)init
+{
+    NSString *nibName = nil;
+    if ([[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+        nibName = [self className];
+    }
+    
+    return [self initWithNibName:nibName bundle:nil];
 }
 
 // Common initialization code

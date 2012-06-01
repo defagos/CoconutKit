@@ -10,16 +10,6 @@
 
 @implementation PortraitOnlyViewController
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
