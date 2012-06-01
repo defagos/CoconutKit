@@ -23,6 +23,8 @@ typedef enum {
  *   - a vertical alignment can be specified
  *   - the font size can be automatically adjusted to fit the label width (adjustsFontSizeToFitWidth property)
  *     even if several lines can be displayed by the label (numberOfLines property)
+ *   - the minimumFontSize can be used to set a minimal font size when adjustments occur (even if the number
+ *     of lines is larger than 1)
  *   - the baselineAdjustment parameter is ignored
  */
 @interface HLSLabel : UILabel {
