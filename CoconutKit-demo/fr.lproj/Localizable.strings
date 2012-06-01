@@ -12,6 +12,8 @@
 "Animated"="Animé";
 "Animation"="Animation";
 "Apples & Coconut"="Pommes & noix de coco";
+"Baseline adjustment"="Ajustement de la ligne de base";
+"Baselines"="Lignes";
 "Birthdate"="Date de naissance";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
@@ -21,6 +23,7 @@
 "Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
 "Capitalized string in Localizable.strings"="Chaîne de Localizable.strings capitalisée";
+"Centers"="Centres";
 "Change"="Changer";
 "Change color"="Changer couleur";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
@@ -75,6 +78,7 @@
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
+"None"="Aucun";
 "Number of children"="Nombre d'enfants";
 "Number of lines"="Nombre de lignes";
 "Parallax scrolling"="Défilement parallaxe";

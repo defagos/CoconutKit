@@ -58,6 +58,7 @@ static NSArray *s_fontNames = nil;
     self.standardLabelPointSizeLabel = nil;
     self.textPickerView = nil;
     self.fontPickerView = nil;
+    self.baselineAdjustmentSegmentedControl = nil;
     self.numberOfLinesSlider = nil;
     self.numberOfLinesLabel = nil;
     self.fontSizeSlider = nil;
@@ -83,6 +84,8 @@ static NSArray *s_fontNames = nil;
 
 @synthesize fontPickerView = _fontPickerView;
 
+@synthesize baselineAdjustmentSegmentedControl = _baselineAdjustmentSegmentedControl;
+
 @synthesize numberOfLinesSlider = _numberOfLinesSlider;
 
 @synthesize numberOfLinesLabel = _numberOfLinesLabel;
@@ -106,7 +109,7 @@ static NSArray *s_fontNames = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     self.textPickerView.dataSource = self;
     self.textPickerView.delegate = self;
     
@@ -138,9 +141,15 @@ static NSArray *s_fontNames = nil;
     
     self.title = NSLocalizedString(@"Label", @"Label");
     
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Baselines", @"Baselines") forSegmentAtIndex:0];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", @"Centers") forSegmentAtIndex:1];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", @"None") forSegmentAtIndex:2];
+    
     [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:0];
     [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:1];
     [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", @"Bottom") forSegmentAtIndex:2];
+    
+    [self reloadData];
 }
 
 #pragma mark HLSReloadable protocol implementation
@@ -150,12 +159,14 @@ static NSArray *s_fontNames = nil;
     NSString *text = [s_textExamples objectAtIndex:[self.textPickerView selectedRowInComponent:0]];
     NSString *fontName = [s_fontNames objectAtIndex:[self.fontPickerView selectedRowInComponent:0]];
     UILineBreakMode lineBreakMode = [self.lineBreakModePickerView selectedRowInComponent:0];
+    UIBaselineAdjustment baselineAdjustment = [self.baselineAdjustmentSegmentedControl selectedSegmentIndex];
         
     self.label.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
     self.label.minimumFontSize = self.minFontSizeSlider.value;
     self.label.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
     self.label.verticalAlignment = self.verticalAlignmentSegmentedControl.selectedSegmentIndex;
     self.label.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
+    self.label.baselineAdjustment = baselineAdjustment;
     self.label.lineBreakMode = lineBreakMode;
     self.label.text = text;
     
@@ -163,8 +174,14 @@ static NSArray *s_fontNames = nil;
     self.standardLabel.minimumFontSize = self.minFontSizeSlider.value;
     self.standardLabel.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
     self.standardLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
+    self.standardLabel.baselineAdjustment = baselineAdjustment;
     self.standardLabel.lineBreakMode = lineBreakMode;
     self.standardLabel.text = text;
+    
+    self.labelPointSizeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Font size", @"Font size"),
+                                     [NSString stringWithFormat:@"%.0f", self.label.font.pointSize]];
+    self.standardLabelPointSizeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Font size", @"Font size"),
+                                             [NSString stringWithFormat:@"%.0f", self.standardLabel.font.pointSize]];
     
     self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfLinesSlider.value];
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];

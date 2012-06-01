@@ -17,6 +17,8 @@
     UIPickerView *_textPickerView;
     UIPickerView *_fontPickerView;
     
+    UISegmentedControl *_baselineAdjustmentSegmentedControl;
+    
     UISlider *_numberOfLinesSlider;
     UILabel *_numberOfLinesLabel;
     
@@ -39,6 +41,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *standardLabelPointSizeLabel;
 @property (nonatomic, retain) IBOutlet UIPickerView *textPickerView;
 @property (nonatomic, retain) IBOutlet UIPickerView *fontPickerView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *baselineAdjustmentSegmentedControl;
 @property (nonatomic, retain) IBOutlet UISlider *numberOfLinesSlider;
 @property (nonatomic, retain) IBOutlet UILabel *numberOfLinesLabel;
 @property (nonatomic, retain) IBOutlet UISlider *fontSizeSlider;
