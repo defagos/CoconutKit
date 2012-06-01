@@ -5,20 +5,25 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Hortis. All rights reserved.
  */
-"Action sheet"="Menu action"; 
+"Action sheet"="Menu action";
+"Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
 "Apples & Coconut"="Pommes & noix de coco";
+"Baseline adjustment"="Ajustement de la ligne de base";
+"Baselines"="Lignes";
 "Birthdate"="Date de naissance";
 "By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
+"Bottom"="Bas";
 "Bounces"="Rebond";
 "Button label, default"="Libellé de bouton, normal";
 "Button label, highlighted"="Libellé de bouton, activé";
 "Cancel"="Annuler";
 "Capitalized string in Localizable.strings"="Chaîne de Localizable.strings capitalisée";
+"Centers"="Centres";
 "Change"="Changer";
 "Change color"="Changer couleur";
 "Check your log window to see view lifecycle and rotation events (logging level must be at least INFO)"="Contrôlez les événements de la vue et de sa rotation dans la fenêtre de log (le niveau de logging doit être INFO au minimum)";
@@ -42,6 +47,8 @@
 "Error"="Erreur";
 "First name"="Prénom";
 "Fixed size"="Taille fixe";
+"Font"="Police";
+"Font size"="Taille de la police";
 "Formatting error"="Erreur de formattage";
 "Forward properties"="Propager les propriétés";
 "Header: custom cells"="En-tête: cellules personnalisées";
@@ -53,11 +60,15 @@
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Index"="Index";
 "Invalid email address"="Adresse e-mail invalide";
+"Label"="Libellé";
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
 "Last name"="Nom";
 "Lifecycle test"="Test du cycle de vie";
+"Line break mode"="Mode saut de ligne";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
+"Middle"="Milieu";
+"Min font size"="Taille de police minimale";
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
 "Missing first name"="Prénom manquant";
@@ -67,9 +78,12 @@
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
+"None"="Aucun";
 "Number of children"="Nombre d'enfants";
+"Number of lines"="Nombre de lignes";
 "Parallax scrolling"="Défilement parallaxe";
 "Parallel processing"="Calculs en parallèle";
+"Parameters for the HLSLabel and UILabel above"="Paramètres pour les HLSLabel et UILabel ci-dessus";
 "Phones"="Téléphones";
 "Play"="Jouer";
 "Play forward"="Jouer l'animation";
@@ -108,13 +122,16 @@
 "Tasks"="Tâches";
 "Terminate"="Terminer";
 "Test in modal"="Test dans modale";
+"Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text fields"="Champs textuels";
 "The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
 "This value cannot be negative"="Cette valeur ne peut être négative";
+"Top"="Haut";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Chaîne de Localizable.strings en majuscules";
+"Vertical alignment"="Alignement vertical";
 "Views"="Vues";
 "View controllers"="View controllers";
 "Web view"="Vue web";

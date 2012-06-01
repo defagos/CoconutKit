@@ -1,5 +1,6 @@
 HLSAssert.m
 HLSCursor.m
+HLSLabel.m
 HLSSlideshow.m
 HLSTextField.m
 HLSViewController.m

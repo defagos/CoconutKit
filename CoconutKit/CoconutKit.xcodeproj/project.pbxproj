@@ -19,6 +19,8 @@
 		6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
 		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; };
+		6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F89148A15790D21009FCC78 /* HLSLabel.h */; };
+		6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89148B15790D21009FCC78 /* HLSLabel.m */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */; };
@@ -205,6 +207,8 @@
 		6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F89148A15790D21009FCC78 /* HLSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabel.h; sourceTree = "<group>"; };
+		6F89148B15790D21009FCC78 /* HLSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabel.m; sourceTree = "<group>"; };
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
@@ -584,6 +588,8 @@
 				6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE56A14BA0494007EE121 /* HLSCursor.h */,
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
+				6F89148A15790D21009FCC78 /* HLSLabel.h */,
+				6F89148B15790D21009FCC78 /* HLSLabel.m */,
 				6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */,
 				6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE56E14BA0494007EE121 /* HLSNibView.h */,
@@ -750,6 +756,7 @@
 				6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */,
 				6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */,
 				6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */,
+				6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +911,7 @@
 				6FC8CB8B1574BFC10014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
 				6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */,
 				6F2D46FE15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,
+				6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

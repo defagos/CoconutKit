@@ -18,6 +18,8 @@
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
+		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
+		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -147,6 +149,9 @@
 		6F5A0BB11509D19300A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
+		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
+		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
 		6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoAppDelegate.m; sourceTree = "<group>"; };
 		6F9C459614C5C30B00824AB2 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -404,6 +409,16 @@
 			path = Slideshow;
 			sourceTree = "<group>";
 		};
+		6F89149C15790DDE009FCC78 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */,
+				6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */,
+				6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		6F9C459214C5C30B00824AB2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,6 +660,7 @@
 			children = (
 				6F9C45E114C5C30B00824AB2 /* ActionSheet */,
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
+				6F89149C15790DDE009FCC78 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
@@ -1051,6 +1067,7 @@
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F00017E156BF2530055CED7 /* CoconutKit-resources.bundle in Resources */,
+				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1126,6 +1143,7 @@
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F00017D156BF2530055CED7 /* CoconutKit_bootstrap.m in Sources */,
+				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

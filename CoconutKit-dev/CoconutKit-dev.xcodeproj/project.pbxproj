@@ -47,6 +47,9 @@
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149415790DA8009FCC78 /* HLSLabel.m */; };
+		6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149815790DCA009FCC78 /* LabelDemoViewController.m */; };
+		6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
@@ -272,6 +275,11 @@
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F89149315790DA8009FCC78 /* HLSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabel.h; sourceTree = "<group>"; };
+		6F89149415790DA8009FCC78 /* HLSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabel.m; sourceTree = "<group>"; };
+		6F89149715790DCA009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
+		6F89149815790DCA009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
+		6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -743,6 +751,16 @@
 			path = Slideshow;
 			sourceTree = "<group>";
 		};
+		6F89149615790DCA009FCC78 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				6F89149715790DCA009FCC78 /* LabelDemoViewController.h */,
+				6F89149815790DCA009FCC78 /* LabelDemoViewController.m */,
+				6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		6FADE62B14BA04A6007EE121 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +908,8 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
+				6F89149315790DA8009FCC78 /* HLSLabel.h */,
+				6F89149415790DA8009FCC78 /* HLSLabel.m */,
 				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
 				6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE68914BA04A6007EE121 /* HLSNibView.h */,
@@ -1188,6 +1208,7 @@
 			children = (
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
+				6F89149615790DCA009FCC78 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
@@ -1573,6 +1594,7 @@
 				6F00014B156BD17F0055CED7 /* parallax_demo_sky_layer.png in Resources */,
 				6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */,
 				6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */,
+				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1720,6 +1742,8 @@
 				6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
 				6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,
 				6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */,
+				6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */,
+				6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
