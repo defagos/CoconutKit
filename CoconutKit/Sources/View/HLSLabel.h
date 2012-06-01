@@ -24,7 +24,8 @@ typedef enum {
  *   - the font size can be automatically adjusted to fit the label width (adjustsFontSizeToFitWidth property)
  *     even if several lines can be displayed by the label (numberOfLines property)
  *   - the minimumFontSize can be used to set a minimal font size when adjustments occur (even if the number
- *     of lines is larger than 1)
+ *     of lines is larger than 1). Unlike UILabel, the font size can never be smaller than this minimum
+ *     value (even if no size adjustment is needed)
  *   - the baselineAdjustment parameter is ignored
  */
 @interface HLSLabel : UILabel {

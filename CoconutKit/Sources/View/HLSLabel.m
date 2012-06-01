@@ -8,6 +8,7 @@
 
 #import "HLSLabel.h"
 
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 
@@ -52,6 +53,12 @@
 	[self setNeedsDisplay];
 }
 
+- (void)setMinimumFontSize:(CGFloat)minimumFontSize
+{
+    [super setMinimumFontSize:minimumFontSize];
+    [self setNeedsDisplay];
+}
+
 #pragma mark UILabel drawing override points
 
 /**
@@ -85,13 +92,17 @@
 
 - (void)drawTextInRect:(CGRect)requestedRect
 {
+    CGFloat fontSize = 0.f;
     if (self.adjustsFontSizeToFitWidth) {
-        CGFloat fontSize = [self.text fontSizeWithFont:self.font 
-                                     constrainedToSize:self.bounds.size 
-                                           minFontSize:self.minimumFontSize
-                                         numberOfLines:self.numberOfLines];
-		self.font = [UIFont fontWithName:self.font.fontName size:fontSize];
+        fontSize = [self.text fontSizeWithFont:self.font 
+                             constrainedToSize:self.bounds.size 
+                                   minFontSize:self.minimumFontSize
+                                 numberOfLines:self.numberOfLines];
 	}
+    else {
+        fontSize = floatmax(self.font.pointSize, self.minimumFontSize);
+    }
+    self.font = [UIFont fontWithName:self.font.fontName size:fontSize];
     
 	CGRect actualRect = [self textRectForBounds:requestedRect limitedToNumberOfLines:self.numberOfLines];
 	[super drawTextInRect:actualRect];
