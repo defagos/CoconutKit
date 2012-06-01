@@ -44,6 +44,7 @@
 "Error"="Error";
 "First name"="First name";
 "Fixed size"="Fixed size";
+"Font"="Font";
 "Font size"="Font size";
 "Formatting error"="Formatting error";
 "Forward properties"="Forward properties";
@@ -62,6 +63,7 @@
 "Language"="Language";
 "Last name"="Last name";
 "Lifecycle test"="Lifecycle test";
+"Line break mode"="Line break mode";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
 "Middle"="Middle";
 "Min font size"="Min font size";
@@ -119,7 +121,6 @@
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
 "The behavior above can be disabled"="The behavior above can be disabled";
-"This text is too long to be displayed on 2 lines in a UILabel"="This text is too long to be displayed on 2 lines in a UILabel";
 "This value cannot be negative"="This value cannot be negative";
 "Top"="Top";
 "Transition"="Transition";
