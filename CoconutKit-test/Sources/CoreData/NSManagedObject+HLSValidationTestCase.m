@@ -48,19 +48,19 @@
                                                                      storeDirectory:libraryDirectoryPath 
                                                                               reuse:NO] 
                                      autorelease];
-    [HLSModelManager setDefaultModelManager:modelManager];
+    [HLSModelManager pushModelManager:modelManager];
     
     // Create an object which cannot be destroyed
     self.lockedDInstance = [ConcreteClassD insert];
     self.lockedDInstance.noValidationStringD = @"LOCKED";
-    NSAssert([HLSModelManager saveDefaultModelContext:NULL], @"Failed to insert test data");
+    NSAssert([HLSModelManager saveCurrentModelContext:NULL], @"Failed to insert test data");
 }
 
 - (void)tearDownClass
 {
     [super tearDownClass];
     
-    [HLSModelManager setDefaultModelManager:nil];
+    [HLSModelManager popModelManager];
 }
 
 #pragma mark Tests
@@ -204,7 +204,7 @@
     GHAssertNil(errorC10, @"Error incorrectly returned");
     
     // Not testing insertion here. Rollback
-    [HLSModelManager rollbackDefaultModelContext];
+    [HLSModelManager rollbackCurrentModelContext];
 }
 
 - (void)testCheck
@@ -267,17 +267,17 @@
     GHAssertEquals([subErrors3 count], 7U, @"Incorrect number of sub-errors");
     
     // Not testing insertion here. Rollback
-    [HLSModelManager rollbackDefaultModelContext];
+    [HLSModelManager rollbackCurrentModelContext];
 }
 
 - (void)testDelete
 {    
-    [HLSModelManager deleteObjectFromDefaultModelContext:self.lockedDInstance];
+    [HLSModelManager deleteObjectFromCurrentModelContext:self.lockedDInstance];
     
     NSError *error = nil;
-    GHAssertFalse([HLSModelManager saveDefaultModelContext:&error], @"Incorrect result when saving");
+    GHAssertFalse([HLSModelManager saveCurrentModelContext:&error], @"Incorrect result when saving");
     GHAssertTrue([error hasCode:TestValidationLockedObjectError withinDomain:TestValidationErrorDomain], @"Incorrect error domain and code");
-    [HLSModelManager rollbackDefaultModelContext];
+    [HLSModelManager rollbackCurrentModelContext];
 }
 
 @end

@@ -47,7 +47,7 @@
                                                                      storeDirectory:libraryDirectoryPath 
                                                                               reuse:NO] 
                                      autorelease];
-    [HLSModelManager setDefaultModelManager:modelManager];
+    [HLSModelManager pushModelManager:modelManager];
     
     // Idea: We work with three test classes: Person, Account and House. A person can have several accounts, and 
     //       owns them (once the person dies, the account disappears). Moreover, an account is owned by a single
@@ -75,7 +75,7 @@
     bankAccount2.balanceValue = 79340087.;
     bankAccount2.owner = self.person1;
     
-    NSAssert([HLSModelManager saveDefaultModelContext:NULL], @"Failed to insert test data");
+    NSAssert([HLSModelManager saveCurrentModelContext:NULL], @"Failed to insert test data");
 }
 
 #pragma mark Tests
@@ -97,7 +97,7 @@
     GHAssertFalse([person1Duplicate.accounts isEqualToSet:self.person1.accounts], @"Accounts are incorrect");
     
     // Test overall consistency of the object hiearchy which has been duplicated
-    GHAssertTrue([HLSModelManager saveDefaultModelContext:NULL], @"Invalid objects");
+    GHAssertTrue([HLSModelManager saveCurrentModelContext:NULL], @"Invalid objects");
 }
 
 @end
