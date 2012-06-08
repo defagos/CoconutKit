@@ -38,7 +38,7 @@
         HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
                                                                          storeDirectory:documentsDirectoryPath]
                                          autorelease];
-        [HLSModelManager setDefaultModelManager:modelManager];
+        [HLSModelManager pushModelManager:modelManager];
         
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:
         //    - "Normal" (or not set): Full set of demos
@@ -121,7 +121,7 @@
 - (void)savePendingChanges
 {
     // Save any pending changes in the default context
-    NSManagedObjectContext *managedObjectContext = [HLSModelManager defaultModelContext];
+    NSManagedObjectContext *managedObjectContext = [HLSModelManager currentModelContext];
     if ([managedObjectContext hasChanges]) {
         HLSLoggerInfo(@"Saving pending changes on exit");
         NSError *error = nil;

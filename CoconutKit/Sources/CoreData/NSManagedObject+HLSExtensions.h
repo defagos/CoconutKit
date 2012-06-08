@@ -6,10 +6,19 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+/**
+ * Convenience methods to perform common Core Data operations on managed objects. Most methods appear in two versions:
+ *   - a version expecting a managed object context parameter:  
+ *   - a context-free version, which works with the current model manager associated with the current thread (see 
+ *     HLSModelManager.h)
+ * Working with model managers and context-free methods reduces errors and is the preferred way of interacting with 
+ * Core Data in CoconutKit. You should therefore only used the methods expecting a context parameter if you directly
+ * have or want to interact with a managed object context
+ */
 @interface NSManagedObject (HLSExtensions)
 
 /**
- * When called on an NSManagedObject subclass, create a new instance of it (without context parameter, the default
+ * When called on an NSManagedObject subclass, create a new instance of it (without context parameter, the current
  * HLSModelManager context is used)
  */
 + (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
@@ -17,7 +26,7 @@
 
 /**
  * When called on an NSManagedObject subclass, query instances of it matching a predicate, sorting them using the
- * specified descriptors (without context parameter, the default HLSModelManager context is used)
+ * specified descriptors (without context parameter, the current HLSModelManager context is used)
  */
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
                     sortedUsingDescriptors:(NSArray *)sortDescriptors
@@ -33,7 +42,7 @@
 
 /**
  * When called on an NSManagedObject subclass, query all instances of it, sorting them using the specified descriptors
- * (without context parameter, the default HLSModelManager context is used)
+ * (without context parameter, the current HLSModelManager context is used)
  */
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
                        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
@@ -45,13 +54,13 @@
 
 /**
  * When called on an NSManagedObject subclass, query all instances of it, without predictable ordering (without context 
- * parameter, the default HLSModelManager context is used)
+ * parameter, the current HLSModelManager context is used)
  */
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSArray *)allObjects;
 
 /**
- * When called on an NSManagedObject subclass, deletes all of its instances (without context parameter, the default 
+ * When called on an NSManagedObject subclass, deletes all of its instances (without context parameter, the current 
  * HLSModelManager context is used)
  */
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;

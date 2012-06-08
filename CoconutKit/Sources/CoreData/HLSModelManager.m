@@ -8,11 +8,15 @@
 
 #import "HLSModelManager.h"
 
+#import "HLSError.h"
 #import "HLSLogger.h"
-
-static HLSModelManager *s_defaultModelManager = nil;
+#import "NSArray+HLSExtensions.h"
 
 @interface HLSModelManager ()
+
++ (NSMutableArray *)modelManagerStackForThread:(NSThread *)thread;
++ (HLSModelManager *)currentModelManagerForThread:(NSThread *)thread;
++ (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread;
 
 - (BOOL)initializeWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory;
 
@@ -32,56 +36,112 @@ static HLSModelManager *s_defaultModelManager = nil;
 
 #pragma mark Class methods
 
-+ (HLSModelManager *)setDefaultModelManager:(HLSModelManager *)modelManager
++ (void)pushModelManager:(HLSModelManager *)modelManager
 {
-    HLSModelManager *previousDefaultModelManager = s_defaultModelManager;
-    s_defaultModelManager = [modelManager retain];
-    return [previousDefaultModelManager autorelease];
-}
-
-+ (HLSModelManager *)defaultModelManager
-{
-    return s_defaultModelManager;
-}
-
-+ (NSManagedObjectContext *)defaultModelContext
-{
-    if (! s_defaultModelManager) {
-        HLSLoggerWarn(@"No default context has been installed. Nothing saved");
-        return nil;
-    }
-    
-    return s_defaultModelManager.managedObjectContext;
-}
-
-+ (BOOL)saveDefaultModelContext:(NSError **)pError
-{
-    if (! s_defaultModelManager) {
-        HLSLoggerWarn(@"No default context has been installed. Nothing saved");
-        return YES;
-    }
-    
-    return [s_defaultModelManager.managedObjectContext save:pError];
-}
-
-+ (void)rollbackDefaultModelContext
-{
-    if (! s_defaultModelManager) {
-        HLSLoggerWarn(@"No default context has been installed. Nothing to rollback");
+    if (! modelManager) {
+        HLSLoggerError(@"Missing model manager");
         return;
     }
     
-    [s_defaultModelManager.managedObjectContext rollback];
+    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
+    [modelManagerStack addObject:modelManager];
 }
 
-+ (void)deleteObjectFromDefaultModelContext:(NSManagedObject *)managedObject
++ (void)popModelManager
 {
-    if (! s_defaultModelManager) {
-        HLSLoggerWarn(@"No default context has been installed. Nothing to delete");
+    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
+    if ([modelManagerStack count] == 0) {
+        HLSLoggerInfo(@"No model manager to pop");
         return;
     }
     
-    [s_defaultModelManager.managedObjectContext deleteObject:managedObject];
+    [modelManagerStack removeLastObject];
+}
+
++ (NSMutableArray *)modelManagerStackForThread:(NSThread *)thread
+{
+    static NSString * const HLSModelManagerStackThreadLocalStorageKey = @"HLSModelManagerStackThreadLocalStorageKey";
+    
+    NSMutableArray *modelManagerStack = [[thread threadDictionary] objectForKey:HLSModelManagerStackThreadLocalStorageKey];
+    if (! modelManagerStack) {
+        modelManagerStack = [NSMutableArray array];
+        [[thread threadDictionary] setObject:modelManagerStack forKey:HLSModelManagerStackThreadLocalStorageKey];
+    }
+    return modelManagerStack;
+}
+
++ (HLSModelManager *)currentModelManager
+{
+    return [self currentModelManagerForThread:[NSThread currentThread]];
+}
+
++ (HLSModelManager *)currentModelManagerForMainThread
+{
+    return [self currentModelManagerForThread:[NSThread mainThread]];
+}
+
++ (HLSModelManager *)currentModelManagerForThread:(NSThread *)thread
+{
+    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
+    return [modelManagerStack lastObject];
+}
+
++ (HLSModelManager *)rootModelManager
+{
+    return [self rootModelManagerForThread:[NSThread currentThread]];
+}
+
++ (HLSModelManager *)rootModelManagerForMainThread
+{
+    return [self rootModelManagerForThread:[NSThread mainThread]];
+}
+
++ (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread
+{
+    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
+    return [modelManagerStack firstObject];
+}
+
++ (NSManagedObjectContext *)currentModelContext
+{
+    return [self currentModelManager].managedObjectContext;
+}
+
++ (BOOL)saveCurrentModelContext:(NSError **)pError
+{
+    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    if (! currentModelContext) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSCoreDataError];
+        }
+        HLSLoggerError(@"No current context");
+        return NO;
+    }
+    
+    return [currentModelContext save:pError];
+}
+
++ (void)rollbackCurrentModelContext
+{
+    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    if (! currentModelContext) {
+        HLSLoggerError(@"No current context");
+        return;
+    }
+    
+    [currentModelContext rollback];
+}
+
++ (void)deleteObjectFromCurrentModelContext:(NSManagedObject *)managedObject
+{
+    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    if (! currentModelContext) {
+        HLSLoggerError(@"No current context");
+        return;
+    }
+    
+    [currentModelContext deleteObject:managedObject];
 }
 
 #pragma mark Object creation and destruction
