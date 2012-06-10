@@ -42,12 +42,25 @@
 {
     [super setUpClass];
     
-    // Destroy any existing previous store and create a new empty one
+    // Destroy any existing previous store
     NSString *libraryDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-    HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitTestData"
+    NSString *storeFilePath = [HLSModelManager storeFilePathForModelFileName:@"CoconutKitTestData" storeDirectory:libraryDirectoryPath];
+    if (storeFilePath) {
+        NSError *error = nil;
+        if (! [[NSFileManager defaultManager] removeItemAtPath:storeFilePath error:&error]) {
+            HLSLoggerWarn(@"Could not remove store at path %@", storeFilePath);
+        }
+    }
+    
+    // Freshly create a test store
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, 
+                             nil];
+    HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
+                                                                      configuration:nil 
                                                                      storeDirectory:libraryDirectoryPath 
-                                                                              reuse:NO] 
-                                     autorelease];
+                                                                            options:options];
     [HLSModelManager pushModelManager:modelManager];
     
     // Create an object which cannot be destroyed

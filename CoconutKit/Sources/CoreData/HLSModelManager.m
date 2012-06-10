@@ -14,11 +14,13 @@
 
 @interface HLSModelManager ()
 
++ (NSString *)standardStoreFilePathForModelFileName:(NSString *)modelFileName 
+                                          storeType:(NSString *)storeType 
+                                     storeDirectory:(NSString *)storeDirectory;
+
 + (NSMutableArray *)modelManagerStackForThread:(NSThread *)thread;
 + (HLSModelManager *)currentModelManagerForThread:(NSThread *)thread;
 + (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread;
-
-- (BOOL)initializeWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory;
 
 @property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -26,8 +28,10 @@
 
 - (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
-                                                                    modelFileName:(NSString *)modelFileName
-                                                                   storeDirectory:(NSString *)storeDirectory;
+                                                                        storeType:(NSString *)storeType 
+                                                                    configuration:(NSString *)configuration 
+                                                                              URL:(NSURL *)storeURL 
+                                                                          options:(NSDictionary *)options;
 - (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
 @end
@@ -35,6 +39,84 @@
 @implementation HLSModelManager
 
 #pragma mark Class methods
+
++ (HLSModelManager *)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                      configuration:(NSString *)configuration
+                                     storeDirectory:(NSString *)storeDirectory
+                                            options:(NSDictionary *)options
+{
+    return [[[[self class] alloc] initWithModelFileName:modelFileName
+                                              storeType:NSSQLiteStoreType
+                                          configuration:configuration
+                                         storeDirectory:storeDirectory 
+                                                options:options] autorelease];
+}
+
++ (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
+                                             configuration:(NSString *)configuration 
+                                                   options:(NSDictionary *)options
+{
+    return [[[[self class] alloc] initWithModelFileName:modelFileName 
+                                              storeType:NSInMemoryStoreType 
+                                          configuration:configuration 
+                                         storeDirectory:nil 
+                                                options:options] autorelease];
+}
+
++ (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
+                                           configuration:(NSString *)configuration 
+                                          storeDirectory:(NSString *)storeDirectory
+                                                 options:(NSDictionary *)options
+{
+    return [[[[self class] alloc] initWithModelFileName:modelFileName 
+                                              storeType:NSBinaryStoreType 
+                                          configuration:configuration 
+                                         storeDirectory:storeDirectory 
+                                                options:options] autorelease];
+}
+
++ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // Look for a SQLite file
+    NSString *sqliteFilePath = [self standardStoreFilePathForModelFileName:modelFileName
+                                                                 storeType:NSSQLiteStoreType
+                                                            storeDirectory:storeDirectory];
+    if ([fileManager fileExistsAtPath:sqliteFilePath]) {
+        return sqliteFilePath;
+    }
+    
+    // Look for a binary file
+    NSString *binaryFilePath = [self standardStoreFilePathForModelFileName:modelFileName
+                                                                 storeType:NSBinaryStoreType
+                                                            storeDirectory:storeDirectory];
+    if ([fileManager fileExistsAtPath:binaryFilePath]) {
+        return binaryFilePath;
+    }
+    
+    // Not found
+    return nil;
+}
+
+// Return the standard path for a store given its type and a model name
++ (NSString *)standardStoreFilePathForModelFileName:(NSString *)modelFileName 
+                                          storeType:(NSString *)storeType 
+                                     storeDirectory:(NSString *)storeDirectory
+{
+    NSString *extension = nil;
+    if ([storeType isEqualToString:NSSQLiteStoreType]) {
+        extension = @"sqlite";
+    }
+    else if ([storeType isEqualToString:NSBinaryStoreType]) {
+        extension = @"bin";
+    }
+    else {
+        return nil;
+    }
+    
+    return [[storeDirectory stringByAppendingPathComponent:modelFileName] stringByAppendingPathExtension:extension];
+}
 
 + (void)pushModelManager:(HLSModelManager *)modelManager
 {
@@ -146,29 +228,40 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory reuse:(BOOL)reuse
+- (id)initWithModelFileName:(NSString *)modelFileName 
+                  storeType:(NSString *)storeType 
+              configuration:(NSString *)configuration 
+             storeDirectory:(NSString *)storeDirectory
+                    options:(NSDictionary *)options
 {
     if ((self = [super init])) {
-        // Delete any existing store
-        // TODO: Cleanest way: Move and delete on success
-        if (! reuse) {
-            NSString *filePath = [[storeDirectory stringByAppendingPathComponent:modelFileName] stringByAppendingPathExtension:@"sqlite"];
-            if (! [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL]) {
-                HLSLoggerWarn(@"Unable to delete previously existing store at %@", filePath);
-            }
-        }
-        
-        if (! [self initializeWithModelFileName:modelFileName storeDirectory:storeDirectory]) {            
+        self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName];
+        if (! self.managedObjectModel) {
             [self release];
             return nil;
-        }        
+        }
+        
+        NSString *standardStoreFilePath = [HLSModelManager standardStoreFilePathForModelFileName:modelFileName
+                                                                                       storeType:storeType
+                                                                                  storeDirectory:storeDirectory];
+        NSURL *standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];
+        self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel 
+                                                                                      storeType:storeType 
+                                                                                  configuration:configuration
+                                                                                            URL:standardStoreURL
+                                                                                        options:options];
+        if (! self.persistentStoreCoordinator) {
+            [self release];
+            return nil;
+        }
+        
+        self.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
+        if (! self.managedObjectContext) {
+            [self release];
+            return nil;
+        }
     }
     return self;
-}
-
-- (id)initWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
-{
-    return [self initWithModelFileName:modelFileName storeDirectory:storeDirectory reuse:YES];
 }
 
 - (void)dealloc
@@ -178,28 +271,6 @@
     self.managedObjectContext = nil;
     
     [super dealloc];
-}
-
-- (BOOL)initializeWithModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
-{
-    self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName];
-    if (! self.managedObjectModel) {
-        return NO;
-    }
-    
-    self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel
-                                                                              modelFileName:modelFileName
-                                                                             storeDirectory:storeDirectory];
-    if (! self.persistentStoreCoordinator) {
-        return NO;
-    }
-    
-    self.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
-    if (! self.managedObjectContext) {
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark Accessors and mutators
@@ -225,23 +296,16 @@
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
-                                                                    modelFileName:(NSString *)modelFileName
-                                                                   storeDirectory:(NSString *)storeDirectory
+                                                                        storeType:(NSString *)storeType 
+                                                                    configuration:(NSString *)configuration 
+                                                                              URL:(NSURL *)storeURL 
+                                                                          options:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel] autorelease];
     
-    NSString *storeFileName = [modelFileName stringByAppendingPathExtension:@"sqlite"];
-    NSURL *storeURL = [NSURL fileURLWithPath:[storeDirectory stringByAppendingPathComponent:storeFileName]];
-    
-    // Enable lightweight data migration
-	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-							 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-							 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, 
-                             nil];
-    
 	NSError *error = nil;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                                                  configuration:nil
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:storeType
+                                                                                  configuration:configuration
                                                                                             URL:storeURL
                                                                                         options:options
                                                                                           error:&error];
@@ -250,10 +314,20 @@
         return nil;
     }
     
-    // Delete the old file
-    NSString *oldStoreFileName = [NSString stringWithFormat:@"~%@", storeFileName];
-    [[NSFileManager defaultManager] removeItemAtPath:[storeDirectory stringByAppendingPathComponent:oldStoreFileName] error:NULL];
-    
+    // If migration of a file-based store has successfully been performed, delete the old file
+    if ([storeURL isFileURL]) {
+        NSString *fileURLString = [storeURL absoluteString];
+        NSString *oldFileName = [NSString stringWithFormat:@"~%@", [fileURLString lastPathComponent]];
+        NSString *oldFilePath = [[fileURLString stringByDeletingLastPathComponent] stringByAppendingPathComponent:oldFileName];
+        
+        NSError *deletionError = nil;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:oldFilePath]
+                && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
+            HLSLoggerInfo(@"The old store at %@ has been removed after successful migration", oldFilePath);
+        }
+    }
+        
     return persistentStoreCoordinator;
 }
 

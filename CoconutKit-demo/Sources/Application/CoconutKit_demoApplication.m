@@ -35,9 +35,14 @@
         
         // Create the default model entry point and context
         NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        HLSModelManager *modelManager = [[[HLSModelManager alloc] initWithModelFileName:@"CoconutKitDemoData" 
-                                                                         storeDirectory:documentsDirectoryPath]
-                                         autorelease];
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, 
+                                 nil];
+        HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitDemoData"
+                                                                          configuration:nil 
+                                                                         storeDirectory:documentsDirectoryPath 
+                                                                                options:options];
         [HLSModelManager pushModelManager:modelManager];
         
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:
