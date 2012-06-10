@@ -241,10 +241,13 @@
             return nil;
         }
         
-        NSString *standardStoreFilePath = [HLSModelManager standardStoreFilePathForModelFileName:modelFileName
-                                                                                       storeType:storeType
-                                                                                  storeDirectory:storeDirectory];
-        NSURL *standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];
+        NSURL *standardStoreURL = nil;
+        if (storeDirectory) {
+            NSString *standardStoreFilePath = [HLSModelManager standardStoreFilePathForModelFileName:modelFileName
+                                                                                           storeType:storeType
+                                                                                      storeDirectory:storeDirectory];
+            standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];            
+        }
         self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel 
                                                                                       storeType:storeType 
                                                                                   configuration:configuration
