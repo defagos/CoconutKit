@@ -13,15 +13,19 @@ typedef enum {
     HLSExpandingSearchBarAlignmentRight,
 } HLSExpandingSearchBarAlignment;
 
-@interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate> {
+@interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
 @private
     UISearchBar *m_searchBar;
     UIButton *m_searchButton;
     HLSExpandingSearchBarAlignment m_alignment;
+    id<UISearchBarDelegate> m_delegate;
     HLSAnimation *m_animation;
     BOOL m_layoutDone;
+    BOOL m_expanded;
 }
 
 @property (nonatomic, assign) HLSExpandingSearchBarAlignment alignment;
+
+@property (nonatomic, assign) id<UISearchBarDelegate> delegate;
 
 @end
