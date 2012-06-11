@@ -52,14 +52,10 @@
     }
     
     // Freshly create a test store
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, 
-                             nil];
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
                                                                       configuration:nil
                                                                      storeDirectory:libraryDirectoryPath
-                                                                            options:options];
+                                                                            options:HLSModelManagerLightweightMigrationOptions];
     [HLSModelManager pushModelManager:modelManager];
     
     // Idea: We work with three test classes: Person, Account and House. A person can have several accounts, and 

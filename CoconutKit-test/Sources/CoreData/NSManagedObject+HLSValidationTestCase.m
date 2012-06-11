@@ -53,14 +53,10 @@
     }
     
     // Freshly create a test store
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, 
-                             nil];
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
                                                                       configuration:nil 
                                                                      storeDirectory:libraryDirectoryPath 
-                                                                            options:options];
+                                                                            options:HLSModelManagerLightweightMigrationOptions];
     [HLSModelManager pushModelManager:modelManager];
     
     // Create an object which cannot be destroyed

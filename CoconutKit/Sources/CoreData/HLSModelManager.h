@@ -6,6 +6,11 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+// Standard option combinations
+#define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,   \
+                                                                                                       [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,         \
+                                                                                                       nil]
+
 /**
  * A model manager is a lightweight wrapper around a Core Data managed object context, eliminating most of the 
  * usual boilerplate you have to write when creating stores and contexts, and providing some additional convenience 
