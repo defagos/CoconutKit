@@ -36,7 +36,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [HLSModelManager rollbackDefaultModelContext];
+    [HLSModelManager rollbackCurrentModelContext];
 }
 
 #pragma mark Orientation management
@@ -55,8 +55,8 @@
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController
 {
     NSError *error = nil;
-    if (! [HLSModelManager saveDefaultModelContext:&error]) {
-        [HLSModelManager rollbackDefaultModelContext];
+    if (! [HLSModelManager saveCurrentModelContext:&error]) {
+        [HLSModelManager rollbackCurrentModelContext];
         HLSLoggerError(@"Failed to save context; reason: %@", error);        
     }
             

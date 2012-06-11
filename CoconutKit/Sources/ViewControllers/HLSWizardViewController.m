@@ -36,7 +36,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if ((self = [super init])) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self hlsWizardViewControllerInit];
     }
     return self;
