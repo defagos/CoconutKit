@@ -1,5 +1,6 @@
 HLSAssert.m
 HLSCursor.m
+HLSExpandingSearchBar.h
 HLSLabel.m
 HLSSlideshow.m
 HLSTextField.m

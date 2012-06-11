@@ -20,6 +20,7 @@
     #import "HLSConverters.h"
     #import "HLSCursor.h"
     #import "HLSError.h"
+    #import "HLSExpandingSearchBar.h"
     #import "HLSFloat.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLabel.h"

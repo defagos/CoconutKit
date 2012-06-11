@@ -17,6 +17,7 @@
     #import "HLSConverters.h"
     #import "HLSCursor.h"
     #import "HLSError.h"
+    #import "HLSExpandingSearchBar.h"
     #import "HLSFloat.h"
     #import "HLSSlideshow.h"
     #import "HLSKeyboardInformation.h"

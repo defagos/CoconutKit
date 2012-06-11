@@ -45,6 +45,9 @@
 		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F5007E41585DD1300391A6C /* HLS3DTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007E31585DD1300391A6C /* HLS3DTransform.m */; };
+		6F5007EF1585E17400391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */; };
+		6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */; };
+		6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
@@ -273,6 +276,11 @@
 		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F5007E21585DD1300391A6C /* HLS3DTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLS3DTransform.h; sourceTree = "<group>"; };
 		6F5007E31585DD1300391A6C /* HLS3DTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLS3DTransform.m; sourceTree = "<group>"; };
+		6F5007ED1585E17400391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
+		6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
+		6F5007F91585E91E00391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
+		6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
+		6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingSearchBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
@@ -744,6 +752,16 @@
 			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
+		6F5007F81585E90100391A6C /* ExpandingSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				6F5007F91585E91E00391A6C /* ExpandingSearchBarDemoViewController.h */,
+				6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */,
+				6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */,
+			);
+			path = ExpandingSearchBar;
+			sourceTree = "<group>";
+		};
 		6F5A0BAA1509D17B00A20DFF /* Slideshow */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,6 +931,8 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
+				6F5007ED1585E17400391A6C /* HLSExpandingSearchBar.h */,
+				6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */,
 				6F89149315790DA8009FCC78 /* HLSLabel.h */,
 				6F89149415790DA8009FCC78 /* HLSLabel.m */,
 				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
@@ -1213,6 +1233,7 @@
 			children = (
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
+				6F5007F81585E90100391A6C /* ExpandingSearchBar */,
 				6F89149615790DCA009FCC78 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
@@ -1600,6 +1621,7 @@
 				6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */,
 				6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */,
 				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
+				6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1750,6 +1772,8 @@
 				6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */,
 				6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */,
 				6F5007E41585DD1300391A6C /* HLS3DTransform.m in Sources */,
+				6F5007EF1585E17400391A6C /* HLSExpandingSearchBar.m in Sources */,
+				6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
