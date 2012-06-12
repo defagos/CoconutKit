@@ -12,21 +12,22 @@
 
 + (CATransform3D)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {
+    // Translation back to the origin
+    CATransform3D originTranslationTransform = CATransform3DMakeTranslation(-CGRectGetMidX(fromRect), -CGRectGetMidY(fromRect), 0.f);
+    
     // Scaling matrix
-    CATransform3D scaleTransform = CATransform3DMakeScale(toRect.size.width / fromRect.size.width, 
-                                                          toRect.size.height / fromRect.size.height,
+    CATransform3D scaleTransform = CATransform3DMakeScale(CGRectGetWidth(toRect) / CGRectGetWidth(fromRect), 
+                                                          CGRectGetHeight(toRect) / CGRectGetHeight(fromRect),
                                                           1.f);
     
-    // Rect centers in the parent view coordinate system
-    CGPoint beginCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(fromRect), CGRectGetMidY(fromRect));
-    CGPoint endCenterInCommonCoordinateSystem = CGPointMake(CGRectGetMidX(toRect), CGRectGetMidY(toRect));
+    // Translation to toRect center
+    CATransform3D toRectCenterTranslationTransform = CATransform3DMakeTranslation(CGRectGetMidX(toRect), CGRectGetMidY(toRect), 0.f);
     
-    // Translation matrix
-    CATransform3D translationTransform = CATransform3DMakeTranslation(endCenterInCommonCoordinateSystem.x - beginCenterInCommonCoordinateSystem.x, 
-                                                                      endCenterInCommonCoordinateSystem.y - beginCenterInCommonCoordinateSystem.y,
-                                                                      0.f);
-    
-    return CATransform3DConcat(scaleTransform, translationTransform);
+    // Compose the transform
+    CATransform3D transform = originTranslationTransform;
+    transform = CATransform3DConcat(transform, scaleTransform);
+    transform = CATransform3DConcat(transform, toRectCenterTranslationTransform);
+    return transform;
 }
 
 @end
