@@ -17,6 +17,9 @@ typedef enum {
 // Forward declarations
 @protocol HLSExpandingSearchBarDelegate;
 
+/**
+ * A search bar which collapses to a button and can be expanded when needed. Completely similar to a UISearchBar
+ */
 @interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
 @private
     UISearchBar *m_searchBar;
@@ -28,13 +31,36 @@ typedef enum {
     BOOL m_expanded;
 }
 
+/**
+ * These properties are exactly the same as for UISearchBar. Refer to their documentation for more information
+ */
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *prompt;
+@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, assign) BOOL showsBookmarkButton;
+@property (nonatomic, assign) BOOL showsCancelButton;
+@property (nonatomic, assign) BOOL showsSearchResultsButton;
+
+@property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;
+@property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
+@property (nonatomic, assign) UITextSpellCheckingType spellCheckingType;
+@property (nonatomic, assign) UIKeyboardType keyboardType;
+
+/**
+ * Set whether the search button is left-aligned (expansion to the right) or right-aligned (expansion to the left).
+ * Default value is HLSExpandingSearchBarAlignmentLeft
+ */
 @property (nonatomic, assign) HLSExpandingSearchBarAlignment alignment;
 
+/**
+ * The search bar delegate
+ */
 @property (nonatomic, assign) id<HLSExpandingSearchBarDelegate> delegate;
 
+/**
+ * Expand or collapse the search bar
+ */
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated;
-
-// TODO: Expose some (most!) UISearchBar methods
 
 @end
 
@@ -56,7 +82,5 @@ typedef enum {
 - (void)expandingSearchBarBookmarkButtonClicked:(HLSExpandingSearchBar *)searchBar;
 - (void)expandingSearchBarCancelButtonClicked:(HLSExpandingSearchBar *) searchBar;
 - (void)expandingSearchBarResultsListButtonClicked:(HLSExpandingSearchBar *)searchBar;
-
-- (void)expandingSearchBar:(HLSExpandingSearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope;
 
 @end

@@ -10,7 +10,6 @@
 
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
-#import "NSObject+HLSExtensions.h"
 
 static const CGFloat kSearchBarStandardHeight = 44.f;
 
@@ -28,18 +27,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 @end
 
 @implementation HLSExpandingSearchBar
-
-#pragma mark Class methods
-
-+ (void)initialize
-{
-    if (self != [HLSExpandingSearchBar class]) {
-        return;
-    }
-    
-    // Ensure that our protocol implementation stays complete as UIKit evolves
-    NSAssert([self implementsProtocol:@protocol(UISearchBarDelegate)], @"Incomplete implementation");
-}
 
 #pragma mark Object creation and destruction
 
@@ -87,6 +74,109 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 }
 
 #pragma mark Accessors and mutators
+
+// TODO: When HLSRestrictedProtocolProxy is available, use it to restrict the UISearchBar interface to those methods,
+//       and make interface and implementation simpler (can then get rid of the methods below)
+
+- (NSString *)text
+{
+    return self.searchBar.text;
+}
+
+- (void)setText:(NSString *)text
+{
+    self.searchBar.text = text;
+}
+
+- (NSString *)prompt
+{
+    return self.searchBar.prompt;
+}
+
+- (void)setPrompt:(NSString *)prompt
+{
+    self.searchBar.prompt = prompt;
+}
+
+- (NSString *)placeholder
+{
+    return self.searchBar.placeholder;
+}
+
+- (void)setPlaceholder:(NSString *)placeholder
+{
+    self.searchBar.placeholder = placeholder;
+}
+
+- (BOOL)showsBookmarkButton
+{
+    return self.searchBar.showsBookmarkButton;
+}
+
+- (void)setShowsBookmarkButton:(BOOL)showsBookmarkButton
+{
+    self.searchBar.showsBookmarkButton = showsBookmarkButton;
+}
+
+- (BOOL)showsCancelButton
+{
+    return self.searchBar.showsCancelButton;
+}
+
+- (void)setShowsCancelButton:(BOOL)showsCancelButton
+{
+    self.searchBar.showsCancelButton = showsCancelButton;
+}
+
+- (BOOL)showsSearchResultsButton
+{
+    return self.searchBar.showsSearchResultsButton;
+}
+
+- (void)setShowsSearchResultsButton:(BOOL)showsSearchResultsButton
+{
+    self.searchBar.showsSearchResultsButton = showsSearchResultsButton;
+}
+
+- (UITextAutocapitalizationType)autocapitalizationType
+{
+    return self.searchBar.autocapitalizationType;
+}
+
+- (void)setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType
+{
+    self.searchBar.autocapitalizationType = autocapitalizationType;
+}
+
+- (UITextAutocorrectionType)autocorrectionType
+{
+    return self.searchBar.autocorrectionType;
+}
+
+- (void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType
+{
+    self.searchBar.autocorrectionType = autocorrectionType;
+}
+
+- (UITextSpellCheckingType)spellCheckingType
+{
+    return self.searchBar.spellCheckingType;
+}
+
+- (void)setSpellCheckingType:(UITextSpellCheckingType)spellCheckingType
+{
+    self.searchBar.spellCheckingType = spellCheckingType;
+}
+
+- (UIKeyboardType)keyboardType
+{
+    return self.searchBar.keyboardType;
+}
+
+- (void)setKeyboardType:(UIKeyboardType)keyboardType
+{
+    self.searchBar.keyboardType = keyboardType;
+}
 
 @synthesize searchBar = m_searchBar;
 
@@ -320,13 +410,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 {
     if ([self.delegate respondsToSelector:@selector(searchBarResultsListButtonClicked:)]) {
         [self.delegate expandingSearchBarResultsListButtonClicked:self];
-    }
-}
-
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-{
-    if ([self.delegate respondsToSelector:@selector(searchBar:selectedScopeButtonIndexDidChange:)]) {
-        [self.delegate expandingSearchBar:self selectedScopeButtonIndexDidChange:selectedScope];
     }
 }
 
