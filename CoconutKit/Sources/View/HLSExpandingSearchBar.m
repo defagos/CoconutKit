@@ -11,6 +11,7 @@
 #import "HLS3DTransform.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSObject+HLSExtensions.h"
 
 static const CGFloat kSearchBarStandardHeight = 44.f;
 
@@ -151,37 +152,37 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     animationStep2.duration = 0.3;
     if (self.alignment == HLSExpandingSearchBarAlignmentLeft) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = [HLS3DTransform transformFromRect:CGRectMake(0.f,
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     kSearchBarStandardHeight, 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))
-                                                                   toRect:CGRectMake(0.f, 
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     CGRectGetWidth(self.bounds), 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))];
+        [viewAnimationStep21 transformFromRect:CGRectMake(0.f,
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          kSearchBarStandardHeight, 
+                                                          CGRectGetHeight(self.searchBar.bounds))
+                                        toRect:CGRectMake(0.f, 
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          CGRectGetWidth(self.bounds), 
+                                                          CGRectGetHeight(self.searchBar.bounds))];
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.searchBar];
     }
     else {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = [HLS3DTransform transformFromRect:CGRectMake(CGRectGetMaxX(self.bounds) - kSearchBarStandardHeight,
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     kSearchBarStandardHeight, 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))
-                                                                   toRect:CGRectMake(0.f, 
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     CGRectGetWidth(self.bounds), 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))];
+        [viewAnimationStep21 transformFromRect:CGRectMake(CGRectGetMaxX(self.bounds) - kSearchBarStandardHeight,
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          kSearchBarStandardHeight, 
+                                                          CGRectGetHeight(self.searchBar.bounds))
+                                        toRect:CGRectMake(0.f, 
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          CGRectGetWidth(self.bounds), 
+                                                          CGRectGetHeight(self.searchBar.bounds))];
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.searchBar];
         
         HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep22.transform = [HLS3DTransform transformFromRect:CGRectMake(CGRectGetMaxX(self.bounds) - kSearchBarStandardHeight,
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     kSearchBarStandardHeight, 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))
-                                                                   toRect:CGRectMake(0.f, 
-                                                                                     CGRectGetMinY(self.searchBar.bounds),
-                                                                                     kSearchBarStandardHeight, 
-                                                                                     CGRectGetHeight(self.searchBar.bounds))];
+        [viewAnimationStep22 transformFromRect:CGRectMake(CGRectGetMaxX(self.bounds) - kSearchBarStandardHeight,
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          kSearchBarStandardHeight, 
+                                                          CGRectGetHeight(self.searchBar.bounds))
+                                        toRect:CGRectMake(0.f, 
+                                                          CGRectGetMinY(self.searchBar.bounds),
+                                                          kSearchBarStandardHeight, 
+                                                          CGRectGetHeight(self.searchBar.bounds))];
         [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:self.searchButton];
     }
     

@@ -153,7 +153,7 @@
 /**
  * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
  * the animation steps get and additional "reverse_" prefix (if a tag is not filled, the reverse tag is nil). 
- Moreover, the userInfo is not copied
+ * Moreover, the userInfo is not copied
  */
 - (HLSAnimation *)reverseAnimation;
 

@@ -479,8 +479,8 @@ static const NSInteger kSlideshowNoIndex = -1;
         CGFloat scaleFactor02 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
         CGFloat xOffset02 = currentImageXOffset * self.transitionDuration / totalDuration;
         CGFloat yOffset02 = currentImageYOffset * self.transitionDuration / totalDuration;
-        viewAnimationStep02.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor02, scaleFactor02, 1.f),
-                                                            CATransform3DMakeTranslation(xOffset02, yOffset02, 0.f));
+        [viewAnimationStep02 scaleWithXFactor:scaleFactor02 yFactor:scaleFactor02 zFactor:1.f];
+        [viewAnimationStep01 translateByVectorWithX:xOffset02 y:yOffset02 z:0.f];
         [animationStep0 addViewAnimationStep:viewAnimationStep02 forView:currentImageView];
     }
     
@@ -502,8 +502,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor11 = powf(currentImageScaleFactor, self.imageDuration / totalDuration);
     CGFloat xOffset11 = currentImageXOffset * self.imageDuration / totalDuration;
     CGFloat yOffset11 = currentImageYOffset * self.imageDuration / totalDuration;
-    viewAnimationStep11.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor11, scaleFactor11, 1.f),
-                                                        CATransform3DMakeTranslation(xOffset11, yOffset11, 0.f));
+    [viewAnimationStep01 scaleWithXFactor:scaleFactor11 yFactor:scaleFactor11 zFactor:1.f];
+    [viewAnimationStep01 translateByVectorWithX:xOffset11 y:yOffset11 z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:currentImageView];
     
     // Transition
@@ -515,8 +515,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor21 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset21 = currentImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset21 = currentImageYOffset * self.transitionDuration / totalDuration;
-    viewAnimationStep21.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor21, scaleFactor21, 1.f),
-                                                        CATransform3DMakeTranslation(xOffset21, yOffset21, 0.f));
+    [viewAnimationStep21 scaleWithXFactor:scaleFactor21 yFactor:scaleFactor21 zFactor:1.f];
+    [viewAnimationStep21 translateByVectorWithX:xOffset21 y:yOffset21 z:0.f];
     viewAnimationStep21.alphaVariation = -1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
     
@@ -524,8 +524,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor22 = powf(nextImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset22 = nextImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset22 = nextImageYOffset * self.transitionDuration / totalDuration;
-    viewAnimationStep22.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor22, scaleFactor22, 1.f),
-                                                        CATransform3DMakeTranslation(xOffset22, yOffset22, 0.f));
+    [viewAnimationStep22 scaleWithXFactor:scaleFactor22 yFactor:scaleFactor22 zFactor:1.f];
+    [viewAnimationStep22 translateByVectorWithX:xOffset22 y:yOffset22 z:0.f];
     viewAnimationStep22.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:nextImageView];
     
@@ -549,7 +549,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     animationStep1.duration = 0.;
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:nextImageView];
     
     // Display the current image for the duration which has been set (identity view animation step)
@@ -561,10 +561,10 @@ static const NSInteger kSlideshowNoIndex = -1;
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     animationStep3.duration = self.transitionDuration;
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [viewAnimationStep31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
     HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep32.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [viewAnimationStep32 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:nextImageView];
     
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];

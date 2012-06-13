@@ -50,6 +50,7 @@
     #import "HLSValidators.h"
     #import "HLSValue1TableViewCell.h"
     #import "HLSValue2TableViewCell.h"
+    #import "HLSVector.h"
     #import "HLSViewAnimationStep.h"
     #import "HLSViewController.h"
     #import "HLSWebViewController.h"

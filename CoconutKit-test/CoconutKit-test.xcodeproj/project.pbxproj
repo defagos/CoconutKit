@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F000182156BF3320055CED7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */; };
+		6F0D07C2158852BE002C1AF7 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0D07C1158852BE002C1AF7 /* HLSVector.m */; };
 		6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */; };
 		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
 		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
@@ -145,6 +146,8 @@
 /* Begin PBXFileReference section */
 		6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CoconutKit-resources.xcodeproj"; path = "../CoconutKit-resources/CoconutKit-resources.xcodeproj"; sourceTree = "<group>"; };
+		6F0D07C0158852BE002C1AF7 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HLSVector.h; sourceTree = "<group>"; };
+		6F0D07C1158852BE002C1AF7 /* HLSVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSVector.m; sourceTree = "<group>"; };
 		6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
 		6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
 		6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
@@ -610,6 +613,8 @@
 				6FADE70D14BA04B6007EE121 /* HLSAnimation.m */,
 				6FADE70E14BA04B6007EE121 /* HLSAnimationStep.h */,
 				6FADE70F14BA04B6007EE121 /* HLSAnimationStep.m */,
+				6F0D07C0158852BE002C1AF7 /* HLSVector.h */,
+				6F0D07C1158852BE002C1AF7 /* HLSVector.m */,
 				6FADE71014BA04B6007EE121 /* HLSViewAnimationStep.h */,
 				6FADE71114BA04B6007EE121 /* HLSViewAnimationStep.m */,
 			);
@@ -1053,6 +1058,7 @@
 				6F8914AC15790E1A009FCC78 /* HLSLabel.m in Sources */,
 				6F5007E81585DD2200391A6C /* HLS3DTransform.m in Sources */,
 				6F5007F21585E18100391A6C /* HLSExpandingSearchBar.m in Sources */,
+				6F0D07C2158852BE002C1AF7 /* HLSVector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

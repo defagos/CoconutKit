@@ -37,6 +37,7 @@ HLSValidable.h
 HLSValidators.h
 HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
+HLSVector.h
 HLSViewAnimationStep.h
 HLSViewController.h
 HLSWebViewController.h

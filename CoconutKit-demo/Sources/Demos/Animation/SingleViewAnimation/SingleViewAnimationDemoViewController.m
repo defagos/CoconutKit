@@ -94,7 +94,7 @@
     animationStep1.duration = 2.;
     animationStep1.curve = UIViewAnimationCurveEaseIn;
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CATransform3DMakeTranslation(100.f, 100.f, 0.f);
+    [viewAnimationStep11 translateByVectorWithX:100.f y:100.f z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
@@ -107,13 +107,13 @@
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     animationStep3.tag = @"step3";
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.transform = CATransform3DMakeScale(1.5f, 1.5f, 1.f);
+    [viewAnimationStep31 scaleWithXFactor:1.5f yFactor:1.5f zFactor:1.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
     animationStep4.tag = @"step4";
     HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep41.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
+    [viewAnimationStep41 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
@@ -121,14 +121,14 @@
     animationStep5.duration = 1.;
     animationStep5.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep51.transform = CATransform3DMakeTranslation(0.f, 200.f, 0.f);
+    [viewAnimationStep51 translateByVectorWithX:0.f y:200.f z:0.f];
     [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:self.rectangleView];
     
     HLSAnimationStep *animationStep6 = [HLSAnimationStep animationStep];
     animationStep6.tag = @"step6";
     animationStep6.curve = UIViewAnimationCurveLinear;
     HLSViewAnimationStep *viewAnimationStep61 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep61.transform = CATransform3DMakeRotation(M_PI_4, 0.f, 0.f, 1.f);
+    [viewAnimationStep61 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
     viewAnimationStep61.alphaVariation = 0.3f;
     [animationStep6 addViewAnimationStep:viewAnimationStep61 forView:self.rectangleView];
     
