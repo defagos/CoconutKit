@@ -118,25 +118,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.text = text;
 }
 
-- (NSString *)prompt
-{
-    return self.searchBar.prompt;
-}
+@synthesize prompt = m_prompt;
 
-- (void)setPrompt:(NSString *)prompt
-{
-    self.searchBar.prompt = prompt;
-}
-
-- (NSString *)placeholder
-{
-    return self.searchBar.placeholder;
-}
-
-- (void)setPlaceholder:(NSString *)placeholder
-{
-    self.searchBar.placeholder = placeholder;
-}
+@synthesize placeholder = m_placeholder;
 
 - (BOOL)showsBookmarkButton
 {
@@ -360,6 +344,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
         self.searchBar.text = nil;
+        self.searchBar.prompt = nil;
+        self.searchBar.placeholder = nil;
         
         [self.searchBar resignFirstResponder];
     }
@@ -371,6 +357,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     if ([animation.tag isEqualToString:@"searchBar"]) {
         m_expanded = YES;
+        
+        self.searchBar.prompt = self.prompt;
+        self.searchBar.placeholder = self.placeholder;
         
         // At the end of the animation so that the blinking cursor does not move during the animation (ugly)
         [self.searchBar becomeFirstResponder];

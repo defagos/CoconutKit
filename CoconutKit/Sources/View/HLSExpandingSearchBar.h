@@ -32,6 +32,8 @@ typedef enum {
 @private
     UISearchBar *m_searchBar;
     UIButton *m_searchButton;
+    NSString *m_prompt;
+    NSString *m_placeholder;
     HLSExpandingSearchBarAlignment m_alignment;
     id<HLSExpandingSearchBarDelegate> m_delegate;
     HLSAnimation *m_animation;
