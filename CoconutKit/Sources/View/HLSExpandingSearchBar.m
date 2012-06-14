@@ -8,6 +8,7 @@
 
 #import "HLSExpandingSearchBar.h"
 
+#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
 
@@ -57,6 +58,15 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)hlsExpandingSearchBarInit
 {
+    // The embedded search bar has a fixed height. Apply the same constraint for self
+    if (! floateq(CGRectGetHeight(self.frame), kSearchBarStandardHeight)) {
+        HLSLoggerWarn(@"The search bar height is expected to be %.0f px. Fixed without changing the origin (but you should update your code)", kSearchBarStandardHeight);
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),
+                                CGRectGetMinY(self.frame),
+                                CGRectGetWidth(self.frame),
+                                kSearchBarStandardHeight);
+    }
+    
     self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.f, 0.f, kSearchBarStandardHeight, kSearchBarStandardHeight)] autorelease];
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     self.searchBar.alpha = 0.f;
@@ -203,6 +213,11 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 {    
     m_layoutDone = YES;
     
+    if (self.autoresizingMask & UIViewAutoresizingFlexibleHeight) {
+        HLSLoggerWarn(@"The search bar cannot have a flexible height. Disabling the corresponding autoresizing mask flag");
+        self.autoresizingMask &= ~UIViewAutoresizingFlexibleHeight;
+    }
+    
     // TODO: Factor out collapsed frame creation code
     if (! m_animating) {
         if (self.alignment == HLSExpandingSearchBarAlignmentLeft || m_expanded) {
@@ -226,7 +241,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         }
         else {
             self.searchBar.frame = self.searchButton.frame;
-        }        
+        }
     }
 }
 

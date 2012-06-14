@@ -22,6 +22,9 @@ typedef enum {
  *
  * The search bar frame corresponds to the area where the search bar stretches when it expands. You can control
  * whether the search bar collapses to a button on the left or on the right using the alignment property.
+ *
+ * A search bar should have a standard height of 44px and no flexible height. This is automatically enforced if
+ * this is not the case (and logged at warning level).
  */
 @interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
 @private
