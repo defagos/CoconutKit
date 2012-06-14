@@ -18,7 +18,10 @@ typedef enum {
 @protocol HLSExpandingSearchBarDelegate;
 
 /**
- * A search bar which collapses to a button and can be expanded when needed. Completely similar to a UISearchBar
+ * A search bar which collapses to a button and can be expanded when needed. Completely similar to a UISearchBar.
+ *
+ * The search bar frame corresponds to the area where the search bar stretches when it expands. You can control
+ * whether the search bar collapses to a button on the left or on the right using the alignment property.
  */
 @interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
 @private
@@ -29,6 +32,7 @@ typedef enum {
     HLSAnimation *m_animation;
     BOOL m_layoutDone;
     BOOL m_expanded;
+    BOOL m_animating;
 }
 
 /**
