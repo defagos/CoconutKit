@@ -49,7 +49,6 @@ typedef enum {
 @property (nonatomic, copy) NSString *prompt;
 @property (nonatomic, copy) NSString *placeholder;
 @property (nonatomic, assign) BOOL showsBookmarkButton;
-@property (nonatomic, assign) BOOL showsCancelButton;
 @property (nonatomic, assign) BOOL showsSearchResultsButton;
 
 @property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;

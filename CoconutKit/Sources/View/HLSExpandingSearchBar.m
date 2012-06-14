@@ -132,16 +132,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.showsBookmarkButton = showsBookmarkButton;
 }
 
-- (BOOL)showsCancelButton
-{
-    return self.searchBar.showsCancelButton;
-}
-
-- (void)setShowsCancelButton:(BOOL)showsCancelButton
-{
-    self.searchBar.showsCancelButton = showsCancelButton;
-}
-
 - (BOOL)showsSearchResultsButton
 {
     return self.searchBar.showsSearchResultsButton;
