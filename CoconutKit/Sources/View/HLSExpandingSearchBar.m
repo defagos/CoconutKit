@@ -58,6 +58,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)hlsExpandingSearchBarInit
 {
+    self.backgroundColor = [UIColor clearColor];
+    
     // The embedded search bar has a fixed height. Apply the same constraint for self
     if (! floateq(CGRectGetHeight(self.frame), kSearchBarStandardHeight)) {
         HLSLoggerWarn(@"The search bar height is expected to be %.0f px. Fixed without changing the origin (but you should update your code)", kSearchBarStandardHeight);
@@ -72,6 +74,14 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.alpha = 0.f;
     self.searchBar.delegate = self;
     [self addSubview:self.searchBar];
+    
+    // Remove the search bar background
+    for (UIView *subview in self.searchBar.subviews) {
+        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+            subview.alpha = 0.f;
+            break;
+        }
+    }
     
     self.searchButton = [[[UIButton alloc] initWithFrame:CGRectMake(0.f, 0.f, kSearchBarStandardHeight, kSearchBarStandardHeight)] autorelease];
     self.searchButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
