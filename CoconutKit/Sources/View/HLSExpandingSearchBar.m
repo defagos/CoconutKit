@@ -101,11 +101,20 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (NSString *)text
 {
+    if (! m_expanded) {
+        return nil;
+    }
+    
     return self.searchBar.text;
 }
 
 - (void)setText:(NSString *)text
 {
+    if (! m_expanded) {
+        HLSLoggerWarn(@"Cannot set the search bar text when closed");
+        return;
+    }
+    
     self.searchBar.text = text;
 }
 

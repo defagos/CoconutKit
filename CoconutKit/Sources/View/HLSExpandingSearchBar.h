@@ -25,6 +25,8 @@ typedef enum {
  *
  * A search bar should have a standard height of 44px and no flexible height. This is automatically enforced if
  * this is not the case (and logged at warning level).
+ *
+ * Note that the search criterium gets cleared and cannot be set when the search bar is collapsed.
  */
 @interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
 @private

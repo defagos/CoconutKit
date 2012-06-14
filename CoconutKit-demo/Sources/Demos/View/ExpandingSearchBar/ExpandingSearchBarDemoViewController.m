@@ -20,12 +20,15 @@
 {
     [super releaseViews];
     
-    self.searchBar = nil;
+    self.searchBar1 = nil;
+    self.searchBar2 = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize searchBar = m_searchBar;
+@synthesize searchBar1 = m_searchBar1;
+
+@synthesize searchBar2 = m_searchBar2;
 
 #pragma mark View lifecycle
 
@@ -33,8 +36,8 @@
 {
     [super viewDidLoad];
     
-    self.searchBar.alignment = HLSExpandingSearchBarAlignmentRight;
-    // Code
+    self.searchBar2.prompt = @"Prompt";
+    self.searchBar2.alignment = HLSExpandingSearchBarAlignmentRight;
 }
 
 #pragma mark Orientation management

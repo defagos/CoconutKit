@@ -36,23 +36,32 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="10602523">
 						<reference key="NSNextResponder" ref="633760054"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{176, 407}, {400, 50}}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{176, 209}, {400, 44}}</string>
 						<reference key="NSSuperview" ref="633760054"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<object class="NSColor" key="IBUIBackgroundColor" id="832285343">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAwIDAAA</bytes>
 						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="995086251">
+						<reference key="NSNextResponder" ref="633760054"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{176, 271}, {400, 44}}</string>
+						<reference key="NSSuperview" ref="633760054"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="832285343"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{768, 1004}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="10602523"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -72,11 +81,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">searchBar</string>
+						<string key="label">searchBar1</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="10602523"/>
 					</object>
-					<int key="connectionID">32</int>
+					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchBar2</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="995086251"/>
+					</object>
+					<int key="connectionID">39</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -103,12 +120,18 @@
 						<reference key="object" ref="633760054"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="10602523"/>
+							<reference ref="995086251"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">31</int>
 						<reference key="object" ref="10602523"/>
+						<reference key="parent" ref="633760054"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">37</int>
+						<reference key="object" ref="995086251"/>
 						<reference key="parent" ref="633760054"/>
 					</object>
 				</array>
@@ -121,29 +144,39 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="31.CustomClassName">HLSExpandingSearchBar</string>
 				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="37.CustomClassName">HLSExpandingSearchBar</string>
+				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">35</int>
+			<int key="maxID">39</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">ExpandingSearchBarDemoViewController</string>
 					<string key="superclassName">HLSViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">searchBar</string>
-						<string key="NS.object.0">HLSExpandingSearchBar</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">searchBar</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="searchBar">HLSExpandingSearchBar</string>
+						<string key="searchBar1">HLSExpandingSearchBar</string>
+						<string key="searchBar2">HLSExpandingSearchBar</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="searchBar">
 							<string key="name">searchBar</string>
 							<string key="candidateClassName">HLSExpandingSearchBar</string>
 						</object>
-					</object>
+						<object class="IBToOneOutletInfo" key="searchBar1">
+							<string key="name">searchBar1</string>
+							<string key="candidateClassName">HLSExpandingSearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar2">
+							<string key="name">searchBar2</string>
+							<string key="candidateClassName">HLSExpandingSearchBar</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ExpandingSearchBarDemoViewController.h</string>
