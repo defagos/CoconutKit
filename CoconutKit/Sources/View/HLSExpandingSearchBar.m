@@ -288,6 +288,11 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated
 {
+    if (m_animating) {
+        HLSLoggerWarn(@"The search bar is already being animated");
+        return;
+    }
+    
     if (expanded) {
         if (m_expanded) {
             HLSLoggerInfo(@"The search bar is already expanded");
