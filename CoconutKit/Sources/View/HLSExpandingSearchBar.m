@@ -339,6 +339,10 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     else if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
         m_expanded = NO;
     }
+    
+    // Force layout so that the views resize properly, even if the expansion / collapsing animation occurs during
+    // a device rotation
+    [self layoutSubviews];
 }
 
 #pragma mark UISearchBarDelegate protocol implementation
