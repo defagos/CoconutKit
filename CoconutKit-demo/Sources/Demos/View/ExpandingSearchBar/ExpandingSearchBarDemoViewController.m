@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
     
+    self.searchBar2.placeholder = @"Placeholder";
     self.searchBar2.prompt = @"Prompt";
     self.searchBar2.alignment = HLSExpandingSearchBarAlignmentRight;
 }
