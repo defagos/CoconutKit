@@ -242,7 +242,7 @@
             view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
-            [view layoutSubviews];
+            [view layoutIfNeeded];
         }
         // Alter transform
         else {
