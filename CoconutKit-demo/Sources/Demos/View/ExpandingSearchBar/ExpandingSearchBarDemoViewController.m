@@ -22,6 +22,7 @@
     
     self.searchBar1 = nil;
     self.searchBar2 = nil;
+    self.searchBar3 = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -30,15 +31,22 @@
 
 @synthesize searchBar2 = m_searchBar2;
 
+@synthesize searchBar3 = m_searchBar3;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.searchBar2.placeholder = @"Placeholder";
-    self.searchBar2.prompt = @"Prompt";
+    // Start with search bar 1 expanded
+    [self.searchBar1 setExpanded:YES animated:NO];
+    
     self.searchBar2.alignment = HLSExpandingSearchBarAlignmentRight;
+    self.searchBar2.showsBookmarkButton = YES;
+
+    self.searchBar3.alignment = HLSExpandingSearchBarAlignmentLeft;
+    self.searchBar3.showsSearchResultsButton = YES;
 }
 
 #pragma mark Orientation management
@@ -59,6 +67,24 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Search bar", @"Search bar");
+    
+    self.searchBar2.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
+    self.searchBar2.prompt = NSLocalizedString(@"Search books", @"Search books");
+    
+    self.searchBar3.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
+    self.searchBar3.prompt = NSLocalizedString(@"Search books", @"Search books");
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)expandSearchBar1:(id)sender
+{
+    [self.searchBar1 setExpanded:YES animated:YES];
+}
+
+- (IBAction)collapseSearchBar1:(id)sender
+{
+    [self.searchBar1 setExpanded:NO animated:YES];
 }
 
 @end

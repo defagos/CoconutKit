@@ -44,6 +44,7 @@
 "Done"="Terminé";
 "Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
+"Enter a search criterium"="Entrez un critère de recherche";
 "Error"="Erreur";
 "First name"="Prénom";
 "Fixed size"="Taille fixe";
@@ -105,6 +106,7 @@
 "Resizing"="Redimensionnement";
 "Scrolling"="Défilement";
 "Search bar"="Champ de recherche";
+"Search books"="Rechercher un livre";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Skinning"="Skinning";

@@ -117,7 +117,35 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @synthesize prompt = m_prompt;
 
+- (void)setPrompt:(NSString *)prompt
+{
+    if (m_prompt == prompt) {
+        return;
+    }
+    
+    [m_prompt release];
+    m_prompt = [prompt copy];
+    
+    if (m_expanded) {
+        self.searchBar.prompt = prompt;
+    }
+}
+
 @synthesize placeholder = m_placeholder;
+
+- (void)setPlaceholder:(NSString *)placeholder
+{
+    if (m_placeholder == placeholder) {
+        return;
+    }
+    
+    [m_placeholder release];
+    m_placeholder = [placeholder copy];
+    
+    if (m_expanded) {
+        self.searchBar.placeholder = placeholder;
+    }
+}
 
 @synthesize showsBookmarkButton = m_showsBookmarkButton;
 
