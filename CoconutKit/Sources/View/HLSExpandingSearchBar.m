@@ -8,6 +8,7 @@
 
 #import "HLSExpandingSearchBar.h"
 
+#import "NSArray+HLSExtensions.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
@@ -76,12 +77,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     [self addSubview:self.searchBar];
     
     // Remove the search bar background
-    for (UIView *subview in self.searchBar.subviews) {
-        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-            subview.alpha = 0.f;
-            break;
-        }
-    }
+    UIView *backgroundView = [self.searchBar.subviews firstObject];
+    backgroundView.alpha = 0.f;
     
     self.searchButton = [[[UIButton alloc] initWithFrame:CGRectMake(0.f, 0.f, kSearchBarStandardHeight, kSearchBarStandardHeight)] autorelease];
     self.searchButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -122,25 +119,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @synthesize placeholder = m_placeholder;
 
-- (BOOL)showsBookmarkButton
-{
-    return self.searchBar.showsBookmarkButton;
-}
+@synthesize showsBookmarkButton = m_showsBookmarkButton;
 
-- (void)setShowsBookmarkButton:(BOOL)showsBookmarkButton
-{
-    self.searchBar.showsBookmarkButton = showsBookmarkButton;
-}
-
-- (BOOL)showsSearchResultsButton
-{
-    return self.searchBar.showsSearchResultsButton;
-}
-
-- (void)setShowsSearchResultsButton:(BOOL)showsSearchResultsButton
-{
-    self.searchBar.showsSearchResultsButton = showsSearchResultsButton;
-}
+@synthesize showsSearchResultsButton = m_showsSearchResultsButton;
 
 - (UITextAutocapitalizationType)autocapitalizationType
 {
@@ -333,9 +314,14 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     m_animating = YES;
     
     if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
+        // The search bar does not store its text when it collapses
         self.searchBar.text = nil;
+        
+        // Remove all search bar additional controls
         self.searchBar.prompt = nil;
         self.searchBar.placeholder = nil;
+        self.searchBar.showsBookmarkButton = NO;
+        self.searchBar.showsSearchResultsButton = NO;
         
         [self.searchBar resignFirstResponder];
     }
@@ -348,8 +334,12 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     if ([animation.tag isEqualToString:@"searchBar"]) {
         m_expanded = YES;
         
+        // Show search bar additional controls only when fully expanded (does not animate well, and we
+        // do not want to animate UISearchBar subviews because we cannot control its view hierarchy)
         self.searchBar.prompt = self.prompt;
         self.searchBar.placeholder = self.placeholder;
+        self.searchBar.showsBookmarkButton = self.showsBookmarkButton;
+        self.searchBar.showsSearchResultsButton = self.showsSearchResultsButton;
         
         // At the end of the animation so that the blinking cursor does not move during the animation (ugly)
         [self.searchBar becomeFirstResponder];

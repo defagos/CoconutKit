@@ -34,6 +34,8 @@ typedef enum {
     UIButton *m_searchButton;
     NSString *m_prompt;
     NSString *m_placeholder;
+    BOOL m_showsBookmarkButton;
+    BOOL m_showsSearchResultsButton;
     HLSExpandingSearchBarAlignment m_alignment;
     id<HLSExpandingSearchBarDelegate> m_delegate;
     HLSAnimation *m_animation;
@@ -43,7 +45,8 @@ typedef enum {
 }
 
 /**
- * These properties are exactly the same as for UISearchBar. Refer to their documentation for more information
+ * These properties are exactly the same as for UISearchBar. Refer to their documentation for more information.
+ * Note that you cannot have bookmark and search results buttons at the same time
  */
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *prompt;
