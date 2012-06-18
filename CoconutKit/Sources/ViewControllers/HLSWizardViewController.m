@@ -210,7 +210,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     
     // Display the current page
     UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
-    [self setInsetViewController:viewController withTransitionStyle:transitionStyle];
+    [self setInsetViewController:viewController atIndex:0 withTransitionStyle:transitionStyle];
 }
 
 #pragma mark HLSReloadable protocol implementation

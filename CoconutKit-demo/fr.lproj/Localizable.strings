@@ -59,6 +59,8 @@
 "Image set"="Images";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="Dans le simulateur, simulez une alerte mémoire et fermez cette vue pour vous assurer que le comportement est correct";
 "Index"="Index";
+"Insert / remove in left placeholder"="Insérer / retirer à gauche";
+"Insert / remove in right placeholder"="Insérer / retirer à droite";
 "Invalid email address"="Adresse e-mail invalide";
 "Label"="Libellé";
 "Landscape only"="Uniquement paysage";

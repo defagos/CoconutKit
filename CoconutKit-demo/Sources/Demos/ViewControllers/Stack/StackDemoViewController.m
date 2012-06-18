@@ -50,7 +50,7 @@
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
         
-        self.insetViewController = stackController;
+        [self setInsetViewController:stackController atIndex:0];
         self.forwardingProperties = YES;
     }
     return self;
@@ -83,7 +83,7 @@
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
@@ -94,9 +94,9 @@
 
 - (void)displayContentViewController:(UIViewController *)viewController
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     
-    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *pushedViewController = viewController;
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
@@ -182,13 +182,13 @@
 
 - (IBAction)pop:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     [stackController popViewController];
 }
 
 - (IBAction)toggleForwardingProperties:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 

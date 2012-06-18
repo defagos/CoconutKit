@@ -21,7 +21,7 @@
  * Using HLSTextField, creating forms is very easy: You usually start with a scroll view (even if the form fits 
  * on a single screen), then you add HLSTextFields to it, usually as direct children.
  *
- * Complex scroll view hierarchies are also supported. You can e.g. embbed a scroll view containing HLSTextField 
+ * Complex scroll view hierarchies are also supported. You can e.g. embed a scroll view containing HLSTextField 
  * objects within other scroll views at will. When a text field needs to be displayed, it is always the bottommost
  * scroll view which is applied an offset if needed. Always remember this fact when designing your forms.
  *
