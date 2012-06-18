@@ -403,7 +403,7 @@
     HLSContainerContent *oldContainerContent = [self oldContainerContentAtIndex:index];
     
     NSMutableArray *containerContentStack = [NSMutableArray array];
-    if (! [oldContainerContent isEqual:[NSNull null]]) {
+    if (oldContainerContent) {
         [containerContentStack addObject:oldContainerContent];
     }
     [containerContentStack addObject:containerContent];
