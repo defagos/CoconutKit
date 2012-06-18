@@ -89,7 +89,7 @@
 
 - (void)displayInsetViewController:(UIViewController *)viewController
 {
-    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *insetViewController = viewController;
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {

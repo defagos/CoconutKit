@@ -8,17 +8,19 @@
 
 #import "HLSPlaceholderViewController.h"
 
-#import "HLSAnimation.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "HLSOrientationCloner.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSMutableArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
-@interface HLSPlaceholderViewController () <HLSAnimationDelegate>
+@interface HLSPlaceholderViewController ()
 
 @property (nonatomic, retain) NSMutableArray *containerContents;
 @property (nonatomic, retain) NSMutableArray *oldContainerContents;
+
+- (NSArray *)insetViewControllers;
 
 - (HLSContainerContent *)containerContentAtIndex:(NSUInteger)index;
 - (HLSContainerContent *)oldContainerContentAtIndex:(NSUInteger)index;
@@ -70,9 +72,8 @@
     
     m_forwardingProperties = forwardingProperties;
     
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        containerContent.forwardingProperties = m_forwardingProperties;
-    }
+    HLSContainerContent *firstContainerContent = [self.containerContents firstObject];
+    firstContainerContent.forwardingProperties = m_forwardingProperties;    
 }
 
 @synthesize delegate = m_delegate;
@@ -372,7 +373,9 @@
                                                                              containerController:self 
                                                                                  transitionStyle:transitionStyle 
                                                                                         duration:duration] autorelease];
-    containerContent.forwardingProperties = self.forwardingProperties;
+    if (index == 0) {
+        containerContent.forwardingProperties = self.forwardingProperties;
+    }
     [self.containerContents replaceObjectAtIndex:index withObject:containerContent];
     if ([self isViewLoaded]) {
         // Install the new view

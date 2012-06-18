@@ -96,7 +96,7 @@
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     
-    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *pushedViewController = viewController;
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
