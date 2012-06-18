@@ -11,7 +11,6 @@
 #import "HLSViewController.h"
 
 // Forward declarations
-@class HLSContainerContent;
 @protocol HLSPlaceholderViewControllerDelegate;
 
 /**
@@ -84,11 +83,12 @@
  */
 @interface HLSPlaceholderViewController : HLSViewController <HLSReloadable> {
 @private
-    HLSContainerContent *m_containerContent;                // Wraps the view controller added as inset
-    HLSContainerContent *m_oldContainerContent;             // Retains the old inset view controller wrapper when swapping with a new one
-    UIView *m_placeholderView;                              // View onto which the inset view is drawn
+    NSMutableArray *m_containerContents;                    // Wraps the view controllers added as insets
+    NSMutableArray *m_oldContainerContents;                 // Retains the old inset view controller wrappers when swapping with new ones
+    NSArray *m_placeholderViews;                            // View onto which the inset views are drawn
     BOOL m_forwardingProperties;                            // Does the container forward inset navigation properties transparently?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
+    BOOL m_loadedOnce;
 }
 
 /**
@@ -96,7 +96,8 @@
  * Setting the inset view controller to nil removes the one currently display (if any)
  * This property can also be set before the placeholder view controller is displayed.
  */
-- (void)setInsetViewController:(UIViewController *)insetViewController;
+- (void)setInsetViewController:(UIViewController *)insetViewController
+                       atIndex:(NSUInteger)index;
 
 /**
  * Display an inset view controller using one of the available built-in transition styles. The transition duration is 
@@ -106,6 +107,7 @@
  * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
+                       atIndex:(NSUInteger)index
            withTransitionStyle:(HLSTransitionStyle)transitionStyle;
 
 /**
@@ -118,6 +120,7 @@
  * This method can also be called before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
+                       atIndex:(NSUInteger)index
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration;
 
@@ -125,12 +128,14 @@
  * The view where inset view controller's views must be drawn. Must either created programmatically in a subclass' loadView 
  * method or bound to a UIView using Interface Builder
  */
-@property (nonatomic, retain) IBOutlet UIView *placeholderView;
+@property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
 
 /**
  * Return the view controller set as inset, nil if none
  */
-- (UIViewController *)insetViewController;
+- (NSArray *)insetViewControllers;
+
+- (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
 
 /**
  * If set to YES, properties of the inset view controller (title, navigation item, toolbar) are forwarded to the placeholder 
@@ -153,12 +158,14 @@
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 /**
  * Called when an inset view controller will be shown, before the transition has ended
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
 @end

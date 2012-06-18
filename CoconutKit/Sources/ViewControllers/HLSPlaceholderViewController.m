@@ -17,12 +17,13 @@
 
 @interface HLSPlaceholderViewController () <HLSAnimationDelegate>
 
-- (void)hlsPlaceholderViewControllerInit;
+@property (nonatomic, retain) NSMutableArray *containerContents;
+@property (nonatomic, retain) NSMutableArray *oldContainerContents;
 
-@property (nonatomic, retain) HLSContainerContent *containerContent;
-@property (nonatomic, retain) HLSContainerContent *oldContainerContent;
+- (HLSContainerContent *)containerContentAtIndex:(NSUInteger)index;
+- (HLSContainerContent *)oldContainerContentAtIndex:(NSUInteger)index;
 
-- (HLSAnimation *)createAnimation;
+- (HLSAnimation *)createAnimationForIndex:(NSUInteger)index;
 
 - (UIViewController *)emptyViewController;
 
@@ -32,36 +33,10 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self hlsPlaceholderViewControllerInit];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = [super initWithCoder:aDecoder])) {
-        [self hlsPlaceholderViewControllerInit];
-    }
-    return self;
-}
-
-- (void)hlsPlaceholderViewControllerInit
-{
-    // Crate a dummy view controller with a transparent view; HLSContainerContent objects cannot manage nil
-    self.containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
-                                                             containerController:self
-                                                                 transitionStyle:HLSTransitionStyleNone
-                                                                        duration:kAnimationTransitionDefaultDuration]
-                             autorelease];
-}
-
 - (void)dealloc
 {
-    self.containerContent = nil;
-    self.oldContainerContent = nil;
+    self.containerContents = nil;
+    self.oldContainerContents = nil;
     
     [super dealloc];
 }
@@ -70,18 +45,20 @@
 {
     [super releaseViews];
     
-    [self.containerContent releaseViews];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent releaseViews];
+    }
     
-    self.placeholderView = nil;
+    self.placeholderViews = nil;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize containerContent = m_containerContent;
+@synthesize containerContents = m_containerContents;
 
-@synthesize oldContainerContent = m_oldContainerContent;
+@synthesize oldContainerContents = m_oldContainerContents;
 
-@synthesize placeholderView = m_placeholderView;
+@synthesize placeholderViews = m_placeholderViews;
 
 @synthesize forwardingProperties = m_forwardingProperties;
 
@@ -93,14 +70,53 @@
     
     m_forwardingProperties = forwardingProperties;
     
-    self.containerContent.forwardingProperties = m_forwardingProperties;
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        containerContent.forwardingProperties = m_forwardingProperties;
+    }
 }
 
 @synthesize delegate = m_delegate;
 
-- (UIViewController *)insetViewController
+- (NSArray *)insetViewControllers
 {
-    return self.containerContent.viewController;
+    NSMutableArray *insetViewControllers = [NSMutableArray array];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [insetViewControllers addObject:containerContent.viewController];
+    }
+    return [NSArray arrayWithArray:insetViewControllers];
+}
+
+- (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index
+{
+    NSArray *insetViewControllers = [self insetViewControllers];
+    if (index >= [insetViewControllers count]) {
+        return nil;
+    }
+    return [insetViewControllers objectAtIndex:index];
+}
+
+- (HLSContainerContent *)containerContentAtIndex:(NSUInteger)index
+{
+    if (index >= [self.containerContents count]) {
+        return nil;
+    }
+    
+    return [self.containerContents objectAtIndex:index];
+}
+
+- (HLSContainerContent *)oldContainerContentAtIndex:(NSUInteger)index
+{
+    if (index >= [self.oldContainerContents count]) {
+        return nil;
+    }
+    
+    HLSContainerContent *oldContainerContent = [self.oldContainerContents objectAtIndex:index];
+    if ([oldContainerContent isEqual:[NSNull null]]) {
+        return nil;
+    }
+    else {
+        return oldContainerContent;
+    }
 }
 
 #pragma mark View lifecycle
@@ -114,10 +130,43 @@
 {
     [super viewDidLoad];
     
-    // All animations must take place within the placeholder area, even those which move views outside it. We
+    // The first time the view is loaded, guess which number of placeholder views have been defined
+    if (! m_loadedOnce) {
+        // View controllers have been preloaded
+        if (self.containerContents) {
+            NSAssert([self.placeholderViews count] >= [self.containerContents count], @"Not enough placeholder views to hold all preloaded view controllers");
+        }
+        // No preloading. Create the container content arrays as large as the number of placeholder views
+        else {
+            self.containerContents = [NSMutableArray array];
+            self.oldContainerContents = [NSMutableArray array];
+            
+            for (UIView *view in self.placeholderViews) {
+                // We must have view controllers in all slots (even if empty)
+                HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
+                                                                                         containerController:self
+                                                                                             transitionStyle:HLSTransitionStyleNone
+                                                                                                    duration:kAnimationTransitionDefaultDuration] autorelease];
+                
+                [self.containerContents addObject:containerContent];
+                
+                [self.oldContainerContents addObject:[NSNull null]];
+            }            
+        }
+        
+        m_loadedOnce = YES;
+    }
+    // If the view has been unloaded, we expect the same number of placeholder views after a reload
+    else {
+        NSAssert([self.containerContents count] == [self.placeholderViews count], @"The number of placeholder views has changed");
+    }
+        
+    // All animations must take place within the placeholder areas, even those which move views outside it. We
     // do not want views in the placeholder view to overlap with views outside it, so we clip views to match
     // the placeholder area
-    self.placeholderView.clipsToBounds = YES;
+    for (UIView *placeholderView in self.placeholderViews) {
+        placeholderView.clipsToBounds = YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -125,46 +174,63 @@
     [super viewWillAppear:animated];
     
     // If an inset has been defined but not displayed yet, display it
-    if ([self.containerContent addViewToContainerView:self.placeholderView 
-                              inContainerContentStack:nil]) {
-        // Push non-animated
-        HLSAnimation *pushAnimation = [self createAnimation];
-        [pushAnimation playAnimated:NO];
-    }
-    
-    // Forward events to the inset view controller
-    UIViewController *insetViewController = [self insetViewController];
-    if (insetViewController && [self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
-        [self.delegate placeholderViewController:self willShowInsetViewController:insetViewController animated:animated];
-    }
-    
-    [self.containerContent viewWillAppear:animated];
+    NSUInteger index = 0;
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        UIView *placeholderView = [self.placeholderViews objectAtIndex:index];
+        if ([containerContent addViewToContainerView:placeholderView 
+                             inContainerContentStack:nil]) {
+            // Push non-animated
+            HLSAnimation *pushAnimation = [self createAnimationForIndex:index];
+            [pushAnimation playAnimated:NO];
+        }
+        
+        // Forward events to the inset view controller
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:atIndex:animated:)]) {
+            [self.delegate placeholderViewController:self 
+                         willShowInsetViewController:containerContent.viewController 
+                                             atIndex:index
+                                            animated:animated];
+        }
+        [containerContent viewWillAppear:animated];
+        
+        ++index;
+    }   
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    UIViewController *insetViewController = [self insetViewController];
-    if (insetViewController && [self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
-        [self.delegate placeholderViewController:self didShowInsetViewController:insetViewController animated:animated];
-    }
-    
-    [self.containerContent viewDidAppear:animated];
+    NSUInteger index = 0;
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:atIndex:animated:)]) {
+            [self.delegate placeholderViewController:self 
+                          didShowInsetViewController:containerContent.viewController 
+                                             atIndex:index
+                                            animated:animated];
+        }
+        [containerContent viewDidAppear:animated];
+        
+        ++index;
+    }    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [self.containerContent viewWillDisappear:animated];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent viewWillDisappear:animated];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [self.containerContent viewDidDisappear:animated];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent viewDidDisappear:animated];
+    }
 }
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)
@@ -175,27 +241,38 @@
         return NO;
     }
     
-    UIViewController *insetViewController = [self insetViewController];
-    return [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-        || [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)];    
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        UIViewController *insetViewController = containerContent.viewController;
+        if (! [insetViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
+                && ! [insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    // If the view controller can rotate by cloning, clone it. Since we use 1-step rotation (smoother, default since iOS3),
+    // If a view controller can rotate by cloning, clone it. Since we use 1-step rotation (smoother, default since iOS3),
     // we cannot swap it in the middle of the animation. Instead, we use a cross-dissolve transition so that the change
     // happens smoothly during the rotation
-    UIViewController *insetViewController = [self insetViewController];
-    [insetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    if ([insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
-        UIViewController<HLSOrientationCloner> *cloneableInsetViewController = (UIViewController<HLSOrientationCloner> *)insetViewController;
-        UIViewController *clonedInsetViewController = [cloneableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
-        [self setInsetViewController:clonedInsetViewController 
-                 withTransitionStyle:HLSTransitionStyleCrossDissolve
-                            duration:duration];
-        [clonedInsetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    NSUInteger index = 0;
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        UIViewController *insetViewController = containerContent.viewController;
+        [insetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+        if ([insetViewController conformsToProtocol:@protocol(HLSOrientationCloner)]) {
+            UIViewController<HLSOrientationCloner> *cloneableInsetViewController = (UIViewController<HLSOrientationCloner> *)insetViewController;
+            UIViewController *clonedInsetViewController = [cloneableInsetViewController viewControllerCloneWithOrientation:toInterfaceOrientation];
+            [self setInsetViewController:clonedInsetViewController 
+                                 atIndex:index
+                     withTransitionStyle:HLSTransitionStyleCrossDissolve
+                                duration:duration];
+            [clonedInsetViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+        }
+        ++index;
     }
 }
 
@@ -203,42 +280,45 @@
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    UIViewController *insetViewController = [self insetViewController];
-    [insetViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent.viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }    
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    UIViewController *insetViewController = [self insetViewController];
-    [insetViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent.viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    }
 }
 
 #pragma mark Setting the inset view controller
 
-- (void)setInsetViewController:(UIViewController *)insetViewController
+- (void)setInsetViewController:(UIViewController *)insetViewController 
+                       atIndex:(NSUInteger)index
 {
-    [self setInsetViewController:insetViewController withTransitionStyle:HLSTransitionStyleNone];
+    [self setInsetViewController:insetViewController 
+                         atIndex:index
+             withTransitionStyle:HLSTransitionStyleNone];
 }
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
+                       atIndex:(NSUInteger)index
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
 {
     [self setInsetViewController:insetViewController 
+                         atIndex:index
              withTransitionStyle:transitionStyle
                         duration:kAnimationTransitionDefaultDuration];
 }
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
+                       atIndex:(NSUInteger)index
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration
-{
-    // Not changed; nothing to do
-    if (insetViewController == [self insetViewController]) {
-        return;
-    }
-    
+{    
     // If no inset set, put an empty view controller instead
     if (! insetViewController) {
         // Only some transition styles are allowed
@@ -250,6 +330,32 @@
         insetViewController = [self emptyViewController];   
     }
     
+    // Pre-loading: Resize the container content arrays as needed to match the number of preloaded view controllers
+    if (! m_loadedOnce) {
+        if (! self.containerContents) {
+            self.containerContents = [NSMutableArray array];
+            self.oldContainerContents = [NSMutableArray array];
+        }
+        
+        // Resize as needed so that all view controllers fit
+        for (NSUInteger i = [self.containerContents count]; i <= index; ++i) {
+            // We must have view controllers in all slots (even if empty)
+            HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
+                                                                                     containerController:self
+                                                                                         transitionStyle:HLSTransitionStyleNone
+                                                                                                duration:kAnimationTransitionDefaultDuration] autorelease];
+
+            [self.containerContents addObject:containerContent];
+            
+            [self.oldContainerContents addObject:[NSNull null]];
+        }
+    }
+    
+    // Not changed; nothing to do
+    if (insetViewController == [self insetViewControllerAtIndex:index]) {
+        return;
+    }
+    
     // Check that the view controller to be pushed is compatible with the current orientation
     if (! [insetViewController shouldAutorotateToInterfaceOrientation:self.interfaceOrientation]) {
         HLSLoggerError(@"The inset view controller cannot be set because it does not support the current interface orientation");
@@ -257,25 +363,26 @@
     }
     
     // Keep a strong ref to the previous inset to keep it alive during the swap
-    self.oldContainerContent = self.containerContent;
+    HLSContainerContent *oldContainerContent = [self containerContentAtIndex:index];
+    [self.oldContainerContents replaceObjectAtIndex:index withObject:oldContainerContent];
     
     // Associate the new view controller with its container (does not swap with current one yet; will be
     // done in the animation end callback)
-    self.containerContent = [[[HLSContainerContent alloc] initWithViewController:insetViewController
-                                                             containerController:self 
-                                                                 transitionStyle:transitionStyle 
-                                                                        duration:duration]
-                             autorelease];
-    self.containerContent.forwardingProperties = self.forwardingProperties;
-    
+    HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:insetViewController
+                                                                             containerController:self 
+                                                                                 transitionStyle:transitionStyle 
+                                                                                        duration:duration] autorelease];
+    containerContent.forwardingProperties = self.forwardingProperties;
+    [self.containerContents replaceObjectAtIndex:index withObject:containerContent];
     if ([self isViewLoaded]) {
         // Install the new view
-        [self.containerContent addViewToContainerView:self.placeholderView  
-                              inContainerContentStack:[NSArray arrayWithObjects:self.oldContainerContent, self.containerContent, nil]];
+        UIView *placeholderView = [self.placeholderViews objectAtIndex:index];
+        [containerContent addViewToContainerView:placeholderView  
+                         inContainerContentStack:[NSArray arrayWithObjects:oldContainerContent, containerContent, nil]];
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
-        HLSAnimation *addAnimation = [self createAnimation];
+        HLSAnimation *addAnimation = [self createAnimationForIndex:index];
         if ([self isViewVisible]) {
             [addAnimation playAnimated:YES];
         }
@@ -287,16 +394,23 @@
 
 #pragma mark Animation
 
-- (HLSAnimation *)createAnimation
+- (HLSAnimation *)createAnimationForIndex:(NSUInteger)index
 {
-    NSMutableArray *containerContentStack = [NSMutableArray array];
-    [containerContentStack safelyAddObject:self.oldContainerContent];
-    [containerContentStack addObject:self.containerContent];
+    HLSContainerContent *containerContent = [self containerContentAtIndex:index];
+    HLSContainerContent *oldContainerContent = [self oldContainerContentAtIndex:index];
     
-    HLSAnimation *animation = [self.containerContent animationWithContainerContentStack:[NSArray arrayWithArray:containerContentStack]
-                                                                          containerView:self.placeholderView];
+    NSMutableArray *containerContentStack = [NSMutableArray array];
+    if (! [oldContainerContent isEqual:[NSNull null]]) {
+        [containerContentStack addObject:oldContainerContent];
+    }
+    [containerContentStack addObject:containerContent];
+    
+    UIView *placeholderView = [self.placeholderViews objectAtIndex:index];
+    HLSAnimation *animation = [containerContent animationWithContainerContentStack:[NSArray arrayWithArray:containerContentStack]
+                                                                     containerView:placeholderView];
     animation.tag = @"add_animation";
     animation.delegate = self;
+    animation.userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:index] forKey:@"index"];
     return animation;
 }
 
@@ -321,12 +435,17 @@
     }
     
     if ([self isViewVisible]) {
-        [self.oldContainerContent viewWillDisappear:animated];
-        [self.containerContent viewWillAppear:animated];
+        NSUInteger index = [[animation.userInfo objectForKey:@"index"] unsignedIntValue];
+        HLSContainerContent *containerContent = [self containerContentAtIndex:index];
+        HLSContainerContent *oldContainerContent = [self oldContainerContentAtIndex:index];
         
-        if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:animated:)]) {
+        [oldContainerContent viewWillDisappear:animated];
+        [containerContent viewWillAppear:animated];
+        
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:atIndex:animated:)]) {
             [self.delegate placeholderViewController:self
-                         willShowInsetViewController:self.containerContent.viewController
+                         willShowInsetViewController:containerContent.viewController
+                                             atIndex:index
                                             animated:animated];
         }
     }
@@ -338,32 +457,40 @@
         return;
     }
     
+    NSUInteger index = [[animation.userInfo objectForKey:@"index"] unsignedIntValue];
+    HLSContainerContent *oldContainerContent = [self oldContainerContentAtIndex:index];
+    
     // Remove the old view controller
-    [self.oldContainerContent removeViewFromContainerView];
+    [oldContainerContent removeViewFromContainerView];
     
     if ([self isViewVisible]) {
-        [self.oldContainerContent viewDidDisappear:animated];
-        [self.containerContent viewDidAppear:animated];
+        HLSContainerContent *containerContent = [self containerContentAtIndex:index];
         
-        if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:animated:)]) {
+        [oldContainerContent viewDidDisappear:animated];
+        [containerContent viewDidAppear:animated];
+        
+        if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:atIndex:animated:)]) {
             [self.delegate placeholderViewController:self
-                          didShowInsetViewController:self.containerContent.viewController
+                          didShowInsetViewController:containerContent.viewController
+                                             atIndex:index
                                             animated:animated];
         }
     }
     
     // Discard the old view controller
-    self.oldContainerContent = nil;
+    [self.oldContainerContents replaceObjectAtIndex:index withObject:[NSNull null]];
 }
 
 #pragma mark HLSReloadable protocol implementation
 
 - (void)reloadData
 {
-    UIViewController *insetViewController = [self insetViewController];
-    if ([insetViewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        UIViewController<HLSReloadable> *reloadableInsetViewController = (UIViewController<HLSReloadable> *)insetViewController;
-        [reloadableInsetViewController reloadData];
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        UIViewController *insetViewController = containerContent.viewController;
+        if ([insetViewController conformsToProtocol:@protocol(HLSReloadable)]) {
+            UIViewController<HLSReloadable> *reloadableInsetViewController = (UIViewController<HLSReloadable> *)insetViewController;
+            [reloadableInsetViewController reloadData];
+        }
     }
 }
 

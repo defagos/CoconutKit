@@ -34,7 +34,8 @@
 {
     if ((self = [super init])) {
         // Pre-load a view controller before display. Yep, this is possible!
-        self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self setInsetViewController:lifeCycleTestViewController atIndex:0];
     }
     return self;
 }
@@ -103,7 +104,7 @@
     }
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self setInsetViewController:insetViewController withTransitionStyle:pickedIndex];
+    [self setInsetViewController:insetViewController atIndex:0 withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks
