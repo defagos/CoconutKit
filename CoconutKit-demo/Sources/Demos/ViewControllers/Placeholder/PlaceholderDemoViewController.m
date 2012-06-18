@@ -20,9 +20,10 @@
 
 @interface PlaceholderDemoViewController ()
 
-@property (nonatomic, retain) HeavyViewController *heavyViewController;
+@property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
+@property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
 
-- (void)displayInsetViewController:(UIViewController *)viewController;
+- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 
 @end
 
@@ -33,16 +34,18 @@
 - (id)init
 {
     if ((self = [super init])) {
-        // Pre-load a view controller before display. Yep, this is possible!
+        // Preload a view controller before display. Yep, this is possible (and not all placeholders have to be preloaded)!
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [self setInsetViewController:lifeCycleTestViewController atIndex:0];
+        [self setInsetViewController:lifeCycleTestViewController atIndex:1];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.heavyViewController = nil;
+    self.leftHeavyViewController = nil;
+    self.rightHeavyViewController = nil;
+    
     [super dealloc];
 }
 
@@ -50,13 +53,16 @@
 {
     [super releaseViews];
     
-    // Free heavy view in cache
-    self.heavyViewController.view = nil;
+    // Free heavy views in cache
+    self.leftHeavyViewController.view = nil;
+    self.rightHeavyViewController.view = nil;
     
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.transitionPickerView = nil;
     self.forwardingPropertiesSwitch = nil;
+    self.leftPlaceholderSwitch = nil;
+    self.rightPlaceholderSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -69,7 +75,13 @@
 
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
-@synthesize heavyViewController = m_heavyViewController;
+@synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
+
+@synthesize rightPlaceholderSwitch = m_rightPlaceholderSwitch;
+
+@synthesize leftHeavyViewController = m_leftHeavyViewController;
+
+@synthesize rightHeavyViewController = m_rightHeavyViewController;
 
 #pragma mark View lifecycle
 
@@ -80,6 +92,8 @@
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
     self.forwardingPropertiesSwitch.on = self.forwardingProperties;
+    self.leftPlaceholderSwitch.on = YES;
+    self.rightPlaceholderSwitch.on = YES;
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -87,8 +101,8 @@
 
 #pragma mark Displaying an inset view controller according to the user settings
 
-- (void)displayInsetViewController:(UIViewController *)viewController
-{
+- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+{    
     // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *insetViewController = viewController;
     if (insetViewController) {
@@ -104,55 +118,133 @@
     }
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self setInsetViewController:insetViewController atIndex:0 withTransitionStyle:pickedIndex];
+    [self setInsetViewController:insetViewController atIndex:index withTransitionStyle:pickedIndex];
 }
 
 #pragma mark Event callbacks
 
 - (IBAction)displayLifeCycleTest:(id)sender
 {
-    LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-    [self displayInsetViewController:lifecycleTestViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:lifecycleTestViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:lifecycleTestViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayStretchable:(id)sender
 {
-    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    [self displayInsetViewController:stretchableViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        [self displayInsetViewController:stretchableViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        [self displayInsetViewController:stretchableViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayFixedSize:(id)sender
 {
-    FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
-    [self displayInsetViewController:fixedSizeViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [self displayInsetViewController:fixedSizeViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [self displayInsetViewController:fixedSizeViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayHeavy:(id)sender
 {
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
     // Store a strong ref to an already built HeavyViewController; this way, this view controller is kept alive and does
     // not need to be recreated from scratch each time it is displayed as inset (lazy creation suffices). This proves 
     // that caching view controller's views is made possible by HLSPlaceholderViewController if needed
-    if (! self.heavyViewController) {
-        self.heavyViewController = [[[HeavyViewController alloc] init] autorelease];
+    if (self.leftPlaceholderSwitch.on) {
+        if (! self.leftHeavyViewController) {
+            self.leftHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+        }
+        [self displayInsetViewController:self.leftHeavyViewController atIndex:0];
     }
-    [self displayInsetViewController:self.heavyViewController];
+    if (self.rightPlaceholderSwitch.on) {
+        if (! self.rightHeavyViewController) {
+            self.rightHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+        }
+        [self displayInsetViewController:self.rightHeavyViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayPortraitOnly:(id)sender
 {
-    PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
-    [self displayInsetViewController:portraitOnlyViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:portraitOnlyViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:portraitOnlyViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayLandscapeOnly:(id)sender
 {
-    LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
-    [self displayInsetViewController:landscapeOnlyViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:landscapeOnlyViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:landscapeOnlyViewController atIndex:1];
+    }
 }
 
 - (IBAction)remove:(id)sender
 {
-    [self displayInsetViewController:nil];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        [self setInsetViewController:nil atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        [self setInsetViewController:nil atIndex:1];
+    }
 }
 
 - (IBAction)hideWithModal:(id)sender
@@ -163,17 +255,42 @@
 
 - (IBAction)displayOrientationCloner:(id)sender
 {
-    OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                         initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                         large:NO]
-                                                                        autorelease];
-    [self displayInsetViewController:orientationClonerViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
+                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
+                                                                             large:NO]
+                                                                            autorelease];
+        [self displayInsetViewController:orientationClonerViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
+                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
+                                                                             large:NO]
+                                                                            autorelease];
+        [self displayInsetViewController:orientationClonerViewController atIndex:1];
+    }
 }
 
 - (IBAction)displayContainerCustomization:(id)sender
 {
-    ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-    [self displayInsetViewController:containerCustomizationViewController];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
+        [self displayInsetViewController:containerCustomizationViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
+        [self displayInsetViewController:containerCustomizationViewController atIndex:1];
+    }
 }
 
 - (IBAction)toggleForwardingProperties:(id)sender

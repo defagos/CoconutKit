@@ -15,13 +15,18 @@
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_forwardingPropertiesSwitch;
-    HeavyViewController *m_heavyViewController;
+    UISwitch *m_leftPlaceholderSwitch;
+    UISwitch *m_rightPlaceholderSwitch;
+    HeavyViewController *m_leftHeavyViewController;
+    HeavyViewController *m_rightHeavyViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;

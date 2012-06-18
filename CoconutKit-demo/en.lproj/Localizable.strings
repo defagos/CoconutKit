@@ -59,6 +59,8 @@
 "Image set"="Image set";
 "In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct"="In the simulator, trigger a memory warning and dismiss this view to check that the behavior is correct";
 "Index"="Index";
+"Insert / remove in left placeholder"="Insert / remove in left placeholder";
+"Insert / remove in right placeholder"="Insert / remove in right placeholder";
 "Invalid email address"="Invalid email address";
 "Label"="Label";
 "Label with some missing translation"="Label with some missing translation";
