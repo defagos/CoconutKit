@@ -18,7 +18,8 @@ typedef enum {
 @protocol HLSExpandingSearchBarDelegate;
 
 /**
- * A search bar which collapses to a button and can be expanded when needed. Completely similar to a UISearchBar.
+ * A search bar which reduces to a button and can be expanded / collapsed when needed by clicking on the
+ * magnifying glass icon. Completely similar to a UISearchBar otherwise.
  *
  * The search bar frame corresponds to the area where the search bar stretches when it expands. You can control
  * whether the search bar collapses to a button on the left or on the right using the alignment property.
@@ -71,7 +72,7 @@ typedef enum {
 @property (nonatomic, assign) id<HLSExpandingSearchBarDelegate> delegate;
 
 /**
- * Expand or collapse the search bar
+ * Expand or collapse the search bar. Can be used to create a search bar initially expanded
  */
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated;
 
@@ -80,8 +81,8 @@ typedef enum {
 @protocol HLSExpandingSearchBarDelegate <NSObject>
 
 // Called when the search bar expands or collapses
-- (BOOL)expandingSearchBarDidExpand:(HLSExpandingSearchBar *)searchBar animated:(BOOL)animated;
-- (BOOL)expandingSearchBarDidCollapse:(HLSExpandingSearchBar *)searchBar animated:(BOOL)animated;
+- (void)expandingSearchBarDidExpand:(HLSExpandingSearchBar *)searchBar animated:(BOOL)animated;
+- (void)expandingSearchBarDidCollapse:(HLSExpandingSearchBar *)searchBar animated:(BOOL)animated;
 
 // Refer to the documentation of the same methods declared by UISearchBarDelegate
 - (BOOL)expandingSearchBarShouldBeginEditing:(HLSExpandingSearchBar *)searchBar;
@@ -93,7 +94,6 @@ typedef enum {
 
 - (void)expandingSearchBarSearchButtonClicked:(HLSExpandingSearchBar *)searchBar;
 - (void)expandingSearchBarBookmarkButtonClicked:(HLSExpandingSearchBar *)searchBar;
-- (void)expandingSearchBarCancelButtonClicked:(HLSExpandingSearchBar *) searchBar;
 - (void)expandingSearchBarResultsListButtonClicked:(HLSExpandingSearchBar *)searchBar;
 
 @end

@@ -211,9 +211,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 #pragma mark Layout
 
 - (void)layoutSubviews
-{    
-    m_layoutDone = YES;
-    
+{
     if (self.autoresizingMask & UIViewAutoresizingFlexibleHeight) {
         HLSLoggerWarn(@"The search bar cannot have a flexible height. Disabling the corresponding autoresizing mask flag");
         self.autoresizingMask &= ~UIViewAutoresizingFlexibleHeight;
@@ -235,6 +233,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         }
         
         if (m_expanded) {
+            self.searchBar.alpha = 1.f;
             self.searchBar.frame = CGRectMake(0.f,
                                               roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
                                               CGRectGetWidth(self.bounds),
@@ -243,6 +242,18 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         else {
             self.searchBar.frame = self.searchButton.frame;
         }
+    }
+    
+    // Notify initial status
+    if (! m_layoutDone) {
+        if (m_expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidExpand:animated:)]) {
+            [self.delegate expandingSearchBarDidExpand:self animated:NO];
+        }
+        else if (! m_expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidCollapse:animated:)]) {
+            [self.delegate expandingSearchBarDidCollapse:self animated:NO];
+        }
+        
+        m_layoutDone = YES;
     }
 }
 
@@ -304,6 +315,12 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated
 {
+    // No animation if not displayed yet
+    if (! m_layoutDone) {
+        m_expanded = expanded;
+        return;
+    }
+    
     if (m_animating) {
         HLSLoggerWarn(@"The search bar is already being animated");
         return;
@@ -370,9 +387,17 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         
         // At the end of the animation so that the blinking cursor does not move during the animation (ugly)
         [self.searchBar becomeFirstResponder];
+        
+        if ([self.delegate respondsToSelector:@selector(expandingSearchBarDidExpand:animated:)]) {
+            [self.delegate expandingSearchBarDidExpand:self animated:animated];
+        }
     }
     else if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
         m_expanded = NO;
+        
+        if ([self.delegate respondsToSelector:@selector(expandingSearchBarDidCollapse:animated:)]) {
+            [self.delegate expandingSearchBarDidCollapse:self animated:animated];
+        }
     }
     
     // Force layout so that the views resize properly, even if the expansion / collapsing animation occurs during
@@ -384,7 +409,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarShouldBeginEditing:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarShouldBeginEditing:)]) {
         return [self.delegate expandingSearchBarShouldBeginEditing:self];
     }
     else {
@@ -394,14 +419,14 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarTextDidEndEditing:)]) {
-        [self.delegate expandingSearchBarTextDidEndEditing:self];
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarTextDidBeginEditing:)]) {
+        [self.delegate expandingSearchBarTextDidBeginEditing:self];
     }
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarShouldEndEditing:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarShouldEndEditing:)]) {
         return [self.delegate expandingSearchBarShouldEndEditing:self];
     }
     else {
@@ -411,21 +436,21 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarTextDidEndEditing:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarTextDidEndEditing:)]) {
         [self.delegate expandingSearchBarTextDidEndEditing:self];
     }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if ([self.delegate respondsToSelector:@selector(searchBar:textDidChange:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBar:textDidChange:)]) {
         [self.delegate expandingSearchBar:self textDidChange:searchText];
     }
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if ([self.delegate respondsToSelector:@selector(searchBar:shouldChangeTextInRange:replacementText:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBar:shouldChangeTextInRange:replacementText:)]) {
         return [self.delegate expandingSearchBar:self shouldChangeTextInRange:range replacementText:text];
     }
     else {
@@ -435,28 +460,21 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarSearchButtonClicked:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarSearchButtonClicked:)]) {
         [self.delegate expandingSearchBarSearchButtonClicked:self];
     }
 }
 
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarBookmarkButtonClicked:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarBookmarkButtonClicked:)]) {
         [self.delegate expandingSearchBarBookmarkButtonClicked:self];
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    if ([self.delegate respondsToSelector:@selector(searchBarCancelButtonClicked:)]) {
-        [self.delegate expandingSearchBarCancelButtonClicked:self];
     }
 }
 
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
 {
-    if ([self.delegate respondsToSelector:@selector(searchBarResultsListButtonClicked:)]) {
+    if ([self.delegate respondsToSelector:@selector(expandingSearchBarResultsListButtonClicked:)]) {
         [self.delegate expandingSearchBarResultsListButtonClicked:self];
     }
 }
