@@ -17,7 +17,7 @@
 /**
  * View controllers must sometimes embed other view controllers as "subviews". In such cases, it is difficult and
  * cumbersome to achieve correct event propagation (e.g. view lifecycle events, rotation events) to the embedded
- * view controllers. The placeholder view controller class allows you to achieve such embeddings, without having
+ * view controllers. The HLSPlaceholderViewController class allows you to achieve such embeddings, without having
  * to worry about event propagation anymore. Simply subclass HLSPlaceholderViewController and define areas where
  * embedded view controllers ("insets") must be drawn, either by binding the placeholder view outlet collection
  * in your subclass xib, or by instantiating them in the loadView method. Note that this class also supports view 
@@ -34,16 +34,14 @@
  * available when swapping insets. If the transition is animated, all inset view controller viewWill / viewDid lifecycle 
  * methods will receive animated = YES, even if one of the views is not moved. This is not an error (what matters is 
  * whether the transition is animated or not, not if individual views are).
- 
- 
- 
- preloading, automatic placeholder view number detection
- 
- 
  *
  * When a view controller's view is set as inset view controller, its view frame is automatically adjusted to match 
  * its placeholder view bounds, as for usual UIKit containers (UITabBarController, UINavigationController). Be sure
  * that the view controller's view size and autoresizing behaviors are correctly set.
+ *
+ * You can preload view controllers into an placeholder view controller before it is displayed. Simply use the
+ * setInsetViewController... methods to load view controllers at specific indices. You must only ensure that the 
+ * number of placeholder views suffices to hold all the view controllers you have preloaded.
  *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
