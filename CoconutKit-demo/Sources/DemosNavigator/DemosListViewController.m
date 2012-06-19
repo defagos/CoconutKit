@@ -11,6 +11,7 @@
 #import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
+#import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "LabelDemoViewController.h"
 #import "MultipleViewsAnimationDemoViewController.h"
@@ -71,6 +72,7 @@ typedef enum {
     ViewDemoIndexTextFields,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
+    ViewDemoIndexExpandingSearchBar,
     ViewDemoIndexActionSheet,
     ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
@@ -299,6 +301,11 @@ typedef enum {
                     cell.textLabel.text = NSLocalizedString(@"Label", @"Label");
                     break;
                 }
+                    
+                case ViewDemoIndexExpandingSearchBar: {
+                    cell.textLabel.text = NSLocalizedString(@"Search bar", @"Search bar");
+                    break;
+                }
                 
                 case ViewDemoIndexActionSheet: {
                     cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
@@ -451,6 +458,11 @@ typedef enum {
                     
                 case ViewDemoIndexLabel: {
                     demoViewController = [[[LabelDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexExpandingSearchBar: {
+                    demoViewController = [[[ExpandingSearchBarDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

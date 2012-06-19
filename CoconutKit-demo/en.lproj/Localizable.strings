@@ -31,6 +31,7 @@
 "Click for missing translation"="Click for missing translation";
 "Close"="Close";
 "Coconuts"="Coconuts";
+"Collapse"="Collapse";
 "Container customization"="Container customization";
 "Core"="Core";
 "Country"="Country";
@@ -44,7 +45,9 @@
 "Done"="Done";
 "Dynamic localization"="Dynamic localization";
 "E-mail"="E-mail";
+"Enter a search criterium"="Enter a search criterium";
 "Error"="Error";
+"Expand"="Expand";
 "First name"="First name";
 "Fixed size"="Fixed size";
 "Font"="Font";
@@ -107,6 +110,8 @@
 "Reset text fields"="Reset text fields";
 "Resizing"="Resizing";
 "Scrolling"="Scrolling";
+"Search bar"="Search bar";
+"Search books"="Search books";
 "Section end"="Section end";
 "Single view animation"="Single view animation";
 "Skinning"="Skinning";

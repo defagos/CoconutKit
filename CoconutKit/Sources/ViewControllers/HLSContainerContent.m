@@ -95,11 +95,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 + (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent;
 
-+ (HLSAnimation *)flipAnimationAroundVectorWithXComponent:(CGFloat)xComponent
-                                               yComponent:(CGFloat)yComponent
-                                               zComponent:(CGFloat)zComponent
-                                appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                            disappearingContainerContents:(NSArray *)disappearingContainerContents;
++ (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
+                                               y:(CGFloat)y
+                                               z:(CGFloat)z
+                       appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                   disappearingContainerContents:(NSArray *)disappearingContainerContents;
 
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent
@@ -187,25 +187,25 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
             switch (containerContent.transitionStyle) {
                 case HLSTransitionStylePushFromTop: {
                     CGFloat offset = CGRectGetHeight(fixedFrame) - belowView.transform.ty;
-                    viewAnimationStep.transform = CATransform3DMakeTranslation(0.f, offset, 0.f);
+                    [viewAnimationStep translateByVectorWithX:0.f y:offset z:0.f];
                     break;
                 }
                     
                 case HLSTransitionStylePushFromBottom: {
                     CGFloat offset = CGRectGetHeight(fixedFrame) + belowView.transform.ty;
-                    viewAnimationStep.transform = CATransform3DMakeTranslation(0.f, -offset, 0.f);
+                    [viewAnimationStep translateByVectorWithX:0.f y:-offset z:0.f];
                     break;
                 }
                     
                 case HLSTransitionStylePushFromLeft: {
                     CGFloat offset = CGRectGetWidth(fixedFrame) - belowView.transform.tx;
-                    viewAnimationStep.transform = CATransform3DMakeTranslation(offset, 0.f, 0.f);
+                    [viewAnimationStep translateByVectorWithX:offset y:0.f z:0.f];
                     break;
                 }
                     
                 case HLSTransitionStylePushFromRight: {
                     CGFloat offset = CGRectGetWidth(fixedFrame) + belowView.transform.tx;
-                    viewAnimationStep.transform = CATransform3DMakeTranslation(-offset, 0.f, 0.f);
+                    [viewAnimationStep translateByVectorWithX:-offset y:0.f z:0.f];
                     break;
                 }
                     
@@ -218,9 +218,9 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
                 case HLSTransitionStyleCoverFromBottomLeft2:
                 case HLSTransitionStyleCoverFromBottomRight2:
                 case HLSTransitionStyleFadeIn2: {
-                    viewAnimationStep.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame), 
-                                                                         kPushToTheBackScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame),
-                                                                         1.f);
+                    [viewAnimationStep scaleWithXFactor:kPushToTheBackScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame) 
+                                                yFactor:kPushToTheBackScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame)
+                                                zFactor:1.f];
                     break;
                 }
                     
@@ -607,14 +607,14 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
@@ -633,7 +633,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -641,11 +641,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor, kPushToTheBackScaleFactor, 1.f);
+        [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep22.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
@@ -692,7 +692,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = CATransform3DMakeScale(kPushToTheBackScaleFactor, kPushToTheBackScaleFactor, 1.f);
+        [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
     }
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
@@ -742,7 +742,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = CATransform3DMakeTranslation(xOffset, yOffset, 0.f);
+    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -750,11 +750,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+        [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep22.transform = CATransform3DMakeTranslation(-xOffset, -yOffset, 0.f);
+    [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
@@ -767,18 +767,18 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    CATransform3D shrinkTransform = CATransform3DMakeScale(kEmergeFromCenterScaleFactor, kEmergeFromCenterScaleFactor, 1.f);
-    
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = shrinkTransform;
+    [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.transform = CATransform3DInvert(shrinkTransform);
+    [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor 
+                                  yFactor:1.f / kEmergeFromCenterScaleFactor 
+                                  zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
@@ -787,21 +787,18 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 }
 
 // The two views are flipped around an axis
-+ (HLSAnimation *)flipAnimationAroundVectorWithXComponent:(CGFloat)xComponent
-                                               yComponent:(CGFloat)yComponent
-                                               zComponent:(CGFloat)zComponent
++ (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
+                                               y:(CGFloat)y
+                                               z:(CGFloat)z
                                 appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                             disappearingContainerContents:(NSArray *)disappearingContainerContents
 
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    CATransform3D flipTransform = CATransform3DMakeRotation(M_PI, xComponent, yComponent, zComponent);
-    CATransform3D halfFlipTransform = CATransform3DMakeRotation(M_PI_2, xComponent, yComponent, zComponent);
-    
+        
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.transform = flipTransform;
+    [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
     viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
     animationStep1.duration = 0.;
@@ -810,12 +807,12 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.transform = CATransform3DInvert(halfFlipTransform);
+        [viewAnimationStep21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
         viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
         [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep22.transform = CATransform3DInvert(halfFlipTransform);
+    [viewAnimationStep22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
     animationStep2.curve = UIViewAnimationCurveEaseOut;
     animationStep2.duration = 0.2;
@@ -836,11 +833,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep41.transform = CATransform3DInvert(halfFlipTransform);
+        [viewAnimationStep41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
         [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
     }
     HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep42.transform = CATransform3DInvert(halfFlipTransform);
+    [viewAnimationStep42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep42.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
     [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
     animationStep4.curve = UIViewAnimationCurveEaseIn;
@@ -1044,20 +1041,20 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }
             
         case HLSTransitionStyleFlipVertical: {
-            animation = [self flipAnimationAroundVectorWithXComponent:0.f 
-                                                           yComponent:1.f 
-                                                           zComponent:0.f 
-                                            appearingContainerContent:appearingContainerContent 
-                                        disappearingContainerContents:disappearingContainerContents];
+            animation = [self flipAnimationAroundVectorWithX:0.f 
+                                                           y:1.f 
+                                                           z:0.f 
+                                   appearingContainerContent:appearingContainerContent 
+                               disappearingContainerContents:disappearingContainerContents];
             break;
         }
             
         case HLSTransitionStyleFlipHorizontal: {
-            animation = [self flipAnimationAroundVectorWithXComponent:1.f 
-                                                           yComponent:0.f 
-                                                           zComponent:0.f 
-                                            appearingContainerContent:appearingContainerContent 
-                                        disappearingContainerContents:disappearingContainerContents];
+            animation = [self flipAnimationAroundVectorWithX:1.f 
+                                                           y:0.f 
+                                                           z:0.f 
+                                   appearingContainerContent:appearingContainerContent 
+                               disappearingContainerContents:disappearingContainerContents];
             break;
         }
             

@@ -240,6 +240,9 @@
             
             // TODO: This does not resize subviews correctly in all cases. Maybe that is not possible?
             view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
+            
+            // Ensure better subview resizing in some cases (e.g. UISearchBar)
+            [view layoutIfNeeded];
         }
         // Alter transform
         else {

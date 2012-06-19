@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSVector.h"
+
 /**
  * A view animation step describes the changes applied to a view during an animation step (HLSAnimationStep). An 
  * animation step is the combination of several view animation steps (HLSViewAnimationStep) applied to a set of views, and 
@@ -16,7 +18,9 @@
  */
 @interface HLSViewAnimationStep : NSObject {
 @private
-    CATransform3D m_transform;
+    HLSVector4 m_rotationParameters;
+    HLSVector3 m_scaleParameters;
+    HLSVector3 m_translationParameters;
     CGFloat m_alphaVariation;
 }
 
@@ -26,12 +30,21 @@
 + (HLSViewAnimationStep *)viewAnimationStep;
 
 /**
- * The transform corresponding to the animation step. Use the convenience methods available from
- * CATransform3D.h to create translation, rotation, scaling transformations, etc. You can even combine
- * them using transformation composition (beware of the order since composing transforms is not a commutative
- * operation)
+ * Geometric transform parameters to be applied during the view animation step. The resulting transform (which you can 
+ * obtained by calling -transform) applies the rotation, the scale and finally the translation
+ *
+ * Remark: Since you cannot control the order of the rotation, scaling and translation transforms, some animations
+ *         are not supported (e.g. translating, then rotating). The currently supported animations should cover most
+ *         needs, though
  */
-@property (nonatomic, assign) CATransform3D transform;
+- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+
+/**
+ * Convenience method to calculate the view animation step parameters needed to transform a rect into another one
+ */
+- (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect;
 
 /**
  * Alpha increment or decrement to be applied during the view animation step. Any value between 1.f and -1.f can be provided, 
@@ -39,6 +52,11 @@
  * Default value is 0.f
  */
 @property (nonatomic, assign) CGFloat alphaVariation;
+
+/**
+ * The transform corresponding to the transform parameters associated with the animation steps
+ */
+@property (nonatomic, readonly, assign) CATransform3D transform;
 
 /**
  * Return the inverse animation step

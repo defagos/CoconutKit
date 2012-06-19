@@ -31,6 +31,7 @@
 "Click for missing translation"="Cliquer pour traduction manquante";
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
+"Collapse"="Contracter";
 "Container customization"="Personnalisation conteneur";
 "Core"="Core";
 "Country"="Pays";
@@ -44,7 +45,9 @@
 "Done"="Terminé";
 "Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
+"Enter a search criterium"="Entrez un critère de recherche";
 "Error"="Erreur";
+"Expand"="Etirer";
 "First name"="Prénom";
 "Fixed size"="Taille fixe";
 "Font"="Police";
@@ -106,6 +109,8 @@
 "Reset text fields"="Effacer champs textuels";
 "Resizing"="Redimensionnement";
 "Scrolling"="Défilement";
+"Search bar"="Champ de recherche";
+"Search books"="Rechercher un livre";
 "Section end"="Fin de section";
 "Single view animation"="Animation d'une seule vue";
 "Skinning"="Skinning";
