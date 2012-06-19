@@ -83,8 +83,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchButton = [[[UIButton alloc] initWithFrame:CGRectMake(0.f, 0.f, kSearchBarStandardHeight, kSearchBarStandardHeight)] autorelease];
     self.searchButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     self.searchButton.showsTouchWhenHighlighted = YES;
-    NSString *imagePath = [[NSBundle coconutKitBundle] pathForResource:@"SearchFieldIcon" ofType:@"png"];
-    [self.searchButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+    [self.searchButton setImage:[UIImage imageNamed:@"CoconutKit-resources.bundle/SearchFieldIcon.png"] forState:UIControlStateNormal];
     [self.searchButton addTarget:self 
                           action:@selector(toggleSearchBar:)
                 forControlEvents:UIControlEventTouchUpInside];

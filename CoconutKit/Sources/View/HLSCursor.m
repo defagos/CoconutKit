@@ -174,8 +174,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if (! m_viewsCreated) {
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
-            NSString *pointerImagePath = [[NSBundle coconutKitBundle] pathForResource:@"CursorDefaultPointer" ofType:@"png"];
-            UIImage *pointerImage = [UIImage imageWithContentsOfFile:pointerImagePath];
+            UIImage *pointerImage = [UIImage imageNamed:@"CoconutKit-resources.bundle/CursorDefaultPointer.png"];
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
             imageView.contentStretch = CGRectMake(0.5f, 
                                                   0.5f, 

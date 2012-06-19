@@ -20,7 +20,7 @@
  *     property of a UIView (or CALayer) with the same transform. When applied to the transform property, the result
  *     obtained is relative to the center of the view (resp. layer) and leaves its center invariant. When applied to 
  *     a frame, the result obtained is relative to the coordinate system in which the frame resides and will in
- *     general move the view center
+ *     general move the frame center
  *   - transforms generated for view animation steps are meant to be applied on the transform property of a view
  *     (or of its layer). This has some important consequences when calculating the reverse view animation step.
  *     The inverse is namely not simply CATransform3DInvert([self transform]). Since we are applying the changes in 
