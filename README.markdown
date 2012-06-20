@@ -84,7 +84,7 @@ If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely 
 
 #### With which versions of iOS is CoconutKit compatible?
 
-CoconutKit should be compatible with iOS 3.2 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
+CoconutKit should be compatible with iOS 4 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
 
 #### With which versions of Xcode is CoconutKit compatible?
 
