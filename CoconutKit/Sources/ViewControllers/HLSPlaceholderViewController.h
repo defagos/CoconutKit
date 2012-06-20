@@ -138,6 +138,11 @@
 @property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
 
 /**
+ * Return the placeholder view at the given index, or nil if none
+ */
+- (UIView *)placeholderViewAtIndex:(NSUInteger)index;
+
+/**
  * Return the view controller displayed on the placeholder view at the given index, or nil if none
  */
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;

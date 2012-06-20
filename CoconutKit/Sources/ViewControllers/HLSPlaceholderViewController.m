@@ -78,6 +78,14 @@
 
 @synthesize delegate = m_delegate;
 
+- (UIView *)placeholderViewAtIndex:(NSUInteger)index
+{
+    if (index >= [self.placeholderViews count]) {
+        return nil;
+    }
+    return [self.placeholderViews objectAtIndex:index];
+}
+
 - (NSArray *)insetViewControllers
 {
     NSMutableArray *insetViewControllers = [NSMutableArray array];
