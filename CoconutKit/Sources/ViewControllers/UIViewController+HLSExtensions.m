@@ -221,6 +221,12 @@ static id swizzled_UIViewController__initWithCoder_Imp(UIViewController *self, S
 
 static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd)
 {
+    if (! [self isViewLoaded]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                       reason:@"The view controller's view has not been loaded" 
+                                     userInfo:nil];
+    }
+    
     (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
