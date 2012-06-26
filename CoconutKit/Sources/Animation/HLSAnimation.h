@@ -168,8 +168,19 @@
 @protocol HLSAnimationDelegate <NSObject>
 @optional
 
+/**
+ * Called right before the first animation step is executed, and after any delay which might have been set
+ */
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated;
+
+/**
+ * Called right after the last animation step has been executed
+ */
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated;
+
+/**
+ * Called when a step has been executed (you can use the animation step tag property to identify it if needed)
+ */
 - (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end

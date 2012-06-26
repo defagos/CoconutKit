@@ -15,6 +15,7 @@
     UIButton *m_terminateButton;
     UISwitch *m_animatedSwitch;
     UISwitch *m_blockingSwitch;
+    UILabel *m_delayedLabel;
     UISwitch *m_delayedSwitch;
     HLSAnimation *m_animation;
     HLSAnimation *m_reverseAnimation;
@@ -27,11 +28,13 @@
 @property (nonatomic, retain) IBOutlet UIButton *terminateButton;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
+@property (nonatomic, retain) IBOutlet UILabel *delayedLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *delayedSwitch;
 
 - (IBAction)playForward:(id)sender;
 - (IBAction)playBackward:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)terminate:(id)sender;
+- (IBAction)toggleAnimated:(id)sender;
 
 @end

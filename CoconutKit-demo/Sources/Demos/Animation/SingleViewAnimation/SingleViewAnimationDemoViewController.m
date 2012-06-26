@@ -15,6 +15,8 @@
 @property (nonatomic, retain) HLSAnimation *animation;
 @property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
+- (void)updateUserInterface;
+
 @end
 
 @implementation SingleViewAnimationDemoViewController
@@ -50,6 +52,8 @@
     self.animatedSwitch.on = YES;
     self.blockingSwitch.on = NO;
     self.delayedSwitch.on = NO;
+    
+    [self updateUserInterface];
 }
 
 #pragma mark Accessors and mutators
@@ -67,6 +71,8 @@
 @synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize blockingSwitch = m_blockingSwitch;
+
+@synthesize delayedLabel = m_delayedLabel;
 
 @synthesize delayedSwitch = m_delayedSwitch;
 
@@ -204,6 +210,11 @@
     self.terminateButton.hidden = YES;
 }
 
+- (IBAction)toggleAnimated:(id)sender
+{
+    [self updateUserInterface];
+}
+
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
@@ -239,6 +250,20 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+}
+
+#pragma mark Miscellaneous
+
+- (void)updateUserInterface
+{
+    if (self.animatedSwitch.on) {
+        self.delayedLabel.hidden = NO;
+        self.delayedSwitch.hidden = NO;
+    }
+    else {
+        self.delayedLabel.hidden = YES;
+        self.delayedSwitch.hidden = YES;
+    }
 }
 
 @end
