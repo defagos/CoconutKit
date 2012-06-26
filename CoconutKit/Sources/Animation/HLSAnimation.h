@@ -53,6 +53,7 @@
     BOOL m_resizeViews;
     BOOL m_lockingUI;
     BOOL m_bringToFront;
+    NSTimeInterval m_delay;
     BOOL m_animated;
     BOOL m_running;
     BOOL m_cancelling;
@@ -127,6 +128,11 @@
  * does take place synchronously at the location of the call to playAnimated:)
  */
 - (void)playAnimated:(BOOL)animated;
+
+/**
+ * Play the animation (same as playAnimated: with animated set to YES) after some delay, given in seconds
+ */
+- (void)playAfterDelay:(NSTimeInterval)delay;
 
 /**
  * Cancel the animation. The animation immediately reaches its end state. The delegate does not receive subsequent

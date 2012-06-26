@@ -32,6 +32,7 @@
     self.terminateButton = nil;
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
+    self.delayedSwitch = nil;
     self.animation = nil;
     self.reverseAnimation = nil;
 }
@@ -48,6 +49,7 @@
     
     self.animatedSwitch.on = YES;
     self.blockingSwitch.on = NO;
+    self.delayedSwitch.on = NO;
 }
 
 #pragma mark Accessors and mutators
@@ -65,6 +67,8 @@
 @synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize blockingSwitch = m_blockingSwitch;
+
+@synthesize delayedSwitch = m_delayedSwitch;
 
 @synthesize animation = m_animation;
 
@@ -143,7 +147,13 @@
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = self.blockingSwitch.on;
     self.animation.delegate = self;
-    [self.animation playAnimated:self.animatedSwitch.on];
+    
+    if (! self.delayedSwitch.on) {
+        [self.animation playAnimated:self.animatedSwitch.on];
+    }
+    else {
+        [self.animation playAfterDelay:2.];
+    }
 }
 
 - (IBAction)playBackward:(id)sender
@@ -155,7 +165,13 @@
     // Create the reverse animation
     self.reverseAnimation = [self.animation reverseAnimation];
     self.reverseAnimation.lockingUI = self.blockingSwitch.on;
-    [self.reverseAnimation playAnimated:self.animatedSwitch.on];
+    
+    if (! self.delayedSwitch.on) {
+        [self.reverseAnimation playAnimated:self.animatedSwitch.on];    
+    }
+    else {
+        [self.reverseAnimation playAfterDelay:1.];
+    }
 }
 
 - (IBAction)cancel:(id)sender

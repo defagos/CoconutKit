@@ -174,6 +174,19 @@
     [self playNextStepAnimated:animated];
 }
 
+- (void)playAfterDelay:(NSTimeInterval)delay
+{
+    if (floatlt(delay, 0.)) {
+        m_delay = 0.;
+        HLSLoggerWarn(@"Negative delay. Fixed to 0");
+    }
+    else {
+        m_delay = delay;
+    }
+    
+    [self playAnimated:YES];
+}
+
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
@@ -183,6 +196,10 @@
         
         [UIView setAnimationDuration:animationStep.duration];
         [UIView setAnimationCurve:animationStep.curve];
+        [UIView setAnimationDelay:m_delay];
+        
+        // The delay is just used for the first step. Set it to 0 for the remaining ones
+        m_delay = 0.;
         
         // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context: (though appearing
         //         in the UIKit UIView header documentation) are reserved by Apple. Using them might lead to app rejection!
