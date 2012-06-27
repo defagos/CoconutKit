@@ -331,6 +331,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
             HLSLoggerInfo(@"The search bar is already expanded");
             return;
         }
+        
+        m_animating = YES;
+        
         HLSAnimation *animation = [self expansionAnimation];
         [animation playAnimated:animated];        
     }
@@ -339,6 +342,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
             HLSLoggerInfo(@"The search bar is already collapsed");
             return;
         }
+        
+        m_animating = YES;
+        
         HLSAnimation *reverseAnimation = [[self expansionAnimation] reverseAnimation];
         [reverseAnimation playAnimated:animated];
     }
@@ -355,8 +361,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    m_animating = YES;
-    
     if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
         // The search bar does not store its text when it collapses
         self.searchBar.text = nil;

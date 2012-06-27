@@ -453,15 +453,19 @@
 
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-    
-    // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
-    // delay period is over, as for UIView animation blocks)
-    if ([self.animationSteps indexOfObject:animationStep] == 0) {
-        if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-            [self.delegate animationWillStart:self animated:YES];
-        }        
-    }
+    // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
+    // set). Do not notify the delegate in such cases
+    if (! self.cancelling) {
+        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        
+        // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
+        // delay period is over, as for UIView animation blocks)
+        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:YES];
+            }        
+        }
+    }    
 }
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
