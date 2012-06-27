@@ -34,10 +34,10 @@
 
 - (void)perform
 {
-    // The source is a stack controller. The segue is used to set its root view controller
+    // The source is a stack controller. The root segue is used to set its root view controller
     HLSStackController *stackController = nil;
     if ([self.sourceViewController isKindOfClass:[HLSStackController class]]) {
-        stackController = (HLSStackController *)self.sourceViewController;
+        stackController = self.sourceViewController;
         if (! [self.identifier isEqualToString:@"root"]) {
             HLSLoggerError(@"The push segue attached to a stack controller must be called 'root'");
             return;
@@ -52,7 +52,7 @@
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
     // push the destination view controller into it
     else {
-        UIViewController *sourceViewController = (UIViewController *)self.sourceViewController;
+        UIViewController *sourceViewController = self.sourceViewController;
         if (! sourceViewController.stackController) {
             HLSLoggerError(@"The source view controller is not embedded into a stack controller");
             return;

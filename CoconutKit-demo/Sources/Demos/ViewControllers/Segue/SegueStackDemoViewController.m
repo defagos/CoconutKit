@@ -27,7 +27,7 @@
         return NO;
     }
     
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    return YES;
 }
 
 #pragma mark Localization
