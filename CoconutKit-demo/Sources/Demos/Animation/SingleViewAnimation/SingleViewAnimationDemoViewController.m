@@ -15,6 +15,8 @@
 @property (nonatomic, retain) HLSAnimation *animation;
 @property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
+- (void)updateUserInterface;
+
 @end
 
 @implementation SingleViewAnimationDemoViewController
@@ -32,6 +34,7 @@
     self.terminateButton = nil;
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
+    self.delayedSwitch = nil;
     self.animation = nil;
     self.reverseAnimation = nil;
 }
@@ -48,6 +51,9 @@
     
     self.animatedSwitch.on = YES;
     self.blockingSwitch.on = NO;
+    self.delayedSwitch.on = NO;
+    
+    [self updateUserInterface];
 }
 
 #pragma mark Accessors and mutators
@@ -65,6 +71,10 @@
 @synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize blockingSwitch = m_blockingSwitch;
+
+@synthesize delayedLabel = m_delayedLabel;
+
+@synthesize delayedSwitch = m_delayedSwitch;
 
 @synthesize animation = m_animation;
 
@@ -143,7 +153,13 @@
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = self.blockingSwitch.on;
     self.animation.delegate = self;
-    [self.animation playAnimated:self.animatedSwitch.on];
+    
+    if (! self.delayedSwitch.on) {
+        [self.animation playAnimated:self.animatedSwitch.on];
+    }
+    else {
+        [self.animation playAfterDelay:2.];
+    }
 }
 
 - (IBAction)playBackward:(id)sender
@@ -155,7 +171,13 @@
     // Create the reverse animation
     self.reverseAnimation = [self.animation reverseAnimation];
     self.reverseAnimation.lockingUI = self.blockingSwitch.on;
-    [self.reverseAnimation playAnimated:self.animatedSwitch.on];
+    
+    if (! self.delayedSwitch.on) {
+        [self.reverseAnimation playAnimated:self.animatedSwitch.on];    
+    }
+    else {
+        [self.reverseAnimation playAfterDelay:1.];
+    }
 }
 
 - (IBAction)cancel:(id)sender
@@ -186,6 +208,11 @@
     
     self.cancelButton.hidden = YES;
     self.terminateButton.hidden = YES;
+}
+
+- (IBAction)toggleAnimated:(id)sender
+{
+    [self updateUserInterface];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -223,6 +250,20 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+}
+
+#pragma mark Miscellaneous
+
+- (void)updateUserInterface
+{
+    if (self.animatedSwitch.on) {
+        self.delayedLabel.hidden = NO;
+        self.delayedSwitch.hidden = NO;
+    }
+    else {
+        self.delayedLabel.hidden = YES;
+        self.delayedSwitch.hidden = YES;
+    }
 }
 
 @end

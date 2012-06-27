@@ -480,7 +480,7 @@ static const NSInteger kSlideshowNoIndex = -1;
         CGFloat xOffset02 = currentImageXOffset * self.transitionDuration / totalDuration;
         CGFloat yOffset02 = currentImageYOffset * self.transitionDuration / totalDuration;
         [viewAnimationStep02 scaleWithXFactor:scaleFactor02 yFactor:scaleFactor02 zFactor:1.f];
-        [viewAnimationStep01 translateByVectorWithX:xOffset02 y:yOffset02 z:0.f];
+        [viewAnimationStep02 translateByVectorWithX:xOffset02 y:yOffset02 z:0.f];
         [animationStep0 addViewAnimationStep:viewAnimationStep02 forView:currentImageView];
     }
     
@@ -502,8 +502,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor11 = powf(currentImageScaleFactor, self.imageDuration / totalDuration);
     CGFloat xOffset11 = currentImageXOffset * self.imageDuration / totalDuration;
     CGFloat yOffset11 = currentImageYOffset * self.imageDuration / totalDuration;
-    [viewAnimationStep01 scaleWithXFactor:scaleFactor11 yFactor:scaleFactor11 zFactor:1.f];
-    [viewAnimationStep01 translateByVectorWithX:xOffset11 y:yOffset11 z:0.f];
+    [viewAnimationStep11 scaleWithXFactor:scaleFactor11 yFactor:scaleFactor11 zFactor:1.f];
+    [viewAnimationStep11 translateByVectorWithX:xOffset11 y:yOffset11 z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:currentImageView];
     
     // Transition

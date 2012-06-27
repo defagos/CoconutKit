@@ -35,6 +35,7 @@
 
 - (NSArray *)reverseAnimationSteps;
 
+- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
@@ -165,13 +166,22 @@
     if (self.lockingUI) {
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
-        
-    if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-        [self.delegate animationWillStart:self animated:animated];
-    }
-        
+    
     // Begin with the first step
     [self playNextStepAnimated:animated];
+}
+
+- (void)playAfterDelay:(NSTimeInterval)delay
+{
+    if (floatlt(delay, 0.)) {
+        m_delay = 0.;
+        HLSLoggerWarn(@"Negative delay. Fixed to 0");
+    }
+    else {
+        m_delay = delay;
+    }
+    
+    [self playAnimated:YES];
 }
 
 - (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
@@ -183,11 +193,25 @@
         
         [UIView setAnimationDuration:animationStep.duration];
         [UIView setAnimationCurve:animationStep.curve];
+        [UIView setAnimationDelay:m_delay];
+        
+        // The delay is just used for the first step. Set it to 0 for the remaining ones
+        m_delay = 0.;
         
         // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context: (though appearing
         //         in the UIKit UIView header documentation) are reserved by Apple. Using them might lead to app rejection!
+        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
-        [UIView setAnimationDelegate:self];        
+        [UIView setAnimationDelegate:self];
+    }
+    // Instantaneous
+    else {
+        // First step
+        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:animated];
+            }        
+        }
     }
     
     // Animate the dummy view
@@ -426,6 +450,23 @@
 }
 
 #pragma mark Animation callbacks
+
+- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
+{
+    // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
+    // set). Do not notify the delegate in such cases
+    if (! self.cancelling) {
+        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        
+        // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
+        // delay period is over, as for UIView animation blocks)
+        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:YES];
+            }        
+        }
+    }    
+}
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
