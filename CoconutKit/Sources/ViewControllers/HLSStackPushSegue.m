@@ -44,7 +44,7 @@
         }
         
         if ([[stackController viewControllers] count] != 0) {
-            HLSLoggerError(@"The segue called 'root can only be used to set a root view controller. No view controller "
+            HLSLoggerError(@"The segue called 'root' can only be used to set a root view controller. No view controller "
                            "must have been loaded before");
             return;
         }
