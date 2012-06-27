@@ -97,7 +97,8 @@
 @property (nonatomic, assign, getter=isResizeViews) BOOL resizeViews;
 
 /**
- * If set to YES, the user interface interaction is blocked during animation
+ * If set to YES, the user interface interaction is blocked during the time the animation is running (see
+ * the running documentation for more information about what this means)
  * Default is NO
  */
 @property (nonatomic, assign) BOOL lockingUI;
@@ -113,7 +114,8 @@
 @property (nonatomic, assign) BOOL bringToFront;
 
 /**
- * Return YES while the animation is running
+ * Return YES while the animation is running. An animation is running from the call to a play method until
+ * it ends, and is considered running from the start even if a delay has been set
  */
 @property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
