@@ -45,12 +45,8 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
             HLSLoggerWarn(@"Capacity cannot be smaller than minimal value %d; set to this value", kStackMinimalCapacity);
         }
         
-        HLSContainerContent *rootContainerContent = [[[HLSContainerContent alloc] initWithViewController:rootViewController 
-                                                                                     containerController:self 
-                                                                                         transitionStyle:HLSTransitionStyleNone 
-                                                                                                duration:kAnimationTransitionDefaultDuration]
-                                                     autorelease];
-        self.containerContentStack = [NSMutableArray arrayWithObject:rootContainerContent];
+        [self pushViewController:rootViewController];
+        
         m_capacity = capacity;
     }
     return self;
@@ -61,10 +57,32 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     return [self initWithRootViewController:rootViewController capacity:kStackDefaultCapacity];
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    // A stack controller is not meant to be instantiated in a nib... except if we are using storyboards. In this
+    // case, setting the root view controller is performed using segues (must be done when the involved view
+    // controllers are available, in -awakeFromNib)
+    if ((self = [super initWithCoder:aDecoder])) {
+        m_capacity = kStackMinimalCapacity;
+    }
+    return self;
+}
+
 - (id)init
 {
     HLSForbiddenInheritedMethod();
     return nil;
+}
+
+- (void)awakeFromNib
+{
+    // Load the root view controller when using segues. A reserved segue called root must be used for such purposes
+    [self performSegueWithIdentifier:@"root" sender:self];
+    
+    // We now must have at least one view controller loaded
+    NSAssert([self.containerContentStack count] != 0, @"No root view controller has been loaded. Drag a segue called "
+             "'root' in your storyboard file, from the stack controller to the view controller you want to install "
+             "as root");
 }
 
 - (void)dealloc
@@ -154,13 +172,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 }
 
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
-    
+        
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -316,6 +334,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     // Can release the view not needed according to the capacity
     HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:m_capacity - 1];
     [newlyInvisibleContainerContent releaseViews];
+    
+    // If no view controller has been loaded yet, create the objects required to store it. The root view controller has always none
+    // as transition style
+    if (! self.containerContentStack) {
+        self.containerContentStack = [NSMutableArray array];
+        transitionStyle = HLSTransitionStyleNone;
+    }    
     
     // Associate the view controller with its container
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 

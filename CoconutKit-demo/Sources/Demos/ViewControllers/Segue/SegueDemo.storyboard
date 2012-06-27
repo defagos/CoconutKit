@@ -1,74 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="XD1-C5-9rJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="lcB-2r-nbk">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="LHb-GV-tzN">
+        <!--Stack Controller-->
+        <scene sceneID="M71-h7-N5s">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iDO-r3-RwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="XD1-C5-9rJ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Eq-S0-HeA">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="arn-8p-lQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lcB-2r-nbk" customClass="HLSStackController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mlr-iN-uxx">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aqh-P1-0DJ">
-                                <rect key="frame" x="20" y="492" width="728" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3Lx-c0-JAa">
-                                <rect key="frame" x="593" y="102" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sS5-og-RoT" kind="push" id="17Z-si-084"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="OOx-fi-7Pa" kind="custom" identifier="root" customClass="HLSStackPushSegue" id="Pbp-ye-qJp"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-604" y="198"/>
+            <point key="canvasLocation" x="-1668" y="-211"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="xTe-KO-KXW">
+        <scene sceneID="qBd-Gr-RHm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Znx-1Z-WpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="sS5-og-RoT" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="t9L-nM-QnZ">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mvH-ED-110" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="OOx-fi-7Pa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4JO-XT-mKc">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="htx-7N-K2b">
+                            <view contentMode="scaleToFill" id="nG6-pY-eba">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Root view controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AQU-yN-FjQ">
                                 <rect key="frame" x="20" y="492" width="728" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="CCB-gk-5CQ">
+                                <rect key="frame" x="0.0" y="984" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qy0-CC-8EF"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="637" y="-89"/>
+            <point key="canvasLocation" x="113" y="-371"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="HLSStackController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HLSStackController.h"/>
+        </class>
+        <class className="HLSViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HLSViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
