@@ -3,6 +3,7 @@ HLSCursor.m
 HLSExpandingSearchBar.h
 HLSLabel.m
 HLSSlideshow.m
+HLSStackPushSegue.m
 HLSTextField.m
 HLSViewController.m
 NSArray+HLSExtensions.m

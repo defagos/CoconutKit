@@ -17,6 +17,8 @@
 		6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		6F5007EB1585E16300391A6C /* HLSExpandingSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */; };
 		6F5007EC1585E16300391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */; };
+		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
+		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
 		6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */; };
 		6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F8366061588CC690044E572 /* HLSVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8366041588CC690044E572 /* HLSVector.h */; };
@@ -209,6 +211,8 @@
 		6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
 		6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
+		6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
+		6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8366041588CC690044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
@@ -660,6 +664,8 @@
 				6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE58B14BA0494007EE121 /* HLSStackController.h */,
 				6FADE58C14BA0494007EE121 /* HLSStackController.m */,
+				6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */,
+				6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */,
 				6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */,
 				6FADE59114BA0494007EE121 /* HLSTransitionStyle.h */,
@@ -771,6 +777,7 @@
 				6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */,
 				6F5007EB1585E16300391A6C /* HLSExpandingSearchBar.h in Headers */,
 				6F8366061588CC690044E572 /* HLSVector.h in Headers */,
+				6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +935,7 @@
 				6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */,
 				6F5007EC1585E16300391A6C /* HLSExpandingSearchBar.m in Sources */,
 				6F8366071588CC690044E572 /* HLSVector.m in Sources */,
+				6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

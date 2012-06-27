@@ -21,6 +21,7 @@ HLSReloadable.h
 HLSRuntime.h
 HLSSlideshow.h
 HLSStackController.h
+HLSStackPushSegue.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h

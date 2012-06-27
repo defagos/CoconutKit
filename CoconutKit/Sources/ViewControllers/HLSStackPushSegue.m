@@ -13,13 +13,31 @@
 
 @implementation HLSStackPushSegue
 
+#pragma mark Object creation and destruction
+
+- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
+{
+    if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
+        self.transitionStyle = HLSTransitionStyleNone;
+        self.duration = kAnimationTransitionDefaultDuration;
+    }
+    return self;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize transitionStyle = m_transitionStyle;
+
+@synthesize duration = m_duration;
+
 #pragma mark Overrides
 
 - (void)perform
 {
     // The source is a stack controller. The segue is used to set its root view controller
+    HLSStackController *stackController = nil;
     if ([self.sourceViewController isKindOfClass:[HLSStackController class]]) {
-        HLSStackController *stackController = (HLSStackController *)self.sourceViewController;
+        stackController = (HLSStackController *)self.sourceViewController;
         if (! [self.identifier isEqualToString:@"root"]) {
             HLSLoggerError(@"The push segue attached to a stack controller must be called 'root'");
             return;
@@ -30,8 +48,6 @@
                            "must have been loaded before");
             return;
         }
-        
-        [stackController pushViewController:self.destinationViewController];
     }
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
     // push the destination view controller into it
@@ -42,8 +58,12 @@
             return;
         }
         
-        [sourceViewController.stackController pushViewController:self.destinationViewController];
+        stackController = sourceViewController.stackController;
     }
+    
+    [stackController pushViewController:self.destinationViewController
+                    withTransitionStyle:self.transitionStyle
+                               duration:self.duration];
 }
 
 @end

@@ -6,6 +6,15 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface HLSStackPushSegue : UIStoryboardSegue
+#import "HLSTransitionStyle.h"
+
+@interface HLSStackPushSegue : UIStoryboardSegue {
+@private
+    HLSTransitionStyle m_transitionStyle;
+    NSTimeInterval m_duration;
+}
+
+@property (nonatomic, assign) HLSTransitionStyle transitionStyle;
+@property (nonatomic, assign) NSTimeInterval duration;
 
 @end

@@ -34,6 +34,7 @@
     #import "HLSRuntime.h"
     #import "HLSSlideshow.h"
     #import "HLSStackController.h"
+    #import "HLSStackPushSegue.h"
     #import "HLSSubtitleTableViewCell.h"
     #import "HLSTableSearchDisplayViewController.h"
     #import "HLSTableViewCell.h"
