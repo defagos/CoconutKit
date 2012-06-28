@@ -16,6 +16,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="capacity">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="OOx-fi-7Pa" kind="custom" identifier="root" customClass="HLSStackPushSegue" id="Pbp-ye-qJp"/>
                     </connections>
@@ -151,4 +156,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Pbp-ye-qJp"/>
+        <segue reference="j6V-lp-2yV"/>
+    </inferredMetricsTieBreakers>
 </document>
