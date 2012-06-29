@@ -54,6 +54,15 @@
             [stackController pushViewController:rootStackDemoViewController2];
             self.rootViewController = stackController;
         }
+        else if ([demoMode isEqualToString:@"RootStoryboard"]) {
+            if (NSClassFromString(@"UIStoryboard")) {
+                UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                self.rootViewController = [segueStoryboard instantiateInitialViewController];
+            }
+            else {
+                HLSLoggerError(@"This demo is only available starting with iOS 5");
+            }
+        }
         else {
             DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
             self.rootViewController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
