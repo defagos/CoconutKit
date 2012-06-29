@@ -66,6 +66,18 @@
  * (in other words, NOT in viewDidLoad). You should not alter an inset view controller's view frame or transform yourself, 
  * otherwise the behavior is undefined.
  *
+ * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
+ *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
+ *     views which you connect to the placeholderViews outlet collection
+ *   - drop another view controller onto the storyboard, and set it as an inset view controller of the placeholder by
+ *     binding the placeholder with it using an HLSPlaceholderInsetSegue. If you need to customize the index at which
+ *     the view controller must be displayed (by default 0) or the transition settings (style and duration), you must 
+ *     implement the -prepareForSegue:sender: method in your source view controller
+ *   - if you have several placeholder views, repeat this process as needed
+ *   - when you want to install a new inset view controller, you can also bind an existing inset view controller
+ *     to it. The new inset view controller will be inserted into the same placeholder view controller the source
+ *     inset view controller belongs to
+ *
  * About view controller reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
  * to it, it will get deallocated, and so will its view. This is perfectly fine in general since it contributes to saving 

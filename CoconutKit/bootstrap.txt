@@ -1,7 +1,8 @@
 HLSAssert.m
 HLSCursor.m
-HLSExpandingSearchBar.h
+HLSExpandingSearchBar.m
 HLSLabel.m
+HLSPlaceholderInsetSegue.m
 HLSSlideshow.m
 HLSStackPopSegue.m
 HLSStackPushSegue.m

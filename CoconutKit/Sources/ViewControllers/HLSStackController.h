@@ -61,7 +61,7 @@ extern const NSUInteger kStackUnlimitedCapacity;
  *   - if you want to push another view controller, drop a view controller onto the storyboard, and connect the 
  *     root view controller with it using another HLSStackPushSegue. If you need to customize transition settings 
  *     (style and duration), you must implement the -prepareForSegue:sender: method in your source view controller 
- *     (the root view controller in this example) to set the corresponding properties
+ *     (the root view controller in this example)
  *   - if you want to pop a view controller, bind it to any other view controller (in general the one towards
  *     which the transition will occur, or itself) using an HLSStackPopSegue
  * For further information, refer to the documentation of HLSStackPushSegue and HLSStackPopSegue.
