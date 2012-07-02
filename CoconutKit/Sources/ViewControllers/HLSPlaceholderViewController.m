@@ -35,6 +35,19 @@
 
 #pragma mark Object creation and destruction
 
+- (void)awakeFromNib
+{
+    // Load view controllers initially using reserved segue identifiers. Cannot use [self.placeholderViews count]
+    // here since the view is not loaded. Checking the first 20 index should be sufficient
+    for (NSUInteger i = 0; i < 20; ++i) {
+        @try {
+            NSString *segueIdentifier = [NSString stringWithFormat:@"init_at_index_%d", i];
+            [self performSegueWithIdentifier:segueIdentifier sender:self];
+        }
+        @catch (NSException *exception) {}
+    }
+}
+
 - (void)dealloc
 {
     self.containerContents = nil;
@@ -137,7 +150,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     
     // The first time the view is loaded, guess which number of placeholder views have been defined
     if (! m_loadedOnce) {

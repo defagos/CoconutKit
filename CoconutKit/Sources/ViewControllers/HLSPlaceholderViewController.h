@@ -48,6 +48,7 @@
  * behavior is undefined:
  *   - initWithNibName:bundle:
  *   - initWithCoder: (for view controllers instantiated from a xib)
+ *   - awakeFromNib
  *   - viewWill...
  *   - viewDid...
  *   - shouldAutorotateToInterfaceOrientation: : If the call to the super method returns NO, return NO immediately (this

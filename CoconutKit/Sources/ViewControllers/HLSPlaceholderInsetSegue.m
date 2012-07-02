@@ -35,10 +35,31 @@
 
 - (void)perform
 {
-    UIViewController *viewController = self.sourceViewController;
     HLSPlaceholderViewController *placeholderViewController = nil;
-    if ([viewController isKindOfClass:[HLSPlaceholderViewController class]]) {
-        placeholderViewController = (HLSPlaceholderViewController *)viewController;
+    UIViewController *viewController = self.sourceViewController;
+    
+    // The source is a placeholder view controller. Reserved segue identifiers can be used to pre-load view controller 
+    // into a placeholder view controller
+    if ([self.sourceViewController isKindOfClass:[HLSPlaceholderViewController class]]) {
+        placeholderViewController = self.sourceViewController;
+        if ([self.identifier hasPrefix:@"init_at_index_"]) {
+            NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:@"init_at_index_" withString:@""];
+            static NSNumberFormatter *s_numberFormatter = nil;
+            if (! s_numberFormatter) {
+                s_numberFormatter = [[NSNumberFormatter alloc] init];
+            }
+            NSNumber *indexNumber = [s_numberFormatter numberFromString:indexString];
+            if (! indexNumber) {
+                HLSLoggerError(@"Cannot parse inset index from segue identifier %@", self.identifier);
+                return;
+            }
+            
+            if (self.index != [indexNumber unsignedIntegerValue]) {
+                HLSLoggerWarn(@"For init_at_index_ segues, the index is given by the identifier. The index "
+                              "%d manually set has been overridden");
+                self.index = [indexNumber unsignedIntegerValue];
+            }
+        }
     }
     else if (viewController.placeholderViewController) {
         placeholderViewController = viewController.placeholderViewController;

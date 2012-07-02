@@ -13,6 +13,8 @@
  *
  * The source view controller must either be a placeholder view controller, or a view controller already installed
  * as inset view controller of a placeholder view controller
+ *
+ * TODO: Document initWithIndex_ and max of 20 view controllers
  */
 @interface HLSPlaceholderInsetSegue : UIStoryboardSegue {
 @private

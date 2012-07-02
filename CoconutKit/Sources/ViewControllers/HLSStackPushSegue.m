@@ -34,8 +34,9 @@
 
 - (void)perform
 {
-    // The source is a stack controller. The root segue is used to set its root view controller
     HLSStackController *stackController = nil;
+    
+    // The source is a stack controller. The root segue is used to set its root view controller
     if ([self.sourceViewController isKindOfClass:[HLSStackController class]]) {
         stackController = self.sourceViewController;
         if (! [self.identifier isEqualToString:@"root"]) {

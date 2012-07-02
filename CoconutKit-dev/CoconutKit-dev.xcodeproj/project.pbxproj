@@ -39,6 +39,13 @@
 		6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
+		6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
+		6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
+		6F1F4E0815A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */; };
+		6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */; };
+		6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
@@ -51,7 +58,6 @@
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
-		6F6C0A13159B958E007933EB /* SegueStackRootDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A12159B958E007933EB /* SegueStackRootDemoViewController.m */; };
 		6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660A1588CC770044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
@@ -196,16 +202,12 @@
 		6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
 		6FADE8E014BA04C9007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
-		6FB33C0B159978B200B26A5D /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB33C0A159978B200B26A5D /* SegueDemo.storyboard */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
-		6FDD9D2B159D736900E4094D /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD9D2A159D736900E4094D /* SegueStackOtherDemoViewController.m */; };
-		6FDD9D2E159D739100E4094D /* SeguePlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD9D2D159D739000E4094D /* SeguePlaceholderDemoViewController.m */; };
-		6FDD9D31159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD9D30159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.m */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
@@ -273,6 +275,19 @@
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
+		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
+		6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFB15A1B64700F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFD15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderInsetDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeguePlaceholderInsetDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFF15A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueSecondRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueSecondRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4E0115A1B64700F65ECF /* SegueStackOtherDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackOtherDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoPlaceholderViewController.h; sourceTree = "<group>"; };
+		6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -294,8 +309,6 @@
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
-		6F6C0A11159B958E007933EB /* SegueStackRootDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoViewController.h; sourceTree = "<group>"; };
-		6F6C0A12159B958E007933EB /* SegueStackRootDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoViewController.m; sourceTree = "<group>"; };
 		6F6C0A20159B9A51007933EB /* HLSStackPopSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPopSegue.h; sourceTree = "<group>"; };
 		6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPopSegue.m; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -558,7 +571,6 @@
 		6FADE88514BA04C9007EE121 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
-		6FB33C0A159978B200B26A5D /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
@@ -568,12 +580,6 @@
 		6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		6FDD9D29159D736900E4094D /* SegueStackOtherDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackOtherDemoViewController.h; sourceTree = "<group>"; };
-		6FDD9D2A159D736900E4094D /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
-		6FDD9D2C159D739000E4094D /* SeguePlaceholderDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderDemoViewController.h; sourceTree = "<group>"; };
-		6FDD9D2D159D739000E4094D /* SeguePlaceholderDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeguePlaceholderDemoViewController.m; sourceTree = "<group>"; };
-		6FDD9D2F159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderInsetDemoViewController.h; sourceTree = "<group>"; };
-		6FDD9D30159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeguePlaceholderInsetDemoViewController.m; sourceTree = "<group>"; };
 		6FDDEC141529777500CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDDEC201529781300CED462 /* UITextView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -746,6 +752,26 @@
 				6F000132156BD17F0055CED7 /* skyscraper.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		6F1F4DF715A1B64700F65ECF /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */,
+				6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */,
+				6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */,
+				6F1F4DFB15A1B64700F65ECF /* SegueLeftPanelDemoViewController.h */,
+				6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */,
+				6F1F4DFD15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.h */,
+				6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */,
+				6F1F4DFF15A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.h */,
+				6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */,
+				6F1F4E0115A1B64700F65ECF /* SegueStackOtherDemoViewController.h */,
+				6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */,
+				6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */,
+				6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */,
+			);
+			path = Segue;
 			sourceTree = "<group>";
 		};
 		6F37FED613EBE480003E33EF /* CoconutKit */ = {
@@ -1341,7 +1367,7 @@
 			children = (
 				6FADE85E14BA04C9007EE121 /* Placeholder */,
 				6FADE86214BA04C9007EE121 /* RootStack */,
-				6FB33C091599788400B26A5D /* Segue */,
+				6F1F4DF715A1B64700F65ECF /* Segue */,
 				6FADE86614BA04C9007EE121 /* Stack */,
 				6FADE86A14BA04C9007EE121 /* TableSearchDisplay */,
 				6FADE87014BA04C9007EE121 /* Wizard */,
@@ -1442,22 +1468,6 @@
 				6FADE88314BA04C9007EE121 /* _Person.m */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		6FB33C091599788400B26A5D /* Segue */ = {
-			isa = PBXGroup;
-			children = (
-				6FB33C0A159978B200B26A5D /* SegueDemo.storyboard */,
-				6FDD9D2C159D739000E4094D /* SeguePlaceholderDemoViewController.h */,
-				6FDD9D2D159D739000E4094D /* SeguePlaceholderDemoViewController.m */,
-				6FDD9D2F159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.h */,
-				6FDD9D30159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.m */,
-				6F6C0A11159B958E007933EB /* SegueStackRootDemoViewController.h */,
-				6F6C0A12159B958E007933EB /* SegueStackRootDemoViewController.m */,
-				6FDD9D29159D736900E4094D /* SegueStackOtherDemoViewController.h */,
-				6FDD9D2A159D736900E4094D /* SegueStackOtherDemoViewController.m */,
-			);
-			path = Segue;
 			sourceTree = "<group>";
 		};
 		6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */ = {
@@ -1668,7 +1678,7 @@
 				6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */,
 				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
-				6FB33C0B159978B200B26A5D /* SegueDemo.storyboard in Resources */,
+				6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1822,12 +1832,14 @@
 				6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6F83660A1588CC770044E572 /* HLSVector.m in Sources */,
 				6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */,
-				6F6C0A13159B958E007933EB /* SegueStackRootDemoViewController.m in Sources */,
 				6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */,
 				6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */,
-				6FDD9D2B159D736900E4094D /* SegueStackOtherDemoViewController.m in Sources */,
-				6FDD9D2E159D739100E4094D /* SeguePlaceholderDemoViewController.m in Sources */,
-				6FDD9D31159D73B900E4094D /* SeguePlaceholderInsetDemoViewController.m in Sources */,
+				6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
+				6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
+				6F1F4E0815A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m in Sources */,
+				6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
+				6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */,
+				6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

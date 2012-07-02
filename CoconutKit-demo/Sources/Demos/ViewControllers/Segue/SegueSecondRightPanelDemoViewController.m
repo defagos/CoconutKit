@@ -1,14 +1,14 @@
 //
-//  SeguePlaceholderDemoViewController.m
+//  SegueSecondRightPanelDemoViewController.m
 //  CoconutKit-demo
 //
-//  Created by Samuel Défago on 29.06.12.
+//  Created by Samuel Défago on 02.07.12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "SeguePlaceholderDemoViewController.h"
+#import "SegueSecondRightPanelDemoViewController.h"
 
-@implementation SeguePlaceholderDemoViewController
+@implementation SegueSecondRightPanelDemoViewController
 
 #pragma mark View lifecycle
 
