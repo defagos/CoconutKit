@@ -8,6 +8,8 @@
 
 #import "SegueStackRootDemoPlaceholderViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
+
 @implementation SegueStackRootDemoPlaceholderViewController
 
 #pragma mark View lifecycle
@@ -52,6 +54,14 @@
             stackPushSegue.transitionStyle = HLSTransitionStyleCoverFromTop;
         }
     }
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 @end

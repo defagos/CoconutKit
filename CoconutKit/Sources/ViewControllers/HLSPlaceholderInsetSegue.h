@@ -14,7 +14,11 @@
  * The source view controller must either be a placeholder view controller, or a view controller already installed
  * as inset view controller of a placeholder view controller
  *
- * TODO: Document initWithIndex_ and max of 20 view controllers
+ * A view controller can be pre-loaded into a placeholder view controllers by binding the placeholder view controller
+ * with it using a segue with the reserved identifier 'init_at_index_N', where N is the index at which the view 
+ * controller must be initially loaded. This index must be between 0 and 19, which allows pre-loading of 20 view 
+ * controllers. This should be sufficient: Though a placeholder view controller can hold more than 20 view controllers,
+ * this should never occur in practice
  */
 @interface HLSPlaceholderInsetSegue : UIStoryboardSegue {
 @private

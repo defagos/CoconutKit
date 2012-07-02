@@ -59,6 +59,12 @@
                               "%d manually set has been overridden");
                 self.index = [indexNumber unsignedIntegerValue];
             }
+            
+            if (self.transitionStyle != HLSTransitionStyleNone) {
+                HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
+                              "the only style available for view controller preloading");
+                self.transitionStyle = HLSTransitionStyleNone;
+            }
         }
     }
     else if (viewController.placeholderViewController) {

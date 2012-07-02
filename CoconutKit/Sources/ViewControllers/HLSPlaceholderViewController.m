@@ -37,8 +37,9 @@
 
 - (void)awakeFromNib
 {
-    // Load view controllers initially using reserved segue identifiers. Cannot use [self.placeholderViews count]
-    // here since the view is not loaded. Checking the first 20 index should be sufficient
+    // Load view controllers initially using reserved segue identifiers. We cannot use [self.placeholderViews count]
+    // as loop upper limit here since the view is not loaded (and we cannot do this after -loadView has been called). 
+    // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
             NSString *segueIdentifier = [NSString stringWithFormat:@"init_at_index_%d", i];

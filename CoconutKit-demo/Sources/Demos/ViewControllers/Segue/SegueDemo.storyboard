@@ -94,12 +94,27 @@
                                     <segue destination="tTf-Rb-1eP" kind="custom" identifier="coverFromTop" customClass="HLSStackPushSegue" id="j6V-lp-2yV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Bj-5n-sJV">
+                                <rect key="frame" x="535" y="939" width="217" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="LS/Hide with modal">
+                                    <color key="titleColor" red="0.99215692280000001" green="0.0039215688589999999" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideWithModal:" destination="OOx-fi-7Pa" eventType="touchUpInside" id="ZwR-gl-WrV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outletCollection property="placeholderViews" destination="X2C-Si-n3L" id="ngJ-V8-MEm"/>
-                        <outletCollection property="placeholderViews" destination="aIq-bQ-FgK" id="Crd-eB-Bgg"/>
+                        <outletCollection property="placeholderViews" destination="X2C-Si-n3L" id="Ptc-Ek-Rfx"/>
+                        <outletCollection property="placeholderViews" destination="aIq-bQ-FgK" id="cLF-ru-gNr"/>
                         <segue destination="HtO-zf-ZsB" kind="custom" identifier="init_at_index_0" customClass="HLSPlaceholderInsetSegue" id="vTG-A9-oft"/>
                     </connections>
                 </viewController>
@@ -162,6 +177,15 @@
                     <view key="view" contentMode="scaleToFill" id="ctF-4h-HuK">
                         <rect key="frame" x="0.0" y="0.0" width="469" height="502"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bmd-BT-vl1">
+                                <rect key="frame" x="213" y="240" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -211,6 +235,21 @@
                                     <segue destination="OOx-fi-7Pa" kind="custom" identifier="pop" customClass="HLSStackPopSegue" id="Mek-HW-xEH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K6e-fL-LFL">
+                                <rect key="frame" x="531" y="939" width="217" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="LS/Hide with modal">
+                                    <color key="titleColor" red="0.99215692280000001" green="0.0039215688589999999" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideWithModal:" destination="tTf-Rb-1eP" eventType="touchUpInside" id="3TS-ya-3d2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -226,6 +265,15 @@
                     <view key="view" contentMode="scaleToFill" id="90S-P5-PEH">
                         <rect key="frame" x="0.0" y="0.0" width="469" height="502"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="EqP-ic-rTg">
+                                <rect key="frame" x="213" y="240" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -260,9 +308,15 @@
         </class>
         <class className="SegueStackOtherDemoViewController" superclassName="HLSViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueStackOtherDemoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideWithModal:"/>
+            </relationships>
         </class>
         <class className="SegueStackRootDemoPlaceholderViewController" superclassName="HLSPlaceholderViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueStackRootDemoPlaceholderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideWithModal:"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

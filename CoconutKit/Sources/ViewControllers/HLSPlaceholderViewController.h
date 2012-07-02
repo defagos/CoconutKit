@@ -69,15 +69,23 @@
  *
  * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
- *     views which you connect to the placeholderViews outlet collection
- *   - drop another view controller onto the storyboard, and set it as an inset view controller of the placeholder by
- *     binding the placeholder with it using an HLSPlaceholderInsetSegue. If you need to customize the index at which
- *     the view controller must be displayed (by default 0) or the transition settings (style and duration), you must 
- *     implement the -prepareForSegue:sender: method in your source view controller
+ *     views which you connect to the placeholderViews outlet collection. This defines where inset view controllers will
+ *     be drawn
+ *   - drop another view controller onto the storyboard. You can display this view controller as inset as follows:
+ *       - if you want to pre-load the view controller so that it gets displayed when the placeholder view controller
+ *         gets displayed, bind the placeholder view controller with it using an HLSPlaceholderInsetSegue with the 
+ *         reserved identifier 'init_at_index_N', where N is the index at which the view controller must be displayed. 
+ *         N must be between 0 and 19 (this limit is arbitrary and should be sufficient in practice). The transition
+ *         style which gets applied is HLSTransitionStyleNone and cannot be customized
+ *       - if you want to display the view controller after the placeholder view controller has been displayed, use
+ *         an HLSPlaceholderInsetSegue (with any non-reserved identifier). If you need to customize the index at which
+ *         the view controller must be displayed (by default 0) or the transition settings (style and duration), you 
+ *         must implement the -prepareForSegue:sender: method in your source view controller
  *   - if you have several placeholder views, repeat this process as needed
  *   - when you want to install a new inset view controller, you can also bind an existing inset view controller
- *     to it. The new inset view controller will be inserted into the same placeholder view controller the source
- *     inset view controller belongs to
+ *     to it (in other words, the source view controller does not need to be the placeholder view controller, but
+ *     can be one of its children). The new inset view controller will be inserted into the placeholder view controller 
+ *     the source inset view controller belongs to
  *
  * About view controller reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 

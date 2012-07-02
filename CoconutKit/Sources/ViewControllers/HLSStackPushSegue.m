@@ -49,6 +49,12 @@
                            "must have been loaded before");
             return;
         }
+        
+        if (self.transitionStyle != HLSTransitionStyleNone) {
+            HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
+                          "the only style available for view controller preloading");
+            self.transitionStyle = HLSTransitionStyleNone;
+        }
     }
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
     // push the destination view controller into it

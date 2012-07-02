@@ -8,6 +8,8 @@
 
 #import "SegueStackOtherDemoViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
+
 @implementation SegueStackOtherDemoViewController
 
 #pragma mark View lifecycle
@@ -37,6 +39,14 @@
     [super localize];
     
     // Just to suppress localization warnings
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 @end

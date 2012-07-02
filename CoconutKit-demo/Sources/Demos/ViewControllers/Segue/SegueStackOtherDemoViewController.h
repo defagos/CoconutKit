@@ -8,4 +8,6 @@
 
 @interface SegueStackOtherDemoViewController : HLSViewController
 
+- (IBAction)hideWithModal:(id)sender;
+
 @end
