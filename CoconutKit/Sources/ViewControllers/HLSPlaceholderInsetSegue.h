@@ -12,7 +12,8 @@
  * Segue class for setting the inset view controller of an HLSPlaceholderViewController when using storyboards.
  *
  * The source view controller must either be a placeholder view controller, or a view controller already installed
- * as inset view controller of a placeholder view controller
+ * as inset view controller of a placeholder view controller. The source view controller can implement the 
+ * -prepareForSegue:sender: method to further customize transition properties (index, transition style and duration)
  *
  * A view controller can be pre-loaded into a placeholder view controllers by binding the placeholder view controller
  * with it using a segue with the reserved identifier 'init_at_index_N', where N is the index at which the view 

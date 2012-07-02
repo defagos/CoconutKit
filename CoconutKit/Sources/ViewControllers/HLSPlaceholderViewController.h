@@ -69,7 +69,7 @@
  *
  * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
- *     views which you connect to the placeholderViews outlet collection. This defines where inset view controllers will
+ *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers will
  *     be drawn
  *   - drop another view controller onto the storyboard. You can display this view controller as inset as follows:
  *       - if you want to pre-load the view controller so that it gets displayed when the placeholder view controller
@@ -86,6 +86,7 @@
  *     to it (in other words, the source view controller does not need to be the placeholder view controller, but
  *     can be one of its children). The new inset view controller will be inserted into the placeholder view controller 
  *     the source inset view controller belongs to
+ * For further information, refer to the documentation of HLSPlaceholderInsetSegue.
  *
  * About view controller reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
