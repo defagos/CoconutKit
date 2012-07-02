@@ -156,24 +156,29 @@
     if (! m_loadedOnce) {
         // View controllers have been preloaded
         if (self.containerContents) {
-            NSAssert([self.placeholderViews count] >= [self.containerContents count], @"Not enough placeholder views to hold all preloaded view controllers");
+            if ([self.placeholderViews count] < [self.containerContents count]) {
+                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%d) to hold preloaded view controllers (%d)", 
+                                    [self.placeholderViews count], [self.containerContents count]];
+                @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                               reason:reason
+                                             userInfo:nil];
+            }            
         }
-        // No preloading. Create the container content arrays as large as the number of placeholder views
+        // No preloading
         else {
             self.containerContents = [NSMutableArray array];
             self.oldContainerContents = [NSMutableArray array];
+        }
+        
+        // We need to have a view controller in each placeholder (even if no pre-loading was made)
+        for (NSUInteger i = [self.containerContents count]; i < [self.placeholderViews count]; ++i) {
+            HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
+                                                                                     containerController:self
+                                                                                         transitionStyle:HLSTransitionStyleNone
+                                                                                                duration:kAnimationTransitionDefaultDuration] autorelease];
             
-            for (UIView *view in self.placeholderViews) {
-                // We must have view controllers in all slots (even if empty)
-                HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
-                                                                                         containerController:self
-                                                                                             transitionStyle:HLSTransitionStyleNone
-                                                                                                    duration:kAnimationTransitionDefaultDuration] autorelease];
-                
-                [self.containerContents addObject:containerContent];
-                
-                [self.oldContainerContents addObject:[NSNull null]];
-            }            
+            [self.containerContents addObject:containerContent];
+            [self.oldContainerContents addObject:[NSNull null]];
         }
         
         m_loadedOnce = YES;
