@@ -90,6 +90,7 @@ typedef enum {
     ViewControllersDemoIndexStackController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
+    ViewControllersDemoIndexSegue,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
@@ -366,6 +367,19 @@ typedef enum {
                     cell.textLabel.text = @"HLSWebViewController";
                     break;
                 }
+                    
+                case ViewControllersDemoIndexSegue: {
+                    cell.textLabel.text = @"Segue (iOS 5)";
+                    if (NSClassFromString(@"UIStoryboard")) {
+                        cell.textLabel.textColor = [UIColor blackColor];
+                        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                    }
+                    else {
+                        cell.textLabel.textColor = [UIColor grayColor];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    break;
+                }
 
                 default: {
                     return nil;
@@ -527,6 +541,14 @@ typedef enum {
                 case ViewControllersDemoIndexWebViewController: {
                     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lestudio.hortis.ch"]];
                     demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexSegue: {
+                    if (NSClassFromString(@"UIStoryboard")) {
+                        UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                        demoViewController = [segueStoryboard instantiateInitialViewController];
+                    }
                     break;
                 }
                     

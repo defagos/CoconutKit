@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="lcB-2r-nbk">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+    </dependencies>
+    <scenes>
+        <!--Stack Controller-->
+        <scene sceneID="M71-h7-N5s">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="arn-8p-lQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lcB-2r-nbk" customClass="HLSStackController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mlr-iN-uxx">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="capacity">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="OOx-fi-7Pa" kind="custom" identifier="root" customClass="HLSStackPushSegue" id="Pbp-ye-qJp"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-1668" y="-211"/>
+        </scene>
+        <!--Segue Stack Root Demo Placeholder View Controller-->
+        <scene sceneID="qBd-Gr-RHm">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mvH-ED-110" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="OOx-fi-7Pa" customClass="SegueStackRootDemoPlaceholderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4JO-XT-mKc">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="nG6-pY-eba">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="X2C-Si-n3L">
+                                <rect key="frame" x="17" y="46" width="258" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="aIq-bQ-FgK">
+                                <rect key="frame" x="283" y="46" width="469" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Root view controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AQU-yN-FjQ">
+                                <rect key="frame" x="20" y="762" width="728" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="CCB-gk-5CQ">
+                                <rect key="frame" x="0.0" y="984" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E00-mD-DHd">
+                                <rect key="frame" x="270" y="828" width="228" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="LS/Push from bottom">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="tTf-Rb-1eP" kind="custom" identifier="pushFromBottom" customClass="HLSStackPushSegue" id="A5N-nj-tAB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iv1-MR-PVd">
+                                <rect key="frame" x="270" y="873" width="228" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="LS/Cover from top">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="tTf-Rb-1eP" kind="custom" identifier="coverFromTop" customClass="HLSStackPushSegue" id="j6V-lp-2yV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Bj-5n-sJV">
+                                <rect key="frame" x="535" y="939" width="217" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="LS/Hide with modal">
+                                    <color key="titleColor" red="0.99215692280000001" green="0.0039215688589999999" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideWithModal:" destination="OOx-fi-7Pa" eventType="touchUpInside" id="ZwR-gl-WrV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="placeholderViews" destination="X2C-Si-n3L" id="Ptc-Ek-Rfx"/>
+                        <outletCollection property="placeholderViews" destination="aIq-bQ-FgK" id="cLF-ru-gNr"/>
+                        <segue destination="HtO-zf-ZsB" kind="custom" identifier="init_at_index_0" customClass="HLSPlaceholderInsetSegue" id="vTG-A9-oft"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-399" y="-203"/>
+        </scene>
+        <!--Segue Left Panel Demo View Controller-->
+        <scene sceneID="dr3-Ci-mQe">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfM-Rc-f4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="HtO-zf-ZsB" customClass="SegueLeftPanelDemoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wu2-l8-SbV">
+                        <rect key="frame" x="0.0" y="0.0" width="258" height="502"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Xz-lW-3r9">
+                                <rect key="frame" x="93" y="116" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="1">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rEw-2v-iMn" kind="custom" identifier="firstPanel" customClass="HLSPlaceholderInsetSegue" id="5Zv-vP-ZJj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N5K-Ey-u9j">
+                                <rect key="frame" x="93" y="349" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="2">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="OvI-qd-2Qo" kind="custom" identifier="secondPanel" customClass="HLSPlaceholderInsetSegue" id="TLW-Zd-fBx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-190" y="1104"/>
+        </scene>
+        <!--Segue First Right Panel Demo View Controller-->
+        <scene sceneID="Its-vM-Gsg">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d0K-y9-jGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="rEw-2v-iMn" customClass="SegueFirstRightPanelDemoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ctF-4h-HuK">
+                        <rect key="frame" x="0.0" y="0.0" width="469" height="502"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bmd-BT-vl1">
+                                <rect key="frame" x="213" y="240" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-855" y="1824"/>
+        </scene>
+        <!--Segue Stack Other Demo View Controller-->
+        <scene sceneID="c7z-cd-1T1">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bls-X9-UVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="tTf-Rb-1eP" customClass="SegueStackOtherDemoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vot-Ye-fJZ">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="S3c-uX-CSg">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Other view controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="t99-Sn-tap">
+                                <rect key="frame" x="20" y="491" width="728" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="tpE-Yc-zfu">
+                                <rect key="frame" x="0.0" y="984" width="768" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ifp-JE-q29">
+                                <rect key="frame" x="330" y="861" width="109" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="LS/Pop">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="OOx-fi-7Pa" kind="custom" identifier="pop" customClass="HLSStackPopSegue" id="Mek-HW-xEH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K6e-fL-LFL">
+                                <rect key="frame" x="531" y="939" width="217" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="LS/Hide with modal">
+                                    <color key="titleColor" red="0.99215692280000001" green="0.0039215688589999999" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideWithModal:" destination="tTf-Rb-1eP" eventType="touchUpInside" id="3TS-ya-3d2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="855" y="-203"/>
+        </scene>
+        <!--Segue Second Right Panel Demo View Controller-->
+        <scene sceneID="h0P-zj-MUW">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1c1-45-6wU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="OvI-qd-2Qo" customClass="SegueSecondRightPanelDemoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="90S-P5-PEH">
+                        <rect key="frame" x="0.0" y="0.0" width="469" height="502"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="EqP-ic-rTg">
+                                <rect key="frame" x="213" y="240" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="162" y="1840"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="HLSPlaceholderViewController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HLSPlaceholderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate"/>
+                <relationship kind="outletCollection" name="placeholderViews" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="HLSStackController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HLSStackController.h"/>
+        </class>
+        <class className="HLSViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HLSViewController.h"/>
+        </class>
+        <class className="SegueFirstRightPanelDemoViewController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueFirstRightPanelDemoViewController.h"/>
+        </class>
+        <class className="SegueLeftPanelDemoViewController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueLeftPanelDemoViewController.h"/>
+        </class>
+        <class className="SegueSecondRightPanelDemoViewController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueSecondRightPanelDemoViewController.h"/>
+        </class>
+        <class className="SegueStackOtherDemoViewController" superclassName="HLSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueStackOtherDemoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideWithModal:"/>
+            </relationships>
+        </class>
+        <class className="SegueStackRootDemoPlaceholderViewController" superclassName="HLSPlaceholderViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegueStackRootDemoPlaceholderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideWithModal:"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Pbp-ye-qJp"/>
+        <segue reference="j6V-lp-2yV"/>
+    </inferredMetricsTieBreakers>
+</document>

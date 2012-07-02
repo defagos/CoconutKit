@@ -14,6 +14,9 @@
 		6F00017D156BF2530055CED7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */; };
 		6F00017E156BF2530055CED7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */; };
 		6F00017F156BF2530055CED7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F00017C156BF2530055CED7 /* CoconutKit.framework */; };
+		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
+		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
+		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
@@ -124,6 +127,10 @@
 		6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
+		6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
+		6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
+		6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; };
+		6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
 		6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
@@ -145,6 +152,12 @@
 		6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		6F00017C156BF2530055CED7 /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
+		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DF315A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueSecondRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueSecondRightPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
 		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
@@ -305,6 +318,13 @@
 		6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple4.jpg; sourceTree = "<group>"; };
 		6FBDA7A71303EE9B004B9617 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FBDA7A91303EEAD004B9617 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
+		6FC3A2A2159E0422001A290E /* SeguePlaceholderInsetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderInsetDemoViewController.h; sourceTree = "<group>"; };
+		6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeguePlaceholderInsetDemoViewController.m; sourceTree = "<group>"; };
+		6FC3A2A4159E0422001A290E /* SegueStackOtherDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackOtherDemoViewController.h; sourceTree = "<group>"; };
+		6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
+		6FC3A2A6159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoPlaceholderViewController.h; sourceTree = "<group>"; };
+		6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoPlaceholderViewController.m; sourceTree = "<group>"; };
 		6FC5E8B214F380B500C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
 		6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
 		6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
@@ -782,6 +802,7 @@
 			children = (
 				6F9C461614C5C30B00824AB2 /* Placeholder */,
 				6F9C461A14C5C30B00824AB2 /* RootStack */,
+				6FC3A2A0159E0422001A290E /* Segue */,
 				6F9C461E14C5C30B00824AB2 /* Stack */,
 				6F9C462214C5C30B00824AB2 /* TableSearchDisplay */,
 				6F9C462814C5C30B00824AB2 /* Wizard */,
@@ -946,6 +967,26 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		6FC3A2A0159E0422001A290E /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */,
+				6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */,
+				6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */,
+				6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */,
+				6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */,
+				6FC3A2A2159E0422001A290E /* SeguePlaceholderInsetDemoViewController.h */,
+				6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */,
+				6F1F4DF315A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.h */,
+				6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */,
+				6FC3A2A4159E0422001A290E /* SegueStackOtherDemoViewController.h */,
+				6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */,
+				6FC3A2A6159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.h */,
+				6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
 		6FC5E8B114F380B500C01ABC /* ParallaxScrolling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1085,6 +1126,7 @@
 				6F00017E156BF2530055CED7 /* CoconutKit-resources.bundle in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
+				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,6 +1204,12 @@
 				6F00017D156BF2530055CED7 /* CoconutKit_bootstrap.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
 				6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
+				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
+				6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */,
+				6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
+				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
+				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
+				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1255,7 +1303,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1282,7 +1330,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

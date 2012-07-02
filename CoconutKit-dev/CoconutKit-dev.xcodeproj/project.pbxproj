@@ -38,6 +38,14 @@
 		6F00014B156BD17F0055CED7 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */; };
 		6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
+		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
+		6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
+		6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
+		6F1F4E0815A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */; };
+		6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */; };
+		6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
@@ -49,6 +57,8 @@
 		6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
+		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
+		6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660A1588CC770044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
 		6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149415790DA8009FCC78 /* HLSLabel.m */; };
@@ -263,6 +273,21 @@
 		6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
+		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
+		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
+		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
+		6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFB15A1B64700F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFD15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderInsetDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeguePlaceholderInsetDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4DFF15A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueSecondRightPanelDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueSecondRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4E0115A1B64700F65ECF /* SegueStackOtherDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackOtherDemoViewController.h; sourceTree = "<group>"; };
+		6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
+		6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoPlaceholderViewController.h; sourceTree = "<group>"; };
+		6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoPlaceholderViewController.m; sourceTree = "<group>"; };
 		6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -282,6 +307,10 @@
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
+		6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
+		6F6C0A20159B9A51007933EB /* HLSStackPopSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPopSegue.h; sourceTree = "<group>"; };
+		6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPopSegue.m; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8366081588CC770044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
@@ -725,6 +754,26 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		6F1F4DF715A1B64700F65ECF /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */,
+				6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */,
+				6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */,
+				6F1F4DFB15A1B64700F65ECF /* SegueLeftPanelDemoViewController.h */,
+				6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */,
+				6F1F4DFD15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.h */,
+				6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */,
+				6F1F4DFF15A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.h */,
+				6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */,
+				6F1F4E0115A1B64700F65ECF /* SegueStackOtherDemoViewController.h */,
+				6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */,
+				6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */,
+				6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
 		6F37FED613EBE480003E33EF /* CoconutKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,10 +1038,16 @@
 			children = (
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
+				6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */,
+				6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */,
 				6FADE6A414BA04A6007EE121 /* HLSPlaceholderViewController.h */,
 				6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE6A614BA04A6007EE121 /* HLSStackController.h */,
 				6FADE6A714BA04A6007EE121 /* HLSStackController.m */,
+				6F6C0A20159B9A51007933EB /* HLSStackPopSegue.h */,
+				6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */,
+				6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */,
+				6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */,
 				6FADE6AA14BA04A6007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */,
 				6FADE6AC14BA04A6007EE121 /* HLSTransitionStyle.h */,
@@ -1312,6 +1367,7 @@
 			children = (
 				6FADE85E14BA04C9007EE121 /* Placeholder */,
 				6FADE86214BA04C9007EE121 /* RootStack */,
+				6F1F4DF715A1B64700F65ECF /* Segue */,
 				6FADE86614BA04C9007EE121 /* Stack */,
 				6FADE86A14BA04C9007EE121 /* TableSearchDisplay */,
 				6FADE87014BA04C9007EE121 /* Wizard */,
@@ -1622,6 +1678,7 @@
 				6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */,
 				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
+				6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1774,6 +1831,15 @@
 				6F5007EF1585E17400391A6C /* HLSExpandingSearchBar.m in Sources */,
 				6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6F83660A1588CC770044E572 /* HLSVector.m in Sources */,
+				6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */,
+				6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */,
+				6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */,
+				6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
+				6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
+				6F1F4E0815A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m in Sources */,
+				6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
+				6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */,
+				6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1843,6 +1909,7 @@
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
 			};
@@ -1857,6 +1924,7 @@
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "CoconutKit-dev";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1884,7 +1952,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1912,7 +1980,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

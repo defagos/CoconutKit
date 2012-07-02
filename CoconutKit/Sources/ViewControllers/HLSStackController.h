@@ -53,6 +53,20 @@ extern const NSUInteger kStackUnlimitedCapacity;
  * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
  * operations, you can increase this value. Standard capacity values are provided at the beginning of this file.
  *
+ * You can also use stack controllers with storyboards (a feature available since iOS 5):
+ *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
+ *     view controller capacity by setting an NSNumber user-defined runtime attribute called 'capacity'
+ *   - drop another view controller onto the storyboard, and set it as root view controller of the stack by
+ *     binding the stack controller with it using an HLSStackPushSegue called 'root'. The transition style which
+ *     gets applied is always HLSTransitionStyleNone and cannot be customized
+ *   - if you want to push another view controller, drop a view controller onto the storyboard, and connect the 
+ *     root view controller with it using another HLSStackPushSegue (with any non-reserved identifier). If you 
+ *     need to customize transition settings (style and duration), you must implement the -prepareForSegue:sender: 
+ *     method in your source view controller (the root view controller in this example)
+ *   - if you want to pop a view controller, bind it to any other view controller (in general the one towards
+ *     which the transition will occur, or itself) using an HLSStackPopSegue
+ * For further information, refer to the documentation of HLSStackPushSegue and HLSStackPopSegue.
+ *
  * TODO: This class currently does not support view controllers implementing the HLSOrientationCloner protocol
  *
  * Designated initializer: initWithRootViewController:capacity:

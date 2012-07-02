@@ -76,6 +76,10 @@ Learning how to use CoconutKit components always starts with header documentatio
 
 Good documentation is critical. If you think some documentation is missing, unclear or incorrect, please file a ticket.
 
+### Known issues
+
+When running CoconutKit-demo or CoconutKit-dev, you might get a compilation error saying that storyboards are not available for iOS 4. This is because the demo is  set to run on iOS 4 (for which storyboards are not available) to avoid having a duplicate project or target just for this iOS version. When you encounter this error, perform a build without running. The compilation should happen without errors. Then run the project. If this does not work, clean the project first.
+
 ### Credits
 
 If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!

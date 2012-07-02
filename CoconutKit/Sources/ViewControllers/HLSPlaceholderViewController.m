@@ -35,6 +35,20 @@
 
 #pragma mark Object creation and destruction
 
+- (void)awakeFromNib
+{
+    // Load view controllers initially using reserved segue identifiers. We cannot use [self.placeholderViews count]
+    // as loop upper limit here since the view is not loaded (and we cannot do this after -loadView has been called). 
+    // Checking the first 20 indices should be sufficient
+    for (NSUInteger i = 0; i < 20; ++i) {
+        @try {
+            NSString *segueIdentifier = [NSString stringWithFormat:@"init_at_index_%d", i];
+            [self performSegueWithIdentifier:segueIdentifier sender:self];
+        }
+        @catch (NSException *exception) {}
+    }
+}
+
 - (void)dealloc
 {
     self.containerContents = nil;
@@ -137,30 +151,35 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     
     // The first time the view is loaded, guess which number of placeholder views have been defined
     if (! m_loadedOnce) {
         // View controllers have been preloaded
         if (self.containerContents) {
-            NSAssert([self.placeholderViews count] >= [self.containerContents count], @"Not enough placeholder views to hold all preloaded view controllers");
+            if ([self.placeholderViews count] < [self.containerContents count]) {
+                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%d) to hold preloaded view controllers (%d)", 
+                                    [self.placeholderViews count], [self.containerContents count]];
+                @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                               reason:reason
+                                             userInfo:nil];
+            }            
         }
-        // No preloading. Create the container content arrays as large as the number of placeholder views
+        // No preloading
         else {
             self.containerContents = [NSMutableArray array];
             self.oldContainerContents = [NSMutableArray array];
+        }
+        
+        // We need to have a view controller in each placeholder (even if no pre-loading was made)
+        for (NSUInteger i = [self.containerContents count]; i < [self.placeholderViews count]; ++i) {
+            HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
+                                                                                     containerController:self
+                                                                                         transitionStyle:HLSTransitionStyleNone
+                                                                                                duration:kAnimationTransitionDefaultDuration] autorelease];
             
-            for (UIView *view in self.placeholderViews) {
-                // We must have view controllers in all slots (even if empty)
-                HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
-                                                                                         containerController:self
-                                                                                             transitionStyle:HLSTransitionStyleNone
-                                                                                                    duration:kAnimationTransitionDefaultDuration] autorelease];
-                
-                [self.containerContents addObject:containerContent];
-                
-                [self.oldContainerContents addObject:[NSNull null]];
-            }            
+            [self.containerContents addObject:containerContent];
+            [self.oldContainerContents addObject:[NSNull null]];
         }
         
         m_loadedOnce = YES;

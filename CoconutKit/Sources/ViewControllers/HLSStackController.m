@@ -22,6 +22,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 @interface HLSStackController () <HLSAnimationDelegate>
 
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
+@property (nonatomic, assign) NSUInteger capacity;
 
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
@@ -40,18 +41,9 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        if (capacity < kStackMinimalCapacity) {
-            capacity = kStackMinimalCapacity;
-            HLSLoggerWarn(@"Capacity cannot be smaller than minimal value %d; set to this value", kStackMinimalCapacity);
-        }
+        self.capacity = capacity;
         
-        HLSContainerContent *rootContainerContent = [[[HLSContainerContent alloc] initWithViewController:rootViewController 
-                                                                                     containerController:self 
-                                                                                         transitionStyle:HLSTransitionStyleNone 
-                                                                                                duration:kAnimationTransitionDefaultDuration]
-                                                     autorelease];
-        self.containerContentStack = [NSMutableArray arrayWithObject:rootContainerContent];
-        m_capacity = capacity;
+        [self pushViewController:rootViewController];
     }
     return self;
 }
@@ -61,10 +53,32 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     return [self initWithRootViewController:rootViewController capacity:kStackDefaultCapacity];
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    // A stack controller is not meant to be instantiated in a nib... except if we are using storyboards. In this
+    // case, setting the root view controller is performed using segues (must be done when the involved view
+    // controllers are available, in -awakeFromNib).
+    if ((self = [super initWithCoder:aDecoder])) {
+        self.capacity = kStackMinimalCapacity;
+    }
+    return self;
+}
+
 - (id)init
 {
     HLSForbiddenInheritedMethod();
     return nil;
+}
+
+- (void)awakeFromNib
+{
+    // Load the root view controller when using segues. A reserved segue called root must be used for such purposes
+    [self performSegueWithIdentifier:@"root" sender:self];
+    
+    // We now must have at least one view controller loaded
+    NSAssert([self.containerContentStack count] != 0, @"No root view controller has been loaded. Drag a segue called "
+             "'root' in your storyboard file, from the stack controller to the view controller you want to install "
+             "as root");
 }
 
 - (void)dealloc
@@ -88,6 +102,23 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 #pragma mark Accessors and mutators
 
 @synthesize containerContentStack = m_containerContentStack;
+
+@synthesize capacity = m_capacity;
+
+- (void)setCapacity:(NSUInteger)capacity
+{
+    if (self.containerContentStack) {
+        HLSLoggerError(@"The capacity must be set earlier using user-defined runtime attributes");
+        return;
+    }
+    
+    if (capacity < kStackMinimalCapacity) {
+        capacity = kStackMinimalCapacity;
+        HLSLoggerWarn(@"The capacity cannot be smaller than %d; set to this value", kStackMinimalCapacity);
+    }
+    
+    m_capacity = capacity;
+}
 
 @synthesize forwardingProperties = m_forwardingProperties;
 
@@ -154,13 +185,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 }
 
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
-    
+        
     // All animation must take place inside the view controller's view
     self.view.clipsToBounds = YES;
     
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -314,8 +345,15 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Can release the view not needed according to the capacity
-    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:m_capacity - 1];
+    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:self.capacity - 1];
     [newlyInvisibleContainerContent releaseViews];
+    
+    // If no view controller has been loaded yet, create the objects required to store it. The root view controller has always none
+    // as transition style
+    if (! self.containerContentStack) {
+        self.containerContentStack = [NSMutableArray array];
+        transitionStyle = HLSTransitionStyleNone;
+    }    
     
     // Associate the view controller with its container
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
@@ -362,7 +400,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     // If the view is loaded, the popped view controller will be unregistered at the end of the animation
     if ([self isViewLoaded]) {
         // A view being popped, we need one more view to be visible so that the capacity criterium can be fulfilled (if stack deep enough)
-        HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:m_capacity];
+        HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:self.capacity];
         if (newlyVisibleContainerContent) {
             [newlyVisibleContainerContent addViewToContainerView:self.view 
                                          inContainerContentStack:self.containerContentStack];
@@ -393,7 +431,7 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 - (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent
 {
     NSUInteger index = [self.containerContentStack indexOfObject:containerContent];
-    return [self.containerContentStack count] - index <= m_capacity;
+    return [self.containerContentStack count] - index <= self.capacity;
 }
 
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth

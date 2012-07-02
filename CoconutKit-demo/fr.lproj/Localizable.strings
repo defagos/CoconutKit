@@ -35,6 +35,7 @@
 "Container customization"="Personnalisation conteneur";
 "Core"="Core";
 "Country"="Pays";
+"Cover from top"="Cover depuis le haut";
 "Cursor"="Curseur";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
@@ -87,6 +88,7 @@
 "None"="Aucun";
 "Number of children"="Nombre d'enfants";
 "Number of lines"="Nombre de lignes";
+"Other view controller"="Autre view controller";
 "Parallax scrolling"="Défilement parallaxe";
 "Parallel processing"="Calculs en parallèle";
 "Parameters for the HLSLabel and UILabel above"="Paramètres pour les HLSLabel et UILabel ci-dessus";
@@ -98,6 +100,7 @@
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Push"="Push";
+"Push from bottom"="Push depuis le bas";
 "Push UINavigationController"="Push UINavigationController";
 "Push UITabBarController"="Push UITabBarController";
 "Random"="Aléatoire";
@@ -109,6 +112,7 @@
 "Reset model fields"="Effacer champs modèle";
 "Reset text fields"="Effacer champs textuels";
 "Resizing"="Redimensionnement";
+"Root view controller"="View controller racine";
 "Scrolling"="Défilement";
 "Search bar"="Champ de recherche";
 "Search books"="Rechercher un livre";

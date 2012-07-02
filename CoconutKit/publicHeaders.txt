@@ -16,11 +16,14 @@ HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
 HLSOrientationCloner.h
+HLSPlaceholderInsetSegue.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
 HLSSlideshow.h
 HLSStackController.h
+HLSStackPopSegue.h
+HLSStackPushSegue.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h

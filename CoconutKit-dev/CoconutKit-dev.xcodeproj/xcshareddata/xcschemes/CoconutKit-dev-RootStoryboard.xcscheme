@@ -59,7 +59,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "CoconutKitDemoMode"
-            value = "RootStack"
+            value = "RootStoryboard"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
