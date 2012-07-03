@@ -128,7 +128,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     if (keyWindow) {
         [keyWindow addSubview:webView];
         
-        // No need to load anything meaningful
+        // We do not need to load anything meaningful
         [webView loadHTMLString:@"" baseURL:nil];
     }
     else {
