@@ -52,6 +52,15 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
             IMP UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp = HLSSwizzleSelector(class, 
                                                                                                           @selector(application:didFinishLaunchingWithOptions:), 
                                                                                                           (IMP)swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions);
+            
+            // If not implemented (which might happen if the application is initialized using a nib only, i.e. if the root view controller is set in
+            // the application nib), inject a method
+            if (! UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp) {
+                class_addMethod(class, 
+                                @selector(application:didFinishLaunchingWithOptions:), 
+                                (IMP)swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions, 
+                                "c@:@@");
+            }
             CFDictionarySetValue(s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap, className, UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp);
             CFRelease(className);
         }
@@ -108,7 +117,9 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         [webView loadHTMLString:@"" baseURL:nil];
     }
     else {
-        HLSLoggerWarn(@"No key window found. Cannot pre-load UIWebView");
+        HLSLoggerWarn(@"No key window found. Cannot pre-load UIWebView. To fix this issue, your application delegate must "
+                      "implement the -application:didFinishLaunchingWithOptions: method to set the key window, either by "
+                      "calling -makeKeyAndVisible or -makeKeyWindow");
     }    
 }
 
@@ -127,14 +138,16 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions(id self, SEL _cmd, UIApplication *application, NSDictionary *launchOptions)
 {
-    // Get the original implementation and call it
+    // Get the original implementation and call it (if any)
     Class class = object_getClass(self);
     CFStringRef className = CFStringCreateWithCString(kCFAllocatorDefault, class_getName(class), kCFStringEncodingUTF8);
     BOOL (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(id, SEL, UIApplication *, NSDictionary *) = (BOOL (*)(id, SEL, id, id))CFDictionaryGetValue(s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap, className);
     CFRelease(className);
     
-    if (! (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(self, _cmd, application, launchOptions)) {
-        return NO;
+    if (UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp) {
+        if (! (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(self, _cmd, application, launchOptions)) {
+            return NO;
+        }
     }
     
     // Install the preloader

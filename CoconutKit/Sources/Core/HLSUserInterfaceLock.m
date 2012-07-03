@@ -56,9 +56,10 @@
 {
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     if (! window) {
-        HLSLoggerWarn(@"No key window define when trying to acquire interface lock; please ensure that the UIWindow "
-                      "makeKeyAndVisible method has been called (e.g. by moving its call to the top of your "
-                      "application:didFinishLaunchingWithOptions: application delegate method). No lock acquired.");
+        HLSLoggerWarn(@"No key window defined when trying to acquire interface lock; please ensure that the UIWindow "
+                      "-makeKeyAndVisible or -makeKeyWindow methods have been called (e.g. by implementing the "
+                      "-application:didFinishLaunchingWithOptions: method and ensuring that either -makeKeyAndVisible "
+                      "or -makeKeyWindow are called as early as possible, at the top of the method implementation)");
         return;
     }
     
