@@ -1,6 +1,7 @@
 HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
+HLSApplicationPreloader.h
 HLSAssert.h
 HLSContainerContent.h
 HLSConverters.h

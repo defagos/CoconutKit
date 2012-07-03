@@ -29,12 +29,26 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 @end
 
+@interface HLSApplicationPreLoader ()
+
+- (id)initWithApplication:(UIApplication *)application;
+
+- (void)preload;
+
+@end
+
 @implementation HLSApplicationPreLoader
 
 #pragma mark Class methods
 
-+ (void)load
++ (void)enable
 {
+    static BOOL s_enabled = NO;
+    if (s_enabled) {
+        HLSLoggerInfo(@"Application preloading already enabled");
+        return;
+    }
+    
     s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = CFDictionaryCreateMutable(NULL, 
                                                                                                     0,
                                                                                                     &kCFTypeDictionaryKeyCallBacks /* store CFString keys */,
@@ -66,6 +80,8 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         }
     }
     free(classes);
+    
+    s_enabled = YES;
 }
 
 #pragma mark Object creation and destruction

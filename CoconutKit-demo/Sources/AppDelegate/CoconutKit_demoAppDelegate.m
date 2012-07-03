@@ -16,6 +16,9 @@ HLSEnableUIControlExclusiveTouch();
 // Enable Core Data easy validation
 HLSEnableNSManagedObjectValidation();
 
+// Enable preloading
+HLSEnableApplicationPreloading();
+
 @interface CoconutKit_demoAppDelegate ()
 
 @property (nonatomic, retain) CoconutKit_demoApplication *application;
