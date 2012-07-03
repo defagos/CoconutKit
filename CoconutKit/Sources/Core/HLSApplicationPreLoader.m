@@ -8,12 +8,16 @@
 
 #import "HLSApplicationPreLoader.h"
 
+#import "HLSAssert.h"
+#import "HLSLogger.h"
+#import "HLSRuntime.h"
+
 // Keys for associated objects
 static void *s_applicationPreLoaderKey = &s_applicationPreLoaderKey;
 
-// Original implementations of the methods we swizzle. Since the methods are from the UIApplicationDelegate protocol, we
-// need to swizzle the methods for each class which conforms to this protocol, therefore the need for a mapping between
-// class names and swizzled implementations
+// Original implementations of the application:didFinishLaunchingWithOptions: methods we swizzle. We need to swizzle
+// those methods for each class which conforms to the UIApplicationDelegate protocol, thus the need for a mapping 
+// between class names and swizzled implementations
 CFMutableDictionaryRef s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = NULL;
 
 // Swizzled method implementations
@@ -33,11 +37,11 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 {
     s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = CFDictionaryCreateMutable(NULL, 
                                                                                                     0,
-                                                                                                    &kCFTypeDictionaryKeyCallBacks,
-                                                                                                    NULL);
+                                                                                                    &kCFTypeDictionaryKeyCallBacks /* store CFString keys */,
+                                                                                                    NULL /* store raw pointers as values. No memory management */);
     
-    // Loop over all classes. Find the ones which implement the UIApplicationDelegate protocol and dynamically
-    // subclass them to pre-load the web view
+    // Loop over all classes. Find the ones which implement the UIApplicationDelegate protocol and swizzle their application:didFinishLaunchingWithOptions: method
+    // so that we can add an HLSApplicationPreLoader 
     unsigned int numberOfClasses = 0;
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
@@ -65,6 +69,12 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     return self;
 }
 
+- (id)init
+{
+    HLSForbiddenInheritedMethod();
+    return nil;
+}
+
 - (void)dealloc
 {
     self.application = nil;
@@ -80,8 +90,9 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 - (void)preload
 {
-	// To avoid the delay which occurs when loading a UIWebView for the first time, we load one as soon as possible.
-    // It seems that loading a large web view (here with the application frame size) is more effective
+	// To avoid the delay which occurs when loading a UIWebView for the first time, we display one as soon as possible
+    // (out of screen bounds). It seems that loading a large web view (here with the application frame size) is more 
+    // effective
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(applicationFrame), 
                                                                      CGRectGetMaxY(applicationFrame), 
@@ -93,7 +104,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     if (keyWindow) {
         [keyWindow addSubview:webView];
         
-        // No need to load anything
+        // No need to load anything meaningful
         [webView loadHTMLString:@"" baseURL:nil];
     }
     else {
@@ -105,6 +116,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    // The web view is not needed anymore
     [webView removeFromSuperview];
     [webView release];
 }
@@ -115,6 +127,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions(id self, SEL _cmd, UIApplication *application, NSDictionary *launchOptions)
 {
+    // Get the original implementation and call it
     Class class = object_getClass(self);
     CFStringRef className = CFStringCreateWithCString(kCFAllocatorDefault, class_getName(class), kCFStringEncodingUTF8);
     BOOL (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(id, SEL, UIApplication *, NSDictionary *) = (BOOL (*)(id, SEL, id, id))CFDictionaryGetValue(s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap, className);
@@ -124,6 +137,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         return NO;
     }
     
+    // Install the preloader
     HLSApplicationPreLoader *applicationPreLoader = [[[HLSApplicationPreLoader alloc] initWithApplication:application] autorelease];
     objc_setAssociatedObject(self, s_applicationPreLoaderKey, applicationPreLoader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [applicationPreLoader preload];
