@@ -12,7 +12,7 @@
  * main.m or your application delegate .m file
  */
 
-#import "HLSApplicationPreLoader.h"
+#import "HLSApplicationPreloader.h"
 #import "NSManagedObject+HLSValidation.h"
 #import "UIControl+HLSExclusiveTouch.h"
 
@@ -24,7 +24,7 @@
 #define HLSEnableApplicationPreloading()                                                                  \
     __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
     {                                                                                                     \
-        [HLSApplicationPreLoader enable];                                                                 \
+        [HLSApplicationPreloader enable];                                                                 \
     }
 
 /**

@@ -1,5 +1,5 @@
 //
-//  HLSApplicationPreLoader.h
+//  HLSApplicationPreloader.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 02.07.12.
@@ -11,7 +11,7 @@
  * increased. For the moment only UIWebView is preloaded so that the time usually required when instantiating the first
  * web view is reduced
  */
-@interface HLSApplicationPreLoader : NSObject <UIWebViewDelegate> {
+@interface HLSApplicationPreloader : NSObject <UIWebViewDelegate> {
 @private
     UIApplication *_application;
 }

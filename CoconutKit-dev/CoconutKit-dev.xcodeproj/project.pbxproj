@@ -50,7 +50,7 @@
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
-		6F3E3E8815A22796007E78BD /* HLSApplicationPreLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreLoader.m */; };
+		6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */; };
 		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F5007EF1585E17400391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */; };
@@ -297,8 +297,8 @@
 		6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064714BC7D500026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F3E3E8615A22796007E78BD /* HLSApplicationPreLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreLoader.h; sourceTree = "<group>"; };
-		6F3E3E8715A22796007E78BD /* HLSApplicationPreLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreLoader.m; sourceTree = "<group>"; };
+		6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
+		6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
 		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
 		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
@@ -866,8 +866,8 @@
 		6FADE63314BA04A6007EE121 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F3E3E8615A22796007E78BD /* HLSApplicationPreLoader.h */,
-				6F3E3E8715A22796007E78BD /* HLSApplicationPreLoader.m */,
+				6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */,
+				6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */,
 				6FADE63414BA04A6007EE121 /* HLSAssert.h */,
 				6FADE63514BA04A6007EE121 /* HLSAssert.m */,
 				6FADE63614BA04A6007EE121 /* HLSCategoryLinker.h */,
@@ -1847,7 +1847,7 @@
 				6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */,
 				6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
-				6F3E3E8815A22796007E78BD /* HLSApplicationPreLoader.m in Sources */,
+				6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

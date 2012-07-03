@@ -1,19 +1,19 @@
 //
-//  HLSApplicationPreLoader.m
+//  HLSApplicationPreloader.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 02.07.12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSApplicationPreLoader.h"
+#import "HLSApplicationPreloader.h"
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 
 // Keys for associated objects
-static void *s_applicationPreLoaderKey = &s_applicationPreLoaderKey;
+static void *s_applicationPreloaderKey = &s_applicationPreloaderKey;
 
 // Original implementations of the application:didFinishLaunchingWithOptions: methods we swizzle. We need to swizzle
 // those methods for each class which conforms to the UIApplicationDelegate protocol, thus the need for a mapping 
@@ -23,13 +23,13 @@ NSDictionary *s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMa
 // Swizzled method implementations
 static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions(id self, SEL _cmd, UIApplication *application, NSDictionary *launchOptions);
 
-@interface HLSApplicationPreLoader ()
+@interface HLSApplicationPreloader ()
 
 @property (nonatomic, assign) UIApplication *application;           // weak ref since retained by the application
 
 @end
 
-@interface HLSApplicationPreLoader ()
+@interface HLSApplicationPreloader ()
 
 - (id)initWithApplication:(UIApplication *)application;
 
@@ -37,7 +37,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 @end
 
-@implementation HLSApplicationPreLoader
+@implementation HLSApplicationPreloader
 
 #pragma mark Class methods
 
@@ -52,7 +52,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     NSMutableDictionary *classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = [NSMutableDictionary dictionary];
     
     // Loop over all classes. Find the ones which implement the UIApplicationDelegate protocol and swizzle their application:didFinishLaunchingWithOptions: method
-    // so that we can add an HLSApplicationPreLoader 
+    // so that we can add an HLSApplicationPreloader 
     unsigned int numberOfClasses = 0;
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
@@ -164,9 +164,9 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     }
     
     // Install the preloader
-    HLSApplicationPreLoader *applicationPreLoader = [[[HLSApplicationPreLoader alloc] initWithApplication:application] autorelease];
-    objc_setAssociatedObject(self, s_applicationPreLoaderKey, applicationPreLoader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [applicationPreLoader preload];
+    HLSApplicationPreloader *applicationPreloader = [[[HLSApplicationPreloader alloc] initWithApplication:application] autorelease];
+    objc_setAssociatedObject(self, s_applicationPreloaderKey, applicationPreloader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [applicationPreloader preload];
     
     return YES;
 }
