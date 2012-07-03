@@ -6,15 +6,6 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-/**
- * Simply call this macro somewhere in global scope to enable Core Data validation extensions early. Good places are 
- * for example main.m or your application delegate .m file
- */
-#define HLSEnableNSManagedObjectValidation()                                                          \
-    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)            \
-    {                                                                                                 \
-        [NSManagedObject injectValidation];                                                           \
-    }
 
 /**
  * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 
@@ -106,7 +97,7 @@
 
 /**
  * Inject the validation extensions of NSManagedObject (disabled by default). You should not call this method
- * directly, use the HLSEnableNSManagedObjectValidation macro instead
+ * directly, use the HLSEnableNSManagedObjectValidation macro instead (see HLSOptionalFeatures.h)
  */
 + (void)injectValidation;
 

@@ -16,6 +16,7 @@ HLSManagedObjectCopying.h
 HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
+HLSOptionalFeatures.h
 HLSOrientationCloner.h
 HLSPlaceholderInsetSegue.h
 HLSPlaceholderViewController.h
