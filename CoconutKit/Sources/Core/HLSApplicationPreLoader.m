@@ -14,7 +14,7 @@ static void *s_applicationPreLoaderKey = &s_applicationPreLoaderKey;
 // Original implementations of the methods we swizzle. Since the methods are from the UIApplicationDelegate protocol, we
 // need to swizzle the methods for each class which conforms to this protocol, therefore the need for a mapping between
 // class names and swizzled implementations
-NSDictionary *s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = nil;
+CFMutableDictionaryRef s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = NULL;
 
 // Swizzled method implementations
 static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions(id self, SEL _cmd, UIApplication *application, NSDictionary *launchOptions);
@@ -31,9 +31,10 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 + (void)load
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSMutableDictionary *classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = [NSMutableDictionary dictionary];
+    s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = CFDictionaryCreateMutable(NULL, 
+                                                                                                    0,
+                                                                                                    &kCFTypeDictionaryKeyCallBacks,
+                                                                                                    NULL);
     
     // Loop over all classes. Find the ones which implement the UIApplicationDelegate protocol and dynamically
     // subclass them to pre-load the web view
@@ -43,19 +44,15 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         Class class = classes[i];
         // TODO: Use hls_class_conformsToProtocol after merge with feature/url-connection
         if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate))) {
-            NSString *className = [NSString stringWithUTF8String:class_getName(class)];
+            CFStringRef className = CFStringCreateWithCString(kCFAllocatorDefault, class_getName(class), kCFStringEncodingUTF8);
             IMP UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp = HLSSwizzleSelector(class, 
                                                                                                           @selector(application:didFinishLaunchingWithOptions:), 
                                                                                                           (IMP)swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions);
-            [classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap setObject:[NSValue valueWithPointer:UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp] 
-                                                                                  forKey:className];
+            CFDictionarySetValue(s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap, className, UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp);
+            CFRelease(className);
         }
     }
     free(classes);
-    
-    s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap = [[NSDictionary dictionaryWithDictionary:classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap] retain];
-    
-    [pool drain];
 }
 
 #pragma mark Object creation and destruction
@@ -118,8 +115,11 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions(id self, SEL _cmd, UIApplication *application, NSDictionary *launchOptions)
 {
-    NSString *className = [NSString stringWithUTF8String:class_getName(object_getClass(self))];
-    BOOL (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(id, SEL, UIApplication *, NSDictionary *) = (BOOL (*)(id, SEL, id, id))[[s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap objectForKey:className] pointerValue];
+    Class class = object_getClass(self);
+    CFStringRef className = CFStringCreateWithCString(kCFAllocatorDefault, class_getName(class), kCFStringEncodingUTF8);
+    BOOL (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(id, SEL, UIApplication *, NSDictionary *) = (BOOL (*)(id, SEL, id, id))CFDictionaryGetValue(s_classNameToSwizzledApplicationDidFinishLaunchingWithOptionsImpMap, className);
+    CFRelease(className);
+    
     if (! (*UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp)(self, _cmd, application, launchOptions)) {
         return NO;
     }
