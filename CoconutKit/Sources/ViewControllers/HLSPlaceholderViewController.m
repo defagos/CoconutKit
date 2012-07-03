@@ -151,7 +151,25 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    // The order of outlets within an IBOutletCollection is sadly not the one defined in the nib file. Expect the user
+    // to explictly order them using the UIView tag property, and warn if this was not done properly. This is not an
+    // issue if the placeholder views are set programmatically
+    if ([self nibName]) {
+        NSMutableSet *tags = [NSMutableSet set];
+        for (UIView *placeholderView in self.placeholderViews) {
+            [tags addObject:[NSNumber numberWithInteger:placeholderView.tag]];
+        }
+        if ([tags count] != [self.placeholderViews count]) {
+            HLSLoggerWarn(@"Duplicate placeholder view tags found. The order of the placeholder view collection is "
+                          "unreliable. Please set a different tag for each placeholder view, the one with the lowest "
+                          "tag will be the first one in the collection");
+        }
+    }
+    
+    NSSortDescriptor *tagSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
+    self.placeholderViews = [self.placeholderViews sortedArrayUsingDescriptor:tagSortDescriptor];
     
     // The first time the view is loaded, guess which number of placeholder views have been defined
     if (! m_loadedOnce) {

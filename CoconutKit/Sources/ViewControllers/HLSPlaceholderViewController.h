@@ -20,8 +20,10 @@
  * view controllers. The HLSPlaceholderViewController class allows you to achieve such embeddings, without having
  * to worry about event propagation anymore. Simply subclass HLSPlaceholderViewController and define areas where
  * embedded view controllers ("insets") must be drawn, either by binding the placeholder view outlet collection
- * in your subclass xib, or by instantiating them in the loadView method. Note that this class also supports view 
- * controllers different depending on the orientation (see HLSOrientationCloner protocol). 
+ * in your subclass nib, or by instantiating them in the loadView method. If you bind your placeholder views in
+ * the nib, be sure to tag them in increasing order, so that the placeholder view with the lowest tag comes first
+ * (refer to the placeholderViews property documentation for more information). Note that this class also supports 
+ * view controllers different depending on the orientation (see HLSOrientationCloner protocol). 
  *
  * The reason this class exists is that embedding view controllers by directly adding a view controller's view as 
  * subview of another view controller's view does not work correctly out of the box. Most view controller events will 
@@ -47,7 +49,7 @@
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
  * behavior is undefined:
  *   - initWithNibName:bundle:
- *   - initWithCoder: (for view controllers instantiated from a xib)
+ *   - initWithCoder: (for view controllers instantiated from a nib)
  *   - awakeFromNib
  *   - viewWill...
  *   - viewDid...
@@ -156,6 +158,10 @@
  * The views where inset view controller's views must be drawn. Must either created programmatically in a subclass' loadView 
  * method or bound to a UIView using Interface Builder. You cannot change the number of placeholder views once the
  * placeholder view controller has been displayed once.
+ *
+ * The order of the outlets in an IBOutletCollection is unreliable (it is sadly not the order in which they are bound
+ * in the nib). To fix this, the placeholderViews property expect you to index placeholder views using the UIView tag
+ * property, and will sort them in increasing order
  */
 @property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
 
