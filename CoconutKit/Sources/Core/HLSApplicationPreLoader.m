@@ -99,7 +99,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 - (void)preload
 {
-	// To avoid the delay which occurs when loading a UIWebView for the first time, we display one as soon as possible
+    // To avoid the delay which occurs when loading a UIWebView for the first time, we display one as soon as possible
     // (out of screen bounds). It seems that loading a large web view (here with the application frame size) is more 
     // effective
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
