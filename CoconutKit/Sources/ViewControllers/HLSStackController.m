@@ -72,13 +72,13 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)awakeFromNib
 {
-    // Load the root view controller when using segues. A reserved segue called root must be used for such purposes
-    [self performSegueWithIdentifier:@"root" sender:self];
+    // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
+    [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
     
     // We now must have at least one view controller loaded
     NSAssert([self.containerContentStack count] != 0, @"No root view controller has been loaded. Drag a segue called "
-             "'root' in your storyboard file, from the stack controller to the view controller you want to install "
-             "as root");
+             "'%@' in your storyboard file, from the stack controller to the view controller you want to install "
+             "as root", HLSStackRootSegueIdentifier);
 }
 
 - (void)dealloc

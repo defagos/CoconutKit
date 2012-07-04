@@ -11,6 +11,8 @@
 #import "HLSLogger.h"
 #import "HLSStackController.h"
 
+NSString * const HLSStackRootSegueIdentifier = @"hls_root";
+
 @implementation HLSStackPushSegue
 
 #pragma mark Object creation and destruction
@@ -36,17 +38,17 @@
 {
     HLSStackController *stackController = nil;
     
-    // The source is a stack controller. The root segue is used to set its root view controller
+    // The source is a stack controller. The 'hls_root' segue is used to set its root view controller
     if ([self.sourceViewController isKindOfClass:[HLSStackController class]]) {
         stackController = self.sourceViewController;
-        if (! [self.identifier isEqualToString:@"root"]) {
-            HLSLoggerError(@"The push segue attached to a stack controller must be called 'root'");
+        if (! [self.identifier isEqualToString:HLSStackRootSegueIdentifier]) {
+            HLSLoggerError(@"The push segue attached to a stack controller must be called '%@'", HLSStackRootSegueIdentifier);
             return;
         }
         
         if ([[stackController viewControllers] count] != 0) {
-            HLSLoggerError(@"The segue called 'root' can only be used to set a root view controller. No view controller "
-                           "must have been loaded before");
+            HLSLoggerError(@"The segue called '%@' can only be used to set a root view controller. No view controller "
+                           "must have been loaded before", HLSStackRootSegueIdentifier);
             return;
         }
         

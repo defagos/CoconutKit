@@ -132,7 +132,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         [webView loadHTMLString:@"" baseURL:nil];
     }
     else {
-        HLSLoggerWarn(@"No key window found. Cannot pre-load UIWebView. To fix this issue, your application delegate must "
+        HLSLoggerWarn(@"No key window found. Cannot preload UIWebView. To fix this issue, your application delegate must "
                       "implement the -application:didFinishLaunchingWithOptions: method to set the key window, either by "
                       "calling -makeKeyAndVisible or -makeKeyWindow");
     }    

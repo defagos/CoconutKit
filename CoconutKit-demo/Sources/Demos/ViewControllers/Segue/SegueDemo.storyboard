@@ -22,7 +22,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="OOx-fi-7Pa" kind="custom" identifier="root" customClass="HLSStackPushSegue" id="Pbp-ye-qJp"/>
+                        <segue destination="OOx-fi-7Pa" kind="custom" identifier="hls_root" customClass="HLSStackPushSegue" id="Pbp-ye-qJp"/>
                     </connections>
                 </viewController>
             </objects>
@@ -115,7 +115,7 @@
                     <connections>
                         <outletCollection property="placeholderViews" destination="X2C-Si-n3L" id="Ptc-Ek-Rfx"/>
                         <outletCollection property="placeholderViews" destination="aIq-bQ-FgK" id="cLF-ru-gNr"/>
-                        <segue destination="HtO-zf-ZsB" kind="custom" identifier="init_at_index_0" customClass="HLSPlaceholderInsetSegue" id="vTG-A9-oft"/>
+                        <segue destination="HtO-zf-ZsB" kind="custom" identifier="hls_preload_at_index_0" customClass="HLSPlaceholderInsetSegue" id="vTG-A9-oft"/>
                     </connections>
                 </viewController>
             </objects>

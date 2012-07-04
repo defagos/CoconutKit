@@ -57,7 +57,7 @@ extern const NSUInteger kStackUnlimitedCapacity;
  *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
  *     view controller capacity by setting an NSNumber user-defined runtime attribute called 'capacity'
  *   - drop another view controller onto the storyboard, and set it as root view controller of the stack by
- *     binding the stack controller with it using an HLSStackPushSegue called 'root'. The transition style which
+ *     binding the stack controller with it using an HLSStackPushSegue called 'hls_root'. The transition style which
  *     gets applied is always HLSTransitionStyleNone and cannot be customized
  *   - if you want to push another view controller, drop a view controller onto the storyboard, and connect the 
  *     root view controller with it using another HLSStackPushSegue (with any non-reserved identifier). If you 

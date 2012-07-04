@@ -42,7 +42,7 @@
     // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
-            NSString *segueIdentifier = [NSString stringWithFormat:@"init_at_index_%d", i];
+            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%d", HLSPlaceholderPreloadSegueIdentifierPrefix, i];
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }
         @catch (NSException *exception) {}
@@ -189,7 +189,7 @@
             self.oldContainerContents = [NSMutableArray array];
         }
         
-        // We need to have a view controller in each placeholder (even if no pre-loading was made)
+        // We need to have a view controller in each placeholder (even if no preloading was made)
         for (NSUInteger i = [self.containerContents count]; i < [self.placeholderViews count]; ++i) {
             HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:[self emptyViewController]
                                                                                      containerController:self

@@ -74,11 +74,11 @@
  *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers will
  *     be drawn
  *   - drop another view controller onto the storyboard. You can display this view controller as inset as follows:
- *       - if you want to pre-load the view controller so that it gets displayed when the placeholder view controller
+ *       - if you want to preload the view controller so that it gets displayed when the placeholder view controller
  *         gets displayed, bind the placeholder view controller with it using an HLSPlaceholderInsetSegue with the 
- *         reserved identifier 'init_at_index_N', where N is the index at which the view controller must be displayed. 
- *         N must be between 0 and 19 (this limit is arbitrary and should be sufficient in practice). The transition
- *         style which gets applied is HLSTransitionStyleNone and cannot be customized
+ *         reserved identifier 'hls_preload_at_index_N', where N is the index at which the view controller must be 
+ *         displayed. N must be between 0 and 19 (this limit is arbitrary and should be sufficient in practice). The 
+ *         transition style which gets applied is HLSTransitionStyleNone and cannot be customized
  *       - if you want to display the view controller after the placeholder view controller has been displayed, use
  *         an HLSPlaceholderInsetSegue (with any non-reserved identifier). If you need to customize the index at which
  *         the view controller must be displayed (by default 0) or the transition settings (style and duration), you 

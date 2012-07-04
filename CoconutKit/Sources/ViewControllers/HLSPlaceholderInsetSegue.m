@@ -11,6 +11,8 @@
 #import "HLSLogger.h"
 #import "HLSPlaceholderViewController.h"
 
+NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_index_";
+
 @implementation HLSPlaceholderInsetSegue
 
 - (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
@@ -38,25 +40,25 @@
     HLSPlaceholderViewController *placeholderViewController = nil;
     UIViewController *viewController = self.sourceViewController;
     
-    // The source is a placeholder view controller. Reserved segue identifiers can be used to pre-load view controller 
+    // The source is a placeholder view controller. Reserved segue identifiers can be used to preload view controller 
     // into a placeholder view controller
     if ([self.sourceViewController isKindOfClass:[HLSPlaceholderViewController class]]) {
         placeholderViewController = self.sourceViewController;
-        if ([self.identifier hasPrefix:@"init_at_index_"]) {
-            NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:@"init_at_index_" withString:@""];
+        if ([self.identifier hasPrefix:HLSPlaceholderPreloadSegueIdentifierPrefix]) {
+            NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:HLSPlaceholderPreloadSegueIdentifierPrefix withString:@""];
             static NSNumberFormatter *s_numberFormatter = nil;
             if (! s_numberFormatter) {
                 s_numberFormatter = [[NSNumberFormatter alloc] init];
             }
             NSNumber *indexNumber = [s_numberFormatter numberFromString:indexString];
             if (! indexNumber) {
-                HLSLoggerError(@"Cannot parse inset index from segue identifier %@", self.identifier);
+                HLSLoggerError(@"Cannot parse inset index from segue identifier '%@'", self.identifier);
                 return;
             }
             
             if (self.index != [indexNumber unsignedIntegerValue]) {
-                HLSLoggerWarn(@"For init_at_index_ segues, the index is given by the identifier. The index "
-                              "%d manually set has been overridden");
+                HLSLoggerWarn(@"For preloading segues, the index is extracted from the segue identifier '%@' and will override the one "
+                              "(%d) manually set", self.index);
                 self.index = [indexNumber unsignedIntegerValue];
             }
             

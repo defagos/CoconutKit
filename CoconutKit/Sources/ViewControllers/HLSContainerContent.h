@@ -17,7 +17,7 @@
  *   - they are added and removed using some transition style, and their view frame is adjusted to match the container
  *     view they are added to
  *   - a view controller's view should be created lazily at the time it is really required
- *   - it must be possible to pre-load a view controller container before it gets actually displayed
+ *   - it must be possible to preload a view controller container before it gets actually displayed
  *   - a view controller container must retain the view controllers it manages
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
  *     happen that a client caches this view controller for later reuse
