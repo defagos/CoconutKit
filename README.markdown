@@ -90,9 +90,9 @@ If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely 
 
 CoconutKit should be compatible with iOS 4 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
 
-#### With which versions of Xcode is CoconutKit compatible?
+#### With which versions of Xcode and the iOS SDK is CoconutKit compatible?
 
-CoconutKit should be used with the latest versions of Xcode and of the iOS SDK. Binaries themselves have been compiled using GCC so that projects built using GCC or LLVM can link against it. As LLVM is adopted I will start building binaries using LLVM.
+CoconutKit should be used with the latest versions of Xcode and of the iOS SDK. Binaries themselves have been compiled using LLVM so that only project built using LLVM will be able to successfully link against it.
 
 #### Can I use CoconutKit with ARC projects?
 
@@ -127,7 +127,7 @@ There are some requirements when contributing, though:
 * Do not use ARC
 * Use of private APIs is strictly forbidden
 * Development and demo projects are also included. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
-* Unit tests require version 4.32 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/4.32/GHUnitIOS.framework`. More recent versions either exhibit linking issues on the device or require LLVM and thus cannot be used currently.
+* Unit tests require version 4.32 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/4.32/GHUnitIOS.framework`. More recent versions either exhibit linking issues on the device.
 
 #### Writing code
 
