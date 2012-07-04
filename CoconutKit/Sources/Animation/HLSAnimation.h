@@ -40,8 +40,9 @@
  * Other transforms will be ignored, and a warning message will be logged
  *
  * Designated initializer: initWithAnimationSteps:
+ * NSCopying behavior: Deep copy
  */
-@interface HLSAnimation : NSObject {
+@interface HLSAnimation : NSObject <NSCopying> {
 @private
     NSArray *m_animationSteps;                              // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;               // enumerator over steps

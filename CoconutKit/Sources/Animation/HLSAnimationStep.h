@@ -14,8 +14,9 @@
  * animation (HLSAnimation) is then simply a collection of animation steps.
  *
  * Designated initializer: init (create an animation step with default settings)
+ * NSCopying behavior: Deep copy
  */
-@interface HLSAnimationStep : NSObject {
+@interface HLSAnimationStep : NSObject <NSCopying> {
 @private
     NSMutableArray *m_viewKeys;                             // track in which order views were added to the animation step
     NSMutableDictionary *m_viewToViewAnimationStepMap;      // map a UIView objects to the view animation step to be applied on it
@@ -57,5 +58,11 @@
  * Optional tag to help identifying animation steps
  */
 @property (nonatomic, retain) NSString *tag;
+
+/**
+ * Return the inverse animation step. If a tag has been defined, the reverse animation step is automatically assigned
+ * the same tag, but with an additional "reverse_" prefix (if a tag has not been filled, the reverse tag is nil)
+ */
+- (HLSAnimationStep *)reverseAnimationStep;
 
 @end

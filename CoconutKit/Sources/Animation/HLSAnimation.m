@@ -33,8 +33,6 @@
 
 - (void)playNextStepAnimated:(BOOL)animated;
 
-- (NSArray *)reverseAnimationSteps;
-
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
@@ -396,8 +394,18 @@
 
 - (HLSAnimation *)reverseAnimation
 {
-    NSArray *reverseAnimationSteps = [self reverseAnimationSteps];
-    HLSAnimation *reverseAnimation = [HLSAnimation animationWithAnimationSteps:reverseAnimationSteps];
+    HLSAnimation *reverseAnimation = nil;
+    if (self.animationSteps) {
+        NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
+        for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
+            [reverseAnimationSteps addObject:[animationStep reverseAnimationStep]];
+        }
+        reverseAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
+    }
+    else {
+        reverseAnimation = [HLSAnimation animationWithAnimationStep:nil];
+    }
+    
     reverseAnimation.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimation.resizeViews = self.resizeViews;
     reverseAnimation.lockingUI = self.lockingUI;
@@ -407,46 +415,30 @@
     return reverseAnimation;
 }
 
-- (NSArray *)reverseAnimationSteps
+#pragma mark NSCopying protocol implementation
+
+- (id)copyWithZone:(NSZone *)zone
 {
-    if (! self.animationSteps) {
-        return nil;
+    HLSAnimation *animationCopy = nil;
+    if (self.animationSteps) {
+        NSMutableArray *animationStepCopies = [NSMutableArray array];
+        for (HLSAnimationStep *animationStep in self.animationSteps) {
+            [animationStepCopies addObject:[animationStep copyWithZone:zone]];
+        }
+        animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];
+    }
+    else {
+        animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:nil];
     }
     
-    // Reverse all animation steps
-    NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
-    for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
-        HLSAnimationStep *reverseAnimationStep = [HLSAnimationStep animationStep];
-        
-        // Reverse the associated view animation steps
-        for (UIView *view in [animationStep views]) {
-            HLSViewAnimationStep *viewAnimationStep = [animationStep viewAnimationStepForView:view];
-            [reverseAnimationStep addViewAnimationStep:[viewAnimationStep reverseViewAnimationStep] forView:view];
-        }
-        
-        // Animation step properties
-        reverseAnimationStep.tag = [animationStep.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", animationStep.tag] : nil;
-        reverseAnimationStep.duration = animationStep.duration;
-        switch (animationStep.curve) {
-            case UIViewAnimationCurveEaseIn:
-                reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;
-                break;
-                
-            case UIViewAnimationCurveEaseOut:
-                reverseAnimationStep.curve = UIViewAnimationCurveEaseIn;
-                break;
-                
-            case UIViewAnimationCurveLinear:
-            case UIViewAnimationCurveEaseInOut:
-            default:
-                // Nothing to do
-                break;
-        }
-        
-        [reverseAnimationSteps addObject:reverseAnimationStep];
-    }
+    animationCopy.tag = self.tag;
+    animationCopy.resizeViews = self.resizeViews;
+    animationCopy.lockingUI = self.lockingUI;
+    animationCopy.bringToFront = self.bringToFront;
+    animationCopy.delegate = self.delegate;
+    animationCopy.userInfo = [NSDictionary dictionaryWithDictionary:self.userInfo];
     
-    return [NSArray arrayWithArray:reverseAnimationSteps];
+    return animationCopy;
 }
 
 #pragma mark Animation callbacks

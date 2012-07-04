@@ -172,6 +172,18 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return reverseViewAnimationStep;
 }
 
+#pragma mark NSCopying protocol implementation
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    HLSViewAnimationStep *viewAnimationStepCopy = [[HLSViewAnimationStep allocWithZone:zone] init];
+    viewAnimationStepCopy.rotationParameters = self.rotationParameters;
+    viewAnimationStepCopy.scaleParameters = self.scaleParameters;
+    viewAnimationStepCopy.translationParameters = self.translationParameters;
+    viewAnimationStepCopy.alphaVariation = self.alphaVariation;
+    return viewAnimationStepCopy;
+}
+
 #pragma mark Description
 
 - (NSString *)description

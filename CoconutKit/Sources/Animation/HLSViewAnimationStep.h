@@ -15,8 +15,9 @@
  * is then simply a collection of animation steps.
  *
  * Designated initializer: init (create a view animation step with default settings)
+ * NSCopying behavior: Deep copy
  */
-@interface HLSViewAnimationStep : NSObject {
+@interface HLSViewAnimationStep : NSObject <NSCopying> {
 @private
     HLSVector4 m_rotationParameters;
     HLSVector3 m_scaleParameters;
@@ -59,7 +60,7 @@
 @property (nonatomic, readonly, assign) CATransform3D transform;
 
 /**
- * Return the inverse animation step
+ * Return the inverse view animation step
  */
 - (HLSViewAnimationStep *)reverseViewAnimationStep;
 

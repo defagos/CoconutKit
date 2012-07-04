@@ -115,13 +115,58 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 
 @synthesize tag = m_tag;
 
+#pragma mark Reverse animation
+
+- (HLSAnimationStep *)reverseAnimationStep
+{
+    HLSAnimationStep *reverseAnimationStep = [HLSAnimationStep animationStep];
+    for (UIView *view in [self views]) {
+        HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
+        [reverseAnimationStep addViewAnimationStep:[viewAnimationStep reverseViewAnimationStep] forView:view];
+    }
+    
+    // Animation step properties
+    reverseAnimationStep.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
+    reverseAnimationStep.duration = self.duration;
+    switch (self.curve) {
+        case UIViewAnimationCurveEaseIn:
+            reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;
+            break;
+            
+        case UIViewAnimationCurveEaseOut:
+            reverseAnimationStep.curve = UIViewAnimationCurveEaseIn;
+            break;
+            
+        case UIViewAnimationCurveLinear:
+        case UIViewAnimationCurveEaseInOut:
+        default:
+            // Nothing to do
+            break;
+    }
+    return reverseAnimationStep;
+}
+
+#pragma mark NSCopying protocol implementation
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    HLSAnimationStep *animationStepCopy = [[HLSAnimationStep allocWithZone:zone] init];
+    for (UIView *view in [self views]) {
+        HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
+        [animationStepCopy addViewAnimationStep:[viewAnimationStep copyWithZone:zone] forView:view];
+    }
+    animationStepCopy.tag = self.tag;
+    animationStepCopy.duration = self.duration;
+    animationStepCopy.curve = self.curve;
+    return animationStepCopy;
+}
+
 #pragma mark Description
 
 - (NSString *)description
 {
     NSString *viewAnimationStepDescriptions = @"{";
-    for (NSValue *viewKey in self.viewKeys) {
-        UIView *view = [viewKey pointerValue];
+    for (UIView *view in [self views]) {
         HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
         viewAnimationStepDescriptions = [viewAnimationStepDescriptions stringByAppendingFormat:@"\n\t%@ - %@", view, viewAnimationStep];
     }
