@@ -404,7 +404,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
        inContainerContentStack:(NSArray *)containerContentStack
 {
     if (self.addedToContainerView) {
-        HLSLoggerInfo(@"View controller's view already added to a container view");
+        HLSLoggerDebug(@"View controller's view already added to a container view");
         return NO;
     }
     
@@ -527,7 +527,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 - (void)removeViewFromContainerView
 {
     if (! self.addedToContainerView) {
-        HLSLoggerInfo(@"View controller's view is not added to a container view");
+        HLSLoggerDebug(@"View controller's view is not added to a container view");
         return;
     }
     

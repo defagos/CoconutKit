@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "NSString+HLSExtensions.h"
 
 // Default values as given by Apple UIView documentation
 static const double kAnimationStepDefaultDuration = 0.2;
@@ -59,12 +60,12 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 - (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view
 {   
     if (! viewAnimationStep) {
-        HLSLoggerInfo(@"View animation step is nil; no animation step added");
+        HLSLoggerDebug(@"View animation step is nil; no animation step added");
         return;
     }
     
     if (! view) {
-        HLSLoggerInfo(@"View is nil; no animation step added");
+        HLSLoggerDebug(@"View is nil; no animation step added");
         return;
     }
     

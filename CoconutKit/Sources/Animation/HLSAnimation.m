@@ -347,12 +347,12 @@
 - (void)cancel
 {
     if (! self.running) {
-        HLSLoggerInfo(@"The animation is not running, nothing to cancel");
+        HLSLoggerDebug(@"The animation is not running, nothing to cancel");
         return;
     }
     
     if (self.cancelling || self.terminating) {
-        HLSLoggerInfo(@"The animation is already being cancelled or terminated");
+        HLSLoggerDebug(@"The animation is already being cancelled or terminated");
         return;
     }
     
@@ -370,12 +370,12 @@
 - (void)terminate
 {
     if (! self.running) {
-        HLSLoggerInfo(@"The animation is not running, nothing to terminate");
+        HLSLoggerDebug(@"The animation is not running, nothing to terminate");
         return;
     }
     
     if (self.cancelling || self.terminating) {
-        HLSLoggerInfo(@"The animation is already being cancelled or terminated");
+        HLSLoggerDebug(@"The animation is already being cancelled or terminated");
         return;
     }
     
