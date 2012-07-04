@@ -35,6 +35,7 @@
     self.animatedSwitch = nil;
     self.blockingSwitch = nil;
     self.delayedSwitch = nil;
+    self.fasterSwitch = nil;
     self.animation = nil;
     self.reverseAnimation = nil;
 }
@@ -52,6 +53,7 @@
     self.animatedSwitch.on = YES;
     self.blockingSwitch.on = NO;
     self.delayedSwitch.on = NO;
+    self.fasterSwitch.on = NO;
     
     [self updateUserInterface];
 }
@@ -75,6 +77,8 @@
 @synthesize delayedLabel = m_delayedLabel;
 
 @synthesize delayedSwitch = m_delayedSwitch;
+
+@synthesize fasterSwitch = m_fasterSwitch;
 
 @synthesize animation = m_animation;
 
@@ -150,6 +154,9 @@
                                                                 animationStep5,
                                                                 animationStep6,
                                                                 nil]];
+    if (self.fasterSwitch.on) {
+        self.animation = [self.animation animationWithDuration:2.];
+    }
     self.animation.tag = @"singleViewAnimation";
     self.animation.lockingUI = self.blockingSwitch.on;
     self.animation.delegate = self;

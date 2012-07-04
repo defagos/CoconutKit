@@ -144,6 +144,15 @@
     [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
 }
 
+- (NSTimeInterval)duration
+{
+    NSTimeInterval duration = 0.;
+    for (HLSAnimationStep *animationStep in self.animationSteps) {
+        duration += animationStep.duration;
+    }
+    return duration;
+}
+
 #pragma mark Animation
 
 - (void)playAnimated:(BOOL)animated
@@ -390,7 +399,28 @@
     [self playNextStepAnimated:NO];
 }
 
-#pragma mark Creating the reverse animation
+#pragma mark Creating animations variants from an existing animation
+
+- (HLSAnimation *)animationWithDuration:(NSTimeInterval)duration
+{
+    if (doublelt(duration, 0.f)) {
+        HLSLoggerError(@"The duration cannot be negative");
+        return nil;
+    }
+    
+    HLSAnimation *animation = [[self copy] autorelease];
+        
+    // Find out which factor must be applied to each animation step to preserve the animation appearance for the 
+    // specified duration
+    double factor = duration / [self duration];
+    
+    // Distribute the total duration evenly among animation steps
+    for (HLSAnimationStep *animationStep in animation.animationSteps) {
+        animationStep.duration *= factor;
+    }
+    
+    return animation;
+}
 
 - (HLSAnimation *)reverseAnimation
 {

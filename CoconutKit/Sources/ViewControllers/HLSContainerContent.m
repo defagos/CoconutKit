@@ -1083,22 +1083,9 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
         return animation;
     }
-    
-    // Calculate the total animation duration
-    NSTimeInterval totalDuration = 0.;
-    for (HLSAnimationStep *animationStep in animation.animationSteps) {
-        totalDuration += animationStep.duration;
+    else {
+        return [animation animationWithDuration:duration];
     }
-    
-    // Find out which factor must be applied to each animation step to preserve the animation appearance for the specified duration
-    double factor = duration / totalDuration;
-    
-    // Distribute the total duration evenly among animation steps
-    for (HLSAnimationStep *animationStep in animation.animationSteps) {
-        animationStep.duration *= factor;
-    }
-    
-    return animation;
 }
 
 

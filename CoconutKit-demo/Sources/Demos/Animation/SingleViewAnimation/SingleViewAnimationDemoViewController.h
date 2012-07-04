@@ -30,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
 @property (nonatomic, retain) IBOutlet UILabel *delayedLabel;
 @property (nonatomic, retain) IBOutlet UISwitch *delayedSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *fasterSwitch;
 
 - (IBAction)playForward:(id)sender;
 - (IBAction)playBackward:(id)sender;

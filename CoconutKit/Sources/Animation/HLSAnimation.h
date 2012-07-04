@@ -127,13 +127,19 @@
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
 
 /**
+ * Return the total duration of the animation
+ */
+- (NSTimeInterval)duration;
+
+/**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 
  * animation does take place synchronously at the location of the call to playAnimated:)
  */
 - (void)playAnimated:(BOOL)animated;
 
 /**
- * Play the animation with animated = YES, but after some delay given in seconds
+ * Play the animation with animated = YES, but after some delay given in seconds (invalid negative delays are fixed
+ * to 0)
  */
 - (void)playAfterDelay:(NSTimeInterval)delay;
 
@@ -158,6 +164,13 @@
  * Return YES iff the animation is being terminated
  */
 @property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
+
+/**
+ * Generate a copy of the animation, but overrides its total duration with a new one. The original appearance of
+ * the animation is preserved (it is only faster or slower depending on the new duration). If an invalid negative
+ * duration is provided, the method returns nil
+ */
+- (HLSAnimation *)animationWithDuration:(NSTimeInterval)duration;
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
