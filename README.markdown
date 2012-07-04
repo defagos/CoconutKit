@@ -145,12 +145,14 @@ For "non-interactive" components, you should consider adding some test cases to 
 
 #### Building binaries
 
-CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory, as follows:
+CoconutKit is meant to be built into a `.staticframework` package using the [make-fmwk command](https://github.com/defagos/make-fmwk), for convenience included as a git submodule. When built, the CoconutKit-demo project automatically creates those binaries into `/LeStudioSDK/Binaries/CoconutKit` to be able to link against them. Be sure that this directory exists and is enabled for writing if you want to be able to run the CoconutKit-demo project.
 
-    make-fmwk.sh -o <output_directory> -u <version> Release
-    make-fmwk.sh -o <output_directory> -u <version> Debug
+You can also build the `.staticframework` debug / release packages manually by running the following commands from the CoconutKit static library project directory:
+
+    path/to/make-fmwk.sh -o <output_directory> -u <version> Release
+    path/to/make-fmwk.sh -o <output_directory> -u <version> Debug
     
-e.g.
+e.g. if `make-fmwk.sh` is available in your path:
 
     make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
     make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
