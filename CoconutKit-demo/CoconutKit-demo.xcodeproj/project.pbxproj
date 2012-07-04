@@ -1145,7 +1145,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "cd \"${PROJECT_DIR}\"/../Tools/Makefile\nmake";
+			shellScript = "\"${PROJECT_DIR}\"/../Tools/Scripts/build.sh";
 		};
 		6FCA9D241451956800004E12 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
