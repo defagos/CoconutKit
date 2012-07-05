@@ -274,6 +274,23 @@
 		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6F159C2915A596670020AFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F159C2515A596590020AFAC;
+			remoteInfo = "Build-StaticFramework";
+		};
+		6F159C2B15A5966D0020AFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F159C2515A596590020AFAC;
+			remoteInfo = "Build-StaticFramework";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CoconutKit-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1147,12 +1164,28 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		6F159C2515A596590020AFAC /* build-staticframework */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "build-staticframework" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "${PROJECT_DIR}/../Tools/Makefile";
+			dependencies = (
+			);
+			name = "build-staticframework";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Build-StaticFramework";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* CoconutKit-demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "CoconutKit-demo" */;
 			buildPhases = (
-				6F327D2315A4868E008B7F9D /* ShellScript */,
 				6FCA9D241451956800004E12 /* ShellScript */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
@@ -1161,6 +1194,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6F159C2A15A596670020AFAC /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-demo";
 			productName = "CoconutKit-demo";
@@ -1171,7 +1205,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F159BD615A55CD10020AFAC /* Build configuration list for PBXNativeTarget "CoconutKit-demo-ios4" */;
 			buildPhases = (
-				6F159B4C15A55CD10020AFAC /* ShellScript */,
 				6F159B4D15A55CD10020AFAC /* ShellScript */,
 				6F159B4E15A55CD10020AFAC /* Sources */,
 				6F159B8815A55CD10020AFAC /* Resources */,
@@ -1180,6 +1213,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6F159C2C15A5966D0020AFAC /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-demo-ios4";
 			productName = "CoconutKit-demo";
@@ -1218,6 +1252,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CoconutKit-demo */,
 				6F159B4B15A55CD10020AFAC /* CoconutKit-demo-ios4 */,
+				6F159C2515A596590020AFAC /* build-staticframework */,
 			);
 		};
 /* End PBXProject section */
@@ -1377,19 +1412,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F159B4C15A55CD10020AFAC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\"${PROJECT_DIR}\"/../Tools/Scripts/build.sh";
-		};
 		6F159B4D15A55CD10020AFAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1402,19 +1424,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\"${PROJECT_DIR}\"/generate_model.sh";
-		};
-		6F327D2315A4868E008B7F9D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\"${PROJECT_DIR}\"/../Tools/Scripts/build.sh";
 		};
 		6FCA9D241451956800004E12 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1562,6 +1571,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6F159C2A15A596670020AFAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F159C2515A596590020AFAC /* build-staticframework */;
+			targetProxy = 6F159C2915A596670020AFAC /* PBXContainerItemProxy */;
+		};
+		6F159C2C15A5966D0020AFAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F159C2515A596590020AFAC /* build-staticframework */;
+			targetProxy = 6F159C2B15A5966D0020AFAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		6F507D6C14BB742800D54088 /* DemoTable.strings */ = {
 			isa = PBXVariantGroup;
@@ -1671,6 +1693,55 @@
 			};
 			name = Release;
 		};
+		6F159C2715A596590020AFAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6F159C2815A596590020AFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1678,6 +1749,7 @@
 					armv6,
 					armv7,
 				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -1693,6 +1765,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1705,6 +1778,7 @@
 					armv6,
 					armv7,
 				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -1721,6 +1795,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1746,6 +1821,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "build-staticframework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F159C2715A596590020AFAC /* Debug */,
+				6F159C2815A596590020AFAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CoconutKit-demo" */ = {
 			isa = XCConfigurationList;
