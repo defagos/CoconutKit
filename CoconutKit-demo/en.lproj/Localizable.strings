@@ -118,6 +118,9 @@
 "Search bar"="Search bar";
 "Search books"="Search books";
 "Section end"="Section end";
+"Segues"="Segues";
+"Segues (not available in bundle)"="Segues (not available in bundle)";
+"Segues (not available for iOS 4)"="Segues (not available for iOS 4)";
 "Single view animation"="Single view animation";
 "Skinning"="Skinning";
 "Slideshow"="Slideshow";
