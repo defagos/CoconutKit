@@ -1165,17 +1165,17 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		6F159C2515A596590020AFAC /* build-staticframework */ = {
+		6F159C2515A596590020AFAC /* CoconutKit-demo-staticframework */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "build-staticframework" */;
+			buildConfigurationList = 6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-demo-staticframework" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
 			buildWorkingDirectory = "${PROJECT_DIR}/../Tools/Makefile";
 			dependencies = (
 			);
-			name = "build-staticframework";
+			name = "CoconutKit-demo-staticframework";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Build-StaticFramework";
 		};
@@ -1252,7 +1252,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CoconutKit-demo */,
 				6F159B4B15A55CD10020AFAC /* CoconutKit-demo-ios4 */,
-				6F159C2515A596590020AFAC /* build-staticframework */,
+				6F159C2515A596590020AFAC /* CoconutKit-demo-staticframework */,
 			);
 		};
 /* End PBXProject section */
@@ -1574,12 +1574,12 @@
 /* Begin PBXTargetDependency section */
 		6F159C2A15A596670020AFAC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6F159C2515A596590020AFAC /* build-staticframework */;
+			target = 6F159C2515A596590020AFAC /* CoconutKit-demo-staticframework */;
 			targetProxy = 6F159C2915A596670020AFAC /* PBXContainerItemProxy */;
 		};
 		6F159C2C15A5966D0020AFAC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6F159C2515A596590020AFAC /* build-staticframework */;
+			target = 6F159C2515A596590020AFAC /* CoconutKit-demo-staticframework */;
 			targetProxy = 6F159C2B15A5966D0020AFAC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1771,7 +1771,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "build-staticframework" */ = {
+		6F159C2615A596590020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-demo-staticframework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6F159C2715A596590020AFAC /* Debug */,
