@@ -11,9 +11,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6F00017D156BF2530055CED7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */; };
-		6F00017E156BF2530055CED7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */; };
-		6F00017F156BF2530055CED7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F00017C156BF2530055CED7 /* CoconutKit.framework */; };
 		6F159B4F15A55CD10020AFAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		6F159B5015A55CD10020AFAC /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -62,7 +59,6 @@
 		6F159B7C15A55CD10020AFAC /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C46A414C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld */; };
 		6F159B7D15A55CD10020AFAC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6F159B7E15A55CD10020AFAC /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
-		6F159B7F15A55CD10020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */; };
 		6F159B8015A55CD10020AFAC /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F159B8115A55CD10020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F159B8215A55CD10020AFAC /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
@@ -136,7 +132,6 @@
 		6F159BC715A55CD10020AFAC /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6F159BC815A55CD10020AFAC /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6F159BC915A55CD10020AFAC /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
-		6F159BCA15A55CD10020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */; };
 		6F159BCB15A55CD10020AFAC /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F159BCC15A55CD10020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F159BCF15A55CD10020AFAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
@@ -145,7 +140,12 @@
 		6F159BD215A55CD10020AFAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6F159BD315A55CD10020AFAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F159BD415A55CD10020AFAC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
-		6F159BD515A55CD10020AFAC /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F00017C156BF2530055CED7 /* CoconutKit.framework */; };
+		6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */; };
+		6F159C3515A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */; };
+		6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */; };
+		6F159C3715A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */; };
+		6F159C3815A5B7B00020AFAC /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F159C3315A5B7B00020AFAC /* CoconutKit.framework */; };
+		6F159C3915A5B7B00020AFAC /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F159C3315A5B7B00020AFAC /* CoconutKit.framework */; };
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
@@ -298,10 +298,10 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
-		6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
-		6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
-		6F00017C156BF2530055CED7 /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F159BD915A55CD10020AFAC /* CoconutKit-demo-ios4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-demo-ios4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
+		6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
+		6F159C3315A5B7B00020AFAC /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -499,7 +499,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */,
-				6F00017F156BF2530055CED7 /* CoconutKit.framework in Frameworks */,
+				6F159C3815A5B7B00020AFAC /* CoconutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +513,7 @@
 				6F159BD215A55CD10020AFAC /* UIKit.framework in Frameworks */,
 				6F159BD315A55CD10020AFAC /* CoreGraphics.framework in Frameworks */,
 				6F159BD415A55CD10020AFAC /* MessageUI.framework in Frameworks */,
-				6F159BD515A55CD10020AFAC /* CoconutKit.framework in Frameworks */,
+				6F159C3915A5B7B00020AFAC /* CoconutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +559,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F000178156BF2530055CED7 /* CoconutKit-trunk-Release.staticframework */,
+				6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -570,21 +570,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F000178156BF2530055CED7 /* CoconutKit-trunk-Release.staticframework */ = {
+		6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-Release.staticframework */ = {
 			isa = PBXGroup;
 			children = (
-				6F000179156BF2530055CED7 /* Bootstrap */,
-				6F00017B156BF2530055CED7 /* CoconutKit-resources.bundle */,
-				6F00017C156BF2530055CED7 /* CoconutKit.framework */,
+				6F159C3015A5B7B00020AFAC /* Bootstrap */,
+				6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */,
+				6F159C3315A5B7B00020AFAC /* CoconutKit.framework */,
 			);
 			name = "CoconutKit-trunk-Release.staticframework";
-			path = "/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-Release.staticframework";
-			sourceTree = "<absolute>";
+			path = "../Binaries/CoconutKit-trunk-Release.staticframework";
+			sourceTree = "<group>";
 		};
-		6F000179156BF2530055CED7 /* Bootstrap */ = {
+		6F159C3015A5B7B00020AFAC /* Bootstrap */ = {
 			isa = PBXGroup;
 			children = (
-				6F00017A156BF2530055CED7 /* CoconutKit_bootstrap.m */,
+				6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */,
 			);
 			path = Bootstrap;
 			sourceTree = "<group>";
@@ -1327,10 +1327,10 @@
 				6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */,
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
-				6F00017E156BF2530055CED7 /* CoconutKit-resources.bundle in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
+				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1403,9 +1403,9 @@
 				6F159BC715A55CD10020AFAC /* img_apple3.jpg in Resources */,
 				6F159BC815A55CD10020AFAC /* img_apple4.jpg in Resources */,
 				6F159BC915A55CD10020AFAC /* SlideshowDemoViewController.xib in Resources */,
-				6F159BCA15A55CD10020AFAC /* CoconutKit-resources.bundle in Resources */,
 				6F159BCB15A55CD10020AFAC /* LabelDemoViewController.xib in Resources */,
 				6F159BCC15A55CD10020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
+				6F159C3715A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1493,7 +1493,6 @@
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
-				6F00017D156BF2530055CED7 /* CoconutKit_bootstrap.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
 				6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
@@ -1502,6 +1501,7 @@
 				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
+				6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1557,7 +1557,6 @@
 				6F159B7C15A55CD10020AFAC /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6F159B7D15A55CD10020AFAC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F159B7E15A55CD10020AFAC /* SlideshowDemoViewController.m in Sources */,
-				6F159B7F15A55CD10020AFAC /* CoconutKit_bootstrap.m in Sources */,
 				6F159B8015A55CD10020AFAC /* LabelDemoViewController.m in Sources */,
 				6F159B8115A55CD10020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6F159B8215A55CD10020AFAC /* SeguePlaceholderInsetDemoViewController.m in Sources */,
@@ -1566,6 +1565,7 @@
 				6F159B8515A55CD10020AFAC /* SegueLeftPanelDemoViewController.m in Sources */,
 				6F159B8615A55CD10020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F159B8715A55CD10020AFAC /* SegueSecondRightPanelDemoViewController.m in Sources */,
+				6F159C3515A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,10 +1620,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1640,10 +1636,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1658,10 +1650,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1679,10 +1667,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1713,6 +1697,7 @@
 					armv7,
 				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -1742,6 +1727,7 @@
 					armv7,
 				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
