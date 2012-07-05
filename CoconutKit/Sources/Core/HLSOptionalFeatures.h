@@ -24,27 +24,33 @@
 #define HLSEnableApplicationPreloading()                                                                  \
     __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
     {                                                                                                     \
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                       \
         [HLSApplicationPreloader enable];                                                                 \
+        [pool drain];                                                                                     \
     }
 
 /**
  * Enable Core Data validation extensions. You need to enable this feature if you want the CoconutKit
- * central validations and text field bindings to be available. This feature does not incur any overhead
- * but swizzles several methods under the hood
+ * central validations and text field bindings to be available. This feature does not incur any major 
+ * overhead but swizzles several methods under the hood
  */
-#define HLSEnableNSManagedObjectValidation()                                                          \
-    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)            \
-    {                                                                                                 \
-        [NSManagedObject injectValidation];                                                           \
+#define HLSEnableNSManagedObjectValidation()                                                             \
+    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)               \
+    {                                                                                                    \
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                      \
+        [NSManagedObject enable];                                                                        \
+        [pool drain];                                                                                    \
     }
 
 /**
- * Disable taps occuring quasi-simultaneously on several controls. This changes the default UIkit behavior
+ * Prevent taps occuring quasi-simultaneously on several controls. This changes the default UIkit behavior
  * but can greatly improve your application robustness (having to deal with such taps can be quite a
- * nightmare and can lead to erratic behaviors or crashes depending on how your application is implemented)
+ * nightmare and can lead to erratic behaviors or crashes when monkey-testing your application)
  */
 #define HLSEnableUIControlExclusiveTouch()                                                                \
     __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                  \
     {                                                                                                     \
-        [UIControl injectExclusiveTouch];                                                                 \
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                       \
+        [UIControl enable];                                                                               \
+        [pool drain];                                                                                     \
     }
