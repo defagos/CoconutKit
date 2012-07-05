@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F159A6815A554250020AFAC"
-               BuildableName = "CoconutKit-dev.app"
+               BuildableName = "CoconutKit-dev-ios4.app"
                BlueprintName = "CoconutKit-dev-ios4"
                ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F159A6815A554250020AFAC"
-            BuildableName = "CoconutKit-dev.app"
+            BuildableName = "CoconutKit-dev-ios4.app"
             BlueprintName = "CoconutKit-dev-ios4"
             ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
          </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F159A6815A554250020AFAC"
-            BuildableName = "CoconutKit-dev.app"
+            BuildableName = "CoconutKit-dev-ios4.app"
             BlueprintName = "CoconutKit-dev-ios4"
             ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F159A6815A554250020AFAC"
-            BuildableName = "CoconutKit-dev.app"
+            BuildableName = "CoconutKit-dev-ios4.app"
             BlueprintName = "CoconutKit-dev-ios4"
             ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
          </BuildableReference>
