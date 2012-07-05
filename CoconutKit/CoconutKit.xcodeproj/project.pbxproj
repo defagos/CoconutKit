@@ -806,6 +806,23 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
+/* Begin PBXLegacyTarget section */
+		6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "${PROJECT_DIR}/../Tools/Makefile";
+			dependencies = (
+			);
+			name = "CoconutKit-staticframework";
+			passBuildSettingsInEnvironment = 1;
+			productName = "CoconutKit-staticframework";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		D2AAC07D0554694100DB518D /* CoconutKit */ = {
 			isa = PBXNativeTarget;
@@ -863,6 +880,7 @@
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* CoconutKit */,
+				6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */,
 			);
 		};
 /* End PBXProject section */
@@ -1016,7 +1034,6 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1030,6 +1047,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -1042,7 +1060,6 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1057,6 +1074,19 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		6F159C6F15A5D7720020AFAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		6F159C7015A5D7720020AFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 			};
 			name = Release;
 		};
@@ -1080,6 +1110,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F159C6F15A5D7720020AFAC /* Debug */,
+				6F159C7015A5D7720020AFAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

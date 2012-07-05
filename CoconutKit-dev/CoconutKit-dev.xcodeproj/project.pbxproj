@@ -39,6 +39,218 @@
 		6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
+		6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */; };
+		6F159A6E15A554250020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F814BA04C8007EE121 /* SingleViewAnimationDemoViewController.xib */; };
+		6F159A6F15A554250020AFAC /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FD14BA04C8007EE121 /* ContainerCustomizationViewController.xib */; };
+		6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
+		6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
+		6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80614BA04C8007EE121 /* HeavyViewController.xib */; };
+		6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80A14BA04C8007EE121 /* LandscapeOnlyViewController.xib */; };
+		6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80E14BA04C8007EE121 /* LifeCycleTestViewController.xib */; };
+		6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */; };
+		6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */; };
+		6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */; };
+		6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */; };
+		6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */; };
+		6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */; };
+		6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81F14BA04C8007EE121 /* StretchableLargeViewController.xib */; };
+		6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE82214BA04C8007EE121 /* StretchableViewController.xib */; };
+		6F159A7D15A554250020AFAC /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE82614BA04C8007EE121 /* TransparentViewController.xib */; };
+		6F159A7E15A554250020AFAC /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE82B14BA04C8007EE121 /* ParallelProcessingDemoViewController.xib */; };
+		6F159A7F15A554250020AFAC /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE83414BA04C8007EE121 /* ActionSheetDemoViewController.xib */; };
+		6F159A8015A554250020AFAC /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE83814BA04C8007EE121 /* CursorCustomPointerView.xib */; };
+		6F159A8115A554250020AFAC /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE83B14BA04C8007EE121 /* CursorDemoViewController.xib */; };
+		6F159A8215A554250020AFAC /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE83E14BA04C8007EE121 /* CursorFolderView.xib */; };
+		6F159A8315A554250020AFAC /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84114BA04C8007EE121 /* CursorPointerInfoViewController.xib */; };
+		6F159A8415A554250020AFAC /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84414BA04C8007EE121 /* CursorSelectedFolderView.xib */; };
+		6F159A8515A554250020AFAC /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84D14BA04C8007EE121 /* FooterView.xib */; };
+		6F159A8615A554250020AFAC /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85014BA04C8007EE121 /* HeaderView.xib */; };
+		6F159A8715A554250020AFAC /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */; };
+		6F159A8815A554250020AFAC /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */; };
+		6F159A8915A554250020AFAC /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */; };
+		6F159A8A15A554250020AFAC /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86514BA04C9007EE121 /* RootStackDemoViewController.xib */; };
+		6F159A8B15A554250020AFAC /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86914BA04C9007EE121 /* StackDemoViewController.xib */; };
+		6F159A8C15A554250020AFAC /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86F14BA04C9007EE121 /* TableSearchDisplayDemoViewController.xib */; };
+		6F159A8D15A554250020AFAC /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87314BA04C9007EE121 /* WizardAddressPageViewController.xib */; };
+		6F159A8E15A554250020AFAC /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87614BA04C9007EE121 /* WizardDemoViewController.xib */; };
+		6F159A8F15A554250020AFAC /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87914BA04C9007EE121 /* WizardIdentityPageViewController.xib */; };
+		6F159A9015A554250020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
+		6F159A9115A554250020AFAC /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */; };
+		6F159A9215A554250020AFAC /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */; };
+		6F159A9315A554250020AFAC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
+		6F159A9415A554250020AFAC /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
+		6F159A9515A554250020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F000108156BD1360055CED7 /* CoconutKit-resources.bundle */; };
+		6F159A9615A554250020AFAC /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F00010B156BD17F0055CED7 /* DemoTable.strings */; };
+		6F159A9715A554250020AFAC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F00010D156BD17F0055CED7 /* Localizable.strings */; };
+		6F159A9815A554250020AFAC /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F000110156BD17F0055CED7 /* DemoTable.strings */; };
+		6F159A9915A554250020AFAC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F000112156BD17F0055CED7 /* Localizable.strings */; };
+		6F159A9A15A554250020AFAC /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F000119156BD17F0055CED7 /* ProximaNova-Bold.otf */; };
+		6F159A9B15A554250020AFAC /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F00011A156BD17F0055CED7 /* ProximaNova-Regular.otf */; };
+		6F159A9C15A554250020AFAC /* sample_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F00011C156BD17F0055CED7 /* sample_text.html */; };
+		6F159A9D15A554250020AFAC /* bkgr_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F00011E156BD17F0055CED7 /* bkgr_bar.png */; };
+		6F159A9E15A554250020AFAC /* cell_bkgr_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F00011F156BD17F0055CED7 /* cell_bkgr_brown_large.png */; };
+		6F159A9F15A554250020AFAC /* cell_bkgr_brown_large_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000120156BD17F0055CED7 /* cell_bkgr_brown_large_selected.png */; };
+		6F159AA015A554250020AFAC /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000121156BD17F0055CED7 /* img_localized.png */; };
+		6F159AA115A554250020AFAC /* icn_bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000124156BD17F0055CED7 /* icn_bookmark.png */; };
+		6F159AA215A554250020AFAC /* icn_folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000125156BD17F0055CED7 /* icn_folder.png */; };
+		6F159AA315A554250020AFAC /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000126156BD17F0055CED7 /* img_apple1.jpg */; };
+		6F159AA415A554250020AFAC /* img_apple2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000127156BD17F0055CED7 /* img_apple2.jpg */; };
+		6F159AA515A554250020AFAC /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000128156BD17F0055CED7 /* img_apple3.jpg */; };
+		6F159AA615A554250020AFAC /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000129156BD17F0055CED7 /* img_apple4.jpg */; };
+		6F159AA715A554250020AFAC /* img_coconut1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012A156BD17F0055CED7 /* img_coconut1.jpg */; };
+		6F159AA815A554250020AFAC /* img_coconut2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012B156BD17F0055CED7 /* img_coconut2.jpg */; };
+		6F159AA915A554250020AFAC /* img_coconut3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012C156BD17F0055CED7 /* img_coconut3.jpg */; };
+		6F159AAA15A554250020AFAC /* img_coconut4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012D156BD17F0055CED7 /* img_coconut4.jpg */; };
+		6F159AAB15A554250020AFAC /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012E156BD17F0055CED7 /* parallax_demo_grass_layer.png */; };
+		6F159AAC15A554250020AFAC /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F00012F156BD17F0055CED7 /* parallax_demo_mountains_layer.png */; };
+		6F159AAD15A554250020AFAC /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */; };
+		6F159AAE15A554250020AFAC /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
+		6F159AAF15A554250020AFAC /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
+		6F159AB015A554250020AFAC /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */; };
+		6F159AB115A554250020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
+		6F159AB515A554250020AFAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
+		6F159AB615A554250020AFAC /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
+		6F159AB715A554250020AFAC /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63014BA04A6007EE121 /* HLSAnimationStep.m */; };
+		6F159AB815A554250020AFAC /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63214BA04A6007EE121 /* HLSViewAnimationStep.m */; };
+		6F159AB915A554250020AFAC /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63514BA04A6007EE121 /* HLSAssert.m */; };
+		6F159ABA15A554250020AFAC /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63814BA04A6007EE121 /* HLSConverters.m */; };
+		6F159ABB15A554250020AFAC /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63A14BA04A6007EE121 /* HLSError.m */; };
+		6F159ABC15A554250020AFAC /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63C14BA04A6007EE121 /* HLSFloat.m */; };
+		6F159ABD15A554250020AFAC /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63E14BA04A6007EE121 /* HLSKeyboardInformation.m */; };
+		6F159ABE15A554250020AFAC /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64014BA04A6007EE121 /* HLSNotifications.m */; };
+		6F159ABF15A554250020AFAC /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64414BA04A6007EE121 /* HLSRuntime.m */; };
+		6F159AC015A554250020AFAC /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64614BA04A6007EE121 /* HLSUserInterfaceLock.m */; };
+		6F159AC115A554250020AFAC /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64914BA04A6007EE121 /* HLSValidators.m */; };
+		6F159AC215A554250020AFAC /* NSArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64B14BA04A6007EE121 /* NSArray+HLSExtensions.m */; };
+		6F159AC315A554250020AFAC /* NSBundle+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64D14BA04A6007EE121 /* NSBundle+HLSDynamicLocalization.m */; };
+		6F159AC415A554250020AFAC /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE64F14BA04A6007EE121 /* NSBundle+HLSExtensions.m */; };
+		6F159AC515A554250020AFAC /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65114BA04A6007EE121 /* NSCalendar+HLSExtensions.m */; };
+		6F159AC615A554250020AFAC /* NSData+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65314BA04A6007EE121 /* NSData+HLSExtensions.m */; };
+		6F159AC715A554250020AFAC /* NSDate+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65514BA04A6007EE121 /* NSDate+HLSExtensions.m */; };
+		6F159AC815A554250020AFAC /* NSDateFormatter+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65714BA04A6007EE121 /* NSDateFormatter+HLSExtensions.m */; };
+		6F159AC915A554250020AFAC /* NSDictionary+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65914BA04A6007EE121 /* NSDictionary+HLSExtensions.m */; };
+		6F159ACA15A554250020AFAC /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65B14BA04A6007EE121 /* NSError+HLSExtensions.m */; };
+		6F159ACB15A554250020AFAC /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65D14BA04A6007EE121 /* NSObject+HLSExtensions.m */; };
+		6F159ACC15A554250020AFAC /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65F14BA04A6007EE121 /* NSString+HLSExtensions.m */; };
+		6F159ACD15A554250020AFAC /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66114BA04A6007EE121 /* NSTimeZone+HLSExtensions.m */; };
+		6F159ACE15A554250020AFAC /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66314BA04A6007EE121 /* UIColor+HLSExtensions.m */; };
+		6F159ACF15A554250020AFAC /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66514BA04A6007EE121 /* UIControl+HLSExclusiveTouch.m */; };
+		6F159AD015A554250020AFAC /* UIImage+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66714BA04A6007EE121 /* UIImage+HLSExtensions.m */; };
+		6F159AD115A554250020AFAC /* HLSManagedTextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66B14BA04A6007EE121 /* HLSManagedTextFieldValidator.m */; };
+		6F159AD215A554250020AFAC /* HLSModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66D14BA04A6007EE121 /* HLSModelManager.m */; };
+		6F159AD315A554250020AFAC /* NSManagedObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66F14BA04A6007EE121 /* NSManagedObject+HLSExtensions.m */; };
+		6F159AD415A554250020AFAC /* NSManagedObject+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE67114BA04A6007EE121 /* NSManagedObject+HLSValidation.m */; };
+		6F159AD515A554250020AFAC /* HLSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE67414BA04A6007EE121 /* HLSLogger.m */; };
+		6F159AD615A554250020AFAC /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE67814BA04A6007EE121 /* HLSTask.m */; };
+		6F159AD715A554250020AFAC /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE67B14BA04A6007EE121 /* HLSTaskGroup.m */; };
+		6F159AD815A554250020AFAC /* HLSTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE67E14BA04A6007EE121 /* HLSTaskManager.m */; };
+		6F159AD915A554250020AFAC /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68114BA04A6007EE121 /* HLSTaskOperation.m */; };
+		6F159ADA15A554250020AFAC /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68414BA04A6007EE121 /* HLSActionSheet.m */; };
+		6F159ADB15A554250020AFAC /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68614BA04A6007EE121 /* HLSCursor.m */; };
+		6F159ADC15A554250020AFAC /* HLSSlideshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68814BA04A6007EE121 /* HLSSlideshow.m */; };
+		6F159ADD15A554250020AFAC /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68A14BA04A6007EE121 /* HLSNibView.m */; };
+		6F159ADE15A554250020AFAC /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */; };
+		6F159ADF15A554250020AFAC /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */; };
+		6F159AE015A554250020AFAC /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69114BA04A6007EE121 /* HLSTextField.m */; };
+		6F159AE115A554250020AFAC /* HLSTextFieldInternalDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69314BA04A6007EE121 /* HLSTextFieldInternalDelegate.m */; };
+		6F159AE215A554250020AFAC /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */; };
+		6F159AE315A554250020AFAC /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */; };
+		6F159AE415A554250020AFAC /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */; };
+		6F159AE515A554250020AFAC /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */; };
+		6F159AE615A554250020AFAC /* UITextField+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */; };
+		6F159AE715A554250020AFAC /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69F14BA04A6007EE121 /* UIView+HLSExtensions.m */; };
+		6F159AE815A554250020AFAC /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */; };
+		6F159AE915A554250020AFAC /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */; };
+		6F159AEA15A554250020AFAC /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A714BA04A6007EE121 /* HLSStackController.m */; };
+		6F159AEB15A554250020AFAC /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */; };
+		6F159AEC15A554250020AFAC /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AD14BA04A6007EE121 /* HLSTransitionStyle.m */; };
+		6F159AED15A554250020AFAC /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AF14BA04A6007EE121 /* HLSViewController.m */; };
+		6F159AEE15A554250020AFAC /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B114BA04A6007EE121 /* HLSWebViewController.m */; };
+		6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */; };
+		6F159AF015A554250020AFAC /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */; };
+		6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */; };
+		6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */; };
+		6F159AF315A554250020AFAC /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F714BA04C8007EE121 /* SingleViewAnimationDemoViewController.m */; };
+		6F159AF415A554250020AFAC /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7FC14BA04C8007EE121 /* ContainerCustomizationViewController.m */; };
+		6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
+		6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80514BA04C8007EE121 /* HeavyViewController.m */; };
+		6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80914BA04C8007EE121 /* LandscapeOnlyViewController.m */; };
+		6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80D14BA04C8007EE121 /* LifeCycleTestViewController.m */; };
+		6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */; };
+		6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */; };
+		6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */; };
+		6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82114BA04C8007EE121 /* StretchableViewController.m */; };
+		6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82514BA04C8007EE121 /* TransparentViewController.m */; };
+		6F159AFE15A554250020AFAC /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82A14BA04C8007EE121 /* ParallelProcessingDemoViewController.m */; };
+		6F159AFF15A554250020AFAC /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82D14BA04C8007EE121 /* SleepTask.m */; };
+		6F159B0015A554250020AFAC /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82F14BA04C8007EE121 /* SleepTaskOperation.m */; };
+		6F159B0115A554250020AFAC /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE83314BA04C8007EE121 /* ActionSheetDemoViewController.m */; };
+		6F159B0215A554250020AFAC /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE83714BA04C8007EE121 /* CursorCustomPointerView.m */; };
+		6F159B0315A554250020AFAC /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE83A14BA04C8007EE121 /* CursorDemoViewController.m */; };
+		6F159B0415A554250020AFAC /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE83D14BA04C8007EE121 /* CursorFolderView.m */; };
+		6F159B0515A554250020AFAC /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84014BA04C8007EE121 /* CursorPointerInfoViewController.m */; };
+		6F159B0615A554250020AFAC /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84314BA04C8007EE121 /* CursorSelectedFolderView.m */; };
+		6F159B0715A554250020AFAC /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84C14BA04C8007EE121 /* FooterView.m */; };
+		6F159B0815A554250020AFAC /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE84F14BA04C8007EE121 /* HeaderView.m */; };
+		6F159B0915A554250020AFAC /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85214BA04C8007EE121 /* ProgrammaticTableViewCell.m */; };
+		6F159B0A15A554250020AFAC /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85414BA04C8007EE121 /* TableViewCellsDemoViewController.m */; };
+		6F159B0B15A554250020AFAC /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85614BA04C9007EE121 /* XibTableViewCell.m */; };
+		6F159B0C15A554250020AFAC /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */; };
+		6F159B0D15A554250020AFAC /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */; };
+		6F159B0E15A554250020AFAC /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86414BA04C9007EE121 /* RootStackDemoViewController.m */; };
+		6F159B0F15A554250020AFAC /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86814BA04C9007EE121 /* StackDemoViewController.m */; };
+		6F159B1015A554250020AFAC /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86C14BA04C9007EE121 /* DeviceInfo.m */; };
+		6F159B1115A554250020AFAC /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86E14BA04C9007EE121 /* TableSearchDisplayDemoViewController.m */; };
+		6F159B1215A554250020AFAC /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE87214BA04C9007EE121 /* WizardAddressPageViewController.m */; };
+		6F159B1315A554250020AFAC /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE87514BA04C9007EE121 /* WizardDemoViewController.m */; };
+		6F159B1415A554250020AFAC /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE87814BA04C9007EE121 /* WizardIdentityPageViewController.m */; };
+		6F159B1515A554250020AFAC /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE87C14BA04C9007EE121 /* DemosListViewController.m */; };
+		6F159B1615A554250020AFAC /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE87F14BA04C9007EE121 /* DemoErrors.m */; };
+		6F159B1715A554250020AFAC /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
+		6F159B1815A554250020AFAC /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
+		6F159B1915A554250020AFAC /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6F159B1A15A554250020AFAC /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
+		6F159B1B15A554250020AFAC /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
+		6F159B1C15A554250020AFAC /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
+		6F159B1D15A554250020AFAC /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
+		6F159B1E15A554250020AFAC /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */; };
+		6F159B1F15A554250020AFAC /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */; };
+		6F159B2015A554250020AFAC /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
+		6F159B2115A554250020AFAC /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F159B2215A554250020AFAC /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */; };
+		6F159B2315A554250020AFAC /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; };
+		6F159B2415A554250020AFAC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
+		6F159B2515A554250020AFAC /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
+		6F159B2615A554250020AFAC /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
+		6F159B2715A554250020AFAC /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
+		6F159B2815A554250020AFAC /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
+		6F159B2915A554250020AFAC /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
+		6F159B2A15A554250020AFAC /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F000116156BD17F0055CED7 /* CoconutKitDemoData.xcdatamodeld */; };
+		6F159B2B15A554250020AFAC /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
+		6F159B2C15A554250020AFAC /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
+		6F159B2D15A554250020AFAC /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
+		6F159B2E15A554250020AFAC /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149415790DA8009FCC78 /* HLSLabel.m */; };
+		6F159B2F15A554250020AFAC /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149815790DCA009FCC78 /* LabelDemoViewController.m */; };
+		6F159B3015A554250020AFAC /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */; };
+		6F159B3115A554250020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */; };
+		6F159B3215A554250020AFAC /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
+		6F159B3315A554250020AFAC /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
+		6F159B3415A554250020AFAC /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */; };
+		6F159B3515A554250020AFAC /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F159B3615A554250020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
+		6F159B3715A554250020AFAC /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
+		6F159B3815A554250020AFAC /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFE15A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m */; };
+		6F159B3915A554250020AFAC /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6F159B3A15A554250020AFAC /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */; };
+		6F159B3B15A554250020AFAC /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */; };
+		6F159B3C15A554250020AFAC /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */; };
+		6F159B3E15A554250020AFAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
+		6F159B3F15A554250020AFAC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
+		6F159B4015A554250020AFAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		6F159B4115A554250020AFAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		6F159B4215A554250020AFAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F159B4315A554250020AFAC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
 		6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
@@ -237,6 +449,13 @@
 			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
 			remoteInfo = "CoconutKit-resources";
 		};
+		6F159A6A15A554250020AFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
+			remoteInfo = "CoconutKit-resources";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -276,6 +495,7 @@
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
 		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
+		6F159B4715A554250020AFAC /* CoconutKit-dev-ios4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev-ios4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
 		6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
@@ -297,7 +517,7 @@
 		6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064714BC7D500026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
+		6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
 		6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
 		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
@@ -620,6 +840,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6F159B3D15A554250020AFAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F159B3E15A554250020AFAC /* QuartzCore.framework in Frameworks */,
+				6F159B3F15A554250020AFAC /* CoreData.framework in Frameworks */,
+				6F159B4015A554250020AFAC /* Foundation.framework in Frameworks */,
+				6F159B4115A554250020AFAC /* UIKit.framework in Frameworks */,
+				6F159B4215A554250020AFAC /* CoreGraphics.framework in Frameworks */,
+				6F159B4315A554250020AFAC /* MessageUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -627,6 +860,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */,
+				6F159B4715A554250020AFAC /* CoconutKit-dev-ios4.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1559,6 +1793,25 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6F159A6815A554250020AFAC /* CoconutKit-dev-ios4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F159B4415A554250020AFAC /* Build configuration list for PBXNativeTarget "CoconutKit-dev-ios4" */;
+			buildPhases = (
+				6F159A6B15A554250020AFAC /* Resources */,
+				6F159AB315A554250020AFAC /* ShellScript */,
+				6F159AB415A554250020AFAC /* Sources */,
+				6F159B3D15A554250020AFAC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F159A6915A554250020AFAC /* PBXTargetDependency */,
+			);
+			name = "CoconutKit-dev-ios4";
+			productName = "CoconutKit-dev";
+			productReference = 6F159B4715A554250020AFAC /* CoconutKit-dev-ios4.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1596,6 +1849,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CoconutKit-dev */,
+				6F159A6815A554250020AFAC /* CoconutKit-dev-ios4 */,
 			);
 		};
 /* End PBXProject section */
@@ -1689,9 +1943,99 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6F159A6B15A554250020AFAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */,
+				6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */,
+				6F159A6E15A554250020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */,
+				6F159A6F15A554250020AFAC /* ContainerCustomizationViewController.xib in Resources */,
+				6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */,
+				6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */,
+				6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */,
+				6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */,
+				6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */,
+				6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */,
+				6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
+				6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
+				6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */,
+				6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */,
+				6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */,
+				6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */,
+				6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */,
+				6F159A7D15A554250020AFAC /* TransparentViewController.xib in Resources */,
+				6F159A7E15A554250020AFAC /* ParallelProcessingDemoViewController.xib in Resources */,
+				6F159A7F15A554250020AFAC /* ActionSheetDemoViewController.xib in Resources */,
+				6F159A8015A554250020AFAC /* CursorCustomPointerView.xib in Resources */,
+				6F159A8115A554250020AFAC /* CursorDemoViewController.xib in Resources */,
+				6F159A8215A554250020AFAC /* CursorFolderView.xib in Resources */,
+				6F159A8315A554250020AFAC /* CursorPointerInfoViewController.xib in Resources */,
+				6F159A8415A554250020AFAC /* CursorSelectedFolderView.xib in Resources */,
+				6F159A8515A554250020AFAC /* FooterView.xib in Resources */,
+				6F159A8615A554250020AFAC /* HeaderView.xib in Resources */,
+				6F159A8715A554250020AFAC /* XibTableViewCell.xib in Resources */,
+				6F159A8815A554250020AFAC /* TextFieldsDemoViewController.xib in Resources */,
+				6F159A8915A554250020AFAC /* PlaceholderDemoViewController.xib in Resources */,
+				6F159A8A15A554250020AFAC /* RootStackDemoViewController.xib in Resources */,
+				6F159A8B15A554250020AFAC /* StackDemoViewController.xib in Resources */,
+				6F159A8C15A554250020AFAC /* TableSearchDisplayDemoViewController.xib in Resources */,
+				6F159A8D15A554250020AFAC /* WizardAddressPageViewController.xib in Resources */,
+				6F159A8E15A554250020AFAC /* WizardDemoViewController.xib in Resources */,
+				6F159A8F15A554250020AFAC /* WizardIdentityPageViewController.xib in Resources */,
+				6F159A9015A554250020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F159A9115A554250020AFAC /* WebViewDemoViewController.xib in Resources */,
+				6F159A9215A554250020AFAC /* SkinningDemoViewController.xib in Resources */,
+				6F159A9315A554250020AFAC /* ParallaxScrollingDemoViewController.xib in Resources */,
+				6F159A9415A554250020AFAC /* SlideshowDemoViewController.xib in Resources */,
+				6F159A9515A554250020AFAC /* CoconutKit-resources.bundle in Resources */,
+				6F159A9615A554250020AFAC /* DemoTable.strings in Resources */,
+				6F159A9715A554250020AFAC /* Localizable.strings in Resources */,
+				6F159A9815A554250020AFAC /* DemoTable.strings in Resources */,
+				6F159A9915A554250020AFAC /* Localizable.strings in Resources */,
+				6F159A9A15A554250020AFAC /* ProximaNova-Bold.otf in Resources */,
+				6F159A9B15A554250020AFAC /* ProximaNova-Regular.otf in Resources */,
+				6F159A9C15A554250020AFAC /* sample_text.html in Resources */,
+				6F159A9D15A554250020AFAC /* bkgr_bar.png in Resources */,
+				6F159A9E15A554250020AFAC /* cell_bkgr_brown_large.png in Resources */,
+				6F159A9F15A554250020AFAC /* cell_bkgr_brown_large_selected.png in Resources */,
+				6F159AA015A554250020AFAC /* img_localized.png in Resources */,
+				6F159AA115A554250020AFAC /* icn_bookmark.png in Resources */,
+				6F159AA215A554250020AFAC /* icn_folder.png in Resources */,
+				6F159AA315A554250020AFAC /* img_apple1.jpg in Resources */,
+				6F159AA415A554250020AFAC /* img_apple2.jpg in Resources */,
+				6F159AA515A554250020AFAC /* img_apple3.jpg in Resources */,
+				6F159AA615A554250020AFAC /* img_apple4.jpg in Resources */,
+				6F159AA715A554250020AFAC /* img_coconut1.jpg in Resources */,
+				6F159AA815A554250020AFAC /* img_coconut2.jpg in Resources */,
+				6F159AA915A554250020AFAC /* img_coconut3.jpg in Resources */,
+				6F159AAA15A554250020AFAC /* img_coconut4.jpg in Resources */,
+				6F159AAB15A554250020AFAC /* parallax_demo_grass_layer.png in Resources */,
+				6F159AAC15A554250020AFAC /* parallax_demo_mountains_layer.png in Resources */,
+				6F159AAD15A554250020AFAC /* parallax_demo_sky_layer.png in Resources */,
+				6F159AAE15A554250020AFAC /* parallax_demo_trees_layer.png in Resources */,
+				6F159AAF15A554250020AFAC /* skyscraper.jpg in Resources */,
+				6F159AB015A554250020AFAC /* LabelDemoViewController.xib in Resources */,
+				6F159AB115A554250020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6F159AB315A554250020AFAC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${PROJECT_DIR}\"/../CoconutKit-demo/generate_model.sh";
+		};
 		6FCA9D231451951400004E12 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1851,6 +2195,149 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6F159AB415A554250020AFAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F159AB515A554250020AFAC /* main.m in Sources */,
+				6F159AB615A554250020AFAC /* HLSAnimation.m in Sources */,
+				6F159AB715A554250020AFAC /* HLSAnimationStep.m in Sources */,
+				6F159AB815A554250020AFAC /* HLSViewAnimationStep.m in Sources */,
+				6F159AB915A554250020AFAC /* HLSAssert.m in Sources */,
+				6F159ABA15A554250020AFAC /* HLSConverters.m in Sources */,
+				6F159ABB15A554250020AFAC /* HLSError.m in Sources */,
+				6F159ABC15A554250020AFAC /* HLSFloat.m in Sources */,
+				6F159ABD15A554250020AFAC /* HLSKeyboardInformation.m in Sources */,
+				6F159ABE15A554250020AFAC /* HLSNotifications.m in Sources */,
+				6F159ABF15A554250020AFAC /* HLSRuntime.m in Sources */,
+				6F159AC015A554250020AFAC /* HLSUserInterfaceLock.m in Sources */,
+				6F159AC115A554250020AFAC /* HLSValidators.m in Sources */,
+				6F159AC215A554250020AFAC /* NSArray+HLSExtensions.m in Sources */,
+				6F159AC315A554250020AFAC /* NSBundle+HLSDynamicLocalization.m in Sources */,
+				6F159AC415A554250020AFAC /* NSBundle+HLSExtensions.m in Sources */,
+				6F159AC515A554250020AFAC /* NSCalendar+HLSExtensions.m in Sources */,
+				6F159AC615A554250020AFAC /* NSData+HLSExtensions.m in Sources */,
+				6F159AC715A554250020AFAC /* NSDate+HLSExtensions.m in Sources */,
+				6F159AC815A554250020AFAC /* NSDateFormatter+HLSExtensions.m in Sources */,
+				6F159AC915A554250020AFAC /* NSDictionary+HLSExtensions.m in Sources */,
+				6F159ACA15A554250020AFAC /* NSError+HLSExtensions.m in Sources */,
+				6F159ACB15A554250020AFAC /* NSObject+HLSExtensions.m in Sources */,
+				6F159ACC15A554250020AFAC /* NSString+HLSExtensions.m in Sources */,
+				6F159ACD15A554250020AFAC /* NSTimeZone+HLSExtensions.m in Sources */,
+				6F159ACE15A554250020AFAC /* UIColor+HLSExtensions.m in Sources */,
+				6F159ACF15A554250020AFAC /* UIControl+HLSExclusiveTouch.m in Sources */,
+				6F159AD015A554250020AFAC /* UIImage+HLSExtensions.m in Sources */,
+				6F159AD115A554250020AFAC /* HLSManagedTextFieldValidator.m in Sources */,
+				6F159AD215A554250020AFAC /* HLSModelManager.m in Sources */,
+				6F159AD315A554250020AFAC /* NSManagedObject+HLSExtensions.m in Sources */,
+				6F159AD415A554250020AFAC /* NSManagedObject+HLSValidation.m in Sources */,
+				6F159AD515A554250020AFAC /* HLSLogger.m in Sources */,
+				6F159AD615A554250020AFAC /* HLSTask.m in Sources */,
+				6F159AD715A554250020AFAC /* HLSTaskGroup.m in Sources */,
+				6F159AD815A554250020AFAC /* HLSTaskManager.m in Sources */,
+				6F159AD915A554250020AFAC /* HLSTaskOperation.m in Sources */,
+				6F159ADA15A554250020AFAC /* HLSActionSheet.m in Sources */,
+				6F159ADB15A554250020AFAC /* HLSCursor.m in Sources */,
+				6F159ADC15A554250020AFAC /* HLSSlideshow.m in Sources */,
+				6F159ADD15A554250020AFAC /* HLSNibView.m in Sources */,
+				6F159ADE15A554250020AFAC /* HLSSubtitleTableViewCell.m in Sources */,
+				6F159ADF15A554250020AFAC /* HLSTableViewCell.m in Sources */,
+				6F159AE015A554250020AFAC /* HLSTextField.m in Sources */,
+				6F159AE115A554250020AFAC /* HLSTextFieldInternalDelegate.m in Sources */,
+				6F159AE215A554250020AFAC /* HLSTextFieldTouchDetector.m in Sources */,
+				6F159AE315A554250020AFAC /* HLSValue1TableViewCell.m in Sources */,
+				6F159AE415A554250020AFAC /* HLSValue2TableViewCell.m in Sources */,
+				6F159AE515A554250020AFAC /* UINavigationBar+HLSExtensions.m in Sources */,
+				6F159AE615A554250020AFAC /* UITextField+HLSValidation.m in Sources */,
+				6F159AE715A554250020AFAC /* UIView+HLSExtensions.m in Sources */,
+				6F159AE815A554250020AFAC /* HLSContainerContent.m in Sources */,
+				6F159AE915A554250020AFAC /* HLSPlaceholderViewController.m in Sources */,
+				6F159AEA15A554250020AFAC /* HLSStackController.m in Sources */,
+				6F159AEB15A554250020AFAC /* HLSTableSearchDisplayViewController.m in Sources */,
+				6F159AEC15A554250020AFAC /* HLSTransitionStyle.m in Sources */,
+				6F159AED15A554250020AFAC /* HLSViewController.m in Sources */,
+				6F159AEE15A554250020AFAC /* HLSWebViewController.m in Sources */,
+				6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */,
+				6F159AF015A554250020AFAC /* CoconutKit_demoAppDelegate.m in Sources */,
+				6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */,
+				6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */,
+				6F159AF315A554250020AFAC /* SingleViewAnimationDemoViewController.m in Sources */,
+				6F159AF415A554250020AFAC /* ContainerCustomizationViewController.m in Sources */,
+				6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */,
+				6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */,
+				6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */,
+				6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */,
+				6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */,
+				6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */,
+				6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */,
+				6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */,
+				6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */,
+				6F159AFE15A554250020AFAC /* ParallelProcessingDemoViewController.m in Sources */,
+				6F159AFF15A554250020AFAC /* SleepTask.m in Sources */,
+				6F159B0015A554250020AFAC /* SleepTaskOperation.m in Sources */,
+				6F159B0115A554250020AFAC /* ActionSheetDemoViewController.m in Sources */,
+				6F159B0215A554250020AFAC /* CursorCustomPointerView.m in Sources */,
+				6F159B0315A554250020AFAC /* CursorDemoViewController.m in Sources */,
+				6F159B0415A554250020AFAC /* CursorFolderView.m in Sources */,
+				6F159B0515A554250020AFAC /* CursorPointerInfoViewController.m in Sources */,
+				6F159B0615A554250020AFAC /* CursorSelectedFolderView.m in Sources */,
+				6F159B0715A554250020AFAC /* FooterView.m in Sources */,
+				6F159B0815A554250020AFAC /* HeaderView.m in Sources */,
+				6F159B0915A554250020AFAC /* ProgrammaticTableViewCell.m in Sources */,
+				6F159B0A15A554250020AFAC /* TableViewCellsDemoViewController.m in Sources */,
+				6F159B0B15A554250020AFAC /* XibTableViewCell.m in Sources */,
+				6F159B0C15A554250020AFAC /* TextFieldsDemoViewController.m in Sources */,
+				6F159B0D15A554250020AFAC /* PlaceholderDemoViewController.m in Sources */,
+				6F159B0E15A554250020AFAC /* RootStackDemoViewController.m in Sources */,
+				6F159B0F15A554250020AFAC /* StackDemoViewController.m in Sources */,
+				6F159B1015A554250020AFAC /* DeviceInfo.m in Sources */,
+				6F159B1115A554250020AFAC /* TableSearchDisplayDemoViewController.m in Sources */,
+				6F159B1215A554250020AFAC /* WizardAddressPageViewController.m in Sources */,
+				6F159B1315A554250020AFAC /* WizardDemoViewController.m in Sources */,
+				6F159B1415A554250020AFAC /* WizardIdentityPageViewController.m in Sources */,
+				6F159B1515A554250020AFAC /* DemosListViewController.m in Sources */,
+				6F159B1615A554250020AFAC /* DemoErrors.m in Sources */,
+				6F159B1715A554250020AFAC /* _Person.m in Sources */,
+				6F159B1815A554250020AFAC /* Person.m in Sources */,
+				6F159B1915A554250020AFAC /* UILabel+HLSDynamicLocalization.m in Sources */,
+				6F159B1A15A554250020AFAC /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F159B1B15A554250020AFAC /* UIToolbar+HLSExtensions.m in Sources */,
+				6F159B1C15A554250020AFAC /* UIWebView+HLSExtensions.m in Sources */,
+				6F159B1D15A554250020AFAC /* WebViewDemoViewController.m in Sources */,
+				6F159B1E15A554250020AFAC /* SkinningDemoViewController.m in Sources */,
+				6F159B1F15A554250020AFAC /* HLSLabelLocalizationInfo.m in Sources */,
+				6F159B2015A554250020AFAC /* UIBarButtonItem+HLSActionSheet.m in Sources */,
+				6F159B2115A554250020AFAC /* UIActionSheet+HLSExtensions.m in Sources */,
+				6F159B2215A554250020AFAC /* UINavigationController+HLSActionSheet.m in Sources */,
+				6F159B2315A554250020AFAC /* UIScrollView+HLSExtensions.m in Sources */,
+				6F159B2415A554250020AFAC /* ParallaxScrollingDemoViewController.m in Sources */,
+				6F159B2515A554250020AFAC /* UIViewController+HLSExtensions.m in Sources */,
+				6F159B2615A554250020AFAC /* SlideshowDemoViewController.m in Sources */,
+				6F159B2715A554250020AFAC /* HLSZeroingWeakRef.m in Sources */,
+				6F159B2815A554250020AFAC /* UITextField+HLSExtensions.m in Sources */,
+				6F159B2915A554250020AFAC /* UITextView+HLSExtensions.m in Sources */,
+				6F159B2A15A554250020AFAC /* CoconutKitDemoData.xcdatamodeld in Sources */,
+				6F159B2B15A554250020AFAC /* NSURLRequest+HLSExtensions.m in Sources */,
+				6F159B2C15A554250020AFAC /* NSMutableArray+HLSExtensions.m in Sources */,
+				6F159B2D15A554250020AFAC /* NSSet+HLSExtensions.m in Sources */,
+				6F159B2E15A554250020AFAC /* HLSLabel.m in Sources */,
+				6F159B2F15A554250020AFAC /* LabelDemoViewController.m in Sources */,
+				6F159B3015A554250020AFAC /* HLSExpandingSearchBar.m in Sources */,
+				6F159B3115A554250020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */,
+				6F159B3215A554250020AFAC /* HLSVector.m in Sources */,
+				6F159B3315A554250020AFAC /* HLSStackPushSegue.m in Sources */,
+				6F159B3415A554250020AFAC /* HLSStackPopSegue.m in Sources */,
+				6F159B3515A554250020AFAC /* HLSPlaceholderInsetSegue.m in Sources */,
+				6F159B3615A554250020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */,
+				6F159B3715A554250020AFAC /* SegueLeftPanelDemoViewController.m in Sources */,
+				6F159B3815A554250020AFAC /* SeguePlaceholderInsetDemoViewController.m in Sources */,
+				6F159B3915A554250020AFAC /* SegueSecondRightPanelDemoViewController.m in Sources */,
+				6F159B3A15A554250020AFAC /* SegueStackOtherDemoViewController.m in Sources */,
+				6F159B3B15A554250020AFAC /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
+				6F159B3C15A554250020AFAC /* HLSApplicationPreloader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1858,6 +2345,11 @@
 			isa = PBXTargetDependency;
 			name = "CoconutKit-resources";
 			targetProxy = 6F000079156BCDDB0055CED7 /* PBXContainerItemProxy */;
+		};
+		6F159A6915A554250020AFAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CoconutKit-resources";
+			targetProxy = 6F159A6A15A554250020AFAC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1917,7 +2409,6 @@
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
 			};
@@ -1932,8 +2423,39 @@
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "CoconutKit-dev";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F159B4515A554250020AFAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DHLS_LOGGER";
+				PRODUCT_NAME = "CoconutKit-dev-ios4";
+			};
+			name = Debug;
+		};
+		6F159B4615A554250020AFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "CoconutKit-dev-ios4";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1945,10 +2467,10 @@
 					armv6,
 					armv7,
 				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1960,7 +2482,8 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1973,10 +2496,10 @@
 					armv6,
 					armv7,
 				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1988,8 +2511,9 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -2003,6 +2527,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F159B4415A554250020AFAC /* Build configuration list for PBXNativeTarget "CoconutKit-dev-ios4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F159B4515A554250020AFAC /* Debug */,
+				6F159B4615A554250020AFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

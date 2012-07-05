@@ -50,6 +50,7 @@
 "Enter a search criterium"="Entrez un critère de recherche";
 "Error"="Erreur";
 "Expand"="Etirer";
+"Faster animation"="Animation rapide";
 "First name"="Prénom";
 "Fixed size"="Taille fixe";
 "Font"="Police";
@@ -117,6 +118,9 @@
 "Search bar"="Champ de recherche";
 "Search books"="Rechercher un livre";
 "Section end"="Fin de section";
+"Segues"="Segues";
+"Segues (not available in bundle)"="Segues (pas disponible dans le bundle)";
+"Segues (not available for iOS 4)"="Segues (pas disponible pour iOS 4)";
 "Single view animation"="Animation d'une seule vue";
 "Skinning"="Skinning";
 "Slideshow"="Slideshow";

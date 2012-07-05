@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "CoconutKit-dev.app"
-               BlueprintName = "CoconutKit-dev"
-               ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+               BuildableName = "CoconutKit-demo.app"
+               BlueprintName = "CoconutKit-demo"
+               ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            BuildableName = "CoconutKit-demo.app"
+            BlueprintName = "CoconutKit-demo"
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,15 +52,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            BuildableName = "CoconutKit-demo.app"
+            BlueprintName = "CoconutKit-demo"
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "NSZombieEnabled"
-            value = "YES"
+            key = "CoconutKitDemoMode"
+            value = "RootStack"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            BuildableName = "CoconutKit-demo.app"
+            BlueprintName = "CoconutKit-demo"
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

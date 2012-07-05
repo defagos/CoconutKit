@@ -17,7 +17,7 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 * View controllers for web browsing and easier table view search management
 * Multi-threaded task management, including task grouping, cancelation, progress status, task dependencies and remaining time estimation
 * Classes for creating complex view animations made of several sub-animations
-* New controls (text field moving automatically with the keyboard, new kind of segmented control, Ken Burns slideshow)
+* New controls (text field moving automatically with the keyboard, new kind of segmented control, Ken Burns slideshow, label with vertical alignment)
 * Classes for common UI tasks (keyboard management, interface locking)
 * Classes for single-line table view cell and view instantiations
 * Methods for skinning some built-in controls prior to iOS 5 appearance API
@@ -30,13 +30,17 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms. [A companion repository](https://github.com/defagos/CoconutKit-binaries) exists for easy installation using CocoaPods, but you do not need to check it out directly.
 
+### How can I test CoconutKit components?
+
+Check out the CoconutKit source code repository by visiting [the official project github page](https://github.com/defagos/CoconutKit), open the workspace and either run the `CoconutKit-demo` or the `CoconutKit-dev` targets. The result of running those targets is the same, the only difference is that `CoconutKit-demo` compiles and builds the CoconutKit library source code before using the resulting binaries, whereas `CoconutKit-dev` includes and compiles all libary sources as part of the project itself.
+
 ### Why should I use CoconutKit?
 
 When designing components, I strongly emphasize on clean and documented interfaces, as well as on code quality. My goal is to create components that are easy to use, reliable, and which do what they claim they do, without nasty surprises. You should never have to look at a component implementation to know how it works, this should be obvious just by looking at its interface. I also strive to avoid components that leak or crash. If those are qualities you love to find in libraries, then you should start using CoconutKit now!
 
 ### How should I add CoconutKit to my project?
 
-You can add CoconutKit to your project in several different ways.
+You can add CoconutKit to your project in several different ways:
 
 #### Adding binaries using CocoaPods
 
@@ -50,15 +54,20 @@ If the specification file is not available from the official CocoaPods specifica
     platform :ios
     dependency 'CoconutKit', :podspec => '/absolute/path/to/CoconutKit/Tools/CocoaPods/CoconutKit.podspec'
     
-The specification file has successfully been tested with the latest stable CocoaPods release (0.5.1).
+The specification file has successfully been tested with CocoaPods 0.5.1.
 
 #### Adding binaries manually
 
-You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project ("Create groups for any added folders" must be checked) and link your project against the following system frameworks:
+You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project (_Create groups for any added folders_ must be checked) and link your project against the following system frameworks:
 
-* CoreData.framework
-* MessageUI.framework
-* QuartzCore.framework
+* `CoreData.framework`
+* `MessageUI.framework`
+* `QuartzCore.framework`
+
+If your project targets iOS 4 as well as iOS 5 and above, you might encounter _symbol not found_ issues at runtime. When this happens:
+
+* If the symbol belongs to UIKit, then weakly link your target with `UIKit.framework` (click on your target, select _Build Phases_, and under _Link Binary With Libraries_ set `UIKit.framework` as optional)
+* If the symbol begins with `_objc`, then link your target with the ARC Lite libraries by adding the `-fobjc-arc` flag to your target `Other Linker Flags` settting
 
 #### Adding CoconutKit in source form
 
@@ -76,13 +85,32 @@ Learning how to use CoconutKit components always starts with header documentatio
 
 Good documentation is critical. If you think some documentation is missing, unclear or incorrect, please file a ticket.
 
-### Known issues
-
-When running CoconutKit-demo or CoconutKit-dev, you might get a compilation error saying that storyboards are not available for iOS 4. This is because the demo is  set to run on iOS 4 (for which storyboards are not available) to avoid having a duplicate project or target just for this iOS version. When you encounter this error, perform a build without running. The compilation should happen without errors. Then run the project. If this does not work, clean the project first.
-
 ### Credits
 
 If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
+
+### The CoconutKit workspace
+
+The workspace file contains everything to build CoconutKit binaries, demos and unit tests.
+
+Several projects are available:
+
+* `CoconutKit`: The project used to build the CoconutKit static library
+* `CoconutKit-resources`: The project creating the `.bundle` containing all resources needed by CoconutKit
+* `CoconutKit-dev`: The main project used when working on CoconutKit. This project is an almost empty shell referencing files from both the `CoconutKit` and `CoconutKit-demo` projects
+* `CoconutKit-demo`: The project used to test CoconutKit binaries against linker issues. When building the demo project, the CoconutKit `.staticframework` is first built and saved into the `Binaries` directory
+* `CoconutKit-test`: The project running unit tests. This project references files from the `CoconutKit` project
+
+Several schemes are available:
+
+* `CoconutKit`: Builds the CoconutKit static library
+* `CoconutKit-staticframework`: Builds the CoconutKit `.staticframework` into the `Binaries` directory, both for the Release and Debug configurations
+* `CoconutKit-resources`: Builds the CoconutKit resource bundle
+* `CoconutKit-(dev|demo)`: The standard CoconutKit component demo. Runs on iOS 5 and above
+* `CoconutKit-(dev|demo)-RootStack`: A demo where CoconutKit stack controller is the root view controller of an application. Runs on iOS 5 and above
+* `CoconutKit-(dev|demo)-RootStoryboard`: A demo where a storyboard defines the whole application view controller hierarchy (itself managed using CoconutKit view controller containers). Runs on iOS 5 and above
+* `CoconutKit-(dev|demo)-ios4`: The standard CoconutKit component demo, but also running on iOS 4. Features available on iOS 5 have been removed.
+* `CoconutKit-test`: CoconutKit unit tests
 
 ### Frequently asked questions
 
@@ -90,9 +118,9 @@ If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely 
 
 CoconutKit should be compatible with iOS 4 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover it is not the case.
 
-#### With which versions of Xcode is CoconutKit compatible?
+#### With which versions of Xcode and the iOS SDK is CoconutKit compatible?
 
-CoconutKit should be used with the latest versions of Xcode and of the iOS SDK. Binaries themselves have been compiled using GCC so that projects built using GCC or LLVM can link against it. As LLVM is adopted I will start building binaries using LLVM.
+CoconutKit should be used with the latest versions of Xcode and of the iOS SDK. Binaries themselves have been compiled using LLVM so that only projects built with LLVM will be able to successfully link against it (linking a project built with LLVM GCC against a library built with LLVM may result in crashes at runtime).
 
 #### Can I use CoconutKit with ARC projects?
 
@@ -108,7 +136,7 @@ My company, [hortis](http://www.hortis.ch/), has a long tradition of open source
 
 #### Does CoconutKit use ARC?
 
-No, CoconutKit currently does not use ARC. This will maybe change in the future as ARC is adopted.
+No, CoconutKit currently does not use ARC itself. This will maybe change in a not-so-near future as ARC is adopted.
 
 #### What does the HLS class prefix mean?
 
@@ -127,33 +155,15 @@ There are some requirements when contributing, though:
 * Do not use ARC
 * Use of private APIs is strictly forbidden
 * Development and demo projects are also included. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
-* Unit tests require version 4.32 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/4.32/GHUnitIOS.framework`. More recent versions either exhibit linking issues on the device or require LLVM and thus cannot be used currently.
+* Unit tests require version 0.5.2 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/0.5.2/GHUnitIOS.framework`
 
 #### Writing code
 
-After checking out the source code repository, open the Xcode 4 workspace. Five projects have been created:
+Use the `CoconutKit-dev` project to easily write and test your code. When you are done with the `CoconutKit-dev` project, update the `CoconutKit` and `CoconutKit-demo` projects to mirror the changes you made to the source tree. New resources must be added to the `CoconutKit-resources` project. 
 
-* CoconutKit: The project used to build the CoconutKit static library
-* CoconutKit-resources: The project building the `.bundle` containing all resources needed by CoconutKit
-* CoconutKit-demo: The project used to test CoconutKit binaries against linker issues
-* CoconutKit-dev: The main project used when working on CoconutKit. This project is an almost empty shell referencing files from both the CoconutKit and CoconutKit-demo projects
-* CoconutKit-test: The project used for writing unit tests. This project references files from the CoconutKit project
+Any new public header file must be added to the `CoconutKit-(dev|test)` `.pch` file, as well as to the `publicHeaders.txt` file located in the `CoconutKit-dev` directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
 
-Use the CoconutKit-dev project to easily write and test your code. When you are done with the CoconutKit-dev project, update the CoconutKit and CoconutKit-demo projects to mirror the changes you made to the source tree. Any new public header file must be added to the CoconutKit-dev `.pch` file, as well as to the `publicHeaders.txt` file located in the CoconutKit-dev directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
-
-For "non-interactive" components, you should consider adding some test cases to the CoconutKit-test project as well. Update it to mirror the changes made to the source and resource files of the CoconutKit project, and update the `.pch` to reference any new public header.
-
-#### Building binaries
-
-CoconutKit is meant to be built into a .staticframework package using the [make-fmwk command](https://github.com/defagos/make-fmwk). After having installed the command somewhere in your path, run it from the CoconutKit static library project directory, as follows:
-
-    make-fmwk.sh -o <output_directory> -u <version> Release
-    make-fmwk.sh -o <output_directory> -u <version> Debug
-    
-e.g.
-
-    make-fmwk.sh -o ~/MyBuilds -u 1.0 Release
-    make-fmwk.sh -o ~/MyBuilds -u 1.0 Debug
+For non-interactive components, you should consider adding some test cases to the `CoconutKit-test` project as well. Update it to mirror the changes made to the source and resource files of the `CoconutKit` project, and update the `.pch` to reference any new public header.
 
 ### Acknowledgements
 

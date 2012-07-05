@@ -59,7 +59,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 #pragma mark Validation wrapper injection
 
-+ (void)injectValidation
++ (void)enable
 {
     if (s_injectedManagedObjectValidation) {
         HLSLoggerInfo(@"Managed object validations already injected");

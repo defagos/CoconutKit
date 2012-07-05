@@ -96,10 +96,10 @@
 @interface NSManagedObject (HLSValidation)
 
 /**
- * Inject the validation extensions of NSManagedObject (disabled by default). You should not call this method
+ * Enable the validation extensions of NSManagedObject (disabled by default). You should not call this method
  * directly, use the HLSEnableNSManagedObjectValidation macro instead (see HLSOptionalFeatures.h)
  */
-+ (void)injectValidation;
++ (void)enable;
 
 /**
  * Check that a given value is valid for a specific field. The validation logic can be implemented in the 

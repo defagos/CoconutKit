@@ -26,7 +26,7 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
 
 #pragma mark Class methods
 
-+ (void)injectExclusiveTouch
++ (void)enable
 {
     static BOOL s_injected = NO;
     if (s_injected) {

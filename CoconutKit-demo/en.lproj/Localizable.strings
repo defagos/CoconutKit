@@ -50,6 +50,7 @@
 "Enter a search criterium"="Enter a search criterium";
 "Error"="Error";
 "Expand"="Expand";
+"Faster animation"="Faster animation";
 "First name"="First name";
 "Fixed size"="Fixed size";
 "Font"="Font";
@@ -118,6 +119,9 @@
 "Search bar"="Search bar";
 "Search books"="Search books";
 "Section end"="Section end";
+"Segues"="Segues";
+"Segues (not available in bundle)"="Segues (not available in bundle)";
+"Segues (not available for iOS 4)"="Segues (not available for iOS 4)";
 "Single view animation"="Single view animation";
 "Skinning"="Skinning";
 "Slideshow"="Slideshow";

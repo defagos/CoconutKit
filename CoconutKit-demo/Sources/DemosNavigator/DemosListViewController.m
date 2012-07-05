@@ -369,14 +369,24 @@ typedef enum {
                 }
                     
                 case ViewControllersDemoIndexSegue: {
-                    cell.textLabel.text = @"Segue (iOS 5)";
-                    if (NSClassFromString(@"UIStoryboard")) {
-                        cell.textLabel.textColor = [UIColor blackColor];
-                        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                    cell.textLabel.textColor = [UIColor grayColor];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
+                    if ([UIStoryboard class]) {
+                        @try {
+                            [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                            
+                            cell.textLabel.text = NSLocalizedString(@"Segues", @"Segues");
+                            cell.textLabel.textColor = [UIColor blackColor];
+                            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                        }
+                        @catch (NSException *exception) {
+                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", @"Segues (not available in bundle)");
+                        }
                     }
                     else {
-                        cell.textLabel.textColor = [UIColor grayColor];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", @"Segues (not available for iOS 4)");
                     }
                     break;
                 }
@@ -545,9 +555,13 @@ typedef enum {
                 }
                     
                 case ViewControllersDemoIndexSegue: {
-                    if (NSClassFromString(@"UIStoryboard")) {
-                        UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
-                        demoViewController = [segueStoryboard instantiateInitialViewController];
+                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
+                    if ([UIStoryboard class]) {
+                        @try {
+                            UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                            demoViewController = [segueStoryboard instantiateInitialViewController];
+                        }
+                        @catch (NSException *exception) {}                        
                     }
                     break;
                 }

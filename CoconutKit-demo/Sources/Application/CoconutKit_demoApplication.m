@@ -55,12 +55,18 @@
             self.rootViewController = stackController;
         }
         else if ([demoMode isEqualToString:@"RootStoryboard"]) {
-            if (NSClassFromString(@"UIStoryboard")) {
-                UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
-                self.rootViewController = [segueStoryboard instantiateInitialViewController];
+            // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
+            if ([UIStoryboard class]) {
+                @try {
+                    UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                    self.rootViewController = [segueStoryboard instantiateInitialViewController];
+                }
+                @catch (NSException *exception) {
+                    HLSLoggerError(@"No storyboard file available in application bundle");
+                }
             }
             else {
-                HLSLoggerError(@"This demo is only available starting with iOS 5");
+                HLSLoggerError(@"Storyboards are not available on iOS 4");
             }
         }
         else {
