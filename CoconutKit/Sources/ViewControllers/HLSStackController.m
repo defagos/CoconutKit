@@ -10,7 +10,6 @@
 
 #import "HLSAnimation.h"
 #import "HLSAssert.h"
-#import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "HLSStackPushSegue.h"
 #import "NSArray+HLSExtensions.h"
@@ -20,15 +19,13 @@ const NSUInteger kStackMinimalCapacity = 2;
 const NSUInteger kStackDefaultCapacity = 2;
 const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 
-@interface HLSStackController () <HLSAnimationDelegate>
+@interface HLSStackController ()
 
 @property (nonatomic, retain) NSMutableArray *containerContentStack;
 @property (nonatomic, assign) NSUInteger capacity;
 
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
-
-- (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent;
 
 - (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent;
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
@@ -286,11 +283,11 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSAnimation *animation = [HLSContainerContent rotationAnimationForContainerContentStack:self.containerContentStack 
-                                                                               containerView:self.view
-                                                                                withDuration:duration];
-    [animation playAnimated:YES];
+    [HLSContainerContent rotateContainerContentStack:self.containerContentStack
+                                       containerView:self.view 
+                                        withDuration:duration];
     
+    // TODO: Move in HLSContainerContent
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         UIViewController *viewController = containerContent.viewController;
         [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -301,6 +298,8 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
+    // TODO: Move in HLSContainerContent. Call order with super didRotate might be unreliable, but does not hurt
+    //       (no constraint)
     for (HLSContainerContent *containerContent in self.containerContentStack) {
         UIViewController *viewController = containerContent.viewController;
         [viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
@@ -371,13 +370,10 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
-        HLSAnimation *pushAnimation = [self animationForContainerContent:containerContent];
-        if ([self isViewVisible]) {
-            [pushAnimation playAnimated:YES];
-        }
-        else {
-            [pushAnimation playAnimated:NO];
-        }
+        [containerContent pushViewControllerAnimated:[self isViewVisible]
+                           intoContainerContentStack:self.containerContentStack 
+                                       containerView:self.view 
+                                            userInfo:nil];
     }
     else {
         // The top view controller must be the one that forwards its content (if forwarding enabled)
@@ -407,15 +403,12 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
                                          inContainerContentStack:self.containerContentStack];
         }
         
-        // Pop animation = reverse push animation
+        // Pop animation
         HLSContainerContent *topContainerContent = [self topContainerContent];
-        HLSAnimation *popAnimation = [[self animationForContainerContent:topContainerContent] reverseAnimation];
-        if ([self isViewVisible]) {
-            [popAnimation playAnimated:YES];
-        }
-        else {
-            [popAnimation playAnimated:NO];
-        }        
+        [topContainerContent popViewControllerAnimated:[self isViewVisible]
+                             fromContainerContentStack:self.containerContentStack 
+                                         containerView:self.view 
+                                              userInfo:nil];
     }
     // If the view is not loaded, we can unregister the popped view controller on the spot
     else {
@@ -443,19 +436,6 @@ const NSUInteger kStackUnlimitedCapacity = NSUIntegerMax;
     else {
         return nil;
     }
-}
-
-#pragma mark Animation
-
-- (HLSAnimation *)animationForContainerContent:(HLSContainerContent *)containerContent
-{
-    // Apply the same effect to all disappearing views; much better (we see all views below the added one as a single one). This is
-    // a lot better with push or fade animations
-    NSAssert([self.containerContentStack indexOfObject:containerContent] != NSNotFound, @"Content not found in the container");
-    HLSAnimation *animation = [containerContent animationWithContainerContentStack:self.containerContentStack containerView:self.view];
-    animation.tag = @"push_animation";
-    animation.delegate = self;
-    return animation;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation

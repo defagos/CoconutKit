@@ -70,6 +70,17 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 
+
+//********
+// TODO: See if any of these methods is still needed as is. Move
+- (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
+                                       containerView:(UIView *)containerView;
+
++ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
+                                              containerView:(UIView *)containerView
+                                               withDuration:(NSTimeInterval)duration;
+//********
+
 + (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
                                            yOffset:(CGFloat)yOffset
                          appearingContainerContent:(HLSContainerContent *)appearingContainerContent;

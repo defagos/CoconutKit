@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "HLSContainerContent.h"
 #import "HLSReloadable.h"
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
@@ -110,7 +111,7 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSAnimationDelegate, HLSReloadable> {
+@interface HLSPlaceholderViewController : HLSViewController <HLSContainerContentDelegate, HLSReloadable> {
 @private
     NSMutableArray *m_containerContents;                    // Wraps the view controllers added as insets
     NSMutableArray *m_oldContainerContents;                 // Retains the old inset view controllers wrappers when swapping with new ones

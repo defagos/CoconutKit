@@ -26,8 +26,6 @@
 - (HLSContainerContent *)containerContentAtIndex:(NSUInteger)index;
 - (HLSContainerContent *)oldContainerContentAtIndex:(NSUInteger)index;
 
-- (HLSAnimation *)createAnimationForIndex:(NSUInteger)index;
-
 - (UIViewController *)emptyViewController;
 
 @end
@@ -226,9 +224,7 @@
         UIView *placeholderView = [self.placeholderViews objectAtIndex:index];
         if ([containerContent addViewToContainerView:placeholderView 
                              inContainerContentStack:nil]) {
-            // Push non-animated
-            HLSAnimation *pushAnimation = [self createAnimationForIndex:index];
-            [pushAnimation playAnimated:NO];
+            [self animateAppearanceAtIndex:index animated:NO];
         }
         
         // Forward events to the inset view controller
@@ -431,19 +427,13 @@
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
-        HLSAnimation *addAnimation = [self createAnimationForIndex:index];
-        if ([self isViewVisible]) {
-            [addAnimation playAnimated:YES];
-        }
-        else {
-            [addAnimation playAnimated:NO];
-        }
+        [self animateAppearanceAtIndex:index animated:[self isViewVisible]];
     }        
 }
 
 #pragma mark Animation
 
-- (HLSAnimation *)createAnimationForIndex:(NSUInteger)index
+- (void)animateAppearanceAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     HLSContainerContent *containerContent = [self containerContentAtIndex:index];
     HLSContainerContent *oldContainerContent = [self oldContainerContentAtIndex:index];
@@ -455,12 +445,10 @@
     [containerContentStack addObject:containerContent];
     
     UIView *placeholderView = [self.placeholderViews objectAtIndex:index];
-    HLSAnimation *animation = [containerContent animationWithContainerContentStack:[NSArray arrayWithArray:containerContentStack]
-                                                                     containerView:placeholderView];
-    animation.tag = @"add_animation";
-    animation.delegate = self;
-    animation.userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:index] forKey:@"index"];
-    return animation;
+    [containerContent pushViewControllerAnimated:animated
+                       intoContainerContentStack:[NSArray arrayWithArray:containerContentStack] 
+                                   containerView:placeholderView
+                                        userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:index] forKey:@"index"]];
 }
 
 #pragma mark Creating an empty view controller for use when no inset is displayed

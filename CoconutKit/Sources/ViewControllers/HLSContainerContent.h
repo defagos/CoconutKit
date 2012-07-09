@@ -10,6 +10,9 @@
 #import "HLSTransitionStyle.h"
 #import "UIViewController+HLSExtensions.h"
 
+// Forward declarations
+@protocol HLSContainerContentDelegate;
+
 /**
  * View controllers inserted into view controller containers exhibit common properties:
  *   - they belong to a container, which they must be able to identify, and they should not be inserted into several
@@ -48,7 +51,7 @@
  * themeselves) or not (if the view controller is not retained elsewhere, it will simply be deallocated when the 
  * HLSContainerContent object managing it is destroyed, and so will be its view).
  * 
- * When implementing a view controller container, use HLSContainerContent objects (retained by the container) to take 
+ * When implementing a view controller container, use an HLSContainerContent object (retained by the container) to take 
  * ownership of a view controller when it is inserted, and simply release the HLSContainerContent object when the view 
  * controller gets removed from the container. When interacting with the view controller, use the HLSContainerContent
  * object as a proxy to help you guarantee that the common properties listed above are fulfilled. In particular,
@@ -94,9 +97,10 @@
  * The animation returned by this method has meaningful settings for a rotation animation (locking interaction, resizing 
  * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
-+ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
-                                              containerView:(UIView *)containerView
-                                               withDuration:(NSTimeInterval)duration;
+// TODO: Update documentation. Move
++ (BOOL)rotateContainerContentStack:(NSArray *)containerContentStack
+                      containerView:(UIView *)containerView                 // TODO: Probably referenced in containerContentStack and therefore redundant
+                       withDuration:(NSTimeInterval)duration;
 
 /**
  * Initialize a container content manager object. Requires the view controller to be managed, the container in which
@@ -132,7 +136,7 @@
  * Return YES if the view has been added, NO if it was already added.
  */
 - (BOOL)addViewToContainerView:(UIView *)containerView 
-       inContainerContentStack:(NSArray *)containerContentStack;
+       inContainerContentStack:(NSArray *)containerContentStack;            // TODO: Should store a weak ref to the view
 
 /**
  * Remove the view controller's view from the container view. Does not release the view (call releaseViews for this
@@ -175,8 +179,15 @@
  * The animation returned by this method has meaningful settings for a container animation (locking interaction, not resizing 
  * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
-- (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
-                                       containerView:(UIView *)containerView;
+// TODO: Update documentation
+- (void)pushViewControllerAnimated:(BOOL)animated
+         intoContainerContentStack:(NSArray *)containerContentStack
+                     containerView:(UIView *)containerView
+                          userInfo:(NSDictionary *)userInfo;
+- (void)popViewControllerAnimated:(BOOL)animated
+        fromContainerContentStack:(NSArray *)containerContentStack
+                    containerView:(UIView *)containerView           // TODO: Zeroing weak ref stored when addView called. Use it to calculate frames again
+                         userInfo:(NSDictionary *)userInfo;
 
 /**
  * The attached view controller. If you need to access its view, do not use the UIViewController view property
@@ -192,5 +203,22 @@
  * to display those elements transparently higher up in the view controller hierarchy
  */
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
+
+@end
+
+@protocol HLSContainerContentDelegate <NSObject>
+
+- (void)containerContent:(HLSContainerContent *)containerContent
+        willPushAnimated:(BOOL)animated
+                userInfo:(NSDictionary *)userInfo;
+- (void)containerContent:(HLSContainerContent *)containerContent 
+         didPushAnimated:(BOOL)animated
+                userInfo:(NSDictionary *)userInfo;
+- (void)containerContent:(HLSContainerContent *)containerContent
+         willPopAnimated:(BOOL)animated
+                userInfo:(NSDictionary *)userInfo;
+- (void)containerContent:(HLSContainerContent *)containerContent 
+          didPopAnimated:(BOOL)animated
+                userInfo:(NSDictionary *)userInfo;
 
 @end
