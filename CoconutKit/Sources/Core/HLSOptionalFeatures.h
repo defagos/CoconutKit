@@ -21,6 +21,7 @@
  * incurs a memory overhead you might not want to pay if you do not need those features (most notably 
  * if your application does not contain any UIWebView)
  */
+#if !__has_feature(objc_arc)
 #define HLSEnableApplicationPreloading()                                                                  \
     __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
     {                                                                                                     \
@@ -28,12 +29,20 @@
         [HLSApplicationPreloader enable];                                                                 \
         [pool drain];                                                                                     \
     }
+#else
+#define HLSEnableApplicationPreloading()                                                                  \
+    __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
+    {                                                                                                     \
+        [HLSApplicationPreloader enable];                                                                 \
+    }
+#endif
 
 /**
  * Enable Core Data validation extensions. You need to enable this feature if you want the CoconutKit
  * central validations and text field bindings to be available. This feature does not incur any major 
  * overhead but swizzles several methods under the hood
  */
+#if !__has_feature(objc_arc)
 #define HLSEnableNSManagedObjectValidation()                                                             \
     __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)               \
     {                                                                                                    \
@@ -41,16 +50,31 @@
         [NSManagedObject enable];                                                                        \
         [pool drain];                                                                                    \
     }
+#else
+#define HLSEnableNSManagedObjectValidation()                                                             \
+    __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)               \
+    {                                                                                                    \
+        [NSManagedObject enable];                                                                        \
+    }
+#endif
 
 /**
  * Prevent taps occuring quasi-simultaneously on several controls. This changes the default UIkit behavior
  * but can greatly improve your application robustness (having to deal with such taps can be quite a
  * nightmare and can lead to erratic behaviors or crashes when monkey-testing your application)
  */
-#define HLSEnableUIControlExclusiveTouch()                                                                \
-    __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                  \
-    {                                                                                                     \
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                       \
-        [UIControl enable];                                                                               \
-        [pool drain];                                                                                     \
+#if !__has_feature(objc_arc)
+#define HLSEnableUIControlExclusiveTouch()                                                               \
+    __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                 \
+    {                                                                                                    \
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                      \
+        [UIControl enable];                                                                              \
+        [pool drain];                                                                                    \
     }
+#else
+#define HLSEnableUIControlExclusiveTouch()                                                               \
+    __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                 \
+    {                                                                                                    \
+        [UIControl enable];                                                                              \
+    }
+#endif
