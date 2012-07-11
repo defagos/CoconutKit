@@ -6,9 +6,7 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSAnimation.h"
-#import "HLSContainerContent.h"
-#import "HLSReloadable.h"
+#import "HLSContainerStack.h"
 #import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
@@ -111,12 +109,10 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSContainerContentDelegate, HLSReloadable> {
+@interface HLSPlaceholderViewController : HLSViewController {
 @private
-    NSMutableArray *m_containerContents;                    // Wraps the view controllers added as insets
-    NSMutableArray *m_oldContainerContents;                 // Retains the old inset view controllers wrappers when swapping with new ones
+    NSMutableArray *m_containerStacks;
     NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
-    BOOL m_forwardingProperties;                            // Does the container forward inset navigation properties transparently?
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
     BOOL m_loadedOnce;
 }

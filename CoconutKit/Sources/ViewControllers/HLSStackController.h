@@ -6,15 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSContainerContent.h"
-#import "HLSReloadable.h"
-#import "HLSTransitionStyle.h"
+#import "HLSContainerStack.h"
 #import "HLSViewController.h"
-
-// Standard capacities
-extern const NSUInteger kStackMinimalCapacity;
-extern const NSUInteger kStackDefaultCapacity;
-extern const NSUInteger kStackUnlimitedCapacity;
 
 // Forward declarations
 @protocol HLSStackControllerDelegate;
@@ -72,11 +65,9 @@ extern const NSUInteger kStackUnlimitedCapacity;
  *
  * Designated initializer: initWithRootViewController:capacity:
  */
-@interface HLSStackController : HLSViewController <HLSContainerContentDelegate, HLSReloadable> {
+@interface HLSStackController : HLSViewController {
 @private
-    NSMutableArray *m_containerContentStack;                    // Contains HLSContainerContent objects
-    NSUInteger m_capacity;
-    BOOL m_forwardingProperties;                                // Does the container forward inset navigation properties transparently?
+    HLSContainerStack *m_containerStack;
     id<HLSStackControllerDelegate> m_delegate;
 }
 

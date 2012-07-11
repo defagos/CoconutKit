@@ -14,10 +14,6 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 
-// Constants
-static CGFloat kPushToTheBackScaleFactor = 0.95f;
-static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, otherwise infinite matrix elements
-
 // Keys for runtime container - view controller object association
 static void *s_containerContentKey = &s_containerContentKey;
 
@@ -62,68 +58,14 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 @interface HLSContainerContent ()
 
 @property (nonatomic, retain) UIViewController *viewController;
-@property (nonatomic, assign) id containerController;           // weak ref
+@property (nonatomic, assign) UIViewController *containerViewController;        // weak ref
+
 @property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
-
-
-//********
-// TODO: See if any of these methods is still needed as is. Move
-- (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
-                                       containerView:(UIView *)containerView;
-
-+ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
-                                              containerView:(UIView *)containerView
-                                               withDuration:(NSTimeInterval)duration;
-//********
-
-+ (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
-                                           yOffset:(CGFloat)yOffset
-                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent;
-
-+ (HLSAnimation *)coverAnimation2WithInitialXOffset:(CGFloat)xOffset
-                                            yOffset:(CGFloat)yOffset
-                          appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                      disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                 disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)fadeInAnimation2WithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                  disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)crossDissolveAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                        disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                    disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent;
-
-+ (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
-                                               y:(CGFloat)y
-                                               z:(CGFloat)z
-                       appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                   disappearingContainerContents:(NSArray *)disappearingContainerContents;
-
-+ (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                     appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                 disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                 containerView:(UIView *)containerView;
-
-+ (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                     appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                 disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                 containerView:(UIView *)containerView
-                                      duration:(NSTimeInterval)duration;
-
-+ (CGRect)fixedFrameForView:(UIView *)view;
 
 @end
 
@@ -140,126 +82,24 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 + (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
-    if ([containerContent.containerController isKindOfClass:containerControllerClass]) {
-        return containerContent.containerController;
+    if ([containerContent.containerViewController isKindOfClass:containerControllerClass]) {
+        return containerContent.containerViewController;
     }
     else {
         return nil;
     }
 }
 
-/**
- * When a view controller is added as root view controller, there is a subtlety: When the device is rotated into landscape mode, the
- * root view is applied a rotation matrix transform. When a view controller container is set as root, there is an issue if the contentView
- * happens to be the root view: We cannot just use contentView.frame to calculate animations in landscape mode, otherwise animations
- * will be incorrect (they will correspond to the animations in portrait mode!). This method just fixes this issue, providing the
- * correct frame in all situations
- */
-+ (CGRect)fixedFrameForView:(UIView *)view
-{
-    CGRect frame = CGRectZero;
-    // Root view
-    if ([view.superview isKindOfClass:[UIWindow class]]) {
-        frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
-    }
-    // All other cases
-    else {
-        frame = view.frame;
-    }
-    return frame;
-}
-
-+ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
-                                              containerView:(UIView *)containerView
-                                               withDuration:(NSTimeInterval)duration
-{
-    CGRect fixedFrame = [self fixedFrameForView:containerView];
-    
-    HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
-    animationStep.duration = duration;
-    
-    // Apply a fix for each contained view controller (except the bottommost one which has no other view controller
-    // below)
-    for (NSUInteger index = 1; index < [containerContentStack count]; ++index) {
-        HLSContainerContent *containerContent = [containerContentStack objectAtIndex:index];
-        
-        // Fix all view controller's views below
-        NSArray *belowContainerContents = [containerContentStack subarrayWithRange:NSMakeRange(0, index)];
-        for (HLSContainerContent *belowContainerContent in belowContainerContents) {
-            UIView *belowView = [belowContainerContent view];
-            
-            // This creates the animations needed to fix the view controller's view positions during rotation. To 
-            // understand the applied animation transforms, use transparent view controllers loaded into the stack. Push 
-            // one view controller into the stack using one of the transitions, then rotate the device, and pop it. For 
-            // each transition style, do it once with push in portrait mode and pop in landscape mode, and once with push 
-            // in landscape mode and pop in portrait mode. Try to remove the transforms to understand what happens if no 
-            // correction is applied during rotation
-            HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-            switch (containerContent.transitionStyle) {
-                case HLSTransitionStylePushFromTop: {
-                    CGFloat offset = CGRectGetHeight(fixedFrame) - belowView.transform.ty;
-                    [viewAnimationStep translateByVectorWithX:0.f y:offset z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromBottom: {
-                    CGFloat offset = CGRectGetHeight(fixedFrame) + belowView.transform.ty;
-                    [viewAnimationStep translateByVectorWithX:0.f y:-offset z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromLeft: {
-                    CGFloat offset = CGRectGetWidth(fixedFrame) - belowView.transform.tx;
-                    [viewAnimationStep translateByVectorWithX:offset y:0.f z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromRight: {
-                    CGFloat offset = CGRectGetWidth(fixedFrame) + belowView.transform.tx;
-                    [viewAnimationStep translateByVectorWithX:-offset y:0.f z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStyleCoverFromBottom2:
-                case HLSTransitionStyleCoverFromTop2:
-                case HLSTransitionStyleCoverFromLeft2:
-                case HLSTransitionStyleCoverFromRight2:
-                case HLSTransitionStyleCoverFromTopLeft2:
-                case HLSTransitionStyleCoverFromTopRight2:
-                case HLSTransitionStyleCoverFromBottomLeft2:
-                case HLSTransitionStyleCoverFromBottomRight2:
-                case HLSTransitionStyleFadeIn2: {
-                    [viewAnimationStep scaleWithXFactor:kPushToTheBackScaleFactor * CGRectGetWidth(fixedFrame) / CGRectGetWidth(belowView.frame) 
-                                                yFactor:kPushToTheBackScaleFactor * CGRectGetHeight(fixedFrame) / CGRectGetHeight(belowView.frame)
-                                                zFactor:1.f];
-                    break;
-                }
-                    
-                default: {
-                    // Nothing to do
-                    break;
-                }
-            }
-            [animationStep addViewAnimationStep:viewAnimationStep forView:[belowContainerContent view]];
-        }        
-    }
-    
-    // Return the animation to be played
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationStep:animationStep];
-    animation.lockingUI = YES;
-    return animation;
-}
-
 #pragma mark Object creation and destruction
 
 - (id)initWithViewController:(UIViewController *)viewController
-         containerController:(id)containerController
+     containerViewController:(UIViewController *)containerViewController
              transitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
 {
     if ((self = [super init])) {
         NSAssert(viewController != nil, @"View controller cannot be nil");
-        NSAssert(containerController != nil, @"The container cannot be nil");
+        NSAssert(containerViewController != nil, @"The container cannot be nil");
         
         // >= iOS 5: For containers having automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
         // return NO, we MUST use the UIViewController containment API to declare each view controller we insert
@@ -273,42 +113,35 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         //   - invisible view controllers get viewWillAppear: and viewDidAppear: events
         //   - the visible view controller gets each of these events twice (once from UIKit internals, and once
         //     through manual forwarding by the container implementation)
-        if ([containerController isKindOfClass:[UIViewController class]]) {
-            UIViewController *containerViewController = (UIViewController *)containerController;
-            NSAssert(! [containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
-                     || ! [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers], @"HLSContainerContent can "
-                     "only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers has been "
-                     "implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
-                     "mechanism)");
-            if ([containerViewController respondsToSelector:@selector(addChildViewController:)]) {
-                [containerViewController addChildViewController:viewController];
-            }
+        if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
+                && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
+            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
+                           "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
+                           "mechanism)");
+            [self release];
+            return nil;
         }
         
-        // Associate the view controller with its container
-        self.containerController = containerController;
-        
-        // Associate the view controller with its container content object
-        NSAssert(! objc_getAssociatedObject(viewController, s_containerContentKey), @"A view controller can only be associated with one container content object");
+        // Associate the view controller with its container content object        
+        if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
+            HLSLoggerError(@"A view controller can only be associated with one container content object");
+            [self release];
+            return nil;
+        }
         objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
+        if ([containerViewController respondsToSelector:@selector(addChildViewController:)]) {
+            [containerViewController addChildViewController:viewController];
+        }
+                
         self.viewController = viewController;
+        self.containerViewController = containerViewController;
         self.transitionStyle = transitionStyle;
         self.duration = duration;
         
         self.originalViewFrame = CGRectZero;
     }
     return self;
-}
-
-- (id)initWithViewController:(UIViewController *)viewController
-         containerController:(id)containerController
-             transitionStyle:(HLSTransitionStyle)transitionStyle
-{
-    return [self initWithViewController:viewController 
-                    containerController:containerController 
-                        transitionStyle:transitionStyle 
-                               duration:kAnimationTransitionDefaultDuration];
 }
 
 - (id)init
@@ -337,7 +170,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
     
     self.viewController = nil;
-    self.containerController = nil;
+    self.containerViewController = nil;
     
     [super dealloc];
 }
@@ -346,7 +179,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 @synthesize viewController = m_viewController;
 
-@synthesize containerController = m_containerController;
+@synthesize containerViewController = m_containerViewController;
 
 @synthesize addedToContainerView = m_addedToContainerView;
 
@@ -377,19 +210,16 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     m_forwardingProperties = forwardingProperties;
     
     if (forwardingProperties) {
-        if ([self.containerController isKindOfClass:[UIViewController class]]) {
-            UIViewController *containerViewController = (UIViewController *)self.containerController;
-            containerViewController.title = self.viewController.title;
-            containerViewController.navigationItem.title = self.viewController.navigationItem.title;
-            containerViewController.navigationItem.backBarButtonItem = self.viewController.navigationItem.backBarButtonItem;
-            containerViewController.navigationItem.titleView = self.viewController.navigationItem.titleView;
-            containerViewController.navigationItem.prompt = self.viewController.navigationItem.prompt;
-            containerViewController.navigationItem.hidesBackButton = self.viewController.navigationItem.hidesBackButton;
-            containerViewController.navigationItem.leftBarButtonItem = self.viewController.navigationItem.leftBarButtonItem;
-            containerViewController.navigationItem.rightBarButtonItem = self.viewController.navigationItem.rightBarButtonItem;
-            containerViewController.toolbarItems = self.viewController.toolbarItems;
-            containerViewController.hidesBottomBarWhenPushed = self.viewController.hidesBottomBarWhenPushed;
-        }   
+        self.containerViewController.title = self.viewController.title;
+        self.containerViewController.navigationItem.title = self.viewController.navigationItem.title;
+        self.containerViewController.navigationItem.backBarButtonItem = self.viewController.navigationItem.backBarButtonItem;
+        self.containerViewController.navigationItem.titleView = self.viewController.navigationItem.titleView;
+        self.containerViewController.navigationItem.prompt = self.viewController.navigationItem.prompt;
+        self.containerViewController.navigationItem.hidesBackButton = self.viewController.navigationItem.hidesBackButton;
+        self.containerViewController.navigationItem.leftBarButtonItem = self.viewController.navigationItem.leftBarButtonItem;
+        self.containerViewController.navigationItem.rightBarButtonItem = self.viewController.navigationItem.rightBarButtonItem;
+        self.containerViewController.toolbarItems = self.viewController.toolbarItems;
+        self.containerViewController.hidesBottomBarWhenPushed = self.viewController.hidesBottomBarWhenPushed;
     }
 }
 
@@ -411,19 +241,30 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 #pragma mark View management
 
-- (BOOL)addViewToContainerView:(UIView *)containerView 
-       inContainerContentStack:(NSArray *)containerContentStack
+- (void)addAsSubviewIntoContainerView:(UIView *)containerView
+{
+    [self insertAsSubviewIntoContainerView:containerView atIndex:NSUIntegerMax];
+}
+
+- (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index
 {
     if (self.addedToContainerView) {
         HLSLoggerDebug(@"View controller's view already added to a container view");
-        return NO;
+        return;
     }
+    
+    // Save original view controller's view properties
+    self.originalViewFrame = self.viewController.view.frame;
+    self.originalViewAlpha = self.viewController.view.alpha;
+    self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
     
     // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
     // added to the container view, a 20px displacement may arise at the top if the container is the root view controller of the
     // application (the implementations of UITabBarController and UINavigationController probably mess up with status bar dimensions internally)
-    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController isKindOfClass:[UITabBarController class]]) {
-        self.viewController.view.frame = containerView.bounds;
+    UIView *view = [self view];
+    if ([self.viewController isKindOfClass:[UINavigationController class]] 
+        || [self.viewController isKindOfClass:[UITabBarController class]]) {
+        view.frame = containerView.bounds;
     }
     
     // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
@@ -451,54 +292,15 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }
     }
     
-    // If a non-empty stack has been provided, find insertion point
-    HLSAssertObjectsInEnumerationAreKindOfClass(containerContentStack, HLSContainerContent);
-    if ([containerContentStack count] != 0) {
-        NSUInteger index = [containerContentStack indexOfObject:self];
-        if (index == NSNotFound) {
-            HLSLoggerError(@"Receiver not found in the container content stack");
-            return NO;
-        }
-        
-        // Last element? Add to top
-        if (index == [containerContentStack count] - 1) {
-            [containerView addSubview:self.viewController.view];
-        }
-        // Otherwise add below first content above for which a view is available (most probably the nearest neighbour above)
-        else {
-            BOOL added = NO;
-            for (NSUInteger i = index + 1; i < [containerContentStack count]; ++i) {
-                HLSContainerContent *aboveContainerContent = [containerContentStack objectAtIndex:i];
-                if ([aboveContainerContent view]) {
-                    NSAssert(self.containerController == aboveContainerContent.containerController,
-                             @"Both container contents must be associated with the same container controller");
-                    NSAssert([aboveContainerContent view].superview == containerView, 
-                             @"Other container contents has not been added to the same container view");
-                    
-                    [containerView insertSubview:self.viewController.view belowSubview:[aboveContainerContent view]];
-                    added = YES;
-                    break;
-                }                
-            }
-            
-            if (! added) {
-                HLSLoggerError(@"Could not insert the view; no view found above in the stack");
-                return NO;
-            }            
-        }
+    if (index == NSUIntegerMax) {
+        [containerView addSubview:view];
     }
-    // If no stack provided, simply add at the top
     else {
-        [containerView addSubview:self.viewController.view];
+        [containerView insertSubview:view atIndex:index];
     }
     
     self.addedToContainerView = YES;
     m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
-    
-    // Save original view controller's view properties
-    self.originalViewFrame = self.viewController.view.frame;
-    self.originalViewAlpha = self.viewController.view.alpha;
-    self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
     
     // The background view of view controller's views inserted into a container must fill its bounds completely, no matter
     // what this original frame is. This is required because of how the root view controller is displayed, and leads to
@@ -510,29 +312,10 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed 
     //     must have been designed accordingly (i.e. its dimensions match the container view). In such cases the autoresizing
     //     mask of the view is irrelevant and can be safely overridden
-    self.viewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // Match the inserted view frame so that it fills the container bounds
-    self.viewController.view.frame = containerView.bounds;
-    
-    // The transitions of the contents above in the stack might move views below in the stack. To account for this
-    // effect, we must replay them so that the view we have inserted is put at the proper location
-    if ([containerContentStack count] != 0) {
-        NSUInteger index = [containerContentStack indexOfObject:self];
-        for (NSUInteger i = index + 1; i < [containerContentStack count]; ++i) {
-            HLSContainerContent *aboveContainerContent = [containerContentStack objectAtIndex:i];
-            HLSAnimation *animation = [HLSContainerContent animationWithTransitionStyle:aboveContainerContent.transitionStyle 
-                                                              appearingContainerContent:nil 
-                                                          disappearingContainerContents:[NSArray arrayWithObject:self]
-                                                                          containerView:containerView 
-                                                                               duration:0.];
-            // Override the default here: We do not want already visible views to be brought to the background by the animations
-            // resurrecting unloaded view controller's views
-            animation.bringToFront = NO;
-            [animation playAnimated:NO];
-        }
-    }    
-    return YES;
+    view.frame = containerView.bounds;
 }
 
 - (void)removeViewFromContainerView
@@ -607,519 +390,24 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     [self.viewController viewDidDisappear:animated];
 }
 
-#pragma mark Animation
-
-// The new view covers the views below (which is not moved)
-+ (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
-                                           yOffset:(CGFloat)yOffset
-                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    return [self.viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
-// The new view covers the views below, which get slightly shrinked (Fliboard-style)
-+ (HLSAnimation *)coverAnimation2WithInitialXOffset:(CGFloat)xOffset
-                                            yOffset:(CGFloat)yOffset
-                          appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                      disappearingContainerContents:(NSArray *)disappearingContainerContents
-
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-    }
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    return [self.viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
-// The new view fades in. The view belows are left as is
-+ (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                 disappearingContainerContents:(NSArray *)disappearingContainerContents
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    return [self.viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
-// The new view fades in. The view belows are pushed to the back
-+ (HLSAnimation *)fadeInAnimation2WithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                  disappearingContainerContents:(NSArray *)disappearingContainerContents
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
-    }
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
-}
-
-// The new view fades in while the views below fade out
-+ (HLSAnimation *)crossDissolveAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                                        disappearingContainerContents:(NSArray *)disappearingContainerContents
-{
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha;
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];                 
-    }
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep22.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
-}
-
-// The new view pushes the other ones
-+ (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                    disappearingContainerContents:(NSArray *)disappearingContainerContents
-{
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-    }
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
-}
-
-// The new view emerges from the center of the screen
-+ (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
-{
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor 
-                                  yFactor:1.f / kEmergeFromCenterScaleFactor 
-                                  zFactor:1.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
-    animationStep2.duration = 0.4;
-    [animationSteps addObject:animationStep2];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
-}
-
-// The two views are flipped around an axis
-+ (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
-                                               y:(CGFloat)y
-                                               z:(CGFloat)z
-                                appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                            disappearingContainerContents:(NSArray *)disappearingContainerContents
-
-{
-    NSMutableArray *animationSteps = [NSMutableArray array];
-        
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
-    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-        viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
-    }
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
-    animationStep2.curve = UIViewAnimationCurveEaseOut;
-    animationStep2.duration = 0.2;
-    [animationSteps addObject:animationStep2];
-    
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep31.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
-    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent view]]; 
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
-        viewAnimationStep32.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
-        [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent view]]; 
-    }
-    animationStep3.duration = 0.;
-    [animationSteps addObject:animationStep3];
-    
-    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
-    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
-        HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-        [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
-    }
-    HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    viewAnimationStep42.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
-    [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
-    animationStep4.curve = UIViewAnimationCurveEaseIn;
-    animationStep4.duration = 0.2;
-    [animationSteps addObject:animationStep4];
-    
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
-}
-
-+ (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                     appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                 disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                 containerView:(UIView *)containerView
-{
-    HLSAssertObjectsInEnumerationAreMembersOfClass(disappearingContainerContents, HLSContainerContent);
-    
-    CGRect frame = [HLSContainerContent fixedFrameForView:containerView];
-    
-    HLSAnimation *animation = nil;
-    switch (transitionStyle) {
-        case HLSTransitionStyleNone: {
-            // Empty animation (not simply nil) so that the animation is played (and the associated
-            // callback are called)
-            animation = [HLSAnimation animationWithAnimationStep:nil];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            animation = [self coverAnimationWithInitialXOffset:0.f
-                                                       yOffset:CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            animation = [self coverAnimationWithInitialXOffset:0.f
-                                                       yOffset:-CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        } 
-            
-        case HLSTransitionStyleCoverFromRight: {
-            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }  
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
-                                                       yOffset:-CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }  
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
-                                                       yOffset:-CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            animation = [self coverAnimationWithInitialXOffset:-CGRectGetWidth(frame)
-                                                       yOffset:CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        }   
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            animation = [self coverAnimationWithInitialXOffset:CGRectGetWidth(frame)
-                                                       yOffset:CGRectGetHeight(frame) 
-                                     appearingContainerContent:appearingContainerContent];
-            break;
-        } 
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            animation = [self coverAnimation2WithInitialXOffset:0.f
-                                                        yOffset:CGRectGetHeight(frame) 
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            animation = [self coverAnimation2WithInitialXOffset:0.f
-                                                        yOffset:-CGRectGetHeight(frame) 
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:0.f 
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:0.f
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:-CGRectGetHeight(frame)
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:-CGRectGetHeight(frame)
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            animation = [self coverAnimation2WithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:CGRectGetHeight(frame)
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            animation = [self coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:CGRectGetHeight(frame)
-                                      appearingContainerContent:appearingContainerContent
-                                  disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            animation = [self fadeInAnimationWithAppearingContainerContent:appearingContainerContent
-                                             disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            animation = [self fadeInAnimation2WithAppearingContainerContent:appearingContainerContent
-                                              disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            animation = [self crossDissolveAnimationWithAppearingContainerContent:appearingContainerContent 
-                                                    disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            animation = [self pushAnimationWithInitialXOffset:0.f
-                                                      yOffset:CGRectGetHeight(frame)
-                                    appearingContainerContent:appearingContainerContent 
-                                disappearingContainerContents:disappearingContainerContents];
-            break;
-        } 
-            
-        case HLSTransitionStylePushFromTop: {
-            animation = [self pushAnimationWithInitialXOffset:0.f
-                                                      yOffset:-CGRectGetHeight(frame)
-                                    appearingContainerContent:appearingContainerContent 
-                                disappearingContainerContents:disappearingContainerContents];
-            break;
-        }    
-            
-        case HLSTransitionStylePushFromLeft: {
-            animation = [self pushAnimationWithInitialXOffset:-CGRectGetWidth(frame)
-                                                      yOffset:0.f
-                                    appearingContainerContent:appearingContainerContent 
-                                disappearingContainerContents:disappearingContainerContents];
-            break;
-        } 
-            
-        case HLSTransitionStylePushFromRight: {
-            animation = [self pushAnimationWithInitialXOffset:CGRectGetWidth(frame)
-                                                      yOffset:0.f
-                                    appearingContainerContent:appearingContainerContent 
-                                disappearingContainerContents:disappearingContainerContents];
-            break;
-        } 
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            animation = [self emergeFromCenterAnimationWithAppearingContainerContent:appearingContainerContent];
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            animation = [self flipAnimationAroundVectorWithX:0.f 
-                                                           y:1.f 
-                                                           z:0.f 
-                                   appearingContainerContent:appearingContainerContent 
-                               disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            animation = [self flipAnimationAroundVectorWithX:1.f 
-                                                           y:0.f 
-                                                           z:0.f 
-                                   appearingContainerContent:appearingContainerContent 
-                               disappearingContainerContents:disappearingContainerContents];
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown transition style");
-            return nil;
-            break;
-        }
-    }
-    
-    animation.lockingUI = YES;
-    animation.bringToFront = YES;
-    return animation;
-}
-
-+ (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                     appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                 disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                 containerView:(UIView *)containerView
-                                      duration:(NSTimeInterval)duration
-{
-    HLSAnimation *animation = [HLSContainerContent animationWithTransitionStyle:transitionStyle 
-                                                      appearingContainerContent:appearingContainerContent 
-                                                  disappearingContainerContents:disappearingContainerContents 
-                                                                  containerView:containerView];    
-    if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
-        return animation;
-    }
-    else {
-        return [animation animationWithDuration:duration];
-    }
-}
-
-
-- (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
-                                       containerView:(UIView *)containerView
-{
-    HLSAssertObjectsInEnumerationAreMembersOfClass(containerContentStack, HLSContainerContent);
-    
-    // Make the receiver appear. Locate it in the stack
-    NSUInteger index = [containerContentStack indexOfObject:self];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"Container content to animate must be part of the stack");
-        return nil;
-    }
-    
-    // Make all container contents below in the stack disappear
-    NSArray *belowContainerContents = [containerContentStack subarrayWithRange:NSMakeRange(0, index)];
-    
-    return [HLSContainerContent animationWithTransitionStyle:self.transitionStyle
-                                   appearingContainerContent:self 
-                               disappearingContainerContents:belowContainerContents
-                                               containerView:containerView 
-                                                    duration:self.duration];
+    return [self.viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 #pragma mark Description
@@ -1196,10 +484,9 @@ static id swizzled_UIViewController__id_accessor_Imp(UIViewController *self, SEL
     // We cannot not forward parentViewController (see why in the .h documentation), we must therefore swizzle
     // interfaceOrientation to fix its behavior
     if (_cmd == @selector(interfaceOrientation)) {
-        if (containerContent
-                && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+        if (containerContent) {
             // Call the same method, but on the container. This handles view controller nesting correctly
-            return swizzled_UIViewController__id_accessor_Imp(containerContent.containerController, _cmd);
+            return swizzled_UIViewController__id_accessor_Imp(containerContent.containerViewController, _cmd);
         }
         else {
             return s_UIViewController__interfaceOrientation_Imp(self, _cmd);
@@ -1228,11 +515,9 @@ static id swizzled_UIViewController__id_forward_accessor_Imp(UIViewController *s
     }
     
     // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
-    if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+    if (containerContent.forwardingProperties) {
         // Call the same method, but on the container. This handles view controller nesting correctly
-        return swizzled_UIViewController__id_forward_accessor_Imp(containerContent.containerController, _cmd);
+        return swizzled_UIViewController__id_forward_accessor_Imp(containerContent.containerViewController, _cmd);
     }
     else {
         return UIViewControllerMethod(self, _cmd);
@@ -1259,11 +544,9 @@ static void swizzled_UIViewController__void_mutator_id_Imp(UIViewController *sel
     UIViewControllerMethod(self, _cmd, value);
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+    if (containerContent.forwardingProperties) {
         // Call the same method, but on the container. This handles view controller nesting correctly
-        swizzled_UIViewController__void_mutator_id_Imp(containerContent.containerController, _cmd, value);
+        swizzled_UIViewController__void_mutator_id_Imp(containerContent.containerViewController, _cmd, value);
     }
 }
 
@@ -1284,11 +567,9 @@ static void swizzled_UIViewController__void_mutator_BOOL_Imp(UIViewController *s
     UIViewControllerMethod(self, _cmd, value);
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+    if (containerContent.forwardingProperties) {
         // Call the same method, but on the container. This handles view controller nesting correctly
-        swizzled_UIViewController__void_mutator_BOOL_Imp(containerContent.containerController, _cmd, value);
+        swizzled_UIViewController__void_mutator_BOOL_Imp(containerContent.containerViewController, _cmd, value);
     }
 }
 
@@ -1309,11 +590,9 @@ static void swizzled_UIViewController__void_mutator_id_BOOL_Imp(UIViewController
     UIViewControllerMethod(self, _cmd, value1, value2);
     
     // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent
-            && containerContent.forwardingProperties 
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
+    if (containerContent.forwardingProperties) {
         // Call the same method, but on the container. This handles view controller nesting correctly
-        swizzled_UIViewController__void_mutator_id_BOOL_Imp(containerContent.containerController, _cmd, value1, value2);
+        swizzled_UIViewController__void_mutator_id_BOOL_Imp(containerContent.containerViewController, _cmd, value1, value2);
     }
 }
 
@@ -1321,10 +600,8 @@ static void swizzled_UIViewController__presentViewController_animated_completion
                                                                                      BOOL flag, void (^completion)(void))
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        [containerViewController presentViewController:viewControllerToPresent animated:flag completion:completion];
+    if (containerContent) {
+        [containerContent.containerViewController presentViewController:viewControllerToPresent animated:flag completion:completion];
     }
     else {
         (*s_UIViewController__presentViewController_animated_completion_Imp)(self, @selector(presentViewController:animated:completion:), viewControllerToPresent, flag, completion);
@@ -1334,10 +611,8 @@ static void swizzled_UIViewController__presentViewController_animated_completion
 static void swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp(UIViewController *self, SEL _cmd, BOOL flag, void (^completion)(void))
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        [containerViewController dismissViewControllerAnimated:flag completion:completion];
+    if (containerContent) {
+        [containerContent.containerViewController dismissViewControllerAnimated:flag completion:completion];
     }
     else {
         (*s_UIViewController__dismissViewControllerAnimated_completion_Imp)(self, @selector(dismissViewControllerAnimated:completion:), flag, completion);
@@ -1347,10 +622,8 @@ static void swizzled_UIViewController__dismissViewControllerAnimated_completion_
 static void swizzled_UIViewController__presentModalViewController_animated_Imp(UIViewController *self, SEL _cmd, UIViewController *modalViewController, BOOL animated)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        [containerViewController presentModalViewController:modalViewController animated:animated];
+    if (containerContent) {
+        [containerContent.containerViewController presentModalViewController:modalViewController animated:animated];
     }
     else {
         (*s_UIViewController__presentModalViewController_animated_Imp)(self, @selector(presentModalViewController:animated:), modalViewController, animated);
@@ -1360,10 +633,8 @@ static void swizzled_UIViewController__presentModalViewController_animated_Imp(U
 static void swizzled_UIViewController__dismissModalViewControllerAnimated_Imp(UIViewController *self, SEL _cmd, BOOL animated)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        [containerViewController dismissModalViewControllerAnimated:animated];
+    if (containerContent) {
+        [containerContent.containerViewController dismissModalViewControllerAnimated:animated];
     }
     else {
         (*s_UIViewController__dismissModalViewControllerAnimated_Imp)(self, @selector(dismissModalViewControllerAnimated:), animated);
@@ -1373,10 +644,8 @@ static void swizzled_UIViewController__dismissModalViewControllerAnimated_Imp(UI
 static UIViewController *swizzled_UIViewController__modalViewController_Imp(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        return containerViewController.modalViewController;
+    if (containerContent) {
+        return containerContent.containerViewController.modalViewController;
     }
     else {
         return (*s_UIViewController__modalViewController_Imp)(self, @selector(modalViewController));
@@ -1386,10 +655,8 @@ static UIViewController *swizzled_UIViewController__modalViewController_Imp(UIVi
 static UIViewController *swizzled_UIViewController__presentedViewController_Imp(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent
-            && [containerContent.containerController isKindOfClass:[UIViewController class]]) {
-        UIViewController *containerViewController = (UIViewController *)containerContent.containerController;
-        return containerViewController.presentedViewController;
+    if (containerContent) {
+        return containerContent.containerViewController.presentedViewController;
     }
     else {
         return (*s_UIViewController__presentedViewController_Imp)(self, @selector(presentedViewController));
