@@ -25,6 +25,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     HLSZeroingWeakRef *m_containerViewZeroingWeakRef;
     NSUInteger m_capacity;
     BOOL m_forwardingProperties;
+    BOOL m_removeInvisibleViewControllers;
 }
 
 - (id)initWithContainerViewController:(UIViewController *)containerViewController;
@@ -39,10 +40,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
+// TODO: Prevent changes when the stack has been displayed once. Default value is NO
+@property (nonatomic, assign, getter=isRemoveInvisibleViewControllers) BOOL removeInvisibleViewControllers;
+
 - (UIViewController *)rootViewController;
 - (UIViewController *)topViewController;
 
 - (NSArray *)viewControllers;
+
+- (NSUInteger)count;
 
 /**
  * Create the animation needed to display the view controller's view in the container view. If the receiver is part
@@ -59,6 +65,14 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
                   duration:(NSTimeInterval)duration;
 
 - (void)popViewController;
+
+- (void)popToViewController:(UIViewController *)viewController;
+- (void)popToRootViewController;
+
+// TODO: Can be used to pop without animation. Can be used to remove at the front (i.e. remove
+//       the root view controller, which can be useful) or in the middle (can be used to implement
+//       a popToViewController)
+- (void)removeViewControllerAtIndex:(NSUInteger)index;
 
 /**
  * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved

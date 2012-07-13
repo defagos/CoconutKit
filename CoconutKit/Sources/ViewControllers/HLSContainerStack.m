@@ -79,6 +79,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize forwardingProperties = m_forwardingProperties;
 
+@synthesize removeInvisibleViewControllers = m_removeInvisibleViewControllers;
+
 // TODO: Prevent changes when the stack has been displayed once
 - (void)setCapacity:(NSUInteger)capacity
 {
@@ -152,6 +154,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return [NSArray arrayWithArray:viewControllers];
 }
 
+- (NSUInteger)count
+{
+    return [self.containerContents count];
+}
+
 #pragma mark Adding and removing view controllers
 
 - (void)pushViewController:(UIViewController *)viewController
@@ -169,8 +176,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Can release the view not needed according to the capacity
-    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:self.capacity - 1];
-    [newlyInvisibleContainerContent releaseViews];
+    NSUInteger newlyInvisibleContainerContentIndex = self.capacity - 1;
+    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:newlyInvisibleContainerContentIndex];
+    if (self.removeInvisibleViewControllers) {
+        [self removeViewControllerAtIndex:newlyInvisibleContainerContentIndex];
+    }
+    else {
+        [newlyInvisibleContainerContent releaseViews];
+    }
     
     // If no view controller has been loaded yet, create the objects required to store it. The root view controller has always none
     // as transition style
@@ -246,6 +259,48 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *topContainerContent = [self topContainerContent];
         topContainerContent.forwardingProperties = self.forwardingProperties;
     }
+}
+
+- (void)popToViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [[self viewControllers] indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerError(@"The view controller to pop to does not belong to the container");
+        return;
+    }
+    
+    for (NSUInteger i = [self.containerContents count] - 1; i > index; --i) {
+        [self removeViewControllerAtIndex:i];
+    }
+}
+
+- (void)popToRootViewController
+{
+    [self popToViewController:[self rootViewController]];
+}
+
+- (void)removeViewControllerAtIndex:(NSUInteger)index
+{
+    if (index >= [self.containerContents count]) {
+        HLSLoggerError(@"Invalid index");
+        return;
+    }
+    
+    // The top view controller receives all events when removed, i.e. is popped normally
+    if (index == [self.containerContents count] - 1) {
+        [self popViewController];
+        return;
+    }
+        
+    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+    HLSAnimation *animation = [[HLSContainerAnimations pushAnimationWithTransitionStyle:containerContent.transitionStyle
+                                                              appearingContainerContent:containerContent 
+                                                          disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                          containerView:self.containerView
+                                                                               duration:0.f] reverseAnimation];
+    animation.lockingUI = YES;
+    animation.bringToFront = NO;
+    [animation playAnimated:NO];
 }
 
 - (void)rotateWithDuration:(NSTimeInterval)duration
