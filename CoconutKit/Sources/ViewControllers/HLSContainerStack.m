@@ -28,6 +28,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
 
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent;
+
 - (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent;
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
@@ -204,11 +206,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
         // expect it to occur animated, even if instantaneously
-        HLSAnimation *pushAnimation = [HLSContainerAnimations pushAnimationWithTransitionStyle:transitionStyle 
-                                                                     appearingContainerContent:containerContent 
-                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)] 
-                                                                                 containerView:self.containerView 
-                                                                                      duration:duration];
+        HLSAnimation *pushAnimation = [HLSContainerAnimations animationWithTransitionStyle:transitionStyle 
+                                                                 appearingContainerContent:containerContent 
+                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)] 
+                                                                             containerView:self.containerView 
+                                                                                  duration:duration];
         pushAnimation.tag = @"push_animation";
         pushAnimation.lockingUI = YES;
         pushAnimation.bringToFront = YES;
@@ -241,11 +243,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Pop animation
         HLSContainerContent *topContainerContent = [self topContainerContent];
-        HLSAnimation *popAnimation = [[HLSContainerAnimations pushAnimationWithTransitionStyle:topContainerContent.transitionStyle
-                                                                     appearingContainerContent:topContainerContent
-                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)]
-                                                                                 containerView:self.containerView 
-                                                                                      duration:topContainerContent.duration] reverseAnimation];
+        HLSAnimation *popAnimation = [[HLSContainerAnimations animationWithTransitionStyle:topContainerContent.transitionStyle
+                                                                 appearingContainerContent:topContainerContent
+                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)]
+                                                                             containerView:self.containerView 
+                                                                                  duration:topContainerContent.duration] reverseAnimation];
         popAnimation.tag = @"pop_animation";
         popAnimation.lockingUI = YES;
         popAnimation.bringToFront = YES;
@@ -279,6 +281,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     [self popToViewController:[self rootViewController]];
 }
 
+// TODO: Pop: Should restore the view below if newly visible (as in popViewController). Maybe it is best to move popViewController
+// implementation here, and to implement popViewController with a single call with max index. Also be careful to ensure that there
+// is always 1 view controller in the stack (this also has to be checked when the stack is loaded)
+
 - (void)removeViewControllerAtIndex:(NSUInteger)index
 {
     if (index >= [self.containerContents count]) {
@@ -293,11 +299,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
         
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-    HLSAnimation *animation = [[HLSContainerAnimations pushAnimationWithTransitionStyle:containerContent.transitionStyle
-                                                              appearingContainerContent:containerContent 
-                                                          disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
-                                                                          containerView:self.containerView
-                                                                               duration:0.f] reverseAnimation];
+    HLSAnimation *animation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
+                                                          appearingContainerContent:containerContent 
+                                                      disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                      containerView:self.containerView
+                                                                           duration:0.f] reverseAnimation];
     animation.lockingUI = YES;
     animation.bringToFront = NO;
     [animation playAnimated:NO];
@@ -444,11 +450,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if ([self.containerContents count] != 0) {
         for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
-            HLSAnimation *animation = [HLSContainerAnimations pushAnimationWithTransitionStyle:aboveContainerContent.transitionStyle
-                                                                         appearingContainerContent:nil
-                                                                     disappearingContainerContents:[NSArray arrayWithObject:containerContent]
-                                                                                     containerView:self.containerView 
-                                                                                          duration:0.];
+            HLSAnimation *animation = [HLSContainerAnimations animationWithTransitionStyle:aboveContainerContent.transitionStyle
+                                                                 appearingContainerContent:nil
+                                                             disappearingContainerContents:[NSArray arrayWithObject:containerContent]
+                                                                             containerView:self.containerView 
+                                                                                  duration:0.];
             animation.lockingUI = YES;
             animation.bringToFront = NO;        // Do not bring resurrected views to the front
             [animation playAnimated:NO];

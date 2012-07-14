@@ -325,11 +325,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-+ (HLSAnimation *)pushAnimationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
-                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
-                     disappearingContainerContents:(NSArray *)disappearingContainerContents
-                                     containerView:(UIView *)containerView
-                                          duration:(NSTimeInterval)duration
++ (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
+                     appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                 disappearingContainerContents:(NSArray *)disappearingContainerContents
+                                 containerView:(UIView *)containerView
+                                      duration:(NSTimeInterval)duration
 {
     HLSAssertObjectsInEnumerationAreMembersOfClass(disappearingContainerContents, HLSContainerContent);
     
