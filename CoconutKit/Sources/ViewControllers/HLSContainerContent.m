@@ -14,6 +14,8 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 
+// TODO: Instead of a container view controller, we should not assume the container is a view controller, just an id
+
 // Keys for runtime container - view controller object association
 static void *s_containerContentKey = &s_containerContentKey;
 
@@ -79,10 +81,10 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 #pragma mark Class methods
 
-+ (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
++ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
-    if ([containerContent.containerViewController isKindOfClass:containerControllerClass]) {
+    if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
         return containerContent.containerViewController;
     }
     else {
@@ -98,8 +100,39 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
                     duration:(NSTimeInterval)duration
 {
     if ((self = [super init])) {
-        NSAssert(viewController != nil, @"View controller cannot be nil");
-        NSAssert(containerViewController != nil, @"The container cannot be nil");
+        if (! viewController) {
+            [self release];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:@"A view controller must be provided"
+                                         userInfo:nil];
+        }
+        if (! containerViewController) {
+            [self release];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:@"A container must be provided"
+                                         userInfo:nil];
+        }
+        
+        // Cannot be mixed with new iOS 5 containment API (but fully iOS 5 compatible)
+        if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
+                && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
+            [self release];
+            NSString *reason = @"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
+                "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
+                "mechanism)";
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:reason
+                                         userInfo:nil];
+        }
+        
+        // Associate the view controller with its container content object        
+        if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
+            [self release];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:@"A view controller can only be associated with one container"
+                                         userInfo:nil];
+        }
+        objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
         // >= iOS 5: For containers having automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
         // return NO, we MUST use the UIViewController containment API to declare each view controller we insert
@@ -110,26 +143,9 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         // and viewDidAppear: event forwarding to ALL view controllers loaded into the container when the container 
         // appears (i.e. when the application gets displayed or when the modal view appears). This leads to two
         // undesired effects:
-        //   - invisible view controllers get viewWillAppear: and viewDidAppear: events
-        //   - the visible view controller gets each of these events twice (once from UIKit internals, and once
+        //   - non-top view controllers get viewWillAppear: and viewDidAppear: events
+        //   - the top view controller gets each of these events twice (once from UIKit internals, and once
         //     through manual forwarding by the container implementation)
-        if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
-                && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
-            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
-                           "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
-                           "mechanism)");
-            [self release];
-            return nil;
-        }
-        
-        // Associate the view controller with its container content object        
-        if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
-            HLSLoggerError(@"A view controller can only be associated with one container content object");
-            [self release];
-            return nil;
-        }
-        objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
-        
         if ([containerViewController respondsToSelector:@selector(addChildViewController:)]) {
             [containerViewController addChildViewController:viewController];
         }
@@ -152,10 +168,10 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)dealloc
 {
-    // Restore the view controller's frame. If the view controller was not retained elsewhere, this would not be necessary. 
-    // But clients might keep additional references to view controllers for caching purposes. The cleanest we can do is to 
-    // restore a view controller's properties when it is removed from a container, no matter whether or not it is later 
-    // reused by the client
+    // Restore the view controller's original properties. If the view controller was not retained elsewhere, this would
+    // not be necessary. But clients might keep additional references to view controllers for caching purposes. The 
+    // best we can do is to restore a view controller's properties when it is removed from a container, no matter whether 
+    // or not it is later reused
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
     self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
@@ -164,11 +180,13 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
-    // See comment in initWithViewController:containerController:transitionStyle:duration:
+    // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:
     if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
         [self.viewController removeFromParentViewController];
     }
     
+    // We do not release the view container's view here, on purpose, so that the view controller can be cached and its
+    // view reused
     self.viewController = nil;
     self.containerViewController = nil;
     
@@ -191,8 +209,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 {
     // Sanitize input
     if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
-        HLSLoggerWarn(@"Duration must be non-negative or %f. Fixed to 0", kAnimationTransitionDefaultDuration);
-        m_duration = 0.;
+        HLSLoggerWarn(@"Duration must be non-negative or the default duration %f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
+        m_duration = kAnimationTransitionDefaultDuration;
     }
     else {
         m_duration = duration;
@@ -209,6 +227,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     
     m_forwardingProperties = forwardingProperties;
     
+    // Performs initial sync
     if (forwardingProperties) {
         self.containerViewController.title = self.viewController.title;
         self.containerViewController.navigationItem.title = self.viewController.navigationItem.title;
@@ -246,6 +265,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     [self insertAsSubviewIntoContainerView:containerView atIndex:NSUIntegerMax];
 }
 
+// You can use index = NSUIntegerMax to add at the top
 - (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index
 {
     if (self.addedToContainerView) {
@@ -260,10 +280,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     
     // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
     // added to the container view, a 20px displacement may arise at the top if the container is the root view controller of the
-    // application (the implementations of UITabBarController and UINavigationController probably mess up with status bar dimensions internally)
+    // application (the implementations of UITabBarController and UINavigationController probably mess up with status bar dimensions 
+    // internally)
     UIView *view = [self view];
     if ([self.viewController isKindOfClass:[UINavigationController class]] 
-        || [self.viewController isKindOfClass:[UITabBarController class]]) {
+            || [self.viewController isKindOfClass:[UITabBarController class]]) {
         view.frame = containerView.bounds;
     }
     
@@ -292,7 +313,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }
     }
     
-    if (index == NSUIntegerMax) {
+    // Insert as subview
+    if (index >= [containerView.subviews count]) {
         [containerView addSubview:view];
     }
     else {
@@ -300,13 +322,12 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
     
     self.addedToContainerView = YES;
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidLoad;
     
     // The background view of view controller's views inserted into a container must fill its bounds completely, no matter
     // what this original frame is. This is required because of how the root view controller is displayed, and leads to
     // issues when a container is set as root view controller for an application starting in landscape mode. Overriding the
     // autoresizing mask is here not a problem, though: We already are adjusting the view controller's view frame (see below),
-    // and this overriding the autoresizing mask should not conflict with how the view controller is displayed:
+    // and this overriding should not conflict with how the view controller is displayed:
     //   - if the view controller's view can resize in all directions, nothing is changed by overriding the autoresizing
     //     mask
     //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed 
@@ -321,7 +342,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 - (void)removeViewFromContainerView
 {
     if (! self.addedToContainerView) {
-        HLSLoggerDebug(@"View controller's view is not added to a container view");
         return;
     }
     
@@ -329,10 +349,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     [self.viewController.view removeFromSuperview];
     self.addedToContainerView = NO;
     
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseInitialized;
-    
-    // Restore view controller original properties (this way, if addViewToContainerView:inContainerContentStack:
-    // is called again later, it will get the view controller's view in its original state)
+    // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.alpha = self.originalViewAlpha;
     self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
@@ -345,8 +362,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     if ([self.viewController isViewLoaded]) {
         self.viewController.view = nil;
         [self.viewController viewDidUnload];
-        
-        m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidUnload;
     }
 }
 
@@ -356,7 +371,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         return;
     }
     
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillAppear;
     [self.viewController viewWillAppear:animated];
 }
 
@@ -366,7 +380,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         return;
     }
     
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidAppear;
     [self.viewController viewDidAppear:animated];
 }
 
@@ -376,7 +389,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         return;
     }
     
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewWillDisappear;
     [self.viewController viewWillDisappear:animated];
 }
 
@@ -386,7 +398,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         return;
     }
     
-    m_lifeCyclePhase = HLSViewControllerLifeCyclePhaseViewDidDisappear;
     [self.viewController viewDidDisappear:animated];
 }
 
@@ -414,10 +425,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; addedToContainerView: %@; view: %@; forwardingProperties: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; view: %@; forwardingProperties: %@>", 
             [self class],
             self,
             self.viewController,
+            self.containerViewController,
             HLSStringFromBool(self.addedToContainerView),
             [self view],
             HLSStringFromBool(self.forwardingProperties)];

@@ -244,7 +244,7 @@
 
 - (HLSStackController *)stackController
 {
-    return [HLSContainerContent containerControllerKindOfClass:[HLSStackController class] forViewController:self];
+    return [self containerViewControllerKindOfClass:[HLSStackController class]];
 }
 
 @end

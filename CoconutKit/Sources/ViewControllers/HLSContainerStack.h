@@ -9,6 +9,16 @@
 #import "HLSAnimation.h"
 #import "HLSTransitionStyle.h"
 
+/*
+ *
+ * Some view controller containers might display several view controllers simultaneously in the same content view. In
+ * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
+ * This allows the view to be inserted at the proper location in the view hierarchy. If this parameter is nil, the
+ * view is simply added on top.
+ * The first element in the stack array is interpreted as the bottommost one.
+ */
+
+
 // Forward declarations
 @class HLSZeroingWeakRef;
 @protocol HLSContainerStackDelegate;
@@ -133,5 +143,11 @@ willPushViewController:(UIViewController *)viewController
   didPopViewController:(UIViewController *)viewController
               animated:(BOOL)animated
               userInfo:(NSDictionary *)userInfo;
+
+@end
+
+@interface UIViewController (HLSContainerStack)
+
+- (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass;
 
 @end

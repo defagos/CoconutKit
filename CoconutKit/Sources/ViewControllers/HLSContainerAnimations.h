@@ -18,9 +18,8 @@
 @interface HLSContainerAnimations : NSObject
 
 /**
- * Return the animation which makes a view controller appear, and other ones disappear. The view controllers
- * to make appear or disappear might be nil, this is why the transition style to apply has to be provided
- * separately
+ * Return the animation which makes a view controller appear, and other ones disappear, for some transition
+ * style. The view controllers to make appear or disappear might be nil
  */
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                      appearingContainerContent:(HLSContainerContent *)appearingContainerContent

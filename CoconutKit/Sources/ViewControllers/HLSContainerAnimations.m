@@ -131,7 +131,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view fades in. The view belows are left as is
+// The new view fades in. The views below are left as is
 + (HLSAnimation *)fadeInAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
                                  disappearingContainerContents:(NSArray *)disappearingContainerContents
 {
@@ -154,7 +154,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view fades in. The view belows are pushed to the back
+// The new view fades in. The views below are pushed to the back
 + (HLSAnimation *)fadeInAnimation2WithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent
                                   disappearingContainerContents:(NSArray *)disappearingContainerContents
 {
@@ -264,7 +264,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The two views are flipped around an axis
+// The appearing and disappearing views are flipped around an axis
 + (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
                                                y:(CGFloat)y
                                                z:(CGFloat)z

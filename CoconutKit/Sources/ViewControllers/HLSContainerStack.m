@@ -15,6 +15,9 @@
 #import "HLSZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 
+// TODO: No requirement about the number of view controllers in an HLSContainerStack. HLSStackController, however, must always
+//       have a root view controller (prevent pops, check that one has been defined when displayed for the first time)
+
 const NSUInteger HLSContainerStackMinimalCapacity = 2;
 const NSUInteger HLSContainerStackDefaultCapacity = 2;
 const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
@@ -213,7 +216,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                   duration:duration];
         pushAnimation.tag = @"push_animation";
         pushAnimation.lockingUI = YES;
-        pushAnimation.bringToFront = YES;
         [pushAnimation playAnimated:[self.containerViewController isViewVisible]];
     }
     else {
@@ -227,40 +229,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)popViewController
 {
-    // Cannot pop if only one view controller remains
-    if ([self.containerContents count] == 1) {
-        HLSLoggerWarn(@"The root view controller cannot be popped");
-        return;
-    }
-    
-    // If the view is loaded, the popped view controller will be unregistered at the end of the animation
-    if ([self.containerViewController isViewLoaded]) {
-        // A view being popped, we need one more view to be visible so that the capacity criterium can be fulfilled (if stack deep enough)
-        HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:self.capacity];
-        if (newlyVisibleContainerContent) {
-            [self addViewForContainerContent:newlyVisibleContainerContent];
-        }
-        
-        // Pop animation
-        HLSContainerContent *topContainerContent = [self topContainerContent];
-        HLSAnimation *popAnimation = [[HLSContainerAnimations animationWithTransitionStyle:topContainerContent.transitionStyle
-                                                                 appearingContainerContent:topContainerContent
-                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)]
-                                                                             containerView:self.containerView 
-                                                                                  duration:topContainerContent.duration] reverseAnimation];
-        popAnimation.tag = @"pop_animation";
-        popAnimation.lockingUI = YES;
-        popAnimation.bringToFront = YES;
-        [popAnimation playAnimated:[self.containerViewController isViewVisible]];
-    }
-    // If the view is not loaded, we can unregister the popped view controller on the spot
-    else {
-        [self.containerContents removeLastObject];
-        
-        // The top view controller must be the one that forwards its content (if forwarding enabled)
-        HLSContainerContent *topContainerContent = [self topContainerContent];
-        topContainerContent.forwardingProperties = self.forwardingProperties;
-    }
+    [self removeViewControllerAtIndex:[self.containerContents count] - 1];
 }
 
 - (void)popToViewController:(UIViewController *)viewController
@@ -271,7 +240,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    for (NSUInteger i = [self.containerContents count] - 1; i > index; --i) {
+    for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
         [self removeViewControllerAtIndex:i];
     }
 }
@@ -281,10 +250,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     [self popToViewController:[self rootViewController]];
 }
 
-// TODO: Pop: Should restore the view below if newly visible (as in popViewController). Maybe it is best to move popViewController
-// implementation here, and to implement popViewController with a single call with max index. Also be careful to ensure that there
-// is always 1 view controller in the stack (this also has to be checked when the stack is loaded)
-
 - (void)removeViewControllerAtIndex:(NSUInteger)index
 {
     if (index >= [self.containerContents count]) {
@@ -292,21 +257,41 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // The top view controller receives all events when removed, i.e. is popped normally
-    if (index == [self.containerContents count] - 1) {
-        [self popViewController];
-        return;
-    }
+    if ([self.containerViewController isViewLoaded]) {
+        HLSContainerContent *removedContainerContent = [self.containerContents objectAtIndex:index];
         
-    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-    HLSAnimation *animation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
-                                                          appearingContainerContent:containerContent 
-                                                      disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
-                                                                      containerView:self.containerView
-                                                                           duration:0.f] reverseAnimation];
-    animation.lockingUI = YES;
-    animation.bringToFront = NO;
-    [animation playAnimated:NO];
+        // If visible, then we need to load a view controller below so that the capacity criterium can be fulfilled
+        if ([self isContainerContentVisible:removedContainerContent]) {
+            HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:self.capacity];
+            if (newlyVisibleContainerContent && ! newlyVisibleContainerContent.addedToContainerView) {
+                [self addViewForContainerContent:newlyVisibleContainerContent];
+            }
+        }
+        
+        // Pop animation
+        HLSAnimation *popAnimation = [[HLSContainerAnimations animationWithTransitionStyle:removedContainerContent.transitionStyle
+                                                                 appearingContainerContent:removedContainerContent
+                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                             containerView:self.containerView 
+                                                                                  duration:removedContainerContent.duration] reverseAnimation];
+        popAnimation.tag = @"pop_animation";
+        popAnimation.lockingUI = YES;
+        if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+            [popAnimation playAnimated:YES];
+        }
+        else {
+            [popAnimation playAnimated:NO];
+        }
+    }
+    // If the view is not loaded, we can unregister the popped view controller on the spot
+    else {
+        [self.containerContents removeObjectAtIndex:index];
+        
+        // The top view controller must be the one that forwards its content (if forwarding enabled). If the top view controller
+        // has been removed, this ensures the new top one has this property
+        HLSContainerContent *topContainerContent = [self topContainerContent];
+        topContainerContent.forwardingProperties = self.forwardingProperties;
+    }
 }
 
 - (void)rotateWithDuration:(NSTimeInterval)duration
@@ -420,6 +405,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     NSAssert(self.containerView != nil, @"A container view must have been defined");
     
+    if (containerContent.addedToContainerView) {
+        return;
+    }
+    
     NSUInteger index = [self.containerContents indexOfObject:containerContent];
     NSAssert(index != NSNotFound, @"Content not found in the stack");
         
@@ -456,7 +445,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                              containerView:self.containerView 
                                                                                   duration:0.];
             animation.lockingUI = YES;
-            animation.bringToFront = NO;        // Do not bring resurrected views to the front
             [animation playAnimated:NO];
         }
     }    
@@ -564,6 +552,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if ([animation.tag isEqualToString:@"pop_animation"]) {
         [self.containerContents removeLastObject];
     }
+}
+
+@end
+
+
+@implementation UIViewController (HLSContainerStack)
+
+- (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass
+{
+    return [HLSContainerContent containerViewControllerKindOfClass:containerViewControllerClass
+                                                 forViewController:self];
 }
 
 @end
