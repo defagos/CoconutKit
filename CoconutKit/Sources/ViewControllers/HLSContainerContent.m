@@ -262,12 +262,18 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)addAsSubviewIntoContainerView:(UIView *)containerView
 {
-    [self insertAsSubviewIntoContainerView:containerView atIndex:NSUIntegerMax];
+    [self insertAsSubviewIntoContainerView:containerView atIndex:[containerView.subviews count]];
 }
 
-// You can use index = NSUIntegerMax to add at the top
 - (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index
 {
+    if (index > [containerView.subviews count]) {
+        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%@]", [containerView.subviews count]];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException 
+                                       reason:reason
+                                     userInfo:nil];
+    }
+    
     if (self.addedToContainerView) {
         HLSLoggerDebug(@"View controller's view already added to a container view");
         return;
@@ -313,14 +319,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }
     }
     
-    // Insert as subview
-    if (index >= [containerView.subviews count]) {
-        [containerView addSubview:view];
-    }
-    else {
-        [containerView insertSubview:view atIndex:index];
-    }
-    
+    // The index [containerView.subviews count] is valid and equivalent to -addSubview:
+    [containerView insertSubview:view atIndex:index];    
     self.addedToContainerView = YES;
     
     // The background view of view controller's views inserted into a container must fill its bounds completely, no matter

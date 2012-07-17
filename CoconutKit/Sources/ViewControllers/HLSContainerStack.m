@@ -50,7 +50,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithContainerViewController:(UIViewController *)containerViewController
+- (id)initWithContainerViewController:(UIViewController *)containerViewController 
+     removingInvisibleViewControllers:(BOOL)removingInvisibleViewControllers
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -63,6 +64,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
         self.capacity = HLSContainerStackDefaultCapacity;
+        m_removingInvisibleViewControllers = removingInvisibleViewControllers;
     }
     return self;
 }
@@ -144,8 +146,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     topContainerContent.forwardingProperties = m_forwardingProperties;
 }
 
-@synthesize removingInvisibleViewControllers = m_removingInvisibleViewControllers;
-
 - (HLSContainerContent *)topContainerContent
 {
     return [self.containerContents lastObject];
@@ -191,58 +191,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
 {
-    if (! viewController) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"Cannot push nil into a view controller container"
-                                     userInfo:nil];
-    }
-    
-    // Check that the view controller to be pushed is compatible with the current orientation
-    if ([self.containerViewController isViewVisible]) {
-        if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
-            HLSLoggerError(@"The view controller does not support the current view container orientation");
-            return;
-        }
-    }
-    
-    // Can release the view not needed according to the capacity
-    NSUInteger newlyInvisibleContainerContentIndex = self.capacity - 1;
-    HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:newlyInvisibleContainerContentIndex];
-    if (self.removingInvisibleViewControllers) {
-        [self removeViewControllerAtIndex:newlyInvisibleContainerContentIndex];
-    }
-    else {
-        [newlyInvisibleContainerContent releaseViews];
-    }
-    
-    // Associate the view controller with its container
-    HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
-                                                                         containerViewController:self.containerViewController
-                                                                                 transitionStyle:transitionStyle 
-                                                                                        duration:duration] autorelease];
-    [self.containerContents addObject:containerContent];
-    
-    if ([self.containerViewController isViewLoaded]) {
-        [self addViewForContainerContent:containerContent];
-        
-        // If visible, always plays animated (even if no animation steps are defined). This is a transition, and we
-        // expect it to occur animated, even if instantaneously
-        HLSAnimation *pushAnimation = [HLSContainerAnimations animationWithTransitionStyle:transitionStyle 
-                                                                 appearingContainerContent:containerContent 
-                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, [self.containerContents count] - 1)] 
-                                                                             containerView:self.containerView 
-                                                                                  duration:duration];
-        pushAnimation.tag = @"push_animation";
-        pushAnimation.lockingUI = YES;
-        [pushAnimation playAnimated:[self.containerViewController isViewVisible]];
-    }
-    else {
-        // The top view controller must be the one that forwards its content (if forwarding enabled)
-        HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
-        secondTopContainerContent.forwardingProperties = NO;
-        
-        containerContent.forwardingProperties = self.forwardingProperties;
-    }
+    [self insertViewController:viewController
+                       atIndex:[self.containerContents count] 
+           withTransitionStyle:transitionStyle
+                      duration:duration];
 }
 
 - (void)popViewController
@@ -266,6 +218,83 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)popToRootViewController
 {
     [self popToViewController:[self rootViewController]];
+}
+
+- (void)insertViewController:(UIViewController *)viewController 
+                     atIndex:(NSUInteger)index 
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle 
+                    duration:(NSTimeInterval)duration
+{
+    // TODO: Beware of containerView = nil! Test!
+    
+    
+    if (! viewController) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"Cannot push nil into a view controller container"
+                                     userInfo:nil];
+    }
+    
+    if (index > [self.containerContents count]) {
+        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%@]", [self.containerContents count]];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException 
+                                       reason:reason
+                                     userInfo:nil];
+    }
+    
+    // Check that the view controller to be pushed is compatible with the current orientation
+    if ([self.containerViewController isViewVisible]) {
+        if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
+            HLSLoggerError(@"The view controller does not support the current view container orientation");
+            return;
+        }
+    }
+        
+    // Associate the new view controller with its container
+    HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
+                                                                         containerViewController:self.containerViewController
+                                                                                 transitionStyle:transitionStyle 
+                                                                                        duration:duration] autorelease];
+    [self.containerContents addObject:containerContent];
+    
+    // Remove the view controllers when exceeding the capacity
+    if (m_removingInvisibleViewControllers) {        
+        if ([self.containerContents count] > self.capacity) {
+            [self removeViewControllerAtIndex:0];
+        }
+        NSAssert([self.containerContents count] <= self.capacity, @"Capacity constraint not fulfilled");
+    }
+    // Release the views for view controllers when exceeding capacity
+    else {
+        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+        [containerContentAtCapacity releaseViews];
+    }
+    
+    if ([self isContainerContentVisible:containerContent]) {
+        [self addViewForContainerContent:containerContent];
+    }
+    
+    // Pushing a view controller onto the stack. Plays the corressponding animation. If visible, always plays animated 
+    // (even if no animation steps are defined). This is a transition, and we expect it to occur animated, even if 
+    // instantaneously
+    if (index == [self.containerContents count] - 1) {
+        if ([self.containerViewController isViewLoaded]) {
+            HLSAnimation *pushAnimation = [HLSContainerAnimations animationWithTransitionStyle:transitionStyle 
+                                                                     appearingContainerContent:containerContent 
+                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
+                                                                                 containerView:self.containerView 
+                                                                                      duration:duration];
+            pushAnimation.tag = @"push_animation";
+            pushAnimation.lockingUI = YES;
+            [pushAnimation playAnimated:[self.containerViewController isViewVisible]];
+        }
+        else {
+            // The top view controller must be the one that forwards its content (if forwarding enabled)
+            HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
+            secondTopContainerContent.forwardingProperties = NO;
+            
+            containerContent.forwardingProperties = self.forwardingProperties;
+        }
+    }
 }
 
 - (void)removeViewControllerAtIndex:(NSUInteger)index
@@ -424,48 +453,45 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
 {
     NSAssert(self.containerView != nil, @"A container view must have been defined");
-    
+        
     if (containerContent.addedToContainerView) {
         return;
     }
     
     NSUInteger index = [self.containerContents indexOfObject:containerContent];
     NSAssert(index != NSNotFound, @"Content not found in the stack");
-        
+    
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
         [containerContent addAsSubviewIntoContainerView:self.containerView];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbour above)
     else {
-        BOOL added = NO;
-        for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
-            HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
-            if ([aboveContainerContent view]) {
-                [containerContent insertAsSubviewIntoContainerView:self.containerView atIndex:i];
-                added = YES;
-                break;
-            }
-        }
-        
-        if (! added) {
-            HLSLoggerError(@"Could not insert the view; no view found above in the stack");
-            return;
-        }            
+        HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
+        UIView *aboveContainerView = [aboveContainerContent view];
+        NSAssert(aboveContainerView != nil, @"The above view controller's view should be loaded");
+        [containerContent insertAsSubviewIntoContainerView:self.containerView
+                                                   atIndex:[self.containerView.subviews indexOfObject:aboveContainerView]];
     }
+    
+    HLSAnimation *belowAnimation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
+                                                              appearingContainerContent:nil
+                                                          disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                          containerView:self.containerView
+                                                                               duration:0.];    
+    [belowAnimation playAnimated:NO];
     
     // The transitions of the contents above in the stack might move views below in the stack. To account for this
     // effect, we must replay them so that the view we have inserted is put at the proper location
     if ([self.containerContents count] != 0) {
         for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
-            HLSAnimation *animation = [HLSContainerAnimations animationWithTransitionStyle:aboveContainerContent.transitionStyle
-                                                                 appearingContainerContent:nil
-                                                             disappearingContainerContents:[NSArray arrayWithObject:containerContent]
-                                                                             containerView:self.containerView 
-                                                                                  duration:0.];
-            animation.lockingUI = YES;
-            [animation playAnimated:NO];
+            HLSAnimation *aboveAnimation = [HLSContainerAnimations animationWithTransitionStyle:aboveContainerContent.transitionStyle
+                                                                      appearingContainerContent:nil
+                                                                  disappearingContainerContents:[NSArray arrayWithObject:containerContent]
+                                                                                  containerView:self.containerView 
+                                                                                       duration:0.];
+            [aboveAnimation playAnimated:NO];
         }
     }    
 }

@@ -47,7 +47,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Create a stack which will manage the children of a container view controller. The view controller container
  * is not retained
  */
-- (id)initWithContainerViewController:(UIViewController *)containerViewController;
+- (id)initWithContainerViewController:(UIViewController *)containerViewController 
+     removingInvisibleViewControllers:(BOOL)removingInvisibleViewControllers;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;
@@ -59,9 +60,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * to display those elements transparently higher up in the view controller hierarchy
  */
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
-
-// TODO: Prevent changes when the stack has been displayed once. Default value is NO
-@property (nonatomic, assign, getter=isRemovingInvisibleViewControllers) BOOL removingInvisibleViewControllers;
 
 - (UIViewController *)rootViewController;
 - (UIViewController *)topViewController;
@@ -89,9 +87,10 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)popToViewController:(UIViewController *)viewController;
 - (void)popToRootViewController;
 
-// TODO: Can be used to pop without animation. Can be used to remove at the front (i.e. remove
-//       the root view controller, which can be useful) or in the middle (can be used to implement
-//       a popToViewController)
+- (void)insertViewController:(UIViewController *)viewController
+                     atIndex:(NSUInteger)index
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                    duration:(NSTimeInterval)duration;
 - (void)removeViewControllerAtIndex:(NSUInteger)index;
 
 // TODO: Implement

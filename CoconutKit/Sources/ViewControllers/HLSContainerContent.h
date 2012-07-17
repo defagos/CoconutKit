@@ -122,6 +122,9 @@
 /**
  * Instantiate (if not already) and add the view controller's view as subview of the view where a container displays
  * its contents (container view). A view container can manage several separate container views
+ *
+ * The index starts at 0 and cannot be greater than [containerView.subviews count]. The 'add' method
+ * is equivalent to the 'insert' method with index = [containerView.subviews count]. 
  * 
  * The frame of a view controller's view is automatically adjusted to match the container view bounds. This matches the
  * usual behavior of built-in view controller containers (UINavigationController, UITabBarController)
