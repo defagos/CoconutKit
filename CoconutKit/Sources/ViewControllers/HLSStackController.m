@@ -235,6 +235,11 @@
 
 - (void)popViewController
 {
+    if ([self.containerStack count] == 1) {
+        HLSLoggerWarn(@"The root view controller cannot be popped");
+        return;
+    }
+    
     [self.containerStack popViewController];
 }
 

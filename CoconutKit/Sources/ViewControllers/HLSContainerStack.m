@@ -12,12 +12,21 @@
 #import "HLSContainerAnimations.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
-#import "HLSZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
+#import "UIViewController+HLSExtensions.h"
+
+/**
+ * Some view controller containers might display several view controllers simultaneously in the same content view. In
+ * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
+ * This allows the view to be inserted at the proper location in the view hierarchy. If this parameter is nil, the
+ * view is simply added on top.
+ * The first element in the stack array is interpreted as the bottommost one.
+ */
 
 // TODO: No requirement about the number of view controllers in an HLSContainerStack. HLSStackController, however, must always
 //       have a root view controller (prevent pops, check that one has been defined when displayed for the first time)
 
+// Constants
 const NSUInteger HLSContainerStackMinimalCapacity = 2;
 const NSUInteger HLSContainerStackDefaultCapacity = 2;
 const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
@@ -26,7 +35,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @property (nonatomic, assign) UIViewController *containerViewController;
 @property (nonatomic, retain) NSMutableArray *containerContents;
-@property (nonatomic, retain) HLSZeroingWeakRef *containerViewZeroingWeakRef;
 
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
@@ -46,13 +54,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     if ((self = [super init])) {
         if (! containerViewController) {
-            HLSLoggerError(@"A container view controller must be provided");
             [self release];
-            return nil;
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:@"Missing container view controller"
+                                         userInfo:nil];
         }
                 
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
+        self.capacity = HLSContainerStackDefaultCapacity;
     }
     return self;
 }
@@ -67,7 +77,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     self.containerViewController = nil;
     self.containerContents = nil;
-    self.containerViewZeroingWeakRef = nil;
+    self.containerView = nil;
 
     [super dealloc];
 }
@@ -78,19 +88,37 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @synthesize containerContents = m_containerContents;
 
-@synthesize containerViewZeroingWeakRef = m_containerViewZeroingWeakRef;
+@synthesize containerView = m_containerView;
+
+- (void)setContainerView:(UIView *)containerView
+{
+    if (m_containerView == containerView) {
+        return;
+    }
+    
+    if (m_containerView) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"The container view has already been set"
+                                     userInfo:nil];
+    }
+        
+    if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException 
+                                       reason:@"The container view must be part of the view controller's view hierarchy"
+                                     userInfo:nil];
+    }
+    
+    // All animations must take place inside the view controller's view
+    containerView.clipsToBounds = YES;
+    containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;    
+}
 
 @synthesize capacity = m_capacity;
 
-@synthesize forwardingProperties = m_forwardingProperties;
-
-@synthesize removeInvisibleViewControllers = m_removeInvisibleViewControllers;
-
-// TODO: Prevent changes when the stack has been displayed once
 - (void)setCapacity:(NSUInteger)capacity
-{
-    if (self.containerContents) {
-        HLSLoggerError(@"The capacity must be set early using user-defined runtime attributes");
+{    
+    if ([self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
+        HLSLoggerError(@"The capacity can only be set before the view controller is loaded for the first time");
         return;
     }
     
@@ -102,28 +130,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     m_capacity = capacity;
 }
 
-- (UIView *)containerView
+@synthesize forwardingProperties = m_forwardingProperties;
+
+- (void)setForwardingProperties:(BOOL)forwardingProperties
 {
-    return self.containerViewZeroingWeakRef.object;
+    if (m_forwardingProperties == forwardingProperties) {
+        return;
+    }
+    
+    m_forwardingProperties = forwardingProperties;
+    
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    topContainerContent.forwardingProperties = m_forwardingProperties;
 }
 
-- (void)setContainerView:(UIView *)containerView
-{
-    if (self.containerViewZeroingWeakRef.object == containerView) {
-        return;
-    }
-    
-    if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
-        HLSLoggerError(@"The container view must be part of the view controller's view hierarchy");
-        return;
-    }
-    
-    self.containerViewZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:containerView] autorelease];
-    
-    // All animations must take place inside the view controller's view
-    containerView.clipsToBounds = YES;
-    containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;    
-}
+@synthesize removingInvisibleViewControllers = m_removingInvisibleViewControllers;
 
 - (HLSContainerContent *)topContainerContent
 {
@@ -170,7 +191,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
 {
-    NSAssert(viewController != nil, @"Cannot push nil");
+    if (! viewController) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"Cannot push nil into a view controller container"
+                                     userInfo:nil];
+    }
     
     // Check that the view controller to be pushed is compatible with the current orientation
     if ([self.containerViewController isViewVisible]) {
@@ -183,18 +208,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Can release the view not needed according to the capacity
     NSUInteger newlyInvisibleContainerContentIndex = self.capacity - 1;
     HLSContainerContent *newlyInvisibleContainerContent = [self containerContentAtDepth:newlyInvisibleContainerContentIndex];
-    if (self.removeInvisibleViewControllers) {
+    if (self.removingInvisibleViewControllers) {
         [self removeViewControllerAtIndex:newlyInvisibleContainerContentIndex];
     }
     else {
         [newlyInvisibleContainerContent releaseViews];
-    }
-    
-    // If no view controller has been loaded yet, create the objects required to store it. The root view controller has always none
-    // as transition style
-    if (! self.containerContents) {
-        self.containerContents = [NSMutableArray array];
-        transitionStyle = HLSTransitionStyleNone;
     }
     
     // Associate the view controller with its container
@@ -308,6 +326,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     for (HLSContainerContent *containerContent in self.containerContents) {
         [containerContent releaseViews];
     }
+    
+    self.containerView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

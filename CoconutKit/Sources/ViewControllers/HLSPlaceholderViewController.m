@@ -171,7 +171,7 @@
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             // We use a stack with standard capacity (2) and removing view controllers at the bottom
             HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self] autorelease];
-            containerStack.removeInvisibleViewControllers = YES;
+            containerStack.removingInvisibleViewControllers = YES;
             containerStack.containerView = [self.placeholderViews objectAtIndex:i];
             [self.containerStacks addObject:containerStack];
         }

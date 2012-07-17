@@ -9,18 +9,7 @@
 #import "HLSAnimation.h"
 #import "HLSTransitionStyle.h"
 
-/*
- *
- * Some view controller containers might display several view controllers simultaneously in the same content view. In
- * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
- * This allows the view to be inserted at the proper location in the view hierarchy. If this parameter is nil, the
- * view is simply added on top.
- * The first element in the stack array is interpreted as the bottommost one.
- */
-
-
 // Forward declarations
-@class HLSZeroingWeakRef;
 @protocol HLSContainerStackDelegate;
 
 // Standard capacities
@@ -28,18 +17,39 @@ extern const NSUInteger HLSContainerStackMinimalCapacity;
 extern const NSUInteger HLSContainerStackDefaultCapacity;
 extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
+/**
+ * The HLSContainerStack class purpose is to make container implementation (which is not a trivial task) as
+ * easy as possible. Implementing a view controller container correctly is namely difficult. The
+ * HLSContainerStack class offers the following features:
+ *   - view lifecycle and rotation events are correctly forwarded to children view controllers
+ *   - view controllers can be unloaded or removed when deep enough into the stack (capacity)
+ *   - view controller properties (title, navigation items, etc.) can be forwarded automatically to the
+ *     container view controller
+ *   - view controllers can be added and removed anywhere in the stack with the correct animation
+ *   - children view controller views are instantiated when really needed, not earlier
+ *   - view controllers can be loaded into a container before it is displayed
+ 
+ * Instead of having to manage children view controllers manually, instantiate a container stack, and attach 
+ * it the view where children must be drawn once it is available
+ *
+ */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private
     UIViewController *m_containerViewController;
     NSMutableArray *m_containerContents;
-    HLSZeroingWeakRef *m_containerViewZeroingWeakRef;
+    UIView *m_containerView;
     NSUInteger m_capacity;
     BOOL m_forwardingProperties;
-    BOOL m_removeInvisibleViewControllers;
+    BOOL m_removingInvisibleViewControllers;
 }
 
+/**
+ * Create a stack which will manage the children of a container view controller. The view controller container
+ * is not retained
+ */
 - (id)initWithContainerViewController:(UIViewController *)containerViewController;
 
+// TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;
 @property (nonatomic, assign) NSUInteger capacity;
 
@@ -51,7 +61,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 // TODO: Prevent changes when the stack has been displayed once. Default value is NO
-@property (nonatomic, assign, getter=isRemoveInvisibleViewControllers) BOOL removeInvisibleViewControllers;
+@property (nonatomic, assign, getter=isRemovingInvisibleViewControllers) BOOL removingInvisibleViewControllers;
 
 - (UIViewController *)rootViewController;
 - (UIViewController *)topViewController;
@@ -83,6 +93,10 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 //       the root view controller, which can be useful) or in the middle (can be used to implement
 //       a popToViewController)
 - (void)removeViewControllerAtIndex:(NSUInteger)index;
+
+// TODO: Implement
+// - insertViewControllerAtIndex:
+// - replaceViewControllerAtIndex:
 
 /**
  * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved
