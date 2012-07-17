@@ -30,7 +30,7 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removingInvisibleViewControllers:NO] autorelease];
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
                                        duration:0.];
@@ -50,7 +50,7 @@
     // case, setting the root view controller is performed using segues (must be done when the involved view
     // controllers are available, in -awakeFromNib).
     if ((self = [super initWithCoder:aDecoder])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removingInvisibleViewControllers:NO] autorelease];
         self.containerStack.capacity = HLSContainerStackMinimalCapacity;
     }
     return self;

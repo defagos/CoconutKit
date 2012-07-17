@@ -168,6 +168,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)dealloc
 {
+    [self removeViewFromContainerView];
+    
     // Restore the view controller's original properties. If the view controller was not retained elsewhere, this would
     // not be necessary. But clients might keep additional references to view controllers for caching purposes. The 
     // best we can do is to restore a view controller's properties when it is removed from a container, no matter whether 

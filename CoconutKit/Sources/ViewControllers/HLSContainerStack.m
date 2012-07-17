@@ -41,7 +41,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent;
 
-- (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent;
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
 @end
@@ -225,9 +224,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
          withTransitionStyle:(HLSTransitionStyle)transitionStyle 
                     duration:(NSTimeInterval)duration
 {
-    // TODO: Beware of containerView = nil! Test!
-    
-    
     if (! viewController) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"Cannot push nil into a view controller container"
@@ -249,51 +245,19 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
         
-    // Associate the new view controller with its container
+    // Associate the new view controller with its container (this increases the containerContents array size)
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
                                                                          containerViewController:self.containerViewController
                                                                                  transitionStyle:transitionStyle 
                                                                                         duration:duration] autorelease];
-    [self.containerContents addObject:containerContent];
+    [self.containerContents insertObject:containerContent atIndex:index];
     
-    // Remove the view controllers when exceeding the capacity
-    if (m_removingInvisibleViewControllers) {        
-        if ([self.containerContents count] > self.capacity) {
-            [self removeViewControllerAtIndex:0];
-        }
-        NSAssert([self.containerContents count] <= self.capacity, @"Capacity constraint not fulfilled");
-    }
-    // Release the views for view controllers when exceeding capacity
-    else {
-        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-        [containerContentAtCapacity releaseViews];
-    }
-    
-    if ([self isContainerContentVisible:containerContent]) {
-        [self addViewForContainerContent:containerContent];
-    }
-    
-    // Pushing a view controller onto the stack. Plays the corressponding animation. If visible, always plays animated 
-    // (even if no animation steps are defined). This is a transition, and we expect it to occur animated, even if 
-    // instantaneously
-    if (index == [self.containerContents count] - 1) {
-        if ([self.containerViewController isViewLoaded]) {
-            HLSAnimation *pushAnimation = [HLSContainerAnimations animationWithTransitionStyle:transitionStyle 
-                                                                     appearingContainerContent:containerContent 
-                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
-                                                                                 containerView:self.containerView 
-                                                                                      duration:duration];
-            pushAnimation.tag = @"push_animation";
-            pushAnimation.lockingUI = YES;
-            [pushAnimation playAnimated:[self.containerViewController isViewVisible]];
-        }
-        else {
-            // The top view controller must be the one that forwards its content (if forwarding enabled)
-            HLSContainerContent *secondTopContainerContent = [self secondTopContainerContent];
-            secondTopContainerContent.forwardingProperties = NO;
-            
-            containerContent.forwardingProperties = self.forwardingProperties;
-        }
+    // If inserted in the capacity range, must add the view. This can lead to temporarily have self.capacity + 1 views
+    // loaded, but this is needed so that no view controller disappear before an animated push animation takes place
+    if ([self.containerViewController isViewLoaded]) {
+        if ([self.containerContents count] - index - 1 <= self.capacity) {
+            [self addViewForContainerContent:containerContent];
+        }        
     }
 }
 
@@ -304,40 +268,32 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if ([self.containerViewController isViewLoaded]) {
-        HLSContainerContent *removedContainerContent = [self.containerContents objectAtIndex:index];
-        
-        // If visible, then we need to load a view controller below so that the capacity criterium can be fulfilled
-        if ([self isContainerContentVisible:removedContainerContent]) {
-            HLSContainerContent *newlyVisibleContainerContent = [self containerContentAtDepth:self.capacity];
-            if (newlyVisibleContainerContent && ! newlyVisibleContainerContent.addedToContainerView) {
-                [self addViewForContainerContent:newlyVisibleContainerContent];
-            }
-        }
-        
-        // Pop animation
-        HLSAnimation *popAnimation = [[HLSContainerAnimations animationWithTransitionStyle:removedContainerContent.transitionStyle
-                                                                 appearingContainerContent:removedContainerContent
-                                                             disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
-                                                                             containerView:self.containerView 
-                                                                                  duration:removedContainerContent.duration] reverseAnimation];
-        popAnimation.tag = @"pop_animation";
-        popAnimation.lockingUI = YES;
+    // Add the new view which will be loaded according to the capacity criterium (if needed)
+    if ([self.containerContents count] - index <= self.capacity) {
+        HLSContainerContent *addedContainerContent = [self.containerContents objectAtIndex:[self.containerContents count] - 1 - self.capacity];
+        [self addViewForContainerContent:addedContainerContent];
+    }
+    
+    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+    if ([self.containerViewController isViewLoaded] && containerContent.addedToContainerView) {
+        HLSAnimation *removalAnimation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
+                                                                     appearingContainerContent:containerContent
+                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                                 containerView:self.containerView 
+                                                                                      duration:containerContent.duration] reverseAnimation];
+        removalAnimation.tag = @"removal_animation";
+        removalAnimation.lockingUI = YES;
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
-            [popAnimation playAnimated:YES];
+            [removalAnimation playAnimated:YES];
         }
         else {
-            [popAnimation playAnimated:NO];
+            [removalAnimation playAnimated:NO];
         }
     }
-    // If the view is not loaded, we can unregister the popped view controller on the spot
     else {
         [self.containerContents removeObjectAtIndex:index];
         
-        // The top view controller must be the one that forwards its content (if forwarding enabled). If the top view controller
-        // has been removed, this ensures the new top one has this property
-        HLSContainerContent *topContainerContent = [self topContainerContent];
-        topContainerContent.forwardingProperties = self.forwardingProperties;
+        [self topContainerContent].forwardingProperties = YES;
     }
 }
 
@@ -364,16 +320,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     NSAssert([self.containerContents count] != 0, @"At least one view controller must be loaded");
     
     // Display those views required according to the capacity
-    for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-        if ([self isContainerContentVisible:containerContent]) {
-            [self addViewForContainerContent:containerContent];
-        }
-        // Otherwise remove them (if loaded; should be quite rare here)
-        else {
-            [containerContent releaseViews];
-        }
+    for (NSUInteger i = 0; i < [self.containerContents count] - self.capacity; ++i) {
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:i];
+        [self addViewForContainerContent:containerContent];
     }
-    
+        
     // Forward events to the top view controller
     HLSContainerContent *topContainerContent = [self topContainerContent];
 #if 0
@@ -450,10 +401,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Managing contents
 
+// The containerContent object must already reside in containerContents. This method is namely intended to be used
+// when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
+// controllers
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
 {
-    NSAssert(self.containerView != nil, @"A container view must have been defined");
-        
+    if (! [self.containerViewController isViewLoaded]) {
+        return;
+    }
+    
+    if (! self.containerView) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"The view controller container view has been loaded, but no container view has been set" 
+                                     userInfo:nil];
+    }
+    
     if (containerContent.addedToContainerView) {
         return;
     }
@@ -463,46 +425,46 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
-        [containerContent addAsSubviewIntoContainerView:self.containerView];
+        [containerContent addAsSubviewIntoContainerView:self.containerView];        
     }
-    // Otherwise add below first content above for which a view is available (most probably the nearest neighbour above)
+    // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
         UIView *aboveContainerView = [aboveContainerContent view];
         NSAssert(aboveContainerView != nil, @"The above view controller's view should be loaded");
         [containerContent insertAsSubviewIntoContainerView:self.containerView
                                                    atIndex:[self.containerView.subviews indexOfObject:aboveContainerView]];
-    }
-    
-    HLSAnimation *belowAnimation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
-                                                              appearingContainerContent:nil
-                                                          disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
-                                                                          containerView:self.containerView
-                                                                               duration:0.];    
-    [belowAnimation playAnimated:NO];
-    
-    // The transitions of the contents above in the stack might move views below in the stack. To account for this
-    // effect, we must replay them so that the view we have inserted is put at the proper location
-    if ([self.containerContents count] != 0) {
+        
+        // Play the animation of all view controllers above so that the new view controller is brought into the correct position
         for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
             HLSAnimation *aboveAnimation = [HLSContainerAnimations animationWithTransitionStyle:aboveContainerContent.transitionStyle
                                                                       appearingContainerContent:nil
                                                                   disappearingContainerContents:[NSArray arrayWithObject:containerContent]
                                                                                   containerView:self.containerView 
-                                                                                       duration:0.];
+                                                                                       duration:aboveContainerContent.duration];
             [aboveAnimation playAnimated:NO];
         }
-    }    
+    }
+    
+    // Play the corresponding animation so that all view controllers are brought into position (animated only if
+    // the container is visible)
+    HLSAnimation *addAnimation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle 
+                                                            appearingContainerContent:containerContent 
+                                                        disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
+                                                                        containerView:self.containerView 
+                                                                             duration:containerContent.duration];
+    addAnimation.tag = @"add_animation";
+    addAnimation.lockingUI = YES;
+    if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+        [addAnimation playAnimated:YES];
+    }
+    else {
+        [addAnimation playAnimated:NO];
+    }
 }
 
 #pragma mark Capacity
-
-- (BOOL)isContainerContentVisible:(HLSContainerContent *)containerContent
-{
-    NSUInteger index = [self.containerContents indexOfObject:containerContent];
-    return [self.containerContents count] - index <= self.capacity;
-}
 
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
 {
@@ -516,16 +478,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
+// Called for any push / pop animation, whether animated or not
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqualToString:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"add_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];        
     }
-    else if ([animation.tag isEqualToString:@"pop_animation"]) {
+    else if ([animation.tag isEqualToString:@"removal_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
     }
@@ -539,7 +502,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // forwarding properties
     appearingContainerContent.forwardingProperties = self.forwardingProperties;
     
-    if ([self.containerViewController isViewVisible]) {
+    // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
+    // transition takes place
+    if (animated) {
         [disappearingContainerContent viewWillDisappear:animated];
         [appearingContainerContent viewWillAppear:animated];
         
@@ -558,22 +523,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *appearingContainerContent = nil;
     HLSContainerContent *disappearingContainerContent = nil;
     
-    if ([animation.tag isEqualToString:@"push_animation"]) {
+    if ([animation.tag isEqualToString:@"add_animation"]) {
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];
     }
-    else if ([animation.tag isEqualToString:@"pop_animation"]) {
+    else if ([animation.tag isEqualToString:@"removal_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
-        
-        // At the end of the pop animation, the popped view controller's view is removed
-        [disappearingContainerContent removeViewFromContainerView];
     }
     else {
         return;
     }
     
-    if ([self.containerViewController isViewVisible]) {
+    // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
+    // transition takes place
+    if (animated) {
         [disappearingContainerContent viewDidDisappear:animated];
     }
     
@@ -583,7 +547,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // properties
     disappearingContainerContent.forwardingProperties = NO;
     
-    if ([self.containerViewController isViewVisible]) {
+    if (animated) {
         [appearingContainerContent viewDidAppear:animated];
         
 #if 0
@@ -594,14 +558,22 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
 #endif
     }
-    
-    if ([animation.tag isEqualToString:@"pop_animation"]) {
-        [self.containerContents removeLastObject];
+
+    // During push animations we might have 3 view controllers loaded, cleanup so that the capacity criterium 
+    // is fulfilled
+    if ([animation.tag isEqualToString:@"add_animation"]) {
+        for (NSUInteger i = 0; i < [self.containerContents count] - self.capacity; ++i) {
+            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:i];
+            [containerContent removeViewFromContainerView];
+        }
+    }
+    // Done with the view controller which has been removed (animated or not)
+    else if ([animation.tag isEqualToString:@"removal_animation"]) {
+        [self.containerContents removeObject:disappearingContainerContent];        
     }
 }
 
 @end
-
 
 @implementation UIViewController (HLSContainerStack)
 
