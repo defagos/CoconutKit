@@ -9,6 +9,7 @@
 #import "UIToolbar+HLSExtensions.h"
 
 #import "HLSCategoryLinker.h"
+#import "UIView+HLSExtensions.h"
 
 HLSLinkCategory(UIToolbar_HLSExtensions)
 
@@ -48,7 +49,7 @@ static const NSInteger kBackgroundImageViewTag = 28756;         // Very unlikely
             backgroundImageView.image = backgroundImage;
             backgroundImageView.tag = kBackgroundImageViewTag;
             backgroundImageView.contentMode = UIViewContentModeScaleToFill;
-            backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            backgroundImageView.autoresizingMask = HLSViewAutoresizingAll;
             
             // iOS 5
             if([[[UIDevice currentDevice] systemVersion] intValue] >= 5) {

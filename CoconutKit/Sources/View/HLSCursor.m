@@ -13,6 +13,7 @@
 #import "HLSUserInterfaceLock.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
 
 static const CGFloat kCursorDefaultSpacing = 20.f;
 
@@ -194,7 +195,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         self.pointerContainerView.autoresizesSubviews = YES;
         self.pointerContainerView.exclusiveTouch = YES;
         
-        self.pointerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.pointerView.autoresizingMask = HLSViewAutoresizingAll;
         [self.pointerContainerView addSubview:self.pointerView];
         [self addSubview:self.pointerContainerView];
         

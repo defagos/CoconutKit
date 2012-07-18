@@ -91,7 +91,7 @@ static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *sel
                 backgroundImageView.image = backgroundImage;
                 backgroundImageView.tag = kBackgroundImageViewTag;
                 backgroundImageView.contentMode = UIViewContentModeScaleToFill;
-                backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                backgroundImageView.autoresizingMask = HLSViewAutoresizingAll;
                 
                 (*s_UINavigationBar__insertSubview_atIndex_Imp)(self, @selector(insertSubview:atIndex:), backgroundImageView, 0);
             }
