@@ -23,6 +23,8 @@
  * - display and hide modal -> does not call will / didShow
  */
 
+// TODO: Tester la capacité minimale
+
 /**
  * Some view controller containers might display several view controllers simultaneously in the same content view. In
  * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
@@ -59,7 +61,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 #pragma mark Object creation and destruction
 
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
-                             capacity:(NSUInteger)capacity 
+                             capacity:(NSUInteger)capacity
+                             removing:(BOOL)removing
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -71,7 +74,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
-        self.capacity = HLSContainerStackDefaultCapacity;
+        self.capacity = capacity;
+        m_removing = removing;
     }
     return self;
 }
@@ -255,12 +259,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                  transitionStyle:transitionStyle 
                                                                                         duration:duration] autorelease];
     [self.containerContents insertObject:containerContent atIndex:index];
-    
-    // Remove view controller / views not needed according to the capacity. This might decrease the containerContents 
-    // array size
-    HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-    [containerContentAtCapacity removeViewFromContainerView];
-    
+        
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
@@ -285,6 +284,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                       duration:containerContent.duration] reverseAnimation];
         removalAnimation.tag = @"remove_animation";
         removalAnimation.lockingUI = YES;
+        removalAnimation.delegate = self;
         
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             [removalAnimation playAnimated:YES];
@@ -470,9 +470,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                              duration:containerContent.duration];
     addAnimation.tag = @"add_animation";
     addAnimation.lockingUI = YES;
+    addAnimation.delegate = self;
     
-    if (animated && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
-        [addAnimation playAnimated:YES];
+    if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+        [addAnimation playAnimated:animated];
     }
     else {
         [addAnimation playAnimated:NO];
@@ -572,8 +573,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [appearingContainerContent viewDidAppear:animated];
     }
     
-    // Done with the view controller which has been removed (animated or not)
-    if ([animation.tag isEqualToString:@"remove_animation"]) {
+    if ([animation.tag isEqualToString:@"add_animation"]) {
+        // Now that the animation is over, get rid of the view or view controller
+        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+        if (! m_removing) {
+            [containerContentAtCapacity removeViewFromContainerView];
+        }
+        else {
+            [self.containerContents removeObject:containerContentAtCapacity];
+        }
+    }
+    else if ([animation.tag isEqualToString:@"remove_animation"]) {
         [self.containerContents removeObject:disappearingContainerContent];
         
         // Load the view below so that the capacity criterium can be fulfilled (if needed)

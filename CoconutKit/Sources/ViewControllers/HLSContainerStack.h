@@ -39,6 +39,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     NSMutableArray *m_containerContents;                       // The first element corresponds to the root view controller
     UIView *m_containerView;
     NSUInteger m_capacity;
+    BOOL m_removing;
     BOOL m_forwardingProperties;
     id<HLSContainerStackDelegate> m_delegate;
 }
@@ -47,8 +48,13 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Create a stack which will manage the children of a container view controller. The view controller container
  * is not retained
  */
+
+// Document: During insertions, we might have capacity + 1 view controllers at the same time. This ensures that no view controller
+// is abruptly removed when showing a new one. capacity is the "static" number of view controllers available when no animations
+// take place
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
-                             capacity:(NSUInteger)capacity;
+                             capacity:(NSUInteger)capacity
+                             removing:(BOOL)removing;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;

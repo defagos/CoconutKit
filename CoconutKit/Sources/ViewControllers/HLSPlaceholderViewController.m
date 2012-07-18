@@ -160,7 +160,8 @@
         // We need to have a stack for each placeholder view
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                                                   capacity:2] autorelease];
+                                                                                                   capacity:HLSContainerStackMinimalCapacity
+                                                                                                   removing:YES] autorelease];
             [self.containerStacks addObject:containerStack];
         }
         
@@ -293,7 +294,8 @@
         
         for (NSUInteger i = [self.containerStacks count]; i <= index; ++i) {
             HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                                                   capacity:2] autorelease];
+                                                                                                   capacity:HLSContainerStackMinimalCapacity
+                                                                                                   removing:YES] autorelease];
             [self.containerStacks addObject:containerStack];
         }
     }
