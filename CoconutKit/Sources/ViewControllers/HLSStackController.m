@@ -29,7 +29,7 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:capacity removing:NO] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:capacity] autorelease];
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
                                        duration:0.];
@@ -50,7 +50,7 @@
 
 - (void)awakeFromNib
 {
-    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:self.capacity removing:NO] autorelease];
+    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:self.capacity] autorelease];
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];

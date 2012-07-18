@@ -73,8 +73,6 @@
     return firstContainerStack.forwardingProperties;
 }
 
-@synthesize forwardingProperties = m_forwardingProperties;
-
 - (void)setForwardingProperties:(BOOL)forwardingProperties
 {
     HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
@@ -117,7 +115,6 @@
     if (index >= [self.containerStacks count]) {
         return nil;
     }
-    
     return [self.containerStacks objectAtIndex:index];
 }
 
@@ -169,9 +166,8 @@
         
         // We need to have a view controller in each placeholder (even if no preloading was made)
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
-            // We use a stack with standard capacity (2) and removing view controllers at the bottom
-            HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removing:YES] autorelease];
-            containerStack.containerView = [self.placeholderViews objectAtIndex:i];
+            HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
+                                                                                                   capacity:HLSContainerStackDefaultCapacity] autorelease];
             [self.containerStacks addObject:containerStack];
         }
         
@@ -180,6 +176,13 @@
     // If the view has been unloaded, we expect the same number of placeholder views after a reload
     else {
         NSAssert([self.containerStacks count] == [self.placeholderViews count], @"The number of placeholder views has changed");
+    }
+    
+    // Associate stacks and placeholder views
+    NSUInteger i = 0;
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        containerStack.containerView = [self.placeholderViews objectAtIndex:i];
+        ++i;
     }
 }
 

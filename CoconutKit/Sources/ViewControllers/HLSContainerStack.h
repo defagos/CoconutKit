@@ -40,7 +40,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     UIView *m_containerView;
     NSUInteger m_capacity;
     BOOL m_forwardingProperties;
-    BOOL m_removing;
+    id<HLSContainerStackDelegate> m_delegate;
 }
 
 /**
@@ -48,8 +48,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * is not retained
  */
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
-                             capacity:(NSUInteger)capacity
-                             removing:(BOOL)removing;
+                             capacity:(NSUInteger)capacity;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;
@@ -60,6 +59,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * to display those elements transparently higher up in the view controller hierarchy
  */
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
+
+@property (nonatomic, assign) id<HLSContainerStackDelegate> delegate;
 
 - (UIViewController *)rootViewController;
 - (UIViewController *)topViewController;
@@ -137,21 +138,17 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 @protocol HLSContainerStackDelegate <NSObject>
 
 - (void)containerStack:(HLSContainerStack *)containerStack
-willPushViewController:(UIViewController *)viewController
-              animated:(BOOL)animated
-              userInfo:(NSDictionary *)userInfo;
+willShowViewController:(UIViewController *)viewController
+              animated:(BOOL)animated;
 - (void)containerStack:(HLSContainerStack *)containerStack
- didPushViewController:(UIViewController *)viewController
-              animated:(BOOL)animated
-              userInfo:(NSDictionary *)userInfo;
+ didShowViewController:(UIViewController *)viewController
+              animated:(BOOL)animated;
 - (void)containerStack:(HLSContainerStack *)containerStack
- willPopViewController:(UIViewController *)viewController
-              animated:(BOOL)animated
-              userInfo:(NSDictionary *)userInfo;
+willHideViewController:(UIViewController *)viewController
+              animated:(BOOL)animated;
 - (void)containerStack:(HLSContainerStack *)containerStack
-  didPopViewController:(UIViewController *)viewController
-              animated:(BOOL)animated
-              userInfo:(NSDictionary *)userInfo;
+ didHideViewController:(UIViewController *)viewController
+              animated:(BOOL)animated;
 
 @end
 
