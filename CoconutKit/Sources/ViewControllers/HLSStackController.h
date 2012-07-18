@@ -65,7 +65,7 @@
  *
  * Designated initializer: initWithRootViewController:capacity:
  */
-@interface HLSStackController : HLSViewController {
+@interface HLSStackController : HLSViewController <HLSContainerStackDelegate> {
 @private
     HLSContainerStack *m_containerStack;
     NSUInteger m_capacity;
@@ -165,7 +165,13 @@
   didShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
 
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated;
 
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated;
 
 @end
 

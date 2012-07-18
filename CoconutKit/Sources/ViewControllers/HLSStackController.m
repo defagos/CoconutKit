@@ -30,6 +30,7 @@
 {
     if ((self = [super init])) {
         self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:capacity] autorelease];
+        self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
                                        duration:0.];
@@ -238,6 +239,36 @@
     }
     
     [self.containerStack popViewController];
+}
+
+#pragma mark HLSContainerStackDelegate protocol implementation
+
+- (void)containerStack:(HLSContainerStack *)containerStack willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
+        [self.delegate stackController:self willShowViewController:viewController animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:didShowViewController:animated:)]) {
+        [self.delegate stackController:self didShowViewController:viewController animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack willHideViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+        [self.delegate stackController:self willHideViewController:viewController animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack didHideViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+        [self.delegate stackController:self didHideViewController:viewController animated:animated];
+    }
 }
 
 @end

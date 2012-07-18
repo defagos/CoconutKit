@@ -20,9 +20,10 @@
 
 - (NSArray *)insetViewControllers;
 
-- (HLSContainerStack *)containerStackAtIndex:(NSUInteger)index;
-
 @end
+
+// TODO: Implement HLSContainerStack delegate methods to be able to remove the bottommost view controller
+//       after a new view controller has been pushed
 
 @implementation HLSPlaceholderViewController
 
@@ -110,14 +111,6 @@
     return [insetViewControllers objectAtIndex:index];
 }
 
-- (HLSContainerStack *)containerStackAtIndex:(NSUInteger)index
-{
-    if (index >= [self.containerStacks count]) {
-        return nil;
-    }
-    return [self.containerStacks objectAtIndex:index];
-}
-
 #pragma mark View lifecycle
 
 - (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
@@ -164,7 +157,7 @@
             self.containerStacks = [NSMutableArray array];
         }
         
-        // We need to have a view controller in each placeholder (even if no preloading was made)
+        // We need to have a stack for each placeholder view
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                                                    capacity:HLSContainerStackDefaultCapacity] autorelease];
@@ -291,9 +284,30 @@
            withTransitionStyle:(HLSTransitionStyle)transitionStyle
                       duration:(NSTimeInterval)duration
 {
-    HLSContainerStack *containerStack = [self containerStackAtIndex:index];
+    // Grows up the list of stacks as necessary while the container still can be implicitly resized (that is, when
+    // it has not been loaded once)
+    if (! m_loadedOnce) {
+        if (! self.containerStacks) {
+            self.containerStacks = [NSMutableArray array];
+        }
+        
+        for (NSUInteger i = [self.containerStacks count]; i <= index; ++i) {
+            HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
+                                                                                                   capacity:HLSContainerStackDefaultCapacity] autorelease];
+            [self.containerStacks addObject:containerStack];            
+        }
+    }
+    else {
+        if (index >= [self.containerStacks count]) {
+            HLSLoggerError(@"Invalid index. Must be between 0 and %d", [self.containerStacks count] - 1);
+            return;
+        }
+    }
+    
+    HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
     if (! insetViewController) {
         if ([containerStack count] > 0) {
+            // TODO: Push an empty view controller with no anim, as before?
             [containerStack popViewController];
         }
         return;

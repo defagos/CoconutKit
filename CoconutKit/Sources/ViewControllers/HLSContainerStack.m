@@ -16,7 +16,7 @@
 #import "UIViewController+HLSExtensions.h"
 
 /**
- * TODO: Mimic behavior of the navigation controller delegate methods:
+ * TODO: Mimic behavior of the navigation controller delegate methods?
  * - display as root -> calls will / didShow for the root view controller
  * - push new VC -> calls will / didShow for this new view controller
  * - pop VC -> calls will / didShow for the VC which gets revealed
@@ -320,17 +320,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSAssert([self.containerContents count] != 0, @"At least one view controller must be loaded");
-    
     // Display those views required according to the capacity
     for (NSUInteger i = 0; i < self.capacity; ++i) {
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
-        [self addViewForContainerContent:containerContent];
+        if (containerContent) {
+            [self addViewForContainerContent:containerContent];
+        }
     }
         
     // Forward events to the top view controller
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
         [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
     }
         
@@ -340,7 +340,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)viewDidAppear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
         [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
     }
         
@@ -350,7 +350,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)viewWillDisappear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
         [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
     }
     
@@ -360,7 +360,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)viewDidDisappear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
         [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
     }
     
@@ -415,6 +415,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // controllers
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
 {
+    if (! containerContent) {
+        HLSLoggerError(@"Missing container content parameter");
+        return;
+    }
+    
     if (! [self.containerViewController isViewVisible]) {
         return;
     }
@@ -516,12 +521,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
     // transition takes place
     if (animated) {
-        if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
         [disappearingContainerContent viewWillDisappear:animated];
         
-        if ([self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
         [appearingContainerContent viewWillAppear:animated];
@@ -548,7 +553,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
     // transition takes place
     if (animated) {
-        if ([self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
         [disappearingContainerContent viewDidDisappear:animated];
@@ -561,7 +566,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     disappearingContainerContent.forwardingProperties = NO;
     
     if (animated) {
-        if ([self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
         [appearingContainerContent viewDidAppear:animated];
@@ -573,8 +578,23 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Load the view below so that the capacity criterium can be fulfilled (if needed)
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-        [self addViewForContainerContent:containerContentAtCapacity];
+        if (containerContentAtCapacity) {
+            [self addViewForContainerContent:containerContentAtCapacity];
+        }
     }
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; containerViewController: %@; containerContents: %@; containerView: %@; forwardingProperties: %@>", 
+            [self class],
+            self,
+            self.containerViewController,
+            self.containerContents,
+            self.containerView,
+            HLSStringFromBool(self.forwardingProperties)];
 }
 
 @end
