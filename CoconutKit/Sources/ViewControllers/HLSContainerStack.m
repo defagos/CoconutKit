@@ -15,6 +15,8 @@
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
+// TODO: Document when viewWillAppear... etc. are called, test cases, and when animated = YES / NO
+
 /**
  * TODO: Mimic behavior of the navigation controller delegate methods?
  * - display as root -> calls will / didShow for the root view controller
@@ -119,7 +121,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // All animations must take place inside the view controller's view
         containerView.clipsToBounds = YES;
-        containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
     m_containerView = containerView;    

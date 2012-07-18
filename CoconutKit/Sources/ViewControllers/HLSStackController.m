@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "HLSStackPushSegue.h"
 #import "NSArray+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
 @interface HLSStackController ()
@@ -132,6 +133,7 @@
     // Take all space available
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
+    self.view.autoresizingMask = HLSViewAutoresizingAll;
     
     self.containerStack.containerView = self.view;
 }

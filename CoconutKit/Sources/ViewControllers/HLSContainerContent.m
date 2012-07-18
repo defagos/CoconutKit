@@ -333,7 +333,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed 
     //     must have been designed accordingly (i.e. its dimensions match the container view). In such cases the autoresizing
     //     mask of the view is irrelevant and can be safely overridden
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    view.autoresizingMask = HLSViewAutoresizingAll;
     
     // Match the inserted view frame so that it fills the container bounds
     view.frame = containerView.bounds;
