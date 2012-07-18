@@ -265,7 +265,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
             [self addViewForContainerContent:containerContent animated:YES];
-        }        
+        }
     }
 }
 

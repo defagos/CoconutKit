@@ -205,8 +205,8 @@
         // The delay is just used for the first step. Set it to 0 for the remaining ones
         m_delay = 0.;
         
-        // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context: (though appearing
-        //         in the UIKit UIView header documentation) are reserved by Apple. Using them might lead to app rejection!
+        // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context:, though appearing
+        //         in the UIKit UIView header documentation, are reserved by Apple. Using them might lead to app rejection!
         [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];
@@ -318,6 +318,13 @@
     }
     // Done with the animation
     else {
+        // Empty animation must still call the animationWillStart:animated delegate method
+        if ([self.animationSteps count] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:animated];
+            }        
+        }
+        
         self.animationStepsEnumerator = nil;
         
         // Unlock the UI
