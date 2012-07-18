@@ -18,8 +18,7 @@
 @interface HLSStackController ()
 
 @property (nonatomic, retain) HLSContainerStack *containerStack;
-
-- (void)setCapacity:(NSUInteger)capacity;
+@property (nonatomic, assign) NSUInteger capacity;
 
 @end
 
@@ -30,11 +29,10 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removingInvisibleViewControllers:NO] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:capacity removing:NO] autorelease];
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
                                        duration:0.];
-        self.containerStack.capacity = capacity;
     }
     return self;
 }
@@ -42,18 +40,6 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
     return [self initWithRootViewController:rootViewController capacity:HLSContainerStackDefaultCapacity];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    // A stack controller is not meant to be instantiated in a nib... except if we are using storyboards. In this
-    // case, setting the root view controller is performed using segues (must be done when the involved view
-    // controllers are available, in -awakeFromNib).
-    if ((self = [super initWithCoder:aDecoder])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removingInvisibleViewControllers:NO] autorelease];
-        self.containerStack.capacity = HLSContainerStackMinimalCapacity;
-    }
-    return self;
 }
 
 - (id)init
@@ -64,6 +50,8 @@
 
 - (void)awakeFromNib
 {
+    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:self.capacity removing:NO] autorelease];
+    
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
     
@@ -92,9 +80,16 @@
 
 @synthesize containerStack = m_containerStack;
 
+@synthesize capacity = m_capacity;
+
 - (void)setCapacity:(NSUInteger)capacity
 {
-    self.containerStack.capacity = capacity;
+    if (self.containerStack) {
+        HLSLoggerWarn(@"The capacity cannot be altered once the stack controller has been created");
+        return;
+    }
+    
+    m_capacity = capacity;
 }
 
 - (BOOL)isForwardingProperties
@@ -111,12 +106,12 @@
 
 - (UIViewController *)rootViewController
 {
-    return [[self.containerStack viewControllers] firstObject];
+    return [self.containerStack rootViewController];
 }
 
 - (UIViewController *)topViewController
 {
-    return [[self.containerStack viewControllers] lastObject];
+    return [self.containerStack topViewController];
 }
 
 - (NSArray *)viewControllers
@@ -136,6 +131,8 @@
     // Take all space available
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
+    
+    self.containerStack.containerView = self.view;
 }
 
 - (void)viewWillAppear:(BOOL)animated

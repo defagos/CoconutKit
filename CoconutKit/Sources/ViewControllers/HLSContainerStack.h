@@ -36,11 +36,11 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private
     UIViewController *m_containerViewController;
-    NSMutableArray *m_containerContents;
+    NSMutableArray *m_containerContents;                       // The first element corresponds to the root view controller
     UIView *m_containerView;
     NSUInteger m_capacity;
     BOOL m_forwardingProperties;
-    BOOL m_removingInvisibleViewControllers;
+    BOOL m_removing;
 }
 
 /**
@@ -48,11 +48,11 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * is not retained
  */
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
-     removingInvisibleViewControllers:(BOOL)removingInvisibleViewControllers;
+                             capacity:(NSUInteger)capacity
+                             removing:(BOOL)removing;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;
-@property (nonatomic, assign) NSUInteger capacity;
 
 /**
  * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
@@ -92,10 +92,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration;
 - (void)removeViewControllerAtIndex:(NSUInteger)index;
-
-// TODO: Implement
-// - insertViewControllerAtIndex:
-// - replaceViewControllerAtIndex:
 
 /**
  * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved

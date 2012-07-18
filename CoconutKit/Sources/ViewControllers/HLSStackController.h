@@ -68,6 +68,7 @@
 @interface HLSStackController : HLSViewController {
 @private
     HLSContainerStack *m_containerStack;
+    NSUInteger m_capacity;
     id<HLSStackControllerDelegate> m_delegate;
 }
 

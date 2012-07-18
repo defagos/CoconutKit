@@ -170,7 +170,7 @@
         // We need to have a view controller in each placeholder (even if no preloading was made)
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             // We use a stack with standard capacity (2) and removing view controllers at the bottom
-            HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removingInvisibleViewControllers:YES] autorelease];
+            HLSContainerStack *containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self removing:YES] autorelease];
             containerStack.containerView = [self.placeholderViews objectAtIndex:i];
             [self.containerStacks addObject:containerStack];
         }

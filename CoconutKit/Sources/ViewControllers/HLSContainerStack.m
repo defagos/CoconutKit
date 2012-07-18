@@ -35,6 +35,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @property (nonatomic, assign) UIViewController *containerViewController;
 @property (nonatomic, retain) NSMutableArray *containerContents;
+@property (nonatomic, assign) NSUInteger capacity;
 
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
@@ -50,7 +51,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 #pragma mark Object creation and destruction
 
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
-     removingInvisibleViewControllers:(BOOL)removingInvisibleViewControllers
+                             capacity:(NSUInteger)capacity 
+                             removing:(BOOL)removing
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -63,7 +65,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
         self.capacity = HLSContainerStackDefaultCapacity;
-        m_removingInvisibleViewControllers = removingInvisibleViewControllers;
+        m_removing = removing;
     }
     return self;
 }
@@ -97,32 +99,25 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_containerView) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"The container view has already been set"
-                                     userInfo:nil];
-    }
+    if (containerView) {
+        if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
+            @throw [NSException exceptionWithName:NSInvalidArgumentException 
+                                           reason:@"The container view must be part of the view controller's view hierarchy"
+                                         userInfo:nil];
+        }
         
-    if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException 
-                                       reason:@"The container view must be part of the view controller's view hierarchy"
-                                     userInfo:nil];
+        // All animations must take place inside the view controller's view
+        containerView.clipsToBounds = YES;
+        containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
-    // All animations must take place inside the view controller's view
-    containerView.clipsToBounds = YES;
-    containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;    
+    m_containerView = containerView;    
 }
 
 @synthesize capacity = m_capacity;
 
 - (void)setCapacity:(NSUInteger)capacity
-{    
-    if ([self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
-        HLSLoggerError(@"The capacity can only be set before the view controller is loaded for the first time");
-        return;
-    }
-    
+{
     if (capacity < HLSContainerStackMinimalCapacity) {
         capacity = HLSContainerStackMinimalCapacity;
         HLSLoggerWarn(@"The capacity cannot be smaller than %d; set to this value", HLSContainerStackMinimalCapacity);
@@ -231,7 +226,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if (index > [self.containerContents count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%@]", [self.containerContents count]];
+        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%d]", [self.containerContents count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];
@@ -252,9 +247,20 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                         duration:duration] autorelease];
     [self.containerContents insertObject:containerContent atIndex:index];
     
-    // If inserted in the capacity range, must add the view. This can lead to temporarily have self.capacity + 1 views
-    // loaded, but this is needed so that no view controller disappear before an animated push animation takes place
-    if ([self.containerViewController isViewLoaded]) {
+    // Remove view controller / views not needed according to the capacity. This might decrease the containerContents 
+    // array size
+    HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+    if (containerContentAtCapacity) {
+        if (m_removing) {
+            [self.containerContents removeObject:containerContentAtCapacity];
+        }
+        else {
+            [containerContentAtCapacity removeViewFromContainerView];
+        }        
+    }
+    
+    // If inserted in the capacity range, must add the view
+    if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
             [self addViewForContainerContent:containerContent];
         }        
@@ -268,21 +274,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // Add the new view which will be loaded according to the capacity criterium (if needed)
-    if ([self.containerContents count] - index <= self.capacity) {
-        HLSContainerContent *addedContainerContent = [self.containerContents objectAtIndex:[self.containerContents count] - 1 - self.capacity];
-        [self addViewForContainerContent:addedContainerContent];
-    }
-    
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-    if ([self.containerViewController isViewLoaded] && containerContent.addedToContainerView) {
+    if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
         HLSAnimation *removalAnimation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
                                                                      appearingContainerContent:containerContent
                                                                  disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
                                                                                  containerView:self.containerView 
                                                                                       duration:containerContent.duration] reverseAnimation];
-        removalAnimation.tag = @"removal_animation";
+        removalAnimation.tag = @"remove_animation";
         removalAnimation.lockingUI = YES;
+        
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             [removalAnimation playAnimated:YES];
         }
@@ -406,7 +407,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // controllers
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
 {
-    if (! [self.containerViewController isViewLoaded]) {
+    if (! [self.containerViewController isViewVisible]) {
         return;
     }
     
@@ -456,6 +457,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                              duration:containerContent.duration];
     addAnimation.tag = @"add_animation";
     addAnimation.lockingUI = YES;
+    
     if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         [addAnimation playAnimated:YES];
     }
@@ -466,6 +468,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Capacity
 
+// TODO: Maybe not needed anymore, inline
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
 {
     if ([self.containerContents count] > depth) {
@@ -488,7 +491,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];        
     }
-    else if ([animation.tag isEqualToString:@"removal_animation"]) {
+    else if ([animation.tag isEqualToString:@"remove_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
     }
@@ -527,7 +530,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         appearingContainerContent = [self topContainerContent];
         disappearingContainerContent = [self secondTopContainerContent];
     }
-    else if ([animation.tag isEqualToString:@"removal_animation"]) {
+    else if ([animation.tag isEqualToString:@"remove_animation"]) {
         appearingContainerContent = [self secondTopContainerContent];
         disappearingContainerContent = [self topContainerContent];
     }
@@ -558,18 +561,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
 #endif
     }
-
-    // During push animations we might have 3 view controllers loaded, cleanup so that the capacity criterium 
-    // is fulfilled
-    if ([animation.tag isEqualToString:@"add_animation"]) {
-        for (NSUInteger i = 0; i < [self.containerContents count] - self.capacity; ++i) {
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:i];
-            [containerContent removeViewFromContainerView];
-        }
-    }
+    
     // Done with the view controller which has been removed (animated or not)
-    else if ([animation.tag isEqualToString:@"removal_animation"]) {
-        [self.containerContents removeObject:disappearingContainerContent];        
+    if ([animation.tag isEqualToString:@"remove_animation"]) {
+        [self.containerContents removeObject:disappearingContainerContent];
+        
+        // Load the view below so that the capacity criterium can be fulfilled (if needed)
+        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+        [self addViewForContainerContent:containerContentAtCapacity];
     }
 }
 
