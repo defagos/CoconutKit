@@ -278,6 +278,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
+        // Load the view below so that the capacity criterium can be fulfilled (if needed). During the animation we will
+        // have capacity + 1 view controller's views loaded, this ensures that no view controller magically pop during
+        // animation
+        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+        if (containerContentAtCapacity) {
+            [self addViewForContainerContent:containerContentAtCapacity animated:NO];
+        }
+        
         HLSAnimation *removalAnimation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
                                                                      appearingContainerContent:containerContent
                                                                  disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
@@ -575,7 +583,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if ([animation.tag isEqualToString:@"add_animation"]) {
-        // Now that the animation is over, get rid of the view or view controller
+        // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (! m_removing) {
             [containerContentAtCapacity removeViewFromContainerView];
@@ -586,12 +594,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     else if ([animation.tag isEqualToString:@"remove_animation"]) {
         [self.containerContents removeObject:disappearingContainerContent];
-        
-        // Load the view below so that the capacity criterium can be fulfilled (if needed)
-        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-        if (containerContentAtCapacity) {
-            [self addViewForContainerContent:containerContentAtCapacity animated:NO];
-        }
     }
 }
 
