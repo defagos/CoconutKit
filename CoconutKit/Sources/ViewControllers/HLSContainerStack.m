@@ -240,7 +240,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if (index > [self.containerContents count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%d]", [self.containerContents count]];
+        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];

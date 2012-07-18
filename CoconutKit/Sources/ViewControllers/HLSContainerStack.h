@@ -129,6 +129,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
  *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
  */
+// TODO: Call containerViewWill/Did or simply containerWill/Did?
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewWillDisappear:(BOOL)animated;

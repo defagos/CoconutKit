@@ -266,7 +266,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 - (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index
 {
     if (index > [containerView.subviews count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index. Expected in [0;%@]", [containerView.subviews count]];
+        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [containerView.subviews count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];
