@@ -286,20 +286,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self addViewForContainerContent:containerContentAtCapacity animated:NO];
         }
         
-        HLSAnimation *removalAnimation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
-                                                                     appearingContainerContent:containerContent
-                                                                 disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
-                                                                                 containerView:self.containerView 
-                                                                                      duration:containerContent.duration] reverseAnimation];
-        removalAnimation.tag = @"remove_animation";
-        removalAnimation.lockingUI = YES;
-        removalAnimation.delegate = self;
-        
+        HLSAnimation *animation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
+                                                              appearingContainerContent:containerContent
+                                                          disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
+                                                                          containerView:self.containerView 
+                                                                               duration:containerContent.duration] reverseAnimation];        
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
-            [removalAnimation playAnimated:YES];
+            animation.tag = @"pop_animation";
+            animation.lockingUI = YES;
+            animation.delegate = self;
+            
+            [animation playAnimated:YES];
         }
         else {
-            [removalAnimation playAnimated:NO];
+            [animation playAnimated:NO];
+            [self.containerContents removeObject:containerContent];
         }
     }
     else {
@@ -472,20 +473,20 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Play the corresponding animation so that all view controllers are brought into position (animated only if
     // the container is visible)
-    HLSAnimation *addAnimation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle 
-                                                            appearingContainerContent:containerContent 
-                                                        disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
-                                                                        containerView:self.containerView 
-                                                                             duration:containerContent.duration];
-    addAnimation.tag = @"add_animation";
-    addAnimation.lockingUI = YES;
-    addAnimation.delegate = self;
-    
+    HLSAnimation *animation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle 
+                                                         appearingContainerContent:containerContent 
+                                                     disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
+                                                                     containerView:self.containerView 
+                                                                          duration:containerContent.duration];    
     if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
-        [addAnimation playAnimated:animated];
+        animation.tag = @"push_animation";
+        animation.lockingUI = YES;
+        animation.delegate = self;
+        
+        [animation playAnimated:animated];
     }
     else {
-        [addAnimation playAnimated:NO];
+        [animation playAnimated:NO];
     }
 }
 
@@ -507,30 +508,25 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // Called for any push / pop animation, whether animated or not
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSContainerContent *appearingContainerContent = nil;
-    HLSContainerContent *disappearingContainerContent = nil;
-    
-    if ([animation.tag isEqualToString:@"add_animation"]) {
-        appearingContainerContent = [self topContainerContent];
-        disappearingContainerContent = [self secondTopContainerContent];        
-    }
-    else if ([animation.tag isEqualToString:@"remove_animation"]) {
-        appearingContainerContent = [self secondTopContainerContent];
-        disappearingContainerContent = [self topContainerContent];
-    }
-    else {
-        return;
-    }
-    
-    // During the time the animation is running, we ensure that if forwarding is enabled the two top view controllers forward their
-    // properties. This is made on purpose: This way, implementers of viewWill* and viewDid* methods will still get access to the 
-    // correct properties through forwarding. Only at the end of the animation will the top view controller be the only one
-    // forwarding properties
-    appearingContainerContent.forwardingProperties = self.forwardingProperties;
-    
-    // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
-    // transition takes place
-    if (animated) {
+    if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
+        HLSContainerContent *appearingContainerContent = nil;
+        HLSContainerContent *disappearingContainerContent = nil;
+        
+        if ([animation.tag isEqualToString:@"push_animation"]) {
+            appearingContainerContent = [self topContainerContent];
+            disappearingContainerContent = [self secondTopContainerContent];        
+        }
+        else {
+            appearingContainerContent = [self secondTopContainerContent];
+            disappearingContainerContent = [self topContainerContent];
+        }
+        
+        // During the time the animation is running, we ensure that if forwarding is enabled the two top view controllers forward their
+        // properties. This is made on purpose: This way, implementers of viewWill* and viewDid* methods will still get access to the 
+        // correct properties through forwarding. Only at the end of the animation will the top view controller be the only one
+        // forwarding properties
+        appearingContainerContent.forwardingProperties = self.forwardingProperties;
+        
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
@@ -545,55 +541,48 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSContainerContent *appearingContainerContent = nil;
-    HLSContainerContent *disappearingContainerContent = nil;
-    
-    if ([animation.tag isEqualToString:@"add_animation"]) {
-        appearingContainerContent = [self topContainerContent];
-        disappearingContainerContent = [self secondTopContainerContent];
-    }
-    else if ([animation.tag isEqualToString:@"remove_animation"]) {
-        appearingContainerContent = [self secondTopContainerContent];
-        disappearingContainerContent = [self topContainerContent];
-    }
-    else {
-        return;
-    }
-    
-    // Animated transitions are associated with a push or pop. In such cases we need to forward lifecycle events before the
-    // transition takes place
-    if (animated) {
+    if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
+        HLSContainerContent *appearingContainerContent = nil;
+        HLSContainerContent *disappearingContainerContent = nil;
+        
+        if ([animation.tag isEqualToString:@"push_animation"]) {
+            appearingContainerContent = [self topContainerContent];
+            disappearingContainerContent = [self secondTopContainerContent];
+        }
+        else {
+            appearingContainerContent = [self secondTopContainerContent];
+            disappearingContainerContent = [self topContainerContent];
+        }
+        
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
         [disappearingContainerContent viewDidDisappear:animated];
-    }
-    
-    // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
-    // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
-    // has been called for it. This way, implementations of viewDidDisappear: could still access the forwarded
-    // properties
-    disappearingContainerContent.forwardingProperties = NO;
-    
-    if (animated) {
+        
+        // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
+        // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
+        // has been called for it. This way, implementations of viewDidDisappear: could still access the forwarded
+        // properties
+        disappearingContainerContent.forwardingProperties = NO;
+        
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
         [appearingContainerContent viewDidAppear:animated];
-    }
-    
-    if ([animation.tag isEqualToString:@"add_animation"]) {
-        // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
-        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-        if (! m_removing) {
-            [containerContentAtCapacity removeViewFromContainerView];
+        
+        if ([animation.tag isEqualToString:@"push_animation"]) {
+            // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
+            HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+            if (! m_removing) {
+                [containerContentAtCapacity removeViewFromContainerView];
+            }
+            else {
+                [self.containerContents removeObject:containerContentAtCapacity];
+            }
         }
-        else {
-            [self.containerContents removeObject:containerContentAtCapacity];
-        }
-    }
-    else if ([animation.tag isEqualToString:@"remove_animation"]) {
-        [self.containerContents removeObject:disappearingContainerContent];
+        else if ([animation.tag isEqualToString:@"pop_animation"]) {
+            [self.containerContents removeObject:disappearingContainerContent];
+        }   
     }
 }
 

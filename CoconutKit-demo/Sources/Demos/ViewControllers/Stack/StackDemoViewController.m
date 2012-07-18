@@ -36,7 +36,6 @@
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
         stackController.title = @"HLSStackController";
         
-#if 0
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
@@ -50,7 +49,6 @@
         [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
-#endif
         
         [self setInsetViewController:stackController atIndex:0];
         self.forwardingProperties = YES;
