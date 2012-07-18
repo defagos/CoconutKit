@@ -48,7 +48,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
 
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent;
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent animated:(BOOL)animated;
 
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
@@ -264,7 +264,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
-            [self addViewForContainerContent:containerContent];
+            [self addViewForContainerContent:containerContent animated:YES];
         }        
     }
 }
@@ -324,7 +324,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     for (NSUInteger i = 0; i < self.capacity; ++i) {
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
         if (containerContent) {
-            [self addViewForContainerContent:containerContent];
+            [self addViewForContainerContent:containerContent animated:NO /* building the hierarchy, no animation */];
         }
     }
         
@@ -413,7 +413,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // The containerContent object must already reside in containerContents. This method is namely intended to be used
 // when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
 // controllers
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent animated:(BOOL)animated
 {
     if (! containerContent) {
         HLSLoggerError(@"Missing container content parameter");
@@ -444,7 +444,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
-        UIView *aboveContainerView = [aboveContainerContent view];
+        UIView *aboveContainerView = [aboveContainerContent viewIfLoaded];
         NSAssert(aboveContainerView != nil, @"The above view controller's view should be loaded");
         [containerContent insertAsSubviewIntoContainerView:self.containerView
                                                    atIndex:[self.containerView.subviews indexOfObject:aboveContainerView]];
@@ -471,7 +471,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     addAnimation.tag = @"add_animation";
     addAnimation.lockingUI = YES;
     
-    if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+    if (animated && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         [addAnimation playAnimated:YES];
     }
     else {
@@ -579,7 +579,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Load the view below so that the capacity criterium can be fulfilled (if needed)
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (containerContentAtCapacity) {
-            [self addViewForContainerContent:containerContentAtCapacity];
+            [self addViewForContainerContent:containerContentAtCapacity animated:NO];
         }
     }
 }

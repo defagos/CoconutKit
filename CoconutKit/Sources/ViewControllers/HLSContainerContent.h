@@ -143,7 +143,7 @@
  * view creation (use the addAsSubviewIntoContainerView: or insertAsSubviewIntoContainerView: methods for this
  * purpose), forcing you to create the view when you actually need it
  */
-- (UIView *)view;
+- (UIView *)viewIfLoaded;
 
 /**
  * Release all view and view-related resources. This also forwards the viewDidUnload message to the underlying view 

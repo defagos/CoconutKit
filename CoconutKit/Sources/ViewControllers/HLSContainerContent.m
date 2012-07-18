@@ -13,6 +13,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "UIViewController+HLSExtensions.h"
 
 // TODO: Instead of a container view controller, we should not assume the container is a view controller, just an id
 
@@ -250,14 +251,9 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 @synthesize originalAutoresizingMask = m_originalAutoresizingMask;
 
-- (UIView *)view
+- (UIView *)viewIfLoaded
 {
-    if (! self.addedToContainerView) {
-        return nil;
-    }
-    else {
-        return self.viewController.view;
-    }
+    return [self.viewController viewIfLoaded];
 }
 
 #pragma mark View management
@@ -281,16 +277,18 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         return;
     }
     
+    // Force a lazy loading of the view controller's view if needed
+    UIView *view = self.viewController.view;
+    
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
     self.originalViewAlpha = self.viewController.view.alpha;
     self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
-    
+        
     // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
     // added to the container view, a 20px displacement may arise at the top if the container is the root view controller of the
     // application (the implementations of UITabBarController and UINavigationController probably mess up with status bar dimensions 
     // internally)
-    UIView *view = [self view];
     if ([self.viewController isKindOfClass:[UINavigationController class]] 
             || [self.viewController isKindOfClass:[UITabBarController class]]) {
         view.frame = containerView.bounds;
@@ -427,13 +425,13 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; view: %@; forwardingProperties: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; viewIfLoaded: %@; forwardingProperties: %@>", 
             [self class],
             self,
             self.viewController,
             self.containerViewController,
             HLSStringFromBool(self.addedToContainerView),
-            [self view],
+            [self viewIfLoaded],
             HLSStringFromBool(self.forwardingProperties)];
 }
 

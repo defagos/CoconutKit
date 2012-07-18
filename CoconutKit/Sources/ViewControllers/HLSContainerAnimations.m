@@ -86,14 +86,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -112,7 +112,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -120,11 +120,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]];
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -140,14 +140,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -163,7 +163,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -171,11 +171,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]];
     }
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep21.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -191,7 +191,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -199,11 +199,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha;
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]];                 
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]];                 
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep22.alphaVariation = appearingContainerContent.originalViewAlpha;
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -221,7 +221,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -229,11 +229,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]]; 
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -248,7 +248,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -257,7 +257,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor 
                                   yFactor:1.f / kEmergeFromCenterScaleFactor 
                                   zFactor:1.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
@@ -278,7 +278,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
     viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent view]]; 
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -287,11 +287,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
         HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
         [viewAnimationStep21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
         viewAnimationStep21.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
-        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent view]]; 
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]]; 
     }
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent view]]; 
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.curve = UIViewAnimationCurveEaseOut;
     animationStep2.duration = 0.2;
     [animationSteps addObject:animationStep2];
@@ -299,11 +299,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep31.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
-    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent view]]; 
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[appearingContainerContent viewIfLoaded]]; 
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
         viewAnimationStep32.alphaVariation = -disappearingContainerContent.originalViewAlpha * 0.5f;
-        [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent view]]; 
+        [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[disappearingContainerContent viewIfLoaded]]; 
     }
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
@@ -312,12 +312,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
         HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
         [viewAnimationStep41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-        [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent view]]; 
+        [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[disappearingContainerContent viewIfLoaded]]; 
     }
     HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep42.alphaVariation = appearingContainerContent.originalViewAlpha * 0.5f;
-    [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent view]]; 
+    [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep4.curve = UIViewAnimationCurveEaseIn;
     animationStep4.duration = 0.2;
     [animationSteps addObject:animationStep4];
@@ -569,7 +569,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
         // Fix all view controller's views below
         NSArray *belowContainerContents = [containerContents subarrayWithRange:NSMakeRange(0, index)];
         for (HLSContainerContent *belowContainerContent in belowContainerContents) {
-            UIView *belowView = [belowContainerContent view];
+            UIView *belowView = [belowContainerContent viewIfLoaded];
             
             // This creates the animations needed to fix the view controller's view positions during rotation. To 
             // understand the applied animation transforms, use transparent view controllers loaded into the stack. Push 
@@ -623,7 +623,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                     break;
                 }
             }
-            [animationStep addViewAnimationStep:viewAnimationStep forView:[belowContainerContent view]];
+            [animationStep addViewAnimationStep:viewAnimationStep forView:[belowContainerContent viewIfLoaded]];
         }        
     }
     
