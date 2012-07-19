@@ -580,7 +580,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
             if (! m_removing) {
-                [containerContentAtCapacity removeViewFromContainerView];
+                [containerContentAtCapacity releaseViews];
             }
             else {
                 [self.containerContents removeObject:containerContentAtCapacity];

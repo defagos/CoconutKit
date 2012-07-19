@@ -70,6 +70,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 
+- (void)removeViewFromContainerView;
+
 @end
 
 @interface UIViewController (HLSContainerContent)

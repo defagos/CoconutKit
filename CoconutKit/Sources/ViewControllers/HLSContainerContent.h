@@ -133,12 +133,6 @@
 - (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index;
 
 /**
- * Remove the view controller's view from the container view it was added to (if any). Does not release the view (call 
- * releaseViews for this purpose)
- */
-- (void)removeViewFromContainerView;
-
-/**
  * Return the view controller's view if it has been added to a container view, nil otherwise. This does not perform
  * view creation (use the addAsSubviewIntoContainerView: or insertAsSubviewIntoContainerView: methods for this
  * purpose), forcing you to create the view when you actually need it
