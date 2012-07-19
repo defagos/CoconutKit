@@ -52,7 +52,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
 
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent animated:(BOOL)animated;
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent 
+                 playingTransition:(BOOL)playingTransition
+                          animated:(BOOL)animated;
 
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
@@ -264,7 +266,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
-            [self addViewForContainerContent:containerContent animated:YES];
+            [self addViewForContainerContent:containerContent playingTransition:YES animated:YES];
         }
     }
 }
@@ -283,7 +285,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // animation
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (containerContentAtCapacity) {
-            [self addViewForContainerContent:containerContentAtCapacity animated:NO];
+            [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
         }
         
         HLSAnimation *animation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
@@ -332,9 +334,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     // Display those views required according to the capacity
     for (NSUInteger i = 0; i < self.capacity; ++i) {
+        // Never play transitions (we are building the view hierarchy). Only the top view controller receives
+        // the animated information
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
         if (containerContent) {
-            [self addViewForContainerContent:containerContent animated:NO /* building the hierarchy, no animation */];
+            [self addViewForContainerContent:containerContent playingTransition:NO animated:i == 0];
         }
     }
         
@@ -423,7 +427,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // The containerContent object must already reside in containerContents. This method is namely intended to be used
 // when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
 // controllers
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent animated:(BOOL)animated
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent 
+                 playingTransition:(BOOL)playingTransition
+                          animated:(BOOL)animated
 {
     if (! containerContent) {
         HLSLoggerError(@"Missing container content parameter");
@@ -478,7 +484,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                      disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
                                                                      containerView:self.containerView 
                                                                           duration:containerContent.duration];    
-    if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+    if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
         animation.delegate = self;
