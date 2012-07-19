@@ -298,6 +298,17 @@
     self.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 
+- (IBAction)navigateForwardNonAnimated:(id)sender
+{
+    PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:placeholderDemoViewController animated:NO];
+}
+
+- (IBAction)navigateBackNonAnimated:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 #pragma mark UIPickerViewDataSource protocol implementation
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView

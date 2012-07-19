@@ -40,4 +40,7 @@
 - (IBAction)displayContainerCustomization:(id)sender;
 - (IBAction)toggleForwardingProperties:(id)sender;
 
+- (IBAction)navigateForwardNonAnimated:(id)sender;
+- (IBAction)navigateBackNonAnimated:(id)sender;
+
 @end
