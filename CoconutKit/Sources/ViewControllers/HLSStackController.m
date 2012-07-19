@@ -243,6 +243,11 @@
     [self.containerStack popViewController];
 }
 
+- (void)popToRootViewController
+{
+    [self.containerStack popToRootViewController];
+}
+
 #pragma mark HLSContainerStackDelegate protocol implementation
 
 - (void)containerStack:(HLSContainerStack *)containerStack willShowViewController:(UIViewController *)viewController animated:(BOOL)animated

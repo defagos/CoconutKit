@@ -112,10 +112,16 @@
                   duration:(NSTimeInterval)duration;
 
 /**
- * Remove the top view controller from the stack. The same animation as when it was pushed onto the stack will be played.
+ * Remove the top view controller from the stack, reversing the transition animation which was used when it was pushed.
  * The root view controller cannot be popped
  */
 - (void)popViewController;
+
+/**
+ * Pop all view controllers to get back to the root view controller. The current top view controller will transition
+ * to the root view controller using the reverse animation with which it was pushed onto the stack
+ */
+- (void)popToRootViewController;
 
 /**
  * Return the view controller at the bottom

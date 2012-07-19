@@ -91,6 +91,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 - (void)popViewController;
 
+// If viewController is nil: Pop everything
 - (void)popToViewController:(UIViewController *)viewController;
 - (void)popToRootViewController;
 

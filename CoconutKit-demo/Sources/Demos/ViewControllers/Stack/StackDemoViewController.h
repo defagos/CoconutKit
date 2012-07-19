@@ -33,6 +33,10 @@
 - (IBAction)displayTransparent:(id)sender;
 - (IBAction)testInModal:(id)sender;
 - (IBAction)pop:(id)sender;
+- (IBAction)popToRoot:(id)sender;
 - (IBAction)toggleForwardingProperties:(id)sender;
+
+- (IBAction)navigateForwardNonAnimated:(id)sender;
+- (IBAction)navigateBackNonAnimated:(id)sender;
 
 @end

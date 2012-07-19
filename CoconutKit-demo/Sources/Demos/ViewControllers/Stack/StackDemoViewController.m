@@ -186,10 +186,27 @@
     [stackController popViewController];
 }
 
+- (IBAction)popToRoot:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    [stackController popToRootViewController];
+}
+
 - (IBAction)toggleForwardingProperties:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
+}
+
+- (IBAction)navigateForwardNonAnimated:(id)sender
+{
+    StackDemoViewController *stackDemoViewController = [[[StackDemoViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:stackDemoViewController animated:NO];
+}
+
+- (IBAction)navigateBackNonAnimated:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

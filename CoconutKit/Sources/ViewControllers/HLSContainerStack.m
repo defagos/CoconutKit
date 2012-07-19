@@ -214,20 +214,34 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)popToViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [[self viewControllers] indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"The view controller to pop to does not belong to the container");
-        return;
+    NSUInteger firstRemovedIndex = 0;
+    if (viewController) {
+        NSUInteger index = [[self viewControllers] indexOfObject:viewController];
+        if (index == NSNotFound) {
+            HLSLoggerError(@"The view controller to pop to does not belong to the container");
+            return;            
+        }
+        firstRemovedIndex = index + 1;        
+    }
+    else {
+        firstRemovedIndex = 0;
     }
     
-    for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
+    // TODO: Not optimal! Create views unnecessarily during successive pops. Write optimized version
+    for (NSUInteger i = [self.containerContents count]; i >= firstRemovedIndex; --i) {
         [self removeViewControllerAtIndex:i];
     }
 }
 
 - (void)popToRootViewController
 {
-    [self popToViewController:[self rootViewController]];
+    UIViewController *rootViewController = [self rootViewController];
+    if (! rootViewController) {
+        HLSLoggerWarn(@"No root view controller has been loaded");
+        return;
+    }
+    
+    [self popToViewController:rootViewController];
 }
 
 - (void)insertViewController:(UIViewController *)viewController 
