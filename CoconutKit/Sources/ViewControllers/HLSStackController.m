@@ -243,6 +243,16 @@
     [self.containerStack popViewController];
 }
 
+- (void)popToViewController:(UIViewController *)viewController
+{
+    if (! viewController) {
+        HLSLoggerWarn(@"Cannot pop to nil");
+        return;
+    }
+    
+    [self.containerStack popToViewController:viewController];
+}
+
 - (void)popToRootViewController
 {
     [self.containerStack popToRootViewController];

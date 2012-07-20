@@ -118,6 +118,13 @@
 - (void)popViewController;
 
 /**
+ * Pop all view controllers to get back to a given view controller. The current top view controller will transition
+ * to the specified view controller using the reverse animation with which it was pushed onto the stack. If the
+ * view controller to pop to does not belong to the stack or is nil, this method does nothing
+ */
+- (void)popToViewController:(UIViewController *)viewController;
+
+/**
  * Pop all view controllers to get back to the root view controller. The current top view controller will transition
  * to the root view controller using the reverse animation with which it was pushed onto the stack
  */

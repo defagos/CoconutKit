@@ -223,14 +223,39 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)popToViewController:(UIViewController *)viewController
 {
-    NSUInteger firstRemovedIndex = 0;
     if (viewController) {
         NSUInteger index = [[self viewControllers] indexOfObject:viewController];
         if (index == NSNotFound) {
-            HLSLoggerError(@"The view controller to pop to does not belong to the container");
+            HLSLoggerWarn(@"The view controller to pop to does not belong to the container");
+            return;
+        }
+        else if (index == [self.containerContents count] - 1) {
+            HLSLoggerWarn(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
+            return;
+        }
+        [self popToViewControllerAtIndex:index];
+    }
+    else {
+        // Pop everything
+        [self popToViewControllerAtIndex:NSUIntegerMax];
+    }
+}
+
+- (void)popToViewControllerAtIndex:(NSUInteger)index
+{
+    NSUInteger firstRemovedIndex = 0;
+    if (index != NSUIntegerMax) {
+        if (index < [self.containerContents count] - 1) {
+            firstRemovedIndex = index + 1;
+        }
+        else if (index == [self.containerContents count] - 1) {
+            HLSLoggerWarn(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
             return;            
         }
-        firstRemovedIndex = index + 1;        
+        else {
+            HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 2);
+            return;
+        }
     }
     else {
         firstRemovedIndex = 0;
@@ -256,18 +281,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Now pop the top view controller
-    [self popViewController];
+    [self popViewController]; 
 }
 
 - (void)popToRootViewController
 {
-    UIViewController *rootViewController = [self rootViewController];
-    if (! rootViewController) {
-        HLSLoggerWarn(@"No root view controller has been loaded");
-        return;
+    if ([self.containerContents count] != 0) {
+        [self popToViewControllerAtIndex:0];
     }
-    
-    [self popToViewController:rootViewController];
+    else {
+        HLSLoggerWarn(@"No root view controller has been loaded");
+    }    
 }
 
 - (void)insertViewController:(UIViewController *)viewController 
@@ -282,10 +306,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if (index > [self.containerContents count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]];
-        @throw [NSException exceptionWithName:NSInvalidArgumentException 
-                                       reason:reason
-                                     userInfo:nil];
+        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]);
+        return;
     }
     
     // Check that the view controller to be pushed is compatible with the current orientation
@@ -295,14 +317,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;
         }
     }
-        
+    
     // Associate the new view controller with its container (this increases the containerContents array size)
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController 
                                                                          containerViewController:self.containerViewController
                                                                                  transitionStyle:transitionStyle 
                                                                                         duration:duration] autorelease];
     [self.containerContents insertObject:containerContent atIndex:index];
-        
+    
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
@@ -311,10 +333,36 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
+- (void)insertViewController:(UIViewController *)viewController
+         belowViewController:(UIViewController *)belowViewController
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                    duration:(NSTimeInterval)duration
+{
+    NSUInteger index = [[self viewControllers] indexOfObject:belowViewController];
+    if (index == NSNotFound) {
+        HLSLoggerWarn(@"The given view controller 'below' does not belong to the container");
+        return;
+    }
+    [self insertViewController:viewController atIndex:index withTransitionStyle:transitionStyle duration:duration];
+}
+
+- (void)insertViewController:(UIViewController *)viewController
+         aboveViewController:(UIViewController *)aboveViewController
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                    duration:(NSTimeInterval)duration
+{
+    NSUInteger index = [[self viewControllers] indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerWarn(@"The given view controller 'above' does not belong to the container");
+        return;
+    }
+    [self insertViewController:viewController atIndex:index + 1 withTransitionStyle:transitionStyle duration:duration];    
+}
+
 - (void)removeViewControllerAtIndex:(NSUInteger)index
 {
     if (index >= [self.containerContents count]) {
-        HLSLoggerError(@"Invalid index");
+        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 1);
         return;
     }
     
@@ -350,6 +398,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         [self topContainerContent].forwardingProperties = YES;
     }
+}
+- (void)removeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [[self viewControllers] indexOfObject:viewController];
+    if (index == NSNotFound) {
+        HLSLoggerWarn(@"The view controller to remove does not belong to the container");
+        return;
+    }
+    [self removeViewControllerAtIndex:index];
 }
 
 - (void)rotateWithDuration:(NSTimeInterval)duration
@@ -551,7 +608,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Capacity
 
-// TODO: Maybe not needed anymore, inline
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
 {
     if ([self.containerContents count] > depth) {

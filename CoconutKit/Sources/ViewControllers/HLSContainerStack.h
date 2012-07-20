@@ -96,13 +96,28 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 // If viewController is nil: Pop everything. Also add remark about view controllers with transparency (this of course
 // does not yield a nice effect)
 - (void)popToViewController:(UIViewController *)viewController;
+
+// Pass NSUIntegerMax to pop all
+- (void)popToViewControllerAtIndex:(NSUInteger)index;
+
 - (void)popToRootViewController;
 
+// TODO: Document special values (cnt - 1, integermax)
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration;
+- (void)insertViewController:(UIViewController *)viewController
+         belowViewController:(UIViewController *)belowViewController
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                    duration:(NSTimeInterval)duration;
+- (void)insertViewController:(UIViewController *)viewController
+         aboveViewController:(UIViewController *)aboveViewController
+         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                    duration:(NSTimeInterval)duration;
+
 - (void)removeViewControllerAtIndex:(NSUInteger)index;
+- (void)removeViewController:(UIViewController *)viewController;
 
 /**
  * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved
