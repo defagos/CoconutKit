@@ -44,6 +44,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     id<HLSContainerStackDelegate> m_delegate;
 }
 
++ (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController;
+
 /**
  * Create a stack which will manage the children of a container view controller. The view controller container
  * is not retained
@@ -91,7 +93,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 - (void)popViewController;
 
-// If viewController is nil: Pop everything
+// If viewController is nil: Pop everything. Also add remark about view controllers with transparency (this of course
+// does not yield a nice effect)
 - (void)popToViewController:(UIViewController *)viewController;
 - (void)popToRootViewController;
 

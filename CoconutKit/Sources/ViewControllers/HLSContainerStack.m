@@ -62,6 +62,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @implementation HLSContainerStack
 
+#pragma mark Class methods
+
++ (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController
+{
+    return [[[[self class] alloc] initWithContainerViewController:containerViewController
+                                                         capacity:HLSContainerStackMinimalCapacity 
+                                                         removing:YES] autorelease];
+}
+
 #pragma mark Object creation and destruction
 
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
@@ -227,10 +236,27 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         firstRemovedIndex = 0;
     }
     
-    // TODO: Not optimal! Create views unnecessarily during successive pops. Write optimized version
-    for (NSUInteger i = [self.containerContents count]; i >= firstRemovedIndex; --i) {
-        [self removeViewControllerAtIndex:i];
+    // Remove the view controllers up to the one we want to pop to (except the topmost one)
+    NSUInteger i = [self.containerContents count] - firstRemovedIndex - 1;
+    while (i > 0) {
+        [self.containerContents removeObjectAtIndex:firstRemovedIndex];
+        --i;
     }
+    
+    // Resurrect view controller's views below the view controller we pop to so that the capacity criterium
+    // is satisfied
+    for (NSUInteger i = 0; i < self.capacity; ++i) {        
+        NSUInteger index = firstRemovedIndex - 1 - i;
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+        [self addViewForContainerContent:containerContent playingTransition:NO animated:NO];
+        
+        if (index == 0) {
+            break;
+        }
+    }
+    
+    // Now pop the top view controller
+    [self popViewController];
 }
 
 - (void)popToRootViewController
@@ -473,12 +499,25 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
-        HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
-        UIView *aboveContainerView = [aboveContainerContent viewIfLoaded];
-        NSAssert(aboveContainerView != nil, @"The above view controller's view should be loaded");
-        [containerContent insertAsSubviewIntoContainerView:self.containerView
-                                                   atIndex:[self.containerView.subviews indexOfObject:aboveContainerView]];
+        // Find which container view above is available. We will insert the new one right below it (usually,
+        // this is the one at index + 1, but this might not be the case if we are resurrecting a view controller
+        // deep in the stack)
+        BOOL inserted = NO;
+        for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
+            HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
+            UIView *aboveContainerView = [aboveContainerContent viewIfLoaded];
+            if (aboveContainerView) {
+                [containerContent insertAsSubviewIntoContainerView:self.containerView
+                                                           atIndex:[self.containerView.subviews indexOfObject:aboveContainerView]];
+                inserted = YES;
+                break;
+            }
+        }
         
+        if (! inserted) {
+            [containerContent addAsSubviewIntoContainerView:self.containerView];
+        }
+                
         // Play the animation of all view controllers above so that the new view controller is brought into the correct position
         for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
