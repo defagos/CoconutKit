@@ -34,6 +34,7 @@
 - (IBAction)testInModal:(id)sender;
 - (IBAction)pop:(id)sender;
 - (IBAction)popToRoot:(id)sender;
+- (IBAction)popThree:(id)sender;
 - (IBAction)toggleForwardingProperties:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;

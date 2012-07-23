@@ -99,8 +99,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 // Pass NSUIntegerMax to pop all
 - (void)popToViewControllerAtIndex:(NSUInteger)index;
-
 - (void)popToRootViewController;
+- (void)popAllViewControllers;
 
 // TODO: Document special values (cnt - 1, integermax)
 - (void)insertViewController:(UIViewController *)viewController

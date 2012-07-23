@@ -192,6 +192,20 @@
     [stackController popToRootViewController];
 }
 
+- (IBAction)popThree:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    NSArray *viewControllers = [stackController viewControllers];
+    UIViewController *targetViewController = nil;
+    if ([viewControllers count] >= 4) {
+        targetViewController = [viewControllers objectAtIndex:[viewControllers count] - 4];
+    }
+    else {
+        targetViewController = [stackController rootViewController];
+    }
+    [stackController popToViewController:targetViewController];
+}
+
 - (IBAction)toggleForwardingProperties:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];

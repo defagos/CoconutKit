@@ -45,7 +45,7 @@
 					<object class="IBUIView" id="947591304">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 20}, {728, 293}}</string>
+						<string key="NSFrame">{{20, 20}, {728, 257}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="143946135"/>
@@ -58,7 +58,7 @@
 					<object class="IBUIButton" id="143946135">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 333}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 285}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1003278248"/>
@@ -95,7 +95,7 @@
 					<object class="IBUIButton" id="1003278248">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 378}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 330}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="631728918"/>
@@ -117,10 +117,10 @@
 					<object class="IBUIButton" id="631728918">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 423}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 375}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="693636749"/>
+						<reference key="NSNextKeyView" ref="457239750"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -139,10 +139,10 @@
 					<object class="IBUIButton" id="457239750">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 468}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 420}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="109554102"/>
+						<reference key="NSNextKeyView" ref="693636749"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -161,7 +161,7 @@
 					<object class="IBUIButton" id="109554102">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 513}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 465}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="810016005"/>
@@ -183,7 +183,7 @@
 					<object class="IBUIButton" id="810016005">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 558}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 510}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="145002668"/>
@@ -205,7 +205,7 @@
 					<object class="IBUIButton" id="145002668">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 603}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 555}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="270606591"/>
@@ -227,10 +227,10 @@
 					<object class="IBUIButton" id="270606591">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 648}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 600}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="266395609"/>
+						<reference key="NSNextKeyView" ref="1027394053"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -249,10 +249,10 @@
 					<object class="IBUIButton" id="710257568">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 806}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 758}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="299030079"/>
+						<reference key="NSNextKeyView" ref="500541430"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -271,10 +271,10 @@
 					<object class="IBUIButton" id="244499301">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 851}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 803}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="709294903"/>
+						<reference key="NSNextKeyView" ref="299030079"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -290,13 +290,35 @@
 						<reference key="IBUIFontDescription" ref="305668555"/>
 						<reference key="IBUIFont" ref="442914560"/>
 					</object>
+					<object class="IBUIButton" id="241716949">
+						<reference key="NSNextResponder" ref="931356872"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{20, 847}, {217, 37}}</string>
+						<reference key="NSSuperview" ref="931356872"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="709294903"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">LS/Pop 3 VCs</string>
+						<reference key="IBUIHighlightedTitleColor" ref="519999835"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="395021683"/>
+						<reference key="IBUIFontDescription" ref="305668555"/>
+						<reference key="IBUIFont" ref="442914560"/>
+					</object>
 					<object class="IBUILabel" id="693636749">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{283, 423}, {465, 40}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="457239750"/>
+						<reference key="NSNextKeyView" ref="109554102"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -327,17 +349,17 @@
 						<string key="NSFrame">{{283, 468}, {465, 216}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1027394053"/>
+						<reference key="NSNextKeyView" ref="410874097"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsSelectionIndicator">YES</bool>
 					</object>
 					<object class="IBUIButton" id="410874097">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 761}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 713}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="500541430"/>
+						<reference key="NSNextKeyView" ref="710257568"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -356,10 +378,10 @@
 					<object class="IBUIButton" id="1027394053">
 						<reference key="NSNextResponder" ref="931356872"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 693}, {217, 37}}</string>
+						<string key="NSFrame">{{20, 645}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="410874097"/>
+						<reference key="NSNextKeyView" ref="266395609"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -406,7 +428,7 @@
 						<string key="NSFrame">{{654, 735}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="710257568"/>
+						<reference key="NSNextKeyView" ref="244499301"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -439,7 +461,7 @@
 						<string key="NSFrame">{{654, 791}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="931356872"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="244499301"/>
+						<reference key="NSNextKeyView" ref="241716949"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -719,6 +741,15 @@
 					</object>
 					<int key="connectionID">88</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">popThree:</string>
+						<reference key="source" ref="241716949"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">93</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -770,6 +801,7 @@
 							<reference ref="445090794"/>
 							<reference ref="37894343"/>
 							<reference ref="244499301"/>
+							<reference ref="241716949"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -888,6 +920,11 @@
 						<reference key="object" ref="244499301"/>
 						<reference key="parent" ref="931356872"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">91</int>
+						<reference key="object" ref="241716949"/>
+						<reference key="parent" ref="931356872"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -922,12 +959,14 @@
 					<string>85.IBPluginDependency</string>
 					<string>86.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
+					<string>91.IBPluginDependency</string>
 				</object>
 				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>StackDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -967,7 +1006,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">90</int>
+			<int key="maxID">93</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1026,12 +1065,14 @@
 							<string>navigateBackNonAnimated:</string>
 							<string>navigateForwardNonAnimated:</string>
 							<string>pop:</string>
+							<string>popThree:</string>
 							<string>popToRoot:</string>
 							<string>testInModal:</string>
 							<string>toggleForwardingProperties:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1065,6 +1106,7 @@
 							<string>navigateBackNonAnimated:</string>
 							<string>navigateForwardNonAnimated:</string>
 							<string>pop:</string>
+							<string>popThree:</string>
 							<string>popToRoot:</string>
 							<string>testInModal:</string>
 							<string>toggleForwardingProperties:</string>
@@ -1117,6 +1159,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">pop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">popThree:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

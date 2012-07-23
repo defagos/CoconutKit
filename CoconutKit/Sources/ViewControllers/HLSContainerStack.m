@@ -294,6 +294,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }    
 }
 
+- (void)popAllViewControllers
+{
+    [self popToViewControllerAtIndex:NSUIntegerMax];
+}
+
 - (void)insertViewController:(UIViewController *)viewController 
                      atIndex:(NSUInteger)index 
          withTransitionStyle:(HLSTransitionStyle)transitionStyle 
