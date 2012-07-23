@@ -579,30 +579,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
             // correction is applied during rotation
             HLSViewAnimationStep *viewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
             switch (containerContent.transitionStyle) {
-                case HLSTransitionStylePushFromTop: {
-                    CGFloat offset = CGRectGetHeight(fixedFrame) - belowView.transform.ty;
-                    [viewAnimationStep translateByVectorWithX:0.f y:offset z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromBottom: {
-                    CGFloat offset = CGRectGetHeight(fixedFrame) + belowView.transform.ty;
-                    [viewAnimationStep translateByVectorWithX:0.f y:-offset z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromLeft: {
-                    CGFloat offset = CGRectGetWidth(fixedFrame) - belowView.transform.tx;
-                    [viewAnimationStep translateByVectorWithX:offset y:0.f z:0.f];
-                    break;
-                }
-                    
-                case HLSTransitionStylePushFromRight: {
-                    CGFloat offset = CGRectGetWidth(fixedFrame) + belowView.transform.tx;
-                    [viewAnimationStep translateByVectorWithX:-offset y:0.f z:0.f];
-                    break;
-                }
-                    
                 case HLSTransitionStyleCoverFromBottom2:
                 case HLSTransitionStyleCoverFromTop2:
                 case HLSTransitionStyleCoverFromLeft2:
