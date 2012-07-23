@@ -379,6 +379,26 @@
             break;
         }
             
+        case HLSTransitionStyleFlowFromBottom: {
+            return @"HLSTransitionStyleFlowFromBottom";
+            break;
+        }
+            
+        case HLSTransitionStyleFlowFromTop: {
+            return @"HLSTransitionStyleFlowFromTop";
+            break;
+        }
+            
+        case HLSTransitionStyleFlowFromLeft: {
+            return @"HLSTransitionStyleFlowFromLeft";
+            break;
+        }
+            
+        case HLSTransitionStyleFlowFromRight: {
+            return @"HLSTransitionStyleFlowFromRight";
+            break;
+        }            
+            
         case HLSTransitionStyleEmergeFromCenter: {
             return @"HLSTransitionStyleEmergeFromCenter";
             break;

@@ -41,6 +41,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                     disappearingContainerContents:(NSArray *)disappearingContainerContents;
 
++ (HLSAnimation *)flowAnimationWithInitialXOffset:(CGFloat)xOffset
+                                          yOffset:(CGFloat)yOffset
+                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                    disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
 + (HLSAnimation *)emergeFromCenterAnimationWithAppearingContainerContent:(HLSContainerContent *)appearingContainerContent;
 
 + (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
@@ -236,6 +241,53 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The old view is pushed to the back, then pushed by the new one (at the same scale), which is then pushed to the front
++ (HLSAnimation *)flowAnimationWithInitialXOffset:(CGFloat)xOffset
+                                          yOffset:(CGFloat)yOffset
+                        appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                    disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
+    [viewAnimationStep11 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]]; 
+    }
+    animationStep2.duration = 0.2;
+    [animationSteps addObject:animationStep2];
+    
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+        [viewAnimationStep31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
+        [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[disappearingContainerContent viewIfLoaded]]; 
+    }
+    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep32 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
+    [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[appearingContainerContent viewIfLoaded]]; 
+    animationStep3.duration = 0.2;
+    [animationSteps addObject:animationStep3];
+    
+    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep41 scaleWithXFactor:1.f / kPushToTheBackScaleFactor yFactor:1.f / kPushToTheBackScaleFactor zFactor:1.f];
+    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:[appearingContainerContent viewIfLoaded]];
+    animationStep4.duration = 0.2;
+    [animationSteps addObject:animationStep4];
     
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
@@ -508,6 +560,38 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
             
         case HLSTransitionStylePushFromRight: {
             animation = [self pushAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                      yOffset:0.f
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStyleFlowFromBottom: {
+            animation = [self flowAnimationWithInitialXOffset:0.f
+                                                      yOffset:CGRectGetHeight(frame)
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStyleFlowFromTop: {
+            animation = [self flowAnimationWithInitialXOffset:0.f
+                                                      yOffset:-CGRectGetHeight(frame)
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
+            break;
+        }    
+            
+        case HLSTransitionStyleFlowFromLeft: {
+            animation = [self flowAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                      yOffset:0.f
+                                    appearingContainerContent:appearingContainerContent 
+                                disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStyleFlowFromRight: {
+            animation = [self flowAnimationWithInitialXOffset:CGRectGetWidth(frame)
                                                       yOffset:0.f
                                     appearingContainerContent:appearingContainerContent 
                                 disappearingContainerContents:disappearingContainerContents];
