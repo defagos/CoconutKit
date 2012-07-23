@@ -22,6 +22,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
         self.transitionStyle = HLSTransitionStyleNone;
         self.duration = kAnimationTransitionDefaultDuration;
+        self.animated = YES;
     }
     return self;
 }
@@ -31,6 +32,8 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 @synthesize transitionStyle = m_transitionStyle;
 
 @synthesize duration = m_duration;
+
+@synthesize animated = m_animated;
 
 #pragma mark Overrides
 
@@ -72,7 +75,8 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     
     [stackController pushViewController:self.destinationViewController
                     withTransitionStyle:self.transitionStyle
-                               duration:self.duration];
+                               duration:self.duration
+                               animated:self.animated];
 }
 
 @end

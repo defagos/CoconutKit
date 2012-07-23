@@ -12,12 +12,14 @@
     UIBarButtonItem *m_actionSheetBarButtonItem;
     UIButton *m_popButton;
     UIPickerView *m_transitionPickerView;
+    UISwitch *m_animatedSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *actionSheetBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
 - (IBAction)push:(id)sender;
 - (IBAction)pop:(id)sender;

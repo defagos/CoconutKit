@@ -38,17 +38,29 @@
         
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
+        [stackController pushViewController:firstViewController 
+                        withTransitionStyle:HLSTransitionStyleEmergeFromCenter
+                                   animated:NO];
         UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
+        [stackController pushViewController:secondViewController 
+                        withTransitionStyle:HLSTransitionStylePushFromRight
+                                   animated:NO];
         UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromRight2];
+        [stackController pushViewController:thirdViewController 
+                        withTransitionStyle:HLSTransitionStyleCoverFromRight2
+                                   animated:NO];
         UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
+        [stackController pushViewController:fourthViewController 
+                        withTransitionStyle:HLSTransitionStyleCoverFromBottom
+                                   animated:NO];
         UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
+        [stackController pushViewController:fifthViewController 
+                        withTransitionStyle:HLSTransitionStylePushFromTop
+                                   animated:NO];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
+        [stackController pushViewController:sixthViewController
+                        withTransitionStyle:HLSTransitionStyleFlipHorizontal
+                                   animated:NO];
         
         [self setInsetViewController:stackController atIndex:0];
         self.forwardingProperties = YES;
@@ -61,7 +73,10 @@
     [super releaseViews];
     
     self.transitionPickerView = nil;
+    self.inTabBarControllerSwitch = nil;
+    self.inNavigationControllerSwitch = nil;
     self.forwardingPropertiesSwitch = nil;
+    self.animatedSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -73,6 +88,8 @@
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
 
 @synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
+
+@synthesize animatedSwitch = m_animatedSwitch;
 
 #pragma mark View lifecycle
 
@@ -111,7 +128,9 @@
     }
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [stackController pushViewController:pushedViewController withTransitionStyle:pickedIndex];
+    [stackController pushViewController:pushedViewController
+                    withTransitionStyle:pickedIndex
+                               animated:self.animatedSwitch.on];
 }
 
 #pragma mark Event callbacks
@@ -183,13 +202,13 @@
 - (IBAction)pop:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    [stackController popViewController];
+    [stackController popViewControllerAnimated:self.animatedSwitch.on];
 }
 
 - (IBAction)popToRoot:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    [stackController popToRootViewController];
+    [stackController popToRootViewControllerAnimated:self.animatedSwitch.on];
 }
 
 - (IBAction)popThree:(id)sender
@@ -203,7 +222,7 @@
     else {
         targetViewController = [stackController rootViewController];
     }
-    [stackController popToViewController:targetViewController];
+    [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
 }
 
 - (IBAction)toggleForwardingProperties:(id)sender

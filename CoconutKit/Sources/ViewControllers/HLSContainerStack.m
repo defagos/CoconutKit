@@ -209,19 +209,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
+                  animated:(BOOL)animated
 {
     [self insertViewController:viewController
                        atIndex:[self.containerContents count] 
            withTransitionStyle:transitionStyle
-                      duration:duration];
+                      duration:duration
+                      animated:animated];
 }
 
-- (void)popViewController
+- (void)popViewControllerAnimated:(BOOL)animated
 {
-    [self removeViewControllerAtIndex:[self.containerContents count] - 1];
+    [self removeViewControllerAtIndex:[self.containerContents count] - 1 animated:animated];
 }
 
-- (void)popToViewController:(UIViewController *)viewController
+- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (viewController) {
         NSUInteger index = [[self viewControllers] indexOfObject:viewController];
@@ -233,15 +235,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             HLSLoggerWarn(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
             return;
         }
-        [self popToViewControllerAtIndex:index];
+        [self popToViewControllerAtIndex:index animated:animated];
     }
     else {
         // Pop everything
-        [self popToViewControllerAtIndex:NSUIntegerMax];
+        [self popToViewControllerAtIndex:NSUIntegerMax animated:animated];
     }
 }
 
-- (void)popToViewControllerAtIndex:(NSUInteger)index
+- (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     NSUInteger firstRemovedIndex = 0;
     if (index != NSUIntegerMax) {
@@ -281,28 +283,29 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Now pop the top view controller
-    [self popViewController]; 
+    [self popViewControllerAnimated:animated]; 
 }
 
-- (void)popToRootViewController
+- (void)popToRootViewControllerAnimated:(BOOL)animated
 {
     if ([self.containerContents count] != 0) {
-        [self popToViewControllerAtIndex:0];
+        [self popToViewControllerAtIndex:0 animated:animated];
     }
     else {
         HLSLoggerWarn(@"No root view controller has been loaded");
     }    
 }
 
-- (void)popAllViewControllers
+- (void)popAllViewControllersAnimated:(BOOL)animated
 {
-    [self popToViewControllerAtIndex:NSUIntegerMax];
+    [self popToViewControllerAtIndex:NSUIntegerMax animated:animated];
 }
 
 - (void)insertViewController:(UIViewController *)viewController 
                      atIndex:(NSUInteger)index 
          withTransitionStyle:(HLSTransitionStyle)transitionStyle 
                     duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated
 {
     if (! viewController) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
@@ -333,7 +336,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
         if ([self.containerContents count] - index - 1 <= self.capacity) {
-            [self addViewForContainerContent:containerContent playingTransition:YES animated:YES];
+            [self addViewForContainerContent:containerContent playingTransition:YES animated:animated];
         }
     }
 }
@@ -342,29 +345,39 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
          belowViewController:(UIViewController *)belowViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated
 {
     NSUInteger index = [[self viewControllers] indexOfObject:belowViewController];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"The given view controller 'below' does not belong to the container");
         return;
     }
-    [self insertViewController:viewController atIndex:index withTransitionStyle:transitionStyle duration:duration];
+    [self insertViewController:viewController 
+                       atIndex:index 
+           withTransitionStyle:transitionStyle 
+                      duration:duration
+                      animated:animated];
 }
 
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)aboveViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated
 {
     NSUInteger index = [[self viewControllers] indexOfObject:viewController];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"The given view controller 'above' does not belong to the container");
         return;
     }
-    [self insertViewController:viewController atIndex:index + 1 withTransitionStyle:transitionStyle duration:duration];    
+    [self insertViewController:viewController 
+                       atIndex:index + 1 
+           withTransitionStyle:transitionStyle 
+                      duration:duration
+                      animated:animated];
 }
 
-- (void)removeViewControllerAtIndex:(NSUInteger)index
+- (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     if (index >= [self.containerContents count]) {
         HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 1);
@@ -391,7 +404,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             animation.lockingUI = YES;
             animation.delegate = self;
             
-            [animation playAnimated:YES];
+            [animation playAnimated:animated];
         }
         else {
             [animation playAnimated:NO];
@@ -404,14 +417,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [self topContainerContent].forwardingProperties = YES;
     }
 }
-- (void)removeViewController:(UIViewController *)viewController
+- (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     NSUInteger index = [[self viewControllers] indexOfObject:viewController];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"The view controller to remove does not belong to the container");
         return;
     }
-    [self removeViewControllerAtIndex:index];
+    [self removeViewControllerAtIndex:index animated:animated];
 }
 
 - (void)rotateWithDuration:(NSTimeInterval)duration

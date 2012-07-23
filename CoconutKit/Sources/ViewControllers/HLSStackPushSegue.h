@@ -16,7 +16,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
 /**
  * Segue class for pushing view controllers into an HLSStackController when using storyboards. The source
  * view controller can implement the -prepareForSegue:sender: method to further customize transition
- * properties (transition style and duration)
+ * properties
  *
  * Each HLSStackController dropped onto a storyboard must be connected to its root view controller using
  * a segue with the identifier 'hls_root'. To push a view controller B onto another one A already in the 
@@ -39,5 +39,11 @@ extern NSString * const HLSStackRootSegueIdentifier;
  * Default is kAnimationTransitionDefaultDuration
  */
 @property (nonatomic, assign) NSTimeInterval duration;
+
+/**
+ * Animated transition
+ * Default is YES
+ */
+@property (nonatomic, assign) BOOL animated;
 
 @end

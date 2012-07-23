@@ -7,7 +7,9 @@
 //
 
 /**
- * Segue class for popping view controllers out of an HLSStackController when using storyboards. 
+ * Segue class for popping view controllers out of an HLSStackController when using storyboards. The source 
+ * view controller can implement the -prepareForSegue:sender: method to further customize transition
+ * properties
  *
  * The destination view controller is not used. Simply bind the segue from the view controller to
  * pop to another one (connecting it to the view controller below in the stack is a good idea 
@@ -15,5 +17,11 @@
  * view controller to itself if you want)
  */
 @interface HLSStackPopSegue : UIStoryboardSegue
+
+/**
+ * Animated transition
+ * Default is YES
+ */
+@property (nonatomic, assign) BOOL animated;
 
 @end

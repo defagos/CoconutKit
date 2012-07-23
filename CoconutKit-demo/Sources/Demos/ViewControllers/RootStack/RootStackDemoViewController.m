@@ -31,6 +31,7 @@
     self.actionSheetBarButtonItem = nil;
     self.popButton = nil;
     self.transitionPickerView = nil;
+    self.animatedSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -42,6 +43,8 @@
 @synthesize popButton = m_popButton;
 
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize animatedSwitch = m_animatedSwitch;
 
 #pragma mark View lifecycle
 
@@ -284,7 +287,7 @@
 - (void)displayViewController:(UIViewController *)viewController
 {
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self.stackController pushViewController:viewController withTransitionStyle:pickedIndex];
+    [self.stackController pushViewController:viewController withTransitionStyle:pickedIndex animated:self.animatedSwitch.on];
 }
 
 #pragma mark Event callbacks
@@ -301,7 +304,7 @@
         [self dismissModalViewControllerAnimated:YES];
     }
     else {
-        [self.stackController popViewController];
+        [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
     }
 }
 
@@ -355,7 +358,7 @@
 
 - (void)closeNativeContainer:(id)sender
 {
-    [self.stackController popViewController];
+    [self.stackController popViewControllerAnimated:YES];
 }
 
 @end

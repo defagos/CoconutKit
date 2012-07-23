@@ -89,35 +89,39 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                  duration:(NSTimeInterval)duration;
+                  duration:(NSTimeInterval)duration
+                  animated:(BOOL)animated;
 
-- (void)popViewController;
+- (void)popViewControllerAnimated:(BOOL)animated;
 
 // If viewController is nil: Pop everything. Also add remark about view controllers with transparency (this of course
 // does not yield a nice effect)
-- (void)popToViewController:(UIViewController *)viewController;
+- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 // Pass NSUIntegerMax to pop all
-- (void)popToViewControllerAtIndex:(NSUInteger)index;
-- (void)popToRootViewController;
-- (void)popAllViewControllers;
+- (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)popToRootViewControllerAnimated:(BOOL)animated;
+- (void)popAllViewControllersAnimated:(BOOL)animated;
 
 // TODO: Document special values (cnt - 1, integermax)
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                    duration:(NSTimeInterval)duration;
+                    duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
          belowViewController:(UIViewController *)belowViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                    duration:(NSTimeInterval)duration;
+                    duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)aboveViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                    duration:(NSTimeInterval)duration;
+                    duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated;
 
-- (void)removeViewControllerAtIndex:(NSUInteger)index;
-- (void)removeViewController:(UIViewController *)viewController;
+- (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved

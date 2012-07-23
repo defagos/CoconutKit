@@ -305,15 +305,15 @@
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
     if (! insetViewController) {
         if ([containerStack count] > 0) {
-            // TODO: Push an empty view controller with no anim, as before?
-            [containerStack popViewController];
+            [containerStack popViewControllerAnimated:YES];
         }
         return;
     }
     
     [containerStack pushViewController:insetViewController
                    withTransitionStyle:transitionStyle 
-                              duration:duration];       
+                              duration:duration
+                              animated:YES];       
 }
 
 @end

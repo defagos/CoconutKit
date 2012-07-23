@@ -34,7 +34,8 @@
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
-                                       duration:0.];
+                                       duration:0.
+                                       animated:NO];
     }
     return self;
 }
@@ -209,53 +210,59 @@
 
 #pragma mark Pushing view controllers onto the stack
 
-- (void)pushViewController:(UIViewController *)viewController
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [self pushViewController:viewController withTransitionStyle:HLSTransitionStyleNone];
+    [self pushViewController:viewController 
+         withTransitionStyle:HLSTransitionStyleNone
+                    animated:animated];
 }
 
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                  animated:(BOOL)animated
 {
     [self pushViewController:viewController 
          withTransitionStyle:transitionStyle
-                    duration:kAnimationTransitionDefaultDuration];
+                    duration:kAnimationTransitionDefaultDuration
+                    animated:animated];
 }
 
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
                   duration:(NSTimeInterval)duration
+                  animated:(BOOL)animated
 {
     [self.containerStack pushViewController:viewController
                         withTransitionStyle:transitionStyle 
-                                   duration:duration];
+                                   duration:duration
+                                   animated:animated];
 }
 
 #pragma mark Popping view controllers
 
-- (void)popViewController
+- (void)popViewControllerAnimated:(BOOL)animated
 {
     if ([self.containerStack count] == 1) {
         HLSLoggerWarn(@"The root view controller cannot be popped");
         return;
     }
     
-    [self.containerStack popViewController];
+    [self.containerStack popViewControllerAnimated:animated];
 }
 
-- (void)popToViewController:(UIViewController *)viewController
+- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (! viewController) {
         HLSLoggerWarn(@"Cannot pop to nil");
         return;
     }
     
-    [self.containerStack popToViewController:viewController];
+    [self.containerStack popToViewController:viewController animated:animated];
 }
 
-- (void)popToRootViewController
+- (void)popToRootViewControllerAnimated:(BOOL)animated
 {
-    [self.containerStack popToRootViewController];
+    [self.containerStack popToRootViewControllerAnimated:animated];
 }
 
 #pragma mark HLSContainerStackDelegate protocol implementation

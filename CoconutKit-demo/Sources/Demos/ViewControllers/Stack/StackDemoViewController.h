@@ -15,12 +15,14 @@
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_forwardingPropertiesSwitch;
+    UISwitch *m_animatedSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;

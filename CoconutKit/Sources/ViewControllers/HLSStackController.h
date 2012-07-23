@@ -88,7 +88,7 @@
  * Push a view controller onto the stack without animation.
  * This method can also be called before the stack controller is displayed
  */
-- (void)pushViewController:(UIViewController *)viewController;
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  * Push a view controller onto the stack using one of the built-in transition styles. The transition duration is set by 
@@ -97,7 +97,8 @@
  * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController 
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle;
+       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+                  animated:(BOOL)animated;
 
 /**
  * Same as pushViewController:withTransitionStyle:, but the transition duration can be overridden (the duration will be 
@@ -109,26 +110,27 @@
  */
 - (void)pushViewController:(UIViewController *)viewController
        withTransitionStyle:(HLSTransitionStyle)transitionStyle
-                  duration:(NSTimeInterval)duration;
+                  duration:(NSTimeInterval)duration
+                  animated:(BOOL)animated;
 
 /**
  * Remove the top view controller from the stack, reversing the transition animation which was used when it was pushed.
  * The root view controller cannot be popped
  */
-- (void)popViewController;
+- (void)popViewControllerAnimated:(BOOL)animated;
 
 /**
  * Pop all view controllers to get back to a given view controller. The current top view controller will transition
  * to the specified view controller using the reverse animation with which it was pushed onto the stack. If the
  * view controller to pop to does not belong to the stack or is nil, this method does nothing
  */
-- (void)popToViewController:(UIViewController *)viewController;
+- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  * Pop all view controllers to get back to the root view controller. The current top view controller will transition
  * to the root view controller using the reverse animation with which it was pushed onto the stack
  */
-- (void)popToRootViewController;
+- (void)popToRootViewControllerAnimated:(BOOL)animated;
 
 /**
  * Return the view controller at the bottom

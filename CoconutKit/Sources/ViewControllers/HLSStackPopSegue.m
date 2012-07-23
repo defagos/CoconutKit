@@ -13,6 +13,20 @@
 
 @implementation HLSStackPopSegue
 
+#pragma mark Object creation and destruction
+
+- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
+{
+    if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
+        self.animated = YES;
+    }
+    return self;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize animated = m_animated;
+
 #pragma mark Overrides
 
 - (void)perform
@@ -23,7 +37,7 @@
         return;
     }
     
-    [sourceViewController.stackController popViewController];
+    [sourceViewController.stackController popViewControllerAnimated:self.animated];
 }
 
 @end
