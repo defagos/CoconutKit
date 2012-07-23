@@ -30,7 +30,10 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:capacity removing:NO] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
+                                                                                 capacity:capacity 
+                                                                                 removing:NO
+                                                              rootViewControllerMandatory:YES] autorelease];
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
                             withTransitionStyle:HLSTransitionStyleNone 
@@ -53,7 +56,10 @@
 
 - (void)awakeFromNib
 {
-    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self capacity:self.capacity removing:NO] autorelease];
+    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
+                                                                             capacity:self.capacity 
+                                                                             removing:NO
+                                                          rootViewControllerMandatory:YES] autorelease];
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
@@ -241,22 +247,12 @@
 #pragma mark Popping view controllers
 
 - (void)popViewControllerAnimated:(BOOL)animated
-{
-    if ([self.containerStack count] == 1) {
-        HLSLoggerWarn(@"The root view controller cannot be popped");
-        return;
-    }
-    
+{    
     [self.containerStack popViewControllerAnimated:animated];
 }
 
 - (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if (! viewController) {
-        HLSLoggerWarn(@"Cannot pop to nil");
-        return;
-    }
-    
     [self.containerStack popToViewController:viewController animated:animated];
 }
 

@@ -68,7 +68,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     return [[[[self class] alloc] initWithContainerViewController:containerViewController
                                                          capacity:HLSContainerStackMinimalCapacity 
-                                                         removing:YES] autorelease];
+                                                         removing:YES
+                                      rootViewControllerMandatory:NO] autorelease];
 }
 
 #pragma mark Object creation and destruction
@@ -76,6 +77,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
                              capacity:(NSUInteger)capacity
                              removing:(BOOL)removing
+          rootViewControllerMandatory:(BOOL)rootViewControllerMandatory
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -89,6 +91,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerContents = [NSMutableArray array];
         self.capacity = capacity;
         m_removing = removing;
+        m_rootViewControllerMandatory = rootViewControllerMandatory;
     }
     return self;
 }
@@ -237,7 +240,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         [self popToViewControllerAtIndex:index animated:animated];
     }
-    else {
+    else {        
         // Pop everything
         [self popToViewControllerAtIndex:NSUIntegerMax animated:animated];
     }
@@ -260,6 +263,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     else {
+        if (m_rootViewControllerMandatory) {
+            HLSLoggerWarn(@"A root view controller is mandatory. Cannot pop everything");
+            return;
+        }
+        
         firstRemovedIndex = 0;
     }
     
@@ -384,6 +392,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
+    if (m_rootViewControllerMandatory && [self.containerContents count] == 1) {
+        HLSLoggerWarn(@"A root view controller is mandatory. Cannot pop the only one which remains");
+        return;
+    }
+    
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
         // Load the view below so that the capacity criterium can be fulfilled (if needed). During the animation we will
@@ -447,6 +460,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if (m_rootViewControllerMandatory && [self.containerContents count] == 0) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                       reason:@"A root view controller is mandatory"
+                                     userInfo:nil];
+    }
+    
     // Display those views required according to the capacity
     for (NSUInteger i = 0; i < self.capacity; ++i) {
         // Never play transitions (we are building the view hierarchy). Only the top view controller receives

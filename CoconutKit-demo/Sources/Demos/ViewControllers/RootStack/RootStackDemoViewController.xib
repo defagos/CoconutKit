@@ -183,7 +183,6 @@
 						<string key="NSFrame">{{0, 960}, {768, 20}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:195</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -282,7 +281,7 @@
 						<string key="NSFrame">{{302, 643}, {164, 37}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="210860281"/>
+						<reference key="NSNextKeyView" ref="711367689"/>
 						<string key="NSReuseIdentifierKey">_NS:241</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -320,13 +319,13 @@
 						<reference key="IBUIFontDescription" ref="188105237"/>
 						<reference key="IBUIFont" ref="99864177"/>
 					</object>
-					<object class="IBUILabel" id="210860281">
+					<object class="IBUILabel" id="711367689">
 						<reference key="NSNextResponder" ref="589436624"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{257, 718}, {160, 21}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="991717858"/>
+						<reference key="NSNextKeyView" ref="524962408"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -341,9 +340,9 @@
 						<reference key="IBUIFontDescription" ref="188105237"/>
 						<reference key="IBUIFont" ref="99864177"/>
 					</object>
-					<object class="IBUISwitch" id="991717858">
+					<object class="IBUISwitch" id="524962408">
 						<reference key="NSNextResponder" ref="589436624"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{417, 715}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
@@ -412,7 +411,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">animatedSwitch</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="991717858"/>
+						<reference key="destination" ref="524962408"/>
 					</object>
 					<int key="connectionID">54</int>
 				</object>
@@ -516,8 +515,8 @@
 							<reference ref="604077133"/>
 							<reference ref="339206221"/>
 							<reference ref="670698016"/>
-							<reference ref="210860281"/>
-							<reference ref="991717858"/>
+							<reference ref="711367689"/>
+							<reference ref="524962408"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -599,12 +598,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
-						<reference key="object" ref="210860281"/>
+						<reference key="object" ref="711367689"/>
 						<reference key="parent" ref="589436624"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">53</int>
-						<reference key="object" ref="991717858"/>
+						<reference key="object" ref="524962408"/>
 						<reference key="parent" ref="589436624"/>
 					</object>
 				</object>

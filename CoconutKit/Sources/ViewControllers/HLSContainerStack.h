@@ -40,6 +40,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     UIView *m_containerView;
     NSUInteger m_capacity;
     BOOL m_removing;
+    BOOL m_rootViewControllerMandatory;
     BOOL m_forwardingProperties;
     id<HLSContainerStackDelegate> m_delegate;
 }
@@ -56,7 +57,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 // take place
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
                              capacity:(NSUInteger)capacity
-                             removing:(BOOL)removing;
+                             removing:(BOOL)removing
+          rootViewControllerMandatory:(BOOL)rootViewControllerMandatory;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, assign) UIView *containerView;
