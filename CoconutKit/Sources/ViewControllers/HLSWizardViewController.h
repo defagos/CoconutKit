@@ -7,6 +7,7 @@
 //
 
 #import "HLSPlaceholderViewController.h"
+#import "HLSReloadable.h"
 
 // Forward declarations
 @protocol HLSWizardViewControllerDelegate;

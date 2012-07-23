@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSContainerAnimations.h"
 #import "HLSContainerContent.h"
+#import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"

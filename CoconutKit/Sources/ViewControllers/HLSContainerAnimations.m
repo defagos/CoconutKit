@@ -9,6 +9,8 @@
 #import "HLSContainerAnimations.h"
 
 #import "HLSAssert.h"
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 
 // Constants
 static CGFloat kPushToTheBackScaleFactor = 0.95f;

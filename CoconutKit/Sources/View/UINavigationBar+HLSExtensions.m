@@ -10,6 +10,7 @@
 
 #import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
+#import "UIView+HLSExtensions.h"
 
 HLSLinkCategory(UINavigationBar_HLSExtensions)
 
