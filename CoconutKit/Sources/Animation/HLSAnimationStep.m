@@ -116,6 +116,12 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
 
 @synthesize tag = m_tag;
 
+- (CGFloat)alphaVariationForView:(UIView *)view
+{
+    HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
+    return viewAnimationStep.alphaVariation;
+}
+
 #pragma mark Reverse animation
 
 - (HLSAnimationStep *)reverseAnimationStep

@@ -166,6 +166,12 @@
 @property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
 
 /**
+ * Return the total alpha variation applied to a given view during the animation. If the view does not belong to the 
+ * views involved in the animation, the method returns 0.f
+ */
+- (CGFloat)alphaVariationForView:(UIView *)view;
+
+/**
  * Generate a copy of the animation, but overrides its total duration with a new one. The original appearance of
  * the animation is preserved (it is only faster or slower depending on the new duration). If an invalid negative
  * duration is provided, the method returns nil

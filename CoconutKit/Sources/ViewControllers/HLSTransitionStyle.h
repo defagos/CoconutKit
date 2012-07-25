@@ -32,6 +32,10 @@ typedef enum {
     HLSTransitionStylePushFromTop,                           // The new view pushes down the old one (which disappears)
     HLSTransitionStylePushFromLeft,                          // The new view pushes the old one to the right (which disappears)
     HLSTransitionStylePushFromRight,                         // The new view pushes the old one to the left (which disappears)
+    HLSTransitionStylePushFromBottomFadeIn,                  // The old view is pushed from the bottom, then the new one appears with a fade in animation
+    HLSTransitionStylePushFromTopFadeIn,                     // The old view is pushed from the top, then the new one appears with a fade in animation
+    HLSTransitionStylePushFromLeftFadeIn,                    // The old view is pushed from the left, then the new one appears with a fade in animation
+    HLSTransitionStylePushFromRightFadeIn,                   // The old view is pushed from the right, then the new one appears with a fade in animation
     HLSTransitionStyleFlowFromBottom,                        // The old view is pushed to the back, pushed from the bottom by the new one, which then is then pushed to the front
     HLSTransitionStyleFlowFromTop,                           // The old view is pushed to the back, pushed from the top by the new one, which then is then pushed to the front
     HLSTransitionStyleFlowFromLeft,                          // The old view is pushed to the back, pushed from the left by the new one, which then is then pushed to the front

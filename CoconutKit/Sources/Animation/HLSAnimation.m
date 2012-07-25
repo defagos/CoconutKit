@@ -129,6 +129,15 @@
 
 @synthesize terminating = m_terminating;
 
+- (CGFloat)alphaVariationForView:(UIView *)view
+{
+    CGFloat alphaVariation = 0.f;
+    for (HLSAnimationStep *animationStep in self.animationSteps) {
+        alphaVariation += [animationStep alphaVariationForView:view];
+    }
+    return alphaVariation;
+}
+
 @synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
 
 @dynamic delegate;

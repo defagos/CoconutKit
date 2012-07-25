@@ -43,6 +43,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
                     disappearingContainerContents:(NSArray *)disappearingContainerContents;
 
++ (HLSAnimation *)pushAndFadeAnimationWithInitialXOffset:(CGFloat)xOffset
+                                                 yOffset:(CGFloat)yOffset
+                               appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                           disappearingContainerContents:(NSArray *)disappearingContainerContents;
+
 + (HLSAnimation *)flowAnimationWithInitialXOffset:(CGFloat)xOffset
                                           yOffset:(CGFloat)yOffset
                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
@@ -217,7 +222,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view pushes the other ones
+// The new view pushes the other one
 + (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
                                           yOffset:(CGFloat)yOffset
                         appearingContainerContent:(HLSContainerContent *)appearingContainerContent
@@ -243,6 +248,45 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:[appearingContainerContent viewIfLoaded]]; 
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+}
+
+// The new view pushes the other one, which fades in
++ (HLSAnimation *)pushAndFadeAnimationWithInitialXOffset:(CGFloat)xOffset
+                                                 yOffset:(CGFloat)yOffset
+                               appearingContainerContent:(HLSContainerContent *)appearingContainerContent
+                           disappearingContainerContents:(NSArray *)disappearingContainerContents
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep11.alphaVariation = -appearingContainerContent.originalViewAlpha;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:[appearingContainerContent viewIfLoaded]]; 
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+        [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
+        [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:[disappearingContainerContent viewIfLoaded]]; 
+    }
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    for (HLSContainerContent *disappearingContainerContent in disappearingContainerContents) {
+        HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+        viewAnimationStep31.alphaVariation = -disappearingContainerContent.originalViewAlpha;
+        [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:[disappearingContainerContent viewIfLoaded]]; 
+    }
+    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep32.alphaVariation = appearingContainerContent.originalViewAlpha;
+    [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:[appearingContainerContent viewIfLoaded]];
+    animationStep3.duration = 0.2;
+    [animationSteps addObject:animationStep3];
     
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
@@ -565,6 +609,38 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                                                       yOffset:0.f
                                     appearingContainerContent:appearingContainerContent 
                                 disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStylePushFromBottomFadeIn: {
+            animation = [self pushAndFadeAnimationWithInitialXOffset:0.f
+                                                             yOffset:CGRectGetHeight(frame)
+                                           appearingContainerContent:appearingContainerContent 
+                                       disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStylePushFromTopFadeIn: {
+            animation = [self pushAndFadeAnimationWithInitialXOffset:0.f
+                                                             yOffset:-CGRectGetHeight(frame)
+                                           appearingContainerContent:appearingContainerContent 
+                                       disappearingContainerContents:disappearingContainerContents];
+            break;
+        }    
+            
+        case HLSTransitionStylePushFromLeftFadeIn: {
+            animation = [self pushAndFadeAnimationWithInitialXOffset:-CGRectGetWidth(frame)
+                                                             yOffset:0.f
+                                           appearingContainerContent:appearingContainerContent 
+                                       disappearingContainerContents:disappearingContainerContents];
+            break;
+        } 
+            
+        case HLSTransitionStylePushFromRightFadeIn: {
+            animation = [self pushAndFadeAnimationWithInitialXOffset:CGRectGetWidth(frame)
+                                                             yOffset:0.f
+                                           appearingContainerContent:appearingContainerContent 
+                                       disappearingContainerContents:disappearingContainerContents];
             break;
         } 
             

@@ -379,6 +379,26 @@
             break;
         }
             
+        case HLSTransitionStylePushFromBottomFadeIn: {
+            return @"HLSTransitionStylePushFromBottomFadeIn";
+            break;
+        }
+            
+        case HLSTransitionStylePushFromTopFadeIn: {
+            return @"HLSTransitionStylePushFromTopFadeIn";
+            break;
+        }
+            
+        case HLSTransitionStylePushFromLeftFadeIn: {
+            return @"HLSTransitionStylePushFromLeftFadeIn";
+            break;
+        }
+            
+        case HLSTransitionStylePushFromRightFadeIn: {
+            return @"HLSTransitionStylePushFromRightFadeIn";
+            break;
+        }
+            
         case HLSTransitionStyleFlowFromBottom: {
             return @"HLSTransitionStyleFlowFromBottom";
             break;
