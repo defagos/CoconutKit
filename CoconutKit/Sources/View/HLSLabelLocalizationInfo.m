@@ -149,7 +149,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         }
         
         if ([table length] == 0) {
-            HLSLoggerWarn(@"Table name prefix detected, but empty table name", [components firstObject]);
+            HLSLoggerWarn(@"Table name prefix detected, but empty table name");
         }
         
         self.table = table;
