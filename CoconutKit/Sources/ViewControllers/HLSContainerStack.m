@@ -9,7 +9,7 @@
 #import "HLSContainerStack.h"
 
 #import "HLSAssert.h"
-#import "HLSContainerAnimations.h"
+#import "HLSContainerAnimation.h"
 #import "HLSContainerContent.h"
 #import "HLSConverters.h"
 #import "HLSLogger.h"
@@ -401,14 +401,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
         // Load the view below so that the capacity criterium can be fulfilled (if needed). During the animation we will
-        // have capacity + 1 view controller's views loaded, this ensures that no view controller magically pop during
+        // have capacity + 1 view controller's views loaded, this ensures that no view controllers magically pop up during
         // animation
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (containerContentAtCapacity) {
             [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
         }
         
-        HLSAnimation *animation = [[HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle
+        HLSAnimation *animation = [[HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
                                                               appearingContainerContent:containerContent
                                                           disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)]
                                                                           containerView:self.containerView 
@@ -443,7 +443,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)rotateWithDuration:(NSTimeInterval)duration
 {
-    HLSAnimation *animation = [HLSContainerAnimations rotationAnimationWithContainerContents:self.containerContents 
+    HLSAnimation *animation = [HLSContainerAnimation rotationAnimationWithContainerContents:self.containerContents 
                                                                                containerView:[self containerView]
                                                                                     duration:duration];
     animation.lockingUI = YES;
@@ -616,7 +616,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Play the animation of all view controllers above so that the new view controller is brought into the correct position
         for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
-            HLSAnimation *aboveAnimation = [HLSContainerAnimations animationWithTransitionStyle:aboveContainerContent.transitionStyle
+            HLSAnimation *aboveAnimation = [HLSContainerAnimation animationWithTransitionStyle:aboveContainerContent.transitionStyle
                                                                       appearingContainerContent:nil
                                                                   disappearingContainerContents:[NSArray arrayWithObject:containerContent]
                                                                                   containerView:self.containerView 
@@ -627,7 +627,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Play the corresponding animation so that all view controllers are brought into position (animated only if
     // the container is visible)
-    HLSAnimation *animation = [HLSContainerAnimations animationWithTransitionStyle:containerContent.transitionStyle 
+    HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle 
                                                          appearingContainerContent:containerContent 
                                                      disappearingContainerContents:[self.containerContents subarrayWithRange:NSMakeRange(0, index)] 
                                                                      containerView:self.containerView 

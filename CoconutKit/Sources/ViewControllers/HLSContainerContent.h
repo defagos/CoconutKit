@@ -69,7 +69,6 @@
     NSTimeInterval m_duration;
     BOOL m_addedToContainerView;
     CGRect m_originalViewFrame;
-    CGFloat m_originalViewAlpha;
     UIViewAutoresizing m_originalAutoresizingMask;
     BOOL m_forwardingProperties;
 }
@@ -117,7 +116,6 @@
  * The original view properties
  */
 @property (nonatomic, readonly, assign) CGRect originalViewFrame;
-@property (nonatomic, readonly, assign) CGFloat originalViewAlpha;
 
 /**
  * Instantiate (if not already) and add the view controller's view as subview of the view where a container displays

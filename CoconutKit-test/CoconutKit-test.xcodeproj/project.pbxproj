@@ -128,7 +128,7 @@
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
 		6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FEEF86814F297F8001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86714F297F8001585A6 /* UIScrollView+HLSExtensions.m */; };
-		6FEFB58215AFDEF70013E940 /* HLSContainerAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFB58115AFDEF70013E940 /* HLSContainerAnimations.m */; };
+		6FEFB58215AFDEF70013E940 /* HLSContainerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,8 +397,8 @@
 		6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FEEF86614F297F7001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FEEF86714F297F8001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FEFB58015AFDEF70013E940 /* HLSContainerAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerAnimations.h; sourceTree = "<group>"; };
-		6FEFB58115AFDEF70013E940 /* HLSContainerAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerAnimations.m; sourceTree = "<group>"; };
+		6FEFB58015AFDEF70013E940 /* HLSContainerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerAnimation.h; sourceTree = "<group>"; };
+		6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerAnimation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -815,8 +815,8 @@
 		6FADE77F14BA04B6007EE121 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FEFB58015AFDEF70013E940 /* HLSContainerAnimations.h */,
-				6FEFB58115AFDEF70013E940 /* HLSContainerAnimations.m */,
+				6FEFB58015AFDEF70013E940 /* HLSContainerAnimation.h */,
+				6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */,
 				6FADE78114BA04B6007EE121 /* HLSContainerContent.h */,
 				6FADE78214BA04B6007EE121 /* HLSContainerContent.m */,
 				6F6010F315ABECA400A9FEC5 /* HLSContainerStack.h */,
@@ -1090,7 +1090,7 @@
 				6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */,
 				6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */,
-				6FEFB58215AFDEF70013E940 /* HLSContainerAnimations.m in Sources */,
+				6FEFB58215AFDEF70013E940 /* HLSContainerAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
