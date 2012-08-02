@@ -18,7 +18,7 @@
 
 // TODO: Instead of a container view controller, we should not assume the container is a view controller, just an id
 
-// Keys for runtime container - view controller object association
+// Keys for runtime container - view controller / view object association
 static void *s_containerContentKey = &s_containerContentKey;
 
 // Original implementation of the methods we swizzle
@@ -256,20 +256,20 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (UIView *)viewIfLoaded
 {
-    return [self.viewController viewIfLoaded];
+    return [self.viewController viewIfLoaded].superview;
 }
 
 #pragma mark View management
 
-- (void)addAsSubviewIntoContainerView:(UIView *)containerView
+- (void)addAsSubviewIntoView:(UIView *)view
 {
-    [self insertAsSubviewIntoContainerView:containerView atIndex:[containerView.subviews count]];
+    [self insertAsSubviewIntoView:view atIndex:[view.subviews count]];
 }
 
-- (void)insertAsSubviewIntoContainerView:(UIView *)containerView atIndex:(NSUInteger)index
+- (void)insertAsSubviewIntoView:(UIView *)view atIndex:(NSUInteger)index
 {
-    if (index > [containerView.subviews count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [containerView.subviews count]];
+    if (index > [view.subviews count]) {
+        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [view.subviews count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];
@@ -281,7 +281,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
     
     // Force a lazy loading of the view controller's view if needed
-    UIView *view = self.viewController.view;
+    UIView *viewControllerView = self.viewController.view;
     
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
@@ -294,7 +294,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     // internally)
     if ([self.viewController isKindOfClass:[UINavigationController class]] 
             || [self.viewController isKindOfClass:[UITabBarController class]]) {
-        view.frame = containerView.bounds;
+        viewControllerView.frame = view.bounds;
     }
     
     // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
@@ -322,10 +322,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         }
     }
     
-    // The index [containerView.subviews count] is valid and equivalent to -addSubview:
-    [containerView insertSubview:view atIndex:index];    
-    self.addedToContainerView = YES;
-    
     // The background view of view controller's views inserted into a container must fill its bounds completely, no matter
     // what this original frame is. This is required because of how the root view controller is displayed, and leads to
     // issues when a container is set as root view controller for an application starting in landscape mode. Overriding the
@@ -333,13 +329,30 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     // and this overriding should not conflict with how the view controller is displayed:
     //   - if the view controller's view can resize in all directions, nothing is changed by overriding the autoresizing
     //     mask
-    //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed 
+    //   - if the view cannot resize in all directions and does not support rotation, the view controller which gets displayed
     //     must have been designed accordingly (i.e. its dimensions match the container view). In such cases the autoresizing
     //     mask of the view is irrelevant and can be safely overridden
-    view.autoresizingMask = HLSViewAutoresizingAll;
+    viewControllerView.autoresizingMask = HLSViewAutoresizingAll;
     
     // Match the inserted view frame so that it fills the container bounds
-    view.frame = containerView.bounds;
+    viewControllerView.frame = view.bounds;
+    
+    // Wrap into a transparent view with alpha = 1.f. This ensures that no animation relies on the initial value of the view
+    // controller's view alpha
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:view.bounds] autorelease];
+    wrapperView.backgroundColor = [UIColor clearColor];
+    wrapperView.autoresizingMask = HLSViewAutoresizingAll;
+    [wrapperView addSubview:viewControllerView];
+    
+    // TODO: Just for easier identification in logs. Remove ASAP
+    wrapperView.tag = 3;
+    
+    // Associate wrapper and container content for easier retrieval
+    objc_setAssociatedObject(wrapperView, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
+    
+    // The index [containerView.subviews count] is valid and equivalent to -addSubview:
+    [view insertSubview:wrapperView atIndex:index];
+    self.addedToContainerView = YES;
 }
 
 - (void)removeViewFromContainerView
@@ -349,6 +362,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
     
     // Remove the view controller's view
+    [self.viewController.view.superview removeFromSuperview];
     [self.viewController.view removeFromSuperview];
     self.addedToContainerView = NO;
     
@@ -486,6 +500,15 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                           @selector(presentedViewController), 
                                                                                           (IMP)swizzled_UIViewController__presentedViewController_Imp);
+}
+
+@end
+
+@implementation UIView (HLSContainerContent)
+
+- (HLSContainerContent *)containerContent
+{
+    return objc_getAssociatedObject(self, s_containerContentKey);
 }
 
 @end
