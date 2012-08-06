@@ -714,6 +714,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
+        // For UINavigationController, when the willShow delegate method is called, the corresponding view controller is
+        // already installed in the stack. We therefore consistently call the didHide method before the view controller
+        // is actually removed from the stack
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
@@ -721,7 +724,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
         // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
-        // has been called for it. This way, implementations of viewDidDisappear: could still access the forwarded
+        // has been called for it. This way, implementations of viewDidDisappear: can still access the forwarded
         // properties
         disappearingContainerContent.forwardingProperties = NO;
         

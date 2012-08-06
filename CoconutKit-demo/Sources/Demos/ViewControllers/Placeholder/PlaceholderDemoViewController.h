@@ -9,8 +9,9 @@
 // Forward declarations
 @class HeavyViewController;
 
-@interface PlaceholderDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface PlaceholderDemoViewController : HLSPlaceholderViewController <HLSPlaceholderViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
+    UIButton *m_heavyButton;
     UIPickerView *m_transitionPickerView;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
@@ -21,6 +22,7 @@
     HeavyViewController *m_rightHeavyViewController;
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *heavyButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
@@ -39,6 +41,7 @@
 - (IBAction)displayOrientationCloner:(id)sender;
 - (IBAction)displayContainerCustomization:(id)sender;
 - (IBAction)toggleForwardingProperties:(id)sender;
+- (IBAction)togglePlaceholder:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;
 - (IBAction)navigateBackNonAnimated:(id)sender;

@@ -169,15 +169,26 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 @protocol HLSContainerStackDelegate <NSObject>
 
+/**
+ * As for UINavigationController, when the willShow method is called the new view controller has already been
+ * installed on top of the stack (but is not displayed yet)
+ */
 - (void)containerStack:(HLSContainerStack *)containerStack
 willShowViewController:(UIViewController *)viewController
               animated:(BOOL)animated;
+
 - (void)containerStack:(HLSContainerStack *)containerStack
  didShowViewController:(UIViewController *)viewController
               animated:(BOOL)animated;
+
 - (void)containerStack:(HLSContainerStack *)containerStack
 willHideViewController:(UIViewController *)viewController
               animated:(BOOL)animated;
+
+/**
+ * As for UINavigationController, when the didHide method is called the new view controller is still on top
+ * of the stack (but not for long)
+ */
 - (void)containerStack:(HLSContainerStack *)containerStack
  didHideViewController:(UIViewController *)viewController
               animated:(BOOL)animated;

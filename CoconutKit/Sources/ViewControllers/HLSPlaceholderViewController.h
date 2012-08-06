@@ -109,7 +109,7 @@
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController {
+@interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate> {
 @private
     NSMutableArray *m_containerStacks;
     NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
@@ -200,6 +200,21 @@
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated;
+
+/**
+ * Called when an inset view controller will be hidden, before the transition happens
+ */
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated;
+/**
+ * Called when an inset view controller has been hidden, after the transition has ended
+ */
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 

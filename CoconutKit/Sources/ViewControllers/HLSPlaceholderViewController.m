@@ -18,8 +18,6 @@
 
 @property (nonatomic, retain) NSMutableArray *containerStacks;
 
-- (NSArray *)insetViewControllers;
-
 @end
 
 // TODO: Implement HLSContainerStack delegate methods to be able to remove the bottommost view controller
@@ -90,25 +88,10 @@
     return [self.placeholderViews objectAtIndex:index];
 }
 
-- (NSArray *)insetViewControllers
-{
-    NSMutableArray *insetViewControllers = [NSMutableArray array];
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        UIViewController *topViewController = [containerStack topViewController];
-        if (topViewController) {
-            [insetViewControllers addObject:topViewController];
-        }
-    }
-    return [NSArray arrayWithArray:insetViewControllers];
-}
-
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index
 {
-    NSArray *insetViewControllers = [self insetViewControllers];
-    if (index >= [insetViewControllers count]) {
-        return nil;
-    }
-    return [insetViewControllers objectAtIndex:index];
+    HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
+    return [containerStack rootViewController];
 }
 
 #pragma mark View lifecycle
@@ -160,6 +143,7 @@
         // We need to have a stack for each placeholder view
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
+            containerStack.delegate = self;
             [self.containerStacks addObject:containerStack];
         }
         
@@ -292,6 +276,7 @@
         
         for (NSUInteger i = [self.containerStacks count]; i <= index; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
+            containerStack.delegate = self;
             [self.containerStacks addObject:containerStack];
         }
     }
@@ -314,6 +299,48 @@
                    withTransitionStyle:transitionStyle 
                               duration:duration
                               animated:YES];       
+}
+
+#pragma mark HLSContainerStackDelegate protocol implementation
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+willShowViewController:(UIViewController *)viewController
+              animated:(BOOL)animated
+{
+    NSUInteger index = [self.containerStacks indexOfObject:containerStack];
+    if ([self.delegate respondsToSelector:@selector(placeholderViewController:willShowInsetViewController:atIndex:animated:)]) {
+        [self.delegate placeholderViewController:self willShowInsetViewController:viewController atIndex:index animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+ didShowViewController:(UIViewController *)viewController
+              animated:(BOOL)animated
+{
+    NSUInteger index = [self.containerStacks indexOfObject:containerStack];
+    if ([self.delegate respondsToSelector:@selector(placeholderViewController:didShowInsetViewController:atIndex:animated:)]) {
+        [self.delegate placeholderViewController:self didShowInsetViewController:viewController atIndex:index animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+willHideViewController:(UIViewController *)viewController
+              animated:(BOOL)animated
+{
+    NSUInteger index = [self.containerStacks indexOfObject:containerStack];
+    if ([self.delegate respondsToSelector:@selector(placeholderViewController:willHideInsetViewController:atIndex:animated:)]) {
+        [self.delegate placeholderViewController:self willHideInsetViewController:viewController atIndex:index animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+ didHideViewController:(UIViewController *)viewController
+              animated:(BOOL)animated
+{
+    NSUInteger index = [self.containerStacks indexOfObject:containerStack];
+    if ([self.delegate respondsToSelector:@selector(placeholderViewController:didHideInsetViewController:atIndex:animated:)]) {
+        [self.delegate placeholderViewController:self didHideInsetViewController:viewController atIndex:index animated:animated];
+    }
 }
 
 @end

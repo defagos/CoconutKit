@@ -37,6 +37,8 @@
         // Preload a view controller before display. Yep, this is possible (and not all placeholders have to be preloaded)!
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [self setInsetViewController:lifeCycleTestViewController atIndex:1];
+        
+        self.delegate = self;
     }
     return self;
 }
@@ -57,15 +59,18 @@
     self.leftHeavyViewController.view = nil;
     self.rightHeavyViewController.view = nil;
     
+    self.heavyButton = nil;
+    self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
-    self.transitionPickerView = nil;
     self.forwardingPropertiesSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize heavyButton = m_heavyButton;
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
@@ -97,6 +102,15 @@
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -298,6 +312,18 @@
     self.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 
+- (IBAction)togglePlaceholder:(id)sender
+{
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
 - (IBAction)navigateForwardNonAnimated:(id)sender
 {
     PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
@@ -307,6 +333,30 @@
 - (IBAction)navigateBackNonAnimated:(id)sender
 {
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
+            || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    self.heavyButton.hidden = NO;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
