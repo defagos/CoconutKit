@@ -64,14 +64,14 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic, assign) UIViewController *containerViewController;        // weak ref
 
-@property (nonatomic, assign, getter=isAddedAsSubview) BOOL addedToContainerView;
+@property (nonatomic, assign) HLSContainerStackView *containerStackView;
 @property (nonatomic, assign) HLSTransitionStyle transitionStyle;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 
-- (void)removeViewFromContainerView;
+- (void)removeViewFromContainerStackView;
 
 @end
 
@@ -172,7 +172,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)dealloc
 {
-    [self removeViewFromContainerView];
+    [self removeViewFromContainerStackView];
     
     // Restore the view controller's original properties. If the view controller was not retained elsewhere, this would
     // not be necessary. But clients might keep additional references to view controllers for caching purposes. The 
@@ -205,7 +205,12 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 @synthesize containerViewController = m_containerViewController;
 
-@synthesize addedToContainerView = m_addedToContainerView;
+@synthesize containerStackView = m_containerStackView;
+
+- (BOOL)isAddedToContainerView
+{
+    return self.containerStackView != nil;
+}
 
 @synthesize transitionStyle = m_transitionStyle;
 
@@ -261,15 +266,15 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 #pragma mark View management
 
-- (void)addAsSubviewIntoView:(UIView *)view
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView
 {
-    [self insertAsSubviewIntoView:view atIndex:[view.subviews count]];
+    [self insertAsSubviewIntoContainerStackView:stackView atIndex:[stackView.subviews count]];
 }
 
-- (void)insertAsSubviewIntoView:(UIView *)view atIndex:(NSUInteger)index
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index
 {
-    if (index > [view.subviews count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [view.subviews count]];
+    if (index > [stackView.subviews count]) {
+        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [stackView.subviews count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];
@@ -294,7 +299,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     // internally)
     if ([self.viewController isKindOfClass:[UINavigationController class]] 
             || [self.viewController isKindOfClass:[UITabBarController class]]) {
-        viewControllerView.frame = view.bounds;
+        viewControllerView.frame = stackView.bounds;
     }
     
     // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
@@ -335,36 +340,29 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     viewControllerView.autoresizingMask = HLSViewAutoresizingAll;
     
     // Match the inserted view frame so that it fills the container bounds
-    viewControllerView.frame = view.bounds;
+    viewControllerView.frame = stackView.bounds;
     
     // Wrap into a transparent view with alpha = 1.f. This ensures that no animation relies on the initial value of the view
     // controller's view alpha
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:view.bounds] autorelease];
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:stackView.bounds] autorelease];
     wrapperView.backgroundColor = [UIColor clearColor];
     wrapperView.autoresizingMask = HLSViewAutoresizingAll;
     [wrapperView addSubview:viewControllerView];
     
-    // TODO: Just for easier identification in logs. Remove ASAP
-    wrapperView.tag = 3;
+    [stackView insertSubview:wrapperView atIndex:index];
     
-    // Associate wrapper and container content for easier retrieval
-    objc_setAssociatedObject(wrapperView, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
-    
-    // The index [containerView.subviews count] is valid and equivalent to -addSubview:
-    [view insertSubview:wrapperView atIndex:index];
-    self.addedToContainerView = YES;
+    self.containerStackView = stackView;
 }
 
-- (void)removeViewFromContainerView
+- (void)removeViewFromContainerStackView
 {
     if (! self.addedToContainerView) {
         return;
     }
     
     // Remove the view controller's view
-    [self.viewController.view.superview removeFromSuperview];
-    [self.viewController.view removeFromSuperview];
-    self.addedToContainerView = NO;
+    [self.containerStackView removeSubview:[self viewIfLoaded]];
+    self.containerStackView = nil;
     
     // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
@@ -374,7 +372,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)releaseViews
 {
-    [self removeViewFromContainerView];
+    [self removeViewFromContainerStackView];
     
     if ([self.viewController isViewLoaded]) {
         self.viewController.view = nil;
@@ -500,15 +498,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                           @selector(presentedViewController), 
                                                                                           (IMP)swizzled_UIViewController__presentedViewController_Imp);
-}
-
-@end
-
-@implementation UIView (HLSContainerContent)
-
-- (HLSContainerContent *)containerContent
-{
-    return objc_getAssociatedObject(self, s_containerContentKey);
 }
 
 @end

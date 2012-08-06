@@ -61,7 +61,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
           rootViewControllerMandatory:(BOOL)rootViewControllerMandatory;
 
 // TODO: Prevent from being changed after the view has been displayed
-@property (nonatomic, assign) UIView *containerView;
+@property (nonatomic, strong) UIView *containerView;
 
 /**
  * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
@@ -112,12 +112,12 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
-         belowViewController:(UIViewController *)belowViewController
+         belowViewController:(UIViewController *)siblingViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
-         aboveViewController:(UIViewController *)aboveViewController
+         aboveViewController:(UIViewController *)siblingViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;

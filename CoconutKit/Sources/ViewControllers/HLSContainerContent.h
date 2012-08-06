@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "HLSContainerStackView.h"
 #import "HLSContainerStack.h"
 #import "HLSTransitionStyle.h"
 #import "UIViewController+HLSExtensions.h"
@@ -67,6 +68,7 @@
     UIViewController *m_containerViewController;
     HLSTransitionStyle m_transitionStyle;
     NSTimeInterval m_duration;
+    HLSContainerStackView *m_containerStackView;
     BOOL m_addedToContainerView;
     CGRect m_originalViewFrame;
     UIViewAutoresizing m_originalAutoresizingMask;
@@ -127,8 +129,8 @@
  * The frame of a view controller's view is automatically adjusted to match the container view bounds. This matches the
  * usual behavior of built-in view controller containers (UINavigationController, UITabBarController)
  */
-- (void)addAsSubviewIntoView:(UIView *)View;
-- (void)insertAsSubviewIntoView:(UIView *)view atIndex:(NSUInteger)index;
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView;
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index;
 
 /**
  * Return the view controller's view if it has been added to a container view, nil otherwise. This does not perform
@@ -171,11 +173,5 @@
  * to display those elements transparently higher up in the view controller hierarchy
  */
 @property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
-
-@end
-
-@interface UIView (HLSContainerContent)
-
-- (HLSContainerContent *)containerContent;
 
 @end

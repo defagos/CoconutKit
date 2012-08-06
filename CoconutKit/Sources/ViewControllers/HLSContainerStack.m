@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSContainerAnimation.h"
 #import "HLSContainerContent.h"
+#import "HLSContainerStackView.h"
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
@@ -138,7 +139,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         containerView.clipsToBounds = YES;
     }
     
-    m_containerView = containerView;    
+    m_containerView = containerView;
+    
+    HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
+    [containerView addSubview:containerStackView];
+}
+
+- (HLSContainerStackView *)containerStackView
+{
+    NSAssert([[self.containerView.subviews firstObject] isKindOfClass:[HLSContainerStackView class]], @"Expected a container view as first subview");
+    return [self.containerView.subviews firstObject];
 }
 
 @synthesize capacity = m_capacity;
@@ -351,14 +361,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 }
 
 - (void)insertViewController:(UIViewController *)viewController
-         belowViewController:(UIViewController *)belowViewController
+         belowViewController:(UIViewController *)siblingViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
-    NSUInteger index = [[self viewControllers] indexOfObject:belowViewController];
+    NSUInteger index = [[self viewControllers] indexOfObject:siblingViewController];
     if (index == NSNotFound) {
-        HLSLoggerWarn(@"The given view controller 'below' does not belong to the container");
+        HLSLoggerWarn(@"The given sibling view controller does not belong to the container");
         return;
     }
     [self insertViewController:viewController 
@@ -369,14 +379,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 }
 
 - (void)insertViewController:(UIViewController *)viewController
-         aboveViewController:(UIViewController *)aboveViewController
+         aboveViewController:(UIViewController *)siblingViewController
          withTransitionStyle:(HLSTransitionStyle)transitionStyle
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
-    NSUInteger index = [[self viewControllers] indexOfObject:viewController];
+    NSUInteger index = [[self viewControllers] indexOfObject:siblingViewController];
     if (index == NSNotFound) {
-        HLSLoggerWarn(@"The given view controller 'above' does not belong to the container");
+        HLSLoggerWarn(@"The given sibling view controller does not belong to the container");
         return;
     }
     [self insertViewController:viewController 
@@ -556,31 +566,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
-#pragma mark Managing contents
-
-+ (UIView *)subviewInGroupView:(UIView *)groupView
-{
-    if ([groupView.subviews count] == 2) {
-        return [groupView.subviews objectAtIndex:1];
-    }
-    else if ([groupView.subviews count] == 1) {
-        return [groupView.subviews objectAtIndex:0];
-    }
-    else {
-        return nil;
-    }
-}
-
-+ (UIView *)groupSubviewInGroupView:(UIView *)groupView
-{
-    if ([groupView.subviews count] == 2) {
-        return [groupView.subviews objectAtIndex:0];
-    }
-    else {
-        return nil;
-    }
-}
-
 // The containerContent object must already reside in containerContents. This method is namely intended to be used
 // when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
 // controllers
@@ -590,12 +575,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     if (! containerContent) {
         HLSLoggerError(@"Missing container content parameter");
-        return;
-    }
-    
-    NSUInteger index = [self.containerContents indexOfObject:containerContent];
-    if (index == NSNotFound) {
-        HLSLoggerError(@"Container content not found in the list");
         return;
     }
     
@@ -613,46 +592,38 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // Locate the group view where we must insert the new container content view (start at the top, i.e. with the
-    // container view)
-    UIView *groupView = self.containerView;
-    UIView *subview = [HLSContainerStack subviewInGroupView:groupView];
-    while (subview && [self.containerContents indexOfObject:[subview containerContent]] >= index) {
-        // Reached the bottom
-        if (! [HLSContainerStack groupSubviewInGroupView:groupView]) {
-            break;
+    NSUInteger index = [self.containerContents indexOfObject:containerContent];
+    NSAssert(index != NSNotFound, @"Content not found in the stack");
+    
+    HLSContainerStackView *stackView = [self containerStackView];
+    
+    // Last element? Add to top
+    if (index == [self.containerContents count] - 1) {
+        [containerContent addAsSubviewIntoContainerStackView:stackView];
+    }
+    // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
+    else {
+        // Find which container view above is available. We will insert the new one right below it (usually,
+        // this is the one at index + 1, but this might not be the case if we are resurrecting a view controller
+        // deep in the stack)
+        BOOL inserted = NO;
+        for (NSUInteger i = index + 1; i < [self.containerContents count]; ++i) {
+            HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
+            if (aboveContainerContent.isAddedToContainerView) {
+                [containerContent insertAsSubviewIntoContainerStackView:stackView
+                                                                atIndex:[stackView.subviews indexOfObject:[aboveContainerContent viewIfLoaded]]];
+                inserted = YES;
+                break;
+            }
         }
         
-        groupView = [HLSContainerStack groupSubviewInGroupView:groupView];
-        subview = [HLSContainerStack subviewInGroupView:groupView];
-    }
-    
-    // Group the subviews into a new group view
-    if ([groupView.subviews count] != 0) {
-        // Retains the subview list temporarily (warning: made first since subviews are changed below)
-        NSArray *groupSubviews = [NSArray arrayWithArray:groupView.subviews];
-        
-        // Add the new group level
-        UIView *newGroupSubview = [[[UIView alloc] initWithFrame:groupView.bounds] autorelease];
-        
-        // TODO: Just to help identifying in logs. Remove ASAP
-        newGroupSubview.tag = 6;
-        
-        newGroupSubview.autoresizingMask = HLSViewAutoresizingAll;
-        newGroupSubview.backgroundColor = [UIColor clearColor];
-        [groupView addSubview:newGroupSubview];
-        
-        // Move the subviews from the container view to the new group view
-        for (UIView *groupSubview in groupSubviews) {
-            [groupSubview removeFromSuperview];
-            [newGroupSubview addSubview:groupSubview];
+        if (! inserted) {
+            [containerContent addAsSubviewIntoContainerStackView:stackView];
         }
     }
-    
-    // Add the view controller's view to the top
-    [containerContent addAsSubviewIntoView:groupView];
     
     // Play the corresponding animation so that the view controllers are brought into correct positions
+    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
     HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
                                                                            inView:groupView
                                                                          duration:containerContent.duration];    
@@ -759,7 +730,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         else if ([animation.tag isEqualToString:@"pop_animation"]) {
             [self.containerContents removeObject:disappearingContainerContent];
-        }   
+        }
     }
 }
 
