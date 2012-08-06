@@ -287,7 +287,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
-    [viewAnimationStep11 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -296,6 +295,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     animationStep2.duration = 0.2;
     [animationSteps addObject:animationStep2];
     
@@ -303,18 +303,26 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep32 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
-    [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:appearingView];
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:appearingView];
     animationStep3.duration = 0.2;
     [animationSteps addObject:animationStep3];
     
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep41 scaleWithXFactor:1.f / kPushToTheBackScaleFactor yFactor:1.f / kPushToTheBackScaleFactor zFactor:1.f];
+    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:disappearingView];
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:appearingView];
     animationStep4.duration = 0.2;
     [animationSteps addObject:animationStep4];
+    
+    // Make the disappearing view disappear. Otherwise the view which disappeared might be visible if we apply the same
+    // effect to push another view controller
+    HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep51.alphaVariation = -1.f;
+    [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:disappearingView];
+    animationStep5.duration = 0.;
+    [animationSteps addObject:animationStep5];
     
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
@@ -400,6 +408,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                                         inView:(UIView *)view
                                       duration:(NSTimeInterval)duration
+                                     belowOnly:(BOOL)belowOnly
 {
     CGRect frame = [HLSContainerAnimation fixedFrameForView:view];
     if ([view.subviews count] == 0) {
@@ -415,6 +424,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     else if ([view.subviews count] == 2) {
         appearingView = [view.subviews objectAtIndex:1];
         disappearingView = [view.subviews objectAtIndex:0];
+    }
+    
+    // TODO: Ugly: Fix when refactoring this class
+    if (belowOnly) {
+        appearingView = nil;
     }
     
     HLSAnimation *animation = nil;

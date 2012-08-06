@@ -417,10 +417,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (containerContentAtCapacity) {
             [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
         }
-                
+        
+        HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
         HLSAnimation *animation = [[HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
-                                                                                inView:[containerContent viewIfLoaded].superview
-                                                                              duration:containerContent.duration] reverseAnimation];
+                                                                                inView:groupView
+                                                                              duration:containerContent.duration
+                                                                             belowOnly:NO] reverseAnimation];
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
@@ -620,13 +622,23 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (! inserted) {
             [containerContent addAsSubviewIntoContainerStackView:stackView];
         }
+        
+        // Play the corresponding animation to put the view into the correct location
+        HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
+        HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForSubview:[aboveContainerContent viewIfLoaded]];
+        HLSAnimation *aboveAnimation = [HLSContainerAnimation animationWithTransitionStyle:aboveContainerContent.transitionStyle
+                                                                                    inView:aboveGroupView
+                                                                                  duration:aboveContainerContent.duration
+                                                                                 belowOnly:YES];
+        [aboveAnimation playAnimated:NO];
     }
     
     // Play the corresponding animation so that the view controllers are brought into correct positions
     HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
     HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
                                                                            inView:groupView
-                                                                         duration:containerContent.duration];    
+                                                                         duration:containerContent.duration
+                                                                        belowOnly:NO];
     if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;

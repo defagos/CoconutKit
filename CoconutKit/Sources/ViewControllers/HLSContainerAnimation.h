@@ -19,7 +19,8 @@
  */
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
                                         inView:(UIView *)view
-                                      duration:(NSTimeInterval)duration;
+                                      duration:(NSTimeInterval)duration
+                                     belowOnly:(BOOL)belowOnly;         // TODO: Ugly: Fix when refactoring this class
 
 /**
  * Return the animation which has to be played when a set of view controllers need to be rotated
