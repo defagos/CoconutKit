@@ -337,14 +337,27 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // Check that the view controller to be pushed is compatible with the current orientation
     if ([self.containerViewController isViewVisible]) {
+        // Check that the view controller to be pushed is compatible with the current orientation
         if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
             HLSLoggerError(@"The view controller does not support the current view container orientation");
             return;
         }
+        
+        // Notify the delegate before the view controller is actually installed on top of the stack. This makes it possible
+        // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
+        // when pushing a view controller onto the stack
+        if (index == [self.containerContents count]) {
+            if ([self topViewController] && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+                [self.delegate containerStack:self willHideViewController:[self topViewController] animated:animated];
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+                [self.delegate containerStack:self willShowViewController:viewController animated:animated];
+            }
+        }
     }
-    
+        
     // Associate the new view controller with its container (this increases the containerContents array size)
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController
                                                                          containerViewController:self.containerViewController
@@ -408,6 +421,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
+    if ([self.containerViewController isViewVisible]) {
+        // Notify the delegate before the view controller is actually removed from the top of the stack. This makes it possible
+        // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
+        // when popping a view controller from the stack
+        if (index == [self.containerContents count] - 1) {
+            if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+                [self.delegate containerStack:self willHideViewController:[self topViewController] animated:animated];
+            }
+            
+            if (self.secondTopContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+                [self.delegate containerStack:self willShowViewController:self.secondTopContainerContent.viewController animated:animated];
+            }
+        }
+    }
+        
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
         // Load the view below so that the capacity criterium can be fulfilled (if needed). During the animation we will
@@ -695,14 +723,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // forwarding properties
         appearingContainerContent.forwardingProperties = self.forwardingProperties;
         
-        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
-            [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
-        }
         [disappearingContainerContent viewWillDisappear:animated];
-        
-        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
-            [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
-        }
         [appearingContainerContent viewWillAppear:animated];
     }    
 }
@@ -722,12 +743,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
-        // For UINavigationController, when the willShow delegate method is called, the corresponding view controller is
-        // already installed in the stack. We therefore consistently call the didHide method before the view controller
-        // is actually removed from the stack
-        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
-            [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
-        }
         [disappearingContainerContent viewDidDisappear:animated];
         
         // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
@@ -736,10 +751,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // properties
         disappearingContainerContent.forwardingProperties = NO;
         
-        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
-            [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
-        }
         [appearingContainerContent viewDidAppear:animated];
+        
+        // Keep the disappearing view controller alive a little bit longer for delegate notification below
+        UIViewController *disappearingViewController = [[disappearingContainerContent.viewController retain] autorelease];
         
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
@@ -753,6 +768,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         else if ([animation.tag isEqualToString:@"pop_animation"]) {
             [self.containerContents removeObject:disappearingContainerContent];
+        }
+        
+        // At the end
+        if (disappearingViewController && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+            [self.delegate containerStack:self didHideViewController:disappearingViewController animated:animated];
+        }
+        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+            [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
     }
 }

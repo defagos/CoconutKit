@@ -164,18 +164,11 @@
 
 @optional
 
-/**
- * Called when a view controller will be shown. This happens when a view controller is pushed onto the stack or
- * revealed by popping the one on top of it
- */
-- (void)stackController:(HLSStackController *)stackController 
+// TODO: Document as for HLSContainerContentDelegate
+- (void)stackController:(HLSStackController *)stackController
  willShowViewController:(UIViewController *)viewController 
                animated:(BOOL)animated;
 
-/**
- * Called when a view controller has been shown. This happens when a view controller is pushed onto the stack or
- * revealed by popping the one on top of it
- */
 - (void)stackController:(HLSStackController *)stackController
   didShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated;

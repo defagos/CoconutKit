@@ -169,19 +169,32 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 /**
  * Unlike UINavigationController, these events are called when a view controller is shown or hidden, in pair with
- * viewWill and viewDid events sent tot the view controller. This makes them more intuitive, meaningful, and ultimately
- * useful, though inconsistent with UINavigationControllerDelegate
+ * viewWill and viewDid events sent to the child view controller (these events are of course only received for
+ * view controllers at the top of the stack). This makes them more intuitive, meaningful and
+ * ultimately useful, though this behavior does not match the one of UINavigationControllerDelegate. It is namely
+ * possible to catch appearance and disappearance events both in the child view controllers themselves or in the
+ * container delegate, depending on your needs.
+ *
+ * Moreover, when the willShow method of UINavigationControllerDelegate is called, the child view controller
+ * is already installed at the top of [navigationController viewControllers]. This is counter-intuitive and
+ * we lose valuable information (i.e. whether the view controller is being added or was already in the child
+ * view controller list). This is not the case for HLSContainerStack: The willShow event is sent before a
+ * child view controller is shown or even added to the stack. This makes it possible to find whether a push
+ * occurs or not.
  *
  * For information, here is UINavigationController behavior: the willShow and didShow methods are called when 
  * presenting a view controller as a result of pushing a new one or popping the one above in the navigation
  * stack. This event is also received when the view controller's view is reloadded after a memory warning has
- * occurred
+ * occurred. Similarly for the willHide event (for which UINavigationControllerDelegate has no counterpart),
+ * which is received only after the view controller has been hidden or popped off the stack.
  */
 @protocol HLSContainerStackDelegate <NSObject>
 
 /**
- * As for UINavigationController, when the willShow method is called the new view controller has already been
- * installed on top of the stack (but is not displayed yet)
+ * Called before the view controller is shown (and even before it is added in the case of a push). If
+ * [containerStack viewControllers] indexOfObject:viewController] == NSNotFound, a call of this method
+ * therefore corresponds to a push, otherwise the view controller was already part of the stack and is
+ * simply being revealed
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
 willShowViewController:(UIViewController *)viewController
@@ -196,8 +209,10 @@ willHideViewController:(UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
- * As for UINavigationController, when the didHide method is called the new view controller is still on top
- * of the stack (but not for long)
+ * Called after the view controller has been hidden (and even after it is removed in the case of a pop). If
+ * [containerStack viewControllers] indexOfObject:viewController] == NSNotFound, a call of this method
+ * therefore corresponds to a pop, otherwise the view controller was already part of the stack and has
+ * simply been hidden from view
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
  didHideViewController:(UIViewController *)viewController
