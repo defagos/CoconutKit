@@ -490,41 +490,49 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
     // Forward events to the top view controller
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
-        [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
-    }
+    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
+        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+            [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
+        }
         
-    [topContainerContent viewWillAppear:animated];
+        [topContainerContent viewWillAppear:animated];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
-        [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
-    }
+    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
+        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+            [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
+        }
         
-    [topContainerContent viewDidAppear:animated];
+        [topContainerContent viewDidAppear:animated];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
-        [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
+    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
+        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+            [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
+        }
+        
+        [topContainerContent viewWillDisappear:animated];
     }
-    
-    [topContainerContent viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
-        [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
+    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
+        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+            [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
+        }
+        
+        [topContainerContent viewDidDisappear:animated];        
     }
-    
-    [topContainerContent viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

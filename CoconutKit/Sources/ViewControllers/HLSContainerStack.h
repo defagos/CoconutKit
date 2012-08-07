@@ -167,6 +167,16 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 @end
 
+/**
+ * Unlike UINavigationController, these events are called when a view controller is shown or hidden, in pair with
+ * viewWill and viewDid events sent tot the view controller. This makes them more intuitive, meaningful, and ultimately
+ * useful, though inconsistent with UINavigationControllerDelegate
+ *
+ * For information, here is UINavigationController behavior: the willShow and didShow methods are called when 
+ * presenting a view controller as a result of pushing a new one or popping the one above in the navigation
+ * stack. This event is also received when the view controller's view is reloadded after a memory warning has
+ * occurred
+ */
 @protocol HLSContainerStackDelegate <NSObject>
 
 /**

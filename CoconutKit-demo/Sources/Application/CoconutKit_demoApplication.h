@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface CoconutKit_demoApplication : NSObject <UIActionSheetDelegate> {
+@interface CoconutKit_demoApplication : NSObject <HLSStackControllerDelegate, UIActionSheetDelegate> {
 @private
     UIViewController *m_rootViewController;
     HLSActionSheet *m_languageActionSheet;

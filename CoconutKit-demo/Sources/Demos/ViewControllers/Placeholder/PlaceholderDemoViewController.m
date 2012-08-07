@@ -338,10 +338,20 @@
 #pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
 
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated
 {
+    HLSLoggerInfo(@"Did show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
     if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
             || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
         self.heavyButton.hidden = YES;
@@ -352,10 +362,20 @@
 }
 
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated
 {
+    HLSLoggerInfo(@"Did hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
     self.heavyButton.hidden = NO;
 }
 

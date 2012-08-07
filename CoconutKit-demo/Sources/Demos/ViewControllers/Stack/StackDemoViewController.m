@@ -34,19 +34,19 @@
     if ((self = [super init])) {
         UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        stackController.delegate = self;
         stackController.title = @"HLSStackController";
         
-#if 0
         // Pre-load other view controllers before display. Yep, this is possible!
-        UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController 
                         withTransitionStyle:HLSTransitionStyleEmergeFromCenter
                                    animated:NO];
-        UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        UIViewController *secondViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController 
                         withTransitionStyle:HLSTransitionStylePushFromRight
                                    animated:NO];
-        UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        UIViewController *thirdViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:thirdViewController 
                         withTransitionStyle:HLSTransitionStyleCoverFromRight2
                                    animated:NO];
@@ -62,7 +62,7 @@
         [stackController pushViewController:sixthViewController
                         withTransitionStyle:HLSTransitionStyleFlipHorizontal
                                    animated:NO];
-#endif
+        
         
         [self setInsetViewController:stackController atIndex:0];
         self.forwardingProperties = YES;
@@ -242,6 +242,36 @@
 - (IBAction)navigateBackNonAnimated:(id)sender
 {
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark HLSStackControllerDelegate protocol implementation
+
+- (void)stackController:(HLSStackController *)stackController
+ willShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation

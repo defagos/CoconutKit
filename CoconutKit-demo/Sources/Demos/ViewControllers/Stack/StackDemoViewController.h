@@ -9,7 +9,7 @@
 /**
  * Designated initializer: init
  */
-@interface StackDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UIPickerView *m_transitionPickerView;
     UISwitch *m_inTabBarControllerSwitch;

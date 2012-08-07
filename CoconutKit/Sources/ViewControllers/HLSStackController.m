@@ -279,14 +279,14 @@
 
 - (void)containerStack:(HLSContainerStack *)containerStack willHideViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+    if ([self.delegate respondsToSelector:@selector(stackController:willHideViewController:animated:)]) {
         [self.delegate stackController:self willHideViewController:viewController animated:animated];
     }
 }
 
 - (void)containerStack:(HLSContainerStack *)containerStack didHideViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if ([self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+    if ([self.delegate respondsToSelector:@selector(stackController:didHideViewController:animated:)]) {
         [self.delegate stackController:self didHideViewController:viewController animated:animated];
     }
 }

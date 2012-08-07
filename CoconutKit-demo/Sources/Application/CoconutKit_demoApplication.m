@@ -50,6 +50,7 @@
             // forwarded to the view controller on top only)
             RootStackDemoViewController *rootStackDemoViewController1 = [[[RootStackDemoViewController alloc] init] autorelease];
             HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1] autorelease];
+            stackController.delegate = self;
             RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
             [stackController pushViewController:rootStackDemoViewController2 animated:NO];
             self.rootViewController = stackController;
@@ -131,6 +132,36 @@
 }
 
 @synthesize languageActionSheet = m_languageActionSheet;
+
+#pragma mark HLSStackControllerDelegate protocol implementation
+
+- (void)stackController:(HLSStackController *)stackController
+ willShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
 
 #pragma mark Core Data
 
