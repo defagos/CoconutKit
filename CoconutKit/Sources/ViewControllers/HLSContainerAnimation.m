@@ -17,7 +17,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @interface HLSContainerAnimation ()
 
-+ (CGRect)fixedFrameForView:(UIView *)view;
++ (CGRect)actualFrameForView:(UIView *)view;
 
 + (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
                                            yOffset:(CGFloat)yOffset
@@ -66,25 +66,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 #pragma mark Class methods
 
-/**
- * When a view controller is added as root view controller, there is a subtlety: When the device is rotated into landscape mode, the
- * root view is applied a rotation matrix transform. When a view controller container is set as root, there is an issue if the contentView
- * happens to be the root view: We cannot just use contentView.frame to calculate animations in landscape mode, otherwise animations
- * will be incorrect (they will correspond to the animations in portrait mode!). This method just fixes this issue, providing the
- * correct frame in all situations
- */
-+ (CGRect)fixedFrameForView:(UIView *)view
++ (CGRect)actualFrameForView:(UIView *)view
 {
-    CGRect frame = CGRectZero;
-    // Root view
-    if ([view.superview isKindOfClass:[UIWindow class]]) {
-        frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
-    }
-    // All other cases
-    else {
-        frame = view.frame;
-    }
-    return frame;
+    return CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
 }
 
 // The new view covers the views below (which is not moved)
@@ -410,7 +394,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                                       duration:(NSTimeInterval)duration
                                      belowOnly:(BOOL)belowOnly
 {
-    CGRect frame = [HLSContainerAnimation fixedFrameForView:view];
+    CGRect frame = [HLSContainerAnimation actualFrameForView:view];
     if ([view.subviews count] == 0) {
         HLSLoggerError(@"At least 1 view is required");
         return nil;
@@ -717,7 +701,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
                                                 duration:(NSTimeInterval)duration
 {
 #if 0
-    CGRect fixedFrame = [HLSContainerAnimation fixedFrameForView:containerView];
+    CGRect fixedFrame = [HLSContainerAnimation actualFrameForView:containerView];
     
     HLSAnimationStep *animationStep = [HLSAnimationStep animationStep];
     animationStep.duration = duration;
