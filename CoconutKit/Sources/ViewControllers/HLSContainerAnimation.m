@@ -8,6 +8,7 @@
 
 #import "HLSContainerAnimation.h"
 
+#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 

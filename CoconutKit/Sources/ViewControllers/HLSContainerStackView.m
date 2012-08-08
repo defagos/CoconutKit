@@ -8,6 +8,7 @@
 
 #import "HLSContainerStackView.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "UIView+HLSExtensions.h"
 
