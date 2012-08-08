@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import "NSSet+HLSExtensions.h"
 #import <objc/runtime.h>
 
 // Constants
@@ -61,8 +62,37 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     static NSArray *s_availableTransitionNames = nil;
     if (! s_availableTransitionNames) {
         NSMutableArray *availableTransitionNames = [NSMutableArray array];
-        [availableTransitionNames addObject:@"HLSTransitionPushFromBottom"];
-        s_availableTransitionNames = [[NSArray arrayWithArray:availableTransitionNames] retain];
+        
+        // Find all HLSTransition subclasses (except HLSTransition itself)
+        int numberOfClasses = objc_getClassList(NULL, 0);
+        if (numberOfClasses > 0) {
+            Class *classes = malloc(numberOfClasses * sizeof(Class));
+            objc_getClassList(classes, numberOfClasses);
+            for (int i = 0; i < numberOfClasses; ++i) {
+                Class class = classes[i];
+                
+                // Discard HLSTransition
+                if (class == [HLSTransition class]) {
+                    continue;
+                }
+                
+                // Find whether HLSTransition is a superclass. We cannot use isSubclassOfClass: since it is an NSObject
+                // method and we might encounter other kinds of classes
+                // TODO: Factor out in HLSRuntime.h after merge with url-networking branch
+                Class superclass = class;
+                do {
+                    superclass = class_getSuperclass(superclass);
+                } while (superclass && superclass != [HLSTransition class]);
+                
+                if (! superclass) {
+                    continue;
+                }
+                
+                [availableTransitionNames addObject:NSStringFromClass(class)];
+            }
+            free(classes);
+        }
+        s_availableTransitionNames = [[availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
     }
     return s_availableTransitionNames;
 }
