@@ -142,8 +142,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [containerView addSubview:containerStackView];
     }
     
-    // The view is retained by the hierarchy
-    m_containerView = containerView;
+    [m_containerView release];
+    m_containerView = [containerView retain];
 }
 
 - (HLSContainerStackView *)containerStackView
