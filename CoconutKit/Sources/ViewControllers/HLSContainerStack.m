@@ -137,12 +137,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // All animations must take place inside the view controller's view
         containerView.clipsToBounds = YES;
+        
+        HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
+        [containerView addSubview:containerStackView];
     }
     
+    // The view is retained by the hierarchy
     m_containerView = containerView;
-    
-    HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
-    [containerView addSubview:containerStackView];
 }
 
 - (HLSContainerStackView *)containerStackView
@@ -801,8 +802,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                          revealViewController:appearingContainerContent.viewController
                                      animated:animated];
             }
-            
-            
         }
     
         [disappearingViewController release];
