@@ -65,7 +65,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * Returns an array of string identifiers for the available transitions
  * TODO: Use runtime.h to find all subclasses
  */
-+ (NSArray *)availableTransitions;
++ (NSArray *)availableTransitionNames;
 
 /**
  * Subclasses must override this method

@@ -40,27 +40,27 @@
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController 
-                        withTransitionStyle:HLSTransitionStyleEmergeFromCenter
+                        withTransitionClass:[HLSTransitionEmergeFromCenter class]
                                    animated:NO];
         UIViewController *secondViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:secondViewController 
-                        withTransitionStyle:HLSTransitionStylePushFromRight
+                        withTransitionClass:[HLSTransitionPushFromRight class]
                                    animated:NO];
         UIViewController *thirdViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:thirdViewController 
-                        withTransitionStyle:HLSTransitionStyleCoverFromRight2
+                        withTransitionClass:[HLSTransitionCoverFromRight2 class]
                                    animated:NO];
         UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:fourthViewController 
-                        withTransitionStyle:HLSTransitionStyleCoverFromBottom
+                        withTransitionClass:[HLSTransitionCoverFromBottom class]
                                    animated:NO];
         UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:fifthViewController 
-                        withTransitionStyle:HLSTransitionStylePushFromTop
+                        withTransitionClass:[HLSTransitionPushFromTop class]
                                    animated:NO];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController
-                        withTransitionStyle:HLSTransitionStyleFlipHorizontal
+                        withTransitionClass:[HLSTransitionFlipHorizontal class]
                                    animated:NO];
         
         
@@ -130,8 +130,9 @@
     }
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
+    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
     [stackController pushViewController:pushedViewController
-                    withTransitionStyle:pickedIndex
+                    withTransitionClass:NSClassFromString(transitionName)
                                animated:self.animatedSwitch.on];
 }
 
@@ -317,194 +318,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return HLSTransitionStyleEnumSize;
+    return [[HLSTransition availableTransitionNames] count];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    switch (row) {
-        case HLSTransitionStyleNone: {
-            return @"HLSTransitionStyleNone";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            return @"HLSTransitionStyleCoverFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            return @"HLSTransitionStyleCoverFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            return @"HLSTransitionStyleCoverFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight: {
-            return @"HLSTransitionStyleCoverFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            return @"HLSTransitionStyleCoverFromTopLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            return @"HLSTransitionStyleCoverFromTopRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            return @"HLSTransitionStyleCoverFromBottomLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            return @"HLSTransitionStyleCoverFromBottomRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            return @"HLSTransitionStyleCoverFromBottom2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            return @"HLSTransitionStyleCoverFromTop2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            return @"HLSTransitionStyleCoverFromLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            return @"HLSTransitionStyleCoverFromRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            return @"HLSTransitionStyleCoverFromTopLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            return @"HLSTransitionStyleCoverFromTopRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            return @"HLSTransitionStyleCoverFromBottomLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            return @"HLSTransitionStyleCoverFromBottomRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            return @"HLSTransitionStyleFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            return @"HLSTransitionStyleFadeIn2";
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            return @"HLSTransitionStyleCrossDissolve";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            return @"HLSTransitionStylePushFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTop: {
-            return @"HLSTransitionStylePushFromTop";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeft: {
-            return @"HLSTransitionStylePushFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRight: {
-            return @"HLSTransitionStylePushFromRight";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottomFadeIn: {
-            return @"HLSTransitionStylePushFromBottomFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTopFadeIn: {
-            return @"HLSTransitionStylePushFromTopFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeftFadeIn: {
-            return @"HLSTransitionStylePushFromLeftFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRightFadeIn: {
-            return @"HLSTransitionStylePushFromRightFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFlowFromBottom: {
-            return @"HLSTransitionStyleFlowFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleFlowFromTop: {
-            return @"HLSTransitionStyleFlowFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleFlowFromLeft: {
-            return @"HLSTransitionStyleFlowFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleFlowFromRight: {
-            return @"HLSTransitionStyleFlowFromRight";
-            break;
-        }            
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            return @"HLSTransitionStyleEmergeFromCenter";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            return @"HLSTransitionStyleFlipVertical";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            return @"HLSTransitionStyleFlipHorizontal";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
-    }
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
 #pragma mark Localization

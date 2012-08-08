@@ -47,10 +47,10 @@
         HLSPlaceholderInsetSegue *placeholderInsetSegue = (HLSPlaceholderInsetSegue *)segue;
         placeholderInsetSegue.index = 1;
         if ([placeholderInsetSegue.identifier isEqualToString:@"firstPanel"]) {
-            placeholderInsetSegue.transitionStyle = HLSTransitionStyleCrossDissolve;
+            placeholderInsetSegue.transitionClass = [HLSTransitionCrossDissolve class];
         }
         else if ([placeholderInsetSegue.identifier isEqualToString:@"secondPanel"]) {
-            placeholderInsetSegue.transitionStyle = HLSTransitionStyleCoverFromRight;
+            placeholderInsetSegue.transitionClass = [HLSTransitionCoverFromRight class];
         }
     }
 }

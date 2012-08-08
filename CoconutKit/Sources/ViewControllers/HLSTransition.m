@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import <objc/runtime.h>
 
 // Constants
 const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
@@ -55,10 +56,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 #pragma mark Getting the available transition list
 
-+ (NSArray *)availableTransitions
++ (NSArray *)availableTransitionNames
 {
-    // TODO:
-    return nil;
+    static NSArray *s_availableTransitionNames = nil;
+    if (! s_availableTransitionNames) {
+        NSMutableArray *availableTransitionNames = [NSMutableArray array];
+        [availableTransitionNames addObject:@"HLSTransitionPushFromBottom"];
+        s_availableTransitionNames = [[NSArray arrayWithArray:availableTransitionNames] retain];
+    }
+    return s_availableTransitionNames;
 }
 
 #pragma mark Built-in transition common code

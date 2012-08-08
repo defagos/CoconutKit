@@ -48,10 +48,10 @@
     if ([segue isKindOfClass:[HLSStackPushSegue class]]) {
         HLSStackPushSegue *stackPushSegue = (HLSStackPushSegue *)segue;
         if ([stackPushSegue.identifier isEqualToString:@"pushFromBottom"]) {
-            stackPushSegue.transitionStyle = HLSTransitionStylePushFromBottom;
+            stackPushSegue.transitionClass = [HLSTransitionPushFromBottom class];
         }
         else if ([stackPushSegue.identifier isEqualToString:@"coverFromTop"]) {
-            stackPushSegue.transitionStyle = HLSTransitionStyleCoverFromTop;
+            stackPushSegue.transitionClass = [HLSTransitionCoverFromBottom class];
         }
     }
 }

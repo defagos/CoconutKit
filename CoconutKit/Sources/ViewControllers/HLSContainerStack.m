@@ -88,8 +88,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                       duration:(NSTimeInterval)duration
 {
     NSAssert([transitionClass isSubclassOfClass:[HLSTransition class]], @"Transitions must be subclasses of HLSTransition");
-    NSAssert(appearingView.superview == view && disappearingView.superview == view, @"Both the appearing and disappearing views must be "
-             "children of the view in which the transition takes place");
+    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+             @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
         
     // Calculate the exact frame in which the animations will occur (taking into account the transform applied
     // to the parent view
