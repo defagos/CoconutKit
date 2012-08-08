@@ -480,19 +480,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     [self removeViewControllerAtIndex:index animated:animated];
 }
 
-- (void)rotateWithDuration:(NSTimeInterval)duration
-{
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        
-    }
-    
-    HLSAnimation *animation = [HLSContainerAnimation rotationAnimationWithContainerContents:self.containerContents 
-                                                                               containerView:[self containerView]
-                                                                                    duration:duration];
-    animation.lockingUI = YES;
-    [animation playAnimated:YES];
-}
-
 - (void)releaseViews
 {
     for (HLSContainerContent *containerContent in self.containerContents) {
@@ -593,9 +580,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [self rotateWithDuration:duration];
-    
+{   
     for (HLSContainerContent *containerContent in self.containerContents) {
         [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }

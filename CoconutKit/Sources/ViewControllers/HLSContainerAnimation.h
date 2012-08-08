@@ -20,11 +20,4 @@
                                         inView:(UIView *)view
                                       duration:(NSTimeInterval)duration;
 
-/**
- * Return the animation which has to be played when a set of view controllers need to be rotated
- */
-+ (HLSAnimation *)rotationAnimationWithContainerContents:(NSArray *)containerContents
-                                           containerView:(UIView *)containerView
-                                                duration:(NSTimeInterval)duration;
-
 @end
