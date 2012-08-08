@@ -348,12 +348,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
         // when pushing a view controller onto the stack
         if (index == [self.containerContents count]) {
-            if ([self topViewController] && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
-                [self.delegate containerStack:self willHideViewController:[self topViewController] animated:animated];
-            }
-            
-            if ([self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
-                [self.delegate containerStack:self willShowViewController:viewController animated:animated];
+            if ([self.delegate respondsToSelector:@selector(containerStack:willPushViewController:coverViewController:animated:)]) {
+                [self.delegate containerStack:self
+                       willPushViewController:viewController
+                          coverViewController:[self topViewController]
+                                     animated:animated];
             }
         }
     }
@@ -426,12 +425,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
         // when popping a view controller from the stack
         if (index == [self.containerContents count] - 1) {
-            if ([self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
-                [self.delegate containerStack:self willHideViewController:[self topViewController] animated:animated];
-            }
-            
-            if (self.secondTopContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
-                [self.delegate containerStack:self willShowViewController:self.secondTopContainerContent.viewController animated:animated];
+            if ([self.delegate respondsToSelector:@selector(containerStack:willPopViewController:revealViewController:animated:)]) {
+                [self.delegate containerStack:self
+                        willPopViewController:[self topViewController]
+                         revealViewController:self.secondTopContainerContent.viewController
+                                     animated:animated];
             }
         }
     }
@@ -531,11 +529,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
+        [topContainerContent viewDidAppear:animated];
+        
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
         }
-        
-        [topContainerContent viewDidAppear:animated];
     }
 }
 
@@ -555,11 +553,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
+        [topContainerContent viewDidDisappear:animated];
+        
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
         }
-        
-        [topContainerContent viewDidDisappear:animated];        
     }
 }
 
@@ -723,7 +721,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // forwarding properties
         appearingContainerContent.forwardingProperties = self.forwardingProperties;
         
+        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+            [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
+        }
         [disappearingContainerContent viewWillDisappear:animated];
+        
+        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+            [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
+        }
         [appearingContainerContent viewWillAppear:animated];
     }    
 }
@@ -744,6 +749,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         [disappearingContainerContent viewDidDisappear:animated];
+        if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+            [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
+        }
         
         // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
         // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
@@ -752,10 +760,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         disappearingContainerContent.forwardingProperties = NO;
         
         [appearingContainerContent viewDidAppear:animated];
-        
-        // Keep the disappearing view controller alive a little bit longer for delegate notification below
-        UIViewController *disappearingViewController = [[disappearingContainerContent.viewController retain] autorelease];
-        
+        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+            [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
+        }
+                
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
@@ -765,18 +773,29 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             else {
                 [self.containerContents removeObject:containerContentAtCapacity];
             }
+            
+            if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
+                [self.delegate containerStack:self
+                        didPushViewController:appearingContainerContent.viewController
+                          coverViewController:disappearingContainerContent.viewController
+                                     animated:animated];
+            }
         }
         else if ([animation.tag isEqualToString:@"pop_animation"]) {
+            // Keep the disappearing view controller alive a little bit longer
+            UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
+            
             [self.containerContents removeObject:disappearingContainerContent];
-        }
-        
-        // At the end
-        if (disappearingViewController && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
-            [self.delegate containerStack:self didHideViewController:disappearingViewController animated:animated];
-        }
-        if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
-            [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
-        }
+            
+            if ([self.delegate respondsToSelector:@selector(containerStack:didPopViewController:revealViewController:animated:)]) {
+                [self.delegate containerStack:self
+                         didPopViewController:disappearingViewController
+                         revealViewController:appearingContainerContent.viewController
+                                     animated:animated];
+            }
+            
+            [disappearingViewController release];
+        }        
     }
 }
 

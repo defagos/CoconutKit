@@ -304,6 +304,14 @@
 #pragma mark HLSContainerStackDelegate protocol implementation
 
 - (void)containerStack:(HLSContainerStack *)containerStack
+willPushViewController:(UIViewController *)pushedViewController
+   coverViewController:(UIViewController *)coveredViewController
+              animated:(BOOL)animated
+{
+    // Not interesting in the present case
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
 willShowViewController:(UIViewController *)viewController
               animated:(BOOL)animated
 {
@@ -324,6 +332,22 @@ willShowViewController:(UIViewController *)viewController
 }
 
 - (void)containerStack:(HLSContainerStack *)containerStack
+ didPushViewController:(UIViewController *)pushedViewController
+   coverViewController:(UIViewController *)coveredViewController
+              animated:(BOOL)animated
+{
+    // Not interesting in the present case
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+ willPopViewController:(UIViewController *)poppedViewController
+  revealViewController:(UIViewController *)revealedViewController
+              animated:(BOOL)animated
+{
+    // Not interesting in the present case
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
 willHideViewController:(UIViewController *)viewController
               animated:(BOOL)animated
 {
@@ -341,6 +365,14 @@ willHideViewController:(UIViewController *)viewController
     if ([self.delegate respondsToSelector:@selector(placeholderViewController:didHideInsetViewController:atIndex:animated:)]) {
         [self.delegate placeholderViewController:self didHideInsetViewController:viewController atIndex:index animated:animated];
     }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+  didPopViewController:(UIViewController *)poppedViewController
+  revealViewController:(UIViewController *)revealedViewController
+              animated:(BOOL)animated
+{
+    // Not interesting in the present case
 }
 
 @end

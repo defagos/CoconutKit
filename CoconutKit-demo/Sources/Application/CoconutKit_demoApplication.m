@@ -136,6 +136,14 @@
 #pragma mark HLSStackControllerDelegate protocol implementation
 
 - (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
  willShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated
 {
@@ -150,6 +158,22 @@
 }
 
 - (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
  willHideViewController:(UIViewController *)viewController
                animated:(BOOL)animated
 {
@@ -161,6 +185,14 @@
                animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
 }
 
 #pragma mark Core Data

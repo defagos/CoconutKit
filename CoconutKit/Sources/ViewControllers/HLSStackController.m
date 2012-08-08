@@ -263,6 +263,19 @@
 
 #pragma mark HLSContainerStackDelegate protocol implementation
 
+- (void)containerStack:(HLSContainerStack *)containerStack
+willPushViewController:(UIViewController *)pushedViewController
+   coverViewController:(UIViewController *)coveredViewController
+              animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:willPushViewController:coverViewController:animated:)]) {
+        [self.delegate stackController:self
+                willPushViewController:pushedViewController
+                   coverViewController:coveredViewController
+                              animated:animated];
+    }
+}
+
 - (void)containerStack:(HLSContainerStack *)containerStack willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if ([self.delegate respondsToSelector:@selector(stackController:willShowViewController:animated:)]) {
@@ -277,6 +290,32 @@
     }
 }
 
+- (void)containerStack:(HLSContainerStack *)containerStack
+ didPushViewController:(UIViewController *)pushedViewController
+   coverViewController:(UIViewController *)coveredViewController
+              animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:didPushViewController:coverViewController:animated:)]) {
+        [self.delegate stackController:self
+                 didPushViewController:pushedViewController
+                   coverViewController:coveredViewController
+                              animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+ willPopViewController:(UIViewController *)poppedViewController
+  revealViewController:(UIViewController *)revealedViewController
+              animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:willPopViewController:revealViewController:animated:)]) {
+        [self.delegate stackController:self
+                 willPopViewController:poppedViewController
+                  revealViewController:revealedViewController
+                              animated:animated];
+    }
+}
+
 - (void)containerStack:(HLSContainerStack *)containerStack willHideViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if ([self.delegate respondsToSelector:@selector(stackController:willHideViewController:animated:)]) {
@@ -288,6 +327,19 @@
 {
     if ([self.delegate respondsToSelector:@selector(stackController:didHideViewController:animated:)]) {
         [self.delegate stackController:self didHideViewController:viewController animated:animated];
+    }
+}
+
+- (void)containerStack:(HLSContainerStack *)containerStack
+  didPopViewController:(UIViewController *)poppedViewController
+  revealViewController:(UIViewController *)revealedViewController
+              animated:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(stackController:didPopViewController:revealViewController:animated:)]) {
+        [self.delegate stackController:self
+                  didPopViewController:poppedViewController
+                  revealViewController:revealedViewController
+                              animated:animated];
     }
 }
 

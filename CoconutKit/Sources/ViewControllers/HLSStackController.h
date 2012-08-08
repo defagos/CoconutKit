@@ -164,7 +164,11 @@
 
 @optional
 
-// TODO: Document as for HLSContainerContentDelegate
+- (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated;
+
 - (void)stackController:(HLSStackController *)stackController
  willShowViewController:(UIViewController *)viewController 
                animated:(BOOL)animated;
@@ -174,11 +178,26 @@
                animated:(BOOL)animated;
 
 - (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated;
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated;
+
+- (void)stackController:(HLSStackController *)stackController
  willHideViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
 
 - (void)stackController:(HLSStackController *)stackController
   didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated;
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
                animated:(BOOL)animated;
 
 @end

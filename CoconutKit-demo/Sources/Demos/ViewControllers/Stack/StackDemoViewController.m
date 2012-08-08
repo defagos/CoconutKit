@@ -247,19 +247,18 @@
 #pragma mark HLSStackControllerDelegate protocol implementation
 
 - (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
  willShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-    
-    // Shows how to extract valuable information from this delegate method call
-    NSUInteger index = [[stackController viewControllers] indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerInfo(@"The view controller %@ is about to be pushed onto the stack", viewController);
-    }
-    else {
-        HLSLoggerInfo(@"The view controller %@ was already in the stack (preloaded or hidden from view) and is about to be revealed", viewController);
-    }
 }
 
 - (void)stackController:(HLSStackController *)stackController
@@ -267,6 +266,22 @@
                animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
 }
 
 - (void)stackController:(HLSStackController *)stackController
@@ -281,15 +296,14 @@
                animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-    
-    // Shows how to extract valuable information from this delegate method call
-    NSUInteger index = [[stackController viewControllers] indexOfObject:viewController];
-    if (index == NSNotFound) {
-        HLSLoggerInfo(@"The view controller %@ has been popped off the stack", viewController);
-    }
-    else {
-        HLSLoggerInfo(@"The view controller %@ has been covered by pushing another one on top of it", viewController);
-    }
+}
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
