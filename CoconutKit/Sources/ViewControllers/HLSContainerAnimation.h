@@ -14,14 +14,11 @@
  */
 @interface HLSContainerAnimation : NSObject
 
-/**
- * Return the animation which make the two container content wrapper views appear and disappear using some
- * transition style and duration
- */
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                 appearingView:(UIView *)appearingView
+                              disappearingView:(UIView *)disappearingView
                                         inView:(UIView *)view
-                                      duration:(NSTimeInterval)duration
-                                     belowOnly:(BOOL)belowOnly;         // TODO: Ugly: Fix when refactoring this class
+                                      duration:(NSTimeInterval)duration;
 
 /**
  * Return the animation which has to be played when a set of view controllers need to be rotated

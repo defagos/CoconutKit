@@ -391,31 +391,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 }
 
 + (HLSAnimation *)animationWithTransitionStyle:(HLSTransitionStyle)transitionStyle
+                                 appearingView:(UIView *)appearingView
+                              disappearingView:(UIView *)disappearingView
                                         inView:(UIView *)view
                                       duration:(NSTimeInterval)duration
-                                     belowOnly:(BOOL)belowOnly
 {
     CGRect frame = [HLSContainerAnimation actualFrameForView:view];
     if ([view.subviews count] == 0) {
         HLSLoggerError(@"At least 1 view is required");
         return nil;
     }
-    
-    UIView *appearingView = nil;
-    UIView *disappearingView = nil;
-    if ([view.subviews count] == 1) {
-        appearingView = [view.subviews objectAtIndex:0];
-    }
-    else if ([view.subviews count] == 2) {
-        appearingView = [view.subviews objectAtIndex:1];
-        disappearingView = [view.subviews objectAtIndex:0];
-    }
-    
-    // TODO: Ugly: Fix when refactoring this class
-    if (belowOnly) {
-        appearingView = nil;
-    }
-    
+        
     HLSAnimation *animation = nil;
     switch (transitionStyle) {
         case HLSTransitionStyleNone: {

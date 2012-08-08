@@ -446,9 +446,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
         HLSAnimation *animation = [[HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
+                                                                         appearingView:groupView.frontView
+                                                                      disappearingView:groupView.backGroupView
                                                                                 inView:groupView
-                                                                              duration:containerContent.duration
-                                                                             belowOnly:NO] reverseAnimation];
+                                                                                duration:containerContent.duration] reverseAnimation];
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
@@ -480,6 +481,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)rotateWithDuration:(NSTimeInterval)duration
 {
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        
+    }
+    
     HLSAnimation *animation = [HLSContainerAnimation rotationAnimationWithContainerContents:self.containerContents 
                                                                                containerView:[self containerView]
                                                                                     duration:duration];
@@ -661,18 +666,20 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
         HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForSubview:[aboveContainerContent viewIfLoaded]];
         HLSAnimation *aboveAnimation = [HLSContainerAnimation animationWithTransitionStyle:aboveContainerContent.transitionStyle
+                                                                             appearingView:nil
+                                                                          disappearingView:aboveGroupView.backGroupView
                                                                                     inView:aboveGroupView
-                                                                                  duration:aboveContainerContent.duration
-                                                                                 belowOnly:YES];
+                                                                                  duration:aboveContainerContent.duration];
         [aboveAnimation playAnimated:NO];
     }
     
     // Play the corresponding animation so that the view controllers are brought into correct positions
     HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
     HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
+                                                                    appearingView:groupView.frontView
+                                                                 disappearingView:groupView.backGroupView
                                                                            inView:groupView
-                                                                         duration:containerContent.duration
-                                                                        belowOnly:NO];
+                                                                         duration:containerContent.duration];
     if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
