@@ -1,12 +1,12 @@
 //
-//  HLSTransitions.h
+//  HLSTransition.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/8/12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSAnimation.h"
+#import "HLSAnimationStep.h"
 
 // Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
 // of an animation as defined by its implementation
@@ -15,8 +15,8 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * Common class for transition animations involving two views (currently for use by containers). To define your
  * own transition animations, subclass HLSTransition and implement the 
- *   -animationWithAppearingView:disappearingView:inFrame:
- * method to return the animation to be played when a view is brought to display, while another one is hidden
+ *   -animationStepsWithAppearingView:disappearingView:inFrame:
+ * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
  * from view.
  *
  * Implement your animations based on the following assumptions:
@@ -26,14 +26,14 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *     it into its initial position with a duration of 0
  *   - appearingView and disappearingView both have alpha = 1
  *   - appearingView is on top of disappearingView and both have the same superview
- *   - you cannot set any HLSAnimation properties (e.g. tag, userInfo, bringToFront, etc.). Those will be ignored
- *   - the duration of your steps is arbitrary. The total duration defines the default duration of your animation,
- *     which might be scaled depending on the duration which is desired when the animation is actually played
+ *   - the duration of your steps is arbitrary. The sum of those durations defines the default duration of the 
+ *     resulting animation. This might be scaled depending on the duration which is desired when the animation 
+ *     is actually played (refer to -[HLSAnimation animationWithDuration:] documentation
  *
  * For example, here is the implementation of a push from right animation (the usual UINavigationController 
  * animation) with an intrinsic duration of 0.4:
  *
- *   + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+ *   + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
  *                               disappearingView:(UIView *)disappearingView
  *                                        inFrame:(CGRect)frame
  *   {
@@ -58,7 +58,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       animationStep2.duration = 0.4;
  *       [animationSteps addObject:animationStep2];
  *
- *       return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+ *       return [NSArray arrayWithArray:animationSteps];
  *   }
  *
  * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition
@@ -73,12 +73,13 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 + (NSArray *)availableTransitionNames;
 
 /**
- * The method to be overridden by subclasses to return the transition animation corresponding to the class
+ * The method to be overridden by subclasses to return the transition animation steps for the animation class.
+ * The returned array must only contain HLSAnimationStep objects
  *
  * The default implementation of this method returns an empty animation (which do not alter any of the
  * views)
  */
-+ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
++ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame;
 

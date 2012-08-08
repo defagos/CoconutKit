@@ -95,16 +95,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // to the parent view
     CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
     
-    // Build the animation (ensure that all parameters are the default ones)
-    HLSAnimation *animation = [[transitionClass class] animationWithAppearingView:appearingView
-                                                                 disappearingView:disappearingView
-                                                                          inFrame:frame];
-    animation.tag = nil;
-    animation.userInfo = nil;
-    animation.resizeViews = NO;
-    animation.lockingUI = NO;
-    animation.bringToFront = NO;
-    animation.delegate = nil;
+    // Build the animation with default parameters
+    NSArray *animationSteps = [[transitionClass class] animationStepsWithAppearingView:appearingView
+                                                                      disappearingView:disappearingView
+                                                                               inFrame:frame];
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
     
     // Generate an animation with the proper duration
     if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
