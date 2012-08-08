@@ -192,6 +192,8 @@
 {
     RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
+    stackController.delegate = self;
     [self presentModalViewController:stackController animated:YES];
 }
 
