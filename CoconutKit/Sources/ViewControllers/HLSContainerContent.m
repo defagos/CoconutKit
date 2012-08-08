@@ -178,9 +178,11 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     // not be necessary. But clients might keep additional references to view controllers for caching purposes. The 
     // best we can do is to restore a view controller's properties when it is removed from a container, no matter whether 
     // or not it is later reused
-    self.viewController.view.frame = self.originalViewFrame;
-    self.viewController.view.alpha = self.originalViewAlpha;
-    self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
+    if ([self.viewController isViewLoaded]) {
+        self.viewController.view.frame = self.originalViewFrame;
+        self.viewController.view.alpha = self.originalViewAlpha;
+        self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
+    }
     
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
