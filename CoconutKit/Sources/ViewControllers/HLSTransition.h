@@ -8,69 +8,75 @@
 
 #import "HLSAnimation.h"
 
-#if 0
-
-typedef enum {
-    HLSTransitionStyleEnumBegin = 0,
-    HLSTransitionStyleNone = HLSTransitionStyleEnumBegin,    // No transtion
-    HLSTransitionStyleCoverFromBottom,                       // The new view covers the old one starting from the bottom
-    HLSTransitionStyleCoverFromTop,                          // The new view covers the old one starting from the top
-    HLSTransitionStyleCoverFromLeft,                         // The new view covers the old one starting from the left
-    HLSTransitionStyleCoverFromRight,                        // The new view covers the old one starting from the right
-    HLSTransitionStyleCoverFromTopLeft,                      // The new view covers the old one starting from the top left corner
-    HLSTransitionStyleCoverFromTopRight,                     // The new view covers the old one starting from the top right corner
-    HLSTransitionStyleCoverFromBottomLeft,                   // The new view covers the old one starting from the bottom left corner
-    HLSTransitionStyleCoverFromBottomRight,                  // The new view covers the old one starting from the bottom right corner
-    HLSTransitionStyleCoverFromBottom2,                      // The new view covers the old one starting from the bottom
-    HLSTransitionStyleCoverFromTop2,                         // The new view covers the old one starting from the top (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromLeft2,                        // The new view covers the old one starting from the left (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromRight2,                       // The new view covers the old one starting from the right (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromTopLeft2,                     // The new view covers the old one starting from the top left corner (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromTopRight2,                    // The new view covers the old one starting from the top right corner (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromBottomLeft2,                  // The new view covers the old one starting from the bottom left corner (the old view is pushed to the back)
-    HLSTransitionStyleCoverFromBottomRight2,                 // The new view covers the old one starting from the bottom right corner (the old view is pushed to the back)
-    HLSTransitionStyleFadeIn,                                // The new view fades in, the old one does not change
-    HLSTransitionStyleFadeIn2,                               // The new view fades in, the old one is pushed to the back
-    HLSTransitionStyleCrossDissolve,                         // The old view fades out and disappears as the new one fades in
-    HLSTransitionStylePushFromBottom,                        // The new view pushes up the old one (which disappears)
-    HLSTransitionStylePushFromTop,                           // The new view pushes down the old one (which disappears)
-    HLSTransitionStylePushFromLeft,                          // The new view pushes the old one to the right (which disappears)
-    HLSTransitionStylePushFromRight,                         // The new view pushes the old one to the left (which disappears)
-    HLSTransitionStylePushFromBottomFadeIn,                  // The old view is pushed from the bottom, then the new one appears with a fade in animation
-    HLSTransitionStylePushFromTopFadeIn,                     // The old view is pushed from the top, then the new one appears with a fade in animation
-    HLSTransitionStylePushFromLeftFadeIn,                    // The old view is pushed from the left, then the new one appears with a fade in animation
-    HLSTransitionStylePushFromRightFadeIn,                   // The old view is pushed from the right, then the new one appears with a fade in animation
-    HLSTransitionStyleFlowFromBottom,                        // The old view is pushed to the back, pushed from the bottom by the new one, which then is then pushed to the front
-    HLSTransitionStyleFlowFromTop,                           // The old view is pushed to the back, pushed from the top by the new one, which then is then pushed to the front
-    HLSTransitionStyleFlowFromLeft,                          // The old view is pushed to the back, pushed from the left by the new one, which then is then pushed to the front
-    HLSTransitionStyleFlowFromRight,                         // The old view is pushed to the back, pushed from the right by the new one, which then is then pushed to the front
-    HLSTransitionStyleEmergeFromCenter,                      // The new view emerges from the center of the placeholder view
-    HLSTransitionStyleFlipVertical,                          // The new view appears with a vertical 3D flip
-    HLSTransitionStyleFlipHorizontal,                        // The new view appears with a horizontal 3D flip
-    HLSTransitionStyleEnumEnd,
-    HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
-} HLSTransitionStyle;
-
-#endif
-
-// Default duration for a transition animation. This is a reserved value and does not correspond to any meaningful
-// duration
+// Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
+// of an animation as defined by its implementation
 extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 
+/**
+ * Common class for transition animations involving two views (currently for use by containers). To define your
+ * own transition animations, subclass HLSTransition and implement the 
+ *   -animationWithAppearingView:disappearingView:inFrame:
+ * method to return the animation to be played when a view is brought to display, while another one is hidden
+ * from view.
+ *
+ * Implement your animations based on the following assumptions:
+ *   - appearingView and disappearingView initially fill the given frame entirely (i.e. they have
+ *     bounds = (0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)). This means that if you want the
+ *     appearingView to start outside the frame you will need to use a first "setup" animation step bringing
+ *     it into its initial position with a duration of 0
+ *   - appearingView and disappearingView both have alpha = 1
+ *   - appearingView is on top of disappearingView and both have the same superview
+ *   - you cannot set any HLSAnimation properties (e.g. tag, userInfo, bringToFront, etc.). Those will be ignored
+ *   - the duration of your steps is arbitrary. The total duration defines the default duration of your animation,
+ *     which might be scaled depending on the duration which is desired when the animation is actually played
+ *
+ * For example, here is the implementation of a push from right animation (the usual UINavigationController 
+ * animation) with an intrinsic duration of 0.4:
+ *
+ *   + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+ *                               disappearingView:(UIView *)disappearingView
+ *                                        inFrame:(CGRect)frame
+ *   {
+ *       NSMutableArray *animationSteps = [NSMutableArray array];
+ *
+ *       // Setup step bringing the appearingView outside the frame
+ *       HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep11 translateByVectorWithX:CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
+ *       animationStep1.duration = 0.;
+ *       [animationSteps addObject:animationStep1];
+ *
+ *       // The push itself, moving the two views to the left
+ *       HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep21 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
+ *       HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep22 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
+ *       animationStep2.duration = 0.4;
+ *       [animationSteps addObject:animationStep2];
+ *
+ *       return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+ *   }
+ *
+ * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition
+ * classes are defined below
+ */
 @interface HLSTransition : NSObject
 
-// TODO: Define string identifier constants here for built-in types
-
 /**
- * Returns an array of string identifiers for the available transitions
- * TODO: Use runtime.h to find all subclasses
+ * Return an array of string identifiers for the available transitions. These include any custom transitions
+ * as well
  */
 + (NSArray *)availableTransitionNames;
 
 /**
- * Subclasses must override this method
- * TODO: When called, must ensure that appearing and disappearing views belong to the
- *       view
+ * The method to be overridden by subclasses to return the transition animation corresponding to the class
+ *
+ * The default implementation of this method returns an empty animation (which do not alter any of the
+ * views)
  */
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -79,106 +85,211 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 @end
 
 /**
- * Standard transitions
+ *  No transition
  */
 @interface HLSTransitionNone : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom
+ */
 @interface HLSTransitionCoverFromBottom : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top
+ */
 @interface HLSTransitionCoverFromTop : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the left
+ */
 @interface HLSTransitionCoverFromLeft : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the right
+ */
 @interface HLSTransitionCoverFromRight : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top left corner
+ */
 @interface HLSTransitionCoverFromTopLeft : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top right corner
+ */
 @interface HLSTransitionCoverFromTopRight : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom left corner
+ */
 @interface HLSTransitionCoverFromBottomLeft : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom right corner
+ */
 @interface HLSTransitionCoverFromBottomRight : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromBottom2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromTop2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the left (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromLeft2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the right (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromRight2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top left corner (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromTopLeft2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the top right corner (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromTopRight2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom left corner (the old view is slightly pushed to the back)
+ */
 @interface HLSTransitionCoverFromBottomLeft2 : HLSTransition
 @end
 
+/**
+ * The new view covers the old one starting from the bottom right corner (the old view is slightly pushed to the back)
+ */
+@interface HLSTransitionCoverFromBottomRight2 : HLSTransition
+@end
+
+/**
+ * The new view fades in, the old one does not change
+ */
 @interface HLSTransitionFadeIn : HLSTransition
 @end
 
+/**
+ * The new view fades in, the old one is slightly pushed to the back
+ */
 @interface HLSTransitionFadeIn2 : HLSTransition
 @end
 
+/**
+ * The old view fades out and disappears as the new one fades in
+ */
 @interface HLSTransitionCrossDissolve : HLSTransition
 @end
 
+/**
+ * The new view pushes up the old one (which disappears)
+ */
 @interface HLSTransitionPushFromBottom : HLSTransition
 @end
 
+/**
+ * The new view pushes down the old one (which disappears)
+ */
 @interface HLSTransitionPushFromTop : HLSTransition
 @end
 
+/**
+ * The new view pushes the old one to the left (which disappears)
+ */
 @interface HLSTransitionPushFromLeft : HLSTransition
 @end
 
+/**
+ * The new view pushes the old one to the right (which disappears)
+ */
 @interface HLSTransitionPushFromRight : HLSTransition
 @end
 
+/**
+ * The old view is pushed from the bottom, then the new one appears with a fade in animation
+ */
 @interface HLSTransitionPushFromBottomFadeIn : HLSTransition
 @end
 
+/**
+ * The old view is pushed from the top, then the new one appears with a fade in animation
+ */
 @interface HLSTransitionPushFromTopFadeIn : HLSTransition
 @end
 
+/**
+ * The old view is pushed from the left, then the new one appears with a fade in animation
+ */
 @interface HLSTransitionPushFromLeftFadeIn : HLSTransition
 @end
 
+/**
+ * The old view is pushed from the right, then the new one appears with a fade in animation
+ */
 @interface HLSTransitionPushFromRightFadeIn : HLSTransition
 @end
 
+/**
+ * The old view is slightly pushed to the back, pushed from the bottom by the new one, which is then brought to the front
+ */
 @interface HLSTransitionFlowFromBottom : HLSTransition
 @end
 
+/**
+ * The old view is slightly pushed to the back, pushed from the top by the new one, which is then brought to the front
+ */
 @interface HLSTransitionFlowFromTop : HLSTransition
 @end
 
+/**
+ * The old view is slightly pushed to the back, pushed from the left by the new one, which is then brought to the front
+ */
 @interface HLSTransitionFlowFromLeft : HLSTransition
 @end
 
+/**
+ * The old view is slightly pushed to the back, pushed from the right by the new one, which is then brought to the front
+ */
 @interface HLSTransitionFlowFromRight : HLSTransition
 @end
 
+/**
+ * The new view emerges from the center of the frame, the old one is left as is
+ */
 @interface HLSTransitionEmergeFromCenter : HLSTransition
 @end
 
+/**
+ * The two views are flipped vertically
+ */
 @interface HLSTransitionFlipVertical : HLSTransition
 @end
 
+/**
+ * The two views are flipped horizontally
+ */
 @interface HLSTransitionFlipHorizontal : HLSTransition
 @end

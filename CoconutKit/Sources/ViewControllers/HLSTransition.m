@@ -17,7 +17,7 @@
 const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
 
 static CGFloat kPushToTheBackScaleFactor = 0.95f;
-static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, otherwise infinite matrix elements
+static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, otherwise infinite transform matrix elements
 
 @interface HLSTransition ()
 
@@ -55,7 +55,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @implementation HLSTransition
 
-#pragma mark Getting the available transition list
+#pragma mark Getting the available transition class list
 
 + (NSArray *)availableTransitionNames
 {
@@ -99,7 +99,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 #pragma mark Built-in transition common code
 
-// The new view covers the views below (which is not moved)
 + (HLSAnimation *)coverAnimationWithInitialXOffset:(CGFloat)xOffset
                                            yOffset:(CGFloat)yOffset
                                      appearingView:(UIView *)appearingView
@@ -123,7 +122,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view covers the views below, which get slightly shrinked (Fliboard-style)
 + (HLSAnimation *)coverAnimation2WithInitialXOffset:(CGFloat)xOffset
                                             yOffset:(CGFloat)yOffset
                                       appearingView:(UIView *)appearingView
@@ -151,7 +149,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view pushes the other one
 + (HLSAnimation *)pushAnimationWithInitialXOffset:(CGFloat)xOffset
                                           yOffset:(CGFloat)yOffset
                                     appearingView:(UIView *)appearingView
@@ -179,7 +176,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The new view pushes the other one, which fades in
 + (HLSAnimation *)pushAndFadeAnimationWithInitialXOffset:(CGFloat)xOffset
                                                  yOffset:(CGFloat)yOffset
                                            appearingView:(UIView *)appearingView
@@ -214,7 +210,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The old view is pushed to the back, then pushed by the new one (at the same scale), which is then pushed to the front
 + (HLSAnimation *)flowAnimationWithInitialXOffset:(CGFloat)xOffset
                                           yOffset:(CGFloat)yOffset
                                     appearingView:(UIView *)appearingView
@@ -265,7 +260,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
 }
 
-// The appearing and disappearing views are flipped around an axis
 + (HLSAnimation *)flipAnimationAroundVectorWithX:(CGFloat)x
                                                y:(CGFloat)y
                                                z:(CGFloat)z
@@ -440,7 +434,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromBottom2 : HLSTransition
+@implementation HLSTransitionCoverFromBottom2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -454,7 +448,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromTop2 : HLSTransition
+@implementation HLSTransitionCoverFromTop2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -468,7 +462,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromLeft2 : HLSTransition
+@implementation HLSTransitionCoverFromLeft2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -482,7 +476,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromRight2 : HLSTransition
+@implementation HLSTransitionCoverFromRight2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -496,7 +490,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromTopLeft2 : HLSTransition
+@implementation HLSTransitionCoverFromTopLeft2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -510,7 +504,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromTopRight2 : HLSTransition
+@implementation HLSTransitionCoverFromTopRight2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -524,7 +518,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCoverFromBottomLeft2 : HLSTransition
+@implementation HLSTransitionCoverFromBottomLeft2
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -538,9 +532,23 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFadeIn : HLSTransition
+@implementation HLSTransitionCoverFromBottomRight2
 
-// The new view fades in. The views below are left as is
++ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+                            disappearingView:(UIView *)disappearingView
+                                     inFrame:(CGRect)frame
+{
+    return [HLSTransition coverAnimation2WithInitialXOffset:CGRectGetWidth(frame)
+                                                    yOffset:CGRectGetHeight(frame)
+                                              appearingView:appearingView
+                                           disappearingView:disappearingView];
+}
+
+@end
+
+@implementation HLSTransitionFadeIn
+
+// The new view fades in. The view below is left as is
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
@@ -566,9 +574,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFadeIn2 : HLSTransition
+@implementation HLSTransitionFadeIn2
 
-// The new view fades in. The views below are pushed to the back
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
@@ -597,9 +604,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionCrossDissolve : HLSTransition
+@implementation HLSTransitionCrossDissolve
 
-// The new view fades in while the views below fade out
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
@@ -627,7 +633,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromBottom : HLSTransition
+@implementation HLSTransitionPushFromBottom
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -641,7 +647,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromTop : HLSTransition
+@implementation HLSTransitionPushFromTop
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -655,7 +661,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromLeft : HLSTransition
+@implementation HLSTransitionPushFromLeft
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -669,7 +675,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromRight : HLSTransition
+@implementation HLSTransitionPushFromRight
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -683,7 +689,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromBottomFadeIn : HLSTransition
+@implementation HLSTransitionPushFromBottomFadeIn
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -697,7 +703,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromTopFadeIn : HLSTransition
+@implementation HLSTransitionPushFromTopFadeIn
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -711,7 +717,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromLeftFadeIn : HLSTransition
+@implementation HLSTransitionPushFromLeftFadeIn
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -725,7 +731,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionPushFromRightFadeIn : HLSTransition
+@implementation HLSTransitionPushFromRightFadeIn
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -739,7 +745,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlowFromBottom : HLSTransition
+@implementation HLSTransitionFlowFromBottom
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -753,7 +759,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlowFromTop : HLSTransition
+@implementation HLSTransitionFlowFromTop
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -767,7 +773,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlowFromLeft : HLSTransition
+@implementation HLSTransitionFlowFromLeft
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -781,7 +787,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlowFromRight : HLSTransition
+@implementation HLSTransitionFlowFromRight
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -795,9 +801,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionEmergeFromCenter : HLSTransition
+@implementation HLSTransitionEmergeFromCenter
 
-// The new view emerges from the center of the screen
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
@@ -825,7 +830,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlipVertical : HLSTransition
+@implementation HLSTransitionFlipVertical
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -840,7 +845,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
 
 @end
 
-@implementation HLSTransitionFlipHorizontal : HLSTransition
+@implementation HLSTransitionFlipHorizontal
 
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
