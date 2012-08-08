@@ -9,8 +9,6 @@
 #import "HLSContainerGroupView.h"
 
 /**
- * TODO: Document: Use the standard view hierarchy management methods
- *
  * Designated initializer: initWithFrame:
  */
 @interface HLSContainerStackView : UIView {
@@ -18,8 +16,11 @@
     NSMutableArray *m_groupViews;
 }
 
-- (HLSContainerGroupView *)groupViewForSubview:(UIView *)subview;
+- (NSArray *)contentViews;
+- (void)insertContentView:(UIView *)subview atIndex:(NSInteger)index;
 
-- (void)removeSubview:(UIView *)subview;
+- (void)removeContentView:(UIView *)subview;
+
+- (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
 
 @end

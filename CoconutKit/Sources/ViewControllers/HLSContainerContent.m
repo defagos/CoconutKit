@@ -268,13 +268,13 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView
 {
-    [self insertAsSubviewIntoContainerStackView:stackView atIndex:[stackView.subviews count]];
+    [self insertAsSubviewIntoContainerStackView:stackView atIndex:[stackView.contentViews count]];
 }
 
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index
 {
-    if (index > [stackView.subviews count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [stackView.subviews count]];
+    if (index > [stackView.contentViews count]) {
+        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [stackView.contentViews count]];
         @throw [NSException exceptionWithName:NSInvalidArgumentException 
                                        reason:reason
                                      userInfo:nil];
@@ -349,7 +349,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     wrapperView.autoresizingMask = HLSViewAutoresizingAll;
     [wrapperView addSubview:viewControllerView];
     
-    [stackView insertSubview:wrapperView atIndex:index];
+    [stackView insertContentView:wrapperView atIndex:index];
     
     self.containerStackView = stackView;
 }
@@ -361,7 +361,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
     
     // Remove the view controller's view
-    [self.containerStackView removeSubview:[self viewIfLoaded]];
+    [self.containerStackView removeContentView:[self viewIfLoaded]];
     self.containerStackView = nil;
     
     // Restore view controller original properties

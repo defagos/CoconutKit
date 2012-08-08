@@ -8,7 +8,6 @@
 
 #import "HLSContainerStackView.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "UIView+HLSExtensions.h"
 
@@ -16,7 +15,7 @@
 
 @property (nonatomic, retain) NSMutableArray *groupViews;
 
-- (NSUInteger)indexOfSubview:(UIView *)view;
+- (NSUInteger)indexOfContentView:(UIView *)contentView;
 
 @end
 
@@ -47,11 +46,11 @@
 
 #pragma mark View management
 
-- (HLSContainerGroupView *)groupViewForSubview:(UIView *)subview
+- (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView
 {
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        if (groupView.frontView == subview) {
+        if (groupView.frontView == contentView) {
             return groupView;
         }
         ++i;
@@ -59,11 +58,11 @@
     return nil;
 }
 
-- (NSUInteger)indexOfSubview:(UIView *)view
+- (NSUInteger)indexOfContentView:(UIView *)contentView
 {
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        if (groupView.frontView == view) {
+        if (groupView.frontView == contentView) {
             return i;
         }
         ++i;
@@ -71,16 +70,16 @@
     return NSNotFound;
 }
 
-- (NSArray *)subviews
+- (NSArray *)contentViews
 {
-    NSMutableArray *subviews = [NSMutableArray array];
+    NSMutableArray *contentViews = [NSMutableArray array];
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        [subviews addObject:groupView.frontView];
+        [contentViews addObject:groupView.frontView];
     }
-    return [NSArray arrayWithArray:subviews];
+    return [NSArray arrayWithArray:contentViews];
 }
 
-- (void)insertSubview:(UIView *)subview atIndex:(NSInteger)index
+- (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index
 {
     if (index > [self.groupViews count]) {
         HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.groupViews count]);
@@ -90,17 +89,17 @@
     if (index == [self.groupViews count]) {
         HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontView:subview] autorelease];
+        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontView:contentView] autorelease];
         newGroupView.backGroupView = topGroupView;
         
         [self.groupViews addObject:newGroupView];
-        [super addSubview:newGroupView];
+        [self addSubview:newGroupView];
     }
     else {
         HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontView:subview] autorelease];
+        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontView:contentView] autorelease];
         groupViewAtIndex.backGroupView = newGroupView;
         newGroupView.backGroupView = belowGroupViewAtIndex;
         
@@ -108,42 +107,11 @@
     }
 }
 
-- (void)exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2
+- (void)removeContentView:(UIView *)contentView
 {
-    // No time to lose implementing this method which will never be used anyway :)
-    HLSMissingMethodImplementation();
-}
-
-- (void)addSubview:(UIView *)subview
-{
-    [self insertSubview:subview atIndex:[self.groupViews count]];
-}
-
-- (void)insertSubview:(UIView *)subview belowSubview:(UIView *)siblingSubview
-{
-    NSUInteger index = [self indexOfSubview:siblingSubview];
+    NSUInteger index = [self indexOfContentView:contentView];
     if (index == NSNotFound) {
-        HLSLoggerWarn(@"The given sibling subview does not belong to view hierarchy");
-        return;
-    }
-    [self insertSubview:subview atIndex:index];
-}
-
-- (void)insertSubview:(UIView *)subview aboveSubview:(UIView *)siblingSubview
-{
-    NSUInteger index = [self indexOfSubview:siblingSubview];
-    if (index == NSNotFound) {
-        HLSLoggerWarn(@"The given sibling subview does not belong to view hierarchy");
-        return;
-    }
-    [self insertSubview:subview atIndex:index + 1];
-}
-
-- (void)removeSubview:(UIView *)subview
-{
-    NSUInteger index = [self indexOfSubview:subview];
-    if (index == NSNotFound) {
-        HLSLoggerWarn(@"Subview not found");
+        HLSLoggerWarn(@"Content view not found");
         return;
     }
     
@@ -152,7 +120,7 @@
     if (index == [self.groupViews count] - 1) {
         groupView.backGroupView = nil;
         
-        [super insertSubview:belowGroupView atIndex:0];
+        [self insertSubview:belowGroupView atIndex:0];
     }
     else {
         HLSContainerGroupView *aboveGroupView = [self.groupViews objectAtIndex:index + 1];

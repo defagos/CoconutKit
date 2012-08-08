@@ -445,7 +445,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
         }
         
-        HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
+        HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
         HLSAnimation *animation = [[HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
                                                                          appearingView:groupView.frontView
                                                                       disappearingView:groupView.backGroupView
@@ -653,7 +653,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
             if (aboveContainerContent.isAddedToContainerView) {
                 [containerContent insertAsSubviewIntoContainerStackView:stackView
-                                                                atIndex:[stackView.subviews indexOfObject:[aboveContainerContent viewIfLoaded]]];
+                                                                atIndex:[stackView.contentViews indexOfObject:[aboveContainerContent viewIfLoaded]]];
                 inserted = YES;
                 break;
             }
@@ -665,7 +665,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Play the corresponding animation to put the view into the correct location
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
-        HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForSubview:[aboveContainerContent viewIfLoaded]];
+        HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForContentView:[aboveContainerContent viewIfLoaded]];
         HLSAnimation *aboveAnimation = [HLSContainerAnimation animationWithTransitionStyle:aboveContainerContent.transitionStyle
                                                                              appearingView:nil
                                                                           disappearingView:aboveGroupView.backGroupView
@@ -675,7 +675,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Play the corresponding animation so that the view controllers are brought into correct positions
-    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForSubview:[containerContent viewIfLoaded]];
+    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
     HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
                                                                     appearingView:groupView.frontView
                                                                  disappearingView:groupView.backGroupView
