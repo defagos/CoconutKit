@@ -770,7 +770,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
-                
+        
+        // Keep the disappearing view controller alive a little bit longer
+        UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
+        
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
@@ -784,13 +787,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
                 [self.delegate containerStack:self
                         didPushViewController:appearingContainerContent.viewController
-                          coverViewController:disappearingContainerContent.viewController
+                          coverViewController:disappearingViewController
                                      animated:animated];
             }
         }
         else if ([animation.tag isEqualToString:@"pop_animation"]) {
-            // Keep the disappearing view controller alive a little bit longer
-            UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
             
             [self.containerContents removeObject:disappearingContainerContent];
             
@@ -801,8 +802,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      animated:animated];
             }
             
-            [disappearingViewController release];
-        }        
+            
+        }
+    
+        [disappearingViewController release];
     }
 }
 
