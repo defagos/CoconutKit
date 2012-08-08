@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSTransitionStyle.h"
+#import "HLSTransition.h"
 
 /**
  * The segue identifier prefix reserved for preloading view controllers into a placeholder view controller
@@ -30,7 +30,7 @@ extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 @interface HLSPlaceholderInsetSegue : UIStoryboardSegue {
 @private
     NSUInteger m_index;
-    HLSTransitionStyle m_transitionStyle;
+    Class m_transitionClass;
     NSTimeInterval m_duration;
 }
 
@@ -44,7 +44,7 @@ extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
  * Push animation style
  * Default value is HLSTransitionStyleNone
  */
-@property (nonatomic, assign) HLSTransitionStyle transitionStyle;
+@property (nonatomic, assign) Class transitionClass;
 
 /**
  * Push animation duration

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSTransitionStyle.h"
+#import "HLSTransition.h"
 
 /**
  * The segue identifier reserved for setting the root view controller of a stack ('hls_root')
@@ -24,7 +24,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
  */
 @interface HLSStackPushSegue : UIStoryboardSegue {
 @private
-    HLSTransitionStyle m_transitionStyle;
+    Class m_transitionClass;
     NSTimeInterval m_duration;
 }
 
@@ -32,7 +32,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
  * Push animation style
  * Default value is HLSTransitionStyleNone
  */
-@property (nonatomic, assign) HLSTransitionStyle transitionStyle;
+@property (nonatomic, assign) Class transitionClass;
 
 /**
  * Push animation duration

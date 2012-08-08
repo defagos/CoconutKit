@@ -19,7 +19,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
         self.index = 0;
-        self.transitionStyle = HLSTransitionStyleNone;
+        self.transitionClass = [HLSTransitionNone class];
         self.duration = kAnimationTransitionDefaultDuration;
     }
     return self;
@@ -29,7 +29,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 @synthesize index = m_index;
 
-@synthesize transitionStyle = m_transitionStyle;
+@synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
 
@@ -62,10 +62,10 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
                 self.index = [indexNumber unsignedIntegerValue];
             }
             
-            if (self.transitionStyle != HLSTransitionStyleNone) {
-                HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
-                              "the only style available for view controller preloading");
-                self.transitionStyle = HLSTransitionStyleNone;
+            if (self.transitionClass != [HLSTransitionNone class]) {
+                HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionNone, which is the only style available for "
+                              "view controller preloading");
+                self.transitionClass = [HLSTransitionNone class];
             }
         }
     }
@@ -79,7 +79,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
     
     [placeholderViewController setInsetViewController:self.destinationViewController
                                               atIndex:self.index
-                                  withTransitionStyle:self.transitionStyle 
+                                  withTransitionClass:self.transitionClass
                                              duration:self.duration];
 }
 

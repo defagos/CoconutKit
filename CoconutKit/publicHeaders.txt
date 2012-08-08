@@ -35,7 +35,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
-HLSTransitionStyle.h
+HLSTransition.h
 HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h

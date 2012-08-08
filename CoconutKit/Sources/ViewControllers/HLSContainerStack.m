@@ -9,11 +9,12 @@
 #import "HLSContainerStack.h"
 
 #import "HLSAssert.h"
-#import "HLSContainerAnimation.h"
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
 #import "HLSConverters.h"
+#import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSTransition.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
@@ -47,6 +48,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @interface HLSContainerStack ()
 
++ (HLSAnimation *)transitionAnimationWithClass:(Class)transitionClass
+                                 appearingView:(UIView *)appearingView
+                              disappearingView:(UIView *)disappearingView
+                                        inView:(UIView *)inView
+                                      duration:(NSTimeInterval)duration;
+
 @property (nonatomic, assign) UIViewController *containerViewController;
 @property (nonatomic, retain) NSMutableArray *containerContents;
 @property (nonatomic, assign) NSUInteger capacity;
@@ -72,6 +79,40 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                          capacity:HLSContainerStackMinimalCapacity 
                                                          removing:YES
                                       rootViewControllerMandatory:NO] autorelease];
+}
+
++ (HLSAnimation *)transitionAnimationWithClass:(Class)transitionClass
+                                 appearingView:(UIView *)appearingView
+                              disappearingView:(UIView *)disappearingView
+                                        inView:(UIView *)view
+                                      duration:(NSTimeInterval)duration
+{
+    NSAssert([transitionClass isSubclassOfClass:[HLSTransition class]], @"Transitions must be subclasses of HLSTransition");
+    NSAssert(appearingView.superview == view && disappearingView.superview == view, @"Both the appearing and disappearing views must be "
+             "children of the view in which the transition takes place");
+        
+    // Calculate the exact frame in which the animations will occur (taking into account the transform applied
+    // to the parent view
+    CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
+    
+    // Build the animation (ensure that all parameters are the default ones)
+    HLSAnimation *animation = [[transitionClass class] animationWithAppearingView:appearingView
+                                                                 disappearingView:disappearingView
+                                                                          inFrame:frame];
+    animation.tag = nil;
+    animation.userInfo = nil;
+    animation.resizeViews = NO;
+    animation.lockingUI = NO;
+    animation.bringToFront = NO;
+    animation.delegate = nil;
+    
+    // Generate an animation with the proper duration
+    if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+        return animation;
+    }
+    else {
+        return [animation animationWithDuration:duration];
+    }
 }
 
 #pragma mark Object creation and destruction
@@ -222,13 +263,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 #pragma mark Adding and removing view controllers
 
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated
 {
     [self insertViewController:viewController
                        atIndex:[self.containerContents count] 
-           withTransitionStyle:transitionStyle
+           withTransitionClass:transitionClass
                       duration:duration
                       animated:animated];
 }
@@ -323,7 +364,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)insertViewController:(UIViewController *)viewController 
                      atIndex:(NSUInteger)index 
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle 
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
@@ -361,7 +402,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Associate the new view controller with its container (this increases the containerContents array size)
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController
                                                                          containerViewController:self.containerViewController
-                                                                                 transitionStyle:transitionStyle
+                                                                                 transitionClass:transitionClass
                                                                                         duration:duration] autorelease];
     [self.containerContents insertObject:containerContent atIndex:index];
     
@@ -375,7 +416,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)insertViewController:(UIViewController *)viewController
          belowViewController:(UIViewController *)siblingViewController
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
@@ -386,14 +427,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     [self insertViewController:viewController 
                        atIndex:index 
-           withTransitionStyle:transitionStyle 
+           withTransitionClass:transitionClass
                       duration:duration
                       animated:animated];
 }
 
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)siblingViewController
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
@@ -403,8 +444,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     [self insertViewController:viewController 
-                       atIndex:index + 1 
-           withTransitionStyle:transitionStyle 
+                       atIndex:index + 1
+           withTransitionClass:transitionClass
                       duration:duration
                       animated:animated];
 }
@@ -446,11 +487,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
-        HLSAnimation *animation = [[HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
-                                                                         appearingView:groupView.frontView
-                                                                      disappearingView:groupView.backGroupView
-                                                                                inView:groupView
-                                                                                duration:containerContent.duration] reverseAnimation];
+        HLSAnimation *animation = [[HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
+                                                                     appearingView:groupView.frontView
+                                                                  disappearingView:groupView.backGroupView
+                                                                            inView:groupView
+                                                                          duration:containerContent.duration] reverseAnimation];
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
@@ -651,21 +692,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Play the corresponding animation to put the view into the correct location
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
         HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForContentView:[aboveContainerContent viewIfLoaded]];
-        HLSAnimation *aboveAnimation = [HLSContainerAnimation animationWithTransitionStyle:aboveContainerContent.transitionStyle
-                                                                             appearingView:nil
-                                                                          disappearingView:aboveGroupView.backGroupView
-                                                                                    inView:aboveGroupView
-                                                                                  duration:aboveContainerContent.duration];
+        HLSAnimation *aboveAnimation = [HLSContainerStack transitionAnimationWithClass:aboveContainerContent.transitionClass
+                                                                         appearingView:nil
+                                                                      disappearingView:aboveGroupView.backGroupView
+                                                                                inView:aboveGroupView
+                                                                              duration:aboveContainerContent.duration];
         [aboveAnimation playAnimated:NO];
     }
     
     // Play the corresponding animation so that the view controllers are brought into correct positions
     HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
-    HLSAnimation *animation = [HLSContainerAnimation animationWithTransitionStyle:containerContent.transitionStyle
-                                                                    appearingView:groupView.frontView
-                                                                 disappearingView:groupView.backGroupView
-                                                                           inView:groupView
-                                                                         duration:containerContent.duration];
+    HLSAnimation *animation = [HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
+                                                                appearingView:groupView.frontView
+                                                             disappearingView:groupView.backGroupView
+                                                                       inView:groupView
+                                                                     duration:containerContent.duration];
     if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;

@@ -116,7 +116,6 @@
 		6FADE7CF14BA04B7007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78414BA04B6007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE7D014BA04B7007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78614BA04B6007EE121 /* HLSStackController.m */; };
 		6FADE7D214BA04B7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */; };
-		6FADE7D314BA04B7007EE121 /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78C14BA04B6007EE121 /* HLSTransitionStyle.m */; };
 		6FADE7D414BA04B7007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78E14BA04B6007EE121 /* HLSViewController.m */; };
 		6FADE7D514BA04B7007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE79014BA04B6007EE121 /* HLSWebViewController.m */; };
 		6FADE7D614BA04B7007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE79214BA04B6007EE121 /* HLSWizardViewController.m */; };
@@ -130,7 +129,7 @@
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
 		6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FEEF86814F297F8001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86714F297F8001585A6 /* UIScrollView+HLSExtensions.m */; };
-		6FEFB58215AFDEF70013E940 /* HLSContainerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */; };
+		6FF3E6FC15D2E4F700AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6FB15D2E4F600AB9A53 /* HLSTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,8 +376,6 @@
 		6FADE78614BA04B6007EE121 /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
 		6FADE78914BA04B6007EE121 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
-		6FADE78B14BA04B6007EE121 /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
-		6FADE78C14BA04B6007EE121 /* HLSTransitionStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransitionStyle.m; sourceTree = "<group>"; };
 		6FADE78D14BA04B6007EE121 /* HLSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewController.h; sourceTree = "<group>"; };
 		6FADE78E14BA04B6007EE121 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FADE78F14BA04B6007EE121 /* HLSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWebViewController.h; sourceTree = "<group>"; };
@@ -403,8 +400,8 @@
 		6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FEEF86614F297F7001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FEEF86714F297F8001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FEFB58015AFDEF70013E940 /* HLSContainerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerAnimation.h; sourceTree = "<group>"; };
-		6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerAnimation.m; sourceTree = "<group>"; };
+		6FF3E6FA15D2E4F500AB9A53 /* HLSTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransition.h; sourceTree = "<group>"; };
+		6FF3E6FB15D2E4F600AB9A53 /* HLSTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -821,8 +818,6 @@
 		6FADE77F14BA04B6007EE121 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FEFB58015AFDEF70013E940 /* HLSContainerAnimation.h */,
-				6FEFB58115AFDEF70013E940 /* HLSContainerAnimation.m */,
 				6FADE78114BA04B6007EE121 /* HLSContainerContent.h */,
 				6FADE78214BA04B6007EE121 /* HLSContainerContent.m */,
 				6F8C934315CEE65D006D892C /* HLSContainerGroupView.h */,
@@ -843,8 +838,8 @@
 				6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */,
 				6FADE78914BA04B6007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE78A14BA04B6007EE121 /* HLSTableSearchDisplayViewController.m */,
-				6FADE78B14BA04B6007EE121 /* HLSTransitionStyle.h */,
-				6FADE78C14BA04B6007EE121 /* HLSTransitionStyle.m */,
+				6FF3E6FA15D2E4F500AB9A53 /* HLSTransition.h */,
+				6FF3E6FB15D2E4F600AB9A53 /* HLSTransition.m */,
 				6FADE78D14BA04B6007EE121 /* HLSViewController.h */,
 				6FADE78E14BA04B6007EE121 /* HLSViewController.m */,
 				6FADE78F14BA04B6007EE121 /* HLSWebViewController.h */,
@@ -1070,7 +1065,6 @@
 				6FADE7CF14BA04B7007EE121 /* HLSPlaceholderViewController.m in Sources */,
 				6FADE7D014BA04B7007EE121 /* HLSStackController.m in Sources */,
 				6FADE7D214BA04B7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */,
-				6FADE7D314BA04B7007EE121 /* HLSTransitionStyle.m in Sources */,
 				6FADE7D414BA04B7007EE121 /* HLSViewController.m in Sources */,
 				6FADE7D514BA04B7007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE7D614BA04B7007EE121 /* HLSWizardViewController.m in Sources */,
@@ -1100,9 +1094,9 @@
 				6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */,
 				6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */,
-				6FEFB58215AFDEF70013E940 /* HLSContainerAnimation.m in Sources */,
 				6F8C934515CEE65D006D892C /* HLSContainerGroupView.m in Sources */,
 				6F8C934C15CEF0E6006D892C /* HLSContainerStackView.m in Sources */,
+				6FF3E6FC15D2E4F700AB9A53 /* HLSTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

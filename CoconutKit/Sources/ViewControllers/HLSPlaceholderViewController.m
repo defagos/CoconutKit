@@ -249,22 +249,22 @@
 {
     [self setInsetViewController:insetViewController 
                          atIndex:index
-             withTransitionStyle:HLSTransitionStyleNone];
+             withTransitionClass:[HLSTransitionNone class]];
 }
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+           withTransitionClass:(Class)transitionClass
 {
     [self setInsetViewController:insetViewController 
                          atIndex:index
-             withTransitionStyle:transitionStyle
+             withTransitionClass:transitionClass
                         duration:kAnimationTransitionDefaultDuration];
 }
 
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+           withTransitionClass:(Class)transitionClass
                       duration:(NSTimeInterval)duration
 {
     // Grows up the list of stacks as necessary while the container still can be implicitly resized (that is, when
@@ -296,7 +296,7 @@
     }
     
     [containerStack pushViewController:insetViewController
-                   withTransitionStyle:transitionStyle 
+                   withTransitionClass:transitionClass
                               duration:duration
                               animated:YES];       
 }

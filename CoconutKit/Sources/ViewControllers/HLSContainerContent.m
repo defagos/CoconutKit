@@ -13,6 +13,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSTransition.h"
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
@@ -65,7 +66,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 @property (nonatomic, assign) UIViewController *containerViewController;        // weak ref
 
 @property (nonatomic, assign) HLSContainerStackView *containerStackView;
-@property (nonatomic, assign) HLSTransitionStyle transitionStyle;
+@property (nonatomic, assign) Class transitionClass;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
@@ -100,7 +101,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (id)initWithViewController:(UIViewController *)viewController
      containerViewController:(UIViewController *)containerViewController
-             transitionStyle:(HLSTransitionStyle)transitionStyle
+             transitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
 {
     if ((self = [super init])) {
@@ -115,6 +116,10 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
             @throw [NSException exceptionWithName:NSInvalidArgumentException
                                            reason:@"A container must be provided"
                                          userInfo:nil];
+        }
+        if (! [transitionClass isSubclassOfClass:[HLSTransition class]]) {
+            HLSLoggerWarn(@"Transitions must be subclasses of HLSTransition. No transition animation will be made");
+            transitionClass = [HLSTransition class];
         }
         
         // Cannot be mixed with new iOS 5 containment API (but fully iOS 5 compatible)
@@ -156,7 +161,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
                 
         self.viewController = viewController;
         self.containerViewController = containerViewController;
-        self.transitionStyle = transitionStyle;
+        self.transitionClass = transitionClass;
         self.duration = duration;
         
         self.originalViewFrame = CGRectZero;
@@ -214,7 +219,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     return self.containerStackView != nil;
 }
 
-@synthesize transitionStyle = m_transitionStyle;
+@synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
 

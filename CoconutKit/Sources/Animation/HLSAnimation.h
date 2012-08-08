@@ -7,7 +7,6 @@
 //
 
 #import "HLSAnimationStep.h"
-#import "HLSTransitionStyle.h"
 
 // Forward declarations
 @class HLSAnimationStep;

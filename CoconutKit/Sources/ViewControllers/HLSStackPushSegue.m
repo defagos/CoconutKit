@@ -20,7 +20,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 - (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
-        self.transitionStyle = HLSTransitionStyleNone;
+        self.transitionClass = [HLSTransitionNone class];
         self.duration = kAnimationTransitionDefaultDuration;
         self.animated = YES;
     }
@@ -29,7 +29,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 #pragma mark Accessors and mutators
 
-@synthesize transitionStyle = m_transitionStyle;
+@synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
 
@@ -55,10 +55,10 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
             return;
         }
         
-        if (self.transitionStyle != HLSTransitionStyleNone) {
-            HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
-                          "the only style available for view controller preloading");
-            self.transitionStyle = HLSTransitionStyleNone;
+        if (self.transitionClass != [HLSTransitionNone class]) {
+            HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionNone, which is the only style "
+                          "available for view controller preloading");
+            self.transitionClass = [HLSTransitionNone class];
         }
     }
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
@@ -74,7 +74,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     }
     
     [stackController pushViewController:self.destinationViewController
-                    withTransitionStyle:self.transitionStyle
+                    withTransitionClass:self.transitionClass
                                duration:self.duration
                                animated:self.animated];
 }

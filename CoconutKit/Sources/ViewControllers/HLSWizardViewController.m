@@ -179,38 +179,38 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Find the transition effect to apply
-    HLSTransitionStyle transitionStyle;
+    Class transitionClass;
     switch (self.wizardTransitionStyle) {
         case HLSWizardTransitionStyleNone: {
-            transitionStyle = HLSTransitionStyleNone;
+            transitionClass = [HLSTransitionNone class];
             break;
         }
             
         case HLSWizardTransitionStyleCrossDissolve: {
-            transitionStyle = HLSTransitionStyleCrossDissolve;
+            transitionClass = [HLSTransitionCrossDissolve class];
             break;
         }
             
         case HLSWizardTransitionStylePushHorizontally: {
             if (m_currentPage > oldCurrentPage) {
-                transitionStyle = HLSTransitionStylePushFromRight;
+                transitionClass = [HLSTransitionPushFromRight class];
             }
             else {
-                transitionStyle = HLSTransitionStylePushFromLeft;
+                transitionClass = [HLSTransitionPushFromLeft class];
             }
             break;
         }
             
         default: {
             HLSLoggerError(@"Unknown transition style");
-            transitionStyle = HLSTransitionStyleNone;
+            transitionClass = [HLSTransitionNone class];
             break;
         }            
     }
     
     // Display the current page
     UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
-    [self setInsetViewController:viewController atIndex:0 withTransitionStyle:transitionStyle];
+    [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 
 #pragma mark HLSReloadable protocol implementation

@@ -97,7 +97,7 @@
  * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController 
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   animated:(BOOL)animated;
 
 /**
@@ -109,7 +109,7 @@
  * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated;
 

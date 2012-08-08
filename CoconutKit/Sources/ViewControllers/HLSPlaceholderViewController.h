@@ -7,7 +7,6 @@
 //
 
 #import "HLSContainerStack.h"
-#import "HLSTransitionStyle.h"
 #import "HLSViewController.h"
 
 // Forward declarations
@@ -135,7 +134,7 @@
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle;
+           withTransitionClass:(Class)transitionClass;
 
 /**
  * Display an inset view controller using one of the available built-in transition styles, on the placeholder view
@@ -148,7 +147,7 @@
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionStyle:(HLSTransitionStyle)transitionStyle
+           withTransitionClass:(Class)transitionClass
                       duration:(NSTimeInterval)duration;
 
 /**

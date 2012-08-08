@@ -45,7 +45,7 @@
     #import "HLSTaskOperation.h"
     #import "HLSTaskOperation+Protected.h"
     #import "HLSTextField.h"
-    #import "HLSTransitionStyle.h"
+    #import "HLSTransition.h"
     #import "HLSUserInterfaceLock.h"
     #import "HLSValidable.h"
     #import "HLSValidators.h"

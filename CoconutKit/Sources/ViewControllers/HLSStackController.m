@@ -36,7 +36,7 @@
                                                               rootViewControllerMandatory:YES] autorelease];
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
-                            withTransitionStyle:HLSTransitionStyleNone 
+                            withTransitionClass:[HLSTransitionNone class]
                                        duration:0.
                                        animated:NO];
     }
@@ -219,27 +219,27 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     [self pushViewController:viewController 
-         withTransitionStyle:HLSTransitionStyleNone
+         withTransitionClass:[HLSTransitionNone class]
                     animated:animated];
 }
 
 - (void)pushViewController:(UIViewController *)viewController 
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   animated:(BOOL)animated
 {
     [self pushViewController:viewController 
-         withTransitionStyle:transitionStyle
+         withTransitionClass:transitionClass
                     duration:kAnimationTransitionDefaultDuration
                     animated:animated];
 }
 
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated
 {
     [self.containerStack pushViewController:viewController
-                        withTransitionStyle:transitionStyle 
+                        withTransitionClass:transitionClass
                                    duration:duration
                                    animated:animated];
 }

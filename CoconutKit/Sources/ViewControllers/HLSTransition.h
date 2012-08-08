@@ -1,10 +1,14 @@
 //
-//  HLSTransitionStyle.h
+//  HLSTransitions.h
 //  CoconutKit
 //
-//  Created by Samuel Défago on 22.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Created by Samuel Défago on 8/8/12.
+//  Copyright (c) 2012 Hortis. All rights reserved.
 //
+
+#import "HLSAnimation.h"
+
+#if 0
 
 typedef enum {
     HLSTransitionStyleEnumBegin = 0,
@@ -47,6 +51,134 @@ typedef enum {
     HLSTransitionStyleEnumSize = HLSTransitionStyleEnumEnd - HLSTransitionStyleEnumBegin
 } HLSTransitionStyle;
 
+#endif
+
 // Default duration for a transition animation. This is a reserved value and does not correspond to any meaningful
 // duration
 extern const NSTimeInterval kAnimationTransitionDefaultDuration;
+
+@interface HLSTransition : NSObject
+
+// TODO: Define string identifier constants here for built-in types
+
+/**
+ * Returns an array of string identifiers for the available transitions
+ * TODO: Use runtime.h to find all subclasses
+ */
++ (NSArray *)availableTransitions;
+
+/**
+ * Subclasses must override this method
+ * TODO: When called, must ensure that appearing and disappearing views belong to the
+ *       view
+ */
++ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+                            disappearingView:(UIView *)disappearingView
+                                     inFrame:(CGRect)frame;
+
+@end
+
+/**
+ * Standard transitions
+ */
+@interface HLSTransitionNone : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromBottom : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTop : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromLeft : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromRight : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTopLeft : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTopRight : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromBottomLeft : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromBottomRight : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromBottom2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTop2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromLeft2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromRight2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTopLeft2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromTopRight2 : HLSTransition
+@end
+
+@interface HLSTransitionCoverFromBottomLeft2 : HLSTransition
+@end
+
+@interface HLSTransitionFadeIn : HLSTransition
+@end
+
+@interface HLSTransitionFadeIn2 : HLSTransition
+@end
+
+@interface HLSTransitionCrossDissolve : HLSTransition
+@end
+
+@interface HLSTransitionPushFromBottom : HLSTransition
+@end
+
+@interface HLSTransitionPushFromTop : HLSTransition
+@end
+
+@interface HLSTransitionPushFromLeft : HLSTransition
+@end
+
+@interface HLSTransitionPushFromRight : HLSTransition
+@end
+
+@interface HLSTransitionPushFromBottomFadeIn : HLSTransition
+@end
+
+@interface HLSTransitionPushFromTopFadeIn : HLSTransition
+@end
+
+@interface HLSTransitionPushFromLeftFadeIn : HLSTransition
+@end
+
+@interface HLSTransitionPushFromRightFadeIn : HLSTransition
+@end
+
+@interface HLSTransitionFlowFromBottom : HLSTransition
+@end
+
+@interface HLSTransitionFlowFromTop : HLSTransition
+@end
+
+@interface HLSTransitionFlowFromLeft : HLSTransition
+@end
+
+@interface HLSTransitionFlowFromRight : HLSTransition
+@end
+
+@interface HLSTransitionEmergeFromCenter : HLSTransition
+@end
+
+@interface HLSTransitionFlipVertical : HLSTransition
+@end
+
+@interface HLSTransitionFlipHorizontal : HLSTransition
+@end

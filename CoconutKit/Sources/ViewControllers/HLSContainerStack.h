@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSAnimation.h"
-#import "HLSTransitionStyle.h"
+#import "HLSTransition.h"
 
 // Forward declarations
 @protocol HLSContainerStackDelegate;
@@ -90,7 +89,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
  */
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionStyle:(HLSTransitionStyle)transitionStyle
+       withTransitionClass:(Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated;
 
@@ -108,17 +107,17 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 // TODO: Document special values (cnt - 1, integermax)
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
          belowViewController:(UIViewController *)siblingViewController
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)siblingViewController
-         withTransitionStyle:(HLSTransitionStyle)transitionStyle
+         withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 

@@ -9,7 +9,6 @@
 #import "HLSAnimation.h"
 #import "HLSContainerStackView.h"
 #import "HLSContainerStack.h"
-#import "HLSTransitionStyle.h"
 #import "UIViewController+HLSExtensions.h"
 
 /**
@@ -66,7 +65,7 @@
 @private
     UIViewController *m_viewController;
     UIViewController *m_containerViewController;
-    HLSTransitionStyle m_transitionStyle;
+    Class m_transitionClass;
     NSTimeInterval m_duration;
     HLSContainerStackView *m_containerStackView;
     BOOL m_addedToContainerView;
@@ -87,7 +86,7 @@
  */
 - (id)initWithViewController:(UIViewController *)viewController
      containerViewController:(UIViewController *)containerViewController
-             transitionStyle:(HLSTransitionStyle)transitionStyle
+             transitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration;
 
 /**
@@ -106,7 +105,7 @@
 /**
  * The transition properties to be applied when the view controller's view is displayed
  */
-@property (nonatomic, readonly, assign) HLSTransitionStyle transitionStyle;
+@property (nonatomic, readonly, assign) Class transitionClass;
 @property (nonatomic, readonly, assign) NSTimeInterval duration;
 
 /**
