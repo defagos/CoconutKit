@@ -14,7 +14,6 @@
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
-#import "HLSTransition.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
 #import "HLSTransition.h"
 
 // Forward declarations

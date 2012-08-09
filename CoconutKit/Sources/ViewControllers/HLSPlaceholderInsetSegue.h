@@ -42,7 +42,7 @@ extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 
 /**
  * Push animation style
- * Default value is HLSTransitionStyleNone
+ * Default value is [HLSTransitionNone class]
  */
 @property (nonatomic, assign) Class transitionClass;
 

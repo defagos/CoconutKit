@@ -17,8 +17,6 @@
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
-// TODO: Instead of a container view controller, we should not assume the container is a view controller, just an id
-
 // Keys for runtime container - view controller / view object association
 static void *s_containerContentKey = &s_containerContentKey;
 

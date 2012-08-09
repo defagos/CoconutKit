@@ -30,7 +30,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
 
 /**
  * Push animation style
- * Default value is HLSTransitionStyleNone
+ * Default value is HLSTransitionNone
  */
 @property (nonatomic, assign) Class transitionClass;
 
