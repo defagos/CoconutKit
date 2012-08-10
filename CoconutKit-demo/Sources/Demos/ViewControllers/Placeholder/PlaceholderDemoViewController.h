@@ -29,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
+- (IBAction)displayContainmentTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;
 - (IBAction)displayFixedSize:(id)sender;
 - (IBAction)displayHeavy:(id)sender;

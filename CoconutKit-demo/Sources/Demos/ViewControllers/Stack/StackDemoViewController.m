@@ -8,15 +8,16 @@
 
 #import "StackDemoViewController.h"
 
+#import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
 #import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
+#import "RootStackDemoViewController.h"
 #import "StretchableViewController.h"
 #import "TransparentViewController.h"
-#import "RootStackDemoViewController.h"
 
 @interface StackDemoViewController ()
 
@@ -134,6 +135,12 @@
 {
     LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [self displayContentViewController:lifecycleTestViewController];
+}
+
+- (IBAction)displayContainmentTest:(id)sender
+{
+    ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+    [self displayContentViewController:containmentTestViewController];
 }
 
 - (IBAction)displayStretchable:(id)sender

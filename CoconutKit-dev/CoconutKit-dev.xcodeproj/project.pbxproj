@@ -421,6 +421,10 @@
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
+		6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0025515D5463C00375240 /* ContainmentTestViewController.m */; };
+		6FD0025815D5463C00375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0025515D5463C00375240 /* ContainmentTestViewController.m */; };
+		6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
+		6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
@@ -809,6 +813,9 @@
 		6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6FD0025415D5463C00375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
+		6FD0025515D5463C00375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
+		6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
 		6FDDEC141529777500CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDDEC201529781300CED462 /* UITextView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -1398,6 +1405,7 @@
 		6FADE7F914BA04C8007EE121 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6FD0025315D5463C00375240 /* ContainmentTestViewController */,
 				6FADE7FE14BA04C8007EE121 /* FixedSizeViewController */,
 				6FADE80314BA04C8007EE121 /* HeavyViewController */,
 				6FADE80714BA04C8007EE121 /* LandscapeOnlyViewController */,
@@ -1727,6 +1735,16 @@
 			path = ParallaxScrolling;
 			sourceTree = "<group>";
 		};
+		6FD0025315D5463C00375240 /* ContainmentTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FD0025415D5463C00375240 /* ContainmentTestViewController.h */,
+				6FD0025515D5463C00375240 /* ContainmentTestViewController.m */,
+				6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */,
+			);
+			path = ContainmentTestViewController;
+			sourceTree = "<group>";
+		};
 		6FDB126B1404D19E00469DEC /* CoconutKit-demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1945,6 +1963,7 @@
 				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */,
+				6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2021,6 +2040,7 @@
 				6F159AAF15A554250020AFAC /* skyscraper.jpg in Resources */,
 				6F159AB015A554250020AFAC /* LabelDemoViewController.xib in Resources */,
 				6F159AB115A554250020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
+				6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2199,6 +2219,7 @@
 				6F8C934F15CEF0F8006D892C /* HLSContainerStackView.m in Sources */,
 				6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */,
 				6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2345,6 +2366,7 @@
 				6F8C935015CEF0F8006D892C /* HLSContainerStackView.m in Sources */,
 				6FF3E6F815D2E4E300AB9A53 /* HLSTransition.m in Sources */,
 				6FF3E71D15D3801600AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025815D5463C00375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

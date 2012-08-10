@@ -8,6 +8,7 @@
 
 #import "PlaceholderDemoViewController.h"
 
+#import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
@@ -148,6 +149,23 @@
         LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [self displayInsetViewController:lifecycleTestViewController atIndex:1];
     }
+}
+
+- (IBAction)displayContainmentTest:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:1];
+    }    
 }
 
 - (IBAction)displayStretchable:(id)sender

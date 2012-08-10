@@ -263,6 +263,10 @@
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
+		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
+		6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
+		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
+		6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
@@ -475,6 +479,9 @@
 		6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6FD0024C15D5463200375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
+		6FD0024D15D5463200375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
+		6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -693,6 +700,7 @@
 		6F9C45A414C5C30B00824AB2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6FD0024B15D5463200375240 /* ContainmentTestViewController */,
 				6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */,
 				6F9C45AE14C5C30B00824AB2 /* HeavyViewController */,
 				6F9C45B214C5C30B00824AB2 /* LandscapeOnlyViewController */,
@@ -1150,6 +1158,16 @@
 			path = ParallaxScrolling;
 			sourceTree = "<group>";
 		};
+		6FD0024B15D5463200375240 /* ContainmentTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FD0024C15D5463200375240 /* ContainmentTestViewController.h */,
+				6FD0024D15D5463200375240 /* ContainmentTestViewController.m */,
+				6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */,
+			);
+			path = ContainmentTestViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -1318,6 +1336,7 @@
 				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
+				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,6 +1411,7 @@
 				6F159BCB15A55CD10020AFAC /* LabelDemoViewController.xib in Resources */,
 				6F159BCC15A55CD10020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6F159C3715A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
+				6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1488,6 +1508,7 @@
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
 				6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1552,6 +1573,7 @@
 				6F159B8715A55CD10020AFAC /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F159C3515A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
 				6FF3E71815D37FB900AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

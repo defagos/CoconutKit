@@ -23,6 +23,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
+- (IBAction)displayContainmentTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;
 - (IBAction)displayFixedSize:(id)sender;
 - (IBAction)displayPortraitOnly:(id)sender;

@@ -151,7 +151,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 @protocol HLSContainerStackDelegate <NSObject>
 
 /**
- * Called before viewController is added to [containerStack viewControllers]
+ * Called before viewController is added to [containerStack viewControllers] (before the parent-child containment
+ * relationship is established)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
 willPushViewController:(UIViewController *)pushedViewController
@@ -192,7 +193,8 @@ willHideViewController:(UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
- * When called, viewController has been removed from [containerStack viewControllers]
+ * When called, viewController has been removed from [containerStack viewControllers] (and the parent-child containment
+ * relationship has been removed)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
   didPopViewController:(UIViewController *)poppedViewController
