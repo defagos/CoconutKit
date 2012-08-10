@@ -147,15 +147,6 @@
  */
 - (NSArray *)viewControllers;
 
-/**
- * If set to YES, properties of the top view controller (title, navigation item, toolbar) are forwarded to the stack 
- * controller. When inserted into a navigation controller, the stack view controller thus behaves as if its top view 
- * controller has been directly pushed into it.
- *
- * Default value is NO.
- */
-@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
-
 @property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
 
 @end

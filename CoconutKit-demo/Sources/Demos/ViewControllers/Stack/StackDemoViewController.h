@@ -14,14 +14,12 @@
     UIPickerView *m_transitionPickerView;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
-    UISwitch *m_forwardingPropertiesSwitch;
     UISwitch *m_animatedSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
@@ -37,7 +35,6 @@
 - (IBAction)pop:(id)sender;
 - (IBAction)popToRoot:(id)sender;
 - (IBAction)popThree:(id)sender;
-- (IBAction)toggleForwardingProperties:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;
 - (IBAction)navigateBackNonAnimated:(id)sender;

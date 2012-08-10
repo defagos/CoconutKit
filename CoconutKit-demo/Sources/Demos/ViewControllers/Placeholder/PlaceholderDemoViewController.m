@@ -63,7 +63,6 @@
     self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
-    self.forwardingPropertiesSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
 }
@@ -77,8 +76,6 @@
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
-
-@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 @synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
 
@@ -96,7 +93,6 @@
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
-    self.forwardingPropertiesSwitch.on = self.forwardingProperties;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
     
@@ -306,11 +302,6 @@
         ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
         [self displayInsetViewController:containerCustomizationViewController atIndex:1];
     }
-}
-
-- (IBAction)toggleForwardingProperties:(id)sender
-{
-    self.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 
 - (IBAction)togglePlaceholder:(id)sender

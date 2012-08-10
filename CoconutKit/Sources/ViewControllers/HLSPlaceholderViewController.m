@@ -66,18 +66,6 @@
 
 @synthesize placeholderViews = m_placeholderViews;
 
-- (BOOL)isForwardingProperties
-{
-    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
-    return firstContainerStack.forwardingProperties;
-}
-
-- (void)setForwardingProperties:(BOOL)forwardingProperties
-{
-    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
-    firstContainerStack.forwardingProperties = forwardingProperties;
-}
-
 @synthesize delegate = m_delegate;
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index

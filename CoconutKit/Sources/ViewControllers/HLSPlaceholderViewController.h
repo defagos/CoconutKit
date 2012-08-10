@@ -171,15 +171,6 @@
  */
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
 
-/**
- * If set to YES, properties of the first inset view controller (title, navigation item, toolbar) are forwarded to the 
- * placeholder view controller. When inserted into a navigation controller, the placeholder view controller thus behaves 
- * as if its first inset view controller had been directly pushed into it.
- *
- * Default value is NO.
- */
-@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
-
 @property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 @end

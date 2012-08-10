@@ -233,31 +233,6 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     }
 }
 
-@synthesize forwardingProperties = m_forwardingProperties;
-
-- (void)setForwardingProperties:(BOOL)forwardingProperties
-{
-    if (m_forwardingProperties == forwardingProperties) {
-        return;
-    }
-    
-    m_forwardingProperties = forwardingProperties;
-    
-    // Performs initial sync
-    if (forwardingProperties) {
-        self.containerViewController.title = self.viewController.title;
-        self.containerViewController.navigationItem.title = self.viewController.navigationItem.title;
-        self.containerViewController.navigationItem.backBarButtonItem = self.viewController.navigationItem.backBarButtonItem;
-        self.containerViewController.navigationItem.titleView = self.viewController.navigationItem.titleView;
-        self.containerViewController.navigationItem.prompt = self.viewController.navigationItem.prompt;
-        self.containerViewController.navigationItem.hidesBackButton = self.viewController.navigationItem.hidesBackButton;
-        self.containerViewController.navigationItem.leftBarButtonItem = self.viewController.navigationItem.leftBarButtonItem;
-        self.containerViewController.navigationItem.rightBarButtonItem = self.viewController.navigationItem.rightBarButtonItem;
-        self.containerViewController.toolbarItems = self.viewController.toolbarItems;
-        self.containerViewController.hidesBottomBarWhenPushed = self.viewController.hidesBottomBarWhenPushed;
-    }
-}
-
 @synthesize originalViewFrame = m_originalViewFrame;
 
 @synthesize originalViewAlpha = m_originalViewAlpha;
@@ -445,14 +420,13 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; viewIfLoaded: %@; forwardingProperties: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; viewIfLoaded: %@>",
             [self class],
             self,
             self.viewController,
             self.containerViewController,
             HLSStringFromBool(self.addedToContainerView),
-            [self viewIfLoaded],
-            HLSStringFromBool(self.forwardingProperties)];
+            [self viewIfLoaded]];
 }
 
 @end
@@ -480,7 +454,7 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
     s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
                                                                                         @selector(setToolbarItems:), 
                                                                                         (IMP)swizzled_UIViewController__void_mutator_id_Imp);
-    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
+    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self,
                                                                                                        @selector(setToolbarItems:animated:), 
                                                                                                        (IMP)swizzled_UIViewController__void_mutator_id_BOOL_Imp);
     
@@ -546,13 +520,13 @@ static id swizzled_UIViewController__id_forward_accessor_Imp(UIViewController *s
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
     }
     
-    // Forwarding only makes sense if the controller itself is a view controller; if not, call original implementation
-    if (containerContent.forwardingProperties) {
-        // Call the same method, but on the container. This handles view controller nesting correctly
-        return swizzled_UIViewController__id_forward_accessor_Imp(containerContent.containerViewController, _cmd);
-    }
-    else {
+    // iOS 5: The view controller chain is automatically guaranteed when we called -addChildViewController:
+    if ([self respondsToSelector:@selector(addChildViewController:)]) {
         return UIViewControllerMethod(self, _cmd);
+    }
+    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
+    else {
+        return swizzled_UIViewController__id_forward_accessor_Imp(containerContent.containerViewController, _cmd);
     }
 }
 
@@ -575,11 +549,12 @@ static void swizzled_UIViewController__void_mutator_id_Imp(UIViewController *sel
     // Call the setter on the view controller first
     UIViewControllerMethod(self, _cmd, value);
     
-    // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent.forwardingProperties) {
-        // Call the same method, but on the container. This handles view controller nesting correctly
+#if 0
+    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
+    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
         swizzled_UIViewController__void_mutator_id_Imp(containerContent.containerViewController, _cmd, value);
     }
+#endif
 }
 
 static void swizzled_UIViewController__void_mutator_BOOL_Imp(UIViewController *self, SEL _cmd, BOOL value)
@@ -598,11 +573,12 @@ static void swizzled_UIViewController__void_mutator_BOOL_Imp(UIViewController *s
     // Call the setter on the view controller first
     UIViewControllerMethod(self, _cmd, value);
     
-    // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent.forwardingProperties) {
-        // Call the same method, but on the container. This handles view controller nesting correctly
+#if 0
+    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
+    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
         swizzled_UIViewController__void_mutator_BOOL_Imp(containerContent.containerViewController, _cmd, value);
     }
+#endif
 }
 
 static void swizzled_UIViewController__void_mutator_id_BOOL_Imp(UIViewController *self, SEL _cmd, id value1, BOOL value2)
@@ -621,14 +597,15 @@ static void swizzled_UIViewController__void_mutator_id_BOOL_Imp(UIViewController
     // Call the setter on the view controller first
     UIViewControllerMethod(self, _cmd, value1, value2);
     
-    // Also set the title of the container controller if it is a view controller and forwarding is enabled
-    if (containerContent.forwardingProperties) {
-        // Call the same method, but on the container. This handles view controller nesting correctly
+#if 0
+    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
+    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
         swizzled_UIViewController__void_mutator_id_BOOL_Imp(containerContent.containerViewController, _cmd, value1, value2);
     }
+#endif
 }
 
-static void swizzled_UIViewController__presentViewController_animated_completion_Imp(UIViewController *self, SEL _cmd, UIViewController *viewControllerToPresent, 
+static void swizzled_UIViewController__presentViewController_animated_completion_Imp(UIViewController *self, SEL _cmd, UIViewController *viewControllerToPresent,
                                                                                      BOOL flag, void (^completion)(void))
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);

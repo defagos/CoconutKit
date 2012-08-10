@@ -71,7 +71,6 @@
     BOOL m_addedToContainerView;
     CGRect m_originalViewFrame;
     UIViewAutoresizing m_originalAutoresizingMask;
-    BOOL m_forwardingProperties;
 }
 
 /**
@@ -165,12 +164,5 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
-
-/**
- * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
- * are forwarded through the container controller if the container is iteslf a view controller. This makes it possible
- * to display those elements transparently higher up in the view controller hierarchy
- */
-@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @end

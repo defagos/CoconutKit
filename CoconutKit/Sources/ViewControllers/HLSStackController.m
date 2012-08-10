@@ -101,16 +101,6 @@
     m_capacity = capacity;
 }
 
-- (BOOL)isForwardingProperties
-{
-    return self.containerStack.forwardingProperties;
-}
-
-- (void)setForwardingProperties:(BOOL)forwardingProperties
-{
-    self.containerStack.forwardingProperties = forwardingProperties;
-}
-
 @synthesize delegate = m_delegate;
 
 - (UIViewController *)rootViewController

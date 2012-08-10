@@ -15,7 +15,6 @@
     UIPickerView *m_transitionPickerView;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
-    UISwitch *m_forwardingPropertiesSwitch;
     UISwitch *m_leftPlaceholderSwitch;
     UISwitch *m_rightPlaceholderSwitch;
     HeavyViewController *m_leftHeavyViewController;
@@ -26,7 +25,6 @@
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
 
@@ -40,7 +38,6 @@
 - (IBAction)hideWithModal:(id)sender;
 - (IBAction)displayOrientationCloner:(id)sender;
 - (IBAction)displayContainerCustomization:(id)sender;
-- (IBAction)toggleForwardingProperties:(id)sender;
 - (IBAction)togglePlaceholder:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;

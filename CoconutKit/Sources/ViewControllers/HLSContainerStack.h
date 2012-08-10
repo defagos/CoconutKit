@@ -41,7 +41,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     NSUInteger m_capacity;
     BOOL m_removing;
     BOOL m_rootViewControllerMandatory;
-    BOOL m_forwardingProperties;
     id<HLSContainerStackDelegate> m_delegate;
 }
 
@@ -62,13 +61,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 // TODO: Prevent from being changed after the view has been displayed
 @property (nonatomic, strong) UIView *containerView;
-
-/**
- * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
- * are forwarded through the container controller if the container is iteslf a view controller. This makes it possible
- * to display those elements transparently higher up in the view controller hierarchy
- */
-@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
 
 @property (nonatomic, assign) id<HLSContainerStackDelegate> delegate;
 

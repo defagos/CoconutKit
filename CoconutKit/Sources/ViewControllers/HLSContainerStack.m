@@ -11,7 +11,6 @@
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
-#import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
@@ -197,20 +196,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     m_capacity = capacity;
-}
-
-@synthesize forwardingProperties = m_forwardingProperties;
-
-- (void)setForwardingProperties:(BOOL)forwardingProperties
-{
-    if (m_forwardingProperties == forwardingProperties) {
-        return;
-    }
-    
-    m_forwardingProperties = forwardingProperties;
-    
-    HLSContainerContent *topContainerContent = [self topContainerContent];
-    topContainerContent.forwardingProperties = m_forwardingProperties;
 }
 
 @synthesize delegate = m_delegate;
@@ -500,8 +485,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     else {
         [self.containerContents removeObjectAtIndex:index];
-        
-        [self topContainerContent].forwardingProperties = YES;
     }
 }
 
@@ -742,13 +725,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             appearingContainerContent = [self secondTopContainerContent];
             disappearingContainerContent = [self topContainerContent];
         }
-        
-        // During the time the animation is running, we ensure that if forwarding is enabled the two top view controllers forward their
-        // properties. This is made on purpose: This way, implementers of viewWill* and viewDid* methods will still get access to the 
-        // correct properties through forwarding. Only at the end of the animation will the top view controller be the only one
-        // forwarding properties
-        appearingContainerContent.forwardingProperties = self.forwardingProperties;
-        
+                
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
@@ -780,13 +757,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-        
-        // Only the view controller which appears must remain forwarding properties (if enabled) after the animation
-        // has ended. Note that disabling forwarding for the disappearing view controller is made after viewDidDisappear:
-        // has been called for it. This way, implementations of viewDidDisappear: can still access the forwarded
-        // properties
-        disappearingContainerContent.forwardingProperties = NO;
-        
+                
         [appearingContainerContent viewDidAppear:animated];
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
@@ -832,13 +803,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; containerViewController: %@; containerContents: %@; containerView: %@; forwardingProperties: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; containerViewController: %@; containerContents: %@; containerView: %@>",
             [self class],
             self,
             self.containerViewController,
             self.containerContents,
-            self.containerView,
-            HLSStringFromBool(self.forwardingProperties)];
+            self.containerView];
 }
 
 @end

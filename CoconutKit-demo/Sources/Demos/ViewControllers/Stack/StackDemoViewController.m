@@ -65,7 +65,6 @@
         
         
         [self setInsetViewController:stackController atIndex:0];
-        self.forwardingProperties = YES;
     }
     return self;
 }
@@ -77,7 +76,6 @@
     self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
-    self.forwardingPropertiesSwitch = nil;
     self.animatedSwitch = nil;
 }
 
@@ -88,8 +86,6 @@
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
-
-@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
@@ -102,11 +98,8 @@
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
-    self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -228,12 +221,6 @@
         targetViewController = [stackController rootViewController];
     }
     [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
-}
-
-- (IBAction)toggleForwardingProperties:(id)sender
-{
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
 }
 
 - (IBAction)navigateForwardNonAnimated:(id)sender
