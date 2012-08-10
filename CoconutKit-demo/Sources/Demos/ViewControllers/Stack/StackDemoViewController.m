@@ -321,7 +321,7 @@
 {
     [super localize];
     
-    // Just to suppress localization warning
+    self.title = @"HLSStackController";
 }
 
 @end

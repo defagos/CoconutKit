@@ -21,42 +21,10 @@
 static void *s_containerContentKey = &s_containerContentKey;
 
 // Original implementation of the methods we swizzle
-static id (*s_UIViewController__navigationController_Imp)(id, SEL) = NULL;
-static id (*s_UIViewController__navigationItem_Imp)(id, SEL) = NULL;
-static id (*s_UIViewController__interfaceOrientation_Imp)(id, SEL) = NULL;
-
-static void (*s_UIViewController__setTitle_Imp)(id, SEL, id) = NULL;
-static void (*s_UIViewController__setHidesBottomBarWhenPushed_Imp)(id, SEL, BOOL) = NULL;
-static void (*s_UIViewController__setToolbarItems_Imp)(id, SEL, id) = NULL;
-static void (*s_UIViewController__setToolbarItems_animated_Imp)(id, SEL, id, BOOL) = NULL;
-
-// All presentModal... and dismissModal... methods must be swizzled so that the embedding container deals with modal view controllers
-// (otherwise we would get a silly buggy behavior when managing modal view controllers from within a view controller itself embedded
-// into a container)
-static void (*s_UIViewController__presentViewController_animated_completion_Imp)(id, SEL, id, BOOL, void (^)(void)) = NULL;
-static void (*s_UIViewController__dismissViewControllerAnimated_completion_Imp)(id, SEL, BOOL, void (^)(void)) = NULL;
-static void (*s_UIViewController__presentModalViewController_animated_Imp)(id, SEL, id, BOOL) = NULL;
-static void (*s_UIViewController__dismissModalViewControllerAnimated_Imp)(id, SEL, BOOL) = NULL;
-
-// Remark: We cannot swizzle parentViewController to return the container (see .h file to know why). There is also
-//         no need to swizzle presentingViewControlller since the present... methods have been swizzled
-static id (*s_UIViewController__modalViewController_Imp)(id, SEL) = NULL;
-static id (*s_UIViewController__presentedViewController_Imp)(id, SEL) = NULL;
+static id (*s_UIViewController__parentViewController_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UIViewController__id_accessor_Imp(UIViewController *self, SEL _cmd);
-static id swizzled_UIViewController__id_forward_accessor_Imp(UIViewController *self, SEL _cmd);
-static void swizzled_UIViewController__void_mutator_id_Imp(UIViewController *self, SEL _cmd, id value);
-static void swizzled_UIViewController__void_mutator_BOOL_Imp(UIViewController *self, SEL _cmd, BOOL value);
-static void swizzled_UIViewController__void_mutator_id_BOOL_Imp(UIViewController *self, SEL _cmd, id value1, BOOL value2);
-
-static void swizzled_UIViewController__presentViewController_animated_completion_Imp(UIViewController *self, SEL _cmd, UIViewController *viewControllerToPresent, 
-                                                                                     BOOL flag, void (^completion)(void));
-static void swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp(UIViewController *self, SEL _cmd, BOOL flag, void (^completion)(void));
-static void swizzled_UIViewController__presentModalViewController_animated_Imp(UIViewController *self, SEL _cmd, UIViewController *modalViewController, BOOL animated);
-static void swizzled_UIViewController__dismissModalViewControllerAnimated_Imp(UIViewController *self, SEL _cmd, BOOL animated);
-static UIViewController *swizzled_UIViewController__modalViewController_Imp(UIViewController *self, SEL _cmd);
-static UIViewController *swizzled_UIViewController__presentedViewController_Imp(UIViewController *self, SEL _cmd);
+static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -153,7 +121,8 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
         //   - non-top view controllers get viewWillAppear: and viewDidAppear: events
         //   - the top view controller gets each of these events twice (once from UIKit internals, and once
         //     through manual forwarding by the container implementation)
-        if ([containerViewController respondsToSelector:@selector(addChildViewController:)]) {
+        // Warning: Cannot test -addChildViewController: existence since it existed as a private method before iOS 5
+        if ([containerViewController respondsToSelector:@selector(removeFromParentViewController)]) {
             [containerViewController addChildViewController:viewController];
         }
                 
@@ -435,240 +404,29 @@ static UIViewController *swizzled_UIViewController__presentedViewController_Imp(
 
 + (void)load
 {
-    s_UIViewController__navigationController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                       @selector(navigationController), 
-                                                                                       (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
-    s_UIViewController__navigationItem_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                 @selector(navigationItem), 
-                                                                                 (IMP)swizzled_UIViewController__id_forward_accessor_Imp);
-    s_UIViewController__interfaceOrientation_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                       @selector(interfaceOrientation), 
-                                                                                       (IMP)swizzled_UIViewController__id_accessor_Imp);
-    
-    s_UIViewController__setTitle_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                 @selector(setTitle:), 
-                                                                                 (IMP)swizzled_UIViewController__void_mutator_id_Imp);
-    s_UIViewController__setHidesBottomBarWhenPushed_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self,
-                                                                                                      @selector(setHidesBottomBarWhenPushed:), 
-                                                                                                      (IMP)swizzled_UIViewController__void_mutator_BOOL_Imp);
-    s_UIViewController__setToolbarItems_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                        @selector(setToolbarItems:), 
-                                                                                        (IMP)swizzled_UIViewController__void_mutator_id_Imp);
-    s_UIViewController__setToolbarItems_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self,
-                                                                                                       @selector(setToolbarItems:animated:), 
-                                                                                                       (IMP)swizzled_UIViewController__void_mutator_id_BOOL_Imp);
-    
-    // The two methods with blocks are only available starting with iOS 5. If we are running on a prior iOS version, their swizzling is a no-op
-    s_UIViewController__presentViewController_animated_completion_Imp = (void (*)(id, SEL, id, BOOL, void (^)(void)))HLSSwizzleSelector(self,
-                                                                                                                                        @selector(presentViewController:animated:completion:), 
-                                                                                                                                        (IMP)swizzled_UIViewController__presentViewController_animated_completion_Imp);
-    s_UIViewController__dismissViewControllerAnimated_completion_Imp = (void (*)(id, SEL, BOOL, void (^)(void)))HLSSwizzleSelector(self,
-                                                                                                                                   @selector(dismissViewControllerAnimated:completion:), 
-                                                                                                                                   (IMP)swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp);
-    s_UIViewController__presentModalViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
-                                                                                                                  @selector(presentModalViewController:animated:), 
-                                                                                                                  (IMP)swizzled_UIViewController__presentModalViewController_animated_Imp);
-    s_UIViewController__dismissModalViewControllerAnimated_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
-                                                                                                             @selector(dismissModalViewControllerAnimated:), 
-                                                                                                             (IMP)swizzled_UIViewController__dismissModalViewControllerAnimated_Imp);
-    s_UIViewController__modalViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                      @selector(modalViewController), 
-                                                                                      (IMP)swizzled_UIViewController__modalViewController_Imp);
-    s_UIViewController__presentedViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                          @selector(presentedViewController), 
-                                                                                          (IMP)swizzled_UIViewController__presentedViewController_Imp);
+    // iOS 4: Private -addChildViewController: and -removeChildViewController: methods exist to define parent-child containment relationships.
+    //        These make the public -parentViewController return the parent container of a view controller (if any), providing correct propagation
+    //        for several view controller properties (e.g. embedding in a navigation controller, correct value for interfaceOrientation, etc.).
+    //        Note that the -addChildViewController: method has been made public in iOS 5, but that the -removeChildViewController: method has been
+    //        replaced with the new -removeFromParentViewController
+    // To test whether we are running iOS 4, we therefore can test whether -removeFromParentViewController exists
+    if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
+        s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                           @selector(parentViewController),
+                                                                                           (IMP)swizzled_UIViewController__parentViewController_Imp);
+    }
 }
 
 @end
 
-#pragma mark Swizzled method implementations
-
-static id swizzled_UIViewController__id_accessor_Imp(UIViewController *self, SEL _cmd)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    
-    // We cannot not forward parentViewController (see why in the .h documentation), we must therefore swizzle
-    // interfaceOrientation to fix its behavior
-    if (_cmd == @selector(interfaceOrientation)) {
-        if (containerContent) {
-            // Call the same method, but on the container. This handles view controller nesting correctly
-            return swizzled_UIViewController__id_accessor_Imp(containerContent.containerViewController, _cmd);
-        }
-        else {
-            return s_UIViewController__interfaceOrientation_Imp(self, _cmd);
-        }
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property getter (%@)", NSStringFromSelector(_cmd)];
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }    
-}
-
-static id swizzled_UIViewController__id_forward_accessor_Imp(UIViewController *self, SEL _cmd)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    
-    id (*UIViewControllerMethod)(id, SEL) = NULL;
-    if (_cmd == @selector(navigationController)) {
-        UIViewControllerMethod = s_UIViewController__navigationController_Imp;
-    }
-    else if (_cmd == @selector(navigationItem)) {
-        UIViewControllerMethod = s_UIViewController__navigationItem_Imp;
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property getter forwarding (%@)", NSStringFromSelector(_cmd)];
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }
-    
-    // iOS 5: The view controller chain is automatically guaranteed when we called -addChildViewController:
-    if ([self respondsToSelector:@selector(addChildViewController:)]) {
-        return UIViewControllerMethod(self, _cmd);
-    }
-    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
-    else {
-        return swizzled_UIViewController__id_forward_accessor_Imp(containerContent.containerViewController, _cmd);
-    }
-}
-
-static void swizzled_UIViewController__void_mutator_id_Imp(UIViewController *self, SEL _cmd, id value)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    
-    void (*UIViewControllerMethod)(id, SEL, id) = NULL;
-    if (_cmd == @selector(setTitle:)) {
-        UIViewControllerMethod = s_UIViewController__setTitle_Imp;
-    }
-    else if (_cmd == @selector(setToolbarItems:)) {
-        UIViewControllerMethod = s_UIViewController__setToolbarItems_Imp;
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }
-    
-    // Call the setter on the view controller first
-    UIViewControllerMethod(self, _cmd, value);
-    
-#if 0
-    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
-    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
-        swizzled_UIViewController__void_mutator_id_Imp(containerContent.containerViewController, _cmd, value);
-    }
-#endif
-}
-
-static void swizzled_UIViewController__void_mutator_BOOL_Imp(UIViewController *self, SEL _cmd, BOOL value)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    
-    void (*UIViewControllerMethod)(id, SEL, BOOL) = NULL;
-    if (_cmd == @selector(setHidesBottomBarWhenPushed:)) {
-        UIViewControllerMethod = s_UIViewController__setHidesBottomBarWhenPushed_Imp;
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }
-    
-    // Call the setter on the view controller first
-    UIViewControllerMethod(self, _cmd, value);
-    
-#if 0
-    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
-    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
-        swizzled_UIViewController__void_mutator_BOOL_Imp(containerContent.containerViewController, _cmd, value);
-    }
-#endif
-}
-
-static void swizzled_UIViewController__void_mutator_id_BOOL_Imp(UIViewController *self, SEL _cmd, id value1, BOOL value2)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    
-    void (*UIViewControllerMethod)(id, SEL, id, BOOL) = NULL;
-    if (_cmd == @selector(setToolbarItems:animated:)) {
-        UIViewControllerMethod = s_UIViewController__setToolbarItems_animated_Imp;
-    }
-    else {
-        NSString *reason = [NSString stringWithFormat:@"Unsupported property setter forwarding (%@)", NSStringFromSelector(_cmd)];
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-    }
-    
-    // Call the setter on the view controller first
-    UIViewControllerMethod(self, _cmd, value1, value2);
-    
-#if 0
-    // Pre-iOS 5: We must chain view controllers manually so that the nearest parent can be found
-    if (! [self respondsToSelector:@selector(addChildViewController:)]) {
-        swizzled_UIViewController__void_mutator_id_BOOL_Imp(containerContent.containerViewController, _cmd, value1, value2);
-    }
-#endif
-}
-
-static void swizzled_UIViewController__presentViewController_animated_completion_Imp(UIViewController *self, SEL _cmd, UIViewController *viewControllerToPresent,
-                                                                                     BOOL flag, void (^completion)(void))
+static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
-        [containerContent.containerViewController presentViewController:viewControllerToPresent animated:flag completion:completion];
+        // Call the original method to recursively apply the same behavior, correctly dealing with container nesting
+        return containerContent.containerViewController.parentViewController;
     }
     else {
-        (*s_UIViewController__presentViewController_animated_completion_Imp)(self, @selector(presentViewController:animated:completion:), viewControllerToPresent, flag, completion);
+        return (*s_UIViewController__parentViewController_Imp)(self, @selector(parentViewController));
     }
 }
-
-static void swizzled_UIViewController__dismissViewControllerAnimated_completion_Imp(UIViewController *self, SEL _cmd, BOOL flag, void (^completion)(void))
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        [containerContent.containerViewController dismissViewControllerAnimated:flag completion:completion];
-    }
-    else {
-        (*s_UIViewController__dismissViewControllerAnimated_completion_Imp)(self, @selector(dismissViewControllerAnimated:completion:), flag, completion);
-    }
-}
-
-static void swizzled_UIViewController__presentModalViewController_animated_Imp(UIViewController *self, SEL _cmd, UIViewController *modalViewController, BOOL animated)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        [containerContent.containerViewController presentModalViewController:modalViewController animated:animated];
-    }
-    else {
-        (*s_UIViewController__presentModalViewController_animated_Imp)(self, @selector(presentModalViewController:animated:), modalViewController, animated);
-    }
-}
-
-static void swizzled_UIViewController__dismissModalViewControllerAnimated_Imp(UIViewController *self, SEL _cmd, BOOL animated)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        [containerContent.containerViewController dismissModalViewControllerAnimated:animated];
-    }
-    else {
-        (*s_UIViewController__dismissModalViewControllerAnimated_Imp)(self, @selector(dismissModalViewControllerAnimated:), animated);
-    }
-}
-
-static UIViewController *swizzled_UIViewController__modalViewController_Imp(UIViewController *self, SEL _cmd)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        return containerContent.containerViewController.modalViewController;
-    }
-    else {
-        return (*s_UIViewController__modalViewController_Imp)(self, @selector(modalViewController));
-    }
-}
-
-static UIViewController *swizzled_UIViewController__presentedViewController_Imp(UIViewController *self, SEL _cmd)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        return containerContent.containerViewController.presentedViewController;
-    }
-    else {
-        return (*s_UIViewController__presentedViewController_Imp)(self, @selector(presentedViewController));
-    }
-}
-
