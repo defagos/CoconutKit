@@ -312,7 +312,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Resurrect view controller's views below the view controller we pop to so that the capacity criterium
     // is satisfied
-    for (NSUInteger i = 0; i < self.capacity; ++i) {        
+    for (NSUInteger i = 0; i < self.capacity; ++i) {
         NSUInteger index = firstRemovedIndex - 1 - i;
         HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
         [self addViewForContainerContent:containerContent playingTransition:NO animated:NO];
@@ -592,22 +592,51 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
+    // events. This matches UINavigationController behavior, for which only the top view controller receives
+    // such events
+    if ([self.containerContents count] != 0) {
+        for (NSUInteger i = 0; i < self.capacity; ++i) {
+            NSUInteger index = [self.containerContents count] - 1 - i;
+            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            
+            if (index == 0) {
+                break;
+            }
+        }
     }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{   
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+{
+    // Same remark as above
+    if ([self.containerContents count] != 0) {
+        for (NSUInteger i = 0; i < self.capacity; ++i) {
+            NSUInteger index = [self.containerContents count] - 1 - i;
+            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            
+            if (index == 0) {
+                break;
+            }
+        }
     }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    // Same remark as above
+    if ([self.containerContents count] != 0) {
+        for (NSUInteger i = 0; i < self.capacity; ++i) {
+            NSUInteger index = [self.containerContents count] - 1 - i;
+            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+            
+            if (index == 0) {
+                break;
+            }
+        }   
     }
 }
 
