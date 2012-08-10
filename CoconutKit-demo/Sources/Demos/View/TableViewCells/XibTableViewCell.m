@@ -19,7 +19,7 @@
     [super dealloc];
 }
 
-#pragma mark Cell customization
+#pragma mark Cell customisation
 
 - (void)awakeFromNib
 {

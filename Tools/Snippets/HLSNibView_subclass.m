@@ -25,7 +25,7 @@
 
 #pragma mark Accessors and mutators
 
-#pragma mark View customization
+#pragma mark View customisation
 
 - (void)awakeFromNib
 {

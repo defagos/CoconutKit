@@ -1004,7 +1004,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>displayContainerCustomization:</string>
 							<string>displayFixedSize:</string>
 							<string>displayLandscapeOnly:</string>
 							<string>displayLifeCycleTest:</string>
@@ -1022,7 +1021,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1043,7 +1041,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>displayContainerCustomization:</string>
 							<string>displayFixedSize:</string>
 							<string>displayLandscapeOnly:</string>
 							<string>displayLifeCycleTest:</string>
@@ -1061,10 +1058,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">displayContainerCustomization:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">displayFixedSize:</string>
 								<string key="candidateClassName">id</string>

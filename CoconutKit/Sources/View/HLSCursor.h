@@ -31,7 +31,7 @@
  * There are two ways to set the cursor contents. Both can be mixed within the same cursor:
  *   - basic: You just set the text and basic text properties (font, colors, shadows)
  *   - custom: Each element is a view and can be customized using Interface Builder
- * Cursors using both ways of customization can coexist in the same source file.
+ * Cursors using both ways of customisation can coexist in the same source file.
  *
  * Designated initializer: initWithFrame:
  */
@@ -117,7 +117,7 @@
 // non-selected elements
 - (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected;
 
-// Less customization, but no view is needed. You can use the selected boolean to set different properties for
+// Less customisation, but no view is needed. You can use the selected boolean to set different properties for
 // selected and non-selected elements
 - (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index;
 - (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented or returning nil: system font, size 17

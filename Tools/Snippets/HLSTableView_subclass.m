@@ -17,7 +17,7 @@
 
 #pragma mark Accessors and mutators
 
-#pragma mark Cell customization
+#pragma mark Cell customisation
 
 - (void)awakeFromNib
 {

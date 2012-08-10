@@ -32,7 +32,7 @@ typedef enum {
  * A slideshow displaying images using one of several built-in transition effects.
  *
  * You can instantiate a slideshow view either using a nib or programmatically. It then suffices to set its images property 
- * to the array of images which must be displayed. Other properties provide for further customization, e.g. animation
+ * to the array of images which must be displayed. Other properties provide for further customisation, e.g. animation
  * effect or timings.
  *
  * You should not alter the frame of a slideshow while it is running. This is currently not supported.
