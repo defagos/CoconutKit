@@ -8,7 +8,6 @@
 
 #import "StackDemoViewController.h"
 
-#import "ContainerCustomizationViewController.h"
 #import "FixedSizeViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
@@ -189,12 +188,6 @@
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
     [self presentModalViewController:stackController animated:YES];
-}
-
-- (IBAction)displayContainerCustomization:(id)sender
-{
-    ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-    [self displayContentViewController:containerCustomizationViewController];
 }
 
 - (IBAction)pop:(id)sender

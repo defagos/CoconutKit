@@ -16,7 +16,6 @@
 		6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
 		6F159B5215A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459E14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.m */; };
 		6F159B5315A55CD10020AFAC /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */; };
-		6F159B5415A55CD10020AFAC /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */; };
 		6F159B5515A55CD10020AFAC /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
 		6F159B5615A55CD10020AFAC /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; };
 		6F159B5715A55CD10020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; };
@@ -72,7 +71,6 @@
 		6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F159B8C15A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459F14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F159B8D15A55CD10020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */; };
-		6F159B8E15A55CD10020AFAC /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */; };
 		6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
 		6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
@@ -164,8 +162,6 @@
 		6F9C465014C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459F14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F9C465114C5C30C00824AB2 /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */; };
 		6F9C465214C5C30C00824AB2 /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */; };
-		6F9C465314C5C30C00824AB2 /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */; };
-		6F9C465414C5C30C00824AB2 /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */; };
 		6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
 		6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
@@ -333,9 +329,6 @@
 		6F9C45A114C5C30B00824AB2 /* SingleViewAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleViewAnimationDemoViewController.h; sourceTree = "<group>"; };
 		6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleViewAnimationDemoViewController.m; sourceTree = "<group>"; };
 		6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleViewAnimationDemoViewController.xib; sourceTree = "<group>"; };
-		6F9C45A614C5C30B00824AB2 /* ContainerCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCustomizationViewController.h; sourceTree = "<group>"; };
-		6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCustomizationViewController.m; sourceTree = "<group>"; };
-		6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCustomizationViewController.xib; sourceTree = "<group>"; };
 		6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6F9C45AB14C5C30B00824AB2 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -700,7 +693,6 @@
 		6F9C45A414C5C30B00824AB2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45A514C5C30B00824AB2 /* ContainerCustomizationViewController */,
 				6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */,
 				6F9C45AE14C5C30B00824AB2 /* HeavyViewController */,
 				6F9C45B214C5C30B00824AB2 /* LandscapeOnlyViewController */,
@@ -712,16 +704,6 @@
 				6F9C45CE14C5C30B00824AB2 /* TransparentViewController */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		6F9C45A514C5C30B00824AB2 /* ContainerCustomizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45A614C5C30B00824AB2 /* ContainerCustomizationViewController.h */,
-				6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */,
-				6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */,
-			);
-			path = ContainerCustomizationViewController;
 			sourceTree = "<group>";
 		};
 		6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */ = {
@@ -1273,7 +1255,6 @@
 				6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */,
 				6F9C465014C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F9C465214C5C30C00824AB2 /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6F9C465414C5C30C00824AB2 /* ContainerCustomizationViewController.xib in Resources */,
 				6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
@@ -1349,7 +1330,6 @@
 				6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */,
 				6F159B8C15A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F159B8D15A55CD10020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6F159B8E15A55CD10020AFAC /* ContainerCustomizationViewController.xib in Resources */,
 				6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */,
 				6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */,
 				6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */,
@@ -1456,7 +1436,6 @@
 				6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */,
 				6F9C464F14C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F9C465114C5C30C00824AB2 /* SingleViewAnimationDemoViewController.m in Sources */,
-				6F9C465314C5C30C00824AB2 /* ContainerCustomizationViewController.m in Sources */,
 				6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */,
 				6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */,
 				6F9C465A14C5C30C00824AB2 /* LandscapeOnlyViewController.m in Sources */,
@@ -1521,7 +1500,6 @@
 				6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */,
 				6F159B5215A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F159B5315A55CD10020AFAC /* SingleViewAnimationDemoViewController.m in Sources */,
-				6F159B5415A55CD10020AFAC /* ContainerCustomizationViewController.m in Sources */,
 				6F159B5515A55CD10020AFAC /* FixedSizeViewController.m in Sources */,
 				6F159B5615A55CD10020AFAC /* HeavyViewController.m in Sources */,
 				6F159B5715A55CD10020AFAC /* LandscapeOnlyViewController.m in Sources */,

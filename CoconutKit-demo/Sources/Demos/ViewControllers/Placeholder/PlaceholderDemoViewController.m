@@ -8,7 +8,6 @@
 
 #import "PlaceholderDemoViewController.h"
 
-#import "ContainerCustomizationViewController.h"
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
@@ -284,23 +283,6 @@
                                                                              large:NO]
                                                                             autorelease];
         [self displayInsetViewController:orientationClonerViewController atIndex:1];
-    }
-}
-
-- (IBAction)displayContainerCustomization:(id)sender
-{
-    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
-        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
-        return;
-    }
-    
-    if (self.leftPlaceholderSwitch.on) {
-        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-        [self displayInsetViewController:containerCustomizationViewController atIndex:0];
-    }
-    if (self.rightPlaceholderSwitch.on) {
-        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-        [self displayInsetViewController:containerCustomizationViewController atIndex:1];
     }
 }
 
