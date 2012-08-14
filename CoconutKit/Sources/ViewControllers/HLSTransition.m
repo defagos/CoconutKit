@@ -912,6 +912,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                   zFactor:1.f];
     viewAnimationStep21.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
+    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep22 scaleWithXFactor:kPushToTheBackScaleFactor
+                                  yFactor:kPushToTheBackScaleFactor
+                                  zFactor:1.f];
+    [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:disappearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
