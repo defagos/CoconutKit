@@ -254,6 +254,30 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 @end
 
 /**
+ * The old view is pushed from the bottom to the back by the new view
+ */
+@interface HLSTransitionPushToBackFromBottom : HLSTransition
+@end
+
+/**
+ * The old view is pushed from the bottom to the back by the new view
+ */
+@interface HLSTransitionPushToBackFromTop : HLSTransition
+@end
+
+/**
+ * The old view is pushed from the bottom to the back by the new view
+ */
+@interface HLSTransitionPushToBackFromLeft : HLSTransition
+@end
+
+/**
+ * The old view is pushed from the bottom to the back by the new view
+ */
+@interface HLSTransitionPushToBackFromRight : HLSTransition
+@end
+
+/**
  * The old view is slightly pushed to the back, pushed from the bottom by the new one, which is then brought to the front
  */
 @interface HLSTransitionFlowFromBottom : HLSTransition
