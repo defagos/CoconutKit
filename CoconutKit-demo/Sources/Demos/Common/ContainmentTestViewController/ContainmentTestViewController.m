@@ -89,6 +89,7 @@
 
 - (IBAction)hideWithModal:(id)sender
 {
+    // Just to test -parentViewController (if correct, then the topmost container will be presenting the modal)
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }

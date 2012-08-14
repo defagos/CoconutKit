@@ -598,9 +598,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
-    // events. This matches UINavigationController behavior, for which only the top view controller receives
-    // such events
     if ([self.containerContents count] != 0) {
         for (NSUInteger i = 0; i < self.capacity; ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
@@ -618,6 +615,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                      duration:0.] reverseAnimation];
             [reverseAnimation playAnimated:NO];
             
+            // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
+            // events. This matches UINavigationController behavior, for which only the top view controller receives
+            // such events
             [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
             
             if (index == 0) {
@@ -629,13 +629,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    // Same remark as above
     if ([self.containerContents count] != 0) {
         for (NSUInteger i = 0; i < self.capacity; ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
-            // See comment in -willRotateToInterfaceOrientation:duration. The container view frame is here the final one
+            // See comment in -willRotateToInterfaceOrientation:duration:. The container view frame is here the final one
             // obtained after the rotation completes
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
             HLSAnimation *animation = [HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
@@ -645,6 +644,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                              duration:0.];
             [animation playAnimated:NO];
             
+            // Same remark as in -willRotateToInterfaceOrientation:duration:
             [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
             
             if (index == 0) {
