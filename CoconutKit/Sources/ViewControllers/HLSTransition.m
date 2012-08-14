@@ -17,7 +17,7 @@
 const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
 
 static CGFloat kPushToTheBackScaleFactor = 0.95f;
-static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, otherwise infinite transform matrix elements
+static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @interface HLSTransition ()
 
@@ -900,6 +900,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
+    viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -909,6 +910,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.01f;      // cannot use 0.f, oth
     [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
                                   yFactor:1.f / kEmergeFromCenterScaleFactor
                                   zFactor:1.f];
+    viewAnimationStep21.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
