@@ -14,7 +14,6 @@
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
-#import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
@@ -279,29 +278,6 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
-}
-
-- (IBAction)displayOrientationCloner:(id)sender
-{
-    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
-        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
-        return;
-    }
-    
-    if (self.leftPlaceholderSwitch.on) {
-        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                             large:NO]
-                                                                            autorelease];
-        [self displayInsetViewController:orientationClonerViewController atIndex:0];
-    }
-    if (self.rightPlaceholderSwitch.on) {
-        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                             large:NO]
-                                                                            autorelease];
-        [self displayInsetViewController:orientationClonerViewController atIndex:1];
-    }
 }
 
 - (IBAction)togglePlaceholder:(id)sender

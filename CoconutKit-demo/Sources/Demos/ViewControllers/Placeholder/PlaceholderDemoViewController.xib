@@ -219,35 +219,13 @@
 						<string key="NSFrame">{{20, 658}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="347996817"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">LS/Landscape only</string>
-						<reference key="IBUIHighlightedTitleColor" ref="114470078"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="504762485"/>
-						<reference key="IBUIFontDescription" ref="877932827"/>
-						<reference key="IBUIFont" ref="186321935"/>
-					</object>
-					<object class="IBUIButton" id="347996817">
-						<reference key="NSNextResponder" ref="490296611"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 703}, {217, 37}}</string>
-						<reference key="NSSuperview" ref="490296611"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="384731418"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">HLSOrientationCloner</string>
 						<reference key="IBUIHighlightedTitleColor" ref="114470078"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -656,15 +634,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">displayOrientationCloner:</string>
-						<reference key="source" ref="347996817"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">56</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">hideWithModal:</string>
 						<reference key="source" ref="154317067"/>
 						<reference key="destination" ref="841351856"/>
@@ -785,7 +754,6 @@
 							<reference ref="973887671"/>
 							<reference ref="375668740"/>
 							<reference ref="262548350"/>
-							<reference ref="347996817"/>
 							<reference ref="94877724"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -826,11 +794,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
 						<reference key="object" ref="988827800"/>
-						<reference key="parent" ref="490296611"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">30</int>
-						<reference key="object" ref="347996817"/>
 						<reference key="parent" ref="490296611"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -930,7 +893,6 @@
 					<string>18.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
-					<string>30.IBPluginDependency</string>
 					<string>31.IBPluginDependency</string>
 					<string>36.IBPluginDependency</string>
 					<string>38.IBPluginDependency</string>
@@ -954,7 +916,6 @@
 					<string>PlaceholderDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1046,7 +1007,6 @@
 							<string>displayHeavy:</string>
 							<string>displayLandscapeOnly:</string>
 							<string>displayLifeCycleTest:</string>
-							<string>displayOrientationCloner:</string>
 							<string>displayPortraitOnly:</string>
 							<string>displayStretchable:</string>
 							<string>hideWithModal:</string>
@@ -1057,7 +1017,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1081,7 +1040,6 @@
 							<string>displayHeavy:</string>
 							<string>displayLandscapeOnly:</string>
 							<string>displayLifeCycleTest:</string>
-							<string>displayOrientationCloner:</string>
 							<string>displayPortraitOnly:</string>
 							<string>displayStretchable:</string>
 							<string>hideWithModal:</string>
@@ -1110,10 +1068,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">displayLifeCycleTest:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayOrientationCloner:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

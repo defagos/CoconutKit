@@ -13,7 +13,6 @@
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
-#import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
 #import "RootStackDemoViewController.h"
 #import "StretchableViewController.h"
@@ -171,15 +170,6 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
-}
-
-- (IBAction)displayOrientationCloner:(id)sender
-{
-    OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                         initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                         large:NO]
-                                                                        autorelease];
-    [self displayContentViewController:orientationClonerViewController];
 }
 
 - (IBAction)displayTransparent:(id)sender

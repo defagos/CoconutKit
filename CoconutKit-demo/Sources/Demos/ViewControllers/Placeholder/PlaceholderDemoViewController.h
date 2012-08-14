@@ -37,7 +37,6 @@
 - (IBAction)displayLandscapeOnly:(id)sender;
 - (IBAction)remove:(id)sender;
 - (IBAction)hideWithModal:(id)sender;
-- (IBAction)displayOrientationCloner:(id)sender;
 - (IBAction)togglePlaceholder:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;

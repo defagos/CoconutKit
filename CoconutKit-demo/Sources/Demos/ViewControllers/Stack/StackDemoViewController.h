@@ -29,7 +29,6 @@
 - (IBAction)displayPortraitOnly:(id)sender;
 - (IBAction)displayLandscapeOnly:(id)sender;
 - (IBAction)hideWithModal:(id)sender;
-- (IBAction)displayOrientationCloner:(id)sender;
 - (IBAction)displayTransparent:(id)sender;
 - (IBAction)testInModal:(id)sender;
 - (IBAction)pop:(id)sender;

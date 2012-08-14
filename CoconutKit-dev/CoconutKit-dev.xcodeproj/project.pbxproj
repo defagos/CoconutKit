@@ -48,10 +48,6 @@
 		6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80A14BA04C8007EE121 /* LandscapeOnlyViewController.xib */; };
 		6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80E14BA04C8007EE121 /* LifeCycleTestViewController.xib */; };
 		6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */; };
-		6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */; };
-		6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */; };
 		6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */; };
 		6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81F14BA04C8007EE121 /* StretchableLargeViewController.xib */; };
 		6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE82214BA04C8007EE121 /* StretchableViewController.xib */; };
@@ -175,7 +171,6 @@
 		6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80914BA04C8007EE121 /* LandscapeOnlyViewController.m */; };
 		6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80D14BA04C8007EE121 /* LifeCycleTestViewController.m */; };
 		6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */; };
-		6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */; };
 		6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */; };
 		6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82114BA04C8007EE121 /* StretchableViewController.m */; };
 		6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82514BA04C8007EE121 /* TransparentViewController.m */; };
@@ -357,11 +352,6 @@
 		6FADE8A214BA04C9007EE121 /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80E14BA04C8007EE121 /* LifeCycleTestViewController.xib */; };
 		6FADE8A314BA04C9007EE121 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */; };
 		6FADE8A414BA04C9007EE121 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */; };
-		6FADE8A514BA04C9007EE121 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6FADE8A614BA04C9007EE121 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6FADE8A714BA04C9007EE121 /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */; };
-		6FADE8A814BA04C9007EE121 /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */; };
-		6FADE8A914BA04C9007EE121 /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */; };
 		6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */; };
 		6FADE8AB14BA04C9007EE121 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */; };
 		6FADE8AC14BA04C9007EE121 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81F14BA04C8007EE121 /* StretchableLargeViewController.xib */; };
@@ -582,7 +572,6 @@
 		6FADE63E14BA04A6007EE121 /* HLSKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKeyboardInformation.m; sourceTree = "<group>"; };
 		6FADE63F14BA04A6007EE121 /* HLSNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNotifications.h; sourceTree = "<group>"; };
 		6FADE64014BA04A6007EE121 /* HLSNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNotifications.m; sourceTree = "<group>"; };
-		6FADE64114BA04A6007EE121 /* HLSOrientationCloner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOrientationCloner.h; sourceTree = "<group>"; };
 		6FADE64214BA04A6007EE121 /* HLSReloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSReloadable.h; sourceTree = "<group>"; };
 		6FADE64314BA04A6007EE121 /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FADE64414BA04A6007EE121 /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
@@ -714,12 +703,6 @@
 		6FADE81014BA04C8007EE121 /* MemoryWarningTestCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryWarningTestCoverViewController.h; sourceTree = "<group>"; };
 		6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryWarningTestCoverViewController.m; sourceTree = "<group>"; };
 		6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoryWarningTestCoverViewController.xib; sourceTree = "<group>"; };
-		6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
-		6FADE81614BA04C8007EE121 /* OrientationClonerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationClonerViewController.h; sourceTree = "<group>"; };
-		6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationClonerViewController.m; sourceTree = "<group>"; };
-		6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerPortrait.xib; sourceTree = "<group>"; };
 		6FADE81B14BA04C8007EE121 /* PortraitOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortraitOnlyViewController.h; sourceTree = "<group>"; };
 		6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitOnlyViewController.m; sourceTree = "<group>"; };
 		6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitOnlyViewController.xib; sourceTree = "<group>"; };
@@ -1132,7 +1115,6 @@
 				6FADE63F14BA04A6007EE121 /* HLSNotifications.h */,
 				6FADE64014BA04A6007EE121 /* HLSNotifications.m */,
 				6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */,
-				6FADE64114BA04A6007EE121 /* HLSOrientationCloner.h */,
 				6FADE64214BA04A6007EE121 /* HLSReloadable.h */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
 				6FADE64414BA04A6007EE121 /* HLSRuntime.m */,
@@ -1411,7 +1393,6 @@
 				6FADE80714BA04C8007EE121 /* LandscapeOnlyViewController */,
 				6FADE80B14BA04C8007EE121 /* LifeCycleTestViewController */,
 				6FADE80F14BA04C8007EE121 /* MemoryWarningTestCoverViewController */,
-				6FADE81314BA04C8007EE121 /* OrientationClonerViewController */,
 				6FADE81A14BA04C8007EE121 /* PortraitOnlyViewController */,
 				6FADE81E14BA04C8007EE121 /* StretchableViewController */,
 				6FADE82314BA04C8007EE121 /* TransparentViewController */,
@@ -1468,19 +1449,6 @@
 				6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */,
 			);
 			path = MemoryWarningTestCoverViewController;
-			sourceTree = "<group>";
-		};
-		6FADE81314BA04C8007EE121 /* OrientationClonerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */,
-				6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */,
-				6FADE81614BA04C8007EE121 /* OrientationClonerViewController.h */,
-				6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */,
-				6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */,
-				6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */,
-			);
-			path = OrientationClonerViewController;
 			sourceTree = "<group>";
 		};
 		6FADE81A14BA04C8007EE121 /* PortraitOnlyViewController */ = {
@@ -1902,10 +1870,6 @@
 				6FADE8A014BA04C9007EE121 /* LandscapeOnlyViewController.xib in Resources */,
 				6FADE8A214BA04C9007EE121 /* LifeCycleTestViewController.xib in Resources */,
 				6FADE8A414BA04C9007EE121 /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6FADE8A514BA04C9007EE121 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6FADE8A614BA04C9007EE121 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6FADE8A814BA04C9007EE121 /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6FADE8A914BA04C9007EE121 /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6FADE8AB14BA04C9007EE121 /* PortraitOnlyViewController.xib in Resources */,
 				6FADE8AC14BA04C9007EE121 /* StretchableLargeViewController.xib in Resources */,
 				6FADE8AE14BA04C9007EE121 /* StretchableViewController.xib in Resources */,
@@ -1980,10 +1944,6 @@
 				6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */,
 				6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */,
 				6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */,
 				6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */,
 				6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */,
@@ -2147,7 +2107,6 @@
 				6FADE89F14BA04C9007EE121 /* LandscapeOnlyViewController.m in Sources */,
 				6FADE8A114BA04C9007EE121 /* LifeCycleTestViewController.m in Sources */,
 				6FADE8A314BA04C9007EE121 /* MemoryWarningTestCoverViewController.m in Sources */,
-				6FADE8A714BA04C9007EE121 /* OrientationClonerViewController.m in Sources */,
 				6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */,
 				6FADE8AD14BA04C9007EE121 /* StretchableViewController.m in Sources */,
 				6FADE8AF14BA04C9007EE121 /* TransparentViewController.m in Sources */,
@@ -2294,7 +2253,6 @@
 				6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */,
 				6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */,
 				6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */,
-				6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */,
 				6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */,
 				6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */,
 				6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */,

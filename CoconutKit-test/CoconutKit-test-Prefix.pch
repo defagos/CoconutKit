@@ -30,7 +30,6 @@
     #import "HLSNibView.h"
     #import "HLSNotifications.h"
     #import "HLSOptionalFeatures.h"
-    #import "HLSOrientationCloner.h"
     #import "HLSPlaceholderInsetSegue.h"
     #import "HLSPlaceholderViewController.h"
     #import "HLSReloadable.h"
