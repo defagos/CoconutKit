@@ -532,7 +532,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
         }
         
-        [topContainerContent viewWillAppear:animated movingToParentViewController:NO];
+        if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
+            [topContainerContent viewWillAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
+        }
+        else {
+            [topContainerContent viewWillAppear:animated movingToParentViewController:NO];
+        }
     }
 }
 
@@ -540,7 +545,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        [topContainerContent viewDidAppear:animated movingToParentViewController:NO];
+        
+        if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
+            [topContainerContent viewDidAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
+        }
+        else {
+            [topContainerContent viewDidAppear:animated movingToParentViewController:NO];
+        }
         
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
@@ -556,7 +567,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
         }
         
-        [topContainerContent viewWillDisappear:animated movingFromParentViewController:NO];
+        if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
+            [topContainerContent viewWillDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
+        }
+        else {
+            [topContainerContent viewWillDisappear:animated movingFromParentViewController:NO];
+        }
     }
 }
 
@@ -564,7 +580,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        [topContainerContent viewDidDisappear:animated movingFromParentViewController:NO];
+        if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
+            [topContainerContent viewDidDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
+        }
+        else {
+            [topContainerContent viewDidDisappear:animated movingFromParentViewController:NO];
+        }
         
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
