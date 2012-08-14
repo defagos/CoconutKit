@@ -22,9 +22,13 @@ static void *s_containerContentKey = &s_containerContentKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__parentViewController_Imp)(id, SEL) = NULL;
+static BOOL (*s_UIViewController__isMovingToParentViewController_Imp)(id, SEL) = NULL;
+static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
 static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -37,6 +41,8 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
+@property (nonatomic, assign) BOOL movingToParentViewController;
+@property (nonatomic, assign) BOOL movingFromParentViewController;
 
 - (void)removeViewFromContainerStackView;
 
@@ -208,6 +214,10 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
 
 @synthesize originalAutoresizingMask = m_originalAutoresizingMask;
 
+@synthesize movingToParentViewController = m_movingToParentViewController;
+
+@synthesize movingFromParentViewController = m_movingFromParentViewController;
+
 - (UIView *)viewIfLoaded
 {
     return [self.viewController viewIfLoaded].superview;
@@ -329,40 +339,48 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController
 {
     if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
         return;
     }
     
+    self.movingToParentViewController = movingToParentViewController;
     [self.viewController viewWillAppear:animated];
+    self.movingToParentViewController = NO;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController
 {
     if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
         return;
     }
     
+    self.movingToParentViewController = movingToParentViewController;
     [self.viewController viewDidAppear:animated];
+    self.movingToParentViewController = NO;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController
 {
     if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
         return;
     }
     
+    self.movingFromParentViewController = movingFromParentViewController;
     [self.viewController viewWillDisappear:animated];
+    self.movingFromParentViewController = NO;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController
 {
     if (! [self.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
         return;
     }
     
+    self.movingFromParentViewController = movingFromParentViewController;
     [self.viewController viewDidDisappear:animated];
+    self.movingFromParentViewController = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -415,6 +433,15 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
     }
+    // iOS 5: Swizzle the new methods introduced by the containment API so that custom containers report their status correctly
+    else {
+        s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                                       @selector(isMovingToParentViewController),
+                                                                                                       (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
+        s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                                         @selector(isMovingFromParentViewController),
+                                                                                                         (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
+    }
 }
 
 @end
@@ -427,6 +454,28 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
         return containerContent.containerViewController.parentViewController;
     }
     else {
-        return (*s_UIViewController__parentViewController_Imp)(self, @selector(parentViewController));
+        return (*s_UIViewController__parentViewController_Imp)(self, _cmd);
+    }
+}
+
+static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    if (containerContent) {
+        return containerContent.movingToParentViewController;
+    }
+    else {
+        return (*s_UIViewController__isMovingToParentViewController_Imp)(self, _cmd);
+    }
+}
+
+static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    if (containerContent) {
+        return containerContent.movingFromParentViewController;
+    }
+    else {
+        return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
 }

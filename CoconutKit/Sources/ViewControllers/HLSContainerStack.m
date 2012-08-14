@@ -532,7 +532,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
         }
         
-        [topContainerContent viewWillAppear:animated];
+        [topContainerContent viewWillAppear:animated movingToParentViewController:NO];
     }
 }
 
@@ -540,7 +540,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        [topContainerContent viewDidAppear:animated];
+        [topContainerContent viewDidAppear:animated movingToParentViewController:NO];
         
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
@@ -556,7 +556,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
         }
         
-        [topContainerContent viewWillDisappear:animated];
+        [topContainerContent viewWillDisappear:animated movingFromParentViewController:NO];
     }
 }
 
@@ -564,7 +564,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     HLSContainerContent *topContainerContent = [self topContainerContent];
     if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        [topContainerContent viewDidDisappear:animated];
+        [topContainerContent viewDidDisappear:animated movingFromParentViewController:NO];
         
         if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
@@ -793,12 +793,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-        [disappearingContainerContent viewWillDisappear:animated];
+        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:YES];
         
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
-        [appearingContainerContent viewWillAppear:animated];
+        [appearingContainerContent viewWillAppear:animated movingToParentViewController:YES];
     }    
 }
 
@@ -821,12 +821,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
-        [disappearingContainerContent viewDidDisappear:animated];
+        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:YES];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
                 
-        [appearingContainerContent viewDidAppear:animated];
+        [appearingContainerContent viewDidAppear:animated movingToParentViewController:YES];
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }

@@ -71,6 +71,9 @@
     BOOL m_addedToContainerView;
     CGRect m_originalViewFrame;
     UIViewAutoresizing m_originalAutoresizingMask;
+    CGFloat m_originalViewAlpha;
+    BOOL m_movingToParentViewController;
+    BOOL m_movingFromParentViewController;
 }
 
 /**
@@ -150,10 +153,10 @@
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
  *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
  */
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewDidAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewDidDisappear:(BOOL)animated;
+- (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
+- (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
+- (void)viewWillDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController;
+- (void)viewDidDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController;
 
 /**
  * Forward the corresponding view rotation events to the view controller
