@@ -278,8 +278,8 @@
             CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, affineTransform), 
                                                                       CGAffineTransformInvert(translation));
             
-            // TODO: This does not resize subviews correctly in all cases. Maybe that is not possible?
-            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
+            // Ensure views never end up blurry
+            view.frame = CGRectIntegral(CGRectApplyAffineTransform(view.frame, convTransform));
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
             [view layoutIfNeeded];
@@ -290,6 +290,12 @@
             CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translation, viewAnimationStep.transform), 
                                                               CATransform3DInvert(translation));
             view.layer.transform = CATransform3DConcat(view.layer.transform, convTransform);
+            
+            // For affine transforms, ensure that views never end up blurry (non-integral frame)
+            if (CATransform3DIsAffine(view.layer.transform)) {
+                view.layer.bounds = CGRectIntegral(view.layer.bounds);
+                view.layer.position = CGPointMake(roundf(view.layer.position.x), roundf(view.layer.position.y));
+            }
         }
     }
     
