@@ -142,49 +142,49 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * The new view covers the old one starting from the bottom (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromBottom2 : HLSTransition
+@interface HLSTransitionCoverFromBottomPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the top (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromTop2 : HLSTransition
+@interface HLSTransitionCoverFromTopPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the left (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromLeft2 : HLSTransition
+@interface HLSTransitionCoverFromLeftPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the right (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromRight2 : HLSTransition
+@interface HLSTransitionCoverFromRightPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the top left corner (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromTopLeft2 : HLSTransition
+@interface HLSTransitionCoverFromTopLeftPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the top right corner (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromTopRight2 : HLSTransition
+@interface HLSTransitionCoverFromTopRightPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the bottom left corner (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromBottomLeft2 : HLSTransition
+@interface HLSTransitionCoverFromBottomLeftPushToBack : HLSTransition
 @end
 
 /**
  * The new view covers the old one starting from the bottom right corner (the old view is slightly pushed to the back)
  */
-@interface HLSTransitionCoverFromBottomRight2 : HLSTransition
+@interface HLSTransitionCoverFromBottomRightPushToBack : HLSTransition
 @end
 
 /**
@@ -196,7 +196,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * The new view fades in, the old one is slightly pushed to the back
  */
-@interface HLSTransitionFadeIn2 : HLSTransition
+@interface HLSTransitionFadeInPushToBack : HLSTransition
 @end
 
 /**

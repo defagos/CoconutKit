@@ -48,7 +48,7 @@
                                    animated:NO];
         UIViewController *thirdViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:thirdViewController 
-                        withTransitionClass:[HLSTransitionCoverFromRight2 class]
+                        withTransitionClass:[HLSTransitionCoverFromRightPushToBack class]
                                    animated:NO];
         UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:fourthViewController 
