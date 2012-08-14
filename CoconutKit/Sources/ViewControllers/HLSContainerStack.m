@@ -471,10 +471,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                   disappearingView:groupView.backGroupView
                                                                             inView:groupView
                                                                           duration:containerContent.duration] reverseAnimation];
+        animation.delegate = self;          // set a delegate for destruction if the stack is deallocated
         if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
-            animation.delegate = self;
             
             [animation playAnimated:animated];
         }
@@ -605,6 +605,19 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         for (NSUInteger i = 0; i < self.capacity; ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            
+            // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
+            // on the animation properties, most notably when scaling is involved), we negate each animation (this is made
+            // here since the frame is still the one prior to the rotation). Those will be replayed for the new orientation
+            // right afterwards, when the animation, so that this trick stays invisible
+            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+            HLSAnimation *reverseAnimation = [[HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
+                                                                                appearingView:groupView.frontView
+                                                                             disappearingView:groupView.backGroupView
+                                                                                       inView:groupView
+                                                                                     duration:0.] reverseAnimation];
+            [reverseAnimation playAnimated:NO];
+            
             [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
             
             if (index == 0) {
@@ -621,6 +634,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         for (NSUInteger i = 0; i < self.capacity; ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            
+            // See comment in -willRotateToInterfaceOrientation:duration. The container view frame is here the final one
+            // obtained after the rotation completes
+            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+            HLSAnimation *animation = [HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
+                                                                        appearingView:groupView.frontView
+                                                                     disappearingView:groupView.backGroupView
+                                                                               inView:groupView
+                                                                             duration:0.];
+            [animation playAnimated:NO];
+            
             [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
             
             if (index == 0) {
@@ -709,6 +733,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                       disappearingView:aboveGroupView.backGroupView
                                                                                 inView:aboveGroupView
                                                                               duration:aboveContainerContent.duration];
+        aboveAnimation.delegate = self;          // set a delegate for destruction if the stack is deallocated
         [aboveAnimation playAnimated:NO];
     }
     
@@ -719,10 +744,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                              disappearingView:groupView.backGroupView
                                                                        inView:groupView
                                                                      duration:containerContent.duration];
+    animation.delegate = self;          // set a delegate for destruction if the stack is deallocated
     if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
-        animation.delegate = self;
         
         [animation playAnimated:animated];
     }
