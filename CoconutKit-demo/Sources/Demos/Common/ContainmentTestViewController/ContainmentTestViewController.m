@@ -8,6 +8,8 @@
 
 #import "ContainmentTestViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
+
 @implementation ContainmentTestViewController
 
 #pragma mark View lifecycle
@@ -80,6 +82,14 @@
     [super localize];
     
     self.title = @"ContainmentTestViewController";
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
 @end

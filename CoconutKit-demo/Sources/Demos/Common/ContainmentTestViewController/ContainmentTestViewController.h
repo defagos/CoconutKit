@@ -8,4 +8,6 @@
 
 @interface ContainmentTestViewController : HLSViewController
 
+- (IBAction)hideWithModal:(id)sender;
+
 @end
