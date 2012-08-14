@@ -277,7 +277,7 @@
             CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
             CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, affineTransform),
                                                                       CGAffineTransformInvert(translationTransform));
-            CGRectApplyAffineTransform(view.frame, convTransform);
+            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
             [view layoutIfNeeded];
