@@ -34,8 +34,9 @@
                   self.parentViewController,
                   self.modalViewController);
     
-    // iOS 5 only
-    if ([self respondsToSelector:@selector(presentedViewController)]) {
+    // iOS 5 only (warning: presentedViewController existed before iOS 5 as private method, must test presentingViewController
+    // for which it was not the case)
+    if ([self respondsToSelector:@selector(presentingViewController)]) {
         HLSLoggerInfo(@"(iOS 5) presentedViewController = %@"
                       "\n\tpresentingViewController = %@",
                       self.presentedViewController,
