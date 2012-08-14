@@ -6,5 +6,5 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface CustomTransitionPushFromRight : HLSTransition
+@interface CustomTransitionFallFromTop : HLSTransition
 @end
