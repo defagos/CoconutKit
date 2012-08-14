@@ -587,6 +587,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
+    // Prevent rotations during animations. Can yields to erroneous animations
+    if (m_animating) {
+        HLSLoggerInfo(@"A transition animation is running. Rotation has been prevented");
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -742,6 +748,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // Called for any push / pop animation, whether animated or not
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    if (animated) {
+        m_animating = YES;
+    }
+    
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
@@ -769,6 +779,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    if (animated) {
+        m_animating = NO;
+    }
+    
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
@@ -825,7 +839,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     
         [disappearingViewController release];
-    }
+    }    
 }
 
 #pragma mark Description

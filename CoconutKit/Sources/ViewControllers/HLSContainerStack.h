@@ -41,6 +41,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     NSUInteger m_capacity;
     BOOL m_removing;
     BOOL m_rootViewControllerMandatory;
+    BOOL m_animating;
     id<HLSContainerStackDelegate> m_delegate;
 }
 
