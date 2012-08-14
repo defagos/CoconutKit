@@ -226,7 +226,7 @@
         if ([self.animationSteps indexOfObject:animationStep] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
-            }        
+            }
         }
     }
     
@@ -268,34 +268,26 @@
                 continue;
             }
             
-            CGAffineTransform affineTransform = CATransform3DGetAffineTransform(viewAnimationStep.transform);            
+            CGAffineTransform affineTransform = CATransform3DGetAffineTransform(viewAnimationStep.transform);
             if (! floateq(affineTransform.b, 0.f) || ! floateq(affineTransform.c, 0.f)) {
                 HLSLoggerWarn(@"Animations with resizeViews set to YES only support translation or scale transforms");
                 continue;
             }
             
-            CGAffineTransform translation = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
-            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translation, affineTransform), 
-                                                                      CGAffineTransformInvert(translation));
-            
-            // Ensure views never end up blurry
-            view.frame = CGRectIntegral(CGRectApplyAffineTransform(view.frame, convTransform));
+            CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
+            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, affineTransform),
+                                                                      CGAffineTransformInvert(translationTransform));
+            CGRectApplyAffineTransform(view.frame, convTransform);
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
             [view layoutIfNeeded];
         }
         // Alter transform
         else {
-            CATransform3D translation = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
-            CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translation, viewAnimationStep.transform), 
-                                                              CATransform3DInvert(translation));
+            CATransform3D translationTransform = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
+            CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, viewAnimationStep.transform),
+                                                              CATransform3DInvert(translationTransform));
             view.layer.transform = CATransform3DConcat(view.layer.transform, convTransform);
-            
-            // For affine transforms, ensure that views never end up blurry (non-integral frame)
-            if (CATransform3DIsAffine(view.layer.transform)) {
-                view.layer.bounds = CGRectIntegral(view.layer.bounds);
-                view.layer.position = CGPointMake(roundf(view.layer.position.x), roundf(view.layer.position.y));
-            }
         }
     }
     
@@ -337,7 +329,7 @@
         if ([self.animationSteps count] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
-            }        
+            }
         }
         
         self.animationStepsEnumerator = nil;
@@ -352,18 +344,18 @@
         if (! self.cancelling) {
             if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
                 [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
-            }            
+            }
         }
         
         // If the animation has been cancelled and was not played animated, update
-        // its status. If the animation was played animated, the end animation callback 
+        // its status. If the animation was played animated, the end animation callback
         // will still be called for the interrupted animation step, and we must update
         // the animation status there (it would be too early here)
         if (animated) {
             self.cancelling = NO;
-            self.terminating = NO;            
+            self.terminating = NO;
         }
-    }    
+    }
 }
 
 - (void)cancel
@@ -416,7 +408,7 @@
             [self.delegate animationStepFinished:self.currentAnimationStep animated:NO];
         }
     }
-        
+    
     // Play all remaining steps without animation
     [self playNextStepAnimated:NO];
 }
@@ -431,8 +423,8 @@
     }
     
     HLSAnimation *animation = [[self copy] autorelease];
-        
-    // Find out which factor must be applied to each animation step to preserve the animation appearance for the 
+    
+    // Find out which factor must be applied to each animation step to preserve the animation appearance for the
     // specified duration
     double factor = duration / [self duration];
     
@@ -507,9 +499,9 @@
         if ([self.animationSteps indexOfObject:animationStep] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:YES];
-            }        
+            }
         }
-    }    
+    }
 }
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
@@ -536,7 +528,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; animationSteps: %@; tag: %@; lockingUI: %@, bringToFront: %@, delegate: %p>", 
+    return [NSString stringWithFormat:@"<%@: %p; animationSteps: %@; tag: %@; lockingUI: %@, bringToFront: %@, delegate: %p>",
             [self class],
             self,
             self.animationSteps,
