@@ -931,6 +931,37 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                   zFactor:1.f];
     viewAnimationStep21.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [NSArray arrayWithArray:animationSteps];
+}
+
+@end
+
+@implementation HLSTransitionEmergeFromCenterPushToBack
+
++ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
+                            disappearingView:(UIView *)disappearingView
+                                     inFrame:(CGRect)frame
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
+    viewAnimationStep11.alphaVariation = -1.f;
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
+                                  yFactor:1.f / kEmergeFromCenterScaleFactor
+                                  zFactor:1.f];
+    viewAnimationStep21.alphaVariation = 1.f;
+    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep22 scaleWithXFactor:kPushToTheBackScaleFactor
                                   yFactor:kPushToTheBackScaleFactor

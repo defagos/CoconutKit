@@ -19,16 +19,19 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
  * from view.
  *
- * Implement your animations based on the following assumptions:
+ * Implement your animations, knowing that when -animationStepsWithAppearingView:disappearingView:inFrame: gets
+ * called:
  *   - appearingView and disappearingView initially fill the given frame entirely (i.e. they have
  *     bounds = (0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)). This means that if you want the
  *     appearingView to start outside the frame you will need to use a first "setup" animation step bringing
- *     it into its initial position with a duration of 0
+ *     it into its initial position with a duration of 0 (see example below)
  *   - appearingView and disappearingView both have alpha = 1
  *   - appearingView is on top of disappearingView and both have the same superview
  *   - the duration of your steps is arbitrary. The sum of those durations defines the default duration of the 
- *     resulting animation. This might be scaled depending on the duration which is desired when the animation 
- *     is actually played (refer to -[HLSAnimation animationWithDuration:] documentation
+ *     resulting animation, which can be retrieved by calling the +duration class method of HLSTransition. The
+ *     duration of each animation step might be scaled depending on the total duration which is desired when 
+ *     the animation is actually played (refer to -[HLSAnimation animationWithDuration:] documentation for more
+ *     information)
  *
  * For example, here is the implementation of a push from right animation (the usual UINavigationController 
  * animation) with an intrinsic duration of 0.4:
@@ -62,13 +65,13 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *   }
  *
  * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition
- * classes are defined below
+ * classes are provided by CoconutKit and should fulfill most of your needs.
  */
 @interface HLSTransition : NSObject
 
 /**
- * Return an array of string identifiers for the available transitions. These include any custom transitions
- * as well
+ * Return all class names corresponding to transition animations (except HLSTransition itself). These include 
+ * custom transition as well
  */
 + (NSArray *)availableTransitionNames;
 
@@ -76,7 +79,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * The method to be overridden by subclasses to return the transition animation steps for the animation class.
  * The returned array must only contain HLSAnimationStep objects
  *
- * The default implementation of this method returns an empty animation (which do not alter any of the
+ * The default implementation of this method returns an empty animation (i.e. which does not alter any of the
  * views)
  */
 + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
@@ -310,6 +313,12 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * The new view emerges from the center of the frame, the old one is left as is
  */
 @interface HLSTransitionEmergeFromCenter : HLSTransition
+@end
+
+/**
+ * The new view emerges from the center of the frame while the old one is slightly pushed to the back
+ */
+@interface HLSTransitionEmergeFromCenterPushToBack : HLSTransition
 @end
 
 /**
