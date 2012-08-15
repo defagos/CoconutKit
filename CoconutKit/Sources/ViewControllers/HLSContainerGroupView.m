@@ -29,6 +29,10 @@
         
         self.backgroundColor = [UIColor clearColor];
         self.autoresizingMask = HLSViewAutoresizingAll;
+        
+        // Remark: If the view was previously added to another superview, it is removed
+        //         while kept alive. No need to call -removeFromSuperview and no need
+        //         for a retain-autorelease. See UIView documentation
         [self addSubview:frontView];
     }
     return self;
@@ -63,7 +67,12 @@
         [[self.subviews objectAtIndex:0] removeFromSuperview];
     }
     
-    [self insertSubview:backGroupView atIndex:0];
+    if (backGroupView) {
+        // Remark: If the view was previously added to another superview, it is removed
+        //         while kept alive. No need to call -removeFromSuperview and no need
+        //         for a retain-autorelease. See UIView documentation
+        [self insertSubview:backGroupView atIndex:0];
+    }
 }
 
 @end

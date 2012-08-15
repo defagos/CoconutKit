@@ -90,8 +90,8 @@
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
         
         HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontView:contentView] autorelease];
-        groupViewAtIndex.backGroupView = newGroupView;
         newGroupView.backGroupView = belowGroupViewAtIndex;
+        groupViewAtIndex.backGroupView = newGroupView;
         
         [self.groupViews insertObject:newGroupView atIndex:index];
     }
@@ -110,8 +110,8 @@
     
     // Remove at the top
     if (index == [self.groupViews count] - 1) {
-        groupView.backGroupView = nil;
-        
+        // No need to call -removeFromSuperview, the view is moved between superviews automatically. No need
+        // for a retain-autorelease: The view is kept alive during this process. See UIView documentation
         [self insertSubview:belowGroupView atIndex:0];
     }
     // Remove in the middle
