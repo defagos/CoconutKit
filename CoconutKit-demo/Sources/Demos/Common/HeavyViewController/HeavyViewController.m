@@ -10,6 +10,16 @@
 
 @implementation HeavyViewController
 
+#pragma mark Object creation and destruction
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    free(m_largeBlock);
+    m_largeBlock = NULL;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -20,6 +30,11 @@
     [NSThread sleepForTimeInterval:2.];
     
     self.view.backgroundColor = [UIColor randomColor];
+    
+    // Simulate a heavy memory consumption for the view
+    if (! m_largeBlock) {
+        m_largeBlock = malloc(5000000);
+    }
 }
 
 #pragma mark Orientation management
