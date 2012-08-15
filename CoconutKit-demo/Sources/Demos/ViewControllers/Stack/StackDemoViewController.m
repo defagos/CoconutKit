@@ -10,6 +10,7 @@
 
 #import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
+#import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
@@ -152,6 +153,12 @@
 {
     FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
     [self displayContentViewController:fixedSizeViewController];
+}
+
+- (IBAction)displayHeavy:(id)sender
+{
+    HeavyViewController *heavyViewController = [[[HeavyViewController alloc] init] autorelease];
+    [self displayContentViewController:heavyViewController];
 }
 
 - (IBAction)displayPortraitOnly:(id)sender

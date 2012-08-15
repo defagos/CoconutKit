@@ -26,6 +26,7 @@
 - (IBAction)displayContainmentTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;
 - (IBAction)displayFixedSize:(id)sender;
+- (IBAction)displayHeavy:(id)sender;
 - (IBAction)displayPortraitOnly:(id)sender;
 - (IBAction)displayLandscapeOnly:(id)sender;
 - (IBAction)hideWithModal:(id)sender;
