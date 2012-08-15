@@ -399,7 +399,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
          belowViewController:(UIViewController *)siblingViewController
          withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
-                    animated:(BOOL)animated
 {
     NSUInteger index = [[self viewControllers] indexOfObject:siblingViewController];
     if (index == NSNotFound) {
@@ -410,7 +409,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                        atIndex:index 
            withTransitionClass:transitionClass
                       duration:duration
-                      animated:animated];
+                      animated:NO /* irrelevant since can never insert at the top */];
 }
 
 - (void)insertViewController:(UIViewController *)viewController
