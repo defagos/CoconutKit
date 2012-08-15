@@ -33,9 +33,12 @@
 - (id)init
 {
     if ((self = [super init])) {
-        // Preload a view controller before display. Yep, this is possible (and not all placeholders have to be preloaded)!
+        // Preload view controllers before display. Yep, this is possible (not all placeholders have to be preloaded)!
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [self setInsetViewController:lifeCycleTestViewController atIndex:1];
+        [self setInsetViewController:lifeCycleTestViewController atIndex:0];
+        
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self setInsetViewController:containmentTestViewController atIndex:1];
         
         self.delegate = self;
     }
