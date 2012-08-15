@@ -8,8 +8,10 @@
 
 #import "HLSTransition.h"
 
+#import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import "NSObject+HLSExtensions.h"
 #import "NSSet+HLSExtensions.h"
 #import <objc/runtime.h>
 
@@ -60,7 +62,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransition
 
-#pragma mark Getting the available transition class list
+#pragma mark Getting transition animation information
 
 + (NSArray *)availableTransitionNames
 {
@@ -98,6 +100,23 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         s_availableTransitionNames = [[availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
     }
     return s_availableTransitionNames;
+}
+
++ (NSTimeInterval)duration
+{
+    static NSMutableDictionary *s_animationClassNameToDurationMap = nil;
+    if (! s_animationClassNameToDurationMap) {
+        s_animationClassNameToDurationMap = [[NSMutableDictionary dictionary] retain];
+    }
+    
+    NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
+    if (! duration) {
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] animationStepsWithAppearingView:nil disappearingView:nil inFrame:CGRectZero]];
+        duration = [NSNumber numberWithDouble:[animation duration]];
+        [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
+    }
+    
+    return [duration doubleValue];
 }
 
 #pragma mark Built-in transition common code

@@ -83,6 +83,11 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame;
 
+/**
+ * Return the intrinsic duration of a transition as given by its implementation
+ */
++ (NSTimeInterval)duration;
+
 @end
 
 /**
