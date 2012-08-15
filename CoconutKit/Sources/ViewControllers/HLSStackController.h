@@ -75,6 +75,7 @@
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
  * installed, and can neither be replaced, nor removed. The capacity can be freely set.
+ * TODO: Document values for capacity
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity;
 

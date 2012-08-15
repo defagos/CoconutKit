@@ -18,6 +18,8 @@
 
 // TODO: Document when viewWillAppear... etc. are called, test cases, and when animated = YES / NO
 
+// TODO: Prevent containerView from being changed after the view has been displayed
+
 /**
  * TODO: Mimic behavior of the navigation controller delegate methods?
  * - display as root -> calls will / didShow for the root view controller
