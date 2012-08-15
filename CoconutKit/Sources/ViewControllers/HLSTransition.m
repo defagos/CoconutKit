@@ -42,10 +42,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                            appearingView:(UIView *)appearingView
                                         disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)pushToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                yOffset:(CGFloat)yOffset
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView;
++ (NSArray *)pushAndToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                   yOffset:(CGFloat)yOffset
+                                             appearingView:(UIView *)appearingView
+                                          disappearingView:(UIView *)disappearingView;
 
 + (NSArray *)flowAnimationStepsWithInitialXOffset:(CGFloat)xOffset
                                           yOffset:(CGFloat)yOffset
@@ -195,6 +195,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
+    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
+    // transition animation
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.alphaVariation = -1.f;
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
+    animationStep3.duration = 0.;
+    [animationSteps addObject:animationStep3];
+    
     return [NSArray arrayWithArray:animationSteps];
 }
 
@@ -229,13 +238,22 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.2;
     [animationSteps addObject:animationStep3];
     
+    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
+    // transition animation
+    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep41.alphaVariation = -1.f;
+    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:disappearingView];
+    animationStep4.duration = 0.;
+    [animationSteps addObject:animationStep4];
+    
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                yOffset:(CGFloat)yOffset
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView
++ (NSArray *)pushAndToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                   yOffset:(CGFloat)yOffset
+                                             appearingView:(UIView *)appearingView
+                                          disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -256,6 +274,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
+    
+    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
+    // transition animation
+    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    viewAnimationStep31.alphaVariation = -1.f;
+    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
+    animationStep3.duration = 0.;
+    [animationSteps addObject:animationStep3];
     
     return [NSArray arrayWithArray:animationSteps];
 }
@@ -298,8 +325,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep4.duration = 0.2;
     [animationSteps addObject:animationStep4];
     
-    // Make the disappearing view disappear. Otherwise the view which disappeared might be visible if we apply the same
-    // effect to push another view controller
+    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
+    // transition animation
     HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep51.alphaVariation = -1.f;
@@ -802,10 +829,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
 {
-    return [HLSTransition pushToBackAnimationStepsWithInitialXOffset:0.f
-                                                             yOffset:CGRectGetHeight(frame)
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:0.f
+                                                                yOffset:CGRectGetHeight(frame)
+                                                          appearingView:appearingView
+                                                       disappearingView:disappearingView];
 }
 
 @end
@@ -816,10 +843,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
 {
-    return [HLSTransition pushToBackAnimationStepsWithInitialXOffset:0.f
-                                                             yOffset:-CGRectGetHeight(frame)
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:0.f
+                                                                yOffset:-CGRectGetHeight(frame)
+                                                          appearingView:appearingView
+                                                       disappearingView:disappearingView];
 }
 
 @end
@@ -830,10 +857,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
 {
-    return [HLSTransition pushToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                             yOffset:0.f
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                yOffset:0.f
+                                                          appearingView:appearingView
+                                                       disappearingView:disappearingView];
 }
 
 @end
@@ -844,10 +871,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame
 {
-    return [HLSTransition pushToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                             yOffset:0.f
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                yOffset:0.f
+                                                          appearingView:appearingView
+                                                       disappearingView:disappearingView];
 }
 
 @end
