@@ -18,20 +18,54 @@ extern const NSUInteger HLSContainerStackDefaultCapacity;
 extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 /**
- * The HLSContainerStack class purpose is to make container implementation (which is not a trivial task) as
- * easy as possible. Implementing a view controller container correctly is namely difficult. The
- * HLSContainerStack class offers the following features:
- *   - view lifecycle and rotation events are correctly forwarded to children view controllers
- *   - view controllers can be unloaded or removed when deep enough into the stack (capacity)
- *   - view controller properties (title, navigation items, etc.) can be forwarded automatically to the
- *     container view controller
- *   - view controllers can be added and removed anywhere in the stack with the correct animation
- *   - children view controller views are instantiated when really needed, not earlier
- *   - view controllers can be loaded into a container before it is displayed
- 
- * Instead of having to manage children view controllers manually, instantiate a container stack, and attach 
- * it the view where children must be drawn once it is available
+ * The HLSContainerStack provides a convenient and easy interface to implement your own view controller containers,
+ * which is usually not a trivial task. Unlike the UIViewController containment API, this class is compatible with 
+ * iOS 4 as well, and provides powerful features which let you implement custom containers in a snap. The iOS 5 
+ * containment API, though powerful, namely still requires a lot of work to implement perfectly working containers. 
+ * This is not the case with HLSContainerStack, which provides a robust way to implement the containers of your
+ * dreams.
  *
+ * A lot of work has been made to provide a clean and powerful interface to implement containers exhibiting
+ * correct behavior and maximum flexibility. Most notably:
+ *   - view lifecycle and rotation events are correctly forwarded to children view controllers
+ *   - custom animations can be provided when pushing view controllers into a stack. A standard set of
+ *     animations is provided out of the box. Animations behave correctly in all cases, even if the stack
+ *     was rotated between push and pop operations, or if views have been unloaded
+ *   - a delegate (usually your container implementation) can register itself with a stack to be notified when 
+ *     a view controller gets pushed, popped, appears or disappears. The set of delegate methods which can be 
+ *     implemented is far richer than the ones of UIKit built-in containers, e.g. UINavigationController. Your
+ *     custom containers usually then only need to forward those events they are interested in through a
+ *     dedicated delegate protocol
+ *   - the methods -[UIViewController isMovingTo/FromParentViewController] return correct results, consistent
+ *     with those returned when using standard built-in UIKit containers (iOS 5 only)
+ *   - a depth can be provided so that children view controller's views deep enough are automatically unloaded
+ *     and reloaded when needed, saving memory. Alternatively, a view controller can be removed from the stack
+ *     as soon as it gets deep enough. This makes it possible to implement containers with a FIFO behavior (the
+ *     case where the depth is set to 1 corresponds to a stack displaying a single child view controller)
+ *   - custom containers implemented using HLSContainerStack behave correctly, whether they are embedded into 
+ *     another container (even built-in ones), displayed as the root of an application, or modally
+ *   - stacks can be used to display any kind of view controllers, even standard UIKit containers like
+ *     UITabBarController or UINavigationController
+ *   - custom containers can be nested to create any kind of application workflow
+ *   - view controllers can be preloaded into a stack before it is actually displayed
+ *   - view controllers can be inserted into or removed from a stack at any position. Methods have been supplied
+ *     to pop to a given view controller (even the root one) or to remove all view controllers at once
+ *   - children view controller's views are instantiated right when needed, avoding wasting memory
+ *   - view controllers are owned by a stack, but if you need to cached some of them for performance reasons,
+ *     you still can: Simply manage an external strong reference to the view controllers you want to cache
+ *   - storyboards are supported (iOS 5 and above only). You are responsible of implementing segues in your own
+ *     container implementations, though (see HLSPlaceholderViewController.m and HLSStackController.m for examples)
+ *   - view controller containment relationships are consistent with those expected from UIKit built-in containers.
+ *     In particular, some properties are automatically forwarded from a child view controller to a navigation
+ *     controller if it displays a custom container, and modal view controllers are presented by the furthest
+ *     ancestor container
+ *   - a custom container can contain several HLSContainerStacks if it needs to display several children view
+ *     controllers simultaneously
+ *
+ * Even though the new iOS 5 containment API is promising, implementing your own view controllers using
+ * HLSContainerStack has many advantages. Give it a try, you won't be disappointed!
+ *
+ * Designated initializer: initWithContainerViewController:capacity:removing:rootViewControllerMandatory:
  */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private
@@ -45,6 +79,9 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     id<HLSContainerStackDelegate> m_delegate;
 }
 
+/**
+ * Convenience constructor to instantiate a 
+ */
 + (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController;
 
 /**
