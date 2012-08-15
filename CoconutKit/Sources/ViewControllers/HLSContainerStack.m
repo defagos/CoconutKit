@@ -312,7 +312,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Resurrect view controller's views below the view controller we pop to so that the capacity criterium
     // is satisfied
-    for (NSUInteger i = 0; i < self.capacity; ++i) {
+    for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
         NSUInteger index = firstRemovedIndex - 1 - i;
         HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
         [self addViewForContainerContent:containerContent playingTransition:NO animated:NO];
@@ -516,7 +516,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Display those views required according to the capacity
-    for (NSUInteger i = 0; i < self.capacity; ++i) {
+    for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
         // Never play transitions (we are building the view hierarchy). Only the top view controller receives
         // the animated information
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
@@ -620,7 +620,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
-        for (NSUInteger i = 0; i < self.capacity; ++i) {
+        for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
@@ -651,7 +651,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
-        for (NSUInteger i = 0; i < self.capacity; ++i) {
+        for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
@@ -679,7 +679,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     // Same remark as above
     if ([self.containerContents count] != 0) {
-        for (NSUInteger i = 0; i < self.capacity; ++i) {
+        for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
