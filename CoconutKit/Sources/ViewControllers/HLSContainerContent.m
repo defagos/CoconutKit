@@ -35,9 +35,9 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 @property (nonatomic, retain) UIViewController *viewController;
 @property (nonatomic, assign) UIViewController *containerViewController;        // weak ref
 
-@property (nonatomic, assign) HLSContainerStackView *containerStackView;
 @property (nonatomic, assign) Class transitionClass;
 @property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic, assign) HLSContainerStackView *containerStackView;        // weak ref
 @property (nonatomic, assign) CGRect originalViewFrame;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 @property (nonatomic, assign) BOOL movingToParentViewController;
@@ -93,7 +93,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
             transitionClass = [HLSTransition class];
         }
         
-        // Cannot be mixed with new iOS 5 containment API (but fully iOS 5 compatible)
+        // Cannot be mixed with iOS 5 containment API (but fully iOS 5 compatible)
         if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
                 && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
             [self release];
@@ -183,13 +183,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 @synthesize containerViewController = m_containerViewController;
 
-@synthesize containerStackView = m_containerStackView;
-
-- (BOOL)isAddedToContainerView
-{
-    return self.containerStackView != nil;
-}
-
 @synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
@@ -204,6 +197,13 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         m_duration = duration;
     }
+}
+
+@synthesize containerStackView = m_containerStackView;
+
+- (BOOL)isAddedToContainerView
+{
+    return self.containerStackView != nil;
 }
 
 @synthesize originalViewFrame = m_originalViewFrame;
@@ -260,8 +260,8 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     // view controller's view (if any), this view is neither reloaded nor added as subview of the tab bar controller's view 
     // again. The tab bar controller ends up empty.
     //
-    // This happens only if the new iOS 5 -[UIViewController addChildViewController:] method has been called to declare the 
-    // tab bar controller as child of a custom container implemented using HLSContainerContent. But since this containment
+    // This happens only if the iOS 5 -[UIViewController addChildViewController:] method has been called to declare the tab
+    // bar controller as child of a custom container implemented using HLSContainerContent. But since this containment
     // relationship must be declared for correct behavior on iOS 5, we have to find a workaround.
     //
     // Steps to reproduce the issue (with the code below commented out):
