@@ -13,28 +13,37 @@
 extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 
 /**
- * Common class for transition animations involving two views (currently for use by containers). To define your
- * own transition animations, subclass HLSTransition and implement the 
+ * Base class for transition animations involving two views (currently for use by containers). To define your
+ * own transition animation, subclass HLSTransition and implement the 
  *   -animationStepsWithAppearingView:disappearingView:inFrame:
  * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
  * from view.
  *
- * Implement your animations, knowing that when -animationStepsWithAppearingView:disappearingView:inFrame: gets
- * called:
- *   - appearingView and disappearingView initially fill the given frame entirely (i.e. they have
- *     bounds = (0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)). This means that if you want the
- *     appearingView to start outside the frame you will need to use a first "setup" animation step bringing
- *     it into its initial position with a duration of 0 (see example below)
- *   - appearingView and disappearingView both have alpha = 1
- *   - appearingView is on top of disappearingView and both have the same superview
- *   - the duration of your steps is arbitrary. The sum of those durations defines the default duration of the 
- *     resulting animation, which can be retrieved by calling the +duration class method of HLSTransition. The
- *     duration of each animation step might be scaled depending on the total duration which is desired when 
+ * When implementing -animationStepsWithAppearingView:disappearingView:inFrame:, keep in mind that:
+ *   - appearingView and disappearingView must not be used directly (in particular, you must not access their current
+ *     frame or alpha). Those view parameters are only provided so that they can be supplied to
+ *       -[HLSAnimationStep addViewAnimationStep:forView]
+ *     when building the animation steps
+ *   - when implementing -animationStepsWithAppearingView:disappearingView:inFrame:, create your animation steps
+ *     based on the folowing assumptions (regardless of the current appearingView and disappearingView properties,
+ *     which you should ignore, as said above):
+ *       - both the appearing and disappearing views fill the given frame entirely, i.e. they have 
+ *           bounds = {0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)}
+ *       - both views have alpha = 1.f
+ *       - the appearing view is on top of the disappearing one
+ *     If you need your appearing view to start from a different initial state, use a first "setup" animation step
+ *     with duration = 0. This way you can make it initially invisible or outside the frame. Conversely, you can
+ *     add a final animation step to make the disappearing view invisible at the end of the animation (this might
+ *     be required for animations moving the disappearing view outside the frame, so that it stays invisible when
+ *     subsequent animations are played)
+ *   - the duration of your animation steps is arbitrary. The sum of those durations defines the default duration 
+ *     of the resulting animation, which can be retrieved by calling the +defaultDuration on a transition class.
+ *     The duration of each animation step might be scaled depending on the total duration which is desired when
  *     the animation is actually played (refer to -[HLSAnimation animationWithDuration:] documentation for more
  *     information)
  *
- * For example, here is the implementation of a push from right animation (the usual UINavigationController 
- * animation) with an intrinsic duration of 0.4:
+ * For example, here is the implementation of a push from right animation (the usual UINavigationController animation) 
+ * with an intrinsic duration of 0.4:
  *
  *   + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
  *                               disappearingView:(UIView *)disappearingView
@@ -42,7 +51,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *   {
  *       NSMutableArray *animationSteps = [NSMutableArray array];
  *
- *       // Setup step bringing the appearingView outside the frame
+ *       // Setup step initially bringing the appearing view outside the frame
  *       HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
  *       HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
  *       [viewAnimationStep11 translateByVectorWithX:CGRectGetWidth(frame) y:0.f z:0.f];
@@ -50,7 +59,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       animationStep1.duration = 0.;
  *       [animationSteps addObject:animationStep1];
  *
- *       // The push itself, moving the two views to the left
+ *       // The push itself, moving both views to the left
  *       HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
  *       HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
  *       [viewAnimationStep21 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f z:0.f];
@@ -61,26 +70,34 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       animationStep2.duration = 0.4;
  *       [animationSteps addObject:animationStep2];
  *
+ *       // Make the disappearing view invisible
+ *       HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+ *       viewAnimationStep31.alphaVariation = -1.f;
+ *       [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
+ *       animationStep3.duration = 0.;
+ *       [animationSteps addObject:animationStep3];
+ *
  *       return [NSArray arrayWithArray:animationSteps];
  *   }
  *
- * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition
- * classes are provided by CoconutKit and should fulfill most of your needs.
+ * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition classes are 
+ * provided by CoconutKit and should fulfill most of your needs.
  */
 @interface HLSTransition : NSObject
 
 /**
- * Return all class names corresponding to transition animations (except HLSTransition itself). These include 
- * custom transition as well
+ * Return all class names corresponding to available transition animations (except HLSTransition itself). These include 
+ * custom transitions as well
  */
 + (NSArray *)availableTransitionNames;
 
 /**
- * The method to be overridden by subclasses to return the transition animation steps for the animation class.
+ * The method to be overridden by subclasses to return the transition animation steps which the animation is made of.
  * The returned array must only contain HLSAnimationStep objects
  *
- * The default implementation of this method returns an empty animation (i.e. which does not alter any of the
- * views)
+ * The default implementation of this method returns nil, which corresponds to an empty animation (i.e. an animation
+ * which does not alter any view)
  */
 + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
@@ -89,7 +106,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * Return the intrinsic duration of a transition as given by its implementation
  */
-+ (NSTimeInterval)duration;
++ (NSTimeInterval)defaultDuration;
 
 @end
 

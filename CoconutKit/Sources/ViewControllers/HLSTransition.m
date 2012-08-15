@@ -81,8 +81,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                 continue;
             }
             
-            // Find whether HLSTransition is a superclass. We cannot use isSubclassOfClass: since it is an NSObject
-            // method and we might encounter other kinds of classes
+            // Find whether HLSTransition is a superclass. We cannot use -isSubclassOfClass: since it is an NSObject
+            // method and we might encounter other kinds of classes (e.g. proxies)
             // TODO: Factor out in HLSRuntime.h after merge with url-networking branch
             Class superclass = class;
             do {
@@ -102,8 +102,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return s_availableTransitionNames;
 }
 
-+ (NSTimeInterval)duration
++ (NSTimeInterval)defaultDuration
 {
+    // Durations are constants for each transition animation class. Can cache them
     static NSMutableDictionary *s_animationClassNameToDurationMap = nil;
     if (! s_animationClassNameToDurationMap) {
         s_animationClassNameToDurationMap = [[NSMutableDictionary dictionary] retain];
@@ -111,6 +112,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
     if (! duration) {
+        // Calculate for a dummy animation
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] animationStepsWithAppearingView:nil disappearingView:nil inFrame:CGRectZero]];
         duration = [NSNumber numberWithDouble:[animation duration]];
         [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
@@ -127,6 +129,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
@@ -151,6 +154,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
@@ -178,6 +182,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
@@ -195,8 +200,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
-    // transition animation
+    // Make the disappearing view invisible
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
@@ -214,6 +218,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
@@ -238,8 +243,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.2;
     [animationSteps addObject:animationStep3];
     
-    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
-    // transition animation
+    // Make the disappearing view invisible
     HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep41.alphaVariation = -1.f;
@@ -257,6 +261,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
@@ -275,8 +280,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
-    // transition animation
+    // Make the disappearing view invisible
     HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
@@ -294,6 +298,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
@@ -325,8 +330,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep4.duration = 0.2;
     [animationSteps addObject:animationStep4];
     
-    // Make the disappearing view invisible. Otherwise the view which disappeared might be visible when we play another
-    // transition animation
+    // Make the disappearing view invisible
     HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
     viewAnimationStep51.alphaVariation = -1.f;
@@ -345,6 +349,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
@@ -943,6 +948,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
@@ -974,6 +980,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
+    // Setup animation step
     HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
     HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
