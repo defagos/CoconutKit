@@ -70,7 +70,6 @@
     HLSContainerStackView *m_containerStackView;
     CGRect m_originalViewFrame;
     UIViewAutoresizing m_originalAutoresizingMask;
-    CGFloat m_originalViewAlpha;
     BOOL m_movingToParentViewController;
     BOOL m_movingFromParentViewController;
 }
@@ -113,11 +112,6 @@
  * Return YES iff the view controller has been added to a container
  */
 @property (nonatomic, readonly, assign, getter=isAddedToContainerView) BOOL addedToContainerView;
-
-/**
- * The original view properties
- */
-@property (nonatomic, readonly, assign) CGRect originalViewFrame;
 
 /**
  * Instantiate (if not already) and add the view controller's view as subview of the view where a container displays

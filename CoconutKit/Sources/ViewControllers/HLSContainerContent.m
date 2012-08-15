@@ -39,7 +39,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 @property (nonatomic, assign) Class transitionClass;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) CGRect originalViewFrame;
-@property (nonatomic, assign) CGFloat originalViewAlpha;
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
 @property (nonatomic, assign) BOOL movingToParentViewController;
 @property (nonatomic, assign) BOOL movingFromParentViewController;
@@ -158,7 +157,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     // or not it is later reused
     if ([self.viewController isViewLoaded]) {
         self.viewController.view.frame = self.originalViewFrame;
-        self.viewController.view.alpha = self.originalViewAlpha;
         self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
     }
     
@@ -210,8 +208,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 @synthesize originalViewFrame = m_originalViewFrame;
 
-@synthesize originalViewAlpha = m_originalViewAlpha;
-
 @synthesize originalAutoresizingMask = m_originalAutoresizingMask;
 
 @synthesize movingToParentViewController = m_movingToParentViewController;
@@ -249,7 +245,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Save original view controller's view properties
     self.originalViewFrame = self.viewController.view.frame;
-    self.originalViewAlpha = self.viewController.view.alpha;
     self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
         
     // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
@@ -325,7 +320,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
-    self.viewController.view.alpha = self.originalViewAlpha;
     self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
 }
 
