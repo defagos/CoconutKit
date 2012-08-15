@@ -109,7 +109,7 @@
 - (NSArray *)contentViews;
  
 /**
- * Insert a view at a given index
+ * Insert a view at a given index. If index is [contentViews count], then the view is added at the top
  */
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index;
 
@@ -119,7 +119,7 @@
 - (void)removeContentView:(UIView *)contentView;
 
 /**
- * Return the group view containing a given view as topmost subview
+ * Return the group view containing a given view as topmost subview. Return nil if not found
  */
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
 

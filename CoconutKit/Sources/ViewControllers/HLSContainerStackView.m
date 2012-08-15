@@ -46,18 +46,6 @@
 
 #pragma mark View management
 
-- (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView
-{
-    NSUInteger i = 0;
-    for (HLSContainerGroupView *groupView in self.groupViews) {
-        if (groupView.frontView == contentView) {
-            return groupView;
-        }
-        ++i;
-    }
-    return nil;
-}
-
 - (NSUInteger)indexOfContentView:(UIView *)contentView
 {
     NSUInteger i = 0;
@@ -86,6 +74,7 @@
         return;
     }
     
+    // Add to the top
     if (index == [self.groupViews count]) {
         HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
         
@@ -95,6 +84,7 @@
         [self.groupViews addObject:newGroupView];
         [self addSubview:newGroupView];
     }
+    // Insert in the middle
     else {
         HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
@@ -117,11 +107,14 @@
     
     HLSContainerGroupView *groupView = [self.groupViews objectAtIndex:index];
     HLSContainerGroupView *belowGroupView = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
+    
+    // Remove at the top
     if (index == [self.groupViews count] - 1) {
         groupView.backGroupView = nil;
         
         [self insertSubview:belowGroupView atIndex:0];
     }
+    // Remove in the middle
     else {
         HLSContainerGroupView *aboveGroupView = [self.groupViews objectAtIndex:index + 1];
         aboveGroupView.backGroupView = belowGroupView;
@@ -129,6 +122,18 @@
     
     [groupView removeFromSuperview];
     [self.groupViews removeObjectAtIndex:index];
+}
+
+- (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView
+{
+    NSUInteger i = 0;
+    for (HLSContainerGroupView *groupView in self.groupViews) {
+        if (groupView.frontView == contentView) {
+            return groupView;
+        }
+        ++i;
+    }
+    return nil;
 }
 
 @end
