@@ -344,6 +344,17 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         
         m_animating = YES;
         
+        // The search bar does not store its text when it collapses
+        self.searchBar.text = nil;
+        
+        // Remove all search bar additional controls
+        self.searchBar.prompt = nil;
+        self.searchBar.placeholder = nil;
+        self.searchBar.showsBookmarkButton = NO;
+        self.searchBar.showsSearchResultsButton = NO;
+        
+        [self.searchBar resignFirstResponder];
+        
         HLSAnimation *reverseAnimation = [[self expansionAnimation] reverseAnimation];
         [reverseAnimation playAnimated:animated];
     }
@@ -357,22 +368,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
-
-- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
-{
-    if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
-        // The search bar does not store its text when it collapses
-        self.searchBar.text = nil;
-        
-        // Remove all search bar additional controls
-        self.searchBar.prompt = nil;
-        self.searchBar.placeholder = nil;
-        self.searchBar.showsBookmarkButton = NO;
-        self.searchBar.showsSearchResultsButton = NO;
-        
-        [self.searchBar resignFirstResponder];
-    }
-}
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {

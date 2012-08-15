@@ -20,21 +20,21 @@
 {
     [super releaseViews];
     
-    self.animatedSwitch = nil;
     self.searchBar1 = nil;
     self.searchBar2 = nil;
     self.searchBar3 = nil;
+    self.animatedSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize searchBar1 = m_searchBar1;
 
 @synthesize searchBar2 = m_searchBar2;
 
 @synthesize searchBar3 = m_searchBar3;
+
+@synthesize animatedSwitch = m_animatedSwitch;
 
 #pragma mark View lifecycle
 
@@ -153,11 +153,15 @@
 - (IBAction)expandSearchBar1:(id)sender
 {
     [self.searchBar1 setExpanded:YES animated:self.animatedSwitch.on];
+    [self.searchBar2 setExpanded:YES animated:self.animatedSwitch.on];
+    [self.searchBar3 setExpanded:YES animated:self.animatedSwitch.on];
 }
 
 - (IBAction)collapseSearchBar1:(id)sender
 {
     [self.searchBar1 setExpanded:NO animated:self.animatedSwitch.on];
+    [self.searchBar2 setExpanded:NO animated:self.animatedSwitch.on];
+    [self.searchBar3 setExpanded:NO animated:self.animatedSwitch.on];
 }
 
 @end
