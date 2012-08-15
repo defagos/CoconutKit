@@ -32,6 +32,7 @@
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
 "Collapse"="Contracter";
+"Containment test"="Test d'appartenance";
 "Core"="Core";
 "Country"="Pays";
 "Cover from top"="Cover depuis le haut";
@@ -96,10 +97,14 @@
 "Play forward"="Jouer l'animation";
 "Play backward"="Jouer l'animation inverse";
 "Pop"="Pop";
+"Pop 3 VCs"="Pop 3 VCs";
+"Pop non-animated"="Pop non-animé";
+"Pop to root"="Pop vers la racine";
 "Portrait only"="Uniquement portrait";
 "Previous"="Précédent";
 "Push"="Push";
 "Push from bottom"="Push depuis le bas";
+"Push non-animated"="Push non-animé";
 "Push UINavigationController"="Push UINavigationController";
 "Push UITabBarController"="Push UITabBarController";
 "Random"="Aléatoire";

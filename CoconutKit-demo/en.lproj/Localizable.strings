@@ -32,6 +32,7 @@
 "Close"="Close";
 "Coconuts"="Coconuts";
 "Collapse"="Collapse";
+"Containment test"="Containment test";
 "Core"="Core";
 "Country"="Country";
 "Cover from top"="Cover from top";
@@ -97,10 +98,14 @@
 "Play forward"="Play forward";
 "Play backward"="Play backward";
 "Pop"="Pop";
+"Pop 3 VCs"="Pop 3 VCs";
+"Pop non-animated"="Pop non-animated";
+"Pop to root"="Pop to root";
 "Portrait only"="Portrait only";
 "Previous"="Previous";
 "Push"="Push";
 "Push from bottom"="Push from bottom";
+"Push non-animated"="Push non-animated";
 "Push UINavigationController"="Push UINavigationController";
 "Push UITabBarController"="Push UITabBarController";
 "Random"="Random";
