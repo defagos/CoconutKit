@@ -160,7 +160,8 @@ static const UIViewAnimationCurve kAnimationStepDefaultCurve = UIViewAnimationCu
     HLSAnimationStep *animationStepCopy = [[HLSAnimationStep allocWithZone:zone] init];
     for (UIView *view in [self views]) {
         HLSViewAnimationStep *viewAnimationStep = [self viewAnimationStepForView:view];
-        [animationStepCopy addViewAnimationStep:[viewAnimationStep copyWithZone:zone] forView:view];
+        HLSViewAnimationStep *viewAnimationStepCopy = [[viewAnimationStep copyWithZone:zone] autorelease];
+        [animationStepCopy addViewAnimationStep:viewAnimationStepCopy forView:view];
     }
     animationStepCopy.tag = self.tag;
     animationStepCopy.duration = self.duration;

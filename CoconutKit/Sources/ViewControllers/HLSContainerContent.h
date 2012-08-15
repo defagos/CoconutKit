@@ -68,7 +68,6 @@
     Class m_transitionClass;
     NSTimeInterval m_duration;
     HLSContainerStackView *m_containerStackView;
-    BOOL m_addedToContainerView;
     CGRect m_originalViewFrame;
     UIViewAutoresizing m_originalAutoresizingMask;
     CGFloat m_originalViewAlpha;

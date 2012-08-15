@@ -467,7 +467,8 @@
     if (self.animationSteps) {
         NSMutableArray *animationStepCopies = [NSMutableArray array];
         for (HLSAnimationStep *animationStep in self.animationSteps) {
-            [animationStepCopies addObject:[animationStep copyWithZone:zone]];
+            HLSAnimationStep *animationStepCopy = [[animationStep copyWithZone:zone] autorelease];
+            [animationStepCopies addObject:animationStepCopy];
         }
         animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];
     }
