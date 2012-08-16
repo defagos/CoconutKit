@@ -37,8 +37,10 @@
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [self setInsetViewController:lifeCycleTestViewController atIndex:0];
         
+        // We can even assign a transition animation. Since the view controller has been preloaded, it won't be played,
+        // but it will later be used if we set the inset to nil
         ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
-        [self setInsetViewController:containmentTestViewController atIndex:1];
+        [self setInsetViewController:containmentTestViewController atIndex:1 withTransitionClass:[HLSTransitionCoverFromBottom class]];
         
         self.delegate = self;
     }

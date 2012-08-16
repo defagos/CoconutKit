@@ -162,18 +162,18 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if (m_containerView == containerView) {
         return;
     }
-    
-    if (! [self.containerViewController isViewLoaded]) {
-        HLSLoggerError(@"Cannot set a container view when the container view controller's view has not been loaded");
-        return;
-    }
-    
+        
     if ([self.containerViewController isViewVisible]) {
         HLSLoggerError(@"Cannot change the container view when the container view controller is being displayed");
         return;
     }
     
     if (containerView) {
+        if (! [self.containerViewController isViewLoaded]) {
+            HLSLoggerError(@"Cannot set a container view when the container view controller's view has not been loaded");
+            return;
+        }
+        
         if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
             HLSLoggerError(@"The container view must be part of the container view controller's view hiearchy");
             return;
@@ -535,6 +535,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if (! self.containerView) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"No container view has been set"
+                                     userInfo:nil];
+    }
+    
     if (m_rootViewControllerMandatory && [self.containerContents count] == 0) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException 
                                        reason:@"A root view controller is mandatory"
@@ -720,25 +726,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 // The containerContent object must already reside in containerContents. This method is namely intended to be used
 // when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
 // controllers
+
+/**
+ * Method to add the view for a container content to the stack view hierarchy. The container content parameter is mandatory
+ * and must belong to the stack
+ */
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent 
                  playingTransition:(BOOL)playingTransition
                           animated:(BOOL)animated
 {
-    if (! containerContent) {
-        HLSLoggerError(@"Missing container content parameter");
-        return;
-    }
-    
+    NSAssert(containerContent != nil, @"A container content is mandatory");
+        
     if (! [self.containerViewController isViewVisible]) {
         return;
     }
-    
-    if (! self.containerView) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"The view controller container view has been loaded, but no container view has been set"
-                                     userInfo:nil];
-    }
-    
+        
     if (containerContent.addedToContainerView) {
         return;
     }
@@ -776,7 +778,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
         HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForContentView:[aboveContainerContent viewIfLoaded]];
         HLSAnimation *aboveAnimation = [HLSContainerStack transitionAnimationWithClass:aboveContainerContent.transitionClass
-                                                                         appearingView:nil
+                                                                         appearingView:nil      /* only play the animation for the view we added */
                                                                       disappearingView:aboveGroupView.backGroupView
                                                                                 inView:aboveGroupView
                                                                               duration:aboveContainerContent.duration];
@@ -792,7 +794,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                        inView:groupView
                                                                      duration:containerContent.duration];
     animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
-    if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+    if (playingTransition && index == [self.containerContents count] - 1) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
         
