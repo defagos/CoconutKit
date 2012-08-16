@@ -37,7 +37,9 @@
             NSString *segueIdentifier = [NSString stringWithFormat:@"%@%d", HLSPlaceholderPreloadSegueIdentifierPrefix, i];
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }
-        @catch (NSException *exception) {}
+        @catch (NSException *exception) {
+            HLSLoggerDebug(@"Exception caught but not rethrown: %@", exception);
+        }
     }
 }
 

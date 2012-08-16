@@ -65,7 +65,9 @@
     @try {
         [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
     }
-    @catch (NSException *exception) {}
+    @catch (NSException *exception) {
+        HLSLoggerDebug(@"Exception caught but not rethrown: %@", exception);
+    }
     
     if ([self.containerStack count] == 0) {
         NSString *reason = [NSString stringWithFormat: @"No root view controller has been loaded. Drag a segue called '%@' "
