@@ -73,6 +73,14 @@ If your project targets iOS 4 as well as iOS 5 and above, you might encounter _s
 
 CoconutKit is meant to be used in binary form to reduce compile times and executable size. You can add the CoconutKit project as a project dependency, but this is an approach I do not endorse and therefore do not officially support.
 
+#### Enabling logging
+
+CoconutKit provides a built-in logger which it uses to provide valuable information about its internal status. This should help you easily discover any issue you might encounter when using CoconutKit. To enable logging in a project using CoconutKit:
+
+* If you are using CoconutKit binaries, link your project against the debug version of the CoconutKit `.staticframework`. If you are using CocoaPods, no special care is needed since debug binaries will be used when compiling your project in debug mode
+* Edit your project target and add `-DHLS_LOGGER` to your `Other C Flags` for the debug configuration
+* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
+
 ### How should I use CoconutKit?
 
 After CoconutKit has been added to your project, simply import the headers you need using the `#import <CoconutKit/HeaderFile.h>` syntax. Though you can import files only where you need them, I strongly recommend importing the CoconutKit global header file from your project `.pch` file once for all (`#import <CoconutKit/CoconutKit.h>`). This file includes all CoconutKit public headers so that you do not need any other import.
