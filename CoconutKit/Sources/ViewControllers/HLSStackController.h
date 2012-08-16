@@ -137,7 +137,8 @@
  * Pop all view controllers to get back to a given view controller. The current top view controller will transition
  * to the specified view controller using the reverse animation with which it was pushed onto the stack. 
  *
- * If the view controller to pop to does not belong to the stack or is nil, this method does nothing
+ * If the view controller to pop to does not belong to the stack or is the current top view controller, this method 
+ * does nothing
  */
 - (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
@@ -210,41 +211,78 @@
 
 @end
 
+/**
+ * This protocol offers more methods than the equivalent protocol of UINavigationController. This provides much
+ * more information about appearance and disappearance events (and especially since HLSStackController allows
+ * insertion and removal anywhere in a stack)
+ */
 @protocol HLSStackControllerDelegate <NSObject>
 
 @optional
 
+/**
+ * Called before pushedViewController is about to be pushed onto the stack. When called, pushedViewController does not
+ * belong to [self viewControllers] yet, and the parent-child containment relationship has not been established.
+ * The coveredViewController parameter is the view controller which is about to be covered (nil if none)
+ */
 - (void)stackController:(HLSStackController *)stackController
  willPushViewController:(UIViewController *)pushedViewController
     coverViewController:(UIViewController *)coveredViewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a child view controller is about to be displayed. When called, viewController is always in
+ * [self viewControllers], even if this event is the result of a push
+ */
 - (void)stackController:(HLSStackController *)stackController
  willShowViewController:(UIViewController *)viewController 
                animated:(BOOL)animated;
 
+/**
+ * Called when a child view controller has been displayed
+ */
 - (void)stackController:(HLSStackController *)stackController
   didShowViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a view controller has been pushed onto the stack. The coveredViewController parameter is the view
+ * controller which was covered (nil if none)
+ */
 - (void)stackController:(HLSStackController *)stackController
   didPushViewController:(UIViewController *)pushedViewController
     coverViewController:(UIViewController *)coveredViewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a view controller is about to be popped off the stack. The revealedViewController parameter is the
+ * view controller which will be revealed (nil if none)
+ */
 - (void)stackController:(HLSStackController *)stackController
   willPopViewController:(UIViewController *)poppedViewController
    revealViewController:(UIViewController *)revealedViewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a child view controller is about to be hidden
+ */
 - (void)stackController:(HLSStackController *)stackController
  willHideViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a view controller has been hidden. When called, viewController is still in [self viewControllers],
+ * even if this event is received during a pop
+ */
 - (void)stackController:(HLSStackController *)stackController
   didHideViewController:(UIViewController *)viewController
                animated:(BOOL)animated;
 
+/**
+ * Called when a view controller has been popped off the stack. When called, poppedViewController has been removed
+ * from [self viewControllers], and the parent-child containment relationship has been broken. The revealedViewController
+ * parameter is the view controller which has been revealed (nil if none)
+ */
 - (void)stackController:(HLSStackController *)stackController
    didPopViewController:(UIViewController *)poppedViewController
    revealViewController:(UIViewController *)revealedViewController
