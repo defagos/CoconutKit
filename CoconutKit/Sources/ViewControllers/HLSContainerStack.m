@@ -277,7 +277,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;
         }
         else if (index == [self.containerContents count] - 1) {
-            HLSLoggerWarn(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
+            HLSLoggerInfo(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
             return;
         }
         [self popToViewControllerAtIndex:index animated:animated];
@@ -290,13 +290,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
+    if ([self.containerContents count] == 0) {
+        HLSLoggerInfo(@"Nothing to pop: The view controller container is empty");
+        return;
+    }
+    
+    // Pop to a valid index
     NSUInteger firstRemovedIndex = 0;
     if (index != NSUIntegerMax) {
+        // Remove in the middle
         if (index < [self.containerContents count] - 1) {
             firstRemovedIndex = index + 1;
         }
+        // Nothing to do if we pop to the current top view controller
         else if (index == [self.containerContents count] - 1) {
-            HLSLoggerWarn(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
+            HLSLoggerInfo(@"Nothing to pop: The view controller displayed is already the one you try to pop to");
             return;            
         }
         else {
@@ -304,6 +312,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;
         }
     }
+    // Pop everything
     else {
         if (m_rootViewControllerMandatory) {
             HLSLoggerWarn(@"A root view controller is mandatory. Cannot pop everything");
@@ -313,7 +322,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         firstRemovedIndex = 0;
     }
     
-    // Remove the view controllers up to the one we want to pop to (except the topmost one)
+    // Remove the view controllers until the one we want to pop to (except the topmost one, for which we will play
+    // the pop animation if desired)
     NSUInteger i = [self.containerContents count] - firstRemovedIndex - 1;
     while (i > 0) {
         [self.containerContents removeObjectAtIndex:firstRemovedIndex];
@@ -338,12 +348,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)popToRootViewControllerAnimated:(BOOL)animated
 {
-    if ([self.containerContents count] != 0) {
-        [self popToViewControllerAtIndex:0 animated:animated];
-    }
-    else {
-        HLSLoggerWarn(@"No root view controller has been loaded");
-    }    
+    [self popToViewControllerAtIndex:0 animated:animated];    
 }
 
 - (void)popAllViewControllersAnimated:(BOOL)animated
