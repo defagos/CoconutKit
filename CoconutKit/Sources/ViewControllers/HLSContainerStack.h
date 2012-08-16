@@ -124,7 +124,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * any time (check the top of this file for some standard capacity constants). If removing is YES, the capacity corresponds 
  * to the maximum number of view controllers which can exist in the container at any time (the view controllers deep enough 
  * are automatically removed from the stack). If rootViewControllerFixed is set to YES, a view controller has to be
- * pushed into the stack before it is displayed for the frsit time, and all operations which could later change it will
+ * pushed into the stack before it is displayed for the first time, and all operations which could later change it will
  * abort
  *
  * Remark: During transition animations, the capacity is temporary increased by one to avoid view controllers popping up

@@ -408,9 +408,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_rootViewControllerFixed && index == 0
-            && [self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
-        HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore after the container has been displayed once");
+    if (m_rootViewControllerFixed && index == 0 && [self rootViewController]) {
+        HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore once set or after the container "
+                       "has been displayed once");
         return;
     }
     
@@ -497,9 +497,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_rootViewControllerFixed && index == 0
-            && [self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
-        HLSLoggerWarn(@"The root view controller is fixed and cannot be removed once the container has been displayed once");
+    if (m_rootViewControllerFixed && index == 0 && [self rootViewController]) {
+        HLSLoggerWarn(@"The root view controller is fixed and cannot be removed once set or after the container has been "
+                      "displayed once");
         return;
     }
     

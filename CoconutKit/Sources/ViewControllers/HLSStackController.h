@@ -14,20 +14,20 @@
 
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
- * to use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
+ * to easily use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
  * modally, but often the usual -presentModalViewController:animated: method of UIViewController is too limited (modal
  * sheets on the iPad have pre-defined sizes, and when displaying full screen the view below disappears, which prevents
  * from displaying transparent modal windows).
  *
  * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack, whose
- * root view is fixed and set once at creation time. It can be applied a richer set of transition animations, even 
- * custom ones. A UINavigationController and UITabBarController, HLSStackController is not meant to be subclassed.
+ * root view is fixed and set once at creation time. It can be applied a richer set of transition animations, even
+ * custom ones. As UINavigationController and UITabBarController, HLSStackController is not meant to be subclassed.
  *
  * When a view controller's view is inserted into a stack controller, its view frame is automatically adjusted to match 
- * the container view bounds, as for usual UIKit containers (UITabBarController, UINavigationController). Be sure that
- * the view controller's view size and autoresizing behaviors are correctly set.
+ * the container view bounds, as is the case with usual UIKit containers (UITabBarController, UINavigationController). 
+ * Be sure that the view controller's view size and autoresizing behaviors are correctly set.
  *
- * HLSStackController uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation methods
+ * HLSStackController uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
  * for view controllers you push in it (they will be ignored, see UIViewController documentation). The 2-step rotation
  * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
  *
@@ -37,8 +37,8 @@
  * which means that the container guarantees that at most the two top view controller's views are loaded. The 
  * controller simply unloads the view controller's views below in the stack so save memory. Usually, the default value
  * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
- * operations, you can increase this value. Standard capacity values are provided at the beginning of the HLSContainerStack.h
- * file.
+ * operations, you can increase this value. Standard capacity values are provided at the beginning of the 
+ * HLSContainerStack.h file.
  *
  * You can also use stack controllers with storyboards (a feature available since iOS 5):
  *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
