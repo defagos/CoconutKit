@@ -77,17 +77,17 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 {
     if ((self = [super init])) {
         if (! viewController) {
+            HLSLoggerError(@"A view controller is mandatory");
             [self release];
-            @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                           reason:@"A view controller must be provided"
-                                         userInfo:nil];
+            return nil;
         }
+        
         if (! containerViewController) {
+            HLSLoggerError(@"A container view controller must be provided");
             [self release];
-            @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                           reason:@"A container must be provided"
-                                         userInfo:nil];
+            return nil;
         }
+        
         if (! [transitionClass isSubclassOfClass:[HLSTransition class]]) {
             HLSLoggerWarn(@"Transitions must be subclasses of HLSTransition. No transition animation will be made");
             transitionClass = [HLSTransition class];
@@ -96,21 +96,18 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         // Cannot be mixed with iOS 5 containment API (but fully iOS 5 compatible)
         if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
                 && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
+            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
+                           "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
+                           "mechanism)");
             [self release];
-            NSString *reason = @"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
-                "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
-                "mechanism)";
-            @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                           reason:reason
-                                         userInfo:nil];
+            return nil;
         }
         
         // Associate the view controller with its container content object        
         if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
+            HLSLoggerError(@"A view controller can only be associated with one container");
             [self release];
-            @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                           reason:@"A view controller can only be associated with one container"
-                                         userInfo:nil];
+            return nil;
         }
         objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
@@ -126,7 +123,9 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         //   - non-top view controllers get viewWillAppear: and viewDidAppear: events
         //   - the top view controller gets each of these events twice (once from UIKit internals, and once
         //     through manual forwarding by the container implementation)
-        // Warning: Cannot test -addChildViewController: existence since it existed as a private method before iOS 5
+        //
+        // Remark: Cannot test -addChildViewController: existence since it existed as a private method before iOS 5.
+        //         Test -removeFromParentViewController existence instead
         if ([containerViewController respondsToSelector:@selector(removeFromParentViewController)]) {
             [containerViewController addChildViewController:viewController];
         }
@@ -149,28 +148,19 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (void)dealloc
 {
+    // Remove the view from the stack (this does NOT set viewController.view to nil to avoid view caching)
     [self removeViewFromContainerStackView];
-    
-    // Restore the view controller's original properties. If the view controller was not retained elsewhere, this would
-    // not be necessary. But clients might keep additional references to view controllers for caching purposes. The 
-    // best we can do is to restore a view controller's properties when it is removed from a container, no matter whether 
-    // or not it is later reused
-    if ([self.viewController isViewLoaded]) {
-        self.viewController.view.frame = self.originalViewFrame;
-        self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
-    }
-    
+        
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
-    // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:
+    // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:. We need to -callRemoveFromParentViewController:
+    //             so that the view controller reference count is correctly decreased
     if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
         [self.viewController removeFromParentViewController];
     }
     
-    // We do not release the view container's view here, on purpose, so that the view controller can be cached and its
-    // view reused
     self.viewController = nil;
     self.containerViewController = nil;
     
@@ -216,6 +206,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (UIView *)viewIfLoaded
 {
+    // Return the wrapper view
     return [self.viewController viewIfLoaded].superview;
 }
 
@@ -229,10 +220,8 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index
 {
     if (index > [stackView.contentViews count]) {
-        NSString *reason = [NSString stringWithFormat:@"Invalid index %d. Expected in [0;%d]", index, [stackView.contentViews count]];
-        @throw [NSException exceptionWithName:NSInvalidArgumentException 
-                                       reason:reason
-                                     userInfo:nil];
+        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [stackView.contentViews count]);
+        return;
     }
     
     if (self.addedToContainerView) {
@@ -240,12 +229,12 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         return;
     }
     
-    // Force a lazy loading of the view controller's view if needed
+    // This is where lazy loading of the view controller's view occurs if needed
     UIView *viewControllerView = self.viewController.view;
     
     // Save original view controller's view properties
-    self.originalViewFrame = self.viewController.view.frame;
-    self.originalAutoresizingMask = self.viewController.view.autoresizingMask;
+    self.originalViewFrame = viewControllerView.frame;
+    self.originalAutoresizingMask = viewControllerView.autoresizingMask;
         
     // Ugly fix for UINavigationController and UITabBarController: If their view frame is only adjusted after the view has been
     // added to the container view, a 20px displacement may arise at the top if the container is the root view controller of the
@@ -321,6 +310,9 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
     self.viewController.view.autoresizingMask = self.originalAutoresizingMask;
+    
+    // We do NOT set self.viewController.view = nil here, on purpose: This allows a view controller's view to be cached
+    // somewhere else if needed for performance reasons
 }
 
 - (void)releaseViews
@@ -401,11 +393,13 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; addedToContainerView: %@; viewIfLoaded: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; viewController: %@; containerViewController: %@; containerStackView:%@; "
+            "addedToContainerView: %@; viewIfLoaded: %@>",
             [self class],
             self,
             self.viewController,
             self.containerViewController,
+            self.containerStackView,
             HLSStringFromBool(self.addedToContainerView),
             [self viewIfLoaded]];
 }
@@ -416,18 +410,23 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 + (void)load
 {
-    // iOS 4: Private -addChildViewController: and -removeChildViewController: methods exist to define parent-child containment relationships.
-    //        These make the public -parentViewController return the parent container of a view controller (if any), providing correct propagation
-    //        for several view controller properties (e.g. embedding in a navigation controller, correct value for interfaceOrientation, etc.).
+    // iOS 4: Private -addChildViewController: and -removeChildViewController: methods exist to define parent-child containment relationships, but
+    //        of course these cannot be used. This is sad since they make the public -parentViewController return the parent container of a view
+    //        controller (if any), providing correct propagation for several view controller properties (e.g. embedding in a navigation controller,
+    //        correct value for interfaceOrientation, correct container containment chain, etc.).
+    //
     //        Note that the -addChildViewController: method has been made public in iOS 5, but that the -removeChildViewController: method has been
-    //        replaced with the new -removeFromParentViewController
-    // To test whether we are running iOS 4, we therefore can test whether -removeFromParentViewController exists
+    //        replaced with the new -removeFromParentViewController. To test whether we are running iOS 4, we therefore must test whether
+    //        -removeFromParentViewController exists
+    
+    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any)
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
         s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
     }
-    // iOS 5: Swizzle the new methods introduced by the containment API so that custom containers report their status correctly
+    // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
+    //        when inserted into a custom container
     else {
         s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                                        @selector(isMovingToParentViewController),

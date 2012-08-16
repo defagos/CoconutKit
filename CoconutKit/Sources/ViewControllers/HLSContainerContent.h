@@ -21,11 +21,16 @@
  *   - a view controller container must retain the child view controllers it manages
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
  *     happen that a client caches this view controller for later reuse
+ *   - animations should always be able to assume that view controller's views have alpha = 1.f (this makes implementing
+ *     them easy since this does not require any knowledge about the view controller's view alpha). This issue is solved
+ *     by having HLSContainerContent always wrap view controller's views within an invisible view having alpha = 1.f
+ *   - a child view controller's view must be adjusted to fill the entire container view it is drawn in. This matches
+ *     the behavior of standard UIKit containers (UINavigationController, UITabBarController, etc.)
  *   - view lifecycle and rotation events must be forwarded correctly from the container to the contained view controllers
  *   - the view controller containment chain must be preserved, so that view controller properties can be automatically
  *     forwarded from a child to its parent (and higher up in the view controller hierarchy if this parent is itself
  *     embedded into a container). This makes it possible for a navigation controller to use relevant child view controller 
- *     properties when it presents the corresponding parent view controller, for example. Moreover, this ensures that when 
+ *     properties when it displays the corresponding parent view controller, for example. Moreover, this ensures that when 
  *     a child view controller presents another view controller modally, it is actually its furthest ancestor who does. 
  *     Finally, this guarantees that the -[UIViewController interfaceOrientation] method returns a correct result
  *   - the iOS 5 containment API defines new methods -[UIViewController isMovingTo/FromParentViewController] so that
@@ -41,7 +46,7 @@
  * as it belongs to a container, and destroyed when the view controller is removed from the container (the view
  * controller itself might be retained elsewhere for caching purposes, though). All interactions with a child view 
  * controller must happen through the HLSContainerContent interface to guarantee proper status tracking and to 
- * ensure that the view is created when it is really needed.
+ * ensure that the view is created when it is really needed, not earlier.
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
@@ -80,9 +85,10 @@
 
 /**
  * The attached view controller. If you need to access its view, do not use the -[UIViewController view] property
- * (this triggers lazy creation). Instead, use the view insertion methods below when you really need to instantiate 
- * the view (i.e. when building up the container view hierarchy), and the -[HLSContainerContent viewIfLoaded] accessor 
- * to access a view which you created this way.
+ * (this triggers lazy creation). Instead, use the view insertion methods provided by HLSContainerContent when you 
+ * really need to instantiate the view (i.e. when building up the container view hierarchy), and the 
+ * -[HLSContainerContent viewIfLoaded] accessor to access a view which you created this way (and which does not
+ * instantiate the view lazily).
  */
 @property (nonatomic, readonly, retain) UIViewController *viewController;
 
@@ -103,34 +109,44 @@
 @property (nonatomic, readonly, assign, getter=isAddedToContainerView) BOOL addedToContainerView;
 
 /**
- * Instantiate (if not already) and add the view controller's view as subview of the view where a container displays
- * its contents (an instance of HLSContainerStackView). A view container can manage several separate container views
+ * Instantiate (if not already) and add the view controller's view at the top of a stack view. The frame of the view
+ * controller's view is automatically adjusted to match the bounds of the stack view
  *
- * The index starts at 0 and cannot be greater than [containerView.subviews count]. The 'add' method
- * is equivalent to the 'insert' method with index = [containerView.subviews count]. 
- * 
- * The frame of a view controller's view is automatically adjusted to match the container view bounds. This matches the
- * usual behavior of built-in view controller containers (UINavigationController, UITabBarController)
+ * If the view has already been added to a stack view, this method does nothing
  */
 - (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView;
+
+/**
+ * Valid values for index range from 0 to [stackView.contentViews count] (this last value being equivalent to
+ * calling addAsSubviewIntoContainerStackView:)
+ *
+ * If the view has already been added to a stack view or if the index is invalid, this method does nothing
+ */
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index;
 
 /**
- * Return the view controller's view if it has been added to a container view, nil otherwise. This does not perform
- * view creation (use the addAsSubviewIntoContainerView: or insertAsSubviewIntoContainerView: methods for this
- * purpose), forcing you to create the view when you actually need it
+ * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 
+ * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
+ * -insertAsSubviewIntoContainerStackView:index
+ *
+ * Remark: This does not return the view controller's view, but a view wrapper having alpha = 1.f. This
+ *         view wrapper is introduced so that animations can safely assume they are animating views with
+ *         initial alpha = 1.f, which could not be guaranteed if the view controller's view was directly
+ *         animated (view controller's views can have an arbitrary alpha). This relieves us from extra
+ *         bookkeeping work
  */
 - (UIView *)viewIfLoaded;
 
 /**
- * Release all view and view-related resources. This also forwards the viewDidUnload message to the underlying view 
+ * Release all view and view-related resources. This also forwards the -viewDidUnload message to the underlying view 
  * controller
  */
 - (void)releaseViews;
 
 /**
  * Forward the corresponding view lifecycle events to the view controller, ensuring that forwarding occurs only if
- * the view controller current lifecycle phase is coherent
+ * the view controller current lifecycle phase is coherent with it. Set movingTo/FromParentViewController to YES
+ * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
  *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
