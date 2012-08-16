@@ -374,14 +374,15 @@ typedef enum {
                     
                     // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
                     if ([UIStoryboard class]) {
-                        @try {
+                        // The compiled storyboard has a storyboardc extension
+                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
                             [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
                             
                             cell.textLabel.text = NSLocalizedString(@"Segues", @"Segues");
                             cell.textLabel.textColor = [UIColor blackColor];
                             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                         }
-                        @catch (NSException *exception) {
+                        else {
                             cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", @"Segues (not available in bundle)");
                         }
                     }
@@ -557,11 +558,11 @@ typedef enum {
                 case ViewControllersDemoIndexSegue: {
                     // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
                     if ([UIStoryboard class]) {
-                        @try {
+                        // The compiled storyboard has a storyboardc extension
+                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
                             UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
                             demoViewController = [segueStoryboard instantiateInitialViewController];
                         }
-                        @catch (NSException *exception) {}                        
                     }
                     break;
                 }

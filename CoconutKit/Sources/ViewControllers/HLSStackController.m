@@ -62,12 +62,19 @@
                                                               rootViewControllerFixed:YES] autorelease];
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
-    [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
+    @try {
+        [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
+    }
+    @catch (NSException *exception) {}
     
-    // We now must have at least one view controller loaded
-    NSAssert([[self.containerStack viewControllers] count] != 0, @"No root view controller has been loaded. Drag a segue called "
-             "'%@' in your storyboard file, from the stack controller to the view controller you want to install "
-             "as root", HLSStackRootSegueIdentifier);
+    if ([self.containerStack count] == 0) {
+        NSString *reason = [NSString stringWithFormat: @"No root view controller has been loaded. Drag a segue called '%@' "
+                            "in your storyboard file, from the stack controller to the view controller you want to install "
+                            "as root", HLSStackRootSegueIdentifier];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:reason
+                                     userInfo:nil];
+    }
 }
 
 - (void)dealloc
