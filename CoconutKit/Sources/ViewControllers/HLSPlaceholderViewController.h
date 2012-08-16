@@ -13,35 +13,24 @@
 @protocol HLSPlaceholderViewControllerDelegate;
 
 /**
- * View controllers must sometimes embed other view controllers as "subviews". In such cases, it is difficult and
- * cumbersome to achieve correct event propagation (e.g. view lifecycle events, rotation events) to the embedded
- * view controllers. The HLSPlaceholderViewController class allows you to achieve such embeddings, without having
- * to worry about event propagation anymore. Simply subclass HLSPlaceholderViewController and define areas where
+ * View controllers must sometimes embed other view controllers as "subviews". The HLSPlaceholderViewController class 
+ * allows you to achieve such embeddings very easily. Simply subclass HLSPlaceholderViewController and define areas where
  * embedded view controllers ("insets") must be drawn, either by binding the placeholder view outlet collection
- * in your subclass nib, or by instantiating them in the loadView method. If you bind your placeholder views in
+ * in your subclass nib, or by instantiating them in the -loadView method. If you bind your placeholder views in
  * the nib, be sure to tag them in increasing order, so that the placeholder view with the lowest tag comes first
- * (refer to the placeholderViews property documentation for more information). Note that this class also supports 
- * view controllers different depending on the orientation (see HLSOrientationCloner protocol). 
+ * (refer to the placeholderViews property documentation for more information).
  *
- * The reason this class exists is that embedding view controllers by directly adding a view controller's view as 
- * subview of another view controller's view does not work correctly out of the box. Most view controller events will 
- * be fired up correctly (e.g viewDidLoad or rotation events), but other simply won't (e.g. viewWillAppear:). This 
- * means that when adding a view controller's view directly as subview, the viewWillAppear: message has to be sent
- * manually, which can be easily forgotten or done incorrectly (the same has of course to be done when removing the 
- * view).
- *
- * The inset view controllers can be swapped with other ones at any time. Several built-in transition styles are
- * available when swapping insets. If the transition is animated, all inset view controller viewWill / viewDid lifecycle 
- * methods will receive animated = YES, even if one of the views is not moved. This is not an error (what matters is 
- * whether the transition is animated or not, not if individual views are).
+ * The inset view controllers can be swapped with other ones at any time. Several built-in transition animations are
+ * available when swapping insets, and you can even use custom animations if you want.
  *
  * When a view controller's view is set as inset view controller, its view frame is automatically adjusted to match 
- * its placeholder view bounds, as for usual UIKit containers (UITabBarController, UINavigationController). Be sure
- * that the view controller's view size and autoresizing behaviors are correctly set.
+ * its placeholder view bounds, as is the case for usual UIKit containers (UITabBarController, UINavigationController). 
+ * Be sure that the view controller's view size and autoresizing behaviors are correctly set.
  *
- * You can preload view controllers into an placeholder view controller before it is displayed. Simply use the
- * setInsetViewController... methods to load view controllers at specific indices. You must only ensure that the 
- * number of placeholder views suffices to hold all the view controllers you have preloaded.
+ * You can preload view controllers into a placeholder view controller before it is displayed. Simply use the
+ * setInsetViewController... methods to load view controllers at specific indices before the placeholder view
+ * controller is displayed. You must only ensure that the number of placeholder views suffices to hold all the view 
+ * controllers you have preloaded.
  *
  * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
@@ -56,16 +45,10 @@
  *   - willRotateToInterfaceOrientation:duration:
  *   - willAnimate...
  *   - didRotateFromInterfaceOrientation:
- *   - viewAnimation...
- * This view controller uses the smoother 1-step rotation available from iOS3. You cannot use the 2-step rotation
+ *
+ * This view controller uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation
  * in subclasses (it will be ignored, see UIViewController documentation) and inset view controllers. The 2-step
  * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
- *
- * As with standard built-in view controllers (e.g. UINavigationController), the inset view controller's view rects are known
- * when viewWillAppear: gets called for them, not earlier. If you need to insert code requiring to know the final view dimensions
- * or changing the screen layout (e.g. hiding a navigation bar), be sure to insert it in viewWillAppear: or events thereafter 
- * (in other words, NOT in viewDidLoad). You should not alter an inset view controller's view frame or transform yourself, 
- * otherwise the behavior is undefined.
  *
  * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
@@ -102,8 +85,8 @@
  * instantiates the placeholder view controller). You must then ensure that this owner object is capable of releasing 
  * the views when memory is critically low. If the owner object is a view controller, it suffices to implement its 
  * viewDidUnload method and, within it, to set the view property of all cached view controllers to nil. Of course,
- * after having set a view to nil, you should forward its view controller the viewDidUnload message as well. If several
- * views are cached but only a subset (probably one) displayed at once, you also need to implement the didReceiveMemoryWarning
+ * after having set a view to nil, you should forward its view controller the -viewDidUnload message as well. If several
+ * views are cached but only a subset (probably one) displayed at once, you also need to implement the -didReceiveMemoryWarning
  * method to set invisible cached views to nil and send their view controller the viewDidUnload message.
  *
  * Designated initializer: initWithNibName:bundle:
@@ -118,32 +101,33 @@
 
 /**
  * Set a view controller to display as inset on the placeholder view corresponding to the given index. The transition 
- * is made without animation. Setting an inset view controller to nil removes the one currently display at this
- * (if any)
- * This property can also be set before the placeholder view controller is displayed.
+ * is made without animation. Setting an inset view controller to nil removes the one currently displayed at this index
+ * (if any) using the animation it was displayed with
+ *
+ * This method can also be called before the placeholder view controller is displayed to preload view controllers
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles, on the placeholder view
- * corresponding to the given index. The transition duration is set by the animation itself. Setting the inset view 
- * controller to nil removes the one currently display (if any). Only the HLSTransitionStyleNone transition is available 
- * in such cases.
- * This method can also be called before the placeholder view controller is displayed
+ * Display an inset view controller using some transition animation, on the placeholder view corresponding to the given 
+ * index. The transition duration is set by the animation itself. Setting the inset view controller to nil removes the 
+ * one currently displayed at this index (if any) using the animation it was displayed with
+ *
+ * This method can also be called before the placeholder view controller is displayed to preload view controllers
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
            withTransitionClass:(Class)transitionClass;
 
 /**
- * Display an inset view controller using one of the available built-in transition styles, on the placeholder view
- * corresponding to the given index (the duration will be evenly distributed on the animation steps composing the 
- * animation so that the animation rhythm stays the same). Use the special value kAnimationTransitionDefaultDuration 
- * as duration to get the default transition duration (same result as the method above). Setting the inset view 
- * controller to nil removes the one currently display (if any). Only the HLSTransitionStyleNone transition is available
- * in such cases.
- * This method can also be called before the placeholder view controller is displayed
+ * Display an inset view controller using some transition animation and duration, on the placeholder view corresponding 
+ * to the given index (the animation will look the same, only slower or faster). Use the special value 
+ * kAnimationTransitionDefaultDuration as duration to get the default transition duration. Setting the inset view
+ * controller to nil removes the one currently displayed at this index (if any) using the animation it was displayed
+ * with
+ *
+ * This method can also be called before the placeholder view controller is displayed to preload view controllers
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
@@ -151,12 +135,12 @@
                       duration:(NSTimeInterval)duration;
 
 /**
- * The views where inset view controller's views must be drawn. Must either created programmatically in a subclass' loadView 
- * method or bound to a UIView using Interface Builder. You cannot change the number of placeholder views once the
- * placeholder view controller has been displayed once.
+ * The views where inset view controller's views must be drawn. Must either be created programmatically in a subclass' 
+ * -loadView method or bound to a UIView using Interface Builder. You cannot change the number of placeholder views 
+ * once the placeholder view controller has been displayed once.
  *
  * The order of the outlets in an IBOutletCollection is unreliable (it is sadly not the order in which they are bound
- * in the nib). To fix this, the placeholderViews property expect you to index placeholder views using the UIView tag
+ * in the nib). To fix this, the placeholderViews property expects you to index placeholder views using the UIView tag
  * property, and will sort them in increasing order
  */
 @property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
@@ -171,6 +155,9 @@
  */
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
 
+/**
+ * The placeholder view controller delegate
+ */
 @property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 @end
@@ -178,31 +165,19 @@
 @protocol HLSPlaceholderViewControllerDelegate <NSObject>
 @optional
 
-/**
- * Called when an inset view controller will be shown, before the transition happens
- */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willShowInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
-/**
- * Called when an inset view controller has been shown, after the transition has ended
- */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
-/**
- * Called when an inset view controller will be hidden, before the transition happens
- */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
-/**
- * Called when an inset view controller has been hidden, after the transition has ended
- */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
