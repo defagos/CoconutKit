@@ -49,4 +49,21 @@
     return [NSArray arrayWithArray:animationSteps];
 }
 
++ (NSArray *)reverseAnimationStepsWithAppearingView:(UIView *)appearingView
+                                   disappearingView:(UIView *)disappearingView
+                                            inFrame:(CGRect)frame
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    // Setup step bringing the appearingView outside the frame
+    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    [viewAnimationStep11 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) z:0.f];
+    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:disappearingView];
+    animationStep1.duration = 0.4;
+    [animationSteps addObject:animationStep1];
+    
+    return [NSArray arrayWithArray:animationSteps];
+}
+
 @end

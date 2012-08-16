@@ -17,7 +17,9 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * own transition animation, subclass HLSTransition and implement the 
  *   -animationStepsWithAppearingView:disappearingView:inFrame:
  * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
- * from view.
+ * from view. You can also optionally implement the 
+ *   -reverseAnimationStepsWithAppearingView:disappearingView:inFrame:
+ * method (which by default returns nil) to define the animation to be used when performing the reverse transition.
  *
  * When implementing -animationStepsWithAppearingView:disappearingView:inFrame:, keep in mind that:
  *   - appearingView and disappearingView must not be used directly (in particular, you must not access their current
@@ -102,6 +104,15 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
                             disappearingView:(UIView *)disappearingView
                                      inFrame:(CGRect)frame;
+
+/**
+ * The method which subclasses can optionally override to define a custom reverse transition animation. The base 
+ * class implementation returns nil, in which case the reverse animation will be generated from the transition 
+ * animation using -[HLSAnimation reverseAnimation] (which is in general what you want)
+ */
++ (NSArray *)reverseAnimationStepsWithAppearingView:(UIView *)appearingView
+                                   disappearingView:(UIView *)disappearingView
+                                            inFrame:(CGRect)frame;
 
 /**
  * Return the intrinsic duration of a transition as given by its implementation

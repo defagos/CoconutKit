@@ -404,6 +404,13 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return nil;
 }
 
++ (NSArray *)reverseAnimationStepsWithAppearingView:(UIView *)appearingView
+                                   disappearingView:(UIView *)disappearingView
+                                            inFrame:(CGRect)frame
+{
+    return nil;
+}
+
 @end
 
 @implementation HLSTransitionNone

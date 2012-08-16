@@ -26,8 +26,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 + (HLSAnimation *)transitionAnimationWithClass:(Class)transitionClass
                                  appearingView:(UIView *)appearingView
                               disappearingView:(UIView *)disappearingView
-                                        inView:(UIView *)inView
+                                        inView:(UIView *)view
                                       duration:(NSTimeInterval)duration;
+
++ (HLSAnimation *)reverseTransitionAnimationWithClass:(Class)transitionClass
+                                        appearingView:(UIView *)appearingView
+                                     disappearingView:(UIView *)disappearingView
+                                               inView:(UIView *)view
+                                             duration:(NSTimeInterval)duration;
 
 @property (nonatomic, assign) UIViewController *containerViewController;
 @property (nonatomic, retain) NSMutableArray *containerContents;
@@ -82,6 +88,46 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     else {
         return [animation animationWithDuration:duration];
+    }
+}
+
++ (HLSAnimation *)reverseTransitionAnimationWithClass:(Class)transitionClass
+                                        appearingView:(UIView *)appearingView
+                                     disappearingView:(UIView *)disappearingView
+                                               inView:(UIView *)view
+                                             duration:(NSTimeInterval)duration
+{
+    NSAssert([transitionClass isSubclassOfClass:[HLSTransition class]], @"Transitions must be subclasses of HLSTransition");
+    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+             @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
+    
+    // Calculate the exact frame in which the animations will occur (taking into account the transform applied
+    // to the parent view)
+    CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
+    
+    // Build the animation with default parameters
+    NSArray *animationSteps = [[transitionClass class] reverseAnimationStepsWithAppearingView:appearingView
+                                                                             disappearingView:disappearingView
+                                                                                      inFrame:frame];
+    // If custom reverse animation implemented by the animation class, use it
+    if (animationSteps) {
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
+        
+        // Generate an animation with the proper duration
+        if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+            return animation;
+        }
+        else {
+            return [animation animationWithDuration:duration];
+        }
+    }
+    // If not implemented by the transition class, use the default reverse animation
+    else {
+        return [[HLSContainerStack transitionAnimationWithClass:transitionClass
+                                                  appearingView:disappearingView
+                                               disappearingView:appearingView
+                                                         inView:view
+                                                        duration:duration] reverseAnimation];
     }
 }
 
@@ -474,24 +520,25 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
-        HLSAnimation *animation = [[HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
-                                                                     appearingView:groupView.frontView
-                                                                  disappearingView:groupView.backGroupView
-                                                                            inView:groupView
-                                                                          duration:containerContent.duration] reverseAnimation];
-        animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
+        
+        HLSAnimation *reverseAnimation = [HLSContainerStack reverseTransitionAnimationWithClass:containerContent.transitionClass
+                                                                                  appearingView:groupView.backGroupView
+                                                                               disappearingView:groupView.frontView
+                                                                                         inView:groupView
+                                                                                       duration:containerContent.duration];
+        reverseAnimation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
         if (index == [self.containerContents count] - 1) {
             // Some more work has to be done for pop animations in the animation begin / end callbacks. To identify such animations,
             // we give them a tag which we can test in those callbacks
-            animation.tag = @"pop_animation";
-            animation.lockingUI = YES;
+            reverseAnimation.tag = @"pop_animation";
+            reverseAnimation.lockingUI = YES;
             
-            [animation playAnimated:animated];
+            [reverseAnimation playAnimated:animated];
             
             // Check the animation callback implementations for what happens next
         }
         else {
-            [animation playAnimated:NO];
+            [reverseAnimation playAnimated:NO];
             [self.containerContents removeObject:containerContent];
         }        
     }
