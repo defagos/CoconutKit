@@ -16,7 +16,10 @@
  * since it makes sense graphically, but this is not needed; you can e.g. bind the segue from the 
  * view controller to itself if you want)
  */
-@interface HLSStackPopSegue : UIStoryboardSegue
+@interface HLSStackPopSegue : UIStoryboardSegue {
+@private
+    BOOL m_animated;
+}
 
 /**
  * Animated transition

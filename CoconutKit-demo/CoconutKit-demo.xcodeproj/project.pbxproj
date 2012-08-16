@@ -829,7 +829,6 @@
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
-				6F9C45FD14C5C30B00824AB2 /* Strips */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
 				6F9C460C14C5C30B00824AB2 /* TextFields */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
@@ -877,13 +876,6 @@
 				6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */,
 			);
 			path = Skinning;
-			sourceTree = "<group>";
-		};
-		6F9C45FD14C5C30B00824AB2 /* Strips */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Strips;
 			sourceTree = "<group>";
 		};
 		6F9C45FE14C5C30B00824AB2 /* TableViewCells */ = {

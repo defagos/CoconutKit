@@ -26,6 +26,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
 @private
     Class m_transitionClass;
     NSTimeInterval m_duration;
+    BOOL m_animated;
 }
 
 /**
