@@ -59,7 +59,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return [[[[self class] alloc] initWithContainerViewController:containerViewController
                                                          capacity:HLSContainerStackMinimalCapacity 
                                                          removing:YES
-                                      rootViewControllerMandatory:NO] autorelease];
+                                          rootViewControllerFixed:NO] autorelease];
 }
 
 + (HLSAnimation *)transitionAnimationWithClass:(Class)transitionClass
@@ -136,7 +136,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
                              capacity:(NSUInteger)capacity
                              removing:(BOOL)removing
-          rootViewControllerMandatory:(BOOL)rootViewControllerMandatory
+              rootViewControllerFixed:(BOOL)rootViewControllerFixed
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -149,7 +149,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerContents = [NSMutableArray array];
         self.capacity = capacity;
         m_removing = removing;
-        m_rootViewControllerMandatory = rootViewControllerMandatory;
+        m_rootViewControllerFixed = rootViewControllerFixed;
     }
     return self;
 }
@@ -345,8 +345,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     // Pop everything
     else {
-        if (m_rootViewControllerMandatory) {
-            HLSLoggerWarn(@"A root view controller is mandatory. Cannot pop everything");
+        if (m_rootViewControllerFixed) {
+            HLSLoggerWarn(@"The root view controller is fixed. Cannot pop everything");
             return;
         }
         
@@ -405,6 +405,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     if (m_animating) {
         HLSLoggerWarn(@"Cannot insert a view controller while a transition animation is running");
+        return;
+    }
+    
+    if (m_rootViewControllerFixed && index == 0
+            && [self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
+        HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore after the container has been displayed once");
         return;
     }
     
@@ -491,8 +497,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_rootViewControllerMandatory && [self.containerContents count] == 1) {
-        HLSLoggerWarn(@"A root view controller is mandatory. Cannot pop the only one which remains");
+    if (m_rootViewControllerFixed && index == 0
+            && [self.containerViewController lifeCyclePhase] != HLSViewControllerLifeCyclePhaseInitialized) {
+        HLSLoggerWarn(@"The root view controller is fixed and cannot be removed once the container has been displayed once");
         return;
     }
     
@@ -574,9 +581,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      userInfo:nil];
     }
     
-    if (m_rootViewControllerMandatory && [self.containerContents count] == 0) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException 
-                                       reason:@"A root view controller is mandatory"
+    if (m_rootViewControllerFixed && [self.containerContents count] == 0) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"The root view controller is fixed but has not been defined when displaying the container"
                                      userInfo:nil];
     }
     

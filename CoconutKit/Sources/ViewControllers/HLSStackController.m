@@ -33,7 +33,7 @@
         self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                                  capacity:capacity 
                                                                                  removing:NO
-                                                              rootViewControllerMandatory:YES] autorelease];
+                                                                  rootViewControllerFixed:YES] autorelease];
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
                             withTransitionClass:[HLSTransitionNone class]
@@ -59,7 +59,7 @@
     self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                              capacity:self.capacity 
                                                                              removing:NO
-                                                          rootViewControllerMandatory:YES] autorelease];
+                                                              rootViewControllerFixed:YES] autorelease];
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     [self performSegueWithIdentifier:HLSStackRootSegueIdentifier sender:self];
@@ -116,6 +116,11 @@
 - (NSArray *)viewControllers
 {
     return [self.containerStack viewControllers];
+}
+
+- (NSUInteger)count
+{
+    return [self.containerStack count];
 }
 
 #pragma mark View lifecycle
@@ -204,14 +209,7 @@
     // Just to suppress localization warning
 }
 
-#pragma mark Pushing view controllers onto the stack
-
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    [self pushViewController:viewController 
-         withTransitionClass:[HLSTransitionNone class]
-                    animated:animated];
-}
+#pragma mark Inserting or removing view controllers
 
 - (void)pushViewController:(UIViewController *)viewController 
        withTransitionClass:(Class)transitionClass
@@ -234,8 +232,6 @@
                                    animated:animated];
 }
 
-#pragma mark Popping view controllers
-
 - (void)popViewControllerAnimated:(BOOL)animated
 {    
     [self.containerStack popViewControllerAnimated:animated];
@@ -246,9 +242,61 @@
     [self.containerStack popToViewController:viewController animated:animated];
 }
 
+- (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    [self.containerStack popToViewControllerAtIndex:index animated:animated];
+}
+
 - (void)popToRootViewControllerAnimated:(BOOL)animated
 {
     [self.containerStack popToRootViewControllerAnimated:animated];
+}
+
+- (void)insertViewController:(UIViewController *)viewController
+                     atIndex:(NSUInteger)index
+         withTransitionClass:(Class)transitionClass
+                    duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated
+{
+    [self.containerStack insertViewController:viewController
+                                      atIndex:index
+                          withTransitionClass:transitionClass
+                                     duration:duration
+                                     animated:animated];
+}
+
+- (void)insertViewController:(UIViewController *)viewController
+         belowViewController:(UIViewController *)siblingViewController
+         withTransitionClass:(Class)transitionClass
+                    duration:(NSTimeInterval)duration
+{
+    [self.containerStack insertViewController:viewController
+                          belowViewController:siblingViewController
+                          withTransitionClass:transitionClass
+                                     duration:duration];
+}
+
+- (void)insertViewController:(UIViewController *)viewController
+         aboveViewController:(UIViewController *)siblingViewController
+         withTransitionClass:(Class)transitionClass
+                    duration:(NSTimeInterval)duration
+                    animated:(BOOL)animated
+{
+    [self.containerStack insertViewController:viewController
+                          aboveViewController:siblingViewController
+                          withTransitionClass:transitionClass
+                                     duration:duration
+                                     animated:animated];
+}
+
+- (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    [self.containerStack removeViewControllerAtIndex:index animated:animated];
+}
+
+- (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [self.containerStack removeViewController:viewController animated:animated];
 }
 
 #pragma mark HLSContainerStackDelegate protocol implementation

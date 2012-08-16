@@ -52,7 +52,7 @@
             HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1] autorelease];
             stackController.delegate = self;
             RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
-            [stackController pushViewController:rootStackDemoViewController2 animated:NO];
+            [stackController pushViewController:rootStackDemoViewController2 withTransitionClass:[HLSTransitionCoverFromBottom class] animated:NO];
             self.rootViewController = stackController;
         }
         else if ([demoMode isEqualToString:@"RootStoryboard"]) {

@@ -21,14 +21,24 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * The HLSContainerStack provides a convenient and easy interface to implement your own view controller containers,
  * which is usually not a trivial task. Unlike the UIViewController containment API, this class is compatible with 
  * iOS 4 as well, and provides powerful features which let you implement custom containers correctly in a snap. The 
- * iOS 5containment API, though powerful, namely still requires a lot of work to implement perfect containers. 
+ * iOS 5 containment API, though powerful, namely still requires a lot of work to implement perfect containers. 
  * This is not the case with HLSContainerStack, which provides a robust way to implement the containers of your
  * dreams.
  *
- * A lot of work has been made to provide a clean and powerful interface to implement containers exhibiting
- * correct behavior and maximum flexibility. Most notably:
+ * HLSContainerStack uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
+ * for view controllers you insert in it (they will be ignored, see UIViewController documentation). The 2-step rotation 
+ * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
+ *
+ * A lot of work has been made to provide a clean and powerful interface to implement containers exhibiting correct 
+ * behavior and maximum flexibility. Most notably:
  *   - view lifecycle and rotation events are correctly forwarded to children view controllers
- *   - custom animations can be provided when pushing view controllers into a stack. A standard set of
+ *     Remark: Even if a view controller remains visible behind a transparent top view controller on top of it, it will
+ *             still be considered as having disappeared (and therefore will receive the -viewWillDisappear: and 
+ *             -viewDidDisappear: events). It would namely be difficult and costly to determine if part of a view 
+ *             controller's view is visible through the view controller hierarchy on top of it (this would require
+ *             finding the intersections of all view and subview rectangles, multiplicating alphas to find which 
+ *             parts of the view are visible and which aren't; clearly not worth it).
+ *   - custom animations can be provided when inserting view controllers into a stack. A standard set of
  *     animations is provided out of the box. Animations behave correctly in all cases, even if the stack
  *     was rotated between push and pop operations, or if views have been unloaded
  *   - a delegate (usually your container implementation) can register itself with a stack to be notified when 
@@ -38,10 +48,13 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     dedicated delegate protocol
  *   - the methods -[UIViewController isMovingTo/FromParentViewController] return correct results, consistent
  *     with those returned when using standard built-in UIKit containers (iOS 5 only)
- *   - a depth can be provided so that children view controller's views deep enough are automatically unloaded
+ *   - a capacity can be provided so that children view controller's views deep enough are automatically unloaded
  *     and reloaded when needed, saving memory. Alternatively, a view controller can be removed from the stack
  *     as soon as it gets deep enough. This makes it possible to implement containers with a FIFO behavior (the
- *     case where the depth is set to 1 corresponds to a stack displaying a single child view controller)
+ *     case where the capacity is set to 1 corresponds to a stack displaying a single child view controller). Usually,
+ *     the default capacity (HLSContainerStackDefaultCapacity = 2) should fulfill most needs, but if you require 
+ *     more transparency levels or if you want to minimize load / unload operations, you can increase this value. 
+ *     Standard capacity values are provided at the beginning of this file.
  *   - custom containers implemented using HLSContainerStack behave correctly, whether they are embedded into 
  *     another container (even built-in ones), displayed as the root of an application, or modally
  *   - stacks can be used to display any kind of view controllers, even standard UIKit containers like
@@ -63,7 +76,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     controllers simultaneously
  *
  * When implementing your own view controller container, be sure to call the following HLSContainerStack
- * methods, otherwise the behavior is undefined (refer to their documentation for more information):
+ * methods, otherwise the behavior is undefined (refer to the documentation of these methods for more 
+ * information):
  *   - releaseViews
  *   - viewWillAppear:
  *   - viewDidAppear:
@@ -75,6 +89,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *   - didRotateFromInterfaceOrientation:duration:
  * (the deprecated 2-step rotation methods are not supported, you should not have your own containers implement
  * them)
+ *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *
  * Remark: No methods have been provided for -viewDidLoad and -viewDidUnload (call -releaseViews instead)
@@ -83,7 +98,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
  *
- * Designated initializer: initWithContainerViewController:capacity:removing:rootViewControllerMandatory:
+ * Designated initializer: initWithContainerViewController:capacity:removing:rootViewControllerFixed:
  */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private
@@ -92,7 +107,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     UIView *m_containerView;                                   // The view where the stack displays its contents
     NSUInteger m_capacity;                                     // The maximum number of top view controllers loaded / not removed at any time
     BOOL m_removing;                                           // If YES, view controllers over capacity are removed from the stack, otherwise their views are simply unloaded
-    BOOL m_rootViewControllerMandatory;                        // Is the root view controller mandatory?
+    BOOL m_rootViewControllerFixed;                            // Is the root view controller fixed?
     BOOL m_animating;                                          // Set to YES when a transition animation is running
     id<HLSContainerStackDelegate> m_delegate;                  // The stack delegate, usually the custom container which is implemented
 }
@@ -108,8 +123,9 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * and is not retained. If removing is NO, the capacity is the maximum number of view controllers whose views are loaded at 
  * any time (check the top of this file for some standard capacity constants). If removing is YES, the capacity corresponds 
  * to the maximum number of view controllers which can exist in the container at any time (the view controllers deep enough 
- * are automatically removed from the stack). If rootViewControllerMandatory is set to YES, at least one view controller must 
- * always exist in the container
+ * are automatically removed from the stack). If rootViewControllerFixed is set to YES, a view controller has to be
+ * pushed into the stack before it is displayed for the frsit time, and all operations which could later change it will
+ * abort
  *
  * Remark: During transition animations, the capacity is temporary increased by one to avoid view controllers popping up
  *         unnecessarily. This is not a bug
@@ -117,7 +133,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
                              capacity:(NSUInteger)capacity
                              removing:(BOOL)removing
-          rootViewControllerMandatory:(BOOL)rootViewControllerMandatory;
+              rootViewControllerFixed:(BOOL)rootViewControllerFixed;
 
 /**
  * The view where the stack must display the children view controller's views. This view must be part of the container
@@ -168,13 +184,13 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 /**
  * Pop the current top view controller, playing the reverse animation corresponding to the one it has been pushed with.
- * If a root view controller is mandatory, you cannot pop it
+ * If the root view controller is fixed, you cannot pop it
  */
 - (void)popViewControllerAnimated:(BOOL)animated;
 
 /**
  * Pop all view controllers up to a given view controller (animated or not). If viewController is set to nil, this 
- * method pops all view controllers (except if a root view controller is mandatory, in which case this method does
+ * method pops all view controllers (except if the root view controller is fixed, in which case this method does
  * nothing)
  *
  * When the transition is animated, the pop occurs with the reverse animation corresponding to the animation with
@@ -185,9 +201,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
- * Same as -popToViewController:animated: (animated or not), but specifying a view controller using its index. Set 
- * index to NSUInteger to pop everything (except if a root view controller is mandatory, in which case this method 
- * does nothing)
+ * Same as -popToViewController:animated:, but specifying a view controller using its index. Set index to NSUIntegerMax
+ * to pop everything (except if the root view controller is fixed, in which case this method does nothing)
  *
  * If the index is invalid or if it is the index of the top view controller (i.e. [self count] - 1), this method 
  * does nothing
@@ -200,7 +215,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)popToRootViewControllerAnimated:(BOOL)animated;
 
 /**
- * Pop all view controllers (except if a root view controller is mandatory, in which case this does nothing)
+ * Pop all view controllers (except if the root view controller is fixed, in which case this method does nothing)
  */
 - (void)popAllViewControllersAnimated:(BOOL)animated;
 
@@ -210,7 +225,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * been set to YES). In all other cases, no animation occurs. Note that the corresponding reverse animation will still 
  * be played when the view controller is later popped
  *
- * If the index is invalid, this method does nothing
+ * If the index is invalid, or if its is 0 and the root view controller is fixed (after the stack has been displayed
+ * once), this method does nothing
  */
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
@@ -220,7 +236,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 /**
  * Insert a view controller below an existing one. If the provided sibling view controller does not exist in the
- * stack, this method does nothing
+ * stack, or if the sibling view controller is the root view controller and is fixed, this method does nothing
  */
 - (void)insertViewController:(UIViewController *)viewController
          belowViewController:(UIViewController *)siblingViewController
@@ -242,7 +258,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Remove the view controller at a given index. If index == [self count] - 1, the removal will be animated
  * (provided animated has been set to YES), otherwise no animation will occur
  *
- * If the index is invalid, this method does nothing
+ * If the index is invalid, or if it is 0 and the root view controller is fixed, this method does nothing
  */
 - (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
 
@@ -250,7 +266,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Remove a given view controller from the stack. If the view controller is the current top view controller, the
  * transition will be animated (provided animated has been set to YES), otherwise no animation will occur.
  *
- * If the view controller is not in the stack, this method does nothing
+ * If the view controller is not in the stack, or if it is the root view controller and is fixed, this method 
+ * does nothing
  */
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
