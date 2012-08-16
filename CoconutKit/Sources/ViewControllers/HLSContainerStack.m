@@ -308,7 +308,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;            
         }
         else {
-            HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 2);
+            HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 2);
             return;
         }
     }
@@ -363,13 +363,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                     animated:(BOOL)animated
 {
     if (! viewController) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"Cannot push nil into a view controller container"
-                                     userInfo:nil];
+        HLSLoggerError(@"Cannot push nil into a view controller container");
+        return;
     }
     
     if (index > [self.containerContents count]) {
-        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]);
+        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]);
+        return;
+    }
+    
+    if (m_animating) {
+        HLSLoggerWarn(@"Cannot insert a view controller while a transition animation is running");
         return;
     }
     
@@ -380,9 +384,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;
         }
         
-        // Notify the delegate before the view controller is actually installed on top of the stack. This makes it possible
-        // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
-        // when pushing a view controller onto the stack
+        // Notify the delegate before the view controller is actually installed on top of the stack and associated with the
+        // container (see HLSContainerStackDelegate interface contract)
         if (index == [self.containerContents count]) {
             if ([self.delegate respondsToSelector:@selector(containerStack:willPushViewController:coverViewController:animated:)]) {
                 [self.delegate containerStack:self
@@ -393,7 +396,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
         
-    // Associate the new view controller with its container (this increases the containerContents array size)
+    // Associate the new view controller with its container (this increases [container count])
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController
                                                                          containerViewController:self.containerViewController
                                                                                  transitionClass:transitionClass
@@ -402,6 +405,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewVisible]) {
+        // A correction needs to be applied here to account for the [container count] increase (since index was relative
+        // to the previous value)
         if ([self.containerContents count] - index - 1 <= self.capacity) {
             [self addViewForContainerContent:containerContent playingTransition:YES animated:animated];
         }
@@ -422,7 +427,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                        atIndex:index 
            withTransitionClass:transitionClass
                       duration:duration
-                      animated:NO /* irrelevant since can never insert at the top */];
+                      animated:NO /* irrelevant since this method can never be used for pushing a view controller */];
 }
 
 - (void)insertViewController:(UIViewController *)viewController
@@ -446,7 +451,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     if (index >= [self.containerContents count]) {
-        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 1);
+        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 1);
+        return;
+    }
+    
+    if (m_animating) {
+        HLSLoggerWarn(@"Cannot remove a view controller while a transition animation is running");
         return;
     }
     
@@ -456,9 +466,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if ([self.containerViewController isViewVisible]) {
-        // Notify the delegate before the view controller is actually removed from the top of the stack. This makes it possible
-        // for the delegate to extract more information (e.g. if a view controller is pushed or revealed by a pop). Only
-        // when popping a view controller from the stack
+        // Notify the delegate before the view controller is actually removed from the top of the stack (see HLSContainerStackDelegate
+        // interface contract)
         if (index == [self.containerContents count] - 1) {
             if ([self.delegate respondsToSelector:@selector(containerStack:willPopViewController:revealViewController:animated:)]) {
                 [self.delegate containerStack:self
@@ -471,9 +480,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
-        // Load the view below so that the capacity criterium can be fulfilled (if needed). During the animation we will
-        // have capacity + 1 view controller's views loaded, this ensures that no view controllers magically pop up during
-        // animation
+        // Load the view controller'sview below so that the capacity criterium can be fulfilled (if needed). If we are popping a
+        // view controller, we will have capacity + 1 view controller's views loaded during the animation. This ensures that no
+        // view controllers magically pops up during animation (which could be noticed depending on the pop animation, or if view
+        // controllers on top of it are transparent)
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (containerContentAtCapacity) {
             [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
@@ -485,12 +495,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                   disappearingView:groupView.backGroupView
                                                                             inView:groupView
                                                                           duration:containerContent.duration] reverseAnimation];
-        animation.delegate = self;          // set a delegate for destruction if the stack is deallocated
-        if (index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
+        animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
+        if (index == [self.containerContents count] - 1) {
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
             
             [animation playAnimated:animated];
+            
+            // The code then resumes in the animation end callback
         }
         else {
             [animation playAnimated:NO];
@@ -529,7 +541,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      userInfo:nil];
     }
     
-    // Display those views required according to the capacity
+    // Create the container view hierarchy with those views required according to the capacity
     for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
         // Never play transitions (we are building the view hierarchy). Only the top view controller receives
         // the animated information
@@ -768,7 +780,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                       disappearingView:aboveGroupView.backGroupView
                                                                                 inView:aboveGroupView
                                                                               duration:aboveContainerContent.duration];
-        aboveAnimation.delegate = self;          // set a delegate for destruction if the stack is deallocated
+        aboveAnimation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
         [aboveAnimation playAnimated:NO];
     }
     
@@ -779,7 +791,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                              disappearingView:groupView.backGroupView
                                                                        inView:groupView
                                                                      duration:containerContent.duration];
-    animation.delegate = self;          // set a delegate for destruction if the stack is deallocated
+    animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
     if (playingTransition && index == [self.containerContents count] - 1 && [self.containerViewController isViewVisible]) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
