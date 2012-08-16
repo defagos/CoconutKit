@@ -106,12 +106,13 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Create a stack which will manage the children view controllers of a container view controller. The containerViewController
  * parameter is the container you want to implement (which must itself instantiate the HLSContainerStack objects it requires) 
  * and is not retained. If removing is NO, the capacity is the maximum number of view controllers whose views are loaded at 
- * any time. If removing is YES, the capacity corresponds to the maximum number of view controllers which can exist in the 
- * container at any time (the view controllers deep enough are automatically removed from the stack). If rootViewControllerMandatory 
- * is set to YES, at least one view controller must always exist in the container
+ * any time (check the top of this file for some standard capacity constants). If removing is YES, the capacity corresponds 
+ * to the maximum number of view controllers which can exist in the container at any time (the view controllers deep enough 
+ * are automatically removed from the stack). If rootViewControllerMandatory is set to YES, at least one view controller must 
+ * always exist in the container
  *
- * Remark: During transition animations, the capacity is temporary increased by one to provide for smooth animations. This
- *         is not a bug
+ * Remark: During transition animations, the capacity is temporary increased by one to avoid view controllers popping up
+ *         unnecessarily. This is not a bug
  */
 - (id)initWithContainerViewController:(UIViewController *)containerViewController 
                              capacity:(NSUInteger)capacity

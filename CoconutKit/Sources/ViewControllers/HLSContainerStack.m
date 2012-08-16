@@ -16,31 +16,6 @@
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
-// TODO: Document when viewWillAppear... etc. are called, test cases, and when animated = YES / NO
-
-// TODO: Prevent containerView from being changed after the view has been displayed
-
-// TODO: Prevent simultaneous pops / pushes
-
-/**
- * TODO: Mimic behavior of the navigation controller delegate methods?
- * - display as root -> calls will / didShow for the root view controller
- * - push new VC -> calls will / didShow for this new view controller
- * - pop VC -> calls will / didShow for the VC which gets revealed
- * - display and hide modal -> does not call will / didShow
- */
-
-/**
- * Some view controller containers might display several view controllers simultaneously in the same content view. In
- * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
- * This allows the view to be inserted at the proper location in the view hierarchy. If this parameter is nil, the
- * view is simply added on top.
- * The first element in the stack array is interpreted as the bottommost one.
- */
-
-// TODO: No requirement about the number of view controllers in an HLSContainerStack. HLSStackController, however, must always
-//       have a root view controller (prevent pops, check that one has been defined when displayed for the first time)
-
 // Constants
 const NSUInteger HLSContainerStackMinimalCapacity = 1;
 const NSUInteger HLSContainerStackDefaultCapacity = 2;
