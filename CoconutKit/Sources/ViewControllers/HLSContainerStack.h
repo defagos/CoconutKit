@@ -172,12 +172,14 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)popViewControllerAnimated:(BOOL)animated;
 
 /**
- * Pop all view controllers up to a given view controller (animated or not). If the view controller is not in the
- * stack, this method does nothing. If viewController is set to nil, this method pops everything (but does nothing
- * if a view controller is mandatory)
+ * Pop all view controllers up to a given view controller (animated or not). If viewController is set to nil, this 
+ * method pops all view controllers (except if a root view controller is mandatory, in which case this method does
+ * nothing)
  *
  * When the transition is animated, the pop occurs with the reverse animation corresponding to the animation with
  * which the topmost view controller was pushed
+ *
+ * If the view controller is not in the stack or if it is already the top view controller, this method does nothing.
  */
 - (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
@@ -186,7 +188,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * index to NSUInteger to pop everything (except if a root view controller is mandatory, in which case this method 
  * does nothing)
  *
- * If the index is invalid, this method does nothing
+ * If the index is invalid or if it is the index of the top view controller (i.e. [self count] - 1), this method 
+ * does nothing
  */
 - (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
 

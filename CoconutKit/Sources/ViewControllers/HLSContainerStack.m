@@ -20,6 +20,8 @@
 
 // TODO: Prevent containerView from being changed after the view has been displayed
 
+// TODO: Prevent simultaneous pops / pushes
+
 /**
  * TODO: Mimic behavior of the navigation controller delegate methods?
  * - display as root -> calls will / didShow for the root view controller
@@ -27,8 +29,6 @@
  * - pop VC -> calls will / didShow for the VC which gets revealed
  * - display and hide modal -> does not call will / didShow
  */
-
-// TODO: Tester la capacité minimale
 
 /**
  * Some view controller containers might display several view controllers simultaneously in the same content view. In
@@ -92,7 +92,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
              @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
         
     // Calculate the exact frame in which the animations will occur (taking into account the transform applied
-    // to the parent view
+    // to the parent view)
     CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
     
     // Build the animation with default parameters
@@ -119,10 +119,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     if ((self = [super init])) {
         if (! containerViewController) {
+            HLSLoggerError(@"Missing container view controller");
             [self release];
-            @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                           reason:@"Missing container view controller"
-                                         userInfo:nil];
+            return nil;
         }
                 
         self.containerViewController = containerViewController;
@@ -164,16 +163,26 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
+    if (! [self.containerViewController isViewLoaded]) {
+        HLSLoggerError(@"Cannot set a container view when the container view controller's view has not been loaded");
+        return;
+    }
+    
+    if ([self.containerViewController isViewVisible]) {
+        HLSLoggerError(@"Cannot change the container view when the container view controller is being displayed");
+        return;
+    }
+    
     if (containerView) {
         if (! [containerView isDescendantOfView:[self.containerViewController view]]) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException 
-                                           reason:@"The container view must be part of the view controller's view hierarchy"
-                                         userInfo:nil];
+            HLSLoggerError(@"The container view must be part of the container view controller's view hiearchy");
+            return;
         }
         
         // All animations must take place inside the view controller's view
         containerView.clipsToBounds = YES;
         
+        // Create the container base view maintaining the whole container view hiearchy
         HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
         [containerView addSubview:containerStackView];
     }
@@ -184,7 +193,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (HLSContainerStackView *)containerStackView
 {
-    NSAssert([[self.containerView.subviews firstObject] isKindOfClass:[HLSContainerStackView class]], @"Expected a container view as first subview");
     return [self.containerView.subviews firstObject];
 }
 
