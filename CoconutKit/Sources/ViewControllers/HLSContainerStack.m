@@ -62,7 +62,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)secondTopContainerContent;
 
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
-                 playingTransition:(BOOL)playingTransition
+                         inserting:(BOOL)inserting
                           animated:(BOOL)animated;
 
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
@@ -335,7 +335,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
         NSUInteger index = firstRemovedIndex - 1 - i;
         HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-        [self addViewForContainerContent:containerContent playingTransition:NO animated:NO];
+        [self addViewForContainerContent:containerContent inserting:NO animated:NO];
         
         if (index == 0) {
             break;
@@ -408,7 +408,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // A correction needs to be applied here to account for the [container count] increase (since index was relative
         // to the previous value)
         if ([self.containerContents count] - index - 1 <= self.capacity) {
-            [self addViewForContainerContent:containerContent playingTransition:YES animated:animated];
+            [self addViewForContainerContent:containerContent inserting:YES animated:animated];
         }
     }
 }
@@ -486,7 +486,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // controllers on top of it are transparent)
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         if (containerContentAtCapacity) {
-            [self addViewForContainerContent:containerContentAtCapacity playingTransition:NO animated:NO];
+            [self addViewForContainerContent:containerContentAtCapacity inserting:NO animated:NO];
         }
         
         HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
@@ -553,7 +553,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // the animated information
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
         if (containerContent) {
-            [self addViewForContainerContent:containerContent playingTransition:NO animated:i == 0];
+            [self addViewForContainerContent:containerContent inserting:NO animated:animated];
         }
     }
         
@@ -723,16 +723,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
-// The containerContent object must already reside in containerContents. This method is namely intended to be used
-// when pushing a view controller, e.g., but also when creating a hierarchy with pre-loaded or unloaded view
-// controllers
-
 /**
  * Method to add the view for a container content to the stack view hierarchy. The container content parameter is mandatory
- * and must belong to the stack
+ * and must be part of the stack. If the view is added because the container content is being inserted into the container,
+ * set inserting to YES, otherwise to NO
  */
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent 
-                 playingTransition:(BOOL)playingTransition
+- (void)addViewForContainerContent:(HLSContainerContent *)containerContent
+                         inserting:(BOOL)inserting
                           animated:(BOOL)animated
 {
     NSAssert(containerContent != nil, @"A container content is mandatory");
@@ -794,7 +791,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                        inView:groupView
                                                                      duration:containerContent.duration];
     animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
-    if (playingTransition && index == [self.containerContents count] - 1) {
+    if (inserting && index == [self.containerContents count] - 1) {
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
         
