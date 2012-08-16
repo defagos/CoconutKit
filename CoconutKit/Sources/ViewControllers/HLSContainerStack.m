@@ -61,11 +61,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
 
+- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
+
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
                          inserting:(BOOL)inserting
                           animated:(BOOL)animated;
-
-- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
 
 @end
 
@@ -247,6 +247,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (NSUInteger)count
 {
     return [self.containerContents count];
+}
+
+- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
+{
+    if ([self.containerContents count] > depth) {
+        return [self.containerContents objectAtIndex:[self.containerContents count] - depth - 1];
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark Adding and removing view controllers
@@ -466,8 +476,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if ([self.containerViewController isViewVisible]) {
-        // Notify the delegate before the view controller is actually removed from the top of the stack (see HLSContainerStackDelegate
-        // interface contract)
+        // Notify the delegate
         if (index == [self.containerContents count] - 1) {
             if ([self.delegate respondsToSelector:@selector(containerStack:willPopViewController:revealViewController:animated:)]) {
                 [self.delegate containerStack:self
@@ -479,7 +488,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
         
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-    if ([self.containerViewController isViewVisible] && containerContent.addedToContainerView) {
+    if (containerContent.addedToContainerView) {
         // Load the view controller'sview below so that the capacity criterium can be fulfilled (if needed). If we are popping a
         // view controller, we will have capacity + 1 view controller's views loaded during the animation. This ensures that no
         // view controllers magically pops up during animation (which could be noticed depending on the pop animation, or if view
@@ -497,12 +506,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                           duration:containerContent.duration] reverseAnimation];
         animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
         if (index == [self.containerContents count] - 1) {
+            // Some more work has to be done for pop animations in the animation begin / end callbacks. To identify such animations,
+            // we give them a tag which we can test in those callbacks
             animation.tag = @"pop_animation";
             animation.lockingUI = YES;
             
             [animation playAnimated:animated];
             
-            // The code then resumes in the animation end callback
+            // Check the animation callback implementations for what happens next
         }
         else {
             [animation playAnimated:NO];
@@ -549,89 +560,83 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Create the container view hierarchy with those views required according to the capacity
     for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-        // Never play transitions (we are building the view hierarchy). Only the top view controller receives
-        // the animated information
+        // Never play transitions (we are building the view hierarchy). Only the top view controller receives the animated
+        // information
         HLSContainerContent *containerContent = [self containerContentAtDepth:i];
         if (containerContent) {
             [self addViewForContainerContent:containerContent inserting:NO animated:animated];
         }
     }
         
-    // Forward events to the top view controller
+    // Forward events (willShow is sent to the delegate before willAppear is sent to the child)
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
-        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
-            [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
-        }
-        
-        if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
-            [topContainerContent viewWillAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
-        }
-        else {
-            [topContainerContent viewWillAppear:animated movingToParentViewController:NO];
-        }
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
+        [self.delegate containerStack:self willShowViewController:topContainerContent.viewController animated:animated];
+    }
+    
+    if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
+        [topContainerContent viewWillAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
+    }
+    else {
+        [topContainerContent viewWillAppear:animated movingToParentViewController:NO];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    // Forward events (didAppear is sent to the child before didShow is sent to the delegate)
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
-        
-        if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
-            [topContainerContent viewDidAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
-        }
-        else {
-            [topContainerContent viewDidAppear:animated movingToParentViewController:NO];
-        }
-        
-        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
-            [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
-        }
+    if ([self.containerViewController respondsToSelector:@selector(isMovingToParentViewController)]) {
+        [topContainerContent viewDidAppear:animated movingToParentViewController:[self.containerViewController isMovingToParentViewController]];
+    }
+    else {
+        [topContainerContent viewDidAppear:animated movingToParentViewController:NO];
+    }
+    
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
+        [self.delegate containerStack:self didShowViewController:topContainerContent.viewController animated:animated];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    // Forward events (willHide is sent to the delegate before willDisappear is sent to the child)
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
-        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
-            [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
-        }
-        
-        if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
-            [topContainerContent viewWillDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
-        }
-        else {
-            [topContainerContent viewWillDisappear:animated movingFromParentViewController:NO];
-        }
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
+        [self.delegate containerStack:self willHideViewController:topContainerContent.viewController animated:animated];
+    }
+    
+    if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
+        [topContainerContent viewWillDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
+    }
+    else {
+        [topContainerContent viewWillDisappear:animated movingFromParentViewController:NO];
     }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    // Forward events (didDisappear is sent to the child before didHide is sent to the delegate)
     HLSContainerContent *topContainerContent = [self topContainerContent];
-    if ([topContainerContent.viewController isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
-        if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
-            [topContainerContent viewDidDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
-        }
-        else {
-            [topContainerContent viewDidDisappear:animated movingFromParentViewController:NO];
-        }
-        
-        if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
-            [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
-        }
+    if ([self.containerViewController respondsToSelector:@selector(isMovingFromParentViewController)]) {
+        [topContainerContent viewDidDisappear:animated movingFromParentViewController:[self.containerViewController isMovingFromParentViewController]];
+    }
+    else {
+        [topContainerContent viewDidDisappear:animated movingFromParentViewController:NO];
+    }
+    
+    if (topContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
+        [self.delegate containerStack:self didHideViewController:topContainerContent.viewController animated:animated];
     }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    // TODO: Support for HLSOrientationCloner is NOT trivial. Not implemented currently, maybe someday... The easiest
-    //       way is probably not to rotate all view, but only the visible one. If it is an HLSOrientationCloner,
-    //       swap it just before it will appear (if a view controller on top of it is popped) or in place (if it
-    //       is at the top of the stack). Maybe this is not so difficult to implement after all, but this means
-    //       that some calls to will...rotate / did...rotate will probably be made directly from viewWillAppear:
+    // Prevent rotations during animations. Can lead to erroneous animations
+    if (m_animating) {
+        HLSLoggerInfo(@"A transition animation is running. Rotation has been prevented");
+        return NO;
+    }
     
     // If one view controller in the stack does not support the orientation, neither will the container
     for (HLSContainerContent *containerContent in self.containerContents) {
@@ -639,27 +644,24 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return NO;
         }
     }
-    
-    // Prevent rotations during animations. Can yields to erroneous animations
-    if (m_animating) {
-        HLSLoggerInfo(@"A transition animation is running. Rotation has been prevented");
-        return NO;
-    }
-    
+        
     return YES;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
+        // Visible view controllers only
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
             // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
-            // on the animation properties, most notably when scaling is involved), we negate each animation (this is made
-            // here since the frame is still the one prior to the rotation). Those will be replayed for the new orientation
-            // right afterwards, when the animation, so that this trick stays invisible
+            // on the animation style, most notably when scaling is involved), we negate each animation here, with the old
+            // frame. We replay the animation just afterwards in willAnimateRotationToInterfaceOrientation:duration:,
+            // where the frame is the final one obtained after rotation. This trick is invisible to the user and avoids
+            // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
+            // non-integral frames, and thus to blurry views)
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
             HLSAnimation *reverseAnimation = [[HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
                                                                                 appearingView:groupView.frontView
@@ -683,12 +685,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
+        // Visible view controllers only
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
-            // See comment in -willRotateToInterfaceOrientation:duration:. The container view frame is here the final one
-            // obtained after the rotation completes
+            // See comment in -willRotateToInterfaceOrientation:duration:
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
             HLSAnimation *animation = [HLSContainerStack transitionAnimationWithClass:containerContent.transitionClass
                                                                         appearingView:groupView.frontView
@@ -709,11 +711,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    // Same remark as above
     if ([self.containerContents count] != 0) {
+        // Visible view controllers only
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            
+            // Same remark as in -willAnimateRotationToInterfaceOrientation:duration:
             [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
             
             if (index == 0) {
@@ -791,38 +795,31 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                        inView:groupView
                                                                      duration:containerContent.duration];
     animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
+    
+    // Pushing a view controller onto the stack
     if (inserting && index == [self.containerContents count] - 1) {
+        // Some more work has to be done for push animations in the animation begin / end callbacks. To identify such animations,
+        // we give them a tag which we can test in those callbacks
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
         
         [animation playAnimated:animated];
+        
+        // Check the animation callback implementations for what happens next
     }
+    // All other cases (inserting in the middle or instantiating the view for a view controller already in the stack)
     else {
         [animation playAnimated:NO];
     }
 }
 
-#pragma mark Capacity
-
-- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
-{
-    if ([self.containerContents count] > depth) {
-        return [self.containerContents objectAtIndex:[self.containerContents count] - depth - 1];
-    }
-    else {
-        return nil;
-    }
-}
-
 #pragma mark HLSAnimationDelegate protocol implementation
 
-// Called for any push / pop animation, whether animated or not
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (animated) {
-        m_animating = YES;
-    }
+    m_animating = YES;
     
+    // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
@@ -835,12 +832,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             appearingContainerContent = [self secondTopContainerContent];
             disappearingContainerContent = [self topContainerContent];
         }
-                
+        
+        // Forward events (willHide is sent to the delegate before willDisappear is sent to the view controller)
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
         [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:YES];
         
+        // Forward events (willShow is sent to the delegate before willAppear is sent to the view controller)
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
@@ -850,10 +849,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (animated) {
-        m_animating = NO;
-    }
+    m_animating = NO;
     
+    // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
@@ -867,11 +865,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
+        // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate)
         [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:YES];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-                
+         
+        // Forward events (didAppear is sent to the view controller before didShow is sent to the delegate)
         [appearingContainerContent viewDidAppear:animated movingToParentViewController:YES];
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
@@ -890,6 +890,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 [self.containerContents removeObject:containerContentAtCapacity];
             }
             
+            // Notify the delegate
             if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
                 [self.delegate containerStack:self
                         didPushViewController:appearingContainerContent.viewController
@@ -898,9 +899,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
         else if ([animation.tag isEqualToString:@"pop_animation"]) {
-            
             [self.containerContents removeObject:disappearingContainerContent];
             
+            // Notify the delegate after the view controller has been removed from the stack and the parent-child containment relationship
+            // has been broken (see HLSContainerStackDelegate interface contract)
             if ([self.delegate respondsToSelector:@selector(containerStack:didPopViewController:revealViewController:animated:)]) {
                 [self.delegate containerStack:self
                          didPopViewController:disappearingViewController
