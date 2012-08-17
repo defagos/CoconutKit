@@ -54,12 +54,6 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
                            "must have been loaded before", HLSStackRootSegueIdentifier);
             return;
         }
-        
-        if (self.transitionClass != [HLSTransitionNone class]) {
-            HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionNone, which is the only style "
-                          "available for view controller preloading");
-            self.transitionClass = [HLSTransitionNone class];
-        }
     }
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
     // push the destination view controller into it

@@ -50,9 +50,12 @@
  *     root view controller with it using another HLSStackPushSegue (with any non-reserved identifier). If you 
  *     need to customize transition settings (e.g. style and duration), you must implement the -prepareForSegue:sender: 
  *     method in your source view controller (the root view controller in this example)
- *   - if you want to pop a view controller, bind it to any other view controller (in general the one towards
- *     which the transition will occur, or the view controller itself) using an HLSStackPopSegue
- * For further information, refer to the documentation of HLSStackPushSegue and HLSStackPopSegue.
+ *   - segues only go one way (as for UINavigationController ones: A segue connection always allocates the 
+ *     destination view controller, and thus cannot be bound to existing destinations, refer to the UIStoryboardSegue
+ *     documentation for more information). If you want to pop a view controller, you therefore have to do it
+ *     programmatically
+ *
+ * For further information, refer to the documentation of HLSStackPushSegue.
  *
  * Designated initializer: initWithRootViewController:capacity:
  */

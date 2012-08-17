@@ -40,7 +40,6 @@
 		6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010F415ABECA400A9FEC5 /* HLSContainerStack.m */; };
 		6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */; };
 		6F6C0A1A159B965E007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */; };
-		6F6C0A25159B9A5F007933EB /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A24159B9A5F007933EB /* HLSStackPopSegue.m */; };
 		6F7B848B14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660D1588CC820044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F83660C1588CC820044E572 /* HLSVector.m */; };
 		6F8914AC15790E1A009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8914AB15790E1A009FCC78 /* HLSLabel.m */; };
@@ -213,8 +212,6 @@
 		6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F6C0A18159B965E007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
-		6F6C0A23159B9A5F007933EB /* HLSStackPopSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPopSegue.h; sourceTree = "<group>"; };
-		6F6C0A24159B9A5F007933EB /* HLSStackPopSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPopSegue.m; sourceTree = "<group>"; };
 		6F7B848914CF32B20091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F83660B1588CC820044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
@@ -830,8 +827,6 @@
 				6FADE78414BA04B6007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE78514BA04B6007EE121 /* HLSStackController.h */,
 				6FADE78614BA04B6007EE121 /* HLSStackController.m */,
-				6F6C0A23159B9A5F007933EB /* HLSStackPopSegue.h */,
-				6F6C0A24159B9A5F007933EB /* HLSStackPopSegue.m */,
 				6F6C0A18159B965E007933EB /* HLSStackPushSegue.h */,
 				6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */,
 				6FADE78914BA04B6007EE121 /* HLSTableSearchDisplayViewController.h */,
@@ -1088,7 +1083,6 @@
 				6F5007F21585E18100391A6C /* HLSExpandingSearchBar.m in Sources */,
 				6F83660D1588CC820044E572 /* HLSVector.m in Sources */,
 				6F6C0A1A159B965E007933EB /* HLSStackPushSegue.m in Sources */,
-				6F6C0A25159B9A5F007933EB /* HLSStackPopSegue.m in Sources */,
 				6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */,
 				6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */,
