@@ -32,7 +32,7 @@
  * controller is displayed. You must only ensure that the number of placeholder views suffices to hold all the view 
  * controllers you have preloaded.
  *
- * When you derive from HLSPlaceholderViewController, it is especially important not to forget to call the super class
+ * When you subclass HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
  * behavior is undefined:
  *   - initWithNibName:bundle:
@@ -47,13 +47,13 @@
  *   - didRotateFromInterfaceOrientation:
  *
  * This view controller uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation
- * in subclasses (it will be ignored, see UIViewController documentation) and inset view controllers. The 2-step
+ * in subclasses and inset view controllers (it will be ignored, see UIViewController documentation). The 2-step
  * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
  * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
- *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers will
- *     be drawn
+ *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers
+ *     will be drawn
  *   - drop another view controller onto the storyboard. You can display this view controller as inset as follows:
  *       - if you want to preload the view controller so that it gets displayed when the placeholder view controller
  *         gets displayed, bind the placeholder view controller with it using an HLSPlaceholderInsetSegue with the 
@@ -104,7 +104,7 @@
  * is made without animation. Setting an inset view controller to nil removes the one currently displayed at this index
  * (if any) using the animation it was displayed with
  *
- * This method can also be called before the placeholder view controller is displayed to preload view controllers
+ * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index;
@@ -112,9 +112,10 @@
 /**
  * Display an inset view controller using some transition animation, on the placeholder view corresponding to the given 
  * index. The transition duration is set by the animation itself. Setting the inset view controller to nil removes the 
- * one currently displayed at this index (if any) using the animation it was displayed with
+ * one currently displayed at this index (if any) using the animation it was displayed with, in which case the transition
+ * animation class will be ignored
  *
- * This method can also be called before the placeholder view controller is displayed to preload view controllers
+ * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
@@ -125,9 +126,9 @@
  * to the given index (the animation will look the same, only slower or faster). Use the special value 
  * kAnimationTransitionDefaultDuration as duration to get the default transition duration. Setting the inset view
  * controller to nil removes the one currently displayed at this index (if any) using the animation it was displayed
- * with
+ * with, in which case the transition animation class and duration will be ignored
  *
- * This method can also be called before the placeholder view controller is displayed to preload view controllers
+ * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
 - (void)setInsetViewController:(UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
@@ -165,19 +166,33 @@
 @protocol HLSPlaceholderViewControllerDelegate <NSObject>
 @optional
 
+/**
+ * Called when a view controller is about to be displayed
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willShowInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
+
+/**
+ * Called when a view controller has been displayed
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didShowInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
+/**
+ * Called when a view controller is about to be hidden
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
       willHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
+
+/**
+ * Called when a view controller has been hidden
+ */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
        didHideInsetViewController:(UIViewController *)viewController
                           atIndex:(NSUInteger)index
