@@ -29,6 +29,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     // Load view controllers initially using reserved segue identifiers. We cannot use [self.placeholderViews count]
     // as loop upper limit here since the view is not loaded (and we cannot do this after -loadView has been called). 
     // Checking the first 20 indices should be sufficient

@@ -56,6 +56,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                              capacity:self.capacity 
                                                                              removing:NO

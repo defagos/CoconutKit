@@ -23,6 +23,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     [self setBackgroundWithImageNamed:@"cell_bkgr_brown_large.png" selectedBackgroundWithImageName:@"cell_bkgr_brown_large_selected.png"];
 }
 
