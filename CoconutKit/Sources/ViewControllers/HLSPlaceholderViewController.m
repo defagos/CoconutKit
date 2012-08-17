@@ -20,9 +20,6 @@
 
 @end
 
-// TODO: Implement HLSContainerStack delegate methods to be able to remove the bottommost view controller
-//       after a new view controller has been pushed
-
 @implementation HLSPlaceholderViewController
 
 #pragma mark Object creation and destruction
@@ -82,6 +79,10 @@
 
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index
 {
+    if (index >= [self.containerStacks count]) {
+        return nil;
+    }
+    
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
     return [containerStack rootViewController];
 }
@@ -100,6 +101,7 @@
     // The order of outlets within an IBOutletCollection is sadly not the one defined in the nib file. Expect the user
     // to explictly order them using the UIView tag property, and warn if this was not done properly. This is not an
     // issue if the placeholder views are set programmatically
+    // (also see rdar://12121242: This issue seems to affect storyboards only)
     if ([self nibName]) {
         NSMutableSet *tags = [NSMutableSet set];
         for (UIView *placeholderView in self.placeholderViews) {
