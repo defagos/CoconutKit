@@ -67,6 +67,7 @@
 "Index"="Index";
 "Insert / remove in left placeholder"="Insérer / retirer à gauche";
 "Insert / remove in right placeholder"="Insérer / retirer à droite";
+"Insertion index: %d"="Index d'insertion: %d";
 "Invalid email address"="Adresse e-mail invalide";
 "Label"="Libellé";
 "Landscape only"="Uniquement paysage";
@@ -111,6 +112,7 @@
 "Random"="Aléatoire";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
+"Removal index: %d"="Index de retrait: %d";
 "Remove"="Retirer";
 "Reset"="Mettre à zéro";
 "Reset (animated)"="Mettre à zéro (animé)";

@@ -23,6 +23,10 @@
 
 - (void)displayContentViewController:(UIViewController *)viewController;
 
+- (void)updateIndexInfo;
+- (NSUInteger)insertionIndex;
+- (NSUInteger)removalIndex;
+
 @end
 
 @implementation StackDemoViewController
@@ -63,7 +67,6 @@
                         withTransitionClass:[HLSTransitionFlipHorizontal class]
                                    animated:NO];
         
-        
         [self setInsetViewController:stackController atIndex:0];
     }
     return self;
@@ -77,6 +80,9 @@
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.animatedSwitch = nil;
+    self.indexSlider = nil;
+    self.insertionIndexLabel = nil;
+    self.removalIndexLabel = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -89,6 +95,12 @@
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
+@synthesize indexSlider = m_indexSlider;
+
+@synthesize insertionIndexLabel = m_insertionIndexLabel;
+
+@synthesize removalIndexLabel = m_removalIndexLabel;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -100,6 +112,24 @@
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
+    
+    self.indexSlider.minimumValue = 1.f;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSStackController";
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -124,9 +154,118 @@
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [stackController pushViewController:pushedViewController
-                    withTransitionClass:NSClassFromString(transitionName)
-                               animated:self.animatedSwitch.on];
+    [stackController insertViewController:viewController
+                                  atIndex:(NSUInteger)roundf(self.indexSlider.value)
+                      withTransitionClass:NSClassFromString(transitionName)
+                                 duration:kAnimationTransitionDefaultDuration
+                                 animated:YES];
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark Miscellaneous
+
+- (void)updateIndexInfo
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    self.indexSlider.maximumValue = [stackController count];
+    self.indexSlider.value = [stackController count];
+    [self indexChanged:self.indexSlider];
+}
+
+- (NSUInteger)insertionIndex
+{
+    return roundf(self.indexSlider.value);
+}
+
+- (NSUInteger)removalIndex
+{
+    return MIN([self insertionIndex], [self.indexSlider maximumValue] - 1);
+}
+
+#pragma mark HLSStackControllerDelegate protocol implementation
+
+- (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    [self updateIndexInfo];
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] count];
+}
+
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
 #pragma mark Event callbacks
@@ -220,6 +359,14 @@
     [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
 }
 
+- (IBAction)indexChanged:(id)sender
+{
+    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", @"Insertion index: %d"),
+                                     [self insertionIndex]];
+    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", @"Removal index: %d"),
+                                   [self removalIndex]];
+}
+
 - (IBAction)navigateForwardNonAnimated:(id)sender
 {
     StackDemoViewController *stackDemoViewController = [[[StackDemoViewController alloc] init] autorelease];
@@ -229,96 +376,6 @@
 - (IBAction)navigateBackNonAnimated:(id)sender
 {
     [self.navigationController popViewControllerAnimated:NO];
-}
-
-#pragma mark HLSStackControllerDelegate protocol implementation
-
-- (void)stackController:(HLSStackController *)stackController
- willPushViewController:(UIViewController *)pushedViewController
-    coverViewController:(UIViewController *)coveredViewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
- willShowViewController:(UIViewController *)viewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
-  didShowViewController:(UIViewController *)viewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
-  didPushViewController:(UIViewController *)pushedViewController
-    coverViewController:(UIViewController *)coveredViewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
-  willPopViewController:(UIViewController *)poppedViewController
-   revealViewController:(UIViewController *)revealedViewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
- willHideViewController:(UIViewController *)viewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
-  didHideViewController:(UIViewController *)viewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)stackController:(HLSStackController *)stackController
-   didPopViewController:(UIViewController *)poppedViewController
-   revealViewController:(UIViewController *)revealedViewController
-               animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
-}
-
-#pragma mark UIPickerViewDataSource protocol implementation
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [[HLSTransition availableTransitionNames] count];
-}
-
-#pragma mark UIPickerViewDelegate protocol implementation
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"HLSStackController";
 }
 
 @end

@@ -67,6 +67,7 @@
 "Index"="Index";
 "Insert / remove in left placeholder"="Insert / remove in left placeholder";
 "Insert / remove in right placeholder"="Insert / remove in right placeholder";
+"Insertion index: %d"="Insertion index: %d";
 "Invalid email address"="Invalid email address";
 "Label"="Label";
 "Label with some missing translation"="Label with some missing translation";
@@ -112,6 +113,7 @@
 "Random"="Random";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
+"Removal index: %d"="Removal index: %d";
 "Remove"="Remove";
 "Reset"="Reset";
 "Reset (animated)"="Reset (animated)";

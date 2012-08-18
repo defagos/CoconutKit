@@ -113,6 +113,15 @@
     }
 }
 
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSPlaceholderViewController";
+}
+
 #pragma mark Displaying an inset view controller according to the user settings
 
 - (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
@@ -134,6 +143,69 @@
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
     [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
+}
+
+#pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
+        || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    self.heavyButton.hidden = NO;
+}
+
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] count];
+}
+
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
 #pragma mark Event callbacks
@@ -306,78 +378,6 @@
 - (IBAction)navigateBackNonAnimated:(id)sender
 {
     [self.navigationController popViewControllerAnimated:NO];
-}
-
-#pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
-
-- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willShowInsetViewController:(UIViewController *)viewController
-                          atIndex:(NSUInteger)index
-                         animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didShowInsetViewController:(UIViewController *)viewController
-                          atIndex:(NSUInteger)index
-                         animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-    
-    if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
-            || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
-        self.heavyButton.hidden = YES;
-    }
-    else {
-        self.heavyButton.hidden = NO;
-    }
-}
-
-- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willHideInsetViewController:(UIViewController *)viewController
-                          atIndex:(NSUInteger)index
-                         animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Will hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didHideInsetViewController:(UIViewController *)viewController
-                          atIndex:(NSUInteger)index
-                         animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Did hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-    
-    self.heavyButton.hidden = NO;
-}
-
-#pragma mark UIPickerViewDataSource protocol implementation
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [[HLSTransition availableTransitionNames] count];
-}
-
-#pragma mark UIPickerViewDelegate protocol implementation
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"HLSPlaceholderViewController";
 }
 
 @end

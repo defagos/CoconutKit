@@ -15,12 +15,18 @@
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_animatedSwitch;
+    UISlider *m_indexSlider;
+    UILabel *m_insertionIndexLabel;
+    UILabel *m_removalIndexLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISlider *indexSlider;
+@property (nonatomic, retain) IBOutlet UILabel *insertionIndexLabel;
+@property (nonatomic, retain) IBOutlet UILabel *removalIndexLabel;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
 - (IBAction)displayContainmentTest:(id)sender;
@@ -35,6 +41,8 @@
 - (IBAction)pop:(id)sender;
 - (IBAction)popToRoot:(id)sender;
 - (IBAction)popThree:(id)sender;
+
+- (IBAction)indexChanged:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;
 - (IBAction)navigateBackNonAnimated:(id)sender;
