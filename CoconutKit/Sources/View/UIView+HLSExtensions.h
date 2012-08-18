@@ -6,6 +6,10 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#define HLSViewAutoresizingAll UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth |         \
+    UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
+    UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
+
 @interface UIView (HLSExtensions)
 
 /**

@@ -87,6 +87,8 @@ static UIScrollView *s_scrollView = nil;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     [self hlsTextFieldInit];
 }
 

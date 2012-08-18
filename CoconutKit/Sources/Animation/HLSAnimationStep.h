@@ -60,6 +60,12 @@
 @property (nonatomic, retain) NSString *tag;
 
 /**
+ * Return the total alpha variation applied to a given view during the animation step. If the view does not belong to the 
+ * views involved in the animation, the method returns 0.f
+ */
+- (CGFloat)alphaVariationForView:(UIView *)view;
+
+/**
  * Return the inverse animation step. If a tag has been defined, the reverse animation step is automatically assigned
  * the same tag, but with an additional "reverse_" prefix (if a tag has not been filled, the reverse tag is nil)
  */

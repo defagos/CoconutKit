@@ -10,4 +10,6 @@
 
 - (IBAction)hideWithModal:(id)sender;
 
+- (IBAction)pop:(id)sender;
+
 @end

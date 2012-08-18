@@ -59,7 +59,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     }
 }
 
-#pragma mark Class methods for customization
+#pragma mark Class methods for customisation
 
 + (CGFloat)height
 {

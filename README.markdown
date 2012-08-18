@@ -73,6 +73,14 @@ If your project targets iOS 4 as well as iOS 5 and above, you might encounter _s
 
 CoconutKit is meant to be used in binary form to reduce compile times and executable size. You can add the CoconutKit project as a project dependency, but this is an approach I do not endorse and therefore do not officially support.
 
+#### Enabling logging
+
+CoconutKit provides a built-in logger which it uses to provide valuable information about its internal status. This should help you easily discover any issue you might encounter when using CoconutKit. To enable logging in a project using CoconutKit:
+
+* If you are using CoconutKit binaries, link your project against the debug version of the CoconutKit `.staticframework`. If you are using CocoaPods, no special care is needed since debug binaries will be used when compiling your project in debug mode
+* Edit your project target and add `-DHLS_LOGGER` to your `Other C Flags` for the debug configuration
+* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
+
 ### How should I use CoconutKit?
 
 After CoconutKit has been added to your project, simply import the headers you need using the `#import <CoconutKit/HeaderFile.h>` syntax. Though you can import files only where you need them, I strongly recommend importing the CoconutKit global header file from your project `.pch` file once for all (`#import <CoconutKit/CoconutKit.h>`). This file includes all CoconutKit public headers so that you do not need any other import.
@@ -164,6 +172,17 @@ Use the `CoconutKit-dev` project to easily write and test your code. When you ar
 Any new public header file must be added to the `CoconutKit-(dev|test)` `.pch` file, as well as to the `publicHeaders.txt` file located in the `CoconutKit-dev` directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
 
 For non-interactive components, you should consider adding some test cases to the `CoconutKit-test` project as well. Update it to mirror the changes made to the source and resource files of the `CoconutKit` project, and update the `.pch` to reference any new public header.
+
+#### Code repository
+
+Branches are managed using [git-flow](https://github.com/nvie/gitflow/):
+
+* `master` is the stable branch on which commits are only made when a new official release is created
+* `develop` is the main development branch and should be stable enough for use in between official releases
+* all new features are developed on `feature` branches. You should avoid such branches since they might not be stable all the time
+
+If you plan to develop for CoconutKit, install `git-flow` and setup your local repository by running `git flow init`, using the default settings.
+
 
 ### Acknowledgements
 

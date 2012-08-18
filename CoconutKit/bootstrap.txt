@@ -4,7 +4,6 @@ HLSExpandingSearchBar.m
 HLSLabel.m
 HLSPlaceholderInsetSegue.m
 HLSSlideshow.m
-HLSStackPopSegue.m
 HLSStackPushSegue.m
 HLSTextField.m
 HLSViewController.m

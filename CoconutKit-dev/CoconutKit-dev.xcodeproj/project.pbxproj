@@ -42,17 +42,12 @@
 		6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
 		6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F159A6E15A554250020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F814BA04C8007EE121 /* SingleViewAnimationDemoViewController.xib */; };
-		6F159A6F15A554250020AFAC /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FD14BA04C8007EE121 /* ContainerCustomizationViewController.xib */; };
 		6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
 		6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
 		6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80614BA04C8007EE121 /* HeavyViewController.xib */; };
 		6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80A14BA04C8007EE121 /* LandscapeOnlyViewController.xib */; };
 		6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80E14BA04C8007EE121 /* LifeCycleTestViewController.xib */; };
 		6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */; };
-		6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */; };
-		6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */; };
 		6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */; };
 		6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81F14BA04C8007EE121 /* StretchableLargeViewController.xib */; };
 		6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE82214BA04C8007EE121 /* StretchableViewController.xib */; };
@@ -164,7 +159,6 @@
 		6F159AE915A554250020AFAC /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */; };
 		6F159AEA15A554250020AFAC /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A714BA04A6007EE121 /* HLSStackController.m */; };
 		6F159AEB15A554250020AFAC /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */; };
-		6F159AEC15A554250020AFAC /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AD14BA04A6007EE121 /* HLSTransitionStyle.m */; };
 		6F159AED15A554250020AFAC /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AF14BA04A6007EE121 /* HLSViewController.m */; };
 		6F159AEE15A554250020AFAC /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B114BA04A6007EE121 /* HLSWebViewController.m */; };
 		6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */; };
@@ -172,13 +166,11 @@
 		6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */; };
 		6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */; };
 		6F159AF315A554250020AFAC /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F714BA04C8007EE121 /* SingleViewAnimationDemoViewController.m */; };
-		6F159AF415A554250020AFAC /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7FC14BA04C8007EE121 /* ContainerCustomizationViewController.m */; };
 		6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
 		6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80514BA04C8007EE121 /* HeavyViewController.m */; };
 		6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80914BA04C8007EE121 /* LandscapeOnlyViewController.m */; };
 		6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80D14BA04C8007EE121 /* LifeCycleTestViewController.m */; };
 		6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */; };
-		6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */; };
 		6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */; };
 		6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82114BA04C8007EE121 /* StretchableViewController.m */; };
 		6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE82514BA04C8007EE121 /* TransparentViewController.m */; };
@@ -236,7 +228,6 @@
 		6F159B3115A554250020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F159B3215A554250020AFAC /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
 		6F159B3315A554250020AFAC /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
-		6F159B3415A554250020AFAC /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */; };
 		6F159B3515A554250020AFAC /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F159B3615A554250020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F159B3715A554250020AFAC /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
@@ -270,13 +261,18 @@
 		6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
+		6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
+		6F6010F115ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
-		6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660A1588CC770044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
 		6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149415790DA8009FCC78 /* HLSLabel.m */; };
 		6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149815790DCA009FCC78 /* LabelDemoViewController.m */; };
 		6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */; };
+		6F8C934015CEE641006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933F15CEE641006D892C /* HLSContainerGroupView.m */; };
+		6F8C934115CEE641006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933F15CEE641006D892C /* HLSContainerGroupView.m */; };
+		6F8C934F15CEF0F8006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934E15CEF0F8006D892C /* HLSContainerStackView.m */; };
+		6F8C935015CEF0F8006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934E15CEF0F8006D892C /* HLSContainerStackView.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
@@ -333,7 +329,6 @@
 		6FADE6F014BA04A7007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE6F114BA04A7007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A714BA04A6007EE121 /* HLSStackController.m */; };
 		6FADE6F314BA04A7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */; };
-		6FADE6F414BA04A7007EE121 /* HLSTransitionStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AD14BA04A6007EE121 /* HLSTransitionStyle.m */; };
 		6FADE6F514BA04A7007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6AF14BA04A6007EE121 /* HLSViewController.m */; };
 		6FADE6F614BA04A7007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B114BA04A6007EE121 /* HLSWebViewController.m */; };
 		6FADE6F714BA04A7007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */; };
@@ -344,8 +339,6 @@
 		6FADE89514BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6FADE89614BA04C9007EE121 /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F714BA04C8007EE121 /* SingleViewAnimationDemoViewController.m */; };
 		6FADE89714BA04C9007EE121 /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F814BA04C8007EE121 /* SingleViewAnimationDemoViewController.xib */; };
-		6FADE89814BA04C9007EE121 /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7FC14BA04C8007EE121 /* ContainerCustomizationViewController.m */; };
-		6FADE89914BA04C9007EE121 /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FD14BA04C8007EE121 /* ContainerCustomizationViewController.xib */; };
 		6FADE89A14BA04C9007EE121 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
 		6FADE89B14BA04C9007EE121 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
 		6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
@@ -357,11 +350,6 @@
 		6FADE8A214BA04C9007EE121 /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80E14BA04C8007EE121 /* LifeCycleTestViewController.xib */; };
 		6FADE8A314BA04C9007EE121 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */; };
 		6FADE8A414BA04C9007EE121 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */; };
-		6FADE8A514BA04C9007EE121 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6FADE8A614BA04C9007EE121 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6FADE8A714BA04C9007EE121 /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */; };
-		6FADE8A814BA04C9007EE121 /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */; };
-		6FADE8A914BA04C9007EE121 /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */; };
 		6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */; };
 		6FADE8AB14BA04C9007EE121 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */; };
 		6FADE8AC14BA04C9007EE121 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE81F14BA04C8007EE121 /* StretchableLargeViewController.xib */; };
@@ -421,6 +409,10 @@
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
+		6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0025515D5463C00375240 /* ContainmentTestViewController.m */; };
+		6FD0025815D5463C00375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0025515D5463C00375240 /* ContainmentTestViewController.m */; };
+		6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
+		6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
@@ -432,6 +424,10 @@
 		6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
 		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
+		6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */; };
+		6FF3E6F815D2E4E300AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */; };
+		6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */; };
+		6FF3E71D15D3801600AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -531,10 +527,10 @@
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F6010EE15ABEC8C00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
+		6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
 		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
-		6F6C0A20159B9A51007933EB /* HLSStackPopSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPopSegue.h; sourceTree = "<group>"; };
-		6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPopSegue.m; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8366081588CC770044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
@@ -544,6 +540,10 @@
 		6F89149715790DCA009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149815790DCA009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
+		6F8C933E15CEE641006D892C /* HLSContainerGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerGroupView.h; sourceTree = "<group>"; };
+		6F8C933F15CEE641006D892C /* HLSContainerGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerGroupView.m; sourceTree = "<group>"; };
+		6F8C934D15CEF0F8006D892C /* HLSContainerStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStackView.h; sourceTree = "<group>"; };
+		6F8C934E15CEF0F8006D892C /* HLSContainerStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStackView.m; sourceTree = "<group>"; };
 		6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -568,7 +568,6 @@
 		6FADE63E14BA04A6007EE121 /* HLSKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKeyboardInformation.m; sourceTree = "<group>"; };
 		6FADE63F14BA04A6007EE121 /* HLSNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNotifications.h; sourceTree = "<group>"; };
 		6FADE64014BA04A6007EE121 /* HLSNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNotifications.m; sourceTree = "<group>"; };
-		6FADE64114BA04A6007EE121 /* HLSOrientationCloner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOrientationCloner.h; sourceTree = "<group>"; };
 		6FADE64214BA04A6007EE121 /* HLSReloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSReloadable.h; sourceTree = "<group>"; };
 		6FADE64314BA04A6007EE121 /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FADE64414BA04A6007EE121 /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
@@ -667,8 +666,6 @@
 		6FADE6A714BA04A6007EE121 /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
 		6FADE6AA14BA04A6007EE121 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
 		6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
-		6FADE6AC14BA04A6007EE121 /* HLSTransitionStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransitionStyle.h; sourceTree = "<group>"; };
-		6FADE6AD14BA04A6007EE121 /* HLSTransitionStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransitionStyle.m; sourceTree = "<group>"; };
 		6FADE6AE14BA04A6007EE121 /* HLSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewController.h; sourceTree = "<group>"; };
 		6FADE6AF14BA04A6007EE121 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FADE6B014BA04A6007EE121 /* HLSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWebViewController.h; sourceTree = "<group>"; };
@@ -686,9 +683,6 @@
 		6FADE7F614BA04C8007EE121 /* SingleViewAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleViewAnimationDemoViewController.h; sourceTree = "<group>"; };
 		6FADE7F714BA04C8007EE121 /* SingleViewAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleViewAnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FADE7F814BA04C8007EE121 /* SingleViewAnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleViewAnimationDemoViewController.xib; sourceTree = "<group>"; };
-		6FADE7FB14BA04C8007EE121 /* ContainerCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCustomizationViewController.h; sourceTree = "<group>"; };
-		6FADE7FC14BA04C8007EE121 /* ContainerCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCustomizationViewController.m; sourceTree = "<group>"; };
-		6FADE7FD14BA04C8007EE121 /* ContainerCustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCustomizationViewController.xib; sourceTree = "<group>"; };
 		6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6FADE80014BA04C8007EE121 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -705,12 +699,6 @@
 		6FADE81014BA04C8007EE121 /* MemoryWarningTestCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryWarningTestCoverViewController.h; sourceTree = "<group>"; };
 		6FADE81114BA04C8007EE121 /* MemoryWarningTestCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryWarningTestCoverViewController.m; sourceTree = "<group>"; };
 		6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoryWarningTestCoverViewController.xib; sourceTree = "<group>"; };
-		6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
-		6FADE81614BA04C8007EE121 /* OrientationClonerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationClonerViewController.h; sourceTree = "<group>"; };
-		6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationClonerViewController.m; sourceTree = "<group>"; };
-		6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerPortrait.xib; sourceTree = "<group>"; };
 		6FADE81B14BA04C8007EE121 /* PortraitOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortraitOnlyViewController.h; sourceTree = "<group>"; };
 		6FADE81C14BA04C8007EE121 /* PortraitOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitOnlyViewController.m; sourceTree = "<group>"; };
 		6FADE81D14BA04C8007EE121 /* PortraitOnlyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitOnlyViewController.xib; sourceTree = "<group>"; };
@@ -804,6 +792,9 @@
 		6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6FD0025415D5463C00375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
+		6FD0025515D5463C00375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
+		6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
 		6FDDEC141529777500CED462 /* UITextField+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDDEC201529781300CED462 /* UITextView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -824,6 +815,10 @@
 		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
 		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
+		6FF3E6F515D2E4E300AB9A53 /* HLSTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransition.h; sourceTree = "<group>"; };
+		6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransition.m; sourceTree = "<group>"; };
+		6FF3E71A15D3801600AB9A53 /* CustomTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitions.h; sourceTree = "<group>"; };
+		6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1116,7 +1111,6 @@
 				6FADE63F14BA04A6007EE121 /* HLSNotifications.h */,
 				6FADE64014BA04A6007EE121 /* HLSNotifications.m */,
 				6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */,
-				6FADE64114BA04A6007EE121 /* HLSOrientationCloner.h */,
 				6FADE64214BA04A6007EE121 /* HLSReloadable.h */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
 				6FADE64414BA04A6007EE121 /* HLSRuntime.m */,
@@ -1279,20 +1273,24 @@
 			children = (
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
+				6F8C933E15CEE641006D892C /* HLSContainerGroupView.h */,
+				6F8C933F15CEE641006D892C /* HLSContainerGroupView.m */,
+				6F6010EE15ABEC8C00A9FEC5 /* HLSContainerStack.h */,
+				6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */,
+				6F8C934D15CEF0F8006D892C /* HLSContainerStackView.h */,
+				6F8C934E15CEF0F8006D892C /* HLSContainerStackView.m */,
 				6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */,
 				6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */,
 				6FADE6A414BA04A6007EE121 /* HLSPlaceholderViewController.h */,
 				6FADE6A514BA04A6007EE121 /* HLSPlaceholderViewController.m */,
 				6FADE6A614BA04A6007EE121 /* HLSStackController.h */,
 				6FADE6A714BA04A6007EE121 /* HLSStackController.m */,
-				6F6C0A20159B9A51007933EB /* HLSStackPopSegue.h */,
-				6F6C0A21159B9A51007933EB /* HLSStackPopSegue.m */,
 				6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */,
 				6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */,
 				6FADE6AA14BA04A6007EE121 /* HLSTableSearchDisplayViewController.h */,
 				6FADE6AB14BA04A6007EE121 /* HLSTableSearchDisplayViewController.m */,
-				6FADE6AC14BA04A6007EE121 /* HLSTransitionStyle.h */,
-				6FADE6AD14BA04A6007EE121 /* HLSTransitionStyle.m */,
+				6FF3E6F515D2E4E300AB9A53 /* HLSTransition.h */,
+				6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */,
 				6FADE6AE14BA04A6007EE121 /* HLSViewController.h */,
 				6FADE6AF14BA04A6007EE121 /* HLSViewController.m */,
 				6FADE6B014BA04A6007EE121 /* HLSWebViewController.h */,
@@ -1383,28 +1381,17 @@
 		6FADE7F914BA04C8007EE121 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE7FA14BA04C8007EE121 /* ContainerCustomizationViewController */,
+				6FD0025315D5463C00375240 /* ContainmentTestViewController */,
 				6FADE7FE14BA04C8007EE121 /* FixedSizeViewController */,
 				6FADE80314BA04C8007EE121 /* HeavyViewController */,
 				6FADE80714BA04C8007EE121 /* LandscapeOnlyViewController */,
 				6FADE80B14BA04C8007EE121 /* LifeCycleTestViewController */,
 				6FADE80F14BA04C8007EE121 /* MemoryWarningTestCoverViewController */,
-				6FADE81314BA04C8007EE121 /* OrientationClonerViewController */,
 				6FADE81A14BA04C8007EE121 /* PortraitOnlyViewController */,
 				6FADE81E14BA04C8007EE121 /* StretchableViewController */,
 				6FADE82314BA04C8007EE121 /* TransparentViewController */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		6FADE7FA14BA04C8007EE121 /* ContainerCustomizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE7FB14BA04C8007EE121 /* ContainerCustomizationViewController.h */,
-				6FADE7FC14BA04C8007EE121 /* ContainerCustomizationViewController.m */,
-				6FADE7FD14BA04C8007EE121 /* ContainerCustomizationViewController.xib */,
-			);
-			path = ContainerCustomizationViewController;
 			sourceTree = "<group>";
 		};
 		6FADE7FE14BA04C8007EE121 /* FixedSizeViewController */ = {
@@ -1456,19 +1443,6 @@
 				6FADE81214BA04C8007EE121 /* MemoryWarningTestCoverViewController.xib */,
 			);
 			path = MemoryWarningTestCoverViewController;
-			sourceTree = "<group>";
-		};
-		6FADE81314BA04C8007EE121 /* OrientationClonerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE81414BA04C8007EE121 /* OrientationClonerLargeViewControllerLandscape.xib */,
-				6FADE81514BA04C8007EE121 /* OrientationClonerLargeViewControllerPortrait.xib */,
-				6FADE81614BA04C8007EE121 /* OrientationClonerViewController.h */,
-				6FADE81714BA04C8007EE121 /* OrientationClonerViewController.m */,
-				6FADE81814BA04C8007EE121 /* OrientationClonerViewControllerLandscape.xib */,
-				6FADE81914BA04C8007EE121 /* OrientationClonerViewControllerPortrait.xib */,
-			);
-			path = OrientationClonerViewController;
 			sourceTree = "<group>";
 		};
 		6FADE81A14BA04C8007EE121 /* PortraitOnlyViewController */ = {
@@ -1686,6 +1660,8 @@
 		6FADE87D14BA04C9007EE121 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6FF3E71A15D3801600AB9A53 /* CustomTransitions.h */,
+				6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */,
 				6FADE87E14BA04C9007EE121 /* DemoErrors.h */,
 				6FADE87F14BA04C9007EE121 /* DemoErrors.m */,
 			);
@@ -1719,6 +1695,16 @@
 				6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */,
 			);
 			path = ParallaxScrolling;
+			sourceTree = "<group>";
+		};
+		6FD0025315D5463C00375240 /* ContainmentTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FD0025415D5463C00375240 /* ContainmentTestViewController.h */,
+				6FD0025515D5463C00375240 /* ContainmentTestViewController.m */,
+				6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */,
+			);
+			path = ContainmentTestViewController;
 			sourceTree = "<group>";
 		};
 		6FDB126B1404D19E00469DEC /* CoconutKit-demo */ = {
@@ -1872,17 +1858,12 @@
 				6FADE89214BA04C9007EE121 /* MainWindow.xib in Resources */,
 				6FADE89514BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6FADE89714BA04C9007EE121 /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6FADE89914BA04C9007EE121 /* ContainerCustomizationViewController.xib in Resources */,
 				6FADE89A14BA04C9007EE121 /* FixedSizeLargeViewController.xib in Resources */,
 				6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */,
 				6FADE89E14BA04C9007EE121 /* HeavyViewController.xib in Resources */,
 				6FADE8A014BA04C9007EE121 /* LandscapeOnlyViewController.xib in Resources */,
 				6FADE8A214BA04C9007EE121 /* LifeCycleTestViewController.xib in Resources */,
 				6FADE8A414BA04C9007EE121 /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6FADE8A514BA04C9007EE121 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6FADE8A614BA04C9007EE121 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6FADE8A814BA04C9007EE121 /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6FADE8A914BA04C9007EE121 /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6FADE8AB14BA04C9007EE121 /* PortraitOnlyViewController.xib in Resources */,
 				6FADE8AC14BA04C9007EE121 /* StretchableLargeViewController.xib in Resources */,
 				6FADE8AE14BA04C9007EE121 /* StretchableViewController.xib in Resources */,
@@ -1940,6 +1921,7 @@
 				6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */,
+				6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1950,17 +1932,12 @@
 				6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */,
 				6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F159A6E15A554250020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6F159A6F15A554250020AFAC /* ContainerCustomizationViewController.xib in Resources */,
 				6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */,
 				6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */,
 				6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */,
 				6F159A7315A554250020AFAC /* LandscapeOnlyViewController.xib in Resources */,
 				6F159A7415A554250020AFAC /* LifeCycleTestViewController.xib in Resources */,
 				6F159A7515A554250020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6F159A7615A554250020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6F159A7715A554250020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6F159A7815A554250020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6F159A7915A554250020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6F159A7A15A554250020AFAC /* PortraitOnlyViewController.xib in Resources */,
 				6F159A7B15A554250020AFAC /* StretchableLargeViewController.xib in Resources */,
 				6F159A7C15A554250020AFAC /* StretchableViewController.xib in Resources */,
@@ -2017,6 +1994,7 @@
 				6F159AAF15A554250020AFAC /* skyscraper.jpg in Resources */,
 				6F159AB015A554250020AFAC /* LabelDemoViewController.xib in Resources */,
 				6F159AB115A554250020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
+				6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2111,7 +2089,6 @@
 				6FADE6F014BA04A7007EE121 /* HLSPlaceholderViewController.m in Sources */,
 				6FADE6F114BA04A7007EE121 /* HLSStackController.m in Sources */,
 				6FADE6F314BA04A7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */,
-				6FADE6F414BA04A7007EE121 /* HLSTransitionStyle.m in Sources */,
 				6FADE6F514BA04A7007EE121 /* HLSViewController.m in Sources */,
 				6FADE6F614BA04A7007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE6F714BA04A7007EE121 /* HLSWizardViewController.m in Sources */,
@@ -2119,13 +2096,11 @@
 				6FADE89314BA04C9007EE121 /* CoconutKit_demoApplication.m in Sources */,
 				6FADE89414BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6FADE89614BA04C9007EE121 /* SingleViewAnimationDemoViewController.m in Sources */,
-				6FADE89814BA04C9007EE121 /* ContainerCustomizationViewController.m in Sources */,
 				6FADE89B14BA04C9007EE121 /* FixedSizeViewController.m in Sources */,
 				6FADE89D14BA04C9007EE121 /* HeavyViewController.m in Sources */,
 				6FADE89F14BA04C9007EE121 /* LandscapeOnlyViewController.m in Sources */,
 				6FADE8A114BA04C9007EE121 /* LifeCycleTestViewController.m in Sources */,
 				6FADE8A314BA04C9007EE121 /* MemoryWarningTestCoverViewController.m in Sources */,
-				6FADE8A714BA04C9007EE121 /* OrientationClonerViewController.m in Sources */,
 				6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */,
 				6FADE8AD14BA04C9007EE121 /* StretchableViewController.m in Sources */,
 				6FADE8AF14BA04C9007EE121 /* TransparentViewController.m in Sources */,
@@ -2183,7 +2158,6 @@
 				6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6F83660A1588CC770044E572 /* HLSVector.m in Sources */,
 				6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */,
-				6F6C0A22159B9A51007933EB /* HLSStackPopSegue.m in Sources */,
 				6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
@@ -2192,6 +2166,12 @@
 				6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */,
 				6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 				6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */,
+				6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */,
+				6F8C934015CEE641006D892C /* HLSContainerGroupView.m in Sources */,
+				6F8C934F15CEF0F8006D892C /* HLSContainerStackView.m in Sources */,
+				6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */,
+				6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2254,7 +2234,6 @@
 				6F159AE915A554250020AFAC /* HLSPlaceholderViewController.m in Sources */,
 				6F159AEA15A554250020AFAC /* HLSStackController.m in Sources */,
 				6F159AEB15A554250020AFAC /* HLSTableSearchDisplayViewController.m in Sources */,
-				6F159AEC15A554250020AFAC /* HLSTransitionStyle.m in Sources */,
 				6F159AED15A554250020AFAC /* HLSViewController.m in Sources */,
 				6F159AEE15A554250020AFAC /* HLSWebViewController.m in Sources */,
 				6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */,
@@ -2262,13 +2241,11 @@
 				6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */,
 				6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F159AF315A554250020AFAC /* SingleViewAnimationDemoViewController.m in Sources */,
-				6F159AF415A554250020AFAC /* ContainerCustomizationViewController.m in Sources */,
 				6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */,
 				6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */,
 				6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */,
 				6F159AF815A554250020AFAC /* LifeCycleTestViewController.m in Sources */,
 				6F159AF915A554250020AFAC /* MemoryWarningTestCoverViewController.m in Sources */,
-				6F159AFA15A554250020AFAC /* OrientationClonerViewController.m in Sources */,
 				6F159AFB15A554250020AFAC /* PortraitOnlyViewController.m in Sources */,
 				6F159AFC15A554250020AFAC /* StretchableViewController.m in Sources */,
 				6F159AFD15A554250020AFAC /* TransparentViewController.m in Sources */,
@@ -2326,7 +2303,6 @@
 				6F159B3115A554250020AFAC /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6F159B3215A554250020AFAC /* HLSVector.m in Sources */,
 				6F159B3315A554250020AFAC /* HLSStackPushSegue.m in Sources */,
-				6F159B3415A554250020AFAC /* HLSStackPopSegue.m in Sources */,
 				6F159B3515A554250020AFAC /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F159B3615A554250020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F159B3715A554250020AFAC /* SegueLeftPanelDemoViewController.m in Sources */,
@@ -2335,6 +2311,12 @@
 				6F159B3A15A554250020AFAC /* SegueStackOtherDemoViewController.m in Sources */,
 				6F159B3B15A554250020AFAC /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 				6F159B3C15A554250020AFAC /* HLSApplicationPreloader.m in Sources */,
+				6F6010F115ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */,
+				6F8C934115CEE641006D892C /* HLSContainerGroupView.m in Sources */,
+				6F8C935015CEF0F8006D892C /* HLSContainerStackView.m in Sources */,
+				6FF3E6F815D2E4E300AB9A53 /* HLSTransition.m in Sources */,
+				6FF3E71D15D3801600AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025815D5463C00375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

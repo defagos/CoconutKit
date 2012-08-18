@@ -49,4 +49,10 @@
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
+- (IBAction)pop:(id)sender
+{
+    // Segues can only be used for view controller insertion. Removal must be done programmatically
+    [self.stackController popViewControllerAnimated:YES];
+}
+
 @end

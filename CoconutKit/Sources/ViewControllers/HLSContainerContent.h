@@ -6,191 +6,164 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "HLSAnimation.h"
-#import "HLSTransitionStyle.h"
-#import "UIViewController+HLSExtensions.h"
+#import "HLSContainerStackView.h"
 
 /**
  * View controllers inserted into view controller containers exhibit common properties:
  *   - they belong to a container, which they must be able to identify, and they should not be inserted into several
  *     containers at the same time
- *   - they are added and removed using some transition style, and their view frame is adjusted to match the container
- *     view they are added to
- *   - a view controller's view should be created lazily at the time it is really required
- *   - it must be possible to preload a view controller container before it gets actually displayed
- *   - a view controller container must retain the view controllers it manages
+ *   - they are inserted into a container with some transition animation, and removed from it with the corresponding
+ *     reverse animation
+ *   - a child view controller's view frame is adjusted to match the container view it is inserted into
+ *   - a child view controller's view should be created lazily at the time it is really required
+ *   - it must be possible to preload a view controller container before it gets actually displayed (i.e. before the
+ *     container view is loaded)
+ *   - a view controller container must retain the child view controllers it manages
  *   - a view controller's view properties should be restored when it is removed from a container. It might namely
  *     happen that a client caches this view controller for later reuse
- *   - view lifecycle events must be forwarded correctly from the container to the contained view controllers
- *   - we sometimes may want the view controller container to forward some properties of a contained view controller
- *     (e.g. title, navigation elements, toolbar, etc.) transparently
- *   - a view controller added to a a container should be able to present or dismiss another view controller modally
- *     by calling the corresponding UIViewController methods on self. In such cases, it is actually the container
- *     which must present the modal view controller. This mechanism must be transparent for the user
- *   - the UIViewController interfaceOrientation property (readonly) is only correctly set when the view controller
- *     is presented using built-in UIKit view controller containers. This has to be fixed when a view controller is
- *     presented using a custom container
- *   - a remark: The UIViewController parentViewController property returns the parent view controller if it is one 
- *     of the buit-in UIKit containers (according to UIViewController documentation). It would make sense to have this
- *     property also return a container for view controllers displayed in custom container view controllers. Sadly
- *     this is not possible: Doing so has some real benefits (automatic forwarding of navigation title and bar color,
- *     correct value for interfaceOrientation), but we lose the ability to choose whether we actually want forwarding
- *     to occur or not. UIKit built-in containers automatically reflect their content, but this must namely not be the 
- *     case for containers in general (imagine a container displaying two view controllers simultaneously: Which one 
- *     is going to give its title to the container controller? The container may also want to have its own title after 
- *     all). For this reason, the parentViewController property has not been altered and returns nil even when a view
- *     controller is embedded into a custom container view controller.
+ *   - animations should always be able to assume that view controller's views have alpha = 1.f (this makes implementing
+ *     them easy since this does not require any knowledge about the view controller's view alpha). This issue is solved
+ *     by having HLSContainerContent always wrap view controller's views within an invisible view having alpha = 1.f
+ *   - a child view controller's view must be adjusted to fill the entire container view it is drawn in. This matches
+ *     the behavior of standard UIKit containers (UINavigationController, UITabBarController, etc.)
+ *   - view lifecycle and rotation events must be forwarded correctly from the container to the contained view controllers
+ *   - the view controller containment chain must be preserved, so that view controller properties can be automatically
+ *     forwarded from a child to its parent (and higher up in the view controller hierarchy if this parent is itself
+ *     embedded into a container). This makes it possible for a navigation controller to use relevant child view controller 
+ *     properties when it displays the corresponding parent view controller, for example. Moreover, this ensures that when 
+ *     a child view controller presents another view controller modally, it is actually its furthest ancestor who does. 
+ *     Finally, this guarantees that the -[UIViewController interfaceOrientation] method returns a correct result
+ *   - the iOS 5 containment API defines new methods -[UIViewController isMovingTo/FromParentViewController] so that
+ *     a child knows when it is inserted or removed from a container. These methods must return a correct result
+ *     for custom containers as well
+ *   - when a view controller is removed from a container, its view must not be released. This lets clients decide whether
+ *     they want to cache the associated view (by retaining the view controller elswhere) or not (if the view controller 
+ *     is not retained elsewhere, it will simply be deallocated when it gets removed from the container, and so will be 
+ *     its view)
  *
- * The HLSContainerContent class provides a way to ensure that the above common properties can be easily implemented. It 
- * can be seen as some kind of smart pointer object, taking ownership of a view controller when inserted into a view 
- * controller container. Note that the view controller's view is NOT released when the HLSContainerContent object is
- * destroyed. This lets clients decide whether they want to cache the view (by retaining the associating view controller
- * themeselves) or not (if the view controller is not retained elsewhere, it will simply be deallocated when the 
- * HLSContainerContent object managing it is destroyed, and so will be its view).
- * 
- * When implementing a view controller container, use HLSContainerContent objects (retained by the container) to take 
- * ownership of a view controller when it is inserted, and simply release the HLSContainerContent object when the view 
- * controller gets removed from the container. When interacting with the view controller, use the HLSContainerContent
- * object as a proxy to help you guarantee that the common properties listed above are fulfilled. In particular,
- * use all provided methods for animating views, forwarding lifecycle events, etc.
+ * The private HLSContainerContent class provides a way to ensure that all above common properties can be easily 
+ * fulfilled. It can be seen as some kind of smart pointer object, keeping ownership of a view controller as long
+ * as it belongs to a container, and destroyed when the view controller is removed from the container (the view
+ * controller itself might be retained elsewhere for caching purposes, though). All interactions with a child view 
+ * controller must happen through the HLSContainerContent interface to guarantee proper status tracking and to 
+ * ensure that the view is created when it is really needed, not earlier.
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
- *    automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+ *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
  * method returns NO (a feature available as of iOS 5).
  * 
- * Designated initializer: initWithViewController:containerController:transitionStyle:duration:
+ * Designated initializer: initWithViewController:containerViewController:transitionStyle:duration:
  */
 @interface HLSContainerContent : NSObject {
 @private
-    UIViewController *m_viewController;
-    id m_containerController;
-    BOOL m_addedToContainerView;
-    HLSTransitionStyle m_transitionStyle;
-    NSTimeInterval m_duration;
-    BOOL m_forwardingProperties;
-    CGRect m_originalViewFrame;
-    CGFloat m_originalViewAlpha;
-    UIViewAutoresizing m_originalAutoresizingMask;
-    HLSViewControllerLifeCyclePhase m_lifeCyclePhase;
+    UIViewController *m_viewController;                         // The embedded view controller
+    UIViewController *m_containerViewController;                // The container it is inserted into
+    Class m_transitionClass;                                    // The transition animation class used when inserting the view controller
+    NSTimeInterval m_duration;                                  // The transition animation duration
+    HLSContainerStackView *m_containerStackView;                // The container stack view into which the view controller's view is inserted
+    CGRect m_originalViewFrame;                                 // The view controller's view frame prior to insertion
+    UIViewAutoresizing m_originalAutoresizingMask;              // The view controller's view autoresizing mask prior to insertion
+    BOOL m_movingToParentViewController;
+    BOOL m_movingFromParentViewController;
 }
 
 /**
  * Return the container of the specified class, in which a given view controller has been inserted, or nil if none
  */
-+ (id)containerControllerKindOfClass:(Class)containerControllerClass forViewController:(UIViewController *)viewController;
++ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
 
 /**
- * When a container rotates, its content view frame changes. Some animations (most notably those involving views moved
- * outside the screen, e.g. "push from" animations) depend on the frame size: For a push from left animation, the
- * applied horizontal translation used to move view controllers outside view depends on the interface orientation. 
- * For such animations, we must update the view controller's view positions when the device goes from landscape into 
- * portrait mode, otherwise the views might be incorrectly located after a rotation has occurred. 
- *
- * To perform this change, the following method generates an animation object which must be played when the container
- * your are implementing rotates (if your container is itself a view controller, this means this method must be called 
- * from the willAnimateRotationToInterfaceOrientation:duration: method)
- *
- * The animation returned by this method has meaningful settings for a rotation animation (locking interaction, resizing 
- * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
- */
-+ (HLSAnimation *)rotationAnimationForContainerContentStack:(NSArray *)containerContentStack 
-                                              containerView:(UIView *)containerView
-                                               withDuration:(NSTimeInterval)duration;
-
-/**
- * Initialize a container content manager object. Requires the view controller to be managed, the container in which
- * it is inserted, as well as the details of the transition with which it gets displayed. Use the reserved
- * kAnimationTransitionDefaultDuration duration for the default animation duration.
- * The view controller is retained.
+ * Initialize a container content object. Expect the view controller to be managed (which is retained), the container 
+ * in which it is inserted into (not retained), as well as the details of the transition animation with which it gets 
+ * displayed. Use the reserved kAnimationTransitionDefaultDuration duration to use the default animation duration.
  */
 - (id)initWithViewController:(UIViewController *)viewController
-         containerController:(id)containerController
-             transitionStyle:(HLSTransitionStyle)transitionStyle
+     containerViewController:(UIViewController *)containerViewController
+             transitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration;
 
 /**
- * Same as above, using the default transition animation duration
+ * The attached view controller. If you need to access its view, do not use the -[UIViewController view] property
+ * (this triggers lazy creation). Instead, use the view insertion methods provided by HLSContainerContent when you 
+ * really need to instantiate the view (i.e. when building up the container view hierarchy), and the 
+ * -[HLSContainerContent viewIfLoaded] accessor to access a view which you created this way (and which does not
+ * instantiate the view lazily).
  */
-- (id)initWithViewController:(UIViewController *)viewController
-         containerController:(id)containerController
-             transitionStyle:(HLSTransitionStyle)transitionStyle;
+@property (nonatomic, readonly, retain) UIViewController *viewController;
 
 /**
- * Instantiate (if not already) and add the view controller's view as subview of a view managed by the container 
- * controller (the view in which it displays its content).
+ * The container into which a view controller has been inserted
+ */
+@property (nonatomic, readonly, assign) UIViewController *containerViewController;
+
+/**
+ * The transition properties to be applied when the view controller's view gets displayed
+ */
+@property (nonatomic, readonly, assign) Class transitionClass;
+@property (nonatomic, readonly, assign) NSTimeInterval duration;
+
+/**
+ * Return YES iff the view controller has been added to a container
+ */
+@property (nonatomic, readonly, assign, getter=isAddedToContainerView) BOOL addedToContainerView;
+
+/**
+ * Instantiate (if not already) and add the view controller's view at the top of a stack view. The frame of the view
+ * controller's view is automatically adjusted to match the bounds of the stack view
  *
- * Some view controller containers might display several view controllers simultaneously in the same content view. In
- * such cases, the corresponding stack of container content objects can be provided (the receiver must be part of it).
- * This allows the view to be inserted at the proper location in the view hierarchy. If this parameter is nil, the
- * view is simply added on top.
- * The first element in the stack array is interpreted as the bottommost one.
- * 
- * The frame of the view which is added is automatically adjusted to match the container view bounds. This is the
- * usual behavior of built-in view controller containers (UINavigationController, UITabBarController)
+ * If the view has already been added to a stack view, this method does nothing
+ */
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView;
+
+/**
+ * Valid values for index range from 0 to [stackView.contentViews count] (this last value being equivalent to
+ * calling addAsSubviewIntoContainerStackView:)
  *
- * Return YES if the view has been added, NO if it was already added.
+ * If the view has already been added to a stack view or if the index is invalid, this method does nothing
  */
-- (BOOL)addViewToContainerView:(UIView *)containerView 
-       inContainerContentStack:(NSArray *)containerContentStack;
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index;
 
 /**
- * Remove the view controller's view from the container view. Does not release the view (call releaseViews for this
- * purpose)
+ * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 
+ * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
+ * -insertAsSubviewIntoContainerStackView:index
+ *
+ * Remark: This does not return the view controller's view, but a view wrapper having alpha = 1.f. This
+ *         view wrapper is introduced so that animations can safely assume they are animating views with
+ *         initial alpha = 1.f, which could not be guaranteed if the view controller's view was directly
+ *         animated (view controller's views can have an arbitrary alpha). This relieves us from extra
+ *         bookkeeping work
  */
-- (void)removeViewFromContainerView;
+- (UIView *)viewIfLoaded;
 
 /**
- * Return the view controller's view if added to a container view, nil otherwise. Does not perform lazy instantiation,
- * you must explicitly build the view when you need using addViewToContainerView:inContainerContentStack. This forces
- * you to create the view when you actually need it
- */
-- (UIView *)view;
-
-/**
- * Release all view and view-related resources. This also forwards the viewDidUnload message to the corresponding view
+ * Release all view and view-related resources. This also forwards the -viewDidUnload message to the underlying view 
  * controller
  */
 - (void)releaseViews;
 
 /**
  * Forward the corresponding view lifecycle events to the view controller, ensuring that forwarding occurs only if
- * the view controller current lifecycle phase is coherent
+ * the view controller current lifecycle phase is coherent with it. Set movingTo/FromParentViewController to YES
+ * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
  *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
  */
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewDidAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewDidDisappear:(BOOL)animated;
+- (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
+- (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
+- (void)viewWillDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController;
+- (void)viewDidDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController;
 
 /**
- * Create the animation needed to display the view controller's view in the container view. If the receiver is part
- * of a container content stack, the stack can be supplied as parameter so that the animation can be tailored
- * accordingly.
+ * Forward the corresponding view rotation events to the view controller
  *
- * The first element in the stack array is interpreted as the bottommost one.
- *
- * The animation returned by this method has meaningful settings for a container animation (locking interaction, not resizing 
- * views, bringing views to front). You can still tweak them or set other properties (e.g. delegate, tag, etc.) if needed.
+ * Remark: No methods have been provided for the deprecated 2-step rotation methods
  */
-- (HLSAnimation *)animationWithContainerContentStack:(NSArray *)containerContentStack
-                                       containerView:(UIView *)containerView;
-
-/**
- * The attached view controller. If you need to access its view, do not use the UIViewController view property
- * (this triggers lazy creation). Instead, use the addViewToContainerView:inContainerContentStack: method above 
- * when you really need to instantiate the view, and the HLSContainerContent view accessor to access a view which 
- * you created this way.
- */
-@property (nonatomic, readonly, retain) UIViewController *viewController;
-
-/**
- * If set to YES, the view controller properties (title, navigation controller, navigation elements, toolbar, etc.)
- * are forwarded through the container controller if the container is iteslf a view controller. This makes it possible
- * to display those elements transparently higher up in the view controller hierarchy
- */
-@property (nonatomic, assign, getter=isForwardingProperties) BOOL forwardingProperties;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
 
 @end

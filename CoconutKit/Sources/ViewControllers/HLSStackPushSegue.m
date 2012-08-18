@@ -20,17 +20,20 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 - (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
-        self.transitionStyle = HLSTransitionStyleNone;
+        self.transitionClass = [HLSTransitionNone class];
         self.duration = kAnimationTransitionDefaultDuration;
+        self.animated = YES;
     }
     return self;
 }
 
 #pragma mark Accessors and mutators
 
-@synthesize transitionStyle = m_transitionStyle;
+@synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
+
+@synthesize animated = m_animated;
 
 #pragma mark Overrides
 
@@ -51,12 +54,6 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
                            "must have been loaded before", HLSStackRootSegueIdentifier);
             return;
         }
-        
-        if (self.transitionStyle != HLSTransitionStyleNone) {
-            HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
-                          "the only style available for view controller preloading");
-            self.transitionStyle = HLSTransitionStyleNone;
-        }
     }
     // The source is an arbitrary view controller. Check that it is embedded into a stack controller, and
     // push the destination view controller into it
@@ -71,8 +68,9 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     }
     
     [stackController pushViewController:self.destinationViewController
-                    withTransitionStyle:self.transitionStyle
-                               duration:self.duration];
+                    withTransitionClass:self.transitionClass
+                               duration:self.duration
+                               animated:self.animated];
 }
 
 @end

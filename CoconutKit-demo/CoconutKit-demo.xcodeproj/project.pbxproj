@@ -16,13 +16,11 @@
 		6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
 		6F159B5215A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459E14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.m */; };
 		6F159B5315A55CD10020AFAC /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */; };
-		6F159B5415A55CD10020AFAC /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */; };
 		6F159B5515A55CD10020AFAC /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
 		6F159B5615A55CD10020AFAC /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; };
 		6F159B5715A55CD10020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; };
 		6F159B5815A55CD10020AFAC /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B814C5C30B00824AB2 /* LifeCycleTestViewController.m */; };
 		6F159B5915A55CD10020AFAC /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; };
-		6F159B5A15A55CD10020AFAC /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C214C5C30B00824AB2 /* OrientationClonerViewController.m */; };
 		6F159B5B15A55CD10020AFAC /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
 		6F159B5C15A55CD10020AFAC /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
 		6F159B5D15A55CD10020AFAC /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
@@ -72,17 +70,12 @@
 		6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F159B8C15A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459F14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F159B8D15A55CD10020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */; };
-		6F159B8E15A55CD10020AFAC /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */; };
 		6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
 		6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
 		6F159B9215A55CD10020AFAC /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B514C5C30B00824AB2 /* LandscapeOnlyViewController.xib */; };
 		6F159B9315A55CD10020AFAC /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B914C5C30B00824AB2 /* LifeCycleTestViewController.xib */; };
 		6F159B9415A55CD10020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
-		6F159B9515A55CD10020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BF14C5C30B00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6F159B9615A55CD10020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C014C5C30B00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6F159B9715A55CD10020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C314C5C30B00824AB2 /* OrientationClonerViewControllerLandscape.xib */; };
-		6F159B9815A55CD10020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C414C5C30B00824AB2 /* OrientationClonerViewControllerPortrait.xib */; };
 		6F159B9915A55CD10020AFAC /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
 		6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */; };
 		6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
@@ -164,8 +157,6 @@
 		6F9C465014C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459F14C5C30B00824AB2 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F9C465114C5C30C00824AB2 /* SingleViewAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */; };
 		6F9C465214C5C30C00824AB2 /* SingleViewAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */; };
-		6F9C465314C5C30C00824AB2 /* ContainerCustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */; };
-		6F9C465414C5C30C00824AB2 /* ContainerCustomizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */; };
 		6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
 		6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
@@ -177,11 +168,6 @@
 		6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B914C5C30B00824AB2 /* LifeCycleTestViewController.xib */; };
 		6F9C465E14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; };
 		6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
-		6F9C466014C5C30C00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BF14C5C30B00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib */; };
-		6F9C466114C5C30C00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C014C5C30B00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib */; };
-		6F9C466214C5C30C00824AB2 /* OrientationClonerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C214C5C30B00824AB2 /* OrientationClonerViewController.m */; };
-		6F9C466314C5C30C00824AB2 /* OrientationClonerViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C314C5C30B00824AB2 /* OrientationClonerViewControllerLandscape.xib */; };
-		6F9C466414C5C30C00824AB2 /* OrientationClonerViewControllerPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C414C5C30B00824AB2 /* OrientationClonerViewControllerPortrait.xib */; };
 		6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
 		6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
 		6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */; };
@@ -267,11 +253,17 @@
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
+		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
+		6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
+		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
+		6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
 		6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
+		6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */; };
+		6FF3E71815D37FB900AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,9 +323,6 @@
 		6F9C45A114C5C30B00824AB2 /* SingleViewAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleViewAnimationDemoViewController.h; sourceTree = "<group>"; };
 		6F9C45A214C5C30B00824AB2 /* SingleViewAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleViewAnimationDemoViewController.m; sourceTree = "<group>"; };
 		6F9C45A314C5C30B00824AB2 /* SingleViewAnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleViewAnimationDemoViewController.xib; sourceTree = "<group>"; };
-		6F9C45A614C5C30B00824AB2 /* ContainerCustomizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerCustomizationViewController.h; sourceTree = "<group>"; };
-		6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerCustomizationViewController.m; sourceTree = "<group>"; };
-		6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerCustomizationViewController.xib; sourceTree = "<group>"; };
 		6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6F9C45AB14C5C30B00824AB2 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -350,12 +339,6 @@
 		6F9C45BB14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryWarningTestCoverViewController.h; sourceTree = "<group>"; };
 		6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryWarningTestCoverViewController.m; sourceTree = "<group>"; };
 		6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoryWarningTestCoverViewController.xib; sourceTree = "<group>"; };
-		6F9C45BF14C5C30B00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6F9C45C014C5C30B00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerLargeViewControllerPortrait.xib; sourceTree = "<group>"; };
-		6F9C45C114C5C30B00824AB2 /* OrientationClonerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationClonerViewController.h; sourceTree = "<group>"; };
-		6F9C45C214C5C30B00824AB2 /* OrientationClonerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationClonerViewController.m; sourceTree = "<group>"; };
-		6F9C45C314C5C30B00824AB2 /* OrientationClonerViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerLandscape.xib; sourceTree = "<group>"; };
-		6F9C45C414C5C30B00824AB2 /* OrientationClonerViewControllerPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrientationClonerViewControllerPortrait.xib; sourceTree = "<group>"; };
 		6F9C45C614C5C30B00824AB2 /* PortraitOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortraitOnlyViewController.h; sourceTree = "<group>"; };
 		6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitOnlyViewController.m; sourceTree = "<group>"; };
 		6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitOnlyViewController.xib; sourceTree = "<group>"; };
@@ -480,11 +463,16 @@
 		6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6FD0024C15D5463200375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
+		6FD0024D15D5463200375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
+		6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
 		6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_mountains_layer.png; sourceTree = "<group>"; };
 		6FEEF86914F29C9A001585A6 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
+		6FF3E71515D37FB900AB9A53 /* CustomTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitions.h; sourceTree = "<group>"; };
+		6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitions.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -696,28 +684,17 @@
 		6F9C45A414C5C30B00824AB2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45A514C5C30B00824AB2 /* ContainerCustomizationViewController */,
+				6FD0024B15D5463200375240 /* ContainmentTestViewController */,
 				6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */,
 				6F9C45AE14C5C30B00824AB2 /* HeavyViewController */,
 				6F9C45B214C5C30B00824AB2 /* LandscapeOnlyViewController */,
 				6F9C45B614C5C30B00824AB2 /* LifeCycleTestViewController */,
 				6F9C45BA14C5C30B00824AB2 /* MemoryWarningTestCoverViewController */,
-				6F9C45BE14C5C30B00824AB2 /* OrientationClonerViewController */,
 				6F9C45C514C5C30B00824AB2 /* PortraitOnlyViewController */,
 				6F9C45C914C5C30B00824AB2 /* StretchableViewController */,
 				6F9C45CE14C5C30B00824AB2 /* TransparentViewController */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		6F9C45A514C5C30B00824AB2 /* ContainerCustomizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45A614C5C30B00824AB2 /* ContainerCustomizationViewController.h */,
-				6F9C45A714C5C30B00824AB2 /* ContainerCustomizationViewController.m */,
-				6F9C45A814C5C30B00824AB2 /* ContainerCustomizationViewController.xib */,
-			);
-			path = ContainerCustomizationViewController;
 			sourceTree = "<group>";
 		};
 		6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */ = {
@@ -769,19 +746,6 @@
 				6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */,
 			);
 			path = MemoryWarningTestCoverViewController;
-			sourceTree = "<group>";
-		};
-		6F9C45BE14C5C30B00824AB2 /* OrientationClonerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45BF14C5C30B00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib */,
-				6F9C45C014C5C30B00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib */,
-				6F9C45C114C5C30B00824AB2 /* OrientationClonerViewController.h */,
-				6F9C45C214C5C30B00824AB2 /* OrientationClonerViewController.m */,
-				6F9C45C314C5C30B00824AB2 /* OrientationClonerViewControllerLandscape.xib */,
-				6F9C45C414C5C30B00824AB2 /* OrientationClonerViewControllerPortrait.xib */,
-			);
-			path = OrientationClonerViewController;
 			sourceTree = "<group>";
 		};
 		6F9C45C514C5C30B00824AB2 /* PortraitOnlyViewController */ = {
@@ -865,7 +829,6 @@
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
-				6F9C45FD14C5C30B00824AB2 /* Strips */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
 				6F9C460C14C5C30B00824AB2 /* TextFields */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
@@ -913,13 +876,6 @@
 				6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */,
 			);
 			path = Skinning;
-			sourceTree = "<group>";
-		};
-		6F9C45FD14C5C30B00824AB2 /* Strips */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Strips;
 			sourceTree = "<group>";
 		};
 		6F9C45FE14C5C30B00824AB2 /* TableViewCells */ = {
@@ -1045,6 +1001,8 @@
 		6F9C463514C5C30B00824AB2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6FF3E71515D37FB900AB9A53 /* CustomTransitions.h */,
+				6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */,
 				6F9C463614C5C30B00824AB2 /* DemoErrors.h */,
 				6F9C463714C5C30B00824AB2 /* DemoErrors.m */,
 			);
@@ -1162,6 +1120,16 @@
 			path = ParallaxScrolling;
 			sourceTree = "<group>";
 		};
+		6FD0024B15D5463200375240 /* ContainmentTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FD0024C15D5463200375240 /* ContainmentTestViewController.h */,
+				6FD0024D15D5463200375240 /* ContainmentTestViewController.m */,
+				6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */,
+			);
+			path = ContainmentTestViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -1267,17 +1235,12 @@
 				6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */,
 				6F9C465014C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F9C465214C5C30C00824AB2 /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6F9C465414C5C30C00824AB2 /* ContainerCustomizationViewController.xib in Resources */,
 				6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
 				6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */,
 				6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */,
 				6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6F9C466014C5C30C00824AB2 /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6F9C466114C5C30C00824AB2 /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6F9C466314C5C30C00824AB2 /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6F9C466414C5C30C00824AB2 /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */,
 				6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
@@ -1331,6 +1294,7 @@
 				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
+				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1343,17 +1307,12 @@
 				6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */,
 				6F159B8C15A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F159B8D15A55CD10020AFAC /* SingleViewAnimationDemoViewController.xib in Resources */,
-				6F159B8E15A55CD10020AFAC /* ContainerCustomizationViewController.xib in Resources */,
 				6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */,
 				6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */,
 				6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */,
 				6F159B9215A55CD10020AFAC /* LandscapeOnlyViewController.xib in Resources */,
 				6F159B9315A55CD10020AFAC /* LifeCycleTestViewController.xib in Resources */,
 				6F159B9415A55CD10020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6F159B9515A55CD10020AFAC /* OrientationClonerLargeViewControllerLandscape.xib in Resources */,
-				6F159B9615A55CD10020AFAC /* OrientationClonerLargeViewControllerPortrait.xib in Resources */,
-				6F159B9715A55CD10020AFAC /* OrientationClonerViewControllerLandscape.xib in Resources */,
-				6F159B9815A55CD10020AFAC /* OrientationClonerViewControllerPortrait.xib in Resources */,
 				6F159B9915A55CD10020AFAC /* PortraitOnlyViewController.xib in Resources */,
 				6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */,
 				6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */,
@@ -1406,6 +1365,7 @@
 				6F159BCB15A55CD10020AFAC /* LabelDemoViewController.xib in Resources */,
 				6F159BCC15A55CD10020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6F159C3715A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
+				6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,13 +1410,11 @@
 				6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */,
 				6F9C464F14C5C30C00824AB2 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F9C465114C5C30C00824AB2 /* SingleViewAnimationDemoViewController.m in Sources */,
-				6F9C465314C5C30C00824AB2 /* ContainerCustomizationViewController.m in Sources */,
 				6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */,
 				6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */,
 				6F9C465A14C5C30C00824AB2 /* LandscapeOnlyViewController.m in Sources */,
 				6F9C465C14C5C30C00824AB2 /* LifeCycleTestViewController.m in Sources */,
 				6F9C465E14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.m in Sources */,
-				6F9C466214C5C30C00824AB2 /* OrientationClonerViewController.m in Sources */,
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
 				6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
@@ -1502,6 +1460,8 @@
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
+				6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1514,13 +1474,11 @@
 				6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */,
 				6F159B5215A55CD10020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F159B5315A55CD10020AFAC /* SingleViewAnimationDemoViewController.m in Sources */,
-				6F159B5415A55CD10020AFAC /* ContainerCustomizationViewController.m in Sources */,
 				6F159B5515A55CD10020AFAC /* FixedSizeViewController.m in Sources */,
 				6F159B5615A55CD10020AFAC /* HeavyViewController.m in Sources */,
 				6F159B5715A55CD10020AFAC /* LandscapeOnlyViewController.m in Sources */,
 				6F159B5815A55CD10020AFAC /* LifeCycleTestViewController.m in Sources */,
 				6F159B5915A55CD10020AFAC /* MemoryWarningTestCoverViewController.m in Sources */,
-				6F159B5A15A55CD10020AFAC /* OrientationClonerViewController.m in Sources */,
 				6F159B5B15A55CD10020AFAC /* PortraitOnlyViewController.m in Sources */,
 				6F159B5C15A55CD10020AFAC /* StretchableViewController.m in Sources */,
 				6F159B5D15A55CD10020AFAC /* TransparentViewController.m in Sources */,
@@ -1566,6 +1524,8 @@
 				6F159B8615A55CD10020AFAC /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F159B8715A55CD10020AFAC /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F159C3515A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
+				6FF3E71815D37FB900AB9A53 /* CustomTransitions.m in Sources */,
+				6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1778,6 +1738,7 @@
 				6F159C2815A596590020AFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CoconutKit-demo" */ = {
 			isa = XCConfigurationList;

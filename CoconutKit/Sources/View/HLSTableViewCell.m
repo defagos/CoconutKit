@@ -78,7 +78,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     return cell;
 }
 
-#pragma mark Cell customization
+#pragma mark Cell customisation
 
 - (void)setBackgroundWithImageNamed:(NSString *)backgroundImageName
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName
@@ -108,7 +108,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     }
 }
 
-#pragma mark Class methods related to customization
+#pragma mark Class methods related to customisation
 
 + (CGFloat)height
 {

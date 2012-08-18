@@ -8,13 +8,12 @@
 
 #import "PlaceholderDemoViewController.h"
 
-#import "ContainerCustomizationViewController.h"
+#import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
-#import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
@@ -34,9 +33,16 @@
 - (id)init
 {
     if ((self = [super init])) {
-        // Preload a view controller before display. Yep, this is possible (and not all placeholders have to be preloaded)!
+        // Preload view controllers before display. Yep, this is possible (not all placeholders have to be preloaded)!
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [self setInsetViewController:lifeCycleTestViewController atIndex:1];
+        [self setInsetViewController:lifeCycleTestViewController atIndex:0];
+        
+        // We can even assign a transition animation. Since the view controller has been preloaded, it won't be played,
+        // but it will later be used if we set the inset to nil
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self setInsetViewController:containmentTestViewController atIndex:1 withTransitionClass:[HLSTransitionCoverFromBottom class]];
+        
+        self.delegate = self;
     }
     return self;
 }
@@ -57,23 +63,23 @@
     self.leftHeavyViewController.view = nil;
     self.rightHeavyViewController.view = nil;
     
+    self.heavyButton = nil;
+    self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
-    self.transitionPickerView = nil;
-    self.forwardingPropertiesSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
 
+@synthesize heavyButton = m_heavyButton;
+
 @synthesize transitionPickerView = m_transitionPickerView;
 
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
-
-@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
 
 @synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
 
@@ -91,12 +97,29 @@
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
-    self.forwardingPropertiesSwitch.on = self.forwardingProperties;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSPlaceholderViewController";
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -118,7 +141,71 @@
     }
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self setInsetViewController:insetViewController atIndex:index withTransitionStyle:pickedIndex];
+    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
+}
+
+#pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
+        || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    self.heavyButton.hidden = NO;
+}
+
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] count];
+}
+
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
 #pragma mark Event callbacks
@@ -138,6 +225,23 @@
         LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [self displayInsetViewController:lifecycleTestViewController atIndex:1];
     }
+}
+
+- (IBAction)displayContainmentTest:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:1];
+    }    
 }
 
 - (IBAction)displayStretchable:(id)sender
@@ -253,217 +357,27 @@
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
-- (IBAction)displayOrientationCloner:(id)sender
+- (IBAction)togglePlaceholder:(id)sender
 {
-    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
-        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
-        return;
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
     }
-    
-    if (self.leftPlaceholderSwitch.on) {
-        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                             large:NO]
-                                                                            autorelease];
-        [self displayInsetViewController:orientationClonerViewController atIndex:0];
-    }
-    if (self.rightPlaceholderSwitch.on) {
-        OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                             initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                             large:NO]
-                                                                            autorelease];
-        [self displayInsetViewController:orientationClonerViewController atIndex:1];
+    else {
+        self.heavyButton.hidden = NO;
     }
 }
 
-- (IBAction)displayContainerCustomization:(id)sender
+- (IBAction)navigateForwardNonAnimated:(id)sender
 {
-    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
-        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
-        return;
-    }
-    
-    if (self.leftPlaceholderSwitch.on) {
-        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-        [self displayInsetViewController:containerCustomizationViewController atIndex:0];
-    }
-    if (self.rightPlaceholderSwitch.on) {
-        ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-        [self displayInsetViewController:containerCustomizationViewController atIndex:1];
-    }
+    PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:placeholderDemoViewController animated:NO];
 }
 
-- (IBAction)toggleForwardingProperties:(id)sender
+- (IBAction)navigateBackNonAnimated:(id)sender
 {
-    self.forwardingProperties = self.forwardingPropertiesSwitch.on;
-}
-
-#pragma mark UIPickerViewDataSource protocol implementation
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return HLSTransitionStyleEnumSize;
-}
-
-#pragma mark UIPickerViewDelegate protocol implementation
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    switch (row) {
-        case HLSTransitionStyleNone: {
-            return @"HLSTransitionStyleNone";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            return @"HLSTransitionStyleCoverFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            return @"HLSTransitionStyleCoverFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            return @"HLSTransitionStyleCoverFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight: {
-            return @"HLSTransitionStyleCoverFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            return @"HLSTransitionStyleCoverFromTopLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            return @"HLSTransitionStyleCoverFromTopRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            return @"HLSTransitionStyleCoverFromBottomLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            return @"HLSTransitionStyleCoverFromBottomRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            return @"HLSTransitionStyleCoverFromBottom2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            return @"HLSTransitionStyleCoverFromTop2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            return @"HLSTransitionStyleCoverFromLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            return @"HLSTransitionStyleCoverFromRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            return @"HLSTransitionStyleCoverFromTopLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            return @"HLSTransitionStyleCoverFromTopRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            return @"HLSTransitionStyleCoverFromBottomLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            return @"HLSTransitionStyleCoverFromBottomRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            return @"HLSTransitionStyleFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            return @"HLSTransitionStyleFadeIn2";
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            return @"HLSTransitionStyleCrossDissolve";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            return @"HLSTransitionStylePushFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTop: {
-            return @"HLSTransitionStylePushFromTop";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeft: {
-            return @"HLSTransitionStylePushFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRight: {
-            return @"HLSTransitionStylePushFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            return @"HLSTransitionStyleEmergeFromCenter";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            return @"HLSTransitionStyleFlipVertical";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            return @"HLSTransitionStyleFlipHorizontal";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
-    }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = @"HLSPlaceholderViewController";
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

@@ -50,23 +50,29 @@
             // forwarded to the view controller on top only)
             RootStackDemoViewController *rootStackDemoViewController1 = [[[RootStackDemoViewController alloc] init] autorelease];
             HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1] autorelease];
+            stackController.delegate = self;
             RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
-            [stackController pushViewController:rootStackDemoViewController2];
+            [stackController pushViewController:rootStackDemoViewController2 withTransitionClass:[HLSTransitionCoverFromBottom class] animated:NO];
             self.rootViewController = stackController;
         }
         else if ([demoMode isEqualToString:@"RootStoryboard"]) {
             // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
             if ([UIStoryboard class]) {
-                @try {
+                // The compiled storyboard has a storyboardc extension
+                if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
                     UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
                     self.rootViewController = [segueStoryboard instantiateInitialViewController];
                 }
-                @catch (NSException *exception) {
+                else {
                     HLSLoggerError(@"No storyboard file available in application bundle");
+                    [self release];
+                    return nil;
                 }
             }
             else {
                 HLSLoggerError(@"Storyboards are not available on iOS 4");
+                [self release];
+                return nil;
             }
         }
         else {
@@ -131,6 +137,68 @@
 }
 
 @synthesize languageActionSheet = m_languageActionSheet;
+
+#pragma mark HLSStackControllerDelegate protocol implementation
+
+- (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
 
 #pragma mark Core Data
 

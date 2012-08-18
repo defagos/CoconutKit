@@ -31,6 +31,7 @@
     self.actionSheetBarButtonItem = nil;
     self.popButton = nil;
     self.transitionPickerView = nil;
+    self.animatedSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -42,6 +43,8 @@
 @synthesize popButton = m_popButton;
 
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize animatedSwitch = m_animatedSwitch;
 
 #pragma mark View lifecycle
 
@@ -129,154 +132,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return HLSTransitionStyleEnumSize;
+    return [[HLSTransition availableTransitionNames] count];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    switch (row) {
-        case HLSTransitionStyleNone: {
-            return @"HLSTransitionStyleNone";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            return @"HLSTransitionStyleCoverFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            return @"HLSTransitionStyleCoverFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            return @"HLSTransitionStyleCoverFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight: {
-            return @"HLSTransitionStyleCoverFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            return @"HLSTransitionStyleCoverFromTopLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            return @"HLSTransitionStyleCoverFromTopRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            return @"HLSTransitionStyleCoverFromBottomLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            return @"HLSTransitionStyleCoverFromBottomRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            return @"HLSTransitionStyleCoverFromBottom2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            return @"HLSTransitionStyleCoverFromTop2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            return @"HLSTransitionStyleCoverFromLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            return @"HLSTransitionStyleCoverFromRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            return @"HLSTransitionStyleCoverFromTopLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            return @"HLSTransitionStyleCoverFromTopRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            return @"HLSTransitionStyleCoverFromBottomLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            return @"HLSTransitionStyleCoverFromBottomRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            return @"HLSTransitionStyleFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            return @"HLSTransitionStyleFadeIn2";
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            return @"HLSTransitionStyleCrossDissolve";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            return @"HLSTransitionStylePushFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTop: {
-            return @"HLSTransitionStylePushFromTop";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeft: {
-            return @"HLSTransitionStylePushFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRight: {
-            return @"HLSTransitionStylePushFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            return @"HLSTransitionStyleEmergeFromCenter";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            return @"HLSTransitionStyleFlipVertical";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            return @"HLSTransitionStyleFlipHorizontal";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
-    }
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
 #pragma mark Displaying view controllers
@@ -284,7 +147,10 @@
 - (void)displayViewController:(UIViewController *)viewController
 {
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self.stackController pushViewController:viewController withTransitionStyle:pickedIndex];
+    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    [self.stackController pushViewController:viewController
+                         withTransitionClass:NSClassFromString(transitionName)
+                                    animated:self.animatedSwitch.on];
 }
 
 #pragma mark Event callbacks
@@ -301,7 +167,7 @@
         [self dismissModalViewControllerAnimated:YES];
     }
     else {
-        [self.stackController popViewController];
+        [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
     }
 }
 
@@ -355,7 +221,7 @@
 
 - (void)closeNativeContainer:(id)sender
 {
-    [self.stackController popViewController];
+    [self.stackController popViewControllerAnimated:YES];
 }
 
 @end

@@ -84,7 +84,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     self.imageViews = [NSArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
         UIImageView *imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        imageView.autoresizingMask = HLSViewAutoresizingAll;
         [self addSubview:imageView];
         
         self.imageViews = [self.imageViews arrayByAddingObject:imageView];

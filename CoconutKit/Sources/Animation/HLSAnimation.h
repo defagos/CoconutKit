@@ -7,7 +7,6 @@
 //
 
 #import "HLSAnimationStep.h"
-#import "HLSTransitionStyle.h"
 
 // Forward declarations
 @class HLSAnimationStep;
@@ -27,6 +26,11 @@
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
  * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
  * notification). Animation steps with duration equal to 0 also occur instantaneously.
+ *
+ * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
+ * views). The reason is that fixing such issues in an automatic way would make reverse animations difficult to
+ * generate, since HLSAnimation does not store any information about the views which are animated (except, of course,
+ * which they are)
  *
  * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
  * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
@@ -164,6 +168,12 @@
  * Return YES iff the animation is being terminated
  */
 @property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
+
+/**
+ * Return the total alpha variation applied to a given view during the animation. If the view does not belong to the 
+ * views involved in the animation, the method returns 0.f
+ */
+- (CGFloat)alphaVariationForView:(UIView *)view;
 
 /**
  * Generate a copy of the animation, but overrides its total duration with a new one. The original appearance of

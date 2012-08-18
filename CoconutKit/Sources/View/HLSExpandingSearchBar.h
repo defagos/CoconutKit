@@ -39,7 +39,6 @@ typedef enum {
     BOOL m_showsSearchResultsButton;
     HLSExpandingSearchBarAlignment m_alignment;
     id<HLSExpandingSearchBarDelegate> m_delegate;
-    HLSAnimation *m_animation;
     BOOL m_layoutDone;
     BOOL m_expanded;
     BOOL m_animating;

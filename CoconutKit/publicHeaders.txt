@@ -3,7 +3,7 @@ HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationPreloader.h
 HLSAssert.h
-HLSContainerContent.h
+HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
 HLSError.h
@@ -17,14 +17,12 @@ HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
 HLSOptionalFeatures.h
-HLSOrientationCloner.h
 HLSPlaceholderInsetSegue.h
 HLSPlaceholderViewController.h
 HLSReloadable.h
 HLSRuntime.h
 HLSSlideshow.h
 HLSStackController.h
-HLSStackPopSegue.h
 HLSStackPushSegue.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
@@ -35,7 +33,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
-HLSTransitionStyle.h
+HLSTransition.h
 HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h

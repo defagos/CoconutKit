@@ -19,7 +19,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
         self.index = 0;
-        self.transitionStyle = HLSTransitionStyleNone;
+        self.transitionClass = [HLSTransitionNone class];
         self.duration = kAnimationTransitionDefaultDuration;
     }
     return self;
@@ -29,7 +29,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 @synthesize index = m_index;
 
-@synthesize transitionStyle = m_transitionStyle;
+@synthesize transitionClass = m_transitionClass;
 
 @synthesize duration = m_duration;
 
@@ -40,12 +40,13 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
     HLSPlaceholderViewController *placeholderViewController = nil;
     UIViewController *viewController = self.sourceViewController;
     
-    // The source is a placeholder view controller. Reserved segue identifiers can be used to preload view controller 
+    // The source is a placeholder view controller. Reserved segue identifiers can be used to preload view controllers 
     // into a placeholder view controller
     if ([self.sourceViewController isKindOfClass:[HLSPlaceholderViewController class]]) {
         placeholderViewController = self.sourceViewController;
         if ([self.identifier hasPrefix:HLSPlaceholderPreloadSegueIdentifierPrefix]) {
-            NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:HLSPlaceholderPreloadSegueIdentifierPrefix withString:@""];
+            NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:HLSPlaceholderPreloadSegueIdentifierPrefix
+                                                                               withString:@""];
             static NSNumberFormatter *s_numberFormatter = nil;
             if (! s_numberFormatter) {
                 s_numberFormatter = [[NSNumberFormatter alloc] init];
@@ -58,14 +59,8 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
             
             if (self.index != [indexNumber unsignedIntegerValue]) {
                 HLSLoggerWarn(@"For preloading segues, the index is extracted from the segue identifier '%@' and will override the one "
-                              "(%d) manually set", self.index);
+                              "(%d) manually set", self.identifier, self.index);
                 self.index = [indexNumber unsignedIntegerValue];
-            }
-            
-            if (self.transitionStyle != HLSTransitionStyleNone) {
-                HLSLoggerWarn(@"The transition style has been overridden with HLSTransitionStyleNone, which is "
-                              "the only style available for view controller preloading");
-                self.transitionStyle = HLSTransitionStyleNone;
             }
         }
     }
@@ -79,7 +74,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
     
     [placeholderViewController setInsetViewController:self.destinationViewController
                                               atIndex:self.index
-                                  withTransitionStyle:self.transitionStyle 
+                                  withTransitionClass:self.transitionClass
                                              duration:self.duration];
 }
 

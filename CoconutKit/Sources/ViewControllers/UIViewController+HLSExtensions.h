@@ -52,6 +52,11 @@ typedef enum {
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 
 /**
+ * Return the view controller's view if loaded, nil otherwise
+ */
+- (UIView *)viewIfLoaded;
+
+/**
  * Return YES iff the view is visible (appearing, appeared, or disappearing)
  */
 - (BOOL)isViewVisible;

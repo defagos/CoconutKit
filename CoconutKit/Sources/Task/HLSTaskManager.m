@@ -483,7 +483,7 @@
     NSMutableSet *operations = [NSMutableSet set];
     for (HLSTask *task in tasks) {
         Class operationClass = [task operationClass];
-        NSAssert([operationClass isSubclassOfClass:[HLSTaskOperation class]], @"Class %@ is not a subclass of HLSTaskOperation");
+        NSAssert([operationClass isSubclassOfClass:[HLSTaskOperation class]], @"Class %@ is not a subclass of HLSTaskOperation", operationClass);
         HLSTaskOperation *operation = [[[operationClass alloc] initWithTaskManager:self
                                                                               task:task]
                                        autorelease];

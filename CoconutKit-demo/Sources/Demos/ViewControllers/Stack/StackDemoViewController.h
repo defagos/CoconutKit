@@ -9,30 +9,42 @@
 /**
  * Designated initializer: init
  */
-@interface StackDemoViewController : HLSPlaceholderViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UIPickerView *m_transitionPickerView;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
-    UISwitch *m_forwardingPropertiesSwitch;
+    UISwitch *m_animatedSwitch;
+    UISlider *m_indexSlider;
+    UILabel *m_insertionIndexLabel;
+    UILabel *m_removalIndexLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *forwardingPropertiesSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISlider *indexSlider;
+@property (nonatomic, retain) IBOutlet UILabel *insertionIndexLabel;
+@property (nonatomic, retain) IBOutlet UILabel *removalIndexLabel;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
+- (IBAction)displayContainmentTest:(id)sender;
 - (IBAction)displayStretchable:(id)sender;
 - (IBAction)displayFixedSize:(id)sender;
+- (IBAction)displayHeavy:(id)sender;
 - (IBAction)displayPortraitOnly:(id)sender;
 - (IBAction)displayLandscapeOnly:(id)sender;
 - (IBAction)hideWithModal:(id)sender;
-- (IBAction)displayOrientationCloner:(id)sender;
-- (IBAction)displayContainerCustomization:(id)sender;
 - (IBAction)displayTransparent:(id)sender;
 - (IBAction)testInModal:(id)sender;
 - (IBAction)pop:(id)sender;
-- (IBAction)toggleForwardingProperties:(id)sender;
+- (IBAction)popToRoot:(id)sender;
+- (IBAction)popThree:(id)sender;
+
+- (IBAction)indexChanged:(id)sender;
+
+- (IBAction)navigateForwardNonAnimated:(id)sender;
+- (IBAction)navigateBackNonAnimated:(id)sender;
 
 @end
