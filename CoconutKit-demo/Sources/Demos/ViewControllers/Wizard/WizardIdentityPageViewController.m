@@ -15,6 +15,8 @@
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
+- (void)reloadData;
+
 - (UILabel *)errorLabelForTextField:(UITextField *)textField;
 
 @end
@@ -116,42 +118,20 @@
     [self reloadData];
 }
 
-#pragma mark HLSReloadable protocol implementation
+#pragma mark Localization
 
-- (void)reloadData
-{    
-    static NSNumberFormatter *s_numberFormatter = nil;
-    if (! s_numberFormatter) {
-        s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [s_numberFormatter setAllowsFloats:NO];
-    }
+- (void)localize
+{
+    [super localize];
     
-    [self.firstNameTextField bindToManagedObject:self.person
-                                       fieldName:@"firstName" 
-                                       formatter:nil
-                              validationDelegate:self];
-    [self.lastNameTextField bindToManagedObject:self.person
-                                      fieldName:@"lastName"
-                                      formatter:nil 
-                             validationDelegate:self];
-    [self.emailTextField bindToManagedObject:self.person
-                                   fieldName:@"email" 
-                                   formatter:nil 
-                          validationDelegate:self];
-    [self.emailTextField setCheckingOnChange:YES];
-    [self.birthdateTextField bindToManagedObject:self.person
-                                       fieldName:@"birthdate"
-                                       formatter:self.dateFormatter 
-                              validationDelegate:self];
-    [self.birthdateTextField setCheckingOnChange:YES];
-    [self.nbrChildrenTextField bindToManagedObject:self.person 
-                                         fieldName:@"nbrChildren"
-                                         formatter:s_numberFormatter 
-                                validationDelegate:self];
-    [self.nbrChildrenTextField setCheckingOnChange:YES];
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
     
-    // Perform an initial complete validation
+    // The date formatter is also localized!
+    // TODO: Does not work yet. Try to switch languages!
+    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    
+    // Trigger a new validation to get localized error messages if any
     [self checkTextFields];
 }
 
@@ -211,6 +191,45 @@
     errorLabel.text = [error localizedDescription];
 }
 
+#pragma mark Updating the view
+
+- (void)reloadData
+{
+    static NSNumberFormatter *s_numberFormatter = nil;
+    if (! s_numberFormatter) {
+        s_numberFormatter = [[NSNumberFormatter alloc] init];
+        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [s_numberFormatter setAllowsFloats:NO];
+    }
+    
+    [self.firstNameTextField bindToManagedObject:self.person
+                                       fieldName:@"firstName"
+                                       formatter:nil
+                              validationDelegate:self];
+    [self.lastNameTextField bindToManagedObject:self.person
+                                      fieldName:@"lastName"
+                                      formatter:nil
+                             validationDelegate:self];
+    [self.emailTextField bindToManagedObject:self.person
+                                   fieldName:@"email"
+                                   formatter:nil
+                          validationDelegate:self];
+    [self.emailTextField setCheckingOnChange:YES];
+    [self.birthdateTextField bindToManagedObject:self.person
+                                       fieldName:@"birthdate"
+                                       formatter:self.dateFormatter
+                              validationDelegate:self];
+    [self.birthdateTextField setCheckingOnChange:YES];
+    [self.nbrChildrenTextField bindToManagedObject:self.person
+                                         fieldName:@"nbrChildren"
+                                         formatter:s_numberFormatter
+                                validationDelegate:self];
+    [self.nbrChildrenTextField setCheckingOnChange:YES];
+    
+    // Perform an initial complete validation
+    [self checkTextFields];
+}
+
 #pragma mark Retrieving the error label associated with a text field
 
 - (UILabel *)errorLabelForTextField:(UITextField *)textField
@@ -234,23 +253,6 @@
         HLSLoggerError(@"Unknown text field");
         return nil;
     }
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    
-    // The date formatter is also localized!
-    // TODO: Does not work yet. Try to switch languages!
-    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
-    
-    // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
 }
 
 #pragma mark Event callbacks

@@ -11,6 +11,12 @@
 static NSArray *s_textExamples = nil;
 static NSArray *s_fontNames = nil;
 
+@interface LabelDemoViewController ()
+
+- (void)reloadData;
+
+@end
+
 @implementation LabelDemoViewController
 
 #pragma mark Class methods
@@ -138,37 +144,6 @@ static NSArray *s_fontNames = nil;
     [self reloadData];
 }
 
-#pragma mark HLSReloadable protocol implementation
-
-- (void)reloadData
-{
-    NSString *text = [s_textExamples objectAtIndex:[self.textPickerView selectedRowInComponent:0]];
-    NSString *fontName = [s_fontNames objectAtIndex:[self.fontPickerView selectedRowInComponent:0]];
-    UILineBreakMode lineBreakMode = [self.lineBreakModePickerView selectedRowInComponent:0];
-    UIBaselineAdjustment baselineAdjustment = [self.baselineAdjustmentSegmentedControl selectedSegmentIndex];
-        
-    self.label.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
-    self.label.minimumFontSize = self.minFontSizeSlider.value;
-    self.label.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
-    self.label.verticalAlignment = self.verticalAlignmentSegmentedControl.selectedSegmentIndex;
-    self.label.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
-    self.label.baselineAdjustment = baselineAdjustment;
-    self.label.lineBreakMode = lineBreakMode;
-    self.label.text = text;
-    
-    self.standardLabel.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
-    self.standardLabel.minimumFontSize = self.minFontSizeSlider.value;
-    self.standardLabel.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
-    self.standardLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
-    self.standardLabel.baselineAdjustment = baselineAdjustment;
-    self.standardLabel.lineBreakMode = lineBreakMode;
-    self.standardLabel.text = text;
-        
-    self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfLinesSlider.value];
-    self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
-    self.minFontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.minFontSizeSlider.value];
-}
-
 #pragma mark UIPickerViewDataSource protocol implementation
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -246,6 +221,37 @@ static NSArray *s_fontNames = nil;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [self reloadData];
+}
+
+#pragma mark Updating the view
+
+- (void)reloadData
+{
+    NSString *text = [s_textExamples objectAtIndex:[self.textPickerView selectedRowInComponent:0]];
+    NSString *fontName = [s_fontNames objectAtIndex:[self.fontPickerView selectedRowInComponent:0]];
+    UILineBreakMode lineBreakMode = [self.lineBreakModePickerView selectedRowInComponent:0];
+    UIBaselineAdjustment baselineAdjustment = [self.baselineAdjustmentSegmentedControl selectedSegmentIndex];
+    
+    self.label.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
+    self.label.minimumFontSize = self.minFontSizeSlider.value;
+    self.label.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
+    self.label.verticalAlignment = self.verticalAlignmentSegmentedControl.selectedSegmentIndex;
+    self.label.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
+    self.label.baselineAdjustment = baselineAdjustment;
+    self.label.lineBreakMode = lineBreakMode;
+    self.label.text = text;
+    
+    self.standardLabel.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
+    self.standardLabel.minimumFontSize = self.minFontSizeSlider.value;
+    self.standardLabel.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
+    self.standardLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
+    self.standardLabel.baselineAdjustment = baselineAdjustment;
+    self.standardLabel.lineBreakMode = lineBreakMode;
+    self.standardLabel.text = text;
+    
+    self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfLinesSlider.value];
+    self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
+    self.minFontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.minFontSizeSlider.value];
 }
 
 #pragma mark Event callbacks

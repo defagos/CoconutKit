@@ -9,7 +9,7 @@
 // Forward declarations
 @class Person;
 
-@interface WizardAddressPageViewController : HLSViewController <HLSReloadable, HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
+@interface WizardAddressPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
 @private
     Person *m_person;
     HLSTextField *m_streetTextField;

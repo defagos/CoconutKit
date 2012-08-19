@@ -274,7 +274,6 @@
 		6FADE71D14BA04B6007EE121 /* HLSKeyboardInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSKeyboardInformation.m; sourceTree = "<group>"; };
 		6FADE71E14BA04B6007EE121 /* HLSNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNotifications.h; sourceTree = "<group>"; };
 		6FADE71F14BA04B6007EE121 /* HLSNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNotifications.m; sourceTree = "<group>"; };
-		6FADE72114BA04B6007EE121 /* HLSReloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSReloadable.h; sourceTree = "<group>"; };
 		6FADE72214BA04B6007EE121 /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FADE72314BA04B6007EE121 /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
 		6FADE72414BA04B6007EE121 /* HLSUserInterfaceLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSUserInterfaceLock.h; sourceTree = "<group>"; };
@@ -653,7 +652,6 @@
 				6FADE71E14BA04B6007EE121 /* HLSNotifications.h */,
 				6FADE71F14BA04B6007EE121 /* HLSNotifications.m */,
 				6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */,
-				6FADE72114BA04B6007EE121 /* HLSReloadable.h */,
 				6FADE72214BA04B6007EE121 /* HLSRuntime.h */,
 				6FADE72314BA04B6007EE121 /* HLSRuntime.m */,
 				6FADE72414BA04B6007EE121 /* HLSUserInterfaceLock.h */,

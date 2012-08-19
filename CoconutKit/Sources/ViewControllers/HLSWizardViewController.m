@@ -213,17 +213,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 
-#pragma mark HLSReloadable protocol implementation
-
-- (void)reloadData
-{
-    // Reload the current page content (if supported)
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-    if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        [(UIViewController<HLSReloadable>*)viewController reloadData];
-    }
-}
-
 #pragma mark Refreshing the UI
 
 - (void)refreshWizardInterface
