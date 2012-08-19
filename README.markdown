@@ -81,6 +81,8 @@ CoconutKit provides a built-in logger which it uses to provide valuable informat
 * Edit your project target and add `-DHLS_LOGGER` to your `Other C Flags` for the debug configuration
 * Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
 
+CoconutKit logger also supports [XcodeColors](https://github.com/robbiehanson/XcodeColors). Simply install the XcodeColors plugin and enable colors when debugging your project within Xcode by adding an environment variable called `XcodeColors` to your project schemes. Projects in the CoconutKit workspace all have this environment variable set. If you see strange `[fg` sequences in your Xcode debugging console, either install XcodeColors or disable the `XcodeColors` environment variable by editing the corresponding project scheme.
+
 ### How should I use CoconutKit?
 
 After CoconutKit has been added to your project, simply import the headers you need using the `#import <CoconutKit/HeaderFile.h>` syntax. Though you can import files only where you need them, I strongly recommend importing the CoconutKit global header file from your project `.pch` file once for all (`#import <CoconutKit/CoconutKit.h>`). This file includes all CoconutKit public headers so that you do not need any other import.
