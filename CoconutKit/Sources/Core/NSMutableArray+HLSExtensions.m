@@ -8,10 +8,6 @@
 
 #import "NSMutableArray+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSMutableArray_HLSExtensions)
-
 @implementation NSMutableArray (HLSExtensions)
 
 - (void)safelyAddObject:(id)object

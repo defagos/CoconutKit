@@ -10,9 +10,6 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(UIControl_HLSExclusiveTouch)
 
 // Original implementation of the methods we swizzle
 static id (*s_UIControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;

@@ -8,10 +8,6 @@
 
 #import "NSTimeZone+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSTimeZone_HLSExtensions)
-
 @implementation NSTimeZone (HLSExtensions)
 
 #pragma mark Class methods

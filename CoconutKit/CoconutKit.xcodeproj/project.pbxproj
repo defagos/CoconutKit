@@ -52,7 +52,6 @@
 		6FADE59E14BA0494007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51714BA0494007EE121 /* HLSViewAnimationStep.m */; };
 		6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51914BA0494007EE121 /* HLSAssert.h */; };
 		6FADE5A014BA0494007EE121 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51A14BA0494007EE121 /* HLSAssert.m */; };
-		6FADE5A114BA0494007EE121 /* HLSCategoryLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51B14BA0494007EE121 /* HLSCategoryLinker.h */; };
 		6FADE5A214BA0494007EE121 /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51C14BA0494007EE121 /* HLSConverters.h */; };
 		6FADE5A314BA0494007EE121 /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51D14BA0494007EE121 /* HLSConverters.m */; };
 		6FADE5A414BA0494007EE121 /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51E14BA0494007EE121 /* HLSError.h */; };
@@ -255,7 +254,6 @@
 		6FADE51714BA0494007EE121 /* HLSViewAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimationStep.m; sourceTree = "<group>"; };
 		6FADE51914BA0494007EE121 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6FADE51A14BA0494007EE121 /* HLSAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAssert.m; sourceTree = "<group>"; };
-		6FADE51B14BA0494007EE121 /* HLSCategoryLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCategoryLinker.h; sourceTree = "<group>"; };
 		6FADE51C14BA0494007EE121 /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
 		6FADE51D14BA0494007EE121 /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
 		6FADE51E14BA0494007EE121 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
@@ -505,7 +503,6 @@
 				6F3E3E8215A2277D007E78BD /* HLSApplicationPreLoader.m */,
 				6FADE51914BA0494007EE121 /* HLSAssert.h */,
 				6FADE51A14BA0494007EE121 /* HLSAssert.m */,
-				6FADE51B14BA0494007EE121 /* HLSCategoryLinker.h */,
 				6FADE51C14BA0494007EE121 /* HLSConverters.h */,
 				6FADE51D14BA0494007EE121 /* HLSConverters.m */,
 				6FADE51E14BA0494007EE121 /* HLSError.h */,
@@ -720,7 +717,6 @@
 				6FADE59B14BA0494007EE121 /* HLSAnimationStep.h in Headers */,
 				6FADE59D14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */,
 				6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */,
-				6FADE5A114BA0494007EE121 /* HLSCategoryLinker.h in Headers */,
 				6FADE5A214BA0494007EE121 /* HLSConverters.h in Headers */,
 				6FADE5A414BA0494007EE121 /* HLSError.h in Headers */,
 				6FADE5A614BA0494007EE121 /* HLSFloat.h in Headers */,

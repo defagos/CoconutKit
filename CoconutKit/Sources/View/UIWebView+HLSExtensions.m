@@ -8,14 +8,11 @@
 
 #import "UIWebView+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 
 #import <objc/runtime.h>
 
 static UIScrollView *scrollView_Imp(UIWebView *self, SEL _cmd);
-
-HLSLinkCategory(UIWebView_HLSExtensions)
 
 @interface UIWebView (HLSExtensionsPrivate)
 

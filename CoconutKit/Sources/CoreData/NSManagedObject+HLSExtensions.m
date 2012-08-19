@@ -9,13 +9,10 @@
 #import "NSManagedObject+HLSExtensions.h"
 
 #import "HLSAssert.h"
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSManagedObjectCopying.h"
 #import "HLSModelManager.h"
 #import "NSObject+HLSExtensions.h"
-
-HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 @implementation NSManagedObject (HLSExtensions)
 

@@ -8,14 +8,11 @@
 
 #import "UILabel+HLSDynamicLocalization.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSLabelLocalizationInfo.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
-
-HLSLinkCategory(UILabel_HLSDynamicLocalization)
 
 static BOOL s_missingLocalizationsVisible = NO;
 

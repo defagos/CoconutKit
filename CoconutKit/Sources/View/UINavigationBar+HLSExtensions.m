@@ -8,11 +8,8 @@
 
 #import "UINavigationBar+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
 #import "UIView+HLSExtensions.h"
-
-HLSLinkCategory(UINavigationBar_HLSExtensions)
 
 /**
  * As navigation levels are pushed onto the stack, the navigation bar is updated. During this process, and if we

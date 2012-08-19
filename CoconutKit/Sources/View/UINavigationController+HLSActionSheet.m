@@ -9,10 +9,7 @@
 #import "UINavigationController+HLSActionSheet.h"
 
 #import "HLSActionSheet+Friend.h"
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UINavigationController_HLSActionSheet)
 
 // Original implementation of the methods we swizzle
 static BOOL (*s_UINavigationController__navigationBar_shouldPopItem_Imp)(id, SEL, id, id) = NULL;

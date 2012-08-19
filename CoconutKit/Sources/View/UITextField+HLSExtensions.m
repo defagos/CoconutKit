@@ -8,10 +8,7 @@
 
 #import "UITextField+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UITextField_HLSExtensions)
 
 static UITextField *s_currentTextField = nil;           // weak ref to the current first responder
 

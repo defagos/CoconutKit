@@ -8,10 +8,6 @@
 
 #import "NSSet+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSSet_HLSExtensions)
-
 @implementation NSSet (HLSExtensions)
 
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor

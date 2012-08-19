@@ -7,9 +7,6 @@
 //
 
 #import "UIColor+HLSExtensions.h"
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(UIColor_HLSExtensions)
 
 @implementation UIColor (HLSExtensions)
 
