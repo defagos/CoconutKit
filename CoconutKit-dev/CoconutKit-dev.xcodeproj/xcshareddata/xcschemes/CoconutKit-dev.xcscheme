@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "NSZombieEnabled"
+            key = "XcodeColors"
             value = "YES"
             isEnabled = "YES">
          </EnvironmentVariable>

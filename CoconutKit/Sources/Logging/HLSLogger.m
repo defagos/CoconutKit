@@ -12,15 +12,16 @@
 #pragma mark HLSLoggerMode struct
 
 typedef struct {
-	NSString *name;
-	HLSLoggerLevel level;
+	NSString *name;                 // Mode name
+	HLSLoggerLevel level;           // Corresponding level
+    NSString *rgbValues;            // RGB values for XcodeColors
 } HLSLoggerMode;
 
-static const HLSLoggerMode kLoggerModeDebug = {@"DEBUG", 0};
-static const HLSLoggerMode kLoggerModeInfo = {@"INFO", 1};
-static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2};
-static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3};
-static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
+static const HLSLoggerMode kLoggerModeDebug = {@"DEBUG", 0, nil};
+static const HLSLoggerMode kLoggerModeInfo = {@"INFO", 1, nil};
+static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2, @"255,120,0"};
+static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3, @"255,0,0"};
+static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 #pragma mark -
 #pragma mark HLSLogger class
@@ -96,11 +97,23 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4};
 	if (m_level > mode.level) {
 		return;
 	}
-	
-	NSString *fullLogEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
+
+    static BOOL s_configurationLoaded = NO;
+    static BOOL s_xcodeColorsEnabled = NO;
+    if (! s_configurationLoaded) {
+        NSString *xcodeColorsValue = [[[NSProcessInfo processInfo] environment] objectForKey:@"XcodeColors"];
+        s_xcodeColorsEnabled = [xcodeColorsValue isEqualToString:@"YES"];
+        s_configurationLoaded = YES;
+    }
     
     // NSLog is thread-safe
-	NSLog(@"%@", fullLogEntry);
+    NSString *fullLogEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
+    if (s_xcodeColorsEnabled && mode.rgbValues) {
+        NSLog(@"\033[fg%@;%@\033[;", mode.rgbValues, fullLogEntry);
+    }
+    else {
+        NSLog(@"%@", fullLogEntry);
+    }
 }
 
 - (void)debug:(NSString *)message
