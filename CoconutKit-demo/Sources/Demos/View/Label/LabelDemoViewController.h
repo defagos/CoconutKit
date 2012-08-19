@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface LabelDemoViewController : HLSViewController <HLSReloadable, UIPickerViewDataSource, UIPickerViewDelegate>{
+@interface LabelDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
 @private
     HLSLabel *_label;
     UILabel *_standardLabel;

@@ -8,10 +8,6 @@
 
 #import "UIImage+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(UIImage_HLSExtensions)
-
 @implementation UIImage (HLSExtensions)
 
 + (UIImage *)imageWithColor:(UIColor *)color

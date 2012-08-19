@@ -7,7 +7,6 @@
 //
 
 #import "HLSPlaceholderViewController.h"
-#import "HLSReloadable.h"
 
 // Forward declarations
 @protocol HLSWizardViewControllerDelegate;
@@ -41,7 +40,7 @@ typedef enum {
  *
  * Designated initializer: initWithNibName:bundle:
  */
-@interface HLSWizardViewController : HLSPlaceholderViewController <HLSReloadable> {
+@interface HLSWizardViewController : HLSPlaceholderViewController {
 @private
     UIButton *m_previousButton;
     UIButton *m_nextButton;

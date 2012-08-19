@@ -9,13 +9,10 @@
 #import "UIViewController+HLSExtensions.h"
 
 #import <objc/runtime.h>
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
 #import "UITextView+HLSExtensions.h"
-
-HLSLinkCategory(UIViewController_HLSExtensions)
 
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;

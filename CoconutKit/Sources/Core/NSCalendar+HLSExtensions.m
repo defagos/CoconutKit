@@ -8,7 +8,6 @@
 
 #import "NSCalendar+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "NSDate+HLSExtensions.h"
 #import "NSTimeZone+HLSExtensions.h"
 
@@ -18,8 +17,6 @@
  * zone we can then apply all methods readily available from NSCalendar. If the result is not a date, we are done. If 
  * the result is a date, though, we need to convert it back to the time zone in which we work
  */
-
-HLSLinkCategory(NSCalendar_HLSExtensions)
 
 @interface NSDateComponents (HLSExtensionsPrivate)
 

@@ -8,10 +8,7 @@
 
 #import "UIToolbar+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "UIView+HLSExtensions.h"
-
-HLSLinkCategory(UIToolbar_HLSExtensions)
 
 static const NSInteger kBackgroundImageViewTag = 28756;         // Very unlikely to be used by another view in the toolbar view hierarchy
 

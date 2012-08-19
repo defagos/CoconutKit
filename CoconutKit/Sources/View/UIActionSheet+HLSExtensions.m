@@ -8,10 +8,7 @@
 
 #import "UIActionSheet+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UIActionSheet_HLSExtensions)
 
 // Keys for associated objects
 static void *s_ownerKey = &s_ownerKey;

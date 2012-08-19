@@ -9,10 +9,7 @@
 #import "UIView+HLSExtensions.h"
 
 #import <objc/runtime.h>
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UIView_HLSExtensions)
 
 static void *s_tagKey = &s_tagKey;
 static void *s_userInfoKey = &s_userInfoKey;

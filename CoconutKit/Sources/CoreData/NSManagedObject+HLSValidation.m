@@ -9,7 +9,6 @@
 #import "NSManagedObject+HLSValidation.h"
 
 #import "HLSAssert.h"
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
@@ -19,8 +18,6 @@
 #import "UITextField+HLSValidation.h"
 
 #import <objc/runtime.h>
-
-HLSLinkCategory(NSManagedObject_HLSValidation)
 
 // Return YES iff injection has been enabled. External linkage, but not public
 BOOL injectedManagedObjectValidation(void);
