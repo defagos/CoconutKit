@@ -33,8 +33,8 @@
 
 - (void)playNextStepAnimated:(BOOL)animated;
 
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
+- (void)animationDidStart:(CAAnimation *)animation;
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag;
 
 @end
 
@@ -204,6 +204,102 @@
 {
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
+    BOOL actuallyAnimated = animated && ! doubleeq(animationStep.duration, 0.f);
+    if (actuallyAnimated) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:animationStep.duration];
+        
+        // TODO: Delay and timing function (curve)
+        
+        // The delay is just used for the first step. Set it to 0 for the remaining ones
+        m_delay = 0.;
+    }
+    else {
+        // Instantaneous
+        // First step
+        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:animated];
+            }
+        }
+    }
+    
+    // TODO: Animate dummy view? Still needed?
+    
+    for (UIView *view in [animationStep views]) {
+        // The views are brought to the front in the order they were registered with the animation step
+        if (self.bringToFront) {
+            [view.superview bringSubviewToFront:view];
+        }
+        
+        HLSViewAnimationStep *viewAnimationStep = [animationStep viewAnimationStepForView:view];
+        NSAssert(viewAnimationStep != nil, @"Missing animation step; data consistency failure");
+        
+        // Opacity always between 0.f and 1.f
+        CGFloat opacity = view.layer.opacity + viewAnimationStep.alphaVariation;
+        if (floatlt(opacity, -1.f)) {
+            HLSLoggerWarn(@"Animation steps adding to an opacity value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", view);
+            opacity = -1.f;
+        }
+        else if (floatgt(opacity, 1.f)) {
+            HLSLoggerWarn(@"Animation steps adding to an opacity value larger than 1 for view %@. Fixed to 1, but your animation is incorrect", view);
+            opacity = 1.f;
+        }
+        
+        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system
+        // centered on the view
+        // TODO: resizeViews
+        // TODO: Access layer properties, not view ones
+        CATransform3D translationTransform = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
+        CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, viewAnimationStep.transform),
+                                                          CATransform3DInvert(translationTransform));
+        CATransform3D transform = CATransform3DConcat(view.layer.transform, convTransform);
+        
+        // Create the animation group for all properties to be animated. Explicit CABasicAnimations are required
+        // to animate properties of a layer (layers associated with views do not participate in implicit animations)
+        if (actuallyAnimated) {
+            CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            [opacityAnimation setFromValue:[NSNumber numberWithFloat:view.layer.opacity]];
+            [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
+            
+            CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+            [transformAnimation setFromValue:[NSValue valueWithCATransform3D:view.layer.transform]];
+            [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
+            
+            CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+            animationGroup.animations = [NSArray arrayWithObjects:opacityAnimation, transformAnimation, nil];
+            if (view == [[animationStep views] lastObject]) {
+                [animationGroup setDelegate:self];
+                [animationGroup setValue:animationStep forKey:@"animationStep"];
+            }
+            [view.layer addAnimation:animationGroup forKey:nil];
+        }
+        
+        // Set the final values (required: Animations do not alter them 
+        view.layer.opacity = opacity;
+        view.layer.transform = transform;
+    }
+    
+    // Animated
+    if (actuallyAnimated) {
+        [CATransaction commit];
+    }
+    // Instantaneous
+    else {
+        // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
+        // played with animated = YES are still notified as animated)
+        if (! self.cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+            }
+        }
+        
+        [self playNextStepAnimated:animated];
+    }
+    
+#if 0
+    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
+    // in animations
     if (animated && ! doubleeq(animationStep.duration, 0.f)) {
         [UIView beginAnimations:nil context:animationStep];
         
@@ -309,6 +405,7 @@
         
         [self playNextStepAnimated:animated];
     }
+#endif
 }
 
 - (void)playNextStepAnimated:(BOOL)animated
@@ -488,12 +585,12 @@
 
 #pragma mark Animation callbacks
 
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
+- (void)animationDidStart:(CAAnimation *)animation
 {
     // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
     // set). Do not notify the delegate in such cases
     if (! self.cancelling) {
-        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
         
         // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
         // delay period is over, as for UIView animation blocks)
@@ -505,7 +602,7 @@
     }
 }
 
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
     if (self.cancelling) {
         self.cancelling = NO;
@@ -518,7 +615,7 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
+        HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
         [self.delegate animationStepFinished:animationStep animated:m_animated];
     }
     
