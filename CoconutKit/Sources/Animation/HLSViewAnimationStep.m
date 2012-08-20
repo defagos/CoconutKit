@@ -38,13 +38,13 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
 @interface HLSViewAnimationStep ()
 
-@property (nonatomic, assign) HLSVector4 rotationParameters;
-@property (nonatomic, assign) HLSVector3 scaleParameters;
-@property (nonatomic, assign) HLSVector3 translationParameters;
+@property (nonatomic, assign) CGFloat rotationAngle;
+@property (nonatomic, assign) HLSVector2 scaleParameters;
+@property (nonatomic, assign) HLSVector2 translationParameters;
 
-- (CATransform3D)rotationTransform;
-- (CATransform3D)scaleTransform;
-- (CATransform3D)translationTransform;
+- (CGAffineTransform)rotationTransform;
+- (CGAffineTransform)scaleTransform;
+- (CGAffineTransform)translationTransform;
 
 @end
 
@@ -63,9 +63,9 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 {
     if ((self = [super init])) {
         // Default: No change
-        self.rotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
-        self.scaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
-        self.translationParameters = HLSVector3Make(0.f, 0.f, 0.f);
+        self.rotationAngle = 0.f;
+        self.scaleParameters = HLSVector2Make(1.f, 1.f);
+        self.translationParameters = HLSVector2Make(0.f, 0.f);
         
         self.alphaVariation = kAnimationStepDefaultAlphaVariation; 
     }
@@ -74,25 +74,25 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
 #pragma mark Accessors and mutators
 
-@synthesize rotationParameters = m_rotationParameters;
+@synthesize rotationAngle = m_rotationAngle;
 
 @synthesize scaleParameters = m_scaleParameters;
 
 @synthesize translationParameters = m_translationParameters;
 
-- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+- (void)rotateByAngle:(CGFloat)angle
 {
-    self.rotationParameters = HLSVector4Make(angle, x, y, z);
+    self.rotationAngle = angle;
 }
 
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
 {
-    self.scaleParameters = HLSVector3Make(xFactor, yFactor, zFactor);
+    self.scaleParameters = HLSVector2Make(xFactor, yFactor);
 }
 
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
 {
-    self.translationParameters = HLSVector3Make(x, y, z);
+    self.translationParameters = HLSVector2Make(x, y);
 }
 
 @synthesize alphaVariation = m_alphaVariation;
@@ -115,26 +115,26 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 
 @dynamic transform;
 
-- (CATransform3D)transform
+- (CGAffineTransform)transform
 {
-    CATransform3D transform = [self rotationTransform];
-    transform = CATransform3DConcat(transform, [self scaleTransform]);
-    return CATransform3DConcat(transform, [self translationTransform]);
+    CGAffineTransform transform = [self rotationTransform];
+    transform = CGAffineTransformConcat(transform, [self scaleTransform]);
+    return CGAffineTransformConcat(transform, [self translationTransform]);
 }
 
-- (CATransform3D)rotationTransform
+- (CGAffineTransform)rotationTransform
 {
-    return CATransform3DMakeRotation(self.rotationParameters.v1, self.rotationParameters.v2, self.rotationParameters.v3, self.rotationParameters.v4);
+    return CGAffineTransformMakeRotation(self.rotationAngle);
 }
 
-- (CATransform3D)scaleTransform
+- (CGAffineTransform)scaleTransform
 {
-    return CATransform3DMakeScale(self.scaleParameters.v1, self.scaleParameters.v2, self.scaleParameters.v3);
+    return CGAffineTransformMakeScale(self.scaleParameters.v1, self.scaleParameters.v2);
 }
 
-- (CATransform3D)translationTransform
+- (CGAffineTransform)translationTransform
 {
-    return CATransform3DMakeTranslation(self.translationParameters.v1, self.translationParameters.v2, self.translationParameters.v3);
+    return CGAffineTransformMakeTranslation(self.translationParameters.v1, self.translationParameters.v2);
 }
 
 #pragma mark Convenience methods
@@ -142,14 +142,12 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {
     // No rotation required
-    self.rotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
+    self.rotationAngle = 0.f;
     
-    self.scaleParameters = HLSVector3Make(CGRectGetWidth(toRect) / CGRectGetWidth(fromRect), 
-                                          CGRectGetHeight(toRect) / CGRectGetHeight(fromRect), 
-                                          1.f);
-    self.translationParameters = HLSVector3Make(CGRectGetMidX(toRect) - CGRectGetMidX(fromRect), 
-                                                CGRectGetMidY(toRect) - CGRectGetMidY(fromRect), 
-                                                0.f);
+    self.scaleParameters = HLSVector2Make(CGRectGetWidth(toRect) / CGRectGetWidth(fromRect),
+                                          CGRectGetHeight(toRect) / CGRectGetHeight(fromRect));
+    self.translationParameters = HLSVector2Make(CGRectGetMidX(toRect) - CGRectGetMidX(fromRect),
+                                                CGRectGetMidY(toRect) - CGRectGetMidY(fromRect));
 }
 
 #pragma mark Reverse animation
@@ -158,16 +156,11 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 {
     // See remarks at the beginning
     HLSViewAnimationStep *reverseViewAnimationStep = [HLSViewAnimationStep viewAnimationStep];
-    [reverseViewAnimationStep rotateByAngle:-self.rotationParameters.v1 
-                           aboutVectorWithX:self.rotationParameters.v2
-                                          y:self.rotationParameters.v3 
-                                          z:self.rotationParameters.v4];
+    [reverseViewAnimationStep rotateByAngle:-self.rotationAngle];
     [reverseViewAnimationStep scaleWithXFactor:1.f / self.scaleParameters.v1 
-                                       yFactor:1.f / self.scaleParameters.v2 
-                                       zFactor:1.f / self.scaleParameters.v3];
+                                       yFactor:1.f / self.scaleParameters.v2];
     [reverseViewAnimationStep translateByVectorWithX:-self.translationParameters.v1
-                                                   y:-self.translationParameters.v2
-                                                   z:-self.translationParameters.v3];
+                                                   y:-self.translationParameters.v2];
     reverseViewAnimationStep.alphaVariation = -self.alphaVariation;
     return reverseViewAnimationStep;
 }
@@ -177,7 +170,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
 - (id)copyWithZone:(NSZone *)zone
 {
     HLSViewAnimationStep *viewAnimationStepCopy = [[HLSViewAnimationStep allocWithZone:zone] init];
-    viewAnimationStepCopy.rotationParameters = self.rotationParameters;
+    viewAnimationStepCopy.rotationAngle = self.rotationAngle;
     viewAnimationStepCopy.scaleParameters = self.scaleParameters;
     viewAnimationStepCopy.translationParameters = self.translationParameters;
     viewAnimationStepCopy.alphaVariation = self.alphaVariation;
@@ -191,7 +184,7 @@ static const CGFloat kAnimationStepDefaultAlphaVariation = 0.f;
     return [NSString stringWithFormat:@"<%@: %p; transform: %@; alphaVariation: %f>", 
             [self class],
             self,
-            HLSStringFromCATransform3D([self transform]) ,
+            NSStringFromCGAffineTransform([self transform]),
             self.alphaVariation];
 }
 

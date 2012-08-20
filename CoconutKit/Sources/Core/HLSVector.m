@@ -8,6 +8,15 @@
 
 #import "HLSVector.h"
 
+HLSVector2 HLSVector2Make(CGFloat v1, CGFloat v2)
+{
+    HLSVector2 vector;
+    memset(&vector, 0, sizeof(HLSVector2));
+    vector.v1 = v1;
+    vector.v2 = v2;
+    return vector;
+}
+
 HLSVector3 HLSVector3Make(CGFloat v1, CGFloat v2, CGFloat v3)
 {
     HLSVector3 vector;

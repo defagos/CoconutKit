@@ -11,6 +11,7 @@ HLSExpandingSearchBar.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLabel.h
+HLSLayerAnimationStep.h
 HLSLogger.h
 HLSManagedObjectCopying.h
 HLSModelManager.h

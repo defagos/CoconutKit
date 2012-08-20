@@ -300,7 +300,7 @@
             view.layer.position = endPosition;
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
-            [view.layer layoutIfNeeded];
+            [view.layer layoutSublayers];
         }
         // Alter transform
         else {

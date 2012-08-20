@@ -22,6 +22,7 @@
     #import "HLSSlideshow.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLabel.h"
+    #import "HLSLayerAnimationStep.h"
     #import "HLSLogger.h"
     #import "HLSManagedObjectCopying.h"
     #import "HLSModelManager.h"

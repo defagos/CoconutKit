@@ -209,39 +209,43 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 #pragma mark Layout
 
-- (void)layoutSubviews
+- (void)layoutSublayersOfLayer:(CALayer *)layer
 {
+    if (layer != self.layer) {
+        return;
+    }
+    
     if (self.autoresizingMask & UIViewAutoresizingFlexibleHeight) {
         HLSLoggerWarn(@"The search bar cannot have a flexible height. Disabling the corresponding autoresizing mask flag");
         self.autoresizingMask &= ~UIViewAutoresizingFlexibleHeight;
     }
     
     // TODO: Factor out collapsed frame creation code
-    if (! m_animating) {
+    //if (! m_animating) {
         if (self.alignment == HLSExpandingSearchBarAlignmentLeft || m_expanded) {
-            self.searchButton.frame = CGRectMake(0.f,
-                                                 roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
-                                                 kSearchBarStandardHeight,
-                                                 kSearchBarStandardHeight);
+            self.searchButton.layer.frame = CGRectMake(0.f,
+                                                       roundf((CGRectGetHeight(layer.frame) - kSearchBarStandardHeight) / 2.f),
+                                                       kSearchBarStandardHeight,
+                                                       kSearchBarStandardHeight);
         }
         else {
-            self.searchButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - kSearchBarStandardHeight,
-                                                 roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
-                                                 kSearchBarStandardHeight,
-                                                 kSearchBarStandardHeight);    
+            self.searchButton.layer.frame = CGRectMake(CGRectGetWidth(layer.bounds) - kSearchBarStandardHeight,
+                                                       roundf((CGRectGetHeight(layer.frame) - kSearchBarStandardHeight) / 2.f),
+                                                       kSearchBarStandardHeight,
+                                                       kSearchBarStandardHeight);    
         }
         
         if (m_expanded) {
             self.searchBar.alpha = 1.f;
-            self.searchBar.frame = CGRectMake(0.f,
-                                              roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
-                                              CGRectGetWidth(self.bounds),
-                                              kSearchBarStandardHeight);
+            self.searchBar.layer.frame = CGRectMake(0.f,
+                                                    roundf((CGRectGetHeight(layer.frame) - kSearchBarStandardHeight) / 2.f),
+                                                    CGRectGetWidth(layer.bounds),
+                                                    kSearchBarStandardHeight);
         }
         else {
-            self.searchBar.frame = self.searchButton.frame;
+            self.searchBar.layer.frame = self.searchButton.layer.frame;
         }
-    }
+    //}
     
     // Notify initial status
     if (! m_layoutDone) {

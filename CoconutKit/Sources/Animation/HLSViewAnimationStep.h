@@ -10,18 +10,18 @@
 
 /**
  * A view animation step describes the changes applied to a view during an animation step (HLSAnimationStep). An 
- * animation step is the combination of several view animation steps (HLSViewAnimationStep) applied to a set of views, and 
- * represent the collective set of changes applied to these views during some time interval. An animation (HLSAnimation) 
- * is then simply a collection of animation steps.
+ * animation step is the combination of several view and / or layer animation steps (HLSViewAnimationStep,
+ * HLSLayerAnimationStep) applied to a set of layers and views, and represent the collective set of changes applied 
+ * to thhem during some time interval. An animation (HLSAnimation) is then simply a collection of animation steps.
  *
  * Designated initializer: init (create a view animation step with default settings)
  * NSCopying behavior: Deep copy
  */
 @interface HLSViewAnimationStep : NSObject <NSCopying> {
 @private
-    HLSVector4 m_rotationParameters;
-    HLSVector3 m_scaleParameters;
-    HLSVector3 m_translationParameters;
+    CGFloat m_rotationAngle;
+    HLSVector2 m_scaleParameters;
+    HLSVector2 m_translationParameters;
     CGFloat m_alphaVariation;
 }
 
@@ -38,9 +38,9 @@
  *         are not supported (e.g. translating, then rotating). The currently supported animations should cover most
  *         needs, though
  */
-- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)rotateByAngle:(CGFloat)angle;
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
 
 /**
  * Convenience method to calculate the view animation step parameters needed to transform a rect into another one
@@ -55,9 +55,9 @@
 @property (nonatomic, assign) CGFloat alphaVariation;
 
 /**
- * The transform corresponding to the transform parameters associated with the animation steps
+ * The transform corresponding to the transform parameters associated with the view animation step
  */
-@property (nonatomic, readonly, assign) CATransform3D transform;
+@property (nonatomic, readonly, assign) CGAffineTransform transform;
 
 /**
  * Return the inverse view animation step
