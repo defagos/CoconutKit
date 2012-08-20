@@ -208,6 +208,7 @@
     if (actuallyAnimated) {
         [CATransaction begin];
         [CATransaction setAnimationDuration:animationStep.duration];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
         
         // TODO: Delay and timing function (curve)
         
@@ -250,7 +251,7 @@
         // centered on the view
         // TODO: resizeViews
         // TODO: Access layer properties, not view ones
-        CATransform3D translationTransform = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
+        CATransform3D translationTransform = CATransform3DMakeTranslation(-view.layer.transform.m41, -view.layer.transform.m42, 0.f);
         CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, viewAnimationStep.transform),
                                                           CATransform3DInvert(translationTransform));
         CATransform3D transform = CATransform3DConcat(view.layer.transform, convTransform);
