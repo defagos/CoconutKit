@@ -215,8 +215,8 @@
         // The delay is just used for the first step. Set it to 0 for the remaining ones
         m_delay = 0.;
     }
+    // Instantaneous
     else {
-        // Instantaneous
         // First step
         if ([self.animationSteps indexOfObject:animationStep] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
@@ -224,9 +224,8 @@
             }
         }
     }
-    
-    // TODO: Animate dummy view? Still needed?
-    
+      
+    // Animate all views involved in the animation step
     for (UIView *view in [animationStep views]) {
         // The views are brought to the front in the order they were registered with the animation step
         if (self.bringToFront) {
@@ -235,6 +234,10 @@
         
         HLSViewAnimationStep *viewAnimationStep = [animationStep viewAnimationStepForView:view];
         NSAssert(viewAnimationStep != nil, @"Missing animation step; data consistency failure");
+        
+        // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
+        //         animate properties but do not set them)
+        NSMutableArray *animations = [NSMutableArray array];
         
         // Opacity always between 0.f and 1.f
         CGFloat opacity = view.layer.opacity + viewAnimationStep.alphaVariation;
@@ -247,115 +250,13 @@
             opacity = 1.f;
         }
         
-        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system
-        // centered on the view
-        // TODO: resizeViews
-        // TODO: Access layer properties, not view ones
-        CATransform3D translationTransform = CATransform3DMakeTranslation(-view.layer.transform.m41, -view.layer.transform.m42, 0.f);
-        CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, viewAnimationStep.transform),
-                                                          CATransform3DInvert(translationTransform));
-        CATransform3D transform = CATransform3DConcat(view.layer.transform, convTransform);
-        
-        // Create the animation group for all properties to be animated. Explicit CABasicAnimations are required
-        // to animate properties of a layer (layers associated with views do not participate in implicit animations)
         if (actuallyAnimated) {
             CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
             [opacityAnimation setFromValue:[NSNumber numberWithFloat:view.layer.opacity]];
             [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
-            
-            CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-            [transformAnimation setFromValue:[NSValue valueWithCATransform3D:view.layer.transform]];
-            [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
-            
-            CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-            animationGroup.animations = [NSArray arrayWithObjects:opacityAnimation, transformAnimation, nil];
-            if (view == [[animationStep views] lastObject]) {
-                [animationGroup setDelegate:self];
-                [animationGroup setValue:animationStep forKey:@"animationStep"];
-            }
-            [view.layer addAnimation:animationGroup forKey:nil];
+            [animations addObject:opacityAnimation];
         }
-        
-        // Set the final values (required: Animations do not alter them 
         view.layer.opacity = opacity;
-        view.layer.transform = transform;
-    }
-    
-    // Animated
-    if (actuallyAnimated) {
-        [CATransaction commit];
-    }
-    // Instantaneous
-    else {
-        // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
-        // played with animated = YES are still notified as animated)
-        if (! self.cancelling) {
-            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
-            }
-        }
-        
-        [self playNextStepAnimated:animated];
-    }
-    
-#if 0
-    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
-    // in animations
-    if (animated && ! doubleeq(animationStep.duration, 0.f)) {
-        [UIView beginAnimations:nil context:animationStep];
-        
-        [UIView setAnimationDuration:animationStep.duration];
-        [UIView setAnimationCurve:animationStep.curve];
-        [UIView setAnimationDelay:m_delay];
-        
-        // The delay is just used for the first step. Set it to 0 for the remaining ones
-        m_delay = 0.;
-        
-        // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context:, though appearing
-        //         in the UIKit UIView header documentation, are reserved by Apple. Using them might lead to app rejection!
-        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
-        [UIView setAnimationDelegate:self];
-    }
-    // Instantaneous
-    else {
-        // First step
-        if ([self.animationSteps indexOfObject:animationStep] == 0) {
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:animated];
-            }
-        }
-    }
-    
-    // Animate the dummy view
-    self.dummyView.alpha = 1.f - self.dummyView.alpha;
-    
-    // Animate all views in the animation step
-    for (UIView *view in [animationStep views]) {
-        // The views are brought to the front in the order they were registered with the animation step
-        if (self.bringToFront) {
-            [view.superview bringSubviewToFront:view];
-        }
-        
-        HLSViewAnimationStep *viewAnimationStep = [animationStep viewAnimationStepForView:view];
-        NSAssert(viewAnimationStep != nil, @"Missing animation step; data consistency failure");
-        
-        // Alpha always between 0.f and 1.f
-        CGFloat alpha = view.alpha + viewAnimationStep.alphaVariation;
-        if (floatlt(alpha, -1.f)) {
-            HLSLoggerWarn(@"Animation steps adding to value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", view);
-            view.alpha = -1.f;
-        }
-        else if (floatgt(alpha, 1.f)) {
-            HLSLoggerWarn(@"Animation steps adding to value larger than 1 for view %@. Fixed to 1, but your animation is incorrect", view);
-            view.alpha = 1.f;
-        }
-        else {
-            view.alpha = alpha;
-        }
-        
-        // In all cases, the transform has to be applied on the view center. This requires a conversion in the coordinate system
-        // centered on the view.
         
         // Alter frame
         if (self.resizeViews) {
@@ -371,28 +272,73 @@
                 continue;
             }
             
+            // TODO: Use layer properties
             CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
-            CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, affineTransform),
-                                                                      CGAffineTransformInvert(translationTransform));
-            view.frame = CGRectApplyAffineTransform(view.frame, convTransform);
+            CGAffineTransform affineConvTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, affineTransform),
+                                                                            CGAffineTransformInvert(translationTransform));
+            CGRect endFrame = CGRectApplyAffineTransform(view.layer.frame, affineConvTransform);
+            
+            // The CALayer frame cannot be animated, we must animate bounds and position instead. Calculate them
+            CGRect endBounds = CGRectMake(0.f, 0.f, CGRectGetWidth(endFrame), CGRectGetHeight(endFrame));
+            CGPoint positionOffset = CGPointMake(CGRectGetMidX(endFrame) - CGRectGetMidX(view.layer.frame),
+                                                 CGRectGetMidY(endFrame) - CGRectGetMidY(view.layer.frame));
+            CGPoint endPosition = CGPointMake(view.layer.position.x + positionOffset.x,
+                                              view.layer.position.y + positionOffset.y);
+            
+            if (actuallyAnimated) {
+                CABasicAnimation *boundsAnimation = [CABasicAnimation animationWithKeyPath:@"bounds"];
+                [boundsAnimation setFromValue:[NSValue valueWithCGRect:view.layer.bounds]];
+                [boundsAnimation setToValue:[NSValue valueWithCGRect:endBounds]];
+                [animations addObject:boundsAnimation];
+                
+                CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+                [positionAnimation setFromValue:[NSValue valueWithCGPoint:view.layer.position]];
+                [positionAnimation setToValue:[NSValue valueWithCGPoint:endPosition]];
+                [animations addObject:positionAnimation];
+            }
+            view.layer.bounds = endBounds;
+            view.layer.position = endPosition;
             
             // Ensure better subview resizing in some cases (e.g. UISearchBar)
-            [view layoutIfNeeded];
+            [view.layer layoutIfNeeded];
         }
         // Alter transform
         else {
-            CATransform3D translationTransform = CATransform3DMakeTranslation(-view.transform.tx, -view.transform.ty, 0.f);
+            CATransform3D translationTransform = CATransform3DMakeTranslation(-view.layer.transform.m41, -view.layer.transform.m42, 0.f);
             CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, viewAnimationStep.transform),
                                                               CATransform3DInvert(translationTransform));
-            view.layer.transform = CATransform3DConcat(view.layer.transform, convTransform);
+            CATransform3D transform = CATransform3DConcat(view.layer.transform, convTransform);
+            
+            if (actuallyAnimated) {
+                CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+                [transformAnimation setFromValue:[NSValue valueWithCATransform3D:view.layer.transform]];
+                [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
+                [animations addObject:transformAnimation];
+            }
+            view.layer.transform = transform;
         }
+        
+        // Create the animation group and attach it to the layer
+        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+        animationGroup.animations = [NSArray arrayWithArray:animations];
+        [view.layer addAnimation:animationGroup forKey:nil];
     }
     
+    // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
+    // which will receive the start / end animation events
+    if (actuallyAnimated) {
+        CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
+        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
+        dummyViewOpacityAnimation.delegate = self;
+        [dummyViewOpacityAnimation setValue:animationStep forKey:@"animationStep"];
+        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
+    }
+    self.dummyView.alpha = 1.f - self.dummyView.alpha;
+    
     // Animated
-    if (animated && ! doubleeq(animationStep.duration, 0.f)) {
-        [UIView commitAnimations];
-        
-        // The code will resume in the animationDidStop:finished:context: method
+    if (actuallyAnimated) {        
+        [CATransaction commit];
     }
     // Instantaneous
     else {
@@ -406,7 +352,6 @@
         
         [self playNextStepAnimated:animated];
     }
-#endif
 }
 
 - (void)playNextStepAnimated:(BOOL)animated
