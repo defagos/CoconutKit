@@ -139,7 +139,7 @@
     viewAnimationStep32.alphaVariation = -0.3f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:self.rectangleView2];
     HLSViewAnimationStep *viewAnimationStep33 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep33 scaleWithXFactor:0.5f yFactor:0.5f zFactor:0.5f];
+    [viewAnimationStep33 scaleWithXFactor:0.5f yFactor:0.5f zFactor:1.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep33 forView:self.rectangleView3];
     
     // Create the animation and play it
