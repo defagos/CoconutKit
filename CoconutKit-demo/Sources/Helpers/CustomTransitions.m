@@ -17,32 +17,32 @@
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup step bringing the appearingView outside the frame
-    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
-    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation11 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) z:0.f];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     // The animation
-    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
-    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep21 translateByVectorWithX:0.f y:CGRectGetHeight(frame) z:0.f];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation21 translateByVectorWithX:0.f y:CGRectGetHeight(frame) z:0.f];
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
     animationStep2.duration = 0.1;
     [animationSteps addObject:animationStep2];
     
-    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
-    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep31 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) / 3.f z:0.f];
-    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:appearingView];
+    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation31 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) / 3.f z:0.f];
+    [animationStep3 addLayerAnimation:layerAnimation31 forView:appearingView];
     animationStep3.duration = 0.15;
     [animationSteps addObject:animationStep3];
     
-    HLSViewAnimationGroup *animationStep4 = [HLSViewAnimationGroup animationStep];
-    HLSViewAnimation *viewAnimationStep41 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep41 translateByVectorWithX:0.f y:CGRectGetHeight(frame) / 3.f z:0.f];
-    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:appearingView];
+    HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation41 translateByVectorWithX:0.f y:CGRectGetHeight(frame) / 3.f z:0.f];
+    [animationStep4 addLayerAnimation:layerAnimation41 forView:appearingView];
     animationStep4.duration = 0.15;
     [animationSteps addObject:animationStep4];
     
@@ -56,10 +56,10 @@
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup step bringing the appearingView outside the frame
-    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
-    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:disappearingView];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation51 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) z:0.f];
+    [animationStep1 addLayerAnimation:layerAnimation51 forView:disappearingView];
     animationStep1.duration = 0.4;
     [animationSteps addObject:animationStep1];
     

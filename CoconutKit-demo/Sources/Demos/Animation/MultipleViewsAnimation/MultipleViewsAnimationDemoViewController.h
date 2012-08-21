@@ -18,7 +18,6 @@
     UIButton *m_terminateButton;
     UISwitch *m_animatedSwitch;
     UISwitch *m_blockingSwitch;
-    UISwitch *m_resizingSwitch;
     HLSAnimation *m_animation;
     HLSAnimation *m_reverseAnimation;
 }
@@ -33,7 +32,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *terminateButton;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *blockingSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *resizingSwitch;
 
 - (IBAction)playForward:(id)sender;
 - (IBAction)playBackward:(id)sender;

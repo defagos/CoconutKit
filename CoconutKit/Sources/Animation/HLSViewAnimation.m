@@ -23,7 +23,7 @@
  *     general move the frame anchor point
  *   - transforms generated for view / layer animations are meant to be applied on the transform property of a view
  *     (resp. its layer). This has some important consequences when calculating the reverse view or layer animation.
- *     The inverse is namely not simply CATransform3DInvert([self transform]). Since we are applying the changes in 
+ *     The reverse is namely not simply CATransform3DInvert([self transform]). Since we are applying the changes in 
  *     the coordinate system centered on the original view or layer frame, we must do the same when the animation is 
  *     played backwards. Therefore, the reverse transform we need is not the inverse of transform = T * S * R, i.e. not 
  *     transform^{-1} = R^{-1} * S^{-1} * T^{-1}, but the transform applying the inverse rotation, scaling and 
@@ -146,7 +146,7 @@
 
 #pragma mark Reverse animation
 
-- (HLSViewAnimation *)reverseViewAnimation
+- (id)reverseObjectAnimation
 {
     // See remarks at the beginning
     HLSViewAnimation *reverseViewAnimation = [HLSViewAnimation viewAnimation];

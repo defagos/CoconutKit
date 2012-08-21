@@ -132,7 +132,7 @@
 
 #pragma mark Reverse animation
 
-- (HLSLayerAnimation *)reverseLayerAnimation
+- (id)reverseObjectAnimation
 {
     // See remarks at the beginning
     HLSLayerAnimation *reverseLayerAnimation = [HLSLayerAnimation layerAnimation];

@@ -103,48 +103,48 @@
     self.cancelButton.hidden = NO;
     self.terminateButton.hidden = NO;
     
-    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
     animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
     animationStep1.curve = UIViewAnimationCurveEaseIn;
-    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep11 translateByVectorWithX:100.f y:100.f z:0.f];
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation viewAnimation];
+    [viewAnimation11 translateByVectorWithX:100.f y:100.f];
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView];
     
-    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
     animationStep2.tag = @"step2";
     animationStep2.duration = 1.;
-    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
-    viewAnimationStep21.alphaVariation = -0.3f;
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation viewAnimation];
+    viewAnimation21.alphaVariation = -0.3f;
+    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView];
     
-    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep3 = [HLSViewAnimationStep animationStep];
     animationStep3.tag = @"step3";
-    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep31 scaleWithXFactor:1.5f yFactor:1.5f zFactor:1.f];
-    [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation viewAnimation];
+    [viewAnimation31 scaleWithXFactor:1.5f yFactor:1.5f];
+    [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView];
     
-    HLSViewAnimationGroup *animationStep4 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep4 = [HLSViewAnimationStep animationStep];
     animationStep4.tag = @"step4";
-    HLSViewAnimation *viewAnimationStep41 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep41 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
-    [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation41 = [HLSViewAnimation viewAnimation];
+    [viewAnimation41 rotateByAngle:M_PI_4];
+    [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView];
     
-    HLSViewAnimationGroup *animationStep5 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep5 = [HLSViewAnimationStep animationStep];
     animationStep5.tag = @"step5";
     animationStep5.duration = 1.;
     animationStep5.curve = UIViewAnimationCurveLinear;
-    HLSViewAnimation *viewAnimationStep51 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep51 translateByVectorWithX:0.f y:200.f z:0.f];
-    [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation51 = [HLSViewAnimation viewAnimation];
+    [viewAnimation51 translateByVectorWithX:0.f y:200.f];
+    [animationStep5 addViewAnimation:viewAnimation51 forView:self.rectangleView];
     
-    HLSViewAnimationGroup *animationStep6 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimationStep *animationStep6 = [HLSViewAnimationStep animationStep];
     animationStep6.tag = @"step6";
     animationStep6.curve = UIViewAnimationCurveLinear;
-    HLSViewAnimation *viewAnimationStep61 = [HLSViewAnimation viewAnimationStep];
-    [viewAnimationStep61 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
-    viewAnimationStep61.alphaVariation = 0.3f;
-    [animationStep6 addViewAnimationStep:viewAnimationStep61 forView:self.rectangleView];
+    HLSViewAnimation *viewAnimation61 = [HLSViewAnimation viewAnimation];
+    [viewAnimation61 rotateByAngle:M_PI_4];
+    viewAnimation61.alphaVariation = 0.3f;
+    [animationStep6 addViewAnimation:viewAnimation61 forView:self.rectangleView];
     
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
@@ -229,7 +229,7 @@
     HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
-- (void)animationStepFinished:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSViewAnimationStep *)animationStep animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
 }

@@ -6,24 +6,27 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+#import "HLSObjectAnimation.h"
 #import "HLSVector.h"
 
 /**
- * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation group
- * (HLSLayerAnimationGroup). An animation group is the combination of several layer animations applied
+ * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
+ * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied
  * to a set of layerss, and represent the collective set of changes applied to them during some time interval.
- * An animation (HLSAnimation) is then simply a collection of animation groups, either view-based
- * (HLSViewAnimationGroup) or layer-based (HLSLayerAnimationGroup).
+ * An animation (HLSAnimation) is then simply a collection of animation steps, either view-based
+ * (HLSViewAnimationStep) or layer-based (HLSLayerAnimationStep).
  *
  * A layer animation animates layer transforms. This choice was made because frame animation would limit
- * transforms to affine transforms, for which HLSViewAnimation can be used (if the layer belongs to a view,
- * of course). Moreover, unlike views, layers do not layout their sublayers automatically based on autoresizing 
- * properties (which are not available in iOS; -[CALayer layoutSublayers] or -[UIView layoutSublayersForLayer]
- * must be implemented in subclasses for such purposes, the latter if the layer belongs to a view)
+ * transforms to affine transforms, for which HLSViewAnimation can be used instead (provided the layer belongs 
+ * to a view, of course). Moreover, unlike views, layers do not layout their sublayers automatically based 
+ * on autoresizing properties in iOS.
  *
- * Designated initializer: init (create a layer animation group with default settings)
+ * Since transforms and not frames are altered, animated views do not have to implement any of the sublayer
+ * layout callbacks (usually -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:])
+ *
+ * Designated initializer: init (create a layer animation step with default settings)
  */
-@interface HLSLayerAnimation : NSObject <NSCopying> {
+@interface HLSLayerAnimation : NSObject <HLSObjectAnimation> {
 @private
     HLSVector4 m_rotationParameters;
     HLSVector3 m_scaleParameters;
@@ -63,10 +66,5 @@
  * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
  */
 @property (nonatomic, readonly, assign) CATransform3D transform;
-
-/**
- * Return the inverse layer animation
- */
-- (HLSLayerAnimation *)reverseLayerAnimation;
 
 @end

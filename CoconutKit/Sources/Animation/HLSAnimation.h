@@ -9,7 +9,6 @@
 #import "HLSAnimationStep.h"
 
 // Forward declarations
-@class HLSViewAnimationGroup;
 @class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
@@ -47,15 +46,13 @@
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private
-    NSArray *m_animationSteps;                              // contains HLSAnimationStep objects
-    NSEnumerator *m_animationStepsEnumerator;               // enumerator over steps
-    HLSViewAnimationGroup *m_currentAnimationStep;
+    NSArray *m_animationSteps;                                     // contains HLSAnimationStep objects
+    NSEnumerator *m_animationStepsEnumerator;                      // enumerator over steps
+    HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
     UIView *m_dummyView;
-    BOOL m_resizeViews;
     BOOL m_lockingUI;
-    BOOL m_bringToFront;
     NSTimeInterval m_delay;
     BOOL m_animated;
     BOOL m_running;
@@ -69,7 +66,7 @@
  * animation
  */
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
-+ (HLSAnimation *)animationWithAnimationStep:(HLSViewAnimationGroup *)animationStep;
++ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
 /**
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
@@ -94,28 +91,11 @@
 @property (nonatomic, retain) NSDictionary *userInfo;
 
 /**
- * If set to YES, the views and their subviews will be resized according to their autoresizing mask during the 
- * animation. Otherwise views will only be scaled.
- * Default is NO
- */
-@property (nonatomic, assign, getter=isResizeViews) BOOL resizeViews;
-
-/**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
  * the running documentation for more information about what this means)
  * Default is NO
  */
 @property (nonatomic, assign) BOOL lockingUI;
-
-/**
- * If set to YES, the views to animate are brought to the front during the animation (their original z-ordering is
- * not restored at the end). The relative z-ordering between the involved views is given by the order in which they 
- * were registered within each animation step (first one added will be bottommost one). The z-ordering might
- * therefore change with each animation step, and the final ordering will be the one given by the last animation 
- * step
- * Default is NO
- */
-@property (nonatomic, assign) BOOL bringToFront;
 
 /**
  * Return YES while the animation is running. An animation is running from the call to a play method until
@@ -169,12 +149,6 @@
 @property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
 
 /**
- * Return the total alpha variation applied to a given view during the animation. If the view does not belong to the 
- * views involved in the animation, the method returns 0.f
- */
-- (CGFloat)alphaVariationForView:(UIView *)view;
-
-/**
  * Generate a copy of the animation, but overrides its total duration with a new one. The original appearance of
  * the animation is preserved (it is only faster or slower depending on the new duration). If an invalid negative
  * duration is provided, the method returns nil
@@ -206,6 +180,6 @@
 /**
  * Called when a step has been executed
  */
-- (void)animationStepFinished:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated;
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end

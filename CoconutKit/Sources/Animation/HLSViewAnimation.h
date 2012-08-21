@@ -6,24 +6,25 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSObjectAnimation.h"
 #import "HLSVector.h"
 
 /**
- * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation group 
- * (HLSViewAnimationGroup). An animation group is the combination of several view animations applied 
+ * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
+ * (HLSViewAnimationStep). An animation step is the combination of several view animations applied 
  * to a set of views, and represent the collective set of changes applied to them during some time interval. 
- * An animation (HLSAnimation) is then simply a collection of animation groups, either view-based
- * (HLSViewAnimationGroup) or layer-based (HLSLayerAnimationGroup).
+ * An animation (HLSAnimation) is then simply a collection of animation steps, either view-based
+ * (HLSViewAnimationStep) or layer-based (HLSLayerAnimationStep).
  *
- * A view animation:
- *   - animates view frames. Those views have to correctly respond to such changes, either by setting
- *     their autoresizing mask properly, or by implementing -layoutSubviews if they need more control
+ * Note that a view animation:
+ *   - animates view frames. The animated views have to correctly respond to such changes, either by setting
+ *     their autoresizing mask properly, or by implementing -layoutSubviews if they need a finer control
  *     over the resizing process
  *   - applies only affine operations
  *
- * Designated initializer: init (create a view animation group with default settings)
+ * Designated initializer: init (create a view animation step with default settings)
  */
-@interface HLSViewAnimation : NSObject <NSCopying> {
+@interface HLSViewAnimation : NSObject <HLSObjectAnimation> {
 @private
     CGFloat m_rotationAngle;
     HLSVector2 m_scaleParameters;
@@ -63,10 +64,5 @@
  * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
  */
 @property (nonatomic, readonly, assign) CGAffineTransform transform;
-
-/**
- * Return the inverse view animation
- */
-- (HLSViewAnimation *)reverseViewAnimation;
 
 @end
