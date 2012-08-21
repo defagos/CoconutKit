@@ -44,14 +44,16 @@
 		6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */; };
 		6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */; };
 		6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */; };
-		6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BD9815E28CBB00E5182E /* HLSLayerAnimationStep.h */; };
-		6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9915E28CBB00E5182E /* HLSLayerAnimationStep.m */; };
+		6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */; };
+		6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */; };
+		6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationGroup.h */; };
+		6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationGroup.m */; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
 		6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
-		6FADE59B14BA0494007EE121 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSAnimationStep.h */; };
-		6FADE59C14BA0494007EE121 /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51514BA0494007EE121 /* HLSAnimationStep.m */; };
-		6FADE59D14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51614BA0494007EE121 /* HLSViewAnimationStep.h */; };
-		6FADE59E14BA0494007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51714BA0494007EE121 /* HLSViewAnimationStep.m */; };
+		6FADE59B14BA0494007EE121 /* HLSViewAnimationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSViewAnimationGroup.h */; };
+		6FADE59C14BA0494007EE121 /* HLSViewAnimationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51514BA0494007EE121 /* HLSViewAnimationGroup.m */; };
+		6FADE59D14BA0494007EE121 /* HLSViewAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51614BA0494007EE121 /* HLSViewAnimation.h */; };
+		6FADE59E14BA0494007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51714BA0494007EE121 /* HLSViewAnimation.m */; };
 		6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51914BA0494007EE121 /* HLSAssert.h */; };
 		6FADE5A014BA0494007EE121 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51A14BA0494007EE121 /* HLSAssert.m */; };
 		6FADE5A214BA0494007EE121 /* HLSConverters.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51C14BA0494007EE121 /* HLSConverters.h */; };
@@ -248,14 +250,16 @@
 		6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
-		6FA5BD9815E28CBB00E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
-		6FA5BD9915E28CBB00E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
+		6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimation.h; sourceTree = "<group>"; };
+		6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
+		6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationGroup.h; sourceTree = "<group>"; };
+		6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationGroup.m; sourceTree = "<group>"; };
 		6FADE51214BA0494007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE51314BA0494007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
-		6FADE51414BA0494007EE121 /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
-		6FADE51514BA0494007EE121 /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
-		6FADE51614BA0494007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
-		6FADE51714BA0494007EE121 /* HLSViewAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimationStep.m; sourceTree = "<group>"; };
+		6FADE51414BA0494007EE121 /* HLSViewAnimationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationGroup.h; sourceTree = "<group>"; };
+		6FADE51514BA0494007EE121 /* HLSViewAnimationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimationGroup.m; sourceTree = "<group>"; };
+		6FADE51614BA0494007EE121 /* HLSViewAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimation.h; sourceTree = "<group>"; };
+		6FADE51714BA0494007EE121 /* HLSViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimation.m; sourceTree = "<group>"; };
 		6FADE51914BA0494007EE121 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6FADE51A14BA0494007EE121 /* HLSAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAssert.m; sourceTree = "<group>"; };
 		6FADE51C14BA0494007EE121 /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
@@ -492,12 +496,14 @@
 			children = (
 				6FADE51214BA0494007EE121 /* HLSAnimation.h */,
 				6FADE51314BA0494007EE121 /* HLSAnimation.m */,
-				6FADE51414BA0494007EE121 /* HLSAnimationStep.h */,
-				6FADE51514BA0494007EE121 /* HLSAnimationStep.m */,
-				6FA5BD9815E28CBB00E5182E /* HLSLayerAnimationStep.h */,
-				6FA5BD9915E28CBB00E5182E /* HLSLayerAnimationStep.m */,
-				6FADE51614BA0494007EE121 /* HLSViewAnimationStep.h */,
-				6FADE51714BA0494007EE121 /* HLSViewAnimationStep.m */,
+				6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationGroup.h */,
+				6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationGroup.m */,
+				6FADE51414BA0494007EE121 /* HLSViewAnimationGroup.h */,
+				6FADE51514BA0494007EE121 /* HLSViewAnimationGroup.m */,
+				6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */,
+				6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */,
+				6FADE51614BA0494007EE121 /* HLSViewAnimation.h */,
+				6FADE51714BA0494007EE121 /* HLSViewAnimation.m */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -720,8 +726,8 @@
 			files = (
 				AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */,
 				6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */,
-				6FADE59B14BA0494007EE121 /* HLSAnimationStep.h in Headers */,
-				6FADE59D14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */,
+				6FADE59B14BA0494007EE121 /* HLSViewAnimationGroup.h in Headers */,
+				6FADE59D14BA0494007EE121 /* HLSViewAnimation.h in Headers */,
 				6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */,
 				6FADE5A214BA0494007EE121 /* HLSConverters.h in Headers */,
 				6FADE5A414BA0494007EE121 /* HLSError.h in Headers */,
@@ -809,7 +815,8 @@
 				6F8C933B15CEE623006D892C /* HLSContainerGroupView.h in Headers */,
 				6F8C934815CEF0DB006D892C /* HLSContainerStackView.h in Headers */,
 				6FF3E6EF15D2E4C900AB9A53 /* HLSTransition.h in Headers */,
-				6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimationStep.h in Headers */,
+				6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */,
+				6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationGroup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,8 +918,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */,
-				6FADE59C14BA0494007EE121 /* HLSAnimationStep.m in Sources */,
-				6FADE59E14BA0494007EE121 /* HLSViewAnimationStep.m in Sources */,
+				6FADE59C14BA0494007EE121 /* HLSViewAnimationGroup.m in Sources */,
+				6FADE59E14BA0494007EE121 /* HLSViewAnimation.m in Sources */,
 				6FADE5A014BA0494007EE121 /* HLSAssert.m in Sources */,
 				6FADE5A314BA0494007EE121 /* HLSConverters.m in Sources */,
 				6FADE5A514BA0494007EE121 /* HLSError.m in Sources */,
@@ -992,7 +999,8 @@
 				6F8C933C15CEE623006D892C /* HLSContainerGroupView.m in Sources */,
 				6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */,
 				6FF3E6F015D2E4C900AB9A53 /* HLSTransition.m in Sources */,
-				6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimationStep.m in Sources */,
+				6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */,
+				6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

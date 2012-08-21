@@ -266,13 +266,13 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 // therefore need a way to generate the animation easily when we need it
 - (HLSAnimation *)expansionAnimation
 {
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
     animationStep1.duration = 0.15;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = 1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.searchBar];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
     animationStep2.duration = 0.25;
     
     CGRect collapsedFrame;
@@ -289,7 +289,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
                                     kSearchBarStandardHeight);    
     }
     
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 transformFromRect:collapsedFrame
                                     toRect:CGRectMake(0.f, 
                                                       roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
@@ -298,7 +298,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.searchBar];
     
     if (self.alignment == HLSExpandingSearchBarAlignmentRight) {
-        HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+        HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
         [viewAnimationStep22 transformFromRect:collapsedFrame
                                         toRect:CGRectMake(0.f, 
                                                           roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),

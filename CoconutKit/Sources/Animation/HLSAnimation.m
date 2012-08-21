@@ -22,14 +22,14 @@
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
-@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
+@property (nonatomic, retain) HLSViewAnimationGroup *currentAnimationStep;
 @property (nonatomic, retain) UIView *dummyView;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
-- (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
+- (void)playStep:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated;
 
 - (void)playNextStepAnimated:(BOOL)animated;
 
@@ -47,7 +47,7 @@
     return [[[[self class] alloc] initWithAnimationSteps:animationSteps] autorelease];
 }
 
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
++ (HLSAnimation *)animationWithAnimationStep:(HLSViewAnimationGroup *)animationStep
 {
     NSArray *animationSteps = nil;
     if (animationStep) {
@@ -63,7 +63,7 @@
 
 - (id)initWithAnimationSteps:(NSArray *)animationSteps
 {
-    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
+    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSViewAnimationGroup);
     if ((self = [super init])) {
         if (! animationSteps) {
             self.animationSteps = [NSArray array];
@@ -132,7 +132,7 @@
 - (CGFloat)alphaVariationForView:(UIView *)view
 {
     CGFloat alphaVariation = 0.f;
-    for (HLSAnimationStep *animationStep in self.animationSteps) {
+    for (HLSViewAnimationGroup *animationStep in self.animationSteps) {
         alphaVariation += [animationStep alphaVariationForView:view];
     }
     return alphaVariation;
@@ -156,7 +156,7 @@
 - (NSTimeInterval)duration
 {
     NSTimeInterval duration = 0.;
-    for (HLSAnimationStep *animationStep in self.animationSteps) {
+    for (HLSViewAnimationGroup *animationStep in self.animationSteps) {
         duration += animationStep.duration;
     }
     return duration;
@@ -200,7 +200,19 @@
     [self playAnimated:YES];
 }
 
-- (void)playStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)playViewBlockBasedAnimationStep:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
+{
+    // UIView animation block
+}
+
+- (void)playCoreAnimationAnimationStep:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
+{
+    // CATransaction
+}
+
+TODO: 2 flavors for HLSViewAnimationGroup: UIView or CA
+
+- (void)playStep:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
 {
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
@@ -472,7 +484,7 @@
     double factor = duration / [self duration];
     
     // Distribute the total duration evenly among animation steps
-    for (HLSAnimationStep *animationStep in animation.animationSteps) {
+    for (HLSViewAnimationGroup *animationStep in animation.animationSteps) {
         animationStep.duration *= factor;
     }
     
@@ -484,7 +496,7 @@
     HLSAnimation *reverseAnimation = nil;
     if (self.animationSteps) {
         NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
-        for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
+        for (HLSViewAnimationGroup *animationStep in [self.animationSteps reverseObjectEnumerator]) {
             [reverseAnimationSteps addObject:[animationStep reverseAnimationStep]];
         }
         reverseAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
@@ -509,8 +521,8 @@
     HLSAnimation *animationCopy = nil;
     if (self.animationSteps) {
         NSMutableArray *animationStepCopies = [NSMutableArray array];
-        for (HLSAnimationStep *animationStep in self.animationSteps) {
-            HLSAnimationStep *animationStepCopy = [[animationStep copyWithZone:zone] autorelease];
+        for (HLSViewAnimationGroup *animationStep in self.animationSteps) {
+            HLSViewAnimationGroup *animationStepCopy = [[animationStep copyWithZone:zone] autorelease];
             [animationStepCopies addObject:animationStepCopy];
         }
         animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];
@@ -536,7 +548,7 @@
     // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
     // set). Do not notify the delegate in such cases
     if (! self.cancelling) {
-        HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
+        HLSViewAnimationGroup *animationStep = [animation valueForKey:@"animationStep"];
         
         // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
         // delay period is over, as for UIView animation blocks)
@@ -561,7 +573,7 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
+        HLSViewAnimationGroup *animationStep = [animation valueForKey:@"animationStep"];
         [self.delegate animationStepFinished:animationStep animated:m_animated];
     }
     

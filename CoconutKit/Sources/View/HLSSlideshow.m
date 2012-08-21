@@ -416,24 +416,24 @@ static const NSInteger kSlideshowNoIndex = -1;
                                           transitionDuration:(NSTimeInterval)transitionDuration
 {
     // Initially hide the next image
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
     animationStep1.duration = 0.;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:nextImageView];
     
     // Display the current image for the duration which has been set
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
     animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
     
     // Transition to the next image
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
     animationStep3.duration = transitionDuration;
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep32 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep32.alphaVariation = 1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:nextImageView];
     
@@ -455,9 +455,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat currentImageYOffset = 0.f;
     NSDictionary *userInfo = self.animation.userInfo;
     
-    HLSAnimationStep *animationStep0 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep0 = [HLSViewAnimationGroup animationStep];
     animationStep0.duration = 0.;
-    HLSViewAnimationStep *viewAnimationStep01 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep01 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep01.alphaVariation = -1.f;
     [animationStep0 addViewAnimationStep:viewAnimationStep01 forView:nextImageView];
     
@@ -475,7 +475,7 @@ static const NSInteger kSlideshowNoIndex = -1;
                                     xOffset:&currentImageXOffset 
                                     yOffset:&currentImageYOffset];
         
-        HLSViewAnimationStep *viewAnimationStep02 = [HLSViewAnimationStep viewAnimationStep];
+        HLSViewAnimation *viewAnimationStep02 = [HLSViewAnimation viewAnimationStep];
         CGFloat scaleFactor02 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
         CGFloat xOffset02 = currentImageXOffset * self.transitionDuration / totalDuration;
         CGFloat yOffset02 = currentImageYOffset * self.transitionDuration / totalDuration;
@@ -493,12 +493,12 @@ static const NSInteger kSlideshowNoIndex = -1;
                                 yOffset:&nextImageYOffset];
     
     // Displaying the current image
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
     animationStep1.tag = @"singleImage";
     animationStep1.curve = UIViewAnimationCurveLinear;         // Linear for smooth transition between steps
     animationStep1.duration = self.imageDuration;
     
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     CGFloat scaleFactor11 = powf(currentImageScaleFactor, self.imageDuration / totalDuration);
     CGFloat xOffset11 = currentImageXOffset * self.imageDuration / totalDuration;
     CGFloat yOffset11 = currentImageYOffset * self.imageDuration / totalDuration;
@@ -507,11 +507,11 @@ static const NSInteger kSlideshowNoIndex = -1;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:currentImageView];
     
     // Transition
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
     animationStep2.curve = UIViewAnimationCurveLinear;
     animationStep2.duration = self.transitionDuration;
     
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     CGFloat scaleFactor21 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset21 = currentImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset21 = currentImageYOffset * self.transitionDuration / totalDuration;
@@ -520,7 +520,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     viewAnimationStep21.alphaVariation = -1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:currentImageView];
     
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     CGFloat scaleFactor22 = powf(nextImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset22 = nextImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset22 = nextImageYOffset * self.transitionDuration / totalDuration;
@@ -546,24 +546,24 @@ static const NSInteger kSlideshowNoIndex = -1;
                                                    yOffset:(CGFloat)yOffset
 {
     // Move the next image to its initial position
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
     animationStep1.duration = 0.;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:nextImageView];
     
     // Display the current image for the duration which has been set (identity view animation step)
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
     animationStep2.tag = @"singleImage";
     animationStep2.duration = self.imageDuration;
     
     // Transition to the next image
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
     animationStep3.duration = self.transitionDuration;
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:currentImageView];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep32 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep32 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:nextImageView];
     
@@ -780,7 +780,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
 {
     if ([animationStep.tag isEqualToString:@"singleImage"]) {
         UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];

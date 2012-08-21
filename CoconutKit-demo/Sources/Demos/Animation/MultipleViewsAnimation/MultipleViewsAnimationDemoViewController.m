@@ -100,45 +100,45 @@
     self.cancelButton.hidden = NO;
     self.terminateButton.hidden = NO;
     
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
     animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:50.f y:60.f z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.rectangleView1];
-    HLSViewAnimationStep *viewAnimationStep12 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep12 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep12 translateByVectorWithX:40.f y:-10.f z:0.f];
     viewAnimationStep12.alphaVariation = -0.4f;
     [animationStep1 addViewAnimationStep:viewAnimationStep12 forView:self.rectangleView2];
-    HLSViewAnimationStep *viewAnimationStep13 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep13 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep13 translateByVectorWithX:0.f y:100.f z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep13 forView:self.rectangleView3];
-    HLSViewAnimationStep *viewAnimationStep14 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep14 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep14.alphaVariation = -0.8f;
     [animationStep1 addViewAnimationStep:viewAnimationStep14 forView:self.rectangleView4];
     
     // Can also apply the same view animation step to all views
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
     animationStep2.tag = @"step2";
     animationStep2.duration = 1.;
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:80.f y:0.f z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView1];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView2];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView3];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.rectangleView4];
     
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
     animationStep3.tag = @"step3";
     animationStep3.duration = 0.5;
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep31 scaleWithXFactor:1.5f yFactor:2.f zFactor:1.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:self.rectangleView1];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep32 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep32 scaleWithXFactor:2.f yFactor:1.5f zFactor:1.f];
     viewAnimationStep32.alphaVariation = -0.3f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:self.rectangleView2];
-    HLSViewAnimationStep *viewAnimationStep33 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep33 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep33 scaleWithXFactor:0.5f yFactor:0.5f zFactor:1.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep33 forView:self.rectangleView3];
     
@@ -203,7 +203,7 @@
     HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
 }

@@ -9,7 +9,7 @@
 #import "HLSAnimationStep.h"
 
 // Forward declarations
-@class HLSAnimationStep;
+@class HLSViewAnimationGroup;
 @class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
@@ -44,13 +44,12 @@
  * Other transforms will be ignored, and a warning message will be logged
  *
  * Designated initializer: initWithAnimationSteps:
- * NSCopying behavior: Deep copy
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private
     NSArray *m_animationSteps;                              // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;               // enumerator over steps
-    HLSAnimationStep *m_currentAnimationStep;
+    HLSViewAnimationGroup *m_currentAnimationStep;
     NSString *m_tag;
     NSDictionary *m_userInfo;
     UIView *m_dummyView;
@@ -70,7 +69,7 @@
  * animation
  */
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
++ (HLSAnimation *)animationWithAnimationStep:(HLSViewAnimationGroup *)animationStep;
 
 /**
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
@@ -207,6 +206,6 @@
 /**
  * Called when a step has been executed
  */
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
+- (void)animationStepFinished:(HLSViewAnimationGroup *)animationStep animated:(BOOL)animated;
 
 @end

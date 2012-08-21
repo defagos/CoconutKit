@@ -1,6 +1,5 @@
 HLSActionSheet.h
 HLSAnimation.h
-HLSAnimationStep.h
 HLSApplicationPreloader.h
 HLSAssert.h
 HLSContainerStack.h
@@ -11,7 +10,8 @@ HLSExpandingSearchBar.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLabel.h
-HLSLayerAnimationStep.h
+HLSLayerAnimation.h
+HLSLayerAnimationGroup.h
 HLSLogger.h
 HLSManagedObjectCopying.h
 HLSModelManager.h
@@ -40,7 +40,8 @@ HLSValidators.h
 HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
 HLSVector.h
-HLSViewAnimationStep.h
+HLSViewAnimation.h
+HLSViewAnimationGroup.h
 HLSViewController.h
 HLSWebViewController.h
 HLSWizardViewController.h

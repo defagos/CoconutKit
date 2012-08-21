@@ -130,15 +130,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -155,18 +155,18 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -183,26 +183,26 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
     // Make the disappearing view invisible
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
     animationStep3.duration = 0.;
@@ -219,33 +219,33 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep32 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep32.alphaVariation = 1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:appearingView];
     animationStep3.duration = 0.2;
     [animationSteps addObject:animationStep3];
     
     // Make the disappearing view invisible
-    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep4 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep41 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep41.alphaVariation = -1.f;
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:disappearingView];
     animationStep4.duration = 0.;
@@ -262,27 +262,27 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [viewAnimationStep21 scaleWithXFactor:0.5f yFactor:0.5f zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
     // Make the disappearing view invisible
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep31.alphaVariation = -1.f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
     animationStep3.duration = 0.;
@@ -299,31 +299,31 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     animationStep2.duration = 0.2;
     [animationSteps addObject:animationStep2];
     
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:appearingView];
     animationStep3.duration = 0.2;
     [animationSteps addObject:animationStep3];
     
-    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep4 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep41 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep41 scaleWithXFactor:1.f / kPushToTheBackScaleFactor yFactor:1.f / kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:disappearingView];
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:appearingView];
@@ -331,8 +331,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep4];
     
     // Make the disappearing view invisible
-    HLSAnimationStep *animationStep5 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep51 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep5 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep51 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep51.alphaVariation = -1.f;
     [animationStep5 addViewAnimationStep:viewAnimationStep51 forView:disappearingView];
     animationStep5.duration = 0.;
@@ -350,41 +350,41 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep21.alphaVariation = -0.5f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.curve = UIViewAnimationCurveEaseOut;
     animationStep2.duration = 0.2;
     [animationSteps addObject:animationStep2];
     
-    HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep3 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep31 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep31.alphaVariation = 0.5f;
     [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:appearingView];
-    HLSViewAnimationStep *viewAnimationStep32 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep32 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep32.alphaVariation = -0.5f;
     [animationStep3 addViewAnimationStep:viewAnimationStep32 forView:disappearingView];
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
     
-    HLSAnimationStep *animationStep4 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep41 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep4 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep41 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep4 addViewAnimationStep:viewAnimationStep41 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep42 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep42 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep42.alphaVariation = 0.5f;
     [animationStep4 addViewAnimationStep:viewAnimationStep42 forView:appearingView];
@@ -643,15 +643,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep21.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -670,18 +670,18 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep22.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -700,17 +700,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep21.alphaVariation = -1.f;
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     viewAnimationStep22.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -956,16 +956,16 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
                                   yFactor:1.f / kEmergeFromCenterScaleFactor
                                   zFactor:1.f];
@@ -988,22 +988,22 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup animation step
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep1 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep11 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
     viewAnimationStep11.alphaVariation = -1.f;
     [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimationGroup *animationStep2 = [HLSViewAnimationGroup animationStep];
+    HLSViewAnimation *viewAnimationStep21 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
                                   yFactor:1.f / kEmergeFromCenterScaleFactor
                                   zFactor:1.f];
     viewAnimationStep21.alphaVariation = 1.f;
     [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:appearingView];
-    HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+    HLSViewAnimation *viewAnimationStep22 = [HLSViewAnimation viewAnimationStep];
     [viewAnimationStep22 scaleWithXFactor:kPushToTheBackScaleFactor
                                   yFactor:kPushToTheBackScaleFactor
                                   zFactor:1.f];
