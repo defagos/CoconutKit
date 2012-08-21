@@ -34,11 +34,9 @@
 
 @interface HLSViewAnimation ()
 
-@property (nonatomic, assign) CGFloat rotationAngle;
 @property (nonatomic, assign) HLSVector2 scaleParameters;
 @property (nonatomic, assign) HLSVector2 translationParameters;
 
-- (CGAffineTransform)rotationTransform;
 - (CGAffineTransform)scaleTransform;
 - (CGAffineTransform)translationTransform;
 
@@ -59,7 +57,6 @@
 {
     if ((self = [super init])) {
         // Default: No change
-        self.rotationAngle = 0.f;
         self.scaleParameters = HLSVector2Make(1.f, 1.f);
         self.translationParameters = HLSVector2Make(0.f, 0.f);
         
@@ -70,16 +67,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize rotationAngle = m_rotationAngle;
-
 @synthesize scaleParameters = m_scaleParameters;
 
 @synthesize translationParameters = m_translationParameters;
-
-- (void)rotateByAngle:(CGFloat)angle
-{
-    self.rotationAngle = angle;
-}
 
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
 {
@@ -111,14 +101,7 @@
 
 - (CGAffineTransform)transform
 {
-    CGAffineTransform transform = [self rotationTransform];
-    transform = CGAffineTransformConcat(transform, [self scaleTransform]);
-    return CGAffineTransformConcat(transform, [self translationTransform]);
-}
-
-- (CGAffineTransform)rotationTransform
-{
-    return CGAffineTransformMakeRotation(self.rotationAngle);
+    return CGAffineTransformConcat([self scaleTransform], [self translationTransform]);
 }
 
 - (CGAffineTransform)scaleTransform
@@ -135,9 +118,6 @@
 
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {
-    // No rotation required
-    self.rotationAngle = 0.f;
-    
     self.scaleParameters = HLSVector2Make(CGRectGetWidth(toRect) / CGRectGetWidth(fromRect),
                                           CGRectGetHeight(toRect) / CGRectGetHeight(fromRect));
     self.translationParameters = HLSVector2Make(CGRectGetMidX(toRect) - CGRectGetMidX(fromRect),
@@ -150,7 +130,6 @@
 {
     // See remarks at the beginning
     HLSViewAnimation *reverseViewAnimation = [HLSViewAnimation viewAnimation];
-    [reverseViewAnimation rotateByAngle:-self.rotationAngle];
     [reverseViewAnimation scaleWithXFactor:1.f / self.scaleParameters.v1
                                    yFactor:1.f / self.scaleParameters.v2];
     [reverseViewAnimation translateByVectorWithX:-self.translationParameters.v1
@@ -164,7 +143,6 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     HLSViewAnimation *viewAnimationCopy = [[HLSViewAnimation allocWithZone:zone] init];
-    viewAnimationCopy.rotationAngle = self.rotationAngle;
     viewAnimationCopy.scaleParameters = self.scaleParameters;
     viewAnimationCopy.translationParameters = self.translationParameters;
     viewAnimationCopy.alphaVariation = self.alphaVariation;

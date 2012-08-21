@@ -26,7 +26,6 @@
  */
 @interface HLSViewAnimation : NSObject <HLSObjectAnimation> {
 @private
-    CGFloat m_rotationAngle;
     HLSVector2 m_scaleParameters;
     HLSVector2 m_translationParameters;
     CGFloat m_alphaVariation;
@@ -41,7 +40,6 @@
  * Geometric transform parameters to be applied during the view animation. The resulting transform (which you can 
  * obtain by calling -transform) applies the rotation, the scale and finally the translation
  */
-- (void)rotateByAngle:(CGFloat)angle;
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
 

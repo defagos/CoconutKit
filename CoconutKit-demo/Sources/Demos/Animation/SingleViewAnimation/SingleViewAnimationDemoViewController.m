@@ -103,48 +103,48 @@
     self.cancelButton.hidden = NO;
     self.terminateButton.hidden = NO;
     
-    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
-    animationStep1.curve = UIViewAnimationCurveEaseIn;
-    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation viewAnimation];
-    [viewAnimation11 translateByVectorWithX:100.f y:100.f];
-    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView];
+    animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation11 translateByVectorWithX:100.f y:100.f z:0.f];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView];
     
-    HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
     animationStep2.tag = @"step2";
     animationStep2.duration = 1.;
-    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation viewAnimation];
-    viewAnimation21.alphaVariation = -0.3f;
-    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    layerAnimation21.opacityVariation = -0.3f;
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView];
     
-    HLSViewAnimationStep *animationStep3 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
     animationStep3.tag = @"step3";
-    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation viewAnimation];
-    [viewAnimation31 scaleWithXFactor:1.5f yFactor:1.5f];
-    [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation31 scaleWithXFactor:1.5f yFactor:1.5f zFactor:1.f];
+    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView];
     
-    HLSViewAnimationStep *animationStep4 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
     animationStep4.tag = @"step4";
-    HLSViewAnimation *viewAnimation41 = [HLSViewAnimation viewAnimation];
-    [viewAnimation41 rotateByAngle:M_PI_4];
-    [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView];
+    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation41 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
+    [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView];
     
-    HLSViewAnimationStep *animationStep5 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep5 = [HLSLayerAnimationStep animationStep];
     animationStep5.tag = @"step5";
     animationStep5.duration = 1.;
-    animationStep5.curve = UIViewAnimationCurveLinear;
-    HLSViewAnimation *viewAnimation51 = [HLSViewAnimation viewAnimation];
-    [viewAnimation51 translateByVectorWithX:0.f y:200.f];
-    [animationStep5 addViewAnimation:viewAnimation51 forView:self.rectangleView];
+    animationStep5.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation51 translateByVectorWithX:0.f y:200.f z:0.f];
+    [animationStep5 addLayerAnimation:layerAnimation51 forView:self.rectangleView];
     
-    HLSViewAnimationStep *animationStep6 = [HLSViewAnimationStep animationStep];
+    HLSLayerAnimationStep *animationStep6 = [HLSLayerAnimationStep animationStep];
     animationStep6.tag = @"step6";
-    animationStep6.curve = UIViewAnimationCurveLinear;
-    HLSViewAnimation *viewAnimation61 = [HLSViewAnimation viewAnimation];
-    [viewAnimation61 rotateByAngle:M_PI_4];
-    viewAnimation61.alphaVariation = 0.3f;
-    [animationStep6 addViewAnimation:viewAnimation61 forView:self.rectangleView];
+    animationStep6.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    HLSLayerAnimation *layerAnimation61 = [HLSLayerAnimation layerAnimation];
+    [layerAnimation61 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
+    layerAnimation61.opacityVariation = 0.3f;
+    [animationStep6 addLayerAnimation:layerAnimation61 forView:self.rectangleView];
     
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,

@@ -221,7 +221,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     }
     
     // TODO: Factor out collapsed frame creation code
-    //if (! m_animating) {
+    if (! m_animating) {
         if (self.alignment == HLSExpandingSearchBarAlignmentLeft || m_expanded) {
             self.searchButton.layer.frame = CGRectMake(0.f,
                                                        roundf((CGRectGetHeight(layer.frame) - kSearchBarStandardHeight) / 2.f),
@@ -245,7 +245,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         else {
             self.searchBar.layer.frame = self.searchButton.layer.frame;
         }
-    //}
+    }
     
     // Notify initial status
     if (! m_layoutDone) {
