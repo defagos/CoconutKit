@@ -54,6 +54,9 @@
 
 @end
 
+/**
+ * Subclasses are responsible of calling those methods on the delegate when the animation starts, respectively stops
+ */
 @protocol HLSAnimationStepDelegate <NSObject>
                                      
 - (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
