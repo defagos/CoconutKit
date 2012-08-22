@@ -72,6 +72,8 @@
 
 - (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
 {
+    self.delegate = delegate;
+    
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
     BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
@@ -85,7 +87,7 @@
     // Instantaneous
     else {
         // Still report the animated value, even if not actually animated
-        [delegate animationStepWillStart:self animated:animated];
+        [self.delegate animationStepWillStart:self animated:animated];
     }
     
     // Animate all views involved in the animation step
@@ -143,7 +145,6 @@
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
         dummyViewOpacityAnimation.delegate = self;
-        [dummyViewOpacityAnimation setValue:delegate forKey:@"animationStepDelegate"];
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
     }
     self.dummyView.alpha = 1.f - self.dummyView.alpha;
@@ -155,7 +156,7 @@
     // Instantaneous
     else {
         // Still report the animated value, even if not actually animated
-        [delegate animationStepDidStop:self animated:animated];
+        [self.delegate animationStepDidStop:self animated:animated];
     }
 }
 
@@ -206,14 +207,12 @@
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    id<HLSAnimationStepDelegate> delegate = [animation valueForKey:@"animationStepDelegate"];
-    [delegate animationStepWillStart:self animated:YES];
+    [self.delegate animationStepWillStart:self animated:YES];
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
-    id<HLSAnimationStepDelegate> delegate = [animation valueForKey:@"animationStepDelegate"];
-    [delegate animationStepDidStop:self animated:YES];
+    [self.delegate animationStepDidStop:self animated:YES];
 }
 
 @end

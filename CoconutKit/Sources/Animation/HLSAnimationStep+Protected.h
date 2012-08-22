@@ -28,4 +28,6 @@
  */
 - (NSString *)objectAnimationDescriptionString;
 
+@property (nonatomic, assign) id<HLSAnimationStepDelegate> delegate;
+
 @end

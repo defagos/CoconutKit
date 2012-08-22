@@ -10,6 +10,7 @@
 
 // Forward declarations
 @protocol HLSAnimationStepDelegate;
+@class HLSZeroingWeakRef;
 
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private
@@ -17,6 +18,7 @@
     NSMutableDictionary *m_objectToObjectAnimationMap;
     NSString *m_tag;
     NSTimeInterval m_duration;
+    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
 }
 
 /**

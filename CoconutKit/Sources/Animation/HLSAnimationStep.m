@@ -11,12 +11,14 @@
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSZeroingWeakRef.h"
 #import "NSString+HLSExtensions.h"
 
 @interface HLSAnimationStep ()
 
 @property (nonatomic, retain) NSMutableArray *objectKeys;
 @property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
+@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -48,6 +50,7 @@
     self.objectKeys = nil;
     self.objectToObjectAnimationMap = nil;
     self.tag = nil;
+    self.delegateZeroingWeakRef = nil;
     
     [super dealloc];
 }
@@ -82,6 +85,22 @@
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
+}
+
+@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
+
+- (id<HLSAnimationStepDelegate>)delegate
+{
+    return self.delegateZeroingWeakRef.object;
+}
+
+- (void)setDelegate:(id<HLSAnimationStepDelegate>)delegate
+{
+    if (self.delegateZeroingWeakRef.object == delegate) {
+        return;
+    }
+    
+    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
 }
 
 #pragma mark Animations in the step

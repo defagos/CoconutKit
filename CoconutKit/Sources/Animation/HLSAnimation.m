@@ -345,32 +345,13 @@
     
     // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
     // played with animated = YES are still notified as animated)
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+    if (! self.cancelling) {
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : animated];
+        }        
     }
     
     [self playNextAnimationStepAnimated:animated];
-    
-#if 0
-    
-    if (self.cancelling) {
-        self.cancelling = NO;
-        return;
-    }
-    
-    if (self.terminating) {
-        self.terminating = NO;
-        return;
-    }
-    
-    // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
-    // played with animated = YES are still notified as animated)
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
-    }
-    
-    [self playNextAnimationStepAnimated:animated];
-#endif
 }
 
 #pragma mark NSCopying protocol implementation

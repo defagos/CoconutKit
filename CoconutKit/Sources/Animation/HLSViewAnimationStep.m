@@ -61,11 +61,13 @@
 
 - (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
 {
+    self.delegate = delegate;
+    
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
     BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
     if (actuallyAnimated) {
-        [UIView beginAnimations:nil context:delegate];
+        [UIView beginAnimations:nil context:NULL];
         
         [UIView setAnimationDuration:self.duration];
         [UIView setAnimationCurve:self.curve];
@@ -169,14 +171,12 @@
 
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
-    id<HLSAnimationStepDelegate> delegate = context;
-    [delegate animationStepWillStart:self animated:YES];
+    [self.delegate animationStepWillStart:self animated:YES];
 }
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    id<HLSAnimationStepDelegate> delegate = context;
-    [delegate animationStepDidStop:self animated:YES];
+    [self.delegate animationStepDidStop:self animated:YES];
 }
 
 @end
