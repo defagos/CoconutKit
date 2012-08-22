@@ -120,10 +120,10 @@
     return NO;
 }
 
-- (void)playAnimated:(BOOL)animated
+- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
 {}
 
-- (void)cancelAnimations
+- (void)cancel
 {}
 
 #pragma mark Reverse animation

@@ -20,6 +20,7 @@
 @interface HLSLayerAnimationStep : HLSAnimationStep {
 @private
     CAMediaTimingFunction *m_timingFunction;
+    UIView *m_dummyView;
 }
 
 /**

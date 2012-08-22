@@ -16,6 +16,15 @@
 //         to be consistent with UIView block-based animations we do not override the default
 //         duration received from HLSAnimationStep (0.2) and set an ease-in ease-out function
 
+@interface HLSLayerAnimationStep ()
+
+@property (nonatomic, retain) UIView *dummyView;
+
+- (void)animationDidStart:(CAAnimation *)animation;
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag;
+
+@end
+
 @implementation HLSLayerAnimationStep
 
 #pragma mark Object creation and destruction
@@ -24,11 +33,32 @@
 {
     if ((self = [super init])) {
         self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        
+        // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
+        // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
+        // animation callbacks for its associated animation (which, since it is part of the transaction,
+        // will be triggered when the transaction begins / ends animating)
+        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
     }
     return self;
 }
 
+- (void)dealloc
+{
+    [self.dummyView removeFromSuperview];
+    self.dummyView = nil;
+    
+    [super dealloc];
+}
+
 #pragma mark Accessors and mutators
+
+@synthesize timingFunction = m_timingFunction;
+
+@synthesize dummyView = m_dummyView;
+
+#pragma mark Managing the animation
 
 - (void)addLayerAnimation:(HLSLayerAnimation *)layerAnimation forLayer:(CALayer *)layer
 {
@@ -40,12 +70,24 @@
     [self addLayerAnimation:layerAnimation forLayer:view.layer];
 }
 
-@synthesize timingFunction = m_timingFunction;
-
-#pragma mark Managing the animation
-
-- (void)playAnimated:(BOOL)animated
+- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
 {
+    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
+    // in animations
+    BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
+    if (actuallyAnimated) {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:self.duration];
+        [CATransaction setAnimationTimingFunction:self.timingFunction];
+        
+        // TODO: Delay
+    }
+    // Instantaneous
+    else {
+        // Still report the animated value, even if not actually animated
+        [delegate animationStepWillStart:self animated:animated];
+    }
+    
     // Animate all views involved in the animation step
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
@@ -93,9 +135,31 @@
         animationGroup.animations = [NSArray arrayWithArray:animations];
         [layer addAnimation:animationGroup forKey:nil];
     }
+    
+    // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
+    // which will receive the start / end animation events
+    if (actuallyAnimated) {
+        CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
+        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
+        dummyViewOpacityAnimation.delegate = self;
+        [dummyViewOpacityAnimation setValue:delegate forKey:@"animationStepDelegate"];
+        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
+    }
+    self.dummyView.alpha = 1.f - self.dummyView.alpha;
+    
+    // Animated
+    if (actuallyAnimated) {
+        [CATransaction commit];
+    }
+    // Instantaneous
+    else {
+        // Still report the animated value, even if not actually animated
+        [delegate animationStepDidStop:self animated:animated];
+    }
 }
 
-- (void)cancelAnimations
+- (void)cancel
 {
     for (CALayer *layer in [self objects]) {
         [layer removeAllAnimations];
@@ -136,6 +200,20 @@
     HLSLayerAnimationStep *animationStepCopy = [super copyWithZone:zone];
     animationStepCopy.timingFunction = self.timingFunction;
     return animationStepCopy;
+}
+
+#pragma mark Animation callbacks
+
+- (void)animationDidStart:(CAAnimation *)animation
+{
+    id<HLSAnimationStepDelegate> delegate = [animation valueForKey:@"animationStepDelegate"];
+    [delegate animationStepWillStart:self animated:YES];
+}
+
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
+{
+    id<HLSAnimationStepDelegate> delegate = [animation valueForKey:@"animationStepDelegate"];
+    [delegate animationStepDidStop:self animated:YES];
 }
 
 @end

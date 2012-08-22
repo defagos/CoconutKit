@@ -20,6 +20,7 @@
 @interface HLSViewAnimationStep : HLSAnimationStep {
 @private
     UIViewAnimationCurve m_curve;
+    UIView *m_dummyView;
 }
 
 /**

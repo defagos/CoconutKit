@@ -8,6 +8,9 @@
 
 #import "HLSObjectAnimation.h"
 
+// Forward declarations
+@protocol HLSAnimationStepDelegate;
+
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private
     NSMutableArray *m_objectKeys;
@@ -37,16 +40,23 @@
 /**
  * Playing the animation
  */
-- (void)playAnimated:(BOOL)animated;
+- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated;
 
 /**
  * Cancel the animation associated with the step (if running)
  */
-- (void)cancelAnimations;
+- (void)cancel;
 
 /**
  * The reverse animation
  */
 - (id)reverseAnimationStep;
+
+@end
+
+@protocol HLSAnimationStepDelegate <NSObject>
+                                     
+- (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
+- (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end

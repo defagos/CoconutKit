@@ -23,23 +23,12 @@
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 @property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
-@property (nonatomic, retain) UIView *dummyView;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
-- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
-- (void)playViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep animated:(BOOL)animated;
-- (void)playLayerAnimationStep:(HLSLayerAnimationStep *)layerAnimationStep animated:(BOOL)animated;
-
 - (void)playNextAnimationStepAnimated:(BOOL)animated;
-
-- (void)animationDidStart:(CAAnimation *)animation;
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag;
-
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
 
@@ -75,14 +64,7 @@
         }
         else {
             self.animationSteps = animationSteps;
-        }
-        
-        // This dummy view fixes an issue encountered with animation blocks: If no view is altered
-        // during an animation block, the block duration is reduced to 0. To prevent this, we create
-        // and animate a dummy invisible view in each animation step, so that the duration is never
-        // reduced to 0
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        }        
     }
     return self;
 }
@@ -100,9 +82,8 @@
     self.currentAnimationStep = nil;
     self.tag = nil;
     self.userInfo = nil;
-    [self.dummyView removeFromSuperview];
-    self.dummyView = nil;
     self.delegateZeroingWeakRef = nil;
+    
     [super dealloc];
 }
 
@@ -118,8 +99,6 @@
 
 @synthesize userInfo = m_userInfo;
 
-@synthesize dummyView = m_dummyView;
-
 @synthesize lockingUI = m_lockingUI;
 
 @synthesize running = m_running;
@@ -129,8 +108,6 @@
 @synthesize terminating = m_terminating;
 
 @synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
-
-@dynamic delegate;
 
 - (id<HLSAnimationDelegate>)delegate
 {
@@ -190,136 +167,6 @@
     [self playAnimated:YES];
 }
 
-- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
-{
-    // UIView block-based animation
-    if ([animationStep isKindOfClass:[HLSViewAnimationStep class]]) {
-        HLSViewAnimationStep *viewAnimationStep = (HLSViewAnimationStep *)animationStep;
-        [self playViewAnimationStep:viewAnimationStep animated:animated];
-    }
-    // Core Animation
-    else if ([animationStep isKindOfClass:[HLSLayerAnimationStep class]]) {
-        HLSLayerAnimationStep *layerAnimationStep = (HLSLayerAnimationStep *)animationStep;
-        [self playLayerAnimationStep:layerAnimationStep animated:animated];
-    }
-    else {
-        HLSLoggerError(@"Unsupported animation step class");
-    }
-}
-
-- (void)playViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep animated:(BOOL)animated
-{
-    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
-    // in animations
-    BOOL actuallyAnimated = animated && ! doubleeq(viewAnimationStep.duration, 0.f);
-    if (actuallyAnimated) {
-        [UIView beginAnimations:nil context:viewAnimationStep];
-        
-        [UIView setAnimationDuration:viewAnimationStep.duration];
-        [UIView setAnimationCurve:viewAnimationStep.curve];
-        [UIView setAnimationDelay:m_delay];
-        
-        // The delay is just used for the first step. Set it to 0 for the remaining ones
-        m_delay = 0.;
-        
-        // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context:, though appearing
-        //         in the UIKit UIView header documentation, are reserved by Apple. Using them might lead to app rejection!
-        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
-        [UIView setAnimationDelegate:self];
-    }
-    // Instantaneous
-    else {
-        // First step
-        if ([self.animationSteps indexOfObject:viewAnimationStep] == 0) {
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:animated];
-            }
-        }
-    }
-    
-    [viewAnimationStep playAnimated:actuallyAnimated];
-    
-    // Animate the dummy view
-    self.dummyView.alpha = 1.f - self.dummyView.alpha;
-    
-    // Animated
-    if (actuallyAnimated) {
-        [UIView commitAnimations];
-        
-        // The code will resume in the animationDidStop:finished:context: method
-    }
-    // Instantaneous
-    else {
-        // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
-        // played with animated = YES are still notified as animated)
-        if (! self.cancelling) {
-            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:viewAnimationStep animated:self.terminating ? NO : m_animated];
-            }
-        }
-        
-        [self playNextAnimationStepAnimated:animated];
-    }
-}
-
-- (void)playLayerAnimationStep:(HLSLayerAnimationStep *)layerAnimationStep animated:(BOOL)animated
-{
-    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
-    // in animations
-    BOOL actuallyAnimated = animated && ! doubleeq(layerAnimationStep.duration, 0.f);
-    if (actuallyAnimated) {
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:layerAnimationStep.duration];
-        [CATransaction setAnimationTimingFunction:layerAnimationStep.timingFunction];
-        
-        // TODO: Delay and timing function (curve)
-        
-        // The delay is just used for the first step. Set it to 0 for the remaining ones
-        m_delay = 0.;
-    }
-    // Instantaneous
-    else {
-        // First step
-        if ([self.animationSteps indexOfObject:layerAnimationStep] == 0) {
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:animated];
-            }
-        }
-    }
-    
-    [layerAnimationStep playAnimated:actuallyAnimated];
-    
-    // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
-    // which will receive the start / end animation events
-    if (actuallyAnimated) {
-        CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
-        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
-        dummyViewOpacityAnimation.delegate = self;
-        [dummyViewOpacityAnimation setValue:layerAnimationStep forKey:@"animationStep"];
-        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
-    }
-    self.dummyView.alpha = 1.f - self.dummyView.alpha;
-    
-    // Animated
-    if (actuallyAnimated) {
-        [CATransaction commit];
-    }
-    // Instantaneous
-    else {
-        // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
-        // played with animated = YES are still notified as animated)
-        if (! self.cancelling) {
-            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:layerAnimationStep animated:self.terminating ? NO : m_animated];
-            }
-        }
-        
-        [self playNextAnimationStepAnimated:animated];
-    }
-}
-
 - (void)playNextAnimationStepAnimated:(BOOL)animated
 {
     // First call?
@@ -330,7 +177,10 @@
     // Proceeed with the next step (if any)
     self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
     if (self.currentAnimationStep) {
-        [self playAnimationStep:self.currentAnimationStep animated:animated];
+        [self.currentAnimationStep playAfterDelay:m_delay withDelegate:self animated:animated];
+        
+        // The delay is just used for the first step. Set it to 0 for the remaining ones
+        m_delay = 0.;
     }
     // Done with the animation
     else {
@@ -382,7 +232,7 @@
     self.cancelling = YES;
     
     // Cancel all animations
-    [self.currentAnimationStep cancelAnimations];
+    [self.currentAnimationStep cancel];
     
     // Play all remaining steps without animation
     [self playNextAnimationStepAnimated:NO];
@@ -404,7 +254,7 @@
     
     if (self.currentAnimationStep) {
         // Cancel all animations
-        [self.currentAnimationStep cancelAnimations];
+        [self.currentAnimationStep cancel];
         
         // The animation callback will be called, but to get delegate events in the proper order we cannot
         // notify that the animation step has ended there. We must do it right now, and not anymore
@@ -462,6 +312,44 @@
     return reverseAnimation;
 }
 
+#pragma mark HLSAnimationStepDelegate protocol implementation
+
+- (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+{
+    // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
+    // set). Do not notify the delegate in such cases
+    if (! self.cancelling) {
+        // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
+        // delay period is over, as for UIView animation blocks)
+        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:YES];
+            }
+        }
+    }
+}
+
+- (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+{
+    if (self.cancelling) {
+        self.cancelling = NO;
+        return;
+    }
+    
+    if (self.terminating) {
+        self.terminating = NO;
+        return;
+    }
+    
+    // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
+    // played with animated = YES are still notified as animated)
+    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+        [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+    }
+    
+    [self playNextAnimationStepAnimated:animated];
+}
+
 #pragma mark NSCopying protocol implementation
 
 - (id)copyWithZone:(NSZone *)zone
@@ -485,68 +373,6 @@
     animationCopy.userInfo = [NSDictionary dictionaryWithDictionary:self.userInfo];
     
     return animationCopy;
-}
-
-#pragma mark Animation callbacks
-
-// TODO: UIView-based callbacks too!
-
-- (void)animationStepDidStart:(HLSAnimationStep *)animationStep
-{
-    // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
-    // set). Do not notify the delegate in such cases
-    if (! self.cancelling) {
-        // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
-        // delay period is over, as for UIView animation blocks)
-        if ([self.animationSteps indexOfObject:animationStep] == 0) {
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:YES];
-            }
-        }
-    }
-}
-
-- (void)animationStepDidStop:(HLSAnimationStep *)animationStep
-{
-    if (self.cancelling) {
-        self.cancelling = NO;
-        return;
-    }
-    
-    if (self.terminating) {
-        self.terminating = NO;
-        return;
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-        [self.delegate animationStepFinished:animationStep animated:m_animated];
-    }
-    
-    [self playNextAnimationStepAnimated:m_animated];
-}
-
-- (void)animationDidStart:(CAAnimation *)animation
-{
-    HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
-    [self animationStepDidStart:animationStep];
-}
-
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
-{
-    HLSAnimationStep *animationStep = [animation valueForKey:@"animationStep"];
-    [self animationStepDidStop:animationStep];
-}
-
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
-{
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-    [self animationStepDidStart:animationStep];
-}
-
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-    HLSAnimationStep *animationStep = (HLSAnimationStep *)context;
-    [self animationStepDidStop:animationStep];
 }
 
 #pragma mark Description
