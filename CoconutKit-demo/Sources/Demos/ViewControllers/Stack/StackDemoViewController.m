@@ -158,7 +158,7 @@
                                   atIndex:(NSUInteger)roundf(self.indexSlider.value)
                       withTransitionClass:NSClassFromString(transitionName)
                                  duration:kAnimationTransitionDefaultDuration
-                                 animated:YES];
+                                 animated:self.animatedSwitch.on];
     
     [self updateIndexInfo];
 }
