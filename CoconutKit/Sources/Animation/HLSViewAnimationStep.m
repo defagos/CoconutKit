@@ -8,6 +8,7 @@
 
 #import "HLSViewAnimationStep.h"
 
+#import "CALayer+HLSExtensions.h"
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
@@ -16,8 +17,6 @@
 @interface HLSViewAnimationStep ()
 
 @property (nonatomic, retain) UIView *dummyView;
-
-- (void)cancelAnimationForView:(UIView *)view;
 
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
@@ -118,23 +117,15 @@
     }
 }
 
-- (void)cancelAnimationForView:(UIView *)view
-{
-    [view.layer removeAllAnimations];
-    for (UIView *subview in view.subviews) {
-        [self cancelAnimationForView:subview];
-    }
-}
-
 - (void)cancelAnimation
 {
     // We must recursively cancel subview animations (this is especially important since altering the frame (e.g.
     // by scaling it) seems to create additional implicit animations, which still finish and trigger the end animation
     // callback with finished = YES!)
     for (UIView *view in [self objects]) {
-        [self cancelAnimationForView:view];
+        [view.layer removeAllAnimationsRecursively];
     }
-    [self cancelAnimationForView:self.dummyView];
+    [self.dummyView.layer removeAllAnimationsRecursively];
 }
 
 #pragma mark Reverse animation

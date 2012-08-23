@@ -1,3 +1,4 @@
+CALayer+HLSExtensions.m
 HLSAssert.m
 HLSCursor.m
 HLSExpandingSearchBar.m

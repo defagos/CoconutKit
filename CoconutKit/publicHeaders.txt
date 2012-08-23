@@ -1,3 +1,4 @@
+CALayer+HLSExtensions.h
 HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h

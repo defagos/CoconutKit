@@ -8,6 +8,7 @@
 
 #import "HLSLayerAnimationStep.h"
 
+#import "CALayer+HLSExtensions.h"
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -19,8 +20,6 @@
 @interface HLSLayerAnimationStep ()
 
 @property (nonatomic, retain) UIView *dummyView;
-
-- (void)cancelAnimationForLayer:(CALayer *)layer;
 
 - (void)animationDidStart:(CAAnimation *)animation;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
@@ -151,23 +150,15 @@
     }
 }
 
-- (void)cancelAnimationForLayer:(CALayer *)layer
-{
-    [layer removeAllAnimations];
-    for (CALayer *sublayer in layer.sublayers) {
-        [self cancelAnimationForLayer:sublayer];
-    }
-}
-
 - (void)cancelAnimation
 {
     // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
     for (CALayer *layer in [self objects]) {
-        [self cancelAnimationForLayer:layer];
+        [layer removeAllAnimationsRecursively];
     }
-    [self cancelAnimationForLayer:self.dummyView.layer];
+    [self.dummyView.layer removeAllAnimationsRecursively];
 }
 
 #pragma mark Reverse animation
