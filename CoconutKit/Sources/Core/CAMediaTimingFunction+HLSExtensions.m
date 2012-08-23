@@ -10,10 +10,15 @@
 
 @implementation CAMediaTimingFunction (HLSExtensions)
 
-- (CAMediaTimingFunction *)inverse
+- (CAMediaTimingFunction *)inverseFunction
 {
-    // TODO:
-    return nil;
+    float values1[2];
+    [self getControlPointAtIndex:1 values:values1];
+     
+    float values2[2];
+    [self getControlPointAtIndex:2 values:values2];
+    
+    return [CAMediaTimingFunction functionWithControlPoints:1.f - values2[0] :values1[1] :1.f - values1[0] :values2[1]];
 }
 
 - (NSString *)controlPointsString

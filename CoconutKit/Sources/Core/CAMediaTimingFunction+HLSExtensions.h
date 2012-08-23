@@ -8,8 +8,14 @@
 
 @interface CAMediaTimingFunction (HLSExtensions)
 
-- (CAMediaTimingFunction *)inverse;
+/**
+ * Return the inverse function, i.e. the one which must be played when playing an animation backwards
+ */
+- (CAMediaTimingFunction *)inverseFunction;
 
+/**
+ * Return the control points as a human-readable string
+ */
 - (NSString *)controlPointsString;
 
 @end

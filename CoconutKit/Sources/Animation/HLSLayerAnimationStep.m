@@ -9,6 +9,7 @@
 #import "HLSLayerAnimationStep.h"
 
 #import "CALayer+HLSExtensions.h"
+#import "CAMediaTimingFunction+HLSExtensions.h"
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -166,25 +167,7 @@
 - (id)reverseAnimationStep
 {
     HLSLayerAnimationStep *reverseAnimationStep = [super reverseAnimationStep];
-    // TODO: Add category to CAMediaTimingFunction to generate the inverse function, and add defines
-    //       for the common animations (e.g. HLSMediaTimingFunctionEaseInEaseOut)
-#if 0
-    switch (self.curve) {
-        case UIViewAnimationCurveEaseIn:
-            reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;
-            break;
-            
-        case UIViewAnimationCurveEaseOut:
-            reverseAnimationStep.curve = UIViewAnimationCurveEaseIn;
-            break;
-            
-        case UIViewAnimationCurveLinear:
-        case UIViewAnimationCurveEaseInOut:
-        default:
-            // Nothing to do
-            break;
-    }
-#endif
+    self.timingFunction = [self.timingFunction inverseFunction];
     return reverseAnimationStep;
 }
 
