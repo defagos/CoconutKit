@@ -126,7 +126,9 @@
     m_actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
     
     if (! m_actuallyAnimated) {
-        [delegate animationStepWillStart:self animated:m_actuallyAnimated];
+        // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
+        // played animated are still considered to be played animated
+        [delegate animationStepWillStart:self animated:animated];
     }
     // Retain the delegate during the time of the animation (this is based on the assumption
     // that animations implemented in subclasses do the same, and that they always call the
@@ -138,7 +140,9 @@
     [self playAnimationAfterDelay:delay animated:m_actuallyAnimated];
     
     if (! m_actuallyAnimated) {
-        [delegate animationStepDidStop:self animated:m_actuallyAnimated finished:YES];
+        // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
+        // played animated are still considered to be played animated
+        [delegate animationStepDidStop:self animated:animated finished:YES];
     }
 }
 

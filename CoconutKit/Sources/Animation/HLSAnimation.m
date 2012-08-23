@@ -337,12 +337,12 @@
     // played with animated = YES are still notified as animated)
     if (! self.cancelling && ! (animated && self.terminating)) {
         if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : animated];
         }
     }
     
     if (! animated || (! self.terminating && ! self.cancelling)) {
-        [self playNextAnimationStepAnimated:(self.terminating || self.cancelling) ? NO : m_animated];
+        [self playNextAnimationStepAnimated:(self.terminating || self.cancelling) ? NO : animated];
     }
     
     if (animated) {

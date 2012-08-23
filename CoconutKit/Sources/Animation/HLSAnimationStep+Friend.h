@@ -33,6 +33,10 @@
  */
 @protocol HLSAnimationStepDelegate <NSObject>
 
+/**
+ * The animated info which is returned is the same given when the play method was called (even if the animation
+ * was actually not animated because its duration was 0)
+ */
 - (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished;
 
