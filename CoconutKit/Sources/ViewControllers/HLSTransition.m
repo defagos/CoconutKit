@@ -131,14 +131,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -156,17 +156,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -184,17 +184,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -202,7 +202,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Make the disappearing view invisible
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
     layerAnimation31.opacityVariation = -1.f;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
     animationStep3.duration = 0.;
@@ -220,24 +220,24 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
     layerAnimation31.opacityVariation = -1.f;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation32 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation32 = [HLSLayerAnimation animation];
     layerAnimation32.opacityVariation = 1.f;
     [animationStep3 addLayerAnimation:layerAnimation32 forView:appearingView];
     animationStep3.duration = 0.2;
@@ -245,7 +245,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Make the disappearing view invisible
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
     layerAnimation41.opacityVariation = -1.f;
     [animationStep4 addLayerAnimation:layerAnimation41 forView:disappearingView];
     animationStep4.duration = 0.;
@@ -263,18 +263,18 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [layerAnimation21 scaleWithXFactor:0.5f yFactor:0.5f zFactor:1.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -282,7 +282,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Make the disappearing view invisible
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
     layerAnimation31.opacityVariation = -1.f;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
     animationStep3.duration = 0.;
@@ -300,14 +300,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
@@ -315,7 +315,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
     [layerAnimation31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:appearingView];
@@ -323,7 +323,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep3];
     
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
     [layerAnimation41 scaleWithXFactor:1.f / kPushToTheBackScaleFactor yFactor:1.f / kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:disappearingView];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:appearingView];
@@ -332,7 +332,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Make the disappearing view invisible
     HLSLayerAnimationStep *animationStep5 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation animation];
     layerAnimation51.opacityVariation = -1.f;
     [animationStep5 addLayerAnimation:layerAnimation51 forView:disappearingView];
     animationStep5.duration = 0.;
@@ -351,7 +351,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *viewAnimationStep11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep11 = [HLSLayerAnimation animation];
     [viewAnimationStep11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
     viewAnimationStep11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:viewAnimationStep11 forView:appearingView];
@@ -359,11 +359,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *viewAnimationStep21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep21 = [HLSLayerAnimation animation];
     [viewAnimationStep21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep21.opacityVariation = -0.5f;
     [animationStep2 addLayerAnimation:viewAnimationStep21 forView:disappearingView];
-    HLSLayerAnimation *viewAnimationStep22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep22 = [HLSLayerAnimation animation];
     [viewAnimationStep22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep2 addLayerAnimation:viewAnimationStep22 forView:appearingView];
     animationStep2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
@@ -371,20 +371,20 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *viewAnimationStep31 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep31 = [HLSLayerAnimation animation];
     viewAnimationStep31.opacityVariation = 0.5f;
     [animationStep3 addLayerAnimation:viewAnimationStep31 forView:appearingView];
-    HLSLayerAnimation *viewAnimationStep32 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep32 = [HLSLayerAnimation animation];
     viewAnimationStep32.opacityVariation = -0.5f;
     [animationStep3 addLayerAnimation:viewAnimationStep32 forView:disappearingView];
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
     
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *viewAnimationStep41 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep41 = [HLSLayerAnimation animation];
     [viewAnimationStep41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep4 addLayerAnimation:viewAnimationStep41 forView:disappearingView];
-    HLSLayerAnimation *viewAnimationStep42 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *viewAnimationStep42 = [HLSLayerAnimation animation];
     [viewAnimationStep42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     viewAnimationStep42.opacityVariation = 0.5f;
     [animationStep4 addLayerAnimation:viewAnimationStep42 forView:appearingView];
@@ -644,14 +644,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     layerAnimation21.opacityVariation = 1.f;
     [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -671,17 +671,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 scaleWithXFactor:kPushToTheBackScaleFactor yFactor:kPushToTheBackScaleFactor zFactor:1.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     layerAnimation22.opacityVariation = 1.f;
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -701,17 +701,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     layerAnimation21.opacityVariation = -1.f;
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     layerAnimation22.opacityVariation = 1.f;
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
     animationStep2.duration = 0.4;
@@ -958,7 +958,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
@@ -966,7 +966,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
                                yFactor:1.f / kEmergeFromCenterScaleFactor
                                zFactor:1.f];
@@ -990,7 +990,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 scaleWithXFactor:kEmergeFromCenterScaleFactor yFactor:kEmergeFromCenterScaleFactor zFactor:1.f];
     layerAnimation11.opacityVariation = -1.f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
@@ -998,13 +998,13 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationSteps addObject:animationStep1];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 scaleWithXFactor:1.f / kEmergeFromCenterScaleFactor
                                yFactor:1.f / kEmergeFromCenterScaleFactor
                                zFactor:1.f];
     layerAnimation21.opacityVariation = 1.f;
     [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 scaleWithXFactor:kPushToTheBackScaleFactor
                                yFactor:kPushToTheBackScaleFactor
                                zFactor:1.f];

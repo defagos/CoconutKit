@@ -7,11 +7,12 @@
 //
 
 #import "HLSObjectAnimation.h"
+
 #import "HLSVector.h"
 
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
- * (HLSViewAnimationStep). An animation step is the combination of several view animations applied 
+ * (HLSViewAnimationStep). An animation step is the combination of several view animations applied
  * to a set of views, and represent the collective set of changes applied to them during some time interval. 
  * An animation (HLSAnimation) is then simply a collection of animation steps, either view-based
  * (HLSViewAnimationStep) or layer-based (HLSLayerAnimationStep).
@@ -24,17 +25,12 @@
  *
  * Designated initializer: init (create a view animation step with default settings)
  */
-@interface HLSViewAnimation : NSObject <HLSObjectAnimation> {
+@interface HLSViewAnimation : HLSObjectAnimation {
 @private
     HLSVector2 m_scaleParameters;
     HLSVector2 m_translationParameters;
     CGFloat m_alphaVariation;
 }
-
-/**
- * Identity view animation
- */
-+ (HLSViewAnimation *)viewAnimation;
 
 /**
  * Geometric transform parameters to be applied during the view animation. The resulting transform (which you can 

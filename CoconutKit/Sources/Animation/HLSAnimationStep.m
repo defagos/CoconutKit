@@ -8,17 +8,18 @@
 
 #import "HLSAnimationStep.h"
 
+#import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
-#import "HLSZeroingWeakRef.h"
+#import "HLSObjectAnimation+Friend.h"
 #import "NSString+HLSExtensions.h"
 
 @interface HLSAnimationStep ()
 
 @property (nonatomic, retain) NSMutableArray *objectKeys;
 @property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
+@property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate during animation
 
 @end
 
@@ -50,7 +51,7 @@
     self.objectKeys = nil;
     self.objectToObjectAnimationMap = nil;
     self.tag = nil;
-    self.delegateZeroingWeakRef = nil;
+    self.delegate = nil;
     
     [super dealloc];
 }
@@ -77,6 +78,8 @@
     }
 }
 
+@synthesize delegate = m_delegate;
+
 - (NSArray *)objects
 {
     NSMutableArray *objects = [NSMutableArray array];
@@ -85,22 +88,6 @@
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
-}
-
-@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
-
-- (id<HLSAnimationStepDelegate>)delegate
-{
-    return self.delegateZeroingWeakRef.object;
-}
-
-- (void)setDelegate:(id<HLSAnimationStepDelegate>)delegate
-{
-    if (self.delegateZeroingWeakRef.object == delegate) {
-        return;
-    }
-    
-    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
 }
 
 #pragma mark Animations in the step
@@ -134,16 +121,35 @@
 
 #pragma mark Managing the animation
 
-- (BOOL)animatingView
+- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
-    return NO;
+    m_actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
+    
+    if (! m_actuallyAnimated) {
+        [delegate animationStepWillStart:self animated:m_actuallyAnimated];
+    }
+    // Retain the delegate during the time of the animation (this is based on the assumption
+    // that animations implemented in subclasses do the same, and that they always call the
+    // animation delegate stop method, which is the case for UIView animations and CAAnimations
+    else {
+        self.delegate = delegate;
+    }
+    
+    [self playAnimationAfterDelay:delay animated:m_actuallyAnimated];
+    
+    if (! m_actuallyAnimated) {
+        [delegate animationStepDidStop:self animated:m_actuallyAnimated finished:YES];
+    }
 }
 
-- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
-{}
-
 - (void)cancel
-{}
+{
+    if (! m_actuallyAnimated) {
+        return;
+    }
+    
+    [self cancelAnimation];
+}
 
 #pragma mark Reverse animation
 
@@ -151,7 +157,7 @@
 {
     HLSAnimationStep *reverseAnimationStep = [[self class] animationStep];
     for (id object in [self objects]) {
-        id<HLSObjectAnimation> objectAnimation = [self objectAnimationForObject:object];
+        HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
         [reverseAnimationStep addObjectAnimation:[objectAnimation reverseObjectAnimation] forObject:object];
     }
     reverseAnimationStep.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
@@ -166,9 +172,10 @@
     [self.delegate animationStepWillStart:self animated:YES];
 }
 
-- (void)notifyDelegateAnimationStepDidStop
+- (void)notifyDelegateAnimationStepDidStopFinished:(BOOL)finished
 {
-    [self.delegate animationStepDidStop:self animated:YES];
+    [self.delegate animationStepDidStop:self animated:YES finished:finished];
+    self.delegate = nil;
 }
 
 #pragma mark NSCopying protocol implementation
@@ -177,8 +184,8 @@
 {
     HLSAnimationStep *animationStepCopy = [[[self class] allocWithZone:zone] init];
     for (id object in [self objects]) {
-        id<HLSObjectAnimation> objectAnimation = [self objectAnimationForObject:object];
-        id<HLSObjectAnimation> objectAnimationCopy = [[objectAnimation copyWithZone:zone] autorelease];
+        HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
+        HLSObjectAnimation *objectAnimationCopy = [[objectAnimation copyWithZone:zone] autorelease];
         [animationStepCopy addObjectAnimation:objectAnimationCopy forObject:object];
     }
     animationStepCopy.tag = self.tag;
@@ -192,7 +199,7 @@
 {
     NSString *objectAnimationDescriptionString = @"{";
     for (id object in [self objects]) {
-        id<HLSObjectAnimation> objectAnimation = [self objectAnimationForObject:object];
+        HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
         objectAnimationDescriptionString = [objectAnimationDescriptionString stringByAppendingFormat:@"\n\t%@ - %@", object, objectAnimation];        
     }
     return [objectAnimationDescriptionString stringByAppendingFormat:@"\n}"];

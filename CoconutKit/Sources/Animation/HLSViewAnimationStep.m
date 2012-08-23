@@ -8,6 +8,7 @@
 
 #import "HLSViewAnimationStep.h"
 
+#import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
 
 @interface HLSViewAnimationStep ()
@@ -59,14 +60,9 @@
     [self addObjectAnimation:viewAnimation forObject:view];
 }
 
-- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
+- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
-    self.delegate = delegate;
-    
-    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
-    // in animations
-    BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
-    if (actuallyAnimated) {
+    if (animated) {
         [UIView beginAnimations:nil context:NULL];
         
         [UIView setAnimationDuration:self.duration];
@@ -78,11 +74,6 @@
         [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];
-    }
-    // Instantaneous
-    else {
-        // Still report the animated value, even if not actually animated
-        [delegate animationStepWillStart:self animated:animated];
     }
     
     for (UIView *view in [self objects]) {
@@ -116,19 +107,14 @@
     self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
     // Animated
-    if (actuallyAnimated) {
+    if (animated) {
         [UIView commitAnimations];
         
         // The code will resume in the animationDidStop:finished:context: method
     }
-    // Instantaneous
-    else {
-        // Still report the animated value, even if not actually animated
-        [delegate animationStepDidStop:self animated:animated];
-    }
 }
 
-- (void)cancel
+- (void)cancelAnimation
 {
     for (UIView *view in [self objects]) {
         [view.layer removeAllAnimations];
@@ -176,7 +162,7 @@
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    [self notifyDelegateAnimationStepDidStop];
+    [self notifyDelegateAnimationStepDidStopFinished:[finished boolValue]];
 }
 
 @end

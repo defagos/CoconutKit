@@ -7,6 +7,7 @@
 //
 
 #import "HLSObjectAnimation.h"
+
 #import "HLSVector.h"
 
 /**
@@ -26,18 +27,13 @@
  *
  * Designated initializer: init (create a layer animation step with default settings)
  */
-@interface HLSLayerAnimation : NSObject <HLSObjectAnimation> {
+@interface HLSLayerAnimation : HLSObjectAnimation {
 @private
     HLSVector4 m_rotationParameters;
     HLSVector3 m_scaleParameters;
     HLSVector3 m_translationParameters;
     CGFloat m_opacityVariation;
 }
-
-/**
- * Identity layer animation
- */
-+ (HLSLayerAnimation *)layerAnimation;
 
 /**
  * Geometric transform parameters to be applied during the layer animation. The resulting transform (which you can

@@ -275,6 +275,8 @@
 		6F8C935015CEF0F8006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934E15CEF0F8006D892C /* HLSContainerStackView.m */; };
 		6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */; };
+		6F97E17A15E60C7900EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17915E60C7900EF6F62 /* HLSObjectAnimation.m */; };
+		6F97E17B15E60C7900EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17915E60C7900EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BD9F15E2921F00E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
 		6FA5BDC815E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
 		6FA5BDC915E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
@@ -555,6 +557,9 @@
 		6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6F91F76D14F3EEFB00E95EFA /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F97E17415E6054D00EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
+		6F97E17915E60C7900EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
+		6F97E17F15E60CBC00EF6F62 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FA5BD9D15E2921F00E5182E /* HLSLayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimation.h; sourceTree = "<group>"; };
 		6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
@@ -1098,12 +1103,15 @@
 				6FADE62E14BA04A6007EE121 /* HLSAnimation.m */,
 				6FCFEA4C15E37E40002CAF9E /* HLSAnimationStep.h */,
 				6FCFEA4D15E37E40002CAF9E /* HLSAnimationStep.m */,
+				6F97E17415E6054D00EF6F62 /* HLSAnimationStep+Friend.h */,
 				6FCFEA6215E3AAD0002CAF9E /* HLSAnimationStep+Protected.h */,
 				6FA5BD9D15E2921F00E5182E /* HLSLayerAnimation.h */,
 				6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */,
 				6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */,
 				6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */,
 				6FCFEA5A15E390B2002CAF9E /* HLSObjectAnimation.h */,
+				6F97E17915E60C7900EF6F62 /* HLSObjectAnimation.m */,
+				6F97E17F15E60CBC00EF6F62 /* HLSObjectAnimation+Friend.h */,
 				6FADE63114BA04A6007EE121 /* HLSViewAnimation.h */,
 				6FADE63214BA04A6007EE121 /* HLSViewAnimation.m */,
 				6FADE62F14BA04A6007EE121 /* HLSViewAnimationStep.h */,
@@ -2193,6 +2201,7 @@
 				6FA5BD9F15E2921F00E5182E /* HLSLayerAnimation.m in Sources */,
 				6FA5BDC815E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */,
 				6FCFEA4E15E37E40002CAF9E /* HLSAnimationStep.m in Sources */,
+				6F97E17A15E60C7900EF6F62 /* HLSObjectAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2341,6 +2350,7 @@
 				6FD0025815D5463C00375240 /* ContainmentTestViewController.m in Sources */,
 				6FA5BDC915E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */,
 				6FCFEA4F15E37E40002CAF9E /* HLSAnimationStep.m in Sources */,
+				6F97E17B15E60C7900EF6F62 /* HLSObjectAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

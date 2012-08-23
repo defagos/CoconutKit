@@ -44,7 +44,7 @@
  *
  * Designated initializer: initWithAnimationSteps:
  */
-@interface HLSAnimation : NSObject <HLSAnimationStepDelegate, NSCopying> {
+@interface HLSAnimation : NSObject <NSCopying> {
 @private
     NSArray *m_animationSteps;                                     // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;                      // enumerator over steps

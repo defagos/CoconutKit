@@ -44,6 +44,7 @@
 		6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */; };
 		6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */; };
 		6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */; };
+		6F97E17815E60C6A00EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */; };
 		6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */; };
 		6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */; };
@@ -254,6 +255,8 @@
 		6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
+		6F97E17215E6054000EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
+		6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
 		6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimation.h; sourceTree = "<group>"; };
 		6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
@@ -506,12 +509,14 @@
 				6FADE51314BA0494007EE121 /* HLSAnimation.m */,
 				6FCFEA4715E37E25002CAF9E /* HLSAnimationStep.h */,
 				6FCFEA4815E37E25002CAF9E /* HLSAnimationStep.m */,
+				6F97E17215E6054000EF6F62 /* HLSAnimationStep+Friend.h */,
 				6FCFEA6015E3AAC5002CAF9E /* HLSAnimationStep+Protected.h */,
 				6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */,
 				6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */,
 				6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */,
 				6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */,
 				6FCFEA5815E390A6002CAF9E /* HLSObjectAnimation.h */,
+				6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */,
 				6FADE51614BA0494007EE121 /* HLSViewAnimation.h */,
 				6FADE51714BA0494007EE121 /* HLSViewAnimation.m */,
 				6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */,
@@ -1017,6 +1022,7 @@
 				6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */,
 				6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationStep.m in Sources */,
 				6FCFEA4A15E37E25002CAF9E /* HLSAnimationStep.m in Sources */,
+				6F97E17815E60C6A00EF6F62 /* HLSObjectAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

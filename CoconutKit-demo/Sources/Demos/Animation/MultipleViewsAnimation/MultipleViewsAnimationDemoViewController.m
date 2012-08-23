@@ -99,17 +99,17 @@
     HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
     animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
-    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
     [viewAnimation11 translateByVectorWithX:50.f y:60.f];
     [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
-    HLSViewAnimation *viewAnimation12 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation12 = [HLSViewAnimation animation];
     [viewAnimation12 translateByVectorWithX:40.f y:-10.f];
     viewAnimation12.alphaVariation = -0.4f;
     [animationStep1 addViewAnimation:viewAnimation12 forView:self.rectangleView2];
-    HLSViewAnimation *viewAnimation13 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation13 = [HLSViewAnimation animation];
     [viewAnimation13 translateByVectorWithX:0.f y:100.f];
     [animationStep1 addViewAnimation:viewAnimation13 forView:self.rectangleView3];
-    HLSViewAnimation *viewAnimation14 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation14 = [HLSViewAnimation animation];
     viewAnimation14.alphaVariation = -0.8f;
     [animationStep1 addViewAnimation:viewAnimation14 forView:self.rectangleView4];
     
@@ -117,7 +117,7 @@
     HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
     animationStep2.tag = @"step2";
     animationStep2.duration = 1.;
-    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation animation];
     [viewAnimation21 translateByVectorWithX:80.f y:0.f];
     [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView1];
     [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView2];
@@ -127,14 +127,14 @@
     HLSViewAnimationStep *animationStep3 = [HLSViewAnimationStep animationStep];
     animationStep3.tag = @"step3";
     animationStep3.duration = 0.5;
-    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation animation];
     [viewAnimation31 scaleWithXFactor:1.5f yFactor:2.f];
     [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView1];
-    HLSViewAnimation *viewAnimation32 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation32 = [HLSViewAnimation animation];
     [viewAnimation32 scaleWithXFactor:2.f yFactor:1.5f];
     viewAnimation32.alphaVariation = -0.3f;
     [animationStep3 addViewAnimation:viewAnimation32 forView:self.rectangleView2];
-    HLSViewAnimation *viewAnimation33 = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *viewAnimation33 = [HLSViewAnimation animation];
     [viewAnimation33 scaleWithXFactor:0.5f yFactor:0.5f];
     [animationStep3 addViewAnimation:viewAnimation33 forView:self.rectangleView3];
     

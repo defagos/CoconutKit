@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSObjectAnimation+Friend.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -43,13 +44,6 @@
 @end
 
 @implementation HLSViewAnimation
-
-#pragma mark Convenience methods
-
-+ (HLSViewAnimation *)viewAnimation
-{
-    return [[[[self class] alloc] init] autorelease];
-}
 
 #pragma mark Object creation and destruction
 
@@ -129,7 +123,7 @@
 - (id)reverseObjectAnimation
 {
     // See remarks at the beginning
-    HLSViewAnimation *reverseViewAnimation = [HLSViewAnimation viewAnimation];
+    HLSViewAnimation *reverseViewAnimation = [super reverseObjectAnimation];
     [reverseViewAnimation scaleWithXFactor:1.f / self.scaleParameters.v1
                                    yFactor:1.f / self.scaleParameters.v2];
     [reverseViewAnimation translateByVectorWithX:-self.translationParameters.v1
@@ -142,7 +136,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    HLSViewAnimation *viewAnimationCopy = [[HLSViewAnimation allocWithZone:zone] init];
+    HLSViewAnimation *viewAnimationCopy = [super copyWithZone:zone];
     viewAnimationCopy.scaleParameters = self.scaleParameters;
     viewAnimationCopy.translationParameters = self.translationParameters;
     viewAnimationCopy.alphaVariation = self.alphaVariation;

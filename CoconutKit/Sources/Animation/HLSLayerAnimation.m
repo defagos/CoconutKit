@@ -10,6 +10,7 @@
 
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSObjectAnimation+Friend.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -29,13 +30,6 @@
 @end
 
 @implementation HLSLayerAnimation
-
-#pragma mark Convenience methods
-
-+ (HLSLayerAnimation *)layerAnimation
-{
-    return [[[[self class] alloc] init] autorelease];
-}
 
 #pragma mark Object creation and destruction
 
@@ -135,7 +129,7 @@
 - (id)reverseObjectAnimation
 {
     // See remarks at the beginning
-    HLSLayerAnimation *reverseLayerAnimation = [HLSLayerAnimation layerAnimation];
+    HLSLayerAnimation *reverseLayerAnimation = [super reverseObjectAnimation];
     [reverseLayerAnimation rotateByAngle:-self.rotationParameters.v1
                         aboutVectorWithX:self.rotationParameters.v2
                                        y:self.rotationParameters.v3
@@ -154,7 +148,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    HLSLayerAnimation *layerAnimationCopy = [[HLSLayerAnimation allocWithZone:zone] init];
+    HLSLayerAnimation *layerAnimationCopy = [super copyWithZone:zone];
     layerAnimationCopy.rotationParameters = self.rotationParameters;
     layerAnimationCopy.scaleParameters = self.scaleParameters;
     layerAnimationCopy.translationParameters = self.translationParameters;

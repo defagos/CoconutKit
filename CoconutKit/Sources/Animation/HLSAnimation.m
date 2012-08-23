@@ -8,17 +8,19 @@
 
 #import "HLSAnimation.h"
 
+#import "HLSAnimationStep+Friend.h"
 #import "HLSAssert.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 #import "HLSZeroingWeakRef.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface HLSAnimation ()
+@interface HLSAnimation () <HLSAnimationStepDelegate>
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
@@ -177,7 +179,7 @@
     // Proceeed with the next step (if any)
     self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
     if (self.currentAnimationStep) {
-        [self.currentAnimationStep playAfterDelay:m_delay withDelegate:self animated:animated];
+        [self.currentAnimationStep playWithDelegate:self afterDelay:m_delay animated:animated];
         
         // The delay is just used for the first step. Set it to 0 for the remaining ones
         m_delay = 0.;
@@ -321,37 +323,32 @@
     if (! self.cancelling) {
         // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
         // delay period is over, as for UIView animation blocks)
-        if ([self.animationSteps indexOfObject:animationStep] == 0) {
+        if (animationStep == [self.animationSteps firstObject]) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:YES];
+                [self.delegate animationWillStart:self animated:animated];
             }
         }
     }
 }
 
-- (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
-    if (animated) {
-        if (self.cancelling) {
-            self.cancelling = NO;
-            return;
-        }
-        
-        if (self.terminating) {
-            self.terminating = NO;
-            return;
-        }        
-    }
-    
     // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
     // played with animated = YES are still notified as animated)
-    if (! self.cancelling) {
+    if (! self.cancelling && ! (animated && self.terminating)) {
         if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : animated];
-        }        
+            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : m_animated];
+        }
     }
     
-    [self playNextAnimationStepAnimated:animated];
+    if (! animated || (! self.terminating && ! self.cancelling)) {
+        [self playNextAnimationStepAnimated:(self.terminating || self.cancelling) ? NO : m_animated];
+    }
+    
+    if (animated) {
+        self.cancelling = NO;
+        self.terminating = NO;
+    }
 }
 
 #pragma mark NSCopying protocol implementation

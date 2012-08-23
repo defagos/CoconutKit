@@ -21,7 +21,7 @@
 @property (nonatomic, retain) UIView *dummyView;
 
 - (void)animationDidStart:(CAAnimation *)animation;
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag;
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
 
 @end
 
@@ -70,24 +70,16 @@
     [self addLayerAnimation:layerAnimation forLayer:view.layer];
 }
 
-- (void)playAfterDelay:(NSTimeInterval)delay withDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
+- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
-    self.delegate = delegate;
-    
     // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
     // in animations
-    BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
-    if (actuallyAnimated) {
+    if (animated) {
         [CATransaction begin];
         [CATransaction setAnimationDuration:self.duration];
         [CATransaction setAnimationTimingFunction:self.timingFunction];
         
         // TODO: Delay
-    }
-    // Instantaneous
-    else {
-        // Still report the animated value, even if not actually animated
-        [self.delegate animationStepWillStart:self animated:animated];
     }
     
     // Animate all views involved in the animation step
@@ -140,7 +132,7 @@
     
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
     // which will receive the start / end animation events
-    if (actuallyAnimated) {
+    if (animated) {
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
@@ -150,17 +142,12 @@
     self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
     // Animated
-    if (actuallyAnimated) {
+    if (animated) {
         [CATransaction commit];
-    }
-    // Instantaneous
-    else {
-        // Still report the animated value, even if not actually animated
-        [self.delegate animationStepDidStop:self animated:animated];
     }
 }
 
-- (void)cancel
+- (void)cancelAnimation
 {
     for (CALayer *layer in [self objects]) {
         [layer removeAllAnimations];
@@ -210,9 +197,9 @@
     [self notifyDelegateAnimationStepWillStart];
 }
 
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished
 {
-    [self notifyDelegateAnimationStepDidStop];
+    [self notifyDelegateAnimationStepDidStopFinished:finished];
 }
 
 @end

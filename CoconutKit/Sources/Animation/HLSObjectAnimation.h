@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@protocol HLSObjectAnimation <NSCopying>
+@interface HLSObjectAnimation : NSObject <NSCopying>
 
 /**
- * Return the object animation corresponding to the inverse animation
+ * Identity animation
  */
-- (id)reverseObjectAnimation;
++ (id)animation;
 
 @end
