@@ -152,6 +152,7 @@
     for (CALayer *layer in [self objects]) {
         [layer removeAllAnimations];
     }
+    [self.dummyView.layer removeAllAnimations];
 }
 
 #pragma mark Reverse animation

@@ -153,6 +153,13 @@
     }
     
     [self cancelAnimation];
+    
+    // The animation callback might be called (it might depend on subclasses, but currently this is the case for UIView
+    // bock-based animations and CoreAnimations), but to get delegate events in the proper order we cannot notify that
+    // the animation step has ended there. We must do it right here
+    if ([self.delegate respondsToSelector:@selector(animationStepDidStop:animated:finished:)]) {
+        [self.delegate animationStepDidStop:self animated:NO finished:NO];
+    }
 }
 
 #pragma mark Reverse animation
@@ -178,7 +185,11 @@
 
 - (void)notifyDelegateAnimationStepDidStopFinished:(BOOL)finished
 {
-    [self.delegate animationStepDidStop:self animated:YES finished:finished];
+    // If the animation was cancelled, we do not notify from end callbacks (where this method is supposedly being called)
+    if (finished) {
+        [self.delegate animationStepDidStop:self animated:YES finished:YES];
+    }
+    
     self.delegate = nil;
 }
 

@@ -119,6 +119,7 @@
     for (UIView *view in [self objects]) {
         [view.layer removeAllAnimations];
     }
+    [self.dummyView.layer removeAllAnimations];
 }
 
 #pragma mark Reverse animation

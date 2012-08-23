@@ -235,9 +235,6 @@
     
     // Cancel all animations
     [self.currentAnimationStep cancel];
-    
-    // Play all remaining steps without animation
-    [self playNextAnimationStepAnimated:NO];
 }
 
 - (void)terminate
@@ -254,20 +251,8 @@
     
     self.terminating = YES;
     
-    if (self.currentAnimationStep) {
-        // Cancel all animations
-        [self.currentAnimationStep cancel];
-        
-        // The animation callback will be called, but to get delegate events in the proper order we cannot
-        // notify that the animation step has ended there. We must do it right now, and not anymore
-        // in -animationStepDidStop:finished:context:
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:self.currentAnimationStep animated:NO];
-        }
-    }
-    
-    // Play all remaining steps without animation
-    [self playNextAnimationStepAnimated:NO];
+    // Cancel all animations
+    [self.currentAnimationStep cancel];
 }
 
 #pragma mark Creating animations variants from an existing animation
@@ -333,21 +318,25 @@
 
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
-    // Notify the end of the animation step. Use m_animated, not simply NO (so that animation steps with duration 0 and
-    // played with animated = YES are still notified as animated)
-    if (! self.cancelling && ! (animated && self.terminating)) {
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:self.terminating ? NO : animated];
+    if (finished) {
+        if (! self.cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:animated];
+            }
         }
+        
+        [self playNextAnimationStepAnimated:animated];
     }
-    
-    if (! animated || (! self.terminating && ! self.cancelling)) {
-        [self playNextAnimationStepAnimated:(self.terminating || self.cancelling) ? NO : animated];
-    }
-    
-    if (animated) {
-        self.cancelling = NO;
-        self.terminating = NO;
+    else {
+        // Still send all delegate notifications if terminating
+        if (! self.cancelling) {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:animated];
+            }
+        }
+        
+        // Play the remaining steps non-animated
+        [self playNextAnimationStepAnimated:NO];
     }
 }
 
