@@ -159,6 +159,18 @@
     return reverseAnimationStep;
 }
 
+#pragma mark Delegate notification
+
+- (void)notifyDelegateAnimationStepWillStart
+{
+    [self.delegate animationStepWillStart:self animated:YES];
+}
+
+- (void)notifyDelegateAnimationStepDidStop
+{
+    [self.delegate animationStepDidStop:self animated:YES];
+}
+
 #pragma mark NSCopying protocol implementation
 
 - (id)copyWithZone:(NSZone *)zone

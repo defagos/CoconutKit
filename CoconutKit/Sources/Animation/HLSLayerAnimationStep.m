@@ -207,12 +207,12 @@
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    [self.delegate animationStepWillStart:self animated:YES];
+    [self notifyDelegateAnimationStepWillStart];
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
-    [self.delegate animationStepDidStop:self animated:YES];
+    [self notifyDelegateAnimationStepDidStop];
 }
 
 @end

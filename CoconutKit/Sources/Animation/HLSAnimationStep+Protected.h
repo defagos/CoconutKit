@@ -30,4 +30,7 @@
 
 @property (nonatomic, assign) id<HLSAnimationStepDelegate> delegate;
 
+- (void)notifyDelegateAnimationStepWillStart;
+- (void)notifyDelegateAnimationStepDidStop;
+
 @end

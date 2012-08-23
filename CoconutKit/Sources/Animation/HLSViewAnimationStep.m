@@ -171,12 +171,12 @@
 
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
-    [self.delegate animationStepWillStart:self animated:YES];
+    [self notifyDelegateAnimationStepWillStart];
 }
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    [self.delegate animationStepDidStop:self animated:YES];
+    [self notifyDelegateAnimationStepDidStop];
 }
 
 @end
