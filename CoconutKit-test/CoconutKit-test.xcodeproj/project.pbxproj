@@ -37,6 +37,7 @@
 		6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */; };
 		6F41D23715E6A590009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */; };
+		6F41D24815E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
 		6F5007F21585E18100391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */; };
 		6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010F415ABECA400A9FEC5 /* HLSContainerStack.m */; };
 		6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */; };
@@ -211,6 +212,8 @@
 		6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreLoader.m; sourceTree = "<group>"; };
 		6F41D23515E6A590009A2384 /* CALayer+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F41D24615E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F5007F01585E18100391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
 		6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
 		6F6010F315ABECA400A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
@@ -666,6 +669,8 @@
 			children = (
 				6F41D23515E6A590009A2384 /* CALayer+HLSExtensions.h */,
 				6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */,
+				6F41D24615E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.h */,
+				6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */,
 				6F3E3E8A15A227A7007E78BD /* HLSApplicationPreLoader.h */,
 				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
@@ -1121,6 +1126,7 @@
 				6FCFEA5615E37E4F002CAF9E /* HLSLayerAnimationStep.m in Sources */,
 				6F97E17D15E60C8700EF6F62 /* HLSObjectAnimation.m in Sources */,
 				6F41D23715E6A590009A2384 /* CALayer+HLSExtensions.m in Sources */,
+				6F41D24815E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

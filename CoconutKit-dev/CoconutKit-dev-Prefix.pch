@@ -9,6 +9,7 @@
 
     // CoconutKit library public header files
     #import "CALayer+HLSExtensions.h"
+    #import "CAMediaTimingFunction+HLSExtensions.h"
     #import "HLSActionSheet.h"
     #import "HLSAnimation.h"
     #import "HLSAnimationStep.h"
