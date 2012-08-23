@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
@@ -780,7 +781,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationStepFinished:(HLSViewAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     if ([animationStep.tag isEqualToString:@"singleImage"]) {
         UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];

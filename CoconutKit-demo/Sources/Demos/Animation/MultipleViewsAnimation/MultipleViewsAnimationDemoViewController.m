@@ -198,7 +198,7 @@
     HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
 }
 
-- (void)animationStepFinished:(HLSViewAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
 }

@@ -11,6 +11,7 @@
 #import "HLSAnimation.h"
 #import "HLSAssert.h"
 #import "HLSFloat.h"
+#import "HLSLayerAnimationStep.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSSet+HLSExtensions.h"
 #import <objc/runtime.h>

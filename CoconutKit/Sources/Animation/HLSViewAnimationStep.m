@@ -10,6 +10,8 @@
 
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 
 @interface HLSViewAnimationStep ()
 

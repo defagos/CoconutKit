@@ -11,6 +11,7 @@
 #import "NSArray+HLSExtensions.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSViewAnimationStep.h"
 #import "NSBundle+HLSExtensions.h"
 
 static const CGFloat kSearchBarStandardHeight = 44.f;
