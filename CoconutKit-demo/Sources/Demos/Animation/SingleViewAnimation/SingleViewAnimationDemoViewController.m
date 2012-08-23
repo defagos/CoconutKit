@@ -140,6 +140,7 @@
     
     HLSLayerAnimationStep *animationStep6 = [HLSLayerAnimationStep animationStep];
     animationStep6.tag = @"step6";
+    animationStep6.duration = 0.7;
     animationStep6.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     HLSLayerAnimation *layerAnimation61 = [HLSLayerAnimation animation];
     [layerAnimation61 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];

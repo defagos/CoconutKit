@@ -20,6 +20,8 @@
 
 @property (nonatomic, retain) UIView *dummyView;
 
+- (void)cancelAnimationForLayer:(CALayer *)layer;
+
 - (void)animationDidStart:(CAAnimation *)animation;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
 
@@ -125,9 +127,11 @@
         layer.transform = transform;
         
         // Create the animation group and attach it to the layer
-        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-        animationGroup.animations = [NSArray arrayWithArray:animations];
-        [layer addAnimation:animationGroup forKey:nil];
+        if (animated) {
+            CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+            animationGroup.animations = [NSArray arrayWithArray:animations];
+            [layer addAnimation:animationGroup forKey:nil];            
+        }
     }
     
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
@@ -147,12 +151,23 @@
     }
 }
 
+- (void)cancelAnimationForLayer:(CALayer *)layer
+{
+    [layer removeAllAnimations];
+    for (CALayer *sublayer in layer.sublayers) {
+        [self cancelAnimationForLayer:sublayer];
+    }
+}
+
 - (void)cancelAnimation
 {
+    // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
+    // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
+    // correct way to cancel animations attached to a layer
     for (CALayer *layer in [self objects]) {
-        [layer removeAllAnimations];
+        [self cancelAnimationForLayer:layer];
     }
-    [self.dummyView.layer removeAllAnimations];
+    [self cancelAnimationForLayer:self.dummyView.layer];
 }
 
 #pragma mark Reverse animation
