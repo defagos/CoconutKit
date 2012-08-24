@@ -18,6 +18,8 @@
     float values2[2];
     [self getControlPointAtIndex:2 values:values2];
     
+    // Flip the original curve around the y = 1 - x axis
+    // Refer to the "Introduction to Animation Types and Timing Programming Guide"
     return [CAMediaTimingFunction functionWithControlPoints:1.f - values2[0] :values1[1] :1.f - values1[0] :values2[1]];
 }
 
