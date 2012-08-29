@@ -80,6 +80,12 @@
 
 @synthesize delegate = m_delegate;
 
+@synthesize running = m_running;
+
+@synthesize animating = m_animating;
+
+@synthesize cancelling = m_cancelling;
+
 - (NSArray *)objects
 {
     NSMutableArray *objects = [NSMutableArray array];
@@ -123,9 +129,17 @@
 
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
-    m_actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
+    if (self.running) {
+        HLSLoggerInfo(@"The animation step is already running");
+        return;
+    }
     
-    if (! m_actuallyAnimated) {
+    self.running = YES;
+    self.cancelling = NO;
+    
+    BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
+    
+    if (! actuallyAnimated) {
         // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
         // played animated are still considered to be played animated
         [delegate animationStepWillStart:self animated:animated];
@@ -137,22 +151,41 @@
         self.delegate = delegate;
     }
     
-    [self playAnimationAfterDelay:delay animated:m_actuallyAnimated];
+    [self playAnimationAfterDelay:delay animated:actuallyAnimated];
     
-    if (! m_actuallyAnimated) {
+    if (! actuallyAnimated) {
         // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
         // played animated are still considered to be played animated
         [delegate animationStepDidStop:self animated:animated finished:YES];
+        
+        self.running = NO;
     }
 }
 
 - (void)cancel
 {
-    if (! m_actuallyAnimated) {
+    if (! self.running) {
+        HLSLoggerDebug(@"The animation step is not running, nothing to cancel");
         return;
     }
     
+    if (self.cancelling) {
+        HLSLoggerDebug(@"The animation step is already being cancelled");
+        return;
+    }
+    
+    self.cancelling = YES;
+    
     [self cancelAnimation];
+    
+    // Cancel occurs during the initial delay period
+    if (! self.animating) {
+        // Must notify manually (the willStart callback is still called, but too late. We want to get this event
+        // on the spot)
+        if ([self.delegate respondsToSelector:@selector(animationStepWillStart:animated:)]) {
+            [self.delegate animationStepWillStart:self animated:NO];
+        }        
+    }
     
     // The animation callback might be called (it might depend on subclasses, but currently this is the case for UIView
     // bock-based animations and CoreAnimations), but to get delegate events in the proper order we cannot notify that
@@ -180,15 +213,22 @@
 
 - (void)notifyDelegateAnimationStepWillStart
 {
-    [self.delegate animationStepWillStart:self animated:YES];
+    if (! self.cancelling) {
+        [self.delegate animationStepWillStart:self animated:YES];
+    }
+    
+    self.animating = YES;
 }
 
 - (void)notifyDelegateAnimationStepDidStopFinished:(BOOL)finished
 {
     // If the animation was cancelled, we do not notify from end callbacks (where this method is supposedly being called)
-    if (finished) {
+    if (! self.cancelling) {
         [self.delegate animationStepDidStop:self animated:YES finished:YES];
     }
+    
+    self.animating = NO;
+    self.cancelling = NO;
     
     self.delegate = nil;
 }

@@ -22,6 +22,8 @@
 
 @property (nonatomic, retain) UIView *dummyView;
 
+- (void)updateToFinalState;
+
 - (void)animationDidStart:(CAAnimation *)animation;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
 
@@ -84,6 +86,8 @@
         // TODO: Delay
     }
     
+    CFTimeInterval beginTime = CACurrentMediaTime() + delay;
+    
     // Animate all views involved in the animation step
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
@@ -110,7 +114,9 @@
             [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
             [animations addObject:opacityAnimation];
         }
-        layer.opacity = opacity;
+        else if (doubleeq(delay, 0.f)) {
+            layer.opacity = opacity;
+        }
         
         // Transform animation
         CATransform3D translationTransform = CATransform3DMakeTranslation(-layer.transform.m41, -layer.transform.m42, 0.f);
@@ -124,14 +130,20 @@
             [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
             [animations addObject:transformAnimation];
         }
-        layer.transform = transform;
+        else if (doubleeq(delay, 0.f)) {
+            layer.transform = transform;
+        }
         
         // Create the animation group and attach it to the layer
         if (animated) {
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
-            [layer addAnimation:animationGroup forKey:nil];            
+            animationGroup.beginTime = beginTime;
+            [layer addAnimation:animationGroup forKey:@"layerAnimationGroup"];
         }
+        
+        // TODO: Instead of doing manual property setting like above, create animations in all cases
+        //       and loop over them here?
     }
     
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
@@ -140,6 +152,7 @@
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
+        dummyViewOpacityAnimation.beginTime = beginTime;
         dummyViewOpacityAnimation.delegate = self;
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
     }
@@ -153,9 +166,12 @@
 
 - (void)cancelAnimation
 {
+    [self updateToFinalState];
+    
     // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
+    // Cancel occurred during the initial delay period
     for (CALayer *layer in [self objects]) {
         [layer removeAllAnimationsRecursively];
     }
@@ -180,10 +196,27 @@
     return animationStepCopy;
 }
 
+#pragma mark Setting the animation final state
+
+- (void)updateToFinalState
+{
+    for (CALayer *layer in [self objects]) {
+        // Set final values
+        CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:@"layerAnimationGroup"];
+        for (CABasicAnimation *layerAnimation in animationGroup.animations) {
+            [layer setValue:layerAnimation.toValue forKeyPath:layerAnimation.keyPath];
+        }
+    }
+}
+
 #pragma mark Animation callbacks
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
+    if (! self.cancelling) {
+        [self updateToFinalState];
+    }
+    
     [self notifyDelegateAnimationStepWillStart];
 }
 

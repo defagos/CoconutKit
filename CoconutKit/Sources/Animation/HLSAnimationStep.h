@@ -16,7 +16,9 @@
     NSString *m_tag;
     NSTimeInterval m_duration;
     id<HLSAnimationStepDelegate> m_delegate;
-    BOOL m_actuallyAnimated;
+    BOOL m_running;
+    BOOL m_animating;
+    BOOL m_cancelling;
 }
 
 /**
@@ -36,5 +38,9 @@
  * Default value is 0.2
  */
 @property (nonatomic, assign) NSTimeInterval duration;
+
+@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isAnimating) BOOL animating;
+@property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 
 @end
