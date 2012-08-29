@@ -14,6 +14,10 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 
+#if TARGET_IPHONE_SIMULATOR
+#import <dlfcn.h>
+#endif
+
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
 //         duration received from HLSAnimationStep (0.2) and set an ease-in ease-out function
@@ -80,7 +84,31 @@
 {
     if (animated) {
         [CATransaction begin];
-        [CATransaction setAnimationDuration:self.duration];
+        
+        NSTimeInterval duration = self.duration;
+        
+        // For tests within the iOS simulator only: Slow down Core Animations as UIView block-based animations (when
+        // quickly pressing the shift key three times)
+        //
+        // Credits to Cédric Luthi, see http://twitter.com/0xced/statuses/232860477317869568
+#if TARGET_IPHONE_SIMULATOR
+        static CGFloat (*s_UIAnimationDragCoefficient)(void) = NULL;
+        static BOOL s_firstLoad = YES;
+        if (s_firstLoad) {
+            void *UIKitDylib = dlopen([[[NSBundle bundleForClass:[UIApplication class]] executablePath] fileSystemRepresentation], RTLD_LAZY);
+            s_UIAnimationDragCoefficient = (CGFloat (*)(void))dlsym(UIKitDylib, "UIAnimationDragCoefficient");
+            if (! s_UIAnimationDragCoefficient) {
+                HLSLoggerInfo(@"UIAnimationDragCoefficient not found. Slow animations won't be available for animations based on Core Animation");
+            }
+            
+            s_firstLoad = NO;
+        }
+        
+        if (s_UIAnimationDragCoefficient) {
+            duration *= s_UIAnimationDragCoefficient();
+        }
+#endif
+        [CATransaction setAnimationDuration:duration];
         [CATransaction setAnimationTimingFunction:self.timingFunction];
     }
     
