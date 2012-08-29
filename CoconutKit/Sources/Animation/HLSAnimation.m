@@ -221,6 +221,11 @@
     }
 }
 
+- (void)togglePause
+{
+    [self.currentAnimationStep togglePause];
+}
+
 - (void)cancel
 {
     if (! self.running) {

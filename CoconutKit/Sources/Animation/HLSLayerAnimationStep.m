@@ -123,6 +123,11 @@
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
         
+        // Reinitialize layer properties which could have been changed when pausing the animation
+        // during a previous step
+        layer.timeOffset = 0.;
+        layer.beginTime = delay;
+        
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
         //         animate properties but do not set them). Usually, we can do this right where the CoreAnimation
         //         is created, but this does not work if a delay has been set (in which case this will be
@@ -186,6 +191,11 @@
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
     // which will receive the start / end animation events
     if (animated) {
+        // Reinitialize layer properties which could have been changed when pausing the animation
+        // during a previous step
+        self.dummyView.layer.timeOffset = 0.;
+        self.dummyView.layer.beginTime = delay;
+        
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
@@ -201,6 +211,14 @@
     if (animated) {
         [CATransaction commit];
     }
+}
+
+- (void)togglePauseAnimation
+{
+    for (CALayer *layer in [self objects]) {
+        [layer togglePauseAnimations];
+    }
+    [self.dummyView.layer togglePauseAnimations];
 }
 
 - (void)terminateAnimation

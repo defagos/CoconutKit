@@ -21,6 +21,8 @@
  */
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
+- (void)togglePause;
+
 /**
  * Terminate the animation (if running). The delegate will still receive the willStart / didStop events
  */

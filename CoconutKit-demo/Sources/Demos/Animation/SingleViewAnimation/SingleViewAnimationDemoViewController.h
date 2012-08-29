@@ -34,6 +34,7 @@
 
 - (IBAction)playForward:(id)sender;
 - (IBAction)playBackward:(id)sender;
+- (IBAction)pause:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)terminate:(id)sender;
 - (IBAction)toggleAnimated:(id)sender;

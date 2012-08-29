@@ -117,6 +117,14 @@
     }
 }
 
+- (void)togglePauseAnimation
+{
+    for (UIView *view in [self objects]) {
+        [view.layer togglePauseAnimations];
+    }
+    [self.dummyView.layer togglePauseAnimations];
+}
+
 - (void)terminateAnimation
 {
     // We must recursively cancel subview animations (this is especially important since altering the frame (e.g.

@@ -128,6 +128,9 @@
  */
 - (void)playAfterDelay:(NSTimeInterval)delay;
 
+- (void)togglePause;
+
+
 /**
  * Cancel the animation. The animation immediately reaches its end state. The delegate does not receive subsequent
  * events

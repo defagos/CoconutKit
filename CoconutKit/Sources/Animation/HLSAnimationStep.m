@@ -167,6 +167,11 @@
     }
 }
 
+- (void)togglePause
+{
+    [self togglePauseAnimation];
+}
+
 - (void)terminate
 {
     if (! self.running) {
@@ -200,6 +205,11 @@
 }
 
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+{
+    HLSMissingMethodImplementation();
+}
+
+- (void)togglePauseAnimation
 {
     HLSMissingMethodImplementation();
 }
