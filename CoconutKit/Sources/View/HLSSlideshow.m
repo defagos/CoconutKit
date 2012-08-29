@@ -480,8 +480,8 @@ static const NSInteger kSlideshowNoIndex = -1;
         CGFloat scaleFactor12 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
         CGFloat xOffset12 = currentImageXOffset * self.transitionDuration / totalDuration;
         CGFloat yOffset12 = currentImageYOffset * self.transitionDuration / totalDuration;
-        [layerAnimation12 scaleWithXFactor:scaleFactor12 yFactor:scaleFactor12 zFactor:1.f];
-        [layerAnimation12 translateByVectorWithX:xOffset12 y:yOffset12 z:0.f];
+        [layerAnimation12 scaleWithXFactor:scaleFactor12 yFactor:scaleFactor12];
+        [layerAnimation12 translateByVectorWithX:xOffset12 y:yOffset12];
         [animationStep1 addLayerAnimation:layerAnimation12 forView:currentImageView];
     }
     
@@ -503,8 +503,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor21 = powf(currentImageScaleFactor, self.imageDuration / totalDuration);
     CGFloat xOffset21 = currentImageXOffset * self.imageDuration / totalDuration;
     CGFloat yOffset21 = currentImageYOffset * self.imageDuration / totalDuration;
-    [layerAnimation21 scaleWithXFactor:scaleFactor21 yFactor:scaleFactor21 zFactor:1.f];
-    [layerAnimation21 translateByVectorWithX:xOffset21 y:yOffset21 z:0.f];
+    [layerAnimation21 scaleWithXFactor:scaleFactor21 yFactor:scaleFactor21];
+    [layerAnimation21 translateByVectorWithX:xOffset21 y:yOffset21];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:currentImageView];
     
     // Transition
@@ -516,8 +516,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor31 = powf(currentImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset31 = currentImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset31 = currentImageYOffset * self.transitionDuration / totalDuration;
-    [layerAnimation31 scaleWithXFactor:scaleFactor31 yFactor:scaleFactor31 zFactor:1.f];
-    [layerAnimation31 translateByVectorWithX:xOffset31 y:yOffset31 z:0.f];
+    [layerAnimation31 scaleWithXFactor:scaleFactor31 yFactor:scaleFactor31];
+    [layerAnimation31 translateByVectorWithX:xOffset31 y:yOffset31];
     layerAnimation31.opacityVariation = -1.f;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:currentImageView];
     
@@ -525,8 +525,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat scaleFactor32 = powf(nextImageScaleFactor, self.transitionDuration / totalDuration);
     CGFloat xOffset32 = nextImageXOffset * self.transitionDuration / totalDuration;
     CGFloat yOffset32 = nextImageYOffset * self.transitionDuration / totalDuration;
-    [layerAnimation32 scaleWithXFactor:scaleFactor32 yFactor:scaleFactor32 zFactor:1.f];
-    [layerAnimation32 translateByVectorWithX:xOffset32 y:yOffset32 z:0.f];
+    [layerAnimation32 scaleWithXFactor:scaleFactor32 yFactor:scaleFactor32];
+    [layerAnimation32 translateByVectorWithX:xOffset32 y:yOffset32];
     layerAnimation32.opacityVariation = 1.f;
     [animationStep3 addLayerAnimation:layerAnimation32 forView:nextImageView];
     
@@ -550,7 +550,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     animationStep1.duration = 0.;
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 translateByVectorWithX:xOffset y:yOffset z:0.f];
+    [layerAnimation11 translateByVectorWithX:xOffset y:yOffset];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:nextImageView];
     
     // Display the current image for the duration which has been set (identity view animation step)
@@ -562,10 +562,10 @@ static const NSInteger kSlideshowNoIndex = -1;
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
     animationStep3.duration = self.transitionDuration;
     HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
+    [layerAnimation31 translateByVectorWithX:-xOffset y:-yOffset];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:currentImageView];
     HLSLayerAnimation *layerAnimation32 = [HLSLayerAnimation animation];
-    [layerAnimation32 translateByVectorWithX:-xOffset y:-yOffset z:0.f];
+    [layerAnimation32 translateByVectorWithX:-xOffset y:-yOffset];
     [animationStep3 addLayerAnimation:layerAnimation32 forView:nextImageView];
     
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];

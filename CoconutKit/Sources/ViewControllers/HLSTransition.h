@@ -56,7 +56,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       // Setup step initially bringing the appearing view outside the frame
  *       HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
  *       HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
- *       [layerAnimation11 translateByVectorWithX:CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [layerAnimation11 translateByVectorWithX:CGRectGetWidth(frame) y:0.f];
  *       [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
  *       animationStep1.duration = 0.;
  *       [animationSteps addObject:animationStep1];
@@ -64,10 +64,10 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       // The push itself, moving both views to the left
  *       HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
  *       HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
- *       [layerAnimation21 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [layerAnimation21 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f];
  *       [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
  *       HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
- *       [layerAnimation22 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f z:0.f];
+ *       [layerAnimation22 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f];
  *       [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
  *       animationStep2.duration = 0.4;
  *       [animationSteps addObject:animationStep2];

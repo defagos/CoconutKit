@@ -48,6 +48,13 @@
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 
 /**
+ * Same geometric transforms as above, but for transforms in a plane (the most common case)
+ */
+- (void)rotateByAngle:(CGFloat)angle;
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
+
+/**
  * Convenience method to calculate the layer animation parameters needed to transform a rect into another one
  */
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect;

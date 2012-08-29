@@ -106,7 +106,7 @@
     animationStep1.duration = 2.;
     animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 translateByVectorWithX:100.f y:100.f z:0.f];
+    [layerAnimation11 translateByVectorWithX:100.f y:100.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView];
     
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
@@ -119,13 +119,13 @@
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
     animationStep3.tag = @"step3";
     HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 scaleWithXFactor:1.5f yFactor:1.5f zFactor:1.f];
+    [layerAnimation31 scaleWithXFactor:1.5f yFactor:1.5f];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView];
     
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
     animationStep4.tag = @"step4";
     HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
-    [layerAnimation41 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
+    [layerAnimation41 rotateByAngle:M_PI_4];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView];
     
     HLSLayerAnimationStep *animationStep5 = [HLSLayerAnimationStep animationStep];
@@ -133,7 +133,7 @@
     animationStep5.duration = 1.;
     animationStep5.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation animation];
-    [layerAnimation51 translateByVectorWithX:0.f y:200.f z:0.f];
+    [layerAnimation51 translateByVectorWithX:0.f y:200.f];
     [animationStep5 addLayerAnimation:layerAnimation51 forView:self.rectangleView];
     
     HLSLayerAnimationStep *animationStep6 = [HLSLayerAnimationStep animationStep];
@@ -141,7 +141,7 @@
     animationStep6.duration = 0.7;
     animationStep6.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     HLSLayerAnimation *layerAnimation61 = [HLSLayerAnimation animation];
-    [layerAnimation61 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:0.f z:1.f];
+    [layerAnimation61 rotateByAngle:M_PI_4];
     layerAnimation61.opacityVariation = 0.3f;
     [animationStep6 addLayerAnimation:layerAnimation61 forView:self.rectangleView];
     

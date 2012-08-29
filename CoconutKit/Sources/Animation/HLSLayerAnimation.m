@@ -85,6 +85,21 @@
     self.translationParameters = HLSVector3Make(x, y, z);
 }
 
+- (void)rotateByAngle:(CGFloat)angle
+{
+    [self rotateByAngle:angle aboutVectorWithX:0.f y:0.f z:1.f];
+}
+
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
+{
+    [self scaleWithXFactor:xFactor yFactor:yFactor zFactor:1.f];
+}
+
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
+{
+    [self translateByVectorWithX:x y:y z:0.f];
+}
+
 @synthesize opacityVariation = m_opacityVariation;
 
 - (void)setOpacityVariation:(CGFloat)opacityVariation
