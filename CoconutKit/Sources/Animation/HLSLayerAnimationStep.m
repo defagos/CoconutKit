@@ -50,6 +50,8 @@
 
 - (void)dealloc
 {
+    self.timingFunction = nil;
+    
     [self.dummyView removeFromSuperview];
     self.dummyView = nil;
     
@@ -76,25 +78,34 @@
 
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
-    // If duration is 0, do not create an animation block; creating such useless animation blocks might cause flickering
-    // in animations
     if (animated) {
         [CATransaction begin];
         [CATransaction setAnimationDuration:self.duration];
         [CATransaction setAnimationTimingFunction:self.timingFunction];
-        
-        // TODO: Delay
+    }
+    
+    if (! animated && ! doubleeq(delay, 0.f)) {
+        HLSLoggerWarn(@"A delay has been defined, but animated = NO. Ignored");
     }
     
     CFTimeInterval beginTime = CACurrentMediaTime() + delay;
     
-    // Animate all views involved in the animation step
+    // Animate all layers involved in the animation step
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
         
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
-        //         animate properties but do not set them)
+        //         animate properties but do not set them). Usually, we can do this right where the CoreAnimation
+        //         is created, but this does not work if a delay has been set (in which case this will be
+        //         noticed before the animation actually starts). We therefore apply the following strategy:
+        //           1) If animated, we create the animation, and set the final properties in the start
+        //              callback
+        //           2) If not animated we set the final properties on the spot
+        //           3) If a delay has been defined and the animation step is terminated before is actually
+        //              started animating layers, we stop the animation and set the final properties on the
+        //              spot
+        
         NSMutableArray *animations = [NSMutableArray array];
         
         // Opacity animation (opacity must always lie between 0.f and 1.f)
@@ -114,7 +125,7 @@
             [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
             [animations addObject:opacityAnimation];
         }
-        else if (doubleeq(delay, 0.f)) {
+        else {
             layer.opacity = opacity;
         }
         
@@ -130,7 +141,7 @@
             [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
             [animations addObject:transformAnimation];
         }
-        else if (doubleeq(delay, 0.f)) {
+        else {
             layer.transform = transform;
         }
         

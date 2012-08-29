@@ -76,7 +76,8 @@
 
 /**
  * Subclasses must register themselves for the asynchronous delegate events of the animation they implement,
- * and must call these methods from within their start / stop methods
+ * and must call these methods from within their start / stop methods. The finished parameter must be set to
+ * YES iff the animation could run to completion without being cancelled
  */
 - (void)notifyAsynchronousAnimationStepWillStart;
 - (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished;

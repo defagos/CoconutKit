@@ -96,7 +96,7 @@
         
         view.alpha = alpha;
         
-        // Animate frame
+        // Animate the frame
         CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
         CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, viewAnimation.transform),
                                                                   CGAffineTransformInvert(translationTransform));
@@ -109,7 +109,6 @@
     // Animate the dummy view
     self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
-    // Animated
     if (animated) {
         [UIView commitAnimations];
         
@@ -120,8 +119,8 @@
 - (void)terminateAnimation
 {
     // We must recursively cancel subview animations (this is especially important since altering the frame (e.g.
-    // by scaling it) seems to create additional implicit animations, which still finish and trigger the end animation
-    // callback with finished = YES!)
+    // by scaling it) seems to create additional implicit animations, which still finish and trigger their end
+    // animation callback with finished = YES!)
     for (UIView *view in [self objects]) {
         [view.layer removeAllAnimationsRecursively];
     }
