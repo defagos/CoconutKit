@@ -23,6 +23,9 @@
  *     over the resizing process
  *   - applies only affine operations
  *
+ * In general, and if you do not need to animate view frames to resize subviews during animations, you should 
+ * use layer animations instead of view animations since they have far more capabilities.
+ *
  * Designated initializer: init (create a view animation step with default settings)
  */
 @interface HLSViewAnimation : HLSObjectAnimation {
@@ -34,7 +37,7 @@
 
 /**
  * Geometric transform parameters to be applied during the view animation. The resulting transform (which you can 
- * obtain by calling -transform) applies the rotation, the scale and finally the translation
+ * obtain by calling -transform) applies the scale, then the translation
  */
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
@@ -55,7 +58,7 @@
 /**
  * The transform corresponding to the transform parameters associated with the view animation
  *
- * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
+ * If no scale or translation parameters have been set, this property returns the identity matrix
  */
 @property (nonatomic, readonly, assign) CGAffineTransform transform;
 

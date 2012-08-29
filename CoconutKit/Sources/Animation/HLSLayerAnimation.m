@@ -14,7 +14,23 @@
 #import "NSString+HLSExtensions.h"
 
 /**
- * Please read the remarks at the top of HLSViewAnimation.m
+ * Just a few important remarks about transforms (CATransform3D and CGAffineTransform):
+ *   - transforms are applied on the right: F' = F * T, where F is a frame (this is what CGRectApplyAffineTransform
+ *     does). A composed transform F_n * ... * F_2 * F_1 therefore applies F_1 first, then F_2, etc.
+ *   - the result of applying a transform using CGRectApplyAffineTransform is not the same as setting the transform
+ *     property of a UIView (or CALayer) with the same transform. When applied to the transform property, the result
+ *     obtained is relative to the anchor point of the view (resp. layer) and leaves it invariant. When applied to
+ *     a frame, the result obtained is relative to the coordinate system in which the frame resides and will in
+ *     general move the anchor point
+ *   - transforms generated for view / layer animations are meant to be applied on the transform property of a view
+ *     (resp. its layer). This has some important consequences when calculating the reverse view or layer animation.
+ *     The reverse is namely not simply CATransform3DInvert([self transform]). Since we are applying the changes in
+ *     the coordinate system centered on the original view or layer frame, we must do the same when the animation is
+ *     played backwards. Therefore, the reverse transform we need is not the inverse of transform = T * S * R, i.e. not
+ *     transform^{-1} = R^{-1} * S^{-1} * T^{-1}, but the transform applying the inverse rotation, scaling and
+ *     translation transforms, beginning with the operations leaving the frame origin invariant (rotation and scaling),
+ *     i.e. transform_{reverse} = R^{-1} * S^{-1} * T^{-1}. This is why rotation, translation and scaling parameters
+ *     must be kept separate, so that the reverse animation can be easily computed
  */
 
 @interface HLSLayerAnimation ()
@@ -160,10 +176,13 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; transform: %@; opacityVariation: %f>",
+    return [NSString stringWithFormat:@"<%@: %p; rotationParamers: %@; scaleParameters: %@; translationParameters: %@; "
+            "opacityVariation: %.2f>",
             [self class],
             self,
-            HLSStringFromCATransform3D([self transform]) ,
+            HLSStringFromVector4(self.rotationParameters),
+            HLSStringFromVector3(self.scaleParameters),
+            HLSStringFromVector3(self.translationParameters),
             self.opacityVariation];
 }
 

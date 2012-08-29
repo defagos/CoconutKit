@@ -13,17 +13,21 @@
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
  * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied
- * to a set of layerss, and represent the collective set of changes applied to them during some time interval.
+ * to a set of layers, and represent the collective set of changes applied to them during some time interval.
  * An animation (HLSAnimation) is then simply a collection of animation steps, either view-based
  * (HLSViewAnimationStep) or layer-based (HLSLayerAnimationStep).
  *
- * A layer animation animates layer transforms. This choice was made because frame animation would limit
- * transforms to affine transforms, for which HLSViewAnimation can be used instead (provided the layer belongs 
- * to a view, of course). Moreover, unlike views, layers do not layout their sublayers automatically based 
- * on autoresizing properties in iOS.
+ * A layer animation animates layer transforms, not frames. This choice was made because frame animation would 
+ * restrict transforms to affine transforms, for which HLSViewAnimation can be used instead (provided the layer 
+ * belongs to a view, of course). Moreover, unlike views, layers do not layout their sublayers automatically based 
+ * on autoresizing properties in iOS (the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] methods
+ * have to be implemented to respond to frame changes)
  *
- * Since transforms and not frames are altered, animated views do not have to implement any of the sublayer
- * layout callbacks (usually -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:])
+ * Since the layer transform is animated, none of the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] 
+ * methods need to be implemented for layers which are animated.
+ *
+ * In general, and if you do not need to animate view frames to resize subviews during animations, you should
+ * use layer animations instead of view animations since they have far more capabilities.
  *
  * Designated initializer: init (create a layer animation step with default settings)
  */

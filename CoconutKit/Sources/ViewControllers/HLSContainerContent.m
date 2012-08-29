@@ -181,7 +181,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 {
     // Sanitize input
     if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
-        HLSLoggerWarn(@"Duration must be non-negative or the default duration %f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
+        HLSLoggerWarn(@"Duration must be non-negative or the default duration %.2f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
         m_duration = kAnimationTransitionDefaultDuration;
     }
     else {

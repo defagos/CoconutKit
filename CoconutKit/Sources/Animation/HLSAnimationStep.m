@@ -262,7 +262,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; objectAnimations: %@; duration: %f; tag: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; objectAnimations: %@; duration: %.2f; tag: %@>",
             [self class],
             self,
             [self objectAnimationDescriptionString],
