@@ -234,7 +234,7 @@
     self.cancelling = YES;
     
     // Cancel all animations
-    [self.currentAnimationStep cancel];
+    [self.currentAnimationStep terminate];
 }
 
 - (void)terminate
@@ -252,7 +252,7 @@
     self.terminating = YES;
     
     // Cancel all animations
-    [self.currentAnimationStep cancel];
+    [self.currentAnimationStep terminate];
 }
 
 #pragma mark Creating animations variants from an existing animation

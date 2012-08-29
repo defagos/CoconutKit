@@ -8,6 +8,10 @@
 
 #import "HLSObjectAnimation.h"
 
+/**
+ * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included
+ * from their implementation file
+ */
 @interface HLSAnimationStep (Protected)
 
 /**
@@ -16,43 +20,65 @@
 - (void)addObjectAnimation:(HLSObjectAnimation *)objectAnimation forObject:(id)object;
 
 /**
- * Retrieving the animation for an object
+ * Retrieving the animation for an object (nil if not match is found)
  */
 - (HLSObjectAnimation *)objectAnimationForObject:(id)object;
 
 /**
- * All objects changed by the animation group, returned in the order they were added to it
+ * All objects changed by the animation step, returned in the order they were added to it
  */
 - (NSArray *)objects;
 
 /**
- * Playing the animation. This retains the animation step delegate if animated, and requires 
- * subclasses to call notifyDelegateAnimationStepDidStopAnimated:finished: somewhere in their 
- * implementation to free it when 
+ * Return YES iff the step is running. This method also returns YES during the initial delay period if
+ * any has been defined
+ */
+@property (nonatomic, assign, getter=isRunning) BOOL running;
+
+/**
+ * Return YES iff the step is animating objects (this method returns NO during the initial delay period
+ * if any has been defined)
+ */
+@property (nonatomic, assign, getter=isAnimating) BOOL animating;
+
+/**
+ * Return YES iff the step is being terminated
+ */
+@property (nonatomic, assign, getter=isCancelling) BOOL terminating;
+
+/**
+ * This method must be implemented by subclasses to create and play the animation step (animated or not)
+ * after some delay. If animated = YES, the animation is expected to take place asynchronously, otherwise
+ * synchronously
  *
- * If the duration of a step is 0, animated will be NO
+ * The super method implementation must not be called (it raises an exception)
  */
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
 /**
- * Cancel the animation associated with the step (if running)
+ * This method must be implemented by subclasses to terminate the animation
+ *
+ * The super method implementation must not be called (it raises an exception)
  */
-- (void)cancelAnimation;
+- (void)terminateAnimation;
 
 /**
  * The corresponding animation step to be played during the reverse animation
+ *
+ * The super method implementation must be called first
  */
 - (id)reverseAnimationStep;
 
 /**
  * Return a string describing the involved object animations
  */
-- (NSString *)objectAnimationDescriptionString;
+- (NSString *)objectAnimationsDescriptionString;
 
 /**
- * To be called by subclasses in their animated animation delegates
+ * Subclasses must register themselves for the asynchronous delegate events of the animation they implement,
+ * and must call these methods from within their start / stop methods
  */
-- (void)notifyDelegateAnimationStepWillStart;
-- (void)notifyDelegateAnimationStepDidStopFinished:(BOOL)finished;
+- (void)notifyAsynchronousAnimationStepWillStart;
+- (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished;
 
 @end

@@ -19,7 +19,10 @@
 
 @property (nonatomic, retain) NSMutableArray *objectKeys;
 @property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate during animation
+@property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
+@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isAnimating) BOOL animating;
+@property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 @end
 
@@ -84,7 +87,7 @@
 
 @synthesize animating = m_animating;
 
-@synthesize cancelling = m_cancelling;
+@synthesize terminating = m_terminating;
 
 - (NSArray *)objects
 {
@@ -135,13 +138,13 @@
     }
     
     self.running = YES;
-    self.cancelling = NO;
+    self.terminating = NO;
     
+    // We do not perform the animation if the duration is 0 (this can lead to unnecessary flickering in animations)
     BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
-    
     if (! actuallyAnimated) {
-        // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
-        // played animated are still considered to be played animated
+        // Give the caller the original animated information (even if duration is zero) so that animations with
+        // duration 0 played animated are still considered to be played animated
         [delegate animationStepWillStart:self animated:animated];
     }
     // Retain the delegate during the time of the animation (this is based on the assumption
@@ -151,48 +154,58 @@
         self.delegate = delegate;
     }
     
+    // Call the subclass implementation
     [self playAnimationAfterDelay:delay animated:actuallyAnimated];
     
+    // Not animated (i.e. synchronously animated to the final position)
     if (! actuallyAnimated) {
-        // Give the caller the original animated information (even if duration is zero) so that animations with duration 0
-        // played animated are still considered to be played animated
+        // Same remark as above
         [delegate animationStepDidStop:self animated:animated finished:YES];
         
         self.running = NO;
     }
 }
 
-- (void)cancel
+- (void)terminate
 {
     if (! self.running) {
         HLSLoggerDebug(@"The animation step is not running, nothing to cancel");
         return;
     }
     
-    if (self.cancelling) {
-        HLSLoggerDebug(@"The animation step is already being cancelled");
+    if (self.terminating) {
+        HLSLoggerDebug(@"The animation step is already being terminated");
         return;
     }
     
-    self.cancelling = YES;
+    self.terminating = YES;
     
-    [self cancelAnimation];
+    // Call the subclass implementation
+    [self terminateAnimation];
     
     // Cancel occurs during the initial delay period
     if (! self.animating) {
-        // Must notify manually (the willStart callback is still called, but too late. We want to get this event
-        // on the spot)
+        // Must notify manually (the willStart callback is still asynchronously called, but too late (otherwise
+        // we do not get the events in the proper order)
         if ([self.delegate respondsToSelector:@selector(animationStepWillStart:animated:)]) {
             [self.delegate animationStepWillStart:self animated:NO];
         }        
     }
     
-    // The animation callback might be called (it might depend on subclasses, but currently this is the case for UIView
-    // bock-based animations and CoreAnimations), but to get delegate events in the proper order we cannot notify that
-    // the animation step has ended there. We must do it right here
+    // Same remark as above
     if ([self.delegate respondsToSelector:@selector(animationStepDidStop:animated:finished:)]) {
         [self.delegate animationStepDidStop:self animated:NO finished:NO];
     }
+}
+
+- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+{
+    HLSMissingMethodImplementation();
+}
+
+- (void)terminateAnimation
+{
+    HLSMissingMethodImplementation();
 }
 
 #pragma mark Reverse animation
@@ -211,24 +224,28 @@
 
 #pragma mark Delegate notification
 
-- (void)notifyDelegateAnimationStepWillStart
+- (void)notifyAsynchronousAnimationStepWillStart
 {
-    if (! self.cancelling) {
+    // If the animation is terminated, this event was already emitted when termination occurs (to avoid
+    // waiting too long on this event to occur asynchronously). Do not notify again here
+    if (! self.terminating) {
+        // This method is meant to be called in the animation start callback, which is called for animations
+        // with animated = YES
         [self.delegate animationStepWillStart:self animated:YES];
     }
     
     self.animating = YES;
 }
 
-- (void)notifyDelegateAnimationStepDidStopFinished:(BOOL)finished
+- (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished
 {
-    // If the animation was cancelled, we do not notify from end callbacks (where this method is supposedly being called)
-    if (! self.cancelling) {
+    // Same remarks as in -notifyAsynchronousAnimationStepWillStart
+    if (! self.terminating) {
         [self.delegate animationStepDidStop:self animated:YES finished:YES];
     }
     
     self.animating = NO;
-    self.cancelling = NO;
+    self.terminating = NO;
     
     self.delegate = nil;
 }
@@ -250,14 +267,14 @@
 
 #pragma mark Description
 
-- (NSString *)objectAnimationDescriptionString
+- (NSString *)objectAnimationsDescriptionString
 {
-    NSString *objectAnimationDescriptionString = @"{";
+    NSString *objectAnimationsDescriptionString = @"{";
     for (id object in [self objects]) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
-        objectAnimationDescriptionString = [objectAnimationDescriptionString stringByAppendingFormat:@"\n\t%@ - %@", object, objectAnimation];        
+        objectAnimationsDescriptionString = [objectAnimationsDescriptionString stringByAppendingFormat:@"\n\t%@ - %@", object, objectAnimation];        
     }
-    return [objectAnimationDescriptionString stringByAppendingFormat:@"\n}"];
+    return [objectAnimationsDescriptionString stringByAppendingFormat:@"\n}"];
 }
 
 - (NSString *)description
@@ -265,7 +282,7 @@
     return [NSString stringWithFormat:@"<%@: %p; objectAnimations: %@; duration: %.2f; tag: %@>",
             [self class],
             self,
-            [self objectAnimationDescriptionString],
+            [self objectAnimationsDescriptionString],
             self.duration,
             self.tag];
 }

@@ -117,7 +117,7 @@
     }
 }
 
-- (void)cancelAnimation
+- (void)terminateAnimation
 {
     // We must recursively cancel subview animations (this is especially important since altering the frame (e.g.
     // by scaling it) seems to create additional implicit animations, which still finish and trigger the end animation
@@ -164,12 +164,12 @@
 
 - (void)animationStepWillStart:(NSString *)animationID context:(void *)context
 {
-    [self notifyDelegateAnimationStepWillStart];
+    [self notifyAsynchronousAnimationStepWillStart];
 }
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    [self notifyDelegateAnimationStepDidStopFinished:[finished boolValue]];
+    [self notifyAsynchronousAnimationStepDidStopFinished:[finished boolValue]];
 }
 
 @end

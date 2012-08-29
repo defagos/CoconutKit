@@ -15,6 +15,8 @@
  * (HLSAnimation) is then simply a collection of animation steps, either view-based (HLSViewAnimationStep) or layer-based 
  * (HLSLayerAnimationStep).
  *
+ * instantiate with +animate
+ *
  * Designated initializer: init (create an animation step with default settings)
  */
 @interface HLSViewAnimationStep : HLSAnimationStep {

@@ -9,6 +9,11 @@
 // Forward declarations
 @protocol HLSAnimationStepDelegate;
 
+/**
+ * Abstract base class for animation steps. Do not instantiate directly
+ *
+ * Designated initializer: init
+ */
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private
     NSMutableArray *m_objectKeys;
@@ -18,7 +23,7 @@
     id<HLSAnimationStepDelegate> m_delegate;
     BOOL m_running;
     BOOL m_animating;
-    BOOL m_cancelling;
+    BOOL m_terminating;
 }
 
 /**
@@ -38,9 +43,5 @@
  * Default value is 0.2
  */
 @property (nonatomic, assign) NSTimeInterval duration;
-
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isAnimating) BOOL animating;
-@property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 
 @end

@@ -164,7 +164,7 @@
     }
 }
 
-- (void)cancelAnimation
+- (void)terminateAnimation
 {
     [self updateToFinalState];
     
@@ -213,16 +213,16 @@
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    if (! self.cancelling) {
+    if (! self.terminating) {
         [self updateToFinalState];
     }
     
-    [self notifyDelegateAnimationStepWillStart];
+    [self notifyAsynchronousAnimationStepWillStart];
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished
 {
-    [self notifyDelegateAnimationStepDidStopFinished:finished];
+    [self notifyAsynchronousAnimationStepDidStopFinished:finished];
 }
 
 @end

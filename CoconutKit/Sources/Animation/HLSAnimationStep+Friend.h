@@ -9,17 +9,22 @@
 // Forward declarations
 @protocol HLSAnimationStepDelegate;
 
+/**
+ * Interface meant to be used by friend classes of HLSAnimationStep (= classes which must have access to private implementation
+ * details)
+ */
 @interface HLSAnimationStep (Friend)
 
 /**
- * Playing the animation
+ * Play the associated animation after some delay, reporting events to the specified delegate (which is retained during
+ * the animation)
  */
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
 /**
- * Cancel the animation associated with the step (if running)
+ * Terminate the animation (if running). The delegate will still receive the willStart / didStop events
  */
-- (void)cancel;
+- (void)terminate;
 
 /**
  * The corresponding animation step to be played during the reverse animation
@@ -29,15 +34,20 @@
 @end
 
 /**
- * Subclasses are responsible of calling those methods on the delegate
+ * The animated info which is returned is the same given when the play method was called (even if the animation
+ * was actually not animated because its duration was 0)
  */
 @protocol HLSAnimationStepDelegate <NSObject>
 
 /**
- * The animated info which is returned is the same given when the play method was called (even if the animation
- * was actually not animated because its duration was 0)
+ * Called when an animation step will start
  */
 - (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
+
+/**
+ * Called when an animation step did stop. The finished boolean is YES iff the animation played until the end
+ * without being terminated
+ */
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished;
 
 @end
