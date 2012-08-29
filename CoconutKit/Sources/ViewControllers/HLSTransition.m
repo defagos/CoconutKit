@@ -24,40 +24,40 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @interface HLSTransition ()
 
-+ (NSArray *)coverAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                           yOffset:(CGFloat)yOffset
-                                     appearingView:(UIView *)appearingView;
++ (NSArray *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                yOffset:(CGFloat)yOffset
+                                          appearingView:(UIView *)appearingView;
 
-+ (NSArray *)coverPushToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                     yOffset:(CGFloat)yOffset
-                                               appearingView:(UIView *)appearingView
-                                            disappearingView:(UIView *)disappearingView;
++ (NSArray *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                          yOffset:(CGFloat)yOffset
+                                                    appearingView:(UIView *)appearingView
+                                                 disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)pushAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                                    appearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView;
++ (NSArray *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                               yOffset:(CGFloat)yOffset
+                                         appearingView:(UIView *)appearingView
+                                      disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)pushAndFadeAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                 yOffset:(CGFloat)yOffset
-                                           appearingView:(UIView *)appearingView
-                                        disappearingView:(UIView *)disappearingView;
++ (NSArray *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                      yOffset:(CGFloat)yOffset
+                                                appearingView:(UIView *)appearingView
+                                             disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)pushAndToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                   yOffset:(CGFloat)yOffset
-                                             appearingView:(UIView *)appearingView
-                                          disappearingView:(UIView *)disappearingView;
++ (NSArray *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                        yOffset:(CGFloat)yOffset
+                                                  appearingView:(UIView *)appearingView
+                                               disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)flowAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                                    appearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView;
++ (NSArray *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                               yOffset:(CGFloat)yOffset
+                                         appearingView:(UIView *)appearingView
+                                      disappearingView:(UIView *)disappearingView;
 
-+ (NSArray *)flipAnimationStepsAroundVectorWithX:(CGFloat)x
-                                               y:(CGFloat)y
-                                               z:(CGFloat)z
-                                   appearingView:(UIView *)appearingView
-                                disappearingView:(UIView *)disappearingView;
++ (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
+                                                    y:(CGFloat)y
+                                                    z:(CGFloat)z
+                                        appearingView:(UIView *)appearingView
+                                     disappearingView:(UIView *)disappearingView;
 
 @end
 
@@ -114,7 +114,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
     if (! duration) {
         // Calculate for a dummy animation
-        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] animationStepsWithAppearingView:nil disappearingView:nil inFrame:CGRectZero]];
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] layerAnimationStepsWithAppearingView:nil
+                                                                                                              disappearingView:nil
+                                                                                                                       inFrame:CGRectZero]];
         duration = [NSNumber numberWithDouble:[animation duration]];
         [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
     }
@@ -124,9 +126,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 #pragma mark Built-in transition common code
 
-+ (NSArray *)coverAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                           yOffset:(CGFloat)yOffset
-                                     appearingView:(UIView *)appearingView
++ (NSArray *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                yOffset:(CGFloat)yOffset
+                                          appearingView:(UIView *)appearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -148,10 +150,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)coverPushToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                     yOffset:(CGFloat)yOffset
-                                               appearingView:(UIView *)appearingView
-                                            disappearingView:(UIView *)disappearingView
++ (NSArray *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                          yOffset:(CGFloat)yOffset
+                                                    appearingView:(UIView *)appearingView
+                                                 disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -176,10 +178,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                                    appearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
++ (NSArray *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                               yOffset:(CGFloat)yOffset
+                                         appearingView:(UIView *)appearingView
+                                      disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -212,10 +214,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushAndFadeAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                 yOffset:(CGFloat)yOffset
-                                           appearingView:(UIView *)appearingView
-                                        disappearingView:(UIView *)disappearingView
++ (NSArray *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                      yOffset:(CGFloat)yOffset
+                                                appearingView:(UIView *)appearingView
+                                             disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -255,10 +257,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushAndToBackAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                   yOffset:(CGFloat)yOffset
-                                             appearingView:(UIView *)appearingView
-                                          disappearingView:(UIView *)disappearingView
++ (NSArray *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                        yOffset:(CGFloat)yOffset
+                                                  appearingView:(UIView *)appearingView
+                                               disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -292,10 +294,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)flowAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                          yOffset:(CGFloat)yOffset
-                                    appearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
++ (NSArray *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                               yOffset:(CGFloat)yOffset
+                                         appearingView:(UIView *)appearingView
+                                      disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -342,11 +344,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)flipAnimationStepsAroundVectorWithX:(CGFloat)x
-                                               y:(CGFloat)y
-                                               z:(CGFloat)z
-                                   appearingView:(UIView *)appearingView
-                                disappearingView:(UIView *)disappearingView
++ (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
+                                                    y:(CGFloat)y
+                                                    z:(CGFloat)z
+                                        appearingView:(UIView *)appearingView
+                                     disappearingView:(UIView *)disappearingView
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -398,16 +400,16 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 #pragma mark Default transition implementation
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     return nil;
 }
 
-+ (NSArray *)reverseAnimationStepsWithAppearingView:(UIView *)appearingView
-                                   disappearingView:(UIView *)disappearingView
-                                            inFrame:(CGRect)frame
++ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                        disappearingView:(UIView *)disappearingView
+                                                 inFrame:(CGRect)frame
 {
     return nil;
 }
@@ -422,225 +424,225 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottom
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:0.f
-                                                        yOffset:CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:0.f
+                                                             yOffset:CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTop
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:0.f
-                                                        yOffset:-CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:0.f
+                                                             yOffset:-CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:0.f
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                             yOffset:0.f
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:0.f
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                             yOffset:0.f
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTopLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:-CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                             yOffset:-CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTopRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:-CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                             yOffset:-CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromBottomLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                        yOffset:CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                             yOffset:CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromBottomRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                        yOffset:CGRectGetHeight(frame)
-                                                  appearingView:appearingView];
+    return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                             yOffset:CGRectGetHeight(frame)
+                                                       appearingView:appearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromBottomPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:0.f
-                                                                  yOffset:CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:0.f
+                                                                       yOffset:CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTopPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:0.f
-                                                                  yOffset:-CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:0.f
+                                                                       yOffset:-CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromLeftPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                                  yOffset:0.f
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                       yOffset:0.f
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromRightPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                                  yOffset:0.f
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                       yOffset:0.f
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTopLeftPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                                  yOffset:-CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                       yOffset:-CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromTopRightPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                                  yOffset:-CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                       yOffset:-CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromBottomLeftPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                                  yOffset:CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                       yOffset:CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionCoverFromBottomRightPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition coverPushToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                                  yOffset:CGRectGetHeight(frame)
-                                                            appearingView:appearingView
-                                                         disappearingView:disappearingView];
+    return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                       yOffset:CGRectGetHeight(frame)
+                                                                 appearingView:appearingView
+                                                              disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFadeIn
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -665,9 +667,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFadeInPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -695,9 +697,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCrossDissolve
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -725,112 +727,112 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromBottom
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAnimationStepsWithInitialXOffset:0.f
-                                                       yOffset:CGRectGetHeight(frame)
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:0.f
+                                                            yOffset:CGRectGetHeight(frame)
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromTop
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAnimationStepsWithInitialXOffset:0.f
-                                                       yOffset:-CGRectGetHeight(frame)
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:0.f
+                                                            yOffset:-CGRectGetHeight(frame)
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                            yOffset:0.f
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                            yOffset:0.f
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromBottomFadeIn
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndFadeAnimationStepsWithInitialXOffset:0.f
-                                                              yOffset:CGRectGetHeight(frame)
-                                                        appearingView:appearingView
-                                                     disappearingView:disappearingView];
+    return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:0.f
+                                                                   yOffset:CGRectGetHeight(frame)
+                                                             appearingView:appearingView
+                                                          disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromTopFadeIn
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndFadeAnimationStepsWithInitialXOffset:0.f
-                                                              yOffset:-CGRectGetHeight(frame)
-                                                        appearingView:appearingView
-                                                     disappearingView:disappearingView];
+    return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:0.f
+                                                                   yOffset:-CGRectGetHeight(frame)
+                                                             appearingView:appearingView
+                                                          disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromLeftFadeIn
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndFadeAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                              yOffset:0.f
-                                                        appearingView:appearingView
-                                                     disappearingView:disappearingView];
+    return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                   yOffset:0.f
+                                                             appearingView:appearingView
+                                                          disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushFromRightFadeIn
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndFadeAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                              yOffset:0.f
-                                                        appearingView:appearingView
-                                                     disappearingView:disappearingView];
+    return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                   yOffset:0.f
+                                                             appearingView:appearingView
+                                                          disappearingView:disappearingView];
 }
 
 @end
@@ -839,121 +841,121 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushToBackFromBottom
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:0.f
-                                                                yOffset:CGRectGetHeight(frame)
-                                                          appearingView:appearingView
-                                                       disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:0.f
+                                                                     yOffset:CGRectGetHeight(frame)
+                                                               appearingView:appearingView
+                                                            disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushToBackFromTop
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:0.f
-                                                                yOffset:-CGRectGetHeight(frame)
-                                                          appearingView:appearingView
-                                                       disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:0.f
+                                                                     yOffset:-CGRectGetHeight(frame)
+                                                               appearingView:appearingView
+                                                            disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushToBackFromLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                                yOffset:0.f
-                                                          appearingView:appearingView
-                                                       disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                                     yOffset:0.f
+                                                               appearingView:appearingView
+                                                            disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionPushToBackFromRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition pushAndToBackAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                                yOffset:0.f
-                                                          appearingView:appearingView
-                                                       disappearingView:disappearingView];
+    return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                                     yOffset:0.f
+                                                               appearingView:appearingView
+                                                            disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFlowFromBottom
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flowAnimationStepsWithInitialXOffset:0.f
-                                                       yOffset:CGRectGetHeight(frame)
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:0.f
+                                                            yOffset:CGRectGetHeight(frame)
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFlowFromTop
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flowAnimationStepsWithInitialXOffset:0.f
-                                                       yOffset:-CGRectGetHeight(frame)
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:0.f
+                                                            yOffset:-CGRectGetHeight(frame)
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFlowFromLeft
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flowAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(frame)
+                                                            yOffset:0.f
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFlowFromRight
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flowAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
-                                                       yOffset:0.f
-                                                 appearingView:appearingView
-                                              disappearingView:disappearingView];
+    return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(frame)
+                                                            yOffset:0.f
+                                                      appearingView:appearingView
+                                                   disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionEmergeFromCenter
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -983,9 +985,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionEmergeFromCenterPushToBack
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -1020,30 +1022,30 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlipVertical
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flipAnimationStepsAroundVectorWithX:0.f
-                                                            y:1.f
-                                                            z:0.f
-                                                appearingView:appearingView
-                                             disappearingView:disappearingView];
+    return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
+                                                                 y:1.f
+                                                                 z:0.f
+                                                     appearingView:appearingView
+                                                  disappearingView:disappearingView];
 }
 
 @end
 
 @implementation HLSTransitionFlipHorizontal
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
 {
-    return [HLSTransition flipAnimationStepsAroundVectorWithX:1.f
-                                                            y:0.f
-                                                            z:0.f
-                                                appearingView:appearingView
-                                             disappearingView:disappearingView];
+    return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
+                                                                 y:0.f
+                                                                 z:0.f
+                                                     appearingView:appearingView
+                                                  disappearingView:disappearingView];
 }
 
 @end

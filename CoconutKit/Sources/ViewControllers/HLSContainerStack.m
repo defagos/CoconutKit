@@ -12,6 +12,7 @@
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
 #import "HLSFloat.h"
+#import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
@@ -77,9 +78,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
     
     // Build the animation with default parameters
-    NSArray *animationSteps = [[transitionClass class] animationStepsWithAppearingView:appearingView
-                                                                      disappearingView:disappearingView
-                                                                               inFrame:frame];
+    NSArray *animationSteps = [[transitionClass class] layerAnimationStepsWithAppearingView:appearingView
+                                                                           disappearingView:disappearingView
+                                                                                    inFrame:frame];
+    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
+    
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
     
     // Generate an animation with the proper duration
@@ -106,11 +109,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
     
     // Build the animation with default parameters
-    NSArray *animationSteps = [[transitionClass class] reverseAnimationStepsWithAppearingView:appearingView
-                                                                             disappearingView:disappearingView
-                                                                                      inFrame:frame];
+    NSArray *animationSteps = [[transitionClass class] reverseLayerAnimationStepsWithAppearingView:appearingView
+                                                                                  disappearingView:disappearingView
+                                                                                           inFrame:frame];
+    
     // If custom reverse animation implemented by the animation class, use it
     if (animationSteps) {
+        HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
+        
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
         
         // Generate an animation with the proper duration

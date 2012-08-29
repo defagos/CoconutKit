@@ -10,10 +10,10 @@
 
 @implementation CustomTransitionFallFromTop
 
-+ (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
-                                     inFrame:(CGRect)frame
-{    
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                          inFrame:(CGRect)frame
+{
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup step bringing the appearingView outside the frame
@@ -49,9 +49,9 @@
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)reverseAnimationStepsWithAppearingView:(UIView *)appearingView
-                                   disappearingView:(UIView *)disappearingView
-                                            inFrame:(CGRect)frame
++ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                        disappearingView:(UIView *)disappearingView
+                                                 inFrame:(CGRect)frame
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
