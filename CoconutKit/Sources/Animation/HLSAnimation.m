@@ -79,6 +79,8 @@
 
 - (void)dealloc
 {
+    [self cancel];
+    
     self.animationSteps = nil;
     self.animationStepsEnumerator = nil;
     self.currentAnimationStep = nil;
@@ -318,26 +320,15 @@
 
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
-    if (finished) {
-        if (! self.cancelling) {
-            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:animationStep animated:animated];
-            }
+    // Still send all delegate notifications if terminating
+    if (! self.cancelling) {
+        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+            [self.delegate animationStepFinished:animationStep animated:animated];
         }
-        
-        [self playNextAnimationStepAnimated:animated];
     }
-    else {
-        // Still send all delegate notifications if terminating
-        if (! self.cancelling) {
-            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-                [self.delegate animationStepFinished:animationStep animated:animated];
-            }
-        }
-        
-        // Play the remaining steps non-animated
-        [self playNextAnimationStepAnimated:NO];
-    }
+    
+    // Play the next step, but non-animated if the animation did not reach completion normally
+    [self playNextAnimationStepAnimated:finished ? animated : NO];
 }
 
 #pragma mark NSCopying protocol implementation

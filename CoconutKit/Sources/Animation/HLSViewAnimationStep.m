@@ -96,7 +96,8 @@
         
         view.alpha = alpha;
         
-        // Animate the frame
+        // Animate the frame. The transform has to be applied on the view center. This requires a conversion in the coordinate system
+        // centered on the view
         CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(-view.center.x, -view.center.y);
         CGAffineTransform convTransform = CGAffineTransformConcat(CGAffineTransformConcat(translationTransform, viewAnimation.transform),
                                                                   CGAffineTransformInvert(translationTransform));

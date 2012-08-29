@@ -10,6 +10,7 @@
 
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
+#import "HLSAssert.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"

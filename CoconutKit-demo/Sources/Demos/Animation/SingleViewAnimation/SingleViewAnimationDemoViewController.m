@@ -8,8 +8,6 @@
 
 #import "SingleViewAnimationDemoViewController.h"
 
-#import <objc/runtime.h>
-
 @interface SingleViewAnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
@@ -220,6 +218,8 @@
 
 - (IBAction)toggleAnimated:(id)sender
 {
+    self.delayedSwitch.on = NO;
+    
     [self updateUserInterface];
 }
 

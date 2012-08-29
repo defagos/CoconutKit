@@ -102,9 +102,9 @@
         //           1) If animated, we create the animation, and set the final properties in the start
         //              callback
         //           2) If not animated we set the final properties on the spot
-        //           3) If a delay has been defined and the animation step is terminated before is actually
-        //              started animating layers, we stop the animation and set the final properties on the
-        //              spot
+        //           3) If an animation step is terminated, we set the final properties right when terminatingm
+        //              and not anymore in the start callback. This behaves correctly whether the animation
+        //              step is terminated while animating layers or during its initial delay period
         
         NSMutableArray *animations = [NSMutableArray array];
         
@@ -129,7 +129,8 @@
             layer.opacity = opacity;
         }
         
-        // Transform animation
+        // Animate the frame. The transform has to be applied on the layer center. This requires a conversion in the coordinate system
+        // centered on the layer
         CATransform3D translationTransform = CATransform3DMakeTranslation(-layer.transform.m41, -layer.transform.m42, 0.f);
         CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, layerAnimation.transform),
                                                           CATransform3DInvert(translationTransform));
@@ -152,22 +153,21 @@
             animationGroup.beginTime = beginTime;
             [layer addAnimation:animationGroup forKey:@"layerAnimationGroup"];
         }
-        
-        // TODO: Instead of doing manual property setting like above, create animations in all cases
-        //       and loop over them here?
     }
     
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
     // which will receive the start / end animation events
     if (animated) {
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.alpha];
-        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.alpha];
+        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.layer.opacity];
+        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.beginTime = beginTime;
         dummyViewOpacityAnimation.delegate = self;
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
     }
-    self.dummyView.alpha = 1.f - self.dummyView.alpha;
+    else {
+        self.dummyView.layer.opacity = 1.f - self.dummyView.layer.opacity;
+    }
     
     // Animated
     if (animated) {
@@ -177,12 +177,12 @@
 
 - (void)terminateAnimation
 {
+    // Set the final values immediately (won't be done anymore in the animation start callback)
     [self updateToFinalState];
     
     // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
-    // Cancel occurred during the initial delay period
     for (CALayer *layer in [self objects]) {
         [layer removeAllAnimationsRecursively];
     }
@@ -211,19 +211,21 @@
 
 - (void)updateToFinalState
 {
+    // Set all final values
     for (CALayer *layer in [self objects]) {
-        // Set final values
         CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:@"layerAnimationGroup"];
         for (CABasicAnimation *layerAnimation in animationGroup.animations) {
             [layer setValue:layerAnimation.toValue forKeyPath:layerAnimation.keyPath];
         }
     }
+    self.dummyView.layer.opacity = 1.f - self.dummyView.layer.opacity;
 }
 
 #pragma mark Animation callbacks
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
+    // If the animation is being terminated, this already was made when -terminateAnimation was called
     if (! self.terminating) {
         [self updateToFinalState];
     }

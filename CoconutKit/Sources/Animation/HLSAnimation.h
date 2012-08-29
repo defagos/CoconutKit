@@ -14,33 +14,34 @@
 
 /**
  * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective changes
- * applied to sets of views during some time interval. An HLSAnimation object simply chains those changes together to play 
- * a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
+ * applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those changes together 
+ * to play a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
+ *
+ * An HLSAnimation can be made of view-based animation steps (HLSViewAnimationStep) or layer-based animation steps
+ * (HLSLayerAnimationStep). You can mix both types of animation steps within the same animation, but you must
+ * not alter a view both in a view and in a layer animation step, otherwise the behavior is undefined. In general,
+ * you should use HLSLayerAnimationSteps, except if you want to animate a view whose contents must resize appropriately
+ * (in which case use an HLSViewAnimationStep)
  *
  * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
  * an HLSAnimation is automatically cancelled if it has a delegate and the delegate is deallocated. This eliminates
- * the need to cancel the animation manually when the delegate is destroyed.
+ * the need to cancel the animation manually when the delegate is destroyed (except, of course, if no delegate has
+ * been defined)
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
  * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
- * notification). Animation steps with duration equal to 0 also occur instantaneously.
+ * notification).
  *
  * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
  * views). The reason is that fixing such issues in an automatic way would make reverse animations difficult to
- * generate, since HLSAnimation does not store any information about the views which are animated (except, of course,
- * which they are)
+ * generate, since HLSAnimation does not store any information about the original state of the views which are 
+ * animated.
  *
  * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
  * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
  * also YES if the animation was run with animated = YES (even though the step was not animated, it is still
  * part of an animation which was played animated).
- *
- * If the resizeViews property is set to YES, an animation alters the frames of the involved views. If this property 
- * is set to NO, the animation only alters the view transforms, which means the views will be stretched.
- *
- * When resizeViews is set to YES, only translation and scale transforms can be applied since the frame is involved.
- * Other transforms will be ignored, and a warning message will be logged
  *
  * Designated initializer: initWithAnimationSteps:
  */
@@ -92,7 +93,8 @@
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
- * the running documentation for more information about what this means)
+ * the -running documentation for more information about what this means)
+ *
  * Default is NO
  */
 @property (nonatomic, assign) BOOL lockingUI;
@@ -116,7 +118,7 @@
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 
- * animation does take place synchronously at the location of the call to playAnimated:)
+ * animation does take place synchronously at the location of the call to -playAnimated:)
  */
 - (void)playAnimated:(BOOL)animated;
 
