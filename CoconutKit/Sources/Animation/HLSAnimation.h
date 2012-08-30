@@ -13,18 +13,19 @@
 @protocol HLSAnimationDelegate;
 
 /**
- * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective changes
- * applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those changes together 
- * to play a complete animation. It also provides a convenient way to generate the corresponding reverse animation.
+ * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective 
+ * changes applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those 
+ * changes together to play a complete animation. It also provides a convenient interface to generate the corresponding 
+ * reverse animation, play an animation instantaneously, or even pause and resume animations.
  *
  * An HLSAnimation can be made of view-based animation steps (HLSViewAnimationStep) or layer-based animation steps
  * (HLSLayerAnimationStep). You can mix both types of animation steps within the same animation, but you must
- * not alter a view both in a view and in a layer animation step, otherwise the behavior is undefined. In general,
- * you should use HLSLayerAnimationSteps, except if you want to animate a view whose contents must resize appropriately
- * (in which case use an HLSViewAnimationStep)
+ * not alter a view involved both in a view and in a layer animation steps, otherwise the behavior is undefined. 
+ * In general, you should most of the time use HLSLayerAnimationSteps, except if you want to animate a view whose 
+ * contents must resize appropriately (in which case you must use an HLSViewAnimationStep)
  *
  * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
- * an HLSAnimation is automatically cancelled if it has a delegate and the delegate is deallocated. This eliminates
+ * an HLSAnimation is automatically cancelled if it has a delegate and this delegate is deallocated. This eliminates
  * the need to cancel the animation manually when the delegate is destroyed (except, of course, if no delegate has
  * been defined)
  *
@@ -93,28 +94,17 @@
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
- * the -running documentation for more information about what this means)
+ * the -running documentation for more information about what "running" means)
  *
  * Default is NO
  */
 @property (nonatomic, assign) BOOL lockingUI;
 
 /**
- * Return YES while the animation is running. An animation is running from the call to a play method until
- * it ends, and is considered running from the start even if a delay has been set
- */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
-
-/**
- * The animation delegate. Note that the animation is automatically cancelled if the delegate is deallocated while
- * the animation is runnning
+ * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set
+ * and gets deallocated while the animation is runnning
  */
 @property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
-
-/**
- * Return the total duration of the animation
- */
-- (NSTimeInterval)duration;
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 
@@ -128,10 +118,16 @@
  */
 - (void)playAfterDelay:(NSTimeInterval)delay;
 
-- (void)togglePause;
+/**
+ * Pause an animation being played animated (does nothing if the animation is not running or not animated). This method
+ * can also be used to pause an animation during its initial delay period
+ */
+- (void)pause;
 
-- (BOOL)isPaused;
-
+/**
+ * Resume a paused animation (does nothing if the animation has not been paused)
+ */
+- (void)resume;
 
 /**
  * Cancel the animation. The animation immediately reaches its end state. The delegate does not receive subsequent
@@ -144,6 +140,23 @@
  * subsequent events, but with animated = NO
  */
 - (void)terminate;
+
+/**
+ * Return the total duration of the animation
+ */
+@property (nonatomic, readonly, assign) NSTimeInterval duration;
+
+/**
+ * Return YES while the animation is running. An animation is running from the call to a play method until
+ * it ends, and is considered running from the start even if a delay has been set or if the animation is
+ * paused
+ */
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+
+/**
+ * Return YES iff the animation has been paused
+ */
+@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
 
 /**
  * Return YES iff the animation is being cancelled

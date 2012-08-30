@@ -21,9 +21,16 @@
  */
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
-- (void)togglePause;
+/**
+ * Pause the an animation step being played animated (does nothing if the animation is not running or not animated). This
+ * method can also be used to pause an animation during its initial delay period
+ */
+- (void)pause;
 
-- (BOOL)isPaused;
+/**
+ * Resume a paused animation
+ */
+- (void)resume;
 
 /**
  * Terminate the animation (if running). The delegate will still receive the willStart / didStop events
@@ -34,6 +41,11 @@
  * The corresponding animation step to be played during the reverse animation
  */
 - (id)reverseAnimationStep;
+
+/**
+ * Return YES iff the animation has been paused
+ */
+@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
 
 @end
 

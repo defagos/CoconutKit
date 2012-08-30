@@ -55,8 +55,25 @@
  */
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
-- (void)toggleAnimationPause;
+/**
+ * This method must be implemented by subclasses to pause a running animation step
+ *
+ * The super method implementation must not be called (it raises an exception)
+ */
+- (void)pauseAnimation;
 
+/**
+ * This method must be implemented by subclasses to resume a paused animation step
+ *
+ * The super method implementation must not be called (it raises an exception)
+ */
+- (void)resumeAnimation;
+
+/**
+ * This method must be implemented by subclasses to return YES iff an animation step is paused
+ *
+ * The super method implementation must not be called (it raises an exception)
+ */
 - (BOOL)isAnimationPaused;
 
 /**

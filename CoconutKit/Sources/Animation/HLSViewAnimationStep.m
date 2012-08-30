@@ -124,12 +124,20 @@
     }
 }
 
-- (void)toggleAnimationPause
+- (void)pauseAnimation
 {
     for (UIView *view in [self objects]) {
-        [view.layer togglePauseAllAnimations];
+        [view.layer pauseAllAnimations];
     }
-    [self.dummyView.layer togglePauseAllAnimations];
+    [self.dummyView.layer pauseAllAnimations];
+}
+
+- (void)resumeAnimation
+{
+    for (UIView *view in [self objects]) {
+        [view.layer resumeAllAnimations];
+    }
+    [self.dummyView.layer resumeAllAnimations];
 }
 
 - (BOOL)isAnimationPaused

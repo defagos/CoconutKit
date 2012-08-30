@@ -189,10 +189,20 @@
 - (IBAction)pause:(id)sender
 {
     if (self.animation.running) {
-        [self.animation togglePause];
+        if (! self.animation.paused) {
+            [self.animation pause];
+        }
+        else {
+            [self.animation resume];
+        }
     }
     if (self.reverseAnimation.running) {
-        [self.reverseAnimation togglePause];
+        if (! self.reverseAnimation.paused) {
+            [self.reverseAnimation pause];
+        }
+        else {
+            [self.reverseAnimation resume];
+        }
     }    
 }
 

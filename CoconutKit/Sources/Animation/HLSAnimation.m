@@ -18,8 +18,6 @@
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
-#import <QuartzCore/QuartzCore.h>
-
 @interface HLSAnimation () <HLSAnimationStepDelegate>
 
 @property (nonatomic, retain) NSArray *animationSteps;
@@ -49,9 +47,6 @@
     if (animationStep) {
         animationSteps = [NSArray arrayWithObject:animationStep];
     }
-    else {
-        animationSteps = [NSArray array];
-    }
     return [HLSAnimation animationWithAnimationSteps:animationSteps];
 }
 
@@ -59,12 +54,12 @@
 
 - (id)initWithAnimationSteps:(NSArray *)animationSteps
 {
-    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
     if ((self = [super init])) {
         if (! animationSteps) {
             self.animationSteps = [NSArray array];
         }
         else {
+            HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
             self.animationSteps = animationSteps;
         }        
     }
@@ -106,6 +101,11 @@
 @synthesize lockingUI = m_lockingUI;
 
 @synthesize running = m_running;
+
+- (BOOL)isPaused
+{
+    return [self.currentAnimationStep isPaused];
+}
 
 @synthesize cancelling = m_cancelling;
 
@@ -221,14 +221,34 @@
     }
 }
 
-- (void)togglePause
+- (void)pause
 {
-    [self.currentAnimationStep togglePause];
+    if (! self.running) {
+        HLSLoggerDebug(@"The animation is not running, nothing to pause");
+        return;
+    }
+    
+    if (self.cancelling || self.terminating) {
+        HLSLoggerDebug(@"The animation is being cancelled or terminated");
+        return;
+    }
+    
+    if (self.paused) {
+        HLSLoggerDebug(@"The animation is already paused");
+        return;
+    }
+    
+    [self.currentAnimationStep pause];
 }
 
-- (BOOL)isPaused
+- (void)resume
 {
-    return [self.currentAnimationStep isPaused];
+    if (! self.paused) {
+        HLSLoggerDebug(@"The animation has not being paused. Nothing to resume");
+        return;
+    }
+    
+    [self.currentAnimationStep resume];
 }
 
 - (void)cancel

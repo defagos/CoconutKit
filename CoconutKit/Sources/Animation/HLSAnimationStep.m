@@ -88,6 +88,11 @@
 
 @synthesize animating = m_animating;
 
+- (BOOL)isPaused
+{
+    return [self isAnimationPaused];
+}
+
 @synthesize terminating = m_terminating;
 
 - (NSArray *)objects
@@ -167,14 +172,34 @@
     }
 }
 
-- (void)togglePause
+- (void)pause
 {
-    [self toggleAnimationPause];
+    if (! self.running) {
+        HLSLoggerDebug(@"The animation step is not running, nothing to pause");
+        return;
+    }
+    
+    if (self.terminating) {
+        HLSLoggerDebug(@"The animation step is being terminated");
+        return;
+    }
+    
+    if (self.paused) {
+        HLSLoggerDebug(@"The animation step is already paused");
+        return;
+    }
+    
+    [self pauseAnimation];
 }
 
-- (BOOL)isPaused
+- (void)resume
 {
-    return [self isAnimationPaused];
+    if (! self.paused) {
+        HLSLoggerDebug(@"The animation step has not being paused. Nothing to resume");
+        return;
+    }
+    
+    [self resumeAnimation];
 }
 
 - (void)terminate
@@ -214,7 +239,12 @@
     HLSMissingMethodImplementation();
 }
 
-- (void)toggleAnimationPause
+- (void)pauseAnimation
+{
+    HLSMissingMethodImplementation();
+}
+
+- (void)resumeAnimation
 {
     HLSMissingMethodImplementation();
 }

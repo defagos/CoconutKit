@@ -216,12 +216,20 @@
     }
 }
 
-- (void)toggleAnimationPause
+- (void)pauseAnimation
 {
     for (CALayer *layer in [self objects]) {
-        [layer togglePauseAllAnimations];
+        [layer pauseAllAnimations];
     }
-    [self.dummyView.layer togglePauseAllAnimations];
+    [self.dummyView.layer pauseAllAnimations];
+}
+
+- (void)resumeAnimation
+{
+    for (CALayer *layer in [self objects]) {
+        [layer resumeAllAnimations];
+    }
+    [self.dummyView.layer resumeAllAnimations];
 }
 
 - (BOOL)isAnimationPaused
