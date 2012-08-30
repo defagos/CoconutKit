@@ -39,6 +39,10 @@
  * generate, since HLSAnimation does not store any information about the original state of the views which are 
  * animated.
  *
+ * Running animations (this includes animations which have been paused) are automatically terminated if the application
+ * enters background. This avoids issues with saving / restoring animations, and avoids animations letting views
+ * or layers in an inconsistent state.
+ *
  * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
  * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
  * also YES if the animation was run with animated = YES (even though the step was not animated, it is still
