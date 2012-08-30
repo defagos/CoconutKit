@@ -161,6 +161,16 @@
     [self.reverseAnimation playAnimated:self.animatedSwitch.on];
 }
 
+- (IBAction)pause:(id)sender
+{
+    if (self.animation.running) {
+        [self.animation togglePause];
+    }
+    if (self.reverseAnimation.running) {
+        [self.reverseAnimation togglePause];
+    }
+}
+
 - (IBAction)cancel:(id)sender
 {
     if (self.animation.running) {

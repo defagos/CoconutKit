@@ -125,9 +125,10 @@
         
         // Reinitialize layer properties which could have been changed when pausing the animation
         // during a previous step
-        [layer resetAnimations];
-        
-        layer.beginTime = delay;
+        if (animated) {
+            [layer resetAnimations];
+            layer.beginTime = delay;
+        }
         
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
         //         animate properties but do not set them). Usually, we can do this right where the CoreAnimation

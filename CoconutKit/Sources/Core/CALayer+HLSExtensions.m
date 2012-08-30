@@ -13,6 +13,7 @@
 - (void)removeAllAnimationsRecursively
 {
     [self removeAllAnimations];
+    
     for (CALayer *sublayer in self.sublayers) {
         [sublayer removeAllAnimationsRecursively];
     }

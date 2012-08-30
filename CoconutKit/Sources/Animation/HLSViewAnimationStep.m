@@ -83,6 +83,10 @@
         HLSViewAnimation *viewAnimation = (HLSViewAnimation *)[self objectAnimationForObject:view];
         NSAssert(viewAnimation != nil, @"Missing view animation; data consistency failure");
         
+        if (animated) {
+            [view.layer resetAnimations];
+        }
+        
         // Alpha animation (alpha must always lie between 0.f and 1.f)
         CGFloat alpha = view.alpha + viewAnimation.alphaVariation;
         if (floatlt(alpha, -1.f)) {
@@ -108,6 +112,9 @@
     }
     
     // Animate the dummy view
+    if (animated) {
+        [self.dummyView.layer resetAnimations];
+    }
     self.dummyView.alpha = 1.f - self.dummyView.alpha;
     
     if (animated) {
