@@ -125,7 +125,8 @@
         
         // Reinitialize layer properties which could have been changed when pausing the animation
         // during a previous step
-        layer.timeOffset = 0.;
+        [layer resetAnimations];
+        
         layer.beginTime = delay;
         
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
@@ -193,7 +194,8 @@
     if (animated) {
         // Reinitialize layer properties which could have been changed when pausing the animation
         // during a previous step
-        self.dummyView.layer.timeOffset = 0.;
+        [self.dummyView.layer resetAnimations];
+        
         self.dummyView.layer.beginTime = delay;
         
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -213,12 +215,17 @@
     }
 }
 
-- (void)togglePauseAnimation
+- (void)toggleAnimationPause
 {
     for (CALayer *layer in [self objects]) {
-        [layer togglePauseAnimations];
+        [layer togglePauseAllAnimations];
     }
-    [self.dummyView.layer togglePauseAnimations];
+    [self.dummyView.layer togglePauseAllAnimations];
+}
+
+- (BOOL)isAnimationPaused
+{
+    return [self.dummyView.layer areAllAnimationsPaused];
 }
 
 - (void)terminateAnimation

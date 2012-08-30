@@ -130,6 +130,8 @@
 
 - (void)togglePause;
 
+- (BOOL)isPaused;
+
 
 /**
  * Cancel the animation. The animation immediately reaches its end state. The delegate does not receive subsequent

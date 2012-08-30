@@ -14,6 +14,10 @@
  */
 - (void)removeAllAnimationsRecursively;
 
-- (void)togglePauseAnimations;
+- (void)togglePauseAllAnimations;
+
+- (BOOL)areAllAnimationsPaused;
+
+- (void)resetAnimations;
 
 @end

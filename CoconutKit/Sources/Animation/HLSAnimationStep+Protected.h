@@ -55,7 +55,9 @@
  */
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 
-- (void)togglePauseAnimation;
+- (void)toggleAnimationPause;
+
+- (BOOL)isAnimationPaused;
 
 /**
  * This method must be implemented by subclasses to terminate the animation

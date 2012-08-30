@@ -18,7 +18,12 @@
     }
 }
 
-- (void)togglePauseAnimations
+- (BOOL)areAllAnimationsPaused
+{
+    return [self valueForKey:@"HLSPausedSpeed"] != nil;
+}
+
+- (void)togglePauseAllAnimations
 {
     // See https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html
     NSNumber *pausedSpeedNumber = [self valueForKey:@"HLSPausedSpeed"];
@@ -34,9 +39,22 @@
         self.speed = [pausedSpeedNumber doubleValue];
         self.timeOffset = 0.;
         self.beginTime = 0.;        // Very important! Changes the result of the convertTime:fromLayer: calculation!
-        self.beginTime = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        CFTimeInterval timeInt = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        self.beginTime = timeInt;
         [self setValue:nil forKey:@"HLSPausedSpeed"];
     }
+}
+
+- (void)resetAnimations
+{
+    NSNumber *pausedSpeedNumber = [self valueForKey:@"HLSPausedSpeed"];
+    if (pausedSpeedNumber) {
+        self.speed = [pausedSpeedNumber doubleValue];
+        [self setValue:nil forKey:@"HLSPausedSpeed"];
+    }
+    
+    self.timeOffset = 0.;
+    self.beginTime = 0.;
 }
 
 @end

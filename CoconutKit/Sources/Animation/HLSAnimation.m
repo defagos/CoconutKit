@@ -226,6 +226,11 @@
     [self.currentAnimationStep togglePause];
 }
 
+- (BOOL)isPaused
+{
+    return [self.currentAnimationStep isPaused];
+}
+
 - (void)cancel
 {
     if (! self.running) {

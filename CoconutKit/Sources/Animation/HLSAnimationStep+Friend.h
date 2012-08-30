@@ -23,6 +23,8 @@
 
 - (void)togglePause;
 
+- (BOOL)isPaused;
+
 /**
  * Terminate the animation (if running). The delegate will still receive the willStart / didStop events
  */

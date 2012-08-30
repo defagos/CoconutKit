@@ -169,7 +169,12 @@
 
 - (void)togglePause
 {
-    [self togglePauseAnimation];
+    [self toggleAnimationPause];
+}
+
+- (BOOL)isPaused
+{
+    return [self isAnimationPaused];
 }
 
 - (void)terminate
@@ -209,9 +214,15 @@
     HLSMissingMethodImplementation();
 }
 
-- (void)togglePauseAnimation
+- (void)toggleAnimationPause
 {
     HLSMissingMethodImplementation();
+}
+
+- (BOOL)isAnimationPaused
+{
+    HLSMissingMethodImplementation();
+    return NO;
 }
 
 - (void)terminateAnimation
