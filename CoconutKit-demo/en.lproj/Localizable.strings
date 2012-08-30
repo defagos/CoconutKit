@@ -95,6 +95,7 @@
 "Parallax scrolling"="Parallax scrolling";
 "Parallel processing"="Parallel processing";
 "Parameters for the HLSLabel and UILabel above"="Parameters for the HLSLabel and UILabel above";
+"Pause"="Pause";
 "Phones"="Phones";
 "Play"="Play";
 "Play forward"="Play forward";
@@ -119,6 +120,7 @@
 "Reset (animated)"="Reset (animated)";
 "Reset model fields"="Reset model fields";
 "Reset text fields"="Reset text fields";
+"Resume"="Resume";
 "Root view controller"="Root view controller";
 "Scrolling"="Scrolling";
 "Search bar"="Search bar";

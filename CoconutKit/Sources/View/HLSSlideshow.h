@@ -98,9 +98,11 @@ typedef enum {
 @property (nonatomic, assign) id<HLSSlideshowDelegate> delegate;
 
 /**
- * Start / stop the slideshow
+ * Slideshow controls
  */
 - (void)play;
+- (void)pause;
+- (void)resume;
 - (void)stop;
 
 /**
@@ -124,7 +126,12 @@ typedef enum {
 /**
  * Return YES iff the slideshow is running
  */
-- (BOOL)isRunning;
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+
+/**
+ * Return YES iff the slideshow is paused
+ */
+@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
 
 @end
 

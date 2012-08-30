@@ -191,6 +191,11 @@ static const NSInteger kSlideshowNoIndex = -1;
     return self.animation.running;
 }
 
+- (BOOL)isPaused
+{
+    return self.animation.paused;
+}
+
 @synthesize delegate = m_delegate;
 
 #pragma mark Playing the slideshow
@@ -214,10 +219,35 @@ static const NSInteger kSlideshowNoIndex = -1;
     [self playAnimationForNextImage];
 }
 
+- (void)pause
+{
+    if (! self.animation.running) {
+        HLSLoggerDebug(@"The slideshow is not running");
+        return;
+    }
+    
+    if (self.animation.paused) {
+        HLSLoggerDebug(@"The slideshow is already paused");
+        return;
+    }
+    
+    [self.animation pause];
+}
+
+- (void)resume
+{
+    if (! self.animation.paused) {
+        HLSLoggerDebug(@"The slideshow has not been paused");
+        return;
+    }
+    
+    [self.animation resume];
+}
+
 - (void)stop
 {
     if (! self.animation.running) {
-        HLSLoggerInfo(@"The slideshow is not running");
+        HLSLoggerDebug(@"The slideshow is not running");
         return;
     }    
     
