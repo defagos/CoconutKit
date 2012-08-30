@@ -18,6 +18,8 @@
 #import <dlfcn.h>
 #endif
 
+static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
+
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
 //         duration received from HLSAnimationStep (0.2) and set an ease-in ease-out function
@@ -182,7 +184,7 @@
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.beginTime = beginTime;
-            [layer addAnimation:animationGroup forKey:@"layerAnimationGroup"];
+            [layer addAnimation:animationGroup forKey:kLayerAnimationGroupKey];
         }
     }
     
@@ -268,7 +270,7 @@
 {
     // Set all final values
     for (CALayer *layer in [self objects]) {
-        CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:@"layerAnimationGroup"];
+        CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:kLayerAnimationGroupKey];
         for (CABasicAnimation *layerAnimation in animationGroup.animations) {
             [layer setValue:layerAnimation.toValue forKeyPath:layerAnimation.keyPath];
         }
