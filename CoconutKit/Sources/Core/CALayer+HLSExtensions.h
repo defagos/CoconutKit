@@ -10,16 +10,23 @@
 
 /**
  * This method removes all animations added to a CALayer and to all layers in its sublayer hierarchy
- * (the usual removeAllAnimations only remove the animations attached to a layer, not to its sublayers)
+ * (the usual removeAllAnimations only removes the animations attached to a layer, not to its sublayers)
  */
 - (void)removeAllAnimationsRecursively;
 
-- (void)resetAnimations;
-
+/**
+ * Pause all animations attached to a layer. Does nothing if the layer was already paused
+ */
 - (void)pauseAllAnimations;
 
+/**
+ * Resume animations attached to a layer. Does nothing if the layer was not paused
+ */
 - (void)resumeAllAnimations;
 
-- (BOOL)areAllAnimationsPaused;
+/**
+ * Return YES iff layer animations have been paused
+ */
+- (BOOL)isPaused;
 
 @end

@@ -10,10 +10,23 @@
 
 #import "HLSLogger.h"
 
+static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
+
+@interface CALayer (HLSExtensionsPrivate)
+
+- (void)resetAnimations;
+
+@end
+
 @implementation CALayer (HLSExtensions)
 
 - (void)removeAllAnimationsRecursively
 {
+    // If we cancel animations for a layer which had been paused, reset its properties. In all other cases,
+    // the layer properties will end up correctly at the end of the animation (the end of an animation is
+    // only reached if the animation is not paused, and resuming animation restores layer properties)
+    [self resetAnimations];
+    
     [self removeAllAnimations];
     
     for (CALayer *sublayer in self.sublayers) {
@@ -21,29 +34,26 @@
     }
 }
 
-- (void)resetAnimations
-{
-    // If layer animations had been paused, reset the layer status
-    NSNumber *pausedSpeedNumber = [self valueForKey:@"HLSPausedSpeed"];
-    if (pausedSpeedNumber) {
-        self.speed = [pausedSpeedNumber doubleValue];
-        [self setValue:nil forKey:@"HLSPausedSpeed"];
-    }
-    
-    self.timeOffset = 0.;
-    self.beginTime = 0.;
-}
-
-// See https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html for pausing / resuming layer animations
+/**
+ * See https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html for pausing / resuming layer animations
+ *
+ * Important remark: Time conversion involves speed, timeOffset and beginTime: From -timeOffset documentation,
+ *                   we have for fromLayer = nil;
+ *                     t' = (t - beginTime) * speed + timeOffset
+ *                   The order of the setSpeed:, setTimeOffset:, setBeginTime: and convertTime:fromLayer:
+ *                   calls below is therefore VERY important, and temporary variables are sometimes
+ *                   absolutely mandatory to get a correct result
+ */
 - (void)pauseAllAnimations
 {
-    NSNumber *pausedSpeedNumber = [self valueForKey:@"HLSPausedSpeed"];
-    if (pausedSpeedNumber) {
+    NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
+    if (speedBeforePauseNumber) {
         HLSLoggerDebug(@"Layer animations have already been paused");
         return;
     }
-    [self setValue:[NSNumber numberWithDouble:self.speed] forKey:@"HLSPausedSpeed"];
+    [self setValue:[NSNumber numberWithFloat:self.speed] forKey:kLayerSpeedBeforePauseKey];
     
+    // Call order / use of temporaries is very important here! See remark above!
     CFTimeInterval pausedTime = [self convertTime:CACurrentMediaTime() fromLayer:nil];
     self.speed = 0.f;
     self.timeOffset = pausedTime;
@@ -51,24 +61,43 @@
 
 - (void)resumeAllAnimations
 {
-    NSNumber *pausedSpeedNumber = [self valueForKey:@"HLSPausedSpeed"];
-    if (! pausedSpeedNumber) {
+    NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
+    if (! speedBeforePauseNumber) {
         HLSLoggerDebug(@"Layer animations have not been paused");
         return;        
     }
     
+    // Call order / use of temporaries is very important here! See remark above!
     CFTimeInterval pausedTime = self.timeOffset;
-    self.speed = [pausedSpeedNumber doubleValue];
+    self.speed = [speedBeforePauseNumber floatValue];
     self.timeOffset = 0.;
-    self.beginTime = 0.;        // Very important! Changes the result of the convertTime:fromLayer: calculation!
-    CFTimeInterval timeInt = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-    self.beginTime = timeInt;
-    [self setValue:nil forKey:@"HLSPausedSpeed"];
+    self.beginTime = 0.;
+    CFTimeInterval timeIntervalSincePause = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    self.beginTime = timeIntervalSincePause;
+    
+    [self setValue:nil forKey:kLayerSpeedBeforePauseKey];
 }
 
-- (BOOL)areAllAnimationsPaused
+- (BOOL)isPaused
 {
-    return [self valueForKey:@"HLSPausedSpeed"] != nil;
+    return [self valueForKey:kLayerSpeedBeforePauseKey] != nil;
+}
+
+@end
+
+@implementation CALayer (HLSExtensionsPrivate)
+
+- (void)resetAnimations
+{
+    // If layer animations had been paused, reset the layer status
+    NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
+    if (speedBeforePauseNumber) {
+        self.speed = [speedBeforePauseNumber floatValue];
+        [self setValue:nil forKey:kLayerSpeedBeforePauseKey];
+    }
+    
+    self.timeOffset = 0.;
+    self.beginTime = 0.;
 }
 
 @end

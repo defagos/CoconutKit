@@ -122,14 +122,7 @@
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
-        
-        // Reinitialize layer properties which could have been changed when pausing the animation
-        // during a previous step
-        if (animated) {
-            [layer resetAnimations];
-            layer.beginTime = delay;
-        }
-        
+                
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
         //         animate properties but do not set them). Usually, we can do this right where the CoreAnimation
         //         is created, but this does not work if a delay has been set (in which case this will be
@@ -183,6 +176,9 @@
         
         // Create the animation group and attach it to the layer
         if (animated) {
+            // Needed so that pausing layers behaves nicely
+            layer.beginTime = delay;
+            
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.beginTime = beginTime;
@@ -193,10 +189,7 @@
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
     // which will receive the start / end animation events
     if (animated) {
-        // Reinitialize layer properties which could have been changed when pausing the animation
-        // during a previous step
-        [self.dummyView.layer resetAnimations];
-        
+        // Needed so that pausing layers behaves nicely
         self.dummyView.layer.beginTime = delay;
         
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -234,7 +227,7 @@
 
 - (BOOL)isAnimationPaused
 {
-    return [self.dummyView.layer areAllAnimationsPaused];
+    return [self.dummyView.layer isPaused];
 }
 
 - (void)terminateAnimation
