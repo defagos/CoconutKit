@@ -14,11 +14,10 @@
 #import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "LabelDemoViewController.h"
-#import "MultipleViewsAnimationDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
-#import "SingleViewAnimationDemoViewController.h"
+#import "AnimationDemoViewController.h"
 #import "SkinningDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
@@ -43,8 +42,7 @@ typedef enum {
 // Demos for animation
 typedef enum {
     AnimationDemoIndexEnumBegin = 0,
-    AnimationDemoIndexSingleView = AnimationDemoIndexEnumBegin,
-    AnimationDemoIndexMultipleViews,
+    AnimationDemoIndexAnimation = AnimationDemoIndexEnumBegin,
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
@@ -233,13 +231,8 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    cell.textLabel.text = NSLocalizedString(@"Single view animation", @"Single view animation");
-                    break;
-                }
-                
-                case AnimationDemoIndexMultipleViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
+                case AnimationDemoIndexAnimation: {
+                    cell.textLabel.text = NSLocalizedString(@"Animations", @"Animations");
                     break;
                 }
                     
@@ -416,13 +409,8 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case AnimationDemoIndexMultipleViews: {
-                    demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
+                case AnimationDemoIndexAnimation: {
+                    demoViewController = [[[AnimationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

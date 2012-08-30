@@ -16,7 +16,7 @@
 /**
  * Just a few important remarks about transforms (CATransform3D and CGAffineTransform):
  *   - transforms are applied on the right: F' = F * T, where F is a frame (this is what CGRectApplyAffineTransform
- *     does). A composed transform F_n * ... * F_2 * F_1 therefore applies F_1 first, then F_2, etc.
+ *     does). A composed transform T_n * ... * T_2 * T_1 therefore applies T_n first, then T_{n-1}, etc.
  *   - the result of applying a transform using CGRectApplyAffineTransform is not the same as setting the transform
  *     property of a UIView (or CALayer) with the same transform. When applied to the transform property, the result
  *     obtained is relative to the anchor point of the view (resp. layer) and leaves it invariant. When applied to
