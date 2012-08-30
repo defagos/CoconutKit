@@ -44,6 +44,10 @@
 
 /**
  * Convenience method to calculate the view animation parameters needed to transform a rect into another one
+ *
+ * Be careful: During an animation, the frame of a view changes. If you set fromRect to view.frame, this will be
+ * the frame of the view at the time the animation is created, not right before the view animation is performed. 
+ * Those might be the same, but in general this is not the case!
  */
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect;
 

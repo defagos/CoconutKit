@@ -56,6 +56,10 @@
 
 /**
  * Convenience method to calculate the layer animation parameters needed to transform a rect into another one
+ *
+ * Be careful: During an animation, the frame of a layer changes. If you set fromRect to layer.frame, this will be
+ * the frame of the layer at the time the animation is created, not right before the layer animation is performed. 
+ * Those might be the same, but in general this is not the case!
  */
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect;
 

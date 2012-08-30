@@ -148,29 +148,27 @@
     
     HLSViewAnimationStep *animationStep4 = [HLSViewAnimationStep animationStep];
     animationStep4.tag = @"step4";
-    HLSViewAnimation *viewAnimation41 = [HLSViewAnimation animation];
-    [viewAnimation41 transformFromRect:self.rectangleView2.frame toRect:CGRectMake(10.f, 10.f, 50.f, 50.f)];
-    [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView2];
-    HLSViewAnimation *viewAnimation42 = [HLSViewAnimation animation];
-    [viewAnimation42 transformFromRect:self.rectangleView3.frame toRect:CGRectMake(70.f, 10.f, 50.f, 50.f)];
-    [animationStep4 addViewAnimation:viewAnimation42 forView:self.rectangleView3];
+    animationStep4.duration = 1.;
     
     HLSLayerAnimationStep *animationStep5 = [HLSLayerAnimationStep animationStep];
     animationStep5.tag = @"step5";
     animationStep5.duration = 1.;
-    animationStep5.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation animation];
-    [layerAnimation51 translateByVectorWithX:0.f y:200.f];
-    [animationStep5 addLayerAnimation:layerAnimation51 forView:self.rectangleView1];
-    
+
     HLSLayerAnimationStep *animationStep6 = [HLSLayerAnimationStep animationStep];
     animationStep6.tag = @"step6";
-    animationStep6.duration = 0.7;
+    animationStep6.duration = 1.;
     animationStep6.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     HLSLayerAnimation *layerAnimation61 = [HLSLayerAnimation animation];
-    [layerAnimation61 rotateByAngle:M_PI_4];
-    layerAnimation61.opacityVariation = 0.3f;
+    [layerAnimation61 translateByVectorWithX:0.f y:200.f];
     [animationStep6 addLayerAnimation:layerAnimation61 forView:self.rectangleView1];
+    
+    HLSLayerAnimationStep *animationStep7 = [HLSLayerAnimationStep animationStep];
+    animationStep7.tag = @"step7";
+    animationStep7.duration = 0.7;
+    animationStep7.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    HLSLayerAnimation *layerAnimation71 = [HLSLayerAnimation animation];
+    [layerAnimation71 rotateByAngle:M_PI_4];
+    [animationStep7 addLayerAnimation:layerAnimation71 forView:self.rectangleView1];
     
     // Create the animation and play it
     self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
@@ -179,6 +177,7 @@
                                                                 animationStep4,
                                                                 animationStep5,
                                                                 animationStep6,
+                                                                animationStep7,
                                                                 nil]];
     if (self.fasterSwitch.on) {
         self.animation = [self.animation animationWithDuration:2.];
