@@ -49,16 +49,6 @@
 
 @synthesize translationParameters = m_translationParameters;
 
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
-{
-    self.scaleParameters = HLSVector2Make(xFactor, yFactor);
-}
-
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
-{
-    self.translationParameters = HLSVector2Make(x, y);
-}
-
 @synthesize alphaVariation = m_alphaVariation;
 
 - (void)setAlphaVariation:(CGFloat)alphaVariation
@@ -93,6 +83,16 @@
 }
 
 #pragma mark Convenience methods
+
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
+{
+    self.scaleParameters = HLSVector2Make(xFactor, yFactor);
+}
+
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
+{
+    self.translationParameters = HLSVector2Make(x, y);
+}
 
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {

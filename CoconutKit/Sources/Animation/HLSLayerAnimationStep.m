@@ -176,6 +176,27 @@ static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
             layer.transform = transform;
         }
         
+        // Animate the anchor point
+        CGPoint anchorPoint = CGPointMake(layer.anchorPoint.x + layerAnimation.anchorPointTranslationParameters.v1,
+                                          layer.anchorPoint.y + layerAnimation.anchorPointTranslationParameters.v2);
+        CGFloat anchorPointZ = layer.anchorPointZ + layerAnimation.anchorPointTranslationParameters.v3;
+        
+        if (animated) {
+            CABasicAnimation *anchorPointAnimation = [CABasicAnimation animationWithKeyPath:@"anchorPoint"];
+            [anchorPointAnimation setFromValue:[NSValue valueWithCGPoint:layer.anchorPoint]];
+            [anchorPointAnimation setToValue:[NSValue valueWithCGPoint:anchorPoint]];
+            [animations addObject:anchorPointAnimation];
+            
+            CABasicAnimation *anchorPointZAnimation = [CABasicAnimation animationWithKeyPath:@"anchorPointZ"];
+            [anchorPointZAnimation setFromValue:[NSNumber numberWithFloat:layer.anchorPointZ]];
+            [anchorPointZAnimation setToValue:[NSNumber numberWithFloat:anchorPointZ]];
+            [animations addObject:anchorPointZAnimation];
+        }
+        else {
+            layer.anchorPoint = anchorPoint;
+            layer.anchorPointZ = anchorPointZ;
+        }
+        
         // Create the animation group and attach it to the layer
         if (animated) {
             // Needed so that pausing layers behaves nicely

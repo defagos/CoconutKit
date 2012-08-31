@@ -36,6 +36,7 @@
     HLSVector4 m_rotationParameters;
     HLSVector3 m_scaleParameters;
     HLSVector3 m_translationParameters;
+    HLSVector3 m_anchorPointTranslationParameters;
     CGFloat m_opacityVariation;
 }
 
@@ -54,6 +55,9 @@
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
 
+- (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y;
+
 /**
  * Convenience method to calculate the layer animation parameters needed to transform a rect into another one
  *
@@ -71,11 +75,17 @@
  */
 @property (nonatomic, assign) CGFloat opacityVariation;
 
+
+
+// TODO: Hide the following in a Friend category
+
 /**
  * The transform corresponding to the transform parameters associated with the layer animation
  *
  * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
  */
 @property (nonatomic, readonly, assign) CATransform3D transform;
+
+@property (nonatomic, readonly, assign) HLSVector3 anchorPointTranslationParameters;
 
 @end

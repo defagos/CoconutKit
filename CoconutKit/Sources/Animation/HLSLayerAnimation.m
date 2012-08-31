@@ -38,6 +38,7 @@
 @property (nonatomic, assign) HLSVector4 rotationParameters;
 @property (nonatomic, assign) HLSVector3 scaleParameters;
 @property (nonatomic, assign) HLSVector3 translationParameters;
+@property (nonatomic, assign) HLSVector3 anchorPointTranslationParameters;
 
 - (CATransform3D)rotationTransform;
 - (CATransform3D)scaleTransform;
@@ -56,6 +57,7 @@
         self.rotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
         self.scaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
         self.translationParameters = HLSVector3Make(0.f, 0.f, 0.f);
+        self.anchorPointTranslationParameters = HLSVector3Make(0.f, 0.f, 0.f);
         
         self.opacityVariation = 0.f;
     }
@@ -70,35 +72,7 @@
 
 @synthesize translationParameters = m_translationParameters;
 
-- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
-{
-    self.rotationParameters = HLSVector4Make(angle, x, y, z);
-}
-
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor
-{
-    self.scaleParameters = HLSVector3Make(xFactor, yFactor, zFactor);
-}
-
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
-{
-    self.translationParameters = HLSVector3Make(x, y, z);
-}
-
-- (void)rotateByAngle:(CGFloat)angle
-{
-    [self rotateByAngle:angle aboutVectorWithX:0.f y:0.f z:1.f];
-}
-
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
-{
-    [self scaleWithXFactor:xFactor yFactor:yFactor zFactor:1.f];
-}
-
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
-{
-    [self translateByVectorWithX:x y:y z:0.f];
-}
+@synthesize anchorPointTranslationParameters = m_anchorPointTranslationParameters;
 
 @synthesize opacityVariation = m_opacityVariation;
 
@@ -142,6 +116,46 @@
 
 #pragma mark Convenience methods
 
+- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+{
+    self.rotationParameters = HLSVector4Make(angle, x, y, z);
+}
+
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor
+{
+    self.scaleParameters = HLSVector3Make(xFactor, yFactor, zFactor);
+}
+
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+{
+    self.translationParameters = HLSVector3Make(x, y, z);
+}
+
+- (void)rotateByAngle:(CGFloat)angle
+{
+    [self rotateByAngle:angle aboutVectorWithX:0.f y:0.f z:1.f];
+}
+
+- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
+{
+    [self scaleWithXFactor:xFactor yFactor:yFactor zFactor:1.f];
+}
+
+- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y
+{
+    [self translateByVectorWithX:x y:y z:0.f];
+}
+
+- (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+{
+    self.anchorPointTranslationParameters = HLSVector3Make(x, y, z);
+}
+
+- (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y
+{
+    [self translateAnchorPointByVectorWithX:x y:y z:0.f];
+}
+
 - (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect
 {
     // No rotation required
@@ -171,6 +185,9 @@
     [reverseLayerAnimation translateByVectorWithX:-self.translationParameters.v1
                                                 y:-self.translationParameters.v2
                                                 z:-self.translationParameters.v3];
+    [reverseLayerAnimation translateAnchorPointByVectorWithX:-self.anchorPointTranslationParameters.v1
+                                                           y:-self.anchorPointTranslationParameters.v2
+                                                           z:-self.anchorPointTranslationParameters.v3];
     reverseLayerAnimation.opacityVariation = -self.opacityVariation;
     return reverseLayerAnimation;
 }
@@ -183,6 +200,7 @@
     layerAnimationCopy.rotationParameters = self.rotationParameters;
     layerAnimationCopy.scaleParameters = self.scaleParameters;
     layerAnimationCopy.translationParameters = self.translationParameters;
+    layerAnimationCopy.anchorPointTranslationParameters = self.anchorPointTranslationParameters;
     layerAnimationCopy.opacityVariation = self.opacityVariation;
     return layerAnimationCopy;
 }
