@@ -114,6 +114,25 @@
     self.terminateButton.hidden = NO;
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.duration = 0.;
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 translateAnchorPointByVectorWithX:-0.5f y:0.f];
+    [layerAnimation11 translateByVectorWithX:-CGRectGetWidth(self.rectangleView1.frame) / 2.f y:0.f];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    animationStep2.duration = 1.;
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
+    [layerAnimation21 rotateByAngle:M_PI aboutVectorWithX:0.f y:1.f z:0.f];
+    [layerAnimation21 translateByVectorWithX:CGRectGetWidth(self.rectangleView1.frame) y:0.f];
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
+    
+    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+    
+    
+    
+#if 0
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     animationStep1.tag = @"step1";
     animationStep1.duration = 2.;
     animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
@@ -179,6 +198,7 @@
                                                                 animationStep6,
                                                                 animationStep7,
                                                                 nil]];
+#endif
     if (self.fasterSwitch.on) {
         self.animation = [self.animation animationWithDuration:2.];
     }

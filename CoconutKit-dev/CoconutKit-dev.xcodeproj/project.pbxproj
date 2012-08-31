@@ -40,7 +40,6 @@
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
-		6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
 		6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
 		6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80614BA04C8007EE121 /* HeavyViewController.xib */; };
@@ -163,7 +162,6 @@
 		6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */; };
 		6F159AF015A554250020AFAC /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */; };
 		6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */; };
-		6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */; };
 		6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
 		6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80514BA04C8007EE121 /* HeavyViewController.m */; };
 		6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80914BA04C8007EE121 /* LandscapeOnlyViewController.m */; };
@@ -343,8 +341,6 @@
 		6FADE89114BA04C9007EE121 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */; };
 		6FADE89214BA04C9007EE121 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
 		6FADE89314BA04C9007EE121 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */; };
-		6FADE89414BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */; };
-		6FADE89514BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */; };
 		6FADE89A14BA04C9007EE121 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
 		6FADE89B14BA04C9007EE121 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
 		6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
@@ -410,6 +406,10 @@
 		6FADE8E014BA04C9007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
+		6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
+		6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
+		6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */; };
+		6FB9EA4515F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */; };
 		6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF115EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */; };
@@ -698,9 +698,6 @@
 		6FADE7EB14BA04C8007EE121 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FADE7ED14BA04C8007EE121 /* CoconutKit_demoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoApplication.h; sourceTree = "<group>"; };
 		6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoApplication.m; sourceTree = "<group>"; };
-		6FADE7F214BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleViewsAnimationDemoViewController.h; sourceTree = "<group>"; };
-		6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleViewsAnimationDemoViewController.m; sourceTree = "<group>"; };
-		6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleViewsAnimationDemoViewController.xib; sourceTree = "<group>"; };
 		6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6FADE80014BA04C8007EE121 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
@@ -803,6 +800,9 @@
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FB9EA3F15F0C3760061D807 /* LayerPropertiesTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPropertiesTestViewController.h; sourceTree = "<group>"; };
+		6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPropertiesTestViewController.m; sourceTree = "<group>"; };
+		6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerPropertiesTestViewController.xib; sourceTree = "<group>"; };
 		6FC09CED15EFDAAA00C0CC74 /* AnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationDemoViewController.h; sourceTree = "<group>"; };
 		6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationDemoViewController.xib; sourceTree = "<group>"; };
@@ -1391,19 +1391,9 @@
 			isa = PBXGroup;
 			children = (
 				6FC09CEC15EFDAA900C0CC74 /* AnimationDemoViewController */,
-				6FADE7F114BA04C8007EE121 /* MultipleViewsAnimation */,
+				6FB9EA3E15F0C3580061D807 /* LayerPropertiesTestViewController */,
 			);
 			path = Animation;
-			sourceTree = "<group>";
-		};
-		6FADE7F114BA04C8007EE121 /* MultipleViewsAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE7F214BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.h */,
-				6FADE7F314BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.m */,
-				6FADE7F414BA04C8007EE121 /* MultipleViewsAnimationDemoViewController.xib */,
-			);
-			path = MultipleViewsAnimation;
 			sourceTree = "<group>";
 		};
 		6FADE7F914BA04C8007EE121 /* Common */ = {
@@ -1715,6 +1705,16 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		6FB9EA3E15F0C3580061D807 /* LayerPropertiesTestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6FB9EA3F15F0C3760061D807 /* LayerPropertiesTestViewController.h */,
+				6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */,
+				6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */,
+			);
+			path = LayerPropertiesTestViewController;
+			sourceTree = "<group>";
+		};
 		6FC09CEC15EFDAA900C0CC74 /* AnimationDemoViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1894,7 +1894,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FADE89214BA04C9007EE121 /* MainWindow.xib in Resources */,
-				6FADE89514BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6FADE89A14BA04C9007EE121 /* FixedSizeLargeViewController.xib in Resources */,
 				6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */,
 				6FADE89E14BA04C9007EE121 /* HeavyViewController.xib in Resources */,
@@ -1960,6 +1959,7 @@
 				6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */,
 				6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */,
+				6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1968,7 +1968,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */,
-				6F159A6D15A554250020AFAC /* MultipleViewsAnimationDemoViewController.xib in Resources */,
 				6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */,
 				6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */,
 				6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */,
@@ -2033,6 +2032,7 @@
 				6F159AB115A554250020AFAC /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF315EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */,
+				6FB9EA4515F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2132,7 +2132,6 @@
 				6FADE6F714BA04A7007EE121 /* HLSWizardViewController.m in Sources */,
 				6FADE89114BA04C9007EE121 /* CoconutKit_demoAppDelegate.m in Sources */,
 				6FADE89314BA04C9007EE121 /* CoconutKit_demoApplication.m in Sources */,
-				6FADE89414BA04C9007EE121 /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6FADE89B14BA04C9007EE121 /* FixedSizeViewController.m in Sources */,
 				6FADE89D14BA04C9007EE121 /* HeavyViewController.m in Sources */,
 				6FADE89F14BA04C9007EE121 /* LandscapeOnlyViewController.m in Sources */,
@@ -2216,6 +2215,7 @@
 				6F41D23315E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */,
 				6F41D24415E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */,
+				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2284,7 +2284,6 @@
 				6F159AEF15A554250020AFAC /* HLSWizardViewController.m in Sources */,
 				6F159AF015A554250020AFAC /* CoconutKit_demoAppDelegate.m in Sources */,
 				6F159AF115A554250020AFAC /* CoconutKit_demoApplication.m in Sources */,
-				6F159AF215A554250020AFAC /* MultipleViewsAnimationDemoViewController.m in Sources */,
 				6F159AF515A554250020AFAC /* FixedSizeViewController.m in Sources */,
 				6F159AF615A554250020AFAC /* HeavyViewController.m in Sources */,
 				6F159AF715A554250020AFAC /* LandscapeOnlyViewController.m in Sources */,
@@ -2367,6 +2366,7 @@
 				6F41D23415E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */,
 				6F41D24515E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6FC09CF115EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */,
+				6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

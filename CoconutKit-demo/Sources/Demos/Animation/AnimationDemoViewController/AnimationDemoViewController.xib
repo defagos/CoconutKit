@@ -775,15 +775,6 @@
 						<reference key="parent" ref="814849854"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">47</int>
-						<reference key="object" ref="802194221"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="718548916"/>
-						</object>
-						<reference key="parent" ref="814849854"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">48</int>
 						<reference key="object" ref="985397569"/>
 						<object class="NSMutableArray" key="children">
@@ -793,19 +784,18 @@
 						<reference key="parent" ref="814849854"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">49</int>
-						<reference key="object" ref="485366770"/>
-						<reference key="parent" ref="814849854"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">50</int>
-						<reference key="object" ref="60059350"/>
-						<reference key="parent" ref="814849854"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
 						<reference key="object" ref="358919830"/>
 						<reference key="parent" ref="985397569"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">47</int>
+						<reference key="object" ref="802194221"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="718548916"/>
+						</object>
+						<reference key="parent" ref="814849854"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
@@ -820,6 +810,16 @@
 						<int key="objectID">53</int>
 						<reference key="object" ref="639232871"/>
 						<reference key="parent" ref="718548916"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="60059350"/>
+						<reference key="parent" ref="814849854"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="485366770"/>
+						<reference key="parent" ref="814849854"/>
 					</object>
 				</object>
 			</object>
@@ -976,7 +976,6 @@
 							<string>fasterSwitch</string>
 							<string>playBackwardButton</string>
 							<string>playForwardButton</string>
-							<string>rectangleView</string>
 							<string>rectangleView1</string>
 							<string>rectangleView2</string>
 							<string>rectangleView3</string>
@@ -999,7 +998,6 @@
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIView</string>
-							<string>UIView</string>
 							<string>UIButton</string>
 						</object>
 					</object>
@@ -1015,7 +1013,6 @@
 							<string>fasterSwitch</string>
 							<string>playBackwardButton</string>
 							<string>playForwardButton</string>
-							<string>rectangleView</string>
 							<string>rectangleView1</string>
 							<string>rectangleView2</string>
 							<string>rectangleView3</string>
@@ -1056,10 +1053,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">playForwardButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">rectangleView</string>
-								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">rectangleView1</string>

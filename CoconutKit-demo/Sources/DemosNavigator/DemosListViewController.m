@@ -14,6 +14,7 @@
 #import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "LabelDemoViewController.h"
+#import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
@@ -43,6 +44,7 @@ typedef enum {
 typedef enum {
     AnimationDemoIndexEnumBegin = 0,
     AnimationDemoIndexAnimation = AnimationDemoIndexEnumBegin,
+    AnimationDemoIndexLayerPropertiesTest,
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
@@ -236,6 +238,11 @@ typedef enum {
                     break;
                 }
                     
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    cell.textLabel.text = NSLocalizedString(@"Layer properties test", @"Layer properties test");
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -411,6 +418,11 @@ typedef enum {
             switch (indexPath.row) {
                 case AnimationDemoIndexAnimation: {
                     demoViewController = [[[AnimationDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    demoViewController = [[[LayerPropertiesTestViewController alloc] init] autorelease];
                     break;
                 }
                     
