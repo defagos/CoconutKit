@@ -9,6 +9,8 @@
 @interface LayerPropertiesTestViewController : HLSViewController {
 @private
     UIView *m_rectangleView;
+    UIView *m_topSubview;
+    UIView *m_bottomSubview;
     
     UISlider *m_transformTxSlider;
     UILabel *m_transformTxLabel;
@@ -62,6 +64,8 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView;
+@property (nonatomic, retain) IBOutlet UIView *topSubview;
+@property (nonatomic, retain) IBOutlet UIView *bottomSubview;
 
 @property (nonatomic, retain) IBOutlet UISlider *transformTxSlider;
 @property (nonatomic, retain) IBOutlet UILabel *transformTxLabel;

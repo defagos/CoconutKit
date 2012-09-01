@@ -24,6 +24,8 @@
     [super releaseViews];
     
     self.rectangleView = nil;
+    self.topSubview = nil;
+    self.bottomSubview = nil;
     self.transformTxSlider = nil;
     self.transformTxLabel = nil;
     self.transformTySlider = nil;
@@ -75,6 +77,10 @@
 #pragma mark Accessors and mutators
 
 @synthesize rectangleView = m_rectangleView;
+
+@synthesize topSubview = m_topSubview;
+
+@synthesize bottomSubview = m_bottomSubview;
 
 @synthesize transformTxSlider = m_transformTxSlider;
 
@@ -173,6 +179,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.topSubview.layer.zPosition = 100.f;
+    self.bottomSubview.layer.zPosition = -100.f;
     
     [self reset];
 }
