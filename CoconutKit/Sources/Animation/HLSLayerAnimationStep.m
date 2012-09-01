@@ -197,6 +197,23 @@ static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
             layer.anchorPointZ = anchorPointZ;
         }
         
+        // Animate the sublayer transform
+        CATransform3D sublayerTranslationTransform = CATransform3DMakeTranslation(-layer.sublayerTransform.m41, -layer.sublayerTransform.m42, 0.f);
+        CATransform3D sublayerConvTransform = CATransform3DConcat(CATransform3DConcat(sublayerTranslationTransform, layerAnimation.sublayerTransform),
+                                                                  CATransform3DInvert(sublayerTranslationTransform));
+        CATransform3D sublayerTransform = CATransform3DConcat(layer.sublayerTransform, sublayerConvTransform);
+        sublayerTransform.m34 += layerAnimation.sublayerSkewIncrement;
+        
+        if (animated) {
+            CABasicAnimation *sublayerTransformAnimation = [CABasicAnimation animationWithKeyPath:@"sublayerTransform"];
+            [sublayerTransformAnimation setFromValue:[NSValue valueWithCATransform3D:layer.sublayerTransform]];
+            [sublayerTransformAnimation setToValue:[NSValue valueWithCATransform3D:sublayerTransform]];
+            [animations addObject:sublayerTransformAnimation];
+        }
+        else {
+            layer.sublayerTransform = sublayerTransform;
+        }
+        
         // Create the animation group and attach it to the layer
         if (animated) {
             // Needed so that pausing layers behaves nicely

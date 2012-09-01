@@ -37,12 +37,16 @@
     HLSVector3 m_scaleParameters;
     HLSVector3 m_translationParameters;
     HLSVector3 m_anchorPointTranslationParameters;
+    HLSVector4 m_sublayerRotationParameters;
+    HLSVector3 m_sublayerScaleParameters;
+    HLSVector3 m_sublayerTranslationParameters;
+    CGFloat m_sublayerSkewIncrement;
     CGFloat m_opacityVariation;
 }
 
 /**
- * Geometric transform parameters to be applied during the layer animation. The resulting transform (which you can
- * obtain by calling -transform) applies the rotation, the scale and finally the translation
+ * Geometric transform parameters to be applied during the layer animation. The resulting transform applies the rotation, 
+ * the scale and finally the translation
  */
 - (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
@@ -55,8 +59,27 @@
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
 
+/**
+ * Anchor point translation
+ */
 - (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 - (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y;
+
+/**
+ * Geometric transform parameters to be applied to sublayers during the layer animation. In particular, tweaking the
+ * skew parameter enables perspective to be applied to subviews, adding 3D to your animations
+ */
+- (void)rotateSublayersByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
+- (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)addToSublayersSkew:(CGFloat)skewIncrement;
+
+/**
+ * Same geometric transforms as above, but for transforms in a plane (the most common case)
+ */
+- (void)rotateSublayersByAngle:(CGFloat)angle;
+- (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
+- (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y;
 
 /**
  * Convenience method to calculate the layer animation parameters needed to transform a rect into another one
@@ -75,8 +98,6 @@
  */
 @property (nonatomic, assign) CGFloat opacityVariation;
 
-
-
 // TODO: Hide the following in a Friend category
 
 /**
@@ -85,6 +106,8 @@
  * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
  */
 @property (nonatomic, readonly, assign) CATransform3D transform;
+@property (nonatomic, readonly, assign) CATransform3D sublayerTransform;
+@property (nonatomic, readonly, assign) CGFloat sublayerSkewIncrement;
 
 @property (nonatomic, readonly, assign) HLSVector3 anchorPointTranslationParameters;
 

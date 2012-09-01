@@ -39,10 +39,18 @@
 @property (nonatomic, assign) HLSVector3 scaleParameters;
 @property (nonatomic, assign) HLSVector3 translationParameters;
 @property (nonatomic, assign) HLSVector3 anchorPointTranslationParameters;
+@property (nonatomic, assign) HLSVector4 sublayerRotationParameters;
+@property (nonatomic, assign) HLSVector3 sublayerScaleParameters;
+@property (nonatomic, assign) HLSVector3 sublayerTranslationParameters;
+@property (nonatomic, assign) CGFloat sublayerSkewIncrement;
 
 - (CATransform3D)rotationTransform;
 - (CATransform3D)scaleTransform;
 - (CATransform3D)translationTransform;
+
+- (CATransform3D)sublayerRotationTransform;
+- (CATransform3D)sublayerScaleTransform;
+- (CATransform3D)sublayerTranslationTransform;
 
 @end
 
@@ -59,6 +67,10 @@
         self.translationParameters = HLSVector3Make(0.f, 0.f, 0.f);
         self.anchorPointTranslationParameters = HLSVector3Make(0.f, 0.f, 0.f);
         
+        self.sublayerRotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
+        self.sublayerScaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
+        self.sublayerTranslationParameters = HLSVector3Make(0.f, 0.f, 0.f);
+        
         self.opacityVariation = 0.f;
     }
     return self;
@@ -73,6 +85,14 @@
 @synthesize translationParameters = m_translationParameters;
 
 @synthesize anchorPointTranslationParameters = m_anchorPointTranslationParameters;
+
+@synthesize sublayerRotationParameters = m_sublayerRotationParameters;
+
+@synthesize sublayerScaleParameters = m_sublayerScaleParameters;
+
+@synthesize sublayerTranslationParameters = m_sublayerTranslationParameters;
+
+@synthesize sublayerSkewIncrement = m_sublayerSkewIncrement;
 
 @synthesize opacityVariation = m_opacityVariation;
 
@@ -101,17 +121,54 @@
 
 - (CATransform3D)rotationTransform
 {
-    return CATransform3DMakeRotation(self.rotationParameters.v1, self.rotationParameters.v2, self.rotationParameters.v3, self.rotationParameters.v4);
+    return CATransform3DMakeRotation(self.rotationParameters.v1,
+                                     self.rotationParameters.v2,
+                                     self.rotationParameters.v3,
+                                     self.rotationParameters.v4);
 }
 
 - (CATransform3D)scaleTransform
 {
-    return CATransform3DMakeScale(self.scaleParameters.v1, self.scaleParameters.v2, self.scaleParameters.v3);
+    return CATransform3DMakeScale(self.scaleParameters.v1,
+                                  self.scaleParameters.v2,
+                                  self.scaleParameters.v3);
 }
 
 - (CATransform3D)translationTransform
 {
-    return CATransform3DMakeTranslation(self.translationParameters.v1, self.translationParameters.v2, self.translationParameters.v3);
+    return CATransform3DMakeTranslation(self.translationParameters.v1,
+                                        self.translationParameters.v2,
+                                        self.translationParameters.v3);
+}
+
+- (CATransform3D)sublayerTransform
+{
+    CATransform3D sublayerTransform = [self sublayerRotationTransform];
+    sublayerTransform = CATransform3DConcat(sublayerTransform, [self sublayerScaleTransform]);
+    sublayerTransform = CATransform3DConcat(sublayerTransform, [self sublayerTranslationTransform]);
+    return sublayerTransform;
+}
+
+- (CATransform3D)sublayerRotationTransform;
+{
+    return CATransform3DMakeRotation(self.sublayerRotationParameters.v1,
+                                     self.sublayerRotationParameters.v2,
+                                     self.sublayerRotationParameters.v3,
+                                     self.sublayerRotationParameters.v4);
+}
+
+- (CATransform3D)sublayerScaleTransform
+{
+    return CATransform3DMakeScale(self.sublayerScaleParameters.v1,
+                                  self.sublayerScaleParameters.v2,
+                                  self.sublayerScaleParameters.v3);
+}
+
+- (CATransform3D)sublayerTranslationTransform
+{
+    return CATransform3DMakeTranslation(self.sublayerTranslationParameters.v1,
+                                        self.sublayerTranslationParameters.v2,
+                                        self.sublayerTranslationParameters.v3);
 }
 
 #pragma mark Convenience methods
@@ -169,12 +226,48 @@
                                                 0.f);
 }
 
+- (void)rotateSublayersByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+{
+    self.sublayerRotationParameters = HLSVector4Make(angle, x, y, z);
+}
+
+- (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor
+{
+    self.sublayerScaleParameters = HLSVector3Make(xFactor, yFactor, zFactor);
+}
+
+- (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z
+{
+    self.sublayerTranslationParameters = HLSVector3Make(x, y, z);
+}
+
+- (void)addToSublayersSkew:(CGFloat)skewIncrement
+{
+    self.sublayerSkewIncrement = skewIncrement;
+}
+
+- (void)rotateSublayersByAngle:(CGFloat)angle
+{
+    [self rotateSublayersByAngle:angle aboutVectorWithX:0.f y:0.f z:1.f];
+}
+
+- (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor
+{
+    [self scaleSublayersWithXFactor:xFactor yFactor:yFactor zFactor:1.f];
+}
+
+- (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y
+{
+    [self translateSublayersByVectorWithX:x y:y z:0.f];
+}
+
 #pragma mark Reverse animation
 
 - (id)reverseObjectAnimation
 {
     // See remarks at the beginning
     HLSLayerAnimation *reverseLayerAnimation = [super reverseObjectAnimation];
+    
     [reverseLayerAnimation rotateByAngle:-self.rotationParameters.v1
                         aboutVectorWithX:self.rotationParameters.v2
                                        y:self.rotationParameters.v3
@@ -188,6 +281,19 @@
     [reverseLayerAnimation translateAnchorPointByVectorWithX:-self.anchorPointTranslationParameters.v1
                                                            y:-self.anchorPointTranslationParameters.v2
                                                            z:-self.anchorPointTranslationParameters.v3];
+    
+    [reverseLayerAnimation rotateSublayersByAngle:-self.sublayerRotationParameters.v1
+                                 aboutVectorWithX:self.sublayerRotationParameters.v2
+                                                y:self.sublayerRotationParameters.v3
+                                                z:self.sublayerRotationParameters.v4];
+    [reverseLayerAnimation scaleSublayersWithXFactor:1.f / self.sublayerScaleParameters.v1
+                                             yFactor:1.f / self.sublayerScaleParameters.v2
+                                             zFactor:1.f / self.sublayerScaleParameters.v3];
+    [reverseLayerAnimation translateSublayersByVectorWithX:-self.sublayerTranslationParameters.v1
+                                                         y:-self.sublayerTranslationParameters.v2
+                                                         z:-self.sublayerTranslationParameters.v3];
+    [reverseLayerAnimation addToSublayersSkew:-self.sublayerSkewIncrement];
+    
     reverseLayerAnimation.opacityVariation = -self.opacityVariation;
     return reverseLayerAnimation;
 }
@@ -197,10 +303,17 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     HLSLayerAnimation *layerAnimationCopy = [super copyWithZone:zone];
+    
     layerAnimationCopy.rotationParameters = self.rotationParameters;
     layerAnimationCopy.scaleParameters = self.scaleParameters;
     layerAnimationCopy.translationParameters = self.translationParameters;
     layerAnimationCopy.anchorPointTranslationParameters = self.anchorPointTranslationParameters;
+    
+    layerAnimationCopy.sublayerRotationParameters = self.sublayerRotationParameters;
+    layerAnimationCopy.sublayerScaleParameters = self.sublayerScaleParameters;
+    layerAnimationCopy.sublayerTranslationParameters = self.sublayerTranslationParameters;
+    layerAnimationCopy.sublayerSkewIncrement = self.sublayerSkewIncrement;
+    
     layerAnimationCopy.opacityVariation = self.opacityVariation;
     return layerAnimationCopy;
 }

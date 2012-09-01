@@ -123,6 +123,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                  inFrame:frame];
     HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
     
+    // Create a setup animation step for the skew applied to appearingView and disappearingView
+    HLSLayerAnimationStep *skewAnimationStep = [HLSLayerAnimationStep animationStep];
+    skewAnimationStep.duration = 0.;
+    HLSLayerAnimation *skewLayerAnimation = [HLSLayerAnimation animation];
+    [skewLayerAnimation addToSublayersSkew:[self skewWithFrame:frame]];
+    [skewAnimationStep addLayerAnimation:skewLayerAnimation forView:view];
+    animationSteps = [[NSArray arrayWithObject:skewAnimationStep] arrayByAddingObjectsFromArray:animationSteps];
+    
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
     
     // Generate an animation with the proper duration
@@ -154,6 +162,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     // If custom reverse animation implemented by the animation class, use it
     if (animationSteps) {
         HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
+        
+        // Create a setup animation step for the skew applied to appearingView and disappearingView
+        HLSLayerAnimationStep *skewAnimationStep = [HLSLayerAnimationStep animationStep];
+        skewAnimationStep.duration = 0.;
+        HLSLayerAnimation *skewLayerAnimation = [HLSLayerAnimation animation];
+        [skewLayerAnimation addToSublayersSkew:-[self skewWithFrame:frame]];
+        [skewAnimationStep addLayerAnimation:skewLayerAnimation forView:view];
+        animationSteps = [animationSteps arrayByAddingObject:skewAnimationStep];
         
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
         
@@ -1108,7 +1124,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 + (CGFloat)skewWithFrame:(CGRect)frame
 {
-    return 1.f / 1500.f;
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
+    return 1.f / (4.f * CGRectGetWidth(frame));
 }
 
 @end
@@ -1128,7 +1145,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 + (CGFloat)skewWithFrame:(CGRect)frame
 {
-    return 1.f / 1500.f;
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
+    return 1.f / (4.f * CGRectGetHeight(frame));
 }
 
 @end

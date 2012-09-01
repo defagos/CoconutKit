@@ -180,6 +180,7 @@
 {
     [super viewDidLoad];
     
+    // Set zPositions so that layers can be seen not to be on the same plane when playing with sublayer transforms
     self.topSubview.layer.zPosition = 100.f;
     self.bottomSubview.layer.zPosition = -100.f;
     
