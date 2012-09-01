@@ -103,6 +103,77 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return s_availableTransitionNames;
 }
 
+#pragma mark Generating the animation
+
++ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+                            disappearingView:(UIView *)disappearingView
+                                      inView:(UIView *)view
+                                    duration:(NSTimeInterval)duration
+{
+    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+             @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
+    
+    // Calculate the exact frame in which the animations will occur (taking into account the transform applied
+    // to the parent view)
+    CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
+    
+    // Build the animation with default parameters
+    NSArray *animationSteps = [self layerAnimationStepsWithAppearingView:appearingView
+                                                        disappearingView:disappearingView
+                                                                 inFrame:frame];
+    HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
+    
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
+    
+    // Generate an animation with the proper duration
+    if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+        return animation;
+    }
+    else {
+        return [animation animationWithDuration:duration];
+    }
+}
+
++ (HLSAnimation *)reverseAnimationWithAppearingView:(UIView *)appearingView
+                                   disappearingView:(UIView *)disappearingView
+                                             inView:(UIView *)view
+                                           duration:(NSTimeInterval)duration
+{
+    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+             @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
+    
+    // Calculate the exact frame in which the animations will occur (taking into account the transform applied
+    // to the parent view)
+    CGRect frame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
+    
+    // Build the animation with default parameters
+    NSArray *animationSteps = [self reverseLayerAnimationStepsWithAppearingView:appearingView
+                                                               disappearingView:disappearingView
+                                                                        inFrame:frame];
+    
+    // If custom reverse animation implemented by the animation class, use it
+    if (animationSteps) {
+        HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
+        
+        HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
+        
+        // Generate an animation with the proper duration
+        if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+            return animation;
+        }
+        else {
+            return [animation animationWithDuration:duration];
+        }
+    }
+    // If not implemented by the transition class, use the default reverse animation
+    else {
+        return [[self animationWithAppearingView:disappearingView
+                                disappearingView:appearingView
+                                          inView:view
+                                        duration:duration] reverseAnimation];
+    }
+}
+
 + (NSTimeInterval)defaultDuration
 {
     // Durations are constants for each transition animation class. Can cache them
@@ -412,6 +483,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                  inFrame:(CGRect)frame
 {
     return nil;
+}
+
++ (CGFloat)skewWithFrame:(CGRect)frame
+{
+    return 0.f;
 }
 
 @end
@@ -1030,6 +1106,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                   disappearingView:disappearingView];
 }
 
++ (CGFloat)skewWithFrame:(CGRect)frame
+{
+    return 1.f / 1500.f;
+}
+
 @end
 
 @implementation HLSTransitionFlipHorizontal
@@ -1043,6 +1124,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                  z:0.f
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView];
+}
+
++ (CGFloat)skewWithFrame:(CGRect)frame
+{
+    return 1.f / 1500.f;
 }
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
 #import "HLSLayerAnimationStep.h"
 
 // Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
@@ -114,10 +115,34 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
                                         disappearingView:(UIView *)disappearingView
                                                  inFrame:(CGRect)frame;
 
++ (CGFloat)skewWithFrame:(CGRect)frame;
+
 /**
  * Return the intrinsic duration of a transition as given by its implementation
  */
 + (NSTimeInterval)defaultDuration;
+
+/**
+ * Return the transition animation for an appearing view and disappearing view pair (both of which must be subviews of
+ * view)
+ *
+ * Not meant to be subclassed
+ */
++ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
+                            disappearingView:(UIView *)disappearingView
+                                      inView:(UIView *)view
+                                    duration:(NSTimeInterval)duration;
+
+/**
+ * Return the reverse transition animation to be played for an appearing view and disappearing view pair (both of which
+ * must be subviews of view)
+ *
+ * Not meant to be subclassed
+ */
++ (HLSAnimation *)reverseAnimationWithAppearingView:(UIView *)appearingView
+                                   disappearingView:(UIView *)disappearingView
+                                             inView:(UIView *)view
+                                           duration:(NSTimeInterval)duration;
 
 @end
 
