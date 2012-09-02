@@ -41,7 +41,7 @@
     HLSVector3 m_sublayerScaleParameters;
     HLSVector3 m_sublayerTranslationParameters;
     CGFloat m_sublayerSkewIncrement;
-    CGFloat m_opacityVariation;
+    CGFloat m_opacityIncrement;
 }
 
 /**
@@ -93,22 +93,7 @@
 /**
  * Opacity increment or decrement to be applied during the layer animation. Any value between 1.f and -1.f can be provided,
  * though you should ensure that opacity never reaches a value outside [0, 1] during an animation.
- *
- * Default value is 0.f
  */
-@property (nonatomic, assign) CGFloat opacityVariation;
-
-// TODO: Hide the following in a Friend category
-
-/**
- * The transform corresponding to the transform parameters associated with the layer animation
- *
- * If no rotation, scale or translation parameters have been set, this property returns the identity matrix
- */
-@property (nonatomic, readonly, assign) CATransform3D transform;
-@property (nonatomic, readonly, assign) CATransform3D sublayerTransform;
-@property (nonatomic, readonly, assign) CGFloat sublayerSkewIncrement;
-
-@property (nonatomic, readonly, assign) HLSVector3 anchorPointTranslationParameters;
+- (void)addToOpacity:(CGFloat)opacityIncrement;
 
 @end

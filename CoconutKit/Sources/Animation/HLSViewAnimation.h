@@ -32,7 +32,7 @@
 @private
     HLSVector2 m_scaleParameters;
     HLSVector2 m_translationParameters;
-    CGFloat m_alphaVariation;
+    CGFloat m_alphaIncrement;
 }
 
 /**
@@ -54,16 +54,7 @@
 /**
  * Alpha increment or decrement to be applied during the view animation. Any value between 1.f and -1.f can be provided, 
  * though you should ensure that alpha never reaches a value outside [0, 1] during an animation.
- *
- * Default value is 0.f
  */
-@property (nonatomic, assign) CGFloat alphaVariation;
-
-/**
- * The transform corresponding to the transform parameters associated with the view animation
- *
- * If no scale or translation parameters have been set, this property returns the identity matrix
- */
-@property (nonatomic, readonly, assign) CGAffineTransform transform;
+- (void)addToAlpha:(CGFloat)alphaIncrement;
 
 @end

@@ -176,6 +176,9 @@
 		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */; };
+		6FB8E67715F3EDD300CA4037 /* HLSObjectAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */; };
+		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
 		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
 		6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */; };
@@ -392,6 +395,9 @@
 		6FADE59814BA0494007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
+		6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
+		6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -521,12 +527,15 @@
 				6FCFEA6015E3AAC5002CAF9E /* HLSAnimationStep+Protected.h */,
 				6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */,
 				6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */,
+				6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */,
 				6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */,
 				6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */,
 				6FCFEA5815E390A6002CAF9E /* HLSObjectAnimation.h */,
 				6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */,
+				6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */,
 				6FADE51614BA0494007EE121 /* HLSViewAnimation.h */,
 				6FADE51714BA0494007EE121 /* HLSViewAnimation.m */,
+				6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */,
 				6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */,
 				6FADE51514BA0494007EE121 /* HLSViewAnimationStep.m */,
 			);
@@ -851,6 +860,9 @@
 				6FCFEA6115E3AAC5002CAF9E /* HLSAnimationStep+Protected.h in Headers */,
 				6F41D22B15E6A527009A2384 /* CALayer+HLSExtensions.h in Headers */,
 				6F41D23F15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h in Headers */,
+				6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */,
+				6FB8E67715F3EDD300CA4037 /* HLSObjectAnimation+Friend.h in Headers */,
+				6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -798,6 +798,8 @@
 		6FADE88514BA04C9007EE121 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
+		6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FB9EA3F15F0C3760061D807 /* LayerPropertiesTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPropertiesTestViewController.h; sourceTree = "<group>"; };
@@ -1115,6 +1117,7 @@
 				6FCFEA6215E3AAD0002CAF9E /* HLSAnimationStep+Protected.h */,
 				6FA5BD9D15E2921F00E5182E /* HLSLayerAnimation.h */,
 				6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */,
+				6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */,
 				6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */,
 				6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */,
 				6FCFEA5A15E390B2002CAF9E /* HLSObjectAnimation.h */,
@@ -1122,6 +1125,7 @@
 				6F97E17F15E60CBC00EF6F62 /* HLSObjectAnimation+Friend.h */,
 				6FADE63114BA04A6007EE121 /* HLSViewAnimation.h */,
 				6FADE63214BA04A6007EE121 /* HLSViewAnimation.m */,
+				6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */,
 				6FADE62F14BA04A6007EE121 /* HLSViewAnimationStep.h */,
 				6FADE63014BA04A6007EE121 /* HLSViewAnimationStep.m */,
 			);

@@ -266,7 +266,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
     animationStep1.duration = 0.15;
     HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
-    viewAnimation11.alphaVariation = 1.f;
+    [viewAnimation11 addToAlpha:1.f];
     [animationStep1 addViewAnimation:viewAnimation11 forView:self.searchBar];
     
     HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];

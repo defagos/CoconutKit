@@ -43,6 +43,7 @@
 @property (nonatomic, assign) HLSVector3 sublayerScaleParameters;
 @property (nonatomic, assign) HLSVector3 sublayerTranslationParameters;
 @property (nonatomic, assign) CGFloat sublayerSkewIncrement;
+@property (nonatomic, assign) CGFloat opacityIncrement;
 
 - (CATransform3D)rotationTransform;
 - (CATransform3D)scaleTransform;
@@ -70,8 +71,6 @@
         self.sublayerRotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
         self.sublayerScaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
         self.sublayerTranslationParameters = HLSVector3Make(0.f, 0.f, 0.f);
-        
-        self.opacityVariation = 0.f;
     }
     return self;
 }
@@ -94,23 +93,7 @@
 
 @synthesize sublayerSkewIncrement = m_sublayerSkewIncrement;
 
-@synthesize opacityVariation = m_opacityVariation;
-
-- (void)setOpacityVariation:(CGFloat)opacityVariation
-{
-    // Sanitize input
-    if (floatlt(opacityVariation, -1.f)) {
-        HLSLoggerWarn(@"Opacity variation cannot be smaller than -1. Fixed to -1");
-        m_opacityVariation = -1.f;
-    }
-    else if (floatgt(opacityVariation, 1.f)) {
-        HLSLoggerWarn(@"Opacity variation cannot be larger than 1. Fixed to 1");
-        m_opacityVariation = 1.f;
-    }
-    else {
-        m_opacityVariation = opacityVariation;
-    }
-}
+@synthesize opacityIncrement = m_opacityIncrement;
 
 - (CATransform3D)transform
 {
@@ -261,6 +244,22 @@
     [self translateSublayersByVectorWithX:x y:y z:0.f];
 }
 
+- (void)addToOpacity:(CGFloat)opacityIncrement
+{
+    // Sanitize input
+    if (floatlt(opacityIncrement, -1.f)) {
+        HLSLoggerWarn(@"Opacity increment cannot be smaller than -1. Fixed to -1");
+        m_opacityIncrement = -1.f;
+    }
+    else if (floatgt(opacityIncrement, 1.f)) {
+        HLSLoggerWarn(@"Opacity increment cannot be larger than 1. Fixed to 1");
+        m_opacityIncrement = 1.f;
+    }
+    else {
+        m_opacityIncrement = opacityIncrement;
+    }
+}
+
 #pragma mark Reverse animation
 
 - (id)reverseObjectAnimation
@@ -294,7 +293,7 @@
                                                          z:-self.sublayerTranslationParameters.v3];
     [reverseLayerAnimation addToSublayersSkew:-self.sublayerSkewIncrement];
     
-    reverseLayerAnimation.opacityVariation = -self.opacityVariation;
+    reverseLayerAnimation.opacityIncrement = -self.opacityIncrement;
     return reverseLayerAnimation;
 }
 
@@ -314,7 +313,7 @@
     layerAnimationCopy.sublayerTranslationParameters = self.sublayerTranslationParameters;
     layerAnimationCopy.sublayerSkewIncrement = self.sublayerSkewIncrement;
     
-    layerAnimationCopy.opacityVariation = self.opacityVariation;
+    layerAnimationCopy.opacityIncrement = self.opacityIncrement;
     return layerAnimationCopy;
 }
 
@@ -323,13 +322,13 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: %p; rotationParamers: %@; scaleParameters: %@; translationParameters: %@; "
-            "opacityVariation: %.2f>",
+            "opacityIncrement: %.2f>",
             [self class],
             self,
             HLSStringFromVector4(self.rotationParameters),
             HLSStringFromVector3(self.scaleParameters),
             HLSStringFromVector3(self.translationParameters),
-            self.opacityVariation];
+            self.opacityIncrement];
 }
 
 @end

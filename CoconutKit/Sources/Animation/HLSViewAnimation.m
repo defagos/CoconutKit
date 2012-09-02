@@ -21,6 +21,7 @@
 
 @property (nonatomic, assign) HLSVector2 scaleParameters;
 @property (nonatomic, assign) HLSVector2 translationParameters;
+@property (nonatomic, assign) CGFloat alphaIncrement;
 
 - (CGAffineTransform)scaleTransform;
 - (CGAffineTransform)translationTransform;
@@ -37,8 +38,6 @@
         // Default: No change
         self.scaleParameters = HLSVector2Make(1.f, 1.f);
         self.translationParameters = HLSVector2Make(0.f, 0.f);
-        
-        self.alphaVariation = 0.f;
     }
     return self;
 }
@@ -49,21 +48,21 @@
 
 @synthesize translationParameters = m_translationParameters;
 
-@synthesize alphaVariation = m_alphaVariation;
+@synthesize alphaIncrement = m_alphaIncrement;
 
-- (void)setAlphaVariation:(CGFloat)alphaVariation
+- (void)addToAlpha:(CGFloat)alphaIncrement
 {
     // Sanitize input
-    if (floatlt(alphaVariation, -1.f)) {
-        HLSLoggerWarn(@"Alpha variation cannot be smaller than -1. Fixed to -1");
-        m_alphaVariation = -1.f;
+    if (floatlt(alphaIncrement, -1.f)) {
+        HLSLoggerWarn(@"Alpha increment cannot be smaller than -1. Fixed to -1");
+        m_alphaIncrement = -1.f;
     }
-    else if (floatgt(alphaVariation, 1.f)) {
+    else if (floatgt(alphaIncrement, 1.f)) {
         HLSLoggerWarn(@"Alpha variation cannot be larger than 1. Fixed to 1");
-        m_alphaVariation = 1.f;
+        m_alphaIncrement = 1.f;
     }
     else {
-        m_alphaVariation = alphaVariation;
+        m_alphaIncrement = alphaIncrement;
     }
 }
 
@@ -112,7 +111,7 @@
                                    yFactor:1.f / self.scaleParameters.v2];
     [reverseViewAnimation translateByVectorWithX:-self.translationParameters.v1
                                                y:-self.translationParameters.v2];
-    reverseViewAnimation.alphaVariation = -self.alphaVariation;
+    reverseViewAnimation.alphaIncrement = -self.alphaIncrement;
     return reverseViewAnimation;
 }
 
@@ -123,7 +122,7 @@
     HLSViewAnimation *viewAnimationCopy = [super copyWithZone:zone];
     viewAnimationCopy.scaleParameters = self.scaleParameters;
     viewAnimationCopy.translationParameters = self.translationParameters;
-    viewAnimationCopy.alphaVariation = self.alphaVariation;
+    viewAnimationCopy.alphaIncrement = self.alphaIncrement;
     return viewAnimationCopy;
 }
 
@@ -131,12 +130,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; scaleParameters: %@; translationParameters: %@; alphaVariation: %.2f>", 
+    return [NSString stringWithFormat:@"<%@: %p; scaleParameters: %@; translationParameters: %@; alphaIncrement: %.2f>", 
             [self class],
             self,
             HLSStringFromVector2(self.scaleParameters),
             HLSStringFromVector2(self.translationParameters),
-            self.alphaVariation];
+            self.alphaIncrement];
 }
 
 @end

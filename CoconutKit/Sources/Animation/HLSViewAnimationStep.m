@@ -13,6 +13,7 @@
 #import "HLSAnimationStep+Protected.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSViewAnimation+Friend.h"
 
 @interface HLSViewAnimationStep ()
 
@@ -84,7 +85,7 @@
         NSAssert(viewAnimation != nil, @"Missing view animation; data consistency failure");
         
         // Alpha animation (alpha must always lie between 0.f and 1.f)
-        CGFloat alpha = view.alpha + viewAnimation.alphaVariation;
+        CGFloat alpha = view.alpha + viewAnimation.alphaIncrement;
         if (floatlt(alpha, -1.f)) {
             HLSLoggerWarn(@"View animations adding to an alpha value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", view);
             alpha = -1.f;
