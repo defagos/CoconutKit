@@ -40,7 +40,7 @@
     HLSVector4 m_sublayerRotationParameters;
     HLSVector3 m_sublayerScaleParameters;
     HLSVector3 m_sublayerTranslationParameters;
-    CGFloat m_sublayerSkewIncrement;
+    CGFloat m_sublayerCameraTranslationZ;
     CGFloat m_opacityIncrement;
 }
 
@@ -72,7 +72,14 @@
 - (void)rotateSublayersByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 - (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
 - (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
-- (void)addToSublayersSkew:(CGFloat)skewIncrement;
+
+/**
+ * Move the position of the camera from which sublayers are seen. The usual position is (0, 0, 0), which
+ * means no perspective is applied (the sublayers are seen from infinity, i.e. z = infinity). Providing 
+ * a non-zero meaningful value for z (usually some factor of the layer dimensions) applies a 3D perspective 
+ * to sublayers
+ */
+- (void)translateSublayerCameraByVectorWithZ:(CGFloat)z;
 
 /**
  * Same geometric transforms as above, but for transforms in a plane (the most common case)

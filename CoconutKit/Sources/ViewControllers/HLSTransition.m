@@ -433,13 +433,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    // See http://markpospesel.wordpress.com/tag/catransform3d/
-    [layerAnimation11 addToSublayersSkew:-1.f / (4.f * CGRectGetWidth(view.frame))];
-    [animationStep1 addLayerAnimation:layerAnimation11 forView:view];
+    [layerAnimation11 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
+    [layerAnimation11 addToOpacity:-1.f];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
-    [layerAnimation12 rotateByAngle:M_PI aboutVectorWithX:x y:y z:z];
-    [layerAnimation12 addToOpacity:-1.f];
-    [animationStep1 addLayerAnimation:layerAnimation12 forView:appearingView];
+    [layerAnimation12 translateSublayerCameraByVectorWithZ:4 * CGRectGetWidth(view.frame)];
+    [animationStep1 addLayerAnimation:layerAnimation12 forView:view];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
     
@@ -451,7 +450,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
-    animationStep2.duration = 0.2;
+    animationStep2.duration = 0.3;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
@@ -472,7 +471,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [layerAnimation42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [layerAnimation42 addToOpacity:0.5f];
     [animationStep4 addLayerAnimation:layerAnimation42 forView:appearingView];
-    animationStep4.duration = 0.2;
+    animationStep4.duration = 0.3;
     [animationSteps addObject:animationStep4];
     
     return [NSArray arrayWithArray:animationSteps];

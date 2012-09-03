@@ -19,9 +19,9 @@
 @property (nonatomic, readonly, assign) CATransform3D sublayerTransform;
 
 /**
- * The sublayer skew matrix element increment to apply
+ * The z-translation to apply to the camera from which sublayers are seen
  */
-@property (nonatomic, readonly, assign) CGFloat sublayerSkewIncrement;
+@property (nonatomic, readonly, assign) CGFloat sublayerCameraTranslationZ;
 
 /**
  * The translation to apply to the layer anchor point

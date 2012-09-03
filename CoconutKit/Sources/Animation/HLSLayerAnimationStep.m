@@ -20,6 +20,8 @@
 #endif
 
 static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
+static NSString * const kLayerNonProjectedSublayerTransformKey = @"HLSNonProjectedSublayerTransform";
+static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZPositionForSublayers";
 
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
@@ -198,12 +200,47 @@ static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
             layer.anchorPointZ = anchorPointZ;
         }
         
-        // Animate the sublayer transform
-        CATransform3D sublayerTranslationTransform = CATransform3DMakeTranslation(-layer.sublayerTransform.m41, -layer.sublayerTransform.m42, 0.f);
+        // Get the sublayer transform without its perspective component (saved as additional layer information)
+        NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:kLayerNonProjectedSublayerTransformKey];
+        CATransform3D nonProjectedSublayerTransform = CATransform3DIdentity;
+        if (nonProjectedSublayerTransformValue) {
+            nonProjectedSublayerTransform = [nonProjectedSublayerTransformValue CATransform3DValue];
+        }
+        else {
+            nonProjectedSublayerTransform = layer.sublayerTransform;
+        }
+        
+        // Get the current camera position (saved as additional layer information)
+        NSNumber *sublayerCameraZPositionNumber = [layer valueForKey:kLayerCameraZPositionForSublayersKey];
+        CGFloat sublayerCameraZPosition = 0.f;
+        if (sublayerCameraZPositionNumber) {
+            sublayerCameraZPosition = [sublayerCameraZPositionNumber floatValue];
+        }
+        else {
+            sublayerCameraZPosition = floateq(layer.sublayerTransform.m34, 0.f) ? 0.f : 1.f / layer.sublayerTransform.m34;
+        }
+        
+        // Calculate the sublayer transform (without perspective component)
+        CATransform3D sublayerTranslationTransform = CATransform3DMakeTranslation(-nonProjectedSublayerTransform.m41, -nonProjectedSublayerTransform.m42, 0.f);
         CATransform3D sublayerConvTransform = CATransform3DConcat(CATransform3DConcat(sublayerTranslationTransform, layerAnimation.sublayerTransform),
                                                                   CATransform3DInvert(sublayerTranslationTransform));
-        CATransform3D sublayerTransform = CATransform3DConcat(layer.sublayerTransform, sublayerConvTransform);
-        sublayerTransform.m34 += layerAnimation.sublayerSkewIncrement;
+        CATransform3D sublayerTransform = CATransform3DConcat(nonProjectedSublayerTransform, sublayerConvTransform);
+        
+        // Calculate the new z-position of the camera
+        sublayerCameraZPosition += layerAnimation.sublayerCameraTranslationZ;
+        
+        // Save the information relative / not relative to the perspective separately
+        [layer setValue:[NSNumber numberWithFloat:sublayerCameraZPosition] forKey:kLayerCameraZPositionForSublayersKey];
+        [layer setValue:[NSValue valueWithCATransform3D:sublayerTransform] forKey:kLayerNonProjectedSublayerTransformKey];
+        
+        // Create the perspective matrix (see http://en.wikipedia.org/wiki/3D_projection#Perspective_projection)
+        CATransform3D perspectiveProjectionTransform = CATransform3DIdentity;
+        if (! floateq(sublayerCameraZPosition, 0.f)) {
+            perspectiveProjectionTransform.m34 = -1.f / sublayerCameraZPosition;
+        }
+        
+        // Apply the perspective
+        sublayerTransform = CATransform3DConcat(sublayerTransform, perspectiveProjectionTransform);
         
         if (animated) {
             CABasicAnimation *sublayerTransformAnimation = [CABasicAnimation animationWithKeyPath:@"sublayerTransform"];

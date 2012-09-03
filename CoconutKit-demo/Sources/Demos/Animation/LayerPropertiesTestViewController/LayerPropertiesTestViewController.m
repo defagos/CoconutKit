@@ -267,11 +267,13 @@
                                                                               self.sublayerTransformTySlider.value,
                                                                               self.sublayerTransformTzSlider.value);
     
-    CATransform3D sublayerTransform = CATransform3DConcat(sublayerRotationTransformX, sublayerRotationTransformY);
+    CATransform3D sublayerTransform = CATransform3DIdentity;
+    sublayerTransform.m34 = self.sublayerTransformSkewSlider.value;
+    sublayerTransform = CATransform3DConcat(sublayerTransform, sublayerRotationTransformX);
+    sublayerTransform = CATransform3DConcat(sublayerTransform, sublayerRotationTransformY);
     sublayerTransform = CATransform3DConcat(sublayerTransform, sublayerRotationTransformZ);
     sublayerTransform = CATransform3DConcat(sublayerTransform, sublayerScaleTransform);
     sublayerTransform = CATransform3DConcat(sublayerTransform, sublayerTranslationTransform);
-    sublayerTransform.m34 = self.sublayerTransformSkewSlider.value;
     self.rectangleView.layer.sublayerTransform = sublayerTransform;
     
     // Anchor point

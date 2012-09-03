@@ -26,10 +26,10 @@
  *     (resp. its layer). This has some important consequences when calculating the reverse view or layer animation.
  *     The reverse is namely not simply CATransform3DInvert([self transform]). Since we are applying the changes in
  *     the coordinate system centered on the original view or layer frame, we must do the same when the animation is
- *     played backwards. Therefore, the reverse transform we need is not the inverse of transform = T * S * R, i.e. not
- *     transform^{-1} = R^{-1} * S^{-1} * T^{-1}, but the transform applying the inverse rotation, scaling and
+ *     played backwards. Therefore, the reverse transform we need is not the inverse of transform = R * S * T, i.e. not
+ *     transform^{-1} = T^{-1} * S^{-1} * R^{-1}, but the transform applying the inverse rotation, scaling and
  *     translation transforms, beginning with the operations leaving the frame origin invariant (rotation and scaling),
- *     i.e. transform_{reverse} = R^{-1} * S^{-1} * T^{-1}. This is why rotation, translation and scaling parameters
+ *     i.e. transform_{reverse} = T^{-1} * S^{-1} * R^{-1}. This is why rotation, translation and scaling parameters
  *     must be kept separate, so that the reverse animation can be easily computed
  */
 
@@ -42,7 +42,7 @@
 @property (nonatomic, assign) HLSVector4 sublayerRotationParameters;
 @property (nonatomic, assign) HLSVector3 sublayerScaleParameters;
 @property (nonatomic, assign) HLSVector3 sublayerTranslationParameters;
-@property (nonatomic, assign) CGFloat sublayerSkewIncrement;
+@property (nonatomic, assign) CGFloat sublayerCameraTranslationZ;
 @property (nonatomic, assign) CGFloat opacityIncrement;
 
 - (CATransform3D)rotationTransform;
@@ -71,6 +71,8 @@
         self.sublayerRotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
         self.sublayerScaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
         self.sublayerTranslationParameters = HLSVector3Make(0.f, 0.f, 0.f);
+        
+        self.sublayerCameraTranslationZ = 0.f;
     }
     return self;
 }
@@ -91,7 +93,7 @@
 
 @synthesize sublayerTranslationParameters = m_sublayerTranslationParameters;
 
-@synthesize sublayerSkewIncrement = m_sublayerSkewIncrement;
+@synthesize sublayerCameraTranslationZ = m_sublayerCameraTranslationZ;
 
 @synthesize opacityIncrement = m_opacityIncrement;
 
@@ -224,11 +226,6 @@
     self.sublayerTranslationParameters = HLSVector3Make(x, y, z);
 }
 
-- (void)addToSublayersSkew:(CGFloat)skewIncrement
-{
-    self.sublayerSkewIncrement = skewIncrement;
-}
-
 - (void)rotateSublayersByAngle:(CGFloat)angle
 {
     [self rotateSublayersByAngle:angle aboutVectorWithX:0.f y:0.f z:1.f];
@@ -242,6 +239,11 @@
 - (void)translateSublayersByVectorWithX:(CGFloat)x y:(CGFloat)y
 {
     [self translateSublayersByVectorWithX:x y:y z:0.f];
+}
+
+- (void)translateSublayerCameraByVectorWithZ:(CGFloat)z
+{    
+    self.sublayerCameraTranslationZ = z;
 }
 
 - (void)addToOpacity:(CGFloat)opacityIncrement
@@ -291,7 +293,7 @@
     [reverseLayerAnimation translateSublayersByVectorWithX:-self.sublayerTranslationParameters.v1
                                                          y:-self.sublayerTranslationParameters.v2
                                                          z:-self.sublayerTranslationParameters.v3];
-    [reverseLayerAnimation addToSublayersSkew:-self.sublayerSkewIncrement];
+    [reverseLayerAnimation translateSublayerCameraByVectorWithZ:-self.sublayerCameraTranslationZ];
     
     reverseLayerAnimation.opacityIncrement = -self.opacityIncrement;
     return reverseLayerAnimation;
@@ -311,7 +313,7 @@
     layerAnimationCopy.sublayerRotationParameters = self.sublayerRotationParameters;
     layerAnimationCopy.sublayerScaleParameters = self.sublayerScaleParameters;
     layerAnimationCopy.sublayerTranslationParameters = self.sublayerTranslationParameters;
-    layerAnimationCopy.sublayerSkewIncrement = self.sublayerSkewIncrement;
+    layerAnimationCopy.sublayerCameraTranslationZ = self.sublayerCameraTranslationZ;
     
     layerAnimationCopy.opacityIncrement = self.opacityIncrement;
     return layerAnimationCopy;
