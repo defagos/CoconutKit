@@ -16,68 +16,67 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * Base class for transition animations involving two views (currently for use by containers). To define your
  * own transition animation, subclass HLSTransition and implement the
- *   -layerAnimationStepsWithAppearingView:disappearingView:inFrame:
- * method to return the HLSLayerAnimationSteps to be played when a view is brought to display, while another one
- * is hidden from view. Only layer animations are supported. You can also optionally implement the
- *   -reverseLayerAnimationStepsWithAppearingView:disappearingView:inFrame:
+ *   -animationStepsWithAppearingView:disappearingView:inView:
+ * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
+ * from view. You can also optionally implement the
+ *   -reverseAnimationStepsWithAppearingView:disappearingView:inView:
  * method (which by default returns nil) to define the animation to be used when performing the reverse transition.
  *
- * When implementing -layerAnimationStepsWithAppearingView:disappearingView:inFrame:, keep in mind that:
- *   - appearingView and disappearingView must not be used directly (in particular, you must not access their current
- *     frame or alpha). Those view parameters are only provided so that they can be supplied to
- *       -[HLSLayerAnimationStep addLayerAnimation:forView:]
- *     when building the animation steps
- *   - when implementing -layerAnimationStepsWithAppearingView:disappearingView:inFrame:, create your animation steps
- *     based on the folowing assumptions (regardless of the current appearingView and disappearingView properties,
- *     which you should ignore, as said above):
- *       - both the appearing and disappearing views fill the given frame entirely, i.e. they have
- *           bounds = {0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)}
+ * When implementing -animationStepsWithAppearingView:disappearingView:inView:, keep in mind that:
+ *   - appearingView, disappearingView and view must not be altered directly (in particular, you must not change their
+ *     current frame or alpha directly). Those view parameters are only provided so that they can be supplied to
+ *       -[HLSAnimationStep addViewAnimationStep:forView]
+ *     when building the animation steps. Only the animation is allowed to perform changes on those views
+ *   - when implementing -animationStepsWithAppearingView:disappearingView:inView:, create your animation steps
+ *     based on the folowing assumptions:
+ *       - both the appearing and disappearing views fill the given view.frame entirely, i.e. they have
+ *           bounds = {0.f, 0.f, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame)}
  *       - both views have alpha = 1.f
- *       - the appearing view is on top of the disappearing one
+ *       - the appearing view is on top of the disappearing one, and both are displayed within view
  *     If you need your appearing view to start from a different initial state, use a first "setup" animation step
- *     with duration = 0. This way you can make it initially invisible or outside the frame. Conversely, you can
+ *     with duration = 0. This way you can make it initially invisible or outside view.frame. Conversely, you can
  *     add a final animation step to make the disappearing view invisible at the end of the animation (this might
- *     be required for animations moving the disappearing view outside the frame, so that it stays invisible when
+ *     be required for animations moving the disappearing view outside view.frame, so that it stays invisible when
  *     subsequent animations are played)
  *   - the duration of your animation steps is arbitrary. The sum of those durations defines the default duration
- *     of the resulting animation, which can be retrieved by calling the +defaultDuration on a transition class.
- *     The duration of each animation step might be scaled depending on the total duration which is desired when
- *     the animation is actually played (refer to -[HLSAnimation animationWithDuration:] documentation for more
+ *     of the resulting animation, which can be retrieved by calling the +defaultDuration method on a transition
+ *     class. The duration of each animation step might be scaled depending on the total duration which is desired
+ *     when the animation is actually played (refer to -[HLSAnimation animationWithDuration:] documentation for more
  *     information)
  *
  * For example, here is the implementation of a push from right animation (the usual UINavigationController animation)
  * with an intrinsic duration of 0.4:
  *
- *   + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
- *                                    disappearingView:(UIView *)disappearingView
- *                                             inFrame:(CGRect)frame
+ *   + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
+ *                               disappearingView:(UIView *)disappearingView
+ *                                         inView:(UIView *)view
  *   {
  *       NSMutableArray *animationSteps = [NSMutableArray array];
  *
- *       // Setup step initially bringing the appearing view outside the frame
- *       HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
- *       HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
- *       [layerAnimation11 translateByVectorWithX:CGRectGetWidth(frame) y:0.f];
- *       [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
+ *       // Setup step initially bringing the appearing view outside view.frame
+ *       HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep11 translateByVectorWithX:CGRectGetWidth(view.frame) y:0.f z:0.f];
+ *       [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:appearingView];
  *       animationStep1.duration = 0.;
  *       [animationSteps addObject:animationStep1];
  *
  *       // The push itself, moving both views to the left
- *       HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
- *       HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
- *       [layerAnimation21 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f];
- *       [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
- *       HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
- *       [layerAnimation22 translateByVectorWithX:-CGRectGetWidth(frame) y:0.f];
- *       [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
+ *       HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep21 translateByVectorWithX:-CGRectGetWidth(view.frame) y:0.f z:0.f];
+ *       [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:disappearingView];
+ *       HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
+ *       [viewAnimationStep22 translateByVectorWithX:-CGRectGetWidth(view.frame) y:0.f z:0.f];
+ *       [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:appearingView];
  *       animationStep2.duration = 0.4;
  *       [animationSteps addObject:animationStep2];
  *
  *       // Make the disappearing view invisible
- *       HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
- *       HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
- *       layerAnimation31.opacityVariation = -1.f;
- *       [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
+ *       HLSAnimationStep *animationStep3 = [HLSAnimationStep animationStep];
+ *       HLSViewAnimationStep *viewAnimationStep31 = [HLSViewAnimationStep viewAnimationStep];
+ *       viewAnimationStep31.alphaVariation = -1.f;
+ *       [animationStep3 addViewAnimationStep:viewAnimationStep31 forView:disappearingView];
  *       animationStep3.duration = 0.;
  *       [animationSteps addObject:animationStep3];
  *
@@ -104,7 +103,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  */
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                          inFrame:(CGRect)frame;
+                                           inView:(UIView *)view;
 
 /**
  * The method which subclasses can optionally override to define a custom reverse transition animation. The base
@@ -113,9 +112,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  */
 + (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
                                         disappearingView:(UIView *)disappearingView
-                                                 inFrame:(CGRect)frame;
-
-+ (CGFloat)skewWithFrame:(CGRect)frame;
+                                                  inView:(UIView *)view;
 
 /**
  * Return the intrinsic duration of a transition as given by its implementation
@@ -363,13 +360,13 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 @end
 
 /**
- * The new view emerges from the center of the frame, the old one is left as is
+ * The new view emerges from the center of view.frame, the old one is left as is
  */
 @interface HLSTransitionEmergeFromCenter : HLSTransition
 @end
 
 /**
- * The new view emerges from the center of the frame while the old one is slightly pushed to the back
+ * The new view emerges from the center of view.frame while the old one is slightly pushed to the back
  */
 @interface HLSTransitionEmergeFromCenterPushToBack : HLSTransition
 @end
