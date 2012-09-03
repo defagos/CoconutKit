@@ -451,7 +451,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
     [layerAnimation22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
-    animationStep2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animationStep2.duration = 0.2;
     [animationSteps addObject:animationStep2];
     
@@ -473,7 +472,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [layerAnimation42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [layerAnimation42 addToOpacity:0.5f];
     [animationStep4 addLayerAnimation:layerAnimation42 forView:appearingView];
-    animationStep4.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     animationStep4.duration = 0.2;
     [animationSteps addObject:animationStep4];
     
