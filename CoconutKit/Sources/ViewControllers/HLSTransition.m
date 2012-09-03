@@ -56,6 +56,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 + (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
                                                     y:(CGFloat)y
                                                     z:(CGFloat)z
+                                   cameraZTranslation:(CGFloat)cameraZTranslation
                                         appearingView:(UIView *)appearingView
                                      disappearingView:(UIView *)disappearingView
                                                inView:(UIView *)view;
@@ -424,6 +425,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 + (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
                                                     y:(CGFloat)y
                                                     z:(CGFloat)z
+                                   cameraZTranslation:(CGFloat)cameraZTranslation
                                         appearingView:(UIView *)appearingView
                                      disappearingView:(UIView *)disappearingView
                                                inView:(UIView *)view
@@ -437,7 +439,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [layerAnimation11 addToOpacity:-1.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
-    [layerAnimation12 translateSublayerCameraByVectorWithZ:4 * CGRectGetWidth(view.frame)];
+    [layerAnimation12 translateSublayerCameraByVectorWithZ:cameraZTranslation];
     [animationStep1 addLayerAnimation:layerAnimation12 forView:view];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -1102,9 +1104,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                  disappearingView:(UIView *)disappearingView
                                            inView:(UIView *)view
 {
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
                                                                  y:1.f
                                                                  z:0.f
+                                                cameraZTranslation:4.f * CGRectGetWidth(view.frame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1118,9 +1122,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                  disappearingView:(UIView *)disappearingView
                                            inView:(UIView *)view
 {
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
                                                                  y:0.f
                                                                  z:0.f
+                                                cameraZTranslation:4.f * CGRectGetHeight(view.frame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
