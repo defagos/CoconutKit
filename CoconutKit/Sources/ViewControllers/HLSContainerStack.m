@@ -788,7 +788,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
         [appearingContainerContent viewWillAppear:animated movingToParentViewController:YES];
-    }    
+    }
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated

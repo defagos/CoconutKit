@@ -162,7 +162,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             layer.opacity = opacity;
         }
         
-        // Animate the frame. The transform has to be applied on the layer center. This requires a conversion in the coordinate system
+        // Animate the transform. The transform has to be applied on the layer center. This requires a conversion in the coordinate system
         // centered on the layer
         CATransform3D translationTransform = CATransform3DMakeTranslation(-layer.transform.m41, -layer.transform.m42, 0.f);
         CATransform3D convTransform = CATransform3DConcat(CATransform3DConcat(translationTransform, layerAnimation.transform),
