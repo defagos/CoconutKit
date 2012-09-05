@@ -132,6 +132,11 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * Return the transition animation for an appearing view and disappearing view pair (both of which must be subviews of
  * view)
  *
+ * view must not be nil. Appearing view is allowed to be nil (in which case view won't be animated as well). This is 
+ * a special use of this method when replaying an animation for a resurrected disappearing view, while appearingView 
+ * (and therefore view) are already loaded and were already correctly animated to their final location. disappearingView
+ * can be nil (this is the case when the first view in the container is being animated)
+ *
  * Not meant to be subclassed
  */
 + (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
@@ -144,7 +149,8 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * must be subviews of view)
  *
  * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the
- * reverse transition
+ * reverse transition. view must and disappearing view must not be nil. appearingView can be nil (this is the case
+ * when the last view in the container is being removed)
  *
  * Not meant to be subclassed
  */

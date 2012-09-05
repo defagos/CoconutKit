@@ -121,7 +121,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                       inView:(UIView *)view
                                     duration:(NSTimeInterval)duration
 {
-    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+    NSAssert(view && (! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
              @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
     
     // Calculate the exact frame in which the animations will occur (taking into account the transform applied
@@ -130,11 +130,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     // changing the view to eliminate any potential side effects
     CGRect actualFrame = CGRectApplyAffineTransform(view.frame, CGAffineTransformInvert(view.transform));
     
-    // Build the animation with default parameters
+    // Build the animation with default parameters. Beware of the inView parameter here: If no appearing view has been set,
+    // we are replaying an animation only for disappearing view (view is still required to calculate the actual frame)
     NSArray *animationSteps = [self layerAnimationStepsWithAppearingView:appearingView
                                                         disappearingView:disappearingView
                                                                    frame:actualFrame
-                                                                  inView:view];
+                                                                  inView:appearingView ? view : nil];
     HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, [HLSLayerAnimationStep class]);
         
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
@@ -153,7 +154,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                              inView:(UIView *)view
                                            duration:(NSTimeInterval)duration
 {
-    NSAssert((! appearingView || appearingView.superview == view) && (! disappearingView || disappearingView.superview == view),
+    NSAssert(view && (! appearingView || appearingView.superview == view) && disappearingView.superview == view,
              @"Both the appearing and disappearing views must be children of the view in which the transition takes place");
     
     // Calculate the exact frame in which the animations will occur (taking into account the transform applied
