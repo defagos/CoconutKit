@@ -169,10 +169,10 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 NSString *HLSStringFromCATransform3D(CATransform3D transform)
 {
     return [NSString stringWithFormat:@"[\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
+            "    [%.6f, %.6f, %.6f, %.6f]\n"
+            "    [%.6f, %.6f, %.6f, %.6f]\n"
+            "    [%.6f, %.6f, %.6f, %.6f]\n"
+            "    [%.6f, %.6f, %.6f, %.6f]\n"
             "]", 
             transform.m11, transform.m12, transform.m13, transform.m14, 
             transform.m21, transform.m22, transform.m23, transform.m24, 
