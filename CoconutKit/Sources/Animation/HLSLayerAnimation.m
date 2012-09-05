@@ -324,13 +324,14 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: %p; rotationParamers: %@; scaleParameters: %@; translationParameters: %@; "
-            "opacityIncrement: %.2f>",
+            "opacityIncrement: %.2f; sublayerCameraTranslationZ: %.2f>",
             [self class],
             self,
             HLSStringFromVector4(self.rotationParameters),
             HLSStringFromVector3(self.scaleParameters),
             HLSStringFromVector3(self.translationParameters),
-            self.opacityIncrement];
+            self.opacityIncrement,
+            self.sublayerCameraTranslationZ];
 }
 
 @end
