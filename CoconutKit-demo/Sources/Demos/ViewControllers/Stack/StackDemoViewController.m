@@ -154,7 +154,7 @@
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [stackController insertViewController:viewController
+    [stackController insertViewController:pushedViewController
                                   atIndex:(NSUInteger)roundf(self.indexSlider.value)
                       withTransitionClass:NSClassFromString(transitionName)
                                  duration:kAnimationTransitionDefaultDuration
