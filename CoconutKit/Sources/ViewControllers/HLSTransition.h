@@ -42,6 +42,9 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *     add a final animation step to make the disappearing view invisible at the end of the animation (this might
  *     be required for animations moving the disappearing view outside the frame, so that it stays invisible when
  *     subsequent animations are played)
+ *   - your transition animation can animate appearingView, disappearingView, as well as view (e.g. to alter its 
+ *     sublayer transform so that perspective can be applied to appearingView and disappearingView animations if
+ *     needed)
  *   - the duration of your animation steps is arbitrary. The sum of those durations defines the default duration
  *     of the resulting animation, which can be retrieved by calling the +defaultDuration method on a transition
  *     class. The duration of each animation step might be scaled depending on the total duration which is desired
