@@ -437,7 +437,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if (containerContent.addedToContainerView) {
-        // Load the view controller'sview below so that the capacity criterium can be fulfilled (if needed). If we are popping a
+        // Load the view controller's view below so that the capacity criterium can be fulfilled (if needed). If we are popping a
         // view controller, we will have capacity + 1 view controller's views loaded during the animation. This ensures that no
         // view controllers magically pops up during animation (which could be noticed depending on the pop animation, or if view
         // controllers on top of it are transparent)
