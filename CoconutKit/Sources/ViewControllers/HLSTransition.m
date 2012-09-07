@@ -515,6 +515,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
     [layerAnimation12 translateSublayerCameraByVectorWithZ:cameraZTranslation];
+    layerAnimation12.togglingShouldRasterize = YES;
     [animationStep1 addLayerAnimation:layerAnimation12 forView:view];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];

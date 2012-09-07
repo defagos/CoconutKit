@@ -42,6 +42,7 @@
     HLSVector3 m_sublayerTranslationParameters;
     CGFloat m_sublayerCameraTranslationZ;
     CGFloat m_opacityIncrement;
+    BOOL m_togglingShouldRasterize;
 }
 
 /**
@@ -102,5 +103,10 @@
  * though you should ensure that opacity never reaches a value outside [0, 1] during an animation.
  */
 - (void)addToOpacity:(CGFloat)opacityIncrement;
+
+/**
+ * Whether the shouldRasterize flag should be changed during the animation
+ */
+@property (nonatomic, assign, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
 
 @end

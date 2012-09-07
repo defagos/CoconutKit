@@ -97,6 +97,8 @@
 
 @synthesize opacityIncrement = m_opacityIncrement;
 
+@synthesize togglingShouldRasterize = m_togglingShouldRasterize;
+
 - (CATransform3D)transform
 {
     CATransform3D transform = [self rotationTransform];
@@ -296,6 +298,7 @@
     [reverseLayerAnimation translateSublayerCameraByVectorWithZ:-self.sublayerCameraTranslationZ];
     
     reverseLayerAnimation.opacityIncrement = -self.opacityIncrement;
+    reverseLayerAnimation.togglingShouldRasterize = self.togglingShouldRasterize;
     return reverseLayerAnimation;
 }
 
@@ -316,6 +319,7 @@
     layerAnimationCopy.sublayerCameraTranslationZ = self.sublayerCameraTranslationZ;
     
     layerAnimationCopy.opacityIncrement = self.opacityIncrement;
+    layerAnimationCopy.togglingShouldRasterize = self.togglingShouldRasterize;
     return layerAnimationCopy;
 }
 

@@ -200,6 +200,20 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             layer.anchorPointZ = anchorPointZ;
         }
         
+        // Rasterization
+        if (layerAnimation.togglingShouldRasterize) {
+            BOOL shouldRasterize = ! layer.shouldRasterize;
+            if (animated) {
+                CABasicAnimation *shouldRasterizeAnimation = [CABasicAnimation animationWithKeyPath:@"shouldRasterize"];
+                [shouldRasterizeAnimation setFromValue:[NSNumber numberWithBool:layer.shouldRasterize]];
+                [shouldRasterizeAnimation setToValue:[NSNumber numberWithBool:shouldRasterize]];
+                [animations addObject:shouldRasterizeAnimation];
+            }
+            else {
+                layer.shouldRasterize = shouldRasterize;
+            }
+        }
+        
         // Get the sublayer transform without its perspective component (saved as additional layer information)
         NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:kLayerNonProjectedSublayerTransformKey];
         CATransform3D nonProjectedSublayerTransform = CATransform3DIdentity;
