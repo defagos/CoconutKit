@@ -89,15 +89,15 @@
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
                                            inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup step bringing the appearingView outside the frame
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 translateByVectorWithX:0.f y:-CGRectGetHeight(frame)];
+    [layerAnimation11 translateByVectorWithX:0.f y:-CGRectGetHeight(bounds)];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
@@ -105,21 +105,21 @@
     // The animation
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
-    [layerAnimation21 translateByVectorWithX:0.f y:CGRectGetHeight(frame)];
+    [layerAnimation21 translateByVectorWithX:0.f y:CGRectGetHeight(bounds)];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
     animationStep2.duration = 0.1;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 translateByVectorWithX:0.f y:-CGRectGetHeight(frame) / 3.f];
+    [layerAnimation31 translateByVectorWithX:0.f y:-CGRectGetHeight(bounds) / 3.f];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:appearingView];
     animationStep3.duration = 0.15;
     [animationSteps addObject:animationStep3];
     
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
-    [layerAnimation41 translateByVectorWithX:0.f y:CGRectGetHeight(frame) / 3.f];
+    [layerAnimation41 translateByVectorWithX:0.f y:CGRectGetHeight(bounds) / 3.f];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:appearingView];
     animationStep4.duration = 0.15;
     [animationSteps addObject:animationStep4];
@@ -129,15 +129,15 @@
 
 + (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
                                         disappearingView:(UIView *)disappearingView
-                                                   frame:(CGRect)frame
                                                   inView:(UIView *)view
+                                              withBounds:(CGRect)bounds
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
     // Setup step bringing the disappearingView outside the frame
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation51 = [HLSLayerAnimation animation];
-    [layerAnimation51 translateByVectorWithX:0.f y:-CGRectGetHeight(frame)];
+    [layerAnimation51 translateByVectorWithX:0.f y:-CGRectGetHeight(bounds)];
     [animationStep1 addLayerAnimation:layerAnimation51 forView:disappearingView];
     animationStep1.duration = 0.4;
     [animationSteps addObject:animationStep1];
@@ -151,8 +151,8 @@
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
                                            inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [CustomTransition rotateLayerAnimationStepsAroundVectorWithX:0.f
@@ -171,8 +171,8 @@
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
                                            inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [CustomTransition rotateLayerAnimationStepsAroundVectorWithX:0.f
@@ -191,8 +191,8 @@
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
                                            inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [CustomTransition rotateLayerAnimationStepsAroundVectorWithX:1.f
@@ -211,8 +211,8 @@
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
                                            inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [CustomTransition rotateLayerAnimationStepsAroundVectorWithX:1.f
