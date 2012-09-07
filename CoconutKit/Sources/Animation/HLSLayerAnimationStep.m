@@ -200,7 +200,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             layer.anchorPointZ = anchorPointZ;
         }
         
-        // Rasterization
+        // Rasterisation
         if (layerAnimation.togglingShouldRasterize) {
             BOOL shouldRasterize = ! layer.shouldRasterize;
             if (animated) {

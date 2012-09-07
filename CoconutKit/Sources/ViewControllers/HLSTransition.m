@@ -502,7 +502,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    // Setup animation step
+    // Setup animation step. Rasterisation is enabled to avoid artifacts when removing several view controllers
+    // which where added with the rotation animation
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 rotateByAngle:(counterclockwise ? -M_PI_2 : M_PI_2) aboutVectorWithX:x y:y z:z];

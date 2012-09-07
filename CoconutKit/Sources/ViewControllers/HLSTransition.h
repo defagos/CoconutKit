@@ -35,6 +35,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *           bounds = {0.f, 0.f, CGRectGetWidth(frame), CGRectGetHeight(frame)}
  *         You can use this frame dimensions to translate the views outside the frame if your animation requires it
  *       - both views have alpha = 1.f
+ *       - the layer properties are the default ones (e.g. rasterisation is disabled)
  *       - the appearing view is on top of the disappearing one, and both are displayed within view
  *     If you need your appearing view to start from a different initial state, use a first "setup" animation step
  *     with duration = 0. This way you can make it initially invisible or outside the frame. Conversely, you can
