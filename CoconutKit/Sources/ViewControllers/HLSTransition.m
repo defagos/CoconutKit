@@ -457,24 +457,21 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
     [layerAnimation21 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    [layerAnimation21 addToOpacity:-0.5f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
     HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
-    [layerAnimation22 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
-    HLSLayerAnimation *layerAnimation23 = [HLSLayerAnimation animation];
-    [layerAnimation23 translateSublayersByVectorWithX:0.f y:0.f z:-cameraZTranslation / 5.f];
-    [animationStep2 addLayerAnimation:layerAnimation23 forView:view];
+    [layerAnimation22 translateSublayersByVectorWithX:0.f y:0.f z:-cameraZTranslation / 5.f];
+    [animationStep2 addLayerAnimation:layerAnimation22 forView:view];
     animationStep2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     animationStep2.duration = 0.3;
     [animationSteps addObject:animationStep2];
     
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 addToOpacity:0.5f];
+    [layerAnimation31 addToOpacity:1.f];
     [animationStep3 addLayerAnimation:layerAnimation31 forView:appearingView];
     HLSLayerAnimation *layerAnimation32 = [HLSLayerAnimation animation];
-    [layerAnimation32 addToOpacity:-0.5f];
+    [layerAnimation32 addToOpacity:-1.f];
     [animationStep3 addLayerAnimation:layerAnimation32 forView:disappearingView];
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
@@ -483,13 +480,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
     [layerAnimation41 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:disappearingView];
+    [animationStep4 addLayerAnimation:layerAnimation41 forView:appearingView];
     HLSLayerAnimation *layerAnimation42 = [HLSLayerAnimation animation];
-    [layerAnimation42 rotateByAngle:-M_PI_2 aboutVectorWithX:x y:y z:z];
-    [layerAnimation42 addToOpacity:0.5f];
-    [animationStep4 addLayerAnimation:layerAnimation42 forView:appearingView];
-    HLSLayerAnimation *layerAnimation43 = [HLSLayerAnimation animation];
-    [layerAnimation43 translateSublayersByVectorWithX:0.f y:0.f z:cameraZTranslation / 5.f];
-    [animationStep4 addLayerAnimation:layerAnimation43 forView:view];
+    [layerAnimation42 translateSublayersByVectorWithX:0.f y:0.f z:cameraZTranslation / 5.f];
+    [animationStep4 addLayerAnimation:layerAnimation42 forView:view];
     animationStep4.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animationStep4.duration = 0.3;
     [animationSteps addObject:animationStep4];
@@ -544,7 +538,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.3;
     [animationSteps addObject:animationStep3];
     
-    // Hide the view which disappears to avoid being able to barely see it after a rotation
+    // Hide the view which disappears to avoid being able to barely see when the device is rotated between
+    // portrait and landscape modes
     HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
     [layerAnimation41 addToOpacity:-1.f];
