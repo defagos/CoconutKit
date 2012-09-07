@@ -1215,12 +1215,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                             frame:(CGRect)frame
                                            inView:(UIView *)view
 {
-    // We translate the camera by a distance proportional to the size of the frame, so that larger frames are
-    // observed from further away. We avoid the dimension which gets altered (the width during a vertical flip)
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
                                                                  y:1.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetHeight(frame)
+                                                cameraZTranslation:4.f * CGRectGetWidth(frame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1235,12 +1234,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                             frame:(CGRect)frame
                                            inView:(UIView *)view
 {
-    // We translate the camera by a distance proportional to the size of the frame, so that larger frames are
-    // observed from further away. We avoid the dimension which gets altered (the height during a horizontal flip)
+    // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
                                                                  y:0.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetWidth(frame)
+                                                cameraZTranslation:4.f * CGRectGetHeight(frame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
