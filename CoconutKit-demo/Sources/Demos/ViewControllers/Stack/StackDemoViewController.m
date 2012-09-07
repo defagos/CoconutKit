@@ -64,7 +64,7 @@
                                    animated:NO];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController
-                        withTransitionClass:[HLSTransitionFlipHorizontal class]
+                        withTransitionClass:[HLSTransitionFlipHorizontally class]
                                    animated:NO];
         
         [self setInsetViewController:stackController atIndex:0];

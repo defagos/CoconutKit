@@ -116,6 +116,9 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * class implementation returns nil, in which case the reverse animation will be generated from the transition
  * animation using -[HLSAnimation reverseAnimation] (which is in general what you want)
  *
+ * If you are implementing this method, you are responsible of ensuring that all views are brought to the exact
+ * same initial state which they started from
+ *
  * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the 
  * reverse transition
  */
@@ -393,14 +396,11 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * The two views are flipped vertically
  */
-@interface HLSTransitionFlipVertical : HLSTransition
+@interface HLSTransitionFlipVertically : HLSTransition
 @end
 
 /**
  * The two views are flipped horizontally
  */
-@interface HLSTransitionFlipHorizontal : HLSTransition
-@end
-
-@interface HLSTransitionRotateFromLeftCounterclockwise : HLSTransition
+@interface HLSTransitionFlipHorizontally : HLSTransition
 @end

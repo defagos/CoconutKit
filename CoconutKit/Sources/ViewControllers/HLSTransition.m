@@ -61,15 +61,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                      disappearingView:(UIView *)disappearingView
                                                inView:(UIView *)view;
 
-+ (NSArray *)rotateLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                      y:(CGFloat)y
-                                                      z:(CGFloat)z
-                                       counterclockwise:(BOOL)counterclockwise
-                                     cameraZTranslation:(CGFloat)cameraZTranslation
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView
-                                                 inView:(UIView *)view;
-
 @end
 
 @implementation HLSTransition
@@ -486,66 +477,6 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     [animationStep4 addLayerAnimation:layerAnimation42 forView:view];
     animationStep4.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animationStep4.duration = 0.3;
-    [animationSteps addObject:animationStep4];
-    
-    return [NSArray arrayWithArray:animationSteps];
-}
-
-+ (NSArray *)rotateLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                      y:(CGFloat)y
-                                                      z:(CGFloat)z
-                                       counterclockwise:(BOOL)counterclockwise
-                                     cameraZTranslation:(CGFloat)cameraZTranslation
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView
-                                                 inView:(UIView *)view
-{
-    NSMutableArray *animationSteps = [NSMutableArray array];
-    
-    // Setup animation step. Rasterisation is enabled to avoid artifacts when removing several view controllers
-    // which where added with the rotation animation
-    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 rotateByAngle:(counterclockwise ? -M_PI_2 : M_PI_2) aboutVectorWithX:x y:y z:z];
-    [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
-    HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
-    [layerAnimation12 translateSublayerCameraByVectorWithZ:cameraZTranslation];
-    layerAnimation12.togglingShouldRasterize = YES;
-    [animationStep1 addLayerAnimation:layerAnimation12 forView:view];
-    animationStep1.duration = 0.;
-    [animationSteps addObject:animationStep1];
-    
-    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
-    [layerAnimation21 rotateByAngle:(counterclockwise ? M_PI_4 : -M_PI_4) aboutVectorWithX:x y:y z:z];
-    [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
-    [animationStep2 addLayerAnimation:layerAnimation21 forView:appearingView];
-    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
-    [layerAnimation22 translateSublayersByVectorWithX:0.f y:0.f z:-cameraZTranslation / 5.f];
-    [animationStep2 addLayerAnimation:layerAnimation22 forView:view];
-    animationStep2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    animationStep2.duration = 0.3;
-    [animationSteps addObject:animationStep2];
-    
-    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 rotateByAngle:(counterclockwise ? M_PI_4 : -M_PI_4) aboutVectorWithX:x y:y z:z];
-    [animationStep3 addLayerAnimation:layerAnimation31 forView:disappearingView];
-    [animationStep3 addLayerAnimation:layerAnimation31 forView:appearingView];
-    HLSLayerAnimation *layerAnimation32 = [HLSLayerAnimation animation];
-    [layerAnimation32 translateSublayersByVectorWithX:0.f y:0.f z:cameraZTranslation / 5.f];
-    [animationStep3 addLayerAnimation:layerAnimation32 forView:view];
-    animationStep3.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    animationStep3.duration = 0.3;
-    [animationSteps addObject:animationStep3];
-    
-    // Hide the view which disappears to avoid being able to barely see when the device is rotated between
-    // portrait and landscape modes
-    HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
-    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
-    [layerAnimation41 addToOpacity:-1.f];
-    [animationStep4 addLayerAnimation:layerAnimation41 forView:disappearingView];
-    animationStep4.duration = 0.;
     [animationSteps addObject:animationStep4];
     
     return [NSArray arrayWithArray:animationSteps];
@@ -1209,7 +1140,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @end
 
-@implementation HLSTransitionFlipVertical
+@implementation HLSTransitionFlipVertically
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
@@ -1220,7 +1151,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
                                                                  y:1.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetWidth(frame)
+                                                cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1228,7 +1159,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @end
 
-@implementation HLSTransitionFlipHorizontal
+@implementation HLSTransitionFlipHorizontally
 
 + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
                                  disappearingView:(UIView *)disappearingView
@@ -1239,31 +1170,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
                                                                  y:0.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetHeight(frame)
+                                                cameraZTranslation:4.f * CGRectGetHeight([[UIScreen mainScreen] applicationFrame])
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
-}
-
-@end
-
-@implementation HLSTransitionRotateFromLeftCounterclockwise
-
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                            frame:(CGRect)frame
-                                           inView:(UIView *)view
-{
-    // We translate the camera by a distance proportional to the size of the frame, so that larger frames are
-    // observed from further away. We avoid the dimension which gets altered (the width during a horizontal rotation)
-    return [HLSTransition rotateLayerAnimationStepsAroundVectorWithX:0.f
-                                                                   y:1.f
-                                                                   z:0.f
-                                                    counterclockwise:YES
-                                                  cameraZTranslation:4.f * CGRectGetHeight(frame)
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView
-                                                              inView:view];
 }
 
 @end
