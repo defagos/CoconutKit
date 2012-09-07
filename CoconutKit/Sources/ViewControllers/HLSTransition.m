@@ -61,7 +61,9 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                      disappearingView:(UIView *)disappearingView
                                                inView:(UIView *)view;
 
-+ (NSArray *)rotateLayerAnimationStepsAroundVectorWithX:(CGFloat)x
++ (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
+                                                     yOffset:(CGFloat)yOffset
+                                           aroundVectorWithX:(CGFloat)x
                                                       y:(CGFloat)y
                                                       z:(CGFloat)z
                                        counterclockwise:(BOOL)counterclockwise
@@ -487,15 +489,17 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)rotateLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                      y:(CGFloat)y
-                                                      z:(CGFloat)z
-                                       counterclockwise:(BOOL)counterclockwise
-                                     cameraZTranslation:(CGFloat)cameraZTranslation
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView
-                                                 inView:(UIView *)view
-                                             withBounds:(CGRect)bounds
++ (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
+                                                     yOffset:(CGFloat)yOffset
+                                           aroundVectorWithX:(CGFloat)x
+                                                           y:(CGFloat)y
+                                                           z:(CGFloat)z
+                                            counterclockwise:(BOOL)counterclockwise
+                                          cameraZTranslation:(CGFloat)cameraZTranslation
+                                               appearingView:(UIView *)appearingView
+                                            disappearingView:(UIView *)disappearingView
+                                                      inView:(UIView *)view
+                                                  withBounds:(CGRect)bounds
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
@@ -504,12 +508,16 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 rotateByAngle:(counterclockwise ? -M_PI_2 : M_PI_2) aboutVectorWithX:x y:y z:z];
-    [layerAnimation11 translateAnchorPointByVectorWithX:-0.5f y:0.f z:0.f];
-    [layerAnimation11 translateByVectorWithX:-CGRectGetWidth(bounds) / 2.f y:0.f z:0.f];
+    [layerAnimation11 translateAnchorPointByVectorWithX:xOffset y:yOffset z:0.f];
+    [layerAnimation11 translateByVectorWithX:xOffset * CGRectGetWidth(bounds)
+                                           y:yOffset * CGRectGetHeight(bounds)
+                                           z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
-    [layerAnimation12 translateAnchorPointByVectorWithX:-0.5f y:0.f z:0.f];
-    [layerAnimation12 translateByVectorWithX:-CGRectGetWidth(bounds) / 2.f y:0.f z:0.f];
+    [layerAnimation12 translateAnchorPointByVectorWithX:xOffset y:yOffset z:0.f];
+    [layerAnimation12 translateByVectorWithX:xOffset * CGRectGetWidth(bounds)
+                                           y:yOffset * CGRectGetHeight(bounds)
+                                           z:0.f];
     [animationStep1 addLayerAnimation:layerAnimation12 forView:disappearingView];
     HLSLayerAnimation *layerAnimation13 = [HLSLayerAnimation animation];
     [layerAnimation13 translateSublayerCameraByVectorWithZ:cameraZTranslation];
@@ -1242,17 +1250,92 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @end
 
-@implementation HLSTransitionRotateVerticallyFromBottomCounterclockwise
+@implementation HLSTransitionRotateHorizontallyFromBottomCounterclockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
+                                                                  yOffset:0.5f
+                                                        aroundVectorWithX:1.f
+                                                                        y:0.f
+                                                                        z:0.f
+                                                         counterclockwise:YES
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
 
 @end
 
-@implementation HLSTransitionRotateVerticallyFromBottomClockwise
+@implementation HLSTransitionRotateHorizontallyFromBottomClockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
+                                                                  yOffset:0.5f
+                                                        aroundVectorWithX:1.f
+                                                                        y:0.f
+                                                                        z:0.f
+                                                         counterclockwise:NO
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end
 
-@implementation HLSTransitionRotateVerticallyFromTopCounterclockwise
+@implementation HLSTransitionRotateHorizontallyFromTopCounterclockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
+                                                                  yOffset:-0.5f
+                                                        aroundVectorWithX:1.f
+                                                                        y:0.f
+                                                                        z:0.f
+                                                         counterclockwise:YES
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end
 
-@implementation HLSTransitionRotateVerticallyFromTopClockwise
+@implementation HLSTransitionRotateHorizontallyFromTopClockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
+                                                                  yOffset:-0.5f
+                                                        aroundVectorWithX:1.f
+                                                                        y:0.f
+                                                                        z:0.f
+                                                         counterclockwise:NO
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end
 
 @implementation HLSTransitionRotateVerticallyFromLeftCounterclockwise
@@ -1262,24 +1345,83 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                            inView:(UIView *)view
                                        withBounds:(CGRect)bounds
 {
-    return [HLSTransition rotateLayerAnimationStepsAroundVectorWithX:0.f
-                                                                   y:1.f
-                                                                   z:0.f
-                                                    counterclockwise:YES
-                                                  cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
-                                                       appearingView:appearingView
-                                                    disappearingView:disappearingView
-                                                              inView:view
-                                                          withBounds:bounds];
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:-0.5f
+                                                                  yOffset:0.f
+                                                        aroundVectorWithX:0.f
+                                                                        y:1.f
+                                                                        z:0.f
+                                                         counterclockwise:YES
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
 }
 
 @end
 
 @implementation HLSTransitionRotateVerticallyFromLeftClockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:-0.5f
+                                                                  yOffset:0.f
+                                                        aroundVectorWithX:0.f
+                                                                        y:1.f
+                                                                        z:0.f
+                                                         counterclockwise:NO
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end
 
 @implementation HLSTransitionRotateVerticallyFromRightCounterclockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.5f
+                                                                  yOffset:0.f
+                                                        aroundVectorWithX:0.f
+                                                                        y:1.f
+                                                                        z:0.f
+                                                         counterclockwise:YES
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end
 
 @implementation HLSTransitionRotateVerticallyFromRightClockwise
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.5f
+                                                                  yOffset:0.f
+                                                        aroundVectorWithX:0.f
+                                                                        y:1.f
+                                                                        z:0.f
+                                                         counterclockwise:NO
+                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                            appearingView:appearingView
+                                                         disappearingView:disappearingView
+                                                                   inView:view
+                                                               withBounds:bounds];
+}
+
 @end

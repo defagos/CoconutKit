@@ -411,24 +411,21 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 @interface HLSTransitionFlipHorizontally : HLSTransition
 @end
 
-#if 0
-@interface HLSTransitionRotateVerticallyFromBottomCounterclockwise : HLSTransition
+@interface HLSTransitionRotateHorizontallyFromBottomCounterclockwise : HLSTransition
 @end
 
-@interface HLSTransitionRotateVerticallyFromBottomClockwise : HLSTransition
+@interface HLSTransitionRotateHorizontallyFromBottomClockwise : HLSTransition
 @end
 
-@interface HLSTransitionRotateVerticallyFromTopCounterclockwise : HLSTransition
+@interface HLSTransitionRotateHorizontallyFromTopCounterclockwise : HLSTransition
 @end
 
-@interface HLSTransitionRotateVerticallyFromTopClockwise : HLSTransition
+@interface HLSTransitionRotateHorizontallyFromTopClockwise : HLSTransition
 @end
-#endif
 
 @interface HLSTransitionRotateVerticallyFromLeftCounterclockwise : HLSTransition
 @end
 
-#if 0
 @interface HLSTransitionRotateVerticallyFromLeftClockwise : HLSTransition
 @end
 
@@ -437,4 +434,3 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 
 @interface HLSTransitionRotateVerticallyFromRightClockwise : HLSTransition
 @end
-#endif
