@@ -544,6 +544,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.3;
     [animationSteps addObject:animationStep3];
     
+    // Hide the view which disappears to avoid being able to barely see it after a rotation
+    HLSLayerAnimationStep *animationStep4 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation41 = [HLSLayerAnimation animation];
+    [layerAnimation41 addToOpacity:-1.f];
+    [animationStep4 addLayerAnimation:layerAnimation41 forView:disappearingView];
+    animationStep4.duration = 0.;
+    [animationSteps addObject:animationStep4];
+    
     return [NSArray arrayWithArray:animationSteps];
 }
 
