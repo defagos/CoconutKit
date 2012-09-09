@@ -32,3 +32,9 @@
 
 @interface CustomTransitionRotateHorizontallyClockwise : HLSTransition
 @end
+
+/**
+ * Same as HLSTransitionFadeIn, but applying a blur effect on the view which gets covered
+ */
+@interface CustomTransitionFadeInBlur : HLSTransition
+@end

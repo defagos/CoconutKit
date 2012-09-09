@@ -226,3 +226,36 @@
 }
 
 @end
+
+@implementation CustomTransitionFadeInBlur
+
++ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                 disappearingView:(UIView *)disappearingView
+                                           inView:(UIView *)view
+                                       withBounds:(CGRect)bounds
+{
+    NSMutableArray *animationSteps = [NSMutableArray array];
+    
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 addToOpacity:-1.f];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
+    animationStep1.duration = 0.;
+    [animationSteps addObject:animationStep1];
+    
+    // Tweak the rasterization scale of the disappearing view to create a pseudo-blur effect
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
+    layerAnimation21.togglingShouldRasterize = YES;
+    [layerAnimation21 addToRasterizationScale:-0.5f];
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:disappearingView];
+    HLSLayerAnimation *layerAnimation22 = [HLSLayerAnimation animation];
+    [layerAnimation22 addToOpacity:1.f];
+    [animationStep2 addLayerAnimation:layerAnimation22 forView:appearingView];
+    animationStep2.duration = 0.4;
+    [animationSteps addObject:animationStep2];
+    
+    return [NSArray arrayWithArray:animationSteps];
+}
+
+@end
