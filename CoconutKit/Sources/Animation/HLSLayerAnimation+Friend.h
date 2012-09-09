@@ -33,4 +33,9 @@
  */
 @property (nonatomic, readonly, assign) CGFloat opacityIncrement;
 
+/**
+ * The increment to apply to the layer rasterization scale
+ */
+@property (nonatomic, readonly, assign) CGFloat rasterizationScaleIncrement;
+
 @end

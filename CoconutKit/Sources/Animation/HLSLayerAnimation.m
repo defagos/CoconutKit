@@ -44,6 +44,7 @@
 @property (nonatomic, assign) HLSVector3 sublayerTranslationParameters;
 @property (nonatomic, assign) CGFloat sublayerCameraTranslationZ;
 @property (nonatomic, assign) CGFloat opacityIncrement;
+@property (nonatomic, assign) CGFloat rasterizationScaleIncrement;
 
 - (CATransform3D)rotationTransform;
 - (CATransform3D)scaleTransform;
@@ -98,6 +99,8 @@
 @synthesize opacityIncrement = m_opacityIncrement;
 
 @synthesize togglingShouldRasterize = m_togglingShouldRasterize;
+
+@synthesize rasterizationScaleIncrement = m_rasterizationScaleIncrement;
 
 - (CATransform3D)transform
 {
@@ -264,6 +267,11 @@
     }
 }
 
+- (void)addToRasterizationScale:(CGFloat)rasterizationScaleIncrement
+{
+    self.rasterizationScaleIncrement = rasterizationScaleIncrement;
+}
+
 #pragma mark Reverse animation
 
 - (id)reverseObjectAnimation
@@ -299,6 +307,7 @@
     
     reverseLayerAnimation.opacityIncrement = -self.opacityIncrement;
     reverseLayerAnimation.togglingShouldRasterize = self.togglingShouldRasterize;
+    reverseLayerAnimation.rasterizationScaleIncrement = -self.rasterizationScaleIncrement;
     return reverseLayerAnimation;
 }
 
@@ -320,6 +329,7 @@
     
     layerAnimationCopy.opacityIncrement = self.opacityIncrement;
     layerAnimationCopy.togglingShouldRasterize = self.togglingShouldRasterize;
+    layerAnimationCopy.rasterizationScaleIncrement = self.rasterizationScaleIncrement;
     return layerAnimationCopy;
 }
 
@@ -328,14 +338,15 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: %p; rotationParamers: %@; scaleParameters: %@; translationParameters: %@; "
-            "opacityIncrement: %.2f; sublayerCameraTranslationZ: %.2f>",
+            "opacityIncrement: %.2f; sublayerCameraTranslationZ: %.2f; rasterizationScaleIncrement: %.2f>",
             [self class],
             self,
             HLSStringFromVector4(self.rotationParameters),
             HLSStringFromVector3(self.scaleParameters),
             HLSStringFromVector3(self.translationParameters),
             self.opacityIncrement,
-            self.sublayerCameraTranslationZ];
+            self.sublayerCameraTranslationZ,
+            self.rasterizationScaleIncrement];
 }
 
 @end

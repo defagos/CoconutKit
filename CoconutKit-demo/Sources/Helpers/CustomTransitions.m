@@ -34,7 +34,7 @@
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    // Setup animation step. Rasterisation is enabled to avoid artifacts when removing several view controllers
+    // Setup animation step. Rasterization is enabled to avoid artifacts when removing several view controllers
     // which where added with the rotation animation
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];

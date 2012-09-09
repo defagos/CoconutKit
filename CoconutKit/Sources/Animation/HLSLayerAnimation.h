@@ -43,6 +43,7 @@
     CGFloat m_sublayerCameraTranslationZ;
     CGFloat m_opacityIncrement;
     BOOL m_togglingShouldRasterize;
+    CGFloat m_rasterizationScaleIncrement;
 }
 
 /**
@@ -62,6 +63,8 @@
 
 /**
  * Anchor point translation
+ *
+ * Remark: x and y are in relative coordinates. Refer to the -[CALayer anchorPoint] documentation for more information
  */
 - (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 - (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y;
@@ -108,5 +111,11 @@
  * Whether the shouldRasterize flag should be changed during the animation
  */
 @property (nonatomic, assign, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
+
+/**
+ * Rasterization scale increment or decrement to be applied during the layer animation. You can use this parameter
+ * to pixelize layers (small rasterization scale value) or to give them a blurry appearance (medium values)
+ */
+- (void)addToRasterizationScale:(CGFloat)rasterizationScaleIncrement;
 
 @end

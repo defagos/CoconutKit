@@ -38,7 +38,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  *         You can e.g. use the dimensions of bounds to translate the appearing and / or disappearing views outside 
  *         the view if your animation requires it
  *       - both appearingView and disappearingView have alpha = 1.f
- *       - the layer properties are the default ones for a CALayer (e.g. rasterisation is disabled)
+ *       - the layer properties are the default ones for a CALayer (e.g. rasterization is disabled)
  *       - appearingView is on top of disappearingView, and both are displayed within view
  *     If you need your appearing view to start from a different initial state, use a first "setup" animation step
  *     with duration = 0. This way you can make it initially invisible or outside the frame. Conversely, you can

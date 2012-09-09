@@ -200,7 +200,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             layer.anchorPointZ = anchorPointZ;
         }
         
-        // Rasterisation
+        // Rasterization
         if (layerAnimation.togglingShouldRasterize) {
             BOOL shouldRasterize = ! layer.shouldRasterize;
             if (animated) {
@@ -212,6 +212,18 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             else {
                 layer.shouldRasterize = shouldRasterize;
             }
+        }
+        
+        // Rasterization scale
+        CGFloat rasterizationScale = layer.rasterizationScale + layerAnimation.rasterizationScaleIncrement;
+        if (animated) {
+            CABasicAnimation *rasterizationScaleAnimation = [CABasicAnimation animationWithKeyPath:@"rasterizationScale"];
+            [rasterizationScaleAnimation setFromValue:[NSNumber numberWithFloat:layer.rasterizationScale]];
+            [rasterizationScaleAnimation setToValue:[NSNumber numberWithFloat:rasterizationScale]];
+            [animations addObject:rasterizationScaleAnimation];
+        }
+        else {
+            layer.rasterizationScale = rasterizationScale;
         }
         
         // Get the sublayer transform without its perspective component (saved as additional layer information)
