@@ -309,6 +309,7 @@
     
     self.animating = NO;
     self.terminating = NO;
+    self.running = NO;
     
     self.delegate = nil;
 }
