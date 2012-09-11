@@ -104,7 +104,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
         
-    if ([self.containerViewController isViewVisible]) {
+    if ([self.containerViewController isViewDisplayed]) {
         HLSLoggerError(@"Cannot change the container view when the container view controller is being displayed");
         return;
     }
@@ -334,13 +334,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if ([self.containerViewController isViewVisible]) {
-        // Check that the view controller to be pushed is compatible with the current orientation
-        if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
-            HLSLoggerError(@"The view controller does not support the current view container orientation");
-            return;
-        }
-        
+    // TODO: This test cannot be made without being wrapped, at least in isViewDisplayed, maybe better in isViewLoaded test.
+    //       Maybe find a better location / approach
+#if 0
+    // Check that the view controller to be pushed is compatible with the current orientation
+    if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
+        HLSLoggerError(@"The view controller does not support the current view container orientation");
+        return;
+    }
+#endif
+    
+    if ([self.containerViewController isViewDisplayed]) {
         // Notify the delegate before the view controller is actually installed on top of the stack and associated with the
         // container (see HLSContainerStackDelegate interface contract)
         if (index == [self.containerContents count]) {
@@ -361,7 +365,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     [self.containerContents insertObject:containerContent atIndex:index];
     
     // If inserted in the capacity range, must add the view
-    if ([self.containerViewController isViewVisible]) {
+    if ([self.containerViewController isViewDisplayed]) {
         // A correction needs to be applied here to account for the [container count] increase (since index was relative
         // to the previous value)
         if ([self.containerContents count] - index - 1 <= self.capacity) {
@@ -423,7 +427,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if ([self.containerViewController isViewVisible]) {
+    if ([self.containerViewController isViewDisplayed]) {
         // Notify the delegate
         if (index == [self.containerContents count] - 1) {
             if ([self.delegate respondsToSelector:@selector(containerStack:willPopViewController:revealViewController:animated:)]) {
@@ -684,7 +688,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     NSAssert(containerContent != nil, @"A container content is mandatory");
         
-    if (! [self.containerViewController isViewVisible]) {
+    if (! [self.containerViewController isViewDisplayed]) {
         return;
     }
         

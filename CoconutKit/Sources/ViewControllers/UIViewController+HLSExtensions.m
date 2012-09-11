@@ -86,6 +86,13 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
         && lifeCyclePhase <= HLSViewControllerLifeCyclePhaseViewWillDisappear;
 }
 
+- (BOOL)isViewDisplayed
+{
+    HLSViewControllerLifeCyclePhase lifeCyclePhase = [self lifeCyclePhase];
+    return HLSViewControllerLifeCyclePhaseViewWillAppear <= lifeCyclePhase
+        && lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidUnload;
+}
+
 - (CGSize)originalViewSize
 {
     if ([self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidLoad) {
