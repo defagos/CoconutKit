@@ -9,6 +9,7 @@
 #import "UIView+HLSExtensions.h"
 
 #import <objc/runtime.h>
+#import "CALayer+HLSExtensions.h"
 #import "HLSRuntime.h"
 
 static void *s_tagKey = &s_tagKey;
@@ -36,6 +37,11 @@ static void *s_userInfoKey = &s_userInfoKey;
 - (void)setUserInfo_hls:(NSDictionary *)userInfo_hls
 {
     objc_setAssociatedObject(self, s_userInfoKey, userInfo_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIImage *)flattenedImage
+{
+    return [self.layer flattenedImage];
 }
 
 @end

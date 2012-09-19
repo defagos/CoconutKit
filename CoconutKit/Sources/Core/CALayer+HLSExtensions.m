@@ -83,6 +83,36 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
     return [self valueForKey:kLayerSpeedBeforePauseKey] != nil;
 }
 
+- (UIImage *)flattenedImage
+{
+    // >= iOS 4: Take the scale into account
+    if (UIGraphicsBeginImageContextWithOptions) {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
+    }
+    // < iOS 4
+    else {
+        UIGraphicsBeginImageContext(self.bounds.size);
+    }
+    
+    // -renderInContext renders in the layer coordinate space
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    CGContextTranslateCTM(context, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    CGContextConcatCTM(context, CATransform3DGetAffineTransform(self.transform));
+    CGContextTranslateCTM(context,
+                          -CGRectGetWidth(self.bounds) * self.anchorPoint.x,
+                          -CGRectGetHeight(self.bounds) * self.anchorPoint.y);
+    [self renderInContext:context];
+    
+    CGContextRestoreGState(context);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end
 
 @implementation CALayer (HLSExtensionsPrivate)

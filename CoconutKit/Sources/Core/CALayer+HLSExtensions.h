@@ -29,4 +29,9 @@
  */
 - (BOOL)isPaused;
 
+/**
+ * Return the layer and all its sublayers flattened as a UIImage
+ */
+- (UIImage *)flattenedImage;
+
 @end
