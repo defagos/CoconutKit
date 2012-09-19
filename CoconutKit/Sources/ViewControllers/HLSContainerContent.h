@@ -128,12 +128,6 @@
  * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 
  * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
  * -insertAsSubviewIntoContainerStackView:index
- *
- * Remark: This does not return the view controller's view, but a view wrapper having alpha = 1.f. This
- *         view wrapper is introduced so that animations can safely assume they are animating views with
- *         initial alpha = 1.f, which could not be guaranteed if the view controller's view was directly
- *         animated (view controller's views can have an arbitrary alpha). This relieves us from extra
- *         bookkeeping work
  */
 - (UIView *)viewIfLoaded;
 

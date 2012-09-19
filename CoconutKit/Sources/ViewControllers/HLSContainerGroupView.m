@@ -18,17 +18,24 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame frontView:(UIView *)frontView
+- (id)initWithFrame:(CGRect)frame contentView:(UIView *)contentView
 {
     if ((self = [super initWithFrame:frame])) {
-        if (! frontView) {
-            HLSLoggerError(@"A front view is mandatory");
+        if (! contentView) {
+            HLSLoggerError(@"A content view is mandatory");
             [self release];
             return nil;
         }
         
         self.backgroundColor = [UIColor clearColor];
         self.autoresizingMask = HLSViewAutoresizingAll;
+        
+        // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on the front view relies
+        // on its initial alpha
+        UIView *frontView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        frontView.backgroundColor = [UIColor clearColor];
+        frontView.autoresizingMask = HLSViewAutoresizingAll;
+        [frontView addSubview:contentView];
         
         // Remark: If the view was previously added to another superview, it is removed
         //         while kept alive. No need to call -removeFromSuperview and no need
@@ -45,6 +52,11 @@
 }
 
 #pragma mark Accessors and mutators
+
+- (UIView *)contentView
+{
+    return [[self frontView].subviews firstObject];
+}
 
 - (UIView *)frontView
 {

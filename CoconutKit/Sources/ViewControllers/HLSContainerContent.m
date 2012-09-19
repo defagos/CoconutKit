@@ -206,8 +206,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (UIView *)viewIfLoaded
 {
-    // Return the wrapper view
-    return [self.viewController viewIfLoaded].superview;
+    return [self.viewController viewIfLoaded];
 }
 
 #pragma mark View management
@@ -284,15 +283,8 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Match the inserted view frame so that it fills the container bounds
     viewControllerView.frame = stackView.bounds;
-    
-    // Wrap into a transparent view with alpha = 1.f. This ensures that no animation relies on the initial value of the view
-    // controller's view alpha
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:stackView.bounds] autorelease];
-    wrapperView.backgroundColor = [UIColor clearColor];
-    wrapperView.autoresizingMask = HLSViewAutoresizingAll;
-    [wrapperView addSubview:viewControllerView];
-    
-    [stackView insertContentView:wrapperView atIndex:index];
+        
+    [stackView insertContentView:viewControllerView atIndex:index];
     
     self.containerStackView = stackView;
 }
