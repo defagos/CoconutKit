@@ -50,7 +50,7 @@
 {
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        if (groupView.contentView == contentView) {
+        if (groupView.frontContentView == contentView) {
             return i;
         }
         ++i;
@@ -62,7 +62,7 @@
 {
     NSMutableArray *contentViews = [NSMutableArray array];
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        [contentViews addObject:groupView.contentView];
+        [contentViews addObject:groupView.frontContentView];
     }
     return [NSArray arrayWithArray:contentViews];
 }
@@ -78,8 +78,8 @@
     if (index == [self.groupViews count]) {
         HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds contentView:contentView] autorelease];
-        newGroupView.backGroupView = topGroupView;
+        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        newGroupView.backContentView = topGroupView;
         
         [self.groupViews addObject:newGroupView];
         [self addSubview:newGroupView];
@@ -89,9 +89,9 @@
         HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds contentView:contentView] autorelease];
-        newGroupView.backGroupView = belowGroupViewAtIndex;
-        groupViewAtIndex.backGroupView = newGroupView;
+        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        newGroupView.backContentView = belowGroupViewAtIndex;
+        groupViewAtIndex.backContentView = newGroupView;
         
         [self.groupViews insertObject:newGroupView atIndex:index];
     }
@@ -117,7 +117,7 @@
     // Remove in the middle
     else {
         HLSContainerGroupView *aboveGroupView = [self.groupViews objectAtIndex:index + 1];
-        aboveGroupView.backGroupView = belowGroupView;
+        aboveGroupView.backContentView = belowGroupView;
     }
     
     [groupView removeFromSuperview];
@@ -128,7 +128,7 @@
 {
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
-        if (groupView.contentView == contentView) {
+        if (groupView.frontContentView == contentView) {
             return groupView;
         }
         ++i;

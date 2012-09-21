@@ -452,7 +452,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
         
-        HLSAnimation *reverseAnimation = [containerContent.transitionClass reverseAnimationWithAppearingView:groupView.backGroupView
+        HLSAnimation *reverseAnimation = [containerContent.transitionClass reverseAnimationWithAppearingView:groupView.backView
                                                                                             disappearingView:groupView.frontView
                                                                                                       inView:groupView
                                                                                                     duration:containerContent.duration];
@@ -462,7 +462,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // we give them a tag which we can test in those callbacks
             reverseAnimation.tag = @"pop_animation";
             reverseAnimation.lockingUI = YES;
+            reverseAnimation.userInfo = [NSDictionary dictionaryWithObject:groupView forKey:@"groupView"];
             
+            if (animated) {
+                [groupView flatten];
+            }
             [reverseAnimation playAnimated:animated];
             
             // Check the animation callback implementations for what happens next
@@ -616,7 +620,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // non-integral frames, and thus to blurry views)
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
             HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                          disappearingView:groupView.backGroupView
+                                                                                          disappearingView:groupView.backView
                                                                                                     inView:groupView
                                                                                                   duration:0.] reverseAnimation];
             [reverseAnimation playAnimated:NO];
@@ -644,7 +648,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // See comment in -willRotateToInterfaceOrientation:duration:
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
             HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                  disappearingView:groupView.backGroupView
+                                                                                  disappearingView:groupView.backView
                                                                                             inView:groupView
                                                                                           duration:0.];
             [animation playAnimated:NO];
@@ -729,7 +733,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
         HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForContentView:[aboveContainerContent viewIfLoaded]];
         HLSAnimation *aboveAnimation = [aboveContainerContent.transitionClass animationWithAppearingView:nil      /* only play the animation for the view we added */
-                                                                                        disappearingView:aboveGroupView.backGroupView
+                                                                                        disappearingView:aboveGroupView.backView
                                                                                                   inView:aboveGroupView
                                                                                                 duration:aboveContainerContent.duration];
         aboveAnimation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
@@ -739,7 +743,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Play the corresponding animation so that the view controllers are brought into correct positions
     HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
     HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                          disappearingView:groupView.backGroupView
+                                                                          disappearingView:groupView.backView
                                                                                     inView:groupView
                                                                                   duration:containerContent.duration];
     animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
@@ -750,7 +754,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // we give them a tag which we can test in those callbacks
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
+        animation.userInfo = [NSDictionary dictionaryWithObject:groupView forKey:@"groupView"];
         
+        if (animated) {
+            [groupView flatten];
+        }
         [animation playAnimated:animated];
         
         // Check the animation callback implementations for what happens next
@@ -798,6 +806,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     m_animating = NO;
+    
+    if (animated) {
+        HLSContainerGroupView *groupView = [animation.userInfo objectForKey:@"groupView"];
+        [groupView unflatten];
+    }
     
     // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
