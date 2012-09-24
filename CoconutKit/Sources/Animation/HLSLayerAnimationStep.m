@@ -45,14 +45,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 - (id)init
 {
     if ((self = [super init])) {
-        self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        
-        // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
-        // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
-        // animation callbacks for its associated animation (which, since it is part of the transaction,
-        // will be triggered when the transaction begins / ends animating)
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];        
     }
     return self;
 }
@@ -60,8 +53,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 - (void)dealloc
 {
     self.timingFunction = nil;
-    
-    [self.dummyView removeFromSuperview];
     self.dummyView = nil;
     
     [super dealloc];
@@ -88,6 +79,13 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
     if (animated) {
+        // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
+        // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
+        // animation callbacks for its associated animation (which, since it is part of the transaction,
+        // will be triggered when the transaction begins / ends animating)
+        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        
         [CATransaction begin];
         
         NSTimeInterval duration = self.duration;
@@ -303,9 +301,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         dummyViewOpacityAnimation.delegate = self;
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
     }
-    else {
-        self.dummyView.layer.opacity = 1.f - self.dummyView.layer.opacity;
-    }
     
     // Animated
     if (animated) {
@@ -393,7 +388,10 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished
-{
+{    
+    [self.dummyView removeFromSuperview];
+    self.dummyView = nil;
+    
     [self notifyAsynchronousAnimationStepDidStopFinished:finished];
 }
 

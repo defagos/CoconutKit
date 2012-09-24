@@ -31,21 +31,13 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.curve = UIViewAnimationCurveEaseInOut;
-        
-        // This dummy view fixes an issue encountered with animation blocks: If no view is altered
-        // during an animation block, the block duration is reduced to 0. To prevent this, we create
-        // and animate a dummy invisible view in each animation step, so that the duration is never
-        // reduced to 0
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        self.curve = UIViewAnimationCurveEaseInOut;        
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [self.dummyView removeFromSuperview];
     self.dummyView = nil;
     
     [super dealloc];
@@ -67,6 +59,13 @@
 - (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
 {
     if (animated) {
+        // This dummy view fixes an issue encountered with animation blocks: If no view is altered
+        // during an animation block, the block duration is reduced to 0. To prevent this, we create
+        // and animate a dummy invisible view in each animation step, so that the duration is never
+        // reduced to 0
+        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
+        
         [UIView beginAnimations:nil context:NULL];
         
         [UIView setAnimationDuration:self.duration];
@@ -107,11 +106,11 @@
         // Ensure better subview resizing in some cases (e.g. UISearchBar)
         [view layoutIfNeeded];
     }
-    
-    // Animate the dummy view
-    self.dummyView.alpha = 1.f - self.dummyView.alpha;
-    
+        
     if (animated) {
+        // Animate the dummy view
+        self.dummyView.alpha = 1.f - self.dummyView.alpha;
+        
         [UIView commitAnimations];
         
         // The code will resume in the animationDidStop:finished:context: method
@@ -191,6 +190,9 @@
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
+    [self.dummyView removeFromSuperview];
+    self.dummyView = nil;
+    
     [self notifyAsynchronousAnimationStepDidStopFinished:[finished boolValue]];
 }
 
