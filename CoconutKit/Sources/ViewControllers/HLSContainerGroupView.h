@@ -12,13 +12,10 @@
  * (optional, and which can be changed).
  *
  * Each of those views is wrapped into a transparent wrapper view with alpha = 1.f, which must be used
- * for animations. This way:
- *   - animations can safely assume they animate views with alpha = 1.f. If we had animated the content
- *     views directly, which can have arbitrary alpha values, this would not have been possible
- *   - we can flatten views very easily by replacing the contents within the wrapper with a UIImageView
- *     of their content when appropriate. This can be especially useful to optimize animations, especially
- *     considered the CALayer shouldRasterize setting is only a hint and does not ensure rasterization
- *     will not be made several times during animation
+ * for animations. This way animations can safely assume they animate views with alpha = 1.f. If we had 
+ * animated the content views directly, which can have arbitrary alpha values, this would not have been 
+ * possible. Moreover, this additional wrapping yields smoother animations (I cannot explain why, though.
+ * Probably blending can be performed more efficiently)
  *
  * Designated initializer: initWithFrame:frontView:
  */
@@ -26,7 +23,6 @@
 @private
     UIView *m_savedFrontContentView;
     UIView *m_savedBackContentView;
-    BOOL m_flattened;
 }
 
 /**
@@ -58,15 +54,5 @@
  * a guaranteed initial alpha of 1.f)
  */
 @property (nonatomic, readonly, retain) UIView *backView;
-
-/**
- * Flatten the content view hierarchies as two images
- */
-- (void)flatten;
-
-/**
- * Unflatten the content view hierarchies
- */
-- (void)unflatten;
 
 @end

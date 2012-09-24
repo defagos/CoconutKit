@@ -462,11 +462,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // we give them a tag which we can test in those callbacks
             reverseAnimation.tag = @"pop_animation";
             reverseAnimation.lockingUI = YES;
-            reverseAnimation.userInfo = [NSDictionary dictionaryWithObject:groupView forKey:@"groupView"];
-            
-            if (animated) {
-                [groupView flatten];
-            }
             [reverseAnimation playAnimated:animated];
             
             // Check the animation callback implementations for what happens next
@@ -754,11 +749,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // we give them a tag which we can test in those callbacks
         animation.tag = @"push_animation";
         animation.lockingUI = YES;
-        animation.userInfo = [NSDictionary dictionaryWithObject:groupView forKey:@"groupView"];
-        
-        if (animated) {
-            [groupView flatten];
-        }
         [animation playAnimated:animated];
         
         // Check the animation callback implementations for what happens next
@@ -806,11 +796,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
     m_animating = NO;
-    
-    if (animated) {
-        HLSContainerGroupView *groupView = [animation.userInfo objectForKey:@"groupView"];
-        [groupView unflatten];
-    }
     
     // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
