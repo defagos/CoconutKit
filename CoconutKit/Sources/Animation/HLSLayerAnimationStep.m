@@ -142,11 +142,11 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         // Opacity animation (opacity must always lie between 0.f and 1.f)
         CGFloat opacity = layer.opacity + layerAnimation.opacityIncrement;
         if (floatlt(opacity, -1.f)) {
-            HLSLoggerWarn(@"Layer animations adding to an opacity value larger than -1 for view %@. Fixed to -1, but your animation is incorrect", layer);
+            HLSLoggerWarn(@"Layer animations adding to an opacity value larger than -1 for layer %@. Fixed to -1, but your animation is incorrect", layer);
             opacity = -1.f;
         }
         else if (floatgt(opacity, 1.f)) {
-            HLSLoggerWarn(@"Layer animations adding to an opacity value larger than 1 for view %@. Fixed to 1, but your animation is incorrect", layer);
+            HLSLoggerWarn(@"Layer animations adding to an opacity value larger than 1 for layer %@. Fixed to 1, but your animation is incorrect", layer);
             opacity = 1.f;
         }
         
