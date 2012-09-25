@@ -12,6 +12,7 @@
 NSString *HLSStringFromBool(BOOL yesOrNo);
 NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
+NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
 /**
  * Conversions to numbers
