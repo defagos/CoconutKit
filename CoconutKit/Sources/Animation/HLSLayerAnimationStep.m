@@ -20,8 +20,12 @@
 #endif
 
 static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
+static NSString * const kDummyViewLayerAnimationKey = @"HLSDummyViewLayerAnimation";
+
 static NSString * const kLayerNonProjectedSublayerTransformKey = @"HLSNonProjectedSublayerTransform";
 static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZPositionForSublayers";
+
+static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
 
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
@@ -32,6 +36,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 @property (nonatomic, retain) UIView *dummyView;
 
 - (void)updateToFinalState;
+- (void)updateToFinalStateForAnimation:(CAAnimation *)animation withLayer:(CALayer *)layer;
 
 - (void)animationDidStart:(CAAnimation *)animation;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
@@ -284,6 +289,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.beginTime = beginTime;
+            animationGroup.delegate = self;
+            [animationGroup setValue:[NSValue valueWithPointer:layer] forKey:kAnimationLayerKey];
             [layer addAnimation:animationGroup forKey:kLayerAnimationGroupKey];
         }
     }
@@ -299,11 +306,18 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.beginTime = beginTime;
         dummyViewOpacityAnimation.delegate = self;
-        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:nil];
+        [dummyViewOpacityAnimation setValue:[NSValue valueWithPointer:self.dummyView.layer] forKey:kAnimationLayerKey];
+        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:kDummyViewLayerAnimationKey];
     }
-    
+        
     // Animated
     if (animated) {
+        // We need to keep track of animations which have started / ended (there is no way to known when a
+        // CATransaction has started or ended, and there order in which the child animations are started or
+        // ended is unspecified)
+        m_numberOfStartedLayerAnimations = 0;
+        m_numberOfFinishedLayerAnimations = 0;
+        
         [CATransaction commit];
     }
 }
@@ -368,11 +382,24 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     // Set all final values
     for (CALayer *layer in [self objects]) {
         CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:kLayerAnimationGroupKey];
-        for (CABasicAnimation *layerAnimation in animationGroup.animations) {
-            [layer setValue:layerAnimation.toValue forKeyPath:layerAnimation.keyPath];
+        [self updateToFinalStateForAnimation:animationGroup withLayer:layer];
+    }
+    
+    // No need to update the dummy view here. It will get discarded at the end of the animation anyway
+}
+
+- (void)updateToFinalStateForAnimation:(CAAnimation *)animation withLayer:(CALayer *)layer
+{
+    if ([animation isKindOfClass:[CAAnimationGroup class]]) {
+        CAAnimationGroup *animationGroup = (CAAnimationGroup *)animation;
+        for (CAAnimation *childAnimation in animationGroup.animations) {
+            [self updateToFinalStateForAnimation:childAnimation withLayer:layer];
         }
     }
-    self.dummyView.layer.opacity = 1.f - self.dummyView.layer.opacity;
+    else if ([animation isKindOfClass:[CABasicAnimation class]]) {
+        CABasicAnimation *basicAnimation = (CABasicAnimation *)animation;
+        [layer setValue:basicAnimation.toValue forKeyPath:basicAnimation.keyPath];
+    }
 }
 
 #pragma mark Animation callbacks
@@ -381,18 +408,30 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 {
     // If the animation is being terminated, this already was made when -terminateAnimation was called
     if (! self.terminating) {
-        [self updateToFinalState];
+        CALayer *layer = [[animation valueForKey:kAnimationLayerKey] pointerValue];
+        [self updateToFinalStateForAnimation:animation withLayer:layer];
     }
     
-    [self notifyAsynchronousAnimationStepWillStart];
+    if (m_numberOfStartedLayerAnimations == 0) {
+        [self notifyAsynchronousAnimationStepWillStart];
+    }
+    
+    m_numberOfStartedLayerAnimations++;
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished
-{    
-    [self.dummyView removeFromSuperview];
-    self.dummyView = nil;
+{
+    m_numberOfFinishedLayerAnimations++;
     
-    [self notifyAsynchronousAnimationStepDidStopFinished:finished];
+    if (m_numberOfFinishedLayerAnimations == [[self objects] count] + 1  /* + 1 for the dummy view animation */) {
+        NSAssert(m_numberOfStartedLayerAnimations == m_numberOfFinishedLayerAnimations,
+                 @"The number of started and finished animations must be the same");
+        
+        [self.dummyView removeFromSuperview];
+        self.dummyView = nil;
+        
+        [self notifyAsynchronousAnimationStepDidStopFinished:finished];
+    }
 }
 
 @end
