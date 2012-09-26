@@ -127,7 +127,15 @@
     [layerAnimation21 translateByVectorWithX:CGRectGetWidth(self.rectangleView1.frame) y:0.f];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
     
-    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
+    animationStep3.duration = 1.;
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
+    [layerAnimation31 translateByVectorWithX:0.f y:200.f];
+    [layerAnimation31 rotateByAngle:M_PI_4];
+    [layerAnimation31 scaleWithXFactor:2.f yFactor:2.f];
+    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
+    
+    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
     
     
     

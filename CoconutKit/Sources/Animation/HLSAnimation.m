@@ -12,11 +12,14 @@
 #import "HLSAssert.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
+#import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "HLSUserInterfaceLock.h"
 #import "HLSZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
+
+static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 @interface HLSAnimation () <HLSAnimationStepDelegate>
 
@@ -28,6 +31,7 @@
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
+- (void)playAnimated:(BOOL)animated afterDelay:(NSTimeInterval)delay;
 - (void)playNextAnimationStepAnimated:(BOOL)animated;
 
 @end
@@ -137,6 +141,26 @@
 
 - (void)playAnimated:(BOOL)animated
 {
+    [self playAnimated:animated afterDelay:0.];
+}
+
+- (void)playAfterDelay:(NSTimeInterval)delay
+{    
+    [self playAnimated:YES afterDelay:delay];
+}
+
+- (void)playAnimated:(BOOL)animated afterDelay:(NSTimeInterval)delay
+{
+    if (! animated && ! doubleeq(delay, 0.)) {
+        HLSLoggerWarn(@"A delay has been defined, but the animation is played non-animated. The delay will be ignored");
+        delay = 0.;
+    }
+    
+    if (floatlt(delay, 0.)) {
+        delay = 0;
+        HLSLoggerWarn(@"Negative delay. Fixed to 0");
+    }
+    
     // Cannot be played if already running
     if (self.running) {
         HLSLoggerDebug(@"The animation is already running");
@@ -154,21 +178,24 @@
         [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
     }
     
-    // Begin with the first step
-    [self playNextAnimationStepAnimated:animated];
-}
-
-- (void)playAfterDelay:(NSTimeInterval)delay
-{
-    if (floatlt(delay, 0.)) {
-        m_delay = 0.;
-        HLSLoggerWarn(@"Negative delay. Fixed to 0");
-    }
-    else {
-        m_delay = delay;
-    }
+    // Create a dummy animation step to simulate the delay. This way we avoid two potential issues:
+    //   - if an animation step subclass is implemented using an animation framework which does not support delays,
+    //     delayed animations would not be possible
+    //   - there is an issue with Core Animation delays: CALayer properties must namely be updated ASAP (ideally
+    //     when creating the animation), but this cannot be done with delayed Core Animations (otherwise the animated
+    //     layer reaches its end state before the animation has actually started). In such cases, properties should
+    //     be set in the -animationDidStart: animation callback. This works well in most cases, but it is too late
+    //     (after all, the start delegate method is called 'didStart', not 'willStart') if the animated layers are
+    //     heavy, e.g. with may transparent sublayers, creating an ugly flickering in animations. By creating delays
+    //     with a dummy layer animation step, this problem vanishes
+    HLSLayerAnimationStep *delayAnimationStep = [HLSLayerAnimationStep animationStep];
+    delayAnimationStep.tag = kDelayLayerAnimationTag;
+    delayAnimationStep.duration = delay;
     
-    [self playAnimated:YES];
+    // Set the dummy animation step as current animation step, so that cancel / terminate work as expected, even
+    // if they occur during the initial delay period
+    self.currentAnimationStep = delayAnimationStep;
+    [delayAnimationStep playWithDelegate:self animated:animated];
 }
 
 - (void)playNextAnimationStepAnimated:(BOOL)animated
@@ -181,10 +208,7 @@
     // Proceeed with the next step (if any)
     self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
     if (self.currentAnimationStep) {
-        [self.currentAnimationStep playWithDelegate:self afterDelay:m_delay animated:animated];
-        
-        // The delay is just used for the first step. Set it to 0 for the remaining ones
-        m_delay = 0.;
+        [self.currentAnimationStep playWithDelegate:self animated:animated];
     }
     // Done with the animation
     else {
@@ -335,29 +359,31 @@
 
 - (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    // This callback is still called when an animation is cancelled before it actually started (i.e. if a delay has been
-    // set). Do not notify the delegate in such cases
-    if (! self.cancelling) {
-        // Notify just before the execution of the first step (if a delay has been set, this event is not fired until the
-        // delay period is over, as for UIView animation blocks)
-        if (animationStep == [self.animationSteps firstObject]) {
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:animated];
-            }
-        }
-    }
+    // TODO: Remove
 }
 
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
     // Still send all delegate notifications if terminating
     if (! self.cancelling) {
-        if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
-            [self.delegate animationStepFinished:animationStep animated:animated];
+        // Notify that the animation begins when the initial delay animation (always played) ends. This way
+        // we get rid of subtle differences which might arise with animation steps only being able to notify
+        // when they did start, rather than when they will
+        if ([animationStep.tag isEqualToString:kDelayLayerAnimationTag]) {
+            // Note that if a delay has been set, this event is not fired until the delay period is over, as for UIView animation blocks)
+            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                [self.delegate animationWillStart:self animated:animated];
+            }
+        }
+        else {
+            if ([self.delegate respondsToSelector:@selector(animationStepFinished:animated:)]) {
+                [self.delegate animationStepFinished:animationStep animated:animated];
+            }
         }
     }
     
-    // Play the next step, but non-animated if the animation did not reach completion normally
+    // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the
+    // animation did not reach completion normally
     [self playNextAnimationStepAnimated:finished ? animated : NO];
 }
 

@@ -22,7 +22,6 @@
 @property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
 @property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
 @property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isAnimating) BOOL animating;
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification;
@@ -97,8 +96,6 @@
 
 @synthesize running = m_running;
 
-@synthesize animating = m_animating;
-
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
@@ -147,7 +144,7 @@
 
 #pragma mark Managing the animation
 
-- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
 {
     if (self.running) {
         HLSLoggerInfo(@"The animation step is already running");
@@ -172,7 +169,7 @@
     }
     
     // Call the subclass implementation
-    [self playAnimationAfterDelay:delay animated:actuallyAnimated];
+    [self playAnimationAnimated:actuallyAnimated];
     
     // Not animated (i.e. synchronously animated to the final position)
     if (! actuallyAnimated) {
@@ -229,23 +226,14 @@
     
     // Call the subclass implementation
     [self terminateAnimation];
-    
-    // Cancel occurs during the initial delay period
-    if (! self.animating) {
-        // Must notify manually (the willStart callback is still asynchronously called, but too late (otherwise
-        // we do not get the events in the proper order)
-        if ([self.delegate respondsToSelector:@selector(animationStepWillStart:animated:)]) {
-            [self.delegate animationStepWillStart:self animated:NO];
-        }        
-    }
-    
+        
     // Same remark as above
     if ([self.delegate respondsToSelector:@selector(animationStepDidStop:animated:finished:)]) {
         [self.delegate animationStepDidStop:self animated:NO finished:NO];
     }
 }
 
-- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+- (void)playAnimationAnimated:(BOOL)animated
 {
     HLSMissingMethodImplementation();
 }
@@ -296,8 +284,6 @@
         // with animated = YES
         [self.delegate animationStepWillStart:self animated:YES];
     }
-    
-    self.animating = YES;
 }
 
 - (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished
@@ -307,7 +293,6 @@
         [self.delegate animationStepDidStop:self animated:YES finished:YES];
     }
     
-    self.animating = NO;
     self.terminating = NO;
     self.running = NO;
     

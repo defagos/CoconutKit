@@ -25,8 +25,6 @@ static NSString * const kDummyViewLayerAnimationKey = @"HLSDummyViewLayerAnimati
 static NSString * const kLayerNonProjectedSublayerTransformKey = @"HLSNonProjectedSublayerTransform";
 static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZPositionForSublayers";
 
-static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
-
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
 //         duration received from HLSAnimationStep (0.2) and set an ease-in ease-out function
@@ -34,9 +32,6 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
 @interface HLSLayerAnimationStep ()
 
 @property (nonatomic, retain) UIView *dummyView;
-
-- (void)updateToFinalState;
-- (void)updateToFinalStateForAnimation:(CAAnimation *)animation withLayer:(CALayer *)layer;
 
 - (void)animationDidStart:(CAAnimation *)animation;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
@@ -81,7 +76,7 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
     [self addLayerAnimation:layerAnimation forLayer:view.layer];
 }
 
-- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+- (void)playAnimationAnimated:(BOOL)animated
 {
     if (animated) {
         // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
@@ -120,28 +115,16 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
         [CATransaction setAnimationTimingFunction:self.timingFunction];
     }
     
-    if (! animated && ! doubleeq(delay, 0.f)) {
-        HLSLoggerWarn(@"A delay has been defined, but animated = NO. Ignored");
-    }
-    
-    CFTimeInterval beginTime = CACurrentMediaTime() + delay;
+    CFTimeInterval beginTime = CACurrentMediaTime();
     
     // Animate all layers involved in the animation step
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
                 
-        // Remark: For each property we animate, we still must set the final value manually (CoreAnimations
-        //         animate properties but do not set them). Usually, we can do this right where the CoreAnimation
-        //         is created, but this does not work if a delay has been set (in which case this will be
-        //         noticed before the animation actually starts). We therefore apply the following strategy:
-        //           1) If animated, we create the animation, and set the final properties in the start
-        //              callback
-        //           2) If not animated we set the final properties on the spot
-        //           3) If an animation step is terminated, we set the final properties right when terminatingm
-        //              and not anymore in the start callback. This behaves correctly whether the animation
-        //              step is terminated while animating layers or during its initial delay period
-        
+        // Remark: For each property we animate, we still must set the final value manually (CoreAnimations animate properties
+        // but do not set them). Since we do not need to support delays (which are implemented at the HLSAnimation level), we
+        // can do it right here, eliminating potentially flickering animations (for more information, see HLSAnimation.m)
         NSMutableArray *animations = [NSMutableArray array];
         
         // Opacity animation (opacity must always lie between 0.f and 1.f)
@@ -161,9 +144,7 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
             [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
             [animations addObject:opacityAnimation];
         }
-        else {
-            layer.opacity = opacity;
-        }
+        layer.opacity = opacity;
         
         // Animate the transform. The transform has to be applied on the layer center. This requires a conversion in the coordinate system
         // centered on the layer
@@ -178,9 +159,7 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
             [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
             [animations addObject:transformAnimation];
         }
-        else {
-            layer.transform = transform;
-        }
+        layer.transform = transform;
         
         // Animate the anchor point
         CGPoint anchorPoint = CGPointMake(layer.anchorPoint.x + layerAnimation.anchorPointTranslationParameters.v1,
@@ -198,10 +177,8 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
             [anchorPointZAnimation setToValue:[NSNumber numberWithFloat:anchorPointZ]];
             [animations addObject:anchorPointZAnimation];
         }
-        else {
-            layer.anchorPoint = anchorPoint;
-            layer.anchorPointZ = anchorPointZ;
-        }
+        layer.anchorPoint = anchorPoint;
+        layer.anchorPointZ = anchorPointZ;
         
         // Rasterization
         if (layerAnimation.togglingShouldRasterize) {
@@ -212,9 +189,7 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
                 [shouldRasterizeAnimation setToValue:[NSNumber numberWithBool:shouldRasterize]];
                 [animations addObject:shouldRasterizeAnimation];
             }
-            else {
-                layer.shouldRasterize = shouldRasterize;
-            }
+            layer.shouldRasterize = shouldRasterize;
         }
         
         // Rasterization scale
@@ -225,9 +200,7 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
             [rasterizationScaleAnimation setToValue:[NSNumber numberWithFloat:rasterizationScale]];
             [animations addObject:rasterizationScaleAnimation];
         }
-        else {
-            layer.rasterizationScale = rasterizationScale;
-        }
+        layer.rasterizationScale = rasterizationScale;
         
         // Get the sublayer transform without its perspective component (saved as additional layer information)
         NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:kLayerNonProjectedSublayerTransformKey];
@@ -277,20 +250,14 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
             [sublayerTransformAnimation setToValue:[NSValue valueWithCATransform3D:sublayerTransform]];
             [animations addObject:sublayerTransformAnimation];
         }
-        else {
-            layer.sublayerTransform = sublayerTransform;
-        }
+        layer.sublayerTransform = sublayerTransform;
         
         // Create the animation group and attach it to the layer
         if (animated) {
-            // Needed so that pausing layers behaves nicely
-            layer.beginTime = delay;
-            
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.beginTime = beginTime;
             animationGroup.delegate = self;
-            [animationGroup setValue:[NSValue valueWithPointer:layer] forKey:kAnimationLayerKey];
             [layer addAnimation:animationGroup forKey:kLayerAnimationGroupKey];
         }
     }
@@ -298,15 +265,11 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
     // Animate the dummy view. It is also used to set a delegate (one for all animations in the transaction)
     // which will receive the start / end animation events
     if (animated) {
-        // Needed so that pausing layers behaves nicely
-        self.dummyView.layer.beginTime = delay;
-        
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.beginTime = beginTime;
         dummyViewOpacityAnimation.delegate = self;
-        [dummyViewOpacityAnimation setValue:[NSValue valueWithPointer:self.dummyView.layer] forKey:kAnimationLayerKey];
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:kDummyViewLayerAnimationKey];
     }
         
@@ -345,9 +308,6 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
 
 - (void)terminateAnimation
 {
-    // Set the final values immediately (won't be done anymore in the animation start callback)
-    [self updateToFinalState];
-    
     // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
@@ -375,43 +335,10 @@ static NSString * const kAnimationLayerKey = @"HLSAnimationLayer";
     return animationStepCopy;
 }
 
-#pragma mark Setting the animation final state
-
-- (void)updateToFinalState
-{
-    // Set all final values
-    for (CALayer *layer in [self objects]) {
-        CAAnimationGroup *animationGroup = (CAAnimationGroup *)[layer animationForKey:kLayerAnimationGroupKey];
-        [self updateToFinalStateForAnimation:animationGroup withLayer:layer];
-    }
-    
-    // No need to update the dummy view here. It will get discarded at the end of the animation anyway
-}
-
-- (void)updateToFinalStateForAnimation:(CAAnimation *)animation withLayer:(CALayer *)layer
-{
-    if ([animation isKindOfClass:[CAAnimationGroup class]]) {
-        CAAnimationGroup *animationGroup = (CAAnimationGroup *)animation;
-        for (CAAnimation *childAnimation in animationGroup.animations) {
-            [self updateToFinalStateForAnimation:childAnimation withLayer:layer];
-        }
-    }
-    else if ([animation isKindOfClass:[CABasicAnimation class]]) {
-        CABasicAnimation *basicAnimation = (CABasicAnimation *)animation;
-        [layer setValue:basicAnimation.toValue forKeyPath:basicAnimation.keyPath];
-    }
-}
-
 #pragma mark Animation callbacks
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    // If the animation is being terminated, this already was made when -terminateAnimation was called
-    if (! self.terminating) {
-        CALayer *layer = [[animation valueForKey:kAnimationLayerKey] pointerValue];
-        [self updateToFinalStateForAnimation:animation withLayer:layer];
-    }
-    
     if (m_numberOfStartedLayerAnimations == 0) {
         [self notifyAsynchronousAnimationStepWillStart];
     }

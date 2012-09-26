@@ -30,16 +30,9 @@
 - (NSArray *)objects;
 
 /**
- * Return YES iff the step is running. This method also returns YES during the initial delay period if
- * any has been defined
+ * Return YES iff the step is running
  */
 @property (nonatomic, assign, getter=isRunning) BOOL running;
-
-/**
- * Return YES iff the step is animating objects (this method returns NO during the initial delay period
- * if any has been defined)
- */
-@property (nonatomic, assign, getter=isAnimating) BOOL animating;
 
 /**
  * Return YES iff the step is being terminated
@@ -47,13 +40,12 @@
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 /**
- * This method must be implemented by subclasses to create and play the animation step (animated or not)
- * after some delay. If animated = YES, the animation is expected to take place asynchronously, otherwise
- * synchronously
+ * This method must be implemented by subclasses to create and play the animation step (animated or not).
+ * If animated = YES, the animation is expected to take place asynchronously, otherwise synchronously
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
+- (void)playAnimationAnimated:(BOOL)animated;
 
 /**
  * This method must be implemented by subclasses to pause a running animation step

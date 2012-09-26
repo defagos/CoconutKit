@@ -59,7 +59,6 @@
     NSDictionary *m_userInfo;
     UIView *m_dummyView;
     BOOL m_lockingUI;
-    NSTimeInterval m_delay;
     BOOL m_animated;
     BOOL m_running;
     BOOL m_cancelling;

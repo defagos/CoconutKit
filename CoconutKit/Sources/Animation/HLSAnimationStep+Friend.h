@@ -16,14 +16,12 @@
 @interface HLSAnimationStep (Friend)
 
 /**
- * Play the associated animation after some delay, reporting events to the specified delegate (which is retained during
- * the animation)
+ * Play the associated animation, reporting events to the specified delegate (which is retained during the animation)
  */
-- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate afterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
+- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated;
 
 /**
- * Pause the an animation step being played animated (does nothing if the animation is not running or not animated). This
- * method can also be used to pause an animation during its initial delay period
+ * Pause the an animation step being played animated (does nothing if the animation is not running or not animated)
  */
 - (void)pause;
 

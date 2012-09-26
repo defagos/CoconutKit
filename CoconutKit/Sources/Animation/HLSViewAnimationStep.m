@@ -56,7 +56,7 @@
     [self addObjectAnimation:viewAnimation forObject:view];
 }
 
-- (void)playAnimationAfterDelay:(NSTimeInterval)delay animated:(BOOL)animated
+- (void)playAnimationAnimated:(BOOL)animated
 {
     if (animated) {
         // This dummy view fixes an issue encountered with animation blocks: If no view is altered
@@ -70,7 +70,6 @@
         
         [UIView setAnimationDuration:self.duration];
         [UIView setAnimationCurve:self.curve];
-        [UIView setAnimationDelay:delay];
         
         // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context:, though appearing
         //         in the UIKit UIView header documentation, are reserved by Apple. Using them might lead to app rejection!
