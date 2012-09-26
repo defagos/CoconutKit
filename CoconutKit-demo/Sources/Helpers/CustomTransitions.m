@@ -34,15 +34,13 @@
 {
     NSMutableArray *animationSteps = [NSMutableArray array];
     
-    // Setup animation step. Rasterization is enabled to avoid artifacts when removing several view controllers
-    // which where added with the rotation animation
+    // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 rotateByAngle:(counterclockwise ? -M_PI_2 : M_PI_2) aboutVectorWithX:x y:y z:z];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:appearingView];
     HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
     [layerAnimation12 translateSublayerCameraByVectorWithZ:cameraZTranslation];
-    layerAnimation12.togglingShouldRasterize = YES;
     [animationStep1 addLayerAnimation:layerAnimation12 forView:view];
     animationStep1.duration = 0.;
     [animationSteps addObject:animationStep1];
