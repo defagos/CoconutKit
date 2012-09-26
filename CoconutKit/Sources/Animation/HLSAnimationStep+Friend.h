@@ -54,11 +54,6 @@
 @protocol HLSAnimationStepDelegate <NSObject>
 
 /**
- * Called when an animation step will start
- */
-- (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
-
-/**
  * Called when an animation step did stop. The finished boolean is YES iff the animation played until the end
  * without being terminated
  */

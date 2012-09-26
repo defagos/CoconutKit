@@ -281,6 +281,13 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         m_numberOfStartedLayerAnimations = 0;
         m_numberOfFinishedLayerAnimations = 0;
         
+        // We want to be able to test the number of animations in the animation stop callback. If the animated
+        // layers are dead when the end callback is called (which can happen if the layer they are on is
+        // destroyed while the animation was running), we cannot compare to self.objects anymore (otherwise
+        // the application will crash). We therefore keep track of how animations are expected, but in a safe way
+        // (+ 1 for the dummy view animation)
+        m_numberOfLayerAnimations = [self.objects count] + 1;
+        
         [CATransaction commit];
     }
 }
@@ -339,10 +346,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    if (m_numberOfStartedLayerAnimations == 0) {
-        [self notifyAsynchronousAnimationStepWillStart];
-    }
-    
     m_numberOfStartedLayerAnimations++;
 }
 
@@ -350,7 +353,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 {
     m_numberOfFinishedLayerAnimations++;
     
-    if (m_numberOfFinishedLayerAnimations == [[self objects] count] + 1  /* + 1 for the dummy view animation */) {
+    if (m_numberOfFinishedLayerAnimations == m_numberOfLayerAnimations) {
         NSAssert(m_numberOfStartedLayerAnimations == m_numberOfFinishedLayerAnimations,
                  @"The number of started and finished animations must be the same");
         

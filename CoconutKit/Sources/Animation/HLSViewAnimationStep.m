@@ -19,7 +19,6 @@
 
 @property (nonatomic, retain) UIView *dummyView;
 
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
@@ -73,7 +72,6 @@
         
         // Remark: The selector names animationWillStart:context: and animationDidStop:finished:context:, though appearing
         //         in the UIKit UIView header documentation, are reserved by Apple. Using them might lead to app rejection!
-        [UIView setAnimationWillStartSelector:@selector(animationStepWillStart:context:)];
         [UIView setAnimationDidStopSelector:@selector(animationStepDidStop:finished:context:)];
         [UIView setAnimationDelegate:self];
     }
@@ -181,11 +179,6 @@
 }
 
 #pragma mark Animation delegate methods
-
-- (void)animationStepWillStart:(NSString *)animationID context:(void *)context
-{
-    [self notifyAsynchronousAnimationStepWillStart];
-}
 
 - (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {

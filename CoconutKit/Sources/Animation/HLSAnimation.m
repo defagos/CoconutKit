@@ -357,11 +357,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 #pragma mark HLSAnimationStepDelegate protocol implementation
 
-- (void)animationStepWillStart:(HLSAnimationStep *)animationStep animated:(BOOL)animated
-{
-    // TODO: Remove
-}
-
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
     // Still send all delegate notifications if terminating

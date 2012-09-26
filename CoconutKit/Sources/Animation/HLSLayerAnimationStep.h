@@ -24,6 +24,7 @@
 @private
     CAMediaTimingFunction *m_timingFunction;
     UIView *m_dummyView;
+    NSUInteger m_numberOfLayerAnimations;
     BOOL m_numberOfStartedLayerAnimations;
     NSUInteger m_numberOfFinishedLayerAnimations;
 }

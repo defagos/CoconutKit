@@ -156,15 +156,11 @@
     
     // We do not perform the animation if the duration is 0 (this can lead to unnecessary flickering in animations)
     BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
-    if (! actuallyAnimated) {
-        // Give the caller the original animated information (even if duration is zero) so that animations with
-        // duration 0 played animated are still considered to be played animated
-        [delegate animationStepWillStart:self animated:animated];
-    }
+    
     // Retain the delegate during the time of the animation (this is based on the assumption
     // that animations implemented in subclasses do the same, and that they always call the
     // animation delegate stop method, which is the case for UIView animations and CAAnimations
-    else {
+    if (actuallyAnimated) {
         self.delegate = delegate;
     }
     
@@ -275,21 +271,13 @@
 
 #pragma mark Delegate notification
 
-- (void)notifyAsynchronousAnimationStepWillStart
+- (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished
 {
     // If the animation is terminated, this event was already emitted when termination occurs (to avoid
     // waiting too long on this event to occur asynchronously). Do not notify again here
     if (! self.terminating) {
-        // This method is meant to be called in the animation start callback, which is called for animations
+        // This method is meant to be called in the animation stop callback, which is called for animations
         // with animated = YES
-        [self.delegate animationStepWillStart:self animated:YES];
-    }
-}
-
-- (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished
-{
-    // Same remarks as in -notifyAsynchronousAnimationStepWillStart
-    if (! self.terminating) {
         [self.delegate animationStepDidStop:self animated:YES finished:YES];
     }
     
