@@ -47,7 +47,9 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     Your custom containers usually just need to forward the events their users might be interested in through a
  *     dedicated delegate protocol
  *   - the methods -[UIViewController isMovingTo/FromParentViewController] return correct results, consistent
- *     with those returned when using standard built-in UIKit containers (iOS 5 only)
+ *     with those returned when using standard built-in UIKit containers (these methods are available since iOS 5 
+ *     only, but CoconutKit injects implementations as well so that you can use them with custom containers on
+ *     iOS 4 as well)
  *   - a capacity can be provided so that children view controller's views deep enough are automatically unloaded
  *     and reloaded when needed, saving memory. Alternatively, a view controller can be removed from the stack
  *     as soon as it gets deep enough. This makes it possible to implement containers with a FIFO behavior (the

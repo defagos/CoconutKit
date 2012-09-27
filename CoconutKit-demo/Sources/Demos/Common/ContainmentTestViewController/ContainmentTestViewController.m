@@ -48,6 +48,7 @@
 {
     [super viewWillAppear:animated];
     
+    // Can be called also in iOS 4
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -55,6 +56,7 @@
 {
     [super viewDidAppear:animated];
     
+    // Can be called also in iOS 4
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 

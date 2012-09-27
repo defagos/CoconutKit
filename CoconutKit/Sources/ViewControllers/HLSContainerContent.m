@@ -29,6 +29,8 @@ static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL)
 static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -411,11 +413,21 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     //        replaced with the new -removeFromParentViewController. To test whether we are running iOS 4, we therefore must test whether
     //        -removeFromParentViewController exists
     
-    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any)
+    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
+    //        implementations for isMovingTo/FromParentViewController
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
         s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
+        class_addMethod(self,
+                        @selector(isMovingToParentViewController),
+                        (IMP)iOS4_UIViewController__isMovingToParentViewController_Imp,
+                        "c@:");
+        class_addMethod(self,
+                        @selector(isMovingFromParentViewController),
+                        (IMP)iOS4_UIViewController__isMovingFromParentViewController_Imp,
+                        "c@:");
+        
     }
     // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
     //        when inserted into a custom container
@@ -463,4 +475,30 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
+}
+
+static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    UIViewController *currentViewController = self;
+    while (currentViewController) {
+        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
+        if (containerContent.movingToParentViewController) {
+            return YES;
+        }
+        currentViewController = currentViewController.parentViewController;
+    }
+    return NO;
+}
+
+static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    UIViewController *currentViewController = self;
+    while (currentViewController) {
+        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
+        if (containerContent.movingFromParentViewController) {
+            return YES;
+        }
+        currentViewController = currentViewController.parentViewController;
+    }
+    return NO;
 }
