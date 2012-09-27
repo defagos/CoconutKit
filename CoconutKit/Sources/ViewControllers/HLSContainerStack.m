@@ -460,6 +460,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (index == [self.containerContents count] - 1) {
             // Some more work has to be done for pop animations in the animation begin / end callbacks. To identify such animations,
             // we give them a tag which we can test in those callbacks
+            //
+            // Same remark as in -addViewForContainerContent:inserting:animated: regarding animations in nested containers
             reverseAnimation.tag = @"pop_animation";
             reverseAnimation.lockingUI = YES;
             [reverseAnimation playAnimated:animated];
@@ -743,7 +745,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                   duration:containerContent.duration];
     animation.delegate = self;          // always set a delegate so that the animation is destroyed if the container gets deallocated
     
-    // Pushing a view controller onto the stack
+    // Pushing a view controller onto the stack. Note that the transition can only be animated for the top view controller.
+    // Even if the container view controller's view is not currently visible, the transition can still be animated. This is
+    // made to allow transition animations to occur in nested containers (e.g. you may want to animate transitions in an
+    // HLSPlaceholderViewController nested in an HLSStackController so that, if the placeholder view controller is covered
+    // with a transparent view controller, transitions can still be seen underneath)
     if (inserting && index == [self.containerContents count] - 1) {
         // Some more work has to be done for push animations in the animation begin / end callbacks. To identify such animations,
         // we give them a tag which we can test in those callbacks
