@@ -115,8 +115,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         [CATransaction setAnimationTimingFunction:self.timingFunction];
     }
     
-    CFTimeInterval beginTime = CACurrentMediaTime();
-    
     // Animate all layers involved in the animation step
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
@@ -256,7 +254,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         if (animated) {
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
-            animationGroup.beginTime = beginTime;
             animationGroup.delegate = self;
             [layer addAnimation:animationGroup forKey:kLayerAnimationGroupKey];
         }
@@ -268,7 +265,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.layer.opacity];
         dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
-        dummyViewOpacityAnimation.beginTime = beginTime;
         dummyViewOpacityAnimation.delegate = self;
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:kDummyViewLayerAnimationKey];
     }
