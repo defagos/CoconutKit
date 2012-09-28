@@ -31,8 +31,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
-- (void)playAnimated:(BOOL)animated afterDelay:(NSTimeInterval)delay;
+- (void)playAnimated:(BOOL)animated withRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
 - (void)playNextAnimationStepAnimated:(BOOL)animated;
+
+- (NSArray *)reverseAnimationSteps;
 
 @end
 
@@ -141,16 +143,36 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)playAnimated:(BOOL)animated
 {
-    [self playAnimated:animated afterDelay:0.];
+    [self playAnimated:animated withRepeatCount:1 afterDelay:0.];
 }
 
 - (void)playAfterDelay:(NSTimeInterval)delay
 {    
-    [self playAnimated:YES afterDelay:delay];
+    [self playAnimated:YES withRepeatCount:1 afterDelay:delay];
 }
 
-- (void)playAnimated:(BOOL)animated afterDelay:(NSTimeInterval)delay
+- (void)playWithRepeatCount:(NSUInteger)repeatCount animated:(BOOL)animated
 {
+    [self playAnimated:animated withRepeatCount:repeatCount afterDelay:0.f];
+}
+
+- (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay
+{
+    [self playAnimated:YES withRepeatCount:repeatCount afterDelay:delay];
+}
+
+- (void)playAnimated:(BOOL)animated withRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay
+{
+    if (repeatCount == 0) {
+        HLSLoggerError(@"repeatCount cannot be 0");
+        return;
+    }
+    
+    if (repeatCount == NSUIntegerMax && ! animated) {
+        HLSLoggerError(@"An animation running indefinitely must be played with animated = YES");
+        return;
+    }
+    
     if (! animated && ! doubleeq(delay, 0.)) {
         HLSLoggerWarn(@"A delay has been defined, but the animation is played non-animated. The delay will be ignored");
         delay = 0.;
@@ -160,7 +182,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         delay = 0;
         HLSLoggerWarn(@"Negative delay. Fixed to 0");
     }
-    
+        
     // Cannot be played if already running
     if (self.running) {
         HLSLoggerDebug(@"The animation is already running");
@@ -172,6 +194,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     self.terminating = NO;
     
     m_animated = animated;
+    m_repeatCount = repeatCount;
+    m_currentRepeatCount = 0;
     
     // Lock the UI during the animation
     if (self.lockingUI) {
@@ -213,7 +237,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Done with the animation
     else {
         // Empty animations (without animation steps) must still call the animationWillStart:animated delegate method
-        if ([self.animationSteps count] == 0) {
+        if (m_currentRepeatCount == 0 && [self.animationSteps count] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
             }
@@ -228,7 +252,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         
         self.running = NO;
         
-        if (! self.cancelling) {
+        // Could theoretically overflow if m_repeatCount == NSUIntegerMax, but this would still yield correct
+        // behavior here
+        ++m_currentRepeatCount;
+        
+        if (m_repeatCount != NSUIntegerMax && m_currentRepeatCount == m_repeatCount && ! self.cancelling) {
             if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
                 [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
             }
@@ -241,6 +269,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         if (animated) {
             self.cancelling = NO;
             self.terminating = NO;
+        }
+        
+        // Repeat if needed
+        if (m_repeatCount != NSUIntegerMax && m_currentRepeatCount != m_repeatCount) {
+            [self playAnimated:m_animated];
         }
     }
 }
@@ -334,25 +367,43 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     return animation;
 }
 
+- (NSArray *)reverseAnimationSteps
+{
+    NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
+    for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
+        [reverseAnimationSteps addObject:[animationStep reverseAnimationStep]];
+    }
+    return [NSArray arrayWithArray:reverseAnimationSteps];
+}
+
 - (HLSAnimation *)reverseAnimation
 {
-    HLSAnimation *reverseAnimation = nil;
-    if (self.animationSteps) {
-        NSMutableArray *reverseAnimationSteps = [NSMutableArray array];
-        for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
-            [reverseAnimationSteps addObject:[animationStep reverseAnimationStep]];
-        }
-        reverseAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:reverseAnimationSteps]];
-    }
-    else {
-        reverseAnimation = [HLSAnimation animationWithAnimationStep:nil];
-    }
-    
+    HLSAnimation *reverseAnimation = [HLSAnimation animationWithAnimationSteps:[self reverseAnimationSteps]];
     reverseAnimation.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimation.lockingUI = self.lockingUI;
     reverseAnimation.delegate = self.delegate;
+    reverseAnimation.userInfo = self.userInfo;
     
     return reverseAnimation;
+}
+
+- (HLSAnimation *)loopAnimation
+{
+    NSMutableArray *animationSteps = [NSMutableArray arrayWithArray:self.animationSteps];
+    [animationSteps addObjectsFromArray:[self reverseAnimationSteps]];
+    
+    // Add a loop_ prefix to all animation step tags
+    for (HLSAnimationStep *animationStep in animationSteps) {
+        animationStep.tag = [animationStep.tag isFilled] ? [NSString stringWithFormat:@"loop_%@", animationStep.tag] : nil;
+    }
+    
+    HLSAnimation *loopAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    loopAnimation.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"loop_%@", self.tag] : nil;
+    loopAnimation.lockingUI = self.lockingUI;
+    loopAnimation.delegate = self.delegate;
+    loopAnimation.userInfo = self.userInfo;
+    
+    return loopAnimation;
 }
 
 #pragma mark HLSAnimationStepDelegate protocol implementation
@@ -366,8 +417,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         // when they did start, rather than when they will
         if ([animationStep.tag isEqualToString:kDelayLayerAnimationTag]) {
             // Note that if a delay has been set, this event is not fired until the delay period is over, as for UIView animation blocks)
-            if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
-                [self.delegate animationWillStart:self animated:animated];
+            if (m_currentRepeatCount == 0) {
+                if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
+                    [self.delegate animationWillStart:self animated:animated];
+                }
             }
         }
         else {

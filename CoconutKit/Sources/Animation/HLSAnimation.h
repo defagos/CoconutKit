@@ -60,6 +60,8 @@
     UIView *m_dummyView;
     BOOL m_lockingUI;
     BOOL m_animated;
+    NSUInteger m_repeatCount;
+    NSUInteger m_currentRepeatCount;
     BOOL m_running;
     BOOL m_cancelling;
     BOOL m_terminating;
@@ -122,6 +124,24 @@
 - (void)playAfterDelay:(NSTimeInterval)delay;
 
 /**
+ * Play the animation some number of times (repeatCount must be different from 0). If repeatCount = NSUIntegerMax,
+ * the animation is repeated forever (in such cases, animated must be YES)
+ *
+ * The -animationWillStart:animated: and -animationDidStop:animated: delegate methods will be respectively
+ * called once at the start and at the end of the animation
+ */
+- (void)playWithRepeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
+
+/**
+ * Play the animation some number of times (repeatCount must be different from 0) after some delay. If 
+ * repeatCount = NSUIntegerMax, the animation is repeated forever
+ *
+ * The -animationWillStart:animated: and -animationDidStop:animated: delegate methods will be respectively
+ * called once at the start and at the end of the animation
+ */
+- (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
+
+/**
  * Pause an animation being played animated (does nothing if the animation is not running or not animated). This method
  * can also be used to pause an animation during its initial delay period
  */
@@ -180,10 +200,18 @@
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
- * animation steps get and additional "reverse_" prefix (if a tag has not been filled, the reverse tag is nil). 
- * The userInfo dictionary is not copied
+ * animation steps get and additional "reverse_" prefix. If a tag has not been filled for the receiver, the
+ * corresponding tag of the reverse animation is nil
  */
 - (HLSAnimation *)reverseAnimation;
+
+/**
+ * Generate the corresponding loop animation by concatening self with its reverse animation. All attributes are
+ * copied as is, except that all tags for the animation and animation steps get and additional "loop_" prefix
+ * (reverse animation steps therefore begin with a "loop_reverse_" prefix). If a tag has not been filled for
+ * the receiver, the corresponding tag of the reverse animation is nil
+ */
+- (HLSAnimation *)loopAnimation;
 
 @end
 
