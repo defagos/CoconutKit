@@ -16,6 +16,8 @@
 
 /**
  * Setting an animation for an object
+ *
+ * The object animation is deeply copied to prevent further changes once assigned to a step
  */
 - (void)addObjectAnimation:(HLSObjectAnimation *)objectAnimation forObject:(id)object;
 

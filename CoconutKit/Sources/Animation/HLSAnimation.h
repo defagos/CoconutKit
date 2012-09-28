@@ -52,7 +52,8 @@
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private
-    NSArray *m_animationSteps;                                     // contains HLSAnimationStep objects
+    NSArray *m_animationSteps;
+    NSArray *m_animationStepCopies;                                // contains HLSAnimationStep objects
     NSEnumerator *m_animationStepsEnumerator;                      // enumerator over steps
     HLSAnimationStep *m_currentAnimationStep;
     NSString *m_tag;
@@ -79,13 +80,11 @@
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
  * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart: and 
  * animationDidStop: events when played)
+ *
+ * A deep copy of the animation steps is performed to prevent further changes once they have been assigned to an
+ * animation
  */
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;
-
-/**
- * The animation steps the animation is made of
- */
-@property (nonatomic, readonly, retain) NSArray *animationSteps;
 
 /**
  * Tag which can optionally be used to help identifying an animation

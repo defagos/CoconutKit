@@ -32,6 +32,8 @@
 /**
  * Setting a layer animation for a layer. Only one layer animation can be defined at most for a layer within an
  * animation step. The layer is not retained
+ *
+ * The layer animation is deeply copied to prevent further changes once assigned to a step
  */
 - (void)addLayerAnimation:(HLSLayerAnimation *)layerAnimation forLayer:(CALayer *)layer;
 

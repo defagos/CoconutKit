@@ -29,6 +29,8 @@
 /**
  * Setting a view animation for a view. Only one view animation can be defined at most for a view within an
  * animation step. The view is not retained
+ *
+ * The view animation is deeply copied to prevent further changes once assigned to a step
  */
 - (void)addViewAnimation:(HLSViewAnimation *)viewAnimation forView:(UIView *)view;
 
