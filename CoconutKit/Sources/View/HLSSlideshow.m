@@ -289,6 +289,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     }
     
     [self.animation terminate];
+    self.animation = nil;
+    
     for (UIImageView *imageView in self.imageViews) {
         [self releaseImageView:imageView];
     }
@@ -302,6 +304,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     }
     
     [self.animation terminate];
+    self.animation = nil;
+    
     for (UIImageView *imageView in self.imageViews) {
         [self releaseImageView:imageView];
     }
@@ -321,6 +325,8 @@ static const NSInteger kSlideshowNoIndex = -1;
     }
     
     [self.animation terminate];
+    self.animation = nil;
+    
     for (UIImageView *imageView in self.imageViews) {
         [self releaseImageView:imageView];
     }
@@ -513,7 +519,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     // User information attached: Not the first animation loop (and not reset after skipping
     // to the next or previous image)
-    if ([userInfo objectForKey:@"scaleFactor"] && ! self.animation.terminating) {
+    if ([userInfo objectForKey:@"scaleFactor"]) {
         currentImageScaleFactor = [[userInfo objectForKey:@"scaleFactor"] floatValue];
         currentImageXOffset = [[userInfo objectForKey:@"xOffset"] floatValue];
         currentImageYOffset = [[userInfo objectForKey:@"yOffset"] floatValue];
