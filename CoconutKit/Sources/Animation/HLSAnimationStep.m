@@ -24,8 +24,6 @@
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
-- (void)applicationDidEnterBackground:(NSNotification *)notification;
-
 @end
 
 @implementation HLSAnimationStep
@@ -46,22 +44,13 @@
         self.objectToObjectAnimationMap = [NSMutableDictionary dictionary];
         
         // Default animation settings (as given in UIKit documentation)
-        self.duration = 0.2;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidEnterBackground:)
-                                                     name:UIApplicationDidEnterBackgroundNotification
-                                                   object:nil];
+        self.duration = 0.2;        
     }
     return self;
 }
 
 - (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidEnterBackgroundNotification
-                                                  object:nil];
-    
+{    
     self.objectKeys = nil;
     self.objectToObjectAnimationMap = nil;
     self.tag = nil;
@@ -300,14 +289,6 @@
     animationStepCopy.tag = self.tag;
     animationStepCopy.duration = self.duration;
     return animationStepCopy;
-}
-
-#pragma mark Notification callbacks
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification
-{
-    // Safest strategy: Terminate all animations when the application enters background
-    [self terminate];
 }
 
 #pragma mark Description

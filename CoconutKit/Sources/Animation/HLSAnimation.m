@@ -42,6 +42,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (NSArray *)reverseAnimationSteps;
 
+- (void)applicationDidEnterBackground:(NSNotification *)notification;
+
 @end
 
 @implementation HLSAnimation
@@ -82,7 +84,12 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         else {
             HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
             self.animationSteps = [HLSAnimation copyForAnimationSteps:animationSteps];
-        }        
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidEnterBackground:)
+                                                     name:UIApplicationDidEnterBackgroundNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -95,6 +102,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
+    
     [self cancel];
     
     self.animationSteps = nil;
@@ -486,6 +497,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     animationCopy.userInfo = self.userInfo;
     
     return animationCopy;
+}
+
+#pragma mark Notification callbacks
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    // Safest strategy: Terminate all animations when the application enters background
+    [self terminate];
 }
 
 #pragma mark Description
