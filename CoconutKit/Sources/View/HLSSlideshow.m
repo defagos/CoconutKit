@@ -836,9 +836,9 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+- (void)animation:(HLSAnimation *)animation didFinishStepWithTag:(NSString *)animationStepTag animated:(BOOL)animated
 {
-    if ([animationStep.tag isEqualToString:@"singleImage"]) {
+    if ([animationStepTag isEqualToString:@"singleImage"]) {
         UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
         if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageWithNameOrPath:)]) {
             [self.delegate slideshow:self willHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];

@@ -230,6 +230,6 @@
 /**
  * Called when a step has been executed
  */
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
+- (void)animation:(HLSAnimation *)animation didFinishStepWithTag:(NSString *)animationStepTag animated:(BOOL)animated;
 
 @end
