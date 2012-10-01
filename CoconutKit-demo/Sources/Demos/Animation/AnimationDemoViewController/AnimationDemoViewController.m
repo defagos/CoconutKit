@@ -11,9 +11,26 @@
 @interface AnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
-@property (nonatomic, retain) HLSAnimation *reverseAnimation;
 
 - (void)updateUserInterface;
+
+- (SEL)selectorForAnimationWithIndex:(NSUInteger)index;
+- (NSUInteger)repeatCount;
+- (void)playAnimation:(HLSAnimation *)animation;
+
+- (HLSAnimation *)animation;
+- (HLSAnimation *)animation1;
+- (HLSAnimation *)animation2;
+- (HLSAnimation *)animation3;
+- (HLSAnimation *)animation4;
+- (HLSAnimation *)animation5;
+- (HLSAnimation *)animation6;
+- (HLSAnimation *)animation7;
+- (HLSAnimation *)animation8;
+- (HLSAnimation *)animation9;
+- (HLSAnimation *)animation10;
+- (HLSAnimation *)animation11;
+- (HLSAnimation *)animation12;
 
 @end
 
@@ -24,22 +41,24 @@
 - (void)releaseViews
 {
     [super releaseViews];
-        
+    
     self.rectangleView1 = nil;
     self.rectangleView2 = nil;
-    self.rectangleView3 = nil;
-    self.rectangleView4 = nil;
-    self.rectangleView5 = nil;
+    self.animationPickerView = nil;
+    self.resetButton = nil;
     self.playForwardButton = nil;
     self.playBackwardButton = nil;
+    self.pauseButton = nil;
     self.cancelButton = nil;
     self.terminateButton = nil;
     self.animatedSwitch = nil;
-    self.blockingSwitch = nil;
+    self.lockingUISwitch = nil;
     self.delayedSwitch = nil;
-    self.fasterSwitch = nil;
+    self.overrideDurationSwitch = nil;
+    self.loopingSwitch = nil;
+    self.repeatCountSlider = nil;
+    self.repeatCountLabel = nil;
     self.animation = nil;
-    self.reverseAnimation = nil;
 }
 
 #pragma mark View lifecycle
@@ -48,14 +67,24 @@
 {
     [super viewDidLoad];
     
-    self.playBackwardButton.hidden = YES;
+    self.animationPickerView.dataSource = self;
+    self.animationPickerView.delegate = self;
+    
+    self.resetButton.hidden = YES;
+    self.pauseButton.hidden = YES;
     self.cancelButton.hidden = YES;
     self.terminateButton.hidden = YES;
     
     self.animatedSwitch.on = YES;
-    self.blockingSwitch.on = NO;
+    self.lockingUISwitch.on = NO;
     self.delayedSwitch.on = NO;
-    self.fasterSwitch.on = NO;
+    self.overrideDurationSwitch.on = NO;
+    
+    self.loopingSwitch.on = NO;
+    
+    // Apply a perspective to sublayers
+    CATransform3D sublayerTransform = self.view.layer.sublayerTransform;
+    sublayerTransform.m34 = -1.f / 1000.f;
     
     [self updateUserInterface];
 }
@@ -66,15 +95,15 @@
 
 @synthesize rectangleView2 = m_rectangleView2;
 
-@synthesize rectangleView3 = m_rectangleView3;
+@synthesize animationPickerView = m_animationPickerView;
 
-@synthesize rectangleView4 = m_rectangleView4;
-
-@synthesize rectangleView5 = m_rectangleView5;
+@synthesize resetButton = m_resetButton;
 
 @synthesize playForwardButton = m_playForwardButton;
 
 @synthesize playBackwardButton = m_playBackwardButton;
+
+@synthesize pauseButton = m_pauseButton;
 
 @synthesize cancelButton = m_cancelButton;
 
@@ -82,17 +111,19 @@
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
-@synthesize blockingSwitch = m_blockingSwitch;
-
-@synthesize delayedLabel = m_delayedLabel;
+@synthesize lockingUISwitch = m_lockingUISwitch;
 
 @synthesize delayedSwitch = m_delayedSwitch;
 
-@synthesize fasterSwitch = m_fasterSwitch;
+@synthesize overrideDurationSwitch = m_overrideDurationSwitch;
+
+@synthesize loopingSwitch = m_loopingSwitch;
+
+@synthesize repeatCountSlider = m_repeatCountSlider;
+
+@synthesize repeatCountLabel = m_repeatCountLabel;
 
 @synthesize animation = m_animation;
-
-@synthesize reverseAnimation = m_reverseAnimation;
 
 #pragma mark Orientation management
 
@@ -105,226 +136,6 @@
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
-#pragma mark Event callbacks
-
-- (IBAction)playForward:(id)sender
-{
-    self.playForwardButton.hidden = YES;
-    self.cancelButton.hidden = NO;
-    self.terminateButton.hidden = NO;
-    
-    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    animationStep1.duration = 0.;
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 translateAnchorPointByVectorWithX:-0.5f y:0.f];
-    [layerAnimation11 translateByVectorWithX:-CGRectGetWidth(self.rectangleView1.frame) / 2.f y:0.f];
-    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
-    
-    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
-    animationStep2.duration = 1.;
-    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
-    [layerAnimation21 rotateByAngle:M_PI aboutVectorWithX:0.f y:1.f z:0.f];
-    [layerAnimation21 translateByVectorWithX:CGRectGetWidth(self.rectangleView1.frame) y:0.f];
-    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
-    
-    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    animationStep3.duration = 1.;
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 translateByVectorWithX:0.f y:200.f];
-    [layerAnimation31 rotateByAngle:M_PI_4];
-    [layerAnimation31 scaleWithXFactor:2.f yFactor:2.f];
-    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
-    
-    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
-    
-    
-    
-#if 0
-    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
-    animationStep1.tag = @"step1";
-    animationStep1.duration = 2.;
-    animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
-    [layerAnimation11 translateByVectorWithX:100.f y:100.f];
-    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
-    HLSLayerAnimation *layerAnimation12 = [HLSLayerAnimation animation];
-    [layerAnimation12 translateByVectorWithX:50.f y:30.f];
-    [layerAnimation12 rotateByAngle:M_PI_2];
-    [layerAnimation12 scaleWithXFactor:1.3f yFactor:1.3f];
-    layerAnimation12.opacityVariation = -0.3f;
-    [animationStep1 addLayerAnimation:layerAnimation12 forView:self.rectangleView4];
-    [animationStep1 addLayerAnimation:layerAnimation12 forView:self.rectangleView5];
-    
-    HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
-    animationStep2.tag = @"step2";
-    animationStep2.duration = 1.;
-    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation animation];
-    [viewAnimation21 scaleWithXFactor:1.5f yFactor:1.5f];
-    [viewAnimation21 translateByVectorWithX:30.f y:30.f];
-    viewAnimation21.alphaVariation = -0.3f;
-    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView2];
-    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView3];
-    
-    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
-    animationStep3.tag = @"step3";
-    animationStep3.duration = 0.6;
-    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
-    [layerAnimation31 rotateByAngle:M_PI aboutVectorWithX:0.f y:1.f z:0.f];
-    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView4];
-    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView5];
-    
-    HLSViewAnimationStep *animationStep4 = [HLSViewAnimationStep animationStep];
-    animationStep4.tag = @"step4";
-    animationStep4.duration = 1.;
-    
-    HLSLayerAnimationStep *animationStep5 = [HLSLayerAnimationStep animationStep];
-    animationStep5.tag = @"step5";
-    animationStep5.duration = 1.;
-
-    HLSLayerAnimationStep *animationStep6 = [HLSLayerAnimationStep animationStep];
-    animationStep6.tag = @"step6";
-    animationStep6.duration = 1.;
-    animationStep6.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    HLSLayerAnimation *layerAnimation61 = [HLSLayerAnimation animation];
-    [layerAnimation61 translateByVectorWithX:0.f y:200.f];
-    [animationStep6 addLayerAnimation:layerAnimation61 forView:self.rectangleView1];
-    
-    HLSLayerAnimationStep *animationStep7 = [HLSLayerAnimationStep animationStep];
-    animationStep7.tag = @"step7";
-    animationStep7.duration = 0.7;
-    animationStep7.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    HLSLayerAnimation *layerAnimation71 = [HLSLayerAnimation animation];
-    [layerAnimation71 rotateByAngle:M_PI_4];
-    [animationStep7 addLayerAnimation:layerAnimation71 forView:self.rectangleView1];
-    
-    // Create the animation and play it
-    self.animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
-                                                                animationStep2,
-                                                                animationStep3,
-                                                                animationStep4,
-                                                                animationStep5,
-                                                                animationStep6,
-                                                                animationStep7,
-                                                                nil]];
-#endif
-    if (self.fasterSwitch.on) {
-        self.animation = [self.animation animationWithDuration:2.];
-    }
-    self.animation.tag = @"singleViewAnimation";
-    self.animation.lockingUI = self.blockingSwitch.on;
-    self.animation.delegate = self;
-    
-    if (! self.delayedSwitch.on) {
-        [self.animation playAnimated:self.animatedSwitch.on];
-    }
-    else {
-        [self.animation playAfterDelay:2.];
-    }
-}
-
-- (IBAction)playBackward:(id)sender
-{
-    self.playBackwardButton.hidden = YES;
-    self.cancelButton.hidden = NO;
-    self.terminateButton.hidden = NO;
-    
-    // Create the reverse animation
-    self.reverseAnimation = [self.animation reverseAnimation];
-    self.reverseAnimation.lockingUI = self.blockingSwitch.on;
-    
-    if (! self.delayedSwitch.on) {
-        [self.reverseAnimation playAnimated:self.animatedSwitch.on];    
-    }
-    else {
-        [self.reverseAnimation playAfterDelay:1.];
-    }
-}
-
-- (IBAction)pause:(id)sender
-{
-    if (self.animation.running) {
-        if (! self.animation.paused) {
-            [self.animation pause];
-        }
-        else {
-            [self.animation resume];
-        }
-    }
-    if (self.reverseAnimation.running) {
-        if (! self.reverseAnimation.paused) {
-            [self.reverseAnimation pause];
-        }
-        else {
-            [self.reverseAnimation resume];
-        }
-    }    
-}
-
-- (IBAction)cancel:(id)sender
-{
-    if (self.animation.running) {
-        self.playBackwardButton.hidden = NO;
-        [self.animation cancel];
-    }
-    if (self.reverseAnimation.running) {
-        self.playForwardButton.hidden = NO;
-        [self.reverseAnimation cancel];
-    }
-    
-    self.cancelButton.hidden = YES;
-    self.terminateButton.hidden = YES;
-}
-
-- (IBAction)terminate:(id)sender
-{
-    if (self.animation.running) {
-        self.playBackwardButton.hidden = NO;
-        [self.animation terminate];
-    }
-    if (self.reverseAnimation.running) {
-        self.playForwardButton.hidden = NO;
-        [self.reverseAnimation terminate];
-    }
-    
-    self.cancelButton.hidden = YES;
-    self.terminateButton.hidden = YES;
-}
-
-- (IBAction)toggleAnimated:(id)sender
-{
-    self.delayedSwitch.on = NO;
-    
-    [self updateUserInterface];
-}
-
-#pragma mark HLSAnimationDelegate protocol implementation
-
-- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Animation %@ will start, animated = %@", animation.tag, HLSStringFromBool(animated));
-}
-
-- (void)animationStepFinished:(HLSAnimationStep *)animationStep animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Step %@ finished, animated = %@", animationStep.tag, HLSStringFromBool(animated));
-}
-
-- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
-{
-    HLSLoggerInfo(@"Animation %@ did stop, animated = %@", animation.tag, HLSStringFromBool(animated));
-    
-    // Can find which animation ended using its tag
-    if ([animation.tag isEqualToString:@"singleViewAnimation"]) {
-        self.playBackwardButton.hidden = NO;
-    }
-    else if ([animation.tag isEqualToString:@"reverse_singleViewAnimation"]) {
-        self.playForwardButton.hidden = NO;
-    }
-    
-    self.cancelButton.hidden = YES;
-    self.terminateButton.hidden = YES;
-}
-
 #pragma mark Localization
 
 - (void)localize
@@ -334,18 +145,293 @@
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
 }
 
-#pragma mark Miscellaneous
+#pragma mark UI
 
 - (void)updateUserInterface
 {
-    if (self.animatedSwitch.on) {
-        self.delayedLabel.hidden = NO;
-        self.delayedSwitch.hidden = NO;
+    NSUInteger repeatCount = [self repeatCount];
+    if (repeatCount == NSUIntegerMax) {
+        self.repeatCountLabel.text = @"inf";
     }
     else {
-        self.delayedLabel.hidden = YES;
-        self.delayedSwitch.hidden = YES;
+        self.repeatCountLabel.text = [NSString stringWithFormat:@"%d", repeatCount];
     }
 }
+
+#pragma mark HLSAnimationDelegate protocol implementation
+
+- (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Animation %@ will start, animated = %@, running = %@, cancelling = %@, terminating = %@", animation.tag,
+                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
+                  HLSStringFromBool(animation.terminating));
+}
+
+- (void)animation:(HLSAnimation *)animation didFinishStepWithTag:(NSString *)animationStepTag animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Step with tag %@ finished, animated = %@, running = %@, cancelling = %@, terminating = %@", animationStepTag,
+                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
+                  HLSStringFromBool(animation.terminating));
+}
+
+- (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Animation %@ did stop, animated = %@, running = %@, cancelling = %@, terminating = %@", animation.tag,
+                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
+                  HLSStringFromBool(animation.terminating));
+}
+
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    NSUInteger animationMethodCount = 0;
+    while ([self respondsToSelector:[self selectorForAnimationWithIndex:animationMethodCount + 1]]) {
+        ++animationMethodCount;
+    }
+    
+    return animationMethodCount;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [NSString stringWithFormat:@"%d", row + 1];
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)reset:(id)sender
+{
+
+}
+
+- (IBAction)playForward:(id)sender
+{
+    [self playAnimation:[self animation]];
+}
+
+- (IBAction)playBackward:(id)sender
+{
+    [self playAnimation:[[self animation] reverseAnimation]];
+}
+
+- (IBAction)pause:(id)sender
+{
+    if (! self.animation.paused) {
+        [self.animation pause];
+    }
+    else {
+        [self.animation resume];
+    }
+}
+
+- (IBAction)cancel:(id)sender
+{
+    [self.animation cancel];
+}
+
+- (IBAction)terminate:(id)sender
+{
+    [self.animation terminate];
+}
+
+- (IBAction)repeatCountChanged:(id)sender
+{
+    [self updateUserInterface];
+}
+
+#pragma mark Animations
+
+- (SEL)selectorForAnimationWithIndex:(NSUInteger)index
+{
+    NSString *selectorName = [NSString stringWithFormat:@"animation%d", index];
+    return NSSelectorFromString(selectorName);
+}
+
+- (NSUInteger)repeatCount
+{
+    if (floateq(self.repeatCountSlider.value, self.repeatCountSlider.maximumValue)) {
+        return NSUIntegerMax;
+    }
+    else {
+        return roundf(self.repeatCountSlider.value);
+    }
+}
+
+- (void)playAnimation:(HLSAnimation *)animation
+{
+    NSUInteger repeatCount = [self repeatCount];
+    if (self.overrideDurationSwitch.on) {
+        animation = [animation animationWithDuration:5.];
+    }
+    if (self.delayedSwitch.on) {
+        [animation playWithRepeatCount:repeatCount afterDelay:3.];
+    }
+    else {
+        [animation playWithRepeatCount:repeatCount animated:self.animatedSwitch.on];
+    }
+}
+
+- (HLSAnimation *)animation
+{    
+    SEL selector = [self selectorForAnimationWithIndex:[self.animationPickerView selectedRowInComponent:0] + 1];
+    HLSAnimation *animation = [self performSelector:selector];
+    if (self.loopingSwitch.on) {
+        animation = [animation loopAnimation];
+    }
+    if (self.overrideDurationSwitch) {
+        
+    }
+    animation.delegate = self;
+    animation.lockingUI = self.lockingUISwitch.on;
+    return animation;
+}
+
+- (HLSAnimation *)animation1
+{
+    // Layer translation, one view
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 translateByVectorWithX:100.f y:20.f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation2
+{
+    // Layer rotation around the z axis, one view
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 rotateByAngle:M_PI_4];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation3
+{
+    // Layer rotation around the x axis, one view
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:1.f z:0.f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation4
+{
+    // Layer scaling, one view
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 scaleWithXFactor:2.f yFactor:3.f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation5
+{
+    // View translation, one view
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 translateByVectorWithX:100.f y:20.f];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation6
+{
+    // View scaling, one view
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 scaleWithXFactor:2.f yFactor:3.f];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];;
+}
+
+- (HLSAnimation *)animation7
+{
+    // Layer opacity
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 addToOpacity:-0.5f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];
+}
+
+- (HLSAnimation *)animation8
+{
+    // View opacity
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 addToAlpha:-0.5f];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
+    return [HLSAnimation animationWithAnimationStep:animationStep1];
+}
+
+- (HLSAnimation *)animation9
+{
+    // Empty animation. Also triggers willStart and didStop callbacks
+    return [HLSAnimation animationWithAnimationStep:nil];
+}
+
+- (HLSAnimation *)animation10
+{
+    // Pulse animation (when repeated)
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 scaleWithXFactor:2.f yFactor:2.f];
+    [layerAnimation11 addToOpacity:-1.f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.duration = 0.8;
+    animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+        
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    animationStep2.duration = 0.5;
+    
+    HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
+    [layerAnimation31 scaleWithXFactor:1.f / 2.f yFactor:1.f / 2.f];
+    [layerAnimation31 addToOpacity:1.f];
+    HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
+    animationStep3.duration = 0.;
+    [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+}
+
+- (HLSAnimation *)animation11
+{
+    // Identity animation step with some duration
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    animationStep1.duration = 2.;
+    return [HLSAnimation animationWithAnimationStep:animationStep1];
+}
+
+- (HLSAnimation *)animation12
+{
+    // Identity animation step with some duration
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    animationStep1.duration = 2.;
+    return [HLSAnimation animationWithAnimationStep:animationStep1];
+}
+
+// Other tests:
+//   1) Several views
+//   2) Several changes during a ViewAnimation / LayerAnimation
+//   3) Mix layer & view animations
+//   4) Pulse
 
 @end
