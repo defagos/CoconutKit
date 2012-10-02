@@ -80,6 +80,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 {
     NSAssert(doublele(startTime, self.duration), @"The start time of a step cannot be greater than its duration");
     
+    NSTimeInterval duration = self.duration;
     if (animated) {
         // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
         // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
@@ -89,8 +90,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
         
         [CATransaction begin];
-        
-        NSTimeInterval duration = self.duration;
         
         // For tests within the iOS simulator only: Slow down Core Animations as UIView block-based animations (when
         // quickly pressing the shift key three times)
@@ -111,6 +110,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         if (s_UIAnimationDragCoefficient) {
             duration *= s_UIAnimationDragCoefficient();
+            startTime *= s_UIAnimationDragCoefficient();
         }
 #endif
         // If we want to play an animation from somewhere in its middle, we need to reduce the duration of the enclosing
@@ -262,7 +262,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             // when played from somewhere in their middle. The timing function must also be attached to each
             // animation
             for (CAAnimation *animation in animations) {
-                animation.duration = self.duration;
+                animation.duration = duration;
                 animation.timeOffset = startTime;
                 animation.timingFunction = self.timingFunction;
             }
