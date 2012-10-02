@@ -285,7 +285,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    // Instantaneously play all animation steps which complete before the start time
+    // Instantaneously play all animation steps which complete before the start time. The value of m_remainingTimeBeforeStart
+    // is updated before the animation is played (so that it can be used as a criterium to guess whether we are playing
+    // animation steps instantaneously to reach the start time)
     if (doublegt(m_remainingTimeBeforeStart, animationStep.duration)) {
         m_remainingTimeBeforeStart -= animationStep.duration;
         [animationStep playWithDelegate:self startTime:0. animated:NO];
@@ -490,8 +492,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished
 {
-    // Still send all delegate notifications if terminating
-    if (! self.cancelling) {
+    // Still send all delegate notifications if terminating and if not playing animation steps instantaneously
+    // when a start time has been set
+    if (! self.cancelling && doubleeq(m_remainingTimeBeforeStart, 0.)) {
         // Notify that the animation begins when the initial delay animation (always played) ends. This way
         // we get rid of subtle differences which might arise with animation steps only being able to notify
         // when they did start, rather than when they will

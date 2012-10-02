@@ -142,13 +142,15 @@
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
 
 /**
- * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning)
+ * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning). The delegate 
+ * events which would have occurred prior to startTime are not received
  */
 - (void)playWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated;
 
 /**
  * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning) and repeating
- * it at the end. If repeatCount = NSUIntegerMax, the animation is repeated forever
+ * it at the end. If repeatCount = NSUIntegerMax, the animation is repeated forever. The delegate events which
+ * would have occurred prior to startTime are not received
  */
 - (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
 
