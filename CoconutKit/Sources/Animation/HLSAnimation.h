@@ -63,6 +63,7 @@
     BOOL m_animated;
     NSUInteger m_repeatCount;
     NSUInteger m_currentRepeatCount;
+    NSTimeInterval m_remainingTimeBeforeStart;
     BOOL m_running;
     BOOL m_cancelling;
     BOOL m_terminating;
@@ -139,6 +140,17 @@
  * called once at the start and at the end of the animation
  */
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
+
+/**
+ * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning)
+ */
+- (void)playWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated;
+
+/**
+ * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning) and repeating
+ * it at the end. If repeatCount = NSUIntegerMax, the animation is repeated forever
+ */
+- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
 
 /**
  * Pause an animation being played animated (does nothing if the animation is not running or not animated). This method

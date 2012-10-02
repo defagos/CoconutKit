@@ -133,7 +133,7 @@
 
 #pragma mark Managing the animation
 
-- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated
+- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
     if (self.running) {
         HLSLoggerInfo(@"The animation step is already running");
@@ -154,7 +154,7 @@
     }
     
     // Call the subclass implementation
-    [self playAnimationAnimated:actuallyAnimated];
+    [self playAnimationWithStartTime:startTime animated:actuallyAnimated];
     
     // Not animated (i.e. synchronously animated to the final position)
     if (! actuallyAnimated) {

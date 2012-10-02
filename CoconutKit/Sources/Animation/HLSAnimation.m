@@ -34,10 +34,13 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
-- (void)playAnimated:(BOOL)animated
-     withRepeatCount:(NSUInteger)repeatCount
-  currentRepeatCount:(NSUInteger)currentRepeatCount
-          afterDelay:(NSTimeInterval)delay;
+- (void)playWithStartTime:(NSTimeInterval)startTime
+              repeatCount:(NSUInteger)repeatCount
+       currentRepeatCount:(NSUInteger)currentRepeatCount
+               afterDelay:(NSTimeInterval)delay
+                 animated:(BOOL)animated;
+
+- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 - (void)playNextAnimationStepAnimated:(BOOL)animated;
 
 - (NSArray *)reverseAnimationSteps;
@@ -172,28 +175,39 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)playAnimated:(BOOL)animated
 {
-    [self playAnimated:animated withRepeatCount:1 currentRepeatCount:0 afterDelay:0.];
+    [self playWithStartTime:0. repeatCount:1 currentRepeatCount:0 afterDelay:0. animated:animated];
 }
 
 - (void)playAfterDelay:(NSTimeInterval)delay
-{    
-    [self playAnimated:YES withRepeatCount:1 currentRepeatCount:0 afterDelay:delay];
+{
+    [self playWithStartTime:0. repeatCount:1 currentRepeatCount:0 afterDelay:delay animated:YES];
 }
 
 - (void)playWithRepeatCount:(NSUInteger)repeatCount animated:(BOOL)animated
 {
-    [self playAnimated:animated withRepeatCount:repeatCount currentRepeatCount:0 afterDelay:0.f];
+    [self playWithStartTime:0. repeatCount:repeatCount currentRepeatCount:0 afterDelay:0. animated:animated];
 }
 
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay
 {
-    [self playAnimated:YES withRepeatCount:repeatCount currentRepeatCount:0 afterDelay:delay];
+    [self playWithStartTime:0. repeatCount:repeatCount currentRepeatCount:0 afterDelay:delay animated:YES];
 }
 
-- (void)playAnimated:(BOOL)animated
-     withRepeatCount:(NSUInteger)repeatCount
-  currentRepeatCount:(NSUInteger)currentRepeatCount
-          afterDelay:(NSTimeInterval)delay
+- (void)playWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
+{
+    [self playWithStartTime:startTime repeatCount:1 currentRepeatCount:0 afterDelay:0. animated:animated];
+}
+
+- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount animated:(BOOL)animated
+{
+    [self playWithStartTime:startTime repeatCount:repeatCount currentRepeatCount:0 afterDelay:0. animated:animated];
+}
+
+- (void)playWithStartTime:(NSTimeInterval)startTime
+              repeatCount:(NSUInteger)repeatCount
+       currentRepeatCount:(NSUInteger)currentRepeatCount
+               afterDelay:(NSTimeInterval)delay
+                 animated:(BOOL)animated
 {
     if (repeatCount == 0) {
         HLSLoggerError(@"repeatCount cannot be 0");
@@ -209,10 +223,20 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         HLSLoggerWarn(@"A delay has been defined, but the animation is played non-animated. The delay will be ignored");
         delay = 0.;
     }
-    
+        
     if (floatlt(delay, 0.)) {
         delay = 0;
         HLSLoggerWarn(@"Negative delay. Fixed to 0");
+    }
+    
+    if (doublelt(startTime, 0.)) {
+        HLSLoggerWarn(@"The start time cannot be negative. Fixed to 0");
+        startTime = 0.;
+    }
+    
+    if (doublegt(startTime, repeatCount * [self duration])) {
+        HLSLoggerWarn(@"The start time is larger than the total animation duration (including repeats). Set to the total duration");
+        startTime = repeatCount * [self duration];
     }
         
     // Cannot be played if already running and trying to play the first time
@@ -237,6 +261,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     m_animated = animated;
     m_repeatCount = repeatCount;
     m_currentRepeatCount = currentRepeatCount;
+    m_remainingTimeBeforeStart = startTime;
     
     // Create a dummy animation step to simulate the delay. This way we avoid two potential issues:
     //   - if an animation step subclass is implemented using an animation framework which does not support delays,
@@ -255,7 +280,22 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Set the dummy animation step as current animation step, so that cancel / terminate work as expected, even
     // if they occur during the initial delay period
     self.currentAnimationStep = delayAnimationStep;
-    [delayAnimationStep playWithDelegate:self animated:animated];
+    [self playAnimationStep:delayAnimationStep animated:animated];
+}
+
+- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
+{
+    // Instantaneously play all animation steps which complete before the start time
+    if (doublegt(m_remainingTimeBeforeStart, animationStep.duration)) {
+        m_remainingTimeBeforeStart -= animationStep.duration;
+        [animationStep playWithDelegate:self startTime:0. animated:NO];
+    }
+    // Play the incomplete animation step, starting where appropriate
+    else {
+        NSTimeInterval remainingTimeBeforeStart = m_remainingTimeBeforeStart;
+        m_remainingTimeBeforeStart = 0.;
+        [animationStep playWithDelegate:self startTime:remainingTimeBeforeStart animated:animated];
+    }
 }
 
 - (void)playNextAnimationStepAnimated:(BOOL)animated
@@ -268,7 +308,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Proceeed with the next step (if any)
     self.currentAnimationStep = [self.animationStepsEnumerator nextObject];
     if (self.currentAnimationStep) {
-        [self.currentAnimationStep playWithDelegate:self animated:animated];
+        [self playAnimationStep:self.currentAnimationStep animated:animated];
     }
     // Done with the animation
     else {
@@ -303,10 +343,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         // until the end
         if ((m_repeatCount == NSUIntegerMax && ! self.cancelling && ! self.terminating)
                 || (m_repeatCount != NSUIntegerMax && m_currentRepeatCount != m_repeatCount)) {
-            [self playAnimated:(self.cancelling || self.terminating) ? NO : m_animated
-               withRepeatCount:m_repeatCount
-            currentRepeatCount:m_currentRepeatCount
-                    afterDelay:0.];
+            [self playWithStartTime:m_remainingTimeBeforeStart
+                        repeatCount:m_repeatCount
+                 currentRepeatCount:m_currentRepeatCount
+                         afterDelay:0.
+                           animated:(self.cancelling || self.terminating) ? NO : m_animated];
         }
         // The end of the animation has been reached. Reset its status variables
         else {
@@ -470,8 +511,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     }
     
     // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the
-    // animation did not reach completion normally
-    [self playNextAnimationStepAnimated:finished ? animated : NO];
+    // animation did not reach completion normally. Moreover, if some animation steps are played non-animated because
+    // a start time has been set, we must override animated = NO with the original m_animated value of the animation
+    [self playNextAnimationStepAnimated:finished ? (! doubleeq(m_remainingTimeBeforeStart, 0.) ? m_animated : animated) : NO];
 }
 
 #pragma mark NSCopying protocol implementation

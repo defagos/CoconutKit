@@ -55,7 +55,7 @@
     [self addObjectAnimation:viewAnimation forObject:view];
 }
 
-- (void)playAnimationAnimated:(BOOL)animated
+- (void)playAnimationWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
     if (animated) {
         // This dummy view fixes an issue encountered with animation blocks: If no view is altered

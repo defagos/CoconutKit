@@ -16,9 +16,10 @@
 @interface HLSAnimationStep (Friend)
 
 /**
- * Play the associated animation, reporting events to the specified delegate (which is retained during the animation)
+ * Play the associated animation (starting at startTime, 0 if the full animation must be played), reporting events to the 
+ * specified delegate (which is retained during the animation)
  */
-- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate animated:(BOOL)animated;
+- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated;
 
 /**
  * Pause the an animation step being played animated (does nothing if the animation is not running or not animated)

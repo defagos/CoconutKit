@@ -76,8 +76,10 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     [self addLayerAnimation:layerAnimation forLayer:view.layer];
 }
 
-- (void)playAnimationAnimated:(BOOL)animated
+- (void)playAnimationWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
+    NSAssert(doublele(startTime, self.duration), @"The start time of a step cannot be greater than its duration");
+    
     if (animated) {
         // This dummy view is always animated. There is no way to set a start callback for a CATransaction.
         // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
@@ -111,8 +113,12 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             duration *= s_UIAnimationDragCoefficient();
         }
 #endif
-        [CATransaction setAnimationDuration:duration];
-        [CATransaction setAnimationTimingFunction:self.timingFunction];
+        // If we want to play an animation from somewhere in its middle, we need to reduce the duration of the enclosing
+        // group or transaction accordingly, while letting the duration of the individual animations unchanged (see the
+        // CAAnimationGroup creation below). The child animation is not scaled, rather cut at its end (see the CAAnimationGroup
+        // class documentation), yielding the desired effect. For the same reason, the timing function must be applied on
+        // the animation, not on the transaction
+        [CATransaction setAnimationDuration:duration - startTime];
     }
     
     // Animate all layers involved in the animation step
@@ -252,6 +258,15 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         // Create the animation group and attach it to the layer
         if (animated) {
+            // All animations must have the expected duration, but must be offset according to the start time
+            // when played from somewhere in their middle. The timing function must also be attached to each
+            // animation
+            for (CAAnimation *animation in animations) {
+                animation.duration = self.duration;
+                animation.timeOffset = startTime;
+                animation.timingFunction = self.timingFunction;
+            }
+            
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.delegate = self;

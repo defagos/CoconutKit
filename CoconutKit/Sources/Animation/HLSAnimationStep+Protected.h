@@ -42,12 +42,14 @@
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 /**
- * This method must be implemented by subclasses to create and play the animation step (animated or not).
+ * This method must be implemented by subclasses to create and play the animation step (animated or not),
+ * starting from startTime (0 if the full animation must be played).
+ *
  * If animated = YES, the animation is expected to take place asynchronously, otherwise synchronously
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (void)playAnimationAnimated:(BOOL)animated;
+- (void)playAnimationWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated;
 
 /**
  * This method must be implemented by subclasses to pause a running animation step
