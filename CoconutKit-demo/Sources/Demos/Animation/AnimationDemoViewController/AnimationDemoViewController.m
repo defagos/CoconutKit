@@ -31,6 +31,7 @@
 - (HLSAnimation *)animation10;
 - (HLSAnimation *)animation11;
 - (HLSAnimation *)animation12;
+- (HLSAnimation *)animation13;
 
 @end
 
@@ -393,17 +394,20 @@
     [layerAnimation11 scaleWithXFactor:2.f yFactor:2.f];
     [layerAnimation11 addToOpacity:-1.f];
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
     animationStep1.duration = 0.8;
     animationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
         
     HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    animationStep2.tag = @"step2";
     animationStep2.duration = 0.5;
     
     HLSLayerAnimation *layerAnimation31 = [HLSLayerAnimation animation];
     [layerAnimation31 scaleWithXFactor:1.f / 2.f yFactor:1.f / 2.f];
     [layerAnimation31 addToOpacity:1.f];
     HLSLayerAnimationStep *animationStep3 = [HLSLayerAnimationStep animationStep];
+    animationStep3.tag = @"step3";
     animationStep3.duration = 0.;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
     
@@ -412,6 +416,31 @@
 
 - (HLSAnimation *)animation11
 {
+    // Animate several views similarly at once, and with several transformations applied during each step
+    HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
+    [layerAnimation11 translateByVectorWithX:50.f y:50.f];
+    [layerAnimation11 rotateByAngle:M_PI_4];
+    [layerAnimation11 scaleWithXFactor:2.f yFactor:2.f];
+    [layerAnimation11 addToOpacity:-0.5f];
+    HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    animationStep1.duration = 0.6;
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
+    [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView2];
+    
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
+    [layerAnimation21 translateByVectorWithX:40.f y:0.f];
+    [layerAnimation21 rotateByAngle:-M_PI_4 aboutVectorWithX:0.f y:1.f z:0.f];
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    animationStep1.tag = @"step2";
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+}
+
+- (HLSAnimation *)animation12
+{
     // Identity animation step with some duration
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     animationStep1.tag = @"step1";
@@ -419,7 +448,7 @@
     return [HLSAnimation animationWithAnimationStep:animationStep1];
 }
 
-- (HLSAnimation *)animation12
+- (HLSAnimation *)animation13
 {
     // Identity animation step with some duration
     HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
@@ -429,9 +458,8 @@
 }
 
 // Other tests:
-//   1) Several views
-//   2) Several changes during a ViewAnimation / LayerAnimation
 //   3) Mix layer & view animations
-//   4) Pulse
+//   4) Complex pulse with several views
+//   5) Cube & rotation: Setup initial step to position views, then rotate about PI
 
 @end
