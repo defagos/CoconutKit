@@ -40,11 +40,12 @@
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
 "Day"="Jour";
-"Delayed (3 sec.)"="Retardé (3 sec.)";
+"Delay"="Retard";
 "Demos"="Démos";
 "Details"="Détails";
 "Dismiss"="Fermer";
 "Done"="Terminé";
+"Duration"="Durée";
 "Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
 "Enter a search criterium"="Entrez un critère de recherche";
@@ -74,6 +75,7 @@
 "Last name"="Nom";
 "Lifecycle test"="Test du cycle de vie";
 "Line break mode"="Mode saut de ligne";
+"Looping"="Boucle";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
 "Middle"="Milieu";
 "Min font size"="Taille de police minimale";
@@ -96,8 +98,6 @@
 "Pause"="Pause";
 "Phones"="Téléphones";
 "Play"="Jouer";
-"Play forward"="Jouer l'animation";
-"Play backward"="Jouer l'animation inverse";
 "Pop"="Pop";
 "Pop 3 VCs"="Pop 3 VCs";
 "Pop non-animated"="Pop non-animé";
@@ -114,11 +114,13 @@
 "Remaining time estimate"="Temps restant estimé";
 "Removal index: %d"="Index de retrait: %d";
 "Remove"="Retirer";
+"Repeat count"="Répétitions";
 "Reset"="Mettre à zéro";
 "Reset (animated)"="Mettre à zéro (animé)";
 "Reset model fields"="Effacer champs modèle";
 "Reset text fields"="Effacer champs textuels";
 "Resume"="Reprendre";
+"Reverse"="Inversée";
 "Root view controller"="View controller racine";
 "Scrolling"="Défilement";
 "Search bar"="Champ de recherche";
@@ -131,6 +133,7 @@
 "Skinning"="Skinning";
 "Slideshow"="Slideshow";
 "Start"="Démarrer";
+"Start time"="Début";
 "State"="Etat";
 "Stop"="Arrêter";
 "Street"="Rue";

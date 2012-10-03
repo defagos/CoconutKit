@@ -8,17 +8,22 @@
 
 #import "AnimationDemoViewController.h"
 
+static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
+
 @interface AnimationDemoViewController ()
 
 @property (nonatomic, retain) HLSAnimation *animation;
 
 - (void)updateUserInterface;
+- (void)calculateAnimation;
 
 - (SEL)selectorForAnimationWithIndex:(NSUInteger)index;
-- (NSUInteger)repeatCount;
-- (void)playAnimation:(HLSAnimation *)animation;
 
-- (HLSAnimation *)animation;
+- (NSTimeInterval)delay;
+- (NSTimeInterval)duration;
+- (NSUInteger)repeatCount;
+- (NSTimeInterval)startTime;
+
 - (HLSAnimation *)animation1;
 - (HLSAnimation *)animation2;
 - (HLSAnimation *)animation3;
@@ -47,18 +52,22 @@
     self.rectangleView2 = nil;
     self.animationPickerView = nil;
     self.resetButton = nil;
-    self.playForwardButton = nil;
-    self.playBackwardButton = nil;
+    self.playButton = nil;
     self.pauseButton = nil;
     self.cancelButton = nil;
     self.terminateButton = nil;
+    self.reverseSwitch = nil;
     self.animatedSwitch = nil;
     self.lockingUISwitch = nil;
-    self.delayedSwitch = nil;
-    self.overrideDurationSwitch = nil;
     self.loopingSwitch = nil;
+    self.delaySlider = nil;
+    self.delayLabel = nil;
+    self.durationSlider = nil;
+    self.durationLabel = nil;
     self.repeatCountSlider = nil;
     self.repeatCountLabel = nil;
+    self.startTimeSlider = nil;
+    self.startTimeLabel = nil;
     self.animation = nil;
 }
 
@@ -71,22 +80,11 @@
     self.animationPickerView.dataSource = self;
     self.animationPickerView.delegate = self;
     
-    self.resetButton.hidden = YES;
-    self.pauseButton.hidden = YES;
-    self.cancelButton.hidden = YES;
-    self.terminateButton.hidden = YES;
-    
-    self.animatedSwitch.on = YES;
-    self.lockingUISwitch.on = NO;
-    self.delayedSwitch.on = NO;
-    self.overrideDurationSwitch.on = NO;
-    
-    self.loopingSwitch.on = NO;
-    
     // Apply a perspective to sublayers
     CATransform3D sublayerTransform = self.view.layer.sublayerTransform;
     sublayerTransform.m34 = -1.f / 1000.f;
     
+    [self calculateAnimation];
     [self updateUserInterface];
 }
 
@@ -100,9 +98,7 @@
 
 @synthesize resetButton = m_resetButton;
 
-@synthesize playForwardButton = m_playForwardButton;
-
-@synthesize playBackwardButton = m_playBackwardButton;
+@synthesize playButton = m_playButton;
 
 @synthesize pauseButton = m_pauseButton;
 
@@ -110,19 +106,29 @@
 
 @synthesize terminateButton = m_terminateButton;
 
+@synthesize reverseSwitch = m_reverseSwitch;
+
 @synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize lockingUISwitch = m_lockingUISwitch;
 
-@synthesize delayedSwitch = m_delayedSwitch;
-
-@synthesize overrideDurationSwitch = m_overrideDurationSwitch;
-
 @synthesize loopingSwitch = m_loopingSwitch;
+
+@synthesize delaySlider = m_delaySlider;
+
+@synthesize delayLabel = m_delayLabel;
+
+@synthesize durationSlider = m_durationSlider;
+
+@synthesize durationLabel = m_durationLabel;
 
 @synthesize repeatCountSlider = m_repeatCountSlider;
 
 @synthesize repeatCountLabel = m_repeatCountLabel;
+
+@synthesize startTimeSlider = m_startTimeSlider;
+
+@synthesize startTimeLabel = m_startTimeLabel;
 
 @synthesize animation = m_animation;
 
@@ -146,10 +152,20 @@
     self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
 }
 
-#pragma mark UI
+#pragma mark Responding to parameter adjustment
 
 - (void)updateUserInterface
 {
+    self.delayLabel.text = [NSString stringWithFormat:@"%.0f", [self delay]];
+    
+    NSTimeInterval duration = [self duration];
+    if (doubleeq(duration, kAnimationIntrinsicDuration)) {
+        self.durationLabel.text = @"-";
+    }
+    else {
+        self.durationLabel.text = [NSString stringWithFormat:@"%.0f", [self duration]];
+    }
+    
     NSUInteger repeatCount = [self repeatCount];
     if (repeatCount == NSUIntegerMax) {
         self.repeatCountLabel.text = @"inf";
@@ -157,6 +173,48 @@
     else {
         self.repeatCountLabel.text = [NSString stringWithFormat:@"%d", repeatCount];
     }
+    
+    // Adjust the start time to cover the whole animation
+    self.startTimeSlider.maximumValue = [self totalDuration];
+    
+    self.startTimeLabel.text = [NSString stringWithFormat:@"%.2f", self.startTimeSlider.value];
+    
+    if (self.animation.running) {
+        self.playButton.hidden = ! self.animation.paused;
+        self.pauseButton.hidden = self.animation.paused;
+        self.cancelButton.hidden = NO;
+        self.terminateButton.hidden = NO;
+    }
+    else {
+        self.playButton.hidden = NO;
+        self.pauseButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+        self.terminateButton.hidden = YES;
+    }
+}
+
+- (void)calculateAnimation
+{
+    NSUInteger animationIndex = [self.animationPickerView selectedRowInComponent:0] + 1;
+    SEL selector = [self selectorForAnimationWithIndex:animationIndex];
+    HLSAnimation *animation = [self performSelector:selector];
+    animation.tag = [NSString stringWithFormat:@"animation%d", animationIndex];
+    if (self.loopingSwitch.on) {
+        animation = [animation loopAnimation];
+    }
+    if (self.reverseSwitch.on) {
+        animation = [animation reverseAnimation];
+    }
+    if (! doubleeq([self duration], kAnimationIntrinsicDuration)) {
+        animation = [animation animationWithDuration:[self duration]];
+    }
+    animation.delegate = self;
+    animation.lockingUI = self.lockingUISwitch.on;
+    
+    self.animation = animation;
+    
+    // Reset the start time slider to a value which is always valid
+    self.startTimeSlider.value = 0.f;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
@@ -180,6 +238,7 @@
     HLSLoggerInfo(@"Animation %@ did stop, animated = %@, running = %@, cancelling = %@, terminating = %@", animation.tag,
                   HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
                   HLSStringFromBool(animation.terminating));
+    [self updateUserInterface];
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
@@ -204,6 +263,14 @@
     return [NSString stringWithFormat:@"%d", row + 1];
 }
 
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [self calculateAnimation];
+    [self updateUserInterface];
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)reset:(id)sender
@@ -211,37 +278,66 @@
 
 }
 
-- (IBAction)playForward:(id)sender
+- (IBAction)play:(id)sender
 {
-    [self playAnimation:[self animation]];
-}
-
-- (IBAction)playBackward:(id)sender
-{
-    [self playAnimation:[[self animation] reverseAnimation]];
+    if (self.animation.paused) {
+        [self.animation resume];
+    }
+    else {
+        [self.animation playWithStartTime:[self startTime]
+                              repeatCount:[self repeatCount]
+                                 animated:self.animatedSwitch.on];
+    }
+    [self updateUserInterface];
 }
 
 - (IBAction)pause:(id)sender
 {
-    if (! self.animation.paused) {
-        [self.animation pause];
-    }
-    else {
-        [self.animation resume];
-    }
+    [self.animation pause];
+    [self updateUserInterface];
 }
 
 - (IBAction)cancel:(id)sender
 {
     [self.animation cancel];
+    [self updateUserInterface];
 }
 
 - (IBAction)terminate:(id)sender
 {
     [self.animation terminate];
+    [self updateUserInterface];
+}
+
+- (IBAction)toggleReverse:(id)sender
+{
+    [self calculateAnimation];
+    [self updateUserInterface];
+}
+
+- (IBAction)toggleLooping:(id)sender
+{
+    [self calculateAnimation];
+    [self updateUserInterface];
+}
+
+- (IBAction)delayChanged:(id)sender
+{
+    [self updateUserInterface];
+}
+
+- (IBAction)durationChanged:(id)sender
+{
+    [self calculateAnimation];
+    [self updateUserInterface];
 }
 
 - (IBAction)repeatCountChanged:(id)sender
+{
+    [self updateUserInterface];
+}
+
+- (IBAction)startTimeChanged:(id)sender
 {
     [self updateUserInterface];
 }
@@ -254,43 +350,48 @@
     return NSSelectorFromString(selectorName);
 }
 
+- (NSTimeInterval)delay
+{
+    // Rounded values are better suited for tests, but this is no requirement
+    return roundf(self.delaySlider.value);
+}
+
+- (NSTimeInterval)duration
+{
+    if (floateq(self.durationSlider.value, self.durationSlider.maximumValue)) {
+        return kAnimationIntrinsicDuration;
+    }
+    else {
+        // Rounded values are better suited for tests, but this is no requirement
+        return roundf(self.durationSlider.value);
+    }
+}
+
+- (NSTimeInterval)totalDuration
+{
+    return [self repeatCount] * [self.animation duration] + [self delay];
+}
+
 - (NSUInteger)repeatCount
 {
     if (floateq(self.repeatCountSlider.value, self.repeatCountSlider.maximumValue)) {
         return NSUIntegerMax;
     }
     else {
+        // Rounded values are better suited for tests, but this is no requirement
         return roundf(self.repeatCountSlider.value);
     }
 }
 
-- (void)playAnimation:(HLSAnimation *)animation
+- (NSTimeInterval)startTime
 {
-    NSUInteger repeatCount = [self repeatCount];
-    if (self.overrideDurationSwitch.on) {
-        animation = [animation animationWithDuration:5.];
-    }
-    if (self.delayedSwitch.on) {
-        [animation playWithRepeatCount:repeatCount afterDelay:3.];
+    if (doubleeq(self.startTimeSlider.value, [self totalDuration])) {
+        return self.startTimeSlider.value;
     }
     else {
-        [animation playWithRepeatCount:repeatCount animated:self.animatedSwitch.on];
+        // Rounded values are better suited for tests, but this is no requirement
+        return roundf(self.startTimeSlider.value);
     }
-}
-
-- (HLSAnimation *)animation
-{    
-    SEL selector = [self selectorForAnimationWithIndex:[self.animationPickerView selectedRowInComponent:0] + 1];
-    HLSAnimation *animation = [self performSelector:selector];
-    if (self.loopingSwitch.on) {
-        animation = [animation loopAnimation];
-    }
-    if (self.overrideDurationSwitch) {
-        
-    }
-    animation.delegate = self;
-    animation.lockingUI = self.lockingUISwitch.on;
-    return animation;
 }
 
 - (HLSAnimation *)animation1
@@ -383,12 +484,6 @@
 
 - (HLSAnimation *)animation9
 {
-    // Empty animation. Also triggers willStart and didStop callbacks
-    return [HLSAnimation animationWithAnimationStep:nil];
-}
-
-- (HLSAnimation *)animation10
-{
     // Pulse animation (when repeated)
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 scaleWithXFactor:2.f yFactor:2.f];
@@ -414,7 +509,7 @@
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
 }
 
-- (HLSAnimation *)animation11
+- (HLSAnimation *)animation10
 {
     // Animate several views similarly at once, and with several transformations applied during each step
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
@@ -439,6 +534,12 @@
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
 }
 
+- (HLSAnimation *)animation11
+{
+    // Empty animation. Also triggers willStart and didStop callbacks
+    return [HLSAnimation animationWithAnimationStep:nil];
+}
+
 - (HLSAnimation *)animation12
 {
     // Identity animation step with some duration
@@ -460,6 +561,5 @@
 // Other tests:
 //   3) Mix layer & view animations
 //   4) Complex pulse with several views
-//   5) Cube & rotation: Setup initial step to position views, then rotate about PI
 
 @end

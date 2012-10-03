@@ -40,11 +40,12 @@
 "Custom cell created programmatically"="Custom cell created programmatically";
 "Custom cell from xib"="Custom cell from xib";
 "Day"="Day";
-"Delayed (3 sec.)"="Delayed (3 sec.)";
+"Delay"="Delay";
 "Demos"="Demos";
 "Details"="Details";
 "Dismiss"="Dismiss";
 "Done"="Done";
+"Duration"="Duration";
 "Dynamic localization"="Dynamic localization";
 "E-mail"="E-mail";
 "Enter a search criterium"="Enter a search criterium";
@@ -75,6 +76,7 @@
 "Last name"="Last name";
 "Lifecycle test"="Lifecycle test";
 "Line break mode"="Line break mode";
+"Looping"="Looping";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
 "Middle"="Middle";
 "Min font size"="Min font size";
@@ -97,8 +99,6 @@
 "Pause"="Pause";
 "Phones"="Phones";
 "Play"="Play";
-"Play forward"="Play forward";
-"Play backward"="Play backward";
 "Pop"="Pop";
 "Pop 3 VCs"="Pop 3 VCs";
 "Pop non-animated"="Pop non-animated";
@@ -115,11 +115,13 @@
 "Remaining time estimate"="Remaining time estimate";
 "Removal index: %d"="Removal index: %d";
 "Remove"="Remove";
+"Repeat count"="Repeat count";
 "Reset"="Reset";
 "Reset (animated)"="Reset (animated)";
 "Reset model fields"="Reset model fields";
 "Reset text fields"="Reset text fields";
 "Resume"="Resume";
+"Reverse"="Reverse";
 "Root view controller"="Root view controller";
 "Scrolling"="Scrolling";
 "Search bar"="Search bar";
@@ -132,6 +134,7 @@
 "Skinning"="Skinning";
 "Slideshow"="Slideshow";
 "Start"="Start";
+"Start time"="Start time";
 "State"="State";
 "Stop"="Stop";
 "Street"="Street";
