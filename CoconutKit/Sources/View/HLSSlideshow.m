@@ -133,7 +133,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)setEffect:(HLSSlideshowEffect)effect
 {
-    if (self.animation.running) {
+    if (self.running) {
         HLSLoggerWarn(@"The effect cannot be changed while the slideshow is running");
         return;
     }
@@ -221,7 +221,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)play
 {
-    if (self.animation.running) {
+    if (self.running) {
         HLSLoggerWarn(@"The slideshow is already running");
         return;
     }
@@ -240,12 +240,12 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)pause
 {
-    if (! self.animation.running) {
+    if (! self.running) {
         HLSLoggerDebug(@"The slideshow is not running");
         return;
     }
     
-    if (self.animation.paused) {
+    if (self.paused) {
         HLSLoggerDebug(@"The slideshow is already paused");
         return;
     }
@@ -255,7 +255,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)resume
 {
-    if (! self.animation.paused) {
+    if (! self.paused) {
         HLSLoggerDebug(@"The slideshow has not been paused");
         return;
     }
@@ -265,7 +265,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)stop
 {
-    if (! self.animation.running) {
+    if (! self.running) {
         HLSLoggerDebug(@"The slideshow is not running");
         return;
     }    
@@ -284,7 +284,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)skipToNextImage
 {
-    if (! self.animation.running) {
+    if (! self.running) {
         return;
     }
     
@@ -299,7 +299,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)skipToPreviousImage
 {
-    if (! self.animation.running) {
+    if (! self.running) {
         return;
     }
     
@@ -314,7 +314,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)skipToImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    if (! self.animation.running) {
+    if (! self.running) {
         return;
     }
     
@@ -339,7 +339,7 @@ static const NSInteger kSlideshowNoIndex = -1;
         return nil;
     }
     
-    if ([self.animation isRunning]) {
+    if (self.running) {
         UIImageView *currentImageView = [self.imageViews objectAtIndex:m_currentImageViewIndex];
         return [self imageNameOrPathForImageView:currentImageView];        
     }
