@@ -54,6 +54,7 @@
     self.objectKeys = nil;
     self.objectToObjectAnimationMap = nil;
     self.tag = nil;
+    self.userInfo = nil;
     self.delegate = nil;
     
     [super dealloc];
@@ -66,6 +67,8 @@
 @synthesize objectToObjectAnimationMap = m_objectToObjectAnimationMap;
 
 @synthesize tag = m_tag;
+
+@synthesize userInfo = m_userInfo;
 
 @synthesize duration = m_duration;
 
@@ -254,6 +257,7 @@
         [reverseAnimationStep addObjectAnimation:[objectAnimation reverseObjectAnimation] forObject:object];
     }
     reverseAnimationStep.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
+    reverseAnimationStep.userInfo = self.userInfo;
     reverseAnimationStep.duration = self.duration;
     return reverseAnimationStep;
 }
@@ -287,6 +291,7 @@
         [animationStepCopy addObjectAnimation:objectAnimationCopy forObject:object];
     }
     animationStepCopy.tag = self.tag;
+    animationStepCopy.userInfo = self.userInfo;
     animationStepCopy.duration = self.duration;
     return animationStepCopy;
 }

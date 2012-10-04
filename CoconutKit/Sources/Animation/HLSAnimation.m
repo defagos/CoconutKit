@@ -507,8 +507,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             }
         }
         else {
-            if ([self.delegate respondsToSelector:@selector(animation:didFinishStepWithTag:animated:)]) {
-                [self.delegate animation:self didFinishStepWithTag:animationStep.tag animated:animated];
+            if ([self.delegate respondsToSelector:@selector(animation:didFinishStep:animated:)]) {
+                [self.delegate animation:self didFinishStep:animationStep animated:animated];
             }
         }
     }

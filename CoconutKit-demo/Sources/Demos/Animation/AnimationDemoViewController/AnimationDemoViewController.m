@@ -226,9 +226,9 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
                   HLSStringFromBool(animation.terminating));
 }
 
-- (void)animation:(HLSAnimation *)animation didFinishStepWithTag:(NSString *)animationStepTag animated:(BOOL)animated
+- (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Step with tag %@ finished, animated = %@, running = %@, cancelling = %@, terminating = %@", animationStepTag,
+    HLSLoggerInfo(@"Step with tag %@ finished, animated = %@, running = %@, cancelling = %@, terminating = %@", animationStep.tag,
                   HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
                   HLSStringFromBool(animation.terminating));
 }

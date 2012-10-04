@@ -19,6 +19,7 @@
     NSMutableArray *m_objectKeys;
     NSMutableDictionary *m_objectToObjectAnimationMap;
     NSString *m_tag;
+    NSDictionary *m_userInfo;
     NSTimeInterval m_duration;
     id<HLSAnimationStepDelegate> m_delegate;
     BOOL m_running;
@@ -34,6 +35,11 @@
  * Optional tag to help identifying animation steps
  */
 @property (nonatomic, retain) NSString *tag;
+
+/**
+ * Dictionary which can be freely used to convey additional information
+ */
+@property (nonatomic, retain) NSDictionary *userInfo;
 
 /**
  * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced
