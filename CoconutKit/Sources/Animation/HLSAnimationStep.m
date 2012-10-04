@@ -247,6 +247,12 @@
     HLSMissingMethodImplementation();
 }
 
+- (NSTimeInterval)elapsedTime;
+{
+    HLSMissingMethodImplementation();
+    return 0.;
+}
+
 #pragma mark Reverse animation
 
 - (id)reverseAnimationStep

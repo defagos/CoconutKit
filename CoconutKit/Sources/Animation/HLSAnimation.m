@@ -30,6 +30,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
 @property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isPlaying) BOOL playing;
+@property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
@@ -46,6 +48,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 - (NSArray *)reverseAnimationSteps;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification;
+- (void)applicationWillEnterForeground:(NSNotification *)notification;
 
 @end
 
@@ -93,6 +96,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                                                  selector:@selector(applicationDidEnterBackground:)
                                                      name:UIApplicationDidEnterBackgroundNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillEnterForeground:)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -107,6 +114,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
     
     [self cancel];
@@ -139,6 +149,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @synthesize lockingUI = m_lockingUI;
 
 @synthesize running = m_running;
+
+@synthesize playing = m_playing;
+
+@synthesize started = m_started;
 
 - (BOOL)isPaused
 {
@@ -247,6 +261,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         }
                 
         self.running = YES;
+        self.playing = YES;
     
         // Lock the UI during the animation
         if (self.lockingUI) {
@@ -262,6 +277,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     m_repeatCount = repeatCount;
     m_currentRepeatCount = currentRepeatCount;
     m_remainingTimeBeforeStart = startTime;
+    m_elapsedTime = 0.;
     
     // Create a dummy animation step to simulate the delay. This way we avoid two potential issues:
     //   - if an animation step subclass is implemented using an animation framework which does not support delays,
@@ -319,6 +335,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
             }
+            
+            self.started = YES;
         }
         
         self.animationStepsEnumerator = nil;
@@ -334,11 +352,19 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                 [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
             }
             
+            self.started = NO;
+            self.playing = NO;
+            
             if (! self.cancelling) {
                 if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
                     [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
                 }
             }
+            
+            // End of the animation
+            self.running = NO;
+            self.cancelling = NO;
+            self.terminating = NO;
         }
                 
         // Repeat if needed. If an indefinitely running animation is interrupted, stop playing, otherwise play it
@@ -350,12 +376,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                  currentRepeatCount:m_currentRepeatCount
                          afterDelay:0.
                            animated:(self.cancelling || self.terminating) ? NO : m_animated];
-        }
-        // The end of the animation has been reached. Reset its status variables
-        else {
-            self.running = NO;
-            self.cancelling = NO;
-            self.terminating = NO;
         }
     }
 }
@@ -499,11 +519,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         // we get rid of subtle differences which might arise with animation steps only being able to notify
         // when they did start, rather than when they will
         if ([animationStep.tag isEqualToString:kDelayLayerAnimationTag]) {
-            // Note that if a delay has been set, this event is not fired until the delay period is over, as for UIView animation blocks)
+            // Note that if a delay has been set, this event is not fired until the delay period is over, as for UIView
+            // animation blocks)
             if (m_currentRepeatCount == 0) {
                 if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                     [self.delegate animationWillStart:self animated:animated];
                 }
+                
+                self.started = YES;
             }
         }
         else {
@@ -511,6 +534,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                 [self.delegate animation:self didFinishStep:animationStep animated:animated];
             }
         }
+    }
+    
+    if (finished) {
+        m_elapsedTime += [self.currentAnimationStep duration];
     }
     
     // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the
@@ -548,8 +575,15 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    // Safest strategy: Terminate all animations when the application enters background
-    [self terminate];
+    m_elapsedTime += [self.currentAnimationStep elapsedTime];
+    
+    [self cancel];
+    [[self reverseAnimation] playAnimated:NO];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self playWithStartTime:m_elapsedTime animated:YES];
 }
 
 #pragma mark Description

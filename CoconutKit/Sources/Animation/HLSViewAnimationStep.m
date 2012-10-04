@@ -57,6 +57,10 @@
 
 - (void)playAnimationWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
+    // UIView animation blocks create Core Animations internally, but those are immutable. We cannot therefore
+    // tweak those animations to implement start time support, and there is sadly no way to do it at the
+    // UIView block level
+    
     if (animated) {
         // This dummy view fixes an issue encountered with animation blocks: If no view is altered
         // during an animation block, the block duration is reduced to 0. To prevent this, we create
@@ -144,6 +148,14 @@
         [view.layer removeAllAnimationsRecursively];
     }
     [self.dummyView.layer removeAllAnimationsRecursively];
+}
+
+- (NSTimeInterval)elapsedTime
+{
+    // Since start time support cannot be implemented for UIView animations (see comment in -playAnimationWithStartTime:animated),
+    // we must not provide any elapsed time information. The elapsed time is namely used to start an animation again at a precise
+    // location, but this is not possible here
+    return 0.;
 }
 
 #pragma mark Reverse animation

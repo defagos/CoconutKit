@@ -11,7 +11,6 @@
     UIView *m_rectangleView1;
     UIView *m_rectangleView2;
     UIPickerView *m_animationPickerView;
-    UIButton *m_resetButton;
     UIButton *m_playButton;
     UIButton *m_pauseButton;
     UIButton *m_cancelButton;
@@ -34,7 +33,6 @@
 @property (nonatomic, retain) IBOutlet UIView *rectangleView1;
 @property (nonatomic, retain) IBOutlet UIView *rectangleView2;
 @property (nonatomic, retain) IBOutlet UIPickerView *animationPickerView;
-@property (nonatomic, retain) IBOutlet UIButton *resetButton;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 @property (nonatomic, retain) IBOutlet UIButton *pauseButton;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
@@ -52,7 +50,6 @@
 @property (nonatomic, retain) IBOutlet UISlider *startTimeSlider;
 @property (nonatomic, retain) IBOutlet UILabel *startTimeLabel;
 
-- (IBAction)reset:(id)sender;
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)cancel:(id)sender;

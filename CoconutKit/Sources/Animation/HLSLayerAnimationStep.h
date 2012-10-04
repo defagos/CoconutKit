@@ -27,6 +27,7 @@
     NSUInteger m_numberOfLayerAnimations;
     BOOL m_numberOfStartedLayerAnimations;
     NSUInteger m_numberOfFinishedLayerAnimations;
+    CFTimeInterval m_startTime;
 }
 
 /**

@@ -51,7 +51,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     self.rectangleView1 = nil;
     self.rectangleView2 = nil;
     self.animationPickerView = nil;
-    self.resetButton = nil;
     self.playButton = nil;
     self.pauseButton = nil;
     self.cancelButton = nil;
@@ -95,8 +94,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 @synthesize rectangleView2 = m_rectangleView2;
 
 @synthesize animationPickerView = m_animationPickerView;
-
-@synthesize resetButton = m_resetButton;
 
 @synthesize playButton = m_playButton;
 
@@ -179,7 +176,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     
     self.startTimeLabel.text = [NSString stringWithFormat:@"%.2f", self.startTimeSlider.value];
     
-    if (self.animation.running) {
+    if (self.animation.playing) {
         self.playButton.hidden = ! self.animation.paused;
         self.pauseButton.hidden = self.animation.paused;
         self.cancelButton.hidden = NO;
@@ -221,23 +218,23 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@ will start, animated = %@, running = %@, cancelling = %@, terminating = %@", animation.tag,
-                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
-                  HLSStringFromBool(animation.terminating));
+    HLSLoggerInfo(@"Animation %@ will start, animated = %@, running = %@, playing = %@, started = %@, cancelling = %@, terminating = %@",
+                  animation.tag, HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.playing),
+                  HLSStringFromBool(animation.started), HLSStringFromBool(animation.cancelling), HLSStringFromBool(animation.terminating));
 }
 
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Step with tag %@ finished, animated = %@, running = %@, cancelling = %@, terminating = %@", animationStep.tag,
-                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
-                  HLSStringFromBool(animation.terminating));
+    HLSLoggerInfo(@"Step with tag %@ finished, animated = %@, running = %@, playing = %@, started = %@, cancelling = %@, terminating = %@",
+                  animationStep.tag, HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.playing),
+                  HLSStringFromBool(animation.started), HLSStringFromBool(animation.cancelling), HLSStringFromBool(animation.terminating));
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    HLSLoggerInfo(@"Animation %@ did stop, animated = %@, running = %@, cancelling = %@, terminating = %@", animation.tag,
-                  HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.cancelling),
-                  HLSStringFromBool(animation.terminating));
+    HLSLoggerInfo(@"Animation %@ did stop, animated = %@, running = %@, playing = %@, started = %@, cancelling = %@, terminating = %@",
+                  animation.tag, HLSStringFromBool(animated), HLSStringFromBool(animation.running), HLSStringFromBool(animation.playing),
+                  HLSStringFromBool(animation.started), HLSStringFromBool(animation.cancelling), HLSStringFromBool(animation.terminating));
     [self updateUserInterface];
 }
 
@@ -272,11 +269,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 }
 
 #pragma mark Event callbacks
-
-- (IBAction)reset:(id)sender
-{
-
-}
 
 - (IBAction)play:(id)sender
 {

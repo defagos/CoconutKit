@@ -37,6 +37,12 @@
 - (void)terminate;
 
 /**
+ * The time elapsed since the animation step began animating (might be always 0 if the animation step does not support
+ * arbitrary start times)
+ */
+- (NSTimeInterval)elapsedTime;
+
+/**
  * The corresponding animation step to be played during the reverse animation
  */
 - (id)reverseAnimationStep;

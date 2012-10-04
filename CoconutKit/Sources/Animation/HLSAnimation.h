@@ -16,12 +16,13 @@
  * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective 
  * changes applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those 
  * changes together to play a complete animation. It also provides a convenient interface to generate the corresponding 
- * reverse animation, play an animation instantaneously, or even pause and resume animations.
+ * reverse or loop animations, play an animation instantaneously, repeat it, delay it, or even pause and resume 
+ * animations.
  *
  * An HLSAnimation can be made of view-based animation steps (HLSViewAnimationStep) or layer-based animation steps
  * (HLSLayerAnimationStep). You can mix both types of animation steps within the same animation, but you must
  * not alter a view involved both in a view and in a layer animation steps, otherwise the behavior is undefined. 
- * In general, you should most of the time use HLSLayerAnimationSteps, except if you want to animate a view whose 
+ * In general, you should use HLSLayerAnimationSteps most of the time, except if you want to animate a view whose 
  * contents must resize appropriately (in which case you must use an HLSViewAnimationStep)
  *
  * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
@@ -45,17 +46,17 @@
  *
  * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
  * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
- * also YES if the animation was run with animated = YES (even though the step was not animated, it is still
+ * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
  * part of an animation which was played animated).
  *
  * Designated initializer: initWithAnimationSteps:
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private
-    NSArray *m_animationSteps;
-    NSArray *m_animationStepCopies;                                // contains HLSAnimationStep objects
-    NSEnumerator *m_animationStepsEnumerator;                      // enumerator over steps
-    HLSAnimationStep *m_currentAnimationStep;
+    NSArray *m_animationSteps;                                      // a copy of the HLSAnimationSteps passed at initialization time
+    NSArray *m_animationStepCopies;                                 // another copy made temporarily during animation
+    NSEnumerator *m_animationStepsEnumerator;                       // enumerator over steps
+    HLSAnimationStep *m_currentAnimationStep;                       // the currently played animation step
     NSString *m_tag;
     NSDictionary *m_userInfo;
     UIView *m_dummyView;
@@ -64,7 +65,10 @@
     NSUInteger m_repeatCount;
     NSUInteger m_currentRepeatCount;
     NSTimeInterval m_remainingTimeBeforeStart;
+    NSTimeInterval m_elapsedTime;
     BOOL m_running;
+    BOOL m_playing;
+    BOOL m_started;
     BOOL m_cancelling;
     BOOL m_terminating;
     HLSZeroingWeakRef *m_delegateZeroingWeakRef;
@@ -79,8 +83,8 @@
 
 /**
  * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
- * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart: and 
- * animationDidStop: events when played)
+ * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart:animated: and
+ * animationDidStop:animated: events when played)
  *
  * A deep copy of the animation steps is performed to prevent further changes once they have been assigned to an
  * animation
@@ -127,8 +131,8 @@
  * Play the animation some number of times (repeatCount must be different from 0). If repeatCount = NSUIntegerMax,
  * the animation is repeated forever (in such cases, animated must be YES)
  *
- * The -animationWillStart:animated: and -animationDidStop:animated: delegate methods will be respectively
- * called once at the start and at the end of the animation
+ * The -animationWillStart:animated: and -animationDidStop:animated delegate methods will be respectively
+ * called once at the start and at the end of the whole animation
  */
 - (void)playWithRepeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
 
@@ -137,7 +141,7 @@
  * repeatCount = NSUIntegerMax, the animation is repeated forever
  *
  * The -animationWillStart:animated: and -animationDidStop:animated: delegate methods will be respectively
- * called once at the start and at the end of the animation
+ * called once at the start and at the end of the whole animation
  */
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
 
@@ -178,16 +182,31 @@
 - (void)terminate;
 
 /**
- * Return the total duration of the animation
+ * Return the total duration of the animation. This does not include delays or repeat count multiplicators which
+ * are not intrinsic properties of an animation, but rather specified when the animation is played
  */
 @property (nonatomic, readonly, assign) NSTimeInterval duration;
 
 /**
- * Return YES while the animation is running. An animation is running from the call to a play method until
- * it ends, and is considered running from the start even if a delay has been set or if the animation is
- * paused
+ * Return YES while the animation is running. An animation is considered running from the call to a play method until
+ * right after -animationDidStop:animated: has been called. Note that this property also returns YES even when the 
+ * animation has been paused or is being terminated / cancelled
  */
 @property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+
+/**
+ * Return YES while the animation is being played. An animation is considered being played from the time a play
+ * method has been called, and until right before -animationDidStop:animated: is called. Note that this property
+ * also returns YES even when the animation has been paused or is being terminated / cancelled
+ */
+@property (nonatomic, readonly, assign, getter=isPlaying) BOOL playing;
+
+/**
+ * Return YES while the animation is started. An animation is considered started right after -animationWillStart:animated:
+ * has been called, and until right before -animationDidStop:animated: is called. Note that this property also returns YES 
+ * even if the animation was played with animated = NO, has been paused, terminated or cancelled
+ */
+@property (nonatomic, readonly, assign, getter=isStarted) BOOL started;
 
 /**
  * Return YES iff the animation has been paused
@@ -195,12 +214,14 @@
 @property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
 
 /**
- * Return YES iff the animation is being cancelled
+ * Return YES iff the animation is being cancelled (i.e. from the time -cancel is called until after -animationDidStop:animated:
+ * has been called)
  */
 @property (nonatomic, readonly, assign, getter=isCancelling) BOOL cancelling;
 
 /**
- * Return YES iff the animation is being terminated
+ * Return YES iff the animation is being terminated (i.e. from the time -terminate is called until after -animationDidStop:animated:
+ * has been called)
  */
 @property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
 
@@ -232,18 +253,21 @@
 @optional
 
 /**
- * Called right before the first animation step is executed, after any delay which might have been set
+ * Called right before the first animation step is executed, but after any delay which might have been set
  */
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated;
 
 /**
- * Called right after the last animation step has been executed
+ * Called right after the last animation step has been executed. You can check -terminating or -cancelling
+ * to find if the animation ended normally
  */
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated;
 
 /**
- * Called when a step has been executed
+ * Called when a step has been executed. Since animation steps are deeply copied when assigned to an animation,
+ * you should use animation step pointers to identify animation steps when implementing this method. Use tags 
+ * instead
  */
-- (void)animation:(HLSAnimation *)animation didFinishStepWithTag:(NSString *)animationStepTag animated:(BOOL)animated;
+- (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end
