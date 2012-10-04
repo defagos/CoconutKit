@@ -153,14 +153,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (void)updateUserInterface
 {
-    self.delayLabel.text = [NSString stringWithFormat:@"%.0f", [self delay]];
+    self.delayLabel.text = [NSString stringWithFormat:@"%.2f", [self delay]];
     
     NSTimeInterval duration = [self duration];
     if (doubleeq(duration, kAnimationIntrinsicDuration)) {
         self.durationLabel.text = @"-";
     }
     else {
-        self.durationLabel.text = [NSString stringWithFormat:@"%.0f", [self duration]];
+        self.durationLabel.text = [NSString stringWithFormat:@"%.2f", [self duration]];
     }
     
     NSUInteger repeatCount = [self repeatCount];
@@ -276,9 +276,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         [self.animation resume];
     }
     else {
-        [self.animation playWithStartTime:[self startTime]
-                              repeatCount:[self repeatCount]
-                                 animated:self.animatedSwitch.on];
+        if (! doubleeq([self delay], 0.)) {
+            [self.animation playWithRepeatCount:[self repeatCount] afterDelay:[self delay]];
+        }
+        else {
+            [self.animation playWithStartTime:[self startTime]
+                                  repeatCount:[self repeatCount]
+                                     animated:self.animatedSwitch.on];
+        }
     }
     [self updateUserInterface];
 }
@@ -344,8 +349,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSTimeInterval)delay
 {
-    // Rounded values are better suited for tests, but this is no requirement
-    return roundf(self.delaySlider.value);
+    return self.delaySlider.value;
 }
 
 - (NSTimeInterval)duration
@@ -354,8 +358,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         return kAnimationIntrinsicDuration;
     }
     else {
-        // Rounded values are better suited for tests, but this is no requirement
-        return roundf(self.durationSlider.value);
+        return self.durationSlider.value;
     }
 }
 
@@ -370,8 +373,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         return NSUIntegerMax;
     }
     else {
-        // Rounded values are better suited for tests, but this is no requirement
-        return roundf(self.repeatCountSlider.value);
+        return self.repeatCountSlider.value;
     }
 }
 
@@ -381,8 +383,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         return self.startTimeSlider.value;
     }
     else {
-        // Rounded values are better suited for tests, but this is no requirement
-        return roundf(self.startTimeSlider.value);
+        return self.startTimeSlider.value;
     }
 }
 
