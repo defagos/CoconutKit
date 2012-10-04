@@ -147,7 +147,7 @@
     self.terminating = NO;
     
     // We do not perform the animation if the duration is 0 (this can lead to unnecessary flickering in animations)
-    BOOL actuallyAnimated = animated && ! doubleeq(self.duration, 0.f);
+    BOOL actuallyAnimated = animated && ! doubleeq(self.duration - startTime, 0.);
     
     // Retain the delegate during the time of the animation (this is based on the assumption
     // that animations implemented in subclasses do the same, and that they always call the
