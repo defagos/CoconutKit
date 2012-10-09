@@ -310,6 +310,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         [layer pauseAllAnimations];
     }
     [self.dummyView.layer pauseAllAnimations];
+    
+    m_pauseTime = CACurrentMediaTime();
 }
 
 - (void)resumeAnimation
@@ -318,6 +320,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         [layer resumeAllAnimations];
     }
     [self.dummyView.layer resumeAllAnimations];
+    
+    m_pauseTime = 0.;
 }
 
 - (BOOL)isAnimationPaused
@@ -338,7 +342,12 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (NSTimeInterval)elapsedTime
 {
-    return CACurrentMediaTime() - m_startTime;
+    NSTimeInterval pauseDuration = 0.;
+    if (! doubleeq(m_pauseTime, 0.)) {
+        pauseDuration = CACurrentMediaTime() - m_pauseTime;
+    }
+    
+    return CACurrentMediaTime() - m_startTime - pauseDuration;
 }
 
 #pragma mark Reverse animation

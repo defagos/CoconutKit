@@ -38,7 +38,7 @@
 
 /**
  * The time elapsed since the animation step began animating (might be always 0 if the animation step does not support
- * arbitrary start times)
+ * arbitrary start times). Must return the actual running time, removing pause durations if any
  */
 - (NSTimeInterval)elapsedTime;
 

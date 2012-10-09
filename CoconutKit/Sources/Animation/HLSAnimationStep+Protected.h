@@ -89,7 +89,7 @@
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support
- * arbitrary start times, return 0
+ * arbitrary start times, return 0. Must return the actual running time, removing pause durations if any
  *
  * The super method implementation must not be called (it raises an exception)
  */
