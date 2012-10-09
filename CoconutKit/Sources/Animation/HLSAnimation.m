@@ -207,14 +207,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     [self playWithStartTime:0. repeatCount:repeatCount currentRepeatCount:0 afterDelay:delay animated:YES];
 }
 
-- (void)playWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
+- (void)playWithStartTime:(NSTimeInterval)startTime
 {
-    [self playWithStartTime:startTime repeatCount:1 currentRepeatCount:0 afterDelay:0. animated:animated];
+    [self playWithStartTime:startTime repeatCount:1 currentRepeatCount:0 afterDelay:0. animated:YES];
 }
 
-- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount animated:(BOOL)animated
+- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount
 {
-    [self playWithStartTime:startTime repeatCount:repeatCount currentRepeatCount:0 afterDelay:0. animated:animated];
+    [self playWithStartTime:startTime repeatCount:repeatCount currentRepeatCount:0 afterDelay:0. animated:YES];
 }
 
 - (void)playWithStartTime:(NSTimeInterval)startTime
@@ -585,7 +585,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    [self playWithStartTime:m_elapsedTime animated:YES];
+    [self playWithStartTime:m_elapsedTime];
 }
 
 #pragma mark Description

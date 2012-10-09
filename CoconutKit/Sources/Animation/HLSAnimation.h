@@ -137,8 +137,8 @@
 - (void)playWithRepeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
 
 /**
- * Play the animation some number of times (repeatCount must be different from 0) after some delay. If 
- * repeatCount = NSUIntegerMax, the animation is repeated forever
+ * Play the animation some number of times (repeatCount must be different from 0) after some delay, with
+ * animated = YES. If repeatCount = NSUIntegerMax, the animation is repeated forever
  *
  * The -animationWillStart:animated: and -animationDidStop:animated: delegate methods will be respectively
  * called once at the start and at the end of the whole animation
@@ -146,17 +146,17 @@
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
 
 /**
- * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning). The delegate 
- * events which would have occurred prior to startTime are not received
+ * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning), with
+ * animated = YES. The delegate events which would have occurred prior to startTime are not received
  */
-- (void)playWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated;
+- (void)playWithStartTime:(NSTimeInterval)startTime;
 
 /**
  * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning) and repeating
- * it at the end. If repeatCount = NSUIntegerMax, the animation is repeated forever. The delegate events which
- * would have occurred prior to startTime are not received
+ * it at the end, with animated = YES. If repeatCount = NSUIntegerMax, the animation is repeated forever. The 
+ * delegate events which would have occurred prior to startTime are not received
  */
-- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount animated:(BOOL)animated;
+- (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount;
 
 /**
  * Pause an animation being played animated (does nothing if the animation is not running or not animated). This method

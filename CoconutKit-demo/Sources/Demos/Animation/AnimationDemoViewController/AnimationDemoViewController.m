@@ -56,15 +56,16 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     self.cancelButton = nil;
     self.terminateButton = nil;
     self.reverseSwitch = nil;
-    self.animatedSwitch = nil;
     self.lockingUISwitch = nil;
     self.loopingSwitch = nil;
+    self.animatedSwitch = nil;
+    self.repeatCountSlider = nil;
+    self.repeatCountLabel = nil;
+    self.animatedSettingsView = nil;
     self.delaySlider = nil;
     self.delayLabel = nil;
     self.durationSlider = nil;
     self.durationLabel = nil;
-    self.repeatCountSlider = nil;
-    self.repeatCountLabel = nil;
     self.startTimeSlider = nil;
     self.startTimeLabel = nil;
     self.animation = nil;
@@ -105,11 +106,17 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @synthesize reverseSwitch = m_reverseSwitch;
 
-@synthesize animatedSwitch = m_animatedSwitch;
-
 @synthesize lockingUISwitch = m_lockingUISwitch;
 
 @synthesize loopingSwitch = m_loopingSwitch;
+
+@synthesize animatedSwitch = m_animatedSwitch;
+
+@synthesize repeatCountSlider = m_repeatCountSlider;
+
+@synthesize repeatCountLabel = m_repeatCountLabel;
+
+@synthesize animatedSettingsView = m_animatedSettingsView;
 
 @synthesize delaySlider = m_delaySlider;
 
@@ -118,10 +125,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 @synthesize durationSlider = m_durationSlider;
 
 @synthesize durationLabel = m_durationLabel;
-
-@synthesize repeatCountSlider = m_repeatCountSlider;
-
-@synthesize repeatCountLabel = m_repeatCountLabel;
 
 @synthesize startTimeSlider = m_startTimeSlider;
 
@@ -153,6 +156,8 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (void)updateUserInterface
 {
+    self.animatedSettingsView.hidden = ! self.animatedSwitch.on;
+    
     self.delayLabel.text = [NSString stringWithFormat:@"%.2f", [self delay]];
     
     NSTimeInterval duration = [self duration];
@@ -279,10 +284,11 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         if (! doubleeq([self delay], 0.)) {
             [self.animation playWithRepeatCount:[self repeatCount] afterDelay:[self delay]];
         }
+        else if (! doubleeq([self startTime], 0.)) {
+            [self.animation playWithStartTime:[self startTime] repeatCount:[self repeatCount]];
+        }
         else {
-            [self.animation playWithStartTime:[self startTime]
-                                  repeatCount:[self repeatCount]
-                                     animated:self.animatedSwitch.on];
+            [self.animation playWithRepeatCount:[self repeatCount] animated:self.animatedSwitch.on];
         }
     }
     [self updateUserInterface];
@@ -315,6 +321,11 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (IBAction)toggleLooping:(id)sender
 {
     [self calculateAnimation];
+    [self updateUserInterface];
+}
+
+- (IBAction)toggleAnimated:(id)sender
+{
     [self updateUserInterface];
 }
 
