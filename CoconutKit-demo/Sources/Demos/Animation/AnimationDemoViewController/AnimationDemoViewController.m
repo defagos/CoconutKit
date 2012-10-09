@@ -373,7 +373,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         return NSUIntegerMax;
     }
     else {
-        return self.repeatCountSlider.value;
+        return roundf(self.repeatCountSlider.value);
     }
 }
 
