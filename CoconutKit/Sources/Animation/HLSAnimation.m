@@ -248,8 +248,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         startTime = 0.;
     }
     
-    if (doublegt(startTime, repeatCount * [self duration])) {
-        HLSLoggerWarn(@"The start time is larger than the total animation duration (including repeats). Set to the total duration");
+    NSTimeInterval totalDuration = repeatCount * [self duration];
+    if (doublegt(startTime, totalDuration)) {
+        HLSLoggerWarn(@"The start time %.2f is larger than the total animation duration %.2f (including repeats). Set to the total duration",
+                      startTime, totalDuration);
         startTime = repeatCount * [self duration];
     }
         
