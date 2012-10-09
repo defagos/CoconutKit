@@ -22,10 +22,12 @@
     UISlider *m_repeatCountSlider;
     UILabel *m_repeatCountLabel;
     UIView *m_animatedSettingsView;
-    UISlider *m_delaySlider;
-    UILabel *m_delayLabel;
     UISlider *m_durationSlider;
     UILabel *m_durationLabel;
+    UIView *m_delayBackgroundView;
+    UISlider *m_delaySlider;
+    UILabel *m_delayLabel;
+    UIView *m_startTimeBackgroundView;
     UISlider *m_startTimeSlider;
     UILabel *m_startTimeLabel;
     HLSAnimation *m_animation;
@@ -45,10 +47,12 @@
 @property (nonatomic, retain) IBOutlet UISlider *repeatCountSlider;
 @property (nonatomic, retain) IBOutlet UILabel *repeatCountLabel;
 @property (nonatomic, retain) IBOutlet UIView *animatedSettingsView;
-@property (nonatomic, retain) IBOutlet UISlider *delaySlider;
-@property (nonatomic, retain) IBOutlet UILabel *delayLabel;
 @property (nonatomic, retain) IBOutlet UISlider *durationSlider;
 @property (nonatomic, retain) IBOutlet UILabel *durationLabel;
+@property (nonatomic, retain) IBOutlet UIView *delayBackgroundView;
+@property (nonatomic, retain) IBOutlet UISlider *delaySlider;
+@property (nonatomic, retain) IBOutlet UILabel *delayLabel;
+@property (nonatomic, retain) IBOutlet UIView *startTimeBackgroundView;
 @property (nonatomic, retain) IBOutlet UISlider *startTimeSlider;
 @property (nonatomic, retain) IBOutlet UILabel *startTimeLabel;
 

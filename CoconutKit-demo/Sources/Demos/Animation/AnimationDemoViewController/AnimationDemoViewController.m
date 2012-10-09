@@ -62,10 +62,12 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     self.repeatCountSlider = nil;
     self.repeatCountLabel = nil;
     self.animatedSettingsView = nil;
-    self.delaySlider = nil;
-    self.delayLabel = nil;
     self.durationSlider = nil;
     self.durationLabel = nil;
+    self.delayBackgroundView = nil;
+    self.delaySlider = nil;
+    self.delayLabel = nil;
+    self.startTimeBackgroundView = nil;
     self.startTimeSlider = nil;
     self.startTimeLabel = nil;
     self.animation = nil;
@@ -118,13 +120,17 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @synthesize animatedSettingsView = m_animatedSettingsView;
 
+@synthesize durationSlider = m_durationSlider;
+
+@synthesize durationLabel = m_durationLabel;
+
+@synthesize delayBackgroundView = m_delayBackgroundView;
+
 @synthesize delaySlider = m_delaySlider;
 
 @synthesize delayLabel = m_delayLabel;
 
-@synthesize durationSlider = m_durationSlider;
-
-@synthesize durationLabel = m_durationLabel;
+@synthesize startTimeBackgroundView = m_startTimeBackgroundView;
 
 @synthesize startTimeSlider = m_startTimeSlider;
 
@@ -157,6 +163,8 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (void)updateUserInterface
 {
     self.animatedSettingsView.hidden = ! self.animatedSwitch.on;
+    self.delayBackgroundView.hidden = ! floateq(self.startTimeSlider.value, 0.f);
+    self.startTimeBackgroundView.hidden = ! floateq(self.delaySlider.value, 0.f);
     
     self.delayLabel.text = [NSString stringWithFormat:@"%.2f", [self delay]];
     
