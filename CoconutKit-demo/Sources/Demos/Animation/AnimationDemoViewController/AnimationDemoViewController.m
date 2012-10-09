@@ -209,11 +209,11 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     SEL selector = [self selectorForAnimationWithIndex:animationIndex];
     HLSAnimation *animation = [self performSelector:selector];
     animation.tag = [NSString stringWithFormat:@"animation%d", animationIndex];
-    if (self.loopingSwitch.on) {
-        animation = [animation loopAnimation];
-    }
     if (self.reverseSwitch.on) {
         animation = [animation reverseAnimation];
+    }
+    if (self.loopingSwitch.on) {
+        animation = [animation loopAnimation];
     }
     if (! doubleeq([self duration], kAnimationIntrinsicDuration)) {
         animation = [animation animationWithDuration:[self duration]];
@@ -311,13 +311,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (IBAction)cancel:(id)sender
 {
     [self.animation cancel];
+    
+    // We need to update the UI manually since the animation end callback is not called in such cases
     [self updateUserInterface];
 }
 
 - (IBAction)terminate:(id)sender
 {
     [self.animation terminate];
-    [self updateUserInterface];
 }
 
 - (IBAction)toggleReverse:(id)sender

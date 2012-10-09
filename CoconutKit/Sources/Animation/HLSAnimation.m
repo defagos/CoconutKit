@@ -347,7 +347,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         // behavior here
         ++m_currentRepeatCount;
         
-        if ((m_repeatCount == NSUIntegerMax && self.terminating)
+        if ((m_repeatCount == NSUIntegerMax && (self.terminating || self.cancelling))
                 || (m_repeatCount != NSUIntegerMax && m_currentRepeatCount == m_repeatCount)) {
             // Unlock the UI
             if (self.lockingUI) {
@@ -367,12 +367,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             self.running = NO;
             self.cancelling = NO;
             self.terminating = NO;
-        }
-                
-        // Repeat if needed. If an indefinitely running animation is interrupted, stop playing, otherwise play it
-        // until the end
-        if ((m_repeatCount == NSUIntegerMax && ! self.cancelling && ! self.terminating)
-                || (m_repeatCount != NSUIntegerMax && m_currentRepeatCount != m_repeatCount)) {
+        }    
+        // Repeat as needed
+        else {
             [self playWithStartTime:m_remainingTimeBeforeStart
                         repeatCount:m_repeatCount
                  currentRepeatCount:m_currentRepeatCount
