@@ -298,7 +298,9 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         // the application will crash). We therefore keep track of how animations are expected, but in a safe way
         // (+ 1 for the dummy view animation)
         m_numberOfLayerAnimations = [self.objects count] + 1;
-        m_startTime = CACurrentMediaTime() + startTime;
+        
+        // When a start time has been defined, the animation must look like it started earlier
+        m_startTime = CACurrentMediaTime() - startTime;
         
         [CATransaction commit];
     }
