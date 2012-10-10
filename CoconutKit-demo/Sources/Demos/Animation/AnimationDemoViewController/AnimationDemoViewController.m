@@ -39,6 +39,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (HLSAnimation *)animation13;
 - (HLSAnimation *)animation14;
 - (HLSAnimation *)animation15;
+- (HLSAnimation *)animation16;
 
 @end
 
@@ -619,11 +620,36 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (HLSAnimation *)animation13
 {
+    // Mixing UIView-based and Core Animation-based animation steps (NOT on the same views, otherwise the behavior
+    // is undefined)
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 scaleWithXFactor:2.f yFactor:2.f];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
+    
+    HLSLayerAnimation *layerAnimation21 = [HLSLayerAnimation animation];
+    [layerAnimation21 rotateByAngle:M_PI_4 aboutVectorWithX:0.f y:1.f z:0.f];
+    HLSLayerAnimationStep *animationStep2 = [HLSLayerAnimationStep animationStep];
+    animationStep2.tag = @"step2";
+    [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView2];
+    
+    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation animation];
+    [viewAnimation31 scaleWithXFactor:0.5f yFactor:1.f];
+    HLSViewAnimationStep *animationStep3 = [HLSViewAnimationStep animationStep];
+    animationStep3.tag = @"step3";
+    [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView1];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+}
+
+- (HLSAnimation *)animation14
+{
     // Empty animation. Also triggers willStart and didStop callbacks
     return [HLSAnimation animationWithAnimationStep:nil];
 }
 
-- (HLSAnimation *)animation14
+- (HLSAnimation *)animation15
 {
     // Identity animation step with some duration
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -632,7 +658,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     return [HLSAnimation animationWithAnimationStep:animationStep1];
 }
 
-- (HLSAnimation *)animation15
+- (HLSAnimation *)animation16
 {
     // Identity animation step with some duration
     HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
@@ -640,9 +666,5 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     animationStep1.duration = 2.;
     return [HLSAnimation animationWithAnimationStep:animationStep1];
 }
-
-// Other tests:
-//   3) Mix layer & view animations
-//   4) Complex pulse with several views
 
 @end
