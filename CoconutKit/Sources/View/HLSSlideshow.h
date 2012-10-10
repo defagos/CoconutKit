@@ -52,7 +52,6 @@ typedef enum {
     NSTimeInterval m_transitionDuration;
     BOOL m_random;
     id<HLSSlideshowDelegate> m_delegate;
-    BOOL m_enteredBackgroundWhileRunning;
 }
 
 /**

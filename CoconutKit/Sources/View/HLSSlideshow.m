@@ -54,9 +54,6 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex;
 
-- (void)applicationDidEnterBackground:(NSNotification *)notification;
-- (void)applicationWillEnterForeground:(NSNotification *)notification;
-
 @end
 
 @implementation HLSSlideshow
@@ -97,26 +94,10 @@ static const NSInteger kSlideshowNoIndex = -1;
     self.imageDuration = kSlideshowDefaultImageDuration;
     self.transitionDuration = kSlideshowDefaultTransitionDuration;
     self.random = NO;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidEnterBackground:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidEnterBackgroundNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationWillEnterForegroundNotification
-                                                  object:nil];
-    
     [self stop];
     
     self.imageViews = nil;
@@ -870,24 +851,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     if (! animation.terminating) {
         [self playNextAnimation];
-    }
-}
-
-#pragma mark Notification callbacks
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification
-{
-    if (self.running) {
-        [self stop];
-        m_enteredBackgroundWhileRunning = YES;
-    }
-}
-
-- (void)applicationWillEnterForeground:(NSNotification *)notification
-{
-    if (m_enteredBackgroundWhileRunning) {
-        m_enteredBackgroundWhileRunning = NO;
-        [self play];
     }
 }
 
