@@ -66,6 +66,7 @@
     NSUInteger m_currentRepeatCount;
     NSTimeInterval m_remainingTimeBeforeStart;
     NSTimeInterval m_elapsedTime;
+    BOOL m_pausedBeforeEnteringBackground;
     BOOL m_running;
     BOOL m_playing;
     BOOL m_started;

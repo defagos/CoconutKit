@@ -29,6 +29,7 @@
     NSUInteger m_numberOfFinishedLayerAnimations;
     CFTimeInterval m_startTime;
     CFTimeInterval m_pauseTime;
+    CFTimeInterval m_previousPauseDuration;
 }
 
 /**

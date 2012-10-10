@@ -575,6 +575,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
     m_elapsedTime += [self.currentAnimationStep elapsedTime];
+    m_pausedBeforeEnteringBackground = self.paused;
     
     [self cancel];
     [[self reverseAnimation] playAnimated:NO];
@@ -583,6 +584,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
     [self playWithStartTime:m_elapsedTime];
+    if (m_pausedBeforeEnteringBackground) {
+        [self pause];
+    }
 }
 
 #pragma mark Description
