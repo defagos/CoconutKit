@@ -38,6 +38,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (HLSAnimation *)animation12;
 - (HLSAnimation *)animation13;
 - (HLSAnimation *)animation14;
+- (HLSAnimation *)animation15;
 
 @end
 
@@ -498,7 +499,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (HLSAnimation *)animation9
 {
-    // Animation made of several steps
+    // Layer animation made of several steps
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:200.f y:0.f];
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -532,6 +533,40 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (HLSAnimation *)animation10
 {
+    // View animation made of several steps
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 translateByVectorWithX:200.f y:0.f];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
+    animationStep1.tag = @"step1";
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView1];
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.rectangleView2];
+    
+    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation animation];
+    [viewAnimation21 translateByVectorWithX:0.f y:50.f];
+    HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
+    animationStep2.tag = @"step2";
+    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView1];
+    [animationStep2 addViewAnimation:viewAnimation21 forView:self.rectangleView2];
+    
+    HLSViewAnimation *viewAnimation31 = [HLSViewAnimation animation];
+    [viewAnimation31 translateByVectorWithX:-200.f y:0.f];
+    HLSViewAnimationStep *animationStep3 = [HLSViewAnimationStep animationStep];
+    animationStep3.tag = @"step3";
+    [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView1];
+    [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView2];
+    
+    HLSViewAnimation *viewAnimation41 = [HLSViewAnimation animation];
+    [viewAnimation41 translateByVectorWithX:0.f y:-50.f];
+    HLSViewAnimationStep *animationStep4 = [HLSViewAnimationStep animationStep];
+    animationStep4.tag = @"step4";
+    [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView1];
+    [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView2];
+    
+    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, animationStep4, nil]];
+}
+
+- (HLSAnimation *)animation11
+{
     // Pulse animation (when repeated)
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 scaleWithXFactor:2.f yFactor:2.f];
@@ -557,7 +592,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
 }
 
-- (HLSAnimation *)animation11
+- (HLSAnimation *)animation12
 {
     // Animate several views similarly at once, and with several transformations applied during each step
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
@@ -582,13 +617,13 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
 }
 
-- (HLSAnimation *)animation12
+- (HLSAnimation *)animation13
 {
     // Empty animation. Also triggers willStart and didStop callbacks
     return [HLSAnimation animationWithAnimationStep:nil];
 }
 
-- (HLSAnimation *)animation13
+- (HLSAnimation *)animation14
 {
     // Identity animation step with some duration
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -597,7 +632,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     return [HLSAnimation animationWithAnimationStep:animationStep1];
 }
 
-- (HLSAnimation *)animation14
+- (HLSAnimation *)animation15
 {
     // Identity animation step with some duration
     HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
