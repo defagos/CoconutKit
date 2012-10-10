@@ -13,17 +13,24 @@
 @protocol HLSAnimationDelegate;
 
 /**
- * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective 
- * changes applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those 
- * changes together to play a complete animation. It also provides a convenient interface to generate the corresponding 
- * reverse or loop animations, play an animation instantaneously, repeat it, delay it, or even pause and resume 
- * animations.
+ * HLSAnimation is the simplest way to create and manage complex animations made of Core Animation-based layer
+ * and / or UIView-based animations. Usually, creating complex animations made of several steps requires the
+ * implementation of delegate methods, where animations are glued together. This makes your code ugly and difficult
+ * to maintain. Moreover, it is painful to create a reverse animation (e.g. when toggling a menu), to pause
+ * and cancel animations properly, or to play such animations instantaneously to restore some view state.
  *
- * An HLSAnimation can be made of view-based animation steps (HLSViewAnimationStep) or layer-based animation steps
- * (HLSLayerAnimationStep). You can mix both types of animation steps within the same animation, but you must
- * not alter a view involved both in a view and in a layer animation steps, otherwise the behavior is undefined. 
- * In general, you should use HLSLayerAnimationSteps most of the time, except if you want to animate a view whose 
- * contents must resize appropriately (in which case you must use an HLSViewAnimationStep)
+ * To eliminate all those issues and provide a convenient way to create animations for your applications, HLSAnimations
+ * are defined in a declarative way when instantiated, can be stored, replayed, reversed, cancelled, paused, played
+ * instantaneously, slowed down in the iOS simulator, and more. Implementing and tweaking animations has never been 
+ * easier and fun!
+ *
+ * An animation (HLSAnimation) is a collection of animation steps (HLSAnimationStep), each representing collective
+ * changes applied to sets of views or layers during some time interval. An HLSAnimation object simply chains those 
+ * changes together to play a complete animation. An HLSAnimation can be made of view-based animation steps 
+ * (HLSViewAnimationStep) or layer-based animation steps (HLSLayerAnimationStep). You can mix both types of animation 
+ * steps within the same animation, but you must not alter a view involved both in a view and in a layer animation steps, 
+ * otherwise the behavior is undefined. In general, you should use HLSLayerAnimationSteps most of the time, except if 
+ * you want to animate a view whose contents must resize appropriately (in which case you must use an HLSViewAnimationStep)
  *
  * Unlike UIView animation blocks, the animation delegate is not retained. This safety measure is not needed since
  * an HLSAnimation is automatically cancelled if it has a delegate and this delegate is deallocated. This eliminates
@@ -33,19 +40,23 @@
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
  * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
- * notification).
+ * notification on iOS 4 & 5. Views are not unloaded anymore since iOS 6)
  *
  * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
  * views). The reason is that fixing such issues in an automatic way would make reverse animations difficult to
  * generate, since HLSAnimation does not store any information about the original state of the views which are 
  * animated.
  *
- * Running animations (this includes animations which have been paused) are automatically terminated if the application
- * enters background. This avoids issues with saving / restoring animations, and avoids animations letting views
- * or layers in an inconsistent state.
+ * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
+ * were running before) when the application enters, respectively exits background. Note that this mechanism works 
+ * perfectly within the iOS simulator and on the device, though views will appear to "jump" on the device (not within
+ * the simulator). This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
+ * methods are still called correctly), but is a consequence of the application screenshot which is displayed when 
+ * the application exits background. The screenshot made when the application enters background namely reflects the
+ * non-animated view / layer state, which explains why the views seem to jump.
  *
  * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
- * in each of them, corresponding to how playAnimated: was called. For steps whose duration is 0, the boolean is
+ * in each of them, corresponding to how the play method was called. For steps whose duration is 0, the boolean is
  * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
  * part of an animation which was played animated).
  *
@@ -64,9 +75,9 @@
     BOOL m_animated;
     NSUInteger m_repeatCount;
     NSUInteger m_currentRepeatCount;
-    NSTimeInterval m_remainingTimeBeforeStart;
-    NSTimeInterval m_elapsedTime;
-    BOOL m_pausedBeforeEnteringBackground;
+    NSTimeInterval m_remainingTimeBeforeStart;                      // the time remaining before the start time is reached
+    NSTimeInterval m_elapsedTime;                                   // the currently elapsed time (does not include pauses)
+    BOOL m_pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
     BOOL m_running;
     BOOL m_playing;
     BOOL m_started;
@@ -83,9 +94,9 @@
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
 /**
- * Create a animation using HLSAnimationStep objects. Those steps will be chained together when the animation
- * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart:animated: and
- * animationDidStop:animated: events when played)
+ * Create an animation using HLSAnimationStep objects. Those steps will be chained together when the animation
+ * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart:animated: 
+ * and animationDidStop:animated: events when played)
  *
  * A deep copy of the animation steps is performed to prevent further changes once they have been assigned to an
  * animation
@@ -118,7 +129,7 @@
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 
- * animation does take place synchronously at the location of the call to -playAnimated:)
+ * animation does take place synchronously at the location of the call to this method)
  */
 - (void)playAnimated:(BOOL)animated;
 
@@ -131,6 +142,9 @@
 /**
  * Play the animation some number of times (repeatCount must be different from 0). If repeatCount = NSUIntegerMax,
  * the animation is repeated forever (in such cases, animated must be YES)
+ *
+ * If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the
+ * animation does take place synchronously at the location of the call to this method)
  *
  * The -animationWillStart:animated: and -animationDidStop:animated delegate methods will be respectively
  * called once at the start and at the end of the whole animation
@@ -147,21 +161,27 @@
 - (void)playWithRepeatCount:(NSUInteger)repeatCount afterDelay:(NSTimeInterval)delay;
 
 /**
- * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning), with
- * animated = YES. The delegate events which would have occurred prior to startTime are not received
+ * Play part of an animation, starting at startTime (if 0, the animation starts at the beginning), with
+ * animated = YES. The delegate events which would have been triggered prior to startTime are not received
+ *
+ * Remark: Core Animation steps support arbitrary start times. For UIView-based animation steps, the animation
+ *         starts at the end of the step which startTime belongs to
  */
 - (void)playWithStartTime:(NSTimeInterval)startTime;
 
 /**
- * Play parts of an animation, starting at startTime (if 0, the animation starts at the beginning) and repeating
+ * Play part of an animation, starting at startTime (if 0, the animation starts at the beginning) and repeating
  * it at the end, with animated = YES. If repeatCount = NSUIntegerMax, the animation is repeated forever. The 
  * delegate events which would have occurred prior to startTime are not received
+ *
+ * Remark: Core Animation steps support arbitrary start times. For UIView-based animation steps, the animation
+ *         starts at the end of the step which startTime belongs to
  */
 - (void)playWithStartTime:(NSTimeInterval)startTime repeatCount:(NSUInteger)repeatCount;
 
 /**
- * Pause an animation being played animated (does nothing if the animation is not running or not animated). This method
- * can also be used to pause an animation during its initial delay period
+ * Pause an animation being played animated (does nothing if the animation is not running or not animated). This 
+ * method can also be used to pause an animation during its initial delay period
  */
 - (void)pause;
 
@@ -266,8 +286,8 @@
 
 /**
  * Called when a step has been executed. Since animation steps are deeply copied when assigned to an animation,
- * you should use animation step pointers to identify animation steps when implementing this method. Use tags 
- * instead
+ * you must not use animation step pointers to identify animation steps when implementing this method. Use 
+ * animation step tags instead
  */
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 

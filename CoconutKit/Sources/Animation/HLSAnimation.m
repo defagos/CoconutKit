@@ -289,7 +289,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     //     layer reaches its end state before the animation has actually started). In such cases, properties should
     //     be set in the -animationDidStart: animation callback. This works well in most cases, but it is too late
     //     (after all, the start delegate method is called 'didStart', not 'willStart') if the animated layers are
-    //     heavy, e.g. with may transparent sublayers, creating an ugly flickering in animations. By creating delays
+    //     heavy, e.g. with many transparent sublayers, creating an ugly flickering in animations. By creating delays
     //     with a dummy layer animation step, this problem vanishes
     HLSLayerAnimationStep *delayAnimationStep = [HLSLayerAnimationStep animationStep];
     delayAnimationStep.tag = kDelayLayerAnimationTag;

@@ -20,7 +20,7 @@
  * A layer animation animates layer transforms, not frames. This choice was made because frame animation would 
  * restrict transforms to affine transforms, for which HLSViewAnimation can be used instead (provided the layer 
  * belongs to a view, of course). Moreover, unlike views, layers do not layout their sublayers automatically based 
- * on autoresizing properties in iOS (the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] methods
+ * on autoresizing properties on iOS (the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] methods
  * have to be implemented to respond to frame changes)
  *
  * Since the layer transform is animated, none of the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] 
@@ -103,7 +103,7 @@
 
 /**
  * Opacity increment or decrement to be applied during the layer animation. Any value between 1.f and -1.f can be provided,
- * though you should ensure that opacity never reaches a value outside [0, 1] during an animation.
+ * though you should ensure that opacity never reaches a value outside [0, 1] during the course of an animation.
  */
 - (void)addToOpacity:(CGFloat)opacityIncrement;
 

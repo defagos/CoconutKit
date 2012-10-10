@@ -90,8 +90,8 @@
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support
- * arbitrary start times, return self.duration. Must return the actual running time, removing pause durations 
- * if any
+ * arbitrary start times, return self.duration. This method must return the actual running time, removing 
+ * pauses (if any)
  *
  * The super method implementation must not be called (it raises an exception)
  */

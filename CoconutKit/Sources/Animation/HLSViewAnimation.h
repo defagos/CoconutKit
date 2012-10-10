@@ -53,7 +53,7 @@
 
 /**
  * Alpha increment or decrement to be applied during the view animation. Any value between 1.f and -1.f can be provided, 
- * though you should ensure that alpha never reaches a value outside [0, 1] during an animation.
+ * though you should ensure that alpha never reaches a value outside [0, 1] during the course of an animation.
  */
 - (void)addToAlpha:(CGFloat)alphaIncrement;
 
