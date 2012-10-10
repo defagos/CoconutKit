@@ -9,20 +9,26 @@
 #import "HLSContainerGroupView.h"
 
 #import "HLSAssert.h"
-#import "HLSContainerStackView.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
+
+@interface HLSContainerGroupView ()
+
+@property (nonatomic, retain) UIView *savedFrontContentView;
+@property (nonatomic, retain) UIView *savedBackContentView;
+
+@end
 
 @implementation HLSContainerGroupView
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame frontView:(UIView *)frontView
+- (id)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
     if ((self = [super initWithFrame:frame])) {
-        if (! frontView) {
-            HLSLoggerError(@"A front view is mandatory");
+        if (! frontContentView) {
+            HLSLoggerError(@"A front content view is mandatory");
             [self release];
             return nil;
         }
@@ -30,9 +36,16 @@
         self.backgroundColor = [UIColor clearColor];
         self.autoresizingMask = HLSViewAutoresizingAll;
         
-        // Remark: If the view was previously added to another superview, it is removed
-        //         while kept alive. No need to call -removeFromSuperview and no need
-        //         for a retain-autorelease. See UIView documentation
+        // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on frontContentView relies
+        // on its initial alpha
+        UIView *frontView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        frontView.backgroundColor = [UIColor clearColor];
+        frontView.autoresizingMask = HLSViewAutoresizingAll;
+
+        // Remark: If frontContentView was previously added to another superview, it is removed while kept alive. No need
+        //         to call -removeFromSuperview and no need for a retain-autorelease. See UIView documentation
+        [frontView addSubview:frontContentView];
+        
         [self addSubview:frontView];
     }
     return self;
@@ -44,35 +57,65 @@
     return nil;
 }
 
+- (void)dealloc
+{
+    self.savedFrontContentView = nil;
+    self.savedBackContentView = nil;
+
+    [super dealloc];
+}
+
 #pragma mark Accessors and mutators
+
+@synthesize savedFrontContentView = m_savedFrontContentView;
+
+@synthesize savedBackContentView = m_savedBackContentView;
+
+- (UIView *)frontContentView
+{
+    return [self.frontView.subviews firstObject];
+}
 
 - (UIView *)frontView
 {
     return [self.subviews lastObject];
 }
 
-- (HLSContainerGroupView *)backGroupView
+- (UIView *)backContentView
+{
+    return [self.backView.subviews firstObject];
+}
+
+- (void)setBackContentView:(UIView *)backContentView
+{
+    UIView *backView = self.backView;
+    if (! backContentView) {
+        [backView removeFromSuperview];
+        return;
+    }
+    
+    if (! backView) {
+        // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on backContentView relies
+        // on its initial alpha
+        backView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        backView.backgroundColor = [UIColor clearColor];
+        backView.autoresizingMask = HLSViewAutoresizingAll;
+        [self insertSubview:backView atIndex:0];
+    }
+    
+    // Remark: If backContentView was previously added to another superview, it is removed while kept alive. No need to
+    //         call -removeFromSuperview and no need for a retain-autorelease. See UIView documentation
+    [backView addSubview:backContentView];
+}
+
+- (UIView *)backView
 {
     if ([self.subviews count] == 2) {
         return [self.subviews firstObject];
     }
     else {
         return nil;
-    }
-}
-
-- (void)setBackGroupView:(HLSContainerGroupView *)backGroupView
-{
-    if ([self.subviews count] == 2) {
-        [[self.subviews objectAtIndex:0] removeFromSuperview];
-    }
-    
-    if (backGroupView) {
-        // Remark: If the view was previously added to another superview, it is removed
-        //         while kept alive. No need to call -removeFromSuperview and no need
-        //         for a retain-autorelease. See UIView documentation
-        [self insertSubview:backGroupView atIndex:0];
-    }
+    }    
 }
 
 @end

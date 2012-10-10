@@ -11,6 +11,7 @@
 #import "NSArray+HLSExtensions.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSViewAnimationStep.h"
 #import "NSBundle+HLSExtensions.h"
 
 static const CGFloat kSearchBarStandardHeight = 44.f;
@@ -228,7 +229,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
             self.searchButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - kSearchBarStandardHeight,
                                                  roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
                                                  kSearchBarStandardHeight,
-                                                 kSearchBarStandardHeight);    
+                                                 kSearchBarStandardHeight);
         }
         
         if (m_expanded) {
@@ -262,13 +263,13 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 // therefore need a way to generate the animation easily when we need it
 - (HLSAnimation *)expansionAnimation
 {
-    HLSAnimationStep *animationStep1 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *animationStep1 = [HLSViewAnimationStep animationStep];
     animationStep1.duration = 0.15;
-    HLSViewAnimationStep *viewAnimationStep11 = [HLSViewAnimationStep viewAnimationStep];
-    viewAnimationStep11.alphaVariation = 1.f;
-    [animationStep1 addViewAnimationStep:viewAnimationStep11 forView:self.searchBar];
+    HLSViewAnimation *viewAnimation11 = [HLSViewAnimation animation];
+    [viewAnimation11 addToAlpha:1.f];
+    [animationStep1 addViewAnimation:viewAnimation11 forView:self.searchBar];
     
-    HLSAnimationStep *animationStep2 = [HLSAnimationStep animationStep];
+    HLSViewAnimationStep *animationStep2 = [HLSViewAnimationStep animationStep];
     animationStep2.duration = 0.25;
     
     CGRect collapsedFrame;
@@ -285,28 +286,27 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
                                     kSearchBarStandardHeight);    
     }
     
-    HLSViewAnimationStep *viewAnimationStep21 = [HLSViewAnimationStep viewAnimationStep];
-    [viewAnimationStep21 transformFromRect:collapsedFrame
-                                    toRect:CGRectMake(0.f, 
-                                                      roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
-                                                      CGRectGetWidth(self.bounds), 
-                                                      kSearchBarStandardHeight)];
-    [animationStep2 addViewAnimationStep:viewAnimationStep21 forView:self.searchBar];
+    HLSViewAnimation *viewAnimation21 = [HLSViewAnimation animation];
+    [viewAnimation21 transformFromRect:collapsedFrame
+                                toRect:CGRectMake(0.f,
+                                                  roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
+                                                  CGRectGetWidth(self.bounds),
+                                                  kSearchBarStandardHeight)];
+    [animationStep2 addViewAnimation:viewAnimation21 forView:self.searchBar];
     
     if (self.alignment == HLSExpandingSearchBarAlignmentRight) {
-        HLSViewAnimationStep *viewAnimationStep22 = [HLSViewAnimationStep viewAnimationStep];
-        [viewAnimationStep22 transformFromRect:collapsedFrame
-                                        toRect:CGRectMake(0.f, 
-                                                          roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
-                                                          kSearchBarStandardHeight, 
-                                                          kSearchBarStandardHeight)];
-        [animationStep2 addViewAnimationStep:viewAnimationStep22 forView:self.searchButton];        
+        HLSViewAnimation *viewAnimation22 = [HLSViewAnimation animation];
+        [viewAnimation22 transformFromRect:collapsedFrame
+                                    toRect:CGRectMake(0.f,
+                                                      roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
+                                                      kSearchBarStandardHeight,
+                                                      kSearchBarStandardHeight)];
+        [animationStep2 addViewAnimation:viewAnimation22 forView:self.searchButton];
     }
     
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
     animation.tag = @"searchBar";
     animation.lockingUI = YES;
-    animation.resizeViews = YES;
     animation.delegate = self;
     
     return animation;

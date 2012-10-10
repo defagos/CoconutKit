@@ -7,31 +7,52 @@
 //
 
 /**
- * A private class to manage group views in an HLSContainerStackView. Such a view has at most two subviews:
- *   - a mandatory front view displaying the content at a given level within the container stack view
- *     hierarchy
- *   - an optional group view display behind it
- * Refer to HLSContainerStackView for more information
+ * A private class to manage group views in an HLSContainerStackView. Such a view has at most two subviews,
+ * one for the front content (mandatory and which cannot be changed), and another one for the back content 
+ * (optional, and which can be changed).
+ *
+ * Each of those views is wrapped into a transparent wrapper view with alpha = 1.f, which must be used
+ * for animations. This way animations can safely assume they animate views with alpha = 1.f. If we had 
+ * animated the content views directly, which can have arbitrary alpha values, this would not have been 
+ * possible. Moreover, this additional wrapping yields smoother animations (I cannot explain why, though.
+ * Probably blending can be performed more efficiently)
  *
  * Designated initializer: initWithFrame:frontView:
  */
-@interface HLSContainerGroupView : UIView
+@interface HLSContainerGroupView : UIView {
+@private
+    UIView *m_savedFrontContentView;
+    UIView *m_savedBackContentView;
+}
 
 /**
- * Create a group view with the given view (mandatory) displayed at the front. If the view was previously
- * added to another view it is transferred to the group view
+ * Create a group view with the given content view (mandatory) displayed at the front. If the view was 
+ * previously added to another view it is transferred to the group view
  */
-- (id)initWithFrame:(CGRect)frame frontView:(UIView *)frontView;
+- (id)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView;
 
 /**
- * The front view
+ * The content view which has been inserted at the front into the group view. Do not use this view for 
+ * animation purposes, use -frontView instead
+ */
+@property (nonatomic, readonly, retain) UIView *frontContentView;
+
+/**
+ * The front content view wrapper. If you want to animate the group view, animate this view (which has 
+ * a guaranteed initial alpha of 1.f)
  */
 @property (nonatomic, readonly, retain) UIView *frontView;
 
 /**
- * Set the group view displayed behind the front view. If this view was already added to a superview,
- * it is transferred to the group view
+ * Set the content view displayed in the back. If this view was already added to a superview, it is 
+ * transferred to the group view
  */
-@property (nonatomic, retain) HLSContainerGroupView *backGroupView;
+@property (nonatomic, retain) UIView *backContentView;
+
+/**
+ * The back content view wrapper. If you want to animate the group view, animate this view (which has
+ * a guaranteed initial alpha of 1.f)
+ */
+@property (nonatomic, readonly, retain) UIView *backView;
 
 @end

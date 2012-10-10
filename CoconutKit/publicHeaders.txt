@@ -1,3 +1,5 @@
+CALayer+HLSExtensions.h
+CAMediaTimingFunction+HLSExtensions.h
 HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
@@ -11,11 +13,14 @@ HLSExpandingSearchBar.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLabel.h
+HLSLayerAnimation.h
+HLSLayerAnimationStep.h
 HLSLogger.h
 HLSManagedObjectCopying.h
 HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
+HLSObjectAnimation.h
 HLSOptionalFeatures.h
 HLSPlaceholderInsetSegue.h
 HLSPlaceholderViewController.h
@@ -39,6 +44,7 @@ HLSValidators.h
 HLSValue1TableViewCell.h
 HLSValue2TableViewCell.h
 HLSVector.h
+HLSViewAnimation.h
 HLSViewAnimationStep.h
 HLSViewController.h
 HLSWebViewController.h

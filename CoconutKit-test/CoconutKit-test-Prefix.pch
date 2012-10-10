@@ -11,6 +11,8 @@
     #import <MessageUI/MessageUI.h>
 
     // CoconutKit library public header files
+    #import "CALayer+HLSExtensions.h"
+    #import "CAMediaTimingFunction+HLSExtensions.h"
     #import "HLSActionSheet.h"
     #import "HLSAnimation.h"
     #import "HLSAnimationStep.h"
@@ -24,11 +26,14 @@
     #import "HLSFloat.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLabel.h"
+    #import "HLSLayerAnimation.h"
+    #import "HLSLayerAnimationStep.h"
     #import "HLSLogger.h"
     #import "HLSManagedObjectCopying.h"
     #import "HLSModelManager.h"
     #import "HLSNibView.h"
     #import "HLSNotifications.h"
+    #import "HLSObjectAnimation.h"
     #import "HLSOptionalFeatures.h"
     #import "HLSPlaceholderInsetSegue.h"
     #import "HLSPlaceholderViewController.h"
@@ -52,6 +57,7 @@
     #import "HLSValue1TableViewCell.h"
     #import "HLSValue2TableViewCell.h"
     #import "HLSVector.h"
+    #import "HLSViewAnimation.h"
     #import "HLSViewAnimationStep.h"
     #import "HLSViewController.h"
     #import "HLSWebViewController.h"

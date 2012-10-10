@@ -29,6 +29,8 @@ static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL)
 static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -181,7 +183,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 {
     // Sanitize input
     if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
-        HLSLoggerWarn(@"Duration must be non-negative or the default duration %f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
+        HLSLoggerWarn(@"Duration must be non-negative or the default duration %.2f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
         m_duration = kAnimationTransitionDefaultDuration;
     }
     else {
@@ -206,8 +208,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (UIView *)viewIfLoaded
 {
-    // Return the wrapper view
-    return [self.viewController viewIfLoaded].superview;
+    return [self.viewController viewIfLoaded];
 }
 
 #pragma mark View management
@@ -284,15 +285,8 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Match the inserted view frame so that it fills the container bounds
     viewControllerView.frame = stackView.bounds;
-    
-    // Wrap into a transparent view with alpha = 1.f. This ensures that no animation relies on the initial value of the view
-    // controller's view alpha
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:stackView.bounds] autorelease];
-    wrapperView.backgroundColor = [UIColor clearColor];
-    wrapperView.autoresizingMask = HLSViewAutoresizingAll;
-    [wrapperView addSubview:viewControllerView];
-    
-    [stackView insertContentView:wrapperView atIndex:index];
+        
+    [stackView insertContentView:viewControllerView atIndex:index];
     
     self.containerStackView = stackView;
 }
@@ -419,11 +413,21 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     //        replaced with the new -removeFromParentViewController. To test whether we are running iOS 4, we therefore must test whether
     //        -removeFromParentViewController exists
     
-    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any)
+    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
+    //        implementations for isMovingTo/FromParentViewController
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
         s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
+        class_addMethod(self,
+                        @selector(isMovingToParentViewController),
+                        (IMP)iOS4_UIViewController__isMovingToParentViewController_Imp,
+                        "c@:");
+        class_addMethod(self,
+                        @selector(isMovingFromParentViewController),
+                        (IMP)iOS4_UIViewController__isMovingFromParentViewController_Imp,
+                        "c@:");
+        
     }
     // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
     //        when inserted into a custom container
@@ -471,4 +475,30 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
+}
+
+static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    UIViewController *currentViewController = self;
+    while (currentViewController) {
+        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
+        if (containerContent.movingToParentViewController) {
+            return YES;
+        }
+        currentViewController = currentViewController.parentViewController;
+    }
+    return NO;
+}
+
+static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
+{
+    UIViewController *currentViewController = self;
+    while (currentViewController) {
+        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
+        if (containerContent.movingFromParentViewController) {
+            return YES;
+        }
+        currentViewController = currentViewController.parentViewController;
+    }
+    return NO;
 }

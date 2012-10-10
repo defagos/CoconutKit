@@ -48,6 +48,12 @@
  * controller must happen through the HLSContainerContent interface to guarantee proper status tracking and to 
  * ensure that the view is created when it is really needed, not earlier.
  *
+ * For convenience, the -[UIViewController isMovingTo/FromParentViewController] methods have also been made available 
+ * on iOS 4, for CoconutKit containers only (not for UIKit ones). These methods simply follow the parent view controller
+ * hierarchy until they find a view controller which is being moved to / from a CoconutKit container, in which case they 
+ * return YES. If they reach the top of the view controller hierarchy without having found such a view controller, they 
+ * return NO.
+ *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
  *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
@@ -128,12 +134,6 @@
  * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 
  * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
  * -insertAsSubviewIntoContainerStackView:index
- *
- * Remark: This does not return the view controller's view, but a view wrapper having alpha = 1.f. This
- *         view wrapper is introduced so that animations can safely assume they are animating views with
- *         initial alpha = 1.f, which could not be guaranteed if the view controller's view was directly
- *         animated (view controller's views can have an arbitrary alpha). This relieves us from extra
- *         bookkeeping work
  */
 - (UIView *)viewIfLoaded;
 

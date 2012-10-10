@@ -64,7 +64,7 @@
                                    animated:NO];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController
-                        withTransitionClass:[HLSTransitionFlipHorizontal class]
+                        withTransitionClass:[HLSTransitionFlipHorizontally class]
                                    animated:NO];
         
         [self setInsetViewController:stackController atIndex:0];
@@ -154,11 +154,11 @@
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [stackController insertViewController:viewController
+    [stackController insertViewController:pushedViewController
                                   atIndex:(NSUInteger)roundf(self.indexSlider.value)
                       withTransitionClass:NSClassFromString(transitionName)
                                  duration:kAnimationTransitionDefaultDuration
-                                 animated:YES];
+                                 animated:self.animatedSwitch.on];
     
     [self updateIndexInfo];
 }

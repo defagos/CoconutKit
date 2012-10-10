@@ -57,9 +57,15 @@ typedef enum {
 - (UIView *)viewIfLoaded;
 
 /**
- * Return YES iff the view is visible (appearing, appeared, or disappearing)
+ * Return YES iff the view is displayed and visible (appearing, appeared, or disappearing)
  */
 - (BOOL)isViewVisible;
+
+/**
+ * Return YES iff the view has been displayed (it might be invisible, though). Note that the frame of a view is reliable 
+ * only when it is displayed
+ */
+- (BOOL)isViewDisplayed;
 
 /**
  * Original size of the view right after creation (i.e. right after xib deserialization or construction by loadView)

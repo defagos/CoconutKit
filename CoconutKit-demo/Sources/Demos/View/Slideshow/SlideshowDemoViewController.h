@@ -14,6 +14,8 @@
     UIButton *m_previousButton;
     UIButton *m_nextButton;
     UIButton *m_playButton;
+    UIButton *m_pauseButton;
+    UIButton *m_resumeButton;
     UIButton *m_stopButton;
     UIButton *m_skipToSpecificButton;
     UISwitch *m_randomSwitch;
@@ -30,6 +32,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *previousButton;
 @property (nonatomic, retain) IBOutlet UIButton *nextButton;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UIButton *pauseButton;
+@property (nonatomic, retain) IBOutlet UIButton *resumeButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property (nonatomic, retain) IBOutlet UIButton *skipToSpecificButton;
 @property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
@@ -43,6 +47,8 @@
 - (IBAction)previousImage:(id)sender;
 
 - (IBAction)play:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)resume:(id)sender;
 - (IBAction)stop:(id)sender;
 
 - (IBAction)skipToSpecificImage:(id)sender;

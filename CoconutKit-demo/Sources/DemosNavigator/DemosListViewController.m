@@ -14,11 +14,11 @@
 #import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "LabelDemoViewController.h"
-#import "MultipleViewsAnimationDemoViewController.h"
+#import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
-#import "SingleViewAnimationDemoViewController.h"
+#import "AnimationDemoViewController.h"
 #import "SkinningDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
@@ -43,8 +43,8 @@ typedef enum {
 // Demos for animation
 typedef enum {
     AnimationDemoIndexEnumBegin = 0,
-    AnimationDemoIndexSingleView = AnimationDemoIndexEnumBegin,
-    AnimationDemoIndexMultipleViews,
+    AnimationDemoIndexAnimation = AnimationDemoIndexEnumBegin,
+    AnimationDemoIndexLayerPropertiesTest,
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
@@ -233,13 +233,13 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    cell.textLabel.text = NSLocalizedString(@"Single view animation", @"Single view animation");
+                case AnimationDemoIndexAnimation: {
+                    cell.textLabel.text = NSLocalizedString(@"Animations", @"Animations");
                     break;
                 }
-                
-                case AnimationDemoIndexMultipleViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
+                    
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    cell.textLabel.text = NSLocalizedString(@"Layer properties test", @"Layer properties test");
                     break;
                 }
                     
@@ -416,13 +416,13 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
+                case AnimationDemoIndexAnimation: {
+                    demoViewController = [[[AnimationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
-                case AnimationDemoIndexMultipleViews: {
-                    demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    demoViewController = [[[LayerPropertiesTestViewController alloc] init] autorelease];
                     break;
                 }
                     

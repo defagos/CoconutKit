@@ -22,4 +22,9 @@
  */
 @property (nonatomic, retain) NSDictionary *userInfo_hls;
 
+/**
+ * Return the view and all its subview flattened as a UIImage
+ */
+- (UIImage *)flattenedImage;
+
 @end

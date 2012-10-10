@@ -2,66 +2,43 @@
 //  HLSViewAnimationStep.h
 //  CoconutKit
 //
-//  Created by Samuel Défago on 2/8/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Created by Samuel Défago on 8/10/10.
+//  Copyright 2010 Hortis. All rights reserved.
 //
 
-#import "HLSVector.h"
+#import "HLSAnimationStep.h"
+#import "HLSViewAnimation.h"
 
 /**
- * A view animation step describes the changes applied to a view during an animation step (HLSAnimationStep). An 
- * animation step is the combination of several view animation steps (HLSViewAnimationStep) applied to a set of views, and 
- * represent the collective set of changes applied to these views during some time interval. An animation (HLSAnimation) 
- * is then simply a collection of animation steps.
+ * A view animation step (HLSViewAnimationStep) is the combination of several view animations (HLSViewAnimation) applied
+ * to a set of views, and represent the collective set of changes applied to them during some time interval. An animation
+ * (HLSAnimation) is then simply a collection of animation steps, either view-based (HLSViewAnimationStep) or layer-based 
+ * (HLSLayerAnimationStep).
  *
- * Designated initializer: init (create a view animation step with default settings)
- * NSCopying behavior: Deep copy
+ * To create a view animation step, simply instantiate it using the +animationStep class method, then add view animations
+ * to it, and set its duration and curve
+ *
+ * Designated initializer: init (create an animation step with default settings)
  */
-@interface HLSViewAnimationStep : NSObject <NSCopying> {
+@interface HLSViewAnimationStep : HLSAnimationStep {
 @private
-    HLSVector4 m_rotationParameters;
-    HLSVector3 m_scaleParameters;
-    HLSVector3 m_translationParameters;
-    CGFloat m_alphaVariation;
+    UIViewAnimationCurve m_curve;
+    UIView *m_dummyView;
 }
 
 /**
- * Identity view animation step
- */
-+ (HLSViewAnimationStep *)viewAnimationStep;
-
-/**
- * Geometric transform parameters to be applied during the view animation step. The resulting transform (which you can 
- * obtained by calling -transform) applies the rotation, the scale and finally the translation
+ * Setting a view animation for a view. Only one view animation can be defined at most for a view within an
+ * animation step. The view is not retained
  *
- * Remark: Since you cannot control the order of the rotation, scaling and translation transforms, some animations
- *         are not supported (e.g. translating, then rotating). The currently supported animations should cover most
- *         needs, though
+ * The view animation is deeply copied to prevent further changes once assigned to a step
  */
-- (void)rotateByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
-- (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
-- (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
+- (void)addViewAnimation:(HLSViewAnimation *)viewAnimation forView:(UIView *)view;
 
 /**
- * Convenience method to calculate the view animation step parameters needed to transform a rect into another one
+ * The animation curve to use
+ *
+ * Default value is UIViewAnimationCurveEaseInOut
  */
-- (void)transformFromRect:(CGRect)fromRect toRect:(CGRect)toRect;
-
-/**
- * Alpha increment or decrement to be applied during the view animation step. Any value between 1.f and -1.f can be provided, 
- * though you should ensure that alphas never add to a value outside [0, 1] during an animation.
- * Default value is 0.f
- */
-@property (nonatomic, assign) CGFloat alphaVariation;
-
-/**
- * The transform corresponding to the transform parameters associated with the animation steps
- */
-@property (nonatomic, readonly, assign) CATransform3D transform;
-
-/**
- * Return the inverse view animation step
- */
-- (HLSViewAnimationStep *)reverseViewAnimationStep;
+@property (nonatomic, assign) UIViewAnimationCurve curve;
 
 @end

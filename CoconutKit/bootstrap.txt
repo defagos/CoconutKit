@@ -1,3 +1,5 @@
+CALayer+HLSExtensions.m
+CAMediaTimingFunction+HLSExtensions.m
 HLSAssert.m
 HLSCursor.m
 HLSExpandingSearchBar.m

@@ -2,57 +2,34 @@
 //  HLSAnimationStep.h
 //  CoconutKit
 //
-//  Created by Samuel Défago on 8/10/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Created by Samuel Défago on 8/21/12.
+//  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSViewAnimationStep.h"
+// Forward declarations
+@protocol HLSAnimationStepDelegate;
 
 /**
- * An animation step (HLSAnimationStep) is the combination of several view animation steps (HLSViewAnimationStep) applied
- * to a set of views, and represent the collective set of changes applied to these views during some time interval. An 
- * animation (HLSAnimation) is then simply a collection of animation steps.
+ * Abstract base class for animation steps. Do not instantiate directly
  *
- * Designated initializer: init (create an animation step with default settings)
- * NSCopying behavior: Deep copy
+ * Designated initializer: init
  */
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private
-    NSMutableArray *m_viewKeys;                             // track in which order views were added to the animation step
-    NSMutableDictionary *m_viewToViewAnimationStepMap;      // map a UIView objects to the view animation step to be applied on it
-    NSTimeInterval m_duration;
-    UIViewAnimationCurve m_curve;
+    NSMutableArray *m_objectKeys;
+    NSMutableDictionary *m_objectToObjectAnimationMap;
     NSString *m_tag;
+    NSDictionary *m_userInfo;
+    NSTimeInterval m_duration;
+    id<HLSAnimationStepDelegate> m_delegate;
+    BOOL m_running;
+    BOOL m_terminating;
 }
 
 /**
- * Convenience constructor for an animation step with default settings and no view to animate
+ * Convenience constructor for an animation step with default settings and nothing to animate
  */
-+ (HLSAnimationStep *)animationStep;
-
-/**
- * Setting a view animation step for a view. Only one animation step can be defined at most for a view during
- * an animation step. The view is not retained. The order in which view animation steps are added is important
- * if your animation changes their z-ordering (refer to the HLSAnimation bringToFront property documentation)
- */
-- (void)addViewAnimationStep:(HLSViewAnimationStep *)viewAnimationStep forView:(UIView *)view;
-
-/**
- * All views changed by the animation step, returned in the order they were added to the animation step object
- */
-- (NSArray *)views;
-
-/**
- * Return the view animation step defined for a view, or nil if none is found
- */
-- (HLSViewAnimationStep *)viewAnimationStepForView:(UIView *)view;
-
-/**
- * Animation step settings. Unlike UIView animation blocks, the duration of an animation step is never reduced
- * to 0 if no view is altered by the animation block
- */
-@property (nonatomic, assign) NSTimeInterval duration;                      // default: 0.2
-@property (nonatomic, assign) UIViewAnimationCurve curve;                   // default: UIViewAnimationCurveEaseInOut
++ (id)animationStep;
 
 /**
  * Optional tag to help identifying animation steps
@@ -60,15 +37,16 @@
 @property (nonatomic, retain) NSString *tag;
 
 /**
- * Return the total alpha variation applied to a given view during the animation step. If the view does not belong to the 
- * views involved in the animation, the method returns 0.f
+ * Dictionary which can be freely used to convey additional information
  */
-- (CGFloat)alphaVariationForView:(UIView *)view;
+@property (nonatomic, retain) NSDictionary *userInfo;
 
 /**
- * Return the inverse animation step. If a tag has been defined, the reverse animation step is automatically assigned
- * the same tag, but with an additional "reverse_" prefix (if a tag has not been filled, the reverse tag is nil)
+ * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced
+ * to 0 if no view is altered by the animation step
+ *
+ * Default value is 0.2
  */
-- (HLSAnimationStep *)reverseAnimationStep;
+@property (nonatomic, assign) NSTimeInterval duration;
 
 @end
