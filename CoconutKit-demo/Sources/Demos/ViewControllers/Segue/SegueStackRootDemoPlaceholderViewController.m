@@ -51,7 +51,7 @@
             stackPushSegue.transitionClass = [HLSTransitionPushFromBottom class];
         }
         else if ([stackPushSegue.identifier isEqualToString:@"coverFromTop"]) {
-            stackPushSegue.transitionClass = [HLSTransitionCoverFromBottom class];
+            stackPushSegue.transitionClass = [HLSTransitionCoverFromTop class];
         }
     }
 }
