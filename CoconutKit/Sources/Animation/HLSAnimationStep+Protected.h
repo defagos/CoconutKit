@@ -44,7 +44,8 @@
 /**
  * This method must be implemented by subclasses to create and play the animation step (animated or not),
  * starting from startTime (0 if the full animation must be played). If your animation step subclass
- * cannot implement arbitrary start times, be sure that you override -elapsedTime to return 0
+ * cannot implement arbitrary start times, be sure that you override -elapsedTime to return self.duration
+ * so that the animation is skipped instead of being resumed in the middle
  *
  * If animated = YES, the animation is expected to take place asynchronously, otherwise synchronously
  *
@@ -89,7 +90,8 @@
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support
- * arbitrary start times, return 0. Must return the actual running time, removing pause durations if any
+ * arbitrary start times, return self.duration. Must return the actual running time, removing pause durations 
+ * if any
  *
  * The super method implementation must not be called (it raises an exception)
  */

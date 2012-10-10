@@ -155,7 +155,7 @@
     // Since start time support cannot be implemented for UIView animations (see comment in -playAnimationWithStartTime:animated),
     // we must not provide any elapsed time information. The elapsed time is namely used to start an animation again at a precise
     // location, but this is not possible here
-    return 0.;
+    return self.duration;
 }
 
 #pragma mark Reverse animation
