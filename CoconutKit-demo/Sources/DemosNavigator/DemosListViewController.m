@@ -239,7 +239,7 @@ typedef enum {
                 }
                     
                 case AnimationDemoIndexLayerPropertiesTest: {
-                    cell.textLabel.text = NSLocalizedString(@"Layer properties test", @"Layer properties test");
+                    cell.textLabel.text = NSLocalizedString(@"Layer properties test (not a CoconutKit component)", @"Layer properties test (not a CoconutKit component)");
                     break;
                 }
                     

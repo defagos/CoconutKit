@@ -74,6 +74,8 @@
 "Landscape only"="Landscape only";
 "Language"="Language";
 "Last name"="Last name";
+"Layer properties test"="Layer properties test";
+"Layer properties test (not a CoconutKit component)"="Layer properties test (not a CoconutKit component)";
 "Lifecycle test"="Lifecycle test";
 "Line break mode"="Line break mode";
 "Looping"="Looping";

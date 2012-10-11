@@ -73,6 +73,8 @@
 "Landscape only"="Uniquement paysage";
 "Language"="Langue";
 "Last name"="Nom";
+"Layer properties test"="Test des propriétés d'un layer";
+"Layer properties test (not a CoconutKit component)"="Test des propriétés d'un layer (pas un composant CoconutKit)";
 "Lifecycle test"="Test du cycle de vie";
 "Line break mode"="Mode saut de ligne";
 "Looping"="Boucle";
