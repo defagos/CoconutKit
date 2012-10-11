@@ -589,19 +589,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
-            // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
-            // on the animation style, most notably when scaling is involved), we negate each animation here, with the old
-            // frame. We replay the animation just afterwards in willAnimateRotationToInterfaceOrientation:duration:,
-            // where the frame is the final one obtained after rotation. This trick is invisible to the user and avoids
-            // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
-            // non-integral frames, and thus to blurry views)
-            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
-            HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                          disappearingView:groupView.backView
-                                                                                                    inView:groupView
-                                                                                                  duration:0.] reverseAnimation];
-            [reverseAnimation playAnimated:NO];
-            
+            if ([containerContent viewIfLoaded]) {
+                // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
+                // on the animation style, most notably when scaling is involved), we negate each animation here, with the old
+                // frame. We replay the animation just afterwards in willAnimateRotationToInterfaceOrientation:duration:,
+                // where the frame is the final one obtained after rotation. This trick is invisible to the user and avoids
+                // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
+                // non-integral frames, and thus to blurry views)
+                HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
+                                                                                              disappearingView:groupView.backView
+                                                                                                        inView:groupView
+                                                                                                      duration:0.] reverseAnimation];
+                [reverseAnimation playAnimated:NO];
+            }
+                
             // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
             // events. This matches UINavigationController behavior, for which only the top view controller receives
             // such events
@@ -622,14 +624,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
-            // See comment in -willRotateToInterfaceOrientation:duration:
-            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
-            HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                  disappearingView:groupView.backView
-                                                                                            inView:groupView
-                                                                                          duration:0.];
-            [animation playAnimated:NO];
-            
+            if ([containerContent viewIfLoaded]) {
+                // See comment in -willRotateToInterfaceOrientation:duration:
+                HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
+                                                                                      disappearingView:groupView.backView
+                                                                                                inView:groupView
+                                                                                              duration:0.];
+                [animation playAnimated:NO];
+            }
+                
             // Same remark as in -willRotateToInterfaceOrientation:duration:
             [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
             
