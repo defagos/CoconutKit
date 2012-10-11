@@ -78,6 +78,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     [self addSubview:self.searchBar];
     
     // Remove the search bar background
+    self.searchBar.backgroundColor = [UIColor clearColor];
     UIView *backgroundView = [self.searchBar.subviews firstObject];
     backgroundView.alpha = 0.f;
     
