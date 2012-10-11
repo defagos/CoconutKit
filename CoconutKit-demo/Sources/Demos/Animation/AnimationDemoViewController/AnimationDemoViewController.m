@@ -387,7 +387,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSTimeInterval)totalDuration
 {
-    return [self repeatCount] * [self.animation duration] + [self delay];
+    // Special case of infinitely repeating animations: Must limit the range so that the slider can still be used
+    // conveniently
+    if ([self repeatCount] == NSUIntegerMax) {
+        return 5. * [self.animation duration];
+    }
+    else {
+        return [self repeatCount] * [self.animation duration] + [self delay];
+    }
 }
 
 - (NSUInteger)repeatCount
