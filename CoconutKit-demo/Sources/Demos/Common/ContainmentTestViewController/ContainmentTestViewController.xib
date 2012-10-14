@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">1498</string>
@@ -97,10 +97,10 @@
 					<object class="IBUIButton" id="376708509">
 						<reference key="NSNextResponder" ref="1015820844"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{118, 349}, {164, 37}}</string>
+						<string key="NSFrame">{{81, 349}, {239, 37}}</string>
 						<reference key="NSSuperview" ref="1015820844"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="969201762"/>
+						<reference key="NSNextKeyView" ref="181274872"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -113,19 +113,42 @@
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor">
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="916873713">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="990193532">
 							<int key="type">2</int>
 							<double key="pointSize">15</double>
 						</object>
-						<object class="NSFont" key="IBUIFont">
+						<object class="NSFont" key="IBUIFont" id="977065601">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
+					</object>
+					<object class="IBUIButton" id="181274872">
+						<reference key="NSNextResponder" ref="1015820844"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{81, 399}, {239, 37}}</string>
+						<reference key="NSSuperview" ref="1015820844"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="969201762"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">LS/Test responder chain</string>
+						<reference key="IBUIHighlightedTitleColor" ref="976262292"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="916873713"/>
+						<reference key="IBUIFontDescription" ref="990193532"/>
+						<reference key="IBUIFont" ref="977065601"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{400, 500}</string>
@@ -161,6 +184,15 @@
 					</object>
 					<int key="connectionID">9</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">testResponderChain:</string>
+						<reference key="source" ref="181274872"/>
+						<reference key="destination" ref="371349661"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">12</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -189,6 +221,7 @@
 							<reference ref="969201762"/>
 							<reference ref="77395395"/>
 							<reference ref="376708509"/>
+							<reference ref="181274872"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -212,6 +245,11 @@
 						<reference key="object" ref="376708509"/>
 						<reference key="parent" ref="1015820844"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="181274872"/>
+						<reference key="parent" ref="1015820844"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -219,6 +257,7 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -229,7 +268,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">9</int>
+			<int key="maxID">12</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -253,11 +292,174 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">HLSPlaceholderViewController</string>
+					<string key="superclassName">HLSViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">delegate</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">delegate</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">delegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toManyOutletInfosByName">
+						<string key="NS.key.0">placeholderViews</string>
+						<object class="IBToManyOutletInfo" key="NS.object.0">
+							<string key="name">placeholderViews</string>
+							<string key="candidateClassName">UIView</string>
+							<string key="collectionClassName">NSArray</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HLSPlaceholderViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">HLSViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HLSViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">StackDemoViewController</string>
+					<string key="superclassName">HLSPlaceholderViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="displayContainmentTest:">id</string>
+						<string key="displayFixedSize:">id</string>
+						<string key="displayHeavy:">id</string>
+						<string key="displayLandscapeOnly:">id</string>
+						<string key="displayLifeCycleTest:">id</string>
+						<string key="displayPortraitOnly:">id</string>
+						<string key="displayStretchable:">id</string>
+						<string key="displayTransparent:">id</string>
+						<string key="hideWithModal:">id</string>
+						<string key="indexChanged:">id</string>
+						<string key="navigateBackNonAnimated:">id</string>
+						<string key="navigateForwardNonAnimated:">id</string>
+						<string key="pop:">id</string>
+						<string key="popThree:">id</string>
+						<string key="popToRoot:">id</string>
+						<string key="testInModal:">id</string>
+						<string key="testResponderChain:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="displayContainmentTest:">
+							<string key="name">displayContainmentTest:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayFixedSize:">
+							<string key="name">displayFixedSize:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayHeavy:">
+							<string key="name">displayHeavy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayLandscapeOnly:">
+							<string key="name">displayLandscapeOnly:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayLifeCycleTest:">
+							<string key="name">displayLifeCycleTest:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayPortraitOnly:">
+							<string key="name">displayPortraitOnly:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayStretchable:">
+							<string key="name">displayStretchable:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="displayTransparent:">
+							<string key="name">displayTransparent:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideWithModal:">
+							<string key="name">hideWithModal:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="indexChanged:">
+							<string key="name">indexChanged:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="navigateBackNonAnimated:">
+							<string key="name">navigateBackNonAnimated:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="navigateForwardNonAnimated:">
+							<string key="name">navigateForwardNonAnimated:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="pop:">
+							<string key="name">pop:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="popThree:">
+							<string key="name">popThree:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="popToRoot:">
+							<string key="name">popToRoot:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="testInModal:">
+							<string key="name">testInModal:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="testResponderChain:">
+							<string key="name">testResponderChain:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="animatedSwitch">UISwitch</string>
+						<string key="inNavigationControllerSwitch">UISwitch</string>
+						<string key="inTabBarControllerSwitch">UISwitch</string>
+						<string key="indexSlider">UISlider</string>
+						<string key="insertionIndexLabel">UILabel</string>
+						<string key="removalIndexLabel">UILabel</string>
+						<string key="transitionPickerView">UIPickerView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="animatedSwitch">
+							<string key="name">animatedSwitch</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="inNavigationControllerSwitch">
+							<string key="name">inNavigationControllerSwitch</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="inTabBarControllerSwitch">
+							<string key="name">inTabBarControllerSwitch</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="indexSlider">
+							<string key="name">indexSlider</string>
+							<string key="candidateClassName">UISlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="insertionIndexLabel">
+							<string key="name">insertionIndexLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="removalIndexLabel">
+							<string key="name">removalIndexLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="transitionPickerView">
+							<string key="name">transitionPickerView</string>
+							<string key="candidateClassName">UIPickerView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/StackDemoViewController.h</string>
 					</object>
 				</object>
 			</array>

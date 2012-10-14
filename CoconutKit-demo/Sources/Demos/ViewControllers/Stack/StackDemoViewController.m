@@ -359,6 +359,16 @@
     [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
 }
 
+- (IBAction)testResponderChain:(id)sender
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
 - (IBAction)indexChanged:(id)sender
 {
     self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", @"Insertion index: %d"),

@@ -42,6 +42,8 @@
 - (IBAction)popToRoot:(id)sender;
 - (IBAction)popThree:(id)sender;
 
+- (IBAction)testResponderChain:(id)sender;
+
 - (IBAction)indexChanged:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;
