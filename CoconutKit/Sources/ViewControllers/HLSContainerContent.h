@@ -138,8 +138,8 @@
 - (UIView *)viewIfLoaded;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewDidUnload message to the underlying view 
- * controller
+ * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload 
+ * messages to the underlying view controller (this mechanism is deprecated starting with iOS 6)
  */
 - (void)releaseViews;
 
@@ -149,7 +149,8 @@
  * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
- *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
+ *         and viewWill/DidUnload (which container implementations must not call directly; use the releaseViews method 
+ *         above)
  */
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
 - (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;

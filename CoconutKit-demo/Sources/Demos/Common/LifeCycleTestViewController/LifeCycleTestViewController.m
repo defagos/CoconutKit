@@ -49,6 +49,13 @@
     HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
 }
 
+- (void)viewWillUnload
+{
+    [super viewWillUnload];
+    
+    HLSLoggerInfo(@"Called for object %@", self);
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];

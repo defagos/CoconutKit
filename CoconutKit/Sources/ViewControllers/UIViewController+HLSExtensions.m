@@ -26,6 +26,7 @@ static void (*s_UIViewController__viewWillAppear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidAppear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewWillDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidDisappear_Imp)(id, SEL, BOOL) = NULL;
+static void (*s_UIViewController__viewWillUnload_Imp)(id, SEL) = NULL;
 static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
@@ -36,6 +37,7 @@ static void swizzled_UIViewController__viewWillAppear_Imp(UIViewController *self
 static void swizzled_UIViewController__viewDidAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
 static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
 static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd);
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
 
 @interface UIViewController (HLSExtensionsPrivate)
@@ -62,6 +64,9 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (void)unloadViews
 {
     if ([self isViewLoaded]) {
+        // The -viewWillUnload method is available starting with iOS 5 and deprecated starting with iOS 6, but was
+        // in fact already privately implemented in iOS 4 (with empty implementation). Does not harm to call it here
+        [self viewWillUnload];
         self.view = nil;
         [self viewDidUnload];        
     }
@@ -140,9 +145,14 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
             break;
         }
             
-        case HLSViewControllerLifeCyclePhaseViewDidUnload: {
+        case HLSViewControllerLifeCyclePhaseViewWillUnload: {
             return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidLoad
                 || currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidDisappear;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewDidUnload: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewWillUnload;
             break;
         }
             
@@ -183,8 +193,11 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
                                                                                            @selector(viewDidDisappear:),
                                                                                            (IMP)swizzled_UIViewController__viewDidDisappear_Imp);
-    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                  @selector(viewDidUnload), 
+    s_UIViewController__viewWillUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                   @selector(viewWillUnload),
+                                                                                   (IMP)swizzled_UIViewController__viewWillUnload_Imp);
+    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                  @selector(viewDidUnload),
                                                                                   (IMP)swizzled_UIViewController__viewDidUnload_Imp);
 }
 
@@ -312,6 +325,19 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
+}
+
+static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd)
+{
+    (s_UIViewController__viewWillUnload_Imp)(self, _cmd);
+    
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillUnload]) {
+        HLSLoggerWarn(@"The viewWillUnload method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillUnload] has not been called by class %@ or one of its parents", self, [self class]);
+    }
+    
+    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillUnload];
 }
 
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd)

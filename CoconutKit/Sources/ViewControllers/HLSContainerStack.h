@@ -94,7 +94,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *
- * Remark: No methods have been provided for -viewDidLoad and -viewDidUnload (call -releaseViews instead)
+ * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload (call -releaseViews instead)
  *
  * Even though the new iOS 5 containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
@@ -274,9 +274,9 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewDidUnload message to the corresponding view
- * controllers. You should call this method from your -viewDidUnload method (better: Have your container view controller
- * subclass HLSViewController, and call this method from its -releaseView method)
+ * Release all view and view-related resources. This also forwards the -viewWill/DidUnload messages to the corresponding 
+ * view controllers. You should call this method from your -viewDidUnload method (better: Have your container view 
+ * controller subclass HLSViewController, and call this method from its -releaseView method)
  */
 - (void)releaseViews;
 

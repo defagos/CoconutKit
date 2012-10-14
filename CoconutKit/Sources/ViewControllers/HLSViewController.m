@@ -89,6 +89,7 @@
     [super setView:view];
     if (! view) {
         HLSLoggerDebug(@"View controller %@: view set to nil", self);
+        [self releaseViews];
     }
 }
 
@@ -125,10 +126,15 @@
     HLSLoggerDebug(@"View controller %@: view did disappear, animated = %@", self, HLSStringFromBool(animated));
 }
 
+- (void)viewWillUnload
+{
+    [super viewWillUnload];
+    HLSLoggerDebug(@"View controller %@: view will unload", self);
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [self releaseViews];
     HLSLoggerDebug(@"View controller %@: view did unload", self);
 }
 

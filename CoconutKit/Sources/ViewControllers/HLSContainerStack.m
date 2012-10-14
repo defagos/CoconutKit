@@ -103,11 +103,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if (m_containerView == containerView) {
         return;
     }
-        
-    if ([self.containerViewController isViewDisplayed]) {
-        HLSLoggerError(@"Cannot change the container view when the container view controller is being displayed");
-        return;
-    }
     
     if (containerView) {
         if (! [self.containerViewController isViewLoaded]) {

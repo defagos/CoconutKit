@@ -15,6 +15,7 @@ typedef enum {
     HLSViewControllerLifeCyclePhaseViewDidAppear,
     HLSViewControllerLifeCyclePhaseViewWillDisappear,
     HLSViewControllerLifeCyclePhaseViewDidDisappear,
+    HLSViewControllerLifeCyclePhaseViewWillUnload,
     HLSViewControllerLifeCyclePhaseViewDidUnload,
     HLSViewControllerLifeCyclePhaseEnumEnd,
     HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
@@ -39,7 +40,7 @@ typedef enum {
 @interface UIViewController (HLSExtensions)
 
 /**
- * Convenience method to set the view controller to nil and forward viewDidUnload to its view controller
+ * Convenience method to set the view controller to nil and forward -viewWill/DidUnload events correctly
  * Not meant to be overridden
  * Note: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
  */

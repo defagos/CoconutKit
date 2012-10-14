@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSValidable.h"
+#import "UIViewController+HLSExtensions.h"
 
 static const NSInteger kWizardViewControllerNoPage = -1;
 
@@ -70,10 +71,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     
     // Release views in cache (since view controllers are retained by a wizard view controller object, so are their view)
     for (UIViewController *viewController in self.viewControllers) {
-        if ([viewController isViewLoaded]) {
-            viewController.view = nil;
-            [viewController viewDidUnload];
-        }
+        [viewController unloadViews];
     }
     
     self.previousButton = nil;
@@ -112,12 +110,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
         if (page == self.currentPage) {
             continue;
         }
-        
-        if ([viewController isViewLoaded]) {
-            viewController.view = nil;
-            [viewController viewDidUnload];            
-        }
-        
+        [viewController unloadViews];
         ++page;
     }
 }

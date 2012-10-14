@@ -314,8 +314,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     [self removeViewFromContainerStackView];
     
     if ([self.viewController isViewLoaded]) {
-        self.viewController.view = nil;
-        [self.viewController viewDidUnload];
+        [self.viewController unloadViews];
     }
 }
 
