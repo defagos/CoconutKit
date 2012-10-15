@@ -358,6 +358,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                  transitionClass:transitionClass
                                                                                         duration:duration] autorelease];
     [self.containerContents insertObject:containerContent atIndex:index];
+
+    // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
+    // displayed), we must call -didMoveToParentViewController: manually right after the containment relationship has
+    // been established (iOS 5 and above, see UIViewController documentation)
+    if (! [self.containerViewController isViewDisplayed]
+            || (index == [self.containerContents count] - 1 && ! animated)) {
+        if ([viewController respondsToSelector:@selector(didMoveToParentViewController:)]) {
+            [viewController didMoveToParentViewController:self.containerViewController];
+        }
+    }
     
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewDisplayed]) {
@@ -433,7 +443,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
     }
-        
+    
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if (containerContent.addedToContainerView) {
         // Load the view controller's view below so that the capacity criterium can be fulfilled (if needed). If we are popping a
@@ -810,6 +820,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Keep the disappearing view controller alive a little bit longer
         UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
+        UIViewController *appearingViewController = appearingContainerContent.viewController;
         
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
@@ -821,10 +832,16 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 [self.containerContents removeObject:containerContentAtCapacity];
             }
             
+            // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
+            // been performed (iOS 5 and above, see UIViewController documentation)
+            if ([appearingViewController respondsToSelector:@selector(didMoveToParentViewController:)]) {
+                [appearingViewController didMoveToParentViewController:self.containerViewController];
+            }
+            
             // Notify the delegate
             if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
                 [self.delegate containerStack:self
-                        didPushViewController:appearingContainerContent.viewController
+                        didPushViewController:appearingViewController
                           coverViewController:disappearingViewController
                                      animated:animated];
             }

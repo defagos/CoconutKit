@@ -157,6 +157,12 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
+    // We must call -willMoveToParentViewController: manually right before the containment relationship is removed without
+    // animation, if one remains of course (iOS 5 and above, see UIViewController documentation)
+    if ([self.viewController respondsToSelector:@selector(willMoveToParentViewController:)] && self.viewController.parentViewController) {
+        [self.viewController willMoveToParentViewController:nil];
+    }
+    
     // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:. We need to -callRemoveFromParentViewController:
     //             so that the view controller reference count is correctly decreased
     if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
