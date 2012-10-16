@@ -110,13 +110,18 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark Accessors and mutators

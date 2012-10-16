@@ -65,14 +65,22 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    HLSLoggerInfo(@"Called");
+    
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    HLSLoggerInfo(@"Called");
+    
+    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

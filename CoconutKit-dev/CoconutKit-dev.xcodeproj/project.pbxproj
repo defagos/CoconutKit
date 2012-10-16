@@ -405,6 +405,10 @@
 		6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
 		6FADE8E014BA04C9007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */; };
+		6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */; };
+		6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
+		6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
@@ -798,6 +802,11 @@
 		6FADE88514BA04C9007EE121 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FAF24EE162DE58000F93DA2 /* HLSAutorotationMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationMode.h; sourceTree = "<group>"; };
+		6FAF24EF162DE58000F93DA2 /* UINavigationController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FAF24F1162DE58000F93DA2 /* UITabBarController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
@@ -1313,6 +1322,7 @@
 		6FADE6A014BA04A6007EE121 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6FAF24EE162DE58000F93DA2 /* HLSAutorotationMode.h */,
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
 				6F8C933E15CEE641006D892C /* HLSContainerGroupView.h */,
@@ -1339,6 +1349,10 @@
 				6FADE6B114BA04A6007EE121 /* HLSWebViewController.m */,
 				6FADE6B214BA04A6007EE121 /* HLSWizardViewController.h */,
 				6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */,
+				6FAF24EF162DE58000F93DA2 /* UINavigationController+HLSExtensions.h */,
+				6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */,
+				6FAF24F1162DE58000F93DA2 /* UITabBarController+HLSExtensions.h */,
+				6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */,
 				6F91F76D14F3EEFB00E95EFA /* UIViewController+HLSExtensions.h */,
 				6F91F76E14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m */,
 			);
@@ -2220,6 +2234,8 @@
 				6F41D24415E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */,
 				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
+				6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
+				6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2371,6 +2387,8 @@
 				6F41D24515E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6FC09CF115EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */,
 				6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
+				6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
+				6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

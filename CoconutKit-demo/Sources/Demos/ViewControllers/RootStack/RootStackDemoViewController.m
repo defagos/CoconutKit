@@ -120,13 +120,18 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskAll;
 }
 
 #pragma mark Localization
@@ -202,6 +207,7 @@
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
     UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
     tabBarController.viewControllers = [NSArray arrayWithObject:navigationController];
     [self displayViewController:tabBarController];    
@@ -215,6 +221,7 @@
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
     [self displayViewController:navigationController];
 }
 

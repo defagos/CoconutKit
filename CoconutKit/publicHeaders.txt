@@ -5,6 +5,7 @@ HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationPreloader.h
 HLSAssert.h
+HLSAutorotationMode.h
 HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
@@ -69,7 +70,9 @@ UIControl+HLSExclusiveTouch.h
 UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
 UINavigationBar+HLSExtensions.h
+UINavigationController+HLSExtensions.h
 UIScrollView+HLSExtensions.h
+UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UITextView+HLSExtensions.h

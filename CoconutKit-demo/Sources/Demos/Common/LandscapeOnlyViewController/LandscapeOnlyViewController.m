@@ -21,13 +21,18 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark Localization

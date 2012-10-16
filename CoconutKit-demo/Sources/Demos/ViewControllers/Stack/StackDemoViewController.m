@@ -143,6 +143,7 @@
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
             pushedViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {

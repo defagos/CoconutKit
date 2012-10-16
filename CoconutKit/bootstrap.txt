@@ -34,7 +34,9 @@ UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
 UINavigationBar+HLSExtensions.m
 UINavigationController+HLSActionSheet.m
+UINavigationController+HLSExtensions.m
 UIScrollView+HLSExtensions.m
+UITabBarController+HLSExtensions.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UITextView+HLSExtensions.m

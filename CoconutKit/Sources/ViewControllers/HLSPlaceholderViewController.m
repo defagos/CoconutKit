@@ -89,7 +89,18 @@
 
 #pragma mark View lifecycle
 
+// Deprecated since iOS 6
 - (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods
+{
+    return NO;
+}
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods
 {
     return NO;
 }

@@ -131,6 +131,7 @@
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
             insetViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
