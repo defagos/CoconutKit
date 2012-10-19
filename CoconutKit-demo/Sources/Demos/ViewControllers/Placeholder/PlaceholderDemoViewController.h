@@ -19,6 +19,7 @@
     UISwitch *m_rightPlaceholderSwitch;
     HeavyViewController *m_leftHeavyViewController;
     HeavyViewController *m_rightHeavyViewController;
+    UISwitch *m_involvingChildrenForAutorotationSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *heavyButton;
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *involvingChildrenForAutorotationSwitch;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
 - (IBAction)displayContainmentTest:(id)sender;
@@ -38,6 +40,7 @@
 - (IBAction)remove:(id)sender;
 - (IBAction)hideWithModal:(id)sender;
 - (IBAction)togglePlaceholder:(id)sender;
+- (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender;
 
 - (IBAction)navigateForwardNonAnimated:(id)sender;
 - (IBAction)navigateBackNonAnimated:(id)sender;

@@ -63,6 +63,7 @@
 @private
     HLSContainerStack *m_containerStack;
     NSUInteger m_capacity;
+    HLSAutorotationMode m_autorotationMode;
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -78,6 +79,13 @@
  * installed, and can neither be replaced, nor removed. The default capacity (HLSContainerStackDefaultCapacity= 2) is used.
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
+
+/**
+ * Set how the stack controller decides whether it must rotate or not
+ *
+ * The default value is given by HLSDefaultAutorotationMode()
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack controller delegate

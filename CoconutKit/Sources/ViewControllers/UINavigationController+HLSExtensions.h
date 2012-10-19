@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSAutorotationMode.h"
+#import "HLSAutorotation.h"
 
 @interface UINavigationController (HLSExtensions)
 

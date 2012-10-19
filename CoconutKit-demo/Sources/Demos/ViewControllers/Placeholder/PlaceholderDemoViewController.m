@@ -69,6 +69,7 @@
     self.inNavigationControllerSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
+    self.involvingChildrenForAutorotationSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -89,6 +90,8 @@
 
 @synthesize rightHeavyViewController = m_rightHeavyViewController;
 
+@synthesize involvingChildrenForAutorotationSwitch = m_involvingChildrenForAutorotationSwitch;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -99,6 +102,7 @@
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
+    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndVisibleChildren || self.autorotationMode == HLSAutorotationModeContainerAndChildren);
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -367,6 +371,16 @@
     }
     else {
         self.heavyButton.hidden = NO;
+    }
+}
+
+- (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender
+{
+    if (self.involvingChildrenForAutorotationSwitch.on) {
+        self.autorotationMode = HLSAutorotationModeContainerAndChildren;
+    }
+    else {
+        self.autorotationMode = HLSAutorotationModeContainer;
     }
 }
 

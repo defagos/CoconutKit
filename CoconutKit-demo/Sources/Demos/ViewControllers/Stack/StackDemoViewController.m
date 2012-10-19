@@ -41,6 +41,11 @@
         stackController.delegate = self;
         stackController.title = @"HLSStackController";
         
+        // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
+        // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
+        // behavior
+        self.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+        
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:firstViewController 
@@ -77,6 +82,7 @@
     [super releaseViews];
     
     self.transitionPickerView = nil;
+    self.autorotationModeSegmentedControl = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.animatedSwitch = nil;
@@ -88,6 +94,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
@@ -110,6 +118,9 @@
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    self.autorotationModeSegmentedControl.selectedSegmentIndex = stackController.autorotationMode;
+    
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
     
@@ -130,6 +141,10 @@
     [super localize];
     
     self.title = @"HLSStackController";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible children", @"Visible children") forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All children", @"Tous les enfants") forSegmentAtIndex:2];
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -368,6 +383,12 @@
                                                cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction)indexChanged:(id)sender

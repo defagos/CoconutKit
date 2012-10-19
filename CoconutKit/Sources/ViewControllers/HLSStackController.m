@@ -30,10 +30,13 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
+        self.autorotationMode = HLSAutorotationModeDefault();
+        
         self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                                  capacity:capacity 
                                                                                  removing:NO
                                                                   rootViewControllerFixed:YES] autorelease];
+        self.containerStack.autorotationMode = self.autorotationMode;
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
                             withTransitionClass:[HLSTransitionNone class]
@@ -46,6 +49,14 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
     return [self initWithRootViewController:rootViewController capacity:HLSContainerStackDefaultCapacity];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder])) {
+        self.autorotationMode = HLSAutorotationModeDefault();
+    }
+    return self;
 }
 
 - (id)init
@@ -62,6 +73,7 @@
                                                                              capacity:self.capacity 
                                                                              removing:NO
                                                               rootViewControllerFixed:YES] autorelease];
+    self.containerStack.autorotationMode = self.autorotationMode;
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     @try {
@@ -110,6 +122,23 @@
     }
     
     m_capacity = capacity;
+}
+
+@synthesize autorotationMode = m_autorotationMode;
+
+- (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
+{
+    if (autorotationMode == m_autorotationMode) {
+        return;
+    }
+    
+    m_autorotationMode = autorotationMode;
+    
+    // If the container stack has not been instantiated (which can happen when using storyboards, since in this case
+    // it gets intantiated in -awakeFromNimb), the following does nothing. This is why the autorotation mode value
+    // also has to be stored as an ivar, so that the container stack autorotation mode can be correctly set even
+    // in this case
+    self.containerStack.autorotationMode = autorotationMode;
 }
 
 @synthesize delegate = m_delegate;
@@ -192,13 +221,18 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
-    return [self.containerStack shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+    return [self.containerStack shouldAutorotate];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & [self.containerStack supportedInterfaceOrientations];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

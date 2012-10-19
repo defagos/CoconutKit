@@ -47,8 +47,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
 {
     NSNumber *autorotationModeNumber = objc_getAssociatedObject(self, s_autorotationModeKey);
     if (! autorotationModeNumber) {
-        // TODO: iOS 4 and 5: Top view controller
-        return HLSAutorotationModeContainer;
+        return HLSAutorotationModeDefault();
     }
     else {
         return [autorotationModeNumber integerValue];

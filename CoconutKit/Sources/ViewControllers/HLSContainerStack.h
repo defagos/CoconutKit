@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "HLSAutorotation.h"
 #import "HLSTransition.h"
 
 // Forward declarations
@@ -111,6 +112,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     BOOL m_removing;                                           // If YES, view controllers over capacity are removed from the stack, otherwise their views are simply unloaded
     BOOL m_rootViewControllerFixed;                            // Is the root view controller fixed?
     BOOL m_animating;                                          // Set to YES when a transition animation is running
+    HLSAutorotationMode m_autorotationMode;                    // How the container decides to behave when rotation occurs
     id<HLSContainerStackDelegate> m_delegate;                  // The stack delegate, usually the custom container which is implemented
 }
 
@@ -143,6 +145,14 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * set it once in the container view controller -loadView or -viewDidLoad method)
  */
 @property (nonatomic, strong) UIView *containerView;
+
+/**
+ * Set how a container decides whether it must rotate or not. Your containers should exhibit a similar property, whose 
+ * implementation is based on the autorotation mode of all container stacks they manage
+ *
+ * The default value is given by HLSDefaultAutorotationMode()
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack delegate (usually the container view controller you are implementing)
@@ -301,10 +311,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)viewDidDisappear:(BOOL)animated;
 
 /**
- * Call this method from your container view controller -shouldAutorotateToInterfaceOrientation: method, otherwise the 
- * behavior is undefined
+ * Call this method from your container view controller -shouldAutorotate: method, otherwise the behavior is undefined
  */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (BOOL)shouldAutorotate;
+
+/**
+ * Call this method from your container view controller -supportedInterfaceOrientations method, otherwise the behavior
+ * is undefined
+ */
+- (NSUInteger)supportedInterfaceOrientations;
 
 /**
  * Call this method from your container view controller -willRotateToInterfaceOrientation:duration: method, otherwise 

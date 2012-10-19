@@ -18,7 +18,7 @@
     #import "HLSAnimationStep.h"
     #import "HLSApplicationPreloader.h"
     #import "HLSAssert.h"
-    #import "HLSAutorotationMode.h"
+    #import "HLSAutorotation.h"
     #import "HLSContainerStack.h"
     #import "HLSConverters.h"
     #import "HLSCursor.h"

@@ -47,8 +47,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
 {
     NSNumber *autorotationModeNumber = objc_getAssociatedObject(self, s_autorotationModeKey);
     if (! autorotationModeNumber) {
-        // TODO: iOS 4 and 5: Top view controller (even if equivalent here since no stack is managed)
-        return HLSAutorotationModeContainer;
+        return HLSAutorotationModeDefault();
     }
     else {
         return [autorotationModeNumber integerValue];

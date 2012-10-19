@@ -12,6 +12,7 @@
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UIPickerView *m_transitionPickerView;
+    UISegmentedControl *sm_autorotationModeSegmentedControl;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_animatedSwitch;
@@ -21,6 +22,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
@@ -43,6 +45,8 @@
 - (IBAction)popThree:(id)sender;
 
 - (IBAction)testResponderChain:(id)sender;
+
+- (IBAction)changeAutorotationMode:(id)sender;
 
 - (IBAction)indexChanged:(id)sender;
 

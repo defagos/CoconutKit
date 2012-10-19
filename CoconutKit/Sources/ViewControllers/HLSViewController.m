@@ -9,6 +9,7 @@
 #import "HLSViewController.h"
 
 #import <objc/runtime.h>
+#import "HLSAutorotation.h"
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -159,6 +160,8 @@
 
 - (BOOL)shouldAutorotate
 {
+    // Do not call the parent method here, since it does not exist prior to iOS 6
+    // TODO: Add call to super method when CoconutKit compatible with >= iOS 6 only. Conceptually cleaner
     return YES;
 }
 

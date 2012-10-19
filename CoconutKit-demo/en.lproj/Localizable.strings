@@ -8,9 +8,12 @@
 "Action sheet"="Action sheet";
 "Adjust font size to width"="Adjust font size to width";
 "All"="All";
+"All children"="All children";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Autorotation"="Autorotation";
+"Autorotation involves children"="Autorotation involves children";
 "Apples & Coconut"="Apples & Coconut";
 "Baseline adjustment"="Baseline adjustment";
 "Baselines"="Baselines";
@@ -32,6 +35,7 @@
 "Close"="Close";
 "Coconuts"="Coconuts";
 "Collapse"="Collapse";
+"Container"="Container";
 "Containment test"="Containment test";
 "Core"="Core";
 "Country"="Country";
@@ -163,6 +167,7 @@
 "Vertical alignment"="Vertical alignment";
 "Views"="Views";
 "View controllers"="View controllers";
+"Visible children"="Visible children";
 "Web view"="Web view";
 "Week"="Week";
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";

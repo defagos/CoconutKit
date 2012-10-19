@@ -80,7 +80,7 @@
 {
     HLSLoggerInfo(@"Called");
     
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait;
+    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

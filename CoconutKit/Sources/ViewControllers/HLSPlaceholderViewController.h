@@ -95,6 +95,7 @@
 @private
     NSMutableArray *m_containerStacks;
     NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
+    HLSAutorotationMode m_autorotationMode;
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
     BOOL m_loadedOnce;
 }
@@ -155,6 +156,13 @@
  * Return the view controller displayed on the placeholder view at the given index, or nil if none
  */
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
+
+/**
+ * Set how the placeholder view controller decides whether it must rotate or not
+ *
+ * The default value is given by HLSDefaultAutorotationMode()
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The placeholder view controller delegate

@@ -70,6 +70,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.capacity = capacity;
         m_removing = removing;
         m_rootViewControllerFixed = rootViewControllerFixed;
+        m_autorotationMode = HLSAutorotationModeDefault();
     }
     return self;
 }
@@ -143,6 +144,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     m_capacity = capacity;
 }
+
+@synthesize autorotationMode = m_autorotationMode;
 
 @synthesize delegate = m_delegate;
 
@@ -568,7 +571,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
     // Prevent rotations during animations. Can lead to erroneous animations
     if (m_animating) {
@@ -576,14 +579,59 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    // If one view controller in the stack does not support the orientation, neither will the container
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        if (! [containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-            return NO;
+    switch (self.autorotationMode) {
+        case HLSAutorotationModeContainerAndChildren: {
+            for (HLSContainerContent *containerContent in self.containerContents) {
+                if (! [containerContent shouldAutorotate]) {
+                    return NO;
+                }
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndVisibleChildren: {
+            HLSContainerContent *topContainerContent = [self topContainerContent];
+            if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
+                return NO;
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainer:
+        default: {
+            break;
+        }            
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSUInteger supportedInterfaceOrientations = HLSInterfaceOrientationMaskAll;
+    switch (self.autorotationMode) {
+        case HLSAutorotationModeContainerAndChildren: {
+            for (HLSContainerContent *containerContent in self.containerContents) {
+                supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndVisibleChildren: {
+            HLSContainerContent *topContainerContent = [self topContainerContent];
+            if (topContainerContent) {
+                supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainer:
+        default: {
+            break;
         }
     }
-        
-    return YES;
+    
+    return supportedInterfaceOrientations;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

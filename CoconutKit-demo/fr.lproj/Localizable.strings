@@ -8,10 +8,13 @@
 "Action sheet"="Menu action";
 "Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
+"All children"="Tous les enfants";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
 "Apples & Coconut"="Pommes & noix de coco";
+"Autorotation"="Autorotation";
+"Autorotation involves children"="Autorotation impliquant les enfants";
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
 "Birthdate"="Date de naissance";
@@ -32,6 +35,7 @@
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
 "Collapse"="Contracter";
+"Container"="Conteneur";
 "Containment test"="Test d'appartenance";
 "Core"="Core";
 "Country"="Pays";
@@ -162,6 +166,7 @@
 "Vertical alignment"="Alignement vertical";
 "Views"="Vues";
 "View controllers"="View controllers";
+"Visible children"="Enfants visibles";
 "Web view"="Vue web";
 "Week"="Semaine";
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";

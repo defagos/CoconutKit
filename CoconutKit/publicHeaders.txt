@@ -5,7 +5,7 @@ HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationPreloader.h
 HLSAssert.h
-HLSAutorotationMode.h
+HLSAutorotation.h
 HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
