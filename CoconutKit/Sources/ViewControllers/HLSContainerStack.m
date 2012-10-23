@@ -70,7 +70,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.capacity = capacity;
         m_removing = removing;
         m_rootViewControllerFixed = rootViewControllerFixed;
-        m_autorotationMode = HLSAutorotationModeDefault();
+        m_autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
 }
@@ -581,7 +581,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren: {
-            for (HLSContainerContent *containerContent in self.containerContents) {
+            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
                 if (! [containerContent shouldAutorotate]) {
                     return NO;
                 }
@@ -611,7 +611,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     NSUInteger supportedInterfaceOrientations = HLSInterfaceOrientationMaskAll;
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren: {
-            for (HLSContainerContent *containerContent in self.containerContents) {
+            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
                 supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
             }
             break;

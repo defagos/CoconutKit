@@ -30,7 +30,7 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
-        self.autorotationMode = HLSAutorotationModeDefault();
+        self.autorotationMode = HLSAutorotationModeContainer;
         
         self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
                                                                                  capacity:capacity 
@@ -54,7 +54,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        self.autorotationMode = HLSAutorotationModeDefault();
+        self.autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
 }

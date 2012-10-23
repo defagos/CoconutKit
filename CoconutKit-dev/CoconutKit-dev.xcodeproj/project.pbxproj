@@ -250,8 +250,6 @@
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */; };
-		6F406BBD16311B1800AD647F /* HLSAutorotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F406BBC16311B1800AD647F /* HLSAutorotation.m */; };
-		6F406BBE16311B1800AD647F /* HLSAutorotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F406BBC16311B1800AD647F /* HLSAutorotation.m */; };
 		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F41D23315E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */; };
@@ -534,7 +532,6 @@
 		6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
 		6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
-		6F406BBC16311B1800AD647F /* HLSAutorotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAutorotation.m; sourceTree = "<group>"; };
 		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
 		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
 		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
@@ -1326,7 +1323,6 @@
 			isa = PBXGroup;
 			children = (
 				6FAF24EE162DE58000F93DA2 /* HLSAutorotation.h */,
-				6F406BBC16311B1800AD647F /* HLSAutorotation.m */,
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
 				6F8C933E15CEE641006D892C /* HLSContainerGroupView.h */,
@@ -2240,7 +2236,6 @@
 				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
-				6F406BBD16311B1800AD647F /* HLSAutorotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2394,7 +2389,6 @@
 				6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
-				6F406BBE16311B1800AD647F /* HLSAutorotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

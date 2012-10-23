@@ -21,20 +21,18 @@ typedef enum {
 } HLSInterfaceOrientationMask;
 
 /**
- * Set up how a container behaves when interface rotation occurs
+ * Set up how a container view controller behaves when interface rotation occurs. This means:
+ *   - which view controllers decide whether rotation can occur
+ *   - which view controllers receive rotation events (for children, from the topmost to the bottommost view controller)
+ * THe default values are currently:
+ *   - for iOS 4 and 5: HLSAutorotationModeContainerAndVisibleChildren
+ *   - for iOS 6: HLSAutorotationModeContainer
  */
 typedef enum {
     HLSAutorotationModeEnumBegin = 0,
-    HLSAutorotationModeContainer = HLSAutorotationModeEnumBegin,            // The container itself decides whether rotation can occur or not
-    HLSAutorotationModeContainerAndVisibleChildren,                         // The container and its visible children decide whether rotation can occur or not
-    HLSAutorotationModeContainerAndChildren,                                // The container and all its children (even not visible) decide whether rotation can occur or not
+    HLSAutorotationModeContainer = HLSAutorotationModeEnumBegin,            // Default: The container decides (it might consider children on not depending on iOS versions)
+    HLSAutorotationModeContainerAndVisibleChildren,                         // The container and its visible children are involved
+    HLSAutorotationModeContainerAndChildren,                                // The container and all its children (even not visible) are involved
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin
 } HLSAutorotationMode;
-
-/**
- * The default orientation mode applied by containers:
- *   - iOS 4 and 5: HLSAutorotationModeContainerAndVisibleChildren
- *   - iOS 6: HLSAutorotationModeContainer
- */
-HLSAutorotationMode HLSAutorotationModeDefault();

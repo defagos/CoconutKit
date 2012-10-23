@@ -44,7 +44,7 @@
 
 - (void)hlsPlaceholderViewControllerInit
 {
-    self.autorotationMode = HLSAutorotationModeDefault();
+    self.autorotationMode = HLSAutorotationModeContainer;
 }
 
 - (void)awakeFromNib
