@@ -97,7 +97,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
     return containerShouldAutorotate;
 }
 
-// Swizzled on iOS 6 only, never called on iOS 4 and 5
+// Swizzled on iOS 6 only, never called on iOS 4 and 5 by UIKit (can be called by client code, though)
 static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientations_Imp(UINavigationController *self, SEL _cmd)
 {
     // On iOS 6, the container always decides first (does not look at children)
@@ -106,13 +106,13 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                containerSupportedInterfaceOrientations &= viewController.supportedInterfaceOrientations;
+                containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;
         }
             
         case HLSAutorotationModeContainerAndVisibleChildren: {
-            containerSupportedInterfaceOrientations &= self.topViewController.supportedInterfaceOrientations;
+            containerSupportedInterfaceOrientations &= [self.topViewController supportedInterfaceOrientations];
             break;
         }
             
@@ -125,7 +125,7 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
     return containerSupportedInterfaceOrientations;
 }
 
-// Swizzled on iOS 6 as well, but never called
+// Swizzled on iOS 6 as well, but never called by UIKit (can be called by client code, though)
 static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp(UINavigationController *self, SEL _cmd, NSInteger toInterfaceOrientation)
 {
     // Pre-iOS 6: Strange behavior of the original UINavigationController implementation, which never calls the -shouldAutorotateToInterfaceOrientation:

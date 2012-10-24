@@ -192,7 +192,7 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController
 {
     if ([viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
-        return [self shouldAutorotateForOrientations:viewController.supportedInterfaceOrientations];
+        return [self shouldAutorotateForOrientations:[viewController supportedInterfaceOrientations]];
     }
     else {
         if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
@@ -418,7 +418,7 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
         if (! [self shouldAutorotate]) {
             return NO;
         }
-        return  self.supportedInterfaceOrientations & (1 << toInterfaceOrientation);
+        return [self supportedInterfaceOrientations] & (1 << toInterfaceOrientation);
     }
     else {
         return (*s_UIViewController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);

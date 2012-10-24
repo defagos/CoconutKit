@@ -91,7 +91,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
     return containerShouldAutorotate;
 }
 
-// Swizzled on iOS 6 only, never called on iOS 4 and 5
+// Swizzled on iOS 6 only, never called on iOS 4 and 5 by UIKit (can be called by client code, though)
 static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Imp(UITabBarController *self, SEL _cmd)
 {
     // On iOS 6, the container always decides first (does not look at children)
@@ -101,7 +101,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
         case HLSAutorotationModeContainerAndChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
             for (UIViewController *viewController in self.viewControllers) {
-                containerSupportedInterfaceOrientations &= viewController.supportedInterfaceOrientations;
+                containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;
         }
@@ -115,7 +115,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
     return containerSupportedInterfaceOrientations;
 }
 
-// Swizzled on iOS 6 as well, but never called
+// Swizzled on iOS 6 as well, but never called by UIKit (can be called by client code, though)
 static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp(UITabBarController *self, SEL _cmd, NSInteger toInterfaceOrientation)
 {
     // Pre-iOS 6: Strange behavior of the original UITabBarController implementation, which never calls the -shouldAutorotateToInterfaceOrientation:
