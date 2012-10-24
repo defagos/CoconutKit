@@ -36,6 +36,13 @@ typedef enum {
  * ones are defined in HLSOrientationMode if you need to compile against the iOS 4 or 5 SDKs. If you compile against
  * the iOS 6 SDK, you should use the new UIInterfaceOrientationFlags instead.
  *
+ * As a quick reference:
+ *    -shouldAutorotateToInterfaceOrientation: is called on iOS 4 and 5 by UIKit, never by UIKit on iOS 6. It can
+ *     still be called by client code on iOS 6
+ *    -shouldAutorotate and -supportedInterfaceOrientations are never called by UIKit directly on iOS 4 and 5, and
+ *     are only called by UIKit starting with iOS 6. They can still be called by client code on iOS 4 and 5 since
+ *     CoconutKit adds support for those methods on iOS 4 and 5 as well
+ *
  * You can still implement the usual -shouldRotateToInterfaceOrientation: method if you prefer, but by implementing
  * the new iOS 6 methods above, your code will be the same for all versions of iOS. If you implement both the old
  * and new methods, only the new ones will be taken into account.
