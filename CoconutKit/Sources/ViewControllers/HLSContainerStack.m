@@ -824,7 +824,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
+    // TODO: Probablement stocker l'orientation au moment de l'insertion dans HLSContainerContent, et calculer l'angle
+    //       par rapport à elle
+    
     // TODO: Pour éviter de voir pivoter la vue de 2 * PI - angle, toujours prendre l'angle équivalent (mod 2 * PI) le plus proche
+    
+    // TODO: Devrait également utiliser l'info de preferredInterfaceOrientation si inséré alors que l'orientation actuelle est incompatible
+    
     groupView.frontView.transform = CGAffineTransformIdentity;
     groupView.frontView.bounds = groupView.bounds;
     if (! [containerContent shouldAutorotate] || ! ([containerContent supportedInterfaceOrientations] & (1 << interfaceOrientation))) {

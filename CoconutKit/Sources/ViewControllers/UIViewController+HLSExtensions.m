@@ -166,6 +166,57 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     }
 }
 
+- (BOOL)shouldAutorotateForOrientations:(HLSInterfaceOrientationMask)orientations
+{
+    if (orientations & HLSInterfaceOrientationMaskPortrait
+            && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+        return YES;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskLandscapeLeft
+            && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+        return YES;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskLandscapeRight
+            && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+        return YES;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskPortraitUpsideDown
+            && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+- (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController
+{
+    if ([viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+        return [self shouldAutorotateForOrientations:viewController.supportedInterfaceOrientations];
+    }
+    else {
+        if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
+                && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+}
+
 @end
 
 @implementation UIViewController (HLSExtensionsPrivate)
@@ -363,11 +414,11 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     // This is the pre-iOS 6 deprecated rotation method. To avoid having to duplicate rotation code for applications
     // targeting both iOS 6 and prior versions, we implement the old rotation method in terms of the new rotation
     // methods. This way, one only need to implement rotation using iOS 6 methods
-    if ([self respondsToSelector:@selector(shouldAutorotate)]) {
-        if (! self.shouldAutorotate) {
+    if ([self respondsToSelector:@selector(shouldAutorotate)] && [self respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+        if (! [self shouldAutorotate]) {
             return NO;
         }
-        return self.supportedInterfaceOrientations & (1 << toInterfaceOrientation);
+        return  self.supportedInterfaceOrientations & (1 << toInterfaceOrientation);
     }
     else {
         return (*s_UIViewController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);

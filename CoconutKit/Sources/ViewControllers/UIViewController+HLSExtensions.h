@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+#import "HLSAutorotation.h"
+
 // Lifecycle phases
 typedef enum {
     HLSViewControllerLifeCyclePhaseEnumBegin = 0,
@@ -90,5 +92,15 @@ typedef enum {
  * Return YES iff the current view controller lifecycle can be transitioned to the one received as parameter
  */
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
+
+/**
+ * Return YES iff the receiver can autorotate to at least one of the supplied orientations
+ */
+- (BOOL)shouldAutorotateForOrientations:(HLSInterfaceOrientationMask)orientations;
+
+/**
+ * Return YES iff the receiver has at least one compatible orientation with the supplied view controller
+ */
+- (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
 
 @end
