@@ -36,6 +36,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
                          inserting:(BOOL)inserting
                           animated:(BOOL)animated;
+- (void)rotateContainerContent:(HLSContainerContent *)containerContent
+       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end
 
@@ -654,8 +656,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                               disappearingView:groupView.backView
                                                                                                         inView:groupView
                                                                                                       duration:0.] reverseAnimation];
-                [reverseAnimation playAnimated:NO];
+                [reverseAnimation playAnimated:NO];                
             }
+            
+            [self rotateContainerContent:containerContent forInterfaceOrientation:toInterfaceOrientation];
                 
             // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
             // events. This matches UINavigationController behavior, for which only the top view controller receives
@@ -742,6 +746,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
         [containerContent addAsSubviewIntoContainerStackView:stackView];
+        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
@@ -762,6 +767,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (! inserted) {
             [containerContent addAsSubviewIntoContainerStackView:stackView];
         }
+        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
         
         // Play the corresponding animation to put the view into the correct location
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
@@ -799,6 +805,54 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // All other cases (inserting in the middle or instantiating the view for a view controller already in the stack)
     else {
         [animation playAnimated:NO];
+    }
+}
+
+/**
+ * Call this method when a child view controller's view must be rotated to make it compatible with the container interface
+ * orientation. Landscape-only view controllers, e.g., must be rotated from PI/2 when inserted in a container in portrait
+ * mode
+ */
+- (void)rotateContainerContent:(HLSContainerContent *)containerContent
+       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    NSLog(@"----> Child orientation: %@", HLSStringFromInterfaceOrientation(containerContent.viewController.interfaceOrientation));
+    NSLog(@"----> Target orientation: %@", HLSStringFromInterfaceOrientation(interfaceOrientation));
+    
+    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+    if (! groupView) {
+        return;
+    }
+    
+    // TODO: Pour éviter de voir pivoter la vue de 2 * PI - angle, toujours prendre l'angle équivalent (mod 2 * PI) le plus proche
+    groupView.frontView.transform = CGAffineTransformIdentity;
+    groupView.frontView.bounds = groupView.bounds;
+    if (! [containerContent shouldAutorotate] || ! ([containerContent supportedInterfaceOrientations] & (1 << interfaceOrientation))) {
+        CGFloat angle = 0.f;
+        switch (interfaceOrientation) {
+            case UIInterfaceOrientationLandscapeRight: {
+                angle = -M_PI_2;
+                groupView.frontView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
+                break;
+            }
+                
+            case UIInterfaceOrientationPortraitUpsideDown: {
+                angle = M_PI;
+                break;
+            }
+                
+            case UIInterfaceOrientationLandscapeLeft: {
+                angle = M_PI_2;
+                groupView.frontView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
+                break;
+            }
+                
+            default: {
+                angle = 0.f;
+                break;
+            }
+        }
+        groupView.frontView.transform = CGAffineTransformMakeRotation(angle);
     }
 }
 
