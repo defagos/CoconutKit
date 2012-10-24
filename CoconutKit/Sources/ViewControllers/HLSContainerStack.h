@@ -144,7 +144,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * view controller's view hierarchy and cannot be set once it has been displayed (in general, though, you need to
  * set it once in the container view controller -loadView or -viewDidLoad method)
  */
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, retain) UIView *containerView;
 
 /**
  * Set how a container decides whether it must rotate or not. Your containers should exhibit a similar property, whose 
