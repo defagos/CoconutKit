@@ -110,4 +110,16 @@ typedef enum {
  */
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
 
+/**
+ * Return the first interface orientation supported by the receiver, and compatible with a given orientation set
+ * (respectively a view controller). Orientations are checked in the following order:
+ *   - portrait
+ *   - landscape right (on iPad, this is the orientation we get when using a smart cover)
+ *   - landscape left
+ *   - portrait upside down
+ * Return 0 if no orientation is found
+ */
+- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(HLSInterfaceOrientationMask)orientations;
+- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
+
 @end

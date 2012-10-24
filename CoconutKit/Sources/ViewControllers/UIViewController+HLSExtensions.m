@@ -217,6 +217,30 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     }
 }
 
+- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(HLSInterfaceOrientationMask)orientations
+{
+    if (orientations & HLSInterfaceOrientationMaskPortrait && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait) {
+        return UIInterfaceOrientationPortrait;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskLandscapeRight && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscapeRight) {
+        return UIInterfaceOrientationLandscapeRight;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskLandscapeLeft && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscapeLeft) {
+        return UIInterfaceOrientationLandscapeLeft;
+    }
+    else if (orientations & HLSInterfaceOrientationMaskPortraitUpsideDown && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortraitUpsideDown) {
+        return UIInterfaceOrientationPortraitUpsideDown;
+    }
+    else {
+        return 0;
+    }
+}
+
+- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController
+{
+    return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
+}
+
 @end
 
 @implementation UIViewController (HLSExtensionsPrivate)
