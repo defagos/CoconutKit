@@ -162,6 +162,7 @@
  *
  * Remark: No methods have been provided for the deprecated 2-step rotation methods
  */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 - (BOOL)shouldAutorotate;
 - (NSUInteger)supportedInterfaceOrientations;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;

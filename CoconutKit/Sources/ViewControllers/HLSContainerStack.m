@@ -829,11 +829,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // TODO: Pour éviter de voir pivoter la vue de 2 * PI - angle, toujours prendre l'angle équivalent (mod 2 * PI) le plus proche
     
-    // TODO: Devrait également utiliser l'info de preferredInterfaceOrientation si inséré alors que l'orientation actuelle est incompatible
-    
     groupView.frontView.transform = CGAffineTransformIdentity;
     groupView.frontView.bounds = groupView.bounds;
-    if (! [containerContent shouldAutorotate] || ! ([containerContent supportedInterfaceOrientations] & (1 << interfaceOrientation))) {
+    if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
         CGFloat angle = 0.f;
         switch (interfaceOrientation) {
             case UIInterfaceOrientationLandscapeRight: {
