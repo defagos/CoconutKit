@@ -812,7 +812,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // We directly act on the front content view, not on the front view, to avoid interfering with the animations
-    // played on it
+    // played on it. This is how rotations are usually applied on the root view controller's view by UIKit.
+    // TODO: If this happens to be an issue (this should not, though):
+    //         - add a frontAutorotationView wrapper to HLSGroupView
+    //         - apply rotation and bounds changes on it
+    //         - test this does not have any negative performance impact
     groupView.frontContentView.transform = CGAffineTransformIdentity;
     groupView.frontContentView.bounds = groupView.bounds;
     if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
