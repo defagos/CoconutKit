@@ -648,8 +648,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                                       duration:0.] reverseAnimation];
                 [reverseAnimation playAnimated:NO];                
             }
-            
-            [self rotateContainerContent:containerContent forInterfaceOrientation:toInterfaceOrientation];
                 
             // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
             // events. This matches UINavigationController behavior, for which only the top view controller receives
@@ -698,6 +696,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            
+            // Called in -didRotate. Two reasons:
+            //   - the result looks better (children incompatible with the current orientation snap at the end of the animation,
+            //     which looks quite the same as what happens when popping view controllers with different orientations from a
+            //     navigation controller
+            //   - if called early in -willRotate, the views get slightly blurry when rotated
+            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
             
             // Same remark as in -willAnimateRotationToInterfaceOrientation:duration:
             [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
