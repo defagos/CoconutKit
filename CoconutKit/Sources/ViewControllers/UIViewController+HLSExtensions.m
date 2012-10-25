@@ -438,7 +438,8 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     // This is the pre-iOS 6 deprecated rotation method. To avoid having to duplicate rotation code for applications
     // targeting both iOS 6 and prior versions, we implement the old rotation method in terms of the new rotation
     // methods. This way, one only need to implement rotation using iOS 6 methods
-    if ([self respondsToSelector:@selector(shouldAutorotate)] && [self respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+    if (self.compatibleWithNewRotationMethods && [self respondsToSelector:@selector(shouldAutorotate)]
+            && [self respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         if (! [self shouldAutorotate]) {
             return NO;
         }

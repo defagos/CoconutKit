@@ -181,6 +181,7 @@
 		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FB896CA1639BA79008AC996 /* HLSAutorotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB896C91639BA79008AC996 /* HLSAutorotation.m */; };
 		6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */; };
 		6FB8E67715F3EDD300CA4037 /* HLSObjectAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */; };
 		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
@@ -405,6 +406,7 @@
 		6FADE59814BA0494007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB896C91639BA79008AC996 /* HLSAutorotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAutorotation.m; sourceTree = "<group>"; };
 		6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				6F6C7557162DC0D90094B090 /* HLSAutorotation.h */,
+				6FB896C91639BA79008AC996 /* HLSAutorotation.m */,
 				6FADE58714BA0494007EE121 /* HLSContainerContent.h */,
 				6FADE58814BA0494007EE121 /* HLSContainerContent.m */,
 				6F8C933915CEE623006D892C /* HLSContainerGroupView.h */,
@@ -1071,6 +1074,7 @@
 				6F41D24015E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6F6C7551162DC0290094B090 /* UINavigationController+HLSExtensions.m in Sources */,
 				6F6C7556162DC0550094B090 /* UITabBarController+HLSExtensions.m in Sources */,
+				6FB896CA1639BA79008AC996 /* HLSAutorotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

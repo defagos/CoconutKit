@@ -43,6 +43,34 @@ typedef enum {
 
 #endif
 
+@protocol HLSAutorotationPreSDK6Compatibility <NSObject>
+
+@optional
+
+/**
+ * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set whether the view controller should
+ * autorotate or not
+ *
+ * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
+ * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
+ * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
+ * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
+ */
+- (BOOL)shouldAutorotate;
+
+/**
+ * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set the orientations which a view
+ * controller is compatible with
+ *
+ * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
+ * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
+ * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
+ * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
+ */
+- (NSUInteger)supportedInterfaceOrientations;
+
+@end
+
 /**
  * Starting with iOS 6, new methods must be implemented to define the set of orientations supported by a view 
  * controller:
@@ -77,28 +105,15 @@ typedef enum {
  * The following category just declares the iOS 6 rotation methods so that CoconutKit can be compiled against
  * the iOS 5 SDK without warnings.
  */
-@interface UIViewController (HLSAutorotationPreSDK6Compatibility)
+@interface UIViewController (HLSAutorotationPreSDK6Compatibility) <HLSAutorotationPreSDK6Compatibility>
 
 /**
- * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set whether the view controller should 
- * autorotate or not
+ * Enable the optional use of iOS 6 rotation methods on older versions of iOS (this method is ignored when running
+ * an application built with iOS 6 SDK on iOS 6). Set it to NO if you are inheriting from a view controller which
+ * you do not control the implementation of
  *
- * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
- * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
- * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
- * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
+ * Default value is YES
  */
-- (BOOL)shouldAutorotate;
-
-/**
- * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set the orientations which a view 
- * controller is compatible with
- *
- * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
- * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
- * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
- * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
- */
-- (NSUInteger)supportedInterfaceOrientations;
+@property (nonatomic, assign, getter=isCompatibleWithNewRotationMethods) BOOL compatibleWithNewRotationMethods;
 
 @end
