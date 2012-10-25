@@ -6,19 +6,20 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-/**
- * Enum equivalent to the UIInterfaceOrientationMask enum available starting with the iOS 6 SDK. Use these values
- * if you plan to compile your project against an older version of the SDK only
- */
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+
+// Enum available starting with the iOS 6 SDK, here made available for previous SDK versions as well
 typedef enum {
-    HLSInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
-    HLSInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
-    HLSInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
-    HLSInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
-    HLSInterfaceOrientationMaskLandscape = (HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight),
-    HLSInterfaceOrientationMaskAll = (HLSInterfaceOrientationMaskPortrait | HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight | HLSInterfaceOrientationMaskPortraitUpsideDown),
-    HLSInterfaceOrientationMaskAllButUpsideDown = (HLSInterfaceOrientationMaskPortrait | HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight),
-} HLSInterfaceOrientationMask;
+    UIInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
+    UIInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
+    UIInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
+    UIInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
+    UIInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
+    UIInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
+    UIInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
+} UIInterfaceOrientationMask;
+
+#endif
 
 /**
  * Set up how a container view controller behaves when interface rotation occurs. This means:

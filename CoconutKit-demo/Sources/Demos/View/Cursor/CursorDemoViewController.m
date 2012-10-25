@@ -121,7 +121,7 @@ static NSArray *s_folders = nil;
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark Memory warnings

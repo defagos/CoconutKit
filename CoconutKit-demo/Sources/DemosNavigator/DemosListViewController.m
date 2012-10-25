@@ -151,7 +151,7 @@ typedef enum {
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark UITableViewDataSource protocol implementation

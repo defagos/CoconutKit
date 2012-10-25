@@ -103,7 +103,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskAll;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

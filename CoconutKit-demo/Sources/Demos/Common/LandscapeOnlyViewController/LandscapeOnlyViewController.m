@@ -32,7 +32,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscape;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark Localization

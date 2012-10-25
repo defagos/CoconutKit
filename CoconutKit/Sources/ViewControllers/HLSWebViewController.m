@@ -130,10 +130,10 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        return HLSInterfaceOrientationMaskAllButUpsideDown;
+        return UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {
-        return HLSInterfaceOrientationMaskAll;
+        return UIInterfaceOrientationMaskAll;
     }
 }
 

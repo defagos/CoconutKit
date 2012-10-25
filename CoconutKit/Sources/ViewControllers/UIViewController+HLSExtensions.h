@@ -103,7 +103,7 @@ typedef enum {
 /**
  * Return YES iff the receiver can autorotate to at least one of the supplied orientations
  */
-- (BOOL)shouldAutorotateForOrientations:(HLSInterfaceOrientationMask)orientations;
+- (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations;
 
 /**
  * Return YES iff the receiver has at least one compatible orientation with the supplied view controller
@@ -119,7 +119,7 @@ typedef enum {
  *   - portrait upside down
  * Return 0 if no orientation is found
  */
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(HLSInterfaceOrientationMask)orientations;
+- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
 
 @end

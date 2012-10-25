@@ -600,7 +600,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    NSUInteger supportedInterfaceOrientations = HLSInterfaceOrientationMaskAll;
+    NSUInteger supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren: {
             for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {

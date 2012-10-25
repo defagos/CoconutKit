@@ -100,7 +100,7 @@ typedef enum {
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & HLSInterfaceOrientationMaskAll;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
 }
 
 #pragma mark UISearchDisplayDelegate protocol implementation

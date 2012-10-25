@@ -166,21 +166,21 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     }
 }
 
-- (BOOL)shouldAutorotateForOrientations:(HLSInterfaceOrientationMask)orientations
+- (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations
 {
-    if (orientations & HLSInterfaceOrientationMaskPortrait
+    if (orientations & UIInterfaceOrientationMaskPortrait
             && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
         return YES;
     }
-    else if (orientations & HLSInterfaceOrientationMaskLandscapeLeft
+    else if (orientations & UIInterfaceOrientationMaskLandscapeLeft
             && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
         return YES;
     }
-    else if (orientations & HLSInterfaceOrientationMaskLandscapeRight
+    else if (orientations & UIInterfaceOrientationMaskLandscapeRight
             && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
         return YES;
     }
-    else if (orientations & HLSInterfaceOrientationMaskPortraitUpsideDown
+    else if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown
             && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
         return YES;
     }
@@ -217,18 +217,18 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     }
 }
 
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(HLSInterfaceOrientationMask)orientations
+- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations
 {
-    if (orientations & HLSInterfaceOrientationMaskPortrait && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortrait) {
+    if (orientations & UIInterfaceOrientationMaskPortrait && [self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait) {
         return UIInterfaceOrientationPortrait;
     }
-    else if (orientations & HLSInterfaceOrientationMaskLandscapeRight && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscapeRight) {
+    else if (orientations & UIInterfaceOrientationMaskLandscapeRight && [self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeRight) {
         return UIInterfaceOrientationLandscapeRight;
     }
-    else if (orientations & HLSInterfaceOrientationMaskLandscapeLeft && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskLandscapeLeft) {
+    else if (orientations & UIInterfaceOrientationMaskLandscapeLeft && [self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeLeft) {
         return UIInterfaceOrientationLandscapeLeft;
     }
-    else if (orientations & HLSInterfaceOrientationMaskPortraitUpsideDown && [self supportedInterfaceOrientations] & HLSInterfaceOrientationMaskPortraitUpsideDown) {
+    else if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown && [self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortraitUpsideDown) {
         return UIInterfaceOrientationPortraitUpsideDown;
     }
     else {

@@ -168,7 +168,7 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     // This fixes an inconsistency of UIViewController, see HLSViewController.h documentation
-    return HLSInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
