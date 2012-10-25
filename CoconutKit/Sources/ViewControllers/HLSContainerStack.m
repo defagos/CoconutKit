@@ -334,16 +334,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // TODO: This test cannot be made without being wrapped, at least in isViewDisplayed, maybe better in isViewLoaded test.
-    //       Maybe find a better location / approach
-#if 0
-    // Check that the view controller to be pushed is compatible with the current orientation
-    if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
-        HLSLoggerError(@"The view controller does not support the current view container orientation");
-        return;
-    }
-#endif
-    
     if ([self.containerViewController isViewDisplayed]) {
         // Notify the delegate before the view controller is actually installed on top of the stack and associated with the
         // container (see HLSContainerStackDelegate interface contract)
