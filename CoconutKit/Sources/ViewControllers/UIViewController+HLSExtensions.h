@@ -28,25 +28,6 @@ typedef enum {
  * This category also provide automatic keyboard dismissal when a view controller disappears while a text field was
  * active.
  *
- * Moreover, this category makes the new iOS 6 rotation methods also available on iOS 4 and iOS 5. This means you can
- * setup the rotation behavior of any view controller by simply implementing the two methods
- *     -shouldAutorotate 
- * and -supportedInterfaceOrientations
- * instead of implementing the old -shouldRotateToInterfaceOrientation: method. Rotation masks compatible with iOS 6
- * ones are defined in HLSOrientationMode if you need to compile against the iOS 4 or 5 SDKs. If you compile against
- * the iOS 6 SDK, you should use the new UIInterfaceOrientationFlags instead.
- *
- * As a quick reference:
- *    -shouldAutorotateToInterfaceOrientation: is called on iOS 4 and 5 by UIKit, never by UIKit on iOS 6. It can
- *     still be called by client code on iOS 6
- *    -shouldAutorotate and -supportedInterfaceOrientations are never called by UIKit directly on iOS 4 and 5, and
- *     are only called by UIKit starting with iOS 6. They can still be called by client code on iOS 4 and 5 since
- *     CoconutKit adds support for those methods on iOS 4 and 5 as well
- *
- * You can still implement the usual -shouldRotateToInterfaceOrientation: method if you prefer, but by implementing
- * the new iOS 6 methods above, your code will be the same for all versions of iOS. If you implement both the old
- * and new methods, only the new ones will be taken into account.
- *
  * Remark:
  * -------
  * As written in the UIKit documentation (though slightly scattered all around), view controller's view frame dimensions

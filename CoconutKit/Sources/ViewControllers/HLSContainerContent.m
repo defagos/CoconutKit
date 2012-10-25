@@ -49,6 +49,21 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 @end
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+
+/**
+ * Declarations to suppress warnings when compiling against the iOS SDK 5. Remove when CoconutKit support requires
+ * at least SDK 6
+ */
+@interface UIViewController (HLSContainerContentSDK5Compatibility)
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods;
+- (BOOL)shouldAutomaticallyForwardRotationMethods;
+
+@end
+
+#endif
+
 @interface UIViewController (HLSContainerContent)
 
 // Empty category. Just swizzling some UIViewController methods for HLSContainerContent
