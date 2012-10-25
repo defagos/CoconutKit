@@ -37,8 +37,9 @@
         self.autoresizingMask = HLSViewAutoresizingAll;
         
         // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on frontContentView relies
-        // on its initial alpha
+        // on its initial alpha. The transform is always set to identity, corresponding to an initial portrait orientation
         UIView *frontView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        frontView.transform = CGAffineTransformIdentity;
         frontView.backgroundColor = [UIColor clearColor];
         frontView.autoresizingMask = HLSViewAutoresizingAll;
 

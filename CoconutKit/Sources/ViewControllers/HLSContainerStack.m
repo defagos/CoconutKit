@@ -811,8 +811,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    groupView.frontView.transform = CGAffineTransformIdentity;
-    groupView.frontView.bounds = groupView.bounds;
+    // We directly act on the front content view, not on the front view, to avoid interfering with the animations
+    // played on it
+    groupView.frontContentView.transform = CGAffineTransformIdentity;
+    groupView.frontContentView.bounds = groupView.bounds;
     if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
         // Find an orientation compatible with the container
         UIInterfaceOrientation compatibleInterfaceOrientation = [containerContent.viewController compatibleOrientationWithViewController:self.containerViewController];
@@ -870,12 +872,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 break;
             }
         }
-        groupView.frontView.transform = CGAffineTransformMakeRotation(angle);
+        groupView.frontContentView.transform = CGAffineTransformMakeRotation(angle);
         
         // If the format is different, must exchange width and height
         if ((UIInterfaceOrientationIsPortrait(interfaceOrientation) && UIInterfaceOrientationIsLandscape(compatibleInterfaceOrientation))
                 || (UIInterfaceOrientationIsLandscape(interfaceOrientation) && UIInterfaceOrientationIsPortrait(compatibleInterfaceOrientation))) {
-            groupView.frontView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
+            groupView.frontContentView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
         }
     }
 }
