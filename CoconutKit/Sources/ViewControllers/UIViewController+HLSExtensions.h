@@ -83,6 +83,12 @@ typedef enum {
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 
 /**
+ * Return YES iff the receiver implements the new iOS 6 rotation methods -shouldAutorotate and -supportedInterfaceOrientations
+ * (also possible for iOS 4 when using CoconutKit)
+ */
+- (BOOL)implementsNewAutorotationMethods;
+
+/**
  * Return YES iff the receiver can autorotate to at least one of the supplied orientations
  */
 - (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations;
@@ -91,6 +97,11 @@ typedef enum {
  * Return YES iff the receiver has at least one compatible orientation with the supplied view controller
  */
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
+
+/**
+ * Return YES iff the receiver supports the supplied interface orientation
+ */
+- (BOOL)supportsInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 /**
  * Return the first interface orientation supported by the receiver, and compatible with a given orientation set

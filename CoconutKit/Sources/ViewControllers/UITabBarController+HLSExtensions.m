@@ -75,7 +75,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
         case HLSAutorotationModeContainerAndChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
             for (UIViewController *viewController in self.viewControllers) {
-                if (! viewController.shouldAutorotate) {
+                if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
             }

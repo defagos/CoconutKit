@@ -54,7 +54,7 @@ typedef enum {
  * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
  * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
  * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
- * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
+ * (if it is implemented, it is ignored, except if compatibleWithNewAutorotationMethods is set to NO)
  */
 - (BOOL)shouldAutorotate;
 
@@ -65,7 +65,7 @@ typedef enum {
  * When building an application for iOS 4 or 5, this method is NOT implemented. If both -shouldAutorotate and
  * -supportedInterfaceOrientations are implemented for a view controller on iOS 4 or 5, the older
  * -shouldAutorotateToInterfaceOrientation: method is automatically derived and should not be implemented
- * (if it is implemented, it is ignored, except if compatibleWithNewRotationMethods is set to NO)
+ * (if it is implemented, it is ignored, except if compatibleWithNewAutorotationMethods is set to NO)
  */
 - (NSUInteger)supportedInterfaceOrientations;
 
@@ -89,7 +89,7 @@ typedef enum {
  * There is only an exception to this rule: If you are using a view controller which you do not control the 
  * implementation of (e.g. a view controller made available by a static library), and whose implementation has
  * been made compatible with iOS 4, 5 and 6 (i.e. which implements all three rotation methods internally), 
- * you should disable the above mechanism by setting the value of the compatibleWithNewRotationMethods property 
+ * you should disable the above mechanism by setting the value of the compatibleWithNewAutorotationMethods property
  * to NO for this view controller. Since this should be quite rare, the backwards iOS 6 optional compatibility 
  * mechanism is enabled by default.
  *
@@ -114,6 +114,6 @@ typedef enum {
  *
  * Default value is YES
  */
-@property (nonatomic, assign, getter=isCompatibleWithNewRotationMethods) BOOL compatibleWithNewRotationMethods;
+@property (nonatomic, assign, getter=isCompatibleWithNewAutorotationMethods) BOOL compatibleWithNewAutorotationMethods;
 
 @end

@@ -397,17 +397,43 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return [self shouldAutorotate] && ([self supportedInterfaceOrientations] & (1 << toInterfaceOrientation));
+    return [self.viewController supportsInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate
 {
-    return [self.viewController shouldAutorotate];
+    if ([self.viewController respondsToSelector:@selector(shouldAutorotate)]) {
+        return [self.viewController shouldAutorotate];
+    }
+    else {
+        return [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [self.viewController supportedInterfaceOrientations];
+    if ([self.viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+        return [self.viewController supportedInterfaceOrientations];
+    }
+    else {
+        UIInterfaceOrientationMask orientations = 0;
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            orientations |= UIInterfaceOrientationMaskPortrait;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            orientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            orientations |= UIInterfaceOrientationMaskLandscapeLeft;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            orientations |= UIInterfaceOrientationMaskLandscapeRight;
+        }
+        return orientations;
+    }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

@@ -74,7 +74,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                if (! viewController.shouldAutorotate) {
+                if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
             }
@@ -82,7 +82,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
         }
             
         case HLSAutorotationModeContainerAndVisibleChildren: {
-            if (! self.topViewController.shouldAutorotate) {
+            if (! [self.topViewController shouldAutorotate]) {
                 return NO;
             }
             break;

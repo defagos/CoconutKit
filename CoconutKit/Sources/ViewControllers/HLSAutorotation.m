@@ -11,24 +11,24 @@
 #import "HLSRuntime.h"
 
 // Associated object keys
-static void *s_compatibleWithNewRotationMethodsKey = &s_compatibleWithNewRotationMethodsKey;
+static void *s_compatibleWithNewAutorotationMethodsKey = &s_compatibleWithNewAutorotationMethodsKey;
 
 @implementation UIViewController (HLSAutorotationPreSDK6Compatibility)
 
-- (BOOL)isCompatibleWithNewRotationMethods
+- (BOOL)isCompatibleWithNewAutorotationMethods
 {
-    NSNumber *compatibleWithNewRotationMethodsNumber = objc_getAssociatedObject(self, s_compatibleWithNewRotationMethodsKey);
-    if (! compatibleWithNewRotationMethodsNumber) {
+    NSNumber *compatibleWithNewAutorotationMethodsNumber = objc_getAssociatedObject(self, s_compatibleWithNewAutorotationMethodsKey);
+    if (! compatibleWithNewAutorotationMethodsNumber) {
         return YES;
     }
     else {
-        return [compatibleWithNewRotationMethodsNumber boolValue];
+        return [compatibleWithNewAutorotationMethodsNumber boolValue];
     }
 }
 
-- (void)setCompatibleWithNewRotationMethods:(BOOL)compatibleWithNewRotationMethods
+- (void)setCompatibleWithNewAutorotationMethods:(BOOL)compatibleWithNewAutorotationMethods
 {
-    objc_setAssociatedObject(self, s_compatibleWithNewRotationMethodsKey, [NSNumber numberWithBool:compatibleWithNewRotationMethods],
+    objc_setAssociatedObject(self, s_compatibleWithNewAutorotationMethodsKey, [NSNumber numberWithBool:compatibleWithNewAutorotationMethods],
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
