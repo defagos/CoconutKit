@@ -15,9 +15,9 @@ typedef enum {
     HLSInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
     HLSInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
     HLSInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
-    HLSInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-    HLSInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
-    HLSInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
+    HLSInterfaceOrientationMaskLandscape = (HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight),
+    HLSInterfaceOrientationMaskAll = (HLSInterfaceOrientationMaskPortrait | HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight | HLSInterfaceOrientationMaskPortraitUpsideDown),
+    HLSInterfaceOrientationMaskAllButUpsideDown = (HLSInterfaceOrientationMaskPortrait | HLSInterfaceOrientationMaskLandscapeLeft | HLSInterfaceOrientationMaskLandscapeRight),
 } HLSInterfaceOrientationMask;
 
 /**
