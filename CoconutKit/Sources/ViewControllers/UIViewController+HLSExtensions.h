@@ -45,7 +45,8 @@ typedef enum {
 /**
  * Convenience method to set the view controller to nil and forward -viewWill/DidUnload events correctly
  * Not meant to be overridden
- * Note: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
+ *
+ * Remark: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
  */
 - (void)unloadViews;
 
@@ -94,11 +95,12 @@ typedef enum {
 /**
  * Return the first interface orientation supported by the receiver, and compatible with a given orientation set
  * (respectively a view controller). Orientations are checked in the following order:
- *   - portrait
+ *   - portrait (the usual default orientation on iPhone and iPad)
  *   - landscape right (on iPad, this is the orientation we get when using a smart cover)
  *   - landscape left
- *   - portrait upside down
- * Return 0 if no orientation is found
+ *   - portrait upside down (the usually disabled orientation on iPhone)
+ *
+ * Return 0 if no compatible orientation is found
  */
 - (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
