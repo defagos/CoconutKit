@@ -23,7 +23,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 @interface HLSAnimation () <HLSAnimationStepDelegate>
 
-+ (NSArray *)copyForAnimationSteps:(NSArray *)animationSteps;
++ (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps;
 
 @property (nonatomic, retain) NSArray *animationSteps;
 @property (nonatomic, retain) NSArray *animationStepCopies;
@@ -70,7 +70,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     return [HLSAnimation animationWithAnimationSteps:animationSteps];
 }
 
-+ (NSArray *)copyForAnimationSteps:(NSArray *)animationSteps
++ (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps
 {
     NSMutableArray *animationStepCopies = [NSMutableArray array];
     for (HLSAnimationStep *animationStep in animationSteps) {
@@ -89,7 +89,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         }
         else {
             HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
-            self.animationSteps = [HLSAnimation copyForAnimationSteps:animationSteps];
+            self.animationSteps = [HLSAnimation duplicateAnimationSteps:animationSteps];
         }
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -273,7 +273,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     
     // Animation steps carry state information. To avoid issues when playing the same animation step several times (most
     // notably when repeatCount > 1), we work on a deep copy of them
-    self.animationStepCopies = [HLSAnimation copyForAnimationSteps:self.animationSteps];
+    self.animationStepCopies = [HLSAnimation duplicateAnimationSteps:self.animationSteps];
         
     m_animated = animated;
     m_repeatCount = repeatCount;

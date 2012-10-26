@@ -12,7 +12,7 @@
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UIPickerView *m_transitionPickerView;
-    UISegmentedControl *sm_autorotationModeSegmentedControl;
+    UISegmentedControl *m_autorotationModeSegmentedControl;
     UISwitch *m_inTabBarControllerSwitch;
     UISwitch *m_inNavigationControllerSwitch;
     UISwitch *m_animatedSwitch;
