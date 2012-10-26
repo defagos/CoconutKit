@@ -159,6 +159,7 @@
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
 "The behavior above can be disabled"="The behavior above can be disabled";
+"The view controller is not compatible with the container (most probably its orientation)"="The view controller is not compatible with the container (most probably its orientation)";
 "This value cannot be negative"="This value cannot be negative";
 "Top"="Top";
 "Transition"="Transition";

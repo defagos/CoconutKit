@@ -170,11 +170,24 @@
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [stackController insertViewController:pushedViewController
-                                  atIndex:(NSUInteger)roundf(self.indexSlider.value)
-                      withTransitionClass:NSClassFromString(transitionName)
-                                 duration:kAnimationTransitionDefaultDuration
-                                 animated:self.animatedSwitch.on];
+    
+    @try {
+        [stackController insertViewController:pushedViewController
+                                      atIndex:(NSUInteger)roundf(self.indexSlider.value)
+                          withTransitionClass:NSClassFromString(transitionName)
+                                     duration:kAnimationTransitionDefaultDuration
+                                     animated:self.animatedSwitch.on];
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
+                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+        return;
+    }
     
     [self updateIndexInfo];
 }

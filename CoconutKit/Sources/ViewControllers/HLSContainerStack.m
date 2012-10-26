@@ -352,6 +352,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                          containerViewController:self.containerViewController
                                                                                  transitionClass:transitionClass
                                                                                         duration:duration] autorelease];
+    if (! containerContent) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"The view controller to insert is incompatible with the container it is inserted into"
+                                     userInfo:nil];
+    }
+    
     [self.containerContents insertObject:containerContent atIndex:index];
 
     // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
