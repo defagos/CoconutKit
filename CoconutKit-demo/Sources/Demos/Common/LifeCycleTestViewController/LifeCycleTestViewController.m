@@ -104,6 +104,22 @@
     HLSLoggerInfo(@"Called, fromInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
 }
 
+#pragma mark Layout management
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    HLSLoggerInfo(@"Called");
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    HLSLoggerInfo(@"Called");
+}
+
 #pragma mark Localization
 
 - (void)localize
