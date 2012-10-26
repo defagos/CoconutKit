@@ -9,6 +9,7 @@
 #import "UIViewController+HLSExtensions.h"
 
 #import <objc/runtime.h>
+#import "HLSAutorotationCompatibility.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
@@ -28,7 +29,6 @@ static void (*s_UIViewController__viewWillDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewWillUnload_Imp)(id, SEL) = NULL;
 static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
-static BOOL (*s_UIViewController__shouldAutorotateToInterfaceOrientation_Imp)(id, SEL, NSInteger) = NULL;
 
 // Swizzled method implementations
 static id swizzled_UIViewController__initWithNibName_bundle_Imp(UIViewController *self, SEL _cmd, NSString *nibName, NSBundle *bundle);
@@ -40,9 +40,8 @@ static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *s
 static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
 static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd);
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
-static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Imp(UIViewController *self, SEL _cmd, NSInteger toInterfaceOrientation);
 
-@interface UIViewController (HLSExtensionsPrivate)
+@interface UIViewController (HLSExtensionsPrivate) <HLSAutorotationCompatibility>
 
 - (void)uiViewControllerHLSExtensionsInit;
 
@@ -307,9 +306,6 @@ static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Im
     s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                   @selector(viewDidUnload),
                                                                                   (IMP)swizzled_UIViewController__viewDidUnload_Imp);
-    s_UIViewController__shouldAutorotateToInterfaceOrientation_Imp = (BOOL (*)(id, SEL, NSInteger))HLSSwizzleSelector(self,
-                                                                                                                      @selector(shouldAutorotateToInterfaceOrientation:),
-                                                                                                                      (IMP)swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Imp);
 }
 
 #pragma mark Object creation and destruction
@@ -462,20 +458,4 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidUnload];
-}
-
-static BOOL swizzled_UIViewController__shouldAutorotateToInterfaceOrientation_Imp(UIViewController *self, SEL _cmd, NSInteger toInterfaceOrientation)
-{
-    // This is the pre-iOS 6 deprecated rotation method. To avoid having to duplicate rotation code for applications
-    // targeting both iOS 6 and prior versions, we implement the old rotation method in terms of the new rotation
-    // methods. This way, one only need to implement rotation using iOS 6 methods
-    if (self.compatibleWithNewAutorotationMethods && [self implementsNewAutorotationMethods]) {
-        if (! [self shouldAutorotate]) {
-            return NO;
-        }
-        return [self supportedInterfaceOrientations] & (1 << toInterfaceOrientation);
-    }
-    else {
-        return (*s_UIViewController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);
-    }
 }

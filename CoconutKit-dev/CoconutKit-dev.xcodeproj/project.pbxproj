@@ -409,8 +409,6 @@
 		6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */; };
 		6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
 		6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
-		6FB896D21639BAAC008AC996 /* HLSAutorotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB896D11639BAAC008AC996 /* HLSAutorotation.m */; };
-		6FB896D31639BAAC008AC996 /* HLSAutorotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB896D11639BAAC008AC996 /* HLSAutorotation.m */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
@@ -507,6 +505,7 @@
 		6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
+		6F0C7D01163A7B7500C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F159B4715A554250020AFAC /* CoconutKit-dev-ios4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev-ios4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -809,7 +808,6 @@
 		6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FAF24F1162DE58000F93DA2 /* UITabBarController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FB896D11639BAAC008AC996 /* HLSAutorotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAutorotation.m; sourceTree = "<group>"; };
 		6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
@@ -1326,7 +1324,7 @@
 			isa = PBXGroup;
 			children = (
 				6FAF24EE162DE58000F93DA2 /* HLSAutorotation.h */,
-				6FB896D11639BAAC008AC996 /* HLSAutorotation.m */,
+				6F0C7D01163A7B7500C6C381 /* HLSAutorotationCompatibility.h */,
 				6FADE6A214BA04A6007EE121 /* HLSContainerContent.h */,
 				6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */,
 				6F8C933E15CEE641006D892C /* HLSContainerGroupView.h */,
@@ -2240,7 +2238,6 @@
 				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
-				6FB896D21639BAAC008AC996 /* HLSAutorotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2394,7 +2391,6 @@
 				6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
-				6FB896D31639BAAC008AC996 /* HLSAutorotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

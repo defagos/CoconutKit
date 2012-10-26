@@ -8,6 +8,7 @@
 
 #import "UITabBarController+HLSExtensions.h"
 
+#import "HLSAutorotationCompatibility.h"
 #import "HLSRuntime.h"
 
 // Associated object keys
@@ -74,7 +75,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
-            for (UIViewController *viewController in self.viewControllers) {
+            for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
@@ -100,7 +101,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
-            for (UIViewController *viewController in self.viewControllers) {
+            for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;

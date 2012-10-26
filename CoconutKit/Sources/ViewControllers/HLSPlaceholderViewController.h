@@ -40,8 +40,7 @@
  *   - awakeFromNib
  *   - viewWill...
  *   - viewDid...
- *   - shouldAutorotateToInterfaceOrientation: : If the call to the super method returns NO, return NO immediately (this
- *                                               means that the inset cannot rotate)
+ *   - shouldAutorotate and supportedInterfaceOrientations
  *   - willRotateToInterfaceOrientation:duration:
  *   - willAnimate...
  *   - didRotateFromInterfaceOrientation:

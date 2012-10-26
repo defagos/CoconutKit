@@ -9,6 +9,7 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
+#import "HLSAutorotationCompatibility.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -64,7 +65,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 #endif
 
-@interface UIViewController (HLSContainerContent)
+@interface UIViewController (HLSContainerContent) <HLSAutorotationCompatibility>
 
 // Empty category. Just swizzling some UIViewController methods for HLSContainerContent
 
