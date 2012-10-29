@@ -9,7 +9,10 @@
 #import "CoconutKit_demoApplication.h"
 
 #import "DemosListViewController.h"
+#import "RootNavigationDemoViewController.h"
+#import "RootSplitViewDemoController.h"
 #import "RootStackDemoViewController.h"
+#import "RootTabBarDemoViewController.h"
 
 @interface CoconutKit_demoApplication ()
 
@@ -54,6 +57,30 @@
             RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
             [stackController pushViewController:rootStackDemoViewController2 withTransitionClass:[HLSTransitionCoverFromBottom class] animated:NO];
             self.rootViewController = stackController;
+        }
+        else if ([demoMode isEqualToString:@"RootNavigation"]) {
+            RootNavigationDemoViewController *rootNavigationDemoViewController = [[[RootNavigationDemoViewController alloc] init] autorelease];
+            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:rootNavigationDemoViewController] autorelease];
+            navigationController.delegate = self;
+            self.rootViewController = navigationController;
+        }
+        else if ([demoMode isEqualToString:@"RootSplitView"]) {
+            RootSplitViewDemoController *leftRootSplitViewController = [[[RootSplitViewDemoController alloc] init] autorelease];
+            RootSplitViewDemoController *rightRootSplitViewController = [[[RootSplitViewDemoController alloc] init] autorelease];
+            UISplitViewController *splitViewController = [[[UISplitViewController alloc] init] autorelease];
+            splitViewController.viewControllers = [NSArray arrayWithObjects:leftRootSplitViewController, rightRootSplitViewController, nil];
+            splitViewController.delegate = self;
+            self.rootViewController = splitViewController;
+        }
+        else if ([demoMode isEqualToString:@"RootTabBar"]) {
+            RootTabBarDemoViewController *rootTabBarDemoViewController1 = [[[RootTabBarDemoViewController alloc] init] autorelease];
+            RootTabBarDemoViewController *rootTabBarDemoViewController2 = [[[RootTabBarDemoViewController alloc] init] autorelease];
+            RootTabBarDemoViewController *rootTabBarDemoViewController3 = [[[RootTabBarDemoViewController alloc] init] autorelease];
+            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            tabBarController.viewControllers = [NSArray arrayWithObjects:rootTabBarDemoViewController1, rootTabBarDemoViewController2,
+                                                rootTabBarDemoViewController3, nil];
+            tabBarController.delegate = self;
+            self.rootViewController = tabBarController;
         }
         else if ([demoMode isEqualToString:@"RootStoryboard"]) {
             // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
@@ -108,16 +135,6 @@
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
     }
     [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        return;
-    }
-    
-    NSString *localization = [[[NSBundle mainBundle] localizations] objectAtIndex:buttonIndex];
-    [NSBundle setLocalization:localization];
 }
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
@@ -200,6 +217,68 @@
                animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
+
+#pragma mark UIActionSheetDelegate protocol implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    NSString *localization = [[[NSBundle mainBundle] localizations] objectAtIndex:buttonIndex];
+    [NSBundle setLocalization:localization];
+}
+
+#pragma mark UINavigationControllerDelegate protocol implementation
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+#pragma mark UISplitViewControllerDelegate protocol implementation
+
+- (void)splitViewController:(UISplitViewController *)splitViewController
+          popoverController:(UIPopoverController *)popoverController
+  willPresentViewController:(UIViewController *)viewController
+{
+    HLSLoggerInfo(@"Popover controller %@ will present view controller %@", popoverController, viewController);
+}
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController
+   shouldHideViewController:(UIViewController *)viewController
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+- (void)splitViewController:(UISplitViewController *)splitViewController
+     willShowViewController:(UIViewController *)viewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    HLSLoggerInfo(@"Will show view controller %@ invalidating bar button item %@", viewController, barButtonItem);
+}
+
+- (void)splitViewController:(UISplitViewController *)splitViewController
+     willHideViewController:(UIViewController *)viewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)popoverController
+{
+    HLSLoggerInfo(@"Will hide view controller %@ with barButtonItem %@ for popoverController %@", viewController, barButtonItem, popoverController);
+}
+
+#pragma mark UITabBarControllerDelegate protocol implementation
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    HLSLoggerInfo(@"Did select view controller %@", viewController);
 }
 
 #pragma mark Core Data

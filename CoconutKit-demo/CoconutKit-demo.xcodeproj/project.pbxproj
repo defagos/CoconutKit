@@ -11,6 +11,18 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; };
+		6F0BFE04163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; };
+		6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */; };
+		6F0BFE06163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */; };
+		6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */; };
+		6F0BFE0B163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */; };
+		6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
+		6F0BFE0D163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
+		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
+		6F0BFE12163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
+		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
+		6F0BFE14163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F159B4F15A55CD10020AFAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		6F159B5015A55CD10020AFAC /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F159B5115A55CD10020AFAC /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -288,6 +300,15 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
+		6F0BFE00163EED8900420A5F /* RootNavigationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationDemoViewController.h; sourceTree = "<group>"; };
+		6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationDemoViewController.m; sourceTree = "<group>"; };
+		6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootNavigationDemoViewController.xib; sourceTree = "<group>"; };
+		6F0BFE07163EED9F00420A5F /* RootSplitViewDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootSplitViewDemoController.h; sourceTree = "<group>"; };
+		6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootSplitViewDemoController.m; sourceTree = "<group>"; };
+		6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootSplitViewDemoController.xib; sourceTree = "<group>"; };
+		6F0BFE0E163EEDAC00420A5F /* RootTabBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarDemoViewController.h; sourceTree = "<group>"; };
+		6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarDemoViewController.m; sourceTree = "<group>"; };
+		6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F159BD915A55CD10020AFAC /* CoconutKit-demo-ios4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-demo-ios4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
@@ -554,6 +575,36 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F0BFDFC163EED5800420A5F /* RootNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE00163EED8900420A5F /* RootNavigationDemoViewController.h */,
+				6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */,
+				6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */,
+			);
+			path = RootNavigation;
+			sourceTree = "<group>";
+		};
+		6F0BFDFD163EED5800420A5F /* RootSplitView */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE07163EED9F00420A5F /* RootSplitViewDemoController.h */,
+				6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */,
+				6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */,
+			);
+			path = RootSplitView;
+			sourceTree = "<group>";
+		};
+		6F0BFDFE163EED5800420A5F /* RootTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE0E163EEDAC00420A5F /* RootTabBarDemoViewController.h */,
+				6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */,
+				6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */,
+			);
+			path = RootTabBar;
 			sourceTree = "<group>";
 		};
 		6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-Release.staticframework */ = {
@@ -900,7 +951,10 @@
 			isa = PBXGroup;
 			children = (
 				6F9C461614C5C30B00824AB2 /* Placeholder */,
+				6F0BFDFC163EED5800420A5F /* RootNavigation */,
+				6F0BFDFD163EED5800420A5F /* RootSplitView */,
 				6F9C461A14C5C30B00824AB2 /* RootStack */,
+				6F0BFDFE163EED5800420A5F /* RootTabBar */,
 				6FC3A2A0159E0422001A290E /* Segue */,
 				6F9C461E14C5C30B00824AB2 /* Stack */,
 				6F9C462214C5C30B00824AB2 /* TableSearchDisplay */,
@@ -1293,6 +1347,9 @@
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
+				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
+				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,6 +1420,9 @@
 				6F159C3715A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 				6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 				6FB9EA5315F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
+				6F0BFE06163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
+				6F0BFE0D163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6F0BFE14163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1459,6 +1519,9 @@
 				6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */,
 				6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */,
 				6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */,
+				6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
+				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
+				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1522,6 +1585,9 @@
 				6FF3E71815D37FB900AB9A53 /* CustomTransitions.m in Sources */,
 				6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */,
 				6FB9EA5115F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */,
+				6F0BFE04163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
+				6F0BFE0B163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
+				6F0BFE12163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

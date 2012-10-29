@@ -38,6 +38,18 @@
 		6F00014B156BD17F0055CED7 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */; };
 		6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
+		6F0BFE21163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */; };
+		6F0BFE22163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */; };
+		6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */; };
+		6F0BFE24163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */; };
+		6F0BFE25163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1B163EF00B00420A5F /* RootSplitViewDemoController.m */; };
+		6F0BFE26163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1B163EF00B00420A5F /* RootSplitViewDemoController.m */; };
+		6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1C163EF00B00420A5F /* RootSplitViewDemoController.xib */; };
+		6F0BFE28163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1C163EF00B00420A5F /* RootSplitViewDemoController.xib */; };
+		6F0BFE29163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1F163EF00B00420A5F /* RootTabBarDemoViewController.m */; };
+		6F0BFE2A163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE1F163EF00B00420A5F /* RootTabBarDemoViewController.m */; };
+		6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
+		6F0BFE2C163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
 		6F159A7015A554250020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7FF14BA04C8007EE121 /* FixedSizeLargeViewController.xib */; };
@@ -505,6 +517,15 @@
 		6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
+		6F0BFE16163EF00B00420A5F /* RootNavigationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationDemoViewController.h; sourceTree = "<group>"; };
+		6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationDemoViewController.m; sourceTree = "<group>"; };
+		6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootNavigationDemoViewController.xib; sourceTree = "<group>"; };
+		6F0BFE1A163EF00B00420A5F /* RootSplitViewDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootSplitViewDemoController.h; sourceTree = "<group>"; };
+		6F0BFE1B163EF00B00420A5F /* RootSplitViewDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootSplitViewDemoController.m; sourceTree = "<group>"; };
+		6F0BFE1C163EF00B00420A5F /* RootSplitViewDemoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootSplitViewDemoController.xib; sourceTree = "<group>"; };
+		6F0BFE1E163EF00B00420A5F /* RootTabBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarDemoViewController.h; sourceTree = "<group>"; };
+		6F0BFE1F163EF00B00420A5F /* RootTabBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarDemoViewController.m; sourceTree = "<group>"; };
+		6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F0C7D01163A7B7500C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
@@ -1022,6 +1043,36 @@
 				6F000132156BD17F0055CED7 /* skyscraper.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		6F0BFE15163EF00B00420A5F /* RootNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE16163EF00B00420A5F /* RootNavigationDemoViewController.h */,
+				6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */,
+				6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */,
+			);
+			path = RootNavigation;
+			sourceTree = "<group>";
+		};
+		6F0BFE19163EF00B00420A5F /* RootSplitView */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE1A163EF00B00420A5F /* RootSplitViewDemoController.h */,
+				6F0BFE1B163EF00B00420A5F /* RootSplitViewDemoController.m */,
+				6F0BFE1C163EF00B00420A5F /* RootSplitViewDemoController.xib */,
+			);
+			path = RootSplitView;
+			sourceTree = "<group>";
+		};
+		6F0BFE1D163EF00B00420A5F /* RootTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6F0BFE1E163EF00B00420A5F /* RootTabBarDemoViewController.h */,
+				6F0BFE1F163EF00B00420A5F /* RootTabBarDemoViewController.m */,
+				6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */,
+			);
+			path = RootTabBar;
 			sourceTree = "<group>";
 		};
 		6F1F4DF715A1B64700F65ECF /* Segue */ = {
@@ -1619,7 +1670,10 @@
 			isa = PBXGroup;
 			children = (
 				6FADE85E14BA04C9007EE121 /* Placeholder */,
+				6F0BFE15163EF00B00420A5F /* RootNavigation */,
+				6F0BFE19163EF00B00420A5F /* RootSplitView */,
 				6FADE86214BA04C9007EE121 /* RootStack */,
+				6F0BFE1D163EF00B00420A5F /* RootTabBar */,
 				6F1F4DF715A1B64700F65ECF /* Segue */,
 				6FADE86614BA04C9007EE121 /* Stack */,
 				6FADE86A14BA04C9007EE121 /* TableSearchDisplay */,
@@ -1980,6 +2034,9 @@
 				6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */,
+				6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
+				6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2053,6 +2110,9 @@
 				6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF315EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA4515F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */,
+				6F0BFE24163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
+				6F0BFE28163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6F0BFE2C163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2238,6 +2298,9 @@
 				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
+				6F0BFE21163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */,
+				6F0BFE25163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */,
+				6F0BFE29163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2391,6 +2454,9 @@
 				6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
+				6F0BFE22163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */,
+				6F0BFE26163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */,
+				6F0BFE2A163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
