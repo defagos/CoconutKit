@@ -143,8 +143,9 @@
     self.title = @"HLSStackController";
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible children", @"Visible children") forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All children", @"Tous les enfants") forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings

@@ -102,7 +102,7 @@
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
-    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndVisibleChildren || self.autorotationMode == HLSAutorotationModeContainerAndChildren);
+    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndVisibleChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren);
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -389,7 +389,7 @@
 - (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender
 {
     if (self.involvingChildrenForAutorotationSwitch.on) {
-        self.autorotationMode = HLSAutorotationModeContainerAndChildren;
+        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
     }
     else {
         self.autorotationMode = HLSAutorotationModeContainer;

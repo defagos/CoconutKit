@@ -10,6 +10,20 @@
 
 @interface UINavigationController (HLSExtensions)
 
+/**
+ * Set how a navigation container decides whether it must rotate or not
+ *
+ * HLSAutorotationModeContainer: The original UIKit behavior is used (the top view controller decide on iOS 4 and 5,
+ *                               none on iOS 6)
+ * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
+ *                                            related events
+ * HLSAutorotationModeContainerAndVisibleChildren: The top child view controller decide whether rotation can occur,
+ *                                                 and receive the related events
+ * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive
+ *                                             the related events
+ *
+ * The default value is HLSAutorotationModeContainer
+ */
 @property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 @end

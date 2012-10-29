@@ -21,8 +21,9 @@ typedef enum {
     HLSAutorotationModeContainer = HLSAutorotationModeEnumBegin,            // Default: The container implementation decides which view controllers are involved
                                                                             // and which ones receive events (for UIKit containers this might vary between iOS
                                                                             // versions)
+    HLSAutorotationModeContainerAndNoChildren,                              // The container only decides and receives events
     HLSAutorotationModeContainerAndVisibleChildren,                         // The container and its visible children decide and receive events
-    HLSAutorotationModeContainerAndChildren,                                // The container and all its children (even those not visible) decide and receive events
+    HLSAutorotationModeContainerAndAllChildren,                             // The container and all its children (even those not visible) decide and receive events
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin
 } HLSAutorotationMode;

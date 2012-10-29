@@ -159,7 +159,14 @@
 /**
  * Set how the placeholder view controller decides whether it must rotate or not
  *
- * The default value is given by HLSDefaultAutorotationMode()
+ * HLSAutorotationModeContainer
+ * HLSAutorotationModeContainerAndVisibleChildren
+ * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive
+ *                                             the related events
+ * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
+ *                                            related events
+ *
+ * The default value is given by HLSAutorotationModeContainer
  */
 @property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 

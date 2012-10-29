@@ -8,7 +8,6 @@
 "Action sheet"="Action sheet";
 "Adjust font size to width"="Adjust font size to width";
 "All"="All";
-"All children"="All children";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
@@ -94,6 +93,7 @@
 "Month"="Month";
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
+"No children"="No children";
 "None"="None";
 "Number of children"="Number of children";
 "Number of lines"="Number of lines";
@@ -168,7 +168,7 @@
 "Vertical alignment"="Vertical alignment";
 "Views"="Views";
 "View controllers"="View controllers";
-"Visible children"="Visible children";
+"Visible"="Visible";
 "Web view"="Web view";
 "Week"="Week";
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";

@@ -67,13 +67,12 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
 static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController *self, SEL _cmd)
 {
     // On iOS 6, the container always decides first (does not look at children)
-    BOOL containerShouldAutorotate = (*s_UITabBarController__shouldAutorotate_Imp)(self, _cmd);
-    if (! containerShouldAutorotate) {
+    if (! (*s_UITabBarController__shouldAutorotate_Imp)(self, _cmd)) {
         return NO;
     }
     
     switch (self.autorotationMode) {
-        case HLSAutorotationModeContainerAndChildren:
+        case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 if (! [viewController shouldAutorotate]) {
@@ -83,13 +82,14 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
             break;
         }
             
+        case HLSAutorotationModeContainerAndNoChildren:
         case HLSAutorotationModeContainer:
         default: {
             break;
         }
     }
     
-    return containerShouldAutorotate;
+    return YES;
 }
 
 // Swizzled on iOS 6 only, never called on iOS 4 and 5 by UIKit (can be called by client code, though)
@@ -99,7 +99,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
     BOOL containerSupportedInterfaceOrientations = (*s_UITabBarController__supportedInterfaceOrientations_Imp)(self, _cmd);
     
     switch (self.autorotationMode) {
-        case HLSAutorotationModeContainerAndChildren:
+        case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndVisibleChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
@@ -107,6 +107,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
             break;
         }
             
+        case HLSAutorotationModeContainerAndNoChildren:
         case HLSAutorotationModeContainer:
         default: {
             break;
@@ -125,11 +126,21 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
     //            to restrict the supported orientation set, but:
     //              - orientation should be given by the top view controller
     //              - iOS 4 and iOS 5 will soon disappear, this fix is temporary and should never be a problem in practice
-    
-    // Same logic for all cases
-    for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
-        if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-            return NO;
+    switch (self.autorotationMode) {
+        case HLSAutorotationModeContainerAndAllChildren:
+        case HLSAutorotationModeContainerAndVisibleChildren:
+        case HLSAutorotationModeContainer:
+        default: {
+            for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
+                if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+                    return NO;
+                }
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndNoChildren: {
+            break;
         }
     }
     

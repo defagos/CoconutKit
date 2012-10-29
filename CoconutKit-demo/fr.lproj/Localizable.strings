@@ -8,7 +8,6 @@
 "Action sheet"="Menu action";
 "Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
-"All children"="Tous les enfants";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
@@ -94,6 +93,7 @@
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
+"No children"="Aucun enfant";
 "None"="Aucun";
 "Number of children"="Nombre d'enfants";
 "Number of lines"="Nombre de lignes";
@@ -167,7 +167,7 @@
 "Vertical alignment"="Alignement vertical";
 "Views"="Vues";
 "View controllers"="View controllers";
-"Visible children"="Enfants visibles";
+"Visible"="Visibles";
 "Web view"="Vue web";
 "Week"="Semaine";
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";
