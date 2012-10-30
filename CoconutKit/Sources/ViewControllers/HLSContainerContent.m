@@ -526,8 +526,7 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
-        // Call the original method to recursively apply the same behavior, correctly dealing with container nesting
-        return containerContent.containerViewController.parentViewController;
+        return containerContent.containerViewController;
     }
     else {
         return (*s_UIViewController__parentViewController_Imp)(self, _cmd);
