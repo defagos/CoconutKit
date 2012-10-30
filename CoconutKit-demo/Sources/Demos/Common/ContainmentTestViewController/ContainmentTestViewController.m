@@ -48,7 +48,7 @@
 {
     [super viewWillAppear:animated];
     
-    // Can be called also in iOS 4
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -56,7 +56,7 @@
 {
     [super viewDidAppear:animated];
     
-    // Can be called also in iOS 4
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -64,6 +64,7 @@
 {
     [super viewWillDisappear:animated];
     
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
@@ -71,6 +72,7 @@
 {
     [super viewDidDisappear:animated];
     
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
