@@ -67,6 +67,22 @@
     HLSLoggerInfo(@"Called for object %@", self);
 }
 
+#pragma mark Containment
+
+- (void)willMoveToParentViewController:(UIViewController *)parentViewController
+{
+    [super willMoveToParentViewController:parentViewController];
+    
+    HLSLoggerInfo(@"Called for object %@, parent is %@", self, parentViewController);
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parentViewController
+{
+    [super didMoveToParentViewController:parentViewController];
+    
+    HLSLoggerInfo(@"Called for object %@, parent is %@", self, parentViewController);
+}
+
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotate
