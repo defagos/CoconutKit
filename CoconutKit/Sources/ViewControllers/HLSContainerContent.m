@@ -30,6 +30,10 @@ static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL)
 static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
+
+// Added method implementations
+static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
+static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
 static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
@@ -187,9 +191,8 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     
     // We must call -willMoveToParentViewController: manually right before the containment relationship is removed without
     // animation, if one remains of course (iOS 5 and above, see UIViewController documentation)
-    if ([self.viewController respondsToSelector:@selector(willMoveToParentViewController:)] && self.viewController.parentViewController) {
-        [self.viewController willMoveToParentViewController:nil];
-    }
+    // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+    [self.viewController willMoveToParentViewController:nil];
     
     // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:. We need to -callRemoveFromParentViewController:
     //             so that the view controller reference count is correctly decreased
@@ -483,11 +486,19 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     //        -removeFromParentViewController exists
     
     // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
-    //        implementations for isMovingTo/FromParentViewController
+    //        implementations for isMovingTo/FromParentViewController and willMoveTo/FromParentViewController
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
         s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
+        class_addMethod(self,
+                        @selector(willMoveToParentViewController:),
+                        (IMP)iOS4_UIViewController__willMoveToParentViewController_Imp,
+                        "v@:@");
+        class_addMethod(self,
+                        @selector(didMoveToParentViewController:),
+                        (IMP)iOS4_UIViewController__didMoveToParentViewController_Imp,
+                        "v@:@");
         class_addMethod(self,
                         @selector(isMovingToParentViewController),
                         (IMP)iOS4_UIViewController__isMovingToParentViewController_Imp,
@@ -496,7 +507,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
                         @selector(isMovingFromParentViewController),
                         (IMP)iOS4_UIViewController__isMovingFromParentViewController_Imp,
                         "c@:");
-        
     }
     // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
     //        when inserted into a custom container
@@ -544,6 +554,16 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
+}
+
+static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
+{
+    // Empty implementation, so that subclasses of UIViewController can call [super willMoveToParentViewController:]
+}
+
+static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
+{
+    // Empty implementation, so that subclasses of UIViewController can call [super didMoveToParentViewController:]
 }
 
 static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)

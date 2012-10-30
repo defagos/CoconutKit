@@ -365,9 +365,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // been established (iOS 5 and above, see UIViewController documentation)
     if (! [self.containerViewController isViewDisplayed]
             || (index == [self.containerContents count] - 1 && ! animated)) {
-        if ([viewController respondsToSelector:@selector(didMoveToParentViewController:)]) {
-            [viewController didMoveToParentViewController:self.containerViewController];
-        }
+        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+        [viewController didMoveToParentViewController:self.containerViewController];
     }
     
     // If inserted in the capacity range, must add the view
@@ -1067,9 +1066,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             
             // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
             // been performed (iOS 5 and above, see UIViewController documentation)
-            if ([appearingViewController respondsToSelector:@selector(didMoveToParentViewController:)]) {
-                [appearingViewController didMoveToParentViewController:self.containerViewController];
-            }
+            // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+            [appearingViewController didMoveToParentViewController:self.containerViewController];
             
             // Notify the delegate
             if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
