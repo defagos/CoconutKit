@@ -73,7 +73,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 if (! [viewController shouldAutorotate]) {
                     return NO;
@@ -100,7 +100,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
                 containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
@@ -128,7 +128,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
     //              - iOS 4 and iOS 5 will soon disappear, this fix is temporary and should never be a problem in practice
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
-        case HLSAutorotationModeContainerAndVisibleChildren:
+        case HLSAutorotationModeContainerAndTopChildren:
         case HLSAutorotationModeContainer:
         default: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {

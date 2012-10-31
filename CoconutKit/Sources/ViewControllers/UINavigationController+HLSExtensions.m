@@ -81,7 +81,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
             break;
         }
             
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
             if (! [topViewController shouldAutorotate]) {
                 return NO;
@@ -113,7 +113,7 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
             break;
         }
             
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
             containerSupportedInterfaceOrientations &= [topViewController supportedInterfaceOrientations];
             break;
@@ -153,7 +153,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
         }
             
         case HLSAutorotationModeContainer:
-        case HLSAutorotationModeContainerAndVisibleChildren:
+        case HLSAutorotationModeContainerAndTopChildren:
         default: {
             if (self.topViewController && ! [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                 return NO;

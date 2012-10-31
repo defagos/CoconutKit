@@ -44,7 +44,7 @@
         // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
         // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
         // behavior
-        self.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+        self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
@@ -159,7 +159,7 @@
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
-            navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             pushedViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {

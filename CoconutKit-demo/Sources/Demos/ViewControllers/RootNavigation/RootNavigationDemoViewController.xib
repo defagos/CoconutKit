@@ -52,16 +52,6 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIView" id="517033221">
-						<reference key="NSNextResponder" ref="1037322864"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{0, 960}, {768, 20}}</string>
-						<reference key="NSSuperview" ref="1037322864"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:195</string>
-						<reference key="IBUIBackgroundColor" ref="783632616"/>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
 					<object class="IBUILabel" id="283943764">
 						<reference key="NSNextResponder" ref="1037322864"/>
 						<int key="NSvFlags">319</int>
@@ -368,6 +358,16 @@
 						</object>
 						<reference key="IBUIFont" ref="698677322"/>
 					</object>
+					<object class="IBUIView" id="517033221">
+						<reference key="NSNextResponder" ref="1037322864"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{0, 960}, {768, 20}}</string>
+						<reference key="NSSuperview" ref="1037322864"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:195</string>
+						<reference key="IBUIBackgroundColor" ref="783632616"/>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrameSize">{768, 980}</string>
 				<reference key="NSSuperview"/>
@@ -493,7 +493,6 @@
 						<int key="objectID">4</int>
 						<reference key="object" ref="1037322864"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="517033221"/>
 							<reference ref="360347056"/>
 							<reference ref="495125299"/>
 							<reference ref="283943764"/>
@@ -507,6 +506,7 @@
 							<reference ref="122032630"/>
 							<reference ref="1067688460"/>
 							<reference ref="624527483"/>
+							<reference ref="517033221"/>
 							<reference ref="832904082"/>
 						</array>
 						<reference key="parent" ref="0"/>

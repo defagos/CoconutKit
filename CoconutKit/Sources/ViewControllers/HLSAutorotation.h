@@ -13,7 +13,7 @@
  *     view controller, if they are involved)
  *
  * The default values are currently:
- *   - for iOS 4 and 5: HLSAutorotationModeContainerAndVisibleChildren
+ *   - for iOS 4 and 5: HLSAutorotationModeContainerAndTopChildren
  *   - for iOS 6: HLSAutorotationModeContainer
  */
 typedef enum {
@@ -22,7 +22,8 @@ typedef enum {
                                                                             // and which ones receive events (for UIKit containers this might vary between iOS
                                                                             // versions)
     HLSAutorotationModeContainerAndNoChildren,                              // The container only decides and receives events
-    HLSAutorotationModeContainerAndVisibleChildren,                         // The container and its visible children decide and receive events
+    HLSAutorotationModeContainerAndTopChildren,                             // The container and its top children decide and receive events. A container might have
+                                                                            // several top children if it displays several view controllers next to each other
     HLSAutorotationModeContainerAndAllChildren,                             // The container and all its children (even those not visible) decide and receive events
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin

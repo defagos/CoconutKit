@@ -8,7 +8,34 @@
 
 #import "RootTabBarDemoViewController.h"
 
+#import "MemoryWarningTestCoverViewController.h"
+
 @implementation RootTabBarDemoViewController
+
+#pragma mark Object creation and destruction
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    self.portraitSwitch = nil;
+    self.landscapeRightSwitch = nil;
+    self.landscapeLeftSwitch = nil;
+    self.portraitUpsideDownSwitch = nil;
+    self.autorotationModeSegmentedControl = nil;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize portraitSwitch = m_portraitSwitch;
+
+@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
+
+@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
+
+@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -17,6 +44,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor randomColor];
+    
+    self.portraitSwitch.on = YES;
+    self.landscapeRightSwitch.on = YES;
+    self.landscapeLeftSwitch.on = YES;
+    self.portraitUpsideDownSwitch.on = YES;
     
     HLSLoggerInfo(@"Called for object %@", self);
 }
@@ -100,7 +132,26 @@
 {
     HLSLoggerInfo(@"Called");
     
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
+    NSUInteger supportedOrientations = 0;
+    if ([self isViewLoaded]) {
+        if (self.portraitSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortrait;
+        }
+        if (self.landscapeRightSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeRight;
+        }
+        if (self.landscapeLeftSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeLeft;
+        }
+        if (self.portraitUpsideDownSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+        }
+    }
+    else {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
+    }
+    
+    return [super supportedInterfaceOrientations] & supportedOrientations;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -130,7 +181,25 @@
 {
     [super localize];
     
-    self.title = @"RootTabBarDemoViewController";
+    self.title = @"Tab";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    self.tabBarController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 @end

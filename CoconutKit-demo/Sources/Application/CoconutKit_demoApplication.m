@@ -105,7 +105,7 @@
         else {
             DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
-            navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             self.rootViewController = navigationController;
             UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") 
                                                                                        style:UIBarButtonItemStyleBordered 

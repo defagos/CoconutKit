@@ -154,8 +154,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *                               can occur, and receive the related events
  * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
  *                                            related events
- * HLSAutorotationModeContainerAndVisibleChildren: The top child view controller decide whether rotation can occur,
- *                                                 and receive the related events
+ * HLSAutorotationModeContainerAndTopChildren: The top child view controller decide whether rotation can occur,
+ *                                             and receive the related events
  * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive 
  *                                             the related events
  *

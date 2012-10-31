@@ -250,7 +250,7 @@
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
-    navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+    navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
     UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
     tabBarController.viewControllers = [NSArray arrayWithObject:navigationController];
     [self displayViewController:tabBarController];    
@@ -264,7 +264,7 @@
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
-    navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+    navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
     [self displayViewController:navigationController];
 }
 

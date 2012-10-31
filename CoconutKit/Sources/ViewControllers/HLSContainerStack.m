@@ -586,7 +586,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             break;
         }
             
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             HLSContainerContent *topContainerContent = [self topContainerContent];
             if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
                 return NO;
@@ -625,7 +625,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             break;
         }
             
-        case HLSAutorotationModeContainerAndVisibleChildren: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             HLSContainerContent *topContainerContent = [self topContainerContent];
             if (topContainerContent) {
                 supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
@@ -683,7 +683,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 break;
             }
                 
-            case HLSAutorotationModeContainerAndVisibleChildren: {
+            case HLSAutorotationModeContainerAndTopChildren: {
                 HLSContainerContent *topContainerContent = [self topContainerContent];
                 if (topContainerContent) {
                     [topContainerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -735,7 +735,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 break;
             }
                 
-            case HLSAutorotationModeContainerAndVisibleChildren: {
+            case HLSAutorotationModeContainerAndTopChildren: {
                 HLSContainerContent *topContainerContent = [self topContainerContent];
                 if (topContainerContent) {
                     [topContainerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -784,7 +784,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 break;
             }
                 
-            case HLSAutorotationModeContainerAndVisibleChildren: {
+            case HLSAutorotationModeContainerAndTopChildren: {
                 HLSContainerContent *topContainerContent = [self topContainerContent];
                 if (topContainerContent) {
                     [topContainerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];

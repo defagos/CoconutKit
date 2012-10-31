@@ -102,7 +102,7 @@
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
-    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndVisibleChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren);
+    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren);
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -135,7 +135,7 @@
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
-            navigationController.autorotationMode = HLSAutorotationModeContainerAndVisibleChildren;
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             insetViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
