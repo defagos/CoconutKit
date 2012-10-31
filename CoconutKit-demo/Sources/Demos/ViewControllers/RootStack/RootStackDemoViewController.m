@@ -32,6 +32,11 @@
     self.popButton = nil;
     self.transitionPickerView = nil;
     self.animatedSwitch = nil;
+    self.autorotationModeSegmentedControl = nil;
+    self.portraitSwitch = nil;
+    self.landscapeRightSwitch = nil;
+    self.landscapeLeftSwitch = nil;
+    self.portraitUpsideDownSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -46,6 +51,16 @@
 
 @synthesize animatedSwitch = m_animatedSwitch;
 
+@synthesize portraitSwitch = m_portraitSwitch;
+
+@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
+
+@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
+
+@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -56,6 +71,11 @@
         
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    self.portraitSwitch.on = YES;
+    self.landscapeRightSwitch.on = YES;
+    self.landscapeLeftSwitch.on = YES;
+    self.portraitUpsideDownSwitch.on = YES;
     
     HLSLoggerInfo(@"Called for object %@", self);
 }
@@ -135,7 +155,26 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
+    NSUInteger supportedOrientations = 0;
+    if ([self isViewLoaded]) {
+        if (self.portraitSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortrait;
+        }
+        if (self.landscapeRightSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeRight;
+        }
+        if (self.landscapeLeftSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeLeft;
+        }
+        if (self.portraitUpsideDownSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+        }
+    }
+    else {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
+    }
+    
+    return [super supportedInterfaceOrientations] & supportedOrientations;
 }
 
 #pragma mark Localization
@@ -256,6 +295,11 @@
 - (void)closeNativeContainer:(id)sender
 {
     [self.stackController popViewControllerAnimated:YES];
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    self.stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 @end

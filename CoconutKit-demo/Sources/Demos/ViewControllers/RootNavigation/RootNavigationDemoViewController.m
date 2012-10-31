@@ -117,17 +117,22 @@
     HLSLoggerInfo(@"Called");
     
     NSUInteger supportedOrientations = 0;
-    if (self.portraitSwitch.on) {
-        supportedOrientations |= UIInterfaceOrientationMaskPortrait;
+    if ([self isViewLoaded]) {
+        if (self.portraitSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortrait;
+        }
+        if (self.landscapeRightSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeRight;
+        }
+        if (self.landscapeLeftSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskLandscapeLeft;
+        }
+        if (self.portraitUpsideDownSwitch.on) {
+            supportedOrientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+        }        
     }
-    if (self.landscapeRightSwitch.on) {
-        supportedOrientations |= UIInterfaceOrientationMaskLandscapeRight;
-    }
-    if (self.landscapeLeftSwitch.on) {
-        supportedOrientations |= UIInterfaceOrientationMaskLandscapeLeft;
-    }
-    if (self.portraitUpsideDownSwitch.on) {
-        supportedOrientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+    else {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
     }
     
     return [super supportedInterfaceOrientations] & supportedOrientations;
