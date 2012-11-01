@@ -17,6 +17,7 @@ static void *s_autorotationModeKey = &s_autorotationModeKey;
 // Original implementation of the methods we swizzle
 static BOOL (*s_UITabBarController__shouldAutorotate_Imp)(id, SEL) = NULL;
 static NSUInteger (*s_UITabBarController__supportedInterfaceOrientations_Imp)(id, SEL) = NULL;
+static BOOL (*s_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp)(id, SEL, NSInteger) = NULL;
 
 // Swizzled method implementations
 static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController *self, SEL _cmd);
@@ -38,9 +39,9 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
                                                                                                            (IMP)swizzled_UITabBarController__supportedInterfaceOrientations_Imp);
     
     // Swizzled both on iOS < 6 and iOS 6
-    HLSSwizzleSelector(self,
-                       @selector(shouldAutorotateToInterfaceOrientation:),
-                       (IMP)swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp);
+    s_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp = (BOOL (*)(id, SEL, NSInteger))HLSSwizzleSelector(self,
+                                                                                                                        @selector(shouldAutorotateToInterfaceOrientation:),
+                                                                                                                        (IMP)swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp);
 }
 
 #pragma mark Accessors and mutators
@@ -120,17 +121,9 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 // Swizzled on iOS 6 as well, but never called by UIKit (can be called by client code, though)
 static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp(UITabBarController *self, SEL _cmd, NSInteger toInterfaceOrientation)
 {
-    // Pre-iOS 6: Strange behavior of the original UITabBarController implementation, which never calls the -shouldAutorotateToInterfaceOrientation:
-    //            for the top view controller when swizzled (have a look at the disassembly). To fix this, we assume the tab bar controller returns
-    //            YES for all orientations, and we do not call the original implementation. This can lead to issues if UITabBarController is subclassed
-    //            to restrict the supported orientation set, but:
-    //              - orientation should be given by the top view controller
-    //              - iOS 4 and iOS 5 will soon disappear, this fix is temporary and should never be a problem in practice
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
-        case HLSAutorotationModeContainerAndTopChildren:
-        case HLSAutorotationModeContainer:
-        default: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
                 if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                     return NO;
@@ -140,6 +133,12 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
         }
             
         case HLSAutorotationModeContainerAndNoChildren: {
+            break;
+        }
+            
+        case HLSAutorotationModeContainer:
+        default: {
+            return (*s_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);
             break;
         }
     }

@@ -17,6 +17,7 @@ static void *s_autorotationModeKey = &s_autorotationModeKey;
 // Original implementation of the methods we swizzle
 static BOOL (*s_UINavigationController__shouldAutorotate_Imp)(id, SEL) = NULL;
 static NSUInteger (*s_UINavigationController__supportedInterfaceOrientations_Imp)(id, SEL) = NULL;
+static BOOL (*s_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp)(id, SEL, NSInteger) = NULL;
 
 // Swizzled method implementations
 static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationController *self, SEL _cmd);
@@ -38,9 +39,9 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
                                                                                                                (IMP)swizzled_UINavigationController__supportedInterfaceOrientations_Imp);
     
     // Swizzled both on iOS < 6 and iOS 6
-    HLSSwizzleSelector(self,
-                       @selector(shouldAutorotateToInterfaceOrientation:),
-                       (IMP)swizzled_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp);
+    s_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp = (BOOL (*)(id, SEL, NSInteger))HLSSwizzleSelector(self,
+                                                                                                                            @selector(shouldAutorotateToInterfaceOrientation:),
+                                                                                                                            (IMP)swizzled_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp);
 }
 
 #pragma mark Accessors and mutators
@@ -132,12 +133,6 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
 // Swizzled on iOS 6 as well, but never called by UIKit (can be called by client code, though)
 static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp(UINavigationController *self, SEL _cmd, NSInteger toInterfaceOrientation)
 {
-    // Pre-iOS 6: Strange behavior of the original UINavigationController implementation, which never calls the -shouldAutorotateToInterfaceOrientation:
-    //            for the top view controller when swizzled (have a look at the disassembly). To fix this, we assume the navigation controller returns
-    //            YES for all orientations, and we do not call the original implementation. This can lead to issues if UINavigationController is subclassed
-    //            to restrict the supported orientation set, but:
-    //              - orientation should be given by the top view controller
-    //              - iOS 4 and iOS 5 will soon disappear, this fix is temporary and should never be a problem in practice
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
@@ -148,16 +143,21 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
             break;
         }
             
+        case HLSAutorotationModeContainerAndTopChildren: {
+            if (self.topViewController && ! [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+                return NO;
+            }
+            break;
+        }
+            
         case HLSAutorotationModeContainerAndNoChildren: {
             break;
         }
             
+            
         case HLSAutorotationModeContainer:
-        case HLSAutorotationModeContainerAndTopChildren:
         default: {
-            if (self.topViewController && ! [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-                return NO;
-            }
+            return (*s_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);
             break;
         }
     }

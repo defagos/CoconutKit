@@ -17,7 +17,7 @@ static void *s_autorotationModeKey = &s_autorotationModeKey;
 // Original implementation of the methods we swizzle
 static BOOL (*s_UISplitViewController__shouldAutorotate_Imp)(id, SEL) = NULL;
 static NSUInteger (*s_UISplitViewController__supportedInterfaceOrientations_Imp)(id, SEL) = NULL;
-static BOOL (*s_UISplitViewController__shouldAutorotateToInterfaceOrientation_Imp)(id, SEL, NSInteger toInterfaceOrientation) = NULL;
+static BOOL (*s_UISplitViewController__shouldAutorotateToInterfaceOrientation_Imp)(id, SEL, NSInteger) = NULL;
 
 // Swizzled method implementations
 static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewController *self, SEL _cmd);
@@ -123,8 +123,7 @@ static BOOL swizzled_UISplitViewController__shouldAutorotateToInterfaceOrientati
 {
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
-        case HLSAutorotationModeContainerAndTopChildren:
-        default: {
+        case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
                 if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                     return NO;
@@ -133,12 +132,13 @@ static BOOL swizzled_UISplitViewController__shouldAutorotateToInterfaceOrientati
             break;
         }
             
-        case HLSAutorotationModeContainer: {
-            return (*s_UISplitViewController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);
+        case HLSAutorotationModeContainerAndNoChildren: {
             break;
         }
             
-        case HLSAutorotationModeContainerAndNoChildren: {
+        case HLSAutorotationModeContainer:
+        default: {
+            return (*s_UISplitViewController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);
             break;
         }
     }
