@@ -12,6 +12,19 @@
 
 @implementation ContainmentTestViewController
 
+#pragma mark Object creation and destruction
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    self.presentingModalSwitch = nil;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize presentingModalSwitch = m_presentingModalSwitch;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -19,6 +32,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor randomColor];
+    
+    self.presentingModalSwitch.on = NO;
     
     // It is sufficient to log this information once, it won't change afterwards
     HLSLoggerInfo(@"navigationController = %@"
@@ -137,6 +152,7 @@
 {
     // Just to test -parentViewController (if correct, then the topmost container will be presenting the modal)
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    memoryWarningTestCoverViewController.modalPresentationStyle = self.presentingModalSwitch.on ? UIModalPresentationCurrentContext : UIModalPresentationFullScreen;
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 

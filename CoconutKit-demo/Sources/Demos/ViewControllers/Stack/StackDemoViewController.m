@@ -41,6 +41,10 @@
         stackController.delegate = self;
         stackController.title = @"HLSStackController";
         
+        // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
+        // with the UIModalPresentationCurrentContext presentation style
+        stackController.definesPresentationContext = YES;
+        
         // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
         // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
         // behavior
