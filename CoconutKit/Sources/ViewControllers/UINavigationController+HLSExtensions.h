@@ -11,7 +11,7 @@
 @interface UINavigationController (HLSExtensions)
 
 /**
- * Set how a navigation container decides whether it must rotate or not
+ * Set how a navigation controller decides whether it must rotate or not
  *
  * HLSAutorotationModeContainer: The original UIKit behavior is used (the top view controller decide on iOS 4 and 5,
  *                               none on iOS 6)

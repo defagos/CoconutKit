@@ -36,6 +36,7 @@ UINavigationBar+HLSExtensions.m
 UINavigationController+HLSActionSheet.m
 UINavigationController+HLSExtensions.m
 UIScrollView+HLSExtensions.m
+UISplitViewController+HLSExtensions.m
 UITabBarController+HLSExtensions.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m

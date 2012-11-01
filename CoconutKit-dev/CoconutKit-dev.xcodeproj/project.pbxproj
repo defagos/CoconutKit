@@ -430,6 +430,8 @@
 		6FC09CF115EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC09CF315EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */; };
+		6FC40C5D1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */; };
+		6FC40C5E1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
@@ -839,6 +841,8 @@
 		6FC09CED15EFDAAA00C0CC74 /* AnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationDemoViewController.h; sourceTree = "<group>"; };
 		6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationDemoViewController.xib; sourceTree = "<group>"; };
+		6FC40C5B1641D03C00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
 		6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
 		6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
@@ -1404,6 +1408,8 @@
 				6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */,
 				6FAF24EF162DE58000F93DA2 /* UINavigationController+HLSExtensions.h */,
 				6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */,
+				6FC40C5B1641D03C00398242 /* UISplitViewController+HLSExtensions.h */,
+				6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */,
 				6FAF24F1162DE58000F93DA2 /* UITabBarController+HLSExtensions.h */,
 				6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */,
 				6F91F76D14F3EEFB00E95EFA /* UIViewController+HLSExtensions.h */,
@@ -2301,6 +2307,7 @@
 				6F0BFE21163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE25163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE29163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6FC40C5D1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2457,6 +2464,7 @@
 				6F0BFE22163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE26163EF00B00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE2A163EF00B00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6FC40C5E1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

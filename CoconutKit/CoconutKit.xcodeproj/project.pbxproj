@@ -187,6 +187,8 @@
 		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
 		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
+		6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; };
+		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */; };
 		6FC8CB8B1574BFC10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB891574BFC10014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
@@ -412,6 +414,8 @@
 		6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC8CB891574BFC10014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F213D465F700834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -765,6 +769,8 @@
 				6FADE59814BA0494007EE121 /* HLSWizardViewController.m */,
 				6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */,
 				6F6C754F162DC0290094B090 /* UINavigationController+HLSExtensions.m */,
+				6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */,
+				6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */,
 				6F6C7553162DC0550094B090 /* UITabBarController+HLSExtensions.h */,
 				6F6C7554162DC0550094B090 /* UITabBarController+HLSExtensions.m */,
 				6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */,
@@ -885,6 +891,7 @@
 				6F6C7555162DC0550094B090 /* UITabBarController+HLSExtensions.h in Headers */,
 				6F6C7558162DC0DA0094B090 /* HLSAutorotation.h in Headers */,
 				6F0C7D03163A7B7E00C6C381 /* HLSAutorotationCompatibility.h in Headers */,
+				6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,6 +1082,7 @@
 				6F41D24015E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6F6C7551162DC0290094B090 /* UINavigationController+HLSExtensions.m in Sources */,
 				6F6C7556162DC0550094B090 /* UITabBarController+HLSExtensions.m in Sources */,
+				6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

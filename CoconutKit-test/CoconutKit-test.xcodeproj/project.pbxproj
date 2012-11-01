@@ -126,6 +126,7 @@
 		6FAF24FD162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24FA162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m */; };
 		6FAF24FE162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24FC162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m */; };
 		6FB991FE1523B18B00E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991FD1523B18B00E13BED /* HLSZeroingWeakRef.m */; };
+		6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB951574C01C0014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FCDA17214DAE61B00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */; };
 		6FCFEA5515E37E4F002CAF9E /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5215E37E4C002CAF9E /* HLSAnimationStep.m */; };
@@ -406,6 +407,8 @@
 		6FB8E67415F3EDBE00CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991FC1523B18B00E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991FD1523B18B00E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FC40C601641D04B00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC8CB941574C01C0014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC8CB951574C01C0014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -892,6 +895,8 @@
 				6FADE79214BA04B6007EE121 /* HLSWizardViewController.m */,
 				6FAF24F9162DE59D00F93DA2 /* UINavigationController+HLSExtensions.h */,
 				6FAF24FA162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m */,
+				6FC40C601641D04B00398242 /* UISplitViewController+HLSExtensions.h */,
+				6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */,
 				6FAF24FB162DE59D00F93DA2 /* UITabBarController+HLSExtensions.h */,
 				6FAF24FC162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m */,
 				6F91F77114F3EF0B00E95EFA /* UIViewController+HLSExtensions.h */,
@@ -1153,6 +1158,7 @@
 				6FEFF35A15F9C5FB006B06A6 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
 				6FAF24FD162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24FE162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
+				6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

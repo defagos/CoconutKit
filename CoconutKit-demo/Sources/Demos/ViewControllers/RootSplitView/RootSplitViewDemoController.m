@@ -210,7 +210,7 @@
 
 - (IBAction)changeAutorotationMode:(id)sender
 {
-    self.tabBarController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
+    self.splitViewController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 @end

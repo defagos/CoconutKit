@@ -72,6 +72,7 @@ UILabel+HLSDynamicLocalization.h
 UINavigationBar+HLSExtensions.h
 UINavigationController+HLSExtensions.h
 UIScrollView+HLSExtensions.h
+UISplitViewController+HLSExtensions.h
 UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h

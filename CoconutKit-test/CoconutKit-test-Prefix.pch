@@ -89,6 +89,7 @@
     #import "UINavigationBar+HLSExtensions.h"
     #import "UINavigationController+HLSExtensions.h"
     #import "UIScrollView+HLSExtensions.h"
+    #import "UISplitViewController+HLSExtensions.h"
     #import "UITabBarController+HLSExtensions.h"
     #import "UITextField+HLSExtensions.h"
     #import "UITextField+HLSValidation.h"

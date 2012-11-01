@@ -1,17 +1,17 @@
 //
-//  UITabBarController+HLSExtensions.h
+//  UISplitViewController+HLSExtensions.h
 //  CoconutKit
 //
-//  Created by Samuel Défago on 10/16/12.
+//  Created by Samuel Défago on 10/31/12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
 #import "HLSAutorotation.h"
 
-@interface UITabBarController (HLSExtensions)
+@interface UISplitViewController (HLSExtensions)
 
 /**
- * Set how a tab bar controller decides whether it must rotate or not
+ * Set how a split view controller decides whether it must rotate or not
  *
  * HLSAutorotationModeContainer: The original UIKit behavior is used (the child view controllers decide on iOS 4 and 5,
  *                               none on iOS 6)
