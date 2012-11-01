@@ -120,6 +120,15 @@
     HLSLoggerInfo(@"Called");
 }
 
+#pragma mark Memory warnings
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    HLSLoggerInfo(@"Called");
+}
+
 #pragma mark Localization
 
 - (void)localize
