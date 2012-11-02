@@ -667,6 +667,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
                 // non-integral frames, and thus to blurry views)
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                
+                // If the container view controller presents a modal on its view (i.e. defines a presentation context and
+                // displays a modal with a UIModalPresentationCurrentContext presentation style), then views might be removed
+                // from the hierarchy by the system when the modal gets displayed. In such cases, ignore
+                if (! groupView) {
+                    continue;
+                }
+                
                 HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
                                                                                               disappearingView:groupView.backView
                                                                                                         inView:groupView
@@ -717,8 +725,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
             if ([containerContent viewIfLoaded]) {
-                // See comment in -willRotateToInterfaceOrientation:duration:
+                // See comments in -willRotateToInterfaceOrientation:duration:
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                if (! groupView) {
+                    continue;
+                }
+                
                 HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
                                                                                       disappearingView:groupView.backView
                                                                                                 inView:groupView
