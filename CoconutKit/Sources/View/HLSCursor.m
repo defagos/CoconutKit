@@ -499,67 +499,61 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // If clicking on the pointer, do not select it again. This corresponds to the user grabbing the pointer
+    // Might be a click, or a click and hold (which will then trigger a drag event)
     CGPoint point = [[touches anyObject] locationInView:self];
-    if (! CGRectContainsPoint(self.pointerContainerView.frame, point)) {
-        m_clicked = YES;
-        
-        [self deselectPreviousIndex];
-        [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
-    }
+    [self deselectPreviousIndex];
+    [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInView:self];
     
-    if (! m_clicked) {
-        if (! m_dragging) {
-            m_dragging = YES;
-            
-            // Check that we are actually grabbing the pointer view
-            if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
-                m_grabbed = YES;
-                
-                // Offset between the point where the finger touches the screen when dragging begins and initial center
-                // of the view which will be moved. This makes it possible to compensate this initial offset so that
-                // the view frame does not "jump" at the finger location (so that the finger is then at the view center) once 
-                // the first finger motion is detected. Instead, the frame will nicely follow the finger, even if it was not
-                // initially touched at its center
-                m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
-                
-                NSUInteger index = [self indexForXPos:m_xPos];
-                [self swapElementViewAtIndex:index selected:NO];
-                
-                HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
-                if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-                    [self.delegate cursor:self didMoveFromIndex:index];
-                }
-                
-                HLSLoggerDebug(@"Calling cursorDidStartDragging:");
-                if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
-                    [self.delegate cursorDidStartDragging:self];
-                }
-            }
-            else {
-                m_grabbed = NO;
-            }
-        }
+    if (! m_dragging) {
+        m_dragging = YES;
         
-        if (m_grabbed) {
-            CGFloat xPos = point.x - m_initialDraggingXOffset;
-            self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
-            HLSLoggerDebug(@"Calling cursor:didDragNearIndex:");
-            if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
-                [self.delegate cursor:self didDragNearIndex:[self indexForXPos:xPos]];
+        // Check that we are actually grabbing the pointer view
+        if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
+            m_grabbed = YES;
+            
+            // Offset between the point where the finger touches the screen when dragging begins and initial center
+            // of the view which will be moved. This makes it possible to compensate this initial offset so that
+            // the view frame does not "jump" at the finger location (so that the finger is then at the view center) once
+            // the first finger motion is detected. Instead, the frame will nicely follow the finger, even if it was not
+            // initially touched at its center
+            m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
+            
+            NSUInteger index = [self indexForXPos:m_xPos];
+            [self swapElementViewAtIndex:index selected:NO];
+            
+            HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
+            if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+                [self.delegate cursor:self didMoveFromIndex:index];
+            }
+            
+            HLSLoggerDebug(@"Calling cursorDidStartDragging:");
+            if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
+                [self.delegate cursorDidStartDragging:self];
             }
         }
-    }    
+        else {
+            m_grabbed = NO;
+        }
+    }
+    
+    if (m_grabbed) {
+        CGFloat xPos = point.x - m_initialDraggingXOffset;
+        self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
+        HLSLoggerDebug(@"Calling cursor:didDragNearIndex:");
+        if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
+            [self.delegate cursor:self didDragNearIndex:[self indexForXPos:xPos]];
+        }
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self endTouches:touches animated:YES];   
+    [self endTouches:touches animated:YES];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -582,7 +576,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     m_dragging = NO;
     m_grabbed = NO;
-    m_clicked = NO;
 }
 
 #pragma mark Animation callbacks
