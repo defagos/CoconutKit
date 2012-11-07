@@ -69,11 +69,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     [super releaseViews];
     
-    // Release views in cache (since view controllers are retained by a wizard view controller object, so are their view)
-    for (UIViewController *viewController in self.viewControllers) {
-        [viewController unloadViews];
-    }
-    
     self.previousButton = nil;
     self.nextButton = nil;
     self.doneButton = nil;
@@ -96,23 +91,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
               forControlEvents:UIControlEventTouchUpInside];
     
     [self refreshWizardInterface];
-}
-
-#pragma mark Memory warnings
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-    // Free all views in cache (except the visible one of course!)
-    NSInteger page = 0;
-    for (UIViewController *viewController in self.viewControllers) {
-        if (page == self.currentPage) {
-            continue;
-        }
-        [viewController unloadViews];
-        ++page;
-    }
 }
 
 #pragma mark Accessors and mutators

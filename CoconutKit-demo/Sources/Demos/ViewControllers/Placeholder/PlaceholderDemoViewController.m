@@ -59,10 +59,6 @@
 {
     [super releaseViews];
     
-    // Free heavy views in cache
-    self.leftHeavyViewController.view = nil;
-    self.rightHeavyViewController.view = nil;
-    
     self.heavyButton = nil;
     self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
