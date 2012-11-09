@@ -190,7 +190,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         
         // Create a view to container the pointer view. This avoid issues with transparent pointer views
-        self.pointerContainerView = [[[UIView alloc] initWithFrame:self.pointerView.frame] autorelease];
+        self.pointerContainerView = [[[UIView alloc] initWithFrame:self.pointerView.bounds] autorelease];
+        self.pointerView.frame = self.pointerContainerView.bounds;
         self.pointerContainerView.backgroundColor = [UIColor clearColor];
         self.pointerContainerView.autoresizesSubviews = YES;
         self.pointerContainerView.exclusiveTouch = YES;
