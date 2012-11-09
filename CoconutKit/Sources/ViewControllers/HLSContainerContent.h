@@ -75,7 +75,8 @@
 }
 
 /**
- * Return the container of the specified class, in which a given view controller has been inserted, or nil if none
+ * Return the container into which a view controller has been inserted into (if any). If a class parameter is provided,
+ * the method returns nil if the container class does not match
  */
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
 

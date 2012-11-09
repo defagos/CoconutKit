@@ -80,11 +80,16 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
-    if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
-        return containerContent.containerViewController;
+    if (containerViewControllerClass) {
+        if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
+            return containerContent.containerViewController;
+        }
+        else {
+            return nil;
+        }
     }
     else {
-        return nil;
+        return containerContent.containerViewController;
     }
 }
 

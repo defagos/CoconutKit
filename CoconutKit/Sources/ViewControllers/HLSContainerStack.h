@@ -440,4 +440,13 @@ willHideViewController:(UIViewController *)viewController
  */
 - (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass;
 
+/**
+ * Return the interface orientation used for displaying the view controller. For view controllers not embedded into
+ * CoconutKit containers, this value is the same as the one returned by -[UIViewController interfaceOrientation], 
+ * matching the status bar orientation. For view controllers embedded into CoconutKit containers, this is the 
+ * orientation of the view controller, compatible with the container, which has been used for display (this might
+ * not necessarily match the status bar orientation)
+ */
+@property (nonatomic, readonly, assign) UIInterfaceOrientation displayedInterfaceOrientation;
+
 @end

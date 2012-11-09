@@ -1130,4 +1130,21 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                  forViewController:self];
 }
 
+- (UIInterfaceOrientation)displayedInterfaceOrientation
+{
+    UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
+                                                                                      forViewController:self];
+    if (containerViewController) {
+        if ([self supportsInterfaceOrientation:containerViewController.interfaceOrientation]) {
+            return containerViewController.interfaceOrientation;
+        }
+        else {
+            return [self compatibleOrientationWithViewController:containerViewController];
+        }
+    }
+    else {
+        return self.interfaceOrientation;
+    }
+}
+
 @end

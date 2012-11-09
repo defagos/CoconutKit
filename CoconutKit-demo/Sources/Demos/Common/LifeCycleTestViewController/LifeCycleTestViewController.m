@@ -25,28 +25,36 @@
 {
     [super viewWillAppear:animated];
      
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewWillUnload
@@ -87,21 +95,27 @@
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
+    HLSLoggerInfo(@"Calledfor object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    HLSLoggerInfo(@"Called, fromInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, fromInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(fromInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 #pragma mark Layout management
