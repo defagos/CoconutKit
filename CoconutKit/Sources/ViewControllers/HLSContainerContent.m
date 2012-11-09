@@ -50,8 +50,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 @property (nonatomic, assign) BOOL movingToParentViewController;
 @property (nonatomic, assign) BOOL movingFromParentViewController;
 
-- (void)removeViewFromContainerStackView;
-
 @end
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
@@ -349,10 +347,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 - (void)releaseViews
 {
     [self removeViewFromContainerStackView];
-    
-    if ([self.viewController isViewLoaded]) {
-        [self.viewController unloadViews];
-    }
+    [self.viewController unloadViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController

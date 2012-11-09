@@ -30,8 +30,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * for view controllers you insert in it (they will be ignored, see UIViewController documentation). The 2-step rotation 
  * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
  *
- * A lot of work has been made to provide a clean and powerful interface to implement containers exhibiting correct 
- * behavior and maximum flexibility. Most notably:
+ * A lot of work has been made to provide a clean and powerful interface letting you easily implement containers with
+ * correct behavior. Most notably:
  *   - view lifecycle and rotation events are correctly forwarded to children view controllers
  *     Remark: Even if a view controller remains visible behind a transparent top view controller on top of it, it will
  *             still be considered as having disappeared (and therefore will receive the -viewWillDisappear: and 
@@ -51,13 +51,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     with those returned when using standard built-in UIKit containers (these methods are available since iOS 5 
  *     only, but CoconutKit injects implementations as well so that you can use them with custom containers on
  *     iOS 4 as well)
- *   - a capacity can be provided so that children view controller's views deep enough are automatically unloaded
- *     and reloaded when needed, saving memory. Alternatively, a view controller can be removed from the stack
- *     as soon as it gets deep enough. This makes it possible to implement containers with a FIFO behavior (the
- *     case where the capacity is set to 1 corresponds to a stack displaying a single child view controller). Usually,
- *     the default capacity (HLSContainerStackDefaultCapacity = 2) should fulfill most needs, but if you require 
- *     more transparency levels or if you want to minimize load / unload operations, you can increase this value. 
- *     Standard capacity values are provided at the beginning of this file.
+ *   - a capacity can be provided so that children view controller's views deep enough are automatically removed
+ *     from the view hierarchy and reinserted when needed. The reason is that having too many view non-opaque
+ *     view controllers can lead to performance issues, especially during animations (due to layer blending).
+ *     By limiting the number of views in the container view hierarchy, such issues can be kept under control.
+ *     Alternatively, a view controller can be removed from the stack as soon as it gets deep enough. This makes 
+ *     it possible to implement containers with a FIFO behavior (the case where the capacity is set to 1 corresponds 
+ *     to a stack displaying a single child view controller). Usually, the default capacity (which is given by
+ *     HLSContainerStackDefaultCapacity = 2) should fulfill most needs, but if you require more transparency levels
+ *     you can increase this value. Standard capacity values are provided at the beginning of this file.
  *   - custom containers implemented using HLSContainerStack behave correctly, whether they are embedded into 
  *     another container (even built-in ones), displayed as the root of an application, or modally
  *   - stacks can be used to display any kind of view controllers, even standard UIKit containers like
@@ -293,9 +295,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewWill/DidUnload messages to the corresponding 
- * view controllers. You should call this method from your -viewDidUnload method (better: Have your container view 
- * controller subclass HLSViewController, and call this method from its -releaseView method)
+ * Release all view and view-related resources. On iOS 4 and 5, this also forwards the -viewWill/DidUnload messages 
+ * to the corresponding view controllers
  */
 - (void)releaseViews;
 

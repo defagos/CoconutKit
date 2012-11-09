@@ -138,7 +138,12 @@
 - (UIView *)viewIfLoaded;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload 
+ * Remove the view controller's view from its container view (if added to a container view)
+ */
+- (void)removeViewFromContainerStackView;
+
+/**
+ * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload
  * messages to the underlying view controller (this mechanism is deprecated starting with iOS 6)
  */
 - (void)releaseViews;

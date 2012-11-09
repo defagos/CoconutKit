@@ -1070,7 +1070,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
             if (! m_removing) {
-                [containerContentAtCapacity releaseViews];
+                // The view is only removed from the view hierarchy, so that blending can be made faster. The view is NOT unloaded
+                // (on iOS 4 and 5, it will only be unloaded if a memory warning is later received)
+                [containerContentAtCapacity removeViewFromContainerStackView];
             }
             else {
                 [self.containerContents removeObject:containerContentAtCapacity];

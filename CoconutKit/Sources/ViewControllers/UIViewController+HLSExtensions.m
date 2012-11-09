@@ -65,11 +65,17 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (void)unloadViews
 {
     if ([self isViewLoaded]) {
-        // The -viewWillUnload method is available starting with iOS 5 and deprecated starting with iOS 6, but was
-        // in fact already privately implemented in iOS 4 (with empty implementation). Does not harm to call it here
-        [self viewWillUnload];
+        BOOL isRunningIOS6 = (class_getInstanceMethod([UIViewController class], @selector(shouldAutorotate)) != NULL);
+        
+        if (! isRunningIOS6) {
+            // The -viewWillUnload method is available starting with iOS 5 and deprecated starting with iOS 6, but was
+            // in fact already privately implemented on iOS 4 (with empty implementation). Does not harm to call it here
+            [self viewWillUnload];
+        }
         self.view = nil;
-        [self viewDidUnload];        
+        if (! isRunningIOS6) {
+            [self viewDidUnload];
+        }
     }
 }
 

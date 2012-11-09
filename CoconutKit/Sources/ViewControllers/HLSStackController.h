@@ -33,12 +33,11 @@
  *
  * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
  * need to be visible, it would be a waste of resources to keep all views loaded at any time. At creation time, the
- * maximal number of loaded view controllers ("capacity") can be provided. By default, the capacity is set to 2, 
- * which means that the container guarantees that at most the two top view controller's views are loaded. The 
- * controller simply unloads the view controller's views below in the stack so save memory. Usually, the default value
- * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
- * operations, you can increase this value. Standard capacity values are provided at the beginning of the 
- * HLSContainerStack.h file.
+ * maximal number of view controllers whose view are added to the container view hierarchy ("capacity") can be provided. 
+ * By default, the capacity is set to 2, which means that the container guarantees that at most the two top view controller's 
+ * views appear in the container view hierarchy. The container simply removes the view controller's views below in the stack 
+ * to minimize blending calculations. Usually, the default value should fulfill most needs, but if you require more transparency 
+ * levels you can increase this value. Standard capacity values are provided at the beginning of the HLSContainerStack.h file.
  *
  * You can also use stack controllers with storyboards (a feature available since iOS 5):
  *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
