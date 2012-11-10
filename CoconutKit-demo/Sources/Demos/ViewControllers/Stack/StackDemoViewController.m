@@ -21,6 +21,8 @@
 
 @interface StackDemoViewController ()
 
+@property (nonatomic, retain) UIPopoverController *popoverController;
+
 - (void)displayContentViewController:(UIViewController *)viewController;
 
 - (void)updateIndexInfo;
@@ -81,10 +83,18 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.popoverController = nil;
+
+    [super dealloc];
+}
+
 - (void)releaseViews
 { 
     [super releaseViews];
     
+    self.popoverButton = nil;
     self.transitionPickerView = nil;
     self.autorotationModeSegmentedControl = nil;
     self.inTabBarControllerSwitch = nil;
@@ -96,6 +106,8 @@
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize popoverButton = m_popoverButton;
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
@@ -112,6 +124,8 @@
 @synthesize insertionIndexLabel = m_insertionIndexLabel;
 
 @synthesize removalIndexLabel = m_removalIndexLabel;
+
+@synthesize popoverController = m_popoverController;
 
 #pragma mark View lifecycle
 
@@ -136,6 +150,25 @@
     [super viewWillAppear:animated];
     
     [self updateIndexInfo];
+}
+
+#pragma mark Orientation management
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self.popoverController dismissPopoverAnimated:NO];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
+                                            inView:self.popoverButton
+                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                          animated:NO];
 }
 
 #pragma mark Localization
@@ -365,6 +398,20 @@
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
     [self presentModalViewController:stackController animated:YES];
+}
+
+- (IBAction)testInPopover:(id)sender
+{   
+    RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+    HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
+    stackController.delegate = self;
+    stackController.contentSizeForViewInPopover = CGSizeMake(800.f, 600.);
+    self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:stackController] autorelease];
+    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
+                                            inView:self.popoverButton
+                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                          animated:YES];
 }
 
 - (IBAction)pop:(id)sender

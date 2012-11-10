@@ -11,6 +11,7 @@
  */
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
+    UIButton *m_popoverButton;
     UIPickerView *m_transitionPickerView;
     UISegmentedControl *m_autorotationModeSegmentedControl;
     UISwitch *m_inTabBarControllerSwitch;
@@ -19,8 +20,10 @@
     UISlider *m_indexSlider;
     UILabel *m_insertionIndexLabel;
     UILabel *m_removalIndexLabel;
+    UIPopoverController *m_popoverController;
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *popoverButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
@@ -40,6 +43,8 @@
 - (IBAction)hideWithModal:(id)sender;
 - (IBAction)displayTransparent:(id)sender;
 - (IBAction)testInModal:(id)sender;
+- (IBAction)testInPopover:(id)sender;
+
 - (IBAction)pop:(id)sender;
 - (IBAction)popToRoot:(id)sender;
 - (IBAction)popThree:(id)sender;

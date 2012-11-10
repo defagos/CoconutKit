@@ -155,6 +155,7 @@
 "Tasks"="Tasks";
 "Terminate"="Terminate";
 "Test in modal"="Test in modal";
+"Test in popover"="Test in popover";
 "Test responder chain"="Test responder chain";
 "Text"="Text";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
