@@ -33,7 +33,7 @@
  *
  * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
  * need to be visible, it would be a waste of resources to keep all views loaded at any time. At creation time, the
- * maximal number of view controllers whose view are added to the container view hierarchy ("capacity") can be provided. 
+ * maximal number of view controllers whose views are added to the container view hierarchy ("capacity") can be provided. 
  * By default, the capacity is set to 2, which means that the container guarantees that at most the two top view controller's 
  * views appear in the container view hierarchy. The container simply removes the view controller's views below in the stack 
  * to minimize blending calculations. Usually, the default value should fulfill most needs, but if you require more transparency 
@@ -53,8 +53,16 @@
  *     destination view controller, and thus cannot be bound to existing destinations, refer to the UIStoryboardSegue
  *     documentation for more information). If you want to pop a view controller, you therefore have to do it
  *     programmatically
- *
  * For further information, refer to the documentation of HLSStackPushSegue.
+ *
+ * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
+ *     -willMoveToParentViewController:
+ *     -didMoveToParentViewController:
+ * Implementations should call the super implementation first. Moreover, the following methods are also available
+ * for child view controllers, even on iOS 4:
+ *     -isMovingToParentViewController
+ *     -isMovingFromParentViewController
+ * Refer to the documentation of those methods for more information.
  *
  * Designated initializer: initWithRootViewController:capacity:
  */

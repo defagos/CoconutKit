@@ -99,6 +99,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload (call -releaseViews instead)
  *
+ * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
+ *     -willMoveToParentViewController:
+ *     -didMoveToParentViewController:
+ * Implementations should call the super implementation first. Moreover, the following methods are also available
+ * for child view controllers, even on iOS 4:
+ *     -isMovingToParentViewController
+ *     -isMovingFromParentViewController
+ * Refer to the documentation of those methods for more information.
+ *
  * Even though the new iOS 5 containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
