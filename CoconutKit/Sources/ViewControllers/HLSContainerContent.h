@@ -75,7 +75,8 @@
 }
 
 /**
- * Return the container of the specified class, in which a given view controller has been inserted, or nil if none
+ * Return the container into which a view controller has been inserted into (if any). If a class parameter is provided,
+ * the method returns nil if the container class does not match
  */
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
 
@@ -138,8 +139,13 @@
 - (UIView *)viewIfLoaded;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewDidUnload message to the underlying view 
- * controller
+ * Remove the view controller's view from its container view (if added to a container view)
+ */
+- (void)removeViewFromContainerStackView;
+
+/**
+ * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload
+ * messages to the underlying view controller (this mechanism is deprecated starting with iOS 6)
  */
 - (void)releaseViews;
 
@@ -149,7 +155,8 @@
  * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
- *         and viewDidUnload (which container implementations must not call directly; use the releaseViews method above)
+ *         and viewWill/DidUnload (which container implementations must not call directly; use the releaseViews method 
+ *         above)
  */
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
 - (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
@@ -162,6 +169,8 @@
  * Remark: No methods have been provided for the deprecated 2-step rotation methods
  */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (BOOL)shouldAutorotate;
+- (NSUInteger)supportedInterfaceOrientations;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;

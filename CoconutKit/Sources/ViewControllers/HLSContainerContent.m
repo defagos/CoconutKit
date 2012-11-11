@@ -9,6 +9,7 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
+#import "HLSAutorotationCompatibility.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -29,6 +30,10 @@ static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL)
 static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
+
+// Added method implementations
+static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
+static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
 static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
@@ -45,11 +50,24 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 @property (nonatomic, assign) BOOL movingToParentViewController;
 @property (nonatomic, assign) BOOL movingFromParentViewController;
 
-- (void)removeViewFromContainerStackView;
+@end
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+
+/**
+ * Declarations to suppress warnings when compiling against the iOS SDK 5. Remove when CoconutKit support requires
+ * at least SDK 6
+ */
+@interface UIViewController (HLSContainerContentSDK5Compatibility)
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods;
+- (BOOL)shouldAutomaticallyForwardRotationMethods;
 
 @end
 
-@interface UIViewController (HLSContainerContent)
+#endif
+
+@interface UIViewController (HLSContainerContent) <HLSAutorotationCompatibility>
 
 // Empty category. Just swizzling some UIViewController methods for HLSContainerContent
 
@@ -62,11 +80,16 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
-    if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
-        return containerContent.containerViewController;
+    if (containerViewControllerClass) {
+        if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
+            return containerContent.containerViewController;
+        }
+        else {
+            return nil;
+        }
     }
     else {
-        return nil;
+        return containerContent.containerViewController;
     }
 }
 
@@ -95,14 +118,26 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
             transitionClass = [HLSTransition class];
         }
         
-        // Cannot be mixed with iOS 5 containment API (but fully iOS 5 compatible)
-        if ([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
-                && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]) {
-            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers "
-                           "has been implemented and returns NO (i.e. containers which do not forward view lifecycle events automatically through the iOS 5 containment "
-                           "mechanism)");
+        // Cannot be mixed with iOS 5 & 6 containment API (but fully iOS 5 & 6 compatible)
+        if (([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
+                    && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers])
+                || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
+                    && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
+                || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardRotationMethods)]
+                    && [containerViewController shouldAutomaticallyForwardRotationMethods])) {
+            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle and rotation event automatic "
+                           "forwarding has been explicitly disabled (iOS 5 and 6)");
             [self release];
             return nil;
+        }
+        
+        // Even when pre-loading view controllers into a container which has not been displayed yet, the -interfaceOrientation property
+        // returns a correct value. To be able to insert a view controller into a container view controller, their supported interface
+        // orientations must be compatible (if the current container orientation is not supported, we will rotate the child view
+        // controller appropriately)
+        if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
+            HLSLoggerError(@"The view controller has no compatible orientation with the container");
+            return NO;
         }
         
         // Associate the view controller with its container content object        
@@ -156,6 +191,11 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    
+    // We must call -willMoveToParentViewController: manually right before the containment relationship is removed without
+    // animation, if one remains of course (iOS 5 and above, see UIViewController documentation)
+    // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+    [self.viewController willMoveToParentViewController:nil];
     
     // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:. We need to -callRemoveFromParentViewController:
     //             so that the view controller reference count is correctly decreased
@@ -312,11 +352,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 - (void)releaseViews
 {
     [self removeViewFromContainerStackView];
-    
-    if ([self.viewController isViewLoaded]) {
-        self.viewController.view = nil;
-        [self.viewController viewDidUnload];
-    }
+    [self.viewController unloadViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController
@@ -365,7 +401,43 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return [self.viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+    return [self.viewController supportsInterfaceOrientation:toInterfaceOrientation];
+}
+
+- (BOOL)shouldAutorotate
+{
+    if ([self.viewController respondsToSelector:@selector(shouldAutorotate)]) {
+        return [self.viewController shouldAutorotate];
+    }
+    else {
+        return [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]
+            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
+    }
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([self.viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
+        return [self.viewController supportedInterfaceOrientations];
+    }
+    else {
+        UIInterfaceOrientationMask orientations = 0;
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            orientations |= UIInterfaceOrientationMaskPortrait;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            orientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            orientations |= UIInterfaceOrientationMaskLandscapeLeft;
+        }
+        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            orientations |= UIInterfaceOrientationMaskLandscapeRight;
+        }
+        return orientations;
+    }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -414,11 +486,19 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     //        -removeFromParentViewController exists
     
     // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
-    //        implementations for isMovingTo/FromParentViewController
+    //        implementations for isMovingTo/FromParentViewController and willMoveTo/FromParentViewController
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
         s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
                                                                                            @selector(parentViewController),
                                                                                            (IMP)swizzled_UIViewController__parentViewController_Imp);
+        class_addMethod(self,
+                        @selector(willMoveToParentViewController:),
+                        (IMP)iOS4_UIViewController__willMoveToParentViewController_Imp,
+                        "v@:@");
+        class_addMethod(self,
+                        @selector(didMoveToParentViewController:),
+                        (IMP)iOS4_UIViewController__didMoveToParentViewController_Imp,
+                        "v@:@");
         class_addMethod(self,
                         @selector(isMovingToParentViewController),
                         (IMP)iOS4_UIViewController__isMovingToParentViewController_Imp,
@@ -427,7 +507,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
                         @selector(isMovingFromParentViewController),
                         (IMP)iOS4_UIViewController__isMovingFromParentViewController_Imp,
                         "c@:");
-        
     }
     // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
     //        when inserted into a custom container
@@ -447,8 +526,7 @@ static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIV
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
-        // Call the original method to recursively apply the same behavior, correctly dealing with container nesting
-        return containerContent.containerViewController.parentViewController;
+        return containerContent.containerViewController;
     }
     else {
         return (*s_UIViewController__parentViewController_Imp)(self, _cmd);
@@ -475,6 +553,16 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
+}
+
+static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
+{
+    // Empty implementation, so that subclasses of UIViewController can call [super willMoveToParentViewController:]
+}
+
+static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
+{
+    // Empty implementation, so that subclasses of UIViewController can call [super didMoveToParentViewController:]
 }
 
 static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)

@@ -70,7 +70,6 @@
     HLSAnimationStep *m_currentAnimationStep;                       // the currently played animation step
     NSString *m_tag;
     NSDictionary *m_userInfo;
-    UIView *m_dummyView;
     BOOL m_lockingUI;
     BOOL m_animated;
     NSUInteger m_repeatCount;

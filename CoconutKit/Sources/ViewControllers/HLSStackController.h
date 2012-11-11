@@ -33,12 +33,11 @@
  *
  * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
  * need to be visible, it would be a waste of resources to keep all views loaded at any time. At creation time, the
- * maximal number of loaded view controllers ("capacity") can be provided. By default, the capacity is set to 2, 
- * which means that the container guarantees that at most the two top view controller's views are loaded. The 
- * controller simply unloads the view controller's views below in the stack so save memory. Usually, the default value
- * should fulfill most needs, but if you require more transparency levels or if you want to minimize load / unload
- * operations, you can increase this value. Standard capacity values are provided at the beginning of the 
- * HLSContainerStack.h file.
+ * maximal number of view controllers whose views are added to the container view hierarchy ("capacity") can be provided. 
+ * By default, the capacity is set to 2, which means that the container guarantees that at most the two top view controller's 
+ * views appear in the container view hierarchy. The container simply removes the view controller's views below in the stack 
+ * to minimize blending calculations. Usually, the default value should fulfill most needs, but if you require more transparency 
+ * levels you can increase this value. Standard capacity values are provided at the beginning of the HLSContainerStack.h file.
  *
  * You can also use stack controllers with storyboards (a feature available since iOS 5):
  *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
@@ -54,8 +53,16 @@
  *     destination view controller, and thus cannot be bound to existing destinations, refer to the UIStoryboardSegue
  *     documentation for more information). If you want to pop a view controller, you therefore have to do it
  *     programmatically
- *
  * For further information, refer to the documentation of HLSStackPushSegue.
+ *
+ * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
+ *     -willMoveToParentViewController:
+ *     -didMoveToParentViewController:
+ * Implementations should call the super implementation first. Moreover, the following methods are also available
+ * for child view controllers, even on iOS 4:
+ *     -isMovingToParentViewController
+ *     -isMovingFromParentViewController
+ * Refer to the documentation of those methods for more information.
  *
  * Designated initializer: initWithRootViewController:capacity:
  */
@@ -63,6 +70,7 @@
 @private
     HLSContainerStack *m_containerStack;
     NSUInteger m_capacity;
+    HLSAutorotationMode m_autorotationMode;
     id<HLSStackControllerDelegate> m_delegate;
 }
 
@@ -78,6 +86,22 @@
  * installed, and can neither be replaced, nor removed. The default capacity (HLSContainerStackDefaultCapacity= 2) is used.
  */
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
+
+/**
+ * Set how the stack controller decides whether it must rotate or not
+ *
+ * HLSAutorotationModeContainer: All child view controllers loaded according to the capacity decide whether rotation
+ *                               can occur, and receive the related events
+ * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
+ *                                            related events
+ * HLSAutorotationModeContainerAndTopChildren: The top child view controller decide whether rotation can occur,
+ *                                             and receive the related events
+ * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive
+ *                                             the related events
+ *
+ * The default value is HLSAutorotationModeContainer
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack controller delegate

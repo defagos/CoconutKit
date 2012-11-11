@@ -46,7 +46,6 @@
     CGFloat m_xPos;
     BOOL m_dragging;
     CGFloat m_initialDraggingXOffset;
-    BOOL m_clicked;
     BOOL m_grabbed;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;

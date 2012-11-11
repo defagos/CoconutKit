@@ -40,8 +40,7 @@
  *   - awakeFromNib
  *   - viewWill...
  *   - viewDid...
- *   - shouldAutorotateToInterfaceOrientation: : If the call to the super method returns NO, return NO immediately (this
- *                                               means that the inset cannot rotate)
+ *   - shouldAutorotate and supportedInterfaceOrientations
  *   - willRotateToInterfaceOrientation:duration:
  *   - willAnimate...
  *   - didRotateFromInterfaceOrientation:
@@ -71,23 +70,25 @@
  *     the source inset view controller belongs to
  * For further information, refer to the documentation of HLSPlaceholderInsetSegue.
  *
- * About view controller reuse:
+ * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
+ *     -willMoveToParentViewController:
+ *     -didMoveToParentViewController:
+ * Implementations should call the super implementation first. Moreover, the following methods are also available
+ * for child view controllers, even on iOS 4:
+ *     -isMovingToParentViewController
+ *     -isMovingFromParentViewController
+ * Refer to the documentation of those methods for more information.
+ *
+ * About view controller's view reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
  * to it, it will get deallocated, and so will its view. This is perfectly fine in general since it contributes to saving 
  * resources. But if you need to reuse a view controller's view instead of creating it from scratch again (most likely if 
  * you plan to display it later within the same placeholder view controller), you need to have another object retain the 
  * view controller to keep it alive.
- * For example, you might use HLSPlaceholderViewController to switch through a set of view controllers using a button bar. 
- * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, since
- * this would make navigating between tabs slow. You want to pay the price once, either by creating all views at the 
- * beginning, or more probably by using some lazy creation mechanism.
- * In such cases, be sure to retain all those view controllers elsewhere (most naturally by the same object which
- * instantiates the placeholder view controller). You must then ensure that this owner object is capable of releasing 
- * the views when memory is critically low. If the owner object is a view controller, it suffices to implement its 
- * viewDidUnload method and, within it, to set the view property of all cached view controllers to nil. Of course,
- * after having set a view to nil, you should forward its view controller the -viewDidUnload message as well. If several
- * views are cached but only a subset (probably one) displayed at once, you also need to implement the -didReceiveMemoryWarning
- * method to set invisible cached views to nil and send their view controller the viewDidUnload message.
+ * For example, you might use a placeholder view controller to switch through a set of view controllers using tabs.
+ * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, 
+ * since this would make navigating between tabs slow. In such cases, it makes sense to keep strong references to
+ * those view controllers elsewhere (most probably as additional ivars of your placeholder view controller subclass)
  *
  * Designated initializer: initWithNibName:bundle:
  */
@@ -95,6 +96,7 @@
 @private
     NSMutableArray *m_containerStacks;
     NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
+    HLSAutorotationMode m_autorotationMode;
     id<HLSPlaceholderViewControllerDelegate> m_delegate;
     BOOL m_loadedOnce;
 }
@@ -155,6 +157,20 @@
  * Return the view controller displayed on the placeholder view at the given index, or nil if none
  */
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
+
+/**
+ * Set how the placeholder view controller decides whether it must rotate or not
+ *
+ * HLSAutorotationModeContainer
+ * HLSAutorotationModeContainerAndTopChildren
+ * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive
+ *                                             the related events
+ * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
+ *                                            related events
+ *
+ * The default value is given by HLSAutorotationModeContainer
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The placeholder view controller delegate

@@ -12,6 +12,8 @@
 "Animated"="Animé";
 "Animation"="Animation";
 "Apples & Coconut"="Pommes & noix de coco";
+"Autorotation"="Autorotation";
+"Autorotation involves children"="Autorotation impliquant les enfants";
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
 "Birthdate"="Date de naissance";
@@ -32,6 +34,7 @@
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
 "Collapse"="Contracter";
+"Container"="Conteneur";
 "Containment test"="Test d'appartenance";
 "Core"="Core";
 "Country"="Pays";
@@ -90,6 +93,7 @@
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
 "Next"="Suivant";
+"No children"="Aucun enfant";
 "None"="Aucun";
 "Number of children"="Nombre d'enfants";
 "Number of lines"="Nombre de lignes";
@@ -105,6 +109,7 @@
 "Pop non-animated"="Pop non-animé";
 "Pop to root"="Pop vers la racine";
 "Portrait only"="Uniquement portrait";
+"Presents the modal"="Affiche la modale";
 "Previous"="Précédent";
 "Push"="Push";
 "Push from bottom"="Push depuis le bas";
@@ -149,10 +154,13 @@
 "Tasks"="Tâches";
 "Terminate"="Terminer";
 "Test in modal"="Test dans modale";
+"Test in popover"="Test dans popover";
+"Test responder chain"="Tester la responder chain";
 "Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text fields"="Champs textuels";
 "The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
+"The view controller is not compatible with the container (most probably its orientation)"="Le view controller n'est pas compatible avec le conteneur (probablement au niveau de son orientation)";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Top"="Haut";
 "Transition"="Transition";
@@ -161,6 +169,7 @@
 "Vertical alignment"="Alignement vertical";
 "Views"="Vues";
 "View controllers"="View controllers";
+"Visible"="Visibles";
 "Web view"="Vue web";
 "Week"="Semaine";
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";

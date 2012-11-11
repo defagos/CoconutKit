@@ -11,6 +11,8 @@
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Autorotation"="Autorotation";
+"Autorotation involves children"="Autorotation involves children";
 "Apples & Coconut"="Apples & Coconut";
 "Baseline adjustment"="Baseline adjustment";
 "Baselines"="Baselines";
@@ -32,6 +34,7 @@
 "Close"="Close";
 "Coconuts"="Coconuts";
 "Collapse"="Collapse";
+"Container"="Container";
 "Containment test"="Containment test";
 "Core"="Core";
 "Country"="Country";
@@ -90,6 +93,7 @@
 "Month"="Month";
 "Multiple view animation"="Multiple view animation";
 "Next"="Next";
+"No children"="No children";
 "None"="None";
 "Number of children"="Number of children";
 "Number of lines"="Number of lines";
@@ -106,6 +110,7 @@
 "Pop non-animated"="Pop non-animated";
 "Pop to root"="Pop to root";
 "Portrait only"="Portrait only";
+"Presents the modal"="Presents the modal";
 "Previous"="Previous";
 "Push"="Push";
 "Push from bottom"="Push from bottom";
@@ -150,10 +155,13 @@
 "Tasks"="Tasks";
 "Terminate"="Terminate";
 "Test in modal"="Test in modal";
+"Test in popover"="Test in popover";
+"Test responder chain"="Test responder chain";
 "Text"="Text";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
 "Text fields"="Text fields";
 "The behavior above can be disabled"="The behavior above can be disabled";
+"The view controller is not compatible with the container (most probably its orientation)"="The view controller is not compatible with the container (most probably its orientation)";
 "This value cannot be negative"="This value cannot be negative";
 "Top"="Top";
 "Transition"="Transition";
@@ -162,6 +170,7 @@
 "Vertical alignment"="Vertical alignment";
 "Views"="Views";
 "View controllers"="View controllers";
+"Visible"="Visible";
 "Web view"="Web view";
 "Week"="Week";
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";

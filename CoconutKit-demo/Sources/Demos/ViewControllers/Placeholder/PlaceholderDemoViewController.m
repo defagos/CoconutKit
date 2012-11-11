@@ -59,16 +59,13 @@
 {
     [super releaseViews];
     
-    // Free heavy views in cache
-    self.leftHeavyViewController.view = nil;
-    self.rightHeavyViewController.view = nil;
-    
     self.heavyButton = nil;
     self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
+    self.involvingChildrenForAutorotationSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -89,6 +86,8 @@
 
 @synthesize rightHeavyViewController = m_rightHeavyViewController;
 
+@synthesize involvingChildrenForAutorotationSwitch = m_involvingChildrenForAutorotationSwitch;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -99,6 +98,7 @@
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
+    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren);
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -131,6 +131,7 @@
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             insetViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
@@ -142,7 +143,19 @@
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
+    
+    @try {
+        [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
+                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
 #pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
@@ -366,6 +379,16 @@
     }
     else {
         self.heavyButton.hidden = NO;
+    }
+}
+
+- (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender
+{
+    if (self.involvingChildrenForAutorotationSwitch.on) {
+        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
+    }
+    else {
+        self.autorotationMode = HLSAutorotationModeContainer;
     }
 }
 

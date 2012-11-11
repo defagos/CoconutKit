@@ -21,6 +21,8 @@
 
 @interface StackDemoViewController ()
 
+@property (nonatomic, retain) UIPopoverController *popoverController;
+
 - (void)displayContentViewController:(UIViewController *)viewController;
 
 - (void)updateIndexInfo;
@@ -40,6 +42,15 @@
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
         stackController.delegate = self;
         stackController.title = @"HLSStackController";
+        
+        // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
+        // with the UIModalPresentationCurrentContext presentation style
+        stackController.definesPresentationContext = YES;
+        
+        // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
+        // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
+        // behavior
+        self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
@@ -72,11 +83,20 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.popoverController = nil;
+
+    [super dealloc];
+}
+
 - (void)releaseViews
 { 
     [super releaseViews];
     
+    self.popoverButton = nil;
     self.transitionPickerView = nil;
+    self.autorotationModeSegmentedControl = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.animatedSwitch = nil;
@@ -87,7 +107,11 @@
 
 #pragma mark Accessors and mutators
 
+@synthesize popoverButton = m_popoverButton;
+
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
@@ -101,6 +125,8 @@
 
 @synthesize removalIndexLabel = m_removalIndexLabel;
 
+@synthesize popoverController = m_popoverController;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -109,6 +135,9 @@
         
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    self.autorotationModeSegmentedControl.selectedSegmentIndex = stackController.autorotationMode;
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
@@ -123,6 +152,25 @@
     [self updateIndexInfo];
 }
 
+#pragma mark Orientation management
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self.popoverController dismissPopoverAnimated:NO];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
+                                            inView:self.popoverButton
+                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                          animated:NO];
+}
+
 #pragma mark Localization
 
 - (void)localize
@@ -130,6 +178,11 @@
     [super localize];
     
     self.title = @"HLSStackController";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -143,6 +196,7 @@
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             pushedViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
@@ -154,11 +208,24 @@
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    [stackController insertViewController:pushedViewController
-                                  atIndex:(NSUInteger)roundf(self.indexSlider.value)
-                      withTransitionClass:NSClassFromString(transitionName)
-                                 duration:kAnimationTransitionDefaultDuration
-                                 animated:self.animatedSwitch.on];
+    
+    @try {
+        [stackController insertViewController:pushedViewController
+                                      atIndex:(NSUInteger)roundf(self.indexSlider.value)
+                          withTransitionClass:NSClassFromString(transitionName)
+                                     duration:kAnimationTransitionDefaultDuration
+                                     animated:self.animatedSwitch.on];
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
+                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+        return;
+    }
     
     [self updateIndexInfo];
 }
@@ -333,6 +400,20 @@
     [self presentModalViewController:stackController animated:YES];
 }
 
+- (IBAction)testInPopover:(id)sender
+{   
+    RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+    HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
+    stackController.delegate = self;
+    stackController.contentSizeForViewInPopover = CGSizeMake(800.f, 600.);
+    self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:stackController] autorelease];
+    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
+                                            inView:self.popoverButton
+                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                          animated:YES];
+}
+
 - (IBAction)pop:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
@@ -357,6 +438,22 @@
         targetViewController = [stackController rootViewController];
     }
     [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
+}
+
+- (IBAction)testResponderChain:(id)sender
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction)indexChanged:(id)sender

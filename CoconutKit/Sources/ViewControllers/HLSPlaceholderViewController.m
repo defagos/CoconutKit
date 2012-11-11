@@ -16,6 +16,8 @@
 
 @interface HLSPlaceholderViewController ()
 
+- (void)hlsPlaceholderViewControllerInit;
+
 @property (nonatomic, retain) NSMutableArray *containerStacks;
 
 @end
@@ -23,6 +25,27 @@
 @implementation HLSPlaceholderViewController
 
 #pragma mark Object creation and destruction
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        [self hlsPlaceholderViewControllerInit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self hlsPlaceholderViewControllerInit];
+    }
+    return self;
+}
+
+- (void)hlsPlaceholderViewControllerInit
+{
+    self.autorotationMode = HLSAutorotationModeContainer;
+}
 
 - (void)awakeFromNib
 {
@@ -67,6 +90,17 @@
 
 @synthesize placeholderViews = m_placeholderViews;
 
+@synthesize autorotationMode = m_autorotationMode;
+
+- (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
+{    
+    m_autorotationMode = autorotationMode;
+    
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        containerStack.autorotationMode = autorotationMode;
+    }
+}
+
 @synthesize delegate = m_delegate;
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index
@@ -89,7 +123,18 @@
 
 #pragma mark View lifecycle
 
+// Deprecated since iOS 6
 - (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
+{
+    return NO;
+}
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods
+{
+    return NO;
+}
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods
 {
     return NO;
 }
@@ -137,6 +182,7 @@
         // We need to have a stack for each placeholder view
         for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
+            containerStack.autorotationMode = self.autorotationMode;
             containerStack.delegate = self;
             [self.containerStacks addObject:containerStack];
         }
@@ -194,19 +240,28 @@
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{    
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+- (BOOL)shouldAutorotate
+{
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
     for (HLSContainerStack *containerStack in self.containerStacks) {
-        if (! [containerStack shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+        if (! [containerStack shouldAutorotate]) {
             return NO;
         }
     }
-        
+    
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSUInteger supportedInterfaceOrientations = [super supportedInterfaceOrientations];
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        supportedInterfaceOrientations &= [containerStack supportedInterfaceOrientations];
+    }
+    return supportedInterfaceOrientations;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -270,6 +325,7 @@
         
         for (NSUInteger i = [self.containerStacks count]; i <= index; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
+            containerStack.autorotationMode = self.autorotationMode;
             containerStack.delegate = self;
             [self.containerStacks addObject:containerStack];
         }

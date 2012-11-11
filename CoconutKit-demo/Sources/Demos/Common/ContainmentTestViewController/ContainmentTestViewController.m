@@ -12,6 +12,19 @@
 
 @implementation ContainmentTestViewController
 
+#pragma mark Object creation and destruction
+
+- (void)releaseViews
+{
+    [super releaseViews];
+    
+    self.presentingModalSwitch = nil;
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize presentingModalSwitch = m_presentingModalSwitch;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -19,6 +32,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor randomColor];
+    
+    self.presentingModalSwitch.on = NO;
     
     // It is sufficient to log this information once, it won't change afterwards
     HLSLoggerInfo(@"navigationController = %@"
@@ -48,7 +63,7 @@
 {
     [super viewWillAppear:animated];
     
-    // Can be called also in iOS 4
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -56,7 +71,7 @@
 {
     [super viewDidAppear:animated];
     
-    // Can be called also in iOS 4
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -64,6 +79,7 @@
 {
     [super viewWillDisappear:animated];
     
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
@@ -71,18 +87,40 @@
 {
     [super viewDidDisappear:animated];
     
+    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
+}
+
+#pragma mark Containment
+
+- (void)willMoveToParentViewController:(UIViewController *)parentViewController
+{
+    [super willMoveToParentViewController:parentViewController];
+    
+    HLSLoggerInfo(@"Called for object %@, parent is %@", self, parentViewController);
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parentViewController
+{
+    [super didMoveToParentViewController:parentViewController];
+    
+    HLSLoggerInfo(@"Called for object %@, parent is %@", self, parentViewController);    
 }
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+    if (! [super shouldAutorotate]) {
         return NO;
     }
     
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -114,6 +152,7 @@
 {
     // Just to test -parentViewController (if correct, then the topmost container will be presenting the modal)
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    memoryWarningTestCoverViewController.modalPresentationStyle = self.presentingModalSwitch.on ? UIModalPresentationCurrentContext : UIModalPresentationFullScreen;
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 

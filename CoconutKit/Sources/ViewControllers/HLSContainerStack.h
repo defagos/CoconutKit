@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "HLSAutorotation.h"
 #import "HLSTransition.h"
 
 // Forward declarations
@@ -29,8 +30,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * for view controllers you insert in it (they will be ignored, see UIViewController documentation). The 2-step rotation 
  * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
  *
- * A lot of work has been made to provide a clean and powerful interface to implement containers exhibiting correct 
- * behavior and maximum flexibility. Most notably:
+ * A lot of work has been made to provide a clean and powerful interface letting you easily implement containers with
+ * correct behavior. Most notably:
  *   - view lifecycle and rotation events are correctly forwarded to children view controllers
  *     Remark: Even if a view controller remains visible behind a transparent top view controller on top of it, it will
  *             still be considered as having disappeared (and therefore will receive the -viewWillDisappear: and 
@@ -50,13 +51,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     with those returned when using standard built-in UIKit containers (these methods are available since iOS 5 
  *     only, but CoconutKit injects implementations as well so that you can use them with custom containers on
  *     iOS 4 as well)
- *   - a capacity can be provided so that children view controller's views deep enough are automatically unloaded
- *     and reloaded when needed, saving memory. Alternatively, a view controller can be removed from the stack
- *     as soon as it gets deep enough. This makes it possible to implement containers with a FIFO behavior (the
- *     case where the capacity is set to 1 corresponds to a stack displaying a single child view controller). Usually,
- *     the default capacity (HLSContainerStackDefaultCapacity = 2) should fulfill most needs, but if you require 
- *     more transparency levels or if you want to minimize load / unload operations, you can increase this value. 
- *     Standard capacity values are provided at the beginning of this file.
+ *   - a capacity can be provided so that children view controller's views deep enough are automatically removed
+ *     from the view hierarchy and reinserted when needed. The reason is that having too many view non-opaque
+ *     view controllers can lead to performance issues, especially during animations (due to layer blending).
+ *     By limiting the number of views in the container view hierarchy, such issues can be kept under control.
+ *     Alternatively, a view controller can be removed from the stack as soon as it gets deep enough. This makes 
+ *     it possible to implement containers with a FIFO behavior (the case where the capacity is set to 1 corresponds 
+ *     to a stack displaying a single child view controller). Usually, the default capacity (which is given by
+ *     HLSContainerStackDefaultCapacity = 2) should fulfill most needs, but if you require more transparency levels
+ *     you can increase this value. Standard capacity values are provided at the beginning of this file.
  *   - custom containers implemented using HLSContainerStack behave correctly, whether they are embedded into 
  *     another container (even built-in ones), displayed as the root of an application, or modally
  *   - stacks can be used to display any kind of view controllers, even standard UIKit containers like
@@ -94,7 +97,16 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *
- * Remark: No methods have been provided for -viewDidLoad and -viewDidUnload (call -releaseViews instead)
+ * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload (call -releaseViews instead)
+ *
+ * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
+ *     -willMoveToParentViewController:
+ *     -didMoveToParentViewController:
+ * Implementations should call the super implementation first. Moreover, the following methods are also available
+ * for child view controllers, even on iOS 4:
+ *     -isMovingToParentViewController
+ *     -isMovingFromParentViewController
+ * Refer to the documentation of those methods for more information.
  *
  * Even though the new iOS 5 containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
@@ -111,6 +123,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     BOOL m_removing;                                           // If YES, view controllers over capacity are removed from the stack, otherwise their views are simply unloaded
     BOOL m_rootViewControllerFixed;                            // Is the root view controller fixed?
     BOOL m_animating;                                          // Set to YES when a transition animation is running
+    HLSAutorotationMode m_autorotationMode;                    // How the container decides to behave when rotation occurs
     id<HLSContainerStackDelegate> m_delegate;                  // The stack delegate, usually the custom container which is implemented
 }
 
@@ -142,7 +155,24 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * view controller's view hierarchy and cannot be set once it has been displayed (in general, though, you need to
  * set it once in the container view controller -loadView or -viewDidLoad method)
  */
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, retain) UIView *containerView;
+
+/**
+ * Set how a container decides whether it must rotate or not. Your containers should in general exhibit a similar 
+ * property, whose implementation must be forwarded to this HLSContainerContent property
+ *
+ * HLSAutorotationModeContainer: All child view controllers loaded according to the capacity decide whether rotation
+ *                               can occur, and receive the related events
+ * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
+ *                                            related events
+ * HLSAutorotationModeContainerAndTopChildren: The top child view controller decide whether rotation can occur,
+ *                                             and receive the related events
+ * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive 
+ *                                             the related events
+ *
+ * The default value is HLSAutorotationModeContainer
+ */
+@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack delegate (usually the container view controller you are implementing)
@@ -274,9 +304,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewDidUnload message to the corresponding view
- * controllers. You should call this method from your -viewDidUnload method (better: Have your container view controller
- * subclass HLSViewController, and call this method from its -releaseView method)
+ * Release all view and view-related resources. On iOS 4 and 5, this also forwards the -viewWill/DidUnload messages 
+ * to the corresponding view controllers
  */
 - (void)releaseViews;
 
@@ -301,10 +330,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)viewDidDisappear:(BOOL)animated;
 
 /**
- * Call this method from your container view controller -shouldAutorotateToInterfaceOrientation: method, otherwise the 
- * behavior is undefined
+ * Call this method from your container view controller -shouldAutorotate: method, otherwise the behavior is undefined
  */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+- (BOOL)shouldAutorotate;
+
+/**
+ * Call this method from your container view controller -supportedInterfaceOrientations method, otherwise the behavior
+ * is undefined
+ */
+- (NSUInteger)supportedInterfaceOrientations;
 
 /**
  * Call this method from your container view controller -willRotateToInterfaceOrientation:duration: method, otherwise 
@@ -414,5 +448,14 @@ willHideViewController:(UIViewController *)viewController
  * straightforward: Simply call the method below with your container class as argument
  */
 - (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass;
+
+/**
+ * Return the interface orientation used for displaying the view controller. For view controllers not embedded into
+ * CoconutKit containers, this value is the same as the one returned by -[UIViewController interfaceOrientation], 
+ * matching the status bar orientation. For view controllers embedded into CoconutKit containers, this is the 
+ * orientation of the view controller, compatible with the container, which has been used for display (this might
+ * not necessarily match the status bar orientation)
+ */
+@property (nonatomic, readonly, assign) UIInterfaceOrientation displayedInterfaceOrientation;
 
 @end

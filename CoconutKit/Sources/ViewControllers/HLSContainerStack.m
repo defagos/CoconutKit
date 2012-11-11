@@ -36,6 +36,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)addViewForContainerContent:(HLSContainerContent *)containerContent
                          inserting:(BOOL)inserting
                           animated:(BOOL)animated;
+- (void)rotateContainerContent:(HLSContainerContent *)containerContent
+       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end
 
@@ -70,6 +72,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.capacity = capacity;
         m_removing = removing;
         m_rootViewControllerFixed = rootViewControllerFixed;
+        m_autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
 }
@@ -101,11 +104,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)setContainerView:(UIView *)containerView
 {
     if (m_containerView == containerView) {
-        return;
-    }
-        
-    if ([self.containerViewController isViewDisplayed]) {
-        HLSLoggerError(@"Cannot change the container view when the container view controller is being displayed");
         return;
     }
     
@@ -148,6 +146,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     m_capacity = capacity;
 }
+
+@synthesize autorotationMode = m_autorotationMode;
 
 @synthesize delegate = m_delegate;
 
@@ -334,16 +334,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    // TODO: This test cannot be made without being wrapped, at least in isViewDisplayed, maybe better in isViewLoaded test.
-    //       Maybe find a better location / approach
-#if 0
-    // Check that the view controller to be pushed is compatible with the current orientation
-    if (! [viewController shouldAutorotateToInterfaceOrientation:self.containerViewController.interfaceOrientation]) {
-        HLSLoggerError(@"The view controller does not support the current view container orientation");
-        return;
-    }
-#endif
-    
     if ([self.containerViewController isViewDisplayed]) {
         // Notify the delegate before the view controller is actually installed on top of the stack and associated with the
         // container (see HLSContainerStackDelegate interface contract)
@@ -362,7 +352,22 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                          containerViewController:self.containerViewController
                                                                                  transitionClass:transitionClass
                                                                                         duration:duration] autorelease];
+    if (! containerContent) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"The view controller to insert is incompatible with the container it is inserted into"
+                                     userInfo:nil];
+    }
+    
     [self.containerContents insertObject:containerContent atIndex:index];
+
+    // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
+    // displayed), we must call -didMoveToParentViewController: manually right after the containment relationship has
+    // been established (iOS 5 and above, see UIViewController documentation)
+    if (! [self.containerViewController isViewDisplayed]
+            || (index == [self.containerContents count] - 1 && ! animated)) {
+        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+        [viewController didMoveToParentViewController:self.containerViewController];
+    }
     
     // If inserted in the capacity range, must add the view
     if ([self.containerViewController isViewDisplayed]) {
@@ -438,7 +443,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
     }
-        
+    
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     if (containerContent.addedToContainerView) {
         // Load the view controller's view below so that the capacity criterium can be fulfilled (if needed). If we are popping a
@@ -563,7 +568,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
     // Prevent rotations during animations. Can lead to erroneous animations
     if (m_animating) {
@@ -571,20 +576,85 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    // If one view controller in the stack does not support the orientation, neither will the container
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        if (! [containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-            return NO;
+    switch (self.autorotationMode) {
+        case HLSAutorotationModeContainerAndAllChildren: {
+            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+                if (! [containerContent shouldAutorotate]) {
+                    return NO;
+                }
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndTopChildren: {
+            HLSContainerContent *topContainerContent = [self topContainerContent];
+            if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
+                return NO;
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndNoChildren: {
+            break;
+        }
+            
+        case HLSAutorotationModeContainer:
+        default: {
+            for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+                NSUInteger index = [self.containerContents count] - 1 - i;
+                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                if (! [containerContent shouldAutorotate]) {
+                    return NO;
+                }
+            }
+            break;
         }
     }
-        
+    
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSUInteger supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
+    switch (self.autorotationMode) {
+        case HLSAutorotationModeContainerAndAllChildren: {
+            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+                supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndTopChildren: {
+            HLSContainerContent *topContainerContent = [self topContainerContent];
+            if (topContainerContent) {
+                supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
+            }
+            break;
+        }
+            
+        case HLSAutorotationModeContainerAndNoChildren: {
+            break;
+        }
+            
+        case HLSAutorotationModeContainer:
+        default: {
+            for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+                NSUInteger index = [self.containerContents count] - 1 - i;
+                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
+            }
+            break;
+        }
+    }
+    
+    return supportedInterfaceOrientations;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
-        // Visible view controllers only
+        // Avoid frame issues due to rotation
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
@@ -597,19 +667,49 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
                 // non-integral frames, and thus to blurry views)
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                
+                // If the container view controller presents a modal on its view (i.e. defines a presentation context and
+                // displays a modal with a UIModalPresentationCurrentContext presentation style), then views might be removed
+                // from the hierarchy by the system when the modal gets displayed. In such cases, ignore
+                if (! groupView) {
+                    continue;
+                }
+                
                 HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
                                                                                               disappearingView:groupView.backView
                                                                                                         inView:groupView
                                                                                                       duration:0.] reverseAnimation];
-                [reverseAnimation playAnimated:NO];
+                [reverseAnimation playAnimated:NO];                
+            }
+        }
+        
+        switch (self.autorotationMode) {
+            case HLSAutorotationModeContainerAndAllChildren: {
+                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
+                break;
             }
                 
-            // Only view controllers potentially visible (i.e. not unloaded according to the capacity) receive rotation
-            // events. This matches UINavigationController behavior, for which only the top view controller receives
-            // such events
-            [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-            
-            if (index == 0) {
+            case HLSAutorotationModeContainerAndTopChildren: {
+                HLSContainerContent *topContainerContent = [self topContainerContent];
+                if (topContainerContent) {
+                    [topContainerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
+                break;
+            }
+                
+            case HLSAutorotationModeContainerAndNoChildren: {
+                break;
+            }
+                
+            case HLSAutorotationModeContainer:
+            default: {
+                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+                    NSUInteger index = [self.containerContents count] - 1 - i;
+                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
                 break;
             }
         }
@@ -619,25 +719,53 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self.containerContents count] != 0) {
-        // Visible view controllers only
+        // Avoid frame issues due to rotation
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
             if ([containerContent viewIfLoaded]) {
-                // See comment in -willRotateToInterfaceOrientation:duration:
+                // See comments in -willRotateToInterfaceOrientation:duration:
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+                if (! groupView) {
+                    continue;
+                }
+                
                 HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
                                                                                       disappearingView:groupView.backView
                                                                                                 inView:groupView
                                                                                               duration:0.];
                 [animation playAnimated:NO];
             }
+        }
+        
+        switch (self.autorotationMode) {
+            case HLSAutorotationModeContainerAndAllChildren: {
+                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
+                break;
+            }
                 
-            // Same remark as in -willRotateToInterfaceOrientation:duration:
-            [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-            
-            if (index == 0) {
+            case HLSAutorotationModeContainerAndTopChildren: {
+                HLSContainerContent *topContainerContent = [self topContainerContent];
+                if (topContainerContent) {
+                    [topContainerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
+                break;
+            }
+                
+            case HLSAutorotationModeContainerAndNoChildren: {
+                break;
+            }
+                
+            case HLSAutorotationModeContainer:
+            default: {
+                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+                    NSUInteger index = [self.containerContents count] - 1 - i;
+                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
                 break;
             }
         }
@@ -647,18 +775,49 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if ([self.containerContents count] != 0) {
-        // Visible view controllers only
+        // Rotate the loaded child view controller's views to an orientation they support (if needed)
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
             
-            // Same remark as in -willAnimateRotationToInterfaceOrientation:duration:
-            [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-            
-            if (index == 0) {
+            // Called in -didRotate. Two reasons:
+            //   - the result looks better (children incompatible with the current orientation snap at the end of the animation,
+            //     which looks quite the same as what happens when popping view controllers with different orientations from a
+            //     navigation controller
+            //   - if called early in -willRotate, the views get slightly blurry when rotated
+            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
+        }
+        
+        switch (self.autorotationMode) {
+            case HLSAutorotationModeContainerAndAllChildren: {
+                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+                }
                 break;
             }
-        }   
+                
+            case HLSAutorotationModeContainerAndTopChildren: {
+                HLSContainerContent *topContainerContent = [self topContainerContent];
+                if (topContainerContent) {
+                    [topContainerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+                }
+                break;
+            }
+                
+            case HLSAutorotationModeContainerAndNoChildren: {
+                break;
+            }
+                
+            case HLSAutorotationModeContainer:
+            default: {
+                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+                    NSUInteger index = [self.containerContents count] - 1 - i;
+                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+                }
+                break;
+            }
+        }
     }
 }
 
@@ -689,6 +848,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
         [containerContent addAsSubviewIntoContainerStackView:stackView];
+        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
@@ -709,6 +869,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (! inserted) {
             [containerContent addAsSubviewIntoContainerStackView:stackView];
         }
+        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
         
         // Play the corresponding animation to put the view into the correct location
         HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
@@ -746,6 +907,94 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // All other cases (inserting in the middle or instantiating the view for a view controller already in the stack)
     else {
         [animation playAnimated:NO];
+    }
+}
+
+/**
+ * Call this method when a child view controller's view must be rotated to make it compatible with the container interface
+ * orientation. Landscape-only view controllers, e.g., must be rotated from PI/2 when inserted in a container in portrait
+ * mode
+ */
+- (void)rotateContainerContent:(HLSContainerContent *)containerContent
+       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+    if (! groupView) {
+        return;
+    }
+    
+    // We directly act on the front content view, not on the front view, to avoid interfering with the animations
+    // played on it. This is how rotations are usually applied on the root view controller's view by UIKit.
+    // TODO: If this happens to be an issue (this should not, though):
+    //         - add a frontAutorotationView wrapper to HLSGroupView
+    //         - apply rotation and bounds changes on it
+    //         - test this does not have any negative performance impact
+    groupView.frontContentView.transform = CGAffineTransformIdentity;
+    groupView.frontContentView.bounds = groupView.bounds;
+    if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
+        // Find an orientation compatible with the container
+        UIInterfaceOrientation compatibleInterfaceOrientation = [containerContent.viewController compatibleOrientationWithViewController:self.containerViewController];
+        if (compatibleInterfaceOrientation == 0) {
+            HLSLoggerError(@"No compatible orientation found. The set of supported orientations of the container has probably been changed after the child "
+                           "has been added");
+            return;
+        }
+        
+        // Rotate the child appropriately
+        CGFloat angle = 0.f;
+        switch (interfaceOrientation) {
+            case UIInterfaceOrientationPortrait: {
+                switch (compatibleInterfaceOrientation) {
+                    case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI; break;
+                    case UIInterfaceOrientationLandscapeRight:          angle = M_PI_2; break;
+                    case UIInterfaceOrientationLandscapeLeft:           angle = -M_PI_2; break;
+                    default:                                            angle = 0.f; break;
+                }
+                break;
+            }
+                
+            case UIInterfaceOrientationPortraitUpsideDown: {
+                switch (compatibleInterfaceOrientation) {
+                    case UIInterfaceOrientationPortrait:                angle = M_PI; break;
+                    case UIInterfaceOrientationLandscapeRight:          angle = -M_PI_2; break;
+                    case UIInterfaceOrientationLandscapeLeft:           angle = M_PI_2; break;
+                    default:                                            angle = 0.f; break;
+                }
+                break;
+            }
+
+            case UIInterfaceOrientationLandscapeRight: {
+                switch (compatibleInterfaceOrientation) {
+                    case UIInterfaceOrientationPortrait:                angle = -M_PI_2; break;
+                    case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI_2; break;
+                    case UIInterfaceOrientationLandscapeLeft:           angle = M_PI; break;
+                    default:                                            angle = 0.f; break;
+                }
+                break;
+            }
+                
+            case UIInterfaceOrientationLandscapeLeft: {
+                switch (compatibleInterfaceOrientation) {
+                    case UIInterfaceOrientationPortrait:                angle = M_PI_2; break;
+                    case UIInterfaceOrientationPortraitUpsideDown:      angle = -M_PI_2; break;
+                    case UIInterfaceOrientationLandscapeRight:          angle = M_PI; break;
+                    default:                                            angle = 0.f; break;
+                }
+                break;
+            }
+                
+            default: {
+                angle = 0.f;
+                break;
+            }
+        }
+        groupView.frontContentView.transform = CGAffineTransformMakeRotation(angle);
+        
+        // If the format is different, must exchange width and height
+        if ((UIInterfaceOrientationIsPortrait(interfaceOrientation) && UIInterfaceOrientationIsLandscape(compatibleInterfaceOrientation))
+                || (UIInterfaceOrientationIsLandscape(interfaceOrientation) && UIInterfaceOrientationIsPortrait(compatibleInterfaceOrientation))) {
+            groupView.frontContentView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
+        }
     }
 }
 
@@ -815,21 +1064,29 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Keep the disappearing view controller alive a little bit longer
         UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
+        UIViewController *appearingViewController = appearingContainerContent.viewController;
         
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
             if (! m_removing) {
-                [containerContentAtCapacity releaseViews];
+                // The view is only removed from the view hierarchy, so that blending can be made faster. The view is NOT unloaded
+                // (on iOS 4 and 5, it will only be unloaded if a memory warning is later received)
+                [containerContentAtCapacity removeViewFromContainerStackView];
             }
             else {
                 [self.containerContents removeObject:containerContentAtCapacity];
             }
             
+            // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
+            // been performed (iOS 5 and above, see UIViewController documentation)
+            // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+            [appearingViewController didMoveToParentViewController:self.containerViewController];
+            
             // Notify the delegate
             if ([self.delegate respondsToSelector:@selector(containerStack:didPushViewController:coverViewController:animated:)]) {
                 [self.delegate containerStack:self
-                        didPushViewController:appearingContainerContent.viewController
+                        didPushViewController:appearingViewController
                           coverViewController:disappearingViewController
                                      animated:animated];
             }
@@ -871,6 +1128,23 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     return [HLSContainerContent containerViewControllerKindOfClass:containerViewControllerClass
                                                  forViewController:self];
+}
+
+- (UIInterfaceOrientation)displayedInterfaceOrientation
+{
+    UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
+                                                                                      forViewController:self];
+    if (containerViewController) {
+        if ([self supportsInterfaceOrientation:containerViewController.interfaceOrientation]) {
+            return containerViewController.interfaceOrientation;
+        }
+        else {
+            return [self compatibleOrientationWithViewController:containerViewController];
+        }
+    }
+    else {
+        return self.interfaceOrientation;
+    }
 }
 
 @end

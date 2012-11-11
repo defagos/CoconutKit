@@ -9,10 +9,11 @@
 #import "HLSWebViewController.h"
 
 #import "HLSActionSheet.h"
+#import "HLSAutorotation.h"
+#import "HLSNotifications.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
-#import "HLSNotifications.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
@@ -121,17 +122,18 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+        return UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {
-        return YES;
+        return UIInterfaceOrientationMaskAll;
     }
 }
 
