@@ -207,6 +207,10 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController
 {
+    if (! viewController) {
+        return NO;
+    }
+    
     if ([viewController implementsNewAutorotationMethods]) {
         return [self shouldAutorotateForOrientations:[viewController supportedInterfaceOrientations]];
     }
@@ -274,6 +278,10 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController
 {
+    if (! viewController) {
+        return 0;
+    }
+    
     return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
 }
 

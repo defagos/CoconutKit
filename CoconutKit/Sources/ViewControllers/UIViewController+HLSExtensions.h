@@ -94,7 +94,8 @@ typedef enum {
 - (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations;
 
 /**
- * Return YES iff the receiver has at least one compatible orientation with the supplied view controller
+ * Return YES iff the receiver has at least one compatible orientation with the supplied view controller. If viewController
+ * is nil, this method returns NO
  */
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
 
@@ -111,7 +112,7 @@ typedef enum {
  *   - landscape left
  *   - portrait upside down (the usually disabled orientation on iPhone)
  *
- * Return 0 if no compatible orientation is found
+ * Return 0 if no compatible orientation is found, or if viewController is nil
  */
 - (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
