@@ -22,7 +22,6 @@
     NSDictionary *m_userInfo;
     NSTimeInterval m_duration;
     id<HLSAnimationStepDelegate> m_delegate;
-    BOOL m_running;
     BOOL m_terminating;
 }
 

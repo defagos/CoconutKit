@@ -21,7 +21,6 @@
 @property (nonatomic, retain) NSMutableArray *objectKeys;
 @property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
 @property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
-@property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 @end
@@ -86,8 +85,6 @@
 
 @synthesize delegate = m_delegate;
 
-@synthesize running = m_running;
-
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
@@ -121,7 +118,7 @@
     
     NSValue *objectKey = [NSValue valueWithPointer:object];
     [self.objectKeys addObject:objectKey];
-    [self.objectToObjectAnimationMap setObject:[objectAnimation copy] forKey:objectKey];
+    [self.objectToObjectAnimationMap setObject:[[objectAnimation copy] autorelease] forKey:objectKey];
 }
 
 - (id)objectAnimationForObject:(id)object
@@ -138,12 +135,6 @@
 
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
-    if (self.running) {
-        HLSLoggerInfo(@"The animation step is already running");
-        return;
-    }
-    
-    self.running = YES;
     self.terminating = NO;
     
     // We do not perform the animation if the duration is 0 (this can lead to unnecessary flickering in animations)
@@ -163,18 +154,11 @@
     if (! actuallyAnimated) {
         // Same remark as above
         [delegate animationStepDidStop:self animated:animated finished:YES];
-        
-        self.running = NO;
     }
 }
 
 - (void)pause
 {
-    if (! self.running) {
-        HLSLoggerDebug(@"The animation step is not running, nothing to pause");
-        return;
-    }
-    
     if (self.terminating) {
         HLSLoggerDebug(@"The animation step is being terminated");
         return;
@@ -200,11 +184,6 @@
 
 - (void)terminate
 {
-    if (! self.running) {
-        HLSLoggerDebug(@"The animation step is not running, nothing to cancel");
-        return;
-    }
-    
     if (self.terminating) {
         HLSLoggerDebug(@"The animation step is already being terminated");
         return;
@@ -281,7 +260,6 @@
     }
     
     self.terminating = NO;
-    self.running = NO;
     
     self.delegate = nil;
 }

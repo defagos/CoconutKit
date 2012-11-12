@@ -74,7 +74,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 {
     NSMutableArray *animationStepCopies = [NSMutableArray array];
     for (HLSAnimationStep *animationStep in animationSteps) {
-        [animationStepCopies addObject:[animationStep copy]];
+        [animationStepCopies addObject:[[animationStep copy] autorelease]];
     }
     return [NSArray arrayWithArray:animationStepCopies];
 }
