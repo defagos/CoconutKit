@@ -88,6 +88,7 @@
     #import "UILabel+HLSDynamicLocalization.h"
     #import "UINavigationBar+HLSExtensions.h"
     #import "UINavigationController+HLSExtensions.h"
+    #import "UIPopoverController+HLSExtensions.h"
     #import "UIScrollView+HLSExtensions.h"
     #import "UISplitViewController+HLSExtensions.h"
     #import "UITabBarController+HLSExtensions.h"

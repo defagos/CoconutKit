@@ -71,6 +71,7 @@ UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
 UINavigationBar+HLSExtensions.h
 UINavigationController+HLSExtensions.h
+UIPopoverController+HLSExtensions.h
 UIScrollView+HLSExtensions.h
 UISplitViewController+HLSExtensions.h
 UITabBarController+HLSExtensions.h
