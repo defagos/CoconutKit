@@ -237,7 +237,7 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     }
 }
 
-- (BOOL)supportsInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)autorotatesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([self implementsNewAutorotationMethods]) {
         return [self shouldAutorotate] && ([self supportedInterfaceOrientations] & (1 << interfaceOrientation));

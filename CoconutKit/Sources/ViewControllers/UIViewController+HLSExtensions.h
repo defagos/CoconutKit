@@ -100,9 +100,9 @@ typedef enum {
 - (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
 
 /**
- * Return YES iff the receiver supports the supplied interface orientation
+ * Return YES iff the receiver can autorotate to the supplied interface orientation
  */
-- (BOOL)supportsInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (BOOL)autorotatesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 /**
  * Return the first interface orientation supported by the receiver, and compatible with a given orientation set

@@ -1135,7 +1135,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
                                                                                       forViewController:self];
     if (containerViewController) {
-        if ([self supportsInterfaceOrientation:containerViewController.interfaceOrientation]) {
+        if ([self autorotatesToInterfaceOrientation:containerViewController.interfaceOrientation]) {
             return containerViewController.interfaceOrientation;
         }
         else {
