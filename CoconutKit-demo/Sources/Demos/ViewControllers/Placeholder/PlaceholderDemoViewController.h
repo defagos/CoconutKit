@@ -42,6 +42,8 @@
 - (IBAction)togglePlaceholder:(id)sender;
 - (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender;
 
+- (IBAction)testResponderChain:(id)sender;
+
 - (IBAction)navigateForwardNonAnimated:(id)sender;
 - (IBAction)navigateBackNonAnimated:(id)sender;
 

@@ -392,6 +392,16 @@
     }
 }
 
+- (IBAction)testResponderChain:(id)sender
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
 - (IBAction)navigateForwardNonAnimated:(id)sender
 {
     PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
