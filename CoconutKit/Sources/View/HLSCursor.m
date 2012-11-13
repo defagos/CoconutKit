@@ -409,7 +409,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     }
     
     // No match found; return leftmost or rightmost element view
-    UIView *firstElementView = [self.elementViews firstObject];
+    UIView *firstElementView = [self.elementViews firstObject_hls];
     if (floatlt(xPos, firstElementView.frame.origin.x - self.spacing / 2.f)) {
         return 0;
     }
@@ -439,7 +439,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // Too far on the left; cursor around the first view
     CGRect pointerRect;
     if (index == 0) {
-        UIView *firstElementView = [self.elementViews firstObject];
+        UIView *firstElementView = [self.elementViews firstObject_hls];
         pointerRect = firstElementView.frame;
     }
     // Too far on the right; cursor around the last view

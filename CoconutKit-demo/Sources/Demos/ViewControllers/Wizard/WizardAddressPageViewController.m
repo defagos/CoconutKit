@@ -27,7 +27,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.person = [[Person allObjects] firstObject];
+        self.person = [[Person allObjects] firstObject_hls];
         NSAssert(self.person != nil, @"A person must be available");
     }
     return self;

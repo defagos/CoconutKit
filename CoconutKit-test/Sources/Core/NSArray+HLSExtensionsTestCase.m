@@ -15,10 +15,10 @@
 - (void)testFirstObject
 {
     NSArray *emptyArray = [NSArray array];
-    GHAssertNil([emptyArray firstObject], @"Empty array");
+    GHAssertNil([emptyArray firstObject_hls], @"Empty array");
     
     NSArray *array = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
-    GHAssertEqualStrings([array firstObject], @"1", @"First object");
+    GHAssertEqualStrings([array firstObject_hls], @"1", @"First object");
 }
 
 - (void)testRotation

@@ -181,7 +181,7 @@
 + (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread
 {
     NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
-    return [modelManagerStack firstObject];
+    return [modelManagerStack firstObject_hls];
 }
 
 + (NSManagedObjectContext *)currentModelContext

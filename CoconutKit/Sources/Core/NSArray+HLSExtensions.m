@@ -16,7 +16,7 @@
 
 @implementation NSArray (HLSExtensions)
 
-- (id)firstObject
+- (id)firstObject_hls
 {
     if ([self count] == 0) {
         return nil;
