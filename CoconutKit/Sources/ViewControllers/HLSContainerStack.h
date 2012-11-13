@@ -79,6 +79,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     ancestor container
  *   - a custom container can contain several HLSContainerStacks if it needs to display several children view
  *     controllers simultaneously
+ *   - the container view can be resized at will, even when child view controllers are displayed
  *
  * When implementing your own view controller container, be sure to call the following HLSContainerStack
  * methods, otherwise the behavior is undefined (refer to the documentation of these methods for more 

@@ -97,6 +97,7 @@
 { 
     [super releaseViews];
     
+    self.sizeSlider = nil;
     self.popoverButton = nil;
     self.transitionPickerView = nil;
     self.autorotationModeSegmentedControl = nil;
@@ -109,6 +110,8 @@
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize sizeSlider = m_sizeSlider;
 
 @synthesize popoverButton = m_popoverButton;
 
@@ -152,6 +155,9 @@
 {
     [super viewWillAppear:animated];
     
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    
     [self updateIndexInfo];
 }
 
@@ -161,7 +167,28 @@
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
+    // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
+    // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
+    // the view
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    
     [self.popoverController dismissPopoverAnimated:NO];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
+    // are able to restore them when rotating again, and set size according to the previous size slider value. This
+    // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    placeholderView.bounds = CGRectMake(0.f,
+                                        0.f,
+                                        CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                        CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -339,6 +366,15 @@
 }
 
 #pragma mark Event callbacks
+
+- (IBAction)sizeChanged:(id)sender
+{
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    placeholderView.bounds = CGRectMake(0.f,
+                                        0.f,
+                                        CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                        CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+}
 
 - (IBAction)displayLifeCycleTest:(id)sender
 {

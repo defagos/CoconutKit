@@ -32,6 +32,9 @@
  * controller is displayed. You must only ensure that the number of placeholder views suffices to hold all the view 
  * controllers you have preloaded.
  *
+ * You can resize or move (even animate!) the placeholder views, even when insets are displayed. This makes the
+ * creation of innovative user interfaces as easy as it can be. Start now!
+ *
  * When you subclass HLSPlaceholderViewController, it is especially important not to forget to call the super class
  * view lifecycle, orientation, animation and initialization methods first if you override any of them, otherwise the 
  * behavior is undefined:
