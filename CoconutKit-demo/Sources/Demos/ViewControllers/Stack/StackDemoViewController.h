@@ -12,6 +12,7 @@
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
     UISlider *m_sizeSlider;
+    UISegmentedControl *m_resizeMethodSegmentedControl;
     UIButton *m_popoverButton;
     UIPickerView *m_transitionPickerView;
     UISegmentedControl *m_autorotationModeSegmentedControl;
@@ -26,6 +27,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UISlider *sizeSlider;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *resizeMethodSegmentedControl;
 @property (nonatomic, retain) IBOutlet UIButton *popoverButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
@@ -37,6 +39,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *removalIndexLabel;
 
 - (IBAction)sizeChanged:(id)sender;
+- (IBAction)changeResizeMethod:(id)sender;
 
 - (IBAction)displayLifeCycleTest:(id)sender;
 - (IBAction)displayContainmentTest:(id)sender;

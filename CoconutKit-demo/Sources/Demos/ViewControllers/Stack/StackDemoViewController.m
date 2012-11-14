@@ -19,6 +19,14 @@
 #import "StretchableViewController.h"
 #import "TransparentViewController.h"
 
+typedef enum {
+    ResizeMethodEnumBegin = 0,
+    ResizeMethodFrame = ResizeMethodEnumBegin,
+    ResizeMethodTransform,
+    ResizeMethodEnumEnd,
+    ResizeMethodEnumSize = ResizeMethodEnumEnd - ResizeMethodEnumBegin
+} ResizeMethod;
+
 @interface StackDemoViewController ()
 
 @property (nonatomic, retain) UIPopoverController *popoverController;
@@ -98,6 +106,7 @@
     [super releaseViews];
     
     self.sizeSlider = nil;
+    self.resizeMethodSegmentedControl = nil;
     self.popoverButton = nil;
     self.transitionPickerView = nil;
     self.autorotationModeSegmentedControl = nil;
@@ -112,6 +121,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize sizeSlider = m_sizeSlider;
+
+@synthesize resizeMethodSegmentedControl = m_resizeMethodSegmentedControl;
 
 @synthesize popoverButton = m_popoverButton;
 
@@ -185,10 +196,7 @@
     // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
     UIView *placeholderView = [self placeholderViewAtIndex:0];
     m_placeholderViewOriginalBounds = placeholderView.bounds;
-    placeholderView.bounds = CGRectMake(0.f,
-                                        0.f,
-                                        CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
-                                        CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+    [self sizeChanged:nil];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -370,10 +378,26 @@
 - (IBAction)sizeChanged:(id)sender
 {
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = CGRectMake(0.f,
-                                        0.f,
-                                        CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
-                                        CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+    
+    if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodFrame) {
+        placeholderView.bounds = CGRectMake(0.f,
+                                            0.f,
+                                            CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                            CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+    }
+    else {
+        placeholderView.transform = CGAffineTransformMakeScale(self.sizeSlider.value, self.sizeSlider.value);
+    }
+}
+
+- (IBAction)changeResizeMethod:(id)sender
+{
+    // Reset the view to its maximum size
+    self.sizeSlider.value = self.sizeSlider.maximumValue;
+    
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.transform = CGAffineTransformIdentity;
 }
 
 - (IBAction)displayLifeCycleTest:(id)sender
