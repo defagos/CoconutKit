@@ -55,7 +55,7 @@
  *     are called, each one receiving -1 as button index. This is the same as for UIActionSheet, but I
  *     found it useful to have it documented somewhere.
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSActionSheet : UIActionSheet {
 @private

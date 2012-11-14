@@ -62,7 +62,7 @@ typedef enum {
  * adding colors to the Xcode debugging console. Simply install the plugin and set an environment variable called 
  * 'XcodeColors' to YES to enable it for your project.
  *
- * Designated initializer: initWithLevel:
+ * Designated initializer: -initWithLevel:
  */
 @interface HLSLogger : NSObject {
 @private

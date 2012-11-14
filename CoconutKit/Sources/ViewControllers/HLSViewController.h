@@ -44,7 +44,7 @@
  * console when running your application to have a look at view controller events. This most notably can help you 
  * discover incorrect view controller hierarchies or poorly implemented view controller containers.
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSViewController : UIViewController {
 @private

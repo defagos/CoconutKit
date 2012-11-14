@@ -8,4 +8,6 @@
 
 @interface NSURLRequest (HLSExtensions)
 
+// Private class used for method swizzling
+
 @end

@@ -25,7 +25,7 @@
  *  - operations are instantiated by the HLSTaskManager using their designated initializer. Your subclass must therefore
  *    not define any other initializer since they would never be called
  *
- * Designated initializer: initWithTaskManager:task:
+ * Designated initializer: -initWithTaskManager:task:
  */
 @interface HLSTaskOperation : NSOperation {
 @private

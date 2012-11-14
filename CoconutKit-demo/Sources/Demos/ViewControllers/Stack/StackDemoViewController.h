@@ -7,7 +7,7 @@
 //
 
 /**
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private

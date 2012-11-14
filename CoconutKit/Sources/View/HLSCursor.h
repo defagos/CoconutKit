@@ -33,7 +33,7 @@
  *   - custom: Each element is a view and can be customized using Interface Builder
  * Cursors using both ways of customisation can coexist in the same source file.
  *
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface HLSCursor : UIView {
 @private

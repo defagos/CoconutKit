@@ -37,7 +37,7 @@ typedef enum {
  *
  * You should not alter the frame of a slideshow while it is running. This is currently not supported.
  *
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface HLSSlideshow : UIView <HLSAnimationDelegate> {
 @private

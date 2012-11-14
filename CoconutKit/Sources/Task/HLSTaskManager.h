@@ -27,7 +27,7 @@
  * This object is not thread-safe. All operations on it must stem from the same thread, otherwise the behavior is 
  * undefined.
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSTaskManager : NSObject {
 @private

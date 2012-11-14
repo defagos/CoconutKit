@@ -7,13 +7,13 @@
 //
 
 /**
- * Globally sets exclusiveTouch for all UIControl objects, preventing quasi-simultaneous taps.
+ * Globally set exclusive touch to YES for all UIControl objects, preventing quasi-simultaneous taps.
  */
 @interface UIControl (HLSExclusiveTouch)
 
 /**
  * Call this method as soon as possible if you want to prevent quasi-simultaneous taps for your whole application. For 
- * simplicity you should use the HLSEnableUIControlInjection convenience macro instead (see HLSOptionalFeatures.h)
+ * simplicity you should use the HLSEnableUIControlExclusiveTouch convenience macro instead (see HLSOptionalFeatures.h)
  */
 + (void)enable;
 

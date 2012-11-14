@@ -12,7 +12,7 @@
 /**
  * Abstract base class for animation steps. Do not instantiate directly
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private

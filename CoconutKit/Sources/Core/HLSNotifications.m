@@ -17,7 +17,7 @@
  * Class encapsulation information related to the sender of a notification (i.e. sender's identity
  * and notification)
  *
- * Designated initializer: initWithObject:forNotificationName:
+ * Designated initializer: -initWithObject:forNotificationName:
  */
 @interface NotificationSender : NSObject {
 @private

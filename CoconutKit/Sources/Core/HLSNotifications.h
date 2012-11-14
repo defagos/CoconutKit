@@ -10,9 +10,8 @@
  * Helper header file for defining new notifications.
  *
  * A module introducing new notifications should:
- *   1) import this header file in its own header file
- *   2) in its header file, declare the new notification name using the HLSDeclareNotification macro
- *   3) in its implementation file, define the new notification using the HLSDefineNotification macro
+ *   1) in its header file, declare the new notification name using the HLSDeclareNotification macro
+ *   2) in its implementation file, define the new notification using the HLSDefineNotification macro
  * If two modules try to introduce the same notification name, a linker error will occur (since the symbol 
  * is in this case multiply defined in two separate translation units). This is good expected behavior, and 
  * this matches the approach applied in the Apple frameworks (see e.g. NSWindow on MacOS, or UIWindow on iOS)
@@ -27,7 +26,7 @@
  *
  * This class is not thread-safe
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSNotificationManager : NSObject {
 @private
@@ -61,7 +60,7 @@
  * such conversion code can be tedious and error prone. The HLSNotificationConverter singleton provides a convenient
  * way to define conversions with very litte code.
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSNotificationConverter : NSObject {
 @private
@@ -92,7 +91,7 @@
 
 /**
  * Add a conversion rule for all objects within an enumerable collection. Convenience function with same semantics
- * as convertNotificationWithName:sentByObject:intoNotificationWithName:sentByObject:
+ * as -convertNotificationWithName:sentByObject:intoNotificationWithName:sentByObject:
  */
 - (void)convertNotificationWithName:(NSString *)notificationNameFrom
            sentByObjectInCollection:(id<NSFastEnumeration>)collectionFrom

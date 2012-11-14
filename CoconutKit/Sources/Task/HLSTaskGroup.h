@@ -24,7 +24,7 @@
  * group which was fully processed can be submitted again (and with another delegate if needed), but must not be 
  * already running.
  *
- * Designated initializer: init:
+ * Designated initializer: -init:
  */
 @interface HLSTaskGroup : NSObject {
 @private

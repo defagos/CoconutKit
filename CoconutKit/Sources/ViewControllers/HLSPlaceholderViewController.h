@@ -93,7 +93,7 @@
  * since this would make navigating between tabs slow. In such cases, it makes sense to keep strong references to
  * those view controllers elsewhere (most probably as additional ivars of your placeholder view controller subclass)
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate> {
 @private

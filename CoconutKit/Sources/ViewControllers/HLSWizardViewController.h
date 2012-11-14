@@ -38,7 +38,7 @@ typedef enum {
  * when clicking on the "done" button. If the page does not implement this protocol, the page is
  * always assumed to be valid.
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSWizardViewController : HLSPlaceholderViewController {
 @private

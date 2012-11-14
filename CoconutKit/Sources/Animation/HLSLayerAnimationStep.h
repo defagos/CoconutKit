@@ -18,7 +18,7 @@
  * To create a layer animation step, simply instantiate it using the +animationStep class method, then add layer animations
  * to it, and set its duration and curve
  *
- * Designated initializer: init (create an animation step with default settings)
+ * Designated initializer: -init (create an animation step with default settings)
  */
 @interface HLSLayerAnimationStep : HLSAnimationStep {
 @private

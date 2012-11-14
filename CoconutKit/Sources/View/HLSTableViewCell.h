@@ -37,7 +37,7 @@
  *     identifier is the class name, except if your class overrides it. If you fail to do so, the reuse mechanism
  *     will not work
  *
- * Designated initializer: initWithStyle:reuseIdentifier:
+ * Designated initializer: -initWithStyle:reuseIdentifier:
  * (You usually do not need to create a cell manually. Use the factory macros instead)
  */
 @interface HLSTableViewCell : UITableViewCell {

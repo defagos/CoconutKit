@@ -41,7 +41,7 @@
  *   - if you need to perform database operations on another thread, duplicate the current context and push 
  *     the new instance onto the other thread model manager stack
  *
- * Designated initializer: initWithModelFileName:storeType:configuration:storeDirectory:options:
+ * Designated initializer: -initWithModelFileName:storeType:configuration:storeDirectory:options:
  */
 @interface HLSModelManager : NSObject {
 @private

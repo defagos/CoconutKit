@@ -59,7 +59,7 @@
  *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
  * method returns NO (a feature available as of iOS 5).
  * 
- * Designated initializer: initWithViewController:containerViewController:transitionStyle:duration:
+ * Designated initializer: -initWithViewController:containerViewController:transitionStyle:duration:
  */
 @interface HLSContainerContent : NSObject {
 @private

@@ -44,7 +44,7 @@
  * Remark: If you override viewDidLoad, viewWillAppear, etc., do not forget to call their super counterpart (as usual),
  *         otherwise the behavior is undefined. The same holds for the UISearchDisplayDelegate methods
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSTableSearchDisplayViewController : HLSViewController <
     UISearchDisplayDelegate,

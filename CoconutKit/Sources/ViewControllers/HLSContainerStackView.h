@@ -96,7 +96,7 @@
  * The HLSContainerStackView class simply implements the above view hierarchy and provides methods for easy insertion
  * and removal of views.
  *
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface HLSContainerStackView : UIView {
 @private

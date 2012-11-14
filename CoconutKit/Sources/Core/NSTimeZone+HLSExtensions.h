@@ -46,13 +46,13 @@
  * options depending on which behavior you require:
  *   - if you use -[NSDate dateByAddingTimeInterval:toDate:], an hour is lost during the transition, and you obtain
  *     2012-03-25 07:00:00 (CEST, UTC+2)
- *   - if you use dateByAddingTimeInterval:toDate:, a one-hour correction is applied to "negate" the transition.
+ *   - if you use -dateByAddingTimeInterval:toDate:, a one-hour correction is applied to "negate" the transition.
  *     In the end you obtain 2012-03-25 06:00:00 (CEST, UTC+2)
  */
 - (NSDate *)dateByAddingTimeInterval:(NSTimeInterval)timeInterval toDate:(NSDate *)date;
 
 /**
- * Same as dateByAddingTimeInterval:toDate:, but using day increments
+ * Same as -dateByAddingTimeInterval:toDate:, but using day increments
  */
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date;
 
@@ -69,7 +69,7 @@
  * now have two options depending on which behavior you require:
  *   - if you use -[NSDate timeIntervalSinceDate:], you get 3600, i.e. 1 hour (because 02:00:00 UTC+1 does not exist and
  *     waas replaced by 03:00:00 UTC+2)
- *   - if you use timeIntervalBetweenDate:andDate:, you get 7200, i.e. 2 hours (this is the difference between 03:00:00
+ *   - if you use -timeIntervalBetweenDate:andDate:, you get 7200, i.e. 2 hours (this is the difference between 03:00:00
  *     and 01:00:00, where the CET -> CEST jump has been negated)
  */
 - (NSTimeInterval)timeIntervalBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2;

@@ -67,7 +67,7 @@
  *     -isMovingFromParentViewController
  * Refer to the documentation of those methods for more information.
  *
- * Designated initializer: initWithRootViewController:capacity:
+ * Designated initializer: -initWithRootViewController:capacity:
  */
 @interface HLSStackController : HLSViewController <HLSContainerStackDelegate> {
 @private

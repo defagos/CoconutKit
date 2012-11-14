@@ -55,7 +55,7 @@
  * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
  * part of an animation which was played animated).
  *
- * Designated initializer: initWithAnimationSteps:
+ * Designated initializer: -initWithAnimationSteps:
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private

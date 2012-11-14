@@ -33,7 +33,7 @@
  * Insert this macro in methods which must be implemented. This can be useful in the following cases:
  *   - during development, to mark methods you have not implemented yet (but which must be)
  *   - in class design: to mark methods for which a class cannot provide a meaningful implementation, which must be
- *                      supplied in subclasses (abstract class, e.g. the draw method of a Shape class)
+ *                      supplied in subclasses (abstract class, e.g. the -draw method of a Shape class)
  */
 #define HLSMissingMethodImplementation()         NSAssert(NO, @"Missing method implementation")
 

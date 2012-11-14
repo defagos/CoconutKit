@@ -46,7 +46,7 @@
  *       without having to hide the keyboard. A better approach would allow fast switching between UIResponders (e.g. 
  *       a picker view, a text field, etc.)
  *
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface HLSTextField : UITextField {
 @private

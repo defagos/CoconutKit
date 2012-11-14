@@ -10,7 +10,7 @@
 
 /**
  * This method removes all animations added to a CALayer and to all layers in its sublayer hierarchy
- * (the usual removeAllAnimations only removes the animations attached to a layer, not to its sublayers)
+ * (the usual -removeAllAnimations only removes the animations attached to a layer, not to its sublayers)
  */
 - (void)removeAllAnimationsRecursively;
 

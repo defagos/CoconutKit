@@ -113,7 +113,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
  *
- * Designated initializer: initWithContainerViewController:capacity:removing:rootViewControllerFixed:
+ * Designated initializer: -initWithContainerViewController:capacity:removing:rootViewControllerFixed:
  */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private

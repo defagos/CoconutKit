@@ -12,12 +12,12 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 @interface NSString (HLSExtensions)
 
 /**
- * Trims spaces left and right
+ * Trim spaces left and right
  */
 - (NSString *)stringByTrimmingWhitespaces;
 
 /**
- * Returns NO if the string is empty or only made of whitespaces
+ * Return NO if the string is empty or only made of whitespaces
  */
 - (BOOL)isFilled;
 
@@ -37,42 +37,42 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding;
 
 /**
- * Calculates the MD2 hash of a string (hexadecimal)
+ * Calculate the MD2 hash of a string (hexadecimal)
  */
 - (NSString *)md2hash;
 
 /**
- * Calculates the MD4 hash of a string (hexadecimal)
+ * Calculate the MD4 hash of a string (hexadecimal)
  */
 - (NSString *)md4hash;
 
 /**
- * Calculates the MD5 hash of a string (hexadecimal)
+ * Calculate the MD5 hash of a string (hexadecimal)
  */
 - (NSString *)md5hash;
 
 /**
- * Calculates the SHA-1 hash of a string (hexadecimal)
+ * Calculate the SHA-1 hash of a string (hexadecimal)
  */
 - (NSString *)sha1hash;
 
 /**
- * Calculates the SHA-224 hash of a string (hexadecimal)
+ * Calculate the SHA-224 hash of a string (hexadecimal)
  */
 - (NSString *)sha224hash;
 
 /**
- * Calculates the SHA-256 hash of a string (hexadecimal)
+ * Calculate the SHA-256 hash of a string (hexadecimal)
  */
 - (NSString *)sha256hash;
 
 /**
- * Calculates the SHA-384 hash of a string (hexadecimal)
+ * Calculate the SHA-384 hash of a string (hexadecimal)
  */
 - (NSString *)sha384hash;
 
 /**
- * Calculates the SHA-512 hash of a string (hexadecimal)
+ * Calculate the SHA-512 hash of a string (hexadecimal)
  */
 - (NSString *)sha512hash;
 

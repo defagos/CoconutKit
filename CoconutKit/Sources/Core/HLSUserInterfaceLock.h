@@ -9,7 +9,7 @@
 /**
  * Singleton class for preventing / allowing user interface interaction
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSUserInterfaceLock : NSObject {
 @private

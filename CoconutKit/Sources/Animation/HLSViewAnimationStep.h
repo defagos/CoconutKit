@@ -18,7 +18,7 @@
  * To create a view animation step, simply instantiate it using the +animationStep class method, then add view animations
  * to it, and set its duration and curve
  *
- * Designated initializer: init (create an animation step with default settings)
+ * Designated initializer: -init (create an animation step with default settings)
  */
 @interface HLSViewAnimationStep : HLSAnimationStep {
 @private

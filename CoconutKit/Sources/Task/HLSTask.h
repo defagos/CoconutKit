@@ -21,7 +21,7 @@
  * which was fully processed can be submitted again (and with another delegate if needed), but only when it
  * is not running anymore.
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSTask : NSObject {
 @private

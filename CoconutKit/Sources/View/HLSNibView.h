@@ -23,7 +23,7 @@
  * to set its type to match your view class name (if you need to bind outlets). Use this class as origin when drawing 
  * bindings (do not use the file's owner)
  *
- * Designated initializer: initWithFrame: (you usually do not need to create a view manually. Use the factory method 
+ * Designated initializer: -initWithFrame: (you usually do not need to create a view manually. Use the factory method 
  * instead)
  */
 @interface HLSNibView : UIView {

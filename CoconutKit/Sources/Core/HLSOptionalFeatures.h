@@ -59,7 +59,7 @@
 #endif
 
 /**
- * Prevent taps occuring quasi-simultaneously on several controls. This changes the default UIkit behavior
+ * Prevent taps occuring quasi-simultaneously on several controls. This changes the default UIKit behavior
  * but can greatly improve your application robustness (having to deal with such taps can be quite a
  * nightmare and can lead to erratic behaviors or crashes when monkey-testing your application)
  */

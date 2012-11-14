@@ -17,7 +17,7 @@
  * possible. Moreover, this additional wrapping yields smoother animations (I cannot explain why, though.
  * Probably blending can be performed more efficiently)
  *
- * Designated initializer: initWithFrame:frontView:
+ * Designated initializer: -initWithFrame:frontView:
  */
 @interface HLSContainerGroupView : UIView {
 @private

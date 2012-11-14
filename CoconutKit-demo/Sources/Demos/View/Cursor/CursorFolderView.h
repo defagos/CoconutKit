@@ -7,7 +7,7 @@
 //
 
 /**
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface CursorFolderView : HLSNibView {
 @private
