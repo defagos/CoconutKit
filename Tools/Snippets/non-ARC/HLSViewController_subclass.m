@@ -69,26 +69,15 @@
     // Code
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    // Code
-}
-
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
+- (NSUInteger)supportedInterfaceOrientations
+{   
     // Code, most probably one of:
-    // return toInterfaceOrientation == UIInterfaceOrientationPortrait;
-    // return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
-    // return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
-    // return YES;
+    // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
+    // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
+    // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscape;
+    // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark Memory warnings
