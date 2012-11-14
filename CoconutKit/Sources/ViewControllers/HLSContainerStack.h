@@ -84,15 +84,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * When implementing your own view controller container, be sure to call the following HLSContainerStack
  * methods, otherwise the behavior is undefined (refer to the documentation of these methods for more 
  * information):
- *   - releaseViews
- *   - viewWillAppear:
- *   - viewDidAppear:
- *   - viewWillDisappear:
- *   - viewDidDisappear:
- *   - shouldAutorotateToInterfaceOrientation:
- *   - willRotateToInterfaceOrientation:duration:
- *   - willAnimateRotationToInterfaceOrientation:duration:
- *   - didRotateFromInterfaceOrientation:duration:
+ *     -releaseViews
+ *     -viewWillAppear:
+ *     -viewDidAppear:
+ *     -viewWillDisappear:
+ *     -viewDidDisappear:
+ *     -shouldAutorotateToInterfaceOrientation:
+ *     -willRotateToInterfaceOrientation:duration:
+ *     -willAnimateRotationToInterfaceOrientation:duration:
+ *     -didRotateFromInterfaceOrientation:duration:
  * (the deprecated 2-step rotation methods are not supported, you should not have your own containers implement
  * them)
  *
@@ -446,7 +446,8 @@ willHideViewController:(UIViewController *)viewController
  * Your custom containers should implement a UIViewController method for retrieving the parent container from within
  * a child view controller (as -navigationController or -tabBarController do). Implement your own method returning
  * your parent view controller container (if any) by declaring a UIViewController category. Its implementation is
- * straightforward: Simply call the method below with your container class as argument
+ * straightforward: Simply call the method below with your container class as argument. If Nil is provided as class
+ * parameter, lookup is performed for any kind of CoconutKit-based container
  */
 - (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass;
 

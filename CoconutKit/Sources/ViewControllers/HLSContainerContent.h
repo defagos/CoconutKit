@@ -14,7 +14,6 @@
  *     containers at the same time
  *   - they are inserted into a container with some transition animation, and removed from it with the corresponding
  *     reverse animation
- *   - a child view controller's view frame is adjusted to match the container view it is inserted into
  *   - a child view controller's view should be created lazily at the time it is really required
  *   - it must be possible to preload a view controller container before it gets actually displayed (i.e. before the
  *     container view is loaded)
@@ -57,9 +56,11 @@
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
  *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
- * method returns NO (a feature available as of iOS 5).
+ * method returns NO (a feature available as of iOS 5). On iOS 6, this method has been split into the two methods
+ *    -[UIViewController shouldAutomaticallyForwardRotationMethods]
+ *    and -[UIViewController shouldAutomaticallyForwardAppearanceMethods]
  * 
- * Designated initializer: -initWithViewController:containerViewController:transitionStyle:duration:
+ * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
 @interface HLSContainerContent : NSObject {
 @private
@@ -75,8 +76,8 @@
 }
 
 /**
- * Return the container into which a view controller has been inserted into (if any). If a class parameter is provided,
- * the method returns nil if the container class does not match
+ * Return the CoconutKit-based container into which a view controller has been inserted into (if any). If a class parameter 
+ * is provided, the method returns nil if the container class does not match
  */
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
 
@@ -125,7 +126,7 @@
 
 /**
  * Valid values for index range from 0 to [stackView.contentViews count] (this last value being equivalent to
- * calling addAsSubviewIntoContainerStackView:)
+ * calling -addAsSubviewIntoContainerStackView:)
  *
  * If the view has already been added to a stack view or if the index is invalid, this method does nothing
  */
@@ -154,8 +155,8 @@
  * the view controller current lifecycle phase is coherent with it. Set movingTo/FromParentViewController to YES
  * if the events occur because the view controller is being added to / removed from its parent container
  *
- * Remark: No methods have been provided for viewDidLoad (which is called automatically when the view has been loaded)
- *         and viewWill/DidUnload (which container implementations must not call directly; use the releaseViews method 
+ * Remark: No methods have been provided for -viewDidLoad (which is called automatically when the view has been loaded)
+ *         and -viewWill/DidUnload (which container implementations must not call directly; use the -releaseViews method 
  *         above)
  */
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;

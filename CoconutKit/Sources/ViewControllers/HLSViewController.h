@@ -61,7 +61,7 @@
  * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 
  * gets called automatically when deallocating or receiving a -viewDidUnload event. This allows to cleanly separate the object releasing
  * code of a view controller into two blocks:
- *   - in releaseViews: Release all views created when loading the view, and retained by the view controller. If your view controller 
+ *   - in -releaseViews: Release all views created when loading the view, and retained by the view controller. If your view controller 
  *     subclass retains view controllers to avoid creating their views too often ("view caching"), also set the views of thesee view 
  *     controllers to nil in this method. If you are subclassing a class already subclassing HLSViewController, always send the 
  *     -releaseViews message to super first.

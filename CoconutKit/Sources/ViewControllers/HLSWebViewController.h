@@ -27,10 +27,19 @@
     UIImage *m_refreshImage;
 }
 
+/**
+ * Create the browser using the specified request
+ */
 - (id)initWithRequest:(NSURLRequest *)request;
 
+/**
+ * The initial request
+ */
 @property (nonatomic, readonly, retain) NSURLRequest *request;
 
+/**
+ * View outlets. Do not change
+ */
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackBarButtonItem;
@@ -39,6 +48,9 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+/**
+ * Actions. Do not change
+ */
 - (IBAction)goBack:(id)sender;
 - (IBAction)goForward:(id)sender;
 - (IBAction)refresh:(id)sender;

@@ -25,7 +25,7 @@ typedef enum {
  * provide. The appearance of the view controller (as well as its behavior under rotation) is customized by 
  * inheriting from it. As for UIViewController, this class is therefore not meant to be instantiated directly.
  *
- * As for UIViewController, if init is called instead of the designated initalizer, a xib with the same name
+ * As for UIViewController, if -init is called instead of the designated initalizer, a xib with the same name
  * as the derived class will be searched in the main bundle (the interface can also be created programmatically,
  * of course).
  *

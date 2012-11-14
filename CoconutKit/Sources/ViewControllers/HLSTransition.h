@@ -411,26 +411,50 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 @interface HLSTransitionFlipHorizontally : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis at the bottom, counterclockwise
+ */
 @interface HLSTransitionRotateHorizontallyFromBottomCounterclockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis at the bottom, clockwise
+ */
 @interface HLSTransitionRotateHorizontallyFromBottomClockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis at the top, counterclockwise
+ */
 @interface HLSTransitionRotateHorizontallyFromTopCounterclockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis at the top, clockwise
+ */
 @interface HLSTransitionRotateHorizontallyFromTopClockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis on the left, counterclockwise
+ */
 @interface HLSTransitionRotateVerticallyFromLeftCounterclockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis on the left, clockwise
+ */
 @interface HLSTransitionRotateVerticallyFromLeftClockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis on the right, counterclockwise
+ */
 @interface HLSTransitionRotateVerticallyFromRightCounterclockwise : HLSTransition
 @end
 
+/**
+ * The views rotate horizontally with rotation axis on the right, clockwise
+ */
 @interface HLSTransitionRotateVerticallyFromRightClockwise : HLSTransition
 @end

@@ -31,13 +31,13 @@ typedef enum {
  * Remark:
  * -------
  * As written in the UIKit documentation (though slightly scattered all around), view controller's view frame dimensions
- * are only known when viewWillAppear: gets called, not earlier (this means you should avoid making calculations
+ * are only known when -viewWillAppear: gets called, not earlier (this means you should avoid making calculations
  * depending on it in the viewDidLoad method; the frame is the one you got from the xib, not necessarily the one which
  * will be used after status, navigation bar, etc. have been added, or after some container controller updates the
  * view controller's frame for display).
  *
- * The same is true for rotations: The final frame dimensions are known in willAnimateRotationToInterfaceOrientation:duration:
- * (1-step rotation) or willAnimateFirstHalfOfRotationToInterfaceOrientation:duration: (2-step rotation, deprecated
+ * The same is true for rotations: The final frame dimensions are known in -willAnimateRotationToInterfaceOrientation:duration:
+ * (1-step rotation) or -willAnimateFirstHalfOfRotationToInterfaceOrientation:duration: (2-step rotation, deprecated
  * starting with iOS 5).
  */
 @interface UIViewController (HLSExtensions)
@@ -73,7 +73,7 @@ typedef enum {
 - (BOOL)isViewDisplayed;
 
 /**
- * Original size of the view right after creation (i.e. right after xib deserialization or construction by loadView)
+ * Original size of the view right after creation (i.e. right after xib deserialization or construction by -loadView)
  */
 - (CGSize)originalViewSize;
 

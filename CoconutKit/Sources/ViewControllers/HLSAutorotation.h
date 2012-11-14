@@ -7,7 +7,7 @@
 //
 
 /**
- * Define the several way for a container view controller to behave when interface rotation occurs. This means:
+ * Define the several ways for a container view controller to behave when interface rotation occurs. This means:
  *   - which view controllers decide whether rotation can occur or not
  *   - which view controllers receive rotation events (for children, this always occur from the topmost to the bottommost
  *     view controller, if they are involved)

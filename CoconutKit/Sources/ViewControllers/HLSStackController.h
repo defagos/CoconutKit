@@ -32,7 +32,7 @@
  * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
  *
  * You can resize or move (even animate!) the stack container view, even when children are displayed. This makes the
- * creation of innovative user interfaces as easy as it can be. Start now!
+ * creation of innovative user interfaces as easy as it can be.
  *
  * Since a stack controller can manage many view controller's views, and since in general only the first few top ones
  * need to be visible, it would be a waste of resources to keep all views loaded at any time. At creation time, the
