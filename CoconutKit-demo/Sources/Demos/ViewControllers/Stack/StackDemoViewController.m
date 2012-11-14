@@ -20,12 +20,12 @@
 #import "TransparentViewController.h"
 
 typedef enum {
-    ResizeMethodEnumBegin = 0,
-    ResizeMethodFrame = ResizeMethodEnumBegin,
-    ResizeMethodTransform,
-    ResizeMethodEnumEnd,
-    ResizeMethodEnumSize = ResizeMethodEnumEnd - ResizeMethodEnumBegin
-} ResizeMethod;
+    ResizeMethodIndexEnumBegin = 0,
+    ResizeMethodIndexFrame = ResizeMethodIndexEnumBegin,
+    ResizeMethodIndexTransform,
+    ResizeMethodIndexEnumEnd,
+    ResizeMethodIndexEnumSize = ResizeMethodIndexEnumEnd - ResizeMethodIndexEnumBegin
+} ResizeMethodIndex;
 
 @interface StackDemoViewController ()
 
@@ -379,7 +379,7 @@ typedef enum {
 {
     UIView *placeholderView = [self placeholderViewAtIndex:0];
     
-    if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodFrame) {
+    if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodIndexFrame) {
         placeholderView.bounds = CGRectMake(0.f,
                                             0.f,
                                             CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,

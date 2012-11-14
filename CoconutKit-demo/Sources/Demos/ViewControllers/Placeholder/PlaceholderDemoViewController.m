@@ -17,6 +17,14 @@
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
+typedef enum {
+    AutorotationModeIndexEnumBegin = 0,
+    AutorotationModeIndexNoChildren = AutorotationModeIndexEnumBegin,
+    AutorotationModeIndexAllChildren,
+    AutorotationModeIndexEnumEnd,
+    AutorotationModeIndexEnumSize = AutorotationModeIndexEnumEnd - AutorotationModeIndexEnumBegin
+} AutorotationModeIndex;
+
 @interface PlaceholderDemoViewController ()
 
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
@@ -65,7 +73,7 @@
     self.inNavigationControllerSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
-    self.involvingChildrenForAutorotationSwitch = nil;
+    self.autorotationModeSegmentedControl = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -86,7 +94,7 @@
 
 @synthesize rightHeavyViewController = m_rightHeavyViewController;
 
-@synthesize involvingChildrenForAutorotationSwitch = m_involvingChildrenForAutorotationSwitch;
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -98,7 +106,13 @@
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
-    self.involvingChildrenForAutorotationSwitch.on = (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren);
+    
+    if (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren) {
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexAllChildren;
+    }
+    else {
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexNoChildren;
+    }
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -120,6 +134,9 @@
     [super localize];
     
     self.title = @"HLSPlaceholderViewController";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:AutorotationModeIndexNoChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:AutorotationModeIndexAllChildren];
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -382,13 +399,14 @@
     }
 }
 
-- (IBAction)toggleInvolvingChildrenForAutorotation:(id)sender
+- (IBAction)changeAutorotationMode:(id)sender
 {
-    if (self.involvingChildrenForAutorotationSwitch.on) {
-        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
+    if (self.autorotationModeSegmentedControl.selectedSegmentIndex == AutorotationModeIndexNoChildren) {
+        self.autorotationMode = HLSAutorotationModeContainerAndNoChildren;
     }
+    // All rotation modes involving children are equivalent for a placeholder view controller. Pick any of them
     else {
-        self.autorotationMode = HLSAutorotationModeContainer;
+        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
     }
 }
 
