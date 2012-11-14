@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+/**
+  * Interface meant to be used by friend classes of HLSLayerAnimation (= classes which must have access to private implementation
+  * details)
+  */
 @interface HLSLayerAnimation (Friend)
 
 /**

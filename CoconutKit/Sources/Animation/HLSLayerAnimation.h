@@ -20,11 +20,10 @@
  * A layer animation animates layer transforms, not frames. This choice was made because frame animation would 
  * restrict transforms to affine transforms, for which HLSViewAnimation can be used instead (provided the layer 
  * belongs to a view, of course). Moreover, unlike views, layers do not layout their sublayers automatically based 
- * on autoresizing properties on iOS (the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] methods
- * have to be implemented to respond to frame changes)
+ * on autoresizing properties on iOS
  *
  * Since the layer transform is animated, none of the -[CALayer layoutSublayers] or -[UIView layoutSublayersOfLayer:] 
- * methods need to be implemented for layers which are animated.
+ * methods need to be implemented for HLSLayerAnimation-based animations.
  *
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should
  * use layer animations instead of view animations since they have far more capabilities.
@@ -70,8 +69,7 @@
 - (void)translateAnchorPointByVectorWithX:(CGFloat)x y:(CGFloat)y;
 
 /**
- * Geometric transform parameters to be applied to sublayers during the layer animation. In particular, tweaking the
- * skew parameter enables perspective to be applied to subviews, adding 3D to your animations
+ * Geometric transform parameters to be applied to sublayers during the layer animation
  */
 - (void)rotateSublayersByAngle:(CGFloat)angle aboutVectorWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z;
 - (void)scaleSublayersWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor zFactor:(CGFloat)zFactor;
@@ -80,8 +78,8 @@
 /**
  * Move the position of the camera from which sublayers are seen. The usual position is (0, 0, 0), which
  * means no perspective is applied (the sublayers are seen from infinity, i.e. z = infinity). Providing 
- * a non-zero meaningful value for z (usually some factor of the layer dimensions) applies a 3D perspective 
- * to sublayers
+ * a non-zero meaningful value for z (usually some factor of the layer or screen dimensions) applies a 
+ * 3D perspective to sublayers
  */
 - (void)translateSublayerCameraByVectorWithZ:(CGFloat)z;
 

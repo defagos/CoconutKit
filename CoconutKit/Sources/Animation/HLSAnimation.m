@@ -19,6 +19,13 @@
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+/**
+ * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
+ * views). The reason is that fixing such issues in an automatic way would make reverse animations difficult to
+ * generate, since HLSAnimation does not store any information about the original state of the views which are
+ * animated.
+ */
+
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 @interface HLSAnimation () <HLSAnimationStepDelegate>

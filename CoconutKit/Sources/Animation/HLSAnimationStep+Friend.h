@@ -22,7 +22,7 @@
 - (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated;
 
 /**
- * Pause the an animation step being played animated (does nothing if the animation is not running or not animated)
+ * Pause the animation step being played (does nothing if the animation is not running or not animated)
  */
 - (void)pause;
 
@@ -38,7 +38,7 @@
 
 /**
  * The time elapsed since the animation step began animating (might be self.duration if the animation step does 
- * not support arbitrary start times). This method must return the actual running time, removing pauses (if any)
+ * not support arbitrary start times). This method returns the actual running time, removing pauses (if any)
  */
 - (NSTimeInterval)elapsedTime;
 
@@ -54,15 +54,12 @@
 
 @end
 
-/**
- * The animated info which is returned is the same given when the play method was called (even if the animation
- * was actually not animated because its duration was 0)
- */
 @protocol HLSAnimationStepDelegate <NSObject>
 
 /**
  * Called when an animation step did stop. The finished boolean is YES iff the animation played until the end
- * without being terminated
+ * without being terminated. The animated info which is returned is the same given when the play method was 
+ * called (even if the animation was actually not animated because its duration was 0)
  */
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished;
 

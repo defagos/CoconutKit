@@ -40,12 +40,7 @@
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
  * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
  * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
- * notification on iOS 4 & 5. Views are not unloaded anymore since iOS 6)
- *
- * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
- * views). The reason is that fixing such issues in an automatic way would make reverse animations difficult to
- * generate, since HLSAnimation does not store any information about the original state of the views which are 
- * animated.
+ * notification on iOS 4 & 5. Note that views are not unloaded anymore since iOS 6)
  *
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 
@@ -94,10 +89,10 @@
 
 /**
  * Create an animation using HLSAnimationStep objects. Those steps will be chained together when the animation
- * is played. If nil is provided, an empty animation is created (such animations still fire animationWillStart:animated: 
- * and animationDidStop:animated: events when played)
+ * is played. If nil is provided, an empty animation is created (such animations still fire -animationWillStart:animated:
+ * and -animationDidStop:animated: events when played)
  *
- * A deep copy of the animation steps is performed to prevent further changes once they have been assigned to an
+ * A deep copy of the animation steps is performed to prevent further changes once the steps have been assigned to an
  * animation
  */
 - (id)initWithAnimationSteps:(NSArray *)animationSteps;
@@ -114,7 +109,7 @@
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
- * the -running documentation for more information about what "running" means)
+ * the running property documentation for more information about what "running" actually means)
  *
  * Default is NO
  */

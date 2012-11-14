@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+/**
+ * Common abstract class for animations
+ */
 @interface HLSObjectAnimation : NSObject <NSCopying>
 
 /**

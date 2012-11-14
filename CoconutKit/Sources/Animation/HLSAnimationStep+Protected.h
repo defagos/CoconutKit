@@ -15,14 +15,14 @@
 @interface HLSAnimationStep (Protected)
 
 /**
- * Setting an animation for an object
+ * Set an animation for an object
  *
  * The object animation is deeply copied to prevent further changes once assigned to a step
  */
 - (void)addObjectAnimation:(HLSObjectAnimation *)objectAnimation forObject:(id)object;
 
 /**
- * Retrieving the animation for an object (nil if not match is found)
+ * Retrieve the animation for an object (nil if not match is found)
  */
 - (HLSObjectAnimation *)objectAnimationForObject:(id)object;
 

@@ -36,8 +36,8 @@
 }
 
 /**
- * Geometric transform parameters to be applied during the view animation. The resulting transform (which you can 
- * obtain by calling -transform) applies the scale, then the translation
+ * Geometric transform parameters to be applied during the view animation. The resulting transform applies the scale, 
+ * then the translation
  */
 - (void)scaleWithXFactor:(CGFloat)xFactor yFactor:(CGFloat)yFactor;
 - (void)translateByVectorWithX:(CGFloat)x y:(CGFloat)y;
