@@ -26,7 +26,6 @@
  * (if it is the first responder)
  * Default value is YES
  */
-
 @property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 
 @end

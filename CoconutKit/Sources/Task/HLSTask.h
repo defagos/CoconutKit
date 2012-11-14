@@ -14,7 +14,7 @@
 
 /**
  * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status. To create your own
- * tasks, simply subclass HLSTask and override the operationClass method to return the class of the operation
+ * tasks, simply subclass HLSTask and override the -operationClass method to return the class of the operation
  * responsible for processing the task.
  *
  * A task must not be submitted several times simultaneously (this leads to undefined behavior). A task
@@ -93,7 +93,7 @@
 
 /**
  * Return a localized string describing the estimated time before completion
- * (see remark of remainingTimeIntervalEstimate method)
+ * (see remark of -remainingTimeIntervalEstimate method)
  * Not meant to be overridden
  */
 - (NSString *)remainingTimeIntervalEstimateLocalizedString;

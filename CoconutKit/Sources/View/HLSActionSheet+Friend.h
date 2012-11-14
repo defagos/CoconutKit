@@ -14,7 +14,14 @@
  */
 @interface HLSActionSheet (Friend)
 
+/**
+ * Return the currently displayed HLSActionSheet, or nil if none
+ */
 + (HLSActionSheet *)currentActionSheet;
+
+/**
+ * Dismiss the currently displayed HLSAction sheet (if any)
+ */
 + (void)dismissCurrentActionSheetAnimated:(BOOL)animated;
 
 @end

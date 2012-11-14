@@ -15,16 +15,16 @@
  * the view.
  *
  * To create your own view class, simply subclass HLSNibView. If your view layout is created using a xib file not 
- * bearing the same name as the view class, override the nibName accessor to return the name of the xib file. 
+ * bearing the same name as the view class, override the -nibName accessor to return the name of the xib file. 
  * If the xib file bears the same name as its corresponding class, you do not need to override this accessor.
- * Your custom classes can then be instantiated using the view class method.
+ * Your custom classes can then be instantiated using the +view class method.
  *
  * To define the view layout in Interface Builder, the first object in the xib must be the view object. Do not forget 
  * to set its type to match your view class name (if you need to bind outlets). Use this class as origin when drawing 
  * bindings (do not use the file's owner)
  *
  * Designated initializer: -initWithFrame: (you usually do not need to create a view manually. Use the factory method 
- * instead)
+ *                                          instead)
  */
 @interface HLSNibView : UIView {
 @private
