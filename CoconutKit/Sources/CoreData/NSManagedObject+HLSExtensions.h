@@ -79,7 +79,7 @@
  *     or more objects also implementing the HLSManagedObjectCopying protocol (ownership is assumed when the relationship
  *     deletion behavior is set to cascade)
  *
- * After the method successfully returns an object, you must still commit the changes by calling save: on the
+ * After the method successfully returns an object, you must still commit the changes by calling -save: on the
  * managed object context in which it was created.
  */
 - (id)duplicate;
