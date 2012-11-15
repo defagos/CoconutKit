@@ -14,6 +14,7 @@ OUTPUT_DIR="$SCRIPT_FILE_DIR/Files"
 PUBLIC_HEADERS_OUTPUT_DIR="$OUTPUT_DIR/PublicHeaders"
 GLOBAL_HEADER_FILE="$PUBLIC_HEADERS_OUTPUT_DIR/CoconutKit.h"
 PRECOMPILED_HEADER_FILE="$COCONUT_KIT_DIR/CoconutKit-Prefix.pch"
+LICENSE_FILE="$MAIN_DIR/LICENSE"
 
 # Cleanup any existing package, and create a package directory
 if [ -d "$OUTPUT_DIR" ]; then
@@ -62,5 +63,12 @@ do
         mv "$header_file" "$PUBLIC_HEADERS_OUTPUT_DIR"
     fi
 done
+
+# Copy precompiled header
+cp "$PRECOMPILED_HEADER_FILE" "$OUTPUT_DIR"
+
+# Copy license file
+echo "Copying license file..."
+cp "$LICENSE_FILE" "$OUTPUT_DIR"
 
 echo "Done"
