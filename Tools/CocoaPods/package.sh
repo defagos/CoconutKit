@@ -12,11 +12,13 @@ RESOURCE_BUNDLE_DIR="$COCONUT_KIT_DIR/CoconutKit-resources.bundle"
 PUBLIC_HEADER_FILE="$COCONUT_KIT_DIR/publicHeaders.txt"
 OUTPUT_DIR="$SCRIPT_FILE_DIR/Files"
 PUBLIC_HEADERS_OUTPUT_DIR="$OUTPUT_DIR/PublicHeaders"
+GLOBAL_HEADER_FILE="$PUBLIC_HEADERS_OUTPUT_DIR/CoconutKit.h"
+PRECOMPILED_HEADER_FILE="$COCONUT_KIT_DIR/CoconutKit-Prefix.pch"
 
 # Cleanup any existing package, and create a package directory
 if [ -d "$OUTPUT_DIR" ]; then
     echo "Files already exist. Cleaning up first..."
-    rm -rf "$OUTPUT_DIR"
+    rm -r "$OUTPUT_DIR"
 fi
 echo "Creating package..."
 mkdir -p "$OUTPUT_DIR"
@@ -36,13 +38,24 @@ echo "Copying files..."
 cp -R "$RESOURCE_BUNDLE_DIR" "$OUTPUT_DIR"
 cp -R "$SOURCES_DIR" "$OUTPUT_DIR"
 
-# Extract public headers by comparison with publicHeaders.txt
-echo "Extracting public headers..."
+# Create a folder for public headers
 mkdir -p "$OUTPUT_DIR/PublicHeaders"
 
+# Create a global header file, starting with the .pch imports (common to all files)
+echo "Generating global header file..."
+cat "$PRECOMPILED_HEADER_FILE" | grep "#import" >> "$GLOBAL_HEADER_FILE"
+public_headers_arr=(`cat "$PUBLIC_HEADER_FILE" | grep -v '^$'`)
+for public_header_file_name in ${public_headers_arr[@]}
+do
+    echo "#import \"$public_header_file_name\"" >> "$GLOBAL_HEADER_FILE"
+done
+
+# Extract public header files
+echo "Extracting public headers..."
 header_files=(`find $OUTPUT_DIR/Sources -name "*.h"`)
 for header_file in ${header_files[@]}
 do
+    
     header_file_name=`basename $header_file`
     grep "$header_file_name" "$PUBLIC_HEADER_FILE" > /dev/null
     if [ "$?" -eq "0" ]; then
