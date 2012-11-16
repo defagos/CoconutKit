@@ -73,7 +73,9 @@
 "Invalid email address"="Invalid email address";
 "Label"="Label";
 "Label with some missing translation"="Label with some missing translation";
+"Landscape left"="Landscape left";
 "Landscape only"="Landscape only";
+"Landscape right"="Landscape right";
 "Language"="Language";
 "Last name"="Last name";
 "Layer properties test"="Layer properties test";
@@ -108,7 +110,9 @@
 "Pop 3 VCs"="Pop 3 VCs";
 "Pop non-animated"="Pop non-animated";
 "Pop to root"="Pop to root";
+"Portrait"="Portrait";
 "Portrait only"="Portrait only";
+"Portrait upside down"="Portrait upside down";
 "Presents the modal"="Presents the modal";
 "Previous"="Previous";
 "Push"="Push";

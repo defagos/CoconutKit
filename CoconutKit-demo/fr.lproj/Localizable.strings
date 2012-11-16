@@ -72,7 +72,9 @@
 "Insertion index: %d"="Index d'insertion: %d";
 "Invalid email address"="Adresse e-mail invalide";
 "Label"="Libellé";
+"Landscape left"="Paysage gauche";
 "Landscape only"="Uniquement paysage";
+"Landscape right"="Paysage droite";
 "Language"="Langue";
 "Last name"="Nom";
 "Layer properties test"="Test des propriétés d'un layer";
@@ -107,7 +109,9 @@
 "Pop 3 VCs"="Pop 3 VCs";
 "Pop non-animated"="Pop non-animé";
 "Pop to root"="Pop vers la racine";
+"Portrait"="Portrait";
 "Portrait only"="Uniquement portrait";
+"Portrait upside down"="Portrait à l'envers";
 "Presents the modal"="Affiche la modale";
 "Previous"="Précédent";
 "Push"="Push";

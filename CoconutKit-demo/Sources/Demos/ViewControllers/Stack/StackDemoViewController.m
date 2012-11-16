@@ -29,7 +29,7 @@ typedef enum {
 
 @interface StackDemoViewController ()
 
-@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) UIPopoverController *displayedPopoverController;
 
 - (void)displayContentViewController:(UIViewController *)viewController;
 
@@ -100,7 +100,7 @@ typedef enum {
 
 - (void)dealloc
 {
-    self.popoverController = nil;
+    self.displayedPopoverController = nil;
 
     [super dealloc];
 }
@@ -146,7 +146,7 @@ typedef enum {
 
 @synthesize removalIndexLabel = m_removalIndexLabel;
 
-@synthesize popoverController = m_popoverController;
+@synthesize displayedPopoverController = m_displayedPopoverController;
 
 #pragma mark View lifecycle
 
@@ -188,7 +188,7 @@ typedef enum {
     
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    [self.popoverController dismissPopoverAnimated:NO];
+    [self.displayedPopoverController dismissPopoverAnimated:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -207,10 +207,10 @@ typedef enum {
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
-                                            inView:self.popoverButton
-                          permittedArrowDirections:UIPopoverArrowDirectionAny
-                                          animated:NO];
+    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
+                                                     inView:self.popoverButton
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:NO];
 }
 
 #pragma mark Localization
@@ -253,7 +253,7 @@ typedef enum {
     
     @try {
         [stackController insertViewController:pushedViewController
-                                      atIndex:(NSUInteger)roundf(self.indexSlider.value)
+                                      atIndex:[self insertionIndex]
                           withTransitionClass:NSClassFromString(transitionName)
                                      duration:kAnimationTransitionDefaultDuration
                                      animated:self.animatedSwitch.on];
@@ -377,6 +377,13 @@ typedef enum {
     return [[HLSTransition availableTransitionNames] objectAtIndex:row];
 }
 
+#pragma mark UIPopoverControllerDelegate protocol implementation
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.displayedPopoverController = nil;
+}
+
 #pragma mark Event callbacks
 
 - (IBAction)sizeChanged:(id)sender
@@ -474,17 +481,18 @@ typedef enum {
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
     stackController.contentSizeForViewInPopover = CGSizeMake(800.f, 600.);
-    self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:stackController] autorelease];
-    [self.popoverController presentPopoverFromRect:self.popoverButton.bounds
-                                            inView:self.popoverButton
-                          permittedArrowDirections:UIPopoverArrowDirectionAny
-                                          animated:YES];
+    self.displayedPopoverController = [[[UIPopoverController alloc] initWithContentViewController:stackController] autorelease];
+    self.displayedPopoverController.delegate = self;
+    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
+                                                     inView:self.popoverButton
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:YES];
 }
 
 - (IBAction)pop:(id)sender
 {
     HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    [stackController popViewControllerAnimated:self.animatedSwitch.on];
+    [stackController removeViewControllerAtIndex:[self removalIndex] animated:self.animatedSwitch.on];
 }
 
 - (IBAction)popToRoot:(id)sender

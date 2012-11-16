@@ -9,7 +9,7 @@
 /**
  * Designated initializer: -init
  */
-@interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate> {
 @private
     UISlider *m_sizeSlider;
     UISegmentedControl *m_resizeMethodSegmentedControl;
@@ -22,7 +22,7 @@
     UISlider *m_indexSlider;
     UILabel *m_insertionIndexLabel;
     UILabel *m_removalIndexLabel;
-    UIPopoverController *m_popoverController;
+    UIPopoverController *m_displayedPopoverController;
     CGRect m_placeholderViewOriginalBounds;
 }
 
