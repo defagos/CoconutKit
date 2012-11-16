@@ -54,13 +54,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             }
             
             // Get the first object and check that it is what we expect
-            id firstObject = [bundleContents firstObject];
-            if (! [firstObject isKindOfClass:self]) {
+            id firstObject_hls = [bundleContents firstObject_hls];
+            if (! [firstObject_hls isKindOfClass:self]) {
                 HLSLoggerError(@"The cell object must be the first one in the xib file, and must be of type %@", [self className]);
                 return nil;
             }
             
-            cell = (UITableViewCell *)firstObject;
+            cell = (UITableViewCell *)firstObject_hls;
             
             // Check that the reuse identifier defined in the xib is correct
             if (! [[cell reuseIdentifier] isEqualToString:[self identifier]]) {
@@ -78,7 +78,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     return cell;
 }
 
-#pragma mark Cell customization
+#pragma mark Cell customisation
 
 - (void)setBackgroundWithImageNamed:(NSString *)backgroundImageName
     selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName
@@ -108,7 +108,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     }
 }
 
-#pragma mark Class methods related to customization
+#pragma mark Class methods related to customisation
 
 + (CGFloat)height
 {

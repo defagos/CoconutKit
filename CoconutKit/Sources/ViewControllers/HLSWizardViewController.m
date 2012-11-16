@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSValidable.h"
+#import "UIViewController+HLSExtensions.h"
 
 static const NSInteger kWizardViewControllerNoPage = -1;
 
@@ -68,14 +69,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     [super releaseViews];
     
-    // Release views in cache (since view controllers are retained by a wizard view controller object, so are their view)
-    for (UIViewController *viewController in self.viewControllers) {
-        if ([viewController isViewLoaded]) {
-            viewController.view = nil;
-            [viewController viewDidUnload];
-        }
-    }
-    
     self.previousButton = nil;
     self.nextButton = nil;
     self.doneButton = nil;
@@ -98,28 +91,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
               forControlEvents:UIControlEventTouchUpInside];
     
     [self refreshWizardInterface];
-}
-
-#pragma mark Memory warnings
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-    // Free all views in cache (except the visible one of course!)
-    NSInteger page = 0;
-    for (UIViewController *viewController in self.viewControllers) {
-        if (page == self.currentPage) {
-            continue;
-        }
-        
-        if ([viewController isViewLoaded]) {
-            viewController.view = nil;
-            [viewController viewDidUnload];            
-        }
-        
-        ++page;
-    }
 }
 
 #pragma mark Accessors and mutators
@@ -179,49 +150,38 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Find the transition effect to apply
-    HLSTransitionStyle transitionStyle;
+    Class transitionClass;
     switch (self.wizardTransitionStyle) {
         case HLSWizardTransitionStyleNone: {
-            transitionStyle = HLSTransitionStyleNone;
+            transitionClass = [HLSTransitionNone class];
             break;
         }
             
         case HLSWizardTransitionStyleCrossDissolve: {
-            transitionStyle = HLSTransitionStyleCrossDissolve;
+            transitionClass = [HLSTransitionCrossDissolve class];
             break;
         }
             
         case HLSWizardTransitionStylePushHorizontally: {
             if (m_currentPage > oldCurrentPage) {
-                transitionStyle = HLSTransitionStylePushFromRight;
+                transitionClass = [HLSTransitionPushFromRight class];
             }
             else {
-                transitionStyle = HLSTransitionStylePushFromLeft;
+                transitionClass = [HLSTransitionPushFromLeft class];
             }
             break;
         }
             
         default: {
             HLSLoggerError(@"Unknown transition style");
-            transitionStyle = HLSTransitionStyleNone;
+            transitionClass = [HLSTransitionNone class];
             break;
         }            
     }
     
     // Display the current page
     UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
-    [self setInsetViewController:viewController withTransitionStyle:transitionStyle];
-}
-
-#pragma mark HLSReloadable protocol implementation
-
-- (void)reloadData
-{
-    // Reload the current page content (if supported)
-    UIViewController *viewController = [self.viewControllers objectAtIndex:self.currentPage];
-    if ([viewController conformsToProtocol:@protocol(HLSReloadable)]) {
-        [(UIViewController<HLSReloadable>*)viewController reloadData];
-    }
+    [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 
 #pragma mark Refreshing the UI

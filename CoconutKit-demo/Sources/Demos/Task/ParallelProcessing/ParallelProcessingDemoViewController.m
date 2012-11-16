@@ -18,14 +18,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 - (void)dealloc
 {
     // Just to be sure we do not let a dying object listen to task events; this would not be needed here since
@@ -118,13 +110,9 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark Accessors and mutators

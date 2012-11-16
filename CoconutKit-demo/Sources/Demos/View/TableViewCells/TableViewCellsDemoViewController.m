@@ -163,7 +163,7 @@ typedef enum {
                     XibTableViewCell *cell = [XibTableViewCell cellForTableView:tableView];
                     cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
                     cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
-                    // Selection enabled to show that customization works
+                    // Selection enabled to show that customisation works
                     return cell;
                     break;
                 }

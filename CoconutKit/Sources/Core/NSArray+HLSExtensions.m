@@ -8,10 +8,6 @@
 
 #import "NSArray+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSArray_HLSExtensions)
-
 @interface NSArray (HLSExtensionsPrivate)
 
 - (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfElements;
@@ -20,7 +16,7 @@ HLSLinkCategory(NSArray_HLSExtensions)
 
 @implementation NSArray (HLSExtensions)
 
-- (id)firstObject
+- (id)firstObject_hls
 {
     if ([self count] == 0) {
         return nil;
@@ -57,19 +53,8 @@ HLSLinkCategory(NSArray_HLSExtensions)
 
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    return [self sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-}
-
-@end
-
-@implementation NSMutableArray (HLSExtensions)
-
-- (void)safelyAddObject:(id)object
-{
-    if (! object) {
-        return;
-    }
-    [self addObject:object];
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 @end

@@ -10,28 +10,7 @@
 
 @implementation SkinningDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Installs a test button to see the benefits of a toolbar tint color
-    UIBarButtonItem *actionBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                          target:nil 
-                                                                                          action:NULL] autorelease];
-    self.toolbarItems = [NSArray arrayWithObject:actionBarButtonItem];
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -65,22 +44,17 @@
     self.navigationController.toolbar.tintColor = nil;
 }
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 #pragma mark Localization
 
 - (void)localize
 {
     [super localize];
+    
+    // Installs a test button to see the benefits of a toolbar tint color
+    UIBarButtonItem *actionBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                          target:nil 
+                                                                                          action:NULL] autorelease];
+    self.toolbarItems = [NSArray arrayWithObject:actionBarButtonItem];
     
     self.title = NSLocalizedString(@"Skinning", @"Skinning");
 }

@@ -15,7 +15,7 @@
  * full protected interface.
  *
  * Concrete subclasses must take into account the following constraints within their implementation:
- *  - the operationMain method must be implemented. When this method returns, the operation must be completely over.
+ *  - the -operationMain method must be implemented. When this method returns, the operation must be completely over.
  *    In particular, no other threads which the operation might have spawned must still be running
  *  - when cancelling a task, each operation is sent a cancel message. You must especially be careful that
  *    if your operations are already running (e.g. downloading data), they will only be put in the cancelled state,
@@ -25,7 +25,7 @@
  *  - operations are instantiated by the HLSTaskManager using their designated initializer. Your subclass must therefore
  *    not define any other initializer since they would never be called
  *
- * Designated initializer: initWithTaskManager:task:
+ * Designated initializer: -initWithTaskManager:task:
  */
 @interface HLSTaskOperation : NSOperation {
 @private

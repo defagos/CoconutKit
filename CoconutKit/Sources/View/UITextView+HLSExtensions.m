@@ -8,10 +8,7 @@
 
 #import "UITextView+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UITextView_HLSExtensions)
 
 static UITextView *s_currentTextView = nil;           // weak ref to the current first responder
 

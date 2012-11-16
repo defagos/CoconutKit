@@ -7,7 +7,7 @@
 //
 
 /**
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface CursorPointerInfoViewController : HLSViewController {
 @private

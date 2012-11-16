@@ -18,14 +18,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 - (void)releaseViews
 {
     [super releaseViews];
@@ -36,6 +28,8 @@
     self.previousButton = nil;
     self.nextButton = nil;
     self.playButton = nil;
+    self.pauseButton = nil;
+    self.resumeButton = nil;
     self.stopButton = nil;
     self.skipToSpecificButton = nil;
     self.randomSwitch = nil;
@@ -59,6 +53,10 @@
 @synthesize nextButton = m_nextButton;
 
 @synthesize playButton = m_playButton;
+
+@synthesize pauseButton = m_pauseButton;
+
+@synthesize resumeButton = m_resumeButton;
 
 @synthesize stopButton = m_stopButton;
 
@@ -92,6 +90,8 @@
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
     
+    self.pauseButton.hidden = YES;
+    self.resumeButton.hidden = YES;
     self.stopButton.hidden = YES;
     self.skipToSpecificButton.hidden = YES;
         
@@ -103,17 +103,6 @@
     self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
     
     [self loadImages];
-}
-
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark Localization
@@ -226,11 +215,17 @@
 
 - (IBAction)nextImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToNextImage];
 }
 
 - (IBAction)previousImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToPreviousImage];
 }
 
@@ -241,11 +236,28 @@
     self.previousButton.hidden = NO;
     self.nextButton.hidden = NO;
     self.playButton.hidden = YES;
+    self.pauseButton.hidden = NO;
     self.stopButton.hidden = NO;
     self.skipToSpecificButton.hidden = NO;
     
     self.slideshow.effect = [self.effectPickerView selectedRowInComponent:0];
     [self.slideshow play];
+}
+
+- (IBAction)pause:(id)sender
+{
+    self.pauseButton.hidden = YES;
+    self.resumeButton.hidden = NO;
+    
+    [self.slideshow pause];
+}
+
+- (IBAction)resume:(id)sender
+{
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
+    [self.slideshow resume];
 }
 
 - (IBAction)stop:(id)sender

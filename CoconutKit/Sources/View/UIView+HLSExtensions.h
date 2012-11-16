@@ -6,6 +6,10 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#define HLSViewAutoresizingAll UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth |         \
+    UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
+    UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
+
 @interface UIView (HLSExtensions)
 
 /**
@@ -17,5 +21,10 @@
  * Use this dictionary to convey additional information about your views
  */
 @property (nonatomic, retain) NSDictionary *userInfo_hls;
+
+/**
+ * Return the view and all its subview flattened as a UIImage
+ */
+- (UIImage *)flattenedImage;
 
 @end

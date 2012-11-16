@@ -16,6 +16,8 @@
 		6F000174156BDD280055CED7 /* ButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000167156BDD280055CED7 /* ButtonBarRefresh@2x.png */; };
 		6F000175156BDD280055CED7 /* CursorDefaultPointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000168156BDD280055CED7 /* CursorDefaultPointer.png */; };
 		6F000176156BDD280055CED7 /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F00016D156BDD280055CED7 /* HLSWebViewController.xib */; };
+		6F5007F51585E60600391A6C /* SearchFieldIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007F31585E60600391A6C /* SearchFieldIcon.png */; };
+		6F5007F61585E60600391A6C /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007F41585E60600391A6C /* SearchFieldIcon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		6F00016B156BDD280055CED7 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F00016D156BDD280055CED7 /* HLSWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSWebViewController.xib; sourceTree = "<group>"; };
 		6F44EA18156BB2E700B45BB4 /* CoconutKit-resources-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-resources-Info.plist"; sourceTree = "<group>"; };
+		6F5007F31585E60600391A6C /* SearchFieldIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchFieldIcon.png; sourceTree = "<group>"; };
+		6F5007F41585E60600391A6C /* SearchFieldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchFieldIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				6F000166156BDD280055CED7 /* ButtonBarRefresh.png */,
 				6F000167156BDD280055CED7 /* ButtonBarRefresh@2x.png */,
 				6F000168156BDD280055CED7 /* CursorDefaultPointer.png */,
+				6F5007F31585E60600391A6C /* SearchFieldIcon.png */,
+				6F5007F41585E60600391A6C /* SearchFieldIcon@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -172,6 +178,8 @@
 				6F000174156BDD280055CED7 /* ButtonBarRefresh@2x.png in Resources */,
 				6F000175156BDD280055CED7 /* CursorDefaultPointer.png in Resources */,
 				6F000176156BDD280055CED7 /* HLSWebViewController.xib in Resources */,
+				6F5007F51585E60600391A6C /* SearchFieldIcon.png in Resources */,
+				6F5007F61585E60600391A6C /* SearchFieldIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +218,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -218,7 +227,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

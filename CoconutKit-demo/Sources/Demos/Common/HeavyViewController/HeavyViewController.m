@@ -12,12 +12,12 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (void)releaseViews
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
+    [super releaseViews];
+    
+    free(m_largeBlock);
+    m_largeBlock = NULL;
 }
 
 #pragma mark View lifecycle
@@ -30,17 +30,11 @@
     [NSThread sleepForTimeInterval:2.];
     
     self.view.backgroundColor = [UIColor randomColor];
-}
-
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
     
-    return YES;
+    // Simulate a heavy memory consumption for the view
+    if (! m_largeBlock) {
+        m_largeBlock = malloc(5000000);
+    }
 }
 
 #pragma mark Localization

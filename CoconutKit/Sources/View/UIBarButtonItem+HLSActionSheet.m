@@ -9,11 +9,8 @@
 #import "UIBarButtonItem+HLSActionSheet.h"
 
 #import "HLSActionSheet+Friend.h"
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
 #import "UIActionSheet+HLSExtensions.h"
-
-HLSLinkCategory(UIBarButtonItem_HLSActionSheet)
 
 // Original implementation of the methods we swizzle
 static SEL (*s_UIBarButtonItem__action_Imp)(id, SEL) = NULL;

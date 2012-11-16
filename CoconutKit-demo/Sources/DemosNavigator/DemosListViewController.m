@@ -11,12 +11,14 @@
 #import "ActionSheetDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
+#import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
-#import "MultipleViewsAnimationDemoViewController.h"
+#import "LabelDemoViewController.h"
+#import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
-#import "SingleViewAnimationDemoViewController.h"
+#import "AnimationDemoViewController.h"
 #import "SkinningDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
@@ -41,8 +43,8 @@ typedef enum {
 // Demos for animation
 typedef enum {
     AnimationDemoIndexEnumBegin = 0,
-    AnimationDemoIndexSingleView = AnimationDemoIndexEnumBegin,
-    AnimationDemoIndexMultipleViews,
+    AnimationDemoIndexAnimation = AnimationDemoIndexEnumBegin,
+    AnimationDemoIndexLayerPropertiesTest,
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
@@ -69,6 +71,8 @@ typedef enum {
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexTextFields,
     ViewDemoIndexCursor,
+    ViewDemoIndexLabel,
+    ViewDemoIndexExpandingSearchBar,
     ViewDemoIndexActionSheet,
     ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
@@ -86,6 +90,7 @@ typedef enum {
     ViewControllersDemoIndexStackController,
     ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
+    ViewControllersDemoIndexSegue,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
 } ViewControllersDemoIndex;
@@ -135,9 +140,9 @@ typedef enum {
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -224,13 +229,13 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    cell.textLabel.text = NSLocalizedString(@"Single view animation", @"Single view animation");
+                case AnimationDemoIndexAnimation: {
+                    cell.textLabel.text = NSLocalizedString(@"Animations", @"Animations");
                     break;
                 }
-                
-                case AnimationDemoIndexMultipleViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Multiple view animation", @"Multiple view animation");
+                    
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    cell.textLabel.text = NSLocalizedString(@"Layer properties test (not a CoconutKit component)", @"Layer properties test (not a CoconutKit component)");
                     break;
                 }
                     
@@ -288,7 +293,17 @@ typedef enum {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
                     break;
                 }
+                
+                case ViewDemoIndexLabel: {
+                    cell.textLabel.text = NSLocalizedString(@"Label", @"Label");
+                    break;
+                }
                     
+                case ViewDemoIndexExpandingSearchBar: {
+                    cell.textLabel.text = NSLocalizedString(@"Search bar", @"Search bar");
+                    break;
+                }
+                
                 case ViewDemoIndexActionSheet: {
                     cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
                     break;
@@ -348,6 +363,30 @@ typedef enum {
                     cell.textLabel.text = @"HLSWebViewController";
                     break;
                 }
+                    
+                case ViewControllersDemoIndexSegue: {
+                    cell.textLabel.textColor = [UIColor grayColor];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
+                    if ([UIStoryboard class]) {
+                        // The compiled storyboard has a storyboardc extension
+                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
+                            [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                            
+                            cell.textLabel.text = NSLocalizedString(@"Segues", @"Segues");
+                            cell.textLabel.textColor = [UIColor blackColor];
+                            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                        }
+                        else {
+                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", @"Segues (not available in bundle)");
+                        }
+                    }
+                    else {
+                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", @"Segues (not available for iOS 4)");
+                    }
+                    break;
+                }
 
                 default: {
                     return nil;
@@ -373,13 +412,13 @@ typedef enum {
     switch (indexPath.section) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
-                case AnimationDemoIndexSingleView: {
-                    demoViewController = [[[SingleViewAnimationDemoViewController alloc] init] autorelease];
+                case AnimationDemoIndexAnimation: {
+                    demoViewController = [[[AnimationDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
-                case AnimationDemoIndexMultipleViews: {
-                    demoViewController = [[[MultipleViewsAnimationDemoViewController alloc] init] autorelease];
+                case AnimationDemoIndexLayerPropertiesTest: {
+                    demoViewController = [[[LayerPropertiesTestViewController alloc] init] autorelease];
                     break;
                 }
                     
@@ -435,6 +474,16 @@ typedef enum {
                     
                 case ViewDemoIndexCursor: {
                     demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexLabel: {
+                    demoViewController = [[[LabelDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexExpandingSearchBar: {
+                    demoViewController = [[[ExpandingSearchBarDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
@@ -499,6 +548,18 @@ typedef enum {
                 case ViewControllersDemoIndexWebViewController: {
                     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lestudio.hortis.ch"]];
                     demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
+                    break;
+                }
+                    
+                case ViewControllersDemoIndexSegue: {
+                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
+                    if ([UIStoryboard class]) {
+                        // The compiled storyboard has a storyboardc extension
+                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
+                            UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+                            demoViewController = [segueStoryboard instantiateInitialViewController];
+                        }
+                    }
                     break;
                 }
                     

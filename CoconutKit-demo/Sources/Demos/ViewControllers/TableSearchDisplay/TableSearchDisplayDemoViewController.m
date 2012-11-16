@@ -36,7 +36,7 @@ typedef enum {
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         NSMutableArray *devices = [NSMutableArray array];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod" type:DeviceTypeMusicPlayer]];
         [devices addObject:[DeviceInfo deviceInfoWithName:@"Apple iPod Touch" type:DeviceTypeMusicPlayer]];
@@ -86,17 +86,6 @@ typedef enum {
 @synthesize devices = m_devices;
 
 @synthesize filteredDevices = m_filteredDevices;
-
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return YES;
-}
 
 #pragma mark UISearchDisplayDelegate protocol implementation
 

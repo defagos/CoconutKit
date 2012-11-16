@@ -13,7 +13,7 @@
  * Private class for implementation purposes. This internal delegate synchronizes the text field
  * value with a managed field object and performs automatic validation when appropriate
  *
- * Designated initializer: initWithTextField:managedObject:fieldName:formatter:validationDelegate:
+ * Designated initializer: -initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
 @interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate {
 @private

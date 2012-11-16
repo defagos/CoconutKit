@@ -87,7 +87,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // If no leading prefix, we are done
-    NSString *leadingPrefix = [components firstObject];
+    NSString *leadingPrefix = [components firstObject_hls];
     if (! [s_leadingPrefixes containsObject:leadingPrefix]) {
         return;
     }
@@ -130,7 +130,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     if ([localizationKey length] == 0) {
-        HLSLoggerWarn(@"Leading localization prefix %@ detected, but empty localization key", [components firstObject]);
+        HLSLoggerWarn(@"Leading localization prefix %@ detected, but empty localization key", [components firstObject_hls]);
     }
     self.localizationKey = localizationKey;
     
@@ -149,7 +149,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         }
         
         if ([table length] == 0) {
-            HLSLoggerWarn(@"Table name prefix detected, but empty table name", [components firstObject]);
+            HLSLoggerWarn(@"Table name prefix detected, but empty table name");
         }
         
         self.table = table;

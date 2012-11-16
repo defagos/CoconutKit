@@ -8,11 +8,8 @@
 
 #import "NSDate+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
 #import "NSCalendar+HLSExtensions.h"
-
-HLSLinkCategory(NSDate_HLSExtensions)
 
 static NSDateFormatter *s_dateFormatter = nil;
 

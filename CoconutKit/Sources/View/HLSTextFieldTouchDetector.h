@@ -13,7 +13,7 @@
  * edit mode, enabling tap detection during edit mode. This allows us to dismiss the keyboard if the user
  * taps outside a text field when it is in edit mode (this feature can be disabled)
  *
- * Designated initializer: initWithTextField:
+ * Designated initializer: -initWithTextField:
  */
 @interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate {
 @private
@@ -26,7 +26,6 @@
  * (if it is the first responder)
  * Default value is YES
  */
-
 @property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 
 @end

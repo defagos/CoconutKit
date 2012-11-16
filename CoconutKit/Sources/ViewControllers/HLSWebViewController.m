@@ -9,10 +9,11 @@
 #import "HLSWebViewController.h"
 
 #import "HLSActionSheet.h"
+#import "HLSAutorotation.h"
+#import "HLSNotifications.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
-#import "HLSNotifications.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
@@ -39,7 +40,7 @@
 
 - (id)initWithRequest:(NSURLRequest *)request
 {
-    if ((self = [super initWithNibName:[self className] bundle:[NSBundle coconutKitBundle]])) {
+    if ((self = [super initWithBundle:[NSBundle coconutKitBundle]])) {
         self.request = request;
     }
     return self;
@@ -121,17 +122,13 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {
-        return YES;
+        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
     }
 }
 
@@ -160,7 +157,7 @@
     self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
     self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
     
-    // Center UI elements accordinglys
+    // Center UI elements accordingly
     self.activityIndicator.center = CGPointMake(self.activityIndicator.center.x, CGRectGetMidY(self.toolbar.frame));
 }
 

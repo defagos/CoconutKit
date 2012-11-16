@@ -8,13 +8,10 @@
 
 #import "UITextField+HLSValidation.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSManagedTextFieldValidator.h"
 #import "HLSRuntime.h"
 
 #import <objc/runtime.h>
-
-HLSLinkCategory(UITextField_HLSValidation)
 
 // Associated object keys
 static void *s_validatorKey = &s_validatorKey;

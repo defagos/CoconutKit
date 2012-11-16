@@ -10,16 +10,6 @@
 
 @implementation LifeCycleTestViewController
 
-#pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -35,28 +25,43 @@
 {
     [super viewWillAppear:animated];
      
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@", self, HLSStringFromBool(animated));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+}
+
+- (void)viewWillUnload
+{
+    [super viewWillUnload];
+    
+    HLSLoggerInfo(@"Called for object %@", self);
 }
 
 - (void)viewDidUnload
@@ -68,35 +73,70 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
+    HLSLoggerInfo(@"Called");
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
-    return YES;
+    return [super shouldAutorotate];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    HLSLoggerInfo(@"Called");
+    
+    return [super supportedInterfaceOrientations];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
+    HLSLoggerInfo(@"Calledfor object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called, toInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(toInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    HLSLoggerInfo(@"Called, fromInterfaceOrientation = %@", HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, fromInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(fromInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+}
+
+#pragma mark Layout management
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    HLSLoggerInfo(@"Called");
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    HLSLoggerInfo(@"Called");
+}
+
+#pragma mark Memory warnings
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    HLSLoggerInfo(@"Called");
 }
 
 #pragma mark Localization

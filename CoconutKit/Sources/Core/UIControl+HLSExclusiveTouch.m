@@ -10,11 +10,6 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(UIControl_HLSExclusiveTouch)
-
-static BOOL m_injected = NO;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
@@ -28,9 +23,10 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
 
 #pragma mark Class methods
 
-+ (void)injectExclusiveTouch
++ (void)enable
 {
-    if (m_injected) {
+    static BOOL s_injected = NO;
+    if (s_injected) {
         HLSLoggerInfo(@"Exclusive touch already injected");
         return;
     }
@@ -43,7 +39,7 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
                                                                              @selector(initWithCoder:), 
                                                                              (IMP)swizzled_UIControl__initWithCoder_Imp);
     
-    m_injected = YES;
+    s_injected = YES;
 }
 
 @end

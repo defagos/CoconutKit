@@ -8,14 +8,11 @@
 
 #import "UIWebView+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 
 #import <objc/runtime.h>
 
 static UIScrollView *scrollView_Imp(UIWebView *self, SEL _cmd);
-
-HLSLinkCategory(UIWebView_HLSExtensions)
 
 @interface UIWebView (HLSExtensionsPrivate)
 
@@ -29,14 +26,9 @@ HLSLinkCategory(UIWebView_HLSExtensions)
 
 + (void)load
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
     if (! class_getInstanceMethod(self, @selector(scrollView))) {
-        NSString *types = [NSString stringWithFormat:@"%s%s%s", @encode(UIScrollView *), @encode(id), @encode(SEL)];
-        class_addMethod(self, NSSelectorFromString(@"scrollView"), (IMP)scrollView_Imp, [types cStringUsingEncoding:NSUTF8StringEncoding]);
+        class_addMethod(self, NSSelectorFromString(@"scrollView"), (IMP)scrollView_Imp, "@@:");
     }
-    
-    [pool drain];
 }
 
 #pragma mark Accessors and mutators

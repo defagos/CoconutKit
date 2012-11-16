@@ -8,21 +8,29 @@
 
 #import "PlaceholderDemoViewController.h"
 
-#import "ContainerCustomizationViewController.h"
+#import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
 #import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
-#import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
+typedef enum {
+    AutorotationModeIndexEnumBegin = 0,
+    AutorotationModeIndexNoChildren = AutorotationModeIndexEnumBegin,
+    AutorotationModeIndexAllChildren,
+    AutorotationModeIndexEnumEnd,
+    AutorotationModeIndexEnumSize = AutorotationModeIndexEnumEnd - AutorotationModeIndexEnumBegin
+} AutorotationModeIndex;
+
 @interface PlaceholderDemoViewController ()
 
-@property (nonatomic, retain) HeavyViewController *heavyViewController;
+@property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
+@property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
 
-- (void)displayInsetViewController:(UIViewController *)viewController;
+- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 
 @end
 
@@ -32,16 +40,26 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        // Pre-load a view controller before display. Yep, this is possible!
-        self.insetViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+    if ((self = [super init])) {
+        // Preload view controllers before display. Yep, this is possible (not all placeholders have to be preloaded)!
+        LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self setInsetViewController:lifeCycleTestViewController atIndex:0];
+        
+        // We can even assign a transition animation. Since the view controller has been preloaded, it won't be played,
+        // but it will later be used if we set the inset to nil
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self setInsetViewController:containmentTestViewController atIndex:1 withTransitionClass:[HLSTransitionCoverFromBottom class]];
+        
+        self.delegate = self;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.heavyViewController = nil;
+    self.leftHeavyViewController = nil;
+    self.rightHeavyViewController = nil;
+    
     [super dealloc];
 }
 
@@ -49,16 +67,18 @@
 {
     [super releaseViews];
     
-    // Free heavy view in cache
-    self.heavyViewController.view = nil;
-    
+    self.heavyButton = nil;
+    self.transitionPickerView = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
-    self.transitionPickerView = nil;
-    self.forwardingPropertiesSwitch = nil;
+    self.leftPlaceholderSwitch = nil;
+    self.rightPlaceholderSwitch = nil;
+    self.autorotationModeSegmentedControl = nil;
 }
 
 #pragma mark Accessors and mutators
+
+@synthesize heavyButton = m_heavyButton;
 
 @synthesize transitionPickerView = m_transitionPickerView;
 
@@ -66,9 +86,15 @@
 
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
 
-@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
+@synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
 
-@synthesize heavyViewController = m_heavyViewController;
+@synthesize rightPlaceholderSwitch = m_rightPlaceholderSwitch;
+
+@synthesize leftHeavyViewController = m_leftHeavyViewController;
+
+@synthesize rightHeavyViewController = m_rightHeavyViewController;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -78,21 +104,51 @@
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
-    self.forwardingPropertiesSwitch.on = self.forwardingProperties;
+    self.leftPlaceholderSwitch.on = YES;
+    self.rightPlaceholderSwitch.on = YES;
+    
+    if (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren) {
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexAllChildren;
+    }
+    else {
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexNoChildren;
+    }
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
+    
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSPlaceholderViewController";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:AutorotationModeIndexNoChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:AutorotationModeIndexAllChildren];
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
 
-- (void)displayInsetViewController:(UIViewController *)viewController
-{
-    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+{    
+    // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *insetViewController = viewController;
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             insetViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
@@ -103,81 +159,64 @@
     }
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [self setInsetViewController:insetViewController withTransitionStyle:pickedIndex];
-}
-
-#pragma mark Event callbacks
-
-- (IBAction)displayLifeCycleTest:(id)sender
-{
-    LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-    [self displayInsetViewController:lifecycleTestViewController];
-}
-
-- (IBAction)displayStretchable:(id)sender
-{
-    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    [self displayInsetViewController:stretchableViewController];
-}
-
-- (IBAction)displayFixedSize:(id)sender
-{
-    FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
-    [self displayInsetViewController:fixedSizeViewController];
-}
-
-- (IBAction)displayHeavy:(id)sender
-{
-    // Store a strong ref to an already built HeavyViewController; this way, this view controller is kept alive and does
-    // not need to be recreated from scratch each time it is displayed as inset (lazy creation suffices). This proves 
-    // that caching view controller's views is made possible by HLSPlaceholderViewController if needed
-    if (! self.heavyViewController) {
-        self.heavyViewController = [[[HeavyViewController alloc] init] autorelease];
+    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    
+    @try {
+        [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
     }
-    [self displayInsetViewController:self.heavyViewController];
+    @catch (NSException *exception) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
+                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
-- (IBAction)displayPortraitOnly:(id)sender
+#pragma mark HLSPlaceholderViewControllerDelegate protocol implementation
+
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
 {
-    PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
-    [self displayInsetViewController:portraitOnlyViewController];
+    HLSLoggerInfo(@"Will show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
 }
 
-- (IBAction)displayLandscapeOnly:(id)sender
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didShowInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
 {
-    LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
-    [self displayInsetViewController:landscapeOnlyViewController];
+    HLSLoggerInfo(@"Did show inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    if ((self.leftPlaceholderSwitch.on && index == 0 && viewController == self.leftHeavyViewController)
+        || (self.rightPlaceholderSwitch.on && index == 1 && viewController == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
 }
 
-- (IBAction)remove:(id)sender
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+      willHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
 {
-    [self displayInsetViewController:nil];
+    HLSLoggerInfo(@"Will hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
 }
 
-- (IBAction)hideWithModal:(id)sender
+- (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
+       didHideInsetViewController:(UIViewController *)viewController
+                          atIndex:(NSUInteger)index
+                         animated:(BOOL)animated
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
-}
-
-- (IBAction)displayOrientationCloner:(id)sender
-{
-    OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                         initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                         large:NO]
-                                                                        autorelease];
-    [self displayInsetViewController:orientationClonerViewController];
-}
-
-- (IBAction)displayContainerCustomization:(id)sender
-{
-    ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-    [self displayInsetViewController:containerCustomizationViewController];
-}
-
-- (IBAction)toggleForwardingProperties:(id)sender
-{
-    self.forwardingProperties = self.forwardingPropertiesSwitch.on;
+    HLSLoggerInfo(@"Did hide inset view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    self.heavyButton.hidden = NO;
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
@@ -189,163 +228,207 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return HLSTransitionStyleEnumSize;
+    return [[HLSTransition availableTransitionNames] count];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    switch (row) {
-        case HLSTransitionStyleNone: {
-            return @"HLSTransitionStyleNone";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            return @"HLSTransitionStyleCoverFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            return @"HLSTransitionStyleCoverFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            return @"HLSTransitionStyleCoverFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight: {
-            return @"HLSTransitionStyleCoverFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            return @"HLSTransitionStyleCoverFromTopLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            return @"HLSTransitionStyleCoverFromTopRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            return @"HLSTransitionStyleCoverFromBottomLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            return @"HLSTransitionStyleCoverFromBottomRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            return @"HLSTransitionStyleCoverFromBottom2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            return @"HLSTransitionStyleCoverFromTop2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            return @"HLSTransitionStyleCoverFromLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            return @"HLSTransitionStyleCoverFromRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            return @"HLSTransitionStyleCoverFromTopLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            return @"HLSTransitionStyleCoverFromTopRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            return @"HLSTransitionStyleCoverFromBottomLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            return @"HLSTransitionStyleCoverFromBottomRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            return @"HLSTransitionStyleFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            return @"HLSTransitionStyleFadeIn2";
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            return @"HLSTransitionStyleCrossDissolve";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            return @"HLSTransitionStylePushFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTop: {
-            return @"HLSTransitionStylePushFromTop";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeft: {
-            return @"HLSTransitionStylePushFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRight: {
-            return @"HLSTransitionStylePushFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            return @"HLSTransitionStyleEmergeFromCenter";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            return @"HLSTransitionStyleFlipVertical";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            return @"HLSTransitionStyleFlipHorizontal";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+}
+
+#pragma mark Event callbacks
+
+- (IBAction)displayLifeCycleTest:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:lifecycleTestViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:lifecycleTestViewController atIndex:1];
     }
 }
 
-#pragma mark Localization
-
-- (void)localize
+- (IBAction)displayContainmentTest:(id)sender
 {
-    [super localize];
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
     
-    self.title = @"HLSPlaceholderViewController";
+    if (self.leftPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        [self displayInsetViewController:containmentTestViewController atIndex:1];
+    }    
+}
+
+- (IBAction)displayStretchable:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        [self displayInsetViewController:stretchableViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        [self displayInsetViewController:stretchableViewController atIndex:1];
+    }
+}
+
+- (IBAction)displayFixedSize:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [self displayInsetViewController:fixedSizeViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        [self displayInsetViewController:fixedSizeViewController atIndex:1];
+    }
+}
+
+- (IBAction)displayHeavy:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    // Store a strong ref to an already built HeavyViewController; this way, this view controller is kept alive and does
+    // not need to be recreated from scratch each time it is displayed as inset (lazy creation suffices). This proves 
+    // that caching view controller's views is made possible by HLSPlaceholderViewController if needed
+    if (self.leftPlaceholderSwitch.on) {
+        if (! self.leftHeavyViewController) {
+            self.leftHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+        }
+        [self displayInsetViewController:self.leftHeavyViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        if (! self.rightHeavyViewController) {
+            self.rightHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+        }
+        [self displayInsetViewController:self.rightHeavyViewController atIndex:1];
+    }
+}
+
+- (IBAction)displayPortraitOnly:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:portraitOnlyViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:portraitOnlyViewController atIndex:1];
+    }
+}
+
+- (IBAction)displayLandscapeOnly:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:landscapeOnlyViewController atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        [self displayInsetViewController:landscapeOnlyViewController atIndex:1];
+    }
+}
+
+- (IBAction)remove:(id)sender
+{
+    if (! self.leftPlaceholderSwitch.on && ! self.rightPlaceholderSwitch.on) {
+        HLSLoggerWarn(@"You must either enable insertion / removal in the left and / or right placeholder");
+        return;
+    }
+    
+    if (self.leftPlaceholderSwitch.on) {
+        [self setInsetViewController:nil atIndex:0];
+    }
+    if (self.rightPlaceholderSwitch.on) {
+        [self setInsetViewController:nil atIndex:1];
+    }
+}
+
+- (IBAction)hideWithModal:(id)sender
+{
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+}
+
+- (IBAction)togglePlaceholder:(id)sender
+{
+    // We must prevent insertion of the same view controller twice (this yields an error)
+    if ((self.leftHeavyViewController && self.leftPlaceholderSwitch.on && [self insetViewControllerAtIndex:0] == self.leftHeavyViewController)
+        || (self.rightHeavyViewController && self.rightPlaceholderSwitch.on && [self insetViewControllerAtIndex:1] == self.rightHeavyViewController)) {
+        self.heavyButton.hidden = YES;
+    }
+    else {
+        self.heavyButton.hidden = NO;
+    }
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    if (self.autorotationModeSegmentedControl.selectedSegmentIndex == AutorotationModeIndexNoChildren) {
+        self.autorotationMode = HLSAutorotationModeContainerAndNoChildren;
+    }
+    // All rotation modes involving children are equivalent for a placeholder view controller. Pick any of them
+    else {
+        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
+    }
+}
+
+- (IBAction)testResponderChain:(id)sender
+{
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
+- (IBAction)navigateForwardNonAnimated:(id)sender
+{
+    PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:placeholderDemoViewController animated:NO];
+}
+
+- (IBAction)navigateBackNonAnimated:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

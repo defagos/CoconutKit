@@ -22,7 +22,7 @@ typedef enum {
 /**
  * Internal class for containing the localization information attached to a UILabel (see UILabel+HLSDynamicLocalization.m)
  *
- * Designated initializer: initWithText:
+ * Designated initializer: -initWithText:
  */
 @interface HLSLabelLocalizationInfo : NSObject {
 @private

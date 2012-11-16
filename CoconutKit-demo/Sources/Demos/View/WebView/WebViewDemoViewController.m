@@ -12,14 +12,6 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
-{
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        
-    }
-    return self;
-}
-
 - (void)releaseViews
 {
     [super releaseViews];
@@ -48,17 +40,6 @@
     [self.webView loadHTMLString:htmlText baseURL:[[NSBundle mainBundle] bundleURL]];
     
     self.scrollEnabledSwitch.on = self.webView.scrollView.scrollEnabled;
-}
-
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark Localization

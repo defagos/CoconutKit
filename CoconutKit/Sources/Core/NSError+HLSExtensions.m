@@ -8,10 +8,7 @@
 
 #import "NSError+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
-
-HLSLinkCategory(NSError_HLSExtensions)
 
 @implementation NSError (HLSExtensions)
 

@@ -9,13 +9,11 @@
 #import "UIViewController+HLSExtensions.h"
 
 #import <objc/runtime.h>
-#import "HLSCategoryLinker.h"
+#import "HLSAutorotationCompatibility.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
 #import "UITextView+HLSExtensions.h"
-
-HLSLinkCategory(UIViewController_HLSExtensions)
 
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
@@ -29,6 +27,7 @@ static void (*s_UIViewController__viewWillAppear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidAppear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewWillDisappear_Imp)(id, SEL, BOOL) = NULL;
 static void (*s_UIViewController__viewDidDisappear_Imp)(id, SEL, BOOL) = NULL;
+static void (*s_UIViewController__viewWillUnload_Imp)(id, SEL) = NULL;
 static void (*s_UIViewController__viewDidUnload_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
@@ -39,9 +38,10 @@ static void swizzled_UIViewController__viewWillAppear_Imp(UIViewController *self
 static void swizzled_UIViewController__viewDidAppear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
 static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
 static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *self, SEL _cmd, BOOL animated);
+static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd);
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
 
-@interface UIViewController (HLSExtensionsPrivate)
+@interface UIViewController (HLSExtensionsPrivate) <HLSAutorotationCompatibility>
 
 - (void)uiViewControllerHLSExtensionsInit;
 
@@ -65,8 +65,17 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (void)unloadViews
 {
     if ([self isViewLoaded]) {
+        BOOL isRunningIOS6 = (class_getInstanceMethod([UIViewController class], @selector(shouldAutorotate)) != NULL);
+        
+        if (! isRunningIOS6) {
+            // The -viewWillUnload method is available starting with iOS 5 and deprecated starting with iOS 6, but was
+            // in fact already privately implemented on iOS 4 (with empty implementation). Does not harm to call it here
+            [self viewWillUnload];
+        }
         self.view = nil;
-        [self viewDidUnload];        
+        if (! isRunningIOS6) {
+            [self viewDidUnload];
+        }
     }
 }
 
@@ -77,11 +86,23 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     return [objc_getAssociatedObject(self, s_lifeCyclePhaseKey) intValue];
 }
 
+- (UIView *)viewIfLoaded
+{
+    return [self isViewLoaded] ? self.view : nil;
+}
+
 - (BOOL)isViewVisible
 {
     HLSViewControllerLifeCyclePhase lifeCyclePhase = [self lifeCyclePhase];
     return HLSViewControllerLifeCyclePhaseViewWillAppear <= lifeCyclePhase 
-    && lifeCyclePhase <= HLSViewControllerLifeCyclePhaseViewWillDisappear;
+        && lifeCyclePhase <= HLSViewControllerLifeCyclePhaseViewWillDisappear;
+}
+
+- (BOOL)isViewDisplayed
+{
+    HLSViewControllerLifeCyclePhase lifeCyclePhase = [self lifeCyclePhase];
+    return HLSViewControllerLifeCyclePhaseViewWillAppear <= lifeCyclePhase
+        && lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
 - (CGSize)originalViewSize
@@ -131,9 +152,14 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
             break;
         }
             
-        case HLSViewControllerLifeCyclePhaseViewDidUnload: {
+        case HLSViewControllerLifeCyclePhaseViewWillUnload: {
             return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidLoad
                 || currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewDidDisappear;
+            break;
+        }
+            
+        case HLSViewControllerLifeCyclePhaseViewDidUnload: {
+            return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseViewWillUnload;
             break;
         }
             
@@ -143,6 +169,120 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
             break;
         }
     }
+}
+
+- (BOOL)implementsNewAutorotationMethods
+{
+    return [self respondsToSelector:@selector(shouldAutorotate)]
+        && [self respondsToSelector:@selector(supportedInterfaceOrientations)];
+}
+
+- (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations
+{
+    if ([self implementsNewAutorotationMethods]) {
+        return [self shouldAutorotate] && (orientations & [self supportedInterfaceOrientations]);
+    }
+    else {
+        if (orientations & UIInterfaceOrientationMaskPortrait
+                && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            return YES;
+        }
+        else if (orientations & UIInterfaceOrientationMaskLandscapeLeft
+                 && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            return YES;
+        }
+        else if (orientations & UIInterfaceOrientationMaskLandscapeRight
+                 && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            return YES;
+        }
+        else if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown
+                 && [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+}
+
+- (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController
+{
+    if (! viewController) {
+        return NO;
+    }
+    
+    if ([viewController implementsNewAutorotationMethods]) {
+        return [self shouldAutorotateForOrientations:[viewController supportedInterfaceOrientations]];
+    }
+    else {
+        if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
+                && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            return YES;
+        }
+        else if ([self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]
+                 && [viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+}
+
+- (BOOL)autorotatesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([self implementsNewAutorotationMethods]) {
+        return [self shouldAutorotate] && ([self supportedInterfaceOrientations] & (1 << interfaceOrientation));
+    }
+    else {
+        return [self shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+    }
+}
+
+- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations
+{
+    if (orientations & UIInterfaceOrientationMaskPortrait) {
+        if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait))
+                || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
+            return UIInterfaceOrientationPortrait;
+        }
+    }
+    if (orientations & UIInterfaceOrientationMaskLandscapeRight) {
+        if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeRight))
+            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+            return UIInterfaceOrientationLandscapeRight;
+        }
+    }
+    if (orientations & UIInterfaceOrientationMaskLandscapeLeft) {
+        if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeLeft))
+            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            return UIInterfaceOrientationLandscapeLeft;
+        }
+    }
+    if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown) {
+        if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortraitUpsideDown))
+            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            return UIInterfaceOrientationPortraitUpsideDown;
+        }
+    }
+    return 0;
+}
+
+- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController
+{
+    if (! viewController) {
+        return 0;
+    }
+    
+    return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
 }
 
 @end
@@ -174,8 +314,11 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))HLSSwizzleSelector(self, 
                                                                                            @selector(viewDidDisappear:),
                                                                                            (IMP)swizzled_UIViewController__viewDidDisappear_Imp);
-    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                  @selector(viewDidUnload), 
+    s_UIViewController__viewWillUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                   @selector(viewWillUnload),
+                                                                                   (IMP)swizzled_UIViewController__viewWillUnload_Imp);
+    s_UIViewController__viewDidUnload_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                                  @selector(viewDidUnload),
                                                                                   (IMP)swizzled_UIViewController__viewDidUnload_Imp);
 }
 
@@ -221,6 +364,12 @@ static id swizzled_UIViewController__initWithCoder_Imp(UIViewController *self, S
 
 static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd)
 {
+    if (! [self isViewLoaded]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                       reason:@"The view controller's view has not been loaded" 
+                                     userInfo:nil];
+    }
+    
     (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
@@ -297,6 +446,19 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear];
+}
+
+static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd)
+{
+    (s_UIViewController__viewWillUnload_Imp)(self, _cmd);
+    
+    if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillUnload]) {
+        HLSLoggerWarn(@"The viewWillUnload method has been called on %@, but its current view lifecycle state is not compatible. "
+                      "Maybe the view controller is displayed using a container object with incorrect view lifecycle management, "
+                      "or maybe [super viewWillUnload] has not been called by class %@ or one of its parents", self, [self class]);
+    }
+    
+    [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillUnload];
 }
 
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd)

@@ -11,41 +11,41 @@
 /**
  * Calculates the MD2 hash
  */
-- (NSData *)md2hash;
+- (NSString *)md2hash;
 
 /**
  * Calculates the MD4 hash
  */
-- (NSData *)md4hash;
+- (NSString *)md4hash;
 
 /**
  * Calculates the MD5 hash
  */
-- (NSData *)md5hash;
+- (NSString *)md5hash;
 
 /**
  * Calculates the SHA-1 hash
  */
-- (NSData *)sha1hash;
+- (NSString *)sha1hash;
 
 /**
  * Calculates the SHA-224 hash
  */
-- (NSData *)sha224hash;
+- (NSString *)sha224hash;
 
 /**
  * Calculates the SHA-256 hash
  */
-- (NSData *)sha256hash;
+- (NSString *)sha256hash;
 
 /**
  * Calculates the SHA-384 hash
  */
-- (NSData *)sha384hash;
+- (NSString *)sha384hash;
 
 /**
  * Calculates the SHA-512 hash
  */
-- (NSData *)sha512hash;
+- (NSString *)sha512hash;
 
 @end

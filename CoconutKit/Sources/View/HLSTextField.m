@@ -33,7 +33,7 @@ const CGFloat kTextFieldMinVisibilityDistance = 20.f;           // Corresponds t
 /**
  * Keep a reference to the currently active HLSTextField (if any) and to its original offset. This is safe since UIKit 
  * is not meant to be used in multi-threaded code. Moreover, at most one text field can be active at any time, and there 
- * is no risk of dangling pointers (a viewDidUnload, which would invalidate the ref we keep, can only appear
+ * is no risk of dangling pointers (a -viewDidUnload, which would invalidate the ref we keep, can only appear
  * when the view is not visible, i.e. when no text field is active)
  *
  * Saving the original offset (and not the total offset which is applied) is made on purpose. Since we have very little
@@ -87,6 +87,8 @@ static UIScrollView *s_scrollView = nil;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     [self hlsTextFieldInit];
 }
 

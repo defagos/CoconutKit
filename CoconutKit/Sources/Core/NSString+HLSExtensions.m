@@ -9,9 +9,8 @@
 #import "NSString+HLSExtensions.h"
 
 #import <CommonCrypto/CommonDigest.h>
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSString_HLSExtensions)
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
@@ -44,12 +43,66 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return [[self stringByTrimmingWhitespaces] length] != 0;
 }
 
+#pragma mark Font size adjustment
+
+// Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
+- (CGFloat)fontSizeWithFont:(UIFont *)font 
+          constrainedToSize:(CGSize)size 
+                minFontSize:(CGFloat)minFontSize
+              numberOfLines:(NSUInteger)numberOfLines
+{    
+    if (floatle(font.pointSize, minFontSize)) {
+        return minFontSize;
+    }
+    
+    if (numberOfLines == 0) {
+        HLSLoggerWarn(@"The number of lines must be different from 0");
+        return font.pointSize;
+    }
+    
+    CGFloat height = [self sizeWithFont:font
+                      constrainedToSize:CGSizeMake(size.width, FLT_MAX)
+                          lineBreakMode:UILineBreakModeWordWrap].height;
+    
+    // Empty text
+    if (floateq(height, 0.f)) {
+        return font.pointSize;
+    }
+    
+    CGFloat lineHeight = [self sizeWithFont:font
+                          constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)
+                              lineBreakMode:UILineBreakModeWordWrap].height;
+    
+    // Reduce the font size so that the text fits vertically
+    UIFont *newFont = font;
+    while (floatgt(height, size.height) || floatgt(ceilf(height / lineHeight), numberOfLines)) {
+        if (floatle(newFont.pointSize, minFontSize)) {
+            return minFontSize;
+        }
+        
+        newFont = [UIFont fontWithName:font.fontName size:newFont.pointSize - 1.f];
+        height = [self sizeWithFont:newFont 
+                  constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
+                      lineBreakMode:UILineBreakModeWordWrap].height;
+        
+        lineHeight = [self sizeWithFont:newFont 
+                      constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) 
+                          lineBreakMode:UILineBreakModeWordWrap].height;        
+    }
+    
+    return newFont.pointSize;
+}
+
 #pragma mark URL encoding
 
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), cfEncoding));
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
+                                                                                 (CFStringRef)self, 
+                                                                                 NULL, 
+                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"), 
+                                                                                 cfEncoding));
     return [result autorelease];
 }
 
@@ -110,19 +163,3 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 }
 
 @end
-
-#pragma mark Utility functions
-
-NSString *HLSStringFromCATransform3D(CATransform3D transform)
-{
-    return [NSString stringWithFormat:@"[\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "    [%.2f, %.2f, %.2f, %.2f]\n"
-            "]", 
-            transform.m11, transform.m12, transform.m13, transform.m14, 
-            transform.m21, transform.m22, transform.m23, transform.m24, 
-            transform.m31, transform.m32, transform.m33, transform.m34, 
-            transform.m41, transform.m42, transform.m43, transform.m44];
-}

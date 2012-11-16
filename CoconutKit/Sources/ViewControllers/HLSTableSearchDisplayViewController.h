@@ -22,13 +22,13 @@
  *
  * As for UITableViewController, this class conforms to the table view protocols for convenience, but does not provide
  * any meaningful implementations for them. Subclasses are required to override at least the required UITableViewDataSource
- * protocol methods displaying records (tableView:numberOfRowsInSection: and tableView:cellForRowAtIndexPath:). When
+ * protocol methods displaying records (-tableView:numberOfRowsInSection: and -tableView:cellForRowAtIndexPath:). When
  * implementing these methods, you can use the tableView and searchResultsTableView accessors to identify which table
  * view is querying the data source. This allows you to use the proper record set.s
  *
  * You never need to reload the table views of a HLSTableSearchDisplayViewController directly. Instead, implement the
- *              searchDisplayController:shouldReloadTableForSearchString:
- *      and     searchDisplayController:shouldReloadTableForSearchScope:
+ *              -searchDisplayController:shouldReloadTableForSearchString:
+ *      and     -searchDisplayController:shouldReloadTableForSearchScope:
  * UISearchDisplayDelegate methods to return YES when the table view needs reloading. These methods are called each 
  * time the search string or the search scope are changed.
  *
@@ -41,10 +41,10 @@
  * we must code everything from scratch, with tricky animations requiring access to private implementation details,
  * layouts different for portrait and landscape orientations, etc. Not an easy task.
  *
- * Remark: If you override viewDidLoad, viewWillAppear, etc., do not forget to call their super counterpart (as usual),
+ * Remark: If you override -viewDidLoad, -viewWillAppear, etc., do not forget to call their super counterpart (as usual),
  *         otherwise the behavior is undefined. The same holds for the UISearchDisplayDelegate methods
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSTableSearchDisplayViewController : HLSViewController <
     UISearchDisplayDelegate,

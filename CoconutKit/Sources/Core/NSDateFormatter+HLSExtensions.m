@@ -9,9 +9,6 @@
 #import "NSDateFormatter+HLSExtensions.h"
 
 #import "NSArray+HLSExtensions.h"
-#import "HLSCategoryLinker.h"
-
-HLSLinkCategory(NSDateFormatter_HLSExtensions)
 
 @implementation NSDateFormatter (HLSExtensions)
 

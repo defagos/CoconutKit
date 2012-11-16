@@ -7,11 +7,11 @@
 //
 
 /**
- * This class makes keyboard properties accessible at any time in a convenient way. Just access the keyboardInformation 
- * object. If this object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 
+ * This class makes keyboard properties accessible at any time in a convenient way. Just access the +keyboardInformation 
+ * method. If the returned object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 
  * properties. The object is nil if the keyboard is floating (iPad) or invisible.
  *
- * Not meant to be instantiated directly. Simply use the keyboardInformation class method.
+ * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
 @interface HLSKeyboardInformation : NSObject {
 @private

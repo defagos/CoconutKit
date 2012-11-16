@@ -17,7 +17,7 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         self.delegate = self;
         self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally; 
         
@@ -36,18 +36,14 @@
 {
     [super viewWillDisappear:animated];
     
-    [HLSModelManager rollbackDefaultModelContext];
+    [HLSModelManager rollbackCurrentModelContext];
 }
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (NSUInteger)supportedInterfaceOrientations
 {
-    if (! [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return NO;
-    }
-    
-    return YES;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark HLSWizardViewControllerDelegate protocol implementation
@@ -55,8 +51,8 @@
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController
 {
     NSError *error = nil;
-    if (! [HLSModelManager saveDefaultModelContext:&error]) {
-        [HLSModelManager rollbackDefaultModelContext];
+    if (! [HLSModelManager saveCurrentModelContext:&error]) {
+        [HLSModelManager rollbackCurrentModelContext];
         HLSLoggerError(@"Failed to save context; reason: %@", error);        
     }
             

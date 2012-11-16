@@ -20,14 +20,14 @@
  *
  * As always with delegation in asynchronous contexts, it is especially important that delegates do not forget to
  * unregister themselves before they get destroyed, otherwise crashes are likely to occur if operations are still
- * running when their delegate dies. To avoid such issues, never forget to call unregisterDelegateAndCancelAssociatedTasks:
- * or unregisterDelegate in the dealloc method of your delegates. This will unregister the delegate, ensuring that
+ * running when their delegate dies. To avoid such issues, never forget to call -unregisterDelegateAndCancelAssociatedTasks:
+ * or -unregisterDelegate in the dealloc method of your delegates. This will unregister the delegate, ensuring that
  * it cannot be notified anymore when it gets destroyed.
  *
  * This object is not thread-safe. All operations on it must stem from the same thread, otherwise the behavior is 
  * undefined.
  *
- * Designated initializer: init
+ * Designated initializer: -init
  */
 @interface HLSTaskManager : NSObject {
 @private
@@ -92,7 +92,7 @@
  * end, otherwise crashes will occur when dead delegates get notified. This method is for example useful for cancelling
  * tasks when the view associated to a view controller disappears (but does not get deallocated).
  *
- * If you are not interested in end process notifications, call the safer unregisterDelegateAndCancelAssociatedTasks:
+ * If you are not interested in end process notifications, call the safer -unregisterDelegateAndCancelAssociatedTasks:
  * method instead
  */
 - (void)cancelTasksWithDelegate:(id)delegate;

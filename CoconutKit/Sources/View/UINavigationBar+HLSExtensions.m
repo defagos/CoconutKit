@@ -8,10 +8,8 @@
 
 #import "UINavigationBar+HLSExtensions.h"
 
-#import "HLSCategoryLinker.h"
 #import "HLSRuntime.h"
-
-HLSLinkCategory(UINavigationBar_HLSExtensions)
+#import "UIView+HLSExtensions.h"
 
 /**
  * As navigation levels are pushed onto the stack, the navigation bar is updated. During this process, and if we
@@ -91,7 +89,7 @@ static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *sel
                 backgroundImageView.image = backgroundImage;
                 backgroundImageView.tag = kBackgroundImageViewTag;
                 backgroundImageView.contentMode = UIViewContentModeScaleToFill;
-                backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                backgroundImageView.autoresizingMask = HLSViewAutoresizingAll;
                 
                 (*s_UINavigationBar__insertSubview_atIndex_Imp)(self, @selector(insertSubview:atIndex:), backgroundImageView, 0);
             }

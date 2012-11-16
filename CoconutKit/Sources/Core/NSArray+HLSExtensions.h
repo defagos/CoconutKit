@@ -10,8 +10,10 @@
 
 /**
  * Returns the first object in the array, or nil if the array is empty
+ *
+ * Remark: A private -firstObject method exists since iOS 4
  */
-- (id)firstObject;
+- (id)firstObject_hls;
 
 /**
  * Rotate array elements left or right (elements disappearing at an end are moved to the other end)
@@ -23,14 +25,5 @@
  * Sort an array using a single descriptor
  */
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
-
-@end
-
-@interface NSMutableArray (HLSExtensions)
-
-/**
- * Same as addObject:, but does not attempt to insert nil objects
- */
-- (void)safelyAddObject:(id)object;
 
 @end

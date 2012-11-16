@@ -9,7 +9,7 @@
 @interface NSDateFormatter (HLSExtensions)
 
 /**
- * Same as weekDaySymbols and shortWeekdaySymbols, but returning the days in the order corresponding to the
+ * Same as -weekDaySymbols and -shortWeekdaySymbols, but returning the days in the order corresponding to the
  * device international settings. 
  */
 + (NSArray *)orderedWeekdaySymbols;

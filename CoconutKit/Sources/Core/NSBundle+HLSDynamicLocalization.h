@@ -10,7 +10,7 @@ extern NSString * const HLSPreferredLocalizationDefaultsKey;
 extern NSString * const HLSCurrentLocalizationDidChangeNotification;
 
 /**
- * Returns the language for a localization
+ * Return the language for a localization
  * For example:
  *   HLSLanguageForLocalization(@"de") returns @"Deutsch"
  *   HLSLanguageForLocalization(@"en") returns @"English"
@@ -18,7 +18,7 @@ extern NSString * const HLSCurrentLocalizationDidChangeNotification;
 NSString *HLSLanguageForLocalization(NSString *localization);
 
 /**
- * Returns a localized string from the UIKit bundle
+ * Return a localized string from the UIKit bundle
  *
  * If the localized version of the key parameter is not found in the UIKit bundle
  * then this function searches for the localized string inside the main bundle using
@@ -34,7 +34,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key);
  * information)
  *
  * Setting the current localization affects the following instance methods of NSBundle:
- *   - localizedStringForKey:value:table:, i.e. also the NSLocalizedString, NSLocalizedStringFromTable, 
+ *   - localizedStringForKey:value:table:, i.e. also the NSLocalizedString, NSLocalizedStringFromTable,
  *     NSLocalizedStringFromTableInBundle and NSLocalizedStringWithDefaultValue macros
  *   - URLForResource:withExtension:
  *   - URLForResource:withExtension:subdirectory:
@@ -53,7 +53,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key);
 @interface NSBundle (HLSDynamicLocalization)
 
 /**
- * Returns the current localization used by all bundles.
+ * Return the current localization used by all bundles.
  */
 + (NSString *)localization;
 

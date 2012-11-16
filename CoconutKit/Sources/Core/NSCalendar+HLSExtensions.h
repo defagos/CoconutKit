@@ -16,7 +16,7 @@
 @interface NSCalendar (HLSExtensions)
 
 /**
- * Shortcuts to apply calendrical calculation methods to [NSCalendar currentCalendar]. Refer to the instance method documentation
+ * Shortcuts to apply calendrical calculation methods to +[NSCalendar currentCalendar]. Refer to the instance method documentation
  * for more information
  */
 + (NSDate *)dateFromComponents:(NSDateComponents *)components;
@@ -54,12 +54,12 @@
 
 /**
  * Return the date corresponding to given components in the specified time zone. The NSCalendar time zone is ignored
- * This function plays the same role as the NSDateComponents setTimeZone: instance method which is available starting 
+ * This function plays the same role as the NSDateComponents -setTimeZone: instance method which is available starting 
  * with iOS 4.
  * If you are targeting iOS 4 or higher, you therefore have two options:
- *   - either use dateFromComponents:inTimeZone:
- *   - or use dateFromComponents: with the time zone set using setTimeZone:
- * You must not attempt to call dateFromComponents:inTimeZone: if a time zone has been set using setTimeZone:
+ *   - either use -dateFromComponents:inTimeZone:
+ *   - or use -dateFromComponents: with the time zone set using -setTimeZone:
+ * You must not attempt to call -dateFromComponents:inTimeZone: if a time zone has been set using -setTimeZone:
  */
 - (NSDate *)dateFromComponents:(NSDateComponents *)components inTimeZone:(NSTimeZone *)timeZone;
 
@@ -76,7 +76,7 @@
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
 /**
- * Same as numberOfDaysInUnit:containingDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -numberOfDaysInUnit:containingDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSUInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
@@ -88,45 +88,45 @@
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
 /**
- * Same as startDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
+ * Same as -startDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
  */
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as startDateOfUnit:containingDate:, but returning the first date after the unit. For example, if unit is NSWeekCalendarUnit, 
+ * Same as -startDateOfUnit:containingDate:, but returning the first date after the unit. For example, if unit is NSWeekCalendarUnit, 
  * the method returns the date corresponding to the first day (at midnight) of the week after the week to which the given date belongs
  */
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
 /**
- * Same as endDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
+ * Same as -endDateOfUnit:containingDate:, except that the given time zone is used. The NSCalendar time zone is ignored
  */
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as rangeOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -rangeOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSRange)rangeOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as ordinalityOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -ordinalityOfUnit:inUnit:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSUInteger)ordinalityOfUnit:(NSCalendarUnit)smaller inUnit:(NSCalendarUnit)larger forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as rangeOfUnit:startDate:interval:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -rangeOfUnit:startDate:interval:forDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as dateByAddingComponents:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -dateByAddingComponents:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
  *
- * Addition of components can be ambiguous. Please refer to the dateByAddingComponents:toDate:options: documentation for more information
+ * Addition of components can be ambiguous. Please refer to the -dateByAddingComponents:toDate:options: documentation for more information
  */
 - (NSDate *)dateByAddingComponents:(NSDateComponents *)components toDate:(NSDate *)date options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
 
 /**
- * Same as components:fromDate:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -components:fromDate:toDate:options:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSDateComponents *)components:(NSUInteger)unitFlags fromDate:(NSDate *)startDate toDate:(NSDate *)endDate options:(NSUInteger)options inTimeZone:(NSTimeZone *)timeZone;
 
@@ -136,7 +136,7 @@
 - (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date;
 
 /**
- * Same as dateAtNoonTheSameDayAsDate, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -dateAtNoonTheSameDayAsDate, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSDate *)dateAtNoonTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
@@ -146,7 +146,7 @@
 - (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date;
 
 /**
- * Same as dateAtMidnightTheSameDayAsDate, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -dateAtMidnightTheSameDayAsDate, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSDate *)dateAtMidnightTheSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
@@ -157,7 +157,7 @@
 - (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date;
 
 /**
- * Same as dateAtHour:minute:second:theSameDayAsDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -dateAtHour:minute:second:theSameDayAsDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone;
 
@@ -167,7 +167,7 @@
 - (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2;
 
 /**
- * Same as compareDaysBetweenDate:andDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -compareDaysBetweenDate:andDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone;
 
@@ -177,7 +177,7 @@
 - (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2;
 
 /**
- * Same as isDate:theSameDayAsDate:, but in the specified time zone. The NSCalendar time zone is ignored
+ * Same as -isDate:theSameDayAsDate:, but in the specified time zone. The NSCalendar time zone is ignored
  */
 - (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2 inTimeZone:(NSTimeZone *)timeZone;
 

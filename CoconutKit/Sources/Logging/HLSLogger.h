@@ -58,7 +58,11 @@ typedef enum {
  *   - add an HLSLoggerLevel setting to your project main .plist file, with one of the following values (DEBUG, INFO,
  *     WARN, ERROR or FATAL). This sets the logging level to apply
  *
- * Designated initializer: initWithLevel:
+ * HLSLogger supports XcodeColors (see https://github.com/robbiehanson/XcodeColors for the active fork), an Xcode plugin
+ * adding colors to the Xcode debugging console. Simply install the plugin and set an environment variable called 
+ * 'XcodeColors' to YES to enable it for your project.
+ *
+ * Designated initializer: -initWithLevel:
  */
 @interface HLSLogger : NSObject {
 @private

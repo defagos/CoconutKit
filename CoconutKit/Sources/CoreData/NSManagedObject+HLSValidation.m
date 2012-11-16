@@ -9,7 +9,6 @@
 #import "NSManagedObject+HLSValidation.h"
 
 #import "HLSAssert.h"
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSModelManager.h"
 #import "HLSRuntime.h"
@@ -19,8 +18,6 @@
 #import "UITextField+HLSValidation.h"
 
 #import <objc/runtime.h>
-
-HLSLinkCategory(NSManagedObject_HLSValidation)
 
 // Return YES iff injection has been enabled. External linkage, but not public
 BOOL injectedManagedObjectValidation(void);
@@ -59,7 +56,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 #pragma mark Validation wrapper injection
 
-+ (void)injectValidation
++ (void)enable
 {
     if (s_injectedManagedObjectValidation) {
         HLSLoggerInfo(@"Managed object validations already injected");
@@ -482,13 +479,12 @@ static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd)
         //   - (BOOL)validate<fieldName>:(id *)pValue error:(NSError **)pError
         NSString *validationSelectorName = [NSString stringWithFormat:@"validate%@%@:error:", [[propertyName substringToIndex:1] uppercaseString], 
                                             [propertyName substringFromIndex:1]];
-        NSString *types = [NSString stringWithFormat:@"%s%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(id *), @encode(NSError *)];
         if (! class_addMethod(self, 
                               NSSelectorFromString(validationSelectorName),         // Remark: (SEL)[validationSelectorName cStringUsingEncoding:NSUTF8StringEncoding] 
                               // does NOT work (returns YES, but IMP does not get called since the selector has not 
                               // been properly registered in this case)
                               (IMP)validateProperty, 
-                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+                              "c@:^@@")) {
             HLSLoggerError(@"Failed to add %@ method dynamically", validationSelectorName);
             continue;
         }
@@ -501,23 +497,22 @@ static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd)
     
     // If at least one validation method was injected (i.e. if there are fields to validate), we must also inject a global validation
     if (added) {
-        NSString *types = [NSString stringWithFormat:@"%s%s%s%s", @encode(BOOL), @encode(id), @encode(SEL), @encode(NSError *)];
         if (! class_addMethod(self, 
                               @selector(validateForInsert:), 
                               (IMP)validateObjectConsistency,
-                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+                              "c@:@")) {
             HLSLoggerError(@"Failed to add validateForInsert: method dynamically");
         }
         if (! class_addMethod(self, 
                               @selector(validateForUpdate:), 
                               (IMP)validateObjectConsistency,
-                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+                              "c@:@")) {
             HLSLoggerError(@"Failed to add validateForUpdate: method dynamically");
         }        
         if (! class_addMethod(self, 
                               @selector(validateForDelete:), 
                               (IMP)validateObjectConsistency,
-                              [types cStringUsingEncoding:NSUTF8StringEncoding])) {
+                              "c@:@")) {
             HLSLoggerError(@"Failed to add validateForDelete: method dynamically");
         }
     }    

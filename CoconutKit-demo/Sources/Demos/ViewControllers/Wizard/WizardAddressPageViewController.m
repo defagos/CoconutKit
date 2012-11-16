@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) Person *person;
 
+- (void)reloadData;
+
 - (UILabel *)errorLabelForTextField:(UITextField *)textField;
 
 @end
@@ -24,8 +26,8 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
-        self.person = [[Person allObjects] firstObject];
+    if ((self = [super init])) {
+        self.person = [[Person allObjects] firstObject_hls];
         NSAssert(self.person != nil, @"A person must be available");
     }
     return self;
@@ -98,35 +100,6 @@
     [self reloadData];
 }
 
-#pragma mark HLSReloadable protocol implementation
-
-- (void)reloadData
-{
-    [self.streetTextField bindToManagedObject:self.person 
-                                    fieldName:@"street"
-                                    formatter:nil 
-                           validationDelegate:self];
-    [self.streetTextField setCheckingOnChange:YES];
-    [self.cityTextField bindToManagedObject:self.person
-                                  fieldName:@"city"
-                                  formatter:nil 
-                         validationDelegate:self];
-    [self.cityTextField setCheckingOnChange:YES];
-    [self.stateTextField bindToManagedObject:self.person 
-                                   fieldName:@"state"
-                                   formatter:nil 
-                          validationDelegate:self];
-    [self.stateTextField setCheckingOnChange:YES];
-    [self.countryTextField bindToManagedObject:self.person 
-                                     fieldName:@"country"
-                                     formatter:nil 
-                            validationDelegate:self];
-    [self.countryTextField setCheckingOnChange:YES];
-    
-    // Performs and initial complete validation
-    [self checkTextFields];
-}
-
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
@@ -170,6 +143,35 @@
     
     UILabel *errorLabel = [self errorLabelForTextField:textField];
     errorLabel.text = [error localizedDescription];
+}
+
+#pragma mark Updating the view
+
+- (void)reloadData
+{
+    [self.streetTextField bindToManagedObject:self.person
+                                    fieldName:@"street"
+                                    formatter:nil
+                           validationDelegate:self];
+    [self.streetTextField setCheckingOnChange:YES];
+    [self.cityTextField bindToManagedObject:self.person
+                                  fieldName:@"city"
+                                  formatter:nil
+                         validationDelegate:self];
+    [self.cityTextField setCheckingOnChange:YES];
+    [self.stateTextField bindToManagedObject:self.person
+                                   fieldName:@"state"
+                                   formatter:nil
+                          validationDelegate:self];
+    [self.stateTextField setCheckingOnChange:YES];
+    [self.countryTextField bindToManagedObject:self.person
+                                     fieldName:@"country"
+                                     formatter:nil
+                            validationDelegate:self];
+    [self.countryTextField setCheckingOnChange:YES];
+    
+    // Performs and initial complete validation
+    [self checkTextFields];
 }
 
 #pragma mark Retrieving the error label associated with a text field

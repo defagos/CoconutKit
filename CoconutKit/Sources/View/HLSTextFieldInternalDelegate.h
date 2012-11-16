@@ -14,7 +14,7 @@
  * HLSTextFieldInternalDelegate class. To use it, simply inherit from it, and implement the delegate methods you need
  * (calling the super method in their implementation)
  *
- * Designated initializer: initWithTextField:
+ * Designated initializer: -initWithTextField:
  */
 @interface HLSTextFieldInternalDelegate : NSObject <UITextFieldDelegate> {
 @private

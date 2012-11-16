@@ -9,13 +9,10 @@
 #import "NSManagedObject+HLSExtensions.h"
 
 #import "HLSAssert.h"
-#import "HLSCategoryLinker.h"
 #import "HLSLogger.h"
 #import "HLSManagedObjectCopying.h"
 #import "HLSModelManager.h"
 #import "NSObject+HLSExtensions.h"
-
-HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 @implementation NSManagedObject (HLSExtensions)
 
@@ -23,12 +20,13 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 + (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:[self className] inManagedObjectContext:managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:[self className] 
+                                         inManagedObjectContext:managedObjectContext];
 }
 
 + (id)insert
 {
-    return [self insertIntoManagedObjectContext:[HLSModelManager defaultModelContext]];
+    return [self insertIntoManagedObjectContext:[HLSModelManager currentModelContext]];
 }
 
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
@@ -36,6 +34,10 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
+    if (! managedObjectContext) {
+        HLSLoggerError(@"Missing managed object context");
+        return nil;
+    }
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
@@ -59,7 +61,25 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 {
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors 
-                        inManagedObjectContext:[HLSModelManager defaultModelContext]];
+                        inManagedObjectContext:[HLSModelManager currentModelContext]];
+}
+
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                    inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self filteredObjectsUsingPredicate:predicate
+                        sortedUsingDescriptors:sortDescriptors 
+                        inManagedObjectContext:managedObjectContext];
+}
+
++ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
+                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self filteredObjectsUsingPredicate:predicate
+                        sortedUsingDescriptors:sortDescriptors];
 }
 
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
@@ -72,7 +92,21 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 + (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
 {
-    return [self allObjectsSortedUsingDescriptors:sortDescriptors inManagedObjectContext:[HLSModelManager defaultModelContext]];
+    return [self allObjectsSortedUsingDescriptors:sortDescriptors inManagedObjectContext:[HLSModelManager currentModelContext]];
+}
+
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+                      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self allObjectsSortedUsingDescriptors:sortDescriptors
+                           inManagedObjectContext:managedObjectContext];
+}
+
++ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+{
+    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    return [self allObjectsSortedUsingDescriptors:sortDescriptors];
 }
 
 + (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
@@ -83,7 +117,7 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 + (NSArray *)allObjects
 {
-    return [self allObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
+    return [self allObjectsInManagedObjectContext:[HLSModelManager currentModelContext]];
 }
 
 + (void)deleteAllObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
@@ -96,7 +130,7 @@ HLSLinkCategory(NSManagedObject_HLSExtensions)
 
 + (void)deleteAllObjects
 {
-    [self deleteAllObjectsInManagedObjectContext:[HLSModelManager defaultModelContext]];
+    [self deleteAllObjectsInManagedObjectContext:[HLSModelManager currentModelContext]];
 }
 
 #pragma mark Creating a copy

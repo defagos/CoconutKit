@@ -21,7 +21,7 @@
  * Using HLSTextField, creating forms is very easy: You usually start with a scroll view (even if the form fits 
  * on a single screen), then you add HLSTextFields to it, usually as direct children.
  *
- * Complex scroll view hierarchies are also supported. You can e.g. embbed a scroll view containing HLSTextField 
+ * Complex scroll view hierarchies are also supported. You can e.g. embed a scroll view containing HLSTextField 
  * objects within other scroll views at will. When a text field needs to be displayed, it is always the bottommost
  * scroll view which is applied an offset if needed. Always remember this fact when designing your forms.
  *
@@ -38,7 +38,7 @@
  * behavior of HLSTextField objects remains correct, but the offset animations suffer from "hiccups" because of 
  * the two effects overlapping. Since such views should be quite rare, though, this issue should not be a severe one.
  *
- * If you need to subclass HLSTextField (which should be quite rare), do not forget to implement awakeFromNib,
+ * If you need to subclass HLSTextField (which should be quite rare), do not forget to implement -awakeFromNib,
  * calling the super method first (otherwise the behavior of HLSTextFields instantiated from a xib will be
  * undefined)
  *
@@ -46,7 +46,7 @@
  *       without having to hide the keyboard. A better approach would allow fast switching between UIResponders (e.g. 
  *       a picker view, a text field, etc.)
  *
- * Designated initializer: initWithFrame:
+ * Designated initializer: -initWithFrame:
  */
 @interface HLSTextField : UITextField {
 @private

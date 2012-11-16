@@ -25,7 +25,7 @@ typedef enum {
  * provide. The appearance of the view controller (as well as its behavior under rotation) is customized by 
  * inheriting from it. As for UIViewController, this class is therefore not meant to be instantiated directly.
  *
- * As for UIViewController, if init is called instead of the designated initalizer, a xib with the same name
+ * As for UIViewController, if -init is called instead of the designated initalizer, a xib with the same name
  * as the derived class will be searched in the main bundle (the interface can also be created programmatically,
  * of course).
  *
@@ -38,9 +38,9 @@ typedef enum {
  * when clicking on the "done" button. If the page does not implement this protocol, the page is
  * always assumed to be valid.
  *
- * Designated initializer: initWithNibName:bundle:
+ * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSWizardViewController : HLSPlaceholderViewController <HLSReloadable> {
+@interface HLSWizardViewController : HLSPlaceholderViewController {
 @private
     UIButton *m_previousButton;
     UIButton *m_nextButton;

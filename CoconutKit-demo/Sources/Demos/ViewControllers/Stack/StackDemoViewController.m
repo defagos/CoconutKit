@@ -8,20 +8,34 @@
 
 #import "StackDemoViewController.h"
 
-#import "ContainerCustomizationViewController.h"
+#import "ContainmentTestViewController.h"
 #import "FixedSizeViewController.h"
+#import "HeavyViewController.h"
 #import "LandscapeOnlyViewController.h"
 #import "LifeCycleTestViewController.h"
 #import "MemoryWarningTestCoverViewController.h"
-#import "OrientationClonerViewController.h"
 #import "PortraitOnlyViewController.h"
+#import "RootStackDemoViewController.h"
 #import "StretchableViewController.h"
 #import "TransparentViewController.h"
-#import "RootStackDemoViewController.h"
+
+typedef enum {
+    ResizeMethodIndexEnumBegin = 0,
+    ResizeMethodIndexFrame = ResizeMethodIndexEnumBegin,
+    ResizeMethodIndexTransform,
+    ResizeMethodIndexEnumEnd,
+    ResizeMethodIndexEnumSize = ResizeMethodIndexEnumEnd - ResizeMethodIndexEnumBegin
+} ResizeMethodIndex;
 
 @interface StackDemoViewController ()
 
+@property (nonatomic, retain) UIPopoverController *displayedPopoverController;
+
 - (void)displayContentViewController:(UIViewController *)viewController;
+
+- (void)updateIndexInfo;
+- (NSUInteger)insertionIndex;
+- (NSUInteger)removalIndex;
 
 @end
 
@@ -31,48 +45,108 @@
 
 - (id)init
 {
-    if ((self = [super initWithNibName:[self className] bundle:nil])) {
+    if ((self = [super init])) {
         UIViewController *rootViewController = [[[LifeCycleTestViewController alloc] init] autorelease];        
         HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootViewController] autorelease];
+        stackController.delegate = self;
         stackController.title = @"HLSStackController";
         
-        // Pre-load other view controllers before display. Yep, this is possible!
-        UIViewController *firstViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:firstViewController withTransitionStyle:HLSTransitionStyleEmergeFromCenter];
-        UIViewController *secondViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:secondViewController withTransitionStyle:HLSTransitionStylePushFromRight];
-        UIViewController *thirdViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:thirdViewController withTransitionStyle:HLSTransitionStyleCoverFromRight2];
-        UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fourthViewController withTransitionStyle:HLSTransitionStyleCoverFromBottom];
-        UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:fifthViewController withTransitionStyle:HLSTransitionStylePushFromTop];
-        UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
-        [stackController pushViewController:sixthViewController withTransitionStyle:HLSTransitionStyleFlipHorizontal];
+        // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
+        // with the UIModalPresentationCurrentContext presentation style. The definesPresentationContext property is only available
+        // since iOS 5
+        if ([stackController respondsToSelector:@selector(definesPresentationContext)]) {
+            stackController.definesPresentationContext = YES;
+        }
         
-        self.insetViewController = stackController;
-        self.forwardingProperties = YES;
+        // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
+        // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
+        // behavior
+        self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
+        
+        // Pre-load other view controllers before display. Yep, this is possible!
+        UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
+        [stackController pushViewController:firstViewController 
+                        withTransitionClass:[HLSTransitionEmergeFromCenter class]
+                                   animated:NO];
+        UIViewController *secondViewController = [[[TransparentViewController alloc] init] autorelease];
+        [stackController pushViewController:secondViewController 
+                        withTransitionClass:[HLSTransitionPushFromRight class]
+                                   animated:NO];
+        UIViewController *thirdViewController = [[[TransparentViewController alloc] init] autorelease];
+        [stackController pushViewController:thirdViewController 
+                        withTransitionClass:[HLSTransitionCoverFromRightPushToBack class]
+                                   animated:NO];
+        UIViewController *fourthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:fourthViewController 
+                        withTransitionClass:[HLSTransitionCoverFromBottom class]
+                                   animated:NO];
+        UIViewController *fifthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:fifthViewController 
+                        withTransitionClass:[HLSTransitionPushFromTop class]
+                                   animated:NO];
+        UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:sixthViewController
+                        withTransitionClass:[HLSTransitionRotateVerticallyFromLeftClockwise class]
+                                   animated:NO];
+        UIViewController *seventhViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:seventhViewController
+                        withTransitionClass:[HLSTransitionFlipHorizontally class]
+                                   animated:NO];
+        
+        [self setInsetViewController:stackController atIndex:0];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    self.displayedPopoverController = nil;
+
+    [super dealloc];
 }
 
 - (void)releaseViews
 { 
     [super releaseViews];
     
+    self.sizeSlider = nil;
+    self.resizeMethodSegmentedControl = nil;
+    self.popoverButton = nil;
     self.transitionPickerView = nil;
-    self.forwardingPropertiesSwitch = nil;
+    self.autorotationModeSegmentedControl = nil;
+    self.inTabBarControllerSwitch = nil;
+    self.inNavigationControllerSwitch = nil;
+    self.animatedSwitch = nil;
+    self.indexSlider = nil;
+    self.insertionIndexLabel = nil;
+    self.removalIndexLabel = nil;
 }
 
 #pragma mark Accessors and mutators
 
+@synthesize sizeSlider = m_sizeSlider;
+
+@synthesize resizeMethodSegmentedControl = m_resizeMethodSegmentedControl;
+
+@synthesize popoverButton = m_popoverButton;
+
 @synthesize transitionPickerView = m_transitionPickerView;
+
+@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 @synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
 
 @synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
 
-@synthesize forwardingPropertiesSwitch = m_forwardingPropertiesSwitch;
+@synthesize animatedSwitch = m_animatedSwitch;
+
+@synthesize indexSlider = m_indexSlider;
+
+@synthesize insertionIndexLabel = m_insertionIndexLabel;
+
+@synthesize removalIndexLabel = m_removalIndexLabel;
+
+@synthesize displayedPopoverController = m_displayedPopoverController;
 
 #pragma mark View lifecycle
 
@@ -83,24 +157,88 @@
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    self.autorotationModeSegmentedControl.selectedSegmentIndex = stackController.autorotationMode;
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
-    self.forwardingPropertiesSwitch.on = stackController.forwardingProperties;
+    
+    self.indexSlider.minimumValue = 1.f;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark Orientation management
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
+    // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
+    // the view
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self.displayedPopoverController dismissPopoverAnimated:NO];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
+    // are able to restore them when rotating again, and set size according to the previous size slider value. This
+    // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    [self sizeChanged:nil];
+    
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
+                                                     inView:self.popoverButton
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:NO];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = @"HLSStackController";
+    
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings
 
 - (void)displayContentViewController:(UIViewController *)viewController
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
     
-    // We can even embbed navigation and tab bar controllers within a placeolder view controller!
+    // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *pushedViewController = viewController;
     if (pushedViewController) {
         if (self.inNavigationControllerSwitch.on) {
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:pushedViewController] autorelease];
+            navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             pushedViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
@@ -111,15 +249,178 @@
     }
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    [stackController pushViewController:pushedViewController withTransitionStyle:pickedIndex];
+    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    
+    @try {
+        [stackController insertViewController:pushedViewController
+                                      atIndex:[self insertionIndex]
+                          withTransitionClass:NSClassFromString(transitionName)
+                                     duration:kAnimationTransitionDefaultDuration
+                                     animated:self.animatedSwitch.on];
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
+                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+        return;
+    }
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark Miscellaneous
+
+- (void)updateIndexInfo
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    self.indexSlider.maximumValue = [stackController count];
+    self.indexSlider.value = [stackController count];
+    [self indexChanged:self.indexSlider];
+}
+
+- (NSUInteger)insertionIndex
+{
+    return roundf(self.indexSlider.value);
+}
+
+- (NSUInteger)removalIndex
+{
+    return MIN([self insertionIndex], [self.indexSlider maximumValue] - 1);
+}
+
+#pragma mark HLSStackControllerDelegate protocol implementation
+
+- (void)stackController:(HLSStackController *)stackController
+ willPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didShowViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+    
+    [self updateIndexInfo];
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didPushViewController:(UIViewController *)pushedViewController
+    coverViewController:(UIViewController *)coveredViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did push view controller %@, cover view controller %@, animated = %@", pushedViewController, coveredViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  willPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+ willHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Will hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+  didHideViewController:(UIViewController *)viewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did hide view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
+}
+
+- (void)stackController:(HLSStackController *)stackController
+   didPopViewController:(UIViewController *)poppedViewController
+   revealViewController:(UIViewController *)revealedViewController
+               animated:(BOOL)animated
+{
+    HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
+    
+    [self updateIndexInfo];
+}
+
+#pragma mark UIPickerViewDataSource protocol implementation
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] count];
+}
+
+#pragma mark UIPickerViewDelegate protocol implementation
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+}
+
+#pragma mark UIPopoverControllerDelegate protocol implementation
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.displayedPopoverController = nil;
 }
 
 #pragma mark Event callbacks
+
+- (IBAction)sizeChanged:(id)sender
+{
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    
+    if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodIndexFrame) {
+        placeholderView.bounds = CGRectMake(0.f,
+                                            0.f,
+                                            CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                            CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+    }
+    else {
+        placeholderView.transform = CGAffineTransformMakeScale(self.sizeSlider.value, self.sizeSlider.value);
+    }
+}
+
+- (IBAction)changeResizeMethod:(id)sender
+{
+    // Reset the view to its maximum size
+    self.sizeSlider.value = self.sizeSlider.maximumValue;
+    
+    UIView *placeholderView = [self placeholderViewAtIndex:0];
+    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.transform = CGAffineTransformIdentity;
+}
 
 - (IBAction)displayLifeCycleTest:(id)sender
 {
     LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
     [self displayContentViewController:lifecycleTestViewController];
+}
+
+- (IBAction)displayContainmentTest:(id)sender
+{
+    ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+    [self displayContentViewController:containmentTestViewController];
 }
 
 - (IBAction)displayStretchable:(id)sender
@@ -132,6 +433,12 @@
 {
     FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
     [self displayContentViewController:fixedSizeViewController];
+}
+
+- (IBAction)displayHeavy:(id)sender
+{
+    HeavyViewController *heavyViewController = [[[HeavyViewController alloc] init] autorelease];
+    [self displayContentViewController:heavyViewController];
 }
 
 - (IBAction)displayPortraitOnly:(id)sender
@@ -152,15 +459,6 @@
     [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
 }
 
-- (IBAction)displayOrientationCloner:(id)sender
-{
-    OrientationClonerViewController *orientationClonerViewController = [[[OrientationClonerViewController alloc] 
-                                                                         initWithPortraitOrientation:UIInterfaceOrientationIsPortrait(self.interfaceOrientation)
-                                                                         large:NO]
-                                                                        autorelease];
-    [self displayContentViewController:orientationClonerViewController];
-}
-
 - (IBAction)displayTransparent:(id)sender
 {
     TransparentViewController *transparentViewController = [[[TransparentViewController alloc] init] autorelease];
@@ -171,193 +469,85 @@
 {
     RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
     HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
+    stackController.delegate = self;
     [self presentModalViewController:stackController animated:YES];
 }
 
-- (IBAction)displayContainerCustomization:(id)sender
-{
-    ContainerCustomizationViewController *containerCustomizationViewController = [[[ContainerCustomizationViewController alloc] init] autorelease];
-    [self displayContentViewController:containerCustomizationViewController];
+- (IBAction)testInPopover:(id)sender
+{   
+    RootStackDemoViewController *rootStackDemoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+    HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
+    // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
+    stackController.delegate = self;
+    stackController.contentSizeForViewInPopover = CGSizeMake(800.f, 600.);
+    self.displayedPopoverController = [[[UIPopoverController alloc] initWithContentViewController:stackController] autorelease];
+    self.displayedPopoverController.delegate = self;
+    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
+                                                     inView:self.popoverButton
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:YES];
 }
 
 - (IBAction)pop:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
-    [stackController popViewController];
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    [stackController removeViewControllerAtIndex:[self removalIndex] animated:self.animatedSwitch.on];
 }
 
-- (IBAction)toggleForwardingProperties:(id)sender
+- (IBAction)popToRoot:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)self.insetViewController;
-    stackController.forwardingProperties = self.forwardingPropertiesSwitch.on;
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    [stackController popToRootViewControllerAnimated:self.animatedSwitch.on];
 }
 
-#pragma mark UIPickerViewDataSource protocol implementation
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (IBAction)popThree:(id)sender
 {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return HLSTransitionStyleEnumSize;
-}
-
-#pragma mark UIPickerViewDelegate protocol implementation
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    switch (row) {
-        case HLSTransitionStyleNone: {
-            return @"HLSTransitionStyleNone";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom: {
-            return @"HLSTransitionStyleCoverFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop: {
-            return @"HLSTransitionStyleCoverFromTop";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft: {
-            return @"HLSTransitionStyleCoverFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight: {
-            return @"HLSTransitionStyleCoverFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft: {
-            return @"HLSTransitionStyleCoverFromTopLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight: {
-            return @"HLSTransitionStyleCoverFromTopRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft: {
-            return @"HLSTransitionStyleCoverFromBottomLeft";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight: {
-            return @"HLSTransitionStyleCoverFromBottomRight";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottom2: {
-            return @"HLSTransitionStyleCoverFromBottom2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTop2: {
-            return @"HLSTransitionStyleCoverFromTop2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromLeft2: {
-            return @"HLSTransitionStyleCoverFromLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromRight2: {
-            return @"HLSTransitionStyleCoverFromRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopLeft2: {
-            return @"HLSTransitionStyleCoverFromTopLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromTopRight2: {
-            return @"HLSTransitionStyleCoverFromTopRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomLeft2: {
-            return @"HLSTransitionStyleCoverFromBottomLeft2";
-            break;
-        }
-            
-        case HLSTransitionStyleCoverFromBottomRight2: {
-            return @"HLSTransitionStyleCoverFromBottomRight2";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn: {
-            return @"HLSTransitionStyleFadeIn";
-            break;
-        }
-            
-        case HLSTransitionStyleFadeIn2: {
-            return @"HLSTransitionStyleFadeIn2";
-            break;
-        }
-            
-        case HLSTransitionStyleCrossDissolve: {
-            return @"HLSTransitionStyleCrossDissolve";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromBottom: {
-            return @"HLSTransitionStylePushFromBottom";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromTop: {
-            return @"HLSTransitionStylePushFromTop";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromLeft: {
-            return @"HLSTransitionStylePushFromLeft";
-            break;
-        }
-            
-        case HLSTransitionStylePushFromRight: {
-            return @"HLSTransitionStylePushFromRight";
-            break;
-        }
-            
-        case HLSTransitionStyleEmergeFromCenter: {
-            return @"HLSTransitionStyleEmergeFromCenter";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipVertical: {
-            return @"HLSTransitionStyleFlipVertical";
-            break;
-        }
-            
-        case HLSTransitionStyleFlipHorizontal: {
-            return @"HLSTransitionStyleFlipHorizontal";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    NSArray *viewControllers = [stackController viewControllers];
+    UIViewController *targetViewController = nil;
+    if ([viewControllers count] >= 4) {
+        targetViewController = [viewControllers objectAtIndex:[viewControllers count] - 4];
     }
+    else {
+        targetViewController = [stackController rootViewController];
+    }
+    [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
 }
 
-#pragma mark Localization
-
-- (void)localize
+- (IBAction)testResponderChain:(id)sender
 {
-    [super localize];
-    
-    // Just to suppress localization warning
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
+- (IBAction)changeAutorotationMode:(id)sender
+{
+    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
+}
+
+- (IBAction)indexChanged:(id)sender
+{
+    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", @"Insertion index: %d"),
+                                     [self insertionIndex]];
+    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", @"Removal index: %d"),
+                                   [self removalIndex]];
+}
+
+- (IBAction)navigateForwardNonAnimated:(id)sender
+{
+    StackDemoViewController *stackDemoViewController = [[[StackDemoViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:stackDemoViewController animated:NO];
+}
+
+- (IBAction)navigateBackNonAnimated:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

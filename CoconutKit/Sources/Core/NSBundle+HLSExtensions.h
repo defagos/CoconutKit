@@ -9,14 +9,14 @@
 @interface NSBundle (HLSExtensions)
 
 /**
- * Returns the friendly Hortis version number using the bundle version
+ * Return the friendly Hortis version number using the bundle version
  *
- * See NSString friendlyVersionNumber extension method (NSString+HLSExtensions.h)
+ * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
 + (NSString *)friendlyVersionNumber;
 
 /**
- * Returns the "resources" bundle (images + nibs + localizations)
+ * Return the "resources" bundle (images + nibs + localizations)
  */
 + (NSBundle *)coconutKitBundle;
 

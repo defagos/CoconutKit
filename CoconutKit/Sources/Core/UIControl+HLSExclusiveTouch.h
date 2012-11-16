@@ -7,24 +7,14 @@
 //
 
 /**
- * Simply call this macro somewhere in global scope to enable the UIControl injection early, disabling quasi-
- * simultaneous taps. Good places are for example main.m or your application delegate .m file
- */
-#define HLSEnableUIControlExclusiveTouch()                                                                \
-    __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                  \
-    {                                                                                                     \
-        [UIControl injectExclusiveTouch];                                                                 \
-    }
-
-/**
- * Globally sets exclusiveTouch for all UIControl objects, preventing quasi-simultaneous taps.
+ * Globally set exclusive touch to YES for all UIControl objects, preventing quasi-simultaneous taps.
  */
 @interface UIControl (HLSExclusiveTouch)
 
 /**
- * Call this method as soon as possible if you want to disable quasi-simultaneous taps for your whole application. For 
- * simplicity you should use the HLSEnableUIControlInjection convenience macro instead
+ * Call this method as soon as possible if you want to prevent quasi-simultaneous taps for your whole application. For 
+ * simplicity you should use the HLSEnableUIControlExclusiveTouch convenience macro instead (see HLSOptionalFeatures.h)
  */
-+ (void)injectExclusiveTouch;
++ (void)enable;
 
 @end
