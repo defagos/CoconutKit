@@ -108,22 +108,6 @@ static NSArray *s_folders = nil;
     self.mixedFoldersCursor.delegate = self;
 }
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-}
-
 #pragma mark Memory warnings
 
 - (void)didReceiveMemoryWarning

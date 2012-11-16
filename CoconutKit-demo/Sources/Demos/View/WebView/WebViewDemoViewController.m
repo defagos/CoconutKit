@@ -42,22 +42,6 @@
     self.scrollEnabledSwitch.on = self.webView.scrollView.scrollEnabled;
 }
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-}
-
 #pragma mark Localization
 
 - (void)localize

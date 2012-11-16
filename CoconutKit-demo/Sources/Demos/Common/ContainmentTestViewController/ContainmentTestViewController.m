@@ -109,20 +109,6 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-}
-
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];

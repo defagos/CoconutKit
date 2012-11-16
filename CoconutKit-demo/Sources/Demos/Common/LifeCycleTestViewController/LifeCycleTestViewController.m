@@ -77,18 +77,14 @@
 {
     HLSLoggerInfo(@"Called");
     
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
+    return [super shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
     HLSLoggerInfo(@"Called");
     
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
+    return [super supportedInterfaceOrientations];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

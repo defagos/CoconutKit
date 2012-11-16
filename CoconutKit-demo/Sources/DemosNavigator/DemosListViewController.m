@@ -140,15 +140,6 @@ typedef enum {
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (NSUInteger)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;

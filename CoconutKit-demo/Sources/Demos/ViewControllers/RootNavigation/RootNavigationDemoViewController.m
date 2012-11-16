@@ -125,11 +125,7 @@
 {
     HLSLoggerInfo(@"Called");
     
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
+    return [super shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations

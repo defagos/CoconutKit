@@ -158,15 +158,15 @@
 
 - (BOOL)shouldAutorotate
 {
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
+    HLSLoggerInfo(@"Called");
     
-    return YES;
+    return [super shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
+    HLSLoggerInfo(@"Called");
+    
     NSUInteger supportedOrientations = 0;
     if ([self isViewLoaded]) {
         if (self.portraitSwitch.on) {

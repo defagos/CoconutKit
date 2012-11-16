@@ -36,22 +36,6 @@
     self.textField2.resigningFirstResponderOnTap = NO;
 }
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-}
-
 #pragma mark Accessors and mutators
 
 @synthesize textField1 = m_textField1;

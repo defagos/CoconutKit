@@ -74,7 +74,6 @@
 - (NSUInteger)supportedInterfaceOrientations
 {   
     // Code, most probably one of:
-    // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
     // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
     // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscape;
     // return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;

@@ -143,20 +143,10 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (NSUInteger)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
-
 
 #pragma mark Localization
 

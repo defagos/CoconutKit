@@ -87,22 +87,6 @@ typedef enum {
 
 @synthesize filteredDevices = m_filteredDevices;
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-}
-
 #pragma mark UISearchDisplayDelegate protocol implementation
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller

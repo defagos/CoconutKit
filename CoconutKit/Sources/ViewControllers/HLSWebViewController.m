@@ -122,18 +122,13 @@
 
 #pragma mark Orientation management
 
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
 - (NSUInteger)supportedInterfaceOrientations
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationMaskAllButUpsideDown;
+        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {
-        return UIInterfaceOrientationMaskAll;
+        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
     }
 }
 
