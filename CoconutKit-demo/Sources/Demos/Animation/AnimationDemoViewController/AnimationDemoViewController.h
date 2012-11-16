@@ -15,6 +15,7 @@
     UIButton *m_pauseButton;
     UIButton *m_cancelButton;
     UIButton *m_terminateButton;
+    UIView *m_settingsView;
     UISwitch *m_reverseSwitch;
     UISwitch *m_lockingUISwitch;
     UISwitch *m_loopingSwitch;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *pauseButton;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *terminateButton;
+@property (nonatomic, retain) IBOutlet UIView *settingsView;
 @property (nonatomic, retain) IBOutlet UISwitch *reverseSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *lockingUISwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *loopingSwitch;

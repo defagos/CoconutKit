@@ -58,6 +58,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     self.pauseButton = nil;
     self.cancelButton = nil;
     self.terminateButton = nil;
+    self.settingsView = nil;
     self.reverseSwitch = nil;
     self.lockingUISwitch = nil;
     self.loopingSwitch = nil;
@@ -108,6 +109,8 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 @synthesize cancelButton = m_cancelButton;
 
 @synthesize terminateButton = m_terminateButton;
+
+@synthesize settingsView = m_settingsView;
 
 @synthesize reverseSwitch = m_reverseSwitch;
 
@@ -193,12 +196,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         self.pauseButton.hidden = self.animation.paused;
         self.cancelButton.hidden = NO;
         self.terminateButton.hidden = NO;
+        self.settingsView.hidden = YES;
     }
     else {
         self.playButton.hidden = NO;
         self.pauseButton.hidden = YES;
         self.cancelButton.hidden = YES;
         self.terminateButton.hidden = YES;
+        self.settingsView.hidden = NO;
     }
 }
 
