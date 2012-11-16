@@ -215,11 +215,17 @@
 
 - (IBAction)nextImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToNextImage];
 }
 
 - (IBAction)previousImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToPreviousImage];
 }
 
