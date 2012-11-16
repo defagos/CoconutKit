@@ -152,7 +152,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
-    CGFloat xPos = floorf(fabs(self.frame.size.width - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
+    CGFloat xPos = floorf(fabsf(self.frame.size.width - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
     if (floatgt(totalWidth, self.frame.size.width)) {
         HLSLoggerWarn(@"Cursor frame not wide enough");
         xPos = -xPos;
@@ -343,7 +343,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     [self swapElementViewAtIndex:m_selectedIndex selected:NO];
     
     // Notify deselection
-    HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
     if (m_viewsCreated && [self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
         [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
     }
@@ -363,7 +362,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // previously selected. This is needed (and makes sense) since the deselect event is sent as soon the user
     // starts dragging the pointer. Even if we arrive on the same element as before, we must get the corresponding
     // anti-event, i.e. select.
-    HLSLoggerDebug(@"Calling cursor:didMoveToIndex:");
     if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
         [self.delegate cursor:self didMoveToIndex:index];
     }
@@ -536,12 +534,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             
             [self swapElementViewAtIndex:m_selectedIndex selected:NO];
             
-            HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
             if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
                 [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
             }
             
-            HLSLoggerDebug(@"Calling cursorDidStartDragging:");
             if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
                 [self.delegate cursorDidStartDragging:self];
             }
@@ -554,7 +550,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if (m_grabbed) {
         CGFloat xPos = point.x - m_initialDraggingXOffset;
         self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
-        HLSLoggerDebug(@"Calling cursor:didDragNearIndex:");
         if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
             [self.delegate cursor:self didDragNearIndex:[self indexForXPos:xPos]];
         }
@@ -578,7 +573,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         NSUInteger index = [self indexForXPos:point.x];
         [self setSelectedIndex:index animated:animated];
         
-        HLSLoggerDebug(@"Calling cursorDidStopDragging:");
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
             [self.delegate cursorDidStopDragging:self];
         }
