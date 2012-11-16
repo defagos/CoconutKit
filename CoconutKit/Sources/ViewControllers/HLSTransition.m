@@ -64,14 +64,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 + (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
                                                      yOffset:(CGFloat)yOffset
                                            aroundVectorWithX:(CGFloat)x
-                                                      y:(CGFloat)y
-                                                      z:(CGFloat)z
-                                       counterclockwise:(BOOL)counterclockwise
-                                     cameraZTranslation:(CGFloat)cameraZTranslation
-                                          appearingView:(UIView *)appearingView
-                                       disappearingView:(UIView *)disappearingView
-                                                 inView:(UIView *)view
-                                             withBounds:(CGRect)bounds;
+                                                           y:(CGFloat)y
+                                                           z:(CGFloat)z
+                                            counterclockwise:(BOOL)counterclockwise
+                                          cameraZTranslation:(CGFloat)cameraZTranslation
+                                               appearingView:(UIView *)appearingView
+                                            disappearingView:(UIView *)disappearingView
+                                                      inView:(UIView *)view
+                                                  withBounds:(CGRect)bounds;
 
 @end
 

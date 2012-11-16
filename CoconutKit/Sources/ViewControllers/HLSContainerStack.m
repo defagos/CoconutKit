@@ -22,7 +22,7 @@ const NSUInteger HLSContainerStackMinimalCapacity = 1;
 const NSUInteger HLSContainerStackDefaultCapacity = 2;
 const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
-@interface HLSContainerStack ()
+@interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
 @property (nonatomic, assign) UIViewController *containerViewController;
 @property (nonatomic, retain) NSMutableArray *containerContents;
@@ -123,6 +123,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Create the container base view maintaining the whole container view hiearchy
         HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
+        containerStackView.delegate = self;
         [containerView addSubview:containerStackView];
     }
     
@@ -653,6 +654,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    m_rotating = YES;
+    
     if ([self.containerContents count] != 0) {
         // Avoid frame issues due to rotation
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
@@ -819,6 +822,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
     }
+    
+    m_rotating = NO;
 }
 
 /**
@@ -1105,7 +1110,65 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     
         [disappearingViewController release];
-    }    
+    }
+}
+
+#pragma mark HLSContainerStackViewDelegate protocol implementation
+
+- (void)containerStackViewWillChangeFrame:(HLSContainerStackView *)containerStackView
+{
+    // The trick below is also performed during rotations (which might alter the stack view frame). Skip
+    if (m_rotating) {
+        return;
+    }
+    
+    // Children are pushed with layer animations (i.e. transform animations). Those do not play well wit frame changes.
+    // To solve those issues, we reset the children views to their initial state before the frame is changed (the
+    // previous state is then restored after the frame has changed, see below)
+    for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+        NSUInteger index = [self.containerContents count] - 1 - i;
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+        
+        if ([containerContent viewIfLoaded]) {
+            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+            if (! groupView) {
+                continue;
+            }
+            
+            HLSAnimation *reverseAnimation = [[containerContent.transitionClass animationWithAppearingView:groupView.frontView
+                                                                                          disappearingView:groupView.backView
+                                                                                                    inView:groupView
+                                                                                                  duration:0.] reverseAnimation];
+            [reverseAnimation playAnimated:NO];
+        }
+    }
+}
+
+- (void)containerStackViewDidChangeFrame:(HLSContainerStackView *)containerStackView
+{
+    // The trick below is also performed during rotations (which might alter the stack view frame). Skip
+    if (m_rotating) {
+        return;
+    }
+    
+    // See comment in -containerStackViewWillChangeFrame:
+    for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+        NSUInteger index = [self.containerContents count] - 1 - i;
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+        
+        if ([containerContent viewIfLoaded]) {
+            HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
+            if (! groupView) {
+                continue;
+            }
+            
+            HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
+                                                                                  disappearingView:groupView.backView
+                                                                                            inView:groupView
+                                                                                          duration:0.];
+            [animation playAnimated:NO];
+        }
+    }
 }
 
 #pragma mark Description

@@ -36,6 +36,7 @@
 - (void)dealloc
 {
     self.groupViews = nil;
+    self.delegate = nil;
 
     [super dealloc];
 }
@@ -43,6 +44,15 @@
 #pragma mark Accessors and mutators
 
 @synthesize groupViews = m_groupViews;
+
+@synthesize delegate = m_delegate;
+
+- (void)setFrame:(CGRect)frame
+{
+    [self.delegate containerStackViewWillChangeFrame:self];
+    [super setFrame:frame];
+    [self.delegate containerStackViewDidChangeFrame:self];
+}
 
 #pragma mark View management
 

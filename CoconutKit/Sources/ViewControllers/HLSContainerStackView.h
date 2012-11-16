@@ -8,6 +8,9 @@
 
 #import "HLSContainerGroupView.h"
 
+// Forward declarations
+@protocol HLSContainerStackViewDelegate;
+
 /**
  * Private class for managing the view hierarchy of an HLSContainerStack (the generic class which CoconutKit provides 
  * to implement custom view controller containers, and upon which CoconutKit containers are themselves built). 
@@ -101,6 +104,7 @@
 @interface HLSContainerStackView : UIView {
 @private
     NSMutableArray *m_groupViews;               // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
+    id<HLSContainerStackViewDelegate> m_delegate;
 }
 
 /**
@@ -122,5 +126,21 @@
  * Return the group view containing a given view as topmost subview. Return nil if not found
  */
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
+
+@property (nonatomic, assign) id<HLSContainerStackViewDelegate> delegate;
+
+@end
+
+@protocol HLSContainerStackViewDelegate <NSObject>
+
+/**
+ * Called right before the container view frame changes
+ */
+- (void)containerStackViewWillChangeFrame:(HLSContainerStackView *)containerStackView;
+
+/**
+ * Called right after the container view frame changed
+ */
+- (void)containerStackViewDidChangeFrame:(HLSContainerStackView *)containerStackView;
 
 @end

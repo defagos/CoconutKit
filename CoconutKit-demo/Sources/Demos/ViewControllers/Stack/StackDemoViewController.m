@@ -86,6 +86,10 @@ typedef enum {
                                    animated:NO];
         UIViewController *sixthViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [stackController pushViewController:sixthViewController
+                        withTransitionClass:[HLSTransitionRotateVerticallyFromLeftClockwise class]
+                                   animated:NO];
+        UIViewController *seventhViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        [stackController pushViewController:seventhViewController
                         withTransitionClass:[HLSTransitionFlipHorizontally class]
                                    animated:NO];
         

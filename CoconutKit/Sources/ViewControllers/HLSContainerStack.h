@@ -124,6 +124,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
     BOOL m_removing;                                           // If YES, view controllers over capacity are removed from the stack, otherwise their views are simply unloaded
     BOOL m_rootViewControllerFixed;                            // Is the root view controller fixed?
     BOOL m_animating;                                          // Set to YES when a transition animation is running
+    BOOL m_rotating;
     HLSAutorotationMode m_autorotationMode;                    // How the container decides to behave when rotation occurs
     id<HLSContainerStackDelegate> m_delegate;                  // The stack delegate, usually the custom container which is implemented
 }
