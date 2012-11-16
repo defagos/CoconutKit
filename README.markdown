@@ -109,14 +109,26 @@ Learning how to use CoconutKit components always starts with header documentatio
 
 Good documentation is critical. If you think some documentation is missing, unclear or incorrect, please file a ticket.
 
-### Versions
+### Versions and migration guide
 
-I sadly have not enough time to develop new features or to refactor existing ones while keeping CoconutKit public APIs unchanged. Sometimes method prototypes or even class names must change, and I cannot afford marking methods or classes as deprecated while still maintaining them.
+I sadly have not enough time to develop new features and to refactor existing ones while keeping CoconutKit public APIs unchanged or backward compatible. Sometimes method prototypes or even class names must change, and I cannot afford marking methods or classes as deprecated while still maintaining them. Let's face the truth: CoconutKit is not yet widely enough used to justify the amount of work which would be required.
 
-When updating the version of CoconutKit you use, you therefore should keep in mind that:
+When updating the version of CoconutKit you use, your project might therefore not compile anymore. In general, you should keep in mind that:
 
 * major versions might contain major changes to the public APIs
 * minor versions should only contain minor changes
+
+#### Migrating from 1.x to 2.x
+
+Version 2.0 is a major improvement over 1.x, which means several classes have undergone major changes. As usual, please read the header documentation to find what has changed:
+
+* View controller containers:
+	* Placeholder view controllers can now display several insets simultaneously, intead of just one. The `placeholderView` outlet has therefore been replaced with a `placeholderViews` outlet collection, and you need to update your code and nib files accordingly. Methods to set an inset view controller now require a new index parameter specifying which inset must be set. Moreover, transition animations are not specified anymore using an enum value, but rather using a class
+	* Stack controllers transition animations are not specified anymore using an enum value, but rather using a class. An `animated` parameter has also been added to push and pop methods
+	* The CoconutKit container `forwardingProperties` setting has been removed. If you relied on it, you will need to update your code accordingly
+* HLSViewController autorotation is now managed using the new methods introduced with iOS 6, on iOS 4 and 5 as well. All your HLSViewController subclasses must be updated accordingly by removing any existing `-shouldAutorotateToInterfaceOrientation:` implementation, replacing it with `-shouldAutorotate` and `-supportedInterfaceOrientations` implementations
+* The way your create an `HLSAnimation` has changed. `HLSAnimationStep` has now been split into `HLSViewAnimationStep` (for UIView block-based animation steps) and `HLSLayerAnimationStep` (for Core Animation layer-based animation steps). The old `HLSViewAnimationStep` has been replaced with `HLSViewAnimation` for UIView block-based animations, and a corresponding `HLSLayerAnimation` has been introduced. The animations you previously defined by setting transforms on `HLSViewAnimationStep` are now created by calling translation, rotation or scale methods on `HLSViewAnimation`, respectively `HLSLayerAnimation`
+* Core Data: Explicit managed contexts have been eliminated. You now must create an `HLSModelManager` object and use the corresponding class methods to push it onto a stack for the current thread. Then use the `HLSModelManager` context-free methods to interact with the store
 
 ### Credits
 
@@ -230,6 +242,7 @@ Several clever classes (e.g. dynamic localization, web view controller) and othe
 * CoconutKit containers have been rewritten from scratch and are now more powerful than ever:
 	* Support for iOS 4, 5 and 6
 	* Correct implementation of all view controller methods introduced with iOS 4 and 5
+	* Placeholder view controllers can now display several child view controllers (previously only one)
 	* Full compatibility with UIKit built-in containers
 	* New transition animations, which can now be completely customized
 	* Segue support on iOS 5 and above
