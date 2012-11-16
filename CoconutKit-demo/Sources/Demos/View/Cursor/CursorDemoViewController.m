@@ -90,9 +90,9 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
     self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
-    [self.randomRangeCursor moveToIndex:4 animated:NO];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
+    [self.randomRangeCursor moveToIndex:4 animated:NO];
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
@@ -121,7 +121,7 @@ static NSArray *s_folders = nil;
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
 }
 
 #pragma mark Memory warnings
@@ -245,6 +245,8 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index
 {
+    HLSLoggerInfo(@"Cursor %p did move from index %d", cursor, index);
+    
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
         self.weekDayIndexLabel.textColor = [UIColor redColor];
@@ -257,6 +259,8 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index
 {
+    HLSLoggerInfo(@"Cursor %p did move to index %d", cursor, index);
+    
     if (cursor == self.weekDaysCursor) {
         self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
         self.weekDayIndexLabel.textColor = [UIColor blackColor];
@@ -272,6 +276,8 @@ static NSArray *s_folders = nil;
 
 - (void)cursorDidStartDragging:(HLSCursor *)cursor
 {
+    HLSLoggerInfo(@"Cursor %p did start dragging", cursor);
+    
     if (cursor == self.randomRangeCursor) {
         if (! self.popoverController) {
             CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
@@ -283,6 +289,8 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index
 {
+    HLSLoggerInfo(@"Cursor %p did drag near index %d", cursor, index);
+    
     if (cursor == self.randomRangeCursor) {
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
         infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
@@ -300,6 +308,8 @@ static NSArray *s_folders = nil;
 
 - (void)cursorDidStopDragging:(HLSCursor *)cursor
 {
+    HLSLoggerInfo(@"Cursor %p did stop dragging", cursor);
+    
     if (cursor == self.randomRangeCursor) {
         [self.popoverController dismissPopoverAnimated:NO];
     }

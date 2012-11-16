@@ -43,7 +43,7 @@
     UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
-    CGFloat m_xPos;
+    NSUInteger m_selectedIndex;
     BOOL m_dragging;
     CGFloat m_initialDraggingXOffset;
     BOOL m_grabbed;
@@ -77,7 +77,7 @@
 
 /**
  * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value
- * is only updated as soon as the pointer reaches a new element.
+ * is only updated as soon as the pointer reaches a new element
  */
 - (NSUInteger)selectedIndex;
 

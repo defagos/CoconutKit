@@ -202,6 +202,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         
         [self setSelectedIndex:m_initialIndex animated:NO];
     }
+    else if (! m_dragging) {
+        self.pointerContainerView.frame = [self pointerFrameForIndex:m_selectedIndex];
+    }
     
     m_viewsCreated = YES;
 }
@@ -298,12 +301,17 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (NSUInteger)selectedIndex
 {
-    return [self indexForXPos:m_xPos];
+    return m_selectedIndex;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
-{   
-    m_xPos = [self xPosForIndex:selectedIndex];
+{
+    if (m_viewsCreated && [self.elementViews count] > 0 && selectedIndex >= [self.elementViews count]) {
+        HLSLoggerWarn(@"Index outside range. Set to last index");
+        selectedIndex = [self.elementViews count] - 1;
+    }
+    
+    m_selectedIndex = selectedIndex;
     
     if (self.elementViews) {
         if (animated) {
@@ -332,13 +340,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)deselectPreviousIndex
 {
     // Set appearance of previously selected element view to "not selected"
-    NSUInteger previousIndex = [self indexForXPos:m_xPos];
-    [self swapElementViewAtIndex:previousIndex selected:NO];
+    [self swapElementViewAtIndex:m_selectedIndex selected:NO];
     
     // Notify deselection
     HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
-    if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-        [self.delegate cursor:self didMoveFromIndex:previousIndex];
+    if (m_viewsCreated && [self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+        [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
     }
 }
 
@@ -492,7 +499,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
     
-    m_xPos = 0.f;
+    m_selectedIndex = 0;
     m_viewsCreated = NO;
 }
 
@@ -524,12 +531,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             // initially touched at its center
             m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
             
-            NSUInteger index = [self indexForXPos:m_xPos];
-            [self swapElementViewAtIndex:index selected:NO];
+            [self swapElementViewAtIndex:m_selectedIndex selected:NO];
             
             HLSLoggerDebug(@"Calling cursor:didMoveFromIndex:");
             if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-                [self.delegate cursor:self didMoveFromIndex:index];
+                [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
             }
             
             HLSLoggerDebug(@"Calling cursorDidStartDragging:");
