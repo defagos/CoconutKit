@@ -509,8 +509,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     // Might be a click, or a click and hold (which will then trigger a drag event)
     CGPoint point = [[touches anyObject] locationInView:self];
-    [self deselectPreviousIndex];
-    [self setSelectedIndex:[self indexForXPos:point.x] animated:YES];
+    NSUInteger index = [self indexForXPos:point.x];
+    if (index != m_selectedIndex) {
+        [self deselectPreviousIndex];
+        [self setSelectedIndex:index animated:YES];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
