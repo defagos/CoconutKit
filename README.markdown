@@ -42,6 +42,10 @@ CoconutKit is and will stay free. However, if you enjoy using it, you can suppor
 
 [![Donate to author](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=3V35ZXWYXGAYG&lc=CH&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
+### Credits
+
+If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
+
 ### How can I discover CoconutKit components?
 
 Check out the CoconutKit source code repository by visiting [the official project github page](https://github.com/defagos/CoconutKit), open the workspace and either run the `CoconutKit-demo` or the `CoconutKit-dev` targets. The result of running those targets is the same, the only difference is that `CoconutKit-demo` compiles and builds the CoconutKit library source code before using the resulting binaries, whereas `CoconutKit-dev` includes and compiles all libary sources as part of the project itself.
@@ -56,7 +60,7 @@ You can add CoconutKit to your project in several different ways:
 
 #### Adding binaries manually
 
-You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project (_Create groups for any added folders_ must be checked) and link your project against the following system frameworks:
+You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project (the _Create groups for any added folders_ option must be checked) and link your project against the following system frameworks:
 
 * `CoreData.framework`
 * `MessageUI.framework`
@@ -89,10 +93,10 @@ CoconutKit uses a logger to provide valuable information about its internal stat
 	* Link your project against the debug version of the CoconutKit `.staticframework` (edit your project debug configuration settings so that the debug binaries are used)
 	* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
 * If you are using CocoaPods:
-	* Edit the generated `Pods.xcodeproj` project settings, adding `-DHLS_LOGGER` to the `Other C Flags` for the debug configuration. This setting is sadly lost every time your run `pod install` to generate the CocoaPods workspace
+	* Edit the generated `Pods.xcodeproj` project settings, adding `-DHLS_LOGGER` to the _Other C Flags_ setting for the debug configuration. This setting is sadly lost every time your run `pod install` to generate the CocoaPods workspace
 	* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
 
-CoconutKit logger also supports [XcodeColors](https://github.com/robbiehanson/XcodeColors). Simply install the XcodeColors plugin and enable colors when debugging your project within Xcode by adding an environment variable called `XcodeColors` to your project schemes. Projects in the CoconutKit workspace all have this environment variable set. If you see strange `[fg` sequences in your Xcode debugging console, either install XcodeColors or disable the `XcodeColors` environment variable by editing the corresponding project scheme.
+CoconutKit logger also supports [XcodeColors](https://github.com/robbiehanson/XcodeColors). Simply install the XcodeColors plugin and enable colors when debugging your project within Xcode by adding an environment variable called `XcodeColors` to your project schemes. Projects in the CoconutKit workspace all have this environment variable set. If you see strange `[fg` sequences in your Xcode debugging console, either install XcodeColors or disable the `XcodeColors` environment variable by editing the corresponding project schemes.
 
 ### How should I use CoconutKit?
 
@@ -129,10 +133,6 @@ Version 2.0 is a major improvement over 1.x, which means several classes have un
 * HLSViewController autorotation is now managed using the new methods introduced with iOS 6, on iOS 4 and 5 as well. All your HLSViewController subclasses must be updated accordingly by removing any existing `-shouldAutorotateToInterfaceOrientation:` implementation, replacing it with `-shouldAutorotate` and `-supportedInterfaceOrientations` implementations
 * The way your create an `HLSAnimation` has changed. `HLSAnimationStep` has now been split into `HLSViewAnimationStep` (for UIView block-based animation steps) and `HLSLayerAnimationStep` (for Core Animation layer-based animation steps). The old `HLSViewAnimationStep` has been replaced with `HLSViewAnimation` for UIView block-based animations, and a corresponding `HLSLayerAnimation` has been introduced. The animations you previously defined by setting transforms on `HLSViewAnimationStep` are now created by calling translation, rotation or scale methods on `HLSViewAnimation`, respectively `HLSLayerAnimation`
 * Core Data: Explicit managed contexts have been eliminated. You now must create an `HLSModelManager` object and use the corresponding class methods to push it onto a stack for the current thread. Then use the `HLSModelManager` context-free methods to interact with the store
-
-### Credits
-
-If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
 
 ### The CoconutKit workspace
 
@@ -233,7 +233,12 @@ If you plan to develop for CoconutKit, install `git-flow` and setup your local r
 
 I really would like to thank my company for having allowed me to publish this work, as well as all my colleagues which have contributed and given me invaluable advice. This work is yours as well!
 
-Several clever classes (e.g. dynamic localization, web view controller) and other contributions by [Cédric Luthi (0xced)](http://0xced.blogspot.com/). Thanks!
+#### Contributors
+
+The following lists all people who contributed to CoconutKit:
+
+* [Cédric Luthi (0xced)](http://0xced.blogspot.com/) wrote the clever dynamic localization functionality, as well as the HLSWebViewController class
+*  Joris Heuberger wrote the HLSLabel class
 
 ### Release notes
 
