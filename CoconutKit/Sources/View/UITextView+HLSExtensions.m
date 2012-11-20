@@ -13,12 +13,12 @@
 static UITextView *s_currentTextView = nil;           // weak ref to the current first responder
 
 // Original implementation of the methods we swizzle
-static void (*s_UITextView__becomeFirstResponder_Imp)(id, SEL) = NULL;
-static void (*s_UITextView__resignFirstResponder_Imp)(id, SEL) = NULL;
+static BOOL (*s_UITextView__becomeFirstResponder_Imp)(id, SEL) = NULL;
+static BOOL (*s_UITextView__resignFirstResponder_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd);
-static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd);
+static BOOL swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd);
+static BOOL swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd);
 
 @implementation UITextView (HLSExtensions)
 
@@ -37,10 +37,10 @@ static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL 
 
 + (void)load
 {
-    s_UITextView__becomeFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
+    s_UITextView__becomeFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                    @selector(becomeFirstResponder), 
                                                                                    (IMP)swizzled_UITextView__becomeFirstResponder_Imp);
-    s_UITextView__resignFirstResponder_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, 
+    s_UITextView__resignFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, 
                                                                                    @selector(resignFirstResponder), 
                                                                                    (IMP)swizzled_UITextView__resignFirstResponder_Imp);
 }
@@ -49,17 +49,18 @@ static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL 
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd)
+static BOOL swizzled_UITextView__becomeFirstResponder_Imp(UITextView *self, SEL _cmd)
 {
     s_currentTextView = self;
-    (*s_UITextView__becomeFirstResponder_Imp)(self, _cmd);
+    return (*s_UITextView__becomeFirstResponder_Imp)(self, _cmd);
 }
 
-static void swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd)
+static BOOL swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL _cmd)
 {
-    (*s_UITextView__resignFirstResponder_Imp)(self, _cmd);
+    BOOL result = (*s_UITextView__resignFirstResponder_Imp)(self, _cmd);
     if (self == s_currentTextView) {
         s_currentTextView = nil;
     }
+	return result;
 }
 
