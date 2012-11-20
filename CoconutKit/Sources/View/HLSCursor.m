@@ -86,11 +86,15 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     self.spacing = kCursorDefaultSpacing;
     self.pointerViewTopLeftOffset = CGSizeMake(-kCursorDefaultSpacing / 2.f, -kCursorDefaultSpacing / 2.f);
     self.pointerViewBottomRightOffset = CGSizeMake(kCursorDefaultSpacing / 2.f, kCursorDefaultSpacing / 2.f);
+    
+    self.animated = YES;
 }
 
 #pragma mark Accessors and mutators
 
 @synthesize elementViews = m_elementViews;
+
+@synthesize animated = m_animated;
 
 @synthesize spacing = m_spacing;
 
@@ -314,7 +318,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     m_selectedIndex = selectedIndex;
     
     if (self.elementViews) {
-        if (animated) {
+        if (self.animated && animated) {
             [UIView beginAnimations:nil context:NULL];
             [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
             [UIView setAnimationDidStopSelector:@selector(pointerAnimationDidStop:finished:context:)];
@@ -510,7 +514,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     NSUInteger index = [self indexForXPos:point.x];
     if (index != m_selectedIndex) {
         [self deselectPreviousIndex];
-        [self setSelectedIndex:index animated:YES];
+        [self setSelectedIndex:index animated:self.animated];
     }
 }
 
@@ -558,7 +562,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self endTouches:touches animated:YES];
+    [self endTouches:touches animated:self.animated];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

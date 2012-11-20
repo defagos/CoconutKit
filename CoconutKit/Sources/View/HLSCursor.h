@@ -38,6 +38,7 @@
 @interface HLSCursor : UIView {
 @private
     NSArray *m_elementViews;
+    BOOL m_animated;
     CGFloat m_spacing;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
@@ -52,6 +53,13 @@
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
+
+/**
+ * If set to YES, the pointer is moved and snapped animated
+ *
+ * Default value is YES
+ */
+@property (nonatomic, assign, getter=isAnimated) BOOL animated;
 
 /**
  * Spacing between elements displayed by the cursor (default is 20 px)
@@ -84,6 +92,8 @@
 /**
  * Move the pointer to a specific element. This setter can also be used to set the initially selected element before the
  * cursor is displayed (in this case, the animated parameter is ignored)
+ *
+ * If the animated property has been set to NO, the animated parameter is ignored
  */
 - (void)moveToIndex:(NSUInteger)index animated:(BOOL)animated;
 

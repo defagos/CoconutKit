@@ -15,6 +15,7 @@
 			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
 			<string>IBUILabel</string>
+			<string>IBUISwitch</string>
 			<string>IBUIView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -46,7 +47,7 @@
 						<string key="NSFrame">{{20, 78}, {728, 60}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="808294600"/>
+						<reference key="NSNextKeyView" ref="330930698"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="537349591">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -59,7 +60,7 @@
 						<string key="NSFrame">{{556, 165}, {92, 21}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="411449780"/>
+						<reference key="NSNextKeyView" ref="808294600"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -93,7 +94,7 @@
 						<string key="NSFrame">{{656, 158}, {92, 37}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="330930698"/>
+						<reference key="NSNextKeyView" ref="411449780"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -209,8 +210,46 @@
 						<string key="NSFrame">{{20, 786}, {728, 140}}</string>
 						<reference key="NSSuperview" ref="463507662"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="219684721"/>
 						<reference key="IBUIBackgroundColor" ref="537349591"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUISwitch" id="163979004">
+						<reference key="NSNextResponder" ref="463507662"/>
+						<int key="NSvFlags">301</int>
+						<string key="NSFrame">{{394, 962}, {94, 27}}</string>
+						<reference key="NSSuperview" ref="463507662"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIOn">YES</bool>
+					</object>
+					<object class="IBUILabel" id="219684721">
+						<reference key="NSNextResponder" ref="463507662"/>
+						<int key="NSvFlags">319</int>
+						<string key="NSFrame">{{283, 965}, {118, 21}}</string>
+						<reference key="NSSuperview" ref="463507662"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="163979004"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">LS/Animated</string>
+						<reference key="IBUITextColor" ref="251398656"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">1</int>
+							<double key="pointSize">17</double>
+						</object>
+						<reference key="IBUIFont" ref="233401515"/>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 				</object>
 				<string key="NSFrameSize">{768, 1004}</string>
@@ -289,22 +328,39 @@
 					<int key="connectionID">54</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">animatedSwitch</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="163979004"/>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">moveWeekDaysPointerToNextDay</string>
+						<string key="label">moveWeekDaysPointerToNextDay:</string>
 						<reference key="source" ref="808294600"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">14</int>
+					<int key="connectionID">59</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">reloadRandomRangeCursor</string>
+						<string key="label">reloadRandomRangeCursor:</string>
 						<reference key="source" ref="899278541"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">52</int>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleAnimated:</string>
+						<reference key="source" ref="163979004"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">58</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -343,6 +399,8 @@
 							<reference ref="356569897"/>
 							<reference ref="330930698"/>
 							<reference ref="808294600"/>
+							<reference ref="219684721"/>
+							<reference ref="163979004"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -394,6 +452,16 @@
 						<reference key="object" ref="356569897"/>
 						<reference key="parent" ref="463507662"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="163979004"/>
+						<reference key="parent" ref="463507662"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">56</int>
+						<reference key="object" ref="219684721"/>
+						<reference key="parent" ref="463507662"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -417,6 +485,8 @@
 					<string>32.IBPluginDependency</string>
 					<string>45.IBPluginDependency</string>
 					<string>53.IBPluginDependency</string>
+					<string>55.IBPluginDependency</string>
+					<string>56.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -441,6 +511,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -455,7 +527,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">54</int>
+			<int key="maxID">60</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -467,11 +539,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>moveWeekDaysPointerToNextDay</string>
-							<string>reloadRandomRangeCursor</string>
+							<string>moveWeekDaysPointerToNextDay:</string>
+							<string>reloadRandomRangeCursor:</string>
+							<string>toggleAnimated:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -480,17 +554,22 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>moveWeekDaysPointerToNextDay</string>
-							<string>reloadRandomRangeCursor</string>
+							<string>moveWeekDaysPointerToNextDay:</string>
+							<string>reloadRandomRangeCursor:</string>
+							<string>toggleAnimated:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">moveWeekDaysPointerToNextDay</string>
+								<string key="name">moveWeekDaysPointerToNextDay:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">reloadRandomRangeCursor</string>
+								<string key="name">reloadRandomRangeCursor:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleAnimated:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -499,6 +578,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>animatedSwitch</string>
 							<string>foldersCursor</string>
 							<string>mixedFoldersCursor</string>
 							<string>randomRangeCursor</string>
@@ -509,6 +589,7 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UISwitch</string>
 							<string>HLSCursor</string>
 							<string>HLSCursor</string>
 							<string>HLSCursor</string>
@@ -522,6 +603,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>animatedSwitch</string>
 							<string>foldersCursor</string>
 							<string>mixedFoldersCursor</string>
 							<string>randomRangeCursor</string>
@@ -532,6 +614,10 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">animatedSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">foldersCursor</string>
 								<string key="candidateClassName">HLSCursor</string>
