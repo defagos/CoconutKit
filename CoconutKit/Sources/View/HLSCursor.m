@@ -149,7 +149,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // Calculate the needed total width
     CGFloat totalWidth = 0.f;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        totalWidth += elementWrapperView.frame.size.width + self.spacing;
+        totalWidth += CGRectGetWidth(elementWrapperView.frame) + self.spacing;
     }
     totalWidth += - self.spacing                                        /* one too much; remove */
     + floatmax(0.f, -self.pointerViewTopLeftOffset.width)           /* pointer must fit left if larger than element views */
@@ -157,22 +157,22 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
-    CGFloat xPos = floorf(fabsf(self.frame.size.width - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
-    if (floatgt(totalWidth, self.frame.size.width)) {
+    CGFloat xPos = floorf(fabsf(CGRectGetWidth(self.frame) - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
+    if (floatgt(totalWidth, CGRectGetWidth(self.frame))) {
         HLSLoggerWarn(@"Cursor frame not wide enough");
         xPos = -xPos;
     }
     for (UIView *elementWrapperView in self.elementWrapperViews) {
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(xPos,
-                                              floorf((self.frame.size.height - elementWrapperView.frame.size.height) / 2.f),
-                                              elementWrapperView.frame.size.width,
-                                              elementWrapperView.frame.size.height);
-        xPos += elementWrapperView.frame.size.width + self.spacing;
+                                              floorf((CGRectGetHeight(self.frame) - CGRectGetHeight(elementWrapperView.frame)) / 2.f),
+                                              CGRectGetWidth(elementWrapperView.frame),
+                                              CGRectGetHeight(elementWrapperView.frame));
+        xPos += CGRectGetWidth(elementWrapperView.frame) + self.spacing;
         
         // Check if element view (including cursor if larger) fits vertically (at the top, respectively at the bottom)
-        if (floatgt(elementWrapperView.frame.size.height / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), self.frame.size.height / 2.f)
-            || floatgt(elementWrapperView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
+        if (floatgt(CGRectGetHeight(elementWrapperView.frame) / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), CGRectGetHeight(self.frame) / 2.f)
+            || floatgt(CGRectGetHeight(elementWrapperView.frame) / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), CGRectGetHeight(self.frame) / 2.f)) {
             HLSLoggerWarn(@"Cursor frame not tall enough");
         }
     }
@@ -184,8 +184,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
             imageView.contentStretch = CGRectMake(0.5f,
                                                   0.5f,
-                                                  1.f / imageView.frame.size.width,
-                                                  1.f / imageView.frame.size.height);
+                                                  1.f / CGRectGetWidth(imageView.frame),
+                                                  1.f / CGRectGetHeight(imageView.frame));
             self.pointerView = imageView;
         }
         
@@ -422,8 +422,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        if (floatge(xPos, elementWrapperView.frame.origin.x - self.spacing / 2.f)
-            && floatle(xPos, elementWrapperView.frame.origin.x + elementWrapperView.frame.size.width + self.spacing / 2.f)) {
+        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - self.spacing / 2.f)
+            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + self.spacing / 2.f)) {
             return index;
         }
         ++index;
@@ -431,7 +431,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // No match found; return leftmost or rightmost element view
     UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
-    if (floatlt(xPos, firstElementWrapperView.frame.origin.x - self.spacing / 2.f)) {
+    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - self.spacing / 2.f)) {
         return 0;
     }
     else {
@@ -474,22 +474,22 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         UIView *nextElementWrapperView = [self.elementWrapperViews objectAtIndex:index];
         
         // Linear interpolation
-        CGFloat width = ((xPos - nextElementWrapperView.center.x) * previousElementWrapperView.frame.size.width
-                         + (previousElementWrapperView.center.x - xPos) * nextElementWrapperView.frame.size.width) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
-        CGFloat height = ((xPos - nextElementWrapperView.center.x) * previousElementWrapperView.frame.size.height
-                          + (previousElementWrapperView.center.x - xPos) * nextElementWrapperView.frame.size.height) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
+        CGFloat width = ((xPos - nextElementWrapperView.center.x) * CGRectGetWidth(previousElementWrapperView.frame)
+                         + (previousElementWrapperView.center.x - xPos) * CGRectGetWidth(nextElementWrapperView.frame)) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
+        CGFloat height = ((xPos - nextElementWrapperView.center.x) * CGRectGetHeight(previousElementWrapperView.frame)
+                          + (previousElementWrapperView.center.x - xPos) * CGRectGetHeight(nextElementWrapperView.frame)) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
         
         pointerRect = CGRectMake(xPos - width / 2.f,
-                                 (self.frame.size.height - height) / 2.f,
+                                 (CGRectGetHeight(self.frame) - height) / 2.f,
                                  width,
                                  height);
     }
     
     // Adjust the rect according to the offsets to be applied
-    pointerRect = CGRectMake(floorf(pointerRect.origin.x + self.pointerViewTopLeftOffset.width),
-                             floorf(pointerRect.origin.y + self.pointerViewTopLeftOffset.height),
-                             floorf(pointerRect.size.width - self.pointerViewTopLeftOffset.width + self.pointerViewBottomRightOffset.width),
-                             floorf(pointerRect.size.height - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height));
+    pointerRect = CGRectMake(floorf(CGRectGetMinX(pointerRect) + self.pointerViewTopLeftOffset.width),
+                             floorf(CGRectGetMinY(pointerRect) + self.pointerViewTopLeftOffset.height),
+                             floorf(CGRectGetWidth(pointerRect) - self.pointerViewTopLeftOffset.width + self.pointerViewBottomRightOffset.width),
+                             floorf(CGRectGetHeight(pointerRect) - self.pointerViewTopLeftOffset.height + self.pointerViewBottomRightOffset.height));
     
     return pointerRect;
 }
