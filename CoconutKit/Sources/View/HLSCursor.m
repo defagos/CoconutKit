@@ -22,6 +22,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)hlsCursorInit;
 
 @property (nonatomic, retain) NSArray *elementViews;
+@property (nonatomic, retain) NSArray *selectedElementViews;
 @property (nonatomic, retain) UIView *pointerContainerView;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
@@ -71,6 +72,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)dealloc
 {
     self.elementViews = nil;
+    self.selectedElementViews = nil;
     
     // Very special case here. Cannot use the property since it cannot change the pointer view once set!
     [m_pointerView release];
@@ -93,6 +95,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 #pragma mark Accessors and mutators
 
 @synthesize elementViews = m_elementViews;
+
+@synthesize selectedElementViews = m_selectedElementViews;
 
 @synthesize animated = m_animated;
 
@@ -129,6 +133,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if (! m_viewsCreated) {
         // Create the subview set
         self.elementViews = [NSArray array];
+        self.selectedElementViews = [NSArray array];
         
         // Check the data source
         NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
@@ -141,7 +146,12 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         for (NSInteger index = 0; index < nbrElements; ++index) {
             UIView *elementView = [self elementViewForIndex:index selected:NO];
             [self addSubview:elementView];
-            self.elementViews = [self.elementViews arrayByAddingObject:elementView];            
+            self.elementViews = [self.elementViews arrayByAddingObject:elementView];
+            
+            UIView *selectedElementView = [self elementViewForIndex:index selected:YES];
+            selectedElementView.hidden = YES;
+            [self addSubview:selectedElementView];
+            self.selectedElementViews = [self.selectedElementViews arrayByAddingObject:selectedElementView];
         }
     }
         
@@ -174,6 +184,9 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             || floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
             HLSLoggerWarn(@"Cursor frame not tall enough");
         }
+        
+        UIView *selectedElementView = [self.selectedElementViews objectAtIndex:[self.elementViews indexOfObject:elementView]];
+        selectedElementView.frame = elementView.frame;
     }
     
     if (! m_viewsCreated) {
@@ -381,13 +394,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         
         // Swap selected element view with selected version of it
         UIView *elementView = [self.elementViews objectAtIndex:index];
-        UIView *newElementView = [self elementViewForIndex:index selected:selected];
-        newElementView.frame = elementView.frame;
-        [self insertSubview:newElementView belowSubview:elementView];
-        [elementView removeFromSuperview];
-        NSMutableArray *mutableElementViews = [NSMutableArray arrayWithArray:self.elementViews];
-        [mutableElementViews replaceObjectAtIndex:index withObject:newElementView];
-        self.elementViews = [NSArray arrayWithArray:mutableElementViews];
+        elementView.hidden = selected;
+        
+        UIView *selectedElementView = [self.selectedElementViews objectAtIndex:index];
+        selectedElementView.hidden = ! selected;
     }
 }
 
@@ -516,6 +526,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         [self deselectPreviousIndex];
         [self setSelectedIndex:index animated:self.animated];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(cursor:didTouchDownNearIndex:)]) {
+        [self.delegate cursor:self didTouchDownNearIndex:index];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -572,9 +586,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)endTouches:(NSSet *)touches animated:(BOOL)animated
 {
+    CGPoint point = [[touches anyObject] locationInView:self];
+    NSUInteger index = [self indexForXPos:point.x];
+    
     if (m_grabbed) {
-        CGPoint point = [[touches anyObject] locationInView:self];
-        NSUInteger index = [self indexForXPos:point.x];
         [self setSelectedIndex:index animated:animated];
         
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
@@ -584,6 +599,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     m_dragging = NO;
     m_grabbed = NO;
+    
+    if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
+        [self.delegate cursor:self didTouchUpNearIndex:index];
+    }
 }
 
 #pragma mark Animation callbacks

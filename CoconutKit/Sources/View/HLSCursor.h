@@ -38,6 +38,7 @@
 @interface HLSCursor : UIView {
 @private
     NSArray *m_elementViews;
+    NSArray *m_selectedElementViews;
     BOOL m_animated;
     CGFloat m_spacing;
     UIView *m_pointerView;
@@ -139,6 +140,10 @@
 @protocol HLSCursorDelegate <NSObject>
 
 @optional
+
+// Triggered when the user performs starts touching the cursor
+- (void)cursor:(HLSCursor *)cursor didTouchDownNearIndex:(NSUInteger)index;
+
 // Triggered when the pointer leaves a selected element at a given index
 - (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index;
 
@@ -153,5 +158,8 @@
 
 // Triggered when the user stops dragging the pointer
 - (void)cursorDidStopDragging:(HLSCursor *)cursor;
+
+// Triggered when the user stops touching the cursor
+- (void)cursor:(HLSCursor *)cursor didTouchUpNearIndex:(NSUInteger)index;
 
 @end
