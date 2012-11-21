@@ -21,11 +21,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)hlsCursorInit;
 
-@property (nonatomic, retain) NSArray *elementViews;
-@property (nonatomic, retain) NSArray *selectedElementViews;
+@property (nonatomic, retain) NSArray *elementWrapperViews;
 @property (nonatomic, retain) UIView *pointerContainerView;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
+- (UIView *)elementWrapperViewForIndex:(NSUInteger)index;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 - (void)deselectPreviousIndex;
@@ -35,7 +35,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)finalizeSelectionForIndex:(NSUInteger)index;
 
-- (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected;
+- (void)displayElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected;
 
 - (CGRect)pointerFrameForIndex:(NSUInteger)index;
 - (CGRect)pointerFrameForXPos:(CGFloat)xPos;
@@ -71,8 +71,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)dealloc
 {
-    self.elementViews = nil;
-    self.selectedElementViews = nil;
+    self.elementWrapperViews = nil;
     
     // Very special case here. Cannot use the property since it cannot change the pointer view once set!
     [m_pointerView release];
@@ -94,9 +93,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 #pragma mark Accessors and mutators
 
-@synthesize elementViews = m_elementViews;
-
-@synthesize selectedElementViews = m_selectedElementViews;
+@synthesize elementWrapperViews = m_elementWrapperViews;
 
 @synthesize animated = m_animated;
 
@@ -132,8 +129,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // the views before they are displayed
     if (! m_viewsCreated) {
         // Create the subview set
-        self.elementViews = [NSArray array];
-        self.selectedElementViews = [NSArray array];
+        self.elementWrapperViews = [NSArray array];
         
         // Check the data source
         NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
@@ -144,25 +140,20 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         
         // Fill with views generated from the data source
         for (NSInteger index = 0; index < nbrElements; ++index) {
-            UIView *elementView = [self elementViewForIndex:index selected:NO];
-            [self addSubview:elementView];
-            self.elementViews = [self.elementViews arrayByAddingObject:elementView];
-            
-            UIView *selectedElementView = [self elementViewForIndex:index selected:YES];
-            selectedElementView.hidden = YES;
-            [self addSubview:selectedElementView];
-            self.selectedElementViews = [self.selectedElementViews arrayByAddingObject:selectedElementView];
+            UIView *elementWrapperView = [self elementWrapperViewForIndex:index];
+            [self addSubview:elementWrapperView];
+            self.elementWrapperViews = [self.elementWrapperViews arrayByAddingObject:elementWrapperView];
         }
     }
-        
+    
     // Calculate the needed total width
     CGFloat totalWidth = 0.f;
-    for (UIView *elementView in self.elementViews) {
-        totalWidth += elementView.frame.size.width + self.spacing;
+    for (UIView *elementWrapperView in self.elementWrapperViews) {
+        totalWidth += elementWrapperView.frame.size.width + self.spacing;
     }
-    totalWidth += - self.spacing                                        /* one too much; remove */ 
-        + floatmax(0.f, -self.pointerViewTopLeftOffset.width)           /* pointer must fit left if larger than element views */
-        + floatmax(0.f, self.pointerViewBottomRightOffset.width);       /* pointer must fit right if larger than element views */
+    totalWidth += - self.spacing                                        /* one too much; remove */
+    + floatmax(0.f, -self.pointerViewTopLeftOffset.width)           /* pointer must fit left if larger than element views */
+    + floatmax(0.f, self.pointerViewBottomRightOffset.width);       /* pointer must fit right if larger than element views */
     
     // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
     // be centered)
@@ -171,22 +162,19 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         HLSLoggerWarn(@"Cursor frame not wide enough");
         xPos = -xPos;
     }
-    for (UIView *elementView in self.elementViews) {
+    for (UIView *elementWrapperView in self.elementWrapperViews) {
         // Centered in main frame
-        elementView.frame = CGRectMake(xPos, 
-                                       floorf((self.frame.size.height - elementView.frame.size.height) / 2.f),
-                                       elementView.frame.size.width, 
-                                       elementView.frame.size.height);
-        xPos += elementView.frame.size.width + self.spacing;
+        elementWrapperView.frame = CGRectMake(xPos,
+                                              floorf((self.frame.size.height - elementWrapperView.frame.size.height) / 2.f),
+                                              elementWrapperView.frame.size.width,
+                                              elementWrapperView.frame.size.height);
+        xPos += elementWrapperView.frame.size.width + self.spacing;
         
         // Check if element view (including cursor if larger) fits vertically (at the top, respectively at the bottom)
-        if (floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), self.frame.size.height / 2.f)
-            || floatgt(elementView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
+        if (floatgt(elementWrapperView.frame.size.height / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), self.frame.size.height / 2.f)
+            || floatgt(elementWrapperView.frame.size.height / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), self.frame.size.height / 2.f)) {
             HLSLoggerWarn(@"Cursor frame not tall enough");
         }
-        
-        UIView *selectedElementView = [self.selectedElementViews objectAtIndex:[self.elementViews indexOfObject:elementView]];
-        selectedElementView.frame = elementView.frame;
     }
     
     if (! m_viewsCreated) {
@@ -194,14 +182,14 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         if (! self.pointerView) {
             UIImage *pointerImage = [UIImage imageNamed:@"CoconutKit-resources.bundle/CursorDefaultPointer.png"];
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
-            imageView.contentStretch = CGRectMake(0.5f, 
-                                                  0.5f, 
-                                                  1.f / imageView.frame.size.width, 
+            imageView.contentStretch = CGRectMake(0.5f,
+                                                  0.5f,
+                                                  1.f / imageView.frame.size.width,
                                                   1.f / imageView.frame.size.height);
-            self.pointerView = imageView;            
+            self.pointerView = imageView;
         }
         
-        if (m_initialIndex >= [self.elementViews count]) {
+        if (m_initialIndex >= [self.elementWrapperViews count]) {
             m_initialIndex = 0;
             HLSLoggerWarn(@"Initial index too large; fixed");
         }
@@ -232,21 +220,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     if ([self.dataSource respondsToSelector:@selector(cursor:viewAtIndex:selected:)]) {
         // The size must accomodate both the selected and non-selected versions of an element view (i.e. be the largest).
         // To avoid changing the frame of the views we receive, we simply find the rectangle in which both versions fit,
-        // then we create a view with this size and we put the view we receive at its center. 
+        // then we create a view with this size and we put the view we receive at its center.
         UIView *elementView = [self.dataSource cursor:self viewAtIndex:index selected:selected];
-        UIView *otherElementView = [self.dataSource cursor:self viewAtIndex:index selected:! selected];
-        if (elementView && otherElementView) {
-            CGSize elementViewSize = elementView.frame.size;
-            CGSize otherElementViewSize = otherElementView.frame.size;
-            UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 
-                                                                              0.f,
-                                                                              floatmax(elementViewSize.width, otherElementViewSize.width), 
-                                                                              floatmax(elementViewSize.height, otherElementViewSize.height))]
-                                     autorelease];
-            containerView.backgroundColor = [UIColor clearColor];
-            [containerView addSubview:elementView];
-            elementView.center = containerView.center;
-            return containerView;
+        if (elementView) {
+            return elementView;
         }
     }
     
@@ -294,10 +271,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         // states
         CGSize titleSize = [title sizeWithFont:font];
         CGSize otherTitleSize = [title sizeWithFont:otherFont];
-        UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f, 
-                                                                           0.f, 
-                                                                           floatmax(titleSize.width, otherTitleSize.width), 
-                                                                           floatmax(titleSize.height, otherTitleSize.height))] 
+        UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f,
+                                                                           0.f,
+                                                                           floatmax(titleSize.width, otherTitleSize.width),
+                                                                           floatmax(titleSize.height, otherTitleSize.height))]
                                  autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
@@ -314,6 +291,33 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     return nil;
 }
 
+- (UIView *)elementWrapperViewForIndex:(NSUInteger)index
+{
+    UIView *elementView = [self elementViewForIndex:index selected:NO];
+    UIView *selectedElementView = [self elementViewForIndex:index selected:YES];
+    
+    if (! elementView || ! selectedElementView) {
+        // Incorrect data source implementation
+        HLSLoggerError(@"Cursor data source must either implement cursor:viewAtIndex: or cursor:titleAtIndex:");
+        return nil;
+    }
+    
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,
+                                                                    0.f,
+                                                                    floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame)),
+                                                                    floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame)))] autorelease];
+    wrapperView.backgroundColor = [UIColor clearColor];
+    
+    [wrapperView addSubview:elementView];
+    elementView.center = wrapperView.center;
+    
+    [wrapperView addSubview:selectedElementView];
+    selectedElementView.center = wrapperView.center;
+    selectedElementView.hidden = YES;
+    
+    return wrapperView;
+}
+
 #pragma mark Pointer management
 
 - (NSUInteger)selectedIndex
@@ -323,14 +327,14 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
-    if (m_viewsCreated && [self.elementViews count] > 0 && selectedIndex >= [self.elementViews count]) {
+    if (m_viewsCreated && [self.elementWrapperViews count] > 0 && selectedIndex >= [self.elementWrapperViews count]) {
         HLSLoggerWarn(@"Index outside range. Set to last index");
-        selectedIndex = [self.elementViews count] - 1;
+        selectedIndex = [self.elementWrapperViews count] - 1;
     }
     
     m_selectedIndex = selectedIndex;
     
-    if (self.elementViews) {
+    if (self.elementWrapperViews) {
         if (self.animated && animated) {
             [UIView beginAnimations:nil context:NULL];
             [UIView setAnimationWillStartSelector:@selector(pointerAnimationWillStart:context:)];
@@ -345,7 +349,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
         else {
             [self finalizeSelectionForIndex:selectedIndex];
-        }        
+        }
     }
     
     // Will only be used if setSelectedIndex has been called before the views are actually created; not
@@ -357,7 +361,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)deselectPreviousIndex
 {
     // Set appearance of previously selected element view to "not selected"
-    [self swapElementViewAtIndex:m_selectedIndex selected:NO];
+    [self displayElementViewAtIndex:m_selectedIndex selected:NO];
     
     // Notify deselection
     if (m_viewsCreated && [self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
@@ -373,7 +377,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)finalizeSelectionForIndex:(NSUInteger)index
 {
-    [self swapElementViewAtIndex:index selected:YES];
+    [self displayElementViewAtIndex:index selected:YES];
     
     // Send selection event; also sent if the user drags the cursor and release it on the same element that was
     // previously selected. This is needed (and makes sense) since the deselect event is sent as soon the user
@@ -384,56 +388,54 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     }
 }
 
-- (void)swapElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
+- (void)displayElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if ([self.elementViews count] != 0) {
-        // Sanitize input
-        if (index >= [self.elementViews count]) {
-            index = 0;
-        }
-        
-        // Swap selected element view with selected version of it
-        UIView *elementView = [self.elementViews objectAtIndex:index];
-        elementView.hidden = selected;
-        
-        UIView *selectedElementView = [self.selectedElementViews objectAtIndex:index];
-        selectedElementView.hidden = ! selected;
+    if (index >= [self.elementWrapperViews count]) {
+        return;
     }
+    
+    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    
+    UIView *elementView = [elementWrapperView.subviews objectAtIndex:0];
+    elementView.hidden = selected;
+    
+    UIView *selectedElementView = [elementWrapperView.subviews objectAtIndex:1];
+    selectedElementView.hidden = ! selected;
 }
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
 {
-    if ([self.elementViews count] == 0) {
+    if ([self.elementWrapperViews count] == 0) {
         return 0.f;
     }
     
-    if (index >= [self.elementViews count]) {
+    if (index >= [self.elementWrapperViews count]) {
         HLSLoggerError(@"Invalid index");
         return 0.f;
     }
     
-    UIView *elementView = [self.elementViews objectAtIndex:index];
-    return elementView.center.x;
+    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    return elementWrapperView.center.x;
 }
 
 - (NSUInteger)indexForXPos:(CGFloat)xPos
 {
     NSUInteger index = 0;
-    for (UIView *elementView in self.elementViews) {
-        if (floatge(xPos, elementView.frame.origin.x - self.spacing / 2.f) 
-                && floatle(xPos, elementView.frame.origin.x + elementView.frame.size.width + self.spacing / 2.f)) {
+    for (UIView *elementWrapperView in self.elementWrapperViews) {
+        if (floatge(xPos, elementWrapperView.frame.origin.x - self.spacing / 2.f)
+            && floatle(xPos, elementWrapperView.frame.origin.x + elementWrapperView.frame.size.width + self.spacing / 2.f)) {
             return index;
         }
         ++index;
     }
     
     // No match found; return leftmost or rightmost element view
-    UIView *firstElementView = [self.elementViews firstObject_hls];
-    if (floatlt(xPos, firstElementView.frame.origin.x - self.spacing / 2.f)) {
+    UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
+    if (floatlt(xPos, firstElementWrapperView.frame.origin.x - self.spacing / 2.f)) {
         return 0;
     }
     else {
-        return [self.elementViews count] - 1;
+        return [self.elementWrapperViews count] - 1;
     }
 }
 
@@ -448,8 +450,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
     NSUInteger index = 0;
-    for (UIView *elementView in self.elementViews) {
-        if (floatle(xPos, elementView.center.x)) {
+    for (UIView *elementWrapperView in self.elementWrapperViews) {
+        if (floatle(xPos, elementWrapperView.center.x)) {
             break;
         }
         ++index;
@@ -458,28 +460,28 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     // Too far on the left; cursor around the first view
     CGRect pointerRect;
     if (index == 0) {
-        UIView *firstElementView = [self.elementViews firstObject_hls];
-        pointerRect = firstElementView.frame;
+        UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
+        pointerRect = firstElementWrapperView.frame;
     }
     // Too far on the right; cursor around the last view
-    else if (index == [self.elementViews count]) {
-        UIView *lastElementView = [self.elementViews lastObject];
-        pointerRect = lastElementView.frame;
+    else if (index == [self.elementWrapperViews count]) {
+        UIView *lastElementWrapperView = [self.elementWrapperViews lastObject];
+        pointerRect = lastElementWrapperView.frame;
     }
     // Cursor in between views with indices index-1 and index. Interpolate
     else {
-        UIView *previousElementView = [self.elementViews objectAtIndex:index - 1];
-        UIView *nextElementView = [self.elementViews objectAtIndex:index];
+        UIView *previousElementWrapperView = [self.elementWrapperViews objectAtIndex:index - 1];
+        UIView *nextElementWrapperView = [self.elementWrapperViews objectAtIndex:index];
         
         // Linear interpolation
-        CGFloat width = ((xPos - nextElementView.center.x) * previousElementView.frame.size.width 
-                         + (previousElementView.center.x - xPos) * nextElementView.frame.size.width) / (previousElementView.center.x - nextElementView.center.x);
-        CGFloat height = ((xPos - nextElementView.center.x) * previousElementView.frame.size.height 
-                          + (previousElementView.center.x - xPos) * nextElementView.frame.size.height) / (previousElementView.center.x - nextElementView.center.x);
+        CGFloat width = ((xPos - nextElementWrapperView.center.x) * previousElementWrapperView.frame.size.width
+                         + (previousElementWrapperView.center.x - xPos) * nextElementWrapperView.frame.size.width) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
+        CGFloat height = ((xPos - nextElementWrapperView.center.x) * previousElementWrapperView.frame.size.height
+                          + (previousElementWrapperView.center.x - xPos) * nextElementWrapperView.frame.size.height) / (previousElementWrapperView.center.x - nextElementWrapperView.center.x);
         
-        pointerRect = CGRectMake(xPos - width / 2.f, 
+        pointerRect = CGRectMake(xPos - width / 2.f,
                                  (self.frame.size.height - height) / 2.f,
-                                 width, 
+                                 width,
                                  height);
     }
     
@@ -503,15 +505,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 - (void)clear
 {
     // Clear all views
-    for (UIView *view in self.elementViews) {
+    for (UIView *view in self.elementWrapperViews) {
         [view removeFromSuperview];
     }
-    self.elementViews = nil;
-    
-    for (UIView *selectedView in self.selectedElementViews) {
-        [selectedView removeFromSuperview];
-    }
-    self.selectedElementViews = nil;
+    self.elementWrapperViews = nil;
     
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
@@ -555,7 +552,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
             // initially touched at its center
             m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
             
-            [self swapElementViewAtIndex:m_selectedIndex selected:NO];
+            [self displayElementViewAtIndex:m_selectedIndex selected:NO];
             
             if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
                 [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];

@@ -37,8 +37,7 @@
  */
 @interface HLSCursor : UIView {
 @private
-    NSArray *m_elementViews;
-    NSArray *m_selectedElementViews;
+    NSArray *m_elementWrapperViews;
     BOOL m_animated;
     CGFloat m_spacing;
     UIView *m_pointerView;
