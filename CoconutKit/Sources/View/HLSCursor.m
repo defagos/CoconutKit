@@ -516,6 +516,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         [self deselectPreviousIndex];
         [self setSelectedIndex:index animated:self.animated];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(cursor:didTouchDownNearIndex:)]) {
+        [self.delegate cursor:self didTouchDownNearIndex:index];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -572,9 +576,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)endTouches:(NSSet *)touches animated:(BOOL)animated
 {
+    CGPoint point = [[touches anyObject] locationInView:self];
+    NSUInteger index = [self indexForXPos:point.x];
+    
     if (m_grabbed) {
-        CGPoint point = [[touches anyObject] locationInView:self];
-        NSUInteger index = [self indexForXPos:point.x];
         [self setSelectedIndex:index animated:animated];
         
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:)]) {
@@ -584,6 +589,10 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     m_dragging = NO;
     m_grabbed = NO;
+    
+    if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
+        [self.delegate cursor:self didTouchUpNearIndex:index];
+    }
 }
 
 #pragma mark Animation callbacks
