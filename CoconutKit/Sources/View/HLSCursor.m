@@ -508,6 +508,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     }
     self.elementViews = nil;
     
+    for (UIView *selectedView in self.selectedElementViews) {
+        [selectedView removeFromSuperview];
+    }
+    self.selectedElementViews = nil;
+    
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
     
