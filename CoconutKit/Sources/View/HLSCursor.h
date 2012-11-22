@@ -37,10 +37,9 @@
  */
 @interface HLSCursor : UIView {
 @private
-    NSArray *m_elementViews;
-    NSArray *m_selectedElementViews;
+    NSArray *m_elementWrapperViews;
+    NSArray *m_elementWrapperViewSizeValues;
     BOOL m_animated;
-    CGFloat m_spacing;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
@@ -51,6 +50,7 @@
     BOOL m_grabbed;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
+    CGFloat m_spacing;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
@@ -61,11 +61,6 @@
  * Default value is YES
  */
 @property (nonatomic, assign, getter=isAnimated) BOOL animated;
-
-/**
- * Spacing between elements displayed by the cursor (default is 20 px)
- */
-@property (nonatomic, assign) CGFloat spacing;
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
@@ -79,10 +74,10 @@
 
 /**
  * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
- * at. By default the pointer view frame is 10px larger in all directions
+ * at. By default the pointer view frame matches the one of the underlying element
  */
-@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
-@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
+@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (0px, 0px); set negative values to grow larger
+@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (0px, 0px); set negative values to grow larger
 
 /**
  * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value

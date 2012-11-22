@@ -36,6 +36,8 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms. [A companion repository](https://github.com/defagos/CoconutKit-CocoaPods) exists for easy installation using CocoaPods, but you do not need to check it out directly.
 
+You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodules update --init` command.
+
 ### Supporting development
 
 CoconutKit is and will stay free. However, if you enjoy using it, you can support the countless hours of work that are invested into its creation. Thank you in advance! 
