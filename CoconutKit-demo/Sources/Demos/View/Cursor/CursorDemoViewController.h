@@ -38,7 +38,7 @@
 
 - (IBAction)moveWeekDaysPointerToNextDay:(id)sender;
 - (IBAction)reloadRandomRangeCursor:(id)sender;
-- (IBAction)changeSize:(id)sender;
+- (IBAction)sizeChanged:(id)sender;
 - (IBAction)toggleAnimated:(id)sender;
 
 @end

@@ -122,6 +122,29 @@ static NSArray *s_folders = nil;
     m_originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
 }
 
+#pragma mark Orientation management
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
+    // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
+    // the view
+    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, m_originalRandomRangeCursorSize.width, m_originalRandomRangeCursorSize.height);
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
+    // are able to restore them when rotating again, and set size according to the previous size slider value. This
+    // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
+    m_originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
+    [self sizeChanged:nil];
+    
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
 #pragma mark Memory warnings
 
 - (void)didReceiveMemoryWarning
@@ -325,7 +348,7 @@ static NSArray *s_folders = nil;
     [self.randomRangeCursor reloadData];
 }
 
-- (void)changeSize:(id)sender
+- (void)sizeChanged:(id)sender
 {
     self.randomRangeCursor.bounds = CGRectMake(0.f,
                                                0.f,

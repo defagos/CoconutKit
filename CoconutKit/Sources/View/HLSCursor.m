@@ -188,7 +188,7 @@
         
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(floorf(xPos),
-                                              floorf((CGRectGetHeight(self.frame) - CGRectGetHeight(elementWrapperView.frame)) / 2.f),
+                                              floorf((CGRectGetHeight(self.frame) - elementWrapperViewSize.height) / 2.f),
                                               widthScaleFactor * elementWrapperViewSize.width,
                                               heightScaleFactor * elementWrapperViewSize.height);
         xPos += CGRectGetWidth(elementWrapperView.frame) + m_spacing;
