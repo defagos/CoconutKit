@@ -38,6 +38,7 @@
 @interface HLSCursor : UIView {
 @private
     NSArray *m_elementWrapperViews;
+    NSArray *m_elementWrapperViewSizeValues;
     BOOL m_animated;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
@@ -73,10 +74,10 @@
 
 /**
  * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
- * at. By default the pointer view frame is 10px larger in all directions
+ * at. By default the pointer view frame matches the one of the underlying element
  */
-@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
-@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
+@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (0px, 0px); set negative values to grow larger
+@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (0px, 0px); set negative values to grow larger
 
 /**
  * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value

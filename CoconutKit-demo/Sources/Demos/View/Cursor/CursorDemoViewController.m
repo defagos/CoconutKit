@@ -53,6 +53,8 @@ static NSArray *s_folders = nil;
     self.weekDayIndexLabel = nil;
     self.randomRangeCursor = nil;
     self.randomRangeIndexLabel = nil;
+    self.widthFactorSlider = nil;
+    self.heightFactorSlider = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
@@ -68,6 +70,10 @@ static NSArray *s_folders = nil;
 @synthesize randomRangeCursor = m_randomRangeCursor;
 
 @synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
+
+@synthesize widthFactorSlider = m_widthFactorSlider;
+
+@synthesize heightFactorSlider = m_heightFactorSlider;
 
 @synthesize timeScalesCursor = m_timeScalesCursor;
 
@@ -88,8 +94,6 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.dataSource = self;
     self.weekDaysCursor.delegate = self;
     [self.weekDaysCursor moveToIndex:3 animated:NO];
-    self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
-    self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     
     self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
     self.randomRangeCursor.dataSource = self;
@@ -98,19 +102,22 @@ static NSArray *s_folders = nil;
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
-    // Not perfectly centered with the font used. Tweak a little bit to get a perfect result
-    self.timeScalesCursor.pointerViewTopLeftOffset = CGSizeMake(-11.f, -12.f);
     
     self.foldersCursor.dataSource = self;
     self.foldersCursor.delegate = self;
-    self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(5.f, 5.f);
-    self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(-5.f, -5.f);
     
     self.mixedFoldersCursor.dataSource = self;
     self.mixedFoldersCursor.delegate = self;
     
     // All cursors are animated simultaneously or not in this demo. Check the first one
     self.animatedSwitch.on = self.weekDaysCursor.animated;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    m_originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
 }
 
 #pragma mark Memory warnings
@@ -314,6 +321,14 @@ static NSArray *s_folders = nil;
 - (IBAction)reloadRandomRangeCursor:(id)sender
 {
     [self.randomRangeCursor reloadData];
+}
+
+- (void)changeSize:(id)sender
+{
+    self.randomRangeCursor.bounds = CGRectMake(0.f,
+                                               0.f,
+                                               m_originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
+                                               m_originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
 }
 
 - (IBAction)toggleAnimated:(id)sender

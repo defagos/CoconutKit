@@ -20,6 +20,8 @@
 - (void)hlsCursorInit;
 
 @property (nonatomic, retain) NSArray *elementWrapperViews;
+@property (nonatomic, retain) NSArray *elementWrapperViewSizeValues;
+
 @property (nonatomic, retain) UIView *pointerContainerView;
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
@@ -70,6 +72,7 @@
 - (void)dealloc
 {
     self.elementWrapperViews = nil;
+    self.elementWrapperViewSizeValues = nil;
     
     // Very special case here. Cannot use the property since it cannot change the pointer view once set!
     [m_pointerView release];
@@ -82,8 +85,8 @@
 
 - (void)hlsCursorInit
 {
-    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
+    self.pointerViewTopLeftOffset = CGSizeMake(0.f, 0.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(0.f, 0.f);
     
     self.animated = YES;
 }
@@ -91,6 +94,8 @@
 #pragma mark Accessors and mutators
 
 @synthesize elementWrapperViews = m_elementWrapperViews;
+
+@synthesize elementWrapperViewSizeValues = m_elementWrapperViewSizeValues;
 
 @synthesize animated = m_animated;
 
@@ -125,6 +130,7 @@
     if (! m_viewsCreated) {
         // Create the subview set
         self.elementWrapperViews = [NSArray array];
+        self.elementWrapperViewSizeValues = [NSArray array];
         
         // Check the data source
         NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
@@ -138,17 +144,21 @@
             UIView *elementWrapperView = [self elementWrapperViewForIndex:index];
             [self addSubview:elementWrapperView];
             self.elementWrapperViews = [self.elementWrapperViews arrayByAddingObject:elementWrapperView];
+            
+            // The original size needs to be saved separately (since views are not created again)
+            self.elementWrapperViewSizeValues = [self.elementWrapperViewSizeValues arrayByAddingObject:[NSValue valueWithCGSize:elementWrapperView.frame.size]];
         }
     }
     
     // Calculate the needed total size to display all elements
     CGFloat requiredWidth = floatmax(-self.pointerViewTopLeftOffset.width, 0.f) + floatmax(self.pointerViewBottomRightOffset.width, 0.f);
     CGFloat requiredHeight = 0.f;
-    for (UIView *elementWrapperView in self.elementWrapperViews) {
-        requiredWidth += CGRectGetWidth(elementWrapperView.frame);
+    for (NSValue *elementWrapperViewSizeValue in self.elementWrapperViewSizeValues) {
+        CGSize elementWrapperViewSize = [elementWrapperViewSizeValue CGSizeValue];
+        requiredWidth += elementWrapperViewSize.width;
         
-        if (floatgt(CGRectGetHeight(elementWrapperView.frame), requiredHeight)) {
-            requiredHeight = CGRectGetHeight(elementWrapperView.frame);
+        if (floatgt(elementWrapperViewSize.height, requiredHeight)) {
+            requiredHeight = elementWrapperViewSize.height;
         }
     }
     requiredHeight += floatmax(-self.pointerViewTopLeftOffset.height, 0.f) + floatmax(self.pointerViewBottomRightOffset.height, 0.f);
@@ -159,25 +169,32 @@
     }
     // Not large enough: Scale all views so that they can fit with no space in between
     else {
+        NSUInteger i = 0;
         CGFloat factor = CGRectGetWidth(self.frame) / requiredWidth;
         for (UIView *elementWrapperView in self.elementWrapperViews) {
-            elementWrapperView.frame = CGRectMake(CGRectGetMinX(elementWrapperView.frame),
-                                                  CGRectGetMinY(elementWrapperView.frame),
-                                                  factor * CGRectGetWidth(elementWrapperView.frame),
-                                                  CGRectGetHeight(elementWrapperView.frame));
+            CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
+            
+            elementWrapperView.bounds = CGRectMake(0.f,
+                                                   0.f,
+                                                   factor * elementWrapperViewSize.width,
+                                                   elementWrapperViewSize.height);
+            ++i;
         }
         
         m_spacing = 0.f;
     }
     
     // Cursor not tall enough: Scale all views so that they can fit vertically
+    NSUInteger i = 0;
     if (floatgt(requiredHeight, CGRectGetHeight(self.frame))) {
         CGFloat factor = CGRectGetHeight(self.frame) / requiredHeight;
         for (UIView *elementWrapperView in self.elementWrapperViews) {
-            elementWrapperView.frame = CGRectMake(CGRectGetMinX(elementWrapperView.frame),
-                                                  CGRectGetMinY(elementWrapperView.frame),
-                                                  CGRectGetWidth(elementWrapperView.frame),
-                                                  factor * CGRectGetHeight(elementWrapperView.frame));
+            CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
+            
+            elementWrapperView.bounds = CGRectMake(0.f,
+                                                   0.f,
+                                                   elementWrapperViewSize.width,
+                                                   factor * elementWrapperViewSize.height);
         }
     }
     
@@ -288,8 +305,8 @@
         CGSize otherTitleSize = [title sizeWithFont:otherFont];
         UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f,
                                                                            0.f,
-                                                                           floatmax(titleSize.width, otherTitleSize.width),
-                                                                           floatmax(titleSize.height, otherTitleSize.height))]
+                                                                           floatmax(titleSize.width, otherTitleSize.width) + 10.f,
+                                                                           floatmax(titleSize.height, otherTitleSize.height) + 10.f)]
                                  autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
@@ -297,6 +314,8 @@
         elementLabel.textColor = textColor;
         elementLabel.shadowColor = shadowColor;
         elementLabel.shadowOffset = shadowOffset;
+        elementLabel.textAlignment = NSTextAlignmentCenter;
+        elementLabel.autoresizingMask = HLSViewAutoresizingAll;
         
         return elementLabel;
     }
@@ -319,17 +338,15 @@
     
     UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,
                                                                     0.f,
-                                                                    floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame)),
-                                                                    floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame)))] autorelease];
-    wrapperView.backgroundColor = [UIColor clearColor];
+                                                                    floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame) + 10.f),
+                                                                    floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame) + 10.f))] autorelease];
+    wrapperView.backgroundColor = [UIColor redColor];
     
     [wrapperView addSubview:elementView];
     elementView.center = wrapperView.center;
-    elementView.autoresizingMask = HLSViewAutoresizingAll;
     
     [wrapperView addSubview:selectedElementView];
     selectedElementView.center = wrapperView.center;
-    selectedElementView.autoresizingMask = HLSViewAutoresizingAll;
     selectedElementView.hidden = YES;
     
     return wrapperView;
@@ -526,6 +543,7 @@
         [view removeFromSuperview];
     }
     self.elementWrapperViews = nil;
+    self.elementWrapperViewSizeValues = nil;
     
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
