@@ -185,7 +185,7 @@
     CGFloat xPos = floatmax(-self.pointerViewTopLeftOffset.width, 0.f);
     for (UIView *elementWrapperView in self.elementWrapperViews) {
         // Centered in main frame
-        elementWrapperView.frame = CGRectMake(xPos,
+        elementWrapperView.frame = CGRectMake(floorf(xPos),
                                               floorf((CGRectGetHeight(self.frame) - CGRectGetHeight(elementWrapperView.frame)) / 2.f),
                                               CGRectGetWidth(elementWrapperView.frame),
                                               CGRectGetHeight(elementWrapperView.frame));
