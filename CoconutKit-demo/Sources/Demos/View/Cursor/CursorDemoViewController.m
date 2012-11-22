@@ -88,7 +88,6 @@ static NSArray *s_folders = nil;
     self.weekDaysCursor.dataSource = self;
     self.weekDaysCursor.delegate = self;
     [self.weekDaysCursor moveToIndex:3 animated:NO];
-    self.weekDaysCursor.spacing = 30.f;
     self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
     self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
     

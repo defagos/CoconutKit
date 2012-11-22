@@ -39,7 +39,6 @@
 @private
     NSArray *m_elementWrapperViews;
     BOOL m_animated;
-    CGFloat m_spacing;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
@@ -50,6 +49,7 @@
     BOOL m_grabbed;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
+    CGFloat m_spacing;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
@@ -60,11 +60,6 @@
  * Default value is YES
  */
 @property (nonatomic, assign, getter=isAnimated) BOOL animated;
-
-/**
- * Spacing between elements displayed by the cursor (default is 20 px)
- */
-@property (nonatomic, assign) CGFloat spacing;
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.

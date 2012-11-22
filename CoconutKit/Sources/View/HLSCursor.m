@@ -15,8 +15,6 @@
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 
-static const CGFloat kCursorDefaultSpacing = 20.f;
-
 @interface HLSCursor ()
 
 - (void)hlsCursorInit;
@@ -84,9 +82,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 
 - (void)hlsCursorInit
 {
-    self.spacing = kCursorDefaultSpacing;
-    self.pointerViewTopLeftOffset = CGSizeMake(-kCursorDefaultSpacing / 2.f, -kCursorDefaultSpacing / 2.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(kCursorDefaultSpacing / 2.f, kCursorDefaultSpacing / 2.f);
+    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
     
     self.animated = YES;
 }
@@ -96,8 +93,6 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 @synthesize elementWrapperViews = m_elementWrapperViews;
 
 @synthesize animated = m_animated;
-
-@synthesize spacing = m_spacing;
 
 @synthesize pointerContainerView = m_pointerContainerView;
 
@@ -146,35 +141,55 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
         }
     }
     
-    // Calculate the needed total width
-    CGFloat totalWidth = 0.f;
+    // Calculate the needed total size to display all elements
+    CGFloat requiredWidth = floatmax(-self.pointerViewTopLeftOffset.width, 0.f) + floatmax(self.pointerViewBottomRightOffset.width, 0.f);
+    CGFloat requiredHeight = 0.f;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        totalWidth += CGRectGetWidth(elementWrapperView.frame) + self.spacing;
+        requiredWidth += CGRectGetWidth(elementWrapperView.frame);
+        
+        if (floatgt(CGRectGetHeight(elementWrapperView.frame), requiredHeight)) {
+            requiredHeight = CGRectGetHeight(elementWrapperView.frame);
+        }
     }
-    totalWidth += - self.spacing                                        /* one too much; remove */
-    + floatmax(0.f, -self.pointerViewTopLeftOffset.width)           /* pointer must fit left if larger than element views */
-    + floatmax(0.f, self.pointerViewBottomRightOffset.width);       /* pointer must fit right if larger than element views */
+    requiredHeight += floatmax(-self.pointerViewTopLeftOffset.height, 0.f) + floatmax(self.pointerViewBottomRightOffset.height, 0.f);
     
-    // Adjust individual frames so that the element views are centered within the available frame; warn if too large (will still
-    // be centered)
-    CGFloat xPos = floorf(fabsf(CGRectGetWidth(self.frame) - totalWidth) / 2.f) + floatmax(0.f, -self.pointerViewTopLeftOffset.width);
-    if (floatgt(totalWidth, CGRectGetWidth(self.frame))) {
-        HLSLoggerWarn(@"Cursor frame not wide enough");
-        xPos = -xPos;
+    // Cursor large enough so that everything fits in: Add space between elements
+    if (floatle(requiredWidth, CGRectGetWidth(self.frame))) {
+        m_spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
     }
+    // Not large enough: Scale all views so that they can fit with no space in between
+    else {
+        CGFloat factor = CGRectGetWidth(self.frame) / requiredWidth;
+        for (UIView *elementWrapperView in self.elementWrapperViews) {
+            elementWrapperView.frame = CGRectMake(CGRectGetMinX(elementWrapperView.frame),
+                                                  CGRectGetMinY(elementWrapperView.frame),
+                                                  factor * CGRectGetWidth(elementWrapperView.frame),
+                                                  CGRectGetHeight(elementWrapperView.frame));
+        }
+        
+        m_spacing = 0.f;
+    }
+    
+    // Cursor not tall enough: Scale all views so that they can fit vertically
+    if (floatgt(requiredHeight, CGRectGetHeight(self.frame))) {
+        CGFloat factor = CGRectGetHeight(self.frame) / requiredHeight;
+        for (UIView *elementWrapperView in self.elementWrapperViews) {
+            elementWrapperView.frame = CGRectMake(CGRectGetMinX(elementWrapperView.frame),
+                                                  CGRectGetMinY(elementWrapperView.frame),
+                                                  CGRectGetWidth(elementWrapperView.frame),
+                                                  factor * CGRectGetHeight(elementWrapperView.frame));
+        }
+    }
+    
+    // Adjust individual frames so that the element views are centered within the available frame
+    CGFloat xPos = floatmax(-self.pointerViewTopLeftOffset.width, 0.f);
     for (UIView *elementWrapperView in self.elementWrapperViews) {
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(xPos,
                                               floorf((CGRectGetHeight(self.frame) - CGRectGetHeight(elementWrapperView.frame)) / 2.f),
                                               CGRectGetWidth(elementWrapperView.frame),
                                               CGRectGetHeight(elementWrapperView.frame));
-        xPos += CGRectGetWidth(elementWrapperView.frame) + self.spacing;
-        
-        // Check if element view (including cursor if larger) fits vertically (at the top, respectively at the bottom)
-        if (floatgt(CGRectGetHeight(elementWrapperView.frame) / 2.f + floatmax(0.f, -self.pointerViewTopLeftOffset.height), CGRectGetHeight(self.frame) / 2.f)
-            || floatgt(CGRectGetHeight(elementWrapperView.frame) / 2.f + floatmax(0.f, self.pointerViewBottomRightOffset.height), CGRectGetHeight(self.frame) / 2.f)) {
-            HLSLoggerWarn(@"Cursor frame not tall enough");
-        }
+        xPos += CGRectGetWidth(elementWrapperView.frame) + m_spacing;
     }
     
     if (! m_viewsCreated) {
@@ -310,9 +325,11 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     [wrapperView addSubview:elementView];
     elementView.center = wrapperView.center;
+    elementView.autoresizingMask = HLSViewAutoresizingAll;
     
     [wrapperView addSubview:selectedElementView];
     selectedElementView.center = wrapperView.center;
+    selectedElementView.autoresizingMask = HLSViewAutoresizingAll;
     selectedElementView.hidden = YES;
     
     return wrapperView;
@@ -422,8 +439,8 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
 {
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - self.spacing / 2.f)
-            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + self.spacing / 2.f)) {
+        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - m_spacing / 2.f)
+            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + m_spacing / 2.f)) {
             return index;
         }
         ++index;
@@ -431,7 +448,7 @@ static const CGFloat kCursorDefaultSpacing = 20.f;
     
     // No match found; return leftmost or rightmost element view
     UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
-    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - self.spacing / 2.f)) {
+    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - m_spacing / 2.f)) {
         return 0;
     }
     else {
