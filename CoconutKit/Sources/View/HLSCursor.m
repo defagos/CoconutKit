@@ -85,8 +85,8 @@
 
 - (void)hlsCursorInit
 {
-    self.pointerViewTopLeftOffset = CGSizeMake(0.f, 0.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(0.f, 0.f);
+    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
     
     self.animated = YES;
 }
@@ -292,8 +292,8 @@
         CGSize otherTitleSize = [title sizeWithFont:otherFont];
         UILabel *elementLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.f,
                                                                            0.f,
-                                                                           floatmax(titleSize.width, otherTitleSize.width) + 10.f,
-                                                                           floatmax(titleSize.height, otherTitleSize.height) + 10.f)]
+                                                                           floatmax(titleSize.width, otherTitleSize.width),
+                                                                           floatmax(titleSize.height, otherTitleSize.height))]
                                  autorelease];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
@@ -325,8 +325,8 @@
     
     UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,
                                                                     0.f,
-                                                                    floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame) + 10.f),
-                                                                    floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame) + 10.f))] autorelease];
+                                                                    floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame)),
+                                                                    floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame)))] autorelease];
     wrapperView.backgroundColor = [UIColor clearColor];
     
     [wrapperView addSubview:elementView];
