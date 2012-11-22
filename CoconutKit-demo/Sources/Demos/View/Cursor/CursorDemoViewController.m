@@ -105,6 +105,8 @@ static NSArray *s_folders = nil;
     
     self.foldersCursor.dataSource = self;
     self.foldersCursor.delegate = self;
+    self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
     
     self.mixedFoldersCursor.dataSource = self;
     self.mixedFoldersCursor.delegate = self;

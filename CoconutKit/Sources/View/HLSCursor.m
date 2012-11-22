@@ -164,49 +164,36 @@
     requiredHeight += floatmax(-self.pointerViewTopLeftOffset.height, 0.f) + floatmax(self.pointerViewBottomRightOffset.height, 0.f);
     
     // Cursor large enough so that everything fits in: Add space between elements
+    CGFloat widthScaleFactor = 1.f;
     if (floatle(requiredWidth, CGRectGetWidth(self.frame))) {
         m_spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
     }
     // Not large enough: Scale all views so that they can fit with no space in between
     else {
-        NSUInteger i = 0;
-        CGFloat factor = CGRectGetWidth(self.frame) / requiredWidth;
-        for (UIView *elementWrapperView in self.elementWrapperViews) {
-            CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
-            
-            elementWrapperView.bounds = CGRectMake(0.f,
-                                                   0.f,
-                                                   factor * elementWrapperViewSize.width,
-                                                   elementWrapperViewSize.height);
-            ++i;
-        }
-        
+        widthScaleFactor = CGRectGetWidth(self.frame) / requiredWidth;
         m_spacing = 0.f;
     }
     
     // Cursor not tall enough: Scale all views so that they can fit vertically
-    NSUInteger i = 0;
+    CGFloat heightScaleFactor = 1.f;
     if (floatgt(requiredHeight, CGRectGetHeight(self.frame))) {
-        CGFloat factor = CGRectGetHeight(self.frame) / requiredHeight;
-        for (UIView *elementWrapperView in self.elementWrapperViews) {
-            CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
-            
-            elementWrapperView.bounds = CGRectMake(0.f,
-                                                   0.f,
-                                                   elementWrapperViewSize.width,
-                                                   factor * elementWrapperViewSize.height);
-        }
+        heightScaleFactor = CGRectGetHeight(self.frame) / requiredHeight;
     }
     
     // Adjust individual frames so that the element views are centered within the available frame
     CGFloat xPos = floatmax(-self.pointerViewTopLeftOffset.width, 0.f);
+    NSUInteger i = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
+        CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
+        
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(floorf(xPos),
                                               floorf((CGRectGetHeight(self.frame) - CGRectGetHeight(elementWrapperView.frame)) / 2.f),
-                                              CGRectGetWidth(elementWrapperView.frame),
-                                              CGRectGetHeight(elementWrapperView.frame));
+                                              widthScaleFactor * elementWrapperViewSize.width,
+                                              heightScaleFactor * elementWrapperViewSize.height);
         xPos += CGRectGetWidth(elementWrapperView.frame) + m_spacing;
+        
+        ++i;
     }
     
     if (! m_viewsCreated) {
@@ -340,7 +327,7 @@
                                                                     0.f,
                                                                     floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame) + 10.f),
                                                                     floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame) + 10.f))] autorelease];
-    wrapperView.backgroundColor = [UIColor redColor];
+    wrapperView.backgroundColor = [UIColor clearColor];
     
     [wrapperView addSubview:elementView];
     elementView.center = wrapperView.center;
