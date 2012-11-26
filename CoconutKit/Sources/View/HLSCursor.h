@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
+
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
 
@@ -35,7 +37,7 @@
  *
  * Designated initializer: -initWithFrame:
  */
-@interface HLSCursor : UIView {
+@interface HLSCursor : UIView <HLSAnimationDelegate> {
 @private
     NSArray *m_elementWrapperViews;
     NSArray *m_elementWrapperViewSizeValues;
@@ -45,11 +47,10 @@
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
     NSUInteger m_selectedIndex;
-    BOOL m_dragging;
-    BOOL m_grabbed;
-    BOOL m_touching;
-    CGFloat m_touchPointX;
     CGFloat m_initialDraggingXOffset;
+    BOOL m_moving;
+    BOOL m_dragging;
+    BOOL m_holding;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
     CGFloat m_spacing;
@@ -93,7 +94,7 @@
  *
  * If the animated property has been set to NO, the animated parameter is ignored
  */
-- (void)moveToIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)setSelectedIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
  * Reload the cursor from the data source. The pointer is left at the same index where it was, except if the index
@@ -148,13 +149,13 @@
 - (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index;
 
 // Triggered when the user starts dragging the pointer
-- (void)cursorDidStartDragging:(HLSCursor *)cursor;
+- (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index;
 
 // Triggered when the user is dragging the pointer. The nearest index is given as parameter
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index;
 
 // Triggered when the user stops dragging the pointer
-- (void)cursorDidStopDragging:(HLSCursor *)cursor;
+- (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index;
 
 // Triggered when the user stops touching the cursor
 - (void)cursor:(HLSCursor *)cursor didTouchUpNearIndex:(NSUInteger)index;

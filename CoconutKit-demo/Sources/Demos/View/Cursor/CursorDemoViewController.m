@@ -93,12 +93,12 @@ static NSArray *s_folders = nil;
     
     self.weekDaysCursor.dataSource = self;
     self.weekDaysCursor.delegate = self;
-    [self.weekDaysCursor moveToIndex:3 animated:NO];
+    [self.weekDaysCursor setSelectedIndex:3 animated:NO];
     
     self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
-    [self.randomRangeCursor moveToIndex:4 animated:NO];
+    [self.randomRangeCursor setSelectedIndex:4 animated:NO];
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
@@ -297,9 +297,9 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursorDidStartDragging:(HLSCursor *)cursor
+- (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did start dragging", cursor);
+    HLSLoggerInfo(@"Cursor %p did start dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
         if (! self.popoverController) {
@@ -329,9 +329,9 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursorDidStopDragging:(HLSCursor *)cursor
+- (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did stop dragging", cursor);
+    HLSLoggerInfo(@"Cursor %p did stop dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
         [self.popoverController dismissPopoverAnimated:NO];
@@ -342,7 +342,7 @@ static NSArray *s_folders = nil;
 
 - (IBAction)moveWeekDaysPointerToNextDay:(id)sender
 {
-    [self.weekDaysCursor moveToIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
+    [self.weekDaysCursor setSelectedIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
 }
 
 - (IBAction)reloadRandomRangeCursor:(id)sender
