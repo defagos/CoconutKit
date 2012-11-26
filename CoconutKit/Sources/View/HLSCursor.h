@@ -46,8 +46,10 @@
     CGSize m_pointerViewBottomRightOffset;
     NSUInteger m_selectedIndex;
     BOOL m_dragging;
-    CGFloat m_initialDraggingXOffset;
     BOOL m_grabbed;
+    BOOL m_touching;
+    CGFloat m_touchPointX;
+    CGFloat m_initialDraggingXOffset;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
     CGFloat m_spacing;

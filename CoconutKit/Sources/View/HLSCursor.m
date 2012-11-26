@@ -543,8 +543,11 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    m_touching = YES;
+    
     // Might be a click, or a click and hold (which will then trigger a drag event)
     CGPoint point = [[touches anyObject] locationInView:self];
+    m_touchPointX = point.x;
     NSUInteger index = [self indexForXPos:point.x];
     if (index != m_selectedIndex) {
         [self deselectPreviousIndex];
@@ -600,7 +603,14 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self endTouches:touches animated:self.animated];
+    CGPoint point = [[touches anyObject] locationInView:self];
+    NSUInteger index = [self indexForXPos:point.x];
+    if (index != m_selectedIndex) {
+        [self endTouches:touches animated:self.animated];
+    }
+    else {
+        [self endTouches:touches animated:NO];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -623,6 +633,7 @@
     
     m_dragging = NO;
     m_grabbed = NO;
+    m_touching = NO;
     
     if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
         [self.delegate cursor:self didTouchUpNearIndex:index];
@@ -639,7 +650,23 @@
 - (void)pointerAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
-    [self finalizeSelectionForIndex:[self selectedIndex]];
+    
+    if (! m_touching) {
+        [self finalizeSelectionForIndex:[self selectedIndex]];
+    }
+    else {
+        m_grabbed = YES;
+        m_dragging = YES;
+        
+        if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:)]) {
+            [self.delegate cursorDidStartDragging:self];
+        }
+        
+        m_initialDraggingXOffset = m_touchPointX - self.pointerContainerView.center.x;
+        if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
+            [self.delegate cursor:self didDragNearIndex:[self selectedIndex]];
+        }
+    }
 }
 
 @end
