@@ -215,6 +215,9 @@
         
         [self setSelectedIndex:m_initialIndex animated:NO];
     }
+    else if (! m_dragging && ! m_moving) {
+        self.pointerContainerView.frame = [self pointerFrameForIndex:m_selectedIndex];
+    }
     
     m_viewsCreated = YES;
 }
