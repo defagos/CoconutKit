@@ -356,7 +356,7 @@
     moveAnimation.delegate = self;
     moveAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:selectedIndex],
                               @"targetIndex", nil];
-    [moveAnimation playAnimated:animated];
+    [moveAnimation playAnimated:animated && self.animated];
 }
 
 - (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -503,7 +503,7 @@
     }
     
     if (index != m_selectedIndex) {
-        [self setSelectedIndex:index animated:YES];
+        [self setSelectedIndex:index animated:self.animated];
     }
 }
 
@@ -526,8 +526,10 @@
             
             [self showElementViewAtIndex:m_selectedIndex selected:NO];
             
-            if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-                [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
+            if (! m_moved) {
+                if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
+                    [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
+                }                
             }
             
             if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:nearIndex:)]) {
@@ -567,7 +569,7 @@
         snapAnimation.delegate = self;
         snapAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:index],
                                   @"targetIndex", nil];
-        [snapAnimation playAnimated:YES];
+        [snapAnimation playAnimated:self.animated];
     }
     else {
         if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
@@ -586,6 +588,7 @@
     
     m_holding = NO;
     m_dragging = NO;
+    m_moved = NO;
     
     if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
         [self.delegate cursor:self didTouchUpNearIndex:index];
@@ -601,8 +604,13 @@
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
+    if (! m_viewsCreated) {
+        return;
+    }
+    
     if ([animation.tag isEqualToString:@"move"]) {
         m_moving = YES;
+        m_moved = YES;
         
         [self showElementViewAtIndex:m_selectedIndex selected:NO];
         

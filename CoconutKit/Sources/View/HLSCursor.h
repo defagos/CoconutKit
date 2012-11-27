@@ -48,6 +48,7 @@
     CGSize m_pointerViewBottomRightOffset;
     NSUInteger m_selectedIndex;
     CGFloat m_initialDraggingXOffset;
+    BOOL m_moved;
     BOOL m_moving;
     BOOL m_dragging;
     BOOL m_holding;
