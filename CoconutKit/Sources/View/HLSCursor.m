@@ -212,13 +212,15 @@
         [self.pointerContainerView addSubview:self.pointerView];
         [self addSubview:self.pointerContainerView];
         
+        m_creatingViews = YES;
+        
         [self setSelectedIndex:m_initialIndex animated:NO];
+        
+        m_viewsCreated = YES;
     }
     else if (! m_dragging && ! m_moving) {
         self.pointerContainerView.frame = [self pointerFrameForIndex:m_selectedIndex];
     }
-    
-    m_viewsCreated = YES;
 }
 
 - (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected
@@ -336,30 +338,33 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
-    // Will only be used if setSelectedIndex has been called before the views are actually created; not
-    // wrapped in an "if (! m_viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
-    // the most recently set value is used as initial index
-    m_initialIndex = selectedIndex;
-    
-    if ([self.elementWrapperViews count] > 0 && selectedIndex >= [self.elementWrapperViews count]) {
-        HLSLoggerWarn(@"Index outside range. Set to last index");
-        selectedIndex = [self.elementWrapperViews count] - 1;
+    if (m_creatingViews) {
+        if ([self.elementWrapperViews count] > 0 && selectedIndex >= [self.elementWrapperViews count]) {
+            HLSLoggerWarn(@"Index outside range. Set to last index");
+            selectedIndex = [self.elementWrapperViews count] - 1;
+        }
+        
+        HLSViewAnimation *moveViewAnimation11 = [HLSViewAnimation animation];
+        [moveViewAnimation11 transformFromRect:self.pointerContainerView.frame
+                                        toRect:[self pointerFrameForIndex:selectedIndex]];
+        HLSViewAnimationStep *moveAnimationStep1 = [HLSViewAnimationStep animationStep];
+        moveAnimationStep1.duration = self.animationDuration;
+        [moveAnimationStep1 addViewAnimation:moveViewAnimation11 forView:self.pointerContainerView];
+        
+        HLSAnimation *moveAnimation = [HLSAnimation animationWithAnimationStep:moveAnimationStep1];
+        moveAnimation.tag = @"move";
+        moveAnimation.lockingUI = YES;
+        moveAnimation.delegate = self;
+        moveAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:selectedIndex],
+                                  @"targetIndex", nil];
+        [moveAnimation playAnimated:animated];
     }
-    
-    HLSViewAnimation *moveViewAnimation11 = [HLSViewAnimation animation];
-    [moveViewAnimation11 transformFromRect:self.pointerContainerView.frame
-                                    toRect:[self pointerFrameForIndex:selectedIndex]];
-    HLSViewAnimationStep *moveAnimationStep1 = [HLSViewAnimationStep animationStep];
-    moveAnimationStep1.duration = self.animationDuration;
-    [moveAnimationStep1 addViewAnimation:moveViewAnimation11 forView:self.pointerContainerView];
-    
-    HLSAnimation *moveAnimation = [HLSAnimation animationWithAnimationStep:moveAnimationStep1];
-    moveAnimation.tag = @"move";
-    moveAnimation.lockingUI = YES;
-    moveAnimation.delegate = self;
-    moveAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:selectedIndex],
-                              @"targetIndex", nil];
-    [moveAnimation playAnimated:animated];
+    else {
+        // Will only be used if setSelectedIndex has been called before the views are actually created; not
+        // wrapped in an "if (! m_viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
+        // the most recently set value is used as initial index
+        m_initialIndex = selectedIndex;
+    }
 }
 
 - (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -576,17 +581,19 @@
         [snapAnimation playAnimated:YES];
     }
     else {
-        if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
-            m_selectedIndex = index;
-        }
-        else {
-            m_selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
-        }
-        
-        [self showElementViewAtIndex:m_selectedIndex selected:YES];
-        
-        if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
-            [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
+        if (m_selectedIndex != index) {
+            if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
+                m_selectedIndex = index;
+            }
+            else {
+                m_selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
+            }
+            
+            [self showElementViewAtIndex:m_selectedIndex selected:YES];
+            
+            if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
+                [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
+            }
         }
         
         m_holding = NO;

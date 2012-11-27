@@ -52,6 +52,7 @@
     BOOL m_moving;
     BOOL m_dragging;
     BOOL m_holding;
+    BOOL m_creatingViews;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
     CGFloat m_spacing;
