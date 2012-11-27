@@ -20,7 +20,6 @@
     HLSCursor *m_timeScalesCursor;
     HLSCursor *m_foldersCursor;
     HLSCursor *m_mixedFoldersCursor;
-    UISwitch *m_animatedSwitch;
     UIPopoverController *m_popoverController;
     CGSize m_originalRandomRangeCursorSize;
 }
@@ -34,11 +33,9 @@
 @property (nonatomic, retain) IBOutlet HLSCursor *timeScalesCursor;
 @property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;
 @property (nonatomic, retain) IBOutlet HLSCursor *mixedFoldersCursor;
-@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
 - (IBAction)moveWeekDaysPointerToNextDay:(id)sender;
 - (IBAction)reloadRandomRangeCursor:(id)sender;
 - (IBAction)sizeChanged:(id)sender;
-- (IBAction)toggleAnimated:(id)sender;
 
 @end

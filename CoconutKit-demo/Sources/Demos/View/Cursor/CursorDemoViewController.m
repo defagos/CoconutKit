@@ -58,7 +58,6 @@ static NSArray *s_folders = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
-    self.animatedSwitch = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -80,8 +79,6 @@ static NSArray *s_folders = nil;
 @synthesize foldersCursor = m_foldersCursor;
 
 @synthesize mixedFoldersCursor = m_mixedFoldersCursor;
-
-@synthesize animatedSwitch = m_animatedSwitch;
 
 @synthesize popoverController = m_popoverController;
 
@@ -113,8 +110,7 @@ static NSArray *s_folders = nil;
     self.mixedFoldersCursor.dataSource = self;
     self.mixedFoldersCursor.delegate = self;
     
-    // All cursors are animated simultaneously or not in this demo. Check the first one
-    self.animatedSwitch.on = self.weekDaysCursor.animated;
+    self.weekDaysCursor.animationDuration = 0.05;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -356,15 +352,6 @@ static NSArray *s_folders = nil;
                                                0.f,
                                                m_originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
                                                m_originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
-}
-
-- (IBAction)toggleAnimated:(id)sender
-{
-    self.weekDaysCursor.animated = self.animatedSwitch.on;
-    self.randomRangeCursor.animated = self.animatedSwitch.on;
-    self.timeScalesCursor.animated = self.animatedSwitch.on;
-    self.foldersCursor.animated = self.animatedSwitch.on;
-    self.mixedFoldersCursor.animated = self.animatedSwitch.on;
 }
 
 #pragma mark Localization

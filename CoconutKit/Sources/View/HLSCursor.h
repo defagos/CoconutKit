@@ -41,11 +41,11 @@
 @private
     NSArray *m_elementWrapperViews;
     NSArray *m_elementWrapperViewSizeValues;
-    BOOL m_animated;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
+    NSTimeInterval m_animationDuration;
     NSUInteger m_selectedIndex;
     CGFloat m_initialDraggingXOffset;
     BOOL m_moved;
@@ -60,13 +60,6 @@
 }
 
 /**
- * If set to YES, the pointer is moved and snapped animated
- *
- * Default value is YES
- */
-@property (nonatomic, assign, getter=isAnimated) BOOL animated;
-
-/**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
  * If you use a custom view, be sure it can stretch properly since the pointer view frame will be adjusted depending
  * on the element it is on. In general, your custom pointer view is likely to be transparent so that the element
@@ -75,6 +68,13 @@
  * As soon as the pointer view has been set it cannot be changed anymore.
  */
 @property (nonatomic, retain) IBOutlet UIView *pointerView;
+
+/**
+ * The duration of cursor animations
+ *
+ * Default is 0.2
+ */
+@property (nonatomic, assign) NSTimeInterval animationDuration;
 
 /**
  * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points

@@ -76,8 +76,7 @@
 {
     self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
     self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
-    
-    self.animated = YES;
+    self.animationDuration = 0.2;
 }
 
 #pragma mark Accessors and mutators
@@ -85,8 +84,6 @@
 @synthesize elementWrapperViews = m_elementWrapperViews;
 
 @synthesize elementWrapperViewSizeValues = m_elementWrapperViewSizeValues;
-
-@synthesize animated = m_animated;
 
 @synthesize pointerContainerView = m_pointerContainerView;
 
@@ -101,6 +98,8 @@
     
     m_pointerView = [pointerView retain];
 }
+
+@synthesize animationDuration = m_animationDuration;
 
 @synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
 
@@ -351,6 +350,7 @@
     [moveViewAnimation11 transformFromRect:self.pointerContainerView.frame
                                     toRect:[self pointerFrameForIndex:selectedIndex]];
     HLSViewAnimationStep *moveAnimationStep1 = [HLSViewAnimationStep animationStep];
+    moveAnimationStep1.duration = self.animationDuration;
     [moveAnimationStep1 addViewAnimation:moveViewAnimation11 forView:self.pointerContainerView];
     
     HLSAnimation *moveAnimation = [HLSAnimation animationWithAnimationStep:moveAnimationStep1];
@@ -359,7 +359,7 @@
     moveAnimation.delegate = self;
     moveAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:selectedIndex],
                               @"targetIndex", nil];
-    [moveAnimation playAnimated:animated && self.animated];
+    [moveAnimation playAnimated:animated];
 }
 
 - (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
@@ -506,7 +506,7 @@
     }
     
     if (index != m_selectedIndex) {
-        [self setSelectedIndex:index animated:self.animated];
+        [self setSelectedIndex:index animated:YES];
     }
 }
 
@@ -564,6 +564,7 @@
         HLSViewAnimation *snapViewAnimation11 = [HLSViewAnimation animation];
         [snapViewAnimation11 transformFromRect:self.pointerContainerView.frame toRect:[self pointerFrameForIndex:index]];
         HLSViewAnimationStep *snapAnimationStep1 = [HLSViewAnimationStep animationStep];
+        snapAnimationStep1.duration = self.animationDuration;
         [snapAnimationStep1 addViewAnimation:snapViewAnimation11 forView:self.pointerContainerView];
         
         HLSAnimation *snapAnimation = [HLSAnimation animationWithAnimationStep:snapAnimationStep1];
@@ -572,7 +573,7 @@
         snapAnimation.delegate = self;
         snapAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:index],
                                   @"targetIndex", nil];
-        [snapAnimation playAnimated:self.animated];
+        [snapAnimation playAnimated:YES];
     }
     else {
         if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
@@ -587,11 +588,11 @@
         if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
             [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
         }
+        
+        m_holding = NO;
+        m_dragging = NO;
+        m_moved = NO;
     }
-    
-    m_holding = NO;
-    m_dragging = NO;
-    m_moved = NO;
     
     if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
         [self.delegate cursor:self didTouchUpNearIndex:index];
@@ -649,6 +650,10 @@
         if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
             [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
         }
+        
+        m_holding = NO;
+        m_dragging = NO;
+        m_moved = NO;
     }
 }
 
