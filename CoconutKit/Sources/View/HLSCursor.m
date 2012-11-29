@@ -291,7 +291,7 @@
         elementLabel.textColor = textColor;
         elementLabel.shadowColor = shadowColor;
         elementLabel.shadowOffset = shadowOffset;
-        elementLabel.textAlignment = NSTextAlignmentCenter;
+        elementLabel.textAlignment = UITextAlignmentCenter;
         elementLabel.autoresizingMask = HLSViewAutoresizingAll;
         
         return elementLabel;
