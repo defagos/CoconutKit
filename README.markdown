@@ -111,7 +111,7 @@ Some code snippets have been provided in the `Snippets` directory (and more will
 
 ### How can I learn using CoconutKit?
 
-Learning how to use CoconutKit components always starts with header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there since I avoid external documentation which often gets outdated. After you have read the documentation of a class, have a look at the demos and unit tests to see how the component is used in a concrete case.
+To discover what CoconutKit can do, read the [project wiki](https://github.com/defagos/CoconutKit/wiki) and, once you want to learn more, have a look at header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there since I avoid detailed external documentation which often gets outdated. After you have read the documentation of a class, have a look at the demos and unit tests to see how the component is used in a concrete case.
 
 Good documentation is critical. If you think some documentation is missing, unclear or incorrect, please file a ticket.
 
