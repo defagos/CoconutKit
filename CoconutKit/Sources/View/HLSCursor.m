@@ -8,8 +8,10 @@
 
 #import "HLSCursor.h"
 
+#import "HLSAnimation.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "HLSViewAnimationStep.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
