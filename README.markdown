@@ -244,6 +244,11 @@ The following lists all people who contributed to CoconutKit:
 
 ### Release notes
 
+#### Version 2.0.1
+
+* HLSCursor now fills the associated view frame and resizes properly, the spacing parameter has therefore been removed. The cursor behaviour has been improved. The animation duration can now be changed
+* Fix a bug with responders
+
 #### Version 2.0
 
 * CoconutKit containers have been rewritten from scratch and are now more powerful than ever:
