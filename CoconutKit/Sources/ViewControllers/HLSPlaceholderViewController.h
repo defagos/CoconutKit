@@ -146,8 +146,8 @@
  * once the placeholder view controller has been displayed once.
  *
  * The order of the outlets in an IBOutletCollection is unreliable (it is sadly not the order in which they are bound
- * in the nib). To fix this, the placeholderViews property expects you to index placeholder views using the UIView tag
- * property, and will sort them in increasing order
+ * in the nib). Though this issue seems to affect only storyboards on iOS 5 and 6, the placeholderViews property expects 
+ * you to index placeholder views using the UIView tag property, and will sort them in increasing order
  */
 @property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
 
