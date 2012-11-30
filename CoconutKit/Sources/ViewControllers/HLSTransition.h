@@ -16,26 +16,26 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
 /**
  * Base class for transition animations involving two views (currently for use by containers). To define your
  * own transition animation, subclass HLSTransition and implement the
- *   -animationStepsWithAppearingView:disappearingView:inView:withBounds:
+ *   -layerAnimationStepsWithAppearingView:disappearingView:inView:withBounds:
  * method to return the HLSAnimationSteps to be played when a view is brought to display, while another one is hidden
  * from view. You can also optionally implement the
- *   -reverseAnimationStepsWithAppearingView:disappearingView:inView:withBounds:
+ *   -reverseLayerAnimationStepsWithAppearingView:disappearingView:inView:withBounds:
  * method (which by default returns nil) to define the animation to be used when performing the reverse transition.
  *
- * When implementing -animationStepsWithAppearingView:disappearingView:inView:withBounds: (and its reverse counterpart), 
+ * When implementing -layerAnimationStepsWithAppearingView:disappearingView:inView:withBounds: (and its reverse counterpart),
  * keep in mind that:
  *   - appearingView, disappearingView and view must not be altered directly (in particular, you must not change their
- *     current bounds, transform or alpha directly). Those view parameters are only provided so that they can be supplied 
+ *     current bounds, transform or alpha directly). Those view parameters are only provided so that they can be supplied
  *     to
  *       -[HLSAnimationStep addViewAnimationStep:forView:]
  *     when building the animation steps. Only the transition animation is allowed to perform changes on those views
  *     when it gets played
- *   - when implementing -animationStepsWithAppearingView:disappearingView:inView:withBounds:, create your animation 
+ *   - when implementing -layerAnimationStepsWithAppearingView:disappearingView:inView:withBounds:, create your animation
  *     steps based on the folowing assumptions:
  *       - appearingView, disappearingView and view all have the received bounds parameter as bounds. Note that the
  *         real appearingView.bounds, disappearingView.bounds and view.bounds might be different, but you should not
  *         use read and use those properties when implementing your animation.
- *         You can e.g. use the dimensions of bounds to translate the appearing and / or disappearing views outside 
+ *         You can e.g. use the dimensions of bounds to translate the appearing and / or disappearing views outside
  *         the view if your animation requires it
  *       - both appearingView and disappearingView have alpha = 1.f
  *       - the layer properties are the default ones for a CALayer (e.g. rasterization is disabled)
@@ -57,10 +57,10 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * For example, here is the implementation of a push from right animation (the usual UINavigationController animation)
  * with an intrinsic duration of 0.4:
  *
- *   + (NSArray *)animationStepsWithAppearingView:(UIView *)appearingView
- *                               disappearingView:(UIView *)disappearingView
- *                                         inView:(UIView *)view
- *                                     withBounds:(CGRect)bounds
+ *   + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+ *                                    disappearingView:(UIView *)disappearingView
+ *                                              inView:(UIView *)view
+ *                                          withBounds:(CGRect)bounds
  *   {
  *       NSMutableArray *animationSteps = [NSMutableArray array];
  *
@@ -125,7 +125,7 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * If you are implementing this method, you are responsible of ensuring that all views are brought to the exact
  * same initial state which they started from
  *
- * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the 
+ * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the
  * reverse transition
  */
 + (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
@@ -142,8 +142,8 @@ extern const NSTimeInterval kAnimationTransitionDefaultDuration;
  * Return the transition animation for an appearing view and disappearing view pair (both of which must be subviews of
  * view)
  *
- * view must not be nil. Appearing view is allowed to be nil (in which case view won't be animated as well). This is 
- * a special use of this method when replaying an animation for a resurrected disappearing view, while appearingView 
+ * view must not be nil. Appearing view is allowed to be nil (in which case view won't be animated as well). This is
+ * a special use of this method when replaying an animation for a resurrected disappearing view, while appearingView
  * and therefore view are already loaded and were already correctly animated to their final location. disappearingView
  * can be nil (this is the case when the first view in the container is being animated)
  *

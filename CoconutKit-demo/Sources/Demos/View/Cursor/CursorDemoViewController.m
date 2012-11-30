@@ -53,6 +53,8 @@ static NSArray *s_folders = nil;
     self.weekDayIndexLabel = nil;
     self.randomRangeCursor = nil;
     self.randomRangeIndexLabel = nil;
+    self.widthFactorSlider = nil;
+    self.heightFactorSlider = nil;
     self.timeScalesCursor = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
@@ -67,6 +69,10 @@ static NSArray *s_folders = nil;
 @synthesize randomRangeCursor = m_randomRangeCursor;
 
 @synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
+
+@synthesize widthFactorSlider = m_widthFactorSlider;
+
+@synthesize heightFactorSlider = m_heightFactorSlider;
 
 @synthesize timeScalesCursor = m_timeScalesCursor;
 
@@ -84,15 +90,12 @@ static NSArray *s_folders = nil;
     
     self.weekDaysCursor.dataSource = self;
     self.weekDaysCursor.delegate = self;
-    [self.weekDaysCursor moveToIndex:3 animated:NO];
-    self.weekDaysCursor.spacing = 30.f;
-    self.weekDaysCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -5.f);
-    self.weekDaysCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 5.f);
+    [self.weekDaysCursor setSelectedIndex:3 animated:NO];
     
     self.randomRangeCursor.pointerView = [CursorCustomPointerView view];
     self.randomRangeCursor.dataSource = self;
     self.randomRangeCursor.delegate = self;
-    [self.randomRangeCursor moveToIndex:4 animated:NO];
+    [self.randomRangeCursor setSelectedIndex:4 animated:NO];
     
     self.timeScalesCursor.dataSource = self;
     self.timeScalesCursor.delegate = self;
@@ -101,11 +104,43 @@ static NSArray *s_folders = nil;
     
     self.foldersCursor.dataSource = self;
     self.foldersCursor.delegate = self;
-    self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(5.f, 5.f);
-    self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(-5.f, -5.f);
+    self.foldersCursor.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.foldersCursor.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
     
     self.mixedFoldersCursor.dataSource = self;
     self.mixedFoldersCursor.delegate = self;
+    
+    self.weekDaysCursor.animationDuration = 0.05;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    m_originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
+}
+
+#pragma mark Orientation management
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
+    // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
+    // the view
+    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, m_originalRandomRangeCursorSize.width, m_originalRandomRangeCursorSize.height);
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
+    // are able to restore them when rotating again, and set size according to the previous size slider value. This
+    // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
+    m_originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
+    [self sizeChanged:nil];
+    
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 #pragma mark Memory warnings
@@ -258,9 +293,9 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursorDidStartDragging:(HLSCursor *)cursor
+- (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did start dragging", cursor);
+    HLSLoggerInfo(@"Cursor %p did start dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
         if (! self.popoverController) {
@@ -290,9 +325,9 @@ static NSArray *s_folders = nil;
     }
 }
 
-- (void)cursorDidStopDragging:(HLSCursor *)cursor
+- (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did stop dragging", cursor);
+    HLSLoggerInfo(@"Cursor %p did stop dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
         [self.popoverController dismissPopoverAnimated:NO];
@@ -301,14 +336,22 @@ static NSArray *s_folders = nil;
 
 #pragma mark Event callbacks
 
-- (IBAction)moveWeekDaysPointerToNextDay
+- (IBAction)moveWeekDaysPointerToNextDay:(id)sender
 {
-    [self.weekDaysCursor moveToIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
+    [self.weekDaysCursor setSelectedIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
 }
 
-- (IBAction)reloadRandomRangeCursor
+- (IBAction)reloadRandomRangeCursor:(id)sender
 {
     [self.randomRangeCursor reloadData];
+}
+
+- (void)sizeChanged:(id)sender
+{
+    self.randomRangeCursor.bounds = CGRectMake(0.f,
+                                               0.f,
+                                               m_originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
+                                               m_originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
 }
 
 #pragma mark Localization

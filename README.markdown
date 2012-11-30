@@ -36,6 +36,8 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms. [A companion repository](https://github.com/defagos/CoconutKit-CocoaPods) exists for easy installation using CocoaPods, but you do not need to check it out directly.
 
+You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodules update --init` command.
+
 ### Supporting development
 
 CoconutKit is and will stay free. However, if you enjoy using it, you can support the countless hours of work that are invested into its creation. Thank you in advance! 
@@ -109,7 +111,7 @@ Some code snippets have been provided in the `Snippets` directory (and more will
 
 ### How can I learn using CoconutKit?
 
-Learning how to use CoconutKit components always starts with header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there since I avoid external documentation which often gets outdated. After you have read the documentation of a class, have a look at the demos and unit tests to see how the component is used in a concrete case.
+To discover what CoconutKit can do, read the [project wiki](https://github.com/defagos/CoconutKit/wiki) and, once you want to learn more, have a look at header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there since I avoid detailed external documentation which often gets outdated. After you have read the documentation of a class, have a look at the demos and unit tests to see how the component is used in a concrete case.
 
 Good documentation is critical. If you think some documentation is missing, unclear or incorrect, please file a ticket.
 
@@ -241,6 +243,11 @@ The following lists all people who contributed to CoconutKit:
 *  Joris Heuberger wrote the HLSLabel class
 
 ### Release notes
+
+#### Version 2.0.1
+
+* HLSCursor now fills the associated view frame and resizes properly, the spacing parameter has therefore been removed. The cursor behaviour has been improved. The animation duration can now be changed
+* Fix a bug with responders
 
 #### Version 2.0
 

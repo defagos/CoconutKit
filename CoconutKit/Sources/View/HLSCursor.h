@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSAnimation.h"
+
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
 
@@ -35,28 +37,28 @@
  *
  * Designated initializer: -initWithFrame:
  */
-@interface HLSCursor : UIView {
+@interface HLSCursor : UIView <HLSAnimationDelegate> {
 @private
-    NSArray *m_elementViews;
-    CGFloat m_spacing;
+    NSArray *m_elementWrapperViews;
+    NSArray *m_elementWrapperViewSizeValues;
     UIView *m_pointerView;
     UIView *m_pointerContainerView;
     CGSize m_pointerViewTopLeftOffset;
     CGSize m_pointerViewBottomRightOffset;
+    NSTimeInterval m_animationDuration;
     NSUInteger m_selectedIndex;
-    BOOL m_dragging;
     CGFloat m_initialDraggingXOffset;
-    BOOL m_grabbed;
+    BOOL m_moved;
+    BOOL m_moving;
+    BOOL m_dragging;
+    BOOL m_holding;
+    BOOL m_creatingViews;
     BOOL m_viewsCreated;
     NSUInteger m_initialIndex;
+    CGFloat m_spacing;
     id<HLSCursorDataSource> m_dataSource;
     id<HLSCursorDelegate> m_delegate;
 }
-
-/**
- * Spacing between elements displayed by the cursor (default is 20 px)
- */
-@property (nonatomic, assign) CGFloat spacing;
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
@@ -69,11 +71,18 @@
 @property (nonatomic, retain) IBOutlet UIView *pointerView;
 
 /**
- * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
- * at. By default the pointer view frame is 10px larger in all directions
+ * The duration of cursor animations
+ *
+ * Default is 0.2
  */
-@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px)
-@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px)
+@property (nonatomic, assign) NSTimeInterval animationDuration;
+
+/**
+ * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
+ * at
+ */
+@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px); set negative values to grow larger
+@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px); set negative values to grow larger
 
 /**
  * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value
@@ -84,8 +93,10 @@
 /**
  * Move the pointer to a specific element. This setter can also be used to set the initially selected element before the
  * cursor is displayed (in this case, the animated parameter is ignored)
+ *
+ * If the animated property has been set to NO, the animated parameter is ignored
  */
-- (void)moveToIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)setSelectedIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
  * Reload the cursor from the data source. The pointer is left at the same index where it was, except if the index
@@ -129,6 +140,10 @@
 @protocol HLSCursorDelegate <NSObject>
 
 @optional
+
+// Triggered when the user performs starts touching the cursor
+- (void)cursor:(HLSCursor *)cursor didTouchDownNearIndex:(NSUInteger)index;
+
 // Triggered when the pointer leaves a selected element at a given index
 - (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index;
 
@@ -136,12 +151,15 @@
 - (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index;
 
 // Triggered when the user starts dragging the pointer
-- (void)cursorDidStartDragging:(HLSCursor *)cursor;
+- (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index;
 
 // Triggered when the user is dragging the pointer. The nearest index is given as parameter
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index;
 
 // Triggered when the user stops dragging the pointer
-- (void)cursorDidStopDragging:(HLSCursor *)cursor;
+- (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index;
+
+// Triggered when the user stops touching the cursor
+- (void)cursor:(HLSCursor *)cursor didTouchUpNearIndex:(NSUInteger)index;
 
 @end

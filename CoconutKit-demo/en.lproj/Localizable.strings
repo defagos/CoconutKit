@@ -62,6 +62,7 @@
 "Header: simple cells"="Header: simple cells";
 "Heavy view"="Heavy view";
 "Heavy view (cached)"="Heavy view (cached)";
+"Height"="Height";
 "Hide with modal"="Hide with modal";
 "Houston, we've got a problem"="Houston, we've got a problem";
 "Image set"="Image set";
@@ -177,6 +178,7 @@
 "Visible"="Visible";
 "Web view"="Web view";
 "Week"="Week";
+"Width"="Width";
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";
 "Wrapped into UITabBarController"="Wrapped into UITabBarController";
 "Year"="Year";
