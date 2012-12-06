@@ -53,6 +53,7 @@
     
     // Freshly create a test store
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
+                                                                           inBundle:nil
                                                                       configuration:nil
                                                                      storeDirectory:libraryDirectoryPath
                                                                             options:HLSModelManagerLightweightMigrationOptions];

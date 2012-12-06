@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
-- (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName;
+- (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
                                                                         storeType:(NSString *)storeType 
                                                                     configuration:(NSString *)configuration 
@@ -41,11 +41,13 @@
 #pragma mark Class methods
 
 + (HLSModelManager *)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                           inBundle:(NSBundle *)bundle
                                       configuration:(NSString *)configuration
                                      storeDirectory:(NSString *)storeDirectory
                                             options:(NSDictionary *)options
 {
     return [[[[self class] alloc] initWithModelFileName:modelFileName
+                                               inBundle:bundle
                                               storeType:NSSQLiteStoreType
                                           configuration:configuration
                                          storeDirectory:storeDirectory 
@@ -53,10 +55,12 @@
 }
 
 + (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
+                                                  inBundle:(NSBundle *)bundle
                                              configuration:(NSString *)configuration 
                                                    options:(NSDictionary *)options
 {
-    return [[[[self class] alloc] initWithModelFileName:modelFileName 
+    return [[[[self class] alloc] initWithModelFileName:modelFileName
+                                               inBundle:bundle
                                               storeType:NSInMemoryStoreType 
                                           configuration:configuration 
                                          storeDirectory:nil 
@@ -64,12 +68,14 @@
 }
 
 + (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
+                                                inBundle:(NSBundle *)bundle
                                            configuration:(NSString *)configuration 
                                           storeDirectory:(NSString *)storeDirectory
                                                  options:(NSDictionary *)options
 {
-    return [[[[self class] alloc] initWithModelFileName:modelFileName 
-                                              storeType:NSBinaryStoreType 
+    return [[[[self class] alloc] initWithModelFileName:modelFileName
+                                               inBundle:(NSBundle *)bundle
+                                              storeType:NSBinaryStoreType
                                           configuration:configuration 
                                          storeDirectory:storeDirectory 
                                                 options:options] autorelease];
@@ -228,14 +234,15 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithModelFileName:(NSString *)modelFileName 
+- (id)initWithModelFileName:(NSString *)modelFileName
+                   inBundle:(NSBundle *)bundle
                   storeType:(NSString *)storeType 
               configuration:(NSString *)configuration 
              storeDirectory:(NSString *)storeDirectory
                     options:(NSDictionary *)options
 {
     if ((self = [super init])) {
-        self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName];
+        self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName inBundle:bundle];
         if (! self.managedObjectModel) {
             [self release];
             return nil;
@@ -286,9 +293,13 @@
 
 #pragma mark Initialization
 
-- (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName
-{	
-    NSString *modelFilePath = [[NSBundle mainBundle] pathForResource:modelFileName ofType:@"momd"];
+- (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle
+{
+    if (! bundle) {
+        bundle = [NSBundle mainBundle];
+    }
+    
+    NSString *modelFilePath = [bundle pathForResource:modelFileName ofType:@"momd"];
     if (! modelFilePath) {
         HLSLoggerError(@"Model file not found in main bundle");
         return nil;
