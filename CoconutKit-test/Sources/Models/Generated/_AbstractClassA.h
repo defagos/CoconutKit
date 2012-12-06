@@ -31,7 +31,9 @@ extern const struct AbstractClassAFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* codeMandatoryNotEmptyStringA;
+
 
 
 //- (BOOL)validateCodeMandatoryNotEmptyStringA:(id*)value_ error:(NSError**)error_;
@@ -39,7 +41,9 @@ extern const struct AbstractClassAFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* noValidationStringA;
+
 
 
 //- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;

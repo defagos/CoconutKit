@@ -35,7 +35,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* firstName;
+
 
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
@@ -43,7 +45,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* lastName;
+
 
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
@@ -52,14 +56,14 @@ extern const struct PersonFetchedProperties {
 
 
 
-@property (nonatomic, retain) NSSet* accounts;
+@property (nonatomic, retain) NSSet *accounts;
 
 - (NSMutableSet*)accountsSet;
 
 
 
 
-@property (nonatomic, retain) NSSet* houses;
+@property (nonatomic, retain) NSSet *houses;
 
 - (NSMutableSet*)housesSet;
 

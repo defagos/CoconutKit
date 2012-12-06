@@ -40,24 +40,28 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	return (ConcreteSubclassBID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"codeMandatoryNumberBValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"codeMandatoryNumberB"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"modelMandatoryBoundedNumberBValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"modelMandatoryBoundedNumberB"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"modelMandatoryCodeNotZeroNumberBValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"modelMandatoryCodeNotZeroNumberB"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 	if ([key isEqualToString:@"noValidationNumberBValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberB"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;

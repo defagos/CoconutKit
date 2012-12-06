@@ -37,7 +37,9 @@ extern const struct ConcreteSubclassBFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* codeMandatoryNumberB;
+
 
 
 @property int16_t codeMandatoryNumberBValue;
@@ -49,7 +51,9 @@ extern const struct ConcreteSubclassBFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* modelMandatoryBoundedNumberB;
+
 
 
 @property int16_t modelMandatoryBoundedNumberBValue;
@@ -61,7 +65,9 @@ extern const struct ConcreteSubclassBFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* modelMandatoryCodeNotZeroNumberB;
+
 
 
 @property int16_t modelMandatoryCodeNotZeroNumberBValue;
@@ -73,7 +79,9 @@ extern const struct ConcreteSubclassBFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* noValidationNumberB;
+
 
 
 @property int16_t noValidationNumberBValue;
@@ -86,7 +94,7 @@ extern const struct ConcreteSubclassBFetchedProperties {
 
 
 
-@property (nonatomic, retain) NSSet* codeMandatoryConcreteClassesD;
+@property (nonatomic, retain) NSSet *codeMandatoryConcreteClassesD;
 
 - (NSMutableSet*)codeMandatoryConcreteClassesDSet;
 

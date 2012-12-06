@@ -33,7 +33,9 @@ extern const struct BankAccountFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* balance;
+
 
 
 @property double balanceValue;
@@ -45,7 +47,9 @@ extern const struct BankAccountFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* name;
+
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
@@ -54,7 +58,7 @@ extern const struct BankAccountFetchedProperties {
 
 
 
-@property (nonatomic, retain) Person* owner;
+@property (nonatomic, retain) Person *owner;
 
 //- (BOOL)validateOwner:(id*)value_ error:(NSError**)error_;
 

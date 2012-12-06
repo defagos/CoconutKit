@@ -33,7 +33,9 @@ extern const struct ConcreteSubclassCFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* codeMandatoryStringC;
+
 
 
 //- (BOOL)validateCodeMandatoryStringC:(id*)value_ error:(NSError**)error_;
@@ -41,7 +43,9 @@ extern const struct ConcreteSubclassCFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* modelMandatoryBoundedPatternStringC;
+
 
 
 //- (BOOL)validateModelMandatoryBoundedPatternStringC:(id*)value_ error:(NSError**)error_;
@@ -49,7 +53,9 @@ extern const struct ConcreteSubclassCFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* noValidationNumberC;
+
 
 
 @property int16_t noValidationNumberCValue;
