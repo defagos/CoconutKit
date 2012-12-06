@@ -1240,17 +1240,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 					/Developer/Frameworks/GHUnitIOS/0.5.2,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
 				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/arc\"",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/arc\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1261,17 +1256,12 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/LeStudioSDK/Binaries/CoconutKit/CoconutKit-trunk-$(CONFIGURATION).staticframework\"",
 					/Developer/Frameworks/GHUnitIOS/0.5.2,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
 				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/arc\"",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/arc\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
