@@ -9,6 +9,7 @@
 #import "HLSModelManager.h"
 
 #import "HLSError.h"
+#import "HLSFileManager.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 
@@ -83,7 +84,7 @@
 
 + (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    HLSFileManager *fileManager = [HLSFileManager defaultManager];
     
     // Look for a SQLite file
     NSString *sqliteFilePath = [self standardStoreFilePathForModelFileName:modelFileName
@@ -335,7 +336,7 @@
         NSString *oldFilePath = [[fileURLString stringByDeletingLastPathComponent] stringByAppendingPathComponent:oldFileName];
         
         NSError *deletionError = nil;
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+        HLSFileManager *fileManager = [HLSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:oldFilePath]
                 && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
             HLSLoggerInfo(@"The old store at %@ has been removed after successful migration", oldFilePath);

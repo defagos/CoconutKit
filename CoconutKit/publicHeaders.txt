@@ -11,6 +11,7 @@ HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSExpandingSearchBar.h
+HLSFileManager.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLabel.h
@@ -29,6 +30,7 @@ HLSRuntime.h
 HLSSlideshow.h
 HLSStackController.h
 HLSStackPushSegue.h
+HLSStandardFileManager.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h

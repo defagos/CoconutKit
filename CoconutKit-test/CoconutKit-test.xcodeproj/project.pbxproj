@@ -129,6 +129,8 @@
 		6FB991FE1523B18B00E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991FD1523B18B00E13BED /* HLSZeroingWeakRef.m */; };
 		6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB951574C01C0014B37B /* NSURLRequest+HLSExtensions.m */; };
+		6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */; };
+		6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */; };
 		6FCDA17214DAE61B00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */; };
 		6FCFEA5515E37E4F002CAF9E /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5215E37E4C002CAF9E /* HLSAnimationStep.m */; };
 		6FCFEA5615E37E4F002CAF9E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5415E37E4E002CAF9E /* HLSLayerAnimationStep.m */; };
@@ -414,6 +416,10 @@
 		6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC8CB941574C01C0014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC8CB951574C01C0014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FCA2DE21679E41F0011CFDA /* HLSStandardFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManager.h; sourceTree = "<group>"; };
+		6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManager.m; sourceTree = "<group>"; };
+		6FCA2DE41679E41F0011CFDA /* HLSFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManager.h; sourceTree = "<group>"; };
+		6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManager.m; sourceTree = "<group>"; };
 		6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FCFEA5115E37E4C002CAF9E /* HLSAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimationStep.h; sourceTree = "<group>"; };
 		6FCFEA5215E37E4C002CAF9E /* HLSAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimationStep.m; sourceTree = "<group>"; };
@@ -702,6 +708,8 @@
 				6FADE71714BA04B6007EE121 /* HLSConverters.m */,
 				6FADE71814BA04B6007EE121 /* HLSError.h */,
 				6FADE71914BA04B6007EE121 /* HLSError.m */,
+				6FCA2DE41679E41F0011CFDA /* HLSFileManager.h */,
+				6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */,
 				6FADE71A14BA04B6007EE121 /* HLSFloat.h */,
 				6FADE71B14BA04B6007EE121 /* HLSFloat.m */,
 				6FADE71C14BA04B6007EE121 /* HLSKeyboardInformation.h */,
@@ -711,6 +719,8 @@
 				6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */,
 				6FADE72214BA04B6007EE121 /* HLSRuntime.h */,
 				6FADE72314BA04B6007EE121 /* HLSRuntime.m */,
+				6FCA2DE21679E41F0011CFDA /* HLSStandardFileManager.h */,
+				6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */,
 				6FADE72414BA04B6007EE121 /* HLSUserInterfaceLock.h */,
 				6FADE72514BA04B6007EE121 /* HLSUserInterfaceLock.m */,
 				6FADE72614BA04B6007EE121 /* HLSValidable.h */,
@@ -1165,6 +1175,8 @@
 				6FAF24FE162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
 				6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 				6F7A871A16522C3C0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
+				6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */,
+				6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
