@@ -367,4 +367,10 @@
     return modelManager;
 }
 
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError
+{
+    NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject_hls];
+    return [self.persistentStoreCoordinator migratePersistentStore:persistentStore toURL:url options:nil withType:storeType error:pError] != nil;
+}
+
 @end

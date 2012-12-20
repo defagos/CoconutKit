@@ -152,6 +152,8 @@
  */
 - (HLSModelManager *)duplicate;
 
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError;
+
 /**
  * Access to Core Data internals
  */
