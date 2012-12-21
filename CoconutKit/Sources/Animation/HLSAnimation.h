@@ -44,8 +44,8 @@
  *
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 
- * perfectly within the iOS simulator and on the device, though views will appear to "jump" on the device (not within
- * the simulator). This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
+ * perfectly within the iOS simulator and on the device, though views will appear to "jump" on the device and on
+ * iOS >= 6 simulators. This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
  * methods are still called correctly), but is a consequence of the application screenshot which is displayed when 
  * the application exits background. The screenshot made when the application enters background namely reflects the
  * non-animated view / layer state, which explains why the views seem to jump.
