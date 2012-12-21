@@ -244,6 +244,13 @@ The following lists all people who contributed to CoconutKit:
 
 ### Release notes
 
+#### Version 2.0.2
+
+* Fix an issue with non-running animations incorrectly started after the application wakes up from background
+* Add HLSFileManager
+* Fix default capacity for stacks used in storyboards
+* Add bundle parameter to HLSModelManager creation methods
+
 #### Version 2.0.1
 
 * HLSCursor now fills the associated view frame and resizes properly, the spacing parameter has therefore been removed. The cursor behaviour has been improved. The animation duration can now be changed
