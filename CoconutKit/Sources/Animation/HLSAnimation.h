@@ -71,6 +71,7 @@
     NSUInteger m_currentRepeatCount;
     NSTimeInterval m_remainingTimeBeforeStart;                      // the time remaining before the start time is reached
     NSTimeInterval m_elapsedTime;                                   // the currently elapsed time (does not include pauses)
+    BOOL m_runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
     BOOL m_pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
     BOOL m_running;
     BOOL m_playing;

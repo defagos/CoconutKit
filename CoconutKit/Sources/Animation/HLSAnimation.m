@@ -582,28 +582,37 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    // Core Animations are removed and added back again automatically when the application enters / leaves background. This makes
-    // it very hard to resume running animations after the application wakes up, since we have no real control over this process.
-    // But since HLSAnimations can be given a start time, we can apply the following strategy to solve those issues:
-    //   1) Remember how much time has elapsed and cancel the animation when the application enters background. The remaining
-    //      delegate events are not received
-    //   2) Rewind the animation at the beginning, without a delegate
-    //   3) Play the animation from where it was cancelled when the application enters foreground
-    m_elapsedTime += [self.currentAnimationStep elapsedTime];
-    m_pausedBeforeEnteringBackground = self.paused;
+    m_runningBeforeEnteringBackground = self.running;
     
-    [self cancel];
-    
-    HLSAnimation *reverseAnimation = [self reverseAnimation];
-    reverseAnimation.delegate = nil;
-    [reverseAnimation playAnimated:NO];
+    if (m_runningBeforeEnteringBackground) {
+        // Core Animations are removed and added back again automatically when the application enters / leaves background. This makes
+        // it very hard to resume running animations after the application wakes up, since we have no real control over this process.
+        // But since HLSAnimations can be given a start time, we can apply the following strategy to solve those issues:
+        //   1) Remember how much time has elapsed and cancel the animation when the application enters background. The remaining
+        //      delegate events are not received
+        //   2) Rewind the animation at the beginning, without a delegate
+        //   3) Play the animation from where it was cancelled when the application enters foreground
+        m_elapsedTime += [self.currentAnimationStep elapsedTime];
+        m_pausedBeforeEnteringBackground = self.paused;
+        
+        [self cancel];
+        
+        HLSAnimation *reverseAnimation = [self reverseAnimation];
+        reverseAnimation.delegate = nil;
+        [reverseAnimation playAnimated:NO];
+    }
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    [self playWithStartTime:m_elapsedTime repeatCount:m_repeatCount];
-    if (m_pausedBeforeEnteringBackground) {
-        [self pause];
+    if (m_runningBeforeEnteringBackground) {
+        [self playWithStartTime:m_elapsedTime repeatCount:m_repeatCount];
+        if (m_pausedBeforeEnteringBackground) {
+            [self pause];
+        }
+        
+        m_runningBeforeEnteringBackground = NO;
+        m_pausedBeforeEnteringBackground = NO;
     }
 }
 
