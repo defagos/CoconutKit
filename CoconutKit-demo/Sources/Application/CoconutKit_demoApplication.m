@@ -39,6 +39,7 @@
         // Create the default model entry point and context
         NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitDemoData"
+                                                                               inBundle:nil
                                                                           configuration:nil 
                                                                          storeDirectory:documentsDirectoryPath 
                                                                                 options:HLSModelManagerLightweightMigrationOptions];

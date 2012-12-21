@@ -37,7 +37,7 @@ const struct AbstractClassAFetchedProperties AbstractClassAFetchedProperties = {
 	return (AbstractClassAID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 

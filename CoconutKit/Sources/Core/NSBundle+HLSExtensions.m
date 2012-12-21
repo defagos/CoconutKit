@@ -21,15 +21,15 @@
 
 + (NSBundle *)coconutKitBundle
 {
-    static NSBundle *coconutKitBundle = nil;
-    if (! coconutKitBundle) {
+    static NSBundle *s_coconutKitBundle = nil;
+    if (! s_coconutKitBundle) {
         NSString *coconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit-resources" ofType:@"bundle"];
-        coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitPath];
-        if (! coconutKitBundle) {
+        s_coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitPath];
+        if (! s_coconutKitBundle) {
             HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project?");
         }
     }
-    return coconutKitBundle;
+    return s_coconutKitBundle;
 }
 
 @end

@@ -47,13 +47,14 @@
     NSString *storeFilePath = [HLSModelManager storeFilePathForModelFileName:@"CoconutKitTestData" storeDirectory:libraryDirectoryPath];
     if (storeFilePath) {
         NSError *error = nil;
-        if (! [[NSFileManager defaultManager] removeItemAtPath:storeFilePath error:&error]) {
+        if (! [[HLSFileManager defaultManager] removeItemAtPath:storeFilePath error:&error]) {
             HLSLoggerWarn(@"Could not remove store at path %@", storeFilePath);
         }
     }
     
     // Freshly create a test store
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
+                                                                           inBundle:nil
                                                                       configuration:nil 
                                                                      storeDirectory:libraryDirectoryPath 
                                                                             options:HLSModelManagerLightweightMigrationOptions];

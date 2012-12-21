@@ -16,7 +16,7 @@
 + (NSString *)friendlyVersionNumber;
 
 /**
- * Return the "resources" bundle (images + nibs + localizations)
+ * Return the resource bundle associated with CoconutKit
  */
 + (NSBundle *)coconutKitBundle;
 

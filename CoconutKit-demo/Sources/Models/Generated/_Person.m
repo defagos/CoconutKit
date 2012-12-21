@@ -44,12 +44,13 @@ const struct PersonFetchedProperties PersonFetchedProperties = {
 	return (PersonID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"nbrChildrenValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"nbrChildren"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;

@@ -38,12 +38,13 @@ const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
 	return (ConcreteClassDID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"noValidationNumberDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberD"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;

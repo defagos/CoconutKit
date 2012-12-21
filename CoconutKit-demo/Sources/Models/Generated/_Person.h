@@ -45,7 +45,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSDate* birthdate;
+
 
 
 //- (BOOL)validateBirthdate:(id*)value_ error:(NSError**)error_;
@@ -53,7 +55,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* city;
+
 
 
 //- (BOOL)validateCity:(id*)value_ error:(NSError**)error_;
@@ -61,7 +65,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* country;
+
 
 
 //- (BOOL)validateCountry:(id*)value_ error:(NSError**)error_;
@@ -69,7 +75,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* email;
+
 
 
 //- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
@@ -77,7 +85,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* firstName;
+
 
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
@@ -85,7 +95,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* lastName;
+
 
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
@@ -93,7 +105,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* nbrChildren;
+
 
 
 @property int16_t nbrChildrenValue;
@@ -105,7 +119,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* state;
+
 
 
 //- (BOOL)validateState:(id*)value_ error:(NSError**)error_;
@@ -113,7 +129,9 @@ extern const struct PersonFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* street;
+
 
 
 //- (BOOL)validateStreet:(id*)value_ error:(NSError**)error_;

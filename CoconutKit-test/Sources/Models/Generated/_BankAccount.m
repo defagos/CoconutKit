@@ -38,12 +38,13 @@ const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
 	return (BankAccountID*)[super objectID];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
 	if ([key isEqualToString:@"balanceValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"balance"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
 	}
 
 	return keyPaths;

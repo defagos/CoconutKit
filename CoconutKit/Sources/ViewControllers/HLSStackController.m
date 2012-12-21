@@ -54,6 +54,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
+        self.capacity = HLSContainerStackDefaultCapacity;
         self.autorotationMode = HLSAutorotationModeContainer;
     }
     return self;

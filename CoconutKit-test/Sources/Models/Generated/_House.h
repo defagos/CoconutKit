@@ -31,7 +31,9 @@ extern const struct HouseFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* name;
+
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
@@ -40,7 +42,7 @@ extern const struct HouseFetchedProperties {
 
 
 
-@property (nonatomic, retain) NSSet* owners;
+@property (nonatomic, retain) NSSet *owners;
 
 - (NSMutableSet*)ownersSet;
 

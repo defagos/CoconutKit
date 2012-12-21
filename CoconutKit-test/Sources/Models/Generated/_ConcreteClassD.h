@@ -33,7 +33,9 @@ extern const struct ConcreteClassDFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSNumber* noValidationNumberD;
+
 
 
 @property int16_t noValidationNumberDValue;
@@ -45,7 +47,9 @@ extern const struct ConcreteClassDFetchedProperties {
 
 
 
+
 @property (nonatomic, retain) NSString* noValidationStringD;
+
 
 
 //- (BOOL)validateNoValidationStringD:(id*)value_ error:(NSError**)error_;
@@ -54,7 +58,7 @@ extern const struct ConcreteClassDFetchedProperties {
 
 
 
-@property (nonatomic, retain) NSSet* concreteSubclassB;
+@property (nonatomic, retain) NSSet *concreteSubclassB;
 
 - (NSMutableSet*)concreteSubclassBSet;
 
