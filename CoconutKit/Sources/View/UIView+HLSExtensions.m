@@ -44,4 +44,43 @@ static void *s_userInfoKey = &s_userInfoKey;
     return [self.layer flattenedImage];
 }
 
+- (void)fadeLeftBorder:(CGFloat)left rightBorder:(CGFloat)right
+{
+	CGFloat width = CGRectGetWidth(self.frame);
+    
+	CAGradientLayer *maskLayer = [self gradientMaskLayer];
+	maskLayer.locations = @[@(0.0), @(left/width), @(1.0-right/width), @(1.0)];
+	maskLayer.startPoint = CGPointMake(0.0, 0.0);
+	maskLayer.endPoint = CGPointMake(1.0, 0.0);
+	
+	self.layer.mask = maskLayer;
+}
+
+- (void)fadeBottomBorder:(CGFloat)bottom topBorder:(CGFloat)top
+{
+	CGFloat height = CGRectGetHeight(self.frame);
+    
+	CAGradientLayer *maskLayer = [self gradientMaskLayer];
+	maskLayer.locations = @[@(0.0), @(bottom/height), @(1.0-top/height), @(1.0)];
+	maskLayer.startPoint = CGPointMake(0.0, 1.0);
+	maskLayer.endPoint = CGPointMake(0.0, 0.0);
+	
+	self.layer.mask = maskLayer;
+}
+
+- (CAGradientLayer*) gradientMaskLayer
+{
+	CAGradientLayer *maskLayer = [CAGradientLayer layer];
+	
+	UIColor *outerColor = [UIColor colorWithWhite:1.0 alpha:0.0];
+	UIColor *innerColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+	
+	maskLayer.colors = @[(id)outerColor.CGColor, (id)innerColor.CGColor, (id)innerColor.CGColor, (id)outerColor.CGColor];
+	
+	maskLayer.bounds = self.bounds;
+	maskLayer.anchorPoint = CGPointZero;
+    
+	return maskLayer;
+}
+
 @end

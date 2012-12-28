@@ -27,4 +27,12 @@
  */
 - (UIImage *)flattenedImage;
 
+/**
+ * Fades the view borders.
+ * Fades left border of 'left' pixels, right border of 'right' pixels, etc.
+ * These methods cannot be used together; only the last method called will be applied
+ */
+- (void)fadeLeftBorder:(CGFloat)left rightBorder:(CGFloat)right;
+- (void)fadeBottomBorder:(CGFloat)bottom topBorder:(CGFloat)top;
+
 @end
