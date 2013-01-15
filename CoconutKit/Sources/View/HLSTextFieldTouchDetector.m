@@ -27,6 +27,7 @@
         self.gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(dismissKeyboard:)] autorelease];
         self.gestureRecognizer.cancelsTouchesInView = NO;       // Let the taps go through
+        self.gestureRecognizer.delegate = self;
         
         self.resigningFirstResponderOnTap = YES;
     }
@@ -60,6 +61,13 @@
     [super textFieldDidEndEditing:textField];
     
     [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer]; 
+}
+
+#pragma mark UIGestureRecognizerDelegate protocol implementation
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+	return ! [touch.view isDescendantOfView:self.textField];
 }
 
 #pragma mark Event callbacks

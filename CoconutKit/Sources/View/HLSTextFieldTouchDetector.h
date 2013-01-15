@@ -15,7 +15,7 @@
  *
  * Designated initializer: -initWithTextField:
  */
-@interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate {
+@interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate <UIGestureRecognizerDelegate> {
 @private
     UIGestureRecognizer *m_gestureRecognizer;
     BOOL m_resigningFirstResponderOnTap;
