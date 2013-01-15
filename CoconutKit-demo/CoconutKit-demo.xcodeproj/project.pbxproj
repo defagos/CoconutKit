@@ -1206,7 +1206,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "CoconutKit-demo" */;
 			buildPhases = (
-				6FCA9D241451956800004E12 /* ShellScript */,
+				6FCA9D241451956800004E12 /* Generate Model Source Files */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -1442,13 +1442,14 @@
 			shellPath = /bin/bash;
 			shellScript = "\"${PROJECT_DIR}\"/generate_model.sh";
 		};
-		6FCA9D241451956800004E12 /* ShellScript */ = {
+		6FCA9D241451956800004E12 /* Generate Model Source Files */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Generate Model Source Files";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
