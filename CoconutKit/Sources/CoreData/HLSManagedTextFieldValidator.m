@@ -204,14 +204,23 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 {
     // By default, we display an empty string, not nil. As soon as a text field has been edited and is cleared, the empty
     // value is namely an empty string, never nil. The value which therefore makes sense for an empty text field is always
-    // an empty string, not nil
+    // an empty string, not nil. Note that the placeholder text of a text field (if any) is displayed if the string is
+    // empty or nil
     id value = [self.managedObject valueForKey:self.fieldName];
     NSString *text = @"";
     if (value) {
-        if (self.formatter) {
+        // We do not display "0" for numbers equal to zero. This does not make much sense, an empty number text field
+        // means 0, which allows the placeholder text to be displayed in such cases
+        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:[NSNumber numberWithInteger:0]]) {
+            text = @"";
+        }
+        else if (self.formatter) {
             NSString *formattedValue = [self.formatter stringForObjectValue:value];
             if (formattedValue) {
                 text = formattedValue;
+            }
+            else {
+                text = @"";
             }
         }
         else {
