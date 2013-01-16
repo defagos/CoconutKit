@@ -267,6 +267,10 @@
 		6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
+		6FDE588816A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; };
+		6FDE588916A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; };
+		6FDE588A16A670C000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */; };
+		6FDE588B16A670C000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
@@ -485,6 +489,9 @@
 		6FD0024C15D5463200375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
 		6FD0024D15D5463200375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
 		6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
+		6FDE588516A670C000419631 /* TextViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewsDemoViewController.h; sourceTree = "<group>"; };
+		6FDE588616A670C000419631 /* TextViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewsDemoViewController.m; sourceTree = "<group>"; };
+		6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -860,6 +867,7 @@
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
 				6F9C460C14C5C30B00824AB2 /* TextFields */,
+				6FDE588216A6709300419631 /* TextViews */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
 			);
 			path = View;
@@ -1182,6 +1190,16 @@
 			path = ContainmentTestViewController;
 			sourceTree = "<group>";
 		};
+		6FDE588216A6709300419631 /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE588516A670C000419631 /* TextViewsDemoViewController.h */,
+				6FDE588616A670C000419631 /* TextViewsDemoViewController.m */,
+				6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */,
+			);
+			path = TextViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -1350,6 +1368,7 @@
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6FDE588A16A670C000419631 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1423,6 +1442,7 @@
 				6F0BFE06163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0D163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE14163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6FDE588B16A670C000419631 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1523,6 +1543,7 @@
 				6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6FDE588816A670C000419631 /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1589,6 +1610,7 @@
 				6F0BFE04163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE0B163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE12163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6FDE588916A670C000419631 /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

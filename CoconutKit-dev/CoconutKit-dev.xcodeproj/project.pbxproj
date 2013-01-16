@@ -451,6 +451,11 @@
 		6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
+		6FDE587D16A66FAB00419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; };
+		6FDE588416A670A000419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; };
+		6FDE589016A670D700419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */; };
+		6FDE589316A6714000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */; };
+		6FDE589416A6714000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
 		6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */; };
 		6FDE68A714BD61F500F8CD3A /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */; };
@@ -873,6 +878,11 @@
 		6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDDEC201529781300CED462 /* UITextView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FDE587B16A66FAB00419631 /* HLSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextView.m; sourceTree = "<group>"; };
+		6FDE587C16A66FAB00419631 /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
+		6FDE588D16A670D700419631 /* TextViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewsDemoViewController.h; sourceTree = "<group>"; };
+		6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewsDemoViewController.m; sourceTree = "<group>"; };
+		6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
 		6FDE688114BC8E9300F8CD3A /* WebViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewDemoViewController.h; sourceTree = "<group>"; };
 		6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewDemoViewController.m; sourceTree = "<group>"; };
 		6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewDemoViewController.xib; sourceTree = "<group>"; };
@@ -1359,6 +1369,8 @@
 				6FADE69314BA04A6007EE121 /* HLSTextFieldInternalDelegate.m */,
 				6FADE69414BA04A6007EE121 /* HLSTextFieldTouchDetector.h */,
 				6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */,
+				6FDE587B16A66FAB00419631 /* HLSTextView.m */,
+				6FDE587C16A66FAB00419631 /* HLSTextView.h */,
 				6FADE69614BA04A6007EE121 /* HLSValue1TableViewCell.h */,
 				6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */,
 				6FADE69814BA04A6007EE121 /* HLSValue2TableViewCell.h */,
@@ -1623,6 +1635,7 @@
 				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6FADE85814BA04C9007EE121 /* TextFields */,
+				6FDE588C16A670D700419631 /* TextViews */,
 				6FDE688014BC8E9300F8CD3A /* WebView */,
 			);
 			path = View;
@@ -1854,6 +1867,16 @@
 			name = "CoconutKit-demo";
 			sourceTree = "<group>";
 		};
+		6FDE588C16A670D700419631 /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				6FDE588D16A670D700419631 /* TextViewsDemoViewController.h */,
+				6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */,
+				6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */,
+			);
+			path = TextViews;
+			sourceTree = "<group>";
+		};
 		6FDE688014BC8E9300F8CD3A /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2061,6 +2084,7 @@
 				6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6FDE589316A6714000419631 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2137,6 +2161,7 @@
 				6F0BFE24163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE28163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2C163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6FDE589416A6714000419631 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2330,6 +2355,8 @@
 				6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DDE1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE01679E3EB0011CFDA /* HLSFileManager.m in Sources */,
+				6FDE587D16A66FAB00419631 /* HLSTextView.m in Sources */,
+				6FDE589016A670D700419631 /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2490,6 +2517,7 @@
 				6F7A871616522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DDF1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE11679E3EB0011CFDA /* HLSFileManager.m in Sources */,
+				6FDE588416A670A000419631 /* HLSTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -207,6 +207,8 @@
 		6FDDEC1B1529778E00CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC191529778E00CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDDEC1C1529780200CED462 /* UITextView+HLSExtensions.h */; };
 		6FDDEC1F1529780200CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */; };
+		6FDE587816A66F9900419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587616A66F9900419631 /* HLSTextView.m */; };
+		6FDE587916A66F9900419631 /* HLSTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE587716A66F9900419631 /* HLSTextView.h */; };
 		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
 		6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */; };
@@ -440,6 +442,8 @@
 		6FDDEC191529778E00CED462 /* UITextField+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FDDEC1C1529780200CED462 /* UITextView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FDE587616A66F9900419631 /* HLSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextView.m; sourceTree = "<group>"; };
+		6FDE587716A66F9900419631 /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
 		6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
 		6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -720,6 +724,8 @@
 				6FADE57814BA0494007EE121 /* HLSTextFieldInternalDelegate.m */,
 				6FADE57914BA0494007EE121 /* HLSTextFieldTouchDetector.h */,
 				6FADE57A14BA0494007EE121 /* HLSTextFieldTouchDetector.m */,
+				6FDE587616A66F9900419631 /* HLSTextView.m */,
+				6FDE587716A66F9900419631 /* HLSTextView.h */,
 				6FADE57B14BA0494007EE121 /* HLSValue1TableViewCell.h */,
 				6FADE57C14BA0494007EE121 /* HLSValue1TableViewCell.m */,
 				6FADE57D14BA0494007EE121 /* HLSValue2TableViewCell.h */,
@@ -913,6 +919,7 @@
 				6F7A871016522C0A0030B091 /* UIPopoverController+HLSExtensions.h in Headers */,
 				6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */,
 				6FCA2DD81679E3B20011CFDA /* HLSStandardFileManager.h in Headers */,
+				6FDE587916A66F9900419631 /* HLSTextView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,6 +1114,7 @@
 				6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
+				6FDE587816A66F9900419631 /* HLSTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

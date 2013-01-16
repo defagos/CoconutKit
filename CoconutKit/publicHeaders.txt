@@ -40,6 +40,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
+HLSTextView.h
 HLSTransition.h
 HLSUserInterfaceLock.h
 HLSValidable.h

@@ -50,6 +50,7 @@
     #import "HLSTaskOperation.h"
     #import "HLSTaskOperation+Protected.h"
     #import "HLSTextField.h"
+    #import "HLSTextView.h"
     #import "HLSTransition.h"
     #import "HLSUserInterfaceLock.h"
     #import "HLSValidable.h"

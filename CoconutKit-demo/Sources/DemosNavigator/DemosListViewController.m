@@ -25,6 +25,7 @@
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "TextViewsDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
 
@@ -70,6 +71,7 @@ typedef enum {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexTextFields,
+    ViewDemoIndexTextViews,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
     ViewDemoIndexExpandingSearchBar,
@@ -289,6 +291,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexTextViews: {
+                    cell.textLabel.text = NSLocalizedString(@"Text views", @"Text views");
+                    break;
+                }
+                    
                 case ViewDemoIndexCursor: {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
                     break;
@@ -469,6 +476,11 @@ typedef enum {
                     
                 case ViewDemoIndexTextFields: {
                     demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexTextViews: {
+                    demoViewController = [[[TextViewsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
