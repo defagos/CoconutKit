@@ -80,7 +80,6 @@
 		6F159A8D15A554250020AFAC /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87314BA04C9007EE121 /* WizardAddressPageViewController.xib */; };
 		6F159A8E15A554250020AFAC /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87614BA04C9007EE121 /* WizardDemoViewController.xib */; };
 		6F159A8F15A554250020AFAC /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE87914BA04C9007EE121 /* WizardIdentityPageViewController.xib */; };
-		6F159A9015A554250020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F159A9115A554250020AFAC /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */; };
 		6F159A9215A554250020AFAC /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */; };
 		6F159A9315A554250020AFAC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
@@ -210,7 +209,6 @@
 		6F159B1715A554250020AFAC /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88314BA04C9007EE121 /* _Person.m */; };
 		6F159B1815A554250020AFAC /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE88514BA04C9007EE121 /* Person.m */; };
 		6F159B1915A554250020AFAC /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
-		6F159B1A15A554250020AFAC /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
 		6F159B1B15A554250020AFAC /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F159B1C15A554250020AFAC /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F159B1D15A554250020AFAC /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
@@ -257,13 +255,27 @@
 		6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
 		6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */; };
 		6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */; };
+		6F22C74516A858A60081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */; };
+		6F22C74716A858AD0081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */; };
+		6F22C74F16A93DA80081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74E16A93DA70081A9A7 /* CoreText.framework */; };
+		6F22C75016A93DAF0081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74E16A93DA70081A9A7 /* CoreText.framework */; };
+		6F22C75B16A942270081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75A16A942270081A9A7 /* Beon-Regular.otf */; };
+		6F22C75C16A942270081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75A16A942270081A9A7 /* Beon-Regular.otf */; };
+		6F22C77216A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C76F16A942B90081A9A7 /* DynamicLocalizationDemoViewController.m */; };
+		6F22C77316A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C76F16A942B90081A9A7 /* DynamicLocalizationDemoViewController.m */; };
+		6F22C77416A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77016A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
+		6F22C77516A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77016A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
+		6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */; };
+		6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */; };
+		6F22C77C16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */; };
+		6F22C77D16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */; };
+		6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
+		6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */; };
-		6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */; };
-		6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */; };
 		6F41D23315E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D23415E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D24415E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D24315E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
@@ -551,6 +563,17 @@
 		6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoPlaceholderViewController.m; sourceTree = "<group>"; };
+		6F22C74316A858A60081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F22C74E16A93DA70081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6F22C75A16A942270081A9A7 /* Beon-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Beon-Regular.otf"; sourceTree = "<group>"; };
+		6F22C76E16A942B90081A9A7 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F22C76F16A942B90081A9A7 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F22C77016A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
+		6F22C77716A942D90081A9A7 /* FontsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontsDemoViewController.h; sourceTree = "<group>"; };
+		6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
+		6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
+		6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
 		6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -562,9 +585,6 @@
 		6F3E3E8615A22796007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
 		6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
-		6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
-		6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
-		6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F41D23115E6A580009A2384 /* CALayer+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F41D24215E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -900,6 +920,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22C74F16A93DA80081A9A7 /* CoreText.framework in Frameworks */,
 				6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F513D4661100834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -913,6 +934,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22C75016A93DAF0081A9A7 /* CoreText.framework in Frameworks */,
 				6F159B3E15A554250020AFAC /* QuartzCore.framework in Frameworks */,
 				6F159B3F15A554250020AFAC /* CoreData.framework in Frameworks */,
 				6F159B4015A554250020AFAC /* Foundation.framework in Frameworks */,
@@ -954,6 +976,7 @@
 			children = (
 				6FC900F413D4661100834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				6F22C74E16A93DA70081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6FEF8541131F76DA0015B57C /* MessageUI.framework */,
 				6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */,
@@ -1021,6 +1044,7 @@
 		6F000118156BD17F0055CED7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6F22C75A16A942270081A9A7 /* Beon-Regular.otf */,
 				6F000119156BD17F0055CED7 /* ProximaNova-Bold.otf */,
 				6F00011A156BD17F0055CED7 /* ProximaNova-Regular.otf */,
 			);
@@ -1030,6 +1054,7 @@
 		6F00011B156BD17F0055CED7 /* HTML */ = {
 			isa = PBXGroup;
 			children = (
+				6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */,
 				6F00011C156BD17F0055CED7 /* sample_text.html */,
 			);
 			path = HTML;
@@ -1111,6 +1136,26 @@
 			path = Segue;
 			sourceTree = "<group>";
 		};
+		6F22C76D16A942B90081A9A7 /* DynamicLocalization */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C76E16A942B90081A9A7 /* DynamicLocalizationDemoViewController.h */,
+				6F22C76F16A942B90081A9A7 /* DynamicLocalizationDemoViewController.m */,
+				6F22C77016A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalization;
+			sourceTree = "<group>";
+		};
+		6F22C77116A942B90081A9A7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C77716A942D90081A9A7 /* FontsDemoViewController.h */,
+				6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */,
+				6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		6F37FED613EBE480003E33EF /* CoconutKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1123,19 +1168,10 @@
 		6F4169EB14BB67D5006020E6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */,
+				6F22C76D16A942B90081A9A7 /* DynamicLocalization */,
+				6F22C77116A942B90081A9A7 /* Fonts */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		6F4169EC14BB67D5006020E6 /* DynamicLocalizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F4169ED14BB67D5006020E6 /* DynamicLocalizationDemoViewController.h */,
-				6F4169EE14BB67D5006020E6 /* DynamicLocalizationDemoViewController.m */,
-				6F4169EF14BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib */,
-			);
-			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
 		6F5007F81585E90100391A6C /* ExpandingSearchBar */ = {
@@ -1280,6 +1316,8 @@
 				6FADE66314BA04A6007EE121 /* UIColor+HLSExtensions.m */,
 				6FADE66414BA04A6007EE121 /* UIControl+HLSExclusiveTouch.h */,
 				6FADE66514BA04A6007EE121 /* UIControl+HLSExclusiveTouch.m */,
+				6F22C74316A858A60081A9A7 /* UIFont+HLSExtensions.h */,
+				6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */,
 				6FADE66614BA04A6007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE66714BA04A6007EE121 /* UIImage+HLSExtensions.m */,
 			);
@@ -2020,7 +2058,6 @@
 				6FADE8D814BA04C9007EE121 /* WizardAddressPageViewController.xib in Resources */,
 				6FADE8DA14BA04C9007EE121 /* WizardDemoViewController.xib in Resources */,
 				6FADE8DC14BA04C9007EE121 /* WizardIdentityPageViewController.xib in Resources */,
-				6F4169F114BB67D5006020E6 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */,
 				6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */,
 				6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
@@ -2061,6 +2098,10 @@
 				6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6F22C75B16A942270081A9A7 /* Beon-Regular.otf in Resources */,
+				6F22C77416A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F22C77C16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */,
+				6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2097,7 +2138,6 @@
 				6F159A8D15A554250020AFAC /* WizardAddressPageViewController.xib in Resources */,
 				6F159A8E15A554250020AFAC /* WizardDemoViewController.xib in Resources */,
 				6F159A8F15A554250020AFAC /* WizardIdentityPageViewController.xib in Resources */,
-				6F159A9015A554250020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F159A9115A554250020AFAC /* WebViewDemoViewController.xib in Resources */,
 				6F159A9215A554250020AFAC /* SkinningDemoViewController.xib in Resources */,
 				6F159A9315A554250020AFAC /* ParallaxScrollingDemoViewController.xib in Resources */,
@@ -2137,6 +2177,10 @@
 				6F0BFE24163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE28163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2C163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6F22C75C16A942270081A9A7 /* Beon-Regular.otf in Resources */,
+				6F22C77516A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F22C77D16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */,
+				6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2273,7 +2317,6 @@
 				6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */,
 				6FADE8E014BA04C9007EE121 /* Person.m in Sources */,
 				6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
-				6F4169F014BB67D5006020E6 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */,
@@ -2330,6 +2373,9 @@
 				6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DDE1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE01679E3EB0011CFDA /* HLSFileManager.m in Sources */,
+				6F22C74516A858A60081A9A7 /* UIFont+HLSExtensions.m in Sources */,
+				6F22C77216A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2434,7 +2480,6 @@
 				6F159B1715A554250020AFAC /* _Person.m in Sources */,
 				6F159B1815A554250020AFAC /* Person.m in Sources */,
 				6F159B1915A554250020AFAC /* UILabel+HLSDynamicLocalization.m in Sources */,
-				6F159B1A15A554250020AFAC /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F159B1B15A554250020AFAC /* UIToolbar+HLSExtensions.m in Sources */,
 				6F159B1C15A554250020AFAC /* UIWebView+HLSExtensions.m in Sources */,
 				6F159B1D15A554250020AFAC /* WebViewDemoViewController.m in Sources */,
@@ -2490,6 +2535,9 @@
 				6F7A871616522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DDF1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE11679E3EB0011CFDA /* HLSFileManager.m in Sources */,
+				6F22C74716A858AD0081A9A7 /* UIFont+HLSExtensions.m in Sources */,
+				6F22C77316A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

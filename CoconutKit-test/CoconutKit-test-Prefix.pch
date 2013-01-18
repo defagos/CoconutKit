@@ -6,6 +6,7 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <CoreGraphics/CoreGraphics.h>
+    #import <CoreText/CoreText.h>
     #import <UIKit/UIKit.h>
     #import <QuartzCore/QuartzCore.h>
     #import <MessageUI/MessageUI.h>
@@ -86,6 +87,7 @@
     #import "UIActionSheet+HLSExtensions.h"
     #import "UIColor+HLSExtensions.h"
     #import "UIControl+HLSExclusiveTouch.h"
+    #import "UIFont+HLSExtensions.h"
     #import "UIImage+HLSExtensions.h"
     #import "UILabel+HLSDynamicLocalization.h"
     #import "UINavigationBar+HLSExtensions.h"

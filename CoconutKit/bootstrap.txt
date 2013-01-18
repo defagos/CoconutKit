@@ -30,6 +30,7 @@ UIActionSheet+HLSExtensions.m
 UIBarButtonItem+HLSActionSheet.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
+UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
 UINavigationBar+HLSExtensions.m
