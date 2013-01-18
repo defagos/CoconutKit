@@ -13,6 +13,7 @@
 #import "DynamicLocalizationDemoViewController.h"
 #import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
+#import "FontsDemoViewController.h"
 #import "LabelDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
@@ -53,6 +54,7 @@ typedef enum {
 typedef enum {
     CoreDemoIndexEnumBegin = 0,
     CoreDemoIndexDynamicLocalization = CoreDemoIndexEnumBegin,
+    CoreDemoIndexFonts,
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
 } CoreDemoIndex;
@@ -254,6 +256,11 @@ typedef enum {
                     break;
                 }
                     
+                case CoreDemoIndexFonts: {
+                    cell.textLabel.text = NSLocalizedString(@"Fonts", @"Fonts");
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -434,6 +441,11 @@ typedef enum {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
                     demoViewController = [[[DynamicLocalizationDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case CoreDemoIndexFonts: {
+                    demoViewController = [[[FontsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

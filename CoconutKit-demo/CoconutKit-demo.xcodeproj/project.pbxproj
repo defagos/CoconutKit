@@ -34,7 +34,6 @@
 		6F159B5B15A55CD10020AFAC /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
 		6F159B5C15A55CD10020AFAC /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
 		6F159B5D15A55CD10020AFAC /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
-		6F159B5E15A55CD10020AFAC /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */; };
 		6F159B5F15A55CD10020AFAC /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
 		6F159B6015A55CD10020AFAC /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6F159B6115A55CD10020AFAC /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
@@ -88,7 +87,6 @@
 		6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */; };
 		6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F159B9C15A55CD10020AFAC /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F159B9D15A55CD10020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */; };
 		6F159B9E15A55CD10020AFAC /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F159B9F15A55CD10020AFAC /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6F159BA015A55CD10020AFAC /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
@@ -150,6 +148,20 @@
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
+		6F22C75416A93DD90081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
+		6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */; };
+		6F22C75916A9420D0081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */; };
+		6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; };
+		6F22C76216A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; };
+		6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
+		6F22C76416A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
+		6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; };
+		6F22C78216A942F10081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; };
+		6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
+		6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
+		6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
+		6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
@@ -179,8 +191,6 @@
 		6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
 		6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F9C466C14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */; };
-		6F9C466D14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */; };
 		6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
 		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
@@ -319,6 +329,15 @@
 		6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF315A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueSecondRightPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueSecondRightPanelDemoViewController.m; sourceTree = "<group>"; };
+		6F22C75116A93DD20081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Beon-Regular.otf"; sourceTree = "<group>"; };
+		6F22C75E16A942970081A9A7 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
+		6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
+		6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
+		6F22C77E16A942F10081A9A7 /* FontsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontsDemoViewController.h; sourceTree = "<group>"; };
+		6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
+		6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
+		6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
 		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
@@ -362,9 +381,6 @@
 		6F9C45CF14C5C30B00824AB2 /* TransparentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentViewController.h; sourceTree = "<group>"; };
 		6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentViewController.m; sourceTree = "<group>"; };
 		6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransparentViewController.xib; sourceTree = "<group>"; };
-		6F9C45D414C5C30B00824AB2 /* DynamicLocalizationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicLocalizationDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicLocalizationDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicLocalizationDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45D914C5C30B00824AB2 /* ParallelProcessingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelProcessingDemoViewController.h; sourceTree = "<group>"; };
 		6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallelProcessingDemoViewController.m; sourceTree = "<group>"; };
 		6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallelProcessingDemoViewController.xib; sourceTree = "<group>"; };
@@ -500,6 +516,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */,
 				6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F713D4662400834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -514,6 +531,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22C75416A93DD90081A9A7 /* CoreText.framework in Frameworks */,
 				6F159BCF15A55CD10020AFAC /* QuartzCore.framework in Frameworks */,
 				6F159BD015A55CD10020AFAC /* CoreData.framework in Frameworks */,
 				6F159BD115A55CD10020AFAC /* Foundation.framework in Frameworks */,
@@ -569,6 +587,7 @@
 				6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-Release.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
@@ -624,6 +643,26 @@
 				6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */,
 			);
 			path = Bootstrap;
+			sourceTree = "<group>";
+		};
+		6F22C75D16A942970081A9A7 /* DynamicLocalization */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C75E16A942970081A9A7 /* DynamicLocalizationDemoViewController.h */,
+				6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */,
+				6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */,
+			);
+			path = DynamicLocalization;
+			sourceTree = "<group>";
+		};
+		6F22C77616A942C20081A9A7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6F22C77E16A942F10081A9A7 /* FontsDemoViewController.h */,
+				6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */,
+				6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6F5007FE1585EA5600391A6C /* ExpandingSearchBar */ = {
@@ -811,19 +850,10 @@
 		6F9C45D214C5C30B00824AB2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45D314C5C30B00824AB2 /* DynamicLocalizationViewController */,
+				6F22C75D16A942970081A9A7 /* DynamicLocalization */,
+				6F22C77616A942C20081A9A7 /* Fonts */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		6F9C45D314C5C30B00824AB2 /* DynamicLocalizationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45D414C5C30B00824AB2 /* DynamicLocalizationDemoViewController.h */,
-				6F9C45D514C5C30B00824AB2 /* DynamicLocalizationDemoViewController.m */,
-				6F9C45D614C5C30B00824AB2 /* DynamicLocalizationDemoViewController.xib */,
-			);
-			path = DynamicLocalizationViewController;
 			sourceTree = "<group>";
 		};
 		6F9C45D714C5C30B00824AB2 /* Task */ = {
@@ -1082,6 +1112,7 @@
 		6F9C46A614C5C36300824AB2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */,
 				6F9C46A714C5C36300824AB2 /* ProximaNova-Bold.otf */,
 				6F9C46A814C5C36300824AB2 /* ProximaNova-Regular.otf */,
 			);
@@ -1091,6 +1122,7 @@
 		6F9C46A914C5C36300824AB2 /* HTML */ = {
 			isa = PBXGroup;
 			children = (
+				6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */,
 				6F9C46AA14C5C36300824AB2 /* sample_text.html */,
 			);
 			path = HTML;
@@ -1295,7 +1327,6 @@
 				6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
-				6F9C466D14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
@@ -1350,6 +1381,10 @@
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
+				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
+				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,7 +1405,6 @@
 				6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */,
 				6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */,
 				6F159B9C15A55CD10020AFAC /* TransparentViewController.xib in Resources */,
-				6F159B9D15A55CD10020AFAC /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F159B9E15A55CD10020AFAC /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F159B9F15A55CD10020AFAC /* ActionSheetDemoViewController.xib in Resources */,
 				6F159BA015A55CD10020AFAC /* CursorCustomPointerView.xib in Resources */,
@@ -1423,6 +1457,10 @@
 				6F0BFE06163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0D163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE14163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
+				6F22C75916A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
+				6F22C76416A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
+				6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1474,7 +1512,6 @@
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
 				6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
-				6F9C466C14C5C30C00824AB2 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
@@ -1523,6 +1560,8 @@
 				6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1541,7 +1580,6 @@
 				6F159B5B15A55CD10020AFAC /* PortraitOnlyViewController.m in Sources */,
 				6F159B5C15A55CD10020AFAC /* StretchableViewController.m in Sources */,
 				6F159B5D15A55CD10020AFAC /* TransparentViewController.m in Sources */,
-				6F159B5E15A55CD10020AFAC /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F159B5F15A55CD10020AFAC /* ParallelProcessingDemoViewController.m in Sources */,
 				6F159B6015A55CD10020AFAC /* SleepTask.m in Sources */,
 				6F159B6115A55CD10020AFAC /* SleepTaskOperation.m in Sources */,
@@ -1589,6 +1627,8 @@
 				6F0BFE04163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE0B163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE12163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
+				6F22C76216A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F22C78216A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

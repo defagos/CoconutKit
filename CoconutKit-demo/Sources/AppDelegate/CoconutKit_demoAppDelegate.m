@@ -48,6 +48,9 @@ HLSEnableApplicationPreloading();
 {    
     [self.window makeKeyAndVisible];
     
+    // Instead of using the UIAppFonts key in the plist to load the Beon font, do it in code
+    [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];
+    
     self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
     self.window.rootViewController = [self.application rootViewController];
     

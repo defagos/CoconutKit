@@ -65,8 +65,12 @@ You can add CoconutKit to your project in several different ways:
 You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project (the _Create groups for any added folders_ option must be checked) and link your project against the following system frameworks:
 
 * `CoreData.framework`
+* `CoreGraphics.framework`
+* `CoreText.framework`
+* `Foundation.framework`
 * `MessageUI.framework`
 * `QuartzCore.framework`
+* `UIKit.framework`
 
 If your project targets iOS 4 as well as iOS 5 and above, you might encounter _symbol not found_ issues at runtime. When this happens:
 
