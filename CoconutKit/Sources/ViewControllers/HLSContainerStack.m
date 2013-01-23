@@ -48,17 +48,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 + (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController
 {
     return [[[[self class] alloc] initWithContainerViewController:containerViewController
-                                                         capacity:HLSContainerStackMinimalCapacity 
-                                                         removing:YES
-                                          rootViewControllerFixed:NO] autorelease];
+                                                         behavior:HLSContainerStackBehaviorRemoving
+                                                         capacity:HLSContainerStackMinimalCapacity] autorelease];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithContainerViewController:(UIViewController *)containerViewController 
+- (id)initWithContainerViewController:(UIViewController *)containerViewController
+                             behavior:(HLSContainerStackBehavior)behavior
                              capacity:(NSUInteger)capacity
-                             removing:(BOOL)removing
-              rootViewControllerFixed:(BOOL)rootViewControllerFixed
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -69,9 +67,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
+        m_behavior = behavior;
         self.capacity = capacity;
-        m_removing = removing;
-        m_rootViewControllerFixed = rootViewControllerFixed;
         m_autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
@@ -266,7 +263,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     // Pop everything
     else {
-        if (m_rootViewControllerFixed) {
+        if (m_behavior == HLSContainerStackBehaviorFixedRoot) {
             HLSLoggerWarn(@"The root view controller is fixed. Cannot pop everything");
             return;
         }
@@ -329,7 +326,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_rootViewControllerFixed && index == 0 && [self rootViewController]) {
+    if (m_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
         HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore once set or after the container "
                        "has been displayed once");
         return;
@@ -427,7 +424,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_rootViewControllerFixed && index == 0 && [self rootViewController]) {
+    if (m_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
         HLSLoggerWarn(@"The root view controller is fixed and cannot be removed once set or after the container has been "
                       "displayed once");
         return;
@@ -511,7 +508,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      userInfo:nil];
     }
     
-    if (m_rootViewControllerFixed && [self.containerContents count] == 0) {
+    if (m_behavior == HLSContainerStackBehaviorFixedRoot && [self.containerContents count] == 0) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"The root view controller is fixed but has not been defined when displaying the container"
                                      userInfo:nil];
@@ -1074,15 +1071,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-            if (! m_removing) {
+            if (m_behavior == HLSContainerStackBehaviorRemoving) {
+                [self.containerContents removeObject:containerContentAtCapacity];
+            }
+            else {
                 // The view is only removed from the view hierarchy, so that blending can be made faster. The view is NOT unloaded
                 // (on iOS 4 and 5, it will only be unloaded if a memory warning is later received)
                 [containerContentAtCapacity removeViewFromContainerStackView];
             }
-            else {
-                [self.containerContents removeObject:containerContentAtCapacity];
-            }
-            
+                        
             // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
             // been performed (iOS 5 and above, see UIViewController documentation)
             // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)

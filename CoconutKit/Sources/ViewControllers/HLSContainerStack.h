@@ -10,6 +10,16 @@
 #import "HLSAutorotation.h"
 #import "HLSTransition.h"
 
+// Stack behavior
+typedef enum {
+    HLSContainerStackBehaviorEnumBegin = 0,
+    HLSContainerStackBehaviorDefault = HLSContainerStackBehaviorEnumBegin,              // Child view controller views get unloaded when the container capacity has been reached
+    HLSContainerStackBehaviorRemoving,                                                  // Child view controllers get removed from the container when its capacity has been reached
+    HLSContainerStackBehaviorFixedRoot,                                                 // The root view controller is mandatory and cannot be removed. Otherwise same as HLSContainerStackBehaviorDefault
+    HLSContainerStackBehaviorEnumEnd,
+    HLSContainerStackBehaviorEnumSize = HLSContainerStackBehaviorEnumEnd - HLSContainerStackBehaviorEnumBegin
+} HLSContainerStackBehavior;
+
 // Forward declarations
 @protocol HLSContainerStackDelegate;
 
@@ -113,16 +123,15 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
  *
- * Designated initializer: -initWithContainerViewController:capacity:removing:rootViewControllerFixed:
+ * Designated initializer: -initWithContainerViewController:behavior:capacity:
  */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
 @private
     UIViewController *m_containerViewController;               // The container view controller implemented using HLSContainerStack
     NSMutableArray *m_containerContents;                       // The contents loaded into the stack. The first element corresponds to the root view controller
     UIView *m_containerView;                                   // The view where the stack displays its contents
+    HLSContainerStackBehavior m_behavior;                      // How the container manages its child view controllers
     NSUInteger m_capacity;                                     // The maximum number of top view controllers loaded / not removed at any time
-    BOOL m_removing;                                           // If YES, view controllers over capacity are removed from the stack, otherwise their views are simply unloaded
-    BOOL m_rootViewControllerFixed;                            // Is the root view controller fixed?
     BOOL m_animating;                                          // Set to YES when a transition animation is running
     BOOL m_rotating;
     HLSAutorotationMode m_autorotationMode;                    // How the container decides to behave when rotation occurs
@@ -137,20 +146,22 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 /**
  * Create a stack which will manage the children view controllers of a container view controller. The containerViewController
  * parameter is the container you want to implement (which must itself instantiate the HLSContainerStack objects it requires) 
- * and is not retained. If removing is NO, the capacity is the maximum number of view controllers whose views are loaded at 
- * any time (check the top of this file for some standard capacity constants). If removing is YES, the capacity corresponds 
- * to the maximum number of view controllers which can exist in the container at any time (the view controllers deep enough 
- * are automatically removed from the stack). If rootViewControllerFixed is set to YES, a view controller has to be
- * pushed into the stack before it is displayed for the first time, and all operations which could later change it will
- * abort
+ * and is not retained. The behavior parameter sets how the container manages its child view controllers. If the behavior
+ * is HLSContainerStackBehaviorDefault or HLSContainerStackBehaviorFixedRoot, the container unloads child view controller
+ * views deep in the stack so that there is never more than 'capacity' views loaded at any time (in addition, if the
+ * behavior is HLSContainerStackBehaviorFixedRoot, the root view controller is mandatory and cannot be changed, which means
+ * all operations which could later change it will fail). If the behavior is HLSContainerStackBehaviorRemoving, the container 
+ * removes child view controller views deep in the stack, so that there is never more than 'capacity' view controllers loaded
+ * at any time
+ *
+ * For standard capacity constants, have a look at the top of this header file
  *
  * Remark: During transition animations, the capacity is temporary increased by one to avoid view controllers popping up
  *         unnecessarily. This is not a bug
  */
-- (id)initWithContainerViewController:(UIViewController *)containerViewController 
-                             capacity:(NSUInteger)capacity
-                             removing:(BOOL)removing
-              rootViewControllerFixed:(BOOL)rootViewControllerFixed;
+- (id)initWithContainerViewController:(UIViewController *)containerViewController
+                             behavior:(HLSContainerStackBehavior)behavior
+                             capacity:(NSUInteger)capacity;
 
 /**
  * The view where the stack must display the children view controller's views. This view must be part of the container

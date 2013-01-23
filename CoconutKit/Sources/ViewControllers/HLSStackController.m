@@ -32,10 +32,9 @@
     if ((self = [super init])) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                                 capacity:capacity 
-                                                                                 removing:NO
-                                                                  rootViewControllerFixed:YES] autorelease];
+        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                                 behavior:HLSContainerStackBehaviorFixedRoot
+                                                                                 capacity:capacity] autorelease];
         self.containerStack.autorotationMode = self.autorotationMode;
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
@@ -70,10 +69,9 @@
 {
     [super awakeFromNib];
     
-    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                             capacity:self.capacity 
-                                                                             removing:NO
-                                                              rootViewControllerFixed:YES] autorelease];
+    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                             behavior:HLSContainerStackBehaviorFixedRoot
+                                                                             capacity:self.capacity] autorelease];
     self.containerStack.autorotationMode = self.autorotationMode;
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
