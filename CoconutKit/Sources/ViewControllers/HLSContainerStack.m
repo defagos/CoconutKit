@@ -1108,6 +1108,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
         [disappearingViewController release];
     }
+    // Insertions: Ensure that view controllers are removed according to the container capacity (if this behavior has been set)
+    else if (m_behavior == HLSContainerStackBehaviorRemoving) {
+        HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
+        [self.containerContents removeObject:containerContentAtCapacity];
+    }
 }
 
 #pragma mark HLSContainerStackViewDelegate protocol implementation
