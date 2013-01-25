@@ -21,13 +21,29 @@
 
 + (NSBundle *)coconutKitBundle
 {
+    // Search in all subdirectories as well. In general, a bundle is copied at the main bundle root, but this
+    // might not be the case
     static NSBundle *s_coconutKitBundle = nil;
     if (! s_coconutKitBundle) {
-        NSString *coconutKitPath = [[NSBundle mainBundle] pathForResource:@"CoconutKit-resources" ofType:@"bundle"];
-        s_coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitPath];
-        if (! s_coconutKitBundle) {
-            HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project?");
+        NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
+        NSError *error = nil;
+        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:&error];
+        if (error) {
+            HLSLoggerError(@"Could not find CoconutKit-resources bundle. Reason: %@", error);
+            return nil;
         }
+        
+        for (NSString *contentPath in contentPaths) {
+            if ([[contentPath lastPathComponent] isEqualToString:@"CoconutKit-resources.bundle"]) {
+                NSString *coconutKitBundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
+                s_coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitBundlePath];
+                break;
+            }
+        }
+        
+        if (! s_coconutKitBundle) {
+            HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project main bundle?");
+        }        
     }
     return s_coconutKitBundle;
 }
