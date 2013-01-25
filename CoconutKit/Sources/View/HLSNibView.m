@@ -35,10 +35,12 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         return nil;
     }
     
+    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+    
     // A xib has been found, use it
     NSString *nibName = [self nibName];
-    if ([[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"]) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+    if ([bundle pathForResource:nibName ofType:@"nib"]) {
+        NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
         if ([bundleContents count] == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
@@ -86,6 +88,11 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 + (NSString *)nibName
 {
     return [self className];
+}
+
++ (NSBundle *)bundle
+{
+    return nil;
 }
 
 @end

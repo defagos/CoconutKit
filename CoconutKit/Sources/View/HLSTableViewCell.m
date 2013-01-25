@@ -47,7 +47,9 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         
         // A xib file is used
         if (nibName) {
-            NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+            NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+            
+            NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
             if ([bundleContents count] == 0) {
                 HLSLoggerError(@"Missing cell object in xib file %@", nibName);
                 return nil;
@@ -140,6 +142,11 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     return nil;
 }
 
++ (NSBundle *)bundle
+{
+    return nil;
+}
+
 + (UITableViewCellStyle)style
 {
     return UITableViewCellStyleDefault;
@@ -156,7 +163,8 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     // If a xib file name has been specified, use it, otherwise try to locate the default one (xib bearing
     // the class name)
     NSString *nibName = [self nibName];
-    if (! nibName && [[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+    if (! nibName && [bundle pathForResource:[self className] ofType:@"nib"]) {
         nibName = [self className];
     }
     return nibName;
