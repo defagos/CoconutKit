@@ -6,7 +6,6 @@
   Copyright (c) 2012 Hortis. All rights reserved.
 */
 "Capitalized string in DemoTable.strings"="Chaîne de DemoTable.strings capitalisée";
-"Key containing a slash / and another one / "="Clé contenant un slash / et un autre / ";
 "Lowercase string in DemoTable.strings"="Chaîne de DemoTable.strings en minuscules";
 "String in DemoTable.strings"="Chaîne de DemoTable.strings";
 "Uppercase string in DemoTable.strings"="Chaîne de DemoTable.strings en majuscules";

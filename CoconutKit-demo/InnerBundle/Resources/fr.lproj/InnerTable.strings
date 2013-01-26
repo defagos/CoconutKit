@@ -6,7 +6,6 @@
   Copyright (c) 2013 Hortis. All rights reserved.
 */
 "Capitalized string in InnerBundle/InnerTable.strings"="Chaîne de InnerBundle/InnerTable.strings capitalisée";
-"Key containing a slash / and another one / "="Clé contenant un slash / et un autre / ";
 "Lowercase string in InnerBundle/InnerTable.strings"="Chaîne de InnerBundle/InnerTable.strings en minuscules";
 "String in InnerBundle/InnerTable.strings"="Chaîne de InnerBundle/InnerTable.strings";
 "Uppercase string in InnerBundle/InnerTable.strings"="Chaîne de InnerBundle/InnerTable.strings en majuscules";

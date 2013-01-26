@@ -11,12 +11,17 @@
  * to localize a UILabel or a UIButton, this category makes it easy to attach a localization key to a label
  * or a button label directly in a nib file. Simply set the text in the nib using one of the following
  * constructs:
- *   - LS/<localizationKey>[/T/<table>/]: Will be replaced by the localized string corresponding to the 
- *                                        localization key (lookup is performed in the main bundle 
- *                                        Localizable.strings file if no explicit table is provided)
- *   - ULS/<localizationKey>[/T/<table>/]: Same as LS:, but uppercase
- *   - LLS/<localizationKey>[/T/<table>/]: Same as LS:, but lowercase
- *   - CLS/<localizationKey>[/T/<table>/]: Same as LS:, but capitalized
+ *   - LS/<localizationKey>: Will be replaced by the localized string corresponding to the
+ *                           localization key
+ *   - ULS/<localizationKey>: Same as LS/, but uppercase
+ *   - LLS/<localizationKey>: Same as LS/, but lowercase
+ *   - CLS/<localizationKey>: Same as LS/, but capitalized
+ * In all cases, lookup is performed in the Localizable.strings file of the main bundle. If you need lookup
+ * to be performed in another table, respectively another bundle, set user-defined runtime attributes
+ * on the label or button you want to localize:
+ *   - locTable: The name of the localization table to use (without the .strings extension). If not set 
+ *     defaults to Localizable
+ *   - locBundle: The name of the bundle to search into (without the .bundle extension)
  *
  * It is important to note that when a label has been localized in a nib using one of the above prefixes,
  * the attached localization key cannot be altered anymore. This is not a problem, though, since this
@@ -25,16 +30,9 @@
  * (after all, if you need to be able to change the text of a label, you probably need an outlet anyway, 
  * which is just what the prefix approach is intended to avoid).
  *
- * Some examples:
- *   LS/Cancel: Looks for a "Cancel" key in Localizable.strings
- *   ULS/Send link/T/LocalizationFileName: Looks for a "Send link" key in LocalizationFileName.strings
- *
  * Sadly UIBarButtonItem objects cannot be localized this way. Achieving this goal would require messing
  * with a toolbar's view hierarchy, an approach I considered not robust enough to deserve being implemented.
  * Similarly, UISegmentedControl cannot also be localized this way currently.
- *
- * Note that lookup is always performed in the main bundle only. If you want to use localization dictionaries
- * in other bundles, you will have to create and bind outlets.
  *
  * If the key is not found, the localization key itself is used instead. At runtime, you can reveal labels for 
  * which a localization entry is missing (for the current application language) by using the provided
@@ -46,12 +44,8 @@
  * localization language is changed at runtime.
  *
  * This category currently has three limitations, but which should not be real issues:
- *   - only localization dictionaries in the main bundle are considered. For applications this should not be
- *     a problem since this is in general the only bundle you have. Libraries, on the other hand, might provide 
- *     their resources as a separate .bundle. But since nib files should be quite rare in libraries (usually, 
- *     library components are created completely in code) this should not be a problem either
  *   - no comment can be provided. This would have been too verbose, and in my experience comments added
- *     to NSLocalizedString macros are not really useful (they are seen by the programmer, not by the translator). 
+ *     to NSLocalizedString macros are not really useful (they are seen by the programmer, not by the translator).
  *     Having them only in the .strings files is what I usually recommend. Tools like Linguan or iLocalize can
  *     help you to add those comments after localization dictionaries have been extracted from the source code
  *   - this brings me to the (currently) really annoying limitation of this category: Automatic localization key 
