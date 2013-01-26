@@ -1223,7 +1223,7 @@
 		6F6B0C7F16B3D866006B718F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6F6B0C8616B3D866006B718F /* CoconutKit-demo-innerBundle.bundle */,
+				6F6B0C8616B3D866006B718F /* InnerBundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2063,10 +2063,10 @@
 			remoteRef = 6F000077156BCDCF0055CED7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6F6B0C8616B3D866006B718F /* CoconutKit-demo-innerBundle.bundle */ = {
+		6F6B0C8616B3D866006B718F /* InnerBundle.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "CoconutKit-demo-innerBundle.bundle";
+			path = InnerBundle.bundle;
 			remoteRef = 6F6B0C8516B3D866006B718F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

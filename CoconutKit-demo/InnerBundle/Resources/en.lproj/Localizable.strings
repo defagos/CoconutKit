@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  InnerBundle
+
+  Created by Samuel Défago on 1/26/13.
+  Copyright (c) 2013 Hortis. All rights reserved.
+*/
+"Capitalized string in InnerBundle/Localizable.strings"="Capitalized string in InnerBundle/Localizable.strings";
+"Key containing a slash / and another one / "="Key containing a slash / and another one / ";
+"Lowercase string in InnerBundle/Localizable.strings"="Lowercase string in InnerBundle/Localizable.strings";
+"String in InnerBundle/Localizable.strings"="String in InnerBundle/Localizable.strings";
+"Uppercase string in InnerBundle/Localizable.strings"="Uppercase string in InnerBundle/Localizable.strings";

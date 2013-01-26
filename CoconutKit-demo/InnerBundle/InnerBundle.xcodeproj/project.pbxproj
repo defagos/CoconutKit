@@ -6,9 +6,18 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6F6B0CA316B3DD1D006B718F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0CA116B3DD1D006B718F /* Localizable.strings */; };
+		6F6B0CA616B3DD2B006B718F /* InnerTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0CA416B3DD2B006B718F /* InnerTable.strings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6F000048156BCC270055CED7 /* InnerBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InnerBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F23DB1616B3DD7500C085CE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InnerTable.strings; sourceTree = "<group>"; };
+		6F23DB1816B3DD7E00C085CE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F44EA18156BB2E700B45BB4 /* InnerBundle-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InnerBundle-Info.plist"; sourceTree = "<group>"; };
+		6F6B0CA216B3DD1D006B718F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F6B0CA516B3DD2B006B718F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InnerTable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +34,8 @@
 		6F00015B156BDD280055CED7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F6B0CA116B3DD1D006B718F /* Localizable.strings */,
+				6F6B0CA416B3DD2B006B718F /* InnerTable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -111,6 +122,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6B0CA316B3DD1D006B718F /* Localizable.strings in Resources */,
+				6F6B0CA616B3DD2B006B718F /* InnerTable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +138,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6F6B0CA116B3DD1D006B718F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F6B0CA216B3DD1D006B718F /* en */,
+				6F23DB1816B3DD7E00C085CE /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6F6B0CA416B3DD2B006B718F /* InnerTable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F6B0CA516B3DD2B006B718F /* en */,
+				6F23DB1616B3DD7500C085CE /* fr */,
+			);
+			name = InnerTable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6F44EA12156BB2AF00B45BB4 /* Debug */ = {
