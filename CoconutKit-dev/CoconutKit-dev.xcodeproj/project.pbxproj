@@ -271,6 +271,8 @@
 		6F22C77D16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */; };
 		6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
 		6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
+		6F23DB2C16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2B16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m */; };
+		6F23DB2D16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2B16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m */; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
@@ -597,6 +599,8 @@
 		6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
 		6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
 		6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
+		6F23DB2A16B3E86500C085CE /* UIButton+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
+		6F23DB2B16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -1439,6 +1443,8 @@
 				6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */,
 				6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */,
 				6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
+				6F23DB2A16B3E86500C085CE /* UIButton+HLSDynamicLocalization.h */,
+				6F23DB2B16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m */,
 				6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE69A14BA04A6007EE121 /* UINavigationBar+HLSExtensions.h */,
@@ -2426,6 +2432,7 @@
 				6F22C74516A858A60081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6F22C77216A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
+				6F23DB2C16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2588,6 +2595,7 @@
 				6F22C74716A858AD0081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6F22C77316A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
+				6F23DB2D16B3E86600C085CE /* UIButton+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

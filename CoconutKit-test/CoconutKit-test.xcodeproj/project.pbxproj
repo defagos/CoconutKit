@@ -11,6 +11,7 @@
 		6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F22C74A16A859260081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C75616A93DE60081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75516A93DE60081A9A7 /* CoreText.framework */; };
+		6F23DB3116B3E87F00C085CE /* UIButton+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB3016B3E87F00C085CE /* UIButton+HLSDynamicLocalization.m */; };
 		6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */; };
 		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
 		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
@@ -173,6 +174,8 @@
 		6F22C74816A859260081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F22C75516A93DE60081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6F23DB2F16B3E87F00C085CE /* UIButton+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
+		6F23DB3016B3E87F00C085CE /* UIButton+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
 		6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
 		6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
@@ -860,6 +863,8 @@
 				6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */,
 				6F91452814CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.h */,
 				6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
+				6F23DB2F16B3E87F00C085CE /* UIButton+HLSDynamicLocalization.h */,
+				6F23DB3016B3E87F00C085CE /* UIButton+HLSDynamicLocalization.m */,
 				6FADE9F314BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE77914BA04B6007EE121 /* UINavigationBar+HLSExtensions.h */,
@@ -1187,6 +1192,7 @@
 				6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */,
 				6F22C74A16A859260081A9A7 /* UIFont+HLSExtensions.m in Sources */,
+				6F23DB3116B3E87F00C085CE /* UIButton+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

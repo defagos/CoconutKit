@@ -19,6 +19,8 @@ static BOOL s_missingLocalizationsVisible = NO;
 // Keys for associated objects
 static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
+static void *s_localizationTableNameKey = &s_localizationTableNameKey;
+static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
@@ -41,6 +43,11 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
+
+// The user-defined runtime attributes with which the localization table and bundle can be set. Not in a public
+// header file to avoid direct use, but still can be set in IB thanks to KVC
+@property (nonatomic, retain) NSString *locTable;
+@property (nonatomic, retain) NSString *locBundle;
 
 @end
 
@@ -81,6 +88,28 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self,
                                                                                   @selector(setBackgroundColor:),
                                                                                   (IMP)swizzled_UILabel__setBackgroundColor_Imp);
+}
+
+#pragma mark Accessors and mutators
+
+- (NSString *)locTable
+{
+    return objc_getAssociatedObject(self, s_localizationTableNameKey);
+}
+
+- (void)setLocTable:(NSString *)locTable
+{
+    objc_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)locBundle
+{
+    return objc_getAssociatedObject(self, s_localizationBundleNameKey);
+}
+
+- (void)setLocBundle:(NSString *)locBundle
+{
+    objc_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Localization
