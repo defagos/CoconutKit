@@ -1,0 +1,193 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		6F000048156BCC270055CED7 /* InnerBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InnerBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F44EA18156BB2E700B45BB4 /* InnerBundle-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InnerBundle-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F44EA03156BB2AF00B45BB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F00015B156BDD280055CED7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F44E9FB156BB2AF00B45BB4 = {
+			isa = PBXGroup;
+			children = (
+				6F00015B156BDD280055CED7 /* Resources */,
+				6F44EA17156BB2DB00B45BB4 /* Other sources */,
+				6F44EA5A156BCBB800B45BB4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6F44EA17156BB2DB00B45BB4 /* Other sources */ = {
+			isa = PBXGroup;
+			children = (
+				6F44EA18156BB2E700B45BB4 /* InnerBundle-Info.plist */,
+			);
+			name = "Other sources";
+			sourceTree = "<group>";
+		};
+		6F44EA5A156BCBB800B45BB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F000048156BCC270055CED7 /* InnerBundle.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F44EA05156BB2AF00B45BB4 /* InnerBundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F44EA14156BB2AF00B45BB4 /* Build configuration list for PBXNativeTarget "InnerBundle" */;
+			buildPhases = (
+				6F44EA02156BB2AF00B45BB4 /* Sources */,
+				6F44EA03156BB2AF00B45BB4 /* Frameworks */,
+				6F44EA04156BB2AF00B45BB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InnerBundle;
+			productName = "CoconutKit-demo-innerBundle";
+			productReference = 6F000048156BCC270055CED7 /* InnerBundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F44E9FD156BB2AF00B45BB4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Hortis;
+			};
+			buildConfigurationList = 6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "InnerBundle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				es,
+				fr,
+				it,
+				ja,
+				ko,
+			);
+			mainGroup = 6F44E9FB156BB2AF00B45BB4;
+			productRefGroup = 6F44E9FB156BB2AF00B45BB4;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F44EA05156BB2AF00B45BB4 /* InnerBundle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F44EA04156BB2AF00B45BB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F44EA02156BB2AF00B45BB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6F44EA12156BB2AF00B45BB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6F44EA13156BB2AF00B45BB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		6F44EA15156BB2AF00B45BB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../InnerFolder";
+				INFOPLIST_FILE = "InnerBundle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		6F44EA16156BB2AF00B45BB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../InnerFolder";
+				INFOPLIST_FILE = "InnerBundle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "InnerBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F44EA12156BB2AF00B45BB4 /* Debug */,
+				6F44EA13156BB2AF00B45BB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F44EA14156BB2AF00B45BB4 /* Build configuration list for PBXNativeTarget "InnerBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F44EA15156BB2AF00B45BB4 /* Debug */,
+				6F44EA16156BB2AF00B45BB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F44E9FD156BB2AF00B45BB4 /* Project object */;
+}
