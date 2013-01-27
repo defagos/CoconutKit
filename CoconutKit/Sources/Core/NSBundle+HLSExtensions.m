@@ -21,31 +21,40 @@
 
 + (NSBundle *)coconutKitBundle
 {
-    // Search in all subdirectories as well. In general, a bundle is copied at the main bundle root, but this
-    // might not be the case
-    static NSBundle *s_coconutKitBundle = nil;
-    if (! s_coconutKitBundle) {
+    NSBundle *coconutKitBundle = [self bundleWithName:@"CoconutKit-resources"];
+    if (! coconutKitBundle) {
+        HLSLoggerError(@"Could not find CoconutKit-resources bundle. Have you added it to your project main bundle?");
+    }
+    return coconutKitBundle;
+}
+
++ (NSBundle *)bundleWithName:(NSString *)name
+{
+    if (! name) {
+        return [NSBundle mainBundle];
+    }
+    
+    static NSDictionary *s_nameToBundleMap = nil;
+    if (! s_nameToBundleMap) {
         NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
         NSError *error = nil;
         NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:&error];
         if (error) {
-            HLSLoggerError(@"Could not find CoconutKit-resources bundle. Reason: %@", error);
             return nil;
         }
         
+        NSMutableDictionary *nameToBundleMap = [NSMutableDictionary dictionary];
         for (NSString *contentPath in contentPaths) {
-            if ([[contentPath lastPathComponent] isEqualToString:@"CoconutKit-resources.bundle"]) {
-                NSString *coconutKitBundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
-                s_coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitBundlePath];
-                break;
+            if ([[contentPath pathExtension] isEqualToString:@"bundle"]) {
+                NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
+                NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+                NSString *bundleName = [[bundlePath lastPathComponent] stringByDeletingPathExtension];
+                [nameToBundleMap setObject:bundle forKey:bundleName];
             }
         }
-        
-        if (! s_coconutKitBundle) {
-            HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project main bundle?");
-        }        
+        s_nameToBundleMap = [[NSDictionary dictionaryWithDictionary:nameToBundleMap] retain];
     }
-    return s_coconutKitBundle;
+    return [s_nameToBundleMap objectForKey:name];
 }
 
 @end
