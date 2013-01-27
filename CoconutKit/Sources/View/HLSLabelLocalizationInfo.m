@@ -19,7 +19,8 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 @interface HLSLabelLocalizationInfo ()
 
 @property (nonatomic, retain) NSString *localizationKey;
-@property (nonatomic, retain) NSString *table;
+@property (nonatomic, retain) NSString *tableName;
+@property (nonatomic, retain) NSString *bundleName;
 @property (nonatomic, assign) HLSLabelRepresentation representation;
 
 - (void)parseText:(NSString *)text;
@@ -30,10 +31,13 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Object creation and destruction
 
-- (id)initWithText:(NSString *)text
+- (id)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
 {
     if ((self = [super init])) {
         [self parseText:text];
+        
+        self.tableName = tableName;
+        self.bundleName = bundleName;
     }
     return self;
 }
@@ -47,7 +51,8 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 - (void)dealloc
 {
     self.localizationKey = nil;
-    self.table = nil;
+    self.tableName = nil;
+    self.bundleName = nil;
     
     [super dealloc];
 }
@@ -56,7 +61,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 @synthesize localizationKey = m_localizationKey;
 
-@synthesize table = m_table;
+@synthesize tableName = m_tableName;
 
 @synthesize representation = m_representation;
 
@@ -66,94 +71,36 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 - (void)parseText:(NSString *)text
 {
-    // Syntactic elements
-    static NSString * const kSeparator = @"/";
-    static NSString * const kNormalLeadingPrefix = @"LS";
-    static NSString * const kUppercaseLeadingPrefix = @"ULS";
-    static NSString * const kLowercaseLeadingPrefix = @"LLS";
-    static NSString * const kCapitalizedLeadingPrefix = @"CLS";
-    static NSString * const kTableNamePrefix = @"T";
+    static NSString * const kNormalLeadingPrefix = @"LS/";
+    static NSString * const kUppercaseLeadingPrefix = @"ULS/";
+    static NSString * const kLowercaseLeadingPrefix = @"LLS/";
+    static NSString * const kCapitalizedLeadingPrefix = @"CLS/";
     
-    static NSArray *s_leadingPrefixes = nil;
-    if (! s_leadingPrefixes) {
-        s_leadingPrefixes = [[NSArray arrayWithObjects:kNormalLeadingPrefix, kUppercaseLeadingPrefix, kLowercaseLeadingPrefix, 
-                              kCapitalizedLeadingPrefix, nil] retain];
+    // Check prefix
+    NSString *prefix = nil;
+    if ([text hasPrefix:kNormalLeadingPrefix]) {
+        self.representation = HLSLabelRepresentationNormal;
+        prefix = kNormalLeadingPrefix;
     }
-    
-    // Break text into components
-    NSArray *components = [text componentsSeparatedByString:kSeparator];
-    if ([components count] == 0) {
-        return;
-    }
-    
-    // If no leading prefix, we are done
-    NSString *leadingPrefix = [components firstObject_hls];
-    if (! [s_leadingPrefixes containsObject:leadingPrefix]) {
-        return;
-    }
-    
-    // Extract representation
-    if ([leadingPrefix isEqualToString:kUppercaseLeadingPrefix]) {
+    else if ([text hasPrefix:kUppercaseLeadingPrefix]) {
         self.representation = HLSLabelRepresentationUppercase;
+        prefix = kUppercaseLeadingPrefix;
     }
-    else if ([leadingPrefix isEqualToString:kLowercaseLeadingPrefix]) {
+    else if ([text hasPrefix:kLowercaseLeadingPrefix]) {
         self.representation = HLSLabelRepresentationLowercase;
+        prefix = kLowercaseLeadingPrefix;
     }
-    else if ([leadingPrefix isEqualToString:kCapitalizedLeadingPrefix]) {
+    else if ([text hasPrefix:kCapitalizedLeadingPrefix]) {
         self.representation = HLSLabelRepresentationCapitalized;
+        prefix = kCapitalizedLeadingPrefix;
     }
     else {
-        self.representation = HLSLabelRepresentationNormal;
+        // If no leading prefix, we are done
+        return;
     }
     
-    // Extract the localization key
-    NSString *localizationKey = @"";
-    NSUInteger index = 1;
-    BOOL hasTable = NO;
-    while (index < [components count]) {
-        NSString *component = [components objectAtIndex:index];
-        
-        // Stop when we find the table prefix
-        if ([component isEqualToString:kTableNamePrefix]) {
-            hasTable = YES;
-            ++index;
-            break;
-        }
-        
-        localizationKey = [localizationKey stringByAppendingFormat:@"%@%@", component, kSeparator];
-        ++index;
-    }
-    
-    // Remove the last separator we might have incorrectly added
-    if ([localizationKey length] >= 1) {
-        localizationKey = [localizationKey substringToIndex:[localizationKey length] - 1];
-    }
-    
-    if ([localizationKey length] == 0) {
-        HLSLoggerWarn(@"Leading localization prefix %@ detected, but empty localization key", [components firstObject_hls]);
-    }
-    self.localizationKey = localizationKey;
-    
-    // Extract the table name
-    if (hasTable) {
-        NSString *table = @"";
-        while (index < [components count]) {
-            NSString *component = [components objectAtIndex:index];
-            table = [table stringByAppendingFormat:@"%@%@", component, kSeparator];
-            ++index;
-        }
-        
-        // Remove the last separator we might have incorrectly added
-        if ([table length] >= 1) {
-            table = [table substringToIndex:[table length] - 1];
-        }
-        
-        if ([table length] == 0) {
-            HLSLoggerWarn(@"Table name prefix detected, but empty table name");
-        }
-        
-        self.table = table;
-    }
+    // Extract localization key
+    self.localizationKey = [text stringByReplacingCharactersInRange:NSMakeRange(0, [prefix length]) withString:@""];
 }
 
 #pragma mark Localizing
@@ -171,9 +118,10 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Missing translation
+    // TODO: Fetch bundle from its name
     NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
                                                             value:kMissingLocalizedString
-                                                            table:self.table];
+                                                            table:self.tableName];
     if ([text isEqualToString:kMissingLocalizedString]) {
         return YES;
     }
@@ -196,7 +144,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     // be returned by the localizedStringForKey:value:table method
     NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
                                                             value:kMissingLocalizedString
-                                                            table:self.table];
+                                                            table:self.tableName];
     
     // Use the localization key as text if missing
     if ([text isEqualToString:kMissingLocalizedString]) {
@@ -232,11 +180,12 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; localizationKey: %@; table: %@; representation: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; localizationKey: %@; tableName: %@; bundleName: %@; representation: %@>",
             [self class],
             self,
             self.localizationKey,
-            self.table,
+            self.tableName,
+            self.bundleName,
             stringForLabelRepresentation(self.representation)];
 }
 

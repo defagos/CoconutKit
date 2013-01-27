@@ -187,7 +187,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     // you want to mess with the view hierarchy to set a label. But do you really want to?)
     HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
     if (! localizationInfo) {
-        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text] autorelease];
+        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text tableName:self.locTable bundleName:self.locBundle] autorelease];
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications
