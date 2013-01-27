@@ -21,8 +21,9 @@
 + (NSBundle *)coconutKitBundle;
 
 /**
- * Return the bundle with a given name (without the .bundle extension) in the name bundle, nil if
- * none. If name is nil, the main bundle is returned. The main bundle folder is searched recursively
+ * Return the bundle with a given name (without the .bundle extension) in the main bundle, nil if
+ * no matching bundle is found. If name is nil, the main bundle is returned. Note that the main
+ * bundle folder is searched recursively
  */
 + (NSBundle *)bundleWithName:(NSString *)name;
 

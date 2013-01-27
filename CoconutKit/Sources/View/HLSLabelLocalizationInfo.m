@@ -118,10 +118,15 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Missing translation
-    // TODO: Fetch bundle from its name
-    NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
-                                                            value:kMissingLocalizedString
-                                                            table:self.tableName];
+    NSBundle *bundle = [NSBundle bundleWithName:self.bundleName];
+    if (! bundle) {
+        HLSLoggerWarn(@"The bundle %@ was not found", self.bundleName);
+        return NO;
+    }
+    
+    NSString *text = [bundle localizedStringForKey:self.localizationKey
+                                             value:kMissingLocalizedString
+                                             table:self.tableName];
     if ([text isEqualToString:kMissingLocalizedString]) {
         return YES;
     }
@@ -142,9 +147,15 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     
     // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
     // be returned by the localizedStringForKey:value:table method
-    NSString *text = [[NSBundle mainBundle] localizedStringForKey:self.localizationKey
-                                                            value:kMissingLocalizedString
-                                                            table:self.tableName];
+    NSBundle *bundle = [NSBundle bundleWithName:self.bundleName];
+    if (! bundle) {
+        HLSLoggerWarn(@"The bundle %@ was not found", self.bundleName);
+        return self.localizationKey;
+    }
+    
+    NSString *text = [bundle localizedStringForKey:self.localizationKey
+                                             value:kMissingLocalizedString
+                                             table:self.tableName];
     
     // Use the localization key as text if missing
     if ([text isEqualToString:kMissingLocalizedString]) {

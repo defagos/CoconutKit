@@ -47,8 +47,13 @@
         for (NSString *contentPath in contentPaths) {
             if ([[contentPath pathExtension] isEqualToString:@"bundle"]) {
                 NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
-                NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
                 NSString *bundleName = [[bundlePath lastPathComponent] stringByDeletingPathExtension];
+                if ([nameToBundleMap objectForKey:name]) {
+                    HLSLoggerWarn(@"A bundle was already found with the name %@. Skipped", bundleName);
+                    continue;
+                }
+                
+                NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
                 [nameToBundleMap setObject:bundle forKey:bundleName];
             }
         }

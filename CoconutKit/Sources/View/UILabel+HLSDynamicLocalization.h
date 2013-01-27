@@ -16,17 +16,19 @@
  *   - ULS/<localizationKey>: Same as LS/, but uppercase
  *   - LLS/<localizationKey>: Same as LS/, but lowercase
  *   - CLS/<localizationKey>: Same as LS/, but capitalized
- * In all cases, lookup is performed in the Localizable.strings file of the main bundle. If you need lookup
- * to be performed in another table, respectively another bundle, set user-defined runtime attributes
- * on the label or button you want to localize:
+ *
+ * Lookup is performed in the Localizable.strings file of the main bundle. If you need lookup to be performed 
+ * in another table, respectively another bundle, set the following user-defined runtime attributes on the 
+ * label or button you want to localize:
  *   - locTable: The name of the localization table to use (without the .strings extension). If not set 
- *     defaults to Localizable
- *   - locBundle: The name of the bundle to search into (without the .bundle extension)
+ *               defaults to Localizable
+ *   - locBundle: The name of the bundle to search into (without the .bundle extension). Bundles are searched
+ *                recursively in the main bundle, and if locBundle is not set the main bundle is used
  *
  * It is important to note that when a label has been localized in a nib using one of the above prefixes,
  * the attached localization key cannot be altered anymore. This is not a problem, though, since this
  * approach is intended for "static" labels which are defined once in a nib file and not altered later.
- * If you need to be able to change the text of a label, do not use prefixes in the nib, use outlets 
+ * If you need to be able to change the text of a label later, do not use prefixes in the nib, use outlets 
  * (after all, if you need to be able to change the text of a label, you probably need an outlet anyway, 
  * which is just what the prefix approach is intended to avoid).
  *
@@ -34,16 +36,16 @@
  * with a toolbar's view hierarchy, an approach I considered not robust enough to deserve being implemented.
  * Similarly, UISegmentedControl cannot also be localized this way currently.
  *
- * If the key is not found, the localization key itself is used instead. At runtime, you can reveal labels for 
- * which a localization entry is missing (for the current application language) by using the provided
- * +setMissingLocalizationsVisible: class method. You can of course still use the NSShowNonLocalizedStrings
+ * If the key is not found, the localization key itself is used as localized text instead. At runtime, you 
+ * can reveal labels for which a localization entry is missing (for the current application language) by using 
+ * the provided +setMissingLocalizationsVisible: class method. You can of course still use the NSShowNonLocalizedStrings
  * default setting which logs missing keys to the console if you prefer:
  *   [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"NSShowNonLocalizedStrings"];
  *
  * This category integrates with HLSBundle+HLSDynamicLocalization so that localized labels are updated when the 
  * localization language is changed at runtime.
  *
- * This category currently has three limitations, but which should not be real issues:
+ * This category currently has some limitations, but which should not be real issues:
  *   - no comment can be provided. This would have been too verbose, and in my experience comments added
  *     to NSLocalizedString macros are not really useful (they are seen by the programmer, not by the translator).
  *     Having them only in the .strings files is what I usually recommend. Tools like Linguan or iLocalize can
