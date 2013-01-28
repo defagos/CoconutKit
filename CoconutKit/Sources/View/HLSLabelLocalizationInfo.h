@@ -37,7 +37,8 @@ typedef enum {
  * Create a localization object from a given text, processing any prefix contained in the text (see complete list in
  * UILabel+HLSDynamicLocalization.h). Perform lookup in the specified table, respectively bundle (the .strings and
  * .bundle extensions must be omitted). Setting tableName to nil is equivalent to setting it to Localizable (the
- * default localization table name). The main bundle is used if bundleName is set to nil
+ * default localization table name). The main bundle is used if bundleName is set to nil. Bundles are searched
+ * recursively in the main bundle
  */
 - (id)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName;
 
