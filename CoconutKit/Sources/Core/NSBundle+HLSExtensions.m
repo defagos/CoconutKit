@@ -13,6 +13,8 @@
 
 @implementation NSBundle (HLSExtensions)
 
+#pragma mark Class methods
+
 + (NSString *)friendlyVersionNumber
 {
     NSString *versionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -34,32 +36,38 @@
         return [NSBundle mainBundle];
     }
     
-    static NSDictionary *s_nameToBundleMap = nil;
+    static NSMutableDictionary *s_nameToBundleMap = nil;
     if (! s_nameToBundleMap) {
+        s_nameToBundleMap = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
+    if (! bundle) {
         NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
-        NSError *error = nil;
-        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:&error];
-        if (error) {
-            return nil;
+        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:NULL];
+        for (NSString *contentPath in contentPaths) {
+            NSString *lastPathComponent = [contentPath lastPathComponent];
+            if (! [lastPathComponent isEqualToString:name]) {
+                continue;
+            }
+            
+            NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
+            bundle = [NSBundle bundleWithPath:bundlePath];
+            if (! bundle) {
+                continue;
+            }
+            
+            [s_nameToBundleMap setObject:bundle forKey:name];
+            break;
         }
         
-        NSMutableDictionary *nameToBundleMap = [NSMutableDictionary dictionary];
-        for (NSString *contentPath in contentPaths) {
-            if ([[contentPath pathExtension] isEqualToString:@"bundle"]) {
-                NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
-                NSString *bundleName = [[bundlePath lastPathComponent] stringByDeletingPathExtension];
-                if ([nameToBundleMap objectForKey:name]) {
-                    HLSLoggerWarn(@"A bundle was already found with the name %@. Skipped", bundleName);
-                    continue;
-                }
-                
-                NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
-                [nameToBundleMap setObject:bundle forKey:bundleName];
-            }
+        if (! bundle && ! [[name pathExtension] isEqualToString:@"bundle"]) {
+            NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
+            bundle = [self bundleWithName:nameDotBundle];
+            [s_nameToBundleMap setObject:bundle forKey:name];
         }
-        s_nameToBundleMap = [[NSDictionary dictionaryWithDictionary:nameToBundleMap] retain];
     }
-    return [s_nameToBundleMap objectForKey:name];
+    return bundle;
 }
 
 @end
