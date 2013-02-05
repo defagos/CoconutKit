@@ -1,5 +1,5 @@
 //
-//  UIButton+HLSDynamicLocalization.h
+//  UIView+HLSDynamicLocalization.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 1/26/13.
@@ -9,7 +9,7 @@
 /**
  * This header file is not public
  */
-@interface UIButton (HLSDynamicLocalization)
+@interface UIView (HLSDynamicLocalization)
 
 // The user-defined runtime attributes with which the localization table and bundle can be set. Not in a public
 // header file to avoid direct use, but still can be set in IB thanks to KVC

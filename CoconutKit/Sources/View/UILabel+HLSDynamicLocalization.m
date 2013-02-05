@@ -13,14 +13,13 @@
 #import "HLSRuntime.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
+#import "UIView+HLSDynamicLocalization.h"
 
 static BOOL s_missingLocalizationsVisible = NO;
 
 // Keys for associated objects
 static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
-static void *s_localizationTableNameKey = &s_localizationTableNameKey;
-static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
@@ -43,11 +42,6 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
-
-// The user-defined runtime attributes with which the localization table and bundle can be set. Not in a public
-// header file to avoid direct use, but still can be set in IB thanks to KVC
-@property (nonatomic, retain) NSString *locTable;
-@property (nonatomic, retain) NSString *locBundle;
 
 @end
 
@@ -88,28 +82,6 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self,
                                                                                   @selector(setBackgroundColor:),
                                                                                   (IMP)swizzled_UILabel__setBackgroundColor_Imp);
-}
-
-#pragma mark Accessors and mutators
-
-- (NSString *)locTable
-{
-    return objc_getAssociatedObject(self, s_localizationTableNameKey);
-}
-
-- (void)setLocTable:(NSString *)locTable
-{
-    objc_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSString *)locBundle
-{
-    return objc_getAssociatedObject(self, s_localizationBundleNameKey);
-}
-
-- (void)setLocBundle:(NSString *)locBundle
-{
-    objc_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Localization
@@ -187,7 +159,25 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     // you want to mess with the view hierarchy to set a label. But do you really want to?)
     HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
     if (! localizationInfo) {
-        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text tableName:self.locTable bundleName:self.locBundle] autorelease];
+        NSString *tableName = self.locTable;
+        if (! tableName) {
+            UIView *parentView = self.superview;
+            while (parentView && ! [parentView.locTable isFilled]) {
+                parentView = parentView.superview;
+            }
+            tableName = parentView.locTable;
+        }
+        
+        NSString *bundleName = self.locBundle;
+        if (! bundleName) {
+            UIView *parentView = self.superview;
+            while (parentView && ! [parentView.locBundle isFilled]) {
+                parentView = parentView.superview;
+            }
+            bundleName = parentView.locBundle;
+        }
+        
+        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text tableName:tableName bundleName:bundleName] autorelease];
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications

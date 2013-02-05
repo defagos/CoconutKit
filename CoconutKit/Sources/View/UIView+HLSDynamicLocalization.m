@@ -1,18 +1,18 @@
 //
-//  UIButton+HLSDynamicLocalization.m
+//  UIView+HLSDynamicLocalization.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 1/26/13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "UIButton+HLSDynamicLocalization.h"
+#import "UIView+HLSDynamicLocalization.h"
 
 // Keys for associated objects
 static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
-@implementation UIButton (HLSDynamicLocalization)
+@implementation UIView (HLSDynamicLocalization)
 
 #pragma mark Accessors and mutators
 

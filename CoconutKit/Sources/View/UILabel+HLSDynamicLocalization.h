@@ -24,6 +24,8 @@
  *               defaults to Localizable
  *   - locBundle: The name of the bundle to search into (without the .bundle extension). Bundles are searched
  *                recursively in the main bundle, and if locBundle is not set the main bundle is used
+ * If none of these parameters are set on the label or the button, the nearest values in the parent view
+ * hierarchy are used.
  *
  * It is important to note that when a label has been localized in a nib using one of the above prefixes,
  * the attached localization key cannot be altered anymore. This is not a problem, though, since this
