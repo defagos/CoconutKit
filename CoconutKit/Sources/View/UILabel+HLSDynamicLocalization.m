@@ -13,6 +13,7 @@
 #import "HLSRuntime.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
 #import "UIView+HLSDynamicLocalization.h"
 
 static BOOL s_missingLocalizationsVisible = NO;

@@ -8,6 +8,8 @@
 
 #import "UIView+HLSDynamicLocalization.h"
 
+#import <objc/runtime.h>
+
 // Keys for associated objects
 static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;

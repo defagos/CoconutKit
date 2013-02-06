@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSExtensions.h"
 
 static NSString * const kMissingLocalizedString = @"UILabel_HLSDynamicLocalization_missing";
 
