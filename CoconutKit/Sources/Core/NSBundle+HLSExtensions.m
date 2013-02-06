@@ -64,7 +64,12 @@
         if (! bundle && ! [[name pathExtension] isEqualToString:@"bundle"]) {
             NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
             bundle = [self bundleWithName:nameDotBundle];
-            [s_nameToBundleMap setObject:bundle forKey:name];
+            if (bundle) {
+                [s_nameToBundleMap setObject:bundle forKey:name];
+            }
+            else {
+                HLSLoggerWarn(@"The bundle %@ was not found", name);
+            }
         }
     }
     return bundle;

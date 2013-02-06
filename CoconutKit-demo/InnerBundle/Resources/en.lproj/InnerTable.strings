@@ -5,4 +5,5 @@
   Created by Samuel Défago on 1/26/13.
   Copyright (c) 2013 Hortis. All rights reserved.
 */
-"String in InnerBundle/InnerTable.strings"="String in InnerBundle/InnerTable.stringss";
+"String in InnerBundle/InnerTable.strings"="String in InnerBundle/InnerTable.strings";
+"String in InnerBundle/InnerTable.strings, localized by setting bundle and table attributes on a parent view (here the gray view)"="String in InnerBundle/InnerTable.strings, localized by setting bundle and table attributes on a parent view (here the gray view)";
