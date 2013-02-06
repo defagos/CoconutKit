@@ -32,7 +32,7 @@
         struct objc_method_description methodDescription = methodDescriptions[i];
         SEL selector = methodDescription.name;
         if (! class_getInstanceMethod([self class], selector)) {
-            NSString *selectorString = [NSString stringWithCString:(char *)selector encoding:NSUTF8StringEncoding];
+            NSString *selectorString = [NSString stringWithCString:sel_getName(selector) encoding:NSUTF8StringEncoding];
             NSString *protocolName = [NSString stringWithCString:protocol_getName(protocol) encoding:NSUTF8StringEncoding];
             HLSLoggerInfo(@"Class %@ does not implement method %@ of protocol %@", [self className], selectorString, protocolName);
             selectorString = nil;               // Just to remove unused variable warnings

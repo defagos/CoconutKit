@@ -303,7 +303,7 @@ static Method instanceMethodOnClass(Class class, SEL sel)
 static SEL checkSelectorForValidationSelector(SEL sel)
 {
     // Special cases of global validation for insert / update: One common method since always identical
-    NSString *selectorName = [NSString stringWithCString:(char *)sel encoding:NSUTF8StringEncoding];
+    NSString *selectorName = [NSString stringWithCString:sel_getName(sel) encoding:NSUTF8StringEncoding];
     if ([selectorName isEqualToString:@"validateForInsert:"] || [selectorName isEqualToString:@"validateForUpdate:"]) {
         return NSSelectorFromString(@"checkForConsistency:");
     }
@@ -339,14 +339,14 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
     id value = pValue ? *pValue : nil;
     if (! (*checkImp)(self, checkSel, value, &newError)) {
         if (! newError) {
-            HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
+            HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", sel_getName(checkSel));
         }
         [NSManagedObject combineError:newError withError:pError];
         return NO;
     }
     else if (newError) {
         HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method "
-                      "implementation is obviously incorrect. Fix it", (char *)checkSel);
+                      "implementation is obviously incorrect. Fix it", sel_getName(checkSel));
     }
     
     return YES;
@@ -416,14 +416,14 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         NSError *newCheckError = nil;
         if (! (*checkImp)(self, checkSel, &newCheckError)) {
             if (! newCheckError) {
-                HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", (char *)checkSel);
+                HLSLoggerWarn(@"The %s method returns NO but no error. The method implementation is incorrect", sel_getName(checkSel));
             }
             [NSManagedObject combineError:newCheckError withError:pError];
             valid = NO;
         }
         else if (newCheckError) {
             HLSLoggerWarn(@"The %s method returns YES but also an error. The error has been discarded, but the method "
-                          "implementation is incorrect", (char *)checkSel);
+                          "implementation is incorrect", sel_getName(checkSel));
         }
         
         return valid;
