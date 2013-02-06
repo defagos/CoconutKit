@@ -13,6 +13,8 @@
 #import "HLSRuntime.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
+#import "UIView+HLSDynamicLocalization.h"
 
 static BOOL s_missingLocalizationsVisible = NO;
 
@@ -158,7 +160,25 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     // you want to mess with the view hierarchy to set a label. But do you really want to?)
     HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
     if (! localizationInfo) {
-        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text] autorelease];
+        NSString *tableName = self.locTable;
+        if (! tableName) {
+            UIView *parentView = self.superview;
+            while (parentView && ! [parentView.locTable isFilled]) {
+                parentView = parentView.superview;
+            }
+            tableName = parentView.locTable;
+        }
+        
+        NSString *bundleName = self.locBundle;
+        if (! bundleName) {
+            UIView *parentView = self.superview;
+            while (parentView && ! [parentView.locBundle isFilled]) {
+                parentView = parentView.superview;
+            }
+            bundleName = parentView.locBundle;
+        }
+        
+        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text tableName:tableName bundleName:bundleName] autorelease];
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications

@@ -13,6 +13,8 @@
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
 		6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74C16A93D8C0081A9A7 /* CoreText.framework */; };
+		6F23DB2716B3E84200C085CE /* UIView+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */; };
+		6F23DB2816B3E84200C085CE /* UIView+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */; };
 		6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */; };
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
@@ -246,6 +248,8 @@
 		6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F22C74C16A93D8C0081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
+		6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -754,6 +758,8 @@
 				6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */,
 				6F3B063314BC7B950026F512 /* UIToolbar+HLSExtensions.h */,
 				6F3B063414BC7B950026F512 /* UIToolbar+HLSExtensions.m */,
+				6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */,
+				6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */,
 				6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */,
 				6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */,
 				6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */,
@@ -924,6 +930,7 @@
 				6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */,
 				6FCA2DD81679E3B20011CFDA /* HLSStandardFileManager.h in Headers */,
 				6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */,
+				6F23DB2716B3E84200C085CE /* UIView+HLSDynamicLocalization.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,7 +979,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HLS;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Hortis;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CoconutKit" */;
@@ -1119,6 +1126,7 @@
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
+				6F23DB2816B3E84200C085CE /* UIView+HLSDynamicLocalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,6 +1152,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
@@ -1159,6 +1168,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = CoconutKit;
@@ -1174,6 +1184,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -1200,6 +1211,7 @@
 					armv7,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -1222,12 +1234,14 @@
 		6F159C6F15A5D7720020AFAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_THUMB_SUPPORT = NO;
 			};
 			name = Debug;
 		};
 		6F159C7015A5D7720020AFAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_THUMB_SUPPORT = NO;
 			};
 			name = Release;
 		};

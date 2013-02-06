@@ -20,4 +20,11 @@
  */
 + (NSBundle *)coconutKitBundle;
 
+/**
+ * Return the first bundle contained in the main bundle having a given name (the extension can be omitted, in which
+ * case another attempt with the .bundle extension will be made). If no matching bundle is found, nil is returned. 
+ * Note that bundles are searched recursively, and that results are cached for faster lookup
+ */
++ (NSBundle *)bundleWithName:(NSString *)name;
+
 @end

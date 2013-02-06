@@ -168,6 +168,8 @@
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
+		6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
+		6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
@@ -301,6 +303,27 @@
 			remoteGlobalIDString = 6F159C2515A596590020AFAC;
 			remoteInfo = "Build-StaticFramework";
 		};
+		6F6B0C9216B3DA35006B718F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6F000048156BCC270055CED7;
+			remoteInfo = InnerBundle;
+		};
+		6F6B0C9416B3DA8F006B718F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
+			remoteInfo = InnerBundle;
+		};
+		6F6B0C9616B3DA93006B718F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
+			remoteInfo = InnerBundle;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -347,6 +370,8 @@
 		6F5A0BB11509D19300A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InnerBundle.xcodeproj; path = InnerBundle/InnerBundle.xcodeproj; sourceTree = "<group>"; };
+		6F6B0C9B16B3DACF006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InnerFolder; sourceTree = "<group>"; };
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
@@ -557,8 +582,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6F6B0C8D16B3DA22006B718F /* Dependencies */,
 				6F9C46A214C5C36300824AB2 /* Resources */,
 				6F9C459214C5C30B00824AB2 /* Sources */,
+				6F6B0C9B16B3DACF006B718F /* InnerFolder */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -683,6 +710,22 @@
 				6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */,
 			);
 			path = Slideshow;
+			sourceTree = "<group>";
+		};
+		6F6B0C8D16B3DA22006B718F /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		6F6B0C8F16B3DA34006B718F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F6B0C9316B3DA35006B718F /* InnerBundle.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		6F89149C15790DDE009FCC78 /* Label */ = {
@@ -1246,6 +1289,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6F6B0C9516B3DA8F006B718F /* PBXTargetDependency */,
 				6F159C2A15A596670020AFAC /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-demo";
@@ -1265,6 +1309,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6F6B0C9716B3DA93006B718F /* PBXTargetDependency */,
 				6F159C2C15A5966D0020AFAC /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-demo-ios4";
@@ -1300,6 +1345,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6F6B0C8F16B3DA34006B718F /* Products */;
+					ProjectRef = 6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CoconutKit-demo */,
@@ -1308,6 +1359,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6F6B0C9316B3DA35006B718F /* InnerBundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = InnerBundle.bundle;
+			remoteRef = 6F6B0C9216B3DA35006B718F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -1385,6 +1446,7 @@
 				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
+				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1461,6 +1523,7 @@
 				6F22C76416A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
+				6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,6 +1707,16 @@
 			isa = PBXTargetDependency;
 			target = 6F159C2515A596590020AFAC /* CoconutKit-demo-staticframework */;
 			targetProxy = 6F159C2B15A5966D0020AFAC /* PBXContainerItemProxy */;
+		};
+		6F6B0C9516B3DA8F006B718F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InnerBundle;
+			targetProxy = 6F6B0C9416B3DA8F006B718F /* PBXContainerItemProxy */;
+		};
+		6F6B0C9716B3DA93006B718F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InnerBundle;
+			targetProxy = 6F6B0C9616B3DA93006B718F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -22,21 +22,25 @@ typedef enum {
 /**
  * Internal class for containing the localization information attached to a UILabel (see UILabel+HLSDynamicLocalization.m)
  *
- * Designated initializer: -initWithText:
+ * Designated initializer: -initWithText:tableName:bundleName:
  */
 @interface HLSLabelLocalizationInfo : NSObject {
 @private
     NSString *m_localizationKey;
-    NSString *m_table;
+    NSString *m_tableName;
+    NSString *m_bundleName;
     HLSLabelRepresentation m_representation;
     BOOL m_locked;
 }
 
 /**
  * Create a localization object from a given text, processing any prefix contained in the text (see complete list in
- * UILabel+HLSDynamicLocalization.h)
+ * UILabel+HLSDynamicLocalization.h). Perform lookup in the specified table, respectively bundle (the .strings and
+ * .bundle extensions must be omitted). Setting tableName to nil is equivalent to setting it to Localizable (the
+ * default localization table name). The main bundle is used if bundleName is set to nil. Bundles are searched
+ * recursively in the main bundle
  */
-- (id)initWithText:(NSString *)text;
+- (id)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName;
 
 /**
  * Return YES iff the information object corresponds to localized content

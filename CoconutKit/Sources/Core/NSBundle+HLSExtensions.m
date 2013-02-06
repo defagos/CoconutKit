@@ -13,6 +13,8 @@
 
 @implementation NSBundle (HLSExtensions)
 
+#pragma mark Class methods
+
 + (NSString *)friendlyVersionNumber
 {
     NSString *versionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -21,31 +23,56 @@
 
 + (NSBundle *)coconutKitBundle
 {
-    // Search in all subdirectories as well. In general, a bundle is copied at the main bundle root, but this
-    // might not be the case
-    static NSBundle *s_coconutKitBundle = nil;
-    if (! s_coconutKitBundle) {
+    NSBundle *coconutKitBundle = [self bundleWithName:@"CoconutKit-resources"];
+    if (! coconutKitBundle) {
+        HLSLoggerError(@"Could not find CoconutKit-resources bundle. Have you added it to your project main bundle?");
+    }
+    return coconutKitBundle;
+}
+
++ (NSBundle *)bundleWithName:(NSString *)name
+{
+    if (! name) {
+        return [NSBundle mainBundle];
+    }
+    
+    static NSMutableDictionary *s_nameToBundleMap = nil;
+    if (! s_nameToBundleMap) {
+        s_nameToBundleMap = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
+    if (! bundle) {
         NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
-        NSError *error = nil;
-        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:&error];
-        if (error) {
-            HLSLoggerError(@"Could not find CoconutKit-resources bundle. Reason: %@", error);
-            return nil;
+        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:mainBundlePath error:NULL];
+        for (NSString *contentPath in contentPaths) {
+            NSString *lastPathComponent = [contentPath lastPathComponent];
+            if (! [lastPathComponent isEqualToString:name]) {
+                continue;
+            }
+            
+            NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
+            bundle = [NSBundle bundleWithPath:bundlePath];
+            if (! bundle) {
+                continue;
+            }
+            
+            [s_nameToBundleMap setObject:bundle forKey:name];
+            break;
         }
         
-        for (NSString *contentPath in contentPaths) {
-            if ([[contentPath lastPathComponent] isEqualToString:@"CoconutKit-resources.bundle"]) {
-                NSString *coconutKitBundlePath = [mainBundlePath stringByAppendingPathComponent:contentPath];
-                s_coconutKitBundle = [[NSBundle alloc] initWithPath:coconutKitBundlePath];
-                break;
+        if (! bundle && ! [[name pathExtension] isEqualToString:@"bundle"]) {
+            NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
+            bundle = [self bundleWithName:nameDotBundle];
+            if (bundle) {
+                [s_nameToBundleMap setObject:bundle forKey:name];
+            }
+            else {
+                HLSLoggerWarn(@"The bundle %@ was not found", name);
             }
         }
-        
-        if (! s_coconutKitBundle) {
-            HLSLoggerError(@"Could not load CoconutKit-resources bundle. Have you added it to your project main bundle?");
-        }        
     }
-    return s_coconutKitBundle;
+    return bundle;
 }
 
 @end
