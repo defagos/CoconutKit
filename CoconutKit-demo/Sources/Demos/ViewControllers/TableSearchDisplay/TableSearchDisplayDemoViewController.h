@@ -8,8 +8,8 @@
 
 @interface TableSearchDisplayDemoViewController : HLSTableSearchDisplayViewController {
 @private
-    NSArray *m_devices;
-    NSArray *m_filteredDevices;
+    NSArray *_devices;
+    NSArray *_filteredDevices;
 }
 
 @end

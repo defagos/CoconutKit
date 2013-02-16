@@ -8,10 +8,10 @@
 
 @interface TextFieldsDemoViewController : HLSViewController <UITextFieldDelegate> {
 @private
-    HLSTextField *m_textField1;
-    HLSTextField *m_textField2;
-    HLSTextField *m_textField3;
-    HLSTextField *m_textField4;
+    HLSTextField *_textField1;
+    HLSTextField *_textField2;
+    HLSTextField *_textField3;
+    HLSTextField *_textField4;
 }
 
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;

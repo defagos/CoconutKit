@@ -22,9 +22,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize webView = m_webView;
+@synthesize webView = _webView;
 
-@synthesize scrollEnabledSwitch = m_scrollEnabledSwitch;
+@synthesize scrollEnabledSwitch = _scrollEnabledSwitch;
 
 #pragma mark View lifecycle
 

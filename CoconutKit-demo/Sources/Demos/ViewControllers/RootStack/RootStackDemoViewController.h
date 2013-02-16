@@ -8,16 +8,16 @@
 
 @interface RootStackDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
-    UIBarButtonItem *m_backBarButtonItem;
-    UIBarButtonItem *m_actionSheetBarButtonItem;
-    UIButton *m_popButton;
-    UIPickerView *m_transitionPickerView;
-    UISwitch *m_animatedSwitch;
-    UISwitch *m_portraitSwitch;
-    UISwitch *m_landscapeRightSwitch;
-    UISwitch *m_landscapeLeftSwitch;
-    UISwitch *m_portraitUpsideDownSwitch;
-    UISegmentedControl *m_autorotationModeSegmentedControl;
+    UIBarButtonItem *_backBarButtonItem;
+    UIBarButtonItem *_actionSheetBarButtonItem;
+    UIButton *_popButton;
+    UIPickerView *_transitionPickerView;
+    UISwitch *_animatedSwitch;
+    UISwitch *_portraitSwitch;
+    UISwitch *_landscapeRightSwitch;
+    UISwitch *_landscapeLeftSwitch;
+    UISwitch *_portraitUpsideDownSwitch;
+    UISegmentedControl *_autorotationModeSegmentedControl;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backBarButtonItem;

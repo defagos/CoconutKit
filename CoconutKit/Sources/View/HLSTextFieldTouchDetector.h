@@ -17,8 +17,8 @@
  */
 @interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate <UIGestureRecognizerDelegate> {
 @private
-    UIGestureRecognizer *m_gestureRecognizer;
-    BOOL m_resigningFirstResponderOnTap;
+    UIGestureRecognizer *_gestureRecognizer;
+    BOOL _resigningFirstResponderOnTap;
 }
 
 /**

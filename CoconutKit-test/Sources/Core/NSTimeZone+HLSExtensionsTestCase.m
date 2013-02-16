@@ -41,21 +41,21 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize calendar = m_calendar;
+@synthesize calendar = _calendar;
 
-@synthesize timeZoneZurich = m_timeZoneZurich;
+@synthesize timeZoneZurich = _timeZoneZurich;
 
-@synthesize timeZoneTahiti = m_timeZoneTahiti;
+@synthesize timeZoneTahiti = _timeZoneTahiti;
 
-@synthesize date1 = m_date1;
+@synthesize date1 = _date1;
 
-@synthesize date2 = m_date2;
+@synthesize date2 = _date2;
 
-@synthesize date3 = m_date3;
+@synthesize date3 = _date3;
 
-@synthesize date4 = m_date4;
+@synthesize date4 = _date4;
 
-@synthesize date5 = m_date5;
+@synthesize date5 = _date5;
 
 #pragma mark Test setup and tear down
 

@@ -22,14 +22,14 @@
  */
 @interface HLSLayerAnimationStep : HLSAnimationStep {
 @private
-    CAMediaTimingFunction *m_timingFunction;
-    UIView *m_dummyView;
-    NSUInteger m_numberOfLayerAnimations;
-    BOOL m_numberOfStartedLayerAnimations;
-    NSUInteger m_numberOfFinishedLayerAnimations;
-    CFTimeInterval m_startTime;
-    CFTimeInterval m_pauseTime;
-    CFTimeInterval m_previousPauseDuration;
+    CAMediaTimingFunction *_timingFunction;
+    UIView *_dummyView;
+    NSUInteger _numberOfLayerAnimations;
+    BOOL _numberOfStartedLayerAnimations;
+    NSUInteger _numberOfFinishedLayerAnimations;
+    CFTimeInterval _startTime;
+    CFTimeInterval _pauseTime;
+    CFTimeInterval _previousPauseDuration;
 }
 
 /**

@@ -18,8 +18,8 @@
  */
 @interface HLSTextFieldInternalDelegate : NSObject <UITextFieldDelegate> {
 @private
-    UITextField *m_textField;
-    id<UITextFieldDelegate> m_delegate;
+    UITextField *_textField;
+    id<UITextFieldDelegate> _delegate;
 }
 
 - (id)initWithTextField:(UITextField *)textField;

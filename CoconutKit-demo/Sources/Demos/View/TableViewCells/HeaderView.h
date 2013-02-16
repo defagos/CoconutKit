@@ -8,7 +8,7 @@
 
 @interface HeaderView : HLSNibView {
 @private
-    UILabel *m_label;
+    UILabel *_label;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *label;

@@ -8,8 +8,8 @@
 
 @interface ActionSheetDemoViewController : HLSViewController {
 @private
-    UIToolbar *m_toolbar;
-    UILabel *m_choiceLabel;
+    UIToolbar *_toolbar;
+    UILabel *_choiceLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;

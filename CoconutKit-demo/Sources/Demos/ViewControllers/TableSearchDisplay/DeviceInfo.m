@@ -49,8 +49,8 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize name = m_name;
+@synthesize name = _name;
 
-@synthesize type = m_type;
+@synthesize type = _type;
 
 @end

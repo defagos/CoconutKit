@@ -18,7 +18,7 @@
  */
 @interface HLSError : NSError {
 @private
-    NSDictionary *m_internalUserInfo;
+    NSDictionary *_internalUserInfo;
 }
 
 /**

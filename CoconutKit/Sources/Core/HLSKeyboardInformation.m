@@ -81,13 +81,13 @@ static HLSKeyboardInformation *s_instance = nil;
 
 #pragma mark Accessors and mutators
 
-@synthesize beginFrame = m_beginFrame;
+@synthesize beginFrame = _beginFrame;
 
-@synthesize endFrame = m_endFrame;
+@synthesize endFrame = _endFrame;
 
-@synthesize animationDuration = m_animationDuration;
+@synthesize animationDuration = _animationDuration;
 
-@synthesize animationCurve = m_animationCurve;
+@synthesize animationCurve = _animationCurve;
 
 #pragma mark Notification callbacks
 

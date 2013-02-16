@@ -42,12 +42,12 @@ typedef enum {
  */
 @interface HLSWizardViewController : HLSPlaceholderViewController {
 @private
-    UIButton *m_previousButton;
-    UIButton *m_nextButton;
-    UIButton *m_doneButton;
-    NSArray *m_viewControllers;
-    HLSWizardTransitionStyle m_wizardTransitionStyle;
-    NSInteger m_currentPage;
+    UIButton *_previousButton;
+    UIButton *_nextButton;
+    UIButton *_doneButton;
+    NSArray *_viewControllers;
+    HLSWizardTransitionStyle _wizardTransitionStyle;
+    NSInteger _currentPage;
 }
 
 /**

@@ -78,23 +78,23 @@ typedef enum {
 
 #pragma mark Accessors and mutators
 
-@synthesize heavyButton = m_heavyButton;
+@synthesize heavyButton = _heavyButton;
 
-@synthesize transitionPickerView = m_transitionPickerView;
+@synthesize transitionPickerView = _transitionPickerView;
 
-@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
+@synthesize inTabBarControllerSwitch = _inTabBarControllerSwitch;
 
-@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
+@synthesize inNavigationControllerSwitch = _inNavigationControllerSwitch;
 
-@synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
+@synthesize leftPlaceholderSwitch = _leftPlaceholderSwitch;
 
-@synthesize rightPlaceholderSwitch = m_rightPlaceholderSwitch;
+@synthesize rightPlaceholderSwitch = _rightPlaceholderSwitch;
 
-@synthesize leftHeavyViewController = m_leftHeavyViewController;
+@synthesize leftHeavyViewController = _leftHeavyViewController;
 
-@synthesize rightHeavyViewController = m_rightHeavyViewController;
+@synthesize rightHeavyViewController = _rightHeavyViewController;
 
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
+@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 

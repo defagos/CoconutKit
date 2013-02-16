@@ -68,9 +68,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize savedFrontContentView = m_savedFrontContentView;
+@synthesize savedFrontContentView = _savedFrontContentView;
 
-@synthesize savedBackContentView = m_savedBackContentView;
+@synthesize savedBackContentView = _savedBackContentView;
 
 - (UIView *)frontContentView
 {

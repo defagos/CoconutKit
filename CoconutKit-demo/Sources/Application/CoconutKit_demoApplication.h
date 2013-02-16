@@ -13,8 +13,8 @@
     UISplitViewControllerDelegate,
     UITabBarControllerDelegate> {
 @private
-    UIViewController *m_rootViewController;
-    HLSActionSheet *m_languageActionSheet;
+    UIViewController *_rootViewController;
+    HLSActionSheet *_languageActionSheet;
 }
 
 - (UIViewController *)rootViewController;

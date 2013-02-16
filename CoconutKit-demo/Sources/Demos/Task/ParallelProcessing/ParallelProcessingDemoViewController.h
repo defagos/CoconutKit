@@ -8,32 +8,32 @@
 
 @interface ParallelProcessingDemoViewController : HLSViewController <HLSTaskDelegate, HLSTaskGroupDelegate> {
 @private
-    UIButton *m_taskStartButton;
-    UIButton *m_taskStopButton;
-    UIProgressView *m_taskProgressView;
-    UILabel *m_taskRemainingTimeEstimateLabel;
-    UILabel *m_taskRemainingTimeLabel;
+    UIButton *_taskStartButton;
+    UIButton *_taskStopButton;
+    UIProgressView *_taskProgressView;
+    UILabel *_taskRemainingTimeEstimateLabel;
+    UILabel *_taskRemainingTimeLabel;
     
-    UIButton *m_taskGroupStartButton;
-    UIButton *m_taskGroupStopButton;
-    UIProgressView *m_taskGroupProgressView;
-    UILabel *m_taskGroupRemainingTimeEstimateLabel;
-    UILabel *m_taskGroupRemainingTimeLabel;
+    UIButton *_taskGroupStartButton;
+    UIButton *_taskGroupStopButton;
+    UIProgressView *_taskGroupProgressView;
+    UILabel *_taskGroupRemainingTimeEstimateLabel;
+    UILabel *_taskGroupRemainingTimeLabel;
     
-    UIButton *m_subTask1StopButton;
-    UIProgressView *m_subTask1ProgressView;
-    UILabel *m_subTask1RemainingTimeEstimateLabel;
-    UILabel *m_subTask1RemainingTimeLabel;
+    UIButton *_subTask1StopButton;
+    UIProgressView *_subTask1ProgressView;
+    UILabel *_subTask1RemainingTimeEstimateLabel;
+    UILabel *_subTask1RemainingTimeLabel;
     
-    UIButton *m_subTask2StopButton;
-    UIProgressView *m_subTask2ProgressView;
-    UILabel *m_subTask2RemainingTimeEstimateLabel;
-    UILabel *m_subTask2RemainingTimeLabel;
+    UIButton *_subTask2StopButton;
+    UIProgressView *_subTask2ProgressView;
+    UILabel *_subTask2RemainingTimeEstimateLabel;
+    UILabel *_subTask2RemainingTimeLabel;
 
-    UIButton *m_subTask3StopButton;
-    UIProgressView *m_subTask3ProgressView;
-    UILabel *m_subTask3RemainingTimeEstimateLabel;
-    UILabel *m_subTask3RemainingTimeLabel;    
+    UIButton *_subTask3StopButton;
+    UIProgressView *_subTask3ProgressView;
+    UILabel *_subTask3RemainingTimeEstimateLabel;
+    UILabel *_subTask3RemainingTimeLabel;    
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *taskStartButton;

@@ -83,9 +83,9 @@ typedef enum {
 
 #pragma mark Accessors and mutators
 
-@synthesize devices = m_devices;
+@synthesize devices = _devices;
 
-@synthesize filteredDevices = m_filteredDevices;
+@synthesize filteredDevices = _filteredDevices;
 
 #pragma mark UISearchDisplayDelegate protocol implementation
 

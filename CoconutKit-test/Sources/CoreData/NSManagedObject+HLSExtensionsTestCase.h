@@ -11,8 +11,8 @@
 
 @interface NSManagedObject_HLSExtensionsTestCase : GHTestCase {
 @private
-    Person *m_person1;
-    Person *m_person2;
+    Person *_person1;
+    Person *_person2;
 }
 
 @end

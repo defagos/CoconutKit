@@ -11,19 +11,19 @@
  */
 @interface StackDemoViewController : HLSPlaceholderViewController <HLSStackControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate> {
 @private
-    UISlider *m_sizeSlider;
-    UISegmentedControl *m_resizeMethodSegmentedControl;
-    UIButton *m_popoverButton;
-    UIPickerView *m_transitionPickerView;
-    UISegmentedControl *m_autorotationModeSegmentedControl;
-    UISwitch *m_inTabBarControllerSwitch;
-    UISwitch *m_inNavigationControllerSwitch;
-    UISwitch *m_animatedSwitch;
-    UISlider *m_indexSlider;
-    UILabel *m_insertionIndexLabel;
-    UILabel *m_removalIndexLabel;
-    UIPopoverController *m_displayedPopoverController;
-    CGRect m_placeholderViewOriginalBounds;
+    UISlider *_sizeSlider;
+    UISegmentedControl *_resizeMethodSegmentedControl;
+    UIButton *_popoverButton;
+    UIPickerView *_transitionPickerView;
+    UISegmentedControl *_autorotationModeSegmentedControl;
+    UISwitch *_inTabBarControllerSwitch;
+    UISwitch *_inNavigationControllerSwitch;
+    UISwitch *_animatedSwitch;
+    UISlider *_indexSlider;
+    UILabel *_insertionIndexLabel;
+    UILabel *_removalIndexLabel;
+    UIPopoverController *_displayedPopoverController;
+    CGRect _placeholderViewOriginalBounds;
 }
 
 @property (nonatomic, retain) IBOutlet UISlider *sizeSlider;

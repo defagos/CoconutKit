@@ -21,8 +21,8 @@
  */
 @interface NotificationSender : NSObject {
 @private
-    NSString *m_notificationName;
-    id m_object;
+    NSString *_notificationName;
+    id _object;
 }
 
 - (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object;
@@ -67,7 +67,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        m_networkActivityCount = 0;
+        _networkActivityCount = 0;
     }
     return self;
 }
@@ -76,27 +76,27 @@
 
 - (void)notifyBeginNetworkActivity
 {
-    ++m_networkActivityCount;
+    ++_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %d", _networkActivityCount);
     
-    if (m_networkActivityCount == 1) {
+    if (_networkActivityCount == 1) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
 }
 
 - (void)notifyEndNetworkActivity
 {
-    if (m_networkActivityCount == 0) {
+    if (_networkActivityCount == 0) {
         HLSLoggerWarn(@"Warning: Notifying the end of a network activity which has not been started");
         return;
     }
     
-    --m_networkActivityCount;
+    --_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %d", _networkActivityCount);
     
-    if (m_networkActivityCount == 0) {
+    if (_networkActivityCount == 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;        
     }
 }
@@ -128,9 +128,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize notificationName = m_notificationName;
+@synthesize notificationName = _notificationName;
 
-@synthesize object = m_object;
+@synthesize object = _object;
 
 @end
 
@@ -169,7 +169,7 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize objectToNotificationMap = m_objectToNotificationMap;
+@synthesize objectToNotificationMap = _objectToNotificationMap;
 
 #pragma mark (Un)registering conversion rules
 

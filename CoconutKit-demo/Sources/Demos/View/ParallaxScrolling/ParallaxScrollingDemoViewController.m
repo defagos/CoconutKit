@@ -38,29 +38,29 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize textView = m_textView;
+@synthesize textView = _textView;
 
-@synthesize skyScrapperScrollView = m_skyScrapperScrollView;
+@synthesize skyScrapperScrollView = _skyScrapperScrollView;
 
-@synthesize skyScrapperImageView = m_skyScrapperImageView;
+@synthesize skyScrapperImageView = _skyScrapperImageView;
 
-@synthesize skyScrollView = m_skyScrollView;
+@synthesize skyScrollView = _skyScrollView;
 
-@synthesize mountainsScrollView = m_mountainsScrollView;
+@synthesize mountainsScrollView = _mountainsScrollView;
 
-@synthesize grassScrollView = m_grassScrollView;
+@synthesize grassScrollView = _grassScrollView;
 
-@synthesize treesScrollView = m_treesScrollView;
+@synthesize treesScrollView = _treesScrollView;
 
-@synthesize skyImageView = m_skyImageView;
+@synthesize skyImageView = _skyImageView;
 
-@synthesize mountainsImageView = m_mountainsImageView;
+@synthesize mountainsImageView = _mountainsImageView;
 
-@synthesize grassImageView = m_grassImageView;
+@synthesize grassImageView = _grassImageView;
 
-@synthesize treesImageView = m_treesImageView;
+@synthesize treesImageView = _treesImageView;
 
-@synthesize bouncesSwitch = m_bouncesSwitch;
+@synthesize bouncesSwitch = _bouncesSwitch;
 
 #pragma mark View lifecycle
 

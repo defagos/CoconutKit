@@ -35,9 +35,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize toolbar = m_toolbar;
+@synthesize toolbar = _toolbar;
 
-@synthesize choiceLabel = m_choiceLabel;
+@synthesize choiceLabel = _choiceLabel;
 
 #pragma mark View lifecycle
 

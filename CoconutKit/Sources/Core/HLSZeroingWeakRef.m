@@ -108,9 +108,9 @@ static Class subclass_class(id object, SEL _cmd);
 
 #pragma mark Accessors and mutators
 
-@synthesize object = m_object;
+@synthesize object = _object;
 
-@synthesize invocations = m_invocations;
+@synthesize invocations = _invocations;
 
 #pragma mark Optional cleanup
 

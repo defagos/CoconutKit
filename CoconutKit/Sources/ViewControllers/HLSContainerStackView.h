@@ -103,8 +103,8 @@
  */
 @interface HLSContainerStackView : UIView {
 @private
-    NSMutableArray *m_groupViews;               // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
-    id<HLSContainerStackViewDelegate> m_delegate;
+    NSMutableArray *_groupViews;               // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
+    id<HLSContainerStackViewDelegate> _delegate;
 }
 
 /**

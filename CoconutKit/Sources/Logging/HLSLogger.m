@@ -80,7 +80,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 - (id)initWithLevel:(HLSLoggerLevel)level
 {
 	if ((self = [super init])) {
-		m_level = level;
+		_level = level;
 	}
 	return self;
 }
@@ -94,7 +94,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 - (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode
 {
-	if (m_level > mode.level) {
+	if (_level > mode.level) {
 		return;
 	}
 
@@ -145,27 +145,27 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 - (BOOL)isDebug
 {
-	return m_level <= HLSLoggerLevelDebug;
+	return _level <= HLSLoggerLevelDebug;
 }
 
 - (BOOL)isInfo
 {
-	return m_level <= HLSLoggerLevelInfo;
+	return _level <= HLSLoggerLevelInfo;
 }
 
 - (BOOL)isWarn
 {
-	return m_level <= HLSLoggerLevelWarn;
+	return _level <= HLSLoggerLevelWarn;
 }
 
 - (BOOL)isError
 {
-	return m_level <= HLSLoggerLevelError;
+	return _level <= HLSLoggerLevelError;
 }
 
 - (BOOL)isFatal
 {
-	return m_level <= HLSLoggerLevelFatal;
+	return _level <= HLSLoggerLevelFatal;
 }
 
 @end

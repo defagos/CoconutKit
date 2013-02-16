@@ -16,13 +16,13 @@
  */
 @interface HLSAnimationStep : NSObject <NSCopying> {
 @private
-    NSMutableArray *m_objectKeys;
-    NSMutableDictionary *m_objectToObjectAnimationMap;
-    NSString *m_tag;
-    NSDictionary *m_userInfo;
-    NSTimeInterval m_duration;
-    id<HLSAnimationStepDelegate> m_delegate;
-    BOOL m_terminating;
+    NSMutableArray *_objectKeys;
+    NSMutableDictionary *_objectToObjectAnimationMap;
+    NSString *_tag;
+    NSDictionary *_userInfo;
+    NSTimeInterval _duration;
+    id<HLSAnimationStepDelegate> _delegate;
+    BOOL _terminating;
 }
 
 /**

@@ -65,43 +65,43 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
+@synthesize person = _person;
 
 - (void)setPerson:(Person *)person
 {
-    if (m_person == person) {
+    if (_person == person) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    [_person release];
+    _person = [person retain];
     
     [self reloadData];
 }
 
-@synthesize firstNameTextField = m_firstNameTextField;
+@synthesize firstNameTextField = _firstNameTextField;
 
-@synthesize firstNameErrorLabel = m_firstNameErrorLabel;
+@synthesize firstNameErrorLabel = _firstNameErrorLabel;
 
-@synthesize lastNameTextField = m_lastNameTextField;
+@synthesize lastNameTextField = _lastNameTextField;
 
-@synthesize lastNameErrorLabel = m_lastNameErrorLabel;
+@synthesize lastNameErrorLabel = _lastNameErrorLabel;
 
-@synthesize emailTextField = m_emailTextField;
+@synthesize emailTextField = _emailTextField;
 
-@synthesize emailErrorLabel = m_emailErrorLabel;
+@synthesize emailErrorLabel = _emailErrorLabel;
 
-@synthesize birthdateLabel = m_birthdateLabel;
+@synthesize birthdateLabel = _birthdateLabel;
 
-@synthesize birthdateTextField = m_birthdateTextField;
+@synthesize birthdateTextField = _birthdateTextField;
 
-@synthesize birthdateErrorLabel = m_birthdateErrorLabel;
+@synthesize birthdateErrorLabel = _birthdateErrorLabel;
 
-@synthesize nbrChildrenTextField = m_nbrChildrenTextField;
+@synthesize nbrChildrenTextField = _nbrChildrenTextField;
 
-@synthesize nbrChildrenErrorLabel = m_nbrChildrenErrorLabel;
+@synthesize nbrChildrenErrorLabel = _nbrChildrenErrorLabel;
 
-@synthesize dateFormatter = m_dateFormatter;
+@synthesize dateFormatter = _dateFormatter;
 
 #pragma mark View lifecycle
 

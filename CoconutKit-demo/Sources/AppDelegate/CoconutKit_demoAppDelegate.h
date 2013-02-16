@@ -11,8 +11,8 @@
 
 @interface CoconutKit_demoAppDelegate : NSObject <UIApplicationDelegate> {
 @private
-    CoconutKit_demoApplication *m_application;
-    UIWindow *m_window;
+    CoconutKit_demoApplication *_application;
+    UIWindow *_window;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

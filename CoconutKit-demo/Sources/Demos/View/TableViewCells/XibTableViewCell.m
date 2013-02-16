@@ -14,8 +14,8 @@
 
 - (void)dealloc
 {
-    self.imageView = nil;
-    self.label = nil;
+    self.testImageView = nil;
+    self.testLabel = nil;
     [super dealloc];
 }
 
@@ -30,8 +30,8 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize imageView = m_imageView;
+@synthesize testImageView = _testImageView;
 
-@synthesize label = m_label;
+@synthesize testLabel = _testLabel;
 
 @end

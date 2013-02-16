@@ -11,7 +11,7 @@
  */
 @interface CursorPointerInfoViewController : HLSViewController {
 @private
-    UILabel *m_valueLabel;
+    UILabel *_valueLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;

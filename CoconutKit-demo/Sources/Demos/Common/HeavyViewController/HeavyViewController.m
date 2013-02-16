@@ -16,8 +16,8 @@
 {
     [super releaseViews];
     
-    free(m_largeBlock);
-    m_largeBlock = NULL;
+    free(_largeBlock);
+    _largeBlock = NULL;
 }
 
 #pragma mark View lifecycle
@@ -32,8 +32,8 @@
     self.view.backgroundColor = [UIColor randomColor];
     
     // Simulate a heavy memory consumption for the view
-    if (! m_largeBlock) {
-        m_largeBlock = malloc(5000000);
+    if (! _largeBlock) {
+        _largeBlock = malloc(5000000);
     }
 }
 

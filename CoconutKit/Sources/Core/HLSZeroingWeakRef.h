@@ -27,8 +27,8 @@
  */
 @interface HLSZeroingWeakRef : NSObject {
 @private
-    id m_object;
-    NSMutableArray *m_invocations;
+    id _object;
+    NSMutableArray *_invocations;
 }
 
 /**

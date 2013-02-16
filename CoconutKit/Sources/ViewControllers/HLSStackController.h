@@ -71,10 +71,10 @@
  */
 @interface HLSStackController : HLSViewController <HLSContainerStackDelegate> {
 @private
-    HLSContainerStack *m_containerStack;
-    NSUInteger m_capacity;
-    HLSAutorotationMode m_autorotationMode;
-    id<HLSStackControllerDelegate> m_delegate;
+    HLSContainerStack *_containerStack;
+    NSUInteger _capacity;
+    HLSAutorotationMode _autorotationMode;
+    id<HLSStackControllerDelegate> _delegate;
 }
 
 /**

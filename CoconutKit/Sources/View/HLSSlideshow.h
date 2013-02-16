@@ -41,17 +41,17 @@ typedef enum {
  */
 @interface HLSSlideshow : UIView <HLSAnimationDelegate> {
 @private
-    HLSSlideshowEffect m_effect;
-    NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
-    NSArray *m_imageNamesOrPaths;
-    NSInteger m_currentImageIndex;
-    NSInteger m_nextImageIndex;
-    NSInteger m_currentImageViewIndex;
-    HLSAnimation *m_animation;
-    NSTimeInterval m_imageDuration;
-    NSTimeInterval m_transitionDuration;
-    BOOL m_random;
-    id<HLSSlideshowDelegate> m_delegate;
+    HLSSlideshowEffect _effect;
+    NSArray *_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
+    NSArray *_imageNamesOrPaths;
+    NSInteger _currentImageIndex;
+    NSInteger _nextImageIndex;
+    NSInteger _currentImageViewIndex;
+    HLSAnimation *_animation;
+    NSTimeInterval _imageDuration;
+    NSTimeInterval _transitionDuration;
+    BOOL _random;
+    id<HLSSlideshowDelegate> _delegate;
 }
 
 /**

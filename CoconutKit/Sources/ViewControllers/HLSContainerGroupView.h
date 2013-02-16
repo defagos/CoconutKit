@@ -21,8 +21,8 @@
  */
 @interface HLSContainerGroupView : UIView {
 @private
-    UIView *m_savedFrontContentView;
-    UIView *m_savedBackContentView;
+    UIView *_savedFrontContentView;
+    UIView *_savedBackContentView;
 }
 
 /**

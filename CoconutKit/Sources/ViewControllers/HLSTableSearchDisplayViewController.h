@@ -52,13 +52,13 @@
     UITableViewDelegate
 > {
 @private
-    UISearchBar *m_searchBar;
-    UITableView *m_tableView;
-    NSString *m_searchText;
-    NSInteger m_selectedScopeButtonIndex;
-    BOOL m_searchInterfaceActive;
-    UISearchDisplayController *m_searchController;
-    BOOL m_firstLoad;
+    UISearchBar *_searchBar;
+    UITableView *_tableView;
+    NSString *_searchText;
+    NSInteger _selectedScopeButtonIndex;
+    BOOL _searchInterfaceActive;
+    UISearchDisplayController *_searchController;
+    BOOL _firstLoad;
 }
 
 /**

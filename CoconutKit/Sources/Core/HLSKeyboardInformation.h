@@ -15,10 +15,10 @@
  */
 @interface HLSKeyboardInformation : NSObject {
 @private
-    CGRect m_beginFrame;
-    CGRect m_endFrame;
-    NSTimeInterval m_animationDuration;
-    UIViewAnimationCurve m_animationCurve;
+    CGRect _beginFrame;
+    CGRect _endFrame;
+    NSTimeInterval _animationDuration;
+    UIViewAnimationCurve _animationCurve;
 }
 
 /**

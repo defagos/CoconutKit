@@ -8,59 +8,59 @@
 
 @interface LayerPropertiesTestViewController : HLSViewController {
 @private
-    UIView *m_rectangleView;
-    UIView *m_topSubview;
-    UIView *m_bottomSubview;
+    UIView *_rectangleView;
+    UIView *_topSubview;
+    UIView *_bottomSubview;
     
-    UISlider *m_transformTxSlider;
-    UILabel *m_transformTxLabel;
-    UISlider *m_transformTySlider;
-    UILabel *m_transformTyLabel;
-    UISlider *m_transformTzSlider;
-    UILabel *m_transformTzLabel;
-    UISlider *m_transformRxSlider;
-    UILabel *m_transformRxLabel;
-    UISlider *m_transformRySlider;
-    UILabel *m_transformRyLabel;
-    UISlider *m_transformRzSlider;
-    UILabel *m_transformRzLabel;
-    UISlider *m_transformSxSlider;
-    UILabel *m_transformSxLabel;
-    UISlider *m_transformSySlider;
-    UILabel *m_transformSyLabel;
-    UISlider *m_transformSzSlider;
-    UILabel *m_transformSzLabel;
+    UISlider *_transformTxSlider;
+    UILabel *_transformTxLabel;
+    UISlider *_transformTySlider;
+    UILabel *_transformTyLabel;
+    UISlider *_transformTzSlider;
+    UILabel *_transformTzLabel;
+    UISlider *_transformRxSlider;
+    UILabel *_transformRxLabel;
+    UISlider *_transformRySlider;
+    UILabel *_transformRyLabel;
+    UISlider *_transformRzSlider;
+    UILabel *_transformRzLabel;
+    UISlider *_transformSxSlider;
+    UILabel *_transformSxLabel;
+    UISlider *_transformSySlider;
+    UILabel *_transformSyLabel;
+    UISlider *_transformSzSlider;
+    UILabel *_transformSzLabel;
     
-    UISlider *m_sublayerTransformTxSlider;
-    UILabel *m_sublayerTransformTxLabel;
-    UISlider *m_sublayerTransformTySlider;
-    UILabel *m_sublayerTransformTyLabel;
-    UISlider *m_sublayerTransformTzSlider;
-    UILabel *m_sublayerTransformTzLabel;
-    UISlider *m_sublayerTransformRxSlider;
-    UILabel *m_sublayerTransformRxLabel;
-    UISlider *m_sublayerTransformRySlider;
-    UILabel *m_sublayerTransformRyLabel;
-    UISlider *m_sublayerTransformRzSlider;
-    UILabel *m_sublayerTransformRzLabel;
-    UISlider *m_sublayerTransformSxSlider;
-    UILabel *m_sublayerTransformSxLabel;
-    UISlider *m_sublayerTransformSySlider;
-    UILabel *m_sublayerTransformSyLabel;
-    UISlider *m_sublayerTransformSzSlider;
-    UILabel *m_sublayerTransformSzLabel;
-    UISlider *m_sublayerTransformSkewSlider;
-    UILabel *m_sublayerTransformSkewLabel;
+    UISlider *_sublayerTransformTxSlider;
+    UILabel *_sublayerTransformTxLabel;
+    UISlider *_sublayerTransformTySlider;
+    UILabel *_sublayerTransformTyLabel;
+    UISlider *_sublayerTransformTzSlider;
+    UILabel *_sublayerTransformTzLabel;
+    UISlider *_sublayerTransformRxSlider;
+    UILabel *_sublayerTransformRxLabel;
+    UISlider *_sublayerTransformRySlider;
+    UILabel *_sublayerTransformRyLabel;
+    UISlider *_sublayerTransformRzSlider;
+    UILabel *_sublayerTransformRzLabel;
+    UISlider *_sublayerTransformSxSlider;
+    UILabel *_sublayerTransformSxLabel;
+    UISlider *_sublayerTransformSySlider;
+    UILabel *_sublayerTransformSyLabel;
+    UISlider *_sublayerTransformSzSlider;
+    UILabel *_sublayerTransformSzLabel;
+    UISlider *_sublayerTransformSkewSlider;
+    UILabel *_sublayerTransformSkewLabel;
 
-    UISlider *m_anchorPointXSlider;
-    UILabel *m_anchorPointXLabel;
-    UISlider *m_anchorPointYSlider;
-    UILabel *m_anchorPointYLabel;
-    UISlider *m_anchorPointZSlider;
-    UILabel *m_anchorPointZLabel;
+    UISlider *_anchorPointXSlider;
+    UILabel *_anchorPointXLabel;
+    UISlider *_anchorPointYSlider;
+    UILabel *_anchorPointYLabel;
+    UISlider *_anchorPointZSlider;
+    UILabel *_anchorPointZLabel;
     
-    UISlider *m_viewSublayerTransformSkewSlider;
-    UILabel *m_viewSublayerTransformSkewLabel;
+    UISlider *_viewSublayerTransformSkewSlider;
+    UILabel *_viewSublayerTransformSkewLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView;

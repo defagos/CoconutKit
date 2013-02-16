@@ -23,11 +23,11 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize coloredLabel = m_coloredLabel;
+@synthesize coloredLabel = _coloredLabel;
 
-@synthesize imageView = m_imageView;
+@synthesize imageView = _imageView;
 
-@synthesize missingLocalizationVisibilitySwitch = m_missingLocalizationVisibilitySwitch;
+@synthesize missingLocalizationVisibilitySwitch = _missingLocalizationVisibilitySwitch;
 
 #pragma mark View lifecycle
 

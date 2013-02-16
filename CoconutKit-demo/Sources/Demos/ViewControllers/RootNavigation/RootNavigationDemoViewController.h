@@ -8,11 +8,11 @@
 
 @interface RootNavigationDemoViewController : HLSViewController {
 @private
-    UISwitch *m_portraitSwitch;
-    UISwitch *m_landscapeRightSwitch;
-    UISwitch *m_landscapeLeftSwitch;
-    UISwitch *m_portraitUpsideDownSwitch;
-    UISegmentedControl *m_autorotationModeSegmentedControl;
+    UISwitch *_portraitSwitch;
+    UISwitch *_landscapeRightSwitch;
+    UISwitch *_landscapeLeftSwitch;
+    UISwitch *_portraitUpsideDownSwitch;
+    UISegmentedControl *_autorotationModeSegmentedControl;
 }
 
 @property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;

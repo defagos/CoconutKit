@@ -44,9 +44,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize curve = m_curve;
+@synthesize curve = _curve;
 
-@synthesize dummyView = m_dummyView;
+@synthesize dummyView = _dummyView;
 
 #pragma mark Managing the animation
 

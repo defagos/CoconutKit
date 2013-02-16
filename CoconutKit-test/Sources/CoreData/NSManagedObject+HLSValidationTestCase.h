@@ -11,7 +11,7 @@
 
 @interface NSManagedObject_HLSValidationTestCase : GHTestCase {
 @private
-    ConcreteClassD *m_lockedDInstance;
+    ConcreteClassD *_lockedDInstance;
 }
 
 @end

@@ -97,11 +97,11 @@
  */
 @interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate> {
 @private
-    NSMutableArray *m_containerStacks;
-    NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
-    HLSAutorotationMode m_autorotationMode;
-    id<HLSPlaceholderViewControllerDelegate> m_delegate;
-    BOOL m_loadedOnce;
+    NSMutableArray *_containerStacks;
+    NSArray *_placeholderViews;                            // Views onto which the inset views are drawn
+    HLSAutorotationMode _autorotationMode;
+    id<HLSPlaceholderViewControllerDelegate> _delegate;
+    BOOL _loadedOnce;
 }
 
 /**

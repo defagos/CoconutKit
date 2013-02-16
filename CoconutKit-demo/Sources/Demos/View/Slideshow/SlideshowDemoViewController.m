@@ -42,37 +42,37 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize slideshow = m_slideshow;
+@synthesize slideshow = _slideshow;
 
-@synthesize effectPickerView = m_effectPickerView;
+@synthesize effectPickerView = _effectPickerView;
 
-@synthesize currentImageNameLabel = m_currentImageNameLabel;
+@synthesize currentImageNameLabel = _currentImageNameLabel;
 
-@synthesize previousButton = m_previousButton;
+@synthesize previousButton = _previousButton;
 
-@synthesize nextButton = m_nextButton;
+@synthesize nextButton = _nextButton;
 
-@synthesize playButton = m_playButton;
+@synthesize playButton = _playButton;
 
-@synthesize pauseButton = m_pauseButton;
+@synthesize pauseButton = _pauseButton;
 
-@synthesize resumeButton = m_resumeButton;
+@synthesize resumeButton = _resumeButton;
 
-@synthesize stopButton = m_stopButton;
+@synthesize stopButton = _stopButton;
 
-@synthesize skipToSpecificButton = m_skipToSpecificButton;
+@synthesize skipToSpecificButton = _skipToSpecificButton;
 
-@synthesize randomSwitch = m_randomSwitch;
+@synthesize randomSwitch = _randomSwitch;
 
-@synthesize imageSetButton = m_imageSetButton;
+@synthesize imageSetButton = _imageSetButton;
 
-@synthesize imageDurationSlider = m_imageDurationSlider;
+@synthesize imageDurationSlider = _imageDurationSlider;
 
-@synthesize imageDurationLabel = m_imageDurationLabel;
+@synthesize imageDurationLabel = _imageDurationLabel;
 
-@synthesize transitionDurationSlider = m_transitionDurationSlider;
+@synthesize transitionDurationSlider = _transitionDurationSlider;
 
-@synthesize transitionDurationLabel = m_transitionDurationLabel;
+@synthesize transitionDurationLabel = _transitionDurationLabel;
 
 #pragma mark View lifecycle
 

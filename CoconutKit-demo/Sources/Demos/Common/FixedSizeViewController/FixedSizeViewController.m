@@ -27,7 +27,7 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize large = m_large;
+@synthesize large = _large;
 
 #pragma mark View lifecycle
 

@@ -61,36 +61,36 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize objectKeys = m_objectKeys;
+@synthesize objectKeys = _objectKeys;
 
-@synthesize objectToObjectAnimationMap = m_objectToObjectAnimationMap;
+@synthesize objectToObjectAnimationMap = _objectToObjectAnimationMap;
 
-@synthesize tag = m_tag;
+@synthesize tag = _tag;
 
-@synthesize userInfo = m_userInfo;
+@synthesize userInfo = _userInfo;
 
-@synthesize duration = m_duration;
+@synthesize duration = _duration;
 
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
     if (doublelt(duration, 0.)) {
         HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
-        m_duration = 0.;
+        _duration = 0.;
     }
     else {
-        m_duration = duration;
+        _duration = duration;
     }
 }
 
-@synthesize delegate = m_delegate;
+@synthesize delegate = _delegate;
 
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
 }
 
-@synthesize terminating = m_terminating;
+@synthesize terminating = _terminating;
 
 - (NSArray *)objects
 {

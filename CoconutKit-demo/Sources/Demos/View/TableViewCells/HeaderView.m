@@ -20,6 +20,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize label = m_label;
+@synthesize label = _label;
 
 @end

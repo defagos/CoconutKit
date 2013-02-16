@@ -27,11 +27,11 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 #pragma mark Accessors and mutators
 
-@synthesize index = m_index;
+@synthesize index = _index;
 
-@synthesize transitionClass = m_transitionClass;
+@synthesize transitionClass = _transitionClass;
 
-@synthesize duration = m_duration;
+@synthesize duration = _duration;
 
 #pragma mark Overrides
 

@@ -76,103 +76,103 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize rectangleView = m_rectangleView;
+@synthesize rectangleView = _rectangleView;
 
-@synthesize topSubview = m_topSubview;
+@synthesize topSubview = _topSubview;
 
-@synthesize bottomSubview = m_bottomSubview;
+@synthesize bottomSubview = _bottomSubview;
 
-@synthesize transformTxSlider = m_transformTxSlider;
+@synthesize transformTxSlider = _transformTxSlider;
 
-@synthesize transformTxLabel = m_transformTxLabel;
+@synthesize transformTxLabel = _transformTxLabel;
 
-@synthesize transformTySlider = m_transformTySlider;
+@synthesize transformTySlider = _transformTySlider;
 
-@synthesize transformTyLabel = m_transformTyLabel;
+@synthesize transformTyLabel = _transformTyLabel;
 
-@synthesize transformTzSlider = m_transformTzSlider;
+@synthesize transformTzSlider = _transformTzSlider;
 
-@synthesize transformTzLabel = m_transformTzLabel;
+@synthesize transformTzLabel = _transformTzLabel;
 
-@synthesize transformRxSlider = m_transformRxSlider;
+@synthesize transformRxSlider = _transformRxSlider;
 
-@synthesize transformRxLabel = m_transformRxLabel;
+@synthesize transformRxLabel = _transformRxLabel;
 
-@synthesize transformRySlider = m_transformRySlider;
+@synthesize transformRySlider = _transformRySlider;
 
-@synthesize transformRyLabel = m_transformRyLabel;
+@synthesize transformRyLabel = _transformRyLabel;
 
-@synthesize transformRzSlider = m_transformRzSlider;
+@synthesize transformRzSlider = _transformRzSlider;
 
-@synthesize transformRzLabel = m_transformRzLabel;
+@synthesize transformRzLabel = _transformRzLabel;
 
-@synthesize transformSxSlider = m_transformSxSlider;
+@synthesize transformSxSlider = _transformSxSlider;
 
-@synthesize transformSxLabel = m_transformSxLabel;
+@synthesize transformSxLabel = _transformSxLabel;
 
-@synthesize transformSySlider = m_transformSySlider;
+@synthesize transformSySlider = _transformSySlider;
 
-@synthesize transformSyLabel = m_transformSyLabel;
+@synthesize transformSyLabel = _transformSyLabel;
 
-@synthesize transformSzSlider = m_transformSzSlider;
+@synthesize transformSzSlider = _transformSzSlider;
 
-@synthesize transformSzLabel = m_transformSzLabel;
+@synthesize transformSzLabel = _transformSzLabel;
 
-@synthesize sublayerTransformTxSlider = m_sublayerTransformTxSlider;
+@synthesize sublayerTransformTxSlider = _sublayerTransformTxSlider;
 
-@synthesize sublayerTransformTxLabel = m_sublayerTransformTxLabel;
+@synthesize sublayerTransformTxLabel = _sublayerTransformTxLabel;
 
-@synthesize sublayerTransformTySlider = m_sublayerTransformTySlider;
+@synthesize sublayerTransformTySlider = _sublayerTransformTySlider;
 
-@synthesize sublayerTransformTyLabel = m_sublayerTransformTyLabel;
+@synthesize sublayerTransformTyLabel = _sublayerTransformTyLabel;
 
-@synthesize sublayerTransformTzSlider = m_sublayerTransformTzSlider;
+@synthesize sublayerTransformTzSlider = _sublayerTransformTzSlider;
 
-@synthesize sublayerTransformTzLabel = m_sublayerTransformTzLabel;
+@synthesize sublayerTransformTzLabel = _sublayerTransformTzLabel;
 
-@synthesize sublayerTransformRxSlider = m_sublayerTransformRxSlider;
+@synthesize sublayerTransformRxSlider = _sublayerTransformRxSlider;
 
-@synthesize sublayerTransformRxLabel = m_sublayerTransformRxLabel;
+@synthesize sublayerTransformRxLabel = _sublayerTransformRxLabel;
 
-@synthesize sublayerTransformRySlider = m_sublayerTransformRySlider;
+@synthesize sublayerTransformRySlider = _sublayerTransformRySlider;
 
-@synthesize sublayerTransformRyLabel = m_sublayerTransformRyLabel;
+@synthesize sublayerTransformRyLabel = _sublayerTransformRyLabel;
 
-@synthesize sublayerTransformRzSlider = m_sublayerTransformRzSlider;
+@synthesize sublayerTransformRzSlider = _sublayerTransformRzSlider;
 
-@synthesize sublayerTransformRzLabel = m_sublayerTransformRzLabel;
+@synthesize sublayerTransformRzLabel = _sublayerTransformRzLabel;
 
-@synthesize sublayerTransformSxSlider = m_sublayerTransformSxSlider;
+@synthesize sublayerTransformSxSlider = _sublayerTransformSxSlider;
 
-@synthesize sublayerTransformSxLabel = m_sublayerTransformSxLabel;
+@synthesize sublayerTransformSxLabel = _sublayerTransformSxLabel;
 
-@synthesize sublayerTransformSySlider = m_sublayerTransformSySlider;
+@synthesize sublayerTransformSySlider = _sublayerTransformSySlider;
 
-@synthesize sublayerTransformSyLabel = m_sublayerTransformSyLabel;
+@synthesize sublayerTransformSyLabel = _sublayerTransformSyLabel;
 
-@synthesize sublayerTransformSzSlider = m_sublayerTransformSzSlider;
+@synthesize sublayerTransformSzSlider = _sublayerTransformSzSlider;
 
-@synthesize sublayerTransformSzLabel = m_sublayerTransformSzLabel;
+@synthesize sublayerTransformSzLabel = _sublayerTransformSzLabel;
 
-@synthesize sublayerTransformSkewSlider = m_sublayerTransformSkewSlider;
+@synthesize sublayerTransformSkewSlider = _sublayerTransformSkewSlider;
 
-@synthesize sublayerTransformSkewLabel = m_sublayerTransformSkewLabel;
+@synthesize sublayerTransformSkewLabel = _sublayerTransformSkewLabel;
 
-@synthesize anchorPointXSlider = m_anchorPointXSlider;
+@synthesize anchorPointXSlider = _anchorPointXSlider;
 
-@synthesize anchorPointXLabel = m_anchorPointXLabel;
+@synthesize anchorPointXLabel = _anchorPointXLabel;
 
-@synthesize anchorPointYSlider = m_anchorPointYSlider;
+@synthesize anchorPointYSlider = _anchorPointYSlider;
 
-@synthesize anchorPointYLabel = m_anchorPointYLabel;
+@synthesize anchorPointYLabel = _anchorPointYLabel;
 
-@synthesize anchorPointZSlider = m_anchorPointZSlider;
+@synthesize anchorPointZSlider = _anchorPointZSlider;
 
-@synthesize anchorPointZLabel = m_anchorPointZLabel;
+@synthesize anchorPointZLabel = _anchorPointZLabel;
 
-@synthesize viewSublayerTransformSkewSlider = m_viewSublayerTransformSkewSlider;
+@synthesize viewSublayerTransformSkewSlider = _viewSublayerTransformSkewSlider;
 
-@synthesize viewSublayerTransformSkewLabel = m_viewSublayerTransformSkewLabel;
+@synthesize viewSublayerTransformSkewLabel = _viewSublayerTransformSkewLabel;
 
 #pragma mark View lifecycle
 

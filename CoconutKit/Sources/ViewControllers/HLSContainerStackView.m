@@ -43,9 +43,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize groupViews = m_groupViews;
+@synthesize groupViews = _groupViews;
 
-@synthesize delegate = m_delegate;
+@synthesize delegate = _delegate;
 
 - (void)setFrame:(CGRect)frame
 {

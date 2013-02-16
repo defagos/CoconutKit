@@ -50,8 +50,8 @@
  */
 @interface HLSTextField : UITextField {
 @private
-    HLSTextFieldTouchDetector *m_touchDetector;
-    CGFloat m_minVisibilityDistance;
+    HLSTextFieldTouchDetector *_touchDetector;
+    CGFloat _minVisibilityDistance;
 }
 
 /**

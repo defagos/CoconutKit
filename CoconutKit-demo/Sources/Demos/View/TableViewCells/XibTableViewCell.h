@@ -8,11 +8,11 @@
 
 @interface XibTableViewCell : HLSTableViewCell {
 @private
-    UIImageView *m_imageView;
-    UILabel *m_label;
+    UIImageView *m_testImageView;
+    UILabel *m_testLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, retain) IBOutlet UIImageView *testImageView;
+@property (nonatomic, retain) IBOutlet UILabel *testLabel;
 
 @end

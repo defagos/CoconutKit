@@ -11,7 +11,7 @@
  */
 @interface HeavyViewController : HLSViewController {
 @private
-    void *m_largeBlock;
+    void *_largeBlock;
 }
 
 @end

@@ -8,8 +8,8 @@
 
 @interface FontsDemoViewController : HLSViewController {
 @private
-    UILabel *m_label;
-    UIWebView *m_webView;
+    UILabel *_label;
+    UIWebView *_webView;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *label;

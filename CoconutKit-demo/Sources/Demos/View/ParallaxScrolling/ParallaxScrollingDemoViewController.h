@@ -8,20 +8,20 @@
 
 @interface ParallaxScrollingDemoViewController : HLSViewController {
 @private
-    UITextView *m_textView;
-    UIScrollView *m_skyScrapperScrollView;
-    UIImageView *m_skyScrapperImageView;
+    UITextView *_textView;
+    UIScrollView *_skyScrapperScrollView;
+    UIImageView *_skyScrapperImageView;
     
-    UIScrollView *m_skyScrollView;
-    UIScrollView *m_mountainsScrollView;
-    UIScrollView *m_grassScrollView;
-    UIScrollView *m_treesScrollView;
-    UIImageView *m_skyImageView;
-    UIImageView *m_mountainsImageView;
-    UIImageView *m_grassImageView;
-    UIImageView *m_treesImageView;
+    UIScrollView *_skyScrollView;
+    UIScrollView *_mountainsScrollView;
+    UIScrollView *_grassScrollView;
+    UIScrollView *_treesScrollView;
+    UIImageView *_skyImageView;
+    UIImageView *_mountainsImageView;
+    UIImageView *_grassImageView;
+    UIImageView *_treesImageView;
     
-    UISwitch *m_bouncesSwitch;
+    UISwitch *_bouncesSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;

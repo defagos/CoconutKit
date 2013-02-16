@@ -23,7 +23,7 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize presentingModalSwitch = m_presentingModalSwitch;
+@synthesize presentingModalSwitch = _presentingModalSwitch;
 
 #pragma mark View lifecycle
 

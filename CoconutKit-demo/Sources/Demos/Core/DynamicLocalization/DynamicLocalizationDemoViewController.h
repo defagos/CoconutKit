@@ -8,9 +8,9 @@
 
 @interface DynamicLocalizationDemoViewController : HLSViewController {
 @private
-    UILabel *m_coloredLabel;
-    UIImageView *m_imageView;
-    UISwitch *m_missingLocalizationVisibilitySwitch;
+    UILabel *_coloredLabel;
+    UIImageView *_imageView;
+    UISwitch *_missingLocalizationVisibilitySwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *coloredLabel;   // No outlet would be needed for localization purposes only, but 

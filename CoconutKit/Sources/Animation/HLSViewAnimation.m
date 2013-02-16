@@ -44,25 +44,25 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize scaleParameters = m_scaleParameters;
+@synthesize scaleParameters = _scaleParameters;
 
-@synthesize translationParameters = m_translationParameters;
+@synthesize translationParameters = _translationParameters;
 
-@synthesize alphaIncrement = m_alphaIncrement;
+@synthesize alphaIncrement = _alphaIncrement;
 
 - (void)addToAlpha:(CGFloat)alphaIncrement
 {
     // Sanitize input
     if (floatlt(alphaIncrement, -1.f)) {
         HLSLoggerWarn(@"Alpha increment cannot be smaller than -1. Fixed to -1");
-        m_alphaIncrement = -1.f;
+        _alphaIncrement = -1.f;
     }
     else if (floatgt(alphaIncrement, 1.f)) {
         HLSLoggerWarn(@"Alpha variation cannot be larger than 1. Fixed to 1");
-        m_alphaIncrement = 1.f;
+        _alphaIncrement = 1.f;
     }
     else {
-        m_alphaIncrement = alphaIncrement;
+        _alphaIncrement = alphaIncrement;
     }
 }
 

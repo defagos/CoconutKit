@@ -124,29 +124,29 @@ typedef enum {
 
 #pragma mark Accessors and mutators
 
-@synthesize sizeSlider = m_sizeSlider;
+@synthesize sizeSlider = _sizeSlider;
 
-@synthesize resizeMethodSegmentedControl = m_resizeMethodSegmentedControl;
+@synthesize resizeMethodSegmentedControl = _resizeMethodSegmentedControl;
 
-@synthesize popoverButton = m_popoverButton;
+@synthesize popoverButton = _popoverButton;
 
-@synthesize transitionPickerView = m_transitionPickerView;
+@synthesize transitionPickerView = _transitionPickerView;
 
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
+@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
 
-@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
+@synthesize inTabBarControllerSwitch = _inTabBarControllerSwitch;
 
-@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
+@synthesize inNavigationControllerSwitch = _inNavigationControllerSwitch;
 
-@synthesize animatedSwitch = m_animatedSwitch;
+@synthesize animatedSwitch = _animatedSwitch;
 
-@synthesize indexSlider = m_indexSlider;
+@synthesize indexSlider = _indexSlider;
 
-@synthesize insertionIndexLabel = m_insertionIndexLabel;
+@synthesize insertionIndexLabel = _insertionIndexLabel;
 
-@synthesize removalIndexLabel = m_removalIndexLabel;
+@synthesize removalIndexLabel = _removalIndexLabel;
 
-@synthesize displayedPopoverController = m_displayedPopoverController;
+@synthesize displayedPopoverController = _displayedPopoverController;
 
 #pragma mark View lifecycle
 
@@ -171,7 +171,7 @@ typedef enum {
     [super viewWillAppear:animated];
     
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    _placeholderViewOriginalBounds = placeholderView.bounds;
     
     [self updateIndexInfo];
 }
@@ -184,7 +184,7 @@ typedef enum {
     // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
     // the view
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.bounds = _placeholderViewOriginalBounds;
     
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
@@ -197,7 +197,7 @@ typedef enum {
     // are able to restore them when rotating again, and set size according to the previous size slider value. This
     // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    _placeholderViewOriginalBounds = placeholderView.bounds;
     [self sizeChanged:nil];
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -393,8 +393,8 @@ typedef enum {
     if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodIndexFrame) {
         placeholderView.bounds = CGRectMake(0.f,
                                             0.f,
-                                            CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
-                                            CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+                                            CGRectGetWidth(_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                            CGRectGetHeight(_placeholderViewOriginalBounds) * self.sizeSlider.value);
     }
     else {
         placeholderView.transform = CGAffineTransformMakeScale(self.sizeSlider.value, self.sizeSlider.value);
@@ -407,7 +407,7 @@ typedef enum {
     self.sizeSlider.value = self.sizeSlider.maximumValue;
     
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.bounds = _placeholderViewOriginalBounds;
     placeholderView.transform = CGAffineTransformIdentity;
 }
 

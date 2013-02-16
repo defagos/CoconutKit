@@ -8,7 +8,7 @@
 
 @interface SleepTask : HLSTask {
 @private
-    NSUInteger m_secondsToSleep;
+    NSUInteger _secondsToSleep;
 }
 
 - (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep;

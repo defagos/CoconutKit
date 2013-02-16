@@ -8,22 +8,22 @@
 
 @interface SlideshowDemoViewController : HLSViewController <HLSSlideshowDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
-    HLSSlideshow *m_slideshow;
-    UIPickerView *m_effectPickerView;
-    UILabel *m_currentImageNameLabel;
-    UIButton *m_previousButton;
-    UIButton *m_nextButton;
-    UIButton *m_playButton;
-    UIButton *m_pauseButton;
-    UIButton *m_resumeButton;
-    UIButton *m_stopButton;
-    UIButton *m_skipToSpecificButton;
-    UISwitch *m_randomSwitch;
-    UIButton *m_imageSetButton;
-    UISlider *m_imageDurationSlider;
-    UILabel *m_imageDurationLabel;
-    UISlider *m_transitionDurationSlider;
-    UILabel *m_transitionDurationLabel;
+    HLSSlideshow *_slideshow;
+    UIPickerView *_effectPickerView;
+    UILabel *_currentImageNameLabel;
+    UIButton *_previousButton;
+    UIButton *_nextButton;
+    UIButton *_playButton;
+    UIButton *_pauseButton;
+    UIButton *_resumeButton;
+    UIButton *_stopButton;
+    UIButton *_skipToSpecificButton;
+    UISwitch *_randomSwitch;
+    UIButton *_imageSetButton;
+    UISlider *_imageDurationSlider;
+    UILabel *_imageDurationLabel;
+    UISlider *_transitionDurationSlider;
+    UILabel *_transitionDurationLabel;
 }
 
 @property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;

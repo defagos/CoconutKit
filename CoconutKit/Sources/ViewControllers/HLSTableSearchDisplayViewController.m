@@ -44,18 +44,18 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 #pragma mark Accessors and mutators
 
-@synthesize searchBar = m_searchBar;
+@synthesize searchBar = _searchBar;
 
-@synthesize tableView = m_tableView;
+@synthesize tableView = _tableView;
 
 - (UITableView *)searchResultsTableView
 {
     return self.searchController.searchResultsTableView;
 }
 
-@synthesize searchText = m_searchText;
+@synthesize searchText = _searchText;
 
-@synthesize searchController = m_searchController;
+@synthesize searchController = _searchController;
 
 #pragma mark View lifecycle
 
@@ -94,7 +94,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.tableView.dataSource = self;
     
     // Track when view has been loaded for the first time (or after an unload)
-    m_firstLoad = YES;
+    _firstLoad = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -103,18 +103,18 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     // Done in viewWillAppear; in viewDidLoad, we would not have had a chance to reach the subclass viewDidLoad code (which
     // e.g. defines the scope buttons if any)
-    if (m_firstLoad) {
+    if (_firstLoad) {
         // Restore the previous search status (if the view has been unloaded)
-        self.searchController.active = m_searchInterfaceActive;
+        self.searchController.active = _searchInterfaceActive;
         self.searchBar.text = self.searchText;
-        self.searchBar.selectedScopeButtonIndex = m_selectedScopeButtonIndex;
+        self.searchBar.selectedScopeButtonIndex = _selectedScopeButtonIndex;
         
         // Simulate a search to reload the data
         if ([self searchDisplayController:self.searchController shouldReloadTableForSearchString:self.searchText]) {
             [self.searchController.searchResultsTableView reloadData];
         }
         
-        m_firstLoad = NO;
+        _firstLoad = NO;
     }
 }
 
@@ -127,7 +127,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    m_searchInterfaceActive = YES;
+    _searchInterfaceActive = YES;
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
@@ -137,7 +137,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
-    m_searchInterfaceActive = NO;
+    _searchInterfaceActive = NO;
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
@@ -178,7 +178,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
-    m_selectedScopeButtonIndex = searchOption;
+    _selectedScopeButtonIndex = searchOption;
     return YES;
 }
 

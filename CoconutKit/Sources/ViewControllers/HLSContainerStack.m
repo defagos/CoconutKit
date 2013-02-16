@@ -67,9 +67,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
-        m_behavior = behavior;
+        _behavior = behavior;
         self.capacity = capacity;
-        m_autorotationMode = HLSAutorotationModeContainer;
+        _autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
 }
@@ -92,15 +92,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Accessors and mutators
 
-@synthesize containerViewController = m_containerViewController;
+@synthesize containerViewController = _containerViewController;
 
-@synthesize containerContents = m_containerContents;
+@synthesize containerContents = _containerContents;
 
-@synthesize containerView = m_containerView;
+@synthesize containerView = _containerView;
 
 - (void)setContainerView:(UIView *)containerView
 {
-    if (m_containerView == containerView) {
+    if (_containerView == containerView) {
         return;
     }
     
@@ -124,8 +124,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [containerView addSubview:containerStackView];
     }
     
-    [m_containerView release];
-    m_containerView = [containerView retain];
+    [_containerView release];
+    _containerView = [containerView retain];
 }
 
 - (HLSContainerStackView *)containerStackView
@@ -133,7 +133,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return [self.containerView.subviews firstObject_hls];
 }
 
-@synthesize capacity = m_capacity;
+@synthesize capacity = _capacity;
 
 - (void)setCapacity:(NSUInteger)capacity
 {
@@ -142,12 +142,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         HLSLoggerWarn(@"The capacity cannot be smaller than %d; set to this value", HLSContainerStackMinimalCapacity);
     }
     
-    m_capacity = capacity;
+    _capacity = capacity;
 }
 
-@synthesize autorotationMode = m_autorotationMode;
+@synthesize autorotationMode = _autorotationMode;
 
-@synthesize delegate = m_delegate;
+@synthesize delegate = _delegate;
 
 - (HLSContainerContent *)topContainerContent
 {
@@ -263,7 +263,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     // Pop everything
     else {
-        if (m_behavior == HLSContainerStackBehaviorFixedRoot) {
+        if (_behavior == HLSContainerStackBehaviorFixedRoot) {
             HLSLoggerWarn(@"The root view controller is fixed. Cannot pop everything");
             return;
         }
@@ -321,12 +321,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_animating) {
+    if (_animating) {
         HLSLoggerWarn(@"Cannot insert a view controller while a transition animation is running");
         return;
     }
     
-    if (m_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
+    if (_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
         HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore once set or after the container "
                        "has been displayed once");
         return;
@@ -419,12 +419,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (m_animating) {
+    if (_animating) {
         HLSLoggerWarn(@"Cannot remove a view controller while a transition animation is running");
         return;
     }
     
-    if (m_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
+    if (_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
         HLSLoggerWarn(@"The root view controller is fixed and cannot be removed once set or after the container has been "
                       "displayed once");
         return;
@@ -508,7 +508,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      userInfo:nil];
     }
     
-    if (m_behavior == HLSContainerStackBehaviorFixedRoot && [self.containerContents count] == 0) {
+    if (_behavior == HLSContainerStackBehaviorFixedRoot && [self.containerContents count] == 0) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"The root view controller is fixed but has not been defined when displaying the container"
                                      userInfo:nil];
@@ -569,7 +569,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (BOOL)shouldAutorotate
 {
     // Prevent rotations during animations. Can lead to erroneous animations
-    if (m_animating) {
+    if (_animating) {
         HLSLoggerInfo(@"A transition animation is running. Rotation has been prevented");
         return NO;
     }
@@ -651,7 +651,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    m_rotating = YES;
+    _rotating = YES;
     
     if ([self.containerContents count] != 0) {
         // Avoid frame issues due to rotation
@@ -820,7 +820,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
-    m_rotating = NO;
+    _rotating = NO;
 }
 
 /**
@@ -1004,7 +1004,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    m_animating = YES;
+    _animating = YES;
     
     // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
@@ -1036,7 +1036,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    m_animating = NO;
+    _animating = NO;
     
     // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
@@ -1071,7 +1071,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if ([animation.tag isEqualToString:@"push_animation"]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
-            if (m_behavior == HLSContainerStackBehaviorRemoving) {
+            if (_behavior == HLSContainerStackBehaviorRemoving) {
                 [self.containerContents removeObject:containerContentAtCapacity];
             }
             else {
@@ -1109,7 +1109,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [disappearingViewController release];
     }
     // Insertions: Ensure that view controllers are removed according to the container capacity (if this behavior has been set)
-    else if (m_behavior == HLSContainerStackBehaviorRemoving) {
+    else if (_behavior == HLSContainerStackBehaviorRemoving) {
         HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
         [self.containerContents removeObject:containerContentAtCapacity];
     }
@@ -1120,7 +1120,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)containerStackViewWillChangeFrame:(HLSContainerStackView *)containerStackView
 {
     // The trick below is also performed during rotations (which might alter the stack view frame). Skip
-    if (m_rotating) {
+    if (_rotating) {
         return;
     }
     
@@ -1149,7 +1149,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)containerStackViewDidChangeFrame:(HLSContainerStackView *)containerStackView
 {
     // The trick below is also performed during rotations (which might alter the stack view frame). Skip
-    if (m_rotating) {
+    if (_rotating) {
         return;
     }
     

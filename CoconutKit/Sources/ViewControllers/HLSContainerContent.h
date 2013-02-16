@@ -64,15 +64,15 @@
  */
 @interface HLSContainerContent : NSObject {
 @private
-    UIViewController *m_viewController;                         // The embedded view controller
-    UIViewController *m_containerViewController;                // The container it is inserted into
-    Class m_transitionClass;                                    // The transition animation class used when inserting the view controller
-    NSTimeInterval m_duration;                                  // The transition animation duration
-    HLSContainerStackView *m_containerStackView;                // The container stack view into which the view controller's view is inserted
-    CGRect m_originalViewFrame;                                 // The view controller's view frame prior to insertion
-    UIViewAutoresizing m_originalAutoresizingMask;              // The view controller's view autoresizing mask prior to insertion
-    BOOL m_movingToParentViewController;
-    BOOL m_movingFromParentViewController;
+    UIViewController *_viewController;                         // The embedded view controller
+    UIViewController *_containerViewController;                // The container it is inserted into
+    Class _transitionClass;                                    // The transition animation class used when inserting the view controller
+    NSTimeInterval _duration;                                  // The transition animation duration
+    HLSContainerStackView *_containerStackView;                // The container stack view into which the view controller's view is inserted
+    CGRect _originalViewFrame;                                 // The view controller's view frame prior to insertion
+    UIViewAutoresizing _originalAutoresizingMask;              // The view controller's view autoresizing mask prior to insertion
+    BOOL _movingToParentViewController;
+    BOOL _movingFromParentViewController;
 }
 
 /**

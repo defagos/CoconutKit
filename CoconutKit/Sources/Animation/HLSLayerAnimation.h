@@ -32,17 +32,17 @@
  */
 @interface HLSLayerAnimation : HLSObjectAnimation {
 @private
-    HLSVector4 m_rotationParameters;
-    HLSVector3 m_scaleParameters;
-    HLSVector3 m_translationParameters;
-    HLSVector3 m_anchorPointTranslationParameters;
-    HLSVector4 m_sublayerRotationParameters;
-    HLSVector3 m_sublayerScaleParameters;
-    HLSVector3 m_sublayerTranslationParameters;
-    CGFloat m_sublayerCameraTranslationZ;
-    CGFloat m_opacityIncrement;
-    BOOL m_togglingShouldRasterize;
-    CGFloat m_rasterizationScaleIncrement;
+    HLSVector4 _rotationParameters;
+    HLSVector3 _scaleParameters;
+    HLSVector3 _translationParameters;
+    HLSVector3 _anchorPointTranslationParameters;
+    HLSVector4 _sublayerRotationParameters;
+    HLSVector3 _sublayerScaleParameters;
+    HLSVector3 _sublayerTranslationParameters;
+    CGFloat _sublayerCameraTranslationZ;
+    CGFloat _opacityIncrement;
+    BOOL _togglingShouldRasterize;
+    CGFloat _rasterizationScaleIncrement;
 }
 
 /**

@@ -54,8 +54,8 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 // Common initialization code
 - (void)hlsWizardViewControllerInit
 {
-    m_currentPage = kWizardViewControllerNoPage;
-    m_wizardTransitionStyle = HLSWizardTransitionStyleNone;
+    _currentPage = kWizardViewControllerNoPage;
+    _wizardTransitionStyle = HLSWizardTransitionStyleNone;
 }
 
 - (void)dealloc
@@ -95,51 +95,51 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 #pragma mark Accessors and mutators
 
-@synthesize previousButton = m_previousButton;
+@synthesize previousButton = _previousButton;
 
-@synthesize nextButton = m_nextButton;
+@synthesize nextButton = _nextButton;
 
-@synthesize doneButton = m_doneButton;
+@synthesize doneButton = _doneButton;
 
-@synthesize viewControllers = m_viewControllers;
+@synthesize viewControllers = _viewControllers;
 
 - (void)setViewControllers:(NSArray *)viewControllers
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
     
     // Check for self-assignment
-    if (m_viewControllers == viewControllers) {
+    if (_viewControllers == viewControllers) {
         return;
     }
     
     // Update the value
-    [m_viewControllers release];
-    m_viewControllers = [viewControllers retain];
+    [_viewControllers release];
+    _viewControllers = [viewControllers retain];
     
     // Start with the first page
-    if ([m_viewControllers count] > 0) {
+    if ([_viewControllers count] > 0) {
         self.currentPage = 0;   
     }    
 }
 
-@synthesize wizardTransitionStyle = m_wizardTransitionStyle;
+@synthesize wizardTransitionStyle = _wizardTransitionStyle;
 
-@synthesize currentPage = m_currentPage;
+@synthesize currentPage = _currentPage;
 
 - (void)setCurrentPage:(NSInteger)currentPage
 {
     // If no change, nothing to do
-    if (currentPage == m_currentPage) {
+    if (currentPage == _currentPage) {
         return;
     }
     
     // Update the value and refresh the UI accordingly
-    NSInteger oldCurrentPage = m_currentPage;
-    m_currentPage = currentPage;
+    NSInteger oldCurrentPage = _currentPage;
+    _currentPage = currentPage;
     [self refreshWizardInterface];
     
     // If no page selected, done
-    if (m_currentPage == kWizardViewControllerNoPage) {
+    if (_currentPage == kWizardViewControllerNoPage) {
         return;
     }
     
@@ -163,7 +163,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
         }
             
         case HLSWizardTransitionStylePushHorizontally: {
-            if (m_currentPage > oldCurrentPage) {
+            if (_currentPage > oldCurrentPage) {
                 transitionClass = [HLSTransitionPushFromRight class];
             }
             else {
@@ -180,7 +180,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Display the current page
-    UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
+    UIViewController *viewController = [self.viewControllers objectAtIndex:_currentPage];
     [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 

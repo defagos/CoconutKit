@@ -59,26 +59,26 @@
  */
 @interface HLSAnimation : NSObject <NSCopying> {
 @private
-    NSArray *m_animationSteps;                                      // a copy of the HLSAnimationSteps passed at initialization time
-    NSArray *m_animationStepCopies;                                 // another copy made temporarily during animation
-    NSEnumerator *m_animationStepsEnumerator;                       // enumerator over steps
-    HLSAnimationStep *m_currentAnimationStep;                       // the currently played animation step
-    NSString *m_tag;
-    NSDictionary *m_userInfo;
-    BOOL m_lockingUI;
-    BOOL m_animated;
-    NSUInteger m_repeatCount;
-    NSUInteger m_currentRepeatCount;
-    NSTimeInterval m_remainingTimeBeforeStart;                      // the time remaining before the start time is reached
-    NSTimeInterval m_elapsedTime;                                   // the currently elapsed time (does not include pauses)
-    BOOL m_runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
-    BOOL m_pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
-    BOOL m_running;
-    BOOL m_playing;
-    BOOL m_started;
-    BOOL m_cancelling;
-    BOOL m_terminating;
-    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
+    NSArray *_animationSteps;                                      // a copy of the HLSAnimationSteps passed at initialization time
+    NSArray *_animationStepCopies;                                 // another copy made temporarily during animation
+    NSEnumerator *_animationStepsEnumerator;                       // enumerator over steps
+    HLSAnimationStep *_currentAnimationStep;                       // the currently played animation step
+    NSString *_tag;
+    NSDictionary *_userInfo;
+    BOOL _lockingUI;
+    BOOL _animated;
+    NSUInteger _repeatCount;
+    NSUInteger _currentRepeatCount;
+    NSTimeInterval _remainingTimeBeforeStart;                      // the time remaining before the start time is reached
+    NSTimeInterval _elapsedTime;                                   // the currently elapsed time (does not include pauses)
+    BOOL _runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
+    BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
+    BOOL _running;
+    BOOL _playing;
+    BOOL _started;
+    BOOL _cancelling;
+    BOOL _terminating;
+    HLSZeroingWeakRef *_delegateZeroingWeakRef;
 }
 
 /**

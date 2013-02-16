@@ -26,11 +26,11 @@ typedef enum {
  */
 @interface HLSLabelLocalizationInfo : NSObject {
 @private
-    NSString *m_localizationKey;
-    NSString *m_tableName;
-    NSString *m_bundleName;
-    HLSLabelRepresentation m_representation;
-    BOOL m_locked;
+    NSString *_localizationKey;
+    NSString *_tableName;
+    NSString *_bundleName;
+    HLSLabelRepresentation _representation;
+    BOOL _locked;
 }
 
 /**

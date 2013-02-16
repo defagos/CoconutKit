@@ -27,15 +27,15 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize portraitSwitch = m_portraitSwitch;
+@synthesize portraitSwitch = _portraitSwitch;
 
-@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
+@synthesize landscapeRightSwitch = _landscapeRightSwitch;
 
-@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
+@synthesize landscapeLeftSwitch = _landscapeLeftSwitch;
 
-@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
+@synthesize portraitUpsideDownSwitch = _portraitUpsideDownSwitch;
 
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
+@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 

@@ -11,7 +11,7 @@
  */
 @interface CursorFolderView : HLSNibView {
 @private
-    UILabel *m_nameLabel;
+    UILabel *_nameLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;

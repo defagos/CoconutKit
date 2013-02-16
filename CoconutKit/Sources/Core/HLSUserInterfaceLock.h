@@ -13,7 +13,7 @@
  */
 @interface HLSUserInterfaceLock : NSObject {
 @private
-    NSUInteger m_useCount;
+    NSUInteger _useCount;
 }
 
 + (HLSUserInterfaceLock *)sharedUserInterfaceLock;

@@ -95,15 +95,15 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark Accessors and mutators
 
-@synthesize managedObject = m_managedObject;
+@synthesize managedObject = _managedObject;
 
-@synthesize fieldName = m_fieldName;
+@synthesize fieldName = _fieldName;
 
-@synthesize formatter = m_formatter;
+@synthesize formatter = _formatter;
 
-@synthesize validationDelegate = m_validationDelegate;
+@synthesize validationDelegate = _validationDelegate;
 
-@synthesize checkingOnChange = m_checkingOnChange;
+@synthesize checkingOnChange = _checkingOnChange;
 
 #pragma mark UITextFieldDelegate protocol implementation
 

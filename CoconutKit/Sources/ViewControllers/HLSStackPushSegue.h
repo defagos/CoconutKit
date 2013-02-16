@@ -24,9 +24,9 @@ extern NSString * const HLSStackRootSegueIdentifier;
  */
 @interface HLSStackPushSegue : UIStoryboardSegue {
 @private
-    Class m_transitionClass;
-    NSTimeInterval m_duration;
-    BOOL m_animated;
+    Class _transitionClass;
+    NSTimeInterval _duration;
+    BOOL _animated;
 }
 
 /**

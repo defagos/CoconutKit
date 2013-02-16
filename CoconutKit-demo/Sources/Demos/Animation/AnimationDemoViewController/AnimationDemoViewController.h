@@ -8,30 +8,30 @@
 
 @interface AnimationDemoViewController : HLSViewController <HLSAnimationDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
-    UIView *m_rectangleView1;
-    UIView *m_rectangleView2;
-    UIPickerView *m_animationPickerView;
-    UIButton *m_playButton;
-    UIButton *m_pauseButton;
-    UIButton *m_cancelButton;
-    UIButton *m_terminateButton;
-    UIView *m_settingsView;
-    UISwitch *m_reverseSwitch;
-    UISwitch *m_lockingUISwitch;
-    UISwitch *m_loopingSwitch;
-    UISwitch *m_animatedSwitch;
-    UISlider *m_repeatCountSlider;
-    UILabel *m_repeatCountLabel;
-    UIView *m_animatedSettingsView;
-    UISlider *m_durationSlider;
-    UILabel *m_durationLabel;
-    UIView *m_delayBackgroundView;
-    UISlider *m_delaySlider;
-    UILabel *m_delayLabel;
-    UIView *m_startTimeBackgroundView;
-    UISlider *m_startTimeSlider;
-    UILabel *m_startTimeLabel;
-    HLSAnimation *m_animation;
+    UIView *_rectangleView1;
+    UIView *_rectangleView2;
+    UIPickerView *_animationPickerView;
+    UIButton *_playButton;
+    UIButton *_pauseButton;
+    UIButton *_cancelButton;
+    UIButton *_terminateButton;
+    UIView *_settingsView;
+    UISwitch *_reverseSwitch;
+    UISwitch *_lockingUISwitch;
+    UISwitch *_loopingSwitch;
+    UISwitch *_animatedSwitch;
+    UISlider *_repeatCountSlider;
+    UILabel *_repeatCountLabel;
+    UIView *_animatedSettingsView;
+    UISlider *_durationSlider;
+    UILabel *_durationLabel;
+    UIView *_delayBackgroundView;
+    UISlider *_delaySlider;
+    UILabel *_delayLabel;
+    UIView *_startTimeBackgroundView;
+    UISlider *_startTimeSlider;
+    UILabel *_startTimeLabel;
+    HLSAnimation *_animation;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView1;

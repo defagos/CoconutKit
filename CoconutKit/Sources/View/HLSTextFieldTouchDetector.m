@@ -43,9 +43,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize gestureRecognizer = m_gestureRecognizer;
+@synthesize gestureRecognizer = _gestureRecognizer;
 
-@synthesize resigningFirstResponderOnTap = m_resigningFirstResponderOnTap;
+@synthesize resigningFirstResponderOnTap = _resigningFirstResponderOnTap;
 
 #pragma mark UITextFieldDelegate protocol implementation
 

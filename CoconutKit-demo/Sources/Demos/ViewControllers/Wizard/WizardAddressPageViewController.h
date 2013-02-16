@@ -11,15 +11,15 @@
 
 @interface WizardAddressPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
 @private
-    Person *m_person;
-    HLSTextField *m_streetTextField;
-    UILabel *m_streetErrorLabel;
-    HLSTextField *m_cityTextField;
-    UILabel *m_cityErrorLabel;
-    HLSTextField *m_stateTextField;
-    UILabel *m_stateErrorLabel;
-    HLSTextField *m_countryTextField;
-    UILabel *m_countryErrorLabel;
+    Person *_person;
+    HLSTextField *_streetTextField;
+    UILabel *_streetErrorLabel;
+    HLSTextField *_cityTextField;
+    UILabel *_cityErrorLabel;
+    HLSTextField *_stateTextField;
+    UILabel *_stateErrorLabel;
+    HLSTextField *_countryTextField;
+    UILabel *_countryErrorLabel;
 }
 
 @property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;

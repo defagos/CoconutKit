@@ -27,7 +27,7 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize closeBarButtonItem = m_closeBarButtonItem;
+@synthesize closeBarButtonItem = _closeBarButtonItem;
 
 #pragma mark View lifecycle
 

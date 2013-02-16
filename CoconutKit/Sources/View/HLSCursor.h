@@ -39,25 +39,25 @@
  */
 @interface HLSCursor : UIView <HLSAnimationDelegate> {
 @private
-    NSArray *m_elementWrapperViews;
-    NSArray *m_elementWrapperViewSizeValues;
-    UIView *m_pointerView;
-    UIView *m_pointerContainerView;
-    CGSize m_pointerViewTopLeftOffset;
-    CGSize m_pointerViewBottomRightOffset;
-    NSTimeInterval m_animationDuration;
-    NSUInteger m_selectedIndex;
-    CGFloat m_initialDraggingXOffset;
-    BOOL m_moved;
-    BOOL m_moving;
-    BOOL m_dragging;
-    BOOL m_holding;
-    BOOL m_creatingViews;
-    BOOL m_viewsCreated;
-    NSUInteger m_initialIndex;
-    CGFloat m_spacing;
-    id<HLSCursorDataSource> m_dataSource;
-    id<HLSCursorDelegate> m_delegate;
+    NSArray *_elementWrapperViews;
+    NSArray *_elementWrapperViewSizeValues;
+    UIView *_pointerView;
+    UIView *_pointerContainerView;
+    CGSize _pointerViewTopLeftOffset;
+    CGSize _pointerViewBottomRightOffset;
+    NSTimeInterval _animationDuration;
+    NSUInteger _selectedIndex;
+    CGFloat _initialDraggingXOffset;
+    BOOL _moved;
+    BOOL _moving;
+    BOOL _dragging;
+    BOOL _holding;
+    BOOL _creatingViews;
+    BOOL _viewsCreated;
+    NSUInteger _initialIndex;
+    CGFloat _spacing;
+    id<HLSCursorDataSource> _dataSource;
+    id<HLSCursorDelegate> _delegate;
 }
 
 /**

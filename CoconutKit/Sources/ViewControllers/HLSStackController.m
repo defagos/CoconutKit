@@ -109,9 +109,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize containerStack = m_containerStack;
+@synthesize containerStack = _containerStack;
 
-@synthesize capacity = m_capacity;
+@synthesize capacity = _capacity;
 
 - (void)setCapacity:(NSUInteger)capacity
 {
@@ -120,18 +120,18 @@
         return;
     }
     
-    m_capacity = capacity;
+    _capacity = capacity;
 }
 
-@synthesize autorotationMode = m_autorotationMode;
+@synthesize autorotationMode = _autorotationMode;
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
-    if (autorotationMode == m_autorotationMode) {
+    if (autorotationMode == _autorotationMode) {
         return;
     }
     
-    m_autorotationMode = autorotationMode;
+    _autorotationMode = autorotationMode;
     
     // If the container stack has not been instantiated (which can happen when using storyboards, since in this case
     // it gets intantiated in -awakeFromNimb), the following does nothing. This is why the autorotation mode value
@@ -140,7 +140,7 @@
     self.containerStack.autorotationMode = autorotationMode;
 }
 
-@synthesize delegate = m_delegate;
+@synthesize delegate = _delegate;
 
 - (UIViewController *)rootViewController
 {

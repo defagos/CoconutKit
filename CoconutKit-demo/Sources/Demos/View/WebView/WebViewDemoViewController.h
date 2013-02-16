@@ -8,8 +8,8 @@
 
 @interface WebViewDemoViewController : HLSViewController {
 @private
-    UIWebView *m_webView;
-    UISwitch *m_scrollEnabledSwitch;
+    UIWebView *_webView;
+    UISwitch *_scrollEnabledSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;

@@ -29,9 +29,9 @@ extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
  */
 @interface HLSPlaceholderInsetSegue : UIStoryboardSegue {
 @private
-    NSUInteger m_index;
-    Class m_transitionClass;
-    NSTimeInterval m_duration;
+    NSUInteger _index;
+    Class _transitionClass;
+    NSTimeInterval _duration;
 }
 
 /**

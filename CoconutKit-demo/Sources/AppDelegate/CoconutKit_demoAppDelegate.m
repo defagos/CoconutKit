@@ -38,9 +38,9 @@ HLSEnableApplicationPreloading();
 
 #pragma mark Accessors and mutators
 
-@synthesize application = m_application;
+@synthesize application = _application;
 
-@synthesize window = m_window;
+@synthesize window = _window;
 
 #pragma mark Application lifecycle
 

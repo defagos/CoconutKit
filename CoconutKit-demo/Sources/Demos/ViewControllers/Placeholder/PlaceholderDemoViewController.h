@@ -11,15 +11,15 @@
 
 @interface PlaceholderDemoViewController : HLSPlaceholderViewController <HLSPlaceholderViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @private
-    UIButton *m_heavyButton;
-    UIPickerView *m_transitionPickerView;
-    UISwitch *m_inTabBarControllerSwitch;
-    UISwitch *m_inNavigationControllerSwitch;
-    UISwitch *m_leftPlaceholderSwitch;
-    UISwitch *m_rightPlaceholderSwitch;
-    HeavyViewController *m_leftHeavyViewController;
-    HeavyViewController *m_rightHeavyViewController;
-    UISegmentedControl *m_autorotationModeSegmentedControl;
+    UIButton *_heavyButton;
+    UIPickerView *_transitionPickerView;
+    UISwitch *_inTabBarControllerSwitch;
+    UISwitch *_inNavigationControllerSwitch;
+    UISwitch *_leftPlaceholderSwitch;
+    UISwitch *_rightPlaceholderSwitch;
+    HeavyViewController *_leftHeavyViewController;
+    HeavyViewController *_rightHeavyViewController;
+    UISegmentedControl *_autorotationModeSegmentedControl;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *heavyButton;

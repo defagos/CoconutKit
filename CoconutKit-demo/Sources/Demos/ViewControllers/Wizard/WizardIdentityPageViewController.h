@@ -11,19 +11,19 @@
 
 @interface WizardIdentityPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
 @private
-    Person *m_person;
-    HLSTextField *m_firstNameTextField;
-    UILabel *m_firstNameErrorLabel;
-    HLSTextField *m_lastNameTextField;
-    UILabel *m_lastNameErrorLabel;
-    HLSTextField *m_emailTextField;
-    UILabel *m_emailErrorLabel;
-    UILabel *m_birthdateLabel;
-    HLSTextField *m_birthdateTextField;
-    UILabel *m_birthdateErrorLabel;
-    HLSTextField *m_nbrChildrenTextField;
-    UILabel *m_nbrChildrenErrorLabel;
-    NSDateFormatter *m_dateFormatter;
+    Person *_person;
+    HLSTextField *_firstNameTextField;
+    UILabel *_firstNameErrorLabel;
+    HLSTextField *_lastNameTextField;
+    UILabel *_lastNameErrorLabel;
+    HLSTextField *_emailTextField;
+    UILabel *_emailErrorLabel;
+    UILabel *_birthdateLabel;
+    HLSTextField *_birthdateTextField;
+    UILabel *_birthdateErrorLabel;
+    HLSTextField *_nbrChildrenTextField;
+    UILabel *_nbrChildrenErrorLabel;
+    NSDateFormatter *_dateFormatter;
 }
 
 @property (nonatomic, retain) IBOutlet HLSTextField *firstNameTextField;

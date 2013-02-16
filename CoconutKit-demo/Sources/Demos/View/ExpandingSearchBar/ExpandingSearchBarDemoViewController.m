@@ -28,13 +28,13 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize searchBar1 = m_searchBar1;
+@synthesize searchBar1 = _searchBar1;
 
-@synthesize searchBar2 = m_searchBar2;
+@synthesize searchBar2 = _searchBar2;
 
-@synthesize searchBar3 = m_searchBar3;
+@synthesize searchBar3 = _searchBar3;
 
-@synthesize animatedSwitch = m_animatedSwitch;
+@synthesize animatedSwitch = _animatedSwitch;
 
 #pragma mark View lifecycle
 

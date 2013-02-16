@@ -15,7 +15,7 @@
 
 @interface CursorDemoViewController ()
 
-@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) UIPopoverController *currentPopoverController;
 
 @end
 
@@ -40,7 +40,7 @@ static NSArray *s_folders = nil;
 
 - (void)dealloc
 {
-    self.popoverController = nil;
+    self.currentPopoverController = nil;
     
     [super dealloc];
 }
@@ -62,25 +62,25 @@ static NSArray *s_folders = nil;
 
 #pragma mark Accessors and mutators
 
-@synthesize weekDaysCursor = m_weekDaysCursor;
+@synthesize weekDaysCursor = _weekDaysCursor;
 
-@synthesize weekDayIndexLabel = m_weekDayIndexLabel;
+@synthesize weekDayIndexLabel = _weekDayIndexLabel;
 
-@synthesize randomRangeCursor = m_randomRangeCursor;
+@synthesize randomRangeCursor = _randomRangeCursor;
 
-@synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
+@synthesize randomRangeIndexLabel = _randomRangeIndexLabel;
 
-@synthesize widthFactorSlider = m_widthFactorSlider;
+@synthesize widthFactorSlider = _widthFactorSlider;
 
-@synthesize heightFactorSlider = m_heightFactorSlider;
+@synthesize heightFactorSlider = _heightFactorSlider;
 
-@synthesize timeScalesCursor = m_timeScalesCursor;
+@synthesize timeScalesCursor = _timeScalesCursor;
 
-@synthesize foldersCursor = m_foldersCursor;
+@synthesize foldersCursor = _foldersCursor;
 
-@synthesize mixedFoldersCursor = m_mixedFoldersCursor;
+@synthesize mixedFoldersCursor = _mixedFoldersCursor;
 
-@synthesize popoverController = m_popoverController;
+@synthesize currentPopoverController = _currentPopoverController;
 
 #pragma mark View lifecycle
 
@@ -117,7 +117,7 @@ static NSArray *s_folders = nil;
 {
     [super viewWillAppear:animated];
     
-    m_originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
+    _originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
 }
 
 #pragma mark Orientation management
@@ -129,7 +129,7 @@ static NSArray *s_folders = nil;
     // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
     // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
     // the view
-    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, m_originalRandomRangeCursorSize.width, m_originalRandomRangeCursorSize.height);
+    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, _originalRandomRangeCursorSize.width, _originalRandomRangeCursorSize.height);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -137,7 +137,7 @@ static NSArray *s_folders = nil;
     // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
     // are able to restore them when rotating again, and set size according to the previous size slider value. This
     // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
-    m_originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
+    _originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
     [self sizeChanged:nil];
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -149,7 +149,7 @@ static NSArray *s_folders = nil;
 {
     [super didReceiveMemoryWarning];
     
-    self.popoverController = nil;
+    self.currentPopoverController = nil;
 }
 
 #pragma mark HLSCursorDataSource protocol implementation
@@ -300,8 +300,8 @@ static NSArray *s_folders = nil;
     if (cursor == self.randomRangeCursor) {
         if (! self.popoverController) {
             CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
-            self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
-            self.popoverController.popoverContentSize = infoViewController.view.frame.size;
+            self.currentPopoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
+            self.currentPopoverController.popoverContentSize = infoViewController.view.frame.size;
         }        
     }
 }
@@ -350,8 +350,8 @@ static NSArray *s_folders = nil;
 {
     self.randomRangeCursor.bounds = CGRectMake(0.f,
                                                0.f,
-                                               m_originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
-                                               m_originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
+                                               _originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
+                                               _originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
 }
 
 #pragma mark Localization

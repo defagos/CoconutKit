@@ -8,10 +8,10 @@
 
 @interface ExpandingSearchBarDemoViewController : HLSViewController <HLSExpandingSearchBarDelegate> {
 @private
-    HLSExpandingSearchBar *m_searchBar1;
-    HLSExpandingSearchBar *m_searchBar2;
-    HLSExpandingSearchBar *m_searchBar3;
-    UISwitch *m_animatedSwitch;
+    HLSExpandingSearchBar *_searchBar1;
+    HLSExpandingSearchBar *_searchBar2;
+    HLSExpandingSearchBar *_searchBar3;
+    UISwitch *_animatedSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar1;

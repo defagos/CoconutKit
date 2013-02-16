@@ -22,9 +22,9 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize label = m_label;
+@synthesize label = _label;
 
-@synthesize webView = m_webView;
+@synthesize webView = _webView;
 
 #pragma mark View lifecycle
 

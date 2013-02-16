@@ -60,13 +60,13 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Accessors and mutators
 
-@synthesize localizationKey = m_localizationKey;
+@synthesize localizationKey = _localizationKey;
 
-@synthesize tableName = m_tableName;
+@synthesize tableName = _tableName;
 
-@synthesize representation = m_representation;
+@synthesize representation = _representation;
 
-@synthesize locked = m_locked;
+@synthesize locked = _locked;
 
 #pragma mark Parsing text
 

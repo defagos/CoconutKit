@@ -29,7 +29,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        m_useCount = 0;
+        _useCount = 0;
     }
     return self;
 }
@@ -38,10 +38,10 @@
 
 - (void)lock
 {    
-    ++m_useCount;
+    ++_useCount;
     HLSLoggerDebug(@"Acquire UI lock");
     
-    if (m_useCount == 1) {
+    if (_useCount == 1) {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
 }
@@ -49,15 +49,15 @@
 - (void)unlock
 {
     // Check that the UI was locked
-    if (m_useCount == 0) {
+    if (_useCount == 0) {
         HLSLoggerDebug(@"The UI was not locked, nothing to unlock");
         return;
     }
     
-    --m_useCount;
+    --_useCount;
     HLSLoggerDebug(@"Release UI lock");
     
-    if (m_useCount == 0) {
+    if (_useCount == 0) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

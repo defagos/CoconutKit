@@ -70,25 +70,25 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize request = m_request;
+@synthesize request = _request;
 
-@synthesize currentURL = m_currentURL;
+@synthesize currentURL = _currentURL;
 
-@synthesize webView = m_webView;
+@synthesize webView = _webView;
 
-@synthesize toolbar = m_toolbar;
+@synthesize toolbar = _toolbar;
 
-@synthesize goBackBarButtonItem = m_goBackBarButtonItem;
+@synthesize goBackBarButtonItem = _goBackBarButtonItem;
 
-@synthesize goForwardBarButtonItem = m_goForwardBarButtonItem;
+@synthesize goForwardBarButtonItem = _goForwardBarButtonItem;
 
-@synthesize refreshBarButtonItem = m_refreshBarButtonItem;
+@synthesize refreshBarButtonItem = _refreshBarButtonItem;
 
-@synthesize actionBarButtonItem = m_actionBarButtonItem;
+@synthesize actionBarButtonItem = _actionBarButtonItem;
 
-@synthesize activityIndicator = m_activityIndicator;
+@synthesize activityIndicator = _activityIndicator;
 
-@synthesize refreshImage = m_refreshImage;
+@synthesize refreshImage = _refreshImage;
 
 #pragma mark View lifecycle
 

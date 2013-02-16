@@ -59,9 +59,9 @@
  */
 @interface HLSActionSheet : UIActionSheet {
 @private
-    NSArray *m_targets;
-    NSArray *m_actions;
-    id<UIActionSheetDelegate> m_realDelegate;
+    NSArray *_targets;
+    NSArray *_actions;
+    id<UIActionSheetDelegate> _realDelegate;
 }
 
 /**

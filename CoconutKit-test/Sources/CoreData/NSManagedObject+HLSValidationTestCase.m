@@ -34,7 +34,7 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize lockedDInstance = m_lockedDInstance;
+@synthesize lockedDInstance = _lockedDInstance;
 
 #pragma mark Test setup and tear down
 

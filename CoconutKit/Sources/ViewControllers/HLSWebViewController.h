@@ -15,16 +15,16 @@
  */
 @interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIWebViewDelegate> {
 @private
-    NSURLRequest *m_request;
-    NSURL *m_currentURL;
-    UIWebView *m_webView;
-    UIToolbar *m_toolbar;
-    UIBarButtonItem *m_goBackBarButtonItem;
-    UIBarButtonItem *m_goForwardBarButtonItem;
-    UIBarButtonItem *m_refreshBarButtonItem;
-    UIBarButtonItem *m_actionBarButtonItem;
-    UIActivityIndicatorView *m_activityIndicator;
-    UIImage *m_refreshImage;
+    NSURLRequest *_request;
+    NSURL *_currentURL;
+    UIWebView *_webView;
+    UIToolbar *_toolbar;
+    UIBarButtonItem *_goBackBarButtonItem;
+    UIBarButtonItem *_goForwardBarButtonItem;
+    UIBarButtonItem *_refreshBarButtonItem;
+    UIBarButtonItem *_actionBarButtonItem;
+    UIActivityIndicatorView *_activityIndicator;
+    UIImage *_refreshImage;
 }
 
 /**

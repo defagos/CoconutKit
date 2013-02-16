@@ -21,6 +21,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize valueLabel = m_valueLabel;
+@synthesize valueLabel = _valueLabel;
 
 @end

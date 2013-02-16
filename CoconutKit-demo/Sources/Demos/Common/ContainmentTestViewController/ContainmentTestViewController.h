@@ -8,7 +8,7 @@
 
 @interface ContainmentTestViewController : HLSViewController {
 @private
-    UISwitch *m_presentingModalSwitch;
+    UISwitch *_presentingModalSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;

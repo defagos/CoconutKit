@@ -11,17 +11,17 @@
  */
 @interface CursorDemoViewController : HLSViewController <HLSCursorDataSource, HLSCursorDelegate> {
 @private
-    HLSCursor *m_weekDaysCursor;
-    UILabel *m_weekDayIndexLabel;
-    HLSCursor *m_randomRangeCursor;
-    UILabel *m_randomRangeIndexLabel;
-    UISlider *m_widthFactorSlider;
-    UISlider *m_heightFactorSlider;
-    HLSCursor *m_timeScalesCursor;
-    HLSCursor *m_foldersCursor;
-    HLSCursor *m_mixedFoldersCursor;
-    UIPopoverController *m_popoverController;
-    CGSize m_originalRandomRangeCursorSize;
+    HLSCursor *_weekDaysCursor;
+    UILabel *_weekDayIndexLabel;
+    HLSCursor *_randomRangeCursor;
+    UILabel *_randomRangeIndexLabel;
+    UISlider *_widthFactorSlider;
+    UISlider *_heightFactorSlider;
+    HLSCursor *_timeScalesCursor;
+    HLSCursor *_foldersCursor;
+    HLSCursor *_mixedFoldersCursor;
+    UIPopoverController *_currentPopoverController;
+    CGSize _originalRandomRangeCursorSize;
 }
 
 @property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;

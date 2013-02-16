@@ -50,7 +50,7 @@ typedef enum {
 
 @implementation TableViewCellsDemoViewController
 
-@synthesize tableView = m_tableView;
+@synthesize tableView = _tableView;
 
 #pragma mark View lifecycle
 
@@ -161,8 +161,8 @@ typedef enum {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
                     XibTableViewCell *cell = [XibTableViewCell cellForTableView:tableView];
-                    cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
-                    cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
+                    cell.testLabel.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
+                    cell.testImageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
                     // Selection enabled to show that customisation works
                     return cell;
                     break;

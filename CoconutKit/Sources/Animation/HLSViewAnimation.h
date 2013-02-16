@@ -30,9 +30,9 @@
  */
 @interface HLSViewAnimation : HLSObjectAnimation {
 @private
-    HLSVector2 m_scaleParameters;
-    HLSVector2 m_translationParameters;
-    CGFloat m_alphaIncrement;
+    HLSVector2 _scaleParameters;
+    HLSVector2 _translationParameters;
+    CGFloat _alphaIncrement;
 }
 
 /**

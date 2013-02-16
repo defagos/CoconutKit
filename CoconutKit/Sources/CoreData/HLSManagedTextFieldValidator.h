@@ -17,11 +17,11 @@
  */
 @interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate {
 @private
-    NSManagedObject *m_managedObject;
-    NSString *m_fieldName;
-    NSFormatter *m_formatter;
-    id<HLSTextFieldValidationDelegate> m_validationDelegate;
-    BOOL m_checkingOnChange;
+    NSManagedObject *_managedObject;
+    NSString *_fieldName;
+    NSFormatter *_formatter;
+    id<HLSTextFieldValidationDelegate> _validationDelegate;
+    BOOL _checkingOnChange;
 }
 
 /**

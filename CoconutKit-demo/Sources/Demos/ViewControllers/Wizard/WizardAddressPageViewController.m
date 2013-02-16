@@ -56,35 +56,35 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
+@synthesize person = _person;
 
 - (void)setPerson:(Person *)person
 {
-    if (m_person == person) {
+    if (_person == person) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    [_person release];
+    _person = [person retain];
     
     [self reloadData];
 }
 
-@synthesize streetTextField = m_streetTextField;
+@synthesize streetTextField = _streetTextField;
 
-@synthesize streetErrorLabel = m_streetErrorLabel;
+@synthesize streetErrorLabel = _streetErrorLabel;
 
-@synthesize cityTextField = m_cityTextField;
+@synthesize cityTextField = _cityTextField;
 
-@synthesize cityErrorLabel = m_cityErrorLabel;
+@synthesize cityErrorLabel = _cityErrorLabel;
 
-@synthesize stateTextField = m_stateTextField;
+@synthesize stateTextField = _stateTextField;
 
-@synthesize stateErrorLabel = m_stateErrorLabel;
+@synthesize stateErrorLabel = _stateErrorLabel;
 
-@synthesize countryTextField = m_countryTextField;
+@synthesize countryTextField = _countryTextField;
 
-@synthesize countryErrorLabel = m_countryErrorLabel;
+@synthesize countryErrorLabel = _countryErrorLabel;
 
 #pragma mark View lifecycle
 

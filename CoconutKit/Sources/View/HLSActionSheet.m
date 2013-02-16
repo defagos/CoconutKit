@@ -163,11 +163,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     self.realDelegate = delegate;
 }
 
-@synthesize targets = m_targets;
+@synthesize targets = _targets;
 
-@synthesize actions = m_actions;
+@synthesize actions = _actions;
 
-@synthesize realDelegate = m_realDelegate;
+@synthesize realDelegate = _realDelegate;
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex
 {

@@ -38,13 +38,13 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize textField1 = m_textField1;
+@synthesize textField1 = _textField1;
 
-@synthesize textField2 = m_textField2;
+@synthesize textField2 = _textField2;
 
-@synthesize textField3 = m_textField3;
+@synthesize textField3 = _textField3;
 
-@synthesize textField4 = m_textField4;
+@synthesize textField4 = _textField4;
 
 #pragma mark UITextFieldDelegate protocol implementation
 

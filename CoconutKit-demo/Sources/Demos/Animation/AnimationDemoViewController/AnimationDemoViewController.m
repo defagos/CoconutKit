@@ -96,53 +96,53 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 #pragma mark Accessors and mutators
 
-@synthesize rectangleView1 = m_rectangleView1;
+@synthesize rectangleView1 = _rectangleView1;
 
-@synthesize rectangleView2 = m_rectangleView2;
+@synthesize rectangleView2 = _rectangleView2;
 
-@synthesize animationPickerView = m_animationPickerView;
+@synthesize animationPickerView = _animationPickerView;
 
-@synthesize playButton = m_playButton;
+@synthesize playButton = _playButton;
 
-@synthesize pauseButton = m_pauseButton;
+@synthesize pauseButton = _pauseButton;
 
-@synthesize cancelButton = m_cancelButton;
+@synthesize cancelButton = _cancelButton;
 
-@synthesize terminateButton = m_terminateButton;
+@synthesize terminateButton = _terminateButton;
 
-@synthesize settingsView = m_settingsView;
+@synthesize settingsView = _settingsView;
 
-@synthesize reverseSwitch = m_reverseSwitch;
+@synthesize reverseSwitch = _reverseSwitch;
 
-@synthesize lockingUISwitch = m_lockingUISwitch;
+@synthesize lockingUISwitch = _lockingUISwitch;
 
-@synthesize loopingSwitch = m_loopingSwitch;
+@synthesize loopingSwitch = _loopingSwitch;
 
-@synthesize animatedSwitch = m_animatedSwitch;
+@synthesize animatedSwitch = _animatedSwitch;
 
-@synthesize repeatCountSlider = m_repeatCountSlider;
+@synthesize repeatCountSlider = _repeatCountSlider;
 
-@synthesize repeatCountLabel = m_repeatCountLabel;
+@synthesize repeatCountLabel = _repeatCountLabel;
 
-@synthesize animatedSettingsView = m_animatedSettingsView;
+@synthesize animatedSettingsView = _animatedSettingsView;
 
-@synthesize durationSlider = m_durationSlider;
+@synthesize durationSlider = _durationSlider;
 
-@synthesize durationLabel = m_durationLabel;
+@synthesize durationLabel = _durationLabel;
 
-@synthesize delayBackgroundView = m_delayBackgroundView;
+@synthesize delayBackgroundView = _delayBackgroundView;
 
-@synthesize delaySlider = m_delaySlider;
+@synthesize delaySlider = _delaySlider;
 
-@synthesize delayLabel = m_delayLabel;
+@synthesize delayLabel = _delayLabel;
 
-@synthesize startTimeBackgroundView = m_startTimeBackgroundView;
+@synthesize startTimeBackgroundView = _startTimeBackgroundView;
 
-@synthesize startTimeSlider = m_startTimeSlider;
+@synthesize startTimeSlider = _startTimeSlider;
 
-@synthesize startTimeLabel = m_startTimeLabel;
+@synthesize startTimeLabel = _startTimeLabel;
 
-@synthesize animation = m_animation;
+@synthesize animation = _animation;
 
 #pragma mark Orientation management
 

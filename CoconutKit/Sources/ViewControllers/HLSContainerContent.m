@@ -211,40 +211,40 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 #pragma mark Accessors and mutators
 
-@synthesize viewController = m_viewController;
+@synthesize viewController = _viewController;
 
-@synthesize containerViewController = m_containerViewController;
+@synthesize containerViewController = _containerViewController;
 
-@synthesize transitionClass = m_transitionClass;
+@synthesize transitionClass = _transitionClass;
 
-@synthesize duration = m_duration;
+@synthesize duration = _duration;
 
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
     if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
         HLSLoggerWarn(@"Duration must be non-negative or the default duration %.2f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
-        m_duration = kAnimationTransitionDefaultDuration;
+        _duration = kAnimationTransitionDefaultDuration;
     }
     else {
-        m_duration = duration;
+        _duration = duration;
     }
 }
 
-@synthesize containerStackView = m_containerStackView;
+@synthesize containerStackView = _containerStackView;
 
 - (BOOL)isAddedToContainerView
 {
     return self.containerStackView != nil;
 }
 
-@synthesize originalViewFrame = m_originalViewFrame;
+@synthesize originalViewFrame = _originalViewFrame;
 
-@synthesize originalAutoresizingMask = m_originalAutoresizingMask;
+@synthesize originalAutoresizingMask = _originalAutoresizingMask;
 
-@synthesize movingToParentViewController = m_movingToParentViewController;
+@synthesize movingToParentViewController = _movingToParentViewController;
 
-@synthesize movingFromParentViewController = m_movingFromParentViewController;
+@synthesize movingFromParentViewController = _movingFromParentViewController;
 
 - (UIView *)viewIfLoaded
 {

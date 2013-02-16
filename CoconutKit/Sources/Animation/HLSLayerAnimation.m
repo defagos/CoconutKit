@@ -80,27 +80,27 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize rotationParameters = m_rotationParameters;
+@synthesize rotationParameters = _rotationParameters;
 
-@synthesize scaleParameters = m_scaleParameters;
+@synthesize scaleParameters = _scaleParameters;
 
-@synthesize translationParameters = m_translationParameters;
+@synthesize translationParameters = _translationParameters;
 
-@synthesize anchorPointTranslationParameters = m_anchorPointTranslationParameters;
+@synthesize anchorPointTranslationParameters = _anchorPointTranslationParameters;
 
-@synthesize sublayerRotationParameters = m_sublayerRotationParameters;
+@synthesize sublayerRotationParameters = _sublayerRotationParameters;
 
-@synthesize sublayerScaleParameters = m_sublayerScaleParameters;
+@synthesize sublayerScaleParameters = _sublayerScaleParameters;
 
-@synthesize sublayerTranslationParameters = m_sublayerTranslationParameters;
+@synthesize sublayerTranslationParameters = _sublayerTranslationParameters;
 
-@synthesize sublayerCameraTranslationZ = m_sublayerCameraTranslationZ;
+@synthesize sublayerCameraTranslationZ = _sublayerCameraTranslationZ;
 
-@synthesize opacityIncrement = m_opacityIncrement;
+@synthesize opacityIncrement = _opacityIncrement;
 
-@synthesize togglingShouldRasterize = m_togglingShouldRasterize;
+@synthesize togglingShouldRasterize = _togglingShouldRasterize;
 
-@synthesize rasterizationScaleIncrement = m_rasterizationScaleIncrement;
+@synthesize rasterizationScaleIncrement = _rasterizationScaleIncrement;
 
 - (CATransform3D)transform
 {
@@ -256,14 +256,14 @@
     // Sanitize input
     if (floatlt(opacityIncrement, -1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be smaller than -1. Fixed to -1");
-        m_opacityIncrement = -1.f;
+        _opacityIncrement = -1.f;
     }
     else if (floatgt(opacityIncrement, 1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be larger than 1. Fixed to 1");
-        m_opacityIncrement = 1.f;
+        _opacityIncrement = 1.f;
     }
     else {
-        m_opacityIncrement = opacityIncrement;
+        _opacityIncrement = opacityIncrement;
     }
 }
 

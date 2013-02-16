@@ -117,49 +117,49 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize taskStartButton = m_taskStartButton;
+@synthesize taskStartButton = _taskStartButton;
 
-@synthesize taskStopButton = m_taskStopButton;
+@synthesize taskStopButton = _taskStopButton;
 
-@synthesize taskProgressView = m_taskProgressView;
+@synthesize taskProgressView = _taskProgressView;
 
-@synthesize taskRemainingTimeEstimateLabel = m_taskRemainingTimeEstimateLabel;
+@synthesize taskRemainingTimeEstimateLabel = _taskRemainingTimeEstimateLabel;
 
-@synthesize taskRemainingTimeLabel = m_taskRemainingTimeLabel;
+@synthesize taskRemainingTimeLabel = _taskRemainingTimeLabel;
 
-@synthesize taskGroupStartButton = m_taskGroupStartButton;
+@synthesize taskGroupStartButton = _taskGroupStartButton;
 
-@synthesize taskGroupStopButton = m_taskGroupStopButton;
+@synthesize taskGroupStopButton = _taskGroupStopButton;
 
-@synthesize taskGroupProgressView = m_taskGroupProgressView;
+@synthesize taskGroupProgressView = _taskGroupProgressView;
 
-@synthesize taskGroupRemainingTimeEstimateLabel = m_taskGroupRemainingTimeEstimateLabel;
+@synthesize taskGroupRemainingTimeEstimateLabel = _taskGroupRemainingTimeEstimateLabel;
 
-@synthesize taskGroupRemainingTimeLabel = m_taskGroupRemainingTimeLabel;
+@synthesize taskGroupRemainingTimeLabel = _taskGroupRemainingTimeLabel;
 
-@synthesize subTask1StopButton = m_subTask1StopButton;
+@synthesize subTask1StopButton = _subTask1StopButton;
 
-@synthesize subTask1ProgressView = m_subTask1ProgressView;
+@synthesize subTask1ProgressView = _subTask1ProgressView;
 
-@synthesize subTask1RemainingTimeEstimateLabel = m_subTask1RemainingTimeEstimateLabel;
+@synthesize subTask1RemainingTimeEstimateLabel = _subTask1RemainingTimeEstimateLabel;
 
-@synthesize subTask1RemainingTimeLabel = m_subTask1RemainingTimeLabel;
+@synthesize subTask1RemainingTimeLabel = _subTask1RemainingTimeLabel;
 
-@synthesize subTask2StopButton = m_subTask2StopButton;
+@synthesize subTask2StopButton = _subTask2StopButton;
 
-@synthesize subTask2ProgressView = m_subTask2ProgressView;
+@synthesize subTask2ProgressView = _subTask2ProgressView;
 
-@synthesize subTask2RemainingTimeEstimateLabel = m_subTask2RemainingTimeEstimateLabel;
+@synthesize subTask2RemainingTimeEstimateLabel = _subTask2RemainingTimeEstimateLabel;
 
-@synthesize subTask2RemainingTimeLabel = m_subTask2RemainingTimeLabel;
+@synthesize subTask2RemainingTimeLabel = _subTask2RemainingTimeLabel;
 
-@synthesize subTask3StopButton = m_subTask3StopButton;
+@synthesize subTask3StopButton = _subTask3StopButton;
 
-@synthesize subTask3ProgressView = m_subTask3ProgressView;
+@synthesize subTask3ProgressView = _subTask3ProgressView;
 
-@synthesize subTask3RemainingTimeEstimateLabel = m_subTask3RemainingTimeEstimateLabel;
+@synthesize subTask3RemainingTimeEstimateLabel = _subTask3RemainingTimeEstimateLabel;
 
-@synthesize subTask3RemainingTimeLabel = m_subTask3RemainingTimeLabel;
+@synthesize subTask3RemainingTimeLabel = _subTask3RemainingTimeLabel;
 
 #pragma mark HLSTaskDelegate protocol implementation
 

@@ -18,8 +18,8 @@ typedef enum {
 
 @interface DeviceInfo : NSObject {
 @private
-    NSString *m_name;
-    DeviceType m_type;
+    NSString *_name;
+    DeviceType _type;
 }
 
 + (DeviceInfo *)deviceInfoWithName:(NSString *)name type:(DeviceType)type;
