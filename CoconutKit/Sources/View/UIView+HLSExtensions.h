@@ -27,4 +27,13 @@
  */
 - (UIImage *)flattenedImage;
 
+/**
+ * Convenience method to apply a mask to a view, fading in the specified directions from a given fraction of the
+ * width / height.
+ *
+ * This method replaces any mask layer which might have been applied. Only one effect can be applied
+ */
+- (void)fadeLeft:(CGFloat)left right:(CGFloat)right;
+- (void)fadeTop:(CGFloat)top bottom:(CGFloat)bottom;
+
 @end

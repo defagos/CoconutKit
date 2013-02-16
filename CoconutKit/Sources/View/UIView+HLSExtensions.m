@@ -10,6 +10,8 @@
 
 #import <objc/runtime.h>
 #import "CALayer+HLSExtensions.h"
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 #import "HLSRuntime.h"
 
 static void *s_tagKey = &s_tagKey;
@@ -42,6 +44,51 @@ static void *s_userInfoKey = &s_userInfoKey;
 - (UIImage *)flattenedImage
 {
     return [self.layer flattenedImage];
+}
+
+#pragma mark View fading
+
+- (void)fadeLeft:(CGFloat)left right:(CGFloat)right
+{
+    if (floatlt(left, 0.f) || floatlt(right, 0.f) || floatgt(left + right, 1.f)) {
+        HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
+        return;
+    }
+    
+    CAGradientLayer *gradientLayer = [self gradientMaskLayer];
+	gradientLayer.locations = @[@(0.f), @(left), @(1.f - right), @(1.f)];
+	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+	gradientLayer.endPoint = CGPointMake(1.f, 0.f);
+    self.layer.mask = gradientLayer;
+}
+
+- (void)fadeTop:(CGFloat)top bottom:(CGFloat)bottom
+{
+    if (floatlt(top, 0.f) || floatlt(bottom, 0.f) || floatgt(top + bottom, 1.f)) {
+        HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
+        return;
+    }
+
+    CAGradientLayer *gradientLayer = [self gradientMaskLayer];
+	gradientLayer.locations = @[@(0.f), @(top), @(1.f - bottom), @(1.f)];
+	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+	gradientLayer.endPoint = CGPointMake(0.f, 1.f);
+	self.layer.mask = gradientLayer;
+}
+
+- (CAGradientLayer *)gradientMaskLayer
+{
+	CAGradientLayer *maskLayer = [CAGradientLayer layer];
+	
+	UIColor *outerColor = [UIColor colorWithWhite:1.f alpha:0.f];
+	UIColor *innerColor = [UIColor colorWithWhite:1.f alpha:1.f];
+	
+	maskLayer.colors = @[(id)outerColor.CGColor, (id)innerColor.CGColor, (id)innerColor.CGColor, (id)outerColor.CGColor];
+	
+	maskLayer.bounds = self.bounds;
+	maskLayer.anchorPoint = CGPointZero;
+    
+	return maskLayer;
 }
 
 @end
