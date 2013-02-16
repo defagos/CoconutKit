@@ -10,6 +10,8 @@
 
 #import <objc/runtime.h>
 #import "CALayer+HLSExtensions.h"
+#import "HLSFloat.h"
+#import "HLSLogger.h"
 #import "HLSRuntime.h"
 
 static void *s_tagKey = &s_tagKey;
@@ -44,36 +46,42 @@ static void *s_userInfoKey = &s_userInfoKey;
     return [self.layer flattenedImage];
 }
 
-- (void)fadeLeftBorder:(CGFloat)left rightBorder:(CGFloat)right
+#pragma mark View fading
+
+- (void)fadeLeft:(CGFloat)left right:(CGFloat)right
 {
-	CGFloat width = CGRectGetWidth(self.frame);
+    if (floatlt(left, 0.f) || floatlt(right, 0.f) || floatgt(left + right, 1.f)) {
+        HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
+        return;
+    }
     
-	CAGradientLayer *maskLayer = [self gradientMaskLayer];
-	maskLayer.locations = @[@(0.0), @(left/width), @(1.0-right/width), @(1.0)];
-	maskLayer.startPoint = CGPointMake(0.0, 0.0);
-	maskLayer.endPoint = CGPointMake(1.0, 0.0);
-	
-	self.layer.mask = maskLayer;
+    CAGradientLayer *gradientLayer = [self gradientMaskLayer];
+	gradientLayer.locations = @[@(0.f), @(left), @(1.f - right), @(1.f)];
+	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+	gradientLayer.endPoint = CGPointMake(1.f, 0.f);
+    self.layer.mask = gradientLayer;
 }
 
-- (void)fadeBottomBorder:(CGFloat)bottom topBorder:(CGFloat)top
+- (void)fadeTop:(CGFloat)top bottom:(CGFloat)bottom
 {
-	CGFloat height = CGRectGetHeight(self.frame);
-    
-	CAGradientLayer *maskLayer = [self gradientMaskLayer];
-	maskLayer.locations = @[@(0.0), @(bottom/height), @(1.0-top/height), @(1.0)];
-	maskLayer.startPoint = CGPointMake(0.0, 1.0);
-	maskLayer.endPoint = CGPointMake(0.0, 0.0);
-	
-	self.layer.mask = maskLayer;
+    if (floatlt(top, 0.f) || floatlt(bottom, 0.f) || floatgt(top + bottom, 1.f)) {
+        HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
+        return;
+    }
+
+    CAGradientLayer *gradientLayer = [self gradientMaskLayer];
+	gradientLayer.locations = @[@(0.f), @(top), @(1.f - bottom), @(1.f)];
+	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+	gradientLayer.endPoint = CGPointMake(0.f, 1.f);
+	self.layer.mask = gradientLayer;
 }
 
-- (CAGradientLayer*) gradientMaskLayer
+- (CAGradientLayer *)gradientMaskLayer
 {
 	CAGradientLayer *maskLayer = [CAGradientLayer layer];
 	
-	UIColor *outerColor = [UIColor colorWithWhite:1.0 alpha:0.0];
-	UIColor *innerColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+	UIColor *outerColor = [UIColor colorWithWhite:1.f alpha:0.f];
+	UIColor *innerColor = [UIColor colorWithWhite:1.f alpha:1.f];
 	
 	maskLayer.colors = @[(id)outerColor.CGColor, (id)innerColor.CGColor, (id)innerColor.CGColor, (id)outerColor.CGColor];
 	

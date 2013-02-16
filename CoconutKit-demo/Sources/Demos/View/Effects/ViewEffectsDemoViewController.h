@@ -9,5 +9,6 @@
 @interface ViewEffectsDemoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView1;
+@property (nonatomic, retain) IBOutlet UIImageView *imageView2;
 
 @end

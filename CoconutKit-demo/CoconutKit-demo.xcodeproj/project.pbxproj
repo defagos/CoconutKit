@@ -172,8 +172,8 @@
 		6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
 		6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
 		6F718CB116CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
-		6F718CB216CF8714001498D6 /* EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* EffectsViewController.xib */; };
-		6F718CB316CF8714001498D6 /* EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* EffectsViewController.xib */; };
+		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
+		6F718CB316CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
@@ -378,7 +378,7 @@
 		6F6B0C9B16B3DACF006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InnerFolder; sourceTree = "<group>"; };
 		6F718CAD16CF8714001498D6 /* ViewEffectsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewEffectsDemoViewController.h; sourceTree = "<group>"; };
 		6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewEffectsDemoViewController.m; sourceTree = "<group>"; };
-		6F718CAF16CF8714001498D6 /* EffectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsViewController.xib; sourceTree = "<group>"; };
+		6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEffectsDemoViewController.xib; sourceTree = "<group>"; };
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
@@ -740,7 +740,7 @@
 			children = (
 				6F718CAD16CF8714001498D6 /* ViewEffectsDemoViewController.h */,
 				6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */,
-				6F718CAF16CF8714001498D6 /* EffectsViewController.xib */,
+				6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -1465,7 +1465,7 @@
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
-				6F718CB216CF8714001498D6 /* EffectsViewController.xib in Resources */,
+				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,7 +1543,7 @@
 				6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */,
-				6F718CB316CF8714001498D6 /* EffectsViewController.xib in Resources */,
+				6F718CB316CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

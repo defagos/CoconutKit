@@ -28,11 +28,12 @@
 - (UIImage *)flattenedImage;
 
 /**
- * Fades the view borders.
- * Fades left border of 'left' pixels, right border of 'right' pixels, etc.
- * These methods cannot be used together; only the last method called will be applied
+ * Convenience method to apply a mask to a view, fading in the specified directions from a given fraction of the
+ * width / height.
+ *
+ * This method replaces any mask layer which might have been applied. Only one effect can be applied
  */
-- (void)fadeLeftBorder:(CGFloat)left rightBorder:(CGFloat)right;
-- (void)fadeBottomBorder:(CGFloat)bottom topBorder:(CGFloat)top;
+- (void)fadeLeft:(CGFloat)left right:(CGFloat)right;
+- (void)fadeTop:(CGFloat)top bottom:(CGFloat)bottom;
 
 @end
