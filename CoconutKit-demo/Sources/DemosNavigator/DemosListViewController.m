@@ -26,6 +26,7 @@
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextFieldsDemoViewController.h"
+#import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
 
@@ -78,6 +79,7 @@ typedef enum {
     ViewDemoIndexActionSheet,
     ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
+    ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
     ViewDemoIndexEnumEnd,
@@ -326,6 +328,11 @@ typedef enum {
                     break;
                 }
                     
+                case ViewDemoIndexEffects: {
+                    cell.textLabel.text = NSLocalizedString(@"Effects", @"Effects");
+                    break;
+                }
+                    
                 case ViewDemoIndexWebView: {
                     cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
                     break;
@@ -514,6 +521,11 @@ typedef enum {
                     
                 case ViewDemoIndexSkinning: {
                     demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case ViewDemoIndexEffects: {
+                    demoViewController = [[[ViewEffectsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

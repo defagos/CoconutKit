@@ -292,6 +292,10 @@
 		6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9816B3DAB5006B718F /* InnerFolder */; };
 		6F6B0C9A16B3DAB5006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9816B3DAB5006B718F /* InnerFolder */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
+		6F718CA516CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */; };
+		6F718CA616CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */; };
+		6F718CAA16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */; };
+		6F718CAB16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7A871616522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
@@ -630,6 +634,9 @@
 		6F6B0C9816B3DAB5006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = InnerFolder; path = "../CoconutKit-demo/InnerFolder"; sourceTree = "<group>"; };
 		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
+		6F718CA216CF825B001498D6 /* ViewEffectsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewEffectsDemoViewController.h; sourceTree = "<group>"; };
+		6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewEffectsDemoViewController.m; sourceTree = "<group>"; };
+		6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEffectsDemoViewController.xib; sourceTree = "<group>"; };
 		6F7A871316522C210030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -1232,6 +1239,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6F718CA116CF8236001498D6 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				6F718CA216CF825B001498D6 /* ViewEffectsDemoViewController.h */,
+				6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */,
+				6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */,
+			);
+			name = Effects;
+			path = View/Effects;
+			sourceTree = "<group>";
+		};
 		6F89149615790DCA009FCC78 /* Label */ = {
 			isa = PBXGroup;
 			children = (
@@ -1553,6 +1571,7 @@
 				6FADE7F014BA04C8007EE121 /* Animation */,
 				6FADE7F914BA04C8007EE121 /* Common */,
 				6F4169EB14BB67D5006020E6 /* Core */,
+				6F718CA116CF8236001498D6 /* Effects */,
 				6FADE82714BA04C8007EE121 /* Task */,
 				6FADE83014BA04C8007EE121 /* View */,
 				6FADE85D14BA04C9007EE121 /* ViewControllers */,
@@ -2157,6 +2176,7 @@
 				6F22C77C16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */,
+				6F718CAA16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2237,6 +2257,7 @@
 				6F22C77D16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9A16B3DAB5006B718F /* InnerFolder in Resources */,
+				6F718CAB16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2433,6 +2454,7 @@
 				6F22C77216A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181B16C14B7400303628 /* UIView+HLSDynamicLocalization.m in Sources */,
+				6F718CA516CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2596,6 +2618,7 @@
 				6F22C77316A942B90081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181C16C14B7400303628 /* UIView+HLSDynamicLocalization.m in Sources */,
+				6F718CA616CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

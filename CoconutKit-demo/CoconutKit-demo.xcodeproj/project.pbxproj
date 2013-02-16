@@ -170,6 +170,10 @@
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
 		6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
 		6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
+		6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
+		6F718CB116CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
+		6F718CB216CF8714001498D6 /* EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* EffectsViewController.xib */; };
+		6F718CB316CF8714001498D6 /* EffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* EffectsViewController.xib */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
@@ -372,6 +376,9 @@
 		6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F6B0C8E16B3DA34006B718F /* InnerBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InnerBundle.xcodeproj; path = InnerBundle/InnerBundle.xcodeproj; sourceTree = "<group>"; };
 		6F6B0C9B16B3DACF006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InnerFolder; sourceTree = "<group>"; };
+		6F718CAD16CF8714001498D6 /* ViewEffectsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewEffectsDemoViewController.h; sourceTree = "<group>"; };
+		6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewEffectsDemoViewController.m; sourceTree = "<group>"; };
+		6F718CAF16CF8714001498D6 /* EffectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsViewController.xib; sourceTree = "<group>"; };
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
@@ -728,6 +735,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6F718CAC16CF8714001498D6 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				6F718CAD16CF8714001498D6 /* ViewEffectsDemoViewController.h */,
+				6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */,
+				6F718CAF16CF8714001498D6 /* EffectsViewController.xib */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
 		6F89149C15790DDE009FCC78 /* Label */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,6 +943,7 @@
 			children = (
 				6F9C45E114C5C30B00824AB2 /* ActionSheet */,
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
+				6F718CAC16CF8714001498D6 /* Effects */,
 				6F5007FE1585EA5600391A6C /* ExpandingSearchBar */,
 				6F89149C15790DDE009FCC78 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
@@ -1447,6 +1465,7 @@
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
+				6F718CB216CF8714001498D6 /* EffectsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1524,6 +1543,7 @@
 				6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */,
+				6F718CB316CF8714001498D6 /* EffectsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,6 +1645,7 @@
 				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
+				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1692,6 +1713,7 @@
 				6F0BFE12163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 				6F22C76216A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C78216A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
+				6F718CB116CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
