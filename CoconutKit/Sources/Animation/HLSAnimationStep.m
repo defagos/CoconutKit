@@ -61,16 +61,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize objectKeys = _objectKeys;
-
-@synthesize objectToObjectAnimationMap = _objectToObjectAnimationMap;
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize duration = _duration;
-
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
@@ -83,14 +73,10 @@
     }
 }
 
-@synthesize delegate = _delegate;
-
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
 }
-
-@synthesize terminating = _terminating;
 
 - (NSArray *)objects
 {

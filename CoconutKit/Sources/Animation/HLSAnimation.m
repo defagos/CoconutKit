@@ -28,14 +28,23 @@
 
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
-@interface HLSAnimation () <HLSAnimationStepDelegate>
+@interface HLSAnimation () <HLSAnimationStepDelegate>  {
+@private
+    BOOL _animated;
+    NSUInteger _repeatCount;
+    NSUInteger _currentRepeatCount;
+    NSTimeInterval _remainingTimeBeforeStart;                      // the time remaining before the start time is reached
+    NSTimeInterval _elapsedTime;                                   // the currently elapsed time (does not include pauses)
+    BOOL _runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
+    BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
+}
 
 + (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps;
 
-@property (nonatomic, retain) NSArray *animationSteps;
-@property (nonatomic, retain) NSArray *animationStepCopies;
-@property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
-@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
+@property (nonatomic, retain) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
+@property (nonatomic, retain) NSArray *animationStepCopies;                     // another copy made temporarily during animation
+@property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
+@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, getter=isStarted) BOOL started;
@@ -141,36 +150,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 #pragma mark Accessors and mutators
 
-@synthesize animationSteps = _animationSteps;
-
-@synthesize animationStepCopies = _animationStepCopies;
-
-@synthesize animationStepsEnumerator = _animationStepsEnumerator;
-
-@synthesize currentAnimationStep = _currentAnimationStep;
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize lockingUI = _lockingUI;
-
-@synthesize running = _running;
-
-@synthesize playing = _playing;
-
-@synthesize started = _started;
-
 - (BOOL)isPaused
 {
     return [self.currentAnimationStep isPaused];
 }
-
-@synthesize cancelling = _cancelling;
-
-@synthesize terminating = _terminating;
-
-@synthesize delegateZeroingWeakRef = _delegateZeroingWeakRef;
 
 - (id<HLSAnimationDelegate>)delegate
 {

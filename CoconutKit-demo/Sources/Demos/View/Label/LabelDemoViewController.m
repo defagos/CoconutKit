@@ -66,36 +66,6 @@ static NSArray *s_fontNames = nil;
     self.lineBreakModePickerView = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize label = _label;
-
-@synthesize standardLabel = _standardLabel;
-
-@synthesize textPickerView = _textPickerView;
-
-@synthesize fontPickerView = _fontPickerView;
-
-@synthesize baselineAdjustmentSegmentedControl = _baselineAdjustmentSegmentedControl;
-
-@synthesize numberOfLinesSlider = _numberOfLinesSlider;
-
-@synthesize numberOfLinesLabel = _numberOfLinesLabel;
-
-@synthesize fontSizeSlider = _fontSizeSlider;
-
-@synthesize fontSizeLabel = _fontSizeLabel;
-
-@synthesize adjustsFontSizeToFitWidthSwitch = _adjustsFontSizeToFitWidthSwitch;
-
-@synthesize minFontSizeSlider = _minFontSizeSlider;
-
-@synthesize minFontSizeLabel = _minFontSizeLabel;
-
-@synthesize verticalAlignmentSegmentedControl = _verticalAlignmentSegmentedControl;
-
-@synthesize lineBreakModePickerView = _lineBreakModePickerView;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

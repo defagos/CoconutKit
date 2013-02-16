@@ -94,56 +94,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [self updateUserInterface];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize rectangleView1 = _rectangleView1;
-
-@synthesize rectangleView2 = _rectangleView2;
-
-@synthesize animationPickerView = _animationPickerView;
-
-@synthesize playButton = _playButton;
-
-@synthesize pauseButton = _pauseButton;
-
-@synthesize cancelButton = _cancelButton;
-
-@synthesize terminateButton = _terminateButton;
-
-@synthesize settingsView = _settingsView;
-
-@synthesize reverseSwitch = _reverseSwitch;
-
-@synthesize lockingUISwitch = _lockingUISwitch;
-
-@synthesize loopingSwitch = _loopingSwitch;
-
-@synthesize animatedSwitch = _animatedSwitch;
-
-@synthesize repeatCountSlider = _repeatCountSlider;
-
-@synthesize repeatCountLabel = _repeatCountLabel;
-
-@synthesize animatedSettingsView = _animatedSettingsView;
-
-@synthesize durationSlider = _durationSlider;
-
-@synthesize durationLabel = _durationLabel;
-
-@synthesize delayBackgroundView = _delayBackgroundView;
-
-@synthesize delaySlider = _delaySlider;
-
-@synthesize delayLabel = _delayLabel;
-
-@synthesize startTimeBackgroundView = _startTimeBackgroundView;
-
-@synthesize startTimeSlider = _startTimeSlider;
-
-@synthesize startTimeLabel = _startTimeLabel;
-
-@synthesize animation = _animation;
-
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations

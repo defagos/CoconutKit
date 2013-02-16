@@ -15,14 +15,14 @@
 
 @interface HLSTaskManager ()
 
-@property (nonatomic, retain) NSOperationQueue *operationQueue;
-@property (nonatomic, retain) NSMutableSet *tasks;
-@property (nonatomic, retain) NSMutableSet *taskGroups;
-@property (nonatomic, retain) NSMutableDictionary *taskToOperationMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToDelegateMap;
-@property (nonatomic, retain) NSMutableDictionary *delegateToTasksMap;
-@property (nonatomic, retain) NSMutableDictionary *taskGroupToDelegateMap;
-@property (nonatomic, retain) NSMutableDictionary *delegateToTaskGroupsMap;
+@property (nonatomic, retain) NSOperationQueue *operationQueue;                         // Manages the separate threads used for task processing
+@property (nonatomic, retain) NSMutableSet *tasks;                                      // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, retain) NSMutableSet *taskGroups;                                 // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, retain) NSMutableDictionary *taskToOperationMap;                  // Maps a task to the associated HLSTaskOperation object
+@property (nonatomic, retain) NSMutableDictionary *taskToDelegateMap;                   // Maps a task to the associated id<HLSTaskDelegate> object
+@property (nonatomic, retain) NSMutableDictionary *delegateToTasksMap;                  // Maps some object id to the NSMutableSet of all HLSTask objects it is the delegate of
+@property (nonatomic, retain) NSMutableDictionary *taskGroupToDelegateMap;              // Maps a task group to the associated id<HLSTaskGroupDelegate> object
+@property (nonatomic, retain) NSMutableDictionary *delegateToTaskGroupsMap;             // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
 
 - (NSSet *)operationsForTasks:(NSSet *)tasks;
 
@@ -39,7 +39,6 @@
 
 @implementation HLSTaskManager
 
-#pragma mark -
 #pragma mark Class methods
 
 + (HLSTaskManager *)defaultManager
@@ -51,7 +50,6 @@
     return s_instance;
 }
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -84,24 +82,7 @@
     [super dealloc];
 }
 
-#pragma mark -
 #pragma mark Accessors and mutators
-
-@synthesize operationQueue = _operationQueue;
-
-@synthesize tasks = _tasks;
-
-@synthesize taskGroups = _taskGroups;
-
-@synthesize taskToOperationMap = _taskToOperationMap;
-
-@synthesize taskToDelegateMap = _taskToDelegateMap;
-
-@synthesize delegateToTasksMap = _delegateToTasksMap;
-
-@synthesize taskGroupToDelegateMap = _taskGroupToDelegateMap;
-
-@synthesize delegateToTaskGroupsMap = _delegateToTaskGroupsMap;
 
 - (void)setMaxConcurrentTaskCount:(NSInteger)count
 {
@@ -120,7 +101,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Submitting tasks
 
 - (void)submitTask:(HLSTask *)task
@@ -212,7 +192,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Cancelling tasks
 
 - (void)cancelTask:(HLSTask *)task
@@ -328,7 +307,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Finding tasks
 
 - (NSArray *)tasksWithTag:(NSString *)tag
@@ -343,7 +321,6 @@
     return [[self.taskGroups filteredSetUsingPredicate:predicate] allObjects];    
 }
 
-#pragma mark -
 #pragma mark Registering and unregistering task delegates
 
 - (void)registerDelegate:(id<HLSTaskDelegate>)delegate forTask:(HLSTask *)task
@@ -475,7 +452,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Instantiating operations for a set of tasks
 
 - (NSSet *)operationsForTasks:(NSSet *)tasks
@@ -492,7 +468,6 @@
     return operations;
 }
 
-#pragma mark -
 #pragma mark Registering object relationships
 
 - (void)registerOperation:(HLSTaskOperation *)operation
@@ -541,7 +516,6 @@
     [self.taskGroups removeObject:taskGroup];
 }
 
-#pragma mark -
 #pragma mark Retrieving registered delegates
 
 - (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task

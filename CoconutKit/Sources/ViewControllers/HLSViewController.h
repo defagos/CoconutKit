@@ -46,10 +46,7 @@
  *
  * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSViewController : UIViewController {
-@private
-    
-}
+@interface HLSViewController : UIViewController
 
 /**
  * Instantiate a view controller, looking for a nib bearing the same name as the class in the given bundle. If the

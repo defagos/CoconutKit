@@ -15,11 +15,7 @@
  *
  * Designated initializer: -initWithTextField:
  */
-@interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate <UIGestureRecognizerDelegate> {
-@private
-    UIGestureRecognizer *_gestureRecognizer;
-    BOOL _resigningFirstResponderOnTap;
-}
+@interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate <UIGestureRecognizerDelegate>
 
 /**
  * If set to YES, the text field which the detector is the delegate of is asked to relinquish its first responder status 

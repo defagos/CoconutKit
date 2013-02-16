@@ -6,10 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface HeaderView : HLSNibView {
-@private
-    UILabel *_label;
-}
+@interface HeaderView : HLSNibView
 
 @property (nonatomic, retain) IBOutlet UILabel *label;
 

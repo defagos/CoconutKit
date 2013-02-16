@@ -79,16 +79,6 @@ static HLSKeyboardInformation *s_instance = nil;
     return nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize beginFrame = _beginFrame;
-
-@synthesize endFrame = _endFrame;
-
-@synthesize animationDuration = _animationDuration;
-
-@synthesize animationCurve = _animationCurve;
-
 #pragma mark Notification callbacks
 
 + (void)keyboardWillShow:(NSNotification *)notification

@@ -50,8 +50,6 @@ typedef enum {
 
 @implementation TableViewCellsDemoViewController
 
-@synthesize tableView = _tableView;
-
 #pragma mark View lifecycle
 
 - (void)loadView

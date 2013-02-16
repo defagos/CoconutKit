@@ -13,18 +13,21 @@
 #import "CursorPointerInfoViewController.h"
 #import "CursorSelectedFolderView.h"
 
+static NSArray *s_weekDays = nil;
+static NSArray *s_completeRange = nil;
+static NSArray *s_timeScales = nil;
+static NSArray *s_folders = nil;
+
 @interface CursorDemoViewController ()
 
 @property (nonatomic, retain) UIPopoverController *currentPopoverController;
 
 @end
 
-@implementation CursorDemoViewController
-
-static NSArray *s_weekDays = nil;
-static NSArray *s_completeRange = nil;
-static NSArray *s_timeScales = nil;
-static NSArray *s_folders = nil;
+@implementation CursorDemoViewController {
+@private
+    CGSize _originalRandomRangeCursorSize;
+}
 
 #pragma mark Class methods
 
@@ -59,28 +62,6 @@ static NSArray *s_folders = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize weekDaysCursor = _weekDaysCursor;
-
-@synthesize weekDayIndexLabel = _weekDayIndexLabel;
-
-@synthesize randomRangeCursor = _randomRangeCursor;
-
-@synthesize randomRangeIndexLabel = _randomRangeIndexLabel;
-
-@synthesize widthFactorSlider = _widthFactorSlider;
-
-@synthesize heightFactorSlider = _heightFactorSlider;
-
-@synthesize timeScalesCursor = _timeScalesCursor;
-
-@synthesize foldersCursor = _foldersCursor;
-
-@synthesize mixedFoldersCursor = _mixedFoldersCursor;
-
-@synthesize currentPopoverController = _currentPopoverController;
 
 #pragma mark View lifecycle
 

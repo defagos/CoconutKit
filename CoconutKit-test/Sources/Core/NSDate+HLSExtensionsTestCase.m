@@ -8,10 +8,6 @@
 
 #import "NSDate+HLSExtensionsTestCase.h"
 
-@interface NSDate_HLSExtensionsTestCase ()
-
-@end
-
 @implementation NSDate_HLSExtensionsTestCase
 
 #pragma mark Tests

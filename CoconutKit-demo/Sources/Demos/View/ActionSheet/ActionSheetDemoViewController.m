@@ -33,12 +33,6 @@
     self.choiceLabel = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize toolbar = _toolbar;
-
-@synthesize choiceLabel = _choiceLabel;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

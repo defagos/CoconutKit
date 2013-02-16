@@ -9,7 +9,6 @@
 #import "HLSZeroingWeakRefTestCase.h"
 
 @interface BasicClass : NSObject
-
 @end
 
 @implementation HLSZeroingWeakRefTestCase
@@ -35,5 +34,4 @@
 @end
 
 @implementation BasicClass
-
 @end

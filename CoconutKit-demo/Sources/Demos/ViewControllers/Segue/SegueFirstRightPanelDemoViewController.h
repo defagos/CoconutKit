@@ -7,5 +7,4 @@
 //
 
 @interface SegueFirstRightPanelDemoViewController : HLSViewController
-
 @end

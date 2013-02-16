@@ -42,12 +42,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize curve = _curve;
-
-@synthesize dummyView = _dummyView;
-
 #pragma mark Managing the animation
 
 - (void)addViewAnimation:(HLSViewAnimation *)viewAnimation forView:(UIView *)view

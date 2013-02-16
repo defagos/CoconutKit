@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
+#import "HLSVector.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -79,28 +80,6 @@
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize rotationParameters = _rotationParameters;
-
-@synthesize scaleParameters = _scaleParameters;
-
-@synthesize translationParameters = _translationParameters;
-
-@synthesize anchorPointTranslationParameters = _anchorPointTranslationParameters;
-
-@synthesize sublayerRotationParameters = _sublayerRotationParameters;
-
-@synthesize sublayerScaleParameters = _sublayerScaleParameters;
-
-@synthesize sublayerTranslationParameters = _sublayerTranslationParameters;
-
-@synthesize sublayerCameraTranslationZ = _sublayerCameraTranslationZ;
-
-@synthesize opacityIncrement = _opacityIncrement;
-
-@synthesize togglingShouldRasterize = _togglingShouldRasterize;
-
-@synthesize rasterizationScaleIncrement = _rasterizationScaleIncrement;
 
 - (CATransform3D)transform
 {

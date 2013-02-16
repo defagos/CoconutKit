@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface NSObject_HLSExtensionsTestCase : GHTestCase {
-@private
-    
-}
-
+@interface NSObject_HLSExtensionsTestCase : GHTestCase
 @end

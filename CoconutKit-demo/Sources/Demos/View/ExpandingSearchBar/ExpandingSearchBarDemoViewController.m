@@ -26,16 +26,6 @@
     self.animatedSwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize searchBar1 = _searchBar1;
-
-@synthesize searchBar2 = _searchBar2;
-
-@synthesize searchBar3 = _searchBar3;
-
-@synthesize animatedSwitch = _animatedSwitch;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

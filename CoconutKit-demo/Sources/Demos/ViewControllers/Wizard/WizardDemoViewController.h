@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface WizardDemoViewController : HLSWizardViewController <HLSWizardViewControllerDelegate> {
-@private
-    
-}
-
+@interface WizardDemoViewController : HLSWizardViewController <HLSWizardViewControllerDelegate>
 @end

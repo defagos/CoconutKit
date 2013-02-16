@@ -7,5 +7,4 @@
 //
 
 @interface CAMediaTimingFunction_HLExtensionsTestCase : GHTestCase
-
 @end

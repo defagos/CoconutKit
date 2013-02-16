@@ -27,10 +27,7 @@
  * Designated initializer: -initWithFrame: (you usually do not need to create a view manually. Use the factory method 
  *                                          instead)
  */
-@interface HLSNibView : UIView {
-@private
-    
-}
+@interface HLSNibView : UIView
 
 /**
  * Factory method for creating the view. Return an instance of the class it is called on

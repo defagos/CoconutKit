@@ -24,14 +24,7 @@ typedef enum {
  *
  * Designated initializer: -initWithText:tableName:bundleName:
  */
-@interface HLSLabelLocalizationInfo : NSObject {
-@private
-    NSString *_localizationKey;
-    NSString *_tableName;
-    NSString *_bundleName;
-    HLSLabelRepresentation _representation;
-    BOOL _locked;
-}
+@interface HLSLabelLocalizationInfo : NSObject
 
 /**
  * Create a localization object from a given text, processing any prefix contained in the text (see complete list in

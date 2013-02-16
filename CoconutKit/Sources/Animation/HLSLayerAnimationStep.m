@@ -38,7 +38,15 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 @end
 
-@implementation HLSLayerAnimationStep
+@implementation HLSLayerAnimationStep {
+@private
+    NSUInteger _numberOfLayerAnimations;
+    BOOL _numberOfStartedLayerAnimations;
+    NSUInteger _numberOfFinishedLayerAnimations;
+    CFTimeInterval _startTime;
+    CFTimeInterval _pauseTime;
+    CFTimeInterval _previousPauseDuration;
+}
 
 #pragma mark Object creation and destruction
 
@@ -57,12 +65,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize timingFunction = _timingFunction;
-
-@synthesize dummyView = _dummyView;
 
 #pragma mark Managing the animation
 

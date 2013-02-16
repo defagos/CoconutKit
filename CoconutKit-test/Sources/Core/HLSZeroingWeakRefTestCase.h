@@ -7,5 +7,4 @@
 //
 
 @interface HLSZeroingWeakRefTestCase : GHTestCase
-
 @end

@@ -6,13 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface ExpandingSearchBarDemoViewController : HLSViewController <HLSExpandingSearchBarDelegate> {
-@private
-    HLSExpandingSearchBar *_searchBar1;
-    HLSExpandingSearchBar *_searchBar2;
-    HLSExpandingSearchBar *_searchBar3;
-    UISwitch *_animatedSwitch;
-}
+@interface ExpandingSearchBarDemoViewController : HLSViewController <HLSExpandingSearchBarDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar1;
 @property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar2;

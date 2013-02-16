@@ -33,18 +33,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize error1 = _error1;
-
-@synthesize error2 = _error2;
-
-@synthesize error3 = _error3;
-
-@synthesize error4 = _error4;
-
-@synthesize error5 = _error5;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass

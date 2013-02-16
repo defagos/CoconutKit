@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
+#import "HLSVector.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -43,12 +44,6 @@
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize scaleParameters = _scaleParameters;
-
-@synthesize translationParameters = _translationParameters;
-
-@synthesize alphaIncrement = _alphaIncrement;
 
 - (void)addToAlpha:(CGFloat)alphaIncrement
 {

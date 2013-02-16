@@ -20,12 +20,6 @@
     self.scrollEnabledSwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize webView = _webView;
-
-@synthesize scrollEnabledSwitch = _scrollEnabledSwitch;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

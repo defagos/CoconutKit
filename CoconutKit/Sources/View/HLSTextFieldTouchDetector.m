@@ -41,12 +41,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize gestureRecognizer = _gestureRecognizer;
-
-@synthesize resigningFirstResponderOnTap = _resigningFirstResponderOnTap;
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

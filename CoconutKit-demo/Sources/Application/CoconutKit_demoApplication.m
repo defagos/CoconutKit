@@ -149,14 +149,10 @@
 
 #pragma mark Accesors and mutators
 
-@synthesize rootViewController = _rootViewController;
-
 - (UIViewController *)viewController
 {
     return self.rootViewController;
 }
-
-@synthesize languageActionSheet = _languageActionSheet;
 
 #pragma mark HLSStackControllerDelegate protocol implementation
 

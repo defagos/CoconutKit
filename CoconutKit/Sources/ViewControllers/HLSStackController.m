@@ -109,10 +109,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize containerStack = _containerStack;
-
-@synthesize capacity = _capacity;
-
 - (void)setCapacity:(NSUInteger)capacity
 {
     if (self.containerStack) {
@@ -122,8 +118,6 @@
     
     _capacity = capacity;
 }
-
-@synthesize autorotationMode = _autorotationMode;
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
@@ -139,8 +133,6 @@
     // in this case
     self.containerStack.autorotationMode = autorotationMode;
 }
-
-@synthesize delegate = _delegate;
 
 - (UIViewController *)rootViewController
 {

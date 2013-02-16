@@ -9,7 +9,6 @@
 @interface SegueStackOtherDemoViewController : HLSViewController
 
 - (IBAction)hideWithModal:(id)sender;
-
 - (IBAction)pop:(id)sender;
 
 @end

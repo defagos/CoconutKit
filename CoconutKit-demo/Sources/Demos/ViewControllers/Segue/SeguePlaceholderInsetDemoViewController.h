@@ -7,5 +7,4 @@
 //
 
 @interface SeguePlaceholderInsetDemoViewController : HLSViewController
-
 @end

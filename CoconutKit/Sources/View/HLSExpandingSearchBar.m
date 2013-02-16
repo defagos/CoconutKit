@@ -29,7 +29,12 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @end
 
-@implementation HLSExpandingSearchBar
+@implementation HLSExpandingSearchBar {
+@private
+    BOOL _layoutDone;
+    BOOL _expanded;
+    BOOL _animating;
+}
 
 #pragma mark Object creation and destruction
 
@@ -115,8 +120,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.text = text;
 }
 
-@synthesize prompt = _prompt;
-
 - (void)setPrompt:(NSString *)prompt
 {
     if (_prompt == prompt) {
@@ -131,8 +134,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     }
 }
 
-@synthesize placeholder = _placeholder;
-
 - (void)setPlaceholder:(NSString *)placeholder
 {
     if (_placeholder == placeholder) {
@@ -146,10 +147,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         self.searchBar.placeholder = placeholder;
     }
 }
-
-@synthesize showsBookmarkButton = _showsBookmarkButton;
-
-@synthesize showsSearchResultsButton = _showsSearchResultsButton;
 
 - (UITextAutocapitalizationType)autocapitalizationType
 {
@@ -191,12 +188,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.keyboardType = keyboardType;
 }
 
-@synthesize searchBar = _searchBar;
-
-@synthesize searchButton = _searchButton;
-
-@synthesize alignment = _alignment;
-
 - (void)setAlignment:(HLSExpandingSearchBarAlignment)alignment
 {
     if (_layoutDone) {
@@ -206,8 +197,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     _alignment = alignment;
 }
-
-@synthesize delegate = _delegate;
 
 #pragma mark Layout
 

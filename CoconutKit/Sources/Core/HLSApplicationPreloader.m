@@ -106,10 +106,6 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize application = _application;
-
 #pragma mark Pre-loading
 
 - (void)preload

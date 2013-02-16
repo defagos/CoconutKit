@@ -16,9 +16,9 @@
 
 @interface HLSTaskOperation ()
 
-@property (nonatomic, assign) HLSTaskManager *taskManager;
-@property (nonatomic, assign) HLSTask *task;
-@property (nonatomic, retain) NSThread *callingThread;
+@property (nonatomic, assign) HLSTaskManager *taskManager;          // The task manager which spawned the operation
+@property (nonatomic, assign) HLSTask *task;                        // The task the operation is processing
+@property (nonatomic, retain) NSThread *callingThread;              // Thread onto which spawned the operation
 
 - (void)operationMain;
 
@@ -36,7 +36,6 @@
 
 @implementation HLSTaskOperation
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
@@ -63,16 +62,6 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Accessors and mutators
-
-@synthesize taskManager = _taskManager;
-
-@synthesize task = _task;
-
-@synthesize callingThread = _callingThread;
-
-#pragma mark -
 #pragma mark Thread main function
 
 - (void)main
@@ -92,7 +81,6 @@
     HLSMissingMethodImplementation();
 }
 
-#pragma mark -
 #pragma mark Executing code on the calling thread
 
 - (void)onCallingThreadPerformSelector:(SEL)selector object:(NSObject *)objectOrNil
@@ -133,7 +121,6 @@
                                   object:error];
 }
 
-#pragma mark -
 #pragma mark Code to be executed on the calling thread
 
 - (void)notifyStart

@@ -20,12 +20,6 @@
     self.imageView2 = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize imageView1 = _imageView1;
-
-@synthesize imageView2 = _imageView2;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

@@ -39,7 +39,10 @@ typedef enum {
 
 @end
 
-@implementation StackDemoViewController
+@implementation StackDemoViewController {
+@private
+    CGRect _placeholderViewOriginalBounds;
+}
 
 #pragma mark Object creation and destruction
 
@@ -121,32 +124,6 @@ typedef enum {
     self.insertionIndexLabel = nil;
     self.removalIndexLabel = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize sizeSlider = _sizeSlider;
-
-@synthesize resizeMethodSegmentedControl = _resizeMethodSegmentedControl;
-
-@synthesize popoverButton = _popoverButton;
-
-@synthesize transitionPickerView = _transitionPickerView;
-
-@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
-
-@synthesize inTabBarControllerSwitch = _inTabBarControllerSwitch;
-
-@synthesize inNavigationControllerSwitch = _inNavigationControllerSwitch;
-
-@synthesize animatedSwitch = _animatedSwitch;
-
-@synthesize indexSlider = _indexSlider;
-
-@synthesize insertionIndexLabel = _insertionIndexLabel;
-
-@synthesize removalIndexLabel = _removalIndexLabel;
-
-@synthesize displayedPopoverController = _displayedPopoverController;
 
 #pragma mark View lifecycle
 

@@ -16,11 +16,7 @@
  *
  * Designated initializer: -initWithTextField:
  */
-@interface HLSTextFieldInternalDelegate : NSObject <UITextFieldDelegate> {
-@private
-    UITextField *_textField;
-    id<UITextFieldDelegate> _delegate;
-}
+@interface HLSTextFieldInternalDelegate : NSObject <UITextFieldDelegate>
 
 - (id)initWithTextField:(UITextField *)textField;
 

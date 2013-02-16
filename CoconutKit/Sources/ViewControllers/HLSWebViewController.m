@@ -68,28 +68,6 @@
     self.refreshImage = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize request = _request;
-
-@synthesize currentURL = _currentURL;
-
-@synthesize webView = _webView;
-
-@synthesize toolbar = _toolbar;
-
-@synthesize goBackBarButtonItem = _goBackBarButtonItem;
-
-@synthesize goForwardBarButtonItem = _goForwardBarButtonItem;
-
-@synthesize refreshBarButtonItem = _refreshBarButtonItem;
-
-@synthesize actionBarButtonItem = _actionBarButtonItem;
-
-@synthesize activityIndicator = _activityIndicator;
-
-@synthesize refreshImage = _refreshImage;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

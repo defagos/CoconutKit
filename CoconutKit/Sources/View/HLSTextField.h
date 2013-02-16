@@ -6,9 +6,6 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class HLSTextFieldTouchDetector;
-
 /**
  * Thin wrapper to UITextField adding standard useful functionality.
  *
@@ -48,11 +45,7 @@
  *
  * Designated initializer: -initWithFrame:
  */
-@interface HLSTextField : UITextField {
-@private
-    HLSTextFieldTouchDetector *_touchDetector;
-    CGFloat _minVisibilityDistance;
-}
+@interface HLSTextField : UITextField
 
 /**
  * Minimal (positive) distance to keep between keyboard and text field, respectively scroll view top and text field

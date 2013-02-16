@@ -25,18 +25,6 @@
     self.autorotationModeSegmentedControl = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize portraitSwitch = _portraitSwitch;
-
-@synthesize landscapeRightSwitch = _landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = _landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = _portraitUpsideDownSwitch;
-
-@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

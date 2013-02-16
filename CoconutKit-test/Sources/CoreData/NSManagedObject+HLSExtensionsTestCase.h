@@ -6,13 +6,5 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class Person;
-
-@interface NSManagedObject_HLSExtensionsTestCase : GHTestCase {
-@private
-    Person *_person1;
-    Person *_person2;
-}
-
+@interface NSManagedObject_HLSExtensionsTestCase : GHTestCase
 @end

@@ -56,7 +56,12 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 @end
 
-@implementation HLSSlideshow
+@implementation HLSSlideshow {
+@private
+    NSInteger _currentImageIndex;
+    NSInteger _nextImageIndex;
+    NSInteger _currentImageViewIndex;
+}
 
 #pragma mark Object creation and destruction
 
@@ -111,8 +116,6 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark Accessors and mutators
 
-@synthesize effect = _effect;
-
 - (void)setEffect:(HLSSlideshowEffect)effect
 {
     if (self.running) {
@@ -122,10 +125,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     _effect = effect;
 }
-
-@synthesize imageViews = _imageViews;
-
-@synthesize imageNamesOrPaths = _imageNamesOrPaths;
 
 - (void)setImageNamesOrPaths:(NSArray *)imageNamesOrPaths
 {   
@@ -159,10 +158,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     _imageNamesOrPaths = [imageNamesOrPaths retain];
 }
 
-@synthesize animation = _animation;
-
-@synthesize imageDuration = _imageDuration;
-
 - (void)setImageDuration:(NSTimeInterval)imageDuration
 {
     if (doublele(imageDuration, 0.)) {
@@ -172,8 +167,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     _imageDuration = imageDuration;
 }
-
-@synthesize transitionDuration = _transitionDuration;
 
 - (void)setTransitionDuration:(NSTimeInterval)transitionDuration
 {
@@ -185,8 +178,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     _transitionDuration = transitionDuration;
 }
 
-@synthesize random = _random;
-
 - (BOOL)isRunning
 {
     return self.animation.running;
@@ -196,8 +187,6 @@ static const NSInteger kSlideshowNoIndex = -1;
 {
     return self.animation.paused;
 }
-
-@synthesize delegate = _delegate;
 
 #pragma mark Playing the slideshow
 

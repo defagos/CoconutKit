@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface TableViewCellsDemoViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate> {
-@private
-    
-}
-
+@interface TableViewCellsDemoViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
 @end

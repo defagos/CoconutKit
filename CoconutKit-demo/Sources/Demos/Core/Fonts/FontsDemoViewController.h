@@ -6,11 +6,7 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-@interface FontsDemoViewController : HLSViewController {
-@private
-    UILabel *_label;
-    UIWebView *_webView;
-}
+@interface FontsDemoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UILabel *label;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;

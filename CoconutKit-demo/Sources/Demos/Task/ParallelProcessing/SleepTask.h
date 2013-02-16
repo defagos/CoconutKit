@@ -6,10 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface SleepTask : HLSTask {
-@private
-    NSUInteger _secondsToSleep;
-}
+@interface SleepTask : HLSTask
 
 - (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep;
 

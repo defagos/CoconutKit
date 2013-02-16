@@ -110,10 +110,6 @@ static UIScrollView *s_scrollView = nil;
 
 #pragma mark Accessors and mutators
 
-@synthesize touchDetector = _touchDetector;
-
-@synthesize minVisibilityDistance = _minVisibilityDistance;
-
 - (void)setTextFieldMinVisibilityDistance:(CGFloat)minVisibilityDistance
 {
     // Sanitize input

@@ -29,20 +29,7 @@ typedef enum {
  *
  * Note that the search criterium gets cleared and cannot be set when the search bar is collapsed.
  */
-@interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate> {
-@private
-    UISearchBar *_searchBar;
-    UIButton *_searchButton;
-    NSString *_prompt;
-    NSString *_placeholder;
-    BOOL _showsBookmarkButton;
-    BOOL _showsSearchResultsButton;
-    HLSExpandingSearchBarAlignment _alignment;
-    id<HLSExpandingSearchBarDelegate> _delegate;
-    BOOL _layoutDone;
-    BOOL _expanded;
-    BOOL _animating;
-}
+@interface HLSExpandingSearchBar : UIView <HLSAnimationDelegate, UISearchBarDelegate>
 
 /**
  * These properties are exactly the same as for UISearchBar. Refer to their documentation for more information.

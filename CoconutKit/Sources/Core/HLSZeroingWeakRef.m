@@ -106,12 +106,6 @@ static Class subclass_class(id object, SEL _cmd);
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize object = _object;
-
-@synthesize invocations = _invocations;
-
 #pragma mark Optional cleanup
 
 - (void)addInvocation:(NSInvocation *)invocation

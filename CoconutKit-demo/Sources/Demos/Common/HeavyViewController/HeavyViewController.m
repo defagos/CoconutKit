@@ -8,7 +8,10 @@
 
 #import "HeavyViewController.h"
 
-@implementation HeavyViewController
+@implementation HeavyViewController {
+@private
+    void *_largeBlock;
+}
 
 #pragma mark Object creation and destruction
 

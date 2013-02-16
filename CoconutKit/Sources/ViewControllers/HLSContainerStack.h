@@ -125,18 +125,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Designated initializer: -initWithContainerViewController:behavior:capacity:
  */
-@interface HLSContainerStack : NSObject <HLSAnimationDelegate> {
-@private
-    UIViewController *_containerViewController;               // The container view controller implemented using HLSContainerStack
-    NSMutableArray *_containerContents;                       // The contents loaded into the stack. The first element corresponds to the root view controller
-    UIView *_containerView;                                   // The view where the stack displays its contents
-    HLSContainerStackBehavior _behavior;                      // How the container manages its child view controllers
-    NSUInteger _capacity;                                     // The maximum number of top view controllers loaded / not removed at any time
-    BOOL _animating;                                          // Set to YES when a transition animation is running
-    BOOL _rotating;
-    HLSAutorotationMode _autorotationMode;                    // How the container decides to behave when rotation occurs
-    id<HLSContainerStackDelegate> _delegate;                  // The stack delegate, usually the custom container which is implemented
-}
+@interface HLSContainerStack : NSObject <HLSAnimationDelegate>
 
 /**
  * Convenience constructor to instantiate a stack containing at most one child view controller

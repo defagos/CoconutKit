@@ -11,9 +11,5 @@
 /**
  * Same as HLSTableViewCell, but with UITableViewCellStyleSubtitle as style
  */
-@interface HLSSubtitleTableViewCell : HLSTableViewCell {
-@private
-    
-}
-
+@interface HLSSubtitleTableViewCell : HLSTableViewCell
 @end

@@ -43,12 +43,7 @@
  *
  * Designated initializer: -initWithModelFileName:storeType:configuration:storeDirectory:options:
  */
-@interface HLSModelManager : NSObject {
-@private
-    NSManagedObjectModel *_managedObjectModel;
-    NSPersistentStoreCoordinator *_persistentStoreCoordinator;
-    NSManagedObjectContext *_managedObjectContext;
-}
+@interface HLSModelManager : NSObject
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,

@@ -9,20 +9,7 @@
 /**
  * Designated initializer: -init
  */
-@interface CursorDemoViewController : HLSViewController <HLSCursorDataSource, HLSCursorDelegate> {
-@private
-    HLSCursor *_weekDaysCursor;
-    UILabel *_weekDayIndexLabel;
-    HLSCursor *_randomRangeCursor;
-    UILabel *_randomRangeIndexLabel;
-    UISlider *_widthFactorSlider;
-    UISlider *_heightFactorSlider;
-    HLSCursor *_timeScalesCursor;
-    HLSCursor *_foldersCursor;
-    HLSCursor *_mixedFoldersCursor;
-    UIPopoverController *_currentPopoverController;
-    CGSize _originalRandomRangeCursorSize;
-}
+@interface CursorDemoViewController : HLSViewController <HLSCursorDataSource, HLSCursorDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
 @property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;

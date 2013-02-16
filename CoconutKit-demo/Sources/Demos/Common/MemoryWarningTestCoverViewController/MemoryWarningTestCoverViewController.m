@@ -25,10 +25,6 @@
     self.closeBarButtonItem = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize closeBarButtonItem = _closeBarButtonItem;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

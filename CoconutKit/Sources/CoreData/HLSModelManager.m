@@ -284,14 +284,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize managedObjectModel = _managedObjectModel;
-
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-@synthesize managedObjectContext = _managedObjectContext;
-
 #pragma mark Initialization
 
 - (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle

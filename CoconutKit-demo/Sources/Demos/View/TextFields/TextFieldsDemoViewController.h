@@ -6,13 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface TextFieldsDemoViewController : HLSViewController <UITextFieldDelegate> {
-@private
-    HLSTextField *_textField1;
-    HLSTextField *_textField2;
-    HLSTextField *_textField3;
-    HLSTextField *_textField4;
-}
+@interface TextFieldsDemoViewController : HLSViewController <UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField2;

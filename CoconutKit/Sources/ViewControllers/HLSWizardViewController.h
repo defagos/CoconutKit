@@ -40,15 +40,7 @@ typedef enum {
  *
  * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSWizardViewController : HLSPlaceholderViewController {
-@private
-    UIButton *_previousButton;
-    UIButton *_nextButton;
-    UIButton *_doneButton;
-    NSArray *_viewControllers;
-    HLSWizardTransitionStyle _wizardTransitionStyle;
-    NSInteger _currentPage;
-}
+@interface HLSWizardViewController : HLSPlaceholderViewController
 
 /**
  * The wizard buttons. Create them either using Interface Builder or by implementing a loadview. Do not attempt

@@ -46,20 +46,7 @@
  *
  * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSTableSearchDisplayViewController : HLSViewController <
-    UISearchDisplayDelegate,
-    UITableViewDataSource,
-    UITableViewDelegate
-> {
-@private
-    UISearchBar *_searchBar;
-    UITableView *_tableView;
-    NSString *_searchText;
-    NSInteger _selectedScopeButtonIndex;
-    BOOL _searchInterfaceActive;
-    UISearchDisplayController *_searchController;
-    BOOL _firstLoad;
-}
+@interface HLSTableSearchDisplayViewController : HLSViewController <UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate>
 
 /**
  * The search bar is created and managed for you, but you can use this accessor for customizing it if needed. This search bar is available

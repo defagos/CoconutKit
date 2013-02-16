@@ -11,10 +11,7 @@
  * increased. For the moment only UIWebView is preloaded so that the time usually required when instantiating the first
  * web view is reduced
  */
-@interface HLSApplicationPreloader : NSObject <UIWebViewDelegate> {
-@private
-    UIApplication *_application;
-}
+@interface HLSApplicationPreloader : NSObject <UIWebViewDelegate>
 
 /**
  * Call this method as soon as possible if you want to enable preloading. For simplicity you should use the

@@ -10,25 +10,6 @@
 
 @implementation StretchableViewController
 
-#pragma mark Object creation and destruction
-
-- (id)initLarge:(BOOL)large
-{
-    if ((self = [super initWithNibName:large ? @"StretchableLargeViewController" : @"StretchableViewController" bundle:nil])) {
-        self.large = large;
-    }
-    return self;
-}
-
-- (id)init
-{
-    return [self initLarge:NO];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize large = _large;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -44,7 +25,7 @@
 {
     [super localize];
     
-    self.title = self.isLarge ? @"StretchableViewController (large)" : @"StretchableViewController";
+    self.title = @"StretchableViewController";
 }
 
 @end

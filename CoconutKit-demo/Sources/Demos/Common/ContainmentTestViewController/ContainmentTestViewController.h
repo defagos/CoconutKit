@@ -6,10 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface ContainmentTestViewController : HLSViewController {
-@private
-    UISwitch *_presentingModalSwitch;
-}
+@interface ContainmentTestViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;
 

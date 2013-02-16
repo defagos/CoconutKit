@@ -32,10 +32,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize lockedDInstance = _lockedDInstance;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass

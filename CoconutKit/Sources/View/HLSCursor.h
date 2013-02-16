@@ -37,28 +37,7 @@
  *
  * Designated initializer: -initWithFrame:
  */
-@interface HLSCursor : UIView <HLSAnimationDelegate> {
-@private
-    NSArray *_elementWrapperViews;
-    NSArray *_elementWrapperViewSizeValues;
-    UIView *_pointerView;
-    UIView *_pointerContainerView;
-    CGSize _pointerViewTopLeftOffset;
-    CGSize _pointerViewBottomRightOffset;
-    NSTimeInterval _animationDuration;
-    NSUInteger _selectedIndex;
-    CGFloat _initialDraggingXOffset;
-    BOOL _moved;
-    BOOL _moving;
-    BOOL _dragging;
-    BOOL _holding;
-    BOOL _creatingViews;
-    BOOL _viewsCreated;
-    NSUInteger _initialIndex;
-    CGFloat _spacing;
-    id<HLSCursorDataSource> _dataSource;
-    id<HLSCursorDelegate> _delegate;
-}
+@interface HLSCursor : UIView <HLSAnimationDelegate>
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.

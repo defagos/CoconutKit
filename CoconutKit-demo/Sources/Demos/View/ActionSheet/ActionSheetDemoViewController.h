@@ -6,11 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface ActionSheetDemoViewController : HLSViewController {
-@private
-    UIToolbar *_toolbar;
-    UILabel *_choiceLabel;
-}
+@interface ActionSheetDemoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UILabel *choiceLabel;

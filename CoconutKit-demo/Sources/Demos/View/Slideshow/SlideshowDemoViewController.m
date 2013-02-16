@@ -40,40 +40,6 @@
     self.transitionDurationLabel = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize slideshow = _slideshow;
-
-@synthesize effectPickerView = _effectPickerView;
-
-@synthesize currentImageNameLabel = _currentImageNameLabel;
-
-@synthesize previousButton = _previousButton;
-
-@synthesize nextButton = _nextButton;
-
-@synthesize playButton = _playButton;
-
-@synthesize pauseButton = _pauseButton;
-
-@synthesize resumeButton = _resumeButton;
-
-@synthesize stopButton = _stopButton;
-
-@synthesize skipToSpecificButton = _skipToSpecificButton;
-
-@synthesize randomSwitch = _randomSwitch;
-
-@synthesize imageSetButton = _imageSetButton;
-
-@synthesize imageDurationSlider = _imageDurationSlider;
-
-@synthesize imageDurationLabel = _imageDurationLabel;
-
-@synthesize transitionDurationSlider = _transitionDurationSlider;
-
-@synthesize transitionDurationLabel = _transitionDurationLabel;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

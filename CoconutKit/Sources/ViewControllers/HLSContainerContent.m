@@ -39,14 +39,13 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 @interface HLSContainerContent ()
 
-@property (nonatomic, retain) UIViewController *viewController;
-@property (nonatomic, assign) UIViewController *containerViewController;        // weak ref
-
-@property (nonatomic, assign) Class transitionClass;
-@property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, assign) HLSContainerStackView *containerStackView;        // weak ref
-@property (nonatomic, assign) CGRect originalViewFrame;
-@property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;
+@property (nonatomic, retain) UIViewController *viewController;                 // The embedded view controller
+@property (nonatomic, assign) UIViewController *containerViewController;        // The container it is inserted into (weak ref)
+@property (nonatomic, assign) Class transitionClass;                            // The transition animation class used when inserting the view controller
+@property (nonatomic, assign) NSTimeInterval duration;                          // The transition animation duration
+@property (nonatomic, assign) HLSContainerStackView *containerStackView;        // The container stack view into which the view controller's view is inserted (weak ref)
+@property (nonatomic, assign) CGRect originalViewFrame;                         // The view controller's view frame prior to insertion
+@property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;      // The view controller's view autoresizing mask prior to insertion
 @property (nonatomic, assign) BOOL movingToParentViewController;
 @property (nonatomic, assign) BOOL movingFromParentViewController;
 
@@ -211,14 +210,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 #pragma mark Accessors and mutators
 
-@synthesize viewController = _viewController;
-
-@synthesize containerViewController = _containerViewController;
-
-@synthesize transitionClass = _transitionClass;
-
-@synthesize duration = _duration;
-
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
@@ -231,20 +222,10 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     }
 }
 
-@synthesize containerStackView = _containerStackView;
-
 - (BOOL)isAddedToContainerView
 {
     return self.containerStackView != nil;
 }
-
-@synthesize originalViewFrame = _originalViewFrame;
-
-@synthesize originalAutoresizingMask = _originalAutoresizingMask;
-
-@synthesize movingToParentViewController = _movingToParentViewController;
-
-@synthesize movingFromParentViewController = _movingFromParentViewController;
 
 - (UIView *)viewIfLoaded
 {

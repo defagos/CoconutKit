@@ -21,10 +21,6 @@
     self.presentingModalSwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize presentingModalSwitch = _presentingModalSwitch;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

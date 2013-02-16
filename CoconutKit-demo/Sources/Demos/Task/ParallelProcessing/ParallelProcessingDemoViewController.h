@@ -6,35 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface ParallelProcessingDemoViewController : HLSViewController <HLSTaskDelegate, HLSTaskGroupDelegate> {
-@private
-    UIButton *_taskStartButton;
-    UIButton *_taskStopButton;
-    UIProgressView *_taskProgressView;
-    UILabel *_taskRemainingTimeEstimateLabel;
-    UILabel *_taskRemainingTimeLabel;
-    
-    UIButton *_taskGroupStartButton;
-    UIButton *_taskGroupStopButton;
-    UIProgressView *_taskGroupProgressView;
-    UILabel *_taskGroupRemainingTimeEstimateLabel;
-    UILabel *_taskGroupRemainingTimeLabel;
-    
-    UIButton *_subTask1StopButton;
-    UIProgressView *_subTask1ProgressView;
-    UILabel *_subTask1RemainingTimeEstimateLabel;
-    UILabel *_subTask1RemainingTimeLabel;
-    
-    UIButton *_subTask2StopButton;
-    UIProgressView *_subTask2ProgressView;
-    UILabel *_subTask2RemainingTimeEstimateLabel;
-    UILabel *_subTask2RemainingTimeLabel;
-
-    UIButton *_subTask3StopButton;
-    UIProgressView *_subTask3ProgressView;
-    UILabel *_subTask3RemainingTimeEstimateLabel;
-    UILabel *_subTask3RemainingTimeLabel;    
-}
+@interface ParallelProcessingDemoViewController : HLSViewController <HLSTaskDelegate, HLSTaskGroupDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton *taskStartButton;
 @property (nonatomic, retain) IBOutlet UIButton *taskStopButton;

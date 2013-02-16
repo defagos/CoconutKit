@@ -93,18 +93,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize managedObject = _managedObject;
-
-@synthesize fieldName = _fieldName;
-
-@synthesize formatter = _formatter;
-
-@synthesize validationDelegate = _validationDelegate;
-
-@synthesize checkingOnChange = _checkingOnChange;
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

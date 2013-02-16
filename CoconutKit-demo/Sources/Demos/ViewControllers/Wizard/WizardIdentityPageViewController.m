@@ -65,8 +65,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = _person;
-
 - (void)setPerson:(Person *)person
 {
     if (_person == person) {
@@ -78,30 +76,6 @@
     
     [self reloadData];
 }
-
-@synthesize firstNameTextField = _firstNameTextField;
-
-@synthesize firstNameErrorLabel = _firstNameErrorLabel;
-
-@synthesize lastNameTextField = _lastNameTextField;
-
-@synthesize lastNameErrorLabel = _lastNameErrorLabel;
-
-@synthesize emailTextField = _emailTextField;
-
-@synthesize emailErrorLabel = _emailErrorLabel;
-
-@synthesize birthdateLabel = _birthdateLabel;
-
-@synthesize birthdateTextField = _birthdateTextField;
-
-@synthesize birthdateErrorLabel = _birthdateErrorLabel;
-
-@synthesize nbrChildrenTextField = _nbrChildrenTextField;
-
-@synthesize nbrChildrenErrorLabel = _nbrChildrenErrorLabel;
-
-@synthesize dateFormatter = _dateFormatter;
 
 #pragma mark View lifecycle
 

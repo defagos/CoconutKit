@@ -36,32 +36,6 @@
     self.bouncesSwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize textView = _textView;
-
-@synthesize skyScrapperScrollView = _skyScrapperScrollView;
-
-@synthesize skyScrapperImageView = _skyScrapperImageView;
-
-@synthesize skyScrollView = _skyScrollView;
-
-@synthesize mountainsScrollView = _mountainsScrollView;
-
-@synthesize grassScrollView = _grassScrollView;
-
-@synthesize treesScrollView = _treesScrollView;
-
-@synthesize skyImageView = _skyImageView;
-
-@synthesize mountainsImageView = _mountainsImageView;
-
-@synthesize grassImageView = _grassImageView;
-
-@synthesize treesImageView = _treesImageView;
-
-@synthesize bouncesSwitch = _bouncesSwitch;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

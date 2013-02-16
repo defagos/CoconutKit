@@ -39,24 +39,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize calendar = _calendar;
-
-@synthesize timeZoneZurich = _timeZoneZurich;
-
-@synthesize timeZoneTahiti = _timeZoneTahiti;
-
-@synthesize date1 = _date1;
-
-@synthesize date2 = _date2;
-
-@synthesize date3 = _date3;
-
-@synthesize date4 = _date4;
-
-@synthesize date5 = _date5;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass

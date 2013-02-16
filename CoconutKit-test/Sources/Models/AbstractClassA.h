@@ -1,8 +1,4 @@
 #import "_AbstractClassA.h"
 
-@interface AbstractClassA : _AbstractClassA {
-@private
-    
-}
-
+@interface AbstractClassA : _AbstractClassA
 @end

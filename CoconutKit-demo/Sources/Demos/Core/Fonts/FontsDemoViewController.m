@@ -20,12 +20,6 @@
     self.webView = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize label = _label;
-
-@synthesize webView = _webView;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

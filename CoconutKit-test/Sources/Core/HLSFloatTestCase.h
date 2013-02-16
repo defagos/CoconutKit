@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface HLSFloatTestCase : GHTestCase {
-@private
-    
-}
-
+@interface HLSFloatTestCase : GHTestCase
 @end

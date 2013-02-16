@@ -6,14 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface RootNavigationDemoViewController : HLSViewController {
-@private
-    UISwitch *_portraitSwitch;
-    UISwitch *_landscapeRightSwitch;
-    UISwitch *_landscapeLeftSwitch;
-    UISwitch *_portraitUpsideDownSwitch;
-    UISegmentedControl *_autorotationModeSegmentedControl;
-}
+@interface RootNavigationDemoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;

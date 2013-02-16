@@ -26,27 +26,7 @@
  *
  * Designated initializer: -init:
  */
-@interface HLSTaskGroup : NSObject {
-@private
-    NSString *_tag;
-    NSDictionary *_userInfo;
-    NSMutableSet *_taskSet;                                     // contains HLSTask objects
-    // Dependencies between tasks are saved in both directions for faster lookup
-    NSMutableDictionary *_weakTaskDependencyMap;                // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
-    NSMutableDictionary *_strongTaskDependencyMap;              // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
-    NSMutableDictionary *_taskToWeakDependentsMap;              // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
-    NSMutableDictionary *_taskToStrongDependentsMap;            // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
-    BOOL _running;
-    BOOL _finished;
-    BOOL _cancelled;
-    float _progress;                            // all individual progress values added
-    float _fullProgress;                        // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
-    NSTimeInterval _remainingTimeIntervalEstimate;
-    NSDate *_lastEstimateDate;                  // date & time when the remaining time was previously estimated ...
-    float _lastEstimateFullProgress;            // ... and corresponding progress value 
-    NSUInteger _fullProgressStepsCounter;     
-    NSUInteger _nbrFailures;
-}
+@interface HLSTaskGroup : NSObject
 
 /**
  * Optional tag to identify a task group

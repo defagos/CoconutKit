@@ -10,7 +10,10 @@
 
 #import "SleepTaskOperation.h"
 
-@implementation SleepTask
+@implementation SleepTask {
+@private
+    NSUInteger _secondsToSleep;
+}
 
 #pragma mark Object creation and destruction
 

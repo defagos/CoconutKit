@@ -16,8 +16,6 @@ static const NSInteger kBackgroundImageViewTag = 28756;         // Very unlikely
 
 #pragma mark Accessors and mutators
 
-@dynamic backgroundImage;
-
 - (UIImage *)backgroundImage
 {
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];

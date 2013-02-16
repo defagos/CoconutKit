@@ -29,12 +29,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize person1 = _person1;
-
-@synthesize person2 = _person2;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass

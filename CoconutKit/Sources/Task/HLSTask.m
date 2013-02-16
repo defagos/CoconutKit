@@ -22,18 +22,21 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;
+@property (nonatomic, retain) NSDate *lastEstimateDate;         // date & time when the remaining time was previously estimated
 @property (nonatomic, retain) NSDictionary *returnInfo;
 @property (nonatomic, retain) NSError *error;
-@property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
+@property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
 
 - (void)reset;
 
 @end
 
-@implementation HLSTask
+@implementation HLSTask {
+@private
+    float _lastEstimateProgress;            // Progress value when the remaining time was previously estimated (lastEstimateDate)
+    NSUInteger _progressStepsCounter;
+}
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -55,7 +58,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     [super dealloc];
 }
 
-#pragma mark -
 #pragma mark Accessors and mutators
 
 - (Class)operationClass
@@ -63,18 +65,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     HLSLoggerError(@"No operation class attached to task class %@", [self class]);
     return NULL;
 }
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize running = _running;
-
-@synthesize finished = _finished;
-
-@synthesize cancelled = _cancelled;
-
-@synthesize progress = _progress;
 
 - (void)setProgress:(float)progress
 {
@@ -125,8 +115,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
-
 - (NSTimeInterval)remainingTimeIntervalEstimate
 {
     if (! self.finished &&  ! self.cancelled) {
@@ -136,14 +124,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
         return kTaskNoTimeIntervalEstimateAvailable;
     }
 }
-
-@synthesize lastEstimateDate = _lastEstimateDate;
-
-@synthesize returnInfo = _returnInfo;
-
-@synthesize error = _error;
-
-@synthesize taskGroup = _taskGroup;
 
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
@@ -172,7 +152,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     }
 }
 
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset

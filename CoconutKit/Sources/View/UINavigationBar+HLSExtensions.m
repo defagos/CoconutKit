@@ -51,8 +51,6 @@ static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *sel
 
 #pragma mark Accessors and mutators
 
-@dynamic backgroundImage;
-
 - (UIImage *)backgroundImage
 {
     UIImageView *backgroundImageView = (UIImageView *)[self viewWithTag:kBackgroundImageViewTag];

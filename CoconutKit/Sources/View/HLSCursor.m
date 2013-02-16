@@ -40,7 +40,19 @@
 
 @end
 
-@implementation HLSCursor
+@implementation HLSCursor {
+@private
+    NSUInteger _selectedIndex;
+    CGFloat _initialDraggingXOffset;
+    BOOL _moved;
+    BOOL _moving;
+    BOOL _dragging;
+    BOOL _holding;
+    BOOL _creatingViews;
+    BOOL _viewsCreated;
+    NSUInteger _initialIndex;
+    CGFloat _spacing;
+}
 
 #pragma mark Object creation and destruction
 
@@ -83,14 +95,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize elementWrapperViews = _elementWrapperViews;
-
-@synthesize elementWrapperViewSizeValues = _elementWrapperViewSizeValues;
-
-@synthesize pointerContainerView = _pointerContainerView;
-
-@synthesize pointerView = _pointerView;
-
 - (void)setPointerView:(UIView *)pointerView
 {
     if (_pointerView) {
@@ -100,16 +104,6 @@
     
     _pointerView = [pointerView retain];
 }
-
-@synthesize animationDuration = _animationDuration;
-
-@synthesize pointerViewTopLeftOffset = _pointerViewTopLeftOffset;
-
-@synthesize pointerViewBottomRightOffset = _pointerViewBottomRightOffset;
-
-@synthesize dataSource = _dataSource;
-
-@synthesize delegate = _delegate;
 
 #pragma mark Layout
 

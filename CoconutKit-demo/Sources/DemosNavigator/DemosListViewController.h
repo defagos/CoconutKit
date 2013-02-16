@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface DemosListViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate> {
-@private
-    
-}
-
+@interface DemosListViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
 @end

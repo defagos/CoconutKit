@@ -9,9 +9,5 @@
 /**
  * A view controller which only supports portrait orientation
  */
-@interface PortraitOnlyViewController : HLSViewController {
-@private
-    
-}
-
+@interface PortraitOnlyViewController : HLSViewController
 @end

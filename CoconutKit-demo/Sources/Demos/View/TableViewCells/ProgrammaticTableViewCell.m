@@ -36,8 +36,4 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize label = _label;
-
 @end

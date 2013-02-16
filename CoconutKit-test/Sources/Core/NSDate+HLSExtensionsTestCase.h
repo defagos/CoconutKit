@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface NSDate_HLSExtensionsTestCase : GHTestCase {
-@private
-
-}
-
+@interface NSDate_HLSExtensionsTestCase : GHTestCase
 @end

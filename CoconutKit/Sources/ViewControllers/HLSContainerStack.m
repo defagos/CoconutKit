@@ -24,9 +24,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
-@property (nonatomic, assign) UIViewController *containerViewController;
-@property (nonatomic, retain) NSMutableArray *containerContents;
-@property (nonatomic, assign) NSUInteger capacity;
+@property (nonatomic, assign) UIViewController *containerViewController;                // The container view controller implemented using HLSContainerStack
+@property (nonatomic, retain) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
+@property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 
 - (HLSContainerContent *)topContainerContent;
 - (HLSContainerContent *)secondTopContainerContent;
@@ -41,7 +41,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @end
 
-@implementation HLSContainerStack
+@implementation HLSContainerStack {
+@private
+    HLSContainerStackBehavior _behavior;                      // How the container manages its child view controllers
+    BOOL _animating;                                          // Set to YES when a transition animation is running
+    BOOL _rotating;                                           // Set to YES when a rotation is being made
+    HLSAutorotationMode _autorotationMode;                    // How the container decides to behave when rotation occurs
+}
 
 #pragma mark Class methods
 
@@ -92,12 +98,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Accessors and mutators
 
-@synthesize containerViewController = _containerViewController;
-
-@synthesize containerContents = _containerContents;
-
-@synthesize containerView = _containerView;
-
 - (void)setContainerView:(UIView *)containerView
 {
     if (_containerView == containerView) {
@@ -133,8 +133,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return [self.containerView.subviews firstObject_hls];
 }
 
-@synthesize capacity = _capacity;
-
 - (void)setCapacity:(NSUInteger)capacity
 {
     if (capacity < HLSContainerStackMinimalCapacity) {
@@ -144,10 +142,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     _capacity = capacity;
 }
-
-@synthesize autorotationMode = _autorotationMode;
-
-@synthesize delegate = _delegate;
 
 - (HLSContainerContent *)topContainerContent
 {

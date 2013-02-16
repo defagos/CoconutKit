@@ -9,10 +9,7 @@
 /**
  * Designated initializer: -initWithFrame:
  */
-@interface CursorSelectedFolderView : HLSNibView {
-@private
-    UILabel *_nameLabel;
-}
+@interface CursorSelectedFolderView : HLSNibView
 
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 

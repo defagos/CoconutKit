@@ -21,14 +21,6 @@
     self.missingLocalizationVisibilitySwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize coloredLabel = _coloredLabel;
-
-@synthesize imageView = _imageView;
-
-@synthesize missingLocalizationVisibilitySwitch = _missingLocalizationVisibilitySwitch;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

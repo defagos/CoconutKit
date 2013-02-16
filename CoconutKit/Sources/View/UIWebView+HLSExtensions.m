@@ -41,8 +41,6 @@ static UIScrollView *scrollView_Imp(UIWebView *self, SEL _cmd);
     self.backgroundColor = [UIColor clearColor];
 }
 
-@dynamic shadowHidden;
-
 - (BOOL)isShadowHidden
 {
     for (UIView *shadowView in [self shadowViews]) {

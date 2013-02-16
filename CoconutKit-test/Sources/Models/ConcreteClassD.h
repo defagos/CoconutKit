@@ -1,8 +1,4 @@
 #import "_ConcreteClassD.h"
 
-@interface ConcreteClassD : _ConcreteClassD {
-@private
-    
-}
-
+@interface ConcreteClassD : _ConcreteClassD
 @end

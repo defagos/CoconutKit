@@ -6,11 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface WebViewDemoViewController : HLSViewController {
-@private
-    UIWebView *_webView;
-    UISwitch *_scrollEnabledSwitch;
-}
+@interface WebViewDemoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UISwitch *scrollEnabledSwitch;

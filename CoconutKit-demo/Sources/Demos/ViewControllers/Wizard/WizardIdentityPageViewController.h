@@ -6,25 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class Person;
-
-@interface WizardIdentityPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
-@private
-    Person *_person;
-    HLSTextField *_firstNameTextField;
-    UILabel *_firstNameErrorLabel;
-    HLSTextField *_lastNameTextField;
-    UILabel *_lastNameErrorLabel;
-    HLSTextField *_emailTextField;
-    UILabel *_emailErrorLabel;
-    UILabel *_birthdateLabel;
-    HLSTextField *_birthdateTextField;
-    UILabel *_birthdateErrorLabel;
-    HLSTextField *_nbrChildrenTextField;
-    UILabel *_nbrChildrenErrorLabel;
-    NSDateFormatter *_dateFormatter;
-}
+@interface WizardIdentityPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSTextField *firstNameTextField;
 @property (nonatomic, retain) IBOutlet UILabel *firstNameErrorLabel;

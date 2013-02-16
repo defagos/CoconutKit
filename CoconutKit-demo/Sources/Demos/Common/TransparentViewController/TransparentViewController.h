@@ -9,9 +9,5 @@
 /**
  * Designated initializer: -init
  */
-@interface TransparentViewController : HLSViewController {
-@private
-    
-}
-
+@interface TransparentViewController : HLSViewController
 @end

@@ -6,19 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface RootStackDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
-@private
-    UIBarButtonItem *_backBarButtonItem;
-    UIBarButtonItem *_actionSheetBarButtonItem;
-    UIButton *_popButton;
-    UIPickerView *_transitionPickerView;
-    UISwitch *_animatedSwitch;
-    UISwitch *_portraitSwitch;
-    UISwitch *_landscapeRightSwitch;
-    UISwitch *_landscapeLeftSwitch;
-    UISwitch *_portraitUpsideDownSwitch;
-    UISegmentedControl *_autorotationModeSegmentedControl;
-}
+@interface RootStackDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *actionSheetBarButtonItem;

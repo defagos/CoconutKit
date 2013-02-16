@@ -76,26 +76,6 @@ typedef enum {
     self.autorotationModeSegmentedControl = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize heavyButton = _heavyButton;
-
-@synthesize transitionPickerView = _transitionPickerView;
-
-@synthesize inTabBarControllerSwitch = _inTabBarControllerSwitch;
-
-@synthesize inNavigationControllerSwitch = _inNavigationControllerSwitch;
-
-@synthesize leftPlaceholderSwitch = _leftPlaceholderSwitch;
-
-@synthesize rightPlaceholderSwitch = _rightPlaceholderSwitch;
-
-@synthesize leftHeavyViewController = _leftHeavyViewController;
-
-@synthesize rightHeavyViewController = _rightHeavyViewController;
-
-@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

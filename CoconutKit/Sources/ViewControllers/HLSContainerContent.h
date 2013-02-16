@@ -62,18 +62,7 @@
  * 
  * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
-@interface HLSContainerContent : NSObject {
-@private
-    UIViewController *_viewController;                         // The embedded view controller
-    UIViewController *_containerViewController;                // The container it is inserted into
-    Class _transitionClass;                                    // The transition animation class used when inserting the view controller
-    NSTimeInterval _duration;                                  // The transition animation duration
-    HLSContainerStackView *_containerStackView;                // The container stack view into which the view controller's view is inserted
-    CGRect _originalViewFrame;                                 // The view controller's view frame prior to insertion
-    UIViewAutoresizing _originalAutoresizingMask;              // The view controller's view autoresizing mask prior to insertion
-    BOOL _movingToParentViewController;
-    BOOL _movingFromParentViewController;
-}
+@interface HLSContainerContent : NSObject
 
 /**
  * Return the CoconutKit-based container into which a view controller has been inserted into (if any). If a class parameter 

@@ -1,8 +1,4 @@
 #import "_Person.h"
 
-@interface Person : _Person {
-@private
-    
-}
-
+@interface Person : _Person
 @end

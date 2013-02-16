@@ -81,12 +81,6 @@ typedef enum {
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize devices = _devices;
-
-@synthesize filteredDevices = _filteredDevices;
-
 #pragma mark UISearchDisplayDelegate protocol implementation
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller

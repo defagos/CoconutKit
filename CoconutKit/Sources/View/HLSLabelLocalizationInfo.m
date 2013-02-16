@@ -58,16 +58,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize localizationKey = _localizationKey;
-
-@synthesize tableName = _tableName;
-
-@synthesize representation = _representation;
-
-@synthesize locked = _locked;
-
 #pragma mark Parsing text
 
 - (void)parseText:(NSString *)text

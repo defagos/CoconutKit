@@ -22,7 +22,10 @@
 
 @end
 
-@implementation HLSPlaceholderViewController
+@implementation HLSPlaceholderViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
@@ -86,12 +89,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize containerStacks = _containerStacks;
-
-@synthesize placeholderViews = _placeholderViews;
-
-@synthesize autorotationMode = _autorotationMode;
-
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {    
     _autorotationMode = autorotationMode;
@@ -100,8 +97,6 @@
         containerStack.autorotationMode = autorotationMode;
     }
 }
-
-@synthesize delegate = _delegate;
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index
 {

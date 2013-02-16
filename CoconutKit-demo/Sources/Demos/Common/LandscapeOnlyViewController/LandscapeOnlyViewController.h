@@ -9,9 +9,5 @@
 /**
  * A view controller which only supports landscape orientation
  */
-@interface LandscapeOnlyViewController : HLSViewController {
-@private
-    
-}
-
+@interface LandscapeOnlyViewController : HLSViewController
 @end

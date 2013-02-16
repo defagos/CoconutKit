@@ -6,21 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class HeavyViewController;
-
-@interface PlaceholderDemoViewController : HLSPlaceholderViewController <HLSPlaceholderViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
-@private
-    UIButton *_heavyButton;
-    UIPickerView *_transitionPickerView;
-    UISwitch *_inTabBarControllerSwitch;
-    UISwitch *_inNavigationControllerSwitch;
-    UISwitch *_leftPlaceholderSwitch;
-    UISwitch *_rightPlaceholderSwitch;
-    HeavyViewController *_leftHeavyViewController;
-    HeavyViewController *_rightHeavyViewController;
-    UISegmentedControl *_autorotationModeSegmentedControl;
-}
+@interface PlaceholderDemoViewController : HLSPlaceholderViewController <HLSPlaceholderViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton *heavyButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;

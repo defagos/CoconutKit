@@ -28,10 +28,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSNotificationManager : NSObject {
-@private
-    NSUInteger _networkActivityCount;
-}
+@interface HLSNotificationManager : NSObject
 
 /**
  * Get the shared object managing application-wide notifications

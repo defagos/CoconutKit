@@ -9,10 +9,7 @@
 /**
  * Designated initializer: -init
  */
-@interface CursorPointerInfoViewController : HLSViewController {
-@private
-    UILabel *_valueLabel;
-}
+@interface CursorPointerInfoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;
 

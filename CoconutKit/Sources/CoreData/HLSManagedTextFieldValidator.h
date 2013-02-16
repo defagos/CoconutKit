@@ -15,14 +15,7 @@
  *
  * Designated initializer: -initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
-@interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate {
-@private
-    NSManagedObject *_managedObject;
-    NSString *_fieldName;
-    NSFormatter *_formatter;
-    id<HLSTextFieldValidationDelegate> _validationDelegate;
-    BOOL _checkingOnChange;
-}
+@interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate
 
 /**
  * Initialize with a managed object and the field we want to validate, as well as a delegate which must receive

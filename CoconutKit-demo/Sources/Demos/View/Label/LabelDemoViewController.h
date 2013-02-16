@@ -6,31 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface LabelDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
-@private
-    HLSLabel *_label;
-    UILabel *_standardLabel;
-    
-    UIPickerView *_textPickerView;
-    UIPickerView *_fontPickerView;
-    
-    UISegmentedControl *_baselineAdjustmentSegmentedControl;
-    
-    UISlider *_numberOfLinesSlider;
-    UILabel *_numberOfLinesLabel;
-    
-    UISlider *_fontSizeSlider;
-    UILabel *_fontSizeLabel;
-    
-    UISwitch *_adjustsFontSizeToFitWidthSwitch;
-    
-    UISlider *_minFontSizeSlider;
-    UILabel *_minFontSizeLabel;
-    
-    UISegmentedControl *_verticalAlignmentSegmentedControl;
-    
-    UIPickerView *_lineBreakModePickerView;
-}
+@interface LabelDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSLabel *label;
 @property (nonatomic, retain) IBOutlet UILabel *standardLabel;

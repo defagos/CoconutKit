@@ -16,10 +16,7 @@
  *
  * Designated initializer: -initWithDomain:Code:
  */
-@interface HLSError : NSError {
-@private
-    NSDictionary *_internalUserInfo;
-}
+@interface HLSError : NSError
 
 /**
  * Instantiate an error with some code within a domain. The error is created with no information, use the mutators below to 

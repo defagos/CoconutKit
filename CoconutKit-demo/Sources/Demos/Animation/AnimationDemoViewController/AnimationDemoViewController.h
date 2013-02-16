@@ -6,33 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface AnimationDemoViewController : HLSViewController <HLSAnimationDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
-@private
-    UIView *_rectangleView1;
-    UIView *_rectangleView2;
-    UIPickerView *_animationPickerView;
-    UIButton *_playButton;
-    UIButton *_pauseButton;
-    UIButton *_cancelButton;
-    UIButton *_terminateButton;
-    UIView *_settingsView;
-    UISwitch *_reverseSwitch;
-    UISwitch *_lockingUISwitch;
-    UISwitch *_loopingSwitch;
-    UISwitch *_animatedSwitch;
-    UISlider *_repeatCountSlider;
-    UILabel *_repeatCountLabel;
-    UIView *_animatedSettingsView;
-    UISlider *_durationSlider;
-    UILabel *_durationLabel;
-    UIView *_delayBackgroundView;
-    UISlider *_delaySlider;
-    UILabel *_delayLabel;
-    UIView *_startTimeBackgroundView;
-    UISlider *_startTimeSlider;
-    UILabel *_startTimeLabel;
-    HLSAnimation *_animation;
-}
+@interface AnimationDemoViewController : HLSViewController <HLSAnimationDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView1;
 @property (nonatomic, retain) IBOutlet UIView *rectangleView2;

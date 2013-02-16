@@ -6,62 +6,7 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface LayerPropertiesTestViewController : HLSViewController {
-@private
-    UIView *_rectangleView;
-    UIView *_topSubview;
-    UIView *_bottomSubview;
-    
-    UISlider *_transformTxSlider;
-    UILabel *_transformTxLabel;
-    UISlider *_transformTySlider;
-    UILabel *_transformTyLabel;
-    UISlider *_transformTzSlider;
-    UILabel *_transformTzLabel;
-    UISlider *_transformRxSlider;
-    UILabel *_transformRxLabel;
-    UISlider *_transformRySlider;
-    UILabel *_transformRyLabel;
-    UISlider *_transformRzSlider;
-    UILabel *_transformRzLabel;
-    UISlider *_transformSxSlider;
-    UILabel *_transformSxLabel;
-    UISlider *_transformSySlider;
-    UILabel *_transformSyLabel;
-    UISlider *_transformSzSlider;
-    UILabel *_transformSzLabel;
-    
-    UISlider *_sublayerTransformTxSlider;
-    UILabel *_sublayerTransformTxLabel;
-    UISlider *_sublayerTransformTySlider;
-    UILabel *_sublayerTransformTyLabel;
-    UISlider *_sublayerTransformTzSlider;
-    UILabel *_sublayerTransformTzLabel;
-    UISlider *_sublayerTransformRxSlider;
-    UILabel *_sublayerTransformRxLabel;
-    UISlider *_sublayerTransformRySlider;
-    UILabel *_sublayerTransformRyLabel;
-    UISlider *_sublayerTransformRzSlider;
-    UILabel *_sublayerTransformRzLabel;
-    UISlider *_sublayerTransformSxSlider;
-    UILabel *_sublayerTransformSxLabel;
-    UISlider *_sublayerTransformSySlider;
-    UILabel *_sublayerTransformSyLabel;
-    UISlider *_sublayerTransformSzSlider;
-    UILabel *_sublayerTransformSzLabel;
-    UISlider *_sublayerTransformSkewSlider;
-    UILabel *_sublayerTransformSkewLabel;
-
-    UISlider *_anchorPointXSlider;
-    UILabel *_anchorPointXLabel;
-    UISlider *_anchorPointYSlider;
-    UILabel *_anchorPointYLabel;
-    UISlider *_anchorPointZSlider;
-    UILabel *_anchorPointZLabel;
-    
-    UISlider *_viewSublayerTransformSkewSlider;
-    UILabel *_viewSublayerTransformSkewLabel;
-}
+@interface LayerPropertiesTestViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UIView *rectangleView;
 @property (nonatomic, retain) IBOutlet UIView *topSubview;

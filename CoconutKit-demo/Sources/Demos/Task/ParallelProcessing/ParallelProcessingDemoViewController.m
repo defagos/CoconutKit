@@ -115,52 +115,6 @@
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize taskStartButton = _taskStartButton;
-
-@synthesize taskStopButton = _taskStopButton;
-
-@synthesize taskProgressView = _taskProgressView;
-
-@synthesize taskRemainingTimeEstimateLabel = _taskRemainingTimeEstimateLabel;
-
-@synthesize taskRemainingTimeLabel = _taskRemainingTimeLabel;
-
-@synthesize taskGroupStartButton = _taskGroupStartButton;
-
-@synthesize taskGroupStopButton = _taskGroupStopButton;
-
-@synthesize taskGroupProgressView = _taskGroupProgressView;
-
-@synthesize taskGroupRemainingTimeEstimateLabel = _taskGroupRemainingTimeEstimateLabel;
-
-@synthesize taskGroupRemainingTimeLabel = _taskGroupRemainingTimeLabel;
-
-@synthesize subTask1StopButton = _subTask1StopButton;
-
-@synthesize subTask1ProgressView = _subTask1ProgressView;
-
-@synthesize subTask1RemainingTimeEstimateLabel = _subTask1RemainingTimeEstimateLabel;
-
-@synthesize subTask1RemainingTimeLabel = _subTask1RemainingTimeLabel;
-
-@synthesize subTask2StopButton = _subTask2StopButton;
-
-@synthesize subTask2ProgressView = _subTask2ProgressView;
-
-@synthesize subTask2RemainingTimeEstimateLabel = _subTask2RemainingTimeEstimateLabel;
-
-@synthesize subTask2RemainingTimeLabel = _subTask2RemainingTimeLabel;
-
-@synthesize subTask3StopButton = _subTask3StopButton;
-
-@synthesize subTask3ProgressView = _subTask3ProgressView;
-
-@synthesize subTask3RemainingTimeEstimateLabel = _subTask3RemainingTimeEstimateLabel;
-
-@synthesize subTask3RemainingTimeLabel = _subTask3RemainingTimeLabel;
-
 #pragma mark HLSTaskDelegate protocol implementation
 
 - (void)taskHasStartedProcessing:(HLSTask *)task

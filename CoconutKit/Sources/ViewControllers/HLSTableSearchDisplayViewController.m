@@ -22,7 +22,12 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
                                                                                 // UIViewController's searchViewController property
 @end
 
-@implementation HLSTableSearchDisplayViewController
+@implementation HLSTableSearchDisplayViewController {
+@private
+    NSInteger _selectedScopeButtonIndex;
+    BOOL _searchInterfaceActive;
+    BOOL _firstLoad;
+}
 
 #pragma mark Object creation and destruction
 
@@ -44,18 +49,10 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 #pragma mark Accessors and mutators
 
-@synthesize searchBar = _searchBar;
-
-@synthesize tableView = _tableView;
-
 - (UITableView *)searchResultsTableView
 {
     return self.searchController.searchResultsTableView;
 }
-
-@synthesize searchText = _searchText;
-
-@synthesize searchController = _searchController;
 
 #pragma mark View lifecycle
 

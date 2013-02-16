@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface SleepTaskOperation : HLSTaskOperation {
-@private
-    
-}
-
+@interface SleepTaskOperation : HLSTaskOperation
 @end

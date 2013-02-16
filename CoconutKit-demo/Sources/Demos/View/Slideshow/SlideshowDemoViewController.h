@@ -6,25 +6,7 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-@interface SlideshowDemoViewController : HLSViewController <HLSSlideshowDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
-@private
-    HLSSlideshow *_slideshow;
-    UIPickerView *_effectPickerView;
-    UILabel *_currentImageNameLabel;
-    UIButton *_previousButton;
-    UIButton *_nextButton;
-    UIButton *_playButton;
-    UIButton *_pauseButton;
-    UIButton *_resumeButton;
-    UIButton *_stopButton;
-    UIButton *_skipToSpecificButton;
-    UISwitch *_randomSwitch;
-    UIButton *_imageSetButton;
-    UISlider *_imageDurationSlider;
-    UILabel *_imageDurationLabel;
-    UISlider *_transitionDurationSlider;
-    UILabel *_transitionDurationLabel;
-}
+@interface SlideshowDemoViewController : HLSViewController <HLSSlideshowDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
 @property (nonatomic, retain) IBOutlet UIPickerView *effectPickerView;

@@ -6,9 +6,5 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface SkinningDemoViewController : HLSViewController {
-@private
-    
-}
-
+@interface SkinningDemoViewController : HLSViewController
 @end

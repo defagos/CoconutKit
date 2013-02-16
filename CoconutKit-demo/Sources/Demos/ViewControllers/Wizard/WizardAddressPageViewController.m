@@ -56,8 +56,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = _person;
-
 - (void)setPerson:(Person *)person
 {
     if (_person == person) {
@@ -69,22 +67,6 @@
     
     [self reloadData];
 }
-
-@synthesize streetTextField = _streetTextField;
-
-@synthesize streetErrorLabel = _streetErrorLabel;
-
-@synthesize cityTextField = _cityTextField;
-
-@synthesize cityErrorLabel = _cityErrorLabel;
-
-@synthesize stateTextField = _stateTextField;
-
-@synthesize stateErrorLabel = _stateErrorLabel;
-
-@synthesize countryTextField = _countryTextField;
-
-@synthesize countryErrorLabel = _countryErrorLabel;
 
 #pragma mark View lifecycle
 

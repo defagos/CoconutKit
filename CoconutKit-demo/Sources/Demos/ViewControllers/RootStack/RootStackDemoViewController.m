@@ -45,28 +45,6 @@
     self.portraitUpsideDownSwitch = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize backBarButtonItem = _backBarButtonItem;
-
-@synthesize actionSheetBarButtonItem = _actionSheetBarButtonItem;
-
-@synthesize popButton = _popButton;
-
-@synthesize transitionPickerView = _transitionPickerView;
-
-@synthesize animatedSwitch = _animatedSwitch;
-
-@synthesize portraitSwitch = _portraitSwitch;
-
-@synthesize landscapeRightSwitch = _landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = _landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = _portraitUpsideDownSwitch;
-
-@synthesize autorotationModeSegmentedControl = _autorotationModeSegmentedControl;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

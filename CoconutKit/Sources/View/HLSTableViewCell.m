@@ -94,7 +94,6 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             HLSLoggerWarn(@"The image %@ does not exist", backgroundImageName);
             self.backgroundView = nil;
         }
-        
     }
     
     if (selectedBackgroundImageName) {

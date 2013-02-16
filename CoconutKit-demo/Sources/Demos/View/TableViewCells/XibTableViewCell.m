@@ -28,10 +28,4 @@
     [self setBackgroundWithImageNamed:@"cell_bkgr_brown_large.png" selectedBackgroundWithImageName:@"cell_bkgr_brown_large_selected.png"];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize testImageView = _testImageView;
-
-@synthesize testLabel = _testLabel;
-
 @end

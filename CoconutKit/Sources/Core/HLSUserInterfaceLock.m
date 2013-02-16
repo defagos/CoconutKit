@@ -10,7 +10,10 @@
 
 #import "HLSLogger.h"
 
-@implementation HLSUserInterfaceLock
+@implementation HLSUserInterfaceLock {
+@private
+    NSUInteger _useCount;
+}
 
 #pragma mark Class methods
 

@@ -163,12 +163,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     self.realDelegate = delegate;
 }
 
-@synthesize targets = _targets;
-
-@synthesize actions = _actions;
-
-@synthesize realDelegate = _realDelegate;
-
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex
 {
     HLSLoggerError(@"Use addCancelButtonWithTitle:withTarget:action to set the cancel button");

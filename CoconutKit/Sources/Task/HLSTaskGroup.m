@@ -23,17 +23,20 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @interface HLSTaskGroup ()
 
-@property (nonatomic, retain) NSMutableSet *taskSet;
-@property (nonatomic, retain) NSMutableDictionary *weakTaskDependencyMap;
-@property (nonatomic, retain) NSMutableDictionary *strongTaskDependencyMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToWeakDependentsMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToStrongDependentsMap;
+@property (nonatomic, retain) NSMutableSet *taskSet;                                    // contains HLSTask objects
+
+// Dependencies between tasks are saved in both directions for faster lookup
+@property (nonatomic, retain) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
+@property (nonatomic, retain) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
+@property (nonatomic, retain) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
+@property (nonatomic, retain) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
+
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;
-@property (nonatomic, assign) float fullProgress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, assign) float progress;                                           // all individual progress values added
+@property (nonatomic, assign) float fullProgress;                                       // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
+@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
 @property (nonatomic, retain) NSDate *lastEstimateDate;
 
 - (void)updateStatus;
@@ -50,9 +53,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @end
 
-@implementation HLSTaskGroup
+@implementation HLSTaskGroup {
+@private
+    float _lastEstimateFullProgress;            // the progress value when the remaining time was previously estimated (lastEstimateDate)
+    NSUInteger _fullProgressStepsCounter;
+    NSUInteger _nbrFailures;
+}
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
 - (id)init
@@ -81,37 +88,12 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     [super dealloc];
 }
 
-#pragma mark -
 #pragma mark Accessors and mutators
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize taskSet = _taskSet;
 
 - (NSSet *)tasks
 {
     return [NSSet setWithSet:self.taskSet];
 }
-
-@synthesize weakTaskDependencyMap = _weakTaskDependencyMap;
-
-@synthesize strongTaskDependencyMap = _strongTaskDependencyMap;
-
-@synthesize taskToWeakDependentsMap = _taskToWeakDependentsMap;
-
-@synthesize taskToStrongDependentsMap = _taskToStrongDependentsMap;
-
-@synthesize running = _running;
-
-@synthesize finished = _finished;
-
-@synthesize cancelled = _cancelled;
-
-@synthesize progress = _progress;
-
-@synthesize fullProgress = _fullProgress;
 
 - (void)setFullProgress:(float)fullProgress
 {
@@ -162,8 +144,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
-
 - (NSTimeInterval)remainingTimeIntervalEstimate
 {
     if (! self.finished && ! self.cancelled) {
@@ -173,9 +153,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         return kTaskGroupNoTimeIntervalEstimateAvailable;
     }
 }
-
-@synthesize lastEstimateDate = _lastEstimateDate;
-
 
 - (NSUInteger)nbrFailures
 {
@@ -209,7 +186,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
 }
 
-#pragma mark -
 #pragma mark Managing tasks
 
 - (void)addTask:(HLSTask *)task
@@ -223,7 +199,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     task.taskGroup = self;
 }
 
-#pragma mark -
 #pragma mark Recalculating the task group status
 
 - (void)updateStatus
@@ -258,7 +233,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.finished = finished;
 }
 
-#pragma mark -
 #pragma mark Managing dependencies
 
 - (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2 strong:(BOOL)strong
@@ -352,7 +326,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     return [NSSet setWithSet:[self.taskToStrongDependentsMap objectForKey:taskKey]];    
 }
 
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset

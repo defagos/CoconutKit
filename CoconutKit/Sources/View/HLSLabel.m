@@ -22,8 +22,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize verticalAlignment = _verticalAlignment;
-
 - (void)setVerticalAlignment:(HLSLabelVerticalAlignment)verticalAlignment
 {
     if (_verticalAlignment == verticalAlignment) {

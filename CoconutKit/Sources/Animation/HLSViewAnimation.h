@@ -8,8 +8,6 @@
 
 #import "HLSObjectAnimation.h"
 
-#import "HLSVector.h"
-
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
  * (HLSViewAnimationStep). An animation step is the combination of several view animations applied
@@ -28,12 +26,7 @@
  *
  * Designated initializer: -init (create a view animation step with default settings)
  */
-@interface HLSViewAnimation : HLSObjectAnimation {
-@private
-    HLSVector2 _scaleParameters;
-    HLSVector2 _translationParameters;
-    CGFloat _alphaIncrement;
-}
+@interface HLSViewAnimation : HLSObjectAnimation
 
 /**
  * Geometric transform parameters to be applied during the view animation. The resulting transform applies the scale, 

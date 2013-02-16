@@ -107,8 +107,6 @@ typedef enum {
 
 @implementation DemosListViewController
 
-@synthesize tableView = _tableView;
-
 #pragma mark Object creation and destruction
 
 - (void)releaseViews

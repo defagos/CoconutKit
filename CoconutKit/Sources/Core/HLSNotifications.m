@@ -48,7 +48,10 @@
 #pragma mark -
 #pragma mark HLSNotificationManager class implementation
 
-@implementation HLSNotificationManager
+@implementation HLSNotificationManager  {
+@private
+    NSUInteger _networkActivityCount;
+}
 
 #pragma mark Class methods
 

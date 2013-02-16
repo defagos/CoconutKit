@@ -8,8 +8,6 @@
 
 #import "HLSObjectAnimation.h"
 
-#import "HLSVector.h"
-
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
  * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied
@@ -30,20 +28,7 @@
  *
  * Designated initializer: -init (create a layer animation step with default settings)
  */
-@interface HLSLayerAnimation : HLSObjectAnimation {
-@private
-    HLSVector4 _rotationParameters;
-    HLSVector3 _scaleParameters;
-    HLSVector3 _translationParameters;
-    HLSVector3 _anchorPointTranslationParameters;
-    HLSVector4 _sublayerRotationParameters;
-    HLSVector3 _sublayerScaleParameters;
-    HLSVector3 _sublayerTranslationParameters;
-    CGFloat _sublayerCameraTranslationZ;
-    CGFloat _opacityIncrement;
-    BOOL _togglingShouldRasterize;
-    CGFloat _rasterizationScaleIncrement;
-}
+@interface HLSLayerAnimation : HLSObjectAnimation
 
 /**
  * Geometric transform parameters to be applied during the layer animation. The resulting transform applies the rotation, 

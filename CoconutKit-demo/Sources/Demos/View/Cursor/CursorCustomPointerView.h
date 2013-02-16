@@ -6,10 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface CursorCustomPointerView : HLSNibView {
-@private
-    UILabel *_valueLabel;
-}
+@interface CursorCustomPointerView : HLSNibView
 
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;
 

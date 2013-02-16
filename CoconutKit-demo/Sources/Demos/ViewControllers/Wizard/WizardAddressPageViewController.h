@@ -6,21 +6,7 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@class Person;
-
-@interface WizardAddressPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate> {
-@private
-    Person *_person;
-    HLSTextField *_streetTextField;
-    UILabel *_streetErrorLabel;
-    HLSTextField *_cityTextField;
-    UILabel *_cityErrorLabel;
-    HLSTextField *_stateTextField;
-    UILabel *_stateErrorLabel;
-    HLSTextField *_countryTextField;
-    UILabel *_countryErrorLabel;
-}
+@interface WizardAddressPageViewController : HLSViewController <HLSTextFieldValidationDelegate, HLSValidable, UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;
 @property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;

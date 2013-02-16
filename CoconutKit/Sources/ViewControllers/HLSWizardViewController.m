@@ -31,7 +31,11 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 @end
 
-@implementation HLSWizardViewController
+@implementation HLSWizardViewController {
+@private
+    HLSWizardTransitionStyle _wizardTransitionStyle;
+    NSInteger _currentPage;
+}
 
 #pragma mark Object creation and destruction
 
@@ -95,14 +99,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 #pragma mark Accessors and mutators
 
-@synthesize previousButton = _previousButton;
-
-@synthesize nextButton = _nextButton;
-
-@synthesize doneButton = _doneButton;
-
-@synthesize viewControllers = _viewControllers;
-
 - (void)setViewControllers:(NSArray *)viewControllers
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
@@ -121,10 +117,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
         self.currentPage = 0;   
     }    
 }
-
-@synthesize wizardTransitionStyle = _wizardTransitionStyle;
-
-@synthesize currentPage = _currentPage;
 
 - (void)setCurrentPage:(NSInteger)currentPage
 {

@@ -47,10 +47,4 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize name = _name;
-
-@synthesize type = _type;
-
 @end

@@ -36,16 +36,6 @@
     self.textField2.resigningFirstResponderOnTap = NO;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize textField1 = _textField1;
-
-@synthesize textField2 = _textField2;
-
-@synthesize textField3 = _textField3;
-
-@synthesize textField4 = _textField4;
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

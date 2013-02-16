@@ -22,12 +22,7 @@ extern NSString * const HLSStackRootSegueIdentifier;
  * a segue with the identifier 'hls_root'. To push a view controller B onto another one A already in the 
  * stack, connect A with B using an HLSStackPushSegue
  */
-@interface HLSStackPushSegue : UIStoryboardSegue {
-@private
-    Class _transitionClass;
-    NSTimeInterval _duration;
-    BOOL _animated;
-}
+@interface HLSStackPushSegue : UIStoryboardSegue
 
 /**
  * Push animation style

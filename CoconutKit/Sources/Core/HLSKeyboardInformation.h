@@ -13,13 +13,7 @@
  *
  * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
-@interface HLSKeyboardInformation : NSObject {
-@private
-    CGRect _beginFrame;
-    CGRect _endFrame;
-    NSTimeInterval _animationDuration;
-    UIViewAnimationCurve _animationCurve;
-}
+@interface HLSKeyboardInformation : NSObject
 
 /**
  * Return the keyboard information if docked and displayed (or about to be displayed), nil if the keyboard is not visible,

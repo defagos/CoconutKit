@@ -16,11 +16,7 @@ typedef enum {
     DeviceTypeEnumSize = DeviceTypeEnumEnd - DeviceTypeEnumBegin
 } DeviceType;
 
-@interface DeviceInfo : NSObject {
-@private
-    NSString *_name;
-    DeviceType _type;
-}
+@interface DeviceInfo : NSObject
 
 + (DeviceInfo *)deviceInfoWithName:(NSString *)name type:(DeviceType)type;
 
