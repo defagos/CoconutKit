@@ -129,12 +129,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize notificationName = _notificationName;
-
-@synthesize object = _object;
-
 @end
 
 #pragma mark -
@@ -169,10 +163,6 @@
     self.objectToNotificationMap = nil;
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize objectToNotificationMap = _objectToNotificationMap;
 
 #pragma mark (Un)registering conversion rules
 
