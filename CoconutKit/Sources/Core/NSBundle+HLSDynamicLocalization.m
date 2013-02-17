@@ -68,14 +68,12 @@ static void setDefaultLocalization(void)
 
 + (void)load
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
-    if (preferredLocalization) {
-        [NSBundle setLocalization:preferredLocalization];
+    @autoreleasepool {
+        NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
+        if (preferredLocalization) {
+            [NSBundle setLocalization:preferredLocalization];
+        }  
     }
-    
-    [pool drain];
 }
 
 + (NSString *)localization
