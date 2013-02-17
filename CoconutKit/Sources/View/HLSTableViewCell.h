@@ -41,10 +41,7 @@
  * Designated initializer: -initWithStyle:reuseIdentifier:
  * (You usually do not need to create a cell manually. Use the factory macros instead)
  */
-@interface HLSTableViewCell : UITableViewCell {
-@private
-
-}
+@interface HLSTableViewCell : UITableViewCell
 
 /**
  * Factory method for creating a table view cell. Return an instance of the class it is called on

@@ -55,12 +55,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize textField = m_textField;
-
-@synthesize delegate = m_delegate;
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField

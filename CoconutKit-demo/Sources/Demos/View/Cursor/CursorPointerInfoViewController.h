@@ -6,13 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-/**
- * Designated initializer: -init
- */
-@interface CursorPointerInfoViewController : HLSViewController {
-@private
-    UILabel *m_valueLabel;
-}
+@interface CursorPointerInfoViewController : HLSViewController
 
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;
 

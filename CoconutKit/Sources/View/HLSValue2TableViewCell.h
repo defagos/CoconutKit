@@ -11,9 +11,5 @@
 /**
  * Same as HLSTableViewCell, but with UITableViewCellStyleValue2 as style
  */
-@interface HLSValue2TableViewCell : HLSTableViewCell {
-@private
-    
-}
-
+@interface HLSValue2TableViewCell : HLSTableViewCell
 @end

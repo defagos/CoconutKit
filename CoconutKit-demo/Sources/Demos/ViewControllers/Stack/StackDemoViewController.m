@@ -29,17 +29,26 @@ typedef enum {
 
 @interface StackDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet UISlider *sizeSlider;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *resizeMethodSegmentedControl;
+@property (nonatomic, retain) IBOutlet UIButton *popoverButton;
+@property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+@property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISlider *indexSlider;
+@property (nonatomic, retain) IBOutlet UILabel *insertionIndexLabel;
+@property (nonatomic, retain) IBOutlet UILabel *removalIndexLabel;
+
 @property (nonatomic, retain) UIPopoverController *displayedPopoverController;
-
-- (void)displayContentViewController:(UIViewController *)viewController;
-
-- (void)updateIndexInfo;
-- (NSUInteger)insertionIndex;
-- (NSUInteger)removalIndex;
 
 @end
 
-@implementation StackDemoViewController
+@implementation StackDemoViewController {
+@private
+    CGRect _placeholderViewOriginalBounds;
+}
 
 #pragma mark Object creation and destruction
 
@@ -122,32 +131,6 @@ typedef enum {
     self.removalIndexLabel = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize sizeSlider = m_sizeSlider;
-
-@synthesize resizeMethodSegmentedControl = m_resizeMethodSegmentedControl;
-
-@synthesize popoverButton = m_popoverButton;
-
-@synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
-
-@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
-
-@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
-
-@synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize indexSlider = m_indexSlider;
-
-@synthesize insertionIndexLabel = m_insertionIndexLabel;
-
-@synthesize removalIndexLabel = m_removalIndexLabel;
-
-@synthesize displayedPopoverController = m_displayedPopoverController;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -171,7 +154,7 @@ typedef enum {
     [super viewWillAppear:animated];
     
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    _placeholderViewOriginalBounds = placeholderView.bounds;
     
     [self updateIndexInfo];
 }
@@ -184,7 +167,7 @@ typedef enum {
     // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
     // the view
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.bounds = _placeholderViewOriginalBounds;
     
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
@@ -197,7 +180,7 @@ typedef enum {
     // are able to restore them when rotating again, and set size according to the previous size slider value. This
     // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    m_placeholderViewOriginalBounds = placeholderView.bounds;
+    _placeholderViewOriginalBounds = placeholderView.bounds;
     [self sizeChanged:nil];
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -221,10 +204,10 @@ typedef enum {
     
     self.title = @"HLSStackController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", nil) forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -259,11 +242,10 @@ typedef enum {
                                      animated:self.animatedSwitch.on];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
-                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
                                                             delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                    otherButtonTitles:nil] autorelease];
         [alertView show];
         return;
@@ -393,8 +375,8 @@ typedef enum {
     if (self.resizeMethodSegmentedControl.selectedSegmentIndex == ResizeMethodIndexFrame) {
         placeholderView.bounds = CGRectMake(0.f,
                                             0.f,
-                                            CGRectGetWidth(m_placeholderViewOriginalBounds) * self.sizeSlider.value,
-                                            CGRectGetHeight(m_placeholderViewOriginalBounds) * self.sizeSlider.value);
+                                            CGRectGetWidth(_placeholderViewOriginalBounds) * self.sizeSlider.value,
+                                            CGRectGetHeight(_placeholderViewOriginalBounds) * self.sizeSlider.value);
     }
     else {
         placeholderView.transform = CGAffineTransformMakeScale(self.sizeSlider.value, self.sizeSlider.value);
@@ -407,7 +389,7 @@ typedef enum {
     self.sizeSlider.value = self.sizeSlider.maximumValue;
     
     UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = m_placeholderViewOriginalBounds;
+    placeholderView.bounds = _placeholderViewOriginalBounds;
     placeholderView.transform = CGAffineTransformIdentity;
 }
 
@@ -520,7 +502,7 @@ typedef enum {
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
                                                          message:nil
                                                         delegate:nil
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
 }
@@ -533,9 +515,9 @@ typedef enum {
 
 - (IBAction)indexChanged:(id)sender
 {
-    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", @"Insertion index: %d"),
+    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", nil),
                                      [self insertionIndex]];
-    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", @"Removal index: %d"),
+    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", nil),
                                    [self removalIndex]];
 }
 

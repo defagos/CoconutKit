@@ -10,14 +10,8 @@
 
 @interface ActionSheetDemoViewController ()
 
-- (HLSActionSheet *)actionSheetForChoice;
-- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet;
-
-- (void)choose1:(id)sender;
-- (void)choose2:(id)sender;
-- (void)choose3:(id)sender;
-- (void)choose4:(id)sender;
-- (void)cancel;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UILabel *choiceLabel;
 
 @end
 
@@ -32,12 +26,6 @@
     self.toolbar = nil;
     self.choiceLabel = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize toolbar = m_toolbar;
-
-@synthesize choiceLabel = m_choiceLabel;
 
 #pragma mark View lifecycle
 
@@ -61,7 +49,7 @@
 {
     [super localize];
     
-    self.tabBarController.title = NSLocalizedString(@"Action sheet", @"Action sheet");
+    self.tabBarController.title = NSLocalizedString(@"Action sheet", nil);
 }
 
 #pragma mark Common action sheet code
@@ -69,7 +57,7 @@
 - (HLSActionSheet *)actionSheetForChoice
 {
     HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    [actionSheet addDestructiveButtonWithTitle:NSLocalizedString(@"Reset", @"Reset") 
+    [actionSheet addDestructiveButtonWithTitle:NSLocalizedString(@"Reset", nil)
                                         target:self
                                         action:@selector(resetChoice:)];
     [actionSheet addButtonWithTitle:@"1"
@@ -85,7 +73,7 @@
                              target:self
                              action:@selector(choose4:)];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) target:self action:@selector(cancel)];
     }
     
     return actionSheet;
@@ -97,7 +85,7 @@
     [secondActionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Yes") target:nil action:NULL];
     [secondActionSheet addButtonWithTitle:[HLSLocalizedStringFromUIKit(@"No") capitalizedString] target:nil action:NULL];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [secondActionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:@selector(cancel)];
+        [secondActionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) target:self action:@selector(cancel)];
     }
     
     if ([actionSheet.owner isKindOfClass:[UIBarButtonItem class]]) {

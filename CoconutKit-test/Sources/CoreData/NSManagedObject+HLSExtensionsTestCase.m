@@ -29,12 +29,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize person1 = m_person1;
-
-@synthesize person2 = m_person2;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass
@@ -96,18 +90,18 @@
     person1Duplicate.firstName = @"Anthony";
     
     // Test duplication
-    GHAssertTrue(person1Duplicate != self.person1, @"Not a deep copy");
-    GHAssertFalse([person1Duplicate.firstName isEqualToString:self.person1.firstName], @"First name");
-    GHAssertTrue([person1Duplicate.lastName isEqualToString:self.person1.lastName], @"Last name");
+    GHAssertTrue(person1Duplicate != self.person1, nil);
+    GHAssertFalse([person1Duplicate.firstName isEqualToString:self.person1.firstName], nil);
+    GHAssertTrue([person1Duplicate.lastName isEqualToString:self.person1.lastName], nil);
     
     // The house is not owned and therefore shared
-    GHAssertTrue([person1Duplicate.houses isEqualToSet:self.person1.houses], @"Houses are incorrect");
+    GHAssertTrue([person1Duplicate.houses isEqualToSet:self.person1.houses], nil);
     
     // The accounts are owned and therefore deeply copied
-    GHAssertFalse([person1Duplicate.accounts isEqualToSet:self.person1.accounts], @"Accounts are incorrect");
+    GHAssertFalse([person1Duplicate.accounts isEqualToSet:self.person1.accounts], nil);
     
     // Test overall consistency of the object hiearchy which has been duplicated
-    GHAssertTrue([HLSModelManager saveCurrentModelContext:NULL], @"Invalid objects");
+    GHAssertTrue([HLSModelManager saveCurrentModelContext:NULL], nil);
 }
 
 @end

@@ -6,10 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface ProgrammaticTableViewCell : HLSTableViewCell {
-@private
-    UILabel *m_label;
-}
+@interface ProgrammaticTableViewCell : HLSTableViewCell
 
 @property (nonatomic, retain) UILabel *label;
 

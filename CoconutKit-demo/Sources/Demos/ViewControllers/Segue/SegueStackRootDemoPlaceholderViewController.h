@@ -7,7 +7,4 @@
 //
 
 @interface SegueStackRootDemoPlaceholderViewController : HLSPlaceholderViewController
-
-- (IBAction)hideWithModal:(id)sender;
-
 @end

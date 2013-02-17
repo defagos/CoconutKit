@@ -69,13 +69,7 @@
  *
  * Designated initializer: -initWithRootViewController:capacity:
  */
-@interface HLSStackController : HLSViewController <HLSContainerStackDelegate> {
-@private
-    HLSContainerStack *m_containerStack;
-    NSUInteger m_capacity;
-    HLSAutorotationMode m_autorotationMode;
-    id<HLSStackControllerDelegate> m_delegate;
-}
+@interface HLSStackController : HLSViewController <HLSContainerStackDelegate>
 
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 

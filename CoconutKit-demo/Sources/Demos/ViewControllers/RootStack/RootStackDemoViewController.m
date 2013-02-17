@@ -13,9 +13,16 @@
 
 @interface RootStackDemoViewController ()
 
-- (void)displayViewController:(UIViewController *)viewController;
-
-- (void)closeNativeContainer:(id)sender;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *backBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionSheetBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIButton *popButton;
+@property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @end
 
@@ -44,28 +51,6 @@
     self.landscapeLeftSwitch = nil;
     self.portraitUpsideDownSwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize backBarButtonItem = m_backBarButtonItem;
-
-@synthesize actionSheetBarButtonItem = m_actionSheetBarButtonItem;
-
-@synthesize popButton = m_popButton;
-
-@synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize portraitSwitch = m_portraitSwitch;
-
-@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -223,13 +208,13 @@
     [super localize];
     
     self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
-    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", @"Action sheet");
+    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", nil);
     
     if (self == [self.stackController rootViewController]) {
-        [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
     }
     else {
-        [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Pop", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -284,7 +269,7 @@
 - (IBAction)pushTabBarController:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
                                                                                                    style:UIBarButtonItemStyleDone 
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
@@ -298,7 +283,7 @@
 - (IBAction)pushNavigationController:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
                                                                                                    style:UIBarButtonItemStyleDone 
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
@@ -325,7 +310,7 @@
                              target:self
                              action:NULL];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:NULL];
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) target:self action:NULL];
     }
     
     [actionSheet showFromBarButtonItem:self.actionSheetBarButtonItem animated:YES];

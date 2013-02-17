@@ -14,32 +14,29 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @property (nonatomic, retain) HLSAnimation *animation;
 
-- (void)updateUserInterface;
-- (void)calculateAnimation;
-
-- (SEL)selectorForAnimationWithIndex:(NSUInteger)index;
-
-- (NSTimeInterval)delay;
-- (NSTimeInterval)duration;
-- (NSUInteger)repeatCount;
-- (NSTimeInterval)startTime;
-
-- (HLSAnimation *)animation1;
-- (HLSAnimation *)animation2;
-- (HLSAnimation *)animation3;
-- (HLSAnimation *)animation4;
-- (HLSAnimation *)animation5;
-- (HLSAnimation *)animation6;
-- (HLSAnimation *)animation7;
-- (HLSAnimation *)animation8;
-- (HLSAnimation *)animation9;
-- (HLSAnimation *)animation10;
-- (HLSAnimation *)animation11;
-- (HLSAnimation *)animation12;
-- (HLSAnimation *)animation13;
-- (HLSAnimation *)animation14;
-- (HLSAnimation *)animation15;
-- (HLSAnimation *)animation16;
+@property (nonatomic, retain) IBOutlet UIView *rectangleView1;
+@property (nonatomic, retain) IBOutlet UIView *rectangleView2;
+@property (nonatomic, retain) IBOutlet UIPickerView *animationPickerView;
+@property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UIButton *pauseButton;
+@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
+@property (nonatomic, retain) IBOutlet UIButton *terminateButton;
+@property (nonatomic, retain) IBOutlet UIView *settingsView;
+@property (nonatomic, retain) IBOutlet UISwitch *reverseSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *lockingUISwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *loopingSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, retain) IBOutlet UISlider *repeatCountSlider;
+@property (nonatomic, retain) IBOutlet UILabel *repeatCountLabel;
+@property (nonatomic, retain) IBOutlet UIView *animatedSettingsView;
+@property (nonatomic, retain) IBOutlet UISlider *durationSlider;
+@property (nonatomic, retain) IBOutlet UILabel *durationLabel;
+@property (nonatomic, retain) IBOutlet UIView *delayBackgroundView;
+@property (nonatomic, retain) IBOutlet UISlider *delaySlider;
+@property (nonatomic, retain) IBOutlet UILabel *delayLabel;
+@property (nonatomic, retain) IBOutlet UIView *startTimeBackgroundView;
+@property (nonatomic, retain) IBOutlet UISlider *startTimeSlider;
+@property (nonatomic, retain) IBOutlet UILabel *startTimeLabel;
 
 @end
 
@@ -94,56 +91,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [self updateUserInterface];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize rectangleView1 = m_rectangleView1;
-
-@synthesize rectangleView2 = m_rectangleView2;
-
-@synthesize animationPickerView = m_animationPickerView;
-
-@synthesize playButton = m_playButton;
-
-@synthesize pauseButton = m_pauseButton;
-
-@synthesize cancelButton = m_cancelButton;
-
-@synthesize terminateButton = m_terminateButton;
-
-@synthesize settingsView = m_settingsView;
-
-@synthesize reverseSwitch = m_reverseSwitch;
-
-@synthesize lockingUISwitch = m_lockingUISwitch;
-
-@synthesize loopingSwitch = m_loopingSwitch;
-
-@synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize repeatCountSlider = m_repeatCountSlider;
-
-@synthesize repeatCountLabel = m_repeatCountLabel;
-
-@synthesize animatedSettingsView = m_animatedSettingsView;
-
-@synthesize durationSlider = m_durationSlider;
-
-@synthesize durationLabel = m_durationLabel;
-
-@synthesize delayBackgroundView = m_delayBackgroundView;
-
-@synthesize delaySlider = m_delaySlider;
-
-@synthesize delayLabel = m_delayLabel;
-
-@synthesize startTimeBackgroundView = m_startTimeBackgroundView;
-
-@synthesize startTimeSlider = m_startTimeSlider;
-
-@synthesize startTimeLabel = m_startTimeLabel;
-
-@synthesize animation = m_animation;
-
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -157,7 +104,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+    self.title = NSLocalizedString(@"Single view animation", nil);
 }
 
 #pragma mark Responding to parameter adjustment

@@ -19,11 +19,7 @@
  *
  * Designated initializer: -initWithFrame:frontView:
  */
-@interface HLSContainerGroupView : UIView {
-@private
-    UIView *m_savedFrontContentView;
-    UIView *m_savedBackContentView;
-}
+@interface HLSContainerGroupView : UIView
 
 /**
  * Create a group view with the given content view (mandatory) displayed at the front. If the view was 

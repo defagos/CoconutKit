@@ -7,7 +7,6 @@
 //
 
 // Forward declarations
-@class HLSTaskGroup;
 @protocol HLSTaskDelegate;
 
 #define kTaskNoTimeIntervalEstimateAvailable        -1.
@@ -23,22 +22,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSTask : NSObject {
-@private
-    NSString *_tag;
-    NSDictionary *_userInfo;
-    BOOL _running;
-    BOOL _finished;
-    BOOL _cancelled;
-    float _progress;
-    NSTimeInterval _remainingTimeIntervalEstimate;
-    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
-    float _lastEstimateProgress;            // ... and corresponding progress value 
-    NSUInteger _progressStepsCounter; 
-    NSDictionary *_returnInfo;
-    NSError *_error;
-    HLSTaskGroup *_taskGroup;               // parent task group if any, nil if none
-}
+@interface HLSTask : NSObject
 
 /**
  * Class responsible of processing the task. Must be a subclass of HLSTaskOperation

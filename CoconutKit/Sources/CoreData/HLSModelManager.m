@@ -15,25 +15,9 @@
 
 @interface HLSModelManager ()
 
-+ (NSString *)standardStoreFilePathForModelFileName:(NSString *)modelFileName 
-                                          storeType:(NSString *)storeType 
-                                     storeDirectory:(NSString *)storeDirectory;
-
-+ (NSMutableArray *)modelManagerStackForThread:(NSThread *)thread;
-+ (HLSModelManager *)currentModelManagerForThread:(NSThread *)thread;
-+ (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread;
-
 @property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
-- (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle;
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
-                                                                        storeType:(NSString *)storeType 
-                                                                    configuration:(NSString *)configuration 
-                                                                              URL:(NSURL *)storeURL 
-                                                                          options:(NSDictionary *)options;
-- (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
 @end
 
@@ -283,14 +267,6 @@
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize managedObjectModel = _managedObjectModel;
-
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-@synthesize managedObjectContext = _managedObjectContext;
 
 #pragma mark Initialization
 

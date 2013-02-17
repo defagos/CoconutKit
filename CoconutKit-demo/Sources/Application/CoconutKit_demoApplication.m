@@ -16,9 +16,6 @@
 
 @interface CoconutKit_demoApplication ()
 
-- (void)toggleLanguageSheet:(id)sender;
-- (void)currentLocalizationDidChange:(NSNotification *)notification;
-
 @property (nonatomic, retain) UIViewController *rootViewController;
 @property (nonatomic, retain) HLSActionSheet *languageActionSheet;
 
@@ -108,7 +105,7 @@
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
             navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             self.rootViewController = navigationController;
-            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") 
+            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)] autorelease];
@@ -143,20 +140,16 @@
     // Normal demo mode
     if ([self.rootViewController isMemberOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)self.rootViewController;
-        navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", @"Language");
+        navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", nil);
     }
 }
 
 #pragma mark Accesors and mutators
 
-@synthesize rootViewController = m_rootViewController;
-
 - (UIViewController *)viewController
 {
     return self.rootViewController;
 }
-
-@synthesize languageActionSheet = m_languageActionSheet;
 
 #pragma mark HLSStackControllerDelegate protocol implementation
 

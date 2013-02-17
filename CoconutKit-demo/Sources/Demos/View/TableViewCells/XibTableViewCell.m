@@ -14,8 +14,8 @@
 
 - (void)dealloc
 {
-    self.imageView = nil;
-    self.label = nil;
+    self.testImageView = nil;
+    self.testLabel = nil;
     [super dealloc];
 }
 
@@ -27,11 +27,5 @@
     
     [self setBackgroundWithImageNamed:@"cell_bkgr_brown_large.png" selectedBackgroundWithImageName:@"cell_bkgr_brown_large_selected.png"];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize imageView = m_imageView;
-
-@synthesize label = m_label;
 
 @end

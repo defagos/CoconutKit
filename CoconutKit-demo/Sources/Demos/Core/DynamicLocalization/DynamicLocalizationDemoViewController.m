@@ -8,6 +8,15 @@
 
 #import "DynamicLocalizationDemoViewController.h"
 
+@interface DynamicLocalizationDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UILabel *coloredLabel;   // No outlet would be needed for localization purposes only, but
+                                                                // here we want to test background color changes
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
+
+@end
+
 @implementation DynamicLocalizationDemoViewController
 
 #pragma mark Object creation and destruction
@@ -20,14 +29,6 @@
     self.imageView = nil;
     self.missingLocalizationVisibilitySwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize coloredLabel = m_coloredLabel;
-
-@synthesize imageView = m_imageView;
-
-@synthesize missingLocalizationVisibilitySwitch = m_missingLocalizationVisibilitySwitch;
 
 #pragma mark View lifecycle
 
@@ -51,7 +52,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
+    self.title = NSLocalizedString(@"Dynamic localization", nil);
     
     // Cannot use [UIImage imageNamed:] for localized images because of caching
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"img_localized" ofType:@"png"];

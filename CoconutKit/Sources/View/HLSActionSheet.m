@@ -20,9 +20,6 @@ static HLSActionSheet *s_previousActionSheet = nil;                 // weak ref 
 
 @interface HLSActionSheet () <UIActionSheetDelegate>
 
-+ (HLSActionSheet *)currentActionSheet;
-+ (void)dismissCurrentActionSheetAnimated:(BOOL)animated;
-
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
 @property (nonatomic, assign) id<UIActionSheetDelegate> realDelegate;
@@ -143,7 +140,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                          target:(id)target
                          action:(SEL)action
 {
-    self.targets = [self.targets arrayByAddingObject:[NSValue valueWithPointer:target]];
+    self.targets = [self.targets arrayByAddingObject:[NSValue valueWithNonretainedObject:target]];
     self.actions = [self.actions arrayByAddingObject:[NSValue valueWithPointer:action]];
     return [super addButtonWithTitle:title];
 }
@@ -162,12 +159,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 {
     self.realDelegate = delegate;
 }
-
-@synthesize targets = m_targets;
-
-@synthesize actions = m_actions;
-
-@synthesize realDelegate = m_realDelegate;
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex
 {

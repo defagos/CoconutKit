@@ -20,17 +20,7 @@
  *
  * Designated initializer: -init (create an animation step with default settings)
  */
-@interface HLSLayerAnimationStep : HLSAnimationStep {
-@private
-    CAMediaTimingFunction *m_timingFunction;
-    UIView *m_dummyView;
-    NSUInteger m_numberOfLayerAnimations;
-    BOOL m_numberOfStartedLayerAnimations;
-    NSUInteger m_numberOfFinishedLayerAnimations;
-    CFTimeInterval m_startTime;
-    CFTimeInterval m_pauseTime;
-    CFTimeInterval m_previousPauseDuration;
-}
+@interface HLSLayerAnimationStep : HLSAnimationStep
 
 /**
  * Setting a layer animation for a layer. Only one layer animation can be defined at most for a layer within an

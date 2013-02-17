@@ -16,13 +16,14 @@
 
 @interface HLSPlaceholderViewController ()
 
-- (void)hlsPlaceholderViewControllerInit;
-
 @property (nonatomic, retain) NSMutableArray *containerStacks;
 
 @end
 
-@implementation HLSPlaceholderViewController
+@implementation HLSPlaceholderViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
@@ -86,22 +87,14 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize containerStacks = m_containerStacks;
-
-@synthesize placeholderViews = m_placeholderViews;
-
-@synthesize autorotationMode = m_autorotationMode;
-
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {    
-    m_autorotationMode = autorotationMode;
+    _autorotationMode = autorotationMode;
     
     for (HLSContainerStack *containerStack in self.containerStacks) {
         containerStack.autorotationMode = autorotationMode;
     }
 }
-
-@synthesize delegate = m_delegate;
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index
 {
@@ -163,7 +156,7 @@
     self.placeholderViews = [self.placeholderViews sortedArrayUsingDescriptor:tagSortDescriptor];
     
     // The first time the view is loaded, guess which number of placeholder views have been defined
-    if (! m_loadedOnce) {
+    if (! _loadedOnce) {
         // View controllers have been preloaded
         if (self.containerStacks) {
             if ([self.placeholderViews count] < [self.containerStacks count]) {
@@ -187,7 +180,7 @@
             [self.containerStacks addObject:containerStack];
         }
         
-        m_loadedOnce = YES;
+        _loadedOnce = YES;
     }
     // If the view has been unloaded, we expect the same number of placeholder views after a reload
     else {
@@ -318,7 +311,7 @@
 {
     // Grows up the list of stacks as necessary while the container still can be implicitly resized (that is, when
     // it has not been loaded once)
-    if (! m_loadedOnce) {
+    if (! _loadedOnce) {
         if (! self.containerStacks) {
             self.containerStacks = [NSMutableArray array];
         }

@@ -26,8 +26,6 @@ typedef enum {
 @property (nonatomic, retain) NSArray *devices;
 @property (nonatomic, retain) NSArray *filteredDevices;
 
-- (void)filterDevices;
-
 @end
 
 @implementation TableSearchDisplayDemoViewController
@@ -80,12 +78,6 @@ typedef enum {
     self.filteredDevices = nil;
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize devices = m_devices;
-
-@synthesize filteredDevices = m_filteredDevices;
 
 #pragma mark UISearchDisplayDelegate protocol implementation
 
@@ -230,10 +222,10 @@ typedef enum {
     [super localize];
     
     self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
-                                        NSLocalizedString(@"Music players", @"Music players"),
-                                        NSLocalizedString(@"Phones", @"Phones"),
-                                        NSLocalizedString(@"Tablets", @"Tablets"),
+    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", nil),
+                                        NSLocalizedString(@"Music players", nil),
+                                        NSLocalizedString(@"Phones", nil),
+                                        NSLocalizedString(@"Tablets", nil),
                                         nil];
 }
 

@@ -15,10 +15,10 @@
 - (void)testFirstObject
 {
     NSArray *emptyArray = [NSArray array];
-    GHAssertNil([emptyArray firstObject_hls], @"Empty array");
+    GHAssertNil([emptyArray firstObject_hls], nil);
     
     NSArray *array = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
-    GHAssertEqualStrings([array firstObject_hls], @"1", @"First object");
+    GHAssertEqualStrings([array firstObject_hls], @"1", nil);
 }
 
 - (void)testRotation
@@ -27,18 +27,18 @@
     
     NSArray *leftArray = [array arrayByLeftRotatingNumberOfObjects:2];
     NSArray *expectedLeftArray = [NSArray arrayWithObjects:@"3", @"1", @"2", nil];
-    GHAssertTrue([leftArray isEqualToArray:expectedLeftArray], @"left");
+    GHAssertTrue([leftArray isEqualToArray:expectedLeftArray], nil);
     
     NSArray *rightArray = [array arrayByRightRotatingNumberOfObjects:2];
     NSArray *expectedRightArray = [NSArray arrayWithObjects:@"2", @"3", @"1", nil];
-    GHAssertTrue([rightArray isEqualToArray:expectedRightArray], @"right");
+    GHAssertTrue([rightArray isEqualToArray:expectedRightArray], nil);
 }
 
 - (void)testSafeInsert
 {
     NSMutableArray *array = [NSMutableArray array];
     [array safelyAddObject:nil];
-    GHAssertEquals([array count], 0U, @"safe insert");
+    GHAssertEquals([array count], 0U, nil);
 }
 
 @end

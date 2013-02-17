@@ -24,10 +24,7 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string);
  *
  * Not meant to be instantiated
  */
-@interface HLSConverters : NSObject {
-@private
-    
-}
+@interface HLSConverters : NSObject
 
 + (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString;
 

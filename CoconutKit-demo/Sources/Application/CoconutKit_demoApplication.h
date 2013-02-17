@@ -11,11 +11,8 @@
     UIActionSheetDelegate,
     UINavigationControllerDelegate,
     UISplitViewControllerDelegate,
-    UITabBarControllerDelegate> {
-@private
-    UIViewController *m_rootViewController;
-    HLSActionSheet *m_languageActionSheet;
-}
+    UITabBarControllerDelegate
+>
 
 - (UIViewController *)rootViewController;
 

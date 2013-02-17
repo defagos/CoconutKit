@@ -25,11 +25,7 @@
  * classes, accessed from a single thread). In other cases, consider using Mike Ash implementation
  * found at https://github.com/mikeash/MAZeroingWeakRef or ARC zeroing weak references.
  */
-@interface HLSZeroingWeakRef : NSObject {
-@private
-    id m_object;
-    NSMutableArray *m_invocations;
-}
+@interface HLSZeroingWeakRef : NSObject
 
 /**
  * Initialize a weak reference to an Objective-C object (throws an exception if object is a toll-free

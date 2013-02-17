@@ -28,10 +28,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSNotificationManager : NSObject {
-@private
-    NSUInteger m_networkActivityCount;
-}
+@interface HLSNotificationManager : NSObject
 
 /**
  * Get the shared object managing application-wide notifications
@@ -69,7 +66,7 @@
     //   - 1st dictionary: maps objects to a notification map
     //   - 2nd dictionary (notification map): maps notification name to the (object, notification name) pair to
     //                                        convert to
-    NSMutableDictionary *m_objectToNotificationMap;
+    NSMutableDictionary *_objectToNotificationMap;
 }
 
 + (HLSNotificationConverter *)sharedNotificationConverter;

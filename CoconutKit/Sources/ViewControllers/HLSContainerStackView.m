@@ -13,9 +13,7 @@
 
 @interface HLSContainerStackView ()
 
-@property (nonatomic, retain) NSMutableArray *groupViews;
-
-- (NSUInteger)indexOfContentView:(UIView *)contentView;
+@property (nonatomic, retain) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
 @end
 
@@ -42,10 +40,6 @@
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize groupViews = m_groupViews;
-
-@synthesize delegate = m_delegate;
 
 - (void)setFrame:(CGRect)frame
 {

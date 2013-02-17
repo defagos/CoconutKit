@@ -41,13 +41,6 @@
  *    such cases, we would require a parameter to be available so that the trick making iOS 6 methods available
  *    on iOS 4 and 5 can be disabled
  */
-@interface HLSViewController ()
-
-- (void)hlsViewControllerInit;
-- (void)currentLocalizationDidChange:(NSNotification *)notification;
-
-@end
-
 @implementation HLSViewController
 
 #pragma mark Object creation and destruction
@@ -173,7 +166,7 @@
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
     if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
-        HLSLoggerWarn(@"%@ is not localized", [self class]);
+        HLSLoggerDebug(@"%@ is not localized", [self class]);
     }
 }
 

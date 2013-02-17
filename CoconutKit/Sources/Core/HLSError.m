@@ -57,8 +57,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize internalUserInfo = m_internalUserInfo;
-
 - (NSDictionary *)userInfo
 {
     return self.internalUserInfo;

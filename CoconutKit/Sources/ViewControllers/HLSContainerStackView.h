@@ -101,11 +101,7 @@
  *
  * Designated initializer: -initWithFrame:
  */
-@interface HLSContainerStackView : UIView {
-@private
-    NSMutableArray *m_groupViews;               // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
-    id<HLSContainerStackViewDelegate> m_delegate;
-}
+@interface HLSContainerStackView : UIView
 
 /**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one

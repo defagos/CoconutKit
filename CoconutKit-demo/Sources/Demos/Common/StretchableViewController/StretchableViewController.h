@@ -9,13 +9,5 @@
 /**
  * A view controller stretchable in all directions
  */
-@interface StretchableViewController : HLSViewController {
-@private
-    
-}
-
-- (id)initLarge:(BOOL)large;
-
-@property (nonatomic, assign, getter=isLarge) BOOL large;
-
+@interface StretchableViewController : HLSViewController
 @end

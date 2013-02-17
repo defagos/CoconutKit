@@ -20,11 +20,7 @@
  *
  * Designated initializer: -init (create an animation step with default settings)
  */
-@interface HLSViewAnimationStep : HLSAnimationStep {
-@private
-    UIViewAnimationCurve m_curve;
-    UIView *m_dummyView;
-}
+@interface HLSViewAnimationStep : HLSAnimationStep
 
 /**
  * Setting a view animation for a view. Only one view animation can be defined at most for a view within an

@@ -6,7 +6,6 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-
 /**
  * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 
  * is good (writing a set of methods beginning with 'validate' and which perform individual and consistency

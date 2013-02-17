@@ -24,8 +24,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 @property (nonatomic, retain) NSString *bundleName;
 @property (nonatomic, assign) HLSLabelRepresentation representation;
 
-- (void)parseText:(NSString *)text;
-
 @end
 
 @implementation HLSLabelLocalizationInfo
@@ -57,16 +55,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize localizationKey = m_localizationKey;
-
-@synthesize tableName = m_tableName;
-
-@synthesize representation = m_representation;
-
-@synthesize locked = m_locked;
 
 #pragma mark Parsing text
 

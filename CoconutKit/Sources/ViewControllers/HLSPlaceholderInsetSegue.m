@@ -25,14 +25,6 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
     return self;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize index = m_index;
-
-@synthesize transitionClass = m_transitionClass;
-
-@synthesize duration = m_duration;
-
 #pragma mark Overrides
 
 - (void)perform

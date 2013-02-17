@@ -6,10 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface TableSearchDisplayDemoViewController : HLSTableSearchDisplayViewController {
-@private
-    NSArray *m_devices;
-    NSArray *m_filteredDevices;
-}
-
+@interface TableSearchDisplayDemoViewController : HLSTableSearchDisplayViewController
 @end

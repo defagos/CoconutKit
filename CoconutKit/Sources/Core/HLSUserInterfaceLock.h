@@ -11,10 +11,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSUserInterfaceLock : NSObject {
-@private
-    NSUInteger m_useCount;
-}
+@interface HLSUserInterfaceLock : NSObject
 
 + (HLSUserInterfaceLock *)sharedUserInterfaceLock;
 

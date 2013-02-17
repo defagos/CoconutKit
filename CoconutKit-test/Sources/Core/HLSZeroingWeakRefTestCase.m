@@ -9,7 +9,6 @@
 #import "HLSZeroingWeakRefTestCase.h"
 
 @interface BasicClass : NSObject
-
 @end
 
 @implementation HLSZeroingWeakRefTestCase
@@ -20,20 +19,19 @@
 {
     BasicClass *basicClass = [[BasicClass alloc] init];
     HLSZeroingWeakRef *zeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:basicClass] autorelease];
-    GHAssertNotNil(zeroingWeakRef.object, @"Non-zeroed object reference");
+    GHAssertNotNil(zeroingWeakRef.object, nil);
     [basicClass release];
-    GHAssertNil(zeroingWeakRef.object, @"Zeroed object reference");
+    GHAssertNil(zeroingWeakRef.object, nil);
 }
 
 - (void)testTollFreeBridgedObject
 {
     NSNumber *number = [[NSNumber alloc] initWithInt:1012];
-    GHAssertThrows([[HLSZeroingWeakRef alloc] initWithObject:number], @"Cannot create from Core Foundation objects");
+    GHAssertThrows([[HLSZeroingWeakRef alloc] initWithObject:number], nil);
     [number release];
 }
 
 @end
 
 @implementation BasicClass
-
 @end

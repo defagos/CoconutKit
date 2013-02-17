@@ -18,18 +18,17 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSExpandingSearchBar ()
 
-- (void)hlsExpandingSearchBarInit;
-
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIButton *searchButton;
 
-- (HLSAnimation *)expansionAnimation;
-
-- (void)toggleSearchBar:(id)sender;
-
 @end
 
-@implementation HLSExpandingSearchBar
+@implementation HLSExpandingSearchBar {
+@private
+    BOOL _layoutDone;
+    BOOL _expanded;
+    BOOL _animating;
+}
 
 #pragma mark Object creation and destruction
 
@@ -98,7 +97,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (NSString *)text
 {
-    if (! m_expanded) {
+    if (! _expanded) {
         return nil;
     }
     
@@ -107,7 +106,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)setText:(NSString *)text
 {
-    if (! m_expanded) {
+    if (! _expanded) {
         HLSLoggerWarn(@"Cannot set the search bar text when closed");
         return;
     }
@@ -115,41 +114,33 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.text = text;
 }
 
-@synthesize prompt = m_prompt;
-
 - (void)setPrompt:(NSString *)prompt
 {
-    if (m_prompt == prompt) {
+    if (_prompt == prompt) {
         return;
     }
     
-    [m_prompt release];
-    m_prompt = [prompt copy];
+    [_prompt release];
+    _prompt = [prompt copy];
     
-    if (m_expanded) {
+    if (_expanded) {
         self.searchBar.prompt = prompt;
     }
 }
 
-@synthesize placeholder = m_placeholder;
-
 - (void)setPlaceholder:(NSString *)placeholder
 {
-    if (m_placeholder == placeholder) {
+    if (_placeholder == placeholder) {
         return;
     }
     
-    [m_placeholder release];
-    m_placeholder = [placeholder copy];
+    [_placeholder release];
+    _placeholder = [placeholder copy];
     
-    if (m_expanded) {
+    if (_expanded) {
         self.searchBar.placeholder = placeholder;
     }
 }
-
-@synthesize showsBookmarkButton = m_showsBookmarkButton;
-
-@synthesize showsSearchResultsButton = m_showsSearchResultsButton;
 
 - (UITextAutocapitalizationType)autocapitalizationType
 {
@@ -191,23 +182,15 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.searchBar.keyboardType = keyboardType;
 }
 
-@synthesize searchBar = m_searchBar;
-
-@synthesize searchButton = m_searchButton;
-
-@synthesize alignment = m_alignment;
-
 - (void)setAlignment:(HLSExpandingSearchBarAlignment)alignment
 {
-    if (m_layoutDone) {
+    if (_layoutDone) {
         HLSLoggerWarn(@"The alignment cannot be changed once the search bar has been displayed");
         return;
     }
     
-    m_alignment = alignment;
+    _alignment = alignment;
 }
-
-@synthesize delegate = m_delegate;
 
 #pragma mark Layout
 
@@ -219,8 +202,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     }
     
     // TODO: Factor out collapsed frame creation code
-    if (! m_animating) {
-        if (self.alignment == HLSExpandingSearchBarAlignmentLeft || m_expanded) {
+    if (! _animating) {
+        if (self.alignment == HLSExpandingSearchBarAlignmentLeft || _expanded) {
             self.searchButton.frame = CGRectMake(0.f,
                                                  roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
                                                  kSearchBarStandardHeight,
@@ -233,7 +216,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
                                                  kSearchBarStandardHeight);
         }
         
-        if (m_expanded) {
+        if (_expanded) {
             self.searchBar.alpha = 1.f;
             self.searchBar.frame = CGRectMake(0.f,
                                               roundf((CGRectGetHeight(self.frame) - kSearchBarStandardHeight) / 2.f),
@@ -246,15 +229,15 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     }
     
     // Notify initial status
-    if (! m_layoutDone) {
-        if (m_expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidExpand:animated:)]) {
+    if (! _layoutDone) {
+        if (_expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidExpand:animated:)]) {
             [self.delegate expandingSearchBarDidExpand:self animated:NO];
         }
-        else if (! m_expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidCollapse:animated:)]) {
+        else if (! _expanded && [self.delegate respondsToSelector:@selector(expandingSearchBarDidCollapse:animated:)]) {
             [self.delegate expandingSearchBarDidCollapse:self animated:NO];
         }
         
-        m_layoutDone = YES;
+        _layoutDone = YES;
     }
 }
 
@@ -316,34 +299,34 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated
 {
     // No animation if not displayed yet
-    if (! m_layoutDone) {
-        m_expanded = expanded;
+    if (! _layoutDone) {
+        _expanded = expanded;
         return;
     }
     
-    if (m_animating) {
+    if (_animating) {
         HLSLoggerWarn(@"The search bar is already being animated");
         return;
     }
     
     if (expanded) {
-        if (m_expanded) {
+        if (_expanded) {
             HLSLoggerInfo(@"The search bar is already expanded");
             return;
         }
         
-        m_animating = YES;
+        _animating = YES;
         
         HLSAnimation *animation = [self expansionAnimation];
         [animation playAnimated:animated];        
     }
     else {
-        if (! m_expanded) {
+        if (! _expanded) {
             HLSLoggerInfo(@"The search bar is already collapsed");
             return;
         }
         
-        m_animating = YES;
+        _animating = YES;
         
         // The search bar does not store its text when it collapses
         self.searchBar.text = nil;
@@ -365,17 +348,17 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)toggleSearchBar:(id)sender
 {
-    [self setExpanded:! m_expanded animated:YES];
+    [self setExpanded:! _expanded animated:YES];
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    m_animating = NO;
+    _animating = NO;
     
     if ([animation.tag isEqualToString:@"searchBar"]) {
-        m_expanded = YES;
+        _expanded = YES;
         
         // Show search bar additional controls only when fully expanded (does not animate well, and we
         // do not want to animate UISearchBar subviews because we cannot control its view hierarchy)
@@ -392,7 +375,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
         }
     }
     else if ([animation.tag isEqualToString:@"reverse_searchBar"]) {
-        m_expanded = NO;
+        _expanded = NO;
         
         if ([self.delegate respondsToSelector:@selector(expandingSearchBarDidCollapse:animated:)]) {
             [self.delegate expandingSearchBarDidCollapse:self animated:animated];

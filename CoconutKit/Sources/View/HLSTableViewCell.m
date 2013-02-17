@@ -15,12 +15,6 @@
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
 
-@interface HLSTableViewCell ()
-
-+ (NSString *)findNibName;
-
-@end
-
 @implementation HLSTableViewCell
 
 #pragma mark Class methods for initialization and creation
@@ -94,7 +88,6 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             HLSLoggerWarn(@"The image %@ does not exist", backgroundImageName);
             self.backgroundView = nil;
         }
-        
     }
     
     if (selectedBackgroundImageName) {

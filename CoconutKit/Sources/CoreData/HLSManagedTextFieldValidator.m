@@ -24,9 +24,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 @property (nonatomic, retain) NSFormatter *formatter;
 @property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
-- (BOOL)checkValue:(id)value;
-- (void)synchronizeTextField;
-
 @end
 
 @implementation HLSManagedTextFieldValidator
@@ -92,18 +89,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize managedObject = m_managedObject;
-
-@synthesize fieldName = m_fieldName;
-
-@synthesize formatter = m_formatter;
-
-@synthesize validationDelegate = m_validationDelegate;
-
-@synthesize checkingOnChange = m_checkingOnChange;
 
 #pragma mark UITextFieldDelegate protocol implementation
 

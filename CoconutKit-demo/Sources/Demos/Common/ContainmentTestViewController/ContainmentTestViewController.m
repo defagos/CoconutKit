@@ -10,6 +10,12 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface ContainmentTestViewController ()
+
+@property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;
+
+@end
+
 @implementation ContainmentTestViewController
 
 #pragma mark Object creation and destruction
@@ -20,10 +26,6 @@
     
     self.presentingModalSwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize presentingModalSwitch = m_presentingModalSwitch;
 
 #pragma mark View lifecycle
 

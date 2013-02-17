@@ -9,9 +9,5 @@
 /**
  * A view controller needing time to load
  */
-@interface HeavyViewController : HLSViewController {
-@private
-    void *m_largeBlock;
-}
-
+@interface HeavyViewController : HLSViewController
 @end

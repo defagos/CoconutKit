@@ -18,29 +18,26 @@
 
 @interface HLSCursor ()
 
-- (void)hlsCursorInit;
-
 @property (nonatomic, retain) NSArray *elementWrapperViews;
 @property (nonatomic, retain) NSArray *elementWrapperViewSizeValues;
 
 @property (nonatomic, retain) UIView *pointerContainerView;
 
-- (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
-- (UIView *)elementWrapperViewForIndex:(NSUInteger)index;
-
-- (CGFloat)xPosForIndex:(NSUInteger)index;
-- (NSUInteger)indexForXPos:(CGFloat)xPos;
-
-- (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected;
-
-- (CGRect)pointerFrameForIndex:(NSUInteger)index;
-- (CGRect)pointerFrameForXPos:(CGFloat)xPos;
-
-- (void)clear;
-
 @end
 
-@implementation HLSCursor
+@implementation HLSCursor {
+@private
+    NSUInteger _selectedIndex;
+    CGFloat _initialDraggingXOffset;
+    BOOL _moved;
+    BOOL _moving;
+    BOOL _dragging;
+    BOOL _holding;
+    BOOL _creatingViews;
+    BOOL _viewsCreated;
+    NSUInteger _initialIndex;
+    CGFloat _spacing;
+}
 
 #pragma mark Object creation and destruction
 
@@ -66,7 +63,7 @@
     self.elementWrapperViewSizeValues = nil;
     
     // Very special case here. Cannot use the property since it cannot change the pointer view once set!
-    [m_pointerView release];
+    [_pointerView release];
     
     self.pointerContainerView = nil;
     self.dataSource = nil;
@@ -83,33 +80,15 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize elementWrapperViews = m_elementWrapperViews;
-
-@synthesize elementWrapperViewSizeValues = m_elementWrapperViewSizeValues;
-
-@synthesize pointerContainerView = m_pointerContainerView;
-
-@synthesize pointerView = m_pointerView;
-
 - (void)setPointerView:(UIView *)pointerView
 {
-    if (m_pointerView) {
+    if (_pointerView) {
         HLSLoggerError(@"Cannot change the pointer view once it has been set");
         return;
     }
     
-    m_pointerView = [pointerView retain];
+    _pointerView = [pointerView retain];
 }
-
-@synthesize animationDuration = m_animationDuration;
-
-@synthesize pointerViewTopLeftOffset = m_pointerViewTopLeftOffset;
-
-@synthesize pointerViewBottomRightOffset = m_pointerViewBottomRightOffset;
-
-@synthesize dataSource = m_dataSource;
-
-@synthesize delegate = m_delegate;
 
 #pragma mark Layout
 
@@ -117,7 +96,7 @@
 {
     // Create subviews views lazily the first time they are needed; not doing this in init allows clients to customize
     // the views before they are displayed
-    if (! m_viewsCreated) {
+    if (! _viewsCreated) {
         // Create the subview set
         self.elementWrapperViews = [NSArray array];
         self.elementWrapperViewSizeValues = [NSArray array];
@@ -156,12 +135,12 @@
     // Cursor large enough so that everything fits in: Add space between elements
     CGFloat widthScaleFactor = 1.f;
     if (floatle(requiredWidth, CGRectGetWidth(self.frame))) {
-        m_spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
+        _spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
     }
     // Not large enough: Scale all views so that they can fit with no space in between
     else {
         widthScaleFactor = CGRectGetWidth(self.frame) / requiredWidth;
-        m_spacing = 0.f;
+        _spacing = 0.f;
     }
     
     // Cursor not tall enough: Scale all views so that they can fit vertically
@@ -181,12 +160,12 @@
                                               floorf((CGRectGetHeight(self.frame) - heightScaleFactor * elementWrapperViewSize.height) / 2.f),
                                               widthScaleFactor * elementWrapperViewSize.width,
                                               heightScaleFactor * elementWrapperViewSize.height);
-        xPos += CGRectGetWidth(elementWrapperView.frame) + m_spacing;
+        xPos += CGRectGetWidth(elementWrapperView.frame) + _spacing;
         
         ++i;
     }
     
-    if (! m_viewsCreated) {
+    if (! _viewsCreated) {
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
             UIImage *pointerImage = [UIImage imageNamed:@"CoconutKit-resources.bundle/CursorDefaultPointer.png"];
@@ -198,8 +177,8 @@
             self.pointerView = imageView;
         }
         
-        if (m_initialIndex >= [self.elementWrapperViews count]) {
-            m_initialIndex = 0;
+        if (_initialIndex >= [self.elementWrapperViews count]) {
+            _initialIndex = 0;
             HLSLoggerWarn(@"Initial index too large; fixed");
         }
         
@@ -214,14 +193,14 @@
         [self.pointerContainerView addSubview:self.pointerView];
         [self addSubview:self.pointerContainerView];
         
-        m_creatingViews = YES;
+        _creatingViews = YES;
         
-        [self setSelectedIndex:m_initialIndex animated:NO];
+        [self setSelectedIndex:_initialIndex animated:NO];
         
-        m_viewsCreated = YES;
+        _viewsCreated = YES;
     }
-    else if (! m_dragging && ! m_moving) {
-        self.pointerContainerView.frame = [self pointerFrameForIndex:m_selectedIndex];
+    else if (! _dragging && ! _moving) {
+        self.pointerContainerView.frame = [self pointerFrameForIndex:_selectedIndex];
     }
 }
 
@@ -335,12 +314,12 @@
 
 - (NSUInteger)selectedIndex
 {
-    return m_selectedIndex;
+    return _selectedIndex;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
-    if (m_creatingViews) {
+    if (_creatingViews) {
         if ([self.elementWrapperViews count] > 0 && selectedIndex >= [self.elementWrapperViews count]) {
             HLSLoggerWarn(@"Index outside range. Set to last index");
             selectedIndex = [self.elementWrapperViews count] - 1;
@@ -363,9 +342,9 @@
     }
     else {
         // Will only be used if setSelectedIndex has been called before the views are actually created; not
-        // wrapped in an "if (! m_viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
+        // wrapped in an "if (! _viewsCreated) {...}" test, though. This way, when the cursor is reloaded,
         // the most recently set value is used as initial index
-        m_initialIndex = selectedIndex;
+        _initialIndex = selectedIndex;
     }
 }
 
@@ -403,8 +382,8 @@
 {
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - m_spacing / 2.f)
-            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + m_spacing / 2.f)) {
+        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - _spacing / 2.f)
+            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + _spacing / 2.f)) {
             return index;
         }
         ++index;
@@ -412,7 +391,7 @@
     
     // No match found; return leftmost or rightmost element view
     UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
-    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - m_spacing / 2.f)) {
+    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - _spacing / 2.f)) {
         return 0;
     }
     else {
@@ -495,15 +474,15 @@
     [self.pointerContainerView removeFromSuperview];
     self.pointerContainerView = nil;
     
-    m_selectedIndex = 0;
-    m_viewsCreated = NO;
+    _selectedIndex = 0;
+    _viewsCreated = NO;
 }
 
 #pragma mark Touch events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    m_holding = YES;
+    _holding = YES;
     
     CGPoint point = [[touches anyObject] locationInView:self];
     NSUInteger index = [self indexForXPos:point.x];
@@ -512,7 +491,7 @@
         [self.delegate cursor:self didTouchDownNearIndex:index];
     }
     
-    if (index != m_selectedIndex) {
+    if (index != _selectedIndex) {
         [self setSelectedIndex:index animated:YES];
     }
 }
@@ -522,34 +501,34 @@
     CGPoint point = [[touches anyObject] locationInView:self];
     
     // Start dragging
-    if (! m_dragging) {
+    if (! _dragging) {
         // Check that we are actually grabbing the pointer view
         if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
-            m_dragging = YES;
+            _dragging = YES;
             
             // Offset between the point where the finger touches the screen when dragging begins and initial center
             // of the view which will be moved. This makes it possible to compensate this initial offset so that
             // the view frame does not "jump" at the finger location (so that the finger is then at the view center) once
             // the first finger motion is detected. Instead, the frame will nicely follow the finger, even if it was not
             // initially touched at its center
-            m_initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
+            _initialDraggingXOffset = point.x - self.pointerContainerView.center.x;
             
-            [self showElementViewAtIndex:m_selectedIndex selected:NO];
+            [self showElementViewAtIndex:_selectedIndex selected:NO];
             
-            if (! m_moved) {
+            if (! _moved) {
                 if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-                    [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
+                    [self.delegate cursor:self didMoveFromIndex:_selectedIndex];
                 }                
             }
             
             if ([self.delegate respondsToSelector:@selector(cursorDidStartDragging:nearIndex:)]) {
-                [self.delegate cursorDidStartDragging:self nearIndex:m_selectedIndex];
+                [self.delegate cursorDidStartDragging:self nearIndex:_selectedIndex];
             }
         }
     }
     // Dragging
     else {
-        CGFloat xPos = point.x - m_initialDraggingXOffset;
+        CGFloat xPos = point.x - _initialDraggingXOffset;
         self.pointerContainerView.frame = [self pointerFrameForXPos:xPos];
         
         if ([self.delegate respondsToSelector:@selector(cursor:didDragNearIndex:)]) {
@@ -563,7 +542,7 @@
     CGPoint point = [[touches anyObject] locationInView:self];
     NSUInteger index = [self indexForXPos:point.x];
     
-    if (m_dragging) {
+    if (_dragging) {
         if ([self.delegate respondsToSelector:@selector(cursorDidStopDragging:nearIndex:)]) {
             [self.delegate cursorDidStopDragging:self nearIndex:index];
         }
@@ -583,24 +562,24 @@
         [snapAnimation playAnimated:YES];
     }
     else {
-        if (m_selectedIndex != index) {
+        if (_selectedIndex != index) {
             if (CGRectContainsPoint(self.pointerContainerView.frame, point)) {
-                m_selectedIndex = index;
+                _selectedIndex = index;
             }
             else {
-                m_selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
+                _selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
             }
             
-            [self showElementViewAtIndex:m_selectedIndex selected:YES];
+            [self showElementViewAtIndex:_selectedIndex selected:YES];
             
             if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
-                [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
+                [self.delegate cursor:self didMoveToIndex:_selectedIndex];
             }
         }
         
-        m_holding = NO;
-        m_dragging = NO;
-        m_moved = NO;
+        _holding = NO;
+        _dragging = NO;
+        _moved = NO;
     }
     
     if ([self.delegate respondsToSelector:@selector(cursor:didTouchUpNearIndex:)]) {
@@ -610,27 +589,27 @@
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    m_holding = NO;
+    _holding = NO;
 }
 
 #pragma mark HLSAnimationDelegate protocol implementation
 
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    if (! m_viewsCreated) {
+    if (! _viewsCreated) {
         return;
     }
     
     if ([animation.tag isEqualToString:@"move"]) {
-        m_moving = YES;
-        m_moved = YES;
+        _moving = YES;
+        _moved = YES;
         
-        [self showElementViewAtIndex:m_selectedIndex selected:NO];
+        [self showElementViewAtIndex:_selectedIndex selected:NO];
         
         // The selected index is only updated after the pointer has reached its destination, i.e. at the end of
         // the animation
         if ([self.delegate respondsToSelector:@selector(cursor:didMoveFromIndex:)]) {
-            [self.delegate cursor:self didMoveFromIndex:m_selectedIndex];
+            [self.delegate cursor:self didMoveFromIndex:_selectedIndex];
         }
     }
 }
@@ -639,30 +618,30 @@
 {
     if ([animation.tag isEqualToString:@"move"]) {
         // If the finger has been released during the move animation, update the selected index and notify
-        if (! m_holding) {
-            m_selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        if (! _holding) {
+            _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
             
-            [self showElementViewAtIndex:m_selectedIndex selected:YES];
+            [self showElementViewAtIndex:_selectedIndex selected:YES];
             
             if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
-                [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
+                [self.delegate cursor:self didMoveToIndex:_selectedIndex];
             }
         }
         
-        m_moving = NO;
+        _moving = NO;
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
-        m_selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
         
-        [self showElementViewAtIndex:m_selectedIndex selected:YES];
+        [self showElementViewAtIndex:_selectedIndex selected:YES];
         
         if ([self.delegate respondsToSelector:@selector(cursor:didMoveToIndex:)]) {
-            [self.delegate cursor:self didMoveToIndex:m_selectedIndex];
+            [self.delegate cursor:self didMoveToIndex:_selectedIndex];
         }
         
-        m_holding = NO;
-        m_dragging = NO;
-        m_moved = NO;
+        _holding = NO;
+        _dragging = NO;
+        _moved = NO;
     }
 }
 

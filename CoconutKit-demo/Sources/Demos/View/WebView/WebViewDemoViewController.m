@@ -8,6 +8,13 @@
 
 #import "WebViewDemoViewController.h"
 
+@interface WebViewDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UISwitch *scrollEnabledSwitch;
+
+@end
+
 @implementation WebViewDemoViewController
 
 #pragma mark Object creation and destruction
@@ -19,12 +26,6 @@
     self.webView = nil;
     self.scrollEnabledSwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize webView = m_webView;
-
-@synthesize scrollEnabledSwitch = m_scrollEnabledSwitch;
 
 #pragma mark View lifecycle
 
@@ -48,7 +49,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Web view", @"Web view");
+    self.title = NSLocalizedString(@"Web view", nil);
 }
 
 #pragma mark Event callbacks

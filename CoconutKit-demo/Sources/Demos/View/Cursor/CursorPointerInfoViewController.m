@@ -19,10 +19,6 @@
     self.valueLabel = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize valueLabel = m_valueLabel;
-
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations

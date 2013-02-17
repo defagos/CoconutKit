@@ -18,9 +18,6 @@
 @property (nonatomic, assign) NSTimeInterval animationDuration;
 @property (nonatomic, assign) UIViewAnimationCurve animationCurve;
 
-+ (void)keyboardWillShow:(NSNotification *)notification;
-+ (void)keyboardWillHide:(NSNotification *)notification;
-
 @end
 
 static HLSKeyboardInformation *s_instance = nil;
@@ -78,16 +75,6 @@ static HLSKeyboardInformation *s_instance = nil;
     HLSForbiddenInheritedMethod();
     return nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize beginFrame = m_beginFrame;
-
-@synthesize endFrame = m_endFrame;
-
-@synthesize animationDuration = m_animationDuration;
-
-@synthesize animationCurve = m_animationCurve;
 
 #pragma mark Notification callbacks
 

@@ -13,18 +13,31 @@
 #import "CursorPointerInfoViewController.h"
 #import "CursorSelectedFolderView.h"
 
-@interface CursorDemoViewController ()
-
-@property (nonatomic, retain) UIPopoverController *popoverController;
-
-@end
-
-@implementation CursorDemoViewController
-
 static NSArray *s_weekDays = nil;
 static NSArray *s_completeRange = nil;
 static NSArray *s_timeScales = nil;
 static NSArray *s_folders = nil;
+
+@interface CursorDemoViewController ()
+
+@property (nonatomic, retain) UIPopoverController *currentPopoverController;
+
+@property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
+@property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
+@property (nonatomic, retain) IBOutlet HLSCursor *randomRangeCursor;
+@property (nonatomic, retain) IBOutlet UILabel *randomRangeIndexLabel;
+@property (nonatomic, retain) IBOutlet UISlider *widthFactorSlider;
+@property (nonatomic, retain) IBOutlet UISlider *heightFactorSlider;
+@property (nonatomic, retain) IBOutlet HLSCursor *timeScalesCursor;
+@property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;
+@property (nonatomic, retain) IBOutlet HLSCursor *mixedFoldersCursor;
+
+@end
+
+@implementation CursorDemoViewController {
+@private
+    CGSize _originalRandomRangeCursorSize;
+}
 
 #pragma mark Class methods
 
@@ -40,7 +53,7 @@ static NSArray *s_folders = nil;
 
 - (void)dealloc
 {
-    self.popoverController = nil;
+    self.currentPopoverController = nil;
     
     [super dealloc];
 }
@@ -59,28 +72,6 @@ static NSArray *s_folders = nil;
     self.foldersCursor = nil;
     self.mixedFoldersCursor = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize weekDaysCursor = m_weekDaysCursor;
-
-@synthesize weekDayIndexLabel = m_weekDayIndexLabel;
-
-@synthesize randomRangeCursor = m_randomRangeCursor;
-
-@synthesize randomRangeIndexLabel = m_randomRangeIndexLabel;
-
-@synthesize widthFactorSlider = m_widthFactorSlider;
-
-@synthesize heightFactorSlider = m_heightFactorSlider;
-
-@synthesize timeScalesCursor = m_timeScalesCursor;
-
-@synthesize foldersCursor = m_foldersCursor;
-
-@synthesize mixedFoldersCursor = m_mixedFoldersCursor;
-
-@synthesize popoverController = m_popoverController;
 
 #pragma mark View lifecycle
 
@@ -117,7 +108,7 @@ static NSArray *s_folders = nil;
 {
     [super viewWillAppear:animated];
     
-    m_originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
+    _originalRandomRangeCursorSize = self.randomRangeCursor.frame.size;
 }
 
 #pragma mark Orientation management
@@ -129,7 +120,7 @@ static NSArray *s_folders = nil;
     // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
     // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
     // the view
-    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, m_originalRandomRangeCursorSize.width, m_originalRandomRangeCursorSize.height);
+    self.randomRangeCursor.bounds = CGRectMake(0.f, 0.f, _originalRandomRangeCursorSize.width, _originalRandomRangeCursorSize.height);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -137,7 +128,7 @@ static NSArray *s_folders = nil;
     // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
     // are able to restore them when rotating again, and set size according to the previous size slider value. This
     // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
-    m_originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
+    _originalRandomRangeCursorSize = self.randomRangeCursor.bounds.size;
     [self sizeChanged:nil];
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -149,7 +140,7 @@ static NSArray *s_folders = nil;
 {
     [super didReceiveMemoryWarning];
     
-    self.popoverController = nil;
+    self.currentPopoverController = nil;
 }
 
 #pragma mark HLSCursorDataSource protocol implementation
@@ -267,11 +258,11 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move from index %d", cursor, index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.weekDayIndexLabel.textColor = [UIColor redColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.randomRangeIndexLabel.textColor = [UIColor redColor];
     }    
 }
@@ -281,11 +272,11 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move to index %d", cursor, index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.weekDayIndexLabel.textColor = [UIColor blackColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.randomRangeIndexLabel.textColor = [UIColor blackColor];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
@@ -298,10 +289,10 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did start dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        if (! self.popoverController) {
+        if (! self.currentPopoverController) {
             CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
-            self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
-            self.popoverController.popoverContentSize = infoViewController.view.frame.size;
+            self.currentPopoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
+            self.currentPopoverController.popoverContentSize = infoViewController.view.frame.size;
         }        
     }
 }
@@ -311,14 +302,14 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did drag near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
+        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.currentPopoverController.contentViewController;
         infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
         
-        [self.popoverController dismissPopoverAnimated:NO];
-        [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
-                                                inView:cursor.pointerView
-                              permittedArrowDirections:UIPopoverArrowDirectionDown
-                                              animated:NO];
+        [self.currentPopoverController dismissPopoverAnimated:NO];
+        [self.currentPopoverController presentPopoverFromRect:cursor.pointerView.bounds
+                                                       inView:cursor.pointerView
+                                     permittedArrowDirections:UIPopoverArrowDirectionDown
+                                                     animated:NO];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
@@ -330,7 +321,7 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did stop dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        [self.popoverController dismissPopoverAnimated:NO];
+        [self.currentPopoverController dismissPopoverAnimated:NO];
     }
 }
 
@@ -350,8 +341,8 @@ static NSArray *s_folders = nil;
 {
     self.randomRangeCursor.bounds = CGRectMake(0.f,
                                                0.f,
-                                               m_originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
-                                               m_originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
+                                               _originalRandomRangeCursorSize.width * self.widthFactorSlider.value,
+                                               _originalRandomRangeCursorSize.height * self.heightFactorSlider.value);
 }
 
 #pragma mark Localization
@@ -360,13 +351,13 @@ static NSArray *s_folders = nil;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Cursor", @"Cursor");
+    self.title = NSLocalizedString(@"Cursor", nil);
     
     [s_timeScales release];
-    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],
-                     [NSLocalizedString(@"Month", @"Month") uppercaseString],
-                     [NSLocalizedString(@"Week", @"Week") uppercaseString],
-                     [NSLocalizedString(@"Day", @"Day") uppercaseString],
+    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", nil) uppercaseString],
+                     [NSLocalizedString(@"Month", nil) uppercaseString],
+                     [NSLocalizedString(@"Week", nil) uppercaseString],
+                     [NSLocalizedString(@"Day", nil) uppercaseString],
                      nil] retain];
     
     [self.weekDaysCursor reloadData];

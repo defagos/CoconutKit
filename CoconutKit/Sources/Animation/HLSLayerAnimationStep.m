@@ -33,12 +33,17 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 @property (nonatomic, retain) UIView *dummyView;
 
-- (void)animationDidStart:(CAAnimation *)animation;
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
-
 @end
 
-@implementation HLSLayerAnimationStep
+@implementation HLSLayerAnimationStep {
+@private
+    NSUInteger _numberOfLayerAnimations;
+    BOOL _numberOfStartedLayerAnimations;
+    NSUInteger _numberOfFinishedLayerAnimations;
+    CFTimeInterval _startTime;
+    CFTimeInterval _pauseTime;
+    CFTimeInterval _previousPauseDuration;
+}
 
 #pragma mark Object creation and destruction
 
@@ -57,12 +62,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize timingFunction = m_timingFunction;
-
-@synthesize dummyView = m_dummyView;
 
 #pragma mark Managing the animation
 
@@ -289,18 +288,18 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         // We need to keep track of animations which have started / ended (there is no way to known when a
         // CATransaction has started or ended, and there order in which the child animations are started or
         // ended is unspecified)
-        m_numberOfStartedLayerAnimations = 0;
-        m_numberOfFinishedLayerAnimations = 0;
+        _numberOfStartedLayerAnimations = 0;
+        _numberOfFinishedLayerAnimations = 0;
         
         // We want to be able to test the number of animations in the animation stop callback. If the animated
         // layers are dead when the end callback is called (which can happen if the layer they are on is
         // destroyed while the animation was running), we cannot compare to self.objects anymore (otherwise
         // the application will crash). We therefore keep track of how animations are expected, but in a safe way
         // (+ 1 for the dummy view animation)
-        m_numberOfLayerAnimations = [self.objects count] + 1;
+        _numberOfLayerAnimations = [self.objects count] + 1;
         
         // When a start time has been defined, the animation must look like it started earlier
-        m_startTime = CACurrentMediaTime() - startTime;
+        _startTime = CACurrentMediaTime() - startTime;
         
         [CATransaction commit];
     }
@@ -313,7 +312,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     }
     [self.dummyView.layer pauseAllAnimations];
     
-    m_pauseTime = CACurrentMediaTime();
+    _pauseTime = CACurrentMediaTime();
 }
 
 - (void)resumeAnimation
@@ -323,8 +322,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     }
     [self.dummyView.layer resumeAllAnimations];
     
-    m_previousPauseDuration += CACurrentMediaTime() - m_pauseTime;
-    m_pauseTime = 0.;
+    _previousPauseDuration += CACurrentMediaTime() - _pauseTime;
+    _pauseTime = 0.;
 }
 
 - (BOOL)isAnimationPaused
@@ -346,11 +345,11 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 - (NSTimeInterval)elapsedTime
 {
     NSTimeInterval currentPauseDuration = 0.;
-    if (! doubleeq(m_pauseTime, 0.)) {
-        currentPauseDuration = CACurrentMediaTime() - m_pauseTime;
+    if (! doubleeq(_pauseTime, 0.)) {
+        currentPauseDuration = CACurrentMediaTime() - _pauseTime;
     }
     
-    return CACurrentMediaTime() - m_startTime - m_previousPauseDuration - currentPauseDuration;
+    return CACurrentMediaTime() - _startTime - _previousPauseDuration - currentPauseDuration;
 }
 
 #pragma mark Reverse animation
@@ -375,15 +374,15 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (void)animationDidStart:(CAAnimation *)animation
 {
-    m_numberOfStartedLayerAnimations++;
+    _numberOfStartedLayerAnimations++;
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished
 {
-    m_numberOfFinishedLayerAnimations++;
+    _numberOfFinishedLayerAnimations++;
     
-    if (m_numberOfFinishedLayerAnimations == m_numberOfLayerAnimations) {
-        NSAssert(m_numberOfStartedLayerAnimations == m_numberOfFinishedLayerAnimations,
+    if (_numberOfFinishedLayerAnimations == _numberOfLayerAnimations) {
+        NSAssert(_numberOfStartedLayerAnimations == _numberOfFinishedLayerAnimations,
                  @"The number of started and finished animations must be the same");
         
         [self.dummyView removeFromSuperview];

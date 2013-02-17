@@ -6,24 +6,12 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-// Forward declarations
-@protocol HLSAnimationStepDelegate;
-
 /**
  * Abstract base class for animation steps. Do not instantiate directly
  *
  * Designated initializer: -init
  */
-@interface HLSAnimationStep : NSObject <NSCopying> {
-@private
-    NSMutableArray *m_objectKeys;
-    NSMutableDictionary *m_objectToObjectAnimationMap;
-    NSString *m_tag;
-    NSDictionary *m_userInfo;
-    NSTimeInterval m_duration;
-    id<HLSAnimationStepDelegate> m_delegate;
-    BOOL m_terminating;
-}
+@interface HLSAnimationStep : NSObject <NSCopying>
 
 /**
  * Convenience constructor for an animation step with default settings and nothing to animate

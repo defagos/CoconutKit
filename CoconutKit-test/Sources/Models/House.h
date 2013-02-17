@@ -1,8 +1,4 @@
 #import "_House.h"
 
-@interface House : _House <HLSManagedObjectCopying> {
-@private
-    
-}
-
+@interface House : _House <HLSManagedObjectCopying>
 @end

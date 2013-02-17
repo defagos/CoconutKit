@@ -10,7 +10,7 @@
 
 @interface MemoryWarningTestCoverViewController ()
 
-- (void)close:(id)sender;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *closeBarButtonItem;
 
 @end
 
@@ -24,10 +24,6 @@
     
     self.closeBarButtonItem = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize closeBarButtonItem = m_closeBarButtonItem;
 
 #pragma mark View lifecycle
 
@@ -53,7 +49,7 @@
     [super localize];
     
     self.title = @"MemoryWarningTestCoverViewController";
-    self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
+    self.closeBarButtonItem.title = NSLocalizedString(@"Close", nil);
 }
 
 @end

@@ -10,6 +10,37 @@
 
 #import "SleepTask.h"
 
+@interface ParallelProcessingDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UIButton *taskStartButton;
+@property (nonatomic, retain) IBOutlet UIButton *taskStopButton;
+@property (nonatomic, retain) IBOutlet UIProgressView *taskProgressView;
+@property (nonatomic, retain) IBOutlet UILabel *taskRemainingTimeEstimateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *taskRemainingTimeLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *taskGroupStartButton;
+@property (nonatomic, retain) IBOutlet UIButton *taskGroupStopButton;
+@property (nonatomic, retain) IBOutlet UIProgressView *taskGroupProgressView;
+@property (nonatomic, retain) IBOutlet UILabel *taskGroupRemainingTimeEstimateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *taskGroupRemainingTimeLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *subTask1StopButton;
+@property (nonatomic, retain) IBOutlet UIProgressView *subTask1ProgressView;
+@property (nonatomic, retain) IBOutlet UILabel *subTask1RemainingTimeEstimateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *subTask1RemainingTimeLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *subTask2StopButton;
+@property (nonatomic, retain) IBOutlet UIProgressView *subTask2ProgressView;
+@property (nonatomic, retain) IBOutlet UILabel *subTask2RemainingTimeEstimateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *subTask2RemainingTimeLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *subTask3StopButton;
+@property (nonatomic, retain) IBOutlet UIProgressView *subTask3ProgressView;
+@property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeEstimateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeLabel;
+
+@end
+
 // Remark:
 // Please apologize for the copy-paste code, but this is a sample and this was the fastest option. Your production
 // code should always be more cleverly written
@@ -115,52 +146,6 @@
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize taskStartButton = m_taskStartButton;
-
-@synthesize taskStopButton = m_taskStopButton;
-
-@synthesize taskProgressView = m_taskProgressView;
-
-@synthesize taskRemainingTimeEstimateLabel = m_taskRemainingTimeEstimateLabel;
-
-@synthesize taskRemainingTimeLabel = m_taskRemainingTimeLabel;
-
-@synthesize taskGroupStartButton = m_taskGroupStartButton;
-
-@synthesize taskGroupStopButton = m_taskGroupStopButton;
-
-@synthesize taskGroupProgressView = m_taskGroupProgressView;
-
-@synthesize taskGroupRemainingTimeEstimateLabel = m_taskGroupRemainingTimeEstimateLabel;
-
-@synthesize taskGroupRemainingTimeLabel = m_taskGroupRemainingTimeLabel;
-
-@synthesize subTask1StopButton = m_subTask1StopButton;
-
-@synthesize subTask1ProgressView = m_subTask1ProgressView;
-
-@synthesize subTask1RemainingTimeEstimateLabel = m_subTask1RemainingTimeEstimateLabel;
-
-@synthesize subTask1RemainingTimeLabel = m_subTask1RemainingTimeLabel;
-
-@synthesize subTask2StopButton = m_subTask2StopButton;
-
-@synthesize subTask2ProgressView = m_subTask2ProgressView;
-
-@synthesize subTask2RemainingTimeEstimateLabel = m_subTask2RemainingTimeEstimateLabel;
-
-@synthesize subTask2RemainingTimeLabel = m_subTask2RemainingTimeLabel;
-
-@synthesize subTask3StopButton = m_subTask3StopButton;
-
-@synthesize subTask3ProgressView = m_subTask3ProgressView;
-
-@synthesize subTask3RemainingTimeEstimateLabel = m_subTask3RemainingTimeEstimateLabel;
-
-@synthesize subTask3RemainingTimeLabel = m_subTask3RemainingTimeLabel;
-
 #pragma mark HLSTaskDelegate protocol implementation
 
 - (void)taskHasStartedProcessing:(HLSTask *)task
@@ -228,10 +213,10 @@
     if ([task.tag isEqualToString:@"T_task"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -246,10 +231,10 @@
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -263,10 +248,10 @@
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -280,10 +265,10 @@
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -456,7 +441,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+    self.title = NSLocalizedString(@"Parallel processing", nil);
 }
 
 @end

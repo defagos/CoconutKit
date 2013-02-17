@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
+#import "HLSVector.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -46,14 +47,6 @@
 @property (nonatomic, assign) CGFloat opacityIncrement;
 @property (nonatomic, assign) CGFloat rasterizationScaleIncrement;
 
-- (CATransform3D)rotationTransform;
-- (CATransform3D)scaleTransform;
-- (CATransform3D)translationTransform;
-
-- (CATransform3D)sublayerRotationTransform;
-- (CATransform3D)sublayerScaleTransform;
-- (CATransform3D)sublayerTranslationTransform;
-
 @end
 
 @implementation HLSLayerAnimation
@@ -79,28 +72,6 @@
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize rotationParameters = m_rotationParameters;
-
-@synthesize scaleParameters = m_scaleParameters;
-
-@synthesize translationParameters = m_translationParameters;
-
-@synthesize anchorPointTranslationParameters = m_anchorPointTranslationParameters;
-
-@synthesize sublayerRotationParameters = m_sublayerRotationParameters;
-
-@synthesize sublayerScaleParameters = m_sublayerScaleParameters;
-
-@synthesize sublayerTranslationParameters = m_sublayerTranslationParameters;
-
-@synthesize sublayerCameraTranslationZ = m_sublayerCameraTranslationZ;
-
-@synthesize opacityIncrement = m_opacityIncrement;
-
-@synthesize togglingShouldRasterize = m_togglingShouldRasterize;
-
-@synthesize rasterizationScaleIncrement = m_rasterizationScaleIncrement;
 
 - (CATransform3D)transform
 {
@@ -256,14 +227,14 @@
     // Sanitize input
     if (floatlt(opacityIncrement, -1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be smaller than -1. Fixed to -1");
-        m_opacityIncrement = -1.f;
+        _opacityIncrement = -1.f;
     }
     else if (floatgt(opacityIncrement, 1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be larger than 1. Fixed to 1");
-        m_opacityIncrement = 1.f;
+        _opacityIncrement = 1.f;
     }
     else {
-        m_opacityIncrement = opacityIncrement;
+        _opacityIncrement = opacityIncrement;
     }
 }
 

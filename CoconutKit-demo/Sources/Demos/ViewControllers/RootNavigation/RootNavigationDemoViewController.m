@@ -10,6 +10,16 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface RootNavigationDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
+@end
+
 @implementation RootNavigationDemoViewController
 
 #pragma mark Object creation and destruction
@@ -24,18 +34,6 @@
     self.portraitUpsideDownSwitch = nil;
     self.autorotationModeSegmentedControl = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize portraitSwitch = m_portraitSwitch;
-
-@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -189,10 +187,10 @@
     
     self.title = @"RootNavigationDemoViewController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", nil) forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:3];
 }
 
 #pragma mark Action callbacks

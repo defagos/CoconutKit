@@ -10,25 +10,6 @@
 
 @implementation FixedSizeViewController
 
-#pragma mark Object creation and destruction
-
-- (id)initLarge:(BOOL)large
-{
-    if ((self = [super initWithNibName:large ? @"FixedSizeLargeViewController" : @"FixedSizeViewController" bundle:nil])) {
-        self.large = large;
-    }
-    return self;
-}
-
-- (id)init
-{
-    return [self initLarge:NO];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize large = m_large;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -44,7 +25,7 @@
 {
     [super localize];
     
-    self.title = self.isLarge ? @"FixedSizeViewController (large)" : @"FixedSizeViewController";
+    self.title = @"FixedSizeViewController";
 }
 
 @end

@@ -10,6 +10,12 @@
 
 @interface ExpandingSearchBarDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar1;
+@property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar2;
+@property (nonatomic, retain) IBOutlet HLSExpandingSearchBar *searchBar3;
+
+@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
+
 @end
 
 @implementation ExpandingSearchBarDemoViewController
@@ -25,16 +31,6 @@
     self.searchBar3 = nil;
     self.animatedSwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize searchBar1 = m_searchBar1;
-
-@synthesize searchBar2 = m_searchBar2;
-
-@synthesize searchBar3 = m_searchBar3;
-
-@synthesize animatedSwitch = m_animatedSwitch;
 
 #pragma mark View lifecycle
 
@@ -63,13 +59,13 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Search bar", @"Search bar");
+    self.title = NSLocalizedString(@"Search bar", nil);
     
-    self.searchBar2.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
-    self.searchBar2.prompt = NSLocalizedString(@"Search books", @"Search books");
+    self.searchBar2.placeholder = NSLocalizedString(@"Enter a search criterium", nil);
+    self.searchBar2.prompt = NSLocalizedString(@"Search books", nil);
     
-    self.searchBar3.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
-    self.searchBar3.prompt = NSLocalizedString(@"Search books", @"Search books");
+    self.searchBar3.placeholder = NSLocalizedString(@"Enter a search criterium", nil);
+    self.searchBar3.prompt = NSLocalizedString(@"Search books", nil);
 }
 
 #pragma mark HLSExpandingSearchBarDelegate protocol implementation

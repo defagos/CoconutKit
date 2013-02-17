@@ -13,7 +13,20 @@ static NSArray *s_fontNames = nil;
 
 @interface LabelDemoViewController ()
 
-- (void)reloadData;
+@property (nonatomic, retain) IBOutlet HLSLabel *label;
+@property (nonatomic, retain) IBOutlet UILabel *standardLabel;
+@property (nonatomic, retain) IBOutlet UIPickerView *textPickerView;
+@property (nonatomic, retain) IBOutlet UIPickerView *fontPickerView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *baselineAdjustmentSegmentedControl;
+@property (nonatomic, retain) IBOutlet UISlider *numberOfLinesSlider;
+@property (nonatomic, retain) IBOutlet UILabel *numberOfLinesLabel;
+@property (nonatomic, retain) IBOutlet UISlider *fontSizeSlider;
+@property (nonatomic, retain) IBOutlet UILabel *fontSizeLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *adjustsFontSizeToFitWidthSwitch;
+@property (nonatomic, retain) IBOutlet UISlider *minFontSizeSlider;
+@property (nonatomic, retain) IBOutlet UILabel *minFontSizeLabel;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *verticalAlignmentSegmentedControl;
+@property (nonatomic, retain) IBOutlet UIPickerView *lineBreakModePickerView;
 
 @end
 
@@ -66,36 +79,6 @@ static NSArray *s_fontNames = nil;
     self.lineBreakModePickerView = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize label = _label;
-
-@synthesize standardLabel = _standardLabel;
-
-@synthesize textPickerView = _textPickerView;
-
-@synthesize fontPickerView = _fontPickerView;
-
-@synthesize baselineAdjustmentSegmentedControl = _baselineAdjustmentSegmentedControl;
-
-@synthesize numberOfLinesSlider = _numberOfLinesSlider;
-
-@synthesize numberOfLinesLabel = _numberOfLinesLabel;
-
-@synthesize fontSizeSlider = _fontSizeSlider;
-
-@synthesize fontSizeLabel = _fontSizeLabel;
-
-@synthesize adjustsFontSizeToFitWidthSwitch = _adjustsFontSizeToFitWidthSwitch;
-
-@synthesize minFontSizeSlider = _minFontSizeSlider;
-
-@synthesize minFontSizeLabel = _minFontSizeLabel;
-
-@synthesize verticalAlignmentSegmentedControl = _verticalAlignmentSegmentedControl;
-
-@synthesize lineBreakModePickerView = _lineBreakModePickerView;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -120,15 +103,15 @@ static NSArray *s_fontNames = nil;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Label", @"Label");
+    self.title = NSLocalizedString(@"Label", nil);
     
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Baselines", @"Baselines") forSegmentAtIndex:0];
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", @"Centers") forSegmentAtIndex:1];
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", @"None") forSegmentAtIndex:2];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Baselines", nil) forSegmentAtIndex:0];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", nil) forSegmentAtIndex:1];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", nil) forSegmentAtIndex:2];
     
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:0];
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:1];
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", @"Bottom") forSegmentAtIndex:2];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", nil) forSegmentAtIndex:0];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", nil) forSegmentAtIndex:1];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", nil) forSegmentAtIndex:2];
     
     [self reloadData];
 }

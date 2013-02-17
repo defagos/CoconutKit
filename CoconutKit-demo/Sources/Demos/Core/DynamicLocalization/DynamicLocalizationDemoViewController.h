@@ -6,19 +6,5 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-@interface DynamicLocalizationDemoViewController : HLSViewController {
-@private
-    UILabel *m_coloredLabel;
-    UIImageView *m_imageView;
-    UISwitch *m_missingLocalizationVisibilitySwitch;
-}
-
-@property (nonatomic, retain) IBOutlet UILabel *coloredLabel;   // No outlet would be needed for localization purposes only, but 
-                                                                // here we want to test background color changes
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
-
-- (IBAction)changeColor:(id)sender;
-- (IBAction)toggleMissingLocalizationVisibility:(id)sender;
-
+@interface DynamicLocalizationDemoViewController : HLSViewController
 @end

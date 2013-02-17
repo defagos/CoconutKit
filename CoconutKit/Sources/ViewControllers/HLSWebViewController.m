@@ -25,12 +25,13 @@
 
 @property (nonatomic, retain) UIImage *refreshImage;
 
-- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)updateInterface;
-- (void)updateTitle;
-
-- (void)openInSafari:(id)sender;
-- (void)mailLink:(id)sender;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -67,28 +68,6 @@
     self.activityIndicator = nil;
     self.refreshImage = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize request = m_request;
-
-@synthesize currentURL = m_currentURL;
-
-@synthesize webView = m_webView;
-
-@synthesize toolbar = m_toolbar;
-
-@synthesize goBackBarButtonItem = m_goBackBarButtonItem;
-
-@synthesize goForwardBarButtonItem = m_goForwardBarButtonItem;
-
-@synthesize refreshBarButtonItem = m_refreshBarButtonItem;
-
-@synthesize actionBarButtonItem = m_actionBarButtonItem;
-
-@synthesize activityIndicator = m_activityIndicator;
-
-@synthesize refreshImage = m_refreshImage;
 
 #pragma mark View lifecycle
 
@@ -178,7 +157,7 @@
         self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
     else {
-        self.title = NSLocalizedStringFromTableInBundle(@"Untitled", @"Localizable", [NSBundle coconutKitBundle], @"Untitled");
+        self.title = NSLocalizedStringFromTableInBundle(@"Untitled", @"Localizable", [NSBundle coconutKitBundle], nil);
     }
 }
 
@@ -220,9 +199,8 @@
     // We can also encounter other types of errors here (e.g. if a user clicks on two links consecutively on the same page. 
     // The first request is cancelled and ends with NSURLErrorCancelled)
     if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cannot Open Page", @"Localizable", [NSBundle coconutKitBundle], @"Cannot Open Page") 
-                                                             message:NSLocalizedStringFromTableInBundle(@"No Internet connection is available", @"Localizable", [NSBundle coconutKitBundle], 
-                                                                                                @"No Internet connection is available")
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cannot Open Page", @"Localizable", [NSBundle coconutKitBundle], nil)
+                                                             message:NSLocalizedStringFromTableInBundle(@"No Internet connection is available", @"Localizable", [NSBundle coconutKitBundle], nil)
                                                             delegate:nil 
                                                    cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK") 
                                                    otherButtonTitles:nil] autorelease];
@@ -264,11 +242,11 @@
 {    
     HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
     actionSheet.title = [self.currentURL absoluteString];
-    [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Open in Safari", @"Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Open in Safari' action")
+    [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Open in Safari", @"Localizable", [NSBundle coconutKitBundle], nil)
                              target:self
                              action:@selector(openInSafari:)];
     if ([MFMailComposeViewController canSendMail]) {
-        [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Mail Link", @"Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Mail Link' action")
+        [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Mail Link", @"Localizable", [NSBundle coconutKitBundle], nil)
                                  target:self
                                  action:@selector(mailLink:)];
     }

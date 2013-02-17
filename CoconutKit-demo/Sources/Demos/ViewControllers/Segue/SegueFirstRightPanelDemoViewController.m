@@ -19,13 +19,4 @@
     self.view.backgroundColor = [UIColor randomColor];
 }
 
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warnings
-}
-
 @end

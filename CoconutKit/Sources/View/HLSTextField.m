@@ -63,14 +63,6 @@ static UIScrollView *s_scrollView = nil;
 
 @property (nonatomic, retain) HLSTextFieldTouchDetector *touchDetector;
 
-+ (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated;
-+ (void)restoreScrollAnimated:(BOOL)animated;
-
-- (void)hlsTextFieldInit;
-
-- (void)keyboardWillShow:(NSNotification *)notification;
-- (void)keyboardWillHide:(NSNotification *)notification;
-
 @end
 
 @implementation HLSTextField
@@ -110,19 +102,15 @@ static UIScrollView *s_scrollView = nil;
 
 #pragma mark Accessors and mutators
 
-@synthesize touchDetector = m_touchDetector;
-
-@synthesize minVisibilityDistance = m_minVisibilityDistance;
-
 - (void)setTextFieldMinVisibilityDistance:(CGFloat)minVisibilityDistance
 {
     // Sanitize input
     if (floatlt(minVisibilityDistance, 0.f)) {
         HLSLoggerWarn(@"Invalid value; must be positive");
-        m_minVisibilityDistance = 0.f;
+        _minVisibilityDistance = 0.f;
     }
     else {
-        m_minVisibilityDistance = minVisibilityDistance;
+        _minVisibilityDistance = minVisibilityDistance;
     }
 }
 

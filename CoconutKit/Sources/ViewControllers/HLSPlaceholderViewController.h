@@ -95,14 +95,7 @@
  *
  * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate> {
-@private
-    NSMutableArray *m_containerStacks;
-    NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
-    HLSAutorotationMode m_autorotationMode;
-    id<HLSPlaceholderViewControllerDelegate> m_delegate;
-    BOOL m_loadedOnce;
-}
+@interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate>
 
 /**
  * Set a view controller to display as inset on the placeholder view corresponding to the given index. The transition 

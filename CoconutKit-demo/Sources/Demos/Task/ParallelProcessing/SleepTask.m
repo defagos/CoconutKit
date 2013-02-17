@@ -10,14 +10,17 @@
 
 #import "SleepTaskOperation.h"
 
-@implementation SleepTask
+@implementation SleepTask {
+@private
+    NSUInteger _secondsToSleep;
+}
 
 #pragma mark Object creation and destruction
 
 - (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep
 {
     if ((self = [super init])) {
-        m_secondsToSleep = secondsToSleep;
+        _secondsToSleep = secondsToSleep;
     }
     return self;
 }
@@ -31,7 +34,7 @@
 
 - (NSUInteger)secondsToSleep
 {
-    return m_secondsToSleep;
+    return _secondsToSleep;
 }
 
 @end

@@ -61,36 +61,22 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize objectKeys = m_objectKeys;
-
-@synthesize objectToObjectAnimationMap = m_objectToObjectAnimationMap;
-
-@synthesize tag = m_tag;
-
-@synthesize userInfo = m_userInfo;
-
-@synthesize duration = m_duration;
-
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
     if (doublelt(duration, 0.)) {
         HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
-        m_duration = 0.;
+        _duration = 0.;
     }
     else {
-        m_duration = duration;
+        _duration = duration;
     }
 }
-
-@synthesize delegate = m_delegate;
 
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
 }
-
-@synthesize terminating = m_terminating;
 
 - (NSArray *)objects
 {
@@ -116,7 +102,7 @@
         return;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
     [self.objectToObjectAnimationMap setObject:[[objectAnimation copy] autorelease] forKey:objectKey];
 }
@@ -127,7 +113,7 @@
         return nil;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     return [self.objectToObjectAnimationMap objectForKey:objectKey];
 }
 

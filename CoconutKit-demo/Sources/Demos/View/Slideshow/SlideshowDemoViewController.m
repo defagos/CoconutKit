@@ -10,7 +10,22 @@
 
 @interface SlideshowDemoViewController ()
 
-- (void)loadImages;
+@property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
+@property (nonatomic, retain) IBOutlet UIPickerView *effectPickerView;
+@property (nonatomic, retain) IBOutlet UILabel *currentImageNameLabel;
+@property (nonatomic, retain) IBOutlet UIButton *previousButton;
+@property (nonatomic, retain) IBOutlet UIButton *nextButton;
+@property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UIButton *pauseButton;
+@property (nonatomic, retain) IBOutlet UIButton *resumeButton;
+@property (nonatomic, retain) IBOutlet UIButton *stopButton;
+@property (nonatomic, retain) IBOutlet UIButton *skipToSpecificButton;
+@property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
+@property (nonatomic, retain) IBOutlet UIButton *imageSetButton;
+@property (nonatomic, retain) IBOutlet UISlider *imageDurationSlider;
+@property (nonatomic, retain) IBOutlet UILabel *imageDurationLabel;
+@property (nonatomic, retain) IBOutlet UISlider *transitionDurationSlider;
+@property (nonatomic, retain) IBOutlet UILabel *transitionDurationLabel;
 
 @end
 
@@ -39,40 +54,6 @@
     self.transitionDurationSlider = nil;
     self.transitionDurationLabel = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize slideshow = m_slideshow;
-
-@synthesize effectPickerView = m_effectPickerView;
-
-@synthesize currentImageNameLabel = m_currentImageNameLabel;
-
-@synthesize previousButton = m_previousButton;
-
-@synthesize nextButton = m_nextButton;
-
-@synthesize playButton = m_playButton;
-
-@synthesize pauseButton = m_pauseButton;
-
-@synthesize resumeButton = m_resumeButton;
-
-@synthesize stopButton = m_stopButton;
-
-@synthesize skipToSpecificButton = m_skipToSpecificButton;
-
-@synthesize randomSwitch = m_randomSwitch;
-
-@synthesize imageSetButton = m_imageSetButton;
-
-@synthesize imageDurationSlider = m_imageDurationSlider;
-
-@synthesize imageDurationLabel = m_imageDurationLabel;
-
-@synthesize transitionDurationSlider = m_transitionDurationSlider;
-
-@synthesize transitionDurationLabel = m_transitionDurationLabel;
 
 #pragma mark View lifecycle
 
@@ -111,7 +92,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Slideshow", @"Slideshow");
+    self.title = NSLocalizedString(@"Slideshow", nil);
 }
 
 #pragma mark HLSSlideshowDelegate protocol implementation

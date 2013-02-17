@@ -27,14 +27,6 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     return self;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize transitionClass = m_transitionClass;
-
-@synthesize duration = m_duration;
-
-@synthesize animated = m_animated;
-
 #pragma mark Overrides
 
 - (void)perform

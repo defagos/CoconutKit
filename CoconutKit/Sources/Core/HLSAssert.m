@@ -16,7 +16,6 @@
 
 @end
 
-
 @implementation NSAssertionHandler (HLSAssert)
 
 - (void)handleIncorrectObjectClass:(Class)objectClass 

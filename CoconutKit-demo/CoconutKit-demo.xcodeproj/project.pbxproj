@@ -77,14 +77,12 @@
 		6F159B8915A55CD10020AFAC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6F159B8A15A55CD10020AFAC /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
-		6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
 		6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
 		6F159B9215A55CD10020AFAC /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B514C5C30B00824AB2 /* LandscapeOnlyViewController.xib */; };
 		6F159B9315A55CD10020AFAC /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B914C5C30B00824AB2 /* LifeCycleTestViewController.xib */; };
 		6F159B9415A55CD10020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
 		6F159B9915A55CD10020AFAC /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
-		6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */; };
 		6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F159B9C15A55CD10020AFAC /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
 		6F159B9E15A55CD10020AFAC /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
@@ -179,7 +177,6 @@
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C459614C5C30B00824AB2 /* MainWindow.xib */; };
 		6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
-		6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */; };
 		6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
 		6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
 		6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; };
@@ -192,7 +189,6 @@
 		6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
 		6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
 		6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
-		6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */; };
 		6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
 		6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
@@ -387,7 +383,6 @@
 		6F9C459614C5C30B00824AB2 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6F9C459814C5C30B00824AB2 /* CoconutKit_demoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoApplication.h; sourceTree = "<group>"; };
 		6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoApplication.m; sourceTree = "<group>"; };
-		6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeLargeViewController.xib; sourceTree = "<group>"; };
 		6F9C45AB14C5C30B00824AB2 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
 		6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedSizeViewController.m; sourceTree = "<group>"; };
 		6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedSizeViewController.xib; sourceTree = "<group>"; };
@@ -406,7 +401,6 @@
 		6F9C45C614C5C30B00824AB2 /* PortraitOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortraitOnlyViewController.h; sourceTree = "<group>"; };
 		6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortraitOnlyViewController.m; sourceTree = "<group>"; };
 		6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitOnlyViewController.xib; sourceTree = "<group>"; };
-		6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StretchableLargeViewController.xib; sourceTree = "<group>"; };
 		6F9C45CB14C5C30B00824AB2 /* StretchableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StretchableViewController.h; sourceTree = "<group>"; };
 		6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StretchableViewController.m; sourceTree = "<group>"; };
 		6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StretchableViewController.xib; sourceTree = "<group>"; };
@@ -828,7 +822,6 @@
 		6F9C45A914C5C30B00824AB2 /* FixedSizeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45AA14C5C30B00824AB2 /* FixedSizeLargeViewController.xib */,
 				6F9C45AB14C5C30B00824AB2 /* FixedSizeViewController.h */,
 				6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */,
 				6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */,
@@ -889,7 +882,6 @@
 		6F9C45C914C5C30B00824AB2 /* StretchableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45CA14C5C30B00824AB2 /* StretchableLargeViewController.xib */,
 				6F9C45CB14C5C30B00824AB2 /* StretchableViewController.h */,
 				6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */,
 				6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */,
@@ -1396,14 +1388,12 @@
 				6FBDA7A81303EE9B004B9617 /* Localizable.strings in Resources */,
 				6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */,
 				6F9C464D14C5C30C00824AB2 /* MainWindow.xib in Resources */,
-				6F9C465514C5C30C00824AB2 /* FixedSizeLargeViewController.xib in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
 				6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */,
 				6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */,
 				6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */,
-				6F9C466714C5C30C00824AB2 /* StretchableLargeViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
@@ -1476,14 +1466,12 @@
 				6F159B8915A55CD10020AFAC /* Localizable.strings in Resources */,
 				6F159B8A15A55CD10020AFAC /* DemoTable.strings in Resources */,
 				6F159B8B15A55CD10020AFAC /* MainWindow.xib in Resources */,
-				6F159B8F15A55CD10020AFAC /* FixedSizeLargeViewController.xib in Resources */,
 				6F159B9015A55CD10020AFAC /* FixedSizeViewController.xib in Resources */,
 				6F159B9115A55CD10020AFAC /* HeavyViewController.xib in Resources */,
 				6F159B9215A55CD10020AFAC /* LandscapeOnlyViewController.xib in Resources */,
 				6F159B9315A55CD10020AFAC /* LifeCycleTestViewController.xib in Resources */,
 				6F159B9415A55CD10020AFAC /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6F159B9915A55CD10020AFAC /* PortraitOnlyViewController.xib in Resources */,
-				6F159B9A15A55CD10020AFAC /* StretchableLargeViewController.xib in Resources */,
 				6F159B9B15A55CD10020AFAC /* StretchableViewController.xib in Resources */,
 				6F159B9C15A55CD10020AFAC /* TransparentViewController.xib in Resources */,
 				6F159B9E15A55CD10020AFAC /* ParallelProcessingDemoViewController.xib in Resources */,

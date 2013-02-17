@@ -15,9 +15,17 @@
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
+@property (nonatomic, retain) IBOutlet HLSTextField *firstNameTextField;
+@property (nonatomic, retain) IBOutlet UILabel *firstNameErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *lastNameTextField;
+@property (nonatomic, retain) IBOutlet UILabel *lastNameErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *emailTextField;
+@property (nonatomic, retain) IBOutlet UILabel *emailErrorLabel;
+@property (nonatomic, retain) IBOutlet UILabel *birthdateLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *birthdateTextField;
+@property (nonatomic, retain) IBOutlet UILabel *birthdateErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *nbrChildrenTextField;
+@property (nonatomic, retain) IBOutlet UILabel *nbrChildrenErrorLabel;
 
 @end
 
@@ -65,43 +73,17 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
-
 - (void)setPerson:(Person *)person
 {
-    if (m_person == person) {
+    if (_person == person) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    [_person release];
+    _person = [person retain];
     
     [self reloadData];
 }
-
-@synthesize firstNameTextField = m_firstNameTextField;
-
-@synthesize firstNameErrorLabel = m_firstNameErrorLabel;
-
-@synthesize lastNameTextField = m_lastNameTextField;
-
-@synthesize lastNameErrorLabel = m_lastNameErrorLabel;
-
-@synthesize emailTextField = m_emailTextField;
-
-@synthesize emailErrorLabel = m_emailErrorLabel;
-
-@synthesize birthdateLabel = m_birthdateLabel;
-
-@synthesize birthdateTextField = m_birthdateTextField;
-
-@synthesize birthdateErrorLabel = m_birthdateErrorLabel;
-
-@synthesize nbrChildrenTextField = m_nbrChildrenTextField;
-
-@synthesize nbrChildrenErrorLabel = m_nbrChildrenErrorLabel;
-
-@synthesize dateFormatter = m_dateFormatter;
 
 #pragma mark View lifecycle
 
@@ -124,12 +106,12 @@
 {
     [super localize];
     
-    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // The date formatter is also localized!
     // TODO: Does not work yet. Try to switch languages!
     self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
     [self checkTextFields];
@@ -172,7 +154,7 @@
     textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = NSLocalizedString(@"Formatting error", @"Formatting error");
+    errorLabel.text = NSLocalizedString(@"Formatting error", nil);
 }
 
 - (void)textFieldDidPassValidation:(UITextField *)textField

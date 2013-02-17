@@ -8,6 +8,13 @@
 
 #import "FontsDemoViewController.h"
 
+@interface FontsDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+
+@end
+
 @implementation FontsDemoViewController
 
 #pragma mark Object creation and destruction
@@ -19,12 +26,6 @@
     self.label = nil;
     self.webView = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize label = m_label;
-
-@synthesize webView = m_webView;
 
 #pragma mark View lifecycle
 
@@ -52,7 +53,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Font", @"Font");
+    self.title = NSLocalizedString(@"Font", nil);
 }
 
 @end

@@ -25,9 +25,9 @@
 #define HLSEnableApplicationPreloading()                                                                  \
     __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
     {                                                                                                     \
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                       \
-        [HLSApplicationPreloader enable];                                                                 \
-        [pool drain];                                                                                     \
+        @autoreleasepool {                                                                                \
+            [HLSApplicationPreloader enable];                                                             \
+        }                                                                                                 \
     }
 #else
 #define HLSEnableApplicationPreloading()                                                                  \
@@ -46,9 +46,9 @@
 #define HLSEnableNSManagedObjectValidation()                                                             \
     __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)               \
     {                                                                                                    \
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                      \
-        [NSManagedObject enable];                                                                        \
-        [pool drain];                                                                                    \
+        @autoreleasepool {                                                                               \
+            [NSManagedObject enable];                                                                    \
+        }                                                                                                \
     }
 #else
 #define HLSEnableNSManagedObjectValidation()                                                             \
@@ -67,9 +67,9 @@
 #define HLSEnableUIControlExclusiveTouch()                                                               \
     __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                 \
     {                                                                                                    \
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];                                      \
-        [UIControl enable];                                                                              \
-        [pool drain];                                                                                    \
+        @autoreleasepool {                                                                               \
+            [UIControl enable];                                                                          \
+        }                                                                                                \
     }
 #else
 #define HLSEnableUIControlExclusiveTouch()                                                               \

@@ -14,6 +14,12 @@
 NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
 
+static NSString *currentLocalization = nil;
+
+static void setDefaultLocalization(void);
+static void exchangeNSBundleInstanceMethod(SEL originalSelector);
+static void initialize(void);
+
 NSString *HLSLanguageForLocalization(NSString *localization)
 {
     NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:localization] autorelease];
@@ -46,12 +52,6 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
 
 @implementation NSBundle (HLSDynamicLocalization)
 
-static NSString *currentLocalization = nil;
-
-static void setDefaultLocalization(void);
-static void exchangeNSBundleInstanceMethod(SEL originalSelector);
-static void initialize(void);
-
 static void setDefaultLocalization(void)
 {
     [currentLocalization release];
@@ -68,14 +68,12 @@ static void setDefaultLocalization(void)
 
 + (void)load
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
-    if (preferredLocalization) {
-        [NSBundle setLocalization:preferredLocalization];
+    @autoreleasepool {
+        NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
+        if (preferredLocalization) {
+            [NSBundle setLocalization:preferredLocalization];
+        }  
     }
-    
-    [pool drain];
 }
 
 + (NSString *)localization

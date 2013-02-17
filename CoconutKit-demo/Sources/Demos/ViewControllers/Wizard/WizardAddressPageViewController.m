@@ -14,9 +14,14 @@
 
 @property (nonatomic, retain) Person *person;
 
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
+@property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;
+@property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *cityTextField;
+@property (nonatomic, retain) IBOutlet UILabel *cityErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *stateTextField;
+@property (nonatomic, retain) IBOutlet UILabel *stateErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *countryTextField;
+@property (nonatomic, retain) IBOutlet UILabel *countryErrorLabel;
 
 @end
 
@@ -56,35 +61,17 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
-
 - (void)setPerson:(Person *)person
 {
-    if (m_person == person) {
+    if (_person == person) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    [_person release];
+    _person = [person retain];
     
     [self reloadData];
 }
-
-@synthesize streetTextField = m_streetTextField;
-
-@synthesize streetErrorLabel = m_streetErrorLabel;
-
-@synthesize cityTextField = m_cityTextField;
-
-@synthesize cityErrorLabel = m_cityErrorLabel;
-
-@synthesize stateTextField = m_stateTextField;
-
-@synthesize stateErrorLabel = m_stateErrorLabel;
-
-@synthesize countryTextField = m_countryTextField;
-
-@synthesize countryErrorLabel = m_countryErrorLabel;
 
 #pragma mark View lifecycle
 

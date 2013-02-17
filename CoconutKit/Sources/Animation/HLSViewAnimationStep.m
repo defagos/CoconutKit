@@ -19,8 +19,6 @@
 
 @property (nonatomic, retain) UIView *dummyView;
 
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
-
 @end
 
 @implementation HLSViewAnimationStep
@@ -41,12 +39,6 @@
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize curve = m_curve;
-
-@synthesize dummyView = m_dummyView;
 
 #pragma mark Managing the animation
 

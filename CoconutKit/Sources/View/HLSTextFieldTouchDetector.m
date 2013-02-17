@@ -12,8 +12,6 @@
 
 @property (nonatomic, retain) UIGestureRecognizer *gestureRecognizer;
 
-- (void)dismissKeyboard:(UIGestureRecognizer *)gestureRecognizer;
-
 @end
 
 @implementation HLSTextFieldTouchDetector
@@ -40,12 +38,6 @@
     
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize gestureRecognizer = m_gestureRecognizer;
-
-@synthesize resigningFirstResponderOnTap = m_resigningFirstResponderOnTap;
 
 #pragma mark UITextFieldDelegate protocol implementation
 

@@ -27,10 +27,16 @@ typedef enum {
 
 @interface PlaceholderDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet UIButton *heavyButton;
+@property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
 @property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
-
-- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 
 @end
 
@@ -76,26 +82,6 @@ typedef enum {
     self.autorotationModeSegmentedControl = nil;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize heavyButton = m_heavyButton;
-
-@synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize inTabBarControllerSwitch = m_inTabBarControllerSwitch;
-
-@synthesize inNavigationControllerSwitch = m_inNavigationControllerSwitch;
-
-@synthesize leftPlaceholderSwitch = m_leftPlaceholderSwitch;
-
-@synthesize rightPlaceholderSwitch = m_rightPlaceholderSwitch;
-
-@synthesize leftHeavyViewController = m_leftHeavyViewController;
-
-@synthesize rightHeavyViewController = m_rightHeavyViewController;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -135,8 +121,8 @@ typedef enum {
     
     self.title = @"HLSPlaceholderViewController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:AutorotationModeIndexNoChildren];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:AutorotationModeIndexAllChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:AutorotationModeIndexNoChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:AutorotationModeIndexAllChildren];
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -165,11 +151,10 @@ typedef enum {
         [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
-                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
                                                             delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                    otherButtonTitles:nil] autorelease];
         [alertView show];
     }
@@ -415,7 +400,7 @@ typedef enum {
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
                                                          message:nil
                                                         delegate:nil
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
 }

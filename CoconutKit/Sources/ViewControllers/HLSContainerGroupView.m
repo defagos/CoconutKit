@@ -68,10 +68,6 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize savedFrontContentView = m_savedFrontContentView;
-
-@synthesize savedBackContentView = m_savedBackContentView;
-
 - (UIView *)frontContentView
 {
     return [self.frontView.subviews firstObject_hls];

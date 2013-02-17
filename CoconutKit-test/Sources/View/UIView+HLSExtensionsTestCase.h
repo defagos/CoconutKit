@@ -6,9 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface UIView_HLSExtensionsTestCase : GHTestCase {
-@private
-    
-}
-
+@interface UIView_HLSExtensionsTestCase : GHTestCase
 @end

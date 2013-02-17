@@ -8,6 +8,15 @@
 
 #import "TextFieldsDemoViewController.h"
 
+@interface TextFieldsDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet HLSTextField *textField1;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField2;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField3;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField4;
+
+@end
+
 @implementation TextFieldsDemoViewController
 
 #pragma mark Object creation and destruction
@@ -36,16 +45,6 @@
     self.textField2.resigningFirstResponderOnTap = NO;
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize textField1 = m_textField1;
-
-@synthesize textField2 = m_textField2;
-
-@synthesize textField3 = m_textField3;
-
-@synthesize textField4 = m_textField4;
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -61,7 +60,7 @@
 {
     [super localize];
 
-    self.title = NSLocalizedString(@"Text fields", @"Text fields");
+    self.title = NSLocalizedString(@"Text fields", nil);
 }
 
 @end

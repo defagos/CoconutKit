@@ -66,7 +66,7 @@ typedef enum {
  */
 @interface HLSLogger : NSObject {
 @private
-	HLSLoggerLevel m_level;
+	HLSLoggerLevel _level;
 }
 
 /**

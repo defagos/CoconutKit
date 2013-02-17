@@ -14,53 +14,53 @@
 
 - (void)testComparisons
 {
-    GHAssertTrue(floateq(1.f, 1.f), @"floateq");
-    GHAssertFalse(floateq(1.f, 2.f), @"!floateq");
-    GHAssertFalse(floateq(-1.f, 4.f), @"!floateq");
+    GHAssertTrue(floateq(1.f, 1.f), nil);
+    GHAssertFalse(floateq(1.f, 2.f), nil);
+    GHAssertFalse(floateq(-1.f, 4.f), nil);
     
-    GHAssertTrue(doubleeq(1., 1.), @"doubleeq");
-    GHAssertFalse(doubleeq(1., 2.), @"!doubleeq");
-    GHAssertFalse(doubleeq(-1., 4.), @"!doubleeq");
+    GHAssertTrue(doubleeq(1., 1.), nil);
+    GHAssertFalse(doubleeq(1., 2.), nil);
+    GHAssertFalse(doubleeq(-1., 4.), nil);
 
-    GHAssertTrue(floatle(1.f, 1.f), @"floatle");
-    GHAssertTrue(floatle(1.f, 2.f), @"floatle");
-    GHAssertFalse(floatle(2.f, 1.f), @"!floatle");
+    GHAssertTrue(floatle(1.f, 1.f), nil);
+    GHAssertTrue(floatle(1.f, 2.f), nil);
+    GHAssertFalse(floatle(2.f, 1.f), nil);
     
-    GHAssertTrue(floatge(1.f, 1.f), @"floatge");
-    GHAssertTrue(floatge(2.f, 1.f), @"floatge");
-    GHAssertFalse(floatge(1.f, 2.f), @"!floatge");
+    GHAssertTrue(floatge(1.f, 1.f), nil);
+    GHAssertTrue(floatge(2.f, 1.f), nil);
+    GHAssertFalse(floatge(1.f, 2.f), nil);
 
-    GHAssertTrue(floatlt(1.f, 2.f), @"floatlt");
-    GHAssertFalse(floatlt(2.f, 1.f), @"!floatlt");
+    GHAssertTrue(floatlt(1.f, 2.f), nil);
+    GHAssertFalse(floatlt(2.f, 1.f), nil);
     
-    GHAssertTrue(floatgt(2.f, 1.f), @"floatgt");
-    GHAssertFalse(floatgt(1.f, 2.f), @"!floatgt");
+    GHAssertTrue(floatgt(2.f, 1.f), nil);
+    GHAssertFalse(floatgt(1.f, 2.f), nil);
     
-    GHAssertTrue(doublele(1., 1.), @"doublele");
-    GHAssertTrue(doublele(1., 2.), @"doublele");
-    GHAssertFalse(doublele(2., 1.), @"!doublele");
+    GHAssertTrue(doublele(1., 1.), nil);
+    GHAssertTrue(doublele(1., 2.), nil);
+    GHAssertFalse(doublele(2., 1.), nil);
     
-    GHAssertTrue(doublege(1., 1.), @"doublege");
-    GHAssertTrue(doublege(2., 1.), @"doublege");
-    GHAssertFalse(doublege(1., 2.), @"!doublege");
+    GHAssertTrue(doublege(1., 1.), nil);
+    GHAssertTrue(doublege(2., 1.), nil);
+    GHAssertFalse(doublege(1., 2.), nil);
     
-    GHAssertTrue(doublelt(1., 2.), @"doublelt");
-    GHAssertFalse(doublelt(2., 1.), @"!doublelt");
+    GHAssertTrue(doublelt(1., 2.), nil);
+    GHAssertFalse(doublelt(2., 1.), nil);
     
-    GHAssertTrue(doublegt(2., 1.), @"doublegt");
-    GHAssertFalse(doublegt(1., 2.), @"!doublegt");
+    GHAssertTrue(doublegt(2., 1.), nil);
+    GHAssertFalse(doublegt(1., 2.), nil);
     
-    GHAssertEquals(floatmin(1.f, 1.f), 1.f, @"floatmin");
-    GHAssertEquals(floatmin(1.f, 2.f), 1.f, @"floatmin");
+    GHAssertEquals(floatmin(1.f, 1.f), 1.f, nil);
+    GHAssertEquals(floatmin(1.f, 2.f), 1.f, nil);
     
-    GHAssertEquals(floatmax(1.f, 1.f), 1.f, @"floatmax");
-    GHAssertEquals(floatmax(1.f, 2.f), 2.f, @"floatmax");
+    GHAssertEquals(floatmax(1.f, 1.f), 1.f, nil);
+    GHAssertEquals(floatmax(1.f, 2.f), 2.f, nil);
 
-    GHAssertEquals(doublemin(1., 1.), 1., @"doublemin");
-    GHAssertEquals(doublemin(1., 2.), 1., @"doublemin");
+    GHAssertEquals(doublemin(1., 1.), 1., nil);
+    GHAssertEquals(doublemin(1., 2.), 1., nil);
     
-    GHAssertEquals(doublemax(1., 1.), 1., @"doublemax");
-    GHAssertEquals(doublemax(1., 2.), 2., @"doublemax");
+    GHAssertEquals(doublemax(1., 1.), 1., nil);
+    GHAssertEquals(doublemax(1., 2.), 2., nil);
 }
 
 @end

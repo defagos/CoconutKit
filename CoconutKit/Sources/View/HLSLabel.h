@@ -28,10 +28,7 @@ typedef enum {
  *     value (even if no size adjustment is needed)
  *   - the baselineAdjustment property is ignored
  */
-@interface HLSLabel : UILabel {
-@private
-    HLSLabelVerticalAlignment _verticalAlignment;
-}
+@interface HLSLabel : UILabel
 
 /**
  * Vertical alignment of the string in the label

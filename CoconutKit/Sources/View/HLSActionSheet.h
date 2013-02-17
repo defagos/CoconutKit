@@ -57,12 +57,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSActionSheet : UIActionSheet {
-@private
-    NSArray *m_targets;
-    NSArray *m_actions;
-    id<UIActionSheetDelegate> m_realDelegate;
-}
+@interface HLSActionSheet : UIActionSheet
 
 /**
  * Add a standard button at the end of the current button list, with a specific target and action.

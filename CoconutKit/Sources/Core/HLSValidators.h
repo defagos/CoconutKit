@@ -9,10 +9,7 @@
 /**
  * Not meant to be instantiated
  */
-@interface HLSValidators : NSObject {
-@private
-    
-}
+@interface HLSValidators : NSObject
 
 /**
  * Validates an e-mail address

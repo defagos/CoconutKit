@@ -33,18 +33,6 @@
     [super dealloc];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize error1 = m_error1;
-
-@synthesize error2 = m_error2;
-
-@synthesize error3 = m_error3;
-
-@synthesize error4 = m_error4;
-
-@synthesize error5 = m_error5;
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass
@@ -86,17 +74,17 @@
 
 - (void)testInformation
 {
-    GHAssertEqualStrings([self.error1 domain], @"ch.hortis.CoconutKit-test", @"Incorrect domain");
-    GHAssertEquals([self.error1 code], 1012, @"Incorrect code");
+    GHAssertEqualStrings([self.error1 domain], @"ch.hortis.CoconutKit-test", nil);
+    GHAssertEquals([self.error1 code], 1012, nil);
     
-    GHAssertEqualStrings([self.error2 localizedDescription], @"Localized description", @"Incorrect description");
-    GHAssertEqualStrings([self.error2 localizedFailureReason], @"Localized failure reason", @"Incorrect failure reason");
-    GHAssertEqualStrings([self.error2 localizedRecoverySuggestion], @"Localized recovery suggestion", @"Incorrect recovery suggestion");
+    GHAssertEqualStrings([self.error2 localizedDescription], @"Localized description", nil);
+    GHAssertEqualStrings([self.error2 localizedFailureReason], @"Localized failure reason", nil);
+    GHAssertEqualStrings([self.error2 localizedRecoverySuggestion], @"Localized recovery suggestion", nil);
     
-    GHAssertEqualStrings([self.error2 helpAnchor], @"Help anchor", @"Incorrect help anchor");
-    GHAssertEquals([self.error2 underlyingError], self.error1, @"Incorrect underlying error");
-    GHAssertEqualStrings([self.error2 objectForKey:@"AdditionalInfo2"], @"Additional information 2", @"Incorrect additional information");
-    GHAssertEquals([[self.error2 customUserInfo] count], 3U, @"Incorrect custom user information");
+    GHAssertEqualStrings([self.error2 helpAnchor], @"Help anchor", nil);
+    GHAssertEquals([self.error2 underlyingError], self.error1, nil);
+    GHAssertEqualStrings([self.error2 objectForKey:@"AdditionalInfo2"], @"Additional information 2", nil);
+    GHAssertEquals([[self.error2 customUserInfo] count], 3U, nil);
 }
 
 - (void)testCopy
@@ -104,8 +92,8 @@
     NSError *error2Copy = [self.error2 copy];
     
     // The userInfo was deep-copied. Must check some of its information to assert the copy went well
-    GHAssertEqualStrings([error2Copy localizedDescription], [self.error2 localizedDescription], @"Incorrect description");
-    GHAssertEqualStrings([error2Copy localizedFailureReason], @"Localized failure reason", @"Incorrect failure reason");
+    GHAssertEqualStrings([error2Copy localizedDescription], [self.error2 localizedDescription], nil);
+    GHAssertEqualStrings([error2Copy localizedFailureReason], @"Localized failure reason", nil);
 }
 
 @end

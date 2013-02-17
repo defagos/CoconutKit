@@ -11,6 +11,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
+#import "HLSVector.h"
 #import "NSString+HLSExtensions.h"
 
 /**
@@ -22,9 +23,6 @@
 @property (nonatomic, assign) HLSVector2 scaleParameters;
 @property (nonatomic, assign) HLSVector2 translationParameters;
 @property (nonatomic, assign) CGFloat alphaIncrement;
-
-- (CGAffineTransform)scaleTransform;
-- (CGAffineTransform)translationTransform;
 
 @end
 
@@ -44,25 +42,19 @@
 
 #pragma mark Accessors and mutators
 
-@synthesize scaleParameters = m_scaleParameters;
-
-@synthesize translationParameters = m_translationParameters;
-
-@synthesize alphaIncrement = m_alphaIncrement;
-
 - (void)addToAlpha:(CGFloat)alphaIncrement
 {
     // Sanitize input
     if (floatlt(alphaIncrement, -1.f)) {
         HLSLoggerWarn(@"Alpha increment cannot be smaller than -1. Fixed to -1");
-        m_alphaIncrement = -1.f;
+        _alphaIncrement = -1.f;
     }
     else if (floatgt(alphaIncrement, 1.f)) {
         HLSLoggerWarn(@"Alpha variation cannot be larger than 1. Fixed to 1");
-        m_alphaIncrement = 1.f;
+        _alphaIncrement = 1.f;
     }
     else {
-        m_alphaIncrement = alphaIncrement;
+        _alphaIncrement = alphaIncrement;
     }
 }
 

@@ -10,7 +10,20 @@
 
 @interface ParallaxScrollingDemoViewController ()
 
-- (void)setupParallax;
+@property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, retain) IBOutlet UIScrollView *skyScrapperScrollView;
+@property (nonatomic, retain) IBOutlet UIImageView *skyScrapperImageView;
+
+@property (nonatomic, retain) IBOutlet UIScrollView *skyScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *mountainsScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *grassScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView *treesScrollView;
+@property (nonatomic, retain) IBOutlet UIImageView *skyImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *mountainsImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *grassImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *treesImageView;
+
+@property (nonatomic, retain) IBOutlet UISwitch *bouncesSwitch;
 
 @end
 
@@ -35,32 +48,6 @@
     self.treesImageView = nil;
     self.bouncesSwitch = nil;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize textView = m_textView;
-
-@synthesize skyScrapperScrollView = m_skyScrapperScrollView;
-
-@synthesize skyScrapperImageView = m_skyScrapperImageView;
-
-@synthesize skyScrollView = m_skyScrollView;
-
-@synthesize mountainsScrollView = m_mountainsScrollView;
-
-@synthesize grassScrollView = m_grassScrollView;
-
-@synthesize treesScrollView = m_treesScrollView;
-
-@synthesize skyImageView = m_skyImageView;
-
-@synthesize mountainsImageView = m_mountainsImageView;
-
-@synthesize grassImageView = m_grassImageView;
-
-@synthesize treesImageView = m_treesImageView;
-
-@synthesize bouncesSwitch = m_bouncesSwitch;
 
 #pragma mark View lifecycle
 
@@ -92,7 +79,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
+    self.title = NSLocalizedString(@"Parallax scrolling", nil);
 }
 
 #pragma mark Action callbacks

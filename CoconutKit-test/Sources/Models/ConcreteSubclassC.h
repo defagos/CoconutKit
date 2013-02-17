@@ -1,8 +1,4 @@
 #import "_ConcreteSubclassC.h"
 
-@interface ConcreteSubclassC : _ConcreteSubclassC {
-@private
-    
-}
-
+@interface ConcreteSubclassC : _ConcreteSubclassC
 @end
