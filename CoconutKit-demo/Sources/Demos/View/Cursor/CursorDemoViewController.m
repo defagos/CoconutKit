@@ -289,7 +289,7 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did start dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        if (! self.popoverController) {
+        if (! self.currentPopoverController) {
             CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
             self.currentPopoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
             self.currentPopoverController.popoverContentSize = infoViewController.view.frame.size;
@@ -302,14 +302,14 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did drag near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.popoverController.contentViewController;
+        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.currentPopoverController.contentViewController;
         infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
         
-        [self.popoverController dismissPopoverAnimated:NO];
-        [self.popoverController presentPopoverFromRect:cursor.pointerView.bounds
-                                                inView:cursor.pointerView
-                              permittedArrowDirections:UIPopoverArrowDirectionDown
-                                              animated:NO];
+        [self.currentPopoverController dismissPopoverAnimated:NO];
+        [self.currentPopoverController presentPopoverFromRect:cursor.pointerView.bounds
+                                                       inView:cursor.pointerView
+                                     permittedArrowDirections:UIPopoverArrowDirectionDown
+                                                     animated:NO];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
@@ -321,7 +321,7 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did stop dragging near index %d", cursor, index);
     
     if (cursor == self.randomRangeCursor) {
-        [self.popoverController dismissPopoverAnimated:NO];
+        [self.currentPopoverController dismissPopoverAnimated:NO];
     }
 }
 
