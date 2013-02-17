@@ -14,8 +14,8 @@
 
 - (void)testClassName
 {
-    GHAssertEqualStrings([GHTestCase className], @"GHTestCase", @"class name");
-    GHAssertEqualStrings([self className], @"NSObject_HLSExtensionsTestCase", @"class name");
+    GHAssertEqualStrings([GHTestCase className], @"GHTestCase", nil);
+    GHAssertEqualStrings([self className], @"NSObject_HLSExtensionsTestCase", nil);
 }
 
 @end
