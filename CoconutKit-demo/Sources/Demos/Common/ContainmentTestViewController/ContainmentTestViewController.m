@@ -14,8 +14,6 @@
 
 @property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;
 
-- (IBAction)hideWithModal:(id)sender;
-
 @end
 
 @implementation ContainmentTestViewController

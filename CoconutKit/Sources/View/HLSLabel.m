@@ -12,12 +12,6 @@
 #import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 
-@interface HLSLabel ()
-
-- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines;
-
-@end
-
 @implementation HLSLabel
 
 #pragma mark Accessors and mutators

@@ -38,25 +38,6 @@ typedef enum {
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
 @property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
 
-- (IBAction)displayLifeCycleTest:(id)sender;
-- (IBAction)displayContainmentTest:(id)sender;
-- (IBAction)displayStretchable:(id)sender;
-- (IBAction)displayFixedSize:(id)sender;
-- (IBAction)displayHeavy:(id)sender;
-- (IBAction)displayPortraitOnly:(id)sender;
-- (IBAction)displayLandscapeOnly:(id)sender;
-- (IBAction)remove:(id)sender;
-- (IBAction)hideWithModal:(id)sender;
-- (IBAction)togglePlaceholder:(id)sender;
-- (IBAction)changeAutorotationMode:(id)sender;
-
-- (IBAction)testResponderChain:(id)sender;
-
-- (IBAction)navigateForwardNonAnimated:(id)sender;
-- (IBAction)navigateBackNonAnimated:(id)sender;
-
-- (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
-
 @end
 
 @implementation PlaceholderDemoViewController

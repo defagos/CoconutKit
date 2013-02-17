@@ -27,13 +27,6 @@
 @property (nonatomic, retain) IBOutlet HLSTextField *nbrChildrenTextField;
 @property (nonatomic, retain) IBOutlet UILabel *nbrChildrenErrorLabel;
 
-- (IBAction)resetModel:(id)sender;
-- (IBAction)resetTextFields:(id)sender;
-
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
-
 @end
 
 @implementation WizardIdentityPageViewController

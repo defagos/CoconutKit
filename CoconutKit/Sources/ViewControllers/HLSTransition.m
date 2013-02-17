@@ -22,59 +22,6 @@ const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
 static CGFloat kPushToTheBackScaleFactor = 0.95f;
 static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
-@interface HLSTransition ()
-
-+ (NSArray *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                yOffset:(CGFloat)yOffset
-                                          appearingView:(UIView *)appearingView;
-
-+ (NSArray *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                          yOffset:(CGFloat)yOffset
-                                                    appearingView:(UIView *)appearingView
-                                                 disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                      yOffset:(CGFloat)yOffset
-                                                appearingView:(UIView *)appearingView
-                                             disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                        yOffset:(CGFloat)yOffset
-                                                  appearingView:(UIView *)appearingView
-                                               disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                    y:(CGFloat)y
-                                                    z:(CGFloat)z
-                                   cameraZTranslation:(CGFloat)cameraZTranslation
-                                        appearingView:(UIView *)appearingView
-                                     disappearingView:(UIView *)disappearingView
-                                               inView:(UIView *)view;
-
-+ (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
-                                                     yOffset:(CGFloat)yOffset
-                                           aroundVectorWithX:(CGFloat)x
-                                                           y:(CGFloat)y
-                                                           z:(CGFloat)z
-                                            counterclockwise:(BOOL)counterclockwise
-                                          cameraZTranslation:(CGFloat)cameraZTranslation
-                                               appearingView:(UIView *)appearingView
-                                            disappearingView:(UIView *)disappearingView
-                                                      inView:(UIView *)view
-                                                  withBounds:(CGRect)bounds;
-
-@end
-
 @implementation HLSTransition
 
 #pragma mark Getting transition animation information

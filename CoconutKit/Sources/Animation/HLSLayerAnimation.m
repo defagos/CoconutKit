@@ -47,14 +47,6 @@
 @property (nonatomic, assign) CGFloat opacityIncrement;
 @property (nonatomic, assign) CGFloat rasterizationScaleIncrement;
 
-- (CATransform3D)rotationTransform;
-- (CATransform3D)scaleTransform;
-- (CATransform3D)translationTransform;
-
-- (CATransform3D)sublayerRotationTransform;
-- (CATransform3D)sublayerScaleTransform;
-- (CATransform3D)sublayerTranslationTransform;
-
 @end
 
 @implementation HLSLayerAnimation

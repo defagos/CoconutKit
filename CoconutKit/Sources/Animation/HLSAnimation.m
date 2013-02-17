@@ -39,8 +39,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
 }
 
-+ (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps;
-
 @property (nonatomic, retain) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
 @property (nonatomic, retain) NSArray *animationStepCopies;                     // another copy made temporarily during animation
 @property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
@@ -51,20 +49,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
 @property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
-
-- (void)playWithStartTime:(NSTimeInterval)startTime
-              repeatCount:(NSUInteger)repeatCount
-       currentRepeatCount:(NSUInteger)currentRepeatCount
-               afterDelay:(NSTimeInterval)delay
-                 animated:(BOOL)animated;
-
-- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
-- (void)playNextAnimationStepAnimated:(BOOL)animated;
-
-- (NSArray *)reverseAnimationSteps;
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification;
-- (void)applicationWillEnterForeground:(NSNotification *)notification;
 
 @end
 

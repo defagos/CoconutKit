@@ -24,9 +24,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 @property (nonatomic, retain) NSFormatter *formatter;
 @property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
 
-- (BOOL)checkValue:(id)value;
-- (void)synchronizeTextField;
-
 @end
 
 @implementation HLSManagedTextFieldValidator

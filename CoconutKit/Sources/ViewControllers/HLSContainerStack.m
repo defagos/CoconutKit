@@ -28,17 +28,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 @property (nonatomic, retain) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
 @property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 
-- (HLSContainerContent *)topContainerContent;
-- (HLSContainerContent *)secondTopContainerContent;
-
-- (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth;
-
-- (void)addViewForContainerContent:(HLSContainerContent *)containerContent
-                         inserting:(BOOL)inserting
-                          animated:(BOOL)animated;
-- (void)rotateContainerContent:(HLSContainerContent *)containerContent
-       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-
 @end
 
 @implementation HLSContainerStack {

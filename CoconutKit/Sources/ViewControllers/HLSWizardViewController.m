@@ -17,17 +17,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
-- (void)hlsWizardViewControllerInit;
-
 @property (nonatomic, assign) NSInteger currentPage;
-
-- (void)refreshWizardInterface;
-
-- (BOOL)validatePage:(NSInteger)page;
-
-- (void)previousPage:(id)sender;
-- (void)nextPage:(id)sender;
-- (void)done:(id)sender;
 
 @end
 

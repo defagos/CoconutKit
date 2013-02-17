@@ -10,12 +10,6 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
-@interface SegueStackRootDemoPlaceholderViewController ()
-
-- (IBAction)hideWithModal:(id)sender;
-
-@end
-
 @implementation SegueStackRootDemoPlaceholderViewController
 
 #pragma mark View lifecycle

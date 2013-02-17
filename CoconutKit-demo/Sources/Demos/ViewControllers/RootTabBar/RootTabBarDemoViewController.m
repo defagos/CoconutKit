@@ -18,9 +18,6 @@
 @property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
-- (IBAction)hideWithModal:(id)sender;
-- (IBAction)changeAutorotationMode:(id)sender;
-
 @end
 
 @implementation RootTabBarDemoViewController

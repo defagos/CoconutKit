@@ -16,9 +16,6 @@
 
 @interface CoconutKit_demoApplication ()
 
-- (void)toggleLanguageSheet:(id)sender;
-- (void)currentLocalizationDidChange:(NSNotification *)notification;
-
 @property (nonatomic, retain) UIViewController *rootViewController;
 @property (nonatomic, retain) HLSActionSheet *languageActionSheet;
 

@@ -20,9 +20,6 @@ static HLSActionSheet *s_previousActionSheet = nil;                 // weak ref 
 
 @interface HLSActionSheet () <UIActionSheetDelegate>
 
-+ (HLSActionSheet *)currentActionSheet;
-+ (void)dismissCurrentActionSheetAnimated:(BOOL)animated;
-
 @property (nonatomic, retain) NSArray *targets;
 @property (nonatomic, retain) NSArray *actions;
 @property (nonatomic, assign) id<UIActionSheetDelegate> realDelegate;

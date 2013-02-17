@@ -15,9 +15,6 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
 
-- (IBAction)changeColor:(id)sender;
-- (IBAction)toggleMissingLocalizationVisibility:(id)sender;
-
 @end
 
 @implementation DynamicLocalizationDemoViewController

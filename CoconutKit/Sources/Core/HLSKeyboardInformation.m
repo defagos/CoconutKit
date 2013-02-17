@@ -18,9 +18,6 @@
 @property (nonatomic, assign) NSTimeInterval animationDuration;
 @property (nonatomic, assign) UIViewAnimationCurve animationCurve;
 
-+ (void)keyboardWillShow:(NSNotification *)notification;
-+ (void)keyboardWillHide:(NSNotification *)notification;
-
 @end
 
 static HLSKeyboardInformation *s_instance = nil;

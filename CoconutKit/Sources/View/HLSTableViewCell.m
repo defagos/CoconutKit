@@ -15,12 +15,6 @@
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
 
-@interface HLSTableViewCell ()
-
-+ (NSString *)findNibName;
-
-@end
-
 @implementation HLSTableViewCell
 
 #pragma mark Class methods for initialization and creation

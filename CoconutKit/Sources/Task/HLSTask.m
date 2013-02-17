@@ -27,8 +27,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, retain) NSError *error;
 @property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
 
-- (void)reset;
-
 @end
 
 @implementation HLSTask {

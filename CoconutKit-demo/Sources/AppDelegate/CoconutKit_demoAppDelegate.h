@@ -7,8 +7,5 @@
 //
 
 @interface CoconutKit_demoAppDelegate : NSObject <UIApplicationDelegate>
-
-
-
 @end
 

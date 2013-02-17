@@ -18,25 +18,10 @@
 
 @interface HLSCursor ()
 
-- (void)hlsCursorInit;
-
 @property (nonatomic, retain) NSArray *elementWrapperViews;
 @property (nonatomic, retain) NSArray *elementWrapperViewSizeValues;
 
 @property (nonatomic, retain) UIView *pointerContainerView;
-
-- (UIView *)elementViewForIndex:(NSUInteger)index selected:(BOOL)selected;
-- (UIView *)elementWrapperViewForIndex:(NSUInteger)index;
-
-- (CGFloat)xPosForIndex:(NSUInteger)index;
-- (NSUInteger)indexForXPos:(CGFloat)xPos;
-
-- (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected;
-
-- (CGRect)pointerFrameForIndex:(NSUInteger)index;
-- (CGRect)pointerFrameForXPos:(CGFloat)xPos;
-
-- (void)clear;
 
 @end
 

@@ -39,18 +39,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
 @property (nonatomic, retain) NSDate *lastEstimateDate;
 
-- (void)updateStatus;
-
-- (NSSet *)dependenciesForTask:(HLSTask *)task;
-- (NSSet *)weakDependenciesForTask:(HLSTask *)task;
-- (NSSet *)strongDependenciesForTask:(HLSTask *)task;
-
-- (NSSet *)dependentsForTask:(HLSTask *)task;
-- (NSSet *)weakDependentsForTask:(HLSTask *)task;
-- (NSSet *)strongDependentsForTask:(HLSTask *)task;
-
-- (void)reset;
-
 @end
 
 @implementation HLSTaskGroup {

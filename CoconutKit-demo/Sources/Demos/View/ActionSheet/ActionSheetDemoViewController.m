@@ -13,25 +13,6 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UILabel *choiceLabel;
 
-- (IBAction)makeChoiceFromRectAnimated:(id)sender;
-- (IBAction)makeChoiceFromRectNotAnimated:(id)sender;
-- (IBAction)makeChoiceInView;
-- (IBAction)makeChoiceFromToolbar:(id)sender;
-- (IBAction)makeChoiceFromTabBar:(id)sender;
-- (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender;
-- (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender;
-
-- (IBAction)resetChoice:(id)sender;
-
-- (HLSActionSheet *)actionSheetForChoice;
-- (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet;
-
-- (void)choose1:(id)sender;
-- (void)choose2:(id)sender;
-- (void)choose3:(id)sender;
-- (void)choose4:(id)sender;
-- (void)cancel;
-
 @end
 
 @implementation ActionSheetDemoViewController

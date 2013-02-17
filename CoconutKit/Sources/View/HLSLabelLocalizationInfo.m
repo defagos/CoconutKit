@@ -24,8 +24,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 @property (nonatomic, retain) NSString *bundleName;
 @property (nonatomic, assign) HLSLabelRepresentation representation;
 
-- (void)parseText:(NSString *)text;
-
 @end
 
 @implementation HLSLabelLocalizationInfo

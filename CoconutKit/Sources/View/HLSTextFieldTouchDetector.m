@@ -12,8 +12,6 @@
 
 @property (nonatomic, retain) UIGestureRecognizer *gestureRecognizer;
 
-- (void)dismissKeyboard:(UIGestureRecognizer *)gestureRecognizer;
-
 @end
 
 @implementation HLSTextFieldTouchDetector

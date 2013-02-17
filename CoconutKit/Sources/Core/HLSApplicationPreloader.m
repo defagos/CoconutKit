@@ -29,14 +29,6 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
 
 @end
 
-@interface HLSApplicationPreloader ()
-
-- (id)initWithApplication:(UIApplication *)application;
-
-- (void)preload;
-
-@end
-
 @implementation HLSApplicationPreloader
 
 #pragma mark Class methods

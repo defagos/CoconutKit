@@ -18,14 +18,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSExpandingSearchBar ()
 
-- (void)hlsExpandingSearchBarInit;
-
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIButton *searchButton;
-
-- (HLSAnimation *)expansionAnimation;
-
-- (void)toggleSearchBar:(id)sender;
 
 @end
 

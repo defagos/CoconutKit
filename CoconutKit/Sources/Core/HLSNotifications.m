@@ -39,10 +39,6 @@
 
 @property (nonatomic, retain) NSMutableDictionary *objectToNotificationMap;
 
-- (NSString *)buildIdentifierForObject:(id)object;
-
-- (void)convertNotification:(NSNotification *)notification;
-
 @end
 
 #pragma mark -

@@ -38,44 +38,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 @property (nonatomic, retain) IBOutlet UISlider *startTimeSlider;
 @property (nonatomic, retain) IBOutlet UILabel *startTimeLabel;
 
-- (IBAction)play:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)cancel:(id)sender;
-- (IBAction)terminate:(id)sender;
-- (IBAction)toggleReverse:(id)sender;
-- (IBAction)toggleLooping:(id)sender;
-- (IBAction)toggleAnimated:(id)sender;
-- (IBAction)delayChanged:(id)sender;
-- (IBAction)durationChanged:(id)sender;
-- (IBAction)repeatCountChanged:(id)sender;
-- (IBAction)startTimeChanged:(id)sender;
-- (void)updateUserInterface;
-- (void)calculateAnimation;
-
-- (SEL)selectorForAnimationWithIndex:(NSUInteger)index;
-
-- (NSTimeInterval)delay;
-- (NSTimeInterval)duration;
-- (NSUInteger)repeatCount;
-- (NSTimeInterval)startTime;
-
-- (HLSAnimation *)animation1;
-- (HLSAnimation *)animation2;
-- (HLSAnimation *)animation3;
-- (HLSAnimation *)animation4;
-- (HLSAnimation *)animation5;
-- (HLSAnimation *)animation6;
-- (HLSAnimation *)animation7;
-- (HLSAnimation *)animation8;
-- (HLSAnimation *)animation9;
-- (HLSAnimation *)animation10;
-- (HLSAnimation *)animation11;
-- (HLSAnimation *)animation12;
-- (HLSAnimation *)animation13;
-- (HLSAnimation *)animation14;
-- (HLSAnimation *)animation15;
-- (HLSAnimation *)animation16;
-
 @end
 
 @implementation AnimationDemoViewController

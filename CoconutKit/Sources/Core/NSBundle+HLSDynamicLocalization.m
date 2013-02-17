@@ -14,6 +14,12 @@
 NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
 
+static NSString *currentLocalization = nil;
+
+static void setDefaultLocalization(void);
+static void exchangeNSBundleInstanceMethod(SEL originalSelector);
+static void initialize(void);
+
 NSString *HLSLanguageForLocalization(NSString *localization)
 {
     NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:localization] autorelease];
@@ -45,12 +51,6 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
 }
 
 @implementation NSBundle (HLSDynamicLocalization)
-
-static NSString *currentLocalization = nil;
-
-static void setDefaultLocalization(void);
-static void exchangeNSBundleInstanceMethod(SEL originalSelector);
-static void initialize(void);
 
 static void setDefaultLocalization(void)
 {

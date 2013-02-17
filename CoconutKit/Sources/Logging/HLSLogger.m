@@ -26,12 +26,6 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 #pragma mark -
 #pragma mark HLSLogger class
 
-@interface HLSLogger ()
-
-- (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode;
-
-@end
-
 @implementation HLSLogger
 
 #pragma mark Class methods

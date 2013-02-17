@@ -19,8 +19,6 @@
 
 @property (nonatomic, retain) UIView *dummyView;
 
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
-
 @end
 
 @implementation HLSViewAnimationStep

@@ -28,10 +28,6 @@ static NSArray *s_fontNames = nil;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *verticalAlignmentSegmentedControl;
 @property (nonatomic, retain) IBOutlet UIPickerView *lineBreakModePickerView;
 
-- (IBAction)updateLabels:(id)sender;
-
-- (void)reloadData;
-
 @end
 
 @implementation LabelDemoViewController

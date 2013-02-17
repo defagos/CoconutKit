@@ -20,18 +20,6 @@
 @property (nonatomic, assign) HLSTask *task;                        // The task the operation is processing
 @property (nonatomic, retain) NSThread *callingThread;              // Thread onto which spawned the operation
 
-- (void)operationMain;
-
-- (void)onCallingThreadPerformSelector:(SEL)selector object:(NSObject *)objectOrNil;
-- (void)updateProgressToValue:(float)progress;
-- (void)attachError:(NSError *)error;
-
-- (void)notifyStart;
-- (void)notifyRunningWithProgress:(NSNumber *)progress;
-- (void)notifyEnd;
-- (void)notifySettingReturnInfo:(NSDictionary *)returnInfo;
-- (void)notifySettingError:(NSError *)error;
-
 @end
 
 @implementation HLSTaskOperation

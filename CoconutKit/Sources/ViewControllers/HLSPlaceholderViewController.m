@@ -16,8 +16,6 @@
 
 @interface HLSPlaceholderViewController ()
 
-- (void)hlsPlaceholderViewControllerInit;
-
 @property (nonatomic, retain) NSMutableArray *containerStacks;
 
 @end

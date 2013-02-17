@@ -27,24 +27,6 @@
 @property (nonatomic, retain) IBOutlet UISlider *transitionDurationSlider;
 @property (nonatomic, retain) IBOutlet UILabel *transitionDurationLabel;
 
-- (IBAction)nextImage:(id)sender;
-- (IBAction)previousImage:(id)sender;
-
-- (IBAction)play:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)resume:(id)sender;
-- (IBAction)stop:(id)sender;
-
-- (IBAction)skipToSpecificImage:(id)sender;
-
-- (IBAction)changeImages:(id)sender;
-- (IBAction)toggleRandom:(id)sender;
-
-- (IBAction)imageDurationValueChanged:(id)sender;
-- (IBAction)transitionDurationValueChanged:(id)sender;
-
-- (void)loadImages;
-
 @end
 
 @implementation SlideshowDemoViewController

@@ -23,13 +23,6 @@
 @property (nonatomic, retain) IBOutlet HLSTextField *countryTextField;
 @property (nonatomic, retain) IBOutlet UILabel *countryErrorLabel;
 
-- (IBAction)resetModel:(id)sender;
-- (IBAction)resetTextFields:(id)sender;
-
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
-
 @end
 
 @implementation WizardAddressPageViewController

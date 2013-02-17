@@ -33,9 +33,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 @property (nonatomic, retain) UIView *dummyView;
 
-- (void)animationDidStart:(CAAnimation *)animation;
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
-
 @end
 
 @implementation HLSLayerAnimationStep {

@@ -41,13 +41,6 @@
  *    such cases, we would require a parameter to be available so that the trick making iOS 6 methods available
  *    on iOS 4 and 5 can be disabled
  */
-@interface HLSViewController ()
-
-- (void)hlsViewControllerInit;
-- (void)currentLocalizationDidChange:(NSNotification *)notification;
-
-@end
-
 @implementation HLSViewController
 
 #pragma mark Object creation and destruction

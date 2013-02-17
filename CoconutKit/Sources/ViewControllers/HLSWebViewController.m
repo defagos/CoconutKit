@@ -33,18 +33,6 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-- (IBAction)goBack:(id)sender;
-- (IBAction)goForward:(id)sender;
-- (IBAction)refresh:(id)sender;
-- (IBAction)displayActionSheet:(id)sender;
-
-- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)updateInterface;
-- (void)updateTitle;
-
-- (void)openInSafari:(id)sender;
-- (void)mailLink:(id)sender;
-
 @end
 
 @implementation HLSWebViewController

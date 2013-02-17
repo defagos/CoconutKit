@@ -32,10 +32,6 @@ static NSArray *s_folders = nil;
 @property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;
 @property (nonatomic, retain) IBOutlet HLSCursor *mixedFoldersCursor;
 
-- (IBAction)moveWeekDaysPointerToNextDay:(id)sender;
-- (IBAction)reloadRandomRangeCursor:(id)sender;
-- (IBAction)sizeChanged:(id)sender;
-
 @end
 
 @implementation CursorDemoViewController {

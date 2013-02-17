@@ -64,12 +64,6 @@
 @property (nonatomic, retain) IBOutlet UISlider *viewSublayerTransformSkewSlider;
 @property (nonatomic, retain) IBOutlet UILabel *viewSublayerTransformSkewLabel;
 
-- (IBAction)settingsChanged:(id)sender;
-- (IBAction)reset:(id)sender;
-
-- (void)reloadData;
-- (void)reset;
-
 @end
 
 @implementation LayerPropertiesTestViewController

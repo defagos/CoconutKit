@@ -19,9 +19,6 @@
 @property (nonatomic, retain) IBOutlet UIView *autorotationBackgroundView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
-- (IBAction)hideWithModal:(id)sender;
-- (IBAction)changeAutorotationMode:(id)sender;
-
 @end
 
 @implementation RootSplitViewDemoController

@@ -24,17 +24,6 @@
 @property (nonatomic, retain) NSMutableDictionary *taskGroupToDelegateMap;              // Maps a task group to the associated id<HLSTaskGroupDelegate> object
 @property (nonatomic, retain) NSMutableDictionary *delegateToTaskGroupsMap;             // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
 
-- (NSSet *)operationsForTasks:(NSSet *)tasks;
-
-- (void)registerOperation:(HLSTaskOperation *)operation;
-- (void)unregisterOperation:(HLSTaskOperation *)operation;
-
-- (void)registerTaskGroup:(HLSTaskGroup *)taskGroup;
-- (void)unregisterTaskGroup:(HLSTaskGroup *)taskGroup;
-
-- (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task;
-- (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup;
-
 @end
 
 @implementation HLSTaskManager

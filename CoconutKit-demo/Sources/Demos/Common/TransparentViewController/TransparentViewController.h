@@ -6,8 +6,5 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-/**
- * Designated initializer: -init
- */
 @interface TransparentViewController : HLSViewController
 @end

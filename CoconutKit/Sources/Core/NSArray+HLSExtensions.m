@@ -8,12 +8,6 @@
 
 #import "NSArray+HLSExtensions.h"
 
-@interface NSArray (HLSExtensionsPrivate)
-
-- (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfElements;
-
-@end
-
 @implementation NSArray (HLSExtensions)
 
 - (id)firstObject_hls

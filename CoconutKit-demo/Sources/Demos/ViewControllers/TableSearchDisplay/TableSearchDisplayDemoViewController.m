@@ -26,8 +26,6 @@ typedef enum {
 @property (nonatomic, retain) NSArray *devices;
 @property (nonatomic, retain) NSArray *filteredDevices;
 
-- (void)filterDevices;
-
 @end
 
 @implementation TableSearchDisplayDemoViewController

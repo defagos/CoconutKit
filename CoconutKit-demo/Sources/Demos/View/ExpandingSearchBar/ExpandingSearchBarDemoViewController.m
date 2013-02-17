@@ -16,9 +16,6 @@
 
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
 
-- (IBAction)expandSearchBar1:(id)sender;
-- (IBAction)collapseSearchBar1:(id)sender;
-
 @end
 
 @implementation ExpandingSearchBarDemoViewController

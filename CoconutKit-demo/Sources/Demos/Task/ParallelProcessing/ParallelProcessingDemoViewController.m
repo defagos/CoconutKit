@@ -39,16 +39,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeEstimateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *subTask3RemainingTimeLabel;
 
-- (IBAction)startTask:(id)sender;
-- (IBAction)stopTask:(id)sender;
-
-- (IBAction)startTaskGroup:(id)sender;
-- (IBAction)stopTaskGroup:(id)sender;
-
-- (IBAction)stopSubTask1:(id)sender;
-- (IBAction)stopSubTask2:(id)sender;
-- (IBAction)stopSubTask3:(id)sender;
-
 @end
 
 // Remark:

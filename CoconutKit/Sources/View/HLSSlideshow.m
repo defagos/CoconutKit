@@ -23,36 +23,8 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 @interface HLSSlideshow () <HLSAnimationDelegate>
 
-- (void)hlsSlideshowInit;
-
 @property (nonatomic, retain) NSArray *imageViews;
 @property (nonatomic, retain) HLSAnimation *animation;
-
-- (UIImage *)imageForNameOrPath:(NSString *)imageNameOrPath;
-- (void)prepareImageView:(UIImageView *)imageView withImageNameOrPath:(NSString *)imageNameOrPath;
-- (void)releaseImageView:(UIImageView *)imageView;
-- (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView;
-
-- (HLSAnimation *)crossDissolveAnimationWithCurrentImageView:(UIImageView *)currentImageView
-                                               nextImageView:(UIImageView *)nextImageView
-                                          transitionDuration:(NSTimeInterval)transitionDuration;
-- (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
-                                          nextImageView:(UIImageView *)nextImageView;
-- (HLSAnimation *)animationForEffect:(HLSSlideshowEffect)effect
-                    currentImageView:(UIImageView *)currentImageView
-                       nextImageView:(UIImageView *)nextImageView;
-- (HLSAnimation *)translationAnimationWithCurrentImageView:(UIImageView *)currentImageView
-                                             nextImageView:(UIImageView *)nextImageView
-                                                   xOffset:(CGFloat)xOffset
-                                                   yOffset:(CGFloat)yOffset;
-
-- (void)playNextAnimation;
-- (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath;
-- (void)playAnimationForNextImage;
-- (void)playAnimationForPreviousImage;
-- (void)animateImages;
-
-- (NSUInteger)randomIndexWithUpperBound:(NSUInteger)upperBound forbiddenIndex:(NSInteger)forbiddenIndex;
 
 @end
 

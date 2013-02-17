@@ -24,9 +24,6 @@
 @property (nonatomic, assign) HLSVector2 translationParameters;
 @property (nonatomic, assign) CGFloat alphaIncrement;
 
-- (CGAffineTransform)scaleTransform;
-- (CGAffineTransform)translationTransform;
-
 @end
 
 @implementation HLSViewAnimation

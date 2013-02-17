@@ -43,40 +43,6 @@ typedef enum {
 
 @property (nonatomic, retain) UIPopoverController *displayedPopoverController;
 
-- (IBAction)sizeChanged:(id)sender;
-- (IBAction)changeResizeMethod:(id)sender;
-
-- (IBAction)displayLifeCycleTest:(id)sender;
-- (IBAction)displayContainmentTest:(id)sender;
-- (IBAction)displayStretchable:(id)sender;
-- (IBAction)displayFixedSize:(id)sender;
-- (IBAction)displayHeavy:(id)sender;
-- (IBAction)displayPortraitOnly:(id)sender;
-- (IBAction)displayLandscapeOnly:(id)sender;
-- (IBAction)hideWithModal:(id)sender;
-- (IBAction)displayTransparent:(id)sender;
-- (IBAction)testInModal:(id)sender;
-- (IBAction)testInPopover:(id)sender;
-
-- (IBAction)pop:(id)sender;
-- (IBAction)popToRoot:(id)sender;
-- (IBAction)popThree:(id)sender;
-
-- (IBAction)testResponderChain:(id)sender;
-
-- (IBAction)changeAutorotationMode:(id)sender;
-
-- (IBAction)indexChanged:(id)sender;
-
-- (IBAction)navigateForwardNonAnimated:(id)sender;
-- (IBAction)navigateBackNonAnimated:(id)sender;
-
-- (void)displayContentViewController:(UIViewController *)viewController;
-
-- (void)updateIndexInfo;
-- (NSUInteger)insertionIndex;
-- (NSUInteger)removalIndex;
-
 @end
 
 @implementation StackDemoViewController {

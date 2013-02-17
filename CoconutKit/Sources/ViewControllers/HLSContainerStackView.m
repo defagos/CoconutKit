@@ -15,8 +15,6 @@
 
 @property (nonatomic, retain) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
-- (NSUInteger)indexOfContentView:(UIView *)contentView;
-
 @end
 
 @implementation HLSContainerStackView

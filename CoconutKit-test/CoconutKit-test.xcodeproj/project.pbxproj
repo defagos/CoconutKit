@@ -490,6 +490,7 @@
 		6F29083F1498734100506DDC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6F2908481498734100506DDC /* Generated */,
 				6F2908401498734100506DDC /* AbstractClassA.h */,
 				6F2908411498734100506DDC /* AbstractClassA.m */,
 				6FADE48F14B9E474007EE121 /* BankAccount.h */,
@@ -504,7 +505,6 @@
 				6FADE47414B9DA1B007EE121 /* House.m */,
 				6FADE47514B9DA1B007EE121 /* Person.h */,
 				6FADE47614B9DA1B007EE121 /* Person.m */,
-				6F2908481498734100506DDC /* Generated */,
 			);
 			name = Models;
 			path = Sources/Models;

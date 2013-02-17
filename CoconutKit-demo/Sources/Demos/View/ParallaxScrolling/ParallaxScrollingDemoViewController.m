@@ -25,11 +25,6 @@
 
 @property (nonatomic, retain) IBOutlet UISwitch *bouncesSwitch;
 
-- (IBAction)reset:(id)sender;
-- (IBAction)toggleBounces:(id)sender;
-
-- (void)setupParallax;
-
 @end
 
 @implementation ParallaxScrollingDemoViewController
