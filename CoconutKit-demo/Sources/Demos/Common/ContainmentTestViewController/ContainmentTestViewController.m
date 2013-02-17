@@ -10,6 +10,14 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface ContainmentTestViewController ()
+
+@property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;
+
+- (IBAction)hideWithModal:(id)sender;
+
+@end
+
 @implementation ContainmentTestViewController
 
 #pragma mark Object creation and destruction

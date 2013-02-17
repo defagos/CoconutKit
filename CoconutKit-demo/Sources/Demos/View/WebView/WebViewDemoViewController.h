@@ -7,10 +7,4 @@
 //
 
 @interface WebViewDemoViewController : HLSViewController
-
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UISwitch *scrollEnabledSwitch;
-
-- (IBAction)toggleScrollEnabled:(id)sender;
-
 @end

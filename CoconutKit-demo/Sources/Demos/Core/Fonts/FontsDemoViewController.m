@@ -8,6 +8,13 @@
 
 #import "FontsDemoViewController.h"
 
+@interface FontsDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+
+@end
+
 @implementation FontsDemoViewController
 
 #pragma mark Object creation and destruction

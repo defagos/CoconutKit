@@ -15,6 +15,21 @@
 @property (nonatomic, retain) Person *person;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
+@property (nonatomic, retain) IBOutlet HLSTextField *firstNameTextField;
+@property (nonatomic, retain) IBOutlet UILabel *firstNameErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *lastNameTextField;
+@property (nonatomic, retain) IBOutlet UILabel *lastNameErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *emailTextField;
+@property (nonatomic, retain) IBOutlet UILabel *emailErrorLabel;
+@property (nonatomic, retain) IBOutlet UILabel *birthdateLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *birthdateTextField;
+@property (nonatomic, retain) IBOutlet UILabel *birthdateErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *nbrChildrenTextField;
+@property (nonatomic, retain) IBOutlet UILabel *nbrChildrenErrorLabel;
+
+- (IBAction)resetModel:(id)sender;
+- (IBAction)resetTextFields:(id)sender;
+
 - (void)reloadData;
 
 - (UILabel *)errorLabelForTextField:(UITextField *)textField;

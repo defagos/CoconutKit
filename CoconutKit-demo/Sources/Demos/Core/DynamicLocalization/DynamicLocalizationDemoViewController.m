@@ -8,6 +8,18 @@
 
 #import "DynamicLocalizationDemoViewController.h"
 
+@interface DynamicLocalizationDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UILabel *coloredLabel;   // No outlet would be needed for localization purposes only, but
+                                                                // here we want to test background color changes
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
+
+- (IBAction)changeColor:(id)sender;
+- (IBAction)toggleMissingLocalizationVisibility:(id)sender;
+
+@end
+
 @implementation DynamicLocalizationDemoViewController
 
 #pragma mark Object creation and destruction

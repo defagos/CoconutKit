@@ -10,6 +10,19 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface RootTabBarDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
+- (IBAction)hideWithModal:(id)sender;
+- (IBAction)changeAutorotationMode:(id)sender;
+
+@end
+
 @implementation RootTabBarDemoViewController
 
 #pragma mark Object creation and destruction

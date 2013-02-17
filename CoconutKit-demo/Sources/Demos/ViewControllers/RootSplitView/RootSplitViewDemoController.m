@@ -10,6 +10,20 @@
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface RootSplitViewDemoController ()
+
+@property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, retain) IBOutlet UIView *autorotationBackgroundView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
+- (IBAction)hideWithModal:(id)sender;
+- (IBAction)changeAutorotationMode:(id)sender;
+
+@end
+
 @implementation RootSplitViewDemoController
 
 #pragma mark Object creation and destruction

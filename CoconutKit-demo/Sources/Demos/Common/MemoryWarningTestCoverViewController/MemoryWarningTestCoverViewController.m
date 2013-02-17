@@ -10,6 +10,8 @@
 
 @interface MemoryWarningTestCoverViewController ()
 
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *closeBarButtonItem;
+
 - (void)close:(id)sender;
 
 @end

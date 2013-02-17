@@ -27,8 +27,33 @@ typedef enum {
 
 @interface PlaceholderDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet UIButton *heavyButton;
+@property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
 @property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
+
+- (IBAction)displayLifeCycleTest:(id)sender;
+- (IBAction)displayContainmentTest:(id)sender;
+- (IBAction)displayStretchable:(id)sender;
+- (IBAction)displayFixedSize:(id)sender;
+- (IBAction)displayHeavy:(id)sender;
+- (IBAction)displayPortraitOnly:(id)sender;
+- (IBAction)displayLandscapeOnly:(id)sender;
+- (IBAction)remove:(id)sender;
+- (IBAction)hideWithModal:(id)sender;
+- (IBAction)togglePlaceholder:(id)sender;
+- (IBAction)changeAutorotationMode:(id)sender;
+
+- (IBAction)testResponderChain:(id)sender;
+
+- (IBAction)navigateForwardNonAnimated:(id)sender;
+- (IBAction)navigateBackNonAnimated:(id)sender;
 
 - (void)displayInsetViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 

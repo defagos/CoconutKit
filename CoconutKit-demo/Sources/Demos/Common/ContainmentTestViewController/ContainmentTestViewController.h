@@ -7,9 +7,4 @@
 //
 
 @interface ContainmentTestViewController : HLSViewController
-
-@property (nonatomic, retain) IBOutlet UISwitch *presentingModalSwitch;
-
-- (IBAction)hideWithModal:(id)sender;
-
 @end

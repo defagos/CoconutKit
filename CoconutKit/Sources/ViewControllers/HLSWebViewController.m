@@ -25,6 +25,19 @@
 
 @property (nonatomic, retain) UIImage *refreshImage;
 
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+- (IBAction)goBack:(id)sender;
+- (IBAction)goForward:(id)sender;
+- (IBAction)refresh:(id)sender;
+- (IBAction)displayActionSheet:(id)sender;
+
 - (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 - (void)updateInterface;
 - (void)updateTitle;

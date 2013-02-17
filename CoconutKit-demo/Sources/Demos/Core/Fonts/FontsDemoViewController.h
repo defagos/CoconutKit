@@ -7,8 +7,4 @@
 //
 
 @interface FontsDemoViewController : HLSViewController
-
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-
 @end

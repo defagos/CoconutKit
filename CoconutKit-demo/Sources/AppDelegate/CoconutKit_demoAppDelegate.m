@@ -36,6 +36,10 @@ HLSEnableApplicationPreloading();
     [super dealloc];
 }
 
+#pragma mark Accessors and mutators
+
+@synthesize window = _window;
+
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

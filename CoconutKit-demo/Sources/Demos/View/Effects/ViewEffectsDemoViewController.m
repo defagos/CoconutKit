@@ -8,6 +8,13 @@
 
 #import "ViewEffectsDemoViewController.h"
 
+@interface ViewEffectsDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UIImageView *imageView1;
+@property (nonatomic, retain) IBOutlet UIImageView *imageView2;
+
+@end
+
 @implementation ViewEffectsDemoViewController
 
 #pragma mark Object creation and destruction

@@ -8,7 +8,7 @@
 
 @interface CoconutKit_demoAppDelegate : NSObject <UIApplicationDelegate>
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+
 
 @end
 

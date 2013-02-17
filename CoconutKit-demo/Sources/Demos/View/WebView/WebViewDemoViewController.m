@@ -8,6 +8,15 @@
 
 #import "WebViewDemoViewController.h"
 
+@interface WebViewDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UISwitch *scrollEnabledSwitch;
+
+- (IBAction)toggleScrollEnabled:(id)sender;
+
+@end
+
 @implementation WebViewDemoViewController
 
 #pragma mark Object creation and destruction

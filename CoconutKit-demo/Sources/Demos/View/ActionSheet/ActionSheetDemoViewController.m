@@ -10,6 +10,19 @@
 
 @interface ActionSheetDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UILabel *choiceLabel;
+
+- (IBAction)makeChoiceFromRectAnimated:(id)sender;
+- (IBAction)makeChoiceFromRectNotAnimated:(id)sender;
+- (IBAction)makeChoiceInView;
+- (IBAction)makeChoiceFromToolbar:(id)sender;
+- (IBAction)makeChoiceFromTabBar:(id)sender;
+- (IBAction)makeChoiceFromBarButtonItemAnimated:(id)sender;
+- (IBAction)makeChoiceFromBarButtonItemNotAnimated:(id)sender;
+
+- (IBAction)resetChoice:(id)sender;
+
 - (HLSActionSheet *)actionSheetForChoice;
 - (void)showSecondActionSheetFromActionSheet:(HLSActionSheet *)actionSheet;
 

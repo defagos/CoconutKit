@@ -14,6 +14,18 @@
 
 @property (nonatomic, retain) Person *person;
 
+@property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;
+@property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *cityTextField;
+@property (nonatomic, retain) IBOutlet UILabel *cityErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *stateTextField;
+@property (nonatomic, retain) IBOutlet UILabel *stateErrorLabel;
+@property (nonatomic, retain) IBOutlet HLSTextField *countryTextField;
+@property (nonatomic, retain) IBOutlet UILabel *countryErrorLabel;
+
+- (IBAction)resetModel:(id)sender;
+- (IBAction)resetTextFields:(id)sender;
+
 - (void)reloadData;
 
 - (UILabel *)errorLabelForTextField:(UITextField *)textField;

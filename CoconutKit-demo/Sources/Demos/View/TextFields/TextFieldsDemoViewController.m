@@ -8,6 +8,15 @@
 
 #import "TextFieldsDemoViewController.h"
 
+@interface TextFieldsDemoViewController ()
+
+@property (nonatomic, retain) IBOutlet HLSTextField *textField1;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField2;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField3;
+@property (nonatomic, retain) IBOutlet HLSTextField *textField4;
+
+@end
+
 @implementation TextFieldsDemoViewController
 
 #pragma mark Object creation and destruction
