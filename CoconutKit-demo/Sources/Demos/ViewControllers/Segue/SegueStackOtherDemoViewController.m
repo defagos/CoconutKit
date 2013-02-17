@@ -21,15 +21,6 @@
     self.view.backgroundColor = [UIColor randomColor];
 }
 
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warnings
-}
-
 #pragma mark Action callbacks
 
 - (IBAction)hideWithModal:(id)sender

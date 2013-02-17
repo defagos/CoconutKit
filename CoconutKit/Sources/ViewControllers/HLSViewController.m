@@ -173,7 +173,7 @@
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
     if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
-        HLSLoggerWarn(@"%@ is not localized", [self class]);
+        HLSLoggerDebug(@"%@ is not localized", [self class]);
     }
 }
 

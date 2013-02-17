@@ -30,13 +30,4 @@
     [self.imageView2 fadeTop:0.2f bottom:0.6f];
 }
 
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Code
-}
-
 @end

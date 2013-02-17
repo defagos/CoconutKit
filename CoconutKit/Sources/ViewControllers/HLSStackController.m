@@ -247,15 +247,6 @@
     [self.containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warning
-}
-
 #pragma mark Inserting or removing view controllers
 
 - (void)pushViewController:(UIViewController *)viewController 
