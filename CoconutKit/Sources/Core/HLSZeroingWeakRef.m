@@ -81,7 +81,7 @@ static Class subclass_class(id object, SEL _cmd);
                 zeroingWeakRefValues = [NSMutableSet set];
                 objc_setAssociatedObject(object, s_zeroingWeakRefListKey, zeroingWeakRefValues, OBJC_ASSOCIATION_RETAIN);
             }
-            NSValue *selfValue = [NSValue valueWithPointer:self];
+            NSValue *selfValue = [NSValue valueWithNonretainedObject:self];
             [zeroingWeakRefValues addObject:selfValue];
         }        
     }
@@ -91,7 +91,7 @@ static Class subclass_class(id object, SEL _cmd);
 - (void)dealloc
 {
     NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(self.object, s_zeroingWeakRefListKey);
-    NSValue *selfValue = [NSValue valueWithPointer:self];
+    NSValue *selfValue = [NSValue valueWithNonretainedObject:self];
     [zeroingWeakRefValues removeObject:selfValue];
     
     // No weak ref anymore. Can remove the dynamic subclass

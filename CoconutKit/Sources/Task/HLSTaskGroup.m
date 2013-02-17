@@ -241,7 +241,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
     
     // A dependency is either weak or strong, and cannot be registered several times
-    NSValue *task1Key = [NSValue valueWithPointer:task1];
+    NSValue *task1Key = [NSValue valueWithNonretainedObject:task1];
     NSMutableSet *task1WeakDependencies = [self.weakTaskDependencyMap objectForKey:task1Key];
     if ([task1WeakDependencies containsObject:task2]) {
         HLSLoggerError(@"Task %@ already registered as weak dependency on task %@", task1, task2);
@@ -266,7 +266,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     
     // Register the inverse relation, i.e. task1 in the dependents of task2
     NSMutableDictionary *taskToDependentsMap = strong ? self.taskToStrongDependentsMap : self.taskToWeakDependentsMap;
-    NSValue *task2Key = [NSValue valueWithPointer:task2];
+    NSValue *task2Key = [NSValue valueWithNonretainedObject:task2];
     NSMutableSet *task2Dependents = [taskToDependentsMap objectForKey:task2Key];
     // Create the depdents set if it does not exist
     if (! task2Dependents) {
@@ -285,13 +285,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (NSSet *)weakDependenciesForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.weakTaskDependencyMap objectForKey:taskKey]];
 }
 
 - (NSSet *)strongDependenciesForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.strongTaskDependencyMap objectForKey:taskKey]];    
 }
 
@@ -304,13 +304,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (NSSet *)weakDependentsForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.taskToWeakDependentsMap objectForKey:taskKey]];
 }
 
 - (NSSet *)strongDependentsForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.taskToStrongDependentsMap objectForKey:taskKey]];    
 }
 

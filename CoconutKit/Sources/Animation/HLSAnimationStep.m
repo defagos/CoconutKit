@@ -102,7 +102,7 @@
         return;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
     [self.objectToObjectAnimationMap setObject:[[objectAnimation copy] autorelease] forKey:objectKey];
 }
@@ -113,7 +113,7 @@
         return nil;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     return [self.objectToObjectAnimationMap objectForKey:objectKey];
 }
 

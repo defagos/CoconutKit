@@ -140,7 +140,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                          target:(id)target
                          action:(SEL)action
 {
-    self.targets = [self.targets arrayByAddingObject:[NSValue valueWithPointer:target]];
+    self.targets = [self.targets arrayByAddingObject:[NSValue valueWithNonretainedObject:target]];
     self.actions = [self.actions arrayByAddingObject:[NSValue valueWithPointer:action]];
     return [super addButtonWithTitle:title];
 }
