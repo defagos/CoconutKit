@@ -60,7 +60,7 @@
 {
     [super localize];
 
-    self.title = NSLocalizedString(@"Text fields", @"Text fields");
+    self.title = NSLocalizedString(@"Text fields", nil);
 }
 
 @end

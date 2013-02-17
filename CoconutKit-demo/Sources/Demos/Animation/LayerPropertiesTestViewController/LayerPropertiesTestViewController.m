@@ -151,7 +151,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Layer properties test", @"Layer properties test");
+    self.title = NSLocalizedString(@"Layer properties test", nil);
 }
 
 #pragma mark Refreshing the screen

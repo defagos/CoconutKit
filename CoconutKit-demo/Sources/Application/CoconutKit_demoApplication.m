@@ -105,7 +105,7 @@
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
             navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             self.rootViewController = navigationController;
-            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", @"Language") 
+            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)] autorelease];
@@ -140,7 +140,7 @@
     // Normal demo mode
     if ([self.rootViewController isMemberOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)self.rootViewController;
-        navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", @"Language");
+        navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", nil);
     }
 }
 

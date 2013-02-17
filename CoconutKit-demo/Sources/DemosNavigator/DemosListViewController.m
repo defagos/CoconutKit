@@ -158,27 +158,27 @@ typedef enum {
 {
     switch (section) {
         case DemoCategoryIndexAnimation: {
-            return NSLocalizedString(@"Animation", @"Animation");
+            return NSLocalizedString(@"Animation", nil);
             break;
         }
             
         case DemoCategoryIndexCore: {
-            return NSLocalizedString(@"Core", @"Core");
+            return NSLocalizedString(@"Core", nil);
             break;
         }
             
         case DemoCategoryIndexTask: {
-            return NSLocalizedString(@"Tasks", @"Tasks");
+            return NSLocalizedString(@"Tasks", nil);
             break;
         }
 
         case DemoCategoryIndexView: {
-            return NSLocalizedString(@"Views", @"Views");
+            return NSLocalizedString(@"Views", nil);
             break;
         }
 
         case DemoCategoryIndexViewControllers: {
-            return NSLocalizedString(@"View controllers", @"View controllers");
+            return NSLocalizedString(@"View controllers", nil);
             break;
         }
             
@@ -232,12 +232,12 @@ typedef enum {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
                 case AnimationDemoIndexAnimation: {
-                    cell.textLabel.text = NSLocalizedString(@"Animations", @"Animations");
+                    cell.textLabel.text = NSLocalizedString(@"Animations", nil);
                     break;
                 }
                     
                 case AnimationDemoIndexLayerPropertiesTest: {
-                    cell.textLabel.text = NSLocalizedString(@"Layer properties test (not a CoconutKit component)", @"Layer properties test (not a CoconutKit component)");
+                    cell.textLabel.text = NSLocalizedString(@"Layer properties test (not a CoconutKit component)", nil);
                     break;
                 }
                     
@@ -252,12 +252,12 @@ typedef enum {
         case DemoCategoryIndexCore: {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
-                    cell.textLabel.text = NSLocalizedString(@"Dynamic localization", @"Dynamic localization");
+                    cell.textLabel.text = NSLocalizedString(@"Dynamic localization", nil);
                     break;
                 }
                     
                 case CoreDemoIndexFonts: {
-                    cell.textLabel.text = NSLocalizedString(@"Fonts", @"Fonts");
+                    cell.textLabel.text = NSLocalizedString(@"Fonts", nil);
                     break;
                 }
                     
@@ -272,7 +272,7 @@ typedef enum {
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+                    cell.textLabel.text = NSLocalizedString(@"Parallel processing", nil);
                     break;
                 }
                     
@@ -287,57 +287,57 @@ typedef enum {
         case DemoCategoryIndexView: {
             switch (indexPath.row) {
                 case ViewDemoIndexTableViewCells: {
-                    cell.textLabel.text = NSLocalizedString(@"Table view cells", @"Table view cells");
+                    cell.textLabel.text = NSLocalizedString(@"Table view cells", nil);
                     break;
                 }
                     
                 case ViewDemoIndexTextFields: {
-                    cell.textLabel.text = NSLocalizedString(@"Text fields", @"Text fields");
+                    cell.textLabel.text = NSLocalizedString(@"Text fields", nil);
                     break;
                 }
                     
                 case ViewDemoIndexCursor: {
-                    cell.textLabel.text = NSLocalizedString(@"Cursor", @"Cursor");
+                    cell.textLabel.text = NSLocalizedString(@"Cursor", nil);
                     break;
                 }
                 
                 case ViewDemoIndexLabel: {
-                    cell.textLabel.text = NSLocalizedString(@"Label", @"Label");
+                    cell.textLabel.text = NSLocalizedString(@"Label", nil);
                     break;
                 }
                     
                 case ViewDemoIndexExpandingSearchBar: {
-                    cell.textLabel.text = NSLocalizedString(@"Search bar", @"Search bar");
+                    cell.textLabel.text = NSLocalizedString(@"Search bar", nil);
                     break;
                 }
                 
                 case ViewDemoIndexActionSheet: {
-                    cell.textLabel.text = NSLocalizedString(@"Action sheet", @"Action sheet");
+                    cell.textLabel.text = NSLocalizedString(@"Action sheet", nil);
                     break;
                 }
                     
                 case ViewDemoIndexSlideshow: {
-                    cell.textLabel.text = NSLocalizedString(@"Slideshow", @"Slideshow");
+                    cell.textLabel.text = NSLocalizedString(@"Slideshow", nil);
                     break;
                 }
                     
                 case ViewDemoIndexSkinning: {
-                    cell.textLabel.text = NSLocalizedString(@"Skinning", @"Skinning");
+                    cell.textLabel.text = NSLocalizedString(@"Skinning", nil);
                     break;
                 }
                     
                 case ViewDemoIndexEffects: {
-                    cell.textLabel.text = NSLocalizedString(@"Effects", @"Effects");
+                    cell.textLabel.text = NSLocalizedString(@"Effects", nil);
                     break;
                 }
                     
                 case ViewDemoIndexWebView: {
-                    cell.textLabel.text = NSLocalizedString(@"Web view", @"Web view");
+                    cell.textLabel.text = NSLocalizedString(@"Web view", nil);
                     break;
                 }
                     
                 case ViewDemoIndexParallaxScrolling: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
+                    cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", nil);
                     break;
                 }
                 
@@ -386,16 +386,16 @@ typedef enum {
                         if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
                             [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
                             
-                            cell.textLabel.text = NSLocalizedString(@"Segues", @"Segues");
+                            cell.textLabel.text = NSLocalizedString(@"Segues", nil);
                             cell.textLabel.textColor = [UIColor blackColor];
                             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                         }
                         else {
-                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", @"Segues (not available in bundle)");
+                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", nil);
                         }
                     }
                     else {
-                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", @"Segues (not available for iOS 4)");
+                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", nil);
                     }
                     break;
                 }
@@ -609,7 +609,7 @@ typedef enum {
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Demos", @"Demos");
+    self.title = NSLocalizedString(@"Demos", nil);
     [self.tableView reloadData];
 }
 

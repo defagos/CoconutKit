@@ -12,7 +12,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationMandatoryError
-                           localizedDescription:NSLocalizedString(@"Missing first name", @"Missing first name")];            
+                           localizedDescription:NSLocalizedString(@"Missing first name", nil)];
         }
         return NO;
     }
@@ -26,7 +26,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationMandatoryError
-                           localizedDescription:NSLocalizedString(@"Missing last name", @"Missing last name")];
+                           localizedDescription:NSLocalizedString(@"Missing last name", nil)];
         }
         return NO;
     }
@@ -45,7 +45,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationIncorrectError
-                           localizedDescription:NSLocalizedString(@"Invalid email address", @"Invalid email address")];            
+                           localizedDescription:NSLocalizedString(@"Invalid email address", nil)];
         }
         return NO;        
     }
@@ -59,7 +59,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationIncorrectError
-                           localizedDescription:NSLocalizedString(@"This value cannot be negative", @"This value cannot be negative")];            
+                           localizedDescription:NSLocalizedString(@"This value cannot be negative", nil)];
         }
         return NO;
     }
@@ -79,7 +79,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationMandatoryError 
-                           localizedDescription:NSLocalizedString(@"Missing city", @"Missing city")];   
+                           localizedDescription:NSLocalizedString(@"Missing city", nil)];
         }
         return NO;
     }
@@ -99,7 +99,7 @@
         if (pError) {
             *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
                                            code:DemoValidationMandatoryError 
-                           localizedDescription:NSLocalizedString(@"Missing country", @"Missing country")];            
+                           localizedDescription:NSLocalizedString(@"Missing country", nil)];
         }
         return NO;
     }

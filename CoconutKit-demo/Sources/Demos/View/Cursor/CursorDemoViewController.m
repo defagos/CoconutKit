@@ -258,11 +258,11 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move from index %d", cursor, index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.weekDayIndexLabel.textColor = [UIColor redColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.randomRangeIndexLabel.textColor = [UIColor redColor];
     }    
 }
@@ -272,11 +272,11 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move to index %d", cursor, index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.weekDayIndexLabel.textColor = [UIColor blackColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", @"Index"), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
         self.randomRangeIndexLabel.textColor = [UIColor blackColor];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
@@ -351,13 +351,13 @@ static NSArray *s_folders = nil;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Cursor", @"Cursor");
+    self.title = NSLocalizedString(@"Cursor", nil);
     
     [s_timeScales release];
-    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", @"Year") uppercaseString],
-                     [NSLocalizedString(@"Month", @"Month") uppercaseString],
-                     [NSLocalizedString(@"Week", @"Week") uppercaseString],
-                     [NSLocalizedString(@"Day", @"Day") uppercaseString],
+    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", nil) uppercaseString],
+                     [NSLocalizedString(@"Month", nil) uppercaseString],
+                     [NSLocalizedString(@"Week", nil) uppercaseString],
+                     [NSLocalizedString(@"Day", nil) uppercaseString],
                      nil] retain];
     
     [self.weekDaysCursor reloadData];

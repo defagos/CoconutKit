@@ -53,7 +53,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Font", @"Font");
+    self.title = NSLocalizedString(@"Font", nil);
 }
 
 @end

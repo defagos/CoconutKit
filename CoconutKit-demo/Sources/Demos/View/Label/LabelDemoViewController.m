@@ -103,15 +103,15 @@ static NSArray *s_fontNames = nil;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Label", @"Label");
+    self.title = NSLocalizedString(@"Label", nil);
     
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Baselines", @"Baselines") forSegmentAtIndex:0];
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", @"Centers") forSegmentAtIndex:1];
-    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", @"None") forSegmentAtIndex:2];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Baselines", nil) forSegmentAtIndex:0];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"Centers", nil) forSegmentAtIndex:1];
+    [self.baselineAdjustmentSegmentedControl setTitle:NSLocalizedString(@"None", nil) forSegmentAtIndex:2];
     
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", @"Middle") forSegmentAtIndex:0];
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", @"Top") forSegmentAtIndex:1];
-    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", @"Bottom") forSegmentAtIndex:2];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Middle", nil) forSegmentAtIndex:0];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Top", nil) forSegmentAtIndex:1];
+    [self.verticalAlignmentSegmentedControl setTitle:NSLocalizedString(@"Bottom", nil) forSegmentAtIndex:2];
     
     [self reloadData];
 }

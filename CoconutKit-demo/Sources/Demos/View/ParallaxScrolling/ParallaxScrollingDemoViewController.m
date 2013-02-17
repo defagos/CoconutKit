@@ -79,7 +79,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
+    self.title = NSLocalizedString(@"Parallax scrolling", nil);
 }
 
 #pragma mark Action callbacks

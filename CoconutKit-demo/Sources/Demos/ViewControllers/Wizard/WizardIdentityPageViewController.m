@@ -106,12 +106,12 @@
 {
     [super localize];
     
-    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // The date formatter is also localized!
     // TODO: Does not work yet. Try to switch languages!
     self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
     [self checkTextFields];
@@ -154,7 +154,7 @@
     textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = NSLocalizedString(@"Formatting error", @"Formatting error");
+    errorLabel.text = NSLocalizedString(@"Formatting error", nil);
 }
 
 - (void)textFieldDidPassValidation:(UITextField *)textField

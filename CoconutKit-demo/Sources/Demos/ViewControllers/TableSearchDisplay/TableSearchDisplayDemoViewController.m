@@ -222,10 +222,10 @@ typedef enum {
     [super localize];
     
     self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
-                                        NSLocalizedString(@"Music players", @"Music players"),
-                                        NSLocalizedString(@"Phones", @"Phones"),
-                                        NSLocalizedString(@"Tablets", @"Tablets"),
+    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", nil),
+                                        NSLocalizedString(@"Music players", nil),
+                                        NSLocalizedString(@"Phones", nil),
+                                        NSLocalizedString(@"Tablets", nil),
                                         nil];
 }
 

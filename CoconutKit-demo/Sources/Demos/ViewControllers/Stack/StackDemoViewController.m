@@ -204,10 +204,10 @@ typedef enum {
     
     self.title = @"HLSStackController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", nil) forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -242,11 +242,10 @@ typedef enum {
                                      animated:self.animatedSwitch.on];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
-                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
                                                             delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                    otherButtonTitles:nil] autorelease];
         [alertView show];
         return;
@@ -503,7 +502,7 @@ typedef enum {
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
                                                          message:nil
                                                         delegate:nil
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
 }
@@ -516,9 +515,9 @@ typedef enum {
 
 - (IBAction)indexChanged:(id)sender
 {
-    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", @"Insertion index: %d"),
+    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", nil),
                                      [self insertionIndex]];
-    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", @"Removal index: %d"),
+    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", nil),
                                    [self removalIndex]];
 }
 

@@ -49,7 +49,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Web view", @"Web view");
+    self.title = NSLocalizedString(@"Web view", nil);
 }
 
 #pragma mark Event callbacks

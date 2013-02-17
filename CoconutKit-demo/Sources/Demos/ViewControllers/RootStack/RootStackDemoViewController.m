@@ -208,13 +208,13 @@
     [super localize];
     
     self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
-    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", @"Action sheet");
+    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", nil);
     
     if (self == [self.stackController rootViewController]) {
-        [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
     }
     else {
-        [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Pop", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -269,7 +269,7 @@
 - (IBAction)pushTabBarController:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
                                                                                                    style:UIBarButtonItemStyleDone 
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
@@ -283,7 +283,7 @@
 - (IBAction)pushNavigationController:(id)sender
 {
     StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
+    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
                                                                                                    style:UIBarButtonItemStyleDone 
                                                                                                   target:self 
                                                                                                   action:@selector(closeNativeContainer:)] autorelease];
@@ -310,7 +310,7 @@
                              target:self
                              action:NULL];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:NULL];
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) target:self action:NULL];
     }
     
     [actionSheet showFromBarButtonItem:self.actionSheetBarButtonItem animated:YES];

@@ -92,7 +92,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Slideshow", @"Slideshow");
+    self.title = NSLocalizedString(@"Slideshow", nil);
 }
 
 #pragma mark HLSSlideshowDelegate protocol implementation

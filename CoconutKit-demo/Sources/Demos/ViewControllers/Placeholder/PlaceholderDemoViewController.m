@@ -121,8 +121,8 @@ typedef enum {
     
     self.title = @"HLSPlaceholderViewController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:AutorotationModeIndexNoChildren];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:AutorotationModeIndexAllChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:AutorotationModeIndexNoChildren];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:AutorotationModeIndexAllChildren];
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -151,11 +151,10 @@ typedef enum {
         [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)",
-                                                                                       @"The view controller is not compatible with the container (most probably its orientation)")
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
                                                             delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                    otherButtonTitles:nil] autorelease];
         [alertView show];
     }
@@ -401,7 +400,7 @@ typedef enum {
     UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
                                                          message:nil
                                                         delegate:nil
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
 }

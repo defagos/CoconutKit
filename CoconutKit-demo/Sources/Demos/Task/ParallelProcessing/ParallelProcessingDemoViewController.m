@@ -213,10 +213,10 @@
     if ([task.tag isEqualToString:@"T_task"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -231,10 +231,10 @@
     else if ([task.tag isEqualToString:@"T_subTask1"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -248,10 +248,10 @@
     else if ([task.tag isEqualToString:@"T_subTask2"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -265,10 +265,10 @@
     else if ([task.tag isEqualToString:@"T_subTask3"]) {
         // Failure?
         if ([task error]) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
-                                                                 message:NSLocalizedString(@"Houston, we've got a problem", @"Houston, we've got a problem")
+            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                                 message:NSLocalizedString(@"Houston, we've got a problem", nil)
                                                                 delegate:nil 
-                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss")
+                                                       cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                        otherButtonTitles:nil]
                                       autorelease];
             [alertView show];
@@ -441,7 +441,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallel processing", @"Parallel processing");
+    self.title = NSLocalizedString(@"Parallel processing", nil);
 }
 
 @end

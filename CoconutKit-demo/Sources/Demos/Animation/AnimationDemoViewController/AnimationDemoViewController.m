@@ -104,7 +104,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+    self.title = NSLocalizedString(@"Single view animation", nil);
 }
 
 #pragma mark Responding to parameter adjustment

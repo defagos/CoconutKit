@@ -56,7 +56,7 @@
                                                                                           action:NULL] autorelease];
     self.toolbarItems = [NSArray arrayWithObject:actionBarButtonItem];
     
-    self.title = NSLocalizedString(@"Skinning", @"Skinning");
+    self.title = NSLocalizedString(@"Skinning", nil);
 }
 
 @end

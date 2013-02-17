@@ -59,13 +59,13 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Search bar", @"Search bar");
+    self.title = NSLocalizedString(@"Search bar", nil);
     
-    self.searchBar2.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
-    self.searchBar2.prompt = NSLocalizedString(@"Search books", @"Search books");
+    self.searchBar2.placeholder = NSLocalizedString(@"Enter a search criterium", nil);
+    self.searchBar2.prompt = NSLocalizedString(@"Search books", nil);
     
-    self.searchBar3.placeholder = NSLocalizedString(@"Enter a search criterium", @"Enter a search criterium");
-    self.searchBar3.prompt = NSLocalizedString(@"Search books", @"Search books");
+    self.searchBar3.placeholder = NSLocalizedString(@"Enter a search criterium", nil);
+    self.searchBar3.prompt = NSLocalizedString(@"Search books", nil);
 }
 
 #pragma mark HLSExpandingSearchBarDelegate protocol implementation
