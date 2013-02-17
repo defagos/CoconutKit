@@ -37,7 +37,7 @@
 		6F3B060C14BC4C2D0026F512 /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */; };
 		6F3B063E14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */; };
-		6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */; };
+		6F3E3E8C15A227A7007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */; };
 		6F41D23715E6A590009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D24815E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
 		6F5007F21585E18100391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */; };
@@ -222,8 +222,8 @@
 		6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064014BC7D300026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F3E3E8A15A227A7007E78BD /* HLSApplicationPreLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreLoader.h; sourceTree = "<group>"; };
-		6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreLoader.m; sourceTree = "<group>"; };
+		6F3E3E8A15A227A7007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
+		6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F41D23515E6A590009A2384 /* CALayer+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F41D24615E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -710,8 +710,8 @@
 				6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */,
 				6F41D24615E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.h */,
 				6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */,
-				6F3E3E8A15A227A7007E78BD /* HLSApplicationPreLoader.h */,
-				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreLoader.m */,
+				6F3E3E8A15A227A7007E78BD /* HLSApplicationPreloader.h */,
+				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
 				6FADE71414BA04B6007EE121 /* HLSAssert.m */,
 				6FADE71614BA04B6007EE121 /* HLSConverters.h */,
@@ -1173,7 +1173,7 @@
 				6F83660D1588CC820044E572 /* HLSVector.m in Sources */,
 				6F6C0A1A159B965E007933EB /* HLSStackPushSegue.m in Sources */,
 				6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */,
-				6F3E3E8C15A227A7007E78BD /* HLSApplicationPreLoader.m in Sources */,
+				6F3E3E8C15A227A7007E78BD /* HLSApplicationPreloader.m in Sources */,
 				6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */,
 				6F8C934515CEE65D006D892C /* HLSContainerGroupView.m in Sources */,
 				6F8C934C15CEF0E6006D892C /* HLSContainerStackView.m in Sources */,
