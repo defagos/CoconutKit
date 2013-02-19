@@ -28,7 +28,6 @@ NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m
 UIActionSheet+HLSExtensions.m
 UIBarButtonItem+HLSActionSheet.m
-UIButton+HLSDynamicLocalization.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIFont+HLSExtensions.m
