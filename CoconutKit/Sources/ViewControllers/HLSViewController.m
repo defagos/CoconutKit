@@ -45,9 +45,9 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    if ((self = [super initWithNibName:nibName bundle:bundle])) {
         [self hlsViewControllerInit];
     }
     return self;
@@ -61,24 +61,23 @@
     return self;
 }
 
-- (id)initWithBundle:(NSBundle *)nibBundleOrNil
+- (id)initWithBundle:(NSBundle *)bundle
 {
+    if (! bundle) {
+        bundle = [NSBundle mainBundle];
+    }
+    
     NSString *nibName = nil;
-    if ([[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
+    if ([bundle pathForResource:[self className] ofType:@"nib"]) {
         nibName = [self className];
     }
     
-    return [self initWithNibName:nibName bundle:nibBundleOrNil];
+    return [self initWithNibName:nibName bundle:bundle];
 }
 
 - (id)init
 {
-    NSString *nibName = nil;
-    if ([[NSBundle mainBundle] pathForResource:[self className] ofType:@"nib"]) {
-        nibName = [self className];
-    }
-    
-    return [self initWithNibName:nibName bundle:nil];
+    return [self initWithBundle:nil];
 }
 
 // Common initialization code

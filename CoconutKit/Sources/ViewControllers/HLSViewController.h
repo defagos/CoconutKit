@@ -52,7 +52,7 @@
  * Instantiate a view controller, looking for a nib bearing the same name as the class in the given bundle. If the
  * specified bundle is nil, lookup is performed in the main bundle
  */
-- (id)initWithBundle:(NSBundle *)nibBundleOrNil;
+- (id)initWithBundle:(NSBundle *)bundle;
 
 /**
  * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 
