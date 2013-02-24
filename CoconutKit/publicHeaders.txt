@@ -19,6 +19,7 @@ HLSLayerAnimation.h
 HLSLayerAnimationStep.h
 HLSLogger.h
 HLSManagedObjectCopying.h
+HLSMockDiskConnection.h
 HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
@@ -41,6 +42,7 @@ HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextField.h
 HLSTransition.h
+HLSURLConnection.h
 HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h

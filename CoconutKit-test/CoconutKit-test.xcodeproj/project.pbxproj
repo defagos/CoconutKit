@@ -64,6 +64,8 @@
 		6FA5BDA215E2923900E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDA115E2923900E5182E /* HLSLayerAnimation.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
 		6FAB922316DA70D700599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB922216DA70D700599256 /* MobileCoreServices.framework */; };
+		6FAB923B16DA7FB100599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923816DA7FB100599256 /* HLSMockDiskConnection.m */; };
+		6FAB923C16DA7FB100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923A16DA7FB100599256 /* HLSURLConnection.m */; };
 		6FADE47714B9DA1B007EE121 /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47414B9DA1B007EE121 /* House.m */; };
 		6FADE47814B9DA1B007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47614B9DA1B007EE121 /* Person.m */; };
 		6FADE48714B9DA58007EE121 /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE48414B9DA58007EE121 /* _House.m */; };
@@ -278,6 +280,10 @@
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6FAB922216DA70D700599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6FAB923716DA7FB100599256 /* HLSMockDiskConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMockDiskConnection.h; sourceTree = "<group>"; };
+		6FAB923816DA7FB100599256 /* HLSMockDiskConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMockDiskConnection.m; sourceTree = "<group>"; };
+		6FAB923916DA7FB100599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
+		6FAB923A16DA7FB100599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
 		6FADE47314B9DA1B007EE121 /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
 		6FADE47414B9DA1B007EE121 /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
 		6FADE47514B9DA1B007EE121 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -666,6 +672,17 @@
 			path = Sources/View;
 			sourceTree = SOURCE_ROOT;
 		};
+		6FAB923616DA7FB100599256 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6FAB923716DA7FB100599256 /* HLSMockDiskConnection.h */,
+				6FAB923816DA7FB100599256 /* HLSMockDiskConnection.m */,
+				6FAB923916DA7FB100599256 /* HLSURLConnection.h */,
+				6FAB923A16DA7FB100599256 /* HLSURLConnection.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		6FADE70A14BA04B6007EE121 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +690,7 @@
 				6FADE71214BA04B6007EE121 /* Core */,
 				6FADE74714BA04B6007EE121 /* CoreData */,
 				6FADE75114BA04B6007EE121 /* Logging */,
+				6FAB923616DA7FB100599256 /* Networking */,
 				6FADE75414BA04B6007EE121 /* Task */,
 				6FADE76114BA04B6007EE121 /* View */,
 				6FADE77F14BA04B6007EE121 /* ViewControllers */,
@@ -1197,6 +1215,8 @@
 				6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */,
 				6F22C74A16A859260081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6F66181816C14B5E00303628 /* UIView+HLSDynamicLocalization.m in Sources */,
+				6FAB923B16DA7FB100599256 /* HLSMockDiskConnection.m in Sources */,
+				6FAB923C16DA7FB100599256 /* HLSURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -315,6 +315,10 @@
 		6FA5BDCA15E34AF100E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
 		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
+		6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; };
+		6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; };
+		6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; };
+		6FAB923516DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
 		6FADE6BD14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63014BA04A6007EE121 /* HLSViewAnimationStep.m */; };
 		6FADE6BE14BA04A7007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63214BA04A6007EE121 /* HLSViewAnimation.m */; };
@@ -663,6 +667,10 @@
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
 		6FAB921C16DA709600599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6FAB922E16DA7FA300599256 /* HLSMockDiskConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMockDiskConnection.h; sourceTree = "<group>"; };
+		6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMockDiskConnection.m; sourceTree = "<group>"; };
+		6FAB923016DA7FA300599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
+		6FAB923116DA7FA300599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
 		6FADE62D14BA04A6007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE62E14BA04A6007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE62F14BA04A6007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -1260,6 +1268,17 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		6FAB922D16DA7FA300599256 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6FAB922E16DA7FA300599256 /* HLSMockDiskConnection.h */,
+				6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */,
+				6FAB923016DA7FA300599256 /* HLSURLConnection.h */,
+				6FAB923116DA7FA300599256 /* HLSURLConnection.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		6FADE62B14BA04A6007EE121 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1286,7 @@
 				6FADE63314BA04A6007EE121 /* Core */,
 				6FADE66814BA04A6007EE121 /* CoreData */,
 				6FADE67214BA04A6007EE121 /* Logging */,
+				6FAB922D16DA7FA300599256 /* Networking */,
 				6FADE67514BA04A6007EE121 /* Task */,
 				6FADE68214BA04A6007EE121 /* View */,
 				6FADE6A014BA04A6007EE121 /* ViewControllers */,
@@ -2449,6 +2469,8 @@
 				6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181B16C14B7400303628 /* UIView+HLSDynamicLocalization.m in Sources */,
 				6F718CA516CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
+				6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */,
+				6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2613,6 +2635,8 @@
 				6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181C16C14B7400303628 /* UIView+HLSDynamicLocalization.m in Sources */,
 				6F718CA616CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
+				6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */,
+				6FAB923516DA7FA300599256 /* HLSURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
