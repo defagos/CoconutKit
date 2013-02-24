@@ -55,4 +55,11 @@
     GHAssertEqualStrings([string urlEncodedStringUsingEncoding:NSUTF8StringEncoding], encodedStringReference, nil);
 }
 
+- (void)testMIMEType
+{
+    GHAssertEqualStrings([@"/path/to/file.png" MIMEType], @"image/png", nil);
+    GHAssertEqualStrings([@"/path/to/file.jpg" MIMEType], @"image/jpeg", nil);
+    GHAssertEqualStrings([@"/path/to/file.txt" MIMEType], @"text/plain", nil);
+}
+
 @end

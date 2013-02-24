@@ -313,6 +313,8 @@
 		6FA5BDC815E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
 		6FA5BDC915E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
 		6FA5BDCA15E34AF100E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
+		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
+		6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
 		6FADE6BD14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63014BA04A6007EE121 /* HLSViewAnimationStep.m */; };
 		6FADE6BE14BA04A7007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63214BA04A6007EE121 /* HLSViewAnimation.m */; };
@@ -660,6 +662,7 @@
 		6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
+		6FAB921C16DA709600599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6FADE62D14BA04A6007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE62E14BA04A6007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE62F14BA04A6007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -950,6 +953,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C74F16A93DA80081A9A7 /* CoreText.framework in Frameworks */,
 				6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F513D4661100834900 /* CoreData.framework in Frameworks */,
@@ -964,6 +968,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C75016A93DAF0081A9A7 /* CoreText.framework in Frameworks */,
 				6F159B3E15A554250020AFAC /* QuartzCore.framework in Frameworks */,
 				6F159B3F15A554250020AFAC /* CoreData.framework in Frameworks */,
@@ -1009,6 +1014,7 @@
 				6F22C74E16A93DA70081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6FEF8541131F76DA0015B57C /* MessageUI.framework */,
+				6FAB921C16DA709600599256 /* MobileCoreServices.framework */,
 				6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);

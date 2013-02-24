@@ -6,4 +6,5 @@
     #import <QuartzCore/QuartzCore.h>
     #import <UIKit/UIKit.h>
     #import <MessageUI/MessageUI.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
 #endif

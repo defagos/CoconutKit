@@ -66,6 +66,7 @@
 		6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */; };
 		6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */; };
 		6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */; };
+		6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
 		6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		6FADE59B14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */; };
@@ -304,6 +305,7 @@
 		6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
+		6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6FADE51214BA0494007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE51314BA0494007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */,
 				6FCDA16C14DAE5EF00ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F313D465F700834900 /* CoreData.framework in Frameworks */,
@@ -507,13 +510,14 @@
 			isa = PBXGroup;
 			children = (
 				6FC900F213D465F700834900 /* CoreData.framework */,
+				6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */,
 				6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */,
 				6F22C74C16A93D8C0081A9A7 /* CoreText.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				DA838786131EAD1000ECAED3 /* MessageUI.framework */,
+				6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */,
 				6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */,
 				6F8D09A0123F545D00FCF2AF /* UIKit.framework */,
-				6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

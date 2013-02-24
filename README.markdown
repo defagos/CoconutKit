@@ -69,6 +69,7 @@ You can grab the latest tagged binary package available from [the project downlo
 * `CoreText.framework`
 * `Foundation.framework`
 * `MessageUI.framework`
+* `MobileCoreServices.framework`
 * `QuartzCore.framework`
 * `UIKit.framework`
 
