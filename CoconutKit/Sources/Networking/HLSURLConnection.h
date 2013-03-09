@@ -77,11 +77,11 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 
 /**
  * Create a parent - child relationship between the receiver and another connection. When cancelling the receiver,
- * all associated child connections will be cancelled as well (note that you still must manually start each connection.
- * You are namely free to add child connections when the receiver is already running).
+ * all associated child connections will be cancelled as well. When a connection is added as child connection, it
+ * is automatically started for you
  *
- * This can be useful to implement cascading requests. Take for example an object which must be filled using two
- * requests. You want the process to happen as if only one connection is actually running. This can be easily achieved
+ * Child connections can be useful to implement cascading requests. Take for example an object which must be filled using 
+ * two requests. You want the process to happen as if only one connection is actually running. This can be easily achieved
  * using a child connection
  *
  * Note that you are responsible of avoiding cycles when creating parent / child relationships, otherwise the behavior

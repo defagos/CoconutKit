@@ -67,6 +67,7 @@
 - (void)addChildConnection:(HLSURLConnection *)connection
 {
     [self.childConnections addObject:connection];
+    [connection start];
 }
 
 @end
