@@ -17,7 +17,7 @@
 
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
-static void *s_originalViewSizeKey = &s_originalViewSizeKey;
+static void *s_createdViewSizeKey = &s_createdViewSizeKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__initWithNibName_bundle_Imp)(id, SEL, id, id) = NULL;
@@ -42,11 +42,6 @@ static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
 
 @interface UIViewController (HLSExtensionsPrivate) <HLSAutorotationCompatibility>
-
-- (void)uiViewControllerHLSExtensionsInit;
-
-- (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
-- (void)setOriginalViewSize:(CGSize)originalViewSize;
 
 @end
 
@@ -105,14 +100,17 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
         && lifeCyclePhase < HLSViewControllerLifeCyclePhaseViewDidUnload;
 }
 
-- (CGSize)originalViewSize
+- (CGSize)createdViewSize
 {
-    if ([self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidLoad) {
-        HLSLoggerWarn(@"The view has not been created (incorrect view lifecycle). Use current size as reference");
-        [self setOriginalViewSize:self.view.bounds.size];
+    NSValue *createdViewSizeValue = objc_getAssociatedObject(self, s_createdViewSizeKey);
+    if (createdViewSizeValue) {
+        return [createdViewSizeValue CGSizeValue];
     }
-    
-    return [objc_getAssociatedObject(self, s_originalViewSizeKey) CGSizeValue];
+    else {
+        // Return zero to avoid triggering lazy view creation
+        HLSLoggerWarn(@"The view has not been created (incorrect view lifecycle). Return zero");
+        return CGSizeZero;
+    }
 }
 
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
@@ -327,7 +325,6 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (void)uiViewControllerHLSExtensionsInit
 {
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseInitialized];
-    [self setOriginalViewSize:CGSizeZero];
 }
 
 #pragma mark Accessors and mutators
@@ -335,11 +332,6 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
     objc_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)setOriginalViewSize:(CGSize)originalViewSize
-{
-    objc_setAssociatedObject(self, s_originalViewSizeKey, [NSValue valueWithCGSize:originalViewSize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -370,6 +362,8 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
                                      userInfo:nil];
     }
     
+    objc_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
     (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
@@ -378,7 +372,6 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
                       "or maybe [super viewDidLoad] has not been called by class %@ or one of its parents", self, [self class]);
     }
     
-    [self setOriginalViewSize:self.view.bounds.size];
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad];
 }
 

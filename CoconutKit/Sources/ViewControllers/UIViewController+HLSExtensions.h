@@ -73,9 +73,10 @@ typedef enum {
 - (BOOL)isViewDisplayed;
 
 /**
- * Original size of the view right after creation (i.e. right after -viewDidLoad has been executed)
+ * Size of the view right after it has been created (i.e. right after -loadView has been called, or right after it has
+ * been deserialized from its nib)
  */
-- (CGSize)originalViewSize;
+- (CGSize)createdViewSize;
 
 /**
  * Return YES iff the current view controller lifecycle can be transitioned to the one received as parameter
