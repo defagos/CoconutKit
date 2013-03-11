@@ -108,8 +108,8 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 - (CGSize)originalViewSize
 {
     if ([self lifeCyclePhase] < HLSViewControllerLifeCyclePhaseViewDidLoad) {
-        HLSLoggerError(@"The view has not been created. Size is unknown yet");
-        return CGSizeZero;
+        HLSLoggerWarn(@"The view has not been created (incorrect view lifecycle). Use current size as reference");
+        [self setOriginalViewSize:self.view.bounds.size];
     }
     
     return [objc_getAssociatedObject(self, s_originalViewSizeKey) CGSizeValue];
