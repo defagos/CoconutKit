@@ -70,12 +70,7 @@ static id swizzled_UIPopoverController__initWithContentViewController_Imp(UIPopo
     // also in -viewDidLoad, we need to set the parent-child relationship early. No need to remove on -init failure, this will be done in
     // -dealloc
     objc_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
-    self = (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
-    if (self) {
-        // Fixes an inconsistency with how the size of a popover controller is set (use the intrinsic view controller view size)
-        self.popoverContentSize = [viewController originalViewSize];
-    }
-    return self;
+    return (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
 }
 
 static void swizzled_UIPopoverController__dealloc_Imp(UIPopoverController *self, SEL _cmd)
