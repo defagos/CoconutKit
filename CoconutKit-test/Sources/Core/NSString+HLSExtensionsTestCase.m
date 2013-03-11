@@ -58,8 +58,13 @@
 - (void)testMIMEType
 {
     GHAssertEqualStrings([@"/path/to/file.png" MIMEType], @"image/png", nil);
+    GHAssertEqualStrings([@"/path/to/file.PNG" MIMEType], @"image/png", nil);
     GHAssertEqualStrings([@"/path/to/file.jpg" MIMEType], @"image/jpeg", nil);
+    GHAssertEqualStrings([@"/path/to/file.JPG" MIMEType], @"image/jpeg", nil);
     GHAssertEqualStrings([@"/path/to/file.txt" MIMEType], @"text/plain", nil);
+    GHAssertEqualStrings([@"/path/to/file.TXT" MIMEType], @"text/plain", nil);
+    GHAssertEqualStrings([@"/path/to/file.pdf" MIMEType], @"application/pdf", nil);
+    GHAssertEqualStrings([@"/path/to/file.PDF" MIMEType], @"application/pdf", nil);
 }
 
 @end
