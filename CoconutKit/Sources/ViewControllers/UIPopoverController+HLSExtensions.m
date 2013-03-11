@@ -65,11 +65,11 @@ static void swizzled_UIPopoverController__setContentViewController_animated_Imp(
 
 static id swizzled_UIPopoverController__initWithContentViewController_Imp(UIPopoverController *self, SEL _cmd, UIViewController *viewController)
 {
-    self = (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
-    if (self) {
-        objc_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
-    }
-    return self;
+    // The -viewDidLoad method is triggered from the -initWithContentViewController method. If we want the parent information to be available
+    // also in -viewDidLoad, we need to set the parent-child relationship early. No need to remove on -init failure, this will be done in
+    // -dealloc
+    objc_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
+    return (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
 }
 
 static void swizzled_UIPopoverController__dealloc_Imp(UIPopoverController *self, SEL _cmd)
