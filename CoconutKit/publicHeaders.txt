@@ -65,6 +65,7 @@ NSDictionary+HLSExtensions.h
 NSError+HLSExtensions.h
 NSManagedObject+HLSExtensions.h
 NSManagedObject+HLSValidation.h
+NSMutableArray+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSString+HLSExtensions.h
 NSTimeZone+HLSExtensions.h
