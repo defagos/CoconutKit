@@ -9,11 +9,11 @@
 @interface NSBundle (HLSExtensions)
 
 /**
- * Return the friendly Hortis version number using the bundle version
+ * Return the friendly Hortis application version number, based on the main bundle version
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
-+ (NSString *)friendlyVersionNumber;
++ (NSString *)friendlyApplicationVersionNumber;
 
 /**
  * Return the resource bundle associated with CoconutKit
@@ -26,5 +26,12 @@
  * Note that bundles are searched recursively, and that results are cached for faster lookup
  */
 + (NSBundle *)bundleWithName:(NSString *)name;
+
+/**
+ * Return the friendly Hortis bundle version number
+ *
+ * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
+ */
+- (NSString *)friendlyVersionNumber;
 
 @end

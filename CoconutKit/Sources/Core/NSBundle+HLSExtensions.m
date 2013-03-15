@@ -15,10 +15,9 @@
 
 #pragma mark Class methods
 
-+ (NSString *)friendlyVersionNumber
++ (NSString *)friendlyApplicationVersionNumber
 {
-    NSString *versionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    return [versionNumber friendlyVersionNumber];
+    return [[NSBundle mainBundle] friendlyVersionNumber];
 }
 
 + (NSBundle *)coconutKitBundle
@@ -73,6 +72,14 @@
         }
     }
     return bundle;
+}
+
+#pragma mark Accessors and mutators
+
+- (NSString *)friendlyVersionNumber
+{
+    NSString *versionNumber = [[self infoDictionary] objectForKey:@"CFBundleVersion"];
+    return [versionNumber friendlyVersionNumber];
 }
 
 @end
