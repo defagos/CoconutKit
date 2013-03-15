@@ -40,11 +40,9 @@
     
     NSMutableDictionary *overriddenDictionary = [NSMutableDictionary dictionaryWithDictionary:self];
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    for (NSString *key in keys) {
+    for (NSString *key in [environment allKeys]) {
         id environmentValue = [environment objectForKey:key];
-        if (environmentValue) {
-            [overriddenDictionary setObject:environmentValue forKey:key];
-        }
+        [overriddenDictionary setObject:environmentValue forKey:key];
     }
     return [NSDictionary dictionaryWithDictionary:overriddenDictionary];
 }

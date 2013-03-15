@@ -24,10 +24,8 @@
 - (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray;
 
 /**
- * Return the receiver, but if a key has a corresponding entry in [[NSProcessInfo processInfo] environment], the
- * environment variable value will be returned instead (keys which only appear as environment variables, not in
- * the original dictionary, are not returned). This method can only be used for dictionaries whose keys are
- * strings
+ * Return the receiver, but merged with the dictionary returned by [[NSProcessInfo processInfo] environment]. This 
+ * method can only be used for dictionaries whose keys are strings
  *
  * Can be very handy to provide default plist value overriding via environment variables, for example
  */
