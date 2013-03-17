@@ -1007,13 +1007,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:YES];
+        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
         
         // Forward events (willShow is sent to the delegate before willAppear is sent to the view controller)
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
-        [appearingContainerContent viewWillAppear:animated movingToParentViewController:YES];
+        [appearingContainerContent viewWillAppear:animated movingToParentViewController:[animation.tag isEqualToString:@"push_animation"]];
     }
 }
 
@@ -1036,13 +1036,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate)
-        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:YES];
+        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
          
         // Forward events (didAppear is sent to the view controller before didShow is sent to the delegate)
-        [appearingContainerContent viewDidAppear:animated movingToParentViewController:YES];
+        [appearingContainerContent viewDidAppear:animated movingToParentViewController:[animation.tag isEqualToString:@"push_animation"]];
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
