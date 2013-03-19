@@ -111,7 +111,7 @@
     }
     
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
-    return [containerStack rootViewController];
+    return [containerStack topViewController];
 }
 
 #pragma mark View lifecycle
