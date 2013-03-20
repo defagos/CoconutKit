@@ -18,9 +18,6 @@
 static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
-// Helper functions
-static void injectColorNameMethods(Class cls);
-
 // Method implementations
 static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat);
 
@@ -30,14 +27,38 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
 
 + (void)load
 {
-    // Inject color name methods on all UIView subclasses
+    // Inject KVC-compliant color setter methods on all UIView subclasses
     unsigned int numberOfClasses = 0;
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
         Class class = classes[i];
-        if (HLSIsSubclassOfClass(class, objc_getClass("UIView"))) {
-            injectColorNameMethods(class);
+        if (! HLSIsSubclassOfClass(class, objc_getClass("UIView"))) {
+            continue;
         }
+        
+        // The class_copyMethodList extracts only methods defined by the class itself, not by its superclasses
+        unsigned int numberOfMethods = 0;
+        Method *methods = class_copyMethodList(class, &numberOfMethods);
+        for (unsigned int i = 0; i < numberOfMethods; ++i) {
+            Method method = methods[i];
+            
+            // Find setters with proper number of arguments (one argument besides the usual id and SEL)
+            if (method_getNumberOfArguments(method) != 3) {
+                continue;
+            }
+            
+            // Look for KVC-compliant setters ending in "Color"
+            NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(method))
+                                                      encoding:NSUTF8StringEncoding];
+            if (! [methodName hasSuffix:@"Color:"] || ! [methodName hasPrefix:@"set"]) {
+                continue;
+            }
+            
+            SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingCharactersInRange:NSMakeRange(0, 3)
+                                                                                               withString:@"setHls"]);
+            class_addMethod(class, colorSetterSelector, (IMP)UIView__setColorFormat_Imp, "v@:@");
+        }
+        free(methods);
     }
     free(classes);
 }
@@ -66,38 +87,9 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
 
 @end
 
-#pragma mark Helper functions
-
-// TODO: Should avoid ObjC code in this method (called from +load). SHould not be a problem here, though
-static void injectColorNameMethods(Class cls)
-{
-    // No identity test here. We want to perform color method lookup for each class in the UIView class hierarchy
-    // (the class_copyMethodList function only returns methods defined by the class itself, not by one of its
-    // superclasses)
-    unsigned int numberOfMethods = 0;
-    Method *methods = class_copyMethodList(cls, &numberOfMethods);
-    for (unsigned int i = 0; i < numberOfMethods; ++i) {
-        Method method = methods[i];
-        
-        // Find setters with proper encoding and ending in "...Color:"
-        if (method_getNumberOfArguments(method) != 3) {
-            continue;
-        }
-        
-        // Look for methods ending in "Color"
-        NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(method)) encoding:NSUTF8StringEncoding];
-        if (! [methodName hasSuffix:@"Color:"] || ! [methodName hasPrefix:@"set"]) {
-            continue;
-        }
-        
-        SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingCharactersInRange:NSMakeRange(0, 3) withString:@"setHls"]);
-        class_addMethod(cls, colorSetterSelector, (IMP)UIView__setColorFormat_Imp, "v@:@");
-    }
-    free(methods);
-}
-
 #pragma mark Method implementations
 
+// Common setter implementation for setting colors by name
 static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat)
 {
     if (! [colorFormat isFilled]) {
