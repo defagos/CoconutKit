@@ -27,7 +27,7 @@
  * conforms to the above requirements, you can therefore call [UIColor colorWithName:@"blue"] instead
  * and get the exact same color.
  *
- * When looking up a color by name, the class onto which -colorWithName: is called as well as all its
+ * When looking up a color by name, the class onto which +colorWithName: is called as well as all its
  * superclasses and categories are considered. If the color does not exist or if the given name does 
  * not correspond to a valid color, the method returns nil.
  *
