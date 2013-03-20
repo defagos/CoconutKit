@@ -164,6 +164,8 @@
 		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
+		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
+		6F53B63616FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
 		6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
@@ -369,6 +371,8 @@
 		6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingSearchBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D6D14BB742800D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6F507D6F14BB743000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = "<group>"; };
+		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
+		6F53B63416FA321000E01781 /* DemoColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColors.m; sourceTree = "<group>"; };
 		6F5A0BB11509D19300A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
@@ -1124,6 +1128,8 @@
 			children = (
 				6FF3E71515D37FB900AB9A53 /* CustomTransitions.h */,
 				6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */,
+				6F53B63316FA321000E01781 /* DemoColors.h */,
+				6F53B63416FA321000E01781 /* DemoColors.m */,
 				6F9C463614C5C30B00824AB2 /* DemoErrors.h */,
 				6F9C463714C5C30B00824AB2 /* DemoErrors.m */,
 			);
@@ -1640,6 +1646,7 @@
 				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
+				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1708,6 +1715,7 @@
 				6F22C76216A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F22C78216A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB116CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
+				6F53B63616FA321000E01781 /* DemoColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
