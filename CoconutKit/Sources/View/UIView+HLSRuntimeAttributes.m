@@ -1,12 +1,12 @@
 //
-//  UIView+HLSDynamicLocalization.m
+//  UIView+HLSRuntimeAttributes.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 1/26/13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "UIView+HLSDynamicLocalization.h"
+#import "UIView+HLSRuntimeAttributes.h"
 
 #import <objc/runtime.h>
 
@@ -14,7 +14,7 @@
 static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
-@implementation UIView (HLSDynamicLocalization)
+@implementation UIView (HLSRuntimeAttributes)
 
 #pragma mark Accessors and mutators
 

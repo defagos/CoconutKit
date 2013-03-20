@@ -13,8 +13,8 @@
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
 		6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74C16A93D8C0081A9A7 /* CoreText.framework */; };
-		6F23DB2716B3E84200C085CE /* UIView+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */; };
-		6F23DB2816B3E84200C085CE /* UIView+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */; };
+		6F23DB2716B3E84200C085CE /* UIView+HLSRuntimeAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */; };
+		6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */; };
 		6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */; };
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
@@ -253,8 +253,8 @@
 		6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F22C74C16A93D8C0081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
-		6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
+		6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
 		6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -782,10 +782,10 @@
 				6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */,
 				6F3B063314BC7B950026F512 /* UIToolbar+HLSExtensions.h */,
 				6F3B063414BC7B950026F512 /* UIToolbar+HLSExtensions.m */,
-				6F23DB2516B3E84200C085CE /* UIView+HLSDynamicLocalization.h */,
-				6F23DB2616B3E84200C085CE /* UIView+HLSDynamicLocalization.m */,
 				6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */,
 				6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */,
+				6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */,
+				6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */,
 				6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */,
 				6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */,
 			);
@@ -954,7 +954,7 @@
 				6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */,
 				6FCA2DD81679E3B20011CFDA /* HLSStandardFileManager.h in Headers */,
 				6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */,
-				6F23DB2716B3E84200C085CE /* UIView+HLSDynamicLocalization.h in Headers */,
+				6F23DB2716B3E84200C085CE /* UIView+HLSRuntimeAttributes.h in Headers */,
 				6FAB922916DA7F9100599256 /* HLSMockDiskConnection.h in Headers */,
 				6FAB922B16DA7F9100599256 /* HLSURLConnection.h in Headers */,
 			);
@@ -1152,7 +1152,7 @@
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
-				6F23DB2816B3E84200C085CE /* UIView+HLSDynamicLocalization.m in Sources */,
+				6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */,
 				6FAB922A16DA7F9100599256 /* HLSMockDiskConnection.m in Sources */,
 				6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */,
 			);

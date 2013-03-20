@@ -14,7 +14,7 @@
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
-#import "UIView+HLSDynamicLocalization.h"
+#import "UIView+HLSRuntimeAttributes.h"
 
 static BOOL s_missingLocalizationsVisible = NO;
 
@@ -249,6 +249,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 }
 
 @end
+
+#pragma mark Swizzled method implementations
 
 static void swizzled_UILabel__dealloc_Imp(UILabel *self, SEL _cmd)
 {

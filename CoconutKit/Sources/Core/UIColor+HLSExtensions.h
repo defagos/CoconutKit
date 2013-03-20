@@ -26,6 +26,12 @@
  *
  * When looking up a color, the class onto which -colorWithName: is called, as well as all its superclasses,
  * are considered
+ *
+ * For convenience, you can also set colors by name directly in Interface Builder via user-defined runtime
+ * attributes. Simply add an attribute called 'hlsColor', and set its value to 'colorClass:colorName', where
+ * 'colorClass' is the name of the class where lookup must be performed, and 'colorName' is the color name.
+ * You can set the attribute value to 'colorName' only, in which case lookup will be performed on UIColor
+ * (this of course includes any category you might have defined)
  */
 + (UIColor *)colorWithName:(NSString *)name;
 
