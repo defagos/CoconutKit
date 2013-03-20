@@ -34,3 +34,13 @@ IMP HLSSwizzleSelector(Class clazz, SEL selector, IMP newImplementation)
     class_replaceMethod(clazz, selector, newImplementation, method_getTypeEncoding(method));
     return origImp;
 }
+
+BOOL HLSIsSubclassOfClass(Class subclass, Class superclass)
+{
+    for (Class class = subclass; class != Nil; class = class_getSuperclass(class)) {
+        if (class == superclass) {
+            return YES;
+        }
+    }
+    return NO;
+}

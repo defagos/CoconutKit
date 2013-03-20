@@ -35,7 +35,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         // Find all HLSTransition subclasses (except HLSTransition itself)
         unsigned int numberOfClasses = 0;
         Class *classes = objc_copyClassList(&numberOfClasses);
-        for (int i = 0; i < numberOfClasses; ++i) {
+        for (unsigned int i = 0; i < numberOfClasses; ++i) {
             Class class = classes[i];
             
             // Discard HLSTransition

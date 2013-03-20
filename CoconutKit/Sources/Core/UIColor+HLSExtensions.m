@@ -48,8 +48,15 @@
         HLSLoggerWarn(@"No color %@ name was found on class %@", name, [self className]);
         return nil;
     }
+    
     id (*implementation)(id, SEL) = (id (*)(id, SEL))method_getImplementation(method);
-    return (*implementation)(self, selector);
+    id color = (*implementation)(self, selector);
+    if (! [color isKindOfClass:[UIColor class]]) {
+        HLSLoggerWarn(@"The name %@ does not correspond to a color for class %@", name, [self className]);
+        return nil;
+    }
+    
+    return color;
 }
 
 - (UIColor *)invertedColor

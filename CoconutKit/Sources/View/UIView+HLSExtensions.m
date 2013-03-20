@@ -8,12 +8,12 @@
 
 #import "UIView+HLSExtensions.h"
 
-#import <objc/runtime.h>
 #import "CALayer+HLSExtensions.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 
+// Keys for associated objects
 static void *s_tagKey = &s_tagKey;
 static void *s_userInfoKey = &s_userInfoKey;
 

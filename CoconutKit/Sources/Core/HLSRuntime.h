@@ -29,3 +29,9 @@ IMP HLSSwizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
  * Replace the implementation of an instance method, given its selector. Return the original implementation
  */
 IMP HLSSwizzleSelector(Class clazz, SEL selector, IMP newImplementation);
+
+/**
+ * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with
+ * the behavior of +[NSObject isSubclassOfClass:]
+ */
+BOOL HLSIsSubclassOfClass(Class subclass, Class superclass);
