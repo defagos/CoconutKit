@@ -129,7 +129,7 @@ static void subclass_dealloc(id object, SEL _cmd)
     // Set all weak references bound to object to nil
     NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
     for (NSValue *zeroingWeakRefValue in zeroingWeakRefValues) {
-        HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue pointerValue];
+        HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue nonretainedObjectValue];
         
         // Execute optional invocations
         for (NSInvocation *invocation in zeroingWeakRef.invocations) {

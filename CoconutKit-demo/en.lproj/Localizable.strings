@@ -33,6 +33,8 @@
 "Close"="Close";
 "Coconuts"="Coconuts";
 "Collapse"="Collapse";
+"Colors defined via user-defined runtime attributes, color from UIColor category"="Colors defined via user-defined runtime attributes, color from UIColor category";
+"Colors defined via user-defined runtime attributes, color from UIColor subclass"="Colors defined via user-defined runtime attributes, color from UIColor subclass";
 "Container"="Container";
 "Containment test"="Containment test";
 "Core"="Core";

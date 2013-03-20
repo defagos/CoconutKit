@@ -33,6 +33,8 @@
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
 "Collapse"="Contracter";
+"Colors defined via user-defined runtime attributes, colors from UIColor category"="Couleurs définies via user-defined runtime attributes, couleurs définies dans une catégorie de UIColor";
+"Colors defined via user-defined runtime attributes, colors from UIColor subclass"="Couleurs définies via user-defined runtime attributes, couleurs définies dans une sous-classe de UIColor";
 "Container"="Conteneur";
 "Containment test"="Test d'appartenance";
 "Core"="Core";

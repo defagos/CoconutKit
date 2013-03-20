@@ -175,7 +175,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != -1) {
-        id target = [[self.targets objectAtIndex:buttonIndex] pointerValue];
+        id target = [[self.targets objectAtIndex:buttonIndex] nonretainedObjectValue];
         SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
         
         // Support both selectors of the form - (void)action:(id)sender and - (void)action

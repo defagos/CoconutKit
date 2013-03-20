@@ -44,7 +44,7 @@ UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UITextView+HLSExtensions.m
 UIToolbar+HLSExtensions.m
-UIView+HLSDynamicLocalization.m
 UIView+HLSExtensions.m
+UIView+HLSRuntimeAttributes.m
 UIViewController+HLSExtensions.m
 UIWebView+HLSExtensions.m
